@@ -42,12 +42,14 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.tileNavPane1 = new DevExpress.XtraBars.Navigation.TileNavPane();
             this.navButton2 = new DevExpress.XtraBars.Navigation.NavButton();
+            this.stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPane1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stackPanel1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControl1
@@ -162,11 +164,20 @@
             this.navButton2.IsMain = true;
             this.navButton2.Name = "navButton2";
             // 
+            // stackPanel1
+            // 
+            this.stackPanel1.Location = new System.Drawing.Point(362, 206);
+            this.stackPanel1.Name = "stackPanel1";
+            this.stackPanel1.Size = new System.Drawing.Size(340, 140);
+            this.stackPanel1.TabIndex = 11;
+            this.stackPanel1.UseSkinIndents = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1048, 450);
+            this.Controls.Add(this.stackPanel1);
             this.Controls.Add(this.tileNavPane1);
             this.Controls.Add(this.tabPane1);
             this.Controls.Add(this.groupControl1);
@@ -182,6 +193,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tileNavPane1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.stackPanel1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -202,6 +214,7 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraBars.Navigation.TileNavPane tileNavPane1;
         private DevExpress.XtraBars.Navigation.NavButton navButton2;
+        private DevExpress.Utils.Layout.StackPanel stackPanel1;
     }
 }
 
