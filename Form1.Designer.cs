@@ -34,6 +34,7 @@
             this.tabNavigationPage2 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tabNavigationPage3 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.tabNavigationPage1 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
@@ -52,11 +53,13 @@
             // 
             this.tabPane1.Controls.Add(this.tabNavigationPage2);
             this.tabPane1.Controls.Add(this.tabNavigationPage3);
+            this.tabPane1.Controls.Add(this.tabNavigationPage1);
             this.tabPane1.Location = new System.Drawing.Point(362, 49);
             this.tabPane1.Name = "tabPane1";
             this.tabPane1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
             this.tabNavigationPage2,
-            this.tabNavigationPage3});
+            this.tabNavigationPage3,
+            this.tabNavigationPage1});
             this.tabPane1.RegularSize = new System.Drawing.Size(402, 150);
             this.tabPane1.SelectedPage = this.tabNavigationPage2;
             this.tabPane1.Size = new System.Drawing.Size(402, 150);
@@ -78,6 +81,12 @@
             // popupMenu1
             // 
             this.popupMenu1.Name = "popupMenu1";
+            // 
+            // tabNavigationPage1
+            // 
+            this.tabNavigationPage1.Caption = "tabNavigationPage1";
+            this.tabNavigationPage1.Name = "tabNavigationPage1";
+            this.tabNavigationPage1.Size = new System.Drawing.Size(402, 117);
             // 
             // Form1
             // 
@@ -103,6 +112,7 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage2;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage3;
         private DevExpress.XtraBars.PopupMenu popupMenu1;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tabNavigationPage1;
     }
 }
 
