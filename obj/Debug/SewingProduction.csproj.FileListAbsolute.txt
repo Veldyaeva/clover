@@ -28,3 +28,17 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.csproj.CoreCompileInput
 D:\SharpProj\sewingproduction\obj\Debug\SewingPr.0855BE24.Up2Date
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.exe
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.pdb
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraGrid.v22.2.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraLayout.v22.2.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraPrinting.v22.2.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.RichEdit.v22.2.Core.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraTreeList.v22.2.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.Office.v22.2.Core.dll
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraGrid.v22.2.xml
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraLayout.v22.2.xml
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraPrinting.v22.2.xml
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.RichEdit.v22.2.Core.xml
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.XtraTreeList.v22.2.xml
+D:\SharpProj\sewingproduction\bin\Debug\DevExpress.Office.v22.2.Core.xml
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.CardByNom.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.exe.licenses

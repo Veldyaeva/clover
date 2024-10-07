@@ -162,6 +162,11 @@
             this.textBox41 = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
             this.textBox42 = new System.Windows.Forms.TextBox();
+            this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.label52 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             this.tabNavigationPage1.SuspendLayout();
@@ -179,6 +184,8 @@
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
+            this.panelControl6.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPane1
@@ -192,33 +199,34 @@
             this.tabNavigationPage1,
             this.tabNavigationPage2,
             this.tabNavigationPage3});
-            this.tabPane1.RegularSize = new System.Drawing.Size(1320, 548);
+            this.tabPane1.RegularSize = new System.Drawing.Size(1320, 580);
             this.tabPane1.SelectedPage = this.tabNavigationPage1;
-            this.tabPane1.Size = new System.Drawing.Size(1320, 548);
+            this.tabPane1.Size = new System.Drawing.Size(1320, 580);
             this.tabPane1.TabIndex = 1;
             this.tabPane1.Text = "tabPane1";
             // 
             // tabNavigationPage1
             // 
             this.tabNavigationPage1.Caption = "ИНФОРМАЦИЯ ПО РАСЧЕТУ";
+            this.tabNavigationPage1.Controls.Add(this.panelControl6);
             this.tabNavigationPage1.Controls.Add(this.panelControl5);
             this.tabNavigationPage1.Controls.Add(this.panelControl4);
             this.tabNavigationPage1.Controls.Add(this.panelControl3);
             this.tabNavigationPage1.Controls.Add(this.panelControl2);
             this.tabNavigationPage1.Name = "tabNavigationPage1";
-            this.tabNavigationPage1.Size = new System.Drawing.Size(1320, 515);
+            this.tabNavigationPage1.Size = new System.Drawing.Size(1320, 547);
             // 
             // tabNavigationPage2
             // 
             this.tabNavigationPage2.Caption = "КОНФЕКЦИОН";
             this.tabNavigationPage2.Name = "tabNavigationPage2";
-            this.tabNavigationPage2.Size = new System.Drawing.Size(1101, 424);
+            this.tabNavigationPage2.Size = new System.Drawing.Size(1320, 515);
             // 
             // tabNavigationPage3
             // 
             this.tabNavigationPage3.Caption = "ВЫПОЛНЕННАЯ РАБОТА";
             this.tabNavigationPage3.Name = "tabNavigationPage3";
-            this.tabNavigationPage3.Size = new System.Drawing.Size(1101, 424);
+            this.tabNavigationPage3.Size = new System.Drawing.Size(1320, 515);
             // 
             // panelControl1
             // 
@@ -1402,11 +1410,59 @@
             this.textBox42.Size = new System.Drawing.Size(83, 21);
             this.textBox42.TabIndex = 45;
             // 
+            // panelControl6
+            // 
+            this.panelControl6.Controls.Add(this.button4);
+            this.panelControl6.Controls.Add(this.button5);
+            this.panelControl6.Controls.Add(this.button6);
+            this.panelControl6.Controls.Add(this.label52);
+            this.panelControl6.Location = new System.Drawing.Point(2, 487);
+            this.panelControl6.Name = "panelControl6";
+            this.panelControl6.Size = new System.Drawing.Size(1315, 55);
+            this.panelControl6.TabIndex = 29;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(499, 25);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(205, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Сопроводительные реестры";
+            this.button4.UseVisualStyleBackColor = true;
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(223, 25);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(205, 23);
+            this.button5.TabIndex = 7;
+            this.button5.Text = "МЛ + УП";
+            this.button5.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(7, 25);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(171, 23);
+            this.button6.TabIndex = 6;
+            this.button6.Text = "МЛ + РТ";
+            this.button6.UseVisualStyleBackColor = true;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label52.Location = new System.Drawing.Point(3, 2);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(123, 19);
+            this.label52.TabIndex = 4;
+            this.label52.Text = "ДОКУМЕНТЫ:";
+            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1335, 653);
+            this.ClientSize = new System.Drawing.Size(1335, 689);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.tabPane1);
             this.Name = "CardByNom";
@@ -1433,6 +1489,9 @@
             this.panelControl5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
+            this.panelControl6.ResumeLayout(false);
+            this.panelControl6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1572,5 +1631,10 @@
         private System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.TextBox textBox22;
+        private DevExpress.XtraEditors.PanelControl panelControl6;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label52;
     }
 }
