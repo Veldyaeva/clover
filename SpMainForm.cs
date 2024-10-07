@@ -27,7 +27,7 @@ namespace SewingProduction
             //newMDIChild.MdiParent = this;
             //newMDIChild.Show();
             CardByNom f = new CardByNom();
-            f.Text = "Child Form " + (++ctr).ToString();
+//            f.Text = "Child Form " + (++ctr).ToString();
             f.MdiParent = this;
             f.Show();
         }
