@@ -26,6 +26,10 @@ namespace SewingProduction
             //CardByNom newMDIChild = new CardByNom();
             //newMDIChild.MdiParent = this;
             //newMDIChild.Show();
+            CardByNom f = new CardByNom();
+            f.Text = "Child Form " + (++ctr).ToString();
+            f.MdiParent = this;
+            f.Show();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -35,22 +39,22 @@ namespace SewingProduction
 
         private void SpMainForm_Load(object sender, EventArgs e)
         {
-            // Create a Bar Manager that will display a bar of commands at the top of the main form.
-            BarManager barManager = new BarManager();
-            barManager.Form = this;
-            // Create a bar with a New button.
-            barManager.BeginUpdate();
-            Bar bar = new Bar(barManager, "My Bar");
-            bar.DockStyle = BarDockStyle.Top;
-            barManager.MainMenu = bar;
-            BarItem barItem = new BarButtonItem(barManager, "New");
-            barItem.ItemClick += new ItemClickEventHandler(barItem_ItemClick);
-            bar.ItemLinks.Add(barItem);
-            barManager.EndUpdate();
-            // Create an XtraTabbedMdiManager that will manage MDI child windows.
-            mdiManager = new XtraTabbedMdiManager(components);
-            mdiManager.MdiParent = this;
-            mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
+            //// Create a Bar Manager that will display a bar of commands at the top of the main form.
+            //BarManager barManager = new BarManager();
+            //barManager.Form = this;
+            //// Create a bar with a New button.
+            //barManager.BeginUpdate();
+            //Bar bar = new Bar(barManager, "My Bar");
+            //bar.DockStyle = BarDockStyle.Top;
+            //barManager.MainMenu = bar;
+            //BarItem barItem = new BarButtonItem(barManager, "New");
+            //barItem.ItemClick += new ItemClickEventHandler(barItem_ItemClick);
+            //bar.ItemLinks.Add(barItem);
+            //barManager.EndUpdate();
+            //// Create an XtraTabbedMdiManager that will manage MDI child windows.
+            ////mdiManager = new XtraTabbedMdiManager(components);
+            ////mdiManager.MdiParent = this;
+            ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
@@ -62,10 +66,10 @@ namespace SewingProduction
         void barItem_ItemClick(object sender, ItemClickEventArgs e)
         {
             // Create an MDI child form.
-            CardByNom f = new CardByNom();
-            f.Text = "Child Form " + (++ctr).ToString();
-            f.MdiParent = this;
-            f.Show();
+            //CardByNom f = new CardByNom();
+            //f.Text = "Child Form " + (++ctr).ToString();
+            //f.MdiParent = this;
+            //f.Show();
         }
     }
 }
