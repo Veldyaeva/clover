@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction
 {
-    partial class Form2
+    partial class CardByNom
     {
         /// <summary>
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SewingProduction
 {
-    public partial class Form2 : Form
+    public partial class CardByNom : Form
     {
-        public Form2()
+        public CardByNom()
         {
             InitializeComponent();
         }
