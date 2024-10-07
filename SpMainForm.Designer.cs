@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction
 {
-    partial class Form1
+    partial class SpMainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
