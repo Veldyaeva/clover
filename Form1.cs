@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace SewingProduction
 {
     public partial class Form1 : Form
@@ -15,6 +16,13 @@ namespace SewingProduction
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CardByNom newMDIChild = new CardByNom();
+            newMDIChild.MdiParent = this;
+            newMDIChild.Show();
         }
     }
 }
