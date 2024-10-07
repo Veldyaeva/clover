@@ -26,5 +26,15 @@ namespace SewingProduction
         {
 
         }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridControl2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
