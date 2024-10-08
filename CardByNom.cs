@@ -75,5 +75,15 @@ namespace SewingProduction
             }
             
         }
+
+        private void tabPane1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            textBox1_Leave(sender, e);
+        }
     }
 }
