@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
             this.tabNavigationPage1 = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
@@ -84,7 +85,7 @@
             this.btnNaklAbsent = new System.Windows.Forms.Button();
             this.btnNaklPart = new System.Windows.Forms.Button();
             this.btnNaklPrint = new System.Windows.Forms.Button();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gcNaklList = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -167,6 +168,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).BeginInit();
             this.tabPane1.SuspendLayout();
             this.tabNavigationPage1.SuspendLayout();
@@ -178,7 +180,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
@@ -186,6 +188,7 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPane1
@@ -678,7 +681,7 @@
             this.panelControl4.Controls.Add(this.btnNaklAbsent);
             this.panelControl4.Controls.Add(this.btnNaklPart);
             this.panelControl4.Controls.Add(this.btnNaklPrint);
-            this.panelControl4.Controls.Add(this.gridControl1);
+            this.panelControl4.Controls.Add(this.gcNaklList);
             this.panelControl4.Controls.Add(this.label24);
             this.panelControl4.Location = new System.Drawing.Point(2, 137);
             this.panelControl4.Name = "panelControl4";
@@ -712,16 +715,17 @@
             this.btnNaklPrint.Text = "Просмотр/Печать накладной";
             this.btnNaklPrint.UseVisualStyleBackColor = true;
             // 
-            // gridControl1
+            // gcNaklList
             // 
-            this.gridControl1.Location = new System.Drawing.Point(8, 25);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1301, 109);
-            this.gridControl1.TabIndex = 5;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gcNaklList.DataSource = this.bsNaklList;
+            this.gcNaklList.Location = new System.Drawing.Point(8, 25);
+            this.gcNaklList.MainView = this.gridView1;
+            this.gcNaklList.Name = "gcNaklList";
+            this.gcNaklList.Size = new System.Drawing.Size(1301, 109);
+            this.gcNaklList.TabIndex = 5;
+            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
+            this.gcNaklList.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // gridView1
             // 
@@ -743,12 +747,13 @@
             this.gridColumn15,
             this.gridColumn16,
             this.gridColumn17});
-            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.GridControl = this.gcNaklList;
             this.gridView1.Name = "gridView1";
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Кол-во ДО";
+            this.gridColumn1.FieldName = "kol_b";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.VisibleIndex = 9;
@@ -757,6 +762,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Причина деления";
+            this.gridColumn2.FieldName = "prich";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 8;
@@ -765,6 +771,7 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Склад отгрузки";
+            this.gridColumn3.FieldName = "skl_naimen";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 7;
@@ -775,6 +782,7 @@
             this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn4.Caption = "№ накл. Глобал";
+            this.gridColumn4.FieldName = "gl_nomer";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 6;
@@ -785,6 +793,7 @@
             this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn5.Caption = "Дата печати";
+            this.gridColumn5.FieldName = "date_print";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 5;
@@ -793,6 +802,7 @@
             // gridColumn6
             // 
             this.gridColumn6.Caption = "№ отгр.";
+            this.gridColumn6.FieldName = "dost_n";
             this.gridColumn6.Name = "gridColumn6";
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 4;
@@ -803,6 +813,7 @@
             this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn7.Caption = "Доставка на склад";
+            this.gridColumn7.FieldName = "dost_data";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 3;
@@ -813,6 +824,7 @@
             this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn8.Caption = "Дата деления";
+            this.gridColumn8.FieldName = "data_izm";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
             this.gridColumn8.VisibleIndex = 2;
@@ -821,6 +833,7 @@
             // gridColumn9
             // 
             this.gridColumn9.Caption = "Дата накл.";
+            this.gridColumn9.FieldName = "iz_data";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 1;
@@ -829,6 +842,7 @@
             // gridColumn10
             // 
             this.gridColumn10.Caption = "№ накл.";
+            this.gridColumn10.FieldName = "iz_nakl";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 0;
@@ -837,6 +851,7 @@
             // gridColumn11
             // 
             this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
+            this.gridColumn11.FieldName = "kol_c";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 10;
@@ -844,6 +859,7 @@
             // gridColumn12
             // 
             this.gridColumn12.Caption = "Отгр. ЧИП";
+            this.gridColumn12.FieldName = "ChipOtgr";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 16;
@@ -851,6 +867,7 @@
             // gridColumn13
             // 
             this.gridColumn13.Caption = "Скан. ЧИП";
+            this.gridColumn13.FieldName = "ChipScan";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.VisibleIndex = 15;
@@ -858,6 +875,7 @@
             // gridColumn14
             // 
             this.gridColumn14.Caption = "Печ. ЧИП";
+            this.gridColumn14.FieldName = "ChipPech";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 14;
@@ -865,6 +883,7 @@
             // gridColumn15
             // 
             this.gridColumn15.Caption = "ЧИП в УТ";
+            this.gridColumn15.FieldName = "ChipInUT";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 13;
@@ -872,6 +891,7 @@
             // gridColumn16
             // 
             this.gridColumn16.Caption = "Модель";
+            this.gridColumn16.FieldName = "mod";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 12;
@@ -879,6 +899,7 @@
             // gridColumn17
             // 
             this.gridColumn17.Caption = "Артикул";
+            this.gridColumn17.FieldName = "articul";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 11;
@@ -1437,6 +1458,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(64, 21);
             this.textBox1.TabIndex = 5;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
             // label2
             // 
@@ -1462,11 +1485,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1335, 689);
+            this.ClientSize = new System.Drawing.Size(1335, 678);
             this.Controls.Add(this.panelControl1);
             this.Controls.Add(this.tabPane1);
             this.Name = "CardByNom";
             this.Text = "Карточка расчета";
+            this.Load += new System.EventHandler(this.CardByNom_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabPane1)).EndInit();
             this.tabPane1.ResumeLayout(false);
             this.tabNavigationPage1.ResumeLayout(false);
@@ -1481,7 +1505,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
@@ -1492,6 +1516,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1564,7 +1589,7 @@
         private System.Windows.Forms.TextBox textBox20;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox textBox21;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.GridControl gcNaklList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
@@ -1636,5 +1661,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label52;
+        private System.Windows.Forms.BindingSource bsNaklList;
     }
 }
