@@ -125,7 +125,7 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "SpMainForm";
-            this.Text = "Form1";
+            this.Text = "Швейное производство";
             this.Load += new System.EventHandler(this.SpMainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
