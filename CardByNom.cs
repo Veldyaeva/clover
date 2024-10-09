@@ -166,5 +166,13 @@ namespace SewingProduction
         {
 
         }
+
+        private void tbNomPach_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                textBox1_Leave(sender, e);
+            }
+        }
     }
 }

@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
             this.label11 = new System.Windows.Forms.Label();
             this.tbPsaNameSbit = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -146,6 +147,8 @@
             this.tbPsaDataZap = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.tbArtSost3 = new System.Windows.Forms.TextBox();
+            this.tbArtSost2 = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tbPsaKodZv2 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
@@ -170,9 +173,6 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.tbArtSost2 = new System.Windows.Forms.TextBox();
-            this.tbArtSost3 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -225,6 +225,19 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1328, 79);
             this.panelControl1.TabIndex = 3;
+            // 
+            // progressPanel1
+            // 
+            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel1.Appearance.Options.UseBackColor = true;
+            this.progressPanel1.Caption = "Пожалуйста, подождите";
+            this.progressPanel1.Description = "Загрузка данных";
+            this.progressPanel1.Location = new System.Drawing.Point(1086, 2);
+            this.progressPanel1.Name = "progressPanel1";
+            this.progressPanel1.Size = new System.Drawing.Size(236, 66);
+            this.progressPanel1.TabIndex = 25;
+            this.progressPanel1.Text = "progressPanel1";
+            this.progressPanel1.Visible = false;
             // 
             // label11
             // 
@@ -389,6 +402,7 @@
             this.tbNomPach.Size = new System.Drawing.Size(64, 21);
             this.tbNomPach.TabIndex = 5;
             this.tbNomPach.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tbNomPach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNomPach_KeyDown);
             this.tbNomPach.Leave += new System.EventHandler(this.textBox1_Leave);
             this.tbNomPach.Validated += new System.EventHandler(this.textBox1_Validated);
             // 
@@ -1314,6 +1328,20 @@
             this.panelControl2.Size = new System.Drawing.Size(946, 128);
             this.panelControl2.TabIndex = 6;
             // 
+            // tbArtSost3
+            // 
+            this.tbArtSost3.Location = new System.Drawing.Point(651, 102);
+            this.tbArtSost3.Name = "tbArtSost3";
+            this.tbArtSost3.Size = new System.Drawing.Size(290, 21);
+            this.tbArtSost3.TabIndex = 32;
+            // 
+            // tbArtSost2
+            // 
+            this.tbArtSost2.Location = new System.Drawing.Point(651, 75);
+            this.tbArtSost2.Name = "tbArtSost2";
+            this.tbArtSost2.Size = new System.Drawing.Size(290, 21);
+            this.tbArtSost2.TabIndex = 31;
+            // 
             // label22
             // 
             this.label22.AutoSize = true;
@@ -1488,7 +1516,7 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1319, 592);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 714);
             this.xtraTabPage2.Text = "КОНФЕКЦИОН";
             // 
             // xtraTabPage3
@@ -1496,39 +1524,12 @@
             this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1319, 592);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 714);
             this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
             // 
             // bsRasInfo
             // 
             this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
-            // progressPanel1
-            // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Caption = "Пожалуйста, подождите";
-            this.progressPanel1.Description = "Загрузка данных";
-            this.progressPanel1.Location = new System.Drawing.Point(1086, 2);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(236, 66);
-            this.progressPanel1.TabIndex = 25;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
-            // 
-            // tbArtSost2
-            // 
-            this.tbArtSost2.Location = new System.Drawing.Point(651, 75);
-            this.tbArtSost2.Name = "tbArtSost2";
-            this.tbArtSost2.Size = new System.Drawing.Size(290, 21);
-            this.tbArtSost2.TabIndex = 31;
-            // 
-            // tbArtSost3
-            // 
-            this.tbArtSost3.Location = new System.Drawing.Point(651, 102);
-            this.tbArtSost3.Name = "tbArtSost3";
-            this.tbArtSost3.Size = new System.Drawing.Size(290, 21);
-            this.tbArtSost3.TabIndex = 32;
             // 
             // CardByNom
             // 
