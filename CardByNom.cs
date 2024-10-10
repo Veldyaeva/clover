@@ -53,6 +53,7 @@ namespace SewingProduction
         {
             int NomPach = Convert.ToInt32(this.tbNomPach.Text);
             int YearPach = Convert.ToInt32(this.tbYearPach.Text);
+            string _dateFormat = "dd/MM/yyyy";
             if (NomPach > 0 && YearPach > 0)
             {
                 this.progressPanel1.Visible = true;
@@ -111,8 +112,8 @@ namespace SewingProduction
                     this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
                     this.tbPsaYear.DataBindings.Clear();
                     this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
-                    this.tbPsaSez.DataBindings.Clear();
-                    this.tbPsaSez.DataBindings.Add("Text", dtRasInfo, "psaSez");
+                    this.psaSezName.DataBindings.Clear();
+                    this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
                     this.tbArtGrup.DataBindings.Clear();
                     this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
                     this.tbArtSost1.DataBindings.Clear();
@@ -125,22 +126,65 @@ namespace SewingProduction
                     this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
                     this.tbPsaKodZv2.DataBindings.Clear();
                     this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
-                    this.tbPsaDataZap.DataBindings.Clear();
-                    this.tbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
-                    this.tbPsaDataCdPlan.DataBindings.Clear();
-                    this.tbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
-                    this.tbRzuDataCdUt.DataBindings.Clear();
-                    this.tbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
-                    this.tbRzuDataZeh.DataBindings.Clear();
-                    this.tbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
-                    this.tbRzuDataRab.DataBindings.Clear();
-                    this.tbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
-                    this.tbRzuDataUp.DataBindings.Clear();
-                    this.tbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
-                    this.tbRzuDataCd.DataBindings.Clear();
-                    this.tbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                    this.mtbPsaDataZap.DataBindings.Clear();
+                    this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
+                    this.mtbPsaDataCdPlan.DataBindings.Clear();
+                    this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
+                    this.mtbRzuDataCdUt.DataBindings.Clear();
+                    this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
+                    this.mtbRzuDataZeh.DataBindings.Clear();
+                    this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
+                    this.mtbRzuDataRab.DataBindings.Clear();
+                    this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
+                    this.mtbRzuDataUp.DataBindings.Clear();
+                    this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
+                    this.mtbRzuDataCd.DataBindings.Clear();
+                    this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                    this.mtbRzuDataRasp.DataBindings.Clear();
+                    this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
+                    this.mtbRzuDataPrP.DataBindings.Clear();
+                    this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
+                    this.mtbRzuDataPrR.DataBindings.Clear();
+                    this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
+                    this.mtbRzuDataPrPe.DataBindings.Clear();
+                    this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
+                    this.mtbRzuDataPrKm.DataBindings.Clear();
+                    this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
+                    this.mtbRzuDataPrCd.DataBindings.Clear();
+                    this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
+                    this.mtbRzuDataRasv.DataBindings.Clear();
+                    this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
+                    this.mtbRzuDataVP.DataBindings.Clear();
+                    this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
+                    this.mtbRzuDataVR.DataBindings.Clear();
+                    this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
+                    this.mtbRzuDataVChi.DataBindings.Clear();
+                    this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
+                    this.mtbRzuDataVCd.DataBindings.Clear();
+                    this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
+                    this.mtbRzuDataStP.DataBindings.Clear();
+                    this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
+                    this.mtbRzuDataStR.DataBindings.Clear();
+                    this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
+                    this.mtbRzuDataStCd.DataBindings.Clear();
+                    this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
+                    this.mtbRzuVidStir.DataBindings.Clear();
+                    this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+
                     //MessageBox.Show("2");
 
+                    SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
+                    DataTable dtOtdelkaList = new DataTable();
+                    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
+                    //query += $" order by n_pach";
+                    string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
+                    queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
+                    queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
+                    SqlCommand commandOtdelkaList = new SqlCommand(queryOtdelkaList, connection);
+                    adapterOtdelkaList.SelectCommand = commandOtdelkaList;
+                    adapterOtdelkaList.Fill(dtOtdelkaList);
+                    bsOtdelkaList.DataSource = dtOtdelkaList;
+                    //bsOtdelkaList.Sort = "iz asc";
                 }
                 this.progressPanel1.Visible = false;
             }

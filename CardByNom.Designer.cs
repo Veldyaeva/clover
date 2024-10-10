@@ -63,41 +63,23 @@
             this.label52 = new System.Windows.Forms.Label();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
             this.label44 = new System.Windows.Forms.Label();
-            this.textBox35 = new System.Windows.Forms.TextBox();
             this.label49 = new System.Windows.Forms.Label();
-            this.textBox40 = new System.Windows.Forms.TextBox();
             this.label50 = new System.Windows.Forms.Label();
-            this.textBox41 = new System.Windows.Forms.TextBox();
             this.label51 = new System.Windows.Forms.Label();
-            this.textBox42 = new System.Windows.Forms.TextBox();
             this.label43 = new System.Windows.Forms.Label();
-            this.textBox34 = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
-            this.textBox36 = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
-            this.textBox37 = new System.Windows.Forms.TextBox();
             this.label47 = new System.Windows.Forms.Label();
-            this.textBox38 = new System.Windows.Forms.TextBox();
             this.label48 = new System.Windows.Forms.Label();
-            this.textBox39 = new System.Windows.Forms.TextBox();
             this.label42 = new System.Windows.Forms.Label();
-            this.textBox33 = new System.Windows.Forms.TextBox();
             this.label41 = new System.Windows.Forms.Label();
-            this.textBox32 = new System.Windows.Forms.TextBox();
             this.label40 = new System.Windows.Forms.Label();
-            this.textBox31 = new System.Windows.Forms.TextBox();
             this.label39 = new System.Windows.Forms.Label();
-            this.textBox28 = new System.Windows.Forms.TextBox();
             this.label38 = new System.Windows.Forms.Label();
-            this.textBox27 = new System.Windows.Forms.TextBox();
             this.label37 = new System.Windows.Forms.Label();
-            this.textBox22 = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -131,20 +113,20 @@
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label24 = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.mtbRzuDataCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataUp = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataRab = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataZeh = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataCdUt = new System.Windows.Forms.MaskedTextBox();
+            this.mtbPsaDataCdPlan = new System.Windows.Forms.MaskedTextBox();
+            this.mtbPsaDataZap = new System.Windows.Forms.MaskedTextBox();
             this.label14 = new System.Windows.Forms.Label();
-            this.tbRzuDataCd = new System.Windows.Forms.TextBox();
             this.label33 = new System.Windows.Forms.Label();
-            this.tbRzuDataUp = new System.Windows.Forms.TextBox();
             this.label34 = new System.Windows.Forms.Label();
-            this.tbRzuDataCdUt = new System.Windows.Forms.TextBox();
             this.label26 = new System.Windows.Forms.Label();
-            this.tbRzuDataRab = new System.Windows.Forms.TextBox();
             this.label27 = new System.Windows.Forms.Label();
-            this.tbRzuDataZeh = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
-            this.tbPsaDataCdPlan = new System.Windows.Forms.TextBox();
             this.label29 = new System.Windows.Forms.Label();
-            this.tbPsaDataZap = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.tbArtSost3 = new System.Windows.Forms.TextBox();
@@ -158,7 +140,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.tbArtGrup = new System.Windows.Forms.TextBox();
             this.label16 = new System.Windows.Forms.Label();
-            this.tbPsaSez = new System.Windows.Forms.TextBox();
+            this.psaSezName = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.tbPsaYear = new System.Windows.Forms.TextBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -173,6 +155,22 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.mtbRzuDataRasp = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataRasv = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuVidStir = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVChi = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrPe = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrKm = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrCd = new System.Windows.Forms.MaskedTextBox();
+            this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -194,6 +192,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -223,7 +222,7 @@
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Location = new System.Drawing.Point(3, 12);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1328, 79);
+            this.panelControl1.Size = new System.Drawing.Size(1370, 79);
             this.panelControl1.TabIndex = 3;
             // 
             // progressPanel1
@@ -437,7 +436,7 @@
             this.xtraTabControl1.Location = new System.Drawing.Point(3, 97);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 742);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 646);
             this.xtraTabControl1.TabIndex = 3;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -458,7 +457,7 @@
             this.xtraTabPage1.Controls.Add(this.panelControl3);
             this.xtraTabPage1.Controls.Add(this.panelControl2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1368, 714);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1368, 618);
             this.xtraTabPage1.Text = "ИНФОРМАЦИЯ ПО РАСЧЕТУ";
             // 
             // panelControl6
@@ -467,9 +466,9 @@
             this.panelControl6.Controls.Add(this.button5);
             this.panelControl6.Controls.Add(this.button6);
             this.panelControl6.Controls.Add(this.label52);
-            this.panelControl6.Location = new System.Drawing.Point(4, 653);
+            this.panelControl6.Location = new System.Drawing.Point(4, 556);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(1315, 55);
+            this.panelControl6.Size = new System.Drawing.Size(1358, 55);
             this.panelControl6.TabIndex = 31;
             // 
             // button4
@@ -511,294 +510,186 @@
             // 
             // panelControl5
             // 
+            this.panelControl5.Controls.Add(this.mtbRzuDataPrCd);
+            this.panelControl5.Controls.Add(this.mtbRzuDataVCd);
+            this.panelControl5.Controls.Add(this.mtbRzuDataPrKm);
+            this.panelControl5.Controls.Add(this.mtbRzuVidStir);
+            this.panelControl5.Controls.Add(this.mtbRzuDataVChi);
+            this.panelControl5.Controls.Add(this.mtbRzuDataPrPe);
+            this.panelControl5.Controls.Add(this.mtbRzuDataStCd);
+            this.panelControl5.Controls.Add(this.mtbRzuDataVR);
+            this.panelControl5.Controls.Add(this.mtbRzuDataPrR);
+            this.panelControl5.Controls.Add(this.mtbRzuDataStR);
+            this.panelControl5.Controls.Add(this.mtbRzuDataVP);
+            this.panelControl5.Controls.Add(this.mtbRzuDataPrP);
+            this.panelControl5.Controls.Add(this.mtbRzuDataStP);
+            this.panelControl5.Controls.Add(this.mtbRzuDataRasv);
+            this.panelControl5.Controls.Add(this.mtbRzuDataRasp);
             this.panelControl5.Controls.Add(this.label44);
-            this.panelControl5.Controls.Add(this.textBox35);
             this.panelControl5.Controls.Add(this.label49);
-            this.panelControl5.Controls.Add(this.textBox40);
             this.panelControl5.Controls.Add(this.label50);
-            this.panelControl5.Controls.Add(this.textBox41);
             this.panelControl5.Controls.Add(this.label51);
-            this.panelControl5.Controls.Add(this.textBox42);
             this.panelControl5.Controls.Add(this.label43);
-            this.panelControl5.Controls.Add(this.textBox34);
             this.panelControl5.Controls.Add(this.label45);
-            this.panelControl5.Controls.Add(this.textBox36);
             this.panelControl5.Controls.Add(this.label46);
-            this.panelControl5.Controls.Add(this.textBox37);
             this.panelControl5.Controls.Add(this.label47);
-            this.panelControl5.Controls.Add(this.textBox38);
             this.panelControl5.Controls.Add(this.label48);
-            this.panelControl5.Controls.Add(this.textBox39);
             this.panelControl5.Controls.Add(this.label42);
-            this.panelControl5.Controls.Add(this.textBox33);
             this.panelControl5.Controls.Add(this.label41);
-            this.panelControl5.Controls.Add(this.textBox32);
             this.panelControl5.Controls.Add(this.label40);
-            this.panelControl5.Controls.Add(this.textBox31);
             this.panelControl5.Controls.Add(this.label39);
-            this.panelControl5.Controls.Add(this.textBox28);
             this.panelControl5.Controls.Add(this.label38);
-            this.panelControl5.Controls.Add(this.textBox27);
             this.panelControl5.Controls.Add(this.label37);
-            this.panelControl5.Controls.Add(this.textBox22);
             this.panelControl5.Controls.Add(this.label35);
             this.panelControl5.Controls.Add(this.label36);
             this.panelControl5.Controls.Add(this.label32);
-            this.panelControl5.Controls.Add(this.button1);
-            this.panelControl5.Controls.Add(this.button2);
-            this.panelControl5.Controls.Add(this.button3);
             this.panelControl5.Controls.Add(this.gridControl2);
             this.panelControl5.Controls.Add(this.label31);
             this.panelControl5.Location = new System.Drawing.Point(4, 355);
             this.panelControl5.Name = "panelControl5";
-            this.panelControl5.Size = new System.Drawing.Size(1315, 268);
+            this.panelControl5.Size = new System.Drawing.Size(1358, 195);
             this.panelControl5.TabIndex = 30;
             // 
             // label44
             // 
             this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(536, 150);
+            this.label44.Location = new System.Drawing.Point(538, 165);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(64, 13);
             this.label44.TabIndex = 52;
             this.label44.Text = "Вид стирки";
             // 
-            // textBox35
-            // 
-            this.textBox35.Location = new System.Drawing.Point(593, 147);
-            this.textBox35.Name = "textBox35";
-            this.textBox35.Size = new System.Drawing.Size(83, 21);
-            this.textBox35.TabIndex = 51;
-            // 
             // label49
             // 
             this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(391, 151);
+            this.label49.Location = new System.Drawing.Point(359, 165);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(66, 13);
             this.label49.TabIndex = 50;
             this.label49.Text = "Дата сдачи";
             // 
-            // textBox40
-            // 
-            this.textBox40.Location = new System.Drawing.Point(448, 148);
-            this.textBox40.Name = "textBox40";
-            this.textBox40.Size = new System.Drawing.Size(83, 21);
-            this.textBox40.TabIndex = 49;
-            // 
             // label50
             // 
             this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(245, 150);
+            this.label50.Location = new System.Drawing.Point(185, 165);
             this.label50.Name = "label50";
             this.label50.Size = new System.Drawing.Size(71, 13);
             this.label50.TabIndex = 48;
             this.label50.Text = "Дата стирки";
             // 
-            // textBox41
-            // 
-            this.textBox41.Location = new System.Drawing.Point(302, 147);
-            this.textBox41.Name = "textBox41";
-            this.textBox41.Size = new System.Drawing.Size(83, 21);
-            this.textBox41.TabIndex = 47;
-            // 
             // label51
             // 
             this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(99, 151);
+            this.label51.Location = new System.Drawing.Point(11, 158);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(131, 13);
+            this.label51.Size = new System.Drawing.Size(78, 26);
             this.label51.TabIndex = 46;
-            this.label51.Text = "Дата принято на стирку";
-            // 
-            // textBox42
-            // 
-            this.textBox42.Location = new System.Drawing.Point(156, 148);
-            this.textBox42.Name = "textBox42";
-            this.textBox42.Size = new System.Drawing.Size(83, 21);
-            this.textBox42.TabIndex = 45;
+            this.label51.Text = "Дата принято\r\nна стирку";
             // 
             // label43
             // 
             this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(681, 117);
+            this.label43.Location = new System.Drawing.Point(722, 104);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(66, 13);
+            this.label43.Size = new System.Drawing.Size(37, 26);
             this.label43.TabIndex = 42;
-            this.label43.Text = "Дата сдачи";
-            // 
-            // textBox34
-            // 
-            this.textBox34.Location = new System.Drawing.Point(738, 114);
-            this.textBox34.Name = "textBox34";
-            this.textBox34.Size = new System.Drawing.Size(83, 21);
-            this.textBox34.TabIndex = 41;
+            this.label43.Text = "Дата\r\nсдачи";
             // 
             // label45
             // 
             this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(536, 118);
+            this.label45.Location = new System.Drawing.Point(538, 111);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(86, 13);
             this.label45.TabIndex = 38;
             this.label45.Text = "Дата на чистку";
             // 
-            // textBox36
-            // 
-            this.textBox36.Location = new System.Drawing.Point(593, 115);
-            this.textBox36.Name = "textBox36";
-            this.textBox36.Size = new System.Drawing.Size(83, 21);
-            this.textBox36.TabIndex = 37;
-            // 
             // label46
             // 
             this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(390, 117);
+            this.label46.Location = new System.Drawing.Point(359, 104);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(130, 13);
+            this.label46.Size = new System.Drawing.Size(81, 26);
             this.label46.TabIndex = 36;
-            this.label46.Text = "Дата в работу вышивка";
-            // 
-            // textBox37
-            // 
-            this.textBox37.Location = new System.Drawing.Point(447, 114);
-            this.textBox37.Name = "textBox37";
-            this.textBox37.Size = new System.Drawing.Size(83, 21);
-            this.textBox37.TabIndex = 35;
+            this.label46.Text = "Дата в работу\r\nвышивка";
             // 
             // label47
             // 
             this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(244, 118);
+            this.label47.Location = new System.Drawing.Point(185, 104);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(142, 13);
+            this.label47.Size = new System.Drawing.Size(78, 26);
             this.label47.TabIndex = 34;
-            this.label47.Text = "Дата принято на вышивку";
-            // 
-            // textBox38
-            // 
-            this.textBox38.Location = new System.Drawing.Point(301, 115);
-            this.textBox38.Name = "textBox38";
-            this.textBox38.Size = new System.Drawing.Size(83, 21);
-            this.textBox38.TabIndex = 33;
+            this.label47.Text = "Дата принято\r\nна вышивку";
             // 
             // label48
             // 
             this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(98, 117);
+            this.label48.Location = new System.Drawing.Point(11, 104);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(97, 13);
+            this.label48.Size = new System.Drawing.Size(68, 26);
             this.label48.TabIndex = 32;
-            this.label48.Text = "Дата на вышивку";
-            // 
-            // textBox39
-            // 
-            this.textBox39.Location = new System.Drawing.Point(155, 114);
-            this.textBox39.Name = "textBox39";
-            this.textBox39.Size = new System.Drawing.Size(83, 21);
-            this.textBox39.TabIndex = 31;
+            this.label48.Text = "Дата\r\nна вышивку";
             // 
             // label42
             // 
             this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(745, 73);
+            this.label42.Location = new System.Drawing.Point(859, 50);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(66, 13);
+            this.label42.Size = new System.Drawing.Size(37, 26);
             this.label42.TabIndex = 30;
-            this.label42.Text = "Дата сдачи";
-            // 
-            // textBox33
-            // 
-            this.textBox33.Location = new System.Drawing.Point(802, 70);
-            this.textBox33.Name = "textBox33";
-            this.textBox33.Size = new System.Drawing.Size(83, 21);
-            this.textBox33.TabIndex = 29;
+            this.label42.Text = "Дата\r\nсдачи";
             // 
             // label41
             // 
             this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(595, 74);
+            this.label41.Location = new System.Drawing.Point(722, 50);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(70, 13);
+            this.label41.Size = new System.Drawing.Size(41, 26);
             this.label41.TabIndex = 28;
-            this.label41.Text = "Дата компл.";
-            // 
-            // textBox32
-            // 
-            this.textBox32.Location = new System.Drawing.Point(652, 71);
-            this.textBox32.Name = "textBox32";
-            this.textBox32.Size = new System.Drawing.Size(83, 21);
-            this.textBox32.TabIndex = 27;
+            this.label41.Text = "Дата\r\nкомпл.";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
-            this.label40.Location = new System.Drawing.Point(450, 74);
+            this.label40.Location = new System.Drawing.Point(538, 50);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(114, 13);
+            this.label40.Size = new System.Drawing.Size(81, 26);
             this.label40.TabIndex = 26;
-            this.label40.Text = "Дата на печку принт";
-            // 
-            // textBox31
-            // 
-            this.textBox31.Location = new System.Drawing.Point(507, 71);
-            this.textBox31.Name = "textBox31";
-            this.textBox31.Size = new System.Drawing.Size(83, 21);
-            this.textBox31.TabIndex = 25;
+            this.label40.Text = "Дата на печку\r\nпринт";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(304, 73);
+            this.label39.Location = new System.Drawing.Point(359, 50);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(114, 13);
+            this.label39.Size = new System.Drawing.Size(81, 26);
             this.label39.TabIndex = 24;
-            this.label39.Text = "Дата в работу принт";
-            // 
-            // textBox28
-            // 
-            this.textBox28.Location = new System.Drawing.Point(361, 70);
-            this.textBox28.Name = "textBox28";
-            this.textBox28.Size = new System.Drawing.Size(83, 21);
-            this.textBox28.TabIndex = 23;
+            this.label39.Text = "Дата в работу\r\nпринт";
             // 
             // label38
             // 
             this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(158, 74);
+            this.label38.Location = new System.Drawing.Point(185, 50);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(126, 13);
+            this.label38.Size = new System.Drawing.Size(78, 26);
             this.label38.TabIndex = 22;
-            this.label38.Text = "Дата принято на принт";
-            // 
-            // textBox27
-            // 
-            this.textBox27.Location = new System.Drawing.Point(215, 71);
-            this.textBox27.Name = "textBox27";
-            this.textBox27.Size = new System.Drawing.Size(83, 21);
-            this.textBox27.TabIndex = 21;
+            this.label38.Text = "Дата принято\r\nна принт";
             // 
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(12, 73);
+            this.label37.Location = new System.Drawing.Point(11, 50);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(81, 13);
+            this.label37.Size = new System.Drawing.Size(52, 26);
             this.label37.TabIndex = 20;
-            this.label37.Text = "Дата на принт";
-            // 
-            // textBox22
-            // 
-            this.textBox22.Location = new System.Drawing.Point(69, 70);
-            this.textBox22.Name = "textBox22";
-            this.textBox22.Size = new System.Drawing.Size(83, 21);
-            this.textBox22.TabIndex = 19;
+            this.label37.Text = "Дата\r\nна принт";
             // 
             // label35
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label35.Location = new System.Drawing.Point(5, 145);
+            this.label35.Location = new System.Drawing.Point(3, 138);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(77, 19);
             this.label35.TabIndex = 11;
@@ -808,7 +699,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label36.Location = new System.Drawing.Point(5, 114);
+            this.label36.Location = new System.Drawing.Point(3, 84);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(98, 19);
             this.label36.TabIndex = 10;
@@ -818,45 +709,19 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label32.Location = new System.Drawing.Point(5, 39);
+            this.label32.Location = new System.Drawing.Point(3, 30);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(67, 19);
             this.label32.TabIndex = 9;
             this.label32.Text = "ПРИНТ";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(1104, 140);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(205, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Накладная не создана. Причина";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(223, 180);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(205, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Информация по делению накладной";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(7, 180);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(171, 23);
-            this.button3.TabIndex = 6;
-            this.button3.Text = "Просмотр/Печать накладной";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // gridControl2
             // 
-            this.gridControl2.Location = new System.Drawing.Point(939, 25);
+            this.gridControl2.DataSource = this.bsOtdelkaList;
+            this.gridControl2.Location = new System.Drawing.Point(988, 2);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(370, 109);
+            this.gridControl2.Size = new System.Drawing.Size(364, 137);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -875,6 +740,7 @@
             // gridColumn29
             // 
             this.gridColumn29.Caption = "Вид изделия";
+            this.gridColumn29.FieldName = "VidIzdName";
             this.gridColumn29.Name = "gridColumn29";
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 4;
@@ -882,6 +748,7 @@
             // gridColumn30
             // 
             this.gridColumn30.Caption = "Деталь изделия";
+            this.gridColumn30.FieldName = "DetIzdName";
             this.gridColumn30.Name = "gridColumn30";
             this.gridColumn30.Visible = true;
             this.gridColumn30.VisibleIndex = 3;
@@ -889,6 +756,7 @@
             // gridColumn31
             // 
             this.gridColumn31.Caption = "Формат";
+            this.gridColumn31.FieldName = "frt_naimen";
             this.gridColumn31.Name = "gridColumn31";
             this.gridColumn31.Visible = true;
             this.gridColumn31.VisibleIndex = 2;
@@ -896,6 +764,7 @@
             // gridColumn32
             // 
             this.gridColumn32.Caption = "Кол-во/слож/цвет/прогон";
+            this.gridColumn32.FieldName = "kol_sl_zv";
             this.gridColumn32.Name = "gridColumn32";
             this.gridColumn32.Visible = true;
             this.gridColumn32.VisibleIndex = 1;
@@ -903,6 +772,7 @@
             // gridColumn33
             // 
             this.gridColumn33.Caption = "Вид отделки";
+            this.gridColumn33.FieldName = "psa_field_name";
             this.gridColumn33.Name = "gridColumn33";
             this.gridColumn33.Visible = true;
             this.gridColumn33.VisibleIndex = 0;
@@ -931,7 +801,7 @@
             // 
             // btnNaklAbsent
             // 
-            this.btnNaklAbsent.Location = new System.Drawing.Point(1104, 177);
+            this.btnNaklAbsent.Location = new System.Drawing.Point(1143, 177);
             this.btnNaklAbsent.Name = "btnNaklAbsent";
             this.btnNaklAbsent.Size = new System.Drawing.Size(205, 23);
             this.btnNaklAbsent.TabIndex = 8;
@@ -962,7 +832,7 @@
             this.gcNaklList.Location = new System.Drawing.Point(8, 25);
             this.gcNaklList.MainView = this.gridView1;
             this.gcNaklList.Name = "gcNaklList";
-            this.gcNaklList.Size = new System.Drawing.Size(1301, 146);
+            this.gcNaklList.Size = new System.Drawing.Size(1344, 146);
             this.gcNaklList.TabIndex = 5;
             this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -989,6 +859,7 @@
             this.gridColumn17});
             this.gridView1.GridControl = this.gcNaklList;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
@@ -1156,143 +1027,150 @@
             // 
             // panelControl3
             // 
+            this.panelControl3.Controls.Add(this.mtbRzuDataCd);
+            this.panelControl3.Controls.Add(this.mtbRzuDataUp);
+            this.panelControl3.Controls.Add(this.mtbRzuDataRab);
+            this.panelControl3.Controls.Add(this.mtbRzuDataZeh);
+            this.panelControl3.Controls.Add(this.mtbRzuDataCdUt);
+            this.panelControl3.Controls.Add(this.mtbPsaDataCdPlan);
+            this.panelControl3.Controls.Add(this.mtbPsaDataZap);
             this.panelControl3.Controls.Add(this.label14);
-            this.panelControl3.Controls.Add(this.tbRzuDataCd);
             this.panelControl3.Controls.Add(this.label33);
-            this.panelControl3.Controls.Add(this.tbRzuDataUp);
             this.panelControl3.Controls.Add(this.label34);
-            this.panelControl3.Controls.Add(this.tbRzuDataCdUt);
             this.panelControl3.Controls.Add(this.label26);
-            this.panelControl3.Controls.Add(this.tbRzuDataRab);
             this.panelControl3.Controls.Add(this.label27);
-            this.panelControl3.Controls.Add(this.tbRzuDataZeh);
             this.panelControl3.Controls.Add(this.label28);
-            this.panelControl3.Controls.Add(this.tbPsaDataCdPlan);
             this.panelControl3.Controls.Add(this.label29);
-            this.panelControl3.Controls.Add(this.tbPsaDataZap);
             this.panelControl3.Controls.Add(this.label30);
-            this.panelControl3.Location = new System.Drawing.Point(955, 9);
+            this.panelControl3.Location = new System.Drawing.Point(995, 9);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(407, 128);
+            this.panelControl3.Size = new System.Drawing.Size(367, 128);
             this.panelControl3.TabIndex = 27;
+            // 
+            // mtbRzuDataCd
+            // 
+            this.mtbRzuDataCd.Location = new System.Drawing.Point(295, 99);
+            this.mtbRzuDataCd.Mask = "00/00/0000";
+            this.mtbRzuDataCd.Name = "mtbRzuDataCd";
+            this.mtbRzuDataCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataCd.TabIndex = 37;
+            // 
+            // mtbRzuDataUp
+            // 
+            this.mtbRzuDataUp.Location = new System.Drawing.Point(295, 75);
+            this.mtbRzuDataUp.Mask = "00/00/0000";
+            this.mtbRzuDataUp.Name = "mtbRzuDataUp";
+            this.mtbRzuDataUp.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataUp.TabIndex = 36;
+            // 
+            // mtbRzuDataRab
+            // 
+            this.mtbRzuDataRab.Location = new System.Drawing.Point(295, 51);
+            this.mtbRzuDataRab.Mask = "00/00/0000";
+            this.mtbRzuDataRab.Name = "mtbRzuDataRab";
+            this.mtbRzuDataRab.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataRab.TabIndex = 35;
+            // 
+            // mtbRzuDataZeh
+            // 
+            this.mtbRzuDataZeh.Location = new System.Drawing.Point(295, 27);
+            this.mtbRzuDataZeh.Mask = "00/00/0000";
+            this.mtbRzuDataZeh.Name = "mtbRzuDataZeh";
+            this.mtbRzuDataZeh.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataZeh.TabIndex = 34;
+            // 
+            // mtbRzuDataCdUt
+            // 
+            this.mtbRzuDataCdUt.Location = new System.Drawing.Point(108, 75);
+            this.mtbRzuDataCdUt.Mask = "00/00/0000";
+            this.mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
+            this.mtbRzuDataCdUt.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataCdUt.TabIndex = 33;
+            // 
+            // mtbPsaDataCdPlan
+            // 
+            this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(108, 51);
+            this.mtbPsaDataCdPlan.Mask = "00/00/0000";
+            this.mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
+            this.mtbPsaDataCdPlan.Size = new System.Drawing.Size(66, 21);
+            this.mtbPsaDataCdPlan.TabIndex = 32;
+            // 
+            // mtbPsaDataZap
+            // 
+            this.mtbPsaDataZap.Location = new System.Drawing.Point(108, 27);
+            this.mtbPsaDataZap.Mask = "00/00/0000";
+            this.mtbPsaDataZap.Name = "mtbPsaDataZap";
+            this.mtbPsaDataZap.Size = new System.Drawing.Size(66, 21);
+            this.mtbPsaDataZap.TabIndex = 31;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(218, 97);
+            this.label14.Location = new System.Drawing.Point(195, 99);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(73, 26);
             this.label14.TabIndex = 30;
             this.label14.Text = "Дата СДАНО\r\n(осн. накл.)";
             // 
-            // tbRzuDataCd
-            // 
-            this.tbRzuDataCd.Location = new System.Drawing.Point(318, 97);
-            this.tbRzuDataCd.Name = "tbRzuDataCd";
-            this.tbRzuDataCd.Size = new System.Drawing.Size(79, 21);
-            this.tbRzuDataCd.TabIndex = 29;
-            // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(218, 76);
+            this.label33.Location = new System.Drawing.Point(195, 78);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(99, 13);
             this.label33.TabIndex = 28;
             this.label33.Text = "Дата на упаковку";
             // 
-            // tbRzuDataUp
-            // 
-            this.tbRzuDataUp.Location = new System.Drawing.Point(318, 73);
-            this.tbRzuDataUp.Name = "tbRzuDataUp";
-            this.tbRzuDataUp.Size = new System.Drawing.Size(79, 21);
-            this.tbRzuDataUp.TabIndex = 27;
-            // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(8, 70);
+            this.label34.Location = new System.Drawing.Point(8, 72);
             this.label34.Name = "label34";
             this.label34.Size = new System.Drawing.Size(100, 26);
             this.label34.TabIndex = 26;
             this.label34.Text = "План. дата сдачи \r\nУточненная";
             // 
-            // tbRzuDataCdUt
-            // 
-            this.tbRzuDataCdUt.Location = new System.Drawing.Point(108, 73);
-            this.tbRzuDataCdUt.Name = "tbRzuDataCdUt";
-            this.tbRzuDataCdUt.Size = new System.Drawing.Size(94, 21);
-            this.tbRzuDataCdUt.TabIndex = 25;
-            // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(218, 54);
+            this.label26.Location = new System.Drawing.Point(195, 56);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(81, 13);
             this.label26.TabIndex = 16;
             this.label26.Text = "Дата в работу";
             // 
-            // tbRzuDataRab
-            // 
-            this.tbRzuDataRab.Location = new System.Drawing.Point(318, 49);
-            this.tbRzuDataRab.Name = "tbRzuDataRab";
-            this.tbRzuDataRab.Size = new System.Drawing.Size(79, 21);
-            this.tbRzuDataRab.TabIndex = 15;
-            // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(218, 25);
+            this.label27.Location = new System.Drawing.Point(195, 27);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(63, 13);
             this.label27.TabIndex = 14;
             this.label27.Text = "Дата в цех";
             // 
-            // tbRzuDataZeh
-            // 
-            this.tbRzuDataZeh.Location = new System.Drawing.Point(318, 25);
-            this.tbRzuDataZeh.Name = "tbRzuDataZeh";
-            this.tbRzuDataZeh.Size = new System.Drawing.Size(79, 21);
-            this.tbRzuDataZeh.TabIndex = 13;
-            // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(8, 49);
+            this.label28.Location = new System.Drawing.Point(8, 51);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(97, 13);
             this.label28.TabIndex = 12;
             this.label28.Text = "План. дата сдачи";
             // 
-            // tbPsaDataCdPlan
-            // 
-            this.tbPsaDataCdPlan.Location = new System.Drawing.Point(108, 49);
-            this.tbPsaDataCdPlan.Name = "tbPsaDataCdPlan";
-            this.tbPsaDataCdPlan.Size = new System.Drawing.Size(94, 21);
-            this.tbPsaDataCdPlan.TabIndex = 11;
-            // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(8, 25);
+            this.label29.Location = new System.Drawing.Point(8, 27);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(81, 13);
             this.label29.TabIndex = 10;
             this.label29.Text = "Месяц запуска";
             // 
-            // tbPsaDataZap
-            // 
-            this.tbPsaDataZap.Location = new System.Drawing.Point(108, 25);
-            this.tbPsaDataZap.Name = "tbPsaDataZap";
-            this.tbPsaDataZap.Size = new System.Drawing.Size(94, 21);
-            this.tbPsaDataZap.TabIndex = 9;
-            // 
             // label30
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label30.Location = new System.Drawing.Point(5, 2);
+            this.label30.Location = new System.Drawing.Point(7, 2);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(199, 19);
             this.label30.TabIndex = 3;
@@ -1311,7 +1189,7 @@
             this.panelControl2.Controls.Add(this.label15);
             this.panelControl2.Controls.Add(this.tbArtGrup);
             this.panelControl2.Controls.Add(this.label16);
-            this.panelControl2.Controls.Add(this.tbPsaSez);
+            this.panelControl2.Controls.Add(this.psaSezName);
             this.panelControl2.Controls.Add(this.label17);
             this.panelControl2.Controls.Add(this.tbPsaYear);
             this.panelControl2.Controls.Add(this.label18);
@@ -1325,19 +1203,19 @@
             this.panelControl2.Controls.Add(this.label25);
             this.panelControl2.Location = new System.Drawing.Point(4, 9);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(946, 128);
+            this.panelControl2.Size = new System.Drawing.Size(985, 128);
             this.panelControl2.TabIndex = 6;
             // 
             // tbArtSost3
             // 
-            this.tbArtSost3.Location = new System.Drawing.Point(651, 102);
+            this.tbArtSost3.Location = new System.Drawing.Point(690, 102);
             this.tbArtSost3.Name = "tbArtSost3";
             this.tbArtSost3.Size = new System.Drawing.Size(290, 21);
             this.tbArtSost3.TabIndex = 32;
             // 
             // tbArtSost2
             // 
-            this.tbArtSost2.Location = new System.Drawing.Point(651, 75);
+            this.tbArtSost2.Location = new System.Drawing.Point(690, 75);
             this.tbArtSost2.Name = "tbArtSost2";
             this.tbArtSost2.Size = new System.Drawing.Size(290, 21);
             this.tbArtSost2.TabIndex = 31;
@@ -1345,7 +1223,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(421, 102);
+            this.label22.Location = new System.Drawing.Point(460, 102);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(52, 13);
             this.label22.TabIndex = 30;
@@ -1353,7 +1231,7 @@
             // 
             // tbPsaKodZv2
             // 
-            this.tbPsaKodZv2.Location = new System.Drawing.Point(473, 102);
+            this.tbPsaKodZv2.Location = new System.Drawing.Point(512, 102);
             this.tbPsaKodZv2.Name = "tbPsaKodZv2";
             this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 21);
             this.tbPsaKodZv2.TabIndex = 29;
@@ -1361,7 +1239,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(283, 102);
+            this.label23.Location = new System.Drawing.Point(322, 102);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(52, 13);
             this.label23.TabIndex = 27;
@@ -1369,14 +1247,14 @@
             // 
             // tbPsaKodZv1
             // 
-            this.tbPsaKodZv1.Location = new System.Drawing.Point(341, 102);
+            this.tbPsaKodZv1.Location = new System.Drawing.Point(380, 102);
             this.tbPsaKodZv1.Name = "tbPsaKodZv1";
             this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
             this.tbPsaKodZv1.TabIndex = 26;
             // 
             // tbArtSost1
             // 
-            this.tbArtSost1.Location = new System.Drawing.Point(651, 48);
+            this.tbArtSost1.Location = new System.Drawing.Point(690, 48);
             this.tbArtSost1.Name = "tbArtSost1";
             this.tbArtSost1.Size = new System.Drawing.Size(290, 21);
             this.tbArtSost1.TabIndex = 25;
@@ -1384,7 +1262,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(553, 59);
+            this.label13.Location = new System.Drawing.Point(592, 59);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(94, 26);
             this.label13.TabIndex = 24;
@@ -1393,7 +1271,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(553, 20);
+            this.label15.Location = new System.Drawing.Point(592, 20);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(80, 26);
             this.label15.TabIndex = 22;
@@ -1401,31 +1279,31 @@
             // 
             // tbArtGrup
             // 
-            this.tbArtGrup.Location = new System.Drawing.Point(651, 22);
+            this.tbArtGrup.Location = new System.Drawing.Point(690, 22);
             this.tbArtGrup.Name = "tbArtGrup";
-            this.tbArtGrup.Size = new System.Drawing.Size(292, 21);
+            this.tbArtGrup.Size = new System.Drawing.Size(290, 21);
             this.tbArtGrup.TabIndex = 21;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(415, 59);
+            this.label16.Location = new System.Drawing.Point(454, 59);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(37, 13);
             this.label16.TabIndex = 20;
             this.label16.Text = "Сезон";
             // 
-            // tbPsaSez
+            // psaSezName
             // 
-            this.tbPsaSez.Location = new System.Drawing.Point(455, 59);
-            this.tbPsaSez.Name = "tbPsaSez";
-            this.tbPsaSez.Size = new System.Drawing.Size(83, 21);
-            this.tbPsaSez.TabIndex = 19;
+            this.psaSezName.Location = new System.Drawing.Point(494, 59);
+            this.psaSezName.Name = "psaSezName";
+            this.psaSezName.Size = new System.Drawing.Size(83, 21);
+            this.psaSezName.TabIndex = 19;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(415, 25);
+            this.label17.Location = new System.Drawing.Point(454, 25);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(26, 13);
             this.label17.TabIndex = 18;
@@ -1433,7 +1311,7 @@
             // 
             // tbPsaYear
             // 
-            this.tbPsaYear.Location = new System.Drawing.Point(455, 22);
+            this.tbPsaYear.Location = new System.Drawing.Point(494, 22);
             this.tbPsaYear.Name = "tbPsaYear";
             this.tbPsaYear.Size = new System.Drawing.Size(83, 21);
             this.tbPsaYear.TabIndex = 17;
@@ -1441,7 +1319,7 @@
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(229, 57);
+            this.label18.Location = new System.Drawing.Point(268, 57);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(38, 26);
             this.label18.TabIndex = 16;
@@ -1449,7 +1327,7 @@
             // 
             // tbPsaNameSbit1
             // 
-            this.tbPsaNameSbit1.Location = new System.Drawing.Point(269, 59);
+            this.tbPsaNameSbit1.Location = new System.Drawing.Point(308, 59);
             this.tbPsaNameSbit1.Name = "tbPsaNameSbit1";
             this.tbPsaNameSbit1.Size = new System.Drawing.Size(132, 21);
             this.tbPsaNameSbit1.TabIndex = 15;
@@ -1457,7 +1335,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(229, 25);
+            this.label19.Location = new System.Drawing.Point(268, 25);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(31, 13);
             this.label19.TabIndex = 14;
@@ -1465,7 +1343,7 @@
             // 
             // tbPsaTbID
             // 
-            this.tbPsaTbID.Location = new System.Drawing.Point(269, 22);
+            this.tbPsaTbID.Location = new System.Drawing.Point(308, 22);
             this.tbPsaTbID.Name = "tbPsaTbID";
             this.tbPsaTbID.Size = new System.Drawing.Size(132, 21);
             this.tbPsaTbID.TabIndex = 13;
@@ -1484,7 +1362,7 @@
             this.tbPsaMenName.Location = new System.Drawing.Point(67, 62);
             this.tbPsaMenName.Multiline = true;
             this.tbPsaMenName.Name = "tbPsaMenName";
-            this.tbPsaMenName.Size = new System.Drawing.Size(161, 21);
+            this.tbPsaMenName.Size = new System.Drawing.Size(186, 21);
             this.tbPsaMenName.TabIndex = 11;
             // 
             // label21
@@ -1500,7 +1378,7 @@
             // 
             this.tbPsaNN.Location = new System.Drawing.Point(85, 27);
             this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(95, 21);
+            this.tbPsaNN.Size = new System.Drawing.Size(168, 21);
             this.tbPsaNN.TabIndex = 9;
             // 
             // label25
@@ -1516,7 +1394,7 @@
             // xtraTabPage2
             // 
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 714);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 618);
             this.xtraTabPage2.Text = "КОНФЕКЦИОН";
             // 
             // xtraTabPage3
@@ -1524,18 +1402,138 @@
             this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 714);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 618);
             this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
             // 
             // bsRasInfo
             // 
             this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
+            // mtbRzuDataRasp
+            // 
+            this.mtbRzuDataRasp.Location = new System.Drawing.Point(91, 55);
+            this.mtbRzuDataRasp.Mask = "00/00/0000";
+            this.mtbRzuDataRasp.Name = "mtbRzuDataRasp";
+            this.mtbRzuDataRasp.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataRasp.TabIndex = 38;
+            // 
+            // mtbRzuDataRasv
+            // 
+            this.mtbRzuDataRasv.Location = new System.Drawing.Point(91, 109);
+            this.mtbRzuDataRasv.Mask = "00/00/0000";
+            this.mtbRzuDataRasv.Name = "mtbRzuDataRasv";
+            this.mtbRzuDataRasv.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataRasv.TabIndex = 53;
+            // 
+            // mtbRzuDataStP
+            // 
+            this.mtbRzuDataStP.Location = new System.Drawing.Point(91, 163);
+            this.mtbRzuDataStP.Mask = "00/00/0000";
+            this.mtbRzuDataStP.Name = "mtbRzuDataStP";
+            this.mtbRzuDataStP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStP.TabIndex = 54;
+            // 
+            // mtbRzuDataStR
+            // 
+            this.mtbRzuDataStR.Location = new System.Drawing.Point(265, 163);
+            this.mtbRzuDataStR.Mask = "00/00/0000";
+            this.mtbRzuDataStR.Name = "mtbRzuDataStR";
+            this.mtbRzuDataStR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStR.TabIndex = 57;
+            // 
+            // mtbRzuDataVP
+            // 
+            this.mtbRzuDataVP.Location = new System.Drawing.Point(265, 109);
+            this.mtbRzuDataVP.Mask = "00/00/0000";
+            this.mtbRzuDataVP.Name = "mtbRzuDataVP";
+            this.mtbRzuDataVP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVP.TabIndex = 56;
+            // 
+            // mtbRzuDataPrP
+            // 
+            this.mtbRzuDataPrP.Location = new System.Drawing.Point(265, 55);
+            this.mtbRzuDataPrP.Mask = "00/00/0000";
+            this.mtbRzuDataPrP.Name = "mtbRzuDataPrP";
+            this.mtbRzuDataPrP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrP.TabIndex = 55;
+            // 
+            // mtbRzuDataStCd
+            // 
+            this.mtbRzuDataStCd.Location = new System.Drawing.Point(442, 163);
+            this.mtbRzuDataStCd.Mask = "00/00/0000";
+            this.mtbRzuDataStCd.Name = "mtbRzuDataStCd";
+            this.mtbRzuDataStCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStCd.TabIndex = 60;
+            // 
+            // mtbRzuDataVR
+            // 
+            this.mtbRzuDataVR.Location = new System.Drawing.Point(442, 109);
+            this.mtbRzuDataVR.Mask = "00/00/0000";
+            this.mtbRzuDataVR.Name = "mtbRzuDataVR";
+            this.mtbRzuDataVR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVR.TabIndex = 59;
+            // 
+            // mtbRzuDataPrR
+            // 
+            this.mtbRzuDataPrR.Location = new System.Drawing.Point(442, 55);
+            this.mtbRzuDataPrR.Mask = "00/00/0000";
+            this.mtbRzuDataPrR.Name = "mtbRzuDataPrR";
+            this.mtbRzuDataPrR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrR.TabIndex = 58;
+            // 
+            // mtbRzuVidStir
+            // 
+            this.mtbRzuVidStir.Location = new System.Drawing.Point(626, 163);
+            this.mtbRzuVidStir.Mask = "00/00/0000";
+            this.mtbRzuVidStir.Name = "mtbRzuVidStir";
+            this.mtbRzuVidStir.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuVidStir.TabIndex = 63;
+            // 
+            // mtbRzuDataVChi
+            // 
+            this.mtbRzuDataVChi.Location = new System.Drawing.Point(626, 109);
+            this.mtbRzuDataVChi.Mask = "00/00/0000";
+            this.mtbRzuDataVChi.Name = "mtbRzuDataVChi";
+            this.mtbRzuDataVChi.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVChi.TabIndex = 62;
+            // 
+            // mtbRzuDataPrPe
+            // 
+            this.mtbRzuDataPrPe.Location = new System.Drawing.Point(626, 55);
+            this.mtbRzuDataPrPe.Mask = "00/00/0000";
+            this.mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
+            this.mtbRzuDataPrPe.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrPe.TabIndex = 61;
+            // 
+            // mtbRzuDataVCd
+            // 
+            this.mtbRzuDataVCd.Location = new System.Drawing.Point(765, 109);
+            this.mtbRzuDataVCd.Mask = "00/00/0000";
+            this.mtbRzuDataVCd.Name = "mtbRzuDataVCd";
+            this.mtbRzuDataVCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVCd.TabIndex = 65;
+            // 
+            // mtbRzuDataPrKm
+            // 
+            this.mtbRzuDataPrKm.Location = new System.Drawing.Point(765, 55);
+            this.mtbRzuDataPrKm.Mask = "00/00/0000";
+            this.mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
+            this.mtbRzuDataPrKm.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrKm.TabIndex = 64;
+            // 
+            // mtbRzuDataPrCd
+            // 
+            this.mtbRzuDataPrCd.Location = new System.Drawing.Point(898, 55);
+            this.mtbRzuDataPrCd.Mask = "00/00/0000";
+            this.mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
+            this.mtbRzuDataPrCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrCd.TabIndex = 66;
+            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 844);
+            this.ClientSize = new System.Drawing.Size(1378, 750);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
             this.Name = "CardByNom";
@@ -1568,6 +1566,7 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1610,7 +1609,7 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbArtGrup;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox tbPsaSez;
+        private System.Windows.Forms.TextBox psaSezName;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tbPsaYear;
         private System.Windows.Forms.Label label18;
@@ -1630,41 +1629,23 @@
         private System.Windows.Forms.Label label52;
         private DevExpress.XtraEditors.PanelControl panelControl5;
         private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.TextBox textBox35;
         private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.TextBox textBox40;
         private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.TextBox textBox41;
         private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.TextBox textBox42;
         private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox textBox34;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.TextBox textBox36;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.TextBox textBox37;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.TextBox textBox38;
         private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.TextBox textBox39;
         private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.TextBox textBox33;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.TextBox textBox32;
         private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox textBox31;
         private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox textBox28;
         private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.TextBox textBox27;
         private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.TextBox textBox22;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
@@ -1699,23 +1680,39 @@
         private System.Windows.Forms.Label label24;
         private DevExpress.XtraEditors.PanelControl panelControl3;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox tbRzuDataCd;
         private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox tbRzuDataUp;
         private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox tbRzuDataCdUt;
         private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.TextBox tbRzuDataRab;
         private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.TextBox tbRzuDataZeh;
         private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.TextBox tbPsaDataCdPlan;
         private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.TextBox tbPsaDataZap;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.BindingSource bsRasInfo;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
         private System.Windows.Forms.TextBox tbArtSost3;
         private System.Windows.Forms.TextBox tbArtSost2;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrKm;
+        private System.Windows.Forms.MaskedTextBox mtbRzuVidStir;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVChi;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrPe;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasv;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasp;
+        private System.Windows.Forms.BindingSource bsOtdelkaList;
     }
 }
