@@ -1546,7 +1546,7 @@
             this.label4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "sumSum([kol])")});
             this.label4.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
-            this.label4.LocationFloat = new DevExpress.Utils.PointFloat(1437.87F, 4.576109F);
+            this.label4.LocationFloat = new DevExpress.Utils.PointFloat(1345.661F, 4.576109F);
             this.label4.Name = "label4";
             this.label4.SizeF = new System.Drawing.SizeF(226.6561F, 37.80647F);
             this.label4.StyleName = "TotalData1";
@@ -1563,7 +1563,7 @@
             this.label3.Dpi = 254F;
             this.label3.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(1300.184F, 4.576109F);
+            this.label3.LocationFloat = new DevExpress.Utils.PointFloat(1207.975F, 4.576109F);
             this.label3.Name = "label3";
             this.label3.SizeF = new System.Drawing.SizeF(137.6848F, 37.80647F);
             this.label3.StyleName = "TotalCaption1";
@@ -2025,8 +2025,9 @@
             // 
             this.xrLabel54.Dpi = 254F;
             this.xrLabel54.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[BrakPrint]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(IsNull([iz_ob_prch],0) = 4, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintInfo]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([iz_ob_prch],0) = 4 || Substring([articul], 0, 1) = \'2\' || Substring([" +
+                    "mod], 0, 1) = \'M\' || [p_seb] > 0, \'Yes\', \'No\')\n")});
             this.xrLabel54.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
             this.xrLabel54.LocationFloat = new DevExpress.Utils.PointFloat(346.6035F, 447.7251F);
             this.xrLabel54.Multiline = true;
