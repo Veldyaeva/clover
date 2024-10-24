@@ -1,14 +1,26 @@
-﻿using System;
+﻿using DevExpress.Office.Utils;
+using DevExpress.XtraGrid.Views.Card.ViewInfo;
+using DevExpress.XtraGrid.Views.Card;
+using DevExpress.XtraReports;
+using DevExpress.XtraReports.UI;
+using DevExpress.XtraReports.Parameters;
+using DevExpress.XtraReports.UserDesigner;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Collections;
+using System.Security.Cryptography.X509Certificates;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace SewingProduction
 {
@@ -19,6 +31,23 @@ namespace SewingProduction
             InitializeComponent();
         }
 
+        private string GetIzNakl()
+        {
+            string iz = "";
+            try
+            {
+                object data = gridView1.GetRow(gridView1.FocusedRowHandle);
+                if (data != null)
+                {
+                    iz = ((DataRowView)data).Row["iz"].ToString().Trim();
+                }
+            }
+            catch
+            {
+                iz = "";
+            }
+            return iz;
+        }
         private void label5_Click(object sender, EventArgs e)
         {
 
@@ -218,5 +247,153 @@ namespace SewingProduction
                 textBox1_Leave(sender, e);
             }
         }
+
+        private void btnNaklPrint_Click(object sender, EventArgs e)
+        {
+            string iz = GetIzNakl();
+            PrintNaklReport report1 = new PrintNaklReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_naklIz"].Value = iz;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+
+            //DataRowView SelectedRow = (DataRowView)bsNaklList.Current;
+            //DataRow row = SelectedRow.Row;
+            //string iz = row["iz"].ToString();
+            //PrintReport report = new PrintReport();
+            //report.query = $"select * from NaklView where iz = '{iz}' ";
+            //report.Show();
+            ////string iz = GetIzNakl();
+
+            ////string connectionString = Properties.Settings.Default.ACEConnectionString;
+            ////using (SqlConnection connection = new SqlConnection(connectionString))
+            ////{
+            ////    connection.Open();
+            ////    SqlDataAdapter adapterNaklListReport = new SqlDataAdapter();
+            ////    DataTable dtNaklListReport = new DataTable();
+            ////    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
+            ////    //query += $" order by n_pach";
+            ////    string queryNaklListReport = $"select * from NaklView where iz = '{iz}' ";
+            ////    //queryNaklListReport += $" order by iz";
+            ////    SqlCommand commandNaklListReport = new SqlCommand(queryNaklListReport, connection);
+            ////    adapterNaklListReport.SelectCommand = commandNaklListReport;
+            ////    adapterNaklListReport.Fill(dtNaklListReport);
+            ////    //bsNaklList.DataSource = dtNaklListReport;
+            ////    //bsNaklList.Sort = "kod asc";
+
+            ////    //dtNaklListReport.WriteXml("C:\\1\\dtNaklListReport.xml", System.Data.XmlWriteMode.WriteSchema);
+
+            ////    //Создаем отчет
+            ////    PrintNakl report = new PrintNakl();
+            ////    //Открываем шаблон отчета в формате *.repx
+            ////    //report.LoadLayout(Application.StartupPath + ".. \\ XtraReport1.repx"); // Report to the root directory
+            ////    //Передаем класс с данными
+            ////    report.DataSource = dtNaklListReport;
+
+            ////    //Открываем отчет для предпросмотра и дальнейшей работы с ним (печать/экспорт и т.д.)
+            ////    ////ReportPrintTool tool = new ReportPrintTool(report);
+            ////    ////tool.ShowPreview();
+            ////    report.ShowPreview();
+            ////}
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            //MessageBox.Show(GetIzNakl());
+            string iz = GetIzNakl();
+            //Создаем отчет
+            //XtraReport2 report = new XtraReport2();
+            //report.RequestParameters = false;
+            //report.Parameters["naklIz"].Value = iz;
+
+            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            //reportPrintTool.ShowPreviewDialog();
+            
+            PrintNaklReport report1 = new PrintNaklReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_naklIz"].Value = iz;
+
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+
+            //PrintNaklReport report = new PrintNaklReport
+            //{
+            //   FilterString = "[nakl.iz] = ?NaklIz",
+            //    RequestParameters = false
+            //};
+
+            //report.Parameters["NaklIz"].Value = iz;
+            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            //reportPrintTool.ShowPreviewDialog();
+            //string iz = GetIzNakl();
+            ////Создаем отчет
+            //rptPrintNakl report = new rptPrintNakl
+            //{
+            //    FilterString = "[nakl.iz] = ?NaklIz",
+            //    RequestParameters = false
+            //};
+            //report.Parameters["NaklIz"].Value = iz;
+            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            //reportPrintTool.ShowPreviewDialog();
+
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter adapterNaklListReport = new SqlDataAdapter();
+            //    DataTable dtNaklListReport = new DataTable();
+            //    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
+            //    //query += $" order by n_pach";
+            //    string queryNaklListReport = $"select * from NaklView where iz = '{iz}' ";
+            //    //queryNaklListReport += $" order by iz";
+            //    SqlCommand commandNaklListReport = new SqlCommand(queryNaklListReport, connection);
+            //    adapterNaklListReport.SelectCommand = commandNaklListReport;
+            //    adapterNaklListReport.Fill(dtNaklListReport);
+            //    //bsNaklList.DataSource = dtNaklListReport;
+            //    //bsNaklList.Sort = "kod asc";
+
+            //    //dtNaklListReport.WriteXml("C:\\1\\dtNaklListReport.xml", System.Data.XmlWriteMode.WriteSchema);
+
+            //    //Создаем отчет
+            //    rptPrintNakl report = new rptPrintNakl
+            //    {
+            //        FilterString = "[nakl.iz] = ?NaklIz",
+            //        RequestParameters = false
+            //    };
+            //    report.Parameters["NaklIz"].Value = iz;
+            //    ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            //    reportPrintTool.ShowPreviewDialog();
+
+            //    //Открываем шаблон отчета в формате *.repx
+            //    //report.LoadLayout(Application.StartupPath + ".. \\ XtraReport1.repx"); // Report to the root directory
+            //    //Передаем класс с данными
+            //    //report.DataSource = "dtNaklListReport";
+
+            //    //Открываем отчет для предпросмотра и дальнейшей работы с ним (печать/экспорт и т.д.)
+            //    ////ReportPrintTool tool = new ReportPrintTool(report);
+            //    ////tool.ShowPreview();
+            //    ////report.ShowPreview();
+            //}
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            FioListReport report = new FioListReport();
+            report.RequestParameters = false;
+            report.Parameters["_tab"].Value = 3;
+
+            ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            reportPrintTool.ShowPreviewDialog();
+
+        }
+
+        //private void button1_Click(object sender, EventArgs e)
+        //{
+        //    XtraReport1 xtpt = new XtraReport1();
+        //    xtpt.LoadLayout(Application.StartupPath + "..\\XtraReport1.repx");
+        //    ReportDesignTool tool = new ReportDesignTool(xtpt);
+        //    tool.ShowDesignerDialog();
+        //}
     }
 }

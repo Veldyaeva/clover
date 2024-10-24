@@ -6,9 +6,9 @@ using System.Drawing;
 
 namespace SewingProduction
 {
-    public partial class XtraReport1 : DevExpress.XtraReports.UI.XtraReport
+    public partial class rptPrintNakl : DevExpress.XtraReports.UI.XtraReport
     {
-        public XtraReport1()
+        public rptPrintNakl()
         {
             InitializeComponent();
         }

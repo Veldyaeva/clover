@@ -62,6 +62,21 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label52 = new System.Windows.Forms.Label();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            this.mtbRzuDataPrCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrKm = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuVidStir = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVChi = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrPe = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStCd = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStR = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataVP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataPrP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataStP = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataRasv = new System.Windows.Forms.MaskedTextBox();
+            this.mtbRzuDataRasp = new System.Windows.Forms.MaskedTextBox();
             this.label44 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
             this.label50 = new System.Windows.Forms.Label();
@@ -81,6 +96,7 @@
             this.label36 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -89,6 +105,8 @@
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label31 = new System.Windows.Forms.Label();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnPrintNaklXtraReport = new System.Windows.Forms.Button();
             this.btnNaklAbsent = new System.Windows.Forms.Button();
             this.btnNaklPart = new System.Windows.Forms.Button();
             this.btnNaklPrint = new System.Windows.Forms.Button();
@@ -155,22 +173,6 @@
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
-            this.mtbRzuDataRasp = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataRasv = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuVidStir = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVChi = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrPe = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrKm = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrCd = new System.Windows.Forms.MaskedTextBox();
-            this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -182,6 +184,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
@@ -192,7 +195,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -550,6 +552,126 @@
             this.panelControl5.Size = new System.Drawing.Size(1358, 195);
             this.panelControl5.TabIndex = 30;
             // 
+            // mtbRzuDataPrCd
+            // 
+            this.mtbRzuDataPrCd.Location = new System.Drawing.Point(898, 55);
+            this.mtbRzuDataPrCd.Mask = "00/00/0000";
+            this.mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
+            this.mtbRzuDataPrCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrCd.TabIndex = 66;
+            // 
+            // mtbRzuDataVCd
+            // 
+            this.mtbRzuDataVCd.Location = new System.Drawing.Point(765, 109);
+            this.mtbRzuDataVCd.Mask = "00/00/0000";
+            this.mtbRzuDataVCd.Name = "mtbRzuDataVCd";
+            this.mtbRzuDataVCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVCd.TabIndex = 65;
+            // 
+            // mtbRzuDataPrKm
+            // 
+            this.mtbRzuDataPrKm.Location = new System.Drawing.Point(765, 55);
+            this.mtbRzuDataPrKm.Mask = "00/00/0000";
+            this.mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
+            this.mtbRzuDataPrKm.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrKm.TabIndex = 64;
+            // 
+            // mtbRzuVidStir
+            // 
+            this.mtbRzuVidStir.Location = new System.Drawing.Point(626, 163);
+            this.mtbRzuVidStir.Mask = "00/00/0000";
+            this.mtbRzuVidStir.Name = "mtbRzuVidStir";
+            this.mtbRzuVidStir.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuVidStir.TabIndex = 63;
+            // 
+            // mtbRzuDataVChi
+            // 
+            this.mtbRzuDataVChi.Location = new System.Drawing.Point(626, 109);
+            this.mtbRzuDataVChi.Mask = "00/00/0000";
+            this.mtbRzuDataVChi.Name = "mtbRzuDataVChi";
+            this.mtbRzuDataVChi.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVChi.TabIndex = 62;
+            // 
+            // mtbRzuDataPrPe
+            // 
+            this.mtbRzuDataPrPe.Location = new System.Drawing.Point(626, 55);
+            this.mtbRzuDataPrPe.Mask = "00/00/0000";
+            this.mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
+            this.mtbRzuDataPrPe.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrPe.TabIndex = 61;
+            // 
+            // mtbRzuDataStCd
+            // 
+            this.mtbRzuDataStCd.Location = new System.Drawing.Point(442, 163);
+            this.mtbRzuDataStCd.Mask = "00/00/0000";
+            this.mtbRzuDataStCd.Name = "mtbRzuDataStCd";
+            this.mtbRzuDataStCd.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStCd.TabIndex = 60;
+            // 
+            // mtbRzuDataVR
+            // 
+            this.mtbRzuDataVR.Location = new System.Drawing.Point(442, 109);
+            this.mtbRzuDataVR.Mask = "00/00/0000";
+            this.mtbRzuDataVR.Name = "mtbRzuDataVR";
+            this.mtbRzuDataVR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVR.TabIndex = 59;
+            // 
+            // mtbRzuDataPrR
+            // 
+            this.mtbRzuDataPrR.Location = new System.Drawing.Point(442, 55);
+            this.mtbRzuDataPrR.Mask = "00/00/0000";
+            this.mtbRzuDataPrR.Name = "mtbRzuDataPrR";
+            this.mtbRzuDataPrR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrR.TabIndex = 58;
+            // 
+            // mtbRzuDataStR
+            // 
+            this.mtbRzuDataStR.Location = new System.Drawing.Point(265, 163);
+            this.mtbRzuDataStR.Mask = "00/00/0000";
+            this.mtbRzuDataStR.Name = "mtbRzuDataStR";
+            this.mtbRzuDataStR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStR.TabIndex = 57;
+            // 
+            // mtbRzuDataVP
+            // 
+            this.mtbRzuDataVP.Location = new System.Drawing.Point(265, 109);
+            this.mtbRzuDataVP.Mask = "00/00/0000";
+            this.mtbRzuDataVP.Name = "mtbRzuDataVP";
+            this.mtbRzuDataVP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataVP.TabIndex = 56;
+            // 
+            // mtbRzuDataPrP
+            // 
+            this.mtbRzuDataPrP.Location = new System.Drawing.Point(265, 55);
+            this.mtbRzuDataPrP.Mask = "00/00/0000";
+            this.mtbRzuDataPrP.Name = "mtbRzuDataPrP";
+            this.mtbRzuDataPrP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataPrP.TabIndex = 55;
+            // 
+            // mtbRzuDataStP
+            // 
+            this.mtbRzuDataStP.Location = new System.Drawing.Point(91, 163);
+            this.mtbRzuDataStP.Mask = "00/00/0000";
+            this.mtbRzuDataStP.Name = "mtbRzuDataStP";
+            this.mtbRzuDataStP.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataStP.TabIndex = 54;
+            // 
+            // mtbRzuDataRasv
+            // 
+            this.mtbRzuDataRasv.Location = new System.Drawing.Point(91, 109);
+            this.mtbRzuDataRasv.Mask = "00/00/0000";
+            this.mtbRzuDataRasv.Name = "mtbRzuDataRasv";
+            this.mtbRzuDataRasv.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataRasv.TabIndex = 53;
+            // 
+            // mtbRzuDataRasp
+            // 
+            this.mtbRzuDataRasp.Location = new System.Drawing.Point(91, 55);
+            this.mtbRzuDataRasp.Mask = "00/00/0000";
+            this.mtbRzuDataRasp.Name = "mtbRzuDataRasp";
+            this.mtbRzuDataRasp.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataRasp.TabIndex = 38;
+            // 
             // label44
             // 
             this.label44.AutoSize = true;
@@ -789,6 +911,8 @@
             // 
             // panelControl4
             // 
+            this.panelControl4.Controls.Add(this.button1);
+            this.panelControl4.Controls.Add(this.btnPrintNaklXtraReport);
             this.panelControl4.Controls.Add(this.btnNaklAbsent);
             this.panelControl4.Controls.Add(this.btnNaklPart);
             this.panelControl4.Controls.Add(this.btnNaklPrint);
@@ -798,6 +922,28 @@
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(1358, 205);
             this.panelControl4.TabIndex = 28;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(655, 177);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(93, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "testFioReport";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btnPrintNaklXtraReport
+            // 
+            this.btnPrintNaklXtraReport.Location = new System.Drawing.Point(499, 177);
+            this.btnPrintNaklXtraReport.Name = "btnPrintNaklXtraReport";
+            this.btnPrintNaklXtraReport.Size = new System.Drawing.Size(75, 23);
+            this.btnPrintNaklXtraReport.TabIndex = 9;
+            this.btnPrintNaklXtraReport.Text = "button1";
+            this.btnPrintNaklXtraReport.UseVisualStyleBackColor = true;
+            this.btnPrintNaklXtraReport.Visible = false;
+            this.btnPrintNaklXtraReport.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnNaklAbsent
             // 
@@ -825,6 +971,7 @@
             this.btnNaklPrint.TabIndex = 6;
             this.btnNaklPrint.Text = "Просмотр/Печать накладной";
             this.btnNaklPrint.UseVisualStyleBackColor = true;
+            this.btnNaklPrint.Click += new System.EventHandler(this.btnNaklPrint_Click);
             // 
             // gcNaklList
             // 
@@ -1409,126 +1556,6 @@
             // 
             this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
             // 
-            // mtbRzuDataRasp
-            // 
-            this.mtbRzuDataRasp.Location = new System.Drawing.Point(91, 55);
-            this.mtbRzuDataRasp.Mask = "00/00/0000";
-            this.mtbRzuDataRasp.Name = "mtbRzuDataRasp";
-            this.mtbRzuDataRasp.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataRasp.TabIndex = 38;
-            // 
-            // mtbRzuDataRasv
-            // 
-            this.mtbRzuDataRasv.Location = new System.Drawing.Point(91, 109);
-            this.mtbRzuDataRasv.Mask = "00/00/0000";
-            this.mtbRzuDataRasv.Name = "mtbRzuDataRasv";
-            this.mtbRzuDataRasv.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataRasv.TabIndex = 53;
-            // 
-            // mtbRzuDataStP
-            // 
-            this.mtbRzuDataStP.Location = new System.Drawing.Point(91, 163);
-            this.mtbRzuDataStP.Mask = "00/00/0000";
-            this.mtbRzuDataStP.Name = "mtbRzuDataStP";
-            this.mtbRzuDataStP.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataStP.TabIndex = 54;
-            // 
-            // mtbRzuDataStR
-            // 
-            this.mtbRzuDataStR.Location = new System.Drawing.Point(265, 163);
-            this.mtbRzuDataStR.Mask = "00/00/0000";
-            this.mtbRzuDataStR.Name = "mtbRzuDataStR";
-            this.mtbRzuDataStR.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataStR.TabIndex = 57;
-            // 
-            // mtbRzuDataVP
-            // 
-            this.mtbRzuDataVP.Location = new System.Drawing.Point(265, 109);
-            this.mtbRzuDataVP.Mask = "00/00/0000";
-            this.mtbRzuDataVP.Name = "mtbRzuDataVP";
-            this.mtbRzuDataVP.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataVP.TabIndex = 56;
-            // 
-            // mtbRzuDataPrP
-            // 
-            this.mtbRzuDataPrP.Location = new System.Drawing.Point(265, 55);
-            this.mtbRzuDataPrP.Mask = "00/00/0000";
-            this.mtbRzuDataPrP.Name = "mtbRzuDataPrP";
-            this.mtbRzuDataPrP.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataPrP.TabIndex = 55;
-            // 
-            // mtbRzuDataStCd
-            // 
-            this.mtbRzuDataStCd.Location = new System.Drawing.Point(442, 163);
-            this.mtbRzuDataStCd.Mask = "00/00/0000";
-            this.mtbRzuDataStCd.Name = "mtbRzuDataStCd";
-            this.mtbRzuDataStCd.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataStCd.TabIndex = 60;
-            // 
-            // mtbRzuDataVR
-            // 
-            this.mtbRzuDataVR.Location = new System.Drawing.Point(442, 109);
-            this.mtbRzuDataVR.Mask = "00/00/0000";
-            this.mtbRzuDataVR.Name = "mtbRzuDataVR";
-            this.mtbRzuDataVR.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataVR.TabIndex = 59;
-            // 
-            // mtbRzuDataPrR
-            // 
-            this.mtbRzuDataPrR.Location = new System.Drawing.Point(442, 55);
-            this.mtbRzuDataPrR.Mask = "00/00/0000";
-            this.mtbRzuDataPrR.Name = "mtbRzuDataPrR";
-            this.mtbRzuDataPrR.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataPrR.TabIndex = 58;
-            // 
-            // mtbRzuVidStir
-            // 
-            this.mtbRzuVidStir.Location = new System.Drawing.Point(626, 163);
-            this.mtbRzuVidStir.Mask = "00/00/0000";
-            this.mtbRzuVidStir.Name = "mtbRzuVidStir";
-            this.mtbRzuVidStir.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuVidStir.TabIndex = 63;
-            // 
-            // mtbRzuDataVChi
-            // 
-            this.mtbRzuDataVChi.Location = new System.Drawing.Point(626, 109);
-            this.mtbRzuDataVChi.Mask = "00/00/0000";
-            this.mtbRzuDataVChi.Name = "mtbRzuDataVChi";
-            this.mtbRzuDataVChi.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataVChi.TabIndex = 62;
-            // 
-            // mtbRzuDataPrPe
-            // 
-            this.mtbRzuDataPrPe.Location = new System.Drawing.Point(626, 55);
-            this.mtbRzuDataPrPe.Mask = "00/00/0000";
-            this.mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
-            this.mtbRzuDataPrPe.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataPrPe.TabIndex = 61;
-            // 
-            // mtbRzuDataVCd
-            // 
-            this.mtbRzuDataVCd.Location = new System.Drawing.Point(765, 109);
-            this.mtbRzuDataVCd.Mask = "00/00/0000";
-            this.mtbRzuDataVCd.Name = "mtbRzuDataVCd";
-            this.mtbRzuDataVCd.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataVCd.TabIndex = 65;
-            // 
-            // mtbRzuDataPrKm
-            // 
-            this.mtbRzuDataPrKm.Location = new System.Drawing.Point(765, 55);
-            this.mtbRzuDataPrKm.Mask = "00/00/0000";
-            this.mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
-            this.mtbRzuDataPrKm.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataPrKm.TabIndex = 64;
-            // 
-            // mtbRzuDataPrCd
-            // 
-            this.mtbRzuDataPrCd.Location = new System.Drawing.Point(898, 55);
-            this.mtbRzuDataPrCd.Mask = "00/00/0000";
-            this.mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
-            this.mtbRzuDataPrCd.Size = new System.Drawing.Size(66, 21);
-            this.mtbRzuDataPrCd.TabIndex = 66;
-            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1553,6 +1580,7 @@
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
@@ -1566,7 +1594,6 @@
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1714,5 +1741,7 @@
         private System.Windows.Forms.MaskedTextBox mtbRzuDataRasv;
         private System.Windows.Forms.MaskedTextBox mtbRzuDataRasp;
         private System.Windows.Forms.BindingSource bsOtdelkaList;
+        private System.Windows.Forms.Button btnPrintNaklXtraReport;
+        private System.Windows.Forms.Button button1;
     }
 }

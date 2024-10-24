@@ -6,9 +6,9 @@ using System.Drawing;
 
 namespace SewingProduction
 {
-    public partial class XtraReport2 : DevExpress.XtraReports.UI.XtraReport
+    public partial class FioListReport : DevExpress.XtraReports.UI.XtraReport
     {
-        public XtraReport2()
+        public FioListReport()
         {
             InitializeComponent();
         }

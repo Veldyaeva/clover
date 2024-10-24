@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsPrintNakl" targetNamespace="http://tempuri.org/dsPrintNakl.xsd" xmlns:mstns="http://tempuri.org/dsPrintNakl.xsd" xmlns="http://tempuri.org/dsPrintNakl.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ACEConnectionString1" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ACEConnectionString1 (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.SewingProduction.Properties.Settings.GlobalReference.Default.ACEConnectionString1" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="NaklViewTableAdapter" GeneratorDataComponentClassName="NaklViewTableAdapter" Name="NaklView" UserDataComponentName="NaklViewTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ACEConnectionString1 (Settings)" DbObjectName="ACE.dbo.NaklView" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT nom, iz, iz_nakl, iz_data, data_izm, dost_data, dost_n, date_print, gl_nomer, SKL_Naimen, prich, kol_b, kol_c, articul, mod, ChipInUT, ChipPech, ChipScan, ChipOtgr FROM dbo.NaklView</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="nom" DataSetColumn="nom" />
+              <Mapping SourceColumn="iz" DataSetColumn="iz" />
+              <Mapping SourceColumn="iz_nakl" DataSetColumn="iz_nakl" />
+              <Mapping SourceColumn="iz_data" DataSetColumn="iz_data" />
+              <Mapping SourceColumn="data_izm" DataSetColumn="data_izm" />
+              <Mapping SourceColumn="dost_data" DataSetColumn="dost_data" />
+              <Mapping SourceColumn="dost_n" DataSetColumn="dost_n" />
+              <Mapping SourceColumn="date_print" DataSetColumn="date_print" />
+              <Mapping SourceColumn="gl_nomer" DataSetColumn="gl_nomer" />
+              <Mapping SourceColumn="SKL_Naimen" DataSetColumn="SKL_Naimen" />
+              <Mapping SourceColumn="prich" DataSetColumn="prich" />
+              <Mapping SourceColumn="kol_b" DataSetColumn="kol_b" />
+              <Mapping SourceColumn="kol_c" DataSetColumn="kol_c" />
+              <Mapping SourceColumn="articul" DataSetColumn="articul" />
+              <Mapping SourceColumn="mod" DataSetColumn="mod" />
+              <Mapping SourceColumn="ChipInUT" DataSetColumn="ChipInUT" />
+              <Mapping SourceColumn="ChipPech" DataSetColumn="ChipPech" />
+              <Mapping SourceColumn="ChipScan" DataSetColumn="ChipScan" />
+              <Mapping SourceColumn="ChipOtgr" DataSetColumn="ChipOtgr" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsPrintNakl" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="dsPrintNakl" msprop:Generator_DataSetName="dsPrintNakl">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="NaklView" msprop:Generator_RowEvHandlerName="NaklViewRowChangeEventHandler" msprop:Generator_RowDeletedName="NaklViewRowDeleted" msprop:Generator_RowDeletingName="NaklViewRowDeleting" msprop:Generator_RowEvArgName="NaklViewRowChangeEvent" msprop:Generator_TablePropName="NaklView" msprop:Generator_RowChangedName="NaklViewRowChanged" msprop:Generator_RowChangingName="NaklViewRowChanging" msprop:Generator_TableClassName="NaklViewDataTable" msprop:Generator_RowClassName="NaklViewRow" msprop:Generator_TableVarName="tableNaklView" msprop:Generator_UserTableName="NaklView">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="nom" msprop:Generator_ColumnPropNameInRow="nom" msprop:Generator_ColumnPropNameInTable="nomColumn" msprop:Generator_ColumnVarNameInTable="columnnom" msprop:Generator_UserColumnName="nom" type="xs:decimal" minOccurs="0" />
+              <xs:element name="iz" msprop:Generator_ColumnPropNameInRow="iz" msprop:Generator_ColumnPropNameInTable="izColumn" msprop:Generator_ColumnVarNameInTable="columniz" msprop:Generator_UserColumnName="iz" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="9" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="iz_nakl" msprop:Generator_ColumnPropNameInRow="iz_nakl" msprop:Generator_ColumnPropNameInTable="iz_naklColumn" msprop:Generator_ColumnVarNameInTable="columniz_nakl" msprop:Generator_UserColumnName="iz_nakl" type="xs:decimal" minOccurs="0" />
+              <xs:element name="iz_data" msprop:Generator_ColumnPropNameInRow="iz_data" msprop:Generator_ColumnPropNameInTable="iz_dataColumn" msprop:Generator_ColumnVarNameInTable="columniz_data" msprop:Generator_UserColumnName="iz_data" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="data_izm" msprop:Generator_ColumnPropNameInRow="data_izm" msprop:Generator_ColumnPropNameInTable="data_izmColumn" msprop:Generator_ColumnVarNameInTable="columndata_izm" msprop:Generator_UserColumnName="data_izm" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="dost_data" msprop:Generator_ColumnPropNameInRow="dost_data" msprop:Generator_ColumnPropNameInTable="dost_dataColumn" msprop:Generator_ColumnVarNameInTable="columndost_data" msprop:Generator_UserColumnName="dost_data" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="dost_n" msprop:Generator_ColumnPropNameInRow="dost_n" msprop:Generator_ColumnPropNameInTable="dost_nColumn" msprop:Generator_ColumnVarNameInTable="columndost_n" msprop:Generator_UserColumnName="dost_n" type="xs:decimal" minOccurs="0" />
+              <xs:element name="date_print" msprop:Generator_ColumnPropNameInRow="date_print" msprop:Generator_ColumnPropNameInTable="date_printColumn" msprop:Generator_ColumnVarNameInTable="columndate_print" msprop:Generator_UserColumnName="date_print" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="gl_nomer" msprop:Generator_ColumnPropNameInRow="gl_nomer" msprop:Generator_ColumnPropNameInTable="gl_nomerColumn" msprop:Generator_ColumnVarNameInTable="columngl_nomer" msprop:Generator_UserColumnName="gl_nomer" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="SKL_Naimen" msprop:Generator_ColumnPropNameInRow="SKL_Naimen" msprop:Generator_ColumnPropNameInTable="SKL_NaimenColumn" msprop:Generator_ColumnVarNameInTable="columnSKL_Naimen" msprop:Generator_UserColumnName="SKL_Naimen" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="prich" msprop:Generator_ColumnPropNameInRow="prich" msprop:Generator_ColumnPropNameInTable="prichColumn" msprop:Generator_ColumnVarNameInTable="columnprich" msprop:Generator_UserColumnName="prich" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="kol_b" msprop:Generator_ColumnPropNameInRow="kol_b" msprop:Generator_ColumnPropNameInTable="kol_bColumn" msprop:Generator_ColumnVarNameInTable="columnkol_b" msprop:Generator_UserColumnName="kol_b" type="xs:decimal" minOccurs="0" />
+              <xs:element name="kol_c" msprop:Generator_ColumnPropNameInRow="kol_c" msprop:Generator_ColumnPropNameInTable="kol_cColumn" msprop:Generator_ColumnVarNameInTable="columnkol_c" msprop:Generator_UserColumnName="kol_c" type="xs:decimal" minOccurs="0" />
+              <xs:element name="articul" msprop:Generator_ColumnPropNameInRow="articul" msprop:Generator_ColumnPropNameInTable="articulColumn" msprop:Generator_ColumnVarNameInTable="columnarticul" msprop:Generator_UserColumnName="articul" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="mod" msprop:Generator_ColumnPropNameInRow="mod" msprop:Generator_ColumnPropNameInTable="modColumn" msprop:Generator_ColumnVarNameInTable="columnmod" msprop:Generator_UserColumnName="mod" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="25" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChipInUT" msprop:Generator_ColumnPropNameInRow="ChipInUT" msprop:Generator_ColumnPropNameInTable="ChipInUTColumn" msprop:Generator_ColumnVarNameInTable="columnChipInUT" msprop:Generator_UserColumnName="ChipInUT">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChipPech" msprop:Generator_ColumnPropNameInRow="ChipPech" msprop:Generator_ColumnPropNameInTable="ChipPechColumn" msprop:Generator_ColumnVarNameInTable="columnChipPech" msprop:Generator_UserColumnName="ChipPech">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChipScan" msprop:Generator_ColumnPropNameInRow="ChipScan" msprop:Generator_ColumnPropNameInTable="ChipScanColumn" msprop:Generator_ColumnVarNameInTable="columnChipScan" msprop:Generator_UserColumnName="ChipScan">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="ChipOtgr" msprop:Generator_ColumnPropNameInRow="ChipOtgr" msprop:Generator_ColumnPropNameInTable="ChipOtgrColumn" msprop:Generator_ColumnVarNameInTable="columnChipOtgr" msprop:Generator_UserColumnName="ChipOtgr">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="1" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1">
+      <xs:selector xpath=".//mstns:NaklView" />
+      <xs:field xpath="mstns:iz" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
