@@ -383,12 +383,12 @@ namespace SewingProduction
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            FioListReport report = new FioListReport();
-            report.RequestParameters = false;
-            report.Parameters["_tab"].Value = 3;
+            //FioListReport report = new FioListReport();
+            //report.RequestParameters = false;
+            //report.Parameters["_tab"].Value = 3;
 
-            ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            reportPrintTool.ShowPreviewDialog();
+            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            //reportPrintTool.ShowPreviewDialog();
 
         }
 
@@ -398,6 +398,70 @@ namespace SewingProduction
         }
 
         private void label53_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNaklPart_Click(object sender, EventArgs e)
+        {
+            if (btnNaklPart.Text == "Показать информацию по делению накладной")
+            {
+                btnNaklPart.Text = "Скрыть информацию по делению накладной";
+                this.progressPanel2.BringToFront();
+                this.progressPanel2.Visible = true;
+                string iz = GetIzNakl();
+                
+                string connectionString = Properties.Settings.Default.ACEConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlDataAdapter adapterPartNaklList = new SqlDataAdapter();
+                    DataTable dtPartNaklList = new DataTable();
+                    string queryPartNaklList = $"SELECT * FROM [ACE].[dbo].[View_History_razdel_nakl] where iz_b = '{iz}' ";
+                    queryPartNaklList += $" order by id";
+                    SqlCommand commandPartNaklList = new SqlCommand(queryPartNaklList, connection);
+                    adapterPartNaklList.SelectCommand = commandPartNaklList;
+                    adapterPartNaklList.Fill(dtPartNaklList);
+                    bsPartNaklList.DataSource = dtPartNaklList;
+                    bsPartNaklList.Sort = "id asc";
+                    this.gcPartNaklList.Location = this.gcNaklList.Location;
+                    this.gcPartNaklList.Size = this.gcNaklList.Size;
+                    this.gcPartNaklList.BringToFront();
+                    this.gcPartNaklList.Visible = true;
+
+                    //DataRow[] currentRows = dtPartNaklList.Select(null, null, DataViewRowState.CurrentRows);
+                    //if (currentRows.Length < 1)
+                    //    Console.WriteLine("No Current Rows Found");
+                    //else
+                    //{
+                    //    foreach (DataColumn column in dtPartNaklList.Columns)
+                    //        Console.Write("\t{0}", column.ColumnName);
+                    //    Console.WriteLine("\tRowState");
+                    //    foreach (DataRow row in currentRows)
+                    //    {
+                    //        foreach (DataColumn column in dtPartNaklList.Columns)
+                    //            Console.Write("\t{0}", row[column]);
+                    //        Console.WriteLine("\t" + row.RowState);
+                    //    }
+                    //}
+                }
+                this.progressPanel1.Visible = false;
+            }
+            else
+            {
+                btnNaklPart.Text = "Показать информацию по делению накладной";
+                this.gcNaklList.BringToFront();
+                this.gcPartNaklList.Visible = false;
+            }
+            
+        }
+
+        private void gcPartNaklList_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xtraTabControl1_Click(object sender, EventArgs e)
         {
 
         }

@@ -31,6 +31,9 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.label53 = new System.Windows.Forms.Label();
+            this.tbPsaNomZad = new System.Windows.Forms.TextBox();
+            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
             this.pbEskiz = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbPsaNameSbit = new System.Windows.Forms.TextBox();
@@ -50,7 +53,9 @@
             this.tbRzuNom = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.tbYearPach = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.tbPsaNN = new System.Windows.Forms.TextBox();
             this.tbNomPach = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -107,7 +112,29 @@
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label31 = new System.Windows.Forms.Label();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.gcPartNaklList = new DevExpress.XtraGrid.GridControl();
+            this.bsPartNaklList = new System.Windows.Forms.BindingSource(this.components);
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn39 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn42 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn43 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.button1 = new System.Windows.Forms.Button();
             this.btnPrintNaklXtraReport = new System.Windows.Forms.Button();
             this.btnNaklAbsent = new System.Windows.Forms.Button();
@@ -170,12 +197,10 @@
             this.tbPsaTbID = new System.Windows.Forms.TextBox();
             this.label20 = new System.Windows.Forms.Label();
             this.tbPsaMenName = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.tbPsaNN = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.label53 = new System.Windows.Forms.Label();
-            this.tbPsaNomZad = new System.Windows.Forms.TextBox();
+            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.progressPanel2 = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -191,6 +216,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
@@ -235,6 +263,37 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1370, 116);
             this.panelControl1.TabIndex = 3;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(289, 82);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(83, 13);
+            this.label53.TabIndex = 27;
+            this.label53.Text = "Номер задания";
+            this.label53.Click += new System.EventHandler(this.label53_Click);
+            // 
+            // tbPsaNomZad
+            // 
+            this.tbPsaNomZad.Location = new System.Drawing.Point(418, 78);
+            this.tbPsaNomZad.Name = "tbPsaNomZad";
+            this.tbPsaNomZad.Size = new System.Drawing.Size(132, 21);
+            this.tbPsaNomZad.TabIndex = 26;
+            // 
+            // progressPanel1
+            // 
+            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel1.Appearance.Options.UseBackColor = true;
+            this.progressPanel1.Caption = "Пожалуйста, подождите";
+            this.progressPanel1.Description = "Загрузка данных";
+            this.progressPanel1.Location = new System.Drawing.Point(576, 81);
+            this.progressPanel1.Name = "progressPanel1";
+            this.progressPanel1.Size = new System.Drawing.Size(254, 30);
+            this.progressPanel1.TabIndex = 25;
+            this.progressPanel1.Text = "progressPanel1";
+            this.progressPanel1.Visible = false;
+            this.progressPanel1.Click += new System.EventHandler(this.progressPanel1_Click);
             // 
             // pbEskiz
             // 
@@ -392,6 +451,15 @@
             this.tbYearPach.Size = new System.Drawing.Size(42, 21);
             this.tbYearPach.TabIndex = 7;
             // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(8, 82);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(74, 13);
+            this.label21.TabIndex = 10;
+            this.label21.Text = "Код матрицы";
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -400,6 +468,13 @@
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "№ пачки";
+            // 
+            // tbPsaNN
+            // 
+            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
+            this.tbPsaNN.Name = "tbPsaNN";
+            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
+            this.tbPsaNN.TabIndex = 9;
             // 
             // tbNomPach
             // 
@@ -916,6 +991,8 @@
             // 
             // panelControl4
             // 
+            this.panelControl4.Controls.Add(this.progressPanel2);
+            this.panelControl4.Controls.Add(this.gcPartNaklList);
             this.panelControl4.Controls.Add(this.button1);
             this.panelControl4.Controls.Add(this.btnPrintNaklXtraReport);
             this.panelControl4.Controls.Add(this.btnNaklAbsent);
@@ -928,19 +1005,225 @@
             this.panelControl4.Size = new System.Drawing.Size(1358, 205);
             this.panelControl4.TabIndex = 28;
             // 
-            // progressPanel1
+            // gcPartNaklList
             // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Caption = "Пожалуйста, подождите";
-            this.progressPanel1.Description = "Загрузка данных";
-            this.progressPanel1.Location = new System.Drawing.Point(576, 81);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(254, 30);
-            this.progressPanel1.TabIndex = 25;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
-            this.progressPanel1.Click += new System.EventHandler(this.progressPanel1_Click);
+            this.gcPartNaklList.DataSource = this.bsPartNaklList;
+            this.gcPartNaklList.Location = new System.Drawing.Point(37, 42);
+            this.gcPartNaklList.MainView = this.gridView3;
+            this.gcPartNaklList.Name = "gcPartNaklList";
+            this.gcPartNaklList.Size = new System.Drawing.Size(741, 74);
+            this.gcPartNaklList.TabIndex = 11;
+            this.gcPartNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView3});
+            this.gcPartNaklList.Visible = false;
+            this.gcPartNaklList.Click += new System.EventHandler(this.gcPartNaklList_Click);
+            // 
+            // gridView3
+            // 
+            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn18,
+            this.gridColumn19,
+            this.gridColumn20,
+            this.gridColumn21,
+            this.gridColumn23,
+            this.gridColumn25,
+            this.gridColumn27,
+            this.gridColumn28,
+            this.gridColumn34,
+            this.gridColumn35,
+            this.gridColumn24,
+            this.gridColumn26,
+            this.gridColumn36,
+            this.gridColumn37,
+            this.gridColumn38,
+            this.gridColumn39,
+            this.gridColumn40,
+            this.gridColumn22,
+            this.gridColumn42,
+            this.gridColumn43});
+            this.gridView3.GridControl = this.gcPartNaklList;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn18
+            // 
+            this.gridColumn18.Caption = "iz_ob_prch";
+            this.gridColumn18.FieldName = "iz_ob_prch";
+            this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.Visible = true;
+            this.gridColumn18.VisibleIndex = 12;
+            this.gridColumn18.Width = 45;
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "razm";
+            this.gridColumn19.FieldName = "razm";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 11;
+            this.gridColumn19.Width = 132;
+            // 
+            // gridColumn20
+            // 
+            this.gridColumn20.Caption = "mod";
+            this.gridColumn20.FieldName = "mod";
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 10;
+            this.gridColumn20.Width = 109;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.Caption = "kol_new";
+            this.gridColumn21.FieldName = "kol_new";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 9;
+            this.gridColumn21.Width = 63;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.Caption = "kol_c";
+            this.gridColumn23.FieldName = "kol_c";
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 8;
+            this.gridColumn23.Width = 53;
+            // 
+            // gridColumn25
+            // 
+            this.gridColumn25.Caption = "kol_b";
+            this.gridColumn25.FieldName = "kol_b";
+            this.gridColumn25.Name = "gridColumn25";
+            this.gridColumn25.Visible = true;
+            this.gridColumn25.VisibleIndex = 7;
+            this.gridColumn25.Width = 38;
+            // 
+            // gridColumn27
+            // 
+            this.gridColumn27.Caption = "iz_c";
+            this.gridColumn27.FieldName = "iz_c";
+            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.Visible = true;
+            this.gridColumn27.VisibleIndex = 6;
+            this.gridColumn27.Width = 58;
+            // 
+            // gridColumn28
+            // 
+            this.gridColumn28.Caption = "skl_otgr_s";
+            this.gridColumn28.FieldName = "skl_otgr_c";
+            this.gridColumn28.Name = "gridColumn28";
+            this.gridColumn28.Visible = true;
+            this.gridColumn28.VisibleIndex = 3;
+            this.gridColumn28.Width = 35;
+            // 
+            // gridColumn34
+            // 
+            this.gridColumn34.Caption = "skl_otgr_b";
+            this.gridColumn34.FieldName = "skl_otgr_b";
+            this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.Visible = true;
+            this.gridColumn34.VisibleIndex = 2;
+            this.gridColumn34.Width = 40;
+            // 
+            // gridColumn35
+            // 
+            this.gridColumn35.Caption = "data_izm";
+            this.gridColumn35.FieldName = "data_izm";
+            this.gridColumn35.Name = "gridColumn35";
+            this.gridColumn35.Visible = true;
+            this.gridColumn35.VisibleIndex = 1;
+            this.gridColumn35.Width = 51;
+            // 
+            // gridColumn24
+            // 
+            this.gridColumn24.Caption = "status";
+            this.gridColumn24.FieldName = "status";
+            this.gridColumn24.Name = "gridColumn24";
+            this.gridColumn24.Visible = true;
+            this.gridColumn24.VisibleIndex = 13;
+            this.gridColumn24.Width = 45;
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.Caption = "skl_id_1c_b";
+            this.gridColumn26.FieldName = "skl_id_1c_b";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.Visible = true;
+            this.gridColumn26.VisibleIndex = 16;
+            this.gridColumn26.Width = 52;
+            // 
+            // gridColumn36
+            // 
+            this.gridColumn36.Caption = "komp_del";
+            this.gridColumn36.FieldName = "komp_del";
+            this.gridColumn36.Name = "gridColumn36";
+            this.gridColumn36.Visible = true;
+            this.gridColumn36.VisibleIndex = 15;
+            this.gridColumn36.Width = 98;
+            // 
+            // gridColumn37
+            // 
+            this.gridColumn37.Caption = "komp_name";
+            this.gridColumn37.FieldName = "komp_name";
+            this.gridColumn37.Name = "gridColumn37";
+            this.gridColumn37.Visible = true;
+            this.gridColumn37.VisibleIndex = 14;
+            this.gridColumn37.Width = 101;
+            // 
+            // gridColumn38
+            // 
+            this.gridColumn38.Caption = "iz_b";
+            this.gridColumn38.FieldName = "iz_b";
+            this.gridColumn38.Name = "gridColumn38";
+            this.gridColumn38.Visible = true;
+            this.gridColumn38.VisibleIndex = 5;
+            this.gridColumn38.Width = 49;
+            // 
+            // gridColumn39
+            // 
+            this.gridColumn39.Caption = "ID";
+            this.gridColumn39.FieldName = "id";
+            this.gridColumn39.Name = "gridColumn39";
+            this.gridColumn39.Visible = true;
+            this.gridColumn39.VisibleIndex = 0;
+            this.gridColumn39.Width = 49;
+            // 
+            // gridColumn40
+            // 
+            this.gridColumn40.Caption = "komp_del";
+            this.gridColumn40.FieldName = "komp_del";
+            this.gridColumn40.Name = "gridColumn40";
+            this.gridColumn40.Visible = true;
+            this.gridColumn40.VisibleIndex = 4;
+            this.gridColumn40.Width = 49;
+            // 
+            // gridColumn22
+            // 
+            this.gridColumn22.Caption = "n_pach";
+            this.gridColumn22.FieldName = "n_pach";
+            this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.Visible = true;
+            this.gridColumn22.VisibleIndex = 19;
+            this.gridColumn22.Width = 128;
+            // 
+            // gridColumn42
+            // 
+            this.gridColumn42.Caption = "prich_sokr";
+            this.gridColumn42.FieldName = "prich_sokr";
+            this.gridColumn42.Name = "gridColumn42";
+            this.gridColumn42.Visible = true;
+            this.gridColumn42.VisibleIndex = 18;
+            this.gridColumn42.Width = 73;
+            // 
+            // gridColumn43
+            // 
+            this.gridColumn43.Caption = "skl_id_1c_c";
+            this.gridColumn43.FieldName = "skl_id_1c_c";
+            this.gridColumn43.Name = "gridColumn43";
+            this.gridColumn43.Visible = true;
+            this.gridColumn43.VisibleIndex = 17;
+            this.gridColumn43.Width = 51;
             // 
             // button1
             // 
@@ -978,10 +1261,11 @@
             // 
             this.btnNaklPart.Location = new System.Drawing.Point(223, 177);
             this.btnNaklPart.Name = "btnNaklPart";
-            this.btnNaklPart.Size = new System.Drawing.Size(205, 23);
+            this.btnNaklPart.Size = new System.Drawing.Size(268, 23);
             this.btnNaklPart.TabIndex = 7;
-            this.btnNaklPart.Text = "Информация по делению накладной";
+            this.btnNaklPart.Text = "Показать информацию по делению накладной";
             this.btnNaklPart.UseVisualStyleBackColor = true;
+            this.btnNaklPart.Click += new System.EventHandler(this.btnNaklPart_Click);
             // 
             // btnNaklPrint
             // 
@@ -1530,22 +1814,6 @@
             this.tbPsaMenName.Size = new System.Drawing.Size(186, 21);
             this.tbPsaMenName.TabIndex = 11;
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 82);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(74, 13);
-            this.label21.TabIndex = 10;
-            this.label21.Text = "Код матрицы";
-            // 
-            // tbPsaNN
-            // 
-            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
-            this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
-            this.tbPsaNN.TabIndex = 9;
-            // 
             // label25
             // 
             this.label25.AutoSize = true;
@@ -1573,23 +1841,29 @@
             this.xtraTabPage1,
             this.xtraTabPage2,
             this.xtraTabPage3});
+            this.xtraTabControl1.Click += new System.EventHandler(this.xtraTabControl1_Click);
             // 
-            // label53
+            // gridColumn41
             // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(289, 82);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(83, 13);
-            this.label53.TabIndex = 27;
-            this.label53.Text = "Номер задания";
-            this.label53.Click += new System.EventHandler(this.label53_Click);
+            this.gridColumn41.Caption = "Склад отгр ДО";
+            this.gridColumn41.FieldName = "skl_otgr_b";
+            this.gridColumn41.Name = "gridColumn41";
+            this.gridColumn41.Visible = true;
+            this.gridColumn41.VisibleIndex = 7;
+            this.gridColumn41.Width = 61;
             // 
-            // tbPsaNomZad
+            // progressPanel2
             // 
-            this.tbPsaNomZad.Location = new System.Drawing.Point(418, 78);
-            this.tbPsaNomZad.Name = "tbPsaNomZad";
-            this.tbPsaNomZad.Size = new System.Drawing.Size(132, 21);
-            this.tbPsaNomZad.TabIndex = 26;
+            this.progressPanel2.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel2.Appearance.Options.UseBackColor = true;
+            this.progressPanel2.Caption = "Пожалуйста, подождите";
+            this.progressPanel2.Description = "Загрузка данных";
+            this.progressPanel2.Location = new System.Drawing.Point(494, 85);
+            this.progressPanel2.Name = "progressPanel2";
+            this.progressPanel2.Size = new System.Drawing.Size(254, 54);
+            this.progressPanel2.TabIndex = 28;
+            this.progressPanel2.Text = "progressPanel2";
+            this.progressPanel2.Visible = false;
             // 
             // CardByNom
             // 
@@ -1620,6 +1894,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
@@ -1782,5 +2059,30 @@
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.TextBox tbPsaNomZad;
+        private System.Windows.Forms.BindingSource bsPartNaklList;
+        private DevExpress.XtraGrid.GridControl gcPartNaklList;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn34;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn36;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn37;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn39;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn40;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanel2;
     }
 }
