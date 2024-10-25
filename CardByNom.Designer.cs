@@ -131,7 +131,6 @@
             this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn39 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn42 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn43 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -200,7 +199,6 @@
             this.label25 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.progressPanel2 = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -252,10 +250,10 @@
             this.panelControl1.Controls.Add(this.label5);
             this.panelControl1.Controls.Add(this.tbRzuNom);
             this.panelControl1.Controls.Add(this.label4);
-            this.panelControl1.Controls.Add(this.tbYearPach);
             this.panelControl1.Controls.Add(this.label21);
-            this.panelControl1.Controls.Add(this.label3);
             this.panelControl1.Controls.Add(this.tbPsaNN);
+            this.panelControl1.Controls.Add(this.tbYearPach);
+            this.panelControl1.Controls.Add(this.label3);
             this.panelControl1.Controls.Add(this.tbNomPach);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label1);
@@ -991,7 +989,6 @@
             // 
             // panelControl4
             // 
-            this.panelControl4.Controls.Add(this.progressPanel2);
             this.panelControl4.Controls.Add(this.gcPartNaklList);
             this.panelControl4.Controls.Add(this.button1);
             this.panelControl4.Controls.Add(this.btnPrintNaklXtraReport);
@@ -1008,10 +1005,10 @@
             // gcPartNaklList
             // 
             this.gcPartNaklList.DataSource = this.bsPartNaklList;
-            this.gcPartNaklList.Location = new System.Drawing.Point(37, 42);
+            this.gcPartNaklList.Location = new System.Drawing.Point(37, 43);
             this.gcPartNaklList.MainView = this.gridView3;
             this.gcPartNaklList.Name = "gcPartNaklList";
-            this.gcPartNaklList.Size = new System.Drawing.Size(741, 74);
+            this.gcPartNaklList.Size = new System.Drawing.Size(1160, 137);
             this.gcPartNaklList.TabIndex = 11;
             this.gcPartNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -1037,7 +1034,6 @@
             this.gridColumn37,
             this.gridColumn38,
             this.gridColumn39,
-            this.gridColumn40,
             this.gridColumn22,
             this.gridColumn42,
             this.gridColumn43});
@@ -1051,7 +1047,7 @@
             this.gridColumn18.FieldName = "iz_ob_prch";
             this.gridColumn18.Name = "gridColumn18";
             this.gridColumn18.Visible = true;
-            this.gridColumn18.VisibleIndex = 12;
+            this.gridColumn18.VisibleIndex = 11;
             this.gridColumn18.Width = 45;
             // 
             // gridColumn19
@@ -1060,7 +1056,7 @@
             this.gridColumn19.FieldName = "razm";
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 11;
+            this.gridColumn19.VisibleIndex = 10;
             this.gridColumn19.Width = 132;
             // 
             // gridColumn20
@@ -1069,7 +1065,7 @@
             this.gridColumn20.FieldName = "mod";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 10;
+            this.gridColumn20.VisibleIndex = 9;
             this.gridColumn20.Width = 109;
             // 
             // gridColumn21
@@ -1078,7 +1074,7 @@
             this.gridColumn21.FieldName = "kol_new";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 9;
+            this.gridColumn21.VisibleIndex = 8;
             this.gridColumn21.Width = 63;
             // 
             // gridColumn23
@@ -1087,7 +1083,7 @@
             this.gridColumn23.FieldName = "kol_c";
             this.gridColumn23.Name = "gridColumn23";
             this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 8;
+            this.gridColumn23.VisibleIndex = 7;
             this.gridColumn23.Width = 53;
             // 
             // gridColumn25
@@ -1096,7 +1092,7 @@
             this.gridColumn25.FieldName = "kol_b";
             this.gridColumn25.Name = "gridColumn25";
             this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 7;
+            this.gridColumn25.VisibleIndex = 6;
             this.gridColumn25.Width = 38;
             // 
             // gridColumn27
@@ -1105,7 +1101,7 @@
             this.gridColumn27.FieldName = "iz_c";
             this.gridColumn27.Name = "gridColumn27";
             this.gridColumn27.Visible = true;
-            this.gridColumn27.VisibleIndex = 6;
+            this.gridColumn27.VisibleIndex = 5;
             this.gridColumn27.Width = 58;
             // 
             // gridColumn28
@@ -1141,7 +1137,7 @@
             this.gridColumn24.FieldName = "status";
             this.gridColumn24.Name = "gridColumn24";
             this.gridColumn24.Visible = true;
-            this.gridColumn24.VisibleIndex = 13;
+            this.gridColumn24.VisibleIndex = 12;
             this.gridColumn24.Width = 45;
             // 
             // gridColumn26
@@ -1150,7 +1146,7 @@
             this.gridColumn26.FieldName = "skl_id_1c_b";
             this.gridColumn26.Name = "gridColumn26";
             this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 16;
+            this.gridColumn26.VisibleIndex = 15;
             this.gridColumn26.Width = 52;
             // 
             // gridColumn36
@@ -1159,7 +1155,7 @@
             this.gridColumn36.FieldName = "komp_del";
             this.gridColumn36.Name = "gridColumn36";
             this.gridColumn36.Visible = true;
-            this.gridColumn36.VisibleIndex = 15;
+            this.gridColumn36.VisibleIndex = 14;
             this.gridColumn36.Width = 98;
             // 
             // gridColumn37
@@ -1168,7 +1164,7 @@
             this.gridColumn37.FieldName = "komp_name";
             this.gridColumn37.Name = "gridColumn37";
             this.gridColumn37.Visible = true;
-            this.gridColumn37.VisibleIndex = 14;
+            this.gridColumn37.VisibleIndex = 13;
             this.gridColumn37.Width = 101;
             // 
             // gridColumn38
@@ -1177,7 +1173,7 @@
             this.gridColumn38.FieldName = "iz_b";
             this.gridColumn38.Name = "gridColumn38";
             this.gridColumn38.Visible = true;
-            this.gridColumn38.VisibleIndex = 5;
+            this.gridColumn38.VisibleIndex = 4;
             this.gridColumn38.Width = 49;
             // 
             // gridColumn39
@@ -1189,22 +1185,13 @@
             this.gridColumn39.VisibleIndex = 0;
             this.gridColumn39.Width = 49;
             // 
-            // gridColumn40
-            // 
-            this.gridColumn40.Caption = "komp_del";
-            this.gridColumn40.FieldName = "komp_del";
-            this.gridColumn40.Name = "gridColumn40";
-            this.gridColumn40.Visible = true;
-            this.gridColumn40.VisibleIndex = 4;
-            this.gridColumn40.Width = 49;
-            // 
             // gridColumn22
             // 
             this.gridColumn22.Caption = "n_pach";
             this.gridColumn22.FieldName = "n_pach";
             this.gridColumn22.Name = "gridColumn22";
             this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 19;
+            this.gridColumn22.VisibleIndex = 18;
             this.gridColumn22.Width = 128;
             // 
             // gridColumn42
@@ -1213,7 +1200,7 @@
             this.gridColumn42.FieldName = "prich_sokr";
             this.gridColumn42.Name = "gridColumn42";
             this.gridColumn42.Visible = true;
-            this.gridColumn42.VisibleIndex = 18;
+            this.gridColumn42.VisibleIndex = 17;
             this.gridColumn42.Width = 73;
             // 
             // gridColumn43
@@ -1222,7 +1209,7 @@
             this.gridColumn43.FieldName = "skl_id_1c_c";
             this.gridColumn43.Name = "gridColumn43";
             this.gridColumn43.Visible = true;
-            this.gridColumn43.VisibleIndex = 17;
+            this.gridColumn43.VisibleIndex = 16;
             this.gridColumn43.Width = 51;
             // 
             // button1
@@ -1852,19 +1839,6 @@
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
             // 
-            // progressPanel2
-            // 
-            this.progressPanel2.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel2.Appearance.Options.UseBackColor = true;
-            this.progressPanel2.Caption = "Пожалуйста, подождите";
-            this.progressPanel2.Description = "Загрузка данных";
-            this.progressPanel2.Location = new System.Drawing.Point(494, 85);
-            this.progressPanel2.Name = "progressPanel2";
-            this.progressPanel2.Size = new System.Drawing.Size(254, 54);
-            this.progressPanel2.TabIndex = 28;
-            this.progressPanel2.Text = "progressPanel2";
-            this.progressPanel2.Visible = false;
-            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2078,11 +2052,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn37;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn39;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn40;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanel2;
     }
 }

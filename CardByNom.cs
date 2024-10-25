@@ -407,8 +407,8 @@ namespace SewingProduction
             if (btnNaklPart.Text == "Показать информацию по делению накладной")
             {
                 btnNaklPart.Text = "Скрыть информацию по делению накладной";
-                this.progressPanel2.BringToFront();
-                this.progressPanel2.Visible = true;
+                this.progressPanel1.BringToFront();
+                this.progressPanel1.Visible = true;
                 string iz = GetIzNakl();
                 
                 string connectionString = Properties.Settings.Default.ACEConnectionString;
