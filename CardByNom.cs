@@ -115,6 +115,8 @@ namespace SewingProduction
                     //bsRasInfo.Sort = "iz asc";
                     //textBox1.DataBindings.Add("Text", model, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
                     //MessageBox.Show("1");
+                    this.pbEskiz.DataBindings.Clear();
+                    this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
                     this.tbRzuNom.DataBindings.Clear();
                     this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
                     this.tbRzuPach.DataBindings.Clear();
@@ -135,6 +137,8 @@ namespace SewingProduction
                     this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
                     this.tbPsaNN.DataBindings.Clear();
                     this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
+                    this.tbPsaNomZad.DataBindings.Clear();
+                    this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
                     this.tbPsaMenName.DataBindings.Clear();
                     this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
                     this.tbPsaTbID.DataBindings.Clear();
@@ -385,6 +389,16 @@ namespace SewingProduction
 
             ReportPrintTool reportPrintTool = new ReportPrintTool(report);
             reportPrintTool.ShowPreviewDialog();
+
+        }
+
+        private void progressPanel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label53_Click(object sender, EventArgs e)
+        {
 
         }
 

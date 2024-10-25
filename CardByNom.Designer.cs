@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.pbEskiz = new System.Windows.Forms.PictureBox();
             this.label11 = new System.Windows.Forms.Label();
             this.tbPsaNameSbit = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -54,7 +54,10 @@
             this.tbNomPach = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
+            this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.button4 = new System.Windows.Forms.Button();
@@ -96,7 +99,6 @@
             this.label36 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -105,6 +107,7 @@
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label31 = new System.Windows.Forms.Label();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
             this.button1 = new System.Windows.Forms.Button();
             this.btnPrintNaklXtraReport = new System.Windows.Forms.Button();
             this.btnNaklAbsent = new System.Windows.Forms.Button();
@@ -170,21 +173,21 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tbPsaNN = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
-            this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            this.label53 = new System.Windows.Forms.Label();
+            this.tbPsaNomZad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
             this.xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
@@ -194,12 +197,16 @@
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
+            this.xtraTabControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.label53);
+            this.panelControl1.Controls.Add(this.tbPsaNomZad);
             this.panelControl1.Controls.Add(this.progressPanel1);
+            this.panelControl1.Controls.Add(this.pbEskiz);
             this.panelControl1.Controls.Add(this.label11);
             this.panelControl1.Controls.Add(this.tbPsaNameSbit);
             this.panelControl1.Controls.Add(this.label12);
@@ -218,27 +225,25 @@
             this.panelControl1.Controls.Add(this.tbRzuNom);
             this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Controls.Add(this.tbYearPach);
+            this.panelControl1.Controls.Add(this.label21);
             this.panelControl1.Controls.Add(this.label3);
+            this.panelControl1.Controls.Add(this.tbPsaNN);
             this.panelControl1.Controls.Add(this.tbNomPach);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Location = new System.Drawing.Point(3, 12);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1370, 79);
+            this.panelControl1.Size = new System.Drawing.Size(1370, 116);
             this.panelControl1.TabIndex = 3;
             // 
-            // progressPanel1
+            // pbEskiz
             // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Caption = "Пожалуйста, подождите";
-            this.progressPanel1.Description = "Загрузка данных";
-            this.progressPanel1.Location = new System.Drawing.Point(1086, 2);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(236, 66);
-            this.progressPanel1.TabIndex = 25;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
+            this.pbEskiz.Location = new System.Drawing.Point(1104, 1);
+            this.pbEskiz.Name = "pbEskiz";
+            this.pbEskiz.Size = new System.Drawing.Size(117, 114);
+            this.pbEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbEskiz.TabIndex = 25;
+            this.pbEskiz.TabStop = false;
             // 
             // label11
             // 
@@ -427,23 +432,23 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "КАРТОЧКА РАСЧЕТА";
             // 
-            // xtraTabControl1
+            // bsRasInfo
             // 
-            this.xtraTabControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.xtraTabControl1.Appearance.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.Header.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.xtraTabControl1.AppearancePage.Header.Options.UseFont = true;
-            this.xtraTabControl1.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
-            this.xtraTabControl1.Location = new System.Drawing.Point(3, 97);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 646);
-            this.xtraTabControl1.TabIndex = 3;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
-            this.xtraTabPage2,
-            this.xtraTabPage3});
+            this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            // 
+            // xtraTabPage3
+            // 
+            this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
+            this.xtraTabPage3.Name = "xtraTabPage3";
+            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 618);
+            this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
+            // 
+            // xtraTabPage2
+            // 
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 618);
+            this.xtraTabPage2.Text = "КОНФЕКЦИОН";
             // 
             // xtraTabPage1
             // 
@@ -923,6 +928,20 @@
             this.panelControl4.Size = new System.Drawing.Size(1358, 205);
             this.panelControl4.TabIndex = 28;
             // 
+            // progressPanel1
+            // 
+            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanel1.Appearance.Options.UseBackColor = true;
+            this.progressPanel1.Caption = "Пожалуйста, подождите";
+            this.progressPanel1.Description = "Загрузка данных";
+            this.progressPanel1.Location = new System.Drawing.Point(576, 81);
+            this.progressPanel1.Name = "progressPanel1";
+            this.progressPanel1.Size = new System.Drawing.Size(254, 30);
+            this.progressPanel1.TabIndex = 25;
+            this.progressPanel1.Text = "progressPanel1";
+            this.progressPanel1.Visible = false;
+            this.progressPanel1.Click += new System.EventHandler(this.progressPanel1_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(655, 177);
@@ -953,6 +972,7 @@
             this.btnNaklAbsent.TabIndex = 8;
             this.btnNaklAbsent.Text = "Накладная не создана. Причина";
             this.btnNaklAbsent.UseVisualStyleBackColor = true;
+            this.btnNaklAbsent.Visible = false;
             // 
             // btnNaklPart
             // 
@@ -1345,8 +1365,6 @@
             this.panelControl2.Controls.Add(this.tbPsaTbID);
             this.panelControl2.Controls.Add(this.label20);
             this.panelControl2.Controls.Add(this.tbPsaMenName);
-            this.panelControl2.Controls.Add(this.label21);
-            this.panelControl2.Controls.Add(this.tbPsaNN);
             this.panelControl2.Controls.Add(this.label25);
             this.panelControl2.Location = new System.Drawing.Point(4, 9);
             this.panelControl2.Name = "panelControl2";
@@ -1498,7 +1516,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(1, 59);
+            this.label20.Location = new System.Drawing.Point(4, 24);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(66, 26);
             this.label20.TabIndex = 12;
@@ -1506,7 +1524,7 @@
             // 
             // tbPsaMenName
             // 
-            this.tbPsaMenName.Location = new System.Drawing.Point(67, 62);
+            this.tbPsaMenName.Location = new System.Drawing.Point(70, 27);
             this.tbPsaMenName.Multiline = true;
             this.tbPsaMenName.Name = "tbPsaMenName";
             this.tbPsaMenName.Size = new System.Drawing.Size(186, 21);
@@ -1515,7 +1533,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1, 32);
+            this.label21.Location = new System.Drawing.Point(8, 82);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(74, 13);
             this.label21.TabIndex = 10;
@@ -1523,9 +1541,9 @@
             // 
             // tbPsaNN
             // 
-            this.tbPsaNN.Location = new System.Drawing.Point(85, 27);
+            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
             this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(168, 21);
+            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
             this.tbPsaNN.TabIndex = 9;
             // 
             // label25
@@ -1538,29 +1556,46 @@
             this.label25.TabIndex = 3;
             this.label25.Text = "ДАННЫЕ МАТРИЦЫ:";
             // 
-            // xtraTabPage2
+            // xtraTabControl1
             // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 618);
-            this.xtraTabPage2.Text = "КОНФЕКЦИОН";
+            this.xtraTabControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.xtraTabControl1.Appearance.Options.UseFont = true;
+            this.xtraTabControl1.AppearancePage.Header.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.xtraTabControl1.AppearancePage.Header.Options.UseFont = true;
+            this.xtraTabControl1.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
+            this.xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
+            this.xtraTabControl1.Location = new System.Drawing.Point(3, 134);
+            this.xtraTabControl1.Name = "xtraTabControl1";
+            this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 646);
+            this.xtraTabControl1.TabIndex = 3;
+            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPage1,
+            this.xtraTabPage2,
+            this.xtraTabPage3});
             // 
-            // xtraTabPage3
+            // label53
             // 
-            this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
-            this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
-            this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 618);
-            this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(289, 82);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(83, 13);
+            this.label53.TabIndex = 27;
+            this.label53.Text = "Номер задания";
+            this.label53.Click += new System.EventHandler(this.label53_Click);
             // 
-            // bsRasInfo
+            // tbPsaNomZad
             // 
-            this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
+            this.tbPsaNomZad.Location = new System.Drawing.Point(418, 78);
+            this.tbPsaNomZad.Name = "tbPsaNomZad";
+            this.tbPsaNomZad.Size = new System.Drawing.Size(132, 21);
+            this.tbPsaNomZad.TabIndex = 26;
             // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 750);
+            this.ClientSize = new System.Drawing.Size(1378, 831);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
             this.Name = "CardByNom";
@@ -1570,8 +1605,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
             this.panelControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
             this.xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
@@ -1580,7 +1616,6 @@
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
@@ -1593,7 +1628,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
+            this.xtraTabControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1623,38 +1659,33 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbRzuPach;
         private System.Windows.Forms.BindingSource bsNaklList;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox tbPsaKodZv2;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox tbPsaKodZv1;
-        private System.Windows.Forms.TextBox tbArtSost1;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox tbArtGrup;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox psaSezName;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox tbPsaYear;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox tbPsaNameSbit1;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox tbPsaTbID;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox tbPsaMenName;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox tbPsaNN;
-        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.BindingSource bsRasInfo;
+        private System.Windows.Forms.BindingSource bsOtdelkaList;
+        private System.Windows.Forms.PictureBox pbEskiz;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label52;
         private DevExpress.XtraEditors.PanelControl panelControl5;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrKm;
+        private System.Windows.Forms.MaskedTextBox mtbRzuVidStir;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVChi;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrPe;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStR;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataVP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataStP;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasv;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasp;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label49;
         private System.Windows.Forms.Label label50;
@@ -1682,6 +1713,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
         private System.Windows.Forms.Label label31;
         private DevExpress.XtraEditors.PanelControl panelControl4;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPrintNaklXtraReport;
         private System.Windows.Forms.Button btnNaklAbsent;
         private System.Windows.Forms.Button btnNaklPart;
         private System.Windows.Forms.Button btnNaklPrint;
@@ -1706,6 +1740,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private System.Windows.Forms.Label label24;
         private DevExpress.XtraEditors.PanelControl panelControl3;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label33;
         private System.Windows.Forms.Label label34;
@@ -1714,34 +1755,32 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.BindingSource bsRasInfo;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
         private System.Windows.Forms.TextBox tbArtSost3;
         private System.Windows.Forms.TextBox tbArtSost2;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrKm;
-        private System.Windows.Forms.MaskedTextBox mtbRzuVidStir;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVChi;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrPe;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasv;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasp;
-        private System.Windows.Forms.BindingSource bsOtdelkaList;
-        private System.Windows.Forms.Button btnPrintNaklXtraReport;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox tbPsaKodZv2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tbPsaKodZv1;
+        private System.Windows.Forms.TextBox tbArtSost1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbArtGrup;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox psaSezName;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tbPsaYear;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox tbPsaNameSbit1;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox tbPsaTbID;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbPsaMenName;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox tbPsaNN;
+        private System.Windows.Forms.Label label25;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox tbPsaNomZad;
     }
 }
