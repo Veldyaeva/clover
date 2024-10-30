@@ -145,6 +145,18 @@
     <Compile Include="FurnitFITByKodFD.Designer.cs">
       <DependentUpon>FurnitFITByKodFD.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintMlRtReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintMlRtReport.Designer.cs">
+      <DependentUpon>PrintMlRtReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrintPachListReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintPachListReport.Designer.cs">
+      <DependentUpon>PrintPachListReport.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -180,6 +192,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FurnitFITByKodFD.resx">
       <DependentUpon>FurnitFITByKodFD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintMlRtReport.resx">
+      <DependentUpon>PrintMlRtReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintPachListReport.resx">
+      <DependentUpon>PrintPachListReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>

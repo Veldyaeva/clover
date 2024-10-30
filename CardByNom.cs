@@ -149,12 +149,12 @@ namespace SewingProduction
                     this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
                     this.tbArtGrup.DataBindings.Clear();
                     this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
-                    this.tbArtSost1.DataBindings.Clear();
-                    this.tbArtSost1.DataBindings.Add("Text", dtRasInfo, "artSost1");
-                    this.tbArtSost2.DataBindings.Clear();
-                    this.tbArtSost2.DataBindings.Add("Text", dtRasInfo, "artSost2");
-                    this.tbArtSost3.DataBindings.Clear();
-                    this.tbArtSost3.DataBindings.Add("Text", dtRasInfo, "artSost3");
+                    this.tbSost.DataBindings.Clear();
+                    this.tbSost.DataBindings.Add("Text", dtRasInfo, "sost");
+                    this.tbSostOtdelka.DataBindings.Clear();
+                    this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
+                    this.tbSostPodklad.DataBindings.Clear();
+                    this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
                     this.tbPsaKodZv1.DataBindings.Clear();
                     this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
                     this.tbPsaKodZv2.DataBindings.Clear();
@@ -463,6 +463,17 @@ namespace SewingProduction
 
         private void xtraTabControl1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
+            PrintMlRtReport report1 = new PrintMlRtReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_rzuNom"].Value = RzuNom;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
 
         }
 

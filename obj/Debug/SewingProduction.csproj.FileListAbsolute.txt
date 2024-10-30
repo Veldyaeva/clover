@@ -141,3 +141,5 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.rptPrintNakl.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintNaklReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FioListReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FurnitFITByKodFD.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintMlRtReport.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintPachListReport.resources

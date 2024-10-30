@@ -46,16 +46,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.tbPsaPrn = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.tbRzuKol = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbRzuPach = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.tbRzuNom = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbYearPach = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.tbPsaNN = new System.Windows.Forms.TextBox();
+            this.tbYearPach = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.tbNomPach = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -176,13 +175,13 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.tbArtSost3 = new System.Windows.Forms.TextBox();
-            this.tbArtSost2 = new System.Windows.Forms.TextBox();
+            this.tbSostPodklad = new System.Windows.Forms.TextBox();
+            this.tbSostOtdelka = new System.Windows.Forms.TextBox();
             this.label22 = new System.Windows.Forms.Label();
             this.tbPsaKodZv2 = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
             this.tbPsaKodZv1 = new System.Windows.Forms.TextBox();
-            this.tbArtSost1 = new System.Windows.Forms.TextBox();
+            this.tbSost = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
             this.tbArtGrup = new System.Windows.Forms.TextBox();
@@ -199,6 +198,7 @@
             this.label25 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tbRzuKol = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -229,6 +229,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.tbRzuKol);
             this.panelControl1.Controls.Add(this.label53);
             this.panelControl1.Controls.Add(this.tbPsaNomZad);
             this.panelControl1.Controls.Add(this.progressPanel1);
@@ -244,7 +245,6 @@
             this.panelControl1.Controls.Add(this.label8);
             this.panelControl1.Controls.Add(this.tbPsaPrn);
             this.panelControl1.Controls.Add(this.label7);
-            this.panelControl1.Controls.Add(this.tbRzuKol);
             this.panelControl1.Controls.Add(this.label6);
             this.panelControl1.Controls.Add(this.tbRzuPach);
             this.panelControl1.Controls.Add(this.label5);
@@ -393,13 +393,6 @@
             this.label7.TabIndex = 14;
             this.label7.Text = "Количество в расчете";
             // 
-            // tbRzuKol
-            // 
-            this.tbRzuKol.Location = new System.Drawing.Point(418, 30);
-            this.tbRzuKol.Name = "tbRzuKol";
-            this.tbRzuKol.Size = new System.Drawing.Size(132, 21);
-            this.tbRzuKol.TabIndex = 13;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -442,13 +435,6 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "год";
             // 
-            // tbYearPach
-            // 
-            this.tbYearPach.Location = new System.Drawing.Point(741, 2);
-            this.tbYearPach.Name = "tbYearPach";
-            this.tbYearPach.Size = new System.Drawing.Size(42, 21);
-            this.tbYearPach.TabIndex = 7;
-            // 
             // label21
             // 
             this.label21.AutoSize = true;
@@ -458,6 +444,20 @@
             this.label21.TabIndex = 10;
             this.label21.Text = "Код матрицы";
             // 
+            // tbPsaNN
+            // 
+            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
+            this.tbPsaNN.Name = "tbPsaNN";
+            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
+            this.tbPsaNN.TabIndex = 9;
+            // 
+            // tbYearPach
+            // 
+            this.tbYearPach.Location = new System.Drawing.Point(741, 2);
+            this.tbYearPach.Name = "tbYearPach";
+            this.tbYearPach.Size = new System.Drawing.Size(42, 21);
+            this.tbYearPach.TabIndex = 7;
+            // 
             // label3
             // 
             this.label3.AutoSize = true;
@@ -466,13 +466,6 @@
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 6;
             this.label3.Text = "№ пачки";
-            // 
-            // tbPsaNN
-            // 
-            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
-            this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
-            this.tbPsaNN.TabIndex = 9;
             // 
             // tbNomPach
             // 
@@ -577,6 +570,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "Задание общ.";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label52
             // 
@@ -1616,13 +1610,13 @@
             // 
             // panelControl2
             // 
-            this.panelControl2.Controls.Add(this.tbArtSost3);
-            this.panelControl2.Controls.Add(this.tbArtSost2);
+            this.panelControl2.Controls.Add(this.tbSostPodklad);
+            this.panelControl2.Controls.Add(this.tbSostOtdelka);
             this.panelControl2.Controls.Add(this.label22);
             this.panelControl2.Controls.Add(this.tbPsaKodZv2);
             this.panelControl2.Controls.Add(this.label23);
             this.panelControl2.Controls.Add(this.tbPsaKodZv1);
-            this.panelControl2.Controls.Add(this.tbArtSost1);
+            this.panelControl2.Controls.Add(this.tbSost);
             this.panelControl2.Controls.Add(this.label13);
             this.panelControl2.Controls.Add(this.label15);
             this.panelControl2.Controls.Add(this.tbArtGrup);
@@ -1642,19 +1636,19 @@
             this.panelControl2.Size = new System.Drawing.Size(985, 128);
             this.panelControl2.TabIndex = 6;
             // 
-            // tbArtSost3
+            // tbSostPodklad
             // 
-            this.tbArtSost3.Location = new System.Drawing.Point(690, 102);
-            this.tbArtSost3.Name = "tbArtSost3";
-            this.tbArtSost3.Size = new System.Drawing.Size(290, 21);
-            this.tbArtSost3.TabIndex = 32;
+            this.tbSostPodklad.Location = new System.Drawing.Point(690, 102);
+            this.tbSostPodklad.Name = "tbSostPodklad";
+            this.tbSostPodklad.Size = new System.Drawing.Size(290, 21);
+            this.tbSostPodklad.TabIndex = 32;
             // 
-            // tbArtSost2
+            // tbSostOtdelka
             // 
-            this.tbArtSost2.Location = new System.Drawing.Point(690, 75);
-            this.tbArtSost2.Name = "tbArtSost2";
-            this.tbArtSost2.Size = new System.Drawing.Size(290, 21);
-            this.tbArtSost2.TabIndex = 31;
+            this.tbSostOtdelka.Location = new System.Drawing.Point(690, 75);
+            this.tbSostOtdelka.Name = "tbSostOtdelka";
+            this.tbSostOtdelka.Size = new System.Drawing.Size(290, 21);
+            this.tbSostOtdelka.TabIndex = 31;
             // 
             // label22
             // 
@@ -1688,12 +1682,12 @@
             this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
             this.tbPsaKodZv1.TabIndex = 26;
             // 
-            // tbArtSost1
+            // tbSost
             // 
-            this.tbArtSost1.Location = new System.Drawing.Point(690, 48);
-            this.tbArtSost1.Name = "tbArtSost1";
-            this.tbArtSost1.Size = new System.Drawing.Size(290, 21);
-            this.tbArtSost1.TabIndex = 25;
+            this.tbSost.Location = new System.Drawing.Point(690, 48);
+            this.tbSost.Name = "tbSost";
+            this.tbSost.Size = new System.Drawing.Size(290, 21);
+            this.tbSost.TabIndex = 25;
             // 
             // label13
             // 
@@ -1839,6 +1833,13 @@
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
             // 
+            // tbRzuKol
+            // 
+            this.tbRzuKol.Location = new System.Drawing.Point(418, 30);
+            this.tbRzuKol.Name = "tbRzuKol";
+            this.tbRzuKol.Size = new System.Drawing.Size(132, 21);
+            this.tbRzuKol.TabIndex = 29;
+            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1906,7 +1907,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox tbPsaPrn;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbRzuKol;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbRzuPach;
         private System.Windows.Forms.BindingSource bsNaklList;
@@ -2007,13 +2007,13 @@
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.TextBox tbArtSost3;
-        private System.Windows.Forms.TextBox tbArtSost2;
+        private System.Windows.Forms.TextBox tbSostPodklad;
+        private System.Windows.Forms.TextBox tbSostOtdelka;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox tbPsaKodZv2;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox tbPsaKodZv1;
-        private System.Windows.Forms.TextBox tbArtSost1;
+        private System.Windows.Forms.TextBox tbSost;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbArtGrup;
@@ -2056,5 +2056,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
+        private System.Windows.Forms.TextBox tbRzuKol;
     }
 }
