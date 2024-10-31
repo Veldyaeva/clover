@@ -71,6 +71,9 @@ namespace SewingProduction
         private void CardByNom_Load(object sender, EventArgs e)
         {
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
+            //this.tbNomPach.Focus();
+            //this.tbYearPach.Focus();
+            tbNomPach.Select();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -80,181 +83,7 @@ namespace SewingProduction
 
         public void textBox1_Leave(object sender, EventArgs e)
         {
-            int NomPach = Convert.ToInt32(this.tbNomPach.Text);
-            int YearPach = Convert.ToInt32(this.tbYearPach.Text);
-            string _dateFormat = "dd/MM/yyyy";
-            if (NomPach > 0 && YearPach > 0)
-            {
-                this.progressPanel1.Visible = true;
-                string connectionString = Properties.Settings.Default.ACEConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    
-                    
-
-                    //Console.WriteLine("Подключение открыто");
-                    SqlDataAdapter adapterNaklList = new SqlDataAdapter();
-                    DataTable dtNaklList = new DataTable();
-                    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-                    //query += $" order by n_pach";
-                    string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
-                    queryNaklList += $" order by iz";
-                    SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
-                    adapterNaklList.SelectCommand = commandNaklList;
-                    adapterNaklList.Fill(dtNaklList);
-                    bsNaklList.DataSource = dtNaklList;
-                    bsNaklList.Sort = "iz asc";
-                    //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-
-                    SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
-                    DataTable dtRasInfo = new DataTable();
-                    string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
-                    //queryRasInfo += $" order by iz";
-                    SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
-                    adapterRasInfo.SelectCommand = commandRasInfo;
-                    adapterRasInfo.Fill(dtRasInfo);
-                    bsRasInfo.DataSource = dtRasInfo;
-                    //bsRasInfo.Sort = "iz asc";
-                    //textBox1.DataBindings.Add("Text", model, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
-                    //MessageBox.Show("1");
-
-                    
-                    
-
-                    this.pbEskiz.DataBindings.Clear();
-                    this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
-                    this.tbRzuNom.DataBindings.Clear();
-                    this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
-                    this.tbRzuPach.DataBindings.Clear();
-                    this.tbRzuPach.DataBindings.Add("Text", dtRasInfo, "rzuPach");
-                    this.tbRzuKol.DataBindings.Clear();
-                    this.tbRzuKol.DataBindings.Add("Text", dtRasInfo, "rzuKol");
-                    this.tbPsaPrn.DataBindings.Clear();
-                    this.tbPsaPrn.DataBindings.Add("Text", dtRasInfo, "psaPrn");
-                    this.tbRzuArticul.DataBindings.Clear();
-                    this.tbRzuArticul.DataBindings.Add("Text", dtRasInfo, "rzuArticul");
-                    this.tbRzuMod.DataBindings.Clear();
-                    this.tbRzuMod.DataBindings.Add("Text", dtRasInfo, "rzuMod");
-                    this.tbRzuDostZeh.DataBindings.Clear();
-                    this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
-                    this.tbPsaNameSbit.DataBindings.Clear();
-                    this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                    this.tbPsaNameSbit1.DataBindings.Clear();
-                    this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                    this.tbPsaNN.DataBindings.Clear();
-                    this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
-                    this.tbPsaNomZad.DataBindings.Clear();
-                    this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
-                    this.tbPsaMenName.DataBindings.Clear();
-                    this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
-                    this.tbPsaTbID.DataBindings.Clear();
-                    this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
-                    this.tbPsaYear.DataBindings.Clear();
-                    this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
-                    this.psaSezName.DataBindings.Clear();
-                    this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
-                    this.tbArtGrup.DataBindings.Clear();
-                    this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
-                    this.tbSost.DataBindings.Clear();
-                    this.tbSost.DataBindings.Add("Text", dtRasInfo, "sost");
-                    this.tbSostOtdelka.DataBindings.Clear();
-                    this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
-                    this.tbSostPodklad.DataBindings.Clear();
-                    this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
-                    this.tbPsaKodZv1.DataBindings.Clear();
-                    this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
-                    this.tbPsaKodZv2.DataBindings.Clear();
-                    this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
-                    this.mtbPsaDataZap.DataBindings.Clear();
-                    this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
-                    this.mtbPsaDataCdPlan.DataBindings.Clear();
-                    this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
-                    this.mtbRzuDataCdUt.DataBindings.Clear();
-                    this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
-                    this.mtbRzuDataZeh.DataBindings.Clear();
-                    this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
-                    this.mtbRzuDataRab.DataBindings.Clear();
-                    this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
-                    this.mtbRzuDataUp.DataBindings.Clear();
-                    this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
-                    this.mtbRzuDataCd.DataBindings.Clear();
-                    this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
-                    this.mtbRzuDataRasp.DataBindings.Clear();
-                    this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
-                    this.mtbRzuDataPrP.DataBindings.Clear();
-                    this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
-                    this.mtbRzuDataPrR.DataBindings.Clear();
-                    this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
-                    this.mtbRzuDataPrPe.DataBindings.Clear();
-                    this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
-                    this.mtbRzuDataPrKm.DataBindings.Clear();
-                    this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
-                    this.mtbRzuDataPrCd.DataBindings.Clear();
-                    this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
-                    this.mtbRzuDataRasv.DataBindings.Clear();
-                    this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
-                    this.mtbRzuDataVP.DataBindings.Clear();
-                    this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
-                    this.mtbRzuDataVR.DataBindings.Clear();
-                    this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
-                    this.mtbRzuDataVChi.DataBindings.Clear();
-                    this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
-                    this.mtbRzuDataVCd.DataBindings.Clear();
-                    this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
-                    this.mtbRzuDataStP.DataBindings.Clear();
-                    this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
-                    this.mtbRzuDataStR.DataBindings.Clear();
-                    this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
-                    this.mtbRzuDataStCd.DataBindings.Clear();
-                    this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
-                    this.mtbRzuVidStir.DataBindings.Clear();
-                    this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
-
-                    string NomZad = this.tbPsaNomZad.Text;
-                    SqlDataAdapter adapterIsChip = new SqlDataAdapter();
-                    DataTable dtIsChip = new DataTable();
-                    string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
-                    SqlCommand commandIsChip = new SqlCommand(queryIsChip, connection);
-                    adapterIsChip.SelectCommand = commandIsChip;
-                    adapterIsChip.Fill(dtIsChip);
-                    bsIsChip.DataSource = dtIsChip;
-                    this.cbIsChip.DataBindings.Clear();
-                    this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
-
-                    //DataRow[] currentRows = dtIsChip.Select(null, null, DataViewRowState.CurrentRows);
-                    //if (currentRows.Length < 1)
-                    //    Console.WriteLine("No Current Rows in IsChip Found");
-                    //else
-                    //{
-                    //    //foreach (DataColumn column in dtPartNaklList.Columns)
-                    //    //    Console.Write("\t{0}", column.ColumnName);
-                    //    //Console.WriteLine("\tRowState");
-                    //    foreach (DataRow row in currentRows)
-                    //    {
-                    //        foreach (DataColumn column in dtIsChip.Columns)
-                    //            MessageBox.Show(Convert.ToString(row[column]));
-                    //        //Console.WriteLine("\t" + row.RowState);
-                    //    }
-                    //}
-
-                    //MessageBox.Show("2");
-
-                    SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
-                    DataTable dtOtdelkaList = new DataTable();
-                    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-                    //query += $" order by n_pach";
-                    string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
-                    queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
-                    queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
-                    SqlCommand commandOtdelkaList = new SqlCommand(queryOtdelkaList, connection);
-                    adapterOtdelkaList.SelectCommand = commandOtdelkaList;
-                    adapterOtdelkaList.Fill(dtOtdelkaList);
-                    bsOtdelkaList.DataSource = dtOtdelkaList;
-                    //bsOtdelkaList.Sort = "iz asc";
-                }
-                this.progressPanel1.Visible = false;
-            }
+            
             
         }
 
@@ -265,7 +94,6 @@ namespace SewingProduction
 
         private void textBox1_Validated(object sender, EventArgs e)
         {
-            textBox1_Leave(sender, e);
         }
 
         private void bindingSource1_CurrentChanged(object sender, EventArgs e)
@@ -282,7 +110,182 @@ namespace SewingProduction
         {
             if (e.KeyCode == Keys.Enter)
             {
-                textBox1_Leave(sender, e);
+                //textBox1_Leave(sender, e);
+                int NomPach = Convert.ToInt32(this.tbNomPach.Text);
+                int YearPach = Convert.ToInt32(this.tbYearPach.Text);
+                //string _dateFormat = "dd/MM/yyyy";
+                if (NomPach > 0 && YearPach > 0)
+                {
+                    this.progressPanel1.Visible = true;
+                    string connectionString = Properties.Settings.Default.ACEConnectionString;
+                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    {
+                        connection.Open();
+
+
+
+                        //Console.WriteLine("Подключение открыто");
+                        SqlDataAdapter adapterNaklList = new SqlDataAdapter();
+                        DataTable dtNaklList = new DataTable();
+                        //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
+                        //query += $" order by n_pach";
+                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        queryNaklList += $" order by iz";
+                        SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
+                        adapterNaklList.SelectCommand = commandNaklList;
+                        adapterNaklList.Fill(dtNaklList);
+                        bsNaklList.DataSource = dtNaklList;
+                        bsNaklList.Sort = "iz asc";
+                        //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                        SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
+                        DataTable dtRasInfo = new DataTable();
+                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        //queryRasInfo += $" order by iz";
+                        SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
+                        adapterRasInfo.SelectCommand = commandRasInfo;
+                        adapterRasInfo.Fill(dtRasInfo);
+                        bsRasInfo.DataSource = dtRasInfo;
+                        //bsRasInfo.Sort = "iz asc";
+                        //textBox1.DataBindings.Add("Text", model, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
+                        //MessageBox.Show("1");
+
+
+
+
+                        this.pbEskiz.DataBindings.Clear();
+                        this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
+                        this.tbRzuNom.DataBindings.Clear();
+                        this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
+                        this.tbRzuPach.DataBindings.Clear();
+                        this.tbRzuPach.DataBindings.Add("Text", dtRasInfo, "rzuPach");
+                        this.tbRzuKol.DataBindings.Clear();
+                        this.tbRzuKol.DataBindings.Add("Text", dtRasInfo, "rzuKol");
+                        this.tbPsaPrn.DataBindings.Clear();
+                        this.tbPsaPrn.DataBindings.Add("Text", dtRasInfo, "psaPrn");
+                        this.tbRzuArticul.DataBindings.Clear();
+                        this.tbRzuArticul.DataBindings.Add("Text", dtRasInfo, "rzuArticul");
+                        this.tbRzuMod.DataBindings.Clear();
+                        this.tbRzuMod.DataBindings.Add("Text", dtRasInfo, "rzuMod");
+                        this.tbRzuDostZeh.DataBindings.Clear();
+                        this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
+                        this.tbPsaNameSbit.DataBindings.Clear();
+                        this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                        this.tbPsaNameSbit1.DataBindings.Clear();
+                        this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                        this.tbPsaNN.DataBindings.Clear();
+                        this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
+                        this.tbPsaNomZad.DataBindings.Clear();
+                        this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
+                        this.tbPsaMenName.DataBindings.Clear();
+                        this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
+                        this.tbPsaTbID.DataBindings.Clear();
+                        this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
+                        this.tbPsaYear.DataBindings.Clear();
+                        this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
+                        this.psaSezName.DataBindings.Clear();
+                        this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
+                        this.tbArtGrup.DataBindings.Clear();
+                        this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
+                        this.tbSost.DataBindings.Clear();
+                        this.tbSost.DataBindings.Add("Text", dtRasInfo, "sost");
+                        this.tbSostOtdelka.DataBindings.Clear();
+                        this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
+                        this.tbSostPodklad.DataBindings.Clear();
+                        this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
+                        this.tbPsaKodZv1.DataBindings.Clear();
+                        this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
+                        this.tbPsaKodZv2.DataBindings.Clear();
+                        this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
+                        this.mtbPsaDataZap.DataBindings.Clear();
+                        this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
+                        this.mtbPsaDataCdPlan.DataBindings.Clear();
+                        this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
+                        this.mtbRzuDataCdUt.DataBindings.Clear();
+                        this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
+                        this.mtbRzuDataZeh.DataBindings.Clear();
+                        this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
+                        this.mtbRzuDataRab.DataBindings.Clear();
+                        this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
+                        this.mtbRzuDataUp.DataBindings.Clear();
+                        this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
+                        this.mtbRzuDataCd.DataBindings.Clear();
+                        this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                        this.mtbRzuDataRasp.DataBindings.Clear();
+                        this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
+                        this.mtbRzuDataPrP.DataBindings.Clear();
+                        this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
+                        this.mtbRzuDataPrR.DataBindings.Clear();
+                        this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
+                        this.mtbRzuDataPrPe.DataBindings.Clear();
+                        this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
+                        this.mtbRzuDataPrKm.DataBindings.Clear();
+                        this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
+                        this.mtbRzuDataPrCd.DataBindings.Clear();
+                        this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
+                        this.mtbRzuDataRasv.DataBindings.Clear();
+                        this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
+                        this.mtbRzuDataVP.DataBindings.Clear();
+                        this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
+                        this.mtbRzuDataVR.DataBindings.Clear();
+                        this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
+                        this.mtbRzuDataVChi.DataBindings.Clear();
+                        this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
+                        this.mtbRzuDataVCd.DataBindings.Clear();
+                        this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
+                        this.mtbRzuDataStP.DataBindings.Clear();
+                        this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
+                        this.mtbRzuDataStR.DataBindings.Clear();
+                        this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
+                        this.mtbRzuDataStCd.DataBindings.Clear();
+                        this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
+                        this.mtbRzuVidStir.DataBindings.Clear();
+                        this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+
+                        string NomZad = this.tbPsaNomZad.Text;
+                        SqlDataAdapter adapterIsChip = new SqlDataAdapter();
+                        DataTable dtIsChip = new DataTable();
+                        string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
+                        SqlCommand commandIsChip = new SqlCommand(queryIsChip, connection);
+                        adapterIsChip.SelectCommand = commandIsChip;
+                        adapterIsChip.Fill(dtIsChip);
+                        bsIsChip.DataSource = dtIsChip;
+                        this.cbIsChip.DataBindings.Clear();
+                        this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
+
+                        //DataRow[] currentRows = dtIsChip.Select(null, null, DataViewRowState.CurrentRows);
+                        //if (currentRows.Length < 1)
+                        //    Console.WriteLine("No Current Rows in IsChip Found");
+                        //else
+                        //{
+                        //    //foreach (DataColumn column in dtPartNaklList.Columns)
+                        //    //    Console.Write("\t{0}", column.ColumnName);
+                        //    //Console.WriteLine("\tRowState");
+                        //    foreach (DataRow row in currentRows)
+                        //    {
+                        //        foreach (DataColumn column in dtIsChip.Columns)
+                        //            MessageBox.Show(Convert.ToString(row[column]));
+                        //        //Console.WriteLine("\t" + row.RowState);
+                        //    }
+                        //}
+
+                        //MessageBox.Show("2");
+
+                        SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
+                        DataTable dtOtdelkaList = new DataTable();
+                        //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
+                        //query += $" order by n_pach";
+                        string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
+                        queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
+                        queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
+                        SqlCommand commandOtdelkaList = new SqlCommand(queryOtdelkaList, connection);
+                        adapterOtdelkaList.SelectCommand = commandOtdelkaList;
+                        adapterOtdelkaList.Fill(dtOtdelkaList);
+                        bsOtdelkaList.DataSource = dtOtdelkaList;
+                        //bsOtdelkaList.Sort = "iz asc";
+                    }
+                    this.progressPanel1.Visible = false;
+                }
             }
         }
 
