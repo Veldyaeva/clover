@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.cbIsChip = new System.Windows.Forms.CheckBox();
             this.tbRzuKol = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
             this.tbPsaNomZad = new System.Windows.Forms.TextBox();
@@ -200,7 +201,6 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
-            this.cbIsChip = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -265,6 +265,18 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1370, 116);
             this.panelControl1.TabIndex = 3;
+            // 
+            // cbIsChip
+            // 
+            this.cbIsChip.AutoSize = true;
+            this.cbIsChip.Enabled = false;
+            this.cbIsChip.Location = new System.Drawing.Point(882, 82);
+            this.cbIsChip.Name = "cbIsChip";
+            this.cbIsChip.Size = new System.Drawing.Size(45, 17);
+            this.cbIsChip.TabIndex = 30;
+            this.cbIsChip.Text = "Чип";
+            this.cbIsChip.UseVisualStyleBackColor = true;
+            this.cbIsChip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // tbRzuKol
             // 
@@ -1843,17 +1855,6 @@
             this.gridColumn41.Visible = true;
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
-            // 
-            // cbIsChip
-            // 
-            this.cbIsChip.AutoSize = true;
-            this.cbIsChip.Location = new System.Drawing.Point(882, 82);
-            this.cbIsChip.Name = "cbIsChip";
-            this.cbIsChip.Size = new System.Drawing.Size(45, 17);
-            this.cbIsChip.TabIndex = 30;
-            this.cbIsChip.Text = "Чип";
-            this.cbIsChip.UseVisualStyleBackColor = true;
-            this.cbIsChip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // CardByNom
             // 
