@@ -112,10 +112,10 @@
     <Compile Include="SpMainForm.Designer.cs">
       <DependentUpon>SpMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="CardByNom.cs">
+    <Compile Include="form\CardByNom.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CardByNom.Designer.cs">
+    <Compile Include="form\CardByNom.Designer.cs">
       <DependentUpon>CardByNom.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -127,40 +127,40 @@
     <Compile Include="rptPrintNakl.Designer.cs">
       <DependentUpon>rptPrintNakl.cs</DependentUpon>
     </Compile>
-    <Compile Include="FioListReport.cs">
+    <Compile Include="report\FioListReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FioListReport.Designer.cs">
+    <Compile Include="report\FioListReport.Designer.cs">
       <DependentUpon>FioListReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrintNaklReport.cs">
+    <Compile Include="report\PrintNaklReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PrintNaklReport.Designer.cs">
+    <Compile Include="report\PrintNaklReport.Designer.cs">
       <DependentUpon>PrintNaklReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="FurnitFITByKodFD.cs">
+    <Compile Include="report\subreport\FurnitFITByKodFD.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="FurnitFITByKodFD.Designer.cs">
+    <Compile Include="report\subreport\FurnitFITByKodFD.Designer.cs">
       <DependentUpon>FurnitFITByKodFD.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrintMlRtReport.cs">
+    <Compile Include="report\PrintMlRtReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PrintMlRtReport.Designer.cs">
+    <Compile Include="report\PrintMlRtReport.Designer.cs">
       <DependentUpon>PrintMlRtReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrintPachListReport.cs">
+    <Compile Include="report\subreport\PrintPachListReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PrintPachListReport.Designer.cs">
+    <Compile Include="report\subreport\PrintPachListReport.Designer.cs">
       <DependentUpon>PrintPachListReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="PrintGroupNROborudReport.cs">
+    <Compile Include="report\subreport\PrintGroupNROborudReport.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PrintGroupNROborudReport.Designer.cs">
+    <Compile Include="report\subreport\PrintGroupNROborudReport.Designer.cs">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="PrintNakl.rdlc">
@@ -174,7 +174,7 @@
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CardByNom.resx">
+    <EmbeddedResource Include="form\CardByNom.resx">
       <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
@@ -190,22 +190,22 @@
     <EmbeddedResource Include="rptPrintNakl.resx">
       <DependentUpon>rptPrintNakl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FioListReport.resx">
+    <EmbeddedResource Include="report\FioListReport.resx">
       <DependentUpon>FioListReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrintNaklReport.resx">
+    <EmbeddedResource Include="report\PrintNaklReport.resx">
       <DependentUpon>PrintNaklReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FurnitFITByKodFD.resx">
+    <EmbeddedResource Include="report\subreport\FurnitFITByKodFD.resx">
       <DependentUpon>FurnitFITByKodFD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrintMlRtReport.resx">
+    <EmbeddedResource Include="report\PrintMlRtReport.resx">
       <DependentUpon>PrintMlRtReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrintPachListReport.resx">
+    <EmbeddedResource Include="report\subreport\PrintPachListReport.resx">
       <DependentUpon>PrintPachListReport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PrintGroupNROborudReport.resx">
+    <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="dsPrintNakl.xsc">
