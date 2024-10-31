@@ -508,6 +508,7 @@ namespace SewingProduction
             report1.RequestParameters = false;
             report1.Parameters["_rzuNom"].Value = RzuNom;
             report1.Parameters["_isChip"].Value = IsChip;
+            report1.Parameters["_isUpak"].Value = 0;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
 
@@ -516,6 +517,19 @@ namespace SewingProduction
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
+            int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
+            PrintMlRtReport report1 = new PrintMlRtReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_rzuNom"].Value = RzuNom;
+            report1.Parameters["_isChip"].Value = IsChip;
+            report1.Parameters["_isUpak"].Value = 1;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
 
         //private void button1_Click(object sender, EventArgs e)
