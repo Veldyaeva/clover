@@ -143,3 +143,4 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FioListReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FurnitFITByKodFD.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintMlRtReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintPachListReport.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintGroupNROborudReport.resources

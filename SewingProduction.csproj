@@ -157,6 +157,12 @@
     <Compile Include="PrintPachListReport.Designer.cs">
       <DependentUpon>PrintPachListReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="PrintGroupNROborudReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PrintGroupNROborudReport.Designer.cs">
+      <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PrintPachListReport.resx">
       <DependentUpon>PrintPachListReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrintGroupNROborudReport.resx">
+      <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>

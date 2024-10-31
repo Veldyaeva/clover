@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.tbRzuKol = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
             this.tbPsaNomZad = new System.Windows.Forms.TextBox();
             this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
@@ -198,7 +199,8 @@
             this.label25 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tbRzuKol = new System.Windows.Forms.TextBox();
+            this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
+            this.cbIsChip = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -225,10 +227,12 @@
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.cbIsChip);
             this.panelControl1.Controls.Add(this.tbRzuKol);
             this.panelControl1.Controls.Add(this.label53);
             this.panelControl1.Controls.Add(this.tbPsaNomZad);
@@ -261,6 +265,13 @@
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(1370, 116);
             this.panelControl1.TabIndex = 3;
+            // 
+            // tbRzuKol
+            // 
+            this.tbRzuKol.Location = new System.Drawing.Point(418, 30);
+            this.tbRzuKol.Name = "tbRzuKol";
+            this.tbRzuKol.Size = new System.Drawing.Size(132, 21);
+            this.tbRzuKol.TabIndex = 29;
             // 
             // label53
             // 
@@ -1833,12 +1844,16 @@
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
             // 
-            // tbRzuKol
+            // cbIsChip
             // 
-            this.tbRzuKol.Location = new System.Drawing.Point(418, 30);
-            this.tbRzuKol.Name = "tbRzuKol";
-            this.tbRzuKol.Size = new System.Drawing.Size(132, 21);
-            this.tbRzuKol.TabIndex = 29;
+            this.cbIsChip.AutoSize = true;
+            this.cbIsChip.Location = new System.Drawing.Point(882, 82);
+            this.cbIsChip.Name = "cbIsChip";
+            this.cbIsChip.Size = new System.Drawing.Size(45, 17);
+            this.cbIsChip.TabIndex = 30;
+            this.cbIsChip.Text = "Чип";
+            this.cbIsChip.UseVisualStyleBackColor = true;
+            this.cbIsChip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // CardByNom
             // 
@@ -1882,6 +1897,7 @@
             this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2057,5 +2073,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
         private System.Windows.Forms.TextBox tbRzuKol;
+        private System.Windows.Forms.BindingSource bsIsChip;
+        private System.Windows.Forms.CheckBox cbIsChip;
     }
 }

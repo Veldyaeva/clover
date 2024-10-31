@@ -90,6 +90,9 @@ namespace SewingProduction
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+                    
+                    
+
                     //Console.WriteLine("Подключение открыто");
                     SqlDataAdapter adapterNaklList = new SqlDataAdapter();
                     DataTable dtNaklList = new DataTable();
@@ -115,6 +118,10 @@ namespace SewingProduction
                     //bsRasInfo.Sort = "iz asc";
                     //textBox1.DataBindings.Add("Text", model, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
                     //MessageBox.Show("1");
+
+                    
+                    
+
                     this.pbEskiz.DataBindings.Clear();
                     this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
                     this.tbRzuNom.DataBindings.Clear();
@@ -203,6 +210,33 @@ namespace SewingProduction
                     this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
                     this.mtbRzuVidStir.DataBindings.Clear();
                     this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+
+                    string NomZad = this.tbPsaNomZad.Text;
+                    SqlDataAdapter adapterIsChip = new SqlDataAdapter();
+                    DataTable dtIsChip = new DataTable();
+                    string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
+                    SqlCommand commandIsChip = new SqlCommand(queryIsChip, connection);
+                    adapterIsChip.SelectCommand = commandIsChip;
+                    adapterIsChip.Fill(dtIsChip);
+                    bsIsChip.DataSource = dtIsChip;
+                    this.cbIsChip.DataBindings.Clear();
+                    this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
+
+                    //DataRow[] currentRows = dtIsChip.Select(null, null, DataViewRowState.CurrentRows);
+                    //if (currentRows.Length < 1)
+                    //    Console.WriteLine("No Current Rows in IsChip Found");
+                    //else
+                    //{
+                    //    //foreach (DataColumn column in dtPartNaklList.Columns)
+                    //    //    Console.Write("\t{0}", column.ColumnName);
+                    //    //Console.WriteLine("\tRowState");
+                    //    foreach (DataRow row in currentRows)
+                    //    {
+                    //        foreach (DataColumn column in dtIsChip.Columns)
+                    //            MessageBox.Show(Convert.ToString(row[column]));
+                    //        //Console.WriteLine("\t" + row.RowState);
+                    //    }
+                    //}
 
                     //MessageBox.Show("2");
 
@@ -469,11 +503,18 @@ namespace SewingProduction
         private void button6_Click(object sender, EventArgs e)
         {
             int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
+            int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             PrintMlRtReport report1 = new PrintMlRtReport();
             report1.RequestParameters = false;
             report1.Parameters["_rzuNom"].Value = RzuNom;
+            report1.Parameters["_isChip"].Value = IsChip;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
 
         }
 

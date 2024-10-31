@@ -27,5 +27,9 @@ namespace SewingProduction
         {
 
         }
+
+        private void xrBarCode1_BeforePrint(object sender, CancelEventArgs e)
+        {
+        }
     }
 }
