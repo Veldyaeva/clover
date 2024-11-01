@@ -21,6 +21,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using SewingProduction.report;
 
 namespace SewingProduction
 {
@@ -71,8 +72,6 @@ namespace SewingProduction
         private void CardByNom_Load(object sender, EventArgs e)
         {
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
-            //this.tbNomPach.Focus();
-            //this.tbYearPach.Focus();
             tbNomPach.Select();
         }
 
@@ -531,6 +530,18 @@ namespace SewingProduction
             report1.Parameters["_rzuNom"].Value = RzuNom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
+            string RzuPachList = this.tbRzuPach.Text;
+            PrintReestrListReport report1 = new PrintReestrListReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_rzuNom"].Value = RzuNom;
+            report1.Parameters["_rzuPachList"].Value = RzuPachList;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }

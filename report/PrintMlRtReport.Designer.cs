@@ -1637,7 +1637,7 @@
             this.xrTableCell73.StylePriority.UseBorders = false;
             this.xrTableCell73.StylePriority.UseFont = false;
             this.xrTableCell73.Text = "xrTableCell73";
-            this.xrTableCell73.Weight = 163.20624086992819D;
+            this.xrTableCell73.Weight = 160.27498630280334D;
             // 
             // xrBarCode1
             // 
@@ -1675,7 +1675,7 @@
             this.xrTableCell10.StylePriority.UseFont = false;
             this.xrTableCell10.Text = "xrLabel18";
             this.xrTableCell10.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell10.Weight = 39.340228069527534D;
+            this.xrTableCell10.Weight = 42.271482636652379D;
             // 
             // xrTableCell12
             // 
@@ -1837,7 +1837,7 @@
             this.xrTableCell63.StylePriority.UseTextAlignment = false;
             this.xrTableCell63.Text = "Наименование";
             this.xrTableCell63.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell63.Weight = 374.95670073890443D;
+            this.xrTableCell63.Weight = 372.50242061627273D;
             // 
             // xrTableCell64
             // 
@@ -1854,7 +1854,7 @@
             this.xrTableCell64.StylePriority.UseTextAlignment = false;
             this.xrTableCell64.Text = "Раз-ряд ра-бот";
             this.xrTableCell64.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell64.Weight = 26.6703108717094D;
+            this.xrTableCell64.Weight = 29.124590994341087D;
             // 
             // xrTableCell65
             // 
