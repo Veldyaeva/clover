@@ -123,8 +123,6 @@ namespace SewingProduction
                     {
                         connection.Open();
 
-
-
                         //Console.WriteLine("Подключение открыто");
                         SqlDataAdapter adapterNaklList = new SqlDataAdapter();
                         DataTable dtNaklList = new DataTable();
@@ -624,6 +622,44 @@ namespace SewingProduction
         private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void furnitZayavView1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void furnitZayavViewFurnit_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void furnitZayavViewUpak_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xtraTabPage2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void xtraTabPage2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //furnitZayavViewFurnit.Text = "2024   37605";
+            //furnitZayavViewFurnit.Refresh();
+        }
+
+        private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
+        {
+            furnitZayavViewFurnit.Text = "2024   37605";
+            //furnitZayavViewFurnit.Refresh();
+            furnitZayavViewUpak.Text = "2024   40367";
         }
 
         //private void gcNaklList1_RowCellStyle(object sender, MaskInputRejectedEventArgs e)

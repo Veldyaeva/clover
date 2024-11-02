@@ -171,6 +171,15 @@
     <Compile Include="report\subreport\PrintGroupNROborudReport.Designer.cs">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\usercontrol\FurnitZayavView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
+      <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
+      <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

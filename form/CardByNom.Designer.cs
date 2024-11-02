@@ -79,6 +79,44 @@
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.button11 = new System.Windows.Forms.Button();
+            this.furnitZayavViewFurnit = new SewingProduction.FurnitZayavView();
+            this.furnitZayavViewUpak = new SewingProduction.FurnitZayavView();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.button10 = new System.Windows.Forms.Button();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.button8 = new System.Windows.Forms.Button();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.button7 = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
             this.button4 = new System.Windows.Forms.Button();
@@ -86,6 +124,12 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label52 = new System.Windows.Forms.Label();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
+            this.cbRzuStirFact = new System.Windows.Forms.CheckBox();
+            this.cbPszStirPlan = new System.Windows.Forms.CheckBox();
+            this.cbRzuVishFact = new System.Windows.Forms.CheckBox();
+            this.cbPszVishPlan = new System.Windows.Forms.CheckBox();
+            this.cbRzuPrintFact = new System.Windows.Forms.CheckBox();
+            this.cbPszPrintPlan = new System.Windows.Forms.CheckBox();
             this.mtbRzuDataPrCd = new System.Windows.Forms.MaskedTextBox();
             this.mtbRzuDataVCd = new System.Windows.Forms.MaskedTextBox();
             this.mtbRzuDataPrKm = new System.Windows.Forms.MaskedTextBox();
@@ -194,47 +238,6 @@
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
-            this.cbPszPrintPlan = new System.Windows.Forms.CheckBox();
-            this.cbRzuPrintFact = new System.Windows.Forms.CheckBox();
-            this.cbRzuVishFact = new System.Windows.Forms.CheckBox();
-            this.cbPszVishPlan = new System.Windows.Forms.CheckBox();
-            this.cbRzuStirFact = new System.Windows.Forms.CheckBox();
-            this.cbPszStirPlan = new System.Windows.Forms.CheckBox();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.label18 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
-            this.label25 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.button8 = new System.Windows.Forms.Button();
-            this.button9 = new System.Windows.Forms.Button();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label56 = new System.Windows.Forms.Label();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.label60 = new System.Windows.Forms.Label();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox16 = new System.Windows.Forms.TextBox();
-            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            this.label61 = new System.Windows.Forms.Label();
-            this.textBox17 = new System.Windows.Forms.TextBox();
-            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -242,6 +245,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
@@ -261,10 +268,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
-            this.panelControl7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
@@ -699,16 +702,362 @@
             this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 549);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 543);
             this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
             // 
             // xtraTabPage2
             // 
+            this.xtraTabPage2.Controls.Add(this.button11);
+            this.xtraTabPage2.Controls.Add(this.furnitZayavViewFurnit);
+            this.xtraTabPage2.Controls.Add(this.furnitZayavViewUpak);
             this.xtraTabPage2.Controls.Add(this.panelControl7);
             this.xtraTabPage2.Controls.Add(this.panelControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.Size = new System.Drawing.Size(1368, 543);
             this.xtraTabPage2.Text = "КОНФЕКЦИОН";
+            this.xtraTabPage2.Click += new System.EventHandler(this.xtraTabPage2_Click);
+            this.xtraTabPage2.Paint += new System.Windows.Forms.PaintEventHandler(this.xtraTabPage2_Paint);
+            // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(268, 0);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(75, 23);
+            this.button11.TabIndex = 5;
+            this.button11.Text = "button11";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
+            // furnitZayavViewFurnit
+            // 
+            this.furnitZayavViewFurnit.Location = new System.Drawing.Point(270, 29);
+            this.furnitZayavViewFurnit.Name = "furnitZayavViewFurnit";
+            this.furnitZayavViewFurnit.Size = new System.Drawing.Size(1092, 241);
+            this.furnitZayavViewFurnit.TabIndex = 4;
+            this.furnitZayavViewFurnit.TextChanged += new System.EventHandler(this.furnitZayavViewFurnit_TextChanged);
+            // 
+            // furnitZayavViewUpak
+            // 
+            this.furnitZayavViewUpak.Location = new System.Drawing.Point(267, 283);
+            this.furnitZayavViewUpak.Name = "furnitZayavViewUpak";
+            this.furnitZayavViewUpak.Size = new System.Drawing.Size(1193, 256);
+            this.furnitZayavViewUpak.TabIndex = 3;
+            this.furnitZayavViewUpak.TextChanged += new System.EventHandler(this.furnitZayavViewUpak_TextChanged);
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.button10);
+            this.panelControl7.Controls.Add(this.textBox17);
+            this.panelControl7.Controls.Add(this.label61);
+            this.panelControl7.Location = new System.Drawing.Point(8, 464);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(253, 75);
+            this.panelControl7.TabIndex = 1;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(8, 50);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(235, 20);
+            this.button10.TabIndex = 60;
+            this.button10.Text = "Информация по доставке";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(168, 20);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(80, 21);
+            this.textBox17.TabIndex = 60;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(2, 6);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(168, 39);
+            this.label61.TabIndex = 0;
+            this.label61.Text = "Предположительная дата \r\nсоздания заявки \r\n(при выполнении всех условий)";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.textBox15);
+            this.panelControl2.Controls.Add(this.textBox16);
+            this.panelControl2.Controls.Add(this.textBox14);
+            this.panelControl2.Controls.Add(this.textBox13);
+            this.panelControl2.Controls.Add(this.label60);
+            this.panelControl2.Controls.Add(this.label59);
+            this.panelControl2.Controls.Add(this.button9);
+            this.panelControl2.Controls.Add(this.textBox8);
+            this.panelControl2.Controls.Add(this.textBox9);
+            this.panelControl2.Controls.Add(this.textBox10);
+            this.panelControl2.Controls.Add(this.label56);
+            this.panelControl2.Controls.Add(this.textBox11);
+            this.panelControl2.Controls.Add(this.label57);
+            this.panelControl2.Controls.Add(this.textBox12);
+            this.panelControl2.Controls.Add(this.label58);
+            this.panelControl2.Controls.Add(this.button8);
+            this.panelControl2.Controls.Add(this.textBox6);
+            this.panelControl2.Controls.Add(this.textBox7);
+            this.panelControl2.Controls.Add(this.textBox5);
+            this.panelControl2.Controls.Add(this.label55);
+            this.panelControl2.Controls.Add(this.textBox4);
+            this.panelControl2.Controls.Add(this.label54);
+            this.panelControl2.Controls.Add(this.textBox3);
+            this.panelControl2.Controls.Add(this.label25);
+            this.panelControl2.Controls.Add(this.button7);
+            this.panelControl2.Controls.Add(this.textBox2);
+            this.panelControl2.Controls.Add(this.textBox1);
+            this.panelControl2.Controls.Add(this.button3);
+            this.panelControl2.Controls.Add(this.button2);
+            this.panelControl2.Controls.Add(this.label18);
+            this.panelControl2.Location = new System.Drawing.Point(8, 12);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(253, 446);
+            this.panelControl2.TabIndex = 0;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(207, 418);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(37, 21);
+            this.textBox15.TabIndex = 59;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(207, 393);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(37, 21);
+            this.textBox16.TabIndex = 58;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(125, 418);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(80, 21);
+            this.textBox14.TabIndex = 57;
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(125, 393);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(80, 21);
+            this.textBox13.TabIndex = 56;
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(8, 413);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(86, 26);
+            this.label60.TabIndex = 55;
+            this.label60.Text = "Дата отгрузки \r\nс производства";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(8, 388);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(123, 26);
+            this.label59.TabIndex = 54;
+            this.label59.Text = "Дата (в цех / на упак. \r\n/ передачи в ш.ц.)";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(8, 361);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(235, 20);
+            this.button9.TabIndex = 53;
+            this.button9.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(206, 338);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(37, 21);
+            this.textBox8.TabIndex = 52;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(206, 314);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(37, 21);
+            this.textBox9.TabIndex = 51;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(125, 338);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(80, 21);
+            this.textBox10.TabIndex = 50;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(57, 341);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(48, 13);
+            this.label56.TabIndex = 49;
+            this.label56.Text = "собрана";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(125, 314);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(80, 21);
+            this.textBox11.TabIndex = 48;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(57, 317);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(48, 13);
+            this.label57.TabIndex = 47;
+            this.label57.Text = "создана";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(163, 290);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(80, 21);
+            this.textBox12.TabIndex = 46;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label58.Location = new System.Drawing.Point(5, 290);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(142, 13);
+            this.label58.TabIndex = 45;
+            this.label58.Text = "Заявка на упаковку №";
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(8, 247);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(235, 20);
+            this.button8.TabIndex = 44;
+            this.button8.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(206, 224);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(37, 21);
+            this.textBox6.TabIndex = 43;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(206, 200);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(37, 21);
+            this.textBox7.TabIndex = 42;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(125, 224);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(80, 21);
+            this.textBox5.TabIndex = 41;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(57, 227);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(48, 13);
+            this.label55.TabIndex = 40;
+            this.label55.Text = "собрана";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(125, 200);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(80, 21);
+            this.textBox4.TabIndex = 39;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(57, 203);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(48, 13);
+            this.label54.TabIndex = 38;
+            this.label54.Text = "создана";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(163, 176);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(80, 21);
+            this.textBox3.TabIndex = 37;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label25.Location = new System.Drawing.Point(5, 176);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(150, 13);
+            this.label25.TabIndex = 36;
+            this.label25.Text = "Заявка на фурнитуру №";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(6, 130);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(194, 34);
+            this.button7.TabIndex = 35;
+            this.button7.Text = "КК общая \r\n(просмотр/печать)";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(206, 99);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(37, 21);
+            this.textBox2.TabIndex = 34;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(207, 61);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(37, 21);
+            this.textBox1.TabIndex = 33;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 90);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(194, 34);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "КК на упаковку \r\n(просмотр/печать)";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(194, 34);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "КК на фурнитуру (просмотр/печать)";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label18.Location = new System.Drawing.Point(37, 2);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(179, 38);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "УСЛОВИЯ ДЛЯ\r\nСОЗДАНИЯ ЗАЯВОК:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // xtraTabPage1
             // 
@@ -824,6 +1173,67 @@
             this.panelControl5.Name = "panelControl5";
             this.panelControl5.Size = new System.Drawing.Size(1358, 195);
             this.panelControl5.TabIndex = 30;
+            // 
+            // cbRzuStirFact
+            // 
+            this.cbRzuStirFact.AutoSize = true;
+            this.cbRzuStirFact.Location = new System.Drawing.Point(170, 142);
+            this.cbRzuStirFact.Name = "cbRzuStirFact";
+            this.cbRzuStirFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuStirFact.TabIndex = 72;
+            this.cbRzuStirFact.Text = "Факт";
+            this.cbRzuStirFact.UseVisualStyleBackColor = true;
+            // 
+            // cbPszStirPlan
+            // 
+            this.cbPszStirPlan.AutoSize = true;
+            this.cbPszStirPlan.Location = new System.Drawing.Point(106, 142);
+            this.cbPszStirPlan.Name = "cbPszStirPlan";
+            this.cbPszStirPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszStirPlan.TabIndex = 71;
+            this.cbPszStirPlan.Text = "План";
+            this.cbPszStirPlan.UseVisualStyleBackColor = true;
+            // 
+            // cbRzuVishFact
+            // 
+            this.cbRzuVishFact.AutoSize = true;
+            this.cbRzuVishFact.Location = new System.Drawing.Point(174, 88);
+            this.cbRzuVishFact.Name = "cbRzuVishFact";
+            this.cbRzuVishFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuVishFact.TabIndex = 70;
+            this.cbRzuVishFact.Text = "Факт";
+            this.cbRzuVishFact.UseVisualStyleBackColor = true;
+            // 
+            // cbPszVishPlan
+            // 
+            this.cbPszVishPlan.AutoSize = true;
+            this.cbPszVishPlan.Location = new System.Drawing.Point(110, 88);
+            this.cbPszVishPlan.Name = "cbPszVishPlan";
+            this.cbPszVishPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszVishPlan.TabIndex = 69;
+            this.cbPszVishPlan.Text = "План";
+            this.cbPszVishPlan.UseVisualStyleBackColor = true;
+            // 
+            // cbRzuPrintFact
+            // 
+            this.cbRzuPrintFact.AutoSize = true;
+            this.cbRzuPrintFact.Location = new System.Drawing.Point(155, 30);
+            this.cbRzuPrintFact.Name = "cbRzuPrintFact";
+            this.cbRzuPrintFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuPrintFact.TabIndex = 68;
+            this.cbRzuPrintFact.Text = "Факт";
+            this.cbRzuPrintFact.UseVisualStyleBackColor = true;
+            // 
+            // cbPszPrintPlan
+            // 
+            this.cbPszPrintPlan.AutoSize = true;
+            this.cbPszPrintPlan.Location = new System.Drawing.Point(91, 30);
+            this.cbPszPrintPlan.Name = "cbPszPrintPlan";
+            this.cbPszPrintPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszPrintPlan.TabIndex = 67;
+            this.cbPszPrintPlan.Text = "План";
+            this.cbPszPrintPlan.UseVisualStyleBackColor = true;
+            this.cbPszPrintPlan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
             // mtbRzuDataPrCd
             // 
@@ -1839,6 +2249,7 @@
             this.xtraTabPage1,
             this.xtraTabPage2,
             this.xtraTabPage3});
+            this.xtraTabControl1.Selecting += new DevExpress.XtraTab.TabPageCancelEventHandler(this.xtraTabControl1_Selecting);
             this.xtraTabControl1.Click += new System.EventHandler(this.xtraTabControl1_Click);
             // 
             // gridColumn41
@@ -1849,382 +2260,6 @@
             this.gridColumn41.Visible = true;
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
-            // 
-            // cbPszPrintPlan
-            // 
-            this.cbPszPrintPlan.AutoSize = true;
-            this.cbPszPrintPlan.Location = new System.Drawing.Point(91, 30);
-            this.cbPszPrintPlan.Name = "cbPszPrintPlan";
-            this.cbPszPrintPlan.Size = new System.Drawing.Size(51, 17);
-            this.cbPszPrintPlan.TabIndex = 67;
-            this.cbPszPrintPlan.Text = "План";
-            this.cbPszPrintPlan.UseVisualStyleBackColor = true;
-            this.cbPszPrintPlan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
-            // 
-            // cbRzuPrintFact
-            // 
-            this.cbRzuPrintFact.AutoSize = true;
-            this.cbRzuPrintFact.Location = new System.Drawing.Point(155, 30);
-            this.cbRzuPrintFact.Name = "cbRzuPrintFact";
-            this.cbRzuPrintFact.Size = new System.Drawing.Size(52, 17);
-            this.cbRzuPrintFact.TabIndex = 68;
-            this.cbRzuPrintFact.Text = "Факт";
-            this.cbRzuPrintFact.UseVisualStyleBackColor = true;
-            // 
-            // cbRzuVishFact
-            // 
-            this.cbRzuVishFact.AutoSize = true;
-            this.cbRzuVishFact.Location = new System.Drawing.Point(174, 88);
-            this.cbRzuVishFact.Name = "cbRzuVishFact";
-            this.cbRzuVishFact.Size = new System.Drawing.Size(52, 17);
-            this.cbRzuVishFact.TabIndex = 70;
-            this.cbRzuVishFact.Text = "Факт";
-            this.cbRzuVishFact.UseVisualStyleBackColor = true;
-            // 
-            // cbPszVishPlan
-            // 
-            this.cbPszVishPlan.AutoSize = true;
-            this.cbPszVishPlan.Location = new System.Drawing.Point(110, 88);
-            this.cbPszVishPlan.Name = "cbPszVishPlan";
-            this.cbPszVishPlan.Size = new System.Drawing.Size(51, 17);
-            this.cbPszVishPlan.TabIndex = 69;
-            this.cbPszVishPlan.Text = "План";
-            this.cbPszVishPlan.UseVisualStyleBackColor = true;
-            // 
-            // cbRzuStirFact
-            // 
-            this.cbRzuStirFact.AutoSize = true;
-            this.cbRzuStirFact.Location = new System.Drawing.Point(170, 142);
-            this.cbRzuStirFact.Name = "cbRzuStirFact";
-            this.cbRzuStirFact.Size = new System.Drawing.Size(52, 17);
-            this.cbRzuStirFact.TabIndex = 72;
-            this.cbRzuStirFact.Text = "Факт";
-            this.cbRzuStirFact.UseVisualStyleBackColor = true;
-            // 
-            // cbPszStirPlan
-            // 
-            this.cbPszStirPlan.AutoSize = true;
-            this.cbPszStirPlan.Location = new System.Drawing.Point(106, 142);
-            this.cbPszStirPlan.Name = "cbPszStirPlan";
-            this.cbPszStirPlan.Size = new System.Drawing.Size(51, 17);
-            this.cbPszStirPlan.TabIndex = 71;
-            this.cbPszStirPlan.Text = "План";
-            this.cbPszStirPlan.UseVisualStyleBackColor = true;
-            // 
-            // panelControl2
-            // 
-            this.panelControl2.Controls.Add(this.textBox15);
-            this.panelControl2.Controls.Add(this.textBox16);
-            this.panelControl2.Controls.Add(this.textBox14);
-            this.panelControl2.Controls.Add(this.textBox13);
-            this.panelControl2.Controls.Add(this.label60);
-            this.panelControl2.Controls.Add(this.label59);
-            this.panelControl2.Controls.Add(this.button9);
-            this.panelControl2.Controls.Add(this.textBox8);
-            this.panelControl2.Controls.Add(this.textBox9);
-            this.panelControl2.Controls.Add(this.textBox10);
-            this.panelControl2.Controls.Add(this.label56);
-            this.panelControl2.Controls.Add(this.textBox11);
-            this.panelControl2.Controls.Add(this.label57);
-            this.panelControl2.Controls.Add(this.textBox12);
-            this.panelControl2.Controls.Add(this.label58);
-            this.panelControl2.Controls.Add(this.button8);
-            this.panelControl2.Controls.Add(this.textBox6);
-            this.panelControl2.Controls.Add(this.textBox7);
-            this.panelControl2.Controls.Add(this.textBox5);
-            this.panelControl2.Controls.Add(this.label55);
-            this.panelControl2.Controls.Add(this.textBox4);
-            this.panelControl2.Controls.Add(this.label54);
-            this.panelControl2.Controls.Add(this.textBox3);
-            this.panelControl2.Controls.Add(this.label25);
-            this.panelControl2.Controls.Add(this.button7);
-            this.panelControl2.Controls.Add(this.textBox2);
-            this.panelControl2.Controls.Add(this.textBox1);
-            this.panelControl2.Controls.Add(this.button3);
-            this.panelControl2.Controls.Add(this.button2);
-            this.panelControl2.Controls.Add(this.label18);
-            this.panelControl2.Location = new System.Drawing.Point(8, 12);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(253, 446);
-            this.panelControl2.TabIndex = 0;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label18.Location = new System.Drawing.Point(37, 2);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(179, 38);
-            this.label18.TabIndex = 4;
-            this.label18.Text = "УСЛОВИЯ ДЛЯ\r\nСОЗДАНИЯ ЗАЯВОК:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(6, 50);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(194, 34);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "КК на фурнитуру (просмотр/печать)";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 90);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(194, 34);
-            this.button3.TabIndex = 32;
-            this.button3.Text = "КК на упаковку \r\n(просмотр/печать)";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(207, 61);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(37, 21);
-            this.textBox1.TabIndex = 33;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(206, 99);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(37, 21);
-            this.textBox2.TabIndex = 34;
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(6, 130);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(194, 34);
-            this.button7.TabIndex = 35;
-            this.button7.Text = "КК общая \r\n(просмотр/печать)";
-            this.button7.UseVisualStyleBackColor = true;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label25.Location = new System.Drawing.Point(5, 176);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(150, 13);
-            this.label25.TabIndex = 36;
-            this.label25.Text = "Заявка на фурнитуру №";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(163, 176);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(80, 21);
-            this.textBox3.TabIndex = 37;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(125, 200);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(80, 21);
-            this.textBox4.TabIndex = 39;
-            // 
-            // label54
-            // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(57, 203);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(48, 13);
-            this.label54.TabIndex = 38;
-            this.label54.Text = "создана";
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(125, 224);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(80, 21);
-            this.textBox5.TabIndex = 41;
-            // 
-            // label55
-            // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(57, 227);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(48, 13);
-            this.label55.TabIndex = 40;
-            this.label55.Text = "собрана";
-            // 
-            // textBox6
-            // 
-            this.textBox6.Location = new System.Drawing.Point(206, 224);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(37, 21);
-            this.textBox6.TabIndex = 43;
-            // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(206, 200);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(37, 21);
-            this.textBox7.TabIndex = 42;
-            // 
-            // button8
-            // 
-            this.button8.Location = new System.Drawing.Point(8, 247);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(235, 20);
-            this.button8.TabIndex = 44;
-            this.button8.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button8.UseVisualStyleBackColor = true;
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(8, 361);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(235, 20);
-            this.button9.TabIndex = 53;
-            this.button9.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button9.UseVisualStyleBackColor = true;
-            // 
-            // textBox8
-            // 
-            this.textBox8.Location = new System.Drawing.Point(206, 338);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(37, 21);
-            this.textBox8.TabIndex = 52;
-            // 
-            // textBox9
-            // 
-            this.textBox9.Location = new System.Drawing.Point(206, 314);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(37, 21);
-            this.textBox9.TabIndex = 51;
-            // 
-            // textBox10
-            // 
-            this.textBox10.Location = new System.Drawing.Point(125, 338);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(80, 21);
-            this.textBox10.TabIndex = 50;
-            // 
-            // label56
-            // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(57, 341);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(48, 13);
-            this.label56.TabIndex = 49;
-            this.label56.Text = "собрана";
-            // 
-            // textBox11
-            // 
-            this.textBox11.Location = new System.Drawing.Point(125, 314);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(80, 21);
-            this.textBox11.TabIndex = 48;
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(57, 317);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(48, 13);
-            this.label57.TabIndex = 47;
-            this.label57.Text = "создана";
-            // 
-            // textBox12
-            // 
-            this.textBox12.Location = new System.Drawing.Point(163, 290);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(80, 21);
-            this.textBox12.TabIndex = 46;
-            // 
-            // label58
-            // 
-            this.label58.AutoSize = true;
-            this.label58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            this.label58.Location = new System.Drawing.Point(5, 290);
-            this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(142, 13);
-            this.label58.TabIndex = 45;
-            this.label58.Text = "Заявка на упаковку №";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(8, 388);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(123, 26);
-            this.label59.TabIndex = 54;
-            this.label59.Text = "Дата (в цех / на упак. \r\n/ передачи в ш.ц.)";
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(8, 413);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(86, 26);
-            this.label60.TabIndex = 55;
-            this.label60.Text = "Дата отгрузки \r\nс производства";
-            // 
-            // textBox13
-            // 
-            this.textBox13.Location = new System.Drawing.Point(125, 393);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(80, 21);
-            this.textBox13.TabIndex = 56;
-            // 
-            // textBox14
-            // 
-            this.textBox14.Location = new System.Drawing.Point(125, 418);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(80, 21);
-            this.textBox14.TabIndex = 57;
-            // 
-            // textBox15
-            // 
-            this.textBox15.Location = new System.Drawing.Point(207, 418);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(37, 21);
-            this.textBox15.TabIndex = 59;
-            // 
-            // textBox16
-            // 
-            this.textBox16.Location = new System.Drawing.Point(207, 393);
-            this.textBox16.Name = "textBox16";
-            this.textBox16.Size = new System.Drawing.Size(37, 21);
-            this.textBox16.TabIndex = 58;
-            // 
-            // panelControl7
-            // 
-            this.panelControl7.Controls.Add(this.button10);
-            this.panelControl7.Controls.Add(this.textBox17);
-            this.panelControl7.Controls.Add(this.label61);
-            this.panelControl7.Location = new System.Drawing.Point(8, 464);
-            this.panelControl7.Name = "panelControl7";
-            this.panelControl7.Size = new System.Drawing.Size(253, 75);
-            this.panelControl7.TabIndex = 1;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(2, 6);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(168, 39);
-            this.label61.TabIndex = 0;
-            this.label61.Text = "Предположительная дата \r\nсоздания заявки \r\n(при выполнении всех условий)";
-            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // textBox17
-            // 
-            this.textBox17.Location = new System.Drawing.Point(168, 20);
-            this.textBox17.Name = "textBox17";
-            this.textBox17.Size = new System.Drawing.Size(80, 21);
-            this.textBox17.TabIndex = 60;
-            // 
-            // button10
-            // 
-            this.button10.Location = new System.Drawing.Point(8, 50);
-            this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(235, 20);
-            this.button10.TabIndex = 60;
-            this.button10.Text = "Информация по доставке";
-            this.button10.UseVisualStyleBackColor = true;
             // 
             // CardByNom
             // 
@@ -2244,6 +2279,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            this.panelControl7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
             this.xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
@@ -2267,12 +2308,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
-            this.panelControl7.ResumeLayout(false);
-            this.panelControl7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2484,5 +2519,8 @@
         private System.Windows.Forms.TextBox textBox15;
         private System.Windows.Forms.TextBox textBox16;
         private System.Windows.Forms.Button button10;
+        private FurnitZayavView furnitZayavViewFurnit;
+        private FurnitZayavView furnitZayavViewUpak;
+        private System.Windows.Forms.Button button11;
     }
 }

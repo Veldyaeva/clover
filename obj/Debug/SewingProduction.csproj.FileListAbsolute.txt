@@ -333,4 +333,8 @@ D:\SharpProj\sewingproduction\bin\Debug\pt\Microsoft.SqlServer.Types.resources.d
 D:\SharpProj\sewingproduction\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 D:\SharpProj\sewingproduction\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 D:\SharpProj\sewingproduction\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+<<<<<<< HEAD
 >>>>>>> вкладка конфекцион - условия для создания заявок
+=======
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FurnitZayavView.resources
+>>>>>>> usercontrol furmitview
