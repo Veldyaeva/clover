@@ -22,6 +22,8 @@ using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using SewingProduction.report;
+using DevExpress.XtraGauges.Core.Styles;
+using DevExpress.XtraPrinting;
 
 namespace SewingProduction
 {
@@ -115,7 +117,7 @@ namespace SewingProduction
                 //string _dateFormat = "dd/MM/yyyy";
                 if (NomPach > 0 && YearPach > 0)
                 {
-                    this.progressPanel1.Visible = true;
+                    
                     string connectionString = Properties.Settings.Default.ACEConnectionString;
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
@@ -170,8 +172,8 @@ namespace SewingProduction
                         this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
                         this.tbPsaNameSbit.DataBindings.Clear();
                         this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                        this.tbPsaNameSbit1.DataBindings.Clear();
-                        this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                        //this.tbPsaNameSbit1.DataBindings.Clear();
+                        //this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
                         this.tbPsaNN.DataBindings.Clear();
                         this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
                         this.tbPsaNomZad.DataBindings.Clear();
@@ -186,12 +188,12 @@ namespace SewingProduction
                         this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
                         this.tbArtGrup.DataBindings.Clear();
                         this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
-                        this.tbSost.DataBindings.Clear();
-                        this.tbSost.DataBindings.Add("Text", dtRasInfo, "sost");
-                        this.tbSostOtdelka.DataBindings.Clear();
-                        this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
-                        this.tbSostPodklad.DataBindings.Clear();
-                        this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
+                        this.tbSostPoln.DataBindings.Clear();
+                        this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
+                        //this.tbSostOtdelka.DataBindings.Clear();
+                        //this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
+                        //this.tbSostPodklad.DataBindings.Clear();
+                        //this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
                         this.tbPsaKodZv1.DataBindings.Clear();
                         this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
                         this.tbPsaKodZv2.DataBindings.Clear();
@@ -240,6 +242,18 @@ namespace SewingProduction
                         this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
                         this.mtbRzuVidStir.DataBindings.Clear();
                         this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+                        this.cbPszPrintPlan.DataBindings.Clear();
+                        this.cbPszPrintPlan.DataBindings.Add("Checked", dtRasInfo, "PszPrintPlan");
+                        this.cbRzuPrintFact.DataBindings.Clear();
+                        this.cbRzuPrintFact.DataBindings.Add("Checked", dtRasInfo, "RzuPrintFact");
+                        this.cbPszVishPlan.DataBindings.Clear();
+                        this.cbPszVishPlan.DataBindings.Add("Checked", dtRasInfo, "PszVishPlan");
+                        this.cbRzuVishFact.DataBindings.Clear();
+                        this.cbRzuVishFact.DataBindings.Add("Checked", dtRasInfo, "RzuVishFact");
+                        this.cbPszStirPlan.DataBindings.Clear();
+                        this.cbPszStirPlan.DataBindings.Add("Checked", dtRasInfo, "PszStirPlan");
+                        this.cbRzuStirFact.DataBindings.Clear();
+                        this.cbRzuStirFact.DataBindings.Add("Checked", dtRasInfo, "RzuStirFact");
 
                         string NomZad = this.tbPsaNomZad.Text;
                         SqlDataAdapter adapterIsChip = new SqlDataAdapter();
@@ -283,7 +297,6 @@ namespace SewingProduction
                         bsOtdelkaList.DataSource = dtOtdelkaList;
                         //bsOtdelkaList.Sort = "iz asc";
                     }
-                    this.progressPanel1.Visible = false;
                 }
             }
         }
@@ -443,8 +456,6 @@ namespace SewingProduction
             if (btnNaklPart.Text == "Показать информацию по делению накладной")
             {
                 btnNaklPart.Text = "Скрыть информацию по делению накладной";
-                this.progressPanel1.BringToFront();
-                this.progressPanel1.Visible = true;
                 string iz = GetIzNakl();
                 
                 string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -481,7 +492,6 @@ namespace SewingProduction
                     //    }
                     //}
                 }
-                this.progressPanel1.Visible = false;
             }
             else
             {
@@ -545,6 +555,89 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
+
+        private void mtbRzuDataUp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataRab_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataZeh_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataCdUt_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbPsaDataCdPlan_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbPsaDataZap_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void label33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataCd_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        //private void gcNaklList1_RowCellStyle(object sender, MaskInputRejectedEventArgs e)
+        //{
+        //    if (e.Column.FieldName == "Field2")
+        //    {
+        //        var data = gridView1.GetRow(e.RowHandle) as Sample;
+        //        if (data == null)
+        //            return;
+
+        //        if (data.Field2 < 0)
+        //            e.Appearance.ForeColor = Color.Red;
+        //    }
+        //}
 
         //private void button1_Click(object sender, EventArgs e)
         //{

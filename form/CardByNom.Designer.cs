@@ -31,19 +31,34 @@
             this.components = new System.ComponentModel.Container();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.label16 = new System.Windows.Forms.Label();
             this.cbIsChip = new System.Windows.Forms.CheckBox();
+            this.psaSezName = new System.Windows.Forms.TextBox();
             this.tbRzuKol = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tbPsaYear = new System.Windows.Forms.TextBox();
             this.label53 = new System.Windows.Forms.Label();
+            this.tbPsaKodZv2 = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.tbPsaNomZad = new System.Windows.Forms.TextBox();
-            this.progressPanel1 = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.tbPsaKodZv1 = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.tbPsaMenName = new System.Windows.Forms.TextBox();
             this.pbEskiz = new System.Windows.Forms.PictureBox();
+            this.tbSostPoln = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.tbPsaNameSbit = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
+            this.tbArtGrup = new System.Windows.Forms.TextBox();
             this.tbRzuDostZeh = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.tbRzuMod = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.tbPsaTbID = new System.Windows.Forms.TextBox();
             this.tbRzuArticul = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.tbPsaPrn = new System.Windows.Forms.TextBox();
@@ -113,6 +128,25 @@
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label31 = new System.Windows.Forms.Label();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
+            this.gcNaklList = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPartNaklList = new DevExpress.XtraGrid.GridControl();
             this.bsPartNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -140,25 +174,6 @@
             this.btnNaklAbsent = new System.Windows.Forms.Button();
             this.btnNaklPart = new System.Windows.Forms.Button();
             this.btnNaklPrint = new System.Windows.Forms.Button();
-            this.gcNaklList = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label24 = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
             this.mtbRzuDataCd = new System.Windows.Forms.MaskedTextBox();
@@ -176,37 +191,57 @@
             this.label28 = new System.Windows.Forms.Label();
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
-            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.tbSostPodklad = new System.Windows.Forms.TextBox();
-            this.tbSostOtdelka = new System.Windows.Forms.TextBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.tbPsaKodZv2 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tbPsaKodZv1 = new System.Windows.Forms.TextBox();
-            this.tbSost = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.tbArtGrup = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
-            this.psaSezName = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.tbPsaYear = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.tbPsaNameSbit1 = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.tbPsaTbID = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbPsaMenName = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
+            this.cbPszPrintPlan = new System.Windows.Forms.CheckBox();
+            this.cbRzuPrintFact = new System.Windows.Forms.CheckBox();
+            this.cbRzuVishFact = new System.Windows.Forms.CheckBox();
+            this.cbPszVishPlan = new System.Windows.Forms.CheckBox();
+            this.cbRzuStirFact = new System.Windows.Forms.CheckBox();
+            this.cbPszStirPlan = new System.Windows.Forms.CheckBox();
+            this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
+            this.label18 = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.label25 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.label56 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label58 = new System.Windows.Forms.Label();
+            this.label59 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.textBox13 = new System.Windows.Forms.TextBox();
+            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBox15 = new System.Windows.Forms.TextBox();
+            this.textBox16 = new System.Windows.Forms.TextBox();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.label61 = new System.Windows.Forms.Label();
+            this.textBox17 = new System.Windows.Forms.TextBox();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
+            this.xtraTabPage2.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             this.panelControl6.SuspendLayout();
@@ -216,35 +251,52 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
-            this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
+            this.panelControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
+            this.panelControl7.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.label16);
             this.panelControl1.Controls.Add(this.cbIsChip);
+            this.panelControl1.Controls.Add(this.psaSezName);
             this.panelControl1.Controls.Add(this.tbRzuKol);
+            this.panelControl1.Controls.Add(this.label17);
+            this.panelControl1.Controls.Add(this.label22);
+            this.panelControl1.Controls.Add(this.tbPsaYear);
             this.panelControl1.Controls.Add(this.label53);
+            this.panelControl1.Controls.Add(this.tbPsaKodZv2);
+            this.panelControl1.Controls.Add(this.label23);
             this.panelControl1.Controls.Add(this.tbPsaNomZad);
-            this.panelControl1.Controls.Add(this.progressPanel1);
+            this.panelControl1.Controls.Add(this.tbPsaKodZv1);
+            this.panelControl1.Controls.Add(this.label20);
+            this.panelControl1.Controls.Add(this.tbPsaMenName);
             this.panelControl1.Controls.Add(this.pbEskiz);
+            this.panelControl1.Controls.Add(this.tbSostPoln);
+            this.panelControl1.Controls.Add(this.label13);
             this.panelControl1.Controls.Add(this.label11);
             this.panelControl1.Controls.Add(this.tbPsaNameSbit);
+            this.panelControl1.Controls.Add(this.label15);
             this.panelControl1.Controls.Add(this.label12);
+            this.panelControl1.Controls.Add(this.tbArtGrup);
             this.panelControl1.Controls.Add(this.tbRzuDostZeh);
             this.panelControl1.Controls.Add(this.label10);
             this.panelControl1.Controls.Add(this.tbRzuMod);
+            this.panelControl1.Controls.Add(this.label19);
             this.panelControl1.Controls.Add(this.label9);
+            this.panelControl1.Controls.Add(this.tbPsaTbID);
             this.panelControl1.Controls.Add(this.tbRzuArticul);
             this.panelControl1.Controls.Add(this.label8);
             this.panelControl1.Controls.Add(this.tbPsaPrn);
@@ -261,16 +313,25 @@
             this.panelControl1.Controls.Add(this.tbNomPach);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label1);
-            this.panelControl1.Location = new System.Drawing.Point(3, 12);
+            this.panelControl1.Location = new System.Drawing.Point(4, 12);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1370, 116);
+            this.panelControl1.Size = new System.Drawing.Size(1370, 123);
             this.panelControl1.TabIndex = 3;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(1157, 72);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(37, 13);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "Сезон";
             // 
             // cbIsChip
             // 
             this.cbIsChip.AutoSize = true;
             this.cbIsChip.Enabled = false;
-            this.cbIsChip.Location = new System.Drawing.Point(882, 82);
+            this.cbIsChip.Location = new System.Drawing.Point(1196, 97);
             this.cbIsChip.Name = "cbIsChip";
             this.cbIsChip.Size = new System.Drawing.Size(45, 17);
             this.cbIsChip.TabIndex = 30;
@@ -278,57 +339,132 @@
             this.cbIsChip.UseVisualStyleBackColor = true;
             this.cbIsChip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // psaSezName
+            // 
+            this.psaSezName.Location = new System.Drawing.Point(1194, 72);
+            this.psaSezName.Name = "psaSezName";
+            this.psaSezName.Size = new System.Drawing.Size(47, 21);
+            this.psaSezName.TabIndex = 19;
+            // 
             // tbRzuKol
             // 
-            this.tbRzuKol.Location = new System.Drawing.Point(418, 30);
+            this.tbRzuKol.Location = new System.Drawing.Point(259, 26);
             this.tbRzuKol.Name = "tbRzuKol";
-            this.tbRzuKol.Size = new System.Drawing.Size(132, 21);
+            this.tbRzuKol.Size = new System.Drawing.Size(52, 21);
             this.tbRzuKol.TabIndex = 29;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(1157, 53);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(26, 13);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "Год";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(738, 96);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(52, 13);
+            this.label22.TabIndex = 30;
+            this.label22.Text = "Код цв.2";
+            // 
+            // tbPsaYear
+            // 
+            this.tbPsaYear.Location = new System.Drawing.Point(1194, 49);
+            this.tbPsaYear.Name = "tbPsaYear";
+            this.tbPsaYear.Size = new System.Drawing.Size(47, 21);
+            this.tbPsaYear.TabIndex = 17;
             // 
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(289, 82);
+            this.label53.Location = new System.Drawing.Point(8, 53);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(83, 13);
+            this.label53.Size = new System.Drawing.Size(65, 13);
             this.label53.TabIndex = 27;
-            this.label53.Text = "Номер задания";
+            this.label53.Text = "№ задания";
             this.label53.Click += new System.EventHandler(this.label53_Click);
+            // 
+            // tbPsaKodZv2
+            // 
+            this.tbPsaKodZv2.Location = new System.Drawing.Point(790, 96);
+            this.tbPsaKodZv2.Name = "tbPsaKodZv2";
+            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 21);
+            this.tbPsaKodZv2.TabIndex = 29;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(578, 95);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(52, 13);
+            this.label23.TabIndex = 27;
+            this.label23.Text = "Код цв.1";
             // 
             // tbPsaNomZad
             // 
-            this.tbPsaNomZad.Location = new System.Drawing.Point(418, 78);
+            this.tbPsaNomZad.Location = new System.Drawing.Point(75, 49);
             this.tbPsaNomZad.Name = "tbPsaNomZad";
-            this.tbPsaNomZad.Size = new System.Drawing.Size(132, 21);
+            this.tbPsaNomZad.Size = new System.Drawing.Size(73, 21);
             this.tbPsaNomZad.TabIndex = 26;
             // 
-            // progressPanel1
+            // tbPsaKodZv1
             // 
-            this.progressPanel1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanel1.Appearance.Options.UseBackColor = true;
-            this.progressPanel1.Caption = "Пожалуйста, подождите";
-            this.progressPanel1.Description = "Загрузка данных";
-            this.progressPanel1.Location = new System.Drawing.Point(576, 81);
-            this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(254, 30);
-            this.progressPanel1.TabIndex = 25;
-            this.progressPanel1.Text = "progressPanel1";
-            this.progressPanel1.Visible = false;
-            this.progressPanel1.Click += new System.EventHandler(this.progressPanel1_Click);
+            this.tbPsaKodZv1.Location = new System.Drawing.Point(636, 95);
+            this.tbPsaKodZv1.Name = "tbPsaKodZv1";
+            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
+            this.tbPsaKodZv1.TabIndex = 26;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(868, 46);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(66, 26);
+            this.label20.TabIndex = 12;
+            this.label20.Text = "Категория\r\n(менеджер)";
+            // 
+            // tbPsaMenName
+            // 
+            this.tbPsaMenName.Location = new System.Drawing.Point(946, 49);
+            this.tbPsaMenName.Multiline = true;
+            this.tbPsaMenName.Name = "tbPsaMenName";
+            this.tbPsaMenName.Size = new System.Drawing.Size(174, 21);
+            this.tbPsaMenName.TabIndex = 11;
             // 
             // pbEskiz
             // 
-            this.pbEskiz.Location = new System.Drawing.Point(1104, 1);
+            this.pbEskiz.Location = new System.Drawing.Point(1247, 5);
             this.pbEskiz.Name = "pbEskiz";
-            this.pbEskiz.Size = new System.Drawing.Size(117, 114);
+            this.pbEskiz.Size = new System.Drawing.Size(118, 112);
             this.pbEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbEskiz.TabIndex = 25;
             this.pbEskiz.TabStop = false;
             // 
+            // tbSostPoln
+            // 
+            this.tbSostPoln.Location = new System.Drawing.Point(660, 49);
+            this.tbSostPoln.Multiline = true;
+            this.tbSostPoln.Name = "tbSostPoln";
+            this.tbSostPoln.Size = new System.Drawing.Size(195, 45);
+            this.tbSostPoln.TabIndex = 25;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(578, 53);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(62, 26);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Состав\r\n(из справ.)";
+            // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(879, 58);
+            this.label11.Location = new System.Drawing.Point(868, 72);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 13);
             this.label11.TabIndex = 24;
@@ -336,65 +472,97 @@
             // 
             // tbPsaNameSbit
             // 
-            this.tbPsaNameSbit.Location = new System.Drawing.Point(957, 54);
+            this.tbPsaNameSbit.Location = new System.Drawing.Point(946, 72);
             this.tbPsaNameSbit.Name = "tbPsaNameSbit";
-            this.tbPsaNameSbit.Size = new System.Drawing.Size(124, 21);
+            this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 21);
             this.tbPsaNameSbit.TabIndex = 23;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(578, 23);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(80, 26);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Наименование\r\n(из справ.)";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(879, 34);
+            this.label12.Location = new System.Drawing.Point(158, 53);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 13);
             this.label12.TabIndex = 22;
             this.label12.Text = "Бригада №";
             // 
+            // tbArtGrup
+            // 
+            this.tbArtGrup.Location = new System.Drawing.Point(660, 26);
+            this.tbArtGrup.Name = "tbArtGrup";
+            this.tbArtGrup.Size = new System.Drawing.Size(195, 21);
+            this.tbArtGrup.TabIndex = 21;
+            // 
             // tbRzuDostZeh
             // 
-            this.tbRzuDostZeh.Location = new System.Drawing.Point(957, 30);
+            this.tbRzuDostZeh.Location = new System.Drawing.Point(228, 49);
             this.tbRzuDostZeh.Name = "tbRzuDostZeh";
-            this.tbRzuDostZeh.Size = new System.Drawing.Size(124, 21);
+            this.tbRzuDostZeh.Size = new System.Drawing.Size(83, 21);
             this.tbRzuDostZeh.TabIndex = 21;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(608, 58);
+            this.label10.Location = new System.Drawing.Point(324, 53);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 20;
-            this.label10.Text = "№ модель";
+            this.label10.Text = "Модель (торг.)";
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // tbRzuMod
             // 
-            this.tbRzuMod.Location = new System.Drawing.Point(672, 54);
+            this.tbRzuMod.Location = new System.Drawing.Point(426, 49);
             this.tbRzuMod.Name = "tbRzuMod";
-            this.tbRzuMod.Size = new System.Drawing.Size(158, 21);
+            this.tbRzuMod.Size = new System.Drawing.Size(137, 21);
             this.tbRzuMod.TabIndex = 19;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(868, 30);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(31, 13);
+            this.label19.TabIndex = 14;
+            this.label19.Text = "Блок";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(608, 34);
+            this.label9.Location = new System.Drawing.Point(324, 30);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.Size = new System.Drawing.Size(79, 13);
             this.label9.TabIndex = 18;
-            this.label9.Text = "Артикул";
+            this.label9.Text = "Артикул (шв.)";
+            // 
+            // tbPsaTbID
+            // 
+            this.tbPsaTbID.Location = new System.Drawing.Point(946, 26);
+            this.tbPsaTbID.Name = "tbPsaTbID";
+            this.tbPsaTbID.Size = new System.Drawing.Size(136, 21);
+            this.tbPsaTbID.TabIndex = 13;
             // 
             // tbRzuArticul
             // 
-            this.tbRzuArticul.Location = new System.Drawing.Point(672, 30);
+            this.tbRzuArticul.Location = new System.Drawing.Point(426, 26);
             this.tbRzuArticul.Name = "tbRzuArticul";
-            this.tbRzuArticul.Size = new System.Drawing.Size(158, 21);
+            this.tbRzuArticul.Size = new System.Drawing.Size(137, 21);
             this.tbRzuArticul.TabIndex = 17;
             this.tbRzuArticul.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(289, 58);
+            this.label8.Location = new System.Drawing.Point(324, 72);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(96, 13);
             this.label8.TabIndex = 16;
@@ -402,24 +570,25 @@
             // 
             // tbPsaPrn
             // 
-            this.tbPsaPrn.Location = new System.Drawing.Point(418, 54);
+            this.tbPsaPrn.Location = new System.Drawing.Point(426, 72);
+            this.tbPsaPrn.Multiline = true;
             this.tbPsaPrn.Name = "tbPsaPrn";
-            this.tbPsaPrn.Size = new System.Drawing.Size(132, 21);
+            this.tbPsaPrn.Size = new System.Drawing.Size(137, 33);
             this.tbPsaPrn.TabIndex = 15;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(289, 34);
+            this.label7.Location = new System.Drawing.Point(158, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 13);
+            this.label7.Size = new System.Drawing.Size(95, 13);
             this.label7.TabIndex = 14;
-            this.label7.Text = "Количество в расчете";
+            this.label7.Text = "Кол-во в расчете";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 58);
+            this.label6.Location = new System.Drawing.Point(8, 72);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(106, 13);
             this.label6.TabIndex = 12;
@@ -427,15 +596,15 @@
             // 
             // tbRzuPach
             // 
-            this.tbRzuPach.Location = new System.Drawing.Point(118, 54);
+            this.tbRzuPach.Location = new System.Drawing.Point(118, 72);
             this.tbRzuPach.Name = "tbRzuPach";
-            this.tbRzuPach.Size = new System.Drawing.Size(122, 21);
+            this.tbRzuPach.Size = new System.Drawing.Size(193, 21);
             this.tbRzuPach.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 34);
+            this.label5.Location = new System.Drawing.Point(8, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 10;
@@ -444,9 +613,9 @@
             // 
             // tbRzuNom
             // 
-            this.tbRzuNom.Location = new System.Drawing.Point(118, 30);
+            this.tbRzuNom.Location = new System.Drawing.Point(75, 26);
             this.tbRzuNom.Name = "tbRzuNom";
-            this.tbRzuNom.Size = new System.Drawing.Size(122, 21);
+            this.tbRzuNom.Size = new System.Drawing.Size(73, 21);
             this.tbRzuNom.TabIndex = 9;
             // 
             // label4
@@ -461,7 +630,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(8, 82);
+            this.label21.Location = new System.Drawing.Point(1091, 30);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(74, 13);
             this.label21.TabIndex = 10;
@@ -469,9 +638,9 @@
             // 
             // tbPsaNN
             // 
-            this.tbPsaNN.Location = new System.Drawing.Point(118, 78);
+            this.tbPsaNN.Location = new System.Drawing.Point(1171, 26);
             this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(122, 21);
+            this.tbPsaNN.Size = new System.Drawing.Size(70, 21);
             this.tbPsaNN.TabIndex = 9;
             // 
             // tbYearPach
@@ -530,13 +699,15 @@
             this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabPage3.Appearance.HeaderActive.Options.UseFont = true;
             this.xtraTabPage3.Name = "xtraTabPage3";
-            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 618);
+            this.xtraTabPage3.Size = new System.Drawing.Size(1368, 549);
             this.xtraTabPage3.Text = "ВЫПОЛНЕННАЯ РАБОТА";
             // 
             // xtraTabPage2
             // 
+            this.xtraTabPage2.Controls.Add(this.panelControl7);
+            this.xtraTabPage2.Controls.Add(this.panelControl2);
             this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 618);
+            this.xtraTabPage2.Size = new System.Drawing.Size(1368, 543);
             this.xtraTabPage2.Text = "КОНФЕКЦИОН";
             // 
             // xtraTabPage1
@@ -551,9 +722,8 @@
             this.xtraTabPage1.Controls.Add(this.panelControl5);
             this.xtraTabPage1.Controls.Add(this.panelControl4);
             this.xtraTabPage1.Controls.Add(this.panelControl3);
-            this.xtraTabPage1.Controls.Add(this.panelControl2);
             this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1368, 618);
+            this.xtraTabPage1.Size = new System.Drawing.Size(1368, 543);
             this.xtraTabPage1.Text = "ИНФОРМАЦИЯ ПО РАСЧЕТУ";
             // 
             // panelControl6
@@ -562,7 +732,7 @@
             this.panelControl6.Controls.Add(this.button5);
             this.panelControl6.Controls.Add(this.button6);
             this.panelControl6.Controls.Add(this.label52);
-            this.panelControl6.Location = new System.Drawing.Point(4, 556);
+            this.panelControl6.Location = new System.Drawing.Point(4, 484);
             this.panelControl6.Name = "panelControl6";
             this.panelControl6.Size = new System.Drawing.Size(1358, 55);
             this.panelControl6.TabIndex = 31;
@@ -609,6 +779,12 @@
             // 
             // panelControl5
             // 
+            this.panelControl5.Controls.Add(this.cbRzuStirFact);
+            this.panelControl5.Controls.Add(this.cbPszStirPlan);
+            this.panelControl5.Controls.Add(this.cbRzuVishFact);
+            this.panelControl5.Controls.Add(this.cbPszVishPlan);
+            this.panelControl5.Controls.Add(this.cbRzuPrintFact);
+            this.panelControl5.Controls.Add(this.cbPszPrintPlan);
             this.panelControl5.Controls.Add(this.mtbRzuDataPrCd);
             this.panelControl5.Controls.Add(this.mtbRzuDataVCd);
             this.panelControl5.Controls.Add(this.mtbRzuDataPrKm);
@@ -644,7 +820,7 @@
             this.panelControl5.Controls.Add(this.label32);
             this.panelControl5.Controls.Add(this.gridControl2);
             this.panelControl5.Controls.Add(this.label31);
-            this.panelControl5.Location = new System.Drawing.Point(4, 355);
+            this.panelControl5.Location = new System.Drawing.Point(4, 283);
             this.panelControl5.Name = "panelControl5";
             this.panelControl5.Size = new System.Drawing.Size(1358, 195);
             this.panelControl5.TabIndex = 30;
@@ -940,7 +1116,7 @@
             this.gridControl2.Location = new System.Drawing.Point(988, 2);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(364, 137);
+            this.gridControl2.Size = new System.Drawing.Size(364, 188);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -1008,26 +1184,215 @@
             // 
             // panelControl4
             // 
+            this.panelControl4.Controls.Add(this.gcNaklList);
             this.panelControl4.Controls.Add(this.gcPartNaklList);
             this.panelControl4.Controls.Add(this.button1);
             this.panelControl4.Controls.Add(this.btnPrintNaklXtraReport);
             this.panelControl4.Controls.Add(this.btnNaklAbsent);
             this.panelControl4.Controls.Add(this.btnNaklPart);
             this.panelControl4.Controls.Add(this.btnNaklPrint);
-            this.panelControl4.Controls.Add(this.gcNaklList);
             this.panelControl4.Controls.Add(this.label24);
-            this.panelControl4.Location = new System.Drawing.Point(4, 144);
+            this.panelControl4.Location = new System.Drawing.Point(4, 72);
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(1358, 205);
             this.panelControl4.TabIndex = 28;
             // 
+            // gcNaklList
+            // 
+            this.gcNaklList.DataSource = this.bsNaklList;
+            this.gcNaklList.Location = new System.Drawing.Point(8, 25);
+            this.gcNaklList.MainView = this.gridView1;
+            this.gcNaklList.Name = "gcNaklList";
+            this.gcNaklList.Size = new System.Drawing.Size(1344, 146);
+            this.gcNaklList.TabIndex = 5;
+            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn10,
+            this.gridColumn11,
+            this.gridColumn12,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16,
+            this.gridColumn17});
+            this.gridView1.GridControl = this.gcNaklList;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Кол-во ДО";
+            this.gridColumn1.FieldName = "kol_b";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 9;
+            this.gridColumn1.Width = 160;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Причина деления";
+            this.gridColumn2.FieldName = "prich";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 8;
+            this.gridColumn2.Width = 135;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Склад отгрузки";
+            this.gridColumn3.FieldName = "skl_naimen";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 7;
+            this.gridColumn3.Width = 180;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn4.Caption = "№ накл. Глобал";
+            this.gridColumn4.FieldName = "gl_nomer";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 6;
+            this.gridColumn4.Width = 88;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn5.Caption = "Дата печати";
+            this.gridColumn5.FieldName = "date_print";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 5;
+            this.gridColumn5.Width = 88;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "№ отгр.";
+            this.gridColumn6.FieldName = "dost_n";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 4;
+            this.gridColumn6.Width = 69;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn7.Caption = "Доставка на склад";
+            this.gridColumn7.FieldName = "dost_data";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 3;
+            this.gridColumn7.Width = 88;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn8.Caption = "Дата деления";
+            this.gridColumn8.FieldName = "data_izm";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 2;
+            this.gridColumn8.Width = 88;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "Дата накл.";
+            this.gridColumn9.FieldName = "iz_data";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 1;
+            this.gridColumn9.Width = 88;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "№ накл.";
+            this.gridColumn10.FieldName = "iz_nakl";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 0;
+            this.gridColumn10.Width = 70;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
+            this.gridColumn11.FieldName = "kol_c";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 10;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.Caption = "Отгр. ЧИП";
+            this.gridColumn12.FieldName = "ChipOtgr";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 16;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "Скан. ЧИП";
+            this.gridColumn13.FieldName = "ChipScan";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 15;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "Печ. ЧИП";
+            this.gridColumn14.FieldName = "ChipPech";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 14;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "ЧИП в УТ";
+            this.gridColumn15.FieldName = "ChipInUT";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 13;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Модель";
+            this.gridColumn16.FieldName = "mod";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 12;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "Артикул";
+            this.gridColumn17.FieldName = "articul";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 11;
+            // 
             // gcPartNaklList
             // 
             this.gcPartNaklList.DataSource = this.bsPartNaklList;
-            this.gcPartNaklList.Location = new System.Drawing.Point(37, 43);
+            this.gcPartNaklList.Location = new System.Drawing.Point(442, 2);
             this.gcPartNaklList.MainView = this.gridView3;
             this.gcPartNaklList.Name = "gcPartNaklList";
-            this.gcPartNaklList.Size = new System.Drawing.Size(1160, 137);
+            this.gcPartNaklList.Size = new System.Drawing.Size(1160, 77);
             this.gcPartNaklList.TabIndex = 11;
             this.gcPartNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -1283,195 +1648,6 @@
             this.btnNaklPrint.UseVisualStyleBackColor = true;
             this.btnNaklPrint.Click += new System.EventHandler(this.btnNaklPrint_Click);
             // 
-            // gcNaklList
-            // 
-            this.gcNaklList.DataSource = this.bsNaklList;
-            this.gcNaklList.Location = new System.Drawing.Point(8, 25);
-            this.gcNaklList.MainView = this.gridView1;
-            this.gcNaklList.Name = "gcNaklList";
-            this.gcNaklList.Size = new System.Drawing.Size(1344, 146);
-            this.gcNaklList.TabIndex = 5;
-            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn12,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.gridColumn15,
-            this.gridColumn16,
-            this.gridColumn17});
-            this.gridView1.GridControl = this.gcNaklList;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Кол-во ДО";
-            this.gridColumn1.FieldName = "kol_b";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 9;
-            this.gridColumn1.Width = 160;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Причина деления";
-            this.gridColumn2.FieldName = "prich";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
-            this.gridColumn2.Width = 135;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Склад отгрузки";
-            this.gridColumn3.FieldName = "skl_naimen";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 7;
-            this.gridColumn3.Width = 180;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn4.Caption = "№ накл. Глобал";
-            this.gridColumn4.FieldName = "gl_nomer";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
-            this.gridColumn4.Width = 88;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn5.Caption = "Дата печати";
-            this.gridColumn5.FieldName = "date_print";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            this.gridColumn5.Width = 88;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "№ отгр.";
-            this.gridColumn6.FieldName = "dost_n";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 4;
-            this.gridColumn6.Width = 69;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn7.Caption = "Доставка на склад";
-            this.gridColumn7.FieldName = "dost_data";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 3;
-            this.gridColumn7.Width = 88;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn8.Caption = "Дата деления";
-            this.gridColumn8.FieldName = "data_izm";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 2;
-            this.gridColumn8.Width = 88;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "Дата накл.";
-            this.gridColumn9.FieldName = "iz_data";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            this.gridColumn9.Width = 88;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "№ накл.";
-            this.gridColumn10.FieldName = "iz_nakl";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 0;
-            this.gridColumn10.Width = 70;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
-            this.gridColumn11.FieldName = "kol_c";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "Отгр. ЧИП";
-            this.gridColumn12.FieldName = "ChipOtgr";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 16;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "Скан. ЧИП";
-            this.gridColumn13.FieldName = "ChipScan";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 15;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "Печ. ЧИП";
-            this.gridColumn14.FieldName = "ChipPech";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 14;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "ЧИП в УТ";
-            this.gridColumn15.FieldName = "ChipInUT";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 13;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Модель";
-            this.gridColumn16.FieldName = "mod";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 12;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Артикул";
-            this.gridColumn17.FieldName = "articul";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 11;
-            // 
             // label24
             // 
             this.label24.AutoSize = true;
@@ -1499,129 +1675,142 @@
             this.panelControl3.Controls.Add(this.label28);
             this.panelControl3.Controls.Add(this.label29);
             this.panelControl3.Controls.Add(this.label30);
-            this.panelControl3.Location = new System.Drawing.Point(995, 9);
+            this.panelControl3.Location = new System.Drawing.Point(4, 9);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(367, 128);
+            this.panelControl3.Size = new System.Drawing.Size(1358, 57);
             this.panelControl3.TabIndex = 27;
             // 
             // mtbRzuDataCd
             // 
-            this.mtbRzuDataCd.Location = new System.Drawing.Point(295, 99);
+            this.mtbRzuDataCd.Location = new System.Drawing.Point(1286, 28);
             this.mtbRzuDataCd.Mask = "00/00/0000";
             this.mtbRzuDataCd.Name = "mtbRzuDataCd";
             this.mtbRzuDataCd.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataCd.TabIndex = 37;
+            this.mtbRzuDataCd.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataCd_MaskInputRejected);
             // 
             // mtbRzuDataUp
             // 
-            this.mtbRzuDataUp.Location = new System.Drawing.Point(295, 75);
+            this.mtbRzuDataUp.Location = new System.Drawing.Point(1063, 28);
             this.mtbRzuDataUp.Mask = "00/00/0000";
             this.mtbRzuDataUp.Name = "mtbRzuDataUp";
             this.mtbRzuDataUp.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataUp.TabIndex = 36;
+            this.mtbRzuDataUp.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataUp_MaskInputRejected);
             // 
             // mtbRzuDataRab
             // 
-            this.mtbRzuDataRab.Location = new System.Drawing.Point(295, 51);
+            this.mtbRzuDataRab.Location = new System.Drawing.Point(869, 28);
             this.mtbRzuDataRab.Mask = "00/00/0000";
             this.mtbRzuDataRab.Name = "mtbRzuDataRab";
             this.mtbRzuDataRab.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataRab.TabIndex = 35;
+            this.mtbRzuDataRab.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataRab_MaskInputRejected);
             // 
             // mtbRzuDataZeh
             // 
-            this.mtbRzuDataZeh.Location = new System.Drawing.Point(295, 27);
+            this.mtbRzuDataZeh.Location = new System.Drawing.Point(694, 28);
             this.mtbRzuDataZeh.Mask = "00/00/0000";
             this.mtbRzuDataZeh.Name = "mtbRzuDataZeh";
             this.mtbRzuDataZeh.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataZeh.TabIndex = 34;
+            this.mtbRzuDataZeh.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataZeh_MaskInputRejected);
             // 
             // mtbRzuDataCdUt
             // 
-            this.mtbRzuDataCdUt.Location = new System.Drawing.Point(108, 75);
+            this.mtbRzuDataCdUt.Location = new System.Drawing.Point(536, 28);
             this.mtbRzuDataCdUt.Mask = "00/00/0000";
             this.mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
             this.mtbRzuDataCdUt.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataCdUt.TabIndex = 33;
+            this.mtbRzuDataCdUt.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataCdUt_MaskInputRejected);
             // 
             // mtbPsaDataCdPlan
             // 
-            this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(108, 51);
+            this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(285, 28);
             this.mtbPsaDataCdPlan.Mask = "00/00/0000";
             this.mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
             this.mtbPsaDataCdPlan.Size = new System.Drawing.Size(66, 21);
             this.mtbPsaDataCdPlan.TabIndex = 32;
+            this.mtbPsaDataCdPlan.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbPsaDataCdPlan_MaskInputRejected);
             // 
             // mtbPsaDataZap
             // 
-            this.mtbPsaDataZap.Location = new System.Drawing.Point(108, 27);
+            this.mtbPsaDataZap.Location = new System.Drawing.Point(95, 28);
             this.mtbPsaDataZap.Mask = "00/00/0000";
             this.mtbPsaDataZap.Name = "mtbPsaDataZap";
             this.mtbPsaDataZap.Size = new System.Drawing.Size(66, 21);
             this.mtbPsaDataZap.TabIndex = 31;
+            this.mtbPsaDataZap.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbPsaDataZap_MaskInputRejected);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(195, 99);
+            this.label14.Location = new System.Drawing.Point(1144, 32);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 26);
+            this.label14.Size = new System.Drawing.Size(136, 13);
             this.label14.TabIndex = 30;
-            this.label14.Text = "Дата СДАНО\r\n(осн. накл.)";
+            this.label14.Text = "Дата СДАНО (осн. накл.)";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(195, 78);
+            this.label33.Location = new System.Drawing.Point(958, 32);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(99, 13);
             this.label33.TabIndex = 28;
             this.label33.Text = "Дата на упаковку";
+            this.label33.Click += new System.EventHandler(this.label33_Click);
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(8, 72);
+            this.label34.Location = new System.Drawing.Point(369, 32);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(100, 26);
+            this.label34.Size = new System.Drawing.Size(161, 13);
             this.label34.TabIndex = 26;
-            this.label34.Text = "План. дата сдачи \r\nУточненная";
+            this.label34.Text = "План. дата сдачи Уточненная";
+            this.label34.Click += new System.EventHandler(this.label34_Click);
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(195, 56);
+            this.label26.Location = new System.Drawing.Point(782, 32);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(81, 13);
             this.label26.TabIndex = 16;
             this.label26.Text = "Дата в работу";
+            this.label26.Click += new System.EventHandler(this.label26_Click);
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(195, 27);
+            this.label27.Location = new System.Drawing.Point(625, 32);
             this.label27.Name = "label27";
             this.label27.Size = new System.Drawing.Size(63, 13);
             this.label27.TabIndex = 14;
             this.label27.Text = "Дата в цех";
+            this.label27.Click += new System.EventHandler(this.label27_Click);
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(8, 51);
+            this.label28.Location = new System.Drawing.Point(185, 32);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(97, 13);
             this.label28.TabIndex = 12;
             this.label28.Text = "План. дата сдачи";
+            this.label28.Click += new System.EventHandler(this.label28_Click);
             // 
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(8, 27);
+            this.label29.Location = new System.Drawing.Point(8, 32);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(81, 13);
             this.label29.TabIndex = 10;
             this.label29.Text = "Месяц запуска";
+            this.label29.Click += new System.EventHandler(this.label29_Click);
             // 
             // label30
             // 
@@ -1633,203 +1822,6 @@
             this.label30.TabIndex = 3;
             this.label30.Text = "КОНТРОЛЬНЫЕ ДАТЫ:";
             // 
-            // panelControl2
-            // 
-            this.panelControl2.Controls.Add(this.tbSostPodklad);
-            this.panelControl2.Controls.Add(this.tbSostOtdelka);
-            this.panelControl2.Controls.Add(this.label22);
-            this.panelControl2.Controls.Add(this.tbPsaKodZv2);
-            this.panelControl2.Controls.Add(this.label23);
-            this.panelControl2.Controls.Add(this.tbPsaKodZv1);
-            this.panelControl2.Controls.Add(this.tbSost);
-            this.panelControl2.Controls.Add(this.label13);
-            this.panelControl2.Controls.Add(this.label15);
-            this.panelControl2.Controls.Add(this.tbArtGrup);
-            this.panelControl2.Controls.Add(this.label16);
-            this.panelControl2.Controls.Add(this.psaSezName);
-            this.panelControl2.Controls.Add(this.label17);
-            this.panelControl2.Controls.Add(this.tbPsaYear);
-            this.panelControl2.Controls.Add(this.label18);
-            this.panelControl2.Controls.Add(this.tbPsaNameSbit1);
-            this.panelControl2.Controls.Add(this.label19);
-            this.panelControl2.Controls.Add(this.tbPsaTbID);
-            this.panelControl2.Controls.Add(this.label20);
-            this.panelControl2.Controls.Add(this.tbPsaMenName);
-            this.panelControl2.Controls.Add(this.label25);
-            this.panelControl2.Location = new System.Drawing.Point(4, 9);
-            this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(985, 128);
-            this.panelControl2.TabIndex = 6;
-            // 
-            // tbSostPodklad
-            // 
-            this.tbSostPodklad.Location = new System.Drawing.Point(690, 102);
-            this.tbSostPodklad.Name = "tbSostPodklad";
-            this.tbSostPodklad.Size = new System.Drawing.Size(290, 21);
-            this.tbSostPodklad.TabIndex = 32;
-            // 
-            // tbSostOtdelka
-            // 
-            this.tbSostOtdelka.Location = new System.Drawing.Point(690, 75);
-            this.tbSostOtdelka.Name = "tbSostOtdelka";
-            this.tbSostOtdelka.Size = new System.Drawing.Size(290, 21);
-            this.tbSostOtdelka.TabIndex = 31;
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(460, 102);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(52, 13);
-            this.label22.TabIndex = 30;
-            this.label22.Text = "Код цв.2";
-            // 
-            // tbPsaKodZv2
-            // 
-            this.tbPsaKodZv2.Location = new System.Drawing.Point(512, 102);
-            this.tbPsaKodZv2.Name = "tbPsaKodZv2";
-            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 21);
-            this.tbPsaKodZv2.TabIndex = 29;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(322, 102);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(52, 13);
-            this.label23.TabIndex = 27;
-            this.label23.Text = "Код цв.1";
-            // 
-            // tbPsaKodZv1
-            // 
-            this.tbPsaKodZv1.Location = new System.Drawing.Point(380, 102);
-            this.tbPsaKodZv1.Name = "tbPsaKodZv1";
-            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
-            this.tbPsaKodZv1.TabIndex = 26;
-            // 
-            // tbSost
-            // 
-            this.tbSost.Location = new System.Drawing.Point(690, 48);
-            this.tbSost.Name = "tbSost";
-            this.tbSost.Size = new System.Drawing.Size(290, 21);
-            this.tbSost.TabIndex = 25;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(592, 59);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(94, 26);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Состав\r\n(из справочника)";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(592, 20);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 26);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "Наименование\r\nпо ГОСТ";
-            // 
-            // tbArtGrup
-            // 
-            this.tbArtGrup.Location = new System.Drawing.Point(690, 22);
-            this.tbArtGrup.Name = "tbArtGrup";
-            this.tbArtGrup.Size = new System.Drawing.Size(290, 21);
-            this.tbArtGrup.TabIndex = 21;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(454, 59);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 13);
-            this.label16.TabIndex = 20;
-            this.label16.Text = "Сезон";
-            // 
-            // psaSezName
-            // 
-            this.psaSezName.Location = new System.Drawing.Point(494, 59);
-            this.psaSezName.Name = "psaSezName";
-            this.psaSezName.Size = new System.Drawing.Size(83, 21);
-            this.psaSezName.TabIndex = 19;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(454, 25);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(26, 13);
-            this.label17.TabIndex = 18;
-            this.label17.Text = "Год";
-            // 
-            // tbPsaYear
-            // 
-            this.tbPsaYear.Location = new System.Drawing.Point(494, 22);
-            this.tbPsaYear.Name = "tbPsaYear";
-            this.tbPsaYear.Size = new System.Drawing.Size(83, 21);
-            this.tbPsaYear.TabIndex = 17;
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(268, 57);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(38, 26);
-            this.label18.TabIndex = 16;
-            this.label18.Text = "Канал\r\nсбыта";
-            // 
-            // tbPsaNameSbit1
-            // 
-            this.tbPsaNameSbit1.Location = new System.Drawing.Point(308, 59);
-            this.tbPsaNameSbit1.Name = "tbPsaNameSbit1";
-            this.tbPsaNameSbit1.Size = new System.Drawing.Size(132, 21);
-            this.tbPsaNameSbit1.TabIndex = 15;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(268, 25);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(31, 13);
-            this.label19.TabIndex = 14;
-            this.label19.Text = "Блок";
-            // 
-            // tbPsaTbID
-            // 
-            this.tbPsaTbID.Location = new System.Drawing.Point(308, 22);
-            this.tbPsaTbID.Name = "tbPsaTbID";
-            this.tbPsaTbID.Size = new System.Drawing.Size(132, 21);
-            this.tbPsaTbID.TabIndex = 13;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(4, 24);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(66, 26);
-            this.label20.TabIndex = 12;
-            this.label20.Text = "Категория\r\n(менеджер)";
-            // 
-            // tbPsaMenName
-            // 
-            this.tbPsaMenName.Location = new System.Drawing.Point(70, 27);
-            this.tbPsaMenName.Multiline = true;
-            this.tbPsaMenName.Name = "tbPsaMenName";
-            this.tbPsaMenName.Size = new System.Drawing.Size(186, 21);
-            this.tbPsaMenName.TabIndex = 11;
-            // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label25.Location = new System.Drawing.Point(5, 2);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(180, 19);
-            this.label25.TabIndex = 3;
-            this.label25.Text = "ДАННЫЕ МАТРИЦЫ:";
-            // 
             // xtraTabControl1
             // 
             this.xtraTabControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
@@ -1838,10 +1830,10 @@
             this.xtraTabControl1.AppearancePage.Header.Options.UseFont = true;
             this.xtraTabControl1.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
-            this.xtraTabControl1.Location = new System.Drawing.Point(3, 134);
+            this.xtraTabControl1.Location = new System.Drawing.Point(3, 141);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
-            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 646);
+            this.xtraTabControl1.Size = new System.Drawing.Size(1370, 571);
             this.xtraTabControl1.TabIndex = 3;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
@@ -1858,11 +1850,387 @@
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
             // 
+            // cbPszPrintPlan
+            // 
+            this.cbPszPrintPlan.AutoSize = true;
+            this.cbPszPrintPlan.Location = new System.Drawing.Point(91, 30);
+            this.cbPszPrintPlan.Name = "cbPszPrintPlan";
+            this.cbPszPrintPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszPrintPlan.TabIndex = 67;
+            this.cbPszPrintPlan.Text = "План";
+            this.cbPszPrintPlan.UseVisualStyleBackColor = true;
+            this.cbPszPrintPlan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
+            // 
+            // cbRzuPrintFact
+            // 
+            this.cbRzuPrintFact.AutoSize = true;
+            this.cbRzuPrintFact.Location = new System.Drawing.Point(155, 30);
+            this.cbRzuPrintFact.Name = "cbRzuPrintFact";
+            this.cbRzuPrintFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuPrintFact.TabIndex = 68;
+            this.cbRzuPrintFact.Text = "Факт";
+            this.cbRzuPrintFact.UseVisualStyleBackColor = true;
+            // 
+            // cbRzuVishFact
+            // 
+            this.cbRzuVishFact.AutoSize = true;
+            this.cbRzuVishFact.Location = new System.Drawing.Point(174, 88);
+            this.cbRzuVishFact.Name = "cbRzuVishFact";
+            this.cbRzuVishFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuVishFact.TabIndex = 70;
+            this.cbRzuVishFact.Text = "Факт";
+            this.cbRzuVishFact.UseVisualStyleBackColor = true;
+            // 
+            // cbPszVishPlan
+            // 
+            this.cbPszVishPlan.AutoSize = true;
+            this.cbPszVishPlan.Location = new System.Drawing.Point(110, 88);
+            this.cbPszVishPlan.Name = "cbPszVishPlan";
+            this.cbPszVishPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszVishPlan.TabIndex = 69;
+            this.cbPszVishPlan.Text = "План";
+            this.cbPszVishPlan.UseVisualStyleBackColor = true;
+            // 
+            // cbRzuStirFact
+            // 
+            this.cbRzuStirFact.AutoSize = true;
+            this.cbRzuStirFact.Location = new System.Drawing.Point(170, 142);
+            this.cbRzuStirFact.Name = "cbRzuStirFact";
+            this.cbRzuStirFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuStirFact.TabIndex = 72;
+            this.cbRzuStirFact.Text = "Факт";
+            this.cbRzuStirFact.UseVisualStyleBackColor = true;
+            // 
+            // cbPszStirPlan
+            // 
+            this.cbPszStirPlan.AutoSize = true;
+            this.cbPszStirPlan.Location = new System.Drawing.Point(106, 142);
+            this.cbPszStirPlan.Name = "cbPszStirPlan";
+            this.cbPszStirPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszStirPlan.TabIndex = 71;
+            this.cbPszStirPlan.Text = "План";
+            this.cbPszStirPlan.UseVisualStyleBackColor = true;
+            // 
+            // panelControl2
+            // 
+            this.panelControl2.Controls.Add(this.textBox15);
+            this.panelControl2.Controls.Add(this.textBox16);
+            this.panelControl2.Controls.Add(this.textBox14);
+            this.panelControl2.Controls.Add(this.textBox13);
+            this.panelControl2.Controls.Add(this.label60);
+            this.panelControl2.Controls.Add(this.label59);
+            this.panelControl2.Controls.Add(this.button9);
+            this.panelControl2.Controls.Add(this.textBox8);
+            this.panelControl2.Controls.Add(this.textBox9);
+            this.panelControl2.Controls.Add(this.textBox10);
+            this.panelControl2.Controls.Add(this.label56);
+            this.panelControl2.Controls.Add(this.textBox11);
+            this.panelControl2.Controls.Add(this.label57);
+            this.panelControl2.Controls.Add(this.textBox12);
+            this.panelControl2.Controls.Add(this.label58);
+            this.panelControl2.Controls.Add(this.button8);
+            this.panelControl2.Controls.Add(this.textBox6);
+            this.panelControl2.Controls.Add(this.textBox7);
+            this.panelControl2.Controls.Add(this.textBox5);
+            this.panelControl2.Controls.Add(this.label55);
+            this.panelControl2.Controls.Add(this.textBox4);
+            this.panelControl2.Controls.Add(this.label54);
+            this.panelControl2.Controls.Add(this.textBox3);
+            this.panelControl2.Controls.Add(this.label25);
+            this.panelControl2.Controls.Add(this.button7);
+            this.panelControl2.Controls.Add(this.textBox2);
+            this.panelControl2.Controls.Add(this.textBox1);
+            this.panelControl2.Controls.Add(this.button3);
+            this.panelControl2.Controls.Add(this.button2);
+            this.panelControl2.Controls.Add(this.label18);
+            this.panelControl2.Location = new System.Drawing.Point(8, 12);
+            this.panelControl2.Name = "panelControl2";
+            this.panelControl2.Size = new System.Drawing.Size(253, 446);
+            this.panelControl2.TabIndex = 0;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label18.Location = new System.Drawing.Point(37, 2);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(179, 38);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "УСЛОВИЯ ДЛЯ\r\nСОЗДАНИЯ ЗАЯВОК:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 50);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(194, 34);
+            this.button2.TabIndex = 5;
+            this.button2.Text = "КК на фурнитуру (просмотр/печать)";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(6, 90);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(194, 34);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "КК на упаковку \r\n(просмотр/печать)";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(207, 61);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(37, 21);
+            this.textBox1.TabIndex = 33;
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(206, 99);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(37, 21);
+            this.textBox2.TabIndex = 34;
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(6, 130);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(194, 34);
+            this.button7.TabIndex = 35;
+            this.button7.Text = "КК общая \r\n(просмотр/печать)";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label25.Location = new System.Drawing.Point(5, 176);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(150, 13);
+            this.label25.TabIndex = 36;
+            this.label25.Text = "Заявка на фурнитуру №";
+            // 
+            // textBox3
+            // 
+            this.textBox3.Location = new System.Drawing.Point(163, 176);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(80, 21);
+            this.textBox3.TabIndex = 37;
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(125, 200);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(80, 21);
+            this.textBox4.TabIndex = 39;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(57, 203);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(48, 13);
+            this.label54.TabIndex = 38;
+            this.label54.Text = "создана";
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(125, 224);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(80, 21);
+            this.textBox5.TabIndex = 41;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(57, 227);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(48, 13);
+            this.label55.TabIndex = 40;
+            this.label55.Text = "собрана";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(206, 224);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(37, 21);
+            this.textBox6.TabIndex = 43;
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(206, 200);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(37, 21);
+            this.textBox7.TabIndex = 42;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(8, 247);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(235, 20);
+            this.button8.TabIndex = 44;
+            this.button8.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.button8.UseVisualStyleBackColor = true;
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(8, 361);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(235, 20);
+            this.button9.TabIndex = 53;
+            this.button9.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.button9.UseVisualStyleBackColor = true;
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(206, 338);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(37, 21);
+            this.textBox8.TabIndex = 52;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(206, 314);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(37, 21);
+            this.textBox9.TabIndex = 51;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(125, 338);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(80, 21);
+            this.textBox10.TabIndex = 50;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(57, 341);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(48, 13);
+            this.label56.TabIndex = 49;
+            this.label56.Text = "собрана";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(125, 314);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(80, 21);
+            this.textBox11.TabIndex = 48;
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(57, 317);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(48, 13);
+            this.label57.TabIndex = 47;
+            this.label57.Text = "создана";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(163, 290);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(80, 21);
+            this.textBox12.TabIndex = 46;
+            // 
+            // label58
+            // 
+            this.label58.AutoSize = true;
+            this.label58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label58.Location = new System.Drawing.Point(5, 290);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(142, 13);
+            this.label58.TabIndex = 45;
+            this.label58.Text = "Заявка на упаковку №";
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(8, 388);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(123, 26);
+            this.label59.TabIndex = 54;
+            this.label59.Text = "Дата (в цех / на упак. \r\n/ передачи в ш.ц.)";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(8, 413);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(86, 26);
+            this.label60.TabIndex = 55;
+            this.label60.Text = "Дата отгрузки \r\nс производства";
+            // 
+            // textBox13
+            // 
+            this.textBox13.Location = new System.Drawing.Point(125, 393);
+            this.textBox13.Name = "textBox13";
+            this.textBox13.Size = new System.Drawing.Size(80, 21);
+            this.textBox13.TabIndex = 56;
+            // 
+            // textBox14
+            // 
+            this.textBox14.Location = new System.Drawing.Point(125, 418);
+            this.textBox14.Name = "textBox14";
+            this.textBox14.Size = new System.Drawing.Size(80, 21);
+            this.textBox14.TabIndex = 57;
+            // 
+            // textBox15
+            // 
+            this.textBox15.Location = new System.Drawing.Point(207, 418);
+            this.textBox15.Name = "textBox15";
+            this.textBox15.Size = new System.Drawing.Size(37, 21);
+            this.textBox15.TabIndex = 59;
+            // 
+            // textBox16
+            // 
+            this.textBox16.Location = new System.Drawing.Point(207, 393);
+            this.textBox16.Name = "textBox16";
+            this.textBox16.Size = new System.Drawing.Size(37, 21);
+            this.textBox16.TabIndex = 58;
+            // 
+            // panelControl7
+            // 
+            this.panelControl7.Controls.Add(this.button10);
+            this.panelControl7.Controls.Add(this.textBox17);
+            this.panelControl7.Controls.Add(this.label61);
+            this.panelControl7.Location = new System.Drawing.Point(8, 464);
+            this.panelControl7.Name = "panelControl7";
+            this.panelControl7.Size = new System.Drawing.Size(253, 75);
+            this.panelControl7.TabIndex = 1;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(2, 6);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(168, 39);
+            this.label61.TabIndex = 0;
+            this.label61.Text = "Предположительная дата \r\nсоздания заявки \r\n(при выполнении всех условий)";
+            this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // textBox17
+            // 
+            this.textBox17.Location = new System.Drawing.Point(168, 20);
+            this.textBox17.Name = "textBox17";
+            this.textBox17.Size = new System.Drawing.Size(80, 21);
+            this.textBox17.TabIndex = 60;
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(8, 50);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(235, 20);
+            this.button10.TabIndex = 60;
+            this.button10.Text = "Информация по доставке";
+            this.button10.UseVisualStyleBackColor = true;
+            // 
             // CardByNom
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1378, 831);
+            this.ClientSize = new System.Drawing.Size(1378, 719);
             this.Controls.Add(this.xtraTabControl1);
             this.Controls.Add(this.panelControl1);
             this.Name = "CardByNom";
@@ -1875,6 +2243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
+            this.xtraTabPage2.ResumeLayout(false);
             this.xtraTabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             this.panelControl6.ResumeLayout(false);
@@ -1887,20 +2256,23 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
-            this.panelControl2.ResumeLayout(false);
-            this.panelControl2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
+            this.panelControl2.ResumeLayout(false);
+            this.panelControl2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
+            this.panelControl7.ResumeLayout(false);
+            this.panelControl7.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1983,7 +2355,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
         private System.Windows.Forms.Label label31;
         private DevExpress.XtraEditors.PanelControl panelControl4;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanel1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPrintNaklXtraReport;
         private System.Windows.Forms.Button btnNaklAbsent;
@@ -2025,14 +2396,11 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.Label label30;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.TextBox tbSostPodklad;
-        private System.Windows.Forms.TextBox tbSostOtdelka;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.TextBox tbPsaKodZv2;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.TextBox tbPsaKodZv1;
-        private System.Windows.Forms.TextBox tbSost;
+        private System.Windows.Forms.TextBox tbSostPoln;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.TextBox tbArtGrup;
@@ -2040,15 +2408,12 @@
         private System.Windows.Forms.TextBox psaSezName;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox tbPsaYear;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox tbPsaNameSbit1;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox tbPsaTbID;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox tbPsaMenName;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox tbPsaNN;
-        private System.Windows.Forms.Label label25;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.TextBox tbPsaNomZad;
@@ -2078,5 +2443,46 @@
         private System.Windows.Forms.TextBox tbRzuKol;
         private System.Windows.Forms.BindingSource bsIsChip;
         private System.Windows.Forms.CheckBox cbIsChip;
+        private System.Windows.Forms.CheckBox cbPszPrintPlan;
+        private System.Windows.Forms.CheckBox cbRzuVishFact;
+        private System.Windows.Forms.CheckBox cbPszVishPlan;
+        private System.Windows.Forms.CheckBox cbRzuPrintFact;
+        private System.Windows.Forms.CheckBox cbRzuStirFact;
+        private System.Windows.Forms.CheckBox cbPszStirPlan;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox textBox12;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBox13;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label59;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private System.Windows.Forms.TextBox textBox17;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox textBox16;
+        private System.Windows.Forms.Button button10;
     }
 }

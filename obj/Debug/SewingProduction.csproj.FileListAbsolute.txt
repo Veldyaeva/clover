@@ -85,10 +85,6 @@ D:\SharpProj\sewingproduction\bin\Debug\DevExpress.Mvvm.v22.2.dll
 D:\SharpProj\sewingproduction\bin\Debug\DevExpress.Mvvm.v22.2.xml
 D:\SharpProj\sewingproduction\bin\Debug\Microsoft.ReportViewer.WinForms.dll
 D:\SharpProj\sewingproduction\bin\Debug\Microsoft.ReportViewer.Common.dll
-D:\SharpProj\sewingproduction\bin\Debug\SqlServerTypes\x64\msvcr120.dll
-D:\SharpProj\sewingproduction\bin\Debug\SqlServerTypes\x64\SqlServerSpatial140.dll
-D:\SharpProj\sewingproduction\bin\Debug\SqlServerTypes\x86\msvcr120.dll
-D:\SharpProj\sewingproduction\bin\Debug\SqlServerTypes\x86\SqlServerSpatial140.dll
 D:\SharpProj\sewingproduction\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 D:\SharpProj\sewingproduction\bin\Debug\Microsoft.ReportViewer.Design.dll
 D:\SharpProj\sewingproduction\bin\Debug\Microsoft.ReportViewer.ProcessingObjectModel.dll
@@ -145,6 +141,7 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintMlRtReport.resourc
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintPachListReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.PrintGroupNROborudReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.PrintReestrListReport.resources
+<<<<<<< HEAD
 D:\SP\bin\Debug\PrintNakl.rdlc
 D:\SP\bin\Debug\DevExpress.Charts.v22.2.Core.dll
 D:\SP\bin\Debug\DevExpress.CodeParser.v22.2.dll
@@ -323,3 +320,17 @@ D:\SP\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+=======
+D:\SharpProj\sewingproduction\bin\Debug\x86\SqlServerSpatial160.dll
+D:\SharpProj\sewingproduction\bin\Debug\x64\SqlServerSpatial160.dll
+D:\SharpProj\sewingproduction\bin\Debug\de\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\es\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\fr\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\it\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\ja\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\ko\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
+D:\SharpProj\sewingproduction\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+>>>>>>> вкладка конфекцион - условия для создания заявок
