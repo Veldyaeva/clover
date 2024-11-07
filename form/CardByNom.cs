@@ -112,10 +112,15 @@ namespace SewingProduction
             if (e.KeyCode == Keys.Enter)
             {
                 //textBox1_Leave(sender, e);
-                int NomPach = Convert.ToInt32(this.tbNomPach.Text);
-                int YearPach = Convert.ToInt32(this.tbYearPach.Text);
+                //int NomPach = Convert.ToInt32(tbNomPach.Text);
+                //int YearPach = Convert.ToInt32(tbYearPach.Text);
+                // label59.text +  в цех / на упак. / передачи в ш.ц. - доработать с учетом вида производства
+
+
+                string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
                 //string _dateFormat = "dd/MM/yyyy";
-                if (NomPach > 0 && YearPach > 0)
+                //if (NomPach > 0 && YearPach > 0)
+                if (PachKod.Length > 0)
                 {
                     
                     string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -128,7 +133,8 @@ namespace SewingProduction
                         DataTable dtNaklList = new DataTable();
                         //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
                         //query += $" order by n_pach";
-                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        //string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         queryNaklList += $" order by iz";
                         SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
                         adapterNaklList.SelectCommand = commandNaklList;
@@ -139,7 +145,8 @@ namespace SewingProduction
 
                         SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
                         DataTable dtRasInfo = new DataTable();
-                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         //queryRasInfo += $" order by iz";
                         SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
                         adapterRasInfo.SelectCommand = commandRasInfo;
@@ -294,6 +301,9 @@ namespace SewingProduction
                         adapterOtdelkaList.Fill(dtOtdelkaList);
                         bsOtdelkaList.DataSource = dtOtdelkaList;
                         //bsOtdelkaList.Sort = "iz asc";
+
+                        //if (xtraTabControl1.SelectedTab == 1)
+                        //xtraTabControl1_Selecting(sender, e);
                     }
                 }
             }
@@ -649,17 +659,98 @@ namespace SewingProduction
 
         }
 
-        private void button11_Click(object sender, EventArgs e)
-        {
-            //furnitZayavViewFurnit.Text = "2024   37605";
-            //furnitZayavViewFurnit.Refresh();
-        }
-
         private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
         {
-            furnitZayavViewFurnit.Text = "2024   37605";
-            //furnitZayavViewFurnit.Refresh();
-            furnitZayavViewUpak.Text = "2024   40367";
+            //furnitZayavViewFurnit.Text = "2024   37605";
+            ////furnitZayavViewFurnit.Refresh();
+            //furnitZayavViewUpak.Text = "2024   40367";
+            string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
+            string connectionString = Properties.Settings.Default.ACEConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                //Console.WriteLine("Подключение открыто");
+                SqlDataAdapter adapterFurnZayavInfo = new SqlDataAdapter();
+                DataTable dtFurnZayavInfo = new DataTable();
+                string queryFurnZayavInfo = $"exec dbo.furnitZayavCheck '{PachKod}', 1 ";  // 1 - ШП. на будущее нужно будут доработать с учетом выбора вида производства
+                SqlCommand commandFurnZayavInfo = new SqlCommand(queryFurnZayavInfo, connection);
+                adapterFurnZayavInfo.SelectCommand = commandFurnZayavInfo;
+                adapterFurnZayavInfo.Fill(dtFurnZayavInfo);
+                bsFurnZayavInfo.DataSource = dtFurnZayavInfo;
+                //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                this.tbFurnKKStat.DataBindings.Clear();
+                this.tbFurnKKStat.DataBindings.Add("text", bsFurnZayavInfo, "FurnKKStat");
+                this.tbUpakKKStat.DataBindings.Clear();
+                this.tbUpakKKStat.DataBindings.Add("text", bsFurnZayavInfo, "UpakKKStat");
+
+                this.tbFurnZayav.DataBindings.Clear();
+                this.tbFurnZayav.DataBindings.Add("text", bsFurnZayavInfo, "FurnZayav");
+                this.tbData_f_o.DataBindings.Clear();
+                this.tbData_f_o.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_o");
+                this.tbFZSozdStat.DataBindings.Clear();
+                this.tbFZSozdStat.DataBindings.Add("text", bsFurnZayavInfo, "FZSozdStat");
+                this.tbData_f_z.DataBindings.Clear();
+                this.tbData_f_z.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_z");
+                this.tbFZSobrStat.DataBindings.Clear();
+                this.tbFZSobrStat.DataBindings.Add("text", bsFurnZayavInfo, "FZSobrStat");
+ 
+                this.tbUpakZayav.DataBindings.Clear();
+                this.tbUpakZayav.DataBindings.Add("text", bsFurnZayavInfo, "UpakZayav");
+                this.tbData_f_o_u.DataBindings.Clear();
+                this.tbData_f_o_u.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_o_u");
+                this.tbUZSozdStat.DataBindings.Clear();
+                this.tbUZSozdStat.DataBindings.Add("text", bsFurnZayavInfo, "UZSozdStat");
+                this.tbData_f_z_u.DataBindings.Clear();
+                this.tbData_f_z_u.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_z_u");
+                this.tbUZSobrStat.DataBindings.Clear();
+                this.tbUZSobrStat.DataBindings.Add("text", bsFurnZayavInfo, "UZSobrStat");
+               
+                this.mtbData_zeh.DataBindings.Clear();
+                this.mtbData_zeh.DataBindings.Add("text", bsFurnZayavInfo, "Data_zeh");
+                this.tbIs_got.DataBindings.Clear();
+                this.tbIs_got.DataBindings.Add("text", bsFurnZayavInfo, "Is_got");
+                this.mtbData_cd.DataBindings.Clear();
+                this.mtbData_cd.DataBindings.Add("text", bsFurnZayavInfo, "Data_cd");
+                this.tbOtgrStat.DataBindings.Clear();
+                this.tbOtgrStat.DataBindings.Add("text", bsFurnZayavInfo, "OtgrStat");
+
+                this.tbDatZayav.DataBindings.Clear();
+                this.tbDatZayav.DataBindings.Add("text", bsFurnZayavInfo, "DatZayav");
+
+                //furnitZayavViewFurnit.Text = "2024   37605";
+                ////furnitZayavViewFurnit.Refresh();
+                //furnitZayavViewUpak.Text = "2024   40367";
+                furnitZayavViewFurnit.Text = dtFurnZayavInfo.Rows[0]["FKoDF"].ToString();
+                furnitZayavViewFurnit.Refresh();
+                furnitZayavViewUpak.Text = dtFurnZayavInfo.Rows[0]["UKoDF"].ToString();
+                furnitZayavViewUpak.Refresh();
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label59_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label60_Click(object sender, EventArgs e)
+        {
+
         }
 
         //private void gcNaklList1_RowCellStyle(object sender, MaskInputRejectedEventArgs e)

@@ -67,9 +67,34 @@ namespace SewingProduction
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
+
+                    SqlDataAdapter adapterFurnitN = new SqlDataAdapter();
+                    DataTable dtFurnitN = new DataTable();
+                    string queryFurnitN = $"select n_z AS NZ, data_f_o AS DataFO, br AS Br ";
+                    queryFurnitN += $" , iif(vidf = 0, 'ФУРНИТУРА:', 'УПАКОВКА:') as VidFName ";
+                    queryFurnitN += $" from furnit_n ";
+                    queryFurnitN += $" where kod_f = '{_kodF}'";
+                    SqlCommand commandFurnitN = new SqlCommand(queryFurnitN, connection);
+                    adapterFurnitN.SelectCommand = commandFurnitN;
+                    adapterFurnitN.Fill(dtFurnitN);
+                    //bsFurnitN.DataSource = dtFurnitN;
+                    DataRow[] currentRowsFurnitN = dtFurnitN.Select(null, null, DataViewRowState.CurrentRows);
+                    if (currentRowsFurnitN.Length < 1)
+                        Console.WriteLine("No Current Rows Found");
+                    else
+                    {
+                        tbVidFName.Text = dtFurnitN.Rows[0]["VidFName"].ToString();
+                        tbNZ.Text = dtFurnitN.Rows[0]["NZ"].ToString();
+                        tbDataFO.Text = dtFurnitN.Rows[0]["DataFO"].ToString();
+                        tbBr.Text = dtFurnitN.Rows[0]["Br"].ToString();
+                    }
+
                     SqlDataAdapter adapterFurnitArt = new SqlDataAdapter();
                     DataTable dtFurnitArt = new DataTable();
-                    string queryFurnitArt = $"select * from furnit_art where kod_f = '{_kodF}' ";
+                    string queryFurnitArt = $"select fa.kod_f_d, fa.articul, fa.mod, fa.kol, fa.n_zvet, fa.nom_zad, CAST(fa.faSpecRez AS BIT) as faSpecRez ";
+                    queryFurnitArt += $" from furnit_art fa ";
+                    //queryFurnitArt += $"    left join view_sp_articul vsa on fa. ";
+                    queryFurnitArt += $" where kod_f = '{_kodF}' ";
                     queryFurnitArt += $" order by kod_f_d";
                     SqlCommand commandFurnitArt = new SqlCommand(queryFurnitArt, connection);
                     adapterFurnitArt.SelectCommand = commandFurnitArt;
@@ -78,11 +103,30 @@ namespace SewingProduction
                     bsFurnitArt.Sort = "kod_f_d asc";
 
                     gcFurnitArt.Refresh();
+                    string _kodFD = "";
+                    DataRow[] currentRows = dtFurnitArt.Select(null, null, DataViewRowState.CurrentRows);
+                    if (currentRows.Length < 1)
+                        Console.WriteLine("No Current Rows Found");
+                    else
+                    {
 
-                    string _kodFD = GetKodFD();
-                    MessageBox.Show(_kodFD);
-                    this.cbIsChip.DataBindings.Clear();
-                    this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
+                        _kodFD = dtFurnitArt.Rows[0]["kod_f_d"].ToString();
+                        //foreach (DataColumn column in dtFurnitArt.Columns)
+                        //    Console.Write("\t{0}", column.ColumnName);
+                        //Console.WriteLine("\tRowState");
+                        //foreach (DataRow row in currentRows)
+                        //{
+                        //    foreach (DataColumn column in dtFurnitArt.Columns)
+                        //        Console.Write("\t{0}", row[column]);
+                        //    Console.WriteLine("\t" + row.RowState);
+                        //}
+                    }
+
+
+                    //string _kodFD = GetKodFD();
+                    //MessageBox.Show(_kodFD);
+                    //this.cbIsChip.DataBindings.Clear();
+                    //this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
 
                     SqlDataAdapter adapterFurnitPach = new SqlDataAdapter();
                     DataTable dtFurnitPach = new DataTable();
@@ -95,7 +139,8 @@ namespace SewingProduction
 
                     SqlDataAdapter adapterFurnitF = new SqlDataAdapter();
                     DataTable dtFurnitF = new DataTable();
-                    string queryFurnitF = $"select * from furnit_f where kod_f_d = '{_kodFD}' ";
+                    string queryFurnitF = $"select ff.kod_dr, ff.art, ff.n, ff.t_ed, ff.kol_f, ff.kol_f_o, ff.n_pp, CAST(ff.ffSpecRez AS BIT) ffSpecRez ";
+                    queryFurnitF += $"from furnit_f ff where kod_f_d = '{_kodFD}' ";
                     queryFurnitF += $" order by n_pp";
                     SqlCommand commandFurnitF = new SqlCommand(queryFurnitF, connection);
                     adapterFurnitF.SelectCommand = commandFurnitF;
@@ -127,6 +172,19 @@ namespace SewingProduction
         }
 
         private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FurnitZayavView_Load(object sender, EventArgs e)
+        {
+            tbVidFName.BorderStyle = BorderStyle.None;
+            tbNZ.BorderStyle = BorderStyle.None;
+            tbDataFO.BorderStyle = BorderStyle.None;
+            tbBr.BorderStyle = BorderStyle.None;
+        }
+
+        private void gcFurnitFIt_Click(object sender, EventArgs e)
         {
 
         }
