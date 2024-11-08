@@ -1,5 +1,6 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
+using SewingProduction.form;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -73,5 +74,15 @@ namespace SewingProduction
             //f.MdiParent = this;
             //f.Show();
         }
+
+       
+
+        private void группыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravOborud f = new SpravOborud();
+            f.MdiParent = this;
+            f.Show();
+        }
+
     }
 }

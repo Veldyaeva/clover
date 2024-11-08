@@ -44,5 +44,19 @@ namespace SewingProduction.Properties {
                 return ((string)(this["GlobalConnectionString"]));
             }
         }
+
+
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_test;Persist Security Info=True;User ID=" +
+            "sa;Password=kf,bhbyn;Encrypt=False")]
+        public string ACEtestConnectionString
+        {
+            get
+            {
+                return ((string)(this["ACEtestConnectionString"]));
+            }
+        }
     }
 }

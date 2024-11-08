@@ -323,3 +323,4 @@ D:\SP\bin\Debug\pt\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
+D:\SP\obj\Debug\SewingProduction.form.SpravOborud.resources
