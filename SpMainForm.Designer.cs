@@ -42,11 +42,10 @@
             this.оборудованиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оборудованиеВБригадахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.группыОборудованияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видОбВязальныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видОбРаскройныйToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видОбШПToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.видыОборудованияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.матрицаКлассовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -136,10 +135,9 @@
             this.оборудованиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оборудованиеВБригадахToolStripMenuItem,
             this.группыОборудованияToolStripMenuItem,
-            this.видОбВязальныйToolStripMenuItem,
-            this.видОбРаскройныйToolStripMenuItem,
-            this.видОбШПToolStripMenuItem,
-            this.видМашинToolStripMenuItem});
+            this.видМашинToolStripMenuItem,
+            this.видыОборудованияToolStripMenuItem,
+            this.матрицаКлассовToolStripMenuItem});
             this.оборудованиеToolStripMenuItem.Name = "оборудованиеToolStripMenuItem";
             this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оборудованиеToolStripMenuItem.Text = "Оборудование";
@@ -157,34 +155,28 @@
             this.группыОборудованияToolStripMenuItem.Text = "Оборудование";
             this.группыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.группыОборудованияToolStripMenuItem_Click);
             // 
-            // видОбВязальныйToolStripMenuItem
-            // 
-            this.видОбВязальныйToolStripMenuItem.Name = "видОбВязальныйToolStripMenuItem";
-            this.видОбВязальныйToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видОбВязальныйToolStripMenuItem.Text = "Вид об. Вязальный";
-            // 
-            // видОбРаскройныйToolStripMenuItem
-            // 
-            this.видОбРаскройныйToolStripMenuItem.Name = "видОбРаскройныйToolStripMenuItem";
-            this.видОбРаскройныйToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видОбРаскройныйToolStripMenuItem.Text = "Вид об. Раскройный";
-            // 
-            // видОбШПToolStripMenuItem
-            // 
-            this.видОбШПToolStripMenuItem.Name = "видОбШПToolStripMenuItem";
-            this.видОбШПToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видОбШПToolStripMenuItem.Text = "Вид об. ШП";
-            // 
             // видМашинToolStripMenuItem
             // 
             this.видМашинToolStripMenuItem.Name = "видМашинToolStripMenuItem";
             this.видМашинToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видМашинToolStripMenuItem.Text = "Вид машин";
+            this.видМашинToolStripMenuItem.Text = "Виды работ";
             // 
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
             this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
+            // 
+            // видыОборудованияToolStripMenuItem
+            // 
+            this.видыОборудованияToolStripMenuItem.Name = "видыОборудованияToolStripMenuItem";
+            this.видыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.видыОборудованияToolStripMenuItem.Text = "Группы оборудования";
+            // 
+            // матрицаКлассовToolStripMenuItem
+            // 
+            this.матрицаКлассовToolStripMenuItem.Name = "матрицаКлассовToolStripMenuItem";
+            this.матрицаКлассовToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.матрицаКлассовToolStripMenuItem.Text = "Матрица классов";
             // 
             // SpMainForm
             // 
@@ -226,10 +218,9 @@
         private System.Windows.Forms.ToolStripMenuItem оборудованиеToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оборудованиеВБригадахToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem группыОборудованияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видОбВязальныйToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видОбРаскройныйToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видОбШПToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видМашинToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem видыОборудованияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem матрицаКлассовToolStripMenuItem;
     }
 }
 

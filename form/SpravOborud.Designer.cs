@@ -37,14 +37,15 @@
             this.text_ob_s = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_nastav = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_spec_ob = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col_noski = new DevExpress.XtraGrid.Columns.GridColumn();
             this.text_ob_tip = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col_pokaz = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.show_for_plan = new DevExpress.XtraGrid.Columns.GridColumn();
             this.col_id_class = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.name = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col_vid_ob = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col_pokaz_sp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.col_socksserv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.vidm = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.vid_rz = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.vid_np = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.vid_vzp = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.vid_shp = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.сkod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -56,23 +57,28 @@
             this.simpleButtonAdd = new DevExpress.XtraEditors.SimpleButton();
             this.AddTab = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxRedRz = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.comboBoxRedShp = new System.Windows.Forms.ComboBox();
+            this.comboBoxRedNp = new System.Windows.Forms.ComboBox();
+            this.comboBoxRedVzp = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
             this.comboBoxRedClass = new System.Windows.Forms.ComboBox();
             this.Класс = new System.Windows.Forms.Label();
-            this.checkBoxRedSock = new System.Windows.Forms.CheckBox();
-            this.checkBoxRedPokaz_sp = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.comboBoxRedSpec = new System.Windows.Forms.ComboBox();
-            this.checkBoxRedVid = new System.Windows.Forms.CheckBox();
+            this.comboBoxRedVidm = new System.Windows.Forms.ComboBox();
             this.groupBoxRedNastav = new System.Windows.Forms.GroupBox();
             this.radioButtonRed3 = new System.Windows.Forms.RadioButton();
             this.radioButtonRed2 = new System.Windows.Forms.RadioButton();
             this.radioButtonRed1 = new System.Windows.Forms.RadioButton();
             this.radioButtonRedNet = new System.Windows.Forms.RadioButton();
             this.checkBoxRedSpec = new System.Windows.Forms.CheckBox();
-            this.checkBoxRedNoski = new System.Windows.Forms.CheckBox();
-            this.checkBoxRedPokaz = new System.Windows.Forms.CheckBox();
+            this.checkBoxRedShow = new System.Windows.Forms.CheckBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxRedVid = new System.Windows.Forms.ComboBox();
+            this.comboBoxRedGrup = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
             this.textBoxRedKod = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -82,23 +88,28 @@
             this.simpleButtonRedOtm = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonRedSave = new DevExpress.XtraEditors.SimpleButton();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBoxAddRz = new System.Windows.Forms.ComboBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.comboBoxAddShp = new System.Windows.Forms.ComboBox();
+            this.comboBoxAddNp = new System.Windows.Forms.ComboBox();
+            this.comboBoxAddVzp = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.comboBoxAddClass = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.checkBoxAddSock = new System.Windows.Forms.CheckBox();
-            this.checkBoxAddPokaz_sp = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxAddSpec = new System.Windows.Forms.ComboBox();
-            this.checkBoxAddVid = new System.Windows.Forms.CheckBox();
+            this.comboBoxAddVidm = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioButtonAdd3 = new System.Windows.Forms.RadioButton();
             this.radioButtonAdd2 = new System.Windows.Forms.RadioButton();
             this.radioButtonAdd1 = new System.Windows.Forms.RadioButton();
             this.radioButtonAddNet = new System.Windows.Forms.RadioButton();
             this.checkBoxAddSpec = new System.Windows.Forms.CheckBox();
-            this.checkBoxAddNoski = new System.Windows.Forms.CheckBox();
-            this.checkBoxAddPokaz = new System.Windows.Forms.CheckBox();
+            this.checkBoxAddShow = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.comboBoxAddVid = new System.Windows.Forms.ComboBox();
+            this.comboBoxAddGrup = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxAddKod = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -114,11 +125,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.oborudGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.oborudList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddTab)).BeginInit();
             this.AddTab.SuspendLayout();
             this.xtraTabPage2.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBoxRedNastav.SuspendLayout();
             this.xtraTabPage1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +142,8 @@
             this.oborudGrid.Location = new System.Drawing.Point(12, 12);
             this.oborudGrid.MainView = this.gridView1;
             this.oborudGrid.Name = "oborudGrid";
+            this.oborudGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemComboBox1});
             this.oborudGrid.Size = new System.Drawing.Size(1213, 849);
             this.oborudGrid.TabIndex = 0;
             this.oborudGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -142,14 +158,14 @@
             this.text_ob_s,
             this.col_nastav,
             this.col_spec_ob,
-            this.col_noski,
             this.text_ob_tip,
-            this.col_pokaz,
+            this.show_for_plan,
             this.col_id_class,
-            this.name,
-            this.col_vid_ob,
-            this.col_pokaz_sp,
-            this.col_socksserv});
+            this.vidm,
+            this.vid_rz,
+            this.vid_np,
+            this.vid_vzp,
+            this.vid_shp});
             this.gridView1.GridControl = this.oborudGrid;
             this.gridView1.Name = "gridView1";
             // 
@@ -186,7 +202,7 @@
             this.col_nastav.FieldName = "nastav";
             this.col_nastav.Name = "col_nastav";
             this.col_nastav.Visible = true;
-            this.col_nastav.VisibleIndex = 7;
+            this.col_nastav.VisibleIndex = 6;
             this.col_nastav.Width = 73;
             // 
             // col_spec_ob
@@ -195,35 +211,26 @@
             this.col_spec_ob.FieldName = "spec_ob";
             this.col_spec_ob.Name = "col_spec_ob";
             this.col_spec_ob.Visible = true;
-            this.col_spec_ob.VisibleIndex = 6;
+            this.col_spec_ob.VisibleIndex = 8;
             this.col_spec_ob.Width = 73;
-            // 
-            // col_noski
-            // 
-            this.col_noski.Caption = "Носки";
-            this.col_noski.FieldName = "noski";
-            this.col_noski.Name = "col_noski";
-            this.col_noski.Visible = true;
-            this.col_noski.VisibleIndex = 5;
-            this.col_noski.Width = 73;
             // 
             // text_ob_tip
             // 
-            this.text_ob_tip.Caption = "Вид";
+            this.text_ob_tip.Caption = "Группа об.";
             this.text_ob_tip.FieldName = "text_ob_tip";
             this.text_ob_tip.Name = "text_ob_tip";
             this.text_ob_tip.Visible = true;
             this.text_ob_tip.VisibleIndex = 3;
             this.text_ob_tip.Width = 171;
             // 
-            // col_pokaz
+            // show_for_plan
             // 
-            this.col_pokaz.Caption = "Скрыть из \"оборудование бригад\"";
-            this.col_pokaz.FieldName = "pokaz";
-            this.col_pokaz.Name = "col_pokaz";
-            this.col_pokaz.Visible = true;
-            this.col_pokaz.VisibleIndex = 4;
-            this.col_pokaz.Width = 73;
+            this.show_for_plan.Caption = "Скрыть для планирования";
+            this.show_for_plan.FieldName = "show_for_plan";
+            this.show_for_plan.Name = "show_for_plan";
+            this.show_for_plan.Visible = true;
+            this.show_for_plan.VisibleIndex = 7;
+            this.show_for_plan.Width = 73;
             // 
             // col_id_class
             // 
@@ -231,44 +238,57 @@
             this.col_id_class.FieldName = "idClass";
             this.col_id_class.Name = "col_id_class";
             this.col_id_class.Visible = true;
-            this.col_id_class.VisibleIndex = 12;
+            this.col_id_class.VisibleIndex = 5;
             this.col_id_class.Width = 70;
             // 
-            // name
+            // vidm
             // 
-            this.name.Caption = "Спец-ть";
-            this.name.FieldName = "name";
-            this.name.Name = "name";
-            this.name.Visible = true;
-            this.name.VisibleIndex = 9;
-            this.name.Width = 120;
+            this.vidm.Caption = "Вид об.";
+            this.vidm.FieldName = "vidm";
+            this.vidm.Name = "vidm";
+            this.vidm.Visible = true;
+            this.vidm.VisibleIndex = 4;
+            this.vidm.Width = 120;
             // 
-            // col_vid_ob
+            // vid_rz
             // 
-            this.col_vid_ob.Caption = "Вид оборудования";
-            this.col_vid_ob.FieldName = "vid_ob";
-            this.col_vid_ob.Name = "col_vid_ob";
-            this.col_vid_ob.Visible = true;
-            this.col_vid_ob.VisibleIndex = 8;
-            this.col_vid_ob.Width = 73;
+            this.vid_rz.Caption = "РЦ";
+            this.vid_rz.FieldName = "vid_rz";
+            this.vid_rz.Name = "vid_rz";
+            this.vid_rz.Visible = true;
+            this.vid_rz.VisibleIndex = 12;
             // 
-            // col_pokaz_sp
+            // vid_np
             // 
-            this.col_pokaz_sp.Caption = "pokaz_sp";
-            this.col_pokaz_sp.FieldName = "pokaz_sp";
-            this.col_pokaz_sp.Name = "col_pokaz_sp";
-            this.col_pokaz_sp.Visible = true;
-            this.col_pokaz_sp.VisibleIndex = 10;
-            this.col_pokaz_sp.Width = 67;
+            this.vid_np.Caption = "НП";
+            this.vid_np.FieldName = "vid_np";
+            this.vid_np.Name = "vid_np";
+            this.vid_np.Visible = true;
+            this.vid_np.VisibleIndex = 11;
+            this.vid_np.Width = 83;
             // 
-            // col_socksserv
+            // vid_vzp
             // 
-            this.col_socksserv.Caption = "socksserv";
-            this.col_socksserv.FieldName = "socksserv";
-            this.col_socksserv.Name = "col_socksserv";
-            this.col_socksserv.Visible = true;
-            this.col_socksserv.VisibleIndex = 11;
-            this.col_socksserv.Width = 65;
+            this.vid_vzp.Caption = "ВП";
+            this.vid_vzp.FieldName = "vid_vzp";
+            this.vid_vzp.Name = "vid_vzp";
+            this.vid_vzp.Visible = true;
+            this.vid_vzp.VisibleIndex = 10;
+            // 
+            // vid_shp
+            // 
+            this.vid_shp.Caption = "ШП";
+            this.vid_shp.FieldName = "vid_shp";
+            this.vid_shp.Name = "vid_shp";
+            this.vid_shp.Visible = true;
+            this.vid_shp.VisibleIndex = 9;
+            // 
+            // repositoryItemComboBox1
+            // 
+            this.repositoryItemComboBox1.AutoHeight = false;
+            this.repositoryItemComboBox1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemComboBox1.Name = "repositoryItemComboBox1";
             // 
             // gridColumn3
             // 
@@ -366,19 +386,16 @@
             // 
             // xtraTabPage2
             // 
+            this.xtraTabPage2.Controls.Add(this.groupBox2);
             this.xtraTabPage2.Controls.Add(this.comboBoxRedClass);
             this.xtraTabPage2.Controls.Add(this.Класс);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedSock);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedPokaz_sp);
             this.xtraTabPage2.Controls.Add(this.label6);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedSpec);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedVid);
+            this.xtraTabPage2.Controls.Add(this.comboBoxRedVidm);
             this.xtraTabPage2.Controls.Add(this.groupBoxRedNastav);
             this.xtraTabPage2.Controls.Add(this.checkBoxRedSpec);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedNoski);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedPokaz);
+            this.xtraTabPage2.Controls.Add(this.checkBoxRedShow);
             this.xtraTabPage2.Controls.Add(this.label7);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedVid);
+            this.xtraTabPage2.Controls.Add(this.comboBoxRedGrup);
             this.xtraTabPage2.Controls.Add(this.label8);
             this.xtraTabPage2.Controls.Add(this.textBoxRedKod);
             this.xtraTabPage2.Controls.Add(this.label9);
@@ -392,12 +409,129 @@
             this.xtraTabPage2.Size = new System.Drawing.Size(587, 824);
             this.xtraTabPage2.Text = "Редактировать";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.comboBoxRedRz);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.comboBoxRedShp);
+            this.groupBox2.Controls.Add(this.comboBoxRedNp);
+            this.groupBox2.Controls.Add(this.comboBoxRedVzp);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox2.Location = new System.Drawing.Point(105, 261);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(418, 112);
+            this.groupBox2.TabIndex = 56;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Вид производства";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Location = new System.Drawing.Point(6, 37);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(38, 17);
+            this.label12.TabIndex = 48;
+            this.label12.Text = "ШП";
+            // 
+            // comboBoxRedRz
+            // 
+            this.comboBoxRedRz.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedRz.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedRz.FormattingEnabled = true;
+            this.comboBoxRedRz.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxRedRz.Location = new System.Drawing.Point(251, 72);
+            this.comboBoxRedRz.Name = "comboBoxRedRz";
+            this.comboBoxRedRz.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxRedRz.TabIndex = 55;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label14.Location = new System.Drawing.Point(216, 75);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(29, 17);
+            this.label14.TabIndex = 54;
+            this.label14.Text = "РЦ";
+            // 
+            // comboBoxRedShp
+            // 
+            this.comboBoxRedShp.BackColor = System.Drawing.SystemColors.Menu;
+            this.comboBoxRedShp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedShp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedShp.FormattingEnabled = true;
+            this.comboBoxRedShp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxRedShp.Location = new System.Drawing.Point(50, 32);
+            this.comboBoxRedShp.Name = "comboBoxRedShp";
+            this.comboBoxRedShp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxRedShp.TabIndex = 49;
+            // 
+            // comboBoxRedNp
+            // 
+            this.comboBoxRedNp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedNp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedNp.FormattingEnabled = true;
+            this.comboBoxRedNp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxRedNp.Location = new System.Drawing.Point(50, 72);
+            this.comboBoxRedNp.Name = "comboBoxRedNp";
+            this.comboBoxRedNp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxRedNp.TabIndex = 51;
+            // 
+            // comboBoxRedVzp
+            // 
+            this.comboBoxRedVzp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedVzp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedVzp.FormattingEnabled = true;
+            this.comboBoxRedVzp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxRedVzp.Location = new System.Drawing.Point(251, 32);
+            this.comboBoxRedVzp.Name = "comboBoxRedVzp";
+            this.comboBoxRedVzp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxRedVzp.TabIndex = 53;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label15.Location = new System.Drawing.Point(214, 35);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 17);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "ВП";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label13.Location = new System.Drawing.Point(12, 75);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(32, 17);
+            this.label13.TabIndex = 50;
+            this.label13.Text = "НП";
+            // 
             // comboBoxRedClass
             // 
             this.comboBoxRedClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRedClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxRedClass.FormattingEnabled = true;
-            this.comboBoxRedClass.Location = new System.Drawing.Point(105, 605);
+            this.comboBoxRedClass.Items.AddRange(new object[] {
+            ""});
+            this.comboBoxRedClass.Location = new System.Drawing.Point(105, 221);
             this.comboBoxRedClass.Name = "comboBoxRedClass";
             this.comboBoxRedClass.Size = new System.Drawing.Size(418, 25);
             this.comboBoxRedClass.TabIndex = 47;
@@ -406,64 +540,31 @@
             // 
             this.Класс.AutoSize = true;
             this.Класс.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Класс.Location = new System.Drawing.Point(51, 608);
+            this.Класс.Location = new System.Drawing.Point(51, 224);
             this.Класс.Name = "Класс";
             this.Класс.Size = new System.Drawing.Size(48, 17);
             this.Класс.TabIndex = 46;
             this.Класс.Text = "Класс";
             // 
-            // checkBoxRedSock
-            // 
-            this.checkBoxRedSock.AutoSize = true;
-            this.checkBoxRedSock.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedSock.Location = new System.Drawing.Point(105, 567);
-            this.checkBoxRedSock.Name = "checkBoxRedSock";
-            this.checkBoxRedSock.Size = new System.Drawing.Size(94, 21);
-            this.checkBoxRedSock.TabIndex = 44;
-            this.checkBoxRedSock.Text = "socksserv";
-            this.checkBoxRedSock.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRedPokaz_sp
-            // 
-            this.checkBoxRedPokaz_sp.AutoSize = true;
-            this.checkBoxRedPokaz_sp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedPokaz_sp.Location = new System.Drawing.Point(105, 524);
-            this.checkBoxRedPokaz_sp.Name = "checkBoxRedPokaz_sp";
-            this.checkBoxRedPokaz_sp.Size = new System.Drawing.Size(88, 21);
-            this.checkBoxRedPokaz_sp.TabIndex = 43;
-            this.checkBoxRedPokaz_sp.Text = "pokaz_sp";
-            this.checkBoxRedPokaz_sp.UseVisualStyleBackColor = true;
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(33, 483);
+            this.label6.Location = new System.Drawing.Point(39, 184);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(66, 17);
+            this.label6.Size = new System.Drawing.Size(60, 17);
             this.label6.TabIndex = 42;
-            this.label6.Text = "Спец-ть";
+            this.label6.Text = "Вид об.";
             // 
-            // comboBoxRedSpec
+            // comboBoxRedVidm
             // 
-            this.comboBoxRedSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRedSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxRedSpec.FormattingEnabled = true;
-            this.comboBoxRedSpec.Location = new System.Drawing.Point(105, 480);
-            this.comboBoxRedSpec.Name = "comboBoxRedSpec";
-            this.comboBoxRedSpec.Size = new System.Drawing.Size(418, 25);
-            this.comboBoxRedSpec.TabIndex = 41;
-            // 
-            // checkBoxRedVid
-            // 
-            this.checkBoxRedVid.AutoSize = true;
-            this.checkBoxRedVid.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedVid.Location = new System.Drawing.Point(105, 436);
-            this.checkBoxRedVid.Name = "checkBoxRedVid";
-            this.checkBoxRedVid.Size = new System.Drawing.Size(81, 21);
-            this.checkBoxRedVid.TabIndex = 40;
-            this.checkBoxRedVid.Text = "Вид ОБ";
-            this.checkBoxRedVid.UseVisualStyleBackColor = true;
+            this.comboBoxRedVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedVidm.FormattingEnabled = true;
+            this.comboBoxRedVidm.Location = new System.Drawing.Point(105, 181);
+            this.comboBoxRedVidm.Name = "comboBoxRedVidm";
+            this.comboBoxRedVidm.Size = new System.Drawing.Size(418, 25);
+            this.comboBoxRedVidm.TabIndex = 41;
             // 
             // groupBoxRedNastav
             // 
@@ -472,7 +573,7 @@
             this.groupBoxRedNastav.Controls.Add(this.radioButtonRed1);
             this.groupBoxRedNastav.Controls.Add(this.radioButtonRedNet);
             this.groupBoxRedNastav.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBoxRedNastav.Location = new System.Drawing.Point(105, 301);
+            this.groupBoxRedNastav.Location = new System.Drawing.Point(105, 390);
             this.groupBoxRedNastav.Name = "groupBoxRedNastav";
             this.groupBoxRedNastav.Size = new System.Drawing.Size(418, 116);
             this.groupBoxRedNastav.TabIndex = 39;
@@ -525,54 +626,44 @@
             // 
             this.checkBoxRedSpec.AutoSize = true;
             this.checkBoxRedSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedSpec.Location = new System.Drawing.Point(105, 260);
+            this.checkBoxRedSpec.Location = new System.Drawing.Point(105, 548);
             this.checkBoxRedSpec.Name = "checkBoxRedSpec";
-            this.checkBoxRedSpec.Size = new System.Drawing.Size(163, 21);
+            this.checkBoxRedSpec.Size = new System.Drawing.Size(297, 21);
             this.checkBoxRedSpec.TabIndex = 38;
-            this.checkBoxRedSpec.Text = "Спец оборудование";
+            this.checkBoxRedSpec.Text = "Спец оборудование (разделение труда)";
             this.checkBoxRedSpec.UseVisualStyleBackColor = true;
             // 
-            // checkBoxRedNoski
+            // checkBoxRedShow
             // 
-            this.checkBoxRedNoski.AutoSize = true;
-            this.checkBoxRedNoski.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedNoski.Location = new System.Drawing.Point(105, 219);
-            this.checkBoxRedNoski.Name = "checkBoxRedNoski";
-            this.checkBoxRedNoski.Size = new System.Drawing.Size(72, 21);
-            this.checkBoxRedNoski.TabIndex = 37;
-            this.checkBoxRedNoski.Text = "Носки";
-            this.checkBoxRedNoski.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRedPokaz
-            // 
-            this.checkBoxRedPokaz.AutoSize = true;
-            this.checkBoxRedPokaz.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedPokaz.Location = new System.Drawing.Point(105, 180);
-            this.checkBoxRedPokaz.Name = "checkBoxRedPokaz";
-            this.checkBoxRedPokaz.Size = new System.Drawing.Size(225, 21);
-            this.checkBoxRedPokaz.TabIndex = 36;
-            this.checkBoxRedPokaz.Text = "Показывать в оборуд бригад";
-            this.checkBoxRedPokaz.UseVisualStyleBackColor = true;
+            this.checkBoxRedShow.AutoSize = true;
+            this.checkBoxRedShow.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxRedShow.Location = new System.Drawing.Point(105, 521);
+            this.checkBoxRedShow.Name = "checkBoxRedShow";
+            this.checkBoxRedShow.Size = new System.Drawing.Size(214, 21);
+            this.checkBoxRedShow.TabIndex = 36;
+            this.checkBoxRedShow.Text = "Скрыть для планирования";
+            this.checkBoxRedShow.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(63, 142);
+            this.label7.Location = new System.Drawing.Point(18, 142);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(36, 17);
+            this.label7.Size = new System.Drawing.Size(81, 17);
             this.label7.TabIndex = 35;
-            this.label7.Text = "Вид";
+            this.label7.Text = "Группа об.";
             // 
-            // comboBoxRedVid
+            // comboBoxRedGrup
             // 
-            this.comboBoxRedVid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRedVid.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxRedVid.FormattingEnabled = true;
-            this.comboBoxRedVid.Location = new System.Drawing.Point(105, 139);
-            this.comboBoxRedVid.Name = "comboBoxRedVid";
-            this.comboBoxRedVid.Size = new System.Drawing.Size(418, 25);
-            this.comboBoxRedVid.TabIndex = 34;
+            this.comboBoxRedGrup.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxRedGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedGrup.FormattingEnabled = true;
+            this.comboBoxRedGrup.Location = new System.Drawing.Point(105, 139);
+            this.comboBoxRedGrup.Name = "comboBoxRedGrup";
+            this.comboBoxRedGrup.Size = new System.Drawing.Size(418, 25);
+            this.comboBoxRedGrup.TabIndex = 34;
             // 
             // label8
             // 
@@ -586,6 +677,7 @@
             // 
             // textBoxRedKod
             // 
+            this.textBoxRedKod.Cursor = System.Windows.Forms.Cursors.No;
             this.textBoxRedKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxRedKod.Location = new System.Drawing.Point(105, 23);
             this.textBoxRedKod.Name = "textBoxRedKod";
@@ -655,19 +747,16 @@
             // 
             this.xtraTabPage1.Appearance.PageClient.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.xtraTabPage1.Appearance.PageClient.Options.UseBackColor = true;
+            this.xtraTabPage1.Controls.Add(this.groupBox3);
             this.xtraTabPage1.Controls.Add(this.comboBoxAddClass);
             this.xtraTabPage1.Controls.Add(this.label11);
-            this.xtraTabPage1.Controls.Add(this.checkBoxAddSock);
-            this.xtraTabPage1.Controls.Add(this.checkBoxAddPokaz_sp);
             this.xtraTabPage1.Controls.Add(this.label5);
-            this.xtraTabPage1.Controls.Add(this.comboBoxAddSpec);
-            this.xtraTabPage1.Controls.Add(this.checkBoxAddVid);
+            this.xtraTabPage1.Controls.Add(this.comboBoxAddVidm);
             this.xtraTabPage1.Controls.Add(this.groupBox1);
             this.xtraTabPage1.Controls.Add(this.checkBoxAddSpec);
-            this.xtraTabPage1.Controls.Add(this.checkBoxAddNoski);
-            this.xtraTabPage1.Controls.Add(this.checkBoxAddPokaz);
+            this.xtraTabPage1.Controls.Add(this.checkBoxAddShow);
             this.xtraTabPage1.Controls.Add(this.label4);
-            this.xtraTabPage1.Controls.Add(this.comboBoxAddVid);
+            this.xtraTabPage1.Controls.Add(this.comboBoxAddGrup);
             this.xtraTabPage1.Controls.Add(this.label3);
             this.xtraTabPage1.Controls.Add(this.textBoxAddKod);
             this.xtraTabPage1.Controls.Add(this.label2);
@@ -681,12 +770,126 @@
             this.xtraTabPage1.Size = new System.Drawing.Size(587, 824);
             this.xtraTabPage1.Text = "Добавить";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label16);
+            this.groupBox3.Controls.Add(this.comboBoxAddRz);
+            this.groupBox3.Controls.Add(this.label17);
+            this.groupBox3.Controls.Add(this.comboBoxAddShp);
+            this.groupBox3.Controls.Add(this.comboBoxAddNp);
+            this.groupBox3.Controls.Add(this.comboBoxAddVzp);
+            this.groupBox3.Controls.Add(this.label18);
+            this.groupBox3.Controls.Add(this.label19);
+            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox3.Location = new System.Drawing.Point(105, 261);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(418, 112);
+            this.groupBox3.TabIndex = 57;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Вид производства";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label16.Location = new System.Drawing.Point(6, 37);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(38, 17);
+            this.label16.TabIndex = 48;
+            this.label16.Text = "ШП";
+            // 
+            // comboBoxAddRz
+            // 
+            this.comboBoxAddRz.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddRz.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddRz.FormattingEnabled = true;
+            this.comboBoxAddRz.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxAddRz.Location = new System.Drawing.Point(251, 72);
+            this.comboBoxAddRz.Name = "comboBoxAddRz";
+            this.comboBoxAddRz.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxAddRz.TabIndex = 55;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label17.Location = new System.Drawing.Point(216, 75);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(29, 17);
+            this.label17.TabIndex = 54;
+            this.label17.Text = "РЦ";
+            // 
+            // comboBoxAddShp
+            // 
+            this.comboBoxAddShp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddShp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddShp.FormattingEnabled = true;
+            this.comboBoxAddShp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxAddShp.Location = new System.Drawing.Point(50, 32);
+            this.comboBoxAddShp.Name = "comboBoxAddShp";
+            this.comboBoxAddShp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxAddShp.TabIndex = 49;
+            // 
+            // comboBoxAddNp
+            // 
+            this.comboBoxAddNp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddNp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddNp.FormattingEnabled = true;
+            this.comboBoxAddNp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxAddNp.Location = new System.Drawing.Point(50, 72);
+            this.comboBoxAddNp.Name = "comboBoxAddNp";
+            this.comboBoxAddNp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxAddNp.TabIndex = 51;
+            // 
+            // comboBoxAddVzp
+            // 
+            this.comboBoxAddVzp.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddVzp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddVzp.FormattingEnabled = true;
+            this.comboBoxAddVzp.Items.AddRange(new object[] {
+            "нет",
+            "основное",
+            "дополнительное"});
+            this.comboBoxAddVzp.Location = new System.Drawing.Point(251, 32);
+            this.comboBoxAddVzp.Name = "comboBoxAddVzp";
+            this.comboBoxAddVzp.Size = new System.Drawing.Size(148, 25);
+            this.comboBoxAddVzp.TabIndex = 53;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label18.Location = new System.Drawing.Point(214, 35);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(31, 17);
+            this.label18.TabIndex = 52;
+            this.label18.Text = "ВП";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label19.Location = new System.Drawing.Point(12, 75);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(32, 17);
+            this.label19.TabIndex = 50;
+            this.label19.Text = "НП";
+            // 
             // comboBoxAddClass
             // 
             this.comboBoxAddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAddClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxAddClass.FormattingEnabled = true;
-            this.comboBoxAddClass.Location = new System.Drawing.Point(105, 605);
+            this.comboBoxAddClass.Location = new System.Drawing.Point(105, 221);
             this.comboBoxAddClass.Name = "comboBoxAddClass";
             this.comboBoxAddClass.Size = new System.Drawing.Size(418, 25);
             this.comboBoxAddClass.TabIndex = 30;
@@ -695,64 +898,31 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(51, 608);
+            this.label11.Location = new System.Drawing.Point(51, 224);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(48, 17);
             this.label11.TabIndex = 29;
             this.label11.Text = "Класс";
             // 
-            // checkBoxAddSock
-            // 
-            this.checkBoxAddSock.AutoSize = true;
-            this.checkBoxAddSock.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddSock.Location = new System.Drawing.Point(105, 567);
-            this.checkBoxAddSock.Name = "checkBoxAddSock";
-            this.checkBoxAddSock.Size = new System.Drawing.Size(94, 21);
-            this.checkBoxAddSock.TabIndex = 27;
-            this.checkBoxAddSock.Text = "socksserv";
-            this.checkBoxAddSock.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAddPokaz_sp
-            // 
-            this.checkBoxAddPokaz_sp.AutoSize = true;
-            this.checkBoxAddPokaz_sp.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddPokaz_sp.Location = new System.Drawing.Point(105, 524);
-            this.checkBoxAddPokaz_sp.Name = "checkBoxAddPokaz_sp";
-            this.checkBoxAddPokaz_sp.Size = new System.Drawing.Size(88, 21);
-            this.checkBoxAddPokaz_sp.TabIndex = 26;
-            this.checkBoxAddPokaz_sp.Text = "pokaz_sp";
-            this.checkBoxAddPokaz_sp.UseVisualStyleBackColor = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(33, 483);
+            this.label5.Location = new System.Drawing.Point(39, 184);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(66, 17);
+            this.label5.Size = new System.Drawing.Size(60, 17);
             this.label5.TabIndex = 25;
-            this.label5.Text = "Спец-ть";
+            this.label5.Text = "Вид об.";
             // 
-            // comboBoxAddSpec
+            // comboBoxAddVidm
             // 
-            this.comboBoxAddSpec.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAddSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAddSpec.FormattingEnabled = true;
-            this.comboBoxAddSpec.Location = new System.Drawing.Point(105, 480);
-            this.comboBoxAddSpec.Name = "comboBoxAddSpec";
-            this.comboBoxAddSpec.Size = new System.Drawing.Size(418, 25);
-            this.comboBoxAddSpec.TabIndex = 24;
-            // 
-            // checkBoxAddVid
-            // 
-            this.checkBoxAddVid.AutoSize = true;
-            this.checkBoxAddVid.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddVid.Location = new System.Drawing.Point(105, 436);
-            this.checkBoxAddVid.Name = "checkBoxAddVid";
-            this.checkBoxAddVid.Size = new System.Drawing.Size(81, 21);
-            this.checkBoxAddVid.TabIndex = 23;
-            this.checkBoxAddVid.Text = "Вид ОБ";
-            this.checkBoxAddVid.UseVisualStyleBackColor = true;
+            this.comboBoxAddVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddVidm.FormattingEnabled = true;
+            this.comboBoxAddVidm.Location = new System.Drawing.Point(105, 181);
+            this.comboBoxAddVidm.Name = "comboBoxAddVidm";
+            this.comboBoxAddVidm.Size = new System.Drawing.Size(418, 25);
+            this.comboBoxAddVidm.TabIndex = 24;
             // 
             // groupBox1
             // 
@@ -761,7 +931,7 @@
             this.groupBox1.Controls.Add(this.radioButtonAdd1);
             this.groupBox1.Controls.Add(this.radioButtonAddNet);
             this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.groupBox1.Location = new System.Drawing.Point(105, 301);
+            this.groupBox1.Location = new System.Drawing.Point(105, 390);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(418, 116);
             this.groupBox1.TabIndex = 22;
@@ -814,55 +984,44 @@
             // 
             this.checkBoxAddSpec.AutoSize = true;
             this.checkBoxAddSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddSpec.Location = new System.Drawing.Point(105, 260);
+            this.checkBoxAddSpec.Location = new System.Drawing.Point(105, 548);
             this.checkBoxAddSpec.Name = "checkBoxAddSpec";
-            this.checkBoxAddSpec.Size = new System.Drawing.Size(163, 21);
+            this.checkBoxAddSpec.Size = new System.Drawing.Size(297, 21);
             this.checkBoxAddSpec.TabIndex = 21;
-            this.checkBoxAddSpec.Text = "Спец оборудование";
+            this.checkBoxAddSpec.Text = "Спец оборудование (разделение труда)";
             this.checkBoxAddSpec.UseVisualStyleBackColor = true;
             // 
-            // checkBoxAddNoski
+            // checkBoxAddShow
             // 
-            this.checkBoxAddNoski.AutoSize = true;
-            this.checkBoxAddNoski.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddNoski.Location = new System.Drawing.Point(105, 219);
-            this.checkBoxAddNoski.Name = "checkBoxAddNoski";
-            this.checkBoxAddNoski.Size = new System.Drawing.Size(72, 21);
-            this.checkBoxAddNoski.TabIndex = 20;
-            this.checkBoxAddNoski.Text = "Носки";
-            this.checkBoxAddNoski.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAddPokaz
-            // 
-            this.checkBoxAddPokaz.AutoSize = true;
-            this.checkBoxAddPokaz.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddPokaz.Location = new System.Drawing.Point(105, 180);
-            this.checkBoxAddPokaz.Name = "checkBoxAddPokaz";
-            this.checkBoxAddPokaz.Size = new System.Drawing.Size(225, 21);
-            this.checkBoxAddPokaz.TabIndex = 18;
-            this.checkBoxAddPokaz.Text = "Показывать в оборуд бригад";
-            this.checkBoxAddPokaz.UseVisualStyleBackColor = true;
+            this.checkBoxAddShow.AutoSize = true;
+            this.checkBoxAddShow.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxAddShow.Location = new System.Drawing.Point(105, 521);
+            this.checkBoxAddShow.Name = "checkBoxAddShow";
+            this.checkBoxAddShow.Size = new System.Drawing.Size(214, 21);
+            this.checkBoxAddShow.TabIndex = 18;
+            this.checkBoxAddShow.Text = "Скрыть для планирования";
+            this.checkBoxAddShow.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(63, 142);
+            this.label4.Location = new System.Drawing.Point(18, 142);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(36, 17);
+            this.label4.Size = new System.Drawing.Size(81, 17);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Вид";
+            this.label4.Text = "Группа об.";
             // 
-            // comboBoxAddVid
+            // comboBoxAddGrup
             // 
-            this.comboBoxAddVid.BackColor = System.Drawing.Color.White;
-            this.comboBoxAddVid.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAddVid.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAddVid.FormattingEnabled = true;
-            this.comboBoxAddVid.Location = new System.Drawing.Point(105, 139);
-            this.comboBoxAddVid.Name = "comboBoxAddVid";
-            this.comboBoxAddVid.Size = new System.Drawing.Size(418, 25);
-            this.comboBoxAddVid.TabIndex = 15;
+            this.comboBoxAddGrup.BackColor = System.Drawing.Color.White;
+            this.comboBoxAddGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddGrup.FormattingEnabled = true;
+            this.comboBoxAddGrup.Location = new System.Drawing.Point(105, 139);
+            this.comboBoxAddGrup.Name = "comboBoxAddGrup";
+            this.comboBoxAddGrup.Size = new System.Drawing.Size(418, 25);
+            this.comboBoxAddGrup.TabIndex = 15;
             // 
             // label3
             // 
@@ -996,18 +1155,24 @@
             this.Controls.Add(this.oborudGrid);
             this.Name = "SpravOborud";
             this.Text = "Справочник оборудования";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpravOborud_FormClosing);
             this.Load += new System.EventHandler(this.SpravOborud_Load);
             ((System.ComponentModel.ISupportInitialize)(this.oborudGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.oborudList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddTab)).EndInit();
             this.AddTab.ResumeLayout(false);
             this.xtraTabPage2.ResumeLayout(false);
             this.xtraTabPage2.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBoxRedNastav.ResumeLayout(false);
             this.groupBoxRedNastav.PerformLayout();
             this.xtraTabPage1.ResumeLayout(false);
             this.xtraTabPage1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -1028,16 +1193,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn сkod_ob;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn col_spec_ob;
-        private DevExpress.XtraGrid.Columns.GridColumn col_noski;
         private DevExpress.XtraGrid.Columns.GridColumn text_ob_tip;
-        private DevExpress.XtraGrid.Columns.GridColumn col_pokaz;
+        private DevExpress.XtraGrid.Columns.GridColumn show_for_plan;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
         private DevExpress.XtraGrid.Columns.GridColumn col_id_class;
-        private DevExpress.XtraGrid.Columns.GridColumn name;
-        private DevExpress.XtraGrid.Columns.GridColumn col_vid_ob;
-        private DevExpress.XtraGrid.Columns.GridColumn col_pokaz_sp;
-        private DevExpress.XtraGrid.Columns.GridColumn col_socksserv;
+        private DevExpress.XtraGrid.Columns.GridColumn vidm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.SimpleButton simpleButtonAdd;
@@ -1056,36 +1217,28 @@
         private System.Windows.Forms.TextBox textBoxAddKod;
         private DevExpress.XtraEditors.SimpleButton simpleButtonRedOtm;
         private DevExpress.XtraEditors.SimpleButton simpleButtonRedSave;
-        private System.Windows.Forms.ComboBox comboBoxAddVid;
+        private System.Windows.Forms.ComboBox comboBoxAddGrup;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.CheckBox checkBoxAddPokaz;
-        private System.Windows.Forms.CheckBox checkBoxAddVid;
+        private System.Windows.Forms.CheckBox checkBoxAddShow;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioButtonAdd3;
         private System.Windows.Forms.RadioButton radioButtonAdd2;
         private System.Windows.Forms.RadioButton radioButtonAdd1;
         private System.Windows.Forms.RadioButton radioButtonAddNet;
         private System.Windows.Forms.CheckBox checkBoxAddSpec;
-        private System.Windows.Forms.CheckBox checkBoxAddNoski;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox comboBoxAddSpec;
-        private System.Windows.Forms.CheckBox checkBoxAddSock;
-        private System.Windows.Forms.CheckBox checkBoxAddPokaz_sp;
-        private System.Windows.Forms.CheckBox checkBoxRedSock;
-        private System.Windows.Forms.CheckBox checkBoxRedPokaz_sp;
+        private System.Windows.Forms.ComboBox comboBoxAddVidm;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox comboBoxRedSpec;
-        private System.Windows.Forms.CheckBox checkBoxRedVid;
+        private System.Windows.Forms.ComboBox comboBoxRedVidm;
         private System.Windows.Forms.GroupBox groupBoxRedNastav;
         private System.Windows.Forms.RadioButton radioButtonRed3;
         private System.Windows.Forms.RadioButton radioButtonRed2;
         private System.Windows.Forms.RadioButton radioButtonRed1;
         private System.Windows.Forms.RadioButton radioButtonRedNet;
         private System.Windows.Forms.CheckBox checkBoxRedSpec;
-        private System.Windows.Forms.CheckBox checkBoxRedNoski;
-        private System.Windows.Forms.CheckBox checkBoxRedPokaz;
+        private System.Windows.Forms.CheckBox checkBoxRedShow;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox comboBoxRedVid;
+        private System.Windows.Forms.ComboBox comboBoxRedGrup;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxRedKod;
         private System.Windows.Forms.Label label9;
@@ -1098,5 +1251,28 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private System.Windows.Forms.ComboBox comboBoxAddClass;
         private System.Windows.Forms.ComboBox comboBoxRedClass;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboBoxRedRz;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.ComboBox comboBoxRedShp;
+        private System.Windows.Forms.ComboBox comboBoxRedNp;
+        private System.Windows.Forms.ComboBox comboBoxRedVzp;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBoxAddRz;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.ComboBox comboBoxAddShp;
+        private System.Windows.Forms.ComboBox comboBoxAddNp;
+        private System.Windows.Forms.ComboBox comboBoxAddVzp;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label19;
+        private DevExpress.XtraGrid.Columns.GridColumn vid_rz;
+        private DevExpress.XtraGrid.Columns.GridColumn vid_np;
+        private DevExpress.XtraGrid.Columns.GridColumn vid_vzp;
+        private DevExpress.XtraGrid.Columns.GridColumn vid_shp;
+        private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBox1;
     }
 }
