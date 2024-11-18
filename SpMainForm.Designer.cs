@@ -38,6 +38,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.отгрузкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.карточкаРасчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -102,15 +103,24 @@
             // 
             // отгрузкаToolStripMenuItem
             // 
+            this.отгрузкаToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.карточкаРасчетаToolStripMenuItem});
             this.отгрузкаToolStripMenuItem.Name = "отгрузкаToolStripMenuItem";
-            this.отгрузкаToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
-            this.отгрузкаToolStripMenuItem.Text = "Карточка расчета";
+            this.отгрузкаToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.отгрузкаToolStripMenuItem.Text = "Справочники";
             this.отгрузкаToolStripMenuItem.Click += new System.EventHandler(this.отгрузкаToolStripMenuItem_Click);
             // 
             // xtraTabbedMdiManager1
             // 
             this.xtraTabbedMdiManager1.MdiParent = this;
             this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
+            // 
+            // карточкаРасчетаToolStripMenuItem
+            // 
+            this.карточкаРасчетаToolStripMenuItem.Name = "карточкаРасчетаToolStripMenuItem";
+            this.карточкаРасчетаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.карточкаРасчетаToolStripMenuItem.Text = "Карточка расчета";
+            this.карточкаРасчетаToolStripMenuItem.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem_Click);
             // 
             // SpMainForm
             // 
@@ -147,6 +157,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem отгрузкаToolStripMenuItem;
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
+        private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem;
     }
 }
 
