@@ -330,6 +330,7 @@ D:\SP\bin\Debug\ru\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hans\Microsoft.SqlServer.Types.resources.dll
 D:\SP\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resources.dll
 D:\SP\obj\Debug\SewingProduction.form.SpravOborud.resources
+<<<<<<< HEAD
 =======
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.csproj.GenerateResource.cache
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.exe.licenses
@@ -342,3 +343,6 @@ D:\SP\obj\Debug\SewingProduction.FurnitZayavView.resources
 D:\SP\obj\Debug\SewingProduction.report.PrintKKReport.resources
 D:\SP\obj\Debug\SewingProduction.report.PrintFullKKReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.form.SpravOborud.resources
+=======
+D:\SP\obj\Debug\SewingProduction.form.SpravForAll.resources
+>>>>>>> 1

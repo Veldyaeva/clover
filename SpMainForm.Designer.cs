@@ -152,12 +152,19 @@
             this.видыОборудованияToolStripMenuItem.Name = "видыОборудованияToolStripMenuItem";
             this.видыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.видыОборудованияToolStripMenuItem.Text = "Группы оборудования";
+            this.видыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.видыОборудованияToolStripMenuItem_Click);
             // 
             // матрицаКлассовToolStripMenuItem
             // 
             this.матрицаКлассовToolStripMenuItem.Name = "матрицаКлассовToolStripMenuItem";
             this.матрицаКлассовToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.матрицаКлассовToolStripMenuItem.Text = "Матрица классов";
+            this.матрицаКлассовToolStripMenuItem.Click += new System.EventHandler(this.матрицаКлассовToolStripMenuItem_Click);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // xtraTabbedMdiManager1
             // 
