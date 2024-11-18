@@ -1,28 +1,36 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\SP\\",
+  "WorkspaceRootPath": "D:\\SharpProj\\sewingproduction\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
     {
-      "Orientation": 0,
+      "Orientation": 1,
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 26,
+          "DockedHeight": 200,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -34,23 +42,19 @@
             },
             {
               "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
               "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
             },
             {
               "$type": "Bookmark",
@@ -65,89 +69,54 @@
               "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:140:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:141:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "SpMainForm.cs",
-              "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
               "RelativeDocumentMoniker": "SpMainForm.cs",
-              "ToolTip": "D:\\SP\\SpMainForm.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
               "RelativeToolTip": "SpMainForm.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAtwFAAAAAAAAAAAAAAAA==",
+              "ViewState": "AQIAADgAAAAAAAAAAAAAAFIAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:12:24.822Z",
+              "WhenOpened": "2024-11-18T11:01:43.538Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
               "RelativeDocumentMoniker": "SpMainForm.cs",
-              "ToolTip": "D:\\SP\\SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "RelativeToolTip": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:11:58.332Z",
+              "WhenOpened": "2024-11-18T11:01:35.775Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CardByNom.cs",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
+              "RelativeDocumentMoniker": "form\\CardByNom.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
+              "RelativeToolTip": "form\\CardByNom.cs",
+              "ViewState": "AQIAALACAAAAAAAAAAArwMMCAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T09:44:52.627Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
+              "RelativeDocumentMoniker": "form\\CardByNom.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "form\\CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T09:38:36.792Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
         }
