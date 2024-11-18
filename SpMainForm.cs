@@ -25,13 +25,7 @@ namespace SewingProduction
         XtraTabbedMdiManager mdiManager;
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //CardByNom newMDIChild = new CardByNom();
-            //newMDIChild.MdiParent = this;
-            //newMDIChild.Show();
-            CardByNom f = new CardByNom();
-            //f.Text = "Child Form " + (++ctr).ToString();
-            f.MdiParent = this;
-            f.Show();
+           
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -84,5 +78,16 @@ namespace SewingProduction
             f.Show();
         }
 
+
+        private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //CardByNom newMDIChild = new CardByNom();
+            //newMDIChild.MdiParent = this;
+            //newMDIChild.Show();
+            CardByNom f = new CardByNom();
+            //f.Text = "Child Form " + (++ctr).ToString();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

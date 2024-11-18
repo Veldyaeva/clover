@@ -22,11 +22,15 @@ using System.Collections;
 using System.Security.Cryptography.X509Certificates;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using SewingProduction.report;
+using DevExpress.XtraGauges.Core.Styles;
+using DevExpress.XtraPrinting;
 
 namespace SewingProduction
 {
     public partial class CardByNom : Form
     {
+        public int fspecrez, uspecrez;
+        public string fkodfd, ukodfd;
         public CardByNom()
         {
             InitializeComponent();
@@ -49,6 +53,7 @@ namespace SewingProduction
             }
             return iz;
         }
+
         private void label5_Click(object sender, EventArgs e)
         {
 
@@ -110,25 +115,29 @@ namespace SewingProduction
             if (e.KeyCode == Keys.Enter)
             {
                 //textBox1_Leave(sender, e);
-                int NomPach = Convert.ToInt32(this.tbNomPach.Text);
-                int YearPach = Convert.ToInt32(this.tbYearPach.Text);
+                //int NomPach = Convert.ToInt32(tbNomPach.Text);
+                //int YearPach = Convert.ToInt32(tbYearPach.Text);
+                // label59.text +  в цех / на упак. / передачи в ш.ц. - доработать с учетом вида производства
+
+
+                string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
                 //string _dateFormat = "dd/MM/yyyy";
-                if (NomPach > 0 && YearPach > 0)
+                //if (NomPach > 0 && YearPach > 0)
+                if (PachKod.Length > 0)
                 {
-                    this.progressPanel1.Visible = true;
+                    
                     string connectionString = Properties.Settings.Default.ACEConnectionString;
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-
-
 
                         //Console.WriteLine("Подключение открыто");
                         SqlDataAdapter adapterNaklList = new SqlDataAdapter();
                         DataTable dtNaklList = new DataTable();
                         //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
                         //query += $" order by n_pach";
-                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        //string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         queryNaklList += $" order by iz";
                         SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
                         adapterNaklList.SelectCommand = commandNaklList;
@@ -139,7 +148,8 @@ namespace SewingProduction
 
                         SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
                         DataTable dtRasInfo = new DataTable();
-                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
+                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         //queryRasInfo += $" order by iz";
                         SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
                         adapterRasInfo.SelectCommand = commandRasInfo;
@@ -170,10 +180,12 @@ namespace SewingProduction
                         this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
                         this.tbPsaNameSbit.DataBindings.Clear();
                         this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                        this.tbPsaNameSbit1.DataBindings.Clear();
-                        this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                        //this.tbPsaNameSbit1.DataBindings.Clear();
+                        //this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
                         this.tbPsaNN.DataBindings.Clear();
                         this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
+                        this.tbPsaPsaID.DataBindings.Clear();
+                        this.tbPsaPsaID.DataBindings.Add("Text", dtRasInfo, "psaPsaID");
                         this.tbPsaNomZad.DataBindings.Clear();
                         this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
                         this.tbPsaMenName.DataBindings.Clear();
@@ -186,12 +198,12 @@ namespace SewingProduction
                         this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
                         this.tbArtGrup.DataBindings.Clear();
                         this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
-                        this.tbSost.DataBindings.Clear();
-                        this.tbSost.DataBindings.Add("Text", dtRasInfo, "sost");
-                        this.tbSostOtdelka.DataBindings.Clear();
-                        this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
-                        this.tbSostPodklad.DataBindings.Clear();
-                        this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
+                        this.tbSostPoln.DataBindings.Clear();
+                        this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
+                        //this.tbSostOtdelka.DataBindings.Clear();
+                        //this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
+                        //this.tbSostPodklad.DataBindings.Clear();
+                        //this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
                         this.tbPsaKodZv1.DataBindings.Clear();
                         this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
                         this.tbPsaKodZv2.DataBindings.Clear();
@@ -210,6 +222,8 @@ namespace SewingProduction
                         this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
                         this.mtbRzuDataCd.DataBindings.Clear();
                         this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                        this.mtbRzuData1С.DataBindings.Clear();
+                        this.mtbRzuData1С.DataBindings.Add("Text", dtRasInfo, "rzuData1C");
                         this.mtbRzuDataRasp.DataBindings.Clear();
                         this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
                         this.mtbRzuDataPrP.DataBindings.Clear();
@@ -240,6 +254,18 @@ namespace SewingProduction
                         this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
                         this.mtbRzuVidStir.DataBindings.Clear();
                         this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+                        this.cbPszPrintPlan.DataBindings.Clear();
+                        this.cbPszPrintPlan.DataBindings.Add("Checked", dtRasInfo, "PszPrintPlan");
+                        this.cbRzuPrintFact.DataBindings.Clear();
+                        this.cbRzuPrintFact.DataBindings.Add("Checked", dtRasInfo, "RzuPrintFact");
+                        this.cbPszVishPlan.DataBindings.Clear();
+                        this.cbPszVishPlan.DataBindings.Add("Checked", dtRasInfo, "PszVishPlan");
+                        this.cbRzuVishFact.DataBindings.Clear();
+                        this.cbRzuVishFact.DataBindings.Add("Checked", dtRasInfo, "RzuVishFact");
+                        this.cbPszStirPlan.DataBindings.Clear();
+                        this.cbPszStirPlan.DataBindings.Add("Checked", dtRasInfo, "PszStirPlan");
+                        this.cbRzuStirFact.DataBindings.Clear();
+                        this.cbRzuStirFact.DataBindings.Add("Checked", dtRasInfo, "RzuStirFact");
 
                         string NomZad = this.tbPsaNomZad.Text;
                         SqlDataAdapter adapterIsChip = new SqlDataAdapter();
@@ -282,8 +308,13 @@ namespace SewingProduction
                         adapterOtdelkaList.Fill(dtOtdelkaList);
                         bsOtdelkaList.DataSource = dtOtdelkaList;
                         //bsOtdelkaList.Sort = "iz asc";
+
+                        if (xtraTabControl1.SelectedTabPageIndex == 1)
+                        {
+                            button11_Click(sender, e);
+                        }
+                        
                     }
-                    this.progressPanel1.Visible = false;
                 }
             }
         }
@@ -443,8 +474,6 @@ namespace SewingProduction
             if (btnNaklPart.Text == "Показать информацию по делению накладной")
             {
                 btnNaklPart.Text = "Скрыть информацию по делению накладной";
-                this.progressPanel1.BringToFront();
-                this.progressPanel1.Visible = true;
                 string iz = GetIzNakl();
                 
                 string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -481,7 +510,6 @@ namespace SewingProduction
                     //    }
                     //}
                 }
-                this.progressPanel1.Visible = false;
             }
             else
             {
@@ -545,6 +573,305 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
+
+        private void mtbRzuDataUp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataRab_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataZeh_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataCdUt_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbPsaDataCdPlan_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void mtbPsaDataZap_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void label33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mtbRzuDataCd_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
+        }
+
+        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void furnitZayavView1_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void furnitZayavViewFurnit_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void furnitZayavViewUpak_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void xtraTabPage2_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void xtraTabPage2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
+        {
+            button11_Click(sender, e);
+            //furnitZayavViewFurnit.Text = "2024   37605";
+            ////furnitZayavViewFurnit.Refresh();
+            //furnitZayavViewUpak.Text = "2024   40367";
+            
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label59_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label60_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFullKKPrint_Click(object sender, EventArgs e)
+        {
+            PrintFullKKReport report1 = new PrintFullKKReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_psaid"].Value = Convert.ToInt32(tbPsaPsaID.Text);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void btnUpakKKPrint_Click(object sender, EventArgs e)
+        {
+            PrintKKReport report1 = new PrintKKReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_kodFD"].Value = fkodfd;
+            report1.Parameters["_nomZad"].Value = tbPsaNomZad.Text;
+            report1.Parameters["_vidF"].Value = 2;
+            report1.Parameters["_specRez"].Value = Convert.ToBoolean(uspecrez);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
+            string connectionString = Properties.Settings.Default.ACEConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+
+                //Console.WriteLine("Подключение открыто");
+                SqlDataAdapter adapterFurnZayavInfo = new SqlDataAdapter();
+                DataTable dtFurnZayavInfo = new DataTable();
+                string queryFurnZayavInfo = $"exec furnitZayavCheck '{PachKod}', 1 ";  // 1 - ШП. на будущее нужно будут доработать с учетом выбора вида производства
+                SqlCommand commandFurnZayavInfo = new SqlCommand(queryFurnZayavInfo, connection);
+                adapterFurnZayavInfo.SelectCommand = commandFurnZayavInfo;
+                adapterFurnZayavInfo.Fill(dtFurnZayavInfo);
+                bsFurnZayavInfo.DataSource = dtFurnZayavInfo;
+                //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                this.tbFurnKKStat.DataBindings.Clear();
+                this.tbFurnKKStat.DataBindings.Add("text", bsFurnZayavInfo, "FurnKKStat");
+                if (dtFurnZayavInfo.Rows[0]["FurnKKStat"].ToString() != 'V'.ToString() && Convert.ToInt32(dtFurnZayavInfo.Rows[0]["is_furnit"]) == 1)
+                {
+                    tbFurnKKStat.ForeColor = Color.Red; 
+                    btnFurnKKPrint.ForeColor = Color.Red;
+                }
+                else
+                {
+                    tbFurnKKStat.ForeColor = Color.Black;
+                    btnFurnKKPrint.ForeColor = Color.Black;
+                }
+                this.tbUpakKKStat.DataBindings.Clear();
+                this.tbUpakKKStat.DataBindings.Add("text", bsFurnZayavInfo, "UpakKKStat");
+                if (dtFurnZayavInfo.Rows[0]["UpakKKStat"].ToString() != 'V'.ToString() && Convert.ToInt32(dtFurnZayavInfo.Rows[0]["is_upak"]) == 1)
+                {
+                    tbUpakKKStat.ForeColor = Color.Red;
+                    btnUpakKKPrint.ForeColor = Color.Red;
+                }
+                else
+                {
+                    tbUpakKKStat.ForeColor = Color.Black;
+                    btnUpakKKPrint.ForeColor = Color.Black;
+                }
+                this.tbFurnZayav.DataBindings.Clear();
+                this.tbFurnZayav.DataBindings.Add("text", bsFurnZayavInfo, "FurnZayav");
+                this.tbData_f_o.DataBindings.Clear();
+                this.tbData_f_o.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_o");
+                this.tbFZSozdStat.DataBindings.Clear();
+                this.tbFZSozdStat.DataBindings.Add("text", bsFurnZayavInfo, "FZSozdStat");
+                this.tbData_f_z.DataBindings.Clear();
+                this.tbData_f_z.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_z");
+                this.tbFZSobrStat.DataBindings.Clear();
+                this.tbFZSobrStat.DataBindings.Add("text", bsFurnZayavInfo, "FZSobrStat");
+
+                this.tbUpakZayav.DataBindings.Clear();
+                this.tbUpakZayav.DataBindings.Add("text", bsFurnZayavInfo, "UpakZayav");
+                this.tbData_f_o_u.DataBindings.Clear();
+                this.tbData_f_o_u.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_o_u");
+                this.tbUZSozdStat.DataBindings.Clear();
+                this.tbUZSozdStat.DataBindings.Add("text", bsFurnZayavInfo, "UZSozdStat");
+                this.tbData_f_z_u.DataBindings.Clear();
+                this.tbData_f_z_u.DataBindings.Add("text", bsFurnZayavInfo, "Data_f_z_u");
+                this.tbUZSobrStat.DataBindings.Clear();
+                this.tbUZSobrStat.DataBindings.Add("text", bsFurnZayavInfo, "UZSobrStat");
+
+                this.mtbData_zeh.DataBindings.Clear();
+                this.mtbData_zeh.DataBindings.Add("text", bsFurnZayavInfo, "Data_zeh");
+                this.tbIs_got.DataBindings.Clear();
+                this.tbIs_got.DataBindings.Add("text", bsFurnZayavInfo, "Is_got");
+                if (dtFurnZayavInfo.Rows[0]["Is_got"].ToString() == 'V'.ToString())
+                {
+                    tbIs_got.ForeColor = Color.Red;
+                    mtbData_zeh.ForeColor = Color.Red;
+                }
+                else
+                {
+                    tbIs_got.ForeColor = Color.Black;
+                    mtbData_zeh.ForeColor = Color.Black;
+                }
+
+                this.mtbData_cd.DataBindings.Clear();
+                this.mtbData_cd.DataBindings.Add("text", bsFurnZayavInfo, "Data_cd");
+                this.tbOtgrStat.DataBindings.Clear();
+                this.tbOtgrStat.DataBindings.Add("text", bsFurnZayavInfo, "OtgrStat");
+                if (dtFurnZayavInfo.Rows[0]["OtgrStat"].ToString() == 'V'.ToString())
+                {
+                    tbOtgrStat.ForeColor = Color.Red;
+                    mtbData_cd.ForeColor = Color.Red;
+                }
+                else
+                {
+                    tbOtgrStat.ForeColor = Color.Black;
+                    mtbData_cd.ForeColor = Color.Black;
+                }
+
+                this.tbDatZayav.DataBindings.Clear();
+                this.tbDatZayav.DataBindings.Add("text", bsFurnZayavInfo, "DatZayav");
+
+                //furnitZayavViewFurnit.Text = "2024   37605";
+                ////furnitZayavViewFurnit.Refresh();
+                //furnitZayavViewUpak.Text = "2024   40367";
+                //MessageBox.Show(dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString());
+                //MessageBox.Show(dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString().Substring(0,12));
+                furnitZayavViewFurnit.Text = dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString().Substring(0,12);
+                furnitZayavViewFurnit.Refresh();
+                furnitZayavViewUpak.Text = dtFurnZayavInfo.Rows[0]["UKoDFD"].ToString().Substring(0,12);
+                furnitZayavViewUpak.Refresh();
+                fspecrez = Convert.ToInt32(dtFurnZayavInfo.Rows[0]["FSpecRez"]);
+                uspecrez = Convert.ToInt32(dtFurnZayavInfo.Rows[0]["USpecRez"]);
+                fkodfd = dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString();
+                ukodfd = dtFurnZayavInfo.Rows[0]["UKoDFD"].ToString();
+
+
+                
+            }
+        }
+
+        private void btnFurnKKPrint_Click(object sender, EventArgs e)
+        {
+            //string iz = GetIzNakl();
+            //PrintNaklReport report1 = new PrintNaklReport();
+            //report1.RequestParameters = false;
+            //report1.Parameters["_naklIz"].Value = iz;
+            //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            //reportPrintTool1.ShowPreviewDialog();
+
+            //string nomzad = tbPsaNomZad.Text;
+            //int vidf = 1;
+            PrintKKReport report1 = new PrintKKReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_kodFD"].Value = fkodfd;
+            report1.Parameters["_nomZad"].Value = tbPsaNomZad.Text;
+            report1.Parameters["_vidF"].Value = 1;
+            report1.Parameters["_specRez"].Value = Convert.ToBoolean(fspecrez);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+        }
+
+        //private void gcNaklList1_RowCellStyle(object sender, MaskInputRejectedEventArgs e)
+        //{
+        //    if (e.Column.FieldName == "Field2")
+        //    {
+        //        var data = gridView1.GetRow(e.RowHandle) as Sample;
+        //        if (data == null)
+        //            return;
+
+        //        if (data.Field2 < 0)
+        //            e.Appearance.ForeColor = Color.Red;
+        //    }
+        //}
 
         //private void button1_Click(object sender, EventArgs e)
         //{
