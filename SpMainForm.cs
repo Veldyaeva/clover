@@ -79,8 +79,10 @@ namespace SewingProduction
         }
 
 
-        private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
+
             //CardByNom newMDIChild = new CardByNom();
             //newMDIChild.MdiParent = this;
             //newMDIChild.Show();
