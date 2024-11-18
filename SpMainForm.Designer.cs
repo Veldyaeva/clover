@@ -37,14 +37,9 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оборудованиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.оборудованиеВБригадахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.группыОборудованияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.видыОборудованияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.матрицаКлассовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.оборудованиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -116,51 +111,17 @@
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
             // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
+            // 
             // оборудованиеToolStripMenuItem
             // 
-            this.оборудованиеToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.оборудованиеВБригадахToolStripMenuItem,
-            this.группыОборудованияToolStripMenuItem,
-            this.видМашинToolStripMenuItem,
-            this.видыОборудованияToolStripMenuItem,
-            this.матрицаКлассовToolStripMenuItem});
             this.оборудованиеToolStripMenuItem.Name = "оборудованиеToolStripMenuItem";
             this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оборудованиеToolStripMenuItem.Text = "Оборудование";
-            // 
-            // оборудованиеВБригадахToolStripMenuItem
-            // 
-            this.оборудованиеВБригадахToolStripMenuItem.Name = "оборудованиеВБригадахToolStripMenuItem";
-            this.оборудованиеВБригадахToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.оборудованиеВБригадахToolStripMenuItem.Text = "Оборудование в бригадах";
-            // 
-            // группыОборудованияToolStripMenuItem
-            // 
-            this.группыОборудованияToolStripMenuItem.Name = "группыОборудованияToolStripMenuItem";
-            this.группыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.группыОборудованияToolStripMenuItem.Text = "Оборудование";
-            this.группыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.группыОборудованияToolStripMenuItem_Click);
-            // 
-            // видМашинToolStripMenuItem
-            // 
-            this.видМашинToolStripMenuItem.Name = "видМашинToolStripMenuItem";
-            this.видМашинToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видМашинToolStripMenuItem.Text = "Виды работ";
-            this.видМашинToolStripMenuItem.Click += new System.EventHandler(this.видМашинToolStripMenuItem_Click);
-            // 
-            // видыОборудованияToolStripMenuItem
-            // 
-            this.видыОборудованияToolStripMenuItem.Name = "видыОборудованияToolStripMenuItem";
-            this.видыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.видыОборудованияToolStripMenuItem.Text = "Группы оборудования";
-            this.видыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.видыОборудованияToolStripMenuItem_Click);
-            // 
-            // матрицаКлассовToolStripMenuItem
-            // 
-            this.матрицаКлассовToolStripMenuItem.Name = "матрицаКлассовToolStripMenuItem";
-            this.матрицаКлассовToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.матрицаКлассовToolStripMenuItem.Text = "Матрица классов";
-            this.матрицаКлассовToolStripMenuItem.Click += new System.EventHandler(this.матрицаКлассовToolStripMenuItem_Click);
             // 
             // карточкаРасчетаToolStripMenuItem1
             // 
@@ -168,11 +129,6 @@
             this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
             this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
-            // 
-            // xtraTabbedMdiManager1
-            // 
-            this.xtraTabbedMdiManager1.MdiParent = this;
-            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // SpMainForm
             // 
@@ -210,11 +166,6 @@
         private DevExpress.XtraTabbedMdi.XtraTabbedMdiManager xtraTabbedMdiManager1;
         private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оборудованиеToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem оборудованиеВБригадахToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem группыОборудованияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видМашинToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видыОборудованияToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem матрицаКлассовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem карточкаРасчетаToolStripMenuItem1;
     }
 }

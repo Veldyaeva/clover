@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\SP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\form\\spravforall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\spravforall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 25,
+          "SelectedChildIndex": 24,
           "Children": [
             {
               "$type": "Bookmark",
@@ -113,19 +113,15 @@
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SpravForAll.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SP\\form\\SpravForAll.cs",
-              "RelativeDocumentMoniker": "form\\SpravForAll.cs",
-              "ToolTip": "D:\\SP\\form\\SpravForAll.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "form\\SpravForAll.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Title": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
+              "RelativeDocumentMoniker": "SpMainForm.cs",
+              "ToolTip": "D:\\SP\\SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
+              "RelativeToolTip": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T12:11:55.145Z",
+              "WhenOpened": "2024-11-18T12:19:31.345Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
