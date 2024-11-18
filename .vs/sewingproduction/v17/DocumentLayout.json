@@ -3,32 +3,8 @@
   "WorkspaceRootPath": "D:\\SP\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sp\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -89,92 +65,25 @@
               "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\SP\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\SP\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-12T05:22:56.593Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CardByNom.cs",
-              "DocumentMoniker": "D:\\SP\\form\\CardByNom.cs",
-              "RelativeDocumentMoniker": "form\\CardByNom.cs",
-              "ToolTip": "D:\\SP\\form\\CardByNom.cs",
-              "RelativeToolTip": "form\\CardByNom.cs",
-              "ViewState": "AgIAAGcAAAAAAAAAAAAhwIoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T11:56:01.797Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SP\\form\\CardByNom.cs",
-              "RelativeDocumentMoniker": "form\\CardByNom.cs",
-              "ToolTip": "D:\\SP\\form\\CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "form\\CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-06T11:55:52.015Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "SpMainForm.cs",
               "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
               "RelativeDocumentMoniker": "SpMainForm.cs",
               "ToolTip": "D:\\SP\\SpMainForm.cs",
               "RelativeToolTip": "SpMainForm.cs",
-              "ViewState": "AgIAAC4AAAAAAAAAAAAYwEMAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAACYAAAAAAAAAAAAwwA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T11:00:04.992Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
-              "RelativeDocumentMoniker": "SpMainForm.cs",
-              "ToolTip": "D:\\SP\\SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T11:01:46.331Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "SpravOborud.cs",
-              "DocumentMoniker": "D:\\SP\\form\\SpravOborud.cs",
-              "RelativeDocumentMoniker": "form\\SpravOborud.cs",
-              "ToolTip": "D:\\SP\\form\\SpravOborud.cs*",
-              "RelativeToolTip": "form\\SpravOborud.cs*",
-              "ViewState": "AgIAADcBAAAAAAAAAAAkwEsBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T13:25:24.732Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SP\\form\\SpravOborud.cs",
-              "RelativeDocumentMoniker": "form\\SpravOborud.cs",
-              "ToolTip": "D:\\SP\\form\\SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "RelativeToolTip": "form\\SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-01T07:31:23.765Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
         }
