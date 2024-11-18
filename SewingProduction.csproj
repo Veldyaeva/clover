@@ -99,10 +99,18 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="class\RussianGridLocalizer.cs" />
+    <Compile Include="class\RussianPrintLocalizer.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravForAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravForAll.Designer.cs">
+      <DependentUpon>SpravForAll.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravOborud.cs">
       <SubType>Form</SubType>
@@ -198,6 +206,9 @@
     </Compile>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravForAll.resx">
+      <DependentUpon>SpravForAll.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>

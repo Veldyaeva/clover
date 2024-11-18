@@ -91,5 +91,25 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
+        private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravForAll f = new SpravForAll("oborud_shv_ob", "Справочник групп оборудования");
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravForAll f = new SpravForAll("matrix_class", "Справочник матрицы классов");
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void видМашинToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravForAll f = new SpravForAll("spOborudMachine", "Справочник виды работ");
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

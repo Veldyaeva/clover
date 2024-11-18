@@ -43,8 +43,8 @@
             this.видМашинToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видыОборудованияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.матрицаКлассовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -146,23 +146,21 @@
             this.видМашинToolStripMenuItem.Name = "видМашинToolStripMenuItem";
             this.видМашинToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.видМашинToolStripMenuItem.Text = "Виды работ";
+            this.видМашинToolStripMenuItem.Click += new System.EventHandler(this.видМашинToolStripMenuItem_Click);
             // 
             // видыОборудованияToolStripMenuItem
             // 
             this.видыОборудованияToolStripMenuItem.Name = "видыОборудованияToolStripMenuItem";
             this.видыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.видыОборудованияToolStripMenuItem.Text = "Группы оборудования";
+            this.видыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.видыОборудованияToolStripMenuItem_Click);
             // 
             // матрицаКлассовToolStripMenuItem
             // 
             this.матрицаКлассовToolStripMenuItem.Name = "матрицаКлассовToolStripMenuItem";
             this.матрицаКлассовToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
             this.матрицаКлассовToolStripMenuItem.Text = "Матрица классов";
-            // 
-            // xtraTabbedMdiManager1
-            // 
-            this.xtraTabbedMdiManager1.MdiParent = this;
-            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
+            this.матрицаКлассовToolStripMenuItem.Click += new System.EventHandler(this.матрицаКлассовToolStripMenuItem_Click);
             // 
             // карточкаРасчетаToolStripMenuItem1
             // 
@@ -170,6 +168,11 @@
             this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
             this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // SpMainForm
             // 
