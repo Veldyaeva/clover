@@ -337,4 +337,9 @@ D:\SharpProj\sewingproduction\bin\Debug\zh-Hant\Microsoft.SqlServer.Types.resour
 >>>>>>> вкладка конфекцион - условия для создания заявок
 =======
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.FurnitZayavView.resources
+<<<<<<< HEAD
 >>>>>>> usercontrol furmitview
+=======
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.PrintKKReport.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.PrintFullKKReport.resources
+>>>>>>> печать КК по заданию, печать общей КК по коду матрицы

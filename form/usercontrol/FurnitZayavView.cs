@@ -91,8 +91,8 @@ namespace SewingProduction
 
                     SqlDataAdapter adapterFurnitArt = new SqlDataAdapter();
                     DataTable dtFurnitArt = new DataTable();
-                    string queryFurnitArt = $"select fa.kod_f_d, fa.articul, fa.mod, fa.kol, fa.n_zvet, fa.nom_zad, CAST(fa.faSpecRez AS BIT) as faSpecRez ";
-                    queryFurnitArt += $" from furnit_art fa ";
+                    string queryFurnitArt = $"select * ";
+                    queryFurnitArt += $" from FurnitArtView fa ";
                     //queryFurnitArt += $"    left join view_sp_articul vsa on fa. ";
                     queryFurnitArt += $" where kod_f = '{_kodF}' ";
                     queryFurnitArt += $" order by kod_f_d";

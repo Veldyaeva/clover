@@ -105,7 +105,7 @@
             // gcFurnitArt
             // 
             this.gcFurnitArt.DataSource = this.bsFurnitArt;
-            this.gcFurnitArt.Location = new System.Drawing.Point(3, 52);
+            this.gcFurnitArt.Location = new System.Drawing.Point(1, 52);
             this.gcFurnitArt.MainView = this.gridView1;
             this.gcFurnitArt.Name = "gcFurnitArt";
             this.gcFurnitArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
@@ -137,6 +137,7 @@
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.RowAutoHeight = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
             // 
@@ -168,20 +169,21 @@
             // 
             // gridColumn2
             // 
-            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gridColumn2.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gridColumn2.AppearanceCell.Options.UseFont = true;
             this.gridColumn2.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
             this.gridColumn2.AppearanceHeader.Options.UseFont = true;
             this.gridColumn2.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn2.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn2.Caption = "КС";
+            this.gridColumn2.FieldName = "ks";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.FixedWidth = true;
             this.gridColumn2.OptionsFilter.AllowAutoFilter = false;
             this.gridColumn2.OptionsFilter.AllowFilter = false;
             this.gridColumn2.Visible = true;
             this.gridColumn2.VisibleIndex = 6;
-            this.gridColumn2.Width = 42;
+            this.gridColumn2.Width = 30;
             // 
             // gridColumn3
             // 
@@ -203,20 +205,21 @@
             // 
             // gridColumn4
             // 
-            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gridColumn4.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gridColumn4.AppearanceCell.Options.UseFont = true;
             this.gridColumn4.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 6F);
             this.gridColumn4.AppearanceHeader.Options.UseFont = true;
             this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
             this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn4.Caption = "ТМ";
+            this.gridColumn4.FieldName = "tm";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.OptionsColumn.FixedWidth = true;
             this.gridColumn4.OptionsFilter.AllowAutoFilter = false;
             this.gridColumn4.OptionsFilter.AllowFilter = false;
             this.gridColumn4.Visible = true;
             this.gridColumn4.VisibleIndex = 4;
-            this.gridColumn4.Width = 20;
+            this.gridColumn4.Width = 35;
             // 
             // gridColumn5
             // 
@@ -233,7 +236,7 @@
             this.gridColumn5.OptionsFilter.AllowFilter = false;
             this.gridColumn5.Visible = true;
             this.gridColumn5.VisibleIndex = 3;
-            this.gridColumn5.Width = 108;
+            this.gridColumn5.Width = 114;
             // 
             // gridColumn6
             // 
@@ -251,7 +254,7 @@
             this.gridColumn6.OptionsFilter.AllowFilter = false;
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 2;
-            this.gridColumn6.Width = 27;
+            this.gridColumn6.Width = 23;
             // 
             // gridColumn7
             // 
@@ -300,7 +303,7 @@
             // gcFurnitPach
             // 
             this.gcFurnitPach.DataSource = this.bsFurnitPach;
-            this.gcFurnitPach.Location = new System.Drawing.Point(397, 53);
+            this.gcFurnitPach.Location = new System.Drawing.Point(391, 53);
             this.gcFurnitPach.MainView = this.gridView2;
             this.gcFurnitPach.Name = "gcFurnitPach";
             this.gcFurnitPach.Size = new System.Drawing.Size(159, 209);
@@ -320,6 +323,7 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView2.OptionsView.RowAutoHeight = true;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn9
             // 
@@ -437,12 +441,12 @@
             // gcFurnitF
             // 
             this.gcFurnitF.DataSource = this.bsFurnitF;
-            this.gcFurnitF.Location = new System.Drawing.Point(562, 52);
+            this.gcFurnitF.Location = new System.Drawing.Point(552, 52);
             this.gcFurnitF.MainView = this.gridView3;
             this.gcFurnitF.Name = "gcFurnitF";
             this.gcFurnitF.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit2});
-            this.gcFurnitF.Size = new System.Drawing.Size(391, 209);
+            this.gcFurnitF.Size = new System.Drawing.Size(369, 209);
             this.gcFurnitF.TabIndex = 25;
             this.gcFurnitF.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -466,6 +470,7 @@
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView3.OptionsView.RowAutoHeight = true;
+            this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn13
             // 
@@ -616,10 +621,10 @@
             // gcFurnitFIt
             // 
             this.gcFurnitFIt.DataSource = this.bsFurnitFIt;
-            this.gcFurnitFIt.Location = new System.Drawing.Point(959, 52);
+            this.gcFurnitFIt.Location = new System.Drawing.Point(923, 52);
             this.gcFurnitFIt.MainView = this.gridView4;
             this.gcFurnitFIt.Name = "gcFurnitFIt";
-            this.gcFurnitFIt.Size = new System.Drawing.Size(387, 209);
+            this.gcFurnitFIt.Size = new System.Drawing.Size(428, 209);
             this.gcFurnitFIt.TabIndex = 26;
             this.gcFurnitFIt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -645,6 +650,7 @@
             this.gridView4.Name = "gridView4";
             this.gridView4.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.gridView4.OptionsView.RowAutoHeight = true;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn12
             // 
@@ -697,11 +703,11 @@
             this.gridColumn23.Name = "gridColumn23";
             this.gridColumn23.Visible = true;
             this.gridColumn23.VisibleIndex = 3;
-            this.gridColumn23.Width = 119;
+            this.gridColumn23.Width = 126;
             // 
             // gridColumn29
             // 
-            this.gridColumn29.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 6F);
+            this.gridColumn29.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 6.5F);
             this.gridColumn29.AppearanceCell.Options.UseFont = true;
             this.gridColumn29.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
             this.gridColumn29.AppearanceHeader.Options.UseFont = true;
@@ -711,7 +717,7 @@
             this.gridColumn29.OptionsColumn.FixedWidth = true;
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 4;
-            this.gridColumn29.Width = 25;
+            this.gridColumn29.Width = 28;
             // 
             // gridColumn24
             // 
@@ -725,7 +731,7 @@
             this.gridColumn24.OptionsColumn.FixedWidth = true;
             this.gridColumn24.Visible = true;
             this.gridColumn24.VisibleIndex = 5;
-            this.gridColumn24.Width = 32;
+            this.gridColumn24.Width = 39;
             // 
             // gridColumn25
             // 
@@ -739,7 +745,7 @@
             this.gridColumn25.OptionsColumn.FixedWidth = true;
             this.gridColumn25.Visible = true;
             this.gridColumn25.VisibleIndex = 6;
-            this.gridColumn25.Width = 32;
+            this.gridColumn25.Width = 39;
             // 
             // gridColumn26
             // 
@@ -753,11 +759,11 @@
             this.gridColumn26.OptionsColumn.FixedWidth = true;
             this.gridColumn26.Visible = true;
             this.gridColumn26.VisibleIndex = 7;
-            this.gridColumn26.Width = 32;
+            this.gridColumn26.Width = 39;
             // 
             // gridColumn27
             // 
-            this.gridColumn27.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 8.25F);
+            this.gridColumn27.AppearanceCell.Font = new System.Drawing.Font("Arial Narrow", 7F);
             this.gridColumn27.AppearanceCell.Options.UseFont = true;
             this.gridColumn27.AppearanceHeader.Font = new System.Drawing.Font("Arial Narrow", 7F);
             this.gridColumn27.AppearanceHeader.Options.UseFont = true;
@@ -767,7 +773,7 @@
             this.gridColumn27.OptionsColumn.FixedWidth = true;
             this.gridColumn27.Visible = true;
             this.gridColumn27.VisibleIndex = 8;
-            this.gridColumn27.Width = 32;
+            this.gridColumn27.Width = 39;
             // 
             // tbKodF
             // 
@@ -783,7 +789,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(2, 34);
+            this.label3.Location = new System.Drawing.Point(0, 34);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 18);
             this.label3.TabIndex = 28;
@@ -793,7 +799,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(394, 35);
+            this.label4.Location = new System.Drawing.Point(388, 35);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(51, 18);
             this.label4.TabIndex = 29;
@@ -803,7 +809,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(558, 34);
+            this.label5.Location = new System.Drawing.Point(548, 34);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(61, 18);
             this.label5.TabIndex = 30;
@@ -824,7 +830,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(955, 34);
+            this.label6.Location = new System.Drawing.Point(941, 34);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(73, 18);
             this.label6.TabIndex = 32;
@@ -860,7 +866,7 @@
             this.Controls.Add(this.gcFurnitF);
             this.Controls.Add(this.gcFurnitFIt);
             this.Name = "FurnitZayavView";
-            this.Size = new System.Drawing.Size(1349, 265);
+            this.Size = new System.Drawing.Size(1353, 265);
             this.Load += new System.EventHandler(this.FurnitZayavView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFurnitArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnitArt)).EndInit();

@@ -115,6 +115,18 @@
     <Compile Include="report\PrintReestrListReport.Designer.cs">
       <DependentUpon>PrintReestrListReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="report\PrintKKReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintKKReport.Designer.cs">
+      <DependentUpon>PrintKKReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\PrintFullKKReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintFullKKReport.Designer.cs">
+      <DependentUpon>PrintFullKKReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +202,12 @@
     <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="report\PrintReestrListReport.resx">
       <DependentUpon>PrintReestrListReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\PrintKKReport.resx">
+      <DependentUpon>PrintKKReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\PrintFullKKReport.resx">
+      <DependentUpon>PrintFullKKReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>

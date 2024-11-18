@@ -103,6 +103,8 @@
             this.GroupFooter1 = new DevExpress.XtraReports.UI.GroupFooterBand();
             this.label2 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupFooter2 = new DevExpress.XtraReports.UI.GroupFooterBand();
+            this.xrLabel69 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel54 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel51 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel50 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel49 = new DevExpress.XtraReports.UI.XRLabel();
@@ -146,7 +148,6 @@
             this.xrLabel57 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel56 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel72 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrLabel69 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
             this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
             this.Title = new DevExpress.XtraReports.UI.XRControlStyle();
@@ -164,7 +165,6 @@
             this.GrandTotalBackground1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.PageInfo = new DevExpress.XtraReports.UI.XRControlStyle();
             this._naklIz = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrLabel54 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -1154,12 +1154,43 @@
             this.GroupFooter2.Name = "GroupFooter2";
             this.GroupFooter2.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.GroupFooter2_BeforePrint);
             // 
+            // xrLabel69
+            // 
+            this.xrLabel69.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.xrLabel69.Dpi = 254F;
+            this.xrLabel69.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[FurnSobZayavStatus]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([kodFDFurn], \'\'))) != 0, \'Yes\', \'No\')")});
+            this.xrLabel69.LocationFloat = new DevExpress.Utils.PointFloat(34.98107F, 676.2925F);
+            this.xrLabel69.Multiline = true;
+            this.xrLabel69.Name = "xrLabel69";
+            this.xrLabel69.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel69.SizeF = new System.Drawing.SizeF(1366.637F, 42.54504F);
+            this.xrLabel69.StylePriority.UseBackColor = false;
+            this.xrLabel69.Text = "xrLabel52";
+            // 
+            // xrLabel54
+            // 
+            this.xrLabel54.Dpi = 254F;
+            this.xrLabel54.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintInfo]"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([iz_ob_prch],0) = 4 || Substring([articul], 0, 1) = \'2\' || Substring([" +
+                    "mod], 0, 1) = \'M\' || [p_seb] > 0, true, false)\n")});
+            this.xrLabel54.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
+            this.xrLabel54.LocationFloat = new DevExpress.Utils.PointFloat(346.6035F, 447.7251F);
+            this.xrLabel54.Multiline = true;
+            this.xrLabel54.Name = "xrLabel54";
+            this.xrLabel54.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel54.SizeF = new System.Drawing.SizeF(1105.993F, 45.19083F);
+            this.xrLabel54.StylePriority.UseFont = false;
+            this.xrLabel54.Text = "xrLabel54";
+            // 
             // xrLabel51
             // 
             this.xrLabel51.Dpi = 254F;
             this.xrLabel51.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[sostPoln]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim([sostPoln])) != 0, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim([sostPoln])) != 0, true, false)")});
             this.xrLabel51.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel51.LocationFloat = new DevExpress.Utils.PointFloat(512.6089F, 492.916F);
             this.xrLabel51.Multiline = true;
@@ -1230,7 +1261,7 @@
             this.xrLabel46.Dpi = 254F;
             this.xrLabel46.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kodSpPeredGITP]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)")});
             this.xrLabel46.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel46.LocationFloat = new DevExpress.Utils.PointFloat(1221.422F, 405.1802F);
             this.xrLabel46.Multiline = true;
@@ -1244,7 +1275,7 @@
             // 
             this.xrLabel44.Dpi = 254F;
             this.xrLabel44.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)")});
             this.xrLabel44.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel44.LocationFloat = new DevExpress.Utils.PointFloat(881.7722F, 405.1802F);
             this.xrLabel44.Multiline = true;
@@ -1259,7 +1290,7 @@
             this.xrLabel43.Dpi = 254F;
             this.xrLabel43.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[izGITP]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)")});
             this.xrLabel43.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel43.LocationFloat = new DevExpress.Utils.PointFloat(648.564F, 405.1801F);
             this.xrLabel43.Multiline = true;
@@ -1273,7 +1304,7 @@
             // 
             this.xrLabel42.Dpi = 254F;
             this.xrLabel42.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)\n")});
             this.xrLabel42.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel42.LocationFloat = new DevExpress.Utils.PointFloat(344.4333F, 405.1801F);
             this.xrLabel42.Multiline = true;
@@ -1288,7 +1319,7 @@
             this.xrLabel41.Dpi = 254F;
             this.xrLabel41.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[pachListGITP]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)")});
             this.xrLabel41.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel41.LocationFloat = new DevExpress.Utils.PointFloat(581.6421F, 362.6351F);
             this.xrLabel41.Multiline = true;
@@ -1302,7 +1333,7 @@
             // 
             this.xrLabel40.Dpi = 254F;
             this.xrLabel40.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, \'Yes\', \'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif([isTP] = 1, true, false)")});
             this.xrLabel40.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, DevExpress.Drawing.DXFontStyle.Italic);
             this.xrLabel40.LocationFloat = new DevExpress.Utils.PointFloat(346.6037F, 362.6351F);
             this.xrLabel40.Multiline = true;
@@ -1651,8 +1682,8 @@
                     ", \'0\')\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(IsNull([DiscountPercentRazdel],0) != 0 && IsNull([iz_ob_prch],0) = 1, Concat(" +
                     "\'% скидки: \', [DiscountPercentRazdel]), \'\')"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([DiscountPercentRazdel],0) != 0 && IsNull([iz_ob_prch],0) = 1, \'Yes\', " +
-                    "\'No\')")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([DiscountPercentRazdel],0) != 0 && IsNull([iz_ob_prch],0) = 1, true, f" +
+                    "alse)")});
             this.xrLabel63.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 1027.753F);
             this.xrLabel63.Multiline = true;
             this.xrLabel63.Name = "xrLabel63";
@@ -1670,7 +1701,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "HeightF", "Iif(Len(Trim(IsNull([FioKomRazdel],\'\'))) != 0, \'42,54\', \'0\')\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(Len(Trim(IsNull([FioKomRazdel],\'\'))) != 0, Concat(\'Комиссия: \', [FioKomRazdel" +
                     "]), \'\')"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioKomRazdel],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioKomRazdel],\'\'))) != 0, true, false)\n")});
             this.xrLabel62.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 985.2076F);
             this.xrLabel62.Multiline = true;
             this.xrLabel62.Name = "xrLabel62";
@@ -1688,7 +1719,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "HeightF", "Iif(Len(Trim(IsNull([FioKmSoglRazdel],\'\'))) != 0, \'42,54\', \'\')\n\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(Len(Trim(IsNull([FioKmSoglRazdel],\'\'))) != 0, Concat(\'Согласовано с КМ: \', [F" +
                     "ioKmSoglRazdel]), \'\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioKmSoglRazdel],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioKmSoglRazdel],\'\'))) != 0, true, false)\n")});
             this.xrLabel61.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 942.6627F);
             this.xrLabel61.Multiline = true;
             this.xrLabel61.Name = "xrLabel61";
@@ -1706,7 +1737,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "HeightF", "Iif(Len(Trim(IsNull([FioVinovnikRazdel],\'\'))) != 0, \'42,54\', \'\')\n\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(Len(Trim(IsNull([FioVinovnikRazdel],\'\'))) != 0, Concat(\'Виновник: \', [FioVino" +
                     "vnikRazdel]), \'\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioVinovnikRazdel],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([FioVinovnikRazdel],\'\'))) != 0, true, false)\n")});
             this.xrLabel60.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 900.1177F);
             this.xrLabel60.Multiline = true;
             this.xrLabel60.Name = "xrLabel60";
@@ -1724,7 +1755,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "HeightF", "Iif(Len(Trim(IsNull([PrimRazdel],\'\'))) != 0, \'42,54\', \'\')\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(Len(Trim(IsNull([PrimRazdel],\'\'))) != 0, Concat(\'Примечание: \', [PrimRazdel])" +
                     ", \'\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([PrimRazdel],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([PrimRazdel],\'\'))) != 0, true, false)\n")});
             this.xrLabel59.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 857.5726F);
             this.xrLabel59.Multiline = true;
             this.xrLabel59.Name = "xrLabel59";
@@ -1742,7 +1773,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "HeightF", "Iif(Len(Trim(IsNull([PrichRazdel],\'\'))) != 0, \'42,54\', \'0\')\n"),
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif(Len(Trim(IsNull([PrichRazdel],\'\'))) != 0, Concat(\'Причина 2 сорта: \', [PrichR" +
                     "azdel]), \'\')\n"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([PrichRazdel],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([PrichRazdel],\'\'))) != 0, true, false)\n")});
             this.xrLabel58.LocationFloat = new DevExpress.Utils.PointFloat(1448.724F, 815.0278F);
             this.xrLabel58.Multiline = true;
             this.xrLabel58.Name = "xrLabel58";
@@ -1821,21 +1852,6 @@
             this.xrLabel72.StylePriority.UseTextAlignment = false;
             this.xrLabel72.Text = "Расходные материалы";
             this.xrLabel72.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            // 
-            // xrLabel69
-            // 
-            this.xrLabel69.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.xrLabel69.Dpi = 254F;
-            this.xrLabel69.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[FurnSobZayavStatus]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(Len(Trim(IsNull([kodFDFurn], \'\'))) != 0, \'Yes\', \'No\')")});
-            this.xrLabel69.LocationFloat = new DevExpress.Utils.PointFloat(34.98107F, 676.2925F);
-            this.xrLabel69.Multiline = true;
-            this.xrLabel69.Name = "xrLabel69";
-            this.xrLabel69.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel69.SizeF = new System.Drawing.SizeF(1366.637F, 42.54504F);
-            this.xrLabel69.StylePriority.UseBackColor = false;
-            this.xrLabel69.Text = "xrLabel52";
             // 
             // xrSubreport1
             // 
@@ -2019,23 +2035,8 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202474566", "2 сорт"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202463361", "привлеченка Китай"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202474610", "акт-списание"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202452134", null));
             this._naklIz.ValueSourceSettings = staticListLookUpSettings1;
-            // 
-            // xrLabel54
-            // 
-            this.xrLabel54.Dpi = 254F;
-            this.xrLabel54.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintInfo]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(IsNull([iz_ob_prch],0) = 4 || Substring([articul], 0, 1) = \'2\' || Substring([" +
-                    "mod], 0, 1) = \'M\' || [p_seb] > 0, \'Yes\', \'No\')\n")});
-            this.xrLabel54.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F, ((DevExpress.Drawing.DXFontStyle)((DevExpress.Drawing.DXFontStyle.Bold | DevExpress.Drawing.DXFontStyle.Italic))));
-            this.xrLabel54.LocationFloat = new DevExpress.Utils.PointFloat(346.6035F, 447.7251F);
-            this.xrLabel54.Multiline = true;
-            this.xrLabel54.Name = "xrLabel54";
-            this.xrLabel54.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel54.SizeF = new System.Drawing.SizeF(1105.993F, 45.19083F);
-            this.xrLabel54.StylePriority.UseFont = false;
-            this.xrLabel54.Text = "xrLabel54";
             // 
             // PrintNaklReport
             // 
