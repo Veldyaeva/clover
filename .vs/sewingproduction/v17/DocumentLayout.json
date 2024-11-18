@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SharpProj\\sewingproduction\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SharpProj\\sewingproduction\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SharpProj\\sewingproduction\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SharpProj\\sewingproduction\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Bookmark",
@@ -70,19 +70,6 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SpMainForm.cs",
-              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
-              "RelativeDocumentMoniker": "SpMainForm.cs",
-              "ToolTip": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
-              "RelativeToolTip": "SpMainForm.cs",
-              "ViewState": "AQIAADgAAAAAAAAAAAAAAFIAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-18T11:01:43.538Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
               "Title": "SpMainForm.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
@@ -94,8 +81,24 @@
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "SpMainForm.cs",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
+              "RelativeDocumentMoniker": "SpMainForm.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\SpMainForm.cs",
+              "RelativeToolTip": "SpMainForm.cs",
+              "ViewState": "AQIAAEEAAAAAAAAAAAArwE4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-18T11:01:43.538Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "CardByNom.cs",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
               "RelativeDocumentMoniker": "form\\CardByNom.cs",
@@ -107,7 +110,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
               "RelativeDocumentMoniker": "form\\CardByNom.cs",
