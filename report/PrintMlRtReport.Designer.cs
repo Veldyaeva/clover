@@ -394,6 +394,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(414745, "бр50 трусы дев.(набор) 161488-502"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(412569, "бр19 брюки женские раскомпл компл 151940-943"));
             this._rzuNom.ValueSourceSettings = staticListLookUpSettings1;
+            this._rzuNom.Visible = false;
             // 
             // TopMargin
             // 
@@ -2703,6 +2704,7 @@
             staticListLookUpSettings2.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(1, null));
             staticListLookUpSettings2.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(0, null));
             this._isChip.ValueSourceSettings = staticListLookUpSettings2;
+            this._isChip.Visible = false;
             // 
             // _isUpak
             // 
@@ -2713,6 +2715,7 @@
             staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(1, null));
             staticListLookUpSettings3.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(0, null));
             this._isUpak.ValueSourceSettings = staticListLookUpSettings3;
+            this._isUpak.Visible = false;
             // 
             // PrintMlRtReport
             // 
@@ -2730,7 +2733,9 @@
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Margins = new DevExpress.Drawing.DXMargins(25F, 25F, 12.5F, 25F);
             this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._rzuNom, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._rzuNom, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._isChip, DevExpress.XtraReports.Parameters.Orientation.Horizontal),
+            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._isUpak, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
             this._rzuNom,
             this._isChip,

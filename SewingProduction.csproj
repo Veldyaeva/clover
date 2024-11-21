@@ -142,6 +142,18 @@
     <Compile Include="report\PrintFullKKReport.Designer.cs">
       <DependentUpon>PrintFullKKReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="report\PrintFurnUpakZayavReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintFurnUpakZayavReport.Designer.cs">
+      <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\subreport\PrintTakingCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\subreport\PrintTakingCardReport.Designer.cs">
+      <DependentUpon>PrintTakingCardReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -229,6 +241,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="report\PrintFullKKReport.resx">
       <DependentUpon>PrintFullKKReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\PrintFurnUpakZayavReport.resx">
+      <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\subreport\PrintTakingCardReport.resx">
+      <DependentUpon>PrintTakingCardReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>

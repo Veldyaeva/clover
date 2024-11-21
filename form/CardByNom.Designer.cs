@@ -99,14 +99,13 @@
             this.tbIs_got = new System.Windows.Forms.TextBox();
             this.label60 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
             this.tbUZSobrStat = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
             this.tbUZSozdStat = new System.Windows.Forms.TextBox();
             this.label57 = new System.Windows.Forms.Label();
             this.tbUpakZayav = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnZayavFurnPrint = new System.Windows.Forms.Button();
             this.tbFZSobrStat = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
             this.tbFZSozdStat = new System.Windows.Forms.TextBox();
@@ -818,14 +817,13 @@
             this.panelControl2.Controls.Add(this.tbIs_got);
             this.panelControl2.Controls.Add(this.label60);
             this.panelControl2.Controls.Add(this.label59);
-            this.panelControl2.Controls.Add(this.button9);
             this.panelControl2.Controls.Add(this.tbUZSobrStat);
             this.panelControl2.Controls.Add(this.label56);
             this.panelControl2.Controls.Add(this.tbUZSozdStat);
             this.panelControl2.Controls.Add(this.label57);
             this.panelControl2.Controls.Add(this.tbUpakZayav);
             this.panelControl2.Controls.Add(this.label58);
-            this.panelControl2.Controls.Add(this.button8);
+            this.panelControl2.Controls.Add(this.btnZayavFurnPrint);
             this.panelControl2.Controls.Add(this.tbFZSobrStat);
             this.panelControl2.Controls.Add(this.label55);
             this.panelControl2.Controls.Add(this.tbFZSozdStat);
@@ -923,16 +921,6 @@
             this.label59.Text = "Дата в цех";
             this.label59.Click += new System.EventHandler(this.label59_Click);
             // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(5, 362);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(200, 20);
-            this.button9.TabIndex = 53;
-            this.button9.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
-            // 
             // tbUZSobrStat
             // 
             this.tbUZSobrStat.Location = new System.Drawing.Point(177, 337);
@@ -984,15 +972,15 @@
             this.label58.TabIndex = 45;
             this.label58.Text = "Заявка на упаковку №";
             // 
-            // button8
+            // btnZayavFurnPrint
             // 
-            this.button8.Location = new System.Drawing.Point(6, 247);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 20);
-            this.button8.TabIndex = 44;
-            this.button8.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.btnZayavFurnPrint.Location = new System.Drawing.Point(6, 247);
+            this.btnZayavFurnPrint.Name = "btnZayavFurnPrint";
+            this.btnZayavFurnPrint.Size = new System.Drawing.Size(200, 20);
+            this.btnZayavFurnPrint.TabIndex = 44;
+            this.btnZayavFurnPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.btnZayavFurnPrint.UseVisualStyleBackColor = true;
+            this.btnZayavFurnPrint.Click += new System.EventHandler(this.btnZayavFurnPrint_Click);
             // 
             // tbFZSobrStat
             // 
@@ -1663,6 +1651,8 @@
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
@@ -1683,6 +1673,7 @@
             this.gridColumn17});
             this.gridView1.GridControl = this.gcNaklList;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn1
@@ -1715,6 +1706,7 @@
             // gridColumn4
             // 
             this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn4.Caption = "№ накл. Глобал";
             this.gridColumn4.FieldName = "gl_nomer";
@@ -1726,6 +1718,7 @@
             // gridColumn5
             // 
             this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn5.Caption = "Дата печати";
             this.gridColumn5.FieldName = "date_print";
@@ -1736,6 +1729,8 @@
             // 
             // gridColumn6
             // 
+            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "№ отгр.";
             this.gridColumn6.FieldName = "dost_n";
             this.gridColumn6.Name = "gridColumn6";
@@ -1746,6 +1741,7 @@
             // gridColumn7
             // 
             this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn7.Caption = "Доставка на склад";
             this.gridColumn7.FieldName = "dost_data";
@@ -1757,6 +1753,7 @@
             // gridColumn8
             // 
             this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn8.Caption = "Дата деления";
             this.gridColumn8.FieldName = "data_izm";
@@ -1767,6 +1764,8 @@
             // 
             // gridColumn9
             // 
+            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn9.Caption = "Дата накл.";
             this.gridColumn9.FieldName = "iz_data";
             this.gridColumn9.Name = "gridColumn9";
@@ -1776,6 +1775,8 @@
             // 
             // gridColumn10
             // 
+            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn10.Caption = "№ накл.";
             this.gridColumn10.FieldName = "iz_nakl";
             this.gridColumn10.Name = "gridColumn10";
@@ -1785,6 +1786,9 @@
             // 
             // gridColumn11
             // 
+            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
             this.gridColumn11.FieldName = "kol_c";
             this.gridColumn11.Name = "gridColumn11";
@@ -1809,6 +1813,8 @@
             // 
             // gridColumn14
             // 
+            this.gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn14.Caption = "Печ. ЧИП";
             this.gridColumn14.FieldName = "ChipPech";
             this.gridColumn14.Name = "gridColumn14";
@@ -1876,6 +1882,7 @@
             this.gridColumn43});
             this.gridView3.GridControl = this.gcPartNaklList;
             this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn18
@@ -2554,14 +2561,13 @@
         private System.Windows.Forms.TextBox tbFurnKKStat;
         private System.Windows.Forms.Button btnUpakKKPrint;
         private System.Windows.Forms.Button btnFurnKKPrint;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox tbUZSobrStat;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.TextBox tbUZSozdStat;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.TextBox tbUpakZayav;
         private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button btnZayavFurnPrint;
         private System.Windows.Forms.TextBox tbFZSobrStat;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.TextBox tbFZSozdStat;

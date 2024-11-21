@@ -678,14 +678,22 @@ namespace SewingProduction
             
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void btnZayavFurnPrint_Click(object sender, EventArgs e)
         {
-
+            PrintFurnUpakZayavReport report1 = new PrintFurnUpakZayavReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_kodF"].Value = fkodfd.Substring(0, 12);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            PrintFurnUpakZayavReport report1 = new PrintFurnUpakZayavReport();
+            report1.RequestParameters = false;
+            report1.Parameters["_kodF"].Value = ukodfd.Substring(0, 12);
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
 
         private void button10_Click(object sender, EventArgs e)

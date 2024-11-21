@@ -2037,6 +2037,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202474610", "акт-списание"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202452134", null));
             this._naklIz.ValueSourceSettings = staticListLookUpSettings1;
+            this._naklIz.Visible = false;
             // 
             // PrintNaklReport
             // 
