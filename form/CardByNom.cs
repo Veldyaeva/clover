@@ -24,6 +24,7 @@ using DevExpress.ClipboardSource.SpreadsheetML;
 using SewingProduction.report;
 using DevExpress.XtraGauges.Core.Styles;
 using DevExpress.XtraPrinting;
+using SewingProduction.form;
 
 namespace SewingProduction
 {
@@ -114,15 +115,7 @@ namespace SewingProduction
         {
             if (e.KeyCode == Keys.Enter)
             {
-                //textBox1_Leave(sender, e);
-                //int NomPach = Convert.ToInt32(tbNomPach.Text);
-                //int YearPach = Convert.ToInt32(tbYearPach.Text);
-                // label59.text +  в цех / на упак. / передачи в ш.ц. - доработать с учетом вида производства
-
-
                 string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
-                //string _dateFormat = "dd/MM/yyyy";
-                //if (NomPach > 0 && YearPach > 0)
                 if (PachKod.Length > 0)
                 {
                     
@@ -130,13 +123,8 @@ namespace SewingProduction
                     using (SqlConnection connection = new SqlConnection(connectionString))
                     {
                         connection.Open();
-
-                        //Console.WriteLine("Подключение открыто");
                         SqlDataAdapter adapterNaklList = new SqlDataAdapter();
                         DataTable dtNaklList = new DataTable();
-                        //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-                        //query += $" order by n_pach";
-                        //string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
                         string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         queryNaklList += $" order by iz";
                         SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
@@ -144,23 +132,14 @@ namespace SewingProduction
                         adapterNaklList.Fill(dtNaklList);
                         bsNaklList.DataSource = dtNaklList;
                         bsNaklList.Sort = "iz asc";
-                        //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
                         SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
                         DataTable dtRasInfo = new DataTable();
-                        //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{YearPach}{NomPach}%') ";
                         string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
-                        //queryRasInfo += $" order by iz";
                         SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
                         adapterRasInfo.SelectCommand = commandRasInfo;
                         adapterRasInfo.Fill(dtRasInfo);
                         bsRasInfo.DataSource = dtRasInfo;
-                        //bsRasInfo.Sort = "iz asc";
-                        //textBox1.DataBindings.Add("Text", model, "Name", false, DataSourceUpdateMode.OnPropertyChanged);
-                        //MessageBox.Show("1");
-
-
-
 
                         this.pbEskiz.DataBindings.Clear();
                         this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
@@ -180,8 +159,6 @@ namespace SewingProduction
                         this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
                         this.tbPsaNameSbit.DataBindings.Clear();
                         this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                        //this.tbPsaNameSbit1.DataBindings.Clear();
-                        //this.tbPsaNameSbit1.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
                         this.tbPsaNN.DataBindings.Clear();
                         this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
                         this.tbPsaPsaID.DataBindings.Clear();
@@ -200,10 +177,6 @@ namespace SewingProduction
                         this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
                         this.tbSostPoln.DataBindings.Clear();
                         this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
-                        //this.tbSostOtdelka.DataBindings.Clear();
-                        //this.tbSostOtdelka.DataBindings.Add("Text", dtRasInfo, "sostOtdelka");
-                        //this.tbSostPodklad.DataBindings.Clear();
-                        //this.tbSostPodklad.DataBindings.Add("Text", dtRasInfo, "sostPodklad");
                         this.tbPsaKodZv1.DataBindings.Clear();
                         this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
                         this.tbPsaKodZv2.DataBindings.Clear();
@@ -278,28 +251,8 @@ namespace SewingProduction
                         this.cbIsChip.DataBindings.Clear();
                         this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
 
-                        //DataRow[] currentRows = dtIsChip.Select(null, null, DataViewRowState.CurrentRows);
-                        //if (currentRows.Length < 1)
-                        //    Console.WriteLine("No Current Rows in IsChip Found");
-                        //else
-                        //{
-                        //    //foreach (DataColumn column in dtPartNaklList.Columns)
-                        //    //    Console.Write("\t{0}", column.ColumnName);
-                        //    //Console.WriteLine("\tRowState");
-                        //    foreach (DataRow row in currentRows)
-                        //    {
-                        //        foreach (DataColumn column in dtIsChip.Columns)
-                        //            MessageBox.Show(Convert.ToString(row[column]));
-                        //        //Console.WriteLine("\t" + row.RowState);
-                        //    }
-                        //}
-
-                        //MessageBox.Show("2");
-
                         SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
                         DataTable dtOtdelkaList = new DataTable();
-                        //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-                        //query += $" order by n_pach";
                         string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
                         queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
                         queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
@@ -313,7 +266,6 @@ namespace SewingProduction
                         {
                             button11_Click(sender, e);
                         }
-                        
                     }
                 }
             }
@@ -327,135 +279,23 @@ namespace SewingProduction
             report1.Parameters["_naklIz"].Value = iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
-
-            //DataRowView SelectedRow = (DataRowView)bsNaklList.Current;
-            //DataRow row = SelectedRow.Row;
-            //string iz = row["iz"].ToString();
-            //PrintReport report = new PrintReport();
-            //report.query = $"select * from NaklView where iz = '{iz}' ";
-            //report.Show();
-            ////string iz = GetIzNakl();
-
-            ////string connectionString = Properties.Settings.Default.ACEConnectionString;
-            ////using (SqlConnection connection = new SqlConnection(connectionString))
-            ////{
-            ////    connection.Open();
-            ////    SqlDataAdapter adapterNaklListReport = new SqlDataAdapter();
-            ////    DataTable dtNaklListReport = new DataTable();
-            ////    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-            ////    //query += $" order by n_pach";
-            ////    string queryNaklListReport = $"select * from NaklView where iz = '{iz}' ";
-            ////    //queryNaklListReport += $" order by iz";
-            ////    SqlCommand commandNaklListReport = new SqlCommand(queryNaklListReport, connection);
-            ////    adapterNaklListReport.SelectCommand = commandNaklListReport;
-            ////    adapterNaklListReport.Fill(dtNaklListReport);
-            ////    //bsNaklList.DataSource = dtNaklListReport;
-            ////    //bsNaklList.Sort = "kod asc";
-
-            ////    //dtNaklListReport.WriteXml("C:\\1\\dtNaklListReport.xml", System.Data.XmlWriteMode.WriteSchema);
-
-            ////    //Создаем отчет
-            ////    PrintNakl report = new PrintNakl();
-            ////    //Открываем шаблон отчета в формате *.repx
-            ////    //report.LoadLayout(Application.StartupPath + ".. \\ XtraReport1.repx"); // Report to the root directory
-            ////    //Передаем класс с данными
-            ////    report.DataSource = dtNaklListReport;
-
-            ////    //Открываем отчет для предпросмотра и дальнейшей работы с ним (печать/экспорт и т.д.)
-            ////    ////ReportPrintTool tool = new ReportPrintTool(report);
-            ////    ////tool.ShowPreview();
-            ////    report.ShowPreview();
-            ////}
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             
-            //MessageBox.Show(GetIzNakl());
             string iz = GetIzNakl();
-            //Создаем отчет
-            //XtraReport2 report = new XtraReport2();
-            //report.RequestParameters = false;
-            //report.Parameters["naklIz"].Value = iz;
-
-            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            //reportPrintTool.ShowPreviewDialog();
-            
+             
             PrintNaklReport report1 = new PrintNaklReport();
             report1.RequestParameters = false;
             report1.Parameters["_naklIz"].Value = iz;
 
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
-
-            //PrintNaklReport report = new PrintNaklReport
-            //{
-            //   FilterString = "[nakl.iz] = ?NaklIz",
-            //    RequestParameters = false
-            //};
-
-            //report.Parameters["NaklIz"].Value = iz;
-            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            //reportPrintTool.ShowPreviewDialog();
-            //string iz = GetIzNakl();
-            ////Создаем отчет
-            //rptPrintNakl report = new rptPrintNakl
-            //{
-            //    FilterString = "[nakl.iz] = ?NaklIz",
-            //    RequestParameters = false
-            //};
-            //report.Parameters["NaklIz"].Value = iz;
-            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            //reportPrintTool.ShowPreviewDialog();
-
-            //string connectionString = Properties.Settings.Default.ACEConnectionString;
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    connection.Open();
-            //    SqlDataAdapter adapterNaklListReport = new SqlDataAdapter();
-            //    DataTable dtNaklListReport = new DataTable();
-            //    //string query = $"select * from raskr_zeh_up where pach_kod like {YearPach}{NomPach} + '%' ";
-            //    //query += $" order by n_pach";
-            //    string queryNaklListReport = $"select * from NaklView where iz = '{iz}' ";
-            //    //queryNaklListReport += $" order by iz";
-            //    SqlCommand commandNaklListReport = new SqlCommand(queryNaklListReport, connection);
-            //    adapterNaklListReport.SelectCommand = commandNaklListReport;
-            //    adapterNaklListReport.Fill(dtNaklListReport);
-            //    //bsNaklList.DataSource = dtNaklListReport;
-            //    //bsNaklList.Sort = "kod asc";
-
-            //    //dtNaklListReport.WriteXml("C:\\1\\dtNaklListReport.xml", System.Data.XmlWriteMode.WriteSchema);
-
-            //    //Создаем отчет
-            //    rptPrintNakl report = new rptPrintNakl
-            //    {
-            //        FilterString = "[nakl.iz] = ?NaklIz",
-            //        RequestParameters = false
-            //    };
-            //    report.Parameters["NaklIz"].Value = iz;
-            //    ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            //    reportPrintTool.ShowPreviewDialog();
-
-            //    //Открываем шаблон отчета в формате *.repx
-            //    //report.LoadLayout(Application.StartupPath + ".. \\ XtraReport1.repx"); // Report to the root directory
-            //    //Передаем класс с данными
-            //    //report.DataSource = "dtNaklListReport";
-
-            //    //Открываем отчет для предпросмотра и дальнейшей работы с ним (печать/экспорт и т.д.)
-            //    ////ReportPrintTool tool = new ReportPrintTool(report);
-            //    ////tool.ShowPreview();
-            //    ////report.ShowPreview();
-            //}
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            //FioListReport report = new FioListReport();
-            //report.RequestParameters = false;
-            //report.Parameters["_tab"].Value = 3;
-
-            //ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            //reportPrintTool.ShowPreviewDialog();
 
         }
 
@@ -493,22 +333,6 @@ namespace SewingProduction
                     this.gcPartNaklList.Size = this.gcNaklList.Size;
                     this.gcPartNaklList.BringToFront();
                     this.gcPartNaklList.Visible = true;
-
-                    //DataRow[] currentRows = dtPartNaklList.Select(null, null, DataViewRowState.CurrentRows);
-                    //if (currentRows.Length < 1)
-                    //    Console.WriteLine("No Current Rows Found");
-                    //else
-                    //{
-                    //    foreach (DataColumn column in dtPartNaklList.Columns)
-                    //        Console.Write("\t{0}", column.ColumnName);
-                    //    Console.WriteLine("\tRowState");
-                    //    foreach (DataRow row in currentRows)
-                    //    {
-                    //        foreach (DataColumn column in dtPartNaklList.Columns)
-                    //            Console.Write("\t{0}", row[column]);
-                    //        Console.WriteLine("\t" + row.RowState);
-                    //    }
-                    //}
                 }
             }
             else
@@ -672,10 +496,6 @@ namespace SewingProduction
         private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
         {
             button11_Click(sender, e);
-            //furnitZayavViewFurnit.Text = "2024   37605";
-            ////furnitZayavViewFurnit.Refresh();
-            //furnitZayavViewUpak.Text = "2024   40367";
-            
         }
 
         private void btnZayavFurnPrint_Click(object sender, EventArgs e)
@@ -698,7 +518,8 @@ namespace SewingProduction
 
         private void button10_Click(object sender, EventArgs e)
         {
-
+            FurnUpakDeliveryInfo FDI = new FurnUpakDeliveryInfo(fkodfd.Substring(0,12));
+            FDI.Show();
         }
 
         private void label59_Click(object sender, EventArgs e)
@@ -739,8 +560,6 @@ namespace SewingProduction
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-
-                //Console.WriteLine("Подключение открыто");
                 SqlDataAdapter adapterFurnZayavInfo = new SqlDataAdapter();
                 DataTable dtFurnZayavInfo = new DataTable();
                 string queryFurnZayavInfo = $"exec furnitZayavCheck '{PachKod}', 1 ";  // 1 - ШП. на будущее нужно будут доработать с учетом выбора вида производства
@@ -748,7 +567,6 @@ namespace SewingProduction
                 adapterFurnZayavInfo.SelectCommand = commandFurnZayavInfo;
                 adapterFurnZayavInfo.Fill(dtFurnZayavInfo);
                 bsFurnZayavInfo.DataSource = dtFurnZayavInfo;
-                //MessageBox.Show("Запрос выполнен", "Запрос списка накладных", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                 this.tbFurnKKStat.DataBindings.Clear();
                 this.tbFurnKKStat.DataBindings.Add("text", bsFurnZayavInfo, "FurnKKStat");
                 if (dtFurnZayavInfo.Rows[0]["FurnKKStat"].ToString() != 'V'.ToString() && Convert.ToInt32(dtFurnZayavInfo.Rows[0]["is_furnit"]) == 1)
@@ -828,11 +646,6 @@ namespace SewingProduction
                 this.tbDatZayav.DataBindings.Clear();
                 this.tbDatZayav.DataBindings.Add("text", bsFurnZayavInfo, "DatZayav");
 
-                //furnitZayavViewFurnit.Text = "2024   37605";
-                ////furnitZayavViewFurnit.Refresh();
-                //furnitZayavViewUpak.Text = "2024   40367";
-                //MessageBox.Show(dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString());
-                //MessageBox.Show(dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString().Substring(0,12));
                 furnitZayavViewFurnit.Text = dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString().Substring(0,12);
                 furnitZayavViewFurnit.Refresh();
                 furnitZayavViewUpak.Text = dtFurnZayavInfo.Rows[0]["UKoDFD"].ToString().Substring(0,12);

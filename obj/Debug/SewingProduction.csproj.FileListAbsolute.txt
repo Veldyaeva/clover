@@ -343,3 +343,4 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.exe
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.pdb
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.PrintFurnUpakZayavReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.subreport.PrintTakingCardReport.resources
+D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.form.FurnUpakDeliveryInfo.resources
