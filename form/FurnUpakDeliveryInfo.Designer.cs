@@ -107,7 +107,7 @@
             this.gcReestrFurn.Location = new System.Drawing.Point(16, 56);
             this.gcReestrFurn.MainView = this.gridView1;
             this.gcReestrFurn.Name = "gcReestrFurn";
-            this.gcReestrFurn.Size = new System.Drawing.Size(1320, 185);
+            this.gcReestrFurn.Size = new System.Drawing.Size(1196, 185);
             this.gcReestrFurn.TabIndex = 3;
             this.gcReestrFurn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -155,7 +155,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(952, 255);
+            this.label4.Location = new System.Drawing.Point(831, 255);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(108, 13);
             this.label4.TabIndex = 8;
@@ -164,7 +164,7 @@
             // gridControl3
             // 
             this.gridControl3.DataSource = this.bsReestrFurnShtr;
-            this.gridControl3.Location = new System.Drawing.Point(955, 271);
+            this.gridControl3.Location = new System.Drawing.Point(831, 271);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
             this.gridControl3.Size = new System.Drawing.Size(381, 185);
@@ -205,7 +205,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(952, 471);
+            this.label6.Location = new System.Drawing.Point(831, 471);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(160, 13);
             this.label6.TabIndex = 12;
@@ -214,7 +214,7 @@
             // gridControl5
             // 
             this.gridControl5.DataSource = this.bsReestrfurndeliverybagsost;
-            this.gridControl5.Location = new System.Drawing.Point(955, 487);
+            this.gridControl5.Location = new System.Drawing.Point(831, 487);
             this.gridControl5.MainView = this.gridView5;
             this.gridControl5.Name = "gridControl5";
             this.gridControl5.Size = new System.Drawing.Size(381, 185);
@@ -229,7 +229,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1342, 56);
+            this.button1.Location = new System.Drawing.Point(1218, 56);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(72, 83);
             this.button1.TabIndex = 13;
@@ -239,7 +239,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(1342, 158);
+            this.button2.Location = new System.Drawing.Point(1218, 158);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(72, 83);
             this.button2.TabIndex = 14;
@@ -259,7 +259,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1342, 271);
+            this.button4.Location = new System.Drawing.Point(1218, 271);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(72, 83);
             this.button4.TabIndex = 15;
@@ -269,7 +269,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(1342, 487);
+            this.button5.Location = new System.Drawing.Point(1218, 487);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(72, 83);
             this.button5.TabIndex = 17;

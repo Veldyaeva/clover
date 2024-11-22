@@ -189,6 +189,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("2024   45724", "3 заборн карты"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("2024   13221", null));
             this._kodF.ValueSourceSettings = staticListLookUpSettings1;
+            this._kodF.Visible = false;
             // 
             // TopMargin
             // 
@@ -909,8 +910,8 @@
             // xrTableCell26
             // 
             this.xrTableCell26.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[KolFNorm]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([KolFNorm] != 0, [KolFNorm], \'\')\n")});
             this.xrTableCell26.Multiline = true;
             this.xrTableCell26.Name = "xrTableCell26";
             this.xrTableCell26.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -921,8 +922,8 @@
             // xrTableCell27
             // 
             this.xrTableCell27.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[KolFSkl]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([KolFSkl] != 0, [KolFSkl], \'\')\n")});
             this.xrTableCell27.Multiline = true;
             this.xrTableCell27.Name = "xrTableCell27";
             this.xrTableCell27.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -933,8 +934,8 @@
             // xrTableCell28
             // 
             this.xrTableCell28.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[KolFPodr]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([KolFPodr] != 0, [KolFPodr], \'\')\n")});
             this.xrTableCell28.Multiline = true;
             this.xrTableCell28.Name = "xrTableCell28";
             this.xrTableCell28.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -945,8 +946,8 @@
             // xrTableCell29
             // 
             this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DataFZ]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([DataFZ] != 0, [DataFZ], \'\')\n")});
             this.xrTableCell29.Multiline = true;
             this.xrTableCell29.Name = "xrTableCell29";
             this.xrTableCell29.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -957,8 +958,8 @@
             // xrTableCell30
             // 
             this.xrTableCell30.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[KolFOst]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([KolFOst] != 0, [KolFOst], \'\')\n")});
             this.xrTableCell30.Multiline = true;
             this.xrTableCell30.Name = "xrTableCell30";
             this.xrTableCell30.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);

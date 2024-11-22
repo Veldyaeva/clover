@@ -512,8 +512,8 @@
             // xrTableCell5
             // 
             this.xrTableCell5.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SumFNorm]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([SumFNorm] != 0, [SumFNorm], \'\')")});
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
             this.xrTableCell5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -524,8 +524,8 @@
             // xrTableCell6
             // 
             this.xrTableCell6.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SumFOtpr]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([SumFOtpr] != 0, [SumFOtpr], \'\')\n")});
             this.xrTableCell6.Multiline = true;
             this.xrTableCell6.Name = "xrTableCell6";
             this.xrTableCell6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
@@ -536,8 +536,8 @@
             // xrTableCell7
             // 
             this.xrTableCell7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SumFOst]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BackColor", "Iif(IsNull([FfiMainPos],0) != 0, \'Gainsboro\', \'White\')\n"),
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "iif([SumFOst] != 0, [SumFOst], \'\')")});
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
             this.xrTableCell7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);

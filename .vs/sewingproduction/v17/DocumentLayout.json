@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "D:\\SharpProj\\sewingproduction\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\report\\printfurnupakzayavreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:report\\printfurnupakzayavreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\furnupakdeliveryinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|d:\\sharpproj\\sewingproduction\\form\\cardbynom.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -71,31 +75,31 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "PrintFurnUpakZayavReport.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\report\\PrintFurnUpakZayavReport.cs",
+              "RelativeDocumentMoniker": "report\\PrintFurnUpakZayavReport.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\report\\PrintFurnUpakZayavReport.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "report\\PrintFurnUpakZayavReport.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-22T05:09:46.714Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "FurnUpakDeliveryInfo.cs",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs",
               "RelativeDocumentMoniker": "form\\FurnUpakDeliveryInfo.cs",
-              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs*",
-              "RelativeToolTip": "form\\FurnUpakDeliveryInfo.cs*",
-              "ViewState": "AQIAAGwAAAAAAAAAAAAIwHYAAAAzAAAA",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs",
+              "RelativeToolTip": "form\\FurnUpakDeliveryInfo.cs",
+              "ViewState": "AQIAAGwAAAAAAAAAAAAIwHcAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-21T12:27:22.556Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs",
-              "RelativeDocumentMoniker": "form\\FurnUpakDeliveryInfo.cs",
-              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "RelativeToolTip": "form\\FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-21T12:00:21.092Z",
-              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "CardByNom.cs",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
               "RelativeDocumentMoniker": "form\\CardByNom.cs",
@@ -108,7 +112,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\CardByNom.cs",
               "RelativeDocumentMoniker": "form\\CardByNom.cs",
@@ -116,6 +120,39 @@
               "RelativeToolTip": "form\\CardByNom.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-18T12:22:43.405Z",
+              "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "f11bbdb9-846d-4f97-b06e-3ee21a878ae0",
+        "Display": 0,
+        "X": 17,
+        "Y": 29,
+        "Width": 1795,
+        "Height": 981,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs",
+              "RelativeDocumentMoniker": "form\\FurnUpakDeliveryInfo.cs",
+              "ToolTip": "D:\\SharpProj\\sewingproduction\\form\\FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "form\\FurnUpakDeliveryInfo.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-21T12:00:21.092Z",
               "EditorCaption": " [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]"
             }
           ]
