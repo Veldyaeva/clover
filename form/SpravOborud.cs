@@ -42,8 +42,12 @@ namespace SewingProduction.form
         {
             GridLocalizer.Active = new RussianGridLocalizer();
             //PreviewLocalizer.Active = new RussianPrintLocalizer();
+            label4.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
+            label7.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
+            label21.Text = "Спец. оборудование \n для оказания услуг";
+            label22.Text = "Спец. оборудование \n для оказания услуг";
         }
-
+        
         public void StartListening()
         {
             try
@@ -95,7 +99,7 @@ namespace SewingProduction.form
             // Проверка есть ли уведомления
             if (e.Type == SqlNotificationType.Change)
             {
-                Debug.WriteLine("Data was changed");
+                Debug.WriteLine("Обновление таблицы");
 
                 // Обновление UI через Invoke
                 this.Invoke((MethodInvoker)delegate
@@ -128,8 +132,10 @@ namespace SewingProduction.form
             using (var connectionSELECT = new SqlConnection(connectionString))
             {
                 string queryOborudList = $@"SELECT kod_ob ,oborud_shv.text_ob,text_ob_s,
-                                            oborud_shv_ob.text_ob AS text_ob_tip,spec_ob,nastav,
+                                            oborud_shv_ob.text_ob AS text_ob_tip,spec_ob,
                                             spOborudMachine.name AS vidm,pokaz_sp,matrix_class.caption AS idClass,show_for_plan,
+                                            (CASE arhiv WHEN 1 THEN 1 ELSE 0 END) AS arhiv,
+                                            (CASE nastav WHEN 1 THEN 'оверлок' WHEN 2 THEN 'плоскошовка' WHEN 3 THEN 'универсалка' ELSE NULL END) AS nastav,
                                             (CASE vid_shp WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_shp,
                                             (CASE vid_vzp WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_vzp,
                                             (CASE vid_np WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_np,
@@ -138,7 +144,7 @@ namespace SewingProduction.form
                                              LEFT JOIN oborud_shv_ob ON oborud_shv_ob.ko_ob_all = oborud_shv.ko_ob_all 
                                              LEFT JOIN spOborudMachine ON spOborudMachine.miniName = oborud_shv.no_spec 
                                              LEFT JOIN matrix_class ON matrix_class.id_class = oborud_shv.id_class
-                                         {(checkEditArhiv.Checked ? "" : "WHERE arhiv IS NULL")} ";
+                                         {(checkEditArhiv.Checked ? "" : "WHERE arhiv IS NULL OR arhiv = 0")} ";
 
                 //используя подключение отправляем запрос БД:
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(queryOborudList, connectionSELECT);
@@ -164,12 +170,12 @@ namespace SewingProduction.form
                     // Назначаем его столбцам
                     gridView.Columns["show_for_plan"].ColumnEdit = checkEdit;
                     gridView.Columns["spec_ob"].ColumnEdit = checkEdit;
+                    gridView.Columns["arhiv"].ColumnEdit = checkEdit;
                     //gridView.Columns["pokaz"].OptionsColumn.AllowEdit = false; // Запрещаем редактирование
 
                     gridView.OptionsView.ShowGroupPanel = false; // Панель группировки отображается
                     gridView.GroupPanelText = ""; // Текст
                     gridView.OptionsFind.AlwaysVisible = true; // Всегда показывать панель поиска
-
 
                 }
                 // Отображаем количество записей+1 в textBoxAddKod
@@ -227,11 +233,13 @@ namespace SewingProduction.form
                 //Добавляем ответ сервера в таблицу:
                 dataAdapter.Fill(tableMatrixClass);
                 comboBoxTableMatrixClass.Items.Clear();
+                comboBoxTableMatrixClass.Items.Add("нет");
                 //Загрузка в комбобокс:
                 foreach (DataRow row in tableMatrixClass.Rows)
                 {
                     comboBoxTableMatrixClass.Items.Add(row[1].ToString());
                 }
+
             }
         }
 
@@ -253,38 +261,23 @@ namespace SewingProduction.form
             GridView gridView = oborudGrid.MainView as GridView;
             // Получаем текущую выделенную строку в текстбокси и др
             textBoxRedKod.Text = gridView.GetFocusedRowCellValue("kod_ob").ToString();
-            textBoxRedName.Text = gridView.GetFocusedRowCellValue("text_ob").ToString();
-            textBoxRedSokrName.Text = gridView.GetFocusedRowCellValue("text_ob_s").ToString();
+            textBoxRedName.Text = gridView.GetFocusedRowCellValue("text_ob").ToString().Trim();
+            textBoxRedSokrName.Text = gridView.GetFocusedRowCellValue("text_ob_s").ToString().Trim();
             // Заполняем комбобоксы:
             comboTableItems(comboBoxRedGrup, comboBoxRedVidm, comboBoxRedClass);
             comboBoxRedGrup.Text = gridView.GetFocusedRowCellValue("text_ob_tip").ToString();
             comboBoxRedVidm.Text = gridView.GetFocusedRowCellValue("vidm").ToString();
             comboBoxRedClass.Text = gridView.GetFocusedRowCellValue("idClass").ToString();
+            comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav").ToString();
             // comboBox group for proizv:
             comboBoxRedShp.Text = gridView.GetFocusedRowCellValue("vid_shp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_shp").ToString() : "нет";
             comboBoxRedVzp.Text = gridView.GetFocusedRowCellValue("vid_vzp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_vzp").ToString() : "нет";
             comboBoxRedNp.Text = gridView.GetFocusedRowCellValue("vid_np") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_np").ToString() : "нет";
             comboBoxRedRz.Text = gridView.GetFocusedRowCellValue("vid_rz") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_rz").ToString() : "нет";
-            // radiobutton group for nastav:
-            int selectedValue = Convert.ToInt32(gridView.GetFocusedRowCellValue("nastav").ToString());
-            switch (selectedValue)
-            {
-                case 1:
-                    radioButtonRed1.Checked = true;
-                    break;
-                case 2:
-                    radioButtonRed2.Checked = true;
-                    break;
-                case 3:
-                    radioButtonRed3.Checked = true;
-                    break;
-                default:
-                    radioButtonRedNet.Checked = true;
-                    break;
-            }
             //checkBox:
             checkBoxRedShow.Checked = GetCheckBoxValue("show_for_plan", gridView);
             checkBoxRedSpec.Checked = GetCheckBoxValue("spec_ob", gridView);
+            checkBoxRedArhiv.Checked = GetCheckBoxValue("arhiv", gridView);
         }
 
         // Кнопка Добавить
@@ -304,16 +297,16 @@ namespace SewingProduction.form
             comboBoxAddGrup.Text = "прочее                             ";
             comboBoxAddVidm.Text = "Другое";
             comboBoxAddClass.Text = "";
+            comboBoxAddNastav.Text = "";
             //Вид произв:
             comboBoxAddShp.Text = "нет";
             comboBoxAddVzp.Text = "нет";
             comboBoxAddNp.Text = "нет";
             comboBoxAddRz.Text = "нет";
-            //наставничество:
-            radioButtonAddNet.Checked = true;
             //скрыть и тд:
             checkBoxAddShow.Checked = false;
             checkBoxAddSpec.Checked = false;
+            checkBoxAddArhiv.Checked = false;
         }
 
         // Кнопка Отменить на вкладке Редактировать
@@ -326,13 +319,11 @@ namespace SewingProduction.form
             textBoxRedSokrName.Text = "";
             comboBoxRedGrup.Text = "";
             comboBoxRedVidm.Text = "";
+            comboBoxRedClass.Text = "";
+            comboBoxRedNastav.Text = "";
             checkBoxRedShow.Checked = false;
             checkBoxRedSpec.Checked = false;
-            radioButtonRedNet.Checked = true;
-            radioButtonRed1.Checked = false;
-            radioButtonRed2.Checked = false;
-            radioButtonRed3.Checked = false;
-            comboBoxRedClass.Text = "";
+            checkBoxRedArhiv.Checked = false;
         }
 
         // Кнопка Отменить на вкладке Добавить
@@ -340,108 +331,114 @@ namespace SewingProduction.form
         {
             // Переключаем видимость вкладки
             AddTab.TabPages[0].PageVisible = false;
-            //textBoxAddKod.Text = "";
-            textBoxAddName.Text = "";
-            textBoxAddSokrName.Text = "";
-            //comboBoxAddVid.Text = "";
-            //comboBoxAddSpec.Text = "";
-            checkBoxAddShow.Checked = false;
-            checkBoxAddSpec.Checked = false;
-            radioButtonAddNet.Checked = true;
-            radioButtonAdd1.Checked = false;
-            radioButtonAdd2.Checked = false;
-            radioButtonAdd3.Checked = false;
-            comboBoxAddClass.Text = "";
         }
-
+        // Проверка заполения полей
+        string proverkaZap(TextBox proverkaKod, TextBox proverkaName, TextBox proverkaSokrName, ComboBox proverkaGrup,
+                        ComboBox proverkaShp, ComboBox proverkaVzp, ComboBox proverkaNp, ComboBox proverkaRz)
+        {
+            if (proverkaName.Text == "")
+                return "Заполните поле 'Вид оборудования'!";
+            if (proverkaSokrName.Text == "")
+                return "Заполните поле 'Cокращенное наименование'!";
+            if (proverkaGrup.Text == "")
+                return "Заполните поле 'Группа оборудования'!";
+            if (proverkaShp.Text == "нет" && proverkaVzp.Text == "нет" && proverkaNp.Text == "нет" && proverkaRz.Text == "нет")
+                return "Выберите вид производства!";
+            if (proverkaKod.Text == "0" || proverkaKod.Text == "")
+                return "Ошибка, связанная с кодом записи, перезапустите программу и попробуйте снова.";
+            return "OK";
+        }
         // Кнопка Сохранить на вкладке Редактировать
         private void simpleButtonRedSave_Click(object sender, EventArgs e)
         {
-            // Сохраняем текущий индекс строки:
-            GridView gridView = oborudGrid.MainView as GridView;
-            currentRowIndex = gridView.FocusedRowHandle;
-            //topRowIndex = gridView.TopRowIndex;
+            string proverka = proverkaZap(textBoxRedKod, textBoxRedName, textBoxRedSokrName, comboBoxRedGrup,
+                comboBoxRedShp, comboBoxRedVzp, comboBoxRedNp, comboBoxRedRz);
+            if (proverka == "OK")
+            { 
+                // Сохраняем текущий индекс строки:
+                GridView gridView = oborudGrid.MainView as GridView;
+                currentRowIndex = gridView.FocusedRowHandle;
+                //topRowIndex = gridView.TopRowIndex;
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                int nastav = 0;
-                if (radioButtonRedNet.Checked) nastav = 0;
-                if (radioButtonRed1.Checked) nastav = 1;
-                if (radioButtonRed2.Checked) nastav = 2;
-                if (radioButtonRed3.Checked) nastav = 3;
-
-                string queryOborudRed = $"UPDATE oborud_shv " +
-                                             $"SET text_ob = '" + textBoxRedName.Text + "', " +
-                                             $"text_ob_s = '" + textBoxRedSokrName.Text + "', " +
-                                             $"oborud_shv.ko_ob_all = oborud_shv_ob.ko_ob_all, " +
-                                             $"no_spec = spOborudMachine.miniName, " +
-                                             $"oborud_shv.id_class = (SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxRedClass.Text + "')," +
-                                             $"vid_shp = " + comboBoxRedShp.SelectedIndex + ", " +
-                                             $"vid_vzp = " + comboBoxRedVzp.SelectedIndex + ", " +
-                                             $"vid_np = " + comboBoxRedNp.SelectedIndex + ", " +
-                                             $"vid_rz = " + comboBoxRedRz.SelectedIndex + ", " +
-                                             $"nastav = " + nastav + ", " +
-                                             $"show_for_plan = " + Convert.ToInt32(checkBoxRedShow.Checked) + ", " +
-                                             $"spec_ob = " + Convert.ToInt32(checkBoxRedSpec.Checked) + " " +
-                                         $" FROM oborud_shv,spOborudMachine,oborud_shv_ob " +
-                                         $" WHERE kod_ob = " + textBoxRedKod.Text +
-                                         $" AND oborud_shv_ob.text_ob = '" + comboBoxRedGrup.Text + "' " +
-                                         $" AND spOborudMachine.name = '" + comboBoxRedVidm.Text + "' ";
-
-                using (SqlCommand command = new SqlCommand(queryOborudRed, connection))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                    connection.Close();
+                    string queryOborudRed = $"UPDATE oborud_shv " +
+                                                 $"SET text_ob = '" + textBoxRedName.Text + "', " +
+                                                 $"text_ob_s = '" + textBoxRedSokrName.Text + "', " +
+                                                 $"oborud_shv.ko_ob_all = oborud_shv_ob.ko_ob_all, " +
+                                                 $"no_spec = spOborudMachine.miniName, " +
+                                                 $"oborud_shv.id_class = (SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxRedClass.Text + "')," +
+                                                 $"vid_shp = " + comboBoxRedShp.SelectedIndex + ", " +
+                                                 $"vid_vzp = " + comboBoxRedVzp.SelectedIndex + ", " +
+                                                 $"vid_np = " + comboBoxRedNp.SelectedIndex + ", " +
+                                                 $"vid_rz = " + comboBoxRedRz.SelectedIndex + ", " +
+                                                 $"nastav = " + comboBoxRedNastav.SelectedIndex + ", " +
+                                                 $"show_for_plan = " + Convert.ToInt32(checkBoxRedShow.Checked) + ", " +
+                                                 $"spec_ob = " + Convert.ToInt32(checkBoxRedSpec.Checked) + ", " +
+                                                 $"arhiv = " + Convert.ToInt32(checkBoxRedArhiv.Checked) + " " +
+                                             $" FROM oborud_shv,spOborudMachine,oborud_shv_ob " +
+                                             $" WHERE kod_ob = " + textBoxRedKod.Text +
+                                             $" AND oborud_shv_ob.text_ob = '" + comboBoxRedGrup.Text + "' " +
+                                             $" AND spOborudMachine.name = '" + comboBoxRedVidm.Text + "' ";
+
+                    using (SqlCommand command = new SqlCommand(queryOborudRed, connection))
+                    {
+                        connection.Open();
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                    }
                 }
+                //Закрыть вкладку
+                AddTab.TabPages[1].PageVisible = false;
             }
-            //Закрыть вкладку
-            AddTab.TabPages[1].PageVisible = false;
+            else MessageBox.Show(proverka, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         // Кнопка Сохранить на вкладке Добавить
         private void simpleButtonAddSave_Click(object sender, EventArgs e)
         {
-            using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
+            string proverka = proverkaZap(textBoxAddName, textBoxAddName, textBoxAddSokrName, comboBoxAddGrup,
+                comboBoxAddShp, comboBoxAddVzp, comboBoxAddNp, comboBoxAddRz);
+            if (proverka == "OK")
             {
-                int nastav = 0;
-                if (radioButtonAddNet.Checked) nastav = 0;
-                if (radioButtonAdd1.Checked) nastav = 1;
-                if (radioButtonAdd2.Checked) nastav = 2;
-                if (radioButtonAdd3.Checked) nastav = 3;
-
-                string klass;
-                if (comboBoxAddClass.Text == "")
-                    klass = "NULL";
-                else
-                    klass = "(SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxAddClass.Text + "')";
-
-                string queryOborudAdd = $"INSERT INTO oborud_shv (text_ob, text_ob_s, ko_ob_all, no_spec, id_class, vid_shp, vid_vzp, vid_np, vid_rz, nastav, show_for_plan, spec_ob) " +
-                                        $"VALUES (" +
-                                        $"'{textBoxAddName.Text}', " +
-                                        $"'{textBoxAddSokrName.Text}', " +
-                                        $"(SELECT ko_ob_all FROM oborud_shv_ob WHERE text_ob = '{comboBoxAddGrup.Text}'), " +
-                                        $"(SELECT miniName FROM spOborudMachine WHERE name = '{comboBoxAddVidm.Text}'), " +
-                                        $"{klass} ," +
-                                        $"{comboBoxAddShp.SelectedIndex}," +
-                                        $"{comboBoxAddVzp.SelectedIndex}," +
-                                        $"{comboBoxAddNp.SelectedIndex}," +
-                                        $"{comboBoxAddRz.SelectedIndex}," +
-                                        $"{nastav}, " +
-                                        $"{Convert.ToInt32(checkBoxAddShow.Checked)}, " +
-                                        $"{Convert.ToInt32(checkBoxAddSpec.Checked)} ) ";
-
-                using (SqlCommand command = new SqlCommand(queryOborudAdd, connectionINSERT))
+                using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
                 {
-                    connectionINSERT.Open();
-                    command.ExecuteNonQuery();
-                    connectionINSERT.Close();
+                    string klass;
+                    if (comboBoxAddClass.Text == "")
+                        klass = "NULL";
+                    else
+                        klass = "(SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxAddClass.Text + "')";
+
+                    string queryOborudAdd = $"INSERT INTO oborud_shv (text_ob, text_ob_s, ko_ob_all, no_spec, id_class, vid_shp," +
+                                                $" vid_vzp, vid_np, vid_rz, nastav, show_for_plan, spec_ob,arhiv) " +
+                                            $"VALUES (" +
+                                                $"'{textBoxAddName.Text}', " +
+                                                $"'{textBoxAddSokrName.Text}', " +
+                                                $"(SELECT ko_ob_all FROM oborud_shv_ob WHERE text_ob = '{comboBoxAddGrup.Text}'), " +
+                                                $"(SELECT miniName FROM spOborudMachine WHERE name = '{comboBoxAddVidm.Text}'), " +
+                                                $"{klass} ," +
+                                                $"{comboBoxAddShp.SelectedIndex}," +
+                                                $"{comboBoxAddVzp.SelectedIndex}," +
+                                                $"{comboBoxAddNp.SelectedIndex}," +
+                                                $"{comboBoxAddRz.SelectedIndex}," +
+                                                $"{comboBoxAddNastav.SelectedIndex}, " +
+                                                $"{Convert.ToInt32(checkBoxAddShow.Checked)}, " +
+                                                $"{Convert.ToInt32(checkBoxAddSpec.Checked)}, " +
+                                                $"{Convert.ToInt32(checkBoxAddArhiv.Checked)} ) ";
+
+                    using (SqlCommand command = new SqlCommand(queryOborudAdd, connectionINSERT))
+                    {
+                        connectionINSERT.Open();
+                        command.ExecuteNonQuery();
+                        connectionINSERT.Close();
+                    }
                 }
+                // Флаг для перехода вниз
+                flagAddDown = true;
+                // Закрыть вкладку
+                AddTab.TabPages[0].PageVisible = false;
             }
-            //флаг для перехода вниз
-            flagAddDown = true;
-            //Закрыть вкладку
-            AddTab.TabPages[0].PageVisible = false;
+            else MessageBox.Show(proverka, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         // Кнопка Архив
@@ -475,6 +472,8 @@ namespace SewingProduction.form
             GridView gridView = oborudGrid.MainView as GridView;
             // Сохраняем индекс строки
             currentRowIndex = gridView.FocusedRowHandle;
+            // Отменяем если редакитруем:
+            simpleButtonRedOtm_Click(sender, e);
         }
 
         private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
@@ -485,6 +484,10 @@ namespace SewingProduction.form
         private void checkEditArhiv_CheckedChanged(object sender, EventArgs e)
         {
             LoadData();
+            GridView gridView = oborudGrid.MainView as GridView;
+            //gridView.Columns["arhiv"].Visible = !gridView.Columns["arhiv"].Visible;
+            //перенос столбца архив в конец:
+            gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count-2));
         }
     }
 }
