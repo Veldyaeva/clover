@@ -85,6 +85,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tbViewType = new System.Windows.Forms.TextBox();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gcFurnitArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnitArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -100,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFurnitFIt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnitFIt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // gcFurnitArt
@@ -115,6 +118,7 @@
             this.gcFurnitArt.TabIndex = 23;
             this.gcFurnitArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gcFurnitArt.Click += new System.EventHandler(this.gcFurnitArt_Click);
             // 
             // gridView1
             // 
@@ -135,6 +139,7 @@
             this.gridColumn8});
             this.gridView1.GridControl = this.gcFurnitArt;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
             this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
@@ -321,6 +326,7 @@
             this.gridColumn11});
             this.gridView2.GridControl = this.gcFurnitPach;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.Editable = false;
             this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView2.OptionsView.RowAutoHeight = true;
             this.gridView2.OptionsView.ShowGroupPanel = false;
@@ -468,6 +474,7 @@
             this.gridColumn28});
             this.gridView3.GridControl = this.gcFurnitF;
             this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsBehavior.Editable = false;
             this.gridView3.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView3.OptionsView.RowAutoHeight = true;
             this.gridView3.OptionsView.ShowGroupPanel = false;
@@ -624,7 +631,7 @@
             this.gcFurnitFIt.Location = new System.Drawing.Point(923, 52);
             this.gcFurnitFIt.MainView = this.gridView4;
             this.gcFurnitFIt.Name = "gcFurnitFIt";
-            this.gcFurnitFIt.Size = new System.Drawing.Size(428, 209);
+            this.gcFurnitFIt.Size = new System.Drawing.Size(415, 209);
             this.gcFurnitFIt.TabIndex = 26;
             this.gcFurnitFIt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -648,6 +655,7 @@
             this.gridColumn27});
             this.gridView4.GridControl = this.gcFurnitFIt;
             this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
             this.gridView4.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.False;
             this.gridView4.OptionsView.RowAutoHeight = true;
             this.gridView4.OptionsView.ShowGroupPanel = false;
@@ -845,10 +853,19 @@
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 4;
             // 
+            // tbViewType
+            // 
+            this.tbViewType.Location = new System.Drawing.Point(157, 12);
+            this.tbViewType.Name = "tbViewType";
+            this.tbViewType.Size = new System.Drawing.Size(17, 20);
+            this.tbViewType.TabIndex = 33;
+            this.tbViewType.Visible = false;
+            // 
             // FurnitZayavView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tbViewType);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -866,7 +883,7 @@
             this.Controls.Add(this.gcFurnitF);
             this.Controls.Add(this.gcFurnitFIt);
             this.Name = "FurnitZayavView";
-            this.Size = new System.Drawing.Size(1353, 265);
+            this.Size = new System.Drawing.Size(1341, 265);
             this.Load += new System.EventHandler(this.FurnitZayavView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcFurnitArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnitArt)).EndInit();
@@ -883,6 +900,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gcFurnitFIt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnitFIt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -946,5 +964,7 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
+        private System.Windows.Forms.TextBox tbViewType;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

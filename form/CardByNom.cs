@@ -55,60 +55,14 @@ namespace SewingProduction
             return iz;
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridControl1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridControl2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CardByNom_Load(object sender, EventArgs e)
         {
+            this.gridColumn40.Visible = false;
+            this.gridColumn44.Visible = false;
+            this.gridColumn45.Visible = false;
+            this.gridColumn46.Visible = false;
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
             tbNomPach.Select();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        public void textBox1_Leave(object sender, EventArgs e)
-        {
-            
-            
-        }
-
-        private void tabPane1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_Validated(object sender, EventArgs e)
-        {
-        }
-
-        private void bindingSource1_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox7_TextChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void tbNomPach_KeyDown(object sender, KeyEventArgs e)
@@ -127,20 +81,24 @@ namespace SewingProduction
                         DataTable dtNaklList = new DataTable();
                         string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         queryNaklList += $" order by iz";
+                        //string queryNaklList = $"exec GetNaklView '{PachKod}' ";
                         SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
                         adapterNaklList.SelectCommand = commandNaklList;
                         adapterNaklList.Fill(dtNaklList);
                         bsNaklList.DataSource = dtNaklList;
                         bsNaklList.Sort = "iz asc";
+                        //this.gcNaklList.Refresh();
 
                         SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
                         DataTable dtRasInfo = new DataTable();
-                        string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
+                        //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
+                        string queryRasInfo = $"exec GetRasInfoView '{PachKod}' ";
                         SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
                         adapterRasInfo.SelectCommand = commandRasInfo;
                         adapterRasInfo.Fill(dtRasInfo);
                         bsRasInfo.DataSource = dtRasInfo;
 
+                        tbPszRpcNom.Text = "РЦ" + dtRasInfo.Rows[0]["PszRpcNom"].ToString();
                         this.pbEskiz.DataBindings.Clear();
                         this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
                         this.tbRzuNom.DataBindings.Clear();
@@ -187,6 +145,8 @@ namespace SewingProduction
                         this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
                         this.mtbRzuDataCdUt.DataBindings.Clear();
                         this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
+                        this.mtbRzuDataR.DataBindings.Clear();
+                        this.mtbRzuDataR.DataBindings.Add("Text", dtRasInfo, "rzuDataR");
                         this.mtbRzuDataZeh.DataBindings.Clear();
                         this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
                         this.mtbRzuDataRab.DataBindings.Clear();
@@ -294,21 +254,6 @@ namespace SewingProduction
             reportPrintTool1.ShowPreviewDialog();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void progressPanel1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label53_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnNaklPart_Click(object sender, EventArgs e)
         {
             if (btnNaklPart.Text == "Показать информацию по делению накладной")
@@ -344,16 +289,6 @@ namespace SewingProduction
             
         }
 
-        private void gcPartNaklList_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void xtraTabControl1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
             int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
@@ -365,11 +300,6 @@ namespace SewingProduction
             report1.Parameters["_isUpak"].Value = 0;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -396,101 +326,6 @@ namespace SewingProduction
             report1.Parameters["_rzuPachList"].Value = RzuPachList;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
-        }
-
-        private void mtbRzuDataUp_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbRzuDataRab_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbRzuDataZeh_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbRzuDataCdUt_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbPsaDataCdPlan_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void mtbPsaDataZap_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void label33_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label34_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label26_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mtbRzuDataCd_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
-        }
-
-        private void checkBox1_CheckedChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void furnitZayavView1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void furnitZayavViewFurnit_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void furnitZayavViewUpak_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void xtraTabPage2_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void xtraTabPage2_Paint(object sender, PaintEventArgs e)
-        {
-
         }
 
         private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
@@ -522,16 +357,6 @@ namespace SewingProduction
             FDI.Show();
         }
 
-        private void label59_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label60_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnFullKKPrint_Click(object sender, EventArgs e)
         {
             PrintFullKKReport report1 = new PrintFullKKReport();
@@ -551,6 +376,11 @@ namespace SewingProduction
             report1.Parameters["_specRez"].Value = Convert.ToBoolean(uspecrez);
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
+        }
+
+        private void gridView1_CustomDrawCell(object sender, DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventArgs e)
+        {
+
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -617,7 +447,7 @@ namespace SewingProduction
                 this.mtbData_zeh.DataBindings.Add("text", bsFurnZayavInfo, "Data_zeh");
                 this.tbIs_got.DataBindings.Clear();
                 this.tbIs_got.DataBindings.Add("text", bsFurnZayavInfo, "Is_got");
-                if (dtFurnZayavInfo.Rows[0]["Is_got"].ToString() == 'V'.ToString())
+                if (dtFurnZayavInfo.Rows[0]["Is_got"].ToString() == "--".ToString())
                 {
                     tbIs_got.ForeColor = Color.Red;
                     mtbData_zeh.ForeColor = Color.Red;
@@ -647,8 +477,10 @@ namespace SewingProduction
                 this.tbDatZayav.DataBindings.Add("text", bsFurnZayavInfo, "DatZayav");
 
                 furnitZayavViewFurnit.Text = dtFurnZayavInfo.Rows[0]["FKoDFD"].ToString().Substring(0,12);
+                furnitZayavViewFurnit.ViewType = "r";
                 furnitZayavViewFurnit.Refresh();
                 furnitZayavViewUpak.Text = dtFurnZayavInfo.Rows[0]["UKoDFD"].ToString().Substring(0,12);
+                furnitZayavViewUpak.ViewType = "r";
                 furnitZayavViewUpak.Refresh();
                 fspecrez = Convert.ToInt32(dtFurnZayavInfo.Rows[0]["FSpecRez"]);
                 uspecrez = Convert.ToInt32(dtFurnZayavInfo.Rows[0]["USpecRez"]);

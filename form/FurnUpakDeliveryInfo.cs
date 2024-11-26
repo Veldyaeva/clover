@@ -18,10 +18,10 @@ namespace SewingProduction.form
             InitializeComponent();
             tbKodF.Text = _kodF;
         }
-        private int GetID(string xGrid)
+        private int GetID(string _xGrid, string _xField)
         {
             int _ID = 0;
-            switch (xGrid)
+            switch (_xGrid)
             {
                 case "gcReestrFurn":
                     try
@@ -29,7 +29,16 @@ namespace SewingProduction.form
                         object data = gridView1.GetRow(gridView1.FocusedRowHandle);
                         if (data != null)
                         {
-                            _ID = Convert.ToInt32(((DataRowView)data).Row["rfID"]);
+                            switch (_xField)
+                            {
+                                case "rfID":
+                                    _ID = Convert.ToInt32(((DataRowView)data).Row["rfID"]);
+                                    break;
+                                case "rfRfdbID":
+                                    _ID = Convert.ToInt32(((DataRowView)data).Row["rfRfdbID"]);
+                                    break;
+                            }
+                            
                         }
                     }
                     catch
@@ -58,8 +67,11 @@ namespace SewingProduction.form
                 adapterReestrFurn.Fill(dtReestrFurn);
                 bsReestrFurn.DataSource = dtReestrFurn;
                 bsReestrFurn.Sort = "rfNOtgrPp asc";
+                
                 getReestrFurnSost(Convert.ToInt32(dtReestrFurn.Rows[0]["rfID"]));
                 getReestrFurnShtr(Convert.ToInt32(dtReestrFurn.Rows[0]["rfID"]));
+                getReestrFurnDeliveryBag(GetID("gcReestrFurn", "rfRfdbID"));
+                getReestrFurnDeliveryBagSost(GetID("gcReestrFurn", "rfRfdbID"));
             }
         }
         private void getReestrFurnSost(int _rfID)
@@ -70,13 +82,15 @@ namespace SewingProduction.form
                 connection.Open();
                 SqlDataAdapter adapterReestrFurnSost = new SqlDataAdapter();
                 DataTable dtReestrFurnSost = new DataTable();
-                string queryReestrFurnSost = $"select * from ReestrFurnSost where rfsRfID = {_rfID} ";
-                queryReestrFurnSost += $" order by rfsRfID ";
+                string queryReestrFurnSost = $"select rfs.*, cast(ltrim(rtrim(gr)) as nvarchar) + ' / ' + cast(ltrim(rtrim(name)) as nvarchar) as fn from ReestrFurnSost rfs ";
+                queryReestrFurnSost += $" left join dop_ras_mat drm on drm.kod = rfs.rfsKodO and drm.kod_art = rfs.rfsKodArt ";
+                queryReestrFurnSost += $" where rfs.rfsRfID = {_rfID} ";
+                queryReestrFurnSost += $" order by rfs.rfsID ";
                 SqlCommand commandReestrFurnSost = new SqlCommand(queryReestrFurnSost, connection);
                 adapterReestrFurnSost.SelectCommand = commandReestrFurnSost;
                 adapterReestrFurnSost.Fill(dtReestrFurnSost);
                 bsReestrFurnSost.DataSource = dtReestrFurnSost;
-                bsReestrFurnSost.Sort = "rfsRfID asc";
+                bsReestrFurnSost.Sort = "rfsID asc";
             }
         }
         private void getReestrFurnShtr(int _rfID)
@@ -93,7 +107,46 @@ namespace SewingProduction.form
                 adapterReestrFurnShtr.SelectCommand = commandReestrFurnShtr;
                 adapterReestrFurnShtr.Fill(dtReestrFurnShtr);
                 bsReestrFurnShtr.DataSource = dtReestrFurnShtr;
-                bsReestrFurnShtr.Sort = "rfshRfID asc";
+                bsReestrFurnShtr.Sort = "rfshID asc";
+            }
+        }
+
+        private void getReestrFurnDeliveryBag(int _rfdbID)
+        {
+            string connectionString = Properties.Settings.Default.ACEConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlDataAdapter adapterReestrFurnDeliveryBag = new SqlDataAdapter();
+                DataTable dtReestrFurnDeliveryBag = new DataTable();
+                string queryReestrFurnDeliveryBag = $"select rfdb.*, dd.ddName, dt.dtDateTime ";
+                queryReestrFurnDeliveryBag += $" from ReestrFurnDeliveryBag rfdb ";
+                queryReestrFurnDeliveryBag += $" left join deliveryDirection dd on rfdb.rfdbDdID = dd.ddID ";
+                queryReestrFurnDeliveryBag += $" left join deliveryTimeTable dt on rfdb.rfdbDtID = dt.dtID ";
+                queryReestrFurnDeliveryBag += $" where rfdbID = {_rfdbID} ";
+                queryReestrFurnDeliveryBag += $" order by rfdbID ";
+                SqlCommand commandReestrFurnDeliveryBag = new SqlCommand(queryReestrFurnDeliveryBag, connection);
+                adapterReestrFurnDeliveryBag.SelectCommand = commandReestrFurnDeliveryBag;
+                adapterReestrFurnDeliveryBag.Fill(dtReestrFurnDeliveryBag);
+                bsReestrFurnDeliveryBag.DataSource = dtReestrFurnDeliveryBag;
+                bsReestrFurnDeliveryBag.Sort = "rfdbID asc";
+            }
+        }
+        private void getReestrFurnDeliveryBagSost(int _rfdbID)
+        {
+            string connectionString = Properties.Settings.Default.ACEConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlDataAdapter adapterReestrFurnDeliveryBagSost = new SqlDataAdapter();
+                DataTable dtReestrFurnDeliveryBagSost = new DataTable();
+                string queryReestrFurnDeliveryBagSost = $"select * from reestrFurnDeliveryBagSost where rfdbsrfdbid = {_rfdbID} ";
+                queryReestrFurnDeliveryBagSost += $" order by rfdbsrfdbid ";
+                SqlCommand commandReestrFurnDeliveryBagSost = new SqlCommand(queryReestrFurnDeliveryBagSost, connection);
+                adapterReestrFurnDeliveryBagSost.SelectCommand = commandReestrFurnDeliveryBagSost;
+                adapterReestrFurnDeliveryBagSost.Fill(dtReestrFurnDeliveryBagSost);
+                bsReestrFurnDeliveryBagSost.DataSource = dtReestrFurnDeliveryBagSost;
+                bsReestrFurnDeliveryBagSost.Sort = "rfdbsid asc";
             }
         }
         private void FurnUpakDeliveryInfo_Load(object sender, EventArgs e)
@@ -115,9 +168,10 @@ namespace SewingProduction.form
 
         private void gcReestrFurn_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-            getReestrFurnSost(GetID("gcReestrFurn"));
-            getReestrFurnShtr(GetID("gcReestrFurn"));
-
+            getReestrFurnSost(GetID("gcReestrFurn", "rfID"));
+            getReestrFurnShtr(GetID("gcReestrFurn", "rfID"));
+            getReestrFurnDeliveryBag(GetID("gcReestrFurn", "rfRfdbID"));
+            getReestrFurnDeliveryBagSost(GetID("gcReestrFurn", "rfRfdbID"));
         }
 
         private void tbKodF_KeyDown(object sender, KeyEventArgs e)
@@ -127,5 +181,21 @@ namespace SewingProduction.form
                 btnKodFDelivInfo_Click(sender, e);
             }
         }
+
+        private void gridControl3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            object data = gridView1.GetRow(gridView1.FocusedRowHandle);
+           MessageBox.Show(((DataRowView)data).Row["rfDateTime"].ToString());
+                }
     }
 }
