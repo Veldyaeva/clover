@@ -533,6 +533,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(95870, "1Е921-09 уточн / зад с / не утв / резинка,кружево цв/разм"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(92235, "1Ф8362С2167 утв / резинка цв/разм / принт,стирка"));
             this._psaid.ValueSourceSettings = staticListLookUpSettings1;
+            this._psaid.Visible = false;
             // 
             // xrLabel1
             // 

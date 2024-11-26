@@ -27,6 +27,18 @@ namespace SewingProduction
             get => tbKodF.Text;
             set => tbKodF.Text = value;
         }
+
+        [Browsable(true)]
+        public new event EventHandler TextChangedViewType
+        {
+            add => tbViewType.TextChanged += value;
+            remove => tbViewType.TextChanged -= value;
+        }
+        public new string ViewType
+        {
+            get => tbViewType.Text;
+            set => tbViewType.Text = value;
+        }
         public FurnitZayavView()
         {
             InitializeComponent();
@@ -163,6 +175,7 @@ namespace SewingProduction
                     //this.tbRzuNom.DataBindings.Clear();
                     //this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
                 }
+                
             }
         }
 
@@ -185,6 +198,11 @@ namespace SewingProduction
         }
 
         private void gcFurnitFIt_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gcFurnitArt_Click(object sender, EventArgs e)
         {
 
         }

@@ -29,6 +29,36 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule3 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue3 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule4 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue4 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule5 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue5 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule6 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue6 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule7 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue7 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule8 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue8 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule9 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue9 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule10 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue10 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule11 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue11 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            this.gridColumn40 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn45 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn46 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.label62 = new System.Windows.Forms.Label();
@@ -99,14 +129,13 @@
             this.tbIs_got = new System.Windows.Forms.TextBox();
             this.label60 = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
-            this.button9 = new System.Windows.Forms.Button();
             this.tbUZSobrStat = new System.Windows.Forms.TextBox();
             this.label56 = new System.Windows.Forms.Label();
             this.tbUZSozdStat = new System.Windows.Forms.TextBox();
             this.label57 = new System.Windows.Forms.Label();
             this.tbUpakZayav = new System.Windows.Forms.TextBox();
             this.label58 = new System.Windows.Forms.Label();
-            this.button8 = new System.Windows.Forms.Button();
+            this.btnZayavFurnPrint = new System.Windows.Forms.Button();
             this.tbFZSobrStat = new System.Windows.Forms.TextBox();
             this.label55 = new System.Windows.Forms.Label();
             this.tbFZSozdStat = new System.Windows.Forms.TextBox();
@@ -187,10 +216,6 @@
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPartNaklList = new DevExpress.XtraGrid.GridControl();
@@ -222,6 +247,8 @@
             this.btnNaklPrint = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.mtbRzuDataR = new System.Windows.Forms.MaskedTextBox();
+            this.label64 = new System.Windows.Forms.Label();
             this.mtbRzuData1С = new System.Windows.Forms.MaskedTextBox();
             this.label63 = new System.Windows.Forms.Label();
             this.mtbRzuDataCd = new System.Windows.Forms.MaskedTextBox();
@@ -243,6 +270,7 @@
             this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
             this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.tbPszRpcNom = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -275,6 +303,96 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsFurnZayavInfo)).BeginInit();
             this.SuspendLayout();
+            // 
+            // gridColumn40
+            // 
+            this.gridColumn40.FieldName = "ChipInUTForeColor";
+            this.gridColumn40.Name = "gridColumn40";
+            this.gridColumn40.Visible = true;
+            this.gridColumn40.VisibleIndex = 3;
+            this.gridColumn40.Width = 63;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn15.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn15.Caption = "ЧИП в УТ";
+            this.gridColumn15.FieldName = "ChipInUT";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.OptionsColumn.FixedWidth = true;
+            this.gridColumn15.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn15.OptionsFilter.AllowFilter = false;
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 17;
+            this.gridColumn15.Width = 40;
+            // 
+            // gridColumn44
+            // 
+            this.gridColumn44.FieldName = "ChipPechForeColor";
+            this.gridColumn44.Name = "gridColumn44";
+            this.gridColumn44.Visible = true;
+            this.gridColumn44.VisibleIndex = 2;
+            this.gridColumn44.Width = 63;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn14.Caption = "Печ. ЧИП";
+            this.gridColumn14.FieldName = "ChipPech";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.OptionsColumn.FixedWidth = true;
+            this.gridColumn14.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn14.OptionsFilter.AllowFilter = false;
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 18;
+            this.gridColumn14.Width = 40;
+            // 
+            // gridColumn45
+            // 
+            this.gridColumn45.FieldName = "ChipScanForeColor";
+            this.gridColumn45.Name = "gridColumn45";
+            this.gridColumn45.Visible = true;
+            this.gridColumn45.VisibleIndex = 1;
+            this.gridColumn45.Width = 73;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn13.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn13.Caption = "Скан. ЧИП";
+            this.gridColumn13.FieldName = "ChipScan";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.OptionsColumn.FixedWidth = true;
+            this.gridColumn13.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn13.OptionsFilter.AllowFilter = false;
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 19;
+            this.gridColumn13.Width = 40;
+            // 
+            // gridColumn46
+            // 
+            this.gridColumn46.FieldName = "ChipOtgrForeColor";
+            this.gridColumn46.Name = "gridColumn46";
+            this.gridColumn46.Visible = true;
+            this.gridColumn46.VisibleIndex = 0;
+            this.gridColumn46.Width = 73;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.AppearanceCell.Options.UseTextOptions = true;
+            this.gridColumn12.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn12.Caption = "Отгр. ЧИП";
+            this.gridColumn12.FieldName = "ChipOtgr";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.OptionsColumn.FixedWidth = true;
+            this.gridColumn12.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn12.OptionsFilter.AllowFilter = false;
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 20;
+            this.gridColumn12.Width = 40;
             // 
             // panelControl1
             // 
@@ -333,7 +451,7 @@
             // label62
             // 
             this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(1258, 30);
+            this.label62.Location = new System.Drawing.Point(1316, 30);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(38, 13);
             this.label62.TabIndex = 33;
@@ -341,7 +459,7 @@
             // 
             // tbPsaPsaID
             // 
-            this.tbPsaPsaID.Location = new System.Drawing.Point(1302, 26);
+            this.tbPsaPsaID.Location = new System.Drawing.Point(1360, 26);
             this.tbPsaPsaID.Name = "tbPsaPsaID";
             this.tbPsaPsaID.Size = new System.Drawing.Size(70, 21);
             this.tbPsaPsaID.TabIndex = 32;
@@ -360,7 +478,7 @@
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1157, 72);
+            this.label16.Location = new System.Drawing.Point(1215, 72);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(37, 13);
             this.label16.TabIndex = 20;
@@ -370,17 +488,16 @@
             // 
             this.cbIsChip.AutoSize = true;
             this.cbIsChip.Enabled = false;
-            this.cbIsChip.Location = new System.Drawing.Point(1196, 97);
+            this.cbIsChip.Location = new System.Drawing.Point(1254, 97);
             this.cbIsChip.Name = "cbIsChip";
             this.cbIsChip.Size = new System.Drawing.Size(45, 17);
             this.cbIsChip.TabIndex = 30;
             this.cbIsChip.Text = "Чип";
             this.cbIsChip.UseVisualStyleBackColor = true;
-            this.cbIsChip.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // psaSezName
             // 
-            this.psaSezName.Location = new System.Drawing.Point(1194, 72);
+            this.psaSezName.Location = new System.Drawing.Point(1252, 72);
             this.psaSezName.Name = "psaSezName";
             this.psaSezName.Size = new System.Drawing.Size(47, 21);
             this.psaSezName.TabIndex = 19;
@@ -395,7 +512,7 @@
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1157, 53);
+            this.label17.Location = new System.Drawing.Point(1215, 53);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(26, 13);
             this.label17.TabIndex = 18;
@@ -404,7 +521,7 @@
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(738, 96);
+            this.label22.Location = new System.Drawing.Point(513, 95);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(52, 13);
             this.label22.TabIndex = 30;
@@ -412,7 +529,7 @@
             // 
             // tbPsaYear
             // 
-            this.tbPsaYear.Location = new System.Drawing.Point(1194, 49);
+            this.tbPsaYear.Location = new System.Drawing.Point(1252, 49);
             this.tbPsaYear.Name = "tbPsaYear";
             this.tbPsaYear.Size = new System.Drawing.Size(47, 21);
             this.tbPsaYear.TabIndex = 17;
@@ -425,11 +542,10 @@
             this.label53.Size = new System.Drawing.Size(65, 13);
             this.label53.TabIndex = 27;
             this.label53.Text = "№ задания";
-            this.label53.Click += new System.EventHandler(this.label53_Click);
             // 
             // tbPsaKodZv2
             // 
-            this.tbPsaKodZv2.Location = new System.Drawing.Point(790, 96);
+            this.tbPsaKodZv2.Location = new System.Drawing.Point(565, 95);
             this.tbPsaKodZv2.Name = "tbPsaKodZv2";
             this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 21);
             this.tbPsaKodZv2.TabIndex = 29;
@@ -437,7 +553,7 @@
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(578, 95);
+            this.label23.Location = new System.Drawing.Point(367, 95);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(52, 13);
             this.label23.TabIndex = 27;
@@ -452,7 +568,7 @@
             // 
             // tbPsaKodZv1
             // 
-            this.tbPsaKodZv1.Location = new System.Drawing.Point(636, 95);
+            this.tbPsaKodZv1.Location = new System.Drawing.Point(425, 95);
             this.tbPsaKodZv1.Name = "tbPsaKodZv1";
             this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
             this.tbPsaKodZv1.TabIndex = 26;
@@ -460,7 +576,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(868, 46);
+            this.label20.Location = new System.Drawing.Point(926, 46);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(66, 26);
             this.label20.TabIndex = 12;
@@ -468,7 +584,7 @@
             // 
             // tbPsaMenName
             // 
-            this.tbPsaMenName.Location = new System.Drawing.Point(946, 49);
+            this.tbPsaMenName.Location = new System.Drawing.Point(1004, 49);
             this.tbPsaMenName.Multiline = true;
             this.tbPsaMenName.Name = "tbPsaMenName";
             this.tbPsaMenName.Size = new System.Drawing.Size(174, 21);
@@ -485,16 +601,16 @@
             // 
             // tbSostPoln
             // 
-            this.tbSostPoln.Location = new System.Drawing.Point(660, 49);
+            this.tbSostPoln.Location = new System.Drawing.Point(718, 49);
             this.tbSostPoln.Multiline = true;
             this.tbSostPoln.Name = "tbSostPoln";
-            this.tbSostPoln.Size = new System.Drawing.Size(195, 45);
+            this.tbSostPoln.Size = new System.Drawing.Size(195, 67);
             this.tbSostPoln.TabIndex = 25;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(578, 53);
+            this.label13.Location = new System.Drawing.Point(636, 53);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(62, 26);
             this.label13.TabIndex = 24;
@@ -503,7 +619,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(868, 72);
+            this.label11.Location = new System.Drawing.Point(926, 72);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(72, 13);
             this.label11.TabIndex = 24;
@@ -511,7 +627,7 @@
             // 
             // tbPsaNameSbit
             // 
-            this.tbPsaNameSbit.Location = new System.Drawing.Point(946, 72);
+            this.tbPsaNameSbit.Location = new System.Drawing.Point(1004, 72);
             this.tbPsaNameSbit.Name = "tbPsaNameSbit";
             this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 21);
             this.tbPsaNameSbit.TabIndex = 23;
@@ -519,7 +635,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(578, 23);
+            this.label15.Location = new System.Drawing.Point(636, 23);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(80, 26);
             this.label15.TabIndex = 22;
@@ -536,7 +652,7 @@
             // 
             // tbArtGrup
             // 
-            this.tbArtGrup.Location = new System.Drawing.Point(660, 26);
+            this.tbArtGrup.Location = new System.Drawing.Point(718, 26);
             this.tbArtGrup.Name = "tbArtGrup";
             this.tbArtGrup.Size = new System.Drawing.Size(195, 21);
             this.tbArtGrup.TabIndex = 21;
@@ -556,19 +672,18 @@
             this.label10.Size = new System.Drawing.Size(84, 13);
             this.label10.TabIndex = 20;
             this.label10.Text = "Модель (торг.)";
-            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // tbRzuMod
             // 
             this.tbRzuMod.Location = new System.Drawing.Point(426, 49);
             this.tbRzuMod.Name = "tbRzuMod";
-            this.tbRzuMod.Size = new System.Drawing.Size(137, 21);
+            this.tbRzuMod.Size = new System.Drawing.Size(204, 21);
             this.tbRzuMod.TabIndex = 19;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(868, 30);
+            this.label19.Location = new System.Drawing.Point(926, 30);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(31, 13);
             this.label19.TabIndex = 14;
@@ -585,7 +700,7 @@
             // 
             // tbPsaTbID
             // 
-            this.tbPsaTbID.Location = new System.Drawing.Point(946, 26);
+            this.tbPsaTbID.Location = new System.Drawing.Point(1004, 26);
             this.tbPsaTbID.Name = "tbPsaTbID";
             this.tbPsaTbID.Size = new System.Drawing.Size(136, 21);
             this.tbPsaTbID.TabIndex = 13;
@@ -594,9 +709,8 @@
             // 
             this.tbRzuArticul.Location = new System.Drawing.Point(426, 26);
             this.tbRzuArticul.Name = "tbRzuArticul";
-            this.tbRzuArticul.Size = new System.Drawing.Size(137, 21);
+            this.tbRzuArticul.Size = new System.Drawing.Size(204, 21);
             this.tbRzuArticul.TabIndex = 17;
-            this.tbRzuArticul.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // label8
             // 
@@ -612,7 +726,7 @@
             this.tbPsaPrn.Location = new System.Drawing.Point(426, 72);
             this.tbPsaPrn.Multiline = true;
             this.tbPsaPrn.Name = "tbPsaPrn";
-            this.tbPsaPrn.Size = new System.Drawing.Size(137, 33);
+            this.tbPsaPrn.Size = new System.Drawing.Size(204, 21);
             this.tbPsaPrn.TabIndex = 15;
             // 
             // label7
@@ -648,7 +762,6 @@
             this.label5.Size = new System.Drawing.Size(64, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "№ расчета";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // tbRzuNom
             // 
@@ -669,7 +782,7 @@
             // label21
             // 
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1091, 30);
+            this.label21.Location = new System.Drawing.Point(1149, 30);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(74, 13);
             this.label21.TabIndex = 10;
@@ -677,7 +790,7 @@
             // 
             // tbPsaNN
             // 
-            this.tbPsaNN.Location = new System.Drawing.Point(1171, 26);
+            this.tbPsaNN.Location = new System.Drawing.Point(1229, 26);
             this.tbPsaNN.Name = "tbPsaNN";
             this.tbPsaNN.Size = new System.Drawing.Size(70, 21);
             this.tbPsaNN.TabIndex = 9;
@@ -704,10 +817,7 @@
             this.tbNomPach.Name = "tbNomPach";
             this.tbNomPach.Size = new System.Drawing.Size(64, 21);
             this.tbNomPach.TabIndex = 5;
-            this.tbNomPach.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             this.tbNomPach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNomPach_KeyDown);
-            this.tbNomPach.Leave += new System.EventHandler(this.textBox1_Leave);
-            this.tbNomPach.Validated += new System.EventHandler(this.textBox1_Validated);
             // 
             // label2
             // 
@@ -729,10 +839,6 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "КАРТОЧКА РАСЧЕТА";
             // 
-            // bsRasInfo
-            // 
-            this.bsRasInfo.CurrentChanged += new System.EventHandler(this.bindingSource1_CurrentChanged);
-            // 
             // xtraTabPage3
             // 
             this.xtraTabPage3.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
@@ -750,8 +856,6 @@
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.Size = new System.Drawing.Size(1569, 575);
             this.xtraTabPage2.Text = "КОНФЕКЦИОН";
-            this.xtraTabPage2.Click += new System.EventHandler(this.xtraTabPage2_Click);
-            this.xtraTabPage2.Paint += new System.Windows.Forms.PaintEventHandler(this.xtraTabPage2_Paint);
             // 
             // furnitZayavViewFurnit
             // 
@@ -759,7 +863,7 @@
             this.furnitZayavViewFurnit.Name = "furnitZayavViewFurnit";
             this.furnitZayavViewFurnit.Size = new System.Drawing.Size(1349, 264);
             this.furnitZayavViewFurnit.TabIndex = 4;
-            this.furnitZayavViewFurnit.TextChanged += new System.EventHandler(this.furnitZayavViewFurnit_TextChanged);
+            this.furnitZayavViewFurnit.ViewType = "";
             // 
             // furnitZayavViewUpak
             // 
@@ -767,7 +871,7 @@
             this.furnitZayavViewUpak.Name = "furnitZayavViewUpak";
             this.furnitZayavViewUpak.Size = new System.Drawing.Size(1349, 264);
             this.furnitZayavViewUpak.TabIndex = 3;
-            this.furnitZayavViewUpak.TextChanged += new System.EventHandler(this.furnitZayavViewUpak_TextChanged);
+            this.furnitZayavViewUpak.ViewType = "";
             // 
             // panelControl7
             // 
@@ -818,14 +922,13 @@
             this.panelControl2.Controls.Add(this.tbIs_got);
             this.panelControl2.Controls.Add(this.label60);
             this.panelControl2.Controls.Add(this.label59);
-            this.panelControl2.Controls.Add(this.button9);
             this.panelControl2.Controls.Add(this.tbUZSobrStat);
             this.panelControl2.Controls.Add(this.label56);
             this.panelControl2.Controls.Add(this.tbUZSozdStat);
             this.panelControl2.Controls.Add(this.label57);
             this.panelControl2.Controls.Add(this.tbUpakZayav);
             this.panelControl2.Controls.Add(this.label58);
-            this.panelControl2.Controls.Add(this.button8);
+            this.panelControl2.Controls.Add(this.btnZayavFurnPrint);
             this.panelControl2.Controls.Add(this.tbFZSobrStat);
             this.panelControl2.Controls.Add(this.label55);
             this.panelControl2.Controls.Add(this.tbFZSozdStat);
@@ -911,7 +1014,6 @@
             this.label60.Size = new System.Drawing.Size(86, 26);
             this.label60.TabIndex = 55;
             this.label60.Text = "Дата отгрузки \r\nс производства";
-            this.label60.Click += new System.EventHandler(this.label60_Click);
             // 
             // label59
             // 
@@ -921,17 +1023,6 @@
             this.label59.Size = new System.Drawing.Size(63, 13);
             this.label59.TabIndex = 54;
             this.label59.Text = "Дата в цех";
-            this.label59.Click += new System.EventHandler(this.label59_Click);
-            // 
-            // button9
-            // 
-            this.button9.Location = new System.Drawing.Point(5, 362);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(200, 20);
-            this.button9.TabIndex = 53;
-            this.button9.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // tbUZSobrStat
             // 
@@ -984,15 +1075,15 @@
             this.label58.TabIndex = 45;
             this.label58.Text = "Заявка на упаковку №";
             // 
-            // button8
+            // btnZayavFurnPrint
             // 
-            this.button8.Location = new System.Drawing.Point(6, 247);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(200, 20);
-            this.button8.TabIndex = 44;
-            this.button8.Text = "ПРОСМОТР / ПЕЧАТЬ";
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.btnZayavFurnPrint.Location = new System.Drawing.Point(6, 247);
+            this.btnZayavFurnPrint.Name = "btnZayavFurnPrint";
+            this.btnZayavFurnPrint.Size = new System.Drawing.Size(200, 20);
+            this.btnZayavFurnPrint.TabIndex = 44;
+            this.btnZayavFurnPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.btnZayavFurnPrint.UseVisualStyleBackColor = true;
+            this.btnZayavFurnPrint.Click += new System.EventHandler(this.btnZayavFurnPrint_Click);
             // 
             // tbFZSobrStat
             // 
@@ -1124,9 +1215,9 @@
             this.panelControl6.Controls.Add(this.button5);
             this.panelControl6.Controls.Add(this.button6);
             this.panelControl6.Controls.Add(this.label52);
-            this.panelControl6.Location = new System.Drawing.Point(4, 484);
+            this.panelControl6.Location = new System.Drawing.Point(4, 517);
             this.panelControl6.Name = "panelControl6";
-            this.panelControl6.Size = new System.Drawing.Size(1358, 55);
+            this.panelControl6.Size = new System.Drawing.Size(1558, 55);
             this.panelControl6.TabIndex = 31;
             // 
             // button4
@@ -1212,7 +1303,7 @@
             this.panelControl5.Controls.Add(this.label32);
             this.panelControl5.Controls.Add(this.gridControl2);
             this.panelControl5.Controls.Add(this.label31);
-            this.panelControl5.Location = new System.Drawing.Point(4, 283);
+            this.panelControl5.Location = new System.Drawing.Point(4, 316);
             this.panelControl5.Name = "panelControl5";
             this.panelControl5.Size = new System.Drawing.Size(1558, 195);
             this.panelControl5.TabIndex = 30;
@@ -1276,7 +1367,6 @@
             this.cbPszPrintPlan.TabIndex = 67;
             this.cbPszPrintPlan.Text = "План";
             this.cbPszPrintPlan.UseVisualStyleBackColor = true;
-            this.cbPszPrintPlan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged_1);
             // 
             // mtbRzuDataPrCd
             // 
@@ -1566,16 +1656,18 @@
             // gridControl2
             // 
             this.gridControl2.DataSource = this.bsOtdelkaList;
-            this.gridControl2.Location = new System.Drawing.Point(988, 2);
+            this.gridControl2.Location = new System.Drawing.Point(1031, 2);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(364, 188);
+            this.gridControl2.Size = new System.Drawing.Size(522, 188);
             this.gridControl2.TabIndex = 5;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
             // 
             // gridView2
             // 
+            this.gridView2.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn29,
             this.gridColumn30,
@@ -1584,46 +1676,70 @@
             this.gridColumn33});
             this.gridView2.GridControl = this.gridControl2;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView2.OptionsView.RowAutoHeight = true;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn29
             // 
             this.gridColumn29.Caption = "Вид изделия";
             this.gridColumn29.FieldName = "VidIzdName";
             this.gridColumn29.Name = "gridColumn29";
+            this.gridColumn29.OptionsColumn.FixedWidth = true;
+            this.gridColumn29.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn29.OptionsFilter.AllowFilter = false;
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 4;
+            this.gridColumn29.Width = 120;
             // 
             // gridColumn30
             // 
             this.gridColumn30.Caption = "Деталь изделия";
             this.gridColumn30.FieldName = "DetIzdName";
             this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.OptionsColumn.FixedWidth = true;
+            this.gridColumn30.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn30.OptionsFilter.AllowFilter = false;
             this.gridColumn30.Visible = true;
             this.gridColumn30.VisibleIndex = 3;
+            this.gridColumn30.Width = 100;
             // 
             // gridColumn31
             // 
             this.gridColumn31.Caption = "Формат";
             this.gridColumn31.FieldName = "frt_naimen";
             this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.OptionsColumn.FixedWidth = true;
+            this.gridColumn31.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn31.OptionsFilter.AllowFilter = false;
             this.gridColumn31.Visible = true;
             this.gridColumn31.VisibleIndex = 2;
+            this.gridColumn31.Width = 50;
             // 
             // gridColumn32
             // 
             this.gridColumn32.Caption = "Кол-во/слож/цвет/прогон";
             this.gridColumn32.FieldName = "kol_sl_zv";
             this.gridColumn32.Name = "gridColumn32";
+            this.gridColumn32.OptionsColumn.FixedWidth = true;
+            this.gridColumn32.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn32.OptionsFilter.AllowFilter = false;
             this.gridColumn32.Visible = true;
             this.gridColumn32.VisibleIndex = 1;
+            this.gridColumn32.Width = 140;
             // 
             // gridColumn33
             // 
             this.gridColumn33.Caption = "Вид отделки";
             this.gridColumn33.FieldName = "psa_field_name";
             this.gridColumn33.Name = "gridColumn33";
+            this.gridColumn33.OptionsColumn.FixedWidth = true;
+            this.gridColumn33.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn33.OptionsFilter.AllowFilter = false;
             this.gridColumn33.Visible = true;
             this.gridColumn33.VisibleIndex = 0;
+            this.gridColumn33.Width = 90;
             // 
             // label31
             // 
@@ -1645,24 +1761,26 @@
             this.panelControl4.Controls.Add(this.btnNaklPart);
             this.panelControl4.Controls.Add(this.btnNaklPrint);
             this.panelControl4.Controls.Add(this.label24);
-            this.panelControl4.Location = new System.Drawing.Point(4, 72);
+            this.panelControl4.Location = new System.Drawing.Point(4, 90);
             this.panelControl4.Name = "panelControl4";
-            this.panelControl4.Size = new System.Drawing.Size(1558, 205);
+            this.panelControl4.Size = new System.Drawing.Size(1558, 220);
             this.panelControl4.TabIndex = 28;
             // 
             // gcNaklList
             // 
             this.gcNaklList.DataSource = this.bsNaklList;
-            this.gcNaklList.Location = new System.Drawing.Point(8, 25);
+            this.gcNaklList.Location = new System.Drawing.Point(8, 24);
             this.gcNaklList.MainView = this.gridView1;
             this.gcNaklList.Name = "gcNaklList";
-            this.gcNaklList.Size = new System.Drawing.Size(1545, 146);
+            this.gcNaklList.Size = new System.Drawing.Size(1545, 163);
             this.gcNaklList.TabIndex = 5;
             this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
             // 
+            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn1,
             this.gridColumn2,
@@ -1680,164 +1798,316 @@
             this.gridColumn14,
             this.gridColumn15,
             this.gridColumn16,
-            this.gridColumn17});
+            this.gridColumn17,
+            this.gridColumn40,
+            this.gridColumn44,
+            this.gridColumn45,
+            this.gridColumn46});
+            gridFormatRule1.Column = this.gridColumn40;
+            gridFormatRule1.ColumnApplyTo = this.gridColumn15;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue1.Appearance.Options.UseFont = true;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = "red";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridFormatRule2.Column = this.gridColumn40;
+            gridFormatRule2.ColumnApplyTo = this.gridColumn15;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleValue2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue2.Appearance.Options.UseFont = true;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue2.Value1 = "green";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridFormatRule3.Column = this.gridColumn44;
+            gridFormatRule3.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleValue3.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue3.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue3.Appearance.Options.UseFont = true;
+            formatConditionRuleValue3.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue3.Value1 = "green";
+            gridFormatRule3.Rule = formatConditionRuleValue3;
+            gridFormatRule4.Column = this.gridColumn44;
+            gridFormatRule4.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleValue4.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue4.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue4.Appearance.Options.UseFont = true;
+            formatConditionRuleValue4.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue4.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue4.Value1 = "red";
+            gridFormatRule4.Rule = formatConditionRuleValue4;
+            gridFormatRule5.Column = this.gridColumn44;
+            gridFormatRule5.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleValue5.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue5.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue5.Appearance.Options.UseFont = true;
+            formatConditionRuleValue5.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue5.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue5.Value1 = "gray";
+            gridFormatRule5.Rule = formatConditionRuleValue5;
+            gridFormatRule6.Column = this.gridColumn45;
+            gridFormatRule6.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule6.Name = "Format5";
+            formatConditionRuleValue6.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue6.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue6.Appearance.Options.UseFont = true;
+            formatConditionRuleValue6.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue6.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue6.Value1 = "red";
+            gridFormatRule6.Rule = formatConditionRuleValue6;
+            gridFormatRule7.Column = this.gridColumn45;
+            gridFormatRule7.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule7.Name = "Format6";
+            formatConditionRuleValue7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue7.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue7.Appearance.Options.UseFont = true;
+            formatConditionRuleValue7.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue7.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue7.Value1 = "green";
+            gridFormatRule7.Rule = formatConditionRuleValue7;
+            gridFormatRule8.Column = this.gridColumn45;
+            gridFormatRule8.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule8.Name = "Format7";
+            formatConditionRuleValue8.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue8.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue8.Appearance.Options.UseFont = true;
+            formatConditionRuleValue8.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue8.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue8.Value1 = "gray";
+            gridFormatRule8.Rule = formatConditionRuleValue8;
+            gridFormatRule9.Column = this.gridColumn46;
+            gridFormatRule9.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule9.Name = "Format8";
+            formatConditionRuleValue9.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue9.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue9.Appearance.Options.UseFont = true;
+            formatConditionRuleValue9.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue9.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue9.Value1 = "red";
+            gridFormatRule9.Rule = formatConditionRuleValue9;
+            gridFormatRule10.Column = this.gridColumn46;
+            gridFormatRule10.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule10.Name = "Format9";
+            formatConditionRuleValue10.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue10.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue10.Appearance.Options.UseFont = true;
+            formatConditionRuleValue10.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue10.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue10.Value1 = "green";
+            gridFormatRule10.Rule = formatConditionRuleValue10;
+            gridFormatRule11.Column = this.gridColumn46;
+            gridFormatRule11.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule11.Name = "Format10";
+            formatConditionRuleValue11.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue11.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue11.Appearance.Options.UseFont = true;
+            formatConditionRuleValue11.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue11.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue11.Value1 = "gray";
+            gridFormatRule11.Rule = formatConditionRuleValue11;
+            this.gridView1.FormatRules.Add(gridFormatRule1);
+            this.gridView1.FormatRules.Add(gridFormatRule2);
+            this.gridView1.FormatRules.Add(gridFormatRule3);
+            this.gridView1.FormatRules.Add(gridFormatRule4);
+            this.gridView1.FormatRules.Add(gridFormatRule5);
+            this.gridView1.FormatRules.Add(gridFormatRule6);
+            this.gridView1.FormatRules.Add(gridFormatRule7);
+            this.gridView1.FormatRules.Add(gridFormatRule8);
+            this.gridView1.FormatRules.Add(gridFormatRule9);
+            this.gridView1.FormatRules.Add(gridFormatRule10);
+            this.gridView1.FormatRules.Add(gridFormatRule11);
             this.gridView1.GridControl = this.gcNaklList;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsMenu.ShowConditionalFormattingItem = true;
+            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsView.RowAutoHeight = true;
             this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView1_CustomDrawCell);
             // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Кол-во ДО";
             this.gridColumn1.FieldName = "kol_b";
             this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.FixedWidth = true;
+            this.gridColumn1.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn1.OptionsFilter.AllowFilter = false;
             this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 9;
-            this.gridColumn1.Width = 160;
+            this.gridColumn1.VisibleIndex = 13;
+            this.gridColumn1.Width = 60;
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "Причина деления";
             this.gridColumn2.FieldName = "prich";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn2.OptionsFilter.AllowFilter = false;
             this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 8;
-            this.gridColumn2.Width = 135;
+            this.gridColumn2.VisibleIndex = 12;
+            this.gridColumn2.Width = 38;
             // 
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Склад отгрузки";
             this.gridColumn3.FieldName = "skl_naimen";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.FixedWidth = true;
+            this.gridColumn3.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn3.OptionsFilter.AllowFilter = false;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 7;
-            this.gridColumn3.Width = 180;
+            this.gridColumn3.VisibleIndex = 11;
+            this.gridColumn3.Width = 150;
             // 
             // gridColumn4
             // 
             this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn4.Caption = "№ накл. Глобал";
             this.gridColumn4.FieldName = "gl_nomer";
             this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.FixedWidth = true;
+            this.gridColumn4.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn4.OptionsFilter.AllowFilter = false;
             this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
-            this.gridColumn4.Width = 88;
+            this.gridColumn4.VisibleIndex = 10;
+            this.gridColumn4.Width = 70;
             // 
             // gridColumn5
             // 
             this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn5.Caption = "Дата печати";
             this.gridColumn5.FieldName = "date_print";
             this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.FixedWidth = true;
+            this.gridColumn5.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn5.OptionsFilter.AllowFilter = false;
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 5;
-            this.gridColumn5.Width = 88;
+            this.gridColumn5.VisibleIndex = 9;
+            this.gridColumn5.Width = 90;
             // 
             // gridColumn6
             // 
+            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn6.Caption = "№ отгр.";
             this.gridColumn6.FieldName = "dost_n";
             this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.FixedWidth = true;
+            this.gridColumn6.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn6.OptionsFilter.AllowFilter = false;
             this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 4;
-            this.gridColumn6.Width = 69;
+            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.Width = 60;
             // 
             // gridColumn7
             // 
             this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn7.Caption = "Доставка на склад";
             this.gridColumn7.FieldName = "dost_data";
             this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.FixedWidth = true;
+            this.gridColumn7.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn7.OptionsFilter.AllowFilter = false;
             this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 3;
-            this.gridColumn7.Width = 88;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 90;
             // 
             // gridColumn8
             // 
             this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn8.Caption = "Дата деления";
             this.gridColumn8.FieldName = "data_izm";
             this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.OptionsColumn.FixedWidth = true;
+            this.gridColumn8.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn8.OptionsFilter.AllowFilter = false;
             this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 2;
-            this.gridColumn8.Width = 88;
+            this.gridColumn8.VisibleIndex = 6;
+            this.gridColumn8.Width = 90;
             // 
             // gridColumn9
             // 
+            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn9.Caption = "Дата накл.";
             this.gridColumn9.FieldName = "iz_data";
             this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.FixedWidth = true;
+            this.gridColumn9.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn9.OptionsFilter.AllowFilter = false;
             this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 1;
-            this.gridColumn9.Width = 88;
+            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.Width = 90;
             // 
             // gridColumn10
             // 
+            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.gridColumn10.Caption = "№ накл.";
             this.gridColumn10.FieldName = "iz_nakl";
             this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.FixedWidth = true;
+            this.gridColumn10.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn10.OptionsFilter.AllowFilter = false;
             this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 0;
-            this.gridColumn10.Width = 70;
+            this.gridColumn10.VisibleIndex = 4;
+            this.gridColumn10.Width = 60;
             // 
             // gridColumn11
             // 
+            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
             this.gridColumn11.FieldName = "kol_c";
             this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.FixedWidth = true;
+            this.gridColumn11.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn11.OptionsFilter.AllowFilter = false;
             this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 10;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.Caption = "Отгр. ЧИП";
-            this.gridColumn12.FieldName = "ChipOtgr";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 16;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.Caption = "Скан. ЧИП";
-            this.gridColumn13.FieldName = "ChipScan";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 15;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "Печ. ЧИП";
-            this.gridColumn14.FieldName = "ChipPech";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 14;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.Caption = "ЧИП в УТ";
-            this.gridColumn15.FieldName = "ChipInUT";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 13;
+            this.gridColumn11.VisibleIndex = 14;
+            this.gridColumn11.Width = 60;
             // 
             // gridColumn16
             // 
             this.gridColumn16.Caption = "Модель";
             this.gridColumn16.FieldName = "mod";
             this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.OptionsColumn.FixedWidth = true;
+            this.gridColumn16.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn16.OptionsFilter.AllowFilter = false;
             this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 12;
+            this.gridColumn16.VisibleIndex = 16;
+            this.gridColumn16.Width = 120;
             // 
             // gridColumn17
             // 
             this.gridColumn17.Caption = "Артикул";
             this.gridColumn17.FieldName = "articul";
             this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.OptionsColumn.FixedWidth = true;
+            this.gridColumn17.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn17.OptionsFilter.AllowFilter = false;
             this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 11;
+            this.gridColumn17.VisibleIndex = 15;
+            this.gridColumn17.Width = 120;
             // 
             // gcPartNaklList
             // 
@@ -1850,7 +2120,6 @@
             this.gcPartNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
             this.gcPartNaklList.Visible = false;
-            this.gcPartNaklList.Click += new System.EventHandler(this.gcPartNaklList_Click);
             // 
             // gridView3
             // 
@@ -1876,6 +2145,8 @@
             this.gridColumn43});
             this.gridView3.GridControl = this.gcPartNaklList;
             this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsBehavior.Editable = false;
+            this.gridView3.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn18
@@ -1883,6 +2154,8 @@
             this.gridColumn18.Caption = "iz_ob_prch";
             this.gridColumn18.FieldName = "iz_ob_prch";
             this.gridColumn18.Name = "gridColumn18";
+            this.gridColumn18.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn18.OptionsFilter.AllowFilter = false;
             this.gridColumn18.Visible = true;
             this.gridColumn18.VisibleIndex = 11;
             this.gridColumn18.Width = 45;
@@ -1892,6 +2165,8 @@
             this.gridColumn19.Caption = "razm";
             this.gridColumn19.FieldName = "razm";
             this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn19.OptionsFilter.AllowFilter = false;
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 10;
             this.gridColumn19.Width = 132;
@@ -1901,6 +2176,8 @@
             this.gridColumn20.Caption = "mod";
             this.gridColumn20.FieldName = "mod";
             this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn20.OptionsFilter.AllowFilter = false;
             this.gridColumn20.Visible = true;
             this.gridColumn20.VisibleIndex = 9;
             this.gridColumn20.Width = 109;
@@ -1910,6 +2187,8 @@
             this.gridColumn21.Caption = "kol_new";
             this.gridColumn21.FieldName = "kol_new";
             this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn21.OptionsFilter.AllowFilter = false;
             this.gridColumn21.Visible = true;
             this.gridColumn21.VisibleIndex = 8;
             this.gridColumn21.Width = 63;
@@ -1919,6 +2198,8 @@
             this.gridColumn23.Caption = "kol_c";
             this.gridColumn23.FieldName = "kol_c";
             this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn23.OptionsFilter.AllowFilter = false;
             this.gridColumn23.Visible = true;
             this.gridColumn23.VisibleIndex = 7;
             this.gridColumn23.Width = 53;
@@ -1928,6 +2209,8 @@
             this.gridColumn25.Caption = "kol_b";
             this.gridColumn25.FieldName = "kol_b";
             this.gridColumn25.Name = "gridColumn25";
+            this.gridColumn25.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn25.OptionsFilter.AllowFilter = false;
             this.gridColumn25.Visible = true;
             this.gridColumn25.VisibleIndex = 6;
             this.gridColumn25.Width = 38;
@@ -1937,6 +2220,8 @@
             this.gridColumn27.Caption = "iz_c";
             this.gridColumn27.FieldName = "iz_c";
             this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn27.OptionsFilter.AllowFilter = false;
             this.gridColumn27.Visible = true;
             this.gridColumn27.VisibleIndex = 5;
             this.gridColumn27.Width = 58;
@@ -1946,6 +2231,8 @@
             this.gridColumn28.Caption = "skl_otgr_s";
             this.gridColumn28.FieldName = "skl_otgr_c";
             this.gridColumn28.Name = "gridColumn28";
+            this.gridColumn28.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn28.OptionsFilter.AllowFilter = false;
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 3;
             this.gridColumn28.Width = 35;
@@ -1955,6 +2242,8 @@
             this.gridColumn34.Caption = "skl_otgr_b";
             this.gridColumn34.FieldName = "skl_otgr_b";
             this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn34.OptionsFilter.AllowFilter = false;
             this.gridColumn34.Visible = true;
             this.gridColumn34.VisibleIndex = 2;
             this.gridColumn34.Width = 40;
@@ -1964,6 +2253,8 @@
             this.gridColumn35.Caption = "data_izm";
             this.gridColumn35.FieldName = "data_izm";
             this.gridColumn35.Name = "gridColumn35";
+            this.gridColumn35.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn35.OptionsFilter.AllowFilter = false;
             this.gridColumn35.Visible = true;
             this.gridColumn35.VisibleIndex = 1;
             this.gridColumn35.Width = 51;
@@ -1973,6 +2264,8 @@
             this.gridColumn24.Caption = "status";
             this.gridColumn24.FieldName = "status";
             this.gridColumn24.Name = "gridColumn24";
+            this.gridColumn24.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn24.OptionsFilter.AllowFilter = false;
             this.gridColumn24.Visible = true;
             this.gridColumn24.VisibleIndex = 12;
             this.gridColumn24.Width = 45;
@@ -1982,6 +2275,8 @@
             this.gridColumn26.Caption = "skl_id_1c_b";
             this.gridColumn26.FieldName = "skl_id_1c_b";
             this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn26.OptionsFilter.AllowFilter = false;
             this.gridColumn26.Visible = true;
             this.gridColumn26.VisibleIndex = 15;
             this.gridColumn26.Width = 52;
@@ -1991,6 +2286,8 @@
             this.gridColumn36.Caption = "komp_del";
             this.gridColumn36.FieldName = "komp_del";
             this.gridColumn36.Name = "gridColumn36";
+            this.gridColumn36.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn36.OptionsFilter.AllowFilter = false;
             this.gridColumn36.Visible = true;
             this.gridColumn36.VisibleIndex = 14;
             this.gridColumn36.Width = 98;
@@ -2000,6 +2297,8 @@
             this.gridColumn37.Caption = "komp_name";
             this.gridColumn37.FieldName = "komp_name";
             this.gridColumn37.Name = "gridColumn37";
+            this.gridColumn37.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn37.OptionsFilter.AllowFilter = false;
             this.gridColumn37.Visible = true;
             this.gridColumn37.VisibleIndex = 13;
             this.gridColumn37.Width = 101;
@@ -2009,6 +2308,8 @@
             this.gridColumn38.Caption = "iz_b";
             this.gridColumn38.FieldName = "iz_b";
             this.gridColumn38.Name = "gridColumn38";
+            this.gridColumn38.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn38.OptionsFilter.AllowFilter = false;
             this.gridColumn38.Visible = true;
             this.gridColumn38.VisibleIndex = 4;
             this.gridColumn38.Width = 49;
@@ -2018,6 +2319,8 @@
             this.gridColumn39.Caption = "ID";
             this.gridColumn39.FieldName = "id";
             this.gridColumn39.Name = "gridColumn39";
+            this.gridColumn39.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn39.OptionsFilter.AllowFilter = false;
             this.gridColumn39.Visible = true;
             this.gridColumn39.VisibleIndex = 0;
             this.gridColumn39.Width = 49;
@@ -2027,6 +2330,8 @@
             this.gridColumn22.Caption = "n_pach";
             this.gridColumn22.FieldName = "n_pach";
             this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn22.OptionsFilter.AllowFilter = false;
             this.gridColumn22.Visible = true;
             this.gridColumn22.VisibleIndex = 18;
             this.gridColumn22.Width = 128;
@@ -2036,6 +2341,8 @@
             this.gridColumn42.Caption = "prich_sokr";
             this.gridColumn42.FieldName = "prich_sokr";
             this.gridColumn42.Name = "gridColumn42";
+            this.gridColumn42.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn42.OptionsFilter.AllowFilter = false;
             this.gridColumn42.Visible = true;
             this.gridColumn42.VisibleIndex = 17;
             this.gridColumn42.Width = 73;
@@ -2045,24 +2352,25 @@
             this.gridColumn43.Caption = "skl_id_1c_c";
             this.gridColumn43.FieldName = "skl_id_1c_c";
             this.gridColumn43.Name = "gridColumn43";
+            this.gridColumn43.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn43.OptionsFilter.AllowFilter = false;
             this.gridColumn43.Visible = true;
             this.gridColumn43.VisibleIndex = 16;
             this.gridColumn43.Width = 51;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(655, 177);
+            this.button1.Location = new System.Drawing.Point(653, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 23);
             this.button1.TabIndex = 10;
             this.button1.Text = "testFioReport";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnPrintNaklXtraReport
             // 
-            this.btnPrintNaklXtraReport.Location = new System.Drawing.Point(499, 177);
+            this.btnPrintNaklXtraReport.Location = new System.Drawing.Point(497, 193);
             this.btnPrintNaklXtraReport.Name = "btnPrintNaklXtraReport";
             this.btnPrintNaklXtraReport.Size = new System.Drawing.Size(75, 23);
             this.btnPrintNaklXtraReport.TabIndex = 9;
@@ -2073,7 +2381,7 @@
             // 
             // btnNaklAbsent
             // 
-            this.btnNaklAbsent.Location = new System.Drawing.Point(1143, 177);
+            this.btnNaklAbsent.Location = new System.Drawing.Point(1141, 193);
             this.btnNaklAbsent.Name = "btnNaklAbsent";
             this.btnNaklAbsent.Size = new System.Drawing.Size(205, 23);
             this.btnNaklAbsent.TabIndex = 8;
@@ -2083,7 +2391,7 @@
             // 
             // btnNaklPart
             // 
-            this.btnNaklPart.Location = new System.Drawing.Point(223, 177);
+            this.btnNaklPart.Location = new System.Drawing.Point(221, 193);
             this.btnNaklPart.Name = "btnNaklPart";
             this.btnNaklPart.Size = new System.Drawing.Size(268, 23);
             this.btnNaklPart.TabIndex = 7;
@@ -2093,7 +2401,7 @@
             // 
             // btnNaklPrint
             // 
-            this.btnNaklPrint.Location = new System.Drawing.Point(7, 177);
+            this.btnNaklPrint.Location = new System.Drawing.Point(5, 193);
             this.btnNaklPrint.Name = "btnNaklPrint";
             this.btnNaklPrint.Size = new System.Drawing.Size(171, 23);
             this.btnNaklPrint.TabIndex = 6;
@@ -2105,7 +2413,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            this.label24.Location = new System.Drawing.Point(3, 2);
+            this.label24.Location = new System.Drawing.Point(1, 2);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(123, 19);
             this.label24.TabIndex = 4;
@@ -2113,6 +2421,9 @@
             // 
             // panelControl3
             // 
+            this.panelControl3.Controls.Add(this.tbPszRpcNom);
+            this.panelControl3.Controls.Add(this.mtbRzuDataR);
+            this.panelControl3.Controls.Add(this.label64);
             this.panelControl3.Controls.Add(this.mtbRzuData1С);
             this.panelControl3.Controls.Add(this.label63);
             this.panelControl3.Controls.Add(this.mtbRzuDataCd);
@@ -2132,12 +2443,29 @@
             this.panelControl3.Controls.Add(this.label30);
             this.panelControl3.Location = new System.Drawing.Point(4, 9);
             this.panelControl3.Name = "panelControl3";
-            this.panelControl3.Size = new System.Drawing.Size(1558, 57);
+            this.panelControl3.Size = new System.Drawing.Size(1558, 77);
             this.panelControl3.TabIndex = 27;
+            // 
+            // mtbRzuDataR
+            // 
+            this.mtbRzuDataR.Location = new System.Drawing.Point(581, 37);
+            this.mtbRzuDataR.Mask = "00/00/0000";
+            this.mtbRzuDataR.Name = "mtbRzuDataR";
+            this.mtbRzuDataR.Size = new System.Drawing.Size(66, 21);
+            this.mtbRzuDataR.TabIndex = 41;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(518, 32);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(57, 26);
+            this.label64.TabIndex = 40;
+            this.label64.Text = "Дата\r\nв раскроя";
             // 
             // mtbRzuData1С
             // 
-            this.mtbRzuData1С.Location = new System.Drawing.Point(1470, 29);
+            this.mtbRzuData1С.Location = new System.Drawing.Point(1444, 38);
             this.mtbRzuData1С.Mask = "00/00/0000";
             this.mtbRzuData1С.Name = "mtbRzuData1С";
             this.mtbRzuData1С.Size = new System.Drawing.Size(66, 21);
@@ -2146,143 +2474,130 @@
             // label63
             // 
             this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(1377, 31);
+            this.label63.Location = new System.Drawing.Point(1380, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(87, 13);
+            this.label63.Size = new System.Drawing.Size(58, 26);
             this.label63.TabIndex = 38;
-            this.label63.Text = "Дата 1к.т. в 1С";
+            this.label63.Text = "Дата\r\n1к.т. в 1С";
             // 
             // mtbRzuDataCd
             // 
-            this.mtbRzuDataCd.Location = new System.Drawing.Point(1286, 28);
+            this.mtbRzuDataCd.Location = new System.Drawing.Point(1283, 37);
             this.mtbRzuDataCd.Mask = "00/00/0000";
             this.mtbRzuDataCd.Name = "mtbRzuDataCd";
             this.mtbRzuDataCd.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataCd.TabIndex = 37;
-            this.mtbRzuDataCd.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataCd_MaskInputRejected);
             // 
             // mtbRzuDataUp
             // 
-            this.mtbRzuDataUp.Location = new System.Drawing.Point(1063, 28);
+            this.mtbRzuDataUp.Location = new System.Drawing.Point(1111, 37);
             this.mtbRzuDataUp.Mask = "00/00/0000";
             this.mtbRzuDataUp.Name = "mtbRzuDataUp";
             this.mtbRzuDataUp.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataUp.TabIndex = 36;
-            this.mtbRzuDataUp.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataUp_MaskInputRejected);
             // 
             // mtbRzuDataRab
             // 
-            this.mtbRzuDataRab.Location = new System.Drawing.Point(869, 28);
+            this.mtbRzuDataRab.Location = new System.Drawing.Point(938, 37);
             this.mtbRzuDataRab.Mask = "00/00/0000";
             this.mtbRzuDataRab.Name = "mtbRzuDataRab";
             this.mtbRzuDataRab.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataRab.TabIndex = 35;
-            this.mtbRzuDataRab.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataRab_MaskInputRejected);
             // 
             // mtbRzuDataZeh
             // 
-            this.mtbRzuDataZeh.Location = new System.Drawing.Point(694, 28);
+            this.mtbRzuDataZeh.Location = new System.Drawing.Point(780, 37);
             this.mtbRzuDataZeh.Mask = "00/00/0000";
             this.mtbRzuDataZeh.Name = "mtbRzuDataZeh";
             this.mtbRzuDataZeh.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataZeh.TabIndex = 34;
-            this.mtbRzuDataZeh.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataZeh_MaskInputRejected);
             // 
             // mtbRzuDataCdUt
             // 
-            this.mtbRzuDataCdUt.Location = new System.Drawing.Point(536, 28);
+            this.mtbRzuDataCdUt.Location = new System.Drawing.Point(422, 37);
             this.mtbRzuDataCdUt.Mask = "00/00/0000";
             this.mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
             this.mtbRzuDataCdUt.Size = new System.Drawing.Size(66, 21);
             this.mtbRzuDataCdUt.TabIndex = 33;
-            this.mtbRzuDataCdUt.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbRzuDataCdUt_MaskInputRejected);
             // 
             // mtbPsaDataCdPlan
             // 
-            this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(285, 28);
+            this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(222, 37);
             this.mtbPsaDataCdPlan.Mask = "00/00/0000";
             this.mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
             this.mtbPsaDataCdPlan.Size = new System.Drawing.Size(66, 21);
             this.mtbPsaDataCdPlan.TabIndex = 32;
-            this.mtbPsaDataCdPlan.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbPsaDataCdPlan_MaskInputRejected);
             // 
             // mtbPsaDataZap
             // 
-            this.mtbPsaDataZap.Location = new System.Drawing.Point(95, 28);
+            this.mtbPsaDataZap.Location = new System.Drawing.Point(61, 37);
             this.mtbPsaDataZap.Mask = "00/00/0000";
             this.mtbPsaDataZap.Name = "mtbPsaDataZap";
             this.mtbPsaDataZap.Size = new System.Drawing.Size(66, 21);
             this.mtbPsaDataZap.TabIndex = 31;
-            this.mtbPsaDataZap.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.mtbPsaDataZap_MaskInputRejected);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(1144, 32);
+            this.label14.Location = new System.Drawing.Point(1204, 32);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(136, 13);
+            this.label14.Size = new System.Drawing.Size(73, 26);
             this.label14.TabIndex = 30;
-            this.label14.Text = "Дата СДАНО (осн. накл.)";
+            this.label14.Text = "Дата СДАНО\r\n(осн. накл.)";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
-            this.label33.Location = new System.Drawing.Point(958, 32);
+            this.label33.Location = new System.Drawing.Point(1035, 32);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(99, 13);
+            this.label33.Size = new System.Drawing.Size(70, 26);
             this.label33.TabIndex = 28;
-            this.label33.Text = "Дата на упаковку";
-            this.label33.Click += new System.EventHandler(this.label33_Click);
+            this.label33.Text = "Дата\r\nна упаковку";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(369, 32);
+            this.label34.Location = new System.Drawing.Point(315, 32);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(161, 13);
+            this.label34.Size = new System.Drawing.Size(101, 26);
             this.label34.TabIndex = 26;
-            this.label34.Text = "План. дата сдачи Уточненная";
-            this.label34.Click += new System.EventHandler(this.label34_Click);
+            this.label34.Text = "План. дата \r\nсдачи Уточненная";
             // 
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(782, 32);
+            this.label26.Location = new System.Drawing.Point(880, 32);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(81, 13);
+            this.label26.Size = new System.Drawing.Size(52, 26);
             this.label26.TabIndex = 16;
-            this.label26.Text = "Дата в работу";
-            this.label26.Click += new System.EventHandler(this.label26_Click);
+            this.label26.Text = "Дата\r\nв работу";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(625, 32);
+            this.label27.Location = new System.Drawing.Point(740, 32);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(63, 13);
+            this.label27.Size = new System.Drawing.Size(34, 26);
             this.label27.TabIndex = 14;
-            this.label27.Text = "Дата в цех";
-            this.label27.Click += new System.EventHandler(this.label27_Click);
+            this.label27.Text = "Дата\r\nв цех";
             // 
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(185, 32);
+            this.label28.Location = new System.Drawing.Point(152, 32);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(97, 13);
+            this.label28.Size = new System.Drawing.Size(64, 26);
             this.label28.TabIndex = 12;
-            this.label28.Text = "План. дата сдачи";
-            this.label28.Click += new System.EventHandler(this.label28_Click);
+            this.label28.Text = "План. дата\r\nсдачи";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(8, 32);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(81, 13);
+            this.label29.Size = new System.Drawing.Size(47, 26);
             this.label29.TabIndex = 10;
-            this.label29.Text = "Месяц запуска";
-            this.label29.Click += new System.EventHandler(this.label29_Click);
+            this.label29.Text = "Дата\r\nзапуска";
             // 
             // label30
             // 
@@ -2312,7 +2627,6 @@
             this.xtraTabPage2,
             this.xtraTabPage3});
             this.xtraTabControl1.Selecting += new DevExpress.XtraTab.TabPageCancelEventHandler(this.xtraTabControl1_Selecting);
-            this.xtraTabControl1.Click += new System.EventHandler(this.xtraTabControl1_Click);
             // 
             // gridColumn41
             // 
@@ -2322,6 +2636,13 @@
             this.gridColumn41.Visible = true;
             this.gridColumn41.VisibleIndex = 7;
             this.gridColumn41.Width = 61;
+            // 
+            // tbPszRpcNom
+            // 
+            this.tbPszRpcNom.Location = new System.Drawing.Point(662, 38);
+            this.tbPszRpcNom.Name = "tbPszRpcNom";
+            this.tbPszRpcNom.Size = new System.Drawing.Size(42, 21);
+            this.tbPszRpcNom.TabIndex = 34;
             // 
             // CardByNom
             // 
@@ -2554,14 +2875,13 @@
         private System.Windows.Forms.TextBox tbFurnKKStat;
         private System.Windows.Forms.Button btnUpakKKPrint;
         private System.Windows.Forms.Button btnFurnKKPrint;
-        private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox tbUZSobrStat;
         private System.Windows.Forms.Label label56;
         private System.Windows.Forms.TextBox tbUZSozdStat;
         private System.Windows.Forms.Label label57;
         private System.Windows.Forms.TextBox tbUpakZayav;
         private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button btnZayavFurnPrint;
         private System.Windows.Forms.TextBox tbFZSobrStat;
         private System.Windows.Forms.Label label55;
         private System.Windows.Forms.TextBox tbFZSozdStat;
@@ -2590,5 +2910,12 @@
         private System.Windows.Forms.TextBox tbPsaPsaID;
         private System.Windows.Forms.MaskedTextBox mtbRzuData1С;
         private System.Windows.Forms.Label label63;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn40;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn44;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn45;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn46;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataR;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox tbPszRpcNom;
     }
 }
