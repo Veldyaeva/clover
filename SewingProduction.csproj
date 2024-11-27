@@ -106,6 +106,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </Compile>
+    <Compile Include="form\FurnUpakDeliveryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FurnUpakDeliveryInfo.Designer.cs">
+      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\OborudBrig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +153,18 @@
     </Compile>
     <Compile Include="report\PrintFullKKReport.Designer.cs">
       <DependentUpon>PrintFullKKReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\PrintFurnUpakZayavReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintFurnUpakZayavReport.Designer.cs">
+      <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\subreport\PrintTakingCardReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\subreport\PrintTakingCardReport.Designer.cs">
+      <DependentUpon>PrintTakingCardReport.cs</DependentUpon>
     </Compile>
     <Compile Include="SpMainForm.cs">
       <SubType>Form</SubType>
@@ -210,6 +228,9 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
+      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +259,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="report\PrintFullKKReport.resx">
       <DependentUpon>PrintFullKKReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\PrintFurnUpakZayavReport.resx">
+      <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="report\subreport\PrintTakingCardReport.resx">
+      <DependentUpon>PrintTakingCardReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>

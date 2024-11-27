@@ -148,8 +148,6 @@
             this.xrLabel57 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel56 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel72 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
-            this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
             this.Title = new DevExpress.XtraReports.UI.XRControlStyle();
             this.GroupCaption1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.GroupData1 = new DevExpress.XtraReports.UI.XRControlStyle();
@@ -165,6 +163,8 @@
             this.GrandTotalBackground1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.PageInfo = new DevExpress.XtraReports.UI.XRControlStyle();
             this._naklIz = new DevExpress.XtraReports.Parameters.Parameter();
+            this.xrSubreport1 = new DevExpress.XtraReports.UI.XRSubreport();
+            this.xrSubreport2 = new DevExpress.XtraReports.UI.XRSubreport();
             ((System.ComponentModel.ISupportInitialize)(this.table2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -1853,28 +1853,6 @@
             this.xrLabel72.Text = "Расходные материалы";
             this.xrLabel72.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
-            // xrSubreport1
-            // 
-            this.xrSubreport1.Dpi = 254F;
-            this.xrSubreport1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(Len(trim(IsNull([kodFDFurn],\'\'))) != 0, \'Yes\', \'No\')")});
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(36.72709F, 731.6078F);
-            this.xrSubreport1.Name = "xrSubreport1";
-            this.xrSubreport1.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_kodFD", null, "PrintNaklView.kodFDFurn"));
-            this.xrSubreport1.ReportSource = new SewingProduction.FurnitFITByKodFD();
-            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1365.764F, 58.41998F);
-            // 
-            // xrSubreport2
-            // 
-            this.xrSubreport2.Dpi = 254F;
-            this.xrSubreport2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(Len(trim(IsNull([kodFDUpak],\'\'))) != 0, \'Yes\', \'No\')\n")});
-            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(35.85376F, 873.4246F);
-            this.xrSubreport2.Name = "xrSubreport2";
-            this.xrSubreport2.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_kodFD", null, "PrintNaklView.kodFDUpak"));
-            this.xrSubreport2.ReportSource = new SewingProduction.FurnitFITByKodFD();
-            this.xrSubreport2.SizeF = new System.Drawing.SizeF(1365.764F, 58.41998F);
-            // 
             // Title
             // 
             this.Title.BackColor = System.Drawing.Color.Transparent;
@@ -2036,7 +2014,33 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202463361", "привлеченка Китай"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202474610", "акт-списание"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202452134", null));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202461507", null));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202461509", null));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("202464033", null));
             this._naklIz.ValueSourceSettings = staticListLookUpSettings1;
+            this._naklIz.Visible = false;
+            // 
+            // xrSubreport1
+            // 
+            this.xrSubreport1.Dpi = 254F;
+            this.xrSubreport1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(Len(trim(IsNull([kodFDFurn],\'\'))) != 0, \'Yes\', \'No\')")});
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(36.72709F, 731.6078F);
+            this.xrSubreport1.Name = "xrSubreport1";
+            this.xrSubreport1.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_kodFD", null, "PrintNaklView.kodFDFurn"));
+            this.xrSubreport1.ReportSource = new SewingProduction.FurnitFITByKodFD();
+            this.xrSubreport1.SizeF = new System.Drawing.SizeF(1365.764F, 58.41998F);
+            // 
+            // xrSubreport2
+            // 
+            this.xrSubreport2.Dpi = 254F;
+            this.xrSubreport2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "iif(Len(trim(IsNull([kodFDUpak],\'\'))) != 0, \'Yes\', \'No\')\n")});
+            this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(35.85376F, 873.4246F);
+            this.xrSubreport2.Name = "xrSubreport2";
+            this.xrSubreport2.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_kodFD", null, "PrintNaklView.kodFDUpak"));
+            this.xrSubreport2.ReportSource = new SewingProduction.FurnitFITByKodFD();
+            this.xrSubreport2.SizeF = new System.Drawing.SizeF(1365.764F, 58.41998F);
             // 
             // PrintNaklReport
             // 
