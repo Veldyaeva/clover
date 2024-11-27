@@ -15,11 +15,14 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Base;
 using System.Diagnostics;
 using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.XtraGrid.Localization;
+//using DevExpress.XtraGrid.Localization;
 using DevExpress.DataAccess.Native.Data;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.CodeParser;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
+using System.Reflection;
+using DevExpress.Mvvm.Native;
 
 namespace SewingProduction.form
 {
@@ -43,17 +46,19 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
-        private RussianTableName _russianTableName;
         private System.Windows.Forms.Label[] labels;
         private TextBox[] textBoxs;
+        //словари:
+        Dictionary<string, string> eng_rus = new Dictionary<string, string>();
+        Dictionary<string, string> rus_eng = new Dictionary<string, string>();
+        Dictionary<string, string> eng_type = new Dictionary<string, string>();
+        Dictionary<string, int> rus_read = new Dictionary<string, int>();
         public SpravForAll(string tableSQL, string rusNameTableSQL)
         {
-            GridLocalizer.Active = new RussianGridLocalizer();
+            //GridLocalizer.Active = new RussianGridLocalizer();
             InitializeComponent();
             //Таблица:
             tableString = tableSQL;
-            if (_russianTableName == null) 
-                _russianTableName = new RussianTableName(); 
             //Имя формы:
             this.Text = rusNameTableSQL;
             //Текст запроса:
@@ -62,8 +67,33 @@ namespace SewingProduction.form
             fieldsQueryListSQL = new List<string>();
             labels = new System.Windows.Forms.Label[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
             textBoxs = new TextBox[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+            //Задание имен
+            allTableName(tableString);
         }
 
+        void allTableName(string tableName)
+        {
+            string query = @"SELECT acn.name, acn.name_rus, data_type, readonly 
+                                FROM ACE_test.dbo.all_column_name acn
+                                INNER JOIN all_table_name atn
+                                ON acn.id_atn = atn.id_atn
+                                WHERE atn.name = @tableName
+                                ORDER BY ORDINAL_POSITION";
+            using (SqlConnection connectionName = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionName);
+                dataAdapter.SelectCommand.Parameters.AddWithValue("@tableName", tableName); 
+                System.Data.DataTable tableList = new System.Data.DataTable();
+                dataAdapter.Fill(tableList);
+                foreach (DataRow row in tableList.Rows)
+                {
+                    eng_rus.Add(row["name"].ToString(), row["name_rus"].ToString());
+                    rus_eng.Add(row["name_rus"].ToString(), row["name"].ToString());
+                    eng_type.Add(row["name"].ToString(), row["data_type"].ToString());
+                    rus_read.Add(row["name_rus"].ToString(), (Int32)row["readonly"]);
+                }
+            }
+        }
         private void gridControlSprav_Load(object sender, EventArgs e)
         {
             using (SqlConnection connectionLoad = new SqlConnection(connectionString))
@@ -85,17 +115,28 @@ namespace SewingProduction.form
                 }
                 // Получаем доступ к GridView
                 GridView gridView = gridControlSprav.MainView as GridView;
-                //Запрет на редактирование
-                gridView.OptionsBehavior.Editable = false;
+                //Запрет на редактирование 1й столбца
+                gridView.Columns[0].OptionsColumn.AllowEdit = false;
+                gridView.Columns[0].Visible = false;
+                //gridView.OptionsBehavior.Editable = false;
                 //gridView.GroupPanelText = ""; // Текст
+
                 // Изменяем заголовки столбцов
                 for (int i = 0; i < tableList.Columns.Count; i++)
                 {
-                    string russianName = _russianTableName.GetRussianName(tableString, tableList.Columns[i].Caption);
-                    gridView.Columns[i].Caption = russianName; 
+                    // Получаем английское имя
+                    string englishName = tableList.Columns[i].Caption;
+                    // Проверяем, есть ли соответствующее русское имя в словаре
+                    if (eng_rus.TryGetValue(englishName, out string russianName))
+                    {
+                        // Заменяем заголовок столбца на русское имя
+                        gridView.Columns[i].Caption = russianName;
+                    }
                 }
                 // Выравнивание столбцов
                 gridView.BestFitColumns();
+                //перенос столбца архив в конец:
+                //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
             }
             if (!flagStartListening) 
             {
@@ -215,6 +256,7 @@ namespace SewingProduction.form
         {
             xtraTabPageAdd.Text = "Добавить";
             AddTab.TabPages[0].PageVisible = true;
+            simpleButtonDel.Visible = false;
             labelAndTextBox();
             GridView gridView = (GridView)gridControlSprav.MainView;
             // Код = последнему коду в таблице + 1
@@ -232,6 +274,7 @@ namespace SewingProduction.form
         {
             xtraTabPageAdd.Text = "Редактировать";
             AddTab.TabPages[0].PageVisible = true;
+            simpleButtonDel.Visible = true;
             labelAndTextBox();
             // Получаем доступ к GridView
             GridView gridView = gridControlSprav.MainView as GridView;
@@ -272,7 +315,6 @@ namespace SewingProduction.form
             string queryOborudAdd = $"";
             using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
             {
-                // Получаем доступ к GridView
                 GridView gridView = gridControlSprav.MainView as GridView;
                 switch (xtraTabPageAdd.Text)
                 {
@@ -287,12 +329,12 @@ namespace SewingProduction.form
                             queryOborudAdd += " VALUES (";
                             for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                             {
-                                string getType = _russianTableName.GetColumnType(tableString, fieldsQueryListSQL[i]);
+                                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
                                 switch (getType)
                                 {
                                     case "int": queryOborudAdd += textBoxs[i].Text; break;
-                                    case "string": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                    case "float": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
+                                    case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
+                                    case "float": case "decimal": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
                                 }
                                 queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
                             }
@@ -305,18 +347,17 @@ namespace SewingProduction.form
                             for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                             {
                                 queryOborudAdd += fieldsQueryListSQL[i] + " = ";
-                                string getType = _russianTableName.GetColumnType(tableString, fieldsQueryListSQL[i]);
+                                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
                                 switch (getType)
                                 {
                                     case "int":     queryOborudAdd += textBoxs[i].Text; break;
-                                    case "string":  queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                    case "float":   queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
+                                    case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
+                                    case "float": case "decimal":   queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
                                 }
                                 queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? "" : ",";
                             }
                             queryOborudAdd += " FROM " + tableString + " WHERE " + fieldsQueryListSQL[0] + " = " + textBoxs[0].Text;
                             break;
-
                         }
                     default:
                         break;
@@ -328,6 +369,46 @@ namespace SewingProduction.form
                     connectionINSERT.Close();
                 }
                 AddTab.TabPages[0].PageVisible = false;
+            }
+        }
+
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
+            {
+                string englishName;
+                connectionUPDATE.Open();
+                if (rus_eng.TryGetValue(e.Column.FieldName, out string engName))
+                    englishName = engName;
+                else
+                    englishName = e.Column.FieldName;
+                string sql = $"UPDATE {tableString} SET {englishName} = '{e.Value}' WHERE {fieldsQueryListSQL[0]}  = {gridView1.GetDataRow(e.RowHandle)[0]}";
+                SqlCommand command = new SqlCommand(sql, connection);
+                command.ExecuteNonQuery();
+                connectionUPDATE.Close();
+            }
+        }
+
+        private void simpleButtonDel_Click(object sender, EventArgs e)
+        {
+            GridView gridView = gridControlSprav.MainView as GridView;
+            currentRowIndex = gridView.FocusedRowHandle;
+            string textCol = gridView.GetFocusedRowCellValue(gridView.Columns[1]).ToString();
+            int kodCol = Convert.ToInt32(gridView.GetFocusedRowCellValue(gridView.Columns[0]));
+            string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
+            var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
+                {
+                    string queryOborudArh = $"DELETE FROM {tableString} WHERE {fieldsQueryListSQL[0]} = {kodCol}";
+                    using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
+                    {
+                        connectionDELETE.Open();
+                        command.ExecuteNonQuery();
+                        connectionDELETE.Close();
+                    }
+                }
             }
         }
     }

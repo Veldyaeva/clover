@@ -111,5 +111,13 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
+
+        private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OborudBrig f = new OborudBrig();
+            f.MdiParent = this;
+            f.Show();
+
+        }
     }
 }

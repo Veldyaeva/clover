@@ -101,11 +101,16 @@
   <ItemGroup>
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
-    <Compile Include="class\RussianTableName.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="form\OborudBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\OborudBrig.Designer.cs">
+      <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravForAll.cs">
       <SubType>Form</SubType>
@@ -205,6 +210,9 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="form\OborudBrig.resx">
+      <DependentUpon>OborudBrig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </EmbeddedResource>

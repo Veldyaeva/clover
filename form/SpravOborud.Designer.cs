@@ -157,7 +157,7 @@
             this.oborudGrid.Name = "oborudGrid";
             this.oborudGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.oborudGrid.Size = new System.Drawing.Size(1387, 849);
+            this.oborudGrid.Size = new System.Drawing.Size(1387, 886);
             this.oborudGrid.TabIndex = 0;
             this.oborudGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -509,7 +509,7 @@
             this.simpleButtonAdd.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAdd.Appearance.Options.UseFont = true;
             this.simpleButtonAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAdd.ImageOptions.Image")));
-            this.simpleButtonAdd.Location = new System.Drawing.Point(1207, 876);
+            this.simpleButtonAdd.Location = new System.Drawing.Point(1207, 904);
             this.simpleButtonAdd.Name = "simpleButtonAdd";
             this.simpleButtonAdd.Size = new System.Drawing.Size(192, 45);
             this.simpleButtonAdd.TabIndex = 1;
@@ -521,7 +521,7 @@
             this.simpleButtonRed.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonRed.Appearance.Options.UseFont = true;
             this.simpleButtonRed.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRed.ImageOptions.Image")));
-            this.simpleButtonRed.Location = new System.Drawing.Point(1009, 876);
+            this.simpleButtonRed.Location = new System.Drawing.Point(1009, 904);
             this.simpleButtonRed.Name = "simpleButtonRed";
             this.simpleButtonRed.Size = new System.Drawing.Size(192, 45);
             this.simpleButtonRed.TabIndex = 5;
@@ -533,7 +533,7 @@
             this.simpleButtonArhiv.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonArhiv.Appearance.Options.UseFont = true;
             this.simpleButtonArhiv.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonArhiv.ImageOptions.Image")));
-            this.simpleButtonArhiv.Location = new System.Drawing.Point(12, 876);
+            this.simpleButtonArhiv.Location = new System.Drawing.Point(12, 904);
             this.simpleButtonArhiv.Name = "simpleButtonArhiv";
             this.simpleButtonArhiv.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonArhiv.TabIndex = 6;
@@ -628,7 +628,7 @@
             this.xtraTabPage2.Controls.Add(this.simpleButtonRedSave);
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.PageVisible = false;
-            this.xtraTabPage2.Size = new System.Drawing.Size(503, 824);
+            this.xtraTabPage2.Size = new System.Drawing.Size(503, 861);
             this.xtraTabPage2.Text = "Редактировать";
             // 
             // label26
@@ -966,7 +966,7 @@
             this.simpleButtonRedOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonRedOtm.Appearance.Options.UseFont = true;
             this.simpleButtonRedOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRedOtm.ImageOptions.Image")));
-            this.simpleButtonRedOtm.Location = new System.Drawing.Point(71, 761);
+            this.simpleButtonRedOtm.Location = new System.Drawing.Point(71, 806);
             this.simpleButtonRedOtm.Name = "simpleButtonRedOtm";
             this.simpleButtonRedOtm.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonRedOtm.TabIndex = 10;
@@ -978,7 +978,7 @@
             this.simpleButtonRedSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonRedSave.Appearance.Options.UseFont = true;
             this.simpleButtonRedSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRedSave.ImageOptions.Image")));
-            this.simpleButtonRedSave.Location = new System.Drawing.Point(286, 761);
+            this.simpleButtonRedSave.Location = new System.Drawing.Point(286, 806);
             this.simpleButtonRedSave.Name = "simpleButtonRedSave";
             this.simpleButtonRedSave.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonRedSave.TabIndex = 9;
@@ -1014,7 +1014,7 @@
             this.xtraTabPageAdd.Controls.Add(this.simpleButtonAddSave);
             this.xtraTabPageAdd.Name = "xtraTabPageAdd";
             this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 824);
+            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 861);
             this.xtraTabPageAdd.Text = "Добавить";
             // 
             // label27
@@ -1352,7 +1352,7 @@
             this.simpleButtonAddOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddOtm.Appearance.Options.UseFont = true;
             this.simpleButtonAddOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddOtm.ImageOptions.Image")));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(71, 761);
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(71, 806);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonAddOtm.TabIndex = 8;
@@ -1364,7 +1364,7 @@
             this.simpleButtonAddSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddSave.Appearance.Options.UseFont = true;
             this.simpleButtonAddSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddSave.ImageOptions.Image")));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(286, 761);
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(286, 806);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
             this.simpleButtonAddSave.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonAddSave.TabIndex = 7;
@@ -1378,7 +1378,7 @@
             this.AddTab.Location = new System.Drawing.Point(1405, 12);
             this.AddTab.Name = "AddTab";
             this.AddTab.SelectedTabPage = this.xtraTabPage2;
-            this.AddTab.Size = new System.Drawing.Size(505, 849);
+            this.AddTab.Size = new System.Drawing.Size(505, 886);
             this.AddTab.TabIndex = 4;
             this.AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAdd,
@@ -1397,7 +1397,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1913, 939);
+            this.ClientSize = new System.Drawing.Size(1914, 961);
             this.Controls.Add(this.checkEditArhiv);
             this.Controls.Add(this.simpleButtonArhiv);
             this.Controls.Add(this.simpleButtonRed);

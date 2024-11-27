@@ -181,3 +181,4 @@ D:\SP\obj\Debug\SewingProduction.csproj.CoreCompileInputs.cache
 D:\SP\obj\Debug\SewingPr.0855BE24.Up2Date
 D:\SP\obj\Debug\SewingProduction.exe
 D:\SP\obj\Debug\SewingProduction.pdb
+D:\SP\obj\Debug\SewingProduction.form.OborudBrig.resources

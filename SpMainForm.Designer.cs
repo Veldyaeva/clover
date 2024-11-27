@@ -133,6 +133,7 @@
             this.оборудованиеВБригадахToolStripMenuItem.Name = "оборудованиеВБригадахToolStripMenuItem";
             this.оборудованиеВБригадахToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.оборудованиеВБригадахToolStripMenuItem.Text = "Оборудование в бригадах";
+            this.оборудованиеВБригадахToolStripMenuItem.Click += new System.EventHandler(this.оборудованиеВБригадахToolStripMenuItem_Click);
             // 
             // оборудованиеToolStripMenuItem1
             // 

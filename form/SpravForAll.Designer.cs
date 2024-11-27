@@ -61,12 +61,15 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.simpleButtonAddOtm = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonAddSave = new DevExpress.XtraEditors.SimpleButton();
+            this.nameColumnList = new System.Windows.Forms.BindingSource(this.components);
+            this.simpleButtonDel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSprav)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spravList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.AddTab)).BeginInit();
             this.AddTab.SuspendLayout();
             this.xtraTabPageAdd.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nameColumnList)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControlSprav
@@ -75,7 +78,7 @@
             this.gridControlSprav.Location = new System.Drawing.Point(12, 12);
             this.gridControlSprav.MainView = this.gridView1;
             this.gridControlSprav.Name = "gridControlSprav";
-            this.gridControlSprav.Size = new System.Drawing.Size(1387, 849);
+            this.gridControlSprav.Size = new System.Drawing.Size(1387, 889);
             this.gridControlSprav.TabIndex = 0;
             this.gridControlSprav.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -90,13 +93,16 @@
             this.gridView1.AppearancePrint.Lines.Options.UseBackColor = true;
             this.gridView1.GridControl = this.gridControlSprav;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            this.gridView1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gridView1.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView1_CellValueChanged);
             // 
             // simpleButtonRed
             // 
             this.simpleButtonRed.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonRed.Appearance.Options.UseFont = true;
             this.simpleButtonRed.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRed.ImageOptions.Image")));
-            this.simpleButtonRed.Location = new System.Drawing.Point(1009, 878);
+            this.simpleButtonRed.Location = new System.Drawing.Point(1009, 907);
             this.simpleButtonRed.Name = "simpleButtonRed";
             this.simpleButtonRed.Size = new System.Drawing.Size(192, 45);
             this.simpleButtonRed.TabIndex = 7;
@@ -108,7 +114,7 @@
             this.simpleButtonAdd.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAdd.Appearance.Options.UseFont = true;
             this.simpleButtonAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAdd.ImageOptions.Image")));
-            this.simpleButtonAdd.Location = new System.Drawing.Point(1207, 878);
+            this.simpleButtonAdd.Location = new System.Drawing.Point(1207, 907);
             this.simpleButtonAdd.Name = "simpleButtonAdd";
             this.simpleButtonAdd.Size = new System.Drawing.Size(192, 45);
             this.simpleButtonAdd.TabIndex = 6;
@@ -122,7 +128,7 @@
             this.AddTab.Location = new System.Drawing.Point(1405, 12);
             this.AddTab.Name = "AddTab";
             this.AddTab.SelectedTabPage = this.xtraTabPageAdd;
-            this.AddTab.Size = new System.Drawing.Size(505, 849);
+            this.AddTab.Size = new System.Drawing.Size(505, 889);
             this.AddTab.TabIndex = 8;
             this.AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAdd});
@@ -131,6 +137,7 @@
             // 
             this.xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
             this.xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
+            this.xtraTabPageAdd.Controls.Add(this.simpleButtonDel);
             this.xtraTabPageAdd.Controls.Add(this.label10);
             this.xtraTabPageAdd.Controls.Add(this.textBox10);
             this.xtraTabPageAdd.Controls.Add(this.label9);
@@ -157,7 +164,7 @@
             this.xtraTabPageAdd.Controls.Add(this.simpleButtonAddSave);
             this.xtraTabPageAdd.Name = "xtraTabPageAdd";
             this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 824);
+            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 864);
             this.xtraTabPageAdd.Text = "Добавить/Редактировать";
             // 
             // label10
@@ -368,7 +375,7 @@
             this.simpleButtonAddOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddOtm.Appearance.Options.UseFont = true;
             this.simpleButtonAddOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddOtm.ImageOptions.Image")));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(71, 761);
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(16, 808);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonAddOtm.TabIndex = 8;
@@ -380,18 +387,30 @@
             this.simpleButtonAddSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddSave.Appearance.Options.UseFont = true;
             this.simpleButtonAddSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddSave.ImageOptions.Image")));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(286, 761);
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(342, 808);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
             this.simpleButtonAddSave.Size = new System.Drawing.Size(148, 45);
             this.simpleButtonAddSave.TabIndex = 7;
             this.simpleButtonAddSave.Text = "Сохранить";
             this.simpleButtonAddSave.Click += new System.EventHandler(this.simpleButtonAddSave_Click);
             // 
+            // simpleButtonDel
+            // 
+            this.simpleButtonDel.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.simpleButtonDel.Appearance.Options.UseFont = true;
+            this.simpleButtonDel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
+            this.simpleButtonDel.Location = new System.Drawing.Point(179, 808);
+            this.simpleButtonDel.Name = "simpleButtonDel";
+            this.simpleButtonDel.Size = new System.Drawing.Size(148, 45);
+            this.simpleButtonDel.TabIndex = 9;
+            this.simpleButtonDel.Text = "Удалить";
+            this.simpleButtonDel.Click += new System.EventHandler(this.simpleButtonDel_Click);
+            // 
             // SpravForAll
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1913, 939);
+            this.ClientSize = new System.Drawing.Size(1914, 961);
             this.Controls.Add(this.AddTab);
             this.Controls.Add(this.simpleButtonRed);
             this.Controls.Add(this.simpleButtonAdd);
@@ -407,6 +426,7 @@
             this.AddTab.ResumeLayout(false);
             this.xtraTabPageAdd.ResumeLayout(false);
             this.xtraTabPageAdd.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nameColumnList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -444,5 +464,7 @@
         private System.Windows.Forms.TextBox textBox8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.BindingSource nameColumnList;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonDel;
     }
 }
