@@ -126,5 +126,12 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
+
+        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlanZagrBrig f = new PlanZagrBrig();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

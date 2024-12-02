@@ -66,6 +66,7 @@
     <Reference Include="DevExpress.XtraReports.v22.2.Extensions, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2.UI, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraVerticalGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1652.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>
@@ -134,6 +135,12 @@
     </Compile>
     <Compile Include="form\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.Designer.cs">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -262,6 +269,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\PlanZagrBrig.resx">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>

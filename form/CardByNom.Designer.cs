@@ -61,9 +61,16 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.label68 = new System.Windows.Forms.Label();
+            this.tbArtTradeMark = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
+            this.tbPsaKombIzd = new System.Windows.Forms.TextBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.tbPsaKombOsn = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.tbPsaPsaIDOsn = new System.Windows.Forms.TextBox();
             this.label62 = new System.Windows.Forms.Label();
             this.tbPsaPsaID = new System.Windows.Forms.TextBox();
-            this.button11 = new System.Windows.Forms.Button();
             this.label16 = new System.Windows.Forms.Label();
             this.cbIsChip = new System.Windows.Forms.CheckBox();
             this.psaSezName = new System.Windows.Forms.TextBox();
@@ -110,6 +117,75 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.bsPartNaklList = new System.Windows.Forms.BindingSource(this.components);
+            this.bsProizvCombIzdSP = new System.Windows.Forms.BindingSource(this.components);
+            this.bsProizvCombIzdVZP = new System.Windows.Forms.BindingSource(this.components);
+            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
+            this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
+            this.gridSplitContainer1 = new DevExpress.XtraGrid.GridSplitContainer();
+            this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
+            this.sbProizvCombIzdSP = new DevExpress.XtraEditors.SimpleButton();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.gcProizvCombIzdSP = new DevExpress.XtraGrid.GridControl();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn47 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn49 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn51 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn52 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn53 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn54 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn55 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn56 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn58 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn74 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn75 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn76 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn77 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn59 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn60 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn61 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn62 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn63 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn64 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn65 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn66 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn67 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn68 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn69 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn70 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn71 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn72 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn73 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gcNaklList = new DevExpress.XtraGrid.GridControl();
+            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gridView7 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.furnitZayavViewFurnit = new SewingProduction.FurnitZayavView();
@@ -194,32 +270,9 @@
             this.label35 = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label31 = new System.Windows.Forms.Label();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
-            this.gcNaklList = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gcPartNaklList = new DevExpress.XtraGrid.GridControl();
-            this.bsPartNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -247,6 +300,7 @@
             this.btnNaklPrint = new System.Windows.Forms.Button();
             this.label24 = new System.Windows.Forms.Label();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.tbPszRpcNom = new System.Windows.Forms.TextBox();
             this.mtbRzuDataR = new System.Windows.Forms.MaskedTextBox();
             this.label64 = new System.Windows.Forms.Label();
             this.mtbRzuData1С = new System.Windows.Forms.MaskedTextBox();
@@ -267,16 +321,33 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
-            this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
-            this.tbPszRpcNom = new System.Windows.Forms.TextBox();
+            this.gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProizvCombIzdSP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProizvCombIzdVZP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsFurnZayavInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).BeginInit();
+            this.gridSplitContainer1.SuspendLayout();
+            this.xtraTabPage4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcProizvCombIzdSP)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView7)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
@@ -287,21 +358,14 @@
             this.panelControl6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
             this.panelControl5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).BeginInit();
             this.panelControl4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsFurnZayavInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // gridColumn40
@@ -396,9 +460,16 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.label68);
+            this.panelControl1.Controls.Add(this.tbArtTradeMark);
+            this.panelControl1.Controls.Add(this.label66);
+            this.panelControl1.Controls.Add(this.tbPsaKombIzd);
+            this.panelControl1.Controls.Add(this.label67);
+            this.panelControl1.Controls.Add(this.tbPsaKombOsn);
+            this.panelControl1.Controls.Add(this.label65);
+            this.panelControl1.Controls.Add(this.tbPsaPsaIDOsn);
             this.panelControl1.Controls.Add(this.label62);
             this.panelControl1.Controls.Add(this.tbPsaPsaID);
-            this.panelControl1.Controls.Add(this.button11);
             this.panelControl1.Controls.Add(this.label16);
             this.panelControl1.Controls.Add(this.cbIsChip);
             this.panelControl1.Controls.Add(this.psaSezName);
@@ -445,8 +516,72 @@
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Location = new System.Drawing.Point(4, 12);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(1562, 123);
+            this.panelControl1.Size = new System.Drawing.Size(1569, 123);
             this.panelControl1.TabIndex = 3;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(924, 99);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(87, 13);
+            this.label68.TabIndex = 41;
+            this.label68.Text = "Торговая марка";
+            // 
+            // tbArtTradeMark
+            // 
+            this.tbArtTradeMark.Location = new System.Drawing.Point(1017, 95);
+            this.tbArtTradeMark.Name = "tbArtTradeMark";
+            this.tbArtTradeMark.Size = new System.Drawing.Size(70, 21);
+            this.tbArtTradeMark.TabIndex = 40;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(1316, 99);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(51, 13);
+            this.label66.TabIndex = 39;
+            this.label66.Text = "komb_izd";
+            // 
+            // tbPsaKombIzd
+            // 
+            this.tbPsaKombIzd.Location = new System.Drawing.Point(1378, 95);
+            this.tbPsaKombIzd.Name = "tbPsaKombIzd";
+            this.tbPsaKombIzd.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaKombIzd.TabIndex = 38;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(1316, 76);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(55, 13);
+            this.label67.TabIndex = 37;
+            this.label67.Text = "komb_osn";
+            // 
+            // tbPsaKombOsn
+            // 
+            this.tbPsaKombOsn.Location = new System.Drawing.Point(1378, 72);
+            this.tbPsaKombOsn.Name = "tbPsaKombOsn";
+            this.tbPsaKombOsn.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaKombOsn.TabIndex = 36;
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(1316, 53);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(61, 13);
+            this.label65.TabIndex = 35;
+            this.label65.Text = "psa_id_osn";
+            // 
+            // tbPsaPsaIDOsn
+            // 
+            this.tbPsaPsaIDOsn.Location = new System.Drawing.Point(1378, 49);
+            this.tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
+            this.tbPsaPsaIDOsn.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaPsaIDOsn.TabIndex = 34;
             // 
             // label62
             // 
@@ -459,21 +594,10 @@
             // 
             // tbPsaPsaID
             // 
-            this.tbPsaPsaID.Location = new System.Drawing.Point(1360, 26);
+            this.tbPsaPsaID.Location = new System.Drawing.Point(1378, 26);
             this.tbPsaPsaID.Name = "tbPsaPsaID";
-            this.tbPsaPsaID.Size = new System.Drawing.Size(70, 21);
+            this.tbPsaPsaID.Size = new System.Drawing.Size(52, 21);
             this.tbPsaPsaID.TabIndex = 32;
-            // 
-            // button11
-            // 
-            this.button11.Location = new System.Drawing.Point(8, 100);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 31;
-            this.button11.Text = "обн фурн";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Visible = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // label16
             // 
@@ -838,6 +962,969 @@
             this.label1.Size = new System.Drawing.Size(185, 19);
             this.label1.TabIndex = 3;
             this.label1.Text = "КАРТОЧКА РАСЧЕТА";
+            // 
+            // gridColumn41
+            // 
+            this.gridColumn41.Caption = "Склад отгр ДО";
+            this.gridColumn41.FieldName = "skl_otgr_b";
+            this.gridColumn41.Name = "gridColumn41";
+            this.gridColumn41.Visible = true;
+            this.gridColumn41.VisibleIndex = 7;
+            this.gridColumn41.Width = 61;
+            // 
+            // gridSplitContainer1
+            // 
+            this.gridSplitContainer1.Grid = null;
+            this.gridSplitContainer1.Location = new System.Drawing.Point(11, 14);
+            this.gridSplitContainer1.Name = "gridSplitContainer1";
+            this.gridSplitContainer1.Size = new System.Drawing.Size(400, 200);
+            this.gridSplitContainer1.TabIndex = 2;
+            // 
+            // xtraTabPage4
+            // 
+            this.xtraTabPage4.Controls.Add(this.sbProizvCombIzdSP);
+            this.xtraTabPage4.Controls.Add(this.label70);
+            this.xtraTabPage4.Controls.Add(this.label69);
+            this.xtraTabPage4.Controls.Add(this.gcProizvCombIzdSP);
+            this.xtraTabPage4.Controls.Add(this.gridControl4);
+            this.xtraTabPage4.Name = "xtraTabPage4";
+            this.xtraTabPage4.Size = new System.Drawing.Size(1569, 575);
+            this.xtraTabPage4.Text = "ДЕТАЛИ ОТДЕЛКИ";
+            // 
+            // sbProizvCombIzdSP
+            // 
+            this.sbProizvCombIzdSP.Location = new System.Drawing.Point(1475, 245);
+            this.sbProizvCombIzdSP.Name = "sbProizvCombIzdSP";
+            this.sbProizvCombIzdSP.Size = new System.Drawing.Size(72, 23);
+            this.sbProizvCombIzdSP.TabIndex = 7;
+            this.sbProizvCombIzdSP.Text = "Печать";
+            this.sbProizvCombIzdSP.Visible = false;
+            this.sbProizvCombIzdSP.Click += new System.EventHandler(this.sbProizvCombIzdSP_Click);
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label70.Location = new System.Drawing.Point(3, 279);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(42, 19);
+            this.label70.TabIndex = 6;
+            this.label70.Text = "ВЗП";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label69.Location = new System.Drawing.Point(3, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(38, 19);
+            this.label69.TabIndex = 5;
+            this.label69.Text = "ШП";
+            // 
+            // gcProizvCombIzdSP
+            // 
+            this.gcProizvCombIzdSP.DataSource = this.bsProizvCombIzdSP;
+            this.gcProizvCombIzdSP.Location = new System.Drawing.Point(3, 21);
+            this.gcProizvCombIzdSP.MainView = this.gridView4;
+            this.gcProizvCombIzdSP.Name = "gcProizvCombIzdSP";
+            this.gcProizvCombIzdSP.Size = new System.Drawing.Size(1544, 252);
+            this.gcProizvCombIzdSP.TabIndex = 4;
+            this.gcProizvCombIzdSP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView4});
+            // 
+            // gridView4
+            // 
+            this.gridView4.Appearance.GroupFooter.Options.UseTextOptions = true;
+            this.gridView4.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridView4.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView4.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn47,
+            this.gridColumn48,
+            this.gridColumn49,
+            this.gridColumn50,
+            this.gridColumn51,
+            this.gridColumn52,
+            this.gridColumn53,
+            this.gridColumn54,
+            this.gridColumn55,
+            this.gridColumn56,
+            this.gridColumn58,
+            this.gridColumn74,
+            this.gridColumn75,
+            this.gridColumn76,
+            this.gridColumn77});
+            this.gridView4.CustomizationFormBounds = new System.Drawing.Rectangle(3464, 607, 264, 272);
+            this.gridView4.GridControl = this.gcProizvCombIzdSP;
+            this.gridView4.GroupCount = 3;
+            this.gridView4.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolRaskr", null, "(Раскроено всего: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolRab", null, "(В работе всего: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolGI", null, "(Сдано на склад всего: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolFurnPrinSkl", null, "(Принято на склад фурнитуры всего: {0:0.##})")});
+            this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView4.OptionsView.ShowFooter = true;
+            this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridView4.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn49, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn48, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn54, DevExpress.Data.ColumnSortOrder.Ascending)});
+            // 
+            // gridColumn47
+            // 
+            this.gridColumn47.Caption = "Модель";
+            this.gridColumn47.FieldName = "RzuMod";
+            this.gridColumn47.Name = "gridColumn47";
+            this.gridColumn47.OptionsColumn.FixedWidth = true;
+            this.gridColumn47.OptionsEditForm.Caption = "Psz Mod:";
+            this.gridColumn47.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn47.OptionsFilter.AllowFilter = false;
+            this.gridColumn47.Visible = true;
+            this.gridColumn47.VisibleIndex = 2;
+            this.gridColumn47.Width = 100;
+            // 
+            // gridColumn48
+            // 
+            this.gridColumn48.Caption = "Задание";
+            this.gridColumn48.FieldName = "PszNom";
+            this.gridColumn48.Name = "gridColumn48";
+            this.gridColumn48.Visible = true;
+            this.gridColumn48.VisibleIndex = 0;
+            // 
+            // gridColumn49
+            // 
+            this.gridColumn49.Caption = "Цвет";
+            this.gridColumn49.FieldName = "PszZvet";
+            this.gridColumn49.Name = "gridColumn49";
+            this.gridColumn49.Visible = true;
+            this.gridColumn49.VisibleIndex = 0;
+            // 
+            // gridColumn50
+            // 
+            this.gridColumn50.Caption = "Артикул";
+            this.gridColumn50.FieldName = "RzuArticul";
+            this.gridColumn50.Name = "gridColumn50";
+            this.gridColumn50.OptionsColumn.FixedWidth = true;
+            this.gridColumn50.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn50.OptionsFilter.AllowFilter = false;
+            this.gridColumn50.Visible = true;
+            this.gridColumn50.VisibleIndex = 1;
+            this.gridColumn50.Width = 100;
+            // 
+            // gridColumn51
+            // 
+            this.gridColumn51.Caption = "Группа";
+            this.gridColumn51.FieldName = "RzuGrup";
+            this.gridColumn51.Name = "gridColumn51";
+            this.gridColumn51.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn51.OptionsFilter.AllowFilter = false;
+            this.gridColumn51.Visible = true;
+            this.gridColumn51.VisibleIndex = 0;
+            this.gridColumn51.Width = 299;
+            // 
+            // gridColumn52
+            // 
+            this.gridColumn52.Caption = "Размер";
+            this.gridColumn52.FieldName = "RzuRazm";
+            this.gridColumn52.Name = "gridColumn52";
+            this.gridColumn52.OptionsColumn.FixedWidth = true;
+            this.gridColumn52.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn52.OptionsFilter.AllowFilter = false;
+            this.gridColumn52.Visible = true;
+            this.gridColumn52.VisibleIndex = 3;
+            this.gridColumn52.Width = 80;
+            // 
+            // gridColumn53
+            // 
+            this.gridColumn53.Caption = "Кол-во";
+            this.gridColumn53.FieldName = "KolItog";
+            this.gridColumn53.Name = "gridColumn53";
+            this.gridColumn53.OptionsColumn.FixedWidth = true;
+            this.gridColumn53.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn53.OptionsFilter.AllowFilter = false;
+            this.gridColumn53.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolItog", "ИТОГО = {0:0.##}")});
+            this.gridColumn53.Visible = true;
+            this.gridColumn53.VisibleIndex = 4;
+            this.gridColumn53.Width = 90;
+            // 
+            // gridColumn54
+            // 
+            this.gridColumn54.Caption = "№ накладной";
+            this.gridColumn54.FieldName = "NIz";
+            this.gridColumn54.Name = "gridColumn54";
+            this.gridColumn54.Visible = true;
+            this.gridColumn54.VisibleIndex = 0;
+            // 
+            // gridColumn55
+            // 
+            this.gridColumn55.Caption = "Кол-во раскроено";
+            this.gridColumn55.FieldName = "KolRaskr";
+            this.gridColumn55.Name = "gridColumn55";
+            this.gridColumn55.OptionsColumn.FixedWidth = true;
+            this.gridColumn55.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn55.OptionsFilter.AllowFilter = false;
+            this.gridColumn55.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolRaskr", "Раскроено: {0:0.##}")});
+            this.gridColumn55.Visible = true;
+            this.gridColumn55.VisibleIndex = 5;
+            this.gridColumn55.Width = 150;
+            // 
+            // gridColumn56
+            // 
+            this.gridColumn56.Caption = "Количество в работе";
+            this.gridColumn56.FieldName = "KolRab";
+            this.gridColumn56.Name = "gridColumn56";
+            this.gridColumn56.OptionsColumn.FixedWidth = true;
+            this.gridColumn56.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn56.OptionsFilter.AllowFilter = false;
+            this.gridColumn56.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolRab", "В работе: {0:0.##}")});
+            this.gridColumn56.Visible = true;
+            this.gridColumn56.VisibleIndex = 6;
+            this.gridColumn56.Width = 150;
+            // 
+            // gridColumn58
+            // 
+            this.gridColumn58.Caption = "Кол-во прин. на скл. фурн.";
+            this.gridColumn58.FieldName = "KolFurnPrinSkl";
+            this.gridColumn58.Name = "gridColumn58";
+            this.gridColumn58.OptionsColumn.FixedWidth = true;
+            this.gridColumn58.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn58.OptionsFilter.AllowFilter = false;
+            this.gridColumn58.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolFurnPrinSkl", "Прин. на скл. Фурн.: {0:0.##}")});
+            this.gridColumn58.Visible = true;
+            this.gridColumn58.VisibleIndex = 10;
+            this.gridColumn58.Width = 150;
+            // 
+            // gridColumn74
+            // 
+            this.gridColumn74.Caption = "Дата в работу";
+            this.gridColumn74.FieldName = "RzuDataRab";
+            this.gridColumn74.Name = "gridColumn74";
+            this.gridColumn74.OptionsColumn.FixedWidth = true;
+            this.gridColumn74.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn74.OptionsFilter.AllowFilter = false;
+            this.gridColumn74.Visible = true;
+            this.gridColumn74.VisibleIndex = 7;
+            this.gridColumn74.Width = 90;
+            // 
+            // gridColumn75
+            // 
+            this.gridColumn75.Caption = "Дата отгр. на склад";
+            this.gridColumn75.FieldName = "NDostData";
+            this.gridColumn75.Name = "gridColumn75";
+            this.gridColumn75.OptionsColumn.FixedWidth = true;
+            this.gridColumn75.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn75.OptionsFilter.AllowFilter = false;
+            this.gridColumn75.Visible = true;
+            this.gridColumn75.VisibleIndex = 9;
+            this.gridColumn75.Width = 90;
+            // 
+            // gridColumn76
+            // 
+            this.gridColumn76.Caption = "Дата прин. на скл. фурн.";
+            this.gridColumn76.FieldName = "DateFurnPrihSkl";
+            this.gridColumn76.Name = "gridColumn76";
+            this.gridColumn76.OptionsColumn.FixedWidth = true;
+            this.gridColumn76.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn76.OptionsFilter.AllowFilter = false;
+            this.gridColumn76.Visible = true;
+            this.gridColumn76.VisibleIndex = 11;
+            this.gridColumn76.Width = 90;
+            // 
+            // gridColumn77
+            // 
+            this.gridColumn77.Caption = "Кол-во отгр. на склад";
+            this.gridColumn77.FieldName = "KolGI";
+            this.gridColumn77.Name = "gridColumn77";
+            this.gridColumn77.OptionsColumn.FixedWidth = true;
+            this.gridColumn77.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn77.OptionsFilter.AllowFilter = false;
+            this.gridColumn77.Visible = true;
+            this.gridColumn77.VisibleIndex = 8;
+            this.gridColumn77.Width = 150;
+            // 
+            // gridControl4
+            // 
+            this.gridControl4.DataSource = this.bsProizvCombIzdVZP;
+            this.gridControl4.Location = new System.Drawing.Point(3, 301);
+            this.gridControl4.MainView = this.gridView6;
+            this.gridControl4.Name = "gridControl4";
+            this.gridControl4.Size = new System.Drawing.Size(1544, 269);
+            this.gridControl4.TabIndex = 4;
+            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView6});
+            // 
+            // gridView6
+            // 
+            this.gridView6.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gridView6.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridView6.Appearance.GroupFooter.Options.UseTextOptions = true;
+            this.gridView6.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridView6.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView6.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn59,
+            this.gridColumn60,
+            this.gridColumn61,
+            this.gridColumn62,
+            this.gridColumn63,
+            this.gridColumn64,
+            this.gridColumn65,
+            this.gridColumn66,
+            this.gridColumn67,
+            this.gridColumn68,
+            this.gridColumn69,
+            this.gridColumn70,
+            this.gridColumn71,
+            this.gridColumn72,
+            this.gridColumn73});
+            this.gridView6.CustomizationFormBounds = new System.Drawing.Rectangle(3464, 607, 264, 272);
+            this.gridView6.GridControl = this.gridControl4;
+            this.gridView6.GroupCount = 3;
+            this.gridView6.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolVyaz", null, "(Вязание: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolOtparka", null, "(Отпарка: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolGI", null, "(Сдано на склад всего: {0:0.##})"),
+            new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolFurnPrinSkl", null, "(Принято на склад фурнитуры всего: {0:0.##})")});
+            this.gridView6.Name = "gridView6";
+            this.gridView6.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView6.OptionsView.ShowFooter = true;
+            this.gridView6.OptionsView.ShowGroupPanel = false;
+            this.gridView6.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn61, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn60, DevExpress.Data.ColumnSortOrder.Ascending),
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn66, DevExpress.Data.ColumnSortOrder.Ascending)});
+            // 
+            // gridColumn59
+            // 
+            this.gridColumn59.Caption = "Модель";
+            this.gridColumn59.FieldName = "RzvMod";
+            this.gridColumn59.Name = "gridColumn59";
+            this.gridColumn59.OptionsColumn.FixedWidth = true;
+            this.gridColumn59.OptionsEditForm.Caption = "Psz Mod:";
+            this.gridColumn59.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn59.OptionsFilter.AllowFilter = false;
+            this.gridColumn59.Visible = true;
+            this.gridColumn59.VisibleIndex = 2;
+            this.gridColumn59.Width = 100;
+            // 
+            // gridColumn60
+            // 
+            this.gridColumn60.Caption = "Задание";
+            this.gridColumn60.FieldName = "PszNom";
+            this.gridColumn60.Name = "gridColumn60";
+            this.gridColumn60.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn60.OptionsFilter.AllowFilter = false;
+            this.gridColumn60.Visible = true;
+            this.gridColumn60.VisibleIndex = 0;
+            // 
+            // gridColumn61
+            // 
+            this.gridColumn61.Caption = "Цвет";
+            this.gridColumn61.FieldName = "PszZvet";
+            this.gridColumn61.Name = "gridColumn61";
+            this.gridColumn61.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn61.OptionsFilter.AllowFilter = false;
+            this.gridColumn61.Visible = true;
+            this.gridColumn61.VisibleIndex = 0;
+            // 
+            // gridColumn62
+            // 
+            this.gridColumn62.Caption = "Артикул";
+            this.gridColumn62.FieldName = "RzvArticul";
+            this.gridColumn62.Name = "gridColumn62";
+            this.gridColumn62.OptionsColumn.FixedWidth = true;
+            this.gridColumn62.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn62.OptionsFilter.AllowFilter = false;
+            this.gridColumn62.Visible = true;
+            this.gridColumn62.VisibleIndex = 1;
+            this.gridColumn62.Width = 100;
+            // 
+            // gridColumn63
+            // 
+            this.gridColumn63.Caption = "Группа";
+            this.gridColumn63.FieldName = "RzvGrup";
+            this.gridColumn63.Name = "gridColumn63";
+            this.gridColumn63.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn63.OptionsFilter.AllowFilter = false;
+            this.gridColumn63.Visible = true;
+            this.gridColumn63.VisibleIndex = 0;
+            this.gridColumn63.Width = 299;
+            // 
+            // gridColumn64
+            // 
+            this.gridColumn64.Caption = "Размер";
+            this.gridColumn64.FieldName = "RzvRazm";
+            this.gridColumn64.Name = "gridColumn64";
+            this.gridColumn64.OptionsColumn.FixedWidth = true;
+            this.gridColumn64.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn64.OptionsFilter.AllowFilter = false;
+            this.gridColumn64.Visible = true;
+            this.gridColumn64.VisibleIndex = 3;
+            this.gridColumn64.Width = 80;
+            // 
+            // gridColumn65
+            // 
+            this.gridColumn65.Caption = "Кол-во";
+            this.gridColumn65.FieldName = "KolItog";
+            this.gridColumn65.Name = "gridColumn65";
+            this.gridColumn65.OptionsColumn.FixedWidth = true;
+            this.gridColumn65.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn65.OptionsFilter.AllowFilter = false;
+            this.gridColumn65.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolItog", "ИТОГО = {0:0.##}")});
+            this.gridColumn65.Visible = true;
+            this.gridColumn65.VisibleIndex = 4;
+            this.gridColumn65.Width = 90;
+            // 
+            // gridColumn66
+            // 
+            this.gridColumn66.Caption = "№ накладной";
+            this.gridColumn66.FieldName = "NIz";
+            this.gridColumn66.Name = "gridColumn66";
+            this.gridColumn66.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn66.OptionsFilter.AllowFilter = false;
+            this.gridColumn66.Visible = true;
+            this.gridColumn66.VisibleIndex = 0;
+            // 
+            // gridColumn67
+            // 
+            this.gridColumn67.Caption = "Кол-во на вязании";
+            this.gridColumn67.FieldName = "KolVyaz";
+            this.gridColumn67.Name = "gridColumn67";
+            this.gridColumn67.OptionsColumn.FixedWidth = true;
+            this.gridColumn67.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn67.OptionsFilter.AllowFilter = false;
+            this.gridColumn67.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolVyaz", "Вязание: {0:0.##}")});
+            this.gridColumn67.Visible = true;
+            this.gridColumn67.VisibleIndex = 5;
+            this.gridColumn67.Width = 150;
+            // 
+            // gridColumn68
+            // 
+            this.gridColumn68.Caption = "Кол-во на отпарке";
+            this.gridColumn68.FieldName = "KolOtparka";
+            this.gridColumn68.Name = "gridColumn68";
+            this.gridColumn68.OptionsColumn.FixedWidth = true;
+            this.gridColumn68.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn68.OptionsFilter.AllowFilter = false;
+            this.gridColumn68.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolOtparka", "Отпарка: {0:0.##}")});
+            this.gridColumn68.Visible = true;
+            this.gridColumn68.VisibleIndex = 6;
+            this.gridColumn68.Width = 150;
+            // 
+            // gridColumn69
+            // 
+            this.gridColumn69.Caption = "Кол-во отгр. на склад";
+            this.gridColumn69.FieldName = "KolGI";
+            this.gridColumn69.Name = "gridColumn69";
+            this.gridColumn69.OptionsColumn.FixedWidth = true;
+            this.gridColumn69.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn69.OptionsFilter.AllowFilter = false;
+            this.gridColumn69.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolGI", "Отгр. на скл.: {0:0.##}")});
+            this.gridColumn69.Visible = true;
+            this.gridColumn69.VisibleIndex = 8;
+            this.gridColumn69.Width = 150;
+            // 
+            // gridColumn70
+            // 
+            this.gridColumn70.Caption = "Кол-во прин. на скл. фурн.";
+            this.gridColumn70.FieldName = "KolFurnPrinSkl";
+            this.gridColumn70.Name = "gridColumn70";
+            this.gridColumn70.OptionsColumn.FixedWidth = true;
+            this.gridColumn70.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn70.OptionsFilter.AllowFilter = false;
+            this.gridColumn70.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolFurnPrinSkl", "Прин. на скл. Фурн.: {0:0.##}")});
+            this.gridColumn70.Visible = true;
+            this.gridColumn70.VisibleIndex = 10;
+            this.gridColumn70.Width = 150;
+            // 
+            // gridColumn71
+            // 
+            this.gridColumn71.Caption = "Дата отпарки";
+            this.gridColumn71.FieldName = "RzvDateOkonV";
+            this.gridColumn71.Name = "gridColumn71";
+            this.gridColumn71.OptionsColumn.FixedWidth = true;
+            this.gridColumn71.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn71.OptionsFilter.AllowFilter = false;
+            this.gridColumn71.Visible = true;
+            this.gridColumn71.VisibleIndex = 7;
+            this.gridColumn71.Width = 90;
+            // 
+            // gridColumn72
+            // 
+            this.gridColumn72.Caption = "Дата отгр. на склад";
+            this.gridColumn72.FieldName = "NDostData";
+            this.gridColumn72.Name = "gridColumn72";
+            this.gridColumn72.OptionsColumn.FixedWidth = true;
+            this.gridColumn72.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn72.OptionsFilter.AllowFilter = false;
+            this.gridColumn72.Visible = true;
+            this.gridColumn72.VisibleIndex = 9;
+            this.gridColumn72.Width = 90;
+            // 
+            // gridColumn73
+            // 
+            this.gridColumn73.Caption = "Дата прин. на скл. фурн.";
+            this.gridColumn73.FieldName = "DateFurnPrihSkl";
+            this.gridColumn73.Name = "gridColumn73";
+            this.gridColumn73.OptionsColumn.FixedWidth = true;
+            this.gridColumn73.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn73.OptionsFilter.AllowFilter = false;
+            this.gridColumn73.Visible = true;
+            this.gridColumn73.VisibleIndex = 11;
+            this.gridColumn73.Width = 90;
+            // 
+            // gridView1
+            // 
+            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3,
+            this.gridColumn4,
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7,
+            this.gridColumn8,
+            this.gridColumn9,
+            this.gridColumn10,
+            this.gridColumn11,
+            this.gridColumn12,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn15,
+            this.gridColumn16,
+            this.gridColumn17,
+            this.gridColumn40,
+            this.gridColumn44,
+            this.gridColumn45,
+            this.gridColumn46});
+            gridFormatRule1.Column = this.gridColumn40;
+            gridFormatRule1.ColumnApplyTo = this.gridColumn15;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue1.Appearance.Options.UseFont = true;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = "red";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridFormatRule2.Column = this.gridColumn40;
+            gridFormatRule2.ColumnApplyTo = this.gridColumn15;
+            gridFormatRule2.Name = "Format1";
+            formatConditionRuleValue2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue2.Appearance.Options.UseFont = true;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue2.Value1 = "green";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridFormatRule3.Column = this.gridColumn44;
+            gridFormatRule3.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule3.Name = "Format2";
+            formatConditionRuleValue3.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue3.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue3.Appearance.Options.UseFont = true;
+            formatConditionRuleValue3.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue3.Value1 = "green";
+            gridFormatRule3.Rule = formatConditionRuleValue3;
+            gridFormatRule4.Column = this.gridColumn44;
+            gridFormatRule4.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule4.Name = "Format3";
+            formatConditionRuleValue4.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue4.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue4.Appearance.Options.UseFont = true;
+            formatConditionRuleValue4.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue4.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue4.Value1 = "red";
+            gridFormatRule4.Rule = formatConditionRuleValue4;
+            gridFormatRule5.Column = this.gridColumn44;
+            gridFormatRule5.ColumnApplyTo = this.gridColumn14;
+            gridFormatRule5.Name = "Format4";
+            formatConditionRuleValue5.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue5.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue5.Appearance.Options.UseFont = true;
+            formatConditionRuleValue5.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue5.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue5.Value1 = "gray";
+            gridFormatRule5.Rule = formatConditionRuleValue5;
+            gridFormatRule6.Column = this.gridColumn45;
+            gridFormatRule6.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule6.Name = "Format5";
+            formatConditionRuleValue6.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue6.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue6.Appearance.Options.UseFont = true;
+            formatConditionRuleValue6.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue6.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue6.Value1 = "red";
+            gridFormatRule6.Rule = formatConditionRuleValue6;
+            gridFormatRule7.Column = this.gridColumn45;
+            gridFormatRule7.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule7.Name = "Format6";
+            formatConditionRuleValue7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue7.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue7.Appearance.Options.UseFont = true;
+            formatConditionRuleValue7.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue7.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue7.Value1 = "green";
+            gridFormatRule7.Rule = formatConditionRuleValue7;
+            gridFormatRule8.Column = this.gridColumn45;
+            gridFormatRule8.ColumnApplyTo = this.gridColumn13;
+            gridFormatRule8.Name = "Format7";
+            formatConditionRuleValue8.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue8.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue8.Appearance.Options.UseFont = true;
+            formatConditionRuleValue8.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue8.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue8.Value1 = "gray";
+            gridFormatRule8.Rule = formatConditionRuleValue8;
+            gridFormatRule9.Column = this.gridColumn46;
+            gridFormatRule9.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule9.Name = "Format8";
+            formatConditionRuleValue9.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue9.Appearance.ForeColor = System.Drawing.Color.Red;
+            formatConditionRuleValue9.Appearance.Options.UseFont = true;
+            formatConditionRuleValue9.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue9.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue9.Value1 = "red";
+            gridFormatRule9.Rule = formatConditionRuleValue9;
+            gridFormatRule10.Column = this.gridColumn46;
+            gridFormatRule10.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule10.Name = "Format9";
+            formatConditionRuleValue10.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue10.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            formatConditionRuleValue10.Appearance.Options.UseFont = true;
+            formatConditionRuleValue10.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue10.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue10.Value1 = "green";
+            gridFormatRule10.Rule = formatConditionRuleValue10;
+            gridFormatRule11.Column = this.gridColumn46;
+            gridFormatRule11.ColumnApplyTo = this.gridColumn12;
+            gridFormatRule11.Name = "Format10";
+            formatConditionRuleValue11.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            formatConditionRuleValue11.Appearance.ForeColor = System.Drawing.Color.Gray;
+            formatConditionRuleValue11.Appearance.Options.UseFont = true;
+            formatConditionRuleValue11.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue11.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue11.Value1 = "gray";
+            gridFormatRule11.Rule = formatConditionRuleValue11;
+            this.gridView1.FormatRules.Add(gridFormatRule1);
+            this.gridView1.FormatRules.Add(gridFormatRule2);
+            this.gridView1.FormatRules.Add(gridFormatRule3);
+            this.gridView1.FormatRules.Add(gridFormatRule4);
+            this.gridView1.FormatRules.Add(gridFormatRule5);
+            this.gridView1.FormatRules.Add(gridFormatRule6);
+            this.gridView1.FormatRules.Add(gridFormatRule7);
+            this.gridView1.FormatRules.Add(gridFormatRule8);
+            this.gridView1.FormatRules.Add(gridFormatRule9);
+            this.gridView1.FormatRules.Add(gridFormatRule10);
+            this.gridView1.FormatRules.Add(gridFormatRule11);
+            this.gridView1.GridControl = this.gcNaklList;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsBehavior.Editable = false;
+            this.gridView1.OptionsMenu.ShowConditionalFormattingItem = true;
+            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsView.RowAutoHeight = true;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridView1.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView1_CustomDrawCell);
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "Кол-во ДО";
+            this.gridColumn1.FieldName = "kol_b";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.OptionsColumn.FixedWidth = true;
+            this.gridColumn1.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn1.OptionsFilter.AllowFilter = false;
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 13;
+            this.gridColumn1.Width = 60;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "Причина деления";
+            this.gridColumn2.FieldName = "prich";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn2.OptionsFilter.AllowFilter = false;
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 12;
+            this.gridColumn2.Width = 38;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "Склад отгрузки";
+            this.gridColumn3.FieldName = "skl_naimen";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsColumn.FixedWidth = true;
+            this.gridColumn3.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn3.OptionsFilter.AllowFilter = false;
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 11;
+            this.gridColumn3.Width = 150;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn4.Caption = "№ накл. Глобал";
+            this.gridColumn4.FieldName = "gl_nomer";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsColumn.FixedWidth = true;
+            this.gridColumn4.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn4.OptionsFilter.AllowFilter = false;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 10;
+            this.gridColumn4.Width = 70;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn5.Caption = "Дата печати";
+            this.gridColumn5.FieldName = "date_print";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.OptionsColumn.FixedWidth = true;
+            this.gridColumn5.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn5.OptionsFilter.AllowFilter = false;
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 9;
+            this.gridColumn5.Width = 90;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn6.Caption = "№ отгр.";
+            this.gridColumn6.FieldName = "dost_n";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.FixedWidth = true;
+            this.gridColumn6.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn6.OptionsFilter.AllowFilter = false;
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 8;
+            this.gridColumn6.Width = 60;
+            // 
+            // gridColumn7
+            // 
+            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn7.Caption = "Доставка на склад";
+            this.gridColumn7.FieldName = "dost_data";
+            this.gridColumn7.Name = "gridColumn7";
+            this.gridColumn7.OptionsColumn.FixedWidth = true;
+            this.gridColumn7.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn7.OptionsFilter.AllowFilter = false;
+            this.gridColumn7.Visible = true;
+            this.gridColumn7.VisibleIndex = 7;
+            this.gridColumn7.Width = 90;
+            // 
+            // gridColumn8
+            // 
+            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn8.Caption = "Дата деления";
+            this.gridColumn8.FieldName = "data_izm";
+            this.gridColumn8.Name = "gridColumn8";
+            this.gridColumn8.OptionsColumn.FixedWidth = true;
+            this.gridColumn8.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn8.OptionsFilter.AllowFilter = false;
+            this.gridColumn8.Visible = true;
+            this.gridColumn8.VisibleIndex = 6;
+            this.gridColumn8.Width = 90;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn9.Caption = "Дата накл.";
+            this.gridColumn9.FieldName = "iz_data";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.OptionsColumn.FixedWidth = true;
+            this.gridColumn9.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn9.OptionsFilter.AllowFilter = false;
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.VisibleIndex = 5;
+            this.gridColumn9.Width = 90;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn10.Caption = "№ накл.";
+            this.gridColumn10.FieldName = "iz_nakl";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.OptionsColumn.FixedWidth = true;
+            this.gridColumn10.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn10.OptionsFilter.AllowFilter = false;
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 4;
+            this.gridColumn10.Width = 60;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
+            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridColumn11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
+            this.gridColumn11.FieldName = "kol_c";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.OptionsColumn.FixedWidth = true;
+            this.gridColumn11.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn11.OptionsFilter.AllowFilter = false;
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 14;
+            this.gridColumn11.Width = 60;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Модель";
+            this.gridColumn16.FieldName = "mod";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.OptionsColumn.FixedWidth = true;
+            this.gridColumn16.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn16.OptionsFilter.AllowFilter = false;
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 16;
+            this.gridColumn16.Width = 120;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.Caption = "Артикул";
+            this.gridColumn17.FieldName = "articul";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.OptionsColumn.FixedWidth = true;
+            this.gridColumn17.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn17.OptionsFilter.AllowFilter = false;
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 15;
+            this.gridColumn17.Width = 120;
+            // 
+            // gcNaklList
+            // 
+            this.gcNaklList.DataSource = this.bsNaklList;
+            this.gcNaklList.Location = new System.Drawing.Point(8, 24);
+            this.gcNaklList.MainView = this.gridView1;
+            this.gcNaklList.Name = "gcNaklList";
+            this.gcNaklList.Size = new System.Drawing.Size(1545, 163);
+            this.gcNaklList.TabIndex = 5;
+            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1,
+            this.gridView5});
+            // 
+            // gridView5
+            // 
+            this.gridView5.GridControl = this.gcNaklList;
+            this.gridView5.Name = "gridView5";
+            // 
+            // gridView2
+            // 
+            this.gridView2.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridView2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn29,
+            this.gridColumn30,
+            this.gridColumn31,
+            this.gridColumn32,
+            this.gridColumn33});
+            this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView2.OptionsView.RowAutoHeight = true;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn29
+            // 
+            this.gridColumn29.Caption = "Вид изделия";
+            this.gridColumn29.FieldName = "VidIzdName";
+            this.gridColumn29.Name = "gridColumn29";
+            this.gridColumn29.OptionsColumn.FixedWidth = true;
+            this.gridColumn29.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn29.OptionsFilter.AllowFilter = false;
+            this.gridColumn29.Visible = true;
+            this.gridColumn29.VisibleIndex = 4;
+            this.gridColumn29.Width = 120;
+            // 
+            // gridColumn30
+            // 
+            this.gridColumn30.Caption = "Деталь изделия";
+            this.gridColumn30.FieldName = "DetIzdName";
+            this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.OptionsColumn.FixedWidth = true;
+            this.gridColumn30.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn30.OptionsFilter.AllowFilter = false;
+            this.gridColumn30.Visible = true;
+            this.gridColumn30.VisibleIndex = 3;
+            this.gridColumn30.Width = 100;
+            // 
+            // gridColumn31
+            // 
+            this.gridColumn31.Caption = "Формат";
+            this.gridColumn31.FieldName = "frt_naimen";
+            this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.OptionsColumn.FixedWidth = true;
+            this.gridColumn31.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn31.OptionsFilter.AllowFilter = false;
+            this.gridColumn31.Visible = true;
+            this.gridColumn31.VisibleIndex = 2;
+            this.gridColumn31.Width = 50;
+            // 
+            // gridColumn32
+            // 
+            this.gridColumn32.Caption = "Кол-во/слож/цвет/прогон";
+            this.gridColumn32.FieldName = "kol_sl_zv";
+            this.gridColumn32.Name = "gridColumn32";
+            this.gridColumn32.OptionsColumn.FixedWidth = true;
+            this.gridColumn32.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn32.OptionsFilter.AllowFilter = false;
+            this.gridColumn32.Visible = true;
+            this.gridColumn32.VisibleIndex = 1;
+            this.gridColumn32.Width = 140;
+            // 
+            // gridColumn33
+            // 
+            this.gridColumn33.Caption = "Вид отделки";
+            this.gridColumn33.FieldName = "psa_field_name";
+            this.gridColumn33.Name = "gridColumn33";
+            this.gridColumn33.OptionsColumn.FixedWidth = true;
+            this.gridColumn33.OptionsFilter.AllowAutoFilter = false;
+            this.gridColumn33.OptionsFilter.AllowFilter = false;
+            this.gridColumn33.Visible = true;
+            this.gridColumn33.VisibleIndex = 0;
+            this.gridColumn33.Width = 90;
+            // 
+            // gridControl2
+            // 
+            this.gridControl2.DataSource = this.bsOtdelkaList;
+            this.gridControl2.Location = new System.Drawing.Point(1031, 2);
+            this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Name = "gridControl2";
+            this.gridControl2.Size = new System.Drawing.Size(522, 188);
+            this.gridControl2.TabIndex = 5;
+            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2,
+            this.gridView7});
+            // 
+            // gridView7
+            // 
+            this.gridView7.GridControl = this.gridControl2;
+            this.gridView7.Name = "gridView7";
             // 
             // xtraTabPage3
             // 
@@ -1653,94 +2740,6 @@
             this.label32.TabIndex = 9;
             this.label32.Text = "ПРИНТ";
             // 
-            // gridControl2
-            // 
-            this.gridControl2.DataSource = this.bsOtdelkaList;
-            this.gridControl2.Location = new System.Drawing.Point(1031, 2);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(522, 188);
-            this.gridControl2.TabIndex = 5;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
-            // 
-            // gridView2
-            // 
-            this.gridView2.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView2.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn29,
-            this.gridColumn30,
-            this.gridColumn31,
-            this.gridColumn32,
-            this.gridColumn33});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.Editable = false;
-            this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsView.RowAutoHeight = true;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn29
-            // 
-            this.gridColumn29.Caption = "Вид изделия";
-            this.gridColumn29.FieldName = "VidIzdName";
-            this.gridColumn29.Name = "gridColumn29";
-            this.gridColumn29.OptionsColumn.FixedWidth = true;
-            this.gridColumn29.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn29.OptionsFilter.AllowFilter = false;
-            this.gridColumn29.Visible = true;
-            this.gridColumn29.VisibleIndex = 4;
-            this.gridColumn29.Width = 120;
-            // 
-            // gridColumn30
-            // 
-            this.gridColumn30.Caption = "Деталь изделия";
-            this.gridColumn30.FieldName = "DetIzdName";
-            this.gridColumn30.Name = "gridColumn30";
-            this.gridColumn30.OptionsColumn.FixedWidth = true;
-            this.gridColumn30.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn30.OptionsFilter.AllowFilter = false;
-            this.gridColumn30.Visible = true;
-            this.gridColumn30.VisibleIndex = 3;
-            this.gridColumn30.Width = 100;
-            // 
-            // gridColumn31
-            // 
-            this.gridColumn31.Caption = "Формат";
-            this.gridColumn31.FieldName = "frt_naimen";
-            this.gridColumn31.Name = "gridColumn31";
-            this.gridColumn31.OptionsColumn.FixedWidth = true;
-            this.gridColumn31.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn31.OptionsFilter.AllowFilter = false;
-            this.gridColumn31.Visible = true;
-            this.gridColumn31.VisibleIndex = 2;
-            this.gridColumn31.Width = 50;
-            // 
-            // gridColumn32
-            // 
-            this.gridColumn32.Caption = "Кол-во/слож/цвет/прогон";
-            this.gridColumn32.FieldName = "kol_sl_zv";
-            this.gridColumn32.Name = "gridColumn32";
-            this.gridColumn32.OptionsColumn.FixedWidth = true;
-            this.gridColumn32.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn32.OptionsFilter.AllowFilter = false;
-            this.gridColumn32.Visible = true;
-            this.gridColumn32.VisibleIndex = 1;
-            this.gridColumn32.Width = 140;
-            // 
-            // gridColumn33
-            // 
-            this.gridColumn33.Caption = "Вид отделки";
-            this.gridColumn33.FieldName = "psa_field_name";
-            this.gridColumn33.Name = "gridColumn33";
-            this.gridColumn33.OptionsColumn.FixedWidth = true;
-            this.gridColumn33.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn33.OptionsFilter.AllowFilter = false;
-            this.gridColumn33.Visible = true;
-            this.gridColumn33.VisibleIndex = 0;
-            this.gridColumn33.Width = 90;
-            // 
             // label31
             // 
             this.label31.AutoSize = true;
@@ -1765,349 +2764,6 @@
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(1558, 220);
             this.panelControl4.TabIndex = 28;
-            // 
-            // gcNaklList
-            // 
-            this.gcNaklList.DataSource = this.bsNaklList;
-            this.gcNaklList.Location = new System.Drawing.Point(8, 24);
-            this.gcNaklList.MainView = this.gridView1;
-            this.gcNaklList.Name = "gcNaklList";
-            this.gcNaklList.Size = new System.Drawing.Size(1545, 163);
-            this.gcNaklList.TabIndex = 5;
-            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn12,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.gridColumn15,
-            this.gridColumn16,
-            this.gridColumn17,
-            this.gridColumn40,
-            this.gridColumn44,
-            this.gridColumn45,
-            this.gridColumn46});
-            gridFormatRule1.Column = this.gridColumn40;
-            gridFormatRule1.ColumnApplyTo = this.gridColumn15;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue1.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue1.Appearance.Options.UseFont = true;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue1.Value1 = "red";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridFormatRule2.Column = this.gridColumn40;
-            gridFormatRule2.ColumnApplyTo = this.gridColumn15;
-            gridFormatRule2.Name = "Format1";
-            formatConditionRuleValue2.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue2.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue2.Appearance.Options.UseFont = true;
-            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue2.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue2.Value1 = "green";
-            gridFormatRule2.Rule = formatConditionRuleValue2;
-            gridFormatRule3.Column = this.gridColumn44;
-            gridFormatRule3.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule3.Name = "Format2";
-            formatConditionRuleValue3.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue3.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue3.Appearance.Options.UseFont = true;
-            formatConditionRuleValue3.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue3.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue3.Value1 = "green";
-            gridFormatRule3.Rule = formatConditionRuleValue3;
-            gridFormatRule4.Column = this.gridColumn44;
-            gridFormatRule4.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule4.Name = "Format3";
-            formatConditionRuleValue4.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue4.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue4.Appearance.Options.UseFont = true;
-            formatConditionRuleValue4.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue4.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue4.Value1 = "red";
-            gridFormatRule4.Rule = formatConditionRuleValue4;
-            gridFormatRule5.Column = this.gridColumn44;
-            gridFormatRule5.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule5.Name = "Format4";
-            formatConditionRuleValue5.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue5.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue5.Appearance.Options.UseFont = true;
-            formatConditionRuleValue5.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue5.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue5.Value1 = "gray";
-            gridFormatRule5.Rule = formatConditionRuleValue5;
-            gridFormatRule6.Column = this.gridColumn45;
-            gridFormatRule6.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule6.Name = "Format5";
-            formatConditionRuleValue6.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue6.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue6.Appearance.Options.UseFont = true;
-            formatConditionRuleValue6.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue6.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue6.Value1 = "red";
-            gridFormatRule6.Rule = formatConditionRuleValue6;
-            gridFormatRule7.Column = this.gridColumn45;
-            gridFormatRule7.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule7.Name = "Format6";
-            formatConditionRuleValue7.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue7.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue7.Appearance.Options.UseFont = true;
-            formatConditionRuleValue7.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue7.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue7.Value1 = "green";
-            gridFormatRule7.Rule = formatConditionRuleValue7;
-            gridFormatRule8.Column = this.gridColumn45;
-            gridFormatRule8.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule8.Name = "Format7";
-            formatConditionRuleValue8.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue8.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue8.Appearance.Options.UseFont = true;
-            formatConditionRuleValue8.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue8.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue8.Value1 = "gray";
-            gridFormatRule8.Rule = formatConditionRuleValue8;
-            gridFormatRule9.Column = this.gridColumn46;
-            gridFormatRule9.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule9.Name = "Format8";
-            formatConditionRuleValue9.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue9.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue9.Appearance.Options.UseFont = true;
-            formatConditionRuleValue9.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue9.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue9.Value1 = "red";
-            gridFormatRule9.Rule = formatConditionRuleValue9;
-            gridFormatRule10.Column = this.gridColumn46;
-            gridFormatRule10.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule10.Name = "Format9";
-            formatConditionRuleValue10.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue10.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue10.Appearance.Options.UseFont = true;
-            formatConditionRuleValue10.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue10.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue10.Value1 = "green";
-            gridFormatRule10.Rule = formatConditionRuleValue10;
-            gridFormatRule11.Column = this.gridColumn46;
-            gridFormatRule11.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule11.Name = "Format10";
-            formatConditionRuleValue11.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue11.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue11.Appearance.Options.UseFont = true;
-            formatConditionRuleValue11.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue11.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue11.Value1 = "gray";
-            gridFormatRule11.Rule = formatConditionRuleValue11;
-            this.gridView1.FormatRules.Add(gridFormatRule1);
-            this.gridView1.FormatRules.Add(gridFormatRule2);
-            this.gridView1.FormatRules.Add(gridFormatRule3);
-            this.gridView1.FormatRules.Add(gridFormatRule4);
-            this.gridView1.FormatRules.Add(gridFormatRule5);
-            this.gridView1.FormatRules.Add(gridFormatRule6);
-            this.gridView1.FormatRules.Add(gridFormatRule7);
-            this.gridView1.FormatRules.Add(gridFormatRule8);
-            this.gridView1.FormatRules.Add(gridFormatRule9);
-            this.gridView1.FormatRules.Add(gridFormatRule10);
-            this.gridView1.FormatRules.Add(gridFormatRule11);
-            this.gridView1.GridControl = this.gcNaklList;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsMenu.ShowConditionalFormattingItem = true;
-            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsView.RowAutoHeight = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView1_CustomDrawCell);
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Кол-во ДО";
-            this.gridColumn1.FieldName = "kol_b";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.OptionsColumn.FixedWidth = true;
-            this.gridColumn1.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn1.OptionsFilter.AllowFilter = false;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 13;
-            this.gridColumn1.Width = 60;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Причина деления";
-            this.gridColumn2.FieldName = "prich";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn2.OptionsFilter.AllowFilter = false;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 12;
-            this.gridColumn2.Width = 38;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Склад отгрузки";
-            this.gridColumn3.FieldName = "skl_naimen";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsColumn.FixedWidth = true;
-            this.gridColumn3.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn3.OptionsFilter.AllowFilter = false;
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 11;
-            this.gridColumn3.Width = 150;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn4.Caption = "№ накл. Глобал";
-            this.gridColumn4.FieldName = "gl_nomer";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsColumn.FixedWidth = true;
-            this.gridColumn4.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn4.OptionsFilter.AllowFilter = false;
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 10;
-            this.gridColumn4.Width = 70;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn5.Caption = "Дата печати";
-            this.gridColumn5.FieldName = "date_print";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.OptionsColumn.FixedWidth = true;
-            this.gridColumn5.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn5.OptionsFilter.AllowFilter = false;
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 9;
-            this.gridColumn5.Width = 90;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn6.Caption = "№ отгр.";
-            this.gridColumn6.FieldName = "dost_n";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.OptionsColumn.FixedWidth = true;
-            this.gridColumn6.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn6.OptionsFilter.AllowFilter = false;
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
-            this.gridColumn6.Width = 60;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn7.Caption = "Доставка на склад";
-            this.gridColumn7.FieldName = "dost_data";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.OptionsColumn.FixedWidth = true;
-            this.gridColumn7.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn7.OptionsFilter.AllowFilter = false;
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
-            this.gridColumn7.Width = 90;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn8.Caption = "Дата деления";
-            this.gridColumn8.FieldName = "data_izm";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.OptionsColumn.FixedWidth = true;
-            this.gridColumn8.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn8.OptionsFilter.AllowFilter = false;
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
-            this.gridColumn8.Width = 90;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn9.Caption = "Дата накл.";
-            this.gridColumn9.FieldName = "iz_data";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.FixedWidth = true;
-            this.gridColumn9.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn9.OptionsFilter.AllowFilter = false;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
-            this.gridColumn9.Width = 90;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn10.Caption = "№ накл.";
-            this.gridColumn10.FieldName = "iz_nakl";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.OptionsColumn.FixedWidth = true;
-            this.gridColumn10.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn10.OptionsFilter.AllowFilter = false;
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
-            this.gridColumn10.Width = 60;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
-            this.gridColumn11.FieldName = "kol_c";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.OptionsColumn.FixedWidth = true;
-            this.gridColumn11.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn11.OptionsFilter.AllowFilter = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 14;
-            this.gridColumn11.Width = 60;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Модель";
-            this.gridColumn16.FieldName = "mod";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.OptionsColumn.FixedWidth = true;
-            this.gridColumn16.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn16.OptionsFilter.AllowFilter = false;
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 16;
-            this.gridColumn16.Width = 120;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Артикул";
-            this.gridColumn17.FieldName = "articul";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.OptionsColumn.FixedWidth = true;
-            this.gridColumn17.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn17.OptionsFilter.AllowFilter = false;
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 15;
-            this.gridColumn17.Width = 120;
             // 
             // gcPartNaklList
             // 
@@ -2446,6 +3102,13 @@
             this.panelControl3.Size = new System.Drawing.Size(1558, 77);
             this.panelControl3.TabIndex = 27;
             // 
+            // tbPszRpcNom
+            // 
+            this.tbPszRpcNom.Location = new System.Drawing.Point(662, 38);
+            this.tbPszRpcNom.Name = "tbPszRpcNom";
+            this.tbPszRpcNom.Size = new System.Drawing.Size(42, 21);
+            this.tbPszRpcNom.TabIndex = 34;
+            // 
             // mtbRzuDataR
             // 
             this.mtbRzuDataR.Location = new System.Drawing.Point(581, 37);
@@ -2459,9 +3122,9 @@
             this.label64.AutoSize = true;
             this.label64.Location = new System.Drawing.Point(518, 32);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(57, 26);
+            this.label64.Size = new System.Drawing.Size(48, 26);
             this.label64.TabIndex = 40;
-            this.label64.Text = "Дата\r\nв раскроя";
+            this.label64.Text = "Дата\r\nраскроя";
             // 
             // mtbRzuData1С
             // 
@@ -2625,24 +3288,19 @@
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPage1,
             this.xtraTabPage2,
-            this.xtraTabPage3});
+            this.xtraTabPage3,
+            this.xtraTabPage4});
             this.xtraTabControl1.Selecting += new DevExpress.XtraTab.TabPageCancelEventHandler(this.xtraTabControl1_Selecting);
             // 
-            // gridColumn41
+            // gridColumn57
             // 
-            this.gridColumn41.Caption = "Склад отгр ДО";
-            this.gridColumn41.FieldName = "skl_otgr_b";
-            this.gridColumn41.Name = "gridColumn41";
-            this.gridColumn41.Visible = true;
-            this.gridColumn41.VisibleIndex = 7;
-            this.gridColumn41.Width = 61;
-            // 
-            // tbPszRpcNom
-            // 
-            this.tbPszRpcNom.Location = new System.Drawing.Point(662, 38);
-            this.tbPszRpcNom.Name = "tbPszRpcNom";
-            this.tbPszRpcNom.Size = new System.Drawing.Size(42, 21);
-            this.tbPszRpcNom.TabIndex = 34;
+            this.gridColumn57.Caption = "Отгр. на склад";
+            this.gridColumn57.FieldName = "KolGI";
+            this.gridColumn57.Name = "gridColumn57";
+            this.gridColumn57.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] {
+            new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "KolGI", "Отгр. на скл.: {0:0.##}")});
+            this.gridColumn57.Visible = true;
+            this.gridColumn57.VisibleIndex = 8;
             // 
             // CardByNom
             // 
@@ -2661,6 +3319,27 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbEskiz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsOtdelkaList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsRasInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProizvCombIzdSP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsProizvCombIzdVZP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsFurnZayavInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1.Panel2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridSplitContainer1)).EndInit();
+            this.gridSplitContainer1.ResumeLayout(false);
+            this.xtraTabPage4.ResumeLayout(false);
+            this.xtraTabPage4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gcProizvCombIzdSP)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView7)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.panelControl7.ResumeLayout(false);
@@ -2675,23 +3354,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
             this.panelControl5.ResumeLayout(false);
             this.panelControl5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl4)).EndInit();
             this.panelControl4.ResumeLayout(false);
             this.panelControl4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gcNaklList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gcPartNaklList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPartNaklList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
             this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bsIsChip)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsFurnZayavInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2723,8 +3395,149 @@
         private System.Windows.Forms.BindingSource bsRasInfo;
         private System.Windows.Forms.BindingSource bsOtdelkaList;
         private System.Windows.Forms.PictureBox pbEskiz;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox tbPsaKodZv2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tbPsaKodZv1;
+        private System.Windows.Forms.TextBox tbSostPoln;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox tbArtGrup;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.TextBox psaSezName;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.TextBox tbPsaYear;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox tbPsaTbID;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbPsaMenName;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox tbPsaNN;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox tbPsaNomZad;
+        private System.Windows.Forms.BindingSource bsPartNaklList;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
+        private System.Windows.Forms.TextBox tbRzuKol;
+        private System.Windows.Forms.BindingSource bsIsChip;
+        private System.Windows.Forms.CheckBox cbIsChip;
+        private System.Windows.Forms.BindingSource bsFurnZayavInfo;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.TextBox tbPsaPsaID;
+        private System.Windows.Forms.Label label66;
+        private System.Windows.Forms.TextBox tbPsaKombIzd;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.TextBox tbPsaKombOsn;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TextBox tbPsaPsaIDOsn;
+        private System.Windows.Forms.Label label68;
+        private System.Windows.Forms.TextBox tbArtTradeMark;
+        private System.Windows.Forms.BindingSource bsProizvCombIzdVZP;
+        private System.Windows.Forms.BindingSource bsProizvCombIzdSP;
+        private DevExpress.XtraGrid.GridSplitContainer gridSplitContainer1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label69;
+        private DevExpress.XtraGrid.GridControl gcProizvCombIzdSP;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn47;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn48;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn49;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn50;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn51;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn52;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn53;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn54;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn55;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn56;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn58;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn74;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn75;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn76;
+        private DevExpress.XtraGrid.GridControl gridControl4;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn59;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn60;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn61;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn62;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn63;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn64;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn65;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn66;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn67;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn68;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn69;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn70;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn71;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn72;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn73;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn40;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn44;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn45;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn46;
+        private DevExpress.XtraGrid.GridControl gcNaklList;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
+        private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private FurnitZayavView furnitZayavViewFurnit;
+        private FurnitZayavView furnitZayavViewUpak;
+        private DevExpress.XtraEditors.PanelControl panelControl7;
+        private System.Windows.Forms.TextBox tbDatZayav;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Label label61;
+        private DevExpress.XtraEditors.PanelControl panelControl2;
+        private System.Windows.Forms.TextBox tbData_f_z_u;
+        private System.Windows.Forms.TextBox tbData_f_o_u;
+        private System.Windows.Forms.TextBox tbData_f_z;
+        private System.Windows.Forms.TextBox tbData_f_o;
+        private System.Windows.Forms.MaskedTextBox mtbData_cd;
+        private System.Windows.Forms.MaskedTextBox mtbData_zeh;
+        private System.Windows.Forms.TextBox tbOtgrStat;
+        private System.Windows.Forms.TextBox tbIs_got;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox tbUZSobrStat;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox tbUZSozdStat;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.TextBox tbUpakZayav;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.Button btnZayavFurnPrint;
+        private System.Windows.Forms.TextBox tbFZSobrStat;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.TextBox tbFZSozdStat;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.TextBox tbFurnZayav;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Button btnFullKKPrint;
+        private System.Windows.Forms.TextBox tbUpakKKStat;
+        private System.Windows.Forms.TextBox tbFurnKKStat;
+        private System.Windows.Forms.Button btnUpakKKPrint;
+        private System.Windows.Forms.Button btnFurnKKPrint;
+        private System.Windows.Forms.Label label18;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private System.Windows.Forms.Button button4;
@@ -2732,6 +3545,12 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label52;
         private DevExpress.XtraEditors.PanelControl panelControl5;
+        private System.Windows.Forms.CheckBox cbRzuStirFact;
+        private System.Windows.Forms.CheckBox cbPszStirPlan;
+        private System.Windows.Forms.CheckBox cbRzuVishFact;
+        private System.Windows.Forms.CheckBox cbPszVishPlan;
+        private System.Windows.Forms.CheckBox cbRzuPrintFact;
+        private System.Windows.Forms.CheckBox cbPszPrintPlan;
         private System.Windows.Forms.MaskedTextBox mtbRzuDataPrCd;
         private System.Windows.Forms.MaskedTextBox mtbRzuDataVCd;
         private System.Windows.Forms.MaskedTextBox mtbRzuDataPrKm;
@@ -2765,78 +3584,8 @@
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label36;
         private System.Windows.Forms.Label label32;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
         private System.Windows.Forms.Label label31;
         private DevExpress.XtraEditors.PanelControl panelControl4;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnPrintNaklXtraReport;
-        private System.Windows.Forms.Button btnNaklAbsent;
-        private System.Windows.Forms.Button btnNaklPart;
-        private System.Windows.Forms.Button btnNaklPrint;
-        private DevExpress.XtraGrid.GridControl gcNaklList;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn13;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
-        private System.Windows.Forms.Label label24;
-        private DevExpress.XtraEditors.PanelControl panelControl3;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox tbPsaKodZv2;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox tbPsaKodZv1;
-        private System.Windows.Forms.TextBox tbSostPoln;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox tbArtGrup;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox psaSezName;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox tbPsaYear;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox tbPsaTbID;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox tbPsaMenName;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox tbPsaNN;
-        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.TextBox tbPsaNomZad;
-        private System.Windows.Forms.BindingSource bsPartNaklList;
         private DevExpress.XtraGrid.GridControl gcPartNaklList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
@@ -2855,67 +3604,41 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn37;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn39;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
-        private System.Windows.Forms.TextBox tbRzuKol;
-        private System.Windows.Forms.BindingSource bsIsChip;
-        private System.Windows.Forms.CheckBox cbIsChip;
-        private System.Windows.Forms.CheckBox cbPszPrintPlan;
-        private System.Windows.Forms.CheckBox cbRzuVishFact;
-        private System.Windows.Forms.CheckBox cbPszVishPlan;
-        private System.Windows.Forms.CheckBox cbRzuPrintFact;
-        private System.Windows.Forms.CheckBox cbRzuStirFact;
-        private System.Windows.Forms.CheckBox cbPszStirPlan;
-        private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.Button btnFullKKPrint;
-        private System.Windows.Forms.TextBox tbUpakKKStat;
-        private System.Windows.Forms.TextBox tbFurnKKStat;
-        private System.Windows.Forms.Button btnUpakKKPrint;
-        private System.Windows.Forms.Button btnFurnKKPrint;
-        private System.Windows.Forms.TextBox tbUZSobrStat;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.TextBox tbUZSozdStat;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.TextBox tbUpakZayav;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Button btnZayavFurnPrint;
-        private System.Windows.Forms.TextBox tbFZSobrStat;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.TextBox tbFZSozdStat;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.TextBox tbFurnZayav;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Label label59;
-        private DevExpress.XtraEditors.PanelControl panelControl7;
-        private System.Windows.Forms.TextBox tbOtgrStat;
-        private System.Windows.Forms.TextBox tbIs_got;
-        private System.Windows.Forms.Button button10;
-        private FurnitZayavView furnitZayavViewFurnit;
-        private FurnitZayavView furnitZayavViewUpak;
-        private System.Windows.Forms.BindingSource bsFurnZayavInfo;
-        private System.Windows.Forms.MaskedTextBox mtbData_cd;
-        private System.Windows.Forms.MaskedTextBox mtbData_zeh;
-        private System.Windows.Forms.TextBox tbData_f_o;
-        private System.Windows.Forms.TextBox tbData_f_z;
-        private System.Windows.Forms.TextBox tbData_f_z_u;
-        private System.Windows.Forms.TextBox tbData_f_o_u;
-        private System.Windows.Forms.TextBox tbDatZayav;
-        private System.Windows.Forms.Label label61;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.TextBox tbPsaPsaID;
-        private System.Windows.Forms.MaskedTextBox mtbRzuData1С;
-        private System.Windows.Forms.Label label63;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn40;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn44;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn45;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn46;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPrintNaklXtraReport;
+        private System.Windows.Forms.Button btnNaklAbsent;
+        private System.Windows.Forms.Button btnNaklPart;
+        private System.Windows.Forms.Button btnNaklPrint;
+        private System.Windows.Forms.Label label24;
+        private DevExpress.XtraEditors.PanelControl panelControl3;
+        private System.Windows.Forms.TextBox tbPszRpcNom;
         private System.Windows.Forms.MaskedTextBox mtbRzuDataR;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.TextBox tbPszRpcNom;
+        private System.Windows.Forms.MaskedTextBox mtbRzuData1С;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
+        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
+        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label30;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView7;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn57;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn77;
+        private DevExpress.XtraEditors.SimpleButton sbProizvCombIzdSP;
     }
 }
