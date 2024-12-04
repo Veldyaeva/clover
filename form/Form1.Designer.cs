@@ -70,68 +70,12 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
             this.dataGridView3 = new System.Windows.Forms.DataGridView();
-            this.kodDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodpodrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodproizvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.n1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.razrydDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.specDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oborDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sek12DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sek7DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sek5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodobDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sqlpraddDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dateaddDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kompnameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrDateDelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrCompDelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrDateAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nrCompAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nchDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.n1DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.razrydDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.specDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oborDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView5 = new System.Windows.Forms.DataGridView();
-            this.kodDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kodoDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nchDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.n1DataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sebsDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.razrydDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.specDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oborDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridView6 = new System.Windows.Forms.DataGridView();
-            this.kodDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekpDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekstraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekptampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
             this.aproovmentBtn = new System.Windows.Forms.Button();
@@ -157,33 +101,33 @@
             this.grupDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.articulDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.poDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvyazDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataobnDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekshvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvyaz3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.arhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvyazoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvyaz6DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz7DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvyaz10DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz12DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvyaz10DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvyaz6DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekkrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.slognDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kommentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dizDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.constrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.poDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvyaz3DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz62DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz71DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz72DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvyazoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekvyazDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sebDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.stDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.po1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kommentDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.datasozdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dizDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.constrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataobnDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz70DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sekkrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.slognDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sekvyaz14DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.arhDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.sqlpraddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dateaddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.kompnameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -192,6 +136,72 @@
             this.annIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.annDateAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.annCompAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.n1DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.razrydDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodproizvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodpodrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oborDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodobDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sek12DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sek7DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sek5DataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sqlpraddDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateaddDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kompnameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrDateDelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrCompDelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrDateAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nrCompAddDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodDataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekpDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekptampDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekvDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekstraDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.razrydDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nchDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.n1DataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oborDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodoDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.razrydDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.textDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sekDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.kodDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nchDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.n1DataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sebsDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.specDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oborDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
@@ -421,33 +431,33 @@
             this.grupDataGridViewTextBoxColumn,
             this.articulDataGridViewTextBoxColumn,
             this.modDataGridViewTextBoxColumn,
-            this.poDataGridViewTextBoxColumn,
+            this.sekDataGridViewTextBoxColumn,
+            this.sekvyazDataGridViewTextBoxColumn,
+            this.dataobnDataGridViewTextBoxColumn,
             this.sekshvDataGridViewTextBoxColumn,
-            this.sekvyaz3DataGridViewTextBoxColumn,
+            this.arhDataGridViewTextBoxColumn,
+            this.sekvyazoDataGridViewTextBoxColumn,
             this.sekvyaz5DataGridViewTextBoxColumn,
-            this.sekvyaz6DataGridViewTextBoxColumn,
             this.sekvyaz7DataGridViewTextBoxColumn,
-            this.sekvyaz10DataGridViewTextBoxColumn,
             this.sekvyaz12DataGridViewTextBoxColumn,
+            this.sekvyaz10DataGridViewTextBoxColumn,
+            this.sekvyaz6DataGridViewTextBoxColumn,
+            this.sekkrDataGridViewTextBoxColumn,
+            this.slognDataGridViewTextBoxColumn,
+            this.kommentDataGridViewTextBoxColumn,
+            this.dizDataGridViewTextBoxColumn,
+            this.constrDataGridViewTextBoxColumn,
+            this.poDataGridViewTextBoxColumn,
+            this.sekvyaz3DataGridViewTextBoxColumn,
             this.sekvyaz62DataGridViewTextBoxColumn,
             this.sekvyaz71DataGridViewTextBoxColumn,
             this.sekvyaz72DataGridViewTextBoxColumn,
-            this.sekvyazoDataGridViewTextBoxColumn,
-            this.sekvyazDataGridViewTextBoxColumn,
-            this.sekDataGridViewTextBoxColumn,
             this.sebDataGridViewTextBoxColumn,
             this.stDataGridViewTextBoxColumn,
             this.po1DataGridViewTextBoxColumn,
-            this.kommentDataGridViewTextBoxColumn,
             this.datasozdDataGridViewTextBoxColumn,
-            this.dizDataGridViewTextBoxColumn,
-            this.constrDataGridViewTextBoxColumn,
-            this.dataobnDataGridViewTextBoxColumn,
             this.sekvyaz70DataGridViewTextBoxColumn,
-            this.sekkrDataGridViewTextBoxColumn,
-            this.slognDataGridViewTextBoxColumn,
             this.sekvyaz14DataGridViewTextBoxColumn,
-            this.arhDataGridViewTextBoxColumn,
             this.sqlpraddDataGridViewTextBoxColumn,
             this.dateaddDataGridViewTextBoxColumn,
             this.kompnameDataGridViewTextBoxColumn,
@@ -577,7 +587,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.49275F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85.50725F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 99F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 246F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(767, 789);
@@ -596,14 +606,14 @@
             this.stackPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.stackPanel2.Location = new System.Drawing.Point(3, 3);
             this.stackPanel2.Name = "stackPanel2";
-            this.stackPanel2.Size = new System.Drawing.Size(761, 40);
+            this.stackPanel2.Size = new System.Drawing.Size(761, 34);
             this.stackPanel2.TabIndex = 0;
             this.stackPanel2.UseSkinIndents = true;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 13);
+            this.label2.Location = new System.Drawing.Point(14, 10);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 0;
@@ -611,7 +621,7 @@
             // 
             // ModelTextBox
             // 
-            this.ModelTextBox.Location = new System.Drawing.Point(63, 9);
+            this.ModelTextBox.Location = new System.Drawing.Point(63, 6);
             this.ModelTextBox.Name = "ModelTextBox";
             this.ModelTextBox.Size = new System.Drawing.Size(84, 21);
             this.ModelTextBox.TabIndex = 4;
@@ -619,7 +629,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 13);
+            this.label3.Location = new System.Drawing.Point(152, 10);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 1;
@@ -627,7 +637,7 @@
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(236, 9);
+            this.NameTextBox.Location = new System.Drawing.Point(236, 6);
             this.NameTextBox.Name = "NameTextBox";
             this.NameTextBox.Size = new System.Drawing.Size(100, 21);
             this.NameTextBox.TabIndex = 5;
@@ -635,7 +645,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(341, 7);
+            this.label4.Location = new System.Drawing.Point(341, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 26);
             this.label4.TabIndex = 2;
@@ -643,7 +653,7 @@
             // 
             // SecTimeTextBox
             // 
-            this.SecTimeTextBox.Location = new System.Drawing.Point(429, 9);
+            this.SecTimeTextBox.Location = new System.Drawing.Point(429, 6);
             this.SecTimeTextBox.Name = "SecTimeTextBox";
             this.SecTimeTextBox.Size = new System.Drawing.Size(36, 21);
             this.SecTimeTextBox.TabIndex = 6;
@@ -651,7 +661,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(470, 13);
+            this.label5.Location = new System.Drawing.Point(470, 10);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 3;
@@ -659,7 +669,7 @@
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(557, 9);
+            this.dateCreate.Location = new System.Drawing.Point(557, 6);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(106, 21);
             this.dateCreate.TabIndex = 7;
@@ -669,24 +679,24 @@
             this.dataGridView3.AutoGenerateColumns = false;
             this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView3.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodDataGridViewTextBoxColumn1,
-            this.kodoDataGridViewTextBoxColumn,
-            this.kodpodrDataGridViewTextBoxColumn,
-            this.kodproizvDataGridViewTextBoxColumn,
+            this.nDataGridViewTextBoxColumn,
+            this.n1DataGridViewTextBoxColumn,
+            this.razrydDataGridViewTextBoxColumn,
             this.textDataGridViewTextBoxColumn,
             this.sekDataGridViewTextBoxColumn1,
-            this.sebDataGridViewTextBoxColumn1,
-            this.nDataGridViewTextBoxColumn,
-            this.nchDataGridViewTextBoxColumn,
-            this.n1DataGridViewTextBoxColumn,
-            this.sebsDataGridViewTextBoxColumn,
-            this.razrydDataGridViewTextBoxColumn,
             this.specDataGridViewTextBoxColumn,
+            this.kodproizvDataGridViewTextBoxColumn,
+            this.kodpodrDataGridViewTextBoxColumn,
             this.oborDataGridViewTextBoxColumn,
+            this.kodDataGridViewTextBoxColumn1,
+            this.kodoDataGridViewTextBoxColumn,
+            this.kodobDataGridViewTextBoxColumn,
+            this.sebDataGridViewTextBoxColumn1,
+            this.nchDataGridViewTextBoxColumn,
+            this.sebsDataGridViewTextBoxColumn,
             this.sek12DataGridViewTextBoxColumn,
             this.sek7DataGridViewTextBoxColumn,
             this.sek5DataGridViewTextBoxColumn,
-            this.kodobDataGridViewTextBoxColumn,
             this.sqlpraddDataGridViewTextBoxColumn1,
             this.dateaddDataGridViewTextBoxColumn1,
             this.kompnameDataGridViewTextBoxColumn1,
@@ -697,167 +707,10 @@
             this.nrCompAddDataGridViewTextBoxColumn});
             this.dataGridView3.DataSource = this.normraszBindingSource;
             this.dataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView3.Location = new System.Drawing.Point(3, 49);
+            this.dataGridView3.Location = new System.Drawing.Point(3, 43);
             this.dataGridView3.Name = "dataGridView3";
-            this.dataGridView3.Size = new System.Drawing.Size(761, 268);
+            this.dataGridView3.Size = new System.Drawing.Size(761, 232);
             this.dataGridView3.TabIndex = 1;
-            // 
-            // kodDataGridViewTextBoxColumn1
-            // 
-            this.kodDataGridViewTextBoxColumn1.DataPropertyName = "kod";
-            this.kodDataGridViewTextBoxColumn1.HeaderText = "kod";
-            this.kodDataGridViewTextBoxColumn1.Name = "kodDataGridViewTextBoxColumn1";
-            // 
-            // kodoDataGridViewTextBoxColumn
-            // 
-            this.kodoDataGridViewTextBoxColumn.DataPropertyName = "kod_o";
-            this.kodoDataGridViewTextBoxColumn.HeaderText = "kod_o";
-            this.kodoDataGridViewTextBoxColumn.Name = "kodoDataGridViewTextBoxColumn";
-            // 
-            // kodpodrDataGridViewTextBoxColumn
-            // 
-            this.kodpodrDataGridViewTextBoxColumn.DataPropertyName = "kod_podr";
-            this.kodpodrDataGridViewTextBoxColumn.HeaderText = "kod_podr";
-            this.kodpodrDataGridViewTextBoxColumn.Name = "kodpodrDataGridViewTextBoxColumn";
-            // 
-            // kodproizvDataGridViewTextBoxColumn
-            // 
-            this.kodproizvDataGridViewTextBoxColumn.DataPropertyName = "kod_proizv";
-            this.kodproizvDataGridViewTextBoxColumn.HeaderText = "kod_proizv";
-            this.kodproizvDataGridViewTextBoxColumn.Name = "kodproizvDataGridViewTextBoxColumn";
-            // 
-            // textDataGridViewTextBoxColumn
-            // 
-            this.textDataGridViewTextBoxColumn.DataPropertyName = "text";
-            this.textDataGridViewTextBoxColumn.HeaderText = "text";
-            this.textDataGridViewTextBoxColumn.Name = "textDataGridViewTextBoxColumn";
-            // 
-            // sekDataGridViewTextBoxColumn1
-            // 
-            this.sekDataGridViewTextBoxColumn1.DataPropertyName = "sek";
-            this.sekDataGridViewTextBoxColumn1.HeaderText = "sek";
-            this.sekDataGridViewTextBoxColumn1.Name = "sekDataGridViewTextBoxColumn1";
-            // 
-            // sebDataGridViewTextBoxColumn1
-            // 
-            this.sebDataGridViewTextBoxColumn1.DataPropertyName = "seb";
-            this.sebDataGridViewTextBoxColumn1.HeaderText = "seb";
-            this.sebDataGridViewTextBoxColumn1.Name = "sebDataGridViewTextBoxColumn1";
-            // 
-            // nDataGridViewTextBoxColumn
-            // 
-            this.nDataGridViewTextBoxColumn.DataPropertyName = "n";
-            this.nDataGridViewTextBoxColumn.HeaderText = "n";
-            this.nDataGridViewTextBoxColumn.Name = "nDataGridViewTextBoxColumn";
-            // 
-            // nchDataGridViewTextBoxColumn
-            // 
-            this.nchDataGridViewTextBoxColumn.DataPropertyName = "n_ch";
-            this.nchDataGridViewTextBoxColumn.HeaderText = "n_ch";
-            this.nchDataGridViewTextBoxColumn.Name = "nchDataGridViewTextBoxColumn";
-            // 
-            // n1DataGridViewTextBoxColumn
-            // 
-            this.n1DataGridViewTextBoxColumn.DataPropertyName = "n1";
-            this.n1DataGridViewTextBoxColumn.HeaderText = "n1";
-            this.n1DataGridViewTextBoxColumn.Name = "n1DataGridViewTextBoxColumn";
-            // 
-            // sebsDataGridViewTextBoxColumn
-            // 
-            this.sebsDataGridViewTextBoxColumn.DataPropertyName = "seb_s";
-            this.sebsDataGridViewTextBoxColumn.HeaderText = "seb_s";
-            this.sebsDataGridViewTextBoxColumn.Name = "sebsDataGridViewTextBoxColumn";
-            // 
-            // razrydDataGridViewTextBoxColumn
-            // 
-            this.razrydDataGridViewTextBoxColumn.DataPropertyName = "razryd";
-            this.razrydDataGridViewTextBoxColumn.HeaderText = "razryd";
-            this.razrydDataGridViewTextBoxColumn.Name = "razrydDataGridViewTextBoxColumn";
-            // 
-            // specDataGridViewTextBoxColumn
-            // 
-            this.specDataGridViewTextBoxColumn.DataPropertyName = "spec";
-            this.specDataGridViewTextBoxColumn.HeaderText = "spec";
-            this.specDataGridViewTextBoxColumn.Name = "specDataGridViewTextBoxColumn";
-            // 
-            // oborDataGridViewTextBoxColumn
-            // 
-            this.oborDataGridViewTextBoxColumn.DataPropertyName = "obor";
-            this.oborDataGridViewTextBoxColumn.HeaderText = "obor";
-            this.oborDataGridViewTextBoxColumn.Name = "oborDataGridViewTextBoxColumn";
-            // 
-            // sek12DataGridViewTextBoxColumn
-            // 
-            this.sek12DataGridViewTextBoxColumn.DataPropertyName = "sek12";
-            this.sek12DataGridViewTextBoxColumn.HeaderText = "sek12";
-            this.sek12DataGridViewTextBoxColumn.Name = "sek12DataGridViewTextBoxColumn";
-            // 
-            // sek7DataGridViewTextBoxColumn
-            // 
-            this.sek7DataGridViewTextBoxColumn.DataPropertyName = "sek7";
-            this.sek7DataGridViewTextBoxColumn.HeaderText = "sek7";
-            this.sek7DataGridViewTextBoxColumn.Name = "sek7DataGridViewTextBoxColumn";
-            // 
-            // sek5DataGridViewTextBoxColumn
-            // 
-            this.sek5DataGridViewTextBoxColumn.DataPropertyName = "sek5";
-            this.sek5DataGridViewTextBoxColumn.HeaderText = "sek5";
-            this.sek5DataGridViewTextBoxColumn.Name = "sek5DataGridViewTextBoxColumn";
-            // 
-            // kodobDataGridViewTextBoxColumn
-            // 
-            this.kodobDataGridViewTextBoxColumn.DataPropertyName = "kod_ob";
-            this.kodobDataGridViewTextBoxColumn.HeaderText = "kod_ob";
-            this.kodobDataGridViewTextBoxColumn.Name = "kodobDataGridViewTextBoxColumn";
-            // 
-            // sqlpraddDataGridViewTextBoxColumn1
-            // 
-            this.sqlpraddDataGridViewTextBoxColumn1.DataPropertyName = "sql_pr_add";
-            this.sqlpraddDataGridViewTextBoxColumn1.HeaderText = "sql_pr_add";
-            this.sqlpraddDataGridViewTextBoxColumn1.Name = "sqlpraddDataGridViewTextBoxColumn1";
-            // 
-            // dateaddDataGridViewTextBoxColumn1
-            // 
-            this.dateaddDataGridViewTextBoxColumn1.DataPropertyName = "date_add";
-            this.dateaddDataGridViewTextBoxColumn1.HeaderText = "date_add";
-            this.dateaddDataGridViewTextBoxColumn1.Name = "dateaddDataGridViewTextBoxColumn1";
-            // 
-            // kompnameDataGridViewTextBoxColumn1
-            // 
-            this.kompnameDataGridViewTextBoxColumn1.DataPropertyName = "komp_name";
-            this.kompnameDataGridViewTextBoxColumn1.HeaderText = "komp_name";
-            this.kompnameDataGridViewTextBoxColumn1.Name = "kompnameDataGridViewTextBoxColumn1";
-            // 
-            // nrIDDataGridViewTextBoxColumn
-            // 
-            this.nrIDDataGridViewTextBoxColumn.DataPropertyName = "nrID";
-            this.nrIDDataGridViewTextBoxColumn.HeaderText = "nrID";
-            this.nrIDDataGridViewTextBoxColumn.Name = "nrIDDataGridViewTextBoxColumn";
-            this.nrIDDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nrDateDelDataGridViewTextBoxColumn
-            // 
-            this.nrDateDelDataGridViewTextBoxColumn.DataPropertyName = "nrDateDel";
-            this.nrDateDelDataGridViewTextBoxColumn.HeaderText = "nrDateDel";
-            this.nrDateDelDataGridViewTextBoxColumn.Name = "nrDateDelDataGridViewTextBoxColumn";
-            // 
-            // nrCompDelDataGridViewTextBoxColumn
-            // 
-            this.nrCompDelDataGridViewTextBoxColumn.DataPropertyName = "nrCompDel";
-            this.nrCompDelDataGridViewTextBoxColumn.HeaderText = "nrCompDel";
-            this.nrCompDelDataGridViewTextBoxColumn.Name = "nrCompDelDataGridViewTextBoxColumn";
-            // 
-            // nrDateAddDataGridViewTextBoxColumn
-            // 
-            this.nrDateAddDataGridViewTextBoxColumn.DataPropertyName = "nrDateAdd";
-            this.nrDateAddDataGridViewTextBoxColumn.HeaderText = "nrDateAdd";
-            this.nrDateAddDataGridViewTextBoxColumn.Name = "nrDateAddDataGridViewTextBoxColumn";
-            // 
-            // nrCompAddDataGridViewTextBoxColumn
-            // 
-            this.nrCompAddDataGridViewTextBoxColumn.DataPropertyName = "nrCompAdd";
-            this.nrCompAddDataGridViewTextBoxColumn.HeaderText = "nrCompAdd";
-            this.nrCompAddDataGridViewTextBoxColumn.Name = "nrCompAddDataGridViewTextBoxColumn";
             // 
             // normraszBindingSource
             // 
@@ -869,104 +722,30 @@
             this.dataGridView4.AutoGenerateColumns = false;
             this.dataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView4.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idDataGridViewTextBoxColumn,
-            this.kodDataGridViewTextBoxColumn2,
             this.kodoDataGridViewTextBoxColumn1,
+            this.Column1,
+            this.idDataGridViewTextBoxColumn,
+            this.razrydDataGridViewTextBoxColumn1,
             this.textDataGridViewTextBoxColumn1,
             this.sekDataGridViewTextBoxColumn2,
+            this.Column2,
+            this.Column3,
+            this.Column4,
+            this.Column5,
+            this.kodDataGridViewTextBoxColumn2,
             this.sebDataGridViewTextBoxColumn2,
             this.nDataGridViewTextBoxColumn1,
             this.nchDataGridViewTextBoxColumn1,
             this.n1DataGridViewTextBoxColumn1,
             this.sebsDataGridViewTextBoxColumn1,
-            this.razrydDataGridViewTextBoxColumn1,
             this.specDataGridViewTextBoxColumn1,
             this.oborDataGridViewTextBoxColumn1});
             this.dataGridView4.DataSource = this.normraskBindingSource;
             this.dataGridView4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView4.Location = new System.Drawing.Point(3, 323);
+            this.dataGridView4.Location = new System.Drawing.Point(3, 281);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.Size = new System.Drawing.Size(761, 93);
             this.dataGridView4.TabIndex = 2;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
-            this.idDataGridViewTextBoxColumn.HeaderText = "id";
-            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            this.idDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kodDataGridViewTextBoxColumn2
-            // 
-            this.kodDataGridViewTextBoxColumn2.DataPropertyName = "kod";
-            this.kodDataGridViewTextBoxColumn2.HeaderText = "kod";
-            this.kodDataGridViewTextBoxColumn2.Name = "kodDataGridViewTextBoxColumn2";
-            // 
-            // kodoDataGridViewTextBoxColumn1
-            // 
-            this.kodoDataGridViewTextBoxColumn1.DataPropertyName = "kod_o";
-            this.kodoDataGridViewTextBoxColumn1.HeaderText = "kod_o";
-            this.kodoDataGridViewTextBoxColumn1.Name = "kodoDataGridViewTextBoxColumn1";
-            // 
-            // textDataGridViewTextBoxColumn1
-            // 
-            this.textDataGridViewTextBoxColumn1.DataPropertyName = "text";
-            this.textDataGridViewTextBoxColumn1.HeaderText = "text";
-            this.textDataGridViewTextBoxColumn1.Name = "textDataGridViewTextBoxColumn1";
-            // 
-            // sekDataGridViewTextBoxColumn2
-            // 
-            this.sekDataGridViewTextBoxColumn2.DataPropertyName = "sek";
-            this.sekDataGridViewTextBoxColumn2.HeaderText = "sek";
-            this.sekDataGridViewTextBoxColumn2.Name = "sekDataGridViewTextBoxColumn2";
-            // 
-            // sebDataGridViewTextBoxColumn2
-            // 
-            this.sebDataGridViewTextBoxColumn2.DataPropertyName = "seb";
-            this.sebDataGridViewTextBoxColumn2.HeaderText = "seb";
-            this.sebDataGridViewTextBoxColumn2.Name = "sebDataGridViewTextBoxColumn2";
-            // 
-            // nDataGridViewTextBoxColumn1
-            // 
-            this.nDataGridViewTextBoxColumn1.DataPropertyName = "n";
-            this.nDataGridViewTextBoxColumn1.HeaderText = "n";
-            this.nDataGridViewTextBoxColumn1.Name = "nDataGridViewTextBoxColumn1";
-            // 
-            // nchDataGridViewTextBoxColumn1
-            // 
-            this.nchDataGridViewTextBoxColumn1.DataPropertyName = "n_ch";
-            this.nchDataGridViewTextBoxColumn1.HeaderText = "n_ch";
-            this.nchDataGridViewTextBoxColumn1.Name = "nchDataGridViewTextBoxColumn1";
-            // 
-            // n1DataGridViewTextBoxColumn1
-            // 
-            this.n1DataGridViewTextBoxColumn1.DataPropertyName = "n1";
-            this.n1DataGridViewTextBoxColumn1.HeaderText = "n1";
-            this.n1DataGridViewTextBoxColumn1.Name = "n1DataGridViewTextBoxColumn1";
-            // 
-            // sebsDataGridViewTextBoxColumn1
-            // 
-            this.sebsDataGridViewTextBoxColumn1.DataPropertyName = "seb_s";
-            this.sebsDataGridViewTextBoxColumn1.HeaderText = "seb_s";
-            this.sebsDataGridViewTextBoxColumn1.Name = "sebsDataGridViewTextBoxColumn1";
-            // 
-            // razrydDataGridViewTextBoxColumn1
-            // 
-            this.razrydDataGridViewTextBoxColumn1.DataPropertyName = "razryd";
-            this.razrydDataGridViewTextBoxColumn1.HeaderText = "razryd";
-            this.razrydDataGridViewTextBoxColumn1.Name = "razrydDataGridViewTextBoxColumn1";
-            // 
-            // specDataGridViewTextBoxColumn1
-            // 
-            this.specDataGridViewTextBoxColumn1.DataPropertyName = "spec";
-            this.specDataGridViewTextBoxColumn1.HeaderText = "spec";
-            this.specDataGridViewTextBoxColumn1.Name = "specDataGridViewTextBoxColumn1";
-            // 
-            // oborDataGridViewTextBoxColumn1
-            // 
-            this.oborDataGridViewTextBoxColumn1.DataPropertyName = "obor";
-            this.oborDataGridViewTextBoxColumn1.HeaderText = "obor";
-            this.oborDataGridViewTextBoxColumn1.Name = "oborDataGridViewTextBoxColumn1";
             // 
             // normraskBindingSource
             // 
@@ -978,96 +757,29 @@
             this.dataGridView5.AutoGenerateColumns = false;
             this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView5.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.kodDataGridViewTextBoxColumn3,
             this.kodoDataGridViewTextBoxColumn2,
+            this.Column6,
+            this.razrydDataGridViewTextBoxColumn2,
             this.textDataGridViewTextBoxColumn2,
             this.sekDataGridViewTextBoxColumn3,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.kodDataGridViewTextBoxColumn3,
             this.sebDataGridViewTextBoxColumn3,
             this.nDataGridViewTextBoxColumn2,
             this.nchDataGridViewTextBoxColumn2,
             this.n1DataGridViewTextBoxColumn2,
             this.sebsDataGridViewTextBoxColumn2,
-            this.razrydDataGridViewTextBoxColumn2,
             this.specDataGridViewTextBoxColumn2,
             this.oborDataGridViewTextBoxColumn2});
             this.dataGridView5.DataSource = this.normkontBindingSource;
             this.dataGridView5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView5.Location = new System.Drawing.Point(3, 422);
+            this.dataGridView5.Location = new System.Drawing.Point(3, 380);
             this.dataGridView5.Name = "dataGridView5";
-            this.dataGridView5.Size = new System.Drawing.Size(761, 49);
+            this.dataGridView5.Size = new System.Drawing.Size(761, 91);
             this.dataGridView5.TabIndex = 3;
-            // 
-            // kodDataGridViewTextBoxColumn3
-            // 
-            this.kodDataGridViewTextBoxColumn3.DataPropertyName = "kod";
-            this.kodDataGridViewTextBoxColumn3.HeaderText = "kod";
-            this.kodDataGridViewTextBoxColumn3.Name = "kodDataGridViewTextBoxColumn3";
-            // 
-            // kodoDataGridViewTextBoxColumn2
-            // 
-            this.kodoDataGridViewTextBoxColumn2.DataPropertyName = "kod_o";
-            this.kodoDataGridViewTextBoxColumn2.HeaderText = "kod_o";
-            this.kodoDataGridViewTextBoxColumn2.Name = "kodoDataGridViewTextBoxColumn2";
-            // 
-            // textDataGridViewTextBoxColumn2
-            // 
-            this.textDataGridViewTextBoxColumn2.DataPropertyName = "text";
-            this.textDataGridViewTextBoxColumn2.HeaderText = "text";
-            this.textDataGridViewTextBoxColumn2.Name = "textDataGridViewTextBoxColumn2";
-            // 
-            // sekDataGridViewTextBoxColumn3
-            // 
-            this.sekDataGridViewTextBoxColumn3.DataPropertyName = "sek";
-            this.sekDataGridViewTextBoxColumn3.HeaderText = "sek";
-            this.sekDataGridViewTextBoxColumn3.Name = "sekDataGridViewTextBoxColumn3";
-            // 
-            // sebDataGridViewTextBoxColumn3
-            // 
-            this.sebDataGridViewTextBoxColumn3.DataPropertyName = "seb";
-            this.sebDataGridViewTextBoxColumn3.HeaderText = "seb";
-            this.sebDataGridViewTextBoxColumn3.Name = "sebDataGridViewTextBoxColumn3";
-            // 
-            // nDataGridViewTextBoxColumn2
-            // 
-            this.nDataGridViewTextBoxColumn2.DataPropertyName = "n";
-            this.nDataGridViewTextBoxColumn2.HeaderText = "n";
-            this.nDataGridViewTextBoxColumn2.Name = "nDataGridViewTextBoxColumn2";
-            // 
-            // nchDataGridViewTextBoxColumn2
-            // 
-            this.nchDataGridViewTextBoxColumn2.DataPropertyName = "n_ch";
-            this.nchDataGridViewTextBoxColumn2.HeaderText = "n_ch";
-            this.nchDataGridViewTextBoxColumn2.Name = "nchDataGridViewTextBoxColumn2";
-            // 
-            // n1DataGridViewTextBoxColumn2
-            // 
-            this.n1DataGridViewTextBoxColumn2.DataPropertyName = "n1";
-            this.n1DataGridViewTextBoxColumn2.HeaderText = "n1";
-            this.n1DataGridViewTextBoxColumn2.Name = "n1DataGridViewTextBoxColumn2";
-            // 
-            // sebsDataGridViewTextBoxColumn2
-            // 
-            this.sebsDataGridViewTextBoxColumn2.DataPropertyName = "seb_s";
-            this.sebsDataGridViewTextBoxColumn2.HeaderText = "seb_s";
-            this.sebsDataGridViewTextBoxColumn2.Name = "sebsDataGridViewTextBoxColumn2";
-            // 
-            // razrydDataGridViewTextBoxColumn2
-            // 
-            this.razrydDataGridViewTextBoxColumn2.DataPropertyName = "razryd";
-            this.razrydDataGridViewTextBoxColumn2.HeaderText = "razryd";
-            this.razrydDataGridViewTextBoxColumn2.Name = "razrydDataGridViewTextBoxColumn2";
-            // 
-            // specDataGridViewTextBoxColumn2
-            // 
-            this.specDataGridViewTextBoxColumn2.DataPropertyName = "spec";
-            this.specDataGridViewTextBoxColumn2.HeaderText = "spec";
-            this.specDataGridViewTextBoxColumn2.Name = "specDataGridViewTextBoxColumn2";
-            // 
-            // oborDataGridViewTextBoxColumn2
-            // 
-            this.oborDataGridViewTextBoxColumn2.DataPropertyName = "obor";
-            this.oborDataGridViewTextBoxColumn2.HeaderText = "obor";
-            this.oborDataGridViewTextBoxColumn2.Name = "oborDataGridViewTextBoxColumn2";
             // 
             // normkontBindingSource
             // 
@@ -1081,45 +793,15 @@
             this.dataGridView6.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.kodDataGridViewTextBoxColumn4,
             this.sekpDataGridViewTextBoxColumn,
+            this.sekptampDataGridViewTextBoxColumn,
             this.sekvDataGridViewTextBoxColumn,
-            this.sekstraDataGridViewTextBoxColumn,
-            this.sekptampDataGridViewTextBoxColumn});
+            this.sekstraDataGridViewTextBoxColumn});
             this.dataGridView6.DataSource = this.normdopobrBindingSource;
             this.dataGridView6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridView6.Location = new System.Drawing.Point(3, 477);
             this.dataGridView6.Name = "dataGridView6";
             this.dataGridView6.Size = new System.Drawing.Size(761, 62);
             this.dataGridView6.TabIndex = 4;
-            // 
-            // kodDataGridViewTextBoxColumn4
-            // 
-            this.kodDataGridViewTextBoxColumn4.DataPropertyName = "kod";
-            this.kodDataGridViewTextBoxColumn4.HeaderText = "kod";
-            this.kodDataGridViewTextBoxColumn4.Name = "kodDataGridViewTextBoxColumn4";
-            // 
-            // sekpDataGridViewTextBoxColumn
-            // 
-            this.sekpDataGridViewTextBoxColumn.DataPropertyName = "sek_p";
-            this.sekpDataGridViewTextBoxColumn.HeaderText = "sek_p";
-            this.sekpDataGridViewTextBoxColumn.Name = "sekpDataGridViewTextBoxColumn";
-            // 
-            // sekvDataGridViewTextBoxColumn
-            // 
-            this.sekvDataGridViewTextBoxColumn.DataPropertyName = "sek_v";
-            this.sekvDataGridViewTextBoxColumn.HeaderText = "sek_v";
-            this.sekvDataGridViewTextBoxColumn.Name = "sekvDataGridViewTextBoxColumn";
-            // 
-            // sekstraDataGridViewTextBoxColumn
-            // 
-            this.sekstraDataGridViewTextBoxColumn.DataPropertyName = "sek_stra";
-            this.sekstraDataGridViewTextBoxColumn.HeaderText = "sek_stra";
-            this.sekstraDataGridViewTextBoxColumn.Name = "sekstraDataGridViewTextBoxColumn";
-            // 
-            // sekptampDataGridViewTextBoxColumn
-            // 
-            this.sekptampDataGridViewTextBoxColumn.DataPropertyName = "sek_p_tamp";
-            this.sekptampDataGridViewTextBoxColumn.HeaderText = "sek_p_tamp";
-            this.sekptampDataGridViewTextBoxColumn.Name = "sekptampDataGridViewTextBoxColumn";
             // 
             // normdopobrBindingSource
             // 
@@ -1291,26 +973,122 @@
             // kodDataGridViewTextBoxColumn
             // 
             this.kodDataGridViewTextBoxColumn.DataPropertyName = "kod";
-            this.kodDataGridViewTextBoxColumn.HeaderText = "kod";
+            this.kodDataGridViewTextBoxColumn.HeaderText = "код";
             this.kodDataGridViewTextBoxColumn.Name = "kodDataGridViewTextBoxColumn";
             // 
             // grupDataGridViewTextBoxColumn
             // 
             this.grupDataGridViewTextBoxColumn.DataPropertyName = "grup";
-            this.grupDataGridViewTextBoxColumn.HeaderText = "grup";
+            this.grupDataGridViewTextBoxColumn.HeaderText = "группа";
             this.grupDataGridViewTextBoxColumn.Name = "grupDataGridViewTextBoxColumn";
             // 
             // articulDataGridViewTextBoxColumn
             // 
             this.articulDataGridViewTextBoxColumn.DataPropertyName = "articul";
-            this.articulDataGridViewTextBoxColumn.HeaderText = "articul";
+            this.articulDataGridViewTextBoxColumn.HeaderText = "артикул";
             this.articulDataGridViewTextBoxColumn.Name = "articulDataGridViewTextBoxColumn";
             // 
             // modDataGridViewTextBoxColumn
             // 
             this.modDataGridViewTextBoxColumn.DataPropertyName = "mod";
-            this.modDataGridViewTextBoxColumn.HeaderText = "mod";
+            this.modDataGridViewTextBoxColumn.HeaderText = "модель";
             this.modDataGridViewTextBoxColumn.Name = "modDataGridViewTextBoxColumn";
+            // 
+            // sekDataGridViewTextBoxColumn
+            // 
+            this.sekDataGridViewTextBoxColumn.DataPropertyName = "sek";
+            this.sekDataGridViewTextBoxColumn.HeaderText = "сек. общ.";
+            this.sekDataGridViewTextBoxColumn.Name = "sekDataGridViewTextBoxColumn";
+            // 
+            // sekvyazDataGridViewTextBoxColumn
+            // 
+            this.sekvyazDataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz";
+            this.sekvyazDataGridViewTextBoxColumn.HeaderText = "сек. вяз";
+            this.sekvyazDataGridViewTextBoxColumn.Name = "sekvyazDataGridViewTextBoxColumn";
+            // 
+            // dataobnDataGridViewTextBoxColumn
+            // 
+            this.dataobnDataGridViewTextBoxColumn.DataPropertyName = "data_obn";
+            this.dataobnDataGridViewTextBoxColumn.HeaderText = "обновление";
+            this.dataobnDataGridViewTextBoxColumn.Name = "dataobnDataGridViewTextBoxColumn";
+            // 
+            // sekshvDataGridViewTextBoxColumn
+            // 
+            this.sekshvDataGridViewTextBoxColumn.DataPropertyName = "sek_shv";
+            this.sekshvDataGridViewTextBoxColumn.HeaderText = "сек. шв.";
+            this.sekshvDataGridViewTextBoxColumn.Name = "sekshvDataGridViewTextBoxColumn";
+            // 
+            // arhDataGridViewTextBoxColumn
+            // 
+            this.arhDataGridViewTextBoxColumn.DataPropertyName = "arh";
+            this.arhDataGridViewTextBoxColumn.HeaderText = "БУДЕТ ПОЛЕ СТАТУС";
+            this.arhDataGridViewTextBoxColumn.Name = "arhDataGridViewTextBoxColumn";
+            // 
+            // sekvyazoDataGridViewTextBoxColumn
+            // 
+            this.sekvyazoDataGridViewTextBoxColumn.DataPropertyName = "sek_vyazo";
+            this.sekvyazoDataGridViewTextBoxColumn.HeaderText = "sek_vyazo";
+            this.sekvyazoDataGridViewTextBoxColumn.Name = "sekvyazoDataGridViewTextBoxColumn";
+            // 
+            // sekvyaz5DataGridViewTextBoxColumn
+            // 
+            this.sekvyaz5DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz5";
+            this.sekvyaz5DataGridViewTextBoxColumn.HeaderText = "sek_vyaz5";
+            this.sekvyaz5DataGridViewTextBoxColumn.Name = "sekvyaz5DataGridViewTextBoxColumn";
+            // 
+            // sekvyaz7DataGridViewTextBoxColumn
+            // 
+            this.sekvyaz7DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz7";
+            this.sekvyaz7DataGridViewTextBoxColumn.HeaderText = "sek_vyaz7";
+            this.sekvyaz7DataGridViewTextBoxColumn.Name = "sekvyaz7DataGridViewTextBoxColumn";
+            // 
+            // sekvyaz12DataGridViewTextBoxColumn
+            // 
+            this.sekvyaz12DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz12";
+            this.sekvyaz12DataGridViewTextBoxColumn.HeaderText = "sek_vyaz12";
+            this.sekvyaz12DataGridViewTextBoxColumn.Name = "sekvyaz12DataGridViewTextBoxColumn";
+            // 
+            // sekvyaz10DataGridViewTextBoxColumn
+            // 
+            this.sekvyaz10DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz10";
+            this.sekvyaz10DataGridViewTextBoxColumn.HeaderText = "sek_vyaz10";
+            this.sekvyaz10DataGridViewTextBoxColumn.Name = "sekvyaz10DataGridViewTextBoxColumn";
+            // 
+            // sekvyaz6DataGridViewTextBoxColumn
+            // 
+            this.sekvyaz6DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz6";
+            this.sekvyaz6DataGridViewTextBoxColumn.HeaderText = "sek_vyaz6";
+            this.sekvyaz6DataGridViewTextBoxColumn.Name = "sekvyaz6DataGridViewTextBoxColumn";
+            // 
+            // sekkrDataGridViewTextBoxColumn
+            // 
+            this.sekkrDataGridViewTextBoxColumn.DataPropertyName = "sek_kr";
+            this.sekkrDataGridViewTextBoxColumn.HeaderText = "sek_kr";
+            this.sekkrDataGridViewTextBoxColumn.Name = "sekkrDataGridViewTextBoxColumn";
+            // 
+            // slognDataGridViewTextBoxColumn
+            // 
+            this.slognDataGridViewTextBoxColumn.DataPropertyName = "slogn";
+            this.slognDataGridViewTextBoxColumn.HeaderText = "slogn";
+            this.slognDataGridViewTextBoxColumn.Name = "slognDataGridViewTextBoxColumn";
+            // 
+            // kommentDataGridViewTextBoxColumn
+            // 
+            this.kommentDataGridViewTextBoxColumn.DataPropertyName = "komment";
+            this.kommentDataGridViewTextBoxColumn.HeaderText = "komment";
+            this.kommentDataGridViewTextBoxColumn.Name = "kommentDataGridViewTextBoxColumn";
+            // 
+            // dizDataGridViewTextBoxColumn
+            // 
+            this.dizDataGridViewTextBoxColumn.DataPropertyName = "diz";
+            this.dizDataGridViewTextBoxColumn.HeaderText = "diz";
+            this.dizDataGridViewTextBoxColumn.Name = "dizDataGridViewTextBoxColumn";
+            // 
+            // constrDataGridViewTextBoxColumn
+            // 
+            this.constrDataGridViewTextBoxColumn.DataPropertyName = "constr";
+            this.constrDataGridViewTextBoxColumn.HeaderText = "constr";
+            this.constrDataGridViewTextBoxColumn.Name = "constrDataGridViewTextBoxColumn";
             // 
             // poDataGridViewTextBoxColumn
             // 
@@ -1319,53 +1097,12 @@
             this.poDataGridViewTextBoxColumn.Name = "poDataGridViewTextBoxColumn";
             this.poDataGridViewTextBoxColumn.Visible = false;
             // 
-            // sekshvDataGridViewTextBoxColumn
-            // 
-            this.sekshvDataGridViewTextBoxColumn.DataPropertyName = "sek_shv";
-            this.sekshvDataGridViewTextBoxColumn.HeaderText = "sek_shv";
-            this.sekshvDataGridViewTextBoxColumn.Name = "sekshvDataGridViewTextBoxColumn";
-            // 
             // sekvyaz3DataGridViewTextBoxColumn
             // 
             this.sekvyaz3DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz3";
             this.sekvyaz3DataGridViewTextBoxColumn.HeaderText = "sek_vyaz3";
             this.sekvyaz3DataGridViewTextBoxColumn.Name = "sekvyaz3DataGridViewTextBoxColumn";
             this.sekvyaz3DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyaz5DataGridViewTextBoxColumn
-            // 
-            this.sekvyaz5DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz5";
-            this.sekvyaz5DataGridViewTextBoxColumn.HeaderText = "sek_vyaz5";
-            this.sekvyaz5DataGridViewTextBoxColumn.Name = "sekvyaz5DataGridViewTextBoxColumn";
-            this.sekvyaz5DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyaz6DataGridViewTextBoxColumn
-            // 
-            this.sekvyaz6DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz6";
-            this.sekvyaz6DataGridViewTextBoxColumn.HeaderText = "sek_vyaz6";
-            this.sekvyaz6DataGridViewTextBoxColumn.Name = "sekvyaz6DataGridViewTextBoxColumn";
-            this.sekvyaz6DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyaz7DataGridViewTextBoxColumn
-            // 
-            this.sekvyaz7DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz7";
-            this.sekvyaz7DataGridViewTextBoxColumn.HeaderText = "sek_vyaz7";
-            this.sekvyaz7DataGridViewTextBoxColumn.Name = "sekvyaz7DataGridViewTextBoxColumn";
-            this.sekvyaz7DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyaz10DataGridViewTextBoxColumn
-            // 
-            this.sekvyaz10DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz10";
-            this.sekvyaz10DataGridViewTextBoxColumn.HeaderText = "sek_vyaz10";
-            this.sekvyaz10DataGridViewTextBoxColumn.Name = "sekvyaz10DataGridViewTextBoxColumn";
-            this.sekvyaz10DataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyaz12DataGridViewTextBoxColumn
-            // 
-            this.sekvyaz12DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz12";
-            this.sekvyaz12DataGridViewTextBoxColumn.HeaderText = "sek_vyaz12";
-            this.sekvyaz12DataGridViewTextBoxColumn.Name = "sekvyaz12DataGridViewTextBoxColumn";
-            this.sekvyaz12DataGridViewTextBoxColumn.Visible = false;
             // 
             // sekvyaz62DataGridViewTextBoxColumn
             // 
@@ -1388,30 +1125,12 @@
             this.sekvyaz72DataGridViewTextBoxColumn.Name = "sekvyaz72DataGridViewTextBoxColumn";
             this.sekvyaz72DataGridViewTextBoxColumn.Visible = false;
             // 
-            // sekvyazoDataGridViewTextBoxColumn
-            // 
-            this.sekvyazoDataGridViewTextBoxColumn.DataPropertyName = "sek_vyazo";
-            this.sekvyazoDataGridViewTextBoxColumn.HeaderText = "sek_vyazo";
-            this.sekvyazoDataGridViewTextBoxColumn.Name = "sekvyazoDataGridViewTextBoxColumn";
-            this.sekvyazoDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // sekvyazDataGridViewTextBoxColumn
-            // 
-            this.sekvyazDataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz";
-            this.sekvyazDataGridViewTextBoxColumn.HeaderText = "sek_vyaz";
-            this.sekvyazDataGridViewTextBoxColumn.Name = "sekvyazDataGridViewTextBoxColumn";
-            // 
-            // sekDataGridViewTextBoxColumn
-            // 
-            this.sekDataGridViewTextBoxColumn.DataPropertyName = "sek";
-            this.sekDataGridViewTextBoxColumn.HeaderText = "sek";
-            this.sekDataGridViewTextBoxColumn.Name = "sekDataGridViewTextBoxColumn";
-            // 
             // sebDataGridViewTextBoxColumn
             // 
             this.sebDataGridViewTextBoxColumn.DataPropertyName = "seb";
             this.sebDataGridViewTextBoxColumn.HeaderText = "seb";
             this.sebDataGridViewTextBoxColumn.Name = "sebDataGridViewTextBoxColumn";
+            this.sebDataGridViewTextBoxColumn.Visible = false;
             // 
             // stDataGridViewTextBoxColumn
             // 
@@ -1427,36 +1146,12 @@
             this.po1DataGridViewTextBoxColumn.Name = "po1DataGridViewTextBoxColumn";
             this.po1DataGridViewTextBoxColumn.Visible = false;
             // 
-            // kommentDataGridViewTextBoxColumn
-            // 
-            this.kommentDataGridViewTextBoxColumn.DataPropertyName = "komment";
-            this.kommentDataGridViewTextBoxColumn.HeaderText = "komment";
-            this.kommentDataGridViewTextBoxColumn.Name = "kommentDataGridViewTextBoxColumn";
-            // 
             // datasozdDataGridViewTextBoxColumn
             // 
             this.datasozdDataGridViewTextBoxColumn.DataPropertyName = "data_sozd";
             this.datasozdDataGridViewTextBoxColumn.HeaderText = "data_sozd";
             this.datasozdDataGridViewTextBoxColumn.Name = "datasozdDataGridViewTextBoxColumn";
             this.datasozdDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // dizDataGridViewTextBoxColumn
-            // 
-            this.dizDataGridViewTextBoxColumn.DataPropertyName = "diz";
-            this.dizDataGridViewTextBoxColumn.HeaderText = "diz";
-            this.dizDataGridViewTextBoxColumn.Name = "dizDataGridViewTextBoxColumn";
-            // 
-            // constrDataGridViewTextBoxColumn
-            // 
-            this.constrDataGridViewTextBoxColumn.DataPropertyName = "constr";
-            this.constrDataGridViewTextBoxColumn.HeaderText = "constr";
-            this.constrDataGridViewTextBoxColumn.Name = "constrDataGridViewTextBoxColumn";
-            // 
-            // dataobnDataGridViewTextBoxColumn
-            // 
-            this.dataobnDataGridViewTextBoxColumn.DataPropertyName = "data_obn";
-            this.dataobnDataGridViewTextBoxColumn.HeaderText = "data_obn";
-            this.dataobnDataGridViewTextBoxColumn.Name = "dataobnDataGridViewTextBoxColumn";
             // 
             // sekvyaz70DataGridViewTextBoxColumn
             // 
@@ -1465,29 +1160,12 @@
             this.sekvyaz70DataGridViewTextBoxColumn.Name = "sekvyaz70DataGridViewTextBoxColumn";
             this.sekvyaz70DataGridViewTextBoxColumn.Visible = false;
             // 
-            // sekkrDataGridViewTextBoxColumn
-            // 
-            this.sekkrDataGridViewTextBoxColumn.DataPropertyName = "sek_kr";
-            this.sekkrDataGridViewTextBoxColumn.HeaderText = "sek_kr";
-            this.sekkrDataGridViewTextBoxColumn.Name = "sekkrDataGridViewTextBoxColumn";
-            // 
-            // slognDataGridViewTextBoxColumn
-            // 
-            this.slognDataGridViewTextBoxColumn.DataPropertyName = "slogn";
-            this.slognDataGridViewTextBoxColumn.HeaderText = "slogn";
-            this.slognDataGridViewTextBoxColumn.Name = "slognDataGridViewTextBoxColumn";
-            // 
             // sekvyaz14DataGridViewTextBoxColumn
             // 
             this.sekvyaz14DataGridViewTextBoxColumn.DataPropertyName = "sek_vyaz14";
             this.sekvyaz14DataGridViewTextBoxColumn.HeaderText = "sek_vyaz14";
             this.sekvyaz14DataGridViewTextBoxColumn.Name = "sekvyaz14DataGridViewTextBoxColumn";
-            // 
-            // arhDataGridViewTextBoxColumn
-            // 
-            this.arhDataGridViewTextBoxColumn.DataPropertyName = "arh";
-            this.arhDataGridViewTextBoxColumn.HeaderText = "arh";
-            this.arhDataGridViewTextBoxColumn.Name = "arhDataGridViewTextBoxColumn";
+            this.sekvyaz14DataGridViewTextBoxColumn.Visible = false;
             // 
             // sqlpraddDataGridViewTextBoxColumn
             // 
@@ -1545,6 +1223,418 @@
             this.annCompAddDataGridViewTextBoxColumn.HeaderText = "annCompAdd";
             this.annCompAddDataGridViewTextBoxColumn.Name = "annCompAddDataGridViewTextBoxColumn";
             this.annCompAddDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nDataGridViewTextBoxColumn
+            // 
+            this.nDataGridViewTextBoxColumn.DataPropertyName = "n";
+            this.nDataGridViewTextBoxColumn.HeaderText = "№ оп.";
+            this.nDataGridViewTextBoxColumn.Name = "nDataGridViewTextBoxColumn";
+            // 
+            // n1DataGridViewTextBoxColumn
+            // 
+            this.n1DataGridViewTextBoxColumn.DataPropertyName = "n1";
+            this.n1DataGridViewTextBoxColumn.HeaderText = "№ п/оп.";
+            this.n1DataGridViewTextBoxColumn.Name = "n1DataGridViewTextBoxColumn";
+            // 
+            // razrydDataGridViewTextBoxColumn
+            // 
+            this.razrydDataGridViewTextBoxColumn.DataPropertyName = "razryd";
+            this.razrydDataGridViewTextBoxColumn.HeaderText = "разряд";
+            this.razrydDataGridViewTextBoxColumn.Name = "razrydDataGridViewTextBoxColumn";
+            // 
+            // textDataGridViewTextBoxColumn
+            // 
+            this.textDataGridViewTextBoxColumn.DataPropertyName = "text";
+            this.textDataGridViewTextBoxColumn.HeaderText = "наименование операции пошива";
+            this.textDataGridViewTextBoxColumn.Name = "textDataGridViewTextBoxColumn";
+            // 
+            // sekDataGridViewTextBoxColumn1
+            // 
+            this.sekDataGridViewTextBoxColumn1.DataPropertyName = "sek";
+            this.sekDataGridViewTextBoxColumn1.HeaderText = "сек.";
+            this.sekDataGridViewTextBoxColumn1.Name = "sekDataGridViewTextBoxColumn1";
+            // 
+            // specDataGridViewTextBoxColumn
+            // 
+            this.specDataGridViewTextBoxColumn.DataPropertyName = "spec";
+            this.specDataGridViewTextBoxColumn.HeaderText = "спец-ть";
+            this.specDataGridViewTextBoxColumn.Name = "specDataGridViewTextBoxColumn";
+            // 
+            // kodproizvDataGridViewTextBoxColumn
+            // 
+            this.kodproizvDataGridViewTextBoxColumn.DataPropertyName = "kod_proizv";
+            this.kodproizvDataGridViewTextBoxColumn.HeaderText = "kod_proizv";
+            this.kodproizvDataGridViewTextBoxColumn.Name = "kodproizvDataGridViewTextBoxColumn";
+            // 
+            // kodpodrDataGridViewTextBoxColumn
+            // 
+            this.kodpodrDataGridViewTextBoxColumn.DataPropertyName = "kod_podr";
+            this.kodpodrDataGridViewTextBoxColumn.HeaderText = "kod_podr";
+            this.kodpodrDataGridViewTextBoxColumn.Name = "kodpodrDataGridViewTextBoxColumn";
+            // 
+            // oborDataGridViewTextBoxColumn
+            // 
+            this.oborDataGridViewTextBoxColumn.DataPropertyName = "obor";
+            this.oborDataGridViewTextBoxColumn.HeaderText = "obor";
+            this.oborDataGridViewTextBoxColumn.Name = "oborDataGridViewTextBoxColumn";
+            // 
+            // kodDataGridViewTextBoxColumn1
+            // 
+            this.kodDataGridViewTextBoxColumn1.DataPropertyName = "kod";
+            this.kodDataGridViewTextBoxColumn1.HeaderText = "kod";
+            this.kodDataGridViewTextBoxColumn1.Name = "kodDataGridViewTextBoxColumn1";
+            // 
+            // kodoDataGridViewTextBoxColumn
+            // 
+            this.kodoDataGridViewTextBoxColumn.DataPropertyName = "kod_o";
+            this.kodoDataGridViewTextBoxColumn.HeaderText = "kod_o";
+            this.kodoDataGridViewTextBoxColumn.Name = "kodoDataGridViewTextBoxColumn";
+            // 
+            // kodobDataGridViewTextBoxColumn
+            // 
+            this.kodobDataGridViewTextBoxColumn.DataPropertyName = "kod_ob";
+            this.kodobDataGridViewTextBoxColumn.HeaderText = "kod_ob";
+            this.kodobDataGridViewTextBoxColumn.Name = "kodobDataGridViewTextBoxColumn";
+            // 
+            // sebDataGridViewTextBoxColumn1
+            // 
+            this.sebDataGridViewTextBoxColumn1.DataPropertyName = "seb";
+            this.sebDataGridViewTextBoxColumn1.HeaderText = "seb";
+            this.sebDataGridViewTextBoxColumn1.Name = "sebDataGridViewTextBoxColumn1";
+            this.sebDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // nchDataGridViewTextBoxColumn
+            // 
+            this.nchDataGridViewTextBoxColumn.DataPropertyName = "n_ch";
+            this.nchDataGridViewTextBoxColumn.HeaderText = "n_ch";
+            this.nchDataGridViewTextBoxColumn.Name = "nchDataGridViewTextBoxColumn";
+            this.nchDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // sebsDataGridViewTextBoxColumn
+            // 
+            this.sebsDataGridViewTextBoxColumn.DataPropertyName = "seb_s";
+            this.sebsDataGridViewTextBoxColumn.HeaderText = "seb_s";
+            this.sebsDataGridViewTextBoxColumn.Name = "sebsDataGridViewTextBoxColumn";
+            this.sebsDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // sek12DataGridViewTextBoxColumn
+            // 
+            this.sek12DataGridViewTextBoxColumn.DataPropertyName = "sek12";
+            this.sek12DataGridViewTextBoxColumn.HeaderText = "sek12";
+            this.sek12DataGridViewTextBoxColumn.Name = "sek12DataGridViewTextBoxColumn";
+            this.sek12DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // sek7DataGridViewTextBoxColumn
+            // 
+            this.sek7DataGridViewTextBoxColumn.DataPropertyName = "sek7";
+            this.sek7DataGridViewTextBoxColumn.HeaderText = "sek7";
+            this.sek7DataGridViewTextBoxColumn.Name = "sek7DataGridViewTextBoxColumn";
+            this.sek7DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // sek5DataGridViewTextBoxColumn
+            // 
+            this.sek5DataGridViewTextBoxColumn.DataPropertyName = "sek5";
+            this.sek5DataGridViewTextBoxColumn.HeaderText = "sek5";
+            this.sek5DataGridViewTextBoxColumn.Name = "sek5DataGridViewTextBoxColumn";
+            this.sek5DataGridViewTextBoxColumn.Visible = false;
+            // 
+            // sqlpraddDataGridViewTextBoxColumn1
+            // 
+            this.sqlpraddDataGridViewTextBoxColumn1.DataPropertyName = "sql_pr_add";
+            this.sqlpraddDataGridViewTextBoxColumn1.HeaderText = "sql_pr_add";
+            this.sqlpraddDataGridViewTextBoxColumn1.Name = "sqlpraddDataGridViewTextBoxColumn1";
+            this.sqlpraddDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dateaddDataGridViewTextBoxColumn1
+            // 
+            this.dateaddDataGridViewTextBoxColumn1.DataPropertyName = "date_add";
+            this.dateaddDataGridViewTextBoxColumn1.HeaderText = "date_add";
+            this.dateaddDataGridViewTextBoxColumn1.Name = "dateaddDataGridViewTextBoxColumn1";
+            this.dateaddDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // kompnameDataGridViewTextBoxColumn1
+            // 
+            this.kompnameDataGridViewTextBoxColumn1.DataPropertyName = "komp_name";
+            this.kompnameDataGridViewTextBoxColumn1.HeaderText = "komp_name";
+            this.kompnameDataGridViewTextBoxColumn1.Name = "kompnameDataGridViewTextBoxColumn1";
+            this.kompnameDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // nrIDDataGridViewTextBoxColumn
+            // 
+            this.nrIDDataGridViewTextBoxColumn.DataPropertyName = "nrID";
+            this.nrIDDataGridViewTextBoxColumn.HeaderText = "nrID";
+            this.nrIDDataGridViewTextBoxColumn.Name = "nrIDDataGridViewTextBoxColumn";
+            this.nrIDDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nrIDDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nrDateDelDataGridViewTextBoxColumn
+            // 
+            this.nrDateDelDataGridViewTextBoxColumn.DataPropertyName = "nrDateDel";
+            this.nrDateDelDataGridViewTextBoxColumn.HeaderText = "nrDateDel";
+            this.nrDateDelDataGridViewTextBoxColumn.Name = "nrDateDelDataGridViewTextBoxColumn";
+            this.nrDateDelDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nrCompDelDataGridViewTextBoxColumn
+            // 
+            this.nrCompDelDataGridViewTextBoxColumn.DataPropertyName = "nrCompDel";
+            this.nrCompDelDataGridViewTextBoxColumn.HeaderText = "nrCompDel";
+            this.nrCompDelDataGridViewTextBoxColumn.Name = "nrCompDelDataGridViewTextBoxColumn";
+            this.nrCompDelDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nrDateAddDataGridViewTextBoxColumn
+            // 
+            this.nrDateAddDataGridViewTextBoxColumn.DataPropertyName = "nrDateAdd";
+            this.nrDateAddDataGridViewTextBoxColumn.HeaderText = "nrDateAdd";
+            this.nrDateAddDataGridViewTextBoxColumn.Name = "nrDateAddDataGridViewTextBoxColumn";
+            this.nrDateAddDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // nrCompAddDataGridViewTextBoxColumn
+            // 
+            this.nrCompAddDataGridViewTextBoxColumn.DataPropertyName = "nrCompAdd";
+            this.nrCompAddDataGridViewTextBoxColumn.HeaderText = "nrCompAdd";
+            this.nrCompAddDataGridViewTextBoxColumn.Name = "nrCompAddDataGridViewTextBoxColumn";
+            this.nrCompAddDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // kodDataGridViewTextBoxColumn4
+            // 
+            this.kodDataGridViewTextBoxColumn4.DataPropertyName = "kod";
+            this.kodDataGridViewTextBoxColumn4.HeaderText = "kod";
+            this.kodDataGridViewTextBoxColumn4.Name = "kodDataGridViewTextBoxColumn4";
+            this.kodDataGridViewTextBoxColumn4.Visible = false;
+            // 
+            // sekpDataGridViewTextBoxColumn
+            // 
+            this.sekpDataGridViewTextBoxColumn.DataPropertyName = "sek_p";
+            this.sekpDataGridViewTextBoxColumn.HeaderText = "принт(сек.)";
+            this.sekpDataGridViewTextBoxColumn.Name = "sekpDataGridViewTextBoxColumn";
+            // 
+            // sekptampDataGridViewTextBoxColumn
+            // 
+            this.sekptampDataGridViewTextBoxColumn.DataPropertyName = "sek_p_tamp";
+            this.sekptampDataGridViewTextBoxColumn.HeaderText = "тамп.печать(сек.)";
+            this.sekptampDataGridViewTextBoxColumn.Name = "sekptampDataGridViewTextBoxColumn";
+            // 
+            // sekvDataGridViewTextBoxColumn
+            // 
+            this.sekvDataGridViewTextBoxColumn.DataPropertyName = "sek_v";
+            this.sekvDataGridViewTextBoxColumn.HeaderText = "вышивка+пайетки(сек.)";
+            this.sekvDataGridViewTextBoxColumn.Name = "sekvDataGridViewTextBoxColumn";
+            // 
+            // sekstraDataGridViewTextBoxColumn
+            // 
+            this.sekstraDataGridViewTextBoxColumn.DataPropertyName = "sek_stra";
+            this.sekstraDataGridViewTextBoxColumn.HeaderText = "стразы(сек.)";
+            this.sekstraDataGridViewTextBoxColumn.Name = "sekstraDataGridViewTextBoxColumn";
+            // 
+            // kodoDataGridViewTextBoxColumn1
+            // 
+            this.kodoDataGridViewTextBoxColumn1.DataPropertyName = "kod_o";
+            this.kodoDataGridViewTextBoxColumn1.HeaderText = "№ оп.";
+            this.kodoDataGridViewTextBoxColumn1.Name = "kodoDataGridViewTextBoxColumn1";
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "№ п/оп.";
+            this.Column1.Name = "Column1";
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // razrydDataGridViewTextBoxColumn1
+            // 
+            this.razrydDataGridViewTextBoxColumn1.DataPropertyName = "razryd";
+            this.razrydDataGridViewTextBoxColumn1.HeaderText = "разряд";
+            this.razrydDataGridViewTextBoxColumn1.Name = "razrydDataGridViewTextBoxColumn1";
+            // 
+            // textDataGridViewTextBoxColumn1
+            // 
+            this.textDataGridViewTextBoxColumn1.DataPropertyName = "text";
+            this.textDataGridViewTextBoxColumn1.HeaderText = "наименование операции раскроя";
+            this.textDataGridViewTextBoxColumn1.Name = "textDataGridViewTextBoxColumn1";
+            // 
+            // sekDataGridViewTextBoxColumn2
+            // 
+            this.sekDataGridViewTextBoxColumn2.DataPropertyName = "sek";
+            this.sekDataGridViewTextBoxColumn2.HeaderText = "сек.";
+            this.sekDataGridViewTextBoxColumn2.Name = "sekDataGridViewTextBoxColumn2";
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "спец-ть";
+            this.Column2.Name = "Column2";
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "оборуд.";
+            this.Column3.Name = "Column3";
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "код оп.";
+            this.Column4.Name = "Column4";
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "код из.";
+            this.Column5.Name = "Column5";
+            // 
+            // kodDataGridViewTextBoxColumn2
+            // 
+            this.kodDataGridViewTextBoxColumn2.DataPropertyName = "kod";
+            this.kodDataGridViewTextBoxColumn2.HeaderText = "kod";
+            this.kodDataGridViewTextBoxColumn2.Name = "kodDataGridViewTextBoxColumn2";
+            this.kodDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // sebDataGridViewTextBoxColumn2
+            // 
+            this.sebDataGridViewTextBoxColumn2.DataPropertyName = "seb";
+            this.sebDataGridViewTextBoxColumn2.HeaderText = "seb";
+            this.sebDataGridViewTextBoxColumn2.Name = "sebDataGridViewTextBoxColumn2";
+            this.sebDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // nDataGridViewTextBoxColumn1
+            // 
+            this.nDataGridViewTextBoxColumn1.DataPropertyName = "n";
+            this.nDataGridViewTextBoxColumn1.HeaderText = "n";
+            this.nDataGridViewTextBoxColumn1.Name = "nDataGridViewTextBoxColumn1";
+            this.nDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // nchDataGridViewTextBoxColumn1
+            // 
+            this.nchDataGridViewTextBoxColumn1.DataPropertyName = "n_ch";
+            this.nchDataGridViewTextBoxColumn1.HeaderText = "n_ch";
+            this.nchDataGridViewTextBoxColumn1.Name = "nchDataGridViewTextBoxColumn1";
+            this.nchDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // n1DataGridViewTextBoxColumn1
+            // 
+            this.n1DataGridViewTextBoxColumn1.DataPropertyName = "n1";
+            this.n1DataGridViewTextBoxColumn1.HeaderText = "n1";
+            this.n1DataGridViewTextBoxColumn1.Name = "n1DataGridViewTextBoxColumn1";
+            this.n1DataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // sebsDataGridViewTextBoxColumn1
+            // 
+            this.sebsDataGridViewTextBoxColumn1.DataPropertyName = "seb_s";
+            this.sebsDataGridViewTextBoxColumn1.HeaderText = "seb_s";
+            this.sebsDataGridViewTextBoxColumn1.Name = "sebsDataGridViewTextBoxColumn1";
+            this.sebsDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // specDataGridViewTextBoxColumn1
+            // 
+            this.specDataGridViewTextBoxColumn1.DataPropertyName = "spec";
+            this.specDataGridViewTextBoxColumn1.HeaderText = "spec";
+            this.specDataGridViewTextBoxColumn1.Name = "specDataGridViewTextBoxColumn1";
+            this.specDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // oborDataGridViewTextBoxColumn1
+            // 
+            this.oborDataGridViewTextBoxColumn1.DataPropertyName = "obor";
+            this.oborDataGridViewTextBoxColumn1.HeaderText = "obor";
+            this.oborDataGridViewTextBoxColumn1.Name = "oborDataGridViewTextBoxColumn1";
+            this.oborDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // kodoDataGridViewTextBoxColumn2
+            // 
+            this.kodoDataGridViewTextBoxColumn2.DataPropertyName = "kod_o";
+            this.kodoDataGridViewTextBoxColumn2.HeaderText = "№оп.";
+            this.kodoDataGridViewTextBoxColumn2.Name = "kodoDataGridViewTextBoxColumn2";
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "№п/оп.";
+            this.Column6.Name = "Column6";
+            // 
+            // razrydDataGridViewTextBoxColumn2
+            // 
+            this.razrydDataGridViewTextBoxColumn2.DataPropertyName = "razryd";
+            this.razrydDataGridViewTextBoxColumn2.HeaderText = "разряд";
+            this.razrydDataGridViewTextBoxColumn2.Name = "razrydDataGridViewTextBoxColumn2";
+            // 
+            // textDataGridViewTextBoxColumn2
+            // 
+            this.textDataGridViewTextBoxColumn2.DataPropertyName = "text";
+            this.textDataGridViewTextBoxColumn2.HeaderText = "наименование операции комплектовки";
+            this.textDataGridViewTextBoxColumn2.Name = "textDataGridViewTextBoxColumn2";
+            // 
+            // sekDataGridViewTextBoxColumn3
+            // 
+            this.sekDataGridViewTextBoxColumn3.DataPropertyName = "сек.";
+            this.sekDataGridViewTextBoxColumn3.HeaderText = "sek";
+            this.sekDataGridViewTextBoxColumn3.Name = "sekDataGridViewTextBoxColumn3";
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "спец-ть";
+            this.Column7.Name = "Column7";
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "оборуд.";
+            this.Column8.Name = "Column8";
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "код из.";
+            this.Column9.Name = "Column9";
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "код оп.";
+            this.Column10.Name = "Column10";
+            // 
+            // kodDataGridViewTextBoxColumn3
+            // 
+            this.kodDataGridViewTextBoxColumn3.DataPropertyName = "kod";
+            this.kodDataGridViewTextBoxColumn3.HeaderText = "kod";
+            this.kodDataGridViewTextBoxColumn3.Name = "kodDataGridViewTextBoxColumn3";
+            // 
+            // sebDataGridViewTextBoxColumn3
+            // 
+            this.sebDataGridViewTextBoxColumn3.DataPropertyName = "seb";
+            this.sebDataGridViewTextBoxColumn3.HeaderText = "seb";
+            this.sebDataGridViewTextBoxColumn3.Name = "sebDataGridViewTextBoxColumn3";
+            // 
+            // nDataGridViewTextBoxColumn2
+            // 
+            this.nDataGridViewTextBoxColumn2.DataPropertyName = "n";
+            this.nDataGridViewTextBoxColumn2.HeaderText = "n";
+            this.nDataGridViewTextBoxColumn2.Name = "nDataGridViewTextBoxColumn2";
+            // 
+            // nchDataGridViewTextBoxColumn2
+            // 
+            this.nchDataGridViewTextBoxColumn2.DataPropertyName = "n_ch";
+            this.nchDataGridViewTextBoxColumn2.HeaderText = "n_ch";
+            this.nchDataGridViewTextBoxColumn2.Name = "nchDataGridViewTextBoxColumn2";
+            // 
+            // n1DataGridViewTextBoxColumn2
+            // 
+            this.n1DataGridViewTextBoxColumn2.DataPropertyName = "n1";
+            this.n1DataGridViewTextBoxColumn2.HeaderText = "n1";
+            this.n1DataGridViewTextBoxColumn2.Name = "n1DataGridViewTextBoxColumn2";
+            // 
+            // sebsDataGridViewTextBoxColumn2
+            // 
+            this.sebsDataGridViewTextBoxColumn2.DataPropertyName = "seb_s";
+            this.sebsDataGridViewTextBoxColumn2.HeaderText = "seb_s";
+            this.sebsDataGridViewTextBoxColumn2.Name = "sebsDataGridViewTextBoxColumn2";
+            // 
+            // specDataGridViewTextBoxColumn2
+            // 
+            this.specDataGridViewTextBoxColumn2.DataPropertyName = "spec";
+            this.specDataGridViewTextBoxColumn2.HeaderText = "spec";
+            this.specDataGridViewTextBoxColumn2.Name = "specDataGridViewTextBoxColumn2";
+            // 
+            // oborDataGridViewTextBoxColumn2
+            // 
+            this.oborDataGridViewTextBoxColumn2.DataPropertyName = "obor";
+            this.oborDataGridViewTextBoxColumn2.HeaderText = "obor";
+            this.oborDataGridViewTextBoxColumn2.Name = "oborDataGridViewTextBoxColumn2";
             // 
             // TeamWork
             // 
@@ -1658,69 +1748,13 @@
         private ACEDataSetTableAdapters.art_norm_nTableAdapter art_norm_nTableAdapter;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private ACEDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodpodrDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodproizvDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sek12DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sek7DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sek5DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodobDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sqlpraddDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dateaddDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kompnameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrIDDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrDateDelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrCompDelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrDateAddDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nrCompAddDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource aCEDataSetBindingSource;
         private System.Windows.Forms.BindingSource normraskBindingSource;
         private ACEDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn1;
         private System.Windows.Forms.BindingSource normkontBindingSource;
         private ACEDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource normdopobrBindingSource;
         private ACEDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekpDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekstraDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekptampDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource sparticulBindingSource;
         private ACEDataSetTableAdapters.sp_articulTableAdapter sp_articulTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn grupDataGridViewTextBoxColumn1;
@@ -1892,33 +1926,33 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn grupDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn modDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn poDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyazDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataobnDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekshvDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz3DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn arhDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyazoDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz5DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz6DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz7DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz10DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz12DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz10DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz6DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekkrDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn slognDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kommentDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dizDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn constrDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn poDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz3DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz62DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz71DataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz72DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyazoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekvyazDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn stDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn po1DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kommentDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn datasozdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dizDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn constrDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataobnDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz70DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sekkrDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn slognDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sekvyaz14DataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn arhDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn sqlpraddDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dateaddDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn kompnameDataGridViewTextBoxColumn;
@@ -1927,5 +1961,71 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn annIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn annDateAddDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn annCompAddDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodproizvDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodpodrDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodobDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sek12DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sek7DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sek5DataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sqlpraddDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateaddDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kompnameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrDateDelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrCompDelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrDateAddDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nrCompAddDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekpDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekptampDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekvDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekstraDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodoDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn razrydDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn textDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn kodDataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebDataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nchDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn n1DataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sebsDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn specDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn oborDataGridViewTextBoxColumn2;
     }
 }
