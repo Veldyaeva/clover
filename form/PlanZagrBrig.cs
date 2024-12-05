@@ -1,7 +1,15 @@
 ﻿using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.CodeParser;
+using DevExpress.Data.Helpers;
 using DevExpress.Data.Linq.Helpers;
 using DevExpress.DataAccess.Native.Data;
+using DevExpress.DataAccess.Native.Json;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.PivotGrid.QueryMode;
+using DevExpress.Utils;
+using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraCharts.Design;
+using DevExpress.XtraEditors.Filtering.Templates;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +17,11 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
 
 namespace SewingProduction.form
 {
@@ -40,6 +50,33 @@ namespace SewingProduction.form
                 lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
             }
         }
+        public void GetMonthList()
+        {
+            try
+            {
+                string connectionString = Properties.Settings.Default.ACEConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlDataAdapter adapterMonthList = new SqlDataAdapter();
+                    System.Data.DataTable dtMonthList = new System.Data.DataTable();
+                    string queryMonthList = $"SELECT * FROM spr_month ";
+                    SqlCommand commandMonthList = new SqlCommand(queryMonthList, connection);
+                    adapterMonthList.SelectCommand = commandMonthList;
+                    adapterMonthList.Fill(dtMonthList);
+                    bsMonthList.DataSource = dtMonthList;
+
+                    cbMonthList.DataSource = bsMonthList;
+                    cbMonthList.DisplayMember = "name_month";
+                    cbMonthList.ValueMember = "kod";
+                    cbMonthList.SelectedIndex = -1;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
         public void GetPachListByNom(int _nlNom)
         {
             string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -58,45 +95,140 @@ namespace SewingProduction.form
                 tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
             }
         }
-        public static System.Data.DataTable GroupAndSum(System.Data.DataTable _sourceTable, string _groupByColumn, string _sumColumn)
+        //public static System.Data.DataTable GroupAndSum(System.Data.DataTable _sourceTable, string _groupByColumn, string _sumColumn)
+        //{
+        //    // Проверка на существование необходимых столбцов
+        //    if (!_sourceTable.Columns.Contains(_groupByColumn) || !_sourceTable.Columns.Contains(_sumColumn))
+        //    {
+        //        throw new ArgumentException("Source table must contain specified groupBy and sum columns.");
+        //    }
+        //    // Проверка типа данных суммируемого столбца
+        //    if (_sourceTable.Columns[_sumColumn].DataType != typeof(int) && _sourceTable.Columns[_sumColumn].DataType != typeof(double) && _sourceTable.Columns[_sumColumn].DataType != typeof(decimal) && _sourceTable.Columns[_sumColumn].DataType != typeof(float))
+        //    {
+        //        throw new ArgumentException($"Column '{_sumColumn}' must be a numeric type.");
+        //    }
+        //    try
+        //    {
+        //        // Группировка данных с помощью LINQ
+        //        var groupedData = from row in _sourceTable.AsEnumerable()
+        //                          group row by row.Field<object>(_groupByColumn) into grp
+        //                          select new
+        //                          {
+        //                              GroupKey = grp.Key,
+        //                              SumValue = grp.Sum(r => Convert.ToDouble(r.Field<object>(_sumColumn))) //Обработка различных числовых типов
+        //                          };
+        //        // Создание нового DataTable для результатов группировки
+        //        System.Data.DataTable resultDataTable = new System.Data.DataTable("GroupedTable");
+        //        resultDataTable.Columns.Add(_groupByColumn, typeof(object)); // Используем object для большей гибкости
+        //        resultDataTable.Columns.Add("Sum_" + _sumColumn, typeof(double)); // столбец суммы, тип double
+        //        // Заполнение нового DataTable результатами группировки
+        //        foreach (var group in groupedData)
+        //        {
+        //            resultDataTable.Rows.Add(group.GroupKey, group.SumValue);
+        //        }
+        //        return resultDataTable;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        // Обработка исключений (например, преобразование типов)
+        //        Console.WriteLine($"An error occurred: {ex.Message}");
+        //        return null; // Или throw ex, если нужно передать исключение дальше
+        //    }
+        //}
+
+        public System.Data.DataTable ConvertToDataTable<T>(IEnumerable<T> varlist)
         {
-            // Проверка на существование необходимых столбцов
-            if (!_sourceTable.Columns.Contains(_groupByColumn) || !_sourceTable.Columns.Contains(_sumColumn))
+            System.Data.DataTable dtReturn = new System.Data.DataTable();
+            // column names 
+            PropertyInfo[] oProps = null;
+            if (varlist == null) return dtReturn;
+            foreach (T rec in varlist)
             {
-                throw new ArgumentException("Source table must contain specified groupBy and sum columns.");
-            }
-            // Проверка типа данных суммируемого столбца
-            if (_sourceTable.Columns[_sumColumn].DataType != typeof(int) && _sourceTable.Columns[_sumColumn].DataType != typeof(double) && _sourceTable.Columns[_sumColumn].DataType != typeof(decimal) && _sourceTable.Columns[_sumColumn].DataType != typeof(float))
-            {
-                throw new ArgumentException($"Column '{_sumColumn}' must be a numeric type.");
-            }
-            try
-            {
-                // Группировка данных с помощью LINQ
-                var groupedData = from row in _sourceTable.AsEnumerable()
-                                  group row by row.Field<object>(_groupByColumn) into grp
-                                  select new
-                                  {
-                                      GroupKey = grp.Key,
-                                      SumValue = grp.Sum(r => Convert.ToDouble(r.Field<object>(_sumColumn))) //Обработка различных числовых типов
-                                  };
-                // Создание нового DataTable для результатов группировки
-                System.Data.DataTable resultDataTable = new System.Data.DataTable("GroupedTable");
-                resultDataTable.Columns.Add(_groupByColumn, typeof(object)); // Используем object для большей гибкости
-                resultDataTable.Columns.Add("Sum_" + _sumColumn, typeof(double)); // столбец суммы, тип double
-                // Заполнение нового DataTable результатами группировки
-                foreach (var group in groupedData)
+                // Use reflection to get property names, to create table, Only first time, others will follow 
+                if (oProps == null)
                 {
-                    resultDataTable.Rows.Add(group.GroupKey, group.SumValue);
+                    oProps = ((Type)rec.GetType()).GetProperties();
+                    foreach (PropertyInfo pi in oProps)
+                    {
+                        Type colType = pi.PropertyType;
+
+                        if ((colType.IsGenericType) && (colType.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                        {
+                            colType = colType.GetGenericArguments()[0];
+                        }
+                        dtReturn.Columns.Add(new System.Data.DataColumn(pi.Name, colType));
+                    }
                 }
-                return resultDataTable;
+                DataRow dr = dtReturn.NewRow();
+                foreach (PropertyInfo pi in oProps)
+                {
+                    dr[pi.Name] = pi.GetValue(rec, null) == null ? DBNull.Value : pi.GetValue
+                    (rec, null);
+                }
+                dtReturn.Rows.Add(dr);
             }
-            catch (Exception ex)
+            return dtReturn;
+        }
+
+        public int GetUslFilter()
+        {
+            int _xUsl = 0;
+            if (this.radioButton1.Checked == true)  // услуги
             {
-                // Обработка исключений (например, преобразование типов)
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                return null; // Или throw ex, если нужно передать исключение дальше
+                _xUsl = 1;
             }
+            else if (this.radioButton2.Checked == true) // собственное
+            {
+                _xUsl = 2;
+            }
+            else if(this.radioButton3.Checked == true)  // ВСЕ
+            {
+                _xUsl = 3;
+            }
+             return _xUsl;
+
+        }
+        public int GetNZPFilter()
+        {
+            int _xNZP = 0;
+
+            if (this.radioButton7.Checked == true)  // отгруженные с НЗОп
+            {
+                _xNZP = 3;
+            }
+            else if (this.radioButton6.Checked == true) // не отгруженные
+            {
+                _xNZP = 1;
+            }
+            else if (this.radioButton8.Checked == true) //ВСЕ с НЗОп
+            {
+                _xNZP = 2;
+            }
+            else if (this.radioButton9.Checked == true) // отгруженные без НЗОп
+            {
+                _xNZP = 4;
+            }
+            else if (this.radioButton5.Checked == true) // ВСЕ
+            {
+                _xNZP = 5;
+            }
+            return _xNZP;
+        }
+        public int GetMonthPlan()
+        {
+            int _xMonthPlan = 0;
+            if (this.cbMonthList.SelectedIndex != -1)
+            {
+                _xMonthPlan = Convert.ToInt32(cbMonthList.SelectedValue);
+            }
+            return _xMonthPlan;
+        }
+
+        public int GetYearPlan()
+        {
+            int _xYearPlan = 0;
+            int.TryParse(this.tbYearPlan.Text, out _xYearPlan);
+            return _xYearPlan;
         }
 
         private void PlanZagrBrigLoadData()
@@ -108,45 +240,126 @@ namespace SewingProduction.form
                 this.gridColumn16.Visible = false;
                 this.gridColumn17.Visible = false;
                 connection.Open();
-                SqlDataAdapter adapterPzNomList = new SqlDataAdapter();
-                System.Data.DataTable dtPzNomList = new System.Data.DataTable();
-                string queryPzNomList = $"exec rzu_nzp '{XIdBrig}' ";
-                //queryPartNaklList += $" order by id";
-                SqlCommand commandPzNomList = new SqlCommand(queryPzNomList, connection);
-                adapterPzNomList.SelectCommand = commandPzNomList;
-                adapterPzNomList.Fill(dtPzNomList);
-                bsPzNomList.DataSource = dtPzNomList;
-                //this.gcPzNomList.Refresh();
-                //bsPzNomList.Sort = "id asc";
+                SqlDataAdapter adapterNomList = new SqlDataAdapter();
+                System.Data.DataTable dtNomList = new System.Data.DataTable();
+                string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
+                SqlCommand commandNomList = new SqlCommand(queryNomList, connection);
+                adapterNomList.SelectCommand = commandNomList;
+                adapterNomList.Fill(dtNomList);
+                
                 this.gcPzNomList.Location = this.gcPzNomList.Location;
                 this.gcPzNomList.Size = this.gcPzNomList.Size;
 
-                //GetPachListByNom(Convert.ToInt32(dtPzNomList.Rows[0]["nlNom"]));
-                try
+                var queryPzArticulList = from row in dtNomList.AsEnumerable()
+                                         where (row.IsNull("nlDateCd") || row.Field<DateTime>("nlDateCd") == DateTime.MinValue)
+                                         group row by new {
+                                      nlGrup = row.Field<string>("nlGrup"),
+                                      nlArticul = row.Field<string>("nlArticul"),
+                                      nlMod = row.Field<string>("nlMod"),
+                                      nlGrupK = row.Field<string>("nlGrupK"),
+                                      nlArticulK = row.Field<string>("nlArticulK"),
+                                      nlModK = row.Field<string>("nlModK"),
+                                      nlKoddRt = row.Field<string>("nlKoddRt"),
+                                      nlKodd = row.Field<string>("nlKodd"),
+                                      nlKodd7 = row.Field<string>("nlKodd7"),
+                                         } into g
+                                  select new
+                                  {
+                                      alGrup = g.Key.nlGrup,
+                                      alArticul = g.Key.nlArticul,
+                                      alMod = g.Key.nlMod,
+                                      alGrupK = g.Key.nlGrupK,
+                                      alArticulK = g.Key.nlArticulK,
+                                      alModK = g.Key.nlModK,
+                                      alKoddRt = g.Key.nlKoddRt,
+                                      alKodd = g.Key.nlKodd,
+                                      alKodd7 = g.Key.nlKodd7,
+                                      alV = 0,
+                                      alArtSort = (g.Key.nlArticulK.Length != 0 ? g.Key.nlArticulK : g.Key.nlArticul),
+                                      alModSort = (g.Key.nlModK.Length != 0 ? g.Key.nlModK : g.Key.nlMod),
+                                      alDataCdPl = g.Min(row => row.Field<DateTime>("nlDataCdPl")),
+                                      alKol = g.Sum(row => row.Field<decimal>("nlKol"))
+                                  };
+                System.Data.DataTable dtPzArticulList = ConvertToDataTable(queryPzArticulList);
+                if (dtPzArticulList.Rows.Count != 0)
                 {
-                    System.Data.DataTable groupedTable = GroupAndSum(dtPzNomList, "nlGrup, nlArticul, nlMod, nlGrupK, nlArticulK, nlModK, nlKoddRt, nlKodd", "nlKol");
-                    bsPzArticulList.DataSource = dtPzNomList;
-                    //if (groupedTable != null)
-                    //{
-                    //    foreach (DataRow row in groupedTable.Rows)
-                    //    {
-                    //        Console.WriteLine($"Category: {row["Category"]}, Sum_Value: {row["Sum_Value"]}");
-                    //    }
-                    //}
+                    dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
+                }
+                bsPzArticulList.DataSource = dtPzArticulList;
 
-                    //DataTable groupedTable2 = GroupAndSum(dataTable, "Category", "AnotherValue");
-                    //if (groupedTable2 != null)
-                    //{
-                    //    foreach (DataRow row in groupedTable2.Rows)
-                    //    {
-                    //        Console.WriteLine($"Category: {row["Category"]}, Sum_AnotherValue: {row["Sum_AnotherValue"]}");
-                    //    }
-                    //}
-                }
-                catch (ArgumentException ex)
-                {
-                    Console.WriteLine($"Error: {ex.Message}");
-                }
+                string _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString();
+                string _alMod = dtPzArticulList.Rows[0]["alMod"].ToString();
+                var queryPzNomlList = from row in dtNomList.AsEnumerable()
+                                      where (row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod)
+                                      select row;
+                System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
+                dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
+                bsPzNomList.DataSource = dtPzNomList;
+
+                //var queryPzNomlList = dtNomList.AsEnumerable().Where(row => row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod).AsQueryable();
+                //System.Data.DataTable dtPzNomList = (System.Data.DataTable)queryPzNomlList;
+                //dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
+
+                //var queryPzNomlList = dtNomList.AsEnumerable()
+                //.Where(row => row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod) // Условие
+                //.GroupBy(row => new { ProductName = row.Field<string>("ProductName"), SalesMonth = row.Field<DateTime>("SalesDate").Month })
+                //.Select(group => new
+                //{
+                //    ProductName = group.Key.ProductName,
+                //    SalesMonth = group.Key.SalesMonth,
+                //    TotalSales = group.Sum(row => row.Field<decimal>("SalesAmount"))
+                //})
+                //.OrderByDescending(x => x.TotalSales); // Сортировка
+
+
+
+                var queryPzNomlList = from nl in dtNomList.AsEnumerable()
+                                      where (nl.Field<string>("nlKodd7") == _alKodd7 && nl.Field<string>("nlMod") == _alMod)
+                                      select new
+                                      {
+                                          nlNom = nl.Field<decimal>("nlNom"),
+                                          nlNomN = nl.Field<decimal>("nlNomN"),
+                                          nlBrig = nl.Field<string>("nlBrig"),
+                                          nlNomZad = nl.Field<string>("nlNomZad"),
+                                          nlKodd = nl.Field<string>("nlKodd"),
+                                          nlKoddRt = nl.Field<string>("nlKoddRt"),
+                                          nlGrup = nl.Field<string>("nlGrup"),
+                                          nlArticul = nl.Field<string>("nlArticul"),
+                                          nlMod = nl.Field<string>("nlMod"),
+                                          nlGrupK = nl.Field<string>("nlGrupK"),
+                                          nlArticulK = nl.Field<string>("nlArticulK"),
+                                          nlModK = nl.Field<string>("nlModK"),
+                                          nlKol = nl.Field<decimal>("nlKol"),
+                                          nlIdBrig = nl.Field<int>("nlIdBrig"),
+                                          nlNZzeh = nl.Field<decimal>("nlNZzeh"),
+                                          //nlDateZeh1 = nl.Field<DateTime>("nlDateZeh"),
+                                          nlDateZeh = (nl.IsNull("nlDateZeh") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZeh")),
+                                          //nlDateZehP1 = nl.Field<DateTime>("nlDateZehP"),
+                                          nlDateZehP = (nl.IsNull("nlDateZehP") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZehP")),
+                                          //nlDateRab1 = nl.Field<DateTime>("nlDateRab"),
+                                          nlDateRab = (nl.IsNull("nlDateRab") ? DateTime.MinValue : nl.Field<DateTime>("nlDateRab")),
+                                          // nlDataCdPl1 = nl.Field<DateTime>("nlDataCdPl"),
+                                          nlDataCdPl = (nl.IsNull("nlDataCdPl") ? DateTime.MinValue : nl.Field<DateTime>("nlDataCdPl")),
+                                          // nlDateCd1 = nl.Field<DateTime>("nlDateCd"),
+                                          nlDataCd = (nl.IsNull("nlDateCd") ? DateTime.MinValue : nl.Field<DateTime>("nlDateCd")),
+                                          nlPachMin = nl.Field<decimal>("nlPachMin"),
+                                          nlPachMax = nl.Field<decimal>("nlPachMax"),
+                                          nlV = nl.Field<int>("nlV"),
+                                          nlKodd7 = nl.Field<string>("nlKodd7"),
+                                          nlNzOp = nl.Field<int>("nlNzOp"),
+                                          nlTbID = nl.Field<string>("nlTbID"),
+                                          brUsl = nl.Field<int>("brUsl"),
+                                          //idBrigFrom = nl.Field<int>("idBrigFrom"),
+                                          idBrigFrom = (nl.IsNull("idBrigFrom") ? 0 : nl.Field<int>("idBrigFrom")),
+                                          //idBrigTo = nl.Field<int>("idBrigTo"),
+                                          idBrigTo = (nl.IsNull("idBrigTo") ? 0 : nl.Field<int>("idBrigTo")),
+                                          nlIzNakl = nl.Field<decimal>("nlIzNakl"),
+                                          nn = nl.Field<string>("nn"),
+                                          vidPr = nl.Field<string>("vidPr")
+                                      };
+                System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
+                dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
+                bsPzNomList.DataSource = dtPzNomList;
             }
 
         }
@@ -158,6 +371,7 @@ namespace SewingProduction.form
             GetBrigName(XIdBrig);
             this.radioButton3.Checked = true;
             this.radioButton6.Checked = true;
+            GetMonthList();
             PlanZagrBrigLoadData();
             //string connectionString = Properties.Settings.Default.ACEConnectionString;
             //using (SqlConnection connection = new SqlConnection(connectionString))
@@ -190,39 +404,23 @@ namespace SewingProduction.form
             GetPachListByNom(Convert.ToInt32(gridView2.GetDataRow(gridView2.FocusedRowHandle)["nlNom"]));
         }
 
-        private void labelControl11_Click(object sender, EventArgs e)
+        private void simpleButton4_Click(object sender, EventArgs e)
         {
-
+            //MessageBox.Show(cbMonthList.SelectedValue.ToString());
+            cbMonthList.SelectedIndex = -1;
         }
 
-        private void labelControl13_Click(object sender, EventArgs e)
+        private void cbMonthList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (GetYearPlan() != 0 && GetMonthPlan() != 0)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
-        private void labelControl14_Click(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void simpleButton13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void simpleButton14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panel4_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void simpleButton19_Click(object sender, EventArgs e)
-        {
-
+            PlanZagrBrigLoadData();
         }
     }
 }

@@ -114,7 +114,8 @@
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gcPzArticulList = new DevExpress.XtraGrid.GridControl();
+            this.bsPzArticulList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -122,8 +123,8 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.lblBrigName = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -147,8 +148,9 @@
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.tbYearPlan = new System.Windows.Forms.TextBox();
+            this.cbMonthList = new System.Windows.Forms.ComboBox();
+            this.bsMonthList = new System.Windows.Forms.BindingSource(this.components);
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
@@ -162,7 +164,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.bsPzOperList = new System.Windows.Forms.BindingSource(this.components);
-            this.bsPzArticulList = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
@@ -175,16 +176,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPzArticulList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPzArticulList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPzArticulList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -202,7 +204,7 @@
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.tbPList);
             this.panel1.Controls.Add(this.gcPzNomList);
-            this.panel1.Controls.Add(this.gridControl1);
+            this.panel1.Controls.Add(this.gcPzArticulList);
             this.panel1.Controls.Add(this.simpleButton2);
             this.panel1.Controls.Add(this.lblBrigName);
             this.panel1.Controls.Add(this.panel5);
@@ -461,7 +463,7 @@
             this.simpleButton19.Size = new System.Drawing.Size(178, 19);
             this.simpleButton19.TabIndex = 39;
             this.simpleButton19.Text = "Удалить из план. загруза по V";
-            this.simpleButton19.Click += new System.EventHandler(this.simpleButton19_Click);
+            //this.simpleButton19.Click += new System.EventHandler(this.simpleButton19_Click);
             // 
             // simpleButton18
             // 
@@ -807,7 +809,7 @@
             this.labelControl14.Size = new System.Drawing.Size(31, 13);
             this.labelControl14.TabIndex = 7;
             this.labelControl14.Text = "Пачка";
-            this.labelControl14.Click += new System.EventHandler(this.labelControl14_Click);
+            //this.labelControl14.Click += new System.EventHandler(this.labelControl14_Click);
             // 
             // labelControl13
             // 
@@ -816,7 +818,7 @@
             this.labelControl13.Size = new System.Drawing.Size(43, 13);
             this.labelControl13.TabIndex = 6;
             this.labelControl13.Text = "Артикул";
-            this.labelControl13.Click += new System.EventHandler(this.labelControl13_Click);
+            //this.labelControl13.Click += new System.EventHandler(this.labelControl13_Click);
             // 
             // textBox6
             // 
@@ -834,7 +836,7 @@
             this.simpleButton13.Size = new System.Drawing.Size(199, 19);
             this.simpleButton13.TabIndex = 13;
             this.simpleButton13.Text = "Просмотр работы к подтверждению";
-            this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
+            //this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
             // 
             // simpleButton14
             // 
@@ -844,7 +846,7 @@
             this.simpleButton14.Size = new System.Drawing.Size(148, 19);
             this.simpleButton14.TabIndex = 32;
             this.simpleButton14.Text = "История по операции";
-            this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
+            //this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
             // 
             // panel7
             // 
@@ -962,7 +964,7 @@
             this.labelControl11.Size = new System.Drawing.Size(41, 13);
             this.labelControl11.TabIndex = 5;
             this.labelControl11.Text = "оборуд.";
-            this.labelControl11.Click += new System.EventHandler(this.labelControl11_Click);
+            //this.labelControl11.Click += new System.EventHandler(this.labelControl11_Click);
             // 
             // labelControl12
             // 
@@ -1169,17 +1171,17 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 0;
             // 
-            // gridControl1
+            // gcPzArticulList
             // 
-            this.gridControl1.DataSource = this.bsPzArticulList;
-            this.gridControl1.Location = new System.Drawing.Point(3, 92);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.gcPzArticulList.DataSource = this.bsPzArticulList;
+            this.gcPzArticulList.Location = new System.Drawing.Point(3, 92);
+            this.gcPzArticulList.MainView = this.gridView1;
+            this.gcPzArticulList.Name = "gcPzArticulList";
+            this.gcPzArticulList.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.gridControl1.Size = new System.Drawing.Size(522, 181);
-            this.gridControl1.TabIndex = 9;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gcPzArticulList.Size = new System.Drawing.Size(522, 181);
+            this.gcPzArticulList.TabIndex = 9;
+            this.gcPzArticulList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
             // gridView1
@@ -1192,9 +1194,9 @@
             this.gridColumn3,
             this.gridColumn4,
             this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7});
-            this.gridView1.GridControl = this.gridControl1;
+            this.gridColumn7,
+            this.gridColumn6});
+            this.gridView1.GridControl = this.gcPzArticulList;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             // 
@@ -1202,6 +1204,7 @@
             // 
             this.gridColumn1.Caption = "V";
             this.gridColumn1.ColumnEdit = this.repositoryItemCheckEdit1;
+            this.gridColumn1.FieldName = "alV";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.OptionsColumn.FixedWidth = true;
             this.gridColumn1.OptionsFilter.AllowAutoFilter = false;
@@ -1220,6 +1223,7 @@
             // gridColumn2
             // 
             this.gridColumn2.Caption = "План. дата сдачи (MIN)";
+            this.gridColumn2.FieldName = "alDataCdPl";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.OptionsColumn.FixedWidth = true;
             this.gridColumn2.OptionsColumn.ReadOnly = true;
@@ -1232,17 +1236,19 @@
             // gridColumn3
             // 
             this.gridColumn3.Caption = "Модель комплекта";
+            this.gridColumn3.FieldName = "alModK";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.OptionsColumn.ReadOnly = true;
             this.gridColumn3.OptionsFilter.AllowAutoFilter = false;
             this.gridColumn3.OptionsFilter.AllowFilter = false;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 4;
-            this.gridColumn3.Width = 97;
+            this.gridColumn3.Width = 120;
             // 
             // gridColumn4
             // 
             this.gridColumn4.Caption = "Артикул комплекта";
+            this.gridColumn4.FieldName = "alArticulK";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.OptionsColumn.FixedWidth = true;
             this.gridColumn4.OptionsColumn.ReadOnly = true;
@@ -1255,6 +1261,7 @@
             // gridColumn5
             // 
             this.gridColumn5.Caption = "Кол-во шт";
+            this.gridColumn5.FieldName = "alKol";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.OptionsColumn.FixedWidth = true;
             this.gridColumn5.OptionsColumn.ReadOnly = true;
@@ -1264,21 +1271,10 @@
             this.gridColumn5.VisibleIndex = 2;
             this.gridColumn5.Width = 45;
             // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "Модель";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.OptionsColumn.FixedWidth = true;
-            this.gridColumn6.OptionsColumn.ReadOnly = true;
-            this.gridColumn6.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn6.OptionsFilter.AllowFilter = false;
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 1;
-            this.gridColumn6.Width = 70;
-            // 
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Артикул";
+            this.gridColumn7.FieldName = "alArticul";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.OptionsColumn.FixedWidth = true;
             this.gridColumn7.OptionsColumn.ReadOnly = true;
@@ -1286,7 +1282,17 @@
             this.gridColumn7.OptionsFilter.AllowFilter = false;
             this.gridColumn7.Visible = true;
             this.gridColumn7.VisibleIndex = 0;
-            this.gridColumn7.Width = 70;
+            this.gridColumn7.Width = 80;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "Модель";
+            this.gridColumn6.FieldName = "alMod";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.OptionsColumn.FixedWidth = true;
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 1;
+            this.gridColumn6.Width = 80;
             // 
             // simpleButton2
             // 
@@ -1321,8 +1327,8 @@
             this.panel5.Controls.Add(this.labelControl4);
             this.panel5.Controls.Add(this.simpleButton5);
             this.panel5.Controls.Add(this.simpleButton4);
-            this.panel5.Controls.Add(this.textBox2);
-            this.panel5.Controls.Add(this.comboBox1);
+            this.panel5.Controls.Add(this.tbYearPlan);
+            this.panel5.Controls.Add(this.cbMonthList);
             this.panel5.Controls.Add(this.labelControl3);
             this.panel5.Controls.Add(this.labelControl2);
             this.panel5.Controls.Add(this.simpleButton3);
@@ -1446,6 +1452,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Услуги";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
             // 
             // radioButton2
             // 
@@ -1526,7 +1533,6 @@
             // 
             // simpleButton5
             // 
-            this.simpleButton5.Enabled = false;
             this.simpleButton5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
             this.simpleButton5.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
             this.simpleButton5.Location = new System.Drawing.Point(449, 27);
@@ -1536,30 +1542,31 @@
             // 
             // simpleButton4
             // 
-            this.simpleButton4.Enabled = false;
             this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
             this.simpleButton4.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
             this.simpleButton4.Location = new System.Drawing.Point(449, 4);
             this.simpleButton4.Name = "simpleButton4";
             this.simpleButton4.Size = new System.Drawing.Size(29, 21);
             this.simpleButton4.TabIndex = 14;
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
             // 
-            // textBox2
+            // tbYearPlan
             // 
-            this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(390, 27);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(53, 20);
-            this.textBox2.TabIndex = 13;
+            this.tbYearPlan.Location = new System.Drawing.Point(390, 27);
+            this.tbYearPlan.Name = "tbYearPlan";
+            this.tbYearPlan.Size = new System.Drawing.Size(53, 20);
+            this.tbYearPlan.TabIndex = 13;
             // 
-            // comboBox1
+            // cbMonthList
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(390, 4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(53, 21);
-            this.comboBox1.TabIndex = 12;
+            this.cbMonthList.DataSource = this.bsMonthList;
+            this.cbMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonthList.FormattingEnabled = true;
+            this.cbMonthList.Location = new System.Drawing.Point(390, 4);
+            this.cbMonthList.Name = "cbMonthList";
+            this.cbMonthList.Size = new System.Drawing.Size(54, 21);
+            this.cbMonthList.TabIndex = 12;
+            this.cbMonthList.SelectedIndexChanged += new System.EventHandler(this.cbMonthList_SelectedIndexChanged);
             // 
             // labelControl3
             // 
@@ -1672,7 +1679,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(777, 357);
             this.panel4.TabIndex = 2;
-            this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
+            //this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // label3
             // 
@@ -1710,7 +1717,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPzArticulList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPzArticulList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             this.panel5.ResumeLayout(false);
@@ -1719,12 +1727,12 @@
             this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPzArticulList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1751,8 +1759,8 @@
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.SimpleButton simpleButton5;
         private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.TextBox tbYearPlan;
+        private System.Windows.Forms.ComboBox cbMonthList;
         private DevExpress.XtraEditors.LabelControl labelControl3;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton simpleButton6;
@@ -1769,7 +1777,7 @@
         private System.Windows.Forms.RadioButton radioButton3;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RadioButton radioButton2;
-        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.GridControl gcPzArticulList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private System.Windows.Forms.TextBox tbPList;
         private DevExpress.XtraGrid.GridControl gcPzNomList;
@@ -1786,7 +1794,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
@@ -1864,5 +1871,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn50;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn51;
         private System.Windows.Forms.BindingSource bsPzArticulList;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private System.Windows.Forms.BindingSource bsMonthList;
     }
 }
