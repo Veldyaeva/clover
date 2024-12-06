@@ -10,6 +10,7 @@ using DevExpress.Utils;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraCharts.Design;
 using DevExpress.XtraEditors.Filtering.Templates;
+using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,6 +35,7 @@ namespace SewingProduction.form
 
         public int XIdBrig;
         public string XNameBrig;
+        public System.Data.DataTable dtNomList;
         public void GetBrigName(int _xIdBrig)
         {
             string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -79,20 +81,27 @@ namespace SewingProduction.form
         }
         public void GetPachListByNom(int _nlNom)
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            if (_nlNom == 0)
             {
-                connection.Open();
-                SqlDataAdapter adapterPachList = new SqlDataAdapter();
-                System.Data.DataTable dtPachList = new System.Data.DataTable();
-                string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
-                queryPachList += $"	from raskr_zeh_up ";
-                queryPachList += $"	where nom = {_nlNom} ";
-                SqlCommand commandPachList = new SqlCommand(queryPachList, connection);
-                adapterPachList.SelectCommand = commandPachList;
-                adapterPachList.Fill(dtPachList);
-                //bsPzNomList.DataSource = dtPachList;
-                tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
+                tbPList.Text = "";
+            }
+            else
+            {
+                string connectionString = Properties.Settings.Default.ACEConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlDataAdapter adapterPachList = new SqlDataAdapter();
+                    System.Data.DataTable dtPachList = new System.Data.DataTable();
+                    string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
+                    queryPachList += $"	from raskr_zeh_up ";
+                    queryPachList += $"	where nom = {_nlNom} ";
+                    SqlCommand commandPachList = new SqlCommand(queryPachList, connection);
+                    adapterPachList.SelectCommand = commandPachList;
+                    adapterPachList.Fill(dtPachList);
+                    //bsPzNomList.DataSource = dtPachList;
+                    tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
+                }
             }
         }
         //public static System.Data.DataTable GroupAndSum(System.Data.DataTable _sourceTable, string _groupByColumn, string _sumColumn)
@@ -241,7 +250,7 @@ namespace SewingProduction.form
                 this.gridColumn17.Visible = false;
                 connection.Open();
                 SqlDataAdapter adapterNomList = new SqlDataAdapter();
-                System.Data.DataTable dtNomList = new System.Data.DataTable();
+                dtNomList = new System.Data.DataTable();
                 string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
                 SqlCommand commandNomList = new SqlCommand(queryNomList, connection);
                 adapterNomList.SelectCommand = commandNomList;
@@ -281,87 +290,68 @@ namespace SewingProduction.form
                                       alKol = g.Sum(row => row.Field<decimal>("nlKol"))
                                   };
                 System.Data.DataTable dtPzArticulList = ConvertToDataTable(queryPzArticulList);
+                string _alKodd7 = "";
+                string _alMod = "";
                 if (dtPzArticulList.Rows.Count != 0)
                 {
                     dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
+                    _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alKodd7"].ToString();
+                    _alMod = dtPzArticulList.Rows[0]["alMod"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alMod"].ToString();
                 }
                 bsPzArticulList.DataSource = dtPzArticulList;
 
-                string _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString();
-                string _alMod = dtPzArticulList.Rows[0]["alMod"].ToString();
-                var queryPzNomlList = from row in dtNomList.AsEnumerable()
-                                      where (row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod)
-                                      select row;
-                System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
-                dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
-                bsPzNomList.DataSource = dtPzNomList;
+                GetArticulNomList(_alKodd7, _alMod);
 
-                //var queryPzNomlList = dtNomList.AsEnumerable().Where(row => row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod).AsQueryable();
-                //System.Data.DataTable dtPzNomList = (System.Data.DataTable)queryPzNomlList;
-                //dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
-
-                //var queryPzNomlList = dtNomList.AsEnumerable()
-                //.Where(row => row.Field<string>("nlKodd7") == _alKodd7 && row.Field<string>("nlMod") == _alMod) // Условие
-                //.GroupBy(row => new { ProductName = row.Field<string>("ProductName"), SalesMonth = row.Field<DateTime>("SalesDate").Month })
-                //.Select(group => new
-                //{
-                //    ProductName = group.Key.ProductName,
-                //    SalesMonth = group.Key.SalesMonth,
-                //    TotalSales = group.Sum(row => row.Field<decimal>("SalesAmount"))
-                //})
-                //.OrderByDescending(x => x.TotalSales); // Сортировка
-
-
-
-                var queryPzNomlList = from nl in dtNomList.AsEnumerable()
-                                      where (nl.Field<string>("nlKodd7") == _alKodd7 && nl.Field<string>("nlMod") == _alMod)
-                                      select new
-                                      {
-                                          nlNom = nl.Field<decimal>("nlNom"),
-                                          nlNomN = nl.Field<decimal>("nlNomN"),
-                                          nlBrig = nl.Field<string>("nlBrig"),
-                                          nlNomZad = nl.Field<string>("nlNomZad"),
-                                          nlKodd = nl.Field<string>("nlKodd"),
-                                          nlKoddRt = nl.Field<string>("nlKoddRt"),
-                                          nlGrup = nl.Field<string>("nlGrup"),
-                                          nlArticul = nl.Field<string>("nlArticul"),
-                                          nlMod = nl.Field<string>("nlMod"),
-                                          nlGrupK = nl.Field<string>("nlGrupK"),
-                                          nlArticulK = nl.Field<string>("nlArticulK"),
-                                          nlModK = nl.Field<string>("nlModK"),
-                                          nlKol = nl.Field<decimal>("nlKol"),
-                                          nlIdBrig = nl.Field<int>("nlIdBrig"),
-                                          nlNZzeh = nl.Field<decimal>("nlNZzeh"),
-                                          //nlDateZeh1 = nl.Field<DateTime>("nlDateZeh"),
-                                          nlDateZeh = (nl.IsNull("nlDateZeh") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZeh")),
-                                          //nlDateZehP1 = nl.Field<DateTime>("nlDateZehP"),
-                                          nlDateZehP = (nl.IsNull("nlDateZehP") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZehP")),
-                                          //nlDateRab1 = nl.Field<DateTime>("nlDateRab"),
-                                          nlDateRab = (nl.IsNull("nlDateRab") ? DateTime.MinValue : nl.Field<DateTime>("nlDateRab")),
-                                          // nlDataCdPl1 = nl.Field<DateTime>("nlDataCdPl"),
-                                          nlDataCdPl = (nl.IsNull("nlDataCdPl") ? DateTime.MinValue : nl.Field<DateTime>("nlDataCdPl")),
-                                          // nlDateCd1 = nl.Field<DateTime>("nlDateCd"),
-                                          nlDataCd = (nl.IsNull("nlDateCd") ? DateTime.MinValue : nl.Field<DateTime>("nlDateCd")),
-                                          nlPachMin = nl.Field<decimal>("nlPachMin"),
-                                          nlPachMax = nl.Field<decimal>("nlPachMax"),
-                                          nlV = nl.Field<int>("nlV"),
-                                          nlKodd7 = nl.Field<string>("nlKodd7"),
-                                          nlNzOp = nl.Field<int>("nlNzOp"),
-                                          nlTbID = nl.Field<string>("nlTbID"),
-                                          brUsl = nl.Field<int>("brUsl"),
-                                          //idBrigFrom = nl.Field<int>("idBrigFrom"),
-                                          idBrigFrom = (nl.IsNull("idBrigFrom") ? 0 : nl.Field<int>("idBrigFrom")),
-                                          //idBrigTo = nl.Field<int>("idBrigTo"),
-                                          idBrigTo = (nl.IsNull("idBrigTo") ? 0 : nl.Field<int>("idBrigTo")),
-                                          nlIzNakl = nl.Field<decimal>("nlIzNakl"),
-                                          nn = nl.Field<string>("nn"),
-                                          vidPr = nl.Field<string>("vidPr")
-                                      };
-                System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
-                dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
-                bsPzNomList.DataSource = dtPzNomList;
             }
+        }
 
+        private void GetArticulNomList(string _alKodd7, string _alMod)
+        {
+            var queryPzNomlList = from nl in dtNomList.AsEnumerable()
+                                  where (nl.Field<string>("nlKodd7") == _alKodd7 && nl.Field<string>("nlMod") == _alMod)
+                                  select new
+                                  {
+                                      nlNom = nl.Field<decimal>("nlNom"),
+                                      nlNomN = nl.Field<decimal>("nlNomN"),
+                                      nlBrig = nl.Field<string>("nlBrig"),
+                                      nlNomZad = nl.Field<string>("nlNomZad"),
+                                      nlKodd = nl.Field<string>("nlKodd"),
+                                      nlKoddRt = nl.Field<string>("nlKoddRt"),
+                                      nlGrup = nl.Field<string>("nlGrup"),
+                                      nlArticul = nl.Field<string>("nlArticul"),
+                                      nlMod = nl.Field<string>("nlMod"),
+                                      nlGrupK = nl.Field<string>("nlGrupK"),
+                                      nlArticulK = nl.Field<string>("nlArticulK"),
+                                      nlModK = nl.Field<string>("nlModK"),
+                                      nlKol = nl.Field<decimal>("nlKol"),
+                                      nlIdBrig = nl.Field<int>("nlIdBrig"),
+                                      nlNZzeh = nl.Field<decimal>("nlNZzeh"),
+                                      nlDateZeh = (nl.IsNull("nlDateZeh") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZeh")),
+                                      nlDateZehP = (nl.IsNull("nlDateZehP") ? DateTime.MinValue : nl.Field<DateTime>("nlDateZehP")),
+                                      nlDateRab = (nl.IsNull("nlDateRab") ? DateTime.MinValue : nl.Field<DateTime>("nlDateRab")),
+                                      nlDataCdPl = (nl.IsNull("nlDataCdPl") ? DateTime.MinValue : nl.Field<DateTime>("nlDataCdPl")),
+                                      nlDataCd = (nl.IsNull("nlDateCd") ? DateTime.MinValue : nl.Field<DateTime>("nlDateCd")),
+                                      nlPachMin = nl.Field<decimal>("nlPachMin"),
+                                      nlPachMax = nl.Field<decimal>("nlPachMax"),
+                                      nlV = nl.Field<int>("nlV"),
+                                      nlKodd7 = nl.Field<string>("nlKodd7"),
+                                      nlNzOp = nl.Field<int>("nlNzOp"),
+                                      nlTbID = nl.Field<string>("nlTbID"),
+                                      brUsl = nl.Field<int>("brUsl"),
+                                      idBrigFrom = (nl.IsNull("idBrigFrom") ? 0 : nl.Field<int>("idBrigFrom")),
+                                      idBrigTo = (nl.IsNull("idBrigTo") ? 0 : nl.Field<int>("idBrigTo")),
+                                      nlIzNakl = nl.Field<decimal>("nlIzNakl"),
+                                      nn = nl.Field<string>("nn"),
+                                      vidPr = nl.Field<string>("vidPr")
+                                  };
+            System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
+            bsPzNomList.DataSource = dtPzNomList;
+            if (dtPzNomList.Rows.Count != 0)
+            {
+                dtPzNomList.DefaultView.Sort = "nlDataCdPl, nlNom ASC";
+                GetPachListByNom(Convert.ToInt32(dtPzNomList.Rows[0]["nlNom"]));
+            }
+            bsPzNomList.DataSource = dtPzNomList;
         }
 
         private void PlanZagrBrig_Load(object sender, EventArgs e)
@@ -369,6 +359,7 @@ namespace SewingProduction.form
             
             XIdBrig = 1;
             GetBrigName(XIdBrig);
+            this.cbMonthList.SelectedIndex = -1;
             this.radioButton3.Checked = true;
             this.radioButton6.Checked = true;
             GetMonthList();
@@ -398,27 +389,99 @@ namespace SewingProduction.form
 
         }
 
-        private void gridView2_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        private void gcPzNomList_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             //MessageBox.Show(gridView2.GetDataRow(gridView2.FocusedRowHandle)["nlNom"].ToString());
-            GetPachListByNom(Convert.ToInt32(gridView2.GetDataRow(gridView2.FocusedRowHandle)["nlNom"]));
+            if (gridView2.RowCount > 0)
+            {
+                GetPachListByNom(Convert.ToInt32(gridView2.GetDataRow(gridView2.FocusedRowHandle)["nlNom"]));
+            }
+            else
+            {
+                GetPachListByNom(0);
+            }
         }
-
         private void simpleButton4_Click(object sender, EventArgs e)
         {
             //MessageBox.Show(cbMonthList.SelectedValue.ToString());
             cbMonthList.SelectedIndex = -1;
+            PlanZagrBrigLoadData();
         }
 
         private void cbMonthList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (GetYearPlan() != 0 && GetMonthPlan() != 0)
+            if (cbMonthList.SelectedIndex > -1 && tbYearPlan.Text.ToString().Length > 0)
             {
                 PlanZagrBrigLoadData();
             }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void simpleButton5_Click(object sender, EventArgs e)
+        {
+            this.tbYearPlan.Text = "";
+            this.simpleButton4_Click(sender,e);
+            PlanZagrBrigLoadData();
+        }
+
+        private void tbYearPlan_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (cbMonthList.SelectedIndex > -1 && tbYearPlan.Text.ToString().Length > 0)
+                {
+                    PlanZagrBrigLoadData();
+                }
+            }
+        }
+
+        private void gcPzArticulList_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            if (gridView1.RowCount > 0)
+            {
+                GetArticulNomList(gridView1.GetDataRow(gridView1.FocusedRowHandle)["alKodd7"].ToString(), gridView1.GetDataRow(gridView1.FocusedRowHandle)["alMod"].ToString());
+            }
+            else
+            {
+                GetPachListByNom(0);
+            }
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton6_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton7_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton5_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton8_CheckedChanged(object sender, EventArgs e)
+        {
+            PlanZagrBrigLoadData();
+        }
+
+        private void radioButton9_CheckedChanged(object sender, EventArgs e)
         {
             PlanZagrBrigLoadData();
         }

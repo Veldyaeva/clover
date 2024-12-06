@@ -463,7 +463,6 @@
             this.simpleButton19.Size = new System.Drawing.Size(178, 19);
             this.simpleButton19.TabIndex = 39;
             this.simpleButton19.Text = "Удалить из план. загруза по V";
-            //this.simpleButton19.Click += new System.EventHandler(this.simpleButton19_Click);
             // 
             // simpleButton18
             // 
@@ -809,7 +808,6 @@
             this.labelControl14.Size = new System.Drawing.Size(31, 13);
             this.labelControl14.TabIndex = 7;
             this.labelControl14.Text = "Пачка";
-            //this.labelControl14.Click += new System.EventHandler(this.labelControl14_Click);
             // 
             // labelControl13
             // 
@@ -818,7 +816,6 @@
             this.labelControl13.Size = new System.Drawing.Size(43, 13);
             this.labelControl13.TabIndex = 6;
             this.labelControl13.Text = "Артикул";
-            //this.labelControl13.Click += new System.EventHandler(this.labelControl13_Click);
             // 
             // textBox6
             // 
@@ -836,7 +833,6 @@
             this.simpleButton13.Size = new System.Drawing.Size(199, 19);
             this.simpleButton13.TabIndex = 13;
             this.simpleButton13.Text = "Просмотр работы к подтверждению";
-            //this.simpleButton13.Click += new System.EventHandler(this.simpleButton13_Click);
             // 
             // simpleButton14
             // 
@@ -846,7 +842,6 @@
             this.simpleButton14.Size = new System.Drawing.Size(148, 19);
             this.simpleButton14.TabIndex = 32;
             this.simpleButton14.Text = "История по операции";
-            //this.simpleButton14.Click += new System.EventHandler(this.simpleButton14_Click);
             // 
             // panel7
             // 
@@ -964,7 +959,6 @@
             this.labelControl11.Size = new System.Drawing.Size(41, 13);
             this.labelControl11.TabIndex = 5;
             this.labelControl11.Text = "оборуд.";
-            //this.labelControl11.Click += new System.EventHandler(this.labelControl11_Click);
             // 
             // labelControl12
             // 
@@ -1040,7 +1034,7 @@
             this.gridView2.GridControl = this.gcPzNomList;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView2_FocusedRowChanged);
+            this.gridView2.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gcPzNomList_FocusedRowChanged);
             // 
             // gridColumn8
             // 
@@ -1199,6 +1193,7 @@
             this.gridView1.GridControl = this.gcPzArticulList;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gcPzArticulList_FocusedRowChanged);
             // 
             // gridColumn1
             // 
@@ -1364,6 +1359,7 @@
             this.radioButton9.TabStop = true;
             this.radioButton9.Text = "Отгр. б/НЗОп";
             this.radioButton9.UseVisualStyleBackColor = true;
+            this.radioButton9.CheckedChanged += new System.EventHandler(this.radioButton9_CheckedChanged);
             // 
             // radioButton8
             // 
@@ -1375,6 +1371,7 @@
             this.radioButton8.TabStop = true;
             this.radioButton8.Text = "ВСЕ с НЗОп";
             this.radioButton8.UseVisualStyleBackColor = true;
+            this.radioButton8.CheckedChanged += new System.EventHandler(this.radioButton8_CheckedChanged);
             // 
             // radioButton5
             // 
@@ -1387,6 +1384,7 @@
             this.radioButton5.TabStop = true;
             this.radioButton5.Text = "ВСЕ";
             this.radioButton5.UseVisualStyleBackColor = true;
+            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
             // 
             // radioButton6
             // 
@@ -1398,6 +1396,7 @@
             this.radioButton6.TabStop = true;
             this.radioButton6.Text = "ВСЕ не отгр.";
             this.radioButton6.UseVisualStyleBackColor = true;
+            this.radioButton6.CheckedChanged += new System.EventHandler(this.radioButton6_CheckedChanged);
             // 
             // radioButton7
             // 
@@ -1409,6 +1408,7 @@
             this.radioButton7.TabStop = true;
             this.radioButton7.Text = "Отгр. с НЗОп";
             this.radioButton7.UseVisualStyleBackColor = true;
+            this.radioButton7.CheckedChanged += new System.EventHandler(this.radioButton7_CheckedChanged);
             // 
             // simpleButton7
             // 
@@ -1441,6 +1441,7 @@
             this.radioButton3.TabStop = true;
             this.radioButton3.Text = "ВСЕ";
             this.radioButton3.UseVisualStyleBackColor = true;
+            this.radioButton3.CheckedChanged += new System.EventHandler(this.radioButton3_CheckedChanged);
             // 
             // radioButton1
             // 
@@ -1464,6 +1465,7 @@
             this.radioButton2.TabStop = true;
             this.radioButton2.Text = "Собственное";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // simpleButton6
             // 
@@ -1539,6 +1541,7 @@
             this.simpleButton5.Name = "simpleButton5";
             this.simpleButton5.Size = new System.Drawing.Size(29, 21);
             this.simpleButton5.TabIndex = 15;
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
             // 
             // simpleButton4
             // 
@@ -1556,6 +1559,7 @@
             this.tbYearPlan.Name = "tbYearPlan";
             this.tbYearPlan.Size = new System.Drawing.Size(53, 20);
             this.tbYearPlan.TabIndex = 13;
+            this.tbYearPlan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbYearPlan_KeyDown);
             // 
             // cbMonthList
             // 
@@ -1679,7 +1683,6 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(777, 357);
             this.panel4.TabIndex = 2;
-            //this.panel4.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4_Paint);
             // 
             // label3
             // 
