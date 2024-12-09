@@ -449,7 +449,7 @@ namespace SewingProduction
                     connection.Open();
                     SqlDataAdapter adapterPartNaklList = new SqlDataAdapter();
                     DataTable dtPartNaklList = new DataTable();
-                    string queryPartNaklList = $"SELECT * FROM [ACE].[dbo].[View_History_razdel_nakl] where iz_b = '{iz}' ";
+                    string queryPartNaklList = $"SELECT * FROM View_History_razdel_nakl where iz_b = '{iz}' ";
                     queryPartNaklList += $" order by id";
                     SqlCommand commandPartNaklList = new SqlCommand(queryPartNaklList, connection);
                     adapterPartNaklList.SelectCommand = commandPartNaklList;
