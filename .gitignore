@@ -382,3 +382,4 @@ FodyWeavers.xsd
 /bin/Debug/SewingProduction.exe
 /bin/Debug/SewingProduction.pdb
 /obj/Debug/SewingProduction.exe
+/obj/Debug/SewingProduction.csproj.AssemblyReference.cache
