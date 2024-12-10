@@ -82,7 +82,9 @@
       <HintPath>packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
@@ -99,12 +101,26 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACEDataSet.cs">
+      <DependentUpon>ACEDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ACEDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ACEDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="form\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -228,6 +244,9 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="form\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -303,6 +322,17 @@
     <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ACEDataSet.xsc">
+      <DependentUpon>ACEDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ACEDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>ACEDataSet2.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="ACEDataSet.xss">
+      <DependentUpon>ACEDataSet.xsd</DependentUpon>
+    </None>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>
