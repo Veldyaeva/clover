@@ -36,6 +36,10 @@ namespace SewingProduction
         private void SpMainForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            TeamWork teamWork = new TeamWork();
+            teamWork.Show(); 
+            //Form4 form4 = new Form4();
+            //form4.Show();
             //// Create a Bar Manager that will display a bar of commands at the top of the main form.
             //BarManager barManager = new BarManager();
             //barManager.Form = this;
