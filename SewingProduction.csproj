@@ -118,6 +118,12 @@
     <Compile Include="form\OborudBrig.Designer.cs">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\SpravBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravBrig.Designer.cs">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\SpravForAll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -129,6 +135,12 @@
     </Compile>
     <Compile Include="form\SpravOborud.Designer.cs">
       <DependentUpon>SpravOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravZeh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravZeh.Designer.cs">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -233,12 +245,23 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
-      <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    <EmbeddedResource Include="form\OborudBrig.ru.resx">
+      <DependentUpon>OborudBrig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravBrig.resx">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravForAll.resx">
       <DependentUpon>SpravForAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravZeh.resx">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
+      <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>

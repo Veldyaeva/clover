@@ -345,3 +345,11 @@ D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.PrintFurnUpakZay
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.report.subreport.PrintTakingCardReport.resources
 D:\SharpProj\sewingproduction\obj\Debug\SewingProduction.form.FurnUpakDeliveryInfo.resources
 D:\SP\obj\Debug\SewingProduction.form.OborudBrig.resources
+D:\SP\obj\Debug\SewingProduction.form.FurnUpakDeliveryInfo.resources
+D:\SP\obj\Debug\SewingProduction.report.PrintFurnUpakZayavReport.resources
+D:\SP\obj\Debug\SewingProduction.report.subreport.PrintTakingCardReport.resources
+D:\SP\bin\Debug\ru\SewingProduction.resources.dll
+D:\SP\obj\Debug\SewingProduction.form.OborudBrig.ru.resources
+D:\SP\obj\Debug\ru\SewingProduction.resources.dll
+D:\SP\obj\Debug\SewingProduction.form.SpravZeh.resources
+D:\SP\obj\Debug\SewingProduction.form.SpravBrig.resources

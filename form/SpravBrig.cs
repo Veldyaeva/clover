@@ -3,36 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Utils;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
-using System.Diagnostics;
-using DevExpress.ChartRangeControlClient.Core;
-//using DevExpress.XtraGrid.Localization;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.Xpo.DB.Helpers;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.CodeParser;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
-using System.Reflection;
-using DevExpress.Mvvm.Native;
 
 namespace SewingProduction.form
 {
-    public partial class SpravForAll : Form
+    public partial class SpravBrig : Form
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
         string connectionString = Properties.Settings.Default.ACEtestConnectionString;
-
         string queryList;
         int strForAdd;
         string tableString;
@@ -46,39 +32,36 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
-        private System.Windows.Forms.Label[] labels;
-        private TextBox[] textBoxs;
         //словари для рус названий столбцов:
         Dictionary<string, string> eng_rus = new Dictionary<string, string>();
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
-        Dictionary<string, string> eng_type = new Dictionary<string, string>();
-        Dictionary<string, int> rus_read = new Dictionary<string, int>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravForAll(string tableSQL, string rusNameTableSQL)
+
+        public SpravBrig(string tableSQL, string rusNameTableSQL)
         {
-            //GridLocalizer.Active = new RussianGridLocalizer();
             InitializeComponent();
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;
             timer.Tick += Timer_Tick;
-            //Таблица:
+            //Таблица Brig:
             tableString = tableSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
-            //Текст запроса:
-            queryList = $"SELECT * FROM " + tableString;
+            //Текст запроса для Brig:
+            queryList = $@" SELECT id_brig,n_brig,brig,nameZeh AS 'Цех'
+                            FROM Brig
+                            LEFT JOIN ZehList ON ZehList.idZeh = Brig.idZeh ";
             //Иницилизация листа столбцов:
             fieldsQueryListSQL = new List<string>();
-            labels = new System.Windows.Forms.Label[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
-            textBoxs = new TextBox[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+        }
+        private void SpravBrig_Load(object sender, EventArgs e)
+        {
             //Задание имен
             allTableName(tableString);
-        }
-
-        private void SpravForAll_Load(object sender, EventArgs e)
-        {
+            //Загрузка комбобокса:
+            comboBoxZeh_Enter(sender, e);
         }
         //Рус нэйминг столбцов:
         void allTableName(string tableName)
@@ -101,8 +84,6 @@ namespace SewingProduction.form
                     {
                         eng_rus.Add(row["name"].ToString(), row["name_rus"].ToString());
                         rus_eng.Add(row["name_rus"].ToString(), row["name"].ToString());
-                        eng_type.Add(row["name"].ToString(), row["data_type"].ToString());
-                        rus_read.Add(row["name_rus"].ToString(), (Int32)row["readonly"]);
                     }
                 }
             }
@@ -142,9 +123,6 @@ namespace SewingProduction.form
                 //Запрет на редактирование 1й столбца
                 //gridView.Columns[0].OptionsColumn.AllowEdit = false;
                 gridView.Columns[0].Visible = false;
-                //gridView.OptionsBehavior.Editable = false;
-                //gridView.GroupPanelText = ""; // Текст
-
                 // Изменяем заголовки столбцов
                 for (int i = 0; i < tableList.Columns.Count; i++)
                 {
@@ -158,12 +136,11 @@ namespace SewingProduction.form
                     }
                 }
                 // Выравнивание столбцов
-                gridView.BestFitColumns();
+                //gridView.BestFitColumns();
+                gridView1.Columns["n_brig"].Width = 100;
                 gridView.OptionsView.ColumnAutoWidth = true;
-                //перенос столбца архив в конец:
-                //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
             }
-            if (!flagStartListening) 
+            if (!flagStartListening)
             {
                 // Запуск отслеживания изменений для соединения с базой данных
                 SqlDependency.Start(connectionString);
@@ -171,34 +148,25 @@ namespace SewingProduction.form
                 StartListening();
             }
         }
-        // Отображение лейблов и текстбоксов в нужном кол-е
-        void labelAndTextBox()
+        //Загрузка комбобокса список цехов:
+        private void comboBoxZeh_Enter(object sender, EventArgs e)
         {
-            GridView gridView = gridControlSprav.MainView as GridView;
-
-            if (gridView != null)
+            using (SqlConnection connectionCombo = new SqlConnection(connectionString))
             {
-                int columnCount = gridView.Columns.Count;
-
-                for (int i = 0; i < labels.Length; i++)
+                //Текст запроса:
+                string queryZehAllList = $"SELECT nameZeh FROM ZehList";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(queryZehAllList, connectionCombo);
+                //Создаем в памяти таблицу:
+                System.Data.DataTable tableVidProizv = new System.Data.DataTable();
+                //Добавляем ответ сервера в таблицу:
+                dataAdapter.Fill(tableVidProizv);
+                comboBoxZeh.Items.Clear();
+                //Загрузка в комбобокс:
+                foreach (DataRow row in tableVidProizv.Rows)
                 {
-                    if (i < columnCount) // Если индекс меньше количества колонок
-                    {
-                        // текст = колонке
-                        labels[i].Text = gridView.Columns[i].Caption;
-                        // Делаем метку видимой
-                        labels[i].Visible = true;
-                        textBoxs[i].Visible = true; 
-                    }
-                    else
-                    {
-                        // Скрываем метки, если нет данных
-                        labels[i].Visible = false;
-                        textBoxs[i].Visible = false; 
-                    }
+                    comboBoxZeh.Items.Add(row[0].ToString());
                 }
             }
-
         }
         public void StartListening()
         {
@@ -207,10 +175,8 @@ namespace SewingProduction.form
                 flagStartListening = true;
                 // Остановка предыдущего прослушивания, если оно было активно:
                 StopListening();
-                // SQL-запрос// Преобразование списка имен столбцов в строку
-                string columns = string.Join(", ", fieldsQueryListSQL);
                 // SQL-запрос
-                string queryOborudList = $"SELECT {columns} FROM dbo.{tableString}";
+                string queryOborudList = $"SELECT id_brig,idZeh,n_brig,brig FROM dbo.{tableString}";
                 // Создание соединения с базой данных
                 connection = new SqlConnection(connectionString);
                 // Открытие соединения
@@ -273,7 +239,6 @@ namespace SewingProduction.form
                         gridControlSprav_Click(sender, e);
                     }
                 });
-
             }
             // Возобновляем прослушивание
             StartListening();
@@ -283,20 +248,20 @@ namespace SewingProduction.form
         {
             try
             {
-                GridView gridView = (GridView)gridControlSprav.MainView;
                 xtraTabPageAdd.Text = "Добавить";
+                GridView gridView = (GridView)gridControlSprav.MainView;
                 AddTab.TabPages[0].PageVisible = true;
                 simpleButtonDel.Visible = false;
                 simpleButtonAddOtm.Visible = true;
                 simpleButtonAddSave.Visible = true;
-                labelAndTextBox();
                 // Код = последнему коду в таблице + 1
                 textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
-                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                {
-                    textBoxs[i].ReadOnly = false;
-                    textBoxs[i].Text = "";
-                }
+                textBoxBrig.Text = "";
+                textBoxBrig.ReadOnly = false;
+                textBoxNBrig.Text = "";
+                textBoxNBrig.ReadOnly = false;
+                comboBoxZeh.Text = "";
+                comboBoxZeh.Enabled = true;
             }
             catch (Exception Ex)
             {
@@ -308,31 +273,26 @@ namespace SewingProduction.form
         {
             try
             {
+                xtraTabPageAdd.Text = "Редактировать";
                 // Получаем доступ к GridView
                 GridView gridView = gridControlSprav.MainView as GridView;
-                xtraTabPageAdd.Text = "Редактировать";
                 AddTab.TabPages[0].PageVisible = true;
                 simpleButtonDel.Visible = true;
                 simpleButtonAddOtm.Visible = true;
                 simpleButtonAddSave.Visible = true;
-                labelAndTextBox();
                 // Получаем текущую выделенную строку в текстбокси и др
                 textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                {
-                    textBoxs[i].ReadOnly = false;
-                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
-                }
+                textBoxBrig.Text = gridView.GetFocusedRowCellValue("brig").ToString();
+                textBoxBrig.ReadOnly = false;
+                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("n_brig").ToString();
+                textBoxNBrig.ReadOnly = false;
+                comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех").ToString();
+                comboBoxZeh.Enabled = true;
             }
             catch (Exception Ex)
             {
                 Debug.WriteLine($"Error: {Ex.Message}");
             }
-        }
-        //Кнопки вверх/вниз:
-        private void gridControlSprav_KeyUp(object sender, KeyEventArgs e)
-        {
-            gridControlSprav_Click(sender,e);
         }
         //Клик на грид:
         private void gridControlSprav_Click(object sender, EventArgs e)
@@ -347,121 +307,56 @@ namespace SewingProduction.form
                 simpleButtonDel.Visible = false;
                 simpleButtonAddOtm.Visible = false;
                 simpleButtonAddSave.Visible = false;
-                labelAndTextBox();
                 // Получаем текущую выделенную строку в текстбокси и др
                 textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                {
-                    textBoxs[i].ReadOnly = true;
-                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
-                }
+                textBoxBrig.Text = gridView.GetFocusedRowCellValue("brig").ToString();
+                textBoxBrig.ReadOnly = true;
+                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("n_brig").ToString();
+                textBoxNBrig.ReadOnly = true;
+                //comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех") != DBNull.Value ? gridView.GetFocusedRowCellValue("Цех").ToString() : "";
+                if (gridView.GetFocusedRowCellValue("Цех") != DBNull.Value)
+                    comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех").ToString();
+                else comboBoxZeh.SelectedIndex = -1;
+                comboBoxZeh.Enabled = false;
             }
             catch (Exception Ex)
             {
                 Debug.WriteLine($"Error: {Ex.Message}");
             }
         }
+        //Кнопки вверх/вниз:
+        private void gridControlSprav_KeyUp(object sender, KeyEventArgs e)
+        {
+            gridControlSprav_Click(sender, e);
+        }
         //Кнопка Отмена:
         private void simpleButtonAddOtm_Click(object sender, EventArgs e)
         {
             AddTab.TabPages[0].PageVisible = false;
         }
-        //Кнопка сохранить:
-        private void simpleButtonAddSave_Click(object sender, EventArgs e)
+        //Редактирование в таблице:
+        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             try
             {
-                string queryOborudAdd = $"";
-                using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
+                using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
                 {
-                    GridView gridView = gridControlSprav.MainView as GridView;
-                    switch (xtraTabPageAdd.Text)
-                    {
-                        case "Добавить":
-                            {
-                                queryOborudAdd += "INSERT INTO " + tableString + "(";
-                                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                                {
-                                    queryOborudAdd += fieldsQueryListSQL[i];
-                                    queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
-                                }
-                                queryOborudAdd += " VALUES (";
-                                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                                {
-                                    if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
-                                    switch (getType)
-                                    {
-                                        case "int": queryOborudAdd += textBoxs[i].Text; break;
-                                        case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                        case "float": case "decimal": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
-                                    }
-                                    queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
-                                }
-                                flagAddDown = true;
-                                break;
-                            }
-                        case "Редактировать":
-                            {
-                                queryOborudAdd += "UPDATE " + tableString + " SET ";
-                                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                                {
-                                    queryOborudAdd += fieldsQueryListSQL[i] + " = ";
-                                    if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
-                                    switch (getType)
-                                    {
-                                        case "int":     queryOborudAdd += textBoxs[i].Text; break;
-                                        case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                        case "float": case "decimal":   queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
-                                    }
-                                    queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? "" : ",";
-                                }
-                                queryOborudAdd += " FROM " + tableString + " WHERE " + fieldsQueryListSQL[0] + " = " + textBoxs[0].Text;
-                                break;
-                            }
-                        default:
-                            break;
-                    }
-                    using (SqlCommand command = new SqlCommand(queryOborudAdd, connectionINSERT))
-                    {
-                        connectionINSERT.Open();
-                        command.ExecuteNonQuery();
-                        connectionINSERT.Close();
-                    }
-                    labelSave.Text = "Сохранено!";
-                    //AddTab.TabPages[0].PageVisible = false;
+                    connectionUPDATE.Open();
+                    string sql = $"UPDATE {tableString} SET {e.Column.FieldName} = '{e.Value}' WHERE {fieldsQueryListSQL[0]}  = {gridView1.GetDataRow(e.RowHandle)[0]}";
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.ExecuteNonQuery();
+                    connectionUPDATE.Close();
                 }
-
             }
             catch (SqlException sqlEx)
             {
-                labelSave.Text = "Ошибка!";
                 Debug.WriteLine($"{tableString} SQL Error: {sqlEx.Message}");
                 MessageBox.Show($"{sqlEx.Message}");
             }
-            labelSave.Visible = true;
-            timer.Start();
-        }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            labelSave.Visible = false; // Скрываем лейбл
-            timer.Stop(); // Останавливаем таймер
-        }
-
-        //Редактирование таблице:
-        private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
-        {
-            using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
+            catch (Exception ex)
             {
-                string englishName;
-                connectionUPDATE.Open();
-                if (rus_eng.TryGetValue(e.Column.FieldName, out string engName))
-                    englishName = engName;
-                else
-                    englishName = e.Column.FieldName;
-                string sql = $"UPDATE {tableString} SET {englishName} = '{e.Value}' WHERE {fieldsQueryListSQL[0]}  = {gridView1.GetDataRow(e.RowHandle)[0]}";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
-                connectionUPDATE.Close();
+                Debug.WriteLine($"Error {ex.Message}");
+                MessageBox.Show($"Ошибка {ex.Message}");
             }
         }
         //Удалить запись:
@@ -471,15 +366,15 @@ namespace SewingProduction.form
             {
                 GridView gridView = gridControlSprav.MainView as GridView;
                 currentRowIndex = gridView.FocusedRowHandle;
-                string textCol = gridView.GetFocusedRowCellValue(gridView.Columns[1]).ToString();
-                int kodCol = Convert.ToInt32(gridView.GetFocusedRowCellValue(gridView.Columns[0]));
+                string textCol = textBoxBrig.Text;
+                string kodCol = textBoxKod.Text;
                 string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
                 var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
                     {
-                        string queryOborudArh = $"DELETE FROM {tableString} WHERE {fieldsQueryListSQL[0]} = {kodCol}";
+                        string queryOborudArh = $"DELETE FROM {tableString} WHERE id_brig = {kodCol}";
                         using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
                         {
                             connectionDELETE.Open();
@@ -501,11 +396,84 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка {ex.Message}");
             }
         }
-        //закрытие формы:
+        //Кнопка сохранить:
+        private void simpleButtonAddSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string queryAdd = $"";
+                using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
+                {
+                    GridView gridView = gridControlSprav.MainView as GridView;
+                    currentRowIndex = gridView.FocusedRowHandle;
+                    switch (xtraTabPageAdd.Text)
+                    {
+                        case "Добавить":
+                            {
+                                queryAdd = $@"INSERT INTO {tableString} (brig,n_brig,idZeh)
+                                              VALUES ('{textBoxBrig.Text}',{textBoxNBrig.Text},
+                                               (SELECT idZeh FROM ZehList WHERE nameZeh = '{comboBoxZeh.Text}'))";
+                                flagAddDown = true;
+                                break;
+                            }
+                        case "Редактировать":
+                            {
+                                queryAdd = $@"UPDATE {tableString} 
+                                                SET brig = '{textBoxBrig.Text}',
+                                                n_brig = {textBoxNBrig.Text},
+                                                idZeh = (SELECT idZeh FROM ZehList WHERE nameZeh = '{comboBoxZeh.Text}')
+                                              WHERE id_brig =  {textBoxKod.Text}";
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                    using (SqlCommand command = new SqlCommand(queryAdd, connectionINSERT))
+                    {
+                        connectionINSERT.Open();
+                        command.ExecuteNonQuery();
+                        connectionINSERT.Close();
+                    }
+                    labelSave.Text = "Сохранено!";
+                    //AddTab.TabPages[0].PageVisible = false;
+                }
+            }
+            catch (SqlException sqlEx)
+            {
+                labelSave.Text = "Ошибка!";
+                Debug.WriteLine($"{tableString} SQL Error: {sqlEx.Message}");
+                MessageBox.Show($"{sqlEx.Message}");
+            }
+            labelSave.Visible = true;
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            labelSave.Visible = false; // Скрываем лейбл
+            timer.Stop(); // Останавливаем таймер
+        }
+        //ЛейблЛинк Справочник Цехов:
+        private void linkLabelVid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            foreach (Form child in this.MdiParent.MdiChildren)
+            {
+                if (child is SpravZeh)
+                {
+                    // Если форма уже открыта, переключаем на нее
+                    child.BringToFront();
+                    return;
+                }
+            }
+            // Если форма не открыта, создаем новую
+            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            f.MdiParent = this.MdiParent;
+            f.Show();
+        }
+        //Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopListening();
         }
-    }
 
+    }
 }
