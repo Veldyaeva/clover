@@ -7,7 +7,7 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Localization; // локализация для грида
+//using DevExpress.XtraGrid.Localization; // локализация для грида
 //using DevExpress.XtraPrinting.Localization;// локализация для печати
 
 
@@ -40,7 +40,7 @@ namespace SewingProduction.form
 
         private void SpravOborud_Load(object sender, EventArgs e)
         {
-            GridLocalizer.Active = new RussianGridLocalizer();
+            //GridLocalizer.Active = new RussianGridLocalizer();
             //PreviewLocalizer.Active = new RussianPrintLocalizer();
             label4.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label7.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
@@ -102,7 +102,8 @@ namespace SewingProduction.form
                 Debug.WriteLine("Обновление таблицы");
 
                 // Обновление UI через Invoke
-                this.Invoke((MethodInvoker)delegate
+                if (this.IsHandleCreated)
+                    this.Invoke((MethodInvoker)delegate
                 {
                     GridView gridView = oborudGrid.MainView as GridView;
                     // Запомнили положение в таблице:
@@ -265,10 +266,13 @@ namespace SewingProduction.form
             textBoxRedSokrName.Text = gridView.GetFocusedRowCellValue("text_ob_s").ToString().Trim();
             // Заполняем комбобоксы:
             comboTableItems(comboBoxRedGrup, comboBoxRedVidm, comboBoxRedClass);
-            comboBoxRedGrup.Text = gridView.GetFocusedRowCellValue("text_ob_tip").ToString();
-            comboBoxRedVidm.Text = gridView.GetFocusedRowCellValue("vidm").ToString();
-            comboBoxRedClass.Text = gridView.GetFocusedRowCellValue("idClass").ToString();
-            comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav").ToString();
+            comboBoxRedGrup.Text = gridView.GetFocusedRowCellValue("text_ob_tip") != DBNull.Value ? gridView.GetFocusedRowCellValue("text_ob_tip").ToString() : "";
+            comboBoxRedVidm.Text = gridView.GetFocusedRowCellValue("vidm") != DBNull.Value ? gridView.GetFocusedRowCellValue("vidm").ToString() : "";
+            comboBoxRedClass.Text = gridView.GetFocusedRowCellValue("idClass") != DBNull.Value ? gridView.GetFocusedRowCellValue("idClass").ToString() : "";
+            //comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav") != DBNull.Value ? gridView.GetFocusedRowCellValue("nastav").ToString() : "";
+            if (gridView.GetFocusedRowCellValue("nastav") != DBNull.Value)
+                comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav").ToString();
+            else comboBoxRedNastav.SelectedIndex = -1;
             // comboBox group for proizv:
             comboBoxRedShp.Text = gridView.GetFocusedRowCellValue("vid_shp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_shp").ToString() : "нет";
             comboBoxRedVzp.Text = gridView.GetFocusedRowCellValue("vid_vzp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_vzp").ToString() : "нет";
@@ -476,11 +480,6 @@ namespace SewingProduction.form
             simpleButtonRedOtm_Click(sender, e);
         }
 
-        private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StopListening();
-        }
-
         private void checkEditArhiv_CheckedChanged(object sender, EventArgs e)
         {
             LoadData();
@@ -488,6 +487,10 @@ namespace SewingProduction.form
             //gridView.Columns["arhiv"].Visible = !gridView.Columns["arhiv"].Visible;
             //перенос столбца архив в конец:
             gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count-2));
+        }
+        private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopListening();
         }
     }
 }
