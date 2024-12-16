@@ -1,4 +1,7 @@
-﻿namespace SewingProduction.form
+﻿using System;
+using System.Windows.Forms;
+
+namespace SewingProduction.form
 {
     partial class TeamWork
     {
@@ -29,21 +32,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.DataAccess.Sql.SelectQuery selectQuery2 = new DevExpress.DataAccess.Sql.SelectQuery();
-            DevExpress.DataAccess.Sql.Column column7 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression7 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Table table2 = new DevExpress.DataAccess.Sql.Table();
-            DevExpress.DataAccess.Sql.Column column8 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression8 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Column column9 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression9 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Column column10 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression10 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Column column11 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression11 = new DevExpress.DataAccess.Sql.ColumnExpression();
-            DevExpress.DataAccess.Sql.Column column12 = new DevExpress.DataAccess.Sql.Column();
-            DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            DevExpress.XtraGrid.GridLevelNode gridLevelNode3 = new DevExpress.XtraGrid.GridLevelNode();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
+            this.gridView8 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControl7 = new DevExpress.XtraGrid.GridControl();
+            this.aCEDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aCEDataSet = new SewingProduction.ACEDataSet();
+            this.gridView9 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView10 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView7 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView12 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView13 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView14 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView15 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView16 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView17 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView18 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView19 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView20 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.TabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
@@ -61,34 +71,34 @@
             this.sortBtn = new System.Windows.Forms.Button();
             this.SortBox = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.gridControl6 = new DevExpress.XtraGrid.GridControl();
+            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colkod5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpr1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpr2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpr3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colExpr4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
             this.exitBtn = new System.Windows.Forms.Button();
-            this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aCEDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aCEDataSet = new SewingProduction.ACEDataSet();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.artnormnBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.artnormnBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colannID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colstatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colgrup = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colarticul = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colmod = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colpo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldata_obn = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colsek_vyazo = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_vyaz3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_vyaz6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colsek_vyaz12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colsek_kr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colslogn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_vyaz12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz62 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz71 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz72 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_vyazo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colseb = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -98,16 +108,20 @@
             this.coldata_sozd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldiz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colconstr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldata_obn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz70 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_kr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colslogn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colarh = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsql_pr_add = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldate_add = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkomp_name = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannDateDel = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colannCompAdd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannCompDel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colannID = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannDateAdd = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colannCompAdd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.stackPanel2 = new DevExpress.Utils.Layout.StackPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -118,14 +132,11 @@
             this.SecTimeTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
-            this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
             this.aproovmentBtn = new System.Windows.Forms.Button();
             this.KonfKardBtn = new System.Windows.Forms.Button();
             this.AddPrevBtn = new System.Windows.Forms.Button();
             this.deleteBtn = new System.Windows.Forms.Button();
-            this.printBtn = new System.Windows.Forms.Button();
             this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
             this.constructorComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
             this.designerComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
@@ -136,18 +147,18 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coln1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colseb1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coln1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colseb_s = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek12 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -178,19 +189,8 @@
             this.colrazryd1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
-            this.aceDataSet1 = new SewingProduction.ACEDataSet();
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.artnormnBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.art_norm_nTableAdapter = new SewingProduction.ACEDataSetTableAdapters.art_norm_nTableAdapter();
-            this.norm_raszTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_raszTableAdapter();
-            this.norm_raskTableAdapter = new SewingProduction.ACEDataSetTableAdapters.Norm_raskTableAdapter();
-            this.norm_kontTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_kontTableAdapter();
-            this.norm_dop_obrTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_dop_obrTableAdapter();
-            this.sp_articulTableAdapter = new SewingProduction.ACEDataSetTableAdapters.sp_articulTableAdapter();
-            this.art_norm_nTableAdapter1 = new SewingProduction.ACEDataSetTableAdapters.art_norm_nTableAdapter();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_o2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -205,20 +205,43 @@
             this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl5 = new DevExpress.XtraGrid.GridControl();
+            this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_p = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_v = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_stra = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_p_tamp = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl6 = new DevExpress.XtraGrid.GridControl();
-            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.colkod5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.art_norm_nTableAdapter = new SewingProduction.ACEDataSetTableAdapters.art_norm_nTableAdapter();
+            this.norm_raszTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_raszTableAdapter();
+            this.norm_raskTableAdapter = new SewingProduction.ACEDataSetTableAdapters.Norm_raskTableAdapter();
+            this.norm_kontTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_kontTableAdapter();
+            this.norm_dop_obrTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_dop_obrTableAdapter();
+            this.sp_articulTableAdapter = new SewingProduction.ACEDataSetTableAdapters.sp_articulTableAdapter();
+            this.fillByToolStrip = new System.Windows.Forms.ToolStrip();
+            this.fillByToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView13)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView15)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView16)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView17)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView18)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView19)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
@@ -236,18 +259,15 @@
             this.panelControl1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
             this.stackPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).BeginInit();
@@ -257,17 +277,140 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aceDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).BeginInit();
+            this.xtraTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
+            this.fillByToolStrip.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // gridView8
+            // 
+            this.gridView8.GridControl = this.gridControl7;
+            this.gridView8.Name = "gridView8";
+            // 
+            // gridControl7
+            // 
+            this.gridControl7.DataSource = this.aCEDataSetBindingSource;
+            this.gridControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridLevelNode1.LevelTemplate = this.gridView8;
+            gridLevelNode1.RelationName = "Level1";
+            gridLevelNode2.LevelTemplate = this.gridView9;
+            gridLevelNode2.RelationName = "Level2";
+            gridLevelNode3.LevelTemplate = this.gridView10;
+            gridLevelNode3.RelationName = "Level3";
+            this.gridControl7.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
+            gridLevelNode1,
+            gridLevelNode2,
+            gridLevelNode3});
+            this.gridControl7.Location = new System.Drawing.Point(0, 0);
+            this.gridControl7.MainView = this.gridView11;
+            this.gridControl7.Name = "gridControl7";
+            this.gridControl7.Size = new System.Drawing.Size(1493, 789);
+            this.gridControl7.TabIndex = 0;
+            this.gridControl7.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView9,
+            this.gridView10,
+            this.gridView11,
+            this.gridView7,
+            this.gridView12,
+            this.gridView13,
+            this.gridView14,
+            this.gridView15,
+            this.gridView16,
+            this.gridView17,
+            this.gridView18,
+            this.gridView19,
+            this.gridView20,
+            this.gridView8});
+            // 
+            // aCEDataSetBindingSource
+            // 
+            this.aCEDataSetBindingSource.DataSource = this.aCEDataSet;
+            this.aCEDataSetBindingSource.Position = 0;
+            // 
+            // aCEDataSet
+            // 
+            this.aCEDataSet.DataSetName = "ACEDataSet";
+            this.aCEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // gridView9
+            // 
+            this.gridView9.GridControl = this.gridControl7;
+            this.gridView9.Name = "gridView9";
+            // 
+            // gridView10
+            // 
+            this.gridView10.GridControl = this.gridControl7;
+            this.gridView10.Name = "gridView10";
+            // 
+            // gridView11
+            // 
+            this.gridView11.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn3});
+            this.gridView11.GridControl = this.gridControl7;
+            this.gridView11.Name = "gridView11";
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "gridColumn3";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 0;
+            // 
+            // gridView7
+            // 
+            this.gridView7.GridControl = this.gridControl7;
+            this.gridView7.Name = "gridView7";
+            // 
+            // gridView12
+            // 
+            this.gridView12.GridControl = this.gridControl7;
+            this.gridView12.Name = "gridView12";
+            // 
+            // gridView13
+            // 
+            this.gridView13.GridControl = this.gridControl7;
+            this.gridView13.Name = "gridView13";
+            // 
+            // gridView14
+            // 
+            this.gridView14.GridControl = this.gridControl7;
+            this.gridView14.Name = "gridView14";
+            // 
+            // gridView15
+            // 
+            this.gridView15.GridControl = this.gridControl7;
+            this.gridView15.Name = "gridView15";
+            // 
+            // gridView16
+            // 
+            this.gridView16.GridControl = this.gridControl7;
+            this.gridView16.Name = "gridView16";
+            // 
+            // gridView17
+            // 
+            this.gridView17.GridControl = this.gridControl7;
+            this.gridView17.Name = "gridView17";
+            // 
+            // gridView18
+            // 
+            this.gridView18.GridControl = this.gridControl7;
+            this.gridView18.Name = "gridView18";
+            // 
+            // gridView19
+            // 
+            this.gridView19.GridControl = this.gridControl7;
+            this.gridView19.Name = "gridView19";
+            // 
+            // gridView20
+            // 
+            this.gridView20.GridControl = this.gridControl7;
+            this.gridView20.Name = "gridView20";
             // 
             // xtraTabControl1
             // 
@@ -458,6 +601,62 @@
             this.panel3.Size = new System.Drawing.Size(710, 215);
             this.panel3.TabIndex = 5;
             // 
+            // gridControl6
+            // 
+            this.gridControl6.Location = new System.Drawing.Point(8, 3);
+            this.gridControl6.MainView = this.gridView6;
+            this.gridControl6.Name = "gridControl6";
+            this.gridControl6.Size = new System.Drawing.Size(389, 180);
+            this.gridControl6.TabIndex = 3;
+            this.gridControl6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView6});
+            // 
+            // gridView6
+            // 
+            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.colkod5,
+            this.colExpr1,
+            this.colExpr2,
+            this.colExpr3,
+            this.colExpr4});
+            this.gridView6.GridControl = this.gridControl6;
+            this.gridView6.Name = "gridView6";
+            // 
+            // colkod5
+            // 
+            this.colkod5.FieldName = "kod";
+            this.colkod5.Name = "colkod5";
+            this.colkod5.Visible = true;
+            this.colkod5.VisibleIndex = 0;
+            // 
+            // colExpr1
+            // 
+            this.colExpr1.FieldName = "Expr1";
+            this.colExpr1.Name = "colExpr1";
+            this.colExpr1.Visible = true;
+            this.colExpr1.VisibleIndex = 1;
+            // 
+            // colExpr2
+            // 
+            this.colExpr2.FieldName = "Expr2";
+            this.colExpr2.Name = "colExpr2";
+            this.colExpr2.Visible = true;
+            this.colExpr2.VisibleIndex = 2;
+            // 
+            // colExpr3
+            // 
+            this.colExpr3.FieldName = "Expr3";
+            this.colExpr3.Name = "colExpr3";
+            this.colExpr3.Visible = true;
+            this.colExpr3.VisibleIndex = 3;
+            // 
+            // colExpr4
+            // 
+            this.colExpr4.FieldName = "Expr4";
+            this.colExpr4.Name = "colExpr4";
+            this.colExpr4.Visible = true;
+            this.colExpr4.VisibleIndex = 4;
+            // 
             // svgImageBox1
             // 
             this.svgImageBox1.Location = new System.Drawing.Point(432, 6);
@@ -475,24 +674,9 @@
             this.exitBtn.Text = "ВЫХОД";
             this.exitBtn.UseVisualStyleBackColor = true;
             // 
-            // sparticulBindingSource
-            // 
-            this.sparticulBindingSource.DataMember = "sp_articul";
-            this.sparticulBindingSource.DataSource = this.aCEDataSetBindingSource;
-            // 
-            // aCEDataSetBindingSource
-            // 
-            this.aCEDataSetBindingSource.DataSource = this.aCEDataSet;
-            this.aCEDataSetBindingSource.Position = 0;
-            // 
-            // aCEDataSet
-            // 
-            this.aCEDataSet.DataSetName = "ACEDataSet";
-            this.aCEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // gridControl2
             // 
-            this.gridControl2.DataSource = this.artnormnBindingSource1;
+            this.gridControl2.DataSource = this.artnormnBindingSource;
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.Location = new System.Drawing.Point(3, 143);
             this.gridControl2.MainView = this.gridView3;
@@ -501,35 +685,32 @@
             this.gridControl2.TabIndex = 7;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
+            this.gridControl2.Visible = false;
             // 
-            // artnormnBindingSource1
+            // artnormnBindingSource
             // 
-            this.artnormnBindingSource1.DataMember = "art_norm_n";
-            this.artnormnBindingSource1.DataSource = this.aCEDataSet;
+            this.artnormnBindingSource.DataMember = "art_norm_n";
+            this.artnormnBindingSource.DataSource = this.aCEDataSet;
             // 
             // gridView3
             // 
             this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colannID,
-            this.colkod,
+            this.colstatus,
             this.colgrup,
             this.colarticul,
             this.colmod,
-            this.gridColumn2,
             this.colpo,
             this.colsek_shv,
-            this.coldata_obn,
-            this.colsek_vyazo,
+            this.colsek_vyaz3,
             this.colsek_vyaz5,
+            this.colsek_vyaz6,
             this.colsek_vyaz7,
-            this.colsek_vyaz12,
             this.colsek_vyaz10,
-            this.gridColumn1,
-            this.colsek_kr,
-            this.colslogn,
+            this.colsek_vyaz12,
             this.colsek_vyaz62,
             this.colsek_vyaz71,
             this.colsek_vyaz72,
+            this.colsek_vyazo,
             this.colsek_vyaz,
             this.colsek,
             this.colseb,
@@ -539,16 +720,20 @@
             this.coldata_sozd,
             this.coldiz,
             this.colconstr,
+            this.coldata_obn,
             this.colsek_vyaz70,
+            this.colsek_kr,
+            this.colslogn,
             this.colsek_vyaz14,
             this.colarh,
             this.colsql_pr_add,
             this.coldate_add,
             this.colkomp_name,
             this.colannDateDel,
-            this.colannCompAdd,
             this.colannCompDel,
-            this.colannDateAdd});
+            this.colannID,
+            this.colannDateAdd,
+            this.colannCompAdd});
             this.gridView3.CustomizationFormBounds = new System.Drawing.Rectangle(688, 702, 264, 272);
             this.gridView3.GridControl = this.gridControl2;
             this.gridView3.Name = "gridView3";
@@ -556,17 +741,12 @@
             this.gridView3.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
             this.gridView3.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView3_FocusedRowChanged);
             // 
-            // colannID
+            // colstatus
             // 
-            this.colannID.FieldName = "annID";
-            this.colannID.Name = "colannID";
-            // 
-            // colkod
-            // 
-            this.colkod.FieldName = "kod";
-            this.colkod.Name = "colkod";
-            this.colkod.Visible = true;
-            this.colkod.VisibleIndex = 0;
+            this.colstatus.FieldName = "status";
+            this.colstatus.Name = "colstatus";
+            this.colstatus.Visible = true;
+            this.colstatus.VisibleIndex = 0;
             // 
             // colgrup
             // 
@@ -589,201 +769,250 @@
             this.colmod.Visible = true;
             this.colmod.VisibleIndex = 3;
             // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "gridColumn2";
-            this.gridColumn2.FieldName = "sek";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 6;
-            // 
             // colpo
             // 
             this.colpo.FieldName = "po";
             this.colpo.Name = "colpo";
+            this.colpo.Visible = true;
+            this.colpo.VisibleIndex = 4;
             // 
             // colsek_shv
             // 
             this.colsek_shv.FieldName = "sek_shv";
             this.colsek_shv.Name = "colsek_shv";
             this.colsek_shv.Visible = true;
-            this.colsek_shv.VisibleIndex = 4;
+            this.colsek_shv.VisibleIndex = 5;
             // 
-            // coldata_obn
+            // colsek_vyaz3
             // 
-            this.coldata_obn.FieldName = "data_obn";
-            this.coldata_obn.Name = "coldata_obn";
-            this.coldata_obn.Visible = true;
-            this.coldata_obn.VisibleIndex = 12;
-            // 
-            // colsek_vyazo
-            // 
-            this.colsek_vyazo.FieldName = "sek_vyazo";
-            this.colsek_vyazo.Name = "colsek_vyazo";
-            this.colsek_vyazo.Visible = true;
-            this.colsek_vyazo.VisibleIndex = 10;
+            this.colsek_vyaz3.FieldName = "sek_vyaz3";
+            this.colsek_vyaz3.Name = "colsek_vyaz3";
+            this.colsek_vyaz3.Visible = true;
+            this.colsek_vyaz3.VisibleIndex = 6;
             // 
             // colsek_vyaz5
             // 
             this.colsek_vyaz5.FieldName = "sek_vyaz5";
             this.colsek_vyaz5.Name = "colsek_vyaz5";
             this.colsek_vyaz5.Visible = true;
-            this.colsek_vyaz5.VisibleIndex = 5;
+            this.colsek_vyaz5.VisibleIndex = 7;
+            // 
+            // colsek_vyaz6
+            // 
+            this.colsek_vyaz6.FieldName = "sek_vyaz6";
+            this.colsek_vyaz6.Name = "colsek_vyaz6";
+            this.colsek_vyaz6.Visible = true;
+            this.colsek_vyaz6.VisibleIndex = 8;
             // 
             // colsek_vyaz7
             // 
             this.colsek_vyaz7.FieldName = "sek_vyaz7";
             this.colsek_vyaz7.Name = "colsek_vyaz7";
             this.colsek_vyaz7.Visible = true;
-            this.colsek_vyaz7.VisibleIndex = 7;
-            // 
-            // colsek_vyaz12
-            // 
-            this.colsek_vyaz12.FieldName = "sek_vyaz12";
-            this.colsek_vyaz12.Name = "colsek_vyaz12";
-            this.colsek_vyaz12.Visible = true;
-            this.colsek_vyaz12.VisibleIndex = 9;
+            this.colsek_vyaz7.VisibleIndex = 9;
             // 
             // colsek_vyaz10
             // 
             this.colsek_vyaz10.FieldName = "sek_vyaz10";
             this.colsek_vyaz10.Name = "colsek_vyaz10";
             this.colsek_vyaz10.Visible = true;
-            this.colsek_vyaz10.VisibleIndex = 8;
+            this.colsek_vyaz10.VisibleIndex = 10;
             // 
-            // gridColumn1
+            // colsek_vyaz12
             // 
-            this.gridColumn1.Caption = "gridColumn1";
-            this.gridColumn1.FieldName = "sek_vyaz6";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 11;
+            this.colsek_vyaz12.FieldName = "sek_vyaz12";
+            this.colsek_vyaz12.Name = "colsek_vyaz12";
+            this.colsek_vyaz12.Visible = true;
+            this.colsek_vyaz12.VisibleIndex = 11;
+            // 
+            // colsek_vyaz62
+            // 
+            this.colsek_vyaz62.FieldName = "sek_vyaz62";
+            this.colsek_vyaz62.Name = "colsek_vyaz62";
+            this.colsek_vyaz62.Visible = true;
+            this.colsek_vyaz62.VisibleIndex = 12;
+            // 
+            // colsek_vyaz71
+            // 
+            this.colsek_vyaz71.FieldName = "sek_vyaz71";
+            this.colsek_vyaz71.Name = "colsek_vyaz71";
+            this.colsek_vyaz71.Visible = true;
+            this.colsek_vyaz71.VisibleIndex = 13;
+            // 
+            // colsek_vyaz72
+            // 
+            this.colsek_vyaz72.FieldName = "sek_vyaz72";
+            this.colsek_vyaz72.Name = "colsek_vyaz72";
+            this.colsek_vyaz72.Visible = true;
+            this.colsek_vyaz72.VisibleIndex = 14;
+            // 
+            // colsek_vyazo
+            // 
+            this.colsek_vyazo.FieldName = "sek_vyazo";
+            this.colsek_vyazo.Name = "colsek_vyazo";
+            this.colsek_vyazo.Visible = true;
+            this.colsek_vyazo.VisibleIndex = 15;
+            // 
+            // colsek_vyaz
+            // 
+            this.colsek_vyaz.FieldName = "sek_vyaz";
+            this.colsek_vyaz.Name = "colsek_vyaz";
+            this.colsek_vyaz.Visible = true;
+            this.colsek_vyaz.VisibleIndex = 16;
+            // 
+            // colsek
+            // 
+            this.colsek.FieldName = "sek";
+            this.colsek.Name = "colsek";
+            this.colsek.Visible = true;
+            this.colsek.VisibleIndex = 17;
+            // 
+            // colseb
+            // 
+            this.colseb.FieldName = "seb";
+            this.colseb.Name = "colseb";
+            this.colseb.Visible = true;
+            this.colseb.VisibleIndex = 18;
+            // 
+            // colst
+            // 
+            this.colst.FieldName = "st";
+            this.colst.Name = "colst";
+            this.colst.Visible = true;
+            this.colst.VisibleIndex = 19;
+            // 
+            // colpo1
+            // 
+            this.colpo1.FieldName = "po1";
+            this.colpo1.Name = "colpo1";
+            this.colpo1.Visible = true;
+            this.colpo1.VisibleIndex = 20;
+            // 
+            // colkomment
+            // 
+            this.colkomment.FieldName = "komment";
+            this.colkomment.Name = "colkomment";
+            this.colkomment.Visible = true;
+            this.colkomment.VisibleIndex = 21;
+            // 
+            // coldata_sozd
+            // 
+            this.coldata_sozd.FieldName = "data_sozd";
+            this.coldata_sozd.Name = "coldata_sozd";
+            this.coldata_sozd.Visible = true;
+            this.coldata_sozd.VisibleIndex = 22;
+            // 
+            // coldiz
+            // 
+            this.coldiz.FieldName = "diz";
+            this.coldiz.Name = "coldiz";
+            this.coldiz.Visible = true;
+            this.coldiz.VisibleIndex = 23;
+            // 
+            // colconstr
+            // 
+            this.colconstr.FieldName = "constr";
+            this.colconstr.Name = "colconstr";
+            this.colconstr.Visible = true;
+            this.colconstr.VisibleIndex = 24;
+            // 
+            // coldata_obn
+            // 
+            this.coldata_obn.FieldName = "data_obn";
+            this.coldata_obn.Name = "coldata_obn";
+            this.coldata_obn.Visible = true;
+            this.coldata_obn.VisibleIndex = 25;
+            // 
+            // colsek_vyaz70
+            // 
+            this.colsek_vyaz70.FieldName = "sek_vyaz70";
+            this.colsek_vyaz70.Name = "colsek_vyaz70";
+            this.colsek_vyaz70.Visible = true;
+            this.colsek_vyaz70.VisibleIndex = 26;
             // 
             // colsek_kr
             // 
             this.colsek_kr.FieldName = "sek_kr";
             this.colsek_kr.Name = "colsek_kr";
             this.colsek_kr.Visible = true;
-            this.colsek_kr.VisibleIndex = 13;
+            this.colsek_kr.VisibleIndex = 27;
             // 
             // colslogn
             // 
             this.colslogn.FieldName = "slogn";
             this.colslogn.Name = "colslogn";
             this.colslogn.Visible = true;
-            this.colslogn.VisibleIndex = 14;
-            // 
-            // colsek_vyaz62
-            // 
-            this.colsek_vyaz62.FieldName = "sek_vyaz62";
-            this.colsek_vyaz62.Name = "colsek_vyaz62";
-            // 
-            // colsek_vyaz71
-            // 
-            this.colsek_vyaz71.FieldName = "sek_vyaz71";
-            this.colsek_vyaz71.Name = "colsek_vyaz71";
-            // 
-            // colsek_vyaz72
-            // 
-            this.colsek_vyaz72.FieldName = "sek_vyaz72";
-            this.colsek_vyaz72.Name = "colsek_vyaz72";
-            // 
-            // colsek_vyaz
-            // 
-            this.colsek_vyaz.FieldName = "sek_vyaz";
-            this.colsek_vyaz.Name = "colsek_vyaz";
-            // 
-            // colsek
-            // 
-            this.colsek.FieldName = "sek";
-            this.colsek.Name = "colsek";
-            // 
-            // colseb
-            // 
-            this.colseb.FieldName = "seb";
-            this.colseb.Name = "colseb";
-            // 
-            // colst
-            // 
-            this.colst.FieldName = "st";
-            this.colst.Name = "colst";
-            // 
-            // colpo1
-            // 
-            this.colpo1.FieldName = "po1";
-            this.colpo1.Name = "colpo1";
-            // 
-            // colkomment
-            // 
-            this.colkomment.FieldName = "komment";
-            this.colkomment.Name = "colkomment";
-            // 
-            // coldata_sozd
-            // 
-            this.coldata_sozd.FieldName = "data_sozd";
-            this.coldata_sozd.Name = "coldata_sozd";
-            // 
-            // coldiz
-            // 
-            this.coldiz.FieldName = "diz";
-            this.coldiz.Name = "coldiz";
-            // 
-            // colconstr
-            // 
-            this.colconstr.FieldName = "constr";
-            this.colconstr.Name = "colconstr";
-            // 
-            // colsek_vyaz70
-            // 
-            this.colsek_vyaz70.FieldName = "sek_vyaz70";
-            this.colsek_vyaz70.Name = "colsek_vyaz70";
+            this.colslogn.VisibleIndex = 28;
             // 
             // colsek_vyaz14
             // 
             this.colsek_vyaz14.FieldName = "sek_vyaz14";
             this.colsek_vyaz14.Name = "colsek_vyaz14";
+            this.colsek_vyaz14.Visible = true;
+            this.colsek_vyaz14.VisibleIndex = 29;
             // 
             // colarh
             // 
             this.colarh.FieldName = "arh";
             this.colarh.Name = "colarh";
             this.colarh.Visible = true;
-            this.colarh.VisibleIndex = 15;
+            this.colarh.VisibleIndex = 30;
             // 
             // colsql_pr_add
             // 
             this.colsql_pr_add.FieldName = "sql_pr_add";
             this.colsql_pr_add.Name = "colsql_pr_add";
+            this.colsql_pr_add.Visible = true;
+            this.colsql_pr_add.VisibleIndex = 31;
             // 
             // coldate_add
             // 
             this.coldate_add.FieldName = "date_add";
             this.coldate_add.Name = "coldate_add";
+            this.coldate_add.Visible = true;
+            this.coldate_add.VisibleIndex = 32;
             // 
             // colkomp_name
             // 
             this.colkomp_name.FieldName = "komp_name";
             this.colkomp_name.Name = "colkomp_name";
+            this.colkomp_name.Visible = true;
+            this.colkomp_name.VisibleIndex = 33;
             // 
             // colannDateDel
             // 
             this.colannDateDel.FieldName = "annDateDel";
             this.colannDateDel.Name = "colannDateDel";
-            // 
-            // colannCompAdd
-            // 
-            this.colannCompAdd.FieldName = "annCompAdd";
-            this.colannCompAdd.Name = "colannCompAdd";
+            this.colannDateDel.Visible = true;
+            this.colannDateDel.VisibleIndex = 34;
             // 
             // colannCompDel
             // 
             this.colannCompDel.FieldName = "annCompDel";
             this.colannCompDel.Name = "colannCompDel";
+            this.colannCompDel.Visible = true;
+            this.colannCompDel.VisibleIndex = 35;
+            // 
+            // colannID
+            // 
+            this.colannID.FieldName = "annID";
+            this.colannID.Name = "colannID";
+            this.colannID.Visible = true;
+            this.colannID.VisibleIndex = 36;
             // 
             // colannDateAdd
             // 
             this.colannDateAdd.FieldName = "annDateAdd";
             this.colannDateAdd.Name = "colannDateAdd";
+            this.colannDateAdd.Visible = true;
+            this.colannDateAdd.VisibleIndex = 37;
+            // 
+            // colannCompAdd
+            // 
+            this.colannCompAdd.FieldName = "annCompAdd";
+            this.colannCompAdd.Name = "colannCompAdd";
+            this.colannCompAdd.Visible = true;
+            this.colannCompAdd.VisibleIndex = 38;
             // 
             // tableLayoutPanel2
             // 
@@ -889,23 +1118,12 @@
             this.dateCreate.Size = new System.Drawing.Size(106, 21);
             this.dateCreate.TabIndex = 7;
             // 
-            // normkontBindingSource
-            // 
-            this.normkontBindingSource.DataMember = "norm_kont";
-            this.normkontBindingSource.DataSource = this.aCEDataSetBindingSource;
-            // 
-            // normdopobrBindingSource
-            // 
-            this.normdopobrBindingSource.DataMember = "norm_dop_obr";
-            this.normdopobrBindingSource.DataSource = this.aCEDataSetBindingSource;
-            // 
             // panel4
             // 
             this.panel4.Controls.Add(this.aproovmentBtn);
             this.panel4.Controls.Add(this.KonfKardBtn);
             this.panel4.Controls.Add(this.AddPrevBtn);
             this.panel4.Controls.Add(this.deleteBtn);
-            this.panel4.Controls.Add(this.printBtn);
             this.panel4.Controls.Add(this.commentRichTextBox);
             this.panel4.Controls.Add(this.constructorComboBox);
             this.panel4.Controls.Add(this.designerComboBox);
@@ -921,6 +1139,7 @@
             // 
             // aproovmentBtn
             // 
+            this.aproovmentBtn.BackColor = System.Drawing.Color.White;
             this.aproovmentBtn.Location = new System.Drawing.Point(460, 100);
             this.aproovmentBtn.Name = "aproovmentBtn";
             this.aproovmentBtn.Size = new System.Drawing.Size(203, 52);
@@ -954,15 +1173,6 @@
             this.deleteBtn.TabIndex = 8;
             this.deleteBtn.Text = "удалить";
             this.deleteBtn.UseVisualStyleBackColor = true;
-            // 
-            // printBtn
-            // 
-            this.printBtn.Location = new System.Drawing.Point(11, 129);
-            this.printBtn.Name = "printBtn";
-            this.printBtn.Size = new System.Drawing.Size(75, 23);
-            this.printBtn.TabIndex = 7;
-            this.printBtn.Text = "ПЕЧАТЬ";
-            this.printBtn.UseVisualStyleBackColor = true;
             // 
             // commentRichTextBox
             // 
@@ -1024,12 +1234,14 @@
             // 
             // doubleBtn
             // 
+            this.doubleBtn.AutoSize = true;
             this.doubleBtn.Location = new System.Drawing.Point(11, 95);
             this.doubleBtn.Name = "doubleBtn";
             this.doubleBtn.Size = new System.Drawing.Size(75, 28);
             this.doubleBtn.TabIndex = 6;
             this.doubleBtn.Text = "ДУБЛЬ";
             this.doubleBtn.UseVisualStyleBackColor = true;
+            this.doubleBtn.Click += new System.EventHandler(this.doubleBtn_Click);
             // 
             // gridControl1
             // 
@@ -1051,18 +1263,18 @@
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.coln,
+            this.coln1,
+            this.colrazryd,
+            this.coltext,
             this.colkod1,
             this.colkod_o,
             this.colkod_podr,
             this.colkod_proizv,
-            this.coltext,
             this.colsek1,
             this.colseb1,
-            this.coln,
             this.coln_ch,
-            this.coln1,
             this.colseb_s,
-            this.colrazryd,
             this.colspec,
             this.colobor,
             this.colsek12,
@@ -1079,6 +1291,34 @@
             this.colnrCompAdd});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            // 
+            // coln
+            // 
+            this.coln.FieldName = "n";
+            this.coln.Name = "coln";
+            this.coln.Visible = true;
+            this.coln.VisibleIndex = 7;
+            // 
+            // coln1
+            // 
+            this.coln1.FieldName = "n1";
+            this.coln1.Name = "coln1";
+            this.coln1.Visible = true;
+            this.coln1.VisibleIndex = 9;
+            // 
+            // colrazryd
+            // 
+            this.colrazryd.FieldName = "razryd";
+            this.colrazryd.Name = "colrazryd";
+            this.colrazryd.Visible = true;
+            this.colrazryd.VisibleIndex = 11;
+            // 
+            // coltext
+            // 
+            this.coltext.FieldName = "text";
+            this.coltext.Name = "coltext";
+            this.coltext.Visible = true;
+            this.coltext.VisibleIndex = 4;
             // 
             // colkod1
             // 
@@ -1108,13 +1348,6 @@
             this.colkod_proizv.Visible = true;
             this.colkod_proizv.VisibleIndex = 3;
             // 
-            // coltext
-            // 
-            this.coltext.FieldName = "text";
-            this.coltext.Name = "coltext";
-            this.coltext.Visible = true;
-            this.coltext.VisibleIndex = 4;
-            // 
             // colsek1
             // 
             this.colsek1.FieldName = "sek";
@@ -1129,13 +1362,6 @@
             this.colseb1.Visible = true;
             this.colseb1.VisibleIndex = 6;
             // 
-            // coln
-            // 
-            this.coln.FieldName = "n";
-            this.coln.Name = "coln";
-            this.coln.Visible = true;
-            this.coln.VisibleIndex = 7;
-            // 
             // coln_ch
             // 
             this.coln_ch.FieldName = "n_ch";
@@ -1143,26 +1369,12 @@
             this.coln_ch.Visible = true;
             this.coln_ch.VisibleIndex = 8;
             // 
-            // coln1
-            // 
-            this.coln1.FieldName = "n1";
-            this.coln1.Name = "coln1";
-            this.coln1.Visible = true;
-            this.coln1.VisibleIndex = 9;
-            // 
             // colseb_s
             // 
             this.colseb_s.FieldName = "seb_s";
             this.colseb_s.Name = "colseb_s";
             this.colseb_s.Visible = true;
             this.colseb_s.VisibleIndex = 10;
-            // 
-            // colrazryd
-            // 
-            this.colrazryd.FieldName = "razryd";
-            this.colrazryd.Name = "colrazryd";
-            this.colrazryd.Visible = true;
-            this.colrazryd.VisibleIndex = 11;
             // 
             // colspec
             // 
@@ -1389,86 +1601,6 @@
             this.colobor1.Visible = true;
             this.colobor1.VisibleIndex = 12;
             // 
-            // xtraTabPage2
-            // 
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1493, 789);
-            this.xtraTabPage2.Text = "xtraTabPage2";
-            // 
-            // sqlDataSource1
-            // 
-            this.sqlDataSource1.ConnectionName = "ACEConnectionString";
-            this.sqlDataSource1.Name = "sqlDataSource1";
-            columnExpression7.ColumnName = "kod";
-            table2.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"843\" />";
-            table2.Name = "art_norm_n";
-            columnExpression7.Table = table2;
-            column7.Expression = columnExpression7;
-            columnExpression8.ColumnName = "grup";
-            columnExpression8.Table = table2;
-            column8.Expression = columnExpression8;
-            columnExpression9.ColumnName = "articul";
-            columnExpression9.Table = table2;
-            column9.Expression = columnExpression9;
-            columnExpression10.ColumnName = "mod";
-            columnExpression10.Table = table2;
-            column10.Expression = columnExpression10;
-            columnExpression11.ColumnName = "po";
-            columnExpression11.Table = table2;
-            column11.Expression = columnExpression11;
-            columnExpression12.ColumnName = "annID";
-            columnExpression12.Table = table2;
-            column12.Expression = columnExpression12;
-            selectQuery2.Columns.Add(column7);
-            selectQuery2.Columns.Add(column8);
-            selectQuery2.Columns.Add(column9);
-            selectQuery2.Columns.Add(column10);
-            selectQuery2.Columns.Add(column11);
-            selectQuery2.Columns.Add(column12);
-            selectQuery2.Name = "art_norm_n";
-            selectQuery2.Tables.Add(table2);
-            this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            selectQuery2});
-            this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
-            // 
-            // aceDataSet1
-            // 
-            this.aceDataSet1.DataSetName = "ACEDataSet";
-            this.aceDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // artnormnBindingSource
-            // 
-            this.artnormnBindingSource.DataMember = "art_norm_n";
-            this.artnormnBindingSource.DataSource = this.aCEDataSet;
-            // 
-            // art_norm_nTableAdapter
-            // 
-            this.art_norm_nTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_raszTableAdapter
-            // 
-            this.norm_raszTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_raskTableAdapter
-            // 
-            this.norm_raskTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_kontTableAdapter
-            // 
-            this.norm_kontTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_dop_obrTableAdapter
-            // 
-            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
-            // 
-            // sp_articulTableAdapter
-            // 
-            this.sp_articulTableAdapter.ClearBeforeFill = true;
-            // 
-            // art_norm_nTableAdapter1
-            // 
-            this.art_norm_nTableAdapter1.ClearBeforeFill = true;
-            // 
             // gridControl4
             // 
             this.gridControl4.DataSource = this.normkontBindingSource;
@@ -1480,6 +1612,11 @@
             this.gridControl4.TabIndex = 8;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
+            // 
+            // normkontBindingSource
+            // 
+            this.normkontBindingSource.DataMember = "norm_kont";
+            this.normkontBindingSource.DataSource = this.aCEDataSetBindingSource;
             // 
             // gridView4
             // 
@@ -1595,6 +1732,11 @@
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
             // 
+            // normdopobrBindingSource
+            // 
+            this.normdopobrBindingSource.DataMember = "norm_dop_obr";
+            this.normdopobrBindingSource.DataSource = this.aCEDataSetBindingSource;
+            // 
             // gridView5
             // 
             this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -1641,77 +1783,111 @@
             this.colsek_p_tamp.Visible = true;
             this.colsek_p_tamp.VisibleIndex = 4;
             // 
-            // gridControl6
+            // xtraTabPage2
             // 
-            this.gridControl6.DataSource = this.sparticulBindingSource1;
-            this.gridControl6.Location = new System.Drawing.Point(8, 3);
-            this.gridControl6.MainView = this.gridView6;
-            this.gridControl6.Name = "gridControl6";
-            this.gridControl6.Size = new System.Drawing.Size(389, 180);
-            this.gridControl6.TabIndex = 3;
-            this.gridControl6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView6});
+            this.xtraTabPage2.Controls.Add(this.gridControl7);
+            this.xtraTabPage2.Name = "xtraTabPage2";
+            this.xtraTabPage2.Size = new System.Drawing.Size(1493, 789);
+            this.xtraTabPage2.Text = "xtraTabPage2";
             // 
-            // gridView6
+            // sparticulBindingSource
             // 
-            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colkod5,
-            this.colExpr1,
-            this.colExpr2,
-            this.colExpr3,
-            this.colExpr4});
-            this.gridView6.GridControl = this.gridControl6;
-            this.gridView6.Name = "gridView6";
+            this.sparticulBindingSource.DataMember = "sp_articul";
+            this.sparticulBindingSource.DataSource = this.aCEDataSetBindingSource;
             // 
-            // sparticulBindingSource1
+            // art_norm_nTableAdapter
             // 
-            this.sparticulBindingSource1.DataMember = "sp_articul";
-            this.sparticulBindingSource1.DataSource = this.aCEDataSetBindingSource;
+            this.art_norm_nTableAdapter.ClearBeforeFill = true;
             // 
-            // colkod5
+            // norm_raszTableAdapter
             // 
-            this.colkod5.FieldName = "kod";
-            this.colkod5.Name = "colkod5";
-            this.colkod5.Visible = true;
-            this.colkod5.VisibleIndex = 0;
+            this.norm_raszTableAdapter.ClearBeforeFill = true;
             // 
-            // colExpr1
+            // norm_raskTableAdapter
             // 
-            this.colExpr1.FieldName = "Expr1";
-            this.colExpr1.Name = "colExpr1";
-            this.colExpr1.Visible = true;
-            this.colExpr1.VisibleIndex = 1;
+            this.norm_raskTableAdapter.ClearBeforeFill = true;
             // 
-            // colExpr2
+            // norm_kontTableAdapter
             // 
-            this.colExpr2.FieldName = "Expr2";
-            this.colExpr2.Name = "colExpr2";
-            this.colExpr2.Visible = true;
-            this.colExpr2.VisibleIndex = 2;
+            this.norm_kontTableAdapter.ClearBeforeFill = true;
             // 
-            // colExpr3
+            // norm_dop_obrTableAdapter
             // 
-            this.colExpr3.FieldName = "Expr3";
-            this.colExpr3.Name = "colExpr3";
-            this.colExpr3.Visible = true;
-            this.colExpr3.VisibleIndex = 3;
+            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
             // 
-            // colExpr4
+            // sp_articulTableAdapter
             // 
-            this.colExpr4.FieldName = "Expr4";
-            this.colExpr4.Name = "colExpr4";
-            this.colExpr4.Visible = true;
-            this.colExpr4.VisibleIndex = 4;
+            this.sp_articulTableAdapter.ClearBeforeFill = true;
+            // 
+            // fillByToolStrip
+            // 
+            this.fillByToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fillByToolStripButton,
+            this.toolStripButton1,
+            this.toolStripSeparator1,
+            this.toolStripButton2});
+            this.fillByToolStrip.Location = new System.Drawing.Point(0, 0);
+            this.fillByToolStrip.Name = "fillByToolStrip";
+            this.fillByToolStrip.Size = new System.Drawing.Size(1495, 25);
+            this.fillByToolStrip.TabIndex = 2;
+            this.fillByToolStrip.Text = "fillByToolStrip";
+            // 
+            // fillByToolStripButton
+            // 
+            this.fillByToolStripButton.Name = "fillByToolStripButton";
+            this.fillByToolStripButton.Size = new System.Drawing.Size(23, 22);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "toolStripButton1";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "toolStripButton2";
+            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1495, 814);
+            this.Controls.Add(this.fillByToolStrip);
             this.Controls.Add(this.xtraTabControl1);
             this.Name = "TeamWork";
             this.Text = "Работа в бригаде";
             this.Load += new System.EventHandler(this.TeamWork_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView13)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView15)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView16)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView17)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView18)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView19)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.TabPage1.ResumeLayout(false);
@@ -1732,19 +1908,16 @@
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).EndInit();
             this.stackPanel2.ResumeLayout(false);
             this.stackPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).EndInit();
@@ -1755,17 +1928,18 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aceDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).EndInit();
+            this.xtraTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
+            this.fillByToolStrip.ResumeLayout(false);
+            this.fillByToolStrip.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1784,13 +1958,11 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox SortBox;
-        private System.Windows.Forms.Button sortBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private DevExpress.Utils.Layout.StackPanel stackPanel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private DevExpress.XtraEditors.SvgImageBox svgImageBox1;
-        private System.Windows.Forms.Button exitBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private DevExpress.Utils.Layout.StackPanel stackPanel2;
         private System.Windows.Forms.Label label2;
@@ -1808,12 +1980,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button aproovmentBtn;
-        private System.Windows.Forms.Button KonfKardBtn;
-        private System.Windows.Forms.Button AddPrevBtn;
-        private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.Button printBtn;
-        private System.Windows.Forms.Button doubleBtn;
         private ACEDataSet aCEDataSet;
         private System.Windows.Forms.BindingSource artnormnBindingSource;
         private ACEDataSetTableAdapters.art_norm_nTableAdapter art_norm_nTableAdapter;
@@ -1991,49 +2157,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sekDataGridViewTextBoxColumn3;
         private DevExpress.XtraGrid.GridControl gridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod;
-        private DevExpress.XtraGrid.Columns.GridColumn colgrup;
-        private DevExpress.XtraGrid.Columns.GridColumn colarticul;
-        private DevExpress.XtraGrid.Columns.GridColumn colmod;
-        private DevExpress.XtraGrid.Columns.GridColumn colpo;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_shv;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz5;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz7;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz10;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz12;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz62;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz71;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz72;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyazo;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek;
-        private DevExpress.XtraGrid.Columns.GridColumn colseb;
-        private DevExpress.XtraGrid.Columns.GridColumn colst;
-        private DevExpress.XtraGrid.Columns.GridColumn colpo1;
-        private DevExpress.XtraGrid.Columns.GridColumn colkomment;
-        private DevExpress.XtraGrid.Columns.GridColumn coldata_sozd;
-        private DevExpress.XtraGrid.Columns.GridColumn coldiz;
-        private DevExpress.XtraGrid.Columns.GridColumn colconstr;
-        private DevExpress.XtraGrid.Columns.GridColumn coldata_obn;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz70;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_kr;
-        private DevExpress.XtraGrid.Columns.GridColumn colslogn;
-        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz14;
-        private DevExpress.XtraGrid.Columns.GridColumn colarh;
-        private DevExpress.XtraGrid.Columns.GridColumn colsql_pr_add;
-        private DevExpress.XtraGrid.Columns.GridColumn coldate_add;
-        private DevExpress.XtraGrid.Columns.GridColumn colkomp_name;
-        private DevExpress.XtraGrid.Columns.GridColumn colannDateDel;
-        private DevExpress.XtraGrid.Columns.GridColumn colannCompDel;
-        private DevExpress.XtraGrid.Columns.GridColumn colannID;
-        private DevExpress.XtraGrid.Columns.GridColumn colannDateAdd;
-        private DevExpress.XtraGrid.Columns.GridColumn colannCompAdd;
-        private ACEDataSet aceDataSet1;
-        private ACEDataSetTableAdapters.art_norm_nTableAdapter art_norm_nTableAdapter1;
-        private DevExpress.DataAccess.Sql.SqlDataSource sqlDataSource1;
-        private System.Windows.Forms.BindingSource artnormnBindingSource1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn colkod1;
@@ -2078,7 +2201,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colspec1;
         private DevExpress.XtraGrid.Columns.GridColumn colobor1;
         private DevExpress.XtraGrid.GridControl gridControl6;
-        private System.Windows.Forms.BindingSource sparticulBindingSource1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraGrid.Columns.GridColumn colkod5;
         private DevExpress.XtraGrid.Columns.GridColumn colExpr1;
@@ -2106,6 +2228,75 @@
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p_tamp;
+        private DevExpress.XtraGrid.GridControl gridControl7;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView8;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView9;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView10;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView7;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView11;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView12;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView13;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView14;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView15;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView16;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView17;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView18;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView19;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView20;
+        private System.Windows.Forms.ToolStrip fillByToolStrip;
+        private System.Windows.Forms.ToolStripButton fillByToolStripButton;
+        private DevExpress.XtraGrid.Columns.GridColumn colkod;
+        private DevExpress.XtraGrid.Columns.GridColumn colgrup;
+        private DevExpress.XtraGrid.Columns.GridColumn colarticul;
+        private DevExpress.XtraGrid.Columns.GridColumn colmod;
+        private DevExpress.XtraGrid.Columns.GridColumn colpo;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_shv;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz3;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz5;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz6;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz7;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz10;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz12;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz62;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz71;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz72;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyazo;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek;
+        private DevExpress.XtraGrid.Columns.GridColumn colseb;
+        private DevExpress.XtraGrid.Columns.GridColumn colst;
+        private DevExpress.XtraGrid.Columns.GridColumn colpo1;
+        private DevExpress.XtraGrid.Columns.GridColumn colkomment;
+        private DevExpress.XtraGrid.Columns.GridColumn coldata_sozd;
+        private DevExpress.XtraGrid.Columns.GridColumn coldiz;
+        private DevExpress.XtraGrid.Columns.GridColumn colconstr;
+        private DevExpress.XtraGrid.Columns.GridColumn coldata_obn;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz70;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_kr;
+        private DevExpress.XtraGrid.Columns.GridColumn colslogn;
+        private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz14;
+        private DevExpress.XtraGrid.Columns.GridColumn colarh;
+        private DevExpress.XtraGrid.Columns.GridColumn colsql_pr_add;
+        private DevExpress.XtraGrid.Columns.GridColumn coldate_add;
+        private DevExpress.XtraGrid.Columns.GridColumn colkomp_name;
+        private DevExpress.XtraGrid.Columns.GridColumn colannDateDel;
+        private DevExpress.XtraGrid.Columns.GridColumn colannCompDel;
+        private DevExpress.XtraGrid.Columns.GridColumn colannID;
+        private DevExpress.XtraGrid.Columns.GridColumn colannDateAdd;
+        private DevExpress.XtraGrid.Columns.GridColumn colannCompAdd;
+        private DevExpress.XtraGrid.Columns.GridColumn colstatus;
+        private System.Windows.Forms.Button aproovmentBtn;
+        private System.Windows.Forms.Button sortBtn;
+        private System.Windows.Forms.Button exitBtn;
+        private System.Windows.Forms.Button KonfKardBtn;
+        private System.Windows.Forms.Button AddPrevBtn;
+        private System.Windows.Forms.Button deleteBtn;
+        private System.Windows.Forms.Button doubleBtn;
+        private ToolStripButton toolStripButton1;
+        private ToolStripSeparator toolStripSeparator1;
+        private ToolStripButton toolStripButton2;
         //private System.Windows.Forms.BindingSource bindingSource1;
+
     }
 }
