@@ -45,6 +45,7 @@
             this.матрицыКлассовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видыОперацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.разделенияТрудаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,7 +106,8 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
-            this.производствоToolStripMenuItem});
+            this.разделенияТрудаToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1124, 24);
@@ -179,19 +181,10 @@
             // 
             // разделенияТрудаToolStripMenuItem
             // 
-            this.разделенияТрудаToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.разделенияТрудаToolStripMenuItem.Name = "разделенияТрудаToolStripMenuItem";
             this.разделенияТрудаToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.разделенияТрудаToolStripMenuItem.Text = "Разделения труда";
             this.разделенияТрудаToolStripMenuItem.Click += new System.EventHandler(this.разделенияТрудаToolStripMenuItem_Click);
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // xtraTabbedMdiManager1
             // 

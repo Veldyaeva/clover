@@ -36,10 +36,6 @@ namespace SewingProduction
         private void SpMainForm_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            TeamWork teamWork = new TeamWork();
-            teamWork.Show(); 
-            //Form4 form4 = new Form4();
-            //form4.Show();
             //// Create a Bar Manager that will display a bar of commands at the top of the main form.
             //BarManager barManager = new BarManager();
             //barManager.Form = this;
@@ -122,6 +118,21 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
 
+        }
+
+        private void разделенияТрудаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TeamWork teamWork = new TeamWork();
+            teamWork.MdiParent = this;
+            teamWork.Show();
+
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.MdiParent = this;
+            form1.Show();
         }
 
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)

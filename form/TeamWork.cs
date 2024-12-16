@@ -16,6 +16,10 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using System.Data;
 using DevExpress.XtraGrid.Views.Base;
+using DevExpress.Utils;
+using SewingProduction;
+using System.Drawing;
+using Button = SewingProduction.form.TeamWork.Button;
 using System.Drawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
@@ -31,19 +35,57 @@ namespace SewingProduction.form
     {
         // public IDatabaseManager _database;
         string connectionString = Properties.Settings.Default.ACEConnectionString;
-        // Источник данных для привязки данных к DataGridView
-         private BindingSource bindingSource1;
 
         public TeamWork()
         {
             InitializeComponent();
+         //   InitializeComponents();
+            Load += TeamWork_Load; // Подключаем обработчик события Load
             // Load += TeamWork_Load; // Подключаем обработчик события Load
         }
         private void InitializeComponents()
         {
+            // Создание TextBox
+            TextBox textbox = new TextBox
+            {
+                Text = "Введите текст...",
+                ForeColor = System.Drawing.Color.Blue,
+                Font = new System.Drawing.Font("Arial", 14),
+                Location = new System.Drawing.Point(50, 50), // позиция на форме
+                Width = 200
+            };
+
+        private void InitializeComponents()
+        {
+        }
+            // Создание Button
+            //Button Mybutton = new Button
+            //{
+            //    Text = "Нажмите",
+            //    ForeColor = System.Drawing.Color.Red,
+            //    Font = new System.Drawing.Font("Arial", 14),
+            //    Location = new System.Drawing.Point(50, 100), // позиция на форме
+            //    Width = 100
+            //};
+
+            //// Добавление обработчика события для Button
+            //Mybutton.Click += (sender, args) => MessageBox.Show("Кнопка нажата!");
+
+            //// Добавление компонентов на форму
+            //this.Controls.Add(textbox);
+            //this.Controls.Add(Mybutton);
         }
         private void TeamWork_Load(object sender, EventArgs e)
         {
+
+            // Пример использования
+            Textbox textbox = new Textbox(textColor: "blue", textSize: 14, placeholder: "Введите имя");
+            textbox.DisplayTextboxInfo();
+            
+
+            Button button = new Button(textColor: "red", textSize: 16, label: "Отправить");
+            button.DisplayButtonInfo();
+//            LoadData();
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.norm_rasz". При необходимости она может быть перемещена или удалена.
             // this.norm_raszTableAdapter.Fill(this.aCEDataSet.norm_rasz);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
@@ -51,9 +93,68 @@ namespace SewingProduction.form
             LoadData();
 
         }
+        public class Component
+        {
+            public string TextColor { get; set; }
+            public int TextSize { get; set; }
+
+            // Конструктор по умолчанию
+            public Component(string textColor = "black", int textSize = 12)
+            {
+                TextColor = textColor;
+                TextSize = textSize;
+            }
+
+            public void DisplayInfo()
+            {
+                Console.WriteLine($"Text Color: {TextColor}, Text Size: {TextSize}");
+            }
+        }
+
+        // Класс Textbox, наследующий Component
+        public class Textbox : Component
+        {
+            public string Placeholder { get; set; }
+
+            public Textbox(string textColor = "black", int textSize = 12, string placeholder = "Enter text")
+                : base(textColor, textSize)
+            {
+                Placeholder = placeholder;
+            }
+
+            public void DisplayTextboxInfo()
+            {
+                Console.WriteLine($"Textbox - Placeholder: {Placeholder}, Text Color: {TextColor}, Text Size: {TextSize}");
+            }
+        }
+        public class Button : Component
+        {
+            internal string Text;
+            internal Color ForeColor;
+            internal Font Font;
+            internal Point Location;
+
+            public string Label { get; set; }
+            public int Width { get; internal set; }
+            public Func<object, object, DialogResult> Click { get; internal set; }
+
+            public Button(string textColor = "black", int textSize = 12, string label = "Click Me")
+                : base(textColor, textSize)
+            {
+                Label = label;
+            }
+
+            public void DisplayButtonInfo()
+            {
+                Console.WriteLine($"Button - Label: {Label}, Text Color: {TextColor}, Text Size: {TextSize}");
+            }
+        }
 
         private void LoadData(string searchName = "")
         {
+
+
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -73,6 +174,7 @@ namespace SewingProduction.form
                                 adapter.Fill(artNormN);
                                // gridControl2.DataSource = artNormN; // Привязываем напрямую
                             }
+
                             artnormnBindingSource.DataSource = artNormN;
                             gridControl2.DataSource = artnormnBindingSource;// Привязываем через BindingSource
                             transaction.Commit(); // Подтверждаем транзакцию
@@ -92,6 +194,8 @@ namespace SewingProduction.form
             //this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
 
         }
+        
+        private void ShowRelatedData(int artNormNId, string query, GridControl grid)
 
         //более правильно через BindingSource
         private void ShowRelatedData(int artNormNId, string query, GridControl grid, System.Windows.Forms.BindingSource source)
@@ -220,6 +324,7 @@ namespace SewingProduction.form
 
         }
 
+        private void LoadData()
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
@@ -268,6 +373,14 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
+                GridView view = gridControl2.MainView as GridView;
+                int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
+                normRaszUpd(Id);
+                norm_raskUpd(Id);
+                norm_kontUpd(Id);
+                norm_dop_obrUpd(Id);
+                sp_artUpd(Id);
+                kommentUpd(e);
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             }
@@ -279,6 +392,24 @@ namespace SewingProduction.form
             ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n", customGridControl2);
         }
 
+
+        private void kommentUpd(FocusedRowChangedEventArgs e)
+        {
+            GridView gridView = gridControl2.MainView as GridView;
+
+            //GridView view = sender as GridView;
+            if (gridView != null)
+            {
+                // Замените "YourColumnName" на имя столбца и textBox1 на имя вашего поля
+                object komment = gridView.GetRowCellValue(e.FocusedRowHandle, "komment");
+                commentRichTextBox.Text = komment?.ToString() ?? ""; // Обработка null
+                object diz = gridView.GetRowCellValue(e.FocusedRowHandle, "diz");
+                designerComboBox.Text = diz?.ToString() ?? "";
+                object konstr = gridView.GetRowCellValue(e.FocusedRowHandle, "constr");
+                constructorComboBox.Text = konstr?.ToString() ?? string.Empty;
+            }
+        }
+        private void normRaszUpd(int Id)
 
         //Предварительный архив
         private void customGridControl4_Load(object sender, EventArgs e)
@@ -331,11 +462,23 @@ namespace SewingProduction.form
         }
             else
         {
+            string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM [ACE].[dbo].sp_articul WHERE SUBSTRING(kod ,1,7)= '{Id}'";
+            ShowRelatedData(Id, query, gridControl6);
                 MessageBox.Show("Выберите запись для редактирования.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private void doubleBtn_Click(object sender, EventArgs e)
+        {
+
+        }
         }
 
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            Form1 form = new Form1();
+            //form.MdiParent = this;
+            form.Show();
+        }
         //отвязка РТ - обнуление annID в таблице sp_articul
         private void ResetAnnId(int sp_articul)
         {
