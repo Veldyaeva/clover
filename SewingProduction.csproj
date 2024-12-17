@@ -116,11 +116,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </Compile>
-    <Compile Include="form\Form1.cs">
+    <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\Form1.Designer.cs">
+    <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\Font.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -146,6 +149,7 @@
     <Compile Include="form\SpravOborud.Designer.cs">
       <DependentUpon>SpravOborud.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\Theme.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,7 +248,7 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="form\Form1.resx">
+    <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
