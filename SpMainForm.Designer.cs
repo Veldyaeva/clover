@@ -45,6 +45,7 @@
             this.видыОперацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -111,7 +112,8 @@
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оборудованиеToolStripMenuItem,
-            this.карточкаРасчетаToolStripMenuItem1});
+            this.карточкаРасчетаToolStripMenuItem1,
+            this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -176,6 +178,13 @@
             this.xtraTabbedMdiManager1.MdiParent = this;
             this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
+            // изделияToolStripMenuItem
+            // 
+            this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
+            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.изделияToolStripMenuItem.Text = "Изделия";
+            this.изделияToolStripMenuItem.Click += new System.EventHandler(this.изделияToolStripMenuItem_Click);
+            // 
             // SpMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -218,6 +227,7 @@
         private System.Windows.Forms.ToolStripMenuItem видыОборудованияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem матрицыКлассовToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыОперацийToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
     }
 }
 

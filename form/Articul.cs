@@ -16,6 +16,8 @@ namespace SewingProduction.form
         public Articul()
         {
             InitializeComponent();
+            
+
         }
 
         private void Articul_Load(object sender, EventArgs e)
@@ -26,17 +28,29 @@ namespace SewingProduction.form
                 connection.Open();
                 SqlDataAdapter adapterArt = new SqlDataAdapter();
                 DataTable dtArticul = new DataTable();
-                string queryArt = $"select kod, grup, articul, razm, mod, kle_naimen from dbo.view_art";
-                queryArt += $" order by ikod";
+                string queryArt = $"select kod, grup, articul, razm, mod, kle from dbo.view_art";
+                queryArt += $" order by kod";
                 //string queryArt = $"exec GetNaklView '{PachKod}' ";
                 SqlCommand commandNaklList = new SqlCommand(queryArt, connection);
                 adapterArt.SelectCommand = commandNaklList;
                 adapterArt.Fill(dtArticul);
                 bsArt.DataSource = dtArticul;
-
-
             }
 
+            groupControl1.AppearanceCaption.BackColor = Theme.ButtonBackground;
+
         }
+
+        private void groupControl1_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void Articul_Shown(object sender, EventArgs e)
+        {
+            
+        }
+
+       
     }
 }
