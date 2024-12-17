@@ -109,7 +109,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ACEDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="class\Font.cs" />
+    <Compile Include="class\Font.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
     <Compile Include="class\Theme.cs" />
@@ -117,6 +119,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="form\Articul.cs" />
+    <Compile Include="form\Articul.Designer.cs">
+      <DependentUpon>Articul.cs</DependentUpon>
     </Compile>
     <Compile Include="form\Form1.cs">
       <SubType>Form</SubType>
@@ -246,6 +252,9 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="form\Articul.resx">
+      <DependentUpon>Articul.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
