@@ -43,9 +43,6 @@ namespace SewingProduction
             control.Font = Theme.DefaultFont; // Общий шрифт
             control.Font = ComponentFont;
         }
-
-
-
     }
 
 
@@ -53,7 +50,6 @@ namespace SewingProduction
     // Класс-наследник для кнопки
     public class CustomButton : Button
     {
-        public CustomButton() :  this(Color.FromArgb(181, 230, 196), Color.FromArgb(20, 36, 24)) { }
 
         public CustomButton()
         public CustomButton(Color backColor, Color fontColor)
@@ -76,8 +72,6 @@ namespace SewingProduction
         public Color ComponentBackColor { get; set; }
         public Color ComponentFontColor { get; set; }
         public Size ComponentSize { get; set; }
-        public Color ComponentBackColor { get;  set; }
-        public Color ComponentFontColor { get;  set; }
 
         private GraphicsPath _graphicsPath;
 
@@ -124,7 +118,6 @@ namespace SewingProduction
     public class CustomTextBox : TextBox
     public class CustomTextBox : BaseComponent
     {
-        public TextBox TextBox { get; private set; }
         public CustomTextBox()
         {
             this.BackColor = Theme.TextBoxBackground;
@@ -141,9 +134,6 @@ namespace SewingProduction
     }
 
     // Класс-наследник для кастомного GridControl
-    public class CustomGridView : BaseComponent
-    {
-        public GridView gridView { get; private set; }
 
     //public class CustomGridControl : GridControl
     //{
@@ -323,7 +313,5 @@ namespace SewingProduction
                 graphics.FillRectangle(brush, rect);
             }
         }
-
-
     }
 }
