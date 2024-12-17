@@ -109,8 +109,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ACEDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="class\Font.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
+    <Compile Include="class\Theme.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
