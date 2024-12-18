@@ -804,27 +804,6 @@ namespace SewingProduction.form
             this.colExpr1.Visible = true;
             this.colExpr1.VisibleIndex = 1;
             // 
-            // colExpr2
-            // 
-            this.colExpr2.FieldName = "Expr2";
-            this.colExpr2.Name = "colExpr2";
-            this.colExpr2.Visible = true;
-            this.colExpr2.VisibleIndex = 2;
-            // 
-            // colExpr3
-            // 
-            this.colExpr3.FieldName = "Expr3";
-            this.colExpr3.Name = "colExpr3";
-            this.colExpr3.Visible = true;
-            this.colExpr3.VisibleIndex = 3;
-            // 
-            // colExpr4
-            // 
-            this.colExpr4.FieldName = "Expr4";
-            this.colExpr4.Name = "colExpr4";
-            this.colExpr4.Visible = true;
-            this.colExpr4.VisibleIndex = 4;
-            // 
             // svgImageBox1
             // 
             this.customButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
@@ -3148,13 +3127,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd1;
         private DevExpress.XtraGrid.Columns.GridColumn colspec1;
         private DevExpress.XtraGrid.Columns.GridColumn colobor1;
-        private DevExpress.XtraGrid.GridControl gridControl6;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod5;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr1;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr2;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr3;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr4;
         private DevExpress.XtraGrid.GridControl gridControl4;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn colkod3;
