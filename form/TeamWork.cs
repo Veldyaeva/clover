@@ -9,6 +9,7 @@ using System.Data;
 using DevExpress.XtraGrid.Views.Base;
 using System.Drawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
 
 
 namespace SewingProduction.form
@@ -68,8 +69,10 @@ namespace SewingProduction.form
             {
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            //this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
+
         }
-        
+
         private void ShowRelatedData(int artNormNId, string query, GridControl grid)
         {
             try
@@ -162,24 +165,23 @@ namespace SewingProduction.form
             {
                 GridView view = gridControl2.MainView as GridView;
                 int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
-                normRaszUpd(Id);
-                norm_raskUpd(Id);
-                norm_kontUpd(Id);
-                norm_dop_obrUpd(Id);
-                sp_artUpd(Id);
-                kommentUpd(e);
+                NormRaszUpd(Id);
+                Norm_raskUpd(Id);
+                Norm_kontUpd(Id);
+                Norm_dop_obrUpd(Id);
+                Sp_artUpd(Id);
+                KommentUpd(e);
             }
         }
 
 
-        private void kommentUpd(FocusedRowChangedEventArgs e)
+        private void KommentUpd(FocusedRowChangedEventArgs e)
         {
             GridView gridView = gridControl2.MainView as GridView;
 
             //GridView view = sender as GridView;
             if (gridView != null)
             {
-                // Замените "YourColumnName" на имя столбца и textBox1 на имя вашего поля
                 object komment = gridView.GetRowCellValue(e.FocusedRowHandle, "komment");
                 commentRichTextBox.Text = komment?.ToString() ?? ""; // Обработка null
                 string diz = gridView.GetRowCellValue(e.FocusedRowHandle, "diz")?.ToString();
@@ -192,34 +194,34 @@ namespace SewingProduction.form
             }
         }
 
-        private void textBoxUpd(string tab, int diz)
+        private void TextBoxUpd(string tab, int diz)
         {
             string queryDiz = $"SELECT [ACE].[dbo].[fio].fio FROM [ACE].[dbo].fio WHERE [ACE].[dbo].[fio].tab = '{tab}'";
 //            ShowRelatedData(queryDiz);
         }
-        private void normRaszUpd(int Id)
+        private void NormRaszUpd(int Id)
         {
             string query = $"SELECT * FROM [ACE].[dbo].norm_rasz WHERE [ACE].[dbo].[norm_rasz].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl1);
         }
-        private void norm_raskUpd(int Id)
+        private void Norm_raskUpd(int Id)
         {
 
             string query = $"SELECT * FROM [ACE].[dbo].norm_rask WHERE [ACE].[dbo].[norm_rask].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl3);
         }
-        private void norm_kontUpd(int Id)
+        private void Norm_kontUpd(int Id)
         {
             string query = $"SELECT * FROM [ACE].[dbo].norm_kont WHERE [ACE].[dbo].[norm_kont].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl4);
         }
 
-        private void norm_dop_obrUpd(int Id)
+        private void Norm_dop_obrUpd(int Id)
         {
             string query = $"SELECT * FROM [ACE].[dbo].norm_dop_obr WHERE [ACE].[dbo].[norm_dop_obr].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl5);
         }
-        private void sp_artUpd(int Id)
+        private void Sp_artUpd(int Id)
         {
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM [ACE].[dbo].sp_articul WHERE SUBSTRING(kod ,1,7)= '{Id}'";
             ShowRelatedData(Id, query, customGridControl5);
@@ -253,6 +255,71 @@ namespace SewingProduction.form
         {
 
         }
+
+        private void customGridControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customGridControl1_Load(object sender, EventArgs e)
+        {
+            ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where mod>'1'", customGridControl1);
+        }
+        private void ShowArtData(string query, GridControl grid)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    connection.Open();
+                    using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
+                    {
+                        DataTable dt = new DataTable();
+
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            adapter.SelectCommand = command;
+                            adapter.Fill(dt);
+                            grid.DataSource = dt; // Привязываем напрямую
+                        }
+
+                        transaction.Commit(); // Подтверждаем транзакцию
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+       
+
+        private void customButton4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customGridControl2_Load(object sender, EventArgs e)
+        {
+            ShowArtData("SELECT kod, grup, articul, mod FROM art_norm_n where mod>'1'", customGridControl2);
+        }
+
+        //private void fillToolStripButton_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
+        //    }
+        //    catch (System.Exception ex)
+        //    {
+        //        System.Windows.Forms.MessageBox.Show(ex.Message);
+        //    }
+
+        //}
     }
 
 }
