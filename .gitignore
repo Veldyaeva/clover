@@ -382,3 +382,11 @@ FodyWeavers.xsd
 /bin/Debug/SewingProduction.exe
 /bin/Debug/SewingProduction.pdb
 /obj/Debug/SewingProduction.exe
+/obj/Debug/SewingProduction.csproj.AssemblyReference.cache
+/obj/Debug/SewingProduction.csproj.CoreCompileInputs.cache
+/obj/Debug/SewingProduction.csproj.FileListAbsolute.txt
+/obj/Debug/SewingProduction.csproj.GenerateResource.cache
+/obj/Debug/SewingProduction.pdb
+/obj/Debug/SewingProduction.Properties.Resources.resources
+/.vs/SewingProduction.csproj.dtbcache.json
+/.vs/sewingproduction/v17/.suo

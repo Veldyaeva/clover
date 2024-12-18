@@ -222,7 +222,7 @@ namespace SewingProduction.form
         private void sp_artUpd(int Id)
         {
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM [ACE].[dbo].sp_articul WHERE SUBSTRING(kod ,1,7)= '{Id}'";
-            ShowRelatedData(Id, query, gridControl6);
+            ShowRelatedData(Id, query, customGridControl5);
         }
 
         private void doubleBtn_Click(object sender, EventArgs e)
@@ -244,7 +244,15 @@ namespace SewingProduction.form
            // gridView1.ActiveFilterString = "[FieldName1] = 'Value1' AND [FieldName2] > 10";
         }
 
-     
+        private void sparticulBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

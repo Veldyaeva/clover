@@ -52,13 +52,7 @@ namespace SewingProduction.form
             this.sortBtn = new System.Windows.Forms.Button();
             this.SortBox = new System.Windows.Forms.CheckBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.gridControl6 = new DevExpress.XtraGrid.GridControl();
-            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colkod5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colExpr4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
             this.exitBtn = new System.Windows.Forms.Button();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
@@ -214,7 +208,8 @@ namespace SewingProduction.form
             this.norm_kontTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_kontTableAdapter();
             this.norm_dop_obrTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.sp_articulTableAdapter = new SewingProduction.ACEDataSetTableAdapters.sp_articulTableAdapter();
-            this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.customGridControl5 = new SewingProduction.CustomGridControl();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -234,8 +229,7 @@ namespace SewingProduction.form
             this.panelControl1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
@@ -277,7 +271,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl2)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customGridControl5)).BeginInit();
             this.SuspendLayout();
             // 
             // aCEDataSetBindingSource
@@ -495,7 +489,7 @@ namespace SewingProduction.form
             // 
             // panel3
             // 
-            this.panel3.Controls.Add(this.gridControl6);
+            this.panel3.Controls.Add(this.customGridControl5);
             this.panel3.Controls.Add(this.svgImageBox1);
             this.panel3.Controls.Add(this.exitBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -504,62 +498,11 @@ namespace SewingProduction.form
             this.panel3.Size = new System.Drawing.Size(710, 215);
             this.panel3.TabIndex = 5;
             // 
-            // gridControl6
+            // sparticulBindingSource
             // 
-            this.gridControl6.DataSource = this.sparticulBindingSource;
-            this.gridControl6.Location = new System.Drawing.Point(8, 3);
-            this.gridControl6.MainView = this.gridView6;
-            this.gridControl6.Name = "gridControl6";
-            this.gridControl6.Size = new System.Drawing.Size(389, 180);
-            this.gridControl6.TabIndex = 3;
-            this.gridControl6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView6});
-            // 
-            // gridView6
-            // 
-            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colkod5,
-            this.colExpr1,
-            this.colExpr2,
-            this.colExpr3,
-            this.colExpr4});
-            this.gridView6.GridControl = this.gridControl6;
-            this.gridView6.Name = "gridView6";
-            // 
-            // colkod5
-            // 
-            this.colkod5.FieldName = "kod";
-            this.colkod5.Name = "colkod5";
-            this.colkod5.Visible = true;
-            this.colkod5.VisibleIndex = 0;
-            // 
-            // colExpr1
-            // 
-            this.colExpr1.FieldName = "Expr1";
-            this.colExpr1.Name = "colExpr1";
-            this.colExpr1.Visible = true;
-            this.colExpr1.VisibleIndex = 1;
-            // 
-            // colExpr2
-            // 
-            this.colExpr2.FieldName = "Expr2";
-            this.colExpr2.Name = "colExpr2";
-            this.colExpr2.Visible = true;
-            this.colExpr2.VisibleIndex = 2;
-            // 
-            // colExpr3
-            // 
-            this.colExpr3.FieldName = "Expr3";
-            this.colExpr3.Name = "colExpr3";
-            this.colExpr3.Visible = true;
-            this.colExpr3.VisibleIndex = 3;
-            // 
-            // colExpr4
-            // 
-            this.colExpr4.FieldName = "Expr4";
-            this.colExpr4.Name = "colExpr4";
-            this.colExpr4.Visible = true;
-            this.colExpr4.VisibleIndex = 4;
+            this.sparticulBindingSource.DataMember = "sp_articul";
+            this.sparticulBindingSource.DataSource = this.aCEDataSetBindingSource;
+            this.sparticulBindingSource.CurrentChanged += new System.EventHandler(this.sparticulBindingSource_CurrentChanged);
             // 
             // svgImageBox1
             // 
@@ -1774,7 +1717,6 @@ namespace SewingProduction.form
             // 
             // customGridControl1
             // 
-            this.customGridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControl1.Location = new System.Drawing.Point(2, 2);
             this.customGridControl1.Name = "customGridControl1";
@@ -1829,7 +1771,6 @@ namespace SewingProduction.form
             // 
             // customGridControl2
             // 
-            this.customGridControl2.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl2.Location = new System.Drawing.Point(169, 56);
             this.customGridControl2.Name = "customGridControl2";
             this.customGridControl2.Size = new System.Drawing.Size(400, 200);
@@ -1892,16 +1833,28 @@ namespace SewingProduction.form
             // 
             this.sp_articulTableAdapter.ClearBeforeFill = true;
             // 
-            // sparticulBindingSource
+            // toolStrip1
             // 
-            this.sparticulBindingSource.DataMember = "sp_articul";
-            this.sparticulBindingSource.DataSource = this.aCEDataSetBindingSource;
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(1495, 25);
+            this.toolStrip1.TabIndex = 1;
+            this.toolStrip1.Text = "fillByToolStrip";
+            // 
+            // customGridControl5
+            // 
+            this.customGridControl5.DataSource = this.sparticulBindingSource;
+            this.customGridControl5.Location = new System.Drawing.Point(13, 6);
+            this.customGridControl5.Name = "customGridControl5";
+            this.customGridControl5.Size = new System.Drawing.Size(400, 200);
+            this.customGridControl5.TabIndex = 3;
             // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1495, 814);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.xtraTabControl1);
             this.Name = "TeamWork";
             this.Text = "Работа в бригаде";
@@ -1928,8 +1881,7 @@ namespace SewingProduction.form
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).EndInit();
@@ -1973,8 +1925,9 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl2)).EndInit();
             this.xtraTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.customGridControl5)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -2234,13 +2187,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd1;
         private DevExpress.XtraGrid.Columns.GridColumn colspec1;
         private DevExpress.XtraGrid.Columns.GridColumn colobor1;
-        private DevExpress.XtraGrid.GridControl gridControl6;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod5;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr1;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr2;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr3;
-        private DevExpress.XtraGrid.Columns.GridColumn colExpr4;
         private DevExpress.XtraGrid.GridControl gridControl4;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn colkod3;
@@ -2326,5 +2272,7 @@ namespace SewingProduction.form
         private CustomButton customButton4;
         private CustomButton customButton5;
         private BindingSource sparticulBindingSource;
+        private ToolStrip toolStrip1;
+        private CustomGridControl customGridControl5;
     }
 }
