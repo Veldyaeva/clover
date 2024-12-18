@@ -81,6 +81,55 @@ namespace SewingProduction
         }
 
     }
+    // Класс-наследник для кнопки "Ок"
+    public class CustomOkButton : CustomButton
+    {
+        public CustomOkButton()
+        {
+            this.Text = Text;
+            //this.Text = Theme.OkText;//"Ок"; // Текст кнопки
+            this.Click += OnOkButtonClick; // Обработчик события Click
+            this.BackColor = Theme.OkButtonBackground; // Цвет кнопки
+            this.ForeColor = Theme.OkButtonText; // Цвет текста
+        }
+
+        public override string Text { get; set; } = "Ok";
+        // Событие при нажатии на кнопку "Ок"
+        private void OnOkButtonClick(object sender, EventArgs e)
+        {
+            // Логика для кнопки "Ок"
+        //    MessageBox.Show("Нажата кнопка 'Ок'");
+        }
+    }
+
+    // Класс-наследник для кнопки "Отмена"
+    public class CustomCancelButton : CustomButton
+    {
+        public CustomCancelButton()
+        {
+            this.Text = "Отмена"; // Текст кнопки
+            this.Click += OnCancelButtonClick; // Обработчик события Click
+            this.BackColor = Theme.CancelButtonBackground; // Цвет кнопки
+            this.ForeColor = Theme.CancelButtonText; // Цвет текста
+        }
+
+        // Событие при нажатии на кнопку "Отмена"
+        private void OnCancelButtonClick(object sender, EventArgs e)
+        {
+            // Логика для кнопки "Отмена"
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите отменить?",
+                                                  "Подтверждение",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+              //  this.FindForm()?.Close(); // Закрыть текущую форму
+            }
+        }
+    }
+
+
     // Класс-наследник для текстового поля
     public class CustomTextBox : TextBox
     {
@@ -168,7 +217,9 @@ namespace SewingProduction
         {
             // Применяем начальную тему
             //ApplyTheme();
-            this.Appearance.FocusedRow.BackColor = Theme.HighlightBackground;
+         //   this.Appearance.FocusedRow.BackColor = Theme.HighlightBackground;
+         this.Appearance.SelectedRow.Options.UseBackColor = true;
+            this.Appearance.SelectedRow.BackColor = Theme.HighlightBackground;  
             //this.ForeColor = Theme.ButtonText;
             //this.Font = Theme.DefaultFont;
             //this.FlatStyle = FlatStyle.Flat;

@@ -38,6 +38,12 @@ namespace SewingProduction {
         
         private sp_articulDataTable tablesp_articul;
         
+        private global::System.Data.DataRelation relationart_norm_n_fio;
+        
+        private global::System.Data.DataRelation relationart_norm_n_fio1;
+        
+        private global::System.Data.DataRelation relationart_norm_n_sp_articul;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -338,6 +344,9 @@ namespace SewingProduction {
                     this.tablesp_articul.InitVars();
                 }
             }
+            this.relationart_norm_n_fio = this.Relations["art_norm_n_fio"];
+            this.relationart_norm_n_fio1 = this.Relations["art_norm_n_fio1"];
+            this.relationart_norm_n_sp_articul = this.Relations["art_norm_n_sp_articul"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -362,6 +371,18 @@ namespace SewingProduction {
             base.Tables.Add(this.tablenorm_rasz);
             this.tablesp_articul = new sp_articulDataTable();
             base.Tables.Add(this.tablesp_articul);
+            this.relationart_norm_n_fio = new global::System.Data.DataRelation("art_norm_n_fio", new global::System.Data.DataColumn[] {
+                        this.tableart_norm_n.dizColumn}, new global::System.Data.DataColumn[] {
+                        this.tablefio.f_idColumn}, false);
+            this.Relations.Add(this.relationart_norm_n_fio);
+            this.relationart_norm_n_fio1 = new global::System.Data.DataRelation("art_norm_n_fio1", new global::System.Data.DataColumn[] {
+                        this.tableart_norm_n.constrColumn}, new global::System.Data.DataColumn[] {
+                        this.tablefio.f_idColumn}, false);
+            this.Relations.Add(this.relationart_norm_n_fio1);
+            this.relationart_norm_n_sp_articul = new global::System.Data.DataRelation("art_norm_n_sp_articul", new global::System.Data.DataColumn[] {
+                        this.tableart_norm_n.kodColumn}, new global::System.Data.DataColumn[] {
+                        this.tablesp_articul.kodColumn}, false);
+            this.Relations.Add(this.relationart_norm_n_sp_articul);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3998,13 +4019,11 @@ namespace SewingProduction {
             
             private global::System.Data.DataColumn columnkod;
             
-            private global::System.Data.DataColumn columnExpr1;
+            private global::System.Data.DataColumn columngrup;
             
-            private global::System.Data.DataColumn columnExpr2;
+            private global::System.Data.DataColumn columnarticul;
             
-            private global::System.Data.DataColumn columnExpr3;
-            
-            private global::System.Data.DataColumn columnExpr4;
+            private global::System.Data.DataColumn columnmod;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -4049,33 +4068,25 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn Expr1Column {
+            public global::System.Data.DataColumn grupColumn {
                 get {
-                    return this.columnExpr1;
+                    return this.columngrup;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn Expr2Column {
+            public global::System.Data.DataColumn articulColumn {
                 get {
-                    return this.columnExpr2;
+                    return this.columnarticul;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn Expr3Column {
+            public global::System.Data.DataColumn modColumn {
                 get {
-                    return this.columnExpr3;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn Expr4Column {
-                get {
-                    return this.columnExpr4;
+                    return this.columnmod;
                 }
             }
             
@@ -4116,14 +4127,16 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public sp_articulRow Addsp_articulRow(string kod, string Expr1, string Expr2, string Expr3, string Expr4) {
+            public sp_articulRow Addsp_articulRow(art_norm_nRow parentart_norm_nRowByart_norm_n_sp_articul, string grup, string articul, string mod) {
                 sp_articulRow rowsp_articulRow = ((sp_articulRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
-                        kod,
-                        Expr1,
-                        Expr2,
-                        Expr3,
-                        Expr4};
+                        null,
+                        grup,
+                        articul,
+                        mod};
+                if ((parentart_norm_nRowByart_norm_n_sp_articul != null)) {
+                    columnValuesArray[0] = parentart_norm_nRowByart_norm_n_sp_articul[0];
+                }
                 rowsp_articulRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsp_articulRow);
                 return rowsp_articulRow;
@@ -4154,10 +4167,9 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             internal void InitVars() {
                 this.columnkod = base.Columns["kod"];
-                this.columnExpr1 = base.Columns["Expr1"];
-                this.columnExpr2 = base.Columns["Expr2"];
-                this.columnExpr3 = base.Columns["Expr3"];
-                this.columnExpr4 = base.Columns["Expr4"];
+                this.columngrup = base.Columns["grup"];
+                this.columnarticul = base.Columns["articul"];
+                this.columnmod = base.Columns["mod"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -4165,24 +4177,20 @@ namespace SewingProduction {
             private void InitClass() {
                 this.columnkod = new global::System.Data.DataColumn("kod", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnkod);
-                this.columnExpr1 = new global::System.Data.DataColumn("Expr1", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr1);
-                this.columnExpr2 = new global::System.Data.DataColumn("Expr2", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr2);
-                this.columnExpr3 = new global::System.Data.DataColumn("Expr3", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr3);
-                this.columnExpr4 = new global::System.Data.DataColumn("Expr4", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnExpr4);
+                this.columngrup = new global::System.Data.DataColumn("grup", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columngrup);
+                this.columnarticul = new global::System.Data.DataColumn("articul", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarticul);
+                this.columnmod = new global::System.Data.DataColumn("mod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnmod);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnkod}, true));
                 this.columnkod.AllowDBNull = false;
                 this.columnkod.Unique = true;
                 this.columnkod.MaxLength = 8;
-                this.columnExpr1.ReadOnly = true;
-                this.columnExpr1.MaxLength = 7;
-                this.columnExpr2.MaxLength = 35;
-                this.columnExpr3.MaxLength = 25;
-                this.columnExpr4.MaxLength = 25;
+                this.columngrup.MaxLength = 35;
+                this.columnarticul.MaxLength = 25;
+                this.columnmod.MaxLength = 25;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5397,6 +5405,39 @@ namespace SewingProduction {
             public void SetannCompAddNull() {
                 this[this.tableart_norm_n.annCompAddColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public fioRow[] GetfioRowsByart_norm_n_fio() {
+                if ((this.Table.ChildRelations["art_norm_n_fio"] == null)) {
+                    return new fioRow[0];
+                }
+                else {
+                    return ((fioRow[])(base.GetChildRows(this.Table.ChildRelations["art_norm_n_fio"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public fioRow[] GetfioRowsByart_norm_n_fio1() {
+                if ((this.Table.ChildRelations["art_norm_n_fio1"] == null)) {
+                    return new fioRow[0];
+                }
+                else {
+                    return ((fioRow[])(base.GetChildRows(this.Table.ChildRelations["art_norm_n_fio1"])));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public sp_articulRow[] Getsp_articulRows() {
+                if ((this.Table.ChildRelations["art_norm_n_sp_articul"] == null)) {
+                    return new sp_articulRow[0];
+                }
+                else {
+                    return ((sp_articulRow[])(base.GetChildRows(this.Table.ChildRelations["art_norm_n_sp_articul"])));
+                }
+            }
         }
         
         /// <summary>
@@ -6077,6 +6118,28 @@ namespace SewingProduction {
                 }
                 set {
                     this[this.tablefio.edit_dateColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public art_norm_nRow art_norm_nRowByart_norm_n_fio {
+                get {
+                    return ((art_norm_nRow)(this.GetParentRow(this.Table.ParentRelations["art_norm_n_fio"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["art_norm_n_fio"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public art_norm_nRow art_norm_nRowByart_norm_n_fio1 {
+                get {
+                    return ((art_norm_nRow)(this.GetParentRow(this.Table.ParentRelations["art_norm_n_fio1"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["art_norm_n_fio1"]);
                 }
             }
             
@@ -8194,114 +8257,97 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Expr1 {
+            public string grup {
                 get {
                     try {
-                        return ((string)(this[this.tablesp_articul.Expr1Column]));
+                        return ((string)(this[this.tablesp_articul.grupColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Expr1\' в таблице \'sp_articul\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'grup\' в таблице \'sp_articul\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablesp_articul.Expr1Column] = value;
+                    this[this.tablesp_articul.grupColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Expr2 {
+            public string articul {
                 get {
                     try {
-                        return ((string)(this[this.tablesp_articul.Expr2Column]));
+                        return ((string)(this[this.tablesp_articul.articulColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Expr2\' в таблице \'sp_articul\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'articul\' в таблице \'sp_articul\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablesp_articul.Expr2Column] = value;
+                    this[this.tablesp_articul.articulColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Expr3 {
+            public string mod {
                 get {
                     try {
-                        return ((string)(this[this.tablesp_articul.Expr3Column]));
+                        return ((string)(this[this.tablesp_articul.modColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Expr3\' в таблице \'sp_articul\' равно DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'mod\' в таблице \'sp_articul\' равно DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tablesp_articul.Expr3Column] = value;
+                    this[this.tablesp_articul.modColumn] = value;
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string Expr4 {
+            public art_norm_nRow art_norm_nRow {
                 get {
-                    try {
-                        return ((string)(this[this.tablesp_articul.Expr4Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'Expr4\' в таблице \'sp_articul\' равно DBNull.", e);
-                    }
+                    return ((art_norm_nRow)(this.GetParentRow(this.Table.ParentRelations["art_norm_n_sp_articul"])));
                 }
                 set {
-                    this[this.tablesp_articul.Expr4Column] = value;
+                    this.SetParentRow(value, this.Table.ParentRelations["art_norm_n_sp_articul"]);
                 }
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsExpr1Null() {
-                return this.IsNull(this.tablesp_articul.Expr1Column);
+            public bool IsgrupNull() {
+                return this.IsNull(this.tablesp_articul.grupColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetExpr1Null() {
-                this[this.tablesp_articul.Expr1Column] = global::System.Convert.DBNull;
+            public void SetgrupNull() {
+                this[this.tablesp_articul.grupColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsExpr2Null() {
-                return this.IsNull(this.tablesp_articul.Expr2Column);
+            public bool IsarticulNull() {
+                return this.IsNull(this.tablesp_articul.articulColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetExpr2Null() {
-                this[this.tablesp_articul.Expr2Column] = global::System.Convert.DBNull;
+            public void SetarticulNull() {
+                this[this.tablesp_articul.articulColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsExpr3Null() {
-                return this.IsNull(this.tablesp_articul.Expr3Column);
+            public bool IsmodNull() {
+                return this.IsNull(this.tablesp_articul.modColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetExpr3Null() {
-                this[this.tablesp_articul.Expr3Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsExpr4Null() {
-                return this.IsNull(this.tablesp_articul.Expr4Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetExpr4Null() {
-                this[this.tablesp_articul.Expr4Column] = global::System.Convert.DBNull;
+            public void SetmodNull() {
+                this[this.tablesp_articul.modColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -12628,48 +12674,18 @@ SELECT f_id, tab, fio, rab, mast, vd, datau, po, okl, tab_new, grup, tel_r, tel_
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "sp_articul";
             tableMapping.ColumnMappings.Add("kod", "kod");
-            tableMapping.ColumnMappings.Add("Expr1", "Expr1");
-            tableMapping.ColumnMappings.Add("Expr2", "Expr2");
-            tableMapping.ColumnMappings.Add("Expr3", "Expr3");
-            tableMapping.ColumnMappings.Add("Expr4", "Expr4");
+            tableMapping.ColumnMappings.Add("grup", "grup");
+            tableMapping.ColumnMappings.Add("articul", "articul");
+            tableMapping.ColumnMappings.Add("mod", "mod");
             this._adapter.TableMappings.Add(tableMapping);
-            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [sp_articul] WHERE (((@IsNull_Expr2 = 1 AND [grup] IS NULL) OR ([grup] = @Original_Expr2)) AND ((@IsNull_Expr3 = 1 AND [articul] IS NULL) OR ([articul] = @Original_Expr3)) AND ((@IsNull_Expr4 = 1 AND [mod] IS NULL) OR ([mod] = @Original_Expr4)) AND ([kod] = @Original_kod))";
-            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr3", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr3", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr4", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr4", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [sp_articul] ([grup], [articul], [mod], [kod]) VALUES (@Expr2, @Expr3" +
-                ", @Expr4, @kod);\r\nSELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul A" +
-                "S Expr3, mod AS Expr4, kod FROM sp_articul WHERE (kod = @kod)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [sp_articul] ([grup], [articul], [mod]) VALUES (@grup, @articul, @mod" +
+                ")";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr3", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr4", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
-            this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [sp_articul] SET [grup] = @Expr2, [articul] = @Expr3, [mod] = @Expr4, [kod] = @kod WHERE (((@IsNull_Expr2 = 1 AND [grup] IS NULL) OR ([grup] = @Original_Expr2)) AND ((@IsNull_Expr3 = 1 AND [articul] IS NULL) OR ([articul] = @Original_Expr3)) AND ((@IsNull_Expr4 = 1 AND [mod] IS NULL) OR ([mod] = @Original_Expr4)) AND ([kod] = @Original_kod));
-SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Expr4, kod FROM sp_articul WHERE (kod = @kod)";
-            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr3", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Expr4", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr2", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr2", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr2", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr3", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr3", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr3", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_Expr4", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Expr4", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Expr4", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grup", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@articul", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "articul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "mod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12685,8 +12701,8 @@ SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Ex
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Exp" +
-                "r4, kod FROM sp_articul";
+            this._commandCollection[0].CommandText = "SELECT        SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod\r\nFROM            sp" +
+                "_articul";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -12746,79 +12762,25 @@ SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Ex
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_Expr2, string Original_Expr3, string Original_Expr4, string Original_kod) {
-            if ((Original_Expr2 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr2");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[0].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_Expr2));
-            }
-            if ((Original_Expr3 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr3");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[2].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_Expr3));
-            }
-            if ((Original_Expr4 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr4");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.DeleteCommand.Parameters[5].Value = ((string)(Original_Expr4));
-            }
-            if ((Original_kod == null)) {
-                throw new global::System.ArgumentNullException("Original_kod");
-            }
-            else {
-                this.Adapter.DeleteCommand.Parameters[6].Value = ((string)(Original_kod));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
-            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.DeleteCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.DeleteCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string Expr2, string Expr3, string Expr4, string kod) {
-            if ((Expr2 == null)) {
-                throw new global::System.ArgumentNullException("Expr2");
+        public virtual int Insert(string grup, string articul, string mod) {
+            if ((grup == null)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(Expr2));
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(grup));
             }
-            if ((Expr3 == null)) {
-                throw new global::System.ArgumentNullException("Expr3");
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(Expr3));
-            }
-            if ((Expr4 == null)) {
-                throw new global::System.ArgumentNullException("Expr4");
+            if ((articul == null)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(Expr4));
+                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(articul));
             }
-            if ((kod == null)) {
-                throw new global::System.ArgumentNullException("kod");
+            if ((mod == null)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(kod));
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(mod));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -12834,86 +12796,6 @@ SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Ex
                     this.Adapter.InsertCommand.Connection.Close();
                 }
             }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Expr2, string Expr3, string Expr4, string kod, string Original_Expr2, string Original_Expr3, string Original_Expr4, string Original_kod) {
-            if ((Expr2 == null)) {
-                throw new global::System.ArgumentNullException("Expr2");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(Expr2));
-            }
-            if ((Expr3 == null)) {
-                throw new global::System.ArgumentNullException("Expr3");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(Expr3));
-            }
-            if ((Expr4 == null)) {
-                throw new global::System.ArgumentNullException("Expr4");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(Expr4));
-            }
-            if ((kod == null)) {
-                throw new global::System.ArgumentNullException("kod");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(kod));
-            }
-            if ((Original_Expr2 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr2");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_Expr2));
-            }
-            if ((Original_Expr3 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr3");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_Expr3));
-            }
-            if ((Original_Expr4 == null)) {
-                throw new global::System.ArgumentNullException("Original_Expr4");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_Expr4));
-            }
-            if ((Original_kod == null)) {
-                throw new global::System.ArgumentNullException("Original_kod");
-            }
-            else {
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_kod));
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
-            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.UpdateCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.UpdateCommand.Connection.Close();
-                }
-            }
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string Expr2, string Expr3, string Expr4, string Original_Expr2, string Original_Expr3, string Original_Expr4, string Original_kod) {
-            return this.Update(Expr2, Expr3, Expr4, Original_kod, Original_Expr2, Original_Expr3, Original_Expr4, Original_kod);
         }
     }
     

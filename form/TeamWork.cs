@@ -1,141 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Windows.Forms;
-using System.Data.Entity;
 using System.Data.SqlClient;
-using System.Threading.Tasks;
-using System.Configuration;
-using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.Xpo;
-using SewingProduction;
-using BindingSource = System.Windows.Forms.BindingSource;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using System.Data;
 using DevExpress.XtraGrid.Views.Base;
-using DevExpress.Utils;
-using SewingProduction;
 using System.Drawing;
-using Button = SewingProduction.form.TeamWork.Button;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
+
 namespace SewingProduction.form
 {
-    public partial class TeamWork : SP_form
+    public partial class TeamWork : CustomForm
     {
-        public IDatabaseManager _database;
+       // public IDatabaseManager _database;
         string connectionString = Properties.Settings.Default.ACEConnectionString;
 
         public TeamWork()
         {
             InitializeComponent();
-         //   InitializeComponents();
-            Load += TeamWork_Load; // Подключаем обработчик события Load
+           // Load += TeamWork_Load; // Подключаем обработчик события Load
         }
         private void InitializeComponents()
         {
-            // Создание TextBox
-            TextBox textbox = new TextBox
-            {
-                Text = "Введите текст...",
-                ForeColor = System.Drawing.Color.Blue,
-                Font = new System.Drawing.Font("Arial", 14),
-                Location = new System.Drawing.Point(50, 50), // позиция на форме
-                Width = 200
-            };
-
-            // Создание Button
-            //Button Mybutton = new Button
-            //{
-            //    Text = "Нажмите",
-            //    ForeColor = System.Drawing.Color.Red,
-            //    Font = new System.Drawing.Font("Arial", 14),
-            //    Location = new System.Drawing.Point(50, 100), // позиция на форме
-            //    Width = 100
-            //};
-
-            //// Добавление обработчика события для Button
-            //Mybutton.Click += (sender, args) => MessageBox.Show("Кнопка нажата!");
-
-            //// Добавление компонентов на форму
-            //this.Controls.Add(textbox);
-            //this.Controls.Add(Mybutton);
         }
         private void TeamWork_Load(object sender, EventArgs e)
         {
-
-            // Пример использования
-            Textbox textbox = new Textbox(textColor: "blue", textSize: 14, placeholder: "Введите имя");
-            textbox.DisplayTextboxInfo();
-            
-
-            Button button = new Button(textColor: "red", textSize: 16, label: "Отправить");
-            button.DisplayButtonInfo();
-//            LoadData();
+            LoadData();
+         
         }
-        public class Component
-        {
-            public string TextColor { get; set; }
-            public int TextSize { get; set; }
-
-            // Конструктор по умолчанию
-            public Component(string textColor = "black", int textSize = 12)
-            {
-                TextColor = textColor;
-                TextSize = textSize;
-            }
-
-            public void DisplayInfo()
-            {
-                Console.WriteLine($"Text Color: {TextColor}, Text Size: {TextSize}");
-            }
-        }
-
-        // Класс Textbox, наследующий Component
-        public class Textbox : Component
-        {
-            public string Placeholder { get; set; }
-
-            public Textbox(string textColor = "black", int textSize = 12, string placeholder = "Enter text")
-                : base(textColor, textSize)
-            {
-                Placeholder = placeholder;
-            }
-
-            public void DisplayTextboxInfo()
-            {
-                Console.WriteLine($"Textbox - Placeholder: {Placeholder}, Text Color: {TextColor}, Text Size: {TextSize}");
-            }
-        }
-        public class Button : Component
-        {
-            internal string Text;
-            internal Color ForeColor;
-            internal Font Font;
-            internal Point Location;
-
-            public string Label { get; set; }
-            public int Width { get; internal set; }
-            public Func<object, object, DialogResult> Click { get; internal set; }
-
-            public Button(string textColor = "black", int textSize = 12, string label = "Click Me")
-                : base(textColor, textSize)
-            {
-                Label = label;
-            }
-
-            public void DisplayButtonInfo()
-            {
-                Console.WriteLine($"Button - Label: {Label}, Text Color: {TextColor}, Text Size: {TextSize}");
-            }
-        }
-
+   
         private void LoadData(string searchName = "")
         {
-
-
-
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -203,6 +101,37 @@ namespace SewingProduction.form
             }
         }
 
+        private void ShowRelatedData(string query, System.Windows.Forms.TextBox textBox)
+        {
+            string queryDiz = $"SELECT [ACE].[dbo].[fio].fio FROM [ACE].[dbo].fio WHERE [ACE].[dbo].[fio].tab = '{query}'";
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    connection.Open();
+                    using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
+                    {
+                        DataTable fio = new DataTable();
+
+                        using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                        {
+                            adapter.SelectCommand = command;
+                            adapter.Fill(fio);
+                            textBox.Text = fio.Rows[0][0].ToString();
+                        }
+
+                        transaction.Commit(); // Подтверждаем транзакцию
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void LoadData()
         {
@@ -253,11 +182,20 @@ namespace SewingProduction.form
                 // Замените "YourColumnName" на имя столбца и textBox1 на имя вашего поля
                 object komment = gridView.GetRowCellValue(e.FocusedRowHandle, "komment");
                 commentRichTextBox.Text = komment?.ToString() ?? ""; // Обработка null
-                object diz = gridView.GetRowCellValue(e.FocusedRowHandle, "diz");
-                designerComboBox.Text = diz?.ToString() ?? "";
-                object konstr = gridView.GetRowCellValue(e.FocusedRowHandle, "constr");
-                constructorComboBox.Text = konstr?.ToString() ?? string.Empty;
+                string diz = gridView.GetRowCellValue(e.FocusedRowHandle, "diz")?.ToString();
+              //  string queryDiz = $"SELECT [ACE].[dbo].[fio].fio FROM [ACE].[dbo].fio WHERE [ACE].[dbo].[fio].tab = '{diz}'";
+       //         ShowRelatedData(diz, designerComboBox);
+              //  designerComboBox.Text = diz?.ToString() ?? "";
+                string konstr = gridView.GetRowCellValue(e.FocusedRowHandle, "constr")?.ToString();
+     //           ShowRelatedData(konstr, constructorComboBox);
+                //constructorComboBox.Text = konstr?.ToString() ?? string.Empty;
             }
+        }
+
+        private void textBoxUpd(string tab, int diz)
+        {
+            string queryDiz = $"SELECT [ACE].[dbo].[fio].fio FROM [ACE].[dbo].fio WHERE [ACE].[dbo].[fio].tab = '{tab}'";
+//            ShowRelatedData(queryDiz);
         }
         private void normRaszUpd(int Id)
         {
@@ -295,53 +233,62 @@ namespace SewingProduction.form
         private void toolStripButton2_Click(object sender, EventArgs e)
         {
             Form1 form = new Form1();
-            //form.MdiParent = this;
             form.Show();
         }
+
+        private void customButton2_Click(object sender, EventArgs e)
+        {
+           // switch r
+            gridView3.ActiveFilterString = string.Format("[kod] LIKE '%{0}%'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
+                                                                              // Или более сложный пример:
+           // gridView1.ActiveFilterString = "[FieldName1] = 'Value1' AND [FieldName2] > 10";
+        }
+
+     
     }
 
 }
 
 
-#region new
-namespace SewingProduction.form
-{
-    public interface IDatabaseManager : IDisposable
-    {
-        List<ArtNormN> GetAllData();
-        //List<ArtNormN> SearchData(string searchName);
-        //void SaveData(List<ArtNormN> updatedData);
-    }
+//#region new
+//namespace SewingProduction.form
+//{
+//    public interface IDatabaseManager : IDisposable
+//    {
+//        List<ArtNormN> GetAllData();
+//        //List<ArtNormN> SearchData(string searchName);
+//        //void SaveData(List<ArtNormN> updatedData);
+//    }
 
-    public class DatabaseManager : IDatabaseManager
-    {
-        private readonly DbContext _context; // Используем DbContext напрямую
+//    public class DatabaseManager : IDatabaseManager
+//    {
+//        private readonly DbContext _context; // Используем DbContext напрямую
 
-        public DatabaseManager(DbContext context) // Инъекция зависимостей
-        {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
-        }
+//        public DatabaseManager(DbContext context) // Инъекция зависимостей
+//        {
+//            _context = context ?? throw new ArgumentNullException(nameof(context));
+//        }
 
-        public DbSet<ArtNormN> ArtNormNs => _context.Set<ArtNormN>(); // Более чистый доступ к DbSet
+//        public DbSet<ArtNormN> ArtNormNs => _context.Set<ArtNormN>(); // Более чистый доступ к DbSet
 
-        public List<ArtNormN> GetAllData()
-        {
-            try
-            {
-                return ArtNormNs.ToList(); // Используем свойство ArtNormNs
-            }
-            catch (Exception ex)
-            {
-                // Запись в лог или другое обработка исключения
-                Console.WriteLine($"Ошибка при получении данных: {ex.Message}");
-                return new List<ArtNormN>(); // Возвращаем пустой список в случае ошибки
-            }
-        }
+//        public List<ArtNormN> GetAllData()
+//        {
+//            try
+//            {
+//                return ArtNormNs.ToList(); // Используем свойство ArtNormNs
+//            }
+//            catch (Exception ex)
+//            {
+//                // Запись в лог или другое обработка исключения
+//                Console.WriteLine($"Ошибка при получении данных: {ex.Message}");
+//                return new List<ArtNormN>(); // Возвращаем пустой список в случае ошибки
+//            }
+//        }
 
-        public void Dispose()
-        {
-            _context.Dispose();
-        }
-    }
-}
-#endregion
+//        public void Dispose()
+//        {
+//            _context.Dispose();
+//        }
+//    }
+//}
+//#endregion

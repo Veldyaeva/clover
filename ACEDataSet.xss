@@ -9,13 +9,13 @@
     <Shape ID="DesignTable:art_norm_n" ZOrder="10" X="471" Y="110" Height="626" Width="210" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="558" />
     <Shape ID="DesignTable:fio" ZOrder="9" X="199" Y="6" Height="305" Width="160" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:norm_dop_obr" ZOrder="8" X="982" Y="422" Height="191" Width="229" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="140" />
-    <Shape ID="DesignTable:norm_kont" ZOrder="1" X="734" Y="422" Height="305" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
+    <Shape ID="DesignTable:norm_kont" ZOrder="2" X="734" Y="422" Height="305" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:Norm_rask" ZOrder="7" X="960" Y="2" Height="305" Width="207" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
     <Shape ID="DesignTable:norm_rasz" ZOrder="6" X="735" Y="2" Height="305" Width="204" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="254" />
-    <Shape ID="DesignTable:sp_articul" ZOrder="5" X="163" Y="532" Height="172" Width="199" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="121" />
+    <Shape ID="DesignTable:sp_articul" ZOrder="1" X="163" Y="532" Height="153" Width="199" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="102" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:art_norm_n_fio" ZOrder="4" LineWidth="11">
+    <Connector ID="DesignRelation:art_norm_n_fio" ZOrder="5" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>471</X>
@@ -31,7 +31,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:art_norm_n_fio1" ZOrder="3" LineWidth="11">
+    <Connector ID="DesignRelation:art_norm_n_fio1" ZOrder="4" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>471</X>
@@ -47,7 +47,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:art_norm_n_sp_articul" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:art_norm_n_sp_articul" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>470</X>

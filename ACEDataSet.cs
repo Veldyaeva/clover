@@ -9,3 +9,10 @@
         }
     }
 }
+
+namespace SewingProduction.ACEDataSetTableAdapters {
+    
+    
+    public partial class sp_articulTableAdapter {
+    }
+}
