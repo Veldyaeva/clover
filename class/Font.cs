@@ -128,7 +128,6 @@ namespace SewingProduction
             CustomView = new CustomGridView();
             this.MainView = CustomView;
             this.ViewCollection.Add(CustomView);
-
             //// Применяем начальную тему
             //ApplyTheme();
 

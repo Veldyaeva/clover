@@ -194,7 +194,7 @@ namespace SewingProduction.form
             //this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
 
         }
-        
+
         private void ShowRelatedData(int artNormNId, string query, GridControl grid)
 
         //более правильно через BindingSource
@@ -393,14 +393,13 @@ namespace SewingProduction.form
         }
 
 
-        private void kommentUpd(FocusedRowChangedEventArgs e)
+        private void KommentUpd(FocusedRowChangedEventArgs e)
         {
             GridView gridView = gridControl2.MainView as GridView;
 
             //GridView view = sender as GridView;
             if (gridView != null)
             {
-                // Замените "YourColumnName" на имя столбца и textBox1 на имя вашего поля
                 object komment = gridView.GetRowCellValue(e.FocusedRowHandle, "komment");
                 commentRichTextBox.Text = komment?.ToString() ?? ""; // Обработка null
                 object diz = gridView.GetRowCellValue(e.FocusedRowHandle, "diz");
