@@ -29,6 +29,8 @@ namespace SewingProduction.form
         }
         private void TeamWork_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
+            this.art_norm_nTableAdapter.Fill(this.aCEDataSet.art_norm_n);
             LoadData();
          
         }
@@ -305,7 +307,17 @@ namespace SewingProduction.form
 
         private void customGridControl2_Load(object sender, EventArgs e)
         {
-            ShowArtData("SELECT kod, grup, articul, mod FROM art_norm_n where mod>'1'", customGridControl2);
+            ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n where mod>'1'", customGridControl2);
+        }
+
+        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
 
         //private void fillToolStripButton_Click(object sender, EventArgs e)

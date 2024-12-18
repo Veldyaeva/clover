@@ -206,7 +206,13 @@ namespace SewingProduction.form
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.customButton1 = new SewingProduction.CustomButton();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
+            this.radioButton3 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.customButton6 = new SewingProduction.CustomButton();
             this.customGridControl2 = new SewingProduction.CustomGridControl();
+            this.artnormnBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.customButton2 = new SewingProduction.CustomButton();
             this.customGridControl4 = new SewingProduction.CustomGridControl();
@@ -280,6 +286,8 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).BeginInit();
             this.panelControl3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
             this.SuspendLayout();
@@ -1718,6 +1726,7 @@ namespace SewingProduction.form
             // 
             // customGridControl3
             // 
+            this.customGridControl3.DataSource = this.artnormnBindingSource1;
             this.customGridControl3.Location = new System.Drawing.Point(34, 515);
             this.customGridControl3.Name = "customGridControl3";
             this.customGridControl3.Size = new System.Drawing.Size(400, 200);
@@ -1840,6 +1849,10 @@ namespace SewingProduction.form
             // 
             // panelControl3
             // 
+            this.panelControl3.Controls.Add(this.radioButton3);
+            this.panelControl3.Controls.Add(this.radioButton2);
+            this.panelControl3.Controls.Add(this.radioButton1);
+            this.panelControl3.Controls.Add(this.customButton6);
             this.panelControl3.Controls.Add(this.customGridControl2);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(0, 0);
@@ -1847,16 +1860,80 @@ namespace SewingProduction.form
             this.panelControl3.Size = new System.Drawing.Size(661, 509);
             this.panelControl3.TabIndex = 0;
             // 
+            // radioButton3
+            // 
+            this.radioButton3.AutoSize = true;
+            this.radioButton3.Location = new System.Drawing.Point(50, 54);
+            this.radioButton3.Name = "radioButton3";
+            this.radioButton3.Size = new System.Drawing.Size(87, 17);
+            this.radioButton3.TabIndex = 4;
+            this.radioButton3.TabStop = true;
+            this.radioButton3.Text = "radioButton3";
+            this.radioButton3.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(50, 30);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(87, 17);
+            this.radioButton2.TabIndex = 3;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "radioButton2";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(50, 6);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(87, 17);
+            this.radioButton1.TabIndex = 2;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "radioButton1";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
+            // 
+            // customButton6
+            // 
+            this.customButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton6.Btn = null;
+            this.customButton6.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton6.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton6.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton6.FlatAppearance.BorderSize = 0;
+            this.customButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton6.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton6.Location = new System.Drawing.Point(440, 26);
+            this.customButton6.Name = "customButton6";
+            this.customButton6.Size = new System.Drawing.Size(189, 55);
+            this.customButton6.TabIndex = 1;
+            this.customButton6.Text = "Добавить предварительное  РТ";
+            this.customButton6.UseVisualStyleBackColor = false;
+            // 
             // customGridControl2
             // 
-            this.customGridControl2.Cursor = System.Windows.Forms.Cursors.Default;
-            this.customGridControl2.DataSource = this.artnormnBindingSource;
-            this.customGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customGridControl2.Location = new System.Drawing.Point(2, 2);
+            this.customGridControl2.Cursor = System.Windows.Forms.Cursors.SizeWE;
+            this.customGridControl2.DataSource = this.artnormnBindingSource1;
+            this.customGridControl2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.customGridControl2.Location = new System.Drawing.Point(2, 87);
             this.customGridControl2.Name = "customGridControl2";
-            this.customGridControl2.Size = new System.Drawing.Size(657, 505);
+            this.customGridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemCheckEdit3});
+            this.customGridControl2.Size = new System.Drawing.Size(657, 420);
             this.customGridControl2.TabIndex = 0;
             this.customGridControl2.Load += new System.EventHandler(this.customGridControl2_Load);
+            // 
+            // artnormnBindingSource1
+            // 
+            this.artnormnBindingSource1.DataMember = "art_norm_n";
+            this.artnormnBindingSource1.DataSource = this.aCEDataSetBindingSource;
+            // 
+            // repositoryItemCheckEdit3
+            // 
+            this.repositoryItemCheckEdit3.AutoHeight = false;
+            this.repositoryItemCheckEdit3.Name = "repositoryItemCheckEdit3";
             // 
             // xtraTabPage3
             // 
@@ -1992,7 +2069,10 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl3)).EndInit();
             this.panelControl3.ResumeLayout(false);
+            this.panelControl3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit3)).EndInit();
             this.xtraTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).EndInit();
             this.ResumeLayout(false);
@@ -2350,5 +2430,11 @@ namespace SewingProduction.form
         private ToolStrip fillBy1ToolStrip;
         private ToolStripButton fillBy1ToolStripButton;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
+        private CustomButton customButton6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit3;
+        private RadioButton radioButton3;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
+        private BindingSource artnormnBindingSource1;
     }
 }
