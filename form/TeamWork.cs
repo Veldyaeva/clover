@@ -318,7 +318,7 @@ namespace SewingProduction.form
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod, kod FROM sp_articul WHERE annID = '{Id}'";
             ShowRelatedData(Id, query, customGridControl5, sparticulBindingSource);
         }
-
+         
         private void doubleBtn_Click(object sender, EventArgs e)
         {
 
