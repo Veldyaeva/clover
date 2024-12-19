@@ -30,9 +30,9 @@ namespace SewingProduction.form
         private void TeamWork_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.norm_rasz". При необходимости она может быть перемещена или удалена.
-            this.norm_raszTableAdapter.Fill(this.aCEDataSet.norm_rasz);
+           // this.norm_raszTableAdapter.Fill(this.aCEDataSet.norm_rasz);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
-            this.art_norm_nTableAdapter.Fill(this.aCEDataSet.art_norm_n);
+           // this.art_norm_nTableAdapter.Fill(this.aCEDataSet.art_norm_n);
             LoadData();
          
         }
@@ -145,34 +145,18 @@ namespace SewingProduction.form
             LoadData("");  // Вызов основного метода с пустой строкой для отображения всех данных
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if (row != null)
-            //{
-            //    // Строка найдена, получаем индекс строки
-            //    int rowIndex = dt.Rows.IndexOf(row);
-
-            //    // Получаем индекс столбца (замените "ColumnName" на имя вашего столбца)
-            //    int columnIndex = dt.Columns.IndexOf("ColumnName");
-
-            //    // Выделяем ячейку (после привязки данных к GridView)
-            //    GridView.Rows[rowIndex].Cells[columnIndex].BackColor = Color.Yellow;
-            //}
-
-        }
-
-
 
         private void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle >= 0)
             {
                 GridView view = gridControl2.MainView as GridView;
-                int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
+                int kod = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
+                int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annID"));
                 NormRaszUpd(Id);
                 Norm_raskUpd(Id);
-                Norm_kontUpd(Id);
-                Norm_dop_obrUpd(Id);
+                Norm_kontUpd(kod);
+                Norm_dop_obrUpd(kod);
                 Sp_artUpd(Id);
                 KommentUpd(e);
             }
@@ -205,32 +189,32 @@ namespace SewingProduction.form
         }
         private void NormRaszUpd(int Id)
         {
-            string query = $"SELECT * FROM [ACE].[dbo].norm_rasz WHERE [ACE].[dbo].[norm_rasz].kod = '{Id}'";
+            string query = $"SELECT * FROM norm_rasz WHERE [norm_rasz].annId = '{Id}'";
             ShowRelatedData(Id, query, gridControl1);
         }
         private void Norm_raskUpd(int Id)
         {
 
-            string query = $"SELECT * FROM [ACE].[dbo].norm_rask WHERE [ACE].[dbo].[norm_rask].kod = '{Id}'";
+            string query = $"SELECT * FROM norm_rask WHERE [norm_rask].annId = '{Id}'";
             ShowRelatedData(Id, query, gridControl3);
         }
         private void Norm_kontUpd(int Id)
         {
-            string query = $"SELECT * FROM [ACE].[dbo].norm_kont WHERE [ACE].[dbo].[norm_kont].kod = '{Id}'";
+            string query = $"SELECT * FROM norm_kont WHERE [norm_kont].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl4);
         }
 
         private void Norm_dop_obrUpd(int Id)
         {
-            string query = $"SELECT * FROM [ACE].[dbo].norm_dop_obr WHERE [ACE].[dbo].[norm_dop_obr].kod = '{Id}'";
+            string query = $"SELECT * FROM norm_dop_obr WHERE [norm_dop_obr].kod = '{Id}'";
             ShowRelatedData(Id, query, gridControl5);
         }
         private void Sp_artUpd(int Id)
         {
-            string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM [ACE].[dbo].sp_articul WHERE SUBSTRING(kod ,1,7)= '{Id}'";
+            string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM sp_articul WHERE annID = '{Id}'";
             ShowRelatedData(Id, query, customGridControl5);
         }
-
+         
         private void doubleBtn_Click(object sender, EventArgs e)
         {
 
@@ -244,15 +228,12 @@ namespace SewingProduction.form
 
         private void customButton2_Click(object sender, EventArgs e)
         {
-           // switch r
-            gridView3.ActiveFilterString = string.Format("[kod] LIKE '%{0}%'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
-                                                                              // Или более сложный пример:
-           // gridView1.ActiveFilterString = "[FieldName1] = 'Value1' AND [FieldName2] > 10";
+                                                                             
         }
 
         private void customGridControl1_Load(object sender, EventArgs e)
         {
-            ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where mod>'1'", customGridControl1);
+            ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where annId is NULL", customGridControl1);
         }
         private void ShowArtData(string query, GridControl grid)
         {
@@ -285,26 +266,31 @@ namespace SewingProduction.form
             }
         }
 
-       
-
-        private void customButton4_Click(object sender, EventArgs e)
-        {
-
-        }
+  
 
         private void customGridControl2_Load(object sender, EventArgs e)
         {
-            ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n where mod>'1'", customGridControl2);
+            ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n", customGridControl2);
         }
 
         
 
         private void customGridControl4_Load(object sender, EventArgs e)
         {
-            ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where mod>'1'", customGridControl4);
+            ShowArtData("SELECT kod, grup, articul, mod FROM norm_rasz", customGridControl4);
 
         }
 
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+            gridView3.ActiveFilterString = string.Format("[kod] LIKE '{0}'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
+
+        }
+
+        private void customButton7_Click(object sender, EventArgs e)
+        {
+            //customGridControl5.FocusedView
+        }
     }
 
 }
