@@ -147,16 +147,12 @@ namespace SewingProduction.form
             this.customButton8 = new SewingProduction.CustomButton();
             this.customButton5 = new SewingProduction.CustomButton();
             this.aproovmentBtn = new System.Windows.Forms.Button();
-            this.KonfKardBtn = new System.Windows.Forms.Button();
-            this.AddPrevBtn = new System.Windows.Forms.Button();
-            this.deleteBtn = new System.Windows.Forms.Button();
             this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
             this.constructorComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
             this.designerComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.doubleBtn = new System.Windows.Forms.Button();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -719,7 +715,6 @@ namespace SewingProduction.form
             this.panel3.Controls.Add(this.customButton7);
             this.panel3.Controls.Add(this.customGridControl5);
             this.panel3.Controls.Add(this.svgImageBox1);
-            this.panel3.Controls.Add(this.exitBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 555);
             this.panel3.Name = "panel3";
@@ -1279,16 +1274,12 @@ namespace SewingProduction.form
             this.panel4.Controls.Add(this.customButton8);
             this.panel4.Controls.Add(this.customButton5);
             this.panel4.Controls.Add(this.aproovmentBtn);
-            this.panel4.Controls.Add(this.KonfKardBtn);
-            this.panel4.Controls.Add(this.AddPrevBtn);
-            this.panel4.Controls.Add(this.deleteBtn);
             this.panel4.Controls.Add(this.commentRichTextBox);
             this.panel4.Controls.Add(this.constructorComboBox);
             this.panel4.Controls.Add(this.designerComboBox);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.doubleBtn);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 550);
             this.panel4.Name = "panel4";
@@ -1432,17 +1423,6 @@ namespace SewingProduction.form
             this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Дизайнер";
-            // 
-            // doubleBtn
-            // 
-            this.doubleBtn.AutoSize = true;
-            this.doubleBtn.Location = new System.Drawing.Point(11, 95);
-            this.doubleBtn.Name = "doubleBtn";
-            this.doubleBtn.Size = new System.Drawing.Size(75, 28);
-            this.doubleBtn.TabIndex = 6;
-            this.doubleBtn.Text = "ДУБЛЬ";
-            this.doubleBtn.UseVisualStyleBackColor = true;
-            this.doubleBtn.Click += new System.EventHandler(this.doubleBtn_Click);
             // 
             // gridControl1
             // 
