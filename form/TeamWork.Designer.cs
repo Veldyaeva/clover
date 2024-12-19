@@ -57,7 +57,6 @@ namespace SewingProduction.form
             this.customGridControl5 = new SewingProduction.CustomGridControl();
             this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
-            this.exitBtn = new System.Windows.Forms.Button();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
             this.artnormnBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -96,16 +95,12 @@ namespace SewingProduction.form
             this.panel4 = new System.Windows.Forms.Panel();
             this.customButton5 = new SewingProduction.CustomButton();
             this.aproovmentBtn = new System.Windows.Forms.Button();
-            this.KonfKardBtn = new System.Windows.Forms.Button();
-            this.AddPrevBtn = new System.Windows.Forms.Button();
-            this.deleteBtn = new System.Windows.Forms.Button();
             this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
             this.constructorComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
             this.designerComboBox = new DevExpress.XtraEditors.ComboBoxEdit();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.doubleBtn = new System.Windows.Forms.Button();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -205,6 +200,10 @@ namespace SewingProduction.form
             this.norm_dop_obrTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.sp_articulTableAdapter = new SewingProduction.ACEDataSetTableAdapters.sp_articulTableAdapter();
             this.gridColumn18 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.customButton7 = new SewingProduction.CustomButton();
+            this.customButton8 = new SewingProduction.CustomButton();
+            this.customButton9 = new SewingProduction.CustomButton();
+            this.customButton10 = new SewingProduction.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -495,9 +494,9 @@ namespace SewingProduction.form
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.customButton7);
             this.panel3.Controls.Add(this.customGridControl5);
             this.panel3.Controls.Add(this.svgImageBox1);
-            this.panel3.Controls.Add(this.exitBtn);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(3, 550);
             this.panel3.Name = "panel3";
@@ -506,10 +505,11 @@ namespace SewingProduction.form
             // 
             // customGridControl5
             // 
+            this.customGridControl5.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl5.DataSource = this.sparticulBindingSource;
             this.customGridControl5.Location = new System.Drawing.Point(13, 6);
             this.customGridControl5.Name = "customGridControl5";
-            this.customGridControl5.Size = new System.Drawing.Size(400, 200);
+            this.customGridControl5.Size = new System.Drawing.Size(407, 160);
             this.customGridControl5.TabIndex = 3;
             // 
             // sparticulBindingSource
@@ -524,15 +524,6 @@ namespace SewingProduction.form
             this.svgImageBox1.Size = new System.Drawing.Size(229, 180);
             this.svgImageBox1.TabIndex = 2;
             this.svgImageBox1.Text = "svgImageBox1";
-            // 
-            // exitBtn
-            // 
-            this.exitBtn.Location = new System.Drawing.Point(3, 189);
-            this.exitBtn.Name = "exitBtn";
-            this.exitBtn.Size = new System.Drawing.Size(75, 23);
-            this.exitBtn.TabIndex = 1;
-            this.exitBtn.Text = "ВЫХОД";
-            this.exitBtn.UseVisualStyleBackColor = true;
             // 
             // gridControl2
             // 
@@ -851,18 +842,17 @@ namespace SewingProduction.form
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.customButton10);
+            this.panel4.Controls.Add(this.customButton9);
+            this.panel4.Controls.Add(this.customButton8);
             this.panel4.Controls.Add(this.customButton5);
             this.panel4.Controls.Add(this.aproovmentBtn);
-            this.panel4.Controls.Add(this.KonfKardBtn);
-            this.panel4.Controls.Add(this.AddPrevBtn);
-            this.panel4.Controls.Add(this.deleteBtn);
             this.panel4.Controls.Add(this.commentRichTextBox);
             this.panel4.Controls.Add(this.constructorComboBox);
             this.panel4.Controls.Add(this.designerComboBox);
             this.panel4.Controls.Add(this.label8);
             this.panel4.Controls.Add(this.label7);
             this.panel4.Controls.Add(this.label6);
-            this.panel4.Controls.Add(this.doubleBtn);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(3, 545);
             this.panel4.Name = "panel4";
@@ -880,11 +870,11 @@ namespace SewingProduction.form
             this.customButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButton5.Font = new System.Drawing.Font("Arial", 12F);
             this.customButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton5.Location = new System.Drawing.Point(143, 161);
+            this.customButton5.Location = new System.Drawing.Point(190, 95);
             this.customButton5.Name = "customButton5";
-            this.customButton5.Size = new System.Drawing.Size(75, 30);
+            this.customButton5.Size = new System.Drawing.Size(171, 30);
             this.customButton5.TabIndex = 4;
-            this.customButton5.Text = "customButton5";
+            this.customButton5.Text = "редактировать РТ";
             this.customButton5.UseVisualStyleBackColor = false;
             // 
             // aproovmentBtn
@@ -896,33 +886,6 @@ namespace SewingProduction.form
             this.aproovmentBtn.TabIndex = 11;
             this.aproovmentBtn.Text = "Согласование модели Конструктора \r\nс Технологом";
             this.aproovmentBtn.UseVisualStyleBackColor = true;
-            // 
-            // KonfKardBtn
-            // 
-            this.KonfKardBtn.Location = new System.Drawing.Point(143, 124);
-            this.KonfKardBtn.Name = "KonfKardBtn";
-            this.KonfKardBtn.Size = new System.Drawing.Size(134, 23);
-            this.KonfKardBtn.TabIndex = 10;
-            this.KonfKardBtn.Text = "Конфекционная карта";
-            this.KonfKardBtn.UseVisualStyleBackColor = true;
-            // 
-            // AddPrevBtn
-            // 
-            this.AddPrevBtn.Location = new System.Drawing.Point(143, 95);
-            this.AddPrevBtn.Name = "AddPrevBtn";
-            this.AddPrevBtn.Size = new System.Drawing.Size(193, 23);
-            this.AddPrevBtn.TabIndex = 9;
-            this.AddPrevBtn.Text = "Добавить предварительный";
-            this.AddPrevBtn.UseVisualStyleBackColor = true;
-            // 
-            // deleteBtn
-            // 
-            this.deleteBtn.Location = new System.Drawing.Point(11, 158);
-            this.deleteBtn.Name = "deleteBtn";
-            this.deleteBtn.Size = new System.Drawing.Size(75, 23);
-            this.deleteBtn.TabIndex = 8;
-            this.deleteBtn.Text = "удалить";
-            this.deleteBtn.UseVisualStyleBackColor = true;
             // 
             // commentRichTextBox
             // 
@@ -981,17 +944,6 @@ namespace SewingProduction.form
             this.label6.Size = new System.Drawing.Size(56, 13);
             this.label6.TabIndex = 0;
             this.label6.Text = "Дизайнер";
-            // 
-            // doubleBtn
-            // 
-            this.doubleBtn.AutoSize = true;
-            this.doubleBtn.Location = new System.Drawing.Point(11, 95);
-            this.doubleBtn.Name = "doubleBtn";
-            this.doubleBtn.Size = new System.Drawing.Size(75, 28);
-            this.doubleBtn.TabIndex = 6;
-            this.doubleBtn.Text = "ДУБЛЬ";
-            this.doubleBtn.UseVisualStyleBackColor = true;
-            this.doubleBtn.Click += new System.EventHandler(this.doubleBtn_Click);
             // 
             // gridControl1
             // 
@@ -1865,6 +1817,78 @@ namespace SewingProduction.form
             this.gridColumn18.Visible = true;
             this.gridColumn18.VisibleIndex = 0;
             // 
+            // customButton7
+            // 
+            this.customButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton7.Btn = null;
+            this.customButton7.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton7.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton7.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton7.FlatAppearance.BorderSize = 0;
+            this.customButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton7.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton7.Location = new System.Drawing.Point(13, 173);
+            this.customButton7.Name = "customButton7";
+            this.customButton7.Size = new System.Drawing.Size(151, 30);
+            this.customButton7.TabIndex = 4;
+            this.customButton7.Text = "отвязать от РТ";
+            this.customButton7.UseVisualStyleBackColor = false;
+            // 
+            // customButton8
+            // 
+            this.customButton8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton8.Btn = null;
+            this.customButton8.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton8.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton8.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton8.FlatAppearance.BorderSize = 0;
+            this.customButton8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton8.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton8.Location = new System.Drawing.Point(6, 95);
+            this.customButton8.Name = "customButton8";
+            this.customButton8.Size = new System.Drawing.Size(131, 30);
+            this.customButton8.TabIndex = 12;
+            this.customButton8.Text = "печать РТ";
+            this.customButton8.UseVisualStyleBackColor = false;
+            // 
+            // customButton9
+            // 
+            this.customButton9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton9.Btn = null;
+            this.customButton9.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton9.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton9.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton9.FlatAppearance.BorderSize = 0;
+            this.customButton9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton9.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton9.Location = new System.Drawing.Point(11, 141);
+            this.customButton9.Name = "customButton9";
+            this.customButton9.Size = new System.Drawing.Size(126, 30);
+            this.customButton9.TabIndex = 13;
+            this.customButton9.Text = "конф. карта";
+            this.customButton9.UseVisualStyleBackColor = false;
+            // 
+            // customButton10
+            // 
+            this.customButton10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton10.Btn = null;
+            this.customButton10.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton10.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton10.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton10.FlatAppearance.BorderSize = 0;
+            this.customButton10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton10.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton10.Location = new System.Drawing.Point(190, 140);
+            this.customButton10.Name = "customButton10";
+            this.customButton10.Size = new System.Drawing.Size(171, 30);
+            this.customButton10.TabIndex = 14;
+            this.customButton10.Text = "архив+копия";
+            this.customButton10.UseVisualStyleBackColor = false;
+            // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2235,11 +2259,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colstatus;
         private System.Windows.Forms.Button aproovmentBtn;
         private System.Windows.Forms.Button sortBtn;
-        private System.Windows.Forms.Button exitBtn;
-        private System.Windows.Forms.Button KonfKardBtn;
-        private System.Windows.Forms.Button AddPrevBtn;
-        private System.Windows.Forms.Button deleteBtn;
-        private System.Windows.Forms.Button doubleBtn;
         private System.Windows.Forms.BindingSource bindingSource1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
@@ -2297,5 +2316,9 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn18;
+        private CustomButton customButton7;
+        private CustomButton customButton9;
+        private CustomButton customButton8;
+        private CustomButton customButton10;
     }
 }
