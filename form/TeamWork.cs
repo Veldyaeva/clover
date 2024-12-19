@@ -29,6 +29,8 @@ namespace SewingProduction.form
         }
         private void TeamWork_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.norm_rasz". При необходимости она может быть перемещена или удалена.
+            this.norm_raszTableAdapter.Fill(this.aCEDataSet.norm_rasz);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
             this.art_norm_nTableAdapter.Fill(this.aCEDataSet.art_norm_n);
             LoadData();
@@ -248,21 +250,6 @@ namespace SewingProduction.form
            // gridView1.ActiveFilterString = "[FieldName1] = 'Value1' AND [FieldName2] > 10";
         }
 
-        private void sparticulBindingSource_CurrentChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void fillByToolStripButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void customGridControl1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void customGridControl1_Load(object sender, EventArgs e)
         {
             ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where mod>'1'", customGridControl1);
@@ -310,72 +297,15 @@ namespace SewingProduction.form
             ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n where mod>'1'", customGridControl2);
         }
 
-        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
+        
+
+        private void customGridControl4_Load(object sender, EventArgs e)
         {
+            ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where mod>'1'", customGridControl4);
 
         }
 
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void fillToolStripButton_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        System.Windows.Forms.MessageBox.Show(ex.Message);
-        //    }
-
-        //}
     }
 
 }
 
-
-//#region new
-//namespace SewingProduction.form
-//{
-//    public interface IDatabaseManager : IDisposable
-//    {
-//        List<ArtNormN> GetAllData();
-//        //List<ArtNormN> SearchData(string searchName);
-//        //void SaveData(List<ArtNormN> updatedData);
-//    }
-
-//    public class DatabaseManager : IDatabaseManager
-//    {
-//        private readonly DbContext _context; // Используем DbContext напрямую
-
-//        public DatabaseManager(DbContext context) // Инъекция зависимостей
-//        {
-//            _context = context ?? throw new ArgumentNullException(nameof(context));
-//        }
-
-//        public DbSet<ArtNormN> ArtNormNs => _context.Set<ArtNormN>(); // Более чистый доступ к DbSet
-
-//        public List<ArtNormN> GetAllData()
-//        {
-//            try
-//            {
-//                return ArtNormNs.ToList(); // Используем свойство ArtNormNs
-//            }
-//            catch (Exception ex)
-//            {
-//                // Запись в лог или другое обработка исключения
-//                Console.WriteLine($"Ошибка при получении данных: {ex.Message}");
-//                return new List<ArtNormN>(); // Возвращаем пустой список в случае ошибки
-//            }
-//        }
-
-//        public void Dispose()
-//        {
-//            _context.Dispose();
-//        }
-//    }
-//}
-//#endregion
