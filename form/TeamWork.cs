@@ -10,6 +10,9 @@ using DevExpress.XtraGrid.Views.Base;
 using System.Drawing;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.XtraBars.Customization;
+using DevExpress.XtraWaitForm;
+using DevExpress.ChartRangeControlClient.Core;
 
 
 namespace SewingProduction.form
@@ -76,29 +79,64 @@ namespace SewingProduction.form
             //this.sp_articulTableAdapter.Fill(this.aCEDataSet.sp_articul);
 
         }
+        // напрямую через dataSource
+        //private void ShowRelatedData(int artNormNId, string query, GridControl grid)
+        //{
+        //    try
+        //    {
+        //        using (SqlConnection connection = new SqlConnection(connectionString))
+        //        {
+        //            SqlDataAdapter adapter = new SqlDataAdapter();
 
-        private void ShowRelatedData(int artNormNId, string query, GridControl grid)
+        //            connection.Open();
+        //            using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
+        //            {
+        //                DataTable normRasz = new DataTable();
+
+        //                using (SqlCommand command = new SqlCommand(query, connection, transaction))
+        //                {
+        //                    adapter.SelectCommand = command;
+        //                    adapter.Fill(normRasz);
+        //                    grid.DataSource = normRasz; // Привязываем напрямую
+        //                }
+
+        //                transaction.Commit(); // Подтверждаем транзакцию
+
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //более правильно через BindingSource
+        private void ShowRelatedData(int artNormNId, string query, GridControl grid, System.Windows.Forms.BindingSource source)
         {
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter();
-
                     connection.Open();
+
                     using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
                     {
                         DataTable normRasz = new DataTable();
-                      
                         using (SqlCommand command = new SqlCommand(query, connection, transaction))
                         {
                             adapter.SelectCommand = command;
                             adapter.Fill(normRasz);
-                            grid.DataSource = normRasz; // Привязываем напрямую
                         }
 
-                        transaction.Commit(); // Подтверждаем транзакцию
+                        // Привязываем данные к BindingSource
+                        source.DataSource = normRasz;
 
+                        // Привязываем BindingSource к GridControl
+                        grid.DataSource = source;
+
+                        transaction.Commit(); // Подтверждаем транзакцию
                     }
                 }
             }
@@ -107,7 +145,6 @@ namespace SewingProduction.form
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private void ShowRelatedData(string query, System.Windows.Forms.TextBox textBox)
         {
             string queryDiz = $"SELECT [ACE].[dbo].[fio].fio FROM [ACE].[dbo].fio WHERE [ACE].[dbo].[fio].tab = '{query}'";
@@ -190,29 +227,29 @@ namespace SewingProduction.form
         private void NormRaszUpd(int Id)
         {
             string query = $"SELECT * FROM norm_rasz WHERE [norm_rasz].annId = '{Id}'";
-            ShowRelatedData(Id, query, gridControl1);
+            ShowRelatedData(Id, query, gridControl1, normraszBindingSource);
         }
         private void Norm_raskUpd(int Id)
         {
 
             string query = $"SELECT * FROM norm_rask WHERE [norm_rask].annId = '{Id}'";
-            ShowRelatedData(Id, query, gridControl3);
+            ShowRelatedData(Id, query, gridControl3, normraskBindingSource);
         }
         private void Norm_kontUpd(int Id)
         {
             string query = $"SELECT * FROM norm_kont WHERE [norm_kont].kod = '{Id}'";
-            ShowRelatedData(Id, query, gridControl4);
+            ShowRelatedData(Id, query, gridControl4, normkontBindingSource);
         }
 
         private void Norm_dop_obrUpd(int Id)
         {
             string query = $"SELECT * FROM norm_dop_obr WHERE [norm_dop_obr].kod = '{Id}'";
-            ShowRelatedData(Id, query, gridControl5);
+            ShowRelatedData(Id, query, gridControl5, normdopobrBindingSource);
         }
         private void Sp_artUpd(int Id)
         {
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM sp_articul WHERE annID = '{Id}'";
-            ShowRelatedData(Id, query, customGridControl5);
+            ShowRelatedData(Id, query, customGridControl5, sparticulBindingSource);
         }
          
         private void doubleBtn_Click(object sender, EventArgs e)
@@ -283,14 +320,51 @@ namespace SewingProduction.form
 
         private void customButton3_Click(object sender, EventArgs e)
         {
-            gridView3.ActiveFilterString = string.Format("[kod] LIKE '{0}'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
+            gridView3.ActiveFilterString = string.Format("kod LIKE '{0}'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
 
         }
 
         private void customButton7_Click(object sender, EventArgs e)
         {
-            //customGridControl5.FocusedView
+            // gridView10.FocusedRowHandle
+            // Получение индекса выбранной строки
+            int[] selectedRows = gridView10.GetSelectedRows();
+
+            if (selectedRows.Length > 0)
+            {
+                // Получение данных выбранной строки
+                var rowData = gridView10.GetRow(selectedRows[0]) as DataView;
+                if (rowData != null)
+                {
+                    // Обновление данных после редактирования
+                    //                    UpdateDatabase(rowData);
+                    //rowData.annId = null;
+                    gridControl1.RefreshDataSource();
+
+                    //  }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для редактирования.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            //if (editForm.ShowDialog() == DialogResult.OK)
+            //{
+           // }
         }
+        //private void UpdateDatabase(GridView data)
+        //{
+        //    using (var context = new YourDbContext())
+        //    {
+        //        var entry = context.Entry(data);
+        //        if (entry.State == EntityState.Detached)
+        //        {
+        //            context.YourDataSet.Attach(data);
+        //        }
+        //        entry.State = EntityState.Modified;
+        //        context.SaveChanges();
+        //    }
+        //}
     }
 
 }

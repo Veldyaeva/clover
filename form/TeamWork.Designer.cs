@@ -204,6 +204,11 @@ namespace SewingProduction.form
             this.norm_dop_obrTableAdapter = new SewingProduction.ACEDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.sp_articulTableAdapter = new SewingProduction.ACEDataSetTableAdapters.sp_articulTableAdapter();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView10 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -278,6 +283,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView10)).BeginInit();
             this.SuspendLayout();
             // 
             // aCEDataSetBindingSource
@@ -527,9 +533,13 @@ namespace SewingProduction.form
             this.customGridControl5.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl5.DataSource = this.sparticulBindingSource;
             this.customGridControl5.Location = new System.Drawing.Point(13, 6);
+            this.customGridControl5.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.customGridControl5.MainView = this.gridView10;
             this.customGridControl5.Name = "customGridControl5";
             this.customGridControl5.Size = new System.Drawing.Size(407, 160);
             this.customGridControl5.TabIndex = 3;
+            this.customGridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView10});
             // 
             // sparticulBindingSource
             // 
@@ -1920,6 +1930,46 @@ namespace SewingProduction.form
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 18;
             // 
+            // gridView10
+            // 
+            this.gridView10.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+            this.gridView10.Appearance.SelectedRow.Options.UseBackColor = true;
+            this.gridView10.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn20,
+            this.gridColumn21,
+            this.gridColumn22,
+            this.gridColumn23});
+            this.gridView10.GridControl = this.customGridControl5;
+            this.gridView10.Name = "gridView10";
+            // 
+            // gridColumn20
+            // 
+            this.gridColumn20.FieldName = "kod";
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 0;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.FieldName = "grup";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 1;
+            // 
+            // gridColumn22
+            // 
+            this.gridColumn22.FieldName = "articul";
+            this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.Visible = true;
+            this.gridColumn22.VisibleIndex = 2;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.FieldName = "mod";
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 3;
+            // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2010,6 +2060,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView10)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2351,5 +2402,10 @@ namespace SewingProduction.form
         private CustomButton customButton8;
         private CustomButton customButton10;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView10;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn21;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
     }
 }
