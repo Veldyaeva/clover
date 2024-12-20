@@ -50,13 +50,15 @@ namespace SewingProduction.form
             this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtMod = new SewingProduction.CustomTextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbTM = new System.Windows.Forms.ComboBox();
+            this.bsTM = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTM)).BeginInit();
             this.SuspendLayout();
             // 
             // gridArt
@@ -146,7 +148,7 @@ namespace SewingProduction.form
             // groupControl1
             // 
             this.groupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.groupControl1.Controls.Add(this.comboBox1);
+            this.groupControl1.Controls.Add(this.cbTM);
             this.groupControl1.Controls.Add(this.label3);
             this.groupControl1.Controls.Add(this.txtMod);
             this.groupControl1.Controls.Add(this.label2);
@@ -251,14 +253,14 @@ namespace SewingProduction.form
             this.txtMod.Size = new System.Drawing.Size(74, 19);
             this.txtMod.TabIndex = 5;
             // 
-            // comboBox1
+            // cbTM
             // 
-            this.comboBox1.DataSource = this.bsArticul;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(180, 86);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cbTM.DataSource = this.bsTM;
+            this.cbTM.FormattingEnabled = true;
+            this.cbTM.Location = new System.Drawing.Point(180, 86);
+            this.cbTM.Name = "cbTM";
+            this.cbTM.Size = new System.Drawing.Size(121, 21);
+            this.cbTM.TabIndex = 7;
             // 
             // Articul
             // 
@@ -278,6 +280,7 @@ namespace SewingProduction.form
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsTM)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -302,6 +305,7 @@ namespace SewingProduction.form
         private System.Windows.Forms.BindingSource bsArt;
         private System.Windows.Forms.Label label3;
         private CustomTextBox txtMod;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbTM;
+        private System.Windows.Forms.BindingSource bsTM;
     }
 }

@@ -28,13 +28,24 @@ namespace SewingProduction.form
 
         private void Articul_Load(object sender, EventArgs e)
         {
-            
-            string queryArt = $"select kod, grup, articul, razm, mod, kle from dbo.view_art";
-            ShowRelatedDataAce(queryArt, bsArt);
+            try
+            {
+                string query = $"select kod, grup, articul, razm, mod, kle from dbo.view_art";
+                ShowRelatedDataAce(query, bsArt);
+                
+                get_ArticulFromSQl("0");
 
+                query = $"SELECT kodsp,M_Naimen_Sokr FROM view_tovar_marka where tmOwn = 1 ";
+                ShowRelatedDataAce(query, bsTM);
+                cbTM.DisplayMember = "M_Naimen_Sokr";
+                cbTM.ValueMember = "kodsp";
+                cbTM.DataBindings.Add("SelectedValue", bsArticul, "kle", true, DataSourceUpdateMode.OnPropertyChanged);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             //groupControl1.AppearanceCaption.BackColor = Theme.ButtonBackground;
-
-
 
         }
         private void ShowRelatedDataAce(string query, System.Windows.Forms.BindingSource bsource)
@@ -71,7 +82,6 @@ namespace SewingProduction.form
             }
         }
 
-
         private void get_ArticulFromSQl(string kod)
         {
             //string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -92,15 +102,25 @@ namespace SewingProduction.form
             //txbKod.Text = dtArticul.Rows[0]["kod"].ToString();
             //txbArticul.DataBindings.Clear();
             //txbArticul.DataBindings.Add(new Binding("Text", bsArticul, "Articul", true, DataSourceUpdateMode.OnPropertyChanged));
+            try
+            {   
+                
+                    string queryArticul = $"select * from dbo.sp_articul where kod = {kod}";
+                    ShowRelatedDataAce(queryArticul, bsArticul);
+                    if (bsArticul.Count > 0)
+                        {
+                            txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["kod"].ToString();
+                            txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["articul"].ToString();
+                        }
+                    
+                
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            string queryArticul = $"select * from dbo.sp_articul where kod = {kod}";
-            ShowRelatedDataAce(queryArticul, bsArticul);
-
-            txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["kod"].ToString();
-            txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["articul"].ToString();
-            
-            
-            
 
         }
 
