@@ -560,6 +560,7 @@ D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Printing.v22.2.Core.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.RichEdit.v22.2.Core.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.RichEdit.v22.2.Export.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Sparkline.v22.2.Core.dll
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.TreeMap.v22.2.Core.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Utils.v22.2.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Utils.v22.2.UI.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Xpo.v22.2.dll
@@ -572,6 +573,8 @@ D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraLayout.v22.2.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraPrinting.v22.2.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraReports.v22.2.dll
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraReports.v22.2.Extensions.dll
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraTreeMap.v22.2.dll
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraTreeMap.v22.2.UI.dll
 D:\Vs_projects\sewingproduction\bin\Debug\Microsoft.ReportViewer.Common.dll
 D:\Vs_projects\sewingproduction\bin\Debug\Microsoft.ReportViewer.DataVisualization.dll
 D:\Vs_projects\sewingproduction\bin\Debug\Microsoft.ReportViewer.Design.dll
@@ -603,6 +606,7 @@ D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.PivotGrid.v22.2.Core.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Printing.v22.2.Core.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.RichEdit.v22.2.Core.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Sparkline.v22.2.Core.xml
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.TreeMap.v22.2.Core.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Utils.v22.2.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Utils.v22.2.UI.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Xpo.v22.2.xml
@@ -615,6 +619,8 @@ D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraLayout.v22.2.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraPrinting.v22.2.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraReports.v22.2.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraReports.v22.2.Extensions.xml
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraTreeMap.v22.2.xml
+D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraTreeMap.v22.2.UI.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.Pdf.v22.2.Drawing.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraTreeList.v22.2.xml
 D:\Vs_projects\sewingproduction\bin\Debug\DevExpress.XtraRichEdit.v22.2.xml

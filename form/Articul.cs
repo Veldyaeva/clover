@@ -1,4 +1,8 @@
-﻿using System;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.DataAccess.Native.Data;
+using DevExpress.Xpo.Helpers;
+using DevExpress.XtraGrid;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +12,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Utils.Menu.DXMenuItemPainter;
+using DataTable = System.Data.DataTable;
+//using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
 namespace SewingProduction.form
 {
@@ -16,41 +23,112 @@ namespace SewingProduction.form
         public Articul()
         {
             InitializeComponent();
-            
 
         }
 
         private void Articul_Load(object sender, EventArgs e)
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            
+            string queryArt = $"select kod, grup, articul, razm, mod, kle from dbo.view_art";
+            ShowRelatedDataAce(queryArt, bsArt);
+
+            //groupControl1.AppearanceCaption.BackColor = Theme.ButtonBackground;
+
+
+
+        }
+        private void ShowRelatedDataAce(string query, System.Windows.Forms.BindingSource bsource)
+        {
+            try
             {
-                connection.Open();
-                SqlDataAdapter adapterArt = new SqlDataAdapter();
-                DataTable dtArticul = new DataTable();
-                string queryArt = $"select kod, grup, articul, razm, mod, kle from dbo.view_art";
-                queryArt += $" order by kod";
-                //string queryArt = $"exec GetNaklView '{PachKod}' ";
-                SqlCommand commandNaklList = new SqlCommand(queryArt, connection);
-                adapterArt.SelectCommand = commandNaklList;
-                adapterArt.Fill(dtArticul);
-                bsArt.DataSource = dtArticul;
+                string connectionString = Properties.Settings.Default.ACEConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    connection.Open();
+                    //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
+                    //{
+                        DataTable dT = new DataTable();
+
+                    //using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                     //   SqlCommand command = new SqlCommand(query, connection);
+                    adapter.SelectCommand = command;
+                    adapter.Fill(dT);
+                    bsource.DataSource = dT;
+                    }
+
+                    // transaction.Commit(); // Подтверждаем транзакцию
+
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void get_ArticulFromSQl(string kod)
+        {
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter adapterArt = new SqlDataAdapter();
+            //    DataTable dtArticul = new DataTable();
+            //    string query = $"select * from dbo.sp_articul where kod = @kod ";
+            //    SqlCommand command = new SqlCommand();
+            //    command.Connection = connection;
+            //    command.CommandText = query;
+            //    command.Parameters.AddWithValue("kod",kod);
+            //    adapterArt.SelectCommand = command;
+            //    adapterArt.Fill(dtArticul);
+            //    bsArticul.DataSource = dtArticul;
+            //}
+            //txbKod.Text = dtArticul.Rows[0]["kod"].ToString();
+            //txbArticul.DataBindings.Clear();
+            //txbArticul.DataBindings.Add(new Binding("Text", bsArticul, "Articul", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            string queryArticul = $"select * from dbo.sp_articul where kod = {kod}";
+            ShowRelatedDataAce(queryArticul, bsArticul);
+
+            txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["kod"].ToString();
+            txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["articul"].ToString();
+            
+            
+            
+
+        }
+
+        private void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            //var kod = Convert.ToInt32(gridControl1.GetDataRow(gridControl1.FocusedRowHandle)["kod"]);
+            string kod = "";
+            try
+            {
+                object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
+                if (data != null)
+                {
+                    kod = ((DataRowView)data).Row["kod"].ToString();
+                }
+            }
+            catch
+            {
+                kod = "";
             }
 
-            groupControl1.AppearanceCaption.BackColor = Theme.ButtonBackground;
-
-        }
-
-        private void groupControl1_Paint(object sender, PaintEventArgs e)
-        {
+            get_ArticulFromSQl(kod);
             
+
         }
 
-        private void Articul_Shown(object sender, EventArgs e)
+        private void txbKod_TextChanged(object sender, EventArgs e)
         {
-            
-        }
 
-       
+        }
     }
 }

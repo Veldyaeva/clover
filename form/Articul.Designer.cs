@@ -41,12 +41,22 @@ namespace SewingProduction.form
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
-            this.stackPanel1 = new DevExpress.Utils.Layout.StackPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txbArticul = new SewingProduction.CustomTextBox();
+            this.txbPo = new SewingProduction.CustomTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txbKod = new SewingProduction.CustomTextBox();
+            this.customButton1 = new SewingProduction.CustomButton();
+            this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMod = new SewingProduction.CustomTextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stackPanel1)).BeginInit();
+            this.groupControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
             this.SuspendLayout();
             // 
             // gridArt
@@ -76,6 +86,7 @@ namespace SewingProduction.form
             this.gridControl1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
             this.gridControl1.OptionsView.ShowAutoFilterRow = true;
             this.gridControl1.OptionsView.ShowGroupPanel = false;
+            this.gridControl1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridControl1_FocusedRowChanged);
             // 
             // gridColumn1
             // 
@@ -100,6 +111,7 @@ namespace SewingProduction.form
             this.gridColumn3.Caption = "Артикул";
             this.gridColumn3.FieldName = "articul";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 2;
             this.gridColumn3.Width = 84;
@@ -134,40 +146,138 @@ namespace SewingProduction.form
             // groupControl1
             // 
             this.groupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.groupControl1.Controls.Add(this.comboBox1);
+            this.groupControl1.Controls.Add(this.label3);
+            this.groupControl1.Controls.Add(this.txtMod);
+            this.groupControl1.Controls.Add(this.label2);
+            this.groupControl1.Controls.Add(this.txbArticul);
+            this.groupControl1.Controls.Add(this.txbPo);
+            this.groupControl1.Controls.Add(this.label1);
+            this.groupControl1.Controls.Add(this.txbKod);
             this.groupControl1.Location = new System.Drawing.Point(471, 1);
             this.groupControl1.Name = "groupControl1";
+            this.groupControl1.ShowCaption = false;
             this.groupControl1.Size = new System.Drawing.Size(714, 198);
             this.groupControl1.TabIndex = 2;
             this.groupControl1.Text = "sfsfsd";
-            this.groupControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl1_Paint);
             // 
-            // stackPanel1
+            // label2
             // 
-            this.stackPanel1.Appearance.Options.UseBackColor = true;
-            this.stackPanel1.Appearance.Options.UseBorderColor = true;
-            this.stackPanel1.Location = new System.Drawing.Point(471, 205);
-            this.stackPanel1.Name = "stackPanel1";
-            this.stackPanel1.Size = new System.Drawing.Size(725, 260);
-            this.stackPanel1.TabIndex = 3;
-            this.stackPanel1.UseSkinIndents = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(117, 40);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Артикул";
+            // 
+            // txbArticul
+            // 
+            this.txbArticul.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbArticul.Font = new System.Drawing.Font("Arial", 12F);
+            this.txbArticul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.txbArticul.Location = new System.Drawing.Point(180, 36);
+            this.txbArticul.Name = "txbArticul";
+            this.txbArticul.Size = new System.Drawing.Size(74, 19);
+            this.txbArticul.TabIndex = 3;
+            // 
+            // txbPo
+            // 
+            this.txbPo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.txbPo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbPo.Font = new System.Drawing.Font("Arial", 12F);
+            this.txbPo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.txbPo.Location = new System.Drawing.Point(260, 10);
+            this.txbPo.Name = "txbPo";
+            this.txbPo.Size = new System.Drawing.Size(23, 19);
+            this.txbPo.TabIndex = 2;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(140, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Код";
+            // 
+            // txbKod
+            // 
+            this.txbKod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.txbKod.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txbKod.Font = new System.Drawing.Font("Arial", 12F);
+            this.txbKod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.txbKod.Location = new System.Drawing.Point(180, 11);
+            this.txbKod.Name = "txbKod";
+            this.txbKod.Size = new System.Drawing.Size(74, 19);
+            this.txbKod.TabIndex = 0;
+            this.txbKod.TextChanged += new System.EventHandler(this.txbKod_TextChanged);
+            // 
+            // customButton1
+            // 
+            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButton1.Btn = null;
+            this.customButton1.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButton1.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButton1.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButton1.FlatAppearance.BorderSize = 0;
+            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButton1.Font = new System.Drawing.Font("Arial", 12F);
+            this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButton1.Location = new System.Drawing.Point(1, 588);
+            this.customButton1.Name = "customButton1";
+            this.customButton1.Size = new System.Drawing.Size(244, 30);
+            this.customButton1.TabIndex = 1;
+            this.customButton1.Text = "customButton1";
+            this.customButton1.UseVisualStyleBackColor = false;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(117, 65);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Модель";
+            // 
+            // txtMod
+            // 
+            this.txtMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.txtMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMod.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.txtMod.Location = new System.Drawing.Point(180, 61);
+            this.txtMod.Name = "txtMod";
+            this.txtMod.Size = new System.Drawing.Size(74, 19);
+            this.txtMod.TabIndex = 5;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DataSource = this.bsArticul;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(180, 86);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
+            this.comboBox1.TabIndex = 7;
             // 
             // Articul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 700);
-            this.Controls.Add(this.stackPanel1);
+            this.Controls.Add(this.customButton1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gridArt);
             this.Name = "Articul";
             this.Text = "Справочник изделий";
             this.Load += new System.EventHandler(this.Articul_Load);
-            this.Shown += new System.EventHandler(this.Articul_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.stackPanel1)).EndInit();
+            this.groupControl1.ResumeLayout(false);
+            this.groupControl1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -175,7 +285,6 @@ namespace SewingProduction.form
         #endregion
         private DevExpress.XtraGrid.GridControl gridArt;
         private DevExpress.XtraGrid.Views.Grid.GridView gridControl1;
-        private System.Windows.Forms.BindingSource bsArt;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
@@ -183,6 +292,16 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraEditors.GroupControl groupControl1;
-        private DevExpress.Utils.Layout.StackPanel stackPanel1;
+        private CustomTextBox txbKod;
+        private CustomTextBox txbPo;
+        private System.Windows.Forms.Label label1;
+        private CustomButton customButton1;
+        private CustomTextBox txbArticul;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.BindingSource bsArticul;
+        private System.Windows.Forms.BindingSource bsArt;
+        private System.Windows.Forms.Label label3;
+        private CustomTextBox txtMod;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }
