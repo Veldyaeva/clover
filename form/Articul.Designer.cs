@@ -41,6 +41,11 @@ namespace SewingProduction.form
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
+            this.pictureBoxArticul = new System.Windows.Forms.PictureBox();
+            this.cbTM = new System.Windows.Forms.ComboBox();
+            this.bsTM = new System.Windows.Forms.BindingSource(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtMod = new SewingProduction.CustomTextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txbArticul = new SewingProduction.CustomTextBox();
             this.txbPo = new SewingProduction.CustomTextBox();
@@ -48,17 +53,14 @@ namespace SewingProduction.form
             this.txbKod = new SewingProduction.CustomTextBox();
             this.customButton1 = new SewingProduction.CustomButton();
             this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtMod = new SewingProduction.CustomTextBox();
-            this.cbTM = new System.Windows.Forms.ComboBox();
-            this.bsTM = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
             this.SuspendLayout();
             // 
             // gridArt
@@ -148,6 +150,7 @@ namespace SewingProduction.form
             // groupControl1
             // 
             this.groupControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
+            this.groupControl1.Controls.Add(this.pictureBoxArticul);
             this.groupControl1.Controls.Add(this.cbTM);
             this.groupControl1.Controls.Add(this.label3);
             this.groupControl1.Controls.Add(this.txtMod);
@@ -159,14 +162,52 @@ namespace SewingProduction.form
             this.groupControl1.Location = new System.Drawing.Point(471, 1);
             this.groupControl1.Name = "groupControl1";
             this.groupControl1.ShowCaption = false;
-            this.groupControl1.Size = new System.Drawing.Size(714, 198);
+            this.groupControl1.Size = new System.Drawing.Size(714, 257);
             this.groupControl1.TabIndex = 2;
             this.groupControl1.Text = "sfsfsd";
+            // 
+            // pictureBoxArticul
+            // 
+            this.pictureBoxArticul.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxArticul.Name = "pictureBoxArticul";
+            this.pictureBoxArticul.Size = new System.Drawing.Size(219, 222);
+            this.pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxArticul.TabIndex = 8;
+            this.pictureBoxArticul.TabStop = false;
+            // 
+            // cbTM
+            // 
+            this.cbTM.DataSource = this.bsTM;
+            this.cbTM.FormattingEnabled = true;
+            this.cbTM.Location = new System.Drawing.Point(275, 89);
+            this.cbTM.Name = "cbTM";
+            this.cbTM.Size = new System.Drawing.Size(121, 21);
+            this.cbTM.TabIndex = 7;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(225, 68);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Модель";
+            // 
+            // txtMod
+            // 
+            this.txtMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.txtMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtMod.Font = new System.Drawing.Font("Arial", 12F);
+            this.txtMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.txtMod.Location = new System.Drawing.Point(275, 64);
+            this.txtMod.Name = "txtMod";
+            this.txtMod.Size = new System.Drawing.Size(74, 19);
+            this.txtMod.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(117, 40);
+            this.label2.Location = new System.Drawing.Point(221, 43);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 4;
@@ -178,7 +219,7 @@ namespace SewingProduction.form
             this.txbArticul.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbArticul.Font = new System.Drawing.Font("Arial", 12F);
             this.txbArticul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.txbArticul.Location = new System.Drawing.Point(180, 36);
+            this.txbArticul.Location = new System.Drawing.Point(275, 39);
             this.txbArticul.Name = "txbArticul";
             this.txbArticul.Size = new System.Drawing.Size(74, 19);
             this.txbArticul.TabIndex = 3;
@@ -189,7 +230,7 @@ namespace SewingProduction.form
             this.txbPo.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbPo.Font = new System.Drawing.Font("Arial", 12F);
             this.txbPo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.txbPo.Location = new System.Drawing.Point(260, 10);
+            this.txbPo.Location = new System.Drawing.Point(355, 13);
             this.txbPo.Name = "txbPo";
             this.txbPo.Size = new System.Drawing.Size(23, 19);
             this.txbPo.TabIndex = 2;
@@ -197,7 +238,7 @@ namespace SewingProduction.form
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(140, 16);
+            this.label1.Location = new System.Drawing.Point(244, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(27, 13);
             this.label1.TabIndex = 1;
@@ -209,7 +250,7 @@ namespace SewingProduction.form
             this.txbKod.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbKod.Font = new System.Drawing.Font("Arial", 12F);
             this.txbKod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.txbKod.Location = new System.Drawing.Point(180, 11);
+            this.txbKod.Location = new System.Drawing.Point(275, 14);
             this.txbKod.Name = "txbKod";
             this.txbKod.Size = new System.Drawing.Size(74, 19);
             this.txbKod.TabIndex = 0;
@@ -233,35 +274,6 @@ namespace SewingProduction.form
             this.customButton1.Text = "customButton1";
             this.customButton1.UseVisualStyleBackColor = false;
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(117, 65);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Модель";
-            // 
-            // txtMod
-            // 
-            this.txtMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.txtMod.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtMod.Font = new System.Drawing.Font("Arial", 12F);
-            this.txtMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.txtMod.Location = new System.Drawing.Point(180, 61);
-            this.txtMod.Name = "txtMod";
-            this.txtMod.Size = new System.Drawing.Size(74, 19);
-            this.txtMod.TabIndex = 5;
-            // 
-            // cbTM
-            // 
-            this.cbTM.DataSource = this.bsTM;
-            this.cbTM.FormattingEnabled = true;
-            this.cbTM.Location = new System.Drawing.Point(180, 86);
-            this.cbTM.Name = "cbTM";
-            this.cbTM.Size = new System.Drawing.Size(121, 21);
-            this.cbTM.TabIndex = 7;
-            // 
             // Articul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,8 +291,9 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -307,5 +320,6 @@ namespace SewingProduction.form
         private CustomTextBox txtMod;
         private System.Windows.Forms.ComboBox cbTM;
         private System.Windows.Forms.BindingSource bsTM;
+        private System.Windows.Forms.PictureBox pictureBoxArticul;
     }
 }
