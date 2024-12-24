@@ -55,7 +55,7 @@ namespace SewingProduction
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
 
-        }
+        
 
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
@@ -124,26 +124,12 @@ namespace SewingProduction
 
         }
 
-        private void разделенияТрудаToolStripMenuItem_Click(object sender, EventArgs e)
+        private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
             TeamWork teamWork = new TeamWork();
             teamWork.MdiParent = this;
             teamWork.Show();
 
-        }
-
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.MdiParent = this;
-            form1.Show();
-        }
-
-        private void testToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            TeamWorkTest teamWork = new TeamWorkTest();
-            teamWork.MdiParent = this;
-            teamWork.Show();
         }
     }
 }
