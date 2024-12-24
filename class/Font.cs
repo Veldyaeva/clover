@@ -90,7 +90,8 @@ namespace SewingProduction
             //this.Text = Theme.OkText;//"Ок"; // Текст кнопки
             this.Click += OnOkButtonClick; // Обработчик события Click
             this.BackColor = Theme.OkButtonBackground; // Цвет кнопки
-            this.ForeColor = Theme.OkButtonText; // Цвет текста
+            this.ForeColor = Theme.OkButtonTextColor; // Цвет текста
+            this.Text = Theme.OkButtonText;
         }
 
         public override string Text { get; set; } = "Ok";
@@ -110,7 +111,8 @@ namespace SewingProduction
             this.Text = "Отмена"; // Текст кнопки
             this.Click += OnCancelButtonClick; // Обработчик события Click
             this.BackColor = Theme.CancelButtonBackground; // Цвет кнопки
-            this.ForeColor = Theme.CancelButtonText; // Цвет текста
+            this.ForeColor = Theme.CancelButtonTextColor; // Цвет текста
+            this.Text = Theme.CancelButtonText;
         }
 
         // Событие при нажатии на кнопку "Отмена"
@@ -140,6 +142,17 @@ namespace SewingProduction
             this.Font = Theme.DefaultFont;
         }
 
+    }
+
+    //Класс-наследник для ComboBox
+    public class CustomComboBox : ComboBox {
+        public CustomComboBox()
+        {
+            this.BackColor = Theme.TextBoxBackground;
+            this.ForeColor = Theme.TextBoxText;
+            this.Font = Theme.DefaultFont;
+
+        }
     }
 
     // Класс-наследник для кастомного GridControl

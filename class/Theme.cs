@@ -301,9 +301,12 @@ namespace SewingProduction
 
         // Стили кнопок
         public static Color OkButtonBackground { get; set; } = Color.LightGreen;
-        public static Color OkButtonText { get; set; } = Color.Black;
+        public static Color OkButtonTextColor { get; set; } = Color.Black;
+        public static string OkButtonText { get; set; } = "OK";
         public static Color CancelButtonBackground { get; set; } = Color.IndianRed;
-        public static Color CancelButtonText { get; set; } = Color.White;
+        public static Color CancelButtonTextColor { get; set; } = Color.White;
+        public static string CancelButtonText { get; set; } = "Cancel";
+
 
     }
     #endregion
