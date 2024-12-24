@@ -130,7 +130,7 @@ namespace SewingProduction
         public void SetPlaceholderText(string placeholder)
         {
             //TextBox.PlaceholderText = placeholder;
-        }
+    }
     }
 
     // Класс-наследник для кастомного GridControl
@@ -166,7 +166,7 @@ namespace SewingProduction
     //}
     public class CustomGridControl : GridControl
         private void CustomizeSelectionStyles()
-        {
+    {
         public CustomGridView CustomView { get; private set; }
             // Установка стиля выделенной строки
             gridView.Appearance.FocusedRow.BackColor = Color.LightBlue;
@@ -179,7 +179,7 @@ namespace SewingProduction
                 if (e.RowHandle >= 0 && gridView.IsRowSelected(e.RowHandle)) // Проверка на выделенную строку
                 {
                     if (e.Column != null) // Проверка на существование столбца
-                    {
+        {
             // Создаем и подключаем кастомное представление
             CustomView = new CustomGridView();
             this.MainView = CustomView;
@@ -195,7 +195,7 @@ namespace SewingProduction
 
             //// Подписываемся на изменения темы
             //Theme.ThemeChanged += OnThemeChanged;
-    }
+        }
 
         //private void ApplyTheme()
         //{
@@ -250,7 +250,7 @@ namespace SewingProduction
             this.Text = "Custom Form";
             this.Size = new Size(400, 300);
 
-
+        
 
         public void ApplyTheme()
         {
@@ -285,11 +285,11 @@ namespace SewingProduction
             this.Appearance.FocusedCell.BackColor = Theme.HighlightBackground;
            // this.Appearance.SelectedRow.ForeColor = Theme.HighlightText;
         }
-        }
+    }
     // Класс для формы с использованием базовых компонентов
     public class CustomForm : Form
         public void Form_Paint(object sender, PaintEventArgs e)
-        {
+    {
         protected override void OnPaint(PaintEventArgs e)
             DrawLinearGradient(e.Graphics);
         }

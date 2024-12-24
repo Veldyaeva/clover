@@ -29,6 +29,7 @@ using DevExpress.ChartRangeControlClient.Core;
 using BindingSource = System.Windows.Forms.BindingSource;
 using SewingProduction;
 
+
 namespace SewingProduction.form
 {
     public partial class TeamWork : CustomForm
@@ -235,7 +236,7 @@ namespace SewingProduction.form
             }
         }
 
- 
+
         private void LoadData()
         {
             LoadData("");  // Вызов основного метода с пустой строкой для отображения всех данных
@@ -318,7 +319,7 @@ namespace SewingProduction.form
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod, kod FROM sp_articul WHERE annID = '{Id}'";
             ShowRelatedData(Id, query, customGridControl5, sparticulBindingSource);
         }
-         
+
         private void doubleBtn_Click(object sender, EventArgs e)
         {
 
@@ -360,7 +361,7 @@ namespace SewingProduction.form
                         DataTable dt = new DataTable();
 
                         using (SqlCommand command = new SqlCommand(query, connection, transaction))
-        {
+                        {
                             adapter.SelectCommand = command;
                             adapter.Fill(dt);
                             grid.DataSource = dt; // Привязываем напрямую
@@ -383,7 +384,7 @@ namespace SewingProduction.form
                 kommentUpd(e);
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            }
+        }
 
 
         //Загрузка таблицы "Артикулы для увязки"
@@ -442,7 +443,7 @@ namespace SewingProduction.form
                     int sp_articul = Convert.ToInt32(gridView10.GetRowCellValue(rowHandle, "kod"));
 
                     try
-        {
+                    {
                         // Обнуление annId
                         ResetAnnId(sp_articul);
                         MessageBox.Show("РТ успешно отвязано", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -452,19 +453,19 @@ namespace SewingProduction.form
                         customGridControl5.RefreshDataSource();
 
                         gridView10.RefreshData();
-        }
+                    }
                     catch (Exception ex)
-        {
+                    {
                         MessageBox.Show("Ошибка отвязки РТ: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-        }
+            }
             else
-        {
+            {
             string query = $"SELECT SUBSTRING(kod,1,7), grup, articul, mod FROM [ACE].[dbo].sp_articul WHERE SUBSTRING(kod ,1,7)= '{Id}'";
             ShowRelatedData(Id, query, gridControl6);
                 MessageBox.Show("Выберите запись для редактирования.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+            }
 
         private void doubleBtn_Click(object sender, EventArgs e)
         {
@@ -491,7 +492,7 @@ namespace SewingProduction.form
                     command.ExecuteNonQuery();
                 }
             }
-    }
+        }
 
         //Загрузка вкладки "текущие работы"
         private void xtraTabControl2_Enter(object sender, EventArgs e)
@@ -499,7 +500,7 @@ namespace SewingProduction.form
             loadConnectionTab("SELECT annID, kod, articul, status FROM art_norm_n", artnormnBindingSource1, customGridControl2 );
             loadConnectionTab("Select * from sp_articul where annId is null", sparticulBindingSource1, customGridControl1);
 
-}
+        }
         //Загрузка таблиц "Артикулы для увязки" и "РТ для увязки"
         private void loadConnectionTab(string query, BindingSource bindingSource, CustomGridControl gridControl)
         {
@@ -531,7 +532,7 @@ namespace SewingProduction.form
                             transaction.Commit(); // Подтверждаем транзакцию
                         }
                         catch (Exception ex)
-{
+                        {
                             transaction.Rollback(); // Отменяем транзакцию при ошибке
                             throw new Exception("Ошибка в транзакции: " + ex.Message, ex);
                         }
@@ -539,16 +540,16 @@ namespace SewingProduction.form
                 }
             }
             catch (Exception ex)
-    {
+            {
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-    }
+        }
 
         //Реализация зависимости таблиц "Артикулы для увязки" и  "norm_rasz"
         private void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-    {
-            if (e.FocusedRowHandle >= 0)
         {
+            if (e.FocusedRowHandle >= 0)
+            {
                 GridView view = customGridControl2.MainView as GridView;
                 int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annID"));
                 string query = $"SELECT * FROM norm_rasz WHERE [norm_rasz].annId = '{Id}'";

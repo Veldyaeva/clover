@@ -82,6 +82,7 @@ namespace SewingProduction.form
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.svgImageBox1 = new DevExpress.XtraEditors.SvgImageBox();
             this.gridControl6 = new DevExpress.XtraGrid.GridControl();
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -112,6 +113,7 @@ namespace SewingProduction.form
             this.colsek_vyaz5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek_vyaz12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_kr = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -226,8 +228,8 @@ namespace SewingProduction.form
             this.customGridControl1 = new SewingProduction.CustomGridControl();
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gridView7 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.код = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.артикул = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -314,8 +316,8 @@ namespace SewingProduction.form
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.svgImageBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
@@ -788,6 +790,69 @@ namespace SewingProduction.form
             this.customGridControl5.TabIndex = 3;
             this.customGridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView10});
+            // 
+            // sparticulBindingSource
+            // 
+            this.sparticulBindingSource.DataMember = "sp_articul";
+            this.sparticulBindingSource.DataSource = this.aCEDataSetBindingSource;
+            // 
+            // gridView10
+            // 
+            this.gridView10.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+            this.gridView10.Appearance.SelectedRow.Options.UseBackColor = true;
+            this.gridView10.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn20,
+            this.gridColumn21,
+            this.gridColumn22,
+            this.gridColumn23,
+            this.colannId2});
+            this.gridView10.GridControl = this.customGridControl5;
+            this.gridView10.Name = "gridView10";
+            this.gridView10.OptionsView.ShowFooter = true;
+            this.gridView10.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.FieldName = "grup";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 0;
+            // 
+            // gridColumn22
+            // 
+            this.gridColumn22.FieldName = "articul";
+            this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.Visible = true;
+            this.gridColumn22.VisibleIndex = 1;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.FieldName = "mod";
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 2;
+            // 
+            // colannId2
+            // 
+            this.colannId2.FieldName = "annId";
+            this.colannId2.Name = "colannId2";
+            this.colannId2.Visible = true;
+            this.colannId2.VisibleIndex = 3;
+            // 
+            // gridColumn20
+            // 
+            this.gridColumn20.FieldName = "kod";
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 4;
+            // 
+            // svgImageBox1
+            // 
+            this.svgImageBox1.Location = new System.Drawing.Point(432, 6);
+            this.svgImageBox1.Name = "svgImageBox1";
+            this.svgImageBox1.Size = new System.Drawing.Size(229, 180);
+            this.svgImageBox1.TabIndex = 2;
+            this.svgImageBox1.Text = "svgImageBox1";
             // 
             // gridControl2
             // 
@@ -1365,6 +1430,16 @@ namespace SewingProduction.form
             this.customButton5.Text = "редактировать РТ";
             this.customButton5.UseVisualStyleBackColor = false;
             this.customButton5.Click += new System.EventHandler(this.customButton5_Click);
+            // 
+            // aproovmentBtn
+            // 
+            this.aproovmentBtn.BackColor = System.Drawing.Color.White;
+            this.aproovmentBtn.Location = new System.Drawing.Point(460, 100);
+            this.aproovmentBtn.Name = "aproovmentBtn";
+            this.aproovmentBtn.Size = new System.Drawing.Size(203, 52);
+            this.aproovmentBtn.TabIndex = 11;
+            this.aproovmentBtn.Text = "Согласование модели Конструктора \r\nс Технологом";
+            this.aproovmentBtn.UseVisualStyleBackColor = true;
             // 
             // commentRichTextBox
             // 
@@ -2150,19 +2225,18 @@ namespace SewingProduction.form
             this.gridView7.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             this.gridView7.Appearance.SelectedRow.Options.UseBackColor = true;
             this.gridView7.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.код,
-            this.артикул,
+            this.gridColumn1,
+            this.gridColumn3,
             this.gridColumn2});
             this.gridView7.GridControl = this.customGridControl1;
             this.gridView7.Name = "gridView7";
             // 
             // код
             // 
-            this.код.Caption = "код";
-            this.код.FieldName = "kod";
-            this.код.Name = "код";
-            this.код.Visible = true;
-            this.код.VisibleIndex = 0;
+            this.gridColumn1.FieldName = "kod";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
             // 
             // артикул
             // 
@@ -2996,8 +3070,8 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.PanelControl panelControl2;
         private CustomGridControl customGridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView7;
-        private DevExpress.XtraGrid.Columns.GridColumn код;
-        private DevExpress.XtraGrid.Columns.GridColumn артикул;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit2;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
