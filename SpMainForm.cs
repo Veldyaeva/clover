@@ -55,7 +55,7 @@ namespace SewingProduction
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
 
-        }
+        
 
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
