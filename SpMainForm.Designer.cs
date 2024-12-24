@@ -179,19 +179,7 @@
             // 
             // разделенияТрудаToolStripMenuItem
             // 
-            this.разделенияТрудаToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
-            this.разделенияТрудаToolStripMenuItem.Name = "разделенияТрудаToolStripMenuItem";
-            this.разделенияТрудаToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
-            this.разделенияТрудаToolStripMenuItem.Text = "Разделения труда";
-            this.разделенияТрудаToolStripMenuItem.Click += new System.EventHandler(this.разделенияТрудаToolStripMenuItem_Click);
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
+           
             // 
             // xtraTabbedMdiManager1
             // 

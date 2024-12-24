@@ -42,7 +42,7 @@ namespace SewingProduction.form
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.pictureBoxArticul = new System.Windows.Forms.PictureBox();
-            this.cbTM = new System.Windows.Forms.ComboBox();
+            this.cbTM = new SewingProduction.CustomComboBox();
             this.bsTM = new System.Windows.Forms.BindingSource(this.components);
             this.label3 = new System.Windows.Forms.Label();
             this.txtMod = new SewingProduction.CustomTextBox();
@@ -177,11 +177,14 @@ namespace SewingProduction.form
             // 
             // cbTM
             // 
+            this.cbTM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.cbTM.DataSource = this.bsTM;
+            this.cbTM.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbTM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbTM.FormattingEnabled = true;
             this.cbTM.Location = new System.Drawing.Point(275, 89);
             this.cbTM.Name = "cbTM";
-            this.cbTM.Size = new System.Drawing.Size(121, 21);
+            this.cbTM.Size = new System.Drawing.Size(110, 24);
             this.cbTM.TabIndex = 7;
             // 
             // label3
@@ -318,7 +321,8 @@ namespace SewingProduction.form
         private System.Windows.Forms.BindingSource bsArt;
         private System.Windows.Forms.Label label3;
         private CustomTextBox txtMod;
-        private System.Windows.Forms.ComboBox cbTM;
+        private SewingProduction.CustomComboBox cbTM;
+        //private System.Windows.Forms.ComboBox cbTM;
         private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
     }
