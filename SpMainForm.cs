@@ -8,7 +8,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,13 +21,7 @@ namespace SewingProduction
         public SpMainForm()
         {
             InitializeComponent();
-            splashScreen = new SplashScreen();
-            splashScreen.Show();
-            backgroundWorker1.RunWorkerAsync();
-            this.Hide(); // Скрываем главную форму до завершения инициализации
         }
-
-        private SplashScreen splashScreen;
 
         XtraTabbedMdiManager mdiManager;
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,17 +54,7 @@ namespace SewingProduction
             ////mdiManager.MdiParent = this;
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Здесь выполняется долгая инициализация
-            Thread.Sleep(300); // Пример задержки
-        }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Инициализация завершена, скрываем заставку и показываем главную форму
-            splashScreen.Close();
-            this.Show();
         }
 
 
