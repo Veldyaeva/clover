@@ -3,48 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\soft-otdel\\source\\team_work_\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|c:\\users\\soft-otdel\\source\\team_work_\\acedataset.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:acedataset.xsd||{07AC752B-D2B0-4DCD-AD9C-237BF561A30A}"
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|c:\\users\\soft-otdel\\source\\team_work_\\spmainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamwork.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamwork.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\class\\font.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:class\\font.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\class\\theme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:class\\theme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamworktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamworktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamworktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamworktest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\class\\font.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:class\\font.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form1.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\TeamWork.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,8 +22,34 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 15,
+          "SelectedChildIndex": 16,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SpMainForm.cs",
+              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\SpMainForm.cs",
+              "RelativeDocumentMoniker": "SpMainForm.cs",
+              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\SpMainForm.cs",
+              "RelativeToolTip": "SpMainForm.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAhwIYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T13:50:07.104Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TeamWork.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs",
+              "RelativeDocumentMoniker": "form\\TeamWork.Designer.cs",
+              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs",
+              "RelativeToolTip": "form\\TeamWork.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-17T13:15:12.145Z",
+              "IsPinned": true
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:130:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
@@ -110,140 +104,24 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
-            },
-            {
-              "$type": "Bookmark",
               "Name": "ST:2:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ACEDataSet.xsd",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\ACEDataSet.xsd",
-              "RelativeDocumentMoniker": "ACEDataSet.xsd",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\ACEDataSet.xsd",
-              "RelativeToolTip": "ACEDataSet.xsd",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003579|",
-              "WhenOpened": "2024-12-18T07:29:02.314Z",
+              "Title": "SpMainForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\SpMainForm.Designer.cs",
+              "RelativeDocumentMoniker": "SpMainForm.Designer.cs",
+              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\SpMainForm.Designer.cs",
+              "RelativeToolTip": "SpMainForm.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-24T07:55:55.759Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TeamWork.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs",
-              "RelativeDocumentMoniker": "form\\TeamWork.Designer.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs",
-              "RelativeToolTip": "form\\TeamWork.Designer.cs",
-              "ViewState": "AgIAANEAAAAAAAAAAAAUwNkAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T13:15:12.145Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TeamWork.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.cs",
-              "RelativeDocumentMoniker": "form\\TeamWork.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.cs",
-              "RelativeToolTip": "form\\TeamWork.cs",
-              "ViewState": "AgIAAMoAAAAAAAAAAAAYwOAAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T10:11:53.064Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TeamWork.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.cs",
-              "RelativeDocumentMoniker": "form\\TeamWork.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "form\\TeamWork.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T09:31:03.446Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Form1.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\Form1.Designer.cs",
-              "RelativeDocumentMoniker": "Form1.Designer.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\Form1.Designer.cs",
-              "RelativeToolTip": "Form1.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:45:53.119Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "TeamWorkTest.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWorkTest.cs",
-              "RelativeDocumentMoniker": "form\\TeamWorkTest.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWorkTest.cs",
-              "RelativeToolTip": "form\\TeamWorkTest.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAIAwwAwAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:11:48.955Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TeamWorkTest.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWorkTest.cs",
-              "RelativeDocumentMoniker": "form\\TeamWorkTest.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWorkTest.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "form\\TeamWorkTest.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:11:42.522Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Font.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Font.cs",
-              "RelativeDocumentMoniker": "class\\Font.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Font.cs",
-              "RelativeToolTip": "class\\Font.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAA3wF0AAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:02:52.001Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Theme.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Theme.cs",
-              "RelativeDocumentMoniker": "class\\Theme.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Theme.cs",
-              "RelativeToolTip": "class\\Theme.cs",
-              "ViewState": "AgIAAB0BAAAAAAAAAAAmwDABAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:02:47.18Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "Font.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Font.cs",
-              "RelativeDocumentMoniker": "class\\Font.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\class\\Font.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "RelativeToolTip": "class\\Font.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:02:45.898Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Form1.cs",
-              "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\Form1.cs",
-              "RelativeDocumentMoniker": "Form1.cs",
-              "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\Form1.cs",
-              "RelativeToolTip": "Form1.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-17T08:00:45.488Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             }
           ]
         }
