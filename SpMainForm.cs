@@ -124,6 +124,20 @@ namespace SewingProduction
 
         }
 
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Articul f = new Articul();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlanZagrBrig f = new PlanZagrBrig();
+            f.MdiParent = this;
+            f.Show();
+        }
+        
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
             TeamWork teamWork = new TeamWork();

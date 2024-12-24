@@ -374,7 +374,6 @@ FodyWeavers.xsd
 /.vs/sewingproduction/v17/DocumentLayout.json
 /.vs/sewingproduction/v17/.suo
 /.vs/sewingproduction/v17/DocumentLayout.json
-<<<<<<< HEAD
 /.vs/sewingproduction/v17/DocumentLayout.json
 /.vs/sewingproduction/v17/.suo
 /obj/Debug/SewingProduction.csproj.AssemblyReference.cache
@@ -402,18 +401,9 @@ FodyWeavers.xsd
 /obj/Debug/SewingProduction.csproj.AssemblyReference.cache
 /obj/Debug/SewingProduction.csproj.FileListAbsolute.txt
 /obj/Debug/SewingProduction.csproj.CoreCompileInputs.cache
-/obj/Debug/SewingProduction.csproj.AssemblyReference.cache
-=======
 /ACEDataSet1.xsc
 /ACEDataSet1.xsd
 /ACEDataSet1.xss
 /ACEDataSet2.Designer.cs
 /ACEDataSet1.Designer.cs
-/bin/Debug/SewingProduction.exe
-/bin/Debug/SewingProduction.pdb
-/obj/Debug/SewingProduction.exe
-<<<<<<< HEAD
-=======
->>>>>>> 432eeb8 (TW add: добавила родительскую форму SP_Form. Пока пустая, наполняю по мере выяснения новых данных)
->>>>>>> customForm
-/.vs/sewingproduction/v17/DocumentLayout.json
+/obj/Debug/SewingProduction.csproj.AssemblyReference.cache

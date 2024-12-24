@@ -5,14 +5,23 @@ VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SewingProduction", "SewingProduction.csproj", "{492A5D90-D112-4AA4-8DF2-789E7922C204}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{9EC2B433-B5AD-4D12-A04A-B957FD3B1FAF}"
+	ProjectSection(SolutionItems) = preProject
+		ic.ico = ic.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug_test|Any CPU = debug_test|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		release_prodiction|Any CPU = release_prodiction|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{492A5D90-D112-4AA4-8DF2-789E7922C204}.debug_test|Any CPU.ActiveCfg = Release|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{492A5D90-D112-4AA4-8DF2-789E7922C204}.release_prodiction|Any CPU.ActiveCfg = Release|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
