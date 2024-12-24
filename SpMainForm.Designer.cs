@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -45,10 +44,10 @@
             this.матрицыКлассовToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видыОперацийToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рабочийСтолМастераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -74,15 +73,15 @@
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager1;
-            this.barDockControlTop.Size = new System.Drawing.Size(1124, 0);
+            this.barDockControlTop.Size = new System.Drawing.Size(1048, 0);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 506);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 450);
             this.barDockControlBottom.Manager = this.barManager1;
-            this.barDockControlBottom.Size = new System.Drawing.Size(1124, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1048, 0);
             // 
             // barDockControlLeft
             // 
@@ -90,15 +89,15 @@
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
             this.barDockControlLeft.Manager = this.barManager1;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 506);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 450);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(1124, 0);
+            this.barDockControlRight.Location = new System.Drawing.Point(1048, 0);
             this.barDockControlRight.Manager = this.barManager1;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 506);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 450);
             // 
             // menuStrip1
             // 
@@ -108,7 +107,7 @@
             this.производствоToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1124, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1048, 24);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -132,7 +131,7 @@
             this.матрицыКлассовToolStripMenuItem,
             this.видыОперацийToolStripMenuItem});
             this.оборудованиеToolStripMenuItem.Name = "оборудованиеToolStripMenuItem";
-            this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.оборудованиеToolStripMenuItem.Text = "Оборудование";
             // 
             // оборудованиеВБригадахToolStripMenuItem
@@ -173,19 +172,9 @@
             // карточкаРасчетаToolStripMenuItem1
             // 
             this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
+            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
             this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
-            // 
-            // разделенияТрудаToolStripMenuItem
-            // 
-           
-            // 
-            // xtraTabbedMdiManager1
-            // 
-            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
-            this.xtraTabbedMdiManager1.MdiParent = this;
-            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // изделияToolStripMenuItem
             // 
@@ -208,6 +197,12 @@
             this.рабочийСтолМастераToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.рабочийСтолМастераToolStripMenuItem.Text = "Рабочий стол мастера";
             this.рабочийСтолМастераToolStripMenuItem.Click += new System.EventHandler(this.рабочийСтолМастераToolStripMenuItem_Click);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // SpMainForm
             // 
