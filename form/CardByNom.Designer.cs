@@ -322,9 +322,9 @@
             this.label29 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
-            this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
+            //this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
+            //this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
+            //this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
             this.gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
