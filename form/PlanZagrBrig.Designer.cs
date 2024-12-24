@@ -54,7 +54,8 @@
             this.simpleButton17 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton16 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton15 = new DevExpress.XtraEditors.SimpleButton();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gcPzOperList = new DevExpress.XtraGrid.GridControl();
+            this.bsPzOperList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -128,6 +129,16 @@
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.lblBrigName = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            this.tbYearPlan = new System.Windows.Forms.TextBox();
+            this.cbMonthList = new System.Windows.Forms.ComboBox();
+            this.bsMonthList = new System.Windows.Forms.BindingSource(this.components);
             this.panel6 = new System.Windows.Forms.Panel();
             this.radioButton9 = new System.Windows.Forms.RadioButton();
             this.radioButton8 = new System.Windows.Forms.RadioButton();
@@ -144,30 +155,21 @@
             this.labelControl6 = new DevExpress.XtraEditors.LabelControl();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbNlNom = new System.Windows.Forms.TextBox();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButton5 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton4 = new DevExpress.XtraEditors.SimpleButton();
-            this.tbYearPlan = new System.Windows.Forms.TextBox();
-            this.cbMonthList = new System.Windows.Forms.ComboBox();
-            this.bsMonthList = new System.Windows.Forms.BindingSource(this.components);
-            this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton3 = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.bsPzOperList = new System.Windows.Forms.BindingSource(this.components);
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPzOperList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.panel8.SuspendLayout();
             this.panel7.SuspendLayout();
@@ -181,12 +183,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             this.panel5.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).BeginInit();
             this.panel6.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -199,7 +202,7 @@
             this.panel1.Controls.Add(this.simpleButton17);
             this.panel1.Controls.Add(this.simpleButton16);
             this.panel1.Controls.Add(this.simpleButton15);
-            this.panel1.Controls.Add(this.gridControl2);
+            this.panel1.Controls.Add(this.gcPzOperList);
             this.panel1.Controls.Add(this.panel8);
             this.panel1.Controls.Add(this.panel7);
             this.panel1.Controls.Add(this.tbPList);
@@ -500,14 +503,15 @@
             this.simpleButton15.TabIndex = 34;
             this.simpleButton15.Text = "Таб 999 по V";
             // 
-            // gridControl2
+            // gcPzOperList
             // 
-            this.gridControl2.Location = new System.Drawing.Point(3, 358);
-            this.gridControl2.MainView = this.gridView3;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1030, 322);
-            this.gridControl2.TabIndex = 35;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gcPzOperList.DataSource = this.bsPzOperList;
+            this.gcPzOperList.Location = new System.Drawing.Point(3, 358);
+            this.gcPzOperList.MainView = this.gridView3;
+            this.gcPzOperList.Name = "gcPzOperList";
+            this.gcPzOperList.Size = new System.Drawing.Size(1030, 322);
+            this.gcPzOperList.TabIndex = 35;
+            this.gcPzOperList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
             // 
             // gridView3
@@ -536,7 +540,7 @@
             this.gridColumn20,
             this.gridColumn19,
             this.gridColumn18});
-            this.gridView3.GridControl = this.gridControl2;
+            this.gridView3.GridControl = this.gcPzOperList;
             this.gridView3.GroupCount = 1;
             this.gridView3.Name = "gridView3";
             this.gridView3.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
@@ -1035,6 +1039,7 @@
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView2.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gcPzNomList_FocusedRowChanged);
+            this.gridView2.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView2_CellValueChanged);
             // 
             // gridColumn8
             // 
@@ -1055,6 +1060,8 @@
             this.repositoryItemCheckEdit3.Name = "repositoryItemCheckEdit3";
             this.repositoryItemCheckEdit3.ValueChecked = 1;
             this.repositoryItemCheckEdit3.ValueUnchecked = 0;
+            this.repositoryItemCheckEdit3.CheckedChanged += new System.EventHandler(this.repositoryItemCheckEdit3_CheckedChanged);
+            this.repositoryItemCheckEdit3.EditValueChanged += new System.EventHandler(this.repositoryItemCheckEdit3_EditValueChanged);
             // 
             // gridColumn9
             // 
@@ -1192,6 +1199,8 @@
             this.gridColumn6});
             this.gridView1.GridControl = this.gcPzArticulList;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsFind.AlwaysVisible = true;
+            this.gridView1.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Search;
             this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gcPzArticulList_FocusedRowChanged);
             // 
@@ -1311,6 +1320,7 @@
             // panel5
             // 
             this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel5.Controls.Add(this.panel9);
             this.panel5.Controls.Add(this.panel6);
             this.panel5.Controls.Add(this.panel2);
             this.panel5.Controls.Add(this.simpleButton6);
@@ -1318,22 +1328,114 @@
             this.panel5.Controls.Add(this.labelControl6);
             this.panel5.Controls.Add(this.textBox4);
             this.panel5.Controls.Add(this.labelControl5);
-            this.panel5.Controls.Add(this.textBox3);
+            this.panel5.Controls.Add(this.tbNlNom);
             this.panel5.Controls.Add(this.labelControl4);
-            this.panel5.Controls.Add(this.simpleButton5);
-            this.panel5.Controls.Add(this.simpleButton4);
-            this.panel5.Controls.Add(this.tbYearPlan);
-            this.panel5.Controls.Add(this.cbMonthList);
-            this.panel5.Controls.Add(this.labelControl3);
-            this.panel5.Controls.Add(this.labelControl2);
             this.panel5.Controls.Add(this.simpleButton3);
-            this.panel5.Controls.Add(this.labelControl1);
             this.panel5.Controls.Add(this.simpleButton1);
-            this.panel5.Controls.Add(this.textBox1);
             this.panel5.Location = new System.Drawing.Point(3, 22);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(1030, 64);
             this.panel5.TabIndex = 2;
+            // 
+            // panel9
+            // 
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel9.Controls.Add(this.label5);
+            this.panel9.Controls.Add(this.tableLayoutPanel1);
+            this.panel9.Location = new System.Drawing.Point(224, 1);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(220, 60);
+            this.panel9.TabIndex = 19;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Tahoma", 9.5F);
+            this.label5.Location = new System.Drawing.Point(3, 5);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(64, 48);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Плановая\r\nдата\r\nсдачи";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 41F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 79F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.Controls.Add(this.simpleButton5, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelControl1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.simpleButton4, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.labelControl3, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tbYearPlan, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.cbMonthList, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(65, 2);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(150, 53);
+            this.tableLayoutPanel1.TabIndex = 7;
+            // 
+            // simpleButton5
+            // 
+            this.simpleButton5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
+            this.simpleButton5.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
+            this.simpleButton5.Location = new System.Drawing.Point(123, 30);
+            this.simpleButton5.Name = "simpleButton5";
+            this.simpleButton5.Size = new System.Drawing.Size(24, 21);
+            this.simpleButton5.TabIndex = 15;
+            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
+            // 
+            // labelControl1
+            // 
+            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
+            this.labelControl1.Appearance.Options.UseFont = true;
+            this.labelControl1.LineVisible = true;
+            this.labelControl1.Location = new System.Drawing.Point(3, 3);
+            this.labelControl1.Name = "labelControl1";
+            this.labelControl1.Size = new System.Drawing.Size(37, 16);
+            this.labelControl1.TabIndex = 16;
+            this.labelControl1.Text = "Месяц";
+            // 
+            // simpleButton4
+            // 
+            this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
+            this.simpleButton4.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
+            this.simpleButton4.Location = new System.Drawing.Point(123, 3);
+            this.simpleButton4.Name = "simpleButton4";
+            this.simpleButton4.Size = new System.Drawing.Size(24, 21);
+            this.simpleButton4.TabIndex = 14;
+            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
+            // 
+            // labelControl3
+            // 
+            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 9.5F);
+            this.labelControl3.Appearance.Options.UseFont = true;
+            this.labelControl3.LineVisible = true;
+            this.labelControl3.Location = new System.Drawing.Point(3, 30);
+            this.labelControl3.Name = "labelControl3";
+            this.labelControl3.Size = new System.Drawing.Size(21, 16);
+            this.labelControl3.TabIndex = 11;
+            this.labelControl3.Text = "Год";
+            // 
+            // tbYearPlan
+            // 
+            this.tbYearPlan.Location = new System.Drawing.Point(44, 30);
+            this.tbYearPlan.Name = "tbYearPlan";
+            this.tbYearPlan.Size = new System.Drawing.Size(73, 20);
+            this.tbYearPlan.TabIndex = 13;
+            // 
+            // cbMonthList
+            // 
+            this.cbMonthList.DataSource = this.bsMonthList;
+            this.cbMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMonthList.FormattingEnabled = true;
+            this.cbMonthList.Location = new System.Drawing.Point(44, 3);
+            this.cbMonthList.Name = "cbMonthList";
+            this.cbMonthList.Size = new System.Drawing.Size(73, 21);
+            this.cbMonthList.TabIndex = 12;
+            this.cbMonthList.SelectedIndexChanged += new System.EventHandler(this.cbMonthList_SelectedIndexChanged);
             // 
             // panel6
             // 
@@ -1344,9 +1446,9 @@
             this.panel6.Controls.Add(this.radioButton6);
             this.panel6.Controls.Add(this.radioButton7);
             this.panel6.Controls.Add(this.simpleButton7);
-            this.panel6.Location = new System.Drawing.Point(754, 22);
+            this.panel6.Location = new System.Drawing.Point(775, 22);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(273, 39);
+            this.panel6.Size = new System.Drawing.Size(252, 39);
             this.panel6.TabIndex = 23;
             // 
             // radioButton9
@@ -1426,9 +1528,9 @@
             this.panel2.Controls.Add(this.radioButton3);
             this.panel2.Controls.Add(this.radioButton1);
             this.panel2.Controls.Add(this.radioButton2);
-            this.panel2.Location = new System.Drawing.Point(754, 1);
+            this.panel2.Location = new System.Drawing.Point(775, 1);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(273, 20);
+            this.panel2.Size = new System.Drawing.Size(252, 20);
             this.panel2.TabIndex = 22;
             // 
             // radioButton3
@@ -1470,16 +1572,16 @@
             // simpleButton6
             // 
             this.simpleButton6.Enabled = false;
-            this.simpleButton6.Location = new System.Drawing.Point(490, 27);
+            this.simpleButton6.Location = new System.Drawing.Point(535, 23);
             this.simpleButton6.Name = "simpleButton6";
-            this.simpleButton6.Size = new System.Drawing.Size(255, 19);
+            this.simpleButton6.Size = new System.Drawing.Size(238, 19);
             this.simpleButton6.TabIndex = 9;
             this.simpleButton6.Text = "Занести проблемы";
             // 
             // textBox5
             // 
             this.textBox5.Enabled = false;
-            this.textBox5.Location = new System.Drawing.Point(692, 6);
+            this.textBox5.Location = new System.Drawing.Point(720, 1);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(53, 20);
             this.textBox5.TabIndex = 21;
@@ -1489,7 +1591,7 @@
             this.labelControl6.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.labelControl6.Appearance.Options.UseFont = true;
             this.labelControl6.LineVisible = true;
-            this.labelControl6.Location = new System.Drawing.Point(650, 6);
+            this.labelControl6.Location = new System.Drawing.Point(678, 1);
             this.labelControl6.Name = "labelControl6";
             this.labelControl6.Size = new System.Drawing.Size(40, 16);
             this.labelControl6.TabIndex = 20;
@@ -1498,9 +1600,9 @@
             // textBox4
             // 
             this.textBox4.Enabled = false;
-            this.textBox4.Location = new System.Drawing.Point(599, 5);
+            this.textBox4.Location = new System.Drawing.Point(636, 1);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(45, 20);
+            this.textBox4.Size = new System.Drawing.Size(36, 20);
             this.textBox4.TabIndex = 19;
             // 
             // labelControl5
@@ -1508,132 +1610,52 @@
             this.labelControl5.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.labelControl5.Appearance.Options.UseFont = true;
             this.labelControl5.LineVisible = true;
-            this.labelControl5.Location = new System.Drawing.Point(571, 5);
+            this.labelControl5.Location = new System.Drawing.Point(608, 1);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(26, 16);
             this.labelControl5.TabIndex = 18;
             this.labelControl5.Text = "Год:";
             // 
-            // textBox3
+            // tbNlNom
             // 
-            this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(512, 5);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(53, 20);
-            this.textBox3.TabIndex = 17;
+            this.tbNlNom.Location = new System.Drawing.Point(557, 1);
+            this.tbNlNom.Name = "tbNlNom";
+            this.tbNlNom.Size = new System.Drawing.Size(45, 20);
+            this.tbNlNom.TabIndex = 17;
+            this.tbNlNom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNlNom_KeyDown);
             // 
             // labelControl4
             // 
             this.labelControl4.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
             this.labelControl4.Appearance.Options.UseFont = true;
             this.labelControl4.LineVisible = true;
-            this.labelControl4.Location = new System.Drawing.Point(490, 5);
+            this.labelControl4.Location = new System.Drawing.Point(535, 1);
             this.labelControl4.Name = "labelControl4";
             this.labelControl4.Size = new System.Drawing.Size(20, 16);
             this.labelControl4.TabIndex = 16;
             this.labelControl4.Text = "№:";
-            // 
-            // simpleButton5
-            // 
-            this.simpleButton5.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton5.ImageOptions.Image")));
-            this.simpleButton5.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
-            this.simpleButton5.Location = new System.Drawing.Point(449, 27);
-            this.simpleButton5.Name = "simpleButton5";
-            this.simpleButton5.Size = new System.Drawing.Size(29, 21);
-            this.simpleButton5.TabIndex = 15;
-            this.simpleButton5.Click += new System.EventHandler(this.simpleButton5_Click);
-            // 
-            // simpleButton4
-            // 
-            this.simpleButton4.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton4.ImageOptions.Image")));
-            this.simpleButton4.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
-            this.simpleButton4.Location = new System.Drawing.Point(449, 4);
-            this.simpleButton4.Name = "simpleButton4";
-            this.simpleButton4.Size = new System.Drawing.Size(29, 21);
-            this.simpleButton4.TabIndex = 14;
-            this.simpleButton4.Click += new System.EventHandler(this.simpleButton4_Click);
-            // 
-            // tbYearPlan
-            // 
-            this.tbYearPlan.Location = new System.Drawing.Point(390, 27);
-            this.tbYearPlan.Name = "tbYearPlan";
-            this.tbYearPlan.Size = new System.Drawing.Size(53, 20);
-            this.tbYearPlan.TabIndex = 13;
-            this.tbYearPlan.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbYearPlan_KeyDown);
-            // 
-            // cbMonthList
-            // 
-            this.cbMonthList.DataSource = this.bsMonthList;
-            this.cbMonthList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbMonthList.FormattingEnabled = true;
-            this.cbMonthList.Location = new System.Drawing.Point(390, 4);
-            this.cbMonthList.Name = "cbMonthList";
-            this.cbMonthList.Size = new System.Drawing.Size(54, 21);
-            this.cbMonthList.TabIndex = 12;
-            this.cbMonthList.SelectedIndexChanged += new System.EventHandler(this.cbMonthList_SelectedIndexChanged);
-            // 
-            // labelControl3
-            // 
-            this.labelControl3.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.labelControl3.Appearance.Options.UseFont = true;
-            this.labelControl3.LineVisible = true;
-            this.labelControl3.Location = new System.Drawing.Point(356, 27);
-            this.labelControl3.Name = "labelControl3";
-            this.labelControl3.Size = new System.Drawing.Size(21, 16);
-            this.labelControl3.TabIndex = 11;
-            this.labelControl3.Text = "Год";
-            // 
-            // labelControl2
-            // 
-            this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.labelControl2.Appearance.Options.UseFont = true;
-            this.labelControl2.LineVisible = true;
-            this.labelControl2.Location = new System.Drawing.Point(356, 4);
-            this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(27, 16);
-            this.labelControl2.TabIndex = 10;
-            this.labelControl2.Text = "Мес.";
             // 
             // simpleButton3
             // 
             this.simpleButton3.Appearance.Options.UseTextOptions = true;
             this.simpleButton3.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.simpleButton3.Enabled = false;
-            this.simpleButton3.Location = new System.Drawing.Point(196, 4);
+            this.simpleButton3.Location = new System.Drawing.Point(64, 1);
             this.simpleButton3.Name = "simpleButton3";
-            this.simpleButton3.Size = new System.Drawing.Size(154, 53);
+            this.simpleButton3.Size = new System.Drawing.Size(154, 60);
             this.simpleButton3.TabIndex = 9;
             this.simpleButton3.Text = "Выбрать артикулы/расчеты с работой за месяц/год";
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.LineVisible = true;
-            this.labelControl1.Location = new System.Drawing.Point(65, 4);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(113, 16);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Поиск по артикулу:";
             // 
             // simpleButton1
             // 
             this.simpleButton1.Enabled = false;
             this.simpleButton1.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButton1.ImageOptions.Image")));
             this.simpleButton1.ImageOptions.ImageToTextAlignment = DevExpress.XtraEditors.ImageAlignToText.TopCenter;
-            this.simpleButton1.Location = new System.Drawing.Point(3, 3);
+            this.simpleButton1.Location = new System.Drawing.Point(3, 1);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(55, 54);
+            this.simpleButton1.Size = new System.Drawing.Size(55, 60);
             this.simpleButton1.TabIndex = 1;
             this.simpleButton1.Text = "Обновить";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(64, 23);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(126, 20);
-            this.textBox1.TabIndex = 0;
             // 
             // label1
             // 
@@ -1709,7 +1731,8 @@
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gcPzOperList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
@@ -1726,16 +1749,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).EndInit();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsMonthList)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bsPzOperList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1752,20 +1778,12 @@
         private System.Windows.Forms.Label lblBrigName;
         private System.Windows.Forms.Panel panel5;
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
-        private System.Windows.Forms.TextBox textBox1;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.SimpleButton simpleButton3;
         private System.Windows.Forms.TextBox textBox4;
         private DevExpress.XtraEditors.LabelControl labelControl5;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbNlNom;
         private DevExpress.XtraEditors.LabelControl labelControl4;
-        private DevExpress.XtraEditors.SimpleButton simpleButton5;
-        private DevExpress.XtraEditors.SimpleButton simpleButton4;
-        private System.Windows.Forms.TextBox tbYearPlan;
-        private System.Windows.Forms.ComboBox cbMonthList;
-        private DevExpress.XtraEditors.LabelControl labelControl3;
-        private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.SimpleButton simpleButton6;
         private System.Windows.Forms.TextBox textBox5;
         private DevExpress.XtraEditors.LabelControl labelControl6;
@@ -1827,7 +1845,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton14;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.TextBox textBox6;
-        private DevExpress.XtraGrid.GridControl gridControl2;
+        private DevExpress.XtraGrid.GridControl gcPzOperList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.BindingSource bsPzOperList;
@@ -1876,5 +1894,14 @@
         private System.Windows.Forms.BindingSource bsPzArticulList;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private System.Windows.Forms.BindingSource bsMonthList;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Panel panel9;
+        private DevExpress.XtraEditors.SimpleButton simpleButton5;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private DevExpress.XtraEditors.SimpleButton simpleButton4;
+        private DevExpress.XtraEditors.LabelControl labelControl3;
+        private System.Windows.Forms.TextBox tbYearPlan;
+        private System.Windows.Forms.ComboBox cbMonthList;
     }
 }

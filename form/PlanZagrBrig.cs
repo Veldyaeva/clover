@@ -1,16 +1,23 @@
-﻿using DevExpress.ClipboardSource.SpreadsheetML;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.CodeParser;
+using DevExpress.Data.Filtering;
 using DevExpress.Data.Helpers;
 using DevExpress.Data.Linq.Helpers;
+using DevExpress.DataAccess.DataFederation;
 using DevExpress.DataAccess.Native.Data;
 using DevExpress.DataAccess.Native.Json;
+using DevExpress.DataAccess.Sql;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.PivotGrid.QueryMode;
 using DevExpress.Utils;
+using DevExpress.Xpo;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.Xpo.Helpers;
 using DevExpress.XtraCharts.Design;
 using DevExpress.XtraEditors.Filtering.Templates;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraRichEdit.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +29,9 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml.Linq;
 
 namespace SewingProduction.form
 {
@@ -36,6 +45,8 @@ namespace SewingProduction.form
         public int XIdBrig;
         public string XNameBrig;
         public System.Data.DataTable dtNomList;
+        public System.Data.DataTable dtPzArticulList;
+        public System.Data.DataTable dtPzOperList;
         public void GetBrigName(int _xIdBrig)
         {
             string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -178,7 +189,6 @@ namespace SewingProduction.form
             }
             return dtReturn;
         }
-
         public int GetUslFilter()
         {
             int _xUsl = 0;
@@ -232,14 +242,12 @@ namespace SewingProduction.form
             }
             return _xMonthPlan;
         }
-
         public int GetYearPlan()
         {
             int _xYearPlan = 0;
             int.TryParse(this.tbYearPlan.Text, out _xYearPlan);
             return _xYearPlan;
         }
-
         private void PlanZagrBrigLoadData()
         {
             string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -260,7 +268,7 @@ namespace SewingProduction.form
                 this.gcPzNomList.Size = this.gcPzNomList.Size;
 
                 var queryPzArticulList = from row in dtNomList.AsEnumerable()
-                                         where (row.IsNull("nlDateCd") || row.Field<DateTime>("nlDateCd") == DateTime.MinValue)
+                                         //where (row.IsNull("nlDateCd") || row.Field<DateTime>("nlDateCd") == DateTime.MinValue)
                                          group row by new {
                                       nlGrup = row.Field<string>("nlGrup"),
                                       nlArticul = row.Field<string>("nlArticul"),
@@ -287,9 +295,11 @@ namespace SewingProduction.form
                                       alArtSort = (g.Key.nlArticulK.Length != 0 ? g.Key.nlArticulK : g.Key.nlArticul),
                                       alModSort = (g.Key.nlModK.Length != 0 ? g.Key.nlModK : g.Key.nlMod),
                                       alDataCdPl = g.Min(row => row.Field<DateTime>("nlDataCdPl")),
-                                      alKol = g.Sum(row => row.Field<decimal>("nlKol"))
+                                      alKol = g.Sum(row => row.Field<decimal>("nlKol")),
+                                      alRowNumber = 0
                                   };
-                System.Data.DataTable dtPzArticulList = ConvertToDataTable(queryPzArticulList);
+                
+                dtPzArticulList = ConvertToDataTable(queryPzArticulList);
                 string _alKodd7 = "";
                 string _alMod = "";
                 if (dtPzArticulList.Rows.Count != 0)
@@ -297,14 +307,16 @@ namespace SewingProduction.form
                     dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
                     _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alKodd7"].ToString();
                     _alMod = dtPzArticulList.Rows[0]["alMod"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alMod"].ToString();
+                    for (int i = 0; i < dtPzArticulList.Rows.Count; i++)
+                    {
+                        dtPzArticulList.Rows[i]["alRowNumber"] = i + 1;
+                    }
                 }
                 bsPzArticulList.DataSource = dtPzArticulList;
 
                 GetArticulNomList(_alKodd7, _alMod);
-
             }
         }
-
         private void GetArticulNomList(string _alKodd7, string _alMod)
         {
             var queryPzNomlList = from nl in dtNomList.AsEnumerable()
@@ -342,7 +354,8 @@ namespace SewingProduction.form
                                       idBrigTo = (nl.IsNull("idBrigTo") ? 0 : nl.Field<int>("idBrigTo")),
                                       nlIzNakl = nl.Field<decimal>("nlIzNakl"),
                                       nn = nl.Field<string>("nn"),
-                                      vidPr = nl.Field<string>("vidPr")
+                                      vidPr = nl.Field<string>("vidPr"),
+                                      nlRowNumber = nl.Field<int>("nlRowNumber")
                                   };
             System.Data.DataTable dtPzNomList = ConvertToDataTable(queryPzNomlList);
             bsPzNomList.DataSource = dtPzNomList;
@@ -354,16 +367,60 @@ namespace SewingProduction.form
             bsPzNomList.DataSource = dtPzNomList;
         }
 
+        private void GetPztOperList(string _xmlString)
+        {
+            string connectionString = Properties.Settings.Default.ACEConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlDataAdapter adapterPzOperList = new SqlDataAdapter();
+                dtPzOperList = new System.Data.DataTable();
+                string queryPzOperList = $"exec planZagrTwo_view ''";
+                //queryPartNaklList += $" order by id";
+                SqlCommand commandPzOperList = new SqlCommand(queryPzOperList, connection);
+                adapterPzOperList.SelectCommand = commandPzOperList;
+                adapterPzOperList.Fill(dtPzOperList);
+                bsPzOperList.DataSource = dtPzOperList;
+            }
+        }
+        //private int LocateByNomInArticulList(string _cnAlArticul, string _vAlArticul, string _cnAlMod, string _vAlMod, string _cnAlKoddRT, string _vAlKoddRT, string _cnAlArticulK, string _vAlArticulK, string _cnAlModK, string _vAlModK)
+        //{
+        //    for (int i = 0; i < gridView1.RowCount - 1; i++) // -1 чтобы избежать ошибки с последней пустой строкой
+        //    {
+        //        DataGridViewRow row = gridView1.GetDataRow(i);
+
+        //        // Проверка на null, чтобы избежать исключений, если ячейки пустые
+        //        if (row.Cells[column1Name].Value != null && row.Cells[column2Name].Value != null)
+        //        {
+        //            if (row.Cells[column1Name].Value.ToString().Equals(value1, StringComparison.OrdinalIgnoreCase) &&
+        //                row.Cells[column2Name].Value.ToString().Equals(value2, StringComparison.OrdinalIgnoreCase))
+        //            {
+        //                return i; // Строка найдена
+        //            }
+        //        }
+        //    }
+        //    return -1; // Строка не найдена
+        //}
+
+        public static string DataRowToXml3(DataRow dataRow, string _row)
+        {
+            XElement root = new XElement(_row,
+                from System.Data.DataColumn column in dataRow.Table.Columns
+                select new XElement(column.ColumnName.ToLower(), dataRow[column])
+            );
+            return root.ToString();
+        }
         private void PlanZagrBrig_Load(object sender, EventArgs e)
         {
-            
             XIdBrig = 1;
             GetBrigName(XIdBrig);
             this.cbMonthList.SelectedIndex = -1;
             this.radioButton3.Checked = true;
             this.radioButton6.Checked = true;
             GetMonthList();
+            GetPztOperList("");
             PlanZagrBrigLoadData();
+
             //string connectionString = Properties.Settings.Default.ACEConnectionString;
             //using (SqlConnection connection = new SqlConnection(connectionString))
             //{
@@ -418,7 +475,10 @@ namespace SewingProduction.form
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton1.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void simpleButton5_Click(object sender, EventArgs e)
@@ -428,7 +488,7 @@ namespace SewingProduction.form
             PlanZagrBrigLoadData();
         }
 
-        private void tbYearPlan_KeyDown(object sender, KeyEventArgs e)
+        private void tbYearPlan_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -453,37 +513,172 @@ namespace SewingProduction.form
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton2.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton3.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton6_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton6.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton7_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton7.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton5.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton8_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton8.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
         }
 
         private void radioButton9_CheckedChanged(object sender, EventArgs e)
         {
-            PlanZagrBrigLoadData();
+            if (radioButton9.Checked)
+            {
+                PlanZagrBrigLoadData();
+            }
+        }
+
+        private void tbNlNom_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                dtNomList.PrimaryKey = new System.Data.DataColumn[] { dtNomList.Columns["nlNom"] };
+                DataRow drNomListfoundRow = dtNomList.Rows.Find($"{this.tbNlNom.Text}");
+                if (drNomListfoundRow != null)
+                { 
+                    string _nlArticul = drNomListfoundRow["nlArticul"].ToString();
+                    string _nlMod = drNomListfoundRow["nlMod"].ToString();
+                    string _nlKoddRT = drNomListfoundRow["nlKoddRT"].ToString();
+                    string _nlArticulK = drNomListfoundRow["nlArticulK"].ToString();
+                    string _nlModK = drNomListfoundRow["nlModK"].ToString();
+                    dtPzArticulList.PrimaryKey = new System.Data.DataColumn[] { dtPzArticulList.Columns["alArticul"],
+                                                                                dtPzArticulList.Columns["alMod"],
+                                                                                dtPzArticulList.Columns["alKoddRT"],
+                                                                                dtPzArticulList.Columns["alArticulK"],
+                                                                                dtPzArticulList.Columns["alModK"] };
+                    object[] compositeKeyValue = { _nlArticul, _nlMod, _nlKoddRT, _nlArticulK, _nlModK };
+                    DataRow drPzArticulList = dtPzArticulList.Rows.Find(compositeKeyValue);
+
+                    gridView1.FocusedRowHandle = gridView1.LocateByValue("alRowNumber", drPzArticulList["alRowNumber"].ToString());
+                    //gridView2.FocusedColumn.FieldName = "nlV";
+
+                    //gridView2.FocusedColumn = gridView1.Columns["GridColumn8"];
+
+                    if (gridView2 == null) return;
+                    //MessageBox.Show(drNomListfoundRow["nlRowNumber"].ToString());
+                    gridView2.FocusedRowHandle = gridView2.LocateByValue("nlRowNumber", drNomListfoundRow["nlRowNumber"].ToString());
+                    gridView2.FocusedColumn = gridView2.Columns["nlV"];
+                    gridView2.ShowEditor();
+                }
+                else
+                {
+                    MessageBox.Show($"Расчет {this.tbNlNom.Text} не найден. Измените параметры фильтра и повторите попытку");
+                }
+
+            }
+        }
+
+        private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
+        {
+            //if (e.Column.FieldName.ToString() == "nlV")
+            //{
+            //    if (Convert.ToInt32(gridView2.GetDataRow(e.RowHandle)["nlV"]) == 1)
+            //    {
+            //        MessageBox.Show("111");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("222");
+            //    }
+            //}
+        }
+
+        private void repositoryItemCheckEdit3_EditValueChanged(object sender, EventArgs e)
+        {
+            //if (Convert.ToInt32(repositoryItemCheckEdit3 ) == 1)
+            //{
+            //    MessageBox.Show("111");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("222");
+            //}
+        }
+
+        private void repositoryItemCheckEdit3_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (Convert.ToInt32(repositoryItemCheckEdit3.value) == 1)
+            //{
+            //    MessageBox.Show("111");
+            //}
+            //else
+            //{
+            //    MessageBox.Show("222");
+            //}
+            gridView2.FocusedColumn = gridView2.Columns["nlIzNakl"];
+            gridView2.FocusedColumn = gridView2.Columns["nlV"];
+            MessageBox.Show(gridView2.GetRowCellValue(gridView2.FocusedRowHandle, gridView2.FocusedColumn).ToString());
+            
+            if (gridView2.GetRowCellValue(gridView2.FocusedRowHandle, gridView2.FocusedColumn).ToString() == "1")
+            {
+                
+                //string xml3 = DataRowToXml3(gridView1.GetDataRow(gridView2.FocusedRowHandle));
+                //Console.WriteLine(xml3);
+                //Console.WriteLine(DataRowToXml3(gridView1.GetDataRow(gridView2.FocusedRowHandle)));
+
+                string connectionString = Properties.Settings.Default.ACEConnectionString;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    MessageBox.Show(DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list"));
+                    string sqlQuery = $"exec planZagrTwo_view '{DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list")}'";
+                    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                    {
+                        connection.Open();
+                        try
+                        {
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                dtPzOperList.Load(reader);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            //Handle exceptions
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

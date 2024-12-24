@@ -132,8 +132,7 @@ namespace SewingProduction
                 this.mtbData_zeh.DataBindings.Add("text", bsFurnZayavInfo, "Data_zeh");
                 this.tbIs_got.DataBindings.Clear();
                 this.tbIs_got.DataBindings.Add("text", bsFurnZayavInfo, "Is_got");
-                if (dtFurnZayavInfo.Rows[0]
-    ["Is_got"].ToString() == "--".ToString())
+                if (dtFurnZayavInfo.Rows[0]["Is_got"].ToString() == "--".ToString())
                 {
                     tbIs_got.ForeColor = Color.Red;
                     mtbData_zeh.ForeColor = Color.Red;
@@ -148,8 +147,7 @@ namespace SewingProduction
                 this.mtbData_cd.DataBindings.Add("text", bsFurnZayavInfo, "Data_cd");
                 this.tbOtgrStat.DataBindings.Clear();
                 this.tbOtgrStat.DataBindings.Add("text", bsFurnZayavInfo, "OtgrStat");
-                if (dtFurnZayavInfo.Rows[0]
-    ["OtgrStat"].ToString() == 'V'.ToString())
+                if (dtFurnZayavInfo.Rows[0]["OtgrStat"].ToString() == 'V'.ToString())
                 {
                     tbOtgrStat.ForeColor = Color.Red;
                     mtbData_cd.ForeColor = Color.Red;
@@ -252,6 +250,7 @@ namespace SewingProduction
                         bsRasInfo.DataSource = dtRasInfo;
 
                         tbPszRpcNom.Text = "РЦ" + dtRasInfo.Rows[0]["PszRpcNom"].ToString();
+                        //  gridView1.GetDataRow(e.RowHandle)["id"]
                         tbArtTradeMark.Text = dtRasInfo.Rows[0]["ArtTradeMark"].ToString();
                         //MessageBox.Show(dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString());
                         this.xtraTabControl1.Refresh();
