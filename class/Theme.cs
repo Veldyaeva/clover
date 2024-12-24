@@ -298,6 +298,16 @@ namespace SewingProduction
         // Цвета для градиента на форме
             public static readonly Color GradientStartColor = Color.FromArgb(240, 240, 255); // LightLavander
             public static readonly Color GradientEndColor = Color.FromArgb(176, 148, 226); // Goldenrod
+
+        // Стили кнопок
+        public static Color OkButtonBackground { get; set; } = Color.LightGreen;
+        public static Color OkButtonTextColor { get; set; } = Color.Black;
+        public static string OkButtonText { get; set; } = "OK";
+        public static Color CancelButtonBackground { get; set; } = Color.IndianRed;
+        public static Color CancelButtonTextColor { get; set; } = Color.White;
+        public static string CancelButtonText { get; set; } = "Cancel";
+
+
     }
     #endregion
 }
