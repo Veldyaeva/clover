@@ -31,7 +31,7 @@ using DevExpress.Utils.Gesture;
 
 namespace SewingProduction
 {
-    public partial class CardByNom : Form
+    public partial class CardByNom : CustomForm
     {
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;

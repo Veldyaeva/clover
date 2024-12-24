@@ -154,6 +154,12 @@
     <Compile Include="form\OborudBrig.Designer.cs">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\PlanZagrBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.Designer.cs">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\SpravForAll.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -278,6 +284,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\PlanZagrBrig.resx">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
