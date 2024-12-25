@@ -18,6 +18,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using System;
 using System.ComponentModel;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
@@ -272,6 +273,7 @@ namespace SewingProduction
         public CustomLabel()
         {
             //this.BackColor = Theme.TextBoxBackground;
+            this.BackColor = Color.Transparent;
             this.ForeColor = Theme.LabelText;
             this.Font = Theme.DefaultFont;
 
@@ -315,6 +317,49 @@ namespace SewingProduction
                 // Заливка области градиентом
                 e.Graphics.FillRectangle(brush, rect);
             }
+        }
+        protected System.Data.DataTable ShowRelatedData(string _serv, string query)
+        //System.Windows.Forms.BindingSource bsource
+        {
+            System.Data.DataTable dT = new System.Data.DataTable();
+            try
+            {
+                string _connStr = "";
+                switch (_serv)
+                {
+                    case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
+                    case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
+                    case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
+                }
+                string connectionString = _connStr;
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter();
+
+                    connection.Open();
+                    //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
+                    //{
+                    //using (SqlCommand command = new SqlCommand(query, connection, transaction))
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        //   SqlCommand command = new SqlCommand(query, connection);
+                        //CommandType commandType = command.CommandType;
+
+                        adapter.SelectCommand = command;
+                        adapter.Fill(dT);
+                        //bsource.DataSource = dT;
+                    }
+
+                    // transaction.Commit(); // Подтверждаем транзакцию
+
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return dT;
         }
     }
 }
