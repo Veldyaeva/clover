@@ -25,7 +25,8 @@ namespace SewingProduction.form
         public Articul()
         {
             InitializeComponent();
-
+            groupControl1.BackColor = Theme.ButtonBackground;
+            panelControl1.BackColor = Theme.ButtonBackground;
         }
 
         private void Articul_Load(object sender, EventArgs e)
