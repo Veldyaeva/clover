@@ -10,6 +10,7 @@
 Темно-зелёные акценты (если видны): RGB(120, 167, 137)*/
 
 using DevExpress.CodeParser;
+using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Docking2010.Base;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
