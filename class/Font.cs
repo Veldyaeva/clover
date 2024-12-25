@@ -273,6 +273,7 @@ namespace SewingProduction
         public CustomLabel()
         {
             //this.BackColor = Theme.TextBoxBackground;
+            this.BackColor = Color.Transparent;
             this.ForeColor = Theme.LabelText;
             this.Font = Theme.DefaultFont;
 
