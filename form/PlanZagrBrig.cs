@@ -35,33 +35,37 @@ using System.Xml.Linq;
 
 namespace SewingProduction.form
 {
-    public partial class PlanZagrBrig : Form
+    public partial class PlanZagrBrig : CustomForm
     {
-        public PlanZagrBrig()
-        {
-            InitializeComponent();
-        }
-
         public int XIdBrig;
         public string XNameBrig;
         public System.Data.DataTable dtNomList;
         public System.Data.DataTable dtPzArticulList;
         public System.Data.DataTable dtPzOperList;
+        public PlanZagrBrig()
+        {
+            InitializeComponent();
+        }
+
+        
         public void GetBrigName(int _xIdBrig)
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlDataAdapter adapterBrigName = new SqlDataAdapter();
-                System.Data.DataTable dtBrigName = new System.Data.DataTable();
-                string queryBrigName = $"select brig, id_brig from brig where id_brig = {_xIdBrig} ";
-                SqlCommand commandBrigName = new SqlCommand(queryBrigName, connection);
-                adapterBrigName.SelectCommand = commandBrigName;
-                adapterBrigName.Fill(dtBrigName);
-                //bsPzNomList.DataSource = dtPachList;
-                lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
-            }
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter adapterBrigName = new SqlDataAdapter();
+            //    System.Data.DataTable dtBrigName = new System.Data.DataTable();
+            //    string queryBrigName = $"select brig, id_brig from brig where id_brig = {_xIdBrig} ";
+            //    SqlCommand commandBrigName = new SqlCommand(queryBrigName, connection);
+            //    adapterBrigName.SelectCommand = commandBrigName;
+            //    adapterBrigName.Fill(dtBrigName);
+            //    //bsPzNomList.DataSource = dtPachList;
+            //    lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
+            //}
+            string queryBrigName = $"select brig, id_brig from brig where id_brig = {_xIdBrig} ";
+            var dtBrigName = ShowRelatedData("ace", queryBrigName);
+            lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
         }
         public void GetMonthList()
         {

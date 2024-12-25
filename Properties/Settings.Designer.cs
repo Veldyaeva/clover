@@ -66,5 +66,16 @@ namespace SewingProduction.Properties {
                 return ((string)(this["ACEConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OMS;Initial Catalog=PLANETA;User ID=readonly;Password=qwerty12345;Enc" +
+            "rypt=False")]
+        public string OMSConnectionString {
+            get {
+                return ((string)(this["OMSConnectionString"]));
+            }
+        }
     }
 }
