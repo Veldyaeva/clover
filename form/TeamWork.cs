@@ -14,7 +14,7 @@ using DevExpress.XtraBars.Customization;
 using DevExpress.XtraWaitForm;
 using DevExpress.ChartRangeControlClient.Core;
 using BindingSource = System.Windows.Forms.BindingSource;
-
+using SewingProduction;
 
 namespace SewingProduction.form
 {
@@ -202,11 +202,7 @@ namespace SewingProduction.form
 
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.Show();
-        }
+   
 
         private void customButton2_Click(object sender, EventArgs e)
         {
@@ -217,6 +213,8 @@ namespace SewingProduction.form
         {
          //   ShowArtData("SELECT SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod FROM sp_articul where annId is NULL", customGridControl1);
         }
+
+        //Загрузка таблиц "Артикулы для увязки" и "РТ для увязки"
         private void ShowArtData(string query, GridControl grid)
         {
             try
@@ -249,53 +247,30 @@ namespace SewingProduction.form
         }
 
 
-
+        //Загрузка таблицы "Артикулы для увязки"
         private void customGridControl2_Load(object sender, EventArgs e)
         {
             ShowArtData("SELECT kod, grup, articul, mod, st FROM art_norm_n", customGridControl2);
         }
 
 
-
+        //Предварительный архив
         private void customGridControl4_Load(object sender, EventArgs e)
         {
             ShowArtData("SELECT kod, articul FROM art_norm_n", customGridControl4);
 
         }
 
+        // не описанные - sec_shv=0 & arh = 0
         private void customButton3_Click(object sender, EventArgs e)
         {
-            gridView3.ActiveFilterString = string.Format("kod LIKE '{0}'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
+            gridView3.ActiveFilterString = string.Format("[colsec_shv] = '{0}' AND [colarh] = '{1}'", 0, 0);// string.Format("kod LIKE '{0}'", textBox1.Text); // Поиск по полю FieldName, содержащему SearchText
 
         }
 
+        //Отвязка артикула от РТ
         private void customButton7_Click(object sender, EventArgs e)
         {
-
-            //// gridView10.FocusedRowHandle
-            //// Получение индекса выбранной строки
-            //int[] selectedRows = gridView10.GetSelectedRows();
-
-            //if (selectedRows.Length > 0)
-            //{
-            //    // Получение данных выбранной строки
-            //    var rowData = gridView10.GetRow(selectedRows[0]) as DataView;
-            //    if (rowData != null)
-            //    {
-            //        // Обновление данных после редактирования
-            //        //                    UpdateDatabase(rowData);
-            //        //rowData.annId = null;
-            //        ResetAnnId(0);
-            //        gridControl1.RefreshDataSource();
-
-            //        //  }
-            //    }
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Выберите запись для редактирования.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-
             // Получение индекса выбранной строки в customGridControl5
             int[] selectedRows = gridView10.GetSelectedRows();
 
@@ -310,7 +285,7 @@ namespace SewingProduction.form
                     {
                         // Обнуление annId
                         ResetAnnId(sp_articul);
-                        MessageBox.Show("annId успешно обнулен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("РТ успешно отвязано", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         // Обновление данных после изменения
                         //
@@ -320,7 +295,7 @@ namespace SewingProduction.form
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Ошибка при обнулении annId: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ошибка отвязки РТ: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -331,7 +306,7 @@ namespace SewingProduction.form
 
         }
 
-
+        //отвязка РТ - обнуление annID в таблице sp_articul
         private void ResetAnnId(int sp_articul)
         {
             string query = "UPDATE sp_articul SET annId = NULL WHERE kod = @Id";
@@ -346,12 +321,14 @@ namespace SewingProduction.form
             }
         }
 
+        //Загрузка вкладки "текущие работы"
         private void xtraTabControl2_Enter(object sender, EventArgs e)
         {
             loadConnectionTab("SELECT annID, kod, articul, status FROM art_norm_n", artnormnBindingSource1, customGridControl2 );
             loadConnectionTab("Select * from sp_articul where annId is null", sparticulBindingSource1, customGridControl1);
 
         }
+        //Загрузка таблиц "Артикулы для увязки" и "РТ для увязки"
         private void loadConnectionTab(string query, BindingSource bindingSource, CustomGridControl gridControl)
         {
             string _query = query;
@@ -395,6 +372,7 @@ namespace SewingProduction.form
             }
         }
 
+        //Реализация зависимости таблиц "Артикулы для увязки" и  "norm_rasz"
         private void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle >= 0)
@@ -403,11 +381,63 @@ namespace SewingProduction.form
                 int Id = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annID"));
                 string query = $"SELECT * FROM norm_rasz WHERE [norm_rasz].annId = '{Id}'";
                 ShowRelatedData(Id, query, customGridControl3, normraszBindingSource1);
-
             }
         }
 
+        //Увязка выбранных артикулов
         private void customButton4_Click(object sender, EventArgs e)
+        {
+            // Получение индекса выбранной строки в customGridControl
+            int[] selectedArticuls = gridView7.GetSelectedRows();
+            
+            if (selectedArticuls.Length > 0)
+            {
+                foreach (var rowHandle in selectedArticuls)
+                {
+                    // Получение ID строки из norm_rasz
+                    int sp_articul = Convert.ToInt32(gridView10.GetRowCellValue(rowHandle, "kod"));
+                    int ann = Convert.ToInt32(gridView10.GetRowCellValue(rowHandle, "kod"));
+
+                    try
+                    {
+                        // Запись annId
+                     //   UpdateAnnId(sp_articul, ann);
+                        MessageBox.Show("annId успешно обнулен.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // Обновление данных после изменения
+                        //
+                        customGridControl5.RefreshDataSource();
+
+                        gridView10.RefreshData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Ошибка при обнулении annId: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Выберите запись для редактирования.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+
+        }
+
+        private void UpdateAnnId(int sp_articul, int ann)
+        {
+            string query = "UPDATE sp_articul SET annId = @annId WHERE kod = @Id";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", sp_articul);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void customButton5_Click(object sender, EventArgs e)
         {
 
         }
