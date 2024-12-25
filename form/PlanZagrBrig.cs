@@ -71,23 +71,25 @@ namespace SewingProduction.form
         {
             try
             {
-                string connectionString = Properties.Settings.Default.ACEConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapterMonthList = new SqlDataAdapter();
-                    System.Data.DataTable dtMonthList = new System.Data.DataTable();
-                    string queryMonthList = $"SELECT * FROM spr_month ";
-                    SqlCommand commandMonthList = new SqlCommand(queryMonthList, connection);
-                    adapterMonthList.SelectCommand = commandMonthList;
-                    adapterMonthList.Fill(dtMonthList);
-                    bsMonthList.DataSource = dtMonthList;
-
-                    cbMonthList.DataSource = bsMonthList;
-                    cbMonthList.DisplayMember = "name_month";
-                    cbMonthList.ValueMember = "kod";
-                    cbMonthList.SelectedIndex = -1;
-                }
+                //string connectionString = Properties.Settings.Default.ACEConnectionString;
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    connection.Open();
+                //    SqlDataAdapter adapterMonthList = new SqlDataAdapter();
+                //    System.Data.DataTable dtMonthList = new System.Data.DataTable();
+                //    string queryMonthList = $"SELECT * FROM spr_month ";
+                //    SqlCommand commandMonthList = new SqlCommand(queryMonthList, connection);
+                //    adapterMonthList.SelectCommand = commandMonthList;
+                //    adapterMonthList.Fill(dtMonthList);
+                    
+                //}
+                string queryMonthList = $"SELECT * FROM spr_month ";
+                var dtMonthList = ShowRelatedData("ace", queryMonthList);
+                bsMonthList.DataSource = dtMonthList;
+                cbMonthList.DataSource = bsMonthList;
+                cbMonthList.DisplayMember = "name_month";
+                cbMonthList.ValueMember = "kod";
+                cbMonthList.SelectedIndex = -1;
             }
             catch (Exception e)
             {
@@ -102,21 +104,26 @@ namespace SewingProduction.form
             }
             else
             {
-                string connectionString = Properties.Settings.Default.ACEConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapterPachList = new SqlDataAdapter();
-                    System.Data.DataTable dtPachList = new System.Data.DataTable();
-                    string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
-                    queryPachList += $"	from raskr_zeh_up ";
-                    queryPachList += $"	where nom = {_nlNom} ";
-                    SqlCommand commandPachList = new SqlCommand(queryPachList, connection);
-                    adapterPachList.SelectCommand = commandPachList;
-                    adapterPachList.Fill(dtPachList);
-                    //bsPzNomList.DataSource = dtPachList;
-                    tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
-                }
+                //string connectionString = Properties.Settings.Default.ACEConnectionString;
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    connection.Open();
+                //    SqlDataAdapter adapterPachList = new SqlDataAdapter();
+                //    System.Data.DataTable dtPachList = new System.Data.DataTable();
+                //    string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
+                //    queryPachList += $"	from raskr_zeh_up ";
+                //    queryPachList += $"	where nom = {_nlNom} ";
+                //    SqlCommand commandPachList = new SqlCommand(queryPachList, connection);
+                //    adapterPachList.SelectCommand = commandPachList;
+                //    adapterPachList.Fill(dtPachList);
+                //    //bsPzNomList.DataSource = dtPachList;
+                //    tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
+                //}
+                string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
+                queryPachList += $"	from raskr_zeh_up ";
+                queryPachList += $"	where nom = {_nlNom} ";
+                var dtPachList = ShowRelatedData("ace", queryPachList);
+                tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
             }
         }
         //public static System.Data.DataTable GroupAndSum(System.Data.DataTable _sourceTable, string _groupByColumn, string _sumColumn)
@@ -254,72 +261,129 @@ namespace SewingProduction.form
         }
         private void PlanZagrBrigLoadData()
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                this.gridColumn15.Visible = false;
-                this.gridColumn16.Visible = false;
-                this.gridColumn17.Visible = false;
-                connection.Open();
-                SqlDataAdapter adapterNomList = new SqlDataAdapter();
-                dtNomList = new System.Data.DataTable();
-                string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
-                SqlCommand commandNomList = new SqlCommand(queryNomList, connection);
-                adapterNomList.SelectCommand = commandNomList;
-                adapterNomList.Fill(dtNomList);
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    this.gridColumn15.Visible = false;
+            //    this.gridColumn16.Visible = false;
+            //    this.gridColumn17.Visible = false;
+            //    connection.Open();
+            //    SqlDataAdapter adapterNomList = new SqlDataAdapter();
+            //    dtNomList = new System.Data.DataTable();
+            //    string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
+            //    SqlCommand commandNomList = new SqlCommand(queryNomList, connection);
+            //    adapterNomList.SelectCommand = commandNomList;
+            //    adapterNomList.Fill(dtNomList);
                 
-                this.gcPzNomList.Location = this.gcPzNomList.Location;
-                this.gcPzNomList.Size = this.gcPzNomList.Size;
+            //    this.gcPzNomList.Location = this.gcPzNomList.Location;
+            //    this.gcPzNomList.Size = this.gcPzNomList.Size;
 
-                var queryPzArticulList = from row in dtNomList.AsEnumerable()
+            //    var queryPzArticulList = from row in dtNomList.AsEnumerable()
+            //                             //where (row.IsNull("nlDateCd") || row.Field<DateTime>("nlDateCd") == DateTime.MinValue)
+            //                             group row by new {
+            //                          nlGrup = row.Field<string>("nlGrup"),
+            //                          nlArticul = row.Field<string>("nlArticul"),
+            //                          nlMod = row.Field<string>("nlMod"),
+            //                          nlGrupK = row.Field<string>("nlGrupK"),
+            //                          nlArticulK = row.Field<string>("nlArticulK"),
+            //                          nlModK = row.Field<string>("nlModK"),
+            //                          nlKoddRt = row.Field<string>("nlKoddRt"),
+            //                          nlKodd = row.Field<string>("nlKodd"),
+            //                          nlKodd7 = row.Field<string>("nlKodd7"),
+            //                             } into g
+            //                      select new
+            //                      {
+            //                          alGrup = g.Key.nlGrup,
+            //                          alArticul = g.Key.nlArticul,
+            //                          alMod = g.Key.nlMod,
+            //                          alGrupK = g.Key.nlGrupK,
+            //                          alArticulK = g.Key.nlArticulK,
+            //                          alModK = g.Key.nlModK,
+            //                          alKoddRt = g.Key.nlKoddRt,
+            //                          alKodd = g.Key.nlKodd,
+            //                          alKodd7 = g.Key.nlKodd7,
+            //                          alV = 0,
+            //                          alArtSort = (g.Key.nlArticulK.Length != 0 ? g.Key.nlArticulK : g.Key.nlArticul),
+            //                          alModSort = (g.Key.nlModK.Length != 0 ? g.Key.nlModK : g.Key.nlMod),
+            //                          alDataCdPl = g.Min(row => row.Field<DateTime>("nlDataCdPl")),
+            //                          alKol = g.Sum(row => row.Field<decimal>("nlKol")),
+            //                          alRowNumber = 0
+            //                      };
+                
+            //    dtPzArticulList = ConvertToDataTable(queryPzArticulList);
+            //    string _alKodd7 = "";
+            //    string _alMod = "";
+            //    if (dtPzArticulList.Rows.Count != 0)
+            //    {
+            //        dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
+            //        _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alKodd7"].ToString();
+            //        _alMod = dtPzArticulList.Rows[0]["alMod"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alMod"].ToString();
+            //        for (int i = 0; i < dtPzArticulList.Rows.Count; i++)
+            //        {
+            //            dtPzArticulList.Rows[i]["alRowNumber"] = i + 1;
+            //        }
+            //    }
+            //    bsPzArticulList.DataSource = dtPzArticulList;
+
+            //    GetArticulNomList(_alKodd7, _alMod);
+            //}
+
+            this.gridColumn15.Visible = false;
+            this.gridColumn16.Visible = false;
+            this.gridColumn17.Visible = false;
+            string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
+            dtNomList = ShowRelatedData("ace", queryNomList);
+            this.gcPzNomList.Location = this.gcPzNomList.Location;
+            this.gcPzNomList.Size = this.gcPzNomList.Size;
+            var queryPzArticulList = from row in dtNomList.AsEnumerable()
                                          //where (row.IsNull("nlDateCd") || row.Field<DateTime>("nlDateCd") == DateTime.MinValue)
-                                         group row by new {
-                                      nlGrup = row.Field<string>("nlGrup"),
-                                      nlArticul = row.Field<string>("nlArticul"),
-                                      nlMod = row.Field<string>("nlMod"),
-                                      nlGrupK = row.Field<string>("nlGrupK"),
-                                      nlArticulK = row.Field<string>("nlArticulK"),
-                                      nlModK = row.Field<string>("nlModK"),
-                                      nlKoddRt = row.Field<string>("nlKoddRt"),
-                                      nlKodd = row.Field<string>("nlKodd"),
-                                      nlKodd7 = row.Field<string>("nlKodd7"),
-                                         } into g
-                                  select new
-                                  {
-                                      alGrup = g.Key.nlGrup,
-                                      alArticul = g.Key.nlArticul,
-                                      alMod = g.Key.nlMod,
-                                      alGrupK = g.Key.nlGrupK,
-                                      alArticulK = g.Key.nlArticulK,
-                                      alModK = g.Key.nlModK,
-                                      alKoddRt = g.Key.nlKoddRt,
-                                      alKodd = g.Key.nlKodd,
-                                      alKodd7 = g.Key.nlKodd7,
-                                      alV = 0,
-                                      alArtSort = (g.Key.nlArticulK.Length != 0 ? g.Key.nlArticulK : g.Key.nlArticul),
-                                      alModSort = (g.Key.nlModK.Length != 0 ? g.Key.nlModK : g.Key.nlMod),
-                                      alDataCdPl = g.Min(row => row.Field<DateTime>("nlDataCdPl")),
-                                      alKol = g.Sum(row => row.Field<decimal>("nlKol")),
-                                      alRowNumber = 0
-                                  };
-                
-                dtPzArticulList = ConvertToDataTable(queryPzArticulList);
-                string _alKodd7 = "";
-                string _alMod = "";
-                if (dtPzArticulList.Rows.Count != 0)
-                {
-                    dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
-                    _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alKodd7"].ToString();
-                    _alMod = dtPzArticulList.Rows[0]["alMod"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alMod"].ToString();
-                    for (int i = 0; i < dtPzArticulList.Rows.Count; i++)
-                    {
-                        dtPzArticulList.Rows[i]["alRowNumber"] = i + 1;
-                    }
-                }
-                bsPzArticulList.DataSource = dtPzArticulList;
+                                     group row by new
+                                     {
+                                         nlGrup = row.Field<string>("nlGrup"),
+                                         nlArticul = row.Field<string>("nlArticul"),
+                                         nlMod = row.Field<string>("nlMod"),
+                                         nlGrupK = row.Field<string>("nlGrupK"),
+                                         nlArticulK = row.Field<string>("nlArticulK"),
+                                         nlModK = row.Field<string>("nlModK"),
+                                         nlKoddRt = row.Field<string>("nlKoddRt"),
+                                         nlKodd = row.Field<string>("nlKodd"),
+                                         nlKodd7 = row.Field<string>("nlKodd7"),
+                                     } into g
+                                     select new
+                                     {
+                                         alGrup = g.Key.nlGrup,
+                                         alArticul = g.Key.nlArticul,
+                                         alMod = g.Key.nlMod,
+                                         alGrupK = g.Key.nlGrupK,
+                                         alArticulK = g.Key.nlArticulK,
+                                         alModK = g.Key.nlModK,
+                                         alKoddRt = g.Key.nlKoddRt,
+                                         alKodd = g.Key.nlKodd,
+                                         alKodd7 = g.Key.nlKodd7,
+                                         alV = 0,
+                                         alArtSort = (g.Key.nlArticulK.Length != 0 ? g.Key.nlArticulK : g.Key.nlArticul),
+                                         alModSort = (g.Key.nlModK.Length != 0 ? g.Key.nlModK : g.Key.nlMod),
+                                         alDataCdPl = g.Min(row => row.Field<DateTime>("nlDataCdPl")),
+                                         alKol = g.Sum(row => row.Field<decimal>("nlKol")),
+                                         alRowNumber = 0
+                                     };
 
-                GetArticulNomList(_alKodd7, _alMod);
+            dtPzArticulList = ConvertToDataTable(queryPzArticulList);
+            string _alKodd7 = "";
+            string _alMod = "";
+            if (dtPzArticulList.Rows.Count != 0)
+            {
+                dtPzArticulList.DefaultView.Sort = "alDataCdPl, alArtSort, alModSort, alArticul, alMod ASC";
+                _alKodd7 = dtPzArticulList.Rows[0]["alKodd7"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alKodd7"].ToString();
+                _alMod = dtPzArticulList.Rows[0]["alMod"].ToString() == null ? "" : dtPzArticulList.Rows[0]["alMod"].ToString();
+                for (int i = 0; i < dtPzArticulList.Rows.Count; i++)
+                {
+                    dtPzArticulList.Rows[i]["alRowNumber"] = i + 1;
+                }
             }
+            bsPzArticulList.DataSource = dtPzArticulList;
+
+            GetArticulNomList(_alKodd7, _alMod);
         }
         private void GetArticulNomList(string _alKodd7, string _alMod)
         {
@@ -373,19 +437,22 @@ namespace SewingProduction.form
 
         private void GetPztOperList(string _xmlString)
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlDataAdapter adapterPzOperList = new SqlDataAdapter();
-                dtPzOperList = new System.Data.DataTable();
-                string queryPzOperList = $"exec planZagrTwo_view ''";
-                //queryPartNaklList += $" order by id";
-                SqlCommand commandPzOperList = new SqlCommand(queryPzOperList, connection);
-                adapterPzOperList.SelectCommand = commandPzOperList;
-                adapterPzOperList.Fill(dtPzOperList);
-                bsPzOperList.DataSource = dtPzOperList;
-            }
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter adapterPzOperList = new SqlDataAdapter();
+            //    dtPzOperList = new System.Data.DataTable();
+            //    string queryPzOperList = $"exec planZagrTwo_view ''";
+            //    //queryPartNaklList += $" order by id";
+            //    SqlCommand commandPzOperList = new SqlCommand(queryPzOperList, connection);
+            //    adapterPzOperList.SelectCommand = commandPzOperList;
+            //    adapterPzOperList.Fill(dtPzOperList);
+                
+            //}
+            string queryPzOperList = $"exec planZagrTwo_view ''";
+            var dtPzOperList = ShowRelatedData("ace", queryPzOperList);
+            bsPzOperList.DataSource = dtPzOperList;
         }
         //private int LocateByNomInArticulList(string _cnAlArticul, string _vAlArticul, string _cnAlMod, string _vAlMod, string _cnAlKoddRT, string _vAlKoddRT, string _cnAlArticulK, string _vAlArticulK, string _cnAlModK, string _vAlModK)
         //{
