@@ -296,21 +296,6 @@ namespace SewingProduction.form
             //this.customButton1.Text = "customButton1";
             //this.customButton1.UseVisualStyleBackColor = false;
             // 
-            // groupControl2
-            // 
-            this.groupControl2.Location = new System.Drawing.Point(502, 321);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(200, 100);
-            this.groupControl2.TabIndex = 9;
-            this.groupControl2.Text = "groupControl2";
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Location = new System.Drawing.Point(746, 321);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(200, 100);
-            this.panelControl1.TabIndex = 10;
-            // 
             // Articul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
