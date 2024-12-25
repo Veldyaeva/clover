@@ -11,6 +11,7 @@ using DevExpress.DataAccess.Sql;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.PivotGrid.QueryMode;
 using DevExpress.Utils;
+using DevExpress.Utils.DirectXPaint.Svg;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.Xpo.Helpers;
@@ -31,7 +32,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Xml;
 using System.Xml.Linq;
+using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.form
 {
@@ -473,11 +476,11 @@ namespace SewingProduction.form
         //    return -1; // Строка не найдена
         //}
 
-        public static string DataRowToXml3(DataRow dataRow, string _row)
+        public static String DataRowToXml3(DataRow dataRow, string _row)
         {
             XElement root = new XElement(_row,
                 from System.Data.DataColumn column in dataRow.Table.Columns
-                select new XElement(column.ColumnName.ToLower(), dataRow[column])
+                select new XElement(column.ColumnName.ToLower(), dataRow[column].ToString().Trim())
             );
             return root.ToString();
         }
@@ -717,37 +720,83 @@ namespace SewingProduction.form
             //}
             gridView2.FocusedColumn = gridView2.Columns["nlIzNakl"];
             gridView2.FocusedColumn = gridView2.Columns["nlV"];
-            MessageBox.Show(gridView2.GetRowCellValue(gridView2.FocusedRowHandle, gridView2.FocusedColumn).ToString());
+            //MessageBox.Show(gridView2.GetRowCellValue(gridView2.FocusedRowHandle, gridView2.FocusedColumn).ToString());
             
             if (gridView2.GetRowCellValue(gridView2.FocusedRowHandle, gridView2.FocusedColumn).ToString() == "1")
             {
-                
+
                 //string xml3 = DataRowToXml3(gridView1.GetDataRow(gridView2.FocusedRowHandle));
                 //Console.WriteLine(xml3);
                 //Console.WriteLine(DataRowToXml3(gridView1.GetDataRow(gridView2.FocusedRowHandle)));
+                //---------------------------------
+                //string connectionString = Properties.Settings.Default.ACEConnectionString;
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    //MessageBox.Show(DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list"));
+                //    string sqlQuery = $"exec planZagrTwo_view '{DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list")}'";
+                //    using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                //    {
+                //        connection.Open();
+                //        try
+                //        {
+                //            using (SqlDataReader reader = command.ExecuteReader())
+                //            {
+                //                dtPzOperList.Load(reader);
+                //            }
+                //        }
+                //        catch (Exception ex)
+                //        {
+                //            //Handle exceptions
+                //            MessageBox.Show(ex.ToString());
+                //        }
+                //    }
+                //}
+                //---------------------------------
+                
+                //String _xmlParamString = DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list");
+                ////if (_xmlParamString.Length > )
+                //string sqlQuery = $"exec planZagrTwo_view '{_xmlParamString}'";
+                //var dtPzOperList = ShowRelatedData("ace", sqlQuery);
 
+                //--------------------------
+                String _xmlParamString = DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list");
                 string connectionString = Properties.Settings.Default.ACEConnectionString;
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    MessageBox.Show(DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list"));
-                    string sqlQuery = $"exec planZagrTwo_view '{DataRowToXml3(gridView2.GetDataRow(gridView2.FocusedRowHandle), "nom_kod_list")}'";
+                    string sqlQuery = "SELECT top 0 * FROM sp_articul"; // Original SELECT query
                     using (SqlCommand command = new SqlCommand(sqlQuery, connection))
                     {
                         connection.Open();
-                        try
+
+                        //Change the sql query to call the stored procedure
+                        System.Data.DataTable dtPzOperList = new System.Data.DataTable();
+                        string storedProcedureName = "planZagrTwo_view";
+                        command.CommandType = CommandType.StoredProcedure; // Use a stored procedure
+                        command.CommandText = storedProcedureName;
+                        SqlParameter xmlParameter = new SqlParameter("@xmlDoc", SqlDbType.Xml); //Parameter name is dependent on the stored procedure.
+                        xmlParameter.Value = _xmlParamString; //Set value using xml string.
+                                                      //Alternative:
+                                                      //using (XmlReader reader = XmlReader.Create(new StringReader(xmlData)))
+                                                      //    xmlParameter.Value = reader; //Set value using XMLReader.
+
+                        command.Parameters.Add(xmlParameter);
+                        
+                        //command.Parameters.Clear(); // Remove all parameters before adding new ones.
+                        //command.Parameters.AddWithValue("@xmlDoc", _xmlParamString); // Add parameters for the stored proc
+
+                        using (SqlDataReader reader2 = command.ExecuteReader())
                         {
-                            using (SqlDataReader reader = command.ExecuteReader())
-                            {
-                                dtPzOperList.Load(reader);
-                            }
+                            // ... Process results from the stored procedure ...
+                            //reader2.Read();
+                            dtPzOperList.Load(reader2);
                         }
-                        catch (Exception ex)
-                        {
-                            //Handle exceptions
-                            MessageBox.Show(ex.ToString());
-                        }
+
                     }
                 }
+                //--------------------------
+
+
+                bsPzOperList.DataSource = dtPzOperList;
             }
 
         }

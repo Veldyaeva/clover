@@ -10,6 +10,7 @@
 Темно-зелёные акценты (если видны): RGB(120, 167, 137)*/
 
 using DevExpress.CodeParser;
+using DevExpress.Xpo.DB;
 using DevExpress.XtraBars.Docking2010.Base;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGauges.Core.Base;
@@ -335,7 +336,6 @@ namespace SewingProduction
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     SqlDataAdapter adapter = new SqlDataAdapter();
-
                     connection.Open();
                     //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
                     //{
@@ -344,8 +344,12 @@ namespace SewingProduction
                     {
                         //   SqlCommand command = new SqlCommand(query, connection);
                         //CommandType commandType = command.CommandType;
-
-                        adapter.SelectCommand = command;
+                        //command.CommandType = DBStoredProcedure;
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            adapter.SelectCommand = command;
+                            
+                        }
                         adapter.Fill(dT);
                         //bsource.DataSource = dT;
                     }
