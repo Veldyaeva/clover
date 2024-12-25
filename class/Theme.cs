@@ -273,7 +273,7 @@ namespace SewingProduction
     public static class Theme
     {
         // Общие шрифты
-        public static readonly Font DefaultFont = new Font("Arial", 12, FontStyle.Regular);
+        public static readonly Font DefaultFont = new Font("Arial", 10, FontStyle.Regular);
 
         // Цвета для кнопок
         public static readonly Color ButtonBackground = Color.FromArgb(230, 230, 250); // Lavender
@@ -283,11 +283,12 @@ namespace SewingProduction
         public static readonly int ButtonRoundRadius = 5;
 
         // Высота кнопки
-        public static readonly int ButtonHeight = 30;
+        public static readonly int ButtonHeight = 25;
 
         // Цвета для текстовых полей
         public static readonly Color TextBoxBackground = Color.FromArgb(248, 248, 255); // GhostWhite
         public static readonly Color TextBoxText = Color.FromArgb(72, 61, 139); // DarkSlateBlue
+        public static readonly Color LabelText = Color.FromArgb(0, 0, 0); // Black
 
         // Высота текстовых полей
         public static readonly int TextBoxHeight = 20;

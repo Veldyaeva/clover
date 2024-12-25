@@ -45,7 +45,6 @@ namespace SewingProduction
         //    PrintingSystemBase pb = e.PrintingSystem as PrintingSystemBase;
         //    pb.PageSettings.Landscape = true;
         //}
-
         private string GetIzNakl()
         {
             string iz = "";
@@ -63,7 +62,6 @@ namespace SewingProduction
             }
             return iz;
         }
-
         private void UpdateFurnitUpak()
         {
             string PachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
@@ -205,7 +203,6 @@ namespace SewingProduction
                 bsProizvCombIzdVZP.DataSource = dtProizvCombIzdVZP;
             }
         }
-        
         private void CardByNom_Load(object sender, EventArgs e)
         {
             this.gridColumn40.Visible = false;
@@ -215,7 +212,6 @@ namespace SewingProduction
             this.tbYearPach.Text = Convert.ToString(DateTime.Now.Year);
             tbNomPach.Select();
         }
-
         private void tbNomPach_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
@@ -239,8 +235,16 @@ namespace SewingProduction
                         bsNaklList.DataSource = dtNaklList;
                         bsNaklList.Sort = "iz asc";
                         //this.gcNaklList.Refresh();
+                        if (dtNaklList.Rows.Count != 0)
+                        {
+                            this.xtraTabControl1.Enabled = true;
+                        }
+                        else
+                        {
+                            this.xtraTabControl1.Enabled = false;
+                        }
 
-                        SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
+                            SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
                         DataTable dtRasInfo = new DataTable();
                         //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
                         string queryRasInfo = $"exec GetRasInfoView '{PachKod}' ";
@@ -411,7 +415,6 @@ namespace SewingProduction
                 }
             }
         }
-
         private void btnNaklPrint_Click(object sender, EventArgs e)
         {
             string iz = GetIzNakl();
@@ -421,7 +424,6 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             
@@ -434,7 +436,6 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void btnNaklPart_Click(object sender, EventArgs e)
         {
             if (btnNaklPart.Text == "Показать информацию по делению накладной")
@@ -469,7 +470,6 @@ namespace SewingProduction
             }
             
         }
-
         private void button6_Click(object sender, EventArgs e)
         {
             int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
@@ -483,7 +483,6 @@ namespace SewingProduction
             reportPrintTool1.ShowPreviewDialog();
 
         }
-
         private void button5_Click(object sender, EventArgs e)
         {
             int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
@@ -496,7 +495,6 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void button4_Click(object sender, EventArgs e)
         {
             int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
@@ -508,7 +506,6 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void xtraTabControl1_Selecting(object sender, DevExpress.XtraTab.TabPageCancelEventArgs e)
         {
             //button11_Click(sender, e);
@@ -521,7 +518,6 @@ namespace SewingProduction
                 UpdateProizvCombIzd();
             //}
         }
-
         private void btnZayavFurnPrint_Click(object sender, EventArgs e)
         {
             PrintFurnUpakZayavReport report1 = new PrintFurnUpakZayavReport();
@@ -530,8 +526,7 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
-        private void button9_Click(object sender, EventArgs e)
+        private void btnZayavUpakPrint_Click(object sender, EventArgs e)
         {
             PrintFurnUpakZayavReport report1 = new PrintFurnUpakZayavReport();
             report1.RequestParameters = false;
@@ -539,13 +534,11 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void button10_Click(object sender, EventArgs e)
         {
             FurnUpakDeliveryInfo FDI = new FurnUpakDeliveryInfo(fkodfd.Substring(0,12));
             FDI.Show();
         }
-
         private void btnFullKKPrint_Click(object sender, EventArgs e)
         {
             PrintFullKKReport report1 = new PrintFullKKReport();
@@ -554,7 +547,6 @@ namespace SewingProduction
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
         }
-
         private void btnUpakKKPrint_Click(object sender, EventArgs e)
         {
             PrintKKReport report1 = new PrintKKReport();
@@ -576,12 +568,10 @@ namespace SewingProduction
         {
 
         }
-
         private void simpleButton1_Click(object sender, EventArgs e)
         {
 
         }
-
         private void sbProizvCombIzdSP_Click(object sender, EventArgs e)
         {
             ////gcProizvCombIzdSP.ShowPrintPreview();
@@ -599,12 +589,10 @@ namespace SewingProduction
             gcProizvCombIzdSP.ShowPrintPreview();
 
         }
-
         private void button11_Click(object sender, EventArgs e)
         {
             
         }
-
         private void btnFurnKKPrint_Click(object sender, EventArgs e)
         {
             //string iz = GetIzNakl();
