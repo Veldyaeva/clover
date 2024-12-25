@@ -325,7 +325,7 @@ namespace SewingProduction
             try
             {
                 string _connStr = "";
-                switch (_serv)
+                switch (_serv.ToLower())
                 {
                     case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
                     case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
