@@ -282,26 +282,33 @@ namespace SewingProduction
         }
         private void UpdateProizvCombIzd()
         {
-            string connectionString = Properties.Settings.Default.ACEConnectionString;
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                SqlDataAdapter adapterProizvCombIzdSP = new SqlDataAdapter();
-                DataTable dtProizvCombIzdSP = new DataTable();
-                string queryProizvCombIzdSP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 1 ";  // 1 - расчеты ШП
-                SqlCommand commandProizvCombIzdSP = new SqlCommand(queryProizvCombIzdSP, connection);
-                adapterProizvCombIzdSP.SelectCommand = commandProizvCombIzdSP;
-                adapterProizvCombIzdSP.Fill(dtProizvCombIzdSP);
-                bsProizvCombIzdSP.DataSource = dtProizvCombIzdSP;
+            //string connectionString = Properties.Settings.Default.ACEConnectionString;
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    connection.Open();
+            //    SqlDataAdapter adapterProizvCombIzdSP = new SqlDataAdapter();
+            //    DataTable dtProizvCombIzdSP = new DataTable();
+            //    string queryProizvCombIzdSP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 1 ";  // 1 - расчеты ШП
+            //    SqlCommand commandProizvCombIzdSP = new SqlCommand(queryProizvCombIzdSP, connection);
+            //    adapterProizvCombIzdSP.SelectCommand = commandProizvCombIzdSP;
+            //    adapterProizvCombIzdSP.Fill(dtProizvCombIzdSP);
+            //    bsProizvCombIzdSP.DataSource = dtProizvCombIzdSP;
 
-                SqlDataAdapter adapterProizvCombIzdVZP = new SqlDataAdapter();
-                DataTable dtProizvCombIzdVZP = new DataTable();
-                string queryProizvCombIzdVZP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 2 ";  // 2 - расчеты ВЗП
-                SqlCommand commandProizvCombIzdVZP = new SqlCommand(queryProizvCombIzdVZP, connection);
-                adapterProizvCombIzdVZP.SelectCommand = commandProizvCombIzdVZP;
-                adapterProizvCombIzdVZP.Fill(dtProizvCombIzdVZP);
-                bsProizvCombIzdVZP.DataSource = dtProizvCombIzdVZP;
-            }
+            //    SqlDataAdapter adapterProizvCombIzdVZP = new SqlDataAdapter();
+            //    DataTable dtProizvCombIzdVZP = new DataTable();
+            //    string queryProizvCombIzdVZP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 2 ";  // 2 - расчеты ВЗП
+            //    SqlCommand commandProizvCombIzdVZP = new SqlCommand(queryProizvCombIzdVZP, connection);
+            //    adapterProizvCombIzdVZP.SelectCommand = commandProizvCombIzdVZP;
+            //    adapterProizvCombIzdVZP.Fill(dtProizvCombIzdVZP);
+            //    bsProizvCombIzdVZP.DataSource = dtProizvCombIzdVZP;
+            //}
+            string queryProizvCombIzdSP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 1 ";  // 1 - расчеты ШП
+            var dtProizvCombIzdSP = ShowRelatedData("ace", queryProizvCombIzdSP);
+            bsProizvCombIzdSP.DataSource = dtProizvCombIzdSP;
+
+            string queryProizvCombIzdVZP = $"exec getProizvCombIzd {this.tbPsaPsaIDOsn.Text}, 2 ";  // 2 - расчеты ВЗП
+            var dtProizvCombIzdVZP = ShowRelatedData("ace", queryProizvCombIzdVZP);
+            bsProizvCombIzdVZP.DataSource = dtProizvCombIzdVZP;
         }
         private void CardByNom_Load(object sender, EventArgs e)
         {
@@ -320,197 +327,351 @@ namespace SewingProduction
                 if (PachKod.Length > 0)
                 {
                     
-                    string connectionString = Properties.Settings.Default.ACEConnectionString;
-                    using (SqlConnection connection = new SqlConnection(connectionString))
+                    //string connectionString = Properties.Settings.Default.ACEConnectionString;
+                    //using (SqlConnection connection = new SqlConnection(connectionString))
+                    //{
+                    //    connection.Open();
+                    //    SqlDataAdapter adapterNaklList = new SqlDataAdapter();
+                    //    DataTable dtNaklList = new DataTable();
+                    //    string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
+                    //    queryNaklList += $" order by iz";
+                    //    //string queryNaklList = $"exec GetNaklView '{PachKod}' ";
+                    //    SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
+                    //    adapterNaklList.SelectCommand = commandNaklList;
+                    //    adapterNaklList.Fill(dtNaklList);
+                    //    bsNaklList.DataSource = dtNaklList;
+                    //    bsNaklList.Sort = "iz asc";
+                    //    //this.gcNaklList.Refresh();
+                    //    if (dtNaklList.Rows.Count != 0)
+                    //    {
+                    //        this.xtraTabControl1.Enabled = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        this.xtraTabControl1.Enabled = false;
+                    //    }
+
+                    //        SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
+                    //    DataTable dtRasInfo = new DataTable();
+                    //    //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
+                    //    string queryRasInfo = $"exec GetRasInfoView '{PachKod}' ";
+                    //    SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
+                    //    adapterRasInfo.SelectCommand = commandRasInfo;
+                    //    adapterRasInfo.Fill(dtRasInfo);
+                    //    bsRasInfo.DataSource = dtRasInfo;
+
+                    //    tbPszRpcNom.Text = "РЦ" + dtRasInfo.Rows[0]["PszRpcNom"].ToString();
+                    //    //  gridView1.GetDataRow(e.RowHandle)["id"]
+                    //    tbArtTradeMark.Text = dtRasInfo.Rows[0]["ArtTradeMark"].ToString();
+                    //    //MessageBox.Show(dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString());
+                    //    this.xtraTabControl1.Refresh();
+                    //    this.pbEskiz.DataBindings.Clear();
+                    //    this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
+                    //    this.tbRzuNom.DataBindings.Clear();
+                    //    this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
+                    //    this.tbRzuPach.DataBindings.Clear();
+                    //    this.tbRzuPach.DataBindings.Add("Text", dtRasInfo, "rzuPach");
+                    //    this.tbRzuKol.DataBindings.Clear();
+                    //    this.tbRzuKol.DataBindings.Add("Text", dtRasInfo, "rzuKol");
+                    //    this.tbPsaPrn.DataBindings.Clear();
+                    //    this.tbPsaPrn.DataBindings.Add("Text", dtRasInfo, "psaPrn");
+                    //    this.tbRzuArticul.DataBindings.Clear();
+                    //    this.tbRzuArticul.DataBindings.Add("Text", dtRasInfo, "rzuArticul");
+                    //    this.tbRzuMod.DataBindings.Clear();
+                    //    this.tbRzuMod.DataBindings.Add("Text", dtRasInfo, "rzuMod");
+                    //    this.tbRzuDostZeh.DataBindings.Clear();
+                    //    this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
+                    //    this.tbPsaNameSbit.DataBindings.Clear();
+                    //    this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                    //    this.tbPsaNN.DataBindings.Clear();
+                    //    this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
+                    //    this.tbPsaPsaID.DataBindings.Clear();
+                    //    this.tbPsaPsaID.DataBindings.Add("Text", dtRasInfo, "psaPsaID");
+                    //    tbPsaPsaIDOsn.Text = dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString();
+                    //    //if (Convert.ToInt32(dtRasInfo.Rows[0]["PsaPsaIDOsn"]) == 0
+                    //    //        && (("V;F").IndexOf(dtRasInfo.Rows[0]["PsaKombIzd"].ToString()) > -1 || Convert.ToInt32(dtRasInfo.Rows[0]["PsaKombIzd"]) == 1)
+                    //    //        && (Convert.ToInt32(dtRasInfo.Rows[0]["PsaTkIdSet"]) ?? 0 == 1))
+                    //    //MessageBox.Show(dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString());
+                    //    //MessageBox.Show(dtRasInfo.Rows[0]["PsaKombIzd"].ToString());
+                    //    //MessageBox.Show(dtRasInfo.Rows[0]["PsaKombOsn"].ToString());
+                    //    //MessageBox.Show((dtRasInfo.Rows[0]["PsaTkIdSet"] is null).ToString());
+
+                    //    if (Convert.ToInt32(dtRasInfo.Rows[0]["PsaPsaIDOsn"]) != 0
+                    //        && (("V;F").IndexOf(dtRasInfo.Rows[0]["PsaKombIzd"].ToString()) >= 0 || Convert.ToInt32(dtRasInfo.Rows[0]["PsaKombIzd"]) == 1)
+                    //        && (dtRasInfo.Rows[0]["PsaTkIdSet"].ToString().Length == 0))
+                    //    {
+                    //        this.xtraTabPage4.PageVisible = true;
+                    //    }
+                    //    else
+                    //    {
+                    //        this.xtraTabPage4.PageVisible = false;
+                    //    }
+                    //    tbPsaKombIzd.Text = dtRasInfo.Rows[0]["PsaKombIzd"].ToString();
+                    //    tbPsaKombOsn.Text = dtRasInfo.Rows[0]["PsaKombOsn"].ToString();
+                    //    this.tbPsaNomZad.DataBindings.Clear();
+                    //    this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
+                    //    this.tbPsaMenName.DataBindings.Clear();
+                    //    this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
+                    //    this.tbPsaTbID.DataBindings.Clear();
+                    //    this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
+                    //    this.tbPsaYear.DataBindings.Clear();
+                    //    this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
+                    //    this.psaSezName.DataBindings.Clear();
+                    //    this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
+                    //    this.tbArtGrup.DataBindings.Clear();
+                    //    this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
+                    //    this.tbSostPoln.DataBindings.Clear();
+                    //    this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
+                    //    this.tbPsaKodZv1.DataBindings.Clear();
+                    //    this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
+                    //    this.tbPsaKodZv2.DataBindings.Clear();
+                    //    this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
+                    //    this.mtbPsaDataZap.DataBindings.Clear();
+                    //    this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
+                    //    this.mtbPsaDataCdPlan.DataBindings.Clear();
+                    //    this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
+                    //    this.mtbRzuDataCdUt.DataBindings.Clear();
+                    //    this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
+                    //    this.mtbRzuDataR.DataBindings.Clear();
+                    //    this.mtbRzuDataR.DataBindings.Add("Text", dtRasInfo, "rzuDataR");
+                    //    this.mtbRzuDataZeh.DataBindings.Clear();
+                    //    this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
+                    //    this.mtbRzuDataRab.DataBindings.Clear();
+                    //    this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
+                    //    this.mtbRzuDataUp.DataBindings.Clear();
+                    //    this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
+                    //    this.mtbRzuDataCd.DataBindings.Clear();
+                    //    this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                    //    this.mtbRzuData1С.DataBindings.Clear();
+                    //    this.mtbRzuData1С.DataBindings.Add("Text", dtRasInfo, "rzuData1C");
+                    //    this.mtbRzuDataRasp.DataBindings.Clear();
+                    //    this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
+                    //    this.mtbRzuDataPrP.DataBindings.Clear();
+                    //    this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
+                    //    this.mtbRzuDataPrR.DataBindings.Clear();
+                    //    this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
+                    //    this.mtbRzuDataPrPe.DataBindings.Clear();
+                    //    this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
+                    //    this.mtbRzuDataPrKm.DataBindings.Clear();
+                    //    this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
+                    //    this.mtbRzuDataPrCd.DataBindings.Clear();
+                    //    this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
+                    //    this.mtbRzuDataRasv.DataBindings.Clear();
+                    //    this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
+                    //    this.mtbRzuDataVP.DataBindings.Clear();
+                    //    this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
+                    //    this.mtbRzuDataVR.DataBindings.Clear();
+                    //    this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
+                    //    this.mtbRzuDataVChi.DataBindings.Clear();
+                    //    this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
+                    //    this.mtbRzuDataVCd.DataBindings.Clear();
+                    //    this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
+                    //    this.mtbRzuDataStP.DataBindings.Clear();
+                    //    this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
+                    //    this.mtbRzuDataStR.DataBindings.Clear();
+                    //    this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
+                    //    this.mtbRzuDataStCd.DataBindings.Clear();
+                    //    this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
+                    //    this.mtbRzuVidStir.DataBindings.Clear();
+                    //    this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+                    //    this.cbPszPrintPlan.DataBindings.Clear();
+                    //    this.cbPszPrintPlan.DataBindings.Add("Checked", dtRasInfo, "PszPrintPlan");
+                    //    this.cbRzuPrintFact.DataBindings.Clear();
+                    //    this.cbRzuPrintFact.DataBindings.Add("Checked", dtRasInfo, "RzuPrintFact");
+                    //    this.cbPszVishPlan.DataBindings.Clear();
+                    //    this.cbPszVishPlan.DataBindings.Add("Checked", dtRasInfo, "PszVishPlan");
+                    //    this.cbRzuVishFact.DataBindings.Clear();
+                    //    this.cbRzuVishFact.DataBindings.Add("Checked", dtRasInfo, "RzuVishFact");
+                    //    this.cbPszStirPlan.DataBindings.Clear();
+                    //    this.cbPszStirPlan.DataBindings.Add("Checked", dtRasInfo, "PszStirPlan");
+                    //    this.cbRzuStirFact.DataBindings.Clear();
+                    //    this.cbRzuStirFact.DataBindings.Add("Checked", dtRasInfo, "RzuStirFact");
+
+                    //    string NomZad = this.tbPsaNomZad.Text;
+                    //    SqlDataAdapter adapterIsChip = new SqlDataAdapter();
+                    //    DataTable dtIsChip = new DataTable();
+                    //    string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
+                    //    SqlCommand commandIsChip = new SqlCommand(queryIsChip, connection);
+                    //    adapterIsChip.SelectCommand = commandIsChip;
+                    //    adapterIsChip.Fill(dtIsChip);
+                    //    bsIsChip.DataSource = dtIsChip;
+                    //    this.cbIsChip.DataBindings.Clear();
+                    //    this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
+
+                    //    SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
+                    //    DataTable dtOtdelkaList = new DataTable();
+                    //    string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
+                    //    queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
+                    //    queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
+                    //    SqlCommand commandOtdelkaList = new SqlCommand(queryOtdelkaList, connection);
+                    //    adapterOtdelkaList.SelectCommand = commandOtdelkaList;
+                    //    adapterOtdelkaList.Fill(dtOtdelkaList);
+                    //    bsOtdelkaList.DataSource = dtOtdelkaList;
+                    //    //bsOtdelkaList.Sort = "iz asc";
+
+                    //    if (xtraTabControl1.SelectedTabPageIndex == 1)
+                    //    {
+                    //        //button11_Click(sender, e);
+                    //        UpdateFurnitUpak();
+                    //    }
+                    //    if (xtraTabControl1.SelectedTabPageIndex == 3)
+                    //    {
+                    //        UpdateProizvCombIzd();
+                    //    }
+                    //}
+
+                    string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
+                    queryNaklList += $" order by iz";
+                    var dtNaklList = ShowRelatedData("ace", queryNaklList);
+                    bsNaklList.DataSource = dtNaklList;
+                    bsNaklList.Sort = "iz asc";
+                    if (dtNaklList.Rows.Count != 0) 
+                        {this.xtraTabControl1.Enabled = true;}
+                    else 
+                        {this.xtraTabControl1.Enabled = false;}
+
+                    string queryRasInfo = $"exec GetRasInfoView '{PachKod}' ";
+                    var dtRasInfo = ShowRelatedData("ace", queryRasInfo);
+                    bsRasInfo.DataSource = dtRasInfo;
+                    tbPszRpcNom.Text = "РЦ" + dtRasInfo.Rows[0]["PszRpcNom"].ToString();
+                    tbArtTradeMark.Text = dtRasInfo.Rows[0]["ArtTradeMark"].ToString();
+                    this.xtraTabControl1.Refresh();
+                    this.pbEskiz.DataBindings.Clear();
+                    this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
+                    this.tbRzuNom.DataBindings.Clear();
+                    this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
+                    this.tbRzuPach.DataBindings.Clear();
+                    this.tbRzuPach.DataBindings.Add("Text", dtRasInfo, "rzuPach");
+                    this.tbRzuKol.DataBindings.Clear();
+                    this.tbRzuKol.DataBindings.Add("Text", dtRasInfo, "rzuKol");
+                    this.tbPsaPrn.DataBindings.Clear();
+                    this.tbPsaPrn.DataBindings.Add("Text", dtRasInfo, "psaPrn");
+                    this.tbRzuArticul.DataBindings.Clear();
+                    this.tbRzuArticul.DataBindings.Add("Text", dtRasInfo, "rzuArticul");
+                    this.tbRzuMod.DataBindings.Clear();
+                    this.tbRzuMod.DataBindings.Add("Text", dtRasInfo, "rzuMod");
+                    this.tbRzuDostZeh.DataBindings.Clear();
+                    this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
+                    this.tbPsaNameSbit.DataBindings.Clear();
+                    this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
+                    this.tbPsaNN.DataBindings.Clear();
+                    this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
+                    this.tbPsaPsaID.DataBindings.Clear();
+                    this.tbPsaPsaID.DataBindings.Add("Text", dtRasInfo, "psaPsaID");
+                    tbPsaPsaIDOsn.Text = dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString();
+
+                    if (Convert.ToInt32(dtRasInfo.Rows[0]["PsaPsaIDOsn"]) != 0
+                        && (("V;F").IndexOf(dtRasInfo.Rows[0]["PsaKombIzd"].ToString()) >= 0 || Convert.ToInt32(dtRasInfo.Rows[0]["PsaKombIzd"]) == 1)
+                        && (dtRasInfo.Rows[0]["PsaTkIdSet"].ToString().Length == 0))
                     {
-                        connection.Open();
-                        SqlDataAdapter adapterNaklList = new SqlDataAdapter();
-                        DataTable dtNaklList = new DataTable();
-                        string queryNaklList = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
-                        queryNaklList += $" order by iz";
-                        //string queryNaklList = $"exec GetNaklView '{PachKod}' ";
-                        SqlCommand commandNaklList = new SqlCommand(queryNaklList, connection);
-                        adapterNaklList.SelectCommand = commandNaklList;
-                        adapterNaklList.Fill(dtNaklList);
-                        bsNaklList.DataSource = dtNaklList;
-                        bsNaklList.Sort = "iz asc";
-                        //this.gcNaklList.Refresh();
-                        if (dtNaklList.Rows.Count != 0)
-                        {
-                            this.xtraTabControl1.Enabled = true;
-                        }
-                        else
-                        {
-                            this.xtraTabControl1.Enabled = false;
-                        }
+                        this.xtraTabPage4.PageVisible = true;
+                    }
+                    else
+                    {
+                        this.xtraTabPage4.PageVisible = false;
+                    }
+                    tbPsaKombIzd.Text = dtRasInfo.Rows[0]["PsaKombIzd"].ToString();
+                    tbPsaKombOsn.Text = dtRasInfo.Rows[0]["PsaKombOsn"].ToString();
+                    this.tbPsaNomZad.DataBindings.Clear();
+                    this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
+                    this.tbPsaMenName.DataBindings.Clear();
+                    this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
+                    this.tbPsaTbID.DataBindings.Clear();
+                    this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
+                    this.tbPsaYear.DataBindings.Clear();
+                    this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
+                    this.psaSezName.DataBindings.Clear();
+                    this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
+                    this.tbArtGrup.DataBindings.Clear();
+                    this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
+                    this.tbSostPoln.DataBindings.Clear();
+                    this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
+                    this.tbPsaKodZv1.DataBindings.Clear();
+                    this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
+                    this.tbPsaKodZv2.DataBindings.Clear();
+                    this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
+                    this.mtbPsaDataZap.DataBindings.Clear();
+                    this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
+                    this.mtbPsaDataCdPlan.DataBindings.Clear();
+                    this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
+                    this.mtbRzuDataCdUt.DataBindings.Clear();
+                    this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
+                    this.mtbRzuDataR.DataBindings.Clear();
+                    this.mtbRzuDataR.DataBindings.Add("Text", dtRasInfo, "rzuDataR");
+                    this.mtbRzuDataZeh.DataBindings.Clear();
+                    this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
+                    this.mtbRzuDataRab.DataBindings.Clear();
+                    this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
+                    this.mtbRzuDataUp.DataBindings.Clear();
+                    this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
+                    this.mtbRzuDataCd.DataBindings.Clear();
+                    this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
+                    this.mtbRzuData1С.DataBindings.Clear();
+                    this.mtbRzuData1С.DataBindings.Add("Text", dtRasInfo, "rzuData1C");
+                    this.mtbRzuDataRasp.DataBindings.Clear();
+                    this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
+                    this.mtbRzuDataPrP.DataBindings.Clear();
+                    this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
+                    this.mtbRzuDataPrR.DataBindings.Clear();
+                    this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
+                    this.mtbRzuDataPrPe.DataBindings.Clear();
+                    this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
+                    this.mtbRzuDataPrKm.DataBindings.Clear();
+                    this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
+                    this.mtbRzuDataPrCd.DataBindings.Clear();
+                    this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
+                    this.mtbRzuDataRasv.DataBindings.Clear();
+                    this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
+                    this.mtbRzuDataVP.DataBindings.Clear();
+                    this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
+                    this.mtbRzuDataVR.DataBindings.Clear();
+                    this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
+                    this.mtbRzuDataVChi.DataBindings.Clear();
+                    this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
+                    this.mtbRzuDataVCd.DataBindings.Clear();
+                    this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
+                    this.mtbRzuDataStP.DataBindings.Clear();
+                    this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
+                    this.mtbRzuDataStR.DataBindings.Clear();
+                    this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
+                    this.mtbRzuDataStCd.DataBindings.Clear();
+                    this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
+                    this.mtbRzuVidStir.DataBindings.Clear();
+                    this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
+                    this.cbPszPrintPlan.DataBindings.Clear();
+                    this.cbPszPrintPlan.DataBindings.Add("Checked", dtRasInfo, "PszPrintPlan");
+                    this.cbRzuPrintFact.DataBindings.Clear();
+                    this.cbRzuPrintFact.DataBindings.Add("Checked", dtRasInfo, "RzuPrintFact");
+                    this.cbPszVishPlan.DataBindings.Clear();
+                    this.cbPszVishPlan.DataBindings.Add("Checked", dtRasInfo, "PszVishPlan");
+                    this.cbRzuVishFact.DataBindings.Clear();
+                    this.cbRzuVishFact.DataBindings.Add("Checked", dtRasInfo, "RzuVishFact");
+                    this.cbPszStirPlan.DataBindings.Clear();
+                    this.cbPszStirPlan.DataBindings.Add("Checked", dtRasInfo, "PszStirPlan");
+                    this.cbRzuStirFact.DataBindings.Clear();
+                    this.cbRzuStirFact.DataBindings.Add("Checked", dtRasInfo, "RzuStirFact");
 
-                            SqlDataAdapter adapterRasInfo = new SqlDataAdapter();
-                        DataTable dtRasInfo = new DataTable();
-                        //string queryRasInfo = $"select * from RasInfoView where rzuNom = (select nom from raskr_zeh_up where pach_kod like '{PachKod}%') ";
-                        string queryRasInfo = $"exec GetRasInfoView '{PachKod}' ";
-                        SqlCommand commandRasInfo = new SqlCommand(queryRasInfo, connection);
-                        adapterRasInfo.SelectCommand = commandRasInfo;
-                        adapterRasInfo.Fill(dtRasInfo);
-                        bsRasInfo.DataSource = dtRasInfo;
+                    string NomZad = this.tbPsaNomZad.Text;
+                    
+                    string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
+                    var dtIsChip = ShowRelatedData("ace", queryIsChip);
+                    bsIsChip.DataSource = dtIsChip;
+                    this.cbIsChip.DataBindings.Clear();
+                    this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
 
-                        tbPszRpcNom.Text = "РЦ" + dtRasInfo.Rows[0]["PszRpcNom"].ToString();
-                        //  gridView1.GetDataRow(e.RowHandle)["id"]
-                        tbArtTradeMark.Text = dtRasInfo.Rows[0]["ArtTradeMark"].ToString();
-                        //MessageBox.Show(dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString());
-                        this.xtraTabControl1.Refresh();
-                        this.pbEskiz.DataBindings.Clear();
-                        this.pbEskiz.DataBindings.Add("ImageLocation", dtRasInfo, "pictPath");
-                        this.tbRzuNom.DataBindings.Clear();
-                        this.tbRzuNom.DataBindings.Add("Text", dtRasInfo, "rzuNom");
-                        this.tbRzuPach.DataBindings.Clear();
-                        this.tbRzuPach.DataBindings.Add("Text", dtRasInfo, "rzuPach");
-                        this.tbRzuKol.DataBindings.Clear();
-                        this.tbRzuKol.DataBindings.Add("Text", dtRasInfo, "rzuKol");
-                        this.tbPsaPrn.DataBindings.Clear();
-                        this.tbPsaPrn.DataBindings.Add("Text", dtRasInfo, "psaPrn");
-                        this.tbRzuArticul.DataBindings.Clear();
-                        this.tbRzuArticul.DataBindings.Add("Text", dtRasInfo, "rzuArticul");
-                        this.tbRzuMod.DataBindings.Clear();
-                        this.tbRzuMod.DataBindings.Add("Text", dtRasInfo, "rzuMod");
-                        this.tbRzuDostZeh.DataBindings.Clear();
-                        this.tbRzuDostZeh.DataBindings.Add("Text", dtRasInfo, "rzuDostZeh");
-                        this.tbPsaNameSbit.DataBindings.Clear();
-                        this.tbPsaNameSbit.DataBindings.Add("Text", dtRasInfo, "psaNameSbit");
-                        this.tbPsaNN.DataBindings.Clear();
-                        this.tbPsaNN.DataBindings.Add("Text", dtRasInfo, "psaNN");
-                        this.tbPsaPsaID.DataBindings.Clear();
-                        this.tbPsaPsaID.DataBindings.Add("Text", dtRasInfo, "psaPsaID");
-                        tbPsaPsaIDOsn.Text = dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString();
-                        //if (Convert.ToInt32(dtRasInfo.Rows[0]["PsaPsaIDOsn"]) == 0
-                        //        && (("V;F").IndexOf(dtRasInfo.Rows[0]["PsaKombIzd"].ToString()) > -1 || Convert.ToInt32(dtRasInfo.Rows[0]["PsaKombIzd"]) == 1)
-                        //        && (Convert.ToInt32(dtRasInfo.Rows[0]["PsaTkIdSet"]) ?? 0 == 1))
-                        //MessageBox.Show(dtRasInfo.Rows[0]["PsaPsaIDOsn"].ToString());
-                        //MessageBox.Show(dtRasInfo.Rows[0]["PsaKombIzd"].ToString());
-                        //MessageBox.Show(dtRasInfo.Rows[0]["PsaKombOsn"].ToString());
-                        //MessageBox.Show((dtRasInfo.Rows[0]["PsaTkIdSet"] is null).ToString());
+                    string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
+                    queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
+                    queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
+                    var dtOtdelkaList = ShowRelatedData("ace", queryOtdelkaList);
+                    bsOtdelkaList.DataSource = dtOtdelkaList;
 
-                        if (Convert.ToInt32(dtRasInfo.Rows[0]["PsaPsaIDOsn"]) != 0
-                            && (("V;F").IndexOf(dtRasInfo.Rows[0]["PsaKombIzd"].ToString()) >= 0 || Convert.ToInt32(dtRasInfo.Rows[0]["PsaKombIzd"]) == 1)
-                            && (dtRasInfo.Rows[0]["PsaTkIdSet"].ToString().Length == 0))
-                        {
-                            this.xtraTabPage4.PageVisible = true;
-                        }
-                        else
-                        {
-                            this.xtraTabPage4.PageVisible = false;
-                        }
-                        tbPsaKombIzd.Text = dtRasInfo.Rows[0]["PsaKombIzd"].ToString();
-                        tbPsaKombOsn.Text = dtRasInfo.Rows[0]["PsaKombOsn"].ToString();
-                        this.tbPsaNomZad.DataBindings.Clear();
-                        this.tbPsaNomZad.DataBindings.Add("Text", dtRasInfo, "psaNomZad");
-                        this.tbPsaMenName.DataBindings.Clear();
-                        this.tbPsaMenName.DataBindings.Add("Text", dtRasInfo, "psaMenName");
-                        this.tbPsaTbID.DataBindings.Clear();
-                        this.tbPsaTbID.DataBindings.Add("Text", dtRasInfo, "psaTbID");
-                        this.tbPsaYear.DataBindings.Clear();
-                        this.tbPsaYear.DataBindings.Add("Text", dtRasInfo, "psaYear");
-                        this.psaSezName.DataBindings.Clear();
-                        this.psaSezName.DataBindings.Add("Text", dtRasInfo, "psaSezName");
-                        this.tbArtGrup.DataBindings.Clear();
-                        this.tbArtGrup.DataBindings.Add("Text", dtRasInfo, "artGrup");
-                        this.tbSostPoln.DataBindings.Clear();
-                        this.tbSostPoln.DataBindings.Add("Text", dtRasInfo, "sostPoln");
-                        this.tbPsaKodZv1.DataBindings.Clear();
-                        this.tbPsaKodZv1.DataBindings.Add("Text", dtRasInfo, "psaKodZv1");
-                        this.tbPsaKodZv2.DataBindings.Clear();
-                        this.tbPsaKodZv2.DataBindings.Add("Text", dtRasInfo, "psaKodZv2");
-                        this.mtbPsaDataZap.DataBindings.Clear();
-                        this.mtbPsaDataZap.DataBindings.Add("Text", dtRasInfo, "psaDataZap");
-                        this.mtbPsaDataCdPlan.DataBindings.Clear();
-                        this.mtbPsaDataCdPlan.DataBindings.Add("Text", dtRasInfo, "psaDataCdPlan");
-                        this.mtbRzuDataCdUt.DataBindings.Clear();
-                        this.mtbRzuDataCdUt.DataBindings.Add("Text", dtRasInfo, "rzuDataCdUt");
-                        this.mtbRzuDataR.DataBindings.Clear();
-                        this.mtbRzuDataR.DataBindings.Add("Text", dtRasInfo, "rzuDataR");
-                        this.mtbRzuDataZeh.DataBindings.Clear();
-                        this.mtbRzuDataZeh.DataBindings.Add("Text", dtRasInfo, "rzuDataZeh");
-                        this.mtbRzuDataRab.DataBindings.Clear();
-                        this.mtbRzuDataRab.DataBindings.Add("Text", dtRasInfo, "rzuDataRab");
-                        this.mtbRzuDataUp.DataBindings.Clear();
-                        this.mtbRzuDataUp.DataBindings.Add("Text", dtRasInfo, "rzuDataUp");
-                        this.mtbRzuDataCd.DataBindings.Clear();
-                        this.mtbRzuDataCd.DataBindings.Add("Text", dtRasInfo, "rzuDataCd");
-                        this.mtbRzuData1С.DataBindings.Clear();
-                        this.mtbRzuData1С.DataBindings.Add("Text", dtRasInfo, "rzuData1C");
-                        this.mtbRzuDataRasp.DataBindings.Clear();
-                        this.mtbRzuDataRasp.DataBindings.Add("Text", dtRasInfo, "RzuDataRasp");
-                        this.mtbRzuDataPrP.DataBindings.Clear();
-                        this.mtbRzuDataPrP.DataBindings.Add("Text", dtRasInfo, "RzuDataPrP");
-                        this.mtbRzuDataPrR.DataBindings.Clear();
-                        this.mtbRzuDataPrR.DataBindings.Add("Text", dtRasInfo, "RzuDataPrR");
-                        this.mtbRzuDataPrPe.DataBindings.Clear();
-                        this.mtbRzuDataPrPe.DataBindings.Add("Text", dtRasInfo, "RzuDataPrPe");
-                        this.mtbRzuDataPrKm.DataBindings.Clear();
-                        this.mtbRzuDataPrKm.DataBindings.Add("Text", dtRasInfo, "RzuDataPrKm");
-                        this.mtbRzuDataPrCd.DataBindings.Clear();
-                        this.mtbRzuDataPrCd.DataBindings.Add("Text", dtRasInfo, "RzuDataPrCd");
-                        this.mtbRzuDataRasv.DataBindings.Clear();
-                        this.mtbRzuDataRasv.DataBindings.Add("Text", dtRasInfo, "RzuDataRasv");
-                        this.mtbRzuDataVP.DataBindings.Clear();
-                        this.mtbRzuDataVP.DataBindings.Add("Text", dtRasInfo, "RzuDataVP");
-                        this.mtbRzuDataVR.DataBindings.Clear();
-                        this.mtbRzuDataVR.DataBindings.Add("Text", dtRasInfo, "RzuDataVR");
-                        this.mtbRzuDataVChi.DataBindings.Clear();
-                        this.mtbRzuDataVChi.DataBindings.Add("Text", dtRasInfo, "RzuDataVChi");
-                        this.mtbRzuDataVCd.DataBindings.Clear();
-                        this.mtbRzuDataVCd.DataBindings.Add("Text", dtRasInfo, "RzuDataVCd");
-                        this.mtbRzuDataStP.DataBindings.Clear();
-                        this.mtbRzuDataStP.DataBindings.Add("Text", dtRasInfo, "RzuDataStP");
-                        this.mtbRzuDataStR.DataBindings.Clear();
-                        this.mtbRzuDataStR.DataBindings.Add("Text", dtRasInfo, "RzuDataStR");
-                        this.mtbRzuDataStCd.DataBindings.Clear();
-                        this.mtbRzuDataStCd.DataBindings.Add("Text", dtRasInfo, "RzuDataStCd");
-                        this.mtbRzuVidStir.DataBindings.Clear();
-                        this.mtbRzuVidStir.DataBindings.Add("Text", dtRasInfo, "RzuVidStir");
-                        this.cbPszPrintPlan.DataBindings.Clear();
-                        this.cbPszPrintPlan.DataBindings.Add("Checked", dtRasInfo, "PszPrintPlan");
-                        this.cbRzuPrintFact.DataBindings.Clear();
-                        this.cbRzuPrintFact.DataBindings.Add("Checked", dtRasInfo, "RzuPrintFact");
-                        this.cbPszVishPlan.DataBindings.Clear();
-                        this.cbPszVishPlan.DataBindings.Add("Checked", dtRasInfo, "PszVishPlan");
-                        this.cbRzuVishFact.DataBindings.Clear();
-                        this.cbRzuVishFact.DataBindings.Add("Checked", dtRasInfo, "RzuVishFact");
-                        this.cbPszStirPlan.DataBindings.Clear();
-                        this.cbPszStirPlan.DataBindings.Add("Checked", dtRasInfo, "PszStirPlan");
-                        this.cbRzuStirFact.DataBindings.Clear();
-                        this.cbRzuStirFact.DataBindings.Add("Checked", dtRasInfo, "RzuStirFact");
-
-                        string NomZad = this.tbPsaNomZad.Text;
-                        SqlDataAdapter adapterIsChip = new SqlDataAdapter();
-                        DataTable dtIsChip = new DataTable();
-                        string queryIsChip = $"SELECT dbo.checkChipNakl('', '{NomZad}') AS isChip ";
-                        SqlCommand commandIsChip = new SqlCommand(queryIsChip, connection);
-                        adapterIsChip.SelectCommand = commandIsChip;
-                        adapterIsChip.Fill(dtIsChip);
-                        bsIsChip.DataSource = dtIsChip;
-                        this.cbIsChip.DataBindings.Clear();
-                        this.cbIsChip.DataBindings.Add("Checked", dtIsChip, "isChip");
-
-                        SqlDataAdapter adapterOtdelkaList = new SqlDataAdapter();
-                        DataTable dtOtdelkaList = new DataTable();
-                        string queryOtdelkaList = $"SELECT vpso.psa_field_name, vpso.kol_sl_zv, vpso.frt_naimen, DetIzdName, VidIzdName ";
-                        queryOtdelkaList += $" FROM View_plan_sezon_otdelka vpso ";
-                        queryOtdelkaList += $" WHERE vpso.nn = '{this.tbPsaNN.Text}' ";
-                        SqlCommand commandOtdelkaList = new SqlCommand(queryOtdelkaList, connection);
-                        adapterOtdelkaList.SelectCommand = commandOtdelkaList;
-                        adapterOtdelkaList.Fill(dtOtdelkaList);
-                        bsOtdelkaList.DataSource = dtOtdelkaList;
-                        //bsOtdelkaList.Sort = "iz asc";
-
-                        if (xtraTabControl1.SelectedTabPageIndex == 1)
-                        {
-                            //button11_Click(sender, e);
-                            UpdateFurnitUpak();
-                        }
-                        if (xtraTabControl1.SelectedTabPageIndex == 3)
-                        {
-                            UpdateProizvCombIzd();
-                        }
+                    if (xtraTabControl1.SelectedTabPageIndex == 1)
+                    {
+                        UpdateFurnitUpak();
+                    }
+                    if (xtraTabControl1.SelectedTabPageIndex == 3)
+                    {
+                        UpdateProizvCombIzd();
                     }
                 }
             }
@@ -543,24 +704,27 @@ namespace SewingProduction
                 btnNaklPart.Text = "Скрыть информацию по делению накладной";
                 string iz = GetIzNakl();
                 
-                string connectionString = Properties.Settings.Default.ACEConnectionString;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    SqlDataAdapter adapterPartNaklList = new SqlDataAdapter();
-                    DataTable dtPartNaklList = new DataTable();
-                    string queryPartNaklList = $"SELECT * FROM View_History_razdel_nakl where iz_b = '{iz}' ";
-                    queryPartNaklList += $" order by id";
-                    SqlCommand commandPartNaklList = new SqlCommand(queryPartNaklList, connection);
-                    adapterPartNaklList.SelectCommand = commandPartNaklList;
-                    adapterPartNaklList.Fill(dtPartNaklList);
-                    bsPartNaklList.DataSource = dtPartNaklList;
-                    bsPartNaklList.Sort = "id asc";
-                    this.gcPartNaklList.Location = this.gcNaklList.Location;
-                    this.gcPartNaklList.Size = this.gcNaklList.Size;
-                    this.gcPartNaklList.BringToFront();
-                    this.gcPartNaklList.Visible = true;
-                }
+                //string connectionString = Properties.Settings.Default.ACEConnectionString;
+                //using (SqlConnection connection = new SqlConnection(connectionString))
+                //{
+                //    connection.Open();
+                //    SqlDataAdapter adapterPartNaklList = new SqlDataAdapter();
+                //    DataTable dtPartNaklList = new DataTable();
+                //    string queryPartNaklList = $"SELECT * FROM View_History_razdel_nakl where iz_b = '{iz}' ";
+                //    queryPartNaklList += $" order by id";
+                //    SqlCommand commandPartNaklList = new SqlCommand(queryPartNaklList, connection);
+                //    adapterPartNaklList.SelectCommand = commandPartNaklList;
+                //    adapterPartNaklList.Fill(dtPartNaklList);
+                //    bsPartNaklList.DataSource = dtPartNaklList;
+                //    bsPartNaklList.Sort = "id asc";
+                //    this.gcPartNaklList.Location = this.gcNaklList.Location;
+                //    this.gcPartNaklList.Size = this.gcNaklList.Size;
+                //    this.gcPartNaklList.BringToFront();
+                //    this.gcPartNaklList.Visible = true;
+                //}
+                string queryPartNaklList = $"SELECT * FROM View_History_razdel_nakl where iz_b = '{iz}' ";
+                queryPartNaklList += $" order by id";
+                var dtPartNaklList = ShowRelatedData("ace", queryPartNaklList);
             }
             else
             {
