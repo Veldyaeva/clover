@@ -135,9 +135,6 @@
     </Compile>
     <Compile Include="AppDbContext.cs" />
     <Compile Include="ArtNormN.cs" />
-    <Compile Include="class\Font.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="class\CustomControls.cs">
       <SubType>Component</SubType>
     </Compile>

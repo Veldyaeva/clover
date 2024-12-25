@@ -16,6 +16,7 @@ using DevExpress.ChartRangeControlClient.Core;
 using BindingSource = System.Windows.Forms.BindingSource;
 using SewingProduction;
 
+
 namespace SewingProduction.form
 {
     public partial class TeamWork : CustomForm
