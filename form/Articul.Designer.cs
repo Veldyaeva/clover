@@ -44,17 +44,15 @@ namespace SewingProduction.form
             this.pictureBoxArticul = new System.Windows.Forms.PictureBox();
             this.cbTM = new SewingProduction.CustomComboBox();
             this.bsTM = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
+            this.label3 = new SewingProduction.CustomLabel();
             this.txtMod = new SewingProduction.CustomTextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txbArticul = new SewingProduction.CustomTextBox();
             this.txbPo = new SewingProduction.CustomTextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1 = new SewingProduction.CustomLabel();
             this.txbKod = new SewingProduction.CustomTextBox();
+            this.label2 = new SewingProduction.CustomLabel();
             this.customButton1 = new SewingProduction.CustomButton();
             this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
-            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -63,8 +61,6 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridArt
@@ -196,8 +192,10 @@ namespace SewingProduction.form
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.label3.Location = new System.Drawing.Point(225, 68);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(224, 64);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(45, 14);
             this.label3.TabIndex = 6;
@@ -213,16 +211,6 @@ namespace SewingProduction.form
             this.txtMod.Name = "txtMod";
             this.txtMod.Size = new System.Drawing.Size(74, 19);
             this.txtMod.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.label2.Location = new System.Drawing.Point(221, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 14);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Артикул";
             // 
             // txbArticul
             // 
@@ -249,8 +237,10 @@ namespace SewingProduction.form
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Arial", 8.25F);
-            this.label1.Location = new System.Drawing.Point(244, 19);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(243, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 14);
             this.label1.TabIndex = 1;
@@ -267,6 +257,18 @@ namespace SewingProduction.form
             this.txbKod.Size = new System.Drawing.Size(74, 19);
             this.txbKod.TabIndex = 0;
             this.txbKod.TextChanged += new System.EventHandler(this.txbKod_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(220, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 14);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Артикул";
             // 
             // customButton1
             // 
@@ -286,28 +288,11 @@ namespace SewingProduction.form
             this.customButton1.Text = "customButton1";
             this.customButton1.UseVisualStyleBackColor = false;
             // 
-            // groupControl2
-            // 
-            this.groupControl2.Location = new System.Drawing.Point(502, 321);
-            this.groupControl2.Name = "groupControl2";
-            this.groupControl2.Size = new System.Drawing.Size(200, 100);
-            this.groupControl2.TabIndex = 9;
-            this.groupControl2.Text = "groupControl2";
-            // 
-            // panelControl1
-            // 
-            this.panelControl1.Location = new System.Drawing.Point(746, 321);
-            this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(200, 100);
-            this.panelControl1.TabIndex = 10;
-            // 
             // Articul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 700);
-            this.Controls.Add(this.panelControl1);
-            this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.customButton1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gridArt);
@@ -323,8 +308,6 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -341,19 +324,17 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private CustomTextBox txbKod;
         private CustomTextBox txbPo;
-        private System.Windows.Forms.Label label1;
         private CustomButton customButton1;
         private CustomTextBox txbArticul;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource bsArticul;
         private System.Windows.Forms.BindingSource bsArt;
-        private System.Windows.Forms.Label label3;
         private CustomTextBox txtMod;
         private SewingProduction.CustomComboBox cbTM;
         //private System.Windows.Forms.ComboBox cbTM;
         private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
-        private DevExpress.XtraEditors.GroupControl groupControl2;
-        private DevExpress.XtraEditors.PanelControl panelControl1;
+        private CustomLabel label1;
+        private CustomLabel label2;
+        private CustomLabel label3;
     }
 }
