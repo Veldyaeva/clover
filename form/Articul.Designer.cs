@@ -53,6 +53,8 @@ namespace SewingProduction.form
             this.txbKod = new SewingProduction.CustomTextBox();
             this.customButton1 = new SewingProduction.CustomButton();
             this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
+            this.groupControl2 = new DevExpress.XtraEditors.GroupControl();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -61,6 +63,8 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // gridArt
@@ -167,7 +171,6 @@ namespace SewingProduction.form
             this.groupControl1.ShowCaption = false;
             this.groupControl1.Size = new System.Drawing.Size(714, 257);
             this.groupControl1.TabIndex = 2;
-            this.groupControl1.Text = "sfsfsd";
             // 
             // pictureBoxArticul
             // 
@@ -283,11 +286,28 @@ namespace SewingProduction.form
             this.customButton1.Text = "customButton1";
             this.customButton1.UseVisualStyleBackColor = false;
             // 
+            // groupControl2
+            // 
+            this.groupControl2.Location = new System.Drawing.Point(502, 321);
+            this.groupControl2.Name = "groupControl2";
+            this.groupControl2.Size = new System.Drawing.Size(200, 100);
+            this.groupControl2.TabIndex = 9;
+            this.groupControl2.Text = "groupControl2";
+            // 
+            // panelControl1
+            // 
+            this.panelControl1.Location = new System.Drawing.Point(746, 321);
+            this.panelControl1.Name = "panelControl1";
+            this.panelControl1.Size = new System.Drawing.Size(200, 100);
+            this.panelControl1.TabIndex = 10;
+            // 
             // Articul
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1268, 700);
+            this.Controls.Add(this.panelControl1);
+            this.Controls.Add(this.groupControl2);
             this.Controls.Add(this.customButton1);
             this.Controls.Add(this.groupControl1);
             this.Controls.Add(this.gridArt);
@@ -303,6 +323,8 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxArticul)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTM)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsArticul)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -331,5 +353,7 @@ namespace SewingProduction.form
         //private System.Windows.Forms.ComboBox cbTM;
         private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
+        private DevExpress.XtraEditors.GroupControl groupControl2;
+        private DevExpress.XtraEditors.PanelControl panelControl1;
     }
 }
