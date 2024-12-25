@@ -66,6 +66,9 @@ namespace SewingProduction.form
             // gridArt
             // 
             this.gridArt.DataSource = this.bsArt;
+            this.gridArt.EmbeddedNavigator.Appearance.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
+            this.gridArt.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gridArt.Location = new System.Drawing.Point(1, 1);
             this.gridArt.MainView = this.gridControl1;
             this.gridArt.Name = "gridArt";
@@ -190,9 +193,10 @@ namespace SewingProduction.form
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 8.25F);
             this.label3.Location = new System.Drawing.Point(225, 68);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(45, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "Модель";
             // 
@@ -210,9 +214,10 @@ namespace SewingProduction.form
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F);
             this.label2.Location = new System.Drawing.Point(221, 43);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
+            this.label2.Size = new System.Drawing.Size(50, 14);
             this.label2.TabIndex = 4;
             this.label2.Text = "Артикул";
             // 
@@ -241,9 +246,10 @@ namespace SewingProduction.form
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Arial", 8.25F);
             this.label1.Location = new System.Drawing.Point(244, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.Size = new System.Drawing.Size(26, 14);
             this.label1.TabIndex = 1;
             this.label1.Text = "Код";
             // 
