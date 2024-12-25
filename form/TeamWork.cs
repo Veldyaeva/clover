@@ -202,11 +202,7 @@ namespace SewingProduction.form
 
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            Form1 form = new Form1();
-            form.Show();
-        }
+   
 
         private void customButton2_Click(object sender, EventArgs e)
         {

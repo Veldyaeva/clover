@@ -8,16 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction
+namespace SewingProduction.form
 {
-    public partial class Form1 : CustomForm
+    public partial class TeamWorkTest : CustomForm
     {
-        public Form1()
+        public TeamWorkTest()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void TeamWorkTest_Load(object sender, EventArgs e)
         {
 
         }

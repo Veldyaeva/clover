@@ -47,6 +47,7 @@
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рабочийСтолМастераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
@@ -104,7 +105,8 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
-            this.производствоToolStripMenuItem});
+            this.производствоToolStripMenuItem,
+            this.TeamWorktoolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1048, 24);
@@ -131,7 +133,7 @@
             this.матрицыКлассовToolStripMenuItem,
             this.видыОперацийToolStripMenuItem});
             this.оборудованиеToolStripMenuItem.Name = "оборудованиеToolStripMenuItem";
-            this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.оборудованиеToolStripMenuItem.Text = "Оборудование";
             // 
             // оборудованиеВБригадахToolStripMenuItem
@@ -172,16 +174,15 @@
             // карточкаРасчетаToolStripMenuItem1
             // 
             this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(171, 22);
             this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
             this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
             // 
             // изделияToolStripMenuItem
             // 
             this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
-            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
             this.изделияToolStripMenuItem.Text = "Изделия";
-            this.изделияToolStripMenuItem.Click += new System.EventHandler(this.изделияToolStripMenuItem_Click);
             // 
             // производствоToolStripMenuItem
             // 
@@ -196,7 +197,13 @@
             this.рабочийСтолМастераToolStripMenuItem.Name = "рабочийСтолМастераToolStripMenuItem";
             this.рабочийСтолМастераToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.рабочийСтолМастераToolStripMenuItem.Text = "Рабочий стол мастера";
-            this.рабочийСтолМастераToolStripMenuItem.Click += new System.EventHandler(this.рабочийСтолМастераToolStripMenuItem_Click);
+            // 
+            // TeamWorktoolStripMenuItem
+            // 
+            this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
+            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
+            this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -249,6 +256,8 @@
         private System.Windows.Forms.ToolStripMenuItem изделияToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem производствоToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem разделенияТрудаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TeamWorktoolStripMenuItem;
     }
 }
 

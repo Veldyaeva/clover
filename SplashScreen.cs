@@ -10,16 +10,12 @@ using System.Windows.Forms;
 
 namespace SewingProduction
 {
-    public partial class Form1 : CustomForm
+    public partial class SplashScreen : Form
     {
-        public Form1()
+        public SplashScreen()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
