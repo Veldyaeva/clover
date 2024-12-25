@@ -407,3 +407,7 @@ FodyWeavers.xsd
 /ACEDataSet2.Designer.cs
 /ACEDataSet1.Designer.cs
 /obj/Debug/SewingProduction.csproj.AssemblyReference.cache
+/bin/Debug/SewingProduction.exe
+/bin/Debug/SewingProduction.pdb
+/obj/Debug/SewingProduction.exe
+/obj/Debug/SewingProduction.csproj.AssemblyReference.cache
