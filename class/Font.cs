@@ -12,6 +12,7 @@
 using DevExpress.CodeParser;
 using DevExpress.XtraBars.Docking2010.Base;
 using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGauges.Core.Base;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
@@ -140,6 +141,8 @@ namespace SewingProduction
             this.BackColor = Theme.TextBoxBackground;
             this.ForeColor = Theme.TextBoxText;
             this.Font = Theme.DefaultFont;
+            //this.TextAlign = HorizontalAlignment.Left;
+            //this.Margin = new Padding(0) ;
         }
 
     }
@@ -262,6 +265,39 @@ namespace SewingProduction
             this.Appearance.FocusedCell.BackColor = Theme.HighlightBackground;
            // this.Appearance.SelectedRow.ForeColor = Theme.HighlightText;
         }
+    }
+    //Класс-наследник для Label
+    public class CustomLabel : System.Windows.Forms.Label
+    {
+        public CustomLabel()
+        {
+            //this.BackColor = Theme.TextBoxBackground;
+            this.ForeColor = Theme.LabelText;
+            this.Font = Theme.DefaultFont;
+
+        }
+    }
+    //Класс-наследник для MaskedTextBox
+    public class CustomMaskedTextBox : MaskedTextBox
+    {
+        public CustomMaskedTextBox()
+        {
+            this.BackColor = Theme.TextBoxBackground;
+            this.ForeColor = Theme.TextBoxText;
+            this.Font = Theme.DefaultFont;
+        }
+
+    }
+    //Класс-наследник для CheckBox
+    public class CustomCheckBox : CheckBox
+    {
+        public CustomCheckBox()
+        {
+            //this.BackColor = Theme.TextBoxBackground;
+            this.ForeColor = Theme.TextBoxText;
+            this.Font = Theme.DefaultFont;
+        }
+
     }
     // Класс для формы с использованием базовых компонентов
     public class CustomForm : Form
