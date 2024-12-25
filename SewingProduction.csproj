@@ -55,7 +55,7 @@
     <StartupObject>SewingProduction.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>winter.ico</ApplicationIcon>
+    <ApplicationIcon>tbi_winter.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -154,12 +154,6 @@
     </Compile>
     <Compile Include="form\Articul.Designer.cs">
       <DependentUpon>Articul.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -310,16 +304,13 @@
     <EmbeddedResource Include="form\Articul.resx">
       <DependentUpon>Articul.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </EmbeddedResource>
-        <EmbeddedResource Include="form\TeamWork.resx">
+    <EmbeddedResource Include="form\TeamWork.resx">
       <DependentUpon>TeamWork.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -449,6 +440,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\winter.ico" />
+    <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
