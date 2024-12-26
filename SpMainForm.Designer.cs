@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -49,6 +50,10 @@
             this.рабочийСтолМастераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.темыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.краснаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.зеленаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.желтаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -103,10 +108,13 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.производствоToolStripMenuItem,
-            this.TeamWorktoolStripMenuItem});
+            this.TeamWorktoolStripMenuItem,
+            this.темыToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1048, 24);
@@ -211,10 +219,40 @@
             this.xtraTabbedMdiManager1.MdiParent = this;
             this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
+            // темыToolStripMenuItem
+            // 
+            this.темыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.краснаяToolStripMenuItem,
+            this.зеленаяToolStripMenuItem,
+            this.желтаяToolStripMenuItem});
+            this.темыToolStripMenuItem.Name = "темыToolStripMenuItem";
+            this.темыToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.темыToolStripMenuItem.Text = "темы";
+            // 
+            // краснаяToolStripMenuItem
+            // 
+            this.краснаяToolStripMenuItem.Name = "краснаяToolStripMenuItem";
+            this.краснаяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.краснаяToolStripMenuItem.Text = "красная";
+            this.краснаяToolStripMenuItem.Click += new System.EventHandler(this.краснаяToolStripMenuItem_Click);
+            // 
+            // зеленаяToolStripMenuItem
+            // 
+            this.зеленаяToolStripMenuItem.Name = "зеленаяToolStripMenuItem";
+            this.зеленаяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.зеленаяToolStripMenuItem.Text = "зеленая";
+            // 
+            // желтаяToolStripMenuItem
+            // 
+            this.желтаяToolStripMenuItem.Name = "желтаяToolStripMenuItem";
+            this.желтаяToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.желтаяToolStripMenuItem.Text = "желтая";
+            // 
             // SpMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1048, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.barDockControlLeft);
@@ -258,6 +296,10 @@
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem разделенияТрудаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TeamWorktoolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem темыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem краснаяToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem зеленаяToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem желтаяToolStripMenuItem;
     }
 }
 

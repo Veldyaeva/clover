@@ -26,6 +26,10 @@ namespace SewingProduction.form
         public TeamWork()
         {
             InitializeComponent();
+            // Настройка фона всей области вкладок
+            xtraTabControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            xtraTabControl2.LookAndFeel.UseDefaultLookAndFeel = false;
+            xtraTabControl2.Appearance.BackColor = Color.Green; // Основной фон
             // Load += TeamWork_Load; // Подключаем обработчик события Load
         }
         private void InitializeComponents()
@@ -43,6 +47,7 @@ namespace SewingProduction.form
 
         private void LoadData(string searchName = "")
         {
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))

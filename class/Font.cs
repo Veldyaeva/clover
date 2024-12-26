@@ -15,6 +15,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using DevExpress.XtraVerticalGrid;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -30,7 +31,7 @@ namespace SewingProduction
         // Метод для применения общих свойств к компоненту
         public virtual void ApplyBaseProperties(Control control)
         {
-            control.Font = Theme.DefaultFont; // Общий шрифт
+          //  control.Font = ThemeManager.DefaultFont; // Общий шрифт
         }
     }
 
@@ -45,7 +46,7 @@ namespace SewingProduction
 
             this.BackColor = Theme.ButtonBackground;
             this.ForeColor = Theme.ButtonText;
-            this.Font = Theme.DefaultFont;
+            Font = Theme.DefaultFont;
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Height = Theme.ButtonHeight;
@@ -137,10 +138,15 @@ namespace SewingProduction
     {
         public CustomTextBox()
         {
-            this.BackColor = Theme.TextBoxBackground;
-            this.ForeColor = Theme.TextBoxText;
-            this.Font = Theme.DefaultFont;
+            //this.BackColor = Theme.TextBoxBackground;
+            //this.ForeColor = Theme.TextBoxText;
+            //this.Font = Theme.DefaultFont;
+            ////this.TextAlign = HorizontalAlignment.Left;
+            ////this.Margin = new Padding(0) ;
+            ApplyTheme();
+            Theme.ThemeChanged += OnThemeChanged; // Подписываемся на изменение темы
         }
+    }
 
     }
 
@@ -266,6 +272,51 @@ namespace SewingProduction
     // Класс для формы с использованием базовых компонентов
     public class CustomForm : Form
     {
+
+        public CustomForm()
+        {
+            // Подписываемся на изменения темы
+            ThemeManager.ThemeChanged += ApplyTheme;
+
+            // Применяем текущую тему
+            ApplyTheme();
+        }
+        private void ChangeTheme(string themeName)
+        {
+            ThemeManager.SetTheme(themeName);
+        }
+
+        private void ApplyTheme()
+        {
+            var theme = ThemeManager.ActiveTheme;
+
+            // Применяем тему к кнопке
+            //testButton.BackColor = theme.ButtonBackground;
+            //testButton.ForeColor = theme.ButtonTextColor;
+            //testButton.Font = theme.DefaultFont;
+
+            //// Применяем тему к метке
+            //testLabel.ForeColor = theme.LabelTextColor;
+            //testLabel.Font = theme.DefaultFont;
+
+            //// Применяем тему к GridControl
+            //gridControl.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            //gridControl.LookAndFeel.UseDefaultLookAndFeel = false;
+            //gridControl.BackColor = theme.GridBackground;
+            //gridView.Appearance.Row.BackColor = theme.GridRowBackground;
+            //gridView.Appearance.Row.ForeColor = theme.GridTextColor;
+            //gridView.Appearance.Row.Font = theme.DefaultFont;
+
+            // Перерисовываем форму
+            this.Invalidate();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            base.OnFormClosed(e);
+            ThemeManager.ThemeChanged -= ApplyTheme;
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);

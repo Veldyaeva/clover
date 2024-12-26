@@ -236,44 +236,57 @@ namespace SewingProduction
     //    public static readonly Color GradientEndColor = Color.FromArgb(255, 160, 122); // LightSalmon
     //}
     #endregion
-    #region gold
-    //public static class Theme
-    //{
-    //    // Общие шрифты
-    //    public static readonly Font DefaultFont = new Font("Arial", 12, FontStyle.Regular);
 
-    //    // Цвета для кнопок
-    //    public static readonly Color ButtonBackground = Color.FromArgb(255, 223, 186); // LightGoldenrod
-    //    public static readonly Color ButtonText = Color.FromArgb(184, 134, 11); // DarkGoldenrod
 
-    //    // Радиус скругления у кнопок
-    //    public static readonly int ButtonRoundRadius = 3;
+    #region lavander
 
-    //    // Высота кнопки
-    //    public static readonly int ButtonHeight = 30;
+    public  class Theme
+    {   
+        // Общие шрифты
+        public Font DefaultFont { get; set; } // = new Font("Arial", 10, FontStyle.Regular);
 
-    //    // Цвета для текстовых полей
-    //    public static readonly Color TextBoxBackground = Color.FromArgb(255, 248, 220); // Cornsilk
-    //    public static readonly Color TextBoxText = Color.FromArgb(139, 69, 19); // SaddleBrown
+        // Цвета для кнопок
+        public static Color ButtonBackground { get; set; } //= Color.FromArgb(230, 230, 250); // Lavender
+        public static Color ButtonText { get; set; } //= Color.FromArgb(106, 90, 205); // SlateBlue
 
-    //    // Высота текстовых полей
-    //    public static readonly int TextBoxHeight = 20;
+        // Радиус скругления у кнопок
+        public static int ButtonRoundRadius { get; set; } //= 5;
 
-    //    // Цвета для выделения в таблице
-    //    public static readonly Color HighlightBackground = Color.FromArgb(255, 239, 213); // PapayaWhip
-    //    public static readonly Color HighlightText = Color.Black;
+        // Высота кнопки
+        public static int ButtonHeight { get; set; } //= 25;
 
-    //    // Цвета для градиента на форме
-    //    public static readonly Color GradientStartColor = Color.FromArgb(255, 248, 220); // Cornsilk
-    //    public static readonly Color GradientEndColor = Color.FromArgb(218, 165, 32); // Goldenrod
-    //}
+        // Цвета для текстовых полей
+        public static Color TextBoxBackground { get; set; } //= Color.FromArgb(248, 248, 255); // GhostWhite
+        public static Color TextBoxText { get; set; } //= Color.FromArgb(72, 61, 139); // DarkSlateBlue
+        public static Color LabelText { get; set; } //= Color.FromArgb(0, 0, 0); // Black
+
+        // Высота текстовых полей
+        public static int TextBoxHeight { get; set; } // = 20;
+
+        // Цвета для выделения в таблице
+        public static Color HighlightBackground { get; set; } // = Color.Red;//Color.FromArgb(216, 191, 216);
+
+        // Цвета для градиента на форме
+        public static Color GradientStartColor { get; set; } // = Color.FromArgb(240, 240, 255); // LightLavander
+        public static Color GradientEndColor { get; set; } // = Color.FromArgb(176, 148, 226); // Goldenrod
+
+
+        // Стили кнопок
+        public static Color OkButtonBackground { get; set; } // { get; set; } = Color.LightGreen;
+        public static Color OkButtonTextColor { get; set; } // { get; set; } = Color.Black;
+        public static string OkButtonText { get; set; } // { get; set; } = "OK";
+        public static Color CancelButtonBackground { get; set; } // { get; set; } = Color.IndianRed;
+        public static Color CancelButtonTextColor { get; set; } // { get; set; } = Color.White;
+        public static string CancelButtonText { get; set; } // { get; set; } = "Cancel";
+    }
+
     #endregion
 
     #region lavander
     public static class Theme
     {
         // Общие шрифты
-        public static readonly Font DefaultFont = new Font("Arial", 12, FontStyle.Regular);
+        public static readonly Font DefaultFont = new Font("Arial", 10, FontStyle.Regular);
 
         // Цвета для кнопок
         public static readonly Color ButtonBackground = Color.FromArgb(230, 230, 250); // Lavender
@@ -289,25 +302,30 @@ namespace SewingProduction
         public static readonly Color TextBoxBackground = Color.FromArgb(248, 248, 255); // GhostWhite
         public static readonly Color TextBoxText = Color.FromArgb(72, 61, 139); // DarkSlateBlue
 
-        // Высота текстовых полей
-        public static readonly int TextBoxHeight = 20;
+            // Высота текстовых полей
+            TextBoxHeight = 20,
 
-        // Цвета для выделения в таблице
-        public static readonly Color HighlightBackground = Color.Red;//Color.FromArgb(216, 191, 216);
+            // Цвета для выделения в таблице
+            HighlightBackground = Color.FromArgb(255, 239, 213), // PapayaWhip
 
-        // Цвета для градиента на форме
-            public static readonly Color GradientStartColor = Color.FromArgb(240, 240, 255); // LightLavander
-            public static readonly Color GradientEndColor = Color.FromArgb(176, 148, 226); // Goldenrod
+            // Цвета для градиента на форме
+            GradientStartColor = Color.FromArgb(255, 248, 220), // Cornsilk
+            GradientEndColor = Color.FromArgb(218, 165, 32) // Goldenrod
+        };
+        #endregion
+        //Текущая активная тема
+        public static Theme ActiveTheme { get; private set; } = Lavander;
 
-        // Стили кнопок
-        public static Color OkButtonBackground { get; set; } = Color.LightGreen;
-        public static Color OkButtonTextColor { get; set; } = Color.Black;
-        public static string OkButtonText { get; set; } = "OK";
-        public static Color CancelButtonBackground { get; set; } = Color.IndianRed;
-        public static Color CancelButtonTextColor { get; set; } = Color.White;
-        public static string CancelButtonText { get; set; } = "Cancel";
+        public static Theme Lavander => lavander;
+
+        public static void SetTheme(string themeName)
+        {
+            CurrentTheme = themeName;
+            ActiveTheme = themeName == "Gold" ? Gold : Lavander;
+            ThemeChanged?.Invoke(); // Уведомление всех подписчиков
+        }
+
 
 
     }
-    #endregion
 }

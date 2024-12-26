@@ -147,5 +147,10 @@ namespace SewingProduction
             teamWork.Show();
 
         }
+
+        private void краснаяToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
