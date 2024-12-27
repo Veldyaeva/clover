@@ -1,0 +1,37 @@
+--USE ACE_backup
+--UPDATE dbo.sp_articul
+--SET sp_articul.annId = art_norm_n.annID
+--FROM dbo.art_norm_n
+----WHERE art_norm_n.kod = SUBSTRING(sp_articul.kod, 1, 7)
+проставить внешний ключ в sp_articul
+
+--GO
+--USE ACE_backup
+--UPDATE dbo.norm_rasz
+--SET norm_rasz.annId = art_norm_n.annID
+--FROM dbo.art_norm_n
+--WHERE art_norm_n.kod = SUBSTRING(norm_rasz.kod, 1, 7)
+в norm_rasz
+
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_rask
+SET norm_rask.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_rask.kod, 1, 7)
+в norm_rask
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_kont
+SET norm_kont.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_kont.kod, 1, 7)
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_dop_obr
+SET norm_dop_obr.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_dop_obr.kod, 1, 7)

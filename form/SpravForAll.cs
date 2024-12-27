@@ -31,7 +31,7 @@ namespace SewingProduction.form
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
-       string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+       string connectionString = Properties.Settings.Default.ACEConnectionString;
 
         string queryList;
         int strForAdd;

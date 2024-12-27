@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 //nemain
 
 namespace SewingProduction
@@ -53,6 +54,9 @@ namespace SewingProduction
             ////mdiManager.MdiParent = this;
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
+
+        
+
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
         {
@@ -117,6 +121,28 @@ namespace SewingProduction
             OborudBrig f = new OborudBrig();
             f.MdiParent = this;
             f.Show();
+
+        }
+
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Articul f = new Articul();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlanZagrBrig f = new PlanZagrBrig();
+            f.MdiParent = this;
+            f.Show();
+        }
+        
+        private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TeamWork teamWork = new TeamWork();
+            teamWork.MdiParent = this;
+            teamWork.Show();
 
         }
     }
