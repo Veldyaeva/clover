@@ -14,7 +14,7 @@ using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.form
 {
-    public partial class SpravOborud : Form
+    public partial class SpravOborud : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;

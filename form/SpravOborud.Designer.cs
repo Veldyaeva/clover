@@ -68,7 +68,7 @@
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label8 = new SewingProduction.CustomLabel();
             this.simpleButtonRedOtm = new DevExpress.XtraEditors.SimpleButton();
             this.checkBoxRedArhiv = new System.Windows.Forms.CheckBox();
             this.simpleButtonRedSave = new DevExpress.XtraEditors.SimpleButton();
