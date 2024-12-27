@@ -144,12 +144,15 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
-
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SpravForAll f = new SpravForAll("spVidProizv", "Справочник Вид произв");
             f.MdiParent = this;
             f.Show();
+        }
+        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {
