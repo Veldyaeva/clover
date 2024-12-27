@@ -7,13 +7,14 @@ using System.Windows.Forms;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraGrid.Localization; // локализация для грида
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
+//using DevExpress.XtraGrid.Localization; // локализация для грида
 //using DevExpress.XtraPrinting.Localization;// локализация для печати
 
 
 namespace SewingProduction.form
 {
-    public partial class SpravOborud : Form
+    public partial class SpravOborud : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -40,7 +41,7 @@ namespace SewingProduction.form
 
         private void SpravOborud_Load(object sender, EventArgs e)
         {
-            GridLocalizer.Active = new RussianGridLocalizer();
+            //GridLocalizer.Active = new RussianGridLocalizer();
             //PreviewLocalizer.Active = new RussianPrintLocalizer();
             label4.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
             label7.Text = "Группа оборуд-я (для учета \n в цехе, компетенций)";
@@ -58,7 +59,7 @@ namespace SewingProduction.form
                 string queryOborudList = $"SELECT kod_ob ,text_ob,text_ob_s," +
                                             $"ko_ob_all,spec_ob,nastav, arhiv," +
                                             $"no_spec,pokaz_sp,id_class,show_for_plan,vid_shp, vid_vzp, vid_np, vid_rz" +
-                                            $" FROM dbo.oborud_shv";
+                                            $" FROM dbo.spoborudshv";
                 // Создание соединения с базой данных
                 connection = new SqlConnection(connectionString);
                 // Открытие соединения
@@ -102,7 +103,8 @@ namespace SewingProduction.form
                 Debug.WriteLine("Обновление таблицы");
 
                 // Обновление UI через Invoke
-                this.Invoke((MethodInvoker)delegate
+                if (this.IsHandleCreated)
+                    this.Invoke((MethodInvoker)delegate
                 {
                     GridView gridView = oborudGrid.MainView as GridView;
                     // Запомнили положение в таблице:
@@ -131,7 +133,7 @@ namespace SewingProduction.form
         {
             using (var connectionSELECT = new SqlConnection(connectionString))
             {
-                string queryOborudList = $@"SELECT kod_ob ,oborud_shv.text_ob,text_ob_s,
+                string queryOborudList = $@"SELECT kod_ob ,spOborudShv.text_ob,text_ob_s,
                                             oborud_shv_ob.text_ob AS text_ob_tip,spec_ob,
                                             spOborudMachine.name AS vidm,pokaz_sp,matrix_class.caption AS idClass,show_for_plan,
                                             (CASE arhiv WHEN 1 THEN 1 ELSE 0 END) AS arhiv,
@@ -140,10 +142,10 @@ namespace SewingProduction.form
                                             (CASE vid_vzp WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_vzp,
                                             (CASE vid_np WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_np,
                                             (CASE vid_rz WHEN 1 THEN 'основное' WHEN 2 THEN 'дополнительное' ELSE NULL END) AS vid_rz
-                                         FROM oborud_shv 
-                                             LEFT JOIN oborud_shv_ob ON oborud_shv_ob.ko_ob_all = oborud_shv.ko_ob_all 
-                                             LEFT JOIN spOborudMachine ON spOborudMachine.miniName = oborud_shv.no_spec 
-                                             LEFT JOIN matrix_class ON matrix_class.id_class = oborud_shv.id_class
+                                         FROM spOborudShv 
+                                             LEFT JOIN oborud_shv_ob ON oborud_shv_ob.ko_ob_all = spOborudShv.ko_ob_all 
+                                             LEFT JOIN spOborudMachine ON spOborudMachine.miniName = spOborudShv.no_spec 
+                                             LEFT JOIN matrix_class ON matrix_class.id_class = spOborudShv.id_class
                                          {(checkEditArhiv.Checked ? "" : "WHERE arhiv IS NULL OR arhiv = 0")} ";
 
                 //используя подключение отправляем запрос БД:
@@ -265,10 +267,13 @@ namespace SewingProduction.form
             textBoxRedSokrName.Text = gridView.GetFocusedRowCellValue("text_ob_s").ToString().Trim();
             // Заполняем комбобоксы:
             comboTableItems(comboBoxRedGrup, comboBoxRedVidm, comboBoxRedClass);
-            comboBoxRedGrup.Text = gridView.GetFocusedRowCellValue("text_ob_tip").ToString();
-            comboBoxRedVidm.Text = gridView.GetFocusedRowCellValue("vidm").ToString();
-            comboBoxRedClass.Text = gridView.GetFocusedRowCellValue("idClass").ToString();
-            comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav").ToString();
+            comboBoxRedGrup.Text = gridView.GetFocusedRowCellValue("text_ob_tip") != DBNull.Value ? gridView.GetFocusedRowCellValue("text_ob_tip").ToString() : "";
+            comboBoxRedVidm.Text = gridView.GetFocusedRowCellValue("vidm") != DBNull.Value ? gridView.GetFocusedRowCellValue("vidm").ToString() : "";
+            comboBoxRedClass.Text = gridView.GetFocusedRowCellValue("idClass") != DBNull.Value ? gridView.GetFocusedRowCellValue("idClass").ToString() : "";
+            //comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav") != DBNull.Value ? gridView.GetFocusedRowCellValue("nastav").ToString() : "";
+            if (gridView.GetFocusedRowCellValue("nastav") != DBNull.Value)
+                comboBoxRedNastav.Text = gridView.GetFocusedRowCellValue("nastav").ToString();
+            else comboBoxRedNastav.SelectedIndex = -1;
             // comboBox group for proizv:
             comboBoxRedShp.Text = gridView.GetFocusedRowCellValue("vid_shp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_shp").ToString() : "нет";
             comboBoxRedVzp.Text = gridView.GetFocusedRowCellValue("vid_vzp") != DBNull.Value ? gridView.GetFocusedRowCellValue("vid_vzp").ToString() : "нет";
@@ -286,10 +291,17 @@ namespace SewingProduction.form
             // Переключаем видимость вкладки
             AddTab.TabPages[0].PageVisible = true;
             AddTab.TabPages[1].PageVisible = false;
-            // Получаем доступ к GridView
-            GridView gridView = oborudGrid.MainView as GridView;
-            // Код = последнему коду в таблице + 1
-            textBoxAddKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)["kod_ob"]) + 1).ToString();
+            using (SqlConnection sqlKodConnection = new SqlConnection(connectionString))
+            {
+                // Код = последнему коду в таблице + 1
+                string sqlKodQuery = "SELECT TOP 1 kod_ob FROM spOborudShv ORDER BY kod_ob DESC";
+                using (SqlCommand command = new SqlCommand(sqlKodQuery, sqlKodConnection))
+                {
+                    sqlKodConnection.Open();
+                    textBoxAddKod.Text = (Convert.ToInt32(command.ExecuteScalar()) + 1).ToString();
+                }
+            }
+            //textBoxAddKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)["kod_ob"]) + 1).ToString();
             textBoxAddName.Text = "";
             textBoxAddSokrName.Text = "";
             // Заполняем комбобоксы:
@@ -362,12 +374,12 @@ namespace SewingProduction.form
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    string queryOborudRed = $"UPDATE oborud_shv " +
+                    string queryOborudRed = $"UPDATE spOborudShv " +
                                                  $"SET text_ob = '" + textBoxRedName.Text + "', " +
                                                  $"text_ob_s = '" + textBoxRedSokrName.Text + "', " +
-                                                 $"oborud_shv.ko_ob_all = oborud_shv_ob.ko_ob_all, " +
+                                                 $"spOborudShv.ko_ob_all = oborud_shv_ob.ko_ob_all, " +
                                                  $"no_spec = spOborudMachine.miniName, " +
-                                                 $"oborud_shv.id_class = (SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxRedClass.Text + "')," +
+                                                 $"spOborudShv.id_class = (SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxRedClass.Text + "')," +
                                                  $"vid_shp = " + comboBoxRedShp.SelectedIndex + ", " +
                                                  $"vid_vzp = " + comboBoxRedVzp.SelectedIndex + ", " +
                                                  $"vid_np = " + comboBoxRedNp.SelectedIndex + ", " +
@@ -376,7 +388,7 @@ namespace SewingProduction.form
                                                  $"show_for_plan = " + Convert.ToInt32(checkBoxRedShow.Checked) + ", " +
                                                  $"spec_ob = " + Convert.ToInt32(checkBoxRedSpec.Checked) + ", " +
                                                  $"arhiv = " + Convert.ToInt32(checkBoxRedArhiv.Checked) + " " +
-                                             $" FROM oborud_shv,spOborudMachine,oborud_shv_ob " +
+                                             $" FROM spOborudShv,spOborudMachine,oborud_shv_ob " +
                                              $" WHERE kod_ob = " + textBoxRedKod.Text +
                                              $" AND oborud_shv_ob.text_ob = '" + comboBoxRedGrup.Text + "' " +
                                              $" AND spOborudMachine.name = '" + comboBoxRedVidm.Text + "' ";
@@ -409,7 +421,7 @@ namespace SewingProduction.form
                     else
                         klass = "(SELECT id_class FROM matrix_class WHERE caption = '" + comboBoxAddClass.Text + "')";
 
-                    string queryOborudAdd = $"INSERT INTO oborud_shv (text_ob, text_ob_s, ko_ob_all, no_spec, id_class, vid_shp," +
+                    string queryOborudAdd = $"INSERT INTO spOborudShv (text_ob, text_ob_s, ko_ob_all, no_spec, id_class, vid_shp," +
                                                 $" vid_vzp, vid_np, vid_rz, nastav, show_for_plan, spec_ob,arhiv) " +
                                             $"VALUES (" +
                                                 $"'{textBoxAddName.Text}', " +
@@ -424,7 +436,8 @@ namespace SewingProduction.form
                                                 $"{comboBoxAddNastav.SelectedIndex}, " +
                                                 $"{Convert.ToInt32(checkBoxAddShow.Checked)}, " +
                                                 $"{Convert.ToInt32(checkBoxAddSpec.Checked)}, " +
-                                                $"{Convert.ToInt32(checkBoxAddArhiv.Checked)} ) ";
+                                                $"{Convert.ToInt32(checkBoxAddArhiv.Checked)} ); " +
+                                                $"EXEC dbo.add_columns_plan_proz_mg @obor_n = {textBoxAddKod.Text};" ;
 
                     using (SqlCommand command = new SqlCommand(queryOborudAdd, connectionINSERT))
                     {
@@ -456,7 +469,7 @@ namespace SewingProduction.form
             {
                 using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
                 {
-                    string queryOborudArh = $"UPDATE oborud_shv SET arhiv = 1 WHERE kod_ob = " + kodObArh;
+                    string queryOborudArh = $"UPDATE spOborudShv SET arhiv = 1 WHERE kod_ob = " + kodObArh;
                     // Используем SqlCommand для выполнения UPDATE
                     using (SqlCommand command = new SqlCommand(queryOborudArh, connectionUPDATE))
                     {
@@ -476,11 +489,6 @@ namespace SewingProduction.form
             simpleButtonRedOtm_Click(sender, e);
         }
 
-        private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StopListening();
-        }
-
         private void checkEditArhiv_CheckedChanged(object sender, EventArgs e)
         {
             LoadData();
@@ -488,6 +496,10 @@ namespace SewingProduction.form
             //gridView.Columns["arhiv"].Visible = !gridView.Columns["arhiv"].Visible;
             //перенос столбца архив в конец:
             gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count-2));
+        }
+        private void SpravOborud_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopListening();
         }
     }
 }

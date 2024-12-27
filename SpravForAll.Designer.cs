@@ -60,7 +60,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.textBoxKod = new System.Windows.Forms.TextBox();
             this.simpleButtonAddOtm = new DevExpress.XtraEditors.SimpleButton();
-            this.labelSave = new System.Windows.Forms.Label();
             this.gridControlSprav = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -99,19 +98,19 @@
             this.xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
             this.xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
             this.xtraTabPageAdd.Controls.Add(this.tableLayoutPanel3);
-            this.xtraTabPageAdd.MaximumSize = new System.Drawing.Size(540, 850);
+            this.xtraTabPageAdd.MaximumSize = new System.Drawing.Size(540, 585);
             this.xtraTabPageAdd.MinimumSize = new System.Drawing.Size(485, 585);
             this.xtraTabPageAdd.Name = "xtraTabPageAdd";
             this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(546, 860);
+            this.xtraTabPageAdd.Size = new System.Drawing.Size(540, 585);
             this.xtraTabPageAdd.Text = "Добавить/Редактировать";
             // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.34043F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.65957F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 170F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
             this.tableLayoutPanel3.Controls.Add(this.labelKod, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.label3, 0, 3);
             this.tableLayoutPanel3.Controls.Add(this.label1, 0, 1);
@@ -137,14 +136,13 @@
             this.tableLayoutPanel3.Controls.Add(this.label9, 0, 9);
             this.tableLayoutPanel3.Controls.Add(this.textBoxKod, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.simpleButtonAddOtm, 0, 12);
-            this.tableLayoutPanel3.Controls.Add(this.labelSave, 2, 11);
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.MaximumSize = new System.Drawing.Size(540, 850);
+            this.tableLayoutPanel3.MaximumSize = new System.Drawing.Size(540, 565);
             this.tableLayoutPanel3.MinimumSize = new System.Drawing.Size(488, 565);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 13;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 57.14286F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 42.85714F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
@@ -164,7 +162,7 @@
             this.labelKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.labelKod.AutoSize = true;
             this.labelKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelKod.Location = new System.Drawing.Point(3, 7);
+            this.labelKod.Location = new System.Drawing.Point(3, 14);
             this.labelKod.Name = "labelKod";
             this.labelKod.Size = new System.Drawing.Size(34, 17);
             this.labelKod.TabIndex = 14;
@@ -175,7 +173,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(3, 106);
+            this.label3.Location = new System.Drawing.Point(3, 123);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 17);
             this.label3.TabIndex = 16;
@@ -186,7 +184,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 38);
+            this.label1.Location = new System.Drawing.Point(3, 53);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 17);
             this.label1.TabIndex = 10;
@@ -197,7 +195,7 @@
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 71);
+            this.label2.Location = new System.Drawing.Point(3, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(52, 17);
             this.label2.TabIndex = 12;
@@ -208,7 +206,7 @@
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(3, 142);
+            this.label4.Location = new System.Drawing.Point(3, 159);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 17);
             this.label4.TabIndex = 18;
@@ -219,7 +217,7 @@
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(3, 176);
+            this.label5.Location = new System.Drawing.Point(3, 193);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 17);
             this.label5.TabIndex = 20;
@@ -230,7 +228,7 @@
             this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(3, 210);
+            this.label6.Location = new System.Drawing.Point(3, 227);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 17);
             this.label6.TabIndex = 22;
@@ -241,7 +239,7 @@
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(3, 245);
+            this.label7.Location = new System.Drawing.Point(3, 262);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 17);
             this.label7.TabIndex = 24;
@@ -251,7 +249,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox8, 2);
             this.textBox8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox8.Location = new System.Drawing.Point(178, 274);
+            this.textBox8.Location = new System.Drawing.Point(191, 291);
             this.textBox8.Name = "textBox8";
             this.textBox8.Size = new System.Drawing.Size(320, 25);
             this.textBox8.TabIndex = 25;
@@ -260,7 +258,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox7, 2);
             this.textBox7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(178, 239);
+            this.textBox7.Location = new System.Drawing.Point(191, 256);
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(320, 25);
             this.textBox7.TabIndex = 23;
@@ -269,7 +267,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox6, 2);
             this.textBox6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(178, 204);
+            this.textBox6.Location = new System.Drawing.Point(191, 221);
             this.textBox6.Name = "textBox6";
             this.textBox6.Size = new System.Drawing.Size(320, 25);
             this.textBox6.TabIndex = 21;
@@ -278,7 +276,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox5, 2);
             this.textBox5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(178, 171);
+            this.textBox5.Location = new System.Drawing.Point(191, 188);
             this.textBox5.Name = "textBox5";
             this.textBox5.Size = new System.Drawing.Size(320, 25);
             this.textBox5.TabIndex = 19;
@@ -287,7 +285,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox4, 2);
             this.textBox4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(178, 136);
+            this.textBox4.Location = new System.Drawing.Point(191, 153);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(320, 25);
             this.textBox4.TabIndex = 17;
@@ -296,7 +294,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox3, 2);
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(178, 100);
+            this.textBox3.Location = new System.Drawing.Point(191, 117);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(320, 25);
             this.textBox3.TabIndex = 15;
@@ -306,7 +304,7 @@
             this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(3, 279);
+            this.label8.Location = new System.Drawing.Point(3, 296);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 17);
             this.label8.TabIndex = 26;
@@ -318,7 +316,7 @@
             this.simpleButtonDel.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonDel.Appearance.Options.UseFont = true;
             this.simpleButtonDel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonDel.ImageOptions.Image")));
-            this.simpleButtonDel.Location = new System.Drawing.Point(198, 519);
+            this.simpleButtonDel.Location = new System.Drawing.Point(208, 519);
             this.simpleButtonDel.Name = "simpleButtonDel";
             this.simpleButtonDel.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonDel.TabIndex = 9;
@@ -329,7 +327,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox2, 2);
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(178, 65);
+            this.textBox2.Location = new System.Drawing.Point(191, 82);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(320, 25);
             this.textBox2.TabIndex = 11;
@@ -339,7 +337,7 @@
             this.textBox1.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(178, 34);
+            this.textBox1.Location = new System.Drawing.Point(191, 48);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(320, 25);
             this.textBox1.TabIndex = 9;
@@ -350,7 +348,7 @@
             this.simpleButtonAddSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddSave.Appearance.Options.UseFont = true;
             this.simpleButtonAddSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddSave.ImageOptions.Image")));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(380, 519);
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(384, 519);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
             this.simpleButtonAddSave.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonAddSave.TabIndex = 7;
@@ -361,7 +359,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox9, 2);
             this.textBox9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox9.Location = new System.Drawing.Point(178, 308);
+            this.textBox9.Location = new System.Drawing.Point(191, 325);
             this.textBox9.Name = "textBox9";
             this.textBox9.Size = new System.Drawing.Size(320, 25);
             this.textBox9.TabIndex = 27;
@@ -370,7 +368,7 @@
             // 
             this.tableLayoutPanel3.SetColumnSpan(this.textBox10, 2);
             this.textBox10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox10.Location = new System.Drawing.Point(178, 342);
+            this.textBox10.Location = new System.Drawing.Point(191, 359);
             this.textBox10.Name = "textBox10";
             this.textBox10.Size = new System.Drawing.Size(320, 25);
             this.textBox10.TabIndex = 29;
@@ -380,7 +378,7 @@
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(3, 348);
+            this.label10.Location = new System.Drawing.Point(3, 365);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 17);
             this.label10.TabIndex = 30;
@@ -391,7 +389,7 @@
             this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(3, 313);
+            this.label9.Location = new System.Drawing.Point(3, 330);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 17);
             this.label9.TabIndex = 28;
@@ -404,7 +402,7 @@
             this.textBoxKod.Cursor = System.Windows.Forms.Cursors.No;
             this.textBoxKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxKod.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxKod.Location = new System.Drawing.Point(178, 3);
+            this.textBoxKod.Location = new System.Drawing.Point(191, 10);
             this.textBoxKod.Name = "textBoxKod";
             this.textBoxKod.ReadOnly = true;
             this.textBoxKod.Size = new System.Drawing.Size(63, 25);
@@ -416,24 +414,12 @@
             this.simpleButtonAddOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddOtm.Appearance.Options.UseFont = true;
             this.simpleButtonAddOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddOtm.ImageOptions.Image")));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(13, 519);
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(20, 519);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonAddOtm.TabIndex = 8;
             this.simpleButtonAddOtm.Text = "Отмена";
             this.simpleButtonAddOtm.Click += new System.EventHandler(this.simpleButtonAddOtm_Click);
-            // 
-            // labelSave
-            // 
-            this.labelSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelSave.AutoSize = true;
-            this.labelSave.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSave.Location = new System.Drawing.Point(402, 480);
-            this.labelSave.Name = "labelSave";
-            this.labelSave.Size = new System.Drawing.Size(105, 19);
-            this.labelSave.TabIndex = 31;
-            this.labelSave.Text = "Сохранено!";
-            this.labelSave.Visible = false;
             // 
             // gridControlSprav
             // 
@@ -448,7 +434,6 @@
             this.gridView1});
             this.gridControlSprav.Load += new System.EventHandler(this.gridControlSprav_Load);
             this.gridControlSprav.Click += new System.EventHandler(this.gridControlSprav_Click);
-            this.gridControlSprav.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridControlSprav_KeyUp);
             // 
             // gridView1
             // 
@@ -466,15 +451,15 @@
             // 
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.80591F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.19409F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 241F));
             this.tableLayoutPanel1.Controls.Add(this.simpleButtonRed, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.simpleButtonAdd, 2, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 894);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1354, 60);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
@@ -485,7 +470,7 @@
             this.simpleButtonRed.Appearance.Options.UseFont = true;
             this.simpleButtonRed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.simpleButtonRed.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRed.ImageOptions.Image")));
-            this.simpleButtonRed.Location = new System.Drawing.Point(892, 3);
+            this.simpleButtonRed.Location = new System.Drawing.Point(922, 3);
             this.simpleButtonRed.MaximumSize = new System.Drawing.Size(187, 43);
             this.simpleButtonRed.MinimumSize = new System.Drawing.Size(100, 30);
             this.simpleButtonRed.Name = "simpleButtonRed";
@@ -514,8 +499,8 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 71.05538F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28.94462F));
             this.tableLayoutPanel2.Controls.Add(this.gridControlSprav, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.AddTab, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
@@ -593,6 +578,5 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonAddSave;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Label labelSave;
     }
 }
