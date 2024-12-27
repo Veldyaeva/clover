@@ -20,8 +20,22 @@ namespace SewingProduction
     {
         public SpMainForm()
         {
+
+
             InitializeComponent();
+            ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
+            //toolStripComboBox1.SelectedIndex = 0; // Устанавливаем первую тему по умолчанию
+            ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
+            // Обработчик смены темы
+            ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
+            {
+                string selectedTheme = ThemeSelectorComboBox.SelectedItem.ToString();
+                ThemeManager.SetTheme(selectedTheme);
+            };
+        
         }
+
+
 
         XtraTabbedMdiManager mdiManager;
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -143,6 +157,11 @@ namespace SewingProduction
             TeamWork teamWork = new TeamWork();
             teamWork.MdiParent = this;
             teamWork.Show();
+
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }
