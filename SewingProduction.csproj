@@ -152,6 +152,12 @@
     <Compile Include="form\Articul.Designer.cs">
       <DependentUpon>Articul.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\CardByNom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\CardByNom.Designer.cs">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,12 +193,6 @@
     </Compile>
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\TeamWorkTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\TeamWorkTest.Designer.cs">
-      <DependentUpon>TeamWorkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -241,12 +241,6 @@
     </Compile>
     <Compile Include="SpMainForm.Designer.cs">
       <DependentUpon>SpMainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\CardByNom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\CardByNom.Designer.cs">
-      <DependentUpon>CardByNom.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -301,6 +295,9 @@
     <EmbeddedResource Include="form\Articul.resx">
       <DependentUpon>Articul.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\CardByNom.resx">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
@@ -351,9 +348,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\CardByNom.resx">
-      <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
