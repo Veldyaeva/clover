@@ -166,5 +166,9 @@ namespace SewingProduction
             f.Show();
         }
 
+        private void бригадыToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
