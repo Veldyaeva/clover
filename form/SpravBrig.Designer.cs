@@ -72,7 +72,7 @@
             this.textBoxKod.Cursor = System.Windows.Forms.Cursors.No;
             this.textBoxKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxKod.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxKod.Location = new System.Drawing.Point(191, 5);
+            this.textBoxKod.Location = new System.Drawing.Point(183, 5);
             this.textBoxKod.Name = "textBoxKod";
             this.textBoxKod.ReadOnly = true;
             this.textBoxKod.Size = new System.Drawing.Size(63, 25);
@@ -84,7 +84,7 @@
             this.simpleButtonAddOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddOtm.Appearance.Options.UseFont = true;
             this.simpleButtonAddOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddOtm.ImageOptions.Image")));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(20, 163);
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(16, 163);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonAddOtm.TabIndex = 8;
@@ -100,10 +100,10 @@
             this.comboBoxZeh.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxZeh.ForeColor = System.Drawing.SystemColors.WindowText;
             this.comboBoxZeh.FormattingEnabled = true;
-            this.comboBoxZeh.Location = new System.Drawing.Point(191, 110);
+            this.comboBoxZeh.Location = new System.Drawing.Point(183, 110);
             this.comboBoxZeh.Name = "comboBoxZeh";
             this.comboBoxZeh.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.comboBoxZeh.Size = new System.Drawing.Size(320, 25);
+            this.comboBoxZeh.Size = new System.Drawing.Size(341, 25);
             this.comboBoxZeh.TabIndex = 17;
             this.comboBoxZeh.Enter += new System.EventHandler(this.comboBoxZeh_Enter);
             // 
@@ -139,9 +139,9 @@
             this.textBoxNBrig.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.tableLayoutPanel3.SetColumnSpan(this.textBoxNBrig, 2);
             this.textBoxNBrig.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxNBrig.Location = new System.Drawing.Point(191, 75);
+            this.textBoxNBrig.Location = new System.Drawing.Point(183, 75);
             this.textBoxNBrig.Name = "textBoxNBrig";
-            this.textBoxNBrig.Size = new System.Drawing.Size(320, 25);
+            this.textBoxNBrig.Size = new System.Drawing.Size(341, 25);
             this.textBoxNBrig.TabIndex = 15;
             // 
             // simpleButtonDel
@@ -150,7 +150,7 @@
             this.simpleButtonDel.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonDel.Appearance.Options.UseFont = true;
             this.simpleButtonDel.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonDel.ImageOptions.Image")));
-            this.simpleButtonDel.Location = new System.Drawing.Point(208, 163);
+            this.simpleButtonDel.Location = new System.Drawing.Point(196, 163);
             this.simpleButtonDel.Name = "simpleButtonDel";
             this.simpleButtonDel.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonDel.TabIndex = 9;
@@ -163,9 +163,9 @@
             this.textBoxBrig.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanel3.SetColumnSpan(this.textBoxBrig, 2);
             this.textBoxBrig.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxBrig.Location = new System.Drawing.Point(191, 40);
+            this.textBoxBrig.Location = new System.Drawing.Point(183, 40);
             this.textBoxBrig.Name = "textBoxBrig";
-            this.textBoxBrig.Size = new System.Drawing.Size(320, 25);
+            this.textBoxBrig.Size = new System.Drawing.Size(341, 25);
             this.textBoxBrig.TabIndex = 9;
             // 
             // simpleButtonAddSave
@@ -174,7 +174,7 @@
             this.simpleButtonAddSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonAddSave.Appearance.Options.UseFont = true;
             this.simpleButtonAddSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddSave.ImageOptions.Image")));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(384, 163);
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(376, 163);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
             this.simpleButtonAddSave.Size = new System.Drawing.Size(148, 43);
             this.simpleButtonAddSave.TabIndex = 7;
@@ -184,9 +184,9 @@
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 164F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.Controls.Add(this.labelKod, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.labelB, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.textBoxBrig, 1, 1);
@@ -265,7 +265,7 @@
             this.labelSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.labelSave.AutoSize = true;
             this.labelSave.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSave.Location = new System.Drawing.Point(405, 141);
+            this.labelSave.Location = new System.Drawing.Point(397, 141);
             this.labelSave.Name = "labelSave";
             this.labelSave.Size = new System.Drawing.Size(105, 19);
             this.labelSave.TabIndex = 32;

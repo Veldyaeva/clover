@@ -51,8 +51,8 @@ namespace SewingProduction.form
             this.Text = rusNameTableSQL;
             //Текст запроса для Brig:
             queryList = $@" SELECT id_brig,n_brig,brig,nameZeh AS 'Цех'
-                            FROM Brig
-                            LEFT JOIN ZehList ON ZehList.idZeh = Brig.idZeh ";
+                            FROM spBrig
+                            LEFT JOIN ZehList ON ZehList.idZeh = spBrig.idZeh ";
             //Иницилизация листа столбцов:
             fieldsQueryListSQL = new List<string>();
         }

@@ -128,7 +128,7 @@ namespace SewingProduction
         }
         private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravBrig f = new SpravBrig("Brig", "Справочник Бригад");
+            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
             f.MdiParent = this;
             f.Show();
         }
