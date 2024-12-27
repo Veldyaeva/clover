@@ -15,8 +15,29 @@
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|C:\\Users\\soft-otdel\\source\\team_work_\\form\\teamwork.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\teamwork.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:spmainform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\oborudbrig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\oborudbrig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\spravoborud.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|D:\\SP\\form\\oborudbrig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{492A5D90-D112-4AA4-8DF2-789E7922C204}|SewingProduction.csproj|solutionrelative:form\\oborudbrig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 1
     }
   ],
   "DocumentGroupContainers": [
@@ -122,6 +143,33 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
+=======
+              "DocumentIndex": 2,
+              "Title": "SpravOborud.cs",
+              "DocumentMoniker": "D:\\SP\\form\\SpravOborud.cs",
+              "RelativeDocumentMoniker": "form\\SpravOborud.cs",
+              "ToolTip": "D:\\SP\\form\\SpravOborud.cs",
+              "RelativeToolTip": "form\\SpravOborud.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPMBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T10:26:45.166Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "SpravForAll.cs [Design]",
+              "DocumentMoniker": "D:\\SP\\form\\SpravForAll.cs",
+              "RelativeDocumentMoniker": "form\\SpravForAll.cs",
+              "ToolTip": "D:\\SP\\form\\SpravForAll.cs [Design]",
+              "RelativeToolTip": "form\\SpravForAll.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T07:32:21.354Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+>>>>>>> 1
               "DocumentIndex": 0,
               "Title": "TeamWork.cs",
               "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.cs",
@@ -135,6 +183,7 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
               "DocumentIndex": 1,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\Program.cs",
@@ -142,6 +191,14 @@
               "ToolTip": "C:\\Users\\soft-otdel\\source\\team_work_\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAwwB8AAAAiAAAAAAAAAA==",
+=======
+              "DocumentIndex": 5,
+              "Title": "OborudBrig.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SP\\form\\OborudBrig.cs",
+              "RelativeDocumentMoniker": "form\\OborudBrig.cs",
+              "ToolTip": "D:\\SP\\form\\OborudBrig.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "form\\OborudBrig.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+>>>>>>> 1
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-14T06:35:23.51Z"
             },
@@ -160,6 +217,7 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+<<<<<<< HEAD
               "Title": "TeamWork.Designer.cs",
               "DocumentMoniker": "C:\\Users\\soft-otdel\\source\\team_work_\\form\\TeamWork.Designer.cs",
               "RelativeDocumentMoniker": "form\\TeamWork.Designer.cs",
@@ -169,6 +227,39 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-06T08:59:58.827Z",
               "EditorCaption": ""
+=======
+              "Title": "SpMainForm.cs",
+              "DocumentMoniker": "D:\\SP\\SpMainForm.cs",
+              "RelativeDocumentMoniker": "SpMainForm.cs",
+              "ToolTip": "D:\\SP\\SpMainForm.cs",
+              "RelativeToolTip": "SpMainForm.cs",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAwwI0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T11:43:13.173Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "DocumentMoniker": "D:\\SP\\form\\SpravOborud.cs",
+              "RelativeDocumentMoniker": "form\\SpravOborud.cs",
+              "ToolTip": "D:\\SP\\form\\SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "RelativeToolTip": "form\\SpravOborud.cs [\u041A\u043E\u043D\u0441\u0442\u0440\u0443\u043A\u0442\u043E\u0440]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-18T11:41:03.406Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "OborudBrig.cs",
+              "DocumentMoniker": "D:\\SP\\form\\OborudBrig.cs",
+              "RelativeDocumentMoniker": "form\\OborudBrig.cs",
+              "ToolTip": "D:\\SP\\form\\OborudBrig.cs",
+              "RelativeToolTip": "form\\OborudBrig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-13T11:57:07.389Z"
+>>>>>>> 1
             }
           ]
         }
