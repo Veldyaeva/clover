@@ -93,7 +93,7 @@ namespace SewingProduction.form
                 using (var connectionSELECT = new SqlConnection(connectionString))
                 {
                     GridView gridViewZeh = gridZeh.MainView as GridView;
-                    string queryList = $@"SELECT n_brig AS 'Номер', brig AS 'Бригада' FROM Brig WHERE idZeh ";
+                    string queryList = $@"SELECT n_brig AS 'Номер', brig AS 'Бригада' FROM spBrig WHERE idZeh ";
                     if (gridViewZeh.Columns.Count < 1)
                         queryList += " IS NOT NULL";
                     else
@@ -269,7 +269,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravBrig f = new SpravBrig("Brig", "Справочник Бригад");
+            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
             f.MdiParent = this.MdiParent;
             f.Show();
         }

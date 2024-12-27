@@ -55,6 +55,8 @@
             this.цехаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.бригадыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видыПроизводстваToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -258,6 +260,19 @@
             this.видыПроизводстваToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
             this.видыПроизводстваToolStripMenuItem.Text = "Виды производства";
             this.видыПроизводстваToolStripMenuItem.Click += new System.EventHandler(this.видыПроизводстваToolStripMenuItem_Click);
+            // 
+            // карточкаРасчетаToolStripMenuItem1
+            // 
+            this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
+            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
+            this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
+            // 
+            // xtraTabbedMdiManager1
+            // 
+            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
+            this.xtraTabbedMdiManager1.MdiParent = this;
+            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
             // 
             // SpMainForm
             // 

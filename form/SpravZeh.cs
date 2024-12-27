@@ -356,7 +356,7 @@ namespace SewingProduction.form
                     using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
                     {
                         string queryOborudArh = $@" DELETE FROM OborudBrig WHERE idZeh = {kodCol}
-                                                    DELETE FROM Brig WHERE idZeh = {kodCol}
+                                                    DELETE FROM spBrig WHERE idZeh = {kodCol}
                                                     DELETE FROM ZehList WHERE idZeh = {kodCol}";
                         using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
                         {
