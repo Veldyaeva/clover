@@ -323,6 +323,9 @@
       <DependentUpon>OborudBrig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravBrig.resx">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork.resx">
       <DependentUpon>TeamWork.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -344,9 +347,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravZeh.resx">
       <DependentUpon>SpravZeh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
-      <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>

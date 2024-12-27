@@ -129,8 +129,8 @@
             // 
             this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.оборудованиеToolStripMenuItem,
-            this.цехаБригадыToolStripMenuItem,
-            this.карточкаРасчетаToolStripMenuItem1});
+            this.карточкаРасчетаToolStripMenuItem1,
+            this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
             this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -181,85 +181,6 @@
             this.видыОперацийToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.видыОперацийToolStripMenuItem.Text = "Виды операций";
             this.видыОперацийToolStripMenuItem.Click += new System.EventHandler(this.видОперацToolStripMenuItem_Click);
-            // 
-            // карточкаРасчетаToolStripMenuItem1
-            // 
-            this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
-            this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
-            // 
-            // изделияToolStripMenuItem
-            // 
-            this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
-            this.изделияToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
-            this.изделияToolStripMenuItem.Text = "Изделия";
-            // 
-            // производствоToolStripMenuItem
-            // 
-            this.производствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.рабочийСтолМастераToolStripMenuItem});
-            this.производствоToolStripMenuItem.Name = "производствоToolStripMenuItem";
-            this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
-            this.производствоToolStripMenuItem.Text = "Производство";
-            // 
-            // рабочийСтолМастераToolStripMenuItem
-            // 
-            this.рабочийСтолМастераToolStripMenuItem.Name = "рабочийСтолМастераToolStripMenuItem";
-            this.рабочийСтолМастераToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
-            this.рабочийСтолМастераToolStripMenuItem.Text = "Рабочий стол мастера";
-            // 
-            // TeamWorktoolStripMenuItem
-            // 
-            this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
-            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 23);
-            this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
-            this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
-            // 
-            // ThemeSelectorComboBox
-            // 
-            this.ThemeSelectorComboBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.ThemeSelectorComboBox.Name = "ThemeSelectorComboBox";
-            this.ThemeSelectorComboBox.Size = new System.Drawing.Size(121, 23);
-            this.ThemeSelectorComboBox.ToolTipText = "Тема";
-            this.ThemeSelectorComboBox.Click += new System.EventHandler(this.toolStripComboBox1_Click);
-            // 
-            // xtraTabbedMdiManager1
-            // 
-            this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
-            this.xtraTabbedMdiManager1.MdiParent = this;
-            this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
-            // 
-            // цехаБригадыToolStripMenuItem
-            // 
-            this.цехаБригадыToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.цехаToolStripMenuItem1,
-            this.бригадыToolStripMenuItem,
-            this.видыПроизводстваToolStripMenuItem});
-            this.цехаБригадыToolStripMenuItem.Name = "цехаБригадыToolStripMenuItem";
-            this.цехаБригадыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.цехаБригадыToolStripMenuItem.Text = "Цеха/Бригады";
-            // 
-            // цехаToolStripMenuItem1
-            // 
-            this.цехаToolStripMenuItem1.Name = "цехаToolStripMenuItem1";
-            this.цехаToolStripMenuItem1.Size = new System.Drawing.Size(181, 22);
-            this.цехаToolStripMenuItem1.Text = "Цеха";
-            this.цехаToolStripMenuItem1.Click += new System.EventHandler(this.цехаToolStripMenuItem1_Click);
-            // 
-            // бригадыToolStripMenuItem
-            // 
-            this.бригадыToolStripMenuItem.Name = "бригадыToolStripMenuItem";
-            this.бригадыToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.бригадыToolStripMenuItem.Text = "Бригады";
-            this.бригадыToolStripMenuItem.Click += new System.EventHandler(this.бригадыToolStripMenuItem_Click);
-            // 
-            // видыПроизводстваToolStripMenuItem
-            // 
-            this.видыПроизводстваToolStripMenuItem.Name = "видыПроизводстваToolStripMenuItem";
-            this.видыПроизводстваToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
-            this.видыПроизводстваToolStripMenuItem.Text = "Виды производства";
-            this.видыПроизводстваToolStripMenuItem.Click += new System.EventHandler(this.видыПроизводстваToolStripMenuItem_Click);
             // 
             // карточкаРасчетаToolStripMenuItem1
             // 
@@ -329,4 +250,3 @@
         private System.Windows.Forms.ToolStripMenuItem видыПроизводстваToolStripMenuItem;
     }
 }
-
