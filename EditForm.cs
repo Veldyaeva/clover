@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace SewingProduction
 {
-    public partial class Form1 : CustomForm
+    public partial class EditForm : CustomForm
     {
-        public Form1()
+        public EditForm()
         {
             InitializeComponent();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

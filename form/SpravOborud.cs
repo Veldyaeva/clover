@@ -19,7 +19,7 @@ namespace SewingProduction.form
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
-        private string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        private string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Отслеживание изменений в базе данных:
         private SqlDependency sqlDependency;
         // Соединение с бд:
