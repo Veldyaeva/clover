@@ -159,14 +159,14 @@ namespace SewingProduction.form
                             getVid = " 3 ";
                             break;
                     }
-                    string queryList = $@"SELECT oborud_shv.text_ob AS 'Оборудование', COALESCE(OborudBrig.count, 0) AS 'Кол-во', 
+                    string queryList = $@"SELECT spoborudshv.text_ob AS 'Оборудование', COALESCE(OborudBrig.count, 0) AS 'Кол-во', 
                                                 CASE 
                                                     WHEN {getVid} = 1 THEN 'Основное'
                                                     WHEN {getVid} = 2 THEN 'Дополнительное'
                                                     WHEN {getVid} = 3 THEN 'Другое'
                                                 END AS 'Вид'
-                                          FROM oborud_shv 
-                                          LEFT JOIN OborudBrig ON oborud_shv.kod_ob = OborudBrig.kod_ob 
+                                          FROM spoborudshv 
+                                          LEFT JOIN OborudBrig ON spoborudshv.kod_ob = OborudBrig.kod_ob 
                                           AND OborudBrig.idZeh ";
                     if (gridViewZeh.Columns.Count < 1)
                         queryList += " IS NOT NULL";
@@ -176,7 +176,7 @@ namespace SewingProduction.form
                     else
                         queryList += " = (SELECT idZeh FROM ZehList WHERE nameZeh = '" +
                         gridViewZeh.GetFocusedRowCellValue(gridViewZeh.Columns["Цех"]).ToString() + "')";
-                    queryList += " WHERE oborud_shv.kod_ob IS NOT NULL AND COALESCE(oborud_shv.arhiv, 0) = 0 ";
+                    queryList += " WHERE spoborudshv.kod_ob IS NOT NULL AND COALESCE(spoborudshv.arhiv, 0) = 0 ";
                     queryList += $" AND {getVid} > 0";
                     queryList += " ORDER BY CASE WHEN COALESCE(OborudBrig.count, 0) > 0 THEN 1 ELSE 0 END DESC, text_ob ASC";
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionSELECT);
@@ -201,7 +201,7 @@ namespace SewingProduction.form
             }
             catch (SqlException sqlEx)
             {
-                Debug.WriteLine($"oborud_shv SQL Error: {sqlEx.Message}");
+                Debug.WriteLine($"spoborudshv SQL Error: {sqlEx.Message}");
                 MessageBox.Show($"{sqlEx.Message}");
             }
         }
@@ -214,7 +214,7 @@ namespace SewingProduction.form
                 {
                     //Получаем код оборудования по названию из таблицы оборудований:
                     GridView gridViewOborud = gridOborud.MainView as GridView;
-                    string get_kod_ob = $@" (SELECT kod_ob FROM oborud_shv WHERE text_ob =
+                    string get_kod_ob = $@" (SELECT kod_ob FROM spoborudshv WHERE text_ob =
                                       '{gridViewOborud.GetFocusedRowCellValue(gridViewOborud.Columns["Оборудование"]).ToString()}') ";
                     //Получаем код цеха по названию из таблицы цехов:
                     GridView gridViewZeh = gridZeh.MainView as GridView;
