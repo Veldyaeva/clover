@@ -16,7 +16,7 @@ using DevExpress.DataProcessing.InMemoryDataProcessor;
 
 namespace SewingProduction.form
 {
-    public partial class OborudBrig : Form
+    public partial class OborudBrig : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
