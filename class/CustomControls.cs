@@ -31,6 +31,7 @@ namespace SewingProduction
         public Color ComponentFontColor { get; set; }
         public Size ComponentSize { get; set; }
 
+
         private void ApplyTheme()
         {
             BackColor = ThemeManager.ActiveTheme.ButtonBackground;

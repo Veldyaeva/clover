@@ -24,8 +24,11 @@ namespace SewingProduction
 
             InitializeComponent();
             ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
-            //toolStripComboBox1.SelectedIndex = 0; // Устанавливаем первую тему по умолчанию
-            ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
+            if (ThemeManager.CurrentTheme is null) { ThemeSelectorComboBox.SelectedIndex = 0; }
+            else
+            {
+                ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
+            }
             // Обработчик смены темы
             ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
             {
@@ -193,5 +196,9 @@ namespace SewingProduction
 
         }
 
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

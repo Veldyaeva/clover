@@ -159,6 +159,12 @@
     <Compile Include="form\Fio.Designer.cs">
       <DependentUpon>Fio.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\CardByNom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\CardByNom.Designer.cs">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -255,12 +261,6 @@
     <Compile Include="SpMainForm.Designer.cs">
       <DependentUpon>SpMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\CardByNom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\CardByNom.Designer.cs">
-      <DependentUpon>CardByNom.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rptPrintNakl.cs">
@@ -316,6 +316,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\Fio.resx">
       <DependentUpon>Fio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\CardByNom.resx">
+      <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\CardByNom.resx">
       <DependentUpon>CardByNom.cs</DependentUpon>

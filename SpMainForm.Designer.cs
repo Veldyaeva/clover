@@ -133,7 +133,7 @@
             this.карточкаРасчетаToolStripMenuItem1,
             this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
-            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 23);
             this.справочникиToolStripMenuItem.Text = "Справочники";
             // 
             // оборудованиеToolStripMenuItem
@@ -232,7 +232,7 @@
             this.производствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.рабочийСтолМастераToolStripMenuItem});
             this.производствоToolStripMenuItem.Name = "производствоToolStripMenuItem";
-            this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
             this.производствоToolStripMenuItem.Text = "Производство";
             // 
             // рабочийСтолМастераToolStripMenuItem
@@ -244,9 +244,17 @@
             // TeamWorktoolStripMenuItem
             // 
             this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
-            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 23);
             this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
             this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
+            // 
+            // ThemeSelectorComboBox
+            // 
+            this.ThemeSelectorComboBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ThemeSelectorComboBox.Name = "ThemeSelectorComboBox";
+            this.ThemeSelectorComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ThemeSelectorComboBox.ToolTipText = "Тема";
+            this.ThemeSelectorComboBox.Click += new System.EventHandler(this.toolStripComboBox1_Click);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -309,10 +317,6 @@
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem разделенияТрудаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem TeamWorktoolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem бригадыЦехаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem бригадыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem цехаToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem видыПроизводствToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem работникиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox ThemeSelectorComboBox;
     }
 }
