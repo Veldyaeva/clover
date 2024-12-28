@@ -80,7 +80,7 @@ namespace SewingProduction.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Lavander")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Peach")]
         public string SelectedTheme {
             get {
                 return ((string)(this["SelectedTheme"]));

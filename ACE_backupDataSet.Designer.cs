@@ -7191,13 +7191,8 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[1].Connection = this.Connection;
-<<<<<<< HEAD:ACEDataSet.Designer.cs
-            this._commandCollection[1].CommandText = "SELECT        SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod\r\nFROM            sp" +
-                "_articul";
-=======
             this._commandCollection[1].CommandText = "SELECT        kod, grup, articul, mod, razm, annId\r\nFROM            sp_articul\r\nW" +
                 "HERE        (annId IS NULL)";
->>>>>>> a0f6e0670950cb8c6775dfecf1fcd89d252af30c:ACE_backupDataSet.Designer.cs
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -7229,11 +7224,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
-<<<<<<< HEAD:ACEDataSet.Designer.cs
-        public virtual int FillBy(ACEDataSet.sp_articulDataTable dataTable) {
-=======
         public virtual int FillBy(ACE_backupDataSet.sp_articulDataTable dataTable) {
->>>>>>> a0f6e0670950cb8c6775dfecf1fcd89d252af30c:ACE_backupDataSet.Designer.cs
             this.Adapter.SelectCommand = this.CommandCollection[1];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -7245,11 +7236,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-<<<<<<< HEAD:ACEDataSet.Designer.cs
-        public virtual int Update(ACEDataSet.sp_articulDataTable dataTable) {
-=======
         public virtual int Update(ACE_backupDataSet.sp_articulDataTable dataTable) {
->>>>>>> a0f6e0670950cb8c6775dfecf1fcd89d252af30c:ACE_backupDataSet.Designer.cs
             return this.Adapter.Update(dataTable);
         }
         

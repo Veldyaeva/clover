@@ -286,9 +286,6 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).BeginInit();
-            this.xtraTabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
-            this.fillByToolStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // aCEDataSetBindingSource
@@ -300,130 +297,6 @@ namespace SewingProduction.form
             // 
             this.aCEDataSet.DataSetName = "ACEDataSet";
             this.aCEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // gridView8
-            // 
-            this.gridView8.GridControl = this.gridControl7;
-            this.gridView8.Name = "gridView8";
-            // 
-            // gridControl7
-            // 
-            this.gridControl7.DataSource = this.aCEDataSetBindingSource;
-            this.gridControl7.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridLevelNode1.LevelTemplate = this.gridView8;
-            gridLevelNode1.RelationName = "Level1";
-            gridLevelNode2.LevelTemplate = this.gridView9;
-            gridLevelNode2.RelationName = "Level2";
-            gridLevelNode3.LevelTemplate = this.gridView10;
-            gridLevelNode3.RelationName = "Level3";
-            this.gridControl7.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1,
-            gridLevelNode2,
-            gridLevelNode3});
-            this.gridControl7.Location = new System.Drawing.Point(0, 0);
-            this.gridControl7.MainView = this.gridView11;
-            this.gridControl7.Name = "gridControl7";
-            this.gridControl7.Size = new System.Drawing.Size(1493, 789);
-            this.gridControl7.TabIndex = 0;
-            this.gridControl7.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView9,
-            this.gridView10,
-            this.gridView11,
-            this.gridView7,
-            this.gridView12,
-            this.gridView13,
-            this.gridView14,
-            this.gridView15,
-            this.gridView16,
-            this.gridView17,
-            this.gridView18,
-            this.gridView19,
-            this.gridView20,
-            this.gridView8});
-            // 
-            // aCEDataSetBindingSource
-            // 
-            this.aCEDataSetBindingSource.DataSource = this.aCEDataSet;
-            this.aCEDataSetBindingSource.Position = 0;
-            // 
-            // aCEDataSet
-            // 
-            this.aCEDataSet.DataSetName = "ACEDataSet";
-            this.aCEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // gridView9
-            // 
-            this.gridView9.GridControl = this.gridControl7;
-            this.gridView9.Name = "gridView9";
-            // 
-            // gridView10
-            // 
-            this.gridView10.GridControl = this.gridControl7;
-            this.gridView10.Name = "gridView10";
-            // 
-            // gridView11
-            // 
-            this.gridView11.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn3});
-            this.gridView11.GridControl = this.gridControl7;
-            this.gridView11.Name = "gridView11";
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "gridColumn3";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 0;
-            // 
-            // gridView7
-            // 
-            this.gridView7.GridControl = this.gridControl7;
-            this.gridView7.Name = "gridView7";
-            // 
-            // gridView12
-            // 
-            this.gridView12.GridControl = this.gridControl7;
-            this.gridView12.Name = "gridView12";
-            // 
-            // gridView13
-            // 
-            this.gridView13.GridControl = this.gridControl7;
-            this.gridView13.Name = "gridView13";
-            // 
-            // gridView14
-            // 
-            this.gridView14.GridControl = this.gridControl7;
-            this.gridView14.Name = "gridView14";
-            // 
-            // gridView15
-            // 
-            this.gridView15.GridControl = this.gridControl7;
-            this.gridView15.Name = "gridView15";
-            // 
-            // gridView16
-            // 
-            this.gridView16.GridControl = this.gridControl7;
-            this.gridView16.Name = "gridView16";
-            // 
-            // gridView17
-            // 
-            this.gridView17.GridControl = this.gridControl7;
-            this.gridView17.Name = "gridView17";
-            // 
-            // gridView18
-            // 
-            this.gridView18.GridControl = this.gridControl7;
-            this.gridView18.Name = "gridView18";
-            // 
-            // gridView19
-            // 
-            this.gridView19.GridControl = this.gridControl7;
-            this.gridView19.Name = "gridView19";
-            // 
-            // gridView20
-            // 
-            this.gridView20.GridControl = this.gridControl7;
-            this.gridView20.Name = "gridView20";
             // 
             // xtraTabControl1
             // 
@@ -639,42 +512,6 @@ namespace SewingProduction.form
             this.panel3.TabIndex = 5;
             // 
             // customButton7
-            // gridControl6
-            // 
-            this.gridControl6.Location = new System.Drawing.Point(8, 3);
-            this.gridControl6.MainView = this.gridView6;
-            this.gridControl6.Name = "gridControl6";
-            this.gridControl6.Size = new System.Drawing.Size(389, 180);
-            this.gridControl6.TabIndex = 3;
-            this.gridControl6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView6});
-            // 
-            // gridView6
-            // 
-            this.gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colkod5,
-            this.colExpr1,
-            this.colExpr2,
-            this.colExpr3,
-            this.colExpr4});
-            this.gridView6.GridControl = this.gridControl6;
-            this.gridView6.Name = "gridView6";
-            // 
-            // colkod5
-            // 
-            this.colkod5.FieldName = "kod";
-            this.colkod5.Name = "colkod5";
-            this.colkod5.Visible = true;
-            this.colkod5.VisibleIndex = 0;
-            // 
-            // colExpr1
-            // 
-            this.colExpr1.FieldName = "Expr1";
-            this.colExpr1.Name = "colExpr1";
-            this.colExpr1.Visible = true;
-            this.colExpr1.VisibleIndex = 1;
-            // 
-            // svgImageBox1
             // 
             this.customButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.customButton7.Btn = null;

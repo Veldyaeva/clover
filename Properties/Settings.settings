@@ -40,7 +40,7 @@
       <Value Profile="(Default)">Data Source=OMS;Initial Catalog=PLANETA;User ID=readonly;Password=qwerty12345;Encrypt=False</Value>
     </Setting>
     <Setting Name="SelectedTheme" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Lavander</Value>
+      <Value Profile="(Default)">Peach</Value>
     </Setting>
   </Settings>
 </SettingsFile>

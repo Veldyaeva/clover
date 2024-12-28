@@ -133,7 +133,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="AppDbContext.cs" />
     <Compile Include="ArtNormN.cs" />
     <Compile Include="class\CustomControls.cs">
       <SubType>Component</SubType>
