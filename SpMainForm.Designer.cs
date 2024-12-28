@@ -51,10 +51,6 @@
             this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ThemeSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.темыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.краснаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.зеленаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.желтаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();

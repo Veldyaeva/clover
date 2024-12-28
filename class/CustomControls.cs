@@ -26,6 +26,11 @@ namespace SewingProduction
             ApplyTheme();
             ThemeChanged += OnThemeChanged; // Подписка на изменение темы
         }
+        public Button Btn { get; set; }
+        public Color ComponentBackColor { get; set; }
+        public Color ComponentFontColor { get; set; }
+        public Size ComponentSize { get; set; }
+
         private void ApplyTheme()
         {
             BackColor = ThemeManager.ActiveTheme.ButtonBackground;
