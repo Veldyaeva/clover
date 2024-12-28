@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -50,6 +51,10 @@
             this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ThemeSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
+            this.темыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.краснаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.зеленаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.желтаяToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -104,6 +109,8 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.menuStrip1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("menuStrip1.BackgroundImage")));
+            this.menuStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.производствоToolStripMenuItem,
@@ -225,6 +232,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1048, 450);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.barDockControlLeft);
