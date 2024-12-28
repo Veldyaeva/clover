@@ -55,5 +55,39 @@ namespace SewingProduction.Properties {
                 return ((string)(this["ACEtestConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;User ID=sa;Password=kf,bhbyn" +
+            ";Encrypt=False")]
+        public string ACEConnectionString1 {
+            get {
+                return ((string)(this["ACEConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=OMS;Initial Catalog=PLANETA;User ID=readonly;Password=qwerty12345;Enc" +
+            "rypt=False")]
+        public string OMSConnectionString {
+            get {
+                return ((string)(this["OMSConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Lavander")]
+        public string SelectedTheme {
+            get {
+                return ((string)(this["SelectedTheme"]));
+            }
+            set {
+                this["SelectedTheme"] = value;
+            }
+        }
     }
 }
