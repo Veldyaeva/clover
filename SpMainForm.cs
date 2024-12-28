@@ -121,7 +121,7 @@ namespace SewingProduction
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("matrix_class", "Справочник Классы вязального оборудования");
+            SpravForAll f = new SpravForAll("matrix_class", "Справочник Клас. вяз. об.");
             f.MdiParent = this;
             f.Show();
         }
@@ -133,6 +133,28 @@ namespace SewingProduction
             f.Show();
         }
 
+        private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravForAll f = new SpravForAll("spVidProizv", "Справочник Вид произв");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OborudBrig f = new OborudBrig();
