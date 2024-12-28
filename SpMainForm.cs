@@ -8,9 +8,9 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 //nemain
 
@@ -20,14 +20,25 @@ namespace SewingProduction
     {
         public SpMainForm()
         {
+
+
             InitializeComponent();
-            splashScreen = new SplashScreen();
-            splashScreen.Show();
-            backgroundWorker1.RunWorkerAsync();
-            this.Hide(); // Скрываем главную форму до завершения инициализации
+            ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
+            if (ThemeManager.CurrentTheme is null) { ThemeSelectorComboBox.SelectedIndex = 0; }
+            else
+            {
+                ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
+            }
+            // Обработчик смены темы
+            ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
+            {
+                string selectedTheme = ThemeSelectorComboBox.SelectedItem.ToString();
+                ThemeManager.SetTheme(selectedTheme);
+            };
+        
         }
 
-        private SplashScreen splashScreen;
+
 
         XtraTabbedMdiManager mdiManager;
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,18 +71,8 @@ namespace SewingProduction
             ////mdiManager.MdiParent = this;
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
-        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
-        {
-            // Здесь выполняется долгая инициализация
-            Thread.Sleep(300); // Пример задержки
-        }
 
-        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            // Инициализация завершена, скрываем заставку и показываем главную форму
-            splashScreen.Close();
-            this.Show();
-        }
+        
 
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
@@ -120,7 +121,7 @@ namespace SewingProduction
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("matrix_class", "Справочник Классы вязального оборудования");
+            SpravForAll f = new SpravForAll("matrix_class", "Справочник Клас. вяз. об.");
             f.MdiParent = this;
             f.Show();
         }
@@ -132,11 +133,60 @@ namespace SewingProduction
             f.Show();
         }
 
+        private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SpravForAll f = new SpravForAll("spVidProizv", "Справочник Вид произв");
+            f.MdiParent = this;
+            f.Show();
+        }
+        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OborudBrig f = new OborudBrig();
             f.MdiParent = this;
             f.Show();
+
+        }
+
+        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Articul f = new Articul();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PlanZagrBrig f = new PlanZagrBrig();
+            f.MdiParent = this;
+            f.Show();
+        }
+        
+        private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TeamWork teamWork = new TeamWork();
+            teamWork.MdiParent = this;
+            teamWork.Show();
+
+        }
+
+        private void toolStripComboBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }

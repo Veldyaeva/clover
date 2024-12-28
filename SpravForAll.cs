@@ -48,21 +48,15 @@ namespace SewingProduction.form
         bool flagStartListening = false; //вкл прослушки
         private System.Windows.Forms.Label[] labels;
         private TextBox[] textBoxs;
-        //словари для рус названий столбцов:
+        //словари:
         Dictionary<string, string> eng_rus = new Dictionary<string, string>();
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
         Dictionary<string, string> eng_type = new Dictionary<string, string>();
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
-        //Таймер для уведомления о сохранении:
-        private Timer timer;
         public SpravForAll(string tableSQL, string rusNameTableSQL)
         {
             //GridLocalizer.Active = new RussianGridLocalizer();
             InitializeComponent();
-            //Таймер
-            timer = new Timer();
-            timer.Interval = 2000;
-            timer.Tick += Timer_Tick;
             //Таблица:
             tableString = tableSQL;
             //Имя формы:
@@ -77,10 +71,6 @@ namespace SewingProduction.form
             allTableName(tableString);
         }
 
-        private void SpravForAll_Load(object sender, EventArgs e)
-        {
-        }
-        //Рус нэйминг столбцов:
         void allTableName(string tableName)
         {
             try
@@ -117,7 +107,6 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка загрузки русских имен {ex.Message}");
             }
         }
-        //Загрузка грида:
         private void gridControlSprav_Load(object sender, EventArgs e)
         {
             using (SqlConnection connectionLoad = new SqlConnection(connectionString))
@@ -235,6 +224,7 @@ namespace SewingProduction.form
             }
 
         }
+
         public void StopListening()
         {
             // Закрываем подключение
@@ -253,7 +243,6 @@ namespace SewingProduction.form
                 Debug.WriteLine("Data was changed");
 
                 // Обновление UI через Invoke
-                if (this.IsHandleCreated)
                 this.Invoke((MethodInvoker)delegate
                 {
                     GridView gridView = gridControlSprav.MainView as GridView;
@@ -270,7 +259,6 @@ namespace SewingProduction.form
                         gridView.FocusedRowHandle = gridView.RowCount - 1;
                         gridView.TopRowIndex = gridView.RowCount - 1;
                         flagAddDown = false;
-                        gridControlSprav_Click(sender, e);
                     }
                 });
 
@@ -278,49 +266,45 @@ namespace SewingProduction.form
             // Возобновляем прослушивание
             StartListening();
         }
-        //Кнопка добавить:
         private void simpleButtonAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                GridView gridView = (GridView)gridControlSprav.MainView;
                 xtraTabPageAdd.Text = "Добавить";
                 AddTab.TabPages[0].PageVisible = true;
                 simpleButtonDel.Visible = false;
-                simpleButtonAddOtm.Visible = true;
-                simpleButtonAddSave.Visible = true;
                 labelAndTextBox();
+                GridView gridView = (GridView)gridControlSprav.MainView;
                 // Код = последнему коду в таблице + 1
                 textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
                 for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                 {
-                    textBoxs[i].ReadOnly = false;
                     textBoxs[i].Text = "";
                 }
+                //flagAddDown = true;
+                //gridView.AddNewRow();
+                //strForAdd = gridView.FocusedRowHandle;
+                //gridView.UpdateCurrentRow();
             }
             catch (Exception Ex)
             {
                 Debug.WriteLine($"Error: {Ex.Message}");
             }
         }
-        //Кнопка редактировать:
         private void simpleButtonRed_Click(object sender, EventArgs e)
         {
             try
             {
-                // Получаем доступ к GridView
-                GridView gridView = gridControlSprav.MainView as GridView;
                 xtraTabPageAdd.Text = "Редактировать";
                 AddTab.TabPages[0].PageVisible = true;
                 simpleButtonDel.Visible = true;
-                simpleButtonAddOtm.Visible = true;
-                simpleButtonAddSave.Visible = true;
                 labelAndTextBox();
+                // Получаем доступ к GridView
+                GridView gridView = gridControlSprav.MainView as GridView;
                 // Получаем текущую выделенную строку в текстбокси и др
                 textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
                 for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                 {
-                    textBoxs[i].ReadOnly = false;
                     textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
                 }
             }
@@ -329,44 +313,31 @@ namespace SewingProduction.form
                 Debug.WriteLine($"Error: {Ex.Message}");
             }
         }
-        //Кнопки вверх/вниз:
-        private void gridControlSprav_KeyUp(object sender, KeyEventArgs e)
-        {
-            gridControlSprav_Click(sender,e);
-        }
-        //Клик на грид:
+
         private void gridControlSprav_Click(object sender, EventArgs e)
         {
-            try
-            {
-                xtraTabPageAdd.Text = "Просмотр";
-                // Сохраняем индекс строки
-                GridView gridView = gridControlSprav.MainView as GridView;
-                currentRowIndex = gridView.FocusedRowHandle;
-                AddTab.TabPages[0].PageVisible = true;
-                simpleButtonDel.Visible = false;
-                simpleButtonAddOtm.Visible = false;
-                simpleButtonAddSave.Visible = false;
-                labelAndTextBox();
-                // Получаем текущую выделенную строку в текстбокси и др
-                textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                {
-                    textBoxs[i].ReadOnly = true;
-                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
-                }
-            }
-            catch (Exception Ex)
-            {
-                Debug.WriteLine($"Error: {Ex.Message}");
-            }
+            GridView gridView = gridControlSprav.MainView as GridView;
+            // Сохраняем индекс строки
+            currentRowIndex = gridView.FocusedRowHandle;
+            if (xtraTabPageAdd.Text == "Редактировать")
+                simpleButtonRed_Click(sender, e);
         }
-        //Кнопка Отмена:
+
+        private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            StopListening();
+        }
+
+        private void SpravForAll_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void simpleButtonAddOtm_Click(object sender, EventArgs e)
         {
             AddTab.TabPages[0].PageVisible = false;
         }
-        //Кнопка сохранить:
+
         private void simpleButtonAddSave_Click(object sender, EventArgs e)
         {
             try
@@ -427,27 +398,17 @@ namespace SewingProduction.form
                         command.ExecuteNonQuery();
                         connectionINSERT.Close();
                     }
-                    labelSave.Text = "Сохранено!";
-                    //AddTab.TabPages[0].PageVisible = false;
+                    AddTab.TabPages[0].PageVisible = false;
                 }
 
             }
             catch (SqlException sqlEx)
             {
-                labelSave.Text = "Ошибка!";
                 Debug.WriteLine($"{tableString} SQL Error: {sqlEx.Message}");
                 MessageBox.Show($"{sqlEx.Message}");
             }
-            labelSave.Visible = true;
-            timer.Start();
-        }
-        private void Timer_Tick(object sender, EventArgs e)
-        {
-            labelSave.Visible = false; // Скрываем лейбл
-            timer.Stop(); // Останавливаем таймер
         }
 
-        //Редактирование таблице:
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
             using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
@@ -464,48 +425,30 @@ namespace SewingProduction.form
                 connectionUPDATE.Close();
             }
         }
-        //Удалить запись:
+
         private void simpleButtonDel_Click(object sender, EventArgs e)
         {
-            try
+            GridView gridView = gridControlSprav.MainView as GridView;
+            currentRowIndex = gridView.FocusedRowHandle;
+            string textCol = gridView.GetFocusedRowCellValue(gridView.Columns[1]).ToString();
+            int kodCol = Convert.ToInt32(gridView.GetFocusedRowCellValue(gridView.Columns[0]));
+            string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
+            var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                GridView gridView = gridControlSprav.MainView as GridView;
-                currentRowIndex = gridView.FocusedRowHandle;
-                string textCol = gridView.GetFocusedRowCellValue(gridView.Columns[1]).ToString();
-                int kodCol = Convert.ToInt32(gridView.GetFocusedRowCellValue(gridView.Columns[0]));
-                string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
-                var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result == DialogResult.Yes)
+                using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
+                    string queryOborudArh = $"DELETE FROM {tableString} WHERE {fieldsQueryListSQL[0]} = {kodCol}";
+                    using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
                     {
-                        string queryOborudArh = $"DELETE FROM {tableString} WHERE {fieldsQueryListSQL[0]} = {kodCol}";
-                        using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
-                        {
-                            connectionDELETE.Open();
-                            command.ExecuteNonQuery();
-                            connectionDELETE.Close();
-                        }
+                        connectionDELETE.Open();
+                        command.ExecuteNonQuery();
+                        connectionDELETE.Close();
                     }
-                    AddTab.TabPages[0].PageVisible = false;
                 }
             }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"{tableString} SQL Error: {sqlEx.Message}");
-                MessageBox.Show($"{sqlEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error {ex.Message}");
-                MessageBox.Show($"Ошибка {ex.Message}");
-            }
         }
-        //закрытие формы:
-        private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StopListening();
-        }
+
     }
 
 }

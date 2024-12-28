@@ -55,7 +55,7 @@
     <StartupObject>SewingProduction.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>winter.ico</ApplicationIcon>
+    <ApplicationIcon>tbi_winter.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -135,10 +135,7 @@
     </Compile>
     <Compile Include="AppDbContext.cs" />
     <Compile Include="ArtNormN.cs" />
-    <Compile Include="class\Font.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="class\Font.cs">
+    <Compile Include="class\CustomControls.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="class\RussianGridLocalizer.cs" />
@@ -149,11 +146,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </Compile>
-    <Compile Include="form\Form1.cs">
+    <Compile Include="form\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="form\Articul.Designer.cs">
+      <DependentUpon>Articul.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\CardByNom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\CardByNom.Designer.cs">
+      <DependentUpon>CardByNom.cs</DependentUpon>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -166,6 +169,12 @@
     </Compile>
     <Compile Include="form\OborudBrig.Designer.cs">
       <DependentUpon>OborudBrig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravBrig.Designer.cs">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
     </Compile>
     <Compile Include="form\PlanZagrBrig.cs">
       <SubType>Form</SubType>
@@ -185,17 +194,17 @@
     <Compile Include="form\SpravOborud.Designer.cs">
       <DependentUpon>SpravOborud.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\SpravZeh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravZeh.Designer.cs">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\TeamWorkTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\TeamWorkTest.Designer.cs">
-      <DependentUpon>TeamWorkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -244,12 +253,6 @@
     </Compile>
     <Compile Include="SpMainForm.Designer.cs">
       <DependentUpon>SpMainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\CardByNom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\CardByNom.Designer.cs">
-      <DependentUpon>CardByNom.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -301,20 +304,37 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="form\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="form\Articul.resx">
+      <DependentUpon>Articul.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\CardByNom.resx">
+      <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravBrig.resx">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork.resx">
+      <DependentUpon>TeamWork.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\PlanZagrBrig.resx">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravForAll.resx">
       <DependentUpon>SpravForAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravZeh.resx">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
@@ -347,9 +367,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SpMainForm.resx">
       <DependentUpon>SpMainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\CardByNom.resx">
-      <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -432,10 +449,8 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ic.ico" />
-    <Content Include="icon %281%29.ico" />
-    <Content Include="icon.ico" />
     <None Include="Resources\winter.ico" />
+    <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />

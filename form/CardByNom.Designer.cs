@@ -1,4 +1,9 @@
-﻿namespace SewingProduction
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Media;
+
+namespace SewingProduction
 {
     partial class CardByNom
     {
@@ -61,60 +66,60 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.label68 = new System.Windows.Forms.Label();
-            this.tbArtTradeMark = new System.Windows.Forms.TextBox();
-            this.label66 = new System.Windows.Forms.Label();
-            this.tbPsaKombIzd = new System.Windows.Forms.TextBox();
-            this.label67 = new System.Windows.Forms.Label();
-            this.tbPsaKombOsn = new System.Windows.Forms.TextBox();
-            this.label65 = new System.Windows.Forms.Label();
-            this.tbPsaPsaIDOsn = new System.Windows.Forms.TextBox();
-            this.label62 = new System.Windows.Forms.Label();
-            this.tbPsaPsaID = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
+            this.label68 = new SewingProduction.CustomLabel();
+            this.tbArtTradeMark = new SewingProduction.CustomTextBox();
+            this.label66 = new SewingProduction.CustomLabel();
+            this.tbPsaKombIzd = new SewingProduction.CustomTextBox();
+            this.label67 = new SewingProduction.CustomLabel();
+            this.tbPsaKombOsn = new SewingProduction.CustomTextBox();
+            this.label65 = new SewingProduction.CustomLabel();
+            this.tbPsaPsaIDOsn = new SewingProduction.CustomTextBox();
+            this.label62 = new SewingProduction.CustomLabel();
+            this.tbPsaPsaID = new SewingProduction.CustomTextBox();
+            this.label16 = new SewingProduction.CustomLabel();
             this.cbIsChip = new System.Windows.Forms.CheckBox();
-            this.psaSezName = new System.Windows.Forms.TextBox();
-            this.tbRzuKol = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.tbPsaYear = new System.Windows.Forms.TextBox();
-            this.label53 = new System.Windows.Forms.Label();
-            this.tbPsaKodZv2 = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
-            this.tbPsaNomZad = new System.Windows.Forms.TextBox();
-            this.tbPsaKodZv1 = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
-            this.tbPsaMenName = new System.Windows.Forms.TextBox();
+            this.psaSezName = new SewingProduction.CustomTextBox();
+            this.tbRzuKol = new SewingProduction.CustomTextBox();
+            this.label17 = new SewingProduction.CustomLabel();
+            this.label22 = new SewingProduction.CustomLabel();
+            this.tbPsaYear = new SewingProduction.CustomTextBox();
+            this.label53 = new SewingProduction.CustomLabel();
+            this.tbPsaKodZv2 = new SewingProduction.CustomTextBox();
+            this.label23 = new SewingProduction.CustomLabel();
+            this.tbPsaNomZad = new SewingProduction.CustomTextBox();
+            this.tbPsaKodZv1 = new SewingProduction.CustomTextBox();
+            this.label20 = new SewingProduction.CustomLabel();
+            this.tbPsaMenName = new SewingProduction.CustomTextBox();
             this.pbEskiz = new System.Windows.Forms.PictureBox();
-            this.tbSostPoln = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.tbPsaNameSbit = new System.Windows.Forms.TextBox();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.tbArtGrup = new System.Windows.Forms.TextBox();
-            this.tbRzuDostZeh = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.tbRzuMod = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.tbPsaTbID = new System.Windows.Forms.TextBox();
-            this.tbRzuArticul = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbPsaPrn = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tbRzuPach = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbRzuNom = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
-            this.tbPsaNN = new System.Windows.Forms.TextBox();
-            this.tbYearPach = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbNomPach = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tbSostPoln = new SewingProduction.CustomTextBox();
+            this.label13 = new SewingProduction.CustomLabel();
+            this.label11 = new SewingProduction.CustomLabel();
+            this.tbPsaNameSbit = new SewingProduction.CustomTextBox();
+            this.label15 = new SewingProduction.CustomLabel();
+            this.label12 = new SewingProduction.CustomLabel();
+            this.tbArtGrup = new SewingProduction.CustomTextBox();
+            this.tbRzuDostZeh = new SewingProduction.CustomTextBox();
+            this.label10 = new SewingProduction.CustomLabel();
+            this.tbRzuMod = new SewingProduction.CustomTextBox();
+            this.label19 = new SewingProduction.CustomLabel();
+            this.label9 = new SewingProduction.CustomLabel();
+            this.tbPsaTbID = new SewingProduction.CustomTextBox();
+            this.tbRzuArticul = new SewingProduction.CustomTextBox();
+            this.label8 = new SewingProduction.CustomLabel();
+            this.tbPsaPrn = new SewingProduction.CustomTextBox();
+            this.label7 = new SewingProduction.CustomLabel();
+            this.label6 = new SewingProduction.CustomLabel();
+            this.tbRzuPach = new SewingProduction.CustomTextBox();
+            this.label5 = new SewingProduction.CustomLabel();
+            this.tbRzuNom = new SewingProduction.CustomTextBox();
+            this.label4 = new SewingProduction.CustomLabel();
+            this.label21 = new SewingProduction.CustomLabel();
+            this.tbPsaNN = new SewingProduction.CustomTextBox();
+            this.tbYearPach = new SewingProduction.CustomTextBox();
+            this.label3 = new SewingProduction.CustomLabel();
+            this.tbNomPach = new SewingProduction.CustomTextBox();
+            this.label2 = new SewingProduction.CustomLabel();
+            this.label1 = new SewingProduction.CustomLabel();
             this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
             this.bsRasInfo = new System.Windows.Forms.BindingSource(this.components);
             this.bsPartNaklList = new System.Windows.Forms.BindingSource(this.components);
@@ -126,8 +131,8 @@
             this.gridSplitContainer1 = new DevExpress.XtraGrid.GridSplitContainer();
             this.xtraTabPage4 = new DevExpress.XtraTab.XtraTabPage();
             this.sbProizvCombIzdSP = new DevExpress.XtraEditors.SimpleButton();
-            this.label70 = new System.Windows.Forms.Label();
-            this.label69 = new System.Windows.Forms.Label();
+            this.label70 = new SewingProduction.CustomLabel();
+            this.label69 = new SewingProduction.CustomLabel();
             this.gcProizvCombIzdSP = new DevExpress.XtraGrid.GridControl();
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn47 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -191,87 +196,87 @@
             this.furnitZayavViewFurnit = new SewingProduction.FurnitZayavView();
             this.furnitZayavViewUpak = new SewingProduction.FurnitZayavView();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            this.tbDatZayav = new System.Windows.Forms.TextBox();
-            //this.button10 = new System.Windows.Forms.Button();
+            this.tbDatZayav = new SewingProduction.CustomTextBox();
             this.button10 = new SewingProduction.CustomButton();
-            this.label61 = new System.Windows.Forms.Label();
+            this.label61 = new SewingProduction.CustomLabel();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
-            this.tbData_f_z_u = new System.Windows.Forms.TextBox();
-            this.tbData_f_o_u = new System.Windows.Forms.TextBox();
-            this.tbData_f_z = new System.Windows.Forms.TextBox();
-            this.tbData_f_o = new System.Windows.Forms.TextBox();
-            this.mtbData_cd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbData_zeh = new System.Windows.Forms.MaskedTextBox();
-            this.tbOtgrStat = new System.Windows.Forms.TextBox();
-            this.tbIs_got = new System.Windows.Forms.TextBox();
-            this.label60 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.tbUZSobrStat = new System.Windows.Forms.TextBox();
-            this.label56 = new System.Windows.Forms.Label();
-            this.tbUZSozdStat = new System.Windows.Forms.TextBox();
-            this.label57 = new System.Windows.Forms.Label();
-            this.tbUpakZayav = new System.Windows.Forms.TextBox();
-            this.label58 = new System.Windows.Forms.Label();
-            this.btnZayavFurnPrint = new System.Windows.Forms.Button();
-            this.tbFZSobrStat = new System.Windows.Forms.TextBox();
-            this.label55 = new System.Windows.Forms.Label();
-            this.tbFZSozdStat = new System.Windows.Forms.TextBox();
-            this.label54 = new System.Windows.Forms.Label();
-            this.tbFurnZayav = new System.Windows.Forms.TextBox();
-            this.label25 = new System.Windows.Forms.Label();
-            this.btnFullKKPrint = new System.Windows.Forms.Button();
-            this.tbUpakKKStat = new System.Windows.Forms.TextBox();
-            this.tbFurnKKStat = new System.Windows.Forms.TextBox();
-            this.btnUpakKKPrint = new System.Windows.Forms.Button();
-            this.btnFurnKKPrint = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
+            this.btnZayavUpakPrint = new SewingProduction.CustomButton();
+            this.tbData_f_z_u = new SewingProduction.CustomTextBox();
+            this.tbData_f_o_u = new SewingProduction.CustomTextBox();
+            this.tbData_f_z = new SewingProduction.CustomTextBox();
+            this.tbData_f_o = new SewingProduction.CustomTextBox();
+            this.mtbData_cd = new SewingProduction.CustomMaskedTextBox();
+            this.mtbData_zeh = new SewingProduction.CustomMaskedTextBox();
+            this.tbOtgrStat = new SewingProduction.CustomTextBox();
+            this.tbIs_got = new SewingProduction.CustomTextBox();
+            this.label60 = new SewingProduction.CustomLabel();
+            this.label59 = new SewingProduction.CustomLabel();
+            this.tbUZSobrStat = new SewingProduction.CustomTextBox();
+            this.label56 = new SewingProduction.CustomLabel();
+            this.tbUZSozdStat = new SewingProduction.CustomTextBox();
+            this.label57 = new SewingProduction.CustomLabel();
+            this.tbUpakZayav = new SewingProduction.CustomTextBox();
+            this.label58 = new SewingProduction.CustomLabel();
+            this.btnZayavFurnPrint = new SewingProduction.CustomButton();
+            this.tbFZSobrStat = new SewingProduction.CustomTextBox();
+            this.label55 = new SewingProduction.CustomLabel();
+            this.tbFZSozdStat = new SewingProduction.CustomTextBox();
+            this.label54 = new SewingProduction.CustomLabel();
+            this.tbFurnZayav = new SewingProduction.CustomTextBox();
+            this.label25 = new SewingProduction.CustomLabel();
+            this.btnFullKKPrint = new SewingProduction.CustomButton();
+            this.tbUpakKKStat = new SewingProduction.CustomTextBox();
+            this.tbFurnKKStat = new SewingProduction.CustomTextBox();
+            this.btnUpakKKPrint = new SewingProduction.CustomButton();
+            this.btnFurnKKPrint = new SewingProduction.CustomButton();
+            this.label18 = new SewingProduction.CustomLabel();
             this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl6 = new DevExpress.XtraEditors.PanelControl();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.label52 = new System.Windows.Forms.Label();
+            this.button4 = new SewingProduction.CustomButton();
+            this.button5 = new SewingProduction.CustomButton();
+            this.button6 = new SewingProduction.CustomButton();
+            this.label52 = new SewingProduction.CustomLabel();
             this.panelControl5 = new DevExpress.XtraEditors.PanelControl();
-            this.cbRzuStirFact = new System.Windows.Forms.CheckBox();
-            this.cbPszStirPlan = new System.Windows.Forms.CheckBox();
-            this.cbRzuVishFact = new System.Windows.Forms.CheckBox();
-            this.cbPszVishPlan = new System.Windows.Forms.CheckBox();
-            this.cbRzuPrintFact = new System.Windows.Forms.CheckBox();
-            this.cbPszPrintPlan = new System.Windows.Forms.CheckBox();
-            this.mtbRzuDataPrCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrKm = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuVidStir = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVChi = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrPe = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStR = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataVP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataPrP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataStP = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataRasv = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataRasp = new System.Windows.Forms.MaskedTextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label35 = new System.Windows.Forms.Label();
-            this.label36 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label31 = new System.Windows.Forms.Label();
+            this.cbRzuStirFact = new SewingProduction.CustomCheckBox();
+            this.cbPszStirPlan = new SewingProduction.CustomCheckBox();
+            this.cbRzuVishFact = new SewingProduction.CustomCheckBox();
+            this.cbPszVishPlan = new SewingProduction.CustomCheckBox();
+            this.cbRzuPrintFact = new SewingProduction.CustomCheckBox();
+            this.cbPszPrintPlan = new SewingProduction.CustomCheckBox();
+            this.mtbRzuDataPrCd = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataVCd = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataPrKm = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuVidStir = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataVChi = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataPrPe = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataStCd = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataVR = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataPrR = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataStR = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataVP = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataPrP = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataStP = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataRasv = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataRasp = new SewingProduction.CustomMaskedTextBox();
+            this.label44 = new SewingProduction.CustomLabel();
+            this.label49 = new SewingProduction.CustomLabel();
+            this.label50 = new SewingProduction.CustomLabel();
+            this.label51 = new SewingProduction.CustomLabel();
+            this.label43 = new SewingProduction.CustomLabel();
+            this.label45 = new SewingProduction.CustomLabel();
+            this.label46 = new SewingProduction.CustomLabel();
+            this.label47 = new SewingProduction.CustomLabel();
+            this.label48 = new SewingProduction.CustomLabel();
+            this.label42 = new SewingProduction.CustomLabel();
+            this.label41 = new SewingProduction.CustomLabel();
+            this.label40 = new SewingProduction.CustomLabel();
+            this.label39 = new SewingProduction.CustomLabel();
+            this.label38 = new SewingProduction.CustomLabel();
+            this.label37 = new SewingProduction.CustomLabel();
+            this.label35 = new SewingProduction.CustomLabel();
+            this.label36 = new SewingProduction.CustomLabel();
+            this.label32 = new SewingProduction.CustomLabel();
+            this.label31 = new SewingProduction.CustomLabel();
             this.panelControl4 = new DevExpress.XtraEditors.PanelControl();
             this.gcPartNaklList = new DevExpress.XtraGrid.GridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -294,37 +299,34 @@
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn42 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn43 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1 = new SewingProduction.CustomButton();
             this.btnPrintNaklXtraReport = new System.Windows.Forms.Button();
-            this.btnNaklAbsent = new System.Windows.Forms.Button();
-            this.btnNaklPart = new System.Windows.Forms.Button();
-            this.btnNaklPrint = new System.Windows.Forms.Button();
-            this.label24 = new System.Windows.Forms.Label();
+            this.btnNaklAbsent = new SewingProduction.CustomButton();
+            this.btnNaklPart = new SewingProduction.CustomButton();
+            this.btnNaklPrint = new SewingProduction.CustomButton();
+            this.label24 = new SewingProduction.CustomLabel();
             this.panelControl3 = new DevExpress.XtraEditors.PanelControl();
-            this.tbPszRpcNom = new System.Windows.Forms.TextBox();
-            this.mtbRzuDataR = new System.Windows.Forms.MaskedTextBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.mtbRzuData1С = new System.Windows.Forms.MaskedTextBox();
-            this.label63 = new System.Windows.Forms.Label();
-            this.mtbRzuDataCd = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataUp = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataRab = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataZeh = new System.Windows.Forms.MaskedTextBox();
-            this.mtbRzuDataCdUt = new System.Windows.Forms.MaskedTextBox();
-            this.mtbPsaDataCdPlan = new System.Windows.Forms.MaskedTextBox();
-            this.mtbPsaDataZap = new System.Windows.Forms.MaskedTextBox();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.label34 = new System.Windows.Forms.Label();
-            this.label26 = new System.Windows.Forms.Label();
-            this.label27 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.label29 = new System.Windows.Forms.Label();
-            this.label30 = new System.Windows.Forms.Label();
+            this.tbPszRpcNom = new SewingProduction.CustomTextBox();
+            this.mtbRzuDataR = new SewingProduction.CustomMaskedTextBox();
+            this.label64 = new SewingProduction.CustomLabel();
+            this.mtbRzuData1С = new SewingProduction.CustomMaskedTextBox();
+            this.label63 = new SewingProduction.CustomLabel();
+            this.mtbRzuDataCd = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataUp = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataRab = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataZeh = new SewingProduction.CustomMaskedTextBox();
+            this.mtbRzuDataCdUt = new SewingProduction.CustomMaskedTextBox();
+            this.mtbPsaDataCdPlan = new SewingProduction.CustomMaskedTextBox();
+            this.mtbPsaDataZap = new SewingProduction.CustomMaskedTextBox();
+            this.label14 = new SewingProduction.CustomLabel();
+            this.label33 = new SewingProduction.CustomLabel();
+            this.label34 = new SewingProduction.CustomLabel();
+            this.label26 = new SewingProduction.CustomLabel();
+            this.label27 = new SewingProduction.CustomLabel();
+            this.label28 = new SewingProduction.CustomLabel();
+            this.label29 = new SewingProduction.CustomLabel();
+            this.label30 = new SewingProduction.CustomLabel();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.gridColumn41 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bsIsChip = new System.Windows.Forms.BindingSource(this.components);
-            this.bsFurnZayavInfo = new System.Windows.Forms.BindingSource(this.components);
             this.gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.bsNaklList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
@@ -464,58 +466,60 @@
             // 
             // panelControl1
             // 
-            this.panelControl1.Controls.Add(this.label68);
+            this.panelControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.panelControl1.Appearance.Options.UseBackColor = true;
+            this.panelControl1.Controls.Add(this.tbYearPach);
+            this.panelControl1.Controls.Add(this.tbNomPach);
+            this.panelControl1.Controls.Add(this.tbRzuKol);
+            this.panelControl1.Controls.Add(this.tbPsaNomZad);
+            this.panelControl1.Controls.Add(this.tbRzuDostZeh);
+            this.panelControl1.Controls.Add(this.tbRzuPach);
+            this.panelControl1.Controls.Add(this.tbRzuNom);
+            this.panelControl1.Controls.Add(this.tbPsaKodZv2);
+            this.panelControl1.Controls.Add(this.tbPsaKodZv1);
+            this.panelControl1.Controls.Add(this.tbRzuMod);
+            this.panelControl1.Controls.Add(this.tbRzuArticul);
+            this.panelControl1.Controls.Add(this.tbPsaPrn);
+            this.panelControl1.Controls.Add(this.tbSostPoln);
+            this.panelControl1.Controls.Add(this.tbArtGrup);
             this.panelControl1.Controls.Add(this.tbArtTradeMark);
-            this.panelControl1.Controls.Add(this.label66);
+            this.panelControl1.Controls.Add(this.tbPsaMenName);
+            this.panelControl1.Controls.Add(this.tbPsaNameSbit);
+            this.panelControl1.Controls.Add(this.tbPsaTbID);
             this.panelControl1.Controls.Add(this.tbPsaKombIzd);
-            this.panelControl1.Controls.Add(this.label67);
             this.panelControl1.Controls.Add(this.tbPsaKombOsn);
-            this.panelControl1.Controls.Add(this.label65);
             this.panelControl1.Controls.Add(this.tbPsaPsaIDOsn);
-            this.panelControl1.Controls.Add(this.label62);
             this.panelControl1.Controls.Add(this.tbPsaPsaID);
-            this.panelControl1.Controls.Add(this.label16);
             this.panelControl1.Controls.Add(this.cbIsChip);
             this.panelControl1.Controls.Add(this.psaSezName);
-            this.panelControl1.Controls.Add(this.tbRzuKol);
+            this.panelControl1.Controls.Add(this.tbPsaYear);
+            this.panelControl1.Controls.Add(this.tbPsaNN);
+            this.panelControl1.Controls.Add(this.label68);
+            this.panelControl1.Controls.Add(this.label66);
+            this.panelControl1.Controls.Add(this.label67);
+            this.panelControl1.Controls.Add(this.label65);
+            this.panelControl1.Controls.Add(this.label62);
+            this.panelControl1.Controls.Add(this.label16);
             this.panelControl1.Controls.Add(this.label17);
             this.panelControl1.Controls.Add(this.label22);
-            this.panelControl1.Controls.Add(this.tbPsaYear);
             this.panelControl1.Controls.Add(this.label53);
-            this.panelControl1.Controls.Add(this.tbPsaKodZv2);
             this.panelControl1.Controls.Add(this.label23);
-            this.panelControl1.Controls.Add(this.tbPsaNomZad);
-            this.panelControl1.Controls.Add(this.tbPsaKodZv1);
             this.panelControl1.Controls.Add(this.label20);
-            this.panelControl1.Controls.Add(this.tbPsaMenName);
             this.panelControl1.Controls.Add(this.pbEskiz);
-            this.panelControl1.Controls.Add(this.tbSostPoln);
             this.panelControl1.Controls.Add(this.label13);
             this.panelControl1.Controls.Add(this.label11);
-            this.panelControl1.Controls.Add(this.tbPsaNameSbit);
             this.panelControl1.Controls.Add(this.label15);
             this.panelControl1.Controls.Add(this.label12);
-            this.panelControl1.Controls.Add(this.tbArtGrup);
-            this.panelControl1.Controls.Add(this.tbRzuDostZeh);
             this.panelControl1.Controls.Add(this.label10);
-            this.panelControl1.Controls.Add(this.tbRzuMod);
             this.panelControl1.Controls.Add(this.label19);
             this.panelControl1.Controls.Add(this.label9);
-            this.panelControl1.Controls.Add(this.tbPsaTbID);
-            this.panelControl1.Controls.Add(this.tbRzuArticul);
             this.panelControl1.Controls.Add(this.label8);
-            this.panelControl1.Controls.Add(this.tbPsaPrn);
             this.panelControl1.Controls.Add(this.label7);
             this.panelControl1.Controls.Add(this.label6);
-            this.panelControl1.Controls.Add(this.tbRzuPach);
             this.panelControl1.Controls.Add(this.label5);
-            this.panelControl1.Controls.Add(this.tbRzuNom);
             this.panelControl1.Controls.Add(this.label4);
             this.panelControl1.Controls.Add(this.label21);
-            this.panelControl1.Controls.Add(this.tbPsaNN);
-            this.panelControl1.Controls.Add(this.tbYearPach);
             this.panelControl1.Controls.Add(this.label3);
-            this.panelControl1.Controls.Add(this.tbNomPach);
             this.panelControl1.Controls.Add(this.label2);
             this.panelControl1.Controls.Add(this.label1);
             this.panelControl1.Location = new System.Drawing.Point(4, 12);
@@ -526,89 +530,121 @@
             // label68
             // 
             this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(924, 99);
+            this.label68.Font = new System.Drawing.Font("Arial", 9F);
+            this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label68.Location = new System.Drawing.Point(924, 100);
             this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(87, 13);
+            this.label68.Size = new System.Drawing.Size(97, 15);
             this.label68.TabIndex = 41;
             this.label68.Text = "Торговая марка";
             // 
             // tbArtTradeMark
             // 
-            this.tbArtTradeMark.Location = new System.Drawing.Point(1017, 95);
+            this.tbArtTradeMark.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbArtTradeMark.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbArtTradeMark.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbArtTradeMark.Location = new System.Drawing.Point(1018, 96);
+            this.tbArtTradeMark.Margin = new System.Windows.Forms.Padding(0);
             this.tbArtTradeMark.Name = "tbArtTradeMark";
-            this.tbArtTradeMark.Size = new System.Drawing.Size(70, 21);
+            this.tbArtTradeMark.Size = new System.Drawing.Size(70, 23);
             this.tbArtTradeMark.TabIndex = 40;
             // 
             // label66
             // 
             this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(1316, 99);
+            this.label66.Font = new System.Drawing.Font("Arial", 9F);
+            this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label66.Location = new System.Drawing.Point(1316, 102);
             this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(51, 13);
+            this.label66.Size = new System.Drawing.Size(60, 15);
             this.label66.TabIndex = 39;
             this.label66.Text = "komb_izd";
             // 
             // tbPsaKombIzd
             // 
-            this.tbPsaKombIzd.Location = new System.Drawing.Point(1378, 95);
+            this.tbPsaKombIzd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKombIzd.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKombIzd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKombIzd.Location = new System.Drawing.Point(1385, 98);
+            this.tbPsaKombIzd.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaKombIzd.Name = "tbPsaKombIzd";
-            this.tbPsaKombIzd.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaKombIzd.Size = new System.Drawing.Size(52, 23);
             this.tbPsaKombIzd.TabIndex = 38;
             // 
             // label67
             // 
             this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(1316, 76);
+            this.label67.Font = new System.Drawing.Font("Arial", 9F);
+            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label67.Location = new System.Drawing.Point(1316, 78);
             this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(55, 13);
+            this.label67.Size = new System.Drawing.Size(66, 15);
             this.label67.TabIndex = 37;
             this.label67.Text = "komb_osn";
             // 
             // tbPsaKombOsn
             // 
-            this.tbPsaKombOsn.Location = new System.Drawing.Point(1378, 72);
+            this.tbPsaKombOsn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKombOsn.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKombOsn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKombOsn.Location = new System.Drawing.Point(1385, 74);
+            this.tbPsaKombOsn.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaKombOsn.Name = "tbPsaKombOsn";
-            this.tbPsaKombOsn.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaKombOsn.Size = new System.Drawing.Size(52, 23);
             this.tbPsaKombOsn.TabIndex = 36;
             // 
             // label65
             // 
             this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(1316, 53);
+            this.label65.Font = new System.Drawing.Font("Arial", 9F);
+            this.label65.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label65.Location = new System.Drawing.Point(1316, 54);
             this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(61, 13);
+            this.label65.Size = new System.Drawing.Size(73, 15);
             this.label65.TabIndex = 35;
             this.label65.Text = "psa_id_osn";
             // 
             // tbPsaPsaIDOsn
             // 
-            this.tbPsaPsaIDOsn.Location = new System.Drawing.Point(1378, 49);
+            this.tbPsaPsaIDOsn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaPsaIDOsn.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaPsaIDOsn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaPsaIDOsn.Location = new System.Drawing.Point(1385, 50);
+            this.tbPsaPsaIDOsn.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
-            this.tbPsaPsaIDOsn.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaPsaIDOsn.Size = new System.Drawing.Size(52, 23);
             this.tbPsaPsaIDOsn.TabIndex = 34;
             // 
             // label62
             // 
             this.label62.AutoSize = true;
+            this.label62.Font = new System.Drawing.Font("Arial", 9F);
+            this.label62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label62.Location = new System.Drawing.Point(1316, 30);
             this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(38, 13);
+            this.label62.Size = new System.Drawing.Size(45, 15);
             this.label62.TabIndex = 33;
             this.label62.Text = "psa_id";
             // 
             // tbPsaPsaID
             // 
-            this.tbPsaPsaID.Location = new System.Drawing.Point(1378, 26);
+            this.tbPsaPsaID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaPsaID.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaPsaID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaPsaID.Location = new System.Drawing.Point(1385, 26);
+            this.tbPsaPsaID.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaPsaID.Name = "tbPsaPsaID";
-            this.tbPsaPsaID.Size = new System.Drawing.Size(52, 21);
+            this.tbPsaPsaID.Size = new System.Drawing.Size(52, 23);
             this.tbPsaPsaID.TabIndex = 32;
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1215, 72);
+            this.label16.Font = new System.Drawing.Font("Arial", 9F);
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label16.Location = new System.Drawing.Point(1215, 74);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(37, 13);
+            this.label16.Size = new System.Drawing.Size(43, 15);
             this.label16.TabIndex = 20;
             this.label16.Text = "Сезон";
             // 
@@ -616,7 +652,7 @@
             // 
             this.cbIsChip.AutoSize = true;
             this.cbIsChip.Enabled = false;
-            this.cbIsChip.Location = new System.Drawing.Point(1254, 97);
+            this.cbIsChip.Location = new System.Drawing.Point(1259, 100);
             this.cbIsChip.Name = "cbIsChip";
             this.cbIsChip.Size = new System.Drawing.Size(45, 17);
             this.cbIsChip.TabIndex = 30;
@@ -625,94 +661,132 @@
             // 
             // psaSezName
             // 
-            this.psaSezName.Location = new System.Drawing.Point(1252, 72);
+            this.psaSezName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.psaSezName.Font = new System.Drawing.Font("Arial", 10F);
+            this.psaSezName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.psaSezName.Location = new System.Drawing.Point(1257, 74);
+            this.psaSezName.Margin = new System.Windows.Forms.Padding(0);
             this.psaSezName.Name = "psaSezName";
-            this.psaSezName.Size = new System.Drawing.Size(47, 21);
+            this.psaSezName.Size = new System.Drawing.Size(47, 23);
             this.psaSezName.TabIndex = 19;
             // 
             // tbRzuKol
             // 
+            this.tbRzuKol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuKol.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuKol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbRzuKol.Location = new System.Drawing.Point(259, 26);
+            this.tbRzuKol.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuKol.Name = "tbRzuKol";
-            this.tbRzuKol.Size = new System.Drawing.Size(52, 21);
+            this.tbRzuKol.Size = new System.Drawing.Size(52, 23);
             this.tbRzuKol.TabIndex = 29;
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1215, 53);
+            this.label17.Font = new System.Drawing.Font("Arial", 9F);
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label17.Location = new System.Drawing.Point(1215, 54);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(26, 13);
+            this.label17.Size = new System.Drawing.Size(27, 15);
             this.label17.TabIndex = 18;
             this.label17.Text = "Год";
             // 
             // label22
             // 
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(513, 95);
+            this.label22.Font = new System.Drawing.Font("Arial", 9F);
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label22.Location = new System.Drawing.Point(513, 100);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(52, 13);
+            this.label22.Size = new System.Drawing.Size(54, 15);
             this.label22.TabIndex = 30;
             this.label22.Text = "Код цв.2";
             // 
             // tbPsaYear
             // 
-            this.tbPsaYear.Location = new System.Drawing.Point(1252, 49);
+            this.tbPsaYear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaYear.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaYear.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaYear.Location = new System.Drawing.Point(1257, 50);
+            this.tbPsaYear.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaYear.Name = "tbPsaYear";
-            this.tbPsaYear.Size = new System.Drawing.Size(47, 21);
+            this.tbPsaYear.Size = new System.Drawing.Size(47, 23);
             this.tbPsaYear.TabIndex = 17;
             // 
             // label53
             // 
             this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(8, 53);
+            this.label53.Font = new System.Drawing.Font("Arial", 9F);
+            this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label53.Location = new System.Drawing.Point(8, 54);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(65, 13);
+            this.label53.Size = new System.Drawing.Size(71, 15);
             this.label53.TabIndex = 27;
             this.label53.Text = "№ задания";
             // 
             // tbPsaKodZv2
             // 
-            this.tbPsaKodZv2.Location = new System.Drawing.Point(565, 95);
+            this.tbPsaKodZv2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKodZv2.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKodZv2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKodZv2.Location = new System.Drawing.Point(565, 96);
+            this.tbPsaKodZv2.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaKodZv2.Name = "tbPsaKodZv2";
-            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 21);
+            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 23);
             this.tbPsaKodZv2.TabIndex = 29;
             // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(367, 95);
+            this.label23.Font = new System.Drawing.Font("Arial", 9F);
+            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label23.Location = new System.Drawing.Point(367, 100);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(52, 13);
+            this.label23.Size = new System.Drawing.Size(54, 15);
             this.label23.TabIndex = 27;
             this.label23.Text = "Код цв.1";
             // 
             // tbPsaNomZad
             // 
-            this.tbPsaNomZad.Location = new System.Drawing.Point(75, 49);
+            this.tbPsaNomZad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaNomZad.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaNomZad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaNomZad.Location = new System.Drawing.Point(78, 50);
+            this.tbPsaNomZad.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaNomZad.Name = "tbPsaNomZad";
-            this.tbPsaNomZad.Size = new System.Drawing.Size(73, 21);
+            this.tbPsaNomZad.Size = new System.Drawing.Size(73, 23);
             this.tbPsaNomZad.TabIndex = 26;
             // 
             // tbPsaKodZv1
             // 
-            this.tbPsaKodZv1.Location = new System.Drawing.Point(425, 95);
+            this.tbPsaKodZv1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKodZv1.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKodZv1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKodZv1.Location = new System.Drawing.Point(426, 96);
+            this.tbPsaKodZv1.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaKodZv1.Name = "tbPsaKodZv1";
-            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 21);
+            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 23);
             this.tbPsaKodZv1.TabIndex = 26;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(926, 46);
+            this.label20.Font = new System.Drawing.Font("Arial", 9F);
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label20.Location = new System.Drawing.Point(926, 47);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(66, 26);
+            this.label20.Size = new System.Drawing.Size(75, 30);
             this.label20.TabIndex = 12;
             this.label20.Text = "Категория\r\n(менеджер)";
             // 
             // tbPsaMenName
             // 
-            this.tbPsaMenName.Location = new System.Drawing.Point(1004, 49);
+            this.tbPsaMenName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaMenName.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaMenName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaMenName.Location = new System.Drawing.Point(1004, 50);
+            this.tbPsaMenName.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaMenName.Multiline = true;
             this.tbPsaMenName.Name = "tbPsaMenName";
             this.tbPsaMenName.Size = new System.Drawing.Size(174, 21);
@@ -729,7 +803,11 @@
             // 
             // tbSostPoln
             // 
-            this.tbSostPoln.Location = new System.Drawing.Point(718, 49);
+            this.tbSostPoln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbSostPoln.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbSostPoln.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbSostPoln.Location = new System.Drawing.Point(726, 50);
+            this.tbSostPoln.Margin = new System.Windows.Forms.Padding(0);
             this.tbSostPoln.Multiline = true;
             this.tbSostPoln.Name = "tbSostPoln";
             this.tbSostPoln.Size = new System.Drawing.Size(195, 67);
@@ -738,120 +816,164 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(636, 53);
+            this.label13.Font = new System.Drawing.Font("Arial", 9F);
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(636, 54);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(62, 26);
+            this.label13.Size = new System.Drawing.Size(67, 30);
             this.label13.TabIndex = 24;
             this.label13.Text = "Состав\r\n(из справ.)";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(926, 72);
+            this.label11.Font = new System.Drawing.Font("Arial", 9F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(926, 74);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(72, 13);
+            this.label11.Size = new System.Drawing.Size(79, 15);
             this.label11.TabIndex = 24;
             this.label11.Text = "Канал сбыта";
             // 
             // tbPsaNameSbit
             // 
+            this.tbPsaNameSbit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaNameSbit.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaNameSbit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbPsaNameSbit.Location = new System.Drawing.Point(1004, 72);
+            this.tbPsaNameSbit.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaNameSbit.Name = "tbPsaNameSbit";
-            this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 21);
+            this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 23);
             this.tbPsaNameSbit.TabIndex = 23;
             // 
             // label15
             // 
             this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Arial", 9F);
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label15.Location = new System.Drawing.Point(636, 23);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(80, 26);
+            this.label15.Size = new System.Drawing.Size(94, 30);
             this.label15.TabIndex = 22;
             this.label15.Text = "Наименование\r\n(из справ.)";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(158, 53);
+            this.label12.Font = new System.Drawing.Font("Arial", 9F);
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label12.Location = new System.Drawing.Point(158, 54);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(65, 13);
+            this.label12.Size = new System.Drawing.Size(70, 15);
             this.label12.TabIndex = 22;
             this.label12.Text = "Бригада №";
             // 
             // tbArtGrup
             // 
-            this.tbArtGrup.Location = new System.Drawing.Point(718, 26);
+            this.tbArtGrup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbArtGrup.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbArtGrup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbArtGrup.Location = new System.Drawing.Point(726, 26);
+            this.tbArtGrup.Margin = new System.Windows.Forms.Padding(0);
             this.tbArtGrup.Name = "tbArtGrup";
-            this.tbArtGrup.Size = new System.Drawing.Size(195, 21);
+            this.tbArtGrup.Size = new System.Drawing.Size(195, 23);
             this.tbArtGrup.TabIndex = 21;
             // 
             // tbRzuDostZeh
             // 
-            this.tbRzuDostZeh.Location = new System.Drawing.Point(228, 49);
+            this.tbRzuDostZeh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuDostZeh.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuDostZeh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuDostZeh.Location = new System.Drawing.Point(228, 50);
+            this.tbRzuDostZeh.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuDostZeh.Name = "tbRzuDostZeh";
-            this.tbRzuDostZeh.Size = new System.Drawing.Size(83, 21);
+            this.tbRzuDostZeh.Size = new System.Drawing.Size(83, 23);
             this.tbRzuDostZeh.TabIndex = 21;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(324, 53);
+            this.label10.Font = new System.Drawing.Font("Arial", 9F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label10.Location = new System.Drawing.Point(324, 54);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(84, 13);
+            this.label10.Size = new System.Drawing.Size(87, 15);
             this.label10.TabIndex = 20;
             this.label10.Text = "Модель (торг.)";
             // 
             // tbRzuMod
             // 
-            this.tbRzuMod.Location = new System.Drawing.Point(426, 49);
+            this.tbRzuMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuMod.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuMod.Location = new System.Drawing.Point(426, 50);
+            this.tbRzuMod.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuMod.Name = "tbRzuMod";
-            this.tbRzuMod.Size = new System.Drawing.Size(204, 21);
+            this.tbRzuMod.Size = new System.Drawing.Size(204, 23);
             this.tbRzuMod.TabIndex = 19;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Arial", 9F);
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label19.Location = new System.Drawing.Point(926, 30);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(31, 13);
+            this.label19.Size = new System.Drawing.Size(35, 15);
             this.label19.TabIndex = 14;
             this.label19.Text = "Блок";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label9.Location = new System.Drawing.Point(324, 30);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(79, 13);
+            this.label9.Size = new System.Drawing.Size(80, 15);
             this.label9.TabIndex = 18;
             this.label9.Text = "Артикул (шв.)";
             // 
             // tbPsaTbID
             // 
+            this.tbPsaTbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaTbID.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaTbID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbPsaTbID.Location = new System.Drawing.Point(1004, 26);
+            this.tbPsaTbID.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaTbID.Name = "tbPsaTbID";
-            this.tbPsaTbID.Size = new System.Drawing.Size(136, 21);
+            this.tbPsaTbID.Size = new System.Drawing.Size(136, 23);
             this.tbPsaTbID.TabIndex = 13;
             // 
             // tbRzuArticul
             // 
+            this.tbRzuArticul.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuArticul.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuArticul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbRzuArticul.Location = new System.Drawing.Point(426, 26);
+            this.tbRzuArticul.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuArticul.Name = "tbRzuArticul";
-            this.tbRzuArticul.Size = new System.Drawing.Size(204, 21);
+            this.tbRzuArticul.Size = new System.Drawing.Size(204, 23);
             this.tbRzuArticul.TabIndex = 17;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(324, 72);
+            this.label8.Font = new System.Drawing.Font("Arial", 9F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(324, 74);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(96, 13);
+            this.label8.Size = new System.Drawing.Size(104, 15);
             this.label8.TabIndex = 16;
             this.label8.Text = "Цвет по заданию";
             // 
             // tbPsaPrn
             // 
-            this.tbPsaPrn.Location = new System.Drawing.Point(426, 72);
+            this.tbPsaPrn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaPrn.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaPrn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaPrn.Location = new System.Drawing.Point(426, 74);
+            this.tbPsaPrn.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaPrn.Multiline = true;
             this.tbPsaPrn.Name = "tbPsaPrn";
             this.tbPsaPrn.Size = new System.Drawing.Size(204, 21);
@@ -860,90 +982,122 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Arial", 9F);
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label7.Location = new System.Drawing.Point(158, 30);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(95, 13);
+            this.label7.Size = new System.Drawing.Size(102, 15);
             this.label7.TabIndex = 14;
             this.label7.Text = "Кол-во в расчете";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 72);
+            this.label6.Font = new System.Drawing.Font("Arial", 9F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(8, 74);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(106, 13);
+            this.label6.Size = new System.Drawing.Size(113, 15);
             this.label6.TabIndex = 12;
             this.label6.Text = "№ пачек в расчете";
             // 
             // tbRzuPach
             // 
-            this.tbRzuPach.Location = new System.Drawing.Point(118, 72);
+            this.tbRzuPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuPach.Location = new System.Drawing.Point(118, 74);
+            this.tbRzuPach.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuPach.Name = "tbRzuPach";
-            this.tbRzuPach.Size = new System.Drawing.Size(193, 21);
+            this.tbRzuPach.Size = new System.Drawing.Size(193, 23);
             this.tbRzuPach.TabIndex = 11;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 9F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label5.Location = new System.Drawing.Point(8, 30);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(64, 13);
+            this.label5.Size = new System.Drawing.Size(68, 15);
             this.label5.TabIndex = 10;
             this.label5.Text = "№ расчета";
             // 
             // tbRzuNom
             // 
-            this.tbRzuNom.Location = new System.Drawing.Point(75, 26);
+            this.tbRzuNom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuNom.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuNom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuNom.Location = new System.Drawing.Point(78, 26);
+            this.tbRzuNom.Margin = new System.Windows.Forms.Padding(0);
             this.tbRzuNom.Name = "tbRzuNom";
-            this.tbRzuNom.Size = new System.Drawing.Size(73, 21);
+            this.tbRzuNom.Size = new System.Drawing.Size(73, 23);
             this.tbRzuNom.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(710, 5);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 13);
+            this.label4.Size = new System.Drawing.Size(25, 15);
             this.label4.TabIndex = 8;
             this.label4.Text = "год";
             // 
             // label21
             // 
             this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Arial", 9F);
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label21.Location = new System.Drawing.Point(1149, 30);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(74, 13);
+            this.label21.Size = new System.Drawing.Size(82, 15);
             this.label21.TabIndex = 10;
             this.label21.Text = "Код матрицы";
             // 
             // tbPsaNN
             // 
-            this.tbPsaNN.Location = new System.Drawing.Point(1229, 26);
+            this.tbPsaNN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaNN.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaNN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaNN.Location = new System.Drawing.Point(1234, 26);
+            this.tbPsaNN.Margin = new System.Windows.Forms.Padding(0);
             this.tbPsaNN.Name = "tbPsaNN";
-            this.tbPsaNN.Size = new System.Drawing.Size(70, 21);
+            this.tbPsaNN.Size = new System.Drawing.Size(70, 23);
             this.tbPsaNN.TabIndex = 9;
             // 
             // tbYearPach
             // 
+            this.tbYearPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbYearPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbYearPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbYearPach.Location = new System.Drawing.Point(741, 2);
+            this.tbYearPach.Margin = new System.Windows.Forms.Padding(0);
             this.tbYearPach.Name = "tbYearPach";
-            this.tbYearPach.Size = new System.Drawing.Size(42, 21);
+            this.tbYearPach.Size = new System.Drawing.Size(42, 23);
             this.tbYearPach.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(576, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 13);
+            this.label3.Size = new System.Drawing.Size(56, 15);
             this.label3.TabIndex = 6;
             this.label3.Text = "№ пачки";
             // 
             // tbNomPach
             // 
+            this.tbNomPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbNomPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbNomPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbNomPach.Location = new System.Drawing.Point(629, 2);
+            this.tbNomPach.Margin = new System.Windows.Forms.Padding(0);
             this.tbNomPach.Name = "tbNomPach";
-            this.tbNomPach.Size = new System.Drawing.Size(64, 21);
+            this.tbNomPach.Size = new System.Drawing.Size(64, 23);
             this.tbNomPach.TabIndex = 5;
             this.tbNomPach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNomPach_KeyDown);
             // 
@@ -951,6 +1105,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label2.Location = new System.Drawing.Point(497, 2);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(73, 19);
@@ -961,6 +1116,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(5, 2);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(185, 19);
@@ -1009,6 +1165,7 @@
             // 
             this.label70.AutoSize = true;
             this.label70.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label70.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label70.Location = new System.Drawing.Point(3, 279);
             this.label70.Name = "label70";
             this.label70.Size = new System.Drawing.Size(42, 19);
@@ -1019,6 +1176,7 @@
             // 
             this.label69.AutoSize = true;
             this.label69.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label69.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label69.Location = new System.Drawing.Point(3, 0);
             this.label69.Name = "label69";
             this.label69.Size = new System.Drawing.Size(38, 19);
@@ -1976,13 +2134,25 @@
             // 
             // tbDatZayav
             // 
+            this.tbDatZayav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbDatZayav.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbDatZayav.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbDatZayav.Location = new System.Drawing.Point(93, 31);
+            this.tbDatZayav.Margin = new System.Windows.Forms.Padding(0);
             this.tbDatZayav.Name = "tbDatZayav";
-            this.tbDatZayav.Size = new System.Drawing.Size(110, 21);
+            this.tbDatZayav.Size = new System.Drawing.Size(110, 23);
             this.tbDatZayav.TabIndex = 70;
             // 
             // button10
             // 
+            this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.button10.Btn = null;
+            this.button10.ComponentBackColor = System.Drawing.Color.Empty;
+            this.button10.ComponentFontColor = System.Drawing.Color.Empty;
+            this.button10.ComponentSize = new System.Drawing.Size(0, 0);
+            this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button10.Font = new System.Drawing.Font("Arial", 10F);
+            this.button10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.button10.Location = new System.Drawing.Point(5, 58);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(200, 20);
@@ -1994,15 +2164,18 @@
             // label61
             // 
             this.label61.AutoSize = true;
+            this.label61.Font = new System.Drawing.Font("Arial", 9F);
+            this.label61.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label61.Location = new System.Drawing.Point(2, 3);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(206, 26);
+            this.label61.Size = new System.Drawing.Size(227, 30);
             this.label61.TabIndex = 0;
             this.label61.Text = "Предположительная дата создания \r\nзаявки (при выполнении всех условий)";
             this.label61.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // panelControl2
             // 
+            this.panelControl2.Controls.Add(this.btnZayavUpakPrint);
             this.panelControl2.Controls.Add(this.tbData_f_z_u);
             this.panelControl2.Controls.Add(this.tbData_f_o_u);
             this.panelControl2.Controls.Add(this.tbData_f_z);
@@ -2034,40 +2207,77 @@
             this.panelControl2.Controls.Add(this.label18);
             this.panelControl2.Location = new System.Drawing.Point(3, 12);
             this.panelControl2.Name = "panelControl2";
-            this.panelControl2.Size = new System.Drawing.Size(210, 446);
+            this.panelControl2.Size = new System.Drawing.Size(210, 460);
             this.panelControl2.TabIndex = 0;
+            // 
+            // btnZayavUpakPrint
+            // 
+            this.btnZayavUpakPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnZayavUpakPrint.Btn = null;
+            this.btnZayavUpakPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnZayavUpakPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnZayavUpakPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnZayavUpakPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZayavUpakPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnZayavUpakPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.btnZayavUpakPrint.Location = new System.Drawing.Point(5, 362);
+            this.btnZayavUpakPrint.Name = "btnZayavUpakPrint";
+            this.btnZayavUpakPrint.Size = new System.Drawing.Size(200, 24);
+            this.btnZayavUpakPrint.TabIndex = 70;
+            this.btnZayavUpakPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
+            this.btnZayavUpakPrint.UseVisualStyleBackColor = true;
+            this.btnZayavUpakPrint.Click += new System.EventHandler(this.btnZayavFurnPrint_Click);
             // 
             // tbData_f_z_u
             // 
+            this.tbData_f_z_u.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbData_f_z_u.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbData_f_z_u.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbData_f_z_u.Location = new System.Drawing.Point(64, 337);
+            this.tbData_f_z_u.Margin = new System.Windows.Forms.Padding(0);
             this.tbData_f_z_u.Name = "tbData_f_z_u";
-            this.tbData_f_z_u.Size = new System.Drawing.Size(110, 21);
+            this.tbData_f_z_u.Size = new System.Drawing.Size(110, 23);
             this.tbData_f_z_u.TabIndex = 69;
             // 
             // tbData_f_o_u
             // 
+            this.tbData_f_o_u.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbData_f_o_u.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbData_f_o_u.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbData_f_o_u.Location = new System.Drawing.Point(64, 313);
+            this.tbData_f_o_u.Margin = new System.Windows.Forms.Padding(0);
             this.tbData_f_o_u.Name = "tbData_f_o_u";
-            this.tbData_f_o_u.Size = new System.Drawing.Size(110, 21);
+            this.tbData_f_o_u.Size = new System.Drawing.Size(110, 23);
             this.tbData_f_o_u.TabIndex = 68;
             // 
             // tbData_f_z
             // 
+            this.tbData_f_z.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbData_f_z.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbData_f_z.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbData_f_z.Location = new System.Drawing.Point(64, 219);
+            this.tbData_f_z.Margin = new System.Windows.Forms.Padding(0);
             this.tbData_f_z.Name = "tbData_f_z";
-            this.tbData_f_z.Size = new System.Drawing.Size(110, 21);
+            this.tbData_f_z.Size = new System.Drawing.Size(110, 23);
             this.tbData_f_z.TabIndex = 67;
             // 
             // tbData_f_o
             // 
+            this.tbData_f_o.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbData_f_o.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbData_f_o.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbData_f_o.Location = new System.Drawing.Point(64, 195);
+            this.tbData_f_o.Margin = new System.Windows.Forms.Padding(0);
             this.tbData_f_o.Name = "tbData_f_o";
-            this.tbData_f_o.Size = new System.Drawing.Size(110, 21);
+            this.tbData_f_o.Size = new System.Drawing.Size(110, 23);
             this.tbData_f_o.TabIndex = 66;
             // 
             // mtbData_cd
             // 
-            this.mtbData_cd.Location = new System.Drawing.Point(107, 412);
+            this.mtbData_cd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbData_cd.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbData_cd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.mtbData_cd.Location = new System.Drawing.Point(107, 424);
             this.mtbData_cd.Mask = "00/00/0000";
             this.mtbData_cd.Name = "mtbData_cd";
             this.mtbData_cd.Size = new System.Drawing.Size(63, 21);
@@ -2075,7 +2285,10 @@
             // 
             // mtbData_zeh
             // 
-            this.mtbData_zeh.Location = new System.Drawing.Point(107, 388);
+            this.mtbData_zeh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbData_zeh.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbData_zeh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.mtbData_zeh.Location = new System.Drawing.Point(107, 400);
             this.mtbData_zeh.Mask = "00/00/0000";
             this.mtbData_zeh.Name = "mtbData_zeh";
             this.mtbData_zeh.Size = new System.Drawing.Size(63, 21);
@@ -2083,83 +2296,112 @@
             // 
             // tbOtgrStat
             // 
-            this.tbOtgrStat.Location = new System.Drawing.Point(177, 412);
+            this.tbOtgrStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbOtgrStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbOtgrStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbOtgrStat.Location = new System.Drawing.Point(177, 424);
+            this.tbOtgrStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbOtgrStat.Name = "tbOtgrStat";
-            this.tbOtgrStat.Size = new System.Drawing.Size(26, 21);
+            this.tbOtgrStat.Size = new System.Drawing.Size(26, 23);
             this.tbOtgrStat.TabIndex = 59;
             this.tbOtgrStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbIs_got
             // 
-            this.tbIs_got.Location = new System.Drawing.Point(177, 387);
+            this.tbIs_got.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbIs_got.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbIs_got.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbIs_got.Location = new System.Drawing.Point(177, 399);
+            this.tbIs_got.Margin = new System.Windows.Forms.Padding(0);
             this.tbIs_got.Name = "tbIs_got";
-            this.tbIs_got.Size = new System.Drawing.Size(26, 21);
+            this.tbIs_got.Size = new System.Drawing.Size(26, 23);
             this.tbIs_got.TabIndex = 58;
             this.tbIs_got.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label60
             // 
             this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(6, 413);
+            this.label60.Font = new System.Drawing.Font("Arial", 9F);
+            this.label60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label60.Location = new System.Drawing.Point(6, 425);
             this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(86, 26);
+            this.label60.Size = new System.Drawing.Size(94, 30);
             this.label60.TabIndex = 55;
             this.label60.Text = "Дата отгрузки \r\nс производства";
             // 
             // label59
             // 
             this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(6, 388);
+            this.label59.Font = new System.Drawing.Font("Arial", 9F);
+            this.label59.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label59.Location = new System.Drawing.Point(6, 400);
             this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(63, 13);
+            this.label59.Size = new System.Drawing.Size(65, 15);
             this.label59.TabIndex = 54;
             this.label59.Text = "Дата в цех";
             // 
             // tbUZSobrStat
             // 
+            this.tbUZSobrStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbUZSobrStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbUZSobrStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbUZSobrStat.Location = new System.Drawing.Point(177, 337);
+            this.tbUZSobrStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbUZSobrStat.Name = "tbUZSobrStat";
-            this.tbUZSobrStat.Size = new System.Drawing.Size(26, 21);
+            this.tbUZSobrStat.Size = new System.Drawing.Size(26, 23);
             this.tbUZSobrStat.TabIndex = 52;
             this.tbUZSobrStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label56
             // 
             this.label56.AutoSize = true;
+            this.label56.Font = new System.Drawing.Font("Arial", 9F);
+            this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label56.Location = new System.Drawing.Point(16, 341);
             this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(48, 13);
+            this.label56.Size = new System.Drawing.Size(55, 15);
             this.label56.TabIndex = 49;
             this.label56.Text = "собрана";
             // 
             // tbUZSozdStat
             // 
+            this.tbUZSozdStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbUZSozdStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbUZSozdStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbUZSozdStat.Location = new System.Drawing.Point(177, 313);
+            this.tbUZSozdStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbUZSozdStat.Name = "tbUZSozdStat";
-            this.tbUZSozdStat.Size = new System.Drawing.Size(26, 21);
+            this.tbUZSozdStat.Size = new System.Drawing.Size(26, 23);
             this.tbUZSozdStat.TabIndex = 48;
             this.tbUZSozdStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label57
             // 
             this.label57.AutoSize = true;
+            this.label57.Font = new System.Drawing.Font("Arial", 9F);
+            this.label57.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label57.Location = new System.Drawing.Point(16, 317);
             this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(48, 13);
+            this.label57.Size = new System.Drawing.Size(54, 15);
             this.label57.TabIndex = 47;
             this.label57.Text = "создана";
             // 
             // tbUpakZayav
             // 
+            this.tbUpakZayav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbUpakZayav.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbUpakZayav.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbUpakZayav.Location = new System.Drawing.Point(158, 289);
+            this.tbUpakZayav.Margin = new System.Windows.Forms.Padding(0);
             this.tbUpakZayav.Name = "tbUpakZayav";
-            this.tbUpakZayav.Size = new System.Drawing.Size(45, 21);
+            this.tbUpakZayav.Size = new System.Drawing.Size(45, 23);
             this.tbUpakZayav.TabIndex = 46;
             // 
             // label58
             // 
             this.label58.AutoSize = true;
             this.label58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label58.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label58.Location = new System.Drawing.Point(5, 290);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(142, 13);
@@ -2168,9 +2410,17 @@
             // 
             // btnZayavFurnPrint
             // 
-            this.btnZayavFurnPrint.Location = new System.Drawing.Point(6, 247);
+            this.btnZayavFurnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnZayavFurnPrint.Btn = null;
+            this.btnZayavFurnPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnZayavFurnPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnZayavFurnPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnZayavFurnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnZayavFurnPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnZayavFurnPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.btnZayavFurnPrint.Location = new System.Drawing.Point(6, 244);
             this.btnZayavFurnPrint.Name = "btnZayavFurnPrint";
-            this.btnZayavFurnPrint.Size = new System.Drawing.Size(200, 20);
+            this.btnZayavFurnPrint.Size = new System.Drawing.Size(200, 24);
             this.btnZayavFurnPrint.TabIndex = 44;
             this.btnZayavFurnPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
             this.btnZayavFurnPrint.UseVisualStyleBackColor = true;
@@ -2178,49 +2428,66 @@
             // 
             // tbFZSobrStat
             // 
+            this.tbFZSobrStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbFZSobrStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbFZSobrStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbFZSobrStat.Location = new System.Drawing.Point(177, 219);
+            this.tbFZSobrStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbFZSobrStat.Name = "tbFZSobrStat";
-            this.tbFZSobrStat.Size = new System.Drawing.Size(26, 21);
+            this.tbFZSobrStat.Size = new System.Drawing.Size(26, 23);
             this.tbFZSobrStat.TabIndex = 43;
             this.tbFZSobrStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label55
             // 
             this.label55.AutoSize = true;
+            this.label55.Font = new System.Drawing.Font("Arial", 9F);
+            this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label55.Location = new System.Drawing.Point(16, 223);
             this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(48, 13);
+            this.label55.Size = new System.Drawing.Size(55, 15);
             this.label55.TabIndex = 40;
             this.label55.Text = "собрана";
             // 
             // tbFZSozdStat
             // 
+            this.tbFZSozdStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbFZSozdStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbFZSozdStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbFZSozdStat.Location = new System.Drawing.Point(177, 195);
+            this.tbFZSozdStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbFZSozdStat.Name = "tbFZSozdStat";
-            this.tbFZSozdStat.Size = new System.Drawing.Size(26, 21);
+            this.tbFZSozdStat.Size = new System.Drawing.Size(26, 23);
             this.tbFZSozdStat.TabIndex = 39;
             this.tbFZSozdStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label54
             // 
             this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("Arial", 9F);
+            this.label54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label54.Location = new System.Drawing.Point(16, 199);
             this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(48, 13);
+            this.label54.Size = new System.Drawing.Size(54, 15);
             this.label54.TabIndex = 38;
             this.label54.Text = "создана";
             // 
             // tbFurnZayav
             // 
+            this.tbFurnZayav.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbFurnZayav.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbFurnZayav.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbFurnZayav.Location = new System.Drawing.Point(158, 171);
+            this.tbFurnZayav.Margin = new System.Windows.Forms.Padding(0);
             this.tbFurnZayav.Name = "tbFurnZayav";
-            this.tbFurnZayav.Size = new System.Drawing.Size(45, 21);
+            this.tbFurnZayav.Size = new System.Drawing.Size(45, 23);
             this.tbFurnZayav.TabIndex = 37;
             // 
             // label25
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label25.Location = new System.Drawing.Point(3, 175);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(150, 13);
@@ -2229,9 +2496,17 @@
             // 
             // btnFullKKPrint
             // 
-            this.btnFullKKPrint.Location = new System.Drawing.Point(6, 130);
+            this.btnFullKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnFullKKPrint.Btn = null;
+            this.btnFullKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnFullKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnFullKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnFullKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFullKKPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnFullKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.btnFullKKPrint.Location = new System.Drawing.Point(6, 124);
             this.btnFullKKPrint.Name = "btnFullKKPrint";
-            this.btnFullKKPrint.Size = new System.Drawing.Size(168, 34);
+            this.btnFullKKPrint.Size = new System.Drawing.Size(168, 42);
             this.btnFullKKPrint.TabIndex = 35;
             this.btnFullKKPrint.Text = "КК общая \r\n(просмотр/печать)";
             this.btnFullKKPrint.UseVisualStyleBackColor = true;
@@ -2239,25 +2514,41 @@
             // 
             // tbUpakKKStat
             // 
-            this.tbUpakKKStat.Location = new System.Drawing.Point(177, 95);
+            this.tbUpakKKStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbUpakKKStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbUpakKKStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbUpakKKStat.Location = new System.Drawing.Point(177, 94);
+            this.tbUpakKKStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbUpakKKStat.Name = "tbUpakKKStat";
-            this.tbUpakKKStat.Size = new System.Drawing.Size(26, 21);
+            this.tbUpakKKStat.Size = new System.Drawing.Size(26, 23);
             this.tbUpakKKStat.TabIndex = 34;
             this.tbUpakKKStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tbFurnKKStat
             // 
-            this.tbFurnKKStat.Location = new System.Drawing.Point(177, 57);
+            this.tbFurnKKStat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbFurnKKStat.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbFurnKKStat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbFurnKKStat.Location = new System.Drawing.Point(177, 54);
+            this.tbFurnKKStat.Margin = new System.Windows.Forms.Padding(0);
             this.tbFurnKKStat.Name = "tbFurnKKStat";
-            this.tbFurnKKStat.Size = new System.Drawing.Size(26, 21);
+            this.tbFurnKKStat.Size = new System.Drawing.Size(26, 23);
             this.tbFurnKKStat.TabIndex = 33;
             this.tbFurnKKStat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnUpakKKPrint
             // 
-            this.btnUpakKKPrint.Location = new System.Drawing.Point(6, 90);
+            this.btnUpakKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnUpakKKPrint.Btn = null;
+            this.btnUpakKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnUpakKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnUpakKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnUpakKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnUpakKKPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnUpakKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.btnUpakKKPrint.Location = new System.Drawing.Point(6, 84);
             this.btnUpakKKPrint.Name = "btnUpakKKPrint";
-            this.btnUpakKKPrint.Size = new System.Drawing.Size(168, 34);
+            this.btnUpakKKPrint.Size = new System.Drawing.Size(168, 42);
             this.btnUpakKKPrint.TabIndex = 32;
             this.btnUpakKKPrint.Text = "КК на упаковку \r\n(просмотр/печать)";
             this.btnUpakKKPrint.UseVisualStyleBackColor = true;
@@ -2265,9 +2556,17 @@
             // 
             // btnFurnKKPrint
             // 
-            this.btnFurnKKPrint.Location = new System.Drawing.Point(6, 50);
+            this.btnFurnKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnFurnKKPrint.Btn = null;
+            this.btnFurnKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnFurnKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnFurnKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnFurnKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFurnKKPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnFurnKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.btnFurnKKPrint.Location = new System.Drawing.Point(6, 44);
             this.btnFurnKKPrint.Name = "btnFurnKKPrint";
-            this.btnFurnKKPrint.Size = new System.Drawing.Size(168, 34);
+            this.btnFurnKKPrint.Size = new System.Drawing.Size(168, 42);
             this.btnFurnKKPrint.TabIndex = 5;
             this.btnFurnKKPrint.Text = "КК на фурнитуру (просмотр/печать)";
             this.btnFurnKKPrint.UseVisualStyleBackColor = true;
@@ -2277,6 +2576,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label18.Location = new System.Drawing.Point(16, 2);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(179, 38);
@@ -2313,6 +2613,14 @@
             // 
             // button4
             // 
+            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.button4.Btn = null;
+            this.button4.ComponentBackColor = System.Drawing.Color.Empty;
+            this.button4.ComponentFontColor = System.Drawing.Color.Empty;
+            this.button4.ComponentSize = new System.Drawing.Size(0, 0);
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Font = new System.Drawing.Font("Arial", 10F);
+            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.button4.Location = new System.Drawing.Point(499, 25);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(205, 23);
@@ -2323,6 +2631,14 @@
             // 
             // button5
             // 
+            this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.button5.Btn = null;
+            this.button5.ComponentBackColor = System.Drawing.Color.Empty;
+            this.button5.ComponentFontColor = System.Drawing.Color.Empty;
+            this.button5.ComponentSize = new System.Drawing.Size(0, 0);
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Arial", 10F);
+            this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.button5.Location = new System.Drawing.Point(223, 25);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(205, 23);
@@ -2333,6 +2649,14 @@
             // 
             // button6
             // 
+            this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.button6.Btn = null;
+            this.button6.ComponentBackColor = System.Drawing.Color.Empty;
+            this.button6.ComponentFontColor = System.Drawing.Color.Empty;
+            this.button6.ComponentSize = new System.Drawing.Size(0, 0);
+            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button6.Font = new System.Drawing.Font("Arial", 10F);
+            this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.button6.Location = new System.Drawing.Point(7, 25);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(171, 23);
@@ -2345,6 +2669,7 @@
             // 
             this.label52.AutoSize = true;
             this.label52.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label52.Location = new System.Drawing.Point(3, 2);
             this.label52.Name = "label52";
             this.label52.Size = new System.Drawing.Size(123, 19);
@@ -2461,6 +2786,9 @@
             // 
             // mtbRzuDataPrCd
             // 
+            this.mtbRzuDataPrCd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataPrCd.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataPrCd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataPrCd.Location = new System.Drawing.Point(898, 55);
             this.mtbRzuDataPrCd.Mask = "00/00/0000";
             this.mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
@@ -2469,6 +2797,9 @@
             // 
             // mtbRzuDataVCd
             // 
+            this.mtbRzuDataVCd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataVCd.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataVCd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataVCd.Location = new System.Drawing.Point(765, 109);
             this.mtbRzuDataVCd.Mask = "00/00/0000";
             this.mtbRzuDataVCd.Name = "mtbRzuDataVCd";
@@ -2477,6 +2808,9 @@
             // 
             // mtbRzuDataPrKm
             // 
+            this.mtbRzuDataPrKm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataPrKm.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataPrKm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataPrKm.Location = new System.Drawing.Point(765, 55);
             this.mtbRzuDataPrKm.Mask = "00/00/0000";
             this.mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
@@ -2485,6 +2819,9 @@
             // 
             // mtbRzuVidStir
             // 
+            this.mtbRzuVidStir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuVidStir.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuVidStir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuVidStir.Location = new System.Drawing.Point(626, 163);
             this.mtbRzuVidStir.Mask = "00/00/0000";
             this.mtbRzuVidStir.Name = "mtbRzuVidStir";
@@ -2493,6 +2830,9 @@
             // 
             // mtbRzuDataVChi
             // 
+            this.mtbRzuDataVChi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataVChi.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataVChi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataVChi.Location = new System.Drawing.Point(626, 109);
             this.mtbRzuDataVChi.Mask = "00/00/0000";
             this.mtbRzuDataVChi.Name = "mtbRzuDataVChi";
@@ -2501,6 +2841,9 @@
             // 
             // mtbRzuDataPrPe
             // 
+            this.mtbRzuDataPrPe.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataPrPe.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataPrPe.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataPrPe.Location = new System.Drawing.Point(626, 55);
             this.mtbRzuDataPrPe.Mask = "00/00/0000";
             this.mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
@@ -2509,6 +2852,9 @@
             // 
             // mtbRzuDataStCd
             // 
+            this.mtbRzuDataStCd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataStCd.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataStCd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataStCd.Location = new System.Drawing.Point(442, 163);
             this.mtbRzuDataStCd.Mask = "00/00/0000";
             this.mtbRzuDataStCd.Name = "mtbRzuDataStCd";
@@ -2517,6 +2863,9 @@
             // 
             // mtbRzuDataVR
             // 
+            this.mtbRzuDataVR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataVR.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataVR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataVR.Location = new System.Drawing.Point(442, 109);
             this.mtbRzuDataVR.Mask = "00/00/0000";
             this.mtbRzuDataVR.Name = "mtbRzuDataVR";
@@ -2525,6 +2874,9 @@
             // 
             // mtbRzuDataPrR
             // 
+            this.mtbRzuDataPrR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataPrR.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataPrR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataPrR.Location = new System.Drawing.Point(442, 55);
             this.mtbRzuDataPrR.Mask = "00/00/0000";
             this.mtbRzuDataPrR.Name = "mtbRzuDataPrR";
@@ -2533,6 +2885,9 @@
             // 
             // mtbRzuDataStR
             // 
+            this.mtbRzuDataStR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataStR.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataStR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataStR.Location = new System.Drawing.Point(265, 163);
             this.mtbRzuDataStR.Mask = "00/00/0000";
             this.mtbRzuDataStR.Name = "mtbRzuDataStR";
@@ -2541,6 +2896,9 @@
             // 
             // mtbRzuDataVP
             // 
+            this.mtbRzuDataVP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataVP.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataVP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataVP.Location = new System.Drawing.Point(265, 109);
             this.mtbRzuDataVP.Mask = "00/00/0000";
             this.mtbRzuDataVP.Name = "mtbRzuDataVP";
@@ -2549,6 +2907,9 @@
             // 
             // mtbRzuDataPrP
             // 
+            this.mtbRzuDataPrP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataPrP.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataPrP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataPrP.Location = new System.Drawing.Point(265, 55);
             this.mtbRzuDataPrP.Mask = "00/00/0000";
             this.mtbRzuDataPrP.Name = "mtbRzuDataPrP";
@@ -2557,6 +2918,9 @@
             // 
             // mtbRzuDataStP
             // 
+            this.mtbRzuDataStP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataStP.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataStP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataStP.Location = new System.Drawing.Point(91, 163);
             this.mtbRzuDataStP.Mask = "00/00/0000";
             this.mtbRzuDataStP.Name = "mtbRzuDataStP";
@@ -2565,6 +2929,9 @@
             // 
             // mtbRzuDataRasv
             // 
+            this.mtbRzuDataRasv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataRasv.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataRasv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataRasv.Location = new System.Drawing.Point(91, 109);
             this.mtbRzuDataRasv.Mask = "00/00/0000";
             this.mtbRzuDataRasv.Name = "mtbRzuDataRasv";
@@ -2573,6 +2940,9 @@
             // 
             // mtbRzuDataRasp
             // 
+            this.mtbRzuDataRasp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataRasp.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataRasp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataRasp.Location = new System.Drawing.Point(91, 55);
             this.mtbRzuDataRasp.Mask = "00/00/0000";
             this.mtbRzuDataRasp.Name = "mtbRzuDataRasp";
@@ -2582,135 +2952,165 @@
             // label44
             // 
             this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Arial", 9F);
+            this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label44.Location = new System.Drawing.Point(538, 165);
             this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(64, 13);
+            this.label44.Size = new System.Drawing.Size(70, 15);
             this.label44.TabIndex = 52;
             this.label44.Text = "Вид стирки";
             // 
             // label49
             // 
             this.label49.AutoSize = true;
+            this.label49.Font = new System.Drawing.Font("Arial", 9F);
+            this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label49.Location = new System.Drawing.Point(359, 165);
             this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(66, 13);
+            this.label49.Size = new System.Drawing.Size(70, 15);
             this.label49.TabIndex = 50;
             this.label49.Text = "Дата сдачи";
             // 
             // label50
             // 
             this.label50.AutoSize = true;
+            this.label50.Font = new System.Drawing.Font("Arial", 9F);
+            this.label50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label50.Location = new System.Drawing.Point(185, 165);
             this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(71, 13);
+            this.label50.Size = new System.Drawing.Size(75, 15);
             this.label50.TabIndex = 48;
             this.label50.Text = "Дата стирки";
             // 
             // label51
             // 
             this.label51.AutoSize = true;
+            this.label51.Font = new System.Drawing.Font("Arial", 9F);
+            this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label51.Location = new System.Drawing.Point(11, 158);
             this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(78, 26);
+            this.label51.Size = new System.Drawing.Size(84, 30);
             this.label51.TabIndex = 46;
             this.label51.Text = "Дата принято\r\nна стирку";
             // 
             // label43
             // 
             this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Arial", 9F);
+            this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label43.Location = new System.Drawing.Point(722, 104);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(37, 26);
+            this.label43.Size = new System.Drawing.Size(40, 30);
             this.label43.TabIndex = 42;
             this.label43.Text = "Дата\r\nсдачи";
             // 
             // label45
             // 
             this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Arial", 9F);
+            this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label45.Location = new System.Drawing.Point(538, 111);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(86, 13);
+            this.label45.Size = new System.Drawing.Size(89, 15);
             this.label45.TabIndex = 38;
             this.label45.Text = "Дата на чистку";
             // 
             // label46
             // 
             this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Arial", 9F);
+            this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label46.Location = new System.Drawing.Point(359, 104);
             this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(81, 26);
+            this.label46.Size = new System.Drawing.Size(84, 30);
             this.label46.TabIndex = 36;
             this.label46.Text = "Дата в работу\r\nвышивка";
             // 
             // label47
             // 
             this.label47.AutoSize = true;
+            this.label47.Font = new System.Drawing.Font("Arial", 9F);
+            this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label47.Location = new System.Drawing.Point(185, 104);
             this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(78, 26);
+            this.label47.Size = new System.Drawing.Size(84, 30);
             this.label47.TabIndex = 34;
             this.label47.Text = "Дата принято\r\nна вышивку";
             // 
             // label48
             // 
             this.label48.AutoSize = true;
+            this.label48.Font = new System.Drawing.Font("Arial", 9F);
+            this.label48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label48.Location = new System.Drawing.Point(11, 104);
             this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(68, 26);
+            this.label48.Size = new System.Drawing.Size(72, 30);
             this.label48.TabIndex = 32;
             this.label48.Text = "Дата\r\nна вышивку";
             // 
             // label42
             // 
             this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Arial", 9F);
+            this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label42.Location = new System.Drawing.Point(859, 50);
             this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(37, 26);
+            this.label42.Size = new System.Drawing.Size(40, 30);
             this.label42.TabIndex = 30;
             this.label42.Text = "Дата\r\nсдачи";
             // 
             // label41
             // 
             this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Arial", 9F);
+            this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label41.Location = new System.Drawing.Point(722, 50);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(41, 26);
+            this.label41.Size = new System.Drawing.Size(46, 30);
             this.label41.TabIndex = 28;
             this.label41.Text = "Дата\r\nкомпл.";
             // 
             // label40
             // 
             this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Arial", 9F);
+            this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label40.Location = new System.Drawing.Point(538, 50);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(81, 26);
+            this.label40.Size = new System.Drawing.Size(85, 30);
             this.label40.TabIndex = 26;
             this.label40.Text = "Дата на печку\r\nпринт";
             // 
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Arial", 9F);
+            this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label39.Location = new System.Drawing.Point(359, 50);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(81, 26);
+            this.label39.Size = new System.Drawing.Size(84, 30);
             this.label39.TabIndex = 24;
             this.label39.Text = "Дата в работу\r\nпринт";
             // 
             // label38
             // 
             this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Arial", 9F);
+            this.label38.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label38.Location = new System.Drawing.Point(185, 50);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(78, 26);
+            this.label38.Size = new System.Drawing.Size(84, 30);
             this.label38.TabIndex = 22;
             this.label38.Text = "Дата принято\r\nна принт";
             // 
             // label37
             // 
             this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Arial", 9F);
+            this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label37.Location = new System.Drawing.Point(11, 50);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(52, 26);
+            this.label37.Size = new System.Drawing.Size(57, 30);
             this.label37.TabIndex = 20;
             this.label37.Text = "Дата\r\nна принт";
             // 
@@ -2718,6 +3118,7 @@
             // 
             this.label35.AutoSize = true;
             this.label35.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label35.Location = new System.Drawing.Point(3, 138);
             this.label35.Name = "label35";
             this.label35.Size = new System.Drawing.Size(77, 19);
@@ -2728,6 +3129,7 @@
             // 
             this.label36.AutoSize = true;
             this.label36.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label36.Location = new System.Drawing.Point(3, 84);
             this.label36.Name = "label36";
             this.label36.Size = new System.Drawing.Size(98, 19);
@@ -2738,6 +3140,7 @@
             // 
             this.label32.AutoSize = true;
             this.label32.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label32.Location = new System.Drawing.Point(3, 30);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(67, 19);
@@ -2748,6 +3151,7 @@
             // 
             this.label31.AutoSize = true;
             this.label31.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label31.Location = new System.Drawing.Point(3, 2);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(263, 19);
@@ -2768,349 +3172,6 @@
             this.panelControl4.Name = "panelControl4";
             this.panelControl4.Size = new System.Drawing.Size(1558, 220);
             this.panelControl4.TabIndex = 28;
-            // 
-            // gcNaklList
-            // 
-            this.gcNaklList.DataSource = this.bsNaklList;
-            this.gcNaklList.Location = new System.Drawing.Point(8, 24);
-            this.gcNaklList.MainView = this.gridView1;
-            this.gcNaklList.Name = "gcNaklList";
-            this.gcNaklList.Size = new System.Drawing.Size(1545, 163);
-            this.gcNaklList.TabIndex = 5;
-            this.gcNaklList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn1,
-            this.gridColumn2,
-            this.gridColumn3,
-            this.gridColumn4,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7,
-            this.gridColumn8,
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn12,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.gridColumn15,
-            this.gridColumn16,
-            this.gridColumn17,
-            this.gridColumn40,
-            this.gridColumn44,
-            this.gridColumn45,
-            this.gridColumn46});
-            gridFormatRule12.Column = this.gridColumn40;
-            gridFormatRule12.ColumnApplyTo = this.gridColumn15;
-            gridFormatRule12.Name = "Format0";
-            formatConditionRuleValue12.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue12.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue12.Appearance.Options.UseFont = true;
-            formatConditionRuleValue12.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue12.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue12.Value1 = "red";
-            gridFormatRule12.Rule = formatConditionRuleValue12;
-            gridFormatRule13.Column = this.gridColumn40;
-            gridFormatRule13.ColumnApplyTo = this.gridColumn15;
-            gridFormatRule13.Name = "Format1";
-            formatConditionRuleValue13.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue13.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue13.Appearance.Options.UseFont = true;
-            formatConditionRuleValue13.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue13.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue13.Value1 = "green";
-            gridFormatRule13.Rule = formatConditionRuleValue13;
-            gridFormatRule14.Column = this.gridColumn44;
-            gridFormatRule14.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule14.Name = "Format2";
-            formatConditionRuleValue14.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue14.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue14.Appearance.Options.UseFont = true;
-            formatConditionRuleValue14.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue14.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue14.Value1 = "green";
-            gridFormatRule14.Rule = formatConditionRuleValue14;
-            gridFormatRule15.Column = this.gridColumn44;
-            gridFormatRule15.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule15.Name = "Format3";
-            formatConditionRuleValue15.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue15.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue15.Appearance.Options.UseFont = true;
-            formatConditionRuleValue15.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue15.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue15.Value1 = "red";
-            gridFormatRule15.Rule = formatConditionRuleValue15;
-            gridFormatRule16.Column = this.gridColumn44;
-            gridFormatRule16.ColumnApplyTo = this.gridColumn14;
-            gridFormatRule16.Name = "Format4";
-            formatConditionRuleValue16.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue16.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue16.Appearance.Options.UseFont = true;
-            formatConditionRuleValue16.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue16.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue16.Value1 = "gray";
-            gridFormatRule16.Rule = formatConditionRuleValue16;
-            gridFormatRule17.Column = this.gridColumn45;
-            gridFormatRule17.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule17.Name = "Format5";
-            formatConditionRuleValue17.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue17.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue17.Appearance.Options.UseFont = true;
-            formatConditionRuleValue17.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue17.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue17.Value1 = "red";
-            gridFormatRule17.Rule = formatConditionRuleValue17;
-            gridFormatRule18.Column = this.gridColumn45;
-            gridFormatRule18.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule18.Name = "Format6";
-            formatConditionRuleValue18.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue18.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue18.Appearance.Options.UseFont = true;
-            formatConditionRuleValue18.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue18.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue18.Value1 = "green";
-            gridFormatRule18.Rule = formatConditionRuleValue18;
-            gridFormatRule19.Column = this.gridColumn45;
-            gridFormatRule19.ColumnApplyTo = this.gridColumn13;
-            gridFormatRule19.Name = "Format7";
-            formatConditionRuleValue19.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue19.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue19.Appearance.Options.UseFont = true;
-            formatConditionRuleValue19.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue19.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue19.Value1 = "gray";
-            gridFormatRule19.Rule = formatConditionRuleValue19;
-            gridFormatRule20.Column = this.gridColumn46;
-            gridFormatRule20.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule20.Name = "Format8";
-            formatConditionRuleValue20.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue20.Appearance.ForeColor = System.Drawing.Color.Red;
-            formatConditionRuleValue20.Appearance.Options.UseFont = true;
-            formatConditionRuleValue20.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue20.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue20.Value1 = "red";
-            gridFormatRule20.Rule = formatConditionRuleValue20;
-            gridFormatRule21.Column = this.gridColumn46;
-            gridFormatRule21.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule21.Name = "Format9";
-            formatConditionRuleValue21.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue21.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            formatConditionRuleValue21.Appearance.Options.UseFont = true;
-            formatConditionRuleValue21.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue21.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue21.Value1 = "green";
-            gridFormatRule21.Rule = formatConditionRuleValue21;
-            gridFormatRule22.Column = this.gridColumn46;
-            gridFormatRule22.ColumnApplyTo = this.gridColumn12;
-            gridFormatRule22.Name = "Format10";
-            formatConditionRuleValue22.Appearance.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            formatConditionRuleValue22.Appearance.ForeColor = System.Drawing.Color.Gray;
-            formatConditionRuleValue22.Appearance.Options.UseFont = true;
-            formatConditionRuleValue22.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue22.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
-            formatConditionRuleValue22.Value1 = "gray";
-            gridFormatRule22.Rule = formatConditionRuleValue22;
-            this.gridView1.FormatRules.Add(gridFormatRule12);
-            this.gridView1.FormatRules.Add(gridFormatRule13);
-            this.gridView1.FormatRules.Add(gridFormatRule14);
-            this.gridView1.FormatRules.Add(gridFormatRule15);
-            this.gridView1.FormatRules.Add(gridFormatRule16);
-            this.gridView1.FormatRules.Add(gridFormatRule17);
-            this.gridView1.FormatRules.Add(gridFormatRule18);
-            this.gridView1.FormatRules.Add(gridFormatRule19);
-            this.gridView1.FormatRules.Add(gridFormatRule20);
-            this.gridView1.FormatRules.Add(gridFormatRule21);
-            this.gridView1.FormatRules.Add(gridFormatRule22);
-            this.gridView1.GridControl = this.gcNaklList;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.Editable = false;
-            this.gridView1.OptionsMenu.ShowConditionalFormattingItem = true;
-            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsView.RowAutoHeight = true;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            this.gridView1.CustomDrawCell += new DevExpress.XtraGrid.Views.Base.RowCellCustomDrawEventHandler(this.gridView1_CustomDrawCell);
-            // 
-            // gridColumn1
-            // 
-            this.gridColumn1.Caption = "Кол-во ДО";
-            this.gridColumn1.FieldName = "kol_b";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.OptionsColumn.FixedWidth = true;
-            this.gridColumn1.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn1.OptionsFilter.AllowFilter = false;
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 13;
-            this.gridColumn1.Width = 60;
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "Причина деления";
-            this.gridColumn2.FieldName = "prich";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn2.OptionsFilter.AllowFilter = false;
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 12;
-            this.gridColumn2.Width = 38;
-            // 
-            // gridColumn3
-            // 
-            this.gridColumn3.Caption = "Склад отгрузки";
-            this.gridColumn3.FieldName = "skl_naimen";
-            this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsColumn.FixedWidth = true;
-            this.gridColumn3.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn3.OptionsFilter.AllowFilter = false;
-            this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 11;
-            this.gridColumn3.Width = 150;
-            // 
-            // gridColumn4
-            // 
-            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn4.Caption = "№ накл. Глобал";
-            this.gridColumn4.FieldName = "gl_nomer";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsColumn.FixedWidth = true;
-            this.gridColumn4.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn4.OptionsFilter.AllowFilter = false;
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 10;
-            this.gridColumn4.Width = 70;
-            // 
-            // gridColumn5
-            // 
-            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn5.Caption = "Дата печати";
-            this.gridColumn5.FieldName = "date_print";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.OptionsColumn.FixedWidth = true;
-            this.gridColumn5.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn5.OptionsFilter.AllowFilter = false;
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 9;
-            this.gridColumn5.Width = 90;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn6.Caption = "№ отгр.";
-            this.gridColumn6.FieldName = "dost_n";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.OptionsColumn.FixedWidth = true;
-            this.gridColumn6.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn6.OptionsFilter.AllowFilter = false;
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 8;
-            this.gridColumn6.Width = 60;
-            // 
-            // gridColumn7
-            // 
-            this.gridColumn7.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn7.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn7.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn7.Caption = "Доставка на склад";
-            this.gridColumn7.FieldName = "dost_data";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.OptionsColumn.FixedWidth = true;
-            this.gridColumn7.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn7.OptionsFilter.AllowFilter = false;
-            this.gridColumn7.Visible = true;
-            this.gridColumn7.VisibleIndex = 7;
-            this.gridColumn7.Width = 90;
-            // 
-            // gridColumn8
-            // 
-            this.gridColumn8.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn8.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn8.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn8.Caption = "Дата деления";
-            this.gridColumn8.FieldName = "data_izm";
-            this.gridColumn8.Name = "gridColumn8";
-            this.gridColumn8.OptionsColumn.FixedWidth = true;
-            this.gridColumn8.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn8.OptionsFilter.AllowFilter = false;
-            this.gridColumn8.Visible = true;
-            this.gridColumn8.VisibleIndex = 6;
-            this.gridColumn8.Width = 90;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn9.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn9.Caption = "Дата накл.";
-            this.gridColumn9.FieldName = "iz_data";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.OptionsColumn.FixedWidth = true;
-            this.gridColumn9.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn9.OptionsFilter.AllowFilter = false;
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 5;
-            this.gridColumn9.Width = 90;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn10.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn10.Caption = "№ накл.";
-            this.gridColumn10.FieldName = "iz_nakl";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.OptionsColumn.FixedWidth = true;
-            this.gridColumn10.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn10.OptionsFilter.AllowFilter = false;
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 4;
-            this.gridColumn10.Width = 60;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn11.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn11.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn11.Caption = "Кол-во ПОСЛЕ";
-            this.gridColumn11.FieldName = "kol_c";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.OptionsColumn.FixedWidth = true;
-            this.gridColumn11.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn11.OptionsFilter.AllowFilter = false;
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 14;
-            this.gridColumn11.Width = 60;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Модель";
-            this.gridColumn16.FieldName = "mod";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.OptionsColumn.FixedWidth = true;
-            this.gridColumn16.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn16.OptionsFilter.AllowFilter = false;
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 16;
-            this.gridColumn16.Width = 120;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.Caption = "Артикул";
-            this.gridColumn17.FieldName = "articul";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.OptionsColumn.FixedWidth = true;
-            this.gridColumn17.OptionsFilter.AllowAutoFilter = false;
-            this.gridColumn17.OptionsFilter.AllowFilter = false;
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 15;
-            this.gridColumn17.Width = 120;
             // 
             // gcPartNaklList
             // 
@@ -3363,6 +3424,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.button1.Btn = null;
+            this.button1.ComponentBackColor = System.Drawing.Color.Empty;
+            this.button1.ComponentFontColor = System.Drawing.Color.Empty;
+            this.button1.ComponentSize = new System.Drawing.Size(0, 0);
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Arial", 10F);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.button1.Location = new System.Drawing.Point(653, 193);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 23);
@@ -3384,6 +3453,14 @@
             // 
             // btnNaklAbsent
             // 
+            this.btnNaklAbsent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnNaklAbsent.Btn = null;
+            this.btnNaklAbsent.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnNaklAbsent.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnNaklAbsent.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnNaklAbsent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNaklAbsent.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnNaklAbsent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.btnNaklAbsent.Location = new System.Drawing.Point(1141, 193);
             this.btnNaklAbsent.Name = "btnNaklAbsent";
             this.btnNaklAbsent.Size = new System.Drawing.Size(205, 23);
@@ -3394,6 +3471,14 @@
             // 
             // btnNaklPart
             // 
+            this.btnNaklPart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnNaklPart.Btn = null;
+            this.btnNaklPart.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnNaklPart.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnNaklPart.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnNaklPart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNaklPart.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnNaklPart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.btnNaklPart.Location = new System.Drawing.Point(221, 193);
             this.btnNaklPart.Name = "btnNaklPart";
             this.btnNaklPart.Size = new System.Drawing.Size(268, 23);
@@ -3404,6 +3489,14 @@
             // 
             // btnNaklPrint
             // 
+            this.btnNaklPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.btnNaklPrint.Btn = null;
+            this.btnNaklPrint.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnNaklPrint.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnNaklPrint.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnNaklPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnNaklPrint.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnNaklPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.btnNaklPrint.Location = new System.Drawing.Point(5, 193);
             this.btnNaklPrint.Name = "btnNaklPrint";
             this.btnNaklPrint.Size = new System.Drawing.Size(171, 23);
@@ -3416,6 +3509,7 @@
             // 
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label24.Location = new System.Drawing.Point(1, 2);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(123, 19);
@@ -3451,13 +3545,20 @@
             // 
             // tbPszRpcNom
             // 
+            this.tbPszRpcNom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPszRpcNom.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPszRpcNom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.tbPszRpcNom.Location = new System.Drawing.Point(662, 38);
+            this.tbPszRpcNom.Margin = new System.Windows.Forms.Padding(0);
             this.tbPszRpcNom.Name = "tbPszRpcNom";
-            this.tbPszRpcNom.Size = new System.Drawing.Size(42, 21);
+            this.tbPszRpcNom.Size = new System.Drawing.Size(42, 23);
             this.tbPszRpcNom.TabIndex = 34;
             // 
             // mtbRzuDataR
             // 
+            this.mtbRzuDataR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataR.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataR.Location = new System.Drawing.Point(581, 37);
             this.mtbRzuDataR.Mask = "00/00/0000";
             this.mtbRzuDataR.Name = "mtbRzuDataR";
@@ -3467,14 +3568,19 @@
             // label64
             // 
             this.label64.AutoSize = true;
+            this.label64.Font = new System.Drawing.Font("Arial", 9F);
+            this.label64.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label64.Location = new System.Drawing.Point(518, 32);
             this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(48, 26);
+            this.label64.Size = new System.Drawing.Size(54, 30);
             this.label64.TabIndex = 40;
             this.label64.Text = "Дата\r\nраскроя";
             // 
             // mtbRzuData1С
             // 
+            this.mtbRzuData1С.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuData1С.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuData1С.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuData1С.Location = new System.Drawing.Point(1444, 38);
             this.mtbRzuData1С.Mask = "00/00/0000";
             this.mtbRzuData1С.Name = "mtbRzuData1С";
@@ -3484,14 +3590,19 @@
             // label63
             // 
             this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Arial", 9F);
+            this.label63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label63.Location = new System.Drawing.Point(1380, 32);
             this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(58, 26);
+            this.label63.Size = new System.Drawing.Size(58, 30);
             this.label63.TabIndex = 38;
             this.label63.Text = "Дата\r\n1к.т. в 1С";
             // 
             // mtbRzuDataCd
             // 
+            this.mtbRzuDataCd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataCd.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataCd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataCd.Location = new System.Drawing.Point(1283, 37);
             this.mtbRzuDataCd.Mask = "00/00/0000";
             this.mtbRzuDataCd.Name = "mtbRzuDataCd";
@@ -3500,6 +3611,9 @@
             // 
             // mtbRzuDataUp
             // 
+            this.mtbRzuDataUp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataUp.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataUp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataUp.Location = new System.Drawing.Point(1111, 37);
             this.mtbRzuDataUp.Mask = "00/00/0000";
             this.mtbRzuDataUp.Name = "mtbRzuDataUp";
@@ -3508,6 +3622,9 @@
             // 
             // mtbRzuDataRab
             // 
+            this.mtbRzuDataRab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataRab.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataRab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataRab.Location = new System.Drawing.Point(938, 37);
             this.mtbRzuDataRab.Mask = "00/00/0000";
             this.mtbRzuDataRab.Name = "mtbRzuDataRab";
@@ -3516,6 +3633,9 @@
             // 
             // mtbRzuDataZeh
             // 
+            this.mtbRzuDataZeh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataZeh.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataZeh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataZeh.Location = new System.Drawing.Point(780, 37);
             this.mtbRzuDataZeh.Mask = "00/00/0000";
             this.mtbRzuDataZeh.Name = "mtbRzuDataZeh";
@@ -3524,6 +3644,9 @@
             // 
             // mtbRzuDataCdUt
             // 
+            this.mtbRzuDataCdUt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbRzuDataCdUt.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbRzuDataCdUt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbRzuDataCdUt.Location = new System.Drawing.Point(422, 37);
             this.mtbRzuDataCdUt.Mask = "00/00/0000";
             this.mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
@@ -3532,6 +3655,9 @@
             // 
             // mtbPsaDataCdPlan
             // 
+            this.mtbPsaDataCdPlan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbPsaDataCdPlan.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbPsaDataCdPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbPsaDataCdPlan.Location = new System.Drawing.Point(222, 37);
             this.mtbPsaDataCdPlan.Mask = "00/00/0000";
             this.mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
@@ -3540,6 +3666,9 @@
             // 
             // mtbPsaDataZap
             // 
+            this.mtbPsaDataZap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.mtbPsaDataZap.Font = new System.Drawing.Font("Arial", 9F);
+            this.mtbPsaDataZap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.mtbPsaDataZap.Location = new System.Drawing.Point(61, 37);
             this.mtbPsaDataZap.Mask = "00/00/0000";
             this.mtbPsaDataZap.Name = "mtbPsaDataZap";
@@ -3549,63 +3678,77 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Arial", 9F);
+            this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label14.Location = new System.Drawing.Point(1204, 32);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(73, 26);
+            this.label14.Size = new System.Drawing.Size(79, 30);
             this.label14.TabIndex = 30;
             this.label14.Text = "Дата СДАНО\r\n(осн. накл.)";
             // 
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Arial", 9F);
+            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label33.Location = new System.Drawing.Point(1035, 32);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(70, 26);
+            this.label33.Size = new System.Drawing.Size(73, 30);
             this.label33.TabIndex = 28;
             this.label33.Text = "Дата\r\nна упаковку";
             // 
             // label34
             // 
             this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Arial", 9F);
+            this.label34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label34.Location = new System.Drawing.Point(315, 32);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(101, 26);
+            this.label34.Size = new System.Drawing.Size(111, 30);
             this.label34.TabIndex = 26;
             this.label34.Text = "План. дата \r\nсдачи Уточненная";
             // 
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Arial", 9F);
+            this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label26.Location = new System.Drawing.Point(880, 32);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(52, 26);
+            this.label26.Size = new System.Drawing.Size(54, 30);
             this.label26.TabIndex = 16;
             this.label26.Text = "Дата\r\nв работу";
             // 
             // label27
             // 
             this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Arial", 9F);
+            this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label27.Location = new System.Drawing.Point(740, 32);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(34, 26);
+            this.label27.Size = new System.Drawing.Size(35, 30);
             this.label27.TabIndex = 14;
             this.label27.Text = "Дата\r\nв цех";
             // 
             // label28
             // 
             this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Arial", 9F);
+            this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label28.Location = new System.Drawing.Point(152, 32);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(64, 26);
+            this.label28.Size = new System.Drawing.Size(69, 30);
             this.label28.TabIndex = 12;
             this.label28.Text = "План. дата\r\nсдачи";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Arial", 9F);
+            this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label29.Location = new System.Drawing.Point(8, 32);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 26);
+            this.label29.Size = new System.Drawing.Size(51, 30);
             this.label29.TabIndex = 10;
             this.label29.Text = "Дата\r\nзапуска";
             // 
@@ -3613,6 +3756,7 @@
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label30.Location = new System.Drawing.Point(7, 2);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(199, 19);
@@ -3627,6 +3771,7 @@
             this.xtraTabControl1.AppearancePage.Header.Options.UseFont = true;
             this.xtraTabControl1.AppearancePage.HeaderActive.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
+            this.xtraTabControl1.Enabled = false;
             this.xtraTabControl1.Location = new System.Drawing.Point(3, 141);
             this.xtraTabControl1.Name = "xtraTabControl1";
             this.xtraTabControl1.SelectedTabPage = this.xtraTabPage1;
@@ -3717,73 +3862,19 @@
 
         #endregion
         private DevExpress.XtraEditors.PanelControl panelControl1;
-        private System.Windows.Forms.TextBox tbNomPach;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbRzuNom;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbYearPach;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox tbPsaNameSbit;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox tbRzuDostZeh;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox tbRzuMod;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox tbRzuArticul;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox tbPsaPrn;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbRzuPach;
         private System.Windows.Forms.BindingSource bsNaklList;
         private System.Windows.Forms.BindingSource bsRasInfo;
         private System.Windows.Forms.BindingSource bsOtdelkaList;
         private System.Windows.Forms.PictureBox pbEskiz;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.TextBox tbPsaKodZv2;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox tbPsaKodZv1;
-        private System.Windows.Forms.TextBox tbSostPoln;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox tbArtGrup;
-        private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.TextBox psaSezName;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.TextBox tbPsaYear;
-        private System.Windows.Forms.Label label19;
-        private System.Windows.Forms.TextBox tbPsaTbID;
-        private System.Windows.Forms.Label label20;
-        private System.Windows.Forms.TextBox tbPsaMenName;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.TextBox tbPsaNN;
-        private System.Windows.Forms.Label label53;
-        private System.Windows.Forms.TextBox tbPsaNomZad;
         private System.Windows.Forms.BindingSource bsPartNaklList;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn41;
-        private System.Windows.Forms.TextBox tbRzuKol;
         private System.Windows.Forms.BindingSource bsIsChip;
         private System.Windows.Forms.CheckBox cbIsChip;
         private System.Windows.Forms.BindingSource bsFurnZayavInfo;
-        private System.Windows.Forms.Label label62;
-        private System.Windows.Forms.TextBox tbPsaPsaID;
-        private System.Windows.Forms.Label label66;
-        private System.Windows.Forms.TextBox tbPsaKombIzd;
-        private System.Windows.Forms.Label label67;
-        private System.Windows.Forms.TextBox tbPsaKombOsn;
-        private System.Windows.Forms.Label label65;
-        private System.Windows.Forms.TextBox tbPsaPsaIDOsn;
-        private System.Windows.Forms.Label label68;
-        private System.Windows.Forms.TextBox tbArtTradeMark;
         private System.Windows.Forms.BindingSource bsProizvCombIzdVZP;
         private System.Windows.Forms.BindingSource bsProizvCombIzdSP;
         private DevExpress.XtraGrid.GridSplitContainer gridSplitContainer1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage4;
-        private System.Windows.Forms.Label label70;
-        private System.Windows.Forms.Label label69;
         private DevExpress.XtraGrid.GridControl gcProizvCombIzdSP;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn47;
@@ -3852,45 +3943,9 @@
         private FurnitZayavView furnitZayavViewFurnit;
         private FurnitZayavView furnitZayavViewUpak;
         private DevExpress.XtraEditors.PanelControl panelControl7;
-        private System.Windows.Forms.TextBox tbDatZayav;
-        private System.Windows.Forms.Button button10;
-        private System.Windows.Forms.Label label61;
         private DevExpress.XtraEditors.PanelControl panelControl2;
-        private System.Windows.Forms.TextBox tbData_f_z_u;
-        private System.Windows.Forms.TextBox tbData_f_o_u;
-        private System.Windows.Forms.TextBox tbData_f_z;
-        private System.Windows.Forms.TextBox tbData_f_o;
-        private System.Windows.Forms.MaskedTextBox mtbData_cd;
-        private System.Windows.Forms.MaskedTextBox mtbData_zeh;
-        private System.Windows.Forms.TextBox tbOtgrStat;
-        private System.Windows.Forms.TextBox tbIs_got;
-        private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Label label59;
-        private System.Windows.Forms.TextBox tbUZSobrStat;
-        private System.Windows.Forms.Label label56;
-        private System.Windows.Forms.TextBox tbUZSozdStat;
-        private System.Windows.Forms.Label label57;
-        private System.Windows.Forms.TextBox tbUpakZayav;
-        private System.Windows.Forms.Label label58;
-        private System.Windows.Forms.Button btnZayavFurnPrint;
-        private System.Windows.Forms.TextBox tbFZSobrStat;
-        private System.Windows.Forms.Label label55;
-        private System.Windows.Forms.TextBox tbFZSozdStat;
-        private System.Windows.Forms.Label label54;
-        private System.Windows.Forms.TextBox tbFurnZayav;
-        private System.Windows.Forms.Label label25;
-        private System.Windows.Forms.Button btnFullKKPrint;
-        private System.Windows.Forms.TextBox tbUpakKKStat;
-        private System.Windows.Forms.TextBox tbFurnKKStat;
-        private System.Windows.Forms.Button btnUpakKKPrint;
-        private System.Windows.Forms.Button btnFurnKKPrint;
-        private System.Windows.Forms.Label label18;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraEditors.PanelControl panelControl6;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Label label52;
         private DevExpress.XtraEditors.PanelControl panelControl5;
         private System.Windows.Forms.CheckBox cbRzuStirFact;
         private System.Windows.Forms.CheckBox cbPszStirPlan;
@@ -3898,40 +3953,6 @@
         private System.Windows.Forms.CheckBox cbPszVishPlan;
         private System.Windows.Forms.CheckBox cbRzuPrintFact;
         private System.Windows.Forms.CheckBox cbPszPrintPlan;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrKm;
-        private System.Windows.Forms.MaskedTextBox mtbRzuVidStir;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVChi;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrPe;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStR;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataVP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataPrP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataStP;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasv;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRasp;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label50;
-        private System.Windows.Forms.Label label51;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label35;
-        private System.Windows.Forms.Label label36;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label31;
         private DevExpress.XtraEditors.PanelControl panelControl4;
         private DevExpress.XtraGrid.GridControl gcPartNaklList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
@@ -3954,38 +3975,163 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn22;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn42;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn43;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button btnPrintNaklXtraReport;
-        private System.Windows.Forms.Button btnNaklAbsent;
-        private System.Windows.Forms.Button btnNaklPart;
-        private System.Windows.Forms.Button btnNaklPrint;
-        private System.Windows.Forms.Label label24;
         private DevExpress.XtraEditors.PanelControl panelControl3;
-        private System.Windows.Forms.TextBox tbPszRpcNom;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataR;
-        private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.MaskedTextBox mtbRzuData1С;
-        private System.Windows.Forms.Label label63;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCd;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataUp;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataRab;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataZeh;
-        private System.Windows.Forms.MaskedTextBox mtbRzuDataCdUt;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataCdPlan;
-        private System.Windows.Forms.MaskedTextBox mtbPsaDataZap;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.Label label26;
-        private System.Windows.Forms.Label label27;
-        private System.Windows.Forms.Label label28;
-        private System.Windows.Forms.Label label29;
-        private System.Windows.Forms.Label label30;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView7;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn57;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn77;
         private DevExpress.XtraEditors.SimpleButton sbProizvCombIzdSP;
+        private CustomTextBox tbNomPach;
+        private CustomTextBox tbRzuNom;
+        private CustomTextBox tbYearPach;
+        private CustomTextBox tbPsaNameSbit;
+        private CustomTextBox tbRzuDostZeh;
+        private CustomTextBox tbRzuMod;
+        private CustomTextBox tbRzuArticul;
+        private CustomTextBox tbPsaPrn;
+        private CustomTextBox tbRzuPach;
+        private CustomTextBox tbPsaKodZv2;
+        private CustomTextBox tbPsaKodZv1;
+        private CustomTextBox tbSostPoln;
+        private CustomTextBox tbArtGrup;
+        private CustomTextBox psaSezName;
+        private CustomTextBox tbPsaYear;
+        private CustomTextBox tbPsaTbID;
+        private CustomTextBox tbPsaMenName;
+        private CustomTextBox tbPsaNN;
+        private CustomTextBox tbPsaNomZad;
+        private CustomTextBox tbRzuKol;
+        private CustomTextBox tbPsaPsaID;
+        private CustomTextBox tbPsaKombIzd;
+        private CustomTextBox tbPsaKombOsn;
+        private CustomTextBox tbPsaPsaIDOsn;
+        private CustomTextBox tbArtTradeMark;
+        private CustomTextBox tbDatZayav;
+        private CustomButton button10;
+        private CustomTextBox tbData_f_z_u;
+        private CustomTextBox tbData_f_o_u;
+        private CustomTextBox tbData_f_z;
+        private CustomTextBox tbData_f_o;
+        private CustomTextBox tbOtgrStat;
+        private CustomTextBox tbIs_got;
+        private CustomTextBox tbUZSobrStat;
+        private CustomTextBox tbUZSozdStat;
+        private CustomTextBox tbUpakZayav;
+        private CustomButton btnZayavFurnPrint;
+        private CustomTextBox tbFZSobrStat;
+        private CustomTextBox tbFZSozdStat;
+        private CustomTextBox tbFurnZayav;
+        private CustomButton btnFullKKPrint;
+        private CustomTextBox tbUpakKKStat;
+        private CustomTextBox tbFurnKKStat;
+        private CustomButton btnUpakKKPrint;
+        private CustomButton btnFurnKKPrint;
+        private CustomButton button4;
+        private CustomButton button5;
+        private CustomButton button6;
+        private CustomButton button1;
+        private CustomButton btnNaklAbsent;
+        private CustomButton btnNaklPart;
+        private CustomButton btnNaklPrint;
+        private CustomTextBox tbPszRpcNom;
+        private CustomButton btnZayavUpakPrint;
+        private CustomLabel label2;
+        private CustomLabel label1;
+        private CustomLabel label5;
+        private CustomLabel label4;
+        private CustomLabel label3;
+        private CustomLabel label11;
+        private CustomLabel label12;
+        private CustomLabel label10;
+        private CustomLabel label9;
+        private CustomLabel label8;
+        private CustomLabel label7;
+        private CustomLabel label6;
+        private CustomLabel label22;
+        private CustomLabel label23;
+        private CustomLabel label13;
+        private CustomLabel label15;
+        private CustomLabel label16;
+        private CustomLabel label17;
+        private CustomLabel label19;
+        private CustomLabel label20;
+        private CustomLabel label21;
+        private CustomLabel label53;
+        private CustomLabel label62;
+        private CustomLabel label66;
+        private CustomLabel label67;
+        private CustomLabel label65;
+        private CustomLabel label68;
+        private CustomLabel label70;
+        private CustomLabel label69;
+        private CustomLabel label61;
+        private CustomMaskedTextBox mtbData_cd;
+        private CustomMaskedTextBox mtbData_zeh;
+        private CustomLabel label60;
+        private CustomLabel label59;
+        private CustomLabel label56;
+        private CustomLabel label57;
+        private CustomLabel label58;
+        private CustomLabel label55;
+        private CustomLabel label54;
+        private CustomLabel label25;
+        private CustomLabel label18;
+        private CustomLabel label52;
+        private CustomMaskedTextBox mtbRzuDataPrCd;
+        private CustomMaskedTextBox mtbRzuDataVCd;
+        private CustomMaskedTextBox mtbRzuDataPrKm;
+        private CustomMaskedTextBox mtbRzuVidStir;
+        private CustomMaskedTextBox mtbRzuDataVChi;
+        private CustomMaskedTextBox mtbRzuDataPrPe;
+        private CustomMaskedTextBox mtbRzuDataStCd;
+        private CustomMaskedTextBox mtbRzuDataVR;
+        private CustomMaskedTextBox mtbRzuDataPrR;
+        private CustomMaskedTextBox mtbRzuDataStR;
+        private CustomMaskedTextBox mtbRzuDataVP;
+        private CustomMaskedTextBox mtbRzuDataPrP;
+        private CustomMaskedTextBox mtbRzuDataStP;
+        private CustomMaskedTextBox mtbRzuDataRasv;
+        private CustomMaskedTextBox mtbRzuDataRasp;
+        private CustomLabel label44;
+        private CustomLabel label49;
+        private CustomLabel label50;
+        private CustomLabel label51;
+        private CustomLabel label43;
+        private CustomLabel label45;
+        private CustomLabel label46;
+        private CustomLabel label47;
+        private CustomLabel label48;
+        private CustomLabel label42;
+        private CustomLabel label41;
+        private CustomLabel label40;
+        private CustomLabel label39;
+        private CustomLabel label38;
+        private CustomLabel label37;
+        private CustomLabel label35;
+        private CustomLabel label36;
+        private CustomLabel label32;
+        private CustomLabel label31;
+        private CustomLabel label24;
+        private CustomMaskedTextBox mtbRzuDataR;
+        private CustomLabel label64;
+        private CustomMaskedTextBox mtbRzuData1С;
+        private CustomLabel label63;
+        private CustomMaskedTextBox mtbRzuDataCd;
+        private CustomMaskedTextBox mtbRzuDataUp;
+        private CustomMaskedTextBox mtbRzuDataRab;
+        private CustomMaskedTextBox mtbRzuDataZeh;
+        private CustomMaskedTextBox mtbRzuDataCdUt;
+        private CustomMaskedTextBox mtbPsaDataCdPlan;
+        private CustomMaskedTextBox mtbPsaDataZap;
+        private CustomLabel label14;
+        private CustomLabel label33;
+        private CustomLabel label34;
+        private CustomLabel label26;
+        private CustomLabel label27;
+        private CustomLabel label28;
+        private CustomLabel label29;
+        private CustomLabel label30;
     }
 }

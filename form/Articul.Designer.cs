@@ -42,15 +42,15 @@ namespace SewingProduction.form
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.pictureBoxArticul = new System.Windows.Forms.PictureBox();
-            this.cbTM = new System.Windows.Forms.ComboBox();
+            this.cbTM = new SewingProduction.CustomComboBox();
             this.bsTM = new System.Windows.Forms.BindingSource(this.components);
-            this.label3 = new System.Windows.Forms.Label();
+            this.label3 = new SewingProduction.CustomLabel();
             this.txtMod = new SewingProduction.CustomTextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.txbArticul = new SewingProduction.CustomTextBox();
             this.txbPo = new SewingProduction.CustomTextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label1 = new SewingProduction.CustomLabel();
             this.txbKod = new SewingProduction.CustomTextBox();
+            this.label2 = new SewingProduction.CustomLabel();
             this.customButton1 = new SewingProduction.CustomButton();
             this.bsArticul = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridArt)).BeginInit();
@@ -66,6 +66,9 @@ namespace SewingProduction.form
             // gridArt
             // 
             this.gridArt.DataSource = this.bsArt;
+            this.gridArt.EmbeddedNavigator.Appearance.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
+            this.gridArt.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.gridArt.Location = new System.Drawing.Point(1, 1);
             this.gridArt.MainView = this.gridControl1;
             this.gridArt.Name = "gridArt";
@@ -164,7 +167,6 @@ namespace SewingProduction.form
             this.groupControl1.ShowCaption = false;
             this.groupControl1.Size = new System.Drawing.Size(714, 257);
             this.groupControl1.TabIndex = 2;
-            this.groupControl1.Text = "sfsfsd";
             // 
             // pictureBoxArticul
             // 
@@ -177,19 +179,25 @@ namespace SewingProduction.form
             // 
             // cbTM
             // 
+            this.cbTM.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.cbTM.DataSource = this.bsTM;
+            this.cbTM.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbTM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbTM.FormattingEnabled = true;
             this.cbTM.Location = new System.Drawing.Point(275, 89);
             this.cbTM.Name = "cbTM";
-            this.cbTM.Size = new System.Drawing.Size(121, 21);
+            this.cbTM.Size = new System.Drawing.Size(110, 24);
             this.cbTM.TabIndex = 7;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(225, 68);
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(224, 64);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 13);
+            this.label3.Size = new System.Drawing.Size(45, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "Модель";
             // 
@@ -203,15 +211,6 @@ namespace SewingProduction.form
             this.txtMod.Name = "txtMod";
             this.txtMod.Size = new System.Drawing.Size(74, 19);
             this.txtMod.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(221, 43);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(50, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Артикул";
             // 
             // txbArticul
             // 
@@ -238,9 +237,12 @@ namespace SewingProduction.form
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(244, 19);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(243, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.Size = new System.Drawing.Size(26, 14);
             this.label1.TabIndex = 1;
             this.label1.Text = "Код";
             // 
@@ -255,6 +257,18 @@ namespace SewingProduction.form
             this.txbKod.Size = new System.Drawing.Size(74, 19);
             this.txbKod.TabIndex = 0;
             this.txbKod.TextChanged += new System.EventHandler(this.txbKod_TextChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label2.Location = new System.Drawing.Point(220, 43);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(50, 14);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Артикул";
             // 
             // customButton1
             // 
@@ -310,16 +324,17 @@ namespace SewingProduction.form
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private CustomTextBox txbKod;
         private CustomTextBox txbPo;
-        private System.Windows.Forms.Label label1;
         private CustomButton customButton1;
         private CustomTextBox txbArticul;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.BindingSource bsArticul;
         private System.Windows.Forms.BindingSource bsArt;
-        private System.Windows.Forms.Label label3;
         private CustomTextBox txtMod;
-        private System.Windows.Forms.ComboBox cbTM;
+        private SewingProduction.CustomComboBox cbTM;
+        //private System.Windows.Forms.ComboBox cbTM;
         private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
+        private CustomLabel label1;
+        private CustomLabel label2;
+        private CustomLabel label3;
     }
 }
