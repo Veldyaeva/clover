@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid.Views.WinExplorer.ViewInfo;
+using DevExpress.XtraGrid.Views.WinExplorer.ViewInfo;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -16,11 +16,11 @@ namespace SewingProduction
         #region Gold
         public static readonly Theme Gold = new Theme
         {
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
             ButtonBackground = Color.FromArgb(255, 223, 186), // LightGoldenrod
             ButtonTextColor = Color.FromArgb(184, 134, 11), // DarkGoldenrod
             ButtonRoundRadius = 3,
-            ButtonHeight = 30,
+            ButtonHeight = 25,
             TextBoxBackground = Color.FromArgb(255, 248, 220), // Cornsilk
             TextBoxText = Color.FromArgb(139, 69, 19), // SaddleBrown
             HighlightBackground = Color.FromArgb(255, 239, 213), // PapayaWhip
@@ -82,7 +82,7 @@ namespace SewingProduction
         public static readonly Theme Sea = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(135, 206, 235), // SkyBlue
@@ -92,7 +92,7 @@ namespace SewingProduction
             ButtonRoundRadius = 5,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
@@ -115,7 +115,7 @@ namespace SewingProduction
         public static readonly Theme Green = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(209, 241, 221),
@@ -125,7 +125,7 @@ namespace SewingProduction
             ButtonRoundRadius = 2,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.White,
@@ -149,7 +149,7 @@ namespace SewingProduction
         public static readonly Theme Pink = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(255, 182, 193), // LightPink
@@ -159,7 +159,7 @@ namespace SewingProduction
             ButtonRoundRadius = 2,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(255, 240, 245), // LavenderBlush
@@ -182,7 +182,7 @@ namespace SewingProduction
         public static readonly Theme Orange = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(255, 165, 0), // Orange
@@ -192,7 +192,7 @@ namespace SewingProduction
             ButtonRoundRadius = 2,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(255, 248, 220), // Cornsilk
@@ -215,7 +215,7 @@ namespace SewingProduction
         public static readonly Theme Blue = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(173, 216, 230), // LightBlue
@@ -225,7 +225,7 @@ namespace SewingProduction
             ButtonRoundRadius = 2,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
@@ -248,7 +248,7 @@ namespace SewingProduction
         public static readonly Theme Wine = new Theme
         {
             // Общие шрифты
-            DefaultFont = new Font("Arial", 12, FontStyle.Regular),
+            DefaultFont = new Font("Arial", 10, FontStyle.Regular),
 
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(128, 0, 32), // Burgundy
@@ -258,7 +258,7 @@ namespace SewingProduction
             ButtonRoundRadius = 6,
 
             // Высота кнопки
-            ButtonHeight = 30,
+            ButtonHeight = 25,
 
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(245, 222, 179), // Wheat
