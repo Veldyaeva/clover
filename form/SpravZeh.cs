@@ -15,7 +15,7 @@ using static DevExpress.Mvvm.Native.Either;
 
 namespace SewingProduction.form
 {
-    public partial class SpravZeh : Form
+    public partial class SpravZeh : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -451,7 +451,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll("spVidProizv", "Справочник Вид произв");
+            SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв");
             f.MdiParent = this.MdiParent;
             f.Show();
         }
