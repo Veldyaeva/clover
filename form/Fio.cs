@@ -92,5 +92,10 @@ namespace SewingProduction.form
         {
             openSprav("sp_firms", "kod,name,frm_1c_inn", "Справочник Организаций");
         }
+
+        private void checkButtonShowDel_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
