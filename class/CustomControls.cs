@@ -328,6 +328,7 @@ namespace SewingProduction
                 switch (_serv.ToLower())
                 {
                     case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
+                    case "ace_test": _connStr = Properties.Settings.Default.ACEtestConnectionString; break;
                     case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
                     case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
                 }

@@ -97,21 +97,21 @@ namespace SewingProduction
         }
         private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("oborud_shv_ob", "Справочник Группы оборудования");
+            SpravForAll f = new SpravForAll("oborud_shv_ob", "", "Справочник Группы об.");
             f.MdiParent = this;
             f.Show();
         }
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("matrix_class", "Справочник Клас. вяз. об.");
+            SpravForAll f = new SpravForAll("matrix_class", "", "Справочник Клас. вяз. об.");
             f.MdiParent = this;
             f.Show();
         }
 
         private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spOborudMachine", "Справочник Виды операций");
+            SpravForAll f = new SpravForAll("spOborudMachine", "", "Справочник Виды операций");
             f.MdiParent = this;
             f.Show();
         }
@@ -130,13 +130,15 @@ namespace SewingProduction
         }
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spVidProizv", "Справочник Вид произв");
+            SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв.");
             f.MdiParent = this;
             f.Show();
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Fio f = new Fio("fio", "Справочник работников");
+            f.MdiParent = this;
+            f.Show();
         }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {

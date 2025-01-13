@@ -84,6 +84,10 @@
             // 
             // gridView2
             // 
+            this.gridView2.Appearance.ColumnFilterButton.BackColor = System.Drawing.Color.Transparent;
+            this.gridView2.Appearance.ColumnFilterButton.Options.UseBackColor = true;
+            this.gridView2.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.gridView2.Appearance.OddRow.Options.UseBackColor = true;
             this.gridView2.GridControl = this.gridZeh;
             this.gridView2.Name = "gridView2";
             this.gridView2.OptionsView.ShowGroupPanel = false;
@@ -129,6 +133,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
             this.tableLayoutPanel1.Controls.Add(this.linkLabelBrig, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);

@@ -26,7 +26,7 @@ using DevExpress.Mvvm.Native;
 
 namespace SewingProduction.form
 {
-    public partial class SpravForAll : Form
+    public partial class SpravForAll : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -55,7 +55,7 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravForAll(string tableSQL, string rusNameTableSQL)
+        public SpravForAll(string tableSQL, string columns, string rusNameTableSQL)
         {
             //GridLocalizer.Active = new RussianGridLocalizer();
             InitializeComponent();
@@ -68,7 +68,9 @@ namespace SewingProduction.form
             //Имя формы:
             this.Text = rusNameTableSQL;
             //Текст запроса:
-            queryList = $"SELECT * FROM " + tableString;
+            if (columns == "")
+                columns = "*";
+            queryList = $"SELECT {columns} FROM " + tableString;
             //Иницилизация листа столбцов:
             fieldsQueryListSQL = new List<string>();
             labels = new System.Windows.Forms.Label[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
@@ -120,55 +122,68 @@ namespace SewingProduction.form
         //Загрузка грида:
         private void gridControlSprav_Load(object sender, EventArgs e)
         {
-            using (SqlConnection connectionLoad = new SqlConnection(connectionString))
+            try
             {
-                //используя подключение отправляем запрос БД:
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionLoad);
-                //Создаем в памяти таблицу:
-                System.Data.DataTable tableList = new System.Data.DataTable();
-                //Добавляем ответ сервера в таблицу:
-                dataAdapter.Fill(tableList);
-                //Закгрузка в таблицу грида:
-                spravList.DataSource = tableList;
-                fieldsQueryListSQL.Clear();
-                // Получаем имена столбцов и добавляем их в список:
-                foreach (System.Data.DataColumn column in tableList.Columns)
+                using (SqlConnection connectionLoad = new SqlConnection(connectionString))
                 {
-                    // Добавляем имя столбца в список
-                    fieldsQueryListSQL.Add(column.ColumnName);
-                }
-                // Получаем доступ к GridView
-                GridView gridView = gridControlSprav.MainView as GridView;
-                //Запрет на редактирование 1й столбца
-                //gridView.Columns[0].OptionsColumn.AllowEdit = false;
-                gridView.Columns[0].Visible = false;
-                //gridView.OptionsBehavior.Editable = false;
-                //gridView.GroupPanelText = ""; // Текст
-
-                // Изменяем заголовки столбцов
-                for (int i = 0; i < tableList.Columns.Count; i++)
-                {
-                    // Получаем английское имя
-                    string englishName = tableList.Columns[i].Caption;
-                    // Проверяем, есть ли соответствующее русское имя в словаре
-                    if (eng_rus.TryGetValue(englishName, out string russianName))
+                    //используя подключение отправляем запрос БД:
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionLoad);
+                    //Создаем в памяти таблицу:
+                    System.Data.DataTable tableList = new System.Data.DataTable();
+                    //Добавляем ответ сервера в таблицу:
+                    dataAdapter.Fill(tableList);
+                    //Закгрузка в таблицу грида:
+                    spravList.DataSource = tableList;
+                    fieldsQueryListSQL.Clear();
+                    // Получаем имена столбцов и добавляем их в список:
+                    foreach (System.Data.DataColumn column in tableList.Columns)
                     {
-                        // Заменяем заголовок столбца на русское имя
-                        gridView.Columns[i].Caption = russianName;
+                        // Добавляем имя столбца в список
+                        fieldsQueryListSQL.Add(column.ColumnName);
                     }
+                    // Получаем доступ к GridView
+                    GridView gridView = gridControlSprav.MainView as GridView;
+                    //Запрет на редактирование 1й столбца
+                    //gridView.Columns[0].OptionsColumn.AllowEdit = false;
+                    gridView.Columns[0].Visible = false;
+                    //gridView.OptionsBehavior.Editable = false;
+                    //gridView.GroupPanelText = ""; // Текст
+
+                    // Изменяем заголовки столбцов
+                    for (int i = 0; i < tableList.Columns.Count; i++)
+                    {
+                        // Получаем английское имя
+                        string englishName = tableList.Columns[i].Caption;
+                        // Проверяем, есть ли соответствующее русское имя в словаре
+                        if (eng_rus.TryGetValue(englishName, out string russianName))
+                        {
+                            // Заменяем заголовок столбца на русское имя
+                            gridView.Columns[i].Caption = russianName;
+                        }
+                    }
+                    // Выравнивание столбцов
+                    gridView.BestFitColumns();
+                    gridView.OptionsView.ColumnAutoWidth = true;
+                    //перенос столбца архив в конец:
+                    //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
                 }
-                // Выравнивание столбцов
-                gridView.BestFitColumns();
-                gridView.OptionsView.ColumnAutoWidth = true;
-                //перенос столбца архив в конец:
-                //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
+                if (!flagStartListening)
+                {
+                    // Запуск отслеживания изменений для соединения с базой данных
+                    SqlDependency.Start(connectionString);
+                    // Начинаем прослушивание
+                    StartListening();
+                }
             }
-            if (!flagStartListening) 
+            catch (SqlException sqlEx)
             {
-                // Запуск отслеживания изменений для соединения с базой данных
-                SqlDependency.Start(connectionString);
-                // Начинаем прослушивание
-                StartListening();
+                Debug.WriteLine($"SQL Error: {sqlEx.Message}");
+                MessageBox.Show($"{sqlEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading rus name: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки русских имен {ex.Message}");
             }
         }
         // Отображение лейблов и текстбоксов в нужном кол-е
@@ -223,7 +238,7 @@ namespace SewingProduction.form
                 sqlDependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
                 // Выполнение команды
                 command.ExecuteReader();
-
+                Debug.WriteLine($"Включена подписка на обновление");
             }
             catch (SqlException sqlEx)
             {
@@ -241,16 +256,17 @@ namespace SewingProduction.form
             if (connection != null)
             {
                 connection.Close();
+                Debug.WriteLine($"Отписка от обновлений");
             }
         }
         private void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
             // Строка состояния:
-            Debug.WriteLine($"Notification received: Type={e.Type}, Info={e.Info}, Source={e.Source}");
+            Debug.WriteLine($"Получено уведомление: Type={e.Type}, Info={e.Info}, Source={e.Source}");
             // Проверка есть ли уведомления
             if (e.Type == SqlNotificationType.Change)
             {
-                Debug.WriteLine("Data was changed");
+                Debug.WriteLine("Данные были изменены");
 
                 // Обновление UI через Invoke
                 if (this.IsHandleCreated)

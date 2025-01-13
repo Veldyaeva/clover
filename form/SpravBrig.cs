@@ -13,7 +13,7 @@ using DevExpress.XtraGrid.Views.Grid;
 
 namespace SewingProduction.form
 {
-    public partial class SpravBrig : Form
+    public partial class SpravBrig : CustomForm
     {
         // Оснавная БД:
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
@@ -37,7 +37,6 @@ namespace SewingProduction.form
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-
         public SpravBrig(string tableSQL, string rusNameTableSQL)
         {
             InitializeComponent();
@@ -475,5 +474,6 @@ namespace SewingProduction.form
             StopListening();
         }
 
+        
     }
 }
