@@ -35,3 +35,8 @@ UPDATE dbo.norm_dop_obr
 SET norm_dop_obr.annId = art_norm_n.annID
 FROM dbo.art_norm_n
 WHERE art_norm_n.kod = SUBSTRING(norm_dop_obr.kod, 1, 7)
+
+Заполняет статусы 1 = предв.(код начинается с 9), 2= активный (код не начинается с 9 и арх = 0), 3 = архивный (арх = 1)
+UPDATE art_norm_n SET STATUS = 1 WHERE SUBSTRING(kod, 1,1)=9 AND arh = 0
+UPDATE art_norm_n SET STATUS = 2 WHERE SUBSTRING(kod, 1, 1)!=9 AND arh = 0
+UPDATE art_norm_n SET STATUS = 3 WHERE arh = 1
