@@ -962,6 +962,8 @@ using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 using DevExpress.ClipboardSource.SpreadsheetML;
 using DevExpress.DataAccess.Sql;
+using DevExpress.Utils;
+using DevExpress.Mvvm.Native;
 
 namespace SewingProduction.form
 {
@@ -980,19 +982,30 @@ namespace SewingProduction.form
         {
             try
             {
+                int annId = 0;
                 var data = _artNormService.GetArtNormData();
                 artnormnBindingSource.DataSource = data;
                 gridControl2.DataSource = artnormnBindingSource;
-                
-                data = _artNormService.GetRelatedNormRasz(1);
-                normraszBindingSource.DataSource = data;
-                gridControl1.DataSource = normraszBindingSource;
-                LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(2));
 
-                LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(2));
-                LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(2));
-                LoadGridControlData(gridControl5, normdopobrBindingSource,_artNormService.GetRelatedNormDopObr(2));
-                LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(2));
+                var view = gridControl2.MainView as GridView;
+                if (view != null)
+                {
+                    annId = Convert.ToInt32(view.GetRowCellValue(0, "annId"));
+                }
+
+                commentRichTextBox.Text = FieldsUpdate(view, 0, "komment");
+                ModelTextBox.Text = FieldsUpdate(view, 0, "mod");
+                NameTextBox.Text = FieldsUpdate(view, 0, "articul");
+                dateCreate.Text = FieldsUpdate(view, 0, "data_sozd");
+                SecTimeTextBox.Text = FieldsUpdate(view, 0, "sek");
+                constructorComboBox.Text = FieldsUpdate(view, 0, "constr");
+                designerComboBox.Text = FieldsUpdate(view, 0, "diz");
+
+                LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
+                LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
+                LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(annId));
+                LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
+                LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
 
             }
             catch (Exception ex)
@@ -1000,7 +1013,10 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        private void gridControl2_Load(object sender, EventArgs e)
+        {
 
+        }
         private void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle >= 0)
@@ -1010,7 +1026,14 @@ namespace SewingProduction.form
                     var view = gridControl2.MainView as GridView;
                     if (view != null)
                     {
-                        int annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annID"));
+                            commentRichTextBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "komment");
+                            ModelTextBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "mod");
+                            NameTextBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "articul");
+                            dateCreate.Text = FieldsUpdate(view, e.FocusedRowHandle, "data_sozd");
+                            SecTimeTextBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "sek");
+                            constructorComboBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "constr");
+                            designerComboBox.Text = FieldsUpdate(view, e.FocusedRowHandle, "diz");
+                        int annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annId"));
                         UpdateRelatedData(annId);
                     }
                 }
@@ -1021,16 +1044,24 @@ namespace SewingProduction.form
             }
         }
 
+            private string FieldsUpdate(GridView view, int row_number, string field)
+            {
+               string text = (view.GetRowCellValue(row_number, field) == null) ? "" : view.GetRowCellValue(row_number, field).ToString();
+            return text;   
+            }
+        
+
         private void UpdateRelatedData(int annId)
         {
-            LoadGridControlData(gridControl1, normraszBindingSource, annId);// _artNormService.GetRelatedNormRasz(annId));
-
-            LoadGridControlData(gridControl3, normraskBindingSource, annId);// _artNormService.GetRelatedNormRask(annId));
-            LoadGridControlData(gridControl4, normkontBindingSource, annId);// _artNormService.GetRelatedNormKont(annId));
-            LoadGridControlData(gridControl5, normdopobrBindingSource, annId);
-            LoadGridControlData(customGridControl5, sparticulBindingSource, annId);
+            
+            LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
+            LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
+            LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(annId));
+            LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
+            LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
         }
 
+        //Загрузка данных в связанные таблицы с помощью фильтров
         private void LoadGridControlData(GridControl grid, BindingSource source, int _annId)//DataTable data)
         {
             //// Привязываем данные к BindingSource
@@ -1048,6 +1079,8 @@ namespace SewingProduction.form
             view.EndUpdate();
 
         }
+
+        //загрузка данных в связанные таблицы с помощью запросов
         private void LoadGridControlData(GridControl grid, BindingSource source, DataTable data)
         {
             // Привязываем данные к BindingSource
@@ -1152,6 +1185,8 @@ namespace SewingProduction.form
             }
 
         }
+
+
     }
 
     public class DatabaseHelper
@@ -1218,7 +1253,7 @@ namespace SewingProduction.form
 
         public DataTable GetArtNormData()
         {
-            string query = "SELECT annID, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn FROM Art_norm_n";
+            string query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM Art_norm_n";
             return _dbHelper.ExecuteQuery(query);
         }
 
@@ -1238,24 +1273,24 @@ namespace SewingProduction.form
 
         public DataTable GetRelatedNormRasz(int annId)
         {
-            string query = "SELECT annId, n, n1, razryd, text, sek, kod, kod_o, kod_ob FROM norm_rasz";// WHERE annId = @annId";
+            string query = "SELECT annId, n, n1, razryd, text, sek, kod, kod_o, kod_ob FROM norm_rasz WHERE annId = @annId";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
         public DataTable GetRelatedNormRask(int annId)
         {
-            string query = "SELECT kod_o, razryd, text, sek  FROM norm_rask WHERE annId = @annId";
+            string query = "SELECT annId, kod_o, razryd, text, sek  FROM norm_rask WHERE annId = @annId";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public DataTable GetRelatedNormKont(int annId)
         {
-            string query = "SELECT kod_o, razryd, text, sek FROM norm_kont WHERE annId = @annId";
+            string query = "SELECT annId, kod_o, razryd, text, sek FROM norm_kont WHERE annId = @annId";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public DataTable GetRelatedNormDopObr(int annId)
         {
-            string query = "SELECT sek_p, sek_p_tamp, sek_v, sek_stra FROM norm_dop_obr WHERE annId = @annId";
+            string query = "SELECT annId, sek_p, sek_p_tamp, sek_v, sek_stra FROM norm_dop_obr WHERE annId = @annId";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
@@ -1268,8 +1303,8 @@ namespace SewingProduction.form
             //else if (annId>0)
             //{ query = $"SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod FROM sp_articul WHERE annID = @annId"; }
             string query = annId == 0 
-                ? "SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod FROM sp_articul WHERE annID IS NULL" 
-                : $"SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod FROM sp_articul WHERE annID = @annId";
+                ? "SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL" 
+                : $"SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID = @annId";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 

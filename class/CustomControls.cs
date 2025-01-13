@@ -37,8 +37,8 @@ namespace SewingProduction
             BackColor = ThemeManager.ActiveTheme.ButtonBackground;
             ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
             Font = ThemeManager.ActiveTheme.DefaultFont;
-            FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
+            FlatStyle = FlatStyle.Standard;
+            FlatAppearance.BorderSize = 1;
             Height = ThemeManager.ActiveTheme.ButtonHeight;
         }
 
