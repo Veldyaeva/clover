@@ -27,10 +27,7 @@ namespace SewingProduction.form
         public TeamWork()
         {
             InitializeComponent();
-            // Настройка фона всей области вкладок
-            xtraTabControl2.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            xtraTabControl2.LookAndFeel.UseDefaultLookAndFeel = false;
-            xtraTabControl2.Appearance.BackColor = Color.Green; // Основной фон
+            UpdateTheme(this);
             // Load += TeamWork_Load; // Подключаем обработчик события Load
         }
         private void InitializeComponents()
