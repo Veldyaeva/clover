@@ -976,6 +976,7 @@ namespace SewingProduction.form
             InitializeComponent();
             var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
             _artNormService = new ArtNormService(dbHelper);
+            UpdateTheme(this);
         }
 
         private void TeamWorkForm_Load(object sender, EventArgs e)

@@ -14,7 +14,7 @@ namespace SewingProduction
     {
         public virtual void ApplyBaseProperties(Control control)
         {
-            control.Font = ThemeManager.ActiveTheme.DefaultFont;
+           // control.Font = ThemeManager.ActiveTheme.DefaultFont;
         }
     }
 
@@ -32,26 +32,26 @@ namespace SewingProduction
         public Size ComponentSize { get; set; }
 
 
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             BackColor = ThemeManager.ActiveTheme.ButtonBackground;
             ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Font = ThemeManager.ActiveTheme.DefaultFont;
+            Font = ThemeManager.SharedSettings.DefaultFont;
             FlatStyle = FlatStyle.Standard;
             FlatAppearance.BorderSize = 1;
-            Height = ThemeManager.ActiveTheme.ButtonHeight;
+            Height = ThemeManager.SharedSettings.ButtonHeight;
         }
 
         private void OnThemeChanged()
         {
             ApplyTheme();
-            Invalidate(); // Перерисовка кнопки
+         //   Invalidate(); // Перерисовка кнопки
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
-            var path = CreateRoundedRectanglePath(ClientRectangle, ActiveTheme.ButtonRoundRadius);
+            var path = CreateRoundedRectanglePath(ClientRectangle, SharedSettings.ButtonRoundRadius);
             Region = new Region(path);
         }
 
@@ -90,6 +90,7 @@ namespace SewingProduction
         }
 
         public override string Text { get; set; } = "Ok";
+
         // Событие при нажатии на кнопку "Ок"
         private void OnOkButtonClick(object sender, EventArgs e)
         {
@@ -103,11 +104,11 @@ namespace SewingProduction
     {
         public CustomCancelButton()
         {
-            this.Text = "Отмена"; // Текст кнопки
-            this.Click += OnCancelButtonClick; // Обработчик события Click
-            this.BackColor = ActiveTheme.CancelButtonBackground; // Цвет кнопки
-            this.ForeColor = ActiveTheme.CancelButtonTextColor; // Цвет текста
-            this.Text = ActiveTheme.CancelButtonText;
+            Text = "Отмена"; // Текст кнопки
+            Click += OnCancelButtonClick; // Обработчик события Click
+            BackColor = ActiveTheme.CancelButtonBackground; // Цвет кнопки
+            ForeColor = ActiveTheme.CancelButtonTextColor; // Цвет текста
+            Text = ActiveTheme.CancelButtonText;
         }
 
         // Событие при нажатии на кнопку "Отмена"
@@ -137,12 +138,11 @@ namespace SewingProduction
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
         }
 
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
 
-            //this.BackColor = Theme.TextBoxBackground;
             this.ForeColor = ActiveTheme.TextBoxText;
-            this.Font = ActiveTheme.DefaultFont;
+            this.Font = SharedSettings.DefaultFont;
         }
 
         private void OnThemeChanged()
@@ -171,11 +171,11 @@ namespace SewingProduction
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
         }
 
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             this.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            this.Font = ThemeManager.ActiveTheme.DefaultFont;
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
         }
 
         private void OnThemeChanged()
@@ -202,11 +202,11 @@ namespace SewingProduction
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
         }
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             this.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            this.Font = ThemeManager.ActiveTheme.DefaultFont;
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
         }
         private void OnThemeChanged()
         {
@@ -234,11 +234,11 @@ namespace SewingProduction
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
 
         }
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             this.BackColor = Color.Transparent;
             this.ForeColor = ThemeManager.ActiveTheme.LabelText;
-            this.Font = ThemeManager.ActiveTheme.DefaultFont;
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
         }
         private void OnThemeChanged()
         {
@@ -266,11 +266,11 @@ namespace SewingProduction
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
 
         }
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             this.BackColor = ActiveTheme.TextBoxBackground;
             this.ForeColor = ActiveTheme.TextBoxText;
-            this.Font = ActiveTheme.DefaultFont;
+            this.Font = SharedSettings.DefaultFont;
         }
         private void OnThemeChanged()
         {
@@ -307,7 +307,7 @@ namespace SewingProduction
             //Theme.ThemeChanged += OnThemeChanged;
         }
 
-        private void ApplyTheme()
+        public void ApplyTheme()
         {
             // Применяем тему к GridControl (например, цвет фона)
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
@@ -332,11 +332,6 @@ namespace SewingProduction
             base.Dispose(disposing);
         }
     }
-
-
-
-
-
 
     public class CustomGridView : GridView
     {
@@ -381,6 +376,45 @@ namespace SewingProduction
                 LinearGradientMode.ForwardDiagonal))
             {
                 e.Graphics.FillRectangle(brush, rect);
+            }
+        }
+        public void UpdateTheme(Control control)
+        {
+            foreach (Control child in control.Controls)
+            {
+                if (child is CustomButton button)
+                {
+                    button.ApplyTheme();
+                }
+                else if (child is CustomTextBox textBox)
+                {
+                    textBox.ApplyTheme();
+                }
+                else if (child is CustomLabel label)
+                {
+                    label.ApplyTheme();
+                }
+                else if (child is CustomGridControl gridControl)
+                {
+                    gridControl.ApplyTheme();
+                }
+                else if (child is CustomCheckBox check)
+                {
+                    check.ApplyTheme();
+                }
+                else if (child is CustomComboBox combo)
+                {
+                    combo.ApplyTheme();
+                }
+                else if (child is CustomMaskedTextBox maskedTextBox)
+                {
+                    maskedTextBox.ApplyTheme();
+                }
+            
+                else if (child.HasChildren)
+                {
+                    UpdateTheme(child); // Рекурсивно обновляем тему для вложенных элементов
+                }
             }
         }
 

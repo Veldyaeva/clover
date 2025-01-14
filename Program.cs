@@ -29,6 +29,7 @@ namespace SewingProduction
                 // После инициализации создаем и показываем главную форму
              
             }
+            ThemeManager.LoadTheme();
             Application.Run(new SpMainForm());
 
         }
