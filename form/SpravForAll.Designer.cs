@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.spravList = new System.Windows.Forms.BindingSource();
-            this.nameColumnList = new System.Windows.Forms.BindingSource();
+            this.components = new System.ComponentModel.Container();
+            this.spravList = new System.Windows.Forms.BindingSource(this.components);
+            this.nameColumnList = new System.Windows.Forms.BindingSource(this.components);
             this.AddTab = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageAdd = new DevExpress.XtraTab.XtraTabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();

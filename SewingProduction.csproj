@@ -153,6 +153,12 @@
     <Compile Include="form\Articul.Designer.cs">
       <DependentUpon>Articul.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\editFio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\editFio.Designer.cs">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\Fio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -319,6 +325,9 @@
     </Compile>
     <EmbeddedResource Include="form\Articul.resx">
       <DependentUpon>Articul.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\editFio.resx">
+      <DependentUpon>editFio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\Fio.resx">
       <DependentUpon>Fio.cs</DependentUpon>

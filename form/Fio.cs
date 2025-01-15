@@ -2,13 +2,18 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout.Customization;
+using Microsoft.Reporting.Map.WebForms.BingMaps;
 
 namespace SewingProduction.form
 {
@@ -33,19 +38,60 @@ namespace SewingProduction.form
         {
 
         }
-
-        private void oborudGrid_Load(object sender, EventArgs e)
+        private async Task<DataTable> LoadDataAsync(string connectionString, string query)
         {
-            string query = $@"SELECT tab,fio,rab,ved,ftabn,ftabnsort,fgrd,data_p,datau,bday,tel_s,f_fvr_kod,tab1c,tab_sovm,
+            return await Task.Run(() =>
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, connection);
+                    DataTable dataTable = new DataTable();
+                    adapter.Fill(dataTable);
+                    return dataTable;
+                }
+            });
+        }
+        private async void oborudGrid_Load(object sender, EventArgs e)
+        {
+            /*string query = $@"SELECT tab,fio,rab,ved,ftabn,ftabnsort,fgrd,data_p,datau,bday,tel_s,f_fvr_kod,tab1c,tab_sovm,
                                 tel_r,tel_d,mast,okl,tab_new,po,
                                 (SELECT sp_firms.name FROM sp_firms WHERE sp_firms.kod = fio.mast) AS firms_name,
                                 (SELECT brig_object.name FROM brig_object WHERE brig_object.gr = fio.gr) AS BRIG_object_name,
                                 (SELECT DISTINCT spbrig.podrname1c FROM spbrig WHERE spbrig.podrid1c = fio.podr_1c_id AND podrid1c LIKE '%ЭЙС%') AS podr1cname,
+                                (SELECT DISTINCT spisok1c.inn FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_inn,
+                                (SELECT DISTINCT spisok1c.id FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_id,
+                                (SELECT DISTINCT spisok1c.orgName FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_orgName,
+                                (SELECT DISTINCT spisok1c.podrName FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_podrName,
                                 sovm,sdel,itr,dekret
                               FROM fio 
-                                ORDER BY tab ASC";
-            fioList.DataSource = ShowRelatedData("ace_test", query);
+                                ORDER BY tab ASC";*/
+            string query = $@"SELECT fio.tab,       fio.fio,       fio.rab,    fio.ved,       fio.ftabn,
+                                     fio.ftabnsort, fio.fgrd,      fio.data_p, fio.datau,     fio.bday,
+                                     fio.tel_s,     fio.f_fvr_kod, fio.tab1c,  fio.tab_sovm,  fio.tel_r,
+                                     fio.tel_d,     fio.mast,      fio.okl,    fio.tab_new,   fio.po,
+                                     fio.sovm,      fio.sdel,      fio.itr,   fio.dekret,
+                                     sp_firms.name AS firms_name,
+                                     brig_object.name AS BRIG_object_name,
+                                     spbrig.podrname1c AS podr1cname,
+                                     spisok1c.id AS spisok1c_id,
+                                     spisok1c.inn AS spisok1c_inn,
+                                     spisok1c.orgName AS spisok1c_orgName,
+                                     spisok1c.podrName AS spisok1c_podrName
+                                FROM fio
+                                LEFT JOIN sp_firms ON sp_firms.kod = fio.mast
+                                LEFT JOIN brig_object ON brig_object.gr = fio.gr
+                                LEFT JOIN spbrig ON spbrig.podrid1c = fio.podr_1c_id AND spbrig.podrid1c LIKE '%ЭЙС%'
+                                LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgName = sp_firms.name
+                                ORDER BY fio.tab ASC";
+            //fioList.DataSource = ShowRelatedData("ace_test", query);
+
+            DataTable dataTable = await LoadDataAsync(connectionString, query);
+            fioList.DataSource = dataTable;
+
             GridView gridView = fioGrid.MainView as GridView;
+            // Фильтр для уволенных:
+            gridView.ActiveFilterString = "[datau] Is Null";
+            // Чекбоксы в гриде:
             if (gridView != null)
             {
                 // Создаем экземпляр CheckEdit
@@ -60,13 +106,16 @@ namespace SewingProduction.form
                 gridView.Columns["itr"].ColumnEdit = checkEdit;
                 gridView.Columns["dekret"].ColumnEdit = checkEdit;
             }
+            // Переходим к последней строке
             gridView.TopRowIndex = gridView.RowCount - 1;
+            gridView.FocusedRowHandle = gridView.RowCount - 1;
         }
 
         private void oborudGrid_Click(object sender, EventArgs e)
         {
 
         }
+        // Функция для открытия справочников:
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
         {
             foreach (Form child in this.MdiParent.MdiChildren)
@@ -93,8 +142,61 @@ namespace SewingProduction.form
             openSprav("sp_firms", "kod,name,frm_1c_inn", "Справочник Организаций");
         }
 
-        private void checkButtonShowDel_CheckedChanged(object sender, EventArgs e)
+        private void customButtonShowDel_Click(object sender, EventArgs e)
         {
+            GridView gridView = fioGrid.MainView as GridView;
+            if (gridView != null)
+            {
+                if (customButtonShowDel.Text == "Скрыть уволенных")
+                {
+                    // Накладываем фильтр на столбец "datau" (дата увольнения)
+                    gridView.ActiveFilterString = "[datau] Is Null";
+                    customButtonShowDel.Text = "Показать уволенных";
+                    //gridView.TopRowIndex = gridView.RowCount - 1;
+                }
+                else if (customButtonShowDel.Text == "Показать уволенных")
+                {
+                    gridView.ActiveFilterString = "[datau] Is Null or [datau] Is not Null";
+                    customButtonShowDel.Text = "Скрыть уволенных";
+                    //gridView.TopRowIndex = gridView.RowCount - 1;
+                }
+            }
+        }
+        private void customButtonINN_Click(object sender, EventArgs e)
+        {
+            GridView gridView = fioGrid.MainView as GridView;
+            gridView.ActiveFilter.Clear();
+            string INN = gridView.GetFocusedRowCellValue(gridView.Columns["spisok1c_inn"]).ToString();
+            gridView.ActiveFilterString = "[spisok1c_inn] = " + INN;
+        }
+
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            GridView gridView = fioGrid.MainView as GridView;
+            gridView.ActiveFilter.Clear();
+            customButtonShowDel.Text = "Скрыть уволенных";
+        }
+        private void customButtonAdd_Click(object sender, EventArgs e)
+        {
+            editFio f = new editFio("АВТО","Добавление сотрудника");
+            f.Show();
+        }
+
+        private void customButtonRed_Click(object sender, EventArgs e)
+        {
+            GridView gridView = fioGrid.MainView as GridView;
+            string idFIO = gridView.GetFocusedRowCellValue(gridView.Columns["tab"]).ToString();
+            if (Convert.ToInt32(idFIO) < 1)
+            {
+                MessageBox.Show("Табельный не найден или не выбран");
+                return;
+            }
+            string computerName = Environment.MachineName;
+
+
+
+            editFio f = new editFio(idFIO, "Редактирование сотрудника");
+            f.Show();
 
         }
     }
