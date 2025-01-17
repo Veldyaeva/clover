@@ -24,9 +24,9 @@ namespace SewingProduction.form
     public partial class editFio : CustomForm
     {
         // Оснавная БД:
-        //string connectionString = Properties.Settings.Default.ACEConnectionString;
+        string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
-        string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         public editFio(string idFIO, string openType)
         {
             InitializeComponent();
