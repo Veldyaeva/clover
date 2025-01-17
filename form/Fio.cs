@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,10 @@ namespace SewingProduction.form
         // Для тестов:
         string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         string tableString;
+        int currentRowIndex = 0;//текущий индекс
+        int topRowIndex = 0;//верхний индекс 
+        // если редактировали поле:
+        bool flagRed = false;
         public Fio(string tableSQL, string rusNameTableSQL)
         {
             InitializeComponent();
@@ -51,7 +56,7 @@ namespace SewingProduction.form
                 }
             });
         }
-        private async void oborudGrid_Load(object sender, EventArgs e)
+        private async void fioGrid_Load(object sender, EventArgs e)
         {
             /*string query = $@"SELECT tab,fio,rab,ved,ftabn,ftabnsort,fgrd,data_p,datau,bday,tel_s,f_fvr_kod,tab1c,tab_sovm,
                                 tel_r,tel_d,mast,okl,tab_new,po,
@@ -69,8 +74,9 @@ namespace SewingProduction.form
                                      fio.ftabnsort, fio.fgrd,      fio.data_p, fio.datau,     fio.bday,
                                      fio.tel_s,     fio.f_fvr_kod, fio.tab1c,  fio.tab_sovm,  fio.tel_r,
                                      fio.tel_d,     fio.mast,      fio.okl,    fio.tab_new,   fio.po,
-                                     fio.sovm,      fio.sdel,      fio.itr,   fio.dekret,
+                                     fio.sovm,      fio.sdel,      fio.itr,    fio.dekret,
                                      sp_firms.name AS firms_name,
+                                     sp_firms.frm_1c_inn,
                                      brig_object.name AS BRIG_object_name,
                                      spbrig.podrname1c AS podr1cname,
                                      spisok1c.id AS spisok1c_id,
@@ -81,7 +87,7 @@ namespace SewingProduction.form
                                 LEFT JOIN sp_firms ON sp_firms.kod = fio.mast
                                 LEFT JOIN brig_object ON brig_object.gr = fio.gr
                                 LEFT JOIN spbrig ON spbrig.podrid1c = fio.podr_1c_id AND spbrig.podrid1c LIKE '%ЭЙС%'
-                                LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgName = sp_firms.name
+                                LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgcode = sp_firms.frm_1c_inn
                                 ORDER BY fio.tab ASC";
             //fioList.DataSource = ShowRelatedData("ace_test", query);
 
@@ -90,7 +96,7 @@ namespace SewingProduction.form
 
             GridView gridView = fioGrid.MainView as GridView;
             // Фильтр для уволенных:
-            gridView.ActiveFilterString = "[datau] Is Null";
+            customCheckBoxDei.Checked = true;
             // Чекбоксы в гриде:
             if (gridView != null)
             {
@@ -106,15 +112,20 @@ namespace SewingProduction.form
                 gridView.Columns["itr"].ColumnEdit = checkEdit;
                 gridView.Columns["dekret"].ColumnEdit = checkEdit;
             }
+            if (flagRed)
+            {
+                gridView.TopRowIndex = topRowIndex;
+                gridView.FocusedRowHandle = currentRowIndex;
+                flagRed = false; 
+            }
+            else
+            {
             // Переходим к последней строке
             gridView.TopRowIndex = gridView.RowCount - 1;
-            gridView.FocusedRowHandle = gridView.RowCount - 1;
+            gridView.FocusedRowHandle = gridView.RowCount - 1; 
+            }
         }
 
-        private void oborudGrid_Click(object sender, EventArgs e)
-        {
-
-        }
         // Функция для открытия справочников:
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
         {
@@ -147,39 +158,62 @@ namespace SewingProduction.form
             GridView gridView = fioGrid.MainView as GridView;
             if (gridView != null)
             {
-                if (customButtonShowDel.Text == "Скрыть уволенных")
+                string filter = "";
+                if (customCheckBoxDel.Checked == true)
+                    filter += "[datau] Is not Null";
+                if (customCheckBoxDei.Checked == true)
                 {
-                    // Накладываем фильтр на столбец "datau" (дата увольнения)
-                    gridView.ActiveFilterString = "[datau] Is Null";
-                    customButtonShowDel.Text = "Показать уволенных";
-                    //gridView.TopRowIndex = gridView.RowCount - 1;
+                    if (!string.IsNullOrEmpty(filter)) filter += " OR ";
+                    filter += "[datau] Is Null";
                 }
-                else if (customButtonShowDel.Text == "Показать уволенных")
-                {
-                    gridView.ActiveFilterString = "[datau] Is Null or [datau] Is not Null";
-                    customButtonShowDel.Text = "Скрыть уволенных";
-                    //gridView.TopRowIndex = gridView.RowCount - 1;
-                }
+                if (!string.IsNullOrEmpty(filter)) gridView.ActiveFilterString = filter;
+            }
+        }
+        private void fioGrid_KeyUp(object sender, KeyEventArgs e)
+        {
+            fioGrid_Click(sender, e);
+        }
+        private void fioGrid_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Debug.WriteLine($"Клик на грид");
+                GridView gridView = fioGrid.MainView as GridView;
+                customTextBoxInn.Text = gridView.GetFocusedRowCellValue("spisok1c_inn").ToString();
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine($"Error: {Ex.Message}");
             }
         }
         private void customButtonINN_Click(object sender, EventArgs e)
         {
             GridView gridView = fioGrid.MainView as GridView;
             gridView.ActiveFilter.Clear();
-            string INN = gridView.GetFocusedRowCellValue(gridView.Columns["spisok1c_inn"]).ToString();
-            gridView.ActiveFilterString = "[spisok1c_inn] = " + INN;
+            string INN = customTextBoxInn.Text;
+            string filter = "";
+            if (!string.IsNullOrEmpty(INN))
+            {
+                filter += $"([spisok1c_inn] contains '{INN.Replace("'", "''")}')";  // экранируем кавычки
+            }
+            //string osnTab = gridView.GetFocusedRowCellValue(gridView.Columns["tab_sovm"]).ToString();
+            //if (osnTab != "0")
+            //{
+            //    if (!string.IsNullOrEmpty(filter)) filter += " OR ";
+            //    filter += $"([tab_sovm] = {osnTab})";
+            //}
+            if (!string.IsNullOrEmpty(filter)) gridView.ActiveFilterString = filter; //применяем фильтр если он не пустой
+            
         }
 
-        private void customButton1_Click(object sender, EventArgs e)
-        {
-            GridView gridView = fioGrid.MainView as GridView;
-            gridView.ActiveFilter.Clear();
-            customButtonShowDel.Text = "Скрыть уволенных";
-        }
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
             editFio f = new editFio("АВТО","Добавление сотрудника");
-            f.Show();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                // Обновляем таблицу
+                fioGrid_Load(sender, e);
+            }
         }
 
         private void customButtonRed_Click(object sender, EventArgs e)
@@ -193,11 +227,16 @@ namespace SewingProduction.form
             }
             string computerName = Environment.MachineName;
 
-
-
             editFio f = new editFio(idFIO, "Редактирование сотрудника");
-            f.Show();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                flagRed = true;
+                topRowIndex = gridView.TopRowIndex;
+                currentRowIndex = gridView.FocusedRowHandle;
+                fioGrid_Load(sender, e);
+            }
 
         }
+
     }
 }

@@ -32,9 +32,10 @@
             DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
             this.tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButton1 = new SewingProduction.CustomButton();
+            this.customCheckBoxDel = new SewingProduction.CustomCheckBox();
+            this.customCheckBoxDei = new SewingProduction.CustomCheckBox();
             this.customButtonINN = new SewingProduction.CustomButton();
-            this.customButtonShowDel = new SewingProduction.CustomButton();
+            this.customTextBoxInn = new SewingProduction.CustomTextBox();
             this.fioGrid = new DevExpress.XtraGrid.GridControl();
             this.fioList = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -142,43 +143,50 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.customButton1, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.customButtonINN, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.customButtonShowDel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.customCheckBoxDel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.customCheckBoxDei, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.customButtonINN, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.customTextBoxInn, 0, 2);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(1267, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 8;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 301);
             this.tableLayoutPanel4.TabIndex = 7;
             // 
-            // customButton1
+            // customCheckBoxDel
             // 
-            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton1.Btn = null;
-            this.customButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButton1.ComponentSize = new System.Drawing.Size(0, 0);
-            this.customButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButton1.FlatAppearance.BorderSize = 0;
-            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton1.Location = new System.Drawing.Point(3, 77);
-            this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(194, 31);
-            this.customButton1.TabIndex = 8;
-            this.customButton1.Text = "Сбросить все фильтры";
-            this.customButton1.UseVisualStyleBackColor = false;
-            this.customButton1.Click += new System.EventHandler(this.customButton1_Click);
+            this.customCheckBoxDel.AutoSize = true;
+            this.customCheckBoxDel.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCheckBoxDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customCheckBoxDel.Location = new System.Drawing.Point(3, 3);
+            this.customCheckBoxDel.Name = "customCheckBoxDel";
+            this.customCheckBoxDel.Size = new System.Drawing.Size(99, 20);
+            this.customCheckBoxDel.TabIndex = 8;
+            this.customCheckBoxDel.Text = "Уволенные";
+            this.customCheckBoxDel.UseVisualStyleBackColor = true;
+            this.customCheckBoxDel.CheckedChanged += new System.EventHandler(this.customButtonShowDel_Click);
+            // 
+            // customCheckBoxDei
+            // 
+            this.customCheckBoxDei.AutoSize = true;
+            this.customCheckBoxDei.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCheckBoxDei.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customCheckBoxDei.Location = new System.Drawing.Point(3, 33);
+            this.customCheckBoxDei.Name = "customCheckBoxDei";
+            this.customCheckBoxDei.Size = new System.Drawing.Size(117, 20);
+            this.customCheckBoxDei.TabIndex = 8;
+            this.customCheckBoxDei.Text = "Действующие";
+            this.customCheckBoxDei.UseVisualStyleBackColor = true;
+            this.customCheckBoxDei.CheckedChanged += new System.EventHandler(this.customButtonShowDel_Click);
             // 
             // customButtonINN
             // 
@@ -192,33 +200,25 @@
             this.customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonINN.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonINN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonINN.Location = new System.Drawing.Point(3, 40);
+            this.customButtonINN.Location = new System.Drawing.Point(3, 93);
+            this.customButtonINN.MaximumSize = new System.Drawing.Size(0, 50);
             this.customButtonINN.Name = "customButtonINN";
-            this.customButtonINN.Size = new System.Drawing.Size(194, 31);
+            this.customButtonINN.Size = new System.Drawing.Size(194, 29);
             this.customButtonINN.TabIndex = 7;
             this.customButtonINN.Text = "Найти по ИНН";
             this.customButtonINN.UseVisualStyleBackColor = false;
             this.customButtonINN.Click += new System.EventHandler(this.customButtonINN_Click);
             // 
-            // customButtonShowDel
+            // customTextBoxInn
             // 
-            this.customButtonShowDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonShowDel.Btn = null;
-            this.customButtonShowDel.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonShowDel.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonShowDel.ComponentSize = new System.Drawing.Size(0, 0);
-            this.customButtonShowDel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonShowDel.FlatAppearance.BorderSize = 0;
-            this.customButtonShowDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonShowDel.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonShowDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonShowDel.Location = new System.Drawing.Point(3, 3);
-            this.customButtonShowDel.Name = "customButtonShowDel";
-            this.customButtonShowDel.Size = new System.Drawing.Size(194, 31);
-            this.customButtonShowDel.TabIndex = 6;
-            this.customButtonShowDel.Text = "Показать уволенных";
-            this.customButtonShowDel.UseVisualStyleBackColor = false;
-            this.customButtonShowDel.Click += new System.EventHandler(this.customButtonShowDel_Click);
+            this.customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTextBoxInn.Font = new System.Drawing.Font("Arial", 10F);
+            this.customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customTextBoxInn.Location = new System.Drawing.Point(3, 63);
+            this.customTextBoxInn.Name = "customTextBoxInn";
+            this.customTextBoxInn.Size = new System.Drawing.Size(194, 23);
+            this.customTextBoxInn.TabIndex = 9;
             // 
             // fioGrid
             // 
@@ -241,8 +241,9 @@
             this.fioGrid.TabIndex = 6;
             this.fioGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.fioGrid.Load += new System.EventHandler(this.oborudGrid_Load);
-            this.fioGrid.Click += new System.EventHandler(this.oborudGrid_Click);
+            this.fioGrid.Load += new System.EventHandler(this.fioGrid_Load);
+            this.fioGrid.Click += new System.EventHandler(this.fioGrid_Click);
+            this.fioGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fioGrid_KeyUp);
             // 
             // gridView1
             // 
@@ -353,7 +354,6 @@
             this.gridView1.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsBehavior.ReadOnly = true;
-            this.gridView1.OptionsClipboard.AllowHtmlFormat = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsPrint.EnableAppearanceEvenRow = true;
             this.gridView1.OptionsPrint.ExpandAllGroups = false;
             this.gridView1.OptionsPrint.PrintFooter = false;
@@ -1218,6 +1218,7 @@
             this.Load += new System.EventHandler(this.Fio_Load);
             this.tableLayoutPanelAll.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fioList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
@@ -1298,12 +1299,13 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItr;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private CustomButton customButtonShowDel;
         private CustomButton customButtonINN;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_inn;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_id;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_orgName;
         private DevExpress.XtraGrid.Columns.GridColumn spisok1c_podrName;
-        private CustomButton customButton1;
+        private CustomCheckBox customCheckBoxDel;
+        private CustomCheckBox customCheckBoxDei;
+        private CustomTextBox customTextBoxInn;
     }
 }

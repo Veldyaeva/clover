@@ -38,7 +38,7 @@
             this.customLabel2 = new SewingProduction.CustomLabel();
             this.customLabel3 = new SewingProduction.CustomLabel();
             this.customLabel4 = new SewingProduction.CustomLabel();
-            this.customTextBox1 = new SewingProduction.CustomTextBox();
+            this.customTextBoxMast = new SewingProduction.CustomTextBox();
             this.customLabel5 = new SewingProduction.CustomLabel();
             this.customLabel6 = new SewingProduction.CustomLabel();
             this.customTextBoxNved = new SewingProduction.CustomTextBox();
@@ -50,7 +50,7 @@
             this.customLabel14 = new SewingProduction.CustomLabel();
             this.customTextBoxTabN = new SewingProduction.CustomTextBox();
             this.customLabel15 = new SewingProduction.CustomLabel();
-            this.customTextBoxTab2 = new SewingProduction.CustomTextBox();
+            this.customTextBoxTab1с = new SewingProduction.CustomTextBox();
             this.customLabel16 = new SewingProduction.CustomLabel();
             this.customLabel17 = new SewingProduction.CustomLabel();
             this.customTextBoxOsnTab = new SewingProduction.CustomTextBox();
@@ -90,6 +90,8 @@
             this.customButtonNowPriem = new SewingProduction.CustomButton();
             this.customButtonNowYvol = new SewingProduction.CustomButton();
             this.customMaskedTextBoxDateYvoln = new SewingProduction.CustomMaskedTextBox();
+            this.customTextBoxINN = new SewingProduction.CustomTextBox();
+            this.customLabel24 = new SewingProduction.CustomLabel();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
             this.SuspendLayout();
@@ -105,12 +107,13 @@
             this.customCancelButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
             this.customCancelButton1.ForeColor = System.Drawing.Color.White;
-            this.customCancelButton1.Location = new System.Drawing.Point(407, 428);
+            this.customCancelButton1.Location = new System.Drawing.Point(498, 428);
             this.customCancelButton1.Name = "customCancelButton1";
             this.customCancelButton1.Size = new System.Drawing.Size(174, 45);
             this.customCancelButton1.TabIndex = 0;
             this.customCancelButton1.Text = "Выход";
             this.customCancelButton1.UseVisualStyleBackColor = false;
+            this.customCancelButton1.Click += new System.EventHandler(this.customCancelButton1_Click);
             // 
             // customOkButton1
             // 
@@ -154,6 +157,7 @@
             this.customTextBoxTab.ReadOnly = true;
             this.customTextBoxTab.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxTab.TabIndex = 3;
+            this.customTextBoxTab.Text = "0";
             // 
             // customCheckBoxSdel
             // 
@@ -161,7 +165,7 @@
             this.customCheckBoxSdel.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.customCheckBoxSdel.Font = new System.Drawing.Font("Arial", 10F);
             this.customCheckBoxSdel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxSdel.Location = new System.Drawing.Point(513, 148);
+            this.customCheckBoxSdel.Location = new System.Drawing.Point(581, 146);
             this.customCheckBoxSdel.Name = "customCheckBoxSdel";
             this.customCheckBoxSdel.Size = new System.Drawing.Size(82, 21);
             this.customCheckBoxSdel.TabIndex = 4;
@@ -170,13 +174,15 @@
             // 
             // customComboBoxOb
             // 
-            this.customComboBoxOb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxOb.BackColor = System.Drawing.SystemColors.Window;
+            this.customComboBoxOb.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxOb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxOb.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxOb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxOb.FormattingEnabled = true;
-            this.customComboBoxOb.Location = new System.Drawing.Point(113, 70);
+            this.customComboBoxOb.Location = new System.Drawing.Point(113, 71);
             this.customComboBoxOb.Name = "customComboBoxOb";
-            this.customComboBoxOb.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxOb.Size = new System.Drawing.Size(240, 24);
             this.customComboBoxOb.TabIndex = 6;
             // 
             // customTextBoxFIO
@@ -186,7 +192,7 @@
             this.customTextBoxFIO.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxFIO.Location = new System.Drawing.Point(138, 60);
             this.customTextBoxFIO.Name = "customTextBoxFIO";
-            this.customTextBoxFIO.Size = new System.Drawing.Size(558, 23);
+            this.customTextBoxFIO.Size = new System.Drawing.Size(651, 23);
             this.customTextBoxFIO.TabIndex = 9;
             // 
             // customLabel2
@@ -225,15 +231,16 @@
             this.customLabel4.TabIndex = 10;
             this.customLabel4.Text = "Дата рожд.";
             // 
-            // customTextBox1
+            // customTextBoxMast
             // 
-            this.customTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBox1.Location = new System.Drawing.Point(264, 99);
-            this.customTextBox1.Name = "customTextBox1";
-            this.customTextBox1.Size = new System.Drawing.Size(23, 23);
-            this.customTextBox1.TabIndex = 21;
+            this.customTextBoxMast.BackColor = System.Drawing.SystemColors.Control;
+            this.customTextBoxMast.Font = new System.Drawing.Font("Arial", 10F);
+            this.customTextBoxMast.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customTextBoxMast.Location = new System.Drawing.Point(312, 100);
+            this.customTextBoxMast.Name = "customTextBoxMast";
+            this.customTextBoxMast.ReadOnly = true;
+            this.customTextBoxMast.Size = new System.Drawing.Size(41, 23);
+            this.customTextBoxMast.TabIndex = 21;
             // 
             // customLabel5
             // 
@@ -241,7 +248,7 @@
             this.customLabel5.BackColor = System.Drawing.Color.Transparent;
             this.customLabel5.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel5.Location = new System.Drawing.Point(3, 73);
+            this.customLabel5.Location = new System.Drawing.Point(1, 71);
             this.customLabel5.Name = "customLabel5";
             this.customLabel5.Size = new System.Drawing.Size(104, 16);
             this.customLabel5.TabIndex = 20;
@@ -253,7 +260,7 @@
             this.customLabel6.BackColor = System.Drawing.Color.Transparent;
             this.customLabel6.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel6.Location = new System.Drawing.Point(3, 44);
+            this.customLabel6.Location = new System.Drawing.Point(1, 42);
             this.customLabel6.Name = "customLabel6";
             this.customLabel6.Size = new System.Drawing.Size(79, 16);
             this.customLabel6.TabIndex = 18;
@@ -264,10 +271,11 @@
             this.customTextBoxNved.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxNved.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxNved.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxNved.Location = new System.Drawing.Point(417, 42);
+            this.customTextBoxNved.Location = new System.Drawing.Point(504, 43);
             this.customTextBoxNved.Name = "customTextBoxNved";
             this.customTextBoxNved.Size = new System.Drawing.Size(60, 23);
             this.customTextBoxNved.TabIndex = 17;
+            this.customTextBoxNved.Text = "0";
             // 
             // customLabel7
             // 
@@ -275,7 +283,7 @@
             this.customLabel7.BackColor = System.Drawing.Color.Transparent;
             this.customLabel7.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel7.Location = new System.Drawing.Point(3, 15);
+            this.customLabel7.Location = new System.Drawing.Point(1, 13);
             this.customLabel7.Name = "customLabel7";
             this.customLabel7.Size = new System.Drawing.Size(94, 16);
             this.customLabel7.TabIndex = 16;
@@ -322,7 +330,7 @@
             this.customTextBoxPodr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxPodr.Location = new System.Drawing.Point(138, 357);
             this.customTextBoxPodr.Name = "customTextBoxPodr";
-            this.customTextBoxPodr.Size = new System.Drawing.Size(174, 23);
+            this.customTextBoxPodr.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxPodr.TabIndex = 27;
             // 
             // customLabel14
@@ -342,10 +350,11 @@
             this.customTextBoxTabN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxTabN.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxTabN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxTabN.Location = new System.Drawing.Point(417, 100);
+            this.customTextBoxTabN.Location = new System.Drawing.Point(504, 101);
             this.customTextBoxTabN.Name = "customTextBoxTabN";
             this.customTextBoxTabN.Size = new System.Drawing.Size(60, 23);
             this.customTextBoxTabN.TabIndex = 25;
+            this.customTextBoxTabN.Text = "0";
             // 
             // customLabel15
             // 
@@ -359,15 +368,15 @@
             this.customLabel15.TabIndex = 24;
             this.customLabel15.Text = "Подр. 1С";
             // 
-            // customTextBoxTab2
+            // customTextBoxTab1с
             // 
-            this.customTextBoxTab2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxTab2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxTab2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxTab2.Location = new System.Drawing.Point(113, 99);
-            this.customTextBoxTab2.Name = "customTextBoxTab2";
-            this.customTextBoxTab2.Size = new System.Drawing.Size(118, 23);
-            this.customTextBoxTab2.TabIndex = 23;
+            this.customTextBoxTab1с.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customTextBoxTab1с.Font = new System.Drawing.Font("Arial", 10F);
+            this.customTextBoxTab1с.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customTextBoxTab1с.Location = new System.Drawing.Point(113, 99);
+            this.customTextBoxTab1с.Name = "customTextBoxTab1с";
+            this.customTextBoxTab1с.Size = new System.Drawing.Size(118, 23);
+            this.customTextBoxTab1с.TabIndex = 23;
             // 
             // customLabel16
             // 
@@ -375,7 +384,7 @@
             this.customLabel16.BackColor = System.Drawing.Color.Transparent;
             this.customLabel16.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel16.Location = new System.Drawing.Point(3, 102);
+            this.customLabel16.Location = new System.Drawing.Point(1, 100);
             this.customLabel16.Name = "customLabel16";
             this.customLabel16.Size = new System.Drawing.Size(54, 16);
             this.customLabel16.TabIndex = 22;
@@ -387,7 +396,7 @@
             this.customLabel17.BackColor = System.Drawing.Color.Transparent;
             this.customLabel17.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel17.Location = new System.Drawing.Point(301, 150);
+            this.customLabel17.Location = new System.Drawing.Point(325, 150);
             this.customLabel17.Name = "customLabel17";
             this.customLabel17.Size = new System.Drawing.Size(77, 16);
             this.customLabel17.TabIndex = 38;
@@ -398,10 +407,11 @@
             this.customTextBoxOsnTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxOsnTab.Location = new System.Drawing.Point(578, 28);
+            this.customTextBoxOsnTab.Location = new System.Drawing.Point(671, 32);
             this.customTextBoxOsnTab.Name = "customTextBoxOsnTab";
             this.customTextBoxOsnTab.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxOsnTab.TabIndex = 41;
+            this.customTextBoxOsnTab.Text = "0";
             // 
             // customLabel18
             // 
@@ -409,7 +419,7 @@
             this.customLabel18.BackColor = System.Drawing.Color.Transparent;
             this.customLabel18.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel18.Location = new System.Drawing.Point(484, 35);
+            this.customLabel18.Location = new System.Drawing.Point(575, 36);
             this.customLabel18.Name = "customLabel18";
             this.customLabel18.Size = new System.Drawing.Size(88, 16);
             this.customLabel18.TabIndex = 40;
@@ -418,7 +428,11 @@
             // panelControl1
             // 
             this.panelControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.panelControl1.Appearance.BorderColor = System.Drawing.SystemColors.ControlText;
+            this.panelControl1.Appearance.ForeColor = System.Drawing.Color.Transparent;
             this.panelControl1.Appearance.Options.UseBackColor = true;
+            this.panelControl1.Appearance.Options.UseBorderColor = true;
+            this.panelControl1.Appearance.Options.UseForeColor = true;
             this.panelControl1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.panelControl1.Controls.Add(this.customButtonXNtab);
             this.panelControl1.Controls.Add(this.customButtonXPodr);
@@ -441,14 +455,14 @@
             this.panelControl1.Controls.Add(this.customLabel7);
             this.panelControl1.Controls.Add(this.customLabel6);
             this.panelControl1.Controls.Add(this.customLabel5);
-            this.panelControl1.Controls.Add(this.customTextBox1);
+            this.panelControl1.Controls.Add(this.customTextBoxMast);
             this.panelControl1.Controls.Add(this.customLabel16);
-            this.panelControl1.Controls.Add(this.customTextBoxTab2);
+            this.panelControl1.Controls.Add(this.customTextBoxTab1с);
             this.panelControl1.Controls.Add(this.customComboBoxOb);
             this.panelControl1.Controls.Add(this.customTextBoxTabN);
             this.panelControl1.Location = new System.Drawing.Point(25, 176);
             this.panelControl1.Name = "panelControl1";
-            this.panelControl1.Size = new System.Drawing.Size(686, 137);
+            this.panelControl1.Size = new System.Drawing.Size(784, 137);
             this.panelControl1.TabIndex = 43;
             // 
             // customButtonXNtab
@@ -462,12 +476,13 @@
             this.customButtonXNtab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXNtab.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXNtab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXNtab.Location = new System.Drawing.Point(651, 69);
+            this.customButtonXNtab.Location = new System.Drawing.Point(744, 70);
             this.customButtonXNtab.Name = "customButtonXNtab";
             this.customButtonXNtab.Size = new System.Drawing.Size(20, 25);
             this.customButtonXNtab.TabIndex = 61;
             this.customButtonXNtab.Text = "Х";
             this.customButtonXNtab.UseVisualStyleBackColor = false;
+            this.customButtonXNtab.Click += new System.EventHandler(this.customButtonXNtab_Click);
             // 
             // customButtonXPodr
             // 
@@ -480,12 +495,13 @@
             this.customButtonXPodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXPodr.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXPodr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXPodr.Location = new System.Drawing.Point(651, 12);
+            this.customButtonXPodr.Location = new System.Drawing.Point(744, 13);
             this.customButtonXPodr.Name = "customButtonXPodr";
             this.customButtonXPodr.Size = new System.Drawing.Size(20, 25);
             this.customButtonXPodr.TabIndex = 59;
             this.customButtonXPodr.Text = "Х";
             this.customButtonXPodr.UseVisualStyleBackColor = false;
+            this.customButtonXPodr.Click += new System.EventHandler(this.customButtonXPodr_Click);
             // 
             // customButtonXOb
             // 
@@ -498,12 +514,13 @@
             this.customButtonXOb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXOb.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXOb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXOb.Location = new System.Drawing.Point(288, 69);
+            this.customButtonXOb.Location = new System.Drawing.Point(354, 70);
             this.customButtonXOb.Name = "customButtonXOb";
             this.customButtonXOb.Size = new System.Drawing.Size(20, 25);
             this.customButtonXOb.TabIndex = 58;
             this.customButtonXOb.Text = "Х";
             this.customButtonXOb.UseVisualStyleBackColor = false;
+            this.customButtonXOb.Click += new System.EventHandler(this.customButtonXOb_Click);
             // 
             // customButtonXDolj
             // 
@@ -516,12 +533,13 @@
             this.customButtonXDolj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXDolj.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXDolj.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXDolj.Location = new System.Drawing.Point(288, 40);
+            this.customButtonXDolj.Location = new System.Drawing.Point(354, 41);
             this.customButtonXDolj.Name = "customButtonXDolj";
             this.customButtonXDolj.Size = new System.Drawing.Size(20, 25);
             this.customButtonXDolj.TabIndex = 57;
             this.customButtonXDolj.Text = "Х";
             this.customButtonXDolj.UseVisualStyleBackColor = false;
+            this.customButtonXDolj.Click += new System.EventHandler(this.customButtonXDolj_Click);
             // 
             // customButtonXOrg
             // 
@@ -534,22 +552,25 @@
             this.customButtonXOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXOrg.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXOrg.Location = new System.Drawing.Point(288, 12);
+            this.customButtonXOrg.Location = new System.Drawing.Point(354, 13);
             this.customButtonXOrg.Name = "customButtonXOrg";
             this.customButtonXOrg.Size = new System.Drawing.Size(20, 25);
             this.customButtonXOrg.TabIndex = 47;
             this.customButtonXOrg.Text = "Х";
             this.customButtonXOrg.UseVisualStyleBackColor = false;
+            this.customButtonXOrg.Click += new System.EventHandler(this.customButtonXOrg_Click);
             // 
             // customTextBoxNTab
             // 
-            this.customTextBoxNTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customTextBoxNTab.BackColor = System.Drawing.SystemColors.Control;
             this.customTextBoxNTab.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxNTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxNTab.Location = new System.Drawing.Point(417, 71);
+            this.customTextBoxNTab.Location = new System.Drawing.Point(504, 72);
             this.customTextBoxNTab.Name = "customTextBoxNTab";
+            this.customTextBoxNTab.ReadOnly = true;
             this.customTextBoxNTab.Size = new System.Drawing.Size(60, 23);
             this.customTextBoxNTab.TabIndex = 56;
+            this.customTextBoxNTab.Text = "0";
             // 
             // customLabel23
             // 
@@ -557,7 +578,7 @@
             this.customLabel23.BackColor = System.Drawing.Color.Transparent;
             this.customLabel23.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel23.Location = new System.Drawing.Point(520, 102);
+            this.customLabel23.Location = new System.Drawing.Point(611, 101);
             this.customLabel23.Name = "customLabel23";
             this.customLabel23.Size = new System.Drawing.Size(85, 16);
             this.customLabel23.TabIndex = 55;
@@ -568,10 +589,11 @@
             this.customTextBoxSorted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxSorted.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxSorted.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxSorted.Location = new System.Drawing.Point(611, 100);
+            this.customTextBoxSorted.Location = new System.Drawing.Point(704, 101);
             this.customTextBoxSorted.Name = "customTextBoxSorted";
             this.customTextBoxSorted.Size = new System.Drawing.Size(60, 23);
             this.customTextBoxSorted.TabIndex = 54;
+            this.customTextBoxSorted.Text = "0";
             // 
             // customLabel20
             // 
@@ -579,7 +601,7 @@
             this.customLabel20.BackColor = System.Drawing.Color.Transparent;
             this.customLabel20.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel20.Location = new System.Drawing.Point(343, 44);
+            this.customLabel20.Location = new System.Drawing.Point(428, 43);
             this.customLabel20.Name = "customLabel20";
             this.customLabel20.Size = new System.Drawing.Size(53, 16);
             this.customLabel20.TabIndex = 51;
@@ -591,7 +613,7 @@
             this.customLabel21.BackColor = System.Drawing.Color.Transparent;
             this.customLabel21.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel21.Location = new System.Drawing.Point(343, 73);
+            this.customLabel21.Location = new System.Drawing.Point(428, 72);
             this.customLabel21.Name = "customLabel21";
             this.customLabel21.Size = new System.Drawing.Size(73, 16);
             this.customLabel21.TabIndex = 52;
@@ -603,33 +625,38 @@
             this.customLabel22.BackColor = System.Drawing.Color.Transparent;
             this.customLabel22.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel22.Location = new System.Drawing.Point(343, 102);
+            this.customLabel22.Location = new System.Drawing.Point(428, 101);
             this.customLabel22.Name = "customLabel22";
-            this.customLabel22.Size = new System.Drawing.Size(54, 16);
+            this.customLabel22.Size = new System.Drawing.Size(55, 16);
             this.customLabel22.TabIndex = 53;
-            this.customLabel22.Text = "Таб. №";
+            this.customLabel22.Text = "График";
             // 
             // customComboBoxPodr
             // 
             this.customComboBoxPodr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxPodr.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxPodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxPodr.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxPodr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxPodr.FormattingEnabled = true;
-            this.customComboBoxPodr.Location = new System.Drawing.Point(477, 12);
+            this.customComboBoxPodr.Location = new System.Drawing.Point(504, 13);
             this.customComboBoxPodr.Name = "customComboBoxPodr";
-            this.customComboBoxPodr.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxPodr.Size = new System.Drawing.Size(240, 24);
             this.customComboBoxPodr.TabIndex = 50;
             // 
             // customComboBoxNTab
             // 
             this.customComboBoxNTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxNTab.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxNTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxNTab.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxNTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxNTab.FormattingEnabled = true;
-            this.customComboBoxNTab.Location = new System.Drawing.Point(477, 70);
+            this.customComboBoxNTab.Location = new System.Drawing.Point(565, 71);
             this.customComboBoxNTab.Name = "customComboBoxNTab";
-            this.customComboBoxNTab.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxNTab.Size = new System.Drawing.Size(179, 24);
             this.customComboBoxNTab.TabIndex = 48;
+            this.customComboBoxNTab.SelectedIndexChanged += new System.EventHandler(this.customComboBoxNTab_SelectedIndexChanged);
             // 
             // customLabel19
             // 
@@ -637,7 +664,7 @@
             this.customLabel19.BackColor = System.Drawing.Color.Transparent;
             this.customLabel19.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel19.Location = new System.Drawing.Point(343, 15);
+            this.customLabel19.Location = new System.Drawing.Point(388, 14);
             this.customLabel19.Name = "customLabel19";
             this.customLabel19.Size = new System.Drawing.Size(110, 16);
             this.customLabel19.TabIndex = 47;
@@ -649,32 +676,38 @@
             this.customLabel12.BackColor = System.Drawing.Color.Transparent;
             this.customLabel12.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel12.Location = new System.Drawing.Point(250, 102);
+            this.customLabel12.Location = new System.Drawing.Point(294, 106);
             this.customLabel12.Name = "customLabel12";
+            this.customLabel12.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.customLabel12.Size = new System.Drawing.Size(12, 16);
             this.customLabel12.TabIndex = 26;
             this.customLabel12.Text = "*";
+            this.customLabel12.TextAlign = System.Drawing.ContentAlignment.BottomRight;
             // 
             // customComboBoxOrg
             // 
-            this.customComboBoxOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxOrg.BackColor = System.Drawing.SystemColors.Window;
+            this.customComboBoxOrg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxOrg.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customComboBoxOrg.FormattingEnabled = true;
-            this.customComboBoxOrg.Location = new System.Drawing.Point(113, 12);
+            this.customComboBoxOrg.Location = new System.Drawing.Point(113, 13);
             this.customComboBoxOrg.Name = "customComboBoxOrg";
-            this.customComboBoxOrg.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxOrg.Size = new System.Drawing.Size(240, 24);
             this.customComboBoxOrg.TabIndex = 25;
+            this.customComboBoxOrg.SelectedIndexChanged += new System.EventHandler(this.customComboBoxOrg_SelectedIndexChanged);
             // 
             // customComboBoxDolj
             // 
             this.customComboBoxDolj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxDolj.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxDolj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxDolj.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxDolj.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxDolj.FormattingEnabled = true;
-            this.customComboBoxDolj.Location = new System.Drawing.Point(113, 41);
+            this.customComboBoxDolj.Location = new System.Drawing.Point(113, 42);
             this.customComboBoxDolj.Name = "customComboBoxDolj";
-            this.customComboBoxDolj.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxDolj.Size = new System.Drawing.Size(240, 24);
             this.customComboBoxDolj.TabIndex = 24;
             // 
             // customCheckBoxITR
@@ -683,7 +716,7 @@
             this.customCheckBoxITR.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.customCheckBoxITR.Font = new System.Drawing.Font("Arial", 10F);
             this.customCheckBoxITR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxITR.Location = new System.Drawing.Point(580, 148);
+            this.customCheckBoxITR.Location = new System.Drawing.Point(665, 146);
             this.customCheckBoxITR.Name = "customCheckBoxITR";
             this.customCheckBoxITR.Size = new System.Drawing.Size(60, 21);
             this.customCheckBoxITR.TabIndex = 44;
@@ -696,7 +729,7 @@
             this.customCheckBoxDekret.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.customCheckBoxDekret.Font = new System.Drawing.Font("Arial", 10F);
             this.customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxDekret.Location = new System.Drawing.Point(633, 148);
+            this.customCheckBoxDekret.Location = new System.Drawing.Point(731, 146);
             this.customCheckBoxDekret.Name = "customCheckBoxDekret";
             this.customCheckBoxDekret.Size = new System.Drawing.Size(78, 21);
             this.customCheckBoxDekret.TabIndex = 45;
@@ -709,7 +742,7 @@
             this.customCheckBoxSovm.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.customCheckBoxSovm.Font = new System.Drawing.Font("Arial", 10F);
             this.customCheckBoxSovm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxSovm.Location = new System.Drawing.Point(407, 32);
+            this.customCheckBoxSovm.Location = new System.Drawing.Point(498, 33);
             this.customCheckBoxSovm.Name = "customCheckBoxSovm";
             this.customCheckBoxSovm.Size = new System.Drawing.Size(71, 21);
             this.customCheckBoxSovm.TabIndex = 46;
@@ -721,10 +754,11 @@
             this.customTextBoxNTabVed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxNTabVed.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxNTabVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxNTabVed.Location = new System.Drawing.Point(578, 328);
+            this.customTextBoxNTabVed.Location = new System.Drawing.Point(671, 328);
             this.customTextBoxNTabVed.Name = "customTextBoxNTabVed";
             this.customTextBoxNTabVed.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxNTabVed.TabIndex = 25;
+            this.customTextBoxNTabVed.Text = "0";
             // 
             // customLabel9
             // 
@@ -732,7 +766,7 @@
             this.customLabel9.BackColor = System.Drawing.Color.Transparent;
             this.customLabel9.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel9.Location = new System.Drawing.Point(496, 332);
+            this.customLabel9.Location = new System.Drawing.Point(589, 332);
             this.customLabel9.Name = "customLabel9";
             this.customLabel9.Size = new System.Drawing.Size(76, 16);
             this.customLabel9.TabIndex = 24;
@@ -744,7 +778,7 @@
             this.customLabel10.BackColor = System.Drawing.Color.Transparent;
             this.customLabel10.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel10.Location = new System.Drawing.Point(496, 361);
+            this.customLabel10.Location = new System.Drawing.Point(589, 361);
             this.customLabel10.Name = "customLabel10";
             this.customLabel10.Size = new System.Drawing.Size(38, 16);
             this.customLabel10.TabIndex = 26;
@@ -755,7 +789,7 @@
             this.customTextBoxPom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxPom.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxPom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPom.Location = new System.Drawing.Point(578, 357);
+            this.customTextBoxPom.Location = new System.Drawing.Point(671, 357);
             this.customTextBoxPom.Name = "customTextBoxPom";
             this.customTextBoxPom.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxPom.TabIndex = 27;
@@ -766,7 +800,7 @@
             this.customLabel11.BackColor = System.Drawing.Color.Transparent;
             this.customLabel11.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel11.Location = new System.Drawing.Point(496, 390);
+            this.customLabel11.Location = new System.Drawing.Point(589, 389);
             this.customLabel11.Name = "customLabel11";
             this.customLabel11.Size = new System.Drawing.Size(69, 16);
             this.customLabel11.TabIndex = 28;
@@ -777,7 +811,7 @@
             this.customTextBoxTelDom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customTextBoxTelDom.Font = new System.Drawing.Font("Arial", 10F);
             this.customTextBoxTelDom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxTelDom.Location = new System.Drawing.Point(578, 386);
+            this.customTextBoxTelDom.Location = new System.Drawing.Point(671, 386);
             this.customTextBoxTelDom.Name = "customTextBoxTelDom";
             this.customTextBoxTelDom.Size = new System.Drawing.Size(118, 23);
             this.customTextBoxTelDom.TabIndex = 29;
@@ -785,12 +819,14 @@
             // customComboBoxPodr1c
             // 
             this.customComboBoxPodr1c.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customComboBoxPodr1c.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.customComboBoxPodr1c.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customComboBoxPodr1c.Font = new System.Drawing.Font("Arial", 10F);
             this.customComboBoxPodr1c.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxPodr1c.FormattingEnabled = true;
             this.customComboBoxPodr1c.Location = new System.Drawing.Point(138, 328);
             this.customComboBoxPodr1c.Name = "customComboBoxPodr1c";
-            this.customComboBoxPodr1c.Size = new System.Drawing.Size(174, 24);
+            this.customComboBoxPodr1c.Size = new System.Drawing.Size(368, 24);
             this.customComboBoxPodr1c.TabIndex = 27;
             // 
             // customButtonXPodr1c
@@ -804,12 +840,13 @@
             this.customButtonXPodr1c.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXPodr1c.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonXPodr1c.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonXPodr1c.Location = new System.Drawing.Point(313, 328);
+            this.customButtonXPodr1c.Location = new System.Drawing.Point(506, 328);
             this.customButtonXPodr1c.Name = "customButtonXPodr1c";
             this.customButtonXPodr1c.Size = new System.Drawing.Size(20, 25);
             this.customButtonXPodr1c.TabIndex = 62;
             this.customButtonXPodr1c.Text = "Х";
             this.customButtonXPodr1c.UseVisualStyleBackColor = false;
+            this.customButtonXPodr1c.Click += new System.EventHandler(this.customButtonXPodr1c_Click);
             // 
             // dateRozd
             // 
@@ -826,7 +863,7 @@
             this.customMaskedTextBoxTelSot.Font = new System.Drawing.Font("Arial", 10F);
             this.customMaskedTextBoxTelSot.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customMaskedTextBoxTelSot.Location = new System.Drawing.Point(138, 118);
-            this.customMaskedTextBoxTelSot.Mask = "8 (000) 000-00-00";
+            this.customMaskedTextBoxTelSot.Mask = "0 000 000 00 00";
             this.customMaskedTextBoxTelSot.Name = "customMaskedTextBoxTelSot";
             this.customMaskedTextBoxTelSot.Size = new System.Drawing.Size(118, 23);
             this.customMaskedTextBoxTelSot.TabIndex = 68;
@@ -842,6 +879,7 @@
             this.customMaskedTextBoxDatePriem.Size = new System.Drawing.Size(96, 23);
             this.customMaskedTextBoxDatePriem.TabIndex = 69;
             this.customMaskedTextBoxDatePriem.ValidatingType = typeof(System.DateTime);
+            this.customMaskedTextBoxDatePriem.TextChanged += new System.EventHandler(this.customMaskedTextBoxDatePriem_TextChanged);
             // 
             // customButtonNowPriem
             // 
@@ -860,6 +898,7 @@
             this.customButtonNowPriem.TabIndex = 62;
             this.customButtonNowPriem.Text = "С";
             this.customButtonNowPriem.UseVisualStyleBackColor = false;
+            this.customButtonNowPriem.Click += new System.EventHandler(this.customButtonNowPriem_Click);
             // 
             // customButtonNowYvol
             // 
@@ -872,30 +911,57 @@
             this.customButtonNowYvol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonNowYvol.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonNowYvol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonNowYvol.Location = new System.Drawing.Point(384, 146);
+            this.customButtonNowYvol.Location = new System.Drawing.Point(409, 146);
             this.customButtonNowYvol.Name = "customButtonNowYvol";
             this.customButtonNowYvol.Size = new System.Drawing.Size(20, 25);
             this.customButtonNowYvol.TabIndex = 70;
             this.customButtonNowYvol.Text = "С";
             this.customButtonNowYvol.UseVisualStyleBackColor = false;
+            this.customButtonNowYvol.Click += new System.EventHandler(this.customButtonNowYvol_Click);
             // 
             // customMaskedTextBoxDateYvoln
             // 
             this.customMaskedTextBoxDateYvoln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
             this.customMaskedTextBoxDateYvoln.Font = new System.Drawing.Font("Arial", 10F);
             this.customMaskedTextBoxDateYvoln.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customMaskedTextBoxDateYvoln.Location = new System.Drawing.Point(406, 147);
+            this.customMaskedTextBoxDateYvoln.Location = new System.Drawing.Point(430, 147);
             this.customMaskedTextBoxDateYvoln.Mask = "00/00/0000";
             this.customMaskedTextBoxDateYvoln.Name = "customMaskedTextBoxDateYvoln";
             this.customMaskedTextBoxDateYvoln.Size = new System.Drawing.Size(96, 23);
             this.customMaskedTextBoxDateYvoln.TabIndex = 71;
             this.customMaskedTextBoxDateYvoln.ValidatingType = typeof(System.DateTime);
+            this.customMaskedTextBoxDateYvoln.TextChanged += new System.EventHandler(this.customMaskedTextBoxDateYvoln_TextChanged);
+            // 
+            // customTextBoxINN
+            // 
+            this.customTextBoxINN.BackColor = System.Drawing.SystemColors.Control;
+            this.customTextBoxINN.Font = new System.Drawing.Font("Arial", 10F);
+            this.customTextBoxINN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customTextBoxINN.Location = new System.Drawing.Point(671, 89);
+            this.customTextBoxINN.Name = "customTextBoxINN";
+            this.customTextBoxINN.ReadOnly = true;
+            this.customTextBoxINN.Size = new System.Drawing.Size(118, 23);
+            this.customTextBoxINN.TabIndex = 72;
+            // 
+            // customLabel24
+            // 
+            this.customLabel24.AutoSize = true;
+            this.customLabel24.BackColor = System.Drawing.Color.Transparent;
+            this.customLabel24.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.customLabel24.Location = new System.Drawing.Point(628, 92);
+            this.customLabel24.Name = "customLabel24";
+            this.customLabel24.Size = new System.Drawing.Size(35, 16);
+            this.customLabel24.TabIndex = 73;
+            this.customLabel24.Text = "ИНН";
             // 
             // editFio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(731, 490);
+            this.ClientSize = new System.Drawing.Size(821, 490);
+            this.Controls.Add(this.customLabel24);
+            this.Controls.Add(this.customTextBoxINN);
             this.Controls.Add(this.customButtonNowYvol);
             this.Controls.Add(this.customMaskedTextBoxDateYvoln);
             this.Controls.Add(this.customButtonNowPriem);
@@ -934,6 +1000,7 @@
             this.Controls.Add(this.customCancelButton1);
             this.Name = "editFio";
             this.Text = "Редактирование/Добавление ФИО";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.editFio_FormClosing);
             this.Load += new System.EventHandler(this.editFio_Load);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).EndInit();
             this.panelControl1.ResumeLayout(false);
@@ -955,7 +1022,7 @@
         private CustomLabel customLabel2;
         private CustomLabel customLabel3;
         private CustomLabel customLabel4;
-        private CustomTextBox customTextBox1;
+        private CustomTextBox customTextBoxMast;
         private CustomLabel customLabel5;
         private CustomLabel customLabel6;
         private CustomTextBox customTextBoxNved;
@@ -967,7 +1034,7 @@
         private CustomLabel customLabel14;
         private CustomTextBox customTextBoxTabN;
         private CustomLabel customLabel15;
-        private CustomTextBox customTextBoxTab2;
+        private CustomTextBox customTextBoxTab1с;
         private CustomLabel customLabel16;
         private CustomLabel customLabel17;
         private CustomTextBox customTextBoxOsnTab;
@@ -1007,5 +1074,7 @@
         private CustomButton customButtonNowPriem;
         private CustomButton customButtonNowYvol;
         private CustomMaskedTextBox customMaskedTextBoxDateYvoln;
+        private CustomTextBox customTextBoxINN;
+        private CustomLabel customLabel24;
     }
 }
