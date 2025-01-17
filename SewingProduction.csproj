@@ -159,6 +159,12 @@
     <Compile Include="form\CardByNom.Designer.cs">
       <DependentUpon>CardByNom.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\editFio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\editFio.Designer.cs">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\Fio.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -212,6 +218,12 @@
     </Compile>
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWorkTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWorkTest.Designer.cs">
+      <DependentUpon>TeamWorkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -316,6 +328,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\CardByNom.resx">
       <DependentUpon>CardByNom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\editFio.resx">
+      <DependentUpon>editFio.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\Fio.resx">
       <DependentUpon>Fio.cs</DependentUpon>
