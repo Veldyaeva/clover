@@ -24,9 +24,9 @@ namespace SewingProduction.form
     public partial class editFio : CustomForm
     {
         // Оснавная БД:
-        //string connectionString = Properties.Settings.Default.ACEConnectionString;
+        string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
-        string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         public editFio(string idFIO, string openType)
         {
             InitializeComponent();
@@ -262,15 +262,15 @@ namespace SewingProduction.form
                         {
                             // Запрос на добавление нового сотрудника:
                             queryFio = "INSERT INTO fio (fio, tel_s, bday, data_p, datau, rab, mast, f_fvr_kod, gr, ftabn, podr_1c_id, tab_sovm, tab1c," +
-                                        " ved, fgrd, ftabnsort, okl, tab_new, po, tel_r, tel_d, sovm, sdel, itr, dekret,tab) " +
+                                        " ved, fgrd, ftabnsort, okl, tab_new, po, tel_r, tel_d, sovm, sdel, itr, dekret, tab) " +
                                         "VALUES (@fio, @tel_s, @bday, @data_p, @datau, @rab, " +
                                         "CASE WHEN @OrgName IS NULL THEN NULL ELSE (SELECT sf.kod FROM sp_firms sf WHERE sf.name = @OrgName) END, " +
                                         "CASE WHEN @ObName IS NULL THEN NULL ELSE (SELECT fvr.fvr_kod FROM fio_vid_rabot fvr WHERE fvr.fvr_name = @ObName) END, " +
                                         "CASE WHEN @PodrName IS NULL THEN NULL ELSE (SELECT bo.gr FROM brig_object bo WHERE bo.name = @PodrName) END, " +
                                         "CASE WHEN @NTabName IS NULL THEN NULL ELSE (SELECT tn.tnid FROM tab_n tn WHERE tn.naimen = @NTabName) END, " +
                                         "CASE WHEN @Podr1cName IS NULL THEN NULL ELSE (SELECT sb.podrid1c FROM spbrig sb WHERE sb.podrname1c = @Podr1cName) END, " +
-                                        "@tab_sovm, @tab1c, @ved, @fgrd, @ftabnsort, @okl, @tab_new, @po, @tel_r, @tel_d, @sovm, @sdel, @itr, @dekret, " +
-                                        "(SELECT MAX(tab)+1 FROM fio))";
+                                        "@tab_sovm, @tab1c, @ved, @fgrd, @ftabnsort, @okl, @tab_new, @po, @tel_r, @tel_d, @sovm, @sdel, @itr, @dekret, "  + 
+                                        "(SELECT MAX(tab)+1 FROM fio))"; 
                         }
                         //определение данных в запрос и его выполенине
                         using (SqlCommand command = new SqlCommand(queryFio, connection))

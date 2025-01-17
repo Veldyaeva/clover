@@ -100,6 +100,9 @@
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.nam = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tabControlSHK = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanelAll.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).BeginInit();
@@ -114,6 +117,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
+            this.tabControlSHK.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanelAll
@@ -908,9 +912,8 @@
             // 
             this.tableLayoutPanelPech.ColumnCount = 1;
             this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpOrg, 0, 1);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpDol, 0, 0);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 5);
+            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 0);
+            this.tableLayoutPanelPech.Controls.Add(this.tabControlSHK, 0, 1);
             this.tableLayoutPanelPech.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelPech.Location = new System.Drawing.Point(1267, 310);
             this.tableLayoutPanelPech.Name = "tableLayoutPanelPech";
@@ -937,9 +940,9 @@
             this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(3, 37);
+            this.customButtonSpOrg.Location = new System.Drawing.Point(211, 38);
             this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(194, 28);
+            this.customButtonSpOrg.Size = new System.Drawing.Size(202, 29);
             this.customButtonSpOrg.TabIndex = 6;
             this.customButtonSpOrg.Text = "Справочник организаций";
             this.customButtonSpOrg.UseVisualStyleBackColor = false;
@@ -957,9 +960,9 @@
             this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 3);
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 38);
             this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(194, 28);
+            this.customButtonSpDol.Size = new System.Drawing.Size(202, 29);
             this.customButtonSpDol.TabIndex = 5;
             this.customButtonSpDol.Text = "Справочник должностей";
             this.customButtonSpDol.UseVisualStyleBackColor = false;
@@ -977,7 +980,7 @@
             this.customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchShk.Location = new System.Drawing.Point(3, 173);
+            this.customButtonPchShk.Location = new System.Drawing.Point(3, 3);
             this.customButtonPchShk.Name = "customButtonPchShk";
             this.customButtonPchShk.Size = new System.Drawing.Size(194, 28);
             this.customButtonPchShk.TabIndex = 4;
@@ -1024,7 +1027,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            this.tableLayoutPanel2.Controls.Add(this.customButtonSpOrg, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.customButtonRed, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.customButtonSpDol, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.customButtonAdd, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 559);
@@ -1207,6 +1212,37 @@
             this.nam.VisibleIndex = 20;
             this.nam.Width = 116;
             // 
+            // tabControlSHK
+            // 
+            this.tabControlSHK.Controls.Add(this.tabPage1);
+            this.tabControlSHK.Controls.Add(this.tabPage2);
+            this.tabControlSHK.Location = new System.Drawing.Point(3, 37);
+            this.tabControlSHK.Name = "tabControlSHK";
+            this.tableLayoutPanelPech.SetRowSpan(this.tabControlSHK, 6);
+            this.tabControlSHK.SelectedIndex = 0;
+            this.tabControlSHK.Size = new System.Drawing.Size(194, 203);
+            this.tabControlSHK.TabIndex = 5;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(186, 177);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "По ведомости";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(186, 177);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "По таб. №";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
             // Fio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1231,6 +1267,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
+            this.tabControlSHK.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1307,5 +1344,8 @@
         private CustomCheckBox customCheckBoxDel;
         private CustomCheckBox customCheckBoxDei;
         private CustomTextBox customTextBoxInn;
+        private System.Windows.Forms.TabControl tabControlSHK;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
     }
 }

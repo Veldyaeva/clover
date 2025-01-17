@@ -31,6 +31,7 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         // если редактировали поле:
         bool flagRed = false;
+        string filter = "";
         public Fio(string tableSQL, string rusNameTableSQL)
         {
             InitializeComponent();
@@ -59,18 +60,7 @@ namespace SewingProduction.form
         }
         private async void fioGrid_Load(object sender, EventArgs e)
         {
-            /*string query = $@"SELECT tab,fio,rab,ved,ftabn,ftabnsort,fgrd,data_p,datau,bday,tel_s,f_fvr_kod,tab1c,tab_sovm,
-                                tel_r,tel_d,mast,okl,tab_new,po,
-                                (SELECT sp_firms.name FROM sp_firms WHERE sp_firms.kod = fio.mast) AS firms_name,
-                                (SELECT brig_object.name FROM brig_object WHERE brig_object.gr = fio.gr) AS BRIG_object_name,
-                                (SELECT DISTINCT spbrig.podrname1c FROM spbrig WHERE spbrig.podrid1c = fio.podr_1c_id AND podrid1c LIKE '%ЭЙС%') AS podr1cname,
-                                (SELECT DISTINCT spisok1c.inn FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_inn,
-                                (SELECT DISTINCT spisok1c.id FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_id,
-                                (SELECT DISTINCT spisok1c.orgName FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_orgName,
-                                (SELECT DISTINCT spisok1c.podrName FROM spisok1c WHERE TRY_CAST(spisok1c.tab1c AS INT) = TRY_CAST(fio.tab1c AS INT) AND orgName like '%ЭЙС%') AS spisok1c_podrName,
-                                sovm,sdel,itr,dekret
-                              FROM fio 
-                                ORDER BY tab ASC";*/
+
             string query = $@"SELECT fio.tab,       fio.fio,       fio.rab,    fio.ved,       fio.ftabn,
                                      fio.ftabnsort, fio.fgrd,      fio.data_p, fio.datau,     fio.bday,
                                      fio.tel_s,     fio.f_fvr_kod, fio.tab1c,  fio.tab_sovm,  fio.tel_r,
@@ -156,7 +146,7 @@ namespace SewingProduction.form
         {
             if (gridViewFio != null)
             {
-                string filter = "";
+                filter = "";
                 if (customCheckBoxDel.Checked == true)
                     filter += "[datau] Is not Null";
                 if (customCheckBoxDei.Checked == true)
@@ -164,7 +154,8 @@ namespace SewingProduction.form
                     if (!string.IsNullOrEmpty(filter)) filter += " OR ";
                     filter += "[datau] Is Null";
                 }
-                if (!string.IsNullOrEmpty(filter)) gridViewFio.ActiveFilterString = filter;
+                //if (!string.IsNullOrEmpty(filter)) 
+                gridViewFio.ActiveFilterString = filter;
             }
         }
         private void gridViewFio_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -200,10 +191,9 @@ namespace SewingProduction.form
         private void customButtonINN_Click(object sender, EventArgs e)
         {
             string INN = customTextBoxInn.Text;
-            string filter = "";
             if (!string.IsNullOrEmpty(INN))
             {
-                filter += $"[spisok1c_inn] Like '%{INN.Replace("'", "''")}%'";
+                filter = $"[spisok1c_inn] Like '%{INN.Replace("'", "''")}%'";
             }
             else gridViewFio.ActiveFilter.Clear();
             //string osnTab = gridViewFio.GetFocusedRowCellValue(gridViewFio.Columns["tab_sovm"]).ToString();
