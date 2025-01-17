@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Customization;
 using Microsoft.Reporting.Map.WebForms.BingMaps;
@@ -22,9 +23,9 @@ namespace SewingProduction.form
     {
 
         // Оснавная БД:
-        //string connectionString = Properties.Settings.Default.ACEConnectionString;
+        string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
-        string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         string tableString;
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
@@ -93,12 +94,10 @@ namespace SewingProduction.form
 
             DataTable dataTable = await LoadDataAsync(connectionString, query);
             fioList.DataSource = dataTable;
-
-            GridView gridView = fioGrid.MainView as GridView;
             // Фильтр для уволенных:
             customCheckBoxDei.Checked = true;
             // Чекбоксы в гриде:
-            if (gridView != null)
+            if (gridViewFio != null)
             {
                 // Создаем экземпляр CheckEdit
                 RepositoryItemCheckEdit checkEdit = new RepositoryItemCheckEdit
@@ -107,25 +106,34 @@ namespace SewingProduction.form
                     ValueUnchecked = 0
                 };
                 // Назначаем его столбцам
-                gridView.Columns["sovm"].ColumnEdit = checkEdit;
-                gridView.Columns["sdel"].ColumnEdit = checkEdit;
-                gridView.Columns["itr"].ColumnEdit = checkEdit;
-                gridView.Columns["dekret"].ColumnEdit = checkEdit;
+                gridViewFio.Columns["sovm"].ColumnEdit = checkEdit;
+                gridViewFio.Columns["sdel"].ColumnEdit = checkEdit;
+                gridViewFio.Columns["itr"].ColumnEdit = checkEdit;
+                gridViewFio.Columns["dekret"].ColumnEdit = checkEdit;
             }
             if (flagRed)
             {
-                gridView.TopRowIndex = topRowIndex;
-                gridView.FocusedRowHandle = currentRowIndex;
+                gridViewFio.TopRowIndex = topRowIndex;
+                gridViewFio.FocusedRowHandle = currentRowIndex;
                 flagRed = false; 
             }
             else
             {
             // Переходим к последней строке
-            gridView.TopRowIndex = gridView.RowCount - 1;
-            gridView.FocusedRowHandle = gridView.RowCount - 1; 
+            gridViewFio.TopRowIndex = gridViewFio.RowCount - 1;
+            gridViewFio.FocusedRowHandle = gridViewFio.RowCount - 1; 
             }
         }
 
+        private void customButtonSpDol_Click(object sender, EventArgs e)
+        {
+            openSprav("rab", "r_id,rab", "Справочник Должностей");
+        }
+
+        private void customButtonSpOrg_Click(object sender, EventArgs e)
+        {
+            openSprav("sp_firms", "kod,name,frm_1c_inn", "Справочник Организаций");
+        }
         // Функция для открытия справочников:
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
         {
@@ -143,20 +151,10 @@ namespace SewingProduction.form
             f.MdiParent = this.MdiParent;
             f.Show();
         }
-        private void customButtonSpDol_Click(object sender, EventArgs e)
-        {
-            openSprav("rab", "r_id,rab", "Справочник Должностей");
-        }
-
-        private void customButtonSpOrg_Click(object sender, EventArgs e)
-        {
-            openSprav("sp_firms", "kod,name,frm_1c_inn", "Справочник Организаций");
-        }
 
         private void customButtonShowDel_Click(object sender, EventArgs e)
         {
-            GridView gridView = fioGrid.MainView as GridView;
-            if (gridView != null)
+            if (gridViewFio != null)
             {
                 string filter = "";
                 if (customCheckBoxDel.Checked == true)
@@ -166,43 +164,56 @@ namespace SewingProduction.form
                     if (!string.IsNullOrEmpty(filter)) filter += " OR ";
                     filter += "[datau] Is Null";
                 }
-                if (!string.IsNullOrEmpty(filter)) gridView.ActiveFilterString = filter;
+                if (!string.IsNullOrEmpty(filter)) gridViewFio.ActiveFilterString = filter;
             }
+        }
+        private void gridViewFio_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            innGetFocusedRowCellValue();
         }
         private void fioGrid_KeyUp(object sender, KeyEventArgs e)
         {
-            fioGrid_Click(sender, e);
+            innGetFocusedRowCellValue();
         }
-        private void fioGrid_Click(object sender, EventArgs e)
+        private void innGetFocusedRowCellValue()
         {
-            try
+            string INN = customTextBoxInn.Text;
+            GridColumn innColumn = gridViewFio.Columns["spisok1c_inn"];
+            //Проверяем что колонка существует
+            if (innColumn != null && (INN.Length == 12 || INN == ""))
             {
-                Debug.WriteLine($"Клик на грид");
-                GridView gridView = fioGrid.MainView as GridView;
-                customTextBoxInn.Text = gridView.GetFocusedRowCellValue("spisok1c_inn").ToString();
-            }
-            catch (Exception Ex)
-            {
-                Debug.WriteLine($"Error: {Ex.Message}");
+                // Проверяем, что есть строки в GridView
+                if (gridViewFio.RowCount > 0)
+                {
+                    // Получаем значение ячейки
+                    object innValue = gridViewFio.GetFocusedRowCellValue(gridViewFio.Columns["spisok1c_inn"]);
+                    // Проверяем значение на null и  приводим к строке
+                    customTextBoxInn.Text = innValue?.ToString() ?? "";
+                }
+                else
+                {
+                    customTextBoxInn.Text = "";
+                }
+
             }
         }
         private void customButtonINN_Click(object sender, EventArgs e)
         {
-            GridView gridView = fioGrid.MainView as GridView;
-            gridView.ActiveFilter.Clear();
             string INN = customTextBoxInn.Text;
             string filter = "";
             if (!string.IsNullOrEmpty(INN))
             {
-                filter += $"([spisok1c_inn] contains '{INN.Replace("'", "''")}')";  // экранируем кавычки
+                filter += $"[spisok1c_inn] Like '%{INN.Replace("'", "''")}%'";
             }
-            //string osnTab = gridView.GetFocusedRowCellValue(gridView.Columns["tab_sovm"]).ToString();
+            else gridViewFio.ActiveFilter.Clear();
+            //string osnTab = gridViewFio.GetFocusedRowCellValue(gridViewFio.Columns["tab_sovm"]).ToString();
             //if (osnTab != "0")
             //{
             //    if (!string.IsNullOrEmpty(filter)) filter += " OR ";
             //    filter += $"([tab_sovm] = {osnTab})";
             //}
-            if (!string.IsNullOrEmpty(filter)) gridView.ActiveFilterString = filter; //применяем фильтр если он не пустой
+            //
+            if (!string.IsNullOrEmpty(filter)) gridViewFio.ActiveFilterString = filter;
             
         }
 
@@ -218,8 +229,7 @@ namespace SewingProduction.form
 
         private void customButtonRed_Click(object sender, EventArgs e)
         {
-            GridView gridView = fioGrid.MainView as GridView;
-            string idFIO = gridView.GetFocusedRowCellValue(gridView.Columns["tab"]).ToString();
+            string idFIO = gridViewFio.GetFocusedRowCellValue(gridViewFio.Columns["tab"]).ToString();
             if (Convert.ToInt32(idFIO) < 1)
             {
                 MessageBox.Show("Табельный не найден или не выбран");
@@ -231,8 +241,8 @@ namespace SewingProduction.form
             if (f.ShowDialog() == DialogResult.OK)
             {
                 flagRed = true;
-                topRowIndex = gridView.TopRowIndex;
-                currentRowIndex = gridView.FocusedRowHandle;
+                topRowIndex = gridViewFio.TopRowIndex;
+                currentRowIndex = gridViewFio.FocusedRowHandle;
                 fioGrid_Load(sender, e);
             }
 

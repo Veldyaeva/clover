@@ -38,7 +38,7 @@
             this.customTextBoxInn = new SewingProduction.CustomTextBox();
             this.fioGrid = new DevExpress.XtraGrid.GridControl();
             this.fioList = new System.Windows.Forms.BindingSource(this.components);
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewFio = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tab = new DevExpress.XtraGrid.Columns.GridColumn();
             this.fio1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rab = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -104,7 +104,7 @@
             this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fioList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).BeginInit();
@@ -229,7 +229,7 @@
             this.fioGrid.EmbeddedNavigator.Appearance.Options.UseTextOptions = true;
             this.fioGrid.EmbeddedNavigator.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.fioGrid.Location = new System.Drawing.Point(3, 3);
-            this.fioGrid.MainView = this.gridView1;
+            this.fioGrid.MainView = this.gridViewFio;
             this.fioGrid.Name = "fioGrid";
             this.fioGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositorySovm,
@@ -240,84 +240,83 @@
             this.fioGrid.Size = new System.Drawing.Size(1258, 550);
             this.fioGrid.TabIndex = 6;
             this.fioGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridViewFio});
             this.fioGrid.Load += new System.EventHandler(this.fioGrid_Load);
-            this.fioGrid.Click += new System.EventHandler(this.fioGrid_Click);
             this.fioGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fioGrid_KeyUp);
             // 
-            // gridView1
+            // gridViewFio
             // 
-            this.gridView1.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
-            this.gridView1.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.Appearance.DetailTip.Options.UseTextOptions = true;
-            this.gridView1.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.EvenRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FilterCloseButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FilterPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FixedLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FocusedCell.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FocusedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FooterPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupFooter.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HideSelectionRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HorzLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HotTrackedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.OddRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.Preview.Options.UseTextOptions = true;
-            this.gridView1.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.Row.Options.UseTextOptions = true;
-            this.gridView1.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.SelectedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.TopNewRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.VertLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ViewCaption.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            this.gridView1.AppearancePrint.EvenRow.Options.UseBackColor = true;
-            this.gridView1.AppearancePrint.EvenRow.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.GroupRow.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gridView1.AppearancePrint.Row.Options.UseBorderColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewFio.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.Appearance.DetailTip.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.EvenRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FilterCloseButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FilterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FixedLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FocusedCell.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FocusedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupFooter.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.gridViewFio.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridViewFio.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HideSelectionRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HorzLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HotTrackedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.OddRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.Preview.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.Row.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.SelectedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.TopNewRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.VertLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ViewCaption.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            this.gridViewFio.AppearancePrint.EvenRow.Options.UseBackColor = true;
+            this.gridViewFio.AppearancePrint.EvenRow.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.GroupRow.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gridViewFio.AppearancePrint.Row.Options.UseBorderColor = true;
+            this.gridViewFio.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.tab,
             this.fio1,
             this.rab,
@@ -349,17 +348,18 @@
             this.spisok1c_id,
             this.spisok1c_orgName,
             this.spisok1c_podrName});
-            this.gridView1.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 768, 264, 272);
-            this.gridView1.GridControl = this.fioGrid;
-            this.gridView1.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.ReadOnly = true;
-            this.gridView1.OptionsPrint.EnableAppearanceEvenRow = true;
-            this.gridView1.OptionsPrint.ExpandAllGroups = false;
-            this.gridView1.OptionsPrint.PrintFooter = false;
-            this.gridView1.OptionsView.ColumnAutoWidth = false;
-            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.gridViewFio.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 768, 264, 272);
+            this.gridViewFio.GridControl = this.fioGrid;
+            this.gridViewFio.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.gridViewFio.Name = "gridViewFio";
+            this.gridViewFio.OptionsBehavior.ReadOnly = true;
+            this.gridViewFio.OptionsPrint.EnableAppearanceEvenRow = true;
+            this.gridViewFio.OptionsPrint.ExpandAllGroups = false;
+            this.gridViewFio.OptionsPrint.PrintFooter = false;
+            this.gridViewFio.OptionsView.ColumnAutoWidth = false;
+            this.gridViewFio.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewFio.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.gridViewFio.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewFio_FocusedRowChanged);
             // 
             // tab
             // 
@@ -1221,7 +1221,7 @@
             this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fioList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).EndInit();
@@ -1253,7 +1253,7 @@
         private CustomButton customButtonAdd;
         private System.Windows.Forms.BindingSource fioList;
         private DevExpress.XtraGrid.GridControl fioGrid;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewFio;
         private DevExpress.XtraGrid.Columns.GridColumn tab;
         private DevExpress.XtraGrid.Columns.GridColumn fio1;
         private DevExpress.XtraGrid.Columns.GridColumn rab;
