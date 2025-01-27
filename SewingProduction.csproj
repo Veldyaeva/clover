@@ -108,12 +108,17 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.5.3.4\lib\net46\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -207,6 +212,12 @@
     </Compile>
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork_ArchAndCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork_ArchAndCopy.Designer.cs">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -328,6 +339,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\PlanZagrBrig.resx">
       <DependentUpon>PlanZagrBrig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork_ArchAndCopy.resx">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>

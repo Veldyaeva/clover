@@ -17,7 +17,7 @@ namespace SewingProduction
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             using (SplashScreen splash = new SplashScreen())
             {
                 splash.Show();

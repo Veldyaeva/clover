@@ -4,6 +4,9 @@
 
     partial class ACE_backupDataSet
     {
+        partial class art_norm_nDataTable
+        {
+        }
     }
 }
 

@@ -237,7 +237,7 @@ namespace SewingProduction
         public void ApplyTheme()
         {
             this.BackColor = Color.Transparent;
-            this.ForeColor = ThemeManager.ActiveTheme.LabelText;
+            this.ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
         }
         private void OnThemeChanged()

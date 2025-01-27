@@ -15,8 +15,8 @@ namespace SewingProduction
         {
             DefaultFont = new Font("Arial", 10, FontStyle.Regular),
             ButtonRoundRadius = 5,
-            ButtonHeight = 30,
-            TextBoxHeight = 20
+            ButtonHeight = 25,
+            TextBoxHeight = 25
         };
 
         // Переменные для текущей темы
@@ -140,6 +140,8 @@ namespace SewingProduction
             // Цвета для кнопок
             ButtonBackground = Color.FromArgb(173, 216, 230), // LightBlue
             ButtonTextColor = Color.FromArgb(25, 25, 112), // MidnightBlue
+            // Цвета для Label
+            LabelTextColor = Color.FromArgb(25, 25,112),
             // Цвета для текстовых полей
             TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
             TextBoxText = Color.FromArgb(0, 0, 139), // DarkBlue
@@ -179,6 +181,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(255, 235, 205), // BlanchedAlmond
             ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
+            LabelTextColor = Color.FromArgb (139,69,19),
             TextBoxBackground = Color.FromArgb(250, 240, 230), // Linen
             TextBoxText = Color.FromArgb(105, 75, 45), // BrownShade
             HighlightBackground = Color.FromArgb(245, 222, 179), // Wheat
@@ -192,6 +195,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(230, 230, 250), // Lavender
             ButtonTextColor = Color.FromArgb(72, 61, 139), // DarkSlateBlue
+            LabelTextColor = Color.FromArgb(72, 61,139),
             TextBoxBackground = Color.FromArgb(245, 245, 250), // SoftLavender
             TextBoxText = Color.FromArgb(85, 45, 115), // DeepLavender
             HighlightBackground = Color.FromArgb(240, 230, 250), // LightLavender
@@ -205,6 +209,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(255, 223, 196), // LightPeach
             ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
+            LabelTextColor = Color.FromArgb(139, 69, 19), 
             TextBoxBackground = Color.FromArgb(255, 245, 230), // LightPapaya
             TextBoxText = Color.FromArgb(120, 60, 30), // BrownShade
             HighlightBackground = Color.FromArgb(255, 228, 200), // SoftPeach
@@ -218,6 +223,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(173, 216, 230), // LightBlue
             ButtonTextColor = Color.FromArgb(0, 105, 148), // SeaBlue
+            LabelTextColor = Color.FromArgb(0, 105, 148), // SeaBlue
             TextBoxBackground = Color.FromArgb(240, 248, 255), // AliceBlue
             TextBoxText = Color.FromArgb(25, 25, 112), // MidnightBlue
             HighlightBackground = Color.FromArgb(200, 230, 240), // SoftBlue
@@ -231,6 +237,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(200, 230, 210), // SoftGreen
             ButtonTextColor = Color.FromArgb(64, 115, 79), // DeepGreen
+            LabelTextColor = Color.FromArgb(64, 115, 79), // DeepGreen
             TextBoxBackground = Color.FromArgb(245, 255, 250), // LightMint
             TextBoxText = Color.FromArgb(45, 90, 60), // ForestGreen
             HighlightBackground = Color.FromArgb(220, 240, 230), // CalmMint
@@ -244,6 +251,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(255, 192, 203), // LightPink
             ButtonTextColor = Color.FromArgb(139, 0, 139), // DarkMagenta
+            LabelTextColor = Color.FromArgb(139, 0, 139), // DarkMagenta
             TextBoxBackground = Color.FromArgb(255, 228, 232), // BlushPink
             TextBoxText = Color.FromArgb(75, 0, 130), // Indigo
             HighlightBackground = Color.FromArgb(255, 240, 245), // SoftBlush
@@ -257,6 +265,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(255, 200, 150), // SoftOrange
             ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
+            LabelTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
             TextBoxBackground = Color.FromArgb(255, 245, 230), // LightPapaya
             TextBoxText = Color.FromArgb(120, 60, 30), // DeepBrown
             HighlightBackground = Color.FromArgb(255, 225, 180), // LightOrange
@@ -269,6 +278,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(139, 0, 26), // DeepWine
             ButtonTextColor = Color.FromArgb(255, 245, 238), // SoftWhite
+            LabelTextColor = Color.FromArgb(255, 245, 238), // SoftWhite
             TextBoxBackground = Color.FromArgb(245, 222, 179), // Wheat
             TextBoxText = Color.FromArgb(85, 26, 139), // DarkPurple
             HighlightBackground = Color.FromArgb(160, 0, 30), // GentleRed
@@ -282,6 +292,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(200, 225, 255), // SoftSkyBlue
             ButtonTextColor = Color.FromArgb(30, 70, 140), // DeepSkyBlue
+            LabelTextColor = Color.FromArgb(30, 70, 140), // DeepSkyBlue
             TextBoxBackground = Color.FromArgb(230, 245, 255), // LightSky
             TextBoxText = Color.FromArgb(50, 90, 160), // CoolBlue
             HighlightBackground = Color.FromArgb(220, 235, 250), // GentleSky
@@ -295,6 +306,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(210, 245, 230), // SoftMint
             ButtonTextColor = Color.FromArgb(30, 90, 70), // DeepMint
+            LabelTextColor = Color.FromArgb(30, 90, 70), // DeepMint
             TextBoxBackground = Color.FromArgb(230, 255, 240), // LightMint
             TextBoxText = Color.FromArgb(40, 100, 80), // CoolGreen
             HighlightBackground = Color.FromArgb(200, 240, 220), // GentleMint
@@ -308,6 +320,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(245, 222, 179), // SoftSand
             ButtonTextColor = Color.FromArgb(105, 70, 40), // DeepSand
+            LabelTextColor = Color.FromArgb(105, 70, 40), // DeepSand
             TextBoxBackground = Color.FromArgb(255, 245, 230), // LightSand
             TextBoxText = Color.FromArgb(120, 80, 50), // GentleBrown
             HighlightBackground = Color.FromArgb(235, 215, 175), // CalmSand
@@ -321,6 +334,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(225, 200, 230), // SoftLilac
             ButtonTextColor = Color.FromArgb(90, 50, 120), // DeepLilac
+            LabelTextColor = Color.FromArgb(90, 50, 120), // DeepLilac
             TextBoxBackground = Color.FromArgb(240, 220, 245), // LightLilac
             TextBoxText = Color.FromArgb(80, 40, 100), // CoolPurple
             HighlightBackground = Color.FromArgb(230, 210, 240), // GentleLilac
@@ -334,6 +348,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(255, 200, 150), // SoftSunset
             ButtonTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
+            LabelTextColor = Color.FromArgb(139, 69, 19), // SaddleBrown
             TextBoxBackground = Color.FromArgb(255, 240, 230), // WarmPeach
             TextBoxText = Color.FromArgb(110, 50, 25), // DeepCoral
             HighlightBackground = Color.FromArgb(255, 220, 190), // GentleSunset
@@ -347,6 +362,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(200, 230, 200), // SoftForest
             ButtonTextColor = Color.FromArgb(34, 85, 34), // DeepForest
+            LabelTextColor = Color.FromArgb(34, 85, 34), // DeepForest
             TextBoxBackground = Color.FromArgb(240, 250, 240), // LightForest
             TextBoxText = Color.FromArgb(45, 90, 45), // GentleGreen
             GridBackground = Color.FromArgb(240, 250, 240), // GentleMint
@@ -362,6 +378,7 @@ namespace SewingProduction
         {
             ButtonBackground = Color.FromArgb(180, 220, 240), // SoftOcean
             ButtonTextColor = Color.FromArgb(20, 70, 100), // DeepOcean
+            LabelTextColor = Color.FromArgb(20, 70, 100), // DeepOcean
             TextBoxBackground = Color.FromArgb(220, 240, 250), // LightOcean
             TextBoxText = Color.FromArgb(25, 75, 105), // CoolBlue
             HighlightBackground = Color.FromArgb(200, 220, 240), // GentleOcean

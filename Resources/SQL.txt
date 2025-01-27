@@ -40,3 +40,68 @@ WHERE art_norm_n.kod = SUBSTRING(norm_dop_obr.kod, 1, 7)
 UPDATE art_norm_n SET STATUS = 1 WHERE SUBSTRING(kod, 1,1)=9 AND arh = 0
 UPDATE art_norm_n SET STATUS = 2 WHERE SUBSTRING(kod, 1, 1)!=9 AND arh = 0
 UPDATE art_norm_n SET STATUS = 3 WHERE arh = 1
+
+
+Создание таблицы кодов производства
+CREATE TABLE ACE_backup.dbo.Kod_proizv (
+  kod_proizv INT IDENTITY
+ ,text_proizv VARCHAR(15) NULL
+ ,CONSTRAINT PK_Kod_proizv_kod_proizv PRIMARY KEY CLUSTERED (kod_proizv)
+) ON [PRIMARY]
+GO
+USE ACE_backup
+GO
+
+INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'швейное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'вязальное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'квк'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'носки'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'кручение'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'раскройный'
+);
+GO
+
+Создание таблицы подразделений
+CREATE TABLE ACE_backup.dbo.podr_vyaz (
+  kod_vyaz INT IDENTITY
+ ,text_vyaz VARCHAR(50) NULL
+ ,kod_proizv INT NULL
+ ,CONSTRAINT PK_podr_vyaz_kod_vyaz PRIMARY KEY CLUSTERED (kod_vyaz)
+) ON [PRIMARY]
+GO
