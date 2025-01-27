@@ -301,10 +301,10 @@ namespace SewingProduction
             this.MainView = CustomView;
             this.ViewCollection.Add(CustomView);
             //// Применяем начальную тему
-            //ApplyTheme();
-
             //// Подписываемся на изменения темы
-            //Theme.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
+
         }
 
         public void ApplyTheme()
@@ -312,25 +312,31 @@ namespace SewingProduction
             // Применяем тему к GridControl (например, цвет фона)
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.LookAndFeel.UseDefaultLookAndFeel = false;
-            //this.BackColor = ActiveTheme.GridBackground;
+            this.BackColor = ActiveTheme.GridBackground;
 
             //// Применяем тему к связанному GridView
             //CustomView.ApplyTheme();
+            this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
+
         }
+
 
         private void OnThemeChanged()
         {
             ApplyTheme();
+            Invalidate(); // Перерисовка текстового поля
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                //  Theme.ThemeChanged -= OnThemeChanged;
+                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
+
     }
 
     public class CustomGridView : GridView
