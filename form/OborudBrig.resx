@@ -369,10 +369,10 @@
   <data name="&gt;&gt;bindingBrig.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gridView1.Name" xml:space="preserve">
-    <value>gridView1</value>
+  <data name="&gt;&gt;gridViewBrig.Name" xml:space="preserve">
+    <value>gridViewBrig</value>
   </data>
-  <data name="&gt;&gt;gridView1.Type" xml:space="preserve">
+  <data name="&gt;&gt;gridViewBrig.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingZeh.Name" xml:space="preserve">
@@ -381,10 +381,10 @@
   <data name="&gt;&gt;bindingZeh.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gridView2.Name" xml:space="preserve">
-    <value>gridView2</value>
+  <data name="&gt;&gt;gridViewZeh.Name" xml:space="preserve">
+    <value>gridViewZeh</value>
   </data>
-  <data name="&gt;&gt;gridView2.Type" xml:space="preserve">
+  <data name="&gt;&gt;gridViewZeh.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingOborud.Name" xml:space="preserve">
@@ -393,10 +393,10 @@
   <data name="&gt;&gt;bindingOborud.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;gridView3.Name" xml:space="preserve">
-    <value>gridView3</value>
+  <data name="&gt;&gt;gridViewOborud.Name" xml:space="preserve">
+    <value>gridViewOborud</value>
   </data>
-  <data name="&gt;&gt;gridView3.Type" xml:space="preserve">
+  <data name="&gt;&gt;gridViewOborud.Type" xml:space="preserve">
     <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

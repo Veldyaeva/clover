@@ -361,6 +361,60 @@ namespace SewingProduction
 
 
     }
+    public class CustomGroupBox : GroupBox
+    {
+        private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
+        private int _borderThickness = 1;       // Толщина обводки по умолчанию
+
+        // Свойство для установки цвета обводки
+        public Color BorderColor
+        {
+            get { return _borderColor; }
+            set { _borderColor = value; Invalidate(); }
+        }
+
+        // Свойство для установки толщины обводки
+        public int BorderThickness
+        {
+            get { return _borderThickness; }
+            set { _borderThickness = value; Invalidate(); }
+        }
+
+        // Переопределение метода OnPaint для рисования обводки
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e); //рисуем всё что есть в дефолтном GroupBox
+            // Рисуем границу
+            using (Pen borderPen = new Pen(_borderColor, _borderThickness))
+            {
+                // Определение прямоугольника для обводки
+                var rect = new Rectangle(ClientRectangle.X , ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
+                rect.X += _borderThickness / 2 ;
+                rect.Y += _borderThickness / 2;
+
+                //e.Graphics.DrawRectangle(borderPen, rect);
+
+                // Замеряем размер текста
+                SizeF textSize = e.Graphics.MeasureString(Text, Font);
+                int textBottomY = (int)textSize.Height;
+                // рисуем границу
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + textBottomY, rect.X, rect.Y + rect.Height); //Левая полоса
+                e.Graphics.DrawLine(borderPen, rect.X + rect.Width, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + rect.Height); // Правая
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + textBottomY); // Верхняя
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height); // Нижняя
+                //e.Graphics.DrawLine(borderPen, rect.X + (int)rect.Width / 2 + (int)textSize.Width / 2 + 5, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + textBottomY);
+
+            }
+        }
+        public CustomGroupBox()
+        {
+            this.BackColor = Color.Transparent;
+            this.ForeColor = Theme.TextBoxText;
+            this.Font = Theme.DefaultFont;
+        }
+
+    }
+    // Класс для формы с использованием базовых компонентов
 
     // Кастомная форма с градиентным фоном
     public class CustomForm : Form
@@ -431,6 +485,7 @@ namespace SewingProduction
                 switch (_serv.ToLower())
                 {
                     case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
+                    case "ace_test": _connStr = Properties.Settings.Default.ACEtestConnectionString; break;
                     case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
                     case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
                 }
@@ -463,6 +518,56 @@ namespace SewingProduction
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return dT;
+        }
+        protected void ShowRelatedComboBox(CustomComboBox comboBox, string _serv, string query, string displayMember, string valueMember)
+        {
+            try
+            {
+                DataTable dataTable = ShowRelatedData(_serv, query);
+                if (dataTable != null)
+                {
+                    comboBox.DataSource = dataTable;
+                    comboBox.DisplayMember = displayMember;
+                    comboBox.ValueMember = valueMember;
+                }
+                else
+                {
+                    comboBox.DataSource = null;
+                    comboBox.Items.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при создании ComboBox: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        //Универсальный метод для выполнения INSERT, UPDATE, DELETE запросов
+        protected void ExecuteNonQuery(string _serv, string query, params SqlParameter[] parameters)
+        {
+            string connectionString = "";
+            switch (_serv.ToLower())
+            {
+                case "ace": connectionString = Properties.Settings.Default.ACEConnectionString; break;
+                case "ace_test": connectionString = Properties.Settings.Default.ACEtestConnectionString; break;
+                case "oms": connectionString = Properties.Settings.Default.OMSConnectionString; break;
+                case "global": connectionString = Properties.Settings.Default.GlobalConnectionString; break;
+            }
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null) command.Parameters.AddRange(parameters);
+                    connection.Open();
+                    int rowsAffected = command.ExecuteNonQuery();
+                    connection.Close();
+
+                    if (rowsAffected < 0)
+                    {
+                        MessageBox.Show($"Ошибка при выполнении запроса: {command.CommandText}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        throw new Exception($"Error executing query: {command.CommandText}");
+                    }
+                }
+            }
         }
 
 

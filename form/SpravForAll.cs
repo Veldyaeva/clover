@@ -101,6 +101,7 @@ namespace SewingProduction.form
                     dataAdapter.Fill(tableList);
                     foreach (DataRow row in tableList.Rows)
                     {
+                        Debug.WriteLine($"{row["name_rus"].ToString()}");
                         eng_rus.Add(row["name"].ToString(), row["name_rus"].ToString());
                         rus_eng.Add(row["name_rus"].ToString(), row["name"].ToString());
                         eng_type.Add(row["name"].ToString(), row["data_type"].ToString());
@@ -182,8 +183,8 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"Error loading rus name: {ex.Message}");
-                MessageBox.Show($"Ошибка загрузки русских имен {ex.Message}");
+                Debug.WriteLine($"Error loading gridSprav_Load: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки таблицы: {ex.Message}");
             }
         }
         // Отображение лейблов и текстбоксов в нужном кол-е
