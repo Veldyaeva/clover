@@ -123,9 +123,6 @@
   <metadata name="aCEDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>1301, 17</value>
   </metadata>
-  <metadata name="aCEDataSet.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>1301, 17</value>
-  </metadata>
   <metadata name="artnormnBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 54</value>
   </metadata>
@@ -147,12 +144,6 @@
   <metadata name="fioBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>497, 93</value>
   </metadata>
-  <metadata name="fioBindingSource1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>497, 93</value>
-  </metadata>
-  <metadata name="fioBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>215, 93</value>
-  </metadata>
   <metadata name="fioBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>215, 93</value>
   </metadata>
@@ -169,7 +160,7 @@
   <data name="simpleButton1.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        vQAADr0BR/uQrQAAANRJREFUWEftlE8OwUAUh5tI2HMGFhY4A67gNhbCgbBxD8IRJC4hfD/JJJPJo1Mj
+        vAAADrwBlbxySQAAANRJREFUWEftlE8OwUAUh5tI2HMGFhY4A67gNhbCgbBxD8IRJC4hfD/JJJPJo1Mj
         Vu9LvkWn71+n7VSO4zhOBj2cYet1lYdi56jcYk74wD22tVCDYhSrnKMWSrmgiuUMETeXZyymj1cMRQ/Y
         wRQ132GIu+EQGzHBheES7xiKpzuRPrlilWPVGqOJbsRN6lxhYINWjKV6mEOUDLBGK8ZSPUZooiGsbfvL
         K3jHAHM/wi2GuK8+QouS31C5xegwyWkeiIf4yUHUxSk2PYqVo1zHcRznA1X1BKLKb2G2SUdrAAAAAElF
