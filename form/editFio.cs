@@ -27,12 +27,14 @@ namespace SewingProduction.form
         string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
         //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        private ToolTip toolTip = new ToolTip();
         public editFio(string idFIO, string openType)
         {
             InitializeComponent();
             //Имя формы:
             this.Text = openType;
             customTextBoxTab.Text = idFIO;
+            toolTipButton();
         }
 
         private void editFio_Load(object sender, EventArgs e)
@@ -52,9 +54,13 @@ namespace SewingProduction.form
                 comboOneTableItems(customComboBoxOb,     "SELECT TRIM(fvr_name)   FROM fio_vid_rabot  ORDER BY fvr_kod", connectionCombo, true);
                 comboOneTableItems(customComboBoxPodr,   "SELECT TRIM(name)       FROM brig_object    ORDER BY gr", connectionCombo, true);
                 comboOneTableItems(customComboBoxNTab,   "SELECT TRIM(naimen)     FROM tab_n          ORDER BY naimen", connectionCombo, true);
-                comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c) FROM spbrig", connectionCombo,true);
+                comboOneTableItems(customComboBoxNved,   "SELECT TRIM(name)       FROM brig_ved       ORDER BY name", connectionCombo, true);
+                comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c)  FROM spbrig", connectionCombo, true);
+                comboOneTableItems(customComboBox1Cpodr, "SELECT DISTINCT TRIM(name)        FROM podr1C", connectionCombo, true);
+                comboOneTableItems(customComboBox1Cdolg, "SELECT DISTINCT TRIM(name)        FROM dolg1C", connectionCombo, true);
             }
         }
+        
         private void comboOneTableItems(System.Windows.Forms.ComboBox comboBox,string query, SqlConnection connection, bool allOrOne)
         {
             /* comboBox: сам комбобокс
@@ -130,7 +136,6 @@ namespace SewingProduction.form
                     customTextBoxMast.Text = tableList.Rows[0]["mast"].ToString();
                     customTextBoxPodr.Text = tableList.Rows[0]["okl"].ToString();
                     customTextBoxNTabVed.Text = tableList.Rows[0]["tab_new"].ToString();
-                    customTextBoxPom.Text = tableList.Rows[0]["po"].ToString();
                     customTextBoxTelRab.Text = tableList.Rows[0]["tel_r"].ToString();
                     customTextBoxTelDom.Text = tableList.Rows[0]["tel_d"].ToString();
                     // inn
@@ -151,12 +156,24 @@ namespace SewingProduction.form
                         $"SELECT TRIM(name) AS nameColumn FROM brig_object WHERE brig_object.gr =  '{tableList.Rows[0]["gr"].ToString()}'",
                         connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ftabn"].ToString()))
-                        comboOneTableItems(customComboBoxNTab, 
+                        comboOneTableItems(customComboBoxNTab,
                         $"SELECT TRIM(naimen) AS nameColumn FROM tab_n WHERE tab_n.tnid =  {tableList.Rows[0]["ftabn"].ToString()}",
+                        connection, false);
+                    if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ved"].ToString()))
+                        comboOneTableItems(customComboBoxNved,
+                        $"SELECT TRIM(name) AS nameColumn FROM brig_ved WHERE brig_ved.vdID =  {tableList.Rows[0]["ved"].ToString()}",
                         connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_1c_id"].ToString()))
                         comboOneTableItems(customComboBoxPodr1c,
                         $"SELECT DISTINCT TRIM(podrname1c) AS nameColumn FROM spbrig WHERE spbrig.podrid1c = '{tableList.Rows[0]["podr_1c_id"].ToString()}'",
+                        connection, false);
+                    if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_id"].ToString()))
+                        comboOneTableItems(customComboBox1Cpodr,
+                        $"SELECT DISTINCT TRIM(name) AS nameColumn FROM podr1C WHERE podr1C.id = '{tableList.Rows[0]["podr_id"].ToString()}'",
+                        connection, false);
+                    if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["dolg_id"].ToString()))
+                        comboOneTableItems(customComboBox1Cdolg,
+                        $"SELECT DISTINCT TRIM(name) AS nameColumn FROM dolg1C WHERE dolg1C.id = '{tableList.Rows[0]["dolg_id"].ToString()}'",
                         connection, false);
 
                 }
@@ -202,6 +219,7 @@ namespace SewingProduction.form
         }
         private void newUser()
         {
+            customTextBoxFIO.Text = "";
         }
         //Проверка на заполенность данных
         string proverkaZap(TextBox FIO, MaskedTextBox DatePriem, ComboBox Org, ComboBox Dolj)
@@ -239,37 +257,40 @@ namespace SewingProduction.form
                                 "rab = @rab, " +
                                 "mast = CASE WHEN @OrgName IS NULL THEN NULL ELSE (SELECT sf.kod FROM sp_firms sf WHERE sf.name = @OrgName) END, " +
                                 "f_fvr_kod = CASE WHEN @ObName IS NULL THEN NULL ELSE (SELECT fvr.fvr_kod FROM fio_vid_rabot fvr WHERE fvr.fvr_name = @ObName) END, " +
-                                 "gr = CASE WHEN @PodrName IS NULL THEN NULL ELSE (SELECT bo.gr FROM brig_object bo WHERE bo.name = @PodrName) END, " +
+                                "gr = CASE WHEN @PodrName IS NULL THEN NULL ELSE (SELECT bo.gr FROM brig_object bo WHERE bo.name = @PodrName) END, " +
                                 "ftabn = CASE WHEN @NTabName IS NULL THEN NULL ELSE (SELECT tn.tnid FROM tab_n tn WHERE tn.naimen = @NTabName) END, " +
                                 "podr_1c_id = CASE WHEN @Podr1cName IS NULL THEN NULL ELSE (SELECT sb.podrid1c FROM spbrig sb WHERE sb.podrname1c = @Podr1cName) END, " +
-                                 "tab_sovm = @tab_sovm, " +
-                                 "tab1c = @tab1c, " +
+                                "podr_id = CASE WHEN @1CpodrID IS NULL THEN NULL ELSE @1CpodrID END, " +
+                                "dolg_id = CASE WHEN @1CdolgID IS NULL THEN NULL ELSE @1CdolgID END, " +
+                                "tab_sovm = @tab_sovm, " +
+                                "tab1c = @tab1c, " +
                                 "ved = @ved, " +
                                 "fgrd = @fgrd, " +
                                 "ftabnsort = @ftabnsort, " +
                                 "okl = @okl, " +
                                 "tab_new = @tab_new, " +
-                                "po = @po, " +
-                                 "tel_r = @tel_r, " +
-                                 "tel_d = @tel_d, " +
+                                "tel_r = @tel_r, " +
+                                "tel_d = @tel_d, " +
                                 "sovm = @sovm, " +
                                 "sdel = @sdel, " +
-                                 "itr = @itr, " +
+                                "itr = @itr, " +
                                 "dekret = @dekret " +
-                                 " WHERE tab = @tab";
+                                " WHERE tab = @tab";
                         }
                         else
                         {
                             // Запрос на добавление нового сотрудника:
-                            queryFio = "INSERT INTO fio (fio, tel_s, bday, data_p, datau, rab, mast, f_fvr_kod, gr, ftabn, podr_1c_id, tab_sovm, tab1c," +
-                                        " ved, fgrd, ftabnsort, okl, tab_new, po, tel_r, tel_d, sovm, sdel, itr, dekret, tab) " +
+                            queryFio = "INSERT INTO fio (fio, tel_s, bday, data_p, datau, rab, mast, f_fvr_kod, gr, ftabn, podr_1c_id, podr_id, dolg_id," +
+                                        " tab_sovm, tab1c, ved, fgrd, ftabnsort, okl, tab_new,  tel_r, tel_d, sovm, sdel, itr, dekret, komp_name, tab) " +
                                         "VALUES (@fio, @tel_s, @bday, @data_p, @datau, @rab, " +
                                         "CASE WHEN @OrgName IS NULL THEN NULL ELSE (SELECT sf.kod FROM sp_firms sf WHERE sf.name = @OrgName) END, " +
                                         "CASE WHEN @ObName IS NULL THEN NULL ELSE (SELECT fvr.fvr_kod FROM fio_vid_rabot fvr WHERE fvr.fvr_name = @ObName) END, " +
                                         "CASE WHEN @PodrName IS NULL THEN NULL ELSE (SELECT bo.gr FROM brig_object bo WHERE bo.name = @PodrName) END, " +
                                         "CASE WHEN @NTabName IS NULL THEN NULL ELSE (SELECT tn.tnid FROM tab_n tn WHERE tn.naimen = @NTabName) END, " +
                                         "CASE WHEN @Podr1cName IS NULL THEN NULL ELSE (SELECT sb.podrid1c FROM spbrig sb WHERE sb.podrname1c = @Podr1cName) END, " +
-                                        "@tab_sovm, @tab1c, @ved, @fgrd, @ftabnsort, @okl, @tab_new, @po, @tel_r, @tel_d, @sovm, @sdel, @itr, @dekret, "  + 
+                                        "CASE WHEN @1CpodrID IS NULL THEN NULL ELSE @1CpodrID END, " +
+                                        "CASE WHEN @1CdolgID IS NULL THEN NULL ELSE @1CdolgID END, " +
+                                        "@tab_sovm, @tab1c, @ved, @fgrd, @ftabnsort, @okl, @tab_new,  @tel_r, @tel_d, @sovm, @sdel, @itr, @dekret, @komp_name, " + 
                                         "(SELECT MAX(tab)+1 FROM fio))"; 
                         }
                         //определение данных в запрос и его выполенине
@@ -278,14 +299,19 @@ namespace SewingProduction.form
                                 command.Parameters.AddWithValue("@fio", customTextBoxFIO.Text); 
                                 command.Parameters.AddWithValue("@tel_s", customMaskedTextBoxTelSot.Text.Replace(" ", ""));
                                 command.Parameters.AddWithValue("@bday", dateRozd.Value);
-                                command.Parameters.AddWithValue("@data_p", string.IsNullOrWhiteSpace(customMaskedTextBoxDatePriem.Text) ? (object)DBNull.Value : DateTime.ParseExact(customMaskedTextBoxDatePriem.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture));
-                                command.Parameters.AddWithValue("@datau", string.IsNullOrWhiteSpace(customMaskedTextBoxDateYvoln.Text) ? (object)DBNull.Value : (customMaskedTextBoxDateYvoln.Text == "  .  ." ? (object)DBNull.Value : DateTime.ParseExact(customMaskedTextBoxDateYvoln.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture)));
+                                command.Parameters.AddWithValue("@data_p", string.IsNullOrWhiteSpace(customMaskedTextBoxDatePriem.Text) ? (object)DBNull.Value : 
+                                    DateTime.ParseExact(customMaskedTextBoxDatePriem.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture));
+                                command.Parameters.AddWithValue("@datau", string.IsNullOrWhiteSpace(customMaskedTextBoxDateYvoln.Text) ? (object)DBNull.Value : 
+                                    (customMaskedTextBoxDateYvoln.Text == "  .  ." ? (object)DBNull.Value : 
+                                    DateTime.ParseExact(customMaskedTextBoxDateYvoln.Text, "dd.MM.yyyy", CultureInfo.InvariantCulture)));
                                 command.Parameters.AddWithValue("@rab", string.IsNullOrWhiteSpace(customComboBoxDolj.Text) ? (object)DBNull.Value : customComboBoxDolj.Text.Trim());
                                 command.Parameters.AddWithValue("@OrgName", string.IsNullOrWhiteSpace(customComboBoxOrg.Text) ? (object)DBNull.Value : customComboBoxOrg.Text.Trim());
                                 command.Parameters.AddWithValue("@ObName", string.IsNullOrWhiteSpace(customComboBoxOb.Text) ? (object)DBNull.Value : customComboBoxOb.Text.Trim());
                                 command.Parameters.AddWithValue("@PodrName", string.IsNullOrWhiteSpace(customComboBoxPodr.Text) ? (object)DBNull.Value : customComboBoxPodr.Text.Trim());
                                 command.Parameters.AddWithValue("@NTabName", string.IsNullOrWhiteSpace(customComboBoxNTab.Text) ? (object)DBNull.Value : customComboBoxNTab.Text.Trim());
                                 command.Parameters.AddWithValue("@Podr1cName", string.IsNullOrWhiteSpace(customComboBoxPodr1c.Text) ? (object)DBNull.Value : customComboBoxPodr1c.Text.Trim());
+                                command.Parameters.AddWithValue("@1CpodrID", string.IsNullOrWhiteSpace(customTextBox1CpodrID.Text) ? (object)DBNull.Value : customTextBox1CpodrID.Text.Trim());
+                                command.Parameters.AddWithValue("@1CdolgID", string.IsNullOrWhiteSpace(customTextBox1CdolgID.Text) ? (object)DBNull.Value : customTextBox1CdolgID.Text.Trim());
                                 command.Parameters.AddWithValue("@tab_sovm", string.IsNullOrWhiteSpace(customTextBoxOsnTab.Text) ? (object)DBNull.Value : customTextBoxOsnTab.Text);
                                 command.Parameters.AddWithValue("@tab1c", string.IsNullOrWhiteSpace(customTextBoxTab1с.Text) ? (object)DBNull.Value : customTextBoxTab1с.Text);
                                 command.Parameters.AddWithValue("@ved", string.IsNullOrWhiteSpace(customTextBoxNved.Text) ? (object)DBNull.Value : customTextBoxNved.Text);
@@ -293,13 +319,13 @@ namespace SewingProduction.form
                                 command.Parameters.AddWithValue("@ftabnsort", string.IsNullOrWhiteSpace(customTextBoxSorted.Text) ? (object)DBNull.Value : customTextBoxSorted.Text);
                                 command.Parameters.AddWithValue("@okl", string.IsNullOrWhiteSpace(customTextBoxPodr.Text) ? (object)DBNull.Value : customTextBoxPodr.Text);
                                 command.Parameters.AddWithValue("@tab_new", string.IsNullOrWhiteSpace(customTextBoxNTabVed.Text) ? (object)DBNull.Value : customTextBoxNTabVed.Text);
-                                command.Parameters.AddWithValue("@po", string.IsNullOrWhiteSpace(customTextBoxPom.Text) ? (object)DBNull.Value : customTextBoxPom.Text);
                                 command.Parameters.AddWithValue("@tel_r", string.IsNullOrWhiteSpace(customTextBoxTelRab.Text) ? (object)DBNull.Value : customTextBoxTelRab.Text);
                                 command.Parameters.AddWithValue("@tel_d", string.IsNullOrWhiteSpace(customTextBoxTelDom.Text) ? (object)DBNull.Value : customTextBoxTelDom.Text);
                                 command.Parameters.AddWithValue("@sovm", customCheckBoxSovm.Checked);
                                 command.Parameters.AddWithValue("@sdel", customCheckBoxSdel.Checked);
                                 command.Parameters.AddWithValue("@itr", customCheckBoxITR.Checked);
                                 command.Parameters.AddWithValue("@dekret", customCheckBoxDekret.Checked);
+                                command.Parameters.AddWithValue("@komp_name", System.Environment.MachineName);
                                 command.Parameters.AddWithValue("@tab", customTextBoxTab.Text == "АВТО" ? (object)DBNull.Value : customTextBoxTab.Text);
 
                                 connection.Open();
@@ -356,9 +382,19 @@ namespace SewingProduction.form
             clearComboBox(customComboBoxNTab);
         }
 
-        private void customButtonXPodr1c_Click(object sender, EventArgs e)
+        private void customButtonXNved_Click(object sender, EventArgs e)
         {
-            clearComboBox(customComboBoxPodr1c);
+            clearComboBox(customComboBoxNved);
+        }
+        private void customButton1Cpodr_Click(object sender, EventArgs e)
+        {
+            clearComboBox(customComboBox1Cpodr);
+
+        }
+        private void customButton1Cdolg_Click(object sender, EventArgs e)
+        {
+            clearComboBox(customComboBox1Cdolg);
+
         }
         private void clearComboBox(System.Windows.Forms.ComboBox comboBox)
         {
@@ -378,28 +414,64 @@ namespace SewingProduction.form
         /* АВТОЗАПОЛНЕНИЕ ТЕКСТБОКСОВ ПОСЛЕ ВЫБОРКИ В КОМБОБОКСАХ */
         private void customComboBoxNTab_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection connectionCombo = new SqlConnection(connectionString))
-            {
-                string query = $"SELECT tnid AS nameColumn FROM tab_n WHERE tab_n.naimen =  '{customComboBoxNTab.Text}'";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionCombo);
-                System.Data.DataTable tableList = new System.Data.DataTable();
-                dataAdapter.Fill(tableList);
-                customTextBoxNTab.Text = tableList.Rows[0]["nameColumn"].ToString();
-            }
+            string query = $"SELECT tnid AS nameColumn FROM tab_n WHERE tab_n.naimen =  '{customComboBoxNTab.Text}'";
+            FillTextBoxesFromComboBox(query, customComboBoxNTab, (customTextBoxNTab, "nameColumn"));
         }
 
         private void customComboBoxOrg_SelectedIndexChanged(object sender, EventArgs e)
         {
-            using (SqlConnection connectionOrg = new SqlConnection(connectionString))
-            {
-                string query = $"SELECT sp_firms.kod AS nameColumn FROM sp_firms WHERE sp_firms.name =  '{customComboBoxOrg.Text}'";
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionOrg);
-                System.Data.DataTable tableList = new System.Data.DataTable();
-                dataAdapter.Fill(tableList);
-                customTextBoxMast.Text = tableList.Rows[0]["nameColumn"].ToString();
-            }
+            string query = $"SELECT sp_firms.kod AS nameColumn FROM sp_firms WHERE sp_firms.name =  '{customComboBoxOrg.Text}'";
+            FillTextBoxesFromComboBox(query, customComboBoxOrg, (customTextBoxMast, "nameColumn"));
+        }
+        private void customComboBoxNved_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = $"SELECT brig_ved.vdID AS nameColumn FROM brig_ved WHERE brig_ved.name =  '{customComboBoxNved.Text}'";
+            FillTextBoxesFromComboBox(query, customComboBoxNved, (customTextBoxNved, "nameColumn"));
         }
 
+        private void customComboBox1Cpodr_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = $"SELECT id,inn FROM podr1c WHERE podr1c.name =  '{customComboBox1Cpodr.Text}'";
+            FillTextBoxesFromComboBox(query, customComboBox1Cpodr, (customTextBox1CpodrID, "id"), (customTextBox1CpodrINN, "inn"));
+        }
+
+        private void customComboBox1Cdolg_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string query = $"SELECT id,inn FROM dolg1c WHERE dolg1c.name =  '{customComboBox1Cdolg.Text}'";
+            FillTextBoxesFromComboBox(query, customComboBox1Cdolg, (customTextBox1CdolgID, "id"), (customTextBox1CdolgINN, "inn"));
+        }
+        // Общий метод для выполнения запроса и заполнения текстовых полей
+        private void FillTextBoxesFromComboBox(string query, ComboBox comboBox, params (TextBox, string)[] textBoxes)
+        {
+            using (SqlConnection connectionCombo = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionCombo);
+                    DataTable tableList = new DataTable();
+                    dataAdapter.Fill(tableList);
+
+                    if (tableList?.Rows.Count > 0)
+                    {
+                        foreach (var (textBox, columnName) in textBoxes)
+                        {
+                            textBox.Text = tableList.Rows[0][columnName]?.ToString()?.Trim() ?? string.Empty;
+                        }
+                    }
+                    else
+                    {
+                        foreach (var (textBox, columnName) in textBoxes)
+                        {
+                            textBox.Text = string.Empty;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Произошла ошибка при выполнении запроса: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
         /* ПРОВЕРКА ДАТ НА КОРРЕКТНОСТЬ */
         private void customMaskedTextBoxDatePriem_TextChanged(object sender, EventArgs e)
         {
@@ -491,5 +563,29 @@ namespace SewingProduction.form
                 }
             }
         }
+        // Подсказки при наведении на кнопки
+        private void toolTipButton()
+        {
+            toolTip.AutoPopDelay = 5000;     // Подсказка исчезнет через 5 секунд.
+            toolTip.InitialDelay = 500;      // Подсказка появится через 0.5 секунды.
+            toolTip.ReshowDelay = 100;       // Подсказка появится повторно при движении мыши через 0.1 секунду.
+            //toolTip.IsBalloon = true;      // Показывать подсказку в виде воздушного шара.
+            //toolTip.ToolTipIcon = ToolTipIcon.Info; // Показывать иконку информации.
+            //toolTip.ToolTipTitle = "Подсказка";  // Заголовок подсказки.
+
+            toolTip.SetToolTip(customButtonNowPriem, "Сегодня");
+            toolTip.SetToolTip(customButtonNowYvol, "Сегодня");
+            toolTip.SetToolTip(customButtonXOrg, "Очистить");
+            toolTip.SetToolTip(customButtonXDolj, "Очистить");
+            toolTip.SetToolTip(customButtonXOb, "Очистить");
+            toolTip.SetToolTip(customButtonXPodr, "Очистить");
+            toolTip.SetToolTip(customButtonXNved, "Очистить");
+            toolTip.SetToolTip(customButtonXNtab, "Очистить");
+            toolTip.SetToolTip(customButton1Cpodr, "Очистить");
+            toolTip.SetToolTip(customButton1Cdolg, "Очистить");
+            toolTip.SetToolTip(customOkButton1, "Сохранить и выйти");
+            toolTip.SetToolTip(customCancelButton1, "Выйти не сохранив");
+        }
+
     }
 }

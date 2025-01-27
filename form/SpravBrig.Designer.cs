@@ -96,11 +96,12 @@
             // gridControlSprav
             // 
             this.gridControlSprav.DataSource = this.spravList;
+            this.gridControlSprav.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlSprav.Location = new System.Drawing.Point(3, 3);
             this.gridControlSprav.MainView = this.gridView1;
             this.gridControlSprav.MaximumSize = new System.Drawing.Size(1400, 900);
             this.gridControlSprav.Name = "gridControlSprav";
-            this.gridControlSprav.Size = new System.Drawing.Size(1352, 885);
+            this.gridControlSprav.Size = new System.Drawing.Size(474, 606);
             this.gridControlSprav.TabIndex = 0;
             this.gridControlSprav.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -173,7 +174,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(546, 850);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(546, 585);
             this.tableLayoutPanel3.TabIndex = 31;
             // 
             // labelKod
@@ -247,7 +248,7 @@
             this.simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
             this.simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(4, 806);
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(4, 541);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(173, 41);
             this.simpleButtonAddOtm.TabIndex = 34;
@@ -267,7 +268,7 @@
             this.simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
             this.simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonDel.Location = new System.Drawing.Point(185, 806);
+            this.simpleButtonDel.Location = new System.Drawing.Point(185, 541);
             this.simpleButtonDel.Name = "simpleButtonDel";
             this.simpleButtonDel.Size = new System.Drawing.Size(174, 41);
             this.simpleButtonDel.TabIndex = 34;
@@ -287,7 +288,7 @@
             this.simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
             this.simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(367, 806);
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(367, 541);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
             this.simpleButtonAddSave.Size = new System.Drawing.Size(174, 41);
             this.simpleButtonAddSave.TabIndex = 34;
@@ -304,7 +305,7 @@
             this.xtraTabPageAdd.MinimumSize = new System.Drawing.Size(485, 585);
             this.xtraTabPageAdd.Name = "xtraTabPageAdd";
             this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(546, 860);
+            this.xtraTabPageAdd.Size = new System.Drawing.Size(546, 585);
             this.xtraTabPageAdd.Text = "Добавить/Редактировать";
             // 
             // AddTab
@@ -314,10 +315,10 @@
             this.AddTab.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.AddTab.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.AddTab.Dock = System.Windows.Forms.DockStyle.Right;
-            this.AddTab.Location = new System.Drawing.Point(1363, 3);
+            this.AddTab.Location = new System.Drawing.Point(483, 3);
             this.AddTab.Name = "AddTab";
             this.AddTab.SelectedTabPage = this.xtraTabPageAdd;
-            this.AddTab.Size = new System.Drawing.Size(548, 885);
+            this.AddTab.Size = new System.Drawing.Size(548, 606);
             this.AddTab.TabIndex = 8;
             this.AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAdd});
@@ -337,24 +338,24 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.71592F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.284079F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1914, 961);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1034, 661);
             this.tableLayoutPanel2.TabIndex = 13;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Controls.Add(this.simpleButtonAdd, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.simpleButtonRed, 1, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 894);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 615);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1354, 60);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 75F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(474, 43);
             this.tableLayoutPanel1.TabIndex = 10;
             // 
             // simpleButtonAdd
@@ -364,13 +365,14 @@
             this.simpleButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleButtonAdd.FlatAppearance.BorderSize = 0;
             this.simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
             this.simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAdd.Location = new System.Drawing.Point(1153, 3);
+            this.simpleButtonAdd.Location = new System.Drawing.Point(405, 3);
             this.simpleButtonAdd.Name = "simpleButtonAdd";
-            this.simpleButtonAdd.Size = new System.Drawing.Size(187, 42);
+            this.simpleButtonAdd.Size = new System.Drawing.Size(66, 26);
             this.simpleButtonAdd.TabIndex = 10;
             this.simpleButtonAdd.Text = "Добавить";
             this.simpleButtonAdd.UseVisualStyleBackColor = false;
@@ -383,13 +385,14 @@
             this.simpleButtonRed.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.simpleButtonRed.FlatAppearance.BorderSize = 0;
             this.simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
             this.simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonRed.Location = new System.Drawing.Point(950, 3);
+            this.simpleButtonRed.Location = new System.Drawing.Point(334, 3);
             this.simpleButtonRed.Name = "simpleButtonRed";
-            this.simpleButtonRed.Size = new System.Drawing.Size(187, 42);
+            this.simpleButtonRed.Size = new System.Drawing.Size(65, 26);
             this.simpleButtonRed.TabIndex = 11;
             this.simpleButtonRed.Text = "Редактировать";
             this.simpleButtonRed.UseVisualStyleBackColor = false;
@@ -399,7 +402,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1914, 961);
+            this.ClientSize = new System.Drawing.Size(1034, 661);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "SpravBrig";
             this.Text = "SpravBrig";

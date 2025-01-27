@@ -222,19 +222,18 @@ namespace SewingProduction.form
                 if (this.IsHandleCreated)
                 this.Invoke((MethodInvoker)delegate
                 {
-                    GridView gridView = gridControlSprav.MainView as GridView;
                     // Запомнили положение в таблице:
-                    topRowIndex = gridView.TopRowIndex;
+                    topRowIndex = gridViewZeh.TopRowIndex;
                     // Обновили таблицу
                     gridControlSprav_Load(sender, e);
                     // Возвращаемся к курсору:
-                    gridView.FocusedRowHandle = currentRowIndex;
-                    gridView.TopRowIndex = topRowIndex;
+                    gridViewZeh.FocusedRowHandle = currentRowIndex;
+                    gridViewZeh.TopRowIndex = topRowIndex;
                     // Если добавлена новая запись, переходим к ней:
                     if (flagAddDown)
                     {
-                        gridView.FocusedRowHandle = gridView.RowCount - 1;
-                        gridView.TopRowIndex = gridView.RowCount - 1;
+                        gridViewZeh.FocusedRowHandle = gridViewZeh.RowCount - 1;
+                        gridViewZeh.TopRowIndex = gridViewZeh.RowCount - 1;
                         flagAddDown = false;
                         gridControlSprav_Click(sender, e);
                     }

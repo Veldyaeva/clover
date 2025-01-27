@@ -92,7 +92,6 @@ namespace SewingProduction.form
             {
                 using (var connectionSELECT = new SqlConnection(connectionString))
                 {
-                    GridView gridViewZeh = gridZeh.MainView as GridView;
                     string queryList = $@"SELECT n_brig AS 'Номер', brig AS 'Бригада' FROM spBrig WHERE idZeh ";
                     if (gridViewZeh.Columns.Count < 1)
                         queryList += " IS NOT NULL";
