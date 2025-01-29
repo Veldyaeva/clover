@@ -7,12 +7,13 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraPrinting;
+using DevExpress.XtraReports.UI;
 
 namespace SewingProduction.form
 {
     public partial class Fio : CustomForm
     {
-
         // Оснавная БД:
         string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
@@ -128,7 +129,7 @@ namespace SewingProduction.form
         }
         private void customButtonSpVed_Click(object sender, EventArgs e)
         {
-            openSprav("brig_ved", "vdID,brig,object,name,ip_proizv", "Ведомости");
+            openSprav("brig_ved", "vdID,brig,obgect,name,ip_proizv", "Ведомости");
         }
         // Функция для открытия справочников:
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
@@ -278,7 +279,9 @@ namespace SewingProduction.form
             xtraTabControl1.SelectedTabPageIndex = 0;
 
             string query = $@"select * from brig_ved";
-            ShowRelatedComboBox(customComboBoxPechVed, "ace", query, "vdid", "brig");
+            //ShowRelatedComboBox(customComboBoxPechVed, "ace", query, "vdid", "brig");
+            using (SqlConnection connection = new SqlConnection(connectionString))
+                comboOneTableItems(customComboBoxPechVed, query, "vdid", connection, true);
         }
         private void customButtonOtcDol_Click(object sender, EventArgs e)
         {
@@ -316,7 +319,9 @@ namespace SewingProduction.form
             }
             if (!string.IsNullOrEmpty(query))
             {
-                ShowRelatedComboBox(customComboBoxOtch, "ace", query, "value", "value");
+                //ShowRelatedComboBox(customComboBoxOtch, "ace", query, "value", "value");
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                    comboOneTableItems(customComboBoxOtch, query, "value", connection, true);
             }
         }
         // КНОПКА "Совместители"

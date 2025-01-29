@@ -156,6 +156,12 @@
     <Compile Include="form\Articul.Designer.cs">
       <DependentUpon>Articul.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\art_new2024.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\art_new2024.Designer.cs">
+      <DependentUpon>art_new2024.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\CardByNom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,12 @@
     </Compile>
     <Compile Include="PrintReport.Designer.cs">
       <DependentUpon>PrintReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\PrintPostReportFio.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintPostReportFio.Designer.cs">
+      <DependentUpon>PrintPostReportFio.cs</DependentUpon>
     </Compile>
     <Compile Include="report\PrintReestrListReport.cs">
       <SubType>Component</SubType>
@@ -341,6 +353,9 @@
     <EmbeddedResource Include="form\Articul.resx">
       <DependentUpon>Articul.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\art_new2024.resx">
+      <DependentUpon>art_new2024.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\CardByNom.resx">
       <DependentUpon>CardByNom.cs</DependentUpon>
     </EmbeddedResource>
@@ -388,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
+    <EmbeddedResource Include="report\PrintPostReportFio.resx">
+      <DependentUpon>PrintPostReportFio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="report\PrintReestrListReport.resx">
       <DependentUpon>PrintReestrListReport.cs</DependentUpon>
     </EmbeddedResource>

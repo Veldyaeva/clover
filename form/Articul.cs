@@ -2,7 +2,10 @@
 using DevExpress.DataAccess.Native.Data;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.Xpo.Helpers;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using Microsoft.ReportingServices.DataProcessing;
 using System;
 using System.Collections.Generic;
@@ -25,7 +28,7 @@ namespace SewingProduction.form
         public Articul()
         {
             InitializeComponent();
-           
+
         }
 
         private void Articul_Load(object sender, EventArgs e)
@@ -55,8 +58,8 @@ namespace SewingProduction.form
             //groupControl1.AppearanceCaption.BackColor = Theme.ButtonBackground;
 
         }
-        private DataTable ShowRelatedDataAce(string query )
-            //System.Windows.Forms.BindingSource bsource
+        private DataTable ShowRelatedDataAce(string query)
+        //System.Windows.Forms.BindingSource bsource
         {
             DataTable dT = new DataTable();
             try
@@ -70,14 +73,14 @@ namespace SewingProduction.form
                     //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
                     //{
                     //using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                    using (SqlCommand command = new SqlCommand(query, connection ))
+                    using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                     //   SqlCommand command = new SqlCommand(query, connection);
-                     //CommandType commandType = command.CommandType;
+                        //   SqlCommand command = new SqlCommand(query, connection);
+                        //CommandType commandType = command.CommandType;
 
                         adapter.SelectCommand = command;
                         adapter.Fill(dT);
-                    //bsource.DataSource = dT;
+                        //bsource.DataSource = dT;
                     }
 
                     // transaction.Commit(); // Подтверждаем транзакцию
@@ -95,21 +98,21 @@ namespace SewingProduction.form
 
         private void getArticulFromSQl(string kod)
         {
-            
+
             try
-            {   
-                
+            {
+
                 string queryArticul = $"select * from dbo.sp_articul where kod = {kod}";
                 var dt = ShowRelatedDataAce(queryArticul);
                 bsArticul.DataSource = dt;
                 if (bsArticul.Count > 0)
-                    {
-                        txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["kod"].ToString();
-                        txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["articul"].ToString();
-                    }
-                    
-                
-                
+                {
+                    txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["kod"].ToString();
+                    txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["articul"].ToString();
+                }
+
+
+
             }
             catch (Exception ex)
             {
@@ -124,10 +127,10 @@ namespace SewingProduction.form
             //var kod = Convert.ToInt32(gridControl1.GetDataRow(gridControl1.FocusedRowHandle)["kod"]);
             string kod = "";
             string kodd = "";
-            
+
             try
             {
-                object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
+                object data = gridArticul.GetRow(gridArticul.FocusedRowHandle);
                 if (data != null)
                 {
                     kod = ((DataRowView)data).Row["kod"].ToString();
@@ -135,7 +138,7 @@ namespace SewingProduction.form
                 }
 
                 getArticulFromSQl(kod);
-            
+
                 string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                 var dt = ShowRelatedDataAce(query);
                 if (dt != null)
@@ -150,7 +153,7 @@ namespace SewingProduction.form
                 kod = "";
             }
 
-            
+
 
 
         }
@@ -158,6 +161,23 @@ namespace SewingProduction.form
         private void txbKod_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void customButtonAdd_Click(object sender, EventArgs e)
+        {
+            // Получаем код строки на которой курсор:
+            string kodArtSQL;
+            if (gridArticul.FocusedRowHandle >= 0 && gridArticul != null)
+            {
+                kodArtSQL = gridArticul.GetFocusedRowCellValue(gridArticul.Columns["Код"]).ToString();
+                // Открываем форму:
+                art_new2024 f = new art_new2024(kodArtSQL);
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    // Обновляем таблицу
+                    Articul_Load(sender, e);
+                } 
+            }
         }
     }
 }

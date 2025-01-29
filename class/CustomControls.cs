@@ -116,16 +116,7 @@ namespace SewingProduction
         // Событие при нажатии на кнопку "Отмена"
         private void OnCancelButtonClick(object sender, EventArgs e)
         {
-            // Логика для кнопки "Отмена"
-            DialogResult result = MessageBox.Show("Вы уверены, что хотите отменить?",
-                                                  "Подтверждение",
-                                                  MessageBoxButtons.YesNo,
-                                                  MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
-            {
-                //  this.FindForm()?.Close(); // Закрыть текущую форму
-            }
+             //  this.FindForm()?.Close(); // Закрыть текущую форму
         }
     }
 
@@ -411,8 +402,8 @@ namespace SewingProduction
         public CustomGroupBox()
         {
             this.BackColor = Color.Transparent;
-            this.ForeColor = Theme.TextBoxText;
-            this.Font = Theme.DefaultFont;
+            //this.ForeColor = Theme.TextBoxText;
+            //this.Font = Theme.DefaultFont;
         }
 
     }
@@ -519,28 +510,59 @@ namespace SewingProduction
             }
             return dT;
         }
-        protected void ShowRelatedComboBox(CustomComboBox comboBox, string _serv, string query, string displayMember, string valueMember)
+        // Заполнение комбобоксов:
+        protected void comboOneTableItems(System.Windows.Forms.ComboBox comboBox, string query, string nameColumn, SqlConnection connection, bool allOrOne)
         {
-            try
+            /* 
+             * comboBox: сам комбобокс
+             * query: текст запроса
+             * connection: подключение
+             * allOrOne: 
+             * true - для заполнения комбобокса
+             * false - для отображения значения
+            */
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+            //Создаем в памяти таблицу:
+            System.Data.DataTable tableList = new System.Data.DataTable();
+            //Добавляем ответ сервера в таблицу:
+            dataAdapter.Fill(tableList);
+            if (allOrOne)
             {
-                DataTable dataTable = ShowRelatedData(_serv, query);
-                if (dataTable != null)
+                comboBox.Items.Clear();
+                //Загрузка в комбобокс:
+                foreach (DataRow row in tableList.Rows)
                 {
-                    comboBox.DataSource = dataTable;
-                    comboBox.DisplayMember = displayMember;
-                    comboBox.ValueMember = valueMember;
-                }
-                else
-                {
-                    comboBox.DataSource = null;
-                    comboBox.Items.Clear();
+                    comboBox.Items.Add(row[0].ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Ошибка при создании ComboBox: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                comboBox.Text = tableList.Rows.Count > 0 ? tableList.Rows[0][nameColumn].ToString() : "";
             }
         }
+        //protected void ShowRelatedComboBox(CustomComboBox comboBox, string _serv, string query, string displayMember, string valueMember)
+        //{
+        //    try
+        //    {
+        //        DataTable dataTable = ShowRelatedData(_serv, query);
+        //        if (dataTable != null)
+        //        {
+        //            comboBox.DataSource = dataTable;
+        //            comboBox.DisplayMember = displayMember;
+        //            comboBox.ValueMember = valueMember;
+        //        }
+        //        else
+        //        {
+        //            comboBox.DataSource = null;
+        //            comboBox.Items.Clear();
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Ошибка при создании ComboBox: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
         //Универсальный метод для выполнения INSERT, UPDATE, DELETE запросов
         protected void ExecuteNonQuery(string _serv, string query, params SqlParameter[] parameters)
         {
