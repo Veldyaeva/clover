@@ -53,6 +53,7 @@
             this.производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рабочийСтолМастераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ThemeSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
             this.тарифыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
@@ -112,10 +113,11 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.справочникиToolStripMenuItem,
             this.производствоToolStripMenuItem,
-            this.TeamWorktoolStripMenuItem});
+            this.TeamWorktoolStripMenuItem,
+            this.ThemeSelectorComboBox});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1048, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1048, 27);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
@@ -130,7 +132,7 @@
             this.тарифыToolStripMenuItem,
             this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
-            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
+            this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 23);
             this.справочникиToolStripMenuItem.Text = "Справочники";
             // 
             // оборудованиеToolStripMenuItem
@@ -236,7 +238,7 @@
             this.производствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.рабочийСтолМастераToolStripMenuItem});
             this.производствоToolStripMenuItem.Name = "производствоToolStripMenuItem";
-            this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
             this.производствоToolStripMenuItem.Text = "Производство";
             // 
             // рабочийСтолМастераToolStripMenuItem
@@ -248,9 +250,17 @@
             // TeamWorktoolStripMenuItem
             // 
             this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
-            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 20);
+            this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 23);
             this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
             this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
+            // 
+            // ThemeSelectorComboBox
+            // 
+            this.ThemeSelectorComboBox.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.ThemeSelectorComboBox.Name = "ThemeSelectorComboBox";
+            this.ThemeSelectorComboBox.Size = new System.Drawing.Size(121, 23);
+            this.ThemeSelectorComboBox.ToolTipText = "Тема";
+            this.ThemeSelectorComboBox.Click += new System.EventHandler(this.toolStripComboBox1_Click);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -316,6 +326,7 @@
         private System.Windows.Forms.ToolStripMenuItem цехаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыПроизводствToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem работникиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripComboBox ThemeSelectorComboBox;
         private System.Windows.Forms.ToolStripMenuItem тарифыToolStripMenuItem;
     }
 }

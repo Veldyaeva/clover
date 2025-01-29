@@ -27,6 +27,7 @@ namespace SewingProduction.form
         public TeamWork()
         {
             InitializeComponent();
+            UpdateTheme(this);
             // Load += TeamWork_Load; // Подключаем обработчик события Load
         }
         private void InitializeComponents()
