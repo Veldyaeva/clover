@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.form
 {
-    partial class TeamWork_ArchAndCopy
+    partial class TeamWork_AdvanceTW
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.stackPanel2 = new DevExpress.Utils.Layout.StackPanel();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,8 +39,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.bindingSourceRasz = new System.Windows.Forms.BindingSource(this.components);
-            this.aCE_backupDataSet = new SewingProduction.ACE_backupDataSet();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -53,7 +50,6 @@
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.bindingSourceRask = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -64,7 +60,6 @@
             this.colsek2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
-            this.bindingSourceKont = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -73,32 +68,22 @@
             this.colsek3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl5 = new DevExpress.XtraGrid.GridControl();
-            this.bindingSourceDop = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colsek_p = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_p_tamp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_v = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_stra = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.norm_raszTableAdapter = new SewingProduction.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
-            this.norm_raskTableAdapter = new SewingProduction.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
-            this.norm_kontTableAdapter = new SewingProduction.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
-            this.norm_dop_obrTableAdapter = new SewingProduction.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
             this.stackPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceKont)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -115,13 +100,14 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.234122F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.56413F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.7858F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.632939F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.68853F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36015F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.958227F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1136, 803);
-            this.tableLayoutPanel2.TabIndex = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36015F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.958228F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(914, 686);
+            this.tableLayoutPanel2.TabIndex = 3;
             // 
             // stackPanel2
             // 
@@ -136,7 +122,7 @@
             this.stackPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.stackPanel2.Location = new System.Drawing.Point(3, 3);
             this.stackPanel2.Name = "stackPanel2";
-            this.stackPanel2.Size = new System.Drawing.Size(1130, 26);
+            this.stackPanel2.Size = new System.Drawing.Size(908, 26);
             this.stackPanel2.TabIndex = 0;
             this.stackPanel2.UseSkinIndents = true;
             // 
@@ -209,25 +195,14 @@
             // 
             // gridControl1
             // 
-            this.gridControl1.DataSource = this.bindingSourceRasz;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 37);
+            this.gridControl1.Location = new System.Drawing.Point(3, 69);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(1130, 392);
+            this.gridControl1.Size = new System.Drawing.Size(908, 376);
             this.gridControl1.TabIndex = 6;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            // 
-            // bindingSourceRasz
-            // 
-            this.bindingSourceRasz.DataMember = "norm_rasz";
-            this.bindingSourceRasz.DataSource = this.aCE_backupDataSet;
-            // 
-            // aCE_backupDataSet
-            // 
-            this.aCE_backupDataSet.DataSetName = "ACE_backupDataSet";
-            this.aCE_backupDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridView1
             // 
@@ -311,20 +286,14 @@
             // 
             // gridControl3
             // 
-            this.gridControl3.DataSource = this.bindingSourceRask;
             this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.Location = new System.Drawing.Point(3, 435);
+            this.gridControl3.Location = new System.Drawing.Point(3, 451);
             this.gridControl3.MainView = this.gridView2;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1130, 185);
+            this.gridControl3.Size = new System.Drawing.Size(908, 78);
             this.gridControl3.TabIndex = 7;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
-            // 
-            // bindingSourceRask
-            // 
-            this.bindingSourceRask.DataMember = "Norm_rask";
-            this.bindingSourceRask.DataSource = this.aCE_backupDataSet;
             // 
             // gridView2
             // 
@@ -404,20 +373,14 @@
             // 
             // gridControl4
             // 
-            this.gridControl4.DataSource = this.bindingSourceKont;
             this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.Location = new System.Drawing.Point(3, 626);
+            this.gridControl4.Location = new System.Drawing.Point(3, 535);
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1130, 93);
+            this.gridControl4.Size = new System.Drawing.Size(908, 78);
             this.gridControl4.TabIndex = 8;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
-            // 
-            // bindingSourceKont
-            // 
-            this.bindingSourceKont.DataMember = "norm_kont";
-            this.bindingSourceKont.DataSource = this.aCE_backupDataSet;
             // 
             // gridView4
             // 
@@ -485,20 +448,14 @@
             // 
             // gridControl5
             // 
-            this.gridControl5.DataSource = this.bindingSourceDop;
             this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl5.Location = new System.Drawing.Point(3, 725);
+            this.gridControl5.Location = new System.Drawing.Point(3, 619);
             this.gridControl5.MainView = this.gridView5;
             this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(1130, 75);
+            this.gridControl5.Size = new System.Drawing.Size(908, 64);
             this.gridControl5.TabIndex = 9;
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
-            // 
-            // bindingSourceDop
-            // 
-            this.bindingSourceDop.DataMember = "norm_dop_obr";
-            this.bindingSourceDop.DataSource = this.aCE_backupDataSet;
             // 
             // gridView5
             // 
@@ -551,48 +508,26 @@
             this.colannId6.Visible = true;
             this.colannId6.VisibleIndex = 4;
             // 
-            // norm_raszTableAdapter
-            // 
-            this.norm_raszTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_raskTableAdapter
-            // 
-            this.norm_raskTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_kontTableAdapter
-            // 
-            this.norm_kontTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_dop_obrTableAdapter
-            // 
-            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
-            // 
-            // TeamWork_ArchAndCopy
+            // TeamWork_AdvanceTW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1136, 803);
+            this.ClientSize = new System.Drawing.Size(914, 686);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Name = "TeamWork_ArchAndCopy";
-            this.Text = "TeamWork_ArchAndCopy";
-            this.TopMost = true;
-            this.Load += new System.EventHandler(this.TeamWork_ArchAndCopy_Load);
+            this.Name = "TeamWork_AdvanceTW";
+            this.Text = "TeamWork_AdvanceTW";
+            this.Load += new System.EventHandler(this.TeamWork_AdvanceTW_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).EndInit();
             this.stackPanel2.ResumeLayout(false);
             this.stackPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceKont)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             this.ResumeLayout(false);
 
@@ -646,14 +581,5 @@
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
-        private System.Windows.Forms.BindingSource bindingSourceRasz;
-        private ACE_backupDataSet aCE_backupDataSet;
-        private System.Windows.Forms.BindingSource bindingSourceRask;
-        private System.Windows.Forms.BindingSource bindingSourceKont;
-        private ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
-        private ACE_backupDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
-        private ACE_backupDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
-        private System.Windows.Forms.BindingSource bindingSourceDop;
-        private ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
     }
 }
