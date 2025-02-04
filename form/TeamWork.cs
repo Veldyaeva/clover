@@ -29,7 +29,6 @@ using System.Globalization;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors;
 using DevExpress.Xpo.DB.Helpers;
-using SewingProduction.Properties;
 
 namespace SewingProduction.form
 {
@@ -81,7 +80,9 @@ namespace SewingProduction.form
 
                 //}
                 LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
+                Logger.LogEvent(annId.ToString(), "таблица загружена");
                 LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
+                Logger.LogEvent(annId.ToString(), "norm_rasz");
                 LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(annId));
                 LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
                 LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
@@ -107,6 +108,8 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex, $"Ошибка загрузки данных в список разделений труда: {ex.Message}");
+
                 MessageBox.Show($"Ошибка загрузки данных в список разделений труда: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             CurrentWorks_Load();
@@ -143,20 +146,20 @@ namespace SewingProduction.form
                     var view = gridView3;
                     if (gridView3 != null)
                     {
-                        commentRichTextBox.Text = GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "komment", "");
-                        customComboBox1.SelectedValue = GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
+                        commentRichTextBox.Text = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "komment", "");
+                        customComboBox1.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
                         //customComboBox2.SelectedValue = view.GetRowCellValue(e.FocusedRowHandle, "diz");
-                        customComboBox2.SelectedValue = GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0);
+                        customComboBox2.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0);
                         //int annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annId"));
-                        int annId = GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "annId", 0);
+                        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "annId", 0);
                         UpdateRelatedData(annId);
-                        int kod = GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "annId", 0);
+                        int kod = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "annId", 0);
                         LoadGridControlData(pictureBox1, kod);
 
                     }
                 }
                 catch (Exception ex)
-                {
+                {Logger.LogError(ex, $"Ошибка при загрузке данных: {ex.Message}");
                     MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -235,6 +238,7 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
+                Logger.LogError(ex, $"Ошибка обновления статуса НПЗ: {ex.Message}");
                 MessageBox.Show($"Ошибка при обновлении NZP: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -363,6 +367,8 @@ namespace SewingProduction.form
                 //bindedRow.binded_art = bindedAnn.model;
                 _artNormService.UpdateAnnId(art, ann);
                 art_view.RefreshData();
+                Logger.LogEvent("Привязка завершена", "Привязка завершена, успех");
+
                 MessageBox.Show("Привязка завершена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else { MessageBox.Show("Выберите значение для увязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation); }
@@ -520,7 +526,11 @@ namespace SewingProduction.form
                             IsChecked = false
                         });
                     }
-                    catch { };
+                    catch (Exception ex)
+                    {
+                        Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    };
                 }
 
                 customGridControl1.DataSource = artDataList;
@@ -546,7 +556,11 @@ namespace SewingProduction.form
                             IsChecked = false
                         });
                     }
-                    catch { };
+                    catch (Exception ex)
+                    {
+                Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    };
                 }
                 customGridControl2.DataSource = myDataList;
 
@@ -562,7 +576,10 @@ namespace SewingProduction.form
                 normraszBindingSource1.DataSource = relatedData;
                 customGridControl3.DataSource = normraszBindingSource1;
             }
-            catch (Exception ex) { MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         //загрузка norm_rasz 

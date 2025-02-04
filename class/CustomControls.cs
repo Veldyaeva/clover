@@ -1,6 +1,12 @@
-﻿using DevExpress.XtraGrid;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native.WebClientUIControl;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -14,7 +20,7 @@ namespace SewingProduction
     {
         public virtual void ApplyBaseProperties(Control control)
         {
-           // control.Font = ThemeManager.ActiveTheme.DefaultFont;
+            // control.Font = ThemeManager.ActiveTheme.DefaultFont;
         }
     }
 
@@ -45,7 +51,7 @@ namespace SewingProduction
         private void OnThemeChanged()
         {
             ApplyTheme();
-         //   Invalidate(); // Перерисовка кнопки
+            //   Invalidate(); // Перерисовка кнопки
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
@@ -416,7 +422,7 @@ namespace SewingProduction
                 {
                     maskedTextBox.ApplyTheme();
                 }
-            
+
                 else if (child.HasChildren)
                 {
                     UpdateTheme(child); // Рекурсивно обновляем тему для вложенных элементов
@@ -426,8 +432,11 @@ namespace SewingProduction
 
 
 
-        #region
-        protected System.Data.DataTable ShowRelatedData(string _serv, string query)
+    }
+    public static class CommonFunctions
+    #region
+    {
+        public static System.Data.DataTable ShowRelatedData(string _serv, string query)
         //System.Windows.Forms.BindingSource bsource
         {
             System.Data.DataTable dT = new System.Data.DataTable();
@@ -480,7 +489,7 @@ namespace SewingProduction
         /// <param name="fieldName">название поля</param>
         /// <param name="defaultValue">задаваемое значение по умолчанию</param>
         /// <returns></returns>
-        protected T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
+        public static T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
         {
             try
             {
@@ -499,5 +508,79 @@ namespace SewingProduction
             }
         }
     }
+}
     #endregion
+
+public static class Logger
+{
+    private static readonly string logFilePath = "error_log.json";
+    private static readonly object _lock = new object();
+
+    public static void LogError(Exception ex, string context = "")
+    {
+        var logEntry = new LogEntry
+        {
+            Timestamp = DateTime.UtcNow.ToString("o"),
+            Message = ex.Message,
+            StackTrace = ex.StackTrace,
+            Context = context
+        };
+
+        WriteLog(logEntry);
+    }
+
+    public static void LogEvent(string ev, string context = "")
+    {
+        var logEntry = new LogEntry
+        {
+            Timestamp = DateTime.UtcNow.ToString("o"),
+            Message = ev,
+            StackTrace = "",
+            Context = context
+        };
+        WriteLog(logEntry);
+    }
+    private static void WriteLog(LogEntry logEntry)
+    {
+        lock (_lock)
+        {
+            List<LogEntry> logs = new List<LogEntry>();
+
+            // Если файл существует, загружаем предыдущие логи
+            if (File.Exists(logFilePath))
+            {
+                try
+                {
+                    string existingLogs = File.ReadAllText(logFilePath);
+                    logs = JsonConvert.DeserializeObject<List<LogEntry>>(existingLogs) ?? new List<LogEntry>();
+                }
+                catch (Exception readEx)
+                {
+                    Console.WriteLine($"Ошибка при чтении логов: {readEx.Message}");
+                }
+            }
+
+            // Добавляем новый лог
+            logs.Add(logEntry);
+
+            try
+            {
+                // Записываем обновленный список логов в JSON-файл
+                File.WriteAllText(logFilePath, JsonConvert.SerializeObject(logs, Formatting.Indented));
+            }
+            catch (Exception writeEx)
+            {
+                Console.WriteLine($"Ошибка при записи логов: {writeEx.Message}");
+            }
+        }
+    }
+}
+
+// Класс для хранения информации об ошибке
+public class LogEntry
+{
+    public string Timestamp { get; set; }
+    public string Message { get; set; }
+    public string StackTrace { get; set; }
+    public string Context { get; set; }
 }
