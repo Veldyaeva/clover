@@ -29,6 +29,7 @@ using System.Globalization;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors;
 using DevExpress.Xpo.DB.Helpers;
+using SewingProduction.Properties;
 
 namespace SewingProduction.form
 {
@@ -63,7 +64,6 @@ namespace SewingProduction.form
                 var data = _artNormService.GetArtNormData();
                 artnormnBindingSource.DataSource = data;
                 gridControl2.DataSource = artnormnBindingSource;
-
 
                 GridView view = gridControl2.MainView as GridView;
                 if (view != null)
@@ -182,33 +182,6 @@ namespace SewingProduction.form
 
         }
 
-        /// <summary>
-        /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
-        /// </summary>
-        /// <typeparam name="T">Тип возвращаемого значения</typeparam>
-        /// <param name="view">таблица</param>
-        /// <param name="rowHandle">идентификатор выбранной строки</param>
-        /// <param name="fieldName">название поля</param>
-        /// <param name="defaultValue">задаваемое значение по умолчанию</param>
-        /// <returns></returns>
-        private T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
-        {
-            try
-            {
-                object value = view.GetRowCellValue(rowHandle, fieldName);
-                if (value == DBNull.Value || value == null)
-                {
-                    return defaultValue;
-                }
-                return (T)Convert.ChangeType(value, typeof(T));
-            }
-            catch (Exception ex)
-            {
-                // Логирование ошибки или другое действие
-                //  MessageBox.Show($"Ошибка при получении значения поля '{fieldName}': {ex.Message}");
-                return defaultValue;
-            }
-        }
         /// <summary>
         /// обновляет данные в связанных таблицах
         /// </summary>
@@ -996,12 +969,17 @@ namespace SewingProduction.form
 
         public DataTable GetArtNormData()
         {
-            string query = "SELECT SUBSTRING(kod,1,7) as kod, annId, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM Art_norm_n JOIN status_ann ON status=status_id";
+            string query = "SELECT SUBSTRING(kod,1,7) as kod, annId, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id";
             return _dbHelper.ExecuteQuery(query);
         }
+        /// <summary>
+        /// загрузка артикулов для увязки. Статус != архивное
+        /// </summary>
+        /// <returns>Возвращает таблицу артикулов</returns>
         public DataTable GetArtNormDataCurrent()
         {
-            string query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM Art_norm_n JOIN status_ann ON status=status_id WHERE status<3";
+            //string query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
+            string query = "SELECT * FROM artNormNView WHERE kod IN (SELECT annId FROM ACE_backup.dbo.View_sp_articul WHERE kodd_rt LIKE '@kod')";
             return _dbHelper.ExecuteQuery(query);
         }
 
@@ -1045,6 +1023,7 @@ namespace SewingProduction.form
 
         public DataTable GetRelDesigner(int tab)
         {
+            
             string query = "SELECT fio, tab FROM fio where tab = @tab";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tab", tab } });
         }
