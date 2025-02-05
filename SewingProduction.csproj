@@ -113,7 +113,7 @@
       <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>packages\NLog.5.3.4\lib\net46\NLog.dll</HintPath>
+      <HintPath>packages\NLog.5.4.0\lib\net46\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System">
@@ -479,6 +479,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\winter.ico" />
+    <Content Include="Resources\spring.jpg" />
     <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
