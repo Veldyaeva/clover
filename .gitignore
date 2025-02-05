@@ -393,3 +393,5 @@ FodyWeavers.xsd
 /obj/Debug/SewingProduction.csproj.FileListAbsolute.txt
 /obj/Debug/SewingProduction.csproj.GenerateResource.cache
 /ACE_backupDataSet1.Designer.cs
+/project.docx
+*.jpg
