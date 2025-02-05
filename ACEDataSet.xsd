@@ -695,7 +695,17 @@ SELECT SUBSTRING(kod, 1, 7) AS Expr1, grup AS Expr2, articul AS Expr3, mod AS Ex
               <Mapping SourceColumn="Expr3" DataSetColumn="Expr3" />
               <Mapping SourceColumn="Expr4" DataSetColumn="Expr4" />
             </Mappings>
-            <Sources />
+            <Sources>
+              <DbSource ConnectionRef="ACEConnectionString (Settings)" DbObjectName="ACE_backup.dbo.sp_articul" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillBy" GenerateMethods="Fill" GenerateShortCommands="true" GeneratorSourceName="FillBy" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataBy" UserSourceName="FillBy">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT        SUBSTRING(kod, 1, 7) AS kod, grup, articul, mod
+FROM            sp_articul</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </Sources>
           </TableAdapter>
         </Tables>
         <Sources />

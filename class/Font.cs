@@ -31,7 +31,7 @@ namespace SewingProduction
         // Метод для применения общих свойств к компоненту
         public virtual void ApplyBaseProperties(Control control)
         {
-          //  control.Font = ThemeManager.DefaultFont; // Общий шрифт
+            control.Font = Theme.DefaultFont; // Общий шрифт
         }
     }
 
@@ -46,7 +46,7 @@ namespace SewingProduction
 
             this.BackColor = Theme.ButtonBackground;
             this.ForeColor = Theme.ButtonText;
-            Font = Theme.DefaultFont;
+            this.Font = Theme.DefaultFont;
             this.FlatStyle = FlatStyle.Flat;
             this.FlatAppearance.BorderSize = 0;
             this.Height = Theme.ButtonHeight;
@@ -138,15 +138,10 @@ namespace SewingProduction
     {
         public CustomTextBox()
         {
-            //this.BackColor = Theme.TextBoxBackground;
-            //this.ForeColor = Theme.TextBoxText;
-            //this.Font = Theme.DefaultFont;
-            ////this.TextAlign = HorizontalAlignment.Left;
-            ////this.Margin = new Padding(0) ;
-            ApplyTheme();
-            Theme.ThemeChanged += OnThemeChanged; // Подписываемся на изменение темы
+            this.BackColor = Theme.TextBoxBackground;
+            this.ForeColor = Theme.TextBoxText;
+            this.Font = Theme.DefaultFont;
         }
-    }
 
     }
 
