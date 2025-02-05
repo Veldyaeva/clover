@@ -159,7 +159,8 @@ namespace SewingProduction.form
                     }
                 }
                 catch (Exception ex)
-                {Logger.LogError(ex, $"Ошибка при загрузке данных: {ex.Message}");
+                {
+                    Logger.LogError(ex, $"Ошибка при загрузке данных: {ex.Message}");
                     MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
@@ -198,21 +199,6 @@ namespace SewingProduction.form
             LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
             LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
             UpdateNZPStatus();
-            //int nzp = 0;
-            //var view_nzp = customGridControl5.MainView as GridView;
-            //if (view_nzp != null)
-            //{
-            //    for (int i = 0; i < view_nzp.RowCount; i++)
-            //    {
-            //        DataRowView ewwewqe = (DataRowView)view_nzp.GetRow(i);
-            //        int? ewwerrw = Convert.ToInt32(ewwewqe["kolNZP"]);
-
-            //        nzp = ewwerrw ?? 0;
-            //    }
-            //}
-            //if (nzp > 0)
-            //{ customButton7.Enabled = false; }
-
         }
         private void UpdateNZPStatus()
         {
@@ -290,7 +276,7 @@ namespace SewingProduction.form
         }
 
         /// <summary>
-        /// отвязать
+        /// нажатие кнопки "отвязать артикул от РТ"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -598,7 +584,11 @@ namespace SewingProduction.form
 
         }
 
-        //обработка клика на заголовке, 
+        /// <summary>
+        /// обработка клика на заголовке, 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
             if (e.Column == gridView8.Columns["IsChecked"])
@@ -847,6 +837,20 @@ namespace SewingProduction.form
             teamWork_Advance.ShowDialog();
 
         }
+
+        private void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            int kodd_rt = 0;
+            var view = gridView7;
+            if (view != null)
+            {
+                kodd_rt = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
+            }
+
+            var relatedData = _artNormService.GetRelatedNormRasz(kodd_rt);
+            normraszBindingSource1.DataSource = relatedData;
+            customGridControl3.DataSource = normraszBindingSource1;
+        }
     }
 
     //Источник данных РТ для увязки
@@ -1044,6 +1048,7 @@ namespace SewingProduction.form
             string query = "SELECT fio, tab FROM fio where tab = @tab";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tab", tab } });
         }
+        
         /// <summary>
         /// Получение связанных данных из sp_articul
         /// </summary>

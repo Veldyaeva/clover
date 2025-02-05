@@ -105,3 +105,46 @@ CREATE TABLE ACE_backup.dbo.podr_vyaz (
  ,CONSTRAINT PK_podr_vyaz_kod_vyaz PRIMARY KEY CLUSTERED (kod_vyaz)
 ) ON [PRIMARY]
 GO
+
+
+Заполнение
+USE ACE_backup
+GO
+
+INSERT INTO dbo.podr_vyaz
+(
+  text_vyaz, kod_proizv
+)
+VALUES
+(
+  'вязальное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'квк'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'носки'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'кручение'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'раскройный'
+);
+GO

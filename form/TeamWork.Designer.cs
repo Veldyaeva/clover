@@ -118,13 +118,13 @@ namespace SewingProduction.form
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.customGridControl5 = new SewingProduction.CustomGridControl();
             this.gridView10 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.kodd_rt = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.kolNZP = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.kodd_rt = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.customButton7 = new SewingProduction.CustomButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -1227,6 +1227,21 @@ namespace SewingProduction.form
             this.gridView10.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DevExpress.Utils.DefaultBoolean.True;
             this.gridView10.OptionsView.ShowGroupPanel = false;
             // 
+            // kodd_rt
+            // 
+            this.kodd_rt.FieldName = "kodd_rt";
+            this.kodd_rt.Name = "kodd_rt";
+            this.kodd_rt.Visible = true;
+            this.kodd_rt.VisibleIndex = 0;
+            // 
+            // colannId2
+            // 
+            this.colannId2.FieldName = "annId";
+            this.colannId2.Name = "colannId2";
+            this.colannId2.Visible = true;
+            this.colannId2.VisibleIndex = 1;
+            this.colannId2.Width = 42;
+            // 
             // gridColumn20
             // 
             this.gridColumn20.Caption = "Код";
@@ -1271,21 +1286,6 @@ namespace SewingProduction.form
             this.kolNZP.Visible = true;
             this.kolNZP.VisibleIndex = 6;
             this.kolNZP.Width = 56;
-            // 
-            // colannId2
-            // 
-            this.colannId2.FieldName = "annId";
-            this.colannId2.Name = "colannId2";
-            this.colannId2.Visible = true;
-            this.colannId2.VisibleIndex = 1;
-            this.colannId2.Width = 42;
-            // 
-            // kodd_rt
-            // 
-            this.kodd_rt.FieldName = "kodd_rt";
-            this.kodd_rt.Name = "kodd_rt";
-            this.kodd_rt.Visible = true;
-            this.kodd_rt.VisibleIndex = 0;
             // 
             // pictureBox1
             // 
@@ -2264,6 +2264,7 @@ namespace SewingProduction.form
             this.gridView7.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gridView7.OptionsView.ShowGroupPanel = false;
             this.gridView7.CustomDrawColumnHeader += new DevExpress.XtraGrid.Views.Grid.ColumnHeaderCustomDrawEventHandler(this.gridView7_CustomDrawColumnHeader);
+            this.gridView7.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView7_FocusedRowChanged);
             this.gridView7.CellValueChanging += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView7_CellValueChanged);
             this.gridView7.CustomColumnSort += new DevExpress.XtraGrid.Views.Base.CustomColumnSortEventHandler(this.gridView_CustomColumnSort);
             // 
