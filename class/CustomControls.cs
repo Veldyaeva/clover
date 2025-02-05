@@ -96,6 +96,7 @@ namespace SewingProduction
         }
 
         public override string Text { get; set; } = "Ok";
+
         // Событие при нажатии на кнопку "Ок"
         private void OnOkButtonClick(object sender, EventArgs e)
         {
@@ -344,15 +345,6 @@ namespace SewingProduction
 
     }
 
-
-
-
-
-
-
-
-
-
     public class CustomGridView : GridView
     {
         public CustomGridView()
@@ -388,6 +380,15 @@ namespace SewingProduction
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+            using (LinearGradientBrush brush = new LinearGradientBrush(
+                rect,
+                ThemeManager.ActiveTheme.GradientStartColor,
+                ThemeManager.ActiveTheme.GradientEndColor,
+                LinearGradientMode.ForwardDiagonal))
+            {
+                e.Graphics.FillRectangle(brush, rect);
+            }
         }
         public void UpdateTheme(Control control)
         {
@@ -428,23 +429,14 @@ namespace SewingProduction
                 }
             }
         }
-                rect,
-        }
+
+
 
     }
     public static class CommonFunctions
     #region
     {
         public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-            }
-        #region
-        protected System.Data.DataTable ShowRelatedData(string _serv, string query)
-    #region
-    {
-        public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-
-        #region
-        protected System.Data.DataTable ShowRelatedData(string _serv, string query)
         //System.Windows.Forms.BindingSource bsource
         {
             System.Data.DataTable dT = new System.Data.DataTable();
@@ -478,6 +470,15 @@ namespace SewingProduction
 
                     // transaction.Commit(); // Подтверждаем транзакцию
 
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return dT;
+        }
 
         /// <summary>
         /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
@@ -508,7 +509,7 @@ namespace SewingProduction
         }
     }
 }
-    #endregion
+#endregion
 
 public static class Logger
 {
@@ -558,10 +559,10 @@ public static class Logger
                     Console.WriteLine($"Ошибка при чтении логов: {readEx.Message}");
                 }
             }
-                    //}
-                }
-            }
-                    Console.WriteLine($"Ошибка при чтении логов: {readEx.Message}");
+
+            // Добавляем новый лог
+            logs.Add(logEntry);
+
             try
             {
                 // Записываем обновленный список логов в JSON-файл
@@ -582,9 +583,4 @@ public class LogEntry
     public string Message { get; set; }
     public string StackTrace { get; set; }
     public string Context { get; set; }
-}    }
-    #endregion
-}    public string StackTrace { get; set; }
-    public string Context { get; set; }
-}    #endregion
 }
