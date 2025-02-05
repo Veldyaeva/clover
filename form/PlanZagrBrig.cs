@@ -751,5 +751,10 @@ namespace SewingProduction.form
             }
 
         }
+
+        private void gcPzArticulList_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

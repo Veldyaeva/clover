@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraGrid;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Data.SqlClient;
@@ -127,6 +127,16 @@ namespace SewingProduction
         }
     }
 
+
+
+    //Класс-наследник для CheckBox
+    public class CustomCheckBox : CheckBox
+    {
+        public CustomCheckBox()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
+        }
 
 
     //Класс-наследник для CheckBox
@@ -463,6 +473,33 @@ namespace SewingProduction
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return dT;
+        }
+        /// <summary>
+        /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
+        /// </summary>
+        /// <typeparam name="T">Тип возвращаемого значения</typeparam>
+        /// <param name="view">таблица</param>
+        /// <param name="rowHandle">идентификатор выбранной строки</param>
+        /// <param name="fieldName">название поля</param>
+        /// <param name="defaultValue">задаваемое значение по умолчанию</param>
+        /// <returns></returns>
+        protected T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
+        {
+            try
+            {
+                object value = view.GetRowCellValue(rowHandle, fieldName);
+                if (value == DBNull.Value || value == null)
+                {
+                    return defaultValue;
+                }
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            catch (Exception ex)
+            {
+                // Логирование ошибки или другое действие
+                //  MessageBox.Show($"Ошибка при получении значения поля '{fieldName}': {ex.Message}");
+                return defaultValue;
+            }
         }
 
 

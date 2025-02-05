@@ -31,9 +31,14 @@
             this.components = new System.ComponentModel.Container();
             DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
             this.tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.customCheckBoxDel = new SewingProduction.CustomCheckBox();
+            this.customCheckBoxDei = new SewingProduction.CustomCheckBox();
+            this.customButtonINN = new SewingProduction.CustomButton();
+            this.customTextBoxInn = new SewingProduction.CustomTextBox();
             this.fioGrid = new DevExpress.XtraGrid.GridControl();
             this.fioList = new System.Windows.Forms.BindingSource(this.components);
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewFio = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tab = new DevExpress.XtraGrid.Columns.GridColumn();
             this.fio1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.rab = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,11 +70,17 @@
             this.okl = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tab_new = new DevExpress.XtraGrid.Columns.GridColumn();
             this.po = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.spisok1c_inn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.spisok1c_id = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.spisok1c_orgName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.spisok1c_podrName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.customButtonOtcDol = new SewingProduction.CustomButton();
             this.customButtonSov = new SewingProduction.CustomButton();
             this.customButtonAddSov = new SewingProduction.CustomButton();
             this.tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
+            this.customButtonSpOrg = new SewingProduction.CustomButton();
+            this.customButtonSpDol = new SewingProduction.CustomButton();
             this.customButtonPchShk = new SewingProduction.CustomButton();
             this.customButtonPchSps = new SewingProduction.CustomButton();
             this.customButtonPchBln = new SewingProduction.CustomButton();
@@ -97,9 +108,10 @@
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.nam = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanelAll.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.fioList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).BeginInit();
@@ -118,6 +130,7 @@
             this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
             this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
             this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel4, 2, 0);
             this.tableLayoutPanelAll.Controls.Add(this.fioGrid, 0, 0);
             this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel3, 1, 2);
             this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanelPech, 2, 1);
@@ -133,6 +146,87 @@
             this.tableLayoutPanelAll.Size = new System.Drawing.Size(1470, 643);
             this.tableLayoutPanelAll.TabIndex = 0;
             // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 1;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Controls.Add(this.customCheckBoxDel, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.customCheckBoxDei, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.customButtonINN, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.customTextBoxInn, 0, 2);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(1267, 3);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 8;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(200, 301);
+            this.tableLayoutPanel4.TabIndex = 7;
+            // 
+            // customCheckBoxDel
+            // 
+            this.customCheckBoxDel.AutoSize = true;
+            this.customCheckBoxDel.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCheckBoxDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customCheckBoxDel.Location = new System.Drawing.Point(3, 3);
+            this.customCheckBoxDel.Name = "customCheckBoxDel";
+            this.customCheckBoxDel.Size = new System.Drawing.Size(99, 20);
+            this.customCheckBoxDel.TabIndex = 8;
+            this.customCheckBoxDel.Text = "Уволенные";
+            this.customCheckBoxDel.UseVisualStyleBackColor = true;
+            this.customCheckBoxDel.CheckedChanged += new System.EventHandler(this.customButtonShowDel_Click);
+            // 
+            // customCheckBoxDei
+            // 
+            this.customCheckBoxDei.AutoSize = true;
+            this.customCheckBoxDei.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCheckBoxDei.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customCheckBoxDei.Location = new System.Drawing.Point(3, 33);
+            this.customCheckBoxDei.Name = "customCheckBoxDei";
+            this.customCheckBoxDei.Size = new System.Drawing.Size(117, 20);
+            this.customCheckBoxDei.TabIndex = 8;
+            this.customCheckBoxDei.Text = "Действующие";
+            this.customCheckBoxDei.UseVisualStyleBackColor = true;
+            this.customCheckBoxDei.CheckedChanged += new System.EventHandler(this.customButtonShowDel_Click);
+            // 
+            // customButtonINN
+            // 
+            this.customButtonINN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonINN.Btn = null;
+            this.customButtonINN.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButtonINN.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButtonINN.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButtonINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonINN.FlatAppearance.BorderSize = 0;
+            this.customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonINN.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonINN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonINN.Location = new System.Drawing.Point(3, 93);
+            this.customButtonINN.MaximumSize = new System.Drawing.Size(0, 50);
+            this.customButtonINN.Name = "customButtonINN";
+            this.customButtonINN.Size = new System.Drawing.Size(194, 29);
+            this.customButtonINN.TabIndex = 7;
+            this.customButtonINN.Text = "Найти по ИНН";
+            this.customButtonINN.UseVisualStyleBackColor = false;
+            this.customButtonINN.Click += new System.EventHandler(this.customButtonINN_Click);
+            // 
+            // customTextBoxInn
+            // 
+            this.customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customTextBoxInn.Font = new System.Drawing.Font("Arial", 10F);
+            this.customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.customTextBoxInn.Location = new System.Drawing.Point(3, 63);
+            this.customTextBoxInn.Name = "customTextBoxInn";
+            this.customTextBoxInn.Size = new System.Drawing.Size(194, 23);
+            this.customTextBoxInn.TabIndex = 9;
+            // 
             // fioGrid
             // 
             this.tableLayoutPanelAll.SetColumnSpan(this.fioGrid, 2);
@@ -142,7 +236,7 @@
             this.fioGrid.EmbeddedNavigator.Appearance.Options.UseTextOptions = true;
             this.fioGrid.EmbeddedNavigator.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.fioGrid.Location = new System.Drawing.Point(3, 3);
-            this.fioGrid.MainView = this.gridView1;
+            this.fioGrid.MainView = this.gridViewFio;
             this.fioGrid.Name = "fioGrid";
             this.fioGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositorySovm,
@@ -153,83 +247,83 @@
             this.fioGrid.Size = new System.Drawing.Size(1258, 550);
             this.fioGrid.TabIndex = 6;
             this.fioGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            this.fioGrid.Load += new System.EventHandler(this.oborudGrid_Load);
-            this.fioGrid.Click += new System.EventHandler(this.oborudGrid_Click);
+            this.gridViewFio});
+            this.fioGrid.Load += new System.EventHandler(this.fioGrid_Load);
+            this.fioGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fioGrid_KeyUp);
             // 
-            // gridView1
+            // gridViewFio
             // 
-            this.gridView1.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
-            this.gridView1.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.Appearance.DetailTip.Options.UseTextOptions = true;
-            this.gridView1.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.EvenRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FilterCloseButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FilterPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FixedLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FocusedCell.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FocusedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.FooterPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupButton.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupFooter.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.GroupRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.gridView1.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridView1.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.gridView1.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HideSelectionRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HorzLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.HotTrackedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.OddRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.Preview.Options.UseTextOptions = true;
-            this.gridView1.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.Row.Options.UseTextOptions = true;
-            this.gridView1.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.SelectedRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.TopNewRow.Options.UseTextOptions = true;
-            this.gridView1.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.Appearance.VertLine.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ViewCaption.Options.UseTextOptions = true;
-            this.gridView1.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            this.gridView1.AppearancePrint.EvenRow.Options.UseBackColor = true;
-            this.gridView1.AppearancePrint.EvenRow.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridView1.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.GroupRow.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
-            this.gridView1.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridView1.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gridView1.AppearancePrint.Row.Options.UseBorderColor = true;
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewFio.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.Appearance.DetailTip.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.EvenRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FilterCloseButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FilterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FixedLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FocusedCell.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FocusedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.FooterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupButton.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupFooter.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.GroupRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
+            this.gridViewFio.Appearance.HeaderPanel.Options.UseFont = true;
+            this.gridViewFio.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            this.gridViewFio.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HideSelectionRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HorzLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.HotTrackedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.OddRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.Preview.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.Row.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.SelectedRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.TopNewRow.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.Appearance.VertLine.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ViewCaption.Options.UseTextOptions = true;
+            this.gridViewFio.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            this.gridViewFio.AppearancePrint.EvenRow.Options.UseBackColor = true;
+            this.gridViewFio.AppearancePrint.EvenRow.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            this.gridViewFio.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.GroupRow.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
+            this.gridViewFio.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.gridViewFio.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
+            this.gridViewFio.AppearancePrint.Row.Options.UseBorderColor = true;
+            this.gridViewFio.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.tab,
             this.fio1,
             this.rab,
@@ -256,19 +350,23 @@
             this.mast,
             this.okl,
             this.tab_new,
-            this.po});
-            this.gridView1.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 768, 264, 272);
-            this.gridView1.GridControl = this.fioGrid;
-            this.gridView1.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.ReadOnly = true;
-            this.gridView1.OptionsClipboard.AllowHtmlFormat = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsPrint.EnableAppearanceEvenRow = true;
-            this.gridView1.OptionsPrint.ExpandAllGroups = false;
-            this.gridView1.OptionsPrint.PrintFooter = false;
-            this.gridView1.OptionsView.ColumnAutoWidth = false;
-            this.gridView1.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.po,
+            this.spisok1c_inn,
+            this.spisok1c_id,
+            this.spisok1c_orgName,
+            this.spisok1c_podrName});
+            this.gridViewFio.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 768, 264, 272);
+            this.gridViewFio.GridControl = this.fioGrid;
+            this.gridViewFio.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.gridViewFio.Name = "gridViewFio";
+            this.gridViewFio.OptionsBehavior.ReadOnly = true;
+            this.gridViewFio.OptionsPrint.EnableAppearanceEvenRow = true;
+            this.gridViewFio.OptionsPrint.ExpandAllGroups = false;
+            this.gridViewFio.OptionsPrint.PrintFooter = false;
+            this.gridViewFio.OptionsView.ColumnAutoWidth = false;
+            this.gridViewFio.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewFio.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            this.gridViewFio.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewFio_FocusedRowChanged);
             // 
             // tab
             // 
@@ -279,6 +377,7 @@
             this.tab.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.tab.Caption = "Таб. №";
             this.tab.FieldName = "tab";
+            this.tab.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.tab.Name = "tab";
             this.tab.Visible = true;
             this.tab.VisibleIndex = 0;
@@ -298,6 +397,7 @@
             ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions1, new System.Drawing.Size(16, 16))))});
             this.fio1.Caption = "ФИО";
             this.fio1.FieldName = "fio";
+            this.fio1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
             this.fio1.Name = "fio1";
             this.fio1.Visible = true;
             this.fio1.VisibleIndex = 1;
@@ -683,6 +783,58 @@
             this.po.VisibleIndex = 26;
             this.po.Width = 35;
             // 
+            // spisok1c_inn
+            // 
+            this.spisok1c_inn.AppearanceHeader.Options.UseTextOptions = true;
+            this.spisok1c_inn.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.spisok1c_inn.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.spisok1c_inn.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.spisok1c_inn.Caption = "ИНН";
+            this.spisok1c_inn.FieldName = "spisok1c_inn";
+            this.spisok1c_inn.Name = "spisok1c_inn";
+            this.spisok1c_inn.Visible = true;
+            this.spisok1c_inn.VisibleIndex = 27;
+            this.spisok1c_inn.Width = 100;
+            // 
+            // spisok1c_id
+            // 
+            this.spisok1c_id.AppearanceHeader.Options.UseTextOptions = true;
+            this.spisok1c_id.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.spisok1c_id.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.spisok1c_id.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.spisok1c_id.Caption = "ид 1С";
+            this.spisok1c_id.FieldName = "spisok1c_id";
+            this.spisok1c_id.Name = "spisok1c_id";
+            this.spisok1c_id.Visible = true;
+            this.spisok1c_id.VisibleIndex = 30;
+            this.spisok1c_id.Width = 35;
+            // 
+            // spisok1c_orgName
+            // 
+            this.spisok1c_orgName.AppearanceHeader.Options.UseTextOptions = true;
+            this.spisok1c_orgName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.spisok1c_orgName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.spisok1c_orgName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.spisok1c_orgName.Caption = "Организация 1С";
+            this.spisok1c_orgName.FieldName = "spisok1c_orgName";
+            this.spisok1c_orgName.Name = "spisok1c_orgName";
+            this.spisok1c_orgName.Visible = true;
+            this.spisok1c_orgName.VisibleIndex = 29;
+            this.spisok1c_orgName.Width = 100;
+            // 
+            // spisok1c_podrName
+            // 
+            this.spisok1c_podrName.AppearanceHeader.Options.UseTextOptions = true;
+            this.spisok1c_podrName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.spisok1c_podrName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.spisok1c_podrName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.spisok1c_podrName.Caption = "Подразделение 1С";
+            this.spisok1c_podrName.FieldName = "spisok1c_podrName";
+            this.spisok1c_podrName.Name = "spisok1c_podrName";
+            this.spisok1c_podrName.Visible = true;
+            this.spisok1c_podrName.VisibleIndex = 28;
+            this.spisok1c_podrName.Width = 160;
+            // 
             // tableLayoutPanel3
             // 
             this.tableLayoutPanel3.ColumnCount = 3;
@@ -763,24 +915,62 @@
             // 
             this.tableLayoutPanelPech.ColumnCount = 1;
             this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 4);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchSps, 0, 3);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchBln, 0, 2);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchDR, 0, 1);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchTS, 0, 0);
+            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpOrg, 0, 1);
+            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpDol, 0, 0);
+            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 5);
             this.tableLayoutPanelPech.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelPech.Location = new System.Drawing.Point(1267, 310);
             this.tableLayoutPanelPech.Name = "tableLayoutPanelPech";
             this.tableLayoutPanelPech.RowCount = 7;
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28531F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28816F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
             this.tableLayoutPanelPech.Size = new System.Drawing.Size(200, 243);
             this.tableLayoutPanelPech.TabIndex = 1;
+            // 
+            // customButtonSpOrg
+            // 
+            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpOrg.Btn = null;
+            this.customButtonSpOrg.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButtonSpOrg.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButtonSpOrg.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
+            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpOrg.Location = new System.Drawing.Point(3, 37);
+            this.customButtonSpOrg.Name = "customButtonSpOrg";
+            this.customButtonSpOrg.Size = new System.Drawing.Size(194, 28);
+            this.customButtonSpOrg.TabIndex = 6;
+            this.customButtonSpOrg.Text = "Справочник организаций";
+            this.customButtonSpOrg.UseVisualStyleBackColor = false;
+            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
+            // 
+            // customButtonSpDol
+            // 
+            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpDol.Btn = null;
+            this.customButtonSpDol.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButtonSpDol.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButtonSpDol.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
+            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 3);
+            this.customButtonSpDol.Name = "customButtonSpDol";
+            this.customButtonSpDol.Size = new System.Drawing.Size(194, 28);
+            this.customButtonSpDol.TabIndex = 5;
+            this.customButtonSpDol.Text = "Справочник должностей";
+            this.customButtonSpDol.UseVisualStyleBackColor = false;
+            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
             // 
             // customButtonPchShk
             // 
@@ -794,7 +984,7 @@
             this.customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchShk.Location = new System.Drawing.Point(3, 139);
+            this.customButtonPchShk.Location = new System.Drawing.Point(3, 173);
             this.customButtonPchShk.Name = "customButtonPchShk";
             this.customButtonPchShk.Size = new System.Drawing.Size(194, 28);
             this.customButtonPchShk.TabIndex = 4;
@@ -1009,6 +1199,7 @@
             this.customButtonRed.TabIndex = 2;
             this.customButtonRed.Text = "Редактировать";
             this.customButtonRed.UseVisualStyleBackColor = false;
+            this.customButtonRed.Click += new System.EventHandler(this.customButtonRed_Click);
             // 
             // customButtonAdd
             // 
@@ -1028,6 +1219,7 @@
             this.customButtonAdd.TabIndex = 0;
             this.customButtonAdd.Text = "Добавить";
             this.customButtonAdd.UseVisualStyleBackColor = false;
+            this.customButtonAdd.Click += new System.EventHandler(this.customButtonAdd_Click);
             // 
             // gridColumn4
             // 
@@ -1170,9 +1362,11 @@
             this.Text = "Fio";
             this.Load += new System.EventHandler(this.Fio_Load);
             this.tableLayoutPanelAll.ResumeLayout(false);
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.fioList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).EndInit();
@@ -1209,7 +1403,7 @@
         private CustomButton customButtonAdd;
         private System.Windows.Forms.BindingSource fioList;
         private DevExpress.XtraGrid.GridControl fioGrid;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewFio;
         private DevExpress.XtraGrid.Columns.GridColumn tab;
         private DevExpress.XtraGrid.Columns.GridColumn fio1;
         private DevExpress.XtraGrid.Columns.GridColumn rab;
@@ -1254,5 +1448,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn po;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItr;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private CustomButton customButtonINN;
+        private DevExpress.XtraGrid.Columns.GridColumn spisok1c_inn;
+        private DevExpress.XtraGrid.Columns.GridColumn spisok1c_id;
+        private DevExpress.XtraGrid.Columns.GridColumn spisok1c_orgName;
+        private DevExpress.XtraGrid.Columns.GridColumn spisok1c_podrName;
+        private CustomCheckBox customCheckBoxDel;
+        private CustomCheckBox customCheckBoxDei;
+        private CustomTextBox customTextBoxInn;
     }
 }

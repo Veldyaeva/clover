@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>SewingProduction</RootNamespace>
     <AssemblyName>SewingProduction</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -153,17 +153,23 @@
     <Compile Include="form\Articul.Designer.cs">
       <DependentUpon>Articul.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\Fio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\Fio.Designer.cs">
-      <DependentUpon>Fio.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\CardByNom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\CardByNom.Designer.cs">
       <DependentUpon>CardByNom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\editFio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\editFio.Designer.cs">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\Fio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\Fio.Designer.cs">
+      <DependentUpon>Fio.cs</DependentUpon>
     </Compile>
     <Compile Include="form\FurnUpakDeliveryInfo.cs">
       <SubType>Form</SubType>
@@ -177,17 +183,17 @@
     <Compile Include="form\OborudBrig.Designer.cs">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\PlanZagrBrig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\PlanZagrBrig.Designer.cs">
-      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\SpravBrig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\SpravBrig.Designer.cs">
       <DependentUpon>SpravBrig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.Designer.cs">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravForAll.cs">
       <SubType>Form</SubType>
@@ -201,17 +207,23 @@
     <Compile Include="form\SpravOborud.Designer.cs">
       <DependentUpon>SpravOborud.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\SpravZeh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravZeh.Designer.cs">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\SpravZeh.cs">
+    <Compile Include="form\TeamWorkTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SpravZeh.Designer.cs">
-      <DependentUpon>SpravZeh.cs</DependentUpon>
+    <Compile Include="form\TeamWorkTest.Designer.cs">
+      <DependentUpon>TeamWorkTest.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -314,14 +326,15 @@
     <EmbeddedResource Include="form\Articul.resx">
       <DependentUpon>Articul.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\CardByNom.resx">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\editFio.resx">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\Fio.resx">
       <DependentUpon>Fio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\CardByNom.resx">
-      <DependentUpon>CardByNom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\CardByNom.resx">
-      <DependentUpon>CardByNom.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
       <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
@@ -342,12 +355,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
-    <EmbeddedResource Include="form\OborudBrig.ru.resx">
-      <DependentUpon>OborudBrig.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SpravBrig.resx">
-      <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravForAll.resx">
       <DependentUpon>SpravForAll.cs</DependentUpon>
@@ -419,6 +426,17 @@
     <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="ACE_backupDataSet.xsc">
+      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="ACE_backupDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ACE_backupDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ACE_backupDataSet.xss">
+      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
+    </None>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>
