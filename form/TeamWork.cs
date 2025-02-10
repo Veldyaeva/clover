@@ -30,6 +30,7 @@ using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors;
 using DevExpress.Xpo.DB.Helpers;
 
+
 namespace SewingProduction.form
 {
     /// <summary>
@@ -43,7 +44,7 @@ namespace SewingProduction.form
         public TeamWork()
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
+            var dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
             _artNormService = new ArtNormService(dbHelper);
             UpdateTheme(this);
         }
@@ -55,7 +56,7 @@ namespace SewingProduction.form
         private void TeamWorkForm_Load(object sender, EventArgs e)
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.fio". При необходимости она может быть перемещена или удалена.
-            this.fioTableAdapter.Fill(this.aCEDataSet.fio);
+            //this.fioTableAdapter.Fill(this.aCEDataSet.fio);
             try
             {
                 int annId = 0;
@@ -71,14 +72,6 @@ namespace SewingProduction.form
                     kod = Convert.ToInt32(view.GetRowCellValue(0, "kod"));
                 }
 
-
-                //string query = $"select dbo.getFileEskizForKodd({kodd}) as pathpict ";
-                //var dt = ShowRelatedDataAce(query);
-                //if (dt != null)
-                //{
-                //    pictureBox1.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
-
-                //}
                 LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
                 Logger.LogEvent(annId.ToString(), "таблица загружена");
                 LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
@@ -87,14 +80,7 @@ namespace SewingProduction.form
                 LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
                 LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
                 var view_nzp = customGridControl5.MainView as GridView;
-                //if (view_nzp != null)
-                //{
-                //    for (int i=0; i<view_nzp.RowCount; i++)
-                //    {
-                //        DataRow ewwewqe = (DataRow)view_nzp.GetRow(i);
-                //        int nzp = Convert.ToInt32(ewwewqe["kolNZP"]);
-                //    }
-                //}
+
                 LoadGridControlData(pictureBox1, kod);
 
 
@@ -187,7 +173,7 @@ namespace SewingProduction.form
         }
 
         /// <summary>
-        /// обновляет данные в связанных таблицах
+        /// обновление данных в связанных таблицах
         /// </summary>
         /// <param name="annId">идентификатор разделения труда</param>
         private void UpdateRelatedData(int annId)
@@ -228,7 +214,12 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка при обновлении NZP: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        //Загрузка данных в связанные таблицы с помощью фильтров
+        /// <summary>
+        /// Загрузка данных в связанные таблицы с помощью фильтров
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <param name="source"></param>
+        /// <param name="_annId"></param>
         private void LoadGridControlData(GridControl grid, BindingSource source, int _annId)//DataTable data)
         {
             //// Привязываем данные к BindingSource
@@ -246,6 +237,11 @@ namespace SewingProduction.form
             view.EndUpdate();
 
         }
+        /// <summary>
+        /// Загрузка картинки
+        /// </summary>
+        /// <param name="pictureBox"></param>
+        /// <param name="_annId"></param>
         private void LoadGridControlData(PictureBox pictureBox, int _annId)
         {
             var dt = _artNormService.GetImage(_annId);
@@ -286,7 +282,7 @@ namespace SewingProduction.form
             if (view != null)
             {
                 int[] selectedRows = view.GetSelectedRows();
-                int annId = 0;
+                //int annId = 0;
                 //var focusedRow = view.GetFocusedRow();
                 {
                     if (selectedRows != null)
@@ -544,7 +540,7 @@ namespace SewingProduction.form
                     }
                     catch (Exception ex)
                     {
-                Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                        Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                         MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     };
                 }
@@ -565,10 +561,15 @@ namespace SewingProduction.form
             catch (Exception ex)
             {
                 Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
-        //загрузка norm_rasz 
+        /// <summary>
+        /// загрузка norm_rasz 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             int annId = 0;
@@ -620,7 +621,11 @@ namespace SewingProduction.form
 
         }
 
-        //обработка клика на заголовке
+        /// <summary>
+        /// обработка клика на заголовке
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
             if (e.Column == gridView7.Columns["IsChecked"])
@@ -655,7 +660,11 @@ namespace SewingProduction.form
         #region headerCheckBox
         private bool isHeaderChecked = false; // Состояние CheckBox в заголовке
         private Dictionary<GridView, bool> gridViewStates = new Dictionary<GridView, bool>();//словарь состояний CheckBox
-        //отрисовка чекБокса в заголовке столбца
+        /// <summary>
+        /// отрисовка чекБокса в заголовке столбца
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView8_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
         {
             // DrawCheckBox(e);
@@ -716,7 +725,11 @@ namespace SewingProduction.form
 
 
         }
-        //Обработка нажатия на заголовке чекБоксов
+        /// <summary>
+        /// Обработка нажатия на заголовке чекБоксов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBoxMouseDown(object sender, MouseEventArgs e)
         {
             GridView view = sender as GridView;
@@ -740,7 +753,11 @@ namespace SewingProduction.form
             view.RefreshData();
         }
 
-        //обновление статуса CheckBox у всех строк таблицы
+        /// <summary>
+        /// обновление статуса CheckBox у всех строк таблицы
+        /// </summary>
+        /// <param name="view"></param>
+        /// <param name="isChecked"></param>
         private void UpdateAllRows(GridView view, bool isChecked)
         {
             IList dataSource = view.DataSource as IList;
@@ -758,7 +775,11 @@ namespace SewingProduction.form
                 }
             }
         }
-        //переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
+        /// <summary>
+        /// переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
         {
             if (e.Column.FieldName == "IsChecked")
@@ -853,16 +874,32 @@ namespace SewingProduction.form
         }
     }
 
-    //Источник данных РТ для увязки
+    /// <summary>
+    /// Источник данных РТ для увязки
+    /// </summary>
     public class MyDataANN : INotifyPropertyChanged
     {
+        /// <summary>
+        /// AnnId
+        /// </summary>
         public int annId { get; set; }
+        /// <summary>
+        /// код из 7 цифр
+        /// </summary>
         public int kod { get; set; }
+        /// <summary>
+        /// артикул
+        /// </summary>
         public string articul { get; set; }
+        /// <summary>
+        /// статус (номер)
+        /// </summary>
         public int status { get; set; }
         public string group { get; set; }
         public string model { get; set; }
-
+        /// <summary>
+        /// статус название
+        /// </summary>
         public string stat { get; set; }
 
         private bool _isChecked;
@@ -893,15 +930,28 @@ namespace SewingProduction.form
     {
         public string articul { get; set; }
 
-        //код из 7 цифр
+        /// <summary>
+        /// код из 7 цифр
+        /// </summary>
         public int kod { get; set; }
+        /// <summary>
+        /// группа
+        /// </summary>
         public string group { get; set; }
+        /// <summary>
+        /// модель
+        /// </summary>
         public string model { get; set; }
 
-        //связанный артикул. очищается после завершения сеанса
+        /// <summary>
+        /// связанный артикул. очищается после завершения сеанса
+        /// </summary>
         public string binded_art { get; set; }
 
         private bool _isChecked;
+        /// <summary>
+        /// Метка в чек-боксе
+        /// </summary>
         public bool IsChecked
         {
             get => _isChecked;
@@ -924,61 +974,75 @@ namespace SewingProduction.form
 
     }
 
-    //класс для работы с БД
-    public class DatabaseHelper
-    {
-        private readonly string _connectionString;
+    ///// <summary>
+    ///// класс для работы с БД
+    ///// </summary>
+    //public class DatabaseHelper
+    //{
+    //    private readonly string _connectionString;
 
-        public DatabaseHelper(string connectionString)
-        {
-            _connectionString = connectionString;
-        }
+    //    public DatabaseHelper(string connectionString)
+    //    {
+    //        _connectionString = connectionString;
+    //    }
+    //    /// <summary>
+    //    /// Выполнение SQL запроса, возвращает dataTable
+    //    /// </summary>
+    //    /// <param name="query">запрос</param>
+    //    /// <param name="parameters">параметры</param>
+    //    /// <returns></returns>
+    //    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
+    //    {
+    //        var dt = new DataTable();
+    //        using (var connection = new SqlConnection(_connectionString))
+    //        {
+    //            connection.Open();
+    //            using (var command = new SqlCommand(query, connection))
+    //            {
+    //                if (parameters != null)
+    //                {
+    //                    foreach (var param in parameters)
+    //                    {
+    //                        command.Parameters.AddWithValue(param.Key, param.Value);
+    //                    }
+    //                }
+    //                using (var adapter = new SqlDataAdapter(command))
+    //                {
+    //                    adapter.Fill(dt);
+    //                }
+    //            }
+    //        }
+    //        return dt;
+    //    }
 
-        public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
-        {
-            var dt = new DataTable();
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                using (var command = new SqlCommand(query, connection))
-                {
-                    if (parameters != null)
-                    {
-                        foreach (var param in parameters)
-                        {
-                            command.Parameters.AddWithValue(param.Key, param.Value);
-                        }
-                    }
-                    using (var adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-            return dt;
-        }
+    //    /// <summary>
+    //    /// Выполнение SQL запроса
+    //    /// </summary>
+    //    /// <param name="query">запрос</param>
+    //    /// <param name="parameters">параметры</param>
+    //    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
+    //    {
+    //        using (var connection = new SqlConnection(_connectionString))
+    //        {
+    //            connection.Open();
+    //            using (var command = new SqlCommand(query, connection))
+    //            {
+    //                if (parameters != null)
+    //                {
+    //                    foreach (var param in parameters)
+    //                    {
+    //                        command.Parameters.AddWithValue(param.Key, param.Value);
+    //                    }
+    //                }
+    //                command.ExecuteNonQuery();
+    //            }
+    //        }
+    //    }
+    //}
 
-        public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
-        {
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                using (var command = new SqlCommand(query, connection))
-                {
-                    if (parameters != null)
-                    {
-                        foreach (var param in parameters)
-                        {
-                            command.Parameters.AddWithValue(param.Key, param.Value);
-                        }
-                    }
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-    }
-
-    //класс для обработки SQL
+    /// <summary>
+    /// класс для обработки SQL
+    /// </summary>
     public class ArtNormService
     {
         private readonly DatabaseHelper _dbHelper;
@@ -1048,11 +1112,13 @@ namespace SewingProduction.form
             string query = "SELECT fio, tab FROM fio where tab = @tab";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tab", tab } });
         }
-        
+
         /// <summary>
         /// Получение связанных данных из sp_articul
         /// </summary>
-        /// <param name="annId"></param>
+        /// <param name="annId">annId=null=> загрузка неувязанных артикулов
+        /// annId!=null => загрузка артикулов с НЗП процедурой GetNZPByKoddRT 
+        /// </param>
         /// <returns></returns>
         public DataTable GetRelatedspArt(int annId)
         {
@@ -1070,6 +1136,11 @@ namespace SewingProduction.form
 
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
         }
+        /// <summary>
+        /// Получение пути к файлу изображения
+        /// </summary>
+        /// <param name="kod">код</param>
+        /// <returns></returns>
         public DataTable GetImage(int kod)
         {
             string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";

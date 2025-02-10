@@ -17,7 +17,7 @@ namespace SewingProduction.form
         public TeamWork_AdvanceTW()
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
+            var dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
             _artNormService = new ArtNormService(dbHelper);
             UpdateTheme(this);
 

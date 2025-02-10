@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
+using System.Data;
+using DevExpress.XtraRichEdit.Model;
 
 namespace SewingProduction
 {
@@ -24,7 +26,9 @@ namespace SewingProduction
         }
     }
 
-    // Кастомная кнопка
+    /// <summary>
+    /// Кастомная кнопка
+    /// </summary>
     public class CustomButton : Button
     {
         public CustomButton()
@@ -105,7 +109,9 @@ namespace SewingProduction
         }
     }
 
-    // Класс-наследник для кнопки "Отмена"
+    /// <summary>
+    /// Класс-наследник для кнопки "Отмена"
+    /// </summary>
     public class CustomCancelButton : CustomButton
     {
         public CustomCancelButton()
@@ -135,7 +141,9 @@ namespace SewingProduction
 
 
 
-    //Класс-наследник для CheckBox
+    /// <summary>
+    /// Класс-наследник для CheckBox
+    /// </summary>
     public class CustomCheckBox : CheckBox
     {
         public CustomCheckBox()
@@ -168,7 +176,9 @@ namespace SewingProduction
 
     }
 
-    // Кастомное текстовое поле
+    /// <summary>
+    /// Кастомное текстовое поле
+    /// </summary>
     public class CustomTextBox : TextBox
     {
         public CustomTextBox()
@@ -200,7 +210,9 @@ namespace SewingProduction
         }
     }
 
-    //Класс-наследник для ComboBox
+    /// <summary>
+    /// Класс-наследник для ComboBox
+    /// </summary>
     public class CustomComboBox : ComboBox
     {
         public CustomComboBox()
@@ -231,7 +243,9 @@ namespace SewingProduction
 
     }
 
-    //    //Класс-наследник для Label
+    /// <summary>
+    ///    //Класс-наследник для Label
+    /// </summary>
     public class CustomLabel : System.Windows.Forms.Label
     {
         public CustomLabel()
@@ -263,7 +277,9 @@ namespace SewingProduction
 
     }
 
-    //Класс-наследник для MaskedTextBox
+    /// <summary>
+    /// Класс-наследник для MaskedTextBox
+    /// </summary>
     public class CustomMaskedTextBox : MaskedTextBox
     {
         public CustomMaskedTextBox()
@@ -374,7 +390,9 @@ namespace SewingProduction
 
     }
 
-    // Кастомная форма с градиентным фоном
+    /// <summary>
+    /// Кастомная форма с градиентным фоном
+    /// </summary>
     public class CustomForm : Form
     {
         protected override void OnPaint(PaintEventArgs e)
@@ -433,55 +451,17 @@ namespace SewingProduction
 
 
     }
+
+    #region CommonFunctions
+    /// <summary>
+    /// Класс общих функций
+    /// </summary>
     public static class CommonFunctions
-    #region
     {
-        public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-        //System.Windows.Forms.BindingSource bsource
-        {
-            System.Data.DataTable dT = new System.Data.DataTable();
-            try
-            {
-                string _connStr = "";
-                switch (_serv.ToLower())
-                {
-                    case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
-                    case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
-                    case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
-                }
-                string connectionString = _connStr;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter();
 
-                    connection.Open();
-                    //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
-                    //{
-                    //using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        //   SqlCommand command = new SqlCommand(query, connection);
-                        //CommandType commandType = command.CommandType;
-
-                        adapter.SelectCommand = command;
-                        adapter.Fill(dT);
-                        //bsource.DataSource = dT;
-                    }
-
-                    // transaction.Commit(); // Подтверждаем транзакцию
-
-                    //}
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return dT;
-        }
 
         /// <summary>
-        /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
+        /// получает значение в ячейке dt, либо, при его отсутствии присваивает значение по умолчанию
         /// </summary>
         /// <typeparam name="T">Тип возвращаемого значения</typeparam>
         /// <param name="view">таблица</param>
@@ -509,7 +489,117 @@ namespace SewingProduction
         }
     }
 }
-    #endregion
+#endregion
+
+
+#region DbHelper
+/// <summary>
+/// класс для работы с БД
+/// </summary>
+public class DatabaseHelper
+{
+    private readonly string _connectionString;
+
+    public DatabaseHelper(string _serv)//(string connectionString)
+    {
+        //_connectionString = connectionString;
+        switch (_serv.ToLower())
+        {
+            case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
+            case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
+            case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
+        }
+
+    }
+
+    //public static System.Data.DataTable ShowRelatedData(string _serv, string query)
+    //{
+    //    //System.Data.DataTable dT = new System.Data.DataTable();
+    //    try
+    //    {
+    //        //    string _connStr = "";
+    //        //    switch (_serv.ToLower())
+    //        //    {
+    //        //        case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
+    //        //        case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
+    //        //        case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
+    //        //    }
+    //        //    string connectionString = _connStr;
+    //        //    using (SqlConnection connection = new SqlConnection(connectionString))
+    //        //    {
+    //        //        SqlDataAdapter adapter = new SqlDataAdapter();
+
+    //        //        connection.Open();
+    //        //        using (SqlCommand command = new SqlCommand(query, connection))
+    //        //        {
+    //        //            adapter.SelectCommand = command;
+    //        //            adapter.Fill(dT);
+    //        //        }
+    //        //    }
+    //        }
+    //    catch (Exception ex)
+    //    {
+    //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    //    }
+    //        return ExecuteQuery(query);
+        
+    //    //return dT;
+    //}
+    /// <summary>
+    /// Выполнение SQL запроса, возвращает dataTable
+    /// </summary>
+    /// <param name="query">запрос</param>
+    /// <param name="parameters">параметры</param>
+    /// <returns></returns>
+    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
+    {
+        var dt = new DataTable();
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            using (var command = new SqlCommand(query, connection))
+            {
+                if (parameters != null)
+                {
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+                }
+                using (var adapter = new SqlDataAdapter(command))
+                {
+                    adapter.Fill(dt);
+                }
+            }
+        }
+        return dt;
+    }
+
+    /// <summary>
+    /// Выполнение SQL запроса
+    /// </summary>
+    /// <param name="query">запрос</param>
+    /// <param name="parameters">параметры</param>
+    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            using (var command = new SqlCommand(query, connection))
+            {
+                if (parameters != null)
+                {
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+                }
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+}
+#endregion
 
 public static class Logger
 {
