@@ -19,7 +19,7 @@ namespace SewingProduction.form
         {
             _id = Id;
             InitializeComponent(); 
-            var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
+            var dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(dbHelper);
             
             UpdateTheme(this);
