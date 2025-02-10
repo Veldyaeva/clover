@@ -500,6 +500,7 @@
   <ItemGroup>
     <None Include="Resources\winter.ico" />
     <Content Include="Resources\spring.jpg" />
+    <Content Include="Resources\valentine.jpg" />
     <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
