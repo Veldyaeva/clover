@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace SewingProduction.form
 {
     public partial class Fio : CustomForm
     {
-
+        private readonly DatabaseHelper _dbHelper;
         // Оснавная БД:
         string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
@@ -25,7 +26,9 @@ namespace SewingProduction.form
         string filter = "";
         public Fio(string tableSQL, string rusNameTableSQL)
         {
-            InitializeComponent();
+            _dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
+            
+            InitializeComponent(); 
             //Таблица fio:
             tableString = tableSQL;
             //Имя формы:
@@ -71,9 +74,10 @@ namespace SewingProduction.form
                                 LEFT JOIN spisok1c ON TRY_CAST(REPLACE(spisok1c.tab1c, ' ', '') AS INT) = CAST(fio.tab1c AS INT) AND spisok1c.orgcode = sp_firms.frm_1c_inn
                                 ORDER BY fio.tab ASC";
             //fioList.DataSource = ShowRelatedData("ace_test", query);
-
-            DataTable dataTable = await LoadDataAsync(connectionString, query);
-            fioList.DataSource = dataTable;
+            var dt = _dbHelper.ExecuteQuery(query);
+            fioList.DataSource = dt;
+            //DataTable dataTable = await LoadDataAsync(connectionString, query);
+            //fioList.DataSource = dataTable;
             // Фильтр для уволенных:
             customCheckBoxDei.Checked = true;
             // Чекбоксы в гриде:
@@ -277,6 +281,7 @@ namespace SewingProduction.form
             xtraTabPagePechSHk.PageVisible = true;
             xtraTabControl1.SelectedTabPageIndex = 0;
 
+
             string query = $@"select * from brig_ved";
             ShowRelatedComboBox(customComboBoxPechVed, "ace", query, "vdid", "brig");
         }
@@ -319,6 +324,30 @@ namespace SewingProduction.form
                 ShowRelatedComboBox(customComboBoxOtch, "ace", query, "value", "value");
             }
         }
+
+        protected void ShowRelatedComboBox(CustomComboBox comboBox, string _serv, string query, string displayMember, string valueMember)
+        {
+            try
+            {
+                //DataTable dataTable = ShowRelatedData(_serv, query);
+                DataTable dataTable = _dbHelper.ExecuteQuery(query);
+                if (dataTable != null)
+                {
+                    comboBox.DataSource = dataTable;
+                    comboBox.DisplayMember = displayMember;
+                    comboBox.ValueMember = valueMember;
+                }
+                else
+                {
+                    comboBox.DataSource = null;
+                    comboBox.Items.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при создании ComboBox: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         // КНОПКА "Совместители"
         private void customButtonSov_Click(object sender, EventArgs e)
         {
@@ -340,7 +369,8 @@ namespace SewingProduction.form
                     LEFT JOIN sp_firms frm ON f.mast = frm.kod
                     LEFT JOIN tab_n tn ON f.ftabn = tn.tnID
                     ORDER BY tss.tab_sovm, f.sovm, f.tab";
-            for_reports_excel.DataSource = ShowRelatedData("ace", query);
+            //for_reports_excel.DataSource = ShowRelatedData("ace", query);
+            for_reports_excel.DataSource = _dbHelper.ExecuteQuery(query);
             if (for_reports_excel.DataSource == null) { return; }
 
             // Генерируем отчёт
@@ -388,7 +418,8 @@ namespace SewingProduction.form
                     break;
             }
             query += $" order by name,podrname1c,naimen,fio,tab";
-            for_reports_excel.DataSource = ShowRelatedData("ace", query);
+            //for_reports_excel.DataSource = ShowRelatedData("ace", query);
+            for_reports_excel.DataSource = _dbHelper.ExecuteQuery(query);
             if (for_reports_excel.DataSource == null) { return; }
             // Генерируем отчёт
             ExcelReportGenerator generator = new ExcelReportGenerator();
@@ -415,17 +446,20 @@ namespace SewingProduction.form
             // 2. SQL Update для текущего пользователя
             string tab = gridViewFio.GetFocusedRowCellValue(gridViewFio.Columns["tab"]).ToString();
             string query = $"UPDATE fio SET tab_sovm = {tab} WHERE fio.tab={tab}";
-            ExecuteNonQuery("ace", query, new SqlParameter("@tab_sovm", tab), new SqlParameter("@tab", tab));
+            //ExecuteNonQuery("ace", query, new SqlParameter("@tab_sovm", tab), new SqlParameter("@tab", tab));
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@tab_sovm", tab }, { "@tab", tab } });
 
             // 3.  Получение нового табельного номера
             query = "SELECT ISNULL(MAX(tab), 0) + 1 AS newTab FROM fio";
-            DataTable sqlFio = ShowRelatedData("ace", query);
+            //DataTable sqlFio = ShowRelatedData("ace", query);
+            DataTable sqlFio = _dbHelper.ExecuteQuery(query);
             int newTabSovm = Convert.ToInt32(sqlFio.Rows[0]["newTab"]);
 
             // 4. Получение данных для XML
-            query = $"SELECT * FROM fio WHERE fio.tab={tab}"; 
-            sqlFio = ShowRelatedData("ace", query);
-            
+            query = $"SELECT * FROM fio WHERE fio.tab={tab}";
+            //sqlFio = ShowRelatedData("ace", query);
+            sqlFio = _dbHelper.ExecuteQuery(query);
+
             // 5.  Обновление записи
             DataRow newRow = sqlFio.Rows[0];
             newRow["tab"] = newTabSovm;
