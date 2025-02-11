@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.Pdf.Native.BouncyCastle.Crypto;
 using DevExpress.Xpo.DB.Helpers;
 using DevExpress.XtraEditors;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace SewingProduction.form
 {
@@ -23,7 +29,7 @@ namespace SewingProduction.form
         public art_new2024(string kodArtSQL)
         {
             InitializeComponent();
-            visibleSP(false);
+            radioGroup1.SelectedIndex = 0;
             comboAllTableItems();
             kodSQL = kodArtSQL;
         }
@@ -40,15 +46,17 @@ namespace SewingProduction.form
                 // Новый артикул
                 default:
                     visibleSP(false);
+                    newArt();
                     break;
                 // Новый артикул СП (шнуры,резинка)
                 case 1:
                     visibleSP(true);
+                    newArt();
                     break;
                 // Копия артикула
                 case 2:
                     visibleSP(false);
-                    copyArt(kodSQL);
+                    copyArt();
                     break;
             }
         }
@@ -70,54 +78,128 @@ namespace SewingProduction.form
             customTextBoxDlin.Visible = boolShow;
             customTextBoxTimePlet.Visible = boolShow;
             customTextBoxNormP.Visible = boolShow;
-            lookUpEditPrizn.Visible = boolShow;
+            searchLookUpEditPrizn.Visible = boolShow;
         }
 
         // Загрузка комбобоксов
         private void comboAllTableItems()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            string query;
+            /*using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                lookUpEditOneTableItems(lookUpEditGost,  "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,opi_gost AS 'Описание' FROM gost WHERE ust=1", "Имя", connection);
-                lookUpEditOneTableItems(lookUpEditGroup, "SELECT ag_naimen AS 'Наименование' FROM gost_sv_pict,articul_grup  where articul_grup.ag_id=gost_sv_pict.id_art ", "Наименование", connection);
-                lookUpEditOneTableItems(lookUpEditTm1,  "SELECT kodsp AS kle, m_naimen AS 'Наименование' FROM dbo.view_tovar_marka where tmOwn = 1 ", "Наименование", connection);
-                lookUpEditOneTableItems(lookUpEditTm2, "SELECT name AS 'Наименование' FROM view_grup_men where men_id >0 order by men_id ", "Наименование", connection);
-                lookUpEditOneTableItems(lookUpEditRazm, "SELECT razm AS 'Размер' FROM gost_sv_razmer, gost_razmer where gost_sv_razmer.id_razmer=gost_razmer.id_rost ", "Размер", connection);
-                //lookUpEditOneTableItems(lookUpEditPrizn, "SELECT tcds_name FROM TOVAR_CAT_DYNSIGN where tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ", "tcds_name", connection);
-            }
-            lookUpEditPrizn.Properties.DataSource = ShowRelatedData("global", "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN where tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ");
-            lookUpEditPrizn.Properties.DisplayMember = "Признак";
+                query = "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,TRIM(opi_gost) AS 'Описание' FROM gost WHERE ust=1";
+                lookUpEditOneTableItems(searchLookUpEditGost, query, "Описание", connection);
+
+                query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
+                lookUpEditOneTableItems(searchLookUpEditGroup, query, "Наименование", connection);
+
+                query = "SELECT TRIM(kodsp) AS kle, TRIM(m_naimen) AS 'Наименование' FROM dbo.view_tovar_marka WHERE tmOwn = 1 "; 
+                lookUpEditOneTableItems(searchLookUpEditTm1, query, "Наименование", connection);
+
+                query = "SELECT men_id AS 'Группа', TRIM(name) AS 'Наименование' FROM view_grup_men WHERE men_id >0 order by men_id ";
+                lookUpEditOneTableItems(searchLookUpEditTm2, query, "Наименование", connection);
+
+                query = "SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
+                lookUpEditOneTableItems(searchLookUpEditRazm, query, "Размер", connection);
+            }*/
+            query = "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,TRIM(opi_gost) AS 'Описание' FROM gost WHERE ust=1";
+            searchLookUpEditGost.Properties.DataSource = ShowRelatedData("ace", query);
+            searchLookUpEditGost.Properties.DisplayMember = "Описание";
+
+            query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
+            searchLookUpEditGroup.Properties.DataSource = ShowRelatedData("ace", query);
+            searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
+
+            query = "SELECT TRIM(kodsp) AS kle, TRIM(m_naimen) AS 'Наименование' FROM dbo.view_tovar_marka WHERE tmOwn = 1 ";
+            searchLookUpEditTm1.Properties.DataSource = ShowRelatedData("ace", query);
+            searchLookUpEditTm1.Properties.DisplayMember = "Наименование";
+
+            query = "SELECT men_id, TRIM(name) AS 'Наименование' FROM view_grup_men WHERE men_id >0 order by men_id ";
+            searchLookUpEditTm2.Properties.DataSource = ShowRelatedData("ace", query);
+            searchLookUpEditTm2.Properties.DisplayMember = "Наименование";
+
+            query = "SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
+            searchLookUpEditRazm.Properties.DataSource = ShowRelatedData("ace", query);
+            searchLookUpEditRazm.Properties.DisplayMember = "Размер";
+
+            query = "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
+            searchLookUpEditPrizn.Properties.DataSource = ShowRelatedData("global", query);
+            searchLookUpEditPrizn.Properties.DisplayMember = "Признак";
         }
-        private void lookUpEditOneTableItems(LookUpEdit lookUpEdit1, string query, string displayMember, SqlConnection connection)
+        /*
+        private void lookUpEditOneTableItems(SearchLookUpEdit searchLookUpEdit1, string query, string displayMember, SqlConnection connection)
         {
             SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
             DataTable tableList = new DataTable();
             dataAdapter.Fill(tableList);
             // Загрузка в LookUpEdit
-            lookUpEdit1.Properties.DataSource = tableList;
-            lookUpEdit1.Properties.DisplayMember = displayMember;
+            searchLookUpEdit1.Properties.DataSource = tableList;
+            searchLookUpEdit1.Properties.DisplayMember = displayMember;
         }
-        private void copyArt(string kodArtSQL)
+        */
+        private void lookUpEditGost_EditValueChanged(object sender, EventArgs e)
         {
-            string query = "select kod, articul, razm from sp_articul where kod = " + customTextBoxKod1.Text;
+            // услови выборки
+            string query = string.IsNullOrWhiteSpace(searchLookUpEditGost.Text) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{searchLookUpEditGost.Text}')";
+            // сами запросы для searchLookUpEditGroup-ов (комбобокса с гридом)
+            // группы
+            string queryGroup = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
+            queryGroup += query;
+            searchLookUpEditGroup.Properties.DataSource = ShowRelatedData("ace", queryGroup);
+            searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
+            // размеры
+            string queryRazm = $"SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
+            queryRazm += query;
+            searchLookUpEditRazm.Properties.DataSource = ShowRelatedData("ace", queryRazm);
+            searchLookUpEditRazm.Properties.DisplayMember = "Размер";
+        }
+        private void copyArt()
+        {
+            string query = $"select kod, articul, razm AS 'Размер', kle, mod, grup, ag_id, kod_tnved, CAST(grupp AS INT) AS men_id from sp_articul where kod = '{kodSQL}'";
             var tableList = ShowRelatedData("ace", query);
             // Загружаем данные:
-            customTextBoxKod1.Text = tableList.Rows[0]["kod"].ToString();
-            customTextBoxArt.Text = tableList.Rows[0]["articul"].ToString();
-            customTextBoxRazm.Text = tableList.Rows[0]["razm"].ToString();
+            if (tableList.Rows.Count > 0)
+            {
+                customTextBoxKod1.Text = tableList.Rows[0]["kod"].ToString();
+                customTextBoxArt.Text = tableList.Rows[0]["articul"].ToString();
 
+                searchLookUpEditRazm.Properties.ValueMember = "Размер";
+                searchLookUpEditRazm.EditValue = tableList.Rows[0]["Размер"].ToString().Trim();
 
-            //// комбобоксы:
-            //customComboBoxDolj.Text = tableList.Rows[0]["rab"].ToString().Trim();
-            //if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["mast"].ToString()))
-            //    comboOneTableItems(customComboBoxOrg,
-            //            $"SELECT TRIM(name) AS nameColumn FROM sp_firms WHERE sp_firms.kod = {tableList.Rows[0]["mast"].ToString()}",
-            //             "nameColumn", connection, false);
+                searchLookUpEditTm1.Properties.ValueMember = "kle";
+                searchLookUpEditTm1.Text = tableList.Rows[0]["kle"].ToString().Trim();
+
+                searchLookUpEditTm2.Properties.ValueMember = "men_id";
+                searchLookUpEditTm2.Text = tableList.Rows[0]["men_id"].ToString().Trim();
+
+            }
+            searchLookUpEditGost.Enabled = false;
+            searchLookUpEditGroup.Enabled = false;
         }
+        private void newArt()
+        {
+            customTextBoxKod1.Text = "";
+            customTextBoxKod2.Text = "";
+            customTextBoxArt.Text = "";
+            customTextBoxModel.Text = "";
+            customTextBoxKodFurn.Text = "";
+            customTextBox1.Text = "";
+            customTextBoxDlin.Text = "";
+            customTextBoxTimePlet.Text = "";
+            customTextBoxNormP.Text = "";
+            searchLookUpEditGost.EditValue = "";
+            searchLookUpEditGroup.EditValue = "";
+            searchLookUpEditTm1.EditValue = "";
+            searchLookUpEditTm2.EditValue = "";
+            searchLookUpEditRazm.EditValue = "";
+            searchLookUpEditPrizn.EditValue = "";
+            searchLookUpEditGost.Enabled = true;
+            searchLookUpEditGroup.Enabled = true;
+        }
+
         // Кнопка сохранить
         private void customOkButton1_Click(object sender, EventArgs e)
         {
-
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

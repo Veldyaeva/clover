@@ -40,7 +40,6 @@
             this.customTextBoxKod1 = new SewingProduction.CustomTextBox();
             this.customTextBoxKod2 = new SewingProduction.CustomTextBox();
             this.customTextBoxArt = new SewingProduction.CustomTextBox();
-            this.customTextBoxRazm = new SewingProduction.CustomTextBox();
             this.customTextBoxModel = new SewingProduction.CustomTextBox();
             this.customTextBoxKodFurn = new SewingProduction.CustomTextBox();
             this.customTextBox1 = new SewingProduction.CustomTextBox();
@@ -58,20 +57,32 @@
             this.customLabelM2 = new SewingProduction.CustomLabel();
             this.customCancelButton1 = new SewingProduction.CustomCancelButton();
             this.customOkButton1 = new SewingProduction.CustomOkButton();
-            this.lookUpEditGost = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditGroup = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditTm1 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditTm2 = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditRazm = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditPrizn = new DevExpress.XtraEditors.LookUpEdit();
+            this.searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.searchLookUpEditGost = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.searchLookUpEditGroup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.searchLookUpEditTm1 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.searchLookUpEditRazm = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridViewRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.searchLookUpEditTm2 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGost.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGroup.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTm1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTm2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditRazm.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditPrizn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditPrizn.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGost.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGroup.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditRazm.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRazm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm2.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -95,7 +106,6 @@
             this.tableLayoutPanel1.Controls.Add(this.customTextBoxKod1, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.customTextBoxKod2, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.customTextBoxArt, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxRazm, 3, 7);
             this.tableLayoutPanel1.Controls.Add(this.customTextBoxModel, 2, 8);
             this.tableLayoutPanel1.Controls.Add(this.customTextBoxKodFurn, 2, 9);
             this.tableLayoutPanel1.Controls.Add(this.customTextBox1, 2, 10);
@@ -113,12 +123,12 @@
             this.tableLayoutPanel1.Controls.Add(this.customLabelM2, 4, 13);
             this.tableLayoutPanel1.Controls.Add(this.customCancelButton1, 4, 15);
             this.tableLayoutPanel1.Controls.Add(this.customOkButton1, 1, 15);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditGost, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditGroup, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditTm1, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditTm2, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditRazm, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.lookUpEditPrizn, 2, 14);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditPrizn, 2, 14);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditGost, 2, 3);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditGroup, 2, 4);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditTm1, 2, 5);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditRazm, 2, 7);
+            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditTm2, 3, 5);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -294,18 +304,6 @@
             this.customTextBoxArt.Name = "customTextBoxArt";
             this.customTextBoxArt.Size = new System.Drawing.Size(297, 23);
             this.customTextBoxArt.TabIndex = 4;
-            // 
-            // customTextBoxRazm
-            // 
-            this.customTextBoxRazm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxRazm, 2);
-            this.customTextBoxRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxRazm.Location = new System.Drawing.Point(306, 213);
-            this.customTextBoxRazm.Name = "customTextBoxRazm";
-            this.customTextBoxRazm.Size = new System.Drawing.Size(196, 23);
-            this.customTextBoxRazm.TabIndex = 5;
             // 
             // customTextBoxModel
             // 
@@ -534,69 +532,120 @@
             this.customOkButton1.UseVisualStyleBackColor = false;
             this.customOkButton1.Click += new System.EventHandler(this.customOkButton1_Click);
             // 
-            // lookUpEditGost
+            // searchLookUpEditPrizn
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.lookUpEditGost, 3);
-            this.lookUpEditGost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditGost.Location = new System.Drawing.Point(205, 93);
-            this.lookUpEditGost.Name = "lookUpEditGost";
-            this.lookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditPrizn, 3);
+            this.searchLookUpEditPrizn.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditPrizn.Location = new System.Drawing.Point(205, 423);
+            this.searchLookUpEditPrizn.Name = "searchLookUpEditPrizn";
+            this.searchLookUpEditPrizn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditGost.Size = new System.Drawing.Size(297, 20);
-            this.lookUpEditGost.TabIndex = 35;
+            this.searchLookUpEditPrizn.Properties.PopupView = this.gridView5;
+            this.searchLookUpEditPrizn.Size = new System.Drawing.Size(297, 20);
+            this.searchLookUpEditPrizn.TabIndex = 46;
             // 
-            // lookUpEditGroup
+            // gridView5
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.lookUpEditGroup, 3);
-            this.lookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditGroup.Location = new System.Drawing.Point(205, 123);
-            this.lookUpEditGroup.Name = "lookUpEditGroup";
-            this.lookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView5.Name = "gridView5";
+            this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView5.OptionsView.ShowGroupPanel = false;
+            // 
+            // searchLookUpEditGost
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditGost, 3);
+            this.searchLookUpEditGost.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditGost.Location = new System.Drawing.Point(205, 93);
+            this.searchLookUpEditGost.Name = "searchLookUpEditGost";
+            this.searchLookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditGroup.Size = new System.Drawing.Size(297, 20);
-            this.lookUpEditGroup.TabIndex = 36;
+            this.searchLookUpEditGost.Properties.PopupView = this.searchLookUpEdit1View;
+            this.searchLookUpEditGost.Size = new System.Drawing.Size(297, 20);
+            this.searchLookUpEditGost.TabIndex = 41;
+            this.searchLookUpEditGost.EditValueChanged += new System.EventHandler(this.lookUpEditGost_EditValueChanged);
             // 
-            // lookUpEditTm1
+            // searchLookUpEdit1View
             // 
-            this.lookUpEditTm1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditTm1.Location = new System.Drawing.Point(205, 153);
-            this.lookUpEditTm1.Name = "lookUpEditTm1";
-            this.lookUpEditTm1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            // 
+            // searchLookUpEditGroup
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditGroup, 3);
+            this.searchLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditGroup.Location = new System.Drawing.Point(205, 123);
+            this.searchLookUpEditGroup.Name = "searchLookUpEditGroup";
+            this.searchLookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditTm1.Size = new System.Drawing.Size(95, 20);
-            this.lookUpEditTm1.TabIndex = 37;
+            this.searchLookUpEditGroup.Properties.PopupView = this.gridView1;
+            this.searchLookUpEditGroup.Size = new System.Drawing.Size(297, 20);
+            this.searchLookUpEditGroup.TabIndex = 42;
             // 
-            // lookUpEditTm2
+            // gridView1
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.lookUpEditTm2, 2);
-            this.lookUpEditTm2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditTm2.Location = new System.Drawing.Point(306, 153);
-            this.lookUpEditTm2.Name = "lookUpEditTm2";
-            this.lookUpEditTm2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView1.OptionsView.ShowGroupPanel = false;
+            // 
+            // searchLookUpEditTm1
+            // 
+            this.searchLookUpEditTm1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditTm1.Location = new System.Drawing.Point(205, 153);
+            this.searchLookUpEditTm1.Name = "searchLookUpEditTm1";
+            this.searchLookUpEditTm1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditTm2.Size = new System.Drawing.Size(196, 20);
-            this.lookUpEditTm2.TabIndex = 38;
+            this.searchLookUpEditTm1.Properties.PopupView = this.gridView2;
+            this.searchLookUpEditTm1.Size = new System.Drawing.Size(95, 20);
+            this.searchLookUpEditTm1.TabIndex = 43;
             // 
-            // lookUpEditRazm
+            // gridView2
             // 
-            this.lookUpEditRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditRazm.Location = new System.Drawing.Point(205, 213);
-            this.lookUpEditRazm.Name = "lookUpEditRazm";
-            this.lookUpEditRazm.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
+            // 
+            // searchLookUpEditRazm
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditRazm, 3);
+            this.searchLookUpEditRazm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditRazm.EditValue = "0";
+            this.searchLookUpEditRazm.Location = new System.Drawing.Point(205, 213);
+            this.searchLookUpEditRazm.Name = "searchLookUpEditRazm";
+            this.searchLookUpEditRazm.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditRazm.Size = new System.Drawing.Size(95, 20);
-            this.lookUpEditRazm.TabIndex = 39;
+            this.searchLookUpEditRazm.Properties.PopupView = this.gridViewRazm;
+            this.searchLookUpEditRazm.Size = new System.Drawing.Size(297, 20);
+            this.searchLookUpEditRazm.TabIndex = 45;
             // 
-            // lookUpEditPrizn
+            // gridViewRazm
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.lookUpEditPrizn, 3);
-            this.lookUpEditPrizn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lookUpEditPrizn.Location = new System.Drawing.Point(205, 423);
-            this.lookUpEditPrizn.Name = "lookUpEditPrizn";
-            this.lookUpEditPrizn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            this.gridViewRazm.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridViewRazm.Name = "gridViewRazm";
+            this.gridViewRazm.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridViewRazm.OptionsView.ShowGroupPanel = false;
+            // 
+            // searchLookUpEditTm2
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditTm2, 2);
+            this.searchLookUpEditTm2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.searchLookUpEditTm2.Location = new System.Drawing.Point(306, 153);
+            this.searchLookUpEditTm2.Name = "searchLookUpEditTm2";
+            this.searchLookUpEditTm2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditPrizn.Size = new System.Drawing.Size(297, 20);
-            this.lookUpEditPrizn.TabIndex = 40;
+            this.searchLookUpEditTm2.Properties.PopupView = this.gridView3;
+            this.searchLookUpEditTm2.Size = new System.Drawing.Size(196, 20);
+            this.searchLookUpEditTm2.TabIndex = 47;
+            // 
+            // gridView3
+            // 
+            this.gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            this.gridView3.Name = "gridView3";
+            this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
+            this.gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // art_new2024
             // 
@@ -611,12 +660,18 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGost.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGroup.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTm1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTm2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditRazm.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditPrizn.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditPrizn.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGost.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGroup.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditRazm.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRazm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm2.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -629,7 +684,6 @@
         private CustomTextBox customTextBoxKod1;
         private CustomTextBox customTextBoxKod2;
         private CustomTextBox customTextBoxArt;
-        private CustomTextBox customTextBoxRazm;
         private CustomTextBox customTextBoxModel;
         private CustomTextBox customTextBoxKodFurn;
         private CustomTextBox customTextBox1;
@@ -653,11 +707,17 @@
         private CustomLabel customLabelM2;
         private CustomOkButton customOkButton1;
         private CustomCancelButton customCancelButton1;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditGost;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditRazm;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditPrizn;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditGroup;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditTm1;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditTm2;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGost;
+        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditGroup;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditRazm;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRazm;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditPrizn;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
+        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEditTm2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
     }
 }

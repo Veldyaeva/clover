@@ -169,7 +169,7 @@ namespace SewingProduction.form
             string kodArtSQL;
             if (gridArticul.FocusedRowHandle >= 0 && gridArticul != null)
             {
-                kodArtSQL = gridArticul.GetFocusedRowCellValue(gridArticul.Columns["Код"]).ToString();
+                kodArtSQL = gridArticul.GetFocusedRowCellValue(gridArticul.Columns["kod"]).ToString();
                 // Открываем форму:
                 art_new2024 f = new art_new2024(kodArtSQL);
                 if (f.ShowDialog() == DialogResult.OK)
