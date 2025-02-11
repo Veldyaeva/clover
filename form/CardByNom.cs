@@ -178,7 +178,7 @@ namespace SewingProduction
     //        }
 
             string queryFurnZayavInfo = $"exec furnitZayavCheck '{PachKod}', 1 ";  // 1 - ШП. на будущее нужно будут доработать с учетом выбора вида производства
-            var dtFurnZayavInfo = ShowRelatedData("ace", queryFurnZayavInfo);
+            var dtFurnZayavInfo = CommonFunctions.ShowRelatedData("ace", queryFurnZayavInfo);
             bsFurnZayavInfo.DataSource = dtFurnZayavInfo;
             this.tbFurnKKStat.DataBindings.Clear();
             this.tbFurnKKStat.DataBindings.Add("text", bsFurnZayavInfo, "FurnKKStat");

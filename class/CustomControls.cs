@@ -1,6 +1,12 @@
-﻿using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
 using System;
+using System.Collections.Generic;
+using System.IO;
+using Newtonsoft.Json;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraPrinting.Native.WebClientUIControl;
+using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -14,7 +20,7 @@ namespace SewingProduction
     {
         public virtual void ApplyBaseProperties(Control control)
         {
-           // control.Font = ThemeManager.ActiveTheme.DefaultFont;
+            // control.Font = ThemeManager.ActiveTheme.DefaultFont;
         }
     }
 
@@ -45,7 +51,7 @@ namespace SewingProduction
         private void OnThemeChanged()
         {
             ApplyTheme();
-         //   Invalidate(); // Перерисовка кнопки
+            //   Invalidate(); // Перерисовка кнопки
         }
 
         protected override void OnPaint(PaintEventArgs pevent)
@@ -237,7 +243,7 @@ namespace SewingProduction
         public void ApplyTheme()
         {
             this.BackColor = Color.Transparent;
-            this.ForeColor = ThemeManager.ActiveTheme.LabelText;
+            this.ForeColor = ThemeManager.ActiveTheme.LabelTextColor;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
         }
         private void OnThemeChanged()
@@ -301,10 +307,10 @@ namespace SewingProduction
             this.MainView = CustomView;
             this.ViewCollection.Add(CustomView);
             //// Применяем начальную тему
-            //ApplyTheme();
-
             //// Подписываемся на изменения темы
-            //Theme.ThemeChanged += OnThemeChanged;
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
+
         }
 
         public void ApplyTheme()
@@ -312,25 +318,31 @@ namespace SewingProduction
             // Применяем тему к GridControl (например, цвет фона)
             this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.LookAndFeel.UseDefaultLookAndFeel = false;
-            //this.BackColor = ActiveTheme.GridBackground;
+            this.BackColor = ActiveTheme.GridBackground;
 
             //// Применяем тему к связанному GridView
             //CustomView.ApplyTheme();
+            this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
+
         }
+
 
         private void OnThemeChanged()
         {
             ApplyTheme();
+            Invalidate(); // Перерисовка текстового поля
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                //  Theme.ThemeChanged -= OnThemeChanged;
+                ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
         }
+
     }
 
     public class CustomGridView : GridView
@@ -464,7 +476,7 @@ namespace SewingProduction
                 {
                     maskedTextBox.ApplyTheme();
                 }
-            
+
                 else if (child.HasChildren)
                 {
                     UpdateTheme(child); // Рекурсивно обновляем тему для вложенных элементов
@@ -474,8 +486,11 @@ namespace SewingProduction
 
 
 
-        #region
-        protected System.Data.DataTable ShowRelatedData(string _serv, string query)
+    }
+    public static class CommonFunctions
+    #region
+    {
+        public static System.Data.DataTable ShowRelatedData(string _serv, string query)
         //System.Windows.Forms.BindingSource bsource
         {
             System.Data.DataTable dT = new System.Data.DataTable();
@@ -570,7 +585,107 @@ namespace SewingProduction
             }
         }
 
-
+        /// <summary>
+        /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
+        /// </summary>
+        /// <typeparam name="T">Тип возвращаемого значения</typeparam>
+        /// <param name="view">таблица</param>
+        /// <param name="rowHandle">идентификатор выбранной строки</param>
+        /// <param name="fieldName">название поля</param>
+        /// <param name="defaultValue">задаваемое значение по умолчанию</param>
+        /// <returns></returns>
+        public static T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
+        {
+            try
+            {
+                object value = view.GetRowCellValue(rowHandle, fieldName);
+                if (value == DBNull.Value || value == null)
+                {
+                    return defaultValue;
+                }
+                return (T)Convert.ChangeType(value, typeof(T));
+            }
+            catch (Exception ex)
+            {
+                // Логирование ошибки или другое действие
+                //  MessageBox.Show($"Ошибка при получении значения поля '{fieldName}': {ex.Message}");
+                return defaultValue;
+            }
+        }
     }
-    #endregion
+}
+#endregion
+
+public static class Logger
+{
+    private static readonly string logFilePath = "error_log.json";
+    private static readonly object _lock = new object();
+
+    public static void LogError(Exception ex, string context = "")
+    {
+        var logEntry = new LogEntry
+        {
+            Timestamp = DateTime.UtcNow.ToString("o"),
+            Message = ex.Message,
+            StackTrace = ex.StackTrace,
+            Context = context
+        };
+
+        WriteLog(logEntry);
+    }
+
+    public static void LogEvent(string ev, string context = "")
+    {
+        var logEntry = new LogEntry
+        {
+            Timestamp = DateTime.UtcNow.ToString("o"),
+            Message = ev,
+            StackTrace = "",
+            Context = context
+        };
+        WriteLog(logEntry);
+    }
+    private static void WriteLog(LogEntry logEntry)
+    {
+        lock (_lock)
+        {
+            List<LogEntry> logs = new List<LogEntry>();
+
+            // Если файл существует, загружаем предыдущие логи
+            if (File.Exists(logFilePath))
+            {
+                try
+                {
+                    string existingLogs = File.ReadAllText(logFilePath);
+                    logs = JsonConvert.DeserializeObject<List<LogEntry>>(existingLogs) ?? new List<LogEntry>();
+                }
+                catch (Exception readEx)
+                {
+                    Console.WriteLine($"Ошибка при чтении логов: {readEx.Message}");
+                }
+            }
+
+            // Добавляем новый лог
+            logs.Add(logEntry);
+
+            try
+            {
+                // Записываем обновленный список логов в JSON-файл
+                File.WriteAllText(logFilePath, JsonConvert.SerializeObject(logs, Formatting.Indented));
+            }
+            catch (Exception writeEx)
+            {
+                Console.WriteLine($"Ошибка при записи логов: {writeEx.Message}");
+            }
+        }
+    }
+}
+
+// Класс для хранения информации об ошибке
+public class LogEntry
+{
+    public string Timestamp { get; set; }
+    public string Message { get; set; }
+    public string StackTrace { get; set; }
+    public string Context { get; set; }
 }
