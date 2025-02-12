@@ -252,6 +252,7 @@ namespace SewingProduction.form
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             this.sp_articulTableAdapter1 = new SewingProduction.ACE_backupDataSetTableAdapters.sp_articulTableAdapter();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.customCheckBox4 = new SewingProduction.CustomCheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.aCEDataSetBindingSource)).BeginInit();
@@ -548,9 +549,10 @@ namespace SewingProduction.form
             this.gridView3.OptionsView.ColumnAutoWidth = false;
             this.gridView3.OptionsView.ShowGroupPanel = false;
             this.gridView3.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumn5, DevExpress.Data.ColumnSortOrder.Ascending)});
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colarticul, DevExpress.Data.ColumnSortOrder.Ascending)});
             this.gridView3.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.gridView3.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView3_FocusedRowChanged);
+            this.gridView3.ColumnFilterChanged += new System.EventHandler(this.gridView3_ColumnFilterChanged);
             this.gridView3.GotFocus += new System.EventHandler(this.gridControl2_GotFocus);
             // 
             // gridColumn4
@@ -1102,6 +1104,7 @@ namespace SewingProduction.form
             this.gridLookUpEdit1.Properties.ValueMember = "f_id";
             this.gridLookUpEdit1.Size = new System.Drawing.Size(169, 20);
             this.gridLookUpEdit1.TabIndex = 18;
+            this.gridLookUpEdit1.Visible = false;
             // 
             // gridLookUpEdit1View
             // 
@@ -1872,6 +1875,7 @@ namespace SewingProduction.form
             // panelControl5
             // 
             this.tablePanel2.SetColumn(this.panelControl5, 2);
+            this.panelControl5.Controls.Add(this.customCheckBox4);
             this.panelControl5.Controls.Add(this.customLabel5);
             this.panelControl5.Location = new System.Drawing.Point(524, 12);
             this.panelControl5.Name = "panelControl5";
@@ -2552,6 +2556,19 @@ namespace SewingProduction.form
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
             // 
+            // customCheckBox4
+            // 
+            this.customCheckBox4.AutoSize = true;
+            this.customCheckBox4.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCheckBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.customCheckBox4.Location = new System.Drawing.Point(158, 4);
+            this.customCheckBox4.Name = "customCheckBox4";
+            this.customCheckBox4.Size = new System.Drawing.Size(133, 20);
+            this.customCheckBox4.TabIndex = 9;
+            this.customCheckBox4.Text = "Показать все РТ";
+            this.customCheckBox4.UseVisualStyleBackColor = true;
+            this.customCheckBox4.CheckedChanged += new System.EventHandler(this.customCheckBox4_CheckedChanged);
+            // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3050,5 +3067,6 @@ namespace SewingProduction.form
         private CustomGridControl customGridControl6;
         private ACE_backupDataSetTableAdapters.sp_articulTableAdapter sp_articulTableAdapter1;
         private DevExpress.Utils.ImageCollection imageCollection1;
+        private CustomCheckBox customCheckBox4;
     }
 }

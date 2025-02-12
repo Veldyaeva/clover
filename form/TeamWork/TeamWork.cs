@@ -1,34 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Windows.Forms;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.Entity.Model.DescendantBuilding.Native;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.Data.Filtering;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
-using BindingSource = System.Windows.Forms.BindingSource;
-using DataTable = System.Data.DataTable;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.DataAccess.Sql;
-using DevExpress.Utils;
-using DevExpress.Mvvm.Native;
-using System.Drawing;
-using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Runtime.CompilerServices;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.CodeParser;
-using System.Collections;
-using System.Linq;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.DataAccess.Native.Data;
-using System.Threading;
-using System.Globalization;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.XtraEditors;
-using DevExpress.Xpo.DB.Helpers;
+using System.Drawing;
+using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
+using DataTable = System.Data.DataTable;
 
 
 namespace SewingProduction.form
@@ -39,6 +26,7 @@ namespace SewingProduction.form
     public partial class TeamWork : CustomForm
     {
         private readonly ArtNormService _artNormService;
+
 
 
         public TeamWork()
@@ -69,7 +57,7 @@ namespace SewingProduction.form
                 if (view != null)
                 {
                     annId = Convert.ToInt32(view.GetRowCellValue(0, "annId"));
-                    kod = Convert.ToInt32(view.GetRowCellValue(0, "kod"));
+                    kod = Convert.ToInt32(view.GetRowCellValue(1, "kod"));
                 }
 
                 LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
@@ -292,7 +280,7 @@ namespace SewingProduction.form
                         _artNormService.ResetAnnId(kod);
                     }
                 }
-             //   LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
+                //   LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedspArt(annId));
 
                 //sparticulBindingSource.ResetBindings(true);
                 //gridView10.RefreshData();
@@ -334,7 +322,8 @@ namespace SewingProduction.form
                 foreach (MyDataART row in ArtDataSource)
                 {
                     if (row.IsChecked)
-                    { art = row.kod;
+                    {
+                        art = row.kod;
                         row.binded_art = bindedAnn.articul;
                     }
                 }
@@ -491,7 +480,7 @@ namespace SewingProduction.form
             try
             {
                 //артикулы для увязки
-                var relatedData = _artNormService.GetRelatedspArt(0);
+                DataTable relatedData = _artNormService.GetRelatedspArt(0);
                 BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
                 // Заполняем myDataList данными из DataTable 
                 foreach (DataRow row in relatedData.Rows)
@@ -512,15 +501,16 @@ namespace SewingProduction.form
                     {
                         Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                         MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    };
+                    }
+                    ;
                 }
 
                 customGridControl1.DataSource = artDataList;
+                BindingList<MyDataANN> myDataList;
+                relatedData = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
 
-                //РТ для увязки
-                relatedData = _artNormService.GetArtNormDataCurrent();
 
-                BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+                myDataList = new BindingList<MyDataANN>();
                 // Заполняем myDataList данными из DataTable 
                 foreach (DataRow row in relatedData.Rows)
                 {
@@ -542,8 +532,11 @@ namespace SewingProduction.form
                     {
                         Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                         MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    };
+                    }
+                    ;
                 }
+
+                //привязка источника данных к таблице
                 customGridControl2.DataSource = myDataList;
 
                 //norm_rasz
@@ -563,6 +556,23 @@ namespace SewingProduction.form
                 Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                 MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private DataTable LoadWorksbyArt(int kod, string articul)//, out BindingList<MyDataANN> myDataList)
+        {
+            DataTable relatedData = new DataTable();
+            //РТ для увязки - поиск по kodd_rt
+            //загружаем РТ по первому коду в таблице артикулов
+            relatedData = _artNormService.GetArtNormDataCurrent(kod, customCheckBox4.Checked);
+            //РТ для увязки - поиск по первой части артикула
+            string art = articul;
+            int k = art.IndexOf("-");
+            if (k > 0)
+            {
+                DataTable dataTable = _artNormService.GetArtNormDataCurrent(articul.Substring(0, k));
+                relatedData.Merge(dataTable);
+            }
+            return relatedData;
         }
 
         /// <summary>
@@ -814,7 +824,7 @@ namespace SewingProduction.form
 
         }
 
-        private void GridButton_ButtonClick(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        private void GridButton_ButtonClick(object sender, ButtonPressedEventArgs e)
         {
             string filterString = filterTextBox1.Text.TrimEnd(' ');
             string columnName = GetSelectedColumnName();
@@ -862,15 +872,66 @@ namespace SewingProduction.form
         private void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             int kodd_rt = 0;
+            string articul = "";
             var view = gridView7;
             if (view != null)
             {
-                kodd_rt = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
+                kodd_rt = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
+                articul = view.GetRowCellValue(e.FocusedRowHandle, "articul").ToString();
             }
 
-            var relatedData = _artNormService.GetRelatedNormRasz(kodd_rt);
+
+            DataTable relatedData = LoadWorksbyArt(kodd_rt, articul);
+            // relatedData = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
+
+
+            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+            // Заполняем myDataList данными из DataTable 
+            foreach (DataRow row in relatedData.Rows)
+            {
+                try
+                {
+                    myDataList.Add(new MyDataANN
+                    {
+                        annId = Convert.ToInt32(row["annId"]),
+                        kod = Convert.ToInt32(row["kod"]),
+                        articul = row["articul"].ToString(),
+                        status = Convert.ToInt32(row["status"]),
+                        stat = row["stat"].ToString(),
+                        group = row["grup"].ToString(),
+                        model = row["mod"].ToString(),
+                        IsChecked = false
+                    });
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                ;
+            }
+
+            //привязка источника данных к таблице
+            customGridControl2.DataSource = myDataList;
+
+            relatedData = _artNormService.GetRelatedNormRasz(kodd_rt);
             normraszBindingSource1.DataSource = relatedData;
             customGridControl3.DataSource = normraszBindingSource1;
+        }
+
+        private void gridView3_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            //  searchControl1.ClearFilter();
+        }
+
+        private void customCheckBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            DataTable myDataList = new DataTable();
+            if (customCheckBox4.Checked)
+            {
+                myDataList = LoadWorksbyArt(0, "");
+                customGridControl2.DataSource = myDataList;
+            }
         }
     }
 
@@ -1061,13 +1122,25 @@ namespace SewingProduction.form
         /// загрузка артикулов для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public DataTable GetArtNormDataCurrent()
+        public DataTable GetArtNormDataCurrent(int kod, bool all)
         {
-            //string query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
-            string query = "SELECT * FROM artNormNView WHERE kod IN (SELECT annId FROM ACE_backup.dbo.View_sp_articul WHERE kodd_rt LIKE '@kod')";
-            return _dbHelper.ExecuteQuery(query);
+            string query = "";
+            if (all)
+            {
+                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
+            }
+            else
+            {
+                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView JOIN status_ann ON status=status_id WHERE status<3 AND annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt LIKE '@kod')";
+            }
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "kod", kod + "%" } });
         }
 
+        public DataTable GetArtNormDataCurrent(string art)
+        {
+            string query = "SELECT * FROM artNormNView WHERE articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "art", art + "%" } });
+        }
         public void ResetAnnId(int spArticul)
         {
             // string query = "UPDATE sp_articul SET annId = NULL WHERE kod = @kod";
@@ -1108,7 +1181,7 @@ namespace SewingProduction.form
 
         public DataTable GetRelDesigner(int tab)
         {
-            
+
             string query = "SELECT fio, tab FROM fio where tab = @tab";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tab", tab } });
         }
