@@ -38,6 +38,10 @@ namespace SewingProduction {
         
         private sp_articulDataTable tablesp_articul;
         
+        private status_annDataTable tablestatus_ann;
+        
+        private global::System.Data.DataRelation relationstatus_ann_art_norm_n;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -86,6 +90,9 @@ namespace SewingProduction {
                 }
                 if ((ds.Tables["sp_articul"] != null)) {
                     base.Tables.Add(new sp_articulDataTable(ds.Tables["sp_articul"]));
+                }
+                if ((ds.Tables["status_ann"] != null)) {
+                    base.Tables.Add(new status_annDataTable(ds.Tables["status_ann"]));
                 }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
@@ -177,6 +184,16 @@ namespace SewingProduction {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Browsable(false)]
+        [global::System.ComponentModel.DesignerSerializationVisibility(global::System.ComponentModel.DesignerSerializationVisibility.Content)]
+        public status_annDataTable status_ann {
+            get {
+                return this.tablestatus_ann;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.BrowsableAttribute(true)]
         [global::System.ComponentModel.DesignerSerializationVisibilityAttribute(global::System.ComponentModel.DesignerSerializationVisibility.Visible)]
         public override global::System.Data.SchemaSerializationMode SchemaSerializationMode {
@@ -263,6 +280,9 @@ namespace SewingProduction {
                 if ((ds.Tables["sp_articul"] != null)) {
                     base.Tables.Add(new sp_articulDataTable(ds.Tables["sp_articul"]));
                 }
+                if ((ds.Tables["status_ann"] != null)) {
+                    base.Tables.Add(new status_annDataTable(ds.Tables["status_ann"]));
+                }
                 this.DataSetName = ds.DataSetName;
                 this.Prefix = ds.Prefix;
                 this.Namespace = ds.Namespace;
@@ -338,6 +358,13 @@ namespace SewingProduction {
                     this.tablesp_articul.InitVars();
                 }
             }
+            this.tablestatus_ann = ((status_annDataTable)(base.Tables["status_ann"]));
+            if ((initTable == true)) {
+                if ((this.tablestatus_ann != null)) {
+                    this.tablestatus_ann.InitVars();
+                }
+            }
+            this.relationstatus_ann_art_norm_n = this.Relations["status_ann_art_norm_n"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -362,6 +389,12 @@ namespace SewingProduction {
             base.Tables.Add(this.tablenorm_rasz);
             this.tablesp_articul = new sp_articulDataTable();
             base.Tables.Add(this.tablesp_articul);
+            this.tablestatus_ann = new status_annDataTable();
+            base.Tables.Add(this.tablestatus_ann);
+            this.relationstatus_ann_art_norm_n = new global::System.Data.DataRelation("status_ann_art_norm_n", new global::System.Data.DataColumn[] {
+                        this.tablestatus_ann.status_idColumn}, new global::System.Data.DataColumn[] {
+                        this.tableart_norm_n.statusColumn}, false);
+            this.Relations.Add(this.relationstatus_ann_art_norm_n);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -403,6 +436,12 @@ namespace SewingProduction {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private bool ShouldSerializesp_articul() {
+            return false;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private bool ShouldSerializestatus_ann() {
             return false;
         }
         
@@ -482,6 +521,9 @@ namespace SewingProduction {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public delegate void sp_articulRowChangeEventHandler(object sender, sp_articulRowChangeEvent e);
         
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public delegate void status_annRowChangeEventHandler(object sender, status_annRowChangeEvent e);
+        
         /// <summary>
         ///Represents the strongly named DataTable class.
         ///</summary>
@@ -496,8 +538,6 @@ namespace SewingProduction {
             private global::System.Data.DataColumn columnarticul;
             
             private global::System.Data.DataColumn columnmod;
-            
-            private global::System.Data.DataColumn columnpo;
             
             private global::System.Data.DataColumn columnsek_shv;
             
@@ -517,10 +557,6 @@ namespace SewingProduction {
             
             private global::System.Data.DataColumn columnsek;
             
-            private global::System.Data.DataColumn columnst;
-            
-            private global::System.Data.DataColumn columnpo1;
-            
             private global::System.Data.DataColumn columnkomment;
             
             private global::System.Data.DataColumn columndata_sozd;
@@ -538,6 +574,10 @@ namespace SewingProduction {
             private global::System.Data.DataColumn columnannID;
             
             private global::System.Data.DataColumn columnstatus;
+            
+            private global::System.Data.DataColumn columnarh;
+            
+            private global::System.Data.DataColumn columnstat;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
@@ -601,14 +641,6 @@ namespace SewingProduction {
             public global::System.Data.DataColumn modColumn {
                 get {
                     return this.columnmod;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn poColumn {
-                get {
-                    return this.columnpo;
                 }
             }
             
@@ -686,22 +718,6 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn stColumn {
-                get {
-                    return this.columnst;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public global::System.Data.DataColumn po1Column {
-                get {
-                    return this.columnpo1;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public global::System.Data.DataColumn kommentColumn {
                 get {
                     return this.columnkomment;
@@ -774,6 +790,22 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn arhColumn {
+                get {
+                    return this.columnarh;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn statColumn {
+                get {
+                    return this.columnstat;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -814,7 +846,6 @@ namespace SewingProduction {
                         string grup, 
                         string articul, 
                         string mod, 
-                        string po, 
                         int sek_shv, 
                         int sek_vyaz5, 
                         int sek_vyaz6, 
@@ -824,8 +855,6 @@ namespace SewingProduction {
                         int sek_vyazo, 
                         int sek_vyaz, 
                         int sek, 
-                        int st, 
-                        string po1, 
                         string komment, 
                         System.DateTime data_sozd, 
                         int diz, 
@@ -833,14 +862,15 @@ namespace SewingProduction {
                         System.DateTime data_obn, 
                         int sek_kr, 
                         int slogn, 
-                        int status) {
+                        status_annRow parentstatus_annRowBystatus_ann_art_norm_n, 
+                        bool arh, 
+                        string stat) {
                 art_norm_nRow rowart_norm_nRow = ((art_norm_nRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         kod,
                         grup,
                         articul,
                         mod,
-                        po,
                         sek_shv,
                         sek_vyaz5,
                         sek_vyaz6,
@@ -850,8 +880,6 @@ namespace SewingProduction {
                         sek_vyazo,
                         sek_vyaz,
                         sek,
-                        st,
-                        po1,
                         komment,
                         data_sozd,
                         diz,
@@ -860,7 +888,12 @@ namespace SewingProduction {
                         sek_kr,
                         slogn,
                         null,
-                        status};
+                        null,
+                        arh,
+                        stat};
+                if ((parentstatus_annRowBystatus_ann_art_norm_n != null)) {
+                    columnValuesArray[21] = parentstatus_annRowBystatus_ann_art_norm_n[0];
+                }
                 rowart_norm_nRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowart_norm_nRow);
                 return rowart_norm_nRow;
@@ -894,7 +927,6 @@ namespace SewingProduction {
                 this.columngrup = base.Columns["grup"];
                 this.columnarticul = base.Columns["articul"];
                 this.columnmod = base.Columns["mod"];
-                this.columnpo = base.Columns["po"];
                 this.columnsek_shv = base.Columns["sek_shv"];
                 this.columnsek_vyaz5 = base.Columns["sek_vyaz5"];
                 this.columnsek_vyaz6 = base.Columns["sek_vyaz6"];
@@ -904,8 +936,6 @@ namespace SewingProduction {
                 this.columnsek_vyazo = base.Columns["sek_vyazo"];
                 this.columnsek_vyaz = base.Columns["sek_vyaz"];
                 this.columnsek = base.Columns["sek"];
-                this.columnst = base.Columns["st"];
-                this.columnpo1 = base.Columns["po1"];
                 this.columnkomment = base.Columns["komment"];
                 this.columndata_sozd = base.Columns["data_sozd"];
                 this.columndiz = base.Columns["diz"];
@@ -915,6 +945,8 @@ namespace SewingProduction {
                 this.columnslogn = base.Columns["slogn"];
                 this.columnannID = base.Columns["annID"];
                 this.columnstatus = base.Columns["status"];
+                this.columnarh = base.Columns["arh"];
+                this.columnstat = base.Columns["stat"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -928,8 +960,6 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnarticul);
                 this.columnmod = new global::System.Data.DataColumn("mod", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnmod);
-                this.columnpo = new global::System.Data.DataColumn("po", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpo);
                 this.columnsek_shv = new global::System.Data.DataColumn("sek_shv", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsek_shv);
                 this.columnsek_vyaz5 = new global::System.Data.DataColumn("sek_vyaz5", typeof(int), null, global::System.Data.MappingType.Element);
@@ -948,10 +978,6 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnsek_vyaz);
                 this.columnsek = new global::System.Data.DataColumn("sek", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsek);
-                this.columnst = new global::System.Data.DataColumn("st", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnst);
-                this.columnpo1 = new global::System.Data.DataColumn("po1", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnpo1);
                 this.columnkomment = new global::System.Data.DataColumn("komment", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnkomment);
                 this.columndata_sozd = new global::System.Data.DataColumn("data_sozd", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
@@ -970,21 +996,24 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnannID);
                 this.columnstatus = new global::System.Data.DataColumn("status", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnstatus);
+                this.columnarh = new global::System.Data.DataColumn("arh", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnarh);
+                this.columnstat = new global::System.Data.DataColumn("stat", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstat);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnannID}, true));
                 this.columnkod.MaxLength = 7;
                 this.columngrup.MaxLength = 35;
                 this.columnarticul.MaxLength = 25;
                 this.columnmod.MaxLength = 50;
-                this.columnpo.MaxLength = 1;
-                this.columnpo1.MaxLength = 1;
-                this.columnkomment.MaxLength = 2147483647;
                 this.columnannID.AutoIncrement = true;
                 this.columnannID.AutoIncrementSeed = -1;
                 this.columnannID.AutoIncrementStep = -1;
                 this.columnannID.AllowDBNull = false;
                 this.columnannID.ReadOnly = true;
                 this.columnannID.Unique = true;
+                this.columnstat.AllowDBNull = false;
+                this.columnstat.MaxLength = 2147483647;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2108,6 +2137,12 @@ namespace SewingProduction {
             
             private global::System.Data.DataColumn columnannId;
             
+            private global::System.Data.DataColumn columnsek;
+            
+            private global::System.Data.DataColumn columnobor;
+            
+            private global::System.Data.DataColumn columnspec;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public Norm_raskDataTable() {
@@ -2215,6 +2250,30 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sekColumn {
+                get {
+                    return this.columnsek;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn oborColumn {
+                get {
+                    return this.columnobor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn specColumn {
+                get {
+                    return this.columnspec;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2250,7 +2309,7 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public Norm_raskRow AddNorm_raskRow(string kod, string kod_o, string text, int n, int n_ch, int n1, int razryd, int annId) {
+            public Norm_raskRow AddNorm_raskRow(string kod, string kod_o, string text, int n, int n_ch, int n1, int razryd, int annId, int sek, string obor, string spec) {
                 Norm_raskRow rowNorm_raskRow = ((Norm_raskRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -2261,7 +2320,10 @@ namespace SewingProduction {
                         n_ch,
                         n1,
                         razryd,
-                        annId};
+                        annId,
+                        sek,
+                        obor,
+                        spec};
                 rowNorm_raskRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowNorm_raskRow);
                 return rowNorm_raskRow;
@@ -2293,6 +2355,9 @@ namespace SewingProduction {
                 this.columnn1 = base.Columns["n1"];
                 this.columnrazryd = base.Columns["razryd"];
                 this.columnannId = base.Columns["annId"];
+                this.columnsek = base.Columns["sek"];
+                this.columnobor = base.Columns["obor"];
+                this.columnspec = base.Columns["spec"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2316,6 +2381,12 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnrazryd);
                 this.columnannId = new global::System.Data.DataColumn("annId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnannId);
+                this.columnsek = new global::System.Data.DataColumn("sek", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsek);
+                this.columnobor = new global::System.Data.DataColumn("obor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobor);
+                this.columnspec = new global::System.Data.DataColumn("spec", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnspec);
                 this.columnid.AutoIncrement = true;
                 this.columnid.AutoIncrementSeed = -1;
                 this.columnid.AutoIncrementStep = -1;
@@ -2324,6 +2395,8 @@ namespace SewingProduction {
                 this.columnkod.MaxLength = 7;
                 this.columnkod_o.MaxLength = 3;
                 this.columntext.MaxLength = 30;
+                this.columnobor.MaxLength = 20;
+                this.columnspec.MaxLength = 3;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2467,6 +2540,14 @@ namespace SewingProduction {
             
             private global::System.Data.DataColumn columnannId;
             
+            private global::System.Data.DataColumn columnn;
+            
+            private global::System.Data.DataColumn columnn1;
+            
+            private global::System.Data.DataColumn columnsek;
+            
+            private global::System.Data.DataColumn columnobor;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public norm_raszDataTable() {
@@ -2542,6 +2623,38 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn nColumn {
+                get {
+                    return this.columnn;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn n1Column {
+                get {
+                    return this.columnn1;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn sekColumn {
+                get {
+                    return this.columnsek;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn oborColumn {
+                get {
+                    return this.columnobor;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2577,14 +2690,18 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public norm_raszRow Addnorm_raszRow(string kod, string kod_o, string text, int razryd, int annId) {
+            public norm_raszRow Addnorm_raszRow(string kod, string kod_o, string text, int razryd, int annId, int n, int n1, int sek, string obor) {
                 norm_raszRow rownorm_raszRow = ((norm_raszRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         kod,
                         kod_o,
                         text,
                         razryd,
-                        annId};
+                        annId,
+                        n,
+                        n1,
+                        sek,
+                        obor};
                 rownorm_raszRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rownorm_raszRow);
                 return rownorm_raszRow;
@@ -2612,6 +2729,10 @@ namespace SewingProduction {
                 this.columntext = base.Columns["text"];
                 this.columnrazryd = base.Columns["razryd"];
                 this.columnannId = base.Columns["annId"];
+                this.columnn = base.Columns["n"];
+                this.columnn1 = base.Columns["n1"];
+                this.columnsek = base.Columns["sek"];
+                this.columnobor = base.Columns["obor"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2627,9 +2748,18 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnrazryd);
                 this.columnannId = new global::System.Data.DataColumn("annId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnannId);
+                this.columnn = new global::System.Data.DataColumn("n", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnn);
+                this.columnn1 = new global::System.Data.DataColumn("n1", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnn1);
+                this.columnsek = new global::System.Data.DataColumn("sek", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsek);
+                this.columnobor = new global::System.Data.DataColumn("obor", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnobor);
                 this.columnkod.MaxLength = 7;
                 this.columnkod_o.MaxLength = 3;
                 this.columntext.MaxLength = 200;
+                this.columnobor.MaxLength = 35;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2775,6 +2905,10 @@ namespace SewingProduction {
             
             private global::System.Data.DataColumn columnannId;
             
+            private global::System.Data.DataColumn columnkodSort;
+            
+            private global::System.Data.DataColumn columntrueKod;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public sp_articulDataTable() {
@@ -2858,6 +2992,22 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn kodSortColumn {
+                get {
+                    return this.columnkodSort;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn trueKodColumn {
+                get {
+                    return this.columntrueKod;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -2893,7 +3043,7 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public sp_articulRow Addsp_articulRow(string kod, string grup, string articul, string mod, string razm, int annId) {
+            public sp_articulRow Addsp_articulRow(string kod, string grup, string articul, string mod, string razm, int annId, string kodSort, string trueKod) {
                 sp_articulRow rowsp_articulRow = ((sp_articulRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         kod,
@@ -2901,7 +3051,9 @@ namespace SewingProduction {
                         articul,
                         mod,
                         razm,
-                        annId};
+                        annId,
+                        kodSort,
+                        trueKod};
                 rowsp_articulRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowsp_articulRow);
                 return rowsp_articulRow;
@@ -2937,6 +3089,8 @@ namespace SewingProduction {
                 this.columnmod = base.Columns["mod"];
                 this.columnrazm = base.Columns["razm"];
                 this.columnannId = base.Columns["annId"];
+                this.columnkodSort = base.Columns["kodSort"];
+                this.columntrueKod = base.Columns["trueKod"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -2954,6 +3108,10 @@ namespace SewingProduction {
                 base.Columns.Add(this.columnrazm);
                 this.columnannId = new global::System.Data.DataColumn("annId", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnannId);
+                this.columnkodSort = new global::System.Data.DataColumn("kodSort", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnkodSort);
+                this.columntrueKod = new global::System.Data.DataColumn("trueKod", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columntrueKod);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnkod}, true));
                 this.columnkod.AllowDBNull = false;
@@ -2963,6 +3121,8 @@ namespace SewingProduction {
                 this.columnarticul.MaxLength = 25;
                 this.columnmod.MaxLength = 25;
                 this.columnrazm.MaxLength = 25;
+                this.columntrueKod.AllowDBNull = false;
+                this.columntrueKod.MaxLength = 8;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3090,6 +3250,284 @@ namespace SewingProduction {
         }
         
         /// <summary>
+        ///Represents the strongly named DataTable class.
+        ///</summary>
+        [global::System.Serializable()]
+        [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")]
+        public partial class status_annDataTable : global::System.Data.TypedTableBase<status_annRow> {
+            
+            private global::System.Data.DataColumn columnstatus_id;
+            
+            private global::System.Data.DataColumn columnname;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annDataTable() {
+                this.TableName = "status_ann";
+                this.BeginInit();
+                this.InitClass();
+                this.EndInit();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal status_annDataTable(global::System.Data.DataTable table) {
+                this.TableName = table.TableName;
+                if ((table.CaseSensitive != table.DataSet.CaseSensitive)) {
+                    this.CaseSensitive = table.CaseSensitive;
+                }
+                if ((table.Locale.ToString() != table.DataSet.Locale.ToString())) {
+                    this.Locale = table.Locale;
+                }
+                if ((table.Namespace != table.DataSet.Namespace)) {
+                    this.Namespace = table.Namespace;
+                }
+                this.Prefix = table.Prefix;
+                this.MinimumCapacity = table.MinimumCapacity;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected status_annDataTable(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+                    base(info, context) {
+                this.InitVars();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn status_idColumn {
+                get {
+                    return this.columnstatus_id;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn nameColumn {
+                get {
+                    return this.columnname;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            [global::System.ComponentModel.Browsable(false)]
+            public int Count {
+                get {
+                    return this.Rows.Count;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow this[int index] {
+                get {
+                    return ((status_annRow)(this.Rows[index]));
+                }
+            }
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event status_annRowChangeEventHandler status_annRowChanging;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event status_annRowChangeEventHandler status_annRowChanged;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event status_annRowChangeEventHandler status_annRowDeleting;
+            
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public event status_annRowChangeEventHandler status_annRowDeleted;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Addstatus_annRow(status_annRow row) {
+                this.Rows.Add(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow Addstatus_annRow(string name) {
+                status_annRow rowstatus_annRow = ((status_annRow)(this.NewRow()));
+                object[] columnValuesArray = new object[] {
+                        null,
+                        name};
+                rowstatus_annRow.ItemArray = columnValuesArray;
+                this.Rows.Add(rowstatus_annRow);
+                return rowstatus_annRow;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow FindBystatus_id(int status_id) {
+                return ((status_annRow)(this.Rows.Find(new object[] {
+                            status_id})));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public override global::System.Data.DataTable Clone() {
+                status_annDataTable cln = ((status_annDataTable)(base.Clone()));
+                cln.InitVars();
+                return cln;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataTable CreateInstance() {
+                return new status_annDataTable();
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal void InitVars() {
+                this.columnstatus_id = base.Columns["status_id"];
+                this.columnname = base.Columns["name"];
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            private void InitClass() {
+                this.columnstatus_id = new global::System.Data.DataColumn("status_id", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnstatus_id);
+                this.columnname = new global::System.Data.DataColumn("name", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnname);
+                this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
+                                this.columnstatus_id}, true));
+                this.columnstatus_id.AutoIncrement = true;
+                this.columnstatus_id.AutoIncrementSeed = -1;
+                this.columnstatus_id.AutoIncrementStep = -1;
+                this.columnstatus_id.AllowDBNull = false;
+                this.columnstatus_id.ReadOnly = true;
+                this.columnstatus_id.Unique = true;
+                this.columnname.AllowDBNull = false;
+                this.columnname.MaxLength = 2147483647;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow Newstatus_annRow() {
+                return ((status_annRow)(this.NewRow()));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Data.DataRow NewRowFromBuilder(global::System.Data.DataRowBuilder builder) {
+                return new status_annRow(builder);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override global::System.Type GetRowType() {
+                return typeof(status_annRow);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanged(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanged(e);
+                if ((this.status_annRowChanged != null)) {
+                    this.status_annRowChanged(this, new status_annRowChangeEvent(((status_annRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowChanging(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowChanging(e);
+                if ((this.status_annRowChanging != null)) {
+                    this.status_annRowChanging(this, new status_annRowChangeEvent(((status_annRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleted(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleted(e);
+                if ((this.status_annRowDeleted != null)) {
+                    this.status_annRowDeleted(this, new status_annRowChangeEvent(((status_annRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            protected override void OnRowDeleting(global::System.Data.DataRowChangeEventArgs e) {
+                base.OnRowDeleting(e);
+                if ((this.status_annRowDeleting != null)) {
+                    this.status_annRowDeleting(this, new status_annRowChangeEvent(((status_annRow)(e.Row)), e.Action));
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Removestatus_annRow(status_annRow row) {
+                this.Rows.Remove(row);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
+                global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
+                global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
+                ACE_backupDataSet ds = new ACE_backupDataSet();
+                global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
+                any1.Namespace = "http://www.w3.org/2001/XMLSchema";
+                any1.MinOccurs = new decimal(0);
+                any1.MaxOccurs = decimal.MaxValue;
+                any1.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any1);
+                global::System.Xml.Schema.XmlSchemaAny any2 = new global::System.Xml.Schema.XmlSchemaAny();
+                any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1";
+                any2.MinOccurs = new decimal(1);
+                any2.ProcessContents = global::System.Xml.Schema.XmlSchemaContentProcessing.Lax;
+                sequence.Items.Add(any2);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute1 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute1.Name = "namespace";
+                attribute1.FixedValue = ds.Namespace;
+                type.Attributes.Add(attribute1);
+                global::System.Xml.Schema.XmlSchemaAttribute attribute2 = new global::System.Xml.Schema.XmlSchemaAttribute();
+                attribute2.Name = "tableTypeName";
+                attribute2.FixedValue = "status_annDataTable";
+                type.Attributes.Add(attribute2);
+                type.Particle = sequence;
+                global::System.Xml.Schema.XmlSchema dsSchema = ds.GetSchemaSerializable();
+                if (xs.Contains(dsSchema.TargetNamespace)) {
+                    global::System.IO.MemoryStream s1 = new global::System.IO.MemoryStream();
+                    global::System.IO.MemoryStream s2 = new global::System.IO.MemoryStream();
+                    try {
+                        global::System.Xml.Schema.XmlSchema schema = null;
+                        dsSchema.Write(s1);
+                        for (global::System.Collections.IEnumerator schemas = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator(); schemas.MoveNext(); ) {
+                            schema = ((global::System.Xml.Schema.XmlSchema)(schemas.Current));
+                            s2.SetLength(0);
+                            schema.Write(s2);
+                            if ((s1.Length == s2.Length)) {
+                                s1.Position = 0;
+                                s2.Position = 0;
+                                for (; ((s1.Position != s1.Length) 
+                                            && (s1.ReadByte() == s2.ReadByte())); ) {
+                                    ;
+                                }
+                                if ((s1.Position == s1.Length)) {
+                                    return type;
+                                }
+                            }
+                        }
+                    }
+                    finally {
+                        if ((s1 != null)) {
+                            s1.Close();
+                        }
+                        if ((s2 != null)) {
+                            s2.Close();
+                        }
+                    }
+                }
+                xs.Add(dsSchema);
+                return type;
+            }
+        }
+        
+        /// <summary>
         ///Represents strongly named DataRow class.
         ///</summary>
         public partial class art_norm_nRow : global::System.Data.DataRow {
@@ -3164,22 +3602,6 @@ namespace SewingProduction {
                 }
                 set {
                     this[this.tableart_norm_n.modColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string po {
-                get {
-                    try {
-                        return ((string)(this[this.tableart_norm_n.poColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'po\' в таблице \'art_norm_n\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableart_norm_n.poColumn] = value;
                 }
             }
             
@@ -3329,38 +3751,6 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public int st {
-                get {
-                    try {
-                        return ((int)(this[this.tableart_norm_n.stColumn]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'st\' в таблице \'art_norm_n\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableart_norm_n.stColumn] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public string po1 {
-                get {
-                    try {
-                        return ((string)(this[this.tableart_norm_n.po1Column]));
-                    }
-                    catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("Значение для столбца \'po1\' в таблице \'art_norm_n\' равно DBNull.", e);
-                    }
-                }
-                set {
-                    this[this.tableart_norm_n.po1Column] = value;
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public string komment {
                 get {
                     try {
@@ -3500,6 +3890,44 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool arh {
+                get {
+                    try {
+                        return ((bool)(this[this.tableart_norm_n.arhColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'arh\' в таблице \'art_norm_n\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableart_norm_n.arhColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string stat {
+                get {
+                    return ((string)(this[this.tableart_norm_n.statColumn]));
+                }
+                set {
+                    this[this.tableart_norm_n.statColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow status_annRow {
+                get {
+                    return ((status_annRow)(this.GetParentRow(this.Table.ParentRelations["status_ann_art_norm_n"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["status_ann_art_norm_n"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IskodNull() {
                 return this.IsNull(this.tableart_norm_n.kodColumn);
             }
@@ -3544,18 +3972,6 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetmodNull() {
                 this[this.tableart_norm_n.modColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IspoNull() {
-                return this.IsNull(this.tableart_norm_n.poColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetpoNull() {
-                this[this.tableart_norm_n.poColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3668,30 +4084,6 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool IsstNull() {
-                return this.IsNull(this.tableart_norm_n.stColumn);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void SetstNull() {
-                this[this.tableart_norm_n.stColumn] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public bool Ispo1Null() {
-                return this.IsNull(this.tableart_norm_n.po1Column);
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public void Setpo1Null() {
-                this[this.tableart_norm_n.po1Column] = global::System.Convert.DBNull;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IskommentNull() {
                 return this.IsNull(this.tableart_norm_n.kommentColumn);
             }
@@ -3784,6 +4176,18 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetstatusNull() {
                 this[this.tableart_norm_n.statusColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsarhNull() {
+                return this.IsNull(this.tableart_norm_n.arhColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetarhNull() {
+                this[this.tableart_norm_n.arhColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4457,6 +4861,54 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int sek {
+                get {
+                    try {
+                        return ((int)(this[this.tableNorm_rask.sekColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'sek\' в таблице \'Norm_rask\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNorm_rask.sekColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string obor {
+                get {
+                    try {
+                        return ((string)(this[this.tableNorm_rask.oborColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'obor\' в таблице \'Norm_rask\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNorm_rask.oborColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string spec {
+                get {
+                    try {
+                        return ((string)(this[this.tableNorm_rask.specColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'spec\' в таблице \'Norm_rask\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableNorm_rask.specColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IskodNull() {
                 return this.IsNull(this.tableNorm_rask.kodColumn);
             }
@@ -4549,6 +5001,42 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetannIdNull() {
                 this[this.tableNorm_rask.annIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IssekNull() {
+                return this.IsNull(this.tableNorm_rask.sekColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetsekNull() {
+                this[this.tableNorm_rask.sekColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsoborNull() {
+                return this.IsNull(this.tableNorm_rask.oborColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetoborNull() {
+                this[this.tableNorm_rask.oborColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsspecNull() {
+                return this.IsNull(this.tableNorm_rask.specColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetspecNull() {
+                this[this.tableNorm_rask.specColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4648,6 +5136,70 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int n {
+                get {
+                    try {
+                        return ((int)(this[this.tablenorm_rasz.nColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'n\' в таблице \'norm_rasz\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorm_rasz.nColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int n1 {
+                get {
+                    try {
+                        return ((int)(this[this.tablenorm_rasz.n1Column]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'n1\' в таблице \'norm_rasz\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorm_rasz.n1Column] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int sek {
+                get {
+                    try {
+                        return ((int)(this[this.tablenorm_rasz.sekColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'sek\' в таблице \'norm_rasz\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorm_rasz.sekColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string obor {
+                get {
+                    try {
+                        return ((string)(this[this.tablenorm_rasz.oborColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'obor\' в таблице \'norm_rasz\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablenorm_rasz.oborColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IskodNull() {
                 return this.IsNull(this.tablenorm_rasz.kodColumn);
             }
@@ -4704,6 +5256,54 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetannIdNull() {
                 this[this.tablenorm_rasz.annIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsnNull() {
+                return this.IsNull(this.tablenorm_rasz.nColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetnNull() {
+                this[this.tablenorm_rasz.nColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool Isn1Null() {
+                return this.IsNull(this.tablenorm_rasz.n1Column);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void Setn1Null() {
+                this[this.tablenorm_rasz.n1Column] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IssekNull() {
+                return this.IsNull(this.tablenorm_rasz.sekColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetsekNull() {
+                this[this.tablenorm_rasz.sekColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsoborNull() {
+                return this.IsNull(this.tablenorm_rasz.oborColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetoborNull() {
+                this[this.tablenorm_rasz.oborColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -4814,6 +5414,33 @@ namespace SewingProduction {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string kodSort {
+                get {
+                    try {
+                        return ((string)(this[this.tablesp_articul.kodSortColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("Значение для столбца \'kodSort\' в таблице \'sp_articul\' равно DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tablesp_articul.kodSortColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string trueKod {
+                get {
+                    return ((string)(this[this.tablesp_articul.trueKodColumn]));
+                }
+                set {
+                    this[this.tablesp_articul.trueKodColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsgrupNull() {
                 return this.IsNull(this.tablesp_articul.grupColumn);
             }
@@ -4870,6 +5497,66 @@ namespace SewingProduction {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public void SetannIdNull() {
                 this[this.tablesp_articul.annIdColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IskodSortNull() {
+                return this.IsNull(this.tablesp_articul.kodSortColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetkodSortNull() {
+                this[this.tablesp_articul.kodSortColumn] = global::System.Convert.DBNull;
+            }
+        }
+        
+        /// <summary>
+        ///Represents strongly named DataRow class.
+        ///</summary>
+        public partial class status_annRow : global::System.Data.DataRow {
+            
+            private status_annDataTable tablestatus_ann;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            internal status_annRow(global::System.Data.DataRowBuilder rb) : 
+                    base(rb) {
+                this.tablestatus_ann = ((status_annDataTable)(this.Table));
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public int status_id {
+                get {
+                    return ((int)(this[this.tablestatus_ann.status_idColumn]));
+                }
+                set {
+                    this[this.tablestatus_ann.status_idColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string name {
+                get {
+                    return ((string)(this[this.tablestatus_ann.nameColumn]));
+                }
+                set {
+                    this[this.tablestatus_ann.nameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public art_norm_nRow[] Getart_norm_nRows() {
+                if ((this.Table.ChildRelations["status_ann_art_norm_n"] == null)) {
+                    return new art_norm_nRow[0];
+                }
+                else {
+                    return ((art_norm_nRow[])(base.GetChildRows(this.Table.ChildRelations["status_ann_art_norm_n"])));
+                }
             }
         }
         
@@ -5110,6 +5797,40 @@ namespace SewingProduction {
                 }
             }
         }
+        
+        /// <summary>
+        ///Row event argument class
+        ///</summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public class status_annRowChangeEvent : global::System.EventArgs {
+            
+            private status_annRow eventRow;
+            
+            private global::System.Data.DataRowAction eventAction;
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRowChangeEvent(status_annRow row, global::System.Data.DataRowAction action) {
+                this.eventRow = row;
+                this.eventAction = action;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public status_annRow Row {
+                get {
+                    return this.eventRow;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataRowAction Action {
+                get {
+                    return this.eventAction;
+                }
+            }
+        }
     }
 }
 namespace SewingProduction.ACE_backupDataSetTableAdapters {
@@ -5240,7 +5961,6 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("grup", "grup");
             tableMapping.ColumnMappings.Add("articul", "articul");
             tableMapping.ColumnMappings.Add("mod", "mod");
-            tableMapping.ColumnMappings.Add("po", "po");
             tableMapping.ColumnMappings.Add("sek_shv", "sek_shv");
             tableMapping.ColumnMappings.Add("sek_vyaz5", "sek_vyaz5");
             tableMapping.ColumnMappings.Add("sek_vyaz6", "sek_vyaz6");
@@ -5250,8 +5970,6 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("sek_vyazo", "sek_vyazo");
             tableMapping.ColumnMappings.Add("sek_vyaz", "sek_vyaz");
             tableMapping.ColumnMappings.Add("sek", "sek");
-            tableMapping.ColumnMappings.Add("st", "st");
-            tableMapping.ColumnMappings.Add("po1", "po1");
             tableMapping.ColumnMappings.Add("komment", "komment");
             tableMapping.ColumnMappings.Add("data_sozd", "data_sozd");
             tableMapping.ColumnMappings.Add("diz", "diz");
@@ -5261,16 +5979,17 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("slogn", "slogn");
             tableMapping.ColumnMappings.Add("annID", "annID");
             tableMapping.ColumnMappings.Add("status", "status");
+            tableMapping.ColumnMappings.Add("arh", "arh");
+            tableMapping.ColumnMappings.Add("stat", "stat");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = @"INSERT INTO [dbo].[art_norm_n] ([kod], [grup], [articul], [mod], [po], [sek_shv], [sek_vyaz5], [sek_vyaz6], [sek_vyaz7], [sek_vyaz10], [sek_vyaz12], [sek_vyazo], [sek_vyaz], [sek], [st], [po1], [komment], [data_sozd], [diz], [constr], [data_obn], [sek_kr], [slogn], [status]) VALUES (@kod, @grup, @articul, @mod, @po, @sek_shv, @sek_vyaz5, @sek_vyaz6, @sek_vyaz7, @sek_vyaz10, @sek_vyaz12, @sek_vyazo, @sek_vyaz, @sek, @st, @po1, @komment, @data_sozd, @diz, @constr, @data_obn, @sek_kr, @slogn, @status)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [art_norm_n] ([kod], [grup], [articul], [mod], [sek_shv], [sek_vyaz5], [sek_vyaz6], [sek_vyaz7], [sek_vyaz10], [sek_vyaz12], [sek_vyazo], [sek_vyaz], [sek], [komment], [data_sozd], [diz], [constr], [data_obn], [sek_kr], [slogn], [status], [arh]) VALUES (@kod, @grup, @articul, @mod, @sek_shv, @sek_vyaz5, @sek_vyaz6, @sek_vyaz7, @sek_vyaz10, @sek_vyaz12, @sek_vyazo, @sek_vyaz, @sek, @komment, @data_sozd, @diz, @constr, @data_obn, @sek_kr, @slogn, @status, @arh)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grup", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@articul", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "articul", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mod", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "mod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@po", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "po", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_shv", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_shv", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_vyaz5", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_vyaz5", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_vyaz6", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_vyaz6", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5280,8 +5999,6 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_vyazo", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_vyazo", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_vyaz", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_vyaz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@st", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "st", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@po1", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "po1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@komment", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "komment", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@data_sozd", global::System.Data.SqlDbType.DateTime, 0, global::System.Data.ParameterDirection.Input, 0, 0, "data_sozd", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@diz", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "diz", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5290,13 +6007,14 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek_kr", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek_kr", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@slogn", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "slogn", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@status", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "status", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@arh", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "arh", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString;
+            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5305,9 +6023,11 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT kod, grup, articul, mod, po, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek" +
-                "_vyaz10, sek_vyaz12, sek_vyazo, sek_vyaz, sek, st, po1, komment, data_sozd, diz," +
-                " constr, data_obn, sek_kr, slogn, annID, status FROM dbo.art_norm_n";
+            this._commandCollection[0].CommandText = @"SELECT        art_norm_n.kod, art_norm_n.grup, art_norm_n.articul, art_norm_n.mod, art_norm_n.sek_shv, art_norm_n.sek_vyaz5, art_norm_n.sek_vyaz6, art_norm_n.sek_vyaz7, art_norm_n.sek_vyaz10, art_norm_n.sek_vyaz12, 
+                         art_norm_n.sek_vyazo, art_norm_n.sek_vyaz, art_norm_n.sek, art_norm_n.komment, art_norm_n.data_sozd, art_norm_n.diz, art_norm_n.constr, art_norm_n.data_obn, art_norm_n.sek_kr, art_norm_n.slogn, art_norm_n.annID, 
+                         art_norm_n.status, art_norm_n.arh, status_ann.name AS stat
+FROM            art_norm_n CROSS JOIN
+                         status_ann";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5373,7 +6093,6 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
                     string grup, 
                     string articul, 
                     string mod, 
-                    string po, 
                     global::System.Nullable<int> sek_shv, 
                     global::System.Nullable<int> sek_vyaz5, 
                     global::System.Nullable<int> sek_vyaz6, 
@@ -5383,8 +6102,6 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
                     global::System.Nullable<int> sek_vyazo, 
                     global::System.Nullable<int> sek_vyaz, 
                     global::System.Nullable<int> sek, 
-                    global::System.Nullable<int> st, 
-                    string po1, 
                     string komment, 
                     global::System.Nullable<global::System.DateTime> data_sozd, 
                     global::System.Nullable<int> diz, 
@@ -5392,7 +6109,8 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
                     global::System.Nullable<global::System.DateTime> data_obn, 
                     global::System.Nullable<int> sek_kr, 
                     global::System.Nullable<int> slogn, 
-                    global::System.Nullable<int> status) {
+                    global::System.Nullable<int> status, 
+                    global::System.Nullable<bool> arh) {
             if ((kod == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -5417,125 +6135,113 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             else {
                 this.Adapter.InsertCommand.Parameters[3].Value = ((string)(mod));
             }
-            if ((po == null)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            if ((sek_shv.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(sek_shv.Value));
             }
             else {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((string)(po));
+                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
             }
-            if ((sek_shv.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(sek_shv.Value));
+            if ((sek_vyaz5.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(sek_vyaz5.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz5.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(sek_vyaz5.Value));
+            if ((sek_vyaz6.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(sek_vyaz6.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz6.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(sek_vyaz6.Value));
+            if ((sek_vyaz7.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(sek_vyaz7.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz7.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(sek_vyaz7.Value));
+            if ((sek_vyaz10.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(sek_vyaz10.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz10.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(sek_vyaz10.Value));
+            if ((sek_vyaz12.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(sek_vyaz12.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz12.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(sek_vyaz12.Value));
+            if ((sek_vyazo.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(sek_vyazo.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyazo.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(sek_vyazo.Value));
+            if ((sek_vyaz.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(sek_vyaz.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
-            if ((sek_vyaz.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(sek_vyaz.Value));
+            if ((sek.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(sek.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
             }
-            if ((sek.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((int)(sek.Value));
-            }
-            else {
+            if ((komment == null)) {
                 this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
-            if ((st.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((int)(st.Value));
+            else {
+                this.Adapter.InsertCommand.Parameters[13].Value = ((string)(komment));
+            }
+            if ((data_sozd.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[14].Value = ((System.DateTime)(data_sozd.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
             }
-            if ((po1 == null)) {
+            if ((diz.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[15].Value = ((int)(diz.Value));
+            }
+            else {
                 this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((string)(po1));
+            if ((constr.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[16].Value = ((int)(constr.Value));
             }
-            if ((komment == null)) {
+            else {
                 this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((string)(komment));
-            }
-            if ((data_sozd.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((System.DateTime)(data_sozd.Value));
+            if ((data_obn.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[17].Value = ((System.DateTime)(data_obn.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
             }
-            if ((diz.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[18].Value = ((int)(diz.Value));
+            if ((sek_kr.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[18].Value = ((int)(sek_kr.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[18].Value = global::System.DBNull.Value;
             }
-            if ((constr.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[19].Value = ((int)(constr.Value));
+            if ((slogn.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[19].Value = ((int)(slogn.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[19].Value = global::System.DBNull.Value;
             }
-            if ((data_obn.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[20].Value = ((System.DateTime)(data_obn.Value));
+            if ((status.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[20].Value = ((int)(status.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
             }
-            if ((sek_kr.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[21].Value = ((int)(sek_kr.Value));
+            if ((arh.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[21].Value = ((bool)(arh.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            if ((slogn.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[22].Value = ((int)(slogn.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[22].Value = global::System.DBNull.Value;
-            }
-            if ((status.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[23].Value = ((int)(status.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[23].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6578,11 +7284,15 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("n1", "n1");
             tableMapping.ColumnMappings.Add("razryd", "razryd");
             tableMapping.ColumnMappings.Add("annId", "annId");
+            tableMapping.ColumnMappings.Add("sek", "sek");
+            tableMapping.ColumnMappings.Add("obor", "obor");
+            tableMapping.ColumnMappings.Add("spec", "spec");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Norm_rask] ([kod], [kod_o], [text], [n], [n_ch], [n1], [razryd" +
-                "], [annId]) VALUES (@kod, @kod_o, @text, @n, @n_ch, @n1, @razryd, @annId)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [Norm_rask] ([kod], [kod_o], [text], [n], [n_ch], [n1], [razryd], [an" +
+                "nId], [sek], [obor], [spec]) VALUES (@kod, @kod_o, @text, @n, @n_ch, @n1, @razry" +
+                "d, @annId, @sek, @obor, @spec)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod_o", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod_o", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -6592,6 +7302,9 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@n1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "n1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@razryd", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razryd", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@obor", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "obor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@spec", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "spec", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6607,7 +7320,8 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, kod, kod_o, text, n, n_ch, n1, razryd, annId FROM dbo.Norm_rask";
+            this._commandCollection[0].CommandText = "SELECT        id, kod, kod_o, text, n, n_ch, n1, razryd, annId, sek, obor, spec\r\n" +
+                "FROM            Norm_rask";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6668,7 +7382,7 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string kod, string kod_o, string text, global::System.Nullable<int> n, global::System.Nullable<int> n_ch, global::System.Nullable<int> n1, global::System.Nullable<int> razryd, global::System.Nullable<int> annId) {
+        public virtual int Insert(string kod, string kod_o, string text, global::System.Nullable<int> n, global::System.Nullable<int> n_ch, global::System.Nullable<int> n1, global::System.Nullable<int> razryd, global::System.Nullable<int> annId, global::System.Nullable<int> sek, string obor, string spec) {
             if ((kod == null)) {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
@@ -6716,6 +7430,24 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             }
             else {
                 this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            if ((sek.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(sek.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            if ((obor == null)) {
+                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[9].Value = ((string)(obor));
+            }
+            if ((spec == null)) {
+                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[10].Value = ((string)(spec));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -6860,16 +7592,25 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("text", "text");
             tableMapping.ColumnMappings.Add("razryd", "razryd");
             tableMapping.ColumnMappings.Add("annId", "annId");
+            tableMapping.ColumnMappings.Add("n", "n");
+            tableMapping.ColumnMappings.Add("n1", "n1");
+            tableMapping.ColumnMappings.Add("sek", "sek");
+            tableMapping.ColumnMappings.Add("obor", "obor");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[norm_rasz] ([kod], [kod_o], [text], [razryd], [annId]) VALUES " +
-                "(@kod, @kod_o, @text, @razryd, @annId)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [norm_rasz] ([n], [n1], [razryd], [text], [sek], [obor], [kod], [kod_" +
+                "o], [annId]) VALUES (@n, @n1, @razryd, @text, @sek, @obor, @kod, @kod_o, @annId)" +
+                "";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@n", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "n", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@n1", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "n1", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@razryd", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razryd", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@text", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "text", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sek", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sek", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@obor", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "obor", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod_o", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod_o", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@text", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "text", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@razryd", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razryd", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
@@ -6886,7 +7627,8 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT kod, kod_o, text, razryd, annId FROM dbo.norm_rasz";
+            this._commandCollection[0].CommandText = "SELECT        n, n1, razryd, text, sek, obor, kod, kod_o, annId\r\nFROM            " +
+                "norm_rasz";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -6947,36 +7689,60 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string kod, string kod_o, string text, global::System.Nullable<int> razryd, global::System.Nullable<int> annId) {
-            if ((kod == null)) {
+        public virtual int Insert(global::System.Nullable<int> n, global::System.Nullable<int> n1, global::System.Nullable<int> razryd, string text, global::System.Nullable<int> sek, string obor, string kod, string kod_o, global::System.Nullable<int> annId) {
+            if ((n.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((int)(n.Value));
+            }
+            else {
                 this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(kod));
+            if ((n1.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[1].Value = ((int)(n1.Value));
             }
-            if ((kod_o == null)) {
+            else {
                 this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(kod_o));
+            if ((razryd.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((int)(razryd.Value));
             }
-            if ((text == null)) {
+            else {
                 this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
             }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(text));
-            }
-            if ((razryd.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((int)(razryd.Value));
-            }
-            else {
+            if ((text == null)) {
                 this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
             }
-            if ((annId.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(annId.Value));
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(text));
+            }
+            if ((sek.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(sek.Value));
             }
             else {
                 this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            if ((obor == null)) {
+                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[5].Value = ((string)(obor));
+            }
+            if ((kod == null)) {
+                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(kod));
+            }
+            if ((kod_o == null)) {
+                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[7].Value = ((string)(kod_o));
+            }
+            if ((annId.HasValue == true)) {
+                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(annId.Value));
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7122,10 +7888,11 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("mod", "mod");
             tableMapping.ColumnMappings.Add("razm", "razm");
             tableMapping.ColumnMappings.Add("annId", "annId");
+            tableMapping.ColumnMappings.Add("trueKod", "trueKod");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [dbo].[sp_articul] WHERE (([kod] = @Original_kod) AND ((@IsNull_grup = 1 AND [grup] IS NULL) OR ([grup] = @Original_grup)) AND ((@IsNull_articul = 1 AND [articul] IS NULL) OR ([articul] = @Original_articul)) AND ((@IsNull_mod = 1 AND [mod] IS NULL) OR ([mod] = @Original_mod)) AND ((@IsNull_razm = 1 AND [razm] IS NULL) OR ([razm] = @Original_razm)) AND ((@IsNull_annId = 1 AND [annId] IS NULL) OR ([annId] = @Original_annId)))";
+            this._adapter.DeleteCommand.CommandText = @"DELETE FROM [sp_articul] WHERE (([kod] = @Original_kod) AND ((@IsNull_grup = 1 AND [grup] IS NULL) OR ([grup] = @Original_grup)) AND ((@IsNull_articul = 1 AND [articul] IS NULL) OR ([articul] = @Original_articul)) AND ((@IsNull_mod = 1 AND [mod] IS NULL) OR ([mod] = @Original_mod)) AND ((@IsNull_razm = 1 AND [razm] IS NULL) OR ([razm] = @Original_razm)) AND ((@IsNull_annId = 1 AND [annId] IS NULL) OR ([annId] = @Original_annId)) AND ([kod] = @Original_trueKod))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_grup", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
@@ -7138,11 +7905,11 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_razm", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razm", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_trueKod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "trueKod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[sp_articul] ([kod], [grup], [articul], [mod], [razm], [annId])" +
-                " VALUES (@kod, @grup, @articul, @mod, @razm, @annId);\r\nSELECT kod, grup, articul" +
-                ", mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
+            this._adapter.InsertCommand.CommandText = @"INSERT INTO [sp_articul] ([kod], [grup], [articul], [mod], [razm], [annId], [kod]) VALUES (@kod, @grup, @articul, @mod, @razm, @annId, @trueKod);
+SELECT kod, grup, articul, mod, razm, annId, kod AS trueKod FROM sp_articul WHERE (kod = @kod) AND (kod = @kod)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grup", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7150,10 +7917,11 @@ namespace SewingProduction.ACE_backupDataSetTableAdapters {
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "mod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@razm", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razm", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@trueKod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "trueKod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[sp_articul] SET [kod] = @kod, [grup] = @grup, [articul] = @articul, [mod] = @mod, [razm] = @razm, [annId] = @annId WHERE (([kod] = @Original_kod) AND ((@IsNull_grup = 1 AND [grup] IS NULL) OR ([grup] = @Original_grup)) AND ((@IsNull_articul = 1 AND [articul] IS NULL) OR ([articul] = @Original_articul)) AND ((@IsNull_mod = 1 AND [mod] IS NULL) OR ([mod] = @Original_mod)) AND ((@IsNull_razm = 1 AND [razm] IS NULL) OR ([razm] = @Original_razm)) AND ((@IsNull_annId = 1 AND [annId] IS NULL) OR ([annId] = @Original_annId)));
-SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [sp_articul] SET [kod] = @kod, [grup] = @grup, [articul] = @articul, [mod] = @mod, [razm] = @razm, [annId] = @annId, [kod] = @trueKod WHERE (([kod] = @Original_kod) AND ((@IsNull_grup = 1 AND [grup] IS NULL) OR ([grup] = @Original_grup)) AND ((@IsNull_articul = 1 AND [articul] IS NULL) OR ([articul] = @Original_articul)) AND ((@IsNull_mod = 1 AND [mod] IS NULL) OR ([mod] = @Original_mod)) AND ((@IsNull_razm = 1 AND [razm] IS NULL) OR ([razm] = @Original_razm)) AND ((@IsNull_annId = 1 AND [annId] IS NULL) OR ([annId] = @Original_annId)) AND ([kod] = @Original_trueKod));
+SELECT kod, grup, articul, mod, razm, annId, kod AS trueKod FROM sp_articul WHERE (kod = @kod) AND (kod = @kod)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@grup", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -7161,6 +7929,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@mod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "mod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@razm", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razm", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@trueKod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "trueKod", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_kod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "kod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_grup", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_grup", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "grup", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
@@ -7172,13 +7941,14 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_razm", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "razm", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_annId", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "annId", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_trueKod", global::System.Data.SqlDbType.Char, 0, global::System.Data.ParameterDirection.Input, 0, 0, "trueKod", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString;
+            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -7187,11 +7957,12 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT kod, grup, articul, mod, razm, annId FROM dbo.sp_articul";
+            this._commandCollection[0].CommandText = "SELECT        kod, grup, articul, mod, razm, annId, kod AS trueKod\r\nFROM         " +
+                "   sp_articul";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
-            this._commandCollection[1].Connection = this.Connection;
-            this._commandCollection[1].CommandText = "SELECT        kod, grup, articul, mod, razm, annId\r\nFROM            sp_articul\r\nW" +
+            this._commandCollection[1].Connection = new global::System.Data.SqlClient.SqlConnection(global::SewingProduction.Properties.Settings.Default.ACEConnectionString);
+            this._commandCollection[1].CommandText = "SELECT        annId, articul, grup, kod, mod, razm\r\nFROM            sp_articul\r\nW" +
                 "HERE        (annId IS NULL)";
             this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
         }
@@ -7266,7 +8037,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId) {
+        public virtual int Delete(string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId, string Original_trueKod) {
             if ((Original_kod == null)) {
                 throw new global::System.ArgumentNullException("Original_kod");
             }
@@ -7313,6 +8084,12 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                 this.Adapter.DeleteCommand.Parameters[9].Value = ((object)(1));
                 this.Adapter.DeleteCommand.Parameters[10].Value = global::System.DBNull.Value;
             }
+            if ((Original_trueKod == null)) {
+                throw new global::System.ArgumentNullException("Original_trueKod");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[11].Value = ((string)(Original_trueKod));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7333,7 +8110,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string kod, string grup, string articul, string mod, string razm, global::System.Nullable<int> annId) {
+        public virtual int Insert(string kod, string grup, string articul, string mod, string razm, global::System.Nullable<int> annId, string trueKod) {
             if ((kod == null)) {
                 throw new global::System.ArgumentNullException("kod");
             }
@@ -7370,6 +8147,12 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             else {
                 this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
+            if ((trueKod == null)) {
+                throw new global::System.ArgumentNullException("trueKod");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[6].Value = ((string)(trueKod));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -7390,7 +8173,7 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string kod, string grup, string articul, string mod, string razm, global::System.Nullable<int> annId, string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId) {
+        public virtual int Update(string kod, string grup, string articul, string mod, string razm, global::System.Nullable<int> annId, string trueKod, string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId, string Original_trueKod) {
             if ((kod == null)) {
                 throw new global::System.ArgumentNullException("kod");
             }
@@ -7427,51 +8210,63 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             else {
                 this.Adapter.UpdateCommand.Parameters[5].Value = global::System.DBNull.Value;
             }
+            if ((trueKod == null)) {
+                throw new global::System.ArgumentNullException("trueKod");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(trueKod));
+            }
             if ((Original_kod == null)) {
                 throw new global::System.ArgumentNullException("Original_kod");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[6].Value = ((string)(Original_kod));
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_kod));
             }
             if ((Original_grup == null)) {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[9].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_grup));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_grup));
             }
             if ((Original_articul == null)) {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[10].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[11].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[9].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[10].Value = ((string)(Original_articul));
+                this.Adapter.UpdateCommand.Parameters[10].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[11].Value = ((string)(Original_articul));
             }
             if ((Original_mod == null)) {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[12].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[13].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[11].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[12].Value = ((string)(Original_mod));
+                this.Adapter.UpdateCommand.Parameters[12].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[13].Value = ((string)(Original_mod));
             }
             if ((Original_razm == null)) {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[14].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[15].Value = global::System.DBNull.Value;
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[13].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[14].Value = ((string)(Original_razm));
+                this.Adapter.UpdateCommand.Parameters[14].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[15].Value = ((string)(Original_razm));
             }
             if ((Original_annId.HasValue == true)) {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(0));
-                this.Adapter.UpdateCommand.Parameters[16].Value = ((int)(Original_annId.Value));
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[17].Value = ((int)(Original_annId.Value));
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[15].Value = ((object)(1));
-                this.Adapter.UpdateCommand.Parameters[16].Value = global::System.DBNull.Value;
+                this.Adapter.UpdateCommand.Parameters[16].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[17].Value = global::System.DBNull.Value;
+            }
+            if ((Original_trueKod == null)) {
+                throw new global::System.ArgumentNullException("Original_trueKod");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[18].Value = ((string)(Original_trueKod));
             }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -7493,8 +8288,310 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string grup, string articul, string mod, string razm, global::System.Nullable<int> annId, string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId) {
-            return this.Update(Original_kod, grup, articul, mod, razm, annId, Original_kod, Original_grup, Original_articul, Original_mod, Original_razm, Original_annId);
+        public virtual int Update(string grup, string articul, string mod, string razm, global::System.Nullable<int> annId, string trueKod, string Original_kod, string Original_grup, string Original_articul, string Original_mod, string Original_razm, global::System.Nullable<int> Original_annId, string Original_trueKod) {
+            return this.Update(Original_kod, grup, articul, mod, razm, annId, trueKod, Original_kod, Original_grup, Original_articul, Original_mod, Original_razm, Original_annId, Original_trueKod);
+        }
+    }
+    
+    /// <summary>
+    ///Represents the connection and commands used to retrieve and save data.
+    ///</summary>
+    [global::System.ComponentModel.DesignerCategoryAttribute("code")]
+    [global::System.ComponentModel.ToolboxItem(true)]
+    [global::System.ComponentModel.DataObjectAttribute(true)]
+    [global::System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" +
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+    public partial class status_annTableAdapter : global::System.ComponentModel.Component {
+        
+        private global::System.Data.SqlClient.SqlDataAdapter _adapter;
+        
+        private global::System.Data.SqlClient.SqlConnection _connection;
+        
+        private global::System.Data.SqlClient.SqlTransaction _transaction;
+        
+        private global::System.Data.SqlClient.SqlCommand[] _commandCollection;
+        
+        private bool _clearBeforeFill;
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public status_annTableAdapter() {
+            this.ClearBeforeFill = true;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected internal global::System.Data.SqlClient.SqlDataAdapter Adapter {
+            get {
+                if ((this._adapter == null)) {
+                    this.InitAdapter();
+                }
+                return this._adapter;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlConnection Connection {
+            get {
+                if ((this._connection == null)) {
+                    this.InitConnection();
+                }
+                return this._connection;
+            }
+            set {
+                this._connection = value;
+                if ((this.Adapter.InsertCommand != null)) {
+                    this.Adapter.InsertCommand.Connection = value;
+                }
+                if ((this.Adapter.DeleteCommand != null)) {
+                    this.Adapter.DeleteCommand.Connection = value;
+                }
+                if ((this.Adapter.UpdateCommand != null)) {
+                    this.Adapter.UpdateCommand.Connection = value;
+                }
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    if ((this.CommandCollection[i] != null)) {
+                        ((global::System.Data.SqlClient.SqlCommand)(this.CommandCollection[i])).Connection = value;
+                    }
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        internal global::System.Data.SqlClient.SqlTransaction Transaction {
+            get {
+                return this._transaction;
+            }
+            set {
+                this._transaction = value;
+                for (int i = 0; (i < this.CommandCollection.Length); i = (i + 1)) {
+                    this.CommandCollection[i].Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.DeleteCommand != null))) {
+                    this.Adapter.DeleteCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.InsertCommand != null))) {
+                    this.Adapter.InsertCommand.Transaction = this._transaction;
+                }
+                if (((this.Adapter != null) 
+                            && (this.Adapter.UpdateCommand != null))) {
+                    this.Adapter.UpdateCommand.Transaction = this._transaction;
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        protected global::System.Data.SqlClient.SqlCommand[] CommandCollection {
+            get {
+                if ((this._commandCollection == null)) {
+                    this.InitCommandCollection();
+                }
+                return this._commandCollection;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        public bool ClearBeforeFill {
+            get {
+                return this._clearBeforeFill;
+            }
+            set {
+                this._clearBeforeFill = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitAdapter() {
+            this._adapter = new global::System.Data.SqlClient.SqlDataAdapter();
+            global::System.Data.Common.DataTableMapping tableMapping = new global::System.Data.Common.DataTableMapping();
+            tableMapping.SourceTable = "Table";
+            tableMapping.DataSetTable = "status_ann";
+            tableMapping.ColumnMappings.Add("status_id", "status_id");
+            tableMapping.ColumnMappings.Add("name", "name");
+            this._adapter.TableMappings.Add(tableMapping);
+            this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.DeleteCommand.Connection = this.Connection;
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [status_ann] WHERE (([status_id] = @Original_status_id))";
+            this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "status_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.InsertCommand.Connection = this.Connection;
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [status_ann] ([name]) VALUES (@name);\r\nSELECT status_id, name FROM st" +
+                "atus_ann WHERE (status_id = SCOPE_IDENTITY())";
+            this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
+            this._adapter.UpdateCommand.Connection = this.Connection;
+            this._adapter.UpdateCommand.CommandText = "UPDATE [status_ann] SET [name] = @name WHERE (([status_id] = @Original_status_id)" +
+                ");\r\nSELECT status_id, name FROM status_ann WHERE (status_id = @status_id)";
+            this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.Text, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_status_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "status_id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@status_id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "status_id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitConnection() {
+            this._connection = new global::System.Data.SqlClient.SqlConnection();
+            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        private void InitCommandCollection() {
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[0].Connection = this.Connection;
+            this._commandCollection[0].CommandText = "SELECT        status_id, name\r\nFROM            status_ann";
+            this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
+        public virtual int Fill(ACE_backupDataSet.status_annDataTable dataTable) {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
+        public virtual ACE_backupDataSet.status_annDataTable GetData() {
+            this.Adapter.SelectCommand = this.CommandCollection[0];
+            ACE_backupDataSet.status_annDataTable dataTable = new ACE_backupDataSet.status_annDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ACE_backupDataSet.status_annDataTable dataTable) {
+            return this.Adapter.Update(dataTable);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(ACE_backupDataSet dataSet) {
+            return this.Adapter.Update(dataSet, "status_ann");
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow dataRow) {
+            return this.Adapter.Update(new global::System.Data.DataRow[] {
+                        dataRow});
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        public virtual int Update(global::System.Data.DataRow[] dataRows) {
+            return this.Adapter.Update(dataRows);
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
+        public virtual int Delete(int Original_status_id) {
+            this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_status_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
+            if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.DeleteCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.DeleteCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.DeleteCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
+        public virtual int Insert(string name) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(name));
+            }
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
+            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.InsertCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.InsertCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_status_id, int status_id) {
+            if ((name == null)) {
+                throw new global::System.ArgumentNullException("name");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[0].Value = ((string)(name));
+            }
+            this.Adapter.UpdateCommand.Parameters[1].Value = ((int)(Original_status_id));
+            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(status_id));
+            global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
+            if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
+                        != global::System.Data.ConnectionState.Open)) {
+                this.Adapter.UpdateCommand.Connection.Open();
+            }
+            try {
+                int returnValue = this.Adapter.UpdateCommand.ExecuteNonQuery();
+                return returnValue;
+            }
+            finally {
+                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
+                    this.Adapter.UpdateCommand.Connection.Close();
+                }
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
+        public virtual int Update(string name, int Original_status_id) {
+            return this.Update(name, Original_status_id, Original_status_id);
         }
     }
     
@@ -7523,6 +8620,8 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         private norm_raszTableAdapter _norm_raszTableAdapter;
         
         private sp_articulTableAdapter _sp_articulTableAdapter;
+        
+        private status_annTableAdapter _status_annTableAdapter;
         
         private bool _backupDataSetBeforeUpdate;
         
@@ -7639,6 +8738,20 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+        [global::System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso" +
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3" +
+            "a", "System.Drawing.Design.UITypeEditor")]
+        public status_annTableAdapter status_annTableAdapter {
+            get {
+                return this._status_annTableAdapter;
+            }
+            set {
+                this._status_annTableAdapter = value;
+            }
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         public bool BackupDataSetBeforeUpdate {
             get {
                 return this._backupDataSetBeforeUpdate;
@@ -7684,6 +8797,10 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                             && (this._sp_articulTableAdapter.Connection != null))) {
                     return this._sp_articulTableAdapter.Connection;
                 }
+                if (((this._status_annTableAdapter != null) 
+                            && (this._status_annTableAdapter.Connection != null))) {
+                    return this._status_annTableAdapter.Connection;
+                }
                 return null;
             }
             set {
@@ -7718,6 +8835,9 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                 if ((this._sp_articulTableAdapter != null)) {
                     count = (count + 1);
                 }
+                if ((this._status_annTableAdapter != null)) {
+                    count = (count + 1);
+                }
                 return count;
             }
         }
@@ -7729,6 +8849,15 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateUpdatedRows(ACE_backupDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._status_annTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.status_ann.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._status_annTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._art_norm_nTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.art_norm_n.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -7802,6 +8931,14 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private int UpdateInsertedRows(ACE_backupDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._status_annTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.status_ann.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._status_annTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._art_norm_nTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.art_norm_n.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -7924,6 +9061,14 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._status_annTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.status_ann.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._status_annTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             return result;
         }
         
@@ -7995,6 +9140,11 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
             }
             if (((this._sp_articulTableAdapter != null) 
                         && (this.MatchTableAdapterConnection(this._sp_articulTableAdapter.Connection) == false))) {
+                throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
+                        "r, должны использовать одинаковую строку подключения.");
+            }
+            if (((this._status_annTableAdapter != null) 
+                        && (this.MatchTableAdapterConnection(this._status_annTableAdapter.Connection) == false))) {
                 throw new global::System.ArgumentException("Все адаптеры таблицы, управляемые диспетчером адаптера таблицы TableAdapterManage" +
                         "r, должны использовать одинаковую строку подключения.");
             }
@@ -8093,6 +9243,15 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                         adaptersWithAcceptChangesDuringUpdate.Add(this._sp_articulTableAdapter.Adapter);
                     }
                 }
+                if ((this._status_annTableAdapter != null)) {
+                    revertConnections.Add(this._status_annTableAdapter, this._status_annTableAdapter.Connection);
+                    this._status_annTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(workConnection));
+                    this._status_annTableAdapter.Transaction = ((global::System.Data.SqlClient.SqlTransaction)(workTransaction));
+                    if (this._status_annTableAdapter.Adapter.AcceptChangesDuringUpdate) {
+                        this._status_annTableAdapter.Adapter.AcceptChangesDuringUpdate = false;
+                        adaptersWithAcceptChangesDuringUpdate.Add(this._status_annTableAdapter.Adapter);
+                    }
+                }
                 // 
                 //---- Perform updates -----------
                 //
@@ -8178,6 +9337,10 @@ SELECT kod, grup, articul, mod, razm, annId FROM sp_articul WHERE (kod = @kod)";
                 if ((this._sp_articulTableAdapter != null)) {
                     this._sp_articulTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._sp_articulTableAdapter]));
                     this._sp_articulTableAdapter.Transaction = null;
+                }
+                if ((this._status_annTableAdapter != null)) {
+                    this._status_annTableAdapter.Connection = ((global::System.Data.SqlClient.SqlConnection)(revertConnections[this._status_annTableAdapter]));
+                    this._status_annTableAdapter.Transaction = null;
                 }
                 if ((0 < adaptersWithAcceptChangesDuringUpdate.Count)) {
                     global::System.Data.Common.DataAdapter[] adapters = new System.Data.Common.DataAdapter[adaptersWithAcceptChangesDuringUpdate.Count];

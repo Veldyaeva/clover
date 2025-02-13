@@ -1,4 +1,4 @@
-﻿
+﻿using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Collections.Generic;
@@ -69,24 +69,24 @@ namespace SewingProduction
     //public class DatabaseContext : DbContext { public DatabaseContext() : base("DefaultConnection") { } public DbSet<ArtNormN> ArtNormNs { get; set; } }
 
 
-    //public class AppDbContext : DbContext
-    //{
-    //    private readonly string _connectionString;
+    public class AppDbContext : DbContext
+    {
+        private readonly string _connectionString;
 
-    //    public AppDbContext(string connectionString)
-    //    {
-    //        _connectionString = connectionString;
-    //        Database.Connection.ConnectionString = _connectionString; // Установка строки подключения здесь
-    //    }
+        public AppDbContext(string connectionString)
+        {
+            _connectionString = connectionString;
+            Database.Connection.ConnectionString = _connectionString; // Установка строки подключения здесь
+        }
 
-    //    public DbSet<ArtNormN> ArtNormNs { get; set; }
+        public DbSet<ArtNormN> ArtNormNs { get; set; }
 
-    //    protected override void OnModelCreating(DbModelBuilder modelBuilder)
-    //    {
-    //        modelBuilder.Entity<ArtNormN>().HasKey(r => r.annID);
-    //        // ... другие настройки модели, если необходимы ...
-    //    }
-    //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ArtNormN>().HasKey(r => r.annID);
+            // ... другие настройки модели, если необходимы ...
+        }
+    }
     /*    public class AppDbContext : DbContext
         {
             private string _connectionString;
