@@ -195,7 +195,7 @@ namespace SewingProduction
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
         
-            SpravForAll f = new SpravForAll("spisok_t_id_nn_crpt", "", "Список моделей для маркировки");
+            SpravForAll f = new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки");
             f.MdiParent = this;
             f.Show();
         
