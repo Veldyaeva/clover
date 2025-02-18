@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -48,15 +47,15 @@
             this.бригадыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.цехаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видыПроизводствToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.работникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.карточкаРасчетаToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.работникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.тарифыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.рабочийСтолМастераToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ThemeSelectorComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(this.components);
-            this.тарифыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -134,7 +133,7 @@
             this.изделияToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 23);
-            this.справочникиToolStripMenuItem.Text = "Справочники";
+            this.справочникиToolStripMenuItem.Text = "&Справочники";
             // 
             // оборудованиеToolStripMenuItem
             // 
@@ -214,6 +213,13 @@
             this.видыПроизводствToolStripMenuItem.Text = "Виды производств";
             this.видыПроизводствToolStripMenuItem.Click += new System.EventHandler(this.видыПроизводстваToolStripMenuItem_Click);
             // 
+            // карточкаРасчетаToolStripMenuItem1
+            // 
+            this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
+            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
+            this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
+            // 
             // работникиToolStripMenuItem
             // 
             this.работникиToolStripMenuItem.Name = "работникиToolStripMenuItem";
@@ -221,12 +227,11 @@
             this.работникиToolStripMenuItem.Text = "Работники";
             this.работникиToolStripMenuItem.Click += new System.EventHandler(this.работникиToolStripMenuItem_Click);
             // 
-            // карточкаРасчетаToolStripMenuItem1
+            // тарифыToolStripMenuItem
             // 
-            this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
-            this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
+            this.тарифыToolStripMenuItem.Name = "тарифыToolStripMenuItem";
+            this.тарифыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.тарифыToolStripMenuItem.Text = "Тарифы";
             // 
             // изделияToolStripMenuItem
             // 
@@ -240,7 +245,7 @@
             this.рабочийСтолМастераToolStripMenuItem});
             this.производствоToolStripMenuItem.Name = "производствоToolStripMenuItem";
             this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
-            this.производствоToolStripMenuItem.Text = "Производство";
+            this.производствоToolStripMenuItem.Text = "&Производство";
             // 
             // рабочийСтолМастераToolStripMenuItem
             // 
@@ -252,7 +257,7 @@
             // 
             this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
             this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 23);
-            this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
+            this.TeamWorktoolStripMenuItem.Text = "&Разделения труда";
             this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
             // 
             // ThemeSelectorComboBox
@@ -268,12 +273,6 @@
             this.xtraTabbedMdiManager1.ClosePageButtonShowMode = DevExpress.XtraTab.ClosePageButtonShowMode.InAllTabPageHeaders;
             this.xtraTabbedMdiManager1.MdiParent = this;
             this.xtraTabbedMdiManager1.PageAdded += new DevExpress.XtraTabbedMdi.MdiTabPageEventHandler(this.xtraTabbedMdiManager1_PageAdded);
-            // 
-            // тарифыToolStripMenuItem
-            // 
-            this.тарифыToolStripMenuItem.Name = "тарифыToolStripMenuItem";
-            this.тарифыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.тарифыToolStripMenuItem.Text = "Тарифы";
             // 
             // SpMainForm
             // 
