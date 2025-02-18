@@ -48,6 +48,8 @@ namespace SewingProduction
             }
             if (today == DateTime.ParseExact("02-14", "MM-dd", CultureInfo.InvariantCulture))
                 { imageSlider1.CurrentImageIndex = 7; }//14.02
+            if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture)&&today<=DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
+            { imageSlider1.CurrentImageIndex = 8;}//23.02
         }
     }
 }

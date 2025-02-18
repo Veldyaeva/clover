@@ -2,17 +2,19 @@
 using DevExpress.Entity.Model.DescendantBuilding.Native;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraGrid.Views;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
@@ -45,6 +47,32 @@ namespace SewingProduction.form
         {
             // TODO: данная строка кода позволяет загрузить данные в таблицу "aCEDataSet.fio". При необходимости она может быть перемещена или удалена.
             //this.fioTableAdapter.Fill(this.aCEDataSet.fio);
+            Thread splashThread = new Thread(() =>
+            {
+                SplashScreen splash = new SplashScreen();
+                splash.ShowDialog();
+                Thread.Sleep(2000); // Пример задержки - 2 секунды
+
+            });
+            splashThread.Start(); // Запускаем сплэш
+
+            try
+            {
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, "Ошибка загрузки данных");
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                splashThread.Abort(); // Закрываем сплэш
+            }
+        }
+
+        private void LoadData()
+        {
             try
             {
                 int annId = 0;
@@ -89,7 +117,7 @@ namespace SewingProduction.form
             CurrentWorks_Load();
 
         }
-
+        #region работа с окном разделений труда
         private bool IsDataTableLoaded(GridView view)
         {
             if (view.DataSource is BindingSource bindingSource && bindingSource.DataSource is DataTable dataTable)
@@ -99,11 +127,6 @@ namespace SewingProduction.form
             return false;
         }
 
-
-        private void gridControl2_Load(object sender, EventArgs e)
-        {
-
-        }
         /// <summary>
         /// Обработка смены фокуса строки в таблице разделений. При смене фокуса меняются данные в связанных таблицах швейных и раскройных операций.
         /// </summary>
@@ -121,7 +144,8 @@ namespace SewingProduction.form
                     if (gridView3 != null)
                     {
                         commentRichTextBox.Text = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "komment", "");
-                        customComboBox1.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
+                        int f = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
+                        customComboBox1.SelectedValue = f;// CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
                         //customComboBox2.SelectedValue = view.GetRowCellValue(e.FocusedRowHandle, "diz");
                         customComboBox2.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0);
                         //int annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annId"));
@@ -155,10 +179,7 @@ namespace SewingProduction.form
                 selectedRowHandle = -1; //Сбрасываем после восстановления выделения
             }
         }
-        private void artnormnBindingSource_DataSourceChanged(object sender, EventArgs e)
-        {
 
-        }
 
         /// <summary>
         /// обновление данных в связанных таблицах
@@ -332,7 +353,9 @@ namespace SewingProduction.form
             {
                 MessageBox.Show("Данные не загружены!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
+            //NewForm dialog = new NewForm();
+            DialogResult result = MessageBox.Show($"Вы хотите увязать выбранный артикул {art} с разделением труда {ann}?" , "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);//dialog.ShowDialog();
+            if (result == DialogResult.No) { return;  }
             if (ann != 0 && art != 0)
             {
                 //bindedRow.binded_art = bindedAnn.model;
@@ -381,7 +404,8 @@ namespace SewingProduction.form
         /// <param name="e"></param>
         private void customButton5_Click(object sender, EventArgs e)
         {
-
+            if (gridView3.FocusedRowHandle >= 0)
+                gridView3.ShowPopupEditForm();
         }
 
         /// <summary>
@@ -429,6 +453,10 @@ namespace SewingProduction.form
             }
 
         }
+        private void gridView3_ColumnFilterChanged(object sender, EventArgs e)
+        {
+            //  searchControl1.ClearFilter();
+        }
 
         /// <summary>
         /// архив+копия
@@ -437,6 +465,7 @@ namespace SewingProduction.form
         /// <param name="e"></param>
         private void customButton10_Click(object sender, EventArgs e)
         {
+           // ArchiveAndCopyRT(); ;
             //проверка на наличие НЗП
 
             //если нет НЗП
@@ -470,6 +499,60 @@ namespace SewingProduction.form
 
         }
 
+        private void customComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          //  customComboBox1.Text = customComboBox1.Text.ToString().TrimEnd(' ');
+        }
+
+        private void customComboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+           // customComboBox2.Text = customComboBox2.Text.ToString().TrimEnd(' ');
+        }
+
+        private void customCheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            string filterString = "";
+            if (customCheckBox6.Checked) filterString += "status = 1";
+            if (customCheckBox5.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + "status = 2";
+
+            gridView8.BeginUpdate();
+            gridView8.ActiveFilterString = filterString;
+            gridView8.EndUpdate();
+
+        }
+
+        private void GridButton_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            string filterString = filterTextBox1.Text.TrimEnd(' ');
+            string columnName = GetSelectedColumnName();
+            if (filterString.Length > 0)
+            {
+                if (!string.IsNullOrEmpty(columnName))
+                {
+                    gridView3.ActiveFilterCriteria = new FunctionOperator(
+                        FunctionOperatorType.Contains,
+                        new OperandProperty(columnName),
+                        new OperandValue(filterString));
+                }
+            }
+
+        }
+
+        private void searchControl1_QueryIsSearchColumn(object sender, QueryIsSearchColumnEventArgs args)
+        {
+            string colName = GetSelectedColumnName();
+            if (args.FieldName != colName)
+                args.IsSearchColumn = false;
+        }
+
+        private void search_CheckedChanged(object sender, EventArgs e)
+        {
+
+            searchControl1.ClearFilter();
+
+        }
+        #endregion
+
         #region текущие работы - требуют увязки
         /// <summary>
         /// Загрузка вкладки "текущие работы"
@@ -502,55 +585,49 @@ namespace SewingProduction.form
                         Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                         MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    ;
                 }
-
+                // Привязка данных к таблице
                 customGridControl1.DataSource = artDataList;
-                BindingList<MyDataANN> myDataList;
-                relatedData = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
 
-
-                myDataList = new BindingList<MyDataANN>();
-                // Заполняем myDataList данными из DataTable 
-                foreach (DataRow row in relatedData.Rows)
+                if (artDataList.Count > 0)
                 {
-                    try
+                    // Загрузка работ по первому артикулу
+                    BindingList<MyDataANN> myDataList = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
+                    customGridControl2.DataSource = myDataList;
+
+                    // Загрузка norm_rasz
+                    int annId = 0;
+                    var view = customGridControl2.MainView as GridView;
+                    if (view != null && view.RowCount > 0)
                     {
-                        myDataList.Add(new MyDataANN
-                        {
-                            annId = Convert.ToInt32(row["annId"]),
-                            kod = Convert.ToInt32(row["kod"]),
-                            articul = row["articul"].ToString(),
-                            status = Convert.ToInt32(row["status"]),
-                            stat = row["stat"].ToString(),
-                            group = row["grup"].ToString(),
-                            model = row["mod"].ToString(),
-                            IsChecked = false
-                        });
+                        annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
                     }
-                    catch (Exception ex)
-                    {
-                        Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    ;
+
+                    DataTable normRaszData = _artNormService.GetRelatedNormRasz(annId);
+                    normraszBindingSource1.DataSource = normRaszData;
+                    customGridControl3.DataSource = normraszBindingSource1;
+                    DataTable bindedArts = _artNormService.GetRelatedspArt(annId);
                 }
-
-                //привязка источника данных к таблице
-                customGridControl2.DataSource = myDataList;
-
-                //norm_rasz
-                int annId = 0;
-                var view = customGridControl2.MainView as GridView;
-                if (view != null)
-                {
-                    annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
-                }
-
-                relatedData = _artNormService.GetRelatedNormRasz(annId);
-                normraszBindingSource1.DataSource = relatedData;
-                customGridControl3.DataSource = normraszBindingSource1;
             }
+            //    customGridControl1.DataSource = artDataList;
+
+            //    BindingList<MyDataANN> myDataList = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
+
+            //    //привязка источника данных к таблице
+            //    customGridControl2.DataSource = myDataList;
+
+            //    //norm_rasz
+            //    int annId = 0;
+            //    var view = customGridControl2.MainView as GridView;
+            //    if (view != null)
+            //    {
+            //        annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
+            //    }
+
+            //    relatedData = _artNormService.GetRelatedNormRasz(annId);
+            //    normraszBindingSource1.DataSource = relatedData;
+            //    customGridControl3.DataSource = normraszBindingSource1;
+            //}
             catch (Exception ex)
             {
                 Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
@@ -558,22 +635,82 @@ namespace SewingProduction.form
             }
         }
 
-        private DataTable LoadWorksbyArt(int kod, string articul)//, out BindingList<MyDataANN> myDataList)
+        /// <summary>
+        /// Загружает данные для "текущих работ" на основе кода и артикула.
+        /// Если чекбокс customCheckBox4 активен, загружает все данные, иначе фильтрует по выбранному артикулу.
+        /// </summary>
+        /// <param name="kod">Код для фильтрации</param>
+        /// <param name="articul">Артикул для фильтрации</param>
+        /// <returns>Список данных для отображения в таблице</returns>
+        private BindingList<MyDataANN> LoadWorksbyArt(int kod, string articul)
         {
             DataTable relatedData = new DataTable();
-            //РТ для увязки - поиск по kodd_rt
-            //загружаем РТ по первому коду в таблице артикулов
-            relatedData = _artNormService.GetArtNormDataCurrent(kod, customCheckBox4.Checked);
-            //РТ для увязки - поиск по первой части артикула
-            string art = articul;
-            int k = art.IndexOf("-");
-            if (k > 0)
+            // Если customCheckBox4 выбран, загружаем все работы
+            if (customCheckBox4.Checked)
             {
-                DataTable dataTable = _artNormService.GetArtNormDataCurrent(articul.Substring(0, k));
-                relatedData.Merge(dataTable);
+                relatedData = _artNormService.GetArtNormDataCurrent(kod, true); // Загружаем все данные
             }
-            return relatedData;
+            else
+            {
+                // Если чекбокс не выбран, фильтруем данные по выбранному артикулу и коду
+                relatedData = _artNormService.GetArtNormDataCurrent(kod, false); // Загружаем данные по коду
+                                                                                 // Фильтруем по первой части артикула (до дефиса)
+                int k = articul.IndexOf("-");
+                if (k > 0)
+                {
+                    DataTable dataTable = _artNormService.GetArtNormDataCurrent(articul.Substring(0, k));
+                    relatedData.Merge(dataTable); // Объединяем данные по части артикула
+                }
+            }
+
+            // Создаём и заполняем BindingList для отображения в GridControl
+            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+            string q ="";
+            string w ="";
+            string e ="";
+            string r ="";
+            string t ="";
+            string y ="";
+            string u = "";
+            string i = "";
+            int index = 0;
+            foreach (DataRow row in relatedData.Rows)
+            {
+                try
+                {
+                    myDataList.Add(new MyDataANN
+                    {
+                        annId = Convert.ToInt32(row["annId"]),
+                        kod = Convert.ToInt32(row["kod"]),
+                        articul = row["articul"].ToString(),
+                        status = Convert.ToInt32(row["status"]),
+                        stat = row["stat"].ToString(),
+                        group = row["grup"].ToString(),
+                        model = row["mod"].ToString(),
+                        IsChecked = false
+                     });
+
+                    // q = myDataList[index].annId.ToString().TrimEnd(' ');
+                     w = myDataList[index].kod.ToString();
+                    // e = myDataList[index].articul.ToString().TrimEnd(' ');
+                    // r = myDataList[index].status.ToString().TrimEnd(' ');
+                    // t = myDataList[index].stat.ToString().TrimEnd(' ');
+                    // y = myDataList[index].group.ToString().TrimEnd(' ');
+                    // u = myDataList[index].model.ToString().TrimEnd(' ');
+                    // i = myDataList[index].IsChecked.ToString();
+                    index++;
+                    //Logger.LogEvent($"annId= {q},kod={w},art={e},status={r},stat={t},group={y},mod={u}, checked={i}");
+                 }
+                catch (Exception  ex)
+                 {
+                    Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}, annId= {q},kod={w},art={e},status={r},stat={t},group={y},mod={u}, checked {i}");
+                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            return myDataList;
         }
+
 
         /// <summary>
         /// загрузка norm_rasz 
@@ -586,7 +723,7 @@ namespace SewingProduction.form
             var view = gridView8;//customGridControl2.MainView as GridView;
             if (view != null)
             {
-                annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
+                annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "annId"));
             }
 
             var relatedData = _artNormService.GetRelatedNormRasz(annId);
@@ -594,120 +731,198 @@ namespace SewingProduction.form
             customGridControl3.DataSource = normraszBindingSource1;
 
         }
+        #endregion
+        #region headerCheckBox
 
         /// <summary>
-        /// обработка клика на заголовке, 
+        /// Обработчик изменения значения в ячейке (IsChecked) для gridView8.
+        /// Устанавливает IsChecked в true только для одной строки, сбрасывая остальные.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column == gridView8.Columns["IsChecked"])
+            if (e.Column.FieldName == "IsChecked")
             {
-                int rowHandle = e.RowHandle;
-                MyDataANN data = gridView8.GetRow(rowHandle) as MyDataANN;
-
-                if (data != null)
-                {
-                    data.IsChecked = (bool)e.Value;
-                    if (data.IsChecked)
-                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
-                        for (int i = 0; i < gridView8.RowCount; i++)
-                        {
-                            if (i != rowHandle)
-                            {
-                                MyDataANN otherData = gridView8.GetRow(i) as MyDataANN;
-                                if (otherData != null)
-                                {
-                                    if (otherData.IsChecked)
-                                        otherData.IsChecked = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                gridView8.RefreshData();
+                UpdateExclusiveCheck<MyDataANN>(gridView8, e.RowHandle);
             }
-
         }
 
         /// <summary>
-        /// обработка клика на заголовке
+        /// Обработчик изменения значения в ячейке (IsChecked) для gridView7.
+        /// Устанавливает IsChecked в true только для одной строки, сбрасывая остальные.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column == gridView7.Columns["IsChecked"])
+            if (e.Column.FieldName == "IsChecked")
             {
-                int rowHandle = e.RowHandle;
-                MyDataART data = gridView7.GetRow(rowHandle) as MyDataART;
+                UpdateExclusiveCheck<MyDataART>(gridView7, e.RowHandle);
+            }
+        }
 
-                if (data != null)
+        /// <summary>
+        /// Устанавливает IsChecked = true только для одной строки, сбрасывая остальные в false.
+        /// </summary>
+        /// <param name="gridView">GridView, в котором выполняется изменение</param>
+        /// <param name="rowHandle">Индекс строки, где пользователь установил флаг</param>
+        private void UpdateExclusiveCheck<T>(GridView gridView, int rowHandle) where T : class
+        {
+            var selectedData = gridView.GetRow(rowHandle) as T;
+            if (selectedData is ICheckable checkableSelectedData)
+            {
+                checkableSelectedData.IsChecked = true;
+
+                // Сбрасываем флаг у остальных строк
+                for (int i = 0; i < gridView.RowCount; i++)
                 {
-                    data.IsChecked = (bool)e.Value;
-                    if (data.IsChecked)
-                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
-                        for (int i = 0; i < gridView7.RowCount; i++)
+                    if (i != rowHandle)
+                    {
+                        var otherData = gridView.GetRow(i) as T;
+                        if (otherData is ICheckable checkableOtherData && checkableOtherData.IsChecked)
                         {
-                            if (i != rowHandle)
+                            checkableOtherData.IsChecked = false;
+                        }
+                    }
+                }
+            }
+            gridView.RefreshData();
+        }
+
+        /// <summary>
+        /// Интерфейс для моделей с флагом IsChecked
+        /// </summary>
+        public interface ICheckable
+        {
+            bool IsChecked { get; set; }
+        }
+
+        /// <summary>
+        /// Модель MyDataANN с реализацией интерфейса ICheckable
+        /// </summary>
+        public class MyDataANN : ICheckable
+        {
+            public int annId { get; set; }
+            public int kod { get; set; }
+            public string articul { get; set; }
+            public int status { get; set; }
+            public string group { get; set; }
+            public string model { get; set; }
+            public string stat { get; set; }
+            public bool IsChecked { get; set; }
+        }
+
+        /// <summary>
+        /// Модель MyDataART с реализацией интерфейса ICheckable
+        /// </summary>
+        public class MyDataART : ICheckable
+        {
+            public string articul { get; set; }
+            public int kod { get; set; }
+            public string group { get; set; }
+            public string model { get; set; }
+            public string binded_art { get; set; }
+            public bool IsChecked { get; set; }
+        }
+        ///// <summary>
+        ///// обработка клика на заголовке, 
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        //{
+        //    if (e.Column == gridView8.Columns["IsChecked"])
+        //    {
+        //        int rowHandle = e.RowHandle;
+        //        MyDataANN data = gridView8.GetRow(rowHandle) as MyDataANN;
+
+        //        if (data != null)
+        //        {
+        //            data.IsChecked = (bool)e.Value;
+        //            if (data.IsChecked)
+        //            { // Обходим все строки и устанавливаем IsChecked в false для остальных
+        //                for (int i = 0; i < gridView8.RowCount; i++)
+        //                {
+        //                    if (i != rowHandle)
+        //                    {
+        //                        MyDataANN otherData = gridView8.GetRow(i) as MyDataANN;
+        //                        if (otherData != null)
+        //                        {
+        //                            if (otherData.IsChecked)
+        //                                otherData.IsChecked = false;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        gridView8.RefreshData();
+        //    }
+        //}
+
+        ///// <summary>
+        ///// обработка клика на заголовке
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        //{
+        //    if (e.Column == gridView7.Columns["IsChecked"])
+        //    {
+        //        int rowHandle = e.RowHandle;
+        //        MyDataART data = gridView7.GetRow(rowHandle) as MyDataART;
+
+        //        if (data != null)
+        //        {
+        //            data.IsChecked = (bool)e.Value;
+        //            if (data.IsChecked)
+        //            { // Обходим все строки и устанавливаем IsChecked в false для остальных
+        //                for (int i = 0; i < gridView7.RowCount; i++)
+        //                {
+        //                    if (i != rowHandle)
+        //                    {
+        //                        MyDataART otherData = gridView7.GetRow(i) as MyDataART;
+        //                        if (otherData != null)
+        //                        {
+        //                            if (otherData.IsChecked)
+        //                                otherData.IsChecked = false;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        gridView7.RefreshData();
+        //    }
+        //}
+
+        private void checkedChange(GridView view, int rowHandle, bool value)
+        {
+            MyDataANN data = view.GetRow(rowHandle) as MyDataANN;
+
+            if (data != null)
+            {
+                data.IsChecked = value;
+                if (data.IsChecked)
+                { // Обходим все строки и устанавливаем IsChecked в false для остальных
+                    for (int i = 0; i < view.RowCount; i++)
+                    {
+                        if (i != rowHandle)
+                        {
+                            MyDataANN otherData = view.GetRow(i) as MyDataANN;
+                            if (otherData != null)
                             {
-                                MyDataART otherData = gridView7.GetRow(i) as MyDataART;
-                                if (otherData != null)
-                                {
-                                    if (otherData.IsChecked)
-                                        otherData.IsChecked = false;
-                                }
+                                if (otherData.IsChecked)
+                                    otherData.IsChecked = false;
                             }
                         }
                     }
                 }
-                gridView7.RefreshData();
             }
-
         }
-
-        #region headerCheckBox
         private bool isHeaderChecked = false; // Состояние CheckBox в заголовке
         private Dictionary<GridView, bool> gridViewStates = new Dictionary<GridView, bool>();//словарь состояний CheckBox
         /// <summary>
-        /// отрисовка чекБокса в заголовке столбца
+        /// это для множественного выбора
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void gridView8_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-
-        private void gridView7_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-        private void gridView9_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            //DrawCheckBox(e);
-        }
-        private void DrawCheckBox(ColumnHeaderCustomDrawEventArgs e)
-        {
-            if (e.Column != null && e.Column.FieldName == "IsChecked") // Убедимся, что это нужный столбец
-            {
-                // Очищаем стандартную отрисовку заголовка
-                e.Handled = true;
-
-                // Отрисовка заголовка
-                e.Painter.DrawObject(e.Info);
-
-                // Отрисовка CheckBox
-                // Получаем размеры области заголовка
-                Rectangle rect = e.Bounds;
-                CheckBoxRenderer.DrawCheckBox(
-                    e.Graphics,
-                    new Point(rect.Left + (rect.Width - 16) / 2, rect.Y + (rect.Height / 2) - 8),   // Рассчитываем позицию чекбокса по центру
-                    isHeaderChecked ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal : System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal
-                );
-            }
-        }
+        /// <typeparam name="MyDataART"></typeparam>
+        /// <param name="view"></param>
+        /// <returns></returns>
         private List<MyDataART> GetCheckedRows<MyDataART>(GridView view)
         {
             BindingList<MyDataART> dataSource = view.DataSource as BindingList<MyDataART>;
@@ -724,143 +939,65 @@ namespace SewingProduction.form
             return new List<MyDataART>();//
                                          //dataSource.Where(item => item.IsChecked).ToList();
         }
-        private void AddCheckBoxToHeader(GridView gridView)
-        {
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit headerCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            GridColumn column = gridView.Columns["IsChecked"];
-            column.OptionsColumn.AllowEdit = true;
 
-            column.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            column.ColumnEdit = headerCheckEdit;
+        ///// <summary>
+        ///// Обработка нажатия на заголовке чекБоксов
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void CheckBoxMouseDown(object sender, MouseEventArgs e)
+        //{
+        //    GridView view = sender as GridView;
+        //    if (view == null) return;
+        //    GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
 
+        //    if (!hitInfo.InColumn || hitInfo.Column.FieldName != "IsChecked") return;
+        //    isHeaderChecked = !isHeaderChecked;
+        //    //UpdateAllRows(view, isHeaderChecked);
+        //    //view.RefreshData();
+        //    // Получаем или устанавливаем состояние для текущего GridView
+        //    if (!gridViewStates.TryGetValue(view, out bool isChecked))
+        //    {
+        //        isChecked = false; // Значение по умолчанию, если GridView еще не был обработан
+        //    }
 
-        }
+        //    isChecked = !isChecked;
+        //    gridViewStates[view] = isChecked; // Сохраняем новое состояние
+
+        //    UpdateAllRows(view, isChecked);
+        //    view.RefreshData();
+        //}
+
+        ///// <summary>
+        ///// обновление статуса CheckBox у всех строк таблицы
+        ///// </summary>
+        ///// <param name="view"></param>
+        ///// <param name="isChecked"></param>
+        //private void UpdateAllRows(GridView view, bool isChecked)
+        //{
+        //    IList dataSource = view.DataSource as IList;
+        //    if (dataSource == null) return;
+
+        //    foreach (var item in dataSource)
+        //    {
+        //        if (item != null)
+        //        {
+        //            var property = item.GetType().GetProperty("IsChecked");
+        //            if (property != null && property.CanWrite)
+        //            {
+        //                property.SetValue(item, isChecked);
+        //            }
+        //        }
+        //    }
+        //}
+
+        #endregion
+
         /// <summary>
-        /// Обработка нажатия на заголовке чекБоксов
+        /// Загрузка формы Предварительное РТ
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckBoxMouseDown(object sender, MouseEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (view == null) return;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
-
-            if (!hitInfo.InColumn || hitInfo.Column.FieldName != "IsChecked") return;
-            isHeaderChecked = !isHeaderChecked;
-            //UpdateAllRows(view, isHeaderChecked);
-            //view.RefreshData();
-            // Получаем или устанавливаем состояние для текущего GridView
-            if (!gridViewStates.TryGetValue(view, out bool isChecked))
-            {
-                isChecked = false; // Значение по умолчанию, если GridView еще не был обработан
-            }
-
-            isChecked = !isChecked;
-            gridViewStates[view] = isChecked; // Сохраняем новое состояние
-
-            UpdateAllRows(view, isChecked);
-            view.RefreshData();
-        }
-
-        /// <summary>
-        /// обновление статуса CheckBox у всех строк таблицы
-        /// </summary>
-        /// <param name="view"></param>
-        /// <param name="isChecked"></param>
-        private void UpdateAllRows(GridView view, bool isChecked)
-        {
-            IList dataSource = view.DataSource as IList;
-            if (dataSource == null) return;
-
-            foreach (var item in dataSource)
-            {
-                if (item != null)
-                {
-                    var property = item.GetType().GetProperty("IsChecked");
-                    if (property != null && property.CanWrite)
-                    {
-                        property.SetValue(item, isChecked);
-                    }
-                }
-            }
-        }
-        /// <summary>
-        /// переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
-        {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                e.Handled = true; // Отменяем сортировку по колонке "IsChecked"
-            }
-        }
-
-        #endregion
-        #endregion
-
-
-        private void customComboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            customComboBox1.Text = customComboBox1.Text.ToString().TrimEnd(' ');
-        }
-
-        private void customComboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            customComboBox2.Text = customComboBox2.Text.ToString().TrimEnd(' ');
-        }
-
-        private void customCheckBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            string filterString = "";
-            if (customCheckBox6.Checked) filterString += "status = 1";
-            if (customCheckBox5.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + "status = 2";
-
-            gridView8.BeginUpdate();
-            gridView8.ActiveFilterString = filterString;
-            gridView8.EndUpdate();
-
-        }
-
-        private void GridButton_ButtonClick(object sender, ButtonPressedEventArgs e)
-        {
-            string filterString = filterTextBox1.Text.TrimEnd(' ');
-            string columnName = GetSelectedColumnName();
-            if (filterString.Length > 0)
-            {
-                if (!string.IsNullOrEmpty(columnName))
-                {
-                    gridView3.ActiveFilterCriteria = new FunctionOperator(
-                        FunctionOperatorType.Contains,
-                        new OperandProperty(columnName),
-                        new OperandValue(filterString));
-                }
-            }
-
-        }
-
-
-        private void searchControl1_QueryIsSearchColumn(object sender, QueryIsSearchColumnEventArgs args)
-        {
-            string colName = GetSelectedColumnName();
-            if (args.FieldName != colName)
-                args.IsSearchColumn = false;
-        }
-
-        private void search_CheckedChanged(object sender, EventArgs e)
-        {
-
-            searchControl1.ClearFilter();
-
-        }
-
-        private void customButton6_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void simpleButton2_Click(object sender, EventArgs e)
         {
 
@@ -868,72 +1005,155 @@ namespace SewingProduction.form
             teamWork_Advance.ShowDialog();
 
         }
-
+        /// <summary>
+        /// Смена фокуса в таблице артикулов для увязки. Выбор подходящих РТ для увязки с выбранным артикулом
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             int kodd_rt = 0;
             string articul = "";
             var view = gridView7;
-            if (view != null)
+            // DataTable relatedData = new DataTable();
+            BindingList<MyDataANN> relatedData = new BindingList<MyDataANN>();
+            if (!customCheckBox4.Checked)
             {
-                kodd_rt = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
-                articul = view.GetRowCellValue(e.FocusedRowHandle, "articul").ToString();
+                if (view != null)
+                {
+                    kodd_rt = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "kod"));
+                    articul = view.GetRowCellValue(e.FocusedRowHandle, "articul").ToString();
+                }
+                relatedData = LoadWorksbyArt(kodd_rt, articul);
             }
-
-
-            DataTable relatedData = LoadWorksbyArt(kodd_rt, articul);
-            // relatedData = LoadWorksbyArt(artDataList[0].kod, artDataList[0].articul);
-
-
-            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-            // Заполняем myDataList данными из DataTable 
-            foreach (DataRow row in relatedData.Rows)
+            else
             {
-                try
-                {
-                    myDataList.Add(new MyDataANN
-                    {
-                        annId = Convert.ToInt32(row["annId"]),
-                        kod = Convert.ToInt32(row["kod"]),
-                        articul = row["articul"].ToString(),
-                        status = Convert.ToInt32(row["status"]),
-                        stat = row["stat"].ToString(),
-                        group = row["grup"].ToString(),
-                        model = row["mod"].ToString(),
-                        IsChecked = false
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                ;
+                relatedData = LoadWorksbyArt(0, "");
             }
 
             //привязка источника данных к таблице
-            customGridControl2.DataSource = myDataList;
+            customGridControl2.DataSource = relatedData;//myDataList;
 
-            relatedData = _artNormService.GetRelatedNormRasz(kodd_rt);
-            normraszBindingSource1.DataSource = relatedData;
+            
+            normraszBindingSource1.DataSource = _artNormService.GetRelatedNormRasz(kodd_rt); 
             customGridControl3.DataSource = normraszBindingSource1;
-        }
-
-        private void gridView3_ColumnFilterChanged(object sender, EventArgs e)
-        {
-            //  searchControl1.ClearFilter();
         }
 
         private void customCheckBox4_CheckedChanged(object sender, EventArgs e)
         {
-            DataTable myDataList = new DataTable();
+            BindingList<MyDataANN> myDataList = null;
+            int i = gridView7.FocusedRowHandle;
             if (customCheckBox4.Checked)
             {
                 myDataList = LoadWorksbyArt(0, "");
-                customGridControl2.DataSource = myDataList;
             }
+            else
+            {
+                myDataList = LoadWorksbyArt(Convert.ToInt32(gridView7.GetRowCellValue(i, "kod")), gridView7.GetRowCellValue(i, "articul").ToString());
+            }
+            customGridControl2.DataSource = myDataList;
+        }
+
+        private void customButton6_Click(object sender, EventArgs e)
+        {
+            GridView view = gridView3;
+            if (view == null) return;
+
+            view.AddNewRow(); // Добавляем новую строку
+            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW())
+            {
+                if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                {
+                    //сохраняем
+                }
+                else
+                {
+                    //отменяем
+                }
+            }
+            //view.ShowPopupEditForm(); // Открываем окно редактирования
+        }
+        #region arch+copy
+        /// <summary>
+        /// Архивирование РТ с возможностью создания копии
+        /// </summary>
+        private void ArchiveAndCopyRT()
+        {
+            //var view = gridView3;
+            //if (view == null || view.SelectedRowsCount == 0)
+            //{
+            //    MessageBox.Show("Выберите запись для архивирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //int annId = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "annId"));
+            //bool hasNZP = _artNormService.CheckNZP(annId);
+
+            //if (!hasNZP || (hasNZP && !_artNormService.HasAssignedOperations(annId)))
+            //{
+            //    // Создаем копию РТ со статусом "актуальное"
+            //    int newAnnId = _artNormService.CreateCopyRT(annId, "актуальное");
+            //    _artNormService.UpdateRTStatus(annId, "архив");
+            //    _artNormService.ReassignArticles(annId, newAnnId);
+            //    _artNormService.RemoveOperationsFromBrigades(annId);
+            //    MessageBox.Show("РТ успешно архивировано и скопировано.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //else
+            //{
+            //    // Создаем копию РТ со статусом "предварительный"
+            //    int newAnnId = _artNormService.CreateCopyRT(annId, "предварительный");
+            //    _artNormService.UpdateRTStatus(annId, "предварительный архив");
+            //    _artNormService.ReassignArticles(annId, newAnnId);
+            //    _artNormService.RemoveOperationsFromBrigades(annId);
+            //    MessageBox.Show("РТ с НЗП перемещено в предварительный архив и создана копия.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+        }
+
+        /// <summary>
+        /// Обновление данных по НЗП и перевод РТ в архив
+        /// </summary>
+        private void UpdateNZPAndArchive()
+        {
+            //var view = gridView3;
+            //if (view == null || view.SelectedRowsCount == 0)
+            //{
+            //    MessageBox.Show("Выберите запись для архивирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //int annId = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "annId"));
+            //if (_artNormService.CheckNZP(annId))
+            //{
+            //    MessageBox.Show("Невозможно отправить в архив: есть незавершенное производство.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            //_artNormService.UpdateRTStatus(annId, "архив");
+            //MessageBox.Show("РТ успешно отправлено в архив.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnArchiveCopy_Click(object sender, EventArgs e)
+        {
+            ArchiveAndCopyRT();
+        }
+
+        private void btnArchiveRT_Click(object sender, EventArgs e)
+        {
+            UpdateNZPAndArchive();
+        }
+
+        private void gridView3_InitNewRow(object sender, InitNewRowEventArgs e)
+        {
+
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
+    #endregion
+
 
     /// <summary>
     /// Источник данных РТ для увязки
@@ -1035,191 +1255,4 @@ namespace SewingProduction.form
 
     }
 
-    ///// <summary>
-    ///// класс для работы с БД
-    ///// </summary>
-    //public class DatabaseHelper
-    //{
-    //    private readonly string _connectionString;
-
-    //    public DatabaseHelper(string connectionString)
-    //    {
-    //        _connectionString = connectionString;
-    //    }
-    //    /// <summary>
-    //    /// Выполнение SQL запроса, возвращает dataTable
-    //    /// </summary>
-    //    /// <param name="query">запрос</param>
-    //    /// <param name="parameters">параметры</param>
-    //    /// <returns></returns>
-    //    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
-    //    {
-    //        var dt = new DataTable();
-    //        using (var connection = new SqlConnection(_connectionString))
-    //        {
-    //            connection.Open();
-    //            using (var command = new SqlCommand(query, connection))
-    //            {
-    //                if (parameters != null)
-    //                {
-    //                    foreach (var param in parameters)
-    //                    {
-    //                        command.Parameters.AddWithValue(param.Key, param.Value);
-    //                    }
-    //                }
-    //                using (var adapter = new SqlDataAdapter(command))
-    //                {
-    //                    adapter.Fill(dt);
-    //                }
-    //            }
-    //        }
-    //        return dt;
-    //    }
-
-    //    /// <summary>
-    //    /// Выполнение SQL запроса
-    //    /// </summary>
-    //    /// <param name="query">запрос</param>
-    //    /// <param name="parameters">параметры</param>
-    //    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
-    //    {
-    //        using (var connection = new SqlConnection(_connectionString))
-    //        {
-    //            connection.Open();
-    //            using (var command = new SqlCommand(query, connection))
-    //            {
-    //                if (parameters != null)
-    //                {
-    //                    foreach (var param in parameters)
-    //                    {
-    //                        command.Parameters.AddWithValue(param.Key, param.Value);
-    //                    }
-    //                }
-    //                command.ExecuteNonQuery();
-    //            }
-    //        }
-    //    }
-    //}
-
-    /// <summary>
-    /// класс для обработки SQL
-    /// </summary>
-    public class ArtNormService
-    {
-        private readonly DatabaseHelper _dbHelper;
-
-        public ArtNormService(DatabaseHelper dbHelper)
-        {
-            _dbHelper = dbHelper;
-        }
-
-        public DataTable GetArtNormData()
-        {
-            string query = "SELECT SUBSTRING(kod,1,7) as kod, annId, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        /// <summary>
-        /// загрузка артикулов для увязки. Статус != архивное
-        /// </summary>
-        /// <returns>Возвращает таблицу артикулов</returns>
-        public DataTable GetArtNormDataCurrent(int kod, bool all)
-        {
-            string query = "";
-            if (all)
-            {
-                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
-            }
-            else
-            {
-                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView JOIN status_ann ON status=status_id WHERE status<3 AND annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt LIKE '@kod')";
-            }
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "kod", kod + "%" } });
-        }
-
-        public DataTable GetArtNormDataCurrent(string art)
-        {
-            string query = "SELECT * FROM artNormNView WHERE articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "art", art + "%" } });
-        }
-        public void ResetAnnId(int spArticul)
-        {
-            // string query = "UPDATE sp_articul SET annId = NULL WHERE kod = @kod";
-            string query = "UPDATE sp_articul SET annId = NULL WHERE kod IN (SELECT kod FROM view_sp_articul WHERE kodd_rt = @kod)";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", spArticul } });
-        }
-
-        public void UpdateAnnId(int spArticul, int annId)
-        {
-            string query = "UPDATE sp_articul SET annId = @annId WHERE kod like @kod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", spArticul + "%" }, { "@annId", annId } });
-        }
-
-        // Получение связанных данных
-
-        public DataTable GetRelatedNormRasz(int annId)
-        {
-            string query = "SELECT annId, n, n1, razryd, text, sek, kod, kod_o, kod_ob FROM norm_rasz WHERE annId = @annId";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-        }
-        public DataTable GetRelatedNormRask(int annId)
-        {
-            string query = "SELECT annId, kod_o, razryd, text, sek  FROM norm_rask WHERE annId = @annId";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-        }
-
-        public DataTable GetRelatedNormKont(int annId)
-        {
-            string query = "SELECT annId, kod_o, razryd, text, sek FROM norm_kont WHERE annId = @annId";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-        }
-
-        public DataTable GetRelatedNormDopObr(int annId)
-        {
-            string query = "SELECT annId, sek_p, sek_p_tamp, sek_v, sek_stra FROM norm_dop_obr WHERE annId = @annId";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-        }
-
-        public DataTable GetRelDesigner(int tab)
-        {
-
-            string query = "SELECT fio, tab FROM fio where tab = @tab";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tab", tab } });
-        }
-
-        /// <summary>
-        /// Получение связанных данных из sp_articul
-        /// </summary>
-        /// <param name="annId">annId=null=> загрузка неувязанных артикулов
-        /// annId!=null => загрузка артикулов с НЗП процедурой GetNZPByKoddRT 
-        /// </param>
-        /// <returns></returns>
-        public DataTable GetRelatedspArt(int annId)
-        {
-            //string query = "";
-            //if (annId == 0)
-            //{ query = "SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod, FROM sp_articul WHERE annID IS NULL"; }
-            //else if (annId>0)
-            //{ query = $"SELECT SUBSTRING(kod,1,7) as kod, grup, articul, mod FROM sp_articul WHERE annID = @annId"; }
-            string query = annId == 0
-            //? "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL"
-            //: $"SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID = @annId";//kod as trueKod, SUBSTRING(kod,1,7) as kod
-            ? "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL" //"EXEC dbo.GetNZPByKoddRT @annId"
-            : "EXEC dbo.GetNZPByKoddRT @annId";
-
-
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-        }
-        /// <summary>
-        /// Получение пути к файлу изображения
-        /// </summary>
-        /// <param name="kod">код</param>
-        /// <returns></returns>
-        public DataTable GetImage(int kod)
-        {
-            string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kod", kod } });
-        }
-
-
-    }
 }

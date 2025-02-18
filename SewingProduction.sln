@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		ic.ico = ic.ico
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "parser", "..\parser\parser.csproj", "{CACF2892-15D4-47F2-BDE3-5311FFF03A41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		debug_test|Any CPU = debug_test|Any CPU
@@ -24,6 +26,14 @@ Global
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.release_prodiction|Any CPU.ActiveCfg = Release|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{492A5D90-D112-4AA4-8DF2-789E7922C204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.debug_test|Any CPU.ActiveCfg = Debug|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.debug_test|Any CPU.Build.0 = Debug|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.release_prodiction|Any CPU.ActiveCfg = Release|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.release_prodiction|Any CPU.Build.0 = Release|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CACF2892-15D4-47F2-BDE3-5311FFF03A41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

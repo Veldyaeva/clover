@@ -224,6 +224,7 @@
     <Compile Include="form\SpravZeh.Designer.cs">
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\ArtNormService.cs" />
     <Compile Include="form\TeamWork\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>

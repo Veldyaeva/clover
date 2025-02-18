@@ -1,3 +1,4 @@
+using DevExpress.XtraEditors.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
 using System.Data;
 using DevExpress.XtraRichEdit.Model;
+using DevExpress.XtraEditors.Controls;
 
 namespace SewingProduction
 {
@@ -488,8 +490,11 @@ namespace SewingProduction
             }
         }
     }
+
+
 }
 #endregion
+
 
 
 #region DbHelper
@@ -601,6 +606,7 @@ public class DatabaseHelper
 }
 #endregion
 
+#region Logger
 public static class Logger
 {
     private static readonly string logFilePath = "error_log.json";
@@ -674,3 +680,4 @@ public class LogEntry
     public string StackTrace { get; set; }
     public string Context { get; set; }
 }
+#endregion

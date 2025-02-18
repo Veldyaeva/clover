@@ -17,7 +17,7 @@ namespace SewingProduction.form
         public TeamWork_AdvanceTW()
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
+            var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
             _artNormService = new ArtNormService(dbHelper);
             UpdateTheme(this);
 
@@ -25,6 +25,32 @@ namespace SewingProduction.form
 
         private void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.OK; // Устанавливаем результат
+            this.Close(); // Закрываем окно
+        }
+
+        private void gridControl1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddRow_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void gridView5_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            gridView5.AddNewRow();
+            if (gridView5.RowCount >= 2)
+            {
+               // MessageBox.Show("Вы не можете добавить больше двух строк!", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
         }
     }
