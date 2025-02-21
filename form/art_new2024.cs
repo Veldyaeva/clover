@@ -229,5 +229,10 @@ namespace SewingProduction.form
                 }
             }
         }
+
+        private void searchLookUpEditTm1_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -600,6 +600,7 @@
             this.searchLookUpEditTm1.Properties.PopupView = this.gridView2;
             this.searchLookUpEditTm1.Size = new System.Drawing.Size(95, 20);
             this.searchLookUpEditTm1.TabIndex = 43;
+            this.searchLookUpEditTm1.EditValueChanged += new System.EventHandler(this.searchLookUpEditTm1_EditValueChanged);
             // 
             // gridView2
             // 
