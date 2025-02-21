@@ -17,7 +17,7 @@ namespace SewingProduction
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
+            
             using (SplashScreen splash = new SplashScreen())
             {
                 splash.Show();
@@ -29,6 +29,7 @@ namespace SewingProduction
                 // После инициализации создаем и показываем главную форму
              
             }
+            ThemeManager.LoadTheme();
             Application.Run(new SpMainForm());
 
         }

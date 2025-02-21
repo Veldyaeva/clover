@@ -41,6 +41,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SewingProduction.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -111,12 +112,20 @@
     <Reference Include="Microsoft.SqlServer.Types, Version=16.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>packages\NLog.5.4.0\lib\net46\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System">
       <HintPath>..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -131,12 +140,14 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ACE_backupDataSet.cs">
+      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ACE_backupDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="AppDbContext.cs" />
     <Compile Include="ArtNormN.cs" />
     <Compile Include="class\CustomControls.cs">
       <SubType>Component</SubType>
@@ -228,11 +239,17 @@
     <Compile Include="form\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWorkTest.cs">
+    <Compile Include="form\TeamWork_AdvanceTW.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWorkTest.Designer.cs">
-      <DependentUpon>TeamWorkTest.cs</DependentUpon>
+    <Compile Include="form\TeamWork_AdvanceTW.Designer.cs">
+      <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork_ArchAndCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork_ArchAndCopy.Designer.cs">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -383,6 +400,12 @@
     <EmbeddedResource Include="form\PlanZagrBrig.resx">
       <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork_AdvanceTW.resx">
+      <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork_ArchAndCopy.resx">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </EmbeddedResource>
@@ -516,6 +539,7 @@
   <ItemGroup>
     <Content Include="XMLFile1.xml" />
     <None Include="Resources\winter.ico" />
+    <Content Include="Resources\spring.jpg" />
     <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />

@@ -1,0 +1,22 @@
+﻿<XtraSerializer version="1.0" application="Appearances">
+  <property name="SelectedRow" iskey="true" value="SelectedRow">
+    <property name="Options" isnull="true" iskey="true">
+      <property name="UseBackColor">true</property>
+      <property name="UseFont">true</property>
+    </property>
+    <property name="BackColor">Brown</property>
+    <property name="FontStyleDelta">Bold</property>
+  </property>
+  <property name="FocusedRow" iskey="true" value="FocusedRow">
+    <property name="Options" isnull="true" iskey="true">
+      <property name="UseBackColor">true</property>
+    </property>
+    <property name="BackColor">Green</property>
+  </property>
+  <property name="ColumnFilterButton" iskey="true" value="ColumnFilterButton">
+    <property name="Options" isnull="true" iskey="true">
+      <property name="UseBackColor">true</property>
+    </property>
+    <property name="BackColor">Yellow</property>
+  </property>
+</XtraSerializer>

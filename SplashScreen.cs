@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,36 @@ namespace SewingProduction
         public SplashScreen()
         {
             InitializeComponent();
-        }
+            Random random = new Random();
+            int minValue = 3;
+            int maxValue = 6; 
 
+            int randomNumber = random.Next(minValue, maxValue + 1);
+
+            int month = DateTime.Now.Month;
+            DateTime today = DateTime.Now.Date;
+            if (month >= 3 && month <= 5)
+            {
+                imageSlider1.CurrentImageIndex = randomNumber;
+            }
+            else if (month >= 6 && month <= 8)
+            {
+                imageSlider1.CurrentImageIndex = 2;
+            }
+            else if (month >= 9 && month <= 11)
+            {
+                imageSlider1.CurrentImageIndex = 3;
+            }
+            else
+            {
+                imageSlider1.CurrentImageIndex = 0;
+            }
+            DateTime sprStart = DateTime.ParseExact("03-05", "MM-dd", CultureInfo.InvariantCulture);
+            DateTime sprEnd = DateTime.ParseExact("03-11", "MM-dd", CultureInfo.InvariantCulture);
+            if (today >= sprStart&& today<=sprEnd)
+            {
+                imageSlider1.CurrentImageIndex = 4;
+            }
+        }
     }
 }

@@ -1107,335 +1107,6 @@
             // 
             // xtraTabPageX
             // 
-            this.xtraTabPageX.Name = "xtraTabPageX";
-            this.xtraTabPageX.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPageX.Text = "Х";
-            this.xtraTabPageX.Paint += new System.Windows.Forms.PaintEventHandler(this.xtraTabPageX_Paint);
-            // 
-            // xtraTabPagePechSHk
-            // 
-            this.xtraTabPagePechSHk.Controls.Add(this.tabControlSHK);
-            this.xtraTabPagePechSHk.Name = "xtraTabPagePechSHk";
-            this.xtraTabPagePechSHk.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPagePechSHk.Text = "Печать ШК";
-            // 
-            // tabControlSHK
-            // 
-            this.tabControlSHK.Controls.Add(this.tabPage1);
-            this.tabControlSHK.Controls.Add(this.tabPage2);
-            this.tabControlSHK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlSHK.Location = new System.Drawing.Point(0, 0);
-            this.tabControlSHK.Name = "tabControlSHK";
-            this.tabControlSHK.SelectedIndex = 0;
-            this.tabControlSHK.Size = new System.Drawing.Size(132, 184);
-            this.tabControlSHK.TabIndex = 5;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Silver;
-            this.tabPage1.Controls.Add(this.tableLayoutPanel5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(124, 158);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "По ведомости";
-            // 
-            // tableLayoutPanel5
-            // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.customTextBoxPechSHK1, 0, 3);
-            this.tableLayoutPanel5.Controls.Add(this.customComboBoxPechVed, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.customButtonPech1, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel1, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel2, 0, 2);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 5;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(118, 152);
-            this.tableLayoutPanel5.TabIndex = 0;
-            // 
-            // customTextBoxPechSHK1
-            // 
-            this.customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechSHK1.Location = new System.Drawing.Point(3, 85);
-            this.customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
-            this.customTextBoxPechSHK1.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechSHK1.TabIndex = 28;
-            // 
-            // customComboBoxPechVed
-            // 
-            this.customComboBoxPechVed.BackColor = System.Drawing.SystemColors.Window;
-            this.customComboBoxPechVed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customComboBoxPechVed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.customComboBoxPechVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customComboBoxPechVed.Font = new System.Drawing.Font("Arial", 10F);
-            this.customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customComboBoxPechVed.Location = new System.Drawing.Point(3, 25);
-            this.customComboBoxPechVed.Name = "customComboBoxPechVed";
-            this.customComboBoxPechVed.Size = new System.Drawing.Size(112, 24);
-            this.customComboBoxPechVed.TabIndex = 26;
-            // 
-            // customButtonPech1
-            // 
-            this.customButtonPech1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech1.Btn = null;
-            this.customButtonPech1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPech1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPech1.ComponentSize = new System.Drawing.Size(0, 0);
-            this.customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPech1.FlatAppearance.BorderSize = 0;
-            this.customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPech1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPech1.Location = new System.Drawing.Point(3, 123);
-            this.customButtonPech1.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonPech1.Name = "customButtonPech1";
-            this.customButtonPech1.Size = new System.Drawing.Size(112, 26);
-            this.customButtonPech1.TabIndex = 8;
-            this.customButtonPech1.Text = "Печать";
-            this.customButtonPech1.UseVisualStyleBackColor = false;
-            // 
-            // customLabel1
-            // 
-            this.customLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabel1.AutoSize = true;
-            this.customLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel1.Location = new System.Drawing.Point(3, 0);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.Size = new System.Drawing.Size(78, 22);
-            this.customLabel1.TabIndex = 9;
-            this.customLabel1.Text = "Выберите ведомость";
-            // 
-            // customLabel2
-            // 
-            this.customLabel2.AutoSize = true;
-            this.customLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel2.Location = new System.Drawing.Point(3, 60);
-            this.customLabel2.Name = "customLabel2";
-            this.customLabel2.Size = new System.Drawing.Size(112, 22);
-            this.customLabel2.TabIndex = 9;
-            this.customLabel2.Text = "Кол-во ШК для одного таб.";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.BackColor = System.Drawing.Color.Silver;
-            this.tabPage2.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(124, 158);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "По таб. №";
-            // 
-            // tableLayoutPanel6
-            // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.customTextBoxPechTab, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.customTextBoxPechSHK2, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.customButtonPech2, 0, 4);
-            this.tableLayoutPanel6.Controls.Add(this.customLabel3, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.customLabel4, 0, 2);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 5;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(118, 152);
-            this.tableLayoutPanel6.TabIndex = 1;
-            // 
-            // customTextBoxPechTab
-            // 
-            this.customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechTab.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechTab.Location = new System.Drawing.Point(3, 25);
-            this.customTextBoxPechTab.Name = "customTextBoxPechTab";
-            this.customTextBoxPechTab.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechTab.TabIndex = 29;
-            // 
-            // customTextBoxPechSHK2
-            // 
-            this.customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechSHK2.Location = new System.Drawing.Point(3, 85);
-            this.customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
-            this.customTextBoxPechSHK2.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechSHK2.TabIndex = 28;
-            // 
-            // customButtonPech2
-            // 
-            this.customButtonPech2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech2.Btn = null;
-            this.customButtonPech2.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPech2.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPech2.ComponentSize = new System.Drawing.Size(0, 0);
-            this.customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPech2.FlatAppearance.BorderSize = 0;
-            this.customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPech2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPech2.Location = new System.Drawing.Point(3, 123);
-            this.customButtonPech2.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonPech2.Name = "customButtonPech2";
-            this.customButtonPech2.Size = new System.Drawing.Size(112, 26);
-            this.customButtonPech2.TabIndex = 8;
-            this.customButtonPech2.Text = "Печать";
-            this.customButtonPech2.UseVisualStyleBackColor = false;
-            // 
-            // customLabel3
-            // 
-            this.customLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabel3.AutoSize = true;
-            this.customLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel3.Location = new System.Drawing.Point(3, 6);
-            this.customLabel3.Name = "customLabel3";
-            this.customLabel3.Size = new System.Drawing.Size(112, 16);
-            this.customLabel3.TabIndex = 9;
-            this.customLabel3.Text = "Введите таб. №";
-            // 
-            // customLabel4
-            // 
-            this.customLabel4.AutoSize = true;
-            this.customLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel4.Location = new System.Drawing.Point(3, 66);
-            this.customLabel4.Name = "customLabel4";
-            this.customLabel4.Size = new System.Drawing.Size(112, 16);
-            this.customLabel4.TabIndex = 9;
-            this.customLabel4.Text = "Кол-во ШК";
-            // 
-            // xtraTabPageOtchDolg
-            // 
-            this.xtraTabPageOtchDolg.Controls.Add(this.tableLayoutPanel8);
-            this.xtraTabPageOtchDolg.Name = "xtraTabPageOtchDolg";
-            this.xtraTabPageOtchDolg.PageVisible = false;
-            this.xtraTabPageOtchDolg.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPageOtchDolg.Text = "Отчет по должности";
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.customButtonSforming, 0, 4);
-            this.tableLayoutPanel8.Controls.Add(this.radioGroup1, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.customLabelOtch, 0, 2);
-            this.tableLayoutPanel8.Controls.Add(this.customComboBoxOtch, 0, 3);
-            this.tableLayoutPanel8.Controls.Add(this.customCheckBoxOsnTab, 0, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 5;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(132, 184);
-            this.tableLayoutPanel8.TabIndex = 1;
-            // 
-            // customButtonSforming
-            // 
-            this.customButtonSforming.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSforming.Btn = null;
-            this.customButtonSforming.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSforming.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSforming.ComponentSize = new System.Drawing.Size(0, 0);
-            this.customButtonSforming.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSforming.FlatAppearance.BorderSize = 0;
-            this.customButtonSforming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSforming.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSforming.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSforming.Location = new System.Drawing.Point(3, 148);
-            this.customButtonSforming.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonSforming.Name = "customButtonSforming";
-            this.customButtonSforming.Size = new System.Drawing.Size(126, 33);
-            this.customButtonSforming.TabIndex = 8;
-            this.customButtonSforming.Text = "Сформировать";
-            this.customButtonSforming.UseVisualStyleBackColor = false;
-            this.customButtonSforming.Click += new System.EventHandler(this.customButtonSforming_Click);
-            // 
-            // radioGroup1
-            // 
-            this.radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioGroup1.Location = new System.Drawing.Point(3, 3);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Columns = 1;
-            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По организации", true, null, ""),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По подразделению 1С"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По табелю ШП")});
-            this.radioGroup1.Size = new System.Drawing.Size(126, 58);
-            this.radioGroup1.TabIndex = 28;
-            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
-            // 
-            // customLabelOtch
-            // 
-            this.customLabelOtch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabelOtch.AutoSize = true;
-            this.customLabelOtch.BackColor = System.Drawing.Color.Transparent;
-            this.customLabelOtch.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabelOtch.Location = new System.Drawing.Point(3, 93);
-            this.customLabelOtch.Name = "customLabelOtch";
-            this.customLabelOtch.Size = new System.Drawing.Size(43, 16);
-            this.customLabelOtch.TabIndex = 9;
-            this.customLabelOtch.Text = "Текст";
-            // 
-            // customComboBoxOtch
-            // 
-            this.customComboBoxOtch.BackColor = System.Drawing.SystemColors.Window;
-            this.customComboBoxOtch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customComboBoxOtch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.customComboBoxOtch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customComboBoxOtch.Font = new System.Drawing.Font("Arial", 10F);
-            this.customComboBoxOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customComboBoxOtch.Location = new System.Drawing.Point(3, 112);
-            this.customComboBoxOtch.Name = "customComboBoxOtch";
-            this.customComboBoxOtch.Size = new System.Drawing.Size(126, 24);
-            this.customComboBoxOtch.TabIndex = 26;
-            // 
-            // customCheckBoxOsnTab
-            // 
-            this.customCheckBoxOsnTab.AutoSize = true;
-            this.customCheckBoxOsnTab.Checked = true;
-            this.customCheckBoxOsnTab.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.customCheckBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCheckBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxOsnTab.Location = new System.Drawing.Point(3, 67);
-            this.customCheckBoxOsnTab.Name = "customCheckBoxOsnTab";
-            this.customCheckBoxOsnTab.Size = new System.Drawing.Size(126, 20);
-            this.customCheckBoxOsnTab.TabIndex = 27;
-            this.customCheckBoxOsnTab.Text = "Основные табельные";
-            this.customCheckBoxOsnTab.UseVisualStyleBackColor = true;
-            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
@@ -1509,6 +1180,46 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.90195F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(438, 83);
             this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // customButtonSpOrg
+            // 
+            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpOrg.Btn = null;
+            this.customButtonSpOrg.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButtonSpOrg.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButtonSpOrg.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
+            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpOrg.Location = new System.Drawing.Point(211, 38);
+            this.customButtonSpOrg.Name = "customButtonSpOrg";
+            this.customButtonSpOrg.Size = new System.Drawing.Size(202, 29);
+            this.customButtonSpOrg.TabIndex = 6;
+            this.customButtonSpOrg.Text = "Справочник организаций";
+            this.customButtonSpOrg.UseVisualStyleBackColor = false;
+            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
+            // 
+            // customButtonSpDol
+            // 
+            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpDol.Btn = null;
+            this.customButtonSpDol.ComponentBackColor = System.Drawing.Color.Empty;
+            this.customButtonSpDol.ComponentFontColor = System.Drawing.Color.Empty;
+            this.customButtonSpDol.ComponentSize = new System.Drawing.Size(0, 0);
+            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
+            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 38);
+            this.customButtonSpDol.Name = "customButtonSpDol";
+            this.customButtonSpDol.Size = new System.Drawing.Size(202, 29);
+            this.customButtonSpDol.TabIndex = 5;
+            this.customButtonSpDol.Text = "Справочник должностей";
+            this.customButtonSpDol.UseVisualStyleBackColor = false;
+            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
             // 
             // customButtonRed
             // 
@@ -1730,13 +1441,18 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelAll;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelPech;
+        private CustomButton customButtonPchTS;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomButton customButtonOtcDol;
         private CustomButton customButtonSov;
         private CustomButton customButtonAddSov;
         private CustomButton customButtonPchShk;
+        private CustomButton customButtonPchSps;
+        private CustomButton customButtonPchBln;
+        private CustomButton customButtonPchDR;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private CustomButton customButtonTar;
         private CustomButton customButtonPdrSP;
         private CustomButton customButtonSpOrg;
         private CustomButton customButtonSpDol;
