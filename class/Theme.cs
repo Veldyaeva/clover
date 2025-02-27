@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -153,29 +154,6 @@ namespace SewingProduction
         };
         #endregion
 
-        //#region Wine
-        //public static readonly Theme Wine = new Theme
-        //{
-        //    // Цвета для кнопок
-        //    ButtonBackground = Color.FromArgb(128, 0, 32), // Burgundy
-        //    ButtonTextColor = Color.FromArgb(255, 228, 225), // MistyRose
-        //    // Цвета для текстовых полей
-        //    TextBoxBackground = Color.FromArgb(245, 222, 179), // Wheat
-        //    TextBoxText = Color.FromArgb(85, 26, 139), // DarkPurple
-        //    //// Настройки кнопок да/нет
-        //    //OkButtonBackground = Color.FromArgb(0, 0, 0),
-        //    //OkButtonTextColor = Color.FromArgb(0, 0, 0),
-        //    //OkButtonText = "Хорошо",
-        //    //CancelButtonBackground = Color.FromArgb(255, 0, 0),
-        //    //CancelButtonTextColor = Color.FromArgb(255, 0, 0),
-        //    //CancelButtonText = "Отмена",
-        //    // Цвета для выделения в таблице
-        //    HighlightBackground = Color.FromArgb(139, 0, 0), // DarkRed
-        //    // Цвета для градиента на форме
-        //    GradientStartColor = Color.FromArgb(255, 245, 238), // Seashell
-        //    GradientEndColor = Color.FromArgb(139, 0, 0), // DarkRed
-        //};
-        //#endregion
         #region Gold
         public static readonly Theme Gold = new Theme
         {
@@ -273,6 +251,7 @@ namespace SewingProduction
             GradientEndColor = Color.FromArgb(255, 165, 120) // CalmCoral
         };
         #endregion
+
         #region Wine
         public static readonly Theme Wine = new Theme
         {
@@ -517,6 +496,22 @@ namespace SewingProduction
             }
 
         }
+
+        public static void UpdateTheme(Control control)
+        {
+            foreach (Control child in control.Controls)
+            {
+                if (child is IThemeable themeable)
+                {
+                    themeable.ApplyTheme();
+                }
+                else if (child.HasChildren)
+                {
+                    UpdateTheme(child); // Рекурсивно обновляем вложенные элементы
+                }
+            }
+        }
+
 
         public class ThemeSettings
         {

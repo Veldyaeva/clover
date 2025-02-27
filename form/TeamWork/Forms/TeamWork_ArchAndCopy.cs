@@ -8,21 +8,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
     public partial class TeamWork_ArchAndCopy : CustomForm
     {
-        private readonly ArtNormService _artNormService;
+        private readonly Services.ArtNormService _artNormService;
         private int _id;
         public TeamWork_ArchAndCopy(int Id)
         {
             _id = Id;
             InitializeComponent(); 
             var dbHelper = new DatabaseHelper("ace");
-            _artNormService = new ArtNormService(dbHelper);
+            _artNormService = new Services.ArtNormService(dbHelper);
             
-            UpdateTheme(this);
+            ApplyTheme();
         }
 
         private void TeamWork_ArchAndCopy_Load(object sender, EventArgs e)

@@ -2146,10 +2146,6 @@ namespace SewingProduction
             // button10
             // 
             this.button10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.button10.Btn = null;
-            this.button10.ComponentBackColor = System.Drawing.Color.Empty;
-            this.button10.ComponentFontColor = System.Drawing.Color.Empty;
-            this.button10.ComponentSize = new System.Drawing.Size(0, 0);
             this.button10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button10.Font = new System.Drawing.Font("Arial", 10F);
             this.button10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2213,10 +2209,6 @@ namespace SewingProduction
             // btnZayavUpakPrint
             // 
             this.btnZayavUpakPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnZayavUpakPrint.Btn = null;
-            this.btnZayavUpakPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnZayavUpakPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnZayavUpakPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnZayavUpakPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZayavUpakPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnZayavUpakPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2411,10 +2403,6 @@ namespace SewingProduction
             // btnZayavFurnPrint
             // 
             this.btnZayavFurnPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnZayavFurnPrint.Btn = null;
-            this.btnZayavFurnPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnZayavFurnPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnZayavFurnPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnZayavFurnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnZayavFurnPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnZayavFurnPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2497,10 +2485,6 @@ namespace SewingProduction
             // btnFullKKPrint
             // 
             this.btnFullKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnFullKKPrint.Btn = null;
-            this.btnFullKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnFullKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnFullKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnFullKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFullKKPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnFullKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2539,10 +2523,6 @@ namespace SewingProduction
             // btnUpakKKPrint
             // 
             this.btnUpakKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnUpakKKPrint.Btn = null;
-            this.btnUpakKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnUpakKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnUpakKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnUpakKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUpakKKPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnUpakKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2557,10 +2537,6 @@ namespace SewingProduction
             // btnFurnKKPrint
             // 
             this.btnFurnKKPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnFurnKKPrint.Btn = null;
-            this.btnFurnKKPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnFurnKKPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnFurnKKPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnFurnKKPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnFurnKKPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnFurnKKPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2614,10 +2590,6 @@ namespace SewingProduction
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.button4.Btn = null;
-            this.button4.ComponentBackColor = System.Drawing.Color.Empty;
-            this.button4.ComponentFontColor = System.Drawing.Color.Empty;
-            this.button4.ComponentSize = new System.Drawing.Size(0, 0);
             this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button4.Font = new System.Drawing.Font("Arial", 10F);
             this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2632,10 +2604,6 @@ namespace SewingProduction
             // button5
             // 
             this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.button5.Btn = null;
-            this.button5.ComponentBackColor = System.Drawing.Color.Empty;
-            this.button5.ComponentFontColor = System.Drawing.Color.Empty;
-            this.button5.ComponentSize = new System.Drawing.Size(0, 0);
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Arial", 10F);
             this.button5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -2650,10 +2618,6 @@ namespace SewingProduction
             // button6
             // 
             this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.button6.Btn = null;
-            this.button6.ComponentBackColor = System.Drawing.Color.Empty;
-            this.button6.ComponentFontColor = System.Drawing.Color.Empty;
-            this.button6.ComponentSize = new System.Drawing.Size(0, 0);
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Arial", 10F);
             this.button6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -3425,10 +3389,6 @@ namespace SewingProduction
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.button1.Btn = null;
-            this.button1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.button1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.button1.ComponentSize = new System.Drawing.Size(0, 0);
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Arial", 10F);
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -3454,10 +3414,6 @@ namespace SewingProduction
             // btnNaklAbsent
             // 
             this.btnNaklAbsent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnNaklAbsent.Btn = null;
-            this.btnNaklAbsent.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnNaklAbsent.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnNaklAbsent.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnNaklAbsent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNaklAbsent.Font = new System.Drawing.Font("Arial", 10F);
             this.btnNaklAbsent.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -3472,10 +3428,6 @@ namespace SewingProduction
             // btnNaklPart
             // 
             this.btnNaklPart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnNaklPart.Btn = null;
-            this.btnNaklPart.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnNaklPart.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnNaklPart.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnNaklPart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNaklPart.Font = new System.Drawing.Font("Arial", 10F);
             this.btnNaklPart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
@@ -3490,10 +3442,6 @@ namespace SewingProduction
             // btnNaklPrint
             // 
             this.btnNaklPrint.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.btnNaklPrint.Btn = null;
-            this.btnNaklPrint.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnNaklPrint.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnNaklPrint.ComponentSize = new System.Drawing.Size(0, 0);
             this.btnNaklPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNaklPrint.Font = new System.Drawing.Font("Arial", 10F);
             this.btnNaklPrint.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));

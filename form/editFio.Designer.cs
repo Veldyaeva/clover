@@ -122,10 +122,6 @@
             // customCancelButton1
             // 
             this.customCancelButton1.BackColor = System.Drawing.Color.IndianRed;
-            this.customCancelButton1.Btn = null;
-            this.customCancelButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customCancelButton1.FlatAppearance.BorderSize = 0;
             this.customCancelButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
@@ -141,10 +137,6 @@
             // customOkButton1
             // 
             this.customOkButton1.BackColor = System.Drawing.Color.LightGreen;
-            this.customOkButton1.Btn = null;
-            this.customOkButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customOkButton1.FlatAppearance.BorderSize = 0;
             this.customOkButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
