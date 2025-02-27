@@ -42,6 +42,25 @@ UPDATE art_norm_n SET STATUS = 2 WHERE SUBSTRING(kod, 1, 1)!=9 AND arh = 0
 UPDATE art_norm_n SET STATUS = 3 WHERE arh = 1
 
 
+--создание таблицы статусов
+CREATE TABLE dbo.status_ann (
+  status_id int IDENTITY,
+  name text NOT NULL,
+  CONSTRAINT PK_ann_status_status_id PRIMARY KEY CLUSTERED (status_id)
+)
+ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+--заполнение
+INSERT INTO dbo.status_ann
+(
+  name
+)
+VALUES
+(
+  'предварительный', 'актуальный', 'предварительный архив', 'архив' -- name - text NOT NULL
+);
+
+
 Создание таблицы кодов производства
 CREATE TABLE ACE_backup.dbo.Kod_proizv (
   kod_proizv INT IDENTITY

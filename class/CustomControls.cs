@@ -1,21 +1,15 @@
-using DevExpress.XtraEditors.Controls;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native.WebClientUIControl;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
-using System.Data;
-using DevExpress.XtraRichEdit.Model;
-using DevExpress.XtraEditors.Controls;
 
 namespace SewingProduction
 {
@@ -495,116 +489,6 @@ namespace SewingProduction
 }
 #endregion
 
-
-
-#region DbHelper
-/// <summary>
-/// класс для работы с БД
-/// </summary>
-public class DatabaseHelper
-{
-    private readonly string _connectionString;
-
-    public DatabaseHelper(string _serv)//(string connectionString)
-    {
-        //_connectionString = connectionString;
-        switch (_serv.ToLower())
-        {
-            case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
-            case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
-            case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
-        }
-
-    }
-
-    //public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-    //{
-    //    //System.Data.DataTable dT = new System.Data.DataTable();
-    //    try
-    //    {
-    //        //    string _connStr = "";
-    //        //    switch (_serv.ToLower())
-    //        //    {
-    //        //        case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
-    //        //        case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
-    //        //        case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
-    //        //    }
-    //        //    string connectionString = _connStr;
-    //        //    using (SqlConnection connection = new SqlConnection(connectionString))
-    //        //    {
-    //        //        SqlDataAdapter adapter = new SqlDataAdapter();
-
-    //        //        connection.Open();
-    //        //        using (SqlCommand command = new SqlCommand(query, connection))
-    //        //        {
-    //        //            adapter.SelectCommand = command;
-    //        //            adapter.Fill(dT);
-    //        //        }
-    //        //    }
-    //        }
-    //    catch (Exception ex)
-    //    {
-    //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //    }
-    //        return ExecuteQuery(query);
-        
-    //    //return dT;
-    //}
-    /// <summary>
-    /// Выполнение SQL запроса, возвращает dataTable
-    /// </summary>
-    /// <param name="query">запрос</param>
-    /// <param name="parameters">параметры</param>
-    /// <returns></returns>
-    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
-    {
-        var dt = new DataTable();
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-            using (var command = new SqlCommand(query, connection))
-            {
-                if (parameters != null)
-                {
-                    foreach (var param in parameters)
-                    {
-                        command.Parameters.AddWithValue(param.Key, param.Value);
-                    }
-                }
-                using (var adapter = new SqlDataAdapter(command))
-                {
-                    adapter.Fill(dt);
-                }
-            }
-        }
-        return dt;
-    }
-
-    /// <summary>
-    /// Выполнение SQL запроса
-    /// </summary>
-    /// <param name="query">запрос</param>
-    /// <param name="parameters">параметры</param>
-    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-            using (var command = new SqlCommand(query, connection))
-            {
-                if (parameters != null)
-                {
-                    foreach (var param in parameters)
-                    {
-                        command.Parameters.AddWithValue(param.Key, param.Value);
-                    }
-                }
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-}
-#endregion
 
 #region Logger
 public static class Logger

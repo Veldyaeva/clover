@@ -1,6 +1,8 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.form.TeamWork;
+
+namespace SewingProduction.form
 {
-    partial class TeamWork_AdvanceTW
+    partial class TeamWork_ArchAndCopy
     {
         /// <summary>
         /// Required designer variable.
@@ -28,9 +30,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.stackPanel2 = new DevExpress.Utils.Layout.StackPanel();
-            this.btnOK = new SewingProduction.CustomButton();
             this.label2 = new System.Windows.Forms.Label();
             this.ModelTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -40,6 +42,8 @@
             this.label5 = new System.Windows.Forms.Label();
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.bindingSourceRasz = new System.Windows.Forms.BindingSource(this.components);
+            this.aCE_backupDataSet = new SewingProduction.form.TeamWork.ACE_backupDataSet();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,6 +55,7 @@
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
+            this.bindingSourceRask = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -61,6 +66,7 @@
             this.colsek2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.bindingSourceKont = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -69,22 +75,32 @@
             this.colsek3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControl5 = new DevExpress.XtraGrid.GridControl();
+            this.bindingSourceDop = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colsek_p = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_p_tamp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_v = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_stra = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.norm_raszTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
+            this.norm_raskTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
+            this.norm_kontTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
+            this.norm_dop_obrTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
             this.stackPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceKont)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,18 +117,16 @@
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.632939F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.68853F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.234122F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.56413F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.7858F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36015F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.36015F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.958228F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(914, 686);
-            this.tableLayoutPanel2.TabIndex = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.958227F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1136, 803);
+            this.tableLayoutPanel2.TabIndex = 2;
             // 
             // stackPanel2
             // 
-            this.stackPanel2.Controls.Add(this.btnOK);
             this.stackPanel2.Controls.Add(this.label2);
             this.stackPanel2.Controls.Add(this.ModelTextBox);
             this.stackPanel2.Controls.Add(this.label3);
@@ -124,31 +138,14 @@
             this.stackPanel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.stackPanel2.Location = new System.Drawing.Point(3, 3);
             this.stackPanel2.Name = "stackPanel2";
-            this.stackPanel2.Size = new System.Drawing.Size(908, 26);
+            this.stackPanel2.Size = new System.Drawing.Size(1130, 26);
             this.stackPanel2.TabIndex = 0;
             this.stackPanel2.UseSkinIndents = true;
-            // 
-            // btnOK
-            // 
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnOK.Btn = null;
-            this.btnOK.ComponentBackColor = System.Drawing.Color.Empty;
-            this.btnOK.ComponentFontColor = System.Drawing.Color.Empty;
-            this.btnOK.ComponentSize = new System.Drawing.Size(0, 0);
-            this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(13, 0);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(75, 25);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(93, 6);
+            this.label2.Location = new System.Drawing.Point(14, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 0;
@@ -156,15 +153,16 @@
             // 
             // ModelTextBox
             // 
-            this.ModelTextBox.Location = new System.Drawing.Point(142, 2);
+            this.ModelTextBox.Location = new System.Drawing.Point(63, 2);
             this.ModelTextBox.Name = "ModelTextBox";
+            this.ModelTextBox.ReadOnly = true;
             this.ModelTextBox.Size = new System.Drawing.Size(126, 21);
             this.ModelTextBox.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(273, 6);
+            this.label3.Location = new System.Drawing.Point(194, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 1;
@@ -172,15 +170,16 @@
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(357, 2);
+            this.NameTextBox.Location = new System.Drawing.Point(278, 2);
             this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.ReadOnly = true;
             this.NameTextBox.Size = new System.Drawing.Size(131, 21);
             this.NameTextBox.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(493, 0);
+            this.label4.Location = new System.Drawing.Point(414, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 26);
             this.label4.TabIndex = 2;
@@ -188,7 +187,7 @@
             // 
             // SecTimeTextBox
             // 
-            this.SecTimeTextBox.Location = new System.Drawing.Point(581, 2);
+            this.SecTimeTextBox.Location = new System.Drawing.Point(502, 2);
             this.SecTimeTextBox.Name = "SecTimeTextBox";
             this.SecTimeTextBox.ReadOnly = true;
             this.SecTimeTextBox.Size = new System.Drawing.Size(48, 21);
@@ -197,7 +196,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(634, 6);
+            this.label5.Location = new System.Drawing.Point(555, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 3;
@@ -205,22 +204,32 @@
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(721, 2);
+            this.dateCreate.Location = new System.Drawing.Point(642, 2);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(126, 21);
             this.dateCreate.TabIndex = 7;
             // 
             // gridControl1
             // 
+            this.gridControl1.DataSource = this.bindingSourceRasz;
             this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(3, 69);
+            this.gridControl1.Location = new System.Drawing.Point(3, 37);
             this.gridControl1.MainView = this.gridView1;
             this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(908, 376);
+            this.gridControl1.Size = new System.Drawing.Size(1130, 392);
             this.gridControl1.TabIndex = 6;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
-            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
+            // 
+            // bindingSourceRasz
+            // 
+            this.bindingSourceRasz.DataMember = "norm_rasz";
+            this.bindingSourceRasz.DataSource = this.aCE_backupDataSet;
+            // 
+            // aCE_backupDataSet
+            // 
+            this.aCE_backupDataSet.DataSetName = "ACE_backupDataSet";
+            this.aCE_backupDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridView1
             // 
@@ -236,19 +245,11 @@
             this.colannId3});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
-            this.gridView1.NewItemRowText = "Добавить";
-            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView1.OptionsEditForm.EditFormColumnCount = 2;
-            this.gridView1.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView1.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
-            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // coln
             // 
-            this.coln.Caption = "№оп.";
             this.coln.FieldName = "n";
             this.coln.Name = "coln";
             this.coln.Visible = true;
@@ -256,7 +257,6 @@
             // 
             // coln1
             // 
-            this.coln1.Caption = "№п/оп";
             this.coln1.FieldName = "n1";
             this.coln1.Name = "coln1";
             this.coln1.Visible = true;
@@ -264,7 +264,6 @@
             // 
             // colrazryd
             // 
-            this.colrazryd.Caption = "разряд";
             this.colrazryd.FieldName = "razryd";
             this.colrazryd.Name = "colrazryd";
             this.colrazryd.Visible = true;
@@ -272,16 +271,13 @@
             // 
             // coltext
             // 
-            this.coltext.Caption = "наименование операции пошива";
             this.coltext.FieldName = "text";
             this.coltext.Name = "coltext";
             this.coltext.Visible = true;
-            this.coltext.VisibleIndex = 3;
-            this.coltext.Width = 300;
+            this.coltext.VisibleIndex = 6;
             // 
             // colsek1
             // 
-            this.colsek1.Caption = "сек";
             this.colsek1.FieldName = "sek";
             this.colsek1.Name = "colsek1";
             this.colsek1.Visible = true;
@@ -289,7 +285,6 @@
             // 
             // colobor
             // 
-            this.colobor.Caption = "оборудование";
             this.colobor.FieldName = "obor";
             this.colobor.Name = "colobor";
             this.colobor.Visible = true;
@@ -299,36 +294,39 @@
             // 
             this.gridColumn3.FieldName = "kod";
             this.gridColumn3.Name = "gridColumn3";
-            this.gridColumn3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 7;
+            this.gridColumn3.VisibleIndex = 3;
             // 
             // colkod_o
             // 
             this.colkod_o.FieldName = "kod_o";
             this.colkod_o.Name = "colkod_o";
-            this.colkod_o.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colkod_o.Visible = true;
-            this.colkod_o.VisibleIndex = 6;
+            this.colkod_o.VisibleIndex = 7;
             // 
             // colannId3
             // 
             this.colannId3.FieldName = "annId";
             this.colannId3.Name = "colannId3";
-            this.colannId3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colannId3.Visible = true;
             this.colannId3.VisibleIndex = 8;
             // 
             // gridControl3
             // 
+            this.gridControl3.DataSource = this.bindingSourceRask;
             this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.Location = new System.Drawing.Point(3, 451);
+            this.gridControl3.Location = new System.Drawing.Point(3, 435);
             this.gridControl3.MainView = this.gridView2;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(908, 78);
+            this.gridControl3.Size = new System.Drawing.Size(1130, 185);
             this.gridControl3.TabIndex = 7;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
+            // 
+            // bindingSourceRask
+            // 
+            this.bindingSourceRask.DataMember = "Norm_rask";
+            this.bindingSourceRask.DataSource = this.aCE_backupDataSet;
             // 
             // gridView2
             // 
@@ -343,10 +341,6 @@
             this.colannId4});
             this.gridView2.GridControl = this.gridControl3;
             this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView2.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // colid
@@ -412,14 +406,20 @@
             // 
             // gridControl4
             // 
+            this.gridControl4.DataSource = this.bindingSourceKont;
             this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.Location = new System.Drawing.Point(3, 535);
+            this.gridControl4.Location = new System.Drawing.Point(3, 626);
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(908, 78);
+            this.gridControl4.Size = new System.Drawing.Size(1130, 93);
             this.gridControl4.TabIndex = 8;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
+            // 
+            // bindingSourceKont
+            // 
+            this.bindingSourceKont.DataMember = "norm_kont";
+            this.bindingSourceKont.DataSource = this.aCE_backupDataSet;
             // 
             // gridView4
             // 
@@ -432,10 +432,6 @@
             this.colannId5});
             this.gridView4.GridControl = this.gridControl4;
             this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView4.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // colkod_o2
@@ -491,14 +487,20 @@
             // 
             // gridControl5
             // 
+            this.gridControl5.DataSource = this.bindingSourceDop;
             this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl5.Location = new System.Drawing.Point(3, 619);
+            this.gridControl5.Location = new System.Drawing.Point(3, 725);
             this.gridControl5.MainView = this.gridView5;
             this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(908, 64);
+            this.gridControl5.Size = new System.Drawing.Size(1130, 75);
             this.gridControl5.TabIndex = 9;
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
+            // 
+            // bindingSourceDop
+            // 
+            this.bindingSourceDop.DataMember = "norm_dop_obr";
+            this.bindingSourceDop.DataSource = this.aCE_backupDataSet;
             // 
             // gridView5
             // 
@@ -510,14 +512,7 @@
             this.colannId6});
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
-            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gridView5.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
-            this.gridView5.OptionsEditForm.EditFormColumnCount = 4;
-            this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView5.OptionsView.ShowGroupPanel = false;
-            this.gridView5.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridView5_ShowingEditor);
             // 
             // colsek_p
             // 
@@ -555,30 +550,51 @@
             // 
             this.colannId6.FieldName = "annId";
             this.colannId6.Name = "colannId6";
-            this.colannId6.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colannId6.Visible = true;
             this.colannId6.VisibleIndex = 4;
             // 
-            // TeamWork_AdvanceTW
+            // norm_raszTableAdapter
+            // 
+            this.norm_raszTableAdapter.ClearBeforeFill = true;
+            // 
+            // norm_raskTableAdapter
+            // 
+            this.norm_raskTableAdapter.ClearBeforeFill = true;
+            // 
+            // norm_kontTableAdapter
+            // 
+            this.norm_kontTableAdapter.ClearBeforeFill = true;
+            // 
+            // norm_dop_obrTableAdapter
+            // 
+            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
+            // 
+            // TeamWork_ArchAndCopy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(914, 686);
+            this.ClientSize = new System.Drawing.Size(1136, 803);
             this.Controls.Add(this.tableLayoutPanel2);
-            this.Name = "TeamWork_AdvanceTW";
-            this.Text = "TeamWork_AdvanceTW";
-            this.Load += new System.EventHandler(this.TeamWork_AdvanceTW_Load);
+            this.Name = "TeamWork_ArchAndCopy";
+            this.Text = "TeamWork_ArchAndCopy";
+            this.TopMost = true;
+            this.Load += new System.EventHandler(this.TeamWork_ArchAndCopy_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).EndInit();
             this.stackPanel2.ResumeLayout(false);
             this.stackPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceKont)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceDop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             this.ResumeLayout(false);
 
@@ -632,6 +648,14 @@
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
-        private CustomButton btnOK;
+        private System.Windows.Forms.BindingSource bindingSourceRasz;
+        private ACE_backupDataSet aCE_backupDataSet;
+        private System.Windows.Forms.BindingSource bindingSourceRask;
+        private System.Windows.Forms.BindingSource bindingSourceKont;
+        private TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
+        private TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
+        private TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
+        private System.Windows.Forms.BindingSource bindingSourceDop;
+        private TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
     }
 }

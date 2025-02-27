@@ -198,10 +198,6 @@
             // customButtonINN
             // 
             this.customButtonINN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonINN.Btn = null;
-            this.customButtonINN.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonINN.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonINN.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonINN.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonINN.FlatAppearance.BorderSize = 0;
             this.customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -857,10 +853,6 @@
             // customButtonOtcDol
             // 
             this.customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonOtcDol.Btn = null;
-            this.customButtonOtcDol.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonOtcDol.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonOtcDol.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonOtcDol.FlatAppearance.BorderSize = 0;
             this.customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -876,10 +868,6 @@
             // customButtonSov
             // 
             this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSov.Btn = null;
-            this.customButtonSov.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSov.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSov.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSov.FlatAppearance.BorderSize = 0;
             this.customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -895,10 +883,6 @@
             // customButtonAddSov
             // 
             this.customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAddSov.Btn = null;
-            this.customButtonAddSov.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonAddSov.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonAddSov.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonAddSov.FlatAppearance.BorderSize = 0;
             this.customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -935,10 +919,6 @@
             // customButtonSpOrg
             // 
             this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Btn = null;
-            this.customButtonSpOrg.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
             this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -955,10 +935,6 @@
             // customButtonSpDol
             // 
             this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Btn = null;
-            this.customButtonSpDol.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpDol.FlatAppearance.BorderSize = 0;
             this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -975,10 +951,6 @@
             // customButtonPchShk
             // 
             this.customButtonPchShk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchShk.Btn = null;
-            this.customButtonPchShk.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPchShk.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPchShk.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPchShk.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPchShk.FlatAppearance.BorderSize = 0;
             this.customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -994,10 +966,6 @@
             // customButtonPchSps
             // 
             this.customButtonPchSps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchSps.Btn = null;
-            this.customButtonPchSps.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPchSps.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPchSps.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPchSps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPchSps.FlatAppearance.BorderSize = 0;
             this.customButtonPchSps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1013,10 +981,6 @@
             // customButtonPchBln
             // 
             this.customButtonPchBln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchBln.Btn = null;
-            this.customButtonPchBln.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPchBln.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPchBln.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPchBln.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPchBln.FlatAppearance.BorderSize = 0;
             this.customButtonPchBln.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1032,10 +996,6 @@
             // customButtonPchDR
             // 
             this.customButtonPchDR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchDR.Btn = null;
-            this.customButtonPchDR.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPchDR.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPchDR.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPchDR.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPchDR.FlatAppearance.BorderSize = 0;
             this.customButtonPchDR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1051,10 +1011,6 @@
             // customButtonPchTS
             // 
             this.customButtonPchTS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchTS.Btn = null;
-            this.customButtonPchTS.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPchTS.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPchTS.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPchTS.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPchTS.FlatAppearance.BorderSize = 0;
             this.customButtonPchTS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1086,10 +1042,6 @@
             // customButtonPdrSP
             // 
             this.customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPdrSP.Btn = null;
-            this.customButtonPdrSP.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPdrSP.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPdrSP.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPdrSP.FlatAppearance.BorderSize = 0;
             this.customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1105,10 +1057,6 @@
             // customButtonTar
             // 
             this.customButtonTar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonTar.Btn = null;
-            this.customButtonTar.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonTar.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonTar.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonTar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonTar.FlatAppearance.BorderSize = 0;
             this.customButtonTar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1144,10 +1092,6 @@
             // customButtonSpOrg
             // 
             this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Btn = null;
-            this.customButtonSpOrg.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
             this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1164,10 +1108,6 @@
             // customButtonSpDol
             // 
             this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Btn = null;
-            this.customButtonSpDol.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpDol.FlatAppearance.BorderSize = 0;
             this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1184,10 +1124,6 @@
             // customButtonRed
             // 
             this.customButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonRed.Btn = null;
-            this.customButtonRed.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonRed.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonRed.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonRed.FlatAppearance.BorderSize = 0;
             this.customButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1204,10 +1140,6 @@
             // customButtonAdd
             // 
             this.customButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAdd.Btn = null;
-            this.customButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonAdd.FlatAppearance.BorderSize = 0;
             this.customButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

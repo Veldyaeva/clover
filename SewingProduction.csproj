@@ -89,6 +89,9 @@
     <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v22.2.Extensions, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraScheduler.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraScheduler.v22.2.Core.Desktop, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2.UI, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraVerticalGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -123,6 +126,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Entity.Design" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Xml.Linq" />
@@ -138,18 +143,20 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ACE_backupDataSet.cs">
+    <Compile Include="class\CustomControlsThemeable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\ACE_backupDataSet.cs">
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ACE_backupDataSet.Designer.cs">
+    <Compile Include="form\TeamWork\ACE_backupDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="ArtNormN.cs" />
-    <Compile Include="class\CustomControls.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="form\TeamWork\DbContext\AppDbContext.cs" />
+    <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
+    <Compile Include="form\TeamWork\DbContext\ArtNormN.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
     <Compile Include="class\Theme.cs" />
@@ -224,25 +231,43 @@
     <Compile Include="form\SpravZeh.Designer.cs">
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\ArtNormService.cs" />
-    <Compile Include="form\TeamWork\TeamWork.cs">
+    <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
+    <Compile Include="form\TeamWork\Enums\Status.cs" />
+    <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
+    <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IThemeable.cs" />
+    <Compile Include="form\TeamWork\Loggers\Logger.cs" />
+    <Compile Include="form\TeamWork\Models\NormOperData.cs" />
+    <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
+    <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork\TeamWork.Designer.cs">
+    <Compile Include="form\TeamWork\Forms\NormOperNew.Designer.cs">
+      <DependentUpon>NormOperNew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.cs">
+    <Compile Include="form\TeamWork\Forms\TeamWork_AdvanceTW.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.Designer.cs">
+    <Compile Include="form\TeamWork\Forms\TeamWork_AdvanceTW.Designer.cs">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.cs">
+    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.Designer.cs">
+    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.Designer.cs">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\Helpers\CommonFunctions.cs" />
+    <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
+    <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
+    <Compile Include="form\TeamWork\Models\MyDataART.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -364,17 +389,20 @@
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\TeamWork.resx">
+    <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
+      <DependentUpon>NormOperNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork.resx">
       <DependentUpon>TeamWork.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\PlanZagrBrig.resx">
       <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\TeamWork_AdvanceTW.resx">
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\TeamWork_ArchAndCopy.resx">
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.resx">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
@@ -450,15 +478,15 @@
     <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ACE_backupDataSet.xsc">
+    <None Include="form\TeamWork\ACE_backupDataSet.xsc">
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </None>
-    <None Include="ACE_backupDataSet.xsd">
+    <None Include="form\TeamWork\ACE_backupDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>ACE_backupDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="ACE_backupDataSet.xss">
+    <None Include="form\TeamWork\ACE_backupDataSet.xss">
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </None>
     <None Include="dsPrintNakl.xsc">
@@ -508,6 +536,7 @@
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

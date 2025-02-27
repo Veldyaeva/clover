@@ -33,6 +33,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Xml.Linq;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -43,14 +44,14 @@ namespace SewingProduction.form
         public System.Data.DataTable dtNomList;
         public System.Data.DataTable dtPzArticulList;
         public System.Data.DataTable dtPzOperList;
-        private readonly DatabaseHelper dbHelper;
+        private readonly DatabaseHelper _dbHelper;
 
 
         public PlanZagrBrig()
         {
             InitializeComponent();
-            dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
-            UpdateTheme(this);
+            _dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
+            ApplyTheme();
 
         }
 
@@ -71,7 +72,7 @@ namespace SewingProduction.form
             //    lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
             //}
             string queryBrigName = $"select brig, id_brig from brig where id_brig = {_xIdBrig} ";
-            var dtBrigName = dbHelper.ExecuteQuery(queryBrigName);//CommonFunctions.ShowRelatedData("ace", queryBrigName);
+            var dtBrigName = _dbHelper.ExecuteQuery(queryBrigName);//CommonFunctions.ShowRelatedData("ace", queryBrigName);
             lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
         }
         public void GetMonthList()
@@ -91,7 +92,7 @@ namespace SewingProduction.form
                     
                 //}
                 string queryMonthList = $"SELECT * FROM spr_month ";
-                var dtMonthList = dbHelper.ExecuteQuery(queryMonthList);//CommonFunctions.ShowRelatedData("ace", queryMonthList);
+                var dtMonthList = _dbHelper.ExecuteQuery(queryMonthList);//CommonFunctions.ShowRelatedData("ace", queryMonthList);
                 bsMonthList.DataSource = dtMonthList;
                 cbMonthList.DataSource = bsMonthList;
                 cbMonthList.DisplayMember = "name_month";
@@ -129,7 +130,7 @@ namespace SewingProduction.form
                 string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
                 queryPachList += $"	from raskr_zeh_up ";
                 queryPachList += $"	where nom = {_nlNom} ";
-                var dtPachList = dbHelper.ExecuteQuery(queryPachList);
+                var dtPachList = _dbHelper.ExecuteQuery(queryPachList);
                 tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
             }
         }
@@ -339,7 +340,7 @@ namespace SewingProduction.form
             this.gridColumn16.Visible = false;
             this.gridColumn17.Visible = false;
             string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
-            dtNomList = dbHelper.ExecuteQuery(queryNomList);
+            dtNomList = _dbHelper.ExecuteQuery(queryNomList);
             this.gcPzNomList.Location = this.gcPzNomList.Location;
             this.gcPzNomList.Size = this.gcPzNomList.Size;
             var queryPzArticulList = from row in dtNomList.AsEnumerable()
@@ -458,7 +459,7 @@ namespace SewingProduction.form
                 
             //}
             string queryPzOperList = $"exec planZagrTwo_view ''";
-            var dtPzOperList = dbHelper.ExecuteQuery(queryPzOperList);
+            var dtPzOperList = _dbHelper.ExecuteQuery(queryPzOperList);
             bsPzOperList.DataSource = dtPzOperList;
         }
         //private int LocateByNomInArticulList(string _cnAlArticul, string _vAlArticul, string _cnAlMod, string _vAlMod, string _cnAlKoddRT, string _vAlKoddRT, string _cnAlArticulK, string _vAlArticulK, string _cnAlModK, string _vAlModK)
