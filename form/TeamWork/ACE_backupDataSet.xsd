@@ -10,7 +10,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="art_norm_nTableAdapter" GeneratorDataComponentClassName="art_norm_nTableAdapter" Name="art_norm_n" UserDataComponentName="art_norm_nTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ACEConnectionString1 (Settings)" DbObjectType="Unknown" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ACEConnectionString (Settings)" DbObjectName="ACE_backup.dbo.art_norm_n" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <InsertCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>INSERT INTO [art_norm_n] ([kod], [grup], [articul], [mod], [sek_shv], [sek_vyaz5], [sek_vyaz6], [sek_vyaz7], [sek_vyaz10], [sek_vyaz12], [sek_vyazo], [sek_vyaz], [sek], [komment], [data_sozd], [diz], [constr], [data_obn], [sek_kr], [slogn], [status], [arh]) VALUES (@kod, @grup, @articul, @mod, @sek_shv, @sek_vyaz5, @sek_vyaz6, @sek_vyaz7, @sek_vyaz10, @sek_vyaz12, @sek_vyazo, @sek_vyaz, @sek, @komment, @data_sozd, @diz, @constr, @data_obn, @sek_kr, @slogn, @status, @arh)</CommandText>
@@ -41,12 +41,9 @@
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT        art_norm_n.kod, art_norm_n.grup, art_norm_n.articul, art_norm_n.mod, art_norm_n.sek_shv, art_norm_n.sek_vyaz5, art_norm_n.sek_vyaz6, art_norm_n.sek_vyaz7, art_norm_n.sek_vyaz10, art_norm_n.sek_vyaz12, 
-                         art_norm_n.sek_vyazo, art_norm_n.sek_vyaz, art_norm_n.sek, art_norm_n.komment, art_norm_n.data_sozd, art_norm_n.diz, art_norm_n.constr, art_norm_n.data_obn, art_norm_n.sek_kr, art_norm_n.slogn, art_norm_n.annID, 
-                         art_norm_n.status, art_norm_n.arh, status_ann.name AS stat
-FROM            art_norm_n CROSS JOIN
-                         status_ann</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        kod, grup, articul, mod, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo, sek_vyaz, sek, komment, data_sozd, diz, constr, data_obn, sek_kr, slogn, annID, status, arh
+FROM            art_norm_n</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -76,7 +73,6 @@ FROM            art_norm_n CROSS JOIN
               <Mapping SourceColumn="annID" DataSetColumn="annID" />
               <Mapping SourceColumn="status" DataSetColumn="status" />
               <Mapping SourceColumn="arh" DataSetColumn="arh" />
-              <Mapping SourceColumn="stat" DataSetColumn="stat" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -679,16 +675,9 @@ SELECT kod_ob, text_ob FROM oborud_shv WHERE (kod_ob = @kod_ob)</CommandText>
               <xs:element name="data_obn" msprop:Generator_ColumnPropNameInTable="data_obnColumn" msprop:Generator_ColumnPropNameInRow="data_obn" msprop:Generator_UserColumnName="data_obn" msprop:Generator_ColumnVarNameInTable="columndata_obn" type="xs:dateTime" minOccurs="0" />
               <xs:element name="sek_kr" msprop:Generator_ColumnPropNameInTable="sek_krColumn" msprop:Generator_ColumnPropNameInRow="sek_kr" msprop:Generator_UserColumnName="sek_kr" msprop:Generator_ColumnVarNameInTable="columnsek_kr" type="xs:int" minOccurs="0" />
               <xs:element name="slogn" msprop:Generator_ColumnPropNameInTable="slognColumn" msprop:Generator_ColumnPropNameInRow="slogn" msprop:Generator_UserColumnName="slogn" msprop:Generator_ColumnVarNameInTable="columnslogn" type="xs:int" minOccurs="0" />
-              <xs:element name="annID" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="annIDColumn" msprop:Generator_ColumnPropNameInRow="annID" msprop:Generator_UserColumnName="annID" msprop:Generator_ColumnVarNameInTable="columnannID" type="xs:int" />
+              <xs:element name="annID" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="annIDColumn" msprop:Generator_ColumnPropNameInRow="annID" msprop:Generator_UserColumnName="annID" msprop:Generator_ColumnVarNameInTable="columnannID" type="xs:int" />
               <xs:element name="status" msprop:Generator_ColumnPropNameInTable="statusColumn" msprop:Generator_ColumnPropNameInRow="status" msprop:Generator_UserColumnName="status" msprop:Generator_ColumnVarNameInTable="columnstatus" type="xs:int" minOccurs="0" />
               <xs:element name="arh" msprop:Generator_ColumnPropNameInTable="arhColumn" msprop:Generator_ColumnPropNameInRow="arh" msprop:Generator_UserColumnName="arh" msprop:Generator_ColumnVarNameInTable="columnarh" type="xs:boolean" minOccurs="0" />
-              <xs:element name="stat" msprop:Generator_ColumnPropNameInTable="statColumn" msprop:Generator_ColumnPropNameInRow="stat" msprop:Generator_UserColumnName="stat" msprop:Generator_ColumnVarNameInTable="columnstat">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="2147483647" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
@@ -958,26 +947,26 @@ SELECT kod_ob, text_ob FROM oborud_shv WHERE (kod_ob = @kod_ob)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="podr_vyaz" msprop:Generator_RowClassName="podr_vyazRow" msprop:Generator_RowEvHandlerName="podr_vyazRowChangeEventHandler" msprop:Generator_RowDeletedName="podr_vyazRowDeleted" msprop:Generator_RowDeletingName="podr_vyazRowDeleting" msprop:Generator_RowEvArgName="podr_vyazRowChangeEvent" msprop:Generator_TablePropName="podr_vyaz" msprop:Generator_RowChangedName="podr_vyazRowChanged" msprop:Generator_UserTableName="podr_vyaz" msprop:Generator_RowChangingName="podr_vyazRowChanging" msprop:Generator_TableClassName="podr_vyazDataTable" msprop:Generator_TableVarName="tablepodr_vyaz">
+        <xs:element name="podr_vyaz" msprop:Generator_RowEvHandlerName="podr_vyazRowChangeEventHandler" msprop:Generator_RowDeletedName="podr_vyazRowDeleted" msprop:Generator_RowDeletingName="podr_vyazRowDeleting" msprop:Generator_RowEvArgName="podr_vyazRowChangeEvent" msprop:Generator_TablePropName="podr_vyaz" msprop:Generator_RowChangedName="podr_vyazRowChanged" msprop:Generator_UserTableName="podr_vyaz" msprop:Generator_RowChangingName="podr_vyazRowChanging" msprop:Generator_RowClassName="podr_vyazRow" msprop:Generator_TableClassName="podr_vyazDataTable" msprop:Generator_TableVarName="tablepodr_vyaz">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="text_vyaz" msprop:Generator_UserColumnName="text_vyaz" msprop:Generator_ColumnPropNameInTable="text_vyazColumn" msprop:Generator_ColumnPropNameInRow="text_vyaz" msprop:Generator_ColumnVarNameInTable="columntext_vyaz" minOccurs="0">
+              <xs:element name="text_vyaz" msprop:Generator_ColumnPropNameInTable="text_vyazColumn" msprop:Generator_ColumnPropNameInRow="text_vyaz" msprop:Generator_UserColumnName="text_vyaz" msprop:Generator_ColumnVarNameInTable="columntext_vyaz" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="kod_proizv" msprop:Generator_UserColumnName="kod_proizv" msprop:Generator_ColumnPropNameInTable="kod_proizvColumn" msprop:Generator_ColumnPropNameInRow="kod_proizv" msprop:Generator_ColumnVarNameInTable="columnkod_proizv" type="xs:int" minOccurs="0" />
-              <xs:element name="kod_vyaz" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_UserColumnName="kod_vyaz" msprop:Generator_ColumnPropNameInTable="kod_vyazColumn" msprop:Generator_ColumnPropNameInRow="kod_vyaz" msprop:Generator_ColumnVarNameInTable="columnkod_vyaz" type="xs:int" />
+              <xs:element name="kod_proizv" msprop:Generator_ColumnPropNameInTable="kod_proizvColumn" msprop:Generator_ColumnPropNameInRow="kod_proizv" msprop:Generator_UserColumnName="kod_proizv" msprop:Generator_ColumnVarNameInTable="columnkod_proizv" type="xs:int" minOccurs="0" />
+              <xs:element name="kod_vyaz" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="kod_vyazColumn" msprop:Generator_ColumnPropNameInRow="kod_vyaz" msprop:Generator_UserColumnName="kod_vyaz" msprop:Generator_ColumnVarNameInTable="columnkod_vyaz" type="xs:int" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="kod_proizv" msprop:Generator_RowEvHandlerName="kod_proizvRowChangeEventHandler" msprop:Generator_RowDeletedName="kod_proizvRowDeleted" msprop:Generator_RowDeletingName="kod_proizvRowDeleting" msprop:Generator_RowEvArgName="kod_proizvRowChangeEvent" msprop:Generator_TablePropName="kod_proizv" msprop:Generator_RowChangedName="kod_proizvRowChanged" msprop:Generator_RowChangingName="kod_proizvRowChanging" msprop:Generator_TableClassName="kod_proizvDataTable" msprop:Generator_RowClassName="kod_proizvRow" msprop:Generator_TableVarName="tablekod_proizv" msprop:Generator_UserTableName="kod_proizv">
+        <xs:element name="kod_proizv" msprop:Generator_RowEvHandlerName="kod_proizvRowChangeEventHandler" msprop:Generator_RowDeletedName="kod_proizvRowDeleted" msprop:Generator_RowDeletingName="kod_proizvRowDeleting" msprop:Generator_RowEvArgName="kod_proizvRowChangeEvent" msprop:Generator_TablePropName="kod_proizv" msprop:Generator_RowChangedName="kod_proizvRowChanged" msprop:Generator_UserTableName="kod_proizv" msprop:Generator_RowChangingName="kod_proizvRowChanging" msprop:Generator_RowClassName="kod_proizvRow" msprop:Generator_TableClassName="kod_proizvDataTable" msprop:Generator_TableVarName="tablekod_proizv">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="kod_proizv" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="kod_proizv" msprop:Generator_ColumnPropNameInTable="kod_proizvColumn" msprop:Generator_ColumnVarNameInTable="columnkod_proizv" msprop:Generator_UserColumnName="kod_proizv" type="xs:int" />
-              <xs:element name="text_proizv" msprop:Generator_ColumnPropNameInRow="text_proizv" msprop:Generator_ColumnPropNameInTable="text_proizvColumn" msprop:Generator_ColumnVarNameInTable="columntext_proizv" msprop:Generator_UserColumnName="text_proizv" minOccurs="0">
+              <xs:element name="kod_proizv" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="kod_proizvColumn" msprop:Generator_ColumnPropNameInRow="kod_proizv" msprop:Generator_UserColumnName="kod_proizv" msprop:Generator_ColumnVarNameInTable="columnkod_proizv" type="xs:int" />
+              <xs:element name="text_proizv" msprop:Generator_ColumnPropNameInTable="text_proizvColumn" msprop:Generator_ColumnPropNameInRow="text_proizv" msprop:Generator_UserColumnName="text_proizv" msprop:Generator_ColumnVarNameInTable="columntext_proizv" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="15" />
@@ -987,11 +976,11 @@ SELECT kod_ob, text_ob FROM oborud_shv WHERE (kod_ob = @kod_ob)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="oborud_shv" msprop:Generator_RowEvHandlerName="oborud_shvRowChangeEventHandler" msprop:Generator_RowDeletedName="oborud_shvRowDeleted" msprop:Generator_RowDeletingName="oborud_shvRowDeleting" msprop:Generator_RowEvArgName="oborud_shvRowChangeEvent" msprop:Generator_TablePropName="oborud_shv" msprop:Generator_RowChangedName="oborud_shvRowChanged" msprop:Generator_RowChangingName="oborud_shvRowChanging" msprop:Generator_TableClassName="oborud_shvDataTable" msprop:Generator_RowClassName="oborud_shvRow" msprop:Generator_TableVarName="tableoborud_shv" msprop:Generator_UserTableName="oborud_shv">
+        <xs:element name="oborud_shv" msprop:Generator_RowEvHandlerName="oborud_shvRowChangeEventHandler" msprop:Generator_RowDeletedName="oborud_shvRowDeleted" msprop:Generator_RowDeletingName="oborud_shvRowDeleting" msprop:Generator_RowEvArgName="oborud_shvRowChangeEvent" msprop:Generator_TablePropName="oborud_shv" msprop:Generator_RowChangedName="oborud_shvRowChanged" msprop:Generator_UserTableName="oborud_shv" msprop:Generator_RowChangingName="oborud_shvRowChanging" msprop:Generator_RowClassName="oborud_shvRow" msprop:Generator_TableClassName="oborud_shvDataTable" msprop:Generator_TableVarName="tableoborud_shv">
           <xs:complexType>
             <xs:sequence>
-              <xs:element name="kod_ob" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInRow="kod_ob" msprop:Generator_ColumnPropNameInTable="kod_obColumn" msprop:Generator_ColumnVarNameInTable="columnkod_ob" msprop:Generator_UserColumnName="kod_ob" type="xs:int" />
-              <xs:element name="text_ob" msprop:Generator_ColumnPropNameInRow="text_ob" msprop:Generator_ColumnPropNameInTable="text_obColumn" msprop:Generator_ColumnVarNameInTable="columntext_ob" msprop:Generator_UserColumnName="text_ob" minOccurs="0">
+              <xs:element name="kod_ob" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnPropNameInTable="kod_obColumn" msprop:Generator_ColumnPropNameInRow="kod_ob" msprop:Generator_UserColumnName="kod_ob" msprop:Generator_ColumnVarNameInTable="columnkod_ob" type="xs:int" />
+              <xs:element name="text_ob" msprop:Generator_ColumnPropNameInTable="text_obColumn" msprop:Generator_ColumnPropNameInRow="text_ob" msprop:Generator_UserColumnName="text_ob" msprop:Generator_ColumnVarNameInTable="columntext_ob" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="35" />
@@ -1003,7 +992,7 @@ SELECT kod_ob, text_ob FROM oborud_shv WHERE (kod_ob = @kod_ob)</CommandText>
         </xs:element>
       </xs:choice>
     </xs:complexType>
-    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+    <xs:unique name="Constraint1">
       <xs:selector xpath=".//mstns:art_norm_n" />
       <xs:field xpath="mstns:annID" />
     </xs:unique>
@@ -1038,10 +1027,10 @@ SELECT kod_ob, text_ob FROM oborud_shv WHERE (kod_ob = @kod_ob)</CommandText>
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="status_ann_art_norm_n" msdata:parent="status_ann" msdata:child="art_norm_n" msdata:parentkey="status_id" msdata:childkey="status" msprop:Generator_UserParentTable="status_ann" msprop:Generator_UserChildTable="art_norm_n" msprop:Generator_RelationVarName="relationstatus_ann_art_norm_n" msprop:Generator_ChildPropName="Getart_norm_nRows" msprop:Generator_UserRelationName="status_ann_art_norm_n" msprop:Generator_ParentPropName="status_annRow" />
-      <msdata:Relationship name="norm_oper_podr_vyaz" msdata:parent="podr_vyaz" msdata:child="norm_oper" msdata:parentkey="kod_proizv" msdata:childkey="kod_proizv" msprop:Generator_UserParentTable="podr_vyaz" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationnorm_oper_podr_vyaz" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_ParentPropName="podr_vyazRow" msprop:Generator_UserRelationName="norm_oper_podr_vyaz" />
-      <msdata:Relationship name="oborud_shv_norm_oper" msdata:parent="oborud_shv" msdata:child="norm_oper" msdata:parentkey="kod_ob" msdata:childkey="kod_ob" msprop:Generator_UserParentTable="oborud_shv" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationoborud_shv_norm_oper" msprop:Generator_UserRelationName="oborud_shv_norm_oper" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_ParentPropName="oborud_shvRow" />
-      <msdata:Relationship name="kod_proizv_norm_oper" msdata:parent="kod_proizv" msdata:child="norm_oper" msdata:parentkey="kod_proizv" msdata:childkey="kod_proizv" msprop:Generator_UserParentTable="kod_proizv" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationkod_proizv_norm_oper" msprop:Generator_UserRelationName="kod_proizv_norm_oper" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_ParentPropName="kod_proizvRow" />
+      <msdata:Relationship name="status_ann_art_norm_n" msdata:parent="status_ann" msdata:child="art_norm_n" msdata:parentkey="status_id" msdata:childkey="status" msprop:Generator_UserParentTable="status_ann" msprop:Generator_UserChildTable="art_norm_n" msprop:Generator_RelationVarName="relationstatus_ann_art_norm_n" msprop:Generator_ChildPropName="Getart_norm_nRows" msprop:Generator_ParentPropName="status_annRow" msprop:Generator_UserRelationName="status_ann_art_norm_n" />
+      <msdata:Relationship name="norm_oper_podr_vyaz" msdata:parent="podr_vyaz" msdata:child="norm_oper" msdata:parentkey="kod_proizv" msdata:childkey="kod_proizv" msprop:Generator_UserParentTable="podr_vyaz" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationnorm_oper_podr_vyaz" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_UserRelationName="norm_oper_podr_vyaz" msprop:Generator_ParentPropName="podr_vyazRow" />
+      <msdata:Relationship name="oborud_shv_norm_oper" msdata:parent="oborud_shv" msdata:child="norm_oper" msdata:parentkey="kod_ob" msdata:childkey="kod_ob" msprop:Generator_UserParentTable="oborud_shv" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationoborud_shv_norm_oper" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_ParentPropName="oborud_shvRow" msprop:Generator_UserRelationName="oborud_shv_norm_oper" />
+      <msdata:Relationship name="kod_proizv_norm_oper" msdata:parent="kod_proizv" msdata:child="norm_oper" msdata:parentkey="kod_proizv" msdata:childkey="kod_proizv" msprop:Generator_UserParentTable="kod_proizv" msprop:Generator_UserChildTable="norm_oper" msprop:Generator_RelationVarName="relationkod_proizv_norm_oper" msprop:Generator_ChildPropName="Getnorm_operRows" msprop:Generator_ParentPropName="kod_proizvRow" msprop:Generator_UserRelationName="kod_proizv_norm_oper" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

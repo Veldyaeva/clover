@@ -17,6 +17,8 @@ using System.Threading.Tasks;
 using DevExpress.Data.Filtering;
 using DevExpress.CodeParser;
 using SewingProduction.form.TeamWork;
+using SewingProduction.form.TeamWork.Models;
+using DevExpress.XtraBars.Customization;
 
 
 namespace SewingProduction.Forms
@@ -28,66 +30,72 @@ namespace SewingProduction.Forms
         private int selectedRowHandle = -1;
         private readonly ILogger _logger =new FileLogger();
         private int bufferWorkDivision;
+        private readonly BindingList<ArtNormN> _bindingList;
+        private readonly BindingSource _bindingSource;
         public TeamWork()
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(_dbHelper);
+
             ThemeManager.UpdateTheme(this);
             this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridView7, e);
             this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(gridView8, e);
+
+            _bindingList = new BindingList<ArtNormN>();
+            _bindingSource = new BindingSource { DataSource = _bindingList };
+            ANNgridControl.DataSource = _bindingSource;
         }
 
         #region Загрузка данных
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
-            Thread splashThread = new Thread(() =>
-            {
-                SplashScreen splash = new SplashScreen();
-                splash.ShowDialog();
-                Thread.Sleep(2000);
-            });
-
-            splashThread.Start();
-
-            try
-            {
-                LoadData();
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных");
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                splashThread.Abort();
-            }
+            await LoadData();
         }
 
-        private async void LoadData()
+        private async Task LoadData()
         {
+
+            //    //var designer = _artNormService.GetRelDesigner();
+            //    //designerComboBox.DataSource = designer;
+            //    //var constructor = _artNormService.GetRelDesigner();
+            //    //constructorComboBox.DataSource = constructor;
+
+            //    GridView view = ANNgridControl.MainView as GridView;
+            //    if (view != null)
+            //    {
+            //        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, 0, "annId", 0);
+            //        //LoadRelatedData(annId);
+            //    }
+
+            //    filterTable();
+            //    await _logger.LogEventAsync("данные загружены успешно", "LoadData");
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _logger.LogErrorAsync(ex, "Ошибка загрузки данных");
+            //    MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
             try
             {
-                var data = _artNormService.GetArtNormData();
-                artnormnBindingSource.DataSource = data;
-                ANNgridControl.DataSource = artnormnBindingSource;
-                
-                var designer = _artNormService.GetRelDesigner();
-                designerComboBox.DataSource = designer;
-                var constructor = _artNormService.GetRelDesigner();
-                constructorComboBox.DataSource = constructor;
+                _bindingList.Clear();
+                List<ArtNormN> data = await _artNormService.GetArtNormData();
 
-                GridView view = ANNgridControl.MainView as GridView;
-                if (view != null)
+                foreach (var item in data)
                 {
-                    int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, 0, "annId", 0);
-                    //LoadRelatedData(annId);
+                    _bindingList.Add(item);
                 }
 
+                // Принудительное обновление данных в UI
+                _bindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
+                ANNgridView.PopulateColumns(); // Заполняем колонки
+
                 filterTable();
-                await _logger.LogEventAsync("данные загружены успешно", "LoadData");
+                await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
             catch (Exception ex)
             {
@@ -95,6 +103,8 @@ namespace SewingProduction.Forms
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        
 
 
         /// <summary>
@@ -112,17 +122,17 @@ namespace SewingProduction.Forms
                 // Если включен чекбокс "Загрузить все"
                 if (loadAllCheckBox.Checked)
                 {
-                    relatedData = _artNormService.GetArtNormDataCurrent(kod, true);
+                    relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
                 }
                 else
                 {
-                    relatedData = _artNormService.GetArtNormDataCurrent(kod, false);
+                    relatedData = await _artNormService.GetArtNormDataCurrent(kod, false);
 
                     // Если артикул содержит "-", фильтруем по его первой части
                     int dashIndex = articul.IndexOf("-");
                     if (dashIndex > 0)
                     {
-                        DataTable partialData = _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
+                        DataTable partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
                         relatedData.Merge(partialData);
                     }
                 }
@@ -233,7 +243,7 @@ namespace SewingProduction.Forms
         {
             try
             {
-                DataTable dt = _artNormService.GetImage(kod);
+                DataTable dt = await _artNormService.GetImage(kod);
                 if (dt != null && dt.Rows.Count > 0)
                 {
                     pictureBox.ImageLocation = dt.Rows[0]["pathpict"].ToString();
@@ -297,13 +307,13 @@ namespace SewingProduction.Forms
 
         #region Работа с данными
 
-        private void LoadRelatedData(int annId)
+        private async Task LoadRelatedData(int annId)
         {
-            GridHelper.LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
-            GridHelper.LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
-            GridHelper.LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(annId));
-            GridHelper.LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
-            GridHelper.LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedSpArt(annId));
+            GridHelper.LoadGridControlData(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+            GridHelper.LoadGridControlData(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
+            GridHelper.LoadGridControlData(gridControl4, normkontBindingSource, await  _artNormService.GetRelatedNormKont(annId));
+            GridHelper.LoadGridControlData(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
+            GridHelper.LoadGridControlData(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
             //GridHelper.LoadImage(pictureBox1, _artNormService.GetImage(annId)); //не надо annId
 
             UpdateNZPStatus();
@@ -384,11 +394,11 @@ namespace SewingProduction.Forms
         {
             try
             {
-                LoadGridControlData(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz(annId));
-                LoadGridControlData(gridControl3, normraskBindingSource, _artNormService.GetRelatedNormRask(annId));
-                LoadGridControlData(gridControl4, normkontBindingSource, _artNormService.GetRelatedNormKont(annId));
-                LoadGridControlData(gridControl5, normdopobrBindingSource, _artNormService.GetRelatedNormDopObr(annId));
-                LoadGridControlData(customGridControl5, sparticulBindingSource, _artNormService.GetRelatedSpArt(annId));
+                LoadGridControlData(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+                LoadGridControlData(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
+                LoadGridControlData(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
+                LoadGridControlData(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
+                LoadGridControlData(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
 
                 UpdateNZPStatus(); // Обновляем статус незавершенного производства
             }
@@ -489,7 +499,7 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Переключение фильтров при изменении чекбоксов
         /// </summary>
-        private void customCheckBox1_CheckedChanged(object sender, EventArgs e) => filterTable();
+        private void Filter_CheckedChanged(object sender, EventArgs e) => filterTable();
 
         /// <summary>
         /// Сбрасывает текущий фильтр в searchControl1 при изменении параметров поиска.
@@ -724,82 +734,134 @@ namespace SewingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void customButton6_Click(object sender, EventArgs e)
+        private async void customButton6_Click(object sender, EventArgs e)
         {
-            GridView view = ANNgridView;
-            if (view == null) return;
+            ////GridView view = ANNgridView;
+            //if (ANNgridView == null) return;
 
-            ArtNormData newData = new ArtNormData();
+            //ArtNormData newData = new ArtNormData();
 
-            // Создаём новую строку в `DataSet`
-            DataRow newRow = aCEDataSet.art_norm_n.NewRow();
-            newRow["kod"] = newData.Kod;
-            newRow["grup"] = newData.Grup;
-            newRow["articul"] = newData.Articul;
-            newRow["mod"] = newData.Mod;
-    //        newRow["po"] = newData.Po;
-            newRow["sek_shv"] = newData.SekShv;
- //           newRow["sek_vyaz3"] = newData.SekVyaz3;
-            newRow["sek_vyaz5"] = newData.SekVyaz5;
-            newRow["sek_vyaz6"] = newData.SekVyaz6;
-            newRow["sek_vyaz7"] = newData.SekVyaz7;
-            newRow["sek_vyaz10"] = newData.SekVyaz10;
-            newRow["sek_vyaz12"] = newData.SekVyaz12;
-  //          newRow["sek_vyaz62"] = newData.SekVyaz62;
-  //          newRow["sek_vyaz71"] = newData.SekVyaz71;
-  //          newRow["sek_vyaz72"] = newData.SekVyaz72;
-            newRow["sek_vyazo"] = newData.SekVyazo;
-            newRow["sek_vyaz"] = newData.SekVyaz;
-            newRow["sek"] = newData.Sek;
- //           newRow["seb"] = newData.Seb;
- //           newRow["st"] = newData.St;
-    //        newRow["po1"] = newData.Po1;
-            newRow["komment"] = newData.Komment;
-            newRow["data_sozd"] = newData.DataSozd;
-            newRow["diz"] = newData.Diz;
-            newRow["constr"] = newData.Constr;
-            newRow["data_obn"] = newData.DataObn ?? (object)DBNull.Value;
-  //          newRow["sek_vyaz70"] = newData.SekVyaz70;
-            newRow["sek_kr"] = newData.SekKr;
-            newRow["slogn"] = newData.Slogn;
-  //          newRow["sek_vyaz14"] = newData.SekVyaz14;
-            newRow["arh"] = newData.Arh;
- //           newRow["sql_pr_add"] = newData.SqlPrAdd;
- //           newRow["date_add"] = newData.DateAdd;
- //           newRow["komp_name"] = newData.KompName;
-  //          newRow["annDateDel"] = newData.AnnDateDel ?? (object)DBNull.Value;
-  //          newRow["annCompDel"] = newData.AnnCompDel ?? (object)DBNull.Value;
- //           newRow["annDateAdd"] = newData.AnnDateAdd;
- //           newRow["annCompAdd"] = newData.AnnCompAdd;
-            newRow["status"] = newData.Status;
+            //// Создаём новую строку в `DataSet`
+            //DataRow newRow = aCEDataSet.art_norm_n.NewRow();
+            //newRow["kod"] = newData.Kod;
+            //newRow["grup"] = newData.Grup;
+            //newRow["articul"] = newData.Articul;
+            //newRow["mod"] = newData.Mod;
+            //newRow["sek_shv"] = newData.SekShv;
+            //newRow["sek_vyaz5"] = newData.SekVyaz5;
+            //newRow["sek_vyaz6"] = newData.SekVyaz6;
+            //newRow["sek_vyaz7"] = newData.SekVyaz7;
+            //newRow["sek_vyaz10"] = newData.SekVyaz10;
+            //newRow["sek_vyaz12"] = newData.SekVyaz12;
+            //newRow["sek_vyazo"] = newData.SekVyazo;
+            //newRow["sek_vyaz"] = newData.SekVyaz;
+            //newRow["sek"] = newData.Sek;
+            //newRow["komment"] = newData.Komment;
+            //newRow["data_sozd"] = newData.DataSozd;
+            //newRow["diz"] = newData.Diz;
+            //newRow["constr"] = newData.Constr;
+            //newRow["data_obn"] = newData.DataObn ?? (object)DBNull.Value;
+            //newRow["sek_kr"] = newData.SekKr;
+            //newRow["slogn"] = newData.Slogn;
+            //newRow["arh"] = newData.Arh;
+            //newRow["status"] = newData.Status;
 
-            // Сохраняем в БД через SQL-запрос и получаем `ID`
-            int newId = SaveToDatabase(newRow)-1;//!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            //// Сохраняем в БД через SQL-запрос и получаем `ID`
+            //int newId = SaveToDatabase(newRow);
+            //newRow["annID"] = newId;
+            //aCEDataSet.art_norm_n.Rows.Add(newRow);
+            //if (newId <= 0)
+            //{
+            //    MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
+            //ANNgridView.ClearColumnsFilter();
+            //aCEDataSet.art_norm_n.Clear(); // Очищаем DataTable перед загрузкой
+            //art_norm_nTableAdapter.Fill(aCEDataSet.art_norm_n); // Загружаем актуальные данные
+            //ANNgridControl.DataSource = aCEDataSet.art_norm_n;
+            //ANNgridControl.RefreshDataSource();
+            //ANNgridView.RefreshData();
+
+            //// Ищем строку в `GridView` по `ID`
+            //int realRowHandle = ANNgridView.LocateByValue("annID", newId);
+            //if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
+            //{
+            //    ANNgridView.FocusedRowHandle = realRowHandle;
+
+            //    // Открываем `EditForm`
+            //    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
+            //    {
+            //        if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+            //        {
+            //            // Дополнительные действия после закрытия формы
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Ошибка: Новая строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+
+            await HandleButtonClickAsync();
+        }
+        private async Task HandleButtonClickAsync() { 
+
+            if (ANNgridView == null) return;
+
+            // Создаём новую запись модели `ArtNorm`
+            ArtNormN newItem = new ArtNormN
+            {
+                Kod = "0000000",
+                Grup = "Группа",
+                Articul = "Артикул",
+                Mod = "Модель",
+                SekShv = 0,
+                SekVyaz5 = 0,
+                SekVyaz6 = 0,
+                SekVyaz7 = 0,
+                SekVyaz10 = 0,
+                SekVyaz12 = 0,
+                SekVyazo = 0,
+                SekVyaz = 0,
+                Sek = 0,
+                Komment = "Комментарий",
+                DataSozd = DateTime.Now,
+                Diz = 0,
+                Constr = 0,
+                DataObn = null,
+                SekKr = 0,
+                Slogn = 0,
+                Arh = false,
+                Status = 1
+            };
+
+            // Сохраняем в БД и получаем новый `annID`
+            int newId = await _artNormService.InsertANN(newItem);
             if (newId <= 0)
             {
                 MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Обновляем `ID` новой строки в `DataSet`
-            newRow["annID"] = newId;
-            aCEDataSet.art_norm_n.Rows.Add(newRow);
-
-            // Обновляем `GridView`
+            // Обновляем ID в объекте и загружаем данные заново
+            newItem.AnnID = newId;
+            //LoadData(); // Загружаем актуальные данные
+            _bindingList.Add(newItem);
             ANNgridControl.RefreshDataSource();
-
-            // Ищем строку в `GridView` по `ID`
-            int realRowHandle = view.LocateByValue("annId", newId);//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if (realRowHandle >= 0 && view.IsDataRow(realRowHandle))
+            // Ищем строку по `annID` в `GridView`
+            int realRowHandle = ANNgridView.LocateByValue("annID", newId);
+            if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
             {
-                view.FocusedRowHandle = realRowHandle;
+                ANNgridView.FocusedRowHandle = realRowHandle;
 
                 // Открываем `EditForm`
                 using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
                 {
                     if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                     {
-                        // Дополнительные действия после закрытия формы
+                        // Можно обновить данные после закрытия формы, если нужно
+                        LoadData();
                     }
                 }
             }
@@ -808,57 +870,7 @@ namespace SewingProduction.Forms
                 MessageBox.Show("Ошибка: Новая строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        private int SaveToDatabase(DataRow row)
-        {
-           int newId = -1;
-           newId= _artNormService.InsertANN(row);
-           return newId;
-        }
-
-        public class ArtNormData
-    {
-        public string Kod { get; set; } = "0000000";
-        public string Grup { get; set; } = "Группа";
-        public string Articul { get; set; } = "Артикул";
-        public string Mod { get; set; } = "Модель";
-        public string Po { get; set; } = "0";
-        public int SekShv { get; set; } = 0;
-        public int SekVyaz3 { get; set; } = 0;
-        public int SekVyaz5 { get; set; } = 0;
-        public int SekVyaz6 { get; set; } = 0;
-        public int SekVyaz7 { get; set; } = 0;
-        public int SekVyaz10 { get; set; } = 0;
-        public int SekVyaz12 { get; set; } = 0;
-        public int SekVyaz62 { get; set; } = 0;
-        public int SekVyaz71 { get; set; } = 0;
-        public int SekVyaz72 { get; set; } = 0;
-        public int SekVyazo { get; set; } = 0;
-        public int SekVyaz { get; set; } = 0;
-        public int Sek { get; set; } = 0;
-        public decimal Seb { get; set; } = 0.00000m;
-        public int St { get; set; } = 0;
-        public string Po1 { get; set; } = "0";
-        public string Komment { get; set; } = "Комментарий";
-        public DateTime DataSozd { get; set; } = DateTime.Now;
-        public int Diz { get; set; } = 0;
-        public int Constr { get; set; } = 0;
-        public DateTime? DataObn { get; set; } = null;
-        public int SekVyaz70 { get; set; } = 0;
-        public int SekKr { get; set; } = 0;
-        public int Slogn { get; set; } = 0;
-        public int SekVyaz14 { get; set; } = 0;
-        public bool Arh { get; set; } = false;
-        public int SqlPrAdd { get; set; } = 0;
-        public DateTime DateAdd { get; set; } = DateTime.Now;
-        public string KompName { get; set; } = Environment.MachineName;
-        public DateTime? AnnDateDel { get; set; } = null;
-        public string AnnCompDel { get; set; } = null;
-        public DateTime AnnDateAdd { get; set; } = DateTime.Now;
-        public string AnnCompAdd { get; set; } = Environment.MachineName;
-        public int Status { get; set; } = 1;
-}
-
+        
 
         /// <summary>
         /// Архив+копия
@@ -945,53 +957,65 @@ namespace SewingProduction.Forms
                 return;
             }
 
-            var oldRow = gridView1.GetDataRow(selectedRowHandle);
+            ArtNormN oldRow = gridView1.GetRow(selectedRowHandle) as ArtNormN;
             if (oldRow == null) return;
 
-            DataTable table = gridView1.DataSource as DataTable;
-            if (table == null) return;
-
-            DataRow newRow = table.NewRow();
-
-            foreach (DataColumn column in table.Columns)
+            // ✅ Создаём копию объекта
+            ArtNormN newItem = new ArtNormN
             {
-                if (column.ColumnName != "annId")
-                {
-                    newRow[column.ColumnName] = oldRow[column.ColumnName];
-                }
+                Kod = oldRow.Kod,
+                Grup = oldRow.Grup,
+                Articul = oldRow.Articul,
+                Mod = oldRow.Mod,
+                SekShv = oldRow.SekShv,
+                SekVyaz5 = oldRow.SekVyaz5,
+                SekVyaz6 = oldRow.SekVyaz6,
+                SekVyaz7 = oldRow.SekVyaz7,
+                SekVyaz10 = oldRow.SekVyaz10,
+                SekVyaz12 = oldRow.SekVyaz12,
+                SekVyazo = oldRow.SekVyazo,
+                SekVyaz = oldRow.SekVyaz,
+                Sek = oldRow.Sek,
+                Komment = oldRow.Komment,
+                DataSozd = DateTime.Now, // Новая дата создания
+                Diz = oldRow.Diz,
+                Constr = oldRow.Constr,
+                DataObn = null,
+                SekKr = oldRow.SekKr,
+                Slogn = oldRow.Slogn,
+                Arh = false,
+                Status = oldRow.Status
+            };
+
+            //  Сохраняем копию в БД
+            int newID = _artNormService.SaveCopyToDatabase(newItem);
+            if (newID <= 0)
+            {
+                MessageBox.Show("Ошибка копирования в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            table.Rows.Add(newRow);
-            int newID = SaveCopyToDatabase(newRow);
-            newRow["annId"] = newID;
+            //  Загружаем данные заново
+            LoadData();
 
-            gridView1.RefreshData();
+            //  Ищем новую строку в `GridView`
+            int newRowHandle = gridView1.LocateByValue("annID", newID);
+            if (newRowHandle >= 0)
+            {
+                gridView1.FocusedRowHandle = newRowHandle;
+                gridView1.ShowPopupEditForm();
+            }
+            else
+            {
+                MessageBox.Show("Ошибка: Копированная строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
 
-            int newRowHandle = gridView1.LocateByValue("annId", newID);
-            gridView1.FocusedRowHandle = newRowHandle;
-
-            gridView1.ShowPopupEditForm();
         }
-        private int SaveCopyToDatabase(DataRow newRow)
-        {
-            try
-            {
-                // Сохраняем изменения из DataSet в БД
-                art_norm_nTableAdapter.Update(aCEDataSet.art_norm_n);
-                art_norm_nTableAdapter.Fill(aCEDataSet.art_norm_n); // Обновляем DataSet после сохранения
-
-                // Получаем последний ID, добавленный в DataSet
-                DataRow lastRow = aCEDataSet.art_norm_n.Rows[aCEDataSet.art_norm_n.Rows.Count - 1];
-                return Convert.ToInt32(lastRow["id"]);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
-            }
-        }
-
         #endregion
 
+        private void preliminaryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

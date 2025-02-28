@@ -156,7 +156,6 @@
     </Compile>
     <Compile Include="form\TeamWork\DbContext\AppDbContext.cs" />
     <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
-    <Compile Include="form\TeamWork\DbContext\ArtNormN.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
     <Compile Include="class\Theme.cs" />
@@ -238,6 +237,7 @@
     <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
     <Compile Include="form\TeamWork\Interfaces\IThemeable.cs" />
     <Compile Include="form\TeamWork\Loggers\Logger.cs" />
+    <Compile Include="form\TeamWork\Models\ArtNormN.cs" />
     <Compile Include="form\TeamWork\Models\NormOperData.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
