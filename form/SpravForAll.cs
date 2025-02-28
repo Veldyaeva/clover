@@ -167,6 +167,7 @@ namespace SewingProduction.form
                     //перенос столбца архив в конец:
                     //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
                 }
+                /* // отключила временно для реальной базы
                 if (!flagStartListening)
                 {
                     // Запуск отслеживания изменений для соединения с базой данных
@@ -174,6 +175,7 @@ namespace SewingProduction.form
                     // Начинаем прослушивание
                     StartListening();
                 }
+                */
             }
             catch (SqlException sqlEx)
             {
