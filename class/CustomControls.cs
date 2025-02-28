@@ -12,6 +12,8 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
+using System.Data;
+using DevExpress.XtraRichEdit.Model;
 
 namespace SewingProduction
 {
@@ -24,7 +26,9 @@ namespace SewingProduction
         }
     }
 
-    // Кастомная кнопка
+    /// <summary>
+    /// Кастомная кнопка
+    /// </summary>
     public class CustomButton : Button
     {
         public CustomButton()
@@ -105,7 +109,9 @@ namespace SewingProduction
         }
     }
 
-    // Класс-наследник для кнопки "Отмена"
+    /// <summary>
+    /// Класс-наследник для кнопки "Отмена"
+    /// </summary>
     public class CustomCancelButton : CustomButton
     {
         public CustomCancelButton()
@@ -120,13 +126,24 @@ namespace SewingProduction
         // Событие при нажатии на кнопку "Отмена"
         private void OnCancelButtonClick(object sender, EventArgs e)
         {
-             //  this.FindForm()?.Close(); // Закрыть текущую форму
+            // Логика для кнопки "Отмена"
+            DialogResult result = MessageBox.Show("Вы уверены, что хотите отменить?",
+                                                  "Подтверждение",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                //  this.FindForm()?.Close(); // Закрыть текущую форму
+            }
         }
     }
 
 
 
-    //Класс-наследник для CheckBox
+    /// <summary>
+    /// Класс-наследник для CheckBox
+    /// </summary>
     public class CustomCheckBox : CheckBox
     {
         public CustomCheckBox()
@@ -159,7 +176,9 @@ namespace SewingProduction
 
     }
 
-    // Кастомное текстовое поле
+    /// <summary>
+    /// Кастомное текстовое поле
+    /// </summary>
     public class CustomTextBox : TextBox
     {
         public CustomTextBox()
@@ -191,7 +210,9 @@ namespace SewingProduction
         }
     }
 
-    //Класс-наследник для ComboBox
+    /// <summary>
+    /// Класс-наследник для ComboBox
+    /// </summary>
     public class CustomComboBox : ComboBox
     {
         public CustomComboBox()
@@ -222,7 +243,9 @@ namespace SewingProduction
 
     }
 
-    //    //Класс-наследник для Label
+    /// <summary>
+    ///    //Класс-наследник для Label
+    /// </summary>
     public class CustomLabel : System.Windows.Forms.Label
     {
         public CustomLabel()
@@ -254,7 +277,9 @@ namespace SewingProduction
 
     }
 
-    //Класс-наследник для MaskedTextBox
+    /// <summary>
+    /// Класс-наследник для MaskedTextBox
+    /// </summary>
     public class CustomMaskedTextBox : MaskedTextBox
     {
         public CustomMaskedTextBox()
@@ -364,6 +389,7 @@ namespace SewingProduction
 
 
     }
+
     public class CustomGroupBox : GroupBox
     {
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
@@ -391,8 +417,8 @@ namespace SewingProduction
             using (Pen borderPen = new Pen(_borderColor, _borderThickness))
             {
                 // Определение прямоугольника для обводки
-                var rect = new Rectangle(ClientRectangle.X , ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
-                rect.X += _borderThickness / 2 ;
+                var rect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
+                rect.X += _borderThickness / 2;
                 rect.Y += _borderThickness / 2;
 
                 //e.Graphics.DrawRectangle(borderPen, rect);
@@ -417,7 +443,9 @@ namespace SewingProduction
         }
 
     }
-    // Класс для формы с использованием базовых компонентов
+    /// <summary>
+    /// Кастомная форма с градиентным фоном
+    /// </summary>
     public class CustomForm : Form
     {
         protected override void OnPaint(PaintEventArgs e)
@@ -476,6 +504,11 @@ namespace SewingProduction
 
 
     }
+
+    #region CommonFunctions
+    /// <summary>
+    /// Класс общих функций
+    /// </summary>
     public static class CommonFunctions
     #region
     {

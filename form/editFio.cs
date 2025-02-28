@@ -51,46 +51,46 @@ namespace SewingProduction.form
         {
             using (SqlConnection connectionCombo = new SqlConnection(connectionString))
             {
-                comboOneTableItems(customComboBoxOrg,    "SELECT TRIM(name)       FROM sp_firms       ORDER BY kod", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxDolj,   "SELECT TRIM(rab)        FROM rab            ORDER BY rab ", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxOb,     "SELECT TRIM(fvr_name)   FROM fio_vid_rabot  ORDER BY fvr_kod", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxPodr,   "SELECT TRIM(name)       FROM brig_object    ORDER BY gr", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxNTab,   "SELECT TRIM(naimen)     FROM tab_n          ORDER BY naimen", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxNved,   "SELECT TRIM(name)       FROM brig_ved       ORDER BY name", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c)  FROM spbrig", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBox1Cpodr, "SELECT DISTINCT TRIM(name)        FROM podr1C", "nameColumn", connectionCombo, true);
-                comboOneTableItems(customComboBox1Cdolg, "SELECT DISTINCT TRIM(name)        FROM dolg1C", "nameColumn", connectionCombo, true);
+                comboOneTableItems(customComboBoxOrg,    "SELECT TRIM(name)       FROM sp_firms       ORDER BY kod", connectionCombo, true);
+                comboOneTableItems(customComboBoxDolj,   "SELECT TRIM(rab)        FROM rab            ORDER BY rab ", connectionCombo, true);
+                comboOneTableItems(customComboBoxOb,     "SELECT TRIM(fvr_name)   FROM fio_vid_rabot  ORDER BY fvr_kod", connectionCombo, true);
+                comboOneTableItems(customComboBoxPodr,   "SELECT TRIM(name)       FROM brig_object    ORDER BY gr", connectionCombo, true);
+                comboOneTableItems(customComboBoxNTab,   "SELECT TRIM(naimen)     FROM tab_n          ORDER BY naimen", connectionCombo, true);
+                comboOneTableItems(customComboBoxNved,   "SELECT TRIM(name)       FROM brig_ved       ORDER BY name", connectionCombo, true);
+                comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c)  FROM spbrig", connectionCombo, true);
+                comboOneTableItems(customComboBox1Cpodr, "SELECT DISTINCT TRIM(name)        FROM podr1C", connectionCombo, true);
+                comboOneTableItems(customComboBox1Cdolg, "SELECT DISTINCT TRIM(name)        FROM dolg1C", connectionCombo, true);
             }
         }
         
-        //private void comboOneTableItems(System.Windows.Forms.ComboBox comboBox,string query, SqlConnection connection, bool allOrOne)
-        //{
-        //    /* comboBox: сам комбобокс
-        //     * query: текст запроса
-        //     * connection: подключение
-        //     * allOrOne: 
-        //     * true - для заполнения комбобокса
-        //     * false - для отображения значения
-        //     */
-        //    SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-        //    //Создаем в памяти таблицу:
-        //    System.Data.DataTable tableList = new System.Data.DataTable();
-        //    //Добавляем ответ сервера в таблицу:
-        //    dataAdapter.Fill(tableList);
-        //    if (allOrOne)
-        //    {
-        //        comboBox.Items.Clear();
-        //        //Загрузка в комбобокс:
-        //        foreach (DataRow row in tableList.Rows)
-        //        {
-        //            comboBox.Items.Add(row[0].ToString());
-        //        }
-        //    }
-        //    else
-        //    {
-        //        comboBox.Text = tableList.Rows.Count > 0 ? tableList.Rows[0]["nameColumn"].ToString() : "";
-        //    }
-        //}
+        private void comboOneTableItems(System.Windows.Forms.ComboBox comboBox,string query, SqlConnection connection, bool allOrOne)
+        {
+            /* comboBox: сам комбобокс
+             * query: текст запроса
+             * connection: подключение
+             * allOrOne: 
+             * true - для заполнения комбобокса
+             * false - для отображения значения
+             */
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
+            //Создаем в памяти таблицу:
+            System.Data.DataTable tableList = new System.Data.DataTable();
+            //Добавляем ответ сервера в таблицу:
+            dataAdapter.Fill(tableList);
+            if (allOrOne)
+            {
+                comboBox.Items.Clear();
+                //Загрузка в комбобокс:
+                foreach (DataRow row in tableList.Rows)
+                {
+                    comboBox.Items.Add(row[0].ToString());
+                }
+            }
+            else
+            {
+                comboBox.Text = tableList.Rows.Count > 0 ? tableList.Rows[0]["nameColumn"].ToString() : "";
+            }
+        }
 
         /* ЗАГРУЗКА ДАННЫХ СОТРУДНИКА */
         private void oldUser()
@@ -148,35 +148,35 @@ namespace SewingProduction.form
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["mast"].ToString())) 
                         comboOneTableItems(customComboBoxOrg, 
                         $"SELECT TRIM(name) AS nameColumn FROM sp_firms WHERE sp_firms.kod = {tableList.Rows[0]["mast"].ToString()}",
-                         "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["f_fvr_kod"].ToString()))
                         comboOneTableItems(customComboBoxOb,   
                         $"SELECT TRIM(fvr_name) AS nameColumn FROM fio_vid_rabot WHERE fio_vid_rabot.fvr_kod =  {tableList.Rows[0]["f_fvr_kod"].ToString()}",
-                         "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["gr"].ToString()))
                         comboOneTableItems(customComboBoxPodr, 
                         $"SELECT TRIM(name) AS nameColumn FROM brig_object WHERE brig_object.gr =  '{tableList.Rows[0]["gr"].ToString()}'",
-                         "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ftabn"].ToString()))
                         comboOneTableItems(customComboBoxNTab,
                         $"SELECT TRIM(naimen) AS nameColumn FROM tab_n WHERE tab_n.tnid =  {tableList.Rows[0]["ftabn"].ToString()}",
-                        "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ved"].ToString()))
                         comboOneTableItems(customComboBoxNved,
                         $"SELECT TRIM(name) AS nameColumn FROM brig_ved WHERE brig_ved.vdID =  {tableList.Rows[0]["ved"].ToString()}",
-                        "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_1c_id"].ToString()))
                         comboOneTableItems(customComboBoxPodr1c,
                         $"SELECT DISTINCT TRIM(podrname1c) AS nameColumn FROM spbrig WHERE spbrig.podrid1c = '{tableList.Rows[0]["podr_1c_id"].ToString()}'",
-                        "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_id"].ToString()))
                         comboOneTableItems(customComboBox1Cpodr,
                         $"SELECT DISTINCT TRIM(name) AS nameColumn FROM podr1C WHERE podr1C.id = '{tableList.Rows[0]["podr_id"].ToString()}'",
-                        "nameColumn", connection, false);
+                        connection, false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["dolg_id"].ToString()))
                         comboOneTableItems(customComboBox1Cdolg,
                         $"SELECT DISTINCT TRIM(name) AS nameColumn FROM dolg1C WHERE dolg1C.id = '{tableList.Rows[0]["dolg_id"].ToString()}'",
-                        "nameColumn", connection, false);
+                        connection, false);
 
                 }
                 // Если кто то уже радактирует:
