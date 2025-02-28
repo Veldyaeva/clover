@@ -62,22 +62,6 @@ namespace SewingProduction.Forms
             //    //var constructor = _artNormService.GetRelDesigner();
             //    //constructorComboBox.DataSource = constructor;
 
-            //    GridView view = ANNgridControl.MainView as GridView;
-            //    if (view != null)
-            //    {
-            //        int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, 0, "annId", 0);
-            //        //LoadRelatedData(annId);
-            //    }
-
-            //    filterTable();
-            //    await _logger.LogEventAsync("данные загружены успешно", "LoadData");
-            //}
-            //catch (Exception ex)
-            //{
-            //    await _logger.LogErrorAsync(ex, "Ошибка загрузки данных");
-            //    MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-
             try
             {
                 _bindingList.Clear();
@@ -94,7 +78,9 @@ namespace SewingProduction.Forms
                 ANNgridView.RefreshData();
                 ANNgridView.PopulateColumns(); // Заполняем колонки
 
-                filterTable();
+                filterTable();//применяем фильтры
+
+
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
             catch (Exception ex)
@@ -173,7 +159,7 @@ namespace SewingProduction.Forms
         /// </summary>
         private async void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            if (e.FocusedRowHandle < 0 || !GridHelper.IsDataTableLoaded(ANNgridView))
+            if (e.FocusedRowHandle < 0)
                 return;
 
             try
@@ -181,12 +167,12 @@ namespace SewingProduction.Forms
                 var view = ANNgridView;
 
                 commentRichTextBox.Text = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "komment", "");
-                constructorComboBox.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0);
-                designerComboBox.SelectedValue = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0);
+                constructorComboBox.Text = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0).ToString();
+                designerComboBox.Text = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0).ToString();
 
-                int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "annId", 0);
+                int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
                 //UpdateRelatedData(annId);
-                LoadRelatedData(annId);
+                await LoadRelatedData(annId);
 
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "kod", "");
                 int o = 0;
@@ -314,7 +300,7 @@ namespace SewingProduction.Forms
             GridHelper.LoadGridControlData(gridControl4, normkontBindingSource, await  _artNormService.GetRelatedNormKont(annId));
             GridHelper.LoadGridControlData(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
             GridHelper.LoadGridControlData(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-            //GridHelper.LoadImage(pictureBox1, _artNormService.GetImage(annId)); //не надо annId
+            GridHelper.LoadImage(pictureBox1, await _artNormService.GetImage(annId)); //не надо annId
 
             UpdateNZPStatus();
         }
@@ -960,7 +946,7 @@ namespace SewingProduction.Forms
             ArtNormN oldRow = gridView1.GetRow(selectedRowHandle) as ArtNormN;
             if (oldRow == null) return;
 
-            // ✅ Создаём копию объекта
+            //  Создаём копию объекта
             ArtNormN newItem = new ArtNormN
             {
                 Kod = oldRow.Kod,
@@ -1013,9 +999,5 @@ namespace SewingProduction.Forms
         }
         #endregion
 
-        private void preliminaryCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

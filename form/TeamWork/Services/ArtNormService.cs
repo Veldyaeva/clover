@@ -179,10 +179,11 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="kod">код</param>
         /// <returns></returns>
-        public Task<DataTable> GetImage(int kod)
+        public async Task<DataTable> GetImage(int kod)
         {
             string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
+            DataTable result =  await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
+            return result;
         }
 
         /// <summary>

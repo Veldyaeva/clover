@@ -37,11 +37,11 @@ namespace SewingProduction.Forms
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -229,12 +229,6 @@ namespace SewingProduction.Forms
             this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.artnormnBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.norm_raszTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
-            this.norm_raskTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
-            this.norm_kontTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
-            this.norm_dop_obrTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
-            this.sp_articulTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter();
-            this.sp_articulTableAdapter1 = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
@@ -376,9 +370,11 @@ namespace SewingProduction.Forms
             // tablePanel1
             // 
             this.tablePanel1.AutoScroll = true;
+            this.tablePanel1.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] {
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 163.04F),
-            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 52.96F)});
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 452.96F),
+            new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 50F)});
             this.tablePanel1.Controls.Add(this.tableLayoutPanel5);
             this.tablePanel1.Controls.Add(this.splitContainerControl1);
             this.tablePanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -954,7 +950,7 @@ namespace SewingProduction.Forms
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "434", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "434", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.repositoryItemButtonEdit1.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             // 
@@ -2337,30 +2333,6 @@ namespace SewingProduction.Forms
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 3;
             // 
-            // norm_raszTableAdapter
-            // 
-            this.norm_raszTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_raskTableAdapter
-            // 
-            this.norm_raskTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_kontTableAdapter
-            // 
-            this.norm_kontTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_dop_obrTableAdapter
-            // 
-            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
-            // 
-            // sp_articulTableAdapter
-            // 
-            this.sp_articulTableAdapter.ClearBeforeFill = true;
-            // 
-            // sp_articulTableAdapter1
-            // 
-            this.sp_articulTableAdapter1.ClearBeforeFill = true;
-            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
@@ -2489,14 +2461,9 @@ namespace SewingProduction.Forms
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.BindingSource normraszBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
         private System.Windows.Forms.BindingSource normraskBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
         private System.Windows.Forms.BindingSource normkontBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
         private System.Windows.Forms.BindingSource normdopobrBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter sp_articulTableAdapter;
         private System.Windows.Forms.DataGridViewTextBoxColumn grupDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn articulDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn modDataGridViewTextBoxColumn1;
@@ -2807,7 +2774,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn модель;
         private CustomLabel label8;
         private CustomGridControl customGridControl6;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter sp_articulTableAdapter1;
         private DevExpress.Utils.ImageCollection imageCollection1;
         private CustomCheckBox loadAllCheckBox;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView12;
