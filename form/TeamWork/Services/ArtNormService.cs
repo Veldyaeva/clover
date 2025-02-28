@@ -90,7 +90,7 @@ namespace SewingProduction.Services
         /// загрузка артикулов для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public Task<DataTable> GetArtNormDataCurrent(int kod, bool all)
+        public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
         {
             string query = "";
             if (all)
@@ -101,7 +101,8 @@ namespace SewingProduction.Services
             {
                 query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
+            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
+            return (List<ArtNormN>)result;
         }
 
         public Task<DataTable> GetArtNormDataCurrent(string art)
