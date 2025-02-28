@@ -28,8 +28,6 @@ namespace SewingProduction.form
         // Для тестов:
         //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
         private ToolTip toolTip = new ToolTip();
-        bool isBusy = false;
-
         public editFio(string idFIO, string openType)
         {
             InitializeComponent();
