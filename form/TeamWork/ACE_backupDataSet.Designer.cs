@@ -738,8 +738,6 @@ namespace SewingProduction.form.TeamWork {
             
             private global::System.Data.DataColumn columnarh;
             
-          //  private global::System.Data.DataColumn columnstat;
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public art_norm_nDataTable() {
@@ -957,14 +955,6 @@ namespace SewingProduction.form.TeamWork {
                 }
             }
             
-            //[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            //[global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            //public global::System.Data.DataColumn statColumn {
-            //    get {
-            //        return this.columnstat;
-            //    }
-            //}
-            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
@@ -1023,9 +1013,9 @@ namespace SewingProduction.form.TeamWork {
                         System.DateTime data_obn, 
                         int sek_kr, 
                         int slogn, 
+                        int annID, 
                         status_annRow parentstatus_annRowBystatus_ann_art_norm_n, 
-                        bool arh, 
-                        string stat) {
+                        bool arh) {
                 art_norm_nRow rowart_norm_nRow = ((art_norm_nRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         kod,
@@ -1048,7 +1038,7 @@ namespace SewingProduction.form.TeamWork {
                         data_obn,
                         sek_kr,
                         slogn,
-                        null,
+                        annID,
                         null,
                         arh};
                 if ((parentstatus_annRowBystatus_ann_art_norm_n != null)) {
@@ -1057,13 +1047,6 @@ namespace SewingProduction.form.TeamWork {
                 rowart_norm_nRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowart_norm_nRow);
                 return rowart_norm_nRow;
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-            public art_norm_nRow FindByannID(int annID) {
-                return ((art_norm_nRow)(this.Rows.Find(new object[] {
-                            annID})));
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1158,16 +1141,14 @@ namespace SewingProduction.form.TeamWork {
                 this.columnarh = new global::System.Data.DataColumn("arh", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnarh);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
-                                this.columnannID}, true));
+                                this.columnannID}, false));
                 this.columnkod.MaxLength = 7;
                 this.columngrup.MaxLength = 35;
                 this.columnarticul.MaxLength = 25;
                 this.columnmod.MaxLength = 50;
-                this.columnannID.AutoIncrement = true;
                 this.columnannID.AutoIncrementSeed = -1;
                 this.columnannID.AutoIncrementStep = -1;
                 this.columnannID.AllowDBNull = false;
-                this.columnannID.ReadOnly = true;
                 this.columnannID.Unique = true;
             }
             
@@ -5345,7 +5326,7 @@ namespace SewingProduction.form.TeamWork {
                     this[this.tableart_norm_n.arhColumn] = value;
                 }
             }
-                        
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public status_annRow status_annRow {
@@ -8148,7 +8129,6 @@ namespace SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("annID", "annID");
             tableMapping.ColumnMappings.Add("status", "status");
             tableMapping.ColumnMappings.Add("arh", "arh");
-            tableMapping.ColumnMappings.Add("stat", "stat");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -8182,7 +8162,7 @@ namespace SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString1;
+            this._connection.ConnectionString = global::SewingProduction.Properties.Settings.Default.ACEConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -8191,11 +8171,9 @@ namespace SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = @"SELECT        art_norm_n.kod, art_norm_n.grup, art_norm_n.articul, art_norm_n.mod, art_norm_n.sek_shv, art_norm_n.sek_vyaz5, art_norm_n.sek_vyaz6, art_norm_n.sek_vyaz7, art_norm_n.sek_vyaz10, art_norm_n.sek_vyaz12, 
-                         art_norm_n.sek_vyazo, art_norm_n.sek_vyaz, art_norm_n.sek, art_norm_n.komment, art_norm_n.data_sozd, art_norm_n.diz, art_norm_n.constr, art_norm_n.data_obn, art_norm_n.sek_kr, art_norm_n.slogn, art_norm_n.annID, 
-                         art_norm_n.status, art_norm_n.arh, status_ann.name AS stat
-FROM            art_norm_n CROSS JOIN
-                         status_ann";
+            this._commandCollection[0].CommandText = "SELECT        kod, grup, articul, mod, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, " +
+                "sek_vyaz10, sek_vyaz12, sek_vyazo, sek_vyaz, sek, komment, data_sozd, diz, const" +
+                "r, data_obn, sek_kr, slogn, annID, status, arh\r\nFROM            art_norm_n";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -8250,181 +8228,6 @@ FROM            art_norm_n CROSS JOIN
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         public virtual int Update(global::System.Data.DataRow[] dataRows) {
             return this.Adapter.Update(dataRows);
-        }
-        
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
-        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
-        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(
-                    string kod, 
-                    string grup, 
-                    string articul, 
-                    string mod, 
-                    global::System.Nullable<int> sek_shv, 
-                    global::System.Nullable<int> sek_vyaz5, 
-                    global::System.Nullable<int> sek_vyaz6, 
-                    global::System.Nullable<int> sek_vyaz7, 
-                    global::System.Nullable<int> sek_vyaz10, 
-                    global::System.Nullable<int> sek_vyaz12, 
-                    global::System.Nullable<int> sek_vyazo, 
-                    global::System.Nullable<int> sek_vyaz, 
-                    global::System.Nullable<int> sek, 
-                    string komment, 
-                    global::System.Nullable<global::System.DateTime> data_sozd, 
-                    global::System.Nullable<int> diz, 
-                    global::System.Nullable<int> constr, 
-                    global::System.Nullable<global::System.DateTime> data_obn, 
-                    global::System.Nullable<int> sek_kr, 
-                    global::System.Nullable<int> slogn, 
-                    global::System.Nullable<int> status, 
-                    global::System.Nullable<bool> arh) {
-            if ((kod == null)) {
-                this.Adapter.InsertCommand.Parameters[0].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[0].Value = ((string)(kod));
-            }
-            if ((grup == null)) {
-                this.Adapter.InsertCommand.Parameters[1].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[1].Value = ((string)(grup));
-            }
-            if ((articul == null)) {
-                this.Adapter.InsertCommand.Parameters[2].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(articul));
-            }
-            if ((mod == null)) {
-                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(mod));
-            }
-            if ((sek_shv.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[4].Value = ((int)(sek_shv.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[4].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz5.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[5].Value = ((int)(sek_vyaz5.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[5].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz6.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[6].Value = ((int)(sek_vyaz6.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[6].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz7.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[7].Value = ((int)(sek_vyaz7.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[7].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz10.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[8].Value = ((int)(sek_vyaz10.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[8].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz12.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[9].Value = ((int)(sek_vyaz12.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[9].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyazo.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[10].Value = ((int)(sek_vyazo.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[10].Value = global::System.DBNull.Value;
-            }
-            if ((sek_vyaz.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[11].Value = ((int)(sek_vyaz.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[11].Value = global::System.DBNull.Value;
-            }
-            if ((sek.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[12].Value = ((int)(sek.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[12].Value = global::System.DBNull.Value;
-            }
-            if ((komment == null)) {
-                this.Adapter.InsertCommand.Parameters[13].Value = global::System.DBNull.Value;
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[13].Value = ((string)(komment));
-            }
-            if ((data_sozd.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[14].Value = ((System.DateTime)(data_sozd.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[14].Value = global::System.DBNull.Value;
-            }
-            if ((diz.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[15].Value = ((int)(diz.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[15].Value = global::System.DBNull.Value;
-            }
-            if ((constr.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[16].Value = ((int)(constr.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[16].Value = global::System.DBNull.Value;
-            }
-            if ((data_obn.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[17].Value = ((System.DateTime)(data_obn.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[17].Value = global::System.DBNull.Value;
-            }
-            if ((sek_kr.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[18].Value = ((int)(sek_kr.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[18].Value = global::System.DBNull.Value;
-            }
-            if ((slogn.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[19].Value = ((int)(slogn.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[19].Value = global::System.DBNull.Value;
-            }
-            if ((status.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[20].Value = ((int)(status.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[20].Value = global::System.DBNull.Value;
-            }
-            if ((arh.HasValue == true)) {
-                this.Adapter.InsertCommand.Parameters[21].Value = ((bool)(arh.Value));
-            }
-            else {
-                this.Adapter.InsertCommand.Parameters[21].Value = global::System.DBNull.Value;
-            }
-            global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
-            if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
-                        != global::System.Data.ConnectionState.Open)) {
-                this.Adapter.InsertCommand.Connection.Open();
-            }
-            try {
-                int returnValue = this.Adapter.InsertCommand.ExecuteNonQuery();
-                return returnValue;
-            }
-            finally {
-                if ((previousConnectionState == global::System.Data.ConnectionState.Closed)) {
-                    this.Adapter.InsertCommand.Connection.Close();
-                }
-            }
         }
     }
     

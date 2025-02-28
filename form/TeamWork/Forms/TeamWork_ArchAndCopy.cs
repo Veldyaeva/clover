@@ -28,10 +28,10 @@ namespace SewingProduction.form
 
         private void TeamWork_ArchAndCopy_Load(object sender, EventArgs e)
         {
-            LoadGridControlData(gridControl1, bindingSourceRasz, _artNormService.GetRelatedNormRasz(_id));
-            LoadGridControlData(gridControl3, bindingSourceRask, _artNormService.GetRelatedNormRask(_id));
-            LoadGridControlData(gridControl4, bindingSourceKont, _artNormService.GetRelatedNormKont(_id));
-            LoadGridControlData(gridControl5, bindingSourceDop, _artNormService.GetRelatedNormDopObr(_id));
+            //LoadGridControlData(gridControl1, bindingSourceRasz, await _artNormService.GetRelatedNormRasz(_id));
+            //LoadGridControlData(gridControl3, bindingSourceRask, await _artNormService.GetRelatedNormRask(_id));
+            //LoadGridControlData(gridControl4, bindingSourceKont, await _artNormService.GetRelatedNormKont(_id));
+            //LoadGridControlData(gridControl5, bindingSourceDop, await _artNormService.GetRelatedNormDopObr(_id));
 
         }
         private void LoadGridControlData(GridControl grid, BindingSource source, DataTable data)

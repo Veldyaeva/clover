@@ -45,20 +45,13 @@ namespace SewingProduction.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.aCEDataSet = new SewingProduction.form.TeamWork.ACE_backupDataSet();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.TabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            this.gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.fioBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colfio = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coltab = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label6 = new SewingProduction.CustomLabel();
             this.designerComboBox = new SewingProduction.CustomComboBox();
-            this.fioBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.constructorComboBox = new SewingProduction.CustomComboBox();
             this.label7 = new SewingProduction.CustomLabel();
             this.aproovmentBtn = new SewingProduction.CustomButton();
@@ -236,18 +229,15 @@ namespace SewingProduction.Forms
             this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.artnormnBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.art_norm_nTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.art_norm_nTableAdapter();
             this.norm_raszTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
             this.norm_raskTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
             this.norm_kontTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
             this.norm_dop_obrTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.sp_articulTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter();
-            this.fioTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.fioTableAdapter();
             this.sp_articulTableAdapter1 = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.sp_articulTableAdapter();
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
             this.TabPage1.SuspendLayout();
@@ -256,10 +246,6 @@ namespace SewingProduction.Forms
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).BeginInit();
             this.panelControl7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioBindingSource1)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -357,11 +343,6 @@ namespace SewingProduction.Forms
             new DevExpress.XtraEditors.Controls.EditorButton()});
             this.repositoryItemButtonEdit2.Name = "repositoryItemButtonEdit2";
             // 
-            // aCEDataSet
-            // 
-            this.aCEDataSet.DataSetName = "ACEDataSet";
-            this.aCEDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // xtraTabControl1
             // 
             this.xtraTabControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -432,7 +413,6 @@ namespace SewingProduction.Forms
             // 
             // panelControl7
             // 
-            this.panelControl7.Controls.Add(this.gridLookUpEdit1);
             this.panelControl7.Controls.Add(this.label6);
             this.panelControl7.Controls.Add(this.designerComboBox);
             this.panelControl7.Controls.Add(this.constructorComboBox);
@@ -442,52 +422,6 @@ namespace SewingProduction.Forms
             this.panelControl7.Name = "panelControl7";
             this.panelControl7.Size = new System.Drawing.Size(153, 152);
             this.panelControl7.TabIndex = 22;
-            // 
-            // gridLookUpEdit1
-            // 
-            this.gridLookUpEdit1.Location = new System.Drawing.Point(-3, 103);
-            this.gridLookUpEdit1.Name = "gridLookUpEdit1";
-            this.gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.gridLookUpEdit1.Properties.DataSource = this.fioBindingSource;
-            this.gridLookUpEdit1.Properties.DisplayMember = "fio";
-            this.gridLookUpEdit1.Properties.PopupView = this.gridLookUpEdit1View;
-            this.gridLookUpEdit1.Properties.ValueMember = "f_id";
-            this.gridLookUpEdit1.Size = new System.Drawing.Size(153, 20);
-            this.gridLookUpEdit1.TabIndex = 23;
-            this.gridLookUpEdit1.Visible = false;
-            // 
-            // fioBindingSource
-            // 
-            this.fioBindingSource.DataMember = "fio";
-            this.fioBindingSource.DataSource = this.aCEDataSet;
-            // 
-            // gridLookUpEdit1View
-            // 
-            this.gridLookUpEdit1View.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colfio,
-            this.coltab});
-            this.gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridLookUpEdit1View.Name = "gridLookUpEdit1View";
-            this.gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            this.gridLookUpEdit1View.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
-            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colfio, DevExpress.Data.ColumnSortOrder.Ascending)});
-            // 
-            // colfio
-            // 
-            this.colfio.FieldName = "fio";
-            this.colfio.Name = "colfio";
-            this.colfio.SortMode = DevExpress.XtraGrid.ColumnSortMode.DisplayText;
-            this.colfio.Visible = true;
-            this.colfio.VisibleIndex = 0;
-            // 
-            // coltab
-            // 
-            this.coltab.FieldName = "tab";
-            this.coltab.Name = "coltab";
-            this.coltab.Visible = true;
-            this.coltab.VisibleIndex = 1;
             // 
             // label6
             // 
@@ -504,8 +438,6 @@ namespace SewingProduction.Forms
             // designerComboBox
             // 
             this.designerComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.designerComboBox.DataSource = this.fioBindingSource1;
-            this.designerComboBox.DisplayMember = "fio";
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
@@ -513,14 +445,10 @@ namespace SewingProduction.Forms
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(155, 24);
             this.designerComboBox.TabIndex = 16;
-            this.designerComboBox.ValueMember = "tab";
             // 
             // constructorComboBox
             // 
             this.constructorComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.constructorComboBox.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.fioBindingSource, "tab", true));
-            this.constructorComboBox.DataSource = this.fioBindingSource;
-            this.constructorComboBox.DisplayMember = "fio";
             this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorComboBox.FormattingEnabled = true;
@@ -528,7 +456,6 @@ namespace SewingProduction.Forms
             this.constructorComboBox.Name = "constructorComboBox";
             this.constructorComboBox.Size = new System.Drawing.Size(155, 24);
             this.constructorComboBox.TabIndex = 15;
-            this.constructorComboBox.ValueMember = "tab";
             // 
             // label7
             // 
@@ -716,6 +643,7 @@ namespace SewingProduction.Forms
             this.archiveCheckBox.TabIndex = 3;
             this.archiveCheckBox.Text = "Архивные";
             this.archiveCheckBox.UseVisualStyleBackColor = true;
+            this.archiveCheckBox.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // actualCheckBox
             // 
@@ -730,6 +658,7 @@ namespace SewingProduction.Forms
             this.actualCheckBox.TabIndex = 2;
             this.actualCheckBox.Text = "Актуальные";
             this.actualCheckBox.UseVisualStyleBackColor = true;
+            this.actualCheckBox.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // preliminaryCheckBox
             // 
@@ -744,6 +673,7 @@ namespace SewingProduction.Forms
             this.preliminaryCheckBox.TabIndex = 1;
             this.preliminaryCheckBox.Text = "Предварительные";
             this.preliminaryCheckBox.UseVisualStyleBackColor = true;
+            this.preliminaryCheckBox.CheckedChanged += new System.EventHandler(this.Filter_CheckedChanged);
             // 
             // panel2
             // 
@@ -796,11 +726,6 @@ namespace SewingProduction.Forms
             this.ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.ANNgridView});
             this.ANNgridControl.Leave += new System.EventHandler(this.gridControl2_Leave);
-            // 
-            // artnormnBindingSource
-            // 
-            this.artnormnBindingSource.DataMember = "art_norm_n";
-            this.artnormnBindingSource.DataSource = this.aCEDataSet;
             // 
             // ANNgridView
             // 
@@ -1320,11 +1245,6 @@ namespace SewingProduction.Forms
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
             // 
-            // normraszBindingSource
-            // 
-            this.normraszBindingSource.DataMember = "norm_rasz";
-            this.normraszBindingSource.DataSource = this.aCEDataSet;
-            // 
             // gridView1
             // 
             this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -1649,8 +1569,6 @@ namespace SewingProduction.Forms
             // 
             // commentRichTextBox
             // 
-            this.commentRichTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.aCEDataSet, "art_norm_n.komment", true));
-            this.commentRichTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Tag", this.artnormnBindingSource, "komment", true));
             this.commentRichTextBox.Location = new System.Drawing.Point(3, 726);
             this.commentRichTextBox.Name = "commentRichTextBox";
             this.commentRichTextBox.Size = new System.Drawing.Size(530, 55);
@@ -2419,10 +2337,6 @@ namespace SewingProduction.Forms
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 3;
             // 
-            // art_norm_nTableAdapter
-            // 
-            this.art_norm_nTableAdapter.ClearBeforeFill = true;
-            // 
             // norm_raszTableAdapter
             // 
             this.norm_raszTableAdapter.ClearBeforeFill = true;
@@ -2442,10 +2356,6 @@ namespace SewingProduction.Forms
             // sp_articulTableAdapter
             // 
             this.sp_articulTableAdapter.ClearBeforeFill = true;
-            // 
-            // fioTableAdapter
-            // 
-            this.fioTableAdapter.ClearBeforeFill = true;
             // 
             // sp_articulTableAdapter1
             // 
@@ -2468,7 +2378,6 @@ namespace SewingProduction.Forms
             this.Load += new System.EventHandler(this.TeamWorkForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCEDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
             this.xtraTabControl1.ResumeLayout(false);
             this.TabPage1.ResumeLayout(false);
@@ -2478,10 +2387,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.panelControl7)).EndInit();
             this.panelControl7.ResumeLayout(false);
             this.panelControl7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioBindingSource1)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -2583,9 +2488,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private ACE_backupDataSet aCEDataSet;
-        private System.Windows.Forms.BindingSource artnormnBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.art_norm_nTableAdapter art_norm_nTableAdapter;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
         private System.Windows.Forms.BindingSource normraskBindingSource;
@@ -2790,7 +2692,6 @@ namespace SewingProduction.Forms
         private BindingSource sparticulBindingSource1;
         private ToolStrip fillBy1ToolStrip;
         private ToolStripButton fillBy1ToolStripButton;
-        private BindingSource artnormnBindingSource1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView9;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
@@ -2847,9 +2748,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
         private DevExpress.XtraGrid.Columns.GridColumn kolNZP;
         private DevExpress.XtraGrid.Columns.GridColumn colannId2;
-        private BindingSource fioBindingSource;
-        private form.TeamWork.ACE_backupDataSetTableAdapters.fioTableAdapter fioTableAdapter;
-        private BindingSource fioBindingSource1;
         private DevExpress.XtraGrid.Columns.GridColumn colgrup;
         private DevExpress.XtraGrid.Columns.GridColumn colarticul;
         private DevExpress.XtraGrid.Columns.GridColumn colmod;
@@ -2914,10 +2812,6 @@ namespace SewingProduction.Forms
         private CustomCheckBox loadAllCheckBox;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView12;
         private TableLayoutPanel tableLayoutPanel5;
-        private GridLookUpEdit gridLookUpEdit1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
-        private DevExpress.XtraGrid.Columns.GridColumn colfio;
-        private DevExpress.XtraGrid.Columns.GridColumn coltab;
         private PanelControl panelControl7;
         private CustomLabel label6;
         private CustomComboBox designerComboBox;
@@ -2945,5 +2839,7 @@ namespace SewingProduction.Forms
         private RadioButton kode;
         private RadioButton group;
         private CustomTextBox buffer;
+        private BindingSource artnormnBindingSource;
+        private BindingSource artnormnBindingSource1;
     }
 }

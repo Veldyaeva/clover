@@ -51,7 +51,7 @@ namespace SewingProduction.form
             gridControl2.DataSource = table2;
             gridControl2.DataSource = table3;
             gridControl3.DataSource = table4;
-            norm_raszTableAdapter.Fill(aCE_backupDataSet.norm_rasz); // Загружаем данные из БД в DataSet
+            //norm_raszTableAdapter.Fill(aCE_backupDataSet.norm_rasz); // Загружаем данные из БД в DataSet
             normraszBindingSource.DataSource = aCE_backupDataSet.norm_rasz; // Привязываем BindingSource к DataSet
             gridControl5.DataSource = normraszBindingSource;
             //_raszDataTable = new DataTable();
@@ -183,14 +183,42 @@ namespace SewingProduction.form
                         gridView5.SetRowCellValue(newRowHandle, "text_ob", selectedData.Text_ob);
                         gridView5.SetRowCellValue(newRowHandle, "text_vyaz", selectedData.Text_vyaz);
 
-                        gridView5.UpdateCurrentRow();
-                        SaveData();
-                        int realRowHandle = gridView5.LocateByValue("annId", _newAnnId);
-                        if (realRowHandle >= 0)
+                        gridView5.UpdateCurrentRow();//применяем изменения
+                        normraszBindingSource.EndEdit();//заканчиваем редактирование
+                        SaveData();//сохраняем данные в бд
+                                   // Обновляем `DataSet`
+                        norm_raszTableAdapter.Update(aCE_backupDataSet.norm_rasz);
+                        norm_raszTableAdapter.Fill(aCE_backupDataSet.norm_rasz);
+                        gridControl5.RefreshDataSource();
+                        gridView5.RefreshData();
+
+                        //// Ждём обновления данных перед поиском строки
+                        //Task.Delay(100).Wait();
+
+                        //// Ищем строку в `GridView`
+                        //int realRowHandle = gridView5.LocateByValue("annId", _newAnnId);
+                        //if (realRowHandle >= 0)
+                        //{
+                        //    gridView5.FocusedRowHandle = realRowHandle;
+                        //    gridView5.ShowPopupEditForm();
+                        //}
+
+                        // Ожидаем обновления данных перед поиском строки
+                        Task.Delay(100).ContinueWith(_ =>
                         {
-                            gridView5.FocusedRowHandle = realRowHandle;
-                            gridView5.ShowPopupEditForm();
-                        }
+                            if (!gridControl5.IsDisposed && gridControl5.IsHandleCreated)
+                            {
+                                Invoke(new Action(() =>
+                                {
+                                    int realRowHandle = gridView5.LocateByValue("annId", _newAnnId);
+                                    if (realRowHandle >= 0)
+                                    {
+                                        gridView5.FocusedRowHandle = realRowHandle;
+                                        gridView5.ShowPopupEditForm();
+                                    }
+                                }));
+                            }
+                        });
                     }
                 }
                 else
@@ -207,6 +235,11 @@ namespace SewingProduction.form
             normraszBindingSource.EndEdit(); // Применяем изменения из BindingSource в DataTable
             norm_raszTableAdapter.Update(aCE_backupDataSet.norm_rasz); // Отправляем изменения в БД
             gridControl5.RefreshDataSource();
+        }
+
+        private void gridView5_EditFormHidden(object sender, EditFormHiddenEventArgs e)
+        {
+            this.DialogResult = DialogResult.None;
         }
 
 

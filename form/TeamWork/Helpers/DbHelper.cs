@@ -1,4 +1,5 @@
-﻿using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+﻿using DevExpress.XtraCharts.Native;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,6 +44,29 @@ namespace SewingProduction.Helpers
         /// <param name="query">запрос</param>
         /// <param name="parameters">параметры</param>
         /// <returns>DataTable</returns>
+        public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                using (var command = new SqlCommand(query, connection))
+                {
+                        DataTable table = new DataTable();
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                        await connection.OpenAsync(); // Асинхронное подключение к БД
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(table);
+                        return table;
+                    }
+                }
+            }
+        }
         public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
         {
             var dt = new DataTable();
@@ -66,7 +90,6 @@ namespace SewingProduction.Helpers
             }
             return dt;
         }
-
         /// <summary>
         /// Выполнение SQL запроса
         /// </summary>
@@ -91,7 +114,7 @@ namespace SewingProduction.Helpers
             }
         }
 
-        public int ExecuteScalar(string query, Dictionary<string, object> parameters = null)
+        public async Task<int> ExecuteScalar(string query, Dictionary<string, object> parameters = null)
         {
             int res = -1;
             using (var connection = new SqlConnection(_connectionString))
