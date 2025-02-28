@@ -19,6 +19,11 @@ using DevExpress.CodeParser;
 using SewingProduction.form.TeamWork;
 using SewingProduction.form.TeamWork.Models;
 using DevExpress.XtraBars.Customization;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using NLog;
+using System.Collections;
+using System.Drawing;
 
 
 namespace SewingProduction.Forms
@@ -997,6 +1002,294 @@ namespace SewingProduction.Forms
             }
 
         }
+        #endregion
+
+        #region текущие работы - требуют увязки
+        /// <summary>
+        /// Загрузка вкладки "текущие работы"
+        /// </summary>
+        void CurrentWorks_Load()
+        {
+            //загрузка  таблицы РТ для увязки (текущие работы)
+            try
+            {
+                //артикулы для увязки
+                var relatedData = _artNormService.GetRelatedSpArt(0);
+                BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+                // Заполняем myDataList данными из DataTable 
+                foreach (object row in relatedData.Rows)
+                {
+                    try
+                    {
+                        artDataList.Add(new MyDataART
+                        {
+                            kod = Convert.ToInt32(row["kod"]),
+                            articul = row["articul"].ToString(),
+                            group = row["grup"].ToString(),
+                            model = row["mod"].ToString(),
+                            // binded_art = row["binded_art"].ToString(),
+                            IsChecked = false
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    ;
+                }
+
+                customGridControl1.DataSource = artDataList;
+
+                //РТ для увязки
+                relatedData = _artNormService.GetArtNormDataCurrent();
+
+                BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+                // Заполняем myDataList данными из DataTable 
+                foreach (DataRow row in relatedData.Rows)
+                {
+                    try
+                    {
+                        myDataList.Add(new MyDataANN
+                        {
+                            annId = Convert.ToInt32(row["annId"]),
+                            kod = Convert.ToInt32(row["kod"]),
+                            articul = row["articul"].ToString(),
+                            status = Convert.ToInt32(row["status"]),
+                            stat = row["stat"].ToString(),
+                            group = row["grup"].ToString(),
+                            model = row["mod"].ToString(),
+                            IsChecked = false
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    ;
+                }
+                customGridControl2.DataSource = myDataList;
+
+                //norm_rasz
+                int annId = 0;
+                var view = customGridControl2.MainView as GridView;
+                if (view != null)
+                {
+                    annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
+                }
+
+                relatedData = _artNormService.GetRelatedNormRasz(annId);
+                normraszBindingSource1.DataSource = relatedData;
+                customGridControl3.DataSource = normraszBindingSource1;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        //загрузка norm_rasz 
+        private void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            int annId = 0;
+            var view = gridView8;//customGridControl2.MainView as GridView;
+            if (view != null)
+            {
+                annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
+            }
+
+            var relatedData = _artNormService.GetRelatedNormRasz(annId);
+            normraszBindingSource1.DataSource = relatedData;
+            customGridControl3.DataSource = normraszBindingSource1;
+
+        }
+
+        /// <summary>
+        /// обработка клика на заголовке, 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column == gridView8.Columns["IsChecked"])
+            {
+                int rowHandle = e.RowHandle;
+                MyDataANN data = gridView8.GetRow(rowHandle) as MyDataANN;
+
+                if (data != null)
+                {
+                    data.IsChecked = (bool)e.Value;
+                    if (data.IsChecked)
+                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
+                        for (int i = 0; i < gridView8.RowCount; i++)
+                        {
+                            if (i != rowHandle)
+                            {
+                                MyDataANN otherData = gridView8.GetRow(i) as MyDataANN;
+                                if (otherData != null)
+                                {
+                                    if (otherData.IsChecked)
+                                        otherData.IsChecked = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                gridView8.RefreshData();
+            }
+
+        }
+
+        //обработка клика на заголовке
+        private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column == gridView7.Columns["IsChecked"])
+            {
+                int rowHandle = e.RowHandle;
+                MyDataART data = gridView7.GetRow(rowHandle) as MyDataART;
+
+                if (data != null)
+                {
+                    data.IsChecked = (bool)e.Value;
+                    if (data.IsChecked)
+                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
+                        for (int i = 0; i < gridView7.RowCount; i++)
+                        {
+                            if (i != rowHandle)
+                            {
+                                MyDataART otherData = gridView7.GetRow(i) as MyDataART;
+                                if (otherData != null)
+                                {
+                                    if (otherData.IsChecked)
+                                        otherData.IsChecked = false;
+                                }
+                            }
+                        }
+                    }
+                }
+                gridView7.RefreshData();
+            }
+
+        }
+
+        #region headerCheckBox
+        private bool isHeaderChecked = false; // Состояние CheckBox в заголовке
+        private Dictionary<GridView, bool> gridViewStates = new Dictionary<GridView, bool>();//словарь состояний CheckBox
+        //отрисовка чекБокса в заголовке столбца
+        private void gridView8_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
+        {
+            // DrawCheckBox(e);
+        }
+
+        private void gridView7_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
+        {
+            // DrawCheckBox(e);
+        }
+        private void gridView9_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
+        {
+            //DrawCheckBox(e);
+        }
+        private void DrawCheckBox(ColumnHeaderCustomDrawEventArgs e)
+        {
+            if (e.Column != null && e.Column.FieldName == "IsChecked") // Убедимся, что это нужный столбец
+            {
+                // Очищаем стандартную отрисовку заголовка
+                e.Handled = true;
+
+                // Отрисовка заголовка
+                e.Painter.DrawObject(e.Info);
+
+                // Отрисовка CheckBox
+                // Получаем размеры области заголовка
+                Rectangle rect = e.Bounds;
+                CheckBoxRenderer.DrawCheckBox(
+                    e.Graphics,
+                    new Point(rect.Left + (rect.Width - 16) / 2, rect.Y + (rect.Height / 2) - 8),   // Рассчитываем позицию чекбокса по центру
+                    isHeaderChecked ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal : System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal
+                );
+            }
+        }
+        private List<MyDataART> GetCheckedRows<MyDataART>(GridView view)
+        {
+            BindingList<MyDataART> dataSource = view.DataSource as BindingList<MyDataART>;
+            if (dataSource == null) return new List<MyDataART>(); // Обработка null
+            List<MyDataART> list = new List<MyDataART>();
+            foreach (MyDataART row in dataSource)
+            {
+                //if (row.IsChecked = true)
+                {
+                    list.Add(row);
+
+                }
+            }
+            return new List<MyDataART>();//
+                                         //dataSource.Where(item => item.IsChecked).ToList();
+        }
+        private void AddCheckBoxToHeader(GridView gridView)
+        {
+            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit headerCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            GridColumn column = gridView.Columns["IsChecked"];
+            column.OptionsColumn.AllowEdit = true;
+
+            column.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            column.ColumnEdit = headerCheckEdit;
+
+
+        }
+        //Обработка нажатия на заголовке чекБоксов
+        private void CheckBoxMouseDown(object sender, MouseEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view == null) return;
+            GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
+
+            if (!hitInfo.InColumn || hitInfo.Column.FieldName != "IsChecked") return;
+            isHeaderChecked = !isHeaderChecked;
+            //UpdateAllRows(view, isHeaderChecked);
+            //view.RefreshData();
+            // Получаем или устанавливаем состояние для текущего GridView
+            if (!gridViewStates.TryGetValue(view, out bool isChecked))
+            {
+                isChecked = false; // Значение по умолчанию, если GridView еще не был обработан
+            }
+
+            isChecked = !isChecked;
+            gridViewStates[view] = isChecked; // Сохраняем новое состояние
+
+            UpdateAllRows(view, isChecked);
+            view.RefreshData();
+        }
+
+        //обновление статуса CheckBox у всех строк таблицы
+        private void UpdateAllRows(GridView view, bool isChecked)
+        {
+            IList dataSource = view.DataSource as IList;
+            if (dataSource == null) return;
+
+            foreach (var item in dataSource)
+            {
+                if (item != null)
+                {
+                    var property = item.GetType().GetProperty("IsChecked");
+                    if (property != null && property.CanWrite)
+                    {
+                        property.SetValue(item, isChecked);
+                    }
+                }
+            }
+        }
+        //переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
+        private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
+        {
+            if (e.Column.FieldName == "IsChecked")
+            {
+                e.Handled = true; // Отменяем сортировку по колонке "IsChecked"
+            }
+        }
+
+        #endregion
         #endregion
 
     }
