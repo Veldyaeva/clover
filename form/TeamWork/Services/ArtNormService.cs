@@ -6,7 +6,7 @@ using System.Data;
 using DevExpress.CodeParser;
 using SewingProduction.form;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using SewingProduction.form.TeamWork.Models;
+using SewingProduction.Models;
 using SewingProduction.BdContext;
 using System.Windows.Forms;
 using System.Threading.Tasks;
@@ -102,16 +102,17 @@ namespace SewingProduction.Services
             return (List<ArtNormN>)result;
         }
 
-        public Task<DataTable> GetArtNormDataCurrent(string art)
+        public async Task<List<ArtNormN>> GetArtNormDataCurrent(string art)
         {
             string query = $"SELECT * FROM artNormNView WHERE status<{Status.Archive} AND articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "art", art + "%" } });
+            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "art", art + "%" } });
+            return result as List<ArtNormN>;
         }
-        public void ResetAnnId(int kodd_rt)
+        public async Task ResetAnnId(int kodd_rt)
         {
             // string query = "UPDATE sp_articul SET annId = NULL WHERE kod = @kod";
             string query = "UPDATE sp_articul SET annId = NULL WHERE kod IN (SELECT kod FROM view_sp_articul WHERE kodd_rt = @kod)";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", kodd_rt } });
+           await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kodd_rt } });
         }
 
         public void UpdateAnnId(int kod, int annId)
@@ -121,7 +122,11 @@ namespace SewingProduction.Services
         }
 
         // Получение связанных данных
-
+        /// <summary>
+        /// Получает данные из таблицы Norm_rasz (dataTable) 
+        /// </summary>
+        /// <param name="annId">идентификатор РТ</param>
+        /// <returns></returns>
         public Task<DataTable> GetRelatedNormRasz(int annId)
         {
             string query = "SELECT annId, n, n1, razryd, text, sek, kod, kod_o, kod_ob FROM norm_rasz WHERE annId = @annId";
@@ -159,7 +164,7 @@ namespace SewingProduction.Services
         /// annId!=null => загрузка артикулов с НЗП процедурой GetNZPByKoddRT 
         /// </param>
         /// <returns></returns>
-        public Task<DataTable> GetRelatedSpArt(int annId)
+        public async Task<List<MyDataART>> GetRelatedSpArt(int annId)
         {
             //string query = "";
             //if (annId == 0)
@@ -172,8 +177,8 @@ namespace SewingProduction.Services
             ? "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL" //"EXEC dbo.GetNZPByKoddRT @annId"
             : "EXEC dbo.GetNZPByKoddRT @annId";
 
-
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            return (List<MyDataART>)result;
         }
         /// <summary>
         /// Получение пути к файлу изображения
@@ -240,7 +245,7 @@ OUTPUT INSERTED.annID
      {"@slogn", row.Slogn },
      {"@arh" , row.Arh},
                 {"@status", row.Status } };
-            object result = await _dbHelper.ExecuteScalar(query, D);
+            object result = await _dbHelper.ExecuteScalarAsync(query, D);
 
             return result != null ? Convert.ToInt32(result) : -1;            //query = "SELECT * FROM sp_articul WHERE kod = @kod";
             //return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kod", kod } }).Rows[0];
@@ -280,7 +285,7 @@ OUTPUT INSERTED.annID
             {"@arh", newItem.Arh},
             {"@status", newItem.Status}
         };
- object result = _dbHelper.ExecuteScalar(query, parameters);
+                object result = _dbHelper.ExecuteScalar(query, parameters);
                 return result != null ? Convert.ToInt32(result) : -1;
             }
             catch (Exception ex)

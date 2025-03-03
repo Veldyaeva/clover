@@ -37,7 +37,7 @@ namespace SewingProduction.Helpers
             }
             return _globalConnectionString;
         }
-
+        #region async
         /// <summary>
         /// Выполнение SQL запроса, возвращает dataTable
         /// </summary>
@@ -67,6 +67,62 @@ namespace SewingProduction.Helpers
                 }
             }
         }
+
+        /// <summary>
+        /// Выполнение SQL запроса
+        /// </summary>
+        /// <param name="query">запрос</param>
+        /// <param name="parameters">параметры</param>
+        public async Task ExecuteNonQueryAsync(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                   await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+        /// <summary>
+        /// Выполняет запрос и возвращает число в результате 
+        /// </summary>
+        /// <param name="query">Запрос</param>
+        /// <param name="parameters">Список параметров</param>
+        /// <returns></returns>
+        public async Task<int> ExecuteScalarAsync(string query, Dictionary<string, object> parameters = null)
+        {
+            int res = -1;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+               await connection.OpenAsync();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                    object result = await command.ExecuteScalarAsync();
+                    if (result != null) { res = Convert.ToInt32(result); }
+                }
+            }
+            return res;
+        }
+
+
+        #endregion
+
+        #region sync
         public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
         {
             var dt = new DataTable();
@@ -114,7 +170,7 @@ namespace SewingProduction.Helpers
             }
         }
 
-        public async Task<int> ExecuteScalar(string query, Dictionary<string, object> parameters = null)
+        public int ExecuteScalar(string query, Dictionary<string, object> parameters = null)
         {
             int res = -1;
             using (var connection = new SqlConnection(_connectionString))
@@ -135,6 +191,7 @@ namespace SewingProduction.Helpers
             }
             return res;
         }
+        #endregion
     }
 }
 #endregion
