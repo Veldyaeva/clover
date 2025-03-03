@@ -57,7 +57,7 @@ namespace SewingProduction.Services
                 {
                     Kod = row["kod"].ToString(),
                     AnnID = Convert.ToInt32(row["annId"]),
-                    Grup = row["grup"].ToString(),
+                    Group = row["grup"].ToString(),
                     Articul = row["articul"].ToString(),
                     Mod = row["mod"].ToString(),
                     Sek = row["sek"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek"]),
@@ -224,7 +224,7 @@ OUTPUT INSERTED.annID
               VALUES (@kod, @grup, @articul, @mod, @sek_shv, @sek_vyaz5, @sek_vyaz6, @sek_vyaz7, @sek_vyaz10, @sek_vyaz12, @sek_vyazo, @sek_vyaz, @sek, @komment, @data_sozd, @diz, @constr, @data_obn, @sek_kr, @slogn, @arh, @status)";
             Dictionary<string, object> D = new Dictionary<string, object>  {
                 {"@kod", row.Kod},
-                {"@grup", row.Grup},
+                {"@grup", row.Group},
                 {"@articul", row.Articul},
                 {"@mod", row.Mod},
                 {"@sek_shv", row.SekShv},
@@ -263,7 +263,7 @@ OUTPUT INSERTED.annID
                 Dictionary<string, object> parameters = new Dictionary<string, object>
         {
             {"@kod", newItem.Kod},
-            {"@grup", newItem.Grup},
+            {"@grup", newItem.Group},
             {"@articul", newItem.Articul},
             {"@mod", newItem.Mod},
             {"@sek_shv", newItem.SekShv},
