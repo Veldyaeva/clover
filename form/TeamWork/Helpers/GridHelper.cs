@@ -1,13 +1,155 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Interfaces;
+using SewingProduction.Models;
 
 namespace SewingProduction.Helpers
 {
     public static class GridHelper
     {
+        #region
+        /// <summary>
+        /// Загружает данные в `GridControl` через `BindingSource` асинхронно.
+        /// </summary>
+        /// <param name="grid">GridControl, в который загружаются данные</param>
+        /// <param name="source">BindingSource для привязки данных</param>
+        /// <param name="data">DataTable с данными</param>
+        public static async Task LoadGridControlDataAsync(GridControl grid, BindingSource source, DataTable data)
+        {
+            await Task.Run(() =>
+            {
+                source.DataSource = data;
+            });
+
+            grid.Invoke((MethodInvoker)(() =>
+            {
+                grid.DataSource = source;
+                grid.RefreshDataSource();
+            }));
+        }
+
+        public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
+        {
+            await Task.Run(() =>
+            {
+                source.DataSource = data;
+            });
+
+            if (source.CurrencyManager?.Current is Control control && control.InvokeRequired)
+            {
+                control.Invoke((MethodInvoker)(() =>
+                {
+                    source.ResetBindings(false);
+                }));
+            }
+            else
+            {
+                source.ResetBindings(false);
+            }
+        }
+
+        /// <summary>
+        /// Применяет фильтр к `GridControl` асинхронно.
+        /// </summary>
+        /// <param name="grid">GridControl, который нужно отфильтровать</param>
+        /// <param name="annId">Идентификатор разделения труда</param>
+        public static async Task ApplyFilterAsync(GridControl grid, int annId)
+        {
+            await Task.Run(() =>
+            {
+                string filter = "annId = " + annId;
+                GridView view = (GridView)grid.Views[0];
+
+                view.BeginUpdate();
+                view.ActiveFilterString = filter;
+                view.EndUpdate();
+            });
+        }
+
+        /// <summary>
+        /// Загружает изображение в `PictureBox` по `annId` асинхронно.
+        /// </summary>
+        /// <param name="pictureBox">PictureBox для загрузки изображения</param>
+        /// <param name="data">DataTable с путем к изображению</param>
+        public static async Task LoadImageAsync(PictureBox pictureBox, DataTable data)
+        {
+            await Task.Run(() =>
+            {
+                if (data != null && data.Rows.Count > 0)
+                {
+                    pictureBox.Invoke((MethodInvoker)(() =>
+                    {
+                        pictureBox.ImageLocation = data.Rows[0]["pathpict"].ToString();
+                    }));
+                }
+            });
+        }
+
+
+        /// <summary>
+        /// Возвращает имя выбранного столбца для поиска.
+        /// </summary>
+        public static Task<string> GetSelectedColumnNameAsync(bool kode, bool articul, bool model, bool group)
+        {
+            return Task.FromResult(
+                kode ? "kod" :
+                articul ? "articul" :
+                model ? "mod" :
+                group ? "grup" :
+                string.Empty);
+        }
+        /// <summary>
+        /// Проверяет, загружены ли данные в GridView.
+        /// </summary>
+        /// <param name="view">GridView для проверки</param>
+        /// <returns>True, если данные загружены</returns>
+        public static Task<bool> IsDataTableLoadedAsync(GridView view)
+        {
+            return Task.FromResult(view.DataSource is BindingSource bindingSource &&
+                                   bindingSource.DataSource is DataTable dataTable &&
+                                   dataTable.Rows.Count > 0);
+        }
+        /// <summary>
+        /// Асинхронно снимает выделение всех строк, кроме текущей.
+        /// </summary>
+        public static async Task UpdateExclusiveCheckAsync<T>(GridControl grid, int rowHandle) where T : class
+        {
+            GridView gridView = grid.MainView as GridView;
+            if (grid.InvokeRequired)
+            {
+                grid.Invoke(new MethodInvoker(async () => await UpdateExclusiveCheckAsync<T>(grid, rowHandle)));
+                return;
+            }
+
+            await Task.Run(() =>
+            {
+                var selectedData = gridView.GetRow(rowHandle) as T;
+                if (selectedData is ICheckable checkableSelectedData)
+                {
+                    checkableSelectedData.IsChecked = true;
+
+                    for (int i = 0; i < gridView.RowCount; i++)
+                    {
+                        if (i != rowHandle)
+                        {
+                            var otherData = gridView.GetRow(i) as T;
+                            if (otherData is ICheckable checkableOtherData && checkableOtherData.IsChecked)
+                            {
+                                checkableOtherData.IsChecked = false;
+                            }
+                        }
+                    }
+                }
+                gridView.RefreshData();
+            });
+        }
+        #endregion
+
+        #region sync
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource`
         /// </summary>
@@ -104,7 +246,7 @@ namespace SewingProduction.Helpers
             }
             gridView.RefreshData();
         }
-
+        #endregion
     }
 }
 
