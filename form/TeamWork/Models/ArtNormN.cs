@@ -9,7 +9,7 @@ namespace SewingProduction.Models
     public class ArtNormN
     {
         public string Kod { get; set; }
-        public string Grup { get; set; }
+        public string Group { get; set; }
         public string Articul { get; set; }
         public string Mod { get; set; }
         public int SekShv { get; set; }
