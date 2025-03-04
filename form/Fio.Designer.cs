@@ -916,6 +916,8 @@
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpVed, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpOrg1C, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpDol1C, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.customButtonSpOrg, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.customButtonSpDol, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.customButtonPdrSP, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(447, 575);
@@ -999,9 +1001,9 @@
             this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
+            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 3);
             this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
+            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 29);
             this.customButtonSpOrg.TabIndex = 6;
             this.customButtonSpOrg.Text = "Справочник организаций";
             this.customButtonSpOrg.UseVisualStyleBackColor = false;
@@ -1019,9 +1021,9 @@
             this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 3);
             this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
+            this.customButtonSpDol.Size = new System.Drawing.Size(139, 29);
             this.customButtonSpDol.TabIndex = 5;
             this.customButtonSpDol.Text = "Справочник должностей";
             this.customButtonSpDol.UseVisualStyleBackColor = false;

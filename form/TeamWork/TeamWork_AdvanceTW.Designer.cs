@@ -30,6 +30,7 @@
         {
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.stackPanel2 = new DevExpress.Utils.Layout.StackPanel();
+            this.btnOK = new SewingProduction.CustomButton();
             this.label2 = new System.Windows.Forms.Label();
             this.ModelTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -111,6 +112,7 @@
             // 
             // stackPanel2
             // 
+            this.stackPanel2.Controls.Add(this.btnOK);
             this.stackPanel2.Controls.Add(this.label2);
             this.stackPanel2.Controls.Add(this.ModelTextBox);
             this.stackPanel2.Controls.Add(this.label3);
@@ -126,10 +128,27 @@
             this.stackPanel2.TabIndex = 0;
             this.stackPanel2.UseSkinIndents = true;
             // 
+            // btnOK
+            // 
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.btnOK.Btn = null;
+            this.btnOK.ComponentBackColor = System.Drawing.Color.Empty;
+            this.btnOK.ComponentFontColor = System.Drawing.Color.Empty;
+            this.btnOK.ComponentSize = new System.Drawing.Size(0, 0);
+            this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.btnOK.Location = new System.Drawing.Point(13, 0);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.Size = new System.Drawing.Size(75, 25);
+            this.btnOK.TabIndex = 8;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = false;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 6);
+            this.label2.Location = new System.Drawing.Point(93, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(44, 13);
             this.label2.TabIndex = 0;
@@ -137,16 +156,15 @@
             // 
             // ModelTextBox
             // 
-            this.ModelTextBox.Location = new System.Drawing.Point(63, 2);
+            this.ModelTextBox.Location = new System.Drawing.Point(142, 2);
             this.ModelTextBox.Name = "ModelTextBox";
-            this.ModelTextBox.ReadOnly = true;
             this.ModelTextBox.Size = new System.Drawing.Size(126, 21);
             this.ModelTextBox.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(194, 6);
+            this.label3.Location = new System.Drawing.Point(273, 6);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 13);
             this.label3.TabIndex = 1;
@@ -154,16 +172,15 @@
             // 
             // NameTextBox
             // 
-            this.NameTextBox.Location = new System.Drawing.Point(278, 2);
+            this.NameTextBox.Location = new System.Drawing.Point(357, 2);
             this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.ReadOnly = true;
             this.NameTextBox.Size = new System.Drawing.Size(131, 21);
             this.NameTextBox.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(414, 0);
+            this.label4.Location = new System.Drawing.Point(493, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(83, 26);
             this.label4.TabIndex = 2;
@@ -171,7 +188,7 @@
             // 
             // SecTimeTextBox
             // 
-            this.SecTimeTextBox.Location = new System.Drawing.Point(502, 2);
+            this.SecTimeTextBox.Location = new System.Drawing.Point(581, 2);
             this.SecTimeTextBox.Name = "SecTimeTextBox";
             this.SecTimeTextBox.ReadOnly = true;
             this.SecTimeTextBox.Size = new System.Drawing.Size(48, 21);
@@ -180,7 +197,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(555, 6);
+            this.label5.Location = new System.Drawing.Point(634, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 3;
@@ -188,7 +205,7 @@
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(642, 2);
+            this.dateCreate.Location = new System.Drawing.Point(721, 2);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(126, 21);
             this.dateCreate.TabIndex = 7;
@@ -203,6 +220,7 @@
             this.gridControl1.TabIndex = 6;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            this.gridControl1.Click += new System.EventHandler(this.gridControl1_Click);
             // 
             // gridView1
             // 
@@ -218,11 +236,19 @@
             this.colannId3});
             this.gridView1.GridControl = this.gridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.NewItemRowText = "Добавить";
+            this.gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            this.gridView1.OptionsEditForm.EditFormColumnCount = 2;
+            this.gridView1.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView1.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView1.OptionsView.ColumnAutoWidth = false;
+            this.gridView1.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // coln
             // 
+            this.coln.Caption = "№оп.";
             this.coln.FieldName = "n";
             this.coln.Name = "coln";
             this.coln.Visible = true;
@@ -230,6 +256,7 @@
             // 
             // coln1
             // 
+            this.coln1.Caption = "№п/оп";
             this.coln1.FieldName = "n1";
             this.coln1.Name = "coln1";
             this.coln1.Visible = true;
@@ -237,6 +264,7 @@
             // 
             // colrazryd
             // 
+            this.colrazryd.Caption = "разряд";
             this.colrazryd.FieldName = "razryd";
             this.colrazryd.Name = "colrazryd";
             this.colrazryd.Visible = true;
@@ -244,13 +272,16 @@
             // 
             // coltext
             // 
+            this.coltext.Caption = "наименование операции пошива";
             this.coltext.FieldName = "text";
             this.coltext.Name = "coltext";
             this.coltext.Visible = true;
-            this.coltext.VisibleIndex = 6;
+            this.coltext.VisibleIndex = 3;
+            this.coltext.Width = 300;
             // 
             // colsek1
             // 
+            this.colsek1.Caption = "сек";
             this.colsek1.FieldName = "sek";
             this.colsek1.Name = "colsek1";
             this.colsek1.Visible = true;
@@ -258,6 +289,7 @@
             // 
             // colobor
             // 
+            this.colobor.Caption = "оборудование";
             this.colobor.FieldName = "obor";
             this.colobor.Name = "colobor";
             this.colobor.Visible = true;
@@ -267,20 +299,23 @@
             // 
             this.gridColumn3.FieldName = "kod";
             this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn3.Visible = true;
-            this.gridColumn3.VisibleIndex = 3;
+            this.gridColumn3.VisibleIndex = 7;
             // 
             // colkod_o
             // 
             this.colkod_o.FieldName = "kod_o";
             this.colkod_o.Name = "colkod_o";
+            this.colkod_o.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colkod_o.Visible = true;
-            this.colkod_o.VisibleIndex = 7;
+            this.colkod_o.VisibleIndex = 6;
             // 
             // colannId3
             // 
             this.colannId3.FieldName = "annId";
             this.colannId3.Name = "colannId3";
+            this.colannId3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colannId3.Visible = true;
             this.colannId3.VisibleIndex = 8;
             // 
@@ -308,6 +343,10 @@
             this.colannId4});
             this.gridView2.GridControl = this.gridControl3;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView2.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView2.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            this.gridView2.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // colid
@@ -393,6 +432,10 @@
             this.colannId5});
             this.gridView4.GridControl = this.gridControl4;
             this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView4.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView4.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            this.gridView4.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // colkod_o2
@@ -467,7 +510,14 @@
             this.colannId6});
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
+            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView5.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gridView5.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
+            this.gridView5.OptionsEditForm.EditFormColumnCount = 4;
+            this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView5.OptionsView.ShowGroupPanel = false;
+            this.gridView5.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridView5_ShowingEditor);
             // 
             // colsek_p
             // 
@@ -505,6 +555,7 @@
             // 
             this.colannId6.FieldName = "annId";
             this.colannId6.Name = "colannId6";
+            this.colannId6.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colannId6.Visible = true;
             this.colannId6.VisibleIndex = 4;
             // 
@@ -581,5 +632,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
+        private CustomButton btnOK;
     }
 }

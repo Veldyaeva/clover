@@ -283,7 +283,6 @@ namespace SewingProduction.form
             xtraTabPagePechSHk.PageVisible = true;
             xtraTabControl1.SelectedTabPageIndex = 0;
 
-
             string query = $@"select * from brig_ved";
             ShowRelatedComboBox(customComboBoxPechVed, "ace", query, "vdid", "brig");
         }

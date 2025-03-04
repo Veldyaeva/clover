@@ -1,3 +1,4 @@
+using DevExpress.XtraEditors.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,6 +15,7 @@ using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
 using System.Data;
 using DevExpress.XtraRichEdit.Model;
+using DevExpress.XtraEditors.Controls;
 
 namespace SewingProduction
 {
@@ -389,7 +391,10 @@ namespace SewingProduction
 
 
     }
+<<<<<<<<< Temporary merge branch 1
 
+=========
+>>>>>>>>> Temporary merge branch 2
     public class CustomGroupBox : GroupBox
     {
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
@@ -417,8 +422,8 @@ namespace SewingProduction
             using (Pen borderPen = new Pen(_borderColor, _borderThickness))
             {
                 // Определение прямоугольника для обводки
-                var rect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
-                rect.X += _borderThickness / 2;
+                var rect = new Rectangle(ClientRectangle.X , ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
+                rect.X += _borderThickness / 2 ;
                 rect.Y += _borderThickness / 2;
 
                 //e.Graphics.DrawRectangle(borderPen, rect);
@@ -510,52 +515,8 @@ namespace SewingProduction
     /// Класс общих функций
     /// </summary>
     public static class CommonFunctions
-    #region
     {
-        public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-        //System.Windows.Forms.BindingSource bsource
-        {
-            System.Data.DataTable dT = new System.Data.DataTable();
-            try
-            {
-                string _connStr = "";
-                switch (_serv.ToLower())
-                {
-                    case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
-                    case "ace_test": _connStr = Properties.Settings.Default.ACEtestConnectionString; break;
-                    case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
-                    case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
-                }
-                string connectionString = _connStr;
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter();
 
-                    connection.Open();
-                    //using (SqlTransaction transaction = connection.BeginTransaction()) // Используем транзакцию
-                    //{
-                    //using (SqlCommand command = new SqlCommand(query, connection, transaction))
-                    using (SqlCommand command = new SqlCommand(query, connection))
-                    {
-                        //   SqlCommand command = new SqlCommand(query, connection);
-                        //CommandType commandType = command.CommandType;
-
-                        adapter.SelectCommand = command;
-                        adapter.Fill(dT);
-                        //bsource.DataSource = dT;
-                    }
-
-                    // transaction.Commit(); // Подтверждаем транзакцию
-
-                    //}
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return dT;
-        }
 
         /// <summary>
         /// получает значение в ячейке, либо, при его отсутствии присваивает значение по умолчанию
@@ -585,9 +546,123 @@ namespace SewingProduction
             }
         }
     }
+
+
 }
 #endregion
 
+
+
+#region DbHelper
+/// <summary>
+/// класс для работы с БД
+/// </summary>
+public class DatabaseHelper
+{
+    private readonly string _connectionString;
+
+    public DatabaseHelper(string _serv)//(string connectionString)
+    {
+        //_connectionString = connectionString;
+        switch (_serv.ToLower())
+        {
+            case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
+            case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
+            case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
+        }
+
+    }
+
+    //public static System.Data.DataTable ShowRelatedData(string _serv, string query)
+    //{
+    //    //System.Data.DataTable dT = new System.Data.DataTable();
+    //    try
+    //    {
+    //        //    string _connStr = "";
+    //        //    switch (_serv.ToLower())
+    //        //    {
+    //        //        case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
+    //        //        case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
+    //        //        case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
+    //        //    }
+    //        //    string connectionString = _connStr;
+    //        //    using (SqlConnection connection = new SqlConnection(connectionString))
+    //        //    {
+    //        //        SqlDataAdapter adapter = new SqlDataAdapter();
+
+    //        //        connection.Open();
+    //        //        using (SqlCommand command = new SqlCommand(query, connection))
+    //        //        {
+    //        //            adapter.SelectCommand = command;
+    //        //            adapter.Fill(dT);
+    //        //        }
+    //        //    }
+    //        }
+    //    catch (Exception ex)
+    //    {
+    //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+    //    }
+    //        return ExecuteQuery(query);
+        
+    //    //return dT;
+    //}
+    /// <summary>
+    /// Выполнение SQL запроса, возвращает dataTable
+    /// </summary>
+    /// <param name="query">запрос</param>
+    /// <param name="parameters">параметры</param>
+    /// <returns></returns>
+    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
+    {
+        var dt = new DataTable();
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            using (var command = new SqlCommand(query, connection))
+            {
+                if (parameters != null)
+                {
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+                }
+                using (var adapter = new SqlDataAdapter(command))
+                {
+                    adapter.Fill(dt);
+                }
+            }
+        }
+        return dt;
+    }
+
+    /// <summary>
+    /// Выполнение SQL запроса
+    /// </summary>
+    /// <param name="query">запрос</param>
+    /// <param name="parameters">параметры</param>
+    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
+    {
+        using (var connection = new SqlConnection(_connectionString))
+        {
+            connection.Open();
+            using (var command = new SqlCommand(query, connection))
+            {
+                if (parameters != null)
+                {
+                    foreach (var param in parameters)
+                    {
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                    }
+                }
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+}
+#endregion
+
+#region Logger
 public static class Logger
 {
     private static readonly string logFilePath = "error_log.json";
@@ -661,3 +736,4 @@ public class LogEntry
     public string StackTrace { get; set; }
     public string Context { get; set; }
 }
+#endregion
