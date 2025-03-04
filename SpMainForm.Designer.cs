@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpMainForm));
             this.popupMenu1 = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
@@ -138,7 +137,7 @@
             this.моделиСПризнакомМаркировкToolStripMenuItem});
             this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 23);
-            this.справочникиToolStripMenuItem.Text = "Справочники";
+            this.справочникиToolStripMenuItem.Text = "&Справочники";
             // 
             // оборудованиеToolStripMenuItem
             // 
@@ -221,7 +220,7 @@
             // карточкаРасчетаToolStripMenuItem1
             // 
             this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(262, 22);
+            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
             this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
             // 
@@ -235,7 +234,7 @@
             // тарифыToolStripMenuItem
             // 
             this.тарифыToolStripMenuItem.Name = "тарифыToolStripMenuItem";
-            this.тарифыToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
+            this.тарифыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.тарифыToolStripMenuItem.Text = "Тарифы";
             // 
             // изделияToolStripMenuItem
@@ -250,7 +249,7 @@
             this.рабочийСтолМастераToolStripMenuItem});
             this.производствоToolStripMenuItem.Name = "производствоToolStripMenuItem";
             this.производствоToolStripMenuItem.Size = new System.Drawing.Size(97, 23);
-            this.производствоToolStripMenuItem.Text = "Производство";
+            this.производствоToolStripMenuItem.Text = "&Производство";
             // 
             // рабочийСтолМастераToolStripMenuItem
             // 
@@ -262,7 +261,7 @@
             // 
             this.TeamWorktoolStripMenuItem.Name = "TeamWorktoolStripMenuItem";
             this.TeamWorktoolStripMenuItem.Size = new System.Drawing.Size(115, 23);
-            this.TeamWorktoolStripMenuItem.Text = "Разделения труда";
+            this.TeamWorktoolStripMenuItem.Text = "&Разделения труда";
             this.TeamWorktoolStripMenuItem.Click += new System.EventHandler(this.TeamWorktoolStripMenuItem_Click);
             // 
             // ThemeSelectorComboBox

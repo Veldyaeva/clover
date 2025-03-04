@@ -19,7 +19,7 @@ namespace SewingProduction.form
         {
             _id = Id;
             InitializeComponent(); 
-            var dbHelper = new DatabaseHelper(Properties.Settings.Default.ACEConnectionString);
+            var dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(dbHelper);
             
             UpdateTheme(this);
@@ -27,14 +27,6 @@ namespace SewingProduction.form
 
         private void TeamWork_ArchAndCopy_Load(object sender, EventArgs e)
         {
-            //// TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.norm_dop_obr". При необходимости она может быть перемещена или удалена.
-            //this.norm_dop_obrTableAdapter.Fill(this.aCE_backupDataSet.norm_dop_obr);
-            //// TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.norm_kont". При необходимости она может быть перемещена или удалена.
-            //this.norm_kontTableAdapter.Fill(this.aCE_backupDataSet.norm_kont);
-            //// TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.Norm_rask". При необходимости она может быть перемещена или удалена.
-            //this.norm_raskTableAdapter.Fill(this.aCE_backupDataSet.Norm_rask);
-            //// TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.norm_rasz". При необходимости она может быть перемещена или удалена.
-            //this.norm_raszTableAdapter.Fill(this.aCE_backupDataSet.norm_rasz);
             LoadGridControlData(gridControl1, bindingSourceRasz, _artNormService.GetRelatedNormRasz(_id));
             LoadGridControlData(gridControl3, bindingSourceRask, _artNormService.GetRelatedNormRask(_id));
             LoadGridControlData(gridControl4, bindingSourceKont, _artNormService.GetRelatedNormKont(_id));

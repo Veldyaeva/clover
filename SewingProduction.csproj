@@ -233,22 +233,23 @@
     <Compile Include="form\SpravZeh.Designer.cs">
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork.cs">
+    <Compile Include="form\TeamWork\ArtNormService.cs" />
+    <Compile Include="form\TeamWork\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork.Designer.cs">
+    <Compile Include="form\TeamWork\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork_AdvanceTW.cs">
+    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork_AdvanceTW.Designer.cs">
+    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.Designer.cs">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork_ArchAndCopy.cs">
+    <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\TeamWork_ArchAndCopy.Designer.cs">
+    <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.Designer.cs">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
@@ -393,17 +394,17 @@
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork.resx">
+    <EmbeddedResource Include="form\TeamWork\TeamWork.resx">
       <DependentUpon>TeamWork.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\PlanZagrBrig.resx">
       <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork_AdvanceTW.resx">
+    <EmbeddedResource Include="form\TeamWork\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork_ArchAndCopy.resx">
+    <EmbeddedResource Include="form\TeamWork\TeamWork_ArchAndCopy.resx">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
@@ -540,6 +541,7 @@
     <Content Include="XMLFile1.xml" />
     <None Include="Resources\winter.ico" />
     <Content Include="Resources\spring.jpg" />
+    <Content Include="Resources\valentine.jpg" />
     <Content Include="tbi_winter.ico" />
     <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />

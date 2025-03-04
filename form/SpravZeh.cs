@@ -39,6 +39,7 @@ namespace SewingProduction.form
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
+      //  private readonly DatabaseHelper dbHelper;
 
         public SpravZeh(string tableSQL, string rusNameTableSQL)
         {
@@ -57,6 +58,7 @@ namespace SewingProduction.form
                             LEFT JOIN spVidProizv ON spVidProizv.idProizv = ZehList.idProizv ";
             //Иницилизация листа столбцов:
             fieldsQueryListSQL = new List<string>();
+            
         }
         //Рус нэйминг столбцов:
         void allTableName(string tableName)

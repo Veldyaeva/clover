@@ -26,26 +26,30 @@ namespace SewingProduction
             DateTime today = DateTime.Now.Date;
             if (month >= 3 && month <= 5)
             {
-                imageSlider1.CurrentImageIndex = randomNumber;
+                imageSlider1.CurrentImageIndex = randomNumber;//spring
             }
             else if (month >= 6 && month <= 8)
             {
-                imageSlider1.CurrentImageIndex = 2;
+                imageSlider1.CurrentImageIndex = 2;//summer
             }
             else if (month >= 9 && month <= 11)
             {
-                imageSlider1.CurrentImageIndex = 3;
+                imageSlider1.CurrentImageIndex = 3;//fall
             }
             else
             {
-                imageSlider1.CurrentImageIndex = 0;
+                imageSlider1.CurrentImageIndex = 0;//winter
             }
             DateTime sprStart = DateTime.ParseExact("03-05", "MM-dd", CultureInfo.InvariantCulture);
             DateTime sprEnd = DateTime.ParseExact("03-11", "MM-dd", CultureInfo.InvariantCulture);
             if (today >= sprStart&& today<=sprEnd)
             {
-                imageSlider1.CurrentImageIndex = 4;
+                imageSlider1.CurrentImageIndex = 4;//8.03
             }
+            if (today == DateTime.ParseExact("02-14", "MM-dd", CultureInfo.InvariantCulture))
+                { imageSlider1.CurrentImageIndex = 7; }//14.02
+            if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture)&&today<=DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
+            { imageSlider1.CurrentImageIndex = 8;}//23.02
         }
     }
 }
