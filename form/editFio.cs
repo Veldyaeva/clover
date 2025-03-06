@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
@@ -27,12 +28,16 @@ namespace SewingProduction.form
         string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
         //string connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        private readonly ArtNormServiceCombo _artNormServiceCombo;
         private ToolTip toolTip = new ToolTip();
         bool isBusy = false;
 
         public editFio(string idFIO, string openType)
         {
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            _artNormServiceCombo = new ArtNormServiceCombo(dbHelper);
+            UpdateTheme(this);
             //Имя формы:
             this.Text = openType;
             customTextBoxTab.Text = idFIO;
@@ -47,49 +52,17 @@ namespace SewingProduction.form
             else
                 newUser();
         }
-        private void comboAllTableItems(object sender, EventArgs e)
+        public void comboAllTableItems(object sender, EventArgs e)
         {
-            using (SqlConnection connectionCombo = new SqlConnection(connectionString))
-            {
-                comboOneTableItems(customComboBoxOrg,    "SELECT TRIM(name)       FROM sp_firms       ORDER BY kod", connectionCombo, true);
-                comboOneTableItems(customComboBoxDolj,   "SELECT TRIM(rab)        FROM rab            ORDER BY rab ", connectionCombo, true);
-                comboOneTableItems(customComboBoxOb,     "SELECT TRIM(fvr_name)   FROM fio_vid_rabot  ORDER BY fvr_kod", connectionCombo, true);
-                comboOneTableItems(customComboBoxPodr,   "SELECT TRIM(name)       FROM brig_object    ORDER BY gr", connectionCombo, true);
-                comboOneTableItems(customComboBoxNTab,   "SELECT TRIM(naimen)     FROM tab_n          ORDER BY naimen", connectionCombo, true);
-                comboOneTableItems(customComboBoxNved,   "SELECT TRIM(name)       FROM brig_ved       ORDER BY name", connectionCombo, true);
-                comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c)  FROM spbrig", connectionCombo, true);
-                comboOneTableItems(customComboBox1Cpodr, "SELECT DISTINCT TRIM(name)        FROM podr1C", connectionCombo, true);
-                comboOneTableItems(customComboBox1Cdolg, "SELECT DISTINCT TRIM(name)        FROM dolg1C", connectionCombo, true);
-            }
-        }
-        
-        private void comboOneTableItems(System.Windows.Forms.ComboBox comboBox,string query, SqlConnection connection, bool allOrOne)
-        {
-            /* comboBox: сам комбобокс
-             * query: текст запроса
-             * connection: подключение
-             * allOrOne: 
-             * true - для заполнения комбобокса
-             * false - для отображения значения
-             */
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connection);
-            //Создаем в памяти таблицу:
-            System.Data.DataTable tableList = new System.Data.DataTable();
-            //Добавляем ответ сервера в таблицу:
-            dataAdapter.Fill(tableList);
-            if (allOrOne)
-            {
-                comboBox.Items.Clear();
-                //Загрузка в комбобокс:
-                foreach (DataRow row in tableList.Rows)
-                {
-                    comboBox.Items.Add(row[0].ToString());
-                }
-            }
-            else
-            {
-                comboBox.Text = tableList.Rows.Count > 0 ? tableList.Rows[0]["nameColumn"].ToString() : "";
-            }
+            _artNormServiceCombo.comboOneTableItems(customComboBoxOrg,    "SELECT TRIM(name)       FROM sp_firms       ORDER BY kod", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxDolj,   "SELECT TRIM(rab)        FROM rab            ORDER BY rab ", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxOb,     "SELECT TRIM(fvr_name)   FROM fio_vid_rabot  ORDER BY fvr_kod", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxPodr,   "SELECT TRIM(name)       FROM brig_object    ORDER BY gr", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxNTab,   "SELECT TRIM(naimen)     FROM tab_n          ORDER BY naimen", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxNved,   "SELECT TRIM(name)       FROM brig_ved       ORDER BY name",  true);
+            _artNormServiceCombo.comboOneTableItems(customComboBoxPodr1c, "SELECT DISTINCT TRIM(podrname1c)  FROM spbrig", true);
+            _artNormServiceCombo.comboOneTableItems(customComboBox1Cpodr, "SELECT DISTINCT TRIM(name)        FROM podr1C",  true);
+            _artNormServiceCombo.comboOneTableItems(customComboBox1Cdolg, "SELECT DISTINCT TRIM(name)        FROM dolg1C",  true);
         }
 
         /* ЗАГРУЗКА ДАННЫХ СОТРУДНИКА */
@@ -145,38 +118,38 @@ namespace SewingProduction.form
 
                     // комбобоксы:
                     customComboBoxDolj.Text = tableList.Rows[0]["rab"].ToString().Trim();
-                    if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["mast"].ToString())) 
-                        comboOneTableItems(customComboBoxOrg, 
+                    if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["mast"].ToString()))
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxOrg, 
                         $"SELECT TRIM(name) AS nameColumn FROM sp_firms WHERE sp_firms.kod = {tableList.Rows[0]["mast"].ToString()}",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["f_fvr_kod"].ToString()))
-                        comboOneTableItems(customComboBoxOb,   
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxOb,   
                         $"SELECT TRIM(fvr_name) AS nameColumn FROM fio_vid_rabot WHERE fio_vid_rabot.fvr_kod =  {tableList.Rows[0]["f_fvr_kod"].ToString()}",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["gr"].ToString()))
-                        comboOneTableItems(customComboBoxPodr, 
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxPodr, 
                         $"SELECT TRIM(name) AS nameColumn FROM brig_object WHERE brig_object.gr =  '{tableList.Rows[0]["gr"].ToString()}'",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ftabn"].ToString()))
-                        comboOneTableItems(customComboBoxNTab,
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxNTab,
                         $"SELECT TRIM(naimen) AS nameColumn FROM tab_n WHERE tab_n.tnid =  {tableList.Rows[0]["ftabn"].ToString()}",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["ved"].ToString()))
-                        comboOneTableItems(customComboBoxNved,
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxNved,
                         $"SELECT TRIM(name) AS nameColumn FROM brig_ved WHERE brig_ved.vdID =  {tableList.Rows[0]["ved"].ToString()}",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_1c_id"].ToString()))
-                        comboOneTableItems(customComboBoxPodr1c,
+                        _artNormServiceCombo.comboOneTableItems(customComboBoxPodr1c,
                         $"SELECT DISTINCT TRIM(podrname1c) AS nameColumn FROM spbrig WHERE spbrig.podrid1c = '{tableList.Rows[0]["podr_1c_id"].ToString()}'",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["podr_id"].ToString()))
-                        comboOneTableItems(customComboBox1Cpodr,
+                        _artNormServiceCombo.comboOneTableItems(customComboBox1Cpodr,
                         $"SELECT DISTINCT TRIM(name) AS nameColumn FROM podr1C WHERE podr1C.id = '{tableList.Rows[0]["podr_id"].ToString()}'",
-                        connection, false);
+                         false);
                     if (!string.IsNullOrWhiteSpace(tableList.Rows[0]["dolg_id"].ToString()))
-                        comboOneTableItems(customComboBox1Cdolg,
+                        _artNormServiceCombo.comboOneTableItems(customComboBox1Cdolg,
                         $"SELECT DISTINCT TRIM(name) AS nameColumn FROM dolg1C WHERE dolg1C.id = '{tableList.Rows[0]["dolg_id"].ToString()}'",
-                        connection, false);
+                         false);
 
                 }
                 // Если кто то уже радактирует:
@@ -566,7 +539,9 @@ namespace SewingProduction.form
                 }
             }
         }
-        // Подсказки при наведении на кнопки
+        /// <summary>
+        /// Подсказки при наведении на кнопки
+        /// </summary>
         private void toolTipButton()
         {
             toolTip.AutoPopDelay = 5000;     // Подсказка исчезнет через 5 секунд.
@@ -589,6 +564,43 @@ namespace SewingProduction.form
             toolTip.SetToolTip(customOkButton1, "Сохранить и выйти");
             toolTip.SetToolTip(customCancelButton1, "Выйти не сохранив");
         }
+
+    }
+    public class ArtNormServiceCombo
+    {
+        private readonly DatabaseHelper _dbHelper;
+        public ArtNormServiceCombo(DatabaseHelper dbHelper)
+        {
+            _dbHelper = dbHelper;
+        }
+
+        /// <summary>
+        /// Функция для заполнения комбобокса
+        /// </summary>
+        /// <param name="comboBox">сам комбобокс</param>
+        /// <param name="query">текст запроса</param>
+        /// <param name="allOrOne"> true - для заполнения комбобокса / false - для отображения значения </param>
+        public void comboOneTableItems(System.Windows.Forms.ComboBox comboBox, string query, bool allOrOne)
+        {
+            //Создаем в памяти таблицу:
+            System.Data.DataTable tableList = new System.Data.DataTable();
+            //Добавляем ответ сервера в таблицу:
+            tableList = _dbHelper.ExecuteQuery(query); ;
+            if (allOrOne)
+            {
+                comboBox.Items.Clear();
+                //Загрузка в комбобокс:
+                foreach (DataRow row in tableList.Rows)
+                {
+                    comboBox.Items.Add(row[0].ToString());
+                }
+            }
+            else
+            {
+                comboBox.Text = tableList.Rows.Count > 0 ? tableList.Rows[0]["nameColumn"].ToString() : "";
+            }
+        }
+
 
     }
 }

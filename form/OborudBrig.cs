@@ -13,6 +13,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using System.Diagnostics;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.CodeParser;
 
 namespace SewingProduction.form
 {
@@ -22,7 +23,8 @@ namespace SewingProduction.form
         //string connectionString = Properties.Settings.Default.ACEConnectionString;
         // Для тестов:
         string connectionString = Properties.Settings.Default.ACEtestConnectionString;
-
+        private readonly ArtNormService _artNormService;
+        private readonly ServiceBroker _serviceBroker;
         private SqlDependency sqlDependency;
         private SqlConnection connection;
         bool flagStartListening = false; //вкл прослушки
@@ -31,6 +33,10 @@ namespace SewingProduction.form
         public OborudBrig()
         {
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            _artNormService = new ArtNormService(dbHelper);
+            _serviceBroker = new ServiceBroker(dbHelper);
+            UpdateTheme(this);
         }
         private void OborudBrig_Load_1(object sender, EventArgs e)
         {
@@ -40,13 +46,12 @@ namespace SewingProduction.form
         private void OborudBrig_Activated(object sender, EventArgs e)
         {
             gridZeh_Load(sender, e);
-            gridBrig_Load(sender, e);
-            gridOborud_Load(sender, e);
+            gridZeh_Click(sender, e);
         }
-
+        //Клик на бригаду
         private void gridBrig_Click(object sender, EventArgs e)
         {
-            //gridOborud_Load(sender, e);
+            gridOborud_Load(sender, e);
         }
         //Выбор цеха в таблице цехов:
         private void gridZeh_Click(object sender, EventArgs e)
@@ -61,66 +66,22 @@ namespace SewingProduction.form
         //Таблица цехов:
         private void gridZeh_Load(object sender, EventArgs e)
         {
-            try
-            {
-                using (var connectionSELECT = new SqlConnection(connectionString))
-                {
-                    string queryList = $@"SELECT nameZeh AS 'Цех', nameProizv AS 'Вид производства', address AS 'Адрес' 
-                                          FROM ZehList
-                                          LEFT JOIN spVidProizv ON spVidProizv.idProizv = ZehList.idProizv";
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionSELECT);
-                    System.Data.DataTable tableList = new System.Data.DataTable();
-                    dataAdapter.Fill(tableList);
-                    bindingZeh.DataSource = tableList;
-                    GridView gridView = gridZeh.MainView as GridView;
-                    gridView.OptionsBehavior.Editable = false;
-                    gridView.BestFitColumns();
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"ZehList SQL Error: {sqlEx.Message}");
-                MessageBox.Show($"{sqlEx.Message}");
-            }
-
+            bindingZeh.DataSource = _artNormService.GetZehListFromOborudBrig();
+            GridView gridView = gridZeh.MainView as GridView;
+            gridView.OptionsBehavior.Editable = false;
+            gridView.BestFitColumns();
         }
-
         //Таблица бригад:
         private void gridBrig_Load(object sender, EventArgs e)
         {
-            try
-            {
-                using (var connectionSELECT = new SqlConnection(connectionString))
-                {
-                    string queryList = $@"SELECT n_brig AS 'Номер', brig AS 'Бригада' FROM spBrig WHERE idZeh ";
-                    if (gridViewZeh.Columns.Count < 1)
-                        queryList += " IS NOT NULL";
-                    else
-                        if (gridViewZeh.GetFocusedRowCellValue(gridViewZeh.Columns["Цех"]).ToString() == null)
-                        queryList += " IS NOT NULL";
-                    else
-                        queryList += " = (SELECT idZeh FROM ZehList WHERE nameZeh = '" +
-                        gridViewZeh.GetFocusedRowCellValue(gridViewZeh.Columns["Цех"]).ToString() + "')";
-                    //используя подключение отправляем запрос БД:
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionSELECT);
-                    //Создаем в памяти таблицу:
-                    System.Data.DataTable tableList = new System.Data.DataTable();
-                    //Добавляем ответ сервера в таблицу:
-                    dataAdapter.Fill(tableList);
-                    //Закгрузка в таблицу грида:
-                    bindingBrig.DataSource = tableList;
-                    // Получаем доступ к GridView
-                    GridView gridView = gridBrig.MainView as GridView;
-                    //Запрет на редактирование
-                    gridView.OptionsBehavior.Editable = false;
-                    gridView.BestFitColumns();
-                }
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"Brig SQL Error: {sqlEx.Message}");
-                MessageBox.Show($"{sqlEx.Message}");
-            }
+            string nameZeh = gridViewZeh.GetFocusedRowCellValue(gridViewZeh.Columns["Цех"]).ToString();
+            int countVievZeh = gridViewZeh.Columns.Count;
+            bindingBrig.DataSource = _artNormService.GetSpBrigFromOborudBrig(nameZeh, countVievZeh);
+            // Получаем доступ к GridView
+            GridView gridView = gridBrig.MainView as GridView;
+            //Запрет на редактирование
+            gridView.OptionsBehavior.Editable = false;
+            gridView.BestFitColumns();
         }
 
 
@@ -193,9 +154,9 @@ namespace SewingProduction.form
                 if (!flagStartListening)
                 {
                     // Запуск отслеживания изменений для соединения с базой данных
-                    SqlDependency.Start(connectionString);
+                    //SqlDependency.Start(connectionString);
                     // Начинаем прослушивание
-                    StartListening();
+                    //_serviceBroker.StartListening("idOB, idZeh, kod_ob, count", "dbo.OborudBrig");
                 }
             }
             catch (SqlException sqlEx)
@@ -271,66 +232,6 @@ namespace SewingProduction.form
             SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
             f.MdiParent = this.MdiParent;
             f.Show();
-        }
-        public void StartListening()
-        {
-            try
-            {
-                flagStartListening = true;
-                // Остановка предыдущего прослушивания, если оно было активно:
-                StopListening();
-                // SQL-запрос
-                string queryOborudList = $"SELECT idOB,idZeh,kod_ob,count FROM dbo.OborudBrig";
-                // Создание соединения с базой данных
-                connection = new SqlConnection(connectionString);
-                // Открытие соединения
-                connection.Open();
-                // Создание команды для выполнения SQL-запроса
-                SqlCommand command = new SqlCommand(queryOborudList, connection);
-                // Создание зависимости, чтобы отслеживать изменения
-                sqlDependency = new SqlDependency(command);
-                // Подписка на событие изменения
-                sqlDependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
-                // Выполнение команды
-                command.ExecuteReader();
-
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"SQL Error: {sqlEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error starting listener: {ex.Message}");
-            }
-        }
-        public void StopListening()
-        {
-            // Закрываем подключение
-            if (connection != null)
-            {
-                connection.Close();
-            }
-        }
-        private void OnDependencyChange(object sender, SqlNotificationEventArgs e)
-        {
-            // Строка состояния:
-            Debug.WriteLine($"Notification received: Type={e.Type}, Info={e.Info}, Source={e.Source}");
-            // Проверка есть ли уведомления
-            if (e.Type == SqlNotificationType.Change)
-            {
-                Debug.WriteLine("Data was changed");
-                // Обновление UI через Invoke
-                if (this.IsHandleCreated)
-                    this.Invoke((MethodInvoker)delegate
-                    {
-                        // Обновили таблицу
-                        gridOborud_Load(sender, e);
-                    });
-
-            }
-            // Возобновляем прослушивание
-            StartListening();
         }
 
     }

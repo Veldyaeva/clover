@@ -388,13 +388,7 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
-
-
     }
-<<<<<<<<< Temporary merge branch 1
-
-=========
->>>>>>>>> Temporary merge branch 2
     public class CustomGroupBox : GroupBox
     {
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию

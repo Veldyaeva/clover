@@ -200,5 +200,12 @@ namespace SewingProduction
             f.Show();
         
         }
+
+        private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Articul f = new Articul();
+            f.MdiParent = this;
+            f.Show();
+        }
     }
 }

@@ -159,6 +159,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelModel, 2);
             this.customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelModel.Location = new System.Drawing.Point(141, 240);
             this.customLabelModel.Name = "customLabelModel";
             this.customLabelModel.Size = new System.Drawing.Size(58, 30);
@@ -173,6 +174,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelRazm, 2);
             this.customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelRazm.Location = new System.Drawing.Point(143, 210);
             this.customLabelRazm.Name = "customLabelRazm";
             this.customLabelRazm.Size = new System.Drawing.Size(56, 30);
@@ -187,6 +189,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelArt, 2);
             this.customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelArt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelArt.Location = new System.Drawing.Point(139, 180);
             this.customLabelArt.Name = "customLabelArt";
             this.customLabelArt.Size = new System.Drawing.Size(60, 30);
@@ -201,6 +204,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelTM, 2);
             this.customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelTM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelTM.Location = new System.Drawing.Point(172, 150);
             this.customLabelTM.Name = "customLabelTM";
             this.customLabelTM.Size = new System.Drawing.Size(27, 30);
@@ -215,6 +219,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelGroup, 2);
             this.customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelGroup.Location = new System.Drawing.Point(146, 120);
             this.customLabelGroup.Name = "customLabelGroup";
             this.customLabelGroup.Size = new System.Drawing.Size(53, 30);
@@ -229,6 +234,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelGOST, 2);
             this.customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelGOST.Location = new System.Drawing.Point(155, 90);
             this.customLabelGOST.Name = "customLabelGOST";
             this.customLabelGOST.Size = new System.Drawing.Size(44, 30);
@@ -263,6 +269,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelKod, 2);
             this.customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelKod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelKod.Location = new System.Drawing.Point(168, 60);
             this.customLabelKod.Name = "customLabelKod";
             this.customLabelKod.Size = new System.Drawing.Size(31, 30);
@@ -384,6 +391,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelKodFurn, 2);
             this.customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelKodFurn.Location = new System.Drawing.Point(64, 270);
             this.customLabelKodFurn.Name = "customLabelKodFurn";
             this.customLabelKodFurn.Size = new System.Drawing.Size(135, 30);
@@ -398,6 +406,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabel1, 2);
             this.customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel1.Location = new System.Drawing.Point(188, 300);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(11, 30);
@@ -412,6 +421,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelDlin, 2);
             this.customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelDlin.Location = new System.Drawing.Point(151, 330);
             this.customLabelDlin.Name = "customLabelDlin";
             this.customLabelDlin.Size = new System.Drawing.Size(48, 30);
@@ -426,6 +436,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelTimePlet, 2);
             this.customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelTimePlet.Location = new System.Drawing.Point(53, 360);
             this.customLabelTimePlet.Name = "customLabelTimePlet";
             this.customLabelTimePlet.Size = new System.Drawing.Size(146, 30);
@@ -440,6 +451,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelNormP, 2);
             this.customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelNormP.Location = new System.Drawing.Point(85, 390);
             this.customLabelNormP.Name = "customLabelNormP";
             this.customLabelNormP.Size = new System.Drawing.Size(114, 30);
@@ -454,6 +466,7 @@
             this.tableLayoutPanel1.SetColumnSpan(this.customLabelPrizn, 2);
             this.customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
             this.customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelPrizn.Location = new System.Drawing.Point(139, 420);
             this.customLabelPrizn.Name = "customLabelPrizn";
             this.customLabelPrizn.Size = new System.Drawing.Size(60, 30);
@@ -467,6 +480,7 @@
             this.customLabelM.BackColor = System.Drawing.Color.Transparent;
             this.customLabelM.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.customLabelM.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelM.Location = new System.Drawing.Point(407, 344);
             this.customLabelM.Name = "customLabelM";
             this.customLabelM.Size = new System.Drawing.Size(95, 16);
@@ -480,6 +494,7 @@
             this.customLabelM1.BackColor = System.Drawing.Color.Transparent;
             this.customLabelM1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelM1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelM1.Location = new System.Drawing.Point(407, 374);
             this.customLabelM1.Name = "customLabelM1";
             this.customLabelM1.Size = new System.Drawing.Size(95, 16);
@@ -493,6 +508,7 @@
             this.customLabelM2.BackColor = System.Drawing.Color.Transparent;
             this.customLabelM2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabelM2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabelM2.Location = new System.Drawing.Point(407, 404);
             this.customLabelM2.Name = "customLabelM2";
             this.customLabelM2.Size = new System.Drawing.Size(95, 16);
@@ -600,7 +616,6 @@
             this.searchLookUpEditTm1.Properties.PopupView = this.gridView2;
             this.searchLookUpEditTm1.Size = new System.Drawing.Size(95, 20);
             this.searchLookUpEditTm1.TabIndex = 43;
-            this.searchLookUpEditTm1.EditValueChanged += new System.EventHandler(this.searchLookUpEditTm1_EditValueChanged);
             // 
             // gridView2
             // 

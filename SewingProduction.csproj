@@ -154,6 +154,7 @@
     </Compile>
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
+    <Compile Include="class\ServiceBroker.cs" />
     <Compile Include="class\Theme.cs" />
     <Compile Include="class\XlsReportGenerator.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
