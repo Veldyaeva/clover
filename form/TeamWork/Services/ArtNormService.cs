@@ -22,10 +22,11 @@ namespace SewingProduction.Services
     public class ArtNormService
     {
         private readonly DatabaseHelper _dbHelper;
-
+        private readonly HybridLogger _logger;
         public ArtNormService(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
+            
         }
 
         //public async Task<List<ArtNormN>> GetArtNormData()
@@ -167,7 +168,7 @@ namespace SewingProduction.Services
         /// annId!=null => загрузка артикулов с НЗП процедурой GetNZPByKoddRT 
         /// </param>
         /// <returns></returns>
-        public async Task<List<MyDataART>> GetRelatedSpArt(int annId)
+        public async Task<DataTable> GetRelatedSpArt(int annId)
         {
             //string query = "";
             //if (annId == 0)
@@ -181,8 +182,13 @@ namespace SewingProduction.Services
             : "EXEC dbo.GetNZPByKoddRT @annId";
 
             object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
-            return (List<MyDataART>)result;
+            return (DataTable)result;
         }
+
+        //public async Task<List<MyDataART>> GetUnboundArt()
+        //{
+
+        //}
         /// <summary>
         /// Получение пути к файлу изображения
         /// </summary>
@@ -243,7 +249,7 @@ OUTPUT INSERTED.annID
                 {"@data_sozd", row.DataSozd},
                 {"@diz", row.Diz},
                 {"@constr", row.Constr},
-     {"@data_obn", row.DataObn },
+     {"@data_obn", DateTime.Now },//row.DataObn },
      {"@sek_kr", row.SekKr },
      {"@slogn", row.Slogn },
      {"@arh" , row.Arh},
@@ -252,6 +258,14 @@ OUTPUT INSERTED.annID
 
             return result != null ? Convert.ToInt32(result) : -1;            //query = "SELECT * FROM sp_articul WHERE kod = @kod";
             //return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kod", kod } }).Rows[0];
+
+        }
+
+        internal async Task deleteRow(string tableName, int Id)
+        {
+            string query = $"DELETE FROM {tableName} WHERE annID = {Id}";
+            //Dictionary<string, object> parametres = new Dictionary<string, object>{ {"@tableName", tableName }, {"@annID", Id}};
+            await _dbHelper.ExecuteNonQueryAsync(query);
 
         }
         public int SaveCopyToDatabase(ArtNormN newItem)
@@ -297,6 +311,40 @@ OUTPUT INSERTED.annID
                 return -1;
             }
         }
+
+        public async Task<int> InsertNormRaszAsync(NormRasz normRasz)
+        {
+            string query = @"
+        INSERT INTO norm_rasz (annId, kod_o, text, spec, razryd, obor, kod_proizv)
+        OUTPUT INSERTED.nrID
+        VALUES (@annId, @kod_o, @text, @spec, @razryd, @obor, @kod_proizv)";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+    {
+        { "@annId", normRasz.AnnId },
+        { "@kod_o", normRasz.KodO },
+        { "@text", normRasz.Text },
+        { "@spec", normRasz.Spec },
+        { "@razryd", normRasz.Razryad },
+        { "@obor", normRasz.Obor },
+        { "@kod_proizv", normRasz.KodProizv },
+        //{ "@text_proizv", normRasz.TextProizv },
+        //{ "@text_ob", normRasz.TextOb },
+        //{ "@text_vyaz", normRasz.TextVyaz }
+    };
+
+            try
+            {
+                object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
+                return result != null ? Convert.ToInt32(result) : -1;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при добавлении записи в norm_rasz");
+                return -1;
+            }
+        }
+
 
         //public async Task<List<ArtNormN>> GetAll()
         //{

@@ -147,14 +147,6 @@
     <Compile Include="class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="form\TeamWork\ACE_backupDataSet.cs">
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="form\TeamWork\ACE_backupDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="form\TeamWork\DbContext\AppDbContext.cs" />
     <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
@@ -253,7 +245,11 @@
     <Compile Include="form\TeamWork\Interfaces\IThemeable.cs" />
     <Compile Include="form\TeamWork\Loggers\Logger.cs" />
     <Compile Include="form\TeamWork\Models\ArtNormN.cs" />
+    <Compile Include="form\TeamWork\Models\NormDopObr.cs" />
     <Compile Include="form\TeamWork\Models\NormOperData.cs" />
+    <Compile Include="form\TeamWork\Models\NormKont.cs" />
+    <Compile Include="form\TeamWork\Models\NormRask.cs" />
+    <Compile Include="form\TeamWork\Models\NormRasz.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
@@ -520,6 +516,7 @@
     <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
+<<<<<<< HEAD
     <EmbeddedResource Include="XtraReport1.resx">
       <DependentUpon>XtraReport1.cs</DependentUpon>
     </EmbeddedResource>
@@ -537,6 +534,8 @@
     <None Include="ACE_backupDataSet.xss">
       <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
     </None>
+=======
+>>>>>>> сраный промежуточный коммит. Открывается ДВА ПУСТЫХ EditForm, зла как собака
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>

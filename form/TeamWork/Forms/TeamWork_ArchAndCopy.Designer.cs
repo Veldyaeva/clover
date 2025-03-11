@@ -43,7 +43,6 @@ namespace SewingProduction.form
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.bindingSourceRasz = new System.Windows.Forms.BindingSource(this.components);
-            this.aCE_backupDataSet = new SewingProduction.form.TeamWork.ACE_backupDataSet();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,16 +81,11 @@ namespace SewingProduction.form
             this.colsek_v = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_stra = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.norm_raszTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
-            this.norm_raskTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
-            this.norm_kontTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
-            this.norm_dop_obrTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
             this.stackPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).BeginInit();
@@ -223,13 +217,9 @@ namespace SewingProduction.form
             // 
             // bindingSourceRasz
             // 
-            this.bindingSourceRasz.DataMember = "norm_rasz";
-            this.bindingSourceRasz.DataSource = this.aCE_backupDataSet;
             // 
             // aCE_backupDataSet
             // 
-            this.aCE_backupDataSet.DataSetName = "ACE_backupDataSet";
-            this.aCE_backupDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridView1
             // 
@@ -325,8 +315,6 @@ namespace SewingProduction.form
             // 
             // bindingSourceRask
             // 
-            this.bindingSourceRask.DataMember = "Norm_rask";
-            this.bindingSourceRask.DataSource = this.aCE_backupDataSet;
             // 
             // gridView2
             // 
@@ -416,10 +404,7 @@ namespace SewingProduction.form
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
             // 
-            // bindingSourceKont
-            // 
-            this.bindingSourceKont.DataMember = "norm_kont";
-            this.bindingSourceKont.DataSource = this.aCE_backupDataSet;
+            // bindingSourceKontSet;
             // 
             // gridView4
             // 
@@ -499,8 +484,6 @@ namespace SewingProduction.form
             // 
             // bindingSourceDop
             // 
-            this.bindingSourceDop.DataMember = "norm_dop_obr";
-            this.bindingSourceDop.DataSource = this.aCE_backupDataSet;
             // 
             // gridView5
             // 
@@ -552,23 +535,7 @@ namespace SewingProduction.form
             this.colannId6.Name = "colannId6";
             this.colannId6.Visible = true;
             this.colannId6.VisibleIndex = 4;
-            // 
-            // norm_raszTableAdapter
-            // 
-            this.norm_raszTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_raskTableAdapter
-            // 
-            this.norm_raskTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_kontTableAdapter
-            // 
-            this.norm_kontTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_dop_obrTableAdapter
-            // 
-            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
-            // 
+//
             // TeamWork_ArchAndCopy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -585,7 +552,6 @@ namespace SewingProduction.form
             this.stackPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRasz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceRask)).EndInit();
@@ -649,13 +615,8 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
         private System.Windows.Forms.BindingSource bindingSourceRasz;
-        private ACE_backupDataSet aCE_backupDataSet;
         private System.Windows.Forms.BindingSource bindingSourceRask;
         private System.Windows.Forms.BindingSource bindingSourceKont;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
-        private TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
         private System.Windows.Forms.BindingSource bindingSourceDop;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
     }
 }

@@ -38,7 +38,6 @@ namespace SewingProduction.form
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customGridControl1 = new SewingProduction.CustomGridControl();
             this.normoperBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aCE_backupDataSet = new SewingProduction.form.TeamWork.ACE_backupDataSet();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -58,10 +57,8 @@ namespace SewingProduction.form
             this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.customOkButton1 = new SewingProduction.CustomOkButton();
-            this.norm_operTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_operTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).BeginInit();
@@ -126,12 +123,6 @@ namespace SewingProduction.form
             // normoperBindingSource
             // 
             this.normoperBindingSource.DataMember = "norm_oper";
-            this.normoperBindingSource.DataSource = this.aCE_backupDataSet;
-            // 
-            // aCE_backupDataSet
-            // 
-            this.aCE_backupDataSet.DataSetName = "ACE_backupDataSet";
-            this.aCE_backupDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridView1
             // 
@@ -302,7 +293,6 @@ namespace SewingProduction.form
             // 
             // norm_operTableAdapter
             // 
-            this.norm_operTableAdapter.ClearBeforeFill = true;
             // 
             // NormOperNew
             // 
@@ -315,7 +305,6 @@ namespace SewingProduction.form
             this.Load += new System.EventHandler(this.NormOperNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).EndInit();
@@ -347,9 +336,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colobor;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_ob;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_proizv;
-        private ACE_backupDataSet aCE_backupDataSet;
         private System.Windows.Forms.BindingSource normoperBindingSource;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_operTableAdapter norm_operTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn coltext_ob;
         private DevExpress.XtraGrid.Columns.GridColumn coltext_proizv;
         private DevExpress.XtraScheduler.UI.RepositoryItemResourcesComboBox repositoryItemResourcesComboBox1;

@@ -48,8 +48,6 @@ namespace SewingProduction.form
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gridControl5 = new DevExpress.XtraGrid.GridControl();
-            this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aCE_backupDataSet = new SewingProduction.form.TeamWork.ACE_backupDataSet();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -66,7 +64,6 @@ namespace SewingProduction.form
             this.colkod_ob1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,7 +79,6 @@ namespace SewingProduction.form
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -102,12 +98,9 @@ namespace SewingProduction.form
             this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.aCE_backupDataSet1 = new SewingProduction.form.TeamWork.ACE_backupDataSet();
-            this.norm_raszTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter();
-            this.tableAdapterManager = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.TableAdapterManager();
-            this.norm_raskTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter();
-            this.norm_kontTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter();
-            this.norm_dop_obrTableAdapter = new SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter();
+            this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
@@ -117,27 +110,25 @@ namespace SewingProduction.form
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -326,7 +317,6 @@ namespace SewingProduction.form
             // 
             // gridControl5
             // 
-            this.gridControl5.DataSource = this.normraszBindingSource;
             this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl5.Location = new System.Drawing.Point(0, 0);
             this.gridControl5.MainView = this.gridView5;
@@ -335,16 +325,6 @@ namespace SewingProduction.form
             this.gridControl5.TabIndex = 7;
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
-            // 
-            // normraszBindingSource
-            // 
-            this.normraszBindingSource.DataMember = "norm_rasz";
-            this.normraszBindingSource.DataSource = this.aCE_backupDataSet;
-            // 
-            // aCE_backupDataSet
-            // 
-            this.aCE_backupDataSet.DataSetName = "ACE_backupDataSet";
-            this.aCE_backupDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // gridView5
             // 
@@ -365,9 +345,8 @@ namespace SewingProduction.form
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
             this.gridView5.NewItemRowText = "добавить";
-            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView5.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDown;
+            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
+            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplaceHideCurrentRow;
             this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView5.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridView5_EditFormHidden);
@@ -484,7 +463,6 @@ namespace SewingProduction.form
             // 
             // gridControl2
             // 
-            this.gridControl2.DataSource = this.normraskBindingSource;
             this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl2.Location = new System.Drawing.Point(0, 0);
             this.gridControl2.MainView = this.gridView2;
@@ -493,11 +471,6 @@ namespace SewingProduction.form
             this.gridControl2.TabIndex = 7;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
-            // 
-            // normraskBindingSource
-            // 
-            this.normraskBindingSource.DataMember = "Norm_rask";
-            this.normraskBindingSource.DataSource = this.aCE_backupDataSet;
             // 
             // gridView2
             // 
@@ -626,7 +599,6 @@ namespace SewingProduction.form
             // 
             // gridControl3
             // 
-            this.gridControl3.DataSource = this.normkontBindingSource;
             this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControl3.Location = new System.Drawing.Point(0, 0);
             this.gridControl3.MainView = this.gridView3;
@@ -635,11 +607,6 @@ namespace SewingProduction.form
             this.gridControl3.TabIndex = 8;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
-            // 
-            // normkontBindingSource
-            // 
-            this.normkontBindingSource.DataMember = "norm_kont";
-            this.normkontBindingSource.DataSource = this.aCE_backupDataSet;
             // 
             // gridView3
             // 
@@ -736,11 +703,6 @@ namespace SewingProduction.form
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
             // 
-            // normdopobrBindingSource
-            // 
-            this.normdopobrBindingSource.DataMember = "norm_dop_obr";
-            this.normdopobrBindingSource.DataSource = this.aCE_backupDataSet;
-            // 
             // gridView4
             // 
             this.gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
@@ -803,48 +765,6 @@ namespace SewingProduction.form
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 5;
             // 
-            // aCE_backupDataSet1
-            // 
-            this.aCE_backupDataSet1.DataSetName = "ACE_backupDataSet";
-            this.aCE_backupDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // norm_raszTableAdapter
-            // 
-            this.norm_raszTableAdapter.ClearBeforeFill = true;
-            // 
-            // tableAdapterManager
-            // 
-            this.tableAdapterManager.art_norm_nTableAdapter = null;
-            this.tableAdapterManager.BackupDataSetBeforeUpdate = false;
-            this.tableAdapterManager.fioTableAdapter = null;
-            this.tableAdapterManager.kod_proizvTableAdapter = null;
-            this.tableAdapterManager.norm_dop_obrTableAdapter = null;
-            this.tableAdapterManager.norm_kontTableAdapter = null;
-            this.tableAdapterManager.Norm_raskTableAdapter = null;
-            this.tableAdapterManager.norm_raszTableAdapter = this.norm_raszTableAdapter;
-            this.tableAdapterManager.oborud_shvTableAdapter = null;
-            this.tableAdapterManager.podr_vyazTableAdapter = null;
-            this.tableAdapterManager.sp_articulTableAdapter = null;
-            this.tableAdapterManager.status_annTableAdapter = null;
-            this.tableAdapterManager.UpdateOrder = SewingProduction.form.TeamWork.ACE_backupDataSetTableAdapters.TableAdapterManager.UpdateOrderOption.InsertUpdateDelete;
-            // 
-            // norm_raskTableAdapter
-            // 
-            this.norm_raskTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_kontTableAdapter
-            // 
-            this.norm_kontTableAdapter.ClearBeforeFill = true;
-            // 
-            // norm_dop_obrTableAdapter
-            // 
-            this.norm_dop_obrTableAdapter.ClearBeforeFill = true;
-            // 
-            // normraszBindingSource1
-            // 
-            this.normraszBindingSource1.DataMember = "norm_rasz";
-            this.normraszBindingSource1.DataSource = this.aCE_backupDataSet1;
-            // 
             // TeamWork_AdvanceTW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -863,27 +783,25 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.aCE_backupDataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             this.ResumeLayout(false);
 
@@ -937,11 +855,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
         private CustomButton btnOK;
         private CustomButton rasz;
-        private TeamWork.ACE_backupDataSet aCE_backupDataSet;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_raszTableAdapter norm_raszTableAdapter;
-        private TeamWork.ACE_backupDataSetTableAdapters.TableAdapterManager tableAdapterManager;
         private System.Windows.Forms.BindingSource normraskBindingSource;
-        private TeamWork.ACE_backupDataSetTableAdapters.Norm_raskTableAdapter norm_raskTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn colkod1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn10;
@@ -955,7 +869,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn colspec;
         private System.Windows.Forms.BindingSource normkontBindingSource;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_kontTableAdapter norm_kontTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn20;
@@ -966,7 +879,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
         private DevExpress.XtraGrid.Columns.GridColumn colannId2;
         private System.Windows.Forms.BindingSource normdopobrBindingSource;
-        private TeamWork.ACE_backupDataSetTableAdapters.norm_dop_obrTableAdapter norm_dop_obrTableAdapter;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn24;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn25;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
@@ -974,7 +886,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
         private CustomButton customButton2;
-        private TeamWork.ACE_backupDataSet aCE_backupDataSet1;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private CustomButton buffer;
         private System.Windows.Forms.SplitContainer splitContainer1;
