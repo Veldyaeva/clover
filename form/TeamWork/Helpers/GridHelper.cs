@@ -11,7 +11,7 @@ namespace SewingProduction.Helpers
 {
     public static class GridHelper
     {
-        #region
+        #region async
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource` асинхронно.
         /// </summary>
@@ -22,14 +22,16 @@ namespace SewingProduction.Helpers
         {
             await Task.Run(() =>
             {
-                source.DataSource = data;
-            });
+                // Подготовка данных в фоновом потоке
+                var newData = data.Copy();
 
-            grid.Invoke((MethodInvoker)(() =>
-            {
-                grid.DataSource = source;
-                grid.RefreshDataSource();
-            }));
+                grid.Invoke((MethodInvoker)(() =>
+                {
+                    source.DataSource = newData;
+                    grid.DataSource = source;
+                    grid.RefreshDataSource();
+                }));
+            });
         }
 
         public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)

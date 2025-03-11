@@ -94,16 +94,16 @@ namespace SewingProduction.Models
     /// <summary>
     /// Класс данных для передачи информации о выбранной операции
     /// </summary>
-    public class MyData
-    {
-        public string Kod_o { get; set; }
-        public string Text { get; set; }
-        public string Spec { get; set; }
-        public string Razryad { get; set; }
-        public string Obor { get; set; }
-        public string Kod_proizv { get; set; }
-        public string Text_proizv { get; set; }
-        public string Text_vyaz { get; set; }
-        public string Text_ob { get; set; }
-    }
+    //public class MyData
+    //{
+    //    public string Kod_o { get; set; }
+    //    public string Text { get; set; }
+    //    public string Spec { get; set; }
+    //    public string Razryad { get; set; }
+    //    public string Obor { get; set; }
+    //    public string Kod_proizv { get; set; }
+    //    public string Text_proizv { get; set; }
+    //    public string Text_vyaz { get; set; }
+    //    public string Text_ob { get; set; }
+    //}
 }

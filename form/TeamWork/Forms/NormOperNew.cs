@@ -120,6 +120,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using SewingProduction.Models;
 
 namespace SewingProduction.form
 {
@@ -129,7 +130,7 @@ namespace SewingProduction.form
         private readonly ArtNormService _artNormService;
         private readonly ILogger _logger = new FileLogger();
 
-        public MyData SelectedRowData { get; private set; }
+        public NormRasz SelectedRowData { get; private set; }
 
         public NormOperNew()
         {
@@ -156,17 +157,6 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 // Логируем подробности ошибки
-                foreach (DataTable table in aCE_backupDataSet.Tables)
-                {
-                    foreach (DataRow row in table.GetErrors())
-                    {
-                        foreach (DataColumn col in table.Columns)
-                        {
-                            Console.WriteLine($"Столбец {col.ColumnName}: {row[col]}");
-                        }
-                        Console.WriteLine($"Ошибка: {row.RowError}");
-                    }
-                }
             }
         }
 
@@ -206,17 +196,17 @@ namespace SewingProduction.form
                 GridView view = gridView1;
                 if (view == null || view.FocusedRowHandle < 0) return;
 
-                SelectedRowData = new MyData
+                SelectedRowData = new NormRasz
                 {
-                    Kod_o = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "kod_o")),
+                    KodO = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_o")),
                     Text = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text")),
                     Spec = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "spec")),
-                    Razryad = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "razryd")),
+                    Razryad = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "razryd")),
                     Obor = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "obor")),
-                    Kod_proizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
-                    Text_proizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
-                    Text_vyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
-                    Text_ob = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
+                    KodProizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
+                    TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
+                    TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
+                    TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
                 };
 
                 this.DialogResult = DialogResult.OK;

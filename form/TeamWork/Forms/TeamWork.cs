@@ -727,8 +727,8 @@ namespace SewingProduction.Forms
         {
             try
             {
-                bufferWorkDivision = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "grup")}, модель {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "mod")}, артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "articul")}";
+                bufferWorkDivision = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group")}, модель {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod")}, артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul")}";
             }
             catch
             {
@@ -770,11 +770,13 @@ namespace SewingProduction.Forms
                 DataSozd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
-                DataObn = null,
+                DataObn = DateTime.MinValue,
                 SekKr = 0,
                 Slogn = 0,
+                Status = 1,
+                StatusText = "Предварительный",
                 Arh = false,
-                Status = 1
+                AnnID = 0
             };
 
             // Сохраняем в БД и получаем новый `annID`
@@ -791,18 +793,24 @@ namespace SewingProduction.Forms
             _bindingList.Add(newItem);
             ANNgridControl.RefreshDataSource();
             // Ищем строку по `annID` в `GridView`
-            int realRowHandle = ANNgridView.LocateByValue("annID", newId);
+            int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);//добавили строку в ANN
             if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
             {
-                ANNgridView.FocusedRowHandle = realRowHandle;
-
-                // Открываем `EditForm`
-                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
+                ANNgridView.FocusedRowHandle = realRowHandle;//встаём на новую строку
+                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))//открываем  форму Добавить предв.ю передаём новый Id и Id из буфера
                 {
-                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)//если да, то так и оставляем 
                     {
                         // Можно обновить данные после закрытия формы, если нужно
                         await LoadWorkDivisions();
+                    }
+                    else//если нет, удаляем новую пустую строку в ANN и в norm_rasz (потом надо будет в остальных таблицах, но вообще я хочу сделать удаление в привязанных прямо там, где их новые строки создаются)
+                    {
+                        _bindingList.Remove(newItem);
+                        await _artNormService.deleteRow("art_norm_n", newId);
+                        await _artNormService.deleteRow("norm_rasz", newId);
+                        ANNgridControl.RefreshDataSource();
+
                     }
                 }
             }
@@ -968,7 +976,7 @@ namespace SewingProduction.Forms
             //загрузка артикулов для увязки (актуальные и предварительные)
             await MyDataArtLoad();
             //загрузка  таблицы РТ для увязки (текущие работы)
-            await MyDataAnnLoad();
+            //await MyDataAnnLoad();
             //norm_rasz
             await NormRaszLoad();
         }
@@ -977,20 +985,21 @@ namespace SewingProduction.Forms
         {
             try
             {
-                //артикулы для увязки
-                List<MyDataART> relatedData = await _artNormService.GetRelatedSpArt(0);
+                //неувязанные артикулы
+                //List<MyDataART> relatedData = await _artNormService.GetUnboundArt();
                 BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+                DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
                 // Заполняем myDataList данными из DataTable 
-                foreach (var row in relatedData)
+                foreach (DataRow row in relatedData.Rows)
                 {
                     try
                     {
                         artDataList.Add(new MyDataART
                         {
-                            Kod = row.Kod,
-                            Articul = row.Articul,
-                            Group = row.Group,
-                            Model = row.Model,
+                            Kod = Convert.ToInt32(row["Kod"]),
+                            Articul = row["Articul"].ToString(),
+                            Group = row["Grup"].ToString(),
+                            Model = row["Mod"].ToString(),
                             // binded_art = row["binded_art"].ToString(),
                             IsChecked = false
                         });
@@ -1014,46 +1023,46 @@ namespace SewingProduction.Forms
         }
         private async Task MyDataAnnLoad()
         {
-            int annId = 0;
-            var view = customGridControl1.MainView as GridView;
-            if (view != null)
-            {
-                annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
-            }
-            List<MyDataANN> relatedMyDataAnn = new List<MyDataANN>();
-            //РТ для увязки
-            relatedMyDataAnn = await _artNormService
-            normraszBindingSource1.DataSource = relatedMyDataAnn;
-            customGridControl3.DataSource = normraszBindingSource1;
+            //int annId = 0;
+            //var view = customGridControl1.MainView as GridView;
+            //if (view != null)
+            //{
+            //    annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
+            //}
+            //List<MyDataANN> relatedMyDataAnn = new List<MyDataANN>();
+            ////РТ для увязки
+            //relatedMyDataAnn = await _artNormService
+            //normraszBindingSource1.DataSource = relatedMyDataAnn;
+            //customGridControl3.DataSource = normraszBindingSource1;
 
 
 
-            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-            // Заполняем myDataList данными из DataTable 
-            foreach (MyDataANN row in relatedData)
-            {
-                try
-                {
-                    myDataList.Add(new MyDataANN
-                    {
-                        AnnId = row.AnnId,
-                        Kod = row.Kod,
-                        Articul = row.Articul,
-                        Status = row.Status,
-                        Stat = row.Stat,
-                        Group = row.Group,
-                        Model = row.Model,
-                        IsChecked = false
-                    });
-                }
-                catch (Exception ex)
-                {
-                    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                ;
-            }
-            customGridControl2.DataSource = myDataList;
+            //BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+            //// Заполняем myDataList данными из DataTable 
+            //foreach (MyDataANN row in relatedData)
+            //{
+            //    try
+            //    {
+            //        myDataList.Add(new MyDataANN
+            //        {
+            //            AnnId = row.AnnId,
+            //            Kod = row.Kod,
+            //            Articul = row.Articul,
+            //            Status = row.Status,
+            //            Stat = row.Stat,
+            //            Group = row.Group,
+            //            Model = row.Model,
+            //            IsChecked = false
+            //        });
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+            //        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    ;
+            //}
+            //customGridControl2.DataSource = myDataList;
         }
 
         async Task NormRaszLoad()
@@ -1110,32 +1119,6 @@ namespace SewingProduction.Forms
         /// <param name="e"></param>
         private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column == gridView8.Columns["IsChecked"])
-            {
-                int rowHandle = e.RowHandle;
-                MyDataANN data = gridView8.GetRow(rowHandle) as MyDataANN;
-
-                if (data != null)
-                {
-                    data.IsChecked = (bool)e.Value;
-                    if (data.IsChecked)
-                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
-                        for (int i = 0; i < gridView8.RowCount; i++)
-                        {
-                            if (i != rowHandle)
-                            {
-                                MyDataANN otherData = gridView8.GetRow(i) as MyDataANN;
-                                if (otherData != null)
-                                {
-                                    if (otherData.IsChecked)
-                                        otherData.IsChecked = false;
-                                }
-                            }
-                        }
-                    }
-                }
-                gridView8.RefreshData();
-            }
 
         }
 

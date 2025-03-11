@@ -1966,7 +1966,7 @@ namespace SewingProduction.Forms
             this.gridView8.OptionsMenu.EnableColumnMenu = false;
             this.gridView8.OptionsView.ShowAutoFilterRow = true;
             this.gridView8.OptionsView.ShowGroupPanel = false;
-           // this.gridView8.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView8_FocusedRowChanged);
+            this.gridView8.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView8_FocusedRowChanged);
             // 
             // colarh1
             // 
@@ -2124,7 +2124,7 @@ namespace SewingProduction.Forms
             this.gridView7.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gridView7.OptionsView.ShowGroupPanel = false;
             this.gridView7.ScrollStyle = DevExpress.XtraGrid.Views.Grid.ScrollStyleFlags.LiveVertScroll;
-           // this.gridView7.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView7_FocusedRowChanged);
+            this.gridView7.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView7_FocusedRowChanged);
             // 
             // код
             // 
