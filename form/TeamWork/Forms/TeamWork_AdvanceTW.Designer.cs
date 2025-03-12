@@ -182,7 +182,7 @@ namespace SewingProduction.form
             this.rasz.TabIndex = 9;
             this.rasz.Text = "addRasz";
             this.rasz.UseVisualStyleBackColor = false;
-            this.rasz.Click += new System.EventHandler(this.customButton1_Click);
+            //this.rasz.Click += new System.EventHandler(this.customButton1_Click);
             // 
             // customButton2
             // 
@@ -285,7 +285,7 @@ namespace SewingProduction.form
             this.buffer.TabIndex = 11;
             this.buffer.Text = "Вставить из буфера";
             this.buffer.UseVisualStyleBackColor = false;
-            this.buffer.Click += new System.EventHandler(this.bufferButton_Click);
+           // this.buffer.Click += new System.EventHandler(this.bufferButton_Click);
             // 
             // richTextBox1
             // 
@@ -350,8 +350,8 @@ namespace SewingProduction.form
             this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView5.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridView5_EditFormHidden);
-            this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView5_InitNewRow);
+            //this.gridView5.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridView5_EditFormHidden);
+            //this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView5_InitNewRow);
             // 
             // gridColumn30
             // 
