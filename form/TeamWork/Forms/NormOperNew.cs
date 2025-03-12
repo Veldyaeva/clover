@@ -204,9 +204,16 @@ namespace SewingProduction.form
                     Razryad = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "razryd")),
                     Obor = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "obor")),
                     KodProizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
-                    TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
-                    TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
-                    TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
+
+                    Kod = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod")),
+                    N1 = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "n1")),
+                    Sek = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "sek")),
+                    KodPodr = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_podr")),
+                    KodOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "kod_ob"))
+
+                    //TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
+                    //TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
+                    //TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
                 };
 
                 this.DialogResult = DialogResult.OK;

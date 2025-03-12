@@ -102,6 +102,7 @@ namespace SewingProduction.form
             this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).BeginInit();
             this.stackPanel2.SuspendLayout();
@@ -328,11 +329,12 @@ namespace SewingProduction.form
             // gridView5
             // 
             this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn2,
+            this.gridColumn34,
             this.gridColumn30,
             this.gridColumn31,
             this.gridColumn32,
             this.gridColumn33,
-            this.gridColumn34,
             this.gridColumn35,
             this.gridColumn36,
             this.gridColumn37,
@@ -353,94 +355,98 @@ namespace SewingProduction.form
             // 
             // gridColumn30
             // 
+            this.gridColumn30.Caption = "kod";
             this.gridColumn30.FieldName = "kod";
             this.gridColumn30.Name = "gridColumn30";
             this.gridColumn30.Visible = true;
-            this.gridColumn30.VisibleIndex = 0;
+            this.gridColumn30.VisibleIndex = 1;
             // 
             // gridColumn31
             // 
             this.gridColumn31.FieldName = "kod_o";
             this.gridColumn31.Name = "gridColumn31";
             this.gridColumn31.Visible = true;
-            this.gridColumn31.VisibleIndex = 1;
+            this.gridColumn31.VisibleIndex = 2;
             // 
             // gridColumn32
             // 
             this.gridColumn32.FieldName = "text";
             this.gridColumn32.Name = "gridColumn32";
             this.gridColumn32.Visible = true;
-            this.gridColumn32.VisibleIndex = 2;
+            this.gridColumn32.VisibleIndex = 3;
             // 
             // gridColumn33
             // 
             this.gridColumn33.FieldName = "razryd";
             this.gridColumn33.Name = "gridColumn33";
             this.gridColumn33.Visible = true;
-            this.gridColumn33.VisibleIndex = 3;
+            this.gridColumn33.VisibleIndex = 4;
             // 
             // gridColumn34
             // 
+            this.gridColumn34.Caption = "annId";
             this.gridColumn34.FieldName = "annId";
             this.gridColumn34.Name = "gridColumn34";
             this.gridColumn34.Visible = true;
-            this.gridColumn34.VisibleIndex = 4;
+            this.gridColumn34.VisibleIndex = 5;
             // 
             // gridColumn35
             // 
+            this.gridColumn35.Caption = "n";
             this.gridColumn35.FieldName = "n";
             this.gridColumn35.Name = "gridColumn35";
             this.gridColumn35.Visible = true;
-            this.gridColumn35.VisibleIndex = 5;
+            this.gridColumn35.VisibleIndex = 6;
             // 
             // gridColumn36
             // 
+            this.gridColumn36.Caption = "n1";
             this.gridColumn36.FieldName = "n1";
             this.gridColumn36.Name = "gridColumn36";
             this.gridColumn36.Visible = true;
-            this.gridColumn36.VisibleIndex = 6;
+            this.gridColumn36.VisibleIndex = 7;
             // 
             // gridColumn37
             // 
             this.gridColumn37.FieldName = "sek";
             this.gridColumn37.Name = "gridColumn37";
             this.gridColumn37.Visible = true;
-            this.gridColumn37.VisibleIndex = 7;
+            this.gridColumn37.VisibleIndex = 8;
             // 
             // gridColumn38
             // 
             this.gridColumn38.FieldName = "obor";
             this.gridColumn38.Name = "gridColumn38";
             this.gridColumn38.Visible = true;
-            this.gridColumn38.VisibleIndex = 8;
+            this.gridColumn38.VisibleIndex = 9;
             // 
             // colkod_podr1
             // 
             this.colkod_podr1.FieldName = "kod_podr";
             this.colkod_podr1.Name = "colkod_podr1";
             this.colkod_podr1.Visible = true;
-            this.colkod_podr1.VisibleIndex = 9;
+            this.colkod_podr1.VisibleIndex = 10;
             // 
             // colkod_proizv1
             // 
             this.colkod_proizv1.FieldName = "kod_proizv";
             this.colkod_proizv1.Name = "colkod_proizv1";
             this.colkod_proizv1.Visible = true;
-            this.colkod_proizv1.VisibleIndex = 10;
+            this.colkod_proizv1.VisibleIndex = 11;
             // 
             // colspec2
             // 
             this.colspec2.FieldName = "spec";
             this.colspec2.Name = "colspec2";
             this.colspec2.Visible = true;
-            this.colspec2.VisibleIndex = 11;
+            this.colspec2.VisibleIndex = 12;
             // 
             // colkod_ob1
             // 
             this.colkod_ob1.FieldName = "kod_ob";
             this.colkod_ob1.Name = "colkod_ob1";
             this.colkod_ob1.Visible = true;
-            this.colkod_ob1.VisibleIndex = 12;
+            this.colkod_ob1.VisibleIndex = 13;
             // 
             // splitContainer2
             // 
@@ -763,6 +769,14 @@ namespace SewingProduction.form
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 5;
             // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "nrId";
+            this.gridColumn2.FieldName = "nrId";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 0;
+            // 
             // TeamWork_AdvanceTW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -906,5 +920,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colkod_proizv1;
         private DevExpress.XtraGrid.Columns.GridColumn colspec2;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_ob1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
     }
 }
