@@ -27,16 +27,22 @@ namespace SewingProduction.form
         private readonly ArtNormService _artNormService;
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
+<<<<<<< HEAD
         private readonly GridHelper _gridHelper = new GridHelper();
+=======
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
         private int _newAnnId = -1;
         private readonly ILogger _logger = new FileLogger();
         private int _mode;
 
         private BindingList<NormRasz> _normRaszList;
         private BindingSource _normRaszBindingSource;
+<<<<<<< HEAD
         
         private BindingList<NormRask> _normRaskList;
         private BindingSource _normRaskBindingSource;
+=======
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
 
         public TeamWork_AdvanceTW(int id, int bufferWorkDivision, int mode)
         {
@@ -50,27 +56,41 @@ namespace SewingProduction.form
             _newAnnId = id;
 
             InitializeBindings();
+<<<<<<< HEAD
             
 
+=======
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
         }
 
         private void InitializeBindings()
         {
+<<<<<<< HEAD
             // Инициализация для NormRasz
+=======
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
             _normRaszList = new BindingList<NormRasz>();
             _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
             gridControl5.DataSource = _normRaszBindingSource;
 
+<<<<<<< HEAD
             // Инициализация для NormRask
             _normRaskList = new BindingList<NormRask>();
             _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
             gridControl2.DataSource = _normRaskBindingSource;
 
             // Настраиваем обработчики для NormRasz
+=======
+            // Настраиваем отображение колонок
+            SetupGridColumns();
+
+            // Настраиваем обработчики
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
             gridView5.InitNewRow += GridView5_InitNewRow;
             gridView5.RowUpdated += GridView5_RowUpdated;
             gridView5.ValidateRow += GridView5_ValidateRow;
             gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+<<<<<<< HEAD
 
             // Настраиваем обработчики для NormRask
             gridView2.InitNewRow += GridView2_InitNewRow;
@@ -81,6 +101,8 @@ namespace SewingProduction.form
             // Настраиваем отображение колонок
             SetupGridColumns();
             SetupGridColumnsRask();
+=======
+>>>>>>> b2d3435 (ВАУ РАБОТАЕТ)
         }
 
         private void SetupGridColumns()
@@ -111,6 +133,7 @@ namespace SewingProduction.form
             gridView5.OptionsEditForm.PopupEditFormWidth = 400;
             gridView5.OptionsView.ShowGroupPanel = false;
         }
+
 
         private void SetupGridColumnsRask()
         {
@@ -343,6 +366,7 @@ namespace SewingProduction.form
                     await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
                 }
             }
+
         }
 
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
@@ -417,8 +441,6 @@ namespace SewingProduction.form
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
-
- 
 
     }
 }
