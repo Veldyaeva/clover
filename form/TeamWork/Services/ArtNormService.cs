@@ -420,6 +420,24 @@ OUTPUT INSERTED.annID
             }
             return string.Empty;
         }
+        public async Task<string> GetEmployeeFullName(int employeeId)
+        {
+            try
+            {
+                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
+
+                if (result.Rows.Count > 0)
+                {
+                    return result.Rows[0]["fio"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
+            }
+            return string.Empty;
+        }
 
         //public async Task<List<ArtNormN>> GetAll()
         //{

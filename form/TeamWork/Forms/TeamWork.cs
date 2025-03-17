@@ -383,6 +383,28 @@ namespace SewingProduction.Forms
             return string.Empty; // Return empty if not found or error occurs
         }
 
+        private async Task<string> GetEmployeeFullName(int employeeId)
+        {
+            try
+            {
+                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
+
+                // Log the result of the query
+                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
+
+                if (result.Rows.Count > 0)
+                {
+                    return result.Rows[0]["fio"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
+            }
+            return string.Empty; // Return empty if not found or error occurs
+        }
+
         #endregion
 
         #region Загрузка данных LoadGridControlData
@@ -1196,6 +1218,56 @@ namespace SewingProduction.Forms
             await NormRaszLoad();
         }
 
+        //private async Task MyDataArtLoad()
+        //{
+        //    try
+        //    {
+        //        // Fetch unbound articles
+        //        DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
+
+        //        // Log the result of the data retrieval
+        //        await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
+
+        //        // Check if the DataTable is not null and has rows
+        //        if (relatedData != null && relatedData.Rows.Count > 0)
+        //        {
+        //            BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+
+        //            // Populate the BindingList with data from the DataTable
+        //            foreach (DataRow row in relatedData.Rows)
+        //            {
+        //                try
+        //                {
+        //                    artDataList.Add(new MyDataART
+        //                    {
+        //                        Kod = Convert.ToInt32(row["Kod"]),
+        //                        Articul = row["Articul"].ToString(),
+        //                        Group = row["Grup"].ToString(),
+        //                        Model = row["Mod"].ToString(),
+        //                        IsChecked = false
+        //                    });
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                }
+        //            }
+
+        //            // Set the data source for the grid control
+        //            customGridControl1.DataSource = artDataList;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         private async Task MyDataArtLoad()
         {
             try
