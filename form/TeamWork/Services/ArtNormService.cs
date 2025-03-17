@@ -91,26 +91,41 @@ namespace SewingProduction.Services
         /// загрузка артикулов для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-       // public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
-        public async Task<DataTable> GetArtNormDataCurrent(int kod, bool all)
+        public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
+        //public async Task<DataTable> GetArtNormDataCurrent(int kod, bool all)
         {
             string query = "";
             if (all)
-            {
-                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
+            {//"AnnId, Kod, Grup, Articul, Mod, Sek, Sek_vyaz, Data_obn, Sek_shv, Status_ann.name AS Stat, Status, Sek_vyazo, Sek_vyaz5, Sek_vyaz7, Sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
+                query = @"SELECT  
+                                
+                                SUBSTRING(kod, 1, 7) AS kod, annId, grup, articul, mod, sek, sek_vyaz,
+            data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+            sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+            data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status<3";
+
             }
             else
             {
-                query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
+                query =// "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView " +
+@"SELECT                        
+                                SUBSTRING(kod, 1, 7) AS kod, annId, grup, articul, mod, sek, sek_vyaz,
+            data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+            sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+            data_sozd, diz, constr FROM ArtNormNView
+JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
-            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
+            DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
             //return (List<ArtNormN>)result;
-            return (DataTable)result;
+            //DataTable table = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>);
+            return ConvertToList(result);
+
+            //return (DataTable)result;
         }
 
         public async Task<List<ArtNormN>> GetArtNormDataCurrent(string art)
         {
-            string query = $"SELECT * FROM artNormNView WHERE status<{Status.Archive} AND articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
+            string query = $"SELECT * FROM artNormNView WHERE status<{(int)Status.Archive} AND articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
             object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "art", art + "%" } });
             return result as List<ArtNormN>;
         }

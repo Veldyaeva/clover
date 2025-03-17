@@ -24,6 +24,7 @@ using NLog;
 using System.Collections;
 using System.Drawing;
 using DevExpress.XtraCharts;
+using SewingProduction.Interfaces;
 
 
 namespace SewingProduction.Forms
@@ -44,6 +45,23 @@ namespace SewingProduction.Forms
             _artNormService = new ArtNormService(_dbHelper);
 
             ThemeManager.UpdateTheme(this);
+            
+            // Set up single row selection for both grid controls
+            var view7 = customGridControl1.MainView as GridView;
+            var view8 = customGridControl2.MainView as GridView;
+            
+            if (view7 != null)
+            {
+                view7.OptionsSelection.MultiSelect = false;
+                view7.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+            }
+            
+            if (view8 != null)
+            {
+                view8.OptionsSelection.MultiSelect = false;
+                view8.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+            }
+
             this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
             this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
 
@@ -64,44 +82,57 @@ namespace SewingProduction.Forms
         /// Загрузка вкладки "Список РТ"
         /// </summary>
         /// <returns></returns>
+
         private async Task LoadWorkDivisions()
         {
-
-            //    //var designer = _artNormService.GetRelDesigner();
-            //    //designerComboBox.DataSource = designer;
-            //    //var constructor = _artNormService.GetRelDesigner();
-            //    //constructorComboBox.DataSource = constructor;
-
             try
             {
                 _bindingList.Clear();
-                List<ArtNormN> data = await _artNormService.GetArtNormData();
+                var data = await _artNormService.GetArtNormData();
 
-                foreach (var item in data)
+                if (data != null && data.Count > 0)
                 {
-                    _bindingList.Add(item);
+                    foreach (var item in data)
+                    {
+                        _bindingList.Add(item);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                // Принудительное обновление данных в UI
-                _bindingSource.ResetBindings(false);
-                ANNgridControl.RefreshDataSource();
-                ANNgridView.RefreshData();
-                ANNgridView.PopulateColumns(); // Заполняем колонки
-
-                filterTable();//применяем фильтры
-
-
+                RefreshData();
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных");
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
             }
         }
+        private void RefreshData()
+        {
+            SafeInvoke(ANNgridControl, () =>
+            {
+                _bindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
+                ANNgridView.PopulateColumns();
+                filterTable();
+            });
+        }
 
-
-
+        private void SafeInvoke(Control control, Action action)
+        {
+            if (control.InvokeRequired)
+            {
+                control.Invoke(action);
+            }
+            else
+            {
+                action();
+            }
+        }
 
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
@@ -115,42 +146,22 @@ namespace SewingProduction.Forms
             try
             {
                 List<ArtNormN> relatedData;
-
+                bool loadAll = loadAllCheckBox.Checked;
                 // Если включен чекбокс "Загрузить все"
-                if (loadAllCheckBox.Checked)
-                {
-                    relatedData = ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, false)); //relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
-                }
-                else
-                {
-                    relatedData = ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, false));
-
-                    // Если артикул содержит "-", фильтруем по его первой части
+                //relatedData = //ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, loadAll));
+                relatedData = await _artNormService.GetArtNormDataCurrent(kod, loadAll);
+                if (!loadAll)
+                { // Если артикул содержит "-", фильтруем по его первой части
                     int dashIndex = articul.IndexOf("-");
                     if (dashIndex > 0)
                     {
-//                        List<ArtNormN> partialData = //await _artNormService.GetArtNormDataCurrent(kod, true);//ConvertDataTableToList<ArtNormN>(partialTable);
-List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
-                        relatedData.AddRange(partialData);
+                        List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
+                        if (partialData != null)
+                            relatedData.AddRange(partialData);
                     }
                 }
 
-                // Преобразуем List<ArtNormN> в BindingList<MyDataANN>
-                BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-
-                foreach (var item in relatedData)
-                {
-                    myDataList.Add(new MyDataANN
-                    {
-                        AnnId = item.AnnID,
-                        Kod = item.Kod,
-                        Articul = item.Articul,
-                        Status = item.Status,
-                        Group = item.Group,
-                        Model = item.Mod,
-                        IsChecked = false
-                    });
-                }
+                BindingList<MyDataANN> myDataList = ConvertToMyDataAnn(relatedData);
 
                 await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
                 return myDataList;
@@ -161,6 +172,28 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
                 MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
             }
+
+        }
+        BindingList<MyDataANN> ConvertToMyDataAnn(List<ArtNormN> _relatedData)
+        {
+            // Преобразуем List<ArtNormN> в BindingList<MyDataANN>
+            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+
+            foreach (var item in _relatedData)
+            {
+                myDataList.Add(new MyDataANN
+                {
+                    AnnId = item.AnnID,
+                    Kod = item.Kod,
+                    Articul = item.Articul,
+                    Status = item.Status,
+                    Group = item.Group,
+                    Model = item.Mod,
+                    IsChecked = false
+                });
+            }
+
+            return myDataList;
         }
 
         //private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
@@ -584,12 +617,15 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
             args.IsSearchColumn = args.FieldName == colName;
         }
 
-        private void customCheckBox4_CheckedChanged(object sender, EventArgs e)
+        private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
         {
             int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
 
-            customGridControl2.DataSource = loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
+            BindingList<MyDataANN> list = loadAllCheckBox.Checked ? 
+                await LoadWorksbyArt(0, "") : 
+                await LoadWorksbyArt(kod, articul);
+            customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
         }
 
         private void simpleButton2_Click(object sender, EventArgs e)
@@ -780,7 +816,34 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
             {
                 if (e.Column.FieldName == "IsChecked")
                 {
-                    await GridHelper.UpdateExclusiveCheckAsync<T>(gridControl, e.RowHandle);
+                    SafeInvoke(gridControl, () =>
+                    {
+                        var view = gridControl.MainView as GridView;
+                        if (view == null) return;
+
+                        var currentRow = view.GetRow(e.RowHandle) as ICheckable;
+                        if (currentRow == null) return;
+
+                        bool isChecked = (bool)e.Value;
+                        
+                        // Если текущая строка отмечается
+                        if (isChecked)
+                        {
+                            // Сначала снимаем все отметки
+                            for (int i = 0; i < view.RowCount; i++)
+                            {
+                                var row = view.GetRow(i) as ICheckable;
+                                if (row != null)
+                                {
+                                    row.IsChecked = false;
+                                }
+                            }
+                            // Затем отмечаем только текущую строку
+                            currentRow.IsChecked = true;
+                        }
+
+                        view.RefreshData();
+                    });
                 }
             }
             catch (Exception ex)
@@ -1091,56 +1154,6 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
             await NormRaszLoad();
         }
 
-        //private async Task MyDataArtLoad()
-        //{
-        //    try
-        //    {
-        //        // Fetch unbound articles
-        //        DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
-
-        //        // Log the result of the data retrieval
-        //        await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
-
-        //        // Check if the DataTable is not null and has rows
-        //        if (relatedData != null && relatedData.Rows.Count > 0)
-        //        {
-        //            BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
-
-        //            // Populate the BindingList with data from the DataTable
-        //            foreach (DataRow row in relatedData.Rows)
-        //            {
-        //                try
-        //                {
-        //                    artDataList.Add(new MyDataART
-        //                    {
-        //                        Kod = Convert.ToInt32(row["Kod"]),
-        //                        Articul = row["Articul"].ToString(),
-        //                        Group = row["Grup"].ToString(),
-        //                        Model = row["Mod"].ToString(),
-        //                        IsChecked = false
-        //                    });
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                }
-        //            }
-
-        //            // Set the data source for the grid control
-        //            customGridControl1.DataSource = artDataList;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
         private async Task MyDataArtLoad()
         {
             try
@@ -1220,19 +1233,26 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
         }
         private async Task MyDataAnnLoad()
         {
-            //int annId = 0;
-            //var view = customGridControl1.MainView as GridView;
-            //if (view != null)
-            //{
-            //    annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
-            //}
-            //List<MyDataANN> relatedMyDataAnn = new List<MyDataANN>();
-            ////РТ для увязки
-            //relatedMyDataAnn = await _artNormService
-            //normraszBindingSource1.DataSource = relatedMyDataAnn;
-            //customGridControl3.DataSource = normraszBindingSource1;
+            try
+            {
+                int kod = GetSelectedKodFromGrid(customGridControl1);
+                List<ArtNormN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
 
-
+                // Check if artNormNs is not null before proceeding
+                if (artNormNs != null)
+                {
+                    var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
+                    customGridControl3.DataSource = relatedMyDataAnn;
+                }
+                else
+                {
+                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+            }
 
             //BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
             //// Заполняем myDataList данными из DataTable 
@@ -1261,7 +1281,16 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
             //}
             //customGridControl2.DataSource = myDataList;
         }
-
+        private int GetSelectedKodFromGrid(GridControl grid)
+        {
+            var view = grid.MainView as GridView;
+            if (view != null && view.FocusedRowHandle >= 0)
+            {
+                // Retrieve the "Kod" value from the focused row
+                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
+            }
+            return 0; // Return 0 or an appropriate default value if no valid row is selected
+        }
         async Task NormRaszLoad()
         {
             int annId = 0;
@@ -1301,12 +1330,17 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
 
         }
 
-        private void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, e.FocusedRowHandle, "kod", 0);
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "articul", "");
+            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, e.FocusedRowHandle, "Kod", 0);
+            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
 
-            customGridControl2.DataSource = LoadWorksbyArt(kod, articul);
+
+            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
+                await LoadWorksbyArt(0, "") :
+    await LoadWorksbyArt(kod, articul);
+
+            customGridControl2.DataSource = list; //LoadWorksbyArt(kod, articul);
         }
 
         /// <summary>
@@ -1316,39 +1350,73 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
         /// <param name="e"></param>
         private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
+            if (e.Column.FieldName == "IsChecked")
+            {
+                SafeInvoke(gridView8.GridControl, () =>
+                {
+                    var view = sender as GridView;
+                    if (view == null) return;
 
+                    var currentRow = view.GetRow(e.RowHandle) as MyDataANN;
+                    if (currentRow == null) return;
+
+                    bool isChecked = (bool)e.Value;
+                    
+                    // Если текущая строка отмечается
+                    if (isChecked)
+                    {
+                        // Сначала снимаем все отметки
+                        for (int i = 0; i < view.RowCount; i++)
+                        {
+                            var row = view.GetRow(i) as MyDataANN;
+                            if (row != null)
+                            {
+                                row.IsChecked = false;
+                            }
+                        }
+                        // Затем отмечаем только текущую строку
+                        currentRow.IsChecked = true;
+                    }
+
+                    view.RefreshData();
+                });
+            }
         }
 
         //обработка клика на заголовке
         private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
         {
-            if (e.Column == gridView7.Columns["IsChecked"])
+            if (e.Column.FieldName == "IsChecked")
             {
-                int rowHandle = e.RowHandle;
-                MyDataART data = gridView7.GetRow(rowHandle) as MyDataART;
-
-                if (data != null)
+                SafeInvoke(gridView7.GridControl, () =>
                 {
-                    data.IsChecked = (bool)e.Value;
-                    if (data.IsChecked)
-                    { // Обходим все строки и устанавливаем IsChecked в false для остальных
-                        for (int i = 0; i < gridView7.RowCount; i++)
+                    var view = sender as GridView;
+                    if (view == null) return;
+
+                    var currentRow = view.GetRow(e.RowHandle) as MyDataART;
+                    if (currentRow == null) return;
+
+                    bool isChecked = (bool)e.Value;
+                    
+                    // Если текущая строка отмечается
+                    if (isChecked)
+                    {
+                        // Сначала снимаем все отметки
+                        for (int i = 0; i < view.RowCount; i++)
                         {
-                            if (i != rowHandle)
+                            var row = view.GetRow(i) as MyDataART;
+                            if (row != null)
                             {
-                                MyDataART otherData = gridView7.GetRow(i) as MyDataART;
-                                if (otherData != null)
-                                {
-                                    if (otherData.IsChecked)
-                                        otherData.IsChecked = false;
-                                }
+                                row.IsChecked = false;
                             }
                         }
+                        // Затем отмечаем только текущую строку
+                        currentRow.IsChecked = true;
                     }
-                }
-                gridView7.RefreshData();
-            }
 
+                    view.RefreshData();
+                });
+            }
         }
 
         #region headerCheckBox
@@ -1442,20 +1510,23 @@ List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul
         //обновление статуса CheckBox у всех строк таблицы
         private void UpdateAllRows(GridView view, bool isChecked)
         {
-            IList dataSource = view.DataSource as IList;
-            if (dataSource == null) return;
-
-            foreach (var item in dataSource)
+            SafeInvoke(view.GridControl, () =>
             {
-                if (item != null)
+                IList dataSource = view.DataSource as IList;
+                if (dataSource == null) return;
+
+                foreach (var item in dataSource)
                 {
-                    var property = item.GetType().GetProperty("IsChecked");
-                    if (property != null && property.CanWrite)
+                    if (item != null)
                     {
-                        property.SetValue(item, isChecked);
+                        var property = item.GetType().GetProperty("IsChecked");
+                        if (property != null && property.CanWrite)
+                        {
+                            property.SetValue(item, isChecked);
+                        }
                     }
                 }
-            }
+            });
         }
         //переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
         private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
