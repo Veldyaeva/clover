@@ -1218,56 +1218,6 @@ namespace SewingProduction.Forms
             await NormRaszLoad();
         }
 
-        //private async Task MyDataArtLoad()
-        //{
-        //    try
-        //    {
-        //        // Fetch unbound articles
-        //        DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
-
-        //        // Log the result of the data retrieval
-        //        await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
-
-        //        // Check if the DataTable is not null and has rows
-        //        if (relatedData != null && relatedData.Rows.Count > 0)
-        //        {
-        //            BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
-
-        //            // Populate the BindingList with data from the DataTable
-        //            foreach (DataRow row in relatedData.Rows)
-        //            {
-        //                try
-        //                {
-        //                    artDataList.Add(new MyDataART
-        //                    {
-        //                        Kod = Convert.ToInt32(row["Kod"]),
-        //                        Articul = row["Articul"].ToString(),
-        //                        Group = row["Grup"].ToString(),
-        //                        Model = row["Mod"].ToString(),
-        //                        IsChecked = false
-        //                    });
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                }
-        //            }
-
-        //            // Set the data source for the grid control
-        //            customGridControl1.DataSource = artDataList;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
         private async Task MyDataArtLoad()
         {
             try
