@@ -91,7 +91,8 @@ namespace SewingProduction.Services
         /// загрузка артикулов для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
+       // public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
+        public async Task<DataTable> GetArtNormDataCurrent(int kod, bool all)
         {
             string query = "";
             if (all)
@@ -103,7 +104,8 @@ namespace SewingProduction.Services
                 query = "SELECT annId, kod, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, status_ann.name AS stat, status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, data_sozd, diz, constr FROM artNormNView JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
             object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
-            return (List<ArtNormN>)result;
+            //return (List<ArtNormN>)result;
+            return (DataTable)result;
         }
 
         public async Task<List<ArtNormN>> GetArtNormDataCurrent(string art)
@@ -314,37 +316,88 @@ OUTPUT INSERTED.annID
 
         public async Task<int> InsertNormRaszAsync(NormRasz normRasz)
         {
-            string query = @"
-        INSERT INTO norm_rasz (annId, kod_o, text, spec, razryd, obor, kod_proizv)
-        OUTPUT INSERTED.nrID
-        VALUES (@annId, @kod_o, @text, @spec, @razryd, @obor, @kod_proizv)";
+            string query = @"INSERT INTO norm_rasz (annId, kod_o, text, spec, razryd, obor, kod_proizv, kod, n1, sek, kod_ob) 
+                           OUTPUT INSERTED.nrId 
+                           VALUES (@annId, @kod_o, @text, @spec, @razryd, @obor, @kod_proizv, @kod, @n1, @sek, @kod_ob)";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>
-    {
-        { "@annId", normRasz.AnnId },
-        { "@kod_o", normRasz.KodO },
-        { "@text", normRasz.Text },
-        { "@spec", normRasz.Spec },
-        { "@razryd", normRasz.Razryad },
-        { "@obor", normRasz.Obor },
-        { "@kod_proizv", normRasz.KodProizv },
-        //{ "@text_proizv", normRasz.TextProizv },
-        //{ "@text_ob", normRasz.TextOb },
-        //{ "@text_vyaz", normRasz.TextVyaz }
-    };
+            {
+                { "@annId", normRasz.AnnId },
+                { "@kod_o", normRasz.KodO },
+                { "@text", normRasz.Text },
+                { "@spec", normRasz.Spec },
+                { "@razryd", normRasz.Razryad },
+                { "@obor", normRasz.Obor },
+                { "@kod_proizv", normRasz.KodProizv },
+                { "@kod", normRasz.Kod },
+                { "@n1", normRasz.N1 },
+                { "@sek", normRasz.Sek },
+                { "@kod_ob", normRasz.KodOb }
+            };
 
+            object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public async Task<int> InsertNormRaskAsync(NormRask normRask)
+        {
+            // Ваш код для вставки в базу данных
+            // Например, используя ADO.NET или Entity Framework
+            string query = @"INSERT INTO norm_rask (annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s) 
+                           OUTPUT INSERTED.Id 
+                           VALUES (@annId, @kod_o, @text, @razryd, @obor, @n1, @sek, @n, @n_ch, @seb, @seb_s)";
+
+            Dictionary<string, object> parameters = new Dictionary<string, object>
+            {
+                { "@annId", normRask.annId },
+                { "@kod_o", normRask.kodO },
+                { "@text", normRask.text },
+                { "@razryd", normRask.razryad },
+                { "@obor", normRask.obor },
+                { "@n1", normRask.n1 },
+                { "@sek", normRask.sek },
+                { "@n", normRask.n },
+                { "@n_ch", normRask.n_ch },
+                { "@seb", normRask.seb },
+                { "@seb_s", normRask.seb_s }
+            };
+
+            object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
+            return Convert.ToInt32(result);
+        }
+
+        public Task<DataTable> GetNormRask()
+        {
+            string query = "SELECT Id, annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s FROM norm_rask";
+            return _dbHelper.ExecuteQueryAsync(query);
+        }
+
+        public Task<DataTable> GetNormRask(int annId)
+        {
+            string query = "SELECT Id, annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s FROM norm_rask WHERE annId = @annId";
+            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+        }
+        public async Task<string> GetEmployeeFullName(int employeeId)
+        {
             try
             {
-                object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
-                return result != null ? Convert.ToInt32(result) : -1;
+                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
+
+                // Log the result of the query
+                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
+
+                if (result.Rows.Count > 0)
+                {
+                    return result.Rows[0]["fio"].ToString();
+                }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при добавлении записи в norm_rasz");
-                return -1;
+                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
             }
+            return string.Empty;
         }
-
 
         //public async Task<List<ArtNormN>> GetAll()
         //{
@@ -384,6 +437,91 @@ OUTPUT INSERTED.annID
 
         //    return list;
         //}
+
+        public async Task<DataTable> GetRaskroyNormGroups()
+        {
+            string query = @"
+                SELECT DISTINCT gr, naimen 
+                FROM raskroy_norm 
+                ORDER BY gr";
+
+            return await _dbHelper.ExecuteQueryAsync(query);
+        }
+
+        public async Task<DataTable> GetRaskroyNormByGroup(int groupId)
+        {
+            string query = @"
+                SELECT * 
+                FROM raskroy_norm 
+                WHERE gr = @groupId
+                ORDER BY naimen";
+
+            var parameters = new Dictionary<string, object>
+            {
+                { "@groupId", groupId }
+            };
+
+            return await _dbHelper.ExecuteQueryAsync(query, parameters);
+        }
+
+        public async Task SaveRaskroyNorm(RaskroyNorm norm)
+        {
+            try
+            {
+                string query = @"
+                    UPDATE raskroy_norm 
+                    SET dras1 = @dras1,
+                        drez1 = @drez1,
+                        dpro1 = @dpro1,
+                        lras1 = @lras1,
+                        lrez1 = @lrez1,
+                        lpro1 = @lpro1,
+                        dras2 = @dras2,
+                        drez2 = @drez2,
+                        dpro2 = @dpro2,
+                        lras2 = @lras2,
+                        lrez2 = @lrez2,
+                        lpro2 = @lpro2,
+                        dras3 = @dras3,
+                        drez3 = @drez3,
+                        dpro3 = @dpro3,
+                        lras3 = @lras3,
+                        lrez3 = @lrez3,
+                        lpro3 = @lpro3
+                    WHERE gr = @gr AND naimen = @naimen";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@gr", norm.Gr },
+                    { "@naimen", norm.Naimen },
+                    { "@dras1", norm.Dras1 },
+                    { "@drez1", norm.Drez1 },
+                    { "@dpro1", norm.Dpro1 },
+                    { "@lras1", norm.Lras1 },
+                    { "@lrez1", norm.Lrez1 },
+                    { "@lpro1", norm.Lpro1 },
+                    { "@dras2", norm.Dras2 },
+                    { "@drez2", norm.Drez2 },
+                    { "@dpro2", norm.Dpro2 },
+                    { "@lras2", norm.Lras2 },
+                    { "@lrez2", norm.Lrez2 },
+                    { "@lpro2", norm.Lpro2 },
+                    { "@dras3", norm.Dras3 },
+                    { "@drez3", norm.Drez3 },
+                    { "@dpro3", norm.Dpro3 },
+                    { "@lras3", norm.Lras3 },
+                    { "@lrez3", norm.Lrez3 },
+                    { "@lpro3", norm.Lpro3 }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в таблицу raskroy_norm");
+                throw;
+            }
+        }
 
     }
 }

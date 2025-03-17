@@ -100,7 +100,7 @@ namespace SewingProduction.Forms
             }
         }
 
-        
+
 
 
         /// <summary>
@@ -109,6 +109,7 @@ namespace SewingProduction.Forms
         /// <param name="kod">Код артикула</param>
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
+        /// 
         private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
         {
             try
@@ -118,39 +119,39 @@ namespace SewingProduction.Forms
                 // Если включен чекбокс "Загрузить все"
                 if (loadAllCheckBox.Checked)
                 {
-                    relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
+                    relatedData = ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, false)); //relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
                 }
                 else
                 {
-                    relatedData = await _artNormService.GetArtNormDataCurrent(kod, false);
+                    relatedData = ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, false));
 
                     // Если артикул содержит "-", фильтруем по его первой части
                     int dashIndex = articul.IndexOf("-");
                     if (dashIndex > 0)
                     {
-                        List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
-                        foreach (var item in partialData)
-                        { relatedData.Add(item); }
+//                        List<ArtNormN> partialData = //await _artNormService.GetArtNormDataCurrent(kod, true);//ConvertDataTableToList<ArtNormN>(partialTable);
+List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
+                        relatedData.AddRange(partialData);
                     }
                 }
 
-                // Преобразуем DataTable в BindingList<MyDataANN>
+                // Преобразуем List<ArtNormN> в BindingList<MyDataANN>
                 BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
 
-                foreach (var row in myDataList)
+                foreach (var item in relatedData)
                 {
                     myDataList.Add(new MyDataANN
                     {
-                        AnnId = row.AnnId,
-                        Kod = row.Kod,
-                        Articul = row.Articul,
-                        Status = row.Status,
-                        //Stat "].ToString(),
-                        Group = row.Group,
-                        Model = row.Model,
+                        AnnId = item.AnnID,
+                        Kod = item.Kod,
+                        Articul = item.Articul,
+                        Status = item.Status,
+                        Group = item.Group,
+                        Model = item.Mod,
                         IsChecked = false
                     });
                 }
+
                 await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
                 return myDataList;
             }
@@ -160,6 +161,79 @@ namespace SewingProduction.Forms
                 MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
             }
+        }
+
+        //private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
+        //{
+        //    try
+        //    {
+        //        List<ArtNormN> relatedData;
+
+        //        // Если включен чекбокс "Загрузить все"
+        //        if (loadAllCheckBox.Checked)
+        //        {
+        //            relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
+        //        }
+        //        else
+        //        {
+        //            relatedData = await _artNormService.GetArtNormDataCurrent(kod, false);
+
+        //            // Если артикул содержит "-", фильтруем по его первой части
+        //            int dashIndex = articul.IndexOf("-");
+        //            if (dashIndex > 0)
+        //            {
+        //                List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
+        //                foreach (var item in partialData)
+        //                { relatedData.Add(item); }
+        //            }
+        //        }
+
+        //        // Преобразуем DataTable в BindingList<MyDataANN>
+        //        BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
+
+        //        foreach (var row in myDataList)
+        //        {
+        //            myDataList.Add(new MyDataANN
+        //            {
+        //                AnnId = row.AnnId,
+        //                Kod = row.Kod,
+        //                Articul = row.Articul,
+        //                Status = row.Status,
+        //                Stat  = row.Stat,
+        //                Group = row.Group,
+        //                Model = row.Model,
+        //                IsChecked = false
+        //            });
+        //        }
+        //        await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
+        //        return myDataList;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки РТ для кода {kod} и артикула {articul}");
+        //        MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
+        //    }
+        //}
+        private List<T> ConvertDataTableToList<T>(DataTable table) where T : new()
+        {
+            List<T> list = new List<T>();
+
+            foreach (DataRow row in table.Rows)
+            {
+                T obj = new T();
+                foreach (DataColumn column in table.Columns)
+                {
+                    var property = typeof(T).GetProperty(column.ColumnName);
+                    if (property != null && row[column] != DBNull.Value)
+                    {
+                        property.SetValue(obj, Convert.ChangeType(row[column], property.PropertyType));
+                    }
+                }
+                list.Add(obj);
+            }
+
+            return list;
         }
 
         #region Обработка смены строки
@@ -177,25 +251,61 @@ namespace SewingProduction.Forms
             {
                 var view = ANNgridView;
 
-                commentRichTextBox.Text = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "komment", "");
-                constructorComboBox.Text = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "constr", 0).ToString();
-                designerComboBox.Text = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "diz", 0).ToString();
+                // Получаем значения из выбранной строки
+                string comment = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "Komment", "");
+                int constructorId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "Constr", 0);
+                int designerId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "Diz", 0);
+
+                // Log the retrieved IDs
+                await _logger.LogEventAsync($"Constructor ID: {constructorId}, Designer ID: {designerId}", "RowChange");
+
+                // Устанавливаем значения в соответствующие элементы управления
+                commentRichTextBox.Text = comment;
+
+                // Fetch and set the constructor's full name
+                string constructorName = await GetEmployeeFullName(constructorId);
+                constructorTextBox.Text = constructorName;
+
+                // Fetch and set the designer's full name
+                string designerName = await GetEmployeeFullName(designerId);
+                designerTextBox.Text = designerName;
 
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                //UpdateRelatedData(annId);
                 await LoadRelatedData(annId);
 
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "kod", "");
                 int o = 0;
-                try { o=Convert.ToInt32(kod); }
+                try { o = Convert.ToInt32(kod); }
                 catch (Exception ex) { await _logger.LogErrorAsync(ex, "опять КОД это строка"); return; }
-                finally { if(o>0) LoadGridControlData(pictureBox1, o); }
+                finally { if (o > 0) LoadGridControlData(pictureBox1, o); }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при смене выбранной строки в gridView3");
                 MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private async Task<string> GetEmployeeFullName(int employeeId)
+        {
+            try
+            {
+                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
+
+                // Log the result of the query
+                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
+
+                if (result.Rows.Count > 0)
+                {
+                    return result.Rows[0]["fio"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
+            }
+            return string.Empty; // Return empty if not found or error occurs
         }
 
         #endregion
@@ -976,50 +1086,137 @@ namespace SewingProduction.Forms
             //загрузка артикулов для увязки (актуальные и предварительные)
             await MyDataArtLoad();
             //загрузка  таблицы РТ для увязки (текущие работы)
-            //await MyDataAnnLoad();
+            await MyDataAnnLoad();
             //norm_rasz
             await NormRaszLoad();
         }
 
+        //private async Task MyDataArtLoad()
+        //{
+        //    try
+        //    {
+        //        // Fetch unbound articles
+        //        DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
+
+        //        // Log the result of the data retrieval
+        //        await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
+
+        //        // Check if the DataTable is not null and has rows
+        //        if (relatedData != null && relatedData.Rows.Count > 0)
+        //        {
+        //            BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+
+        //            // Populate the BindingList with data from the DataTable
+        //            foreach (DataRow row in relatedData.Rows)
+        //            {
+        //                try
+        //                {
+        //                    artDataList.Add(new MyDataART
+        //                    {
+        //                        Kod = Convert.ToInt32(row["Kod"]),
+        //                        Articul = row["Articul"].ToString(),
+        //                        Group = row["Grup"].ToString(),
+        //                        Model = row["Mod"].ToString(),
+        //                        IsChecked = false
+        //                    });
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //                    MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                }
+        //            }
+
+        //            // Set the data source for the grid control
+        //            customGridControl1.DataSource = artDataList;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         private async Task MyDataArtLoad()
         {
             try
             {
-                //неувязанные артикулы
-                //List<MyDataART> relatedData = await _artNormService.GetUnboundArt();
-                BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+                // Fetch unbound articles
                 DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
-                // Заполняем myDataList данными из DataTable 
-                foreach (DataRow row in relatedData.Rows)
+
+                // Log the result of the data retrieval
+                await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
+
+                // Check if the DataTable is not null and has rows
+                if (relatedData != null && relatedData.Rows.Count > 0)
                 {
+                    BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
+
+                    // Populate the BindingList with data from the DataTable using the mapping method
+                    foreach (DataRow row in relatedData.Rows)
+                    {
+                        try
+                        {
+                            artDataList.Add(MapDataRowToMyDataART(row));
+                        }
+                        catch (Exception ex)
+                        {
+                            await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                            MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+
+                    // Set the data source for the grid control
                     try
                     {
-                        artDataList.Add(new MyDataART
-                        {
-                            Kod = Convert.ToInt32(row["Kod"]),
-                            Articul = row["Articul"].ToString(),
-                            Group = row["Grup"].ToString(),
-                            Model = row["Mod"].ToString(),
-                            // binded_art = row["binded_art"].ToString(),
-                            IsChecked = false
-                        });
+                        customGridControl1.DataSource = artDataList; // This should work if types match
                     }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    ;
+                    catch(Exception ex) { MessageBox.Show("Ошибка приведения artDataList.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 }
-
-                customGridControl1.DataSource = artDataList;
-
+                else
+                {
+                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                MessageBox.Show($"Ошибка загрузки данных в текущие работы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+        private MyDataART MapDataRowToMyDataART(DataRow row)
+        {
+            if (row == null || row.Table == null)
+            {
+                Console.WriteLine("❌ Ошибка: передан пустой DataRow или у него отсутствует таблица!");
+                return null;
+            }
+
+            // Проверяем, содержит ли DataRow нужные колонки
+            bool hasKod = row.Table.Columns.Contains("Kod");
+            bool hasArticul = row.Table.Columns.Contains("Articul");
+            bool hasGrup = row.Table.Columns.Contains("Grup");
+            bool hasMod = row.Table.Columns.Contains("Mod");
+
+            // Логируем список доступных колонок (для отладки)
+            Console.WriteLine("📢 Доступные колонки в DataRow:");
+            foreach (DataColumn col in row.Table.Columns)
+            {
+                Console.WriteLine($"🔹 {col.ColumnName}");
+            }
+
+            return new MyDataART
+            {
+                Kod = hasKod && row["Kod"] != DBNull.Value ? Convert.ToInt32(row["Kod"]) : 0,
+                Articul = hasArticul && row["Articul"] != DBNull.Value ? row["Articul"].ToString() : string.Empty,
+                Group = hasGrup && row["Grup"] != DBNull.Value ? row["Grup"].ToString() : string.Empty,
+                Model = hasMod && row["Mod"] != DBNull.Value ? row["Mod"].ToString() : string.Empty,
+                IsChecked = false // Default value
+            };
         }
         private async Task MyDataAnnLoad()
         {

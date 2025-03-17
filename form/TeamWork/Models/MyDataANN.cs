@@ -6,7 +6,7 @@ namespace SewingProduction.Models
     public class MyDataANN : Interfaces.ICheckable, INotifyPropertyChanged
     {
         public int AnnId { get; set; }
-        public int Kod { get; set; }
+        public string Kod { get; set; }
         public string Articul { get; set; }
         public int Status { get; set; }
         public string Group { get; set; }
