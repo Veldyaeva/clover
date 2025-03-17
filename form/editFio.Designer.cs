@@ -208,6 +208,7 @@
             this.customComboBoxOb.Name = "customComboBoxOb";
             this.customComboBoxOb.Size = new System.Drawing.Size(252, 24);
             this.customComboBoxOb.TabIndex = 6;
+            this.customComboBoxOb.SelectedIndexChanged += new System.EventHandler(this.customComboBoxOb_SelectedIndexChanged);
             // 
             // customTextBoxFIO
             // 
@@ -639,6 +640,7 @@
             this.customComboBoxPodr.Name = "customComboBoxPodr";
             this.customComboBoxPodr.Size = new System.Drawing.Size(252, 24);
             this.customComboBoxPodr.TabIndex = 50;
+            this.customComboBoxPodr.SelectedIndexChanged += new System.EventHandler(this.customComboBoxPodr_SelectedIndexChanged);
             // 
             // customComboBoxNTab
             // 
@@ -705,6 +707,7 @@
             this.customComboBoxDolj.Name = "customComboBoxDolj";
             this.customComboBoxDolj.Size = new System.Drawing.Size(252, 24);
             this.customComboBoxDolj.TabIndex = 24;
+            this.customComboBoxDolj.SelectedIndexChanged += new System.EventHandler(this.customComboBoxDolj_SelectedIndexChanged);
             // 
             // customCheckBoxITR
             // 
@@ -808,6 +811,7 @@
             this.customComboBoxPodr1c.Name = "customComboBoxPodr1c";
             this.customComboBoxPodr1c.Size = new System.Drawing.Size(271, 24);
             this.customComboBoxPodr1c.TabIndex = 27;
+            this.customComboBoxPodr1c.SelectedIndexChanged += new System.EventHandler(this.customComboBoxPodr1c_SelectedIndexChanged);
             // 
             // dateRozd
             // 

@@ -16,6 +16,7 @@ using static SewingProduction.ThemeManager;
 using System.Data;
 using DevExpress.XtraRichEdit.Model;
 using DevExpress.XtraEditors.Controls;
+using System.Diagnostics;
 
 namespace SewingProduction
 {
@@ -608,26 +609,26 @@ public class DatabaseHelper
     /// <returns></returns>
     public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
     {
-        var dt = new DataTable();
-        using (var connection = new SqlConnection(_connectionString))
-        {
-            connection.Open();
-            using (var command = new SqlCommand(query, connection))
+            var dt = new DataTable();
+            using (var connection = new SqlConnection(_connectionString))
             {
-                if (parameters != null)
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
                 {
-                    foreach (var param in parameters)
+                    if (parameters != null)
                     {
-                        command.Parameters.AddWithValue(param.Key, param.Value);
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                    using (var adapter = new SqlDataAdapter(command))
+                    {
+                        adapter.Fill(dt);
                     }
                 }
-                using (var adapter = new SqlDataAdapter(command))
-                {
-                    adapter.Fill(dt);
-                }
             }
-        }
-        return dt;
+            return dt;
     }
 
     /// <summary>

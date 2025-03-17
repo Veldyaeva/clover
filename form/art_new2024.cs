@@ -24,13 +24,13 @@ namespace SewingProduction.form
     /// </summary>
     public partial class art_new2024 : CustomForm
     {
-        private readonly ArtNormService _artNormService;
+        private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
         public art_new2024(string kodArtSQL)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
-            _artNormService = new ArtNormService(dbHelper);
+            _artNewDataService = new ArtNewDataService(dbHelper);
             UpdateTheme(this);
             kodSQL = kodArtSQL;
         }
@@ -106,37 +106,37 @@ namespace SewingProduction.form
         // Загрузка комбобоксов
         private void comboAllTableItems()
         {
-            searchLookUpEditGost.Properties.DataSource = _artNormService.GetGostUst();
+            searchLookUpEditGost.Properties.DataSource = _artNewDataService.GetGostUst();
             searchLookUpEditGost.Properties.DisplayMember = "Описание";
 
-            searchLookUpEditGroup.Properties.DataSource = _artNormService.GetGostSvPictAndArticulGrup();
+            searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrup();
             searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
 
-            searchLookUpEditTm1.Properties.DataSource = _artNormService.GetViewTovarMarka();
+            searchLookUpEditTm1.Properties.DataSource = _artNewDataService.GetViewTovarMarka();
             searchLookUpEditTm1.Properties.DisplayMember = "Наименование";
 
-            searchLookUpEditTm2.Properties.DataSource = _artNormService.GetViewGrupMen();
+            searchLookUpEditTm2.Properties.DataSource = _artNewDataService.GetViewGrupMen();
             searchLookUpEditTm2.Properties.DisplayMember = "Наименование";
 
-            searchLookUpEditRazm.Properties.DataSource = _artNormService.GetGostSvRazmerAndGostRazmer();
+            searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmer();
             searchLookUpEditRazm.Properties.DisplayMember = "Размер";
 
-            searchLookUpEditPrizn.Properties.DataSource = _artNormService.GetTovarCatDynsign();
+            searchLookUpEditPrizn.Properties.DataSource = _artNewDataService.GetTovarCatDynsign();
             searchLookUpEditPrizn.Properties.DisplayMember = "Признак";
         }
         private void lookUpEditGost_EditValueChanged(object sender, EventArgs e)
         {
             // группы
-            searchLookUpEditGroup.Properties.DataSource = _artNormService.GetGostSvPictAndArticulGrupWhere(searchLookUpEditGost.Text);
+            searchLookUpEditGroup.Properties.DataSource = _artNewDataService.GetGostSvPictAndArticulGrupWhere(searchLookUpEditGost.Text);
             searchLookUpEditGroup.Properties.DisplayMember = "Наименование";
             // размеры
-            searchLookUpEditRazm.Properties.DataSource = _artNormService.GetGostSvRazmerAndGostRazmerWhere(searchLookUpEditGost.Text);
+            searchLookUpEditRazm.Properties.DataSource = _artNewDataService.GetGostSvRazmerAndGostRazmerWhere(searchLookUpEditGost.Text);
             searchLookUpEditRazm.Properties.DisplayMember = "Размер";
         }
         // Копирование артикула
         private void copyArt()
         {
-            var tableList = _artNormService.GetSpArticulKod(kodSQL);
+            var tableList = _artNewDataService.GetSpArticulKod(kodSQL);
             // Загружаем данные:
             if (tableList.Rows.Count > 0)
             {
@@ -189,5 +189,62 @@ namespace SewingProduction.form
                 }
             }
         }
+    }
+    public class ArtNewDataService
+    {
+        private readonly DatabaseHelper _dbHelper;
+        public ArtNewDataService(DatabaseHelper dbHelper)
+        {
+            _dbHelper = dbHelper;
+        }
+        #region art_new2024
+        public DataTable GetGostUst()
+        {
+            string query = "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,TRIM(opi_gost) AS 'Описание' FROM gost WHERE ust=1";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetGostSvPictAndArticulGrup()
+        {
+            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetViewTovarMarka()
+        {
+            string query = "SELECT TRIM(kodsp) AS kle, TRIM(m_naimen) AS 'Наименование' FROM dbo.view_tovar_marka WHERE tmOwn = 1 ";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetViewGrupMen()
+        {
+            string query = "SELECT men_id, TRIM(name) AS 'Наименование' FROM view_grup_men WHERE men_id >0 order by men_id ";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetGostSvRazmerAndGostRazmer()
+        {
+            string query = "SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetTovarCatDynsign()
+        {
+            string query = "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetGostSvPictAndArticulGrupWhere(string opiGost)
+        {
+            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
+            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art" + condition;
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetGostSvRazmerAndGostRazmerWhere(string opiGost)
+        {
+            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
+            string query = $"SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost" + condition;
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public DataTable GetSpArticulKod(string kodSQL)
+        {
+            string query = $"SELECT kod, articul, razm AS 'Размер', kle, mod, grup, ag_id, kod_tnved, CAST(grupp AS INT) AS men_id FROM sp_articul WHERE kod = '@kodSQL'";
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kodSQL", kodSQL } });
+        }
+        #endregion
     }
 }
