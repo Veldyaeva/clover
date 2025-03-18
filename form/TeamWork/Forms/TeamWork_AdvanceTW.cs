@@ -43,6 +43,9 @@ namespace SewingProduction.form
             _newAnnId = id;
 
             InitializeBindings();
+            
+            // Подписываемся на событие закрытия формы
+            this.FormClosing += TeamWork_AdvanceTW_FormClosing;
         }
 
         private void InitializeBindings()
@@ -90,40 +93,114 @@ namespace SewingProduction.form
             gridView5.OptionsView.ShowGroupPanel = false;
         }
 
+        private void SetupGridColumnsRask()
+        {
+            //gridView2.Columns.Clear();
+
+            //gridView2.Columns.AddVisible("KodO", "Код операции");
+            //gridView2.Columns.AddVisible("Text", "Текст");
+            //gridView2.Columns.AddVisible("Razryad", "Разряд");
+            //gridView2.Columns.AddVisible("Obor", "Оборудование");
+            //gridView2.Columns.AddVisible("Kod", "Код");
+            //gridView2.Columns.AddVisible("n1", "Норма");
+            //gridView2.Columns.AddVisible("sek", "Секунды");
+            //gridView2.Columns.AddVisible("n", "Количество");
+            //gridView2.Columns.AddVisible("n_ch", "Количество человек");
+            //gridView2.Columns.AddVisible("seb", "Себестоимость");
+            //gridView2.Columns.AddVisible("seb_s", "Себестоимость суммарная");
+
+            // Скрываем служебные поля
+            if (gridView2.Columns["id"] != null)
+                gridView2.Columns["id"].Visible = false;
+            if (gridView2.Columns["annId"] != null)
+                gridView2.Columns["annId"].Visible = false;
+
+            // Настраиваем опции редактирования
+            gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            gridView2.OptionsEditForm.EditFormColumnCount = 1;
+            gridView2.OptionsEditForm.PopupEditFormWidth = 400;
+            gridView2.OptionsView.ShowGroupPanel = false;
+        }
+
+        private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                // Проверяем, не установлены ли редакторы в режим Inplace
+                if (gridView5 != null && gridView5.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                {
+                    gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                }
+                
+                if (gridView2 != null && gridView2.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                {
+                    gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Логируем ошибку, но не мешаем закрытию формы
+                if (_logger != null)
+                {
+                    _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork_AdvanceTW");
+                }
+            }
+        }
+
         private void GridView5_InitNewRow(object sender, InitNewRowEventArgs e)
         {
-            using (var selectionForm = new NormOperNew())
+            var gridView = sender as GridView;
+            if (gridView == null)
+                return;
+
+            // Сохраняем настройки редактирования
+            var allowEditing = gridView.OptionsBehavior.Editable;
+            
+            // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
+            gridView.OptionsBehavior.Editable = false;
+
+            try
             {
-                if (selectionForm.ShowDialog() == DialogResult.OK)
+                using (var selectionForm = new NormOperNew())
                 {
-                    var selectedData = selectionForm.SelectedRowData;
-                    if (selectedData != null)
+                    DialogResult result = selectionForm.ShowDialog();
+                    
+                    if (result == DialogResult.OK)
                     {
-                        // Заполняем значения в текущей новой строке
-                        gridView5.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-                        gridView5.SetRowCellValue(e.RowHandle, "KodO", selectedData.KodO);
-                        gridView5.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
-                        gridView5.SetRowCellValue(e.RowHandle, "Spec", selectedData.Spec);
-                        gridView5.SetRowCellValue(e.RowHandle, "Razryad", selectedData.Razryad);
-                        gridView5.SetRowCellValue(e.RowHandle, "Obor", selectedData.Obor);
-                        gridView5.SetRowCellValue(e.RowHandle, "KodProizv", selectedData.KodProizv);
-                        gridView5.SetRowCellValue(e.RowHandle, "Kod", selectedData.Kod);
-                        gridView5.SetRowCellValue(e.RowHandle, "N1", selectedData.N1);
-                        gridView5.SetRowCellValue(e.RowHandle, "Sek", selectedData.Sek);
-                        gridView5.SetRowCellValue(e.RowHandle, "KodPodr", selectedData.KodPodr);
-                        gridView5.SetRowCellValue(e.RowHandle, "KodOb", selectedData.KodOb);
+                        var selectedData = selectionForm.SelectedRowData;
+                        if (selectedData != null)
+                        {
+                            // Заполняем значения в текущей новой строке
+                            gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
+                            gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.KodO);
+                            gridView.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
+                            gridView.SetRowCellValue(e.RowHandle, "Spec", selectedData.Spec);
+                            gridView.SetRowCellValue(e.RowHandle, "Razryad", selectedData.Razryad);
+                            gridView.SetRowCellValue(e.RowHandle, "Obor", selectedData.Obor);
+                            gridView.SetRowCellValue(e.RowHandle, "KodProizv", selectedData.KodProizv);
+                            gridView.SetRowCellValue(e.RowHandle, "Kod", selectedData.Kod);
+                            gridView.SetRowCellValue(e.RowHandle, "N1", selectedData.N1);
+                            gridView.SetRowCellValue(e.RowHandle, "Sek", selectedData.Sek);
+                            gridView.SetRowCellValue(e.RowHandle, "KodPodr", selectedData.KodPodr);
+                            gridView.SetRowCellValue(e.RowHandle, "KodOb", selectedData.KodOb);
+                        }
+                        else
+                        {
+                            // Если данные не выбраны, удаляем строку
+                            gridView.DeleteRow(e.RowHandle);
+                        }
                     }
                     else
                     {
-                        // Если данные не выбраны, удаляем строку
-                        gridView5.DeleteRow(e.RowHandle);
+                        // Если диалог закрыт не через OK, удаляем строку
+                        gridView.DeleteRow(e.RowHandle);
                     }
                 }
-                else
-                {
-                    // Если диалог отменен, удаляем строку
-                    gridView5.DeleteRow(e.RowHandle);
-                }
+            }
+            finally
+            {
+                // Восстанавливаем настройки редактирования
+                gridView.OptionsBehavior.Editable = allowEditing;
             }
         }
 
@@ -150,6 +227,97 @@ namespace SewingProduction.form
                     {
                         normRasz.nrId = await _artNormService.InsertNormRaszAsync(normRasz);
                         if (normRasz.nrId <= 0)
+                        {
+                            e.Valid = false;
+                            e.ErrorText = "Ошибка при сохранении записи в базу данных";
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    e.Valid = false;
+                    e.ErrorText = $"Ошибка: {ex.Message}";
+                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+                }
+            }
+        }
+
+        private void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        {
+            var gridView = sender as GridView;
+            if (gridView == null)
+                return;
+
+            // Сохраняем настройки редактирования
+            var allowEditing = gridView.OptionsBehavior.Editable;
+            
+            // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
+            gridView.OptionsBehavior.Editable = false;
+
+            try
+            {
+                using (var selectionForm = new norm_raskrNew())
+                {
+                    DialogResult result = selectionForm.ShowDialog();
+                    
+                    if (result == DialogResult.OK && selectionForm.SelectedData != null)
+                    {
+                        var selectedDataList = selectionForm.SelectedData;
+
+                        // Вставляем данные в gridView2
+                        foreach (var normRask in selectedDataList)
+                        {
+                            normRask.annId = _newAnnId;
+                            _normRaskList.Add(normRask); // Добавляем в список
+                        }
+
+                        // Обновляем привязку данных
+                        _normRaskBindingSource.ResetBindings(false);
+
+                        // Сохраняем данные в базу данных
+                        foreach (var normRask in selectedDataList)
+                        {
+                            _artNormService.InsertNormRaskAsync(normRask); 
+                        }
+                        gridView.UpdateCurrentRow();
+                    }
+                    else
+                    {
+                        // Если пользователь отменил выбор или не выбрал данные, удаляем строку
+                        gridView.DeleteRow(gridView.GetRowHandle(e.RowHandle));
+                    }
+                }
+            }
+            finally
+            {
+                // Восстанавливаем настройки редактирования
+                gridView.OptionsBehavior.Editable = allowEditing;
+            }
+        }
+
+        private void GridView2_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        {
+            if (e.Row is NormRask normRask)
+            {
+                normRask.annId = _newAnnId;
+                gridView2.UpdateCurrentRow();
+            }
+        }
+
+        private async void GridView2_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            if (e.Row is NormRask normRask)
+            {
+                try
+                {
+                    // Убеждаемся что AnnId установлен
+                    normRask.annId = _newAnnId;
+
+                    // Если это новая запись (Id <= 0), сохраняем в БД
+                    if (normRask.id <= 0)
+                    {
+                        normRask.id = await _artNormService.InsertNormRaskAsync(normRask);
+                        if (normRask.id <= 0)
                         {
                             e.Valid = false;
                             e.ErrorText = "Ошибка при сохранении записи в базу данных";

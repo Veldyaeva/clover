@@ -237,7 +237,14 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
 
         internal Task<DataTable> GetNormOper(int i)
         {
-            string query = "SELECT * FROM dbo.norm_oper";
+            string query = @"SELECT no.*, 
+                     kp.text_proizv,
+                     pv.text_vyaz,
+                     ob.text_ob
+                     FROM dbo.norm_oper no
+                     LEFT JOIN kod_proizv kp ON no.kod_proizv = kp.kod_proizv
+                     LEFT JOIN podr_vyaz pv ON no.kod_proizv = pv.kod_vyaz
+                     LEFT JOIN oborud_shv ob ON no.kod_ob = ob.kod_ob";
             return _dbHelper.ExecuteQueryAsync(query);
         }
 

@@ -21,8 +21,8 @@ namespace SewingProduction.Models
         public int KodProizv { get; set; }
         public string Spec { get; set; }
         public string KodOb { get; set; }
-        //public string TextProizv { get; set; }
-        //public string TextOb { get; set; }
-        //public string TextVyaz { get; set; }
+        public string TextProizv { get; set; }
+        public string TextOb { get; set; }
+        public string TextVyaz { get; set; }
     }
 }
