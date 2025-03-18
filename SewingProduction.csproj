@@ -461,6 +461,9 @@
     <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
