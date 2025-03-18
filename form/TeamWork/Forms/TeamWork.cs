@@ -25,6 +25,7 @@ using System.Collections;
 using System.Drawing;
 using DevExpress.XtraCharts;
 using SewingProduction.Interfaces;
+using System.IO;
 
 
 namespace SewingProduction.Forms
@@ -35,6 +36,7 @@ namespace SewingProduction.Forms
         private readonly ArtNormService _artNormService;
         private int selectedRowHandle = -1;
         private readonly ILogger _logger =new FileLogger();
+        private readonly GridHelper _gridHelper = new GridHelper();
         private int bufferWorkDivision;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
@@ -68,6 +70,58 @@ namespace SewingProduction.Forms
             _bindingList = new BindingList<ArtNormN>();
             _bindingSource = new BindingSource { DataSource = _bindingList };
             ANNgridControl.DataSource = _bindingSource;
+
+        }
+
+        private async void TeamWork_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Загружаем настройки для всех гридов
+                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
+
+                await LoadWorkDivisions();
+                await CurrentWorks_Load();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork");
+            }
+        }
+
+        private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                // Сохраняем настройки для всех гридов при закрытии формы
+                _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView7, "gridView7Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView9, "gridView9Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView10, "gridView10Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView11, "gridView11Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView12, "gridView12Layout.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork");
+            }
         }
 
         #region Загрузка данных

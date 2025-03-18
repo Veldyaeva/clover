@@ -1,16 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 
 namespace SewingProduction.Helpers
 {
-    public static class GridHelper
+    public  class GridHelper
     {
+        public readonly HybridLogger _logger = new HybridLogger();
         #region async
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource` асинхронно.
@@ -148,6 +152,55 @@ namespace SewingProduction.Helpers
                 }
                 gridView.RefreshData();
             });
+        }
+        #endregion
+
+        #region GridColumnSettings
+        // Сохранение настроек грида
+        public void SaveGridViewSettings(GridView gridView, string fileName)
+        {
+            try
+            {
+                string appPath = Application.StartupPath;
+                string settingsPath = Path.Combine(appPath, "Settings");
+
+                // Создаем директорию, если она не существует
+                if (!Directory.Exists(settingsPath))
+                    Directory.CreateDirectory(settingsPath);
+
+                string fullPath = Path.Combine(settingsPath, fileName);
+                gridView.SaveLayoutToXml(fullPath);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
+            }
+        }
+
+        public void GridView_ColumnWidthChanged(object sender, ColumnEventArgs e)
+        {
+            if (sender is GridView view)
+            {
+                string fileName = $"{view.Name}Layout.xml";
+                SaveGridViewSettings(view, fileName);
+            }
+        }
+
+        public void LoadGridViewSettings(GridView view, string fileName)
+        {
+            try
+            {
+                string appPath = Application.StartupPath;
+                string settingsPath = Path.Combine(appPath, "Settings");
+                string fullPath = Path.Combine(settingsPath, fileName);
+
+                if (File.Exists(fullPath))
+                    view.RestoreLayoutFromXml(fullPath);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
+            }
         }
         #endregion
 

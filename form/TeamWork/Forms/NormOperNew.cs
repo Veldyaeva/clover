@@ -16,6 +16,7 @@ namespace SewingProduction.form
         private readonly DatabaseHelper _dbHelper;
         private readonly ArtNormService _artNormService;
         private readonly ILogger _logger = new FileLogger();
+        private readonly GridHelper _gridHelper = new GridHelper();
 
         public NormRasz SelectedRowData { get; private set; }
 
@@ -38,7 +39,7 @@ namespace SewingProduction.form
             try
             {
                 // Загружаем настройки грида перед заполнением данными
-                LoadGridViewSettings(gridView1, "NormOperGrid.xml");
+                _gridHelper.LoadGridViewSettings(gridView1, "NormOperGrid.xml");
 
                 // Заполнение данных из БД
                // this.norm_operTableAdapter.Fill(this.aCE_backupDataSet.norm_oper);
@@ -53,49 +54,19 @@ namespace SewingProduction.form
         }
         private void NormOperNew_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Сохраняем настройки грида при закрытии формы
-            SaveGridViewSettings(gridView1, "NormOperGrid.xml");
-        }
-
-
-        // Сохранение настроек грида
-        private void SaveGridViewSettings(GridView gridView, string fileName)
-        {
             try
             {
-                string appPath = Application.StartupPath;
-                string settingsPath = Path.Combine(appPath, "Settings");
-
-                // Создаем директорию, если она не существует
-                if (!Directory.Exists(settingsPath))
-                    Directory.CreateDirectory(settingsPath);
-
-                string fullPath = Path.Combine(settingsPath, fileName);
-                gridView.SaveLayoutToXml(fullPath);
+                // Сохраняем настройки грида при закрытии формы
+                _gridHelper.SaveGridViewSettings(gridView1, "NormOperGrid.xml");
             }
+
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
             }
+
         }
 
-        // Загрузка настроек грида
-        private void LoadGridViewSettings(GridView gridView, string fileName)
-        {
-            try
-            {
-                string appPath = Application.StartupPath;
-                string settingsPath = Path.Combine(appPath, "Settings");
-                string fullPath = Path.Combine(settingsPath, fileName);
-
-                if (File.Exists(fullPath))
-                    gridView.RestoreLayoutFromXml(fullPath);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
-            }
-        }
         /// <summary>
         /// Загружает данные в `GridControl`
         /// </summary>
@@ -110,36 +81,6 @@ namespace SewingProduction.form
                     //normoperBindingSource.DataSource = data;
                     customGridControl1.DataSource = data;//normoperBindingSource;
                     
-                    //// Настраиваем отображение колонок в GridView
-                    //// Проверяем наличие колонок перед их настройкой
-                    //if (gridView1.Columns["text_proizv"] != null)
-                    //{
-                    //    gridView1.Columns["text_proizv"].Visible = true;
-                    //    gridView1.Columns["text_proizv"].Caption = "Производство";
-                    //    if (gridView1.Columns["kod_proizv"] != null)
-                    //        gridView1.Columns["text_proizv"].VisibleIndex = gridView1.Columns["kod_proizv"].VisibleIndex + 1;
-                    //}
-                    
-                    //if (gridView1.Columns["text_vyaz"] != null)
-                    //{
-                    //    gridView1.Columns["text_vyaz"].Visible = true;
-                    //    gridView1.Columns["text_vyaz"].Caption = "Подразделение";
-                    //    if (gridView1.Columns["kod_vyaz"] != null)
-                    //        gridView1.Columns["text_vyaz"].VisibleIndex = gridView1.Columns["kod_vyaz"].VisibleIndex + 1;
-                    //}
-                    
-                    //if (gridView1.Columns["text_ob"] != null)
-                    //{
-                    //    gridView1.Columns["text_ob"].Visible = true;
-                    //    gridView1.Columns["text_ob"].Caption = "Оборудование";
-                    //    if (gridView1.Columns["kod_ob"] != null)
-                    //        gridView1.Columns["text_ob"].VisibleIndex = gridView1.Columns["kod_ob"].VisibleIndex + 1;
-                    //}
-                    //else
-                    //{
-                    //    await _logger.LogErrorAsync(new Exception("Колонка text_ob отсутствует в результате запроса"), 
-                    //        "Ошибка настройки отображения колонок");
-                    //}
                 }
                 else
                 {
@@ -157,7 +98,7 @@ namespace SewingProduction.form
         {
             // Можно сохранять при каждом изменении размера колонки
             // (Внимание: частые сохранения могут повлиять на производительность)
-            SaveGridViewSettings(gridView1, "NormOperGrid.xml");
+            _gridHelper.SaveGridViewSettings(gridView1, "NormOperGrid.xml");
         }
         /// <summary>
         /// Выбор строки и передача данных в `TeamWork_AdvanceTW`

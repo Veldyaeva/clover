@@ -816,7 +816,14 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             this.ResumeLayout(false);
+            // Подписываемся на событие закрытия формы
+            this.FormClosing += TeamWork_AdvanceTW_FormClosing;
 
+            // Подписываемся на события изменения ширины колонок
+            gridView2.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView3.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView4.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView5.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
         }
 
         #endregion

@@ -1966,6 +1966,7 @@ namespace SewingProduction.Forms
             this.gridView8.OptionsView.ShowAutoFilterRow = true;
             this.gridView8.OptionsView.ShowGroupPanel = false;
             this.gridView8.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView8_FocusedRowChanged);
+
             // 
             // gridColumn12
             // 
@@ -2127,6 +2128,7 @@ namespace SewingProduction.Forms
             this.gridView7.OptionsView.ShowGroupPanel = false;
             this.gridView7.ScrollStyle = DevExpress.XtraGrid.Views.Grid.ScrollStyleFlags.LiveVertScroll;
             this.gridView7.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView7_FocusedRowChanged);
+
             // 
             // код
             // 
@@ -2347,6 +2349,21 @@ namespace SewingProduction.Forms
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
+
+
+            // Подписываемся на события изменения ширины колонок
+            ANNgridView.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView1.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView2.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView4.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView5.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView6.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView7.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView8.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView9.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView10.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView11.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
+            gridView12.ColumnWidthChanged += _gridHelper.GridView_ColumnWidthChanged;
             // 
             // TeamWork
             // 
@@ -2460,6 +2477,8 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             this.ResumeLayout(false);
+
+            this.FormClosing += TeamWork_FormClosing;
 
         }
 

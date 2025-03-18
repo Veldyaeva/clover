@@ -16,6 +16,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
+using SewingProduction.form.TeamWork.Forms;
+using DevExpress.XtraGrid.Views.Base;
+using System.IO;
 
 namespace SewingProduction.form
 {
@@ -24,12 +27,16 @@ namespace SewingProduction.form
         private readonly ArtNormService _artNormService;
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
+        private readonly GridHelper _gridHelper = new GridHelper();
         private int _newAnnId = -1;
         private readonly ILogger _logger = new FileLogger();
         private int _mode;
 
         private BindingList<NormRasz> _normRaszList;
         private BindingSource _normRaszBindingSource;
+        
+        private BindingList<NormRask> _normRaskList;
+        private BindingSource _normRaskBindingSource;
 
         public TeamWork_AdvanceTW(int id, int bufferWorkDivision, int mode)
         {
@@ -44,24 +51,36 @@ namespace SewingProduction.form
 
             InitializeBindings();
             
-            // Подписываемся на событие закрытия формы
-            this.FormClosing += TeamWork_AdvanceTW_FormClosing;
+
         }
 
         private void InitializeBindings()
         {
+            // Инициализация для NormRasz
             _normRaszList = new BindingList<NormRasz>();
             _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
             gridControl5.DataSource = _normRaszBindingSource;
 
-            // Настраиваем отображение колонок
-            SetupGridColumns();
+            // Инициализация для NormRask
+            _normRaskList = new BindingList<NormRask>();
+            _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
+            gridControl2.DataSource = _normRaskBindingSource;
 
-            // Настраиваем обработчики
+            // Настраиваем обработчики для NormRasz
             gridView5.InitNewRow += GridView5_InitNewRow;
             gridView5.RowUpdated += GridView5_RowUpdated;
             gridView5.ValidateRow += GridView5_ValidateRow;
             gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+
+            // Настраиваем обработчики для NormRask
+            gridView2.InitNewRow += GridView2_InitNewRow;
+            gridView2.RowUpdated += GridView2_RowUpdated;
+            gridView2.ValidateRow += GridView2_ValidateRow;
+            gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+
+            // Настраиваем отображение колонок
+            SetupGridColumns();
+            SetupGridColumnsRask();
         }
 
         private void SetupGridColumns()
@@ -95,19 +114,6 @@ namespace SewingProduction.form
 
         private void SetupGridColumnsRask()
         {
-            //gridView2.Columns.Clear();
-
-            //gridView2.Columns.AddVisible("KodO", "Код операции");
-            //gridView2.Columns.AddVisible("Text", "Текст");
-            //gridView2.Columns.AddVisible("Razryad", "Разряд");
-            //gridView2.Columns.AddVisible("Obor", "Оборудование");
-            //gridView2.Columns.AddVisible("Kod", "Код");
-            //gridView2.Columns.AddVisible("n1", "Норма");
-            //gridView2.Columns.AddVisible("sek", "Секунды");
-            //gridView2.Columns.AddVisible("n", "Количество");
-            //gridView2.Columns.AddVisible("n_ch", "Количество человек");
-            //gridView2.Columns.AddVisible("seb", "Себестоимость");
-            //gridView2.Columns.AddVisible("seb_s", "Себестоимость суммарная");
 
             // Скрываем служебные поля
             if (gridView2.Columns["id"] != null)
@@ -136,6 +142,12 @@ namespace SewingProduction.form
                 {
                     gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
                 }
+
+                // Сохраняем настройки для всех гридов при закрытии формы
+                _gridHelper.SaveGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
             }
             catch (Exception ex)
             {
@@ -335,23 +347,36 @@ namespace SewingProduction.form
 
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
-            switch (_mode)
+            try
             {
-                case (int)Mode.NewWorkDivision:
-                    this.Text = "Добавить предварительное";
-                    break;
-                case (int)Mode.ArchAndCopy:
-                    this.Text = "Архив+копия";
-                    await bufferLoad();
-                    break;
-                case (int)Mode.Archive:
-                    this.Text = "В архив";
-                    await bufferLoad();
-                    break;
-                case (int)Mode.Edit:
-                    this.Text = "Редактировать";
-                    await bufferLoad();
-                    break;
+                // Загружаем настройки для всех гридов
+                _gridHelper.LoadGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+
+                switch (_mode)
+                {
+                    case (int)Mode.NewWorkDivision:
+                        this.Text = "Добавить предварительное";
+                        break;
+                    case (int)Mode.ArchAndCopy:
+                        this.Text = "Архив+копия";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Archive:
+                        this.Text = "В архив";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Edit:
+                        this.Text = "Редактировать";
+                        await bufferLoad();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
             }
         }
 
@@ -392,5 +417,8 @@ namespace SewingProduction.form
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
+
+ 
+
     }
 }
