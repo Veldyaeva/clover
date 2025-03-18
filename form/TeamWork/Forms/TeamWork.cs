@@ -73,33 +73,6 @@ namespace SewingProduction.Forms
 
         }
 
-        private async void TeamWork_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                // Загружаем настройки для всех гридов
-                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
-
-                await LoadWorkDivisions();
-                await CurrentWorks_Load();
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork");
-            }
-        }
-
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -128,6 +101,21 @@ namespace SewingProduction.Forms
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
+            // Загружаем настройки для всех гридов
+            _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+            _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
+
+
             await LoadWorkDivisions();
             await CurrentWorks_Load();
         }
