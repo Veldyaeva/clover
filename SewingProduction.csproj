@@ -204,10 +204,22 @@
     <Compile Include="form\OborudBrig.Designer.cs">
       <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\SettingsForm.cs">
+    <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\SettingsForm.Designer.cs">
+    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravBrig.cs">
@@ -258,6 +270,13 @@
     </Compile>
     <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.Designer.cs">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\UserClass.cs" />
+    <Compile Include="form\UserDistribution\UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
@@ -398,7 +417,13 @@
       <DependentUpon>OborudBrig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\SettingsForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
@@ -428,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

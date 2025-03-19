@@ -1,6 +1,6 @@
-﻿namespace SewingProduction.form
+﻿namespace SewingProduction.form.UserDistribution
 {
-    partial class SettingsForm
+    partial class UserProfile
     {
         /// <summary>
         /// Required designer variable.
@@ -30,14 +30,13 @@
         {
             this.SuspendLayout();
             // 
-            // SettingsForm
+            // UserProfile
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "SettingsForm";
-            this.Text = "SettingsForm";
-            this.Load += new System.EventHandler(this.SettingsForm_Load);
+            this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Name = "UserProfile";
+            this.Text = "UserProfile";
             this.ResumeLayout(false);
 
         }
