@@ -383,28 +383,6 @@ namespace SewingProduction.Forms
             return string.Empty; // Return empty if not found or error occurs
         }
 
-        private async Task<string> GetEmployeeFullName(int employeeId)
-        {
-            try
-            {
-                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
-                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
-
-                // Log the result of the query
-                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
-
-                if (result.Rows.Count > 0)
-                {
-                    return result.Rows[0]["fio"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
-            }
-            return string.Empty; // Return empty if not found or error occurs
-        }
-
         #endregion
 
         #region Загрузка данных LoadGridControlData
@@ -1602,7 +1580,12 @@ namespace SewingProduction.Forms
         }
 
         #endregion
+
         #endregion
 
+        private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+
+        }
     }
 }

@@ -92,93 +92,93 @@ namespace SewingProduction
         }
 
        
-        private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravOborud f = new SpravOborud();
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravOborud f = new SpravOborud();
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
 
 
 
 
-        private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
+        //private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
 
-            //CardByNom newMDIChild = new CardByNom();
-            //newMDIChild.MdiParent = this;
-            //newMDIChild.Show();
-            CardByNom f = new CardByNom();
-            //f.Text = "Child Form " + (++ctr).ToString();
-            f.MdiParent = this;
-            f.Show();
-        }
-        private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravForAll f = new SpravForAll("oborud_shv_ob", "", "Справочник Группы об.");
-            f.MdiParent = this;
-            f.Show();
-        }
+        //    //CardByNom newMDIChild = new CardByNom();
+        //    //newMDIChild.MdiParent = this;
+        //    //newMDIChild.Show();
+        //    CardByNom f = new CardByNom();
+        //    //f.Text = "Child Form " + (++ctr).ToString();
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
+        //private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravForAll f = new SpravForAll("oborud_shv_ob", "", "Справочник Группы об.");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
 
-        private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravForAll f = new SpravForAll("matrix_class", "", "Справочник Клас. вяз. об.");
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravForAll f = new SpravForAll("matrix_class", "", "Справочник Клас. вяз. об.");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
 
-        private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravForAll f = new SpravForAll("spOborudMachine", "", "Справочник Виды операций");
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravForAll f = new SpravForAll("spOborudMachine", "", "Справочник Виды операций");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
 
-        private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
-            f.MdiParent = this;
-            f.Show();
-        }
-        private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
-            f.MdiParent = this;
-            f.Show();
-        }
-        private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв.");
-            f.MdiParent = this;
-            f.Show();
-        }
-        private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Fio f = new Fio("fio", "Справочник работников");
-            f.MdiParent = this;
-            f.Show();
-        }
-        private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OborudBrig f = new OborudBrig();
-            f.MdiParent = this;
-            f.Show();
+        //private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
+        //{
+        //    SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
+        //private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
+        //private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв.");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
+        //private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Fio f = new Fio("fio", "Справочник работников");
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
+        //private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    OborudBrig f = new OborudBrig();
+        //    f.MdiParent = this;
+        //    f.Show();
 
-        }
+        //}
 
-        private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Articul f = new Articul();
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Articul f = new Articul();
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
 
-        private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            PlanZagrBrig f = new PlanZagrBrig();
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void рабочийСтолМастераToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    PlanZagrBrig f = new PlanZagrBrig();
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
         
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -193,20 +193,20 @@ namespace SewingProduction
 
         }
 
-        private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        //private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
         
-            SpravForAll f = new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки");
-            f.MdiParent = this;
-            f.Show();
+        //    SpravForAll f = new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки");
+        //    f.MdiParent = this;
+        //    f.Show();
         
-        }
+        //}
 
-        private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Articul f = new Articul();
-            f.MdiParent = this;
-            f.Show();
-        }
+        //private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
+        //{
+        //    Articul f = new Articul();
+        //    f.MdiParent = this;
+        //    f.Show();
+        //}
     }
 }

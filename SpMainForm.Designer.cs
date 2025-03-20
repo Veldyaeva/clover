@@ -150,41 +150,7 @@
             this.оборудованиеToolStripMenuItem.Name = "оборудованиеToolStripMenuItem";
             this.оборудованиеToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.оборудованиеToolStripMenuItem.Text = "Оборудование";
-            // 
-            // оборудованиеВБригадахToolStripMenuItem
-            // 
-            this.оборудованиеВБригадахToolStripMenuItem.Name = "оборудованиеВБригадахToolStripMenuItem";
-            this.оборудованиеВБригадахToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.оборудованиеВБригадахToolStripMenuItem.Text = "Оборудование в бригадах";
-            this.оборудованиеВБригадахToolStripMenuItem.Click += new System.EventHandler(this.оборудованиеВБригадахToolStripMenuItem_Click);
-            // 
-            // оборудованиеToolStripMenuItem1
-            // 
-            this.оборудованиеToolStripMenuItem1.Name = "оборудованиеToolStripMenuItem1";
-            this.оборудованиеToolStripMenuItem1.Size = new System.Drawing.Size(262, 22);
-            this.оборудованиеToolStripMenuItem1.Text = "Оборудование";
-            this.оборудованиеToolStripMenuItem1.Click += new System.EventHandler(this.оборудованиеToolStripMenuItem_Click);
-            // 
-            // видыОборудованияToolStripMenuItem
-            // 
-            this.видыОборудованияToolStripMenuItem.Name = "видыОборудованияToolStripMenuItem";
-            this.видыОборудованияToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.видыОборудованияToolStripMenuItem.Text = "Группы оборудования";
-            this.видыОборудованияToolStripMenuItem.Click += new System.EventHandler(this.видыОборудованияToolStripMenuItem_Click);
-            // 
-            // матрицыКлассовToolStripMenuItem
-            // 
-            this.матрицыКлассовToolStripMenuItem.Name = "матрицыКлассовToolStripMenuItem";
-            this.матрицыКлассовToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.матрицыКлассовToolStripMenuItem.Text = "Классы вязального оборудования";
-            this.матрицыКлассовToolStripMenuItem.Click += new System.EventHandler(this.матрицаКлассовToolStripMenuItem_Click);
-            // 
-            // видыОперацийToolStripMenuItem
-            // 
-            this.видыОперацийToolStripMenuItem.Name = "видыОперацийToolStripMenuItem";
-            this.видыОперацийToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.видыОперацийToolStripMenuItem.Text = "Виды операций";
-            this.видыОперацийToolStripMenuItem.Click += new System.EventHandler(this.видОперацToolStripMenuItem_Click);
+
             // 
             // бригадыЦехаToolStripMenuItem
             // 
@@ -195,41 +161,7 @@
             this.бригадыЦехаToolStripMenuItem.Name = "бригадыЦехаToolStripMenuItem";
             this.бригадыЦехаToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.бригадыЦехаToolStripMenuItem.Text = "Бригады/Цеха";
-            // 
-            // бригадыToolStripMenuItem
-            // 
-            this.бригадыToolStripMenuItem.Name = "бригадыToolStripMenuItem";
-            this.бригадыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.бригадыToolStripMenuItem.Text = "Бригады";
-            this.бригадыToolStripMenuItem.Click += new System.EventHandler(this.бригадыToolStripMenuItem_Click);
-            // 
-            // цехаToolStripMenuItem
-            // 
-            this.цехаToolStripMenuItem.Name = "цехаToolStripMenuItem";
-            this.цехаToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.цехаToolStripMenuItem.Text = "Цеха";
-            this.цехаToolStripMenuItem.Click += new System.EventHandler(this.цехаToolStripMenuItem1_Click);
-            // 
-            // видыПроизводствToolStripMenuItem
-            // 
-            this.видыПроизводствToolStripMenuItem.Name = "видыПроизводствToolStripMenuItem";
-            this.видыПроизводствToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
-            this.видыПроизводствToolStripMenuItem.Text = "Виды производств";
-            this.видыПроизводствToolStripMenuItem.Click += new System.EventHandler(this.видыПроизводстваToolStripMenuItem_Click);
-            // 
-            // карточкаРасчетаToolStripMenuItem1
-            // 
-            this.карточкаРасчетаToolStripMenuItem1.Name = "карточкаРасчетаToolStripMenuItem1";
-            this.карточкаРасчетаToolStripMenuItem1.Size = new System.Drawing.Size(262, 22);
-            this.карточкаРасчетаToolStripMenuItem1.Text = "Карточка расчета";
-            this.карточкаРасчетаToolStripMenuItem1.Click += new System.EventHandler(this.карточкаРасчетаToolStripMenuItem1_Click);
-            // 
-            // работникиToolStripMenuItem
-            // 
-            this.работникиToolStripMenuItem.Name = "работникиToolStripMenuItem";
-            this.работникиToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.работникиToolStripMenuItem.Text = "Работники";
-            this.работникиToolStripMenuItem.Click += new System.EventHandler(this.работникиToolStripMenuItem_Click);
+
             // 
             // тарифыToolStripMenuItem
             // 
@@ -242,13 +174,7 @@
             this.изделияToolStripMenuItem.Name = "изделияToolStripMenuItem";
             this.изделияToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
             this.изделияToolStripMenuItem.Text = "Изделия";
-            // 
-            // моделиСПризнакомМаркировкToolStripMenuItem
-            // 
-            this.моделиСПризнакомМаркировкToolStripMenuItem.Name = "моделиСПризнакомМаркировкToolStripMenuItem";
-            this.моделиСПризнакомМаркировкToolStripMenuItem.Size = new System.Drawing.Size(262, 22);
-            this.моделиСПризнакомМаркировкToolStripMenuItem.Text = "Модели с признаком маркировки";
-            this.моделиСПризнакомМаркировкToolStripMenuItem.Click += new System.EventHandler(this.моделиСПризнакомМаркировкToolStripMenuItem_Click);
+
             // 
             // производствоToolStripMenuItem
             // 
@@ -279,11 +205,6 @@
             this.ThemeSelectorComboBox.ToolTipText = "Тема";
             this.ThemeSelectorComboBox.Click += new System.EventHandler(this.toolStripComboBox1_Click);
             // 
-            // артикулToolStripMenuItem
-            // 
-            this.артикулToolStripMenuItem.Name = "артикулToolStripMenuItem";
-            this.артикулToolStripMenuItem.Size = new System.Drawing.Size(12, 23);
-            this.артикулToolStripMenuItem.Click += new System.EventHandler(this.артикулToolStripMenuItem_Click);
             // 
             // xtraTabbedMdiManager1
             // 

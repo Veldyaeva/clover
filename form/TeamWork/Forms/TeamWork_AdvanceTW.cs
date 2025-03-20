@@ -120,9 +120,9 @@ namespace SewingProduction.form
                 gridView2.Columns["annId"].Visible = false;
 
             // Настраиваем опции редактирования
-            gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            gridView2.OptionsEditForm.EditFormColumnCount = 1;
-            gridView2.OptionsEditForm.PopupEditFormWidth = 400;
+            //gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            //gridView2.OptionsEditForm.EditFormColumnCount = 1;
+           // gridView2.OptionsEditForm.PopupEditFormWidth = 400;
             gridView2.OptionsView.ShowGroupPanel = false;
         }
 
@@ -252,7 +252,7 @@ namespace SewingProduction.form
             }
         }
 
-        private void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        private async void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
             if (gridView == null)
@@ -260,7 +260,7 @@ namespace SewingProduction.form
 
             // Сохраняем настройки редактирования
             var allowEditing = gridView.OptionsBehavior.Editable;
-            
+
             // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
             gridView.OptionsBehavior.Editable = false;
 
@@ -269,34 +269,50 @@ namespace SewingProduction.form
                 using (var selectionForm = new norm_raskrNew())
                 {
                     DialogResult result = selectionForm.ShowDialog();
-                    
-                    if (result == DialogResult.OK && selectionForm.SelectedData != null)
+
+                    if (result == DialogResult.OK && selectionForm.SelectedData != null && selectionForm.SelectedData.Count > 0)
                     {
                         var selectedDataList = selectionForm.SelectedData;
+
+                        // Логируем количество выбранных элементов
+                        await _logger.LogEventAsync($"Выбрано элементов: {selectedDataList.Count}", "GridView2_InitNewRow");
 
                         // Вставляем данные в gridView2
                         foreach (var normRask in selectedDataList)
                         {
-                            normRask.annId = _newAnnId;
+                            normRask.AnnId = _newAnnId;
                             _normRaskList.Add(normRask); // Добавляем в список
+
+                            // Сохраняем данные в базу данных сразу, с ожиданием результата
+                            try
+                            {
+                                int newId = await _artNormService.InsertNormRaskAsync(normRask);
+                                normRask.id = newId; // Обновляем ID после сохранения
+                            }
+                            catch (Exception ex)
+                            {
+                                await _logger.LogErrorAsync(ex, "Ошибка при сохранении NormRask в БД");
+                            }
                         }
 
-                        // Обновляем привязку данных
+                        // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);
+                        gridControl2.RefreshDataSource();
+                        gridView.RefreshData();
 
-                        // Сохраняем данные в базу данных
-                        foreach (var normRask in selectedDataList)
-                        {
-                            _artNormService.InsertNormRaskAsync(normRask); 
-                        }
+                        // Обновляем текущую строку
                         gridView.UpdateCurrentRow();
                     }
                     else
                     {
                         // Если пользователь отменил выбор или не выбрал данные, удаляем строку
-                        gridView.DeleteRow(gridView.GetRowHandle(e.RowHandle));
+                        gridView.DeleteRow(e.RowHandle);
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка в методе GridView2_InitNewRow");
             }
             finally
             {
@@ -305,11 +321,64 @@ namespace SewingProduction.form
             }
         }
 
+        //private void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        //{
+        //    var gridView = sender as GridView;
+        //    if (gridView == null)
+        //        return;
+
+        //    // Сохраняем настройки редактирования
+        //    var allowEditing = gridView.OptionsBehavior.Editable;
+
+        //    // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
+        //    gridView.OptionsBehavior.Editable = false;
+
+        //    try
+        //    {
+        //        using (var selectionForm = new norm_raskrNew())
+        //        {
+        //            DialogResult result = selectionForm.ShowDialog();
+
+        //            if (result == DialogResult.OK && selectionForm.SelectedData != null)
+        //            {
+        //                var selectedDataList = selectionForm.SelectedData;
+
+        //                // Вставляем данные в gridView2
+        //                foreach (var normRask in selectedDataList)
+        //                {
+        //                    normRask.AnnId = _newAnnId;
+        //                    _normRaskList.Add(normRask); // Добавляем в список
+        //                }
+
+        //                // Обновляем привязку данных
+        //                _normRaskBindingSource.ResetBindings(false);
+
+        //                // Сохраняем данные в базу данных
+        //                foreach (var normRask in selectedDataList)
+        //                {
+        //                    _artNormService.InsertNormRaskAsync(normRask); 
+        //                }
+        //                gridView.UpdateCurrentRow();
+        //            }
+        //            else
+        //            {
+        //                // Если пользователь отменил выбор или не выбрал данные, удаляем строку
+        //                gridView.DeleteRow(gridView.GetRowHandle(e.RowHandle));
+        //            }
+        //        }
+        //    }
+        //    finally
+        //    {
+        //        // Восстанавливаем настройки редактирования
+        //        gridView.OptionsBehavior.Editable = allowEditing;
+        //    }
+        //}
+
         private void GridView2_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             if (e.Row is NormRask normRask)
             {
-                normRask.annId = _newAnnId;
+                normRask.AnnId = _newAnnId;
                 gridView2.UpdateCurrentRow();
             }
         }
@@ -321,7 +390,7 @@ namespace SewingProduction.form
                 try
                 {
                     // Убеждаемся что AnnId установлен
-                    normRask.annId = _newAnnId;
+                    normRask.AnnId = _newAnnId;
 
                     // Если это новая запись (Id <= 0), сохраняем в БД
                     if (normRask.id <= 0)

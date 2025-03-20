@@ -146,6 +146,13 @@
     <Compile Include="class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="class\ServiceBroker.cs" />
+    <Compile Include="form\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\TeamWork\DbContext\AppDbContext.cs" />
     <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
@@ -156,74 +163,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </Compile>
-    <Compile Include="form\Articul.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\Articul.Designer.cs">
-      <DependentUpon>Articul.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\CardByNom.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\CardByNom.Designer.cs">
-      <DependentUpon>CardByNom.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\editFio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\editFio.Designer.cs">
-      <DependentUpon>editFio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\Fio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\Fio.Designer.cs">
-      <DependentUpon>Fio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\FurnUpakDeliveryInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\FurnUpakDeliveryInfo.Designer.cs">
-      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\OborudBrig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\OborudBrig.Designer.cs">
-      <DependentUpon>OborudBrig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\SpravBrig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\SpravBrig.Designer.cs">
-      <DependentUpon>SpravBrig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\PlanZagrBrig.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\PlanZagrBrig.Designer.cs">
-      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\SpravForAll.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\SpravForAll.Designer.cs">
-      <DependentUpon>SpravForAll.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\SpravOborud.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\SpravOborud.Designer.cs">
-      <DependentUpon>SpravOborud.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\SpravZeh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\SpravZeh.Designer.cs">
-      <DependentUpon>SpravZeh.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
     <Compile Include="form\TeamWork\Enums\Status.cs" />
+    <Compile Include="form\TeamWork\Forms\NormRaskrNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
+      <DependentUpon>NormRaskrNew.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
@@ -235,6 +182,7 @@
     <Compile Include="form\TeamWork\Models\NormKont.cs" />
     <Compile Include="form\TeamWork\Models\NormRask.cs" />
     <Compile Include="form\TeamWork\Models\NormRasz.cs" />
+    <Compile Include="form\TeamWork\Models\RaskroyNorm.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
@@ -362,38 +310,18 @@
     <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="form\Articul.resx">
-      <DependentUpon>Articul.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\CardByNom.resx">
-      <DependentUpon>CardByNom.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\editFio.resx">
-      <DependentUpon>editFio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\Fio.resx">
-      <DependentUpon>Fio.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
-      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\OborudBrig.resx">
-      <DependentUpon>OborudBrig.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SpravBrig.resx">
-      <DependentUpon>SpravBrig.cs</DependentUpon>
+    <EmbeddedResource Include="form\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
       <DependentUpon>NormOperNew.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
+      <DependentUpon>NormRaskrNew.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork.resx">
       <DependentUpon>TeamWork.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\PlanZagrBrig.resx">
-      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
@@ -403,15 +331,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SpravForAll.resx">
-      <DependentUpon>SpravForAll.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SpravZeh.resx">
-      <DependentUpon>SpravZeh.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SpravOborud.resx">
-      <DependentUpon>SpravOborud.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

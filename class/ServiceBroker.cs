@@ -22,7 +22,7 @@ namespace SewingProduction
     public class ServiceBroker
     {
         private readonly IDataUpdatableForm _form;
-        // ИЗМЕНЕНИЯ СОМТРТЬСЯ НА ТЕСТОВОЙ БАЗЕ:(удалить коммент после изменения)
+        // ИЗМЕНЕНИЯ СОМТРТСЯ НА ТЕСТОВОЙ БАЗЕ:(удалить коммент после изменения)
         private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
         private SqlConnection _connection;
         private SqlDependency sqlDependency;

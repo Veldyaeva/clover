@@ -371,17 +371,17 @@ OUTPUT INSERTED.annID
 
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                { "@annId", normRask.annId },
-                { "@kod_o", normRask.kodO },
-                { "@text", normRask.text },
-                { "@razryd", normRask.razryad },
-                { "@obor", normRask.obor },
-                { "@n1", normRask.n1 },
-                { "@sek", normRask.sek },
-                { "@n", normRask.n },
-                { "@n_ch", normRask.n_ch },
-                { "@seb", normRask.seb },
-                { "@seb_s", normRask.seb_s }
+                { "@annId", normRask.AnnId },
+                { "@kod_o", normRask.KodO },
+                { "@text", normRask.Text },
+                { "@razryd", normRask.Razryad },
+                { "@obor", normRask.Obor },
+                { "@n1", normRask.N1 },
+                { "@sek", normRask.Sek },
+                { "@n", normRask.N },
+                { "@n_ch", normRask.N_ch },
+                { "@seb", normRask.Seb },
+                { "@seb_s", normRask.Seb_s }
             };
 
             object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
@@ -408,24 +408,6 @@ OUTPUT INSERTED.annID
 
                 // Log the result of the query
                 await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
-
-                if (result.Rows.Count > 0)
-                {
-                    return result.Rows[0]["fio"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
-            }
-            return string.Empty;
-        }
-        public async Task<string> GetEmployeeFullName(int employeeId)
-        {
-            try
-            {
-                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
-                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
 
                 if (result.Rows.Count > 0)
                 {

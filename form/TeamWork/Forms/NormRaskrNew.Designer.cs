@@ -30,38 +30,38 @@ namespace SewingProduction.form.TeamWork.Forms
         {
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.difficult1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.Disk1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColumn1 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.Bound1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColumn4 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.difficult2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.Disk2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColumn7 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColumn8 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn9 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.Bound2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColumn10 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
-            this.gridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.difficult3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.Disk3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridColumn13 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColumn14 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.Bound3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
+            this.gridColumn16 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnCancel = new SewingProduction.CustomCancelButton();
             this.btnOk = new SewingProduction.CustomOkButton();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.customComboBox1 = new SewingProduction.CustomComboBox();
-            this.difficult1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Disk1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Bound1 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.difficult2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Disk2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Bound2 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.difficult3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Disk3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.Bound3 = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.panel1.SuspendLayout();
@@ -116,37 +116,33 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridView1.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             this.gridView1.OptionsView.ShowIndicator = false;
             // 
+            // difficult1
+            // 
+            this.difficult1.Caption = "Сложность1";
+            this.difficult1.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.Disk1,
+            this.Bound1});
+            this.difficult1.Name = "difficult1";
+            this.difficult1.VisibleIndex = 0;
+            this.difficult1.Width = 455;
+            // 
+            // Disk1
+            // 
+            this.Disk1.Caption = "Диск";
+            this.Disk1.Columns.Add(this.gridColumn1);
+            this.Disk1.Columns.Add(this.gridColumn2);
+            this.Disk1.Columns.Add(this.gridColumn3);
+            this.Disk1.Name = "Disk1";
+            this.Disk1.VisibleIndex = 0;
+            this.Disk1.Width = 212;
+            // 
             // gridColumn1
             // 
             this.gridColumn1.Caption = "Рассекание";
             this.gridColumn1.FieldName = "draz1";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
-            this.gridColumn1.Width = 81;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.Caption = "резка диском";
-            this.gridColumn11.FieldName = "lrez2";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.Width = 91;
-            // 
-            // gridColumn6
-            // 
-            this.gridColumn6.Caption = "до проймы";
-            this.gridColumn6.FieldName = "lpro1";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.Width = 214;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.Caption = "Рассекание";
-            this.gridColumn16.FieldName = "lras3";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.Width = 81;
+            this.gridColumn1.Width = 44;
             // 
             // gridColumn2
             // 
@@ -154,7 +150,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn2.FieldName = "drez1";
             this.gridColumn2.Name = "gridColumn2";
             this.gridColumn2.Visible = true;
-            this.gridColumn2.Width = 91;
+            this.gridColumn2.Width = 49;
             // 
             // gridColumn3
             // 
@@ -162,23 +158,17 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn3.FieldName = "dpro1";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
-            this.gridColumn3.Width = 214;
+            this.gridColumn3.Width = 119;
             // 
-            // gridColumn5
+            // Bound1
             // 
-            this.gridColumn5.Caption = "резка диском";
-            this.gridColumn5.FieldName = "lrez1";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.Width = 91;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.Caption = "до проймы";
-            this.gridColumn9.FieldName = "dpro2";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.Width = 77;
+            this.Bound1.Caption = "Лента";
+            this.Bound1.Columns.Add(this.gridColumn4);
+            this.Bound1.Columns.Add(this.gridColumn5);
+            this.Bound1.Columns.Add(this.gridColumn6);
+            this.Bound1.Name = "Bound1";
+            this.Bound1.VisibleIndex = 1;
+            this.Bound1.Width = 243;
             // 
             // gridColumn4
             // 
@@ -186,7 +176,43 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn4.FieldName = "lras1";
             this.gridColumn4.Name = "gridColumn4";
             this.gridColumn4.Visible = true;
-            this.gridColumn4.Width = 135;
+            this.gridColumn4.Width = 74;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "резка диском";
+            this.gridColumn5.FieldName = "lrez1";
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.Width = 50;
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "до проймы";
+            this.gridColumn6.FieldName = "lpro1";
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.Width = 119;
+            // 
+            // difficult2
+            // 
+            this.difficult2.Caption = "Сложность2";
+            this.difficult2.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.Disk2,
+            this.Bound2});
+            this.difficult2.Name = "difficult2";
+            this.difficult2.VisibleIndex = 1;
+            this.difficult2.Width = 411;
+            // 
+            // Disk2
+            // 
+            this.Disk2.Caption = "Диск";
+            this.Disk2.Columns.Add(this.gridColumn7);
+            this.Disk2.Columns.Add(this.gridColumn8);
+            this.Disk2.Columns.Add(this.gridColumn9);
+            this.Disk2.Name = "Disk2";
+            this.Disk2.VisibleIndex = 0;
+            this.Disk2.Width = 182;
             // 
             // gridColumn7
             // 
@@ -194,7 +220,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn7.FieldName = "draz2";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
-            this.gridColumn7.Width = 81;
+            this.gridColumn7.Width = 57;
             // 
             // gridColumn8
             // 
@@ -202,7 +228,41 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn8.FieldName = "drez2";
             this.gridColumn8.Name = "gridColumn8";
             this.gridColumn8.Visible = true;
-            this.gridColumn8.Width = 91;
+            this.gridColumn8.Width = 65;
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.Caption = "до проймы";
+            this.gridColumn9.FieldName = "dpro2";
+            this.gridColumn9.Name = "gridColumn9";
+            this.gridColumn9.Visible = true;
+            this.gridColumn9.Width = 60;
+            // 
+            // Bound2
+            // 
+            this.Bound2.Caption = "Лента";
+            this.Bound2.Columns.Add(this.gridColumn10);
+            this.Bound2.Columns.Add(this.gridColumn11);
+            this.Bound2.Columns.Add(this.gridColumn12);
+            this.Bound2.Name = "Bound2";
+            this.Bound2.VisibleIndex = 1;
+            this.Bound2.Width = 229;
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "Рассекание";
+            this.gridColumn10.FieldName = "lras2";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.Width = 57;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "резка диском";
+            this.gridColumn11.FieldName = "lrez2";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.Width = 66;
             // 
             // gridColumn12
             // 
@@ -210,7 +270,27 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn12.FieldName = "lpro2";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
-            this.gridColumn12.Width = 139;
+            this.gridColumn12.Width = 106;
+            // 
+            // difficult3
+            // 
+            this.difficult3.Caption = "Сложность3";
+            this.difficult3.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
+            this.Disk3,
+            this.Bound3});
+            this.difficult3.Name = "difficult3";
+            this.difficult3.VisibleIndex = 2;
+            this.difficult3.Width = 618;
+            // 
+            // Disk3
+            // 
+            this.Disk3.Caption = "Диск";
+            this.Disk3.Columns.Add(this.gridColumn13);
+            this.Disk3.Columns.Add(this.gridColumn14);
+            this.Disk3.Columns.Add(this.gridColumn15);
+            this.Disk3.Name = "Disk3";
+            this.Disk3.VisibleIndex = 0;
+            this.Disk3.Width = 312;
             // 
             // gridColumn13
             // 
@@ -220,6 +300,14 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn13.Visible = true;
             this.gridColumn13.Width = 81;
             // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "резка диском";
+            this.gridColumn14.FieldName = "drez3";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.Width = 154;
+            // 
             // gridColumn15
             // 
             this.gridColumn15.Caption = "до проймы";
@@ -227,6 +315,24 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
             this.gridColumn15.Width = 77;
+            // 
+            // Bound3
+            // 
+            this.Bound3.Caption = "Лента";
+            this.Bound3.Columns.Add(this.gridColumn16);
+            this.Bound3.Columns.Add(this.gridColumn17);
+            this.Bound3.Columns.Add(this.gridColumn18);
+            this.Bound3.Name = "Bound3";
+            this.Bound3.VisibleIndex = 1;
+            this.Bound3.Width = 306;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.Caption = "Рассекание";
+            this.gridColumn16.FieldName = "lras3";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.Width = 81;
             // 
             // gridColumn17
             // 
@@ -236,14 +342,6 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn17.Visible = true;
             this.gridColumn17.Width = 148;
             // 
-            // gridColumn10
-            // 
-            this.gridColumn10.Caption = "Рассекание";
-            this.gridColumn10.FieldName = "lras2";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.Width = 81;
-            // 
             // gridColumn18
             // 
             this.gridColumn18.Caption = "до проймы";
@@ -252,20 +350,12 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn18.Visible = true;
             this.gridColumn18.Width = 77;
             // 
-            // gridColumn14
-            // 
-            this.gridColumn14.Caption = "резка диском";
-            this.gridColumn14.FieldName = "drez3";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.Width = 154;
-            // 
             // panel1
             // 
             this.tablePanel1.SetColumn(this.panel1, 0);
             this.panel1.Controls.Add(this.btnCancel);
             this.panel1.Controls.Add(this.btnOk);
-            this.panel1.Location = new System.Drawing.Point(13, 421);
+            this.panel1.Location = new System.Drawing.Point(13, 406);
             this.panel1.Name = "panel1";
             this.tablePanel1.SetRow(this.panel1, 2);
             this.panel1.Size = new System.Drawing.Size(1326, 40);
@@ -315,7 +405,7 @@ namespace SewingProduction.form.TeamWork.Forms
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 55F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 335F),
             new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
-            this.tablePanel1.Size = new System.Drawing.Size(1352, 494);
+            this.tablePanel1.Size = new System.Drawing.Size(1352, 464);
             this.tablePanel1.TabIndex = 2;
             this.tablePanel1.UseSkinIndents = true;
             // 
@@ -333,101 +423,11 @@ namespace SewingProduction.form.TeamWork.Forms
             this.customComboBox1.Size = new System.Drawing.Size(256, 24);
             this.customComboBox1.TabIndex = 2;
             // 
-            // difficult1
-            // 
-            this.difficult1.Caption = "Сложность1";
-            this.difficult1.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.Disk1,
-            this.Bound1});
-            this.difficult1.Name = "difficult1";
-            this.difficult1.VisibleIndex = 0;
-            this.difficult1.Width = 772;
-            // 
-            // Disk1
-            // 
-            this.Disk1.Caption = "Диск";
-            this.Disk1.Columns.Add(this.gridColumn1);
-            this.Disk1.Columns.Add(this.gridColumn2);
-            this.Disk1.Columns.Add(this.gridColumn3);
-            this.Disk1.Name = "Disk1";
-            this.Disk1.VisibleIndex = 0;
-            this.Disk1.Width = 386;
-            // 
-            // Bound1
-            // 
-            this.Bound1.Caption = "Лента";
-            this.Bound1.Columns.Add(this.gridColumn4);
-            this.Bound1.Columns.Add(this.gridColumn5);
-            this.Bound1.Columns.Add(this.gridColumn6);
-            this.Bound1.Name = "Bound1";
-            this.Bound1.VisibleIndex = 1;
-            this.Bound1.Width = 386;
-            // 
-            // difficult2
-            // 
-            this.difficult2.Caption = "Сложность2";
-            this.difficult2.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.Disk2,
-            this.Bound2});
-            this.difficult2.Name = "difficult2";
-            this.difficult2.VisibleIndex = 1;
-            this.difficult2.Width = 614;
-            // 
-            // Disk2
-            // 
-            this.Disk2.Caption = "Диск";
-            this.Disk2.Columns.Add(this.gridColumn7);
-            this.Disk2.Columns.Add(this.gridColumn8);
-            this.Disk2.Columns.Add(this.gridColumn9);
-            this.Disk2.Name = "Disk2";
-            this.Disk2.VisibleIndex = 0;
-            this.Disk2.Width = 303;
-            // 
-            // Bound2
-            // 
-            this.Bound2.Caption = "Лента";
-            this.Bound2.Columns.Add(this.gridColumn10);
-            this.Bound2.Columns.Add(this.gridColumn11);
-            this.Bound2.Columns.Add(this.gridColumn12);
-            this.Bound2.Name = "Bound2";
-            this.Bound2.VisibleIndex = 1;
-            this.Bound2.Width = 311;
-            // 
-            // difficult3
-            // 
-            this.difficult3.Caption = "Сложность3";
-            this.difficult3.Children.AddRange(new DevExpress.XtraGrid.Views.BandedGrid.GridBand[] {
-            this.Disk3,
-            this.Bound3});
-            this.difficult3.Name = "difficult3";
-            this.difficult3.VisibleIndex = 2;
-            this.difficult3.Width = 618;
-            // 
-            // Disk3
-            // 
-            this.Disk3.Caption = "Диск";
-            this.Disk3.Columns.Add(this.gridColumn13);
-            this.Disk3.Columns.Add(this.gridColumn14);
-            this.Disk3.Columns.Add(this.gridColumn15);
-            this.Disk3.Name = "Disk3";
-            this.Disk3.VisibleIndex = 0;
-            this.Disk3.Width = 306;
-            // 
-            // Bound3
-            // 
-            this.Bound3.Caption = "Лента";
-            this.Bound3.Columns.Add(this.gridColumn16);
-            this.Bound3.Columns.Add(this.gridColumn17);
-            this.Bound3.Columns.Add(this.gridColumn18);
-            this.Bound3.Name = "Bound3";
-            this.Bound3.VisibleIndex = 1;
-            this.Bound3.Width = 312;
-            // 
             // norm_raskrNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1352, 494);
+            this.ClientSize = new System.Drawing.Size(1352, 464);
             this.Controls.Add(this.tablePanel1);
             this.Name = "norm_raskrNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
