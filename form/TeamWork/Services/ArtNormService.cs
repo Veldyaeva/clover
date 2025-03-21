@@ -13,6 +13,8 @@ using SewingProduction.Models;
 using SewingProduction.BdContext;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Linq;
+using System.Data.SqlClient;
 
 namespace SewingProduction.Services
 {
@@ -22,7 +24,7 @@ namespace SewingProduction.Services
     public class ArtNormService
     {
         private readonly DatabaseHelper _dbHelper;
-        private readonly HybridLogger _logger;
+        private readonly HybridLogger _logger = new HybridLogger();
         public ArtNormService(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
@@ -49,7 +51,108 @@ namespace SewingProduction.Services
             return ConvertToList(table);
         }
 
-        
+        public async Task<ArtNormN> GetArtNormById(int annId)
+        {
+            string query = @"
+        SELECT 
+            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
+            data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+            sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+            data_sozd, diz, constr 
+        FROM ArtNormNView 
+        JOIN status_ann ON status = status_id
+        WHERE annId = @annId";
+
+            DataTable table = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+
+            if (table != null && table.Rows.Count > 0)
+            {
+                return ConvertToList(table).FirstOrDefault();
+            }
+
+            return null;
+        }
+        public async Task<List<NormRask>> GetNormRaskByAnnId(int annId)
+        {
+            string query = "SELECT * FROM norm_rask WHERE annId = @annId";
+
+            var dataTable = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+
+            var result = new List<NormRask>();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                result.Add(new NormRask
+                {
+                    AnnId = row["annId"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+                    Kod = (int)row["kod"],
+                    KodO = row["kod_o"]?.ToString(),
+                    Text = row["text"]?.ToString(),
+                    Sek = (int)row["sek"],
+                    Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
+                    N_ch = row["n_ch"] != DBNull.Value ? Convert.ToInt32(row["n_ch"]) : 0,
+                    Obor = row["obor"]?.ToString()
+                });
+            }
+
+            return result;
+        }
+
+        public async Task<string> GetEmployeeFullName(int employeeId)
+        {
+            try
+            {
+                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
+
+                // Log the result of the query
+                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
+
+                if (result.Rows.Count > 0)
+                {
+                    return result.Rows[0]["fio"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
+            }
+            return string.Empty; // Return empty if not found or error occurs
+        }
+        public async Task<List<NormRasz>> GetNormRaszByAnnId(int annId)
+        {
+            string query = "SELECT * FROM norm_rask WHERE annId = @annId";
+
+            var dataTable = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+
+            var result = new List<NormRasz>();
+
+            foreach (DataRow row in dataTable.Rows)
+            {
+                result.Add(new NormRasz
+                {
+                    AnnId = row["annId"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+                    Kod = row["kod"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+                    KodO = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+                    Text = row["text"]?.ToString(),
+                    Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+                    Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
+                    Obor = row["obor"]?.ToString(),
+        N1 = row["N1"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+        KodPodr = row["KodPodr"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+        KodProizv = row["KodProizv"] != DBNull.Value ? Convert.ToInt32(row["annId"]) : 0,
+        Spec = row["Spec"]?.ToString(),
+        KodOb = row["KodOb"]?.ToString(),
+        TextProizv = row["TextProizv"]?.ToString(),
+        TextOb = row["TextOb"]?.ToString(),
+        TextVyaz = row["TextVyaz"]?.ToString()
+
+                });
+            }
+
+            return result;
+        }
+
 
         private List<ArtNormN> ConvertToList(DataTable table)
         {
@@ -225,14 +328,14 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
         /// <returns>True, если есть НЗП, иначе False</returns>
         public bool CheckNZP(int annId)
         {
-            //try
-            //{
-            //    string query = "SELECT COUNT(*) FROM norm_rasz WHERE annId = @annId AND kolNZP > 0";
-            //    //return true; //
-            //    return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } }).Rows.Count > 0;
-            //}
-            //catch { return false; }
-            return false;
+            try
+            {
+                string query = "SELECT COUNT(*) FROM norm_rasz WHERE annId = @annId AND kolNZP > 0";
+                //return true; //
+                return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } }).Rows.Count > 0;
+            }
+            catch { return false; }
+          //  return false;
         }
 
         internal Task<DataTable> GetNormOper(int i)
@@ -399,28 +502,6 @@ OUTPUT INSERTED.annID
             string query = "SELECT Id, annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s FROM norm_rask WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
-        public async Task<string> GetEmployeeFullName(int employeeId)
-        {
-            try
-            {
-                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
-                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
-
-                // Log the result of the query
-                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
-
-                if (result.Rows.Count > 0)
-                {
-                    return result.Rows[0]["fio"].ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
-            }
-            return string.Empty;
-        }
-
         //public async Task<List<ArtNormN>> GetAll()
         //{
         //    string query = "SELECT * FROM art_norm_n";

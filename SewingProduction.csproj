@@ -171,9 +171,18 @@
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\Helpers\NormRaskManager.cs" />
+    <Compile Include="form\TeamWork\Helpers\NormRaszManager.cs" />
+    <Compile Include="form\TeamWork\Helpers\AnnManager.cs" />
+    <Compile Include="form\TeamWork\Helpers\ArtNormController.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IAnnManager.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IArtNormController.cs" />
     <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INormRaskrManager.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INormRaszManager.cs" />
     <Compile Include="form\TeamWork\Interfaces\IThemeable.cs" />
     <Compile Include="form\TeamWork\Loggers\Logger.cs" />
     <Compile Include="form\TeamWork\Models\ArtNormN.cs" />

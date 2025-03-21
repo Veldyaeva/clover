@@ -138,7 +138,7 @@ namespace SewingProduction.form.TeamWork.Forms
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "Рассекание";
+            this.gridColumn1.Caption = "рассекание";
             this.gridColumn1.FieldName = "draz1";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
@@ -372,7 +372,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 1;
-            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Text = "Отмена";
             this.btnCancel.UseVisualStyleBackColor = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 

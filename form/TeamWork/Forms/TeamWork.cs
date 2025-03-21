@@ -2,142 +2,78 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.form;
+using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using SewingProduction.Helpers;
-using DevExpress.XtraExport.Helpers;
-using System.Threading.Tasks;
-using DevExpress.Data.Filtering;
-using DevExpress.CodeParser;
-using SewingProduction.form.TeamWork;
-using DevExpress.XtraBars.Customization;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using NLog;
-using System.Collections;
-using System.Drawing;
-using DevExpress.XtraCharts;
 using SewingProduction.Interfaces;
-using System.IO;
-
+using SewingProduction.form;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Base;
 
 namespace SewingProduction.Forms
 {
-    public partial class TeamWork : CustomForm
+    public partial class TeamWork : CustomForm, IArtNormController, IAnnManager, INormRaszManager, INormRaskManager
     {
-        private readonly DatabaseHelper _dbHelper; 
+        private readonly DatabaseHelper _dbHelper;
         private readonly ArtNormService _artNormService;
-        private int selectedRowHandle = -1;
-        private readonly ILogger _logger =new FileLogger();
+        private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
+        private AnnManager _annManager;
+        private NormRaszManager _normRaszManager;
+        private NormRaskManager _normRaskManager;
         private int bufferWorkDivision;
-        private readonly BindingList<ArtNormN> _bindingList;
-        private readonly BindingSource _bindingSource;
+
+        private BindingList<ArtNormN> _annBindingList;
+        private readonly BindingSource _annBindingSource;
+        private BindingList<NormRasz> _raszBindingList;
+        private readonly BindingSource _raszBindingSource;
+        private BindingList<NormRask> _raskBindingList;
+        private readonly BindingSource _raskBindingSource;
+        private int selectedRowHandle = -1;
+
         public TeamWork()
         {
             InitializeComponent();
+
             _dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(_dbHelper);
+            _annBindingList = new BindingList<ArtNormN>();
+            _annBindingSource = new BindingSource { DataSource = _annBindingList };
+            _raszBindingList = new BindingList<NormRasz>();
+            _raszBindingSource = new BindingSource { DataSource = _raszBindingList };
+            _raskBindingList = new BindingList<NormRask>();
+            _raskBindingSource = new BindingSource { DataSource = _raskBindingList };
 
-            ThemeManager.UpdateTheme(this);
-            
-            // Set up single row selection for both grid controls
-            var view7 = customGridControl1.MainView as GridView;
-            var view8 = customGridControl2.MainView as GridView;
-            
-            if (view7 != null)
-            {
-                view7.OptionsSelection.MultiSelect = false;
-                view7.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
-            }
-            
-            if (view8 != null)
-            {
-                view8.OptionsSelection.MultiSelect = false;
-                view8.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
-            }
-
-            this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
-            this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
-
-            _bindingList = new BindingList<ArtNormN>();
-            _bindingSource = new BindingSource { DataSource = _bindingList };
-            ANNgridControl.DataSource = _bindingSource;
-
+            ANNgridControl.DataSource = _annBindingSource;
+            FormClosing += TeamWork_FormClosing;
+            _annManager = new AnnManager(_artNormService, _logger, _annBindingSource, ANNgridControl, ANNgridView);
+            _normRaszManager = new NormRaszManager(_artNormService, _raszBindingSource);
+            _normRaskManager = new NormRaskManager(_artNormService, _raskBindingSource);
         }
-
-        private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                // Сохраняем настройки для всех гридов при закрытии формы
-                _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-                _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView7, "gridView7Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView9, "gridView9Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView10, "gridView10Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView11, "gridView11Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView12, "gridView12Layout.xml");
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork");
-            }
-        }
-
-        #region Загрузка данных
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
-            // Загружаем настройки для всех гридов
-            _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-            _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
-
-
-            await LoadWorkDivisions();
-            await CurrentWorks_Load();
+            await LoadSettingsAsync();
+            await LoadCurrentDataAsync();
         }
 
-        /// <summary>
-        /// Загрузка вкладки "Список РТ"
-        /// </summary>
-        /// <returns></returns>
-
-        private async Task LoadWorkDivisions()
+        private async Task LoadCurrentDataAsync()
         {
             try
             {
-                _bindingList.Clear();
+                _annBindingList.Clear();
                 var data = await _artNormService.GetArtNormData();
 
                 if (data != null && data.Count > 0)
                 {
-                    foreach (var item in data)
-                    {
-                        _bindingList.Add(item);
-                    }
+                    //foreach (var item in data)
+                    //{
+                    //    _annBindingList.Add(item);
+                    //}
+                    _annBindingList = data;
                 }
                 else
                 {
@@ -156,167 +92,26 @@ namespace SewingProduction.Forms
         {
             SafeInvoke(ANNgridControl, () =>
             {
-                _bindingSource.ResetBindings(false);
+                _annBindingSource.ResetBindings(false);
                 ANNgridControl.RefreshDataSource();
                 ANNgridView.RefreshData();
                 ANNgridView.PopulateColumns();
                 filterTable();
             });
         }
-
-        private void SafeInvoke(Control control, Action action)
-        {
-            if (control.InvokeRequired)
-            {
-                control.Invoke(action);
-            }
-            else
-            {
-                action();
-            }
-        }
-
-        /// <summary>
-        /// Загружает список разделений труда (РТ) для указанного артикула или кода.
-        /// </summary>
-        /// <param name="kod">Код артикула</param>
-        /// <param name="articul">Название артикула</param>
-        /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
-        /// 
-        private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
+        private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                List<ArtNormN> relatedData;
-                bool loadAll = loadAllCheckBox.Checked;
-                // Если включен чекбокс "Загрузить все"
-                //relatedData = //ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, loadAll));
-                relatedData = await _artNormService.GetArtNormDataCurrent(kod, loadAll);
-                if (!loadAll)
-                { // Если артикул содержит "-", фильтруем по его первой части
-                    int dashIndex = articul.IndexOf("-");
-                    if (dashIndex > 0)
-                    {
-                        List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
-                        if (partialData != null)
-                            relatedData.AddRange(partialData);
-                    }
-                }
-
-                BindingList<MyDataANN> myDataList = ConvertToMyDataAnn(relatedData);
-
-                await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
-                return myDataList;
+                _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки РТ для кода {kod} и артикула {articul}");
-                MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек");
             }
-
-        }
-        BindingList<MyDataANN> ConvertToMyDataAnn(List<ArtNormN> _relatedData)
-        {
-            // Преобразуем List<ArtNormN> в BindingList<MyDataANN>
-            BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-
-            foreach (var item in _relatedData)
-            {
-                myDataList.Add(new MyDataANN
-                {
-                    AnnId = item.AnnID,
-                    Kod = item.Kod,
-                    Articul = item.Articul,
-                    Status = item.Status,
-                    Group = item.Group,
-                    Model = item.Mod,
-                    IsChecked = false
-                });
-            }
-
-            return myDataList;
         }
 
-        //private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
-        //{
-        //    try
-        //    {
-        //        List<ArtNormN> relatedData;
-
-        //        // Если включен чекбокс "Загрузить все"
-        //        if (loadAllCheckBox.Checked)
-        //        {
-        //            relatedData = await _artNormService.GetArtNormDataCurrent(kod, true);
-        //        }
-        //        else
-        //        {
-        //            relatedData = await _artNormService.GetArtNormDataCurrent(kod, false);
-
-        //            // Если артикул содержит "-", фильтруем по его первой части
-        //            int dashIndex = articul.IndexOf("-");
-        //            if (dashIndex > 0)
-        //            {
-        //                List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
-        //                foreach (var item in partialData)
-        //                { relatedData.Add(item); }
-        //            }
-        //        }
-
-        //        // Преобразуем DataTable в BindingList<MyDataANN>
-        //        BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-
-        //        foreach (var row in myDataList)
-        //        {
-        //            myDataList.Add(new MyDataANN
-        //            {
-        //                AnnId = row.AnnId,
-        //                Kod = row.Kod,
-        //                Articul = row.Articul,
-        //                Status = row.Status,
-        //                Stat  = row.Stat,
-        //                Group = row.Group,
-        //                Model = row.Model,
-        //                IsChecked = false
-        //            });
-        //        }
-        //        await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
-        //        return myDataList;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки РТ для кода {kod} и артикула {articul}");
-        //        MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
-        //    }
-        //}
-        private List<T> ConvertDataTableToList<T>(DataTable table) where T : new()
-        {
-            List<T> list = new List<T>();
-
-            foreach (DataRow row in table.Rows)
-            {
-                T obj = new T();
-                foreach (DataColumn column in table.Columns)
-                {
-                    var property = typeof(T).GetProperty(column.ColumnName);
-                    if (property != null && row[column] != DBNull.Value)
-                    {
-                        property.SetValue(obj, Convert.ChangeType(row[column], property.PropertyType));
-                    }
-                }
-                list.Add(obj);
-            }
-
-            return list;
-        }
-
-        #region Обработка смены строки
-
-        /// <summary>
-        /// Обрабатывает смену выбранной  строки в gridView3 - разделениях труда
-        /// Загружает связанные данные в другие таблицы и обновляет UI.
-        /// </summary>
+        #region IArtNormController реализация
         private async void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle < 0)
@@ -338,15 +133,15 @@ namespace SewingProduction.Forms
                 commentRichTextBox.Text = comment;
 
                 // Fetch and set the constructor's full name
-                string constructorName = await GetEmployeeFullName(constructorId);
+                string constructorName = await _artNormService.GetEmployeeFullName(constructorId);
                 constructorTextBox.Text = constructorName;
 
                 // Fetch and set the designer's full name
-                string designerName = await GetEmployeeFullName(designerId);
+                string designerName = await _artNormService.GetEmployeeFullName(designerId);
                 designerTextBox.Text = designerName;
 
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                await LoadRelatedData(annId);
+                await LoadCurrentDataAsync(annId);
 
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "kod", "");
                 int o = 0;
@@ -360,85 +155,69 @@ namespace SewingProduction.Forms
                 MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        private async Task<string> GetEmployeeFullName(int employeeId)
+        public async Task LoadCurrentDataAsync(int annId)
         {
             try
             {
-                string query = "SELECT fio FROM fio WHERE tab = @employeeId";
-                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
-
-                // Log the result of the query
-                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
-
-                if (result.Rows.Count > 0)
+                var data = await _artNormService.GetArtNormData();
+                _annBindingList = new BindingList<ArtNormN>(data ?? new List<ArtNormN>());
+                _annBindingSource.DataSource = _annBindingList;
+                
+                // Создаем словарь с GridControl и их BindingSource для централизованной загрузки данных
+                var controls = new Dictionary<GridControl, BindingSource>
                 {
-                    return result.Rows[0]["fio"].ToString();
-                }
+                    { gridControl1, normraszBindingSource },
+                    { gridControl3, normraskBindingSource },
+                    { gridControl4, normkontBindingSource },
+                    { gridControl5, normdopobrBindingSource },
+                    { customGridControl5, sparticulBindingSource }
+                };
+                
+                // Используем метод GridHelper для загрузки связанных данных
+                await GridHelper.LoadCurrentDataAsync(
+                    annId,
+                    _artNormService,
+                    controls,
+                    pictureBox1,
+                    _annBindingSource,
+                    _annBindingList,
+                    _logger as HybridLogger
+                );
+
+                UpdateNZPStatus();
+                RefreshGrid();
+                await _logger.LogEventAsync("Данные успешно загружены", "LoadCurrentData");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при получении ФИО сотрудника");
+                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных");
+                MessageBox.Show("Ошибка загрузки данных", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            return string.Empty; // Return empty if not found or error occurs
         }
+        private async void UpdateNZPStatus()
+        {
+            try
+            {
+                int nzp = 0;
+                var viewNzp = customGridControl5.MainView as GridView;
 
-        #endregion
+                if (viewNzp != null)
+                {
+                    for (int i = 0; i < viewNzp.RowCount; i++)
+                    {
+                        int parsedValue = CommonFunctions.GetRowCellValueOrDefault<int>(viewNzp, i, "kolNZP", 0);
+                        nzp = parsedValue;
+                    }
+                }
 
-        #region Загрузка данных LoadGridControlData
-
-        ///// <summary>
-        ///// Загружает данные в указанный GridControl через BindingSource.
-        ///// </summary>
-        ///// <param name="grid">Целевой GridControl</param>
-        ///// <param name="source">BindingSource, привязанный к данным</param>
-        ///// <param name="data">DataTable с новыми данными</param>
-        //private async void LoadGridControlData(GridControl grid, BindingSource source, DataTable data)
-        //{
-        //    try
-        //    {
-        //        if (data == null)
-        //        {
-        //            source.DataSource = null;
-        //        }
-        //        else
-        //        {
-        //            source.DataSource = data;
-        //        }
-
-        //        grid.DataSource = source;
-        //        grid.RefreshDataSource();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных в GridControl");
-        //        MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //private async void LoadGridControlData(List<MyDataART> grid, BindingSource source, DataTable data)
-        //{
-        //    try
-        //    {
-        //        if (data == null)
-        //        {
-        //            source.DataSource = null;
-        //        }
-        //        else
-        //        {
-        //            source.DataSource = data;
-        //        }
-
-        //        grid.DataSource = source;
-        //        grid.RefreshDataSource();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных в GridControl");
-        //        MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
+                customButton7.Enabled = nzp <= 0;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка обновления статуса НЗП");
+                MessageBox.Show($"Ошибка при обновлении NZP: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
         /// <summary>
         /// Загружает изображение в PictureBox по идентификатору разделения труда.
         /// </summary>
@@ -487,171 +266,84 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка фильтрации данных для annId = {_annId}");
             }
         }
-        #endregion
 
-
-        #endregion
-
-        #region Вспомогательные методы
-
-        private void gridControl2_Leave(object sender, EventArgs e)
-        {
-            selectedRowHandle = ANNgridView.FocusedRowHandle;
-        }
-
-        private void gridControl2_GotFocus(object sender, EventArgs e)
-        {
-            if (selectedRowHandle >= 0)
-            {
-                gridView1.FocusedRowHandle = selectedRowHandle;
-                gridView1.SelectRow(selectedRowHandle);
-                selectedRowHandle = -1; //Сбрасываем после восстановления выделения
-            }
-        }
-
-        #endregion
-
-        #region Работа с данными
-
-        private async Task LoadRelatedData(int annId)
-        {
-            await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await  _artNormService.GetRelatedNormKont(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
-            await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-            await GridHelper.LoadImageAsync(pictureBox1, await _artNormService.GetImage(annId)); //не надо annId
-
-            UpdateNZPStatus();
-        }
-
-        private async void UpdateNZPStatus()
+        public async Task<BindingList<MyDataANN>> LoadWorksByArtAsync(int kod, string articul)
         {
             try
             {
-                int nzp = 0;
-                var viewNzp = customGridControl5.MainView as GridView;
-
-                if (viewNzp != null)
+                var data = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+                if (!loadAllCheckBox.Checked && articul.Contains("-"))
                 {
-                    for (int i = 0; i < viewNzp.RowCount; i++)
-                    {
-                        int parsedValue = CommonFunctions.GetRowCellValueOrDefault<int>(viewNzp, i, "kolNZP", 0);
-                        nzp = parsedValue;
-                    }
+                    var prefix = articul.Split('-')[0];
+                    var extra = await _artNormService.GetArtNormDataCurrent(prefix);
+                    data.AddRange(extra);
                 }
 
-                customButton7.Enabled = nzp <= 0;
+                var result = new BindingList<MyDataANN>();
+                foreach (var item in data)
+                {
+                    result.Add(new MyDataANN
+                    {
+                        AnnId = item.AnnID,
+                        Kod = item.Kod,
+                        Articul = item.Articul,
+                        Status = item.Status,
+                        Group = item.Group,
+                        Model = item.Mod,
+                        IsChecked = false
+                    });
+                }
+
+                return result;
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка обновления статуса НЗП");
-                MessageBox.Show($"Ошибка при обновлении NZP: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "Ошибка в LoadWorksByArtAsync");
+                return new BindingList<MyDataANN>();
             }
         }
-
-        private async void gridView3_InitNewRow(object sender, InitNewRowEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (view == null) return;
-
-            try
-            {
-                //view.SetRowCellValue(e.RowHandle, "annId", 0);
-                //view.SetRowCellValue(e.RowHandle, "kod", 0);
-                //view.SetRowCellValue(e.RowHandle, "articul", string.Empty);
-                //view.SetRowCellValue(e.RowHandle, "status", 1);
-                //view.SetRowCellValue(e.RowHandle, "group", string.Empty);
-                //view.SetRowCellValue(e.RowHandle, "model", string.Empty);
-                //view.SetRowCellValue(e.RowHandle, "stat", "Новый");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки");
-                MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void gridView3_ColumnFilterChanged(object sender, EventArgs e)
-        {
-           // searchControl1.ClearFilter();
-        }
-
-
-
-        /// <summary>
-        /// Обновляет данные в связанных таблицах при смене разделения труда (РТ).
-        /// </summary>
-        /// <param name="annId">Идентификатор разделения труда</param>
-        private async void UpdateRelatedData(int annId)
-        {
-            try
-            {
-                await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
-                await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-
-                UpdateNZPStatus(); // Обновляем статус незавершенного производства
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка обновления данных для annId = {annId}");
-                MessageBox.Show($"Ошибка обновления данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
 
         #endregion
 
-        #region Поиск и фильтрация
 
-        private async void SearchButton_Click(object sender, EventArgs e)
+        private async void customButton12_Click(object sender, EventArgs e)
         {
-            string searchText = searchControl1.Text.TrimEnd(' ');//filterTextBox1.Text.Trim();
-            string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
-
-            if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(searchText))
-            {
-                ANNgridView.ActiveFilterCriteria = new FunctionOperator(
-                    FunctionOperatorType.Contains,
-                    new OperandProperty(columnName),
-                    new OperandValue(searchText));
-            }
+            ApplySearchFilter();
+        }
+        
+        private void filterTextBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                ApplySearchFilter();
         }
 
-        /// <summary>
-        /// Фильтрация данных в gridView3 по введенному значению в filterTextBox1.
-        /// </summary>
-        private async void customButton12_Click(object sender, EventArgs e)
+        private async void ApplySearchFilter()
         {
             try
             {
-                string filterString = filterTextBox1.Text.Trim(); // Получаем текст из поля ввода
-                string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked); // Определяем, по какой колонке искать
+                string filterString = searchControl1.Text.Trim();
+                string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
 
                 if (!string.IsNullOrEmpty(filterString) && !string.IsNullOrEmpty(columnName))
                 {
-                    // Применяем фильтр к gridView3
                     ANNgridView.ActiveFilterCriteria = new DevExpress.Data.Filtering.FunctionOperator(
                         DevExpress.Data.Filtering.FunctionOperatorType.Contains,
                         new DevExpress.Data.Filtering.OperandProperty(columnName),
                         new DevExpress.Data.Filtering.OperandValue(filterString)
                     );
+                    await _logger.LogEventAsync($"Применен фильтр по колонке {columnName}: {filterString}", "Filter");
                 }
                 else
                 {
-                    MessageBox.Show("Введите значение для поиска и выберите колонку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Введите значение для поиска и выберите колонку!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при поиске по customButton12_Click");
+                await _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
                 MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private async Task searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
         {
@@ -661,18 +353,13 @@ namespace SewingProduction.Forms
 
         private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
         {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
+            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "Kod", 0);
+            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "Articul", "");
 
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ? 
-                await LoadWorksbyArt(0, "") : 
-                await LoadWorksbyArt(kod, articul);
+            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
+                await LoadWorksByArtAsync(0, "") :
+                await LoadWorksByArtAsync(kod, articul);
             customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
-        }
-
-        private void simpleButton2_Click(object sender, EventArgs e)
-        {
-         //   new TeamWork_AdvanceTW(bufferWorkDivision, (int)Mode.NewWorkDivision).ShowDialog();
         }
 
         /// <summary>
@@ -683,11 +370,11 @@ namespace SewingProduction.Forms
             string filterString = "";
 
             if (preliminaryCheckBox.Checked) filterString += $"[status] = {(int)Status.Preliminary}";
-            if (actualCheckBox.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + $"[status] = {(int)Status.Actual}";
-            if (archiveCheckBox.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + $"[status] = {(int)Status.Archive}";
+            if (actualCheckBox.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + $"[Status] = {(int)Status.Actual}";
+            if (archiveCheckBox.Checked) filterString += (filterString.Length > 0 ? " OR " : "") + $"[Status] = {(int)Status.Archive}";
 
             if (filterString.Length > 0) filterString = "(" + filterString + ")";
-            if (SortBox.Checked) filterString += (filterString.Length > 0 ? " AND " : "") + "[sek_shv] = 0 AND [status] > 0";
+            if (SortBox.Checked) filterString += (filterString.Length > 0 ? " AND " : "") + "[Sek_shv] = 0 AND [Status] > 0";
 
             ANNgridView.ActiveFilterString = filterString;
         }
@@ -698,70 +385,29 @@ namespace SewingProduction.Forms
         private void Filter_CheckedChanged(object sender, EventArgs e) => filterTable();
 
         /// <summary>
-        /// Сбрасывает текущий фильтр в searchControl1 при изменении параметров поиска.
+        /// Сбрасывает текущий фильтр и текст поиска при изменении параметров поиска.
         /// </summary>
         private async void search_CheckedChanged(object sender, EventArgs e)
         {
             try
             {
-                searchControl1.ClearFilter(); // Сброс фильтра
+                // Сбрасываем текст поиска
+                searchControl1.Text = string.Empty;
+                
+                // Сбрасываем любые установленные фильтры
+                ANNgridView.ActiveFilterCriteria = null;
+                searchControl1.ClearFilter();
+                
+                // Очищаем поисковый фильтр
+                _gridHelper.ClearSearchFilter(ANNgridView);
+                
+                await _logger.LogEventAsync("Сброшен фильтр поиска из-за изменения колонки", "FilterReset");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при очистке фильтра в searchControl1");
+                await _logger.LogErrorAsync(ex, "Ошибка при сбросе фильтра поиска");
             }
         }
-        #endregion
-
-        #region Работа с артикулами и разделением труда
-
-        /// <summary>
-        /// Обработчик кнопки "Отвязать артикул от РТ".
-        /// Удаляет связь между выбранным артикулом и разделением труда.
-        /// </summary>
-        private async void ResetButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var view = customGridControl5.MainView as GridView;
-                if (view != null)
-                {
-                    int[] selectedRows = view.GetSelectedRows();
-                    if (selectedRows.Length > 0)
-                    {
-                        int kod = Convert.ToInt32(view.GetRowCellValue(selectedRows[0], "kodd_rt"));
-
-                        try
-                        {
-                            // Вызов метода для отвязки артикула
-                            await _artNormService.ResetAnnId(kod);
-
-                            // Обновление данных в таблице после отвязки
-                             view.DeleteRow(selectedRows[0]);
-                        }
-                        catch (Exception ex)
-                        { MessageBox.Show("Ошибка отвязки от РТ", ex.Message);
-                            await _logger.LogErrorAsync(ex, "Ошибка отвязки от РТ "+ ex.Message);
-                        }
-                        finally
-                        {
-                            MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            await _logger.LogEventAsync($"Артикул отвязан от РТ", "ResetBtnClick");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при отвязке артикула от РТ");
-                MessageBox.Show($"Ошибка при отвязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
 
         /// <summary>
         /// Привязывает выбранные артикулы к выбранному разделению труда (РТ).
@@ -835,7 +481,7 @@ namespace SewingProduction.Forms
                     artView.RefreshData();
                 }
 
-                await  _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArt} привязан к РТ {selectedAnn}");
+                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArt} привязан к РТ {selectedAnn}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -844,197 +490,6 @@ namespace SewingProduction.Forms
                 MessageBox.Show($"Ошибка при привязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        /// <summary>
-        /// Гарантирует, что `IsChecked` может быть установлен только у одной строки.
-        /// Работает с `gridView7` и `gridView8`, а также с любым другим `GridView`, где используется `IsChecked`.
-        /// </summary>
-        /// <typeparam name="T">Тип данных, реализующий `ICheckable`</typeparam>
-        /// <param name="gridControl">GridControl, где произошло изменение</param>
-        /// <param name="e">Аргумент события `CellValueChangedEventArgs`</param>
-        private async void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class
-        {
-            try
-            {
-                if (e.Column.FieldName == "IsChecked")
-                {
-                    SafeInvoke(gridControl, () =>
-                    {
-                        var view = gridControl.MainView as GridView;
-                        if (view == null) return;
-
-                        var currentRow = view.GetRow(e.RowHandle) as ICheckable;
-                        if (currentRow == null) return;
-
-                        bool isChecked = (bool)e.Value;
-                        
-                        // Если текущая строка отмечается
-                        if (isChecked)
-                        {
-                            // Сначала снимаем все отметки
-                            for (int i = 0; i < view.RowCount; i++)
-                            {
-                                var row = view.GetRow(i) as ICheckable;
-                                if (row != null)
-                                {
-                                    row.IsChecked = false;
-                                }
-                            }
-                            // Затем отмечаем только текущую строку
-                            currentRow.IsChecked = true;
-                        }
-
-                        view.RefreshData();
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при изменении значения в GridView");
-                MessageBox.Show($"Ошибка при изменении значения: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        #region Поиск и фильтрация данных
-
-        /// <summary>
-        /// Обработчик изменения состояния customCheckBox6.  
-        /// Фильтрует gridView8 по статусу.
-        /// </summary>
-        private async void customCheckBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                string filterString = "";
-
-                if (actualCheckBox1.Checked) filterString += $"status = {(int)Status.Actual}";
-                if (preliminaryCheckBox1.Checked)
-                {
-                    if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
-                    filterString += $"status = {(int)Status.Preliminary}";
-                }
-
-                // Применяем фильтр к gridView8
-                gridView8.BeginUpdate();
-                gridView8.ActiveFilterString = filterString;
-                gridView8.EndUpdate();
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
-                MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        #endregion
-
-        #endregion
-
-        #region Обработчики кнопок
-
-        /// <summary>
-        /// Скопировать РТ
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void copyButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                bufferWorkDivision = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group")}, модель {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod")}, артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul")}";
-            }
-            catch
-            {
-                bufferWorkDivision = 0;
-                MessageBox.Show("Копирование не реализовано", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        /// <summary>
-        /// Добавить предварительное
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void customButton6_Click(object sender, EventArgs e)
-        {
-            await HandleButtonClickAsync();
-        }
-        private async Task HandleButtonClickAsync() { 
-
-            if (ANNgridView == null) return;
-
-            // Создаём новую запись модели `ArtNorm`
-            ArtNormN newItem = new ArtNormN
-            {
-                Kod = "0000000",
-                Group = "Группа",
-                Articul = "Артикул",
-                Mod = "Модель",
-                SekShv = 0,
-                SekVyaz5 = 0,
-                SekVyaz6 = 0,
-                SekVyaz7 = 0,
-                SekVyaz10 = 0,
-                SekVyaz12 = 0,
-                SekVyazo = 0,
-                SekVyaz = 0,
-                Sek = 0,
-                Komment = "Комментарий",
-                DataSozd = DateTime.Now,
-                Diz = 0,
-                Constr = 0,
-                DataObn = DateTime.MinValue,
-                SekKr = 0,
-                Slogn = 0,
-                Status = 1,
-                StatusText = "Предварительный",
-                Arh = false,
-                AnnID = 0
-            };
-
-            // Сохраняем в БД и получаем новый `annID`
-            int newId = await _artNormService.InsertANN(newItem);
-            if (newId <= 0)
-            {
-                MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Обновляем ID в объекте и загружаем данные заново
-            newItem.AnnID = newId;
-            //LoadData(); // Загружаем актуальные данные
-            _bindingList.Add(newItem);
-            ANNgridControl.RefreshDataSource();
-            // Ищем строку по `annID` в `GridView`
-            int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);//добавили строку в ANN
-            if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
-            {
-                ANNgridView.FocusedRowHandle = realRowHandle;//встаём на новую строку
-                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))//открываем  форму Добавить предв.ю передаём новый Id и Id из буфера
-                {
-                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)//если да, то так и оставляем 
-                    {
-                        // Можно обновить данные после закрытия формы, если нужно
-                        await LoadWorkDivisions();
-                    }
-                    else//если нет, удаляем новую пустую строку в ANN и в norm_rasz (потом надо будет в остальных таблицах, но вообще я хочу сделать удаление в привязанных прямо там, где их новые строки создаются)
-                    {
-                        _bindingList.Remove(newItem);
-                        await _artNormService.deleteRow("art_norm_n", newId);
-                        await _artNormService.deleteRow("norm_rasz", newId);
-                        ANNgridControl.RefreshDataSource();
-
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Новая строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-        
 
         /// <summary>
         /// Архив+копия
@@ -1056,8 +511,8 @@ namespace SewingProduction.Forms
                 int newId = 0;//найти новый айди и присвоить
                 if (nzp > 0)
                 {
-                    await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.ArchAndCopy))
+                 //   await CopyRow();
+                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
                     {
                         if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                         {
@@ -1073,8 +528,8 @@ namespace SewingProduction.Forms
 
                 else
                 {
-                    await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.ArchAndCopy))
+                  //  await CopyRow();
+                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
                     {
                         if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                         {
@@ -1103,7 +558,7 @@ namespace SewingProduction.Forms
             if (view == null) return;
 
 
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(0, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.Edit))
+            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(0, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.Edit))
             {
                 if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                 {
@@ -1117,475 +572,156 @@ namespace SewingProduction.Forms
             }
 
         }
-        private async Task CopyRow()
-        {
-            int selectedRowHandle = gridView1.FocusedRowHandle;
-            if (selectedRowHandle < 0)
-            {
-                MessageBox.Show("Выберите РТ для копирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            ArtNormN oldRow = gridView1.GetRow(selectedRowHandle) as ArtNormN;
-            if (oldRow == null) return;
+        #region Старые методы (для совместимости)
 
-            //  Создаём копию объекта
-            ArtNormN newItem = new ArtNormN
-            {
-                Kod = oldRow.Kod,
-                Group = oldRow.Group,
-                Articul = oldRow.Articul,
-                Mod = oldRow.Mod,
-                SekShv = oldRow.SekShv,
-                SekVyaz5 = oldRow.SekVyaz5,
-                SekVyaz6 = oldRow.SekVyaz6,
-                SekVyaz7 = oldRow.SekVyaz7,
-                SekVyaz10 = oldRow.SekVyaz10,
-                SekVyaz12 = oldRow.SekVyaz12,
-                SekVyazo = oldRow.SekVyazo,
-                SekVyaz = oldRow.SekVyaz,
-                Sek = oldRow.Sek,
-                Komment = oldRow.Komment,
-                DataSozd = DateTime.Now, // Новая дата создания
-                Diz = oldRow.Diz,
-                Constr = oldRow.Constr,
-                DataObn = null,
-                SekKr = oldRow.SekKr,
-                Slogn = oldRow.Slogn,
-                Arh = false,
-                Status = oldRow.Status
-            };
-
-            //  Сохраняем копию в БД
-            int newID = _artNormService.SaveCopyToDatabase(newItem);
-            if (newID <= 0)
-            {
-                MessageBox.Show("Ошибка копирования в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            //  Загружаем данные заново
-            await LoadWorkDivisions();
-
-            //  Ищем новую строку в `GridView`
-            int newRowHandle = gridView1.LocateByValue("annID", newID);
-            if (newRowHandle >= 0)
-            {
-                gridView1.FocusedRowHandle = newRowHandle;
-                gridView1.ShowPopupEditForm();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Копированная строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-        }
-        #endregion
-
-        #region текущие работы - требуют увязки
-        /// <summary>
-        /// Загрузка вкладки "текущие работы" (MyDataAnn)
-        /// </summary>
-        private async Task CurrentWorks_Load()
-        {
-            //загрузка артикулов для увязки (актуальные и предварительные)
-            await MyDataArtLoad();
-            //загрузка  таблицы РТ для увязки (текущие работы)
-            await MyDataAnnLoad();
-            //norm_rasz
-            await NormRaszLoad();
-        }
-
-        private async Task MyDataArtLoad()
+        private async Task LoadWorkDivisions()
         {
             try
             {
-                // Fetch unbound articles
-                DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
-
-                // Log the result of the data retrieval
-                await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
-
-                // Check if the DataTable is not null and has rows
-                if (relatedData != null && relatedData.Rows.Count > 0)
+                var data = await _artNormService.GetArtNormData();
+                if (data != null && data.Count > 0)
                 {
-                    BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
-
-                    // Populate the BindingList with data from the DataTable using the mapping method
-                    foreach (DataRow row in relatedData.Rows)
-                    {
-                        try
-                        {
-                            artDataList.Add(MapDataRowToMyDataART(row));
-                        }
-                        catch (Exception ex)
-                        {
-                            await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                            MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-
-                    // Set the data source for the grid control
-                    try
-                    {
-                        customGridControl1.DataSource = artDataList; // This should work if types match
-                    }
-                    catch(Exception ex) { MessageBox.Show("Ошибка приведения artDataList.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+                    _annBindingList = new BindingList<ArtNormN>(data);
+                    _annBindingSource.DataSource = _annBindingList;
                 }
-                else
-                {
-                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+
+                RefreshGrid();
+                await _logger.LogEventAsync("Загрузка RT завершена", "LoadWorkDivisions");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private MyDataART MapDataRowToMyDataART(DataRow row)
-        {
-            if (row == null || row.Table == null)
-            {
-                Console.WriteLine("❌ Ошибка: передан пустой DataRow или у него отсутствует таблица!");
-                return null;
-            }
-
-            // Проверяем, содержит ли DataRow нужные колонки
-            bool hasKod = row.Table.Columns.Contains("Kod");
-            bool hasArticul = row.Table.Columns.Contains("Articul");
-            bool hasGrup = row.Table.Columns.Contains("Grup");
-            bool hasMod = row.Table.Columns.Contains("Mod");
-
-            // Логируем список доступных колонок (для отладки)
-            Console.WriteLine("📢 Доступные колонки в DataRow:");
-            foreach (DataColumn col in row.Table.Columns)
-            {
-                Console.WriteLine($"🔹 {col.ColumnName}");
-            }
-
-            return new MyDataART
-            {
-                Kod = hasKod && row["Kod"] != DBNull.Value ? Convert.ToInt32(row["Kod"]) : 0,
-                Articul = hasArticul && row["Articul"] != DBNull.Value ? row["Articul"].ToString() : string.Empty,
-                Group = hasGrup && row["Grup"] != DBNull.Value ? row["Grup"].ToString() : string.Empty,
-                Model = hasMod && row["Mod"] != DBNull.Value ? row["Mod"].ToString() : string.Empty,
-                IsChecked = false // Default value
-            };
-        }
-        private async Task MyDataAnnLoad()
-        {
-            try
-            {
-                int kod = GetSelectedKodFromGrid(customGridControl1);
-                List<ArtNormN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
-
-                // Check if artNormNs is not null before proceeding
-                if (artNormNs != null)
-                {
-                    var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
-                    customGridControl3.DataSource = relatedMyDataAnn;
-                }
-                else
-                {
-                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-            }
-
-            //BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-            //// Заполняем myDataList данными из DataTable 
-            //foreach (MyDataANN row in relatedData)
-            //{
-            //    try
-            //    {
-            //        myDataList.Add(new MyDataANN
-            //        {
-            //            AnnId = row.AnnId,
-            //            Kod = row.Kod,
-            //            Articul = row.Articul,
-            //            Status = row.Status,
-            //            Stat = row.Stat,
-            //            Group = row.Group,
-            //            Model = row.Model,
-            //            IsChecked = false
-            //        });
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-            //        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //    ;
-            //}
-            //customGridControl2.DataSource = myDataList;
-        }
-        private int GetSelectedKodFromGrid(GridControl grid)
-        {
-            var view = grid.MainView as GridView;
-            if (view != null && view.FocusedRowHandle >= 0)
-            {
-                // Retrieve the "Kod" value from the focused row
-                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
-            }
-            return 0; // Return 0 or an appropriate default value if no valid row is selected
-        }
-        async Task NormRaszLoad()
-        {
-            int annId = 0;
-            var view = customGridControl2.MainView as GridView;
-            if (view != null)
-            {
-                annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
-            }
-            DataTable relatedRasz = new DataTable();
-            relatedRasz = await _artNormService.GetRelatedNormRasz(annId);
-            normraszBindingSource1.DataSource = relatedRasz;
-            customGridControl3.DataSource = normraszBindingSource1;
-        }
-
-        ///// <summary>
-        ///// загрузка norm_rasz
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        {
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "annId", 0);
-            await LoadRelatedData(annId);
-
-
-
-            //int annId = 0;
-            //var view = gridView8;//customGridControl2.MainView as GridView;
-            //if (view != null)
-            //{
-            //    annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
-            //}
-
-            //var relatedData = _artNormService.GetRelatedNormRasz(annId);
-            //normraszBindingSource1.DataSource = relatedData;
-            //customGridControl3.DataSource = normraszBindingSource1;
-
-        }
-
-        private async void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, e.FocusedRowHandle, "Kod", 0);
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
-
-
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
-                await LoadWorksbyArt(0, "") :
-    await LoadWorksbyArt(kod, articul);
-
-            customGridControl2.DataSource = list; //LoadWorksbyArt(kod, articul);
-        }
-
-        /// <summary>
-        /// обработка клика на заголовке, 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                SafeInvoke(gridView8.GridControl, () =>
-                {
-                    var view = sender as GridView;
-                    if (view == null) return;
-
-                    var currentRow = view.GetRow(e.RowHandle) as MyDataANN;
-                    if (currentRow == null) return;
-
-                    bool isChecked = (bool)e.Value;
-                    
-                    // Если текущая строка отмечается
-                    if (isChecked)
-                    {
-                        // Сначала снимаем все отметки
-                        for (int i = 0; i < view.RowCount; i++)
-                        {
-                            var row = view.GetRow(i) as MyDataANN;
-                            if (row != null)
-                            {
-                                row.IsChecked = false;
-                            }
-                        }
-                        // Затем отмечаем только текущую строку
-                        currentRow.IsChecked = true;
-                    }
-
-                    view.RefreshData();
-                });
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке RT");
             }
         }
 
-        //обработка клика на заголовке
-        private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        private void RefreshGrid()
         {
-            if (e.Column.FieldName == "IsChecked")
+            SafeInvoke(ANNgridControl, () =>
             {
-                SafeInvoke(gridView7.GridControl, () =>
-                {
-                    var view = sender as GridView;
-                    if (view == null) return;
-
-                    var currentRow = view.GetRow(e.RowHandle) as MyDataART;
-                    if (currentRow == null) return;
-
-                    bool isChecked = (bool)e.Value;
-                    
-                    // Если текущая строка отмечается
-                    if (isChecked)
-                    {
-                        // Сначала снимаем все отметки
-                        for (int i = 0; i < view.RowCount; i++)
-                        {
-                            var row = view.GetRow(i) as MyDataART;
-                            if (row != null)
-                            {
-                                row.IsChecked = false;
-                            }
-                        }
-                        // Затем отмечаем только текущую строку
-                        currentRow.IsChecked = true;
-                    }
-
-                    view.RefreshData();
-                });
-            }
-        }
-
-        #region headerCheckBox
-        private bool isHeaderChecked = false; // Состояние CheckBox в заголовке
-        private Dictionary<GridView, bool> gridViewStates = new Dictionary<GridView, bool>();//словарь состояний CheckBox
-        //отрисовка чекБокса в заголовке столбца
-        private void gridView8_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-
-        private void gridView7_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-        private void gridView9_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            //DrawCheckBox(e);
-        }
-        private void DrawCheckBox(ColumnHeaderCustomDrawEventArgs e)
-        {
-            if (e.Column != null && e.Column.FieldName == "IsChecked") // Убедимся, что это нужный столбец
-            {
-                // Очищаем стандартную отрисовку заголовка
-                e.Handled = true;
-
-                // Отрисовка заголовка
-                e.Painter.DrawObject(e.Info);
-
-                // Отрисовка CheckBox
-                // Получаем размеры области заголовка
-                Rectangle rect = e.Bounds;
-                CheckBoxRenderer.DrawCheckBox(
-                    e.Graphics,
-                    new Point(rect.Left + (rect.Width - 16) / 2, rect.Y + (rect.Height / 2) - 8),   // Рассчитываем позицию чекбокса по центру
-                    isHeaderChecked ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal : System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal
-                );
-            }
-        }
-        private List<MyDataART> GetCheckedRows<MyDataART>(GridView view)
-        {
-            BindingList<MyDataART> dataSource = view.DataSource as BindingList<MyDataART>;
-            if (dataSource == null) return new List<MyDataART>(); // Обработка null
-            List<MyDataART> list = new List<MyDataART>();
-            foreach (MyDataART row in dataSource)
-            {
-                //if (row.IsChecked = true)
-                {
-                    list.Add(row);
-
-                }
-            }
-            return new List<MyDataART>();//
-                                         //dataSource.Where(item => item.IsChecked).ToList();
-        }
-        private void AddCheckBoxToHeader(GridView gridView)
-        {
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit headerCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            GridColumn column = gridView.Columns["IsChecked"];
-            column.OptionsColumn.AllowEdit = true;
-
-            column.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            column.ColumnEdit = headerCheckEdit;
-
-
-        }
-        //Обработка нажатия на заголовке чекБоксов
-        private void CheckBoxMouseDown(object sender, MouseEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (view == null) return;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
-
-            if (!hitInfo.InColumn || hitInfo.Column.FieldName != "IsChecked") return;
-            isHeaderChecked = !isHeaderChecked;
-            //UpdateAllRows(view, isHeaderChecked);
-            //view.RefreshData();
-            // Получаем или устанавливаем состояние для текущего GridView
-            if (!gridViewStates.TryGetValue(view, out bool isChecked))
-            {
-                isChecked = false; // Значение по умолчанию, если GridView еще не был обработан
-            }
-
-            isChecked = !isChecked;
-            gridViewStates[view] = isChecked; // Сохраняем новое состояние
-
-            UpdateAllRows(view, isChecked);
-            view.RefreshData();
-        }
-
-        //обновление статуса CheckBox у всех строк таблицы
-        private void UpdateAllRows(GridView view, bool isChecked)
-        {
-            SafeInvoke(view.GridControl, () =>
-            {
-                IList dataSource = view.DataSource as IList;
-                if (dataSource == null) return;
-
-                foreach (var item in dataSource)
-                {
-                    if (item != null)
-                    {
-                        var property = item.GetType().GetProperty("IsChecked");
-                        if (property != null && property.CanWrite)
-                        {
-                            property.SetValue(item, isChecked);
-                        }
-                    }
-                }
+                _annBindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
+                filterTable();
             });
         }
-        //переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
-        private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
+
+        private void SafeInvoke(Control control, Action action)
         {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                e.Handled = true; // Отменяем сортировку по колонке "IsChecked"
-            }
+            if (control.InvokeRequired)
+                control.Invoke(action);
+            else
+                action();
         }
 
         #endregion
 
-        #endregion
+        private async Task LoadSettingsAsync()
+        {
+            try
+            {
+                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
+            }
+        }
 
-        private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        public Task LoadAnnByArticulAsync(int kod, string articul)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> InsertNormRaszAsync(NormRasz normRasz)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> InsertNormRaskAsync(NormRask normRask)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<BindingList<MyDataANN>> LoadAnnByArtAsync(int kod, string articul)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RefreshAnnGrid()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SaveAnnToDatabaseAsync(MyDataANN ann)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<List<NormRasz>> LoadNormRaszAsync(int annId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<int> SaveNormRaszAsync(NormRasz norm)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<DataTable> LoadRaskroyNormByGroupAsync(int groupId)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public Task LoadNormRask(int annId)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void copyButton_Click(object sender, EventArgs e)
         {
 
+        }
+
+        // Обработчики событий для радиокнопок поиска
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            // Вызываем очистку поиска при смене радиокнопки
+            _gridHelper.OnSearchRadioButtonChanged(ANNgridView);
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            // Вызываем очистку поиска при смене радиокнопки
+            _gridHelper.OnSearchRadioButtonChanged(ANNgridView);
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            // Вызываем очистку поиска при смене радиокнопки
+            _gridHelper.OnSearchRadioButtonChanged(ANNgridView);
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            // Вызываем очистку поиска при смене радиокнопки
+            _gridHelper.OnSearchRadioButtonChanged(ANNgridView);
+        }
+
+        public Task<BindingList<NormRasz>> LoadByAnnIdAsync(int annId)
+        {
+            return ((INormRaszManager)_normRaszManager).LoadByAnnIdAsync(annId);
+        }
+
+        Task<BindingList<NormRask>> INormRaskManager.LoadByAnnIdAsync(int annId)
+        {
+            return ((INormRaskManager)_normRaskManager).LoadByAnnIdAsync(annId);
+        }
+
+        public Task<BindingList<MyDataANN>> LoadByArtAsync(int kod, string articul, bool loadAll)
+        {
+            return ((IAnnManager)_annManager).LoadByArtAsync(kod, articul, loadAll);
         }
     }
 }

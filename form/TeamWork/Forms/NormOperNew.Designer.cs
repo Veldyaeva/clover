@@ -298,7 +298,7 @@ namespace SewingProduction.form
             this.tablePanel2.SetRow(this.customOkButton1, 0);
             this.customOkButton1.Size = new System.Drawing.Size(100, 21);
             this.customOkButton1.TabIndex = 3;
-            this.customOkButton1.Text = "customOkButton1";
+            this.customOkButton1.Text = "Ок";
             this.customOkButton1.UseVisualStyleBackColor = false;
             this.customOkButton1.Click += new System.EventHandler(this.customOkButton1_Click);
             // 
@@ -333,7 +333,7 @@ namespace SewingProduction.form
             this.tablePanel2.Name = "tablePanel2";
             this.tablePanel1.SetRow(this.tablePanel2, 0);
             this.tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] {
-            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F)});
+            new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F)});
             this.tablePanel2.Size = new System.Drawing.Size(922, 46);
             this.tablePanel2.TabIndex = 4;
             this.tablePanel2.UseSkinIndents = true;
@@ -356,9 +356,6 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
             this.ResumeLayout(false);
-
-            this.FormClosing += NormOperNew_FormClosing;
-            gridView1.ColumnWidthChanged += gridView1_ColumnWidthChanged;
 
         }
 

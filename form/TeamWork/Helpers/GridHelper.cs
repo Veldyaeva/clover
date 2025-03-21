@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid;
@@ -9,13 +11,15 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
+using SewingProduction.Services;
 
 namespace SewingProduction.Helpers
 {
-    public  class GridHelper
+    public class GridHelper
     {
-        public readonly HybridLogger _logger = new HybridLogger();
-        #region async
+        private readonly HybridLogger _logger = new HybridLogger();
+        
+        #region Асинхронные методы
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource` асинхронно.
         /// </summary>
@@ -38,6 +42,140 @@ namespace SewingProduction.Helpers
             });
         }
 
+        /// <summary>
+        /// Загружает данные из таблицы ANN асинхронно и обновляет интерфейс.
+        /// </summary>
+        /// <param name="bindingList">BindingList для хранения данных</param>
+        /// <param name="bindingSource">BindingSource для привязки данных к элементам управления</param>
+        /// <param name="annData">Список объектов ArtNormN</param>
+        /// <param name="logger">Логгер для записи событий</param>
+        public static async Task LoadCurrentDataAsync(BindingList<ArtNormN> bindingList, BindingSource bindingSource, List<ArtNormN> annData, HybridLogger logger)
+        {
+            try
+            {
+                // Очищаем текущий список
+                if (bindingList != null)
+                {
+                    bindingList.Clear();
+                }
+                
+                // Проверяем данные
+                if (annData != null && annData.Count > 0)
+                {
+                    // Создаем новый BindingList, если текущий пуст или null
+                    if (bindingList == null)
+                    {
+                        bindingList = new BindingList<ArtNormN>(annData);
+                    }
+                    else
+                    {
+                        // Добавляем данные в существующий BindingList
+                        foreach (var item in annData)
+                        {
+                            bindingList.Add(item);
+                        }
+                    }
+                }
+                else
+                {
+                    await logger.LogEventAsync("Нет данных для загрузки из таблицы ANN", "LoadCurrentDataAsync");
+                }
+                
+                // Обновляем BindingSource
+                bindingSource.DataSource = bindingList;
+                
+                // Обновляем логгер
+                await logger.LogEventAsync("Данные из таблицы ANN загружены успешно", "LoadCurrentDataAsync");
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ex, "Ошибка при загрузке данных из таблицы ANN");
+                throw;
+            }
+        }
+        
+        /// <summary>
+        /// Загружает данные из таблицы ANN и связанные данные по указанному идентификатору разделения труда.
+        /// </summary>
+        /// <param name="annId">Идентификатор разделения труда</param>
+        /// <param name="artNormService">Сервис для работы с данными</param>
+        /// <param name="controls">Словарь с GridControl'ами и их BindingSource'ами</param>
+        /// <param name="pictureBox">PictureBox для загрузки изображения</param>
+        /// <param name="annBindingSource">BindingSource для данных ANN</param>
+        /// <param name="annBindingList">BindingList для данных ANN</param>
+        /// <param name="logger">Логгер для записи событий</param>
+        public static async Task LoadCurrentDataAsync(
+            int annId, 
+            IArtNormService artNormService, 
+            Dictionary<GridControl, BindingSource> controls,
+            PictureBox pictureBox,
+            BindingSource annBindingSource,
+            BindingList<ArtNormN> annBindingList,
+            HybridLogger logger)
+        {
+            try
+            {
+                // Загружаем данные из таблицы ANN
+                var data = await artNormService.GetArtNormData();
+                annBindingList = new BindingList<ArtNormN>(data ?? new List<ArtNormN>());
+                annBindingSource.DataSource = annBindingList;
+                
+                // Загружаем связанные данные для указанного annId
+                foreach (var control in controls)
+                {
+                    GridControl grid = control.Key;
+                    BindingSource source = control.Value;
+                    
+                    // Определяем тип данных для загрузки на основе имени GridControl
+                    DataTable relatedData = null;
+                    
+                    if (grid.Name.Contains("normrasz", StringComparison.OrdinalIgnoreCase))
+                    {
+                        relatedData = await artNormService.GetRelatedNormRasz(annId);
+                    }
+                    else if (grid.Name.Contains("normrask", StringComparison.OrdinalIgnoreCase))
+                    {
+                        relatedData = await artNormService.GetRelatedNormRask(annId);
+                    }
+                    else if (grid.Name.Contains("normkont", StringComparison.OrdinalIgnoreCase))
+                    {
+                        relatedData = await artNormService.GetRelatedNormKont(annId);
+                    }
+                    else if (grid.Name.Contains("normdopobr", StringComparison.OrdinalIgnoreCase))
+                    {
+                        relatedData = await artNormService.GetRelatedNormDopObr(annId);
+                    }
+                    else if (grid.Name.Contains("sparticul", StringComparison.OrdinalIgnoreCase))
+                    {
+                        relatedData = await artNormService.GetRelatedSpArt(annId);
+                    }
+                    
+                    // Загружаем данные в GridControl
+                    if (relatedData != null)
+                    {
+                        await LoadGridControlDataAsync(grid, source, relatedData);
+                    }
+                }
+                
+                // Загружаем изображение
+                await LoadImageAsync(pictureBox, await artNormService.GetImage(annId));
+                
+                // Логируем успешную загрузку
+                await logger.LogEventAsync("Данные успешно загружены", "LoadCurrentDataAsync");
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ex, "Ошибка загрузки данных");
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Загружает данные в список асинхронно.
+        /// </summary>
+        /// <param name="list">Список для загрузки данных</param>
+        /// <param name="source">BindingSource для привязки данных</param>
+        /// <param name="data">Список с данными</param>
         public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
         {
             await Task.Run(() =>
@@ -95,10 +233,14 @@ namespace SewingProduction.Helpers
             });
         }
 
-
         /// <summary>
         /// Возвращает имя выбранного столбца для поиска.
         /// </summary>
+        /// <param name="kode">Радиокнопка "Код"</param>
+        /// <param name="articul">Радиокнопка "Артикул"</param>
+        /// <param name="model">Радиокнопка "Модель"</param>
+        /// <param name="group">Радиокнопка "Группа"</param>
+        /// <returns>Имя столбца для поиска</returns>
         public static Task<string> GetSelectedColumnNameAsync(bool kode, bool articul, bool model, bool group)
         {
             return Task.FromResult(
@@ -108,6 +250,7 @@ namespace SewingProduction.Helpers
                 group ? "grup" :
                 string.Empty);
         }
+
         /// <summary>
         /// Проверяет, загружены ли данные в GridView.
         /// </summary>
@@ -119,9 +262,13 @@ namespace SewingProduction.Helpers
                                    bindingSource.DataSource is DataTable dataTable &&
                                    dataTable.Rows.Count > 0);
         }
+
         /// <summary>
         /// Асинхронно снимает выделение всех строк, кроме текущей.
         /// </summary>
+        /// <typeparam name="T">Тип данных объекта</typeparam>
+        /// <param name="grid">GridControl</param>
+        /// <param name="rowHandle">Индекс выбранной строки</param>
         public static async Task UpdateExclusiveCheckAsync<T>(GridControl grid, int rowHandle) where T : class
         {
             GridView gridView = grid.MainView as GridView;
@@ -155,8 +302,12 @@ namespace SewingProduction.Helpers
         }
         #endregion
 
-        #region GridColumnSettings
-        // Сохранение настроек грида
+        #region Настройки GridView
+        /// <summary>
+        /// Сохраняет настройки GridView в XML-файл.
+        /// </summary>
+        /// <param name="gridView">GridView для сохранения настроек</param>
+        /// <param name="fileName">Имя файла для сохранения</param>
         public void SaveGridViewSettings(GridView gridView, string fileName)
         {
             try
@@ -169,7 +320,29 @@ namespace SewingProduction.Helpers
                     Directory.CreateDirectory(settingsPath);
 
                 string fullPath = Path.Combine(settingsPath, fileName);
+                
+                // Сохраняем текущие настройки
+                var storeAppearance = gridView.OptionsLayout.StoreAppearance;
+                var storeFilter = gridView.OptionsLayout.StoreDataSettings;
+                
+                // Отключаем сохранение фильтров и поиска
+                gridView.OptionsLayout.StoreAppearance = false;
+                gridView.OptionsLayout.StoreDataSettings = false;
+                
+                // Сохраняем временный текущий фильтр поиска, чтобы восстановить его после
+                var findFilterText = gridView.FindFilterText;
+                // Очищаем текст поиска перед сохранением
+                gridView.FindFilterText = string.Empty;
+                
+                // Сохраняем макет
                 gridView.SaveLayoutToXml(fullPath);
+                
+                // Восстанавливаем предыдущие настройки
+                gridView.OptionsLayout.StoreAppearance = storeAppearance;
+                gridView.OptionsLayout.StoreDataSettings = storeFilter;
+                
+                // Восстанавливаем текст поиска
+                gridView.FindFilterText = findFilterText;
             }
             catch (Exception ex)
             {
@@ -177,6 +350,11 @@ namespace SewingProduction.Helpers
             }
         }
 
+        /// <summary>
+        /// Обработчик события изменения ширины столбца.
+        /// </summary>
+        /// <param name="sender">GridView</param>
+        /// <param name="e">Параметры события</param>
         public void GridView_ColumnWidthChanged(object sender, ColumnEventArgs e)
         {
             if (sender is GridView view)
@@ -186,6 +364,11 @@ namespace SewingProduction.Helpers
             }
         }
 
+        /// <summary>
+        /// Загружает настройки GridView из XML-файла.
+        /// </summary>
+        /// <param name="view">GridView для загрузки настроек</param>
+        /// <param name="fileName">Имя файла с настройками</param>
         public void LoadGridViewSettings(GridView view, string fileName)
         {
             try
@@ -195,16 +378,73 @@ namespace SewingProduction.Helpers
                 string fullPath = Path.Combine(settingsPath, fileName);
 
                 if (File.Exists(fullPath))
+                {
+                    // Сохраняем текущие настройки
+                    var storeFilter = view.OptionsLayout.StoreDataSettings;
+                    
+                    // Отключаем загрузку фильтров
+                    view.OptionsLayout.StoreDataSettings = false;
+                    
+                    // Загружаем макет
                     view.RestoreLayoutFromXml(fullPath);
+                    
+                    // Восстанавливаем предыдущие настройки
+                    view.OptionsLayout.StoreDataSettings = storeFilter;
+                    
+                    // Очищаем любые возможные оставшиеся фильтры
+                    view.ActiveFilterString = string.Empty;
+                    view.ActiveFilterCriteria = null;
+                    view.FindFilterText = string.Empty;
+                }
             }
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
             }
         }
+        
+        /// <summary>
+        /// Очищает поисковый фильтр в GridView
+        /// </summary>
+        /// <param name="gridView">GridView для очистки</param>
+        public void ClearSearchFilter(GridView gridView)
+        {
+            if (gridView == null) return;
+            
+            try
+            {
+                // Сохраняем актуальное состояние для восстановления фокуса
+                int focusedRowHandle = gridView.FocusedRowHandle;
+                
+                // Очищаем поисковый фильтр
+                gridView.FindFilterText = string.Empty;
+                gridView.ClearFindFilter();
+                
+                // Восстанавливаем фокус, если был
+                if (focusedRowHandle >= 0 && focusedRowHandle < gridView.RowCount)
+                {
+                    gridView.FocusedRowHandle = focusedRowHandle;
+                }
+            }
+            catch (Exception ex)
+            {
+                // Используем экземпляр _logger
+                _logger.LogErrorAsync(ex, "Ошибка при очистке поискового фильтра");
+            }
+        }
+        
+        /// <summary>
+        /// Обработчик события смены RadioButton для поиска
+        /// </summary>
+        /// <param name="gridView">GridView, в котором выполняется поиск</param>
+        public void OnSearchRadioButtonChanged(GridView gridView)
+        {
+            // Очищаем поисковый фильтр при смене радиокнопки
+            ClearSearchFilter(gridView);
+        }
         #endregion
 
-        #region sync
+        #region Синхронные методы
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource`
         /// </summary>
@@ -216,6 +456,49 @@ namespace SewingProduction.Helpers
             source.DataSource = data;
             grid.DataSource = source;
             grid.RefreshDataSource();
+        }
+
+        /// <summary>
+        /// Загружает данные из таблицы ANN и обновляет интерфейс
+        /// </summary>
+        /// <param name="bindingList">BindingList для хранения данных</param>
+        /// <param name="bindingSource">BindingSource для привязки данных к элементам управления</param>
+        /// <param name="annData">Список объектов ArtNormN</param>
+        public static void LoadCurrentData(BindingList<ArtNormN> bindingList, BindingSource bindingSource, List<ArtNormN> annData)
+        {
+            try
+            {
+                // Очищаем текущий список
+                if (bindingList != null)
+                {
+                    bindingList.Clear();
+                }
+                
+                // Проверяем данные
+                if (annData != null && annData.Count > 0)
+                {
+                    // Создаем новый BindingList, если текущий пуст или null
+                    if (bindingList == null)
+                    {
+                        bindingList = new BindingList<ArtNormN>(annData);
+                    }
+                    else
+                    {
+                        // Добавляем данные в существующий BindingList
+                        foreach (var item in annData)
+                        {
+                            bindingList.Add(item);
+                        }
+                    }
+                }
+                
+                // Обновляем BindingSource
+                bindingSource.DataSource = bindingList;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Ошибка при загрузке данных из таблицы ANN", ex);
+            }
         }
 
         /// <summary>
@@ -261,6 +544,7 @@ namespace SewingProduction.Helpers
             if (group) return "grup";
             return string.Empty;
         }
+
         /// <summary>
         /// Проверяет, загружены ли данные в GridView
         /// </summary>

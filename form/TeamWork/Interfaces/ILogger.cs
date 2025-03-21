@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SewingProduction
 {
-    interface ILogger
+    public interface ILogger
     {
             Task LogErrorAsync(Exception ex, string context = "");
             Task LogEventAsync(string eventMessage, string context = "");
