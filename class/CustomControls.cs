@@ -1,4 +1,4 @@
-/*Основные цвета:
+﻿/*Основные цвета:
 Фон (градиент):
 Мягкий мятный: RGB(209, 241, 221)
 Кремовый (айвори): RGB(255, 248, 240)
@@ -351,6 +351,8 @@ namespace SewingProduction
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
 
+            //// Подписываемся на изменения темы
+            //Theme.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -426,6 +428,7 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+
     }
     public class CustomGroupBox : GroupBox
     {
@@ -567,6 +570,7 @@ namespace SewingProduction
         /// <returns></returns>
         public static T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
         {
+            System.Data.DataTable dT = new System.Data.DataTable();
             try
             {
                 object value = view.GetRowCellValue(rowHandle, fieldName);
@@ -653,6 +657,7 @@ public static class Logger
                 Console.WriteLine($"Ошибка при записи логов: {writeEx.Message}");
             }
         }
+            return dT;
     }
     }
 

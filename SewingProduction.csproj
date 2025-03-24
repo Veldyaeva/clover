@@ -56,7 +56,8 @@
     <StartupObject>SewingProduction.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>tbi_winter.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -465,9 +466,6 @@
     <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
@@ -572,17 +570,6 @@
     <EmbeddedResource Include="XtraReport2.resx">
       <DependentUpon>XtraReport2.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ACE_backupDataSet.xsc">
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ACE_backupDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ACE_backupDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ACE_backupDataSet.xss">
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </None>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>
@@ -621,19 +608,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\tbi_winter.ico" />
     <Content Include="XMLFile1.xml" />
     <None Include="Resources\winter.ico" />
     <Content Include="Resources\spring.jpg" />
     <Content Include="Resources\valentine.jpg" />
-    <Content Include="tbi_winter.ico" />
-    <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="form\maxim\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
