@@ -1359,6 +1359,7 @@
             this.gcPzArticulList.TabIndex = 9;
             this.gcPzArticulList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gwPzArticulList});
+            this.gcPzArticulList.Click += new System.EventHandler(this.gcPzArticulList_Click);
             // 
             // gwPzArticulList
             // 

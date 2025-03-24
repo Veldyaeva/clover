@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions2 = new DevExpress.Utils.Drawing.StubGlyphOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpravOborud));
             this.oborudGrid = new DevExpress.XtraGrid.GridControl();
             this.oborudList = new System.Windows.Forms.BindingSource(this.components);
@@ -56,8 +57,6 @@
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.simpleButtonAdd = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonRed = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonArhiv = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -67,12 +66,27 @@
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
-            this.label26 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.label8 = new SewingProduction.CustomLabel();
             this.checkBoxRedArhiv = new System.Windows.Forms.CheckBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.comboBoxRedClass = new System.Windows.Forms.ComboBox();
             this.comboBoxRedNastav = new System.Windows.Forms.ComboBox();
+            this.comboBoxRedVidm = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.checkBoxRedSpec = new System.Windows.Forms.CheckBox();
             this.label25 = new System.Windows.Forms.Label();
-            this.label21 = new System.Windows.Forms.Label();
+            this.checkBoxRedShow = new System.Windows.Forms.CheckBox();
+            this.Класс = new System.Windows.Forms.Label();
+            this.comboBoxRedGrup = new System.Windows.Forms.ComboBox();
             this.label20 = new System.Windows.Forms.Label();
+            this.textBoxRedSokrName = new System.Windows.Forms.TextBox();
+            this.textBoxRedKod = new System.Windows.Forms.TextBox();
+            this.textBoxRedName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.comboBoxRedShp = new System.Windows.Forms.ComboBox();
             this.label12 = new System.Windows.Forms.Label();
@@ -82,29 +96,13 @@
             this.comboBoxRedVzp = new System.Windows.Forms.ComboBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.comboBoxRedClass = new System.Windows.Forms.ComboBox();
-            this.Класс = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.comboBoxRedVidm = new System.Windows.Forms.ComboBox();
-            this.checkBoxRedSpec = new System.Windows.Forms.CheckBox();
-            this.checkBoxRedShow = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.comboBoxRedGrup = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBoxRedKod = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxRedSokrName = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBoxRedName = new System.Windows.Forms.TextBox();
-            this.simpleButtonRedOtm = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonRedSave = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonRedSave = new SewingProduction.CustomButton();
+            this.simpleButtonRedOtm = new SewingProduction.CustomButton();
             this.xtraTabPageAdd = new DevExpress.XtraTab.XtraTabPage();
-            this.label27 = new System.Windows.Forms.Label();
-            this.checkBoxAddArhiv = new System.Windows.Forms.CheckBox();
-            this.comboBoxAddNastav = new System.Windows.Forms.ComboBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label23 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.simpleButtonAddSave = new SewingProduction.CustomButton();
+            this.simpleButtonAddOtm = new SewingProduction.CustomButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label16 = new System.Windows.Forms.Label();
             this.comboBoxAddRz = new System.Windows.Forms.ComboBox();
@@ -114,24 +112,31 @@
             this.comboBoxAddVzp = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
-            this.comboBoxAddClass = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.comboBoxAddVidm = new System.Windows.Forms.ComboBox();
-            this.checkBoxAddSpec = new System.Windows.Forms.CheckBox();
+            this.comboBoxAddNastav = new System.Windows.Forms.ComboBox();
             this.checkBoxAddShow = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxAddArhiv = new System.Windows.Forms.CheckBox();
             this.comboBoxAddGrup = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBoxAddKod = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
             this.textBoxAddSokrName = new System.Windows.Forms.TextBox();
+            this.comboBoxAddVidm = new System.Windows.Forms.ComboBox();
+            this.comboBoxAddClass = new System.Windows.Forms.ComboBox();
+            this.textBoxAddKod = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxAddName = new System.Windows.Forms.TextBox();
-            this.simpleButtonAddOtm = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonAddSave = new DevExpress.XtraEditors.SimpleButton();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxAddSpec = new System.Windows.Forms.CheckBox();
             this.AddTab = new DevExpress.XtraTab.XtraTabControl();
             this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.simpleButtonAdd = new SewingProduction.CustomButton();
+            this.simpleButtonRed = new SewingProduction.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.oborudGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.oborudList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -139,11 +144,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEditArhiv.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.xtraTabPage2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.xtraTabPageAdd.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddTab)).BeginInit();
             this.AddTab.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // oborudGrid
@@ -152,12 +161,12 @@
             this.oborudGrid.EmbeddedNavigator.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
             this.oborudGrid.EmbeddedNavigator.Appearance.Options.UseTextOptions = true;
             this.oborudGrid.EmbeddedNavigator.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.oborudGrid.Location = new System.Drawing.Point(12, 12);
+            this.oborudGrid.Location = new System.Drawing.Point(3, 3);
             this.oborudGrid.MainView = this.gridView1;
             this.oborudGrid.Name = "oborudGrid";
             this.oborudGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit1});
-            this.oborudGrid.Size = new System.Drawing.Size(1387, 886);
+            this.oborudGrid.Size = new System.Drawing.Size(1396, 890);
             this.oborudGrid.TabIndex = 0;
             this.oborudGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
@@ -278,6 +287,8 @@
             this.col_text_ob.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             this.col_text_ob.AppearanceHeader.Options.UseTextOptions = true;
             this.col_text_ob.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            this.behaviorManager1.SetBehaviors(this.col_text_ob, new DevExpress.Utils.Behaviors.Behavior[] {
+            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions2, new System.Drawing.Size(16, 16))))});
             this.col_text_ob.Caption = "Вид оборудования  (для РТ)";
             this.col_text_ob.FieldName = "text_ob";
             this.col_text_ob.Name = "col_text_ob";
@@ -504,38 +515,14 @@
             this.gridColumn2.VisibleIndex = 4;
             this.gridColumn2.Width = 57;
             // 
-            // simpleButtonAdd
-            // 
-            this.simpleButtonAdd.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonAdd.Appearance.Options.UseFont = true;
-            this.simpleButtonAdd.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAdd.ImageOptions.Image")));
-            this.simpleButtonAdd.Location = new System.Drawing.Point(1207, 904);
-            this.simpleButtonAdd.Name = "simpleButtonAdd";
-            this.simpleButtonAdd.Size = new System.Drawing.Size(192, 45);
-            this.simpleButtonAdd.TabIndex = 1;
-            this.simpleButtonAdd.Text = "Добавить";
-            this.simpleButtonAdd.Click += new System.EventHandler(this.simpleButtonAdd_Click);
-            // 
-            // simpleButtonRed
-            // 
-            this.simpleButtonRed.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonRed.Appearance.Options.UseFont = true;
-            this.simpleButtonRed.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRed.ImageOptions.Image")));
-            this.simpleButtonRed.Location = new System.Drawing.Point(1009, 904);
-            this.simpleButtonRed.Name = "simpleButtonRed";
-            this.simpleButtonRed.Size = new System.Drawing.Size(192, 45);
-            this.simpleButtonRed.TabIndex = 5;
-            this.simpleButtonRed.Text = "Редактировать";
-            this.simpleButtonRed.Click += new System.EventHandler(this.simpleButtonRed_Click);
-            // 
             // simpleButtonArhiv
             // 
             this.simpleButtonArhiv.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.simpleButtonArhiv.Appearance.Options.UseFont = true;
             this.simpleButtonArhiv.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonArhiv.ImageOptions.Image")));
-            this.simpleButtonArhiv.Location = new System.Drawing.Point(12, 904);
+            this.simpleButtonArhiv.Location = new System.Drawing.Point(3, 3);
             this.simpleButtonArhiv.Name = "simpleButtonArhiv";
-            this.simpleButtonArhiv.Size = new System.Drawing.Size(148, 45);
+            this.simpleButtonArhiv.Size = new System.Drawing.Size(148, 41);
             this.simpleButtonArhiv.TabIndex = 6;
             this.simpleButtonArhiv.Text = "В архив";
             this.simpleButtonArhiv.Visible = false;
@@ -561,7 +548,7 @@
             // 
             // checkEditArhiv
             // 
-            this.checkEditArhiv.Location = new System.Drawing.Point(1266, 22);
+            this.checkEditArhiv.Location = new System.Drawing.Point(157, 3);
             this.checkEditArhiv.Name = "checkEditArhiv";
             this.checkEditArhiv.Properties.Caption = "Показывать Архив";
             this.checkEditArhiv.Size = new System.Drawing.Size(124, 20);
@@ -603,57 +590,112 @@
             // 
             // xtraTabPage2
             // 
-            this.xtraTabPage2.Controls.Add(this.label26);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedArhiv);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedNastav);
-            this.xtraTabPage2.Controls.Add(this.label25);
-            this.xtraTabPage2.Controls.Add(this.label21);
-            this.xtraTabPage2.Controls.Add(this.label20);
-            this.xtraTabPage2.Controls.Add(this.groupBox2);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedClass);
-            this.xtraTabPage2.Controls.Add(this.Класс);
-            this.xtraTabPage2.Controls.Add(this.label6);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedVidm);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedSpec);
-            this.xtraTabPage2.Controls.Add(this.checkBoxRedShow);
-            this.xtraTabPage2.Controls.Add(this.label7);
-            this.xtraTabPage2.Controls.Add(this.comboBoxRedGrup);
-            this.xtraTabPage2.Controls.Add(this.label8);
-            this.xtraTabPage2.Controls.Add(this.textBoxRedKod);
-            this.xtraTabPage2.Controls.Add(this.label9);
-            this.xtraTabPage2.Controls.Add(this.textBoxRedSokrName);
-            this.xtraTabPage2.Controls.Add(this.label10);
-            this.xtraTabPage2.Controls.Add(this.textBoxRedName);
-            this.xtraTabPage2.Controls.Add(this.simpleButtonRedOtm);
-            this.xtraTabPage2.Controls.Add(this.simpleButtonRedSave);
+            this.xtraTabPage2.Controls.Add(this.tableLayoutPanel3);
             this.xtraTabPage2.Name = "xtraTabPage2";
             this.xtraTabPage2.PageVisible = false;
-            this.xtraTabPage2.Size = new System.Drawing.Size(503, 861);
+            this.xtraTabPage2.Size = new System.Drawing.Size(503, 865);
             this.xtraTabPage2.Text = "Редактировать";
             // 
-            // label26
+            // tableLayoutPanel3
             // 
-            this.label26.AutoSize = true;
-            this.label26.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label26.Location = new System.Drawing.Point(10, 624);
-            this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(52, 17);
-            this.label26.TabIndex = 63;
-            this.label26.Text = "Архив";
+            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.checkBoxRedArhiv, 1, 10);
+            this.tableLayoutPanel3.Controls.Add(this.label26, 0, 10);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxRedClass, 1, 9);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxRedNastav, 1, 7);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxRedVidm, 1, 8);
+            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 2);
+            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 3);
+            this.tableLayoutPanel3.Controls.Add(this.checkBoxRedSpec, 1, 6);
+            this.tableLayoutPanel3.Controls.Add(this.label25, 0, 7);
+            this.tableLayoutPanel3.Controls.Add(this.checkBoxRedShow, 1, 4);
+            this.tableLayoutPanel3.Controls.Add(this.Класс, 0, 9);
+            this.tableLayoutPanel3.Controls.Add(this.comboBoxRedGrup, 1, 3);
+            this.tableLayoutPanel3.Controls.Add(this.label20, 0, 4);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxRedSokrName, 1, 2);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxRedKod, 1, 0);
+            this.tableLayoutPanel3.Controls.Add(this.textBoxRedName, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 8);
+            this.tableLayoutPanel3.Controls.Add(this.label21, 0, 6);
+            this.tableLayoutPanel3.Controls.Add(this.groupBox2, 0, 5);
+            this.tableLayoutPanel3.Controls.Add(this.simpleButtonRedSave, 1, 11);
+            this.tableLayoutPanel3.Controls.Add(this.simpleButtonRedOtm, 0, 11);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 12;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 210F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(503, 865);
+            this.tableLayoutPanel3.TabIndex = 64;
+            // 
+            // label8
+            // 
+            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(3, 7);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(34, 17);
+            this.label8.TabIndex = 33;
+            this.label8.Text = "Код";
             // 
             // checkBoxRedArhiv
             // 
+            this.checkBoxRedArhiv.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBoxRedArhiv.AutoSize = true;
             this.checkBoxRedArhiv.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedArhiv.Location = new System.Drawing.Point(226, 627);
+            this.checkBoxRedArhiv.Location = new System.Drawing.Point(219, 644);
             this.checkBoxRedArhiv.Name = "checkBoxRedArhiv";
             this.checkBoxRedArhiv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxRedArhiv.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRedArhiv.TabIndex = 62;
             this.checkBoxRedArhiv.UseVisualStyleBackColor = true;
             // 
+            // label26
+            // 
+            this.label26.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label26.Location = new System.Drawing.Point(3, 642);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(52, 17);
+            this.label26.TabIndex = 63;
+            this.label26.Text = "Архив";
+            // 
+            // comboBoxRedClass
+            // 
+            this.comboBoxRedClass.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxRedClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxRedClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedClass.FormattingEnabled = true;
+            this.comboBoxRedClass.Items.AddRange(new object[] {
+            ""});
+            this.comboBoxRedClass.Location = new System.Drawing.Point(219, 603);
+            this.comboBoxRedClass.Name = "comboBoxRedClass";
+            this.comboBoxRedClass.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxRedClass.TabIndex = 47;
+            // 
             // comboBoxRedNastav
             // 
+            this.comboBoxRedNastav.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBoxRedNastav.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRedNastav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxRedNastav.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -663,43 +705,182 @@
             "оверлок",
             "плоскошовка",
             "универсалка"});
-            this.comboBoxRedNastav.Location = new System.Drawing.Point(226, 498);
+            this.comboBoxRedNastav.Location = new System.Drawing.Point(219, 503);
             this.comboBoxRedNastav.Name = "comboBoxRedNastav";
             this.comboBoxRedNastav.Size = new System.Drawing.Size(269, 25);
             this.comboBoxRedNastav.TabIndex = 61;
             // 
+            // comboBoxRedVidm
+            // 
+            this.comboBoxRedVidm.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxRedVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedVidm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxRedVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedVidm.FormattingEnabled = true;
+            this.comboBoxRedVidm.Location = new System.Drawing.Point(219, 553);
+            this.comboBoxRedVidm.Name = "comboBoxRedVidm";
+            this.comboBoxRedVidm.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxRedVidm.TabIndex = 41;
+            // 
+            // label10
+            // 
+            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(3, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(196, 17);
+            this.label10.TabIndex = 29;
+            this.label10.Text = "Вид оборудования (для РТ)";
+            // 
+            // label9
+            // 
+            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(3, 97);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(210, 17);
+            this.label9.TabIndex = 31;
+            this.label9.Text = "Сокращенное наименование";
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(3, 147);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(124, 17);
+            this.label7.TabIndex = 35;
+            this.label7.Text = "Группа оборуд-я ";
+            // 
+            // checkBoxRedSpec
+            // 
+            this.checkBoxRedSpec.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxRedSpec.AutoSize = true;
+            this.checkBoxRedSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxRedSpec.Location = new System.Drawing.Point(219, 459);
+            this.checkBoxRedSpec.Name = "checkBoxRedSpec";
+            this.checkBoxRedSpec.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxRedSpec.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRedSpec.TabIndex = 38;
+            this.checkBoxRedSpec.UseVisualStyleBackColor = true;
+            // 
             // label25
             // 
+            this.label25.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label25.Location = new System.Drawing.Point(10, 501);
+            this.label25.Location = new System.Drawing.Point(3, 507);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(122, 17);
             this.label25.TabIndex = 60;
             this.label25.Text = "Наставничество";
             // 
-            // label21
+            // checkBoxRedShow
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label21.Location = new System.Drawing.Point(10, 444);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(152, 17);
-            this.label21.TabIndex = 57;
-            this.label21.Text = "Спец. оборудование ";
+            this.checkBoxRedShow.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxRedShow.AutoSize = true;
+            this.checkBoxRedShow.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxRedShow.Location = new System.Drawing.Point(219, 199);
+            this.checkBoxRedShow.Name = "checkBoxRedShow";
+            this.checkBoxRedShow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxRedShow.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRedShow.TabIndex = 36;
+            this.checkBoxRedShow.UseVisualStyleBackColor = true;
+            // 
+            // Класс
+            // 
+            this.Класс.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.Класс.AutoSize = true;
+            this.Класс.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Класс.Location = new System.Drawing.Point(3, 607);
+            this.Класс.Name = "Класс";
+            this.Класс.Size = new System.Drawing.Size(48, 17);
+            this.Класс.TabIndex = 46;
+            this.Класс.Text = "Класс";
+            // 
+            // comboBoxRedGrup
+            // 
+            this.comboBoxRedGrup.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxRedGrup.BackColor = System.Drawing.SystemColors.Window;
+            this.comboBoxRedGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxRedGrup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxRedGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxRedGrup.FormattingEnabled = true;
+            this.comboBoxRedGrup.Location = new System.Drawing.Point(219, 143);
+            this.comboBoxRedGrup.Name = "comboBoxRedGrup";
+            this.comboBoxRedGrup.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxRedGrup.TabIndex = 34;
             // 
             // label20
             // 
+            this.label20.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label20.AutoSize = true;
             this.label20.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label20.Location = new System.Drawing.Point(10, 192);
+            this.label20.Location = new System.Drawing.Point(3, 197);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(195, 17);
             this.label20.TabIndex = 57;
             this.label20.Text = "Скрыть для планирования";
             // 
+            // textBoxRedSokrName
+            // 
+            this.textBoxRedSokrName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxRedSokrName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxRedSokrName.Location = new System.Drawing.Point(219, 93);
+            this.textBoxRedSokrName.Name = "textBoxRedSokrName";
+            this.textBoxRedSokrName.Size = new System.Drawing.Size(269, 25);
+            this.textBoxRedSokrName.TabIndex = 30;
+            // 
+            // textBoxRedKod
+            // 
+            this.textBoxRedKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxRedKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBoxRedKod.Cursor = System.Windows.Forms.Cursors.No;
+            this.textBoxRedKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxRedKod.Location = new System.Drawing.Point(219, 3);
+            this.textBoxRedKod.Name = "textBoxRedKod";
+            this.textBoxRedKod.ReadOnly = true;
+            this.textBoxRedKod.Size = new System.Drawing.Size(63, 25);
+            this.textBoxRedKod.TabIndex = 32;
+            // 
+            // textBoxRedName
+            // 
+            this.textBoxRedName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxRedName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxRedName.Location = new System.Drawing.Point(219, 43);
+            this.textBoxRedName.Name = "textBoxRedName";
+            this.textBoxRedName.Size = new System.Drawing.Size(269, 25);
+            this.textBoxRedName.TabIndex = 28;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label6.Location = new System.Drawing.Point(3, 557);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(107, 17);
+            this.label6.TabIndex = 42;
+            this.label6.Text = "Вид операции";
+            // 
+            // label21
+            // 
+            this.label21.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label21.Location = new System.Drawing.Point(3, 457);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(152, 17);
+            this.label21.TabIndex = 57;
+            this.label21.Text = "Спец. оборудование ";
+            // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel3.SetColumnSpan(this.groupBox2, 2);
             this.groupBox2.Controls.Add(this.comboBoxRedShp);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.comboBoxRedRz);
@@ -709,7 +890,7 @@
             this.groupBox2.Controls.Add(this.label15);
             this.groupBox2.Controls.Add(this.label13);
             this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox2.Location = new System.Drawing.Point(13, 228);
+            this.groupBox2.Location = new System.Drawing.Point(3, 239);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(482, 194);
             this.groupBox2.TabIndex = 56;
@@ -816,276 +997,161 @@
             this.label13.TabIndex = 50;
             this.label13.Text = "Носки";
             // 
-            // comboBoxRedClass
+            // simpleButtonRedSave
             // 
-            this.comboBoxRedClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRedClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxRedClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxRedClass.FormattingEnabled = true;
-            this.comboBoxRedClass.Items.AddRange(new object[] {
-            ""});
-            this.comboBoxRedClass.Location = new System.Drawing.Point(226, 580);
-            this.comboBoxRedClass.Name = "comboBoxRedClass";
-            this.comboBoxRedClass.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxRedClass.TabIndex = 47;
-            // 
-            // Класс
-            // 
-            this.Класс.AutoSize = true;
-            this.Класс.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.Класс.Location = new System.Drawing.Point(10, 583);
-            this.Класс.Name = "Класс";
-            this.Класс.Size = new System.Drawing.Size(48, 17);
-            this.Класс.TabIndex = 46;
-            this.Класс.Text = "Класс";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(10, 543);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(107, 17);
-            this.label6.TabIndex = 42;
-            this.label6.Text = "Вид операции";
-            // 
-            // comboBoxRedVidm
-            // 
-            this.comboBoxRedVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRedVidm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxRedVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxRedVidm.FormattingEnabled = true;
-            this.comboBoxRedVidm.Location = new System.Drawing.Point(226, 540);
-            this.comboBoxRedVidm.Name = "comboBoxRedVidm";
-            this.comboBoxRedVidm.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxRedVidm.TabIndex = 41;
-            // 
-            // checkBoxRedSpec
-            // 
-            this.checkBoxRedSpec.AutoSize = true;
-            this.checkBoxRedSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedSpec.Location = new System.Drawing.Point(226, 448);
-            this.checkBoxRedSpec.Name = "checkBoxRedSpec";
-            this.checkBoxRedSpec.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxRedSpec.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxRedSpec.TabIndex = 38;
-            this.checkBoxRedSpec.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxRedShow
-            // 
-            this.checkBoxRedShow.AutoSize = true;
-            this.checkBoxRedShow.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxRedShow.Location = new System.Drawing.Point(226, 194);
-            this.checkBoxRedShow.Name = "checkBoxRedShow";
-            this.checkBoxRedShow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxRedShow.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxRedShow.TabIndex = 36;
-            this.checkBoxRedShow.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(10, 143);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(124, 17);
-            this.label7.TabIndex = 35;
-            this.label7.Text = "Группа оборуд-я ";
-            // 
-            // comboBoxRedGrup
-            // 
-            this.comboBoxRedGrup.BackColor = System.Drawing.SystemColors.Window;
-            this.comboBoxRedGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxRedGrup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxRedGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxRedGrup.FormattingEnabled = true;
-            this.comboBoxRedGrup.Location = new System.Drawing.Point(226, 139);
-            this.comboBoxRedGrup.Name = "comboBoxRedGrup";
-            this.comboBoxRedGrup.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxRedGrup.TabIndex = 34;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(10, 26);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(34, 17);
-            this.label8.TabIndex = 33;
-            this.label8.Text = "Код";
-            // 
-            // textBoxRedKod
-            // 
-            this.textBoxRedKod.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBoxRedKod.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBoxRedKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxRedKod.Location = new System.Drawing.Point(226, 23);
-            this.textBoxRedKod.Name = "textBoxRedKod";
-            this.textBoxRedKod.ReadOnly = true;
-            this.textBoxRedKod.Size = new System.Drawing.Size(63, 25);
-            this.textBoxRedKod.TabIndex = 32;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(10, 103);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(210, 17);
-            this.label9.TabIndex = 31;
-            this.label9.Text = "Сокращенное наименование";
-            // 
-            // textBoxRedSokrName
-            // 
-            this.textBoxRedSokrName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxRedSokrName.Location = new System.Drawing.Point(226, 99);
-            this.textBoxRedSokrName.Name = "textBoxRedSokrName";
-            this.textBoxRedSokrName.Size = new System.Drawing.Size(269, 25);
-            this.textBoxRedSokrName.TabIndex = 30;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(10, 64);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(196, 17);
-            this.label10.TabIndex = 29;
-            this.label10.Text = "Вид оборудования (для РТ)";
-            // 
-            // textBoxRedName
-            // 
-            this.textBoxRedName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxRedName.Location = new System.Drawing.Point(226, 60);
-            this.textBoxRedName.Name = "textBoxRedName";
-            this.textBoxRedName.Size = new System.Drawing.Size(269, 25);
-            this.textBoxRedName.TabIndex = 28;
+            this.simpleButtonRedSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.simpleButtonRedSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonRedSave.Btn = null;
+            this.simpleButtonRedSave.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonRedSave.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonRedSave.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonRedSave.FlatAppearance.BorderSize = 0;
+            this.simpleButtonRedSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonRedSave.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonRedSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonRedSave.Location = new System.Drawing.Point(272, 818);
+            this.simpleButtonRedSave.Name = "simpleButtonRedSave";
+            this.simpleButtonRedSave.Size = new System.Drawing.Size(174, 44);
+            this.simpleButtonRedSave.TabIndex = 65;
+            this.simpleButtonRedSave.Text = "Сохранить";
+            this.simpleButtonRedSave.UseVisualStyleBackColor = false;
+            this.simpleButtonRedSave.Click += new System.EventHandler(this.simpleButtonRedSave_Click);
             // 
             // simpleButtonRedOtm
             // 
-            this.simpleButtonRedOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonRedOtm.Appearance.Options.UseFont = true;
-            this.simpleButtonRedOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRedOtm.ImageOptions.Image")));
-            this.simpleButtonRedOtm.Location = new System.Drawing.Point(71, 806);
+            this.simpleButtonRedOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.simpleButtonRedOtm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonRedOtm.Btn = null;
+            this.simpleButtonRedOtm.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonRedOtm.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonRedOtm.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonRedOtm.FlatAppearance.BorderSize = 0;
+            this.simpleButtonRedOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonRedOtm.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonRedOtm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonRedOtm.Location = new System.Drawing.Point(21, 818);
             this.simpleButtonRedOtm.Name = "simpleButtonRedOtm";
-            this.simpleButtonRedOtm.Size = new System.Drawing.Size(148, 45);
-            this.simpleButtonRedOtm.TabIndex = 10;
+            this.simpleButtonRedOtm.Size = new System.Drawing.Size(174, 44);
+            this.simpleButtonRedOtm.TabIndex = 64;
             this.simpleButtonRedOtm.Text = "Отмена";
+            this.simpleButtonRedOtm.UseVisualStyleBackColor = false;
             this.simpleButtonRedOtm.Click += new System.EventHandler(this.simpleButtonRedOtm_Click);
-            // 
-            // simpleButtonRedSave
-            // 
-            this.simpleButtonRedSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonRedSave.Appearance.Options.UseFont = true;
-            this.simpleButtonRedSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonRedSave.ImageOptions.Image")));
-            this.simpleButtonRedSave.Location = new System.Drawing.Point(286, 806);
-            this.simpleButtonRedSave.Name = "simpleButtonRedSave";
-            this.simpleButtonRedSave.Size = new System.Drawing.Size(148, 45);
-            this.simpleButtonRedSave.TabIndex = 9;
-            this.simpleButtonRedSave.Text = "Сохранить";
-            this.simpleButtonRedSave.Click += new System.EventHandler(this.simpleButtonRedSave_Click);
             // 
             // xtraTabPageAdd
             // 
             this.xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
             this.xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
-            this.xtraTabPageAdd.Controls.Add(this.label27);
-            this.xtraTabPageAdd.Controls.Add(this.checkBoxAddArhiv);
-            this.xtraTabPageAdd.Controls.Add(this.comboBoxAddNastav);
-            this.xtraTabPageAdd.Controls.Add(this.label24);
-            this.xtraTabPageAdd.Controls.Add(this.label23);
-            this.xtraTabPageAdd.Controls.Add(this.label22);
-            this.xtraTabPageAdd.Controls.Add(this.groupBox3);
-            this.xtraTabPageAdd.Controls.Add(this.comboBoxAddClass);
-            this.xtraTabPageAdd.Controls.Add(this.label11);
-            this.xtraTabPageAdd.Controls.Add(this.label5);
-            this.xtraTabPageAdd.Controls.Add(this.comboBoxAddVidm);
-            this.xtraTabPageAdd.Controls.Add(this.checkBoxAddSpec);
-            this.xtraTabPageAdd.Controls.Add(this.checkBoxAddShow);
-            this.xtraTabPageAdd.Controls.Add(this.label4);
-            this.xtraTabPageAdd.Controls.Add(this.comboBoxAddGrup);
-            this.xtraTabPageAdd.Controls.Add(this.label3);
-            this.xtraTabPageAdd.Controls.Add(this.textBoxAddKod);
-            this.xtraTabPageAdd.Controls.Add(this.label2);
-            this.xtraTabPageAdd.Controls.Add(this.textBoxAddSokrName);
-            this.xtraTabPageAdd.Controls.Add(this.label1);
-            this.xtraTabPageAdd.Controls.Add(this.textBoxAddName);
-            this.xtraTabPageAdd.Controls.Add(this.simpleButtonAddOtm);
-            this.xtraTabPageAdd.Controls.Add(this.simpleButtonAddSave);
+            this.xtraTabPageAdd.Controls.Add(this.tableLayoutPanel4);
             this.xtraTabPageAdd.Name = "xtraTabPageAdd";
             this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 861);
+            this.xtraTabPageAdd.Size = new System.Drawing.Size(503, 865);
             this.xtraTabPageAdd.Text = "Добавить";
             // 
-            // label27
+            // tableLayoutPanel4
             // 
-            this.label27.AutoSize = true;
-            this.label27.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label27.Location = new System.Drawing.Point(10, 624);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(52, 17);
-            this.label27.TabIndex = 65;
-            this.label27.Text = "Архив";
+            this.tableLayoutPanel4.ColumnCount = 2;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.74354F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.25646F));
+            this.tableLayoutPanel4.Controls.Add(this.simpleButtonAddSave, 1, 12);
+            this.tableLayoutPanel4.Controls.Add(this.simpleButtonAddOtm, 0, 12);
+            this.tableLayoutPanel4.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.groupBox3, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxAddNastav, 1, 7);
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxAddShow, 1, 4);
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxAddArhiv, 1, 10);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxAddGrup, 1, 3);
+            this.tableLayoutPanel4.Controls.Add(this.label27, 0, 10);
+            this.tableLayoutPanel4.Controls.Add(this.textBoxAddSokrName, 1, 2);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxAddVidm, 1, 8);
+            this.tableLayoutPanel4.Controls.Add(this.comboBoxAddClass, 1, 9);
+            this.tableLayoutPanel4.Controls.Add(this.textBoxAddKod, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label1, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.textBoxAddName, 1, 1);
+            this.tableLayoutPanel4.Controls.Add(this.label24, 0, 7);
+            this.tableLayoutPanel4.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.label11, 0, 9);
+            this.tableLayoutPanel4.Controls.Add(this.label22, 0, 6);
+            this.tableLayoutPanel4.Controls.Add(this.label5, 0, 8);
+            this.tableLayoutPanel4.Controls.Add(this.label23, 0, 4);
+            this.tableLayoutPanel4.Controls.Add(this.label4, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.checkBoxAddSpec, 1, 6);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 13;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 210F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(503, 865);
+            this.tableLayoutPanel4.TabIndex = 67;
             // 
-            // checkBoxAddArhiv
+            // simpleButtonAddSave
             // 
-            this.checkBoxAddArhiv.AutoSize = true;
-            this.checkBoxAddArhiv.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddArhiv.Location = new System.Drawing.Point(226, 627);
-            this.checkBoxAddArhiv.Name = "checkBoxAddArhiv";
-            this.checkBoxAddArhiv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxAddArhiv.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAddArhiv.TabIndex = 64;
-            this.checkBoxAddArhiv.UseVisualStyleBackColor = true;
+            this.simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonAddSave.Btn = null;
+            this.simpleButtonAddSave.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonAddSave.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonAddSave.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonAddSave.FlatAppearance.BorderSize = 0;
+            this.simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonAddSave.Location = new System.Drawing.Point(272, 818);
+            this.simpleButtonAddSave.Name = "simpleButtonAddSave";
+            this.simpleButtonAddSave.Size = new System.Drawing.Size(174, 44);
+            this.simpleButtonAddSave.TabIndex = 67;
+            this.simpleButtonAddSave.Text = "Сохранить";
+            this.simpleButtonAddSave.UseVisualStyleBackColor = false;
+            this.simpleButtonAddSave.Click += new System.EventHandler(this.simpleButtonAddSave_Click);
             // 
-            // comboBoxAddNastav
+            // simpleButtonAddOtm
             // 
-            this.comboBoxAddNastav.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAddNastav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxAddNastav.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAddNastav.FormattingEnabled = true;
-            this.comboBoxAddNastav.Items.AddRange(new object[] {
-            "нет",
-            "оверлок",
-            "плоскошовка",
-            "универсалка"});
-            this.comboBoxAddNastav.Location = new System.Drawing.Point(226, 498);
-            this.comboBoxAddNastav.Name = "comboBoxAddNastav";
-            this.comboBoxAddNastav.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxAddNastav.TabIndex = 60;
+            this.simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonAddOtm.Btn = null;
+            this.simpleButtonAddOtm.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonAddOtm.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonAddOtm.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
+            this.simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonAddOtm.Location = new System.Drawing.Point(20, 818);
+            this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
+            this.simpleButtonAddOtm.Size = new System.Drawing.Size(174, 44);
+            this.simpleButtonAddOtm.TabIndex = 66;
+            this.simpleButtonAddOtm.Text = "Отмена";
+            this.simpleButtonAddOtm.UseVisualStyleBackColor = false;
+            this.simpleButtonAddOtm.Click += new System.EventHandler(this.simpleButtonAddOtm_Click);
             // 
-            // label24
+            // label3
             // 
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label24.Location = new System.Drawing.Point(10, 501);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(122, 17);
-            this.label24.TabIndex = 59;
-            this.label24.Text = "Наставничество";
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label23.Location = new System.Drawing.Point(10, 192);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(195, 17);
-            this.label23.TabIndex = 58;
-            this.label23.Text = "Скрыть для планирования";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label22.Location = new System.Drawing.Point(10, 444);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(152, 17);
-            this.label22.TabIndex = 58;
-            this.label22.Text = "Спец. оборудование ";
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label3.Location = new System.Drawing.Point(3, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(34, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Код";
             // 
             // groupBox3
             // 
+            this.groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.tableLayoutPanel4.SetColumnSpan(this.groupBox3, 2);
             this.groupBox3.Controls.Add(this.label16);
             this.groupBox3.Controls.Add(this.comboBoxAddRz);
             this.groupBox3.Controls.Add(this.label17);
@@ -1095,7 +1161,7 @@
             this.groupBox3.Controls.Add(this.label18);
             this.groupBox3.Controls.Add(this.label19);
             this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox3.Location = new System.Drawing.Point(13, 228);
+            this.groupBox3.Location = new System.Drawing.Point(3, 258);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(482, 194);
             this.groupBox3.TabIndex = 57;
@@ -1202,137 +1268,123 @@
             this.label19.TabIndex = 50;
             this.label19.Text = "Носки";
             // 
-            // comboBoxAddClass
+            // comboBoxAddNastav
             // 
-            this.comboBoxAddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAddClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxAddClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAddClass.FormattingEnabled = true;
-            this.comboBoxAddClass.Location = new System.Drawing.Point(226, 580);
-            this.comboBoxAddClass.Name = "comboBoxAddClass";
-            this.comboBoxAddClass.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxAddClass.TabIndex = 30;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(10, 583);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(48, 17);
-            this.label11.TabIndex = 29;
-            this.label11.Text = "Класс";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(10, 543);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 17);
-            this.label5.TabIndex = 25;
-            this.label5.Text = "Вид операции";
-            // 
-            // comboBoxAddVidm
-            // 
-            this.comboBoxAddVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxAddVidm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxAddVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBoxAddVidm.FormattingEnabled = true;
-            this.comboBoxAddVidm.Location = new System.Drawing.Point(226, 540);
-            this.comboBoxAddVidm.Name = "comboBoxAddVidm";
-            this.comboBoxAddVidm.Size = new System.Drawing.Size(269, 25);
-            this.comboBoxAddVidm.TabIndex = 24;
-            // 
-            // checkBoxAddSpec
-            // 
-            this.checkBoxAddSpec.AutoSize = true;
-            this.checkBoxAddSpec.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.checkBoxAddSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddSpec.Location = new System.Drawing.Point(226, 448);
-            this.checkBoxAddSpec.Name = "checkBoxAddSpec";
-            this.checkBoxAddSpec.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAddSpec.TabIndex = 21;
-            this.checkBoxAddSpec.UseVisualStyleBackColor = true;
+            this.comboBoxAddNastav.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxAddNastav.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddNastav.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxAddNastav.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddNastav.FormattingEnabled = true;
+            this.comboBoxAddNastav.Items.AddRange(new object[] {
+            "нет",
+            "оверлок",
+            "плоскошовка",
+            "универсалка"});
+            this.comboBoxAddNastav.Location = new System.Drawing.Point(218, 522);
+            this.comboBoxAddNastav.Name = "comboBoxAddNastav";
+            this.comboBoxAddNastav.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxAddNastav.TabIndex = 60;
             // 
             // checkBoxAddShow
             // 
+            this.checkBoxAddShow.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.checkBoxAddShow.AutoSize = true;
             this.checkBoxAddShow.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.checkBoxAddShow.Location = new System.Drawing.Point(226, 194);
+            this.checkBoxAddShow.Location = new System.Drawing.Point(218, 218);
             this.checkBoxAddShow.Name = "checkBoxAddShow";
             this.checkBoxAddShow.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.checkBoxAddShow.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAddShow.TabIndex = 18;
             this.checkBoxAddShow.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // checkBoxAddArhiv
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(10, 143);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(124, 17);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "Группа оборуд-я ";
+            this.checkBoxAddArhiv.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxAddArhiv.AutoSize = true;
+            this.checkBoxAddArhiv.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxAddArhiv.Location = new System.Drawing.Point(218, 678);
+            this.checkBoxAddArhiv.Name = "checkBoxAddArhiv";
+            this.checkBoxAddArhiv.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.checkBoxAddArhiv.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAddArhiv.TabIndex = 64;
+            this.checkBoxAddArhiv.UseVisualStyleBackColor = true;
             // 
             // comboBoxAddGrup
             // 
+            this.comboBoxAddGrup.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.comboBoxAddGrup.BackColor = System.Drawing.Color.White;
             this.comboBoxAddGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxAddGrup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.comboBoxAddGrup.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBoxAddGrup.FormattingEnabled = true;
-            this.comboBoxAddGrup.Location = new System.Drawing.Point(226, 139);
+            this.comboBoxAddGrup.Location = new System.Drawing.Point(218, 162);
             this.comboBoxAddGrup.Name = "comboBoxAddGrup";
             this.comboBoxAddGrup.Size = new System.Drawing.Size(269, 25);
             this.comboBoxAddGrup.TabIndex = 15;
             // 
-            // label3
+            // label27
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(10, 26);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(34, 17);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "Код";
+            this.label27.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label27.Location = new System.Drawing.Point(3, 676);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(52, 17);
+            this.label27.TabIndex = 65;
+            this.label27.Text = "Архив";
+            // 
+            // textBoxAddSokrName
+            // 
+            this.textBoxAddSokrName.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.textBoxAddSokrName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBoxAddSokrName.Location = new System.Drawing.Point(218, 112);
+            this.textBoxAddSokrName.Name = "textBoxAddSokrName";
+            this.textBoxAddSokrName.Size = new System.Drawing.Size(269, 25);
+            this.textBoxAddSokrName.TabIndex = 11;
+            // 
+            // comboBoxAddVidm
+            // 
+            this.comboBoxAddVidm.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxAddVidm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddVidm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxAddVidm.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddVidm.FormattingEnabled = true;
+            this.comboBoxAddVidm.Location = new System.Drawing.Point(218, 572);
+            this.comboBoxAddVidm.Name = "comboBoxAddVidm";
+            this.comboBoxAddVidm.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxAddVidm.TabIndex = 24;
+            // 
+            // comboBoxAddClass
+            // 
+            this.comboBoxAddClass.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.comboBoxAddClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxAddClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxAddClass.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBoxAddClass.FormattingEnabled = true;
+            this.comboBoxAddClass.Location = new System.Drawing.Point(218, 622);
+            this.comboBoxAddClass.Name = "comboBoxAddClass";
+            this.comboBoxAddClass.Size = new System.Drawing.Size(269, 25);
+            this.comboBoxAddClass.TabIndex = 30;
             // 
             // textBoxAddKod
             // 
+            this.textBoxAddKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBoxAddKod.BackColor = System.Drawing.SystemColors.Control;
             this.textBoxAddKod.Cursor = System.Windows.Forms.Cursors.No;
             this.textBoxAddKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textBoxAddKod.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxAddKod.Location = new System.Drawing.Point(226, 23);
+            this.textBoxAddKod.Location = new System.Drawing.Point(218, 12);
             this.textBoxAddKod.Name = "textBoxAddKod";
             this.textBoxAddKod.ReadOnly = true;
             this.textBoxAddKod.Size = new System.Drawing.Size(63, 25);
             this.textBoxAddKod.TabIndex = 13;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(10, 103);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(210, 17);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Сокращенное наименование";
-            // 
-            // textBoxAddSokrName
-            // 
-            this.textBoxAddSokrName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxAddSokrName.Location = new System.Drawing.Point(226, 99);
-            this.textBoxAddSokrName.Name = "textBoxAddSokrName";
-            this.textBoxAddSokrName.Size = new System.Drawing.Size(269, 25);
-            this.textBoxAddSokrName.TabIndex = 11;
-            // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(10, 64);
+            this.label1.Location = new System.Drawing.Point(3, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 17);
             this.label1.TabIndex = 10;
@@ -1340,45 +1392,113 @@
             // 
             // textBoxAddName
             // 
+            this.textBoxAddName.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.textBoxAddName.BackColor = System.Drawing.Color.White;
             this.textBoxAddName.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxAddName.Location = new System.Drawing.Point(226, 60);
+            this.textBoxAddName.Location = new System.Drawing.Point(218, 62);
             this.textBoxAddName.Name = "textBoxAddName";
             this.textBoxAddName.Size = new System.Drawing.Size(269, 25);
             this.textBoxAddName.TabIndex = 9;
             // 
-            // simpleButtonAddOtm
+            // label24
             // 
-            this.simpleButtonAddOtm.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonAddOtm.Appearance.Options.UseFont = true;
-            this.simpleButtonAddOtm.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddOtm.ImageOptions.Image")));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(71, 806);
-            this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
-            this.simpleButtonAddOtm.Size = new System.Drawing.Size(148, 45);
-            this.simpleButtonAddOtm.TabIndex = 8;
-            this.simpleButtonAddOtm.Text = "Отмена";
-            this.simpleButtonAddOtm.Click += new System.EventHandler(this.simpleButtonAddOtm_Click);
+            this.label24.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label24.Location = new System.Drawing.Point(3, 526);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(122, 17);
+            this.label24.TabIndex = 59;
+            this.label24.Text = "Наставничество";
             // 
-            // simpleButtonAddSave
+            // label2
             // 
-            this.simpleButtonAddSave.Appearance.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.simpleButtonAddSave.Appearance.Options.UseFont = true;
-            this.simpleButtonAddSave.ImageOptions.Image = ((System.Drawing.Image)(resources.GetObject("simpleButtonAddSave.ImageOptions.Image")));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(286, 806);
-            this.simpleButtonAddSave.Name = "simpleButtonAddSave";
-            this.simpleButtonAddSave.Size = new System.Drawing.Size(148, 45);
-            this.simpleButtonAddSave.TabIndex = 7;
-            this.simpleButtonAddSave.Text = "Сохранить";
-            this.simpleButtonAddSave.Click += new System.EventHandler(this.simpleButtonAddSave_Click);
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(3, 108);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 34);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Сокращенное наименование";
+            // 
+            // label11
+            // 
+            this.label11.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label11.Location = new System.Drawing.Point(3, 626);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(48, 17);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "Класс";
+            // 
+            // label22
+            // 
+            this.label22.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label22.Location = new System.Drawing.Point(3, 476);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(152, 17);
+            this.label22.TabIndex = 58;
+            this.label22.Text = "Спец. оборудование ";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label5.Location = new System.Drawing.Point(3, 576);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 17);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "Вид операции";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label23.Location = new System.Drawing.Point(3, 216);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(195, 17);
+            this.label23.TabIndex = 58;
+            this.label23.Text = "Скрыть для планирования";
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label4.Location = new System.Drawing.Point(3, 166);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(124, 17);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Группа оборуд-я ";
+            // 
+            // checkBoxAddSpec
+            // 
+            this.checkBoxAddSpec.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.checkBoxAddSpec.AutoSize = true;
+            this.checkBoxAddSpec.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.checkBoxAddSpec.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBoxAddSpec.Location = new System.Drawing.Point(218, 478);
+            this.checkBoxAddSpec.Name = "checkBoxAddSpec";
+            this.checkBoxAddSpec.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxAddSpec.TabIndex = 21;
+            this.checkBoxAddSpec.UseVisualStyleBackColor = true;
             // 
             // AddTab
             // 
             this.AddTab.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.AddTab.Appearance.ForeColor = System.Drawing.Color.Black;
             this.AddTab.Appearance.Options.UseBackColor = true;
-            this.AddTab.Location = new System.Drawing.Point(1405, 12);
+            this.AddTab.Appearance.Options.UseForeColor = true;
+            this.AddTab.Location = new System.Drawing.Point(1406, 3);
             this.AddTab.Name = "AddTab";
             this.AddTab.SelectedTabPage = this.xtraTabPage2;
-            this.AddTab.Size = new System.Drawing.Size(505, 886);
+            this.AddTab.Size = new System.Drawing.Size(505, 890);
             this.AddTab.TabIndex = 4;
             this.AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.xtraTabPageAdd,
@@ -1393,17 +1513,88 @@
             this.gridColumn11.VisibleIndex = 3;
             this.gridColumn11.Width = 156;
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel1.Controls.Add(this.oborudGrid, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.AddTab, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.23621F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.763788F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1914, 961);
+            this.tableLayoutPanel1.TabIndex = 8;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 4;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.checkEditArhiv, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.simpleButtonArhiv, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.simpleButtonAdd, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.simpleButtonRed, 2, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 899);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1396, 59);
+            this.tableLayoutPanel2.TabIndex = 5;
+            // 
+            // simpleButtonAdd
+            // 
+            this.simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonAdd.Btn = null;
+            this.simpleButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonAdd.FlatAppearance.BorderSize = 0;
+            this.simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonAdd.Location = new System.Drawing.Point(1206, 3);
+            this.simpleButtonAdd.Name = "simpleButtonAdd";
+            this.simpleButtonAdd.Size = new System.Drawing.Size(187, 41);
+            this.simpleButtonAdd.TabIndex = 13;
+            this.simpleButtonAdd.Text = "Добавить";
+            this.simpleButtonAdd.UseVisualStyleBackColor = false;
+            this.simpleButtonAdd.Click += new System.EventHandler(this.simpleButtonAdd_Click);
+            // 
+            // simpleButtonRed
+            // 
+            this.simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.simpleButtonRed.Btn = null;
+            this.simpleButtonRed.ComponentBackColor = System.Drawing.Color.Empty;
+            this.simpleButtonRed.ComponentFontColor = System.Drawing.Color.Empty;
+            this.simpleButtonRed.ComponentSize = new System.Drawing.Size(0, 0);
+            this.simpleButtonRed.FlatAppearance.BorderSize = 0;
+            this.simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
+            this.simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.simpleButtonRed.Location = new System.Drawing.Point(1013, 3);
+            this.simpleButtonRed.Name = "simpleButtonRed";
+            this.simpleButtonRed.Size = new System.Drawing.Size(187, 41);
+            this.simpleButtonRed.TabIndex = 12;
+            this.simpleButtonRed.Text = "Редактировать";
+            this.simpleButtonRed.UseVisualStyleBackColor = false;
+            this.simpleButtonRed.Click += new System.EventHandler(this.simpleButtonRed_Click);
+            // 
             // SpravOborud
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1914, 961);
-            this.Controls.Add(this.checkEditArhiv);
-            this.Controls.Add(this.simpleButtonArhiv);
-            this.Controls.Add(this.simpleButtonRed);
-            this.Controls.Add(this.AddTab);
-            this.Controls.Add(this.simpleButtonAdd);
-            this.Controls.Add(this.oborudGrid);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SpravOborud";
             this.Text = "Справочник оборудования";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpravOborud_FormClosing);
@@ -1415,15 +1606,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.checkEditArhiv.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.xtraTabPage2.ResumeLayout(false);
-            this.xtraTabPage2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.xtraTabPageAdd.ResumeLayout(false);
-            this.xtraTabPageAdd.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.AddTab)).EndInit();
             this.AddTab.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1450,8 +1645,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn vidm;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonAdd;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonRed;
         private DevExpress.XtraEditors.SimpleButton simpleButtonArhiv;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
@@ -1490,14 +1683,11 @@
         private System.Windows.Forms.CheckBox checkBoxRedShow;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox comboBoxRedGrup;
-        private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox textBoxRedKod;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBoxRedSokrName;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBoxRedName;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonRedOtm;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonRedSave;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageAdd;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.CheckBox checkBoxAddArhiv;
@@ -1528,9 +1718,18 @@
         private System.Windows.Forms.TextBox textBoxAddSokrName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBoxAddName;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonAddOtm;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonAddSave;
         private DevExpress.XtraTab.XtraTabControl AddTab;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn11;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private CustomLabel label8;
+        private CustomButton simpleButtonRed;
+        private CustomButton simpleButtonAdd;
+        private CustomButton simpleButtonRedSave;
+        private CustomButton simpleButtonRedOtm;
+        private CustomButton simpleButtonAddSave;
+        private CustomButton simpleButtonAddOtm;
     }
 }

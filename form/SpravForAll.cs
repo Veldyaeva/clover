@@ -23,24 +23,24 @@ using DevExpress.CodeParser;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using System.Reflection;
 using DevExpress.Mvvm.Native;
+using static SewingProduction.form.SettingsForm;
+using static SewingProduction.ThemeManager;
 
 namespace SewingProduction.form
 {
-    public partial class SpravForAll : Form
+    public partial class SpravForAll : CustomForm, IDataUpdatableForm
     {
-        // Оснавная БД:
-        //string connectionString = Properties.Settings.Default.ACEConnectionString;
-        // Для тестов:
-       string connectionString = Properties.Settings.Default.ACEConnectionString;
-
-        string queryList;
+        private readonly SpravAllDataService _spravAllDataService;
+        private readonly ServiceBroker _serviceBroker;
         int strForAdd;
+        string columns;
         string tableString;
+        //string tableString;
         List<string> fieldsQueryListSQL;
         // Отслеживание изменений в базе данных:
-        private SqlDependency sqlDependency;
+        //private SqlDependency sqlDependency;
         // Соединение с бд:
-        private SqlConnection connection;
+        //private SqlConnection connection;
         //чтобы перейти к нужной строке в таблице:
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
@@ -48,104 +48,117 @@ namespace SewingProduction.form
         bool flagStartListening = false; //вкл прослушки
         private System.Windows.Forms.Label[] labels;
         private TextBox[] textBoxs;
-        //словари:
+        //словари для рус названий столбцов:
         Dictionary<string, string> eng_rus = new Dictionary<string, string>();
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
         Dictionary<string, string> eng_type = new Dictionary<string, string>();
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
-        public SpravForAll(string tableSQL, string rusNameTableSQL)
+        //Таймер для уведомления о сохранении:
+        private Timer timer;
+        public SpravForAll(string tableSQL, string columnsSQL, string rusNameTableSQL)
         {
-            //GridLocalizer.Active = new RussianGridLocalizer();
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            _spravAllDataService = new SpravAllDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
+            UpdateTheme(this);
+            //Таймер
+            timer = new Timer();
+            timer.Interval = 2000;
+            timer.Tick += Timer_Tick;
             //Таблица:
             tableString = tableSQL;
+            _spravAllDataService._tableString = tableSQL;
+            columns = string.IsNullOrEmpty(columnsSQL) ? "*" : columnsSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
-            //Текст запроса:
-            queryList = $"SELECT * FROM " + tableString;
             //Иницилизация листа столбцов:
             fieldsQueryListSQL = new List<string>();
             labels = new System.Windows.Forms.Label[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
             textBoxs = new TextBox[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
-            //Задание имен
-            allTableName(tableString);
         }
 
-        void allTableName(string tableName)
+        #region service broker
+        // Интерфейс доступный сервис брокеру:
+        public interface IDataUpdatableForm
         {
-            string query = @"SELECT acn.name, acn.name_rus, data_type, readonly 
-                                FROM ACE_test.dbo.all_column_name acn
-                                INNER JOIN all_table_name atn
-                                ON acn.id_atn = atn.id_atn
-                                WHERE atn.name = @tableName
-                                ORDER BY ORDINAL_POSITION";
-            using (SqlConnection connectionName = new SqlConnection(connectionString))
+            void UpdateDataInForm();
+        }
+        // Процедура, которая вызывается из брокера при поступлении обновления?
+        public void UpdateDataInForm()
+        {
+            LoadData();
+        }
+        #endregion
+        private void SpravForAll_Load(object sender, EventArgs e)
+        {
+            _serviceBroker.StartBroker();
+        }
+        //Рус нэйминг столбцов:
+        private async System.Threading.Tasks.Task LoadRusNamesAsync()
+        {
+            try
             {
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionName);
-                dataAdapter.SelectCommand.Parameters.AddWithValue("@tableName", tableName); 
-                System.Data.DataTable tableList = new System.Data.DataTable();
-                dataAdapter.Fill(tableList);
+                System.Data.DataTable tableList = await _spravAllDataService.GetRusNameAsync();
+
                 foreach (DataRow row in tableList.Rows)
                 {
+                    Debug.WriteLine($"{row["name_rus"].ToString()}");
                     eng_rus.Add(row["name"].ToString(), row["name_rus"].ToString());
                     rus_eng.Add(row["name_rus"].ToString(), row["name"].ToString());
                     eng_type.Add(row["name"].ToString(), row["data_type"].ToString());
                     rus_read.Add(row["name_rus"].ToString(), (Int32)row["readonly"]);
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error loading rus name: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки русских имен {ex.Message}");
+            }
         }
-        private void gridControlSprav_Load(object sender, EventArgs e)
+        private async void gridControlSprav_Load(object sender, EventArgs e)
         {
-            using (SqlConnection connectionLoad = new SqlConnection(connectionString))
-            {
-                //используя подключение отправляем запрос БД:
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(queryList, connectionLoad);
-                //Создаем в памяти таблицу:
-                System.Data.DataTable tableList = new System.Data.DataTable();
-                //Добавляем ответ сервера в таблицу:
-                dataAdapter.Fill(tableList);
-                //Закгрузка в таблицу грида:
-                spravList.DataSource = tableList;
-                fieldsQueryListSQL.Clear();
-                // Получаем имена столбцов и добавляем их в список:
-                foreach (System.Data.DataColumn column in tableList.Columns)
-                {
-                    // Добавляем имя столбца в список
-                    fieldsQueryListSQL.Add(column.ColumnName);
-                }
-                // Получаем доступ к GridView
-                GridView gridView = gridControlSprav.MainView as GridView;
-                //Запрет на редактирование 1й столбца
-                gridView.Columns[0].OptionsColumn.AllowEdit = false;
-                gridView.Columns[0].Visible = false;
-                //gridView.OptionsBehavior.Editable = false;
-                //gridView.GroupPanelText = ""; // Текст
+            // Загружаем русские имена асинхронно
+            await LoadRusNamesAsync();
 
-                // Изменяем заголовки столбцов
-                for (int i = 0; i < tableList.Columns.Count; i++)
-                {
-                    // Получаем английское имя
-                    string englishName = tableList.Columns[i].Caption;
-                    // Проверяем, есть ли соответствующее русское имя в словаре
-                    if (eng_rus.TryGetValue(englishName, out string russianName))
-                    {
-                        // Заменяем заголовок столбца на русское имя
-                        gridView.Columns[i].Caption = russianName;
-                    }
-                }
-                // Выравнивание столбцов
-                gridView.BestFitColumns();
-                //перенос столбца архив в конец:
-                //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
-            }
-            if (!flagStartListening) 
-            {
-                // Запуск отслеживания изменений для соединения с базой данных
-                SqlDependency.Start(connectionString);
-                // Начинаем прослушивание
-                StartListening();
-            }
+            // Загружаем данные и запускаем прослушивание
+            LoadData();
+            flagStartListening = true; // Устанавливаем флаг прослушки
+            string columnsStr = string.Join(", ", fieldsQueryListSQL);
+            _serviceBroker.StartListening(columnsStr, tableString);
         }
+        private void LoadData()
+        {
+            System.Data.DataTable tableList = _spravAllDataService.GetRecord(columns);
+            spravList.DataSource = tableList;
+            fieldsQueryListSQL.Clear();
+            // Получаем имена столбцов и добавляем их в список:
+            foreach (System.Data.DataColumn column in tableList.Columns)
+            {
+                // Добавляем имя столбца в список
+                fieldsQueryListSQL.Add(column.ColumnName);
+            }
+            gridView1.Columns[0].Visible = false;
+
+            // Изменяем заголовки столбцов
+            for (int i = 0; i < tableList.Columns.Count; i++)
+            {
+                string englishName = tableList.Columns[i].Caption;
+                // Проверяем, есть ли соответствующее русское имя в словаре
+                if (eng_rus.TryGetValue(englishName, out string russianName))
+                {
+                    // Заменяем заголовок столбца на русское имя
+                    gridView1.Columns[i].Caption = russianName;
+                }
+            }
+            // Выравнивание столбцов
+            gridView1.BestFitColumns();
+            gridView1.OptionsView.ColumnAutoWidth = true;
+            //перенос столбца архив в конец:
+            //gridView.Columns["arhiv"].VisibleIndex = -(gridView.Columns["arhiv"].VisibleIndex - (gridView.Columns.Count - 2));
+
+        }
+
         // Отображение лейблов и текстбоксов в нужном кол-е
         void labelAndTextBox()
         {
@@ -175,242 +188,234 @@ namespace SewingProduction.form
             }
 
         }
-        public void StartListening()
+        //Кнопка добавить:
+        private void simpleButtonAdd_Click(object sender, EventArgs e)
         {
             try
             {
-                flagStartListening = true;
-                // Остановка предыдущего прослушивания, если оно было активно:
-                StopListening();
-                // SQL-запрос// Преобразование списка имен столбцов в строку
-                string columns = string.Join(", ", fieldsQueryListSQL);
-                // SQL-запрос
-                string queryOborudList = $"SELECT {columns} FROM dbo.{tableString}";
-                // Создание соединения с базой данных
-                connection = new SqlConnection(connectionString);
-                // Открытие соединения
-                connection.Open();
-                // Создание команды для выполнения SQL-запроса
-                SqlCommand command = new SqlCommand(queryOborudList, connection);
-                // Создание зависимости, чтобы отслеживать изменения
-                sqlDependency = new SqlDependency(command);
-                // Подписка на событие изменения
-                sqlDependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
-                // Выполнение команды
-                command.ExecuteReader();
-
-            }
-            catch (SqlException sqlEx)
-            {
-                Debug.WriteLine($"SQL Error: {sqlEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"Error starting listener: {ex.Message}");
-            }
-
-        }
-
-        public void StopListening()
-        {
-            // Закрываем подключение
-            if (connection != null)
-            {
-                connection.Close();
-            }
-        }
-        private void OnDependencyChange(object sender, SqlNotificationEventArgs e)
-        {
-            // Строка состояния:
-            Debug.WriteLine($"Notification received: Type={e.Type}, Info={e.Info}, Source={e.Source}");
-            // Проверка есть ли уведомления
-            if (e.Type == SqlNotificationType.Change)
-            {
-                Debug.WriteLine("Data was changed");
-
-                // Обновление UI через Invoke
-                this.Invoke((MethodInvoker)delegate
+                GridView gridView = (GridView)gridControlSprav.MainView;
+                xtraTabPageAdd.Text = "Добавить";
+                AddTab.TabPages[0].PageVisible = true;
+                simpleButtonDel.Visible = false;
+                simpleButtonAddOtm.Visible = true;
+                simpleButtonAddSave.Visible = true;
+                labelAndTextBox();
+                // Код = последнему коду в таблице + 1
+                textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
+                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                 {
-                    GridView gridView = gridControlSprav.MainView as GridView;
-                    // Запомнили положение в таблице:
-                    topRowIndex = gridView.TopRowIndex;
-                    // Обновили таблицу
-                    gridControlSprav_Load(sender, e);
-                    // Возвращаемся к курсору:
-                    gridView.FocusedRowHandle = currentRowIndex;
-                    gridView.TopRowIndex = topRowIndex;
-                    // Если добавлена новая запись, переходим к ней:
-                    if (flagAddDown)
-                    {
-                        gridView.FocusedRowHandle = gridView.RowCount - 1;
-                        gridView.TopRowIndex = gridView.RowCount - 1;
-                        flagAddDown = false;
-                    }
-                });
-
+                    textBoxs[i].ReadOnly = false;
+                    textBoxs[i].Text = "";
+                }
             }
-            // Возобновляем прослушивание
-            StartListening();
-        }
-        private void simpleButtonAdd_Click(object sender, EventArgs e)
-        {
-            xtraTabPageAdd.Text = "Добавить";
-            AddTab.TabPages[0].PageVisible = true;
-            simpleButtonDel.Visible = false;
-            labelAndTextBox();
-            GridView gridView = (GridView)gridControlSprav.MainView;
-            // Код = последнему коду в таблице + 1
-            textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
-            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+            catch (Exception Ex)
             {
-                textBoxs[i].Text = "";
+                Debug.WriteLine($"Error: {Ex.Message}");
             }
-            //flagAddDown = true;
-            //gridView.AddNewRow();
-            //strForAdd = gridView.FocusedRowHandle;
-            //gridView.UpdateCurrentRow();
         }
+        //Кнопка редактировать:
         private void simpleButtonRed_Click(object sender, EventArgs e)
         {
-            xtraTabPageAdd.Text = "Редактировать";
-            AddTab.TabPages[0].PageVisible = true;
-            simpleButtonDel.Visible = true;
-            labelAndTextBox();
-            // Получаем доступ к GridView
-            GridView gridView = gridControlSprav.MainView as GridView;
-            // Получаем текущую выделенную строку в текстбокси и др
-            textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+            try
             {
-                textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
+                // Получаем доступ к GridView
+                GridView gridView = gridControlSprav.MainView as GridView;
+                xtraTabPageAdd.Text = "Редактировать";
+                AddTab.TabPages[0].PageVisible = true;
+                simpleButtonDel.Visible = true;
+                simpleButtonAddOtm.Visible = true;
+                simpleButtonAddSave.Visible = true;
+                labelAndTextBox();
+                // Получаем текущую выделенную строку в текстбокси и др
+                textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
+                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+                {
+                    textBoxs[i].ReadOnly = false;
+                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine($"Error: {Ex.Message}");
             }
         }
-
+        //Кнопки вверх/вниз:
+        private void gridControlSprav_KeyUp(object sender, KeyEventArgs e)
+        {
+            gridControlSprav_Click(sender,e);
+        }
+        //Клик на грид:
         private void gridControlSprav_Click(object sender, EventArgs e)
         {
-            GridView gridView = gridControlSprav.MainView as GridView;
-            // Сохраняем индекс строки
-            currentRowIndex = gridView.FocusedRowHandle;
-            if (xtraTabPageAdd.Text == "Редактировать")
-                simpleButtonRed_Click(sender, e);
+            try
+            {
+                xtraTabPageAdd.Text = "Просмотр";
+                // Сохраняем индекс строки
+                GridView gridView = gridControlSprav.MainView as GridView;
+                currentRowIndex = gridView.FocusedRowHandle;
+                AddTab.TabPages[0].PageVisible = true;
+                simpleButtonDel.Visible = false;
+                simpleButtonAddOtm.Visible = false;
+                simpleButtonAddSave.Visible = false;
+                labelAndTextBox();
+                // Получаем текущую выделенную строку в текстбокси и др
+                textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
+                for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+                {
+                    textBoxs[i].ReadOnly = true;
+                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
+                }
+            }
+            catch (Exception Ex)
+            {
+                Debug.WriteLine($"Error: {Ex.Message}");
+            }
         }
-
-        private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            StopListening();
-        }
-
-        private void SpravForAll_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        //Кнопка Отмена:
         private void simpleButtonAddOtm_Click(object sender, EventArgs e)
         {
             AddTab.TabPages[0].PageVisible = false;
         }
-
+        //Кнопка сохранить:
         private void simpleButtonAddSave_Click(object sender, EventArgs e)
         {
-            string queryOborudAdd = $"";
-            using (SqlConnection connectionINSERT = new SqlConnection(connectionString))
+            switch (xtraTabPageAdd.Text)
             {
-                GridView gridView = gridControlSprav.MainView as GridView;
-                switch (xtraTabPageAdd.Text)
-                {
-                    case "Добавить":
-                        {
-                            queryOborudAdd += "INSERT INTO " + tableString + "(";
-                            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                            {
-                                queryOborudAdd += fieldsQueryListSQL[i];
-                                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
-                            }
-                            queryOborudAdd += " VALUES (";
-                            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                            {
-                                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
-                                switch (getType)
-                                {
-                                    case "int": queryOborudAdd += textBoxs[i].Text; break;
-                                    case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                    case "float": case "decimal": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
-                                }
-                                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
-                            }
-                            flagAddDown = true;
-                            break;
-                        }
-                    case "Редактировать":
-                        {
-                            queryOborudAdd += "UPDATE " + tableString + " SET ";
-                            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
-                            {
-                                queryOborudAdd += fieldsQueryListSQL[i] + " = ";
-                                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
-                                switch (getType)
-                                {
-                                    case "int":     queryOborudAdd += textBoxs[i].Text; break;
-                                    case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
-                                    case "float": case "decimal":   queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
-                                }
-                                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? "" : ",";
-                            }
-                            queryOborudAdd += " FROM " + tableString + " WHERE " + fieldsQueryListSQL[0] + " = " + textBoxs[0].Text;
-                            break;
-                        }
-                    default:
+                case "Добавить":
+                    {
+                        _spravAllDataService.InsertRecord(fieldsQueryListSQL, textBoxs, eng_type);
+                        flagAddDown = true;
                         break;
-                }
-                using (SqlCommand command = new SqlCommand(queryOborudAdd, connectionINSERT))
-                {
-                    connectionINSERT.Open();
-                    command.ExecuteNonQuery();
-                    connectionINSERT.Close();
-                }
-                AddTab.TabPages[0].PageVisible = false;
+                    }
+                case "Редактировать":
+                    {
+                        _spravAllDataService.UpdateRecord(fieldsQueryListSQL, textBoxs, eng_type);
+                        break;
+                    }
+                default:
+                    break;
             }
+            labelSave.Text = "Сохранено!";
+            labelSave.Visible = true;
+            timer.Start();
+        }
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            labelSave.Visible = false; // Скрываем лейбл
+            timer.Stop(); // Останавливаем таймер
         }
 
+        //Редактирование таблице:
         private void gridView1_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
-            using (SqlConnection connectionUPDATE = new SqlConnection(connectionString))
-            {
-                string englishName;
-                connectionUPDATE.Open();
-                if (rus_eng.TryGetValue(e.Column.FieldName, out string engName))
-                    englishName = engName;
-                else
-                    englishName = e.Column.FieldName;
-                string sql = $"UPDATE {tableString} SET {englishName} = '{e.Value}' WHERE {fieldsQueryListSQL[0]}  = {gridView1.GetDataRow(e.RowHandle)[0]}";
-                SqlCommand command = new SqlCommand(sql, connection);
-                command.ExecuteNonQuery();
-                connectionUPDATE.Close();
-            }
+            string englishName;
+            if (rus_eng.TryGetValue(e.Column.FieldName, out string engName))
+                englishName = engName;
+            else
+                englishName = e.Column.FieldName;
+            _spravAllDataService.UpdateRowRecord(englishName, e.Value, fieldsQueryListSQL[0], gridView1.GetDataRow(e.RowHandle)[0]);
         }
-
+        //Удалить запись:
         private void simpleButtonDel_Click(object sender, EventArgs e)
         {
-            GridView gridView = gridControlSprav.MainView as GridView;
-            currentRowIndex = gridView.FocusedRowHandle;
-            string textCol = gridView.GetFocusedRowCellValue(gridView.Columns[1]).ToString();
-            int kodCol = Convert.ToInt32(gridView.GetFocusedRowCellValue(gridView.Columns[0]));
-            string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
-            var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+            try
             {
-                using (SqlConnection connectionDELETE = new SqlConnection(connectionString))
+                currentRowIndex = gridView1.FocusedRowHandle;
+                string textCol = gridView1.GetFocusedRowCellValue(gridView1.Columns[1]).ToString();
+                object kodCol = gridView1.GetFocusedRowCellValue(gridView1.Columns[0]);
+                string message = "Вы уверены что хотите удалить '" + textCol + "' ?";
+                var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
                 {
-                    string queryOborudArh = $"DELETE FROM {tableString} WHERE {fieldsQueryListSQL[0]} = {kodCol}";
-                    using (SqlCommand command = new SqlCommand(queryOborudArh, connectionDELETE))
-                    {
-                        connectionDELETE.Open();
-                        command.ExecuteNonQuery();
-                        connectionDELETE.Close();
-                    }
+                    _spravAllDataService.DeleteRecord(fieldsQueryListSQL[0], kodCol);
+                    AddTab.TabPages[0].PageVisible = false;
                 }
             }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error {ex.Message}");
+                MessageBox.Show($"Ошибка {ex.Message}");
+            }
+        }
+        //закрытие формы:
+        private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _serviceBroker.StopBroker();
         }
     }
 
+    public class SpravAllDataService
+    {
+        private readonly DatabaseHelper _dbHelper;
+        public string _tableString { set; get; }
+        public SpravAllDataService(DatabaseHelper dbHelper)
+        {
+            _dbHelper = dbHelper;
+        }
+        public System.Data.DataTable GetRecord(string columns)
+        {
+            string query = $@"SELECT {columns} FROM {_tableString}";
+            return _dbHelper.ExecuteQuery(query);
+        }
+        public async System.Threading.Tasks.Task<System.Data.DataTable> GetRusNameAsync()
+        {
+            string query = @"SELECT acn.name, acn.name_rus, data_type, readonly 
+                                FROM dbo.all_column_name acn
+                                INNER JOIN all_table_name atn
+                                ON acn.id_atn = atn.id_atn
+                                WHERE atn.name = @tableName
+                                ORDER BY ORDINAL_POSITION";
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tableName", _tableString } });
+        }
+        public void InsertRecord(List<string> fieldsQueryListSQL, TextBox[] textBoxs, Dictionary<string, string> eng_type)
+        {
+            string queryOborudAdd = "INSERT INTO " + _tableString + "(";
+            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+            {
+                queryOborudAdd += fieldsQueryListSQL[i];
+                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
+            }
+            queryOborudAdd += " VALUES (";
+            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+            {
+                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
+                    switch (getType)
+                    {
+                        case "int": queryOborudAdd += textBoxs[i].Text; break;
+                        case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
+                        case "float": case "decimal": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
+                    }
+                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? ")" : ",";
+            }
+            _dbHelper.ExecuteNonQuery(queryOborudAdd);
+        }
+        public void UpdateRecord(List<string> fieldsQueryListSQL, TextBox[] textBoxs, Dictionary<string, string> eng_type)
+        {
+            string queryOborudAdd = "UPDATE " + _tableString + " SET ";
+            for (int i = 1; i < fieldsQueryListSQL.Count; i++)
+            {
+                queryOborudAdd += fieldsQueryListSQL[i] + " = ";
+                if (eng_type.TryGetValue(fieldsQueryListSQL[i], out string getType))
+                    switch (getType)
+                    {
+                        case "int": queryOborudAdd += textBoxs[i].Text; break;
+                        case "string": case "varchar": case "nvarchar": case "nchar": case "char": queryOborudAdd += "'" + textBoxs[i].Text + "'"; break;
+                        case "float": case "decimal": queryOborudAdd += textBoxs[i].Text.Replace(',', '.'); break;
+                    }
+                queryOborudAdd += fieldsQueryListSQL.Count - 1 == i ? "" : ",";
+            }
+            queryOborudAdd += " FROM " + _tableString + " WHERE " + fieldsQueryListSQL[0] + " = " + textBoxs[0].Text;
+            _dbHelper.ExecuteNonQuery(queryOborudAdd);
+        }
+        public void UpdateRowRecord(string englishName, object eValue, string kod, object ekod)
+        {
+            string query = $"UPDATE {_tableString} SET {englishName} = @eValue WHERE {kod} = @ekod";
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@eValue", eValue }, { "@ekod", ekod } });
+        }
+        public void DeleteRecord(string kod, object ekod)
+        {
+            string query = $"DELETE FROM {_tableString} WHERE {kod} = @ekod";
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@ekod", ekod } });
+        }
+    }
 }
