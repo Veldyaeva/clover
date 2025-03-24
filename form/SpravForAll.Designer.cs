@@ -400,10 +400,6 @@
             // 
             this.simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonAddOtm.Btn = null;
-            this.simpleButtonAddOtm.ComponentBackColor = System.Drawing.Color.Empty;
-            this.simpleButtonAddOtm.ComponentFontColor = System.Drawing.Color.Empty;
-            this.simpleButtonAddOtm.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             this.simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
@@ -420,10 +416,6 @@
             // 
             this.simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonDel.Btn = null;
-            this.simpleButtonDel.ComponentBackColor = System.Drawing.Color.Empty;
-            this.simpleButtonDel.ComponentFontColor = System.Drawing.Color.Empty;
-            this.simpleButtonDel.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonDel.FlatAppearance.BorderSize = 0;
             this.simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
@@ -440,10 +432,6 @@
             // 
             this.simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonAddSave.Btn = null;
-            this.simpleButtonAddSave.ComponentBackColor = System.Drawing.Color.Empty;
-            this.simpleButtonAddSave.ComponentFontColor = System.Drawing.Color.Empty;
-            this.simpleButtonAddSave.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             this.simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
@@ -504,11 +492,14 @@
             // simpleButtonRed
             // 
             this.simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.simpleButtonRed.Btn = null;
             this.simpleButtonRed.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.simpleButtonRed.FlatAppearance.BorderSize = 0;
             this.simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
@@ -524,11 +515,14 @@
             // simpleButtonAdd
             // 
             this.simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.simpleButtonAdd.Btn = null;
             this.simpleButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.simpleButtonAdd.FlatAppearance.BorderSize = 0;
             this.simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);

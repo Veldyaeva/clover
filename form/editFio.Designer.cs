@@ -122,10 +122,6 @@
             // customCancelButton1
             // 
             this.customCancelButton1.BackColor = System.Drawing.Color.IndianRed;
-            this.customCancelButton1.Btn = null;
-            this.customCancelButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customCancelButton1.FlatAppearance.BorderSize = 0;
             this.customCancelButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
@@ -141,10 +137,6 @@
             // customOkButton1
             // 
             this.customOkButton1.BackColor = System.Drawing.Color.LightGreen;
-            this.customOkButton1.Btn = null;
-            this.customOkButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customOkButton1.FlatAppearance.BorderSize = 0;
             this.customOkButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
@@ -459,11 +451,14 @@
             // customButtonXNtab
             // 
             this.customButtonXNtab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonXNtab.Btn = null;
             this.customButtonXNtab.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonXNtab.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonXNtab.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonXNtab.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonXNtab.FlatAppearance.BorderSize = 0;
             this.customButtonXNtab.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXNtab.Font = new System.Drawing.Font("Arial", 10F);
@@ -479,11 +474,14 @@
             // customButtonXPodr
             // 
             this.customButtonXPodr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonXPodr.Btn = null;
             this.customButtonXPodr.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonXPodr.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonXPodr.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonXPodr.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonXPodr.FlatAppearance.BorderSize = 0;
             this.customButtonXPodr.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXPodr.Font = new System.Drawing.Font("Arial", 10F);
@@ -499,11 +497,14 @@
             // customButtonXOb
             // 
             this.customButtonXOb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonXOb.Btn = null;
             this.customButtonXOb.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonXOb.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonXOb.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonXOb.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonXOb.FlatAppearance.BorderSize = 0;
             this.customButtonXOb.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXOb.Font = new System.Drawing.Font("Arial", 10F);
@@ -519,11 +520,14 @@
             // customButtonXDolj
             // 
             this.customButtonXDolj.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonXDolj.Btn = null;
             this.customButtonXDolj.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonXDolj.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonXDolj.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonXDolj.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonXDolj.FlatAppearance.BorderSize = 0;
             this.customButtonXDolj.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXDolj.Font = new System.Drawing.Font("Arial", 10F);
@@ -539,11 +543,14 @@
             // customButtonXOrg
             // 
             this.customButtonXOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonXOrg.Btn = null;
             this.customButtonXOrg.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonXOrg.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonXOrg.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonXOrg.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonXOrg.FlatAppearance.BorderSize = 0;
             this.customButtonXOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonXOrg.Font = new System.Drawing.Font("Arial", 10F);
@@ -811,7 +818,25 @@
             this.customComboBoxPodr1c.Name = "customComboBoxPodr1c";
             this.customComboBoxPodr1c.Size = new System.Drawing.Size(271, 24);
             this.customComboBoxPodr1c.TabIndex = 27;
+<<<<<<< HEAD
             this.customComboBoxPodr1c.SelectedIndexChanged += new System.EventHandler(this.customComboBoxPodr1c_SelectedIndexChanged);
+=======
+            // 
+            // customButtonXPodr1c
+            // 
+            this.customButtonXPodr1c.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonXPodr1c.FlatAppearance.BorderSize = 0;
+            this.customButtonXPodr1c.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonXPodr1c.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonXPodr1c.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonXPodr1c.Location = new System.Drawing.Point(506, 328);
+            this.customButtonXPodr1c.Name = "customButtonXPodr1c";
+            this.customButtonXPodr1c.Size = new System.Drawing.Size(20, 25);
+            this.customButtonXPodr1c.TabIndex = 62;
+            this.customButtonXPodr1c.Text = "Х";
+            this.customButtonXPodr1c.UseVisualStyleBackColor = false;
+            this.customButtonXPodr1c.Click += new System.EventHandler(this.customButtonXPodr1c_Click);
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             // 
             // dateRozd
             // 
@@ -850,11 +875,14 @@
             // customButtonNowPriem
             // 
             this.customButtonNowPriem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonNowPriem.Btn = null;
             this.customButtonNowPriem.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonNowPriem.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonNowPriem.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonNowPriem.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonNowPriem.FlatAppearance.BorderSize = 0;
             this.customButtonNowPriem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonNowPriem.Font = new System.Drawing.Font("Arial", 10F);
@@ -870,11 +898,14 @@
             // customButtonNowYvol
             // 
             this.customButtonNowYvol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButtonNowYvol.Btn = null;
             this.customButtonNowYvol.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButtonNowYvol.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButtonNowYvol.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonNowYvol.Cursor = System.Windows.Forms.Cursors.Hand;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButtonNowYvol.FlatAppearance.BorderSize = 0;
             this.customButtonNowYvol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonNowYvol.Font = new System.Drawing.Font("Arial", 10F);

@@ -28,6 +28,7 @@ using SewingProduction.form;
 using DevExpress.DataAccess.Native.Sql;
 using DevExpress.XtraTab;
 using DevExpress.Utils.Gesture;
+using SewingProduction.Helpers;
 
 namespace SewingProduction
 {
@@ -35,12 +36,12 @@ namespace SewingProduction
     {
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;
-        private readonly DatabaseHelper dbHelper;
+        private readonly DatabaseHelper _dbHelper;
         public CardByNom()
         {
             InitializeComponent();
-            dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
-            UpdateTheme(this);
+            _dbHelper = new DatabaseHelper("ace");
+            ApplyTheme();
 
         }
 
@@ -182,7 +183,7 @@ namespace SewingProduction
     //        }
 
             string queryFurnZayavInfo = $"exec furnitZayavCheck '{PachKod}', 1 ";  // 1 - ШП. на будущее нужно будут доработать с учетом выбора вида производства
-            var dtFurnZayavInfo = dbHelper.ExecuteQuery(queryFurnZayavInfo);//CommonFunctions.ShowRelatedData("ace", queryFurnZayavInfo);
+            var dtFurnZayavInfo = _dbHelper.ExecuteQuery(queryFurnZayavInfo);//CommonFunctions.ShowRelatedData("ace", queryFurnZayavInfo);
             bsFurnZayavInfo.DataSource = dtFurnZayavInfo;
             this.tbFurnKKStat.DataBindings.Clear();
             this.tbFurnKKStat.DataBindings.Add("text", bsFurnZayavInfo, "FurnKKStat");
