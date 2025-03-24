@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
+            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions2 = new DevExpress.Utils.Drawing.StubGlyphOptions();
             this.tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.customButtonINN = new SewingProduction.CustomButton();
@@ -82,6 +82,8 @@
             this.customButtonSpDol1C = new SewingProduction.CustomButton();
             this.customButtonPdrSP = new SewingProduction.CustomButton();
             this.tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
+            this.customButtonSpOrg = new SewingProduction.CustomButton();
+            this.customButtonSpDol = new SewingProduction.CustomButton();
             this.customButtonPchShk = new SewingProduction.CustomButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageX = new DevExpress.XtraTab.XtraTabPage();
@@ -112,8 +114,6 @@
             this.customButtonSov = new SewingProduction.CustomButton();
             this.customButtonAddSov = new SewingProduction.CustomButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSpOrg = new SewingProduction.CustomButton();
-            this.customButtonSpDol = new SewingProduction.CustomButton();
             this.customButtonRed = new SewingProduction.CustomButton();
             this.customButtonAdd = new SewingProduction.CustomButton();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
@@ -470,10 +470,10 @@
             this.fio1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.fio1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.fio1.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            stubGlyphOptions1.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            stubGlyphOptions1.UseFont = true;
+            stubGlyphOptions2.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            stubGlyphOptions2.UseFont = true;
             this.behaviorManager1.SetBehaviors(this.fio1, new DevExpress.Utils.Behaviors.Behavior[] {
-            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions1, new System.Drawing.Size(16, 16))))});
+            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions2, new System.Drawing.Size(16, 16))))});
             this.fio1.Caption = "ФИО";
             this.fio1.FieldName = "fio";
             this.fio1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -908,7 +908,6 @@
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpVed, 2, 1);
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpOrg1C, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.customButtonSpDol1C, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.customButtonPdrSP, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(447, 575);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -934,18 +933,6 @@
             this.customButtonSpVed.Text = "Справочник ведомостей";
             this.customButtonSpVed.UseVisualStyleBackColor = false;
             this.customButtonSpVed.Click += new System.EventHandler(this.customButtonSpVed_Click);
-            this.customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonOtcDol.FlatAppearance.BorderSize = 0;
-            this.customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonOtcDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonOtcDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonOtcDol.Location = new System.Drawing.Point(419, 3);
-            this.customButtonOtcDol.Name = "customButtonOtcDol";
-            this.customButtonOtcDol.Size = new System.Drawing.Size(204, 29);
-            this.customButtonOtcDol.TabIndex = 2;
-            this.customButtonOtcDol.Text = "Отчет по должности";
-            this.customButtonOtcDol.UseVisualStyleBackColor = false;
             // 
             // customButtonSpOrg1C
             // 
@@ -962,18 +949,6 @@
             this.customButtonSpOrg1C.Text = "Подразделения 1С";
             this.customButtonSpOrg1C.UseVisualStyleBackColor = false;
             this.customButtonSpOrg1C.Click += new System.EventHandler(this.customButtonSpOrg1C_Click);
-            this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSov.FlatAppearance.BorderSize = 0;
-            this.customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSov.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSov.Location = new System.Drawing.Point(211, 3);
-            this.customButtonSov.Name = "customButtonSov";
-            this.customButtonSov.Size = new System.Drawing.Size(202, 29);
-            this.customButtonSov.TabIndex = 1;
-            this.customButtonSov.Text = "Совместители";
-            this.customButtonSov.UseVisualStyleBackColor = false;
             // 
             // customButtonSpDol1C
             // 
@@ -990,162 +965,6 @@
             this.customButtonSpDol1C.Text = "Должности 1С";
             this.customButtonSpDol1C.UseVisualStyleBackColor = false;
             this.customButtonSpDol1C.Click += new System.EventHandler(this.customButtonSpDol1C_Click);
-            this.customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonAddSov.FlatAppearance.BorderSize = 0;
-            this.customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonAddSov.Location = new System.Drawing.Point(3, 3);
-            this.customButtonAddSov.Name = "customButtonAddSov";
-            this.customButtonAddSov.Size = new System.Drawing.Size(202, 29);
-            this.customButtonAddSov.TabIndex = 0;
-            this.customButtonAddSov.Text = "Добавить совмест.";
-            this.customButtonAddSov.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanelPech
-            // 
-            this.tableLayoutPanelPech.ColumnCount = 1;
-            this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpOrg, 0, 1);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonSpDol, 0, 0);
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 5);
-            this.tableLayoutPanelPech.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelPech.Location = new System.Drawing.Point(1267, 310);
-            this.tableLayoutPanelPech.Name = "tableLayoutPanelPech";
-            this.tableLayoutPanelPech.RowCount = 7;
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.Size = new System.Drawing.Size(200, 243);
-            this.tableLayoutPanelPech.TabIndex = 1;
-            // 
-            // customButtonSpOrg
-            // 
-            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
-            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(3, 37);
-            this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(194, 28);
-            this.customButtonSpOrg.TabIndex = 6;
-            this.customButtonSpOrg.Text = "Справочник организаций";
-            this.customButtonSpOrg.UseVisualStyleBackColor = false;
-            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
-            // 
-            // customButtonSpDol
-            // 
-            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
-            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 3);
-            this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(194, 28);
-            this.customButtonSpDol.TabIndex = 5;
-            this.customButtonSpDol.Text = "Справочник должностей";
-            this.customButtonSpDol.UseVisualStyleBackColor = false;
-            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
-            // 
-            // customButtonPchShk
-            // 
-            this.customButtonPchShk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchShk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchShk.FlatAppearance.BorderSize = 0;
-            this.customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchShk.Location = new System.Drawing.Point(3, 173);
-            this.customButtonPchShk.Name = "customButtonPchShk";
-            this.customButtonPchShk.Size = new System.Drawing.Size(194, 28);
-            this.customButtonPchShk.TabIndex = 4;
-            this.customButtonPchShk.Text = "Печать ШК";
-            this.customButtonPchShk.UseVisualStyleBackColor = false;
-            // 
-            // customButtonPchSps
-            // 
-            this.customButtonPchSps.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchSps.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchSps.FlatAppearance.BorderSize = 0;
-            this.customButtonPchSps.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchSps.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchSps.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchSps.Location = new System.Drawing.Point(3, 105);
-            this.customButtonPchSps.Name = "customButtonPchSps";
-            this.customButtonPchSps.Size = new System.Drawing.Size(194, 28);
-            this.customButtonPchSps.TabIndex = 3;
-            this.customButtonPchSps.Text = "Печать списка";
-            this.customButtonPchSps.UseVisualStyleBackColor = false;
-            // 
-            // customButtonPchBln
-            // 
-            this.customButtonPchBln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchBln.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchBln.FlatAppearance.BorderSize = 0;
-            this.customButtonPchBln.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchBln.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchBln.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchBln.Location = new System.Drawing.Point(3, 71);
-            this.customButtonPchBln.Name = "customButtonPchBln";
-            this.customButtonPchBln.Size = new System.Drawing.Size(194, 28);
-            this.customButtonPchBln.TabIndex = 2;
-            this.customButtonPchBln.Text = "Печать бланк";
-            this.customButtonPchBln.UseVisualStyleBackColor = false;
-            // 
-            // customButtonPchDR
-            // 
-            this.customButtonPchDR.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchDR.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchDR.FlatAppearance.BorderSize = 0;
-            this.customButtonPchDR.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchDR.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchDR.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchDR.Location = new System.Drawing.Point(3, 37);
-            this.customButtonPchDR.Name = "customButtonPchDR";
-            this.customButtonPchDR.Size = new System.Drawing.Size(194, 28);
-            this.customButtonPchDR.TabIndex = 1;
-            this.customButtonPchDR.Text = "Печать Д/Р";
-            this.customButtonPchDR.UseVisualStyleBackColor = false;
-            // 
-            // customButtonPchTS
-            // 
-            this.customButtonPchTS.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchTS.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchTS.FlatAppearance.BorderSize = 0;
-            this.customButtonPchTS.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchTS.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchTS.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchTS.Location = new System.Drawing.Point(3, 3);
-            this.customButtonPchTS.Name = "customButtonPchTS";
-            this.customButtonPchTS.Size = new System.Drawing.Size(194, 28);
-            this.customButtonPchTS.TabIndex = 0;
-            this.customButtonPchTS.Text = "Печать Т/С";
-            this.customButtonPchTS.UseVisualStyleBackColor = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.customButtonPdrSP, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButtonTar, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(1267, 559);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 81);
-            this.tableLayoutPanel1.TabIndex = 3;
             // 
             // customButtonPdrSP
             // 
@@ -1155,9 +974,9 @@
             this.customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPdrSP.Location = new System.Drawing.Point(294, 3);
+            this.customButtonPdrSP.Location = new System.Drawing.Point(3, 39);
             this.customButtonPdrSP.Name = "customButtonPdrSP";
-            this.customButtonPdrSP.Size = new System.Drawing.Size(141, 29);
+            this.customButtonPdrSP.Size = new System.Drawing.Size(134, 30);
             this.customButtonPdrSP.TabIndex = 5;
             this.customButtonPdrSP.Text = "Подразделения ШП - 1С";
             this.customButtonPdrSP.UseVisualStyleBackColor = false;
@@ -1166,6 +985,7 @@
             // tableLayoutPanelPech
             // 
             this.tableLayoutPanelPech.ColumnCount = 1;
+            this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 0);
             this.tableLayoutPanelPech.Controls.Add(this.xtraTabControl1, 0, 1);
@@ -1180,8 +1000,47 @@
             this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
             this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
             this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
             this.tableLayoutPanelPech.Size = new System.Drawing.Size(140, 250);
             this.tableLayoutPanelPech.TabIndex = 1;
+            // 
+            // customButtonSpOrg
+            // 
+            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
+            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
+            this.customButtonSpOrg.Name = "customButtonSpOrg";
+            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
+            this.customButtonSpOrg.TabIndex = 6;
+            this.customButtonSpOrg.Text = "Справочник организаций";
+            this.customButtonSpOrg.UseVisualStyleBackColor = false;
+            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
+            // 
+            // customButtonSpDol
+            // 
+            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
+            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
+            this.customButtonSpDol.Name = "customButtonSpDol";
+            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
+            this.customButtonSpDol.TabIndex = 5;
+            this.customButtonSpDol.Text = "Справочник должностей";
+            this.customButtonSpDol.UseVisualStyleBackColor = false;
+            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
             // 
             // customButtonPchShk
             // 
@@ -1538,12 +1397,17 @@
             // 
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.customButtonPdrSP, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.customButtonSov, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.customButtonAddSov, 0, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(891, 575);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
@@ -1574,25 +1438,13 @@
             this.customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
             this.customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonAddSov.Location = new System.Drawing.Point(3, 39);
+            this.customButtonAddSov.Location = new System.Drawing.Point(3, 75);
             this.customButtonAddSov.Name = "customButtonAddSov";
-            this.customButtonAddSov.Size = new System.Drawing.Size(134, 30);
+            this.customButtonAddSov.Size = new System.Drawing.Size(134, 5);
             this.customButtonAddSov.TabIndex = 0;
             this.customButtonAddSov.Text = "Добавить совмест.";
             this.customButtonAddSov.UseVisualStyleBackColor = false;
             this.customButtonAddSov.Click += new System.EventHandler(this.customButtonAddSov_Click);
-            this.customButtonTar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonTar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonTar.FlatAppearance.BorderSize = 0;
-            this.customButtonTar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonTar.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonTar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonTar.Location = new System.Drawing.Point(3, 38);
-            this.customButtonTar.Name = "customButtonTar";
-            this.customButtonTar.Size = new System.Drawing.Size(194, 29);
-            this.customButtonTar.TabIndex = 6;
-            this.customButtonTar.Text = "Тарифы";
-            this.customButtonTar.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel2
             // 
@@ -1613,38 +1465,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.90195F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(438, 83);
             this.tableLayoutPanel2.TabIndex = 4;
-            // 
-            // customButtonSpOrg
-            // 
-            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
-            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
-            this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
-            this.customButtonSpOrg.TabIndex = 6;
-            this.customButtonSpOrg.Text = "Справочник организаций";
-            this.customButtonSpOrg.UseVisualStyleBackColor = false;
-            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
-            // 
-            // customButtonSpDol
-            // 
-            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
-            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
-            this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
-            this.customButtonSpDol.TabIndex = 5;
-            this.customButtonSpDol.Text = "Справочник должностей";
-            this.customButtonSpDol.UseVisualStyleBackColor = false;
-            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
             // 
             // customButtonRed
             // 

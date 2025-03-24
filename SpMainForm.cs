@@ -209,7 +209,7 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
-
+        #region МЕНЮ
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox f = new AboutBox();
@@ -222,5 +222,18 @@ namespace SewingProduction
             f.Show();
 
         }
+
+        private void профильToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            UserProfile f = new UserProfile();
+            f.MdiParent = this;
+            f.Show();
+        }
+
+        private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+        #endregion
     }
 }
