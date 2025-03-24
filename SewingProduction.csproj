@@ -202,9 +202,6 @@
     <Compile Include="form\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\editFio.Designer.cs">
-      <DependentUpon>editFio.cs</DependentUpon>
-    </Compile>    
     <Compile Include="form\TeamWork\Forms\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>

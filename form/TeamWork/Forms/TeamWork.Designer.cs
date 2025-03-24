@@ -45,8 +45,6 @@ namespace SewingProduction.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
-            this.aCEDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.aCEDataSet = new SewingProduction.ACE_backupDataSet();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.TabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -96,8 +94,6 @@ namespace SewingProduction.Forms
             this.coldiz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colconstr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colstatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colarh = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.customButton12 = new SewingProduction.CustomButton();
             this.filterTextBox1 = new SewingProduction.CustomTextBox();
@@ -107,10 +103,6 @@ namespace SewingProduction.Forms
             this.group = new System.Windows.Forms.RadioButton();
             this.panel5 = new System.Windows.Forms.Panel();
             this.SortBox = new SewingProduction.CustomCheckBox();
-            this.customCheckBox3 = new SewingProduction.CustomCheckBox();
-            this.customCheckBox2 = new SewingProduction.CustomCheckBox();
-            this.customCheckBox1 = new SewingProduction.CustomCheckBox();
-            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
             this.customButton6 = new SewingProduction.CustomButton();
             this.customButton9 = new SewingProduction.CustomButton();
             this.customButton8 = new SewingProduction.CustomButton();
@@ -118,16 +110,8 @@ namespace SewingProduction.Forms
             this.customButton5 = new SewingProduction.CustomButton();
             this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
             this.label6 = new SewingProduction.CustomLabel();
-            this.customComboBox2 = new SewingProduction.CustomComboBox();
-            this.fioBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.customComboBox1 = new SewingProduction.CustomComboBox();
-            this.fioBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label7 = new SewingProduction.CustomLabel();
             this.aproovmentBtn = new SewingProduction.CustomButton();
-            this.gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
-            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colfio = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coltab = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -967,26 +951,6 @@ namespace SewingProduction.Forms
             this.colannID.Name = "colannID";
             this.colannID.Visible = true;
             this.colannID.VisibleIndex = 22;
-            // 
-            // colstatus
-            // 
-            this.colstatus.FieldName = "status";
-            this.colstatus.Name = "colstatus";
-            // 
-            // colarh
-            // 
-            this.colarh.FieldName = "arh";
-            this.colarh.Name = "colarh";
-            this.colarh.Visible = true;
-            this.colarh.VisibleIndex = 23;
-            // 
-            // repositoryItemButtonEdit1
-            // 
-            this.repositoryItemButtonEdit1.AutoHeight = false;
-            this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "434", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
-            this.repositoryItemButtonEdit1.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
-            this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             // 
             // customButton12
             // 
