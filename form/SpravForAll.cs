@@ -25,6 +25,7 @@ using System.Reflection;
 using DevExpress.Mvvm.Native;
 using static SewingProduction.form.SettingsForm;
 using static SewingProduction.ThemeManager;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -61,7 +62,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;

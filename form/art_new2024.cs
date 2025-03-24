@@ -15,6 +15,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SewingProduction.Helpers;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
 namespace SewingProduction.form
@@ -31,7 +32,7 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _artNewDataService = new ArtNewDataService(dbHelper);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
         }
 

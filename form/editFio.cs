@@ -22,6 +22,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Customization;
 using DevExpress.XtraRichEdit.Import.Html;
+using SewingProduction.Helpers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.form.EditFioDataService;
@@ -41,7 +42,7 @@ namespace SewingProduction.form
             InitializeComponent();
             _editFioDataService = new EditFioDataService(dbHelper);
             _person = new Person();
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             //Имя формы:
             this.Text = openType;
             customTextBoxTab.Text = idFIO;

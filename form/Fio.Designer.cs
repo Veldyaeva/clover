@@ -226,10 +226,6 @@
             // customButtonOtcDol
             // 
             this.customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonOtcDol.Btn = null;
-            this.customButtonOtcDol.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonOtcDol.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonOtcDol.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonOtcDol.FlatAppearance.BorderSize = 0;
             this.customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -925,12 +921,7 @@
             // 
             // customButtonSpVed
             // 
-<<<<<<< HEAD
             this.customButtonSpVed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpVed.Btn = null;
-            this.customButtonSpVed.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpVed.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpVed.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpVed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpVed.FlatAppearance.BorderSize = 0;
             this.customButtonSpVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -943,7 +934,6 @@
             this.customButtonSpVed.Text = "Справочник ведомостей";
             this.customButtonSpVed.UseVisualStyleBackColor = false;
             this.customButtonSpVed.Click += new System.EventHandler(this.customButtonSpVed_Click);
-=======
             this.customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonOtcDol.FlatAppearance.BorderSize = 0;
@@ -956,16 +946,10 @@
             this.customButtonOtcDol.TabIndex = 2;
             this.customButtonOtcDol.Text = "Отчет по должности";
             this.customButtonOtcDol.UseVisualStyleBackColor = false;
->>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             // 
             // customButtonSpOrg1C
             // 
-<<<<<<< HEAD
             this.customButtonSpOrg1C.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg1C.Btn = null;
-            this.customButtonSpOrg1C.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg1C.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpOrg1C.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpOrg1C.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpOrg1C.FlatAppearance.BorderSize = 0;
             this.customButtonSpOrg1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -978,7 +962,6 @@
             this.customButtonSpOrg1C.Text = "Подразделения 1С";
             this.customButtonSpOrg1C.UseVisualStyleBackColor = false;
             this.customButtonSpOrg1C.Click += new System.EventHandler(this.customButtonSpOrg1C_Click);
-=======
             this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSov.FlatAppearance.BorderSize = 0;
@@ -991,16 +974,10 @@
             this.customButtonSov.TabIndex = 1;
             this.customButtonSov.Text = "Совместители";
             this.customButtonSov.UseVisualStyleBackColor = false;
->>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             // 
             // customButtonSpDol1C
             // 
-<<<<<<< HEAD
             this.customButtonSpDol1C.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol1C.Btn = null;
-            this.customButtonSpDol1C.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol1C.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSpDol1C.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSpDol1C.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSpDol1C.FlatAppearance.BorderSize = 0;
             this.customButtonSpDol1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1013,7 +990,6 @@
             this.customButtonSpDol1C.Text = "Должности 1С";
             this.customButtonSpDol1C.UseVisualStyleBackColor = false;
             this.customButtonSpDol1C.Click += new System.EventHandler(this.customButtonSpDol1C_Click);
-=======
             this.customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonAddSov.FlatAppearance.BorderSize = 0;
@@ -1170,7 +1146,6 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(200, 81);
             this.tableLayoutPanel1.TabIndex = 3;
->>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             // 
             // customButtonPdrSP
             // 
@@ -1190,7 +1165,6 @@
             // 
             // tableLayoutPanelPech
             // 
-<<<<<<< HEAD
             this.tableLayoutPanelPech.ColumnCount = 1;
             this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 0);
@@ -1325,10 +1299,6 @@
             // customButtonPech1
             // 
             this.customButtonPech1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech1.Btn = null;
-            this.customButtonPech1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPech1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPech1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPech1.FlatAppearance.BorderSize = 0;
             this.customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1425,10 +1395,6 @@
             // customButtonPech2
             // 
             this.customButtonPech2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech2.Btn = null;
-            this.customButtonPech2.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonPech2.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonPech2.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonPech2.FlatAppearance.BorderSize = 0;
             this.customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1500,10 +1466,6 @@
             // customButtonSforming
             // 
             this.customButtonSforming.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSforming.Btn = null;
-            this.customButtonSforming.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSforming.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSforming.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSforming.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSforming.FlatAppearance.BorderSize = 0;
             this.customButtonSforming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1591,10 +1553,6 @@
             // customButtonSov
             // 
             this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSov.Btn = null;
-            this.customButtonSov.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonSov.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonSov.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonSov.FlatAppearance.BorderSize = 0;
             this.customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1611,10 +1569,6 @@
             // customButtonAddSov
             // 
             this.customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAddSov.Btn = null;
-            this.customButtonAddSov.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonAddSov.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonAddSov.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonAddSov.FlatAppearance.BorderSize = 0;
             this.customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -1627,7 +1581,6 @@
             this.customButtonAddSov.Text = "Добавить совмест.";
             this.customButtonAddSov.UseVisualStyleBackColor = false;
             this.customButtonAddSov.Click += new System.EventHandler(this.customButtonAddSov_Click);
-=======
             this.customButtonTar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.customButtonTar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customButtonTar.FlatAppearance.BorderSize = 0;
@@ -1640,7 +1593,6 @@
             this.customButtonTar.TabIndex = 6;
             this.customButtonTar.Text = "Тарифы";
             this.customButtonTar.UseVisualStyleBackColor = false;
->>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             // 
             // tableLayoutPanel2
             // 
