@@ -36,6 +36,11 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оборудованиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оборудованиеВБригадахToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,6 +118,7 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem1,
             this.справочникиToolStripMenuItem,
             this.производствоToolStripMenuItem,
             this.TeamWorktoolStripMenuItem,
@@ -124,6 +130,43 @@
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.профильToolStripMenuItem,
+            this.настройкиToolStripMenuItem,
+            this.оПрограммеToolStripMenuItem,
+            this.помощьToolStripMenuItem});
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(53, 23);
+            this.toolStripMenuItem1.Text = "Меню";
+            // 
+            // профильToolStripMenuItem
+            // 
+            this.профильToolStripMenuItem.Name = "профильToolStripMenuItem";
+            this.профильToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.профильToolStripMenuItem.Text = "Профиль";
+            // 
+            // настройкиToolStripMenuItem
+            // 
+            this.настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
+            this.настройкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.настройкиToolStripMenuItem.Text = "Настройки";
+            this.настройкиToolStripMenuItem.Click += new System.EventHandler(this.настройкиToolStripMenuItem_Click);
+            // 
+            // оПрограммеToolStripMenuItem
+            // 
+            this.оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
+            this.оПрограммеToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.оПрограммеToolStripMenuItem.Text = "О программе";
+            this.оПрограммеToolStripMenuItem.Click += new System.EventHandler(this.оПрограммеToolStripMenuItem_Click);
+            // 
+            // помощьToolStripMenuItem
+            // 
+            this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.помощьToolStripMenuItem.Text = "Помощь";
             // 
             // справочникиToolStripMenuItem
             // 
@@ -260,7 +303,9 @@
             // артикулToolStripMenuItem
             // 
             this.артикулToolStripMenuItem.Name = "артикулToolStripMenuItem";
-            this.артикулToolStripMenuItem.Size = new System.Drawing.Size(12, 23);
+            this.артикулToolStripMenuItem.Size = new System.Drawing.Size(65, 23);
+            this.артикулToolStripMenuItem.Text = "Артикул";
+            this.артикулToolStripMenuItem.Click += new System.EventHandler(this.артикулToolStripMenuItem_Click);
             // 
             // xtraTabbedMdiManager1
             // 
@@ -324,5 +369,10 @@
         private System.Windows.Forms.ToolStripMenuItem тарифыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem моделиСПризнакомМаркировкToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem артикулToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
     }
 }
