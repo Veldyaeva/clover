@@ -176,31 +176,6 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка при фильтрации данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-        // Обработчики событий для радиокнопок поиска
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            // Вызываем очистку поиска при смене радиокнопки
-            GridHelper.OnSearchRadioButtonChanged(gridView1);
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            // Вызываем очистку поиска при смене радиокнопки
-            GridHelper.OnSearchRadioButtonChanged(gridView1);
-        }
-
-        private void radioButton3_CheckedChanged(object sender, EventArgs e)
-        {
-            // Вызываем очистку поиска при смене радиокнопки
-            GridHelper.OnSearchRadioButtonChanged(gridView1);
-        }
-
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-            // Вызываем очистку поиска при смене радиокнопки
-            GridHelper.OnSearchRadioButtonChanged(gridView1);
-        }
     }
 
 }

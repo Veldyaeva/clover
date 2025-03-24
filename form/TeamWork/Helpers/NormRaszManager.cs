@@ -44,8 +44,8 @@ namespace SewingProduction.Helpers
 
         public async Task<BindingList<NormRasz>> LoadByAnnIdAsync(int annId)
         {
-            var list = await _service.GetRelatedNormRasz(annId);
-            return new BindingList<NormRasz>((IList<NormRasz>)list);
+            var list = await _service.GetNormRaszByAnnId(annId);
+            return new BindingList<NormRasz>(list);
         }
     }
 

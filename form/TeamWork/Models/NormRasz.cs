@@ -14,6 +14,7 @@ namespace SewingProduction.Models
         public int KodO { get; set; }
         public string Text { get; set; }
         public int Razryad { get; set; }
+        public int N { get; set; }
         public int N1 { get; set; }
         public int Sek { get; set; }
         public string Obor { get; set; }
