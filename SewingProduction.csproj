@@ -465,9 +465,6 @@
     <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
@@ -572,17 +569,6 @@
     <EmbeddedResource Include="XtraReport2.resx">
       <DependentUpon>XtraReport2.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="ACE_backupDataSet.xsc">
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="ACE_backupDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>ACE_backupDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="ACE_backupDataSet.xss">
-      <DependentUpon>ACE_backupDataSet.xsd</DependentUpon>
-    </None>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>

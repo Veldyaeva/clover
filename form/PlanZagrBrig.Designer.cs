@@ -1358,7 +1358,7 @@
             this.gcPzArticulList.Size = new System.Drawing.Size(522, 181);
             this.gcPzArticulList.TabIndex = 9;
             this.gcPzArticulList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gwPzArticulList});
             this.gcPzArticulList.Click += new System.EventHandler(this.gcPzArticulList_Click);
             // 
             // gwPzArticulList
