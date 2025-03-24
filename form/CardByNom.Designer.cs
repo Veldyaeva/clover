@@ -66,58 +66,58 @@ namespace SewingProduction
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bsNaklList = new System.Windows.Forms.BindingSource(this.components);
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.label68 = new SewingProduction.CustomLabel();
+            this.tbYearPach = new SewingProduction.CustomTextBox();
+            this.tbNomPach = new SewingProduction.CustomTextBox();
+            this.tbRzuKol = new SewingProduction.CustomTextBox();
+            this.tbPsaNomZad = new SewingProduction.CustomTextBox();
+            this.tbRzuDostZeh = new SewingProduction.CustomTextBox();
+            this.tbRzuPach = new SewingProduction.CustomTextBox();
+            this.tbRzuNom = new SewingProduction.CustomTextBox();
+            this.tbPsaKodZv2 = new SewingProduction.CustomTextBox();
+            this.tbPsaKodZv1 = new SewingProduction.CustomTextBox();
+            this.tbRzuMod = new SewingProduction.CustomTextBox();
+            this.tbRzuArticul = new SewingProduction.CustomTextBox();
+            this.tbPsaPrn = new SewingProduction.CustomTextBox();
+            this.tbSostPoln = new SewingProduction.CustomTextBox();
+            this.tbArtGrup = new SewingProduction.CustomTextBox();
             this.tbArtTradeMark = new SewingProduction.CustomTextBox();
-            this.label66 = new SewingProduction.CustomLabel();
+            this.tbPsaMenName = new SewingProduction.CustomTextBox();
+            this.tbPsaNameSbit = new SewingProduction.CustomTextBox();
+            this.tbPsaTbID = new SewingProduction.CustomTextBox();
             this.tbPsaKombIzd = new SewingProduction.CustomTextBox();
-            this.label67 = new SewingProduction.CustomLabel();
             this.tbPsaKombOsn = new SewingProduction.CustomTextBox();
-            this.label65 = new SewingProduction.CustomLabel();
             this.tbPsaPsaIDOsn = new SewingProduction.CustomTextBox();
-            this.label62 = new SewingProduction.CustomLabel();
             this.tbPsaPsaID = new SewingProduction.CustomTextBox();
-            this.label16 = new SewingProduction.CustomLabel();
             this.cbIsChip = new System.Windows.Forms.CheckBox();
             this.psaSezName = new SewingProduction.CustomTextBox();
-            this.tbRzuKol = new SewingProduction.CustomTextBox();
+            this.tbPsaYear = new SewingProduction.CustomTextBox();
+            this.tbPsaNN = new SewingProduction.CustomTextBox();
+            this.label68 = new SewingProduction.CustomLabel();
+            this.label66 = new SewingProduction.CustomLabel();
+            this.label67 = new SewingProduction.CustomLabel();
+            this.label65 = new SewingProduction.CustomLabel();
+            this.label62 = new SewingProduction.CustomLabel();
+            this.label16 = new SewingProduction.CustomLabel();
             this.label17 = new SewingProduction.CustomLabel();
             this.label22 = new SewingProduction.CustomLabel();
-            this.tbPsaYear = new SewingProduction.CustomTextBox();
             this.label53 = new SewingProduction.CustomLabel();
-            this.tbPsaKodZv2 = new SewingProduction.CustomTextBox();
             this.label23 = new SewingProduction.CustomLabel();
-            this.tbPsaNomZad = new SewingProduction.CustomTextBox();
-            this.tbPsaKodZv1 = new SewingProduction.CustomTextBox();
             this.label20 = new SewingProduction.CustomLabel();
-            this.tbPsaMenName = new SewingProduction.CustomTextBox();
             this.pbEskiz = new System.Windows.Forms.PictureBox();
-            this.tbSostPoln = new SewingProduction.CustomTextBox();
             this.label13 = new SewingProduction.CustomLabel();
             this.label11 = new SewingProduction.CustomLabel();
-            this.tbPsaNameSbit = new SewingProduction.CustomTextBox();
             this.label15 = new SewingProduction.CustomLabel();
             this.label12 = new SewingProduction.CustomLabel();
-            this.tbArtGrup = new SewingProduction.CustomTextBox();
-            this.tbRzuDostZeh = new SewingProduction.CustomTextBox();
             this.label10 = new SewingProduction.CustomLabel();
-            this.tbRzuMod = new SewingProduction.CustomTextBox();
             this.label19 = new SewingProduction.CustomLabel();
             this.label9 = new SewingProduction.CustomLabel();
-            this.tbPsaTbID = new SewingProduction.CustomTextBox();
-            this.tbRzuArticul = new SewingProduction.CustomTextBox();
             this.label8 = new SewingProduction.CustomLabel();
-            this.tbPsaPrn = new SewingProduction.CustomTextBox();
             this.label7 = new SewingProduction.CustomLabel();
             this.label6 = new SewingProduction.CustomLabel();
-            this.tbRzuPach = new SewingProduction.CustomTextBox();
             this.label5 = new SewingProduction.CustomLabel();
-            this.tbRzuNom = new SewingProduction.CustomTextBox();
             this.label4 = new SewingProduction.CustomLabel();
             this.label21 = new SewingProduction.CustomLabel();
-            this.tbPsaNN = new SewingProduction.CustomTextBox();
-            this.tbYearPach = new SewingProduction.CustomTextBox();
             this.label3 = new SewingProduction.CustomLabel();
-            this.tbNomPach = new SewingProduction.CustomTextBox();
             this.label2 = new SewingProduction.CustomLabel();
             this.label1 = new SewingProduction.CustomLabel();
             this.bsOtdelkaList = new System.Windows.Forms.BindingSource(this.components);
@@ -527,16 +527,162 @@ namespace SewingProduction
             this.panelControl1.Size = new System.Drawing.Size(1569, 123);
             this.panelControl1.TabIndex = 3;
             // 
-            // label68
+            // tbYearPach
             // 
-            this.label68.AutoSize = true;
-            this.label68.Font = new System.Drawing.Font("Arial", 9F);
-            this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label68.Location = new System.Drawing.Point(924, 100);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(97, 15);
-            this.label68.TabIndex = 41;
-            this.label68.Text = "Торговая марка";
+            this.tbYearPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbYearPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbYearPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbYearPach.Location = new System.Drawing.Point(741, 2);
+            this.tbYearPach.Margin = new System.Windows.Forms.Padding(0);
+            this.tbYearPach.Name = "tbYearPach";
+            this.tbYearPach.Size = new System.Drawing.Size(42, 23);
+            this.tbYearPach.TabIndex = 7;
+            // 
+            // tbNomPach
+            // 
+            this.tbNomPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbNomPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbNomPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbNomPach.Location = new System.Drawing.Point(629, 2);
+            this.tbNomPach.Margin = new System.Windows.Forms.Padding(0);
+            this.tbNomPach.Name = "tbNomPach";
+            this.tbNomPach.Size = new System.Drawing.Size(64, 23);
+            this.tbNomPach.TabIndex = 5;
+            this.tbNomPach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNomPach_KeyDown);
+            // 
+            // tbRzuKol
+            // 
+            this.tbRzuKol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuKol.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuKol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuKol.Location = new System.Drawing.Point(259, 26);
+            this.tbRzuKol.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuKol.Name = "tbRzuKol";
+            this.tbRzuKol.Size = new System.Drawing.Size(52, 23);
+            this.tbRzuKol.TabIndex = 29;
+            // 
+            // tbPsaNomZad
+            // 
+            this.tbPsaNomZad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaNomZad.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaNomZad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaNomZad.Location = new System.Drawing.Point(78, 50);
+            this.tbPsaNomZad.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaNomZad.Name = "tbPsaNomZad";
+            this.tbPsaNomZad.Size = new System.Drawing.Size(73, 23);
+            this.tbPsaNomZad.TabIndex = 26;
+            // 
+            // tbRzuDostZeh
+            // 
+            this.tbRzuDostZeh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuDostZeh.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuDostZeh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuDostZeh.Location = new System.Drawing.Point(228, 50);
+            this.tbRzuDostZeh.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuDostZeh.Name = "tbRzuDostZeh";
+            this.tbRzuDostZeh.Size = new System.Drawing.Size(83, 23);
+            this.tbRzuDostZeh.TabIndex = 21;
+            // 
+            // tbRzuPach
+            // 
+            this.tbRzuPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuPach.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuPach.Location = new System.Drawing.Point(118, 74);
+            this.tbRzuPach.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuPach.Name = "tbRzuPach";
+            this.tbRzuPach.Size = new System.Drawing.Size(193, 23);
+            this.tbRzuPach.TabIndex = 11;
+            // 
+            // tbRzuNom
+            // 
+            this.tbRzuNom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuNom.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuNom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuNom.Location = new System.Drawing.Point(78, 26);
+            this.tbRzuNom.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuNom.Name = "tbRzuNom";
+            this.tbRzuNom.Size = new System.Drawing.Size(73, 23);
+            this.tbRzuNom.TabIndex = 9;
+            // 
+            // tbPsaKodZv2
+            // 
+            this.tbPsaKodZv2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKodZv2.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKodZv2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKodZv2.Location = new System.Drawing.Point(565, 96);
+            this.tbPsaKodZv2.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaKodZv2.Name = "tbPsaKodZv2";
+            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 23);
+            this.tbPsaKodZv2.TabIndex = 29;
+            // 
+            // tbPsaKodZv1
+            // 
+            this.tbPsaKodZv1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaKodZv1.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaKodZv1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaKodZv1.Location = new System.Drawing.Point(426, 96);
+            this.tbPsaKodZv1.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaKodZv1.Name = "tbPsaKodZv1";
+            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 23);
+            this.tbPsaKodZv1.TabIndex = 26;
+            // 
+            // tbRzuMod
+            // 
+            this.tbRzuMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuMod.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuMod.Location = new System.Drawing.Point(426, 50);
+            this.tbRzuMod.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuMod.Name = "tbRzuMod";
+            this.tbRzuMod.Size = new System.Drawing.Size(204, 23);
+            this.tbRzuMod.TabIndex = 19;
+            // 
+            // tbRzuArticul
+            // 
+            this.tbRzuArticul.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbRzuArticul.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbRzuArticul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbRzuArticul.Location = new System.Drawing.Point(426, 26);
+            this.tbRzuArticul.Margin = new System.Windows.Forms.Padding(0);
+            this.tbRzuArticul.Name = "tbRzuArticul";
+            this.tbRzuArticul.Size = new System.Drawing.Size(204, 23);
+            this.tbRzuArticul.TabIndex = 17;
+            // 
+            // tbPsaPrn
+            // 
+            this.tbPsaPrn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaPrn.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaPrn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaPrn.Location = new System.Drawing.Point(426, 74);
+            this.tbPsaPrn.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaPrn.Multiline = true;
+            this.tbPsaPrn.Name = "tbPsaPrn";
+            this.tbPsaPrn.Size = new System.Drawing.Size(204, 21);
+            this.tbPsaPrn.TabIndex = 15;
+            // 
+            // tbSostPoln
+            // 
+            this.tbSostPoln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbSostPoln.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbSostPoln.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbSostPoln.Location = new System.Drawing.Point(726, 50);
+            this.tbSostPoln.Margin = new System.Windows.Forms.Padding(0);
+            this.tbSostPoln.Multiline = true;
+            this.tbSostPoln.Name = "tbSostPoln";
+            this.tbSostPoln.Size = new System.Drawing.Size(195, 67);
+            this.tbSostPoln.TabIndex = 25;
+            // 
+            // tbArtGrup
+            // 
+            this.tbArtGrup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbArtGrup.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbArtGrup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbArtGrup.Location = new System.Drawing.Point(726, 26);
+            this.tbArtGrup.Margin = new System.Windows.Forms.Padding(0);
+            this.tbArtGrup.Name = "tbArtGrup";
+            this.tbArtGrup.Size = new System.Drawing.Size(195, 23);
+            this.tbArtGrup.TabIndex = 21;
             // 
             // tbArtTradeMark
             // 
@@ -549,16 +695,39 @@ namespace SewingProduction
             this.tbArtTradeMark.Size = new System.Drawing.Size(70, 23);
             this.tbArtTradeMark.TabIndex = 40;
             // 
-            // label66
+            // tbPsaMenName
             // 
-            this.label66.AutoSize = true;
-            this.label66.Font = new System.Drawing.Font("Arial", 9F);
-            this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label66.Location = new System.Drawing.Point(1316, 102);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(60, 15);
-            this.label66.TabIndex = 39;
-            this.label66.Text = "komb_izd";
+            this.tbPsaMenName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaMenName.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaMenName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaMenName.Location = new System.Drawing.Point(1004, 50);
+            this.tbPsaMenName.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaMenName.Multiline = true;
+            this.tbPsaMenName.Name = "tbPsaMenName";
+            this.tbPsaMenName.Size = new System.Drawing.Size(174, 21);
+            this.tbPsaMenName.TabIndex = 11;
+            // 
+            // tbPsaNameSbit
+            // 
+            this.tbPsaNameSbit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaNameSbit.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaNameSbit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaNameSbit.Location = new System.Drawing.Point(1004, 72);
+            this.tbPsaNameSbit.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaNameSbit.Name = "tbPsaNameSbit";
+            this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 23);
+            this.tbPsaNameSbit.TabIndex = 23;
+            // 
+            // tbPsaTbID
+            // 
+            this.tbPsaTbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
+            this.tbPsaTbID.Font = new System.Drawing.Font("Arial", 10F);
+            this.tbPsaTbID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
+            this.tbPsaTbID.Location = new System.Drawing.Point(1004, 26);
+            this.tbPsaTbID.Margin = new System.Windows.Forms.Padding(0);
+            this.tbPsaTbID.Name = "tbPsaTbID";
+            this.tbPsaTbID.Size = new System.Drawing.Size(136, 23);
+            this.tbPsaTbID.TabIndex = 13;
             // 
             // tbPsaKombIzd
             // 
@@ -571,17 +740,6 @@ namespace SewingProduction
             this.tbPsaKombIzd.Size = new System.Drawing.Size(52, 23);
             this.tbPsaKombIzd.TabIndex = 38;
             // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Font = new System.Drawing.Font("Arial", 9F);
-            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label67.Location = new System.Drawing.Point(1316, 78);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(66, 15);
-            this.label67.TabIndex = 37;
-            this.label67.Text = "komb_osn";
-            // 
             // tbPsaKombOsn
             // 
             this.tbPsaKombOsn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
@@ -592,17 +750,6 @@ namespace SewingProduction
             this.tbPsaKombOsn.Name = "tbPsaKombOsn";
             this.tbPsaKombOsn.Size = new System.Drawing.Size(52, 23);
             this.tbPsaKombOsn.TabIndex = 36;
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Font = new System.Drawing.Font("Arial", 9F);
-            this.label65.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label65.Location = new System.Drawing.Point(1316, 54);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(73, 15);
-            this.label65.TabIndex = 35;
-            this.label65.Text = "psa_id_osn";
             // 
             // tbPsaPsaIDOsn
             // 
@@ -615,17 +762,6 @@ namespace SewingProduction
             this.tbPsaPsaIDOsn.Size = new System.Drawing.Size(52, 23);
             this.tbPsaPsaIDOsn.TabIndex = 34;
             // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Font = new System.Drawing.Font("Arial", 9F);
-            this.label62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label62.Location = new System.Drawing.Point(1316, 30);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(45, 15);
-            this.label62.TabIndex = 33;
-            this.label62.Text = "psa_id";
-            // 
             // tbPsaPsaID
             // 
             this.tbPsaPsaID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
@@ -636,17 +772,6 @@ namespace SewingProduction
             this.tbPsaPsaID.Name = "tbPsaPsaID";
             this.tbPsaPsaID.Size = new System.Drawing.Size(52, 23);
             this.tbPsaPsaID.TabIndex = 32;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Arial", 9F);
-            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label16.Location = new System.Drawing.Point(1215, 74);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(43, 15);
-            this.label16.TabIndex = 20;
-            this.label16.Text = "Сезон";
             // 
             // cbIsChip
             // 
@@ -670,39 +795,6 @@ namespace SewingProduction
             this.psaSezName.Size = new System.Drawing.Size(47, 23);
             this.psaSezName.TabIndex = 19;
             // 
-            // tbRzuKol
-            // 
-            this.tbRzuKol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuKol.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuKol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuKol.Location = new System.Drawing.Point(259, 26);
-            this.tbRzuKol.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuKol.Name = "tbRzuKol";
-            this.tbRzuKol.Size = new System.Drawing.Size(52, 23);
-            this.tbRzuKol.TabIndex = 29;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Arial", 9F);
-            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label17.Location = new System.Drawing.Point(1215, 54);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(27, 15);
-            this.label17.TabIndex = 18;
-            this.label17.Text = "Год";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Arial", 9F);
-            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label22.Location = new System.Drawing.Point(513, 100);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(54, 15);
-            this.label22.TabIndex = 30;
-            this.label22.Text = "Код цв.2";
-            // 
             // tbPsaYear
             // 
             this.tbPsaYear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
@@ -713,348 +805,6 @@ namespace SewingProduction
             this.tbPsaYear.Name = "tbPsaYear";
             this.tbPsaYear.Size = new System.Drawing.Size(47, 23);
             this.tbPsaYear.TabIndex = 17;
-            // 
-            // label53
-            // 
-            this.label53.AutoSize = true;
-            this.label53.Font = new System.Drawing.Font("Arial", 9F);
-            this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label53.Location = new System.Drawing.Point(8, 54);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(71, 15);
-            this.label53.TabIndex = 27;
-            this.label53.Text = "№ задания";
-            // 
-            // tbPsaKodZv2
-            // 
-            this.tbPsaKodZv2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaKodZv2.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaKodZv2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaKodZv2.Location = new System.Drawing.Point(565, 96);
-            this.tbPsaKodZv2.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaKodZv2.Name = "tbPsaKodZv2";
-            this.tbPsaKodZv2.Size = new System.Drawing.Size(65, 23);
-            this.tbPsaKodZv2.TabIndex = 29;
-            // 
-            // label23
-            // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Arial", 9F);
-            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label23.Location = new System.Drawing.Point(367, 100);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(54, 15);
-            this.label23.TabIndex = 27;
-            this.label23.Text = "Код цв.1";
-            // 
-            // tbPsaNomZad
-            // 
-            this.tbPsaNomZad.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaNomZad.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaNomZad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaNomZad.Location = new System.Drawing.Point(78, 50);
-            this.tbPsaNomZad.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaNomZad.Name = "tbPsaNomZad";
-            this.tbPsaNomZad.Size = new System.Drawing.Size(73, 23);
-            this.tbPsaNomZad.TabIndex = 26;
-            // 
-            // tbPsaKodZv1
-            // 
-            this.tbPsaKodZv1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaKodZv1.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaKodZv1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaKodZv1.Location = new System.Drawing.Point(426, 96);
-            this.tbPsaKodZv1.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaKodZv1.Name = "tbPsaKodZv1";
-            this.tbPsaKodZv1.Size = new System.Drawing.Size(65, 23);
-            this.tbPsaKodZv1.TabIndex = 26;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Arial", 9F);
-            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label20.Location = new System.Drawing.Point(926, 47);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(75, 30);
-            this.label20.TabIndex = 12;
-            this.label20.Text = "Категория\r\n(менеджер)";
-            // 
-            // tbPsaMenName
-            // 
-            this.tbPsaMenName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaMenName.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaMenName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaMenName.Location = new System.Drawing.Point(1004, 50);
-            this.tbPsaMenName.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaMenName.Multiline = true;
-            this.tbPsaMenName.Name = "tbPsaMenName";
-            this.tbPsaMenName.Size = new System.Drawing.Size(174, 21);
-            this.tbPsaMenName.TabIndex = 11;
-            // 
-            // pbEskiz
-            // 
-            this.pbEskiz.Location = new System.Drawing.Point(1439, 6);
-            this.pbEskiz.Name = "pbEskiz";
-            this.pbEskiz.Size = new System.Drawing.Size(118, 112);
-            this.pbEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbEskiz.TabIndex = 25;
-            this.pbEskiz.TabStop = false;
-            // 
-            // tbSostPoln
-            // 
-            this.tbSostPoln.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbSostPoln.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbSostPoln.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbSostPoln.Location = new System.Drawing.Point(726, 50);
-            this.tbSostPoln.Margin = new System.Windows.Forms.Padding(0);
-            this.tbSostPoln.Multiline = true;
-            this.tbSostPoln.Name = "tbSostPoln";
-            this.tbSostPoln.Size = new System.Drawing.Size(195, 67);
-            this.tbSostPoln.TabIndex = 25;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Arial", 9F);
-            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label13.Location = new System.Drawing.Point(636, 54);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(67, 30);
-            this.label13.TabIndex = 24;
-            this.label13.Text = "Состав\r\n(из справ.)";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Arial", 9F);
-            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label11.Location = new System.Drawing.Point(926, 74);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(79, 15);
-            this.label11.TabIndex = 24;
-            this.label11.Text = "Канал сбыта";
-            // 
-            // tbPsaNameSbit
-            // 
-            this.tbPsaNameSbit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaNameSbit.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaNameSbit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaNameSbit.Location = new System.Drawing.Point(1004, 72);
-            this.tbPsaNameSbit.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaNameSbit.Name = "tbPsaNameSbit";
-            this.tbPsaNameSbit.Size = new System.Drawing.Size(174, 23);
-            this.tbPsaNameSbit.TabIndex = 23;
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Arial", 9F);
-            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label15.Location = new System.Drawing.Point(636, 23);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(94, 30);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "Наименование\r\n(из справ.)";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Arial", 9F);
-            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label12.Location = new System.Drawing.Point(158, 54);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(70, 15);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "Бригада №";
-            // 
-            // tbArtGrup
-            // 
-            this.tbArtGrup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbArtGrup.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbArtGrup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbArtGrup.Location = new System.Drawing.Point(726, 26);
-            this.tbArtGrup.Margin = new System.Windows.Forms.Padding(0);
-            this.tbArtGrup.Name = "tbArtGrup";
-            this.tbArtGrup.Size = new System.Drawing.Size(195, 23);
-            this.tbArtGrup.TabIndex = 21;
-            // 
-            // tbRzuDostZeh
-            // 
-            this.tbRzuDostZeh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuDostZeh.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuDostZeh.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuDostZeh.Location = new System.Drawing.Point(228, 50);
-            this.tbRzuDostZeh.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuDostZeh.Name = "tbRzuDostZeh";
-            this.tbRzuDostZeh.Size = new System.Drawing.Size(83, 23);
-            this.tbRzuDostZeh.TabIndex = 21;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Arial", 9F);
-            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label10.Location = new System.Drawing.Point(324, 54);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 15);
-            this.label10.TabIndex = 20;
-            this.label10.Text = "Модель (торг.)";
-            // 
-            // tbRzuMod
-            // 
-            this.tbRzuMod.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuMod.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuMod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuMod.Location = new System.Drawing.Point(426, 50);
-            this.tbRzuMod.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuMod.Name = "tbRzuMod";
-            this.tbRzuMod.Size = new System.Drawing.Size(204, 23);
-            this.tbRzuMod.TabIndex = 19;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Arial", 9F);
-            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label19.Location = new System.Drawing.Point(926, 30);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(35, 15);
-            this.label19.TabIndex = 14;
-            this.label19.Text = "Блок";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Arial", 9F);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label9.Location = new System.Drawing.Point(324, 30);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(80, 15);
-            this.label9.TabIndex = 18;
-            this.label9.Text = "Артикул (шв.)";
-            // 
-            // tbPsaTbID
-            // 
-            this.tbPsaTbID.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaTbID.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaTbID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaTbID.Location = new System.Drawing.Point(1004, 26);
-            this.tbPsaTbID.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaTbID.Name = "tbPsaTbID";
-            this.tbPsaTbID.Size = new System.Drawing.Size(136, 23);
-            this.tbPsaTbID.TabIndex = 13;
-            // 
-            // tbRzuArticul
-            // 
-            this.tbRzuArticul.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuArticul.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuArticul.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuArticul.Location = new System.Drawing.Point(426, 26);
-            this.tbRzuArticul.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuArticul.Name = "tbRzuArticul";
-            this.tbRzuArticul.Size = new System.Drawing.Size(204, 23);
-            this.tbRzuArticul.TabIndex = 17;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Arial", 9F);
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label8.Location = new System.Drawing.Point(324, 74);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(104, 15);
-            this.label8.TabIndex = 16;
-            this.label8.Text = "Цвет по заданию";
-            // 
-            // tbPsaPrn
-            // 
-            this.tbPsaPrn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbPsaPrn.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbPsaPrn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbPsaPrn.Location = new System.Drawing.Point(426, 74);
-            this.tbPsaPrn.Margin = new System.Windows.Forms.Padding(0);
-            this.tbPsaPrn.Multiline = true;
-            this.tbPsaPrn.Name = "tbPsaPrn";
-            this.tbPsaPrn.Size = new System.Drawing.Size(204, 21);
-            this.tbPsaPrn.TabIndex = 15;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Arial", 9F);
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(158, 30);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(102, 15);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "Кол-во в расчете";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Arial", 9F);
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label6.Location = new System.Drawing.Point(8, 74);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(113, 15);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "№ пачек в расчете";
-            // 
-            // tbRzuPach
-            // 
-            this.tbRzuPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuPach.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuPach.Location = new System.Drawing.Point(118, 74);
-            this.tbRzuPach.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuPach.Name = "tbRzuPach";
-            this.tbRzuPach.Size = new System.Drawing.Size(193, 23);
-            this.tbRzuPach.TabIndex = 11;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(8, 30);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 15);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "№ расчета";
-            // 
-            // tbRzuNom
-            // 
-            this.tbRzuNom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbRzuNom.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbRzuNom.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbRzuNom.Location = new System.Drawing.Point(78, 26);
-            this.tbRzuNom.Margin = new System.Windows.Forms.Padding(0);
-            this.tbRzuNom.Name = "tbRzuNom";
-            this.tbRzuNom.Size = new System.Drawing.Size(73, 23);
-            this.tbRzuNom.TabIndex = 9;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(710, 5);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(25, 15);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "год";
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Arial", 9F);
-            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label21.Location = new System.Drawing.Point(1149, 30);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(82, 15);
-            this.label21.TabIndex = 10;
-            this.label21.Text = "Код матрицы";
             // 
             // tbPsaNN
             // 
@@ -1067,20 +817,307 @@ namespace SewingProduction
             this.tbPsaNN.Size = new System.Drawing.Size(70, 23);
             this.tbPsaNN.TabIndex = 9;
             // 
-            // tbYearPach
+            // label68
             // 
-            this.tbYearPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbYearPach.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbYearPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbYearPach.Location = new System.Drawing.Point(741, 2);
-            this.tbYearPach.Margin = new System.Windows.Forms.Padding(0);
-            this.tbYearPach.Name = "tbYearPach";
-            this.tbYearPach.Size = new System.Drawing.Size(42, 23);
-            this.tbYearPach.TabIndex = 7;
+            this.label68.AutoSize = true;
+            this.label68.BackColor = System.Drawing.Color.Transparent;
+            this.label68.Font = new System.Drawing.Font("Arial", 9F);
+            this.label68.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label68.Location = new System.Drawing.Point(924, 100);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(97, 15);
+            this.label68.TabIndex = 41;
+            this.label68.Text = "Торговая марка";
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.BackColor = System.Drawing.Color.Transparent;
+            this.label66.Font = new System.Drawing.Font("Arial", 9F);
+            this.label66.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label66.Location = new System.Drawing.Point(1316, 102);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(60, 15);
+            this.label66.TabIndex = 39;
+            this.label66.Text = "komb_izd";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.BackColor = System.Drawing.Color.Transparent;
+            this.label67.Font = new System.Drawing.Font("Arial", 9F);
+            this.label67.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label67.Location = new System.Drawing.Point(1316, 78);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(66, 15);
+            this.label67.TabIndex = 37;
+            this.label67.Text = "komb_osn";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.BackColor = System.Drawing.Color.Transparent;
+            this.label65.Font = new System.Drawing.Font("Arial", 9F);
+            this.label65.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label65.Location = new System.Drawing.Point(1316, 54);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(73, 15);
+            this.label65.TabIndex = 35;
+            this.label65.Text = "psa_id_osn";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.BackColor = System.Drawing.Color.Transparent;
+            this.label62.Font = new System.Drawing.Font("Arial", 9F);
+            this.label62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label62.Location = new System.Drawing.Point(1316, 30);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(45, 15);
+            this.label62.TabIndex = 33;
+            this.label62.Text = "psa_id";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Font = new System.Drawing.Font("Arial", 9F);
+            this.label16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label16.Location = new System.Drawing.Point(1215, 74);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(43, 15);
+            this.label16.TabIndex = 20;
+            this.label16.Text = "Сезон";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.Font = new System.Drawing.Font("Arial", 9F);
+            this.label17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label17.Location = new System.Drawing.Point(1215, 54);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(27, 15);
+            this.label17.TabIndex = 18;
+            this.label17.Text = "Год";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.Color.Transparent;
+            this.label22.Font = new System.Drawing.Font("Arial", 9F);
+            this.label22.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label22.Location = new System.Drawing.Point(513, 100);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(54, 15);
+            this.label22.TabIndex = 30;
+            this.label22.Text = "Код цв.2";
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.BackColor = System.Drawing.Color.Transparent;
+            this.label53.Font = new System.Drawing.Font("Arial", 9F);
+            this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label53.Location = new System.Drawing.Point(8, 54);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(71, 15);
+            this.label53.TabIndex = 27;
+            this.label53.Text = "№ задания";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.Font = new System.Drawing.Font("Arial", 9F);
+            this.label23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label23.Location = new System.Drawing.Point(367, 100);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(54, 15);
+            this.label23.TabIndex = 27;
+            this.label23.Text = "Код цв.1";
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.Color.Transparent;
+            this.label20.Font = new System.Drawing.Font("Arial", 9F);
+            this.label20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label20.Location = new System.Drawing.Point(926, 47);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(75, 30);
+            this.label20.TabIndex = 12;
+            this.label20.Text = "Категория\r\n(менеджер)";
+            // 
+            // pbEskiz
+            // 
+            this.pbEskiz.Location = new System.Drawing.Point(1439, 6);
+            this.pbEskiz.Name = "pbEskiz";
+            this.pbEskiz.Size = new System.Drawing.Size(118, 112);
+            this.pbEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbEskiz.TabIndex = 25;
+            this.pbEskiz.TabStop = false;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.Transparent;
+            this.label13.Font = new System.Drawing.Font("Arial", 9F);
+            this.label13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label13.Location = new System.Drawing.Point(636, 54);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(67, 30);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "Состав\r\n(из справ.)";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.Transparent;
+            this.label11.Font = new System.Drawing.Font("Arial", 9F);
+            this.label11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label11.Location = new System.Drawing.Point(926, 74);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(79, 15);
+            this.label11.TabIndex = 24;
+            this.label11.Text = "Канал сбыта";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.Font = new System.Drawing.Font("Arial", 9F);
+            this.label15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label15.Location = new System.Drawing.Point(636, 23);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(94, 30);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "Наименование\r\n(из справ.)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Arial", 9F);
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label12.Location = new System.Drawing.Point(158, 54);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(70, 15);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "Бригада №";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Arial", 9F);
+            this.label10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label10.Location = new System.Drawing.Point(324, 54);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 15);
+            this.label10.TabIndex = 20;
+            this.label10.Text = "Модель (торг.)";
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.BackColor = System.Drawing.Color.Transparent;
+            this.label19.Font = new System.Drawing.Font("Arial", 9F);
+            this.label19.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label19.Location = new System.Drawing.Point(926, 30);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(35, 15);
+            this.label19.TabIndex = 14;
+            this.label19.Text = "Блок";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Arial", 9F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label9.Location = new System.Drawing.Point(324, 30);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(80, 15);
+            this.label9.TabIndex = 18;
+            this.label9.Text = "Артикул (шв.)";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Arial", 9F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label8.Location = new System.Drawing.Point(324, 74);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(104, 15);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Цвет по заданию";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.Font = new System.Drawing.Font("Arial", 9F);
+            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label7.Location = new System.Drawing.Point(158, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(102, 15);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Кол-во в расчете";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Arial", 9F);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label6.Location = new System.Drawing.Point(8, 74);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(113, 15);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "№ пачек в расчете";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
+            this.label5.Font = new System.Drawing.Font("Arial", 9F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label5.Location = new System.Drawing.Point(8, 30);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(68, 15);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "№ расчета";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label4.Location = new System.Drawing.Point(710, 5);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(25, 15);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "год";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.Font = new System.Drawing.Font("Arial", 9F);
+            this.label21.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.label21.Location = new System.Drawing.Point(1149, 30);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(82, 15);
+            this.label21.TabIndex = 10;
+            this.label21.Text = "Код матрицы";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial", 9F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label3.Location = new System.Drawing.Point(576, 5);
@@ -1089,21 +1126,10 @@ namespace SewingProduction
             this.label3.TabIndex = 6;
             this.label3.Text = "№ пачки";
             // 
-            // tbNomPach
-            // 
-            this.tbNomPach.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tbNomPach.Font = new System.Drawing.Font("Arial", 10F);
-            this.tbNomPach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.tbNomPach.Location = new System.Drawing.Point(629, 2);
-            this.tbNomPach.Margin = new System.Windows.Forms.Padding(0);
-            this.tbNomPach.Name = "tbNomPach";
-            this.tbNomPach.Size = new System.Drawing.Size(64, 23);
-            this.tbNomPach.TabIndex = 5;
-            this.tbNomPach.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbNomPach_KeyDown);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label2.Location = new System.Drawing.Point(497, 2);
@@ -1115,6 +1141,7 @@ namespace SewingProduction
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label1.Location = new System.Drawing.Point(5, 2);
@@ -1158,12 +1185,12 @@ namespace SewingProduction
             this.sbProizvCombIzdSP.Size = new System.Drawing.Size(72, 23);
             this.sbProizvCombIzdSP.TabIndex = 7;
             this.sbProizvCombIzdSP.Text = "Печать";
-            this.sbProizvCombIzdSP.Visible = false;
             this.sbProizvCombIzdSP.Click += new System.EventHandler(this.sbProizvCombIzdSP_Click);
             // 
             // label70
             // 
             this.label70.AutoSize = true;
+            this.label70.BackColor = System.Drawing.Color.Transparent;
             this.label70.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label70.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label70.Location = new System.Drawing.Point(3, 279);
@@ -1175,6 +1202,7 @@ namespace SewingProduction
             // label69
             // 
             this.label69.AutoSize = true;
+            this.label69.BackColor = System.Drawing.Color.Transparent;
             this.label69.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label69.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label69.Location = new System.Drawing.Point(3, 0);
@@ -2164,6 +2192,7 @@ namespace SewingProduction
             // label61
             // 
             this.label61.AutoSize = true;
+            this.label61.BackColor = System.Drawing.Color.Transparent;
             this.label61.Font = new System.Drawing.Font("Arial", 9F);
             this.label61.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label61.Location = new System.Drawing.Point(2, 3);
@@ -2321,6 +2350,7 @@ namespace SewingProduction
             // label60
             // 
             this.label60.AutoSize = true;
+            this.label60.BackColor = System.Drawing.Color.Transparent;
             this.label60.Font = new System.Drawing.Font("Arial", 9F);
             this.label60.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label60.Location = new System.Drawing.Point(6, 425);
@@ -2332,6 +2362,7 @@ namespace SewingProduction
             // label59
             // 
             this.label59.AutoSize = true;
+            this.label59.BackColor = System.Drawing.Color.Transparent;
             this.label59.Font = new System.Drawing.Font("Arial", 9F);
             this.label59.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label59.Location = new System.Drawing.Point(6, 400);
@@ -2355,6 +2386,7 @@ namespace SewingProduction
             // label56
             // 
             this.label56.AutoSize = true;
+            this.label56.BackColor = System.Drawing.Color.Transparent;
             this.label56.Font = new System.Drawing.Font("Arial", 9F);
             this.label56.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label56.Location = new System.Drawing.Point(16, 341);
@@ -2378,6 +2410,7 @@ namespace SewingProduction
             // label57
             // 
             this.label57.AutoSize = true;
+            this.label57.BackColor = System.Drawing.Color.Transparent;
             this.label57.Font = new System.Drawing.Font("Arial", 9F);
             this.label57.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label57.Location = new System.Drawing.Point(16, 317);
@@ -2400,6 +2433,7 @@ namespace SewingProduction
             // label58
             // 
             this.label58.AutoSize = true;
+            this.label58.BackColor = System.Drawing.Color.Transparent;
             this.label58.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.label58.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label58.Location = new System.Drawing.Point(5, 290);
@@ -2441,6 +2475,7 @@ namespace SewingProduction
             // label55
             // 
             this.label55.AutoSize = true;
+            this.label55.BackColor = System.Drawing.Color.Transparent;
             this.label55.Font = new System.Drawing.Font("Arial", 9F);
             this.label55.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label55.Location = new System.Drawing.Point(16, 223);
@@ -2464,6 +2499,7 @@ namespace SewingProduction
             // label54
             // 
             this.label54.AutoSize = true;
+            this.label54.BackColor = System.Drawing.Color.Transparent;
             this.label54.Font = new System.Drawing.Font("Arial", 9F);
             this.label54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label54.Location = new System.Drawing.Point(16, 199);
@@ -2486,6 +2522,7 @@ namespace SewingProduction
             // label25
             // 
             this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
             this.label25.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             this.label25.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label25.Location = new System.Drawing.Point(3, 175);
@@ -2575,6 +2612,7 @@ namespace SewingProduction
             // label18
             // 
             this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.Transparent;
             this.label18.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label18.Location = new System.Drawing.Point(16, 2);
@@ -2668,6 +2706,7 @@ namespace SewingProduction
             // label52
             // 
             this.label52.AutoSize = true;
+            this.label52.BackColor = System.Drawing.Color.Transparent;
             this.label52.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label52.Location = new System.Drawing.Point(3, 2);
@@ -2727,9 +2766,11 @@ namespace SewingProduction
             // cbRzuStirFact
             // 
             this.cbRzuStirFact.AutoSize = true;
+            this.cbRzuStirFact.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbRzuStirFact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbRzuStirFact.Location = new System.Drawing.Point(170, 142);
             this.cbRzuStirFact.Name = "cbRzuStirFact";
-            this.cbRzuStirFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuStirFact.Size = new System.Drawing.Size(58, 20);
             this.cbRzuStirFact.TabIndex = 72;
             this.cbRzuStirFact.Text = "Факт";
             this.cbRzuStirFact.UseVisualStyleBackColor = true;
@@ -2737,9 +2778,11 @@ namespace SewingProduction
             // cbPszStirPlan
             // 
             this.cbPszStirPlan.AutoSize = true;
+            this.cbPszStirPlan.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbPszStirPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbPszStirPlan.Location = new System.Drawing.Point(106, 142);
             this.cbPszStirPlan.Name = "cbPszStirPlan";
-            this.cbPszStirPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszStirPlan.Size = new System.Drawing.Size(59, 20);
             this.cbPszStirPlan.TabIndex = 71;
             this.cbPszStirPlan.Text = "План";
             this.cbPszStirPlan.UseVisualStyleBackColor = true;
@@ -2747,9 +2790,11 @@ namespace SewingProduction
             // cbRzuVishFact
             // 
             this.cbRzuVishFact.AutoSize = true;
+            this.cbRzuVishFact.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbRzuVishFact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbRzuVishFact.Location = new System.Drawing.Point(174, 88);
             this.cbRzuVishFact.Name = "cbRzuVishFact";
-            this.cbRzuVishFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuVishFact.Size = new System.Drawing.Size(58, 20);
             this.cbRzuVishFact.TabIndex = 70;
             this.cbRzuVishFact.Text = "Факт";
             this.cbRzuVishFact.UseVisualStyleBackColor = true;
@@ -2757,9 +2802,11 @@ namespace SewingProduction
             // cbPszVishPlan
             // 
             this.cbPszVishPlan.AutoSize = true;
+            this.cbPszVishPlan.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbPszVishPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbPszVishPlan.Location = new System.Drawing.Point(110, 88);
             this.cbPszVishPlan.Name = "cbPszVishPlan";
-            this.cbPszVishPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszVishPlan.Size = new System.Drawing.Size(59, 20);
             this.cbPszVishPlan.TabIndex = 69;
             this.cbPszVishPlan.Text = "План";
             this.cbPszVishPlan.UseVisualStyleBackColor = true;
@@ -2767,9 +2814,11 @@ namespace SewingProduction
             // cbRzuPrintFact
             // 
             this.cbRzuPrintFact.AutoSize = true;
+            this.cbRzuPrintFact.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbRzuPrintFact.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbRzuPrintFact.Location = new System.Drawing.Point(155, 30);
             this.cbRzuPrintFact.Name = "cbRzuPrintFact";
-            this.cbRzuPrintFact.Size = new System.Drawing.Size(52, 17);
+            this.cbRzuPrintFact.Size = new System.Drawing.Size(58, 20);
             this.cbRzuPrintFact.TabIndex = 68;
             this.cbRzuPrintFact.Text = "Факт";
             this.cbRzuPrintFact.UseVisualStyleBackColor = true;
@@ -2777,9 +2826,11 @@ namespace SewingProduction
             // cbPszPrintPlan
             // 
             this.cbPszPrintPlan.AutoSize = true;
+            this.cbPszPrintPlan.Font = new System.Drawing.Font("Arial", 10F);
+            this.cbPszPrintPlan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.cbPszPrintPlan.Location = new System.Drawing.Point(91, 30);
             this.cbPszPrintPlan.Name = "cbPszPrintPlan";
-            this.cbPszPrintPlan.Size = new System.Drawing.Size(51, 17);
+            this.cbPszPrintPlan.Size = new System.Drawing.Size(59, 20);
             this.cbPszPrintPlan.TabIndex = 67;
             this.cbPszPrintPlan.Text = "План";
             this.cbPszPrintPlan.UseVisualStyleBackColor = true;
@@ -2952,6 +3003,7 @@ namespace SewingProduction
             // label44
             // 
             this.label44.AutoSize = true;
+            this.label44.BackColor = System.Drawing.Color.Transparent;
             this.label44.Font = new System.Drawing.Font("Arial", 9F);
             this.label44.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label44.Location = new System.Drawing.Point(538, 165);
@@ -2963,6 +3015,7 @@ namespace SewingProduction
             // label49
             // 
             this.label49.AutoSize = true;
+            this.label49.BackColor = System.Drawing.Color.Transparent;
             this.label49.Font = new System.Drawing.Font("Arial", 9F);
             this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label49.Location = new System.Drawing.Point(359, 165);
@@ -2974,6 +3027,7 @@ namespace SewingProduction
             // label50
             // 
             this.label50.AutoSize = true;
+            this.label50.BackColor = System.Drawing.Color.Transparent;
             this.label50.Font = new System.Drawing.Font("Arial", 9F);
             this.label50.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label50.Location = new System.Drawing.Point(185, 165);
@@ -2985,6 +3039,7 @@ namespace SewingProduction
             // label51
             // 
             this.label51.AutoSize = true;
+            this.label51.BackColor = System.Drawing.Color.Transparent;
             this.label51.Font = new System.Drawing.Font("Arial", 9F);
             this.label51.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label51.Location = new System.Drawing.Point(11, 158);
@@ -2996,6 +3051,7 @@ namespace SewingProduction
             // label43
             // 
             this.label43.AutoSize = true;
+            this.label43.BackColor = System.Drawing.Color.Transparent;
             this.label43.Font = new System.Drawing.Font("Arial", 9F);
             this.label43.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label43.Location = new System.Drawing.Point(722, 104);
@@ -3007,6 +3063,7 @@ namespace SewingProduction
             // label45
             // 
             this.label45.AutoSize = true;
+            this.label45.BackColor = System.Drawing.Color.Transparent;
             this.label45.Font = new System.Drawing.Font("Arial", 9F);
             this.label45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label45.Location = new System.Drawing.Point(538, 111);
@@ -3018,6 +3075,7 @@ namespace SewingProduction
             // label46
             // 
             this.label46.AutoSize = true;
+            this.label46.BackColor = System.Drawing.Color.Transparent;
             this.label46.Font = new System.Drawing.Font("Arial", 9F);
             this.label46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label46.Location = new System.Drawing.Point(359, 104);
@@ -3029,6 +3087,7 @@ namespace SewingProduction
             // label47
             // 
             this.label47.AutoSize = true;
+            this.label47.BackColor = System.Drawing.Color.Transparent;
             this.label47.Font = new System.Drawing.Font("Arial", 9F);
             this.label47.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label47.Location = new System.Drawing.Point(185, 104);
@@ -3040,6 +3099,7 @@ namespace SewingProduction
             // label48
             // 
             this.label48.AutoSize = true;
+            this.label48.BackColor = System.Drawing.Color.Transparent;
             this.label48.Font = new System.Drawing.Font("Arial", 9F);
             this.label48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label48.Location = new System.Drawing.Point(11, 104);
@@ -3051,6 +3111,7 @@ namespace SewingProduction
             // label42
             // 
             this.label42.AutoSize = true;
+            this.label42.BackColor = System.Drawing.Color.Transparent;
             this.label42.Font = new System.Drawing.Font("Arial", 9F);
             this.label42.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label42.Location = new System.Drawing.Point(859, 50);
@@ -3062,6 +3123,7 @@ namespace SewingProduction
             // label41
             // 
             this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Transparent;
             this.label41.Font = new System.Drawing.Font("Arial", 9F);
             this.label41.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label41.Location = new System.Drawing.Point(722, 50);
@@ -3073,6 +3135,7 @@ namespace SewingProduction
             // label40
             // 
             this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Transparent;
             this.label40.Font = new System.Drawing.Font("Arial", 9F);
             this.label40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label40.Location = new System.Drawing.Point(538, 50);
@@ -3084,6 +3147,7 @@ namespace SewingProduction
             // label39
             // 
             this.label39.AutoSize = true;
+            this.label39.BackColor = System.Drawing.Color.Transparent;
             this.label39.Font = new System.Drawing.Font("Arial", 9F);
             this.label39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label39.Location = new System.Drawing.Point(359, 50);
@@ -3095,6 +3159,7 @@ namespace SewingProduction
             // label38
             // 
             this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Transparent;
             this.label38.Font = new System.Drawing.Font("Arial", 9F);
             this.label38.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label38.Location = new System.Drawing.Point(185, 50);
@@ -3106,6 +3171,7 @@ namespace SewingProduction
             // label37
             // 
             this.label37.AutoSize = true;
+            this.label37.BackColor = System.Drawing.Color.Transparent;
             this.label37.Font = new System.Drawing.Font("Arial", 9F);
             this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label37.Location = new System.Drawing.Point(11, 50);
@@ -3117,6 +3183,7 @@ namespace SewingProduction
             // label35
             // 
             this.label35.AutoSize = true;
+            this.label35.BackColor = System.Drawing.Color.Transparent;
             this.label35.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label35.Location = new System.Drawing.Point(3, 138);
@@ -3128,6 +3195,7 @@ namespace SewingProduction
             // label36
             // 
             this.label36.AutoSize = true;
+            this.label36.BackColor = System.Drawing.Color.Transparent;
             this.label36.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label36.Location = new System.Drawing.Point(3, 84);
@@ -3139,6 +3207,7 @@ namespace SewingProduction
             // label32
             // 
             this.label32.AutoSize = true;
+            this.label32.BackColor = System.Drawing.Color.Transparent;
             this.label32.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label32.Location = new System.Drawing.Point(3, 30);
@@ -3150,6 +3219,7 @@ namespace SewingProduction
             // label31
             // 
             this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label31.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label31.Location = new System.Drawing.Point(3, 2);
@@ -3439,6 +3509,7 @@ namespace SewingProduction
             this.button1.Text = "testFioReport";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Visible = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // btnPrintNaklXtraReport
             // 
@@ -3508,6 +3579,7 @@ namespace SewingProduction
             // label24
             // 
             this.label24.AutoSize = true;
+            this.label24.BackColor = System.Drawing.Color.Transparent;
             this.label24.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label24.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label24.Location = new System.Drawing.Point(1, 2);
@@ -3568,6 +3640,7 @@ namespace SewingProduction
             // label64
             // 
             this.label64.AutoSize = true;
+            this.label64.BackColor = System.Drawing.Color.Transparent;
             this.label64.Font = new System.Drawing.Font("Arial", 9F);
             this.label64.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label64.Location = new System.Drawing.Point(518, 32);
@@ -3590,6 +3663,7 @@ namespace SewingProduction
             // label63
             // 
             this.label63.AutoSize = true;
+            this.label63.BackColor = System.Drawing.Color.Transparent;
             this.label63.Font = new System.Drawing.Font("Arial", 9F);
             this.label63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label63.Location = new System.Drawing.Point(1380, 32);
@@ -3678,6 +3752,7 @@ namespace SewingProduction
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Arial", 9F);
             this.label14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label14.Location = new System.Drawing.Point(1204, 32);
@@ -3689,6 +3764,7 @@ namespace SewingProduction
             // label33
             // 
             this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Transparent;
             this.label33.Font = new System.Drawing.Font("Arial", 9F);
             this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label33.Location = new System.Drawing.Point(1035, 32);
@@ -3700,6 +3776,7 @@ namespace SewingProduction
             // label34
             // 
             this.label34.AutoSize = true;
+            this.label34.BackColor = System.Drawing.Color.Transparent;
             this.label34.Font = new System.Drawing.Font("Arial", 9F);
             this.label34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label34.Location = new System.Drawing.Point(315, 32);
@@ -3711,6 +3788,7 @@ namespace SewingProduction
             // label26
             // 
             this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.Font = new System.Drawing.Font("Arial", 9F);
             this.label26.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label26.Location = new System.Drawing.Point(880, 32);
@@ -3722,6 +3800,7 @@ namespace SewingProduction
             // label27
             // 
             this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.Color.Transparent;
             this.label27.Font = new System.Drawing.Font("Arial", 9F);
             this.label27.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label27.Location = new System.Drawing.Point(740, 32);
@@ -3733,6 +3812,7 @@ namespace SewingProduction
             // label28
             // 
             this.label28.AutoSize = true;
+            this.label28.BackColor = System.Drawing.Color.Transparent;
             this.label28.Font = new System.Drawing.Font("Arial", 9F);
             this.label28.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label28.Location = new System.Drawing.Point(152, 32);
@@ -3744,6 +3824,7 @@ namespace SewingProduction
             // label29
             // 
             this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.Color.Transparent;
             this.label29.Font = new System.Drawing.Font("Arial", 9F);
             this.label29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label29.Location = new System.Drawing.Point(8, 32);
@@ -3755,6 +3836,7 @@ namespace SewingProduction
             // label30
             // 
             this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
             this.label30.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
             this.label30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.label30.Location = new System.Drawing.Point(7, 2);
@@ -3947,12 +4029,6 @@ namespace SewingProduction
         private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
         private DevExpress.XtraEditors.PanelControl panelControl6;
         private DevExpress.XtraEditors.PanelControl panelControl5;
-        private System.Windows.Forms.CheckBox cbRzuStirFact;
-        private System.Windows.Forms.CheckBox cbPszStirPlan;
-        private System.Windows.Forms.CheckBox cbRzuVishFact;
-        private System.Windows.Forms.CheckBox cbPszVishPlan;
-        private System.Windows.Forms.CheckBox cbRzuPrintFact;
-        private System.Windows.Forms.CheckBox cbPszPrintPlan;
         private DevExpress.XtraEditors.PanelControl panelControl4;
         private DevExpress.XtraGrid.GridControl gcPartNaklList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
@@ -4133,5 +4209,11 @@ namespace SewingProduction
         private CustomLabel label28;
         private CustomLabel label29;
         private CustomLabel label30;
+        private CustomCheckBox cbRzuStirFact;
+        private CustomCheckBox cbPszStirPlan;
+        private CustomCheckBox cbRzuVishFact;
+        private CustomCheckBox cbPszVishPlan;
+        private CustomCheckBox cbRzuPrintFact;
+        private CustomCheckBox cbPszPrintPlan;
     }
 }

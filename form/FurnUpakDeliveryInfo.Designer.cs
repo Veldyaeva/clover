@@ -913,6 +913,7 @@
             this.Name = "FurnUpakDeliveryInfo";
             this.Text = "Информация по доставке фурнитуры/упаковки в бригаду";
             this.TopMost = true;
+            this.Deactivate += new System.EventHandler(this.FurnUpakDeliveryInfo_Deactivate);
             this.Load += new System.EventHandler(this.FurnUpakDeliveryInfo_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gcReestrFurn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurn)).EndInit();

@@ -348,7 +348,6 @@ namespace SewingProduction
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             adapter.SelectCommand = command;
-                            
                         }
                         adapter.Fill(dT);
                         //bsource.DataSource = dT;
