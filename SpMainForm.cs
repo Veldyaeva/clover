@@ -1,6 +1,8 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraTabbedMdi;
 using SewingProduction.form;
+using SewingProduction.form.UserDistribution;
+using SewingProduction.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -206,6 +208,19 @@ namespace SewingProduction
             Articul f = new Articul();
             f.MdiParent = this;
             f.Show();
+        }
+
+        private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AboutBox f = new AboutBox();
+            f.Show();
+        }
+
+        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SettingsForm f = new SettingsForm();
+            f.Show();
+
         }
     }
 }

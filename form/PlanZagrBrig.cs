@@ -55,14 +55,14 @@ namespace SewingProduction.form
         public System.Data.DataTable dtPzArticulList;
         public System.Data.DataTable dtPzNomList;
         public System.Data.DataTable dtPzOperList;
-        private readonly DatabaseHelper dbHelper;
+        private readonly DatabaseHelper _dbHelper;
 
 
         public PlanZagrBrig()
         {
             InitializeComponent();
-            dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
-            UpdateTheme(this);
+            _dbHelper = new DatabaseHelper("ace");//Properties.Settings.Default.ACEConnectionString);
+            ApplyTheme();
 
         }
 
@@ -174,7 +174,7 @@ namespace SewingProduction.form
         public void GetBrigName(int _xIdBrig)
         {
             string queryBrigName = $"select brig, id_brig from brig where id_brig = {_xIdBrig} ";
-            var dtBrigName = dbHelper.ExecuteQuery(queryBrigName);//CommonFunctions.ShowRelatedData("ace", queryBrigName);
+            var dtBrigName = _dbHelper.ExecuteQuery(queryBrigName);//CommonFunctions.ShowRelatedData("ace", queryBrigName);
             lblBrigName.Text = dtBrigName.Rows[0]["brig"].ToString();
         }
 
@@ -183,7 +183,7 @@ namespace SewingProduction.form
             try
             {
                 string queryMonthList = $"SELECT * FROM spr_month ";
-                var dtMonthList = dbHelper.ExecuteQuery(queryMonthList);//CommonFunctions.ShowRelatedData("ace", queryMonthList);
+                var dtMonthList = _dbHelper.ExecuteQuery(queryMonthList);//CommonFunctions.ShowRelatedData("ace", queryMonthList);
                 bsMonthList.DataSource = dtMonthList;
                 cbMonthList.DataSource = bsMonthList;
                 cbMonthList.DisplayMember = "name_month";
@@ -393,7 +393,7 @@ namespace SewingProduction.form
                 string queryPachList = $"select cast(string_agg(cast(n_pach as nvarchar) +' / ' + TRIM(razm) + ' / ' + cast(kol as nvarchar), char(13) + char(10)) as nvarchar(max)) as pList ";
                 queryPachList += $"	from raskr_zeh_up ";
                 queryPachList += $"	where nom = {_nlNom} ";
-                var dtPachList = dbHelper.ExecuteQuery(queryPachList);
+                var dtPachList = _dbHelper.ExecuteQuery(queryPachList);
                 tbPList.Text = dtPachList.Rows[0]["pList"].ToString();
             }
         }
@@ -519,7 +519,7 @@ namespace SewingProduction.form
         private void PlanZagrBrigLoadData()
         {
             string queryNomList = $"exec rzu_nzp {XIdBrig}, {GetUslFilter()}, {GetNZPFilter()}, {GetYearPlan()}, {GetMonthPlan()} ";
-            dtNomList = dbHelper.ExecuteQuery(queryNomList);
+            dtNomList = _dbHelper.ExecuteQuery(queryNomList);
             this.gcPzNomList.Location = this.gcPzNomList.Location;
             this.gcPzNomList.Size = this.gcPzNomList.Size;
             var queryPzArticulList = from row in dtNomList.AsEnumerable()
@@ -625,7 +625,7 @@ namespace SewingProduction.form
         private void GetPztOperList(string _xmlString)
         {
             string queryPzOperList = $"exec planZagrTwo_view ''";
-            var dtPzOperList = dbHelper.ExecuteQuery(queryPzOperList);
+            var dtPzOperList = _dbHelper.ExecuteQuery(queryPzOperList);
             bsPzOperList.DataSource = dtPzOperList;
         }
 
@@ -656,6 +656,18 @@ namespace SewingProduction.form
         }
 
         private void SetFilterOperList()
+        {
+            string _selectText = GetFilterOperList();
+            ApplyParameterizedFilter(gwPzOperList, GetFilterOperList());
+        }
+
+        private void ApplyParameterizedFilter(GridView _gridView, string _filter)
+        {
+            _gridView.ActiveFilterString = _filter;
+            //Console.WriteLine($"Applied filter: {_filter}");
+        }
+
+        public static string DataRowToXml3(DataRow _dataRow, string _row)
         {
             string _selectText = GetFilterOperList();
             ApplyParameterizedFilter(gwPzOperList, GetFilterOperList());
@@ -856,6 +868,18 @@ namespace SewingProduction.form
         private void gridView2_CellValueChanged(object sender, DevExpress.XtraGrid.Views.Base.CellValueChangedEventArgs e)
         {
         }
+                    string _nlArticulK = drNomListfoundRow["nlArticulK"].ToString();
+                    string _nlModK = drNomListfoundRow["nlModK"].ToString();
+                    dtPzArticulList.PrimaryKey = new System.Data.DataColumn[] { dtPzArticulList.Columns["alArticul"],
+                                                                                dtPzArticulList.Columns["alMod"],
+                                                                                dtPzArticulList.Columns["alKoddRT"],
+                                                                                dtPzArticulList.Columns["alArticulK"],
+                                                                                dtPzArticulList.Columns["alModK"] };
+                    object[] compositeKeyValue = { _nlArticul, _nlMod, _nlKoddRT, _nlArticulK, _nlModK };
+                    DataRow drPzArticulList = dtPzArticulList.Rows.Find(compositeKeyValue);
+
+                    gridView1.FocusedRowHandle = gridView1.LocateByValue("alRowNumber", drPzArticulList["alRowNumber"].ToString());
+                    //gridView2.FocusedColumn.FieldName = "nlV";
 
         private void repositoryItemCheckEdit3_EditValueChanged(object sender, EventArgs e)
         {
@@ -887,18 +911,6 @@ namespace SewingProduction.form
                 {
                     string _xmlParamString = DataTableToXml3(dtPzOperListToLoad, "CData", "nom_kod_list", 1);
                     string sqlQuery = $"exec planZagrTwo_view '{_xmlParamString}'";
-
-                    if (dtPzOperList is null)
-                    {
-                        dtPzOperList = ShowRelatedData("ace", sqlQuery);
-                    }
-                    else
-                    {
-                        var dtPzOperListAdd = ShowRelatedData("ace", sqlQuery);
-                        dtPzOperList.Merge(dtPzOperListAdd);
-                    }
-                    bsPzOperList.DataSource = dtPzOperList;
-                }
 
                 //string _xmlParamString = DataRowToXml3(gwPzNomList.GetDataRow(gwPzNomList.FocusedRowHandle), "nom_kod_list");
                 ////var sqlXml = new SqlXml(new XmlTextReader(new StringReader(_xmlParamString)));
@@ -964,9 +976,9 @@ namespace SewingProduction.form
             GetOborudList();
             ApplyParameterizedFilter(gwPzOperList, "");
         }
-
+            //if (e.Column.FieldName.ToString() == "nlV")
         private void tbPachNumber_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-        {
+            //    if (Convert.ToInt32(gridView2.GetDataRow(e.RowHandle)["nlV"]) == 1)
             if (e.KeyCode == Keys.Enter)
             {
                 if (tbPachYear.Text.Length > 0 && tbPachNumber.Text.Length > 0)
@@ -999,6 +1011,18 @@ namespace SewingProduction.form
             //gwPzArticulList.FocusedColumn = gwPzArticulList.Columns["alDataCdPl"];
             //gwPzArticulList.FocusedColumn = gwPzArticulList.Columns["alV"];
             //if (gwPzArticulList.GetRowCellValue(gwPzArticulList.FocusedRowHandle, "alV").ToString() == "1")
+            //        MessageBox.Show("111");
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("222");
+            //    }
+            //}
+        }
+
+        private void repositoryItemCheckEdit3_EditValueChanged(object sender, EventArgs e)
+        {
+            //if (Convert.ToInt32(repositoryItemCheckEdit3 ) == 1)
             //{
             //    for (int rowHandle = 0; rowHandle < gwPzNomList.RowCount; rowHandle++)
             //    {
@@ -1122,18 +1146,6 @@ namespace SewingProduction.form
 
         private void cbPlanZagrTwoStatusList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cbPlanZagrTwoStatusList.SelectedIndex > -1 && cbPlanZagrTwoStatusList.SelectedValue.ToString() != "System.Data.DataRowView")
-            {
-                SetFilterOperList();
-            }
-        }
-
-        private void simpleButton8_Click(object sender, EventArgs e)
-        {
-            cbPlanZagrTwoStatusList.SelectedIndex = -1;
-            SetFilterOperList();
-        }
-
         private void cbWorkersList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cbWorkersList.SelectedIndex > -1 && cbWorkersList.SelectedValue.ToString() != "System.Data.DataRowView")
@@ -1170,6 +1182,18 @@ namespace SewingProduction.form
                 SetFilterOperList();
             }
         }
+                            {
+                                dtPzOperList.Load(reader);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            //Handle exceptions
+                            MessageBox.Show(ex.ToString());
+                        }
+                    }
+                }
+            }
 
         private void simpleButton10_Click(object sender, EventArgs e)
         {

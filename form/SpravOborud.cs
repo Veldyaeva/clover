@@ -11,6 +11,7 @@ using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using static SewingProduction.form.SettingsForm;
 using System.Collections.Generic;
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
+using SewingProduction.Helpers;
 
 
 namespace SewingProduction.form
@@ -29,7 +30,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _spravOborudDataService = new SpravOborudDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
         }
 
         private void SpravOborud_Load(object sender, EventArgs e)

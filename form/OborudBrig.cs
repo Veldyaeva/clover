@@ -15,6 +15,7 @@ using System.Diagnostics;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.CodeParser;
 using static SewingProduction.form.SettingsForm;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -40,7 +41,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _oborudBrigDataService = new OborudBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
         }
         #region service broker
         private void OborudBrig_Load_1(object sender, EventArgs e)

@@ -14,6 +14,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using static DevExpress.Mvvm.Native.Either;
 using static SewingProduction.form.SettingsForm;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -35,7 +36,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;

@@ -29,12 +29,12 @@ namespace SewingProduction
         }
 
         [Browsable(true)]
-        public new event EventHandler TextChangedViewType
+        public  event EventHandler TextChangedViewType
         {
             add => tbViewType.TextChanged += value;
             remove => tbViewType.TextChanged -= value;
         }
-        public new string ViewType
+        public  string ViewType
         {
             get => tbViewType.Text;
             set => tbViewType.Text = value;

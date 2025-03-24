@@ -1,16 +1,28 @@
-﻿using DevExpress.XtraEditors.Controls;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
+﻿/*Основные цвета:
+Фон (градиент):
+Мягкий мятный: RGB(209, 241, 221)
+Кремовый (айвори): RGB(255, 248, 240)
+Элемент "C" (буква):
+Светлый серебристо-серый: RGB(192, 192, 192)
+Внутренний градиент (если заметен): между мятным (RGB(209, 241, 221)) и белым (RGB(255, 255, 255)).
+Лист клевера:
+Нежно-зелёный: RGB(181, 230, 196)
+Темно-зелёные акценты (если видны): RGB(120, 167, 137)*/
+
+using DevExpress.CodeParser;
+using DevExpress.Xpo.DB;
+using DevExpress.XtraBars.Docking2010.Base;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraPrinting.Native.WebClientUIControl;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.IO;
 using System.Windows.Forms;
 using static SewingProduction.ThemeManager;
 using System.Data;
@@ -90,7 +102,7 @@ namespace SewingProduction
             if (disposing)
             {
                 ThemeChanged -= OnThemeChanged;
-            }
+    }
             base.Dispose(disposing);
         }
     }
@@ -200,7 +212,7 @@ namespace SewingProduction
             this.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
-        }
+    }
 
         private void OnThemeChanged()
         {
@@ -320,6 +332,10 @@ namespace SewingProduction
 
     }
 
+    //        //// Общий стиль шрифта
+    //        //this.Appearance.Row.Font = Theme.DefaultFont;
+    //    }
+    //}
     public class CustomGridControl : GridControl
     {
         public CustomGridView CustomView { get; private set; }
@@ -351,8 +367,16 @@ namespace SewingProduction
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
 
+            //// Подписываемся на изменения темы
+            //Theme.ThemeChanged += OnThemeChanged;
         }
 
+        //private void ApplyTheme()
+        //{
+        //    // Применяем тему к GridControl (например, цвет фона)
+        //    this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+        //    this.LookAndFeel.UseDefaultLookAndFeel = false;
+        //    this.BackColor = Theme.GridBackground;
 
         private void OnThemeChanged()
         {
@@ -369,6 +393,14 @@ namespace SewingProduction
             base.Dispose(disposing);
         }
 
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        Theme.ThemeChanged -= OnThemeChanged;
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 
     public class CustomGridView : GridView
@@ -409,7 +441,11 @@ namespace SewingProduction
             get { return _borderColor; }
             set { _borderColor = value; Invalidate(); }
         }
-
+        public GridView gridView { get; set; }
+        public Color HighlightBackground { get; set; }
+        //public Color ComponentFontColor { get; set; }
+        //public Size ComponentSize { get; set; }
+        
         // Свойство для установки толщины обводки
         public int BorderThickness
         {
@@ -423,7 +459,7 @@ namespace SewingProduction
             base.OnPaint(e); //рисуем всё что есть в дефолтном GroupBox
             // Рисуем границу
             using (Pen borderPen = new Pen(_borderColor, _borderThickness))
-            {
+        {
                 // Определение прямоугольника для обводки
                 var rect = new Rectangle(ClientRectangle.X , ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
                 rect.X += _borderThickness / 2 ;
@@ -558,117 +594,6 @@ namespace SewingProduction
 #endregion
 
 
-
-#region DbHelper
-/// <summary>
-/// класс для работы с БД
-/// </summary>
-public class DatabaseHelper
-{
-    private readonly string _connectionString;
-
-    public DatabaseHelper(string _serv)//(string connectionString)
-    {
-        //_connectionString = connectionString;
-        switch (_serv.ToLower())
-        {
-            case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
-            case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
-            case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
-        }
-
-    }
-
-    //public static System.Data.DataTable ShowRelatedData(string _serv, string query)
-    //{
-    //    //System.Data.DataTable dT = new System.Data.DataTable();
-    //    try
-    //    {
-    //        //    string _connStr = "";
-    //        //    switch (_serv.ToLower())
-    //        //    {
-    //        //        case "ace": _connStr = Properties.Settings.Default.ACEConnectionString; break;
-    //        //        case "oms": _connStr = Properties.Settings.Default.OMSConnectionString; break;
-    //        //        case "global": _connStr = Properties.Settings.Default.GlobalConnectionString; break;
-    //        //    }
-    //        //    string connectionString = _connStr;
-    //        //    using (SqlConnection connection = new SqlConnection(connectionString))
-    //        //    {
-    //        //        SqlDataAdapter adapter = new SqlDataAdapter();
-
-    //        //        connection.Open();
-    //        //        using (SqlCommand command = new SqlCommand(query, connection))
-    //        //        {
-    //        //            adapter.SelectCommand = command;
-    //        //            adapter.Fill(dT);
-    //        //        }
-    //        //    }
-    //        }
-    //    catch (Exception ex)
-    //    {
-    //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-    //    }
-    //        return ExecuteQuery(query);
-        
-    //    //return dT;
-    //}
-    /// <summary>
-    /// Выполнение SQL запроса, возвращает dataTable
-    /// </summary>
-    /// <param name="query">запрос</param>
-    /// <param name="parameters">параметры</param>
-    /// <returns></returns>
-    public DataTable ExecuteQuery(string query, Dictionary<string, object> parameters = null)
-    {
-            var dt = new DataTable();
-            using (var connection = new SqlConnection(_connectionString))
-            {
-                connection.Open();
-                using (var command = new SqlCommand(query, connection))
-                {
-                    if (parameters != null)
-                    {
-                        foreach (var param in parameters)
-                        {
-                            command.Parameters.AddWithValue(param.Key, param.Value);
-                        }
-                    }
-                    using (var adapter = new SqlDataAdapter(command))
-                    {
-                        adapter.Fill(dt);
-                    }
-                }
-            }
-            return dt;
-    }
-
-    /// <summary>
-    /// Выполнение SQL запроса
-    /// </summary>
-    /// <param name="query">запрос</param>
-    /// <param name="parameters">параметры</param>
-    public void ExecuteNonQuery(string query, Dictionary<string, object> parameters = null)
-    {
-        using (var connection = new SqlConnection(_connectionString))
-        {
-                    SqlDataAdapter adapter = new SqlDataAdapter();
-            connection.Open();
-            using (var command = new SqlCommand(query, connection))
-            {
-                if (parameters != null)
-                {
-                    foreach (var param in parameters)
-                    {
-                        command.Parameters.AddWithValue(param.Key, param.Value);
-                    }
-                }
-                command.ExecuteNonQuery();
-            }
-        }
-    }
-}
-#endregion
-
 #region Logger
 public static class Logger
 {
@@ -734,9 +659,7 @@ public static class Logger
         }
             return dT;
     }
-========
->>>>>>>> main:class/Font.cs
-}
+    }
 
 // Класс для хранения информации об ошибке
 public class LogEntry

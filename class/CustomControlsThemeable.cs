@@ -218,6 +218,62 @@ namespace SewingProduction
             base.Dispose(disposing);
         }
     }
+    /// <summary>
+    /// Кастомный прозрачный группбокс с черной обводкой
+    /// </summary>
+    public class CustomGroupBox : GroupBox
+    {
+        private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
+        private int _borderThickness = 1;       // Толщина обводки по умолчанию
+
+        // Свойство для установки цвета обводки
+        public Color BorderColor
+        {
+            get { return _borderColor; }
+            set { _borderColor = value; Invalidate(); }
+        }
+
+        // Свойство для установки толщины обводки
+        public int BorderThickness
+        {
+            get { return _borderThickness; }
+            set { _borderThickness = value; Invalidate(); }
+        }
+
+        // Переопределение метода OnPaint для рисования обводки
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e); //рисуем всё что есть в дефолтном GroupBox
+            // Рисуем границу
+            using (Pen borderPen = new Pen(_borderColor, _borderThickness))
+            {
+                // Определение прямоугольника для обводки
+                var rect = new Rectangle(ClientRectangle.X, ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
+                rect.X += _borderThickness / 2;
+                rect.Y += _borderThickness / 2;
+
+                //e.Graphics.DrawRectangle(borderPen, rect);
+
+                // Замеряем размер текста
+                SizeF textSize = e.Graphics.MeasureString(Text, Font);
+                int textBottomY = (int)textSize.Height;
+                // рисуем границу
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + textBottomY, rect.X, rect.Y + rect.Height); //Левая полоса
+                e.Graphics.DrawLine(borderPen, rect.X + rect.Width, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + rect.Height); // Правая
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + textBottomY); // Верхняя
+                e.Graphics.DrawLine(borderPen, rect.X, rect.Y + rect.Height, rect.X + rect.Width, rect.Y + rect.Height); // Нижняя
+                //e.Graphics.DrawLine(borderPen, rect.X + (int)rect.Width / 2 + (int)textSize.Width / 2 + 5, rect.Y + textBottomY, rect.X + rect.Width, rect.Y + textBottomY);
+
+            }
+        }
+        public CustomGroupBox()
+        {
+            this.BackColor = Color.Transparent;
+            //this.ForeColor = Theme.TextBoxText;
+            //this.Font = Theme.DefaultFont;
+        }
+
+    }
 
     /// <summary>
     /// Кастомная форма с градиентным фоном
