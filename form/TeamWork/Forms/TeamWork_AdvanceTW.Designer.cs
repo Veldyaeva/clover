@@ -32,6 +32,20 @@ namespace SewingProduction.form
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.stackPanel2 = new DevExpress.Utils.Layout.StackPanel();
+            this.rasz = new SewingProduction.CustomButton();
+            this.customButton2 = new SewingProduction.CustomButton();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ModelTextBox = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.SecTimeTextBox = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.dateCreate = new System.Windows.Forms.DateTimePicker();
+            this.btnOK = new SewingProduction.CustomButton();
+            this.buffer = new SewingProduction.CustomButton();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.gridControl5 = new DevExpress.XtraGrid.GridControl();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -41,6 +55,7 @@ namespace SewingProduction.form
             this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -187,6 +202,10 @@ namespace SewingProduction.form
             this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn2,
             this.gridColumn34,
+            this.gridColumn30,
+            this.gridColumn31,
+            this.gridColumn32,
+            this.gridColumn33,
             this.gridColumn35,
             this.gridColumn36,
             this.gridColumn33,
@@ -198,6 +217,7 @@ namespace SewingProduction.form
             this.gridColumn38,
             this.colkod_podr1,
             this.colkod_proizv1,
+            this.colspec2,
             this.colkod_ob1});
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
@@ -206,6 +226,8 @@ namespace SewingProduction.form
             this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
             this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            //this.gridView5.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridView5_EditFormHidden);
+            //this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView5_InitNewRow);
             // 
             // gridColumn2
             // 
@@ -249,6 +271,14 @@ namespace SewingProduction.form
             this.gridColumn33.Name = "gridColumn33";
             this.gridColumn33.Visible = true;
             this.gridColumn33.VisibleIndex = 3;
+            // 
+            // gridColumn34
+            // 
+            this.gridColumn34.Caption = "annId";
+            this.gridColumn34.FieldName = "annId";
+            this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.Visible = true;
+            this.gridColumn34.VisibleIndex = 5;
             // 
             // gridColumn35
             // 
@@ -867,6 +897,9 @@ namespace SewingProduction.form
             this.Text = "TeamWork_AdvanceTW";
             this.Load += new System.EventHandler(this.TeamWork_AdvanceTW_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.stackPanel2)).EndInit();
+            this.stackPanel2.ResumeLayout(false);
+            this.stackPanel2.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -944,6 +977,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colsek_stra;
         private DevExpress.XtraGrid.Columns.GridColumn colannId6;
         private CustomButton btnOK;
+        private CustomButton rasz;
         private System.Windows.Forms.BindingSource normraskBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
         private DevExpress.XtraGrid.Columns.GridColumn colkod1;
@@ -974,6 +1008,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn28;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn29;
+        private CustomButton customButton2;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private CustomButton buffer;
         private System.Windows.Forms.SplitContainer splitContainer1;

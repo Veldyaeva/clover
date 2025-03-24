@@ -30,15 +30,19 @@ namespace SewingProduction.form
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customGridControl1 = new SewingProduction.CustomGridControl();
+            this.normoperBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -48,6 +52,7 @@ namespace SewingProduction.form
             this.proizv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.colkod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemResourcesComboBox1 = new DevExpress.XtraScheduler.UI.RepositoryItemResourcesComboBox();
@@ -58,6 +63,7 @@ namespace SewingProduction.form
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).BeginInit();
@@ -345,6 +351,7 @@ namespace SewingProduction.form
             this.Name = "NormOperNew";
             this.Load += new System.EventHandler(this.NormOperNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).EndInit();
@@ -380,6 +387,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn colobor;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_ob;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_proizv;
+        private System.Windows.Forms.BindingSource normoperBindingSource;
         private DevExpress.XtraGrid.Columns.GridColumn coltext_ob;
         private DevExpress.XtraGrid.Columns.GridColumn coltext_proizv;
         private DevExpress.XtraScheduler.UI.RepositoryItemResourcesComboBox repositoryItemResourcesComboBox1;

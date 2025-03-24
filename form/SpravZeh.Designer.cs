@@ -145,11 +145,14 @@
             // customButton1
             // 
             this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButton1.Btn = null;
             this.customButton1.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButton1.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButton1.FlatAppearance.BorderSize = 0;
             this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButton1.Font = new System.Drawing.Font("Arial", 10F);
@@ -165,11 +168,14 @@
             // customButton2
             // 
             this.customButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.customButton2.Btn = null;
             this.customButton2.ComponentBackColor = System.Drawing.Color.Empty;
             this.customButton2.ComponentFontColor = System.Drawing.Color.Empty;
             this.customButton2.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButton2.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.customButton2.FlatAppearance.BorderSize = 0;
             this.customButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButton2.Font = new System.Drawing.Font("Arial", 10F);

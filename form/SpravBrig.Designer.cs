@@ -349,11 +349,14 @@
             // simpleButtonAdd
             // 
             this.simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.simpleButtonAdd.Btn = null;
             this.simpleButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.simpleButtonAdd.FlatAppearance.BorderSize = 0;
             this.simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
@@ -369,11 +372,14 @@
             // simpleButtonRed
             // 
             this.simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+<<<<<<< HEAD
             this.simpleButtonRed.Btn = null;
             this.simpleButtonRed.ComponentBackColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentFontColor = System.Drawing.Color.Empty;
             this.simpleButtonRed.ComponentSize = new System.Drawing.Size(0, 0);
             this.simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
+=======
+>>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
             this.simpleButtonRed.FlatAppearance.BorderSize = 0;
             this.simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);

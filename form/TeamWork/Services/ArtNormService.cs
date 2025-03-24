@@ -449,7 +449,7 @@ OUTPUT INSERTED.annID
                     Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
                     Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
                     Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0
-                };
+    };
                 result.Add(item);
             }
             
@@ -477,6 +477,7 @@ OUTPUT INSERTED.annID
             }
             return string.Empty;
         }
+
 
         //public async Task<List<ArtNormN>> GetAll()
         //{

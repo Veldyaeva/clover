@@ -171,16 +171,16 @@ namespace SewingProduction.form
 
             try
             {
-                using (var selectionForm = new NormOperNew())
-                {
+            using (var selectionForm = new NormOperNew())
+            {
                     DialogResult result = selectionForm.ShowDialog();
                     
                     if (result == DialogResult.OK)
+                {
+                    var selectedData = selectionForm.SelectedRowData;
+                    if (selectedData != null)
                     {
-                        var selectedData = selectionForm.SelectedRowData;
-                        if (selectedData != null)
-                        {
-                            // Заполняем значения в текущей новой строке
+                        // Заполняем значения в текущей новой строке
                             gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
                             gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.KodO);
                             gridView.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
@@ -193,20 +193,20 @@ namespace SewingProduction.form
                             gridView.SetRowCellValue(e.RowHandle, "Sek", selectedData.Sek);
                             gridView.SetRowCellValue(e.RowHandle, "KodPodr", selectedData.KodPodr);
                             gridView.SetRowCellValue(e.RowHandle, "KodOb", selectedData.KodOb);
-                        }
-                        else
-                        {
-                            // Если данные не выбраны, удаляем строку
-                            gridView.DeleteRow(e.RowHandle);
-                        }
                     }
                     else
                     {
+                        // Если данные не выбраны, удаляем строку
+                            gridView.DeleteRow(e.RowHandle);
+                    }
+                }
+                else
+                {
                         // Если диалог закрыт не через OK, удаляем строку
                         gridView.DeleteRow(e.RowHandle);
                     }
                 }
-            }
+                }
             finally
             {
                 // Восстанавливаем настройки редактирования
@@ -292,8 +292,8 @@ namespace SewingProduction.form
                             catch (Exception ex)
                             {
                                 await _logger.LogErrorAsync(ex, "Ошибка при сохранении NormRask в БД");
-                            }
-                        }
+            }
+        }
 
                         // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);

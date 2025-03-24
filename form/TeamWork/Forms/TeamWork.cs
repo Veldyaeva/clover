@@ -180,6 +180,9 @@ namespace SewingProduction.Forms
             }
         }
 
+        
+
+
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
         /// </summary>
@@ -305,7 +308,7 @@ namespace SewingProduction.Forms
                 {
                     var property = typeof(T).GetProperty(column.ColumnName);
                     if (property != null && row[column] != DBNull.Value)
-                    {
+            {
                         property.SetValue(obj, Convert.ChangeType(row[column], property.PropertyType));
                     }
                 }
@@ -350,6 +353,7 @@ namespace SewingProduction.Forms
                 designerTextBox.Text = designerName;
 
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+                //UpdateRelatedData(annId);
                 await LoadRelatedData(annId);
 
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "kod", "");
@@ -622,7 +626,7 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при поиске в SearchButton_Click");
                 MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+            }
 
         private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
@@ -715,7 +719,7 @@ namespace SewingProduction.Forms
                 // Создаем фильтры на основе состояния чекбоксов
                 CriteriaOperator statusCriteria = null;
                 GroupOperator statusGroup = null;
-                
+
                 // Создаем фильтр по статусу
                 if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
                 {
@@ -823,7 +827,7 @@ namespace SewingProduction.Forms
                 {
                     // Если нет текста поиска, просто обновляем привязку поля
                     filterTable();
-                }
+            }
             }
             catch (Exception ex)
             {
@@ -1080,8 +1084,8 @@ namespace SewingProduction.Forms
                                 if (row != null)
                                 {
                                     row.IsChecked = false;
-                                }
-                            }
+                }
+            }
                             // Затем отмечаем только текущую строку
                             currentRow.IsChecked = true;
                         }
@@ -1425,13 +1429,14 @@ namespace SewingProduction.Forms
                         await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                         MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    }
+                    ;
+                }
 
                     // Set the data source for the grid control
                     try
                     {
                         customGridControl1.DataSource = artDataList; // This should work if types match
-                    }
+            }
                     catch(Exception ex) { MessageBox.Show("Ошибка приведения artDataList.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
                 }
                 else
@@ -1633,7 +1638,7 @@ namespace SewingProduction.Forms
             if (e.Column.FieldName == "IsChecked")
             {
                 SafeInvoke(gridView7.GridControl, () =>
-                {
+            {
                     var view = sender as GridView;
                     if (view == null) return;
 
@@ -1641,22 +1646,22 @@ namespace SewingProduction.Forms
                     if (currentRow == null) return;
 
                     bool isChecked = (bool)e.Value;
-                    
+
                     // Если текущая строка отмечается
                     if (isChecked)
-                    {
+                        {
                         // Сначала снимаем все отметки
                         for (int i = 0; i < view.RowCount; i++)
-                        {
+                            {
                             var row = view.GetRow(i) as MyDataART;
                             if (row != null)
-                            {
+                                {
                                 row.IsChecked = false;
-                            }
-                        }
+                    }
+                }
                         // Затем отмечаем только текущую строку
                         currentRow.IsChecked = true;
-                    }
+            }
 
                     view.RefreshData();
                 });

@@ -45,6 +45,8 @@ namespace SewingProduction.Forms
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork));
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.repositoryItemButtonEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
+            this.aCEDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.aCEDataSet = new SewingProduction.ACE_backupDataSet();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.TabPage1 = new DevExpress.XtraTab.XtraTabPage();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -81,6 +83,7 @@ namespace SewingProduction.Forms
             this.coldata_obn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyazo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -93,6 +96,8 @@ namespace SewingProduction.Forms
             this.coldiz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colconstr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colstatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colarh = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemButtonEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             this.customButton12 = new SewingProduction.CustomButton();
             this.filterTextBox1 = new SewingProduction.CustomTextBox();
@@ -100,6 +105,29 @@ namespace SewingProduction.Forms
             this.articul = new System.Windows.Forms.RadioButton();
             this.kode = new System.Windows.Forms.RadioButton();
             this.group = new System.Windows.Forms.RadioButton();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.SortBox = new SewingProduction.CustomCheckBox();
+            this.customCheckBox3 = new SewingProduction.CustomCheckBox();
+            this.customCheckBox2 = new SewingProduction.CustomCheckBox();
+            this.customCheckBox1 = new SewingProduction.CustomCheckBox();
+            this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
+            this.customButton6 = new SewingProduction.CustomButton();
+            this.customButton9 = new SewingProduction.CustomButton();
+            this.customButton8 = new SewingProduction.CustomButton();
+            this.customButton10 = new SewingProduction.CustomButton();
+            this.customButton5 = new SewingProduction.CustomButton();
+            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            this.label6 = new SewingProduction.CustomLabel();
+            this.customComboBox2 = new SewingProduction.CustomComboBox();
+            this.fioBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.customComboBox1 = new SewingProduction.CustomComboBox();
+            this.fioBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.label7 = new SewingProduction.CustomLabel();
+            this.aproovmentBtn = new SewingProduction.CustomButton();
+            this.gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
+            this.gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.colfio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltab = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -678,8 +706,8 @@ namespace SewingProduction.Forms
             this.panel2.Controls.Add(this.articul);
             this.panel2.Controls.Add(this.kode);
             this.panel2.Controls.Add(this.group);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(-20, 41);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(194, 151);
             this.panel2.TabIndex = 11;
@@ -846,6 +874,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyazo
             // 
+            this.colsek_vyazo.Caption = "сек.отп.";
             this.colsek_vyazo.FieldName = "SekVyazo";
             this.colsek_vyazo.Name = "colsek_vyazo";
             this.colsek_vyazo.Visible = true;
@@ -853,6 +882,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyaz5
             // 
+            this.colsek_vyaz5.Caption = "класс5";
             this.colsek_vyaz5.FieldName = "SekVyaz5";
             this.colsek_vyaz5.Name = "colsek_vyaz5";
             this.colsek_vyaz5.Visible = true;
@@ -860,7 +890,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyaz7
             // 
-            this.colsek_vyaz7.Caption = "шв. оборуд 7";
+            this.colsek_vyaz7.Caption = "класс 7";
             this.colsek_vyaz7.FieldName = "SekVyaz7";
             this.colsek_vyaz7.Name = "colsek_vyaz7";
             this.colsek_vyaz7.Visible = true;
@@ -868,7 +898,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyaz12
             // 
-            this.colsek_vyaz12.Caption = "шв. оборуд 12";
+            this.colsek_vyaz12.Caption = "класс 12";
             this.colsek_vyaz12.FieldName = "SekVyaz12";
             this.colsek_vyaz12.Name = "colsek_vyaz12";
             this.colsek_vyaz12.Visible = true;
@@ -876,7 +906,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyaz10
             // 
-            this.colsek_vyaz10.Caption = "шв. оборуд 10";
+            this.colsek_vyaz10.Caption = "класс 10";
             this.colsek_vyaz10.FieldName = "SekVyaz10";
             this.colsek_vyaz10.Name = "colsek_vyaz10";
             this.colsek_vyaz10.Visible = true;
@@ -884,7 +914,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_vyaz6
             // 
-            this.colsek_vyaz6.Caption = "шв. оборуд 6";
+            this.colsek_vyaz6.Caption = "класс. 6";
             this.colsek_vyaz6.FieldName = "SekVyaz6";
             this.colsek_vyaz6.Name = "colsek_vyaz6";
             this.colsek_vyaz6.Visible = true;
@@ -892,6 +922,7 @@ namespace SewingProduction.Forms
             // 
             // colsek_kr
             // 
+            this.colsek_kr.Caption = "кручение";
             this.colsek_kr.FieldName = "SekKr";
             this.colsek_kr.Name = "colsek_kr";
             this.colsek_kr.Visible = true;
@@ -934,12 +965,26 @@ namespace SewingProduction.Forms
             // 
             this.colannID.FieldName = "AnnID";
             this.colannID.Name = "colannID";
+            this.colannID.Visible = true;
+            this.colannID.VisibleIndex = 22;
+            // 
+            // colstatus
+            // 
+            this.colstatus.FieldName = "status";
+            this.colstatus.Name = "colstatus";
+            // 
+            // colarh
+            // 
+            this.colarh.FieldName = "arh";
+            this.colarh.Name = "colarh";
+            this.colarh.Visible = true;
+            this.colarh.VisibleIndex = 23;
             // 
             // repositoryItemButtonEdit1
             // 
             this.repositoryItemButtonEdit1.AutoHeight = false;
             this.repositoryItemButtonEdit1.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "434", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Ellipsis, "434", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.repositoryItemButtonEdit1.ButtonsStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             this.repositoryItemButtonEdit1.Name = "repositoryItemButtonEdit1";
             // 
