@@ -806,7 +806,18 @@ namespace SewingProduction
         private void button10_Click(object sender, EventArgs e)
         {
             FurnUpakDeliveryInfo FDI = new FurnUpakDeliveryInfo(fkodfd.Substring(0,12));
-            FDI.Show();
+            DialogResult result = FDI.ShowDialog() ;
+            // Обработка результата, возвращенного модальной формой
+            if (result == DialogResult.OK)
+            {
+                // Действия при успешном завершении работы модальной формы
+                //MessageBox.Show("OK");
+            }
+            else
+            {
+                // Действия при отмене или другом результате
+                //MessageBox.Show("Cancel");
+            }
         }
         private void btnFullKKPrint_Click(object sender, EventArgs e)
         {
@@ -858,6 +869,12 @@ namespace SewingProduction
             gcProizvCombIzdSP.ShowPrintPreview();
 
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
             
