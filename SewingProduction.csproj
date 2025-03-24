@@ -256,6 +256,28 @@
     <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.Designer.cs">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork\Helpers\CommonFunctions.cs" />
+    <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
+    <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
+    <Compile Include="form\TeamWork\Models\MyDataART.cs" />
+    <Compile Include="form\TeamWork\TeamWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\TeamWork.Designer.cs">
+      <DependentUpon>TeamWork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\TeamWork_AdvanceTW.Designer.cs">
+      <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="form\TeamWork\TeamWork_ArchAndCopy.Designer.cs">
       <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </Compile>
