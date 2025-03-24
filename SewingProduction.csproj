@@ -146,12 +146,9 @@
     <Compile Include="class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="class\ServiceBroker.cs" />
-    <Compile Include="form\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <Compile Include="form\Settings.cs" />
+    <Compile Include="form\Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="form\TeamWork\DbContext\AppDbContext.cs" />
     <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
@@ -171,10 +168,56 @@
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\Helpers\NormRaskManager.cs" />
-    <Compile Include="form\TeamWork\Helpers\NormRaszManager.cs" />
-    <Compile Include="form\TeamWork\Helpers\AnnManager.cs" />
-    <Compile Include="form\TeamWork\Helpers\ArtNormController.cs" />
+    <Compile Include="form\UserDistribution\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravBrig.Designer.cs">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\PlanZagrBrig.Designer.cs">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravForAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravForAll.Designer.cs">
+      <DependentUpon>SpravForAll.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravOborud.Designer.cs">
+      <DependentUpon>SpravOborud.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\SpravZeh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\SpravZeh.Designer.cs">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
+    <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
@@ -202,9 +245,6 @@
     <Compile Include="form\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\editFio.Designer.cs">
-      <DependentUpon>editFio.cs</DependentUpon>
-    </Compile>    
     <Compile Include="form\TeamWork\Forms\TeamWork.Designer.cs">
       <DependentUpon>TeamWork.cs</DependentUpon>
     </Compile>
@@ -246,12 +286,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="report\PrintFullKKReport.Designer.cs">
-      <DependentUpon>PrintFullKKReport.cs</DependentUpon>
+    <Compile Include="SplashScreen.cs">
+      <SubType>Form</SubType>
     </Compile>
-    <Compile Include="report\PrintFurnUpakZayavReport.cs">
-      <SubType>Component</SubType>
+    <Compile Include="SplashScreen.Designer.cs">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </Compile>
-    <Compile Include="report\PrintFurnUpakZayavReport.Designer.cs">
       <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
     </Compile>
     <Compile Include="report\subreport\PrintTakingCardReport.cs">
@@ -308,41 +348,57 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="report\subreport\PrintPachListReport.Designer.cs">
-      <DependentUpon>PrintPachListReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="report\subreport\PrintGroupNROborudReport.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="report\subreport\PrintGroupNROborudReport.Designer.cs">
-      <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\usercontrol\FurnitZayavView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
-      <DependentUpon>FurnitZayavView.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="form\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+      <DependentUpon>art_new2024.cs</DependentUpon>
+    <EmbeddedResource Include="form\OborudBrig.resx">
+      <DependentUpon>OborudBrig.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\editFio.resx">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
       <DependentUpon>NormOperNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
-      <DependentUpon>NormRaskrNew.cs</DependentUpon>
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork.resx">
-      <DependentUpon>TeamWork.cs</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
-      <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+    <EmbeddedResource Include="form\SplashScreen.resx">
+      <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.resx">
-      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
+    <EmbeddedResource Include="form\SpravBrig.resx">
+      <DependentUpon>SpravBrig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
+    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravForAll.resx">
+      <DependentUpon>SpravForAll.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravZeh.resx">
+      <DependentUpon>SpravZeh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\SpravOborud.resx">
+      <DependentUpon>SpravOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
