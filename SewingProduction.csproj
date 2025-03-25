@@ -219,6 +219,7 @@
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,7 +269,6 @@
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
-    <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />

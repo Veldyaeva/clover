@@ -98,18 +98,18 @@ namespace SewingProduction.Forms
             this.articul = new System.Windows.Forms.RadioButton();
             this.kode = new System.Windows.Forms.RadioButton();
             this.group = new System.Windows.Forms.RadioButton();
-            this.panel5 = new System.Windows.Forms.Panel();
-            this.SortBox = new SewingProduction.CustomCheckBox();
-            this.customButton6 = new SewingProduction.CustomButton();
-            this.customButton9 = new SewingProduction.CustomButton();
-            this.customButton8 = new SewingProduction.CustomButton();
-            this.customButton10 = new SewingProduction.CustomButton();
-            this.customButton5 = new SewingProduction.CustomButton();
-            this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            this.label6 = new SewingProduction.CustomLabel();
-            this.customComboBox1 = new SewingProduction.CustomComboBox();
-            this.label7 = new SewingProduction.CustomLabel();
-            this.aproovmentBtn = new SewingProduction.CustomButton();
+            //this.panel5 = new System.Windows.Forms.Panel();
+            //this.SortBox = new SewingProduction.CustomCheckBox();
+            //this.customButton6 = new SewingProduction.CustomButton();
+            //this.customButton9 = new SewingProduction.CustomButton();
+            //this.customButton8 = new SewingProduction.CustomButton();
+            //this.customButton10 = new SewingProduction.CustomButton();
+            //this.customButton5 = new SewingProduction.CustomButton();
+            //this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
+            //this.label6 = new SewingProduction.CustomLabel();
+            //this.customComboBox1 = new SewingProduction.CustomComboBox();
+            //this.label7 = new SewingProduction.CustomLabel();
+            //this.aproovmentBtn = new SewingProduction.CustomButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -182,7 +182,6 @@ namespace SewingProduction.Forms
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             this.customGridControl3 = new SewingProduction.CustomGridControl();
-            this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln3 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -242,14 +241,15 @@ namespace SewingProduction.Forms
             this.customCancelButton1 = new SewingProduction.CustomCancelButton();
             this.customComboBox1 = new SewingProduction.CustomComboBox();
             this.customButton1 = new SewingProduction.CustomButton();
-            this.customGridControl4 = new SewingProduction.CustomGridControl();
+            this.gridControlPreArch = new SewingProduction.CustomGridControl();
             this.artnormnBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.gridView9 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewPreArch = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.artnormnBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.artnormnBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
@@ -308,7 +308,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
             this.tablePanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).BeginInit();
@@ -345,10 +344,11 @@ namespace SewingProduction.Forms
             this.flyoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).BeginInit();
             this.flyoutPanelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlPreArch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPreArch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource2)).BeginInit();
@@ -1114,6 +1114,7 @@ namespace SewingProduction.Forms
             // 
             // customGridControl5
             // 
+            this.customGridControl5.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControl5.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControl5.Font = new System.Drawing.Font("Arial", 10F);
@@ -1752,6 +1753,7 @@ namespace SewingProduction.Forms
             // 
             // customGridControl3
             // 
+            this.customGridControl3.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.tablePanel2.SetColumn(this.customGridControl3, 3);
             this.customGridControl3.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2025,6 +2027,7 @@ namespace SewingProduction.Forms
             // 
             // customGridControl2
             // 
+            this.customGridControl2.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControl2.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControl2.Font = new System.Drawing.Font("Arial", 10F);
@@ -2172,6 +2175,7 @@ namespace SewingProduction.Forms
             // 
             // customGridControl6
             // 
+            this.customGridControl6.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControl6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControl6.Font = new System.Drawing.Font("Arial", 10F);
             this.customGridControl6.Location = new System.Drawing.Point(0, 0);
@@ -2191,6 +2195,7 @@ namespace SewingProduction.Forms
             // 
             // customGridControl1
             // 
+            this.customGridControl1.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.tablePanel2.SetColumn(this.customGridControl1, 0);
             this.customGridControl1.Cursor = System.Windows.Forms.Cursors.Default;
             this.customGridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2356,7 +2361,7 @@ namespace SewingProduction.Forms
             // splitContainerControl2.Panel2
             // 
             this.splitContainerControl2.Panel2.Controls.Add(this.flyoutPanel1);
-            this.splitContainerControl2.Panel2.Controls.Add(this.customGridControl4);
+            this.splitContainerControl2.Panel2.Controls.Add(this.gridControlPreArch);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(1514, 786);
             this.splitContainerControl2.SplitterPosition = 122;
@@ -2432,35 +2437,36 @@ namespace SewingProduction.Forms
             this.customButton1.Text = "customButton1";
             this.customButton1.UseVisualStyleBackColor = false;
             // 
-            // customGridControl4
+            // gridControlPreArch
             // 
-            this.customGridControl4.Cursor = System.Windows.Forms.Cursors.Default;
-            this.customGridControl4.DataSource = this.artnormnBindingSource1;
-            this.customGridControl4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.customGridControl4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customGridControl4.Location = new System.Drawing.Point(0, 0);
-            this.customGridControl4.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            this.customGridControl4.MainView = this.gridView9;
-            this.customGridControl4.Name = "customGridControl4";
-            this.customGridControl4.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.gridControlPreArch.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.gridControlPreArch.Cursor = System.Windows.Forms.Cursors.Default;
+            this.gridControlPreArch.DataSource = this.artnormnBindingSource1;
+            this.gridControlPreArch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.gridControlPreArch.Font = new System.Drawing.Font("Arial", 10F);
+            this.gridControlPreArch.Location = new System.Drawing.Point(0, 0);
+            this.gridControlPreArch.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+            this.gridControlPreArch.MainView = this.gridViewPreArch;
+            this.gridControlPreArch.Name = "gridControlPreArch";
+            this.gridControlPreArch.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit5});
-            this.customGridControl4.Size = new System.Drawing.Size(604, 786);
-            this.customGridControl4.TabIndex = 0;
-            this.customGridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView9});
+            this.gridControlPreArch.Size = new System.Drawing.Size(604, 786);
+            this.gridControlPreArch.TabIndex = 0;
+            this.gridControlPreArch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewPreArch});
             // 
-            // gridView9
+            // gridViewPreArch
             // 
-            this.gridView9.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-            this.gridView9.Appearance.SelectedRow.Options.UseBackColor = true;
-            this.gridView9.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewPreArch.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+            this.gridViewPreArch.Appearance.SelectedRow.Options.UseBackColor = true;
+            this.gridViewPreArch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn14,
             this.gridColumn16,
             this.gridColumn15,
             this.gridColumn17});
-            this.gridView9.GridControl = this.customGridControl4;
-            this.gridView9.Name = "gridView9";
-            this.gridView9.OptionsView.RowAutoHeight = true;
+            this.gridViewPreArch.GridControl = this.gridControlPreArch;
+            this.gridViewPreArch.Name = "gridViewPreArch";
+            this.gridViewPreArch.OptionsView.RowAutoHeight = true;
             // 
             // gridColumn14
             // 
@@ -2574,7 +2580,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl5)).EndInit();
@@ -2614,10 +2619,11 @@ namespace SewingProduction.Forms
             this.flyoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).EndInit();
             this.flyoutPanelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlPreArch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPreArch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource2)).EndInit();
@@ -2802,12 +2808,12 @@ namespace SewingProduction.Forms
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
         private CustomButton customButton2;
-        private CustomGridControl customGridControl4;
+        private CustomGridControl gridControlPreArch;
         private BindingSource sparticulBindingSource;
         private BindingSource sparticulBindingSource1;
         private ToolStrip fillBy1ToolStrip;
         private ToolStripButton fillBy1ToolStripButton;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView9;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPreArch;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;

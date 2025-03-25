@@ -1,120 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.ComponentModel;
-//using DevExpress.XtraGrid;
-//using System.Data;
-//using System.Drawing;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
-//using System.Windows.Forms;
-//using DevExpress.XtraVerticalGrid;
-//using SewingProduction.Helpers;
-//using SewingProduction.Services;
-//using DevExpress.XtraGrid.Views.Grid;
-
-//namespace SewingProduction.form
-//{
-//    public partial class NormOperNew : CustomForm
-//    {
-//        private readonly DatabaseHelper _dbHelper;
-//        private readonly ArtNormService _artNormService;
-//        public
-//        SelectedRowData { get; private set; }
-
-//        public NormOperNew()
-//        {
-//            InitializeComponent();
-//            _dbHelper = new DatabaseHelper("ace");
-//            _artNormService = new ArtNormService(_dbHelper);
-//            UpdateTheme(this);
-//        }
-
-//        private void NormOperNew_Load(object sender, EventArgs e)
-//        {
-//            // TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet1.norm_oper". При необходимости она может быть перемещена или удалена.
-//            this.norm_operTableAdapter.Fill(this.aCE_backupDataSet.norm_oper);
-//            LoadData();
-
-//        }
-
-//        private void LoadData()
-//        {
-//            // Загружаем данные из базы
-//            DataTable data = _artNormService.GetNormOper(0);
-
-//            if (data != null && data.Rows.Count > 0)
-//            {
-//                // Заполняем таблицу данными из БД
-//                normoperBindingSource.DataSource = data;
-//                customGridControl1.DataSource = normoperBindingSource;
-//            }
-//            else
-//            {
-//                MessageBox.Show("Данные отсутствуют", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-//            }
-//        }
-
-//        private void customOkButton1_Click(object sender, EventArgs e)
-//        {
-//            //GridView view = customGridControl1.MainView as GridView;
-//            GridView view = gridView1;
-//            if (view == null || view.FocusedRowHandle < 0) return;
-
-//            SelectedRowData = new MyData
-//            {
-//                Kod_o = view.GetRowCellValue(view.FocusedRowHandle, "kod_o").ToString(),
-//                Text = view.GetRowCellValue(view.FocusedRowHandle, "text").ToString(),
-//                Spec = view.GetRowCellValue(view.FocusedRowHandle, "spec").ToString(),
-//                Razryad = view.GetRowCellValue(view.FocusedRowHandle, "razryd").ToString(),
-//                Obor = view.GetRowCellValue(view.FocusedRowHandle, "obor").ToString(),
-//                Kod_proizv = view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv").ToString()
-//            };
-
-//            this.DialogResult = DialogResult.OK;
-//            this.Close();
-
-//        }
-
-//        private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
-//        {
-//            if (!(sender is DevExpress.XtraEditors.RadioGroup radioGroup)) return;
-
-//            string filterString = ""; // Строка фильтра
-
-//            switch (radioGroup.SelectedIndex)
-//            {
-//                case 1: // вязальное
-//                    filterString = "[kod_proizv] = 1";
-//                    break;
-//                case 2: // швейное
-//                    filterString = "[kod_proizv] = 0";
-//                    break;
-//                case 3: // носки
-//                    filterString = "[kod_proizv] = 3";
-//                    break;
-//                default: // всё
-//                    filterString = "";
-//                    break;
-//            }
-
-//            // Применяем фильтр к GridView
-//            gridView1.ActiveFilterString = filterString;
-//        }
-
-//    }
-//    public class MyData
-//    {
-//        public string Kod_o { get; set; }
-//        public string Text { get; set; }
-//        public string Spec { get; set; }
-//        public string Razryad { get; set; }
-//        public string Obor { get; set; }
-//        public string Kod_proizv { get; set; }
-//    }
-
-//}
-using System;
+﻿using System;
 using System.Data;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
@@ -124,6 +8,7 @@ using SewingProduction.Services;
 using SewingProduction.Models;
 using System.IO;
 using DevExpress.XtraGrid.Views.Base;
+using System.Threading.Tasks;
 
 namespace SewingProduction.form
 {
@@ -143,11 +28,9 @@ namespace SewingProduction.form
             _artNormService = new ArtNormService(_dbHelper);
             _annId = annId;
             ThemeManager.UpdateTheme(this);
-
-
         }
 
-        private void NormOperNew_Load(object sender, EventArgs e)
+        private async void NormOperNew_Load(object sender, EventArgs e)
         {
             try
             {
@@ -157,8 +40,7 @@ namespace SewingProduction.form
             catch (ConstraintException ex)
             {
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                // Логируем подробности ошибки
+                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных}");
             }
         }
         private void NormOperNew_FormClosing(object sender, FormClosingEventArgs e)
@@ -226,15 +108,16 @@ namespace SewingProduction.form
                     Kod_ob = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_ob")),
                     Kod_podr = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_podr")),
                     Kod_proizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
-                    
+
 
                     TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
                     TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
                     TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
                 };
                 try
-                {// await _artNormService.InsertNormRaszAsync(SelectedRowData);
-                  }
+                {
+                    await _artNormService.InsertNormRaszAsync(SelectedRowData);
+                }
                 catch { }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -283,7 +166,7 @@ namespace SewingProduction.form
             }
         }
     }
-    
+
     public class MyData
     {
         public string Kod_o { get; set; }
