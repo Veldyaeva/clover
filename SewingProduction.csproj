@@ -216,8 +216,6 @@
     <Compile Include="form\SpravZeh.Designer.cs">
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
-    <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
@@ -286,12 +284,12 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="report\PrintFullKKReport.Designer.cs">
-    <Compile Include="SplashScreen.cs">
-      <SubType>Form</SubType>
+      <DependentUpon>PrintFullKKReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="SplashScreen.Designer.cs">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
+    <Compile Include="report\PrintFurnUpakZayavReport.cs">
+      <SubType>Component</SubType>
     </Compile>
+    <Compile Include="report\PrintFurnUpakZayavReport.Designer.cs">
       <DependentUpon>PrintFurnUpakZayavReport.cs</DependentUpon>
     </Compile>
     <Compile Include="report\subreport\PrintTakingCardReport.cs">
@@ -348,9 +346,22 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="report\subreport\PrintPachListReport.Designer.cs">
+      <DependentUpon>PrintPachListReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\subreport\PrintGroupNROborudReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\subreport\PrintGroupNROborudReport.Designer.cs">
+      <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <EmbeddedResource Include="form\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
-      <DependentUpon>art_new2024.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -370,18 +381,12 @@
     <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
       <DependentUpon>NormOperNew.cs</DependentUpon>
     </EmbeddedResource>
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\SplashScreen.resx">
       <DependentUpon>SplashScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
     <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
@@ -507,8 +512,7 @@
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />
-  </ItemGroup>
-  <ItemGroup />
+ </ItemGroup>  
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
