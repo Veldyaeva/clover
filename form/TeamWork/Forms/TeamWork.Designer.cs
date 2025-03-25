@@ -2758,7 +2758,7 @@ namespace SewingProduction.Forms
         private CustomCheckBox actualCheckBox1;
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
         private DevExpress.XtraGrid.Columns.GridColumn coln3;
-        private SplitContainerControl splitContainerControl2;
+        private new DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
@@ -2896,7 +2896,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Views.Grid.GridView gridView13;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView14;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView15;
-        private SplitContainerControl splitContainerControl1;
+        private new DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
         private DevExpress.Utils.FlyoutPanel flyoutPanel1;
         private DevExpress.Utils.FlyoutPanelControl flyoutPanelControl1;
         private CustomCancelButton customCancelButton1;

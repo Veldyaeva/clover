@@ -26,6 +26,7 @@ using System.Drawing;
 using DevExpress.XtraCharts;
 using SewingProduction.Interfaces;
 using System.IO;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 
 namespace SewingProduction.Forms
@@ -37,6 +38,7 @@ namespace SewingProduction.Forms
         private int selectedRowHandle = -1;
         private readonly ILogger _logger =new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
+        private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private int bufferWorkDivision;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
@@ -80,7 +82,7 @@ namespace SewingProduction.Forms
         {
             try
             {
-                // Сохраняем настройки для всех гридов при закрытии формы
+                // Save grid settings
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
@@ -93,10 +95,15 @@ namespace SewingProduction.Forms
                 _gridHelper.SaveGridViewSettings(gridView10, "gridView10Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView11, "gridView11Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView12, "gridView12Layout.xml");
+
+                // Save split container settings
+                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl1, "splitContainer1Layout.xml");
+                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl3, "splitContainer3Layout.xml");
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork");
+                _logger.LogErrorAsync(ex, "Error in TeamWork_FormClosing");
             }
         }
 
@@ -104,23 +111,35 @@ namespace SewingProduction.Forms
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
-            // Загружаем настройки для всех гридов
-            _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-            _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
+            try
+            {
+                // Load split container settings
+                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl1, "splitContainer1Layout.xml");
+                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl3, "splitContainer3Layout.xml");
+
+                // Загружаем настройки для всех гридов
+                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView9, "gridView9Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
 
 
-            await LoadWorkDivisions();
-            await CurrentWorks_Load();
+                await LoadWorkDivisions();
+                await CurrentWorks_Load();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Error in TeamWorkForm_Load");
+            }
         }
 
         /// <summary>
@@ -1151,7 +1170,9 @@ namespace SewingProduction.Forms
             try
             {
                 bufferWorkDivision = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group")}, модель {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod")}, артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul")}";
+                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group").ToString().TrimEnd(' ')}, \n\r" +
+                    $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')}, \n\r" +
+                    $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
             }
             catch
             {
@@ -1213,7 +1234,8 @@ namespace SewingProduction.Forms
             // Обновляем ID в объекте и загружаем данные заново
             newItem.AnnID = newId;
             //LoadData(); // Загружаем актуальные данные
-            _bindingList.Add(newItem);
+            BindingList<ArtNormN> newBindingList = (BindingList<ArtNormN>)ANNgridControl.DataSource;
+            newBindingList.Add(newItem);
             ANNgridControl.RefreshDataSource();
             // Ищем строку по `annID` в `GridView`
             int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);//добавили строку в ANN

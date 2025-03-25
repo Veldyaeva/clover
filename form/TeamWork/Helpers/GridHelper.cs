@@ -163,29 +163,32 @@ namespace SewingProduction.Helpers
         {
             try
             {
-                string appPath = Application.StartupPath;
+                string appPath = System.Windows.Forms.Application.StartupPath;
                 string settingsPath = Path.Combine(appPath, "Settings");
 
-                // Создаем директорию, если она не существует
+                // Create directory if it doesn't exist
                 if (!Directory.Exists(settingsPath))
                     Directory.CreateDirectory(settingsPath);
 
                 string fullPath = Path.Combine(settingsPath, fileName);
 
-                // Создаем XML документ только с информацией о ширине колонок
+                // Create XML document with column settings
                 using (XmlWriter writer = XmlWriter.Create(fullPath))
                 {
                     writer.WriteStartDocument();
                     writer.WriteStartElement("GridViewLayout");
                     
-                    // Записываем ширину каждой колонки
+                    writer.WriteStartElement("Columns");
                     foreach (GridColumn column in gridView.Columns)
                     {
                         writer.WriteStartElement("Column");
-                        writer.WriteAttributeString("Name", column.Name);
+                        writer.WriteAttributeString("FieldName", column.FieldName);
                         writer.WriteAttributeString("Width", column.Width.ToString());
+                        writer.WriteAttributeString("VisibleIndex", column.VisibleIndex.ToString());
+                        writer.WriteAttributeString("Visible", column.Visible.ToString());
                         writer.WriteEndElement(); // Column
                     }
+                    writer.WriteEndElement(); // Columns
                     
                     writer.WriteEndElement(); // GridViewLayout
                     writer.WriteEndDocument();
@@ -193,7 +196,7 @@ namespace SewingProduction.Helpers
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
+                _logger.LogErrorAsync(ex, "Error saving grid view settings");
             }
         }
 
@@ -206,39 +209,39 @@ namespace SewingProduction.Helpers
             }
         }
 
-        public void LoadGridViewSettings(GridView view, string fileName)
+        public void LoadGridViewSettings(GridView gridView, string fileName)
         {
             try
             {
-                string appPath = Application.StartupPath;
+                string appPath = System.Windows.Forms.Application.StartupPath;
                 string settingsPath = Path.Combine(appPath, "Settings");
                 string fullPath = Path.Combine(settingsPath, fileName);
 
-                if (File.Exists(fullPath))
+                if (!File.Exists(fullPath))
+                    return;
+
+                using (XmlReader reader = XmlReader.Create(fullPath))
                 {
-                    using (XmlReader reader = XmlReader.Create(fullPath))
+                    while (reader.Read())
                     {
-                        Dictionary<string, int> columnWidths = new Dictionary<string, int>();
-                        
-                        // Чтение XML и извлечение информации о ширине колонок
-                        while (reader.Read())
+                        if (reader.NodeType == XmlNodeType.Element && reader.Name == "Column")
                         {
-                            if (reader.NodeType == XmlNodeType.Element && reader.Name == "Column")
+                            string fieldName = reader.GetAttribute("FieldName");
+                            string widthStr = reader.GetAttribute("Width");
+                            string visibleIndexStr = reader.GetAttribute("VisibleIndex");
+                            string visibleStr = reader.GetAttribute("Visible");
+
+                            if (int.TryParse(widthStr, out int width) && 
+                                int.TryParse(visibleIndexStr, out int visibleIndex) &&
+                                bool.TryParse(visibleStr, out bool visible))
                             {
-                                string name = reader.GetAttribute("Name");
-                                if (int.TryParse(reader.GetAttribute("Width"), out int width) && !string.IsNullOrEmpty(name))
+                                GridColumn column = gridView.Columns[fieldName];
+                                if (column != null)
                                 {
-                                    columnWidths[name] = width;
+                                    column.Width = width;
+                                    column.VisibleIndex = visibleIndex;
+                                    column.Visible = visible;
                                 }
-                            }
-                        }
-                        
-                        // Применение сохраненных значений ширины колонок
-                        foreach (GridColumn column in view.Columns)
-                        {
-                            if (columnWidths.TryGetValue(column.Name, out int width))
-                            {
-                                column.Width = width;
                             }
                         }
                     }
@@ -246,7 +249,7 @@ namespace SewingProduction.Helpers
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
+                _logger.LogErrorAsync(ex, "Error loading grid view settings");
             }
         }
         #endregion

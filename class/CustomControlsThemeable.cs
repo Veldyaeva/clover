@@ -274,7 +274,6 @@ namespace SewingProduction
         }
 
     }
-
     /// <summary>
     /// Кастомная форма с градиентным фоном
     /// </summary>
