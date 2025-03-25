@@ -228,6 +228,11 @@ namespace SewingProduction.Forms
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.customButton2 = new SewingProduction.CustomButton();
+            this.flyoutPanel1 = new DevExpress.Utils.FlyoutPanel();
+            this.flyoutPanelControl1 = new DevExpress.Utils.FlyoutPanelControl();
+            this.customCancelButton1 = new SewingProduction.CustomCancelButton();
+            this.customComboBox1 = new SewingProduction.CustomComboBox();
+            this.customButton1 = new SewingProduction.CustomButton();
             this.customGridControl4 = new SewingProduction.CustomGridControl();
             this.artnormnBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.gridView9 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -241,11 +246,6 @@ namespace SewingProduction.Forms
             this.artnormnBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
-            this.flyoutPanel1 = new DevExpress.Utils.FlyoutPanel();
-            this.flyoutPanelControl1 = new DevExpress.Utils.FlyoutPanelControl();
-            this.customButton1 = new SewingProduction.CustomButton();
-            this.customComboBox1 = new SewingProduction.CustomComboBox();
-            this.customCancelButton1 = new SewingProduction.CustomCancelButton();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -331,6 +331,10 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel2)).BeginInit();
             this.splitContainerControl2.Panel2.SuspendLayout();
             this.splitContainerControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanel1)).BeginInit();
+            this.flyoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).BeginInit();
+            this.flyoutPanelControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView9)).BeginInit();
@@ -340,14 +344,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView13)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView14)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView15)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanel1)).BeginInit();
-            this.flyoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).BeginInit();
-            this.flyoutPanelControl1.SuspendLayout();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -717,6 +713,7 @@ namespace SewingProduction.Forms
             this.searchControl1.Properties.Client = this.ANNgridControl;
             this.searchControl1.Properties.ShowDefaultButtonsMode = DevExpress.XtraEditors.Repository.ShowDefaultButtonsMode.AutoShowClear;
             this.searchControl1.Properties.ShowMRUButton = true;
+            this.searchControl1.Properties.QueryIsSearchColumn += new DevExpress.XtraEditors.QueryIsSearchColumnEventHandler(this.searchControl1_QueryIsSearchColumn);
             this.searchControl1.Properties.ButtonClick += new DevExpress.XtraEditors.Controls.ButtonPressedEventHandler(this.SearchButton_Click);
             this.searchControl1.Size = new System.Drawing.Size(191, 20);
             this.searchControl1.TabIndex = 6;
@@ -2291,6 +2288,62 @@ namespace SewingProduction.Forms
             this.customButton2.Text = "В архив";
             this.customButton2.UseVisualStyleBackColor = false;
             // 
+            // flyoutPanel1
+            // 
+            this.flyoutPanel1.Controls.Add(this.flyoutPanelControl1);
+            this.flyoutPanel1.Location = new System.Drawing.Point(692, 218);
+            this.flyoutPanel1.Name = "flyoutPanel1";
+            this.flyoutPanel1.Size = new System.Drawing.Size(381, 254);
+            this.flyoutPanel1.TabIndex = 1;
+            // 
+            // flyoutPanelControl1
+            // 
+            this.flyoutPanelControl1.Controls.Add(this.customCancelButton1);
+            this.flyoutPanelControl1.Controls.Add(this.customComboBox1);
+            this.flyoutPanelControl1.Controls.Add(this.customButton1);
+            this.flyoutPanelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flyoutPanelControl1.FlyoutPanel = this.flyoutPanel1;
+            this.flyoutPanelControl1.Location = new System.Drawing.Point(0, 0);
+            this.flyoutPanelControl1.Name = "flyoutPanelControl1";
+            this.flyoutPanelControl1.Size = new System.Drawing.Size(381, 254);
+            this.flyoutPanelControl1.TabIndex = 0;
+            // 
+            // customCancelButton1
+            // 
+            this.customCancelButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customCancelButton1.Location = new System.Drawing.Point(276, 33);
+            this.customCancelButton1.Name = "customCancelButton1";
+            this.customCancelButton1.Size = new System.Drawing.Size(75, 25);
+            this.customCancelButton1.TabIndex = 2;
+            this.customCancelButton1.Text = "customCancelButton1";
+            this.customCancelButton1.UseVisualStyleBackColor = false;
+            // 
+            // customComboBox1
+            // 
+            this.customComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.customComboBox1.FormattingEnabled = true;
+            this.customComboBox1.Location = new System.Drawing.Point(218, 125);
+            this.customComboBox1.Name = "customComboBox1";
+            this.customComboBox1.Size = new System.Drawing.Size(121, 24);
+            this.customComboBox1.TabIndex = 1;
+            // 
+            // customButton1
+            // 
+            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customButton1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customButton1.Location = new System.Drawing.Point(52, 34);
+            this.customButton1.Name = "customButton1";
+            this.customButton1.Size = new System.Drawing.Size(75, 25);
+            this.customButton1.TabIndex = 0;
+            this.customButton1.Text = "customButton1";
+            this.customButton1.UseVisualStyleBackColor = false;
+            // 
             // customGridControl4
             // 
             this.customGridControl4.Cursor = System.Windows.Forms.Cursors.Default;
@@ -2362,62 +2415,6 @@ namespace SewingProduction.Forms
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
-            // 
-            // flyoutPanel1
-            // 
-            this.flyoutPanel1.Controls.Add(this.flyoutPanelControl1);
-            this.flyoutPanel1.Location = new System.Drawing.Point(692, 218);
-            this.flyoutPanel1.Name = "flyoutPanel1";
-            this.flyoutPanel1.Size = new System.Drawing.Size(381, 254);
-            this.flyoutPanel1.TabIndex = 1;
-            // 
-            // flyoutPanelControl1
-            // 
-            this.flyoutPanelControl1.Controls.Add(this.customCancelButton1);
-            this.flyoutPanelControl1.Controls.Add(this.customComboBox1);
-            this.flyoutPanelControl1.Controls.Add(this.customButton1);
-            this.flyoutPanelControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flyoutPanelControl1.FlyoutPanel = this.flyoutPanel1;
-            this.flyoutPanelControl1.Location = new System.Drawing.Point(0, 0);
-            this.flyoutPanelControl1.Name = "flyoutPanelControl1";
-            this.flyoutPanelControl1.Size = new System.Drawing.Size(381, 254);
-            this.flyoutPanelControl1.TabIndex = 0;
-            // 
-            // customButton1
-            // 
-            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customButton1.Location = new System.Drawing.Point(52, 34);
-            this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(75, 25);
-            this.customButton1.TabIndex = 0;
-            this.customButton1.Text = "customButton1";
-            this.customButton1.UseVisualStyleBackColor = false;
-            // 
-            // customComboBox1
-            // 
-            this.customComboBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customComboBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.customComboBox1.FormattingEnabled = true;
-            this.customComboBox1.Location = new System.Drawing.Point(218, 125);
-            this.customComboBox1.Name = "customComboBox1";
-            this.customComboBox1.Size = new System.Drawing.Size(121, 24);
-            this.customComboBox1.TabIndex = 1;
-            // 
-            // customCancelButton1
-            // 
-            this.customCancelButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customCancelButton1.Location = new System.Drawing.Point(276, 33);
-            this.customCancelButton1.Name = "customCancelButton1";
-            this.customCancelButton1.Size = new System.Drawing.Size(75, 25);
-            this.customCancelButton1.TabIndex = 2;
-            this.customCancelButton1.Text = "customCancelButton1";
-            this.customCancelButton1.UseVisualStyleBackColor = false;
             // 
             // TeamWork
             // 
@@ -2524,6 +2521,10 @@ namespace SewingProduction.Forms
             this.splitContainerControl2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanel1)).EndInit();
+            this.flyoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).EndInit();
+            this.flyoutPanelControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView9)).EndInit();
@@ -2533,10 +2534,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanel1)).EndInit();
-            this.flyoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.flyoutPanelControl1)).EndInit();
-            this.flyoutPanelControl1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

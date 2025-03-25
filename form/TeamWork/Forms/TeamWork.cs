@@ -454,7 +454,6 @@ namespace SewingProduction.Forms
             await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await  _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
             await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-            await GridHelper.LoadImageAsync(pictureBox1, await _artNormService.GetImage(annId)); //не надо annId
 
             UpdateNZPStatus();
         }
@@ -813,6 +812,9 @@ namespace SewingProduction.Forms
             {
                 // Получаем текст текущего поиска
                 string searchText = searchControl1.Text.TrimEnd(' ');
+                
+                // Очищаем текущий фильтр поиска
+                searchControl1.ClearFilter();
                 
                 // Если есть текст поиска, применяем его к новому выбранному полю
                 if (!string.IsNullOrEmpty(searchText))

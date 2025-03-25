@@ -104,10 +104,10 @@ namespace SewingProduction.Helpers
         public static Task<string> GetSelectedColumnNameAsync(bool kode, bool articul, bool model, bool group)
         {
             return Task.FromResult(
-                kode ? "kod" :
-                articul ? "articul" :
-                model ? "mod" :
-                group ? "grup" :
+                kode ? "Kod" :
+                articul ? "Articul" :
+                model ? "Mod" :
+                group ? "Group" :
                 string.Empty);
         }
         /// <summary>
