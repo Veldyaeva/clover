@@ -11,6 +11,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -28,7 +29,7 @@ namespace SewingProduction.form
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _fioDataService = new FioDataService(dbHelper);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             //Таблица fio:
             tableString = tableSQL;
             //Имя формы:

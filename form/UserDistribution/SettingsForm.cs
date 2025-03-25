@@ -11,7 +11,7 @@ using static SewingProduction.form.SettingsForm;
 
 namespace SewingProduction.form
 {
-    public partial class SettingsForm : Form, IDataUpdatableForm
+    public partial class SettingsForm : CustomForm, IDataUpdatableForm
     {
         public SettingsForm()
         {

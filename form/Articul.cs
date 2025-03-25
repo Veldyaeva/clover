@@ -28,7 +28,7 @@ namespace SewingProduction.form
         public Articul()
         {
             InitializeComponent();
-
+           
         }
 
         private void Articul_Load(object sender, EventArgs e)

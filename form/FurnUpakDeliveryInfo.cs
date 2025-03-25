@@ -197,5 +197,10 @@ namespace SewingProduction.form
             object data = gridView1.GetRow(gridView1.FocusedRowHandle);
            MessageBox.Show(((DataRowView)data).Row["rfDateTime"].ToString());
                 }
+
+        private void FurnUpakDeliveryInfo_Deactivate(object sender, EventArgs e)
+        {
+            //DialogResult = DialogResult.Cancel;
+        }
     }
 }

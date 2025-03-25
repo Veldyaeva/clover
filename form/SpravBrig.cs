@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using static SewingProduction.form.SettingsForm;
+using SewingProduction.Helpers;
 
 namespace SewingProduction.form
 {
@@ -32,7 +33,7 @@ namespace SewingProduction.form
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
-            UpdateTheme(this);
+            ThemeManager.UpdateTheme(this);
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;

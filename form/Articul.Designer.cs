@@ -186,10 +186,6 @@ namespace SewingProduction.form
             // customButtonAdd
             // 
             this.customButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAdd.Btn = null;
-            this.customButtonAdd.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customButtonAdd.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customButtonAdd.ComponentSize = new System.Drawing.Size(0, 0);
             this.customButtonAdd.FlatAppearance.BorderSize = 0;
             this.customButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.customButtonAdd.Font = new System.Drawing.Font("Arial", 12F);
@@ -204,7 +200,6 @@ namespace SewingProduction.form
             // 
             // gridArt
             // 
-<<<<<<< HEAD
             this.gridArt.DataSource = this.bsArt;
             this.gridArt.EmbeddedNavigator.Appearance.Font = new System.Drawing.Font("Arial", 8.25F);
             this.gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
@@ -288,19 +283,18 @@ namespace SewingProduction.form
             this.gridColumn6.Visible = true;
             this.gridColumn6.VisibleIndex = 5;
             this.gridColumn6.Width = 20;
-=======
-            this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton1.FlatAppearance.BorderSize = 0;
-            this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton1.Font = new System.Drawing.Font("Arial", 12F);
-            this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton1.Location = new System.Drawing.Point(1, 588);
-            this.customButton1.Name = "customButton1";
-            this.customButton1.Size = new System.Drawing.Size(244, 30);
-            this.customButton1.TabIndex = 1;
-            this.customButton1.Text = "customButton1";
-            this.customButton1.UseVisualStyleBackColor = false;
->>>>>>> b2d3435266bb10bae216c2c0adc49d8f201a2ed9
+            ////
+            //this.customButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            //this.customButton1.FlatAppearance.BorderSize = 0;
+            //this.customButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            //this.customButton1.Font = new System.Drawing.Font("Arial", 12F);
+            //this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            //this.customButton1.Location = new System.Drawing.Point(1, 588);
+            //this.customButton1.Name = "customButton1";
+            //this.customButton1.Size = new System.Drawing.Size(244, 30);
+            //this.customButton1.TabIndex = 1;
+            //this.customButton1.Text = "customButton1";
+            //this.customButton1.UseVisualStyleBackColor = false;
             // 
             // Articul
             // 

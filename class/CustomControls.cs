@@ -1,3 +1,18 @@
+﻿/*Основные цвета:
+Фон (градиент):
+Мягкий мятный: RGB(209, 241, 221)
+Кремовый (айвори): RGB(255, 248, 240)
+Элемент "C" (буква):
+Светлый серебристо-серый: RGB(192, 192, 192)
+Внутренний градиент (если заметен): между мятным (RGB(209, 241, 221)) и белым (RGB(255, 255, 255)).
+Лист клевера:
+Нежно-зелёный: RGB(181, 230, 196)
+Темно-зелёные акценты (если видны): RGB(120, 167, 137)*/
+
+using DevExpress.CodeParser;
+using DevExpress.Xpo.DB;
+using DevExpress.XtraBars.Docking2010.Base;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
 using Newtonsoft.Json;
@@ -20,6 +35,7 @@ namespace SewingProduction
     // Базовый класс для общих свойств компонентов
     public abstract class BaseComponent : Control
     {
+        // Метод для применения общих свойств к компоненту
         public virtual void ApplyBaseProperties(Control control)
         {
             // control.Font = ThemeManager.ActiveTheme.DefaultFont;
@@ -31,6 +47,7 @@ namespace SewingProduction
     /// </summary>
     public class CustomButton : Button
     {
+
         public CustomButton()
         {
             ApplyTheme();
@@ -41,6 +58,7 @@ namespace SewingProduction
         public Color ComponentFontColor { get; set; }
         public Size ComponentSize { get; set; }
 
+        private GraphicsPath _graphicsPath;
 
         public void ApplyTheme()
         {
@@ -60,6 +78,8 @@ namespace SewingProduction
 
         protected override void OnPaint(PaintEventArgs pevent)
         {
+            _graphicsPath = CreateRoundedRectanglePath(ClientRectangle, Theme.ButtonRoundRadius); // Радиус скругления
+            Region = new Region(_graphicsPath);
             base.OnPaint(pevent);
             var path = CreateRoundedRectanglePath(ClientRectangle, SharedSettings.ButtonRoundRadius);
             Region = new Region(path);
@@ -82,7 +102,7 @@ namespace SewingProduction
             if (disposing)
             {
                 ThemeChanged -= OnThemeChanged;
-            }
+    }
             base.Dispose(disposing);
         }
     }
@@ -192,7 +212,7 @@ namespace SewingProduction
             this.BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
-        }
+    }
 
         private void OnThemeChanged()
         {
@@ -312,6 +332,10 @@ namespace SewingProduction
 
     }
 
+    //        //// Общий стиль шрифта
+    //        //this.Appearance.Row.Font = Theme.DefaultFont;
+    //    }
+    //}
     public class CustomGridControl : GridControl
     {
         public CustomGridView CustomView { get; private set; }
@@ -327,6 +351,8 @@ namespace SewingProduction
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged; // Подписка на изменение темы
 
+            //// Подписываемся на изменения темы
+            //Theme.ThemeChanged += OnThemeChanged;
         }
 
         public void ApplyTheme()
@@ -341,8 +367,16 @@ namespace SewingProduction
             this.ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             this.Font = ThemeManager.SharedSettings.DefaultFont;
 
+            //// Подписываемся на изменения темы
+            //Theme.ThemeChanged += OnThemeChanged;
         }
 
+        //private void ApplyTheme()
+        //{
+        //    // Применяем тему к GridControl (например, цвет фона)
+        //    this.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
+        //    this.LookAndFeel.UseDefaultLookAndFeel = false;
+        //    this.BackColor = Theme.GridBackground;
 
         private void OnThemeChanged()
         {
@@ -359,6 +393,14 @@ namespace SewingProduction
             base.Dispose(disposing);
         }
 
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        Theme.ThemeChanged -= OnThemeChanged;
+        //    }
+        //    base.Dispose(disposing);
+        //}
     }
 
     public class CustomGridView : GridView
@@ -386,6 +428,7 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+
     }
     public class CustomGroupBox : GroupBox
     {
@@ -398,7 +441,11 @@ namespace SewingProduction
             get { return _borderColor; }
             set { _borderColor = value; Invalidate(); }
         }
-
+        public GridView gridView { get; set; }
+        public Color HighlightBackground { get; set; }
+        //public Color ComponentFontColor { get; set; }
+        //public Size ComponentSize { get; set; }
+        
         // Свойство для установки толщины обводки
         public int BorderThickness
         {
@@ -412,7 +459,7 @@ namespace SewingProduction
             base.OnPaint(e); //рисуем всё что есть в дефолтном GroupBox
             // Рисуем границу
             using (Pen borderPen = new Pen(_borderColor, _borderThickness))
-            {
+        {
                 // Определение прямоугольника для обводки
                 var rect = new Rectangle(ClientRectangle.X , ClientRectangle.Y, ClientRectangle.Width - _borderThickness, ClientRectangle.Height - _borderThickness);
                 rect.X += _borderThickness / 2 ;
@@ -449,12 +496,14 @@ namespace SewingProduction
         {
             base.OnPaint(e);
             Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+            // Создание градиента
             using (LinearGradientBrush brush = new LinearGradientBrush(
                 rect,
                 ThemeManager.ActiveTheme.GradientStartColor,
                 ThemeManager.ActiveTheme.GradientEndColor,
                 LinearGradientMode.ForwardDiagonal))
             {
+                // Заливка области градиентом
                 e.Graphics.FillRectangle(brush, rect);
             }
         }
@@ -521,6 +570,7 @@ namespace SewingProduction
         /// <returns></returns>
         public static T GetRowCellValueOrDefault<T>(GridView view, int rowHandle, string fieldName, T defaultValue = default)
         {
+            System.Data.DataTable dT = new System.Data.DataTable();
             try
             {
                 object value = view.GetRowCellValue(rowHandle, fieldName);
@@ -607,8 +657,9 @@ public static class Logger
                 Console.WriteLine($"Ошибка при записи логов: {writeEx.Message}");
             }
         }
+            return dT;
     }
-}
+    }
 
 // Класс для хранения информации об ошибке
 public class LogEntry

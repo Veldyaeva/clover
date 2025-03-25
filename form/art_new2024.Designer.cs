@@ -518,10 +518,6 @@
             // 
             // customCancelButton1
             // 
-            this.customCancelButton1.Btn = null;
-            this.customCancelButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customCancelButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customCancelButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
             this.customCancelButton1.Location = new System.Drawing.Point(407, 453);
@@ -534,10 +530,6 @@
             // 
             // customOkButton1
             // 
-            this.customOkButton1.Btn = null;
-            this.customOkButton1.ComponentBackColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentFontColor = System.Drawing.Color.Empty;
-            this.customOkButton1.ComponentSize = new System.Drawing.Size(0, 0);
             this.customOkButton1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
             this.customOkButton1.Location = new System.Drawing.Point(104, 453);

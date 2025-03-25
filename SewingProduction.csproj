@@ -56,7 +56,8 @@
     <StartupObject>SewingProduction.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>tbi_winter.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -68,6 +69,7 @@
     <Reference Include="DevExpress.DataAccess.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Drawing.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Images.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Map.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Mvvm.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Office.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Pdf.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -76,6 +78,7 @@
     <Reference Include="DevExpress.RichEdit.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.RichEdit.v22.2.Export, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Sparkline.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.SpellChecker.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.TreeMap.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Utils.v22.2.UI, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -84,14 +87,17 @@
     <Reference Include="DevExpress.XtraCharts.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraGauges.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGauges.v22.2.Win, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraMap.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraReports.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraReports.v22.2.Extensions, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraScheduler.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraScheduler.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraScheduler.v22.2.Core.Desktop, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeMap.v22.2.UI, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraVerticalGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -146,6 +152,12 @@
     <Compile Include="class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="form\Articul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\Articul.Designer.cs">
+      <DependentUpon>Articul.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\Settings.cs" />
     <Compile Include="form\Settings.Designer.cs">
       <DependentUpon>Settings.cs</DependentUpon>
@@ -154,11 +166,49 @@
     <Compile Include="form\TeamWork\DbContext\NormOper.cs" />
     <Compile Include="class\RussianGridLocalizer.cs" />
     <Compile Include="class\RussianPrintLocalizer.cs" />
+    <Compile Include="class\ServiceBroker.cs" />
     <Compile Include="class\Theme.cs" />
+    <Compile Include="class\XlsReportGenerator.cs" />
     <Compile Include="dsPrintNakl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="form\art_new2024.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\art_new2024.Designer.cs">
+      <DependentUpon>art_new2024.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\CardByNom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\CardByNom.Designer.cs">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\editFio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\editFio.Designer.cs">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\Fio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\Fio.Designer.cs">
+      <DependentUpon>Fio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\FurnUpakDeliveryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\FurnUpakDeliveryInfo.Designer.cs">
+      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\OborudBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\OborudBrig.Designer.cs">
+      <DependentUpon>OborudBrig.cs</DependentUpon>
     </Compile>
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
     <Compile Include="form\TeamWork\Enums\Status.cs" />
@@ -216,6 +266,8 @@
     <Compile Include="form\SpravZeh.Designer.cs">
       <DependentUpon>SpravZeh.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
+    <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
@@ -262,11 +314,24 @@
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
+    <Compile Include="form\UserDistribution\UserClass.cs" />
+    <Compile Include="form\UserDistribution\UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
+      <DependentUpon>UserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PrintReport.Designer.cs">
       <DependentUpon>PrintReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="report\PrintPostReportFio.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="report\PrintPostReportFio.Designer.cs">
+      <DependentUpon>PrintPostReportFio.cs</DependentUpon>
     </Compile>
     <Compile Include="report\PrintReestrListReport.cs">
       <SubType>Component</SubType>
@@ -354,20 +419,50 @@
     <Compile Include="report\subreport\PrintGroupNROborudReport.Designer.cs">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
+    <Compile Include="form\usercontrol\FurnitZayavView.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <EmbeddedResource Include="form\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
+    <Compile Include="form\usercontrol\FurnitZayavView.Designer.cs">
+      <DependentUpon>FurnitZayavView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraReport1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XtraReport1.Designer.cs">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="XtraReport2.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="XtraReport2.Designer.cs">
+      <DependentUpon>XtraReport2.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="form\Articul.resx">
+      <DependentUpon>Articul.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\art_new2024.resx">
+      <DependentUpon>art_new2024.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\CardByNom.resx">
+      <DependentUpon>CardByNom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\editFio.resx">
+      <DependentUpon>editFio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\Fio.resx">
+      <DependentUpon>Fio.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\FurnUpakDeliveryInfo.resx">
+      <DependentUpon>FurnUpakDeliveryInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\OborudBrig.resx">
       <DependentUpon>OborudBrig.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\editFio.resx">
-      <DependentUpon>editFio.cs</DependentUpon>
+    <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
+      <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
@@ -378,17 +473,24 @@
     <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
-      <DependentUpon>NormOperNew.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\SplashScreen.resx">
-      <DependentUpon>SplashScreen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
-      <DependentUpon>UserProfile.cs</DependentUpon>
+    <EmbeddedResource Include="form\TeamWork\Forms\NormOperNew.resx">
+      <DependentUpon>NormOperNew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork.resx">
+      <DependentUpon>TeamWork.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\PlanZagrBrig.resx">
+      <DependentUpon>PlanZagrBrig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
+      <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.resx">
+      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
@@ -413,6 +515,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Report1.rdlc" />
     <EmbeddedResource Include="Report2.rdlc" />
+    <EmbeddedResource Include="report\PrintPostReportFio.resx">
+      <DependentUpon>PrintPostReportFio.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="report\PrintReestrListReport.resx">
       <DependentUpon>PrintReestrListReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -466,6 +571,12 @@
     <EmbeddedResource Include="report\subreport\PrintGroupNROborudReport.resx">
       <DependentUpon>PrintGroupNROborudReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="XtraReport1.resx">
+      <DependentUpon>XtraReport1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="XtraReport2.resx">
+      <DependentUpon>XtraReport2.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="dsPrintNakl.xsc">
       <DependentUpon>dsPrintNakl.xsd</DependentUpon>
     </None>
@@ -504,11 +615,11 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\tbi_winter.ico" />
+    <Content Include="XMLFile1.xml" />
     <None Include="Resources\winter.ico" />
     <Content Include="Resources\spring.jpg" />
     <Content Include="Resources\valentine.jpg" />
-    <Content Include="tbi_winter.ico" />
-    <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />

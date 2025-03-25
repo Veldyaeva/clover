@@ -186,6 +186,9 @@
         QmCC
 </value>
   </data>
+  <metadata name="bsOborudList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>978, 16</value>
+  </metadata>
   <data name="simpleButton11.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACV0RVh0VGl0
@@ -204,6 +207,9 @@
         QmCC
 </value>
   </data>
+  <metadata name="bsGroupOborudList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>820, 16</value>
+  </metadata>
   <data name="simpleButton9.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACV0RVh0VGl0
@@ -222,6 +228,9 @@
         QmCC
 </value>
   </data>
+  <metadata name="bsWorkersList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>693, 16</value>
+  </metadata>
   <data name="simpleButton8.ImageOptions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACV0RVh0VGl0
@@ -240,6 +249,9 @@
         QmCC
 </value>
   </data>
+  <metadata name="bsPlanZagrTwoStatusList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>513, 17</value>
+  </metadata>
   <metadata name="bsPzNomList.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
