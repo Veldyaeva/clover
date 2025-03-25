@@ -216,7 +216,6 @@
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\Models\RaskroyNorm.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,7 +268,12 @@
     <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IAnnManager.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IArtNormController.cs" />
     <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INormRaskrManager.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INormRaszManager.cs" />
     <Compile Include="form\TeamWork\Interfaces\IThemeable.cs" />
     <Compile Include="form\TeamWork\Loggers\Logger.cs" />
     <Compile Include="form\TeamWork\Models\ArtNormN.cs" />
@@ -278,6 +282,7 @@
     <Compile Include="form\TeamWork\Models\NormKont.cs" />
     <Compile Include="form\TeamWork\Models\NormRask.cs" />
     <Compile Include="form\TeamWork\Models\NormRasz.cs" />
+    <Compile Include="form\TeamWork\Models\RaskroyNorm.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
