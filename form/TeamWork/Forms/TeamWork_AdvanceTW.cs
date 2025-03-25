@@ -82,48 +82,48 @@ namespace SewingProduction.form
 
         private void SetupGridColumns()
         {
-            gridView5.Columns.Clear();
+            //gridView5.Columns.Clear();
             
-            gridView5.Columns.AddVisible("KodO", "Код операции");
-            gridView5.Columns.AddVisible("Text", "Текст");
-            gridView5.Columns.AddVisible("Spec", "Специальность");
-            gridView5.Columns.AddVisible("Razryad", "Разряд");
-            gridView5.Columns.AddVisible("Obor", "Оборудование");
-            gridView5.Columns.AddVisible("KodProizv", "Код производства");
-            gridView5.Columns.AddVisible("Kod", "Код");
-            gridView5.Columns.AddVisible("N1", "Норма");
-            gridView5.Columns.AddVisible("Sek", "Секунды");
-            gridView5.Columns.AddVisible("KodPodr", "Код подразделения");
-            gridView5.Columns.AddVisible("KodOb", "Код оборудования");
+            //gridView5.Columns.AddVisible("KodO", "Код операции");
+            //gridView5.Columns.AddVisible("Text", "Текст");
+            //gridView5.Columns.AddVisible("Spec", "Специальность");
+            //gridView5.Columns.AddVisible("Razryad", "Разряд");
+            //gridView5.Columns.AddVisible("Obor", "Оборудование");
+            //gridView5.Columns.AddVisible("KodProizv", "Код производства");
+            //gridView5.Columns.AddVisible("Kod", "Код");
+            //gridView5.Columns.AddVisible("N1", "Норма");
+            //gridView5.Columns.AddVisible("Sek", "Секунды");
+            //gridView5.Columns.AddVisible("KodPodr", "Код подразделения");
+            //gridView5.Columns.AddVisible("KodOb", "Код оборудования");
 
-            // Скрываем служебные поля
-            if (gridView5.Columns["nrId"] != null)
-                gridView5.Columns["nrId"].Visible = false;
-            if (gridView5.Columns["AnnId"] != null)
-                gridView5.Columns["AnnId"].Visible = false;
+            //// Скрываем служебные поля
+            //if (gridView5.Columns["nrId"] != null)
+            //    gridView5.Columns["nrId"].Visible = false;
+            //if (gridView5.Columns["AnnId"] != null)
+            //    gridView5.Columns["AnnId"].Visible = false;
 
-            // Настраиваем опции редактирования
-            gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            gridView5.OptionsEditForm.EditFormColumnCount = 1;
-            gridView5.OptionsEditForm.PopupEditFormWidth = 400;
-            gridView5.OptionsView.ShowGroupPanel = false;
+            //// Настраиваем опции редактирования
+            //gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            //gridView5.OptionsEditForm.EditFormColumnCount = 1;
+            //gridView5.OptionsEditForm.PopupEditFormWidth = 400;
+            //gridView5.OptionsView.ShowGroupPanel = false;
         }
 
 
         private void SetupGridColumnsRask()
         {
 
-            // Скрываем служебные поля
-            if (gridView2.Columns["id"] != null)
-                gridView2.Columns["id"].Visible = false;
-            if (gridView2.Columns["annId"] != null)
-                gridView2.Columns["annId"].Visible = false;
+           // // Скрываем служебные поля
+           // if (gridView2.Columns["id"] != null)
+           //     gridView2.Columns["id"].Visible = false;
+           // if (gridView2.Columns["annId"] != null)
+           //     gridView2.Columns["annId"].Visible = false;
 
-            // Настраиваем опции редактирования
-            //gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            //gridView2.OptionsEditForm.EditFormColumnCount = 1;
-           // gridView2.OptionsEditForm.PopupEditFormWidth = 400;
-            gridView2.OptionsView.ShowGroupPanel = false;
+           // // Настраиваем опции редактирования
+           // //gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+           // //gridView2.OptionsEditForm.EditFormColumnCount = 1;
+           //// gridView2.OptionsEditForm.PopupEditFormWidth = 400;
+           // gridView2.OptionsView.ShowGroupPanel = false;
         }
 
         private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
@@ -441,6 +441,7 @@ namespace SewingProduction.form
                     await bufferLoad();
                     break;
             }
+             //   richTextBox1.Text = 
         }
             catch (Exception ex)
             {

@@ -27,6 +27,7 @@ using DevExpress.XtraCharts;
 using SewingProduction.Interfaces;
 using System.IO;
 using DevExpress.ClipboardSource.SpreadsheetML;
+using System.Linq;
 
 
 namespace SewingProduction.Forms
@@ -133,8 +134,8 @@ namespace SewingProduction.Forms
                 _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
 
 
-                await LoadWorkDivisions();
-                await CurrentWorks_Load();
+            await LoadWorkDivisions();
+            await CurrentWorks_Load();
             }
             catch (Exception ex)
             {
@@ -156,18 +157,38 @@ namespace SewingProduction.Forms
 
                 if (data != null && data.Count > 0)
                 {
-                    // Создаем новую BindingList и сразу заполняем ее всеми данными
-                    var newBindingList = new BindingList<ArtNormN>(data);
-                    
-                    // Обновляем источник данных
-                    _bindingSource.DataSource = newBindingList;
+                    // Отключаем обновление UI во время загрузки данных
+                    ANNgridControl.BeginUpdate();
+                    try
+                    {
+                        // Настраиваем отображение GridView
+                        ANNgridView.OptionsView.EnableAppearanceEvenRow = true;
+                        ANNgridView.OptionsView.EnableAppearanceOddRow = true;
+                        ANNgridView.OptionsView.ShowAutoFilterRow = true;
+                        ANNgridView.OptionsView.ShowGroupPanel = false;
+                        ANNgridView.OptionsView.ShowIndicator = false;
+                        ANNgridView.OptionsView.ShowPreview = false;
+                        
+                        // Заменяем _bindingList на новый BindingList с данными
+                        _bindingSource.DataSource = new BindingList<ArtNormN>(data);
+                        
+                        // Обновляем источник данных
+                        _bindingSource.ResetBindings(false);
+                        
+                        // Применяем фильтры
+                        filterTable();
+                    }
+                    finally
+                    {
+                        // Включаем обновление UI
+                        ANNgridControl.EndUpdate();
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
-                RefreshData();
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
             catch (Exception ex)
@@ -179,11 +200,18 @@ namespace SewingProduction.Forms
         {
             SafeInvoke(ANNgridControl, () =>
             {
-                _bindingSource.ResetBindings(false);
-                ANNgridControl.RefreshDataSource();
-                ANNgridView.RefreshData();
-          //      ANNgridView.PopulateColumns();
-                filterTable();
+                ANNgridControl.BeginUpdate();
+                try
+                {
+                    _bindingSource.ResetBindings(false);
+                    ANNgridControl.RefreshDataSource();
+                    ANNgridView.RefreshData();
+                    filterTable();
+                }
+                finally
+                {
+                    ANNgridControl.EndUpdate();
+                }
             });
         }
 
@@ -493,7 +521,7 @@ namespace SewingProduction.Forms
                     }
                 }
 
-                customButton7.Enabled = nzp <= 0;
+                customButton7.Visible = nzp <= 0;
             }
             catch (Exception ex)
             {
@@ -1191,7 +1219,6 @@ namespace SewingProduction.Forms
             await HandleButtonClickAsync();
         }
         private async Task HandleButtonClickAsync() { 
-
             if (ANNgridView == null) return;
 
             // Создаём новую запись модели `ArtNorm`
@@ -1231,31 +1258,39 @@ namespace SewingProduction.Forms
                 return;
             }
 
-            // Обновляем ID в объекте и загружаем данные заново
+            // Обновляем ID в объекте
             newItem.AnnID = newId;
-            //LoadData(); // Загружаем актуальные данные
-            BindingList<ArtNormN> newBindingList = (BindingList<ArtNormN>)ANNgridControl.DataSource;
-            newBindingList.Add(newItem);
+
+            // Добавляем новую строку в источник данных
+            _bindingSource.Add(newItem);
+            // Обновляем отображение грида
             ANNgridControl.RefreshDataSource();
+            
+            // Даем время на обновление UI
+            await Task.Delay(100);
+
             // Ищем строку по `annID` в `GridView`
-            int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);//добавили строку в ANN
+            int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);
             if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
             {
-                ANNgridView.FocusedRowHandle = realRowHandle;//встаём на новую строку
-                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))//открываем  форму Добавить предв.ю передаём новый Id и Id из буфера
+                // Устанавливаем фокус на новую строку
+                ANNgridView.FocusedRowHandle = realRowHandle;
+                
+                // Открываем форму редактирования
+                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
                 {
-                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)//если да, то так и оставляем 
+                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                     {
-                        // Можно обновить данные после закрытия формы, если нужно
+                        // Обновляем данные после успешного сохранения
                         await LoadWorkDivisions();
                     }
-                    else//если нет, удаляем новую пустую строку в ANN и в norm_rasz (потом надо будет в остальных таблицах, но вообще я хочу сделать удаление в привязанных прямо там, где их новые строки создаются)
+                    else
                     {
+                        // Удаляем строку при отмене
                         _bindingList.Remove(newItem);
                         await _artNormService.deleteRow("art_norm_n", newId);
                         await _artNormService.deleteRow("norm_rasz", newId);
                         ANNgridControl.RefreshDataSource();
-
                     }
                 }
             }
@@ -1278,12 +1313,12 @@ namespace SewingProduction.Forms
 
         private async Task ArchAndCopy()
         {
+                int newId = 0;//найти новый айди и присвоить
             GridView AnnView = ANNgridView;
             if (AnnView == null) return;
             if (gridView10.RowCount > 0)
             {
                 int nzp = (int)gridView10.GetRowCellValue(0, "kolNZP");
-                int newId = 0;//найти новый айди и присвоить
                 if (nzp > 0)
                 {
                     await CopyRow();
@@ -1300,21 +1335,21 @@ namespace SewingProduction.Forms
                         }
                     }
                 }
+            }
 
-                else
+            else
+            {
+                await CopyRow();
+                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
                 {
-                    await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.ArchAndCopy))
+                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                     {
-                        if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
-                        {
-                            //сохраняем
-                            AnnView.AddNewRow(); // Добавляем новую строку
-                        }
-                        else
-                        {
-                            //отменяем
-                        }
+                        //сохраняем
+                        AnnView.AddNewRow(); // Добавляем новую строку
+                    }
+                    else
+                    {
+                        //отменяем
                     }
                 }
             }

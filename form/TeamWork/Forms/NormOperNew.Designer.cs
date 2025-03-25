@@ -41,12 +41,9 @@ namespace SewingProduction.form
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
             this.proizv = new DevExpress.XtraGrid.Columns.GridColumn();

@@ -139,7 +139,7 @@ namespace SewingProduction.form.TeamWork.Forms
             // gridColumn1
             // 
             this.gridColumn1.Caption = "рассекание";
-            this.gridColumn1.FieldName = "draz1";
+            this.gridColumn1.FieldName = "dras1";
             this.gridColumn1.Name = "gridColumn1";
             this.gridColumn1.Visible = true;
             this.gridColumn1.Width = 44;
@@ -217,7 +217,7 @@ namespace SewingProduction.form.TeamWork.Forms
             // gridColumn7
             // 
             this.gridColumn7.Caption = "Рассекание";
-            this.gridColumn7.FieldName = "draz2";
+            this.gridColumn7.FieldName = "dras2";
             this.gridColumn7.Name = "gridColumn7";
             this.gridColumn7.Visible = true;
             this.gridColumn7.Width = 57;
@@ -295,7 +295,7 @@ namespace SewingProduction.form.TeamWork.Forms
             // gridColumn13
             // 
             this.gridColumn13.Caption = "Рассекание";
-            this.gridColumn13.FieldName = "draz3";
+            this.gridColumn13.FieldName = "dras3";
             this.gridColumn13.Name = "gridColumn13";
             this.gridColumn13.Visible = true;
             this.gridColumn13.Width = 81;

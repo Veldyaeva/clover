@@ -1266,7 +1266,7 @@ namespace SewingProduction.Forms
             // coln
             // 
             this.coln.Caption = "№ оп.";
-            this.coln.FieldName = "n";
+            this.coln.FieldName = "N";
             this.coln.Name = "coln";
             this.coln.Visible = true;
             this.coln.VisibleIndex = 0;
@@ -1275,7 +1275,7 @@ namespace SewingProduction.Forms
             // coln1
             // 
             this.coln1.Caption = "№ п/оп.";
-            this.coln1.FieldName = "n1";
+            this.coln1.FieldName = "N1";
             this.coln1.Name = "coln1";
             this.coln1.Visible = true;
             this.coln1.VisibleIndex = 1;
@@ -1284,7 +1284,7 @@ namespace SewingProduction.Forms
             // colrazryd
             // 
             this.colrazryd.Caption = "разряд";
-            this.colrazryd.FieldName = "razryd";
+            this.colrazryd.FieldName = "Razryad";
             this.colrazryd.Name = "colrazryd";
             this.colrazryd.Visible = true;
             this.colrazryd.VisibleIndex = 2;
@@ -1293,7 +1293,7 @@ namespace SewingProduction.Forms
             // coltext
             // 
             this.coltext.Caption = "наименование операции пошива";
-            this.coltext.FieldName = "text";
+            this.coltext.FieldName = "Text";
             this.coltext.Name = "coltext";
             this.coltext.Visible = true;
             this.coltext.VisibleIndex = 3;
@@ -1302,7 +1302,7 @@ namespace SewingProduction.Forms
             // colsek1
             // 
             this.colsek1.Caption = "сек.";
-            this.colsek1.FieldName = "sek";
+            this.colsek1.FieldName = "Sek";
             this.colsek1.Name = "colsek1";
             this.colsek1.Visible = true;
             this.colsek1.VisibleIndex = 4;
@@ -1310,7 +1310,7 @@ namespace SewingProduction.Forms
             // 
             // colobor
             // 
-            this.colobor.FieldName = "obor";
+            this.colobor.FieldName = "Obor";
             this.colobor.Name = "colobor";
             this.colobor.Visible = true;
             this.colobor.VisibleIndex = 6;
@@ -1318,7 +1318,7 @@ namespace SewingProduction.Forms
             // 
             // gridColumn3
             // 
-            this.gridColumn3.FieldName = "kod";
+            this.gridColumn3.FieldName = "Kod";
             this.gridColumn3.Name = "gridColumn3";
             this.gridColumn3.Visible = true;
             this.gridColumn3.VisibleIndex = 5;
@@ -1326,13 +1326,13 @@ namespace SewingProduction.Forms
             // 
             // colkod_o
             // 
-            this.colkod_o.FieldName = "kod_o";
+            this.colkod_o.FieldName = "KodO";
             this.colkod_o.Name = "colkod_o";
             this.colkod_o.Width = 70;
             // 
             // colannId3
             // 
-            this.colannId3.FieldName = "annId";
+            this.colannId3.FieldName = "AnnID";
             this.colannId3.Name = "colannId3";
             // 
             // gridView13
