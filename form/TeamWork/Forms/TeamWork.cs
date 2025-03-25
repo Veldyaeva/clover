@@ -1322,7 +1322,23 @@ namespace SewingProduction.Forms
                 if (nzp > 0)
                 {
                     await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.ArchAndCopy))
+                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
+                    {
+                        if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                        {
+                            //сохраняем
+                            AnnView.AddNewRow(); // Добавляем новую строку
+                        }
+                        else
+                        {
+                            //отменяем
+                        }
+                    }
+                }
+                else
+                {
+                    await CopyRow();
+                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
                     {
                         if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                         {
@@ -1368,7 +1384,7 @@ namespace SewingProduction.Forms
             if (view == null) return;
 
 
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(0, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "annId"), (int)Mode.Edit))
+            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(0, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.Edit))
             {
                 if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                 {

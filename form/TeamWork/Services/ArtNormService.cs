@@ -603,5 +603,82 @@ OUTPUT INSERTED.annID
             }
         }
 
+        /// <summary>
+        /// Получает запись ArtNormN по идентификатору
+        /// </summary>
+        /// <param name="annId">Идентификатор записи</param>
+        /// <returns>Объект ArtNormN или null, если запись не найдена</returns>
+        public async Task<ArtNormN> GetArtNormDataById(int annId)
+        {
+            try
+            {
+                string query = @"
+                    SELECT 
+                        SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
+                        data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+                        sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+                        data_sozd, diz, constr 
+                    FROM ArtNormNView 
+                    JOIN status_ann ON status = status_id
+                    WHERE annId = @annId";
+
+                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                
+                if (result != null && result.Rows.Count > 0)
+                {
+                    // Возвращаем первую запись
+                    List<ArtNormN> list = ConvertToList(result);
+                    if (list.Count > 0)
+                    {
+                        await _logger.LogEventAsync($"Успешно получены данные ArtNormN для ID {annId}", "GetArtNormDataById");
+                        return list[0];
+                    }
+                }
+                
+                await _logger.LogEventAsync($"Не найдены данные ArtNormN для ID {annId}", "GetArtNormDataById");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных ArtNormN для ID {annId}");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Обновляет значение поля дизайнера или конструктора для указанного ID
+        /// </summary>
+        /// <param name="annId">ID записи</param>
+        /// <param name="fieldName">Имя поля (diz или constr)</param>
+        /// <param name="employeeId">ID сотрудника</param>
+        /// <returns>Задача, представляющая асинхронную операцию</returns>
+        public async Task UpdateEmployeeField(int annId, string fieldName, int employeeId)
+        {
+            try
+            {
+                // Проверяем, что fieldName соответствует одному из допустимых полей
+                if (fieldName != "diz" && fieldName != "constr")
+                {
+                    throw new ArgumentException($"Недопустимое имя поля: {fieldName}. Ожидается 'diz' или 'constr'");
+                }
+
+                string query = $"UPDATE art_norm_n SET {fieldName} = @employeeId WHERE annId = @annId";
+                
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@annId", annId },
+                    { "@employeeId", employeeId }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+                await _logger.LogEventAsync($"Поле {fieldName} для ID {annId} успешно обновлено значением {employeeId}", "UpdateEmployeeField");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении поля {fieldName} для ID {annId}");
+                throw;
+            }
+        }
+
     }
 }

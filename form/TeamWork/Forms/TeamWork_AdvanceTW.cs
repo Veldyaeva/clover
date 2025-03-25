@@ -75,56 +75,12 @@ namespace SewingProduction.form
             gridView2.ValidateRow += GridView2_ValidateRow;
             gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
 
-            // Настраиваем отображение колонок
-            SetupGridColumns();
-            SetupGridColumnsRask();
-        }
-
-        private void SetupGridColumns()
-        {
-            //gridView5.Columns.Clear();
-            
-            //gridView5.Columns.AddVisible("KodO", "Код операции");
-            //gridView5.Columns.AddVisible("Text", "Текст");
-            //gridView5.Columns.AddVisible("Spec", "Специальность");
-            //gridView5.Columns.AddVisible("Razryad", "Разряд");
-            //gridView5.Columns.AddVisible("Obor", "Оборудование");
-            //gridView5.Columns.AddVisible("KodProizv", "Код производства");
-            //gridView5.Columns.AddVisible("Kod", "Код");
-            //gridView5.Columns.AddVisible("N1", "Норма");
-            //gridView5.Columns.AddVisible("Sek", "Секунды");
-            //gridView5.Columns.AddVisible("KodPodr", "Код подразделения");
-            //gridView5.Columns.AddVisible("KodOb", "Код оборудования");
-
-            //// Скрываем служебные поля
-            //if (gridView5.Columns["nrId"] != null)
-            //    gridView5.Columns["nrId"].Visible = false;
-            //if (gridView5.Columns["AnnId"] != null)
-            //    gridView5.Columns["AnnId"].Visible = false;
-
-            //// Настраиваем опции редактирования
-            //gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-            //gridView5.OptionsEditForm.EditFormColumnCount = 1;
-            //gridView5.OptionsEditForm.PopupEditFormWidth = 400;
-            //gridView5.OptionsView.ShowGroupPanel = false;
+            // Подписываемся на события изменения комбобоксов
+            designerComboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
+            constructorComboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
         }
 
 
-        private void SetupGridColumnsRask()
-        {
-
-           // // Скрываем служебные поля
-           // if (gridView2.Columns["id"] != null)
-           //     gridView2.Columns["id"].Visible = false;
-           // if (gridView2.Columns["annId"] != null)
-           //     gridView2.Columns["annId"].Visible = false;
-
-           // // Настраиваем опции редактирования
-           // //gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-           // //gridView2.OptionsEditForm.EditFormColumnCount = 1;
-           //// gridView2.OptionsEditForm.PopupEditFormWidth = 400;
-           // gridView2.OptionsView.ShowGroupPanel = false;
-        }
 
         private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -321,59 +277,6 @@ namespace SewingProduction.form
             }
         }
 
-        //private void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null)
-        //        return;
-
-        //    // Сохраняем настройки редактирования
-        //    var allowEditing = gridView.OptionsBehavior.Editable;
-
-        //    // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
-        //    gridView.OptionsBehavior.Editable = false;
-
-        //    try
-        //    {
-        //        using (var selectionForm = new norm_raskrNew())
-        //        {
-        //            DialogResult result = selectionForm.ShowDialog();
-
-        //            if (result == DialogResult.OK && selectionForm.SelectedData != null)
-        //            {
-        //                var selectedDataList = selectionForm.SelectedData;
-
-        //                // Вставляем данные в gridView2
-        //                foreach (var normRask in selectedDataList)
-        //                {
-        //                    normRask.AnnId = _newAnnId;
-        //                    _normRaskList.Add(normRask); // Добавляем в список
-        //                }
-
-        //                // Обновляем привязку данных
-        //                _normRaskBindingSource.ResetBindings(false);
-
-        //                // Сохраняем данные в базу данных
-        //                foreach (var normRask in selectedDataList)
-        //                {
-        //                    _artNormService.InsertNormRaskAsync(normRask); 
-        //                }
-        //                gridView.UpdateCurrentRow();
-        //            }
-        //            else
-        //            {
-        //                // Если пользователь отменил выбор или не выбрал данные, удаляем строку
-        //                gridView.DeleteRow(gridView.GetRowHandle(e.RowHandle));
-        //            }
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        // Восстанавливаем настройки редактирования
-        //        gridView.OptionsBehavior.Editable = allowEditing;
-        //    }
-        //}
-
         private void GridView2_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             if (e.Row is NormRask normRask)
@@ -423,29 +326,74 @@ namespace SewingProduction.form
                 _gridHelper.LoadGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
 
-            switch (_mode)
-            {
-                case (int)Mode.NewWorkDivision:
-                    this.Text = "Добавить предварительное";
-                    break;
-                case (int)Mode.ArchAndCopy:
-                    this.Text = "Архив+копия";
-                    await bufferLoad();
-                    break;
-                case (int)Mode.Archive:
-                    this.Text = "В архив";
-                    await bufferLoad();
-                    break;
-                case (int)Mode.Edit:
-                    this.Text = "Редактировать";
-                    await bufferLoad();
-                    break;
+                // Загружаем списки дизайнеров и конструкторов
+                await LoadFioLists();
+
+                switch (_mode)
+                {
+                    case (int)Mode.NewWorkDivision:
+                        this.Text = "Добавить предварительное";
+                        break;
+                    case (int)Mode.ArchAndCopy:
+                        this.Text = "Архив+копия";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Archive:
+                        this.Text = "В архив";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Edit:
+                        this.Text = "Редактировать";
+                        await bufferLoad();
+                        break;
+                }
             }
-             //   richTextBox1.Text = 
-        }
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
+            }
+        }
+
+        /// <summary>
+        /// Загружает списки дизайнеров и конструкторов в комбобоксы
+        /// </summary>
+        private async Task LoadFioLists()
+        {
+            try
+            {
+                // Получаем список сотрудников
+                var fioData = await _artNormService.GetRelDesigner();
+
+                if (fioData != null && fioData.Rows.Count > 0)
+                {
+                    // Создаем источники данных для комбобоксов
+                    BindingSource designerBindingSource = new BindingSource();
+                    BindingSource constructorBindingSource = new BindingSource();
+                    
+                    // Устанавливаем данные
+                    designerBindingSource.DataSource = fioData.Copy();
+                    constructorBindingSource.DataSource = fioData.Copy();
+                    
+                    // Настраиваем комбобоксы
+                    designerComboBox.DataSource = designerBindingSource;
+                    designerComboBox.DisplayMember = "fio";
+                    designerComboBox.ValueMember = "tab";
+                    
+                    constructorComboBox.DataSource = constructorBindingSource;
+                    constructorComboBox.DisplayMember = "fio";
+                    constructorComboBox.ValueMember = "tab";
+                    
+                    // Логируем успешную загрузку
+                    await _logger.LogEventAsync($"Списки дизайнеров и конструкторов успешно загружены", "LoadFioLists");
+                }
+                else
+                {
+                    await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "LoadFioLists");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке списков дизайнеров и конструкторов");
             }
         }
 
@@ -453,6 +401,7 @@ namespace SewingProduction.form
         {
             try
             {
+                // Загрузка данных NormRasz
                 var normRaszData = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
                 _normRaszList.Clear();
                 
@@ -471,13 +420,96 @@ namespace SewingProduction.form
                     _normRaszList.Add(normRasz);
                 }
                 
-                        _normRaszBindingSource.ResetBindings(false);
+                _normRaszBindingSource.ResetBindings(false);
+                
+                // Загрузка данных NormRask
+                var normRaskData = await _artNormService.GetRelatedNormRask(_bufferWorkDivision);
+                _normRaskList.Clear();
+                
+                // Преобразуем DataTable в список объектов NormRask
+                foreach (DataRow row in normRaskData.Rows)
+                {
+                    var normRask = new NormRask();
+                    foreach (DataColumn col in normRaskData.Columns)
+                    {
+                        var prop = typeof(NormRask).GetProperty(col.ColumnName);
+                        if (prop != null && row[col] != DBNull.Value)
+                        {
+                            prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
+                        }
                     }
+                    _normRaskList.Add(normRask);
+                }
+                
+                _normRaskBindingSource.ResetBindings(false);
+                
+                // Загрузка данных из ANN
+                await LoadAnnData();
+            }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
                 MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", 
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Загружает данные из таблицы ArtNormN в соответствующие контролы формы
+        /// </summary>
+        private async Task LoadAnnData()
+        {
+            try
+            {
+                // Получаем данные ANN по ID
+                var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
+                
+                if (annData != null)
+                {
+                    // Заполняем текстовые поля
+                    nameTextBox.Text = annData.Articul;
+                    groupTextBox.Text = annData.Group;
+                    modelTextBox.Text = annData.Mod;
+                    secTimeTextBox.Text = annData.Sek.ToString();
+                    
+                    // Устанавливаем выбранные значения для дизайнера и конструктора
+                    if (annData.Diz > 0)
+                    {
+                        try
+                        {
+                            designerComboBox.SelectedValue = annData.Diz;
+                        }
+                        catch
+                        {
+                            // Если не удалось найти значение в списке, просто продолжаем
+                            await _logger.LogEventAsync($"Не удалось найти дизайнера с ID {annData.Diz} в списке", "LoadAnnData");
+                        }
+                    }
+                    
+                    if (annData.Constr > 0)
+                    {
+                        try
+                        {
+                            constructorComboBox.SelectedValue = annData.Constr;
+                        }
+                        catch
+                        {
+                            // Если не удалось найти значение в списке, просто продолжаем
+                            await _logger.LogEventAsync($"Не удалось найти конструктора с ID {annData.Constr} в списке", "LoadAnnData");
+                        }
+                    }
+                    
+                    // Логируем успешную загрузку
+                    await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {_bufferWorkDivision}", "LoadAnnData");
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные ANN для ID {_bufferWorkDivision}", "LoadAnnData");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ANN для ID {_bufferWorkDivision}");
             }
         }
 
@@ -490,43 +522,48 @@ namespace SewingProduction.form
         /// <summary>
         /// Обработчик события изменения выбранного элемента в выпадающих списках конструктора и дизайнера
         /// </summary>
-        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private async void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is System.Windows.Forms.ComboBox comboBox)
+            if (sender is System.Windows.Forms.ComboBox comboBox && comboBox.SelectedValue != null)
             {
-                // Получаем выбранное значение
-                if (comboBox.SelectedItem != null)
+                try
                 {
-                    // Если это конструктор
+                    // Получаем выбранный ID сотрудника
+                    int selectedId = Convert.ToInt32(comboBox.SelectedValue);
+                    string fieldName = string.Empty;
+                    
+                    // Определяем, какой комбобокс был изменен
                     if (comboBox == constructorComboBox)
                     {
-                        // Обработка выбора конструктора
-                        // TODO: Добавить логику для сохранения выбранного конструктора
-                        try
-                        {
-                            int selectedId = (int)comboBox.SelectedValue;
-                            // Здесь можно добавить логику для работы с выбранным конструктором
-                        }
-                        catch (Exception ex)
-                        {
-                            _logger.LogErrorAsync(ex, "Ошибка при обработке выбора конструктора");
-                        }
+                        fieldName = "constr";
+                        await _logger.LogEventAsync($"Выбран конструктор с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
-                    // Если это дизайнер
                     else if (comboBox == designerComboBox)
                     {
-                        // Обработка выбора дизайнера
-                        // TODO: Добавить логику для сохранения выбранного дизайнера
-                        try
+                        fieldName = "diz";
+                        await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
+                    }
+                    
+                    // Если известно поле для обновления, сохраняем изменения
+                    if (!string.IsNullOrEmpty(fieldName) && _bufferWorkDivision > 0)
+                    {
+                        // Проверяем, в каком режиме находимся
+                        if (_mode == (int)Mode.Edit)
                         {
-                            int selectedId = (int)comboBox.SelectedValue;
-                            // Здесь можно добавить логику для работы с выбранным дизайнером
+                            // Сохраняем изменения в базу данных
+                            await _artNormService.UpdateEmployeeField(_bufferWorkDivision, fieldName, selectedId);
+                            await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            _logger.LogErrorAsync(ex, "Ошибка при обработке выбора дизайнера");
+                            // В других режимах сохраняем значение для использования при сохранении
+                            await _logger.LogEventAsync($"Выбрано значение {fieldName}={selectedId} для нового разделения труда", "ComboBox_SelectedIndexChanged");
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при обработке выбора сотрудника");
                 }
             }
         }
