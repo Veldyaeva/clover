@@ -160,7 +160,7 @@ namespace SewingProduction.Forms
                 int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "kolNZP", 0);
                 
                 // Обновляем видимость кнопки в зависимости от значения nzp
-                customButton7.Enabled = nzp <= 0;
+                customButton3.Enabled = nzp <= 0;
                 
             }
             catch (Exception ex)
@@ -541,7 +541,7 @@ namespace SewingProduction.Forms
                 if (view == null || view.FocusedRowHandle < 0) return;
 
                 int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, view.FocusedRowHandle, "kolNZP", 0);
-                customButton7.Visible = nzp <= 0;
+                customButton3.Enabled = nzp <= 0;
 
             }
             catch (Exception ex)
@@ -1291,11 +1291,11 @@ namespace SewingProduction.Forms
             await Task.Delay(100);
 
             // Ищем строку по `annID` в `GridView`
-            int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);
-            if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
+          //  int realRowHandle = ANNgridView.LocateByValue("AnnID", newId);
+          //  if (realRowHandle >= 0 && ANNgridView.IsDataRow(realRowHandle))
             {
                 // Устанавливаем фокус на новую строку
-                ANNgridView.FocusedRowHandle = realRowHandle;
+         //       ANNgridView.FocusedRowHandle = realRowHandle;
                 
                 // Открываем форму редактирования
                 using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
@@ -1314,10 +1314,10 @@ namespace SewingProduction.Forms
                         ANNgridControl.RefreshDataSource();
                     }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Новая строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+            //else
+            //{
+            //    MessageBox.Show("Ошибка: Новая строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         
@@ -1474,7 +1474,7 @@ namespace SewingProduction.Forms
                 }
 
                 // Обновляем архивный статус исходной записи
-                await _artNormService.UpdateEmployeeField(sourceRecord.AnnID, "status", (int)Status.Archive);
+                await _artNormService.UpdateEmployeeField(sourceRecord.AnnID, "Status", (int)Status.Archive);
                 await _logger.LogEventAsync($"Запись ID={sourceRecord.AnnID} архивирована. Создана новая запись ID={newId}", "CopyRow");
 
                 // Обновляем данные в гриде

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SewingProduction.Models
 {
-   public class NormRask //заглушка
+   public class NormRask 
     {
         public int id { get; set; }
         public int AnnId { get; set; }

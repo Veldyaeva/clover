@@ -111,7 +111,6 @@ namespace SewingProduction.Forms
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.customButton7 = new SewingProduction.CustomButton();
             this.customGridControl5 = new SewingProduction.CustomGridControl();
             this.gridView10 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.kodd_rt = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -246,6 +245,7 @@ namespace SewingProduction.Forms
             this.artnormnBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
+            this.customButton3 = new SewingProduction.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -1065,8 +1065,8 @@ namespace SewingProduction.Forms
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.ANNgridControl, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButton7, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.customGridControl5, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.customButton3, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -1087,21 +1087,6 @@ namespace SewingProduction.Forms
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
-            // 
-            // customButton7
-            // 
-            this.customButton7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton7.FlatAppearance.BorderSize = 0;
-            this.customButton7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton7.Font = new System.Drawing.Font("Arial", 12F);
-            this.customButton7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton7.Location = new System.Drawing.Point(3, 766);
-            this.customButton7.Name = "customButton7";
-            this.customButton7.Size = new System.Drawing.Size(151, 24);
-            this.customButton7.TabIndex = 4;
-            this.customButton7.Text = "отвязать от РТ";
-            this.customButton7.UseVisualStyleBackColor = false;
-            this.customButton7.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // customGridControl5
             // 
@@ -2416,6 +2401,18 @@ namespace SewingProduction.Forms
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
             // 
+            // customButton3
+            // 
+            this.customButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customButton3.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customButton3.Location = new System.Drawing.Point(3, 766);
+            this.customButton3.Name = "customButton3";
+            this.customButton3.Size = new System.Drawing.Size(123, 25);
+            this.customButton3.TabIndex = 8;
+            this.customButton3.Text = "customButton3";
+            this.customButton3.UseVisualStyleBackColor = false;
+            // 
             // TeamWork
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2815,7 +2812,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.GridControl ANNgridControl;
         private TableLayoutPanel tableLayoutPanel1;
         private PictureBox pictureBox1;
-        private CustomButton customButton7;
         private CustomGridControl customGridControl5;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView10;
         private DevExpress.XtraGrid.Columns.GridColumn kodd_rt;
@@ -2902,5 +2898,6 @@ namespace SewingProduction.Forms
         private CustomCancelButton customCancelButton1;
         private CustomComboBox customComboBox1;
         private CustomButton customButton1;
+        private CustomButton customButton3;
     }
 }

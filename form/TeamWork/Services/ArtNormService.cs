@@ -155,13 +155,13 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
         }
         public Task<DataTable> GetRelatedNormRask(int annId)
         {
-            string query = "SELECT annId, kod_o, razryd, text, sek  FROM norm_rask WHERE annId = @annId";
+            string query = "SELECT AnnID, kod_o as KodO, razryd as Rasryad, Text, Sek  FROM norm_rask WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public Task<DataTable> GetRelatedNormKont(int annId)
         {
-            string query = "SELECT annId, kod_o, razryd, text, sek FROM norm_kont WHERE annId = @annId";
+            string query = "SELECT AnnID, kod_o as KodO, razryd as Rasryad, Text, Sek FROM norm_kont WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 

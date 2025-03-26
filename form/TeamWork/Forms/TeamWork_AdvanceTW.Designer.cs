@@ -90,6 +90,7 @@ namespace SewingProduction.form
             this.customLabel1 = new SewingProduction.CustomLabel();
             this.customLabel2 = new SewingProduction.CustomLabel();
             this.constructorComboBox = new SewingProduction.CustomComboBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.designerComboBox = new SewingProduction.CustomComboBox();
             this.label2 = new SewingProduction.CustomLabel();
             this.modelTextBox = new SewingProduction.CustomTextBox();
@@ -109,7 +110,6 @@ namespace SewingProduction.form
             this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -134,11 +134,11 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -388,21 +388,21 @@ namespace SewingProduction.form
             // 
             // gridColumn10
             // 
-            this.gridColumn10.FieldName = "kod_o";
+            this.gridColumn10.FieldName = "KodO";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 2;
             // 
             // gridColumn11
             // 
-            this.gridColumn11.FieldName = "text";
+            this.gridColumn11.FieldName = "Text";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 3;
             // 
             // gridColumn12
             // 
-            this.gridColumn12.FieldName = "n";
+            this.gridColumn12.FieldName = "N";
             this.gridColumn12.Name = "gridColumn12";
             this.gridColumn12.Visible = true;
             this.gridColumn12.VisibleIndex = 4;
@@ -430,28 +430,28 @@ namespace SewingProduction.form
             // 
             // colannId1
             // 
-            this.colannId1.FieldName = "annId";
+            this.colannId1.FieldName = "AnnId";
             this.colannId1.Name = "colannId1";
             this.colannId1.Visible = true;
             this.colannId1.VisibleIndex = 8;
             // 
             // gridColumn15
             // 
-            this.gridColumn15.FieldName = "sek";
+            this.gridColumn15.FieldName = "Sek";
             this.gridColumn15.Name = "gridColumn15";
             this.gridColumn15.Visible = true;
             this.gridColumn15.VisibleIndex = 9;
             // 
             // gridColumn16
             // 
-            this.gridColumn16.FieldName = "obor";
+            this.gridColumn16.FieldName = "Obor";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 10;
             // 
             // colspec
             // 
-            this.colspec.FieldName = "spec";
+            this.colspec.FieldName = "Spec";
             this.colspec.Name = "colspec";
             this.colspec.Visible = true;
             this.colspec.VisibleIndex = 11;
@@ -507,63 +507,63 @@ namespace SewingProduction.form
             // 
             // gridColumn17
             // 
-            this.gridColumn17.FieldName = "kod";
+            this.gridColumn17.FieldName = "Kod";
             this.gridColumn17.Name = "gridColumn17";
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 0;
             // 
             // gridColumn19
             // 
-            this.gridColumn19.FieldName = "kod_o";
+            this.gridColumn19.FieldName = "KodO";
             this.gridColumn19.Name = "gridColumn19";
             this.gridColumn19.Visible = true;
             this.gridColumn19.VisibleIndex = 1;
             // 
             // gridColumn20
             // 
-            this.gridColumn20.FieldName = "text";
+            this.gridColumn20.FieldName = "Text";
             this.gridColumn20.Name = "gridColumn20";
             this.gridColumn20.Visible = true;
             this.gridColumn20.VisibleIndex = 2;
             // 
             // gridColumn21
             // 
-            this.gridColumn21.FieldName = "sek";
+            this.gridColumn21.FieldName = "Sek";
             this.gridColumn21.Name = "gridColumn21";
             this.gridColumn21.Visible = true;
             this.gridColumn21.VisibleIndex = 3;
             // 
             // colseb
             // 
-            this.colseb.FieldName = "seb";
+            this.colseb.FieldName = "Seb";
             this.colseb.Name = "colseb";
             this.colseb.Visible = true;
             this.colseb.VisibleIndex = 4;
             // 
             // gridColumn22
             // 
-            this.gridColumn22.FieldName = "n";
+            this.gridColumn22.FieldName = "N";
             this.gridColumn22.Name = "gridColumn22";
             this.gridColumn22.Visible = true;
             this.gridColumn22.VisibleIndex = 5;
             // 
             // coln_ch1
             // 
-            this.coln_ch1.FieldName = "n_ch";
+            this.coln_ch1.FieldName = "NCh";
             this.coln_ch1.Name = "coln_ch1";
             this.coln_ch1.Visible = true;
             this.coln_ch1.VisibleIndex = 6;
             // 
             // gridColumn23
             // 
-            this.gridColumn23.FieldName = "n1";
+            this.gridColumn23.FieldName = "N1";
             this.gridColumn23.Name = "gridColumn23";
             this.gridColumn23.Visible = true;
             this.gridColumn23.VisibleIndex = 7;
             // 
             // colannId2
             // 
-            this.colannId2.FieldName = "annId";
+            this.colannId2.FieldName = "AnnId";
             this.colannId2.Name = "colannId2";
             this.colannId2.Visible = true;
             this.colannId2.VisibleIndex = 8;
@@ -601,42 +601,42 @@ namespace SewingProduction.form
             // 
             // gridColumn24
             // 
-            this.gridColumn24.FieldName = "kod";
+            this.gridColumn24.FieldName = "Kod";
             this.gridColumn24.Name = "gridColumn24";
             this.gridColumn24.Visible = true;
             this.gridColumn24.VisibleIndex = 0;
             // 
             // gridColumn25
             // 
-            this.gridColumn25.FieldName = "sek_p";
+            this.gridColumn25.FieldName = "SekP";
             this.gridColumn25.Name = "gridColumn25";
             this.gridColumn25.Visible = true;
             this.gridColumn25.VisibleIndex = 1;
             // 
             // gridColumn26
             // 
-            this.gridColumn26.FieldName = "sek_v";
+            this.gridColumn26.FieldName = "SekV";
             this.gridColumn26.Name = "gridColumn26";
             this.gridColumn26.Visible = true;
             this.gridColumn26.VisibleIndex = 2;
             // 
             // gridColumn27
             // 
-            this.gridColumn27.FieldName = "sek_stra";
+            this.gridColumn27.FieldName = "SekStra";
             this.gridColumn27.Name = "gridColumn27";
             this.gridColumn27.Visible = true;
             this.gridColumn27.VisibleIndex = 3;
             // 
             // gridColumn28
             // 
-            this.gridColumn28.FieldName = "sek_p_tamp";
+            this.gridColumn28.FieldName = "SekTamp";
             this.gridColumn28.Name = "gridColumn28";
             this.gridColumn28.Visible = true;
             this.gridColumn28.VisibleIndex = 4;
             // 
             // gridColumn29
             // 
-            this.gridColumn29.FieldName = "annId";
+            this.gridColumn29.FieldName = "AnnID";
             this.gridColumn29.Name = "gridColumn29";
             this.gridColumn29.Visible = true;
             this.gridColumn29.VisibleIndex = 5;
@@ -652,7 +652,7 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
@@ -684,9 +684,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1035, 54);
+            this.richTextBox1.Location = new System.Drawing.Point(1033, 54);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(261, 45);
+            this.richTextBox1.Size = new System.Drawing.Size(263, 45);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -695,7 +695,7 @@ namespace SewingProduction.form
             this.customLabel1.AutoSize = true;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(300, 51);
+            this.customLabel1.Location = new System.Drawing.Point(298, 51);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(69, 16);
             this.customLabel1.TabIndex = 14;
@@ -719,9 +719,9 @@ namespace SewingProduction.form
             this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorComboBox.FormattingEnabled = true;
-            this.constructorComboBox.Location = new System.Drawing.Point(112, 54);
+            this.constructorComboBox.Location = new System.Drawing.Point(111, 54);
             this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Size = new System.Drawing.Size(182, 24);
+            this.constructorComboBox.Size = new System.Drawing.Size(181, 24);
             this.constructorComboBox.TabIndex = 16;
             this.constructorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
@@ -731,7 +731,7 @@ namespace SewingProduction.form
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(379, 54);
+            this.designerComboBox.Location = new System.Drawing.Point(377, 54);
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(199, 24);
             this.designerComboBox.TabIndex = 17;
@@ -742,7 +742,7 @@ namespace SewingProduction.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(300, 0);
+            this.label2.Location = new System.Drawing.Point(298, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 0;
@@ -753,7 +753,7 @@ namespace SewingProduction.form
             this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(379, 3);
+            this.modelTextBox.Location = new System.Drawing.Point(377, 3);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(200, 23);
             this.modelTextBox.TabIndex = 4;
@@ -763,7 +763,7 @@ namespace SewingProduction.form
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(585, 0);
+            this.label3.Location = new System.Drawing.Point(583, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 16);
             this.label3.TabIndex = 1;
@@ -774,7 +774,7 @@ namespace SewingProduction.form
             this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(709, 3);
+            this.nameTextBox.Location = new System.Drawing.Point(707, 3);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(204, 23);
             this.nameTextBox.TabIndex = 5;
@@ -784,7 +784,7 @@ namespace SewingProduction.form
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(919, 0);
+            this.label5.Location = new System.Drawing.Point(917, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -792,7 +792,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1035, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1033, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -802,7 +802,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1168, 3);
+            this.btnOK.Location = new System.Drawing.Point(1166, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -816,7 +816,7 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(919, 54);
+            this.buffer.Location = new System.Drawing.Point(917, 54);
             this.buffer.Name = "buffer";
             this.buffer.Size = new System.Drawing.Size(110, 45);
             this.buffer.TabIndex = 11;
@@ -829,7 +829,7 @@ namespace SewingProduction.form
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(585, 51);
+            this.label4.Location = new System.Drawing.Point(583, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 32);
             this.label4.TabIndex = 2;
@@ -840,7 +840,7 @@ namespace SewingProduction.form
             this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(709, 54);
+            this.secTimeTextBox.Location = new System.Drawing.Point(707, 54);
             this.secTimeTextBox.Name = "secTimeTextBox";
             this.secTimeTextBox.ReadOnly = true;
             this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
@@ -862,9 +862,9 @@ namespace SewingProduction.form
             this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(112, 3);
+            this.groupTextBox.Location = new System.Drawing.Point(111, 3);
             this.groupTextBox.Name = "groupTextBox";
-            this.groupTextBox.Size = new System.Drawing.Size(182, 23);
+            this.groupTextBox.Size = new System.Drawing.Size(181, 23);
             this.groupTextBox.TabIndex = 19;
             // 
             // rasz
@@ -923,11 +923,11 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource2)).EndInit();
             this.ResumeLayout(false);
 
