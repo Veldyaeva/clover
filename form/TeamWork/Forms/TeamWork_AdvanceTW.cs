@@ -36,6 +36,8 @@ namespace SewingProduction.form
         private BindingSource _normRaszBindingSource;
         private BindingList<NormRask> _normRaskList;
         private BindingSource _normRaskBindingSource;
+        // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
+        private static DataTable _cachedFioData;
 
         public TeamWork_AdvanceTW(int id, int bufferWorkDivision, int mode)
         {
@@ -47,11 +49,409 @@ namespace SewingProduction.form
             _bufferWorkDivision = bufferWorkDivision;
             _mode = mode;
             _newAnnId = id;
-
-            InitializeBindings();
         }
 
-        private void InitializeBindings()
+        /// <summary>
+        /// Инициализирует привязки для NormRasz и NormRask.
+        /// Выполняется в отдельном потоке.
+        /// </summary>
+        private async Task InitializeBindingsAsync()
+        {
+            var normRaszTask = Task.Run(() =>
+            {
+                _normRaszList = new BindingList<NormRasz>();
+                _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
+            });
+            var normRaskTask = Task.Run(() =>
+            {
+                _normRaskList = new BindingList<NormRask>();
+                _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
+            });
+            await Task.WhenAll(normRaszTask, normRaskTask);
+
+            gridControl5.DataSource = _normRaszBindingSource;
+            gridControl2.DataSource = _normRaskBindingSource;
+
+            gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+            gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+        }
+
+        //private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Загружаем настройки грида в отдельном потоке
+        //        Task loadGridSettingsTask = Task.Run(() =>
+        //        {
+        //            _gridHelper.LoadGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+        //            _gridHelper.LoadGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+        //            _gridHelper.LoadGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+        //            _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+        //        });
+
+        //        // Загружаем списки дизайнеров и конструкторов с кэшированием
+        //        Task<DataTable> loadFioTask = LoadFioListsAsync();
+
+        //        // Инициализируем привязки для NormRasz и NormRask
+        //        Task initBindingsTask = InitializeBindingsAsync();
+
+        //        await Task.WhenAll(loadGridSettingsTask, loadFioTask, initBindingsTask);
+
+        //        DataTable fioData = loadFioTask.Result;
+        //        if (fioData != null && fioData.Rows.Count > 0)
+        //        {
+        //            // Группируем обновление комбобоксов в одном Invoke
+        //            this.Invoke((MethodInvoker)(() =>
+        //            {
+        //                designerComboBox.BeginUpdate();
+        //                constructorComboBox.BeginUpdate();
+        //                try
+        //                {
+        //                    var designerBindingSource = new BindingSource { DataSource = fioData.Copy() };
+        //                    var constructorBindingSource = new BindingSource { DataSource = fioData.Copy() };
+
+        //                    designerComboBox.DataSource = designerBindingSource;
+        //                    designerComboBox.DisplayMember = "fio";
+        //                    designerComboBox.ValueMember = "tab";
+
+        //                    constructorComboBox.DataSource = constructorBindingSource;
+        //                    constructorComboBox.DisplayMember = "fio";
+        //                    constructorComboBox.ValueMember = "tab";
+        //                }
+        //                finally
+        //                {
+        //                    designerComboBox.EndUpdate();
+        //                    constructorComboBox.EndUpdate();
+        //                }
+        //            }));
+        //        }
+        //        else
+        //        {
+        //            await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "TeamWork_AdvanceTW_Load");
+        //        }
+
+        //        // Если режим предполагает загрузку данных из буфера – выполняем параллельно
+        //        if (_mode == (int)Mode.ArchAndCopy ||
+        //            _mode == (int)Mode.Archive ||
+        //            _mode == (int)Mode.Edit)
+        //        {
+        //            await bufferLoadAsync();
+        //        }
+
+        //        // Устанавливаем заголовок окна в зависимости от режима
+        //        switch (_mode)
+        //        {
+        //            case (int)Mode.NewWorkDivision:
+        //                this.Text = "Добавить предварительное";
+        //                break;
+        //            case (int)Mode.ArchAndCopy:
+        //                this.Text = "Архив+копия";
+        //                break;
+        //            case (int)Mode.Archive:
+        //                this.Text = "В архив";
+        //                break;
+        //            case (int)Mode.Edit:
+        //                this.Text = "Редактировать";
+        //                break;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
+        //    }
+        //}
+        private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                // Загружаем настройки для всех гридов
+                _gridHelper.LoadGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+
+                // Загружаем комбобоксы в фоновом режиме
+                var fioData = await Task.Run(() => _artNormService.GetRelDesigner());
+
+                // Используем правильный способ обновления UI
+                if (this.InvokeRequired)
+                {
+                    await Task.Run(() => this.Invoke(new Action(async () =>
+                    {
+                        try
+                        {
+                            if (fioData != null && fioData.Rows.Count > 0)
+                            {
+                                // Создаем BindingSource'ы
+                                var designerBindingSource = new BindingSource { DataSource = fioData.Copy() };
+                                var constructorBindingSource = new BindingSource { DataSource = fioData.Copy() };
+
+                                // Настраиваем комбобоксы
+                                designerComboBox.BeginUpdate();
+                                constructorComboBox.BeginUpdate();
+
+                                try
+                                {
+                                    designerComboBox.DataSource = designerBindingSource;
+                                    designerComboBox.DisplayMember = "fio";
+                                    designerComboBox.ValueMember = "tab";
+
+                                    constructorComboBox.DataSource = constructorBindingSource;
+                                    constructorComboBox.DisplayMember = "fio";
+                                    constructorComboBox.ValueMember = "tab";
+                                }
+                                finally
+                                {
+                                    designerComboBox.EndUpdate();
+                                    constructorComboBox.EndUpdate();
+                                }
+                            }
+                            else
+                            {
+                                await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "TeamWork_AdvanceTW_Load");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            await _logger.LogErrorAsync(ex, "Ошибка при инициализации комбобоксов");
+                            MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    })));
+                }
+                else
+                {
+                    try
+                    {
+                        if (fioData != null && fioData.Rows.Count > 0)
+                        {
+                            // Создаем BindingSource'ы
+                            var designerBindingSource = new BindingSource { DataSource = fioData.Copy() };
+                            var constructorBindingSource = new BindingSource { DataSource = fioData.Copy() };
+
+                            // Настраиваем комбобоксы
+                            designerComboBox.BeginUpdate();
+                            constructorComboBox.BeginUpdate();
+
+                            try
+                            {
+                                designerComboBox.DataSource = designerBindingSource;
+                                designerComboBox.DisplayMember = "fio";
+                                designerComboBox.ValueMember = "tab";
+
+                                constructorComboBox.DataSource = constructorBindingSource;
+                                constructorComboBox.DisplayMember = "fio";
+                                constructorComboBox.ValueMember = "tab";
+                            }
+                            finally
+                            {
+                                designerComboBox.EndUpdate();
+                                constructorComboBox.EndUpdate();
+                            }
+                        }
+                        else
+                        {
+                            await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "TeamWork_AdvanceTW_Load");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "Ошибка при инициализации комбобоксов");
+                        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+
+                // Если есть данные в буфере, отображаем их в richTextBox1
+                if (_bufferWorkDivision > 0)
+                {
+                    try
+                    {
+                        var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
+                        if (annData != null)
+                        {
+                            richTextBox1.Text = $"группа: {annData.Group?.TrimEnd(' ')}, \n\r" +
+                                              $"модель: {annData.Mod?.TrimEnd(' ')}, \n\r" +
+                                              $"артикул: {annData.Articul?.TrimEnd(' ')}";
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных буфера в richTextBox1");
+                    }
+                }
+
+                switch (_mode)
+                {
+                    case (int)Mode.NewWorkDivision:
+                        this.Text = "Добавить предварительное";
+                        break;
+                    case (int)Mode.ArchAndCopy:
+                        this.Text = "Архив+копия";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Archive:
+                        this.Text = "В архив";
+                        await bufferLoad();
+                        break;
+                    case (int)Mode.Edit:
+                        this.Text = "Редактировать";
+                        await bufferLoad();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
+            }
+        }
+
+        /// <summary>
+        /// Загружает списки сотрудников для комбобоксов с кэшированием.
+        /// </summary>
+        private async Task<DataTable> LoadFioListsAsync()
+        {
+            if (_cachedFioData != null)
+                return _cachedFioData;
+            try
+            {
+                DataTable fioData = await _artNormService.GetRelDesigner();
+                if (fioData != null && fioData.Rows.Count > 0)
+                {
+                    _cachedFioData = fioData.Copy();
+                    await _logger.LogEventAsync("Списки дизайнеров и конструкторов успешно загружены", "LoadFioListsAsync");
+                    return _cachedFioData;
+                }
+                else
+                {
+                    await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "LoadFioListsAsync");
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке списков дизайнеров и конструкторов");
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Загрузка данных из буфера (NormRasz, NormRask и ANN) с параллельной обработкой.
+        /// </summary>
+        private async Task bufferLoadAsync()
+        {
+            if (_bufferWorkDivision <= 0)
+                return;
+
+            try
+            {
+                Task loadNormRaszTask = Task.Run(async () =>
+                {
+                    var normRaszData = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    _normRaszList.Clear();
+                    foreach (DataRow row in normRaszData.Rows)
+                    {
+                        var normRasz = new NormRasz();
+                        foreach (DataColumn col in normRaszData.Columns)
+                        {
+                            var prop = typeof(NormRasz).GetProperty(col.ColumnName);
+                            if (prop != null && row[col] != DBNull.Value)
+                                prop.SetValue(normRasz, Convert.ChangeType(row[col], prop.PropertyType));
+                        }
+                        _normRaszList.Add(normRasz);
+                    }
+                    _normRaszBindingSource.ResetBindings(false);
+                });
+
+                Task loadNormRaskTask = Task.Run(async () =>
+                {
+                    var normRaskData = await _artNormService.GetRelatedNormRask(_bufferWorkDivision);
+                    _normRaskList.Clear();
+                    foreach (DataRow row in normRaskData.Rows)
+                    {
+                        var normRask = new NormRask();
+                        foreach (DataColumn col in normRaskData.Columns)
+                        {
+                            var prop = typeof(NormRask).GetProperty(col.ColumnName);
+                            if (prop != null && row[col] != DBNull.Value)
+                                prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
+                        }
+                        _normRaskList.Add(normRask);
+                    }
+                    _normRaskBindingSource.ResetBindings(false);
+                });
+
+                Task loadAnnTask = LoadAnnDataAsync();
+
+                await Task.WhenAll(loadNormRaszTask, loadNormRaskTask, loadAnnTask);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
+                MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Загрузка данных ANN по ID с групповым обновлением UI.
+        /// </summary>
+        private async Task LoadAnnDataAsync()
+        {
+            try
+            {
+                var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
+                if (annData != null)
+                {
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                        nameTextBox.Text = annData.Articul;
+                        groupTextBox.Text = annData.Group;
+                        modelTextBox.Text = annData.Mod;
+                        secTimeTextBox.Text = annData.Sek.ToString();
+                        if (annData.Diz > 0)
+                        {
+                            try { designerComboBox.SelectedValue = annData.Diz; }
+                            catch { /* логирование */ }
+                        }
+                        if (annData.Constr > 0)
+                        {
+                            try { constructorComboBox.SelectedValue = annData.Constr; }
+                            catch { /* логирование */ }
+                        }
+                    }));
+                    await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {_bufferWorkDivision}", "LoadAnnDataAsync");
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные ANN для ID {_bufferWorkDivision}", "LoadAnnDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ANN для ID {_bufferWorkDivision}");
+            }
+        }
+
+        private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                if (gridView5 != null && gridView5.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                    gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                if (gridView2 != null && gridView2.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                    gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+
+                _gridHelper.SaveGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork_AdvanceTW");
+            }
+        }
+
+
+        private async Task InitializeBindings()
         {
             // Инициализация для NormRasz
             _normRaszList = new BindingList<NormRasz>();
@@ -63,55 +463,25 @@ namespace SewingProduction.form
             _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
             gridControl2.DataSource = _normRaskBindingSource;
 
-            // Настраиваем обработчики для NormRasz
-            gridView5.InitNewRow += GridView5_InitNewRow;
-            gridView5.RowUpdated += GridView5_RowUpdated;
-            gridView5.ValidateRow += GridView5_ValidateRow;
+            ////Norm_kont
+            //_normKontList = new BindingList<NormKont>();
+            //_normKontBindingSource = new BindingSource { DataSource = _normKontList };
+            //gridControl3.DataSource = _normKontBindingSource;
+
+            ////dop_obr
+            //_normDopObrList = new BindingList<NormDopObr>();
+            //_normDopObrBindingSource = new BindingSource { DataSource = _normDopObrList };
+            //gridControl4.DataSource = _normDopObrBindingSource;
+
+            // Настраиваем параметры отображения для NormRasz
             gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
 
-            // Настраиваем обработчики для NormRask
-            gridView2.InitNewRow += GridView2_InitNewRow;
-            gridView2.RowUpdated += GridView2_RowUpdated;
-            gridView2.ValidateRow += GridView2_ValidateRow;
+            // Настраиваем параметры отображения для NormRask
             gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-
-            // Подписываемся на события изменения комбобоксов
-            designerComboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
-            constructorComboBox.SelectedIndexChanged += ComboBox_SelectedIndexChanged;
         }
 
 
 
-        private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                // Проверяем, не установлены ли редакторы в режим Inplace
-                if (gridView5 != null && gridView5.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
-                {
-                    gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-                }
-                
-                if (gridView2 != null && gridView2.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
-                {
-                    gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-                }
-
-                // Сохраняем настройки для всех гридов при закрытии формы
-                _gridHelper.SaveGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
-            }
-            catch (Exception ex)
-            {
-                // Логируем ошибку, но не мешаем закрытию формы
-                if (_logger != null)
-                {
-                    _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork_AdvanceTW");
-                }
-            }
-        }
 
         private void GridView5_InitNewRow(object sender, InitNewRowEventArgs e)
         {
@@ -149,9 +519,9 @@ namespace SewingProduction.form
                             gridView.SetRowCellValue(e.RowHandle, "Sek", selectedData.Sek);
                             gridView.SetRowCellValue(e.RowHandle, "KodPodr", selectedData.KodPodr);
                             gridView.SetRowCellValue(e.RowHandle, "KodOb", selectedData.KodOb);
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         // Если данные не выбраны, удаляем строку
                             gridView.DeleteRow(e.RowHandle);
                     }
@@ -316,43 +686,6 @@ namespace SewingProduction.form
 
         }
 
-        private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                // Загружаем настройки для всех гридов
-                _gridHelper.LoadGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
-
-                // Загружаем списки дизайнеров и конструкторов
-                await LoadFioLists();
-
-                switch (_mode)
-                {
-                    case (int)Mode.NewWorkDivision:
-                        this.Text = "Добавить предварительное";
-                        break;
-                    case (int)Mode.ArchAndCopy:
-                        this.Text = "Архив+копия";
-                        await bufferLoad();
-                        break;
-                    case (int)Mode.Archive:
-                        this.Text = "В архив";
-                        await bufferLoad();
-                        break;
-                    case (int)Mode.Edit:
-                        this.Text = "Редактировать";
-                        await bufferLoad();
-                        break;
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
-            }
-        }
 
         /// <summary>
         /// Загружает списки дизайнеров и конструкторов в комбобоксы
@@ -399,58 +732,61 @@ namespace SewingProduction.form
 
         private async Task bufferLoad()
         {
-            try
+            if (_bufferWorkDivision > 0)
             {
-                // Загрузка данных NormRasz
-                var normRaszData = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
-                _normRaszList.Clear();
-                
-                // Преобразуем DataTable в список объектов NormRasz
-                foreach (DataRow row in normRaszData.Rows)
+                try
                 {
-                    var normRasz = new NormRasz();
-                    foreach (DataColumn col in normRaszData.Columns)
+                    // Загрузка данных NormRasz
+                    var normRaszData = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    _normRaszList.Clear();
+
+                    // Преобразуем DataTable в список объектов NormRasz
+                    foreach (DataRow row in normRaszData.Rows)
                     {
-                        var prop = typeof(NormRasz).GetProperty(col.ColumnName);
-                        if (prop != null && row[col] != DBNull.Value)
+                        var normRasz = new NormRasz();
+                        foreach (DataColumn col in normRaszData.Columns)
                         {
-                            prop.SetValue(normRasz, Convert.ChangeType(row[col], prop.PropertyType));
+                            var prop = typeof(NormRasz).GetProperty(col.ColumnName);
+                            if (prop != null && row[col] != DBNull.Value)
+                            {
+                                prop.SetValue(normRasz, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
                         }
+                        _normRaszList.Add(normRasz);
                     }
-                    _normRaszList.Add(normRasz);
+
+                        _normRaszBindingSource.ResetBindings(false);
+
+                    // Загрузка данных NormRask
+                    var normRaskData = await _artNormService.GetRelatedNormRask(_bufferWorkDivision);
+                    _normRaskList.Clear();
+
+                    // Преобразуем DataTable в список объектов NormRask
+                    foreach (DataRow row in normRaskData.Rows)
+                    {
+                        var normRask = new NormRask();
+                        foreach (DataColumn col in normRaskData.Columns)
+                        {
+                            var prop = typeof(NormRask).GetProperty(col.ColumnName);
+                            if (prop != null && row[col] != DBNull.Value)
+                            {
+                                prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
+                        }
+                        _normRaskList.Add(normRask);
+                    }
+
+                    _normRaskBindingSource.ResetBindings(false);
+
+                    // Загрузка данных из ANN
+                    await LoadAnnData();
                 }
-                
-                _normRaszBindingSource.ResetBindings(false);
-                
-                // Загрузка данных NormRask
-                var normRaskData = await _artNormService.GetRelatedNormRask(_bufferWorkDivision);
-                _normRaskList.Clear();
-                
-                // Преобразуем DataTable в список объектов NormRask
-                foreach (DataRow row in normRaskData.Rows)
+                catch (Exception ex)
                 {
-                    var normRask = new NormRask();
-                    foreach (DataColumn col in normRaskData.Columns)
-                    {
-                        var prop = typeof(NormRask).GetProperty(col.ColumnName);
-                        if (prop != null && row[col] != DBNull.Value)
-                        {
-                            prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
-                        }
-                    }
-                    _normRaskList.Add(normRask);
+                    await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
+                    MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                
-                _normRaskBindingSource.ResetBindings(false);
-                
-                // Загрузка данных из ANN
-                await LoadAnnData();
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
-                MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -573,21 +909,25 @@ namespace SewingProduction.form
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            try
+            if (_bufferWorkDivision > 0)
             {
-                // Загружаем данные из буфера
-                await bufferLoad();
-                
-                // Здесь можно добавить дополнительную логику для обработки данных после загрузки из буфера
-                MessageBox.Show("Данные из буфера успешно загружены", "Информация", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+                    // Загружаем данные из буфера
+                    await bufferLoad();
+
+                    // Здесь можно добавить дополнительную логику для обработки данных после загрузки из буфера
+                    MessageBox.Show("Данные из буфера успешно загружены", "Информация",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
+                    MessageBox.Show($"Ошибка при вставке данных из буфера: {ex.Message}", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
-                MessageBox.Show($"Ошибка при вставке данных из буфера: {ex.Message}", "Ошибка", 
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            else { MessageBox.Show("В буфере пусто", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
     }
 }

@@ -40,7 +40,7 @@ namespace SewingProduction.Forms
         private readonly ILogger _logger =new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
-        private int bufferWorkDivision;
+        private int bufferWorkDivision =0;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
         public TeamWork()
@@ -69,9 +69,6 @@ namespace SewingProduction.Forms
 
             this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
             this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
-
-            // Привязываем обработчик события для ограничения поиска только выбранным полем
-            this.searchControl1.Properties.QueryIsSearchColumn += async (s, e) => await searchControl1_QueryIsSearchColumn(s, e);
 
             _bindingList = new BindingList<ArtNormN>();
             _bindingSource = new BindingSource { DataSource = _bindingList };
@@ -133,6 +130,12 @@ namespace SewingProduction.Forms
                 _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
 
+                // Подписываемся на событие смены строки в customGridControl5
+                var view5 = customGridControl5.MainView as GridView;
+                if (view5 != null)
+                {
+                    view5.FocusedRowChanged += GridView5_FocusedRowChanged;
+                }
 
             await LoadWorkDivisions();
             await CurrentWorks_Load();
@@ -142,6 +145,31 @@ namespace SewingProduction.Forms
                 _logger.LogErrorAsync(ex, "Error in TeamWorkForm_Load");
             }
         }
+
+        /// <summary>
+        /// Обработчик смены выбранной строки в customGridControl5
+        /// </summary>
+        private async void GridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                var view = sender as GridView;
+                if (view == null || e.FocusedRowHandle < 0) return;
+
+                // Получаем значение nzp из выбранной строки
+                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "kolNZP", 0);
+                
+                // Обновляем видимость кнопки в зависимости от значения nzp
+                customButton7.Enabled = nzp <= 0;
+                
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
+            }
+        }
+
+
 
         /// <summary>
         /// Загрузка вкладки "Список РТ"
@@ -203,9 +231,9 @@ namespace SewingProduction.Forms
                 ANNgridControl.BeginUpdate();
                 try
                 {
-                    _bindingSource.ResetBindings(false);
-                    ANNgridControl.RefreshDataSource();
-                    ANNgridView.RefreshData();
+                _bindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
                     filterTable();
                 }
                 finally
@@ -403,7 +431,7 @@ namespace SewingProduction.Forms
                 //UpdateRelatedData(annId);
                 await LoadRelatedData(annId);
 
-                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "kod", "");
+                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "Kod", "");
                 int o = 0;
                 try { o = Convert.ToInt32(kod); }
                 catch (Exception ex) { await _logger.LogErrorAsync(ex, "опять КОД это строка"); return; }
@@ -509,19 +537,12 @@ namespace SewingProduction.Forms
         {
             try
             {
-                int nzp = 0;
-                var viewNzp = customGridControl5.MainView as GridView;
+                var view = customGridControl5.MainView as GridView;
+                if (view == null || view.FocusedRowHandle < 0) return;
 
-                if (viewNzp != null)
-                {
-                    for (int i = 0; i < viewNzp.RowCount; i++)
-                    {
-                        int parsedValue = CommonFunctions.GetRowCellValueOrDefault<int>(viewNzp, i, "kolNZP", 0);
-                        nzp = parsedValue;
-                    }
-                }
-
+                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, view.FocusedRowHandle, "kolNZP", 0);
                 customButton7.Visible = nzp <= 0;
+
             }
             catch (Exception ex)
             {
@@ -1313,154 +1334,215 @@ namespace SewingProduction.Forms
 
         private async Task ArchAndCopy()
         {
-                int newId = 0;//найти новый айди и присвоить
-            GridView AnnView = ANNgridView;
-            if (AnnView == null) return;
-            if (gridView10.RowCount > 0)
+            // Проверка доступности представления
+            GridView annView = ANNgridView;
+            if (annView == null || annView.FocusedRowHandle < 0)
             {
-                int nzp = (int)gridView10.GetRowCellValue(0, "kolNZP");
-                if (nzp > 0)
-                {
-                    await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
-                    {
-                        if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
-                        {
-                            //сохраняем
-                            AnnView.AddNewRow(); // Добавляем новую строку
-                        }
-                        else
-                        {
-                            //отменяем
-                        }
-                    }
-                }
-                else
-                {
-                    await CopyRow();
-                    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
-                    {
-                        if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
-                        {
-                            //сохраняем
-                            AnnView.AddNewRow(); // Добавляем новую строку
-                        }
-                        else
-                        {
-                            //отменяем
-                        }
-                    }
-                }
+                MessageBox.Show("Выберите запись для архивирования и копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            else
+            try
             {
-                await CopyRow();
-                using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.ArchAndCopy))
+                // Получаем ID выбранной записи
+                int selectedAnnId = (int)annView.GetRowCellValue(annView.FocusedRowHandle, "AnnID");
+                
+                // Проверяем наличие незавершенного производства (НЗП)
+                bool hasNZP = false;
+                if (gridView10.RowCount > 0)
                 {
-                    if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                    int nzp = Convert.ToInt32(gridView10.GetRowCellValue(0, "kolNZP"));
+                    hasNZP = nzp > 0;
+                    
+                    // Логируем информацию о НЗП
+                    await _logger.LogEventAsync($"Запись ID={selectedAnnId} имеет НЗП: {hasNZP}", "ArchAndCopy");
+                    
+                    if (hasNZP)
                     {
-                        //сохраняем
-                        AnnView.AddNewRow(); // Добавляем новую строку
-                    }
-                    else
-                    {
-                        //отменяем
+                        // Предупреждаем пользователя о наличии НЗП
+                        var result = MessageBox.Show(
+                            "У выбранного разделения труда есть незавершенное производство. Продолжить архивирование?",
+                            "Предупреждение",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Warning);
+                            
+                        if (result == DialogResult.No)
+                        {
+                            await _logger.LogEventAsync("Пользователь отменил архивирование записи с НЗП", "ArchAndCopy");
+                            return;
+                        }
                     }
                 }
+
+                // Копируем запись в новую и получаем ID новой записи
+                int newId = await CopyRow();
+                if (newId <= 0)
+                {
+                    // Ошибка копирования уже выведена в CopyRow
+                    return;
+                }
+
+                // Открываем форму расширенного редактирования
+                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(newId, selectedAnnId, (int)Mode.ArchAndCopy))
+                {
+                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                    
+                    if (result == DialogResult.OK)
+                    {
+                        // Обновляем UI после сохранения
+                        annView.RefreshData();
+                        await _logger.LogEventAsync($"Запись ID={selectedAnnId} успешно архивирована и скопирована как ID={newId}", "ArchAndCopy");
+                        
+                        // Показываем сообщение об успешном завершении операции
+                        MessageBox.Show(
+                            $"Запись успешно архивирована и скопирована.\nНовый ID: {newId}",
+                            "Информация",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                        // Обрабатываем отмену операции
+                        await _logger.LogEventAsync($"Редактирование копии записи ID={newId} отменено пользователем", "ArchAndCopy");
+                        }
+                    }
+                }
+            catch (Exception ex)
+            {
+                // Обрабатываем возможные ошибки
+                await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Создает копию выбранной записи разделения труда в базе данных
+        /// </summary>
+        /// <returns>ID новой записи или -1 в случае ошибки</returns>
+        private async Task<int> CopyRow()
+        {
+            try
+            {
+                int selectedRowHandle = ANNgridView.FocusedRowHandle;
+                if (selectedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите разделение труда для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return -1;
+                }
+
+                // Получаем выбранную запись
+                ArtNormN sourceRecord = ANNgridView.GetRow(selectedRowHandle) as ArtNormN;
+                if (sourceRecord == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return -1;
+                }
+
+                // Создаем копию записи с новыми значениями
+                ArtNormN newRecord = new ArtNormN
+                {
+                    Kod = sourceRecord.Kod,
+                    Group = sourceRecord.Group,
+                    Articul = sourceRecord.Articul,
+                    Mod = sourceRecord.Mod,
+                    SekShv = sourceRecord.SekShv,
+                    SekVyaz5 = sourceRecord.SekVyaz5,
+                    SekVyaz6 = sourceRecord.SekVyaz6,
+                    SekVyaz7 = sourceRecord.SekVyaz7,
+                    SekVyaz10 = sourceRecord.SekVyaz10,
+                    SekVyaz12 = sourceRecord.SekVyaz12,
+                    SekVyazo = sourceRecord.SekVyazo,
+                    SekVyaz = sourceRecord.SekVyaz,
+                    Sek = sourceRecord.Sek,
+                    Komment = sourceRecord.Komment,
+                    DataSozd = DateTime.Now,
+                    Diz = sourceRecord.Diz,
+                    Constr = sourceRecord.Constr,
+                DataObn = null,
+                    SekKr = sourceRecord.SekKr,
+                    Slogn = sourceRecord.Slogn,
+                Arh = false,
+                    Status = (int)Status.Actual
+                };
+
+                // Сохраняем копию в базу данных
+                int newId = await Task.Run(() => _artNormService.SaveCopyToDatabase(newRecord));
+                if (newId <= 0)
+                {
+                    MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return -1;
+                }
+
+                // Обновляем архивный статус исходной записи
+                await _artNormService.UpdateEmployeeField(sourceRecord.AnnID, "status", (int)Status.Archive);
+                await _logger.LogEventAsync($"Запись ID={sourceRecord.AnnID} архивирована. Создана новая запись ID={newId}", "CopyRow");
+
+                // Обновляем данные в гриде
+            await LoadWorkDivisions();
+
+                // Выделяем новую запись в гриде
+                int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
+            if (newRowHandle >= 0)
+            {
+                    ANNgridView.FocusedRowHandle = newRowHandle;
+                }
+
+                return newId;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при копировании записи");
+                MessageBox.Show($"Произошла ошибка при копировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
             }
         }
 
         /// <summary>
         /// Редактировать РТ
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void customButton5_Click(object sender, EventArgs e)
         {
-            if (ANNgridView.FocusedRowHandle >= 0)
-                ANNgridView.ShowPopupEditForm();
-            GridView view = ANNgridView;
-            if (view == null) return;
-
-
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(0, (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID"), (int)Mode.Edit))
+            try
             {
-                if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                if (ANNgridView.FocusedRowHandle < 0)
                 {
-                    //сохраняем
-                    view.AddNewRow(); // Добавляем новую строку
+                    MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
+
+                // Получаем ID выбранной записи
+                int selectedAnnId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+
+                // Открываем форму редактирования
+                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
+                    0, // Новый ID не нужен, так как мы редактируем существующую запись
+                    selectedAnnId, 
+                    (int)Mode.Edit))
                 {
-                    //отменяем
+                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                    
+                    if (result == DialogResult.OK)
+                    {
+                        // Обновляем UI после сохранения
+                        ANNgridView.RefreshData();
+                        
+                        // Отображаем сообщение об успешном редактировании
+                        MessageBox.Show(
+                            "Запись успешно отредактирована.",
+                            "Информация",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
                 }
             }
-
+            catch (Exception ex)
+            {
+                // Обрабатываем возможные ошибки
+                _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        private async Task CopyRow()
-        {
-            int selectedRowHandle = gridView1.FocusedRowHandle;
-            if (selectedRowHandle < 0)
-            {
-                MessageBox.Show("Выберите РТ для копирования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
 
-            ArtNormN oldRow = gridView1.GetRow(selectedRowHandle) as ArtNormN;
-            if (oldRow == null) return;
-
-            //  Создаём копию объекта
-            ArtNormN newItem = new ArtNormN
-            {
-                Kod = oldRow.Kod,
-                Group = oldRow.Group,
-                Articul = oldRow.Articul,
-                Mod = oldRow.Mod,
-                SekShv = oldRow.SekShv,
-                SekVyaz5 = oldRow.SekVyaz5,
-                SekVyaz6 = oldRow.SekVyaz6,
-                SekVyaz7 = oldRow.SekVyaz7,
-                SekVyaz10 = oldRow.SekVyaz10,
-                SekVyaz12 = oldRow.SekVyaz12,
-                SekVyazo = oldRow.SekVyazo,
-                SekVyaz = oldRow.SekVyaz,
-                Sek = oldRow.Sek,
-                Komment = oldRow.Komment,
-                DataSozd = DateTime.Now, // Новая дата создания
-                Diz = oldRow.Diz,
-                Constr = oldRow.Constr,
-                DataObn = null,
-                SekKr = oldRow.SekKr,
-                Slogn = oldRow.Slogn,
-                Arh = false,
-                Status = oldRow.Status
-            };
-
-            //  Сохраняем копию в БД
-            int newID = _artNormService.SaveCopyToDatabase(newItem);
-            if (newID <= 0)
-            {
-                MessageBox.Show("Ошибка копирования в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            //  Загружаем данные заново
-            await LoadWorkDivisions();
-
-            //  Ищем новую строку в `GridView`
-            int newRowHandle = gridView1.LocateByValue("annID", newID);
-            if (newRowHandle >= 0)
-            {
-                gridView1.FocusedRowHandle = newRowHandle;
-                gridView1.ShowPopupEditForm();
-            }
-            else
-            {
-                MessageBox.Show("Ошибка: Копированная строка не найдена!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
-        }
         #endregion
 
         #region текущие работы - требуют увязки

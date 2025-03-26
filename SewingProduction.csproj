@@ -305,12 +305,6 @@
     <Compile Include="form\TeamWork\Forms\TeamWork_AdvanceTW.Designer.cs">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.Designer.cs">
-      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\TeamWork\Helpers\CommonFunctions.cs" />
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
@@ -489,9 +483,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.resx">
-      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
