@@ -42,7 +42,6 @@ namespace SewingProduction.form
         private BindingSource _normDopObrBindingSource;
         // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
         private static DataTable _cachedFioData;
-        private bool _cancelEditForm = false; //настройка отображения EditForm
 
         public TeamWork_AdvanceTW(int id, int bufferWorkDivision, int mode)
         {
@@ -92,10 +91,6 @@ namespace SewingProduction.form
                 gridControl3.DataSource = _normKontBindingSource;
                 gridControl4.DataSource = _normDopObrBindingSource;
 
-                //gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                //gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                //gridView3.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                //gridView4.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
 
             }
             catch (Exception ex)
@@ -247,86 +242,99 @@ namespace SewingProduction.form
                 Task loadNormRaszTask = Task.Run(async () =>
                 {
                     var normRaszData = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
-                    _normRaszList.Clear();
-                    foreach (DataRow row in normRaszData.Rows)
+
+                    await this.InvokeAsync(() =>
                     {
-                        var normRasz = new NormRasz();
-                        foreach (DataColumn col in normRaszData.Columns)
+                        _normRaszList.Clear();
+                        foreach (DataRow row in normRaszData.Rows)
                         {
-                            var prop = typeof(NormRasz).GetProperty(col.ColumnName);
-                            if (prop != null && row[col] != DBNull.Value)
-                                prop.SetValue(normRasz, Convert.ChangeType(row[col], prop.PropertyType));
+                            var normRasz = new NormRasz();
+                            foreach (DataColumn col in normRaszData.Columns)
+                            {
+                                var prop = typeof(NormRasz).GetProperty(col.ColumnName);
+                                if (prop != null && row[col] != DBNull.Value)
+                                    prop.SetValue(normRasz, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
+                            _normRaszList.Add(normRasz);
                         }
-                        _normRaszList.Add(normRasz);
-                    }
-                    _normRaszBindingSource.ResetBindings(false);
+                        _normRaszBindingSource.ResetBindings(false);
+                    });
                 });
 
                 Task loadNormRaskTask = Task.Run(async () =>
                 {
                     var normRaskData = await _artNormService.GetRelatedNormRask(_bufferWorkDivision);
-                    _normRaskList.Clear();
-                    foreach (DataRow row in normRaskData.Rows)
+                    await this.InvokeAsync(() =>
                     {
-                        var normRask = new NormRask();
-                        foreach (DataColumn col in normRaskData.Columns)
+                        _normRaskList.Clear();
+                        foreach (DataRow row in normRaskData.Rows)
                         {
-                            var prop = typeof(NormRask).GetProperty(col.ColumnName);
-                            if (prop != null && row[col] != DBNull.Value)
-                                prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
+                            var normRask = new NormRask();
+                            foreach (DataColumn col in normRaskData.Columns)
+                            {
+                                var prop = typeof(NormRask).GetProperty(col.ColumnName);
+                                if (prop != null && row[col] != DBNull.Value)
+                                    prop.SetValue(normRask, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
+                            _normRaskList.Add(normRask);
                         }
-                        _normRaskList.Add(normRask);
-                    }
-                    _normRaskBindingSource.ResetBindings(false);
+                        _normRaskBindingSource.ResetBindings(false);
+                    });
                 });
 
                 Task loadNormKontTask = Task.Run(async () =>
                 {
                     var normKontData = await _artNormService.GetRelatedNormKont(_bufferWorkDivision);
-                    _normKontList.Clear();
-                    foreach (DataRow row in normKontData.Rows)
+                    await this.InvokeAsync(() =>
                     {
-                        var normKont = new NormKont();
-                        foreach (DataColumn col in normKontData.Columns)
+                        _normKontList.Clear();
+                        foreach (DataRow row in normKontData.Rows)
                         {
-                            var prop = typeof(NormKont).GetProperty(col.ColumnName);
-                            if (prop != null && row[col] != DBNull.Value)
-                                prop.SetValue(normKont, Convert.ChangeType(row[col], prop.PropertyType));
+                            var normKont = new NormKont();
+                            foreach (DataColumn col in normKontData.Columns)
+                            {
+                                var prop = typeof(NormKont).GetProperty(col.ColumnName);
+                                if (prop != null && row[col] != DBNull.Value)
+                                    prop.SetValue(normKont, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
+                            _normKontList.Add(normKont);
                         }
-                        _normKontList.Add(normKont);
-                    }
-                    _normKontBindingSource.ResetBindings(false);
+                        _normKontBindingSource.ResetBindings(false);
+                    });
                 });
 
                 Task loadNormDopObrTask = Task.Run(async () =>
                 {
                     var normDopObrData = await _artNormService.GetRelatedNormDopObr(_bufferWorkDivision);
-                    _normDopObrList.Clear();
-                    foreach (DataRow row in normDopObrData.Rows)
+                    await this.InvokeAsync(() =>
                     {
-                        var normDopObr = new NormDopObr();
-                        foreach (DataColumn col in normDopObrData.Columns)
+                        _normDopObrList.Clear();
+                        foreach (DataRow row in normDopObrData.Rows)
                         {
-                            var prop = typeof(NormDopObr).GetProperty(col.ColumnName);
-                            if (prop != null && row[col] != DBNull.Value)
-                                prop.SetValue(normDopObr, Convert.ChangeType(row[col], prop.PropertyType));
+                            var normDopObr = new NormDopObr();
+                            foreach (DataColumn col in normDopObrData.Columns)
+                            {
+                                var prop = typeof(NormDopObr).GetProperty(col.ColumnName);
+                                if (prop != null && row[col] != DBNull.Value)
+                                    prop.SetValue(normDopObr, Convert.ChangeType(row[col], prop.PropertyType));
+                            }
+                            _normDopObrList.Add(normDopObr);
                         }
-                        _normDopObrList.Add(normDopObr);
-                    }
-                    _normDopObrBindingSource.ResetBindings(false);
+                        _normDopObrBindingSource.ResetBindings(false);
+                    });
                 });
 
                 Task loadAnnTask = LoadAnnDataAsync();
 
                 await Task.WhenAll(loadNormRaszTask, loadNormRaskTask, loadNormKontTask, loadNormDopObrTask, loadAnnTask);
-
-                // Загрузка данных из ANN
-                await LoadAnnData();
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
-                MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await this.InvokeAsync(() =>
+                {
+                    MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
         }
 
@@ -340,7 +348,7 @@ namespace SewingProduction.form
                 var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
                 if (annData != null)
                 {
-                    this.Invoke((MethodInvoker)(() =>
+                    await this.InvokeAsync(() =>
                     {
                         nameTextBox.Text = annData.Articul;
                         groupTextBox.Text = annData.Group;
@@ -356,7 +364,7 @@ namespace SewingProduction.form
                             try { constructorComboBox.SelectedValue = annData.Constr; }
                             catch { /* логирование */ }
                         }
-                    }));
+                    });
                     await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {_bufferWorkDivision}", "LoadAnnDataAsync");
                 }
                 else
@@ -370,23 +378,26 @@ namespace SewingProduction.form
             }
         }
 
-        private void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
+        private async void TeamWork_AdvanceTW_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
             {
-                if (gridView5 != null && gridView5.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
-                    gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
-                if (gridView2 != null && gridView2.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
-                    gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                await this.InvokeAsync(() =>
+                {
+                    if (gridView5 != null && gridView5.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                        gridView5.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+                    if (gridView2 != null && gridView2.OptionsBehavior.EditingMode == GridEditingMode.Inplace)
+                        gridView2.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
 
-                _gridHelper.SaveGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+                    _gridHelper.SaveGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
+                    _gridHelper.SaveGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
+                    _gridHelper.SaveGridViewSettings(gridView4, "AdvanceTW_gridView4Layout.xml");
+                    _gridHelper.SaveGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
+                });
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork_AdvanceTW");
+                await _logger.LogErrorAsync(ex, "Ошибка при закрытии формы TeamWork_AdvanceTW");
             }
         }
 
@@ -535,8 +546,8 @@ namespace SewingProduction.form
                             catch (Exception ex)
                             {
                                 await _logger.LogErrorAsync(ex, "Ошибка при сохранении NormRask в БД");
-            }
-        }
+                            }
+                        }
 
                         // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);
@@ -1002,7 +1013,7 @@ namespace SewingProduction.form
                         if (_mode == (int)Mode.Edit)
                         {
                             // Сохраняем изменения в базу данных
-                            await _artNormService.UpdateEmployeeField(_bufferWorkDivision, fieldName, selectedId);
+                            await _artNormService.UpdateAnnIdeField(_bufferWorkDivision, fieldName, selectedId);
                             await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
                         }
                         else
@@ -1043,6 +1054,30 @@ namespace SewingProduction.form
                 }
             }
             else { MessageBox.Show("В буфере пусто", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+        }
+
+        private async Task InvokeAsync(Action action)
+        {
+            if (this.InvokeRequired)
+            {
+                await Task.Run(() => this.Invoke(action));
+            }
+            else
+            {
+                action();
+            }
+        }
+
+        private async Task<T> InvokeAsync<T>(Func<T> func)
+        {
+            if (this.InvokeRequired)
+            {
+                return await Task.Run(() => (T)this.Invoke(func));
+            }
+            else
+            {
+                return func();
+            }
         }
 
     }

@@ -279,16 +279,16 @@ namespace SewingProduction.form.TeamWork.Forms
             
             return new List<NormRask>
             {
-                new NormRask{AnnId = -1, KodO = "301", Text = "Рассекание на куски диском", Sek = Convert.ToInt32(raskroyList.Dras), Razryad =  5, N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "302", Text = "Резка диском", Sek = Convert.ToInt32(raskroyList.Drez), Razryad = 5, N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "303", Text = "До проймы диск", Sek = Convert.ToInt32(raskroyList.Dpro), Razryad =  5, N_ch = raskroyList.gr, Obor =  raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "311", Text = "Рассекание на куски (лента)",Sek = Convert.ToInt32(raskroyList.Lras), Razryad = 5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "313", Text = "До проймы (лента)", Sek = Convert.ToInt32(raskroyList.Lpro), Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "320", Text = "Перекладывание деталей", Sek = 455, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "330", Text = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "400", Text = "Укладывание шаблона", Sek = 150, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "500", Text = "Вырезание шаблона", Sek = 320, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' ') , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "340", Text = "Разрезание вруч.парных дет/пол", Sek = 300, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(' '), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
+                new NormRask{AnnId = -1, KodO = "301", Text = "Рассекание на куски диском", Sek = raskroyList.Dras, Razryad =  5, N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "302", Text = "Резка диском", Sek = raskroyList.Drez, Razryad = 5, N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "303", Text = "До проймы диск", Sek = raskroyList.Dpro, Razryad =  5, N_ch = raskroyList.gr, Obor =  raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "311", Text = "Рассекание на куски (лента)",Sek = raskroyList.Lras, Razryad = 5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "313", Text = "До проймы (лента)", Sek = raskroyList.Lpro, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "320", Text = "Перекладывание деталей", Sek = 455, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "330", Text = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "400", Text = "Укладывание шаблона", Sek = 150, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "500", Text = "Вырезание шаблона", Sek = 320, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd() , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{AnnId = -1, KodO = "340", Text = "Разрезание вруч.парных дет/пол", Sek = 300, Razryad =5,  N_ch = raskroyList.gr, Obor = raskroyList.Naimen.TrimEnd(), Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
             };
         }
         private void ResetAllColors(BandedGridView view)

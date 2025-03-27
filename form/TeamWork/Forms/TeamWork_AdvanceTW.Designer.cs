@@ -687,7 +687,7 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 148F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
@@ -719,9 +719,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1021, 54);
+            this.richTextBox1.Location = new System.Drawing.Point(1020, 54);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(275, 45);
+            this.richTextBox1.Size = new System.Drawing.Size(276, 45);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -730,7 +730,7 @@ namespace SewingProduction.form
             this.customLabel1.AutoSize = true;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(286, 51);
+            this.customLabel1.Location = new System.Drawing.Point(285, 51);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(69, 16);
             this.customLabel1.TabIndex = 14;
@@ -754,7 +754,7 @@ namespace SewingProduction.form
             this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorComboBox.FormattingEnabled = true;
-            this.constructorComboBox.Location = new System.Drawing.Point(107, 54);
+            this.constructorComboBox.Location = new System.Drawing.Point(106, 54);
             this.constructorComboBox.Name = "constructorComboBox";
             this.constructorComboBox.Size = new System.Drawing.Size(173, 24);
             this.constructorComboBox.TabIndex = 16;
@@ -763,10 +763,11 @@ namespace SewingProduction.form
             // designerComboBox
             // 
             this.designerComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.designerComboBox.DataSource = this.bindingSource1;
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(365, 54);
+            this.designerComboBox.Location = new System.Drawing.Point(364, 54);
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(199, 24);
             this.designerComboBox.TabIndex = 17;
@@ -777,7 +778,7 @@ namespace SewingProduction.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(286, 0);
+            this.label2.Location = new System.Drawing.Point(285, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 0;
@@ -788,7 +789,7 @@ namespace SewingProduction.form
             this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(365, 3);
+            this.modelTextBox.Location = new System.Drawing.Point(364, 3);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(200, 23);
             this.modelTextBox.TabIndex = 4;
@@ -798,7 +799,7 @@ namespace SewingProduction.form
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(571, 0);
+            this.label3.Location = new System.Drawing.Point(570, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 16);
             this.label3.TabIndex = 1;
@@ -809,7 +810,7 @@ namespace SewingProduction.form
             this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(695, 3);
+            this.nameTextBox.Location = new System.Drawing.Point(694, 3);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(204, 23);
             this.nameTextBox.TabIndex = 5;
@@ -819,7 +820,7 @@ namespace SewingProduction.form
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(905, 0);
+            this.label5.Location = new System.Drawing.Point(904, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -827,7 +828,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1021, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1020, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -837,7 +838,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1154, 3);
+            this.btnOK.Location = new System.Drawing.Point(1153, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -851,7 +852,7 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(905, 54);
+            this.buffer.Location = new System.Drawing.Point(904, 54);
             this.buffer.Name = "buffer";
             this.buffer.Size = new System.Drawing.Size(110, 45);
             this.buffer.TabIndex = 11;
@@ -864,7 +865,7 @@ namespace SewingProduction.form
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(571, 51);
+            this.label4.Location = new System.Drawing.Point(570, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 32);
             this.label4.TabIndex = 2;
@@ -875,7 +876,7 @@ namespace SewingProduction.form
             this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(695, 54);
+            this.secTimeTextBox.Location = new System.Drawing.Point(694, 54);
             this.secTimeTextBox.Name = "secTimeTextBox";
             this.secTimeTextBox.ReadOnly = true;
             this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
@@ -897,7 +898,7 @@ namespace SewingProduction.form
             this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(107, 3);
+            this.groupTextBox.Location = new System.Drawing.Point(106, 3);
             this.groupTextBox.Name = "groupTextBox";
             this.groupTextBox.Size = new System.Drawing.Size(173, 23);
             this.groupTextBox.TabIndex = 19;

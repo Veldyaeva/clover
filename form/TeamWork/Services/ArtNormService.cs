@@ -638,32 +638,32 @@ OUTPUT INSERTED.annID
         }
 
         /// <summary>
-        /// Обновляет значение поля дизайнера или конструктора для указанного ID
+        /// Обновляет значение поля ann для указанного ID
         /// </summary>
         /// <param name="annId">ID записи</param>
         /// <param name="fieldName">Имя поля (diz или constr)</param>
-        /// <param name="employeeId">ID сотрудника</param>
+        /// <param name="newValue">новое значение</param>
         /// <returns>Задача, представляющая асинхронную операцию</returns>
-        public async Task UpdateEmployeeField(int annId, string fieldName, int employeeId)
+        public async Task UpdateAnnIdeField(int annId, string fieldName, object newValue)
         {
             try
             {
-                // Проверяем, что fieldName соответствует одному из допустимых полей
-                if (fieldName != "diz" && fieldName != "constr")
-                {
-                    throw new ArgumentException($"Недопустимое имя поля: {fieldName}. Ожидается 'diz' или 'constr'");
-                }
+                //// Проверяем, что fieldName соответствует одному из допустимых полей
+                //if (fieldName != "diz" && fieldName != "constr")
+                //{
+                //    throw new ArgumentException($"Недопустимое имя поля: {fieldName}. Ожидается 'diz' или 'constr'");
+                //}
 
-                string query = $"UPDATE art_norm_n SET {fieldName} = @employeeId WHERE annId = @annId";
+                string query = $"UPDATE art_norm_n SET {fieldName} = @newValue WHERE annId = @annId";
                 
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
                     { "@annId", annId },
-                    { "@employeeId", employeeId }
+                    { "@newValue", newValue }
                 };
 
                 await _dbHelper.ExecuteNonQueryAsync(query, parameters);
-                await _logger.LogEventAsync($"Поле {fieldName} для ID {annId} успешно обновлено значением {employeeId}", "UpdateEmployeeField");
+                await _logger.LogEventAsync($"Поле {fieldName} для ID {annId} успешно обновлено значением {newValue}", "UpdateAnnField");
             }
             catch (Exception ex)
             {

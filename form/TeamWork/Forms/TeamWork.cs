@@ -1338,7 +1338,7 @@ namespace SewingProduction.Forms
             GridView annView = ANNgridView;
             if (annView == null || annView.FocusedRowHandle < 0)
             {
-                MessageBox.Show("Выберите запись для архивирования и копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -1359,18 +1359,7 @@ namespace SewingProduction.Forms
                     
                     if (hasNZP)
                     {
-                        // Предупреждаем пользователя о наличии НЗП
-                        var result = MessageBox.Show(
-                            "У выбранного разделения труда есть незавершенное производство. Продолжить архивирование?",
-                            "Предупреждение",
-                            MessageBoxButtons.YesNo,
-                            MessageBoxIcon.Warning);
                             
-                        if (result == DialogResult.No)
-                        {
-                            await _logger.LogEventAsync("Пользователь отменил архивирование записи с НЗП", "ArchAndCopy");
-                            return;
-                        }
                     }
                 }
 
@@ -1395,7 +1384,7 @@ namespace SewingProduction.Forms
                         
                         // Показываем сообщение об успешном завершении операции
                         MessageBox.Show(
-                            $"Запись успешно архивирована и скопирована.\nНовый ID: {newId}",
+                            $"Запись успешно архивирована и скопирована",
                             "Информация",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
@@ -1474,11 +1463,11 @@ namespace SewingProduction.Forms
                 }
 
                 // Обновляем архивный статус исходной записи
-                await _artNormService.UpdateEmployeeField(sourceRecord.AnnID, "Status", (int)Status.Archive);
+                await _artNormService.UpdateAnnIdeField(sourceRecord.AnnID, "Status", (int)Status.Archive);
                 await _logger.LogEventAsync($"Запись ID={sourceRecord.AnnID} архивирована. Создана новая запись ID={newId}", "CopyRow");
 
                 // Обновляем данные в гриде
-            await LoadWorkDivisions();
+                ANNgridView.RefreshData();
 
                 // Выделяем новую запись в гриде
                 int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
