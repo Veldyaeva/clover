@@ -174,7 +174,7 @@ namespace SewingProduction.form
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
             this.splitContainer1.Size = new System.Drawing.Size(1299, 572);
-            this.splitContainer1.SplitterDistance = 309;
+            this.splitContainer1.SplitterDistance = 235;
             this.splitContainer1.TabIndex = 10;
             // 
             // gridControl5
@@ -183,7 +183,7 @@ namespace SewingProduction.form
             this.gridControl5.Location = new System.Drawing.Point(0, 0);
             this.gridControl5.MainView = this.gridView5;
             this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(1299, 309);
+            this.gridControl5.Size = new System.Drawing.Size(1299, 235);
             this.gridControl5.TabIndex = 7;
             this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
@@ -208,22 +208,29 @@ namespace SewingProduction.form
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
             this.gridView5.NewItemRowText = "добавить";
-            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView5.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
             this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView5_InitNewRow);
+            this.gridView5.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView5_ValidateRow);
+            this.gridView5.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView5_RowUpdated);
+            this.gridView5.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView5_RowEditCanceled);
             // 
             // gridColumn2
             // 
             this.gridColumn2.Caption = "nrId";
             this.gridColumn2.FieldName = "nrId";
             this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
             // gridColumn34
             // 
             this.gridColumn34.Caption = "AnnId";
             this.gridColumn34.FieldName = "annId";
             this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.gridColumn34.Visible = true;
             this.gridColumn34.VisibleIndex = 6;
             // 
@@ -232,6 +239,8 @@ namespace SewingProduction.form
             this.gridColumn30.Caption = "№ оп.";
             this.gridColumn30.FieldName = "Kod";
             this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn30.OptionsEditForm.VisibleIndex = 1;
             this.gridColumn30.Visible = true;
             this.gridColumn30.VisibleIndex = 0;
             // 
@@ -240,6 +249,8 @@ namespace SewingProduction.form
             this.gridColumn31.Caption = "№ п/оп.";
             this.gridColumn31.FieldName = "KodO";
             this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn31.OptionsEditForm.VisibleIndex = 2;
             this.gridColumn31.Visible = true;
             this.gridColumn31.VisibleIndex = 2;
             // 
@@ -248,6 +259,10 @@ namespace SewingProduction.form
             this.gridColumn32.Caption = "Наименование операции пошива";
             this.gridColumn32.FieldName = "Text";
             this.gridColumn32.Name = "gridColumn32";
+            this.gridColumn32.OptionsEditForm.ColumnSpan = 3;
+            this.gridColumn32.OptionsEditForm.RowSpan = 2;
+            this.gridColumn32.OptionsEditForm.StartNewRow = true;
+            this.gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
             this.gridColumn32.Visible = true;
             this.gridColumn32.VisibleIndex = 5;
             // 
@@ -256,6 +271,8 @@ namespace SewingProduction.form
             this.gridColumn33.Caption = "разряд";
             this.gridColumn33.FieldName = "Razryad";
             this.gridColumn33.Name = "gridColumn33";
+            this.gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            this.gridColumn33.OptionsEditForm.VisibleIndex = 3;
             this.gridColumn33.Visible = true;
             this.gridColumn33.VisibleIndex = 4;
             // 
@@ -264,6 +281,7 @@ namespace SewingProduction.form
             this.gridColumn35.Caption = "№ оп.";
             this.gridColumn35.FieldName = "N";
             this.gridColumn35.Name = "gridColumn35";
+            this.gridColumn35.OptionsEditForm.VisibleIndex = 1;
             this.gridColumn35.Visible = true;
             this.gridColumn35.VisibleIndex = 1;
             // 
@@ -272,6 +290,7 @@ namespace SewingProduction.form
             this.gridColumn36.Caption = "№п/оп.";
             this.gridColumn36.FieldName = "N1";
             this.gridColumn36.Name = "gridColumn36";
+            this.gridColumn36.OptionsEditForm.VisibleIndex = 2;
             this.gridColumn36.Visible = true;
             this.gridColumn36.VisibleIndex = 3;
             // 
@@ -280,6 +299,7 @@ namespace SewingProduction.form
             this.gridColumn37.Caption = "сек.";
             this.gridColumn37.FieldName = "Sek";
             this.gridColumn37.Name = "gridColumn37";
+            this.gridColumn37.OptionsEditForm.VisibleIndex = 4;
             this.gridColumn37.Visible = true;
             this.gridColumn37.VisibleIndex = 7;
             // 
@@ -288,6 +308,7 @@ namespace SewingProduction.form
             this.colspec2.Caption = "спец-ть";
             this.colspec2.FieldName = "Spec";
             this.colspec2.Name = "colspec2";
+            this.colspec2.OptionsEditForm.VisibleIndex = 5;
             this.colspec2.Visible = true;
             this.colspec2.VisibleIndex = 8;
             // 
@@ -296,6 +317,7 @@ namespace SewingProduction.form
             this.gridColumn38.Caption = "оборудование";
             this.gridColumn38.FieldName = "Obor";
             this.gridColumn38.Name = "gridColumn38";
+            this.gridColumn38.OptionsEditForm.VisibleIndex = 6;
             this.gridColumn38.Visible = true;
             this.gridColumn38.VisibleIndex = 9;
             // 
@@ -303,6 +325,7 @@ namespace SewingProduction.form
             // 
             this.colkod_podr1.FieldName = "KodPodr";
             this.colkod_podr1.Name = "colkod_podr1";
+            this.colkod_podr1.OptionsEditForm.VisibleIndex = 7;
             this.colkod_podr1.Visible = true;
             this.colkod_podr1.VisibleIndex = 10;
             // 
@@ -310,6 +333,8 @@ namespace SewingProduction.form
             // 
             this.colkod_proizv1.FieldName = "kod_proizv";
             this.colkod_proizv1.Name = "colkod_proizv1";
+            this.colkod_proizv1.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.colkod_proizv1.OptionsEditForm.VisibleIndex = 8;
             this.colkod_proizv1.Visible = true;
             this.colkod_proizv1.VisibleIndex = 11;
             // 
@@ -317,6 +342,7 @@ namespace SewingProduction.form
             // 
             this.colkod_ob1.FieldName = "kod_ob";
             this.colkod_ob1.Name = "colkod_ob1";
+            this.colkod_ob1.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.colkod_ob1.Visible = true;
             this.colkod_ob1.VisibleIndex = 12;
             // 
@@ -334,8 +360,8 @@ namespace SewingProduction.form
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1299, 259);
-            this.splitContainer2.SplitterDistance = 153;
+            this.splitContainer2.Size = new System.Drawing.Size(1299, 333);
+            this.splitContainer2.SplitterDistance = 158;
             this.splitContainer2.TabIndex = 0;
             // 
             // gridControl2
@@ -344,7 +370,7 @@ namespace SewingProduction.form
             this.gridControl2.Location = new System.Drawing.Point(0, 0);
             this.gridControl2.MainView = this.gridView2;
             this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1299, 153);
+            this.gridControl2.Size = new System.Drawing.Size(1299, 158);
             this.gridControl2.TabIndex = 7;
             this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -371,6 +397,9 @@ namespace SewingProduction.form
             this.gridView2.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridView2.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView2.OptionsView.ShowGroupPanel = false;
+            this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView2_InitNewRow);
+            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView2_ValidateRow);
+            this.gridView2.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView2_RowUpdated);
             // 
             // gridColumn9
             // 
@@ -470,8 +499,8 @@ namespace SewingProduction.form
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.gridControl4);
-            this.splitContainer3.Size = new System.Drawing.Size(1299, 102);
-            this.splitContainer3.SplitterDistance = 47;
+            this.splitContainer3.Size = new System.Drawing.Size(1299, 171);
+            this.splitContainer3.SplitterDistance = 77;
             this.splitContainer3.TabIndex = 0;
             // 
             // gridControl3
@@ -480,7 +509,7 @@ namespace SewingProduction.form
             this.gridControl3.Location = new System.Drawing.Point(0, 0);
             this.gridControl3.MainView = this.gridView3;
             this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1299, 47);
+            this.gridControl3.Size = new System.Drawing.Size(1299, 77);
             this.gridControl3.TabIndex = 8;
             this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView3});
@@ -504,6 +533,9 @@ namespace SewingProduction.form
             this.gridView3.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridView3.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView3.OptionsView.ShowGroupPanel = false;
+            this.gridView3.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView3_InitNewRow);
+            this.gridView3.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView3_ValidateRow);
+            this.gridView3.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView3_RowUpdated);
             // 
             // gridColumn17
             // 
@@ -575,7 +607,7 @@ namespace SewingProduction.form
             this.gridControl4.Location = new System.Drawing.Point(0, 0);
             this.gridControl4.MainView = this.gridView4;
             this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1299, 51);
+            this.gridControl4.Size = new System.Drawing.Size(1299, 90);
             this.gridControl4.TabIndex = 9;
             this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -598,6 +630,9 @@ namespace SewingProduction.form
             this.gridView4.OptionsEditForm.EditFormColumnCount = 4;
             this.gridView4.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridView4.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView4_InitNewRow);
+            this.gridView4.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView4_ValidateRow);
+            this.gridView4.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView4_RowUpdated);
             // 
             // gridColumn24
             // 
@@ -652,7 +687,7 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 135F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
@@ -684,9 +719,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1033, 54);
+            this.richTextBox1.Location = new System.Drawing.Point(1021, 54);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(263, 45);
+            this.richTextBox1.Size = new System.Drawing.Size(275, 45);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -695,7 +730,7 @@ namespace SewingProduction.form
             this.customLabel1.AutoSize = true;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(298, 51);
+            this.customLabel1.Location = new System.Drawing.Point(286, 51);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(69, 16);
             this.customLabel1.TabIndex = 14;
@@ -719,9 +754,9 @@ namespace SewingProduction.form
             this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorComboBox.FormattingEnabled = true;
-            this.constructorComboBox.Location = new System.Drawing.Point(111, 54);
+            this.constructorComboBox.Location = new System.Drawing.Point(107, 54);
             this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Size = new System.Drawing.Size(181, 24);
+            this.constructorComboBox.Size = new System.Drawing.Size(173, 24);
             this.constructorComboBox.TabIndex = 16;
             this.constructorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
@@ -731,7 +766,7 @@ namespace SewingProduction.form
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(377, 54);
+            this.designerComboBox.Location = new System.Drawing.Point(365, 54);
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(199, 24);
             this.designerComboBox.TabIndex = 17;
@@ -742,7 +777,7 @@ namespace SewingProduction.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(298, 0);
+            this.label2.Location = new System.Drawing.Point(286, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 0;
@@ -753,7 +788,7 @@ namespace SewingProduction.form
             this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(377, 3);
+            this.modelTextBox.Location = new System.Drawing.Point(365, 3);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(200, 23);
             this.modelTextBox.TabIndex = 4;
@@ -763,7 +798,7 @@ namespace SewingProduction.form
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(583, 0);
+            this.label3.Location = new System.Drawing.Point(571, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 16);
             this.label3.TabIndex = 1;
@@ -774,7 +809,7 @@ namespace SewingProduction.form
             this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(707, 3);
+            this.nameTextBox.Location = new System.Drawing.Point(695, 3);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(204, 23);
             this.nameTextBox.TabIndex = 5;
@@ -784,7 +819,7 @@ namespace SewingProduction.form
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(917, 0);
+            this.label5.Location = new System.Drawing.Point(905, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -792,7 +827,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1033, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1021, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -802,7 +837,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1166, 3);
+            this.btnOK.Location = new System.Drawing.Point(1154, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -816,7 +851,7 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(917, 54);
+            this.buffer.Location = new System.Drawing.Point(905, 54);
             this.buffer.Name = "buffer";
             this.buffer.Size = new System.Drawing.Size(110, 45);
             this.buffer.TabIndex = 11;
@@ -829,7 +864,7 @@ namespace SewingProduction.form
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(583, 51);
+            this.label4.Location = new System.Drawing.Point(571, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 32);
             this.label4.TabIndex = 2;
@@ -840,7 +875,7 @@ namespace SewingProduction.form
             this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(707, 54);
+            this.secTimeTextBox.Location = new System.Drawing.Point(695, 54);
             this.secTimeTextBox.Name = "secTimeTextBox";
             this.secTimeTextBox.ReadOnly = true;
             this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
@@ -862,9 +897,9 @@ namespace SewingProduction.form
             this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(111, 3);
+            this.groupTextBox.Location = new System.Drawing.Point(107, 3);
             this.groupTextBox.Name = "groupTextBox";
-            this.groupTextBox.Size = new System.Drawing.Size(181, 23);
+            this.groupTextBox.Size = new System.Drawing.Size(173, 23);
             this.groupTextBox.TabIndex = 19;
             // 
             // rasz

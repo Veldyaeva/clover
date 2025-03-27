@@ -1721,8 +1721,6 @@ namespace SewingProduction.Forms
             int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "annId", 0);
             await LoadRelatedData(annId);
 
-
-
             //int annId = 0;
             //var view = gridView8;//customGridControl2.MainView as GridView;
             //if (view != null)

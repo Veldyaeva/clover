@@ -42,6 +42,7 @@ namespace SewingProduction.form
         private BindingSource _normDopObrBindingSource;
         // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
         private static DataTable _cachedFioData;
+        private bool _cancelEditForm = false; //настройка отображения EditForm
 
         public TeamWork_AdvanceTW(int id, int bufferWorkDivision, int mode)
         {
@@ -91,20 +92,11 @@ namespace SewingProduction.form
                 gridControl3.DataSource = _normKontBindingSource;
                 gridControl4.DataSource = _normDopObrBindingSource;
 
-                gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                gridView3.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
-                gridView4.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+                //gridView5.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+                //gridView2.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+                //gridView3.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
+                //gridView4.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
 
-                // Привязка обработчиков событий для gridControl3
-                gridView3.InitNewRow += GridView3_InitNewRow;
-                gridView3.RowUpdated += GridView3_RowUpdated;
-                gridView3.ValidateRow += GridView3_ValidateRow;
-
-                // Привязка обработчиков событий для gridControl4
-                gridView4.InitNewRow += GridView4_InitNewRow;
-                gridView4.RowUpdated += GridView4_RowUpdated;
-                gridView4.ValidateRow += GridView4_ValidateRow;
             }
             catch (Exception ex)
             {
@@ -330,44 +322,6 @@ namespace SewingProduction.form
 
                 // Загрузка данных из ANN
                 await LoadAnnData();
-
-                // Записываем данные в richTextBox
-                //this.Invoke((MethodInvoker)(() =>
-                //{
-                //    richTextBox.Clear();
-                //    richTextBox.AppendText($"Данные из буфера (ID: {_bufferWorkDivision}):\n\n");
-
-                //    // Записываем данные NormRasz
-                //    richTextBox.AppendText("Раскрой:\n");
-                //    foreach (var item in _normRaszList)
-                //    {
-                //        richTextBox.AppendText($"- {item.Text} (Код: {item.Kod}, Время: {item.Sek} сек)\n");
-                //    }
-                //    richTextBox.AppendText("\n");
-
-                //    // Записываем данные NormRask
-                //    richTextBox.AppendText("Раскройка:\n");
-                //    foreach (var item in _normRaskList)
-                //    {
-                //        richTextBox.AppendText($"- {item.Text} (Код: {item.Kod}, Время: {item.Sek} сек)\n");
-                //    }
-                //    richTextBox.AppendText("\n");
-
-                //    // Записываем данные NormKont
-                //    richTextBox.AppendText("Контроль:\n");
-                //    foreach (var item in _normKontList)
-                //    {
-                //        richTextBox.AppendText($"- {item.Text} (Код: {item.Kod}, Время: {item.Sek} сек)\n");
-                //    }
-                //    richTextBox.AppendText("\n");
-
-                //    // Записываем данные NormDopObr
-                //    richTextBox.AppendText("Дополнительная обработка:\n");
-                //    foreach (var item in _normDopObrList)
-                //    {
-                //        richTextBox.AppendText($"- Код: {item.Kod}, Время: {item.SekP} сек\n");
-                //    }
-                //}));
             }
             catch (Exception ex)
             {
@@ -442,25 +396,18 @@ namespace SewingProduction.form
             var gridView = sender as GridView;
             if (gridView == null)
                 return;
-
-            // Сохраняем настройки редактирования
-            var allowEditing = gridView.OptionsBehavior.Editable;
-            
-            // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
-            gridView.OptionsBehavior.Editable = false;
-
             try
             {
-            using (var selectionForm = new NormOperNew())
-            {
-                    DialogResult result = selectionForm.ShowDialog();
-                    
-                    if (result == DialogResult.OK)
+                using (var selectionForm = new NormOperNew())
                 {
-                    var selectedData = selectionForm.SelectedRowData;
-                    if (selectedData != null)
+                    DialogResult result = selectionForm.ShowDialog();
+
+                    if (result == DialogResult.OK)
                     {
-                        // Заполняем значения в текущей новой строке
+                        var selectedData = selectionForm.SelectedRowData;
+                        if (selectedData != null)
+                        {
+                            // Заполняем значения в текущей новой строке
                             gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
                             gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.KodO);
                             gridView.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
@@ -476,23 +423,39 @@ namespace SewingProduction.form
                         }
                         else
                         {
-                        // Если данные не выбраны, удаляем строку
+                            gridView.CancelUpdateCurrentRow();
+                            gridView.HideEditForm();
+                            // Если данные не выбраны, удаляем строку
                             gridView.DeleteRow(e.RowHandle);
+                        }
                     }
-                }
-                else
-                {
+                    else
+                    {
+                        gridView.CancelUpdateCurrentRow();
+                        gridView.HideEditForm();
                         // Если диалог закрыт не через OK, удаляем строку
                         gridView.DeleteRow(e.RowHandle);
+
                     }
                 }
-                }
+            }
             finally
             {
                 // Восстанавливаем настройки редактирования
-                gridView.OptionsBehavior.Editable = allowEditing;
+                //    gridView.OptionsBehavior.Editable = allowEditing;
             }
         }
+
+
+        private void gridView5_RowEditCanceled(object sender, RowObjectEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view != null)
+            {
+                view.HideEditForm();
+            }
+        }
+
 
         private void GridView5_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
@@ -704,31 +667,7 @@ namespace SewingProduction.form
 
         private async void GridView3_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-            if (e.Row is NormKont normKont)
-            {
-                try
-                {
-                    // Убеждаемся что AnnId установлен
-                    normKont.AnnId = _newAnnId;
 
-                    // Если это новая запись (Kod <= 0), сохраняем в БД
-                    if (normKont.Kod <= 0)
-                    {
-                      //  normKont.Kod = await _artNormService.InsertNormKontAsync(normKont);
-                        if (normKont.Kod <= 0)
-                        {
-                            e.Valid = false;
-                            e.ErrorText = "Ошибка при сохранении записи в базу данных";
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    e.Valid = false;
-                    e.ErrorText = $"Ошибка: {ex.Message}";
-                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-                }
-            }
         }
 
         private void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
@@ -1105,5 +1044,6 @@ namespace SewingProduction.form
             }
             else { MessageBox.Show("В буфере пусто", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
         }
+
     }
 }

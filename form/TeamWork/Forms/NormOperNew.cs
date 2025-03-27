@@ -209,12 +209,6 @@ namespace SewingProduction.form
             }
 
         }
-        private void gridView1_ColumnWidthChanged(object sender, ColumnEventArgs e)
-        {
-            // Можно сохранять при каждом изменении размера колонки
-            // (Внимание: частые сохранения могут повлиять на производительность)
-            _gridHelper.SaveGridViewSettings(gridView1, "NormOperGrid.xml");
-        }
 
         /// <summary>
         /// Выбор строки и передача данных в `TeamWork_AdvanceTW`

@@ -432,6 +432,7 @@ namespace SewingProduction.form.TeamWork.Forms
             this.Name = "norm_raskrNew";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Выбор нормы раскроя";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.norm_raskrNew_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.panel1.ResumeLayout(false);

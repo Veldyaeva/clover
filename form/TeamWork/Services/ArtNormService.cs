@@ -150,24 +150,24 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
         /// <returns></returns>
         public Task<DataTable> GetRelatedNormRasz(int annId)
         {
-            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb FROM norm_rasz WHERE annId = @annId";
+            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
         public Task<DataTable> GetRelatedNormRask(int annId)
         {
-            string query = "SELECT AnnID, kod_o as KodO, razryd as Rasryad, Text, Sek  FROM norm_rask WHERE annId = @annId";
+            string query = "SELECT Id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_rask WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public Task<DataTable> GetRelatedNormKont(int annId)
         {
-            string query = "SELECT AnnID, kod_o as KodO, razryd as Rasryad, Text, Sek FROM norm_kont WHERE annId = @annId";
+            string query = "SELECT AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_kont WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public Task<DataTable> GetRelatedNormDopObr(int annId)
         {
-            string query = "SELECT annId, sek_p, sek_p_tamp, sek_v, sek_stra FROM norm_dop_obr WHERE annId = @annId";
+            string query = "SELECT AnnId, sek_p as SekP, sek_p_tamp as SekTamp, sek_v as SekV, sek_stra as SekStra FROM norm_dop_obr WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
@@ -363,25 +363,17 @@ OUTPUT INSERTED.annID
 
         public async Task<int> InsertNormRaskAsync(NormRask normRask)
         {
-            // Ваш код для вставки в базу данных
-            // Например, используя ADO.NET или Entity Framework
-            string query = @"INSERT INTO norm_rask (annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s) 
+            string query = @"INSERT INTO norm_rask (AnnId, Kod_o, Text, Razryd, Sek) 
                            OUTPUT INSERTED.Id 
-                           VALUES (@annId, @kod_o, @text, @razryd, @obor, @n1, @sek, @n, @n_ch, @seb, @seb_s)";
+                           VALUES (@AnnId, @KodO, @Text, @Razryad, @Sek)";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
-                { "@annId", normRask.AnnId },
-                { "@kod_o", normRask.KodO },
-                { "@text", normRask.Text },
-                { "@razryd", normRask.Razryad },
-                { "@obor", normRask.Obor },
-                { "@n1", normRask.N1 },
-                { "@sek", normRask.Sek },
-                { "@n", normRask.N },
-                { "@n_ch", normRask.N_ch },
-                { "@seb", normRask.Seb },
-                { "@seb_s", normRask.Seb_s }
+                { "@AnnId", normRask.AnnId },
+                { "@Kod_o", normRask.KodO },
+                { "@Text", normRask.Text },
+                { "@Razryd", normRask.Razryad },
+                { "@Sek", normRask.Sek }
             };
 
             object result = await _dbHelper.ExecuteScalarAsync(query, parameters);

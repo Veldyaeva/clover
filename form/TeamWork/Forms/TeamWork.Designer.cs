@@ -1359,13 +1359,13 @@ namespace SewingProduction.Forms
             // 
             // colkod2
             // 
-            this.colkod2.FieldName = "kod";
+            this.colkod2.FieldName = "Kod";
             this.colkod2.Name = "colkod2";
             // 
             // colkod_o1
             // 
             this.colkod_o1.Caption = "№оп.";
-            this.colkod_o1.FieldName = "kod_o";
+            this.colkod_o1.FieldName = "KodO";
             this.colkod_o1.Name = "colkod_o1";
             this.colkod_o1.Visible = true;
             this.colkod_o1.VisibleIndex = 0;
@@ -1440,7 +1440,7 @@ namespace SewingProduction.Forms
             // colkod_o2
             // 
             this.colkod_o2.Caption = "№ оп.";
-            this.colkod_o2.FieldName = "kod_o";
+            this.colkod_o2.FieldName = "KodO";
             this.colkod_o2.Name = "colkod_o2";
             this.colkod_o2.Visible = true;
             this.colkod_o2.VisibleIndex = 0;
@@ -1514,13 +1514,13 @@ namespace SewingProduction.Forms
             // colsek_p
             // 
             this.colsek_p.Caption = "принт (сек.)";
-            this.colsek_p.FieldName = "sek_p";
+            this.colsek_p.FieldName = "SekP";
             this.colsek_p.Name = "colsek_p";
             // 
             // colsek_p_tamp
             // 
             this.colsek_p_tamp.Caption = "тамп. печать(сек)";
-            this.colsek_p_tamp.FieldName = "sek_p_tamp";
+            this.colsek_p_tamp.FieldName = "SekTamp";
             this.colsek_p_tamp.Name = "colsek_p_tamp";
             this.colsek_p_tamp.Visible = true;
             this.colsek_p_tamp.VisibleIndex = 0;
@@ -1528,7 +1528,7 @@ namespace SewingProduction.Forms
             // colsek_v
             // 
             this.colsek_v.Caption = "вышивка+пайетки (сек)";
-            this.colsek_v.FieldName = "sek_v";
+            this.colsek_v.FieldName = "SekV";
             this.colsek_v.Name = "colsek_v";
             this.colsek_v.Visible = true;
             this.colsek_v.VisibleIndex = 1;
@@ -1536,7 +1536,7 @@ namespace SewingProduction.Forms
             // colsek_stra
             // 
             this.colsek_stra.Caption = "стразы (сек)";
-            this.colsek_stra.FieldName = "sek_stra";
+            this.colsek_stra.FieldName = "SekStra";
             this.colsek_stra.Name = "colsek_stra";
             this.colsek_stra.Visible = true;
             this.colsek_stra.VisibleIndex = 2;

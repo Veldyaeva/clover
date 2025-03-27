@@ -37,40 +37,38 @@ namespace SewingProduction.form
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.customGridControl1 = new SewingProduction.CustomGridControl();
-            this.normoperBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colobor = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
             this.proizv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemComboBox1 = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
             this.colkod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coltext_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemResourcesComboBox1 = new DevExpress.XtraScheduler.UI.RepositoryItemResourcesComboBox();
+            this.normoperBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.searchLookUpEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.customOkButton1 = new SewingProduction.CustomOkButton();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
+            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).BeginInit();
             this.tablePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
             this.tablePanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridColumn1
@@ -145,6 +143,7 @@ namespace SewingProduction.form
             this.coltext_vyaz});
             this.gridView1.GridControl = this.customGridControl1;
             this.gridView1.Name = "gridView1";
+            this.gridView1.OptionsMenu.ShowAutoFilterRowItem = false;
             this.gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // colkod_o
@@ -268,27 +267,6 @@ namespace SewingProduction.form
             this.radioGroup1.TabIndex = 1;
             this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
             // 
-            // searchLookUpEdit1
-            // 
-            this.tablePanel2.SetColumn(this.searchLookUpEdit1, 0);
-            this.searchLookUpEdit1.Location = new System.Drawing.Point(13, 12);
-            this.searchLookUpEdit1.Name = "searchLookUpEdit1";
-            this.searchLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEdit1.Properties.DisplayMember = "text";
-            this.searchLookUpEdit1.Properties.PopupView = this.searchLookUpEdit1View;
-            this.searchLookUpEdit1.Properties.ValueMember = "id";
-            this.tablePanel2.SetRow(this.searchLookUpEdit1, 0);
-            this.searchLookUpEdit1.Size = new System.Drawing.Size(217, 20);
-            this.searchLookUpEdit1.TabIndex = 2;
-            // 
-            // searchLookUpEdit1View
-            // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
             // customOkButton1
             // 
             this.customOkButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
@@ -329,7 +307,7 @@ namespace SewingProduction.form
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 26.96F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 70.36F),
             new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Relative, 12.68F)});
-            this.tablePanel2.Controls.Add(this.searchLookUpEdit1);
+            this.tablePanel2.Controls.Add(this.searchControl1);
             this.tablePanel2.Controls.Add(this.customOkButton1);
             this.tablePanel2.Controls.Add(this.radioGroup1);
             this.tablePanel2.Location = new System.Drawing.Point(13, 12);
@@ -341,24 +319,38 @@ namespace SewingProduction.form
             this.tablePanel2.TabIndex = 4;
             this.tablePanel2.UseSkinIndents = true;
             // 
+            // searchControl1
+            // 
+            this.searchControl1.Client = this.customGridControl1;
+            this.tablePanel2.SetColumn(this.searchControl1, 0);
+            this.searchControl1.Location = new System.Drawing.Point(13, 12);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Properties.Client = this.customGridControl1;
+            this.tablePanel2.SetRow(this.searchControl1, 0);
+            this.searchControl1.Size = new System.Drawing.Size(217, 20);
+            this.searchControl1.TabIndex = 4;
+            // 
             // NormOperNew
             // 
             this.ClientSize = new System.Drawing.Size(948, 441);
             this.Controls.Add(this.tablePanel1);
             this.Name = "NormOperNew";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.NormOperNew_FormClosing);
             this.Load += new System.EventHandler(this.NormOperNew_Load);
             ((System.ComponentModel.ISupportInitialize)(this.customGridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemResourcesComboBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.normoperBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel1)).EndInit();
             this.tablePanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
             this.tablePanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -367,8 +359,6 @@ namespace SewingProduction.form
 
         private CustomGridControl customGridControl1;
         private DevExpress.XtraEditors.RadioGroup radioGroup1;
-        private DevExpress.XtraEditors.SearchLookUpEdit searchLookUpEdit1;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
         private CustomOkButton customOkButton1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
@@ -393,5 +383,6 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn coltext_vyaz;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
+        private DevExpress.XtraEditors.SearchControl searchControl1;
     }
 }
