@@ -19,7 +19,8 @@
 //    {
 //        private readonly DatabaseHelper _dbHelper;
 //        private readonly ArtNormService _artNormService;
-//        public MyData SelectedRowData { get; private set; }
+//        public
+//        SelectedRowData { get; private set; }
 
 //        public NormOperNew()
 //        {
@@ -147,10 +148,6 @@ namespace SewingProduction.form
 
         private void NormOperNew_Load(object sender, EventArgs e)
         {
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.norm_oper". При необходимости она может быть перемещена или удалена.
-           // this.norm_operTableAdapter.Fill(this.aCE_backupDataSet.norm_oper);
-            // TODO: данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.norm_oper". При необходимости она может быть перемещена или удалена.
-            // this.norm_operTableAdapter.Fill(this.aCE_backupDataSet.norm_oper);
             try
             {
                 // Загружаем настройки грида перед заполнением данными
@@ -286,6 +283,16 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка при фильтрации данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+    }
+    
+    public class MyData
+    {
+        public string Kod_o { get; set; }
+        public string Text { get; set; }
+        public string Spec { get; set; }
+        public string Razryad { get; set; }
+        public string Obor { get; set; }
+        public string Kod_proizv { get; set; }
     }
 
 }

@@ -43,6 +43,7 @@ namespace SewingProduction.Forms
         private int bufferWorkDivision =0;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
+
         public TeamWork()
         {
             InitializeComponent();
@@ -525,8 +526,9 @@ namespace SewingProduction.Forms
         private async Task LoadRelatedData(int annId)
         {
             await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+            //await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz1(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await  _artNormService.GetRelatedNormKont(annId));
+            await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
             await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
 
@@ -1600,7 +1602,7 @@ namespace SewingProduction.Forms
         {
             if (row == null || row.Table == null)
             {
-                Console.WriteLine("❌ Ошибка: передан пустой DataRow или у него отсутствует таблица!");
+                Console.WriteLine("Ошибка: передан пустой DataRow или у него отсутствует таблица!");
                 return null;
             }
 
@@ -1611,7 +1613,7 @@ namespace SewingProduction.Forms
             bool hasMod = row.Table.Columns.Contains("Mod");
 
             // Логируем список доступных колонок (для отладки)
-            Console.WriteLine("📢 Доступные колонки в DataRow:");
+            Console.WriteLine("Доступные колонки в DataRow:");
             foreach (DataColumn col in row.Table.Columns)
             {
                 Console.WriteLine($"🔹 {col.ColumnName}");

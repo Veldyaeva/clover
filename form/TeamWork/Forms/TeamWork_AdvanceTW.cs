@@ -1,4 +1,4 @@
-﻿using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
@@ -50,9 +50,9 @@ namespace SewingProduction.form
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
+            _newAnnId = id;
             _bufferWorkDivision = bufferWorkDivision;
             _mode = mode;
-            _newAnnId = id;
         }
 
         /// <summary>
@@ -99,13 +99,11 @@ namespace SewingProduction.form
                 throw;
             }
         }
-
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
             try
             {
-                // Загружаем настройки грида в отдельном потоке
-                Task loadGridSettingsTask = Task.Run(() =>
+                Task gridTask = Task.Run(() =>
                 {
                     _gridHelper.LoadGridViewSettings(gridView2, "AdvanceTW_gridView2Layout.xml");
                     _gridHelper.LoadGridViewSettings(gridView3, "AdvanceTW_gridView3Layout.xml");
@@ -113,56 +111,14 @@ namespace SewingProduction.form
                     _gridHelper.LoadGridViewSettings(gridView5, "AdvanceTW_gridView5Layout.xml");
                 });
 
-                // Загружаем списки дизайнеров и конструкторов с кэшированием
-                Task<DataTable> loadFioTask = LoadFioListsAsync();
+                Task comboBoxTask = LoadAndBindFioListsAsync();
+                Task bindingsTask = InitializeBindingsAsync();
 
-                // Инициализируем привязки для NormRasz и NormRask
-                Task initBindingsTask = InitializeBindingsAsync();
+                await Task.WhenAll(gridTask, comboBoxTask, bindingsTask);
 
-                await Task.WhenAll(loadGridSettingsTask, loadFioTask, initBindingsTask);
-
-                DataTable fioData = loadFioTask.Result;
-                if (fioData != null && fioData.Rows.Count > 0)
-                {
-                    // Группируем обновление комбобоксов в одном Invoke
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        designerComboBox.BeginUpdate();
-                        constructorComboBox.BeginUpdate();
-                        try
-                        {
-                            var designerBindingSource = new BindingSource { DataSource = fioData.Copy() };
-                            var constructorBindingSource = new BindingSource { DataSource = fioData.Copy() };
-
-                            designerComboBox.DataSource = designerBindingSource;
-                            designerComboBox.DisplayMember = "fio";
-                            designerComboBox.ValueMember = "tab";
-
-                            constructorComboBox.DataSource = constructorBindingSource;
-                            constructorComboBox.DisplayMember = "fio";
-                            constructorComboBox.ValueMember = "tab";
-                        }
-                        finally
-                        {
-                            designerComboBox.EndUpdate();
-                            constructorComboBox.EndUpdate();
-                        }
-                    }));
-                }
-                else
-                {
-                    await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "TeamWork_AdvanceTW_Load");
-                }
-
-                // Если режим предполагает загрузку данных из буфера – выполняем параллельно
-                if (_mode == (int)Mode.ArchAndCopy ||
-                    _mode == (int)Mode.Archive ||
-                    _mode == (int)Mode.Edit)
-                {
+                if (_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.Archive || _mode == (int)Mode.Edit)
                     await bufferLoadAsync();
-                }
 
-                // Если _bufferWorkDivision не равен 0, записываем данные в richTextBox1
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -171,27 +127,18 @@ namespace SewingProduction.form
                         this.Invoke((MethodInvoker)(() =>
                         {
                             richTextBox1.Text = $"группа: {annData.Group.TrimEnd(' ')}, \n\r" +
-                                             $"модель: {annData.Mod.TrimEnd(' ')}, \n\r" +
-                                             $"артикул: {annData.Articul.TrimEnd(' ')}";
+                                                 $"модель: {annData.Mod.TrimEnd(' ')}, \n\r" +
+                                                 $"артикул: {annData.Articul.TrimEnd(' ')}";
                         }));
                     }
                 }
 
-                // Устанавливаем заголовок окна в зависимости от режима
                 switch (_mode)
                 {
-                    case (int)Mode.NewWorkDivision:
-                        this.Text = "Добавить предварительное";
-                        break;
-                    case (int)Mode.ArchAndCopy:
-                        this.Text = "Архив+копия";
-                        break;
-                    case (int)Mode.Archive:
-                        this.Text = "В архив";
-                        break;
-                    case (int)Mode.Edit:
-                        this.Text = "Редактировать";
-                        break;
+                    case (int)Mode.NewWorkDivision: this.Text = "Добавить предварительное"; break;
+                    case (int)Mode.ArchAndCopy: this.Text = "Архив+копия"; break;
+                    case (int)Mode.Archive: this.Text = "В архив"; break;
+                    case (int)Mode.Edit: this.Text = "Редактировать"; break;
                 }
             }
             catch (Exception ex)
@@ -200,33 +147,36 @@ namespace SewingProduction.form
             }
         }
 
-        /// <summary>
-        /// Загружает списки сотрудников для комбобоксов с кэшированием.
-        /// </summary>
-        private async Task<DataTable> LoadFioListsAsync()
+        private async Task LoadAndBindFioListsAsync()
         {
-            if (_cachedFioData != null)
-                return _cachedFioData;
-            try
-            {
-                DataTable fioData = await _artNormService.GetRelDesigner();
-                if (fioData != null && fioData.Rows.Count > 0)
-                {
-                    _cachedFioData = fioData.Copy();
-                    await _logger.LogEventAsync("Списки дизайнеров и конструкторов успешно загружены", "LoadFioListsAsync");
-                    return _cachedFioData;
-                }
-                else
-                {
-                    await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "LoadFioListsAsync");
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке списков дизайнеров и конструкторов");
-                return null;
-            }
+            //try
+            //{
+            //    if (_cachedFioData == null)
+            //    {
+            //        var fioData = await _artNormService.GetRelDesigner();
+            //        if (fioData != null && fioData.Rows.Count > 0)
+            //        {
+            //            _cachedFioData = fioData.Copy();
+            //            await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
+            //        }
+            //        else
+            //        {
+            //            await _logger.LogEventAsync("Пустой список FIO", "LoadAndBindFioListsAsync");
+            //            return;
+            //        }
+            //    }
+
+            //    // Обновляем данные в существующих источниках привязки
+            //    await this.InvokeAsync(() =>
+            //    {
+            //        designerBindingSource.DataSource = _cachedFioData.Copy();
+            //        constructorBindingSource.DataSource = _cachedFioData.Copy();
+            //    });
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _logger.LogErrorAsync(ex, "Ошибка при обновлении ComboBox из кеша");
+            //}
         }
 
         /// <summary>
@@ -506,7 +456,7 @@ namespace SewingProduction.form
             }
         }
 
-        private async void GridView2_InitNewRow(object sender, DevExpress.XtraGrid.Views.Grid.InitNewRowEventArgs e)
+        private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
             if (gridView == null)
@@ -613,57 +563,61 @@ namespace SewingProduction.form
             }
         }
 
-        private void GridView3_InitNewRow(object sender, InitNewRowEventArgs e)
+        private async void GridView3_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
             if (gridView == null)
                 return;
 
-            // Сохраняем настройки редактирования
-            var allowEditing = gridView.OptionsBehavior.Editable;
-
-            // Временно отключаем редактирование, чтобы предотвратить появление PopupEditForm
-            gridView.OptionsBehavior.Editable = false;
-
             try
             {
-                using (var selectionForm = new NormOperNew())
-                {
-                    DialogResult result = selectionForm.ShowDialog();
+                // Проверяем существующие строки
+                bool hasNumberingRow = false;
+                bool hasPackingRow = false;
 
-                    if (result == DialogResult.OK)
+                for (int i = 0; i < gridView.DataRowCount; i++)
+                {
+                    var rowText = gridView.GetRowCellValue(i, "Text")?.ToString();
+                    if (rowText == "Пронумеровать деталь")
+                        hasNumberingRow = true;
+                    else if (rowText == "Комплектация пачки")
+                        hasPackingRow = true;
+                }
+
+                // Добавляем первую строку, если её нет
+                if (!hasNumberingRow)
+                {
+                    await this.InvokeAsync(() =>
                     {
-                        var selectedData = selectionForm.SelectedRowData;
-                        if (selectedData != null)
-                        {
-                            // Заполняем значения в текущей новой строке
-                            gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-                            gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.KodO);
-                            gridView.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
-                            gridView.SetRowCellValue(e.RowHandle, "Spec", selectedData.Spec);
-                            gridView.SetRowCellValue(e.RowHandle, "Razryad", selectedData.Razryad);
-                            gridView.SetRowCellValue(e.RowHandle, "Obor", selectedData.Obor);
-                            gridView.SetRowCellValue(e.RowHandle, "Kod", selectedData.Kod);
-                            gridView.SetRowCellValue(e.RowHandle, "N1", selectedData.N1);
-                            gridView.SetRowCellValue(e.RowHandle, "Sek", selectedData.Sek);
-                        }
-                        else
-                        {
-                            // Если данные не выбраны, удаляем строку
-                            gridView.DeleteRow(e.RowHandle);
-                        }
-                    }
-                    else
+                        gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
+                        gridView.SetRowCellValue(e.RowHandle, "Text", "Пронумеровать деталь");
+                        gridView.UpdateCurrentRow();
+                    });
+                }
+
+                // Добавляем вторую строку, если её нет
+                if (!hasPackingRow)
+                {
+                    await this.InvokeAsync(() =>
                     {
-                        // Если диалог закрыт не через OK, удаляем строку
-                        gridView.DeleteRow(e.RowHandle);
-                    }
+                        // Добавляем новую строку напрямую в список данных
+                        var normKont = new NormKont
+                        {
+                            AnnId = _newAnnId,
+                            Text = "Комплектация пачки"
+                        };
+                        _normKontList.Add(normKont);
+                        _normKontBindingSource.ResetBindings(false);
+                    });
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                // Восстанавливаем настройки редактирования
-                gridView.OptionsBehavior.Editable = allowEditing;
+                await _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в GridView3");
+                await this.InvokeAsync(() =>
+                {
+                    MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
         }
 
@@ -767,49 +721,6 @@ namespace SewingProduction.form
                     e.ErrorText = $"Ошибка: {ex.Message}";
                     await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
                 }
-            }
-        }
-
-        /// <summary>
-        /// Загружает списки дизайнеров и конструкторов в комбобоксы
-        /// </summary>
-        private async Task LoadFioLists()
-        {
-            try
-            {
-                // Получаем список сотрудников
-                var fioData = await _artNormService.GetRelDesigner();
-
-                if (fioData != null && fioData.Rows.Count > 0)
-                {
-                    // Создаем источники данных для комбобоксов
-                    BindingSource designerBindingSource = new BindingSource();
-                    BindingSource constructorBindingSource = new BindingSource();
-                    
-                    // Устанавливаем данные
-                    designerBindingSource.DataSource = fioData.Copy();
-                    constructorBindingSource.DataSource = fioData.Copy();
-                    
-                    // Настраиваем комбобоксы
-                    designerComboBox.DataSource = designerBindingSource;
-                    designerComboBox.DisplayMember = "fio";
-                    designerComboBox.ValueMember = "tab";
-                    
-                    constructorComboBox.DataSource = constructorBindingSource;
-                    constructorComboBox.DisplayMember = "fio";
-                    constructorComboBox.ValueMember = "tab";
-                    
-                    // Логируем успешную загрузку
-                    await _logger.LogEventAsync($"Списки дизайнеров и конструкторов успешно загружены", "LoadFioLists");
-                }
-                else
-                {
-                    await _logger.LogEventAsync("Не удалось загрузить списки дизайнеров и конструкторов", "LoadFioLists");
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке списков дизайнеров и конструкторов");
             }
         }
 
@@ -1065,18 +976,6 @@ namespace SewingProduction.form
             else
             {
                 action();
-            }
-        }
-
-        private async Task<T> InvokeAsync<T>(Func<T> func)
-        {
-            if (this.InvokeRequired)
-            {
-                return await Task.Run(() => (T)this.Invoke(func));
-            }
-            else
-            {
-                return func();
             }
         }
 

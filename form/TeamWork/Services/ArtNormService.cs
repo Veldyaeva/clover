@@ -150,9 +150,18 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
         /// <returns></returns>
         public Task<DataTable> GetRelatedNormRasz(int annId)
         {
-            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
+            //string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
+            string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
+        public DataTable GetRelatedNormRasz1(int annId)
+        {
+            //string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
+            string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
+            //.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+        }
+
         public Task<DataTable> GetRelatedNormRask(int annId)
         {
             string query = "SELECT Id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_rask WHERE annId = @annId";
