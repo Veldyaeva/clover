@@ -133,14 +133,15 @@ namespace SewingProduction.form
         private readonly ArtNormService _artNormService;
         private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
-
+        private readonly int _annId;
         public NormRasz SelectedRowData { get; private set; }
 
-        public NormOperNew()
+        public NormOperNew(int annId)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(_dbHelper);
+            _annId = annId;
             ThemeManager.UpdateTheme(this);
 
 
@@ -150,11 +151,7 @@ namespace SewingProduction.form
         {
             try
             {
-                // Загружаем настройки грида перед заполнением данными
                 _gridHelper.LoadGridViewSettings(gridView1, "NormOperGrid.xml");
-
-                // Заполнение данных из БД
-               // this.norm_operTableAdapter.Fill(this.aCE_backupDataSet.norm_oper);
                 LoadData();
             }
             catch (ConstraintException ex)
@@ -190,9 +187,7 @@ namespace SewingProduction.form
 
                 if (data != null && data.Rows.Count > 0)
                 {
-                    //normoperBindingSource.DataSource = data;
-                    customGridControl1.DataSource = data;//normoperBindingSource;
-                    
+                    customGridControl1.DataSource = data;
                 }
                 else
                 {
@@ -204,7 +199,6 @@ namespace SewingProduction.form
                 await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в GridControl");
                 MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
 
         /// <summary>
@@ -219,6 +213,7 @@ namespace SewingProduction.form
 
                 SelectedRowData = new NormRasz
                 {
+                    AnnId = _annId,
                     KodO = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_o")),
                     Text = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text")),
                     Spec = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "spec")),
@@ -236,7 +231,9 @@ namespace SewingProduction.form
                     TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
                     TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
                 };
-
+                try
+                { await _artNormService.InsertNormRaszAsync(SelectedRowData); }
+                catch { }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

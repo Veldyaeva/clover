@@ -33,8 +33,8 @@ namespace SewingProduction.form
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.gridControl5 = new DevExpress.XtraGrid.GridControl();
-            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,8 +50,8 @@ namespace SewingProduction.form
             this.colkod_proizv1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod_ob1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControlRaskr = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRaskr = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -65,8 +65,8 @@ namespace SewingProduction.form
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControlKont = new DevExpress.XtraGrid.GridControl();
+            this.gridViewKont = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -76,9 +76,9 @@ namespace SewingProduction.form
             this.coln_ch1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
+            this.gridControlDopObr = new DevExpress.XtraGrid.GridControl();
             this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewDopObr = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -116,23 +116,23 @@ namespace SewingProduction.form
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
             this.splitContainer3.Panel1.SuspendLayout();
             this.splitContainer3.Panel2.SuspendLayout();
             this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDopObr)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).BeginInit();
@@ -167,7 +167,7 @@ namespace SewingProduction.form
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.gridControl5);
+            this.splitContainer1.Panel1.Controls.Add(this.gridControlRasz);
             // 
             // splitContainer1.Panel2
             // 
@@ -179,18 +179,18 @@ namespace SewingProduction.form
             // 
             // gridControl5
             // 
-            this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl5.Location = new System.Drawing.Point(0, 0);
-            this.gridControl5.MainView = this.gridView5;
-            this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(1299, 235);
-            this.gridControl5.TabIndex = 7;
-            this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView5});
+            this.gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRasz.Location = new System.Drawing.Point(0, 0);
+            this.gridControlRasz.MainView = this.gridViewRasz;
+            this.gridControlRasz.Name = "gridControl5";
+            this.gridControlRasz.Size = new System.Drawing.Size(1299, 235);
+            this.gridControlRasz.TabIndex = 7;
+            this.gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRasz});
             // 
-            // gridView5
+            // gridViewRasz
             // 
-            this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn2,
             this.gridColumn34,
             this.gridColumn30,
@@ -205,18 +205,18 @@ namespace SewingProduction.form
             this.colkod_podr1,
             this.colkod_proizv1,
             this.colkod_ob1});
-            this.gridView5.GridControl = this.gridControl5;
-            this.gridView5.Name = "gridView5";
-            this.gridView5.NewItemRowText = "добавить";
-            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
-            this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView5_InitNewRow);
-            this.gridView5.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView5_ValidateRow);
-            this.gridView5.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView5_RowUpdated);
-            this.gridView5.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridView5_RowEditCanceled);
+            this.gridViewRasz.GridControl = this.gridControlRasz;
+            this.gridViewRasz.Name = "gridViewRasz";
+            this.gridViewRasz.NewItemRowText = "добавить";
+            this.gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
+            this.gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewRasz.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridViewRasz_InitNewRow);
+            this.gridViewRasz.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridViewRasz_ValidateRow);
+            this.gridViewRasz.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowUpdated);
+            this.gridViewRasz.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowEditCanceled);
             // 
             // gridColumn2
             // 
@@ -355,7 +355,7 @@ namespace SewingProduction.form
             // 
             // splitContainer2.Panel1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.gridControl2);
+            this.splitContainer2.Panel1.Controls.Add(this.gridControlRaskr);
             // 
             // splitContainer2.Panel2
             // 
@@ -366,22 +366,22 @@ namespace SewingProduction.form
             // 
             // gridControl2
             // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(0, 0);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1299, 158);
-            this.gridControl2.TabIndex = 7;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRaskr.Location = new System.Drawing.Point(0, 0);
+            this.gridControlRaskr.MainView = this.gridViewRaskr;
+            this.gridControlRaskr.Name = "gridControl2";
+            this.gridControlRaskr.Size = new System.Drawing.Size(1299, 158);
+            this.gridControlRaskr.TabIndex = 7;
+            this.gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRaskr});
             // 
             // gridView2
             // 
-            this.gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
-            this.gridView2.Appearance.EvenRow.Options.UseBackColor = true;
-            this.gridView2.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.gridView2.Appearance.OddRow.Options.UseBackColor = true;
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+            this.gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
+            this.gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn9,
             this.colkod1,
             this.gridColumn10,
@@ -394,23 +394,23 @@ namespace SewingProduction.form
             this.gridColumn15,
             this.gridColumn16,
             this.colspec});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.NewItemRowText = "добавить";
-            this.gridView2.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView2.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView2.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView2.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView2.OptionsView.EnableAppearanceEvenRow = true;
-            this.gridView2.OptionsView.EnableAppearanceOddRow = true;
-            this.gridView2.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView2.OptionsView.ShowAutoFilterRow = true;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            this.gridView2.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView2_InitNewRow);
-            this.gridView2.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView2_ValidateRow);
-            this.gridView2.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView2_RowUpdated);
+            this.gridViewRaskr.GridControl = this.gridControlRaskr;
+            this.gridViewRaskr.Name = "gridView2";
+            this.gridViewRaskr.NewItemRowText = "добавить";
+            this.gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
+            this.gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            this.gridViewRaskr.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
+            this.gridViewRaskr.OptionsView.ShowGroupPanel = false;
+            this.gridViewRaskr.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView2_InitNewRow);
+            this.gridViewRaskr.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView2_ValidateRow);
+            this.gridViewRaskr.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView2_RowUpdated);
             // 
             // gridColumn9
             // 
@@ -505,29 +505,29 @@ namespace SewingProduction.form
             // 
             // splitContainer3.Panel1
             // 
-            this.splitContainer3.Panel1.Controls.Add(this.gridControl3);
+            this.splitContainer3.Panel1.Controls.Add(this.gridControlKont);
             // 
             // splitContainer3.Panel2
             // 
-            this.splitContainer3.Panel2.Controls.Add(this.gridControl4);
+            this.splitContainer3.Panel2.Controls.Add(this.gridControlDopObr);
             this.splitContainer3.Size = new System.Drawing.Size(1299, 171);
             this.splitContainer3.SplitterDistance = 77;
             this.splitContainer3.TabIndex = 0;
             // 
             // gridControl3
             // 
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.Location = new System.Drawing.Point(0, 0);
-            this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1299, 77);
-            this.gridControl3.TabIndex = 8;
-            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView3});
+            this.gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlKont.Location = new System.Drawing.Point(0, 0);
+            this.gridControlKont.MainView = this.gridViewKont;
+            this.gridControlKont.Name = "gridControl3";
+            this.gridControlKont.Size = new System.Drawing.Size(1299, 77);
+            this.gridControlKont.TabIndex = 8;
+            this.gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewKont});
             // 
             // gridView3
             // 
-            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewKont.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn17,
             this.gridColumn19,
             this.gridColumn20,
@@ -537,16 +537,16 @@ namespace SewingProduction.form
             this.coln_ch1,
             this.gridColumn23,
             this.colannId2});
-            this.gridView3.GridControl = this.gridControl3;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView3.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView3.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView3.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView3.OptionsView.ShowGroupPanel = false;
-            this.gridView3.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView3_InitNewRow);
-            this.gridView3.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView3_ValidateRow);
-            this.gridView3.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView3_RowUpdated);
+            this.gridViewKont.GridControl = this.gridControlKont;
+            this.gridViewKont.Name = "gridView3";
+            this.gridViewKont.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewKont.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            this.gridViewKont.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewKont.OptionsView.ShowGroupPanel = false;
+            this.gridViewKont.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView3_InitNewRow);
+            this.gridViewKont.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView3_ValidateRow);
+            this.gridViewKont.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView3_RowUpdated);
             // 
             // gridColumn17
             // 
@@ -613,37 +613,37 @@ namespace SewingProduction.form
             // 
             // gridControl4
             // 
-            this.gridControl4.DataSource = this.normdopobrBindingSource;
-            this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.Location = new System.Drawing.Point(0, 0);
-            this.gridControl4.MainView = this.gridView4;
-            this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1299, 90);
-            this.gridControl4.TabIndex = 9;
-            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView4});
+            this.gridControlDopObr.DataSource = this.normdopobrBindingSource;
+            this.gridControlDopObr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlDopObr.Location = new System.Drawing.Point(0, 0);
+            this.gridControlDopObr.MainView = this.gridViewDopObr;
+            this.gridControlDopObr.Name = "gridControl4";
+            this.gridControlDopObr.Size = new System.Drawing.Size(1299, 90);
+            this.gridControlDopObr.TabIndex = 9;
+            this.gridControlDopObr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewDopObr});
             // 
             // gridView4
             // 
-            this.gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewDopObr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn24,
             this.gridColumn25,
             this.gridColumn26,
             this.gridColumn27,
             this.gridColumn28,
             this.gridColumn29});
-            this.gridView4.GridControl = this.gridControl4;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gridView4.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
-            this.gridView4.OptionsEditForm.EditFormColumnCount = 4;
-            this.gridView4.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
-            this.gridView4.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView4_InitNewRow);
-            this.gridView4.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView4_ValidateRow);
-            this.gridView4.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView4_RowUpdated);
+            this.gridViewDopObr.GridControl = this.gridControlDopObr;
+            this.gridViewDopObr.Name = "gridView4";
+            this.gridViewDopObr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewDopObr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewDopObr.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gridViewDopObr.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
+            this.gridViewDopObr.OptionsEditForm.EditFormColumnCount = 4;
+            this.gridViewDopObr.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewDopObr.OptionsView.ShowGroupPanel = false;
+            this.gridViewDopObr.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView4_InitNewRow);
+            this.gridViewDopObr.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView4_ValidateRow);
+            this.gridViewDopObr.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView4_RowUpdated);
             // 
             // gridColumn24
             // 
@@ -957,23 +957,23 @@ namespace SewingProduction.form
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).EndInit();
             this.splitContainer3.Panel1.ResumeLayout(false);
             this.splitContainer3.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
             this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDopObr)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).EndInit();
@@ -1006,8 +1006,8 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o;
         private DevExpress.XtraGrid.Columns.GridColumn colannId3;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl gridControlRaskr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRaskr;
         private DevExpress.XtraGrid.Columns.GridColumn colid;
         private DevExpress.XtraGrid.Columns.GridColumn colkod2;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o1;
@@ -1016,16 +1016,16 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn coltext1;
         private DevExpress.XtraGrid.Columns.GridColumn colsek2;
         private DevExpress.XtraGrid.Columns.GridColumn colannId4;
-        private DevExpress.XtraGrid.GridControl gridControl3;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.GridControl gridControlKont;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewKont;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd2;
         private DevExpress.XtraGrid.Columns.GridColumn coltext2;
         private DevExpress.XtraGrid.Columns.GridColumn colsek3;
         private DevExpress.XtraGrid.Columns.GridColumn colannId5;
-        private DevExpress.XtraGrid.GridControl gridControl4;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraGrid.GridControl gridControlDopObr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewDopObr;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p_tamp;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
@@ -1071,8 +1071,8 @@ namespace SewingProduction.form
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.BindingSource normraszBindingSource1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private DevExpress.XtraGrid.GridControl gridControl5;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
+        private DevExpress.XtraGrid.GridControl gridControlRasz;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRasz;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;

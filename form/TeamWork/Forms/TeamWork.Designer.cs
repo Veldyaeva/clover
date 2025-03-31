@@ -49,14 +49,14 @@ namespace SewingProduction.Forms
             this.designerTextBox = new SewingProduction.CustomTextBox();
             this.label6 = new SewingProduction.CustomLabel();
             this.label7 = new SewingProduction.CustomLabel();
-            this.aproovmentBtn = new SewingProduction.CustomButton();
+            this.ButtonApprovement = new SewingProduction.CustomButton();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.customButton9 = new SewingProduction.CustomButton();
-            this.customButton5 = new SewingProduction.CustomButton();
+            this.ButtonEditWd = new SewingProduction.CustomButton();
             this.customButton8 = new SewingProduction.CustomButton();
-            this.customButton10 = new SewingProduction.CustomButton();
-            this.customButton6 = new SewingProduction.CustomButton();
-            this.copyButton = new SewingProduction.CustomButton();
+            this.ButtonArchAndCopyWd = new SewingProduction.CustomButton();
+            this.ButtonPreliminaryWd = new SewingProduction.CustomButton();
+            this.ButtonCopyWd = new SewingProduction.CustomButton();
             this.buffer = new SewingProduction.CustomTextBox();
             this.panel5 = new System.Windows.Forms.Panel();
             this.SortBox = new SewingProduction.CustomCheckBox();
@@ -122,7 +122,7 @@ namespace SewingProduction.Forms
             this.kolNZP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView14 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.customButton3 = new SewingProduction.CustomButton();
+            this.ButtonUnboundWd = new DevExpress.XtraEditors.SimpleButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -435,7 +435,7 @@ namespace SewingProduction.Forms
             this.panelControl7.Controls.Add(this.designerTextBox);
             this.panelControl7.Controls.Add(this.label6);
             this.panelControl7.Controls.Add(this.label7);
-            this.panelControl7.Controls.Add(this.aproovmentBtn);
+            this.panelControl7.Controls.Add(this.ButtonApprovement);
             this.panelControl7.Location = new System.Drawing.Point(3, 631);
             this.panelControl7.Name = "panelControl7";
             this.panelControl7.Size = new System.Drawing.Size(194, 152);
@@ -485,29 +485,29 @@ namespace SewingProduction.Forms
             this.label7.TabIndex = 1;
             this.label7.Text = "Конструктор";
             // 
-            // aproovmentBtn
+            // ButtonApprovement
             // 
-            this.aproovmentBtn.BackColor = System.Drawing.Color.White;
-            this.aproovmentBtn.Font = new System.Drawing.Font("Arial", 10F);
-            this.aproovmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.aproovmentBtn.Location = new System.Drawing.Point(3, 106);
-            this.aproovmentBtn.Name = "aproovmentBtn";
-            this.aproovmentBtn.Size = new System.Drawing.Size(186, 58);
-            this.aproovmentBtn.TabIndex = 11;
-            this.aproovmentBtn.Text = "Согласование с технологом";
-            this.aproovmentBtn.UseVisualStyleBackColor = true;
-            this.aproovmentBtn.Visible = false;
+            this.ButtonApprovement.BackColor = System.Drawing.Color.White;
+            this.ButtonApprovement.Font = new System.Drawing.Font("Arial", 10F);
+            this.ButtonApprovement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.ButtonApprovement.Location = new System.Drawing.Point(3, 106);
+            this.ButtonApprovement.Name = "ButtonApprovement";
+            this.ButtonApprovement.Size = new System.Drawing.Size(186, 58);
+            this.ButtonApprovement.TabIndex = 11;
+            this.ButtonApprovement.Text = "Согласование с технологом";
+            this.ButtonApprovement.UseVisualStyleBackColor = true;
+            this.ButtonApprovement.Visible = false;
             // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel4.Controls.Add(this.customButton9, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.customButton5, 0, 2);
+            this.tableLayoutPanel4.Controls.Add(this.ButtonEditWd, 0, 2);
             this.tableLayoutPanel4.Controls.Add(this.customButton8, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.customButton10, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.customButton6, 0, 4);
-            this.tableLayoutPanel4.Controls.Add(this.copyButton, 0, 5);
+            this.tableLayoutPanel4.Controls.Add(this.ButtonArchAndCopyWd, 0, 3);
+            this.tableLayoutPanel4.Controls.Add(this.ButtonPreliminaryWd, 0, 4);
+            this.tableLayoutPanel4.Controls.Add(this.ButtonCopyWd, 0, 5);
             this.tableLayoutPanel4.Controls.Add(this.buffer, 0, 6);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 317);
@@ -538,20 +538,20 @@ namespace SewingProduction.Forms
             this.customButton9.UseVisualStyleBackColor = false;
             this.customButton9.Visible = false;
             // 
-            // customButton5
+            // ButtonEditWd
             // 
-            this.customButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton5.FlatAppearance.BorderSize = 0;
-            this.customButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton5.Font = new System.Drawing.Font("Arial", 12F);
-            this.customButton5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton5.Location = new System.Drawing.Point(3, 7);
-            this.customButton5.Name = "customButton5";
-            this.customButton5.Size = new System.Drawing.Size(188, 30);
-            this.customButton5.TabIndex = 4;
-            this.customButton5.Text = "редактировать РТ";
-            this.customButton5.UseVisualStyleBackColor = false;
-            this.customButton5.Click += new System.EventHandler(this.customButton5_Click);
+            this.ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.ButtonEditWd.FlatAppearance.BorderSize = 0;
+            this.ButtonEditWd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonEditWd.Font = new System.Drawing.Font("Arial", 12F);
+            this.ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.ButtonEditWd.Location = new System.Drawing.Point(3, 7);
+            this.ButtonEditWd.Name = "ButtonEditWd";
+            this.ButtonEditWd.Size = new System.Drawing.Size(188, 30);
+            this.ButtonEditWd.TabIndex = 4;
+            this.ButtonEditWd.Text = "редактировать РТ";
+            this.ButtonEditWd.UseVisualStyleBackColor = false;
+            this.ButtonEditWd.Click += new System.EventHandler(this.ButtonEditWd_Click);
             // 
             // customButton8
             // 
@@ -568,48 +568,48 @@ namespace SewingProduction.Forms
             this.customButton8.UseVisualStyleBackColor = false;
             this.customButton8.Visible = false;
             // 
-            // customButton10
+            // ButtonArchAndCopyWd
             // 
-            this.customButton10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton10.FlatAppearance.BorderSize = 0;
-            this.customButton10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton10.Font = new System.Drawing.Font("Arial", 12F);
-            this.customButton10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton10.Location = new System.Drawing.Point(3, 43);
-            this.customButton10.Name = "customButton10";
-            this.customButton10.Size = new System.Drawing.Size(188, 30);
-            this.customButton10.TabIndex = 14;
-            this.customButton10.Text = "архив+копия";
-            this.customButton10.UseVisualStyleBackColor = false;
-            this.customButton10.Click += new System.EventHandler(this.customButton10_Click);
+            this.ButtonArchAndCopyWd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.ButtonArchAndCopyWd.FlatAppearance.BorderSize = 0;
+            this.ButtonArchAndCopyWd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonArchAndCopyWd.Font = new System.Drawing.Font("Arial", 12F);
+            this.ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.ButtonArchAndCopyWd.Location = new System.Drawing.Point(3, 43);
+            this.ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
+            this.ButtonArchAndCopyWd.Size = new System.Drawing.Size(188, 30);
+            this.ButtonArchAndCopyWd.TabIndex = 14;
+            this.ButtonArchAndCopyWd.Text = "архив+копия";
+            this.ButtonArchAndCopyWd.UseVisualStyleBackColor = false;
+            this.ButtonArchAndCopyWd.Click += new System.EventHandler(this.ButtonArchAndCopyWd_Click);
             // 
-            // customButton6
+            // ButtonPreliminaryWd
             // 
-            this.customButton6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton6.FlatAppearance.BorderSize = 0;
-            this.customButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton6.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton6.Location = new System.Drawing.Point(3, 79);
-            this.customButton6.Name = "customButton6";
-            this.customButton6.Size = new System.Drawing.Size(188, 42);
-            this.customButton6.TabIndex = 15;
-            this.customButton6.Text = "Добавить предварительное ";
-            this.customButton6.UseVisualStyleBackColor = false;
-            this.customButton6.Click += new System.EventHandler(this.customButton6_Click);
+            this.ButtonPreliminaryWd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.ButtonPreliminaryWd.FlatAppearance.BorderSize = 0;
+            this.ButtonPreliminaryWd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ButtonPreliminaryWd.Font = new System.Drawing.Font("Arial", 10F);
+            this.ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.ButtonPreliminaryWd.Location = new System.Drawing.Point(3, 79);
+            this.ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
+            this.ButtonPreliminaryWd.Size = new System.Drawing.Size(188, 42);
+            this.ButtonPreliminaryWd.TabIndex = 15;
+            this.ButtonPreliminaryWd.Text = "Добавить предварительное ";
+            this.ButtonPreliminaryWd.UseVisualStyleBackColor = false;
+            this.ButtonPreliminaryWd.Click += new System.EventHandler(this.ButtonPreliminaryWd_Click);
             // 
-            // copyButton
+            // ButtonCopyWd
             // 
-            this.copyButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.copyButton.Font = new System.Drawing.Font("Arial", 10F);
-            this.copyButton.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.copyButton.Location = new System.Drawing.Point(3, 127);
-            this.copyButton.Name = "copyButton";
-            this.copyButton.Size = new System.Drawing.Size(188, 36);
-            this.copyButton.TabIndex = 19;
-            this.copyButton.Text = "Копировать РТ";
-            this.copyButton.UseVisualStyleBackColor = false;
-            this.copyButton.Click += new System.EventHandler(this.copyButton_Click);
+            this.ButtonCopyWd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.ButtonCopyWd.Font = new System.Drawing.Font("Arial", 10F);
+            this.ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.ButtonCopyWd.Location = new System.Drawing.Point(3, 127);
+            this.ButtonCopyWd.Name = "ButtonCopyWd";
+            this.ButtonCopyWd.Size = new System.Drawing.Size(188, 36);
+            this.ButtonCopyWd.TabIndex = 19;
+            this.ButtonCopyWd.Text = "Копировать РТ";
+            this.ButtonCopyWd.UseVisualStyleBackColor = false;
+            this.ButtonCopyWd.Click += new System.EventHandler(this.ButtonCopyWd_Click);
             // 
             // buffer
             // 
@@ -1071,7 +1071,7 @@ namespace SewingProduction.Forms
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.ANNgridControl, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.customGridControl5, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.customButton3, 0, 2);
+            this.tableLayoutPanel1.Controls.Add(this.ButtonUnboundWd, 0, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -1200,17 +1200,17 @@ namespace SewingProduction.Forms
             this.gridView14.GridControl = this.customGridControl5;
             this.gridView14.Name = "gridView14";
             // 
-            // customButton3
+            // ButtonUnboundWd
             // 
-            this.customButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customButton3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customButton3.Location = new System.Drawing.Point(3, 766);
-            this.customButton3.Name = "customButton3";
-            this.customButton3.Size = new System.Drawing.Size(123, 25);
-            this.customButton3.TabIndex = 8;
-            this.customButton3.Text = "customButton3";
-            this.customButton3.UseVisualStyleBackColor = false;
+            this.ButtonUnboundWd.AppearanceDisabled.BackColor = System.Drawing.Color.Silver;
+            this.ButtonUnboundWd.AppearanceDisabled.BorderColor = System.Drawing.Color.Gray;
+            this.ButtonUnboundWd.AppearanceDisabled.Options.UseBackColor = true;
+            this.ButtonUnboundWd.AppearanceDisabled.Options.UseBorderColor = true;
+            this.ButtonUnboundWd.Location = new System.Drawing.Point(3, 766);
+            this.ButtonUnboundWd.Name = "ButtonUnboundWd";
+            this.ButtonUnboundWd.Size = new System.Drawing.Size(75, 23);
+            this.ButtonUnboundWd.TabIndex = 8;
+            this.ButtonUnboundWd.Text = "Отвязать";
             // 
             // tableLayoutPanel2
             // 
@@ -2866,14 +2866,14 @@ namespace SewingProduction.Forms
         private CustomTextBox designerTextBox;
         private CustomLabel label6;
         private CustomLabel label7;
-        private CustomButton aproovmentBtn;
+        private CustomButton ButtonApprovement;
         private TableLayoutPanel tableLayoutPanel4;
         private CustomButton customButton9;
-        private CustomButton customButton5;
+        private CustomButton ButtonEditWd;
         private CustomButton customButton8;
-        private CustomButton customButton10;
-        private CustomButton customButton6;
-        private CustomButton copyButton;
+        private CustomButton ButtonArchAndCopyWd;
+        private CustomButton ButtonPreliminaryWd;
+        private CustomButton ButtonCopyWd;
         private CustomTextBox buffer;
         private Panel panel5;
         private CustomCheckBox SortBox;
@@ -2971,7 +2971,6 @@ namespace SewingProduction.Forms
         private CustomCancelButton customCancelButton1;
         private CustomComboBox customComboBox1;
         private CustomButton customButton1;
-        private CustomButton customButton3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn27;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn26;
@@ -2979,5 +2978,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
+        private SimpleButton ButtonUnboundWd;
     }
 }

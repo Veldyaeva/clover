@@ -33,7 +33,7 @@ namespace SewingProduction.form.TeamWork.Forms
         public List<NormRask> SelectedData { get; private set; } = new List<NormRask>();
         private List<GridBand> _selectedBands = new List<GridBand>(); // Список для хранения выбранных бэндов
         private List<BandData> _bandDataList = new List<BandData>(); // Список для хранения данных выбранных бэндов
-
+        private int _annId;
         public struct BandData
         {
             public int gr {  get; set; }
@@ -47,7 +47,7 @@ namespace SewingProduction.form.TeamWork.Forms
             public int Lpro { get; set; }
         }
 
-        public norm_raskrNew()
+        public norm_raskrNew(int annId)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
@@ -60,7 +60,7 @@ namespace SewingProduction.form.TeamWork.Forms
             //LoadGridSettings();
             // Загружаем настройки грида перед заполнением данными
             _gridHelper.LoadGridViewSettings(gridView1, "NormRaskrGrid.xml");
-
+            _annId = annId;
         }
 
         private void InitializeBindings()
