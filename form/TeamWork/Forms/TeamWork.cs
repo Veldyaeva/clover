@@ -40,7 +40,7 @@ namespace SewingProduction.Forms
         private readonly ILogger _logger =new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
-        private int bufferWorkDivision =0;
+        private int bufferId =0;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
 
@@ -150,8 +150,8 @@ namespace SewingProduction.Forms
                     view5.FocusedRowChanged += GridView5_FocusedRowChanged;
                 }
 
-                await LoadWorkDivisions();
-                await CurrentWorks_Load();
+            await LoadWorkDivisions();
+            await CurrentWorks_Load();
             }
             catch (Exception ex)
             {
@@ -649,9 +649,12 @@ namespace SewingProduction.Forms
                         
                         if (preliminaryCheckBox.Checked)
                             statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
-                        
+
                         if (actualCheckBox.Checked)
+                        {
                             statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
+                            statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
+                        }
                         
                         if (archiveCheckBox.Checked)
                             statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
@@ -810,9 +813,12 @@ namespace SewingProduction.Forms
                     
                     if (preliminaryCheckBox.Checked)
                         statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
-                    
+
                     if (actualCheckBox.Checked)
+                    {
+                        statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
                         statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
+                    }
                     
                     if (archiveCheckBox.Checked)
                         statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
@@ -903,54 +909,68 @@ namespace SewingProduction.Forms
                 // Если есть текст поиска, применяем его к новому выбранному полю
                 if (!string.IsNullOrEmpty(searchText))
                 {
-                    // Очищаем текущий фильтр поиска, сохраняя статусный фильтр
-                    searchControl1.ClearFilter();
-                    
-                    // Переприменяем поиск по новому полю (если есть текст в поле поиска)
-                    await SearchWithSelectedField(searchText);
+                    // Создаем фильтр поиска для нового выбранного поля
+                    string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
+                    if (!string.IsNullOrEmpty(columnName))
+                    {
+                        var searchFilter = new FunctionOperator(
+                            FunctionOperatorType.Contains,
+                            new OperandProperty(columnName),
+                            new OperandValue(searchText));
+
+                        // Получаем текущий фильтр статусов
+                        CriteriaOperator statusFilter = GetStatusFilter();
+                        
+                        // Если есть фильтр статусов, объединяем его с новым фильтром поиска
+                        if (statusFilter != null)
+                        {
+                            ANNgridView.ActiveFilterCriteria = new GroupOperator(
+                                GroupOperatorType.And,
+                                searchFilter,
+                                statusFilter
+                            );
+                        }
+                        else
+                        {
+                            ANNgridView.ActiveFilterCriteria = searchFilter;
+                        }
+                    }
                 }
                 else
                 {
-                    // Если нет текста поиска, просто обновляем привязку поля
-                    filterTable();
-            }
+                    // Если нет текста поиска, применяем только фильтр статусов
+                    CriteriaOperator statusFilter = GetStatusFilter();
+                    if (statusFilter != null)
+                    {
+                        ANNgridView.ActiveFilterCriteria = statusFilter;
+                    }
+                    else
+                    {
+                        ANNgridView.ActiveFilterString = string.Empty;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при обновлении параметров поиска");
             }
         }
-        
-        // Вспомогательный метод для выполнения поиска по выбранному полю
-        private async Task SearchWithSelectedField(string searchText)
+
+        private CriteriaOperator GetStatusFilter()
         {
-            if (string.IsNullOrEmpty(searchText))
-                return;
-                
-            string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
-            
-            if (!string.IsNullOrEmpty(columnName))
+            // Создаем фильтры на основе состояния чекбоксов
+            if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
             {
-                // Создаем фильтр поиска
-                var searchFilter = new FunctionOperator(
-                    FunctionOperatorType.Contains,
-                    new OperandProperty(columnName),
-                    new OperandValue(searchText));
+                var statusFilters = new List<CriteriaOperator>();
                 
-                // Создаем фильтры на основе состояния чекбоксов
-                CriteriaOperator statusCriteria = null;
-                
-                // Создаем фильтр по статусу
-                if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
+                if (preliminaryCheckBox.Checked)
+                    statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
+
+                if (actualCheckBox.Checked)
                 {
-                    var statusFilters = new List<CriteriaOperator>();
-                    
-                    if (preliminaryCheckBox.Checked)
-                        statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
-                    
-                    if (actualCheckBox.Checked)
-                        statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
-                    
+                    statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
+                    statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
+                }
                     if (archiveCheckBox.Checked)
                         statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
                     
@@ -1242,14 +1262,14 @@ namespace SewingProduction.Forms
         {
             try
             {
-                bufferWorkDivision = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                bufferId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
                 buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group").ToString().TrimEnd(' ')}, \r" +
                     $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')}, \r" +
                     $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
             }
             catch
             {
-                bufferWorkDivision = 0;
+                bufferId = 0;
                 MessageBox.Show("Копирование не реализовано", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -1261,7 +1281,7 @@ namespace SewingProduction.Forms
         /// <param name="e"></param>
         private async void ButtonPreliminaryWd_Click(object sender, EventArgs e)
         {
-         if (ANNgridView == null) return;
+            if (ANNgridView == null) return;
 
             // Создаём новую запись модели `ArtNorm`
             ArtNormN newItem = new ArtNormN
@@ -1307,12 +1327,12 @@ namespace SewingProduction.Forms
             _bindingSource.Add(newItem);
             // Обновляем отображение грида
             ANNgridControl.RefreshDataSource();
-            
+
             // Даем время на обновление UI
             await Task.Delay(100);
 
             // Открываем форму редактирования
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.NewWorkDivision))
+            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
             {
                 if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
                 {
@@ -1327,7 +1347,9 @@ namespace SewingProduction.Forms
                     _bindingList.Remove(newItem);
                     await _artNormService.deleteRow("art_norm_n", newId);
                     await _artNormService.deleteRow("norm_rasz", newId);
+                    _bindingSource.ResetBindings(false);
                     ANNgridControl.RefreshDataSource();
+                    ANNgridView.RefreshData();
                 }
             }
         }
@@ -1356,71 +1378,105 @@ namespace SewingProduction.Forms
             {
                 // Получаем ID выбранной записи
                 int selectedAnnId = (int)annView.GetRowCellValue(annView.FocusedRowHandle, "AnnID");
-                
-                // Проверяем наличие незавершенного производства (НЗП)
-                bool hasNZP = false;
-                if (gridView10.RowCount > 0)
-                    for (int i = 0; i < gridView10.RowCount; i++)
-                    {
-                        object rowObject = gridView10.GetRow(i);
-                        int nzp = Convert.ToInt32(gridView10.GetRowCellValue(0, "kolNZP"));
-                        hasNZP = nzp > 0;
-                        await _logger.LogEventAsync($"Запись ID={selectedAnnId} имеет НЗП: {hasNZP}", "ArchAndCopy");
 
-                    }
-                
+                // Проверяем наличие незавершенного производства (НЗП)
+                bool hasNZP = await checkNzp(selectedAnnId);
+
                 // Копируем запись в новую и получаем ID новой записи
-                int newId = await ArchAndCopyRow(hasNZP);
+                int newId = await CopyRow(hasNZP);
                 if (newId <= 0)
                 {
                     return;
                 }
-                //перепривязываем артикулы базового РТ
-                await _artNormService.UpdateAnnId("norm_rasz", selectedAnnId, "annId", newId);
-                await _artNormService.UpdateAnnId("norm_Rask", selectedAnnId, "annId", newId);
-                await _artNormService.UpdateAnnId("norm_Kont", selectedAnnId, "annId", newId);
-                await _artNormService.UpdateAnnId("norm_dop_obr", selectedAnnId, "annId", newId);
 
                 //Открываем форму расширенного редактирования
-                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(newId, bufferWorkDivision, (int)Mode.ArchAndCopy))
+                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newId, selectedAnnId))
                 {
                     DialogResult result = teamWorkAdvanceTW.ShowDialog();
-                    
+
                     if (result == DialogResult.OK)
                     {
                         // Обновляем все данные после сохранения
-                        await LoadWorkDivisions();
-                        await CurrentWorks_Load();
-                        await LoadRelatedData(newId);
-                        await _logger.LogEventAsync($"Запись ID={selectedAnnId} успешно архивирована и скопирована как ID={newId}", "ArchAndCopy");
-                        
-                        // Показываем сообщение об успешном завершении операции
-                        MessageBox.Show(
-                            $"Запись успешно архивирована и скопирована",
-                            "Информация",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information);
+                        await updateNewRow(selectedAnnId, newId);
                     }
                     else
                     {
                         // Обрабатываем отмену операции
                         await _logger.LogEventAsync($"Редактирование копии записи ID={newId} отменено пользователем", "ArchAndCopy");
+//TODO: удалить вновь обавленную строку?
                     }
                 }
+
+                // Обновляем архивный статус исходной записи
+                await _artNormService.UpdateAnnId("art_norm_n", selectedAnnId, "Status", hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive);
+                await _logger.LogEventAsync($"Запись ID={selectedAnnId} архивирована. Создана новая запись ID={newId}", "CopyRow");
+
+                // Обновляем данные в гриде
+                ANNgridView.RefreshData();
+
+                // Выделяем новую запись в гриде
+                int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
+                if (newRowHandle >= 0)
+                {
+                    ANNgridView.FocusedRowHandle = newRowHandle;
+                }
+                //перепривязываем артикулы базового РТ
+                await bindArticulToNewRow(selectedAnnId, newId);
+
             }
             catch (Exception ex)
             {
+//TODO: удалить новую строку и вернуть статус архивируемой?
                 // Обрабатываем возможные ошибки
                 await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private async Task bindArticulToNewRow(int selectedAnnId, int newId)
+        {
+            await _artNormService.UpdateAnnId("norm_rasz", selectedAnnId, "annId", newId);
+            await _artNormService.UpdateAnnId("norm_Rask", selectedAnnId, "annId", newId);
+            await _artNormService.UpdateAnnId("norm_Kont", selectedAnnId, "annId", newId);
+            await _artNormService.UpdateAnnId("norm_dop_obr", selectedAnnId, "annId", newId);
+        }
+
+        private async Task updateNewRow(int selectedAnnId, int newId)
+        {
+            await LoadWorkDivisions();
+            await CurrentWorks_Load();
+            await LoadRelatedData(newId);
+            await _logger.LogEventAsync($"Запись ID={selectedAnnId} успешно архивирована и скопирована как ID={newId}", "ArchAndCopy");
+
+            // Показываем сообщение об успешном завершении операции
+            MessageBox.Show(
+                $"Запись успешно архивирована",
+                "Информация",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+        }
+
+        private async Task<bool> checkNzp(int selectedAnnId)
+        {
+            bool hasNZP = false;
+            if (gridView10.RowCount > 0)
+                for (int i = 0; i < gridView10.RowCount; i++)
+                {
+                    object rowObject = gridView10.GetRow(i);
+                    int nzp = Convert.ToInt32(gridView10.GetRowCellValue(0, "kolNZP"));
+                    hasNZP = nzp > 0;
+                    await _logger.LogEventAsync($"Запись ID={selectedAnnId} имеет НЗП: {hasNZP}", "ArchAndCopy");
+
+                }
+
+            return hasNZP;
+        }
+
         /// <summary>
         /// Создает копию выбранной записи разделения труда в базе данных
         /// </summary>
         /// <returns>ID новой записи или -1 в случае ошибки</returns>
-        private async Task<int> ArchAndCopyRow(bool nzp)
+        private async Task<int> CopyRow(bool nzp)
         {
             try
             {
@@ -1474,20 +1530,6 @@ namespace SewingProduction.Forms
                     return -1;
                 }
 
-                // Обновляем архивный статус исходной записи
-                await _artNormService.UpdateAnnId("art_norm_n", sourceRecord.AnnID, "Status", nzp ? (int)Status.PreliminaryArchive : (int)Status.Archive);
-                await _logger.LogEventAsync($"Запись ID={sourceRecord.AnnID} архивирована. Создана новая запись ID={newId}", "CopyRow");
-
-                // Обновляем данные в гриде
-                ANNgridView.RefreshData();
-
-                // Выделяем новую запись в гриде
-                int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
-                if (newRowHandle >= 0)
-                {
-                    ANNgridView.FocusedRowHandle = newRowHandle;
-                }
-
                 return newId;
             }
             catch (Exception ex)
@@ -1509,11 +1551,11 @@ namespace SewingProduction.Forms
                 if (_rowNumber < 0)
                 {
                     MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
+                return;
+            }
                 // Создаём новую запись модели `ArtNorm` из выбранной строки
-                ArtNormN newItem = new ArtNormN
-                {
+            ArtNormN newItem = new ArtNormN
+            {
                     Kod = ANNgridView.GetRowCellValue(_rowNumber, "Kod").ToString(),
                     Group = ANNgridView.GetRowCellValue(_rowNumber, "Group").ToString(),
                     Articul = ANNgridView.GetRowCellValue(_rowNumber, "Articul").ToString(),
@@ -1547,20 +1589,19 @@ namespace SewingProduction.Forms
 
                 // Открываем форму редактирования
                 using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
-                    selectedAnnId, // Новый ID не нужен, так как мы редактируем существующую запись
-                   bufferWorkDivision, 
-                    (int)Mode.Edit))
+                   bufferId,
+                    (int)Mode.Edit,oldId: selectedAnnId ))                    // Новый ID не нужен, так как мы редактируем существующую запись
                 {
                     DialogResult result = teamWorkAdvanceTW.ShowDialog();
-                    
+
                     if (result == DialogResult.OK)
                     {
                         // Обновляем все данные после сохранения
-                 //       LoadWorkDivisions();
-                 //       CurrentWorks_Load();
-                 //       LoadRelatedData(selectedAnnId);
-                ANNgridControl.RefreshDataSource();
-                        
+                        //       LoadWorkDivisions();
+                        //       CurrentWorks_Load();
+                        //       LoadRelatedData(selectedAnnId);
+                        ANNgridControl.RefreshDataSource();
+
                         // Отображаем сообщение об успешном редактировании
                         MessageBox.Show(
                             "Запись успешно отредактирована.",

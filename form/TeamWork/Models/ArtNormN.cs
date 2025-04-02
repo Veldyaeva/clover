@@ -30,8 +30,9 @@ namespace SewingProduction.Models
         public int Slogn { get; set; }
         public int AnnID { get; set; } // Первичный ключ
         public int Status { get; set; }
+        public bool preArch { get; set; }//предварительный архив
         public string StatusText { get; set; }
-        public bool Arh { get; set; } // Архив (BIT в БД)
+        public bool Arh { get; set; } // 
     }
 
 }

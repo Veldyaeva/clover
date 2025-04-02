@@ -214,25 +214,27 @@ namespace SewingProduction.form
                 SelectedRowData = new NormRasz
                 {
                     AnnId = _annId,
-                    KodO = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_o")),
+                    Kod_o = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_o")),
                     Text = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text")),
                     Spec = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "spec")),
                     Razryad = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "razryd")),
                     Obor = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "obor")),
-                    KodProizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
-
                     Kod = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod")),
                     N1 = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "n1")),
                     Sek = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "sek")),
-                    KodPodr = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_podr")),
-                    KodOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "kod_ob")),
+
+                    Kod_ob = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_ob")),
+                    Kod_podr = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_podr")),
+                    Kod_proizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
+                    
 
                     TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
                     TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
                     TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
                 };
                 try
-                { await _artNormService.InsertNormRaszAsync(SelectedRowData); }
+                {// await _artNormService.InsertNormRaszAsync(SelectedRowData);
+                  }
                 catch { }
                 this.DialogResult = DialogResult.OK;
                 this.Close();

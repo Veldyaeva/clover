@@ -75,6 +75,8 @@ namespace SewingProduction.Forms
             this.coldata_sozd = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coldata_obn = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyazo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz5 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -268,6 +270,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ANNgridControl)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ANNgridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView15)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
@@ -737,7 +740,8 @@ namespace SewingProduction.Forms
             this.ANNgridControl.MainView = this.ANNgridView;
             this.ANNgridControl.Name = "ANNgridControl";
             this.ANNgridControl.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemButtonEdit1});
+            this.repositoryItemButtonEdit1,
+            this.repositoryItemCheckEdit2});
             this.ANNgridControl.Size = new System.Drawing.Size(925, 577);
             this.ANNgridControl.TabIndex = 7;
             this.ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -763,6 +767,7 @@ namespace SewingProduction.Forms
             this.coldata_sozd,
             this.coldata_obn,
             this.colsek_shv,
+            this.gridColumn35,
             this.gridColumn5,
             this.colsek_vyazo,
             this.colsek_vyaz5,
@@ -858,13 +863,27 @@ namespace SewingProduction.Forms
             this.colsek_shv.Visible = true;
             this.colsek_shv.VisibleIndex = 7;
             // 
+            // gridColumn35
+            // 
+            this.gridColumn35.Caption = "предв. архив";
+            this.gridColumn35.ColumnEdit = this.repositoryItemCheckEdit2;
+            this.gridColumn35.FieldName = "preArch";
+            this.gridColumn35.Name = "gridColumn35";
+            this.gridColumn35.Visible = true;
+            this.gridColumn35.VisibleIndex = 10;
+            // 
+            // repositoryItemCheckEdit2
+            // 
+            this.repositoryItemCheckEdit2.AutoHeight = false;
+            this.repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
+            // 
             // gridColumn5
             // 
             this.gridColumn5.Caption = "статус";
             this.gridColumn5.FieldName = "StatusText";
             this.gridColumn5.Name = "gridColumn5";
             this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 8;
+            this.gridColumn5.VisibleIndex = 9;
             // 
             // colsek_vyazo
             // 
@@ -872,7 +891,7 @@ namespace SewingProduction.Forms
             this.colsek_vyazo.FieldName = "SekVyazo";
             this.colsek_vyazo.Name = "colsek_vyazo";
             this.colsek_vyazo.Visible = true;
-            this.colsek_vyazo.VisibleIndex = 9;
+            this.colsek_vyazo.VisibleIndex = 8;
             // 
             // colsek_vyaz5
             // 
@@ -880,7 +899,7 @@ namespace SewingProduction.Forms
             this.colsek_vyaz5.FieldName = "SekVyaz5";
             this.colsek_vyaz5.Name = "colsek_vyaz5";
             this.colsek_vyaz5.Visible = true;
-            this.colsek_vyaz5.VisibleIndex = 10;
+            this.colsek_vyaz5.VisibleIndex = 11;
             // 
             // colsek_vyaz7
             // 
@@ -888,7 +907,7 @@ namespace SewingProduction.Forms
             this.colsek_vyaz7.FieldName = "SekVyaz7";
             this.colsek_vyaz7.Name = "colsek_vyaz7";
             this.colsek_vyaz7.Visible = true;
-            this.colsek_vyaz7.VisibleIndex = 11;
+            this.colsek_vyaz7.VisibleIndex = 12;
             // 
             // colsek_vyaz12
             // 
@@ -896,7 +915,7 @@ namespace SewingProduction.Forms
             this.colsek_vyaz12.FieldName = "SekVyaz12";
             this.colsek_vyaz12.Name = "colsek_vyaz12";
             this.colsek_vyaz12.Visible = true;
-            this.colsek_vyaz12.VisibleIndex = 12;
+            this.colsek_vyaz12.VisibleIndex = 13;
             // 
             // colsek_vyaz10
             // 
@@ -904,7 +923,7 @@ namespace SewingProduction.Forms
             this.colsek_vyaz10.FieldName = "SekVyaz10";
             this.colsek_vyaz10.Name = "colsek_vyaz10";
             this.colsek_vyaz10.Visible = true;
-            this.colsek_vyaz10.VisibleIndex = 13;
+            this.colsek_vyaz10.VisibleIndex = 14;
             // 
             // colsek_vyaz6
             // 
@@ -912,7 +931,7 @@ namespace SewingProduction.Forms
             this.colsek_vyaz6.FieldName = "SekVyaz6";
             this.colsek_vyaz6.Name = "colsek_vyaz6";
             this.colsek_vyaz6.Visible = true;
-            this.colsek_vyaz6.VisibleIndex = 14;
+            this.colsek_vyaz6.VisibleIndex = 15;
             // 
             // colsek_kr
             // 
@@ -920,7 +939,7 @@ namespace SewingProduction.Forms
             this.colsek_kr.FieldName = "SekKr";
             this.colsek_kr.Name = "colsek_kr";
             this.colsek_kr.Visible = true;
-            this.colsek_kr.VisibleIndex = 15;
+            this.colsek_kr.VisibleIndex = 16;
             // 
             // colslogn
             // 
@@ -928,7 +947,7 @@ namespace SewingProduction.Forms
             this.colslogn.FieldName = "Slogn";
             this.colslogn.Name = "colslogn";
             this.colslogn.Visible = true;
-            this.colslogn.VisibleIndex = 16;
+            this.colslogn.VisibleIndex = 17;
             // 
             // colkomment
             // 
@@ -936,7 +955,7 @@ namespace SewingProduction.Forms
             this.colkomment.FieldName = "Komment";
             this.colkomment.Name = "colkomment";
             this.colkomment.Visible = true;
-            this.colkomment.VisibleIndex = 17;
+            this.colkomment.VisibleIndex = 18;
             this.colkomment.Width = 133;
             // 
             // coldiz
@@ -945,7 +964,7 @@ namespace SewingProduction.Forms
             this.coldiz.FieldName = "Diz";
             this.coldiz.Name = "coldiz";
             this.coldiz.Visible = true;
-            this.coldiz.VisibleIndex = 18;
+            this.coldiz.VisibleIndex = 19;
             // 
             // colconstr
             // 
@@ -953,14 +972,14 @@ namespace SewingProduction.Forms
             this.colconstr.FieldName = "Constr";
             this.colconstr.Name = "colconstr";
             this.colconstr.Visible = true;
-            this.colconstr.VisibleIndex = 19;
+            this.colconstr.VisibleIndex = 20;
             // 
             // colannID
             // 
             this.colannID.FieldName = "AnnID";
             this.colannID.Name = "colannID";
             this.colannID.Visible = true;
-            this.colannID.VisibleIndex = 20;
+            this.colannID.VisibleIndex = 21;
             // 
             // repositoryItemButtonEdit1
             // 
@@ -2517,6 +2536,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ANNgridControl)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ANNgridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView15)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1.Panel1)).EndInit();
@@ -2979,5 +2999,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
         private SimpleButton ButtonUnboundWd;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
+        private RepositoryItemCheckEdit repositoryItemCheckEdit2;
     }
 }

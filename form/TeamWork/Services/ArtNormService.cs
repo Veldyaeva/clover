@@ -13,6 +13,8 @@ using SewingProduction.Models;
 using SewingProduction.BdContext;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using System.Drawing;
+using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 
 namespace SewingProduction.Services
 {
@@ -68,8 +70,9 @@ namespace SewingProduction.Services
                     SekVyaz = row["sek_vyaz"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyaz"]),
                     DataObn = row["data_obn"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_obn"]),
                     SekShv = row["sek_shv"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_shv"]),
-                    StatusText = row["statusText"] == DBNull.Value? "" : row["statusText"].ToString(),
+                    StatusText = row["statusText"] == DBNull.Value ? "" : row["statusText"].ToString(),
                     Status = row["status"] == DBNull.Value ? 0 : Convert.ToInt32(row["status"]),
+                    preArch = ((int)row["status"] == (int)Status.PreliminaryArchive) ? true : false,
                     SekVyazo = row["sek_vyazo"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyazo"]),
                     SekVyaz5 = row["sek_vyaz5"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyaz5"]),
                     SekVyaz7 = row["sek_vyaz7"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyaz7"]),
@@ -150,7 +153,7 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
         /// <returns></returns>
         public Task<DataTable> GetRelatedNormRasz(int annId)
         {
-            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
+            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, kod_podr as KodPodr, kod_proizv as KodProizv, Seb, Spec, Obor, nrId FROM norm_rasz WHERE annId = @annId";
             //string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
@@ -164,7 +167,7 @@ JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId
 
         public Task<DataTable> GetRelatedNormRask(int annId)
         {
-            string query = "SELECT Id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_rask WHERE annId = @annId";
+            string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
             return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
@@ -354,16 +357,16 @@ OUTPUT INSERTED.annID
             Dictionary<string, object> parameters = new Dictionary<string, object>
     {
         { "@annId", normRasz.AnnId },
-        { "@kod_o", normRasz.KodO },
+        { "@kod_o", normRasz.Kod_o },
         { "@text", normRasz.Text },
         { "@spec", normRasz.Spec },
         { "@razryd", normRasz.Razryad },
         { "@obor", normRasz.Obor },
-        { "@kod_proizv", normRasz.KodProizv },
+        { "@kod_proizv", normRasz.Kod_proizv },
                 { "@kod", normRasz.Kod },
                 { "@n1", normRasz.N1 },
                 { "@sek", normRasz.Sek },
-                { "@kod_ob", normRasz.KodOb }
+                { "@kod_ob", normRasz.Kod_ob }
             };
 
             object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
@@ -374,7 +377,7 @@ OUTPUT INSERTED.annID
         {
             string query = @"INSERT INTO norm_rask (AnnId, Kod_o, Text, Razryd, Sek) 
                            OUTPUT INSERTED.Id 
-                           VALUES (@AnnId, @KodO, @Text, @Razryad, @Sek)";
+                           VALUES (@AnnId, @Kod_o, @Text, @Razryd, @Sek)";
 
             Dictionary<string, object> parameters = new Dictionary<string, object>
             {
@@ -389,6 +392,35 @@ OUTPUT INSERTED.annID
             return Convert.ToInt32(result);
         }
 
+        public async Task<int> InsertNormKontAsync(NormKont kont)
+        {
+            string query = "INSERT INTO norm_kont (AnnId, Kod_o, Text, Razryd, Sek) VALUES (@AnnId, @Kod_o, @Text, @Razryd, @Sek)";
+            Dictionary<string, object> parametres = new Dictionary<string, object>
+                        {
+                    {"@AnnId", kont.AnnId },
+                    {"@Kod_o", kont.KodO },
+                    {"@Text", kont.Text },
+                    {"@Razryd", kont.Razryad },
+                    {"@Sek", kont.Sek }
+                        };
+            object result = await _dbHelper.ExecuteScalarAsync(query, parametres);
+            return Convert.ToInt32(result);
+        }
+
+        public async Task<int> InsertDopObrAsync(NormDopObr dop)
+        {
+            string query = "INSERT INTO norm_dop_obr (AnnId, sek_p, sek_p_tamp, sek_v, sek_stra) VALUES (@AnnId, @SekP, @SekTamp, @SekV, @SekStra)";
+                        Dictionary<string, object> parametres =  new Dictionary<string, object>
+                        {
+                    { "@AnnId", dop.AnnId },
+                    { "@SekP", dop.SekP },
+                    { "@SekTamp", dop.SekTamp },
+                    { "@SekV", dop.SekV },
+                    { "@SekStra", dop.SekStra }
+                        };
+            object result = await _dbHelper.ExecuteScalarAsync(query, parametres);
+            return Convert.ToInt32(result);
+        }
         public Task<DataTable> GetNormRask()
         {
             string query = "SELECT Id, annId, kod_o, text, razryd, obor, n1, sek, n, n_ch, seb, seb_s FROM norm_rask";
@@ -422,8 +454,8 @@ OUTPUT INSERTED.annID
                     Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
                     Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0,
                     Kod = row["kod"] != DBNull.Value ? Convert.ToInt32(row["kod"]) : 0,
-                    KodO = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["kod_o"]) : 0,
-                    KodOb = row["kod_ob"] != DBNull.Value ? row["kod_ob"].ToString() : string.Empty
+                    Kod_o = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["kod_o"]) : 0,
+                    Kod_ob = row["kod_ob"] != DBNull.Value ? Convert.ToInt32(row["kod_ob"]) : 0
                 };
                 result.Add(item);
             }
@@ -705,6 +737,59 @@ OUTPUT INSERTED.annID
             }
         }
 
+        public async Task UpdateAnnAsync(ArtNormN annData)
+        {
+            try
+            {
+                var query = @"
+                    UPDATE art_norm_n 
+                    SET articul = @Articul,
+                        grup = @Group,
+                        mod = @Mod,
+                        sek = @Sek,
+                        diz = @Diz,
+                        constr = @Constr,
+                        data_obn = GETDATE()
+                    WHERE annid = @AnnID";
 
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@AnnID", annData.AnnID },
+                    { "@Articul", annData.Articul },
+                    { "@Group", annData.Group },
+                    { "@Mod", annData.Mod },
+                    { "@Sek", annData.Sek },
+                    { "@Diz", annData.Diz },
+                    { "@Constr", annData.Constr }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+                await _logger.LogEventAsync($"Данные ANN успешно обновлены для ID {annData.AnnID}", "UpdateAnnAsync");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных ANN для ID {annData.AnnID}");
+                throw;
+            }
+        }
+
+        internal async Task<DataTable> GetKod_proizv()
+        {
+            string query = "select kod_proizv, text_proizv from kod_proizv";
+            return await _dbHelper.ExecuteQueryAsync(query);
+            
+        }
+
+        internal async Task<DataTable> GetPodr_vyaz()
+        {
+            string query = "select kod_vyaz, text_vyaz from podr_vyaz";
+            return await _dbHelper.ExecuteQueryAsync(query);
+        }
+
+        internal async Task<DataTable> GetOborud_shv()
+        {
+            string query = "select kod_ob, text_ob from oborud_shv";
+            return await _dbHelper.ExecuteQueryAsync(query);
+        }
     }
 }
