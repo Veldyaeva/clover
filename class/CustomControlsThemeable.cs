@@ -194,10 +194,12 @@ namespace SewingProduction
 
     public class CustomGridControl : GridControl, IThemeable
     {
+        public Color? AlternateRowColor { get; set; }
         public CustomGridControl()
         {
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
+            ViewRegistered += OnViewRegistered;
         }
 
         public void ApplyTheme()
@@ -205,8 +207,29 @@ namespace SewingProduction
             BackColor = ThemeManager.ActiveTheme.GridBackground;
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
-        }
+            AlternateRowColor = ThemeManager.ActiveTheme.BandHighlightColor;
 
+            foreach (var view in ViewCollection)
+            {
+                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                    ApplyRowColors(gridView);
+            }
+        }
+        private void OnViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
+        {
+            if (e.View is DevExpress.XtraGrid.Views.Grid.GridView gridView)
+            {
+                ApplyRowColors(gridView);
+            }
+        }
+        private void ApplyRowColors(DevExpress.XtraGrid.Views.Grid.GridView gridView)
+        {
+            if (AlternateRowColor.HasValue)
+            {
+                gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
+                gridView.OptionsView.EnableAppearanceEvenRow = true;
+            }
+        }
         private void OnThemeChanged() => ApplyTheme();
 
         protected override void Dispose(bool disposing)
