@@ -41,8 +41,8 @@ namespace SewingProduction.Forms
         private readonly GridHelper _gridHelper = new GridHelper();
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private int bufferId =0;
-        private readonly BindingList<ArtNormN> _bindingList;
-        private readonly BindingSource _bindingSource;
+        private  BindingList<ArtNormN> _bindingList = new BindingList<ArtNormN>();
+        private BindingSource _bindingSource =new BindingSource();
 
         public TeamWork()
         {
@@ -71,8 +71,8 @@ namespace SewingProduction.Forms
             this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
             this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
 
-            _bindingList = new BindingList<ArtNormN>();
-            _bindingSource = new BindingSource { DataSource = _bindingList };
+            // _bindingList = new BindingList<ArtNormN>();
+            _bindingSource.DataSource = _bindingList; //= new BindingSource { DataSource = _bindingList };
             ANNgridControl.DataSource = _bindingSource;
 
         }
@@ -212,8 +212,10 @@ namespace SewingProduction.Forms
                         ANNgridView.OptionsView.ShowPreview = false;
                         
                         // Заменяем _bindingList на новый BindingList с данными
-                        _bindingSource.DataSource = new BindingList<ArtNormN>(data);
-                        
+//                        _bindingSource.DataSource = new BindingList<ArtNormN>(data);
+                        _bindingList = new BindingList<ArtNormN>(data);
+                        _bindingSource.DataSource = _bindingList;
+
                         // Обновляем источник данных
                         _bindingSource.ResetBindings(false);
                         
@@ -1095,7 +1097,6 @@ namespace SewingProduction.Forms
                 int selectedAnn = -1;
                 MyDataART selectedArtRow = null;
                 MyDataANN selectedAnnRow = null;
-
                 // Получаем выбранные артикулы
                 BindingList<MyDataART> artDataSource = artView.DataSource as BindingList<MyDataART>;
                 foreach (var row in artDataSource)
@@ -1129,7 +1130,7 @@ namespace SewingProduction.Forms
 
                 // Подтверждение привязки
                 DialogResult result = MessageBox.Show(
-                    $"Вы действительно хотите привязать артикул {selectedArt} к разделению труда {selectedAnn}?",
+                    $"Вы действительно хотите привязать артикул {selectedArtRow.Articul.TrimEnd()} к разделению труда {selectedAnnRow.Articul.TrimEnd()}?",
                     "Подтверждение привязки",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question
@@ -1197,10 +1198,10 @@ namespace SewingProduction.Forms
                         if (row != null && row.IsChecked)
                         {
                             row.IsChecked = false;
-                            view.RefreshData();
 
                         }
                     }
+                            view.RefreshData();
 
                     // Устанавливаем флаг только текущей строке
                     newCheckedRow.IsChecked = true;
@@ -1263,8 +1264,8 @@ namespace SewingProduction.Forms
             try
             {
                 bufferId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group").ToString().TrimEnd(' ')}, \r" +
-                    $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')}, \r" +
+                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Group").ToString().TrimEnd(' ')},\r" +
+                    $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')},\r" +
                     $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
             }
             catch
@@ -1287,9 +1288,9 @@ namespace SewingProduction.Forms
             ArtNormN newItem = new ArtNormN
             {
                 Kod = "0000000",
-                Group = "Группа",
-                Articul = "Артикул",
-                Mod = "Модель",
+                Group = "",
+                Articul = "",
+                Mod = "",
                 SekShv = 0,
                 SekVyaz5 = 0,
                 SekVyaz6 = 0,
@@ -1299,7 +1300,7 @@ namespace SewingProduction.Forms
                 SekVyazo = 0,
                 SekVyaz = 0,
                 Sek = 0,
-                Komment = "Комментарий",
+                Komment = "",
                 DataSozd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
@@ -1307,7 +1308,7 @@ namespace SewingProduction.Forms
                 SekKr = 0,
                 Slogn = 0,
                 Status = 1,
-                StatusText = "Предварительный",
+                StatusText = "предварительный",
                 Arh = false,
                 AnnID = 0
             };
@@ -1329,28 +1330,56 @@ namespace SewingProduction.Forms
             ANNgridControl.RefreshDataSource();
 
             // Даем время на обновление UI
-            await Task.Delay(100);
+            //await Task.Delay(100);
 
             // Открываем форму редактирования
             using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
             {
-                if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
-                {
-                    // Обновляем все данные после успешного сохранения
-                    await LoadWorkDivisions();
-                    await CurrentWorks_Load();
-                    await LoadRelatedData(newId);
-                }
-                else
-                {
-                    // Удаляем строку при отмене
-                    _bindingList.Remove(newItem);
-                    await _artNormService.deleteRow("art_norm_n", newId);
-                    await _artNormService.deleteRow("norm_rasz", newId);
-                    _bindingSource.ResetBindings(false);
-                    ANNgridControl.RefreshDataSource();
-                    ANNgridView.RefreshData();
-                }
+                //if (teamWork_AdvanceTW.ShowDialog() == DialogResult.OK)
+                //{
+                //    var createdItem = teamWork_AdvanceTW.CreatedAnn;
+                //    if (createdItem != null) {
+                //        newItem.Articul = createdItem.Articul;
+                //        newItem.Mod = createdItem.Mod;
+                //        newItem.Group = createdItem.Group;
+                //        newItem.Komment = createdItem.Komment;
+                //        newItem.Diz = createdItem.Diz;
+                //        newItem.Constr = createdItem.Constr;
+                //        newItem.Sek = createdItem.Sek;
+                //       // newItem.DataSozd = createdItem.DataSozd;
+
+                //    }
+                //        _bindingSource.ResetBindings(false);
+
+                //    int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
+                //    if (newRowHandle >= 0)
+                //    {
+                //        ANNgridView.FocusedRowHandle = newRowHandle;
+                //        ANNgridView.RefreshRow(newRowHandle);
+                //    }
+                //    //await LoadWorkDivisions();
+                //    //await CurrentWorks_Load();
+                //    //await LoadRelatedData(newId);
+                //}
+                //else
+                //{
+                //    // Удаляем строку при отмене
+                //    _bindingList.Remove(newItem);
+                //    _bindingSource.Remove(newItem);
+                //    await _artNormService.deleteRow("art_norm_n", newId);
+                //    if (teamWork_AdvanceTW.IsRaszInserted)
+                //        await _artNormService.deleteRow("norm_rasz", newId);
+                //    if (teamWork_AdvanceTW.IsRaskInserted)
+                //        await _artNormService.deleteRow("norm_rask", newId);
+                //    if (teamWork_AdvanceTW.IsKontInserted)
+                //        await _artNormService.deleteRow("norm_kont", newId);
+                //    if (teamWork_AdvanceTW.IsDopObrInserted)
+                //        await _artNormService.deleteRow("norm_dop_obr", newId);
+                //    _bindingSource.ResetBindings(false);
+                //    ANNgridControl.RefreshDataSource();
+                //    ANNgridView.RefreshData();
+                //}
+                await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
         
@@ -1383,45 +1412,52 @@ namespace SewingProduction.Forms
                 bool hasNZP = await checkNzp(selectedAnnId);
 
                 // Копируем запись в новую и получаем ID новой записи
-                int newId = await CopyRow(hasNZP);
-                if (newId <= 0)
+                ArtNormN newRow = await CopyRow(hasNZP);
+                if (newRow.AnnID <= 0)
                 {
                     return;
                 }
 
-                //Открываем форму расширенного редактирования
-                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newId, selectedAnnId))
-                {
-                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                //                //Открываем форму расширенного редактирования
+                //                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newId, selectedAnnId))
+                //                {
+                //                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
 
-                    if (result == DialogResult.OK)
-                    {
-                        // Обновляем все данные после сохранения
-                        await updateNewRow(selectedAnnId, newId);
-                    }
-                    else
-                    {
-                        // Обрабатываем отмену операции
-                        await _logger.LogEventAsync($"Редактирование копии записи ID={newId} отменено пользователем", "ArchAndCopy");
-//TODO: удалить вновь обавленную строку?
-                    }
+                //                    if (result == DialogResult.OK)
+                //                    {
+                //                        // Обновляем все данные после сохранения
+                //                        await updateNewRow(selectedAnnId, newId);
+                //                    }
+                //                    else
+                //                    {
+                //                        // Обрабатываем отмену операции
+                //                        await _logger.LogEventAsync($"Редактирование копии записи ID={newId} отменено пользователем", "ArchAndCopy");
+                ////TODO: удалить вновь обавленную строку?
+                //                    }
+                //                }
+
+
+                using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedAnnId))
+                {
+                    await HandleAnnEditResult(teamWorkAdvanceTW, newRow);
                 }
+
 
                 // Обновляем архивный статус исходной записи
                 await _artNormService.UpdateAnnId("art_norm_n", selectedAnnId, "Status", hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive);
-                await _logger.LogEventAsync($"Запись ID={selectedAnnId} архивирована. Создана новая запись ID={newId}", "CopyRow");
+                await _logger.LogEventAsync($"Запись ID={selectedAnnId} архивирована. Создана новая запись ID={newRow.AnnID}", "CopyRow");
 
                 // Обновляем данные в гриде
                 ANNgridView.RefreshData();
 
-                // Выделяем новую запись в гриде
-                int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
-                if (newRowHandle >= 0)
-                {
-                    ANNgridView.FocusedRowHandle = newRowHandle;
-                }
+                //// Выделяем новую запись в гриде
+                //int newRowHandle = ANNgridView.LocateByValue("AnnID", newId);
+                //if (newRowHandle >= 0)
+                //{
+                //    ANNgridView.FocusedRowHandle = newRowHandle;
+                //}
                 //перепривязываем артикулы базового РТ
-                await bindArticulToNewRow(selectedAnnId, newId);
+                await bindArticulToNewRow(selectedAnnId, newRow.AnnID);
 
             }
             catch (Exception ex)
@@ -1430,6 +1466,53 @@ namespace SewingProduction.Forms
                 // Обрабатываем возможные ошибки
                 await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
+        {
+            if (teamWorkForm.ShowDialog() == DialogResult.OK)
+            {
+                var createdItem = teamWorkForm.CreatedAnn;
+
+                if (createdItem != null)
+                {
+                    // Обновляем существующий объект
+                    newItem.Articul = createdItem.Articul;
+                    newItem.Mod = createdItem.Mod;
+                    newItem.Group = createdItem.Group;
+                    newItem.Komment = createdItem.Komment;
+                    newItem.Diz = createdItem.Diz;
+                    newItem.Constr = createdItem.Constr;
+                    newItem.Sek = createdItem.Sek;
+                }
+
+                _bindingSource.ResetBindings(false);
+                int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
+                if (newRowHandle >= 0)
+                {
+                    ANNgridView.FocusedRowHandle = newRowHandle;
+                    ANNgridView.RefreshRow(newRowHandle);
+                }
+            }
+            else
+            {
+                // Удаляем несохранённую строку
+                _bindingList.Remove(newItem);
+                _bindingSource.Remove(newItem);
+
+                await _artNormService.deleteRow("art_norm_n", newItem.AnnID);
+                if (teamWorkForm.IsRaszInserted)
+                    await _artNormService.deleteRow("norm_rasz", newItem.AnnID);
+                if (teamWorkForm.IsRaskInserted)
+                    await _artNormService.deleteRow("norm_rask", newItem.AnnID);
+                if (teamWorkForm.IsKontInserted)
+                    await _artNormService.deleteRow("norm_kont", newItem.AnnID);
+                if (teamWorkForm.IsDopObrInserted)
+                    await _artNormService.deleteRow("norm_dop_obr", newItem.AnnID);
+
+                _bindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
             }
         }
 
@@ -1475,8 +1558,8 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Создает копию выбранной записи разделения труда в базе данных
         /// </summary>
-        /// <returns>ID новой записи или -1 в случае ошибки</returns>
-        private async Task<int> CopyRow(bool nzp)
+        /// <returns>новая запись или null в случае ошибки</returns>
+        private async Task<ArtNormN> CopyRow(bool nzp)
         {
             try
             {
@@ -1484,7 +1567,7 @@ namespace SewingProduction.Forms
                 if (selectedRowHandle < 0)
                 {
                     MessageBox.Show("Выберите разделение труда для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return -1;
+                    return null;
                 }
 
                 // Получаем выбранную запись
@@ -1492,7 +1575,7 @@ namespace SewingProduction.Forms
                 if (sourceRecord == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return -1;
+                    return null;
                 }
 
                 // Создаем копию записи с новыми значениями
@@ -1511,7 +1594,7 @@ namespace SewingProduction.Forms
                     SekVyazo = sourceRecord.SekVyazo,
                     SekVyaz = sourceRecord.SekVyaz,
                     Sek = sourceRecord.Sek,
-                    Komment = sourceRecord.Komment,
+                    Komment = sourceRecord.Komment==null?"":sourceRecord.Komment,
                     DataSozd = DateTime.Now,
                     Diz = sourceRecord.Diz,
                     Constr = sourceRecord.Constr,
@@ -1523,20 +1606,20 @@ namespace SewingProduction.Forms
                 };
 
                 // Сохраняем копию в базу данных
-                int newId = await Task.Run(() => _artNormService.SaveCopyToDatabase(newRecord));
-                if (newId <= 0)
+                newRecord.AnnID = await Task.Run(() => _artNormService.SaveCopyToDatabase(newRecord));
+                if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return -1;
+                    return null;
                 }
 
-                return newId;
+                return newRecord;
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при копировании записи");
                 MessageBox.Show($"Произошла ошибка при копировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
+                return null;
             }
         }
 
@@ -1554,35 +1637,36 @@ namespace SewingProduction.Forms
                 return;
             }
                 // Создаём новую запись модели `ArtNorm` из выбранной строки
-            ArtNormN newItem = new ArtNormN
-            {
-                    Kod = ANNgridView.GetRowCellValue(_rowNumber, "Kod").ToString(),
-                    Group = ANNgridView.GetRowCellValue(_rowNumber, "Group").ToString(),
-                    Articul = ANNgridView.GetRowCellValue(_rowNumber, "Articul").ToString(),
-                    Mod = ANNgridView.GetRowCellValue(_rowNumber, "Mod").ToString(),
-                    SekShv = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekShv")),
-                    SekVyaz5 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz5")),
-                    SekVyaz6 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz6")),
-                    SekVyaz7 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz7")),
-                    SekVyaz10 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz10")),
-                    SekVyaz12 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz12")),
-                    SekVyazo = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyazo")),
-                    SekVyaz = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz")),
-                    Sek = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Sek")),
-                    Komment = ANNgridView.GetRowCellValue(_rowNumber, "Komment").ToString(),
-                    DataSozd = Convert.ToDateTime(ANNgridView.GetRowCellValue(_rowNumber, "DataSozd")),
-                    DataObn = Convert.ToDateTime(ANNgridView.GetRowCellValue(_rowNumber, "DataObn")),
-                    Diz = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Diz")),
-                    Constr = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Constr")),
-                    SekKr = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekKr")),
-                    Slogn = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Slogn")),
-                    Status = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Status")),
-                    StatusText = ANNgridView.GetRowCellValue(_rowNumber, "StatusText").ToString(),
-                    Arh = Convert.ToBoolean(ANNgridView.GetRowCellValue(_rowNumber, "Arch")),
-                    AnnID = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "AnnID"))
-                };
+                /*       ArtNormN newItem = new ArtNormN
+                       {
+                               Kod = ANNgridView.GetRowCellValue(_rowNumber, "Kod").ToString(),
+                               Group = ANNgridView.GetRowCellValue(_rowNumber, "Group").ToString(),
+                               Articul = ANNgridView.GetRowCellValue(_rowNumber, "Articul").ToString(),
+                               Mod = ANNgridView.GetRowCellValue(_rowNumber, "Mod").ToString(),
+                               SekShv = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekShv")),
+                               SekVyaz5 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz5")),
+                               SekVyaz6 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz6")),
+                               SekVyaz7 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz7")),
+                               SekVyaz10 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz10")),
+                               SekVyaz12 = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz12")),
+                               SekVyazo = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyazo")),
+                               SekVyaz = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekVyaz")),
+                               Sek = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Sek")),
+                               Komment = ANNgridView.GetRowCellValue(_rowNumber, "Komment")==DBNull.Value?"": ANNgridView.GetRowCellValue(_rowNumber, "Komment").ToString(),
+                               DataSozd = Convert.ToDateTime(ANNgridView.GetRowCellValue(_rowNumber, "DataSozd")),
+                               DataObn = Convert.ToDateTime(ANNgridView.GetRowCellValue(_rowNumber, "DataObn")),
+                               Diz = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Diz")),
+                               Constr = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Constr")),
+                               SekKr = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "SekKr")),
+                               Slogn = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Slogn")),
+                               Status = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "Status")),
+                               StatusText = ANNgridView.GetRowCellValue(_rowNumber, "StatusText").ToString(),
+                               Arh = Convert.ToBoolean(ANNgridView.GetRowCellValue(_rowNumber, "Arch")),
+                               AnnID = Convert.ToInt32(ANNgridView.GetRowCellValue(_rowNumber, "AnnID"))
+                           };
 
-
+                           */
+                ArtNormN newItem = ANNgridView.GetRow(_rowNumber) as ArtNormN;
 
                 // Получаем ID выбранной записи
                 int selectedAnnId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
@@ -1647,7 +1731,6 @@ namespace SewingProduction.Forms
                 {
                     BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
 
-                    // Populate the BindingList with data from the DataTable using the mapping method
                 foreach (DataRow row in relatedData.Rows)
                 {
                     try
@@ -1662,7 +1745,6 @@ namespace SewingProduction.Forms
                     ;
                 }
 
-                    // Set the data source for the grid control
                     try
                     {
                         customGridControl1.DataSource = artDataList; // This should work if types match
@@ -1717,7 +1799,6 @@ namespace SewingProduction.Forms
                 int kod = GetSelectedKodFromGrid(customGridControl1);
                 List<ArtNormN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
 
-                // Check if artNormNs is not null before proceeding
                 if (artNormNs != null)
                 {
                     var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);

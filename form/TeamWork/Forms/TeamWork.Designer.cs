@@ -1754,7 +1754,6 @@ namespace SewingProduction.Forms
             // 
             this.tablePanel2.SetColumn(this.customGridControl3, 3);
             this.customGridControl3.Cursor = System.Windows.Forms.Cursors.Default;
-            this.customGridControl3.DataSource = this.normraszBindingSource1;
             this.customGridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControl3.Font = new System.Drawing.Font("Arial", 10F);
             this.customGridControl3.Location = new System.Drawing.Point(1085, 38);

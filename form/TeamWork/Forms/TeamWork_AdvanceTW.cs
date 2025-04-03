@@ -12,6 +12,7 @@ using SewingProduction.form.TeamWork.Forms;
 using DevExpress.XtraGrid.Views.Base;
 using System.Collections.Generic;
 using DevExpress.CodeParser;
+using static SewingProduction.form.TeamWork.Forms.norm_raskrNew;
 
 namespace SewingProduction.form
 {
@@ -37,6 +38,13 @@ namespace SewingProduction.form
         // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
         private static DataTable _cachedFioData;
         private bool _okPressed = false;
+        public bool IsRaszInserted { get; private set; }
+        public bool IsRaskInserted { get; private set; }
+        public bool IsKontInserted { get; private set; }
+        public bool IsDopObrInserted { get; private set; }
+
+        public ArtNormN CreatedAnn { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -62,10 +70,6 @@ namespace SewingProduction.form
             }
             _bufferWorkDivision = bufferWorkDivision;
             _mode = mode;
-
-            // Включаем inplace редактирование для gridView3 и gridView4
-            gridViewKont.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
-            gridViewDopObr.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
         }
 
         /// <summary>
@@ -348,7 +352,7 @@ namespace SewingProduction.form
                     _normRaskList.Clear();
                     _normKontList.Clear();
                     _normDopObrList.Clear();
-
+                    
                     this.DialogResult = DialogResult.Cancel;
                     this.Close();
                 }
@@ -360,6 +364,7 @@ namespace SewingProduction.form
         }
 
 
+        #region Rasz
         private void gridViewRasz_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
@@ -530,7 +535,9 @@ namespace SewingProduction.form
             //    }
             //}
         }
+        #endregion
 
+        #region Rask
         private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
@@ -619,7 +626,9 @@ namespace SewingProduction.form
                 }
             }
         }
+        #endregion
 
+        #region Kont
         private async void GridView3_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
@@ -692,6 +701,9 @@ namespace SewingProduction.form
 
         }
 
+        #endregion
+
+        #region Dop
         private void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
@@ -757,22 +769,45 @@ namespace SewingProduction.form
                 }
             }
         }
-
+        #endregion
         private async void btnOK_Click(object sender, EventArgs e)
         {
             _okPressed = true;
-            await SaveAllDataAsync();
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+            if ((groupTextBox.Text.TrimEnd() == "") || (modelTextBox.Text.TrimEnd() == ""))
+            {
+                MessageBox.Show("Заполните поле Модель либо Группа", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                DialogResult = DialogResult.None;
+                return;
+            }
+            else
+            {
+                await SaveAllDataAsync();
+                try
+                {
+                    ArtNormN annData = GetAnnDataFromUI();
+
+                    // Сохраняем данные в таблицу ann
+                    await _artNormService.UpdateAnnAsync(annData);
+                    CreatedAnn = annData;
+
+                    MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
+                catch (Exception ex) 
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
+                    MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.None;
+                    return;
+                }
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
         private async Task SaveAllDataAsync()
         {
             try
             {
-                ArtNormN annData = SetAnnDataFromUI();
-
-                // Сохраняем данные в таблицу ann
-                await _artNormService.UpdateAnnAsync(annData);
 
                 // NormRasz
                 foreach (var rasz in _normRaszList)
@@ -782,6 +817,7 @@ namespace SewingProduction.form
                     {
                         rasz.nrId = await _artNormService.InsertNormRaszAsync(rasz);
                     }
+                    IsRaszInserted = true;
                 }
 
                 // NormRask
@@ -790,6 +826,7 @@ namespace SewingProduction.form
                     rask.AnnId = _newAnnId;
                     if (rask.id <= 0)
                         rask.id = await _artNormService.InsertNormRaskAsync(rask);
+                    IsRaskInserted = true;
                 }
 
                 // NormKont
@@ -797,6 +834,7 @@ namespace SewingProduction.form
                 {
                     kont.AnnId = _newAnnId;
                     await _artNormService.InsertNormKontAsync(kont);
+                    IsKontInserted = true;
                 }
 
                 // NormDopObr
@@ -804,6 +842,7 @@ namespace SewingProduction.form
                 {
                     dop.AnnId = _newAnnId;
                     await _artNormService.InsertDopObrAsync(dop);
+                    IsDopObrInserted = true;
                 }
 
                 // Обновляем UI после сохранения
@@ -822,18 +861,13 @@ namespace SewingProduction.form
                     designerComboBox.Refresh();
                     constructorComboBox.Refresh();
                 });
-
-                MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
-                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                throw;
             }
         }
 
-        private ArtNormN SetAnnDataFromUI()
+        private ArtNormN GetAnnDataFromUI()
         {
             // Обновляем данные в таблице ann
             return new ArtNormN
