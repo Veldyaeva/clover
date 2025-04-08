@@ -477,7 +477,7 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 168F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 169F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.constructorComboBox, 1, 1);
@@ -509,9 +509,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1014, 41);
+            this.richTextBox1.Location = new System.Drawing.Point(1013, 41);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(296, 53);
+            this.richTextBox1.Size = new System.Drawing.Size(297, 53);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -552,7 +552,7 @@ namespace SewingProduction.form
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(358, 41);
+            this.designerComboBox.Location = new System.Drawing.Point(357, 41);
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(199, 24);
             this.designerComboBox.TabIndex = 17;
@@ -564,7 +564,7 @@ namespace SewingProduction.form
             this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(358, 3);
+            this.modelTextBox.Location = new System.Drawing.Point(357, 3);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(200, 23);
             this.modelTextBox.TabIndex = 4;
@@ -575,7 +575,7 @@ namespace SewingProduction.form
             this.nameTextBox.Enabled = false;
             this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(688, 3);
+            this.nameTextBox.Location = new System.Drawing.Point(687, 3);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(204, 23);
             this.nameTextBox.TabIndex = 5;
@@ -586,7 +586,7 @@ namespace SewingProduction.form
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(898, 11);
+            this.label5.Location = new System.Drawing.Point(897, 11);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -594,7 +594,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1014, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1013, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -604,7 +604,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1147, 3);
+            this.btnOK.Location = new System.Drawing.Point(1146, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -618,7 +618,7 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(898, 41);
+            this.buffer.Location = new System.Drawing.Point(897, 41);
             this.buffer.Name = "buffer";
             this.buffer.Size = new System.Drawing.Size(110, 53);
             this.buffer.TabIndex = 11;
@@ -632,7 +632,7 @@ namespace SewingProduction.form
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(564, 51);
+            this.label4.Location = new System.Drawing.Point(563, 51);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 32);
             this.label4.TabIndex = 2;
@@ -643,7 +643,7 @@ namespace SewingProduction.form
             this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(688, 41);
+            this.secTimeTextBox.Location = new System.Drawing.Point(687, 41);
             this.secTimeTextBox.Name = "secTimeTextBox";
             this.secTimeTextBox.ReadOnly = true;
             this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
@@ -678,7 +678,7 @@ namespace SewingProduction.form
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(564, 11);
+            this.label3.Location = new System.Drawing.Point(563, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 16);
             this.label3.TabIndex = 1;
@@ -690,7 +690,7 @@ namespace SewingProduction.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(279, 11);
+            this.label2.Location = new System.Drawing.Point(278, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 0;
@@ -702,7 +702,7 @@ namespace SewingProduction.form
             this.customLabel1.AutoSize = true;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(279, 59);
+            this.customLabel1.Location = new System.Drawing.Point(278, 59);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(69, 16);
             this.customLabel1.TabIndex = 14;
@@ -753,6 +753,7 @@ namespace SewingProduction.form
             this.gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.gridViewRasz.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridViewRasz.EditFormShowing += new DevExpress.XtraGrid.Views.Grid.EditFormShowingEventHandler(this.gridViewRasz_EditFormShowing);
+            this.gridViewRasz.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridViewRasz_EditFormHidden);
             this.gridViewRasz.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridViewRasz_ValidateRow);
             this.gridViewRasz.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowUpdated);
             this.gridViewRasz.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowEditCanceled);

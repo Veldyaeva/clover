@@ -469,7 +469,7 @@ namespace SewingProduction.form
                 _isCustomEditFormOpen = false;
                 return;
             }
-            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)
+            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)//решаем, показывать ли editForm  (но почему код???)
             {
                 e.Allow = true;
                 return;
@@ -484,7 +484,6 @@ namespace SewingProduction.form
                 {
                     var selected = selectionForm.SelectedRowData;
 
-                    selected.nrId = _newAnnId;
                     _normRaszList.Add(selected);
 
                     // Обновляем привязку данных и интерфейс
@@ -493,7 +492,7 @@ namespace SewingProduction.form
                     gridViewRasz.RefreshData();
                     gridView.PostEditor();
                     gridView.UpdateCurrentRow();
-                    int newRowHandle = gridView.LocateByValue(TableNames.Rasz, selected.nrId);//_newAnnId);
+                    int newRowHandle = gridView.LocateByValue(TableNames.RaszId, selected.nrId);//_newAnnId);
                     
                     if (newRowHandle >= 0)
                     {
@@ -550,7 +549,6 @@ namespace SewingProduction.form
         {
             if (e.Row is NormRasz normRasz)
             {
-                normRasz.AnnId = _newAnnId;
                 gridViewRasz.UpdateCurrentRow();
             }
         }
@@ -569,6 +567,38 @@ namespace SewingProduction.form
                     e.Valid = false;
                     e.ErrorText = $"Ошибка: {ex.Message}";
                     await _logger.LogErrorAsync(ex, "Ошибка при валидации данных");
+                }
+            }
+        }
+
+        private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
+        {
+            var gridView = sender as GridView;
+            if (gridView == null) return;
+
+            if (e.Result != EditFormResult.Update)
+            {
+                try
+                {
+                    // Получаем текущую строку
+                    var row = gridView.GetRow(e.RowHandle) as NormRasz;
+                    if (row != null && row.nrId > 0)
+                    {
+                        // Удаляем из базы данных
+                        await _artNormService.DeleteEntityAsync(TableNames.Rasz, TableNames.RaszId, row);//.DeleteNormRaszAsync(row.nrId);
+                        
+                        // Удаляем из списка
+                        _normRaszList.Remove(row);
+                        _normRaszBindingSource.ResetBindings(false);
+                        
+                        // Удаляем из грида
+                        gridView.DeleteRow(e.RowHandle);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogErrorAsync(ex, "Ошибка при удалении строки после закрытия формы редактирования");
+                    MessageBox.Show($"Ошибка при удалении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -118,14 +118,22 @@ namespace SewingProduction.form
                 {
                     SelectedRowData.nrId = newId;
                 }
-
+                else
+                {
+                    MessageBox.Show("Ошибка при сохранении записи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка вставки", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при выборе строки в NormOperNew");
-                MessageBox.Show($"Ошибка при выборе строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Неизвестная ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -167,15 +175,6 @@ namespace SewingProduction.form
         }
     }
 
-    public class MyData
-    {
-        public string Kod_o { get; set; }
-        public string Text { get; set; }
-        public string Spec { get; set; }
-        public string Razryad { get; set; }
-        public string Obor { get; set; }
-        public string Kod_proizv { get; set; }
-    }
 
 }
 
