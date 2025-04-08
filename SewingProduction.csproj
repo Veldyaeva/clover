@@ -212,12 +212,29 @@
     </Compile>
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
     <Compile Include="form\TeamWork\Enums\Status.cs" />
+    <Compile Include="form\TeamWork\Enums\TableNames.cs" />
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Articles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Data.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Helpers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.WorkDivisions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Helpers\CopyHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">

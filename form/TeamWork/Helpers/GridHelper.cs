@@ -17,7 +17,7 @@ namespace SewingProduction.Helpers
 {
     public class GridHelper
     {
-        public readonly HybridLogger _logger = new HybridLogger();
+        public readonly FileLogger _logger = new FileLogger();
         #region async
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource` асинхронно.

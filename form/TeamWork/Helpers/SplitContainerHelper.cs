@@ -8,7 +8,7 @@ namespace SewingProduction.Helpers
 {
     public class SplitContainerHelper
     {
-        private readonly HybridLogger _logger = new HybridLogger();
+        private readonly FileLogger _logger = new FileLogger();
 
         public void SaveSplitContainerSettings(SplitContainerControl splitContainer, string fileName)
         {

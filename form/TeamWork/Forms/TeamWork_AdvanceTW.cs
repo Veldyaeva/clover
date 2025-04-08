@@ -37,6 +37,7 @@ namespace SewingProduction.form
         private BindingSource _normDopObrBindingSource;
         // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
         private static DataTable _cachedFioData;
+        private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
         public bool IsRaszInserted { get; private set; }
         public bool IsRaskInserted { get; private set; }
@@ -209,9 +210,9 @@ namespace SewingProduction.form
                 var raskTask = _artNormService.GetRelatedNormRask(id);
                 var kontTask = _artNormService.GetRelatedNormKont(id);
                 var dopObrTask = _artNormService.GetRelatedNormDopObr(id);
-                //    var annTask = LoadAnnDataAsync();
+                var annDataTask = _artNormService.GetArtNormDataById(id);
 
-                await Task.WhenAll(raszTask, raskTask, kontTask, dopObrTask);//, annTask);
+                await Task.WhenAll(raszTask, raskTask, kontTask, dopObrTask, annDataTask);
 
                 DataTable kod_proizv = await _artNormService.GetKod_proizv();
                 repositoryItemLookUpEdit1.DataSource = kod_proizv;
@@ -219,7 +220,6 @@ namespace SewingProduction.form
                 repositoryItemLookUpEdit2.DataSource = podr_vyaz;
                 DataTable oborud_shv = await _artNormService.GetOborud_shv();
                 repositoryItemLookUpEdit3.DataSource = oborud_shv;
-
 
                 // Преобразуем в списки
                 var raszList = ConvertDataTable<NormRasz>(raszTask.Result);
@@ -245,6 +245,34 @@ namespace SewingProduction.form
                     _normDopObrList.Clear();
                     foreach (var item in dopObrList) _normDopObrList.Add(item);
                     _normDopObrBindingSource.ResetBindings(false);
+
+                    // Обновляем основные поля формы
+                    var annData = annDataTask.Result;
+                    if (annData != null)
+                    {
+                        nameTextBox.Text = annData.Articul;
+                        groupTextBox.Text = annData.Group;
+                        modelTextBox.Text = annData.Mod;
+                        secTimeTextBox.Text = annData.Sek.ToString();
+                        if (annData.Diz > 0)
+                        {
+                            try { designerComboBox.SelectedValue = annData.Diz; }
+                            catch { }
+                        }
+                        if (annData.Constr > 0)
+                        {
+                            try { constructorComboBox.SelectedValue = annData.Constr; }
+                            catch { }
+                        }
+
+                        // Обновляем отображение данных
+                        nameTextBox.Refresh();
+                        groupTextBox.Refresh();
+                        modelTextBox.Refresh();
+                        secTimeTextBox.Refresh();
+                        designerComboBox.Refresh();
+                        constructorComboBox.Refresh();
+                    }
                 });
             }
             catch (Exception ex)
@@ -372,8 +400,8 @@ namespace SewingProduction.form
                 return;
             try
             {
-            using (var selectionForm = new NormOperNew(_selectedAnnId))
-            {
+                using (var selectionForm = new NormOperNew(_selectedAnnId))
+                {
                     DialogResult result = selectionForm.ShowDialog();
 
                     if (result == DialogResult.OK)
@@ -382,7 +410,7 @@ namespace SewingProduction.form
                         if (selectedData != null)
                         {
                             // Заполняем значения в текущей новой строке
-                           gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
+                            gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
                             gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.Kod_o);
                             gridView.SetRowCellValue(e.RowHandle, "Text", selectedData.Text);
                             gridView.SetRowCellValue(e.RowHandle, "Spec", selectedData.Spec);
@@ -397,15 +425,19 @@ namespace SewingProduction.form
                             gridView.SetRowCellValue(e.RowHandle, "TextVyaz", selectedData.TextVyaz);
                             gridView.SetRowCellValue(e.RowHandle, "TextOb", selectedData.TextOb);
                             gridView.SetRowCellValue(e.RowHandle, "TextProizv", selectedData.TextProizv);
+                            gridView.SetRowCellValue(e.RowHandle, "nrId", selectedData.nrId);
+                            
                             gridView.PostEditor();
                             gridView.UpdateCurrentRow();
 
+                            // Фокусируемся на новой строке и открываем форму редактирования
+                            gridView.FocusedRowHandle = e.RowHandle;
+                            gridView.ShowEditForm();
                         }
                         else
                         {
                             gridView.CancelUpdateCurrentRow();
                             gridView.HideEditForm();
-                            // Если данные не выбраны, удаляем строку
                             gridView.DeleteRow(e.RowHandle);
                         }
                     }
@@ -414,27 +446,36 @@ namespace SewingProduction.form
                         gridView.CancelUpdateCurrentRow();
                         gridView.HideEditor();
                         gridView.CloseEditForm();
-
+                        gridView.DeleteRow(e.RowHandle);
                     }
                 }
             }
-            finally
+            catch (Exception ex)
             {
-                // Восстанавливаем настройки редактирования
-                //    gridView.OptionsBehavior.Editable = allowEditing;
+                 _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в gridViewRasz");
+                MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
         {
             var gridView = sender as GridView;
             if (gridView == null || !gridView.IsNewItemRow(e.RowHandle))
                 return;
-            
-            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)
+
+            if (_isCustomEditFormOpen)
             {
-                e.Allow = false;
+                // Если флаг установлен, значит мы специально открыли форму
+                _isCustomEditFormOpen = false;
                 return;
             }
+            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)
+            {
+                e.Allow = true;
+                return;
+            }
+            e.Allow = false;
+
             using (var selectionForm = new NormOperNew(_selectedAnnId))
             {
                 var result = selectionForm.ShowDialog();
@@ -443,26 +484,33 @@ namespace SewingProduction.form
                 {
                     var selected = selectionForm.SelectedRowData;
 
-                    gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-                    gridView.SetRowCellValue(e.RowHandle, "KodO", selected.Kod_o);
-                    gridView.SetRowCellValue(e.RowHandle, "Text", selected.Text);
-                    gridView.SetRowCellValue(e.RowHandle, "Spec", selected.Spec);
-                    gridView.SetRowCellValue(e.RowHandle, "Razryad", selected.Razryad);
-                    gridView.SetRowCellValue(e.RowHandle, "Obor", selected.Obor);
-                    gridView.SetRowCellValue(e.RowHandle, "Kod_proizv", selected.Kod_proizv);
-                    gridView.SetRowCellValue(e.RowHandle, "Kod", selected.Kod);
-                    gridView.SetRowCellValue(e.RowHandle, "N1", selected.N1);
-                    gridView.SetRowCellValue(e.RowHandle, "Sek", selected.Sek);
-                    gridView.SetRowCellValue(e.RowHandle, "Kod_podr", selected.Kod_podr);
-                    gridView.SetRowCellValue(e.RowHandle, "Kod_ob", selected.Kod_ob);
-                    gridView.SetRowCellValue(e.RowHandle, "TextVyaz", selected.TextVyaz);
-                    gridView.SetRowCellValue(e.RowHandle, "TextOb", selected.TextOb);
-                    gridView.SetRowCellValue(e.RowHandle, "TextProizv", selected.TextProizv);
+                    selected.nrId = _newAnnId;
+                    _normRaszList.Add(selected);
 
-                    // разрешаем показать EditForm
+                    // Обновляем привязку данных и интерфейс
+                    _normRaszBindingSource.ResetBindings(false);
+                    gridControlRasz.RefreshDataSource();
+                    gridViewRasz.RefreshData();
                     gridView.PostEditor();
                     gridView.UpdateCurrentRow();
-                    //e.Allow = false;
+                    int newRowHandle = gridView.LocateByValue(TableNames.Rasz, selected.nrId);//_newAnnId);
+                    
+                    if (newRowHandle >= 0)
+                    {
+
+                        gridView.FocusedRowHandle = newRowHandle;
+                        gridView.ClearSelection();
+                    }
+
+                    FinalizeRow(newRowHandle, gridView);
+
+                }
+                else if (result == DialogResult.Cancel)
+                {
+                    // Если пользователь отменил выбор, удаляем строку
+                    gridView.CancelUpdateCurrentRow();
+                    gridView.HideEditForm();
+                    gridView.CloseEditForm();
                 }
                 else
                 {
@@ -473,6 +521,21 @@ namespace SewingProduction.form
             }
         }
 
+        private void FinalizeRow(int rowHandle, GridView gridView)
+        {
+            // разрешаем показать EditForm
+            gridView.PostEditor();
+            gridView.UpdateCurrentRow();
+            gridView.RefreshRow(rowHandle);
+
+            _isCustomEditFormOpen = true;
+
+            gridView.GridControl.BeginInvoke(new Action(() =>
+            {
+                gridView.FocusedRowHandle = rowHandle; 
+                gridView.ShowEditForm();               
+            }));
+        }
 
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
@@ -482,7 +545,6 @@ namespace SewingProduction.form
                 view.HideEditForm();
             }
         }
-
 
         private void gridViewRasz_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
@@ -509,41 +571,13 @@ namespace SewingProduction.form
                     await _logger.LogErrorAsync(ex, "Ошибка при валидации данных");
                 }
             }
-            //if (e.Row is NormRasz normRasz)
-            //{
-            //    try
-            //    {
-            //        // Убеждаемся что AnnId установлен
-            //        normRasz.AnnId = _newAnnId;
-
-            //        // Если это новая запись (nrId <= 0), сохраняем в БД
-            //        if (normRasz.nrId <= 0)
-            //        {
-            //            normRasz.nrId = await _artNormService.InsertNormRaszAsync(normRasz);
-            //            if (normRasz.nrId <= 0)
-            //            {
-            //                e.Valid = false;
-            //                e.ErrorText = "Ошибка при сохранении записи в базу данных";
-            //            }
-            //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        e.Valid = false;
-            //        e.ErrorText = $"Ошибка: {ex.Message}";
-            //        await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-            //    }
-            //}
         }
         #endregion
 
         #region Rask
-        private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
+       // private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
+       private async void OpenSelectionForm() 
         {
-            var gridView = sender as GridView;
-            if (gridView == null)
-                return;
-
             try
             {
                 using (var selectionForm = new norm_raskrNew(_newAnnId))
@@ -563,19 +597,18 @@ namespace SewingProduction.form
                             normRask.AnnId = _newAnnId;
                             _normRaskList.Add(normRask); // Добавляем в список
                         }
-
                         // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);
                         gridControlRaskr.RefreshDataSource();
-                        gridView.RefreshData();
+                        gridViewRasz.RefreshData();
 
                         // Обновляем текущую строку
-                        gridView.UpdateCurrentRow();
-                    }
-                    else
-                    {
+                        //gridView.UpdateCurrentRow();
+                        }
+                        else
+                        {
                         // Если пользователь отменил выбор или не выбрал данные, удаляем строку
-                        gridView.DeleteRow(e.RowHandle);
+                     //   gridViewRasz.DeleteRow(e.RowHandle);
                     }
                 }
             }
@@ -589,7 +622,22 @@ namespace SewingProduction.form
             }
         }
 
-        private void GridView2_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+
+        private void gridViewRaskr_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null)
+                return;
+
+            // Если пользователь кликает на строку "Добавить новую запись"
+            if (view.FocusedRowHandle == DevExpress.XtraGrid.GridControl.NewItemRowHandle)
+            {
+                e.Cancel = true; // Отменяем стандартное редактирование новой строки
+                OpenSelectionForm(); // Открываем свою форму выбора
+            }
+        }
+
+        private void GridView2_RowUpdated(object sender, RowObjectEventArgs e)
         {
             if (e.Row is NormRask normRask)
             {
@@ -773,7 +821,7 @@ namespace SewingProduction.form
         private async void btnOK_Click(object sender, EventArgs e)
         {
             _okPressed = true;
-            if ((groupTextBox.Text.TrimEnd() == "") || (modelTextBox.Text.TrimEnd() == ""))
+            if ((groupTextBox.Text.TrimEnd() == "") && (modelTextBox.Text.TrimEnd() == ""))
             {
                 MessageBox.Show("Заполните поле Модель либо Группа", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 DialogResult = DialogResult.None;
@@ -787,7 +835,8 @@ namespace SewingProduction.form
                     ArtNormN annData = GetAnnDataFromUI();
 
                     // Сохраняем данные в таблицу ann
-                    await _artNormService.UpdateAnnAsync(annData);
+                   //await _artNormService.UpdateAnnAsync(annData);
+                   await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, annData);
                     CreatedAnn = annData;
 
                     MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -813,10 +862,16 @@ namespace SewingProduction.form
                 foreach (var rasz in _normRaszList)
                 {
                     rasz.AnnId = _newAnnId;
-                    if (rasz.nrId <= 0)
+                    try
                     {
-                        rasz.nrId = await _artNormService.InsertNormRaszAsync(rasz);
+                        if (rasz.nrId <= 0)
+                        {
+                            rasz.nrId = await _artNormService.InsertEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz);//_artNormService.InsertNormRaszAsync(rasz);
+                        }
+                        else { await _artNormService.UpdateEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz); }
                     }
+                    catch (Exception ex)
+                    { }
                     IsRaszInserted = true;
                 }
 
@@ -824,8 +879,15 @@ namespace SewingProduction.form
                 foreach (var rask in _normRaskList)
                 {
                     rask.AnnId = _newAnnId;
-                    if (rask.id <= 0)
-                        rask.id = await _artNormService.InsertNormRaskAsync(rask);
+                    try
+                    {
+                        if (rask.id <= 0)
+                            rask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, rask);//_artNormService.InsertNormRaskAsync(rask);
+                        else
+                            await _artNormService.UpdateEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
+                    }
+                    catch(Exception ex)
+                    { }
                     IsRaskInserted = true;
                 }
 
@@ -876,7 +938,7 @@ namespace SewingProduction.form
                 Articul = nameTextBox.Text,
                 Group = groupTextBox.Text,
                 Mod = modelTextBox.Text,
-                Sek = secTimeTextBox.Text != null ? Convert.ToInt32(secTimeTextBox.Text) : 0,
+                Sek = !string.IsNullOrWhiteSpace(secTimeTextBox.Text)? Convert.ToInt32(secTimeTextBox.Text) : 0,
                 Diz = designerComboBox.SelectedValue != null ? Convert.ToInt32(designerComboBox.SelectedValue) : 0,
                 Constr = constructorComboBox.SelectedValue != null ? Convert.ToInt32(constructorComboBox.SelectedValue) : 0
             };
@@ -909,7 +971,7 @@ namespace SewingProduction.form
                     {
                         if (_mode == (int)Mode.Edit)
                         {
-                            await _artNormService.UpdateAnnId("art_norm_n", _bufferWorkDivision, fieldName, selectedId);
+                            await _artNormService.UpdateAnnId(TableNames.Ann, _bufferWorkDivision, fieldName, selectedId);
                             await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
                             
                             // Обновляем UI после изменения

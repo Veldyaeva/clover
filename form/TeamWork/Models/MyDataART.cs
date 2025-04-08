@@ -1,5 +1,6 @@
 ﻿using DevExpress.Mvvm.Native;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SewingProduction.Models
 {
@@ -7,11 +8,14 @@ namespace SewingProduction.Models
     {
         public string Articul { get; set; }
         public int Kod { get; set; }
+        [Column("grup")]
         public string Group { get; set; }
         public string Model { get; set; }
+        [NotMapped]
         public string BindedArt { get; set; }
 
         private bool _isChecked;
+        [NotMapped]
         public bool IsChecked
         {
             get => _isChecked;

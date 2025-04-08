@@ -124,7 +124,7 @@ namespace SewingProduction.Forms
             this.kolNZP = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridView14 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.ButtonUnboundWd = new DevExpress.XtraEditors.SimpleButton();
+            this.ButtonUnboundWd = new SewingProduction.CustomSimpleButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -176,9 +176,9 @@ namespace SewingProduction.Forms
             this.colannId6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label8 = new SewingProduction.CustomLabel();
             this.commentRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.xtraTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageArticles = new DevExpress.XtraTab.XtraTabPage();
             this.xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageWorkDivisions = new DevExpress.XtraTab.XtraTabPage();
             this.panelControl2 = new DevExpress.XtraEditors.PanelControl();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
             this.customGridControl3 = new SewingProduction.CustomGridControl();
@@ -299,10 +299,10 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            this.xtraTabPage2.SuspendLayout();
+            this.xtraTabPageArticles.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).BeginInit();
             this.xtraTabControl2.SuspendLayout();
-            this.xtraTabPage1.SuspendLayout();
+            this.xtraTabPageWorkDivisions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).BeginInit();
             this.panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).BeginInit();
@@ -386,7 +386,8 @@ namespace SewingProduction.Forms
             this.xtraTabControl1.TabIndex = 0;
             this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.TabPage1,
-            this.xtraTabPage2});
+            this.xtraTabPageArticles});
+            this.xtraTabControl1.SelectedPageChanged += new DevExpress.XtraTab.TabPageChangedEventHandler(this.XtraTabControl1_SelectedPageChanged);
             // 
             // TabPage1
             // 
@@ -785,8 +786,6 @@ namespace SewingProduction.Forms
             this.ANNgridView.GridControl = this.ANNgridControl;
             this.ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.ANNgridView.Name = "ANNgridView";
-            this.ANNgridView.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
-            this.ANNgridView.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
             this.ANNgridView.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.ANNgridView.OptionsView.ColumnAutoWidth = false;
             this.ANNgridView.OptionsView.ShowGroupPanel = false;
@@ -1231,6 +1230,7 @@ namespace SewingProduction.Forms
             this.ButtonUnboundWd.Size = new System.Drawing.Size(75, 23);
             this.ButtonUnboundWd.TabIndex = 8;
             this.ButtonUnboundWd.Text = "Отвязать";
+            this.ButtonUnboundWd.Click += new System.EventHandler(this.ResetButton_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -1613,6 +1613,7 @@ namespace SewingProduction.Forms
             this.gridView5.GridControl = this.gridControl5;
             this.gridView5.Name = "gridView5";
             this.gridView5.OptionsView.ShowGroupPanel = false;
+            this.gridView5.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView5_FocusedRowChanged);
             // 
             // colsek_p
             // 
@@ -1671,12 +1672,12 @@ namespace SewingProduction.Forms
             this.commentRichTextBox.TabIndex = 5;
             this.commentRichTextBox.Text = "";
             // 
-            // xtraTabPage2
+            // xtraTabPageArticles
             // 
-            this.xtraTabPage2.Controls.Add(this.xtraTabControl2);
-            this.xtraTabPage2.Name = "xtraTabPage2";
-            this.xtraTabPage2.Size = new System.Drawing.Size(1516, 811);
-            this.xtraTabPage2.Text = "2. Текущие работы";
+            this.xtraTabPageArticles.Controls.Add(this.xtraTabControl2);
+            this.xtraTabPageArticles.Name = "xtraTabPageArticles";
+            this.xtraTabPageArticles.Size = new System.Drawing.Size(1516, 811);
+            this.xtraTabPageArticles.Text = "2. Текущие работы";
             // 
             // xtraTabControl2
             // 
@@ -1694,22 +1695,22 @@ namespace SewingProduction.Forms
             this.xtraTabControl2.LookAndFeel.SkinMaskColor2 = System.Drawing.Color.Transparent;
             this.xtraTabControl2.LookAndFeel.UseDefaultLookAndFeel = false;
             this.xtraTabControl2.Name = "xtraTabControl2";
-            this.xtraTabControl2.SelectedTabPage = this.xtraTabPage1;
+            this.xtraTabControl2.SelectedTabPage = this.xtraTabPageWorkDivisions;
             this.xtraTabControl2.Size = new System.Drawing.Size(1516, 811);
             this.xtraTabControl2.TabIndex = 0;
             this.xtraTabControl2.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPage1,
+            this.xtraTabPageWorkDivisions,
             this.xtraTabPage3});
             // 
-            // xtraTabPage1
+            // xtraTabPageWorkDivisions
             // 
-            this.xtraTabPage1.Appearance.PageClient.BackColor = System.Drawing.Color.Transparent;
-            this.xtraTabPage1.Appearance.PageClient.Options.UseBackColor = true;
-            this.xtraTabPage1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.xtraTabPage1.Controls.Add(this.panelControl2);
-            this.xtraTabPage1.Name = "xtraTabPage1";
-            this.xtraTabPage1.Size = new System.Drawing.Size(1514, 786);
-            this.xtraTabPage1.Text = "Требуют увязки";
+            this.xtraTabPageWorkDivisions.Appearance.PageClient.BackColor = System.Drawing.Color.Transparent;
+            this.xtraTabPageWorkDivisions.Appearance.PageClient.Options.UseBackColor = true;
+            this.xtraTabPageWorkDivisions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.xtraTabPageWorkDivisions.Controls.Add(this.panelControl2);
+            this.xtraTabPageWorkDivisions.Name = "xtraTabPageWorkDivisions";
+            this.xtraTabPageWorkDivisions.Size = new System.Drawing.Size(1514, 786);
+            this.xtraTabPageWorkDivisions.Text = "Требуют увязки";
             // 
             // panelControl2
             // 
@@ -2519,7 +2520,7 @@ namespace SewingProduction.Forms
             this.Controls.Add(this.xtraTabControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TeamWork";
-            this.Text = "Работа в бригаде";
+            this.Text = "Нормативные расценки";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TeamWork_FormClosing);
             this.Load += new System.EventHandler(this.TeamWorkForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
@@ -2571,10 +2572,10 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            this.xtraTabPage2.ResumeLayout(false);
+            this.xtraTabPageArticles.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl2)).EndInit();
             this.xtraTabControl2.ResumeLayout(false);
-            this.xtraTabPage1.ResumeLayout(false);
+            this.xtraTabPageWorkDivisions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.panelControl2)).EndInit();
             this.panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablePanel2)).EndInit();
@@ -2637,7 +2638,7 @@ namespace SewingProduction.Forms
 
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
         private DevExpress.XtraTab.XtraTabPage TabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage2;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageArticles;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private System.Windows.Forms.BindingSource normraskBindingSource;
         private System.Windows.Forms.BindingSource normkontBindingSource;
@@ -2820,7 +2821,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private BindingSource normraszBindingSource1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage1;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageWorkDivisions;
         private CustomButton customButton4;
         private CustomGridControl customGridControl3;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
@@ -3003,7 +3004,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
-        private SimpleButton ButtonUnboundWd;
+        private CustomSimpleButton ButtonUnboundWd;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
         private RepositoryItemCheckEdit repositoryItemCheckEdit2;
     }

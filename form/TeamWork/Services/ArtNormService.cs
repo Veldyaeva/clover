@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using System.Threading.Tasks;
 using System.Drawing;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
+using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SewingProduction.Services
 {
@@ -24,7 +26,8 @@ namespace SewingProduction.Services
     public class ArtNormService
     {
         private readonly DatabaseHelper _dbHelper;
-        private readonly HybridLogger _logger = new HybridLogger();
+        //    private readonly HybridLogger _logger = new HybridLogger();
+        private readonly FileLogger _logger = new FileLogger();
         public ArtNormService(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
@@ -59,6 +62,12 @@ namespace SewingProduction.Services
 
             foreach (DataRow row in table.Rows)
             {
+                //var dateCreate = row["data_sozd"];
+                //var dataUpdate = row["data_obn"];
+                
+                //_logger.LogEventAsync($"data_sozd value: {dateCreate}, type: {dateCreate?.GetType()}", "ConvertToList");
+                //_logger.LogEventAsync($"data_obn value: {dataUpdate}, type: {dataUpdate?.GetType()}", "ConvertToList");
+
                 list.Add(new ArtNormN
                 {
                     Kod = row["kod"].ToString(),
@@ -68,7 +77,7 @@ namespace SewingProduction.Services
                     Mod = row["mod"].ToString(),
                     Sek = row["sek"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek"]),
                     SekVyaz = row["sek_vyaz"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyaz"]),
-                    DataObn = row["data_obn"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_obn"]),
+                    dataUpdate = row["data_obn"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_obn"]),
                     SekShv = row["sek_shv"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_shv"]),
                     StatusText = row["statusText"] == DBNull.Value ? "" : row["statusText"].ToString(),
                     Status = row["status"] == DBNull.Value ? 0 : Convert.ToInt32(row["status"]),
@@ -82,7 +91,7 @@ namespace SewingProduction.Services
                     SekKr = row["sek_kr"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_kr"]),
                     Slogn = row["slogn"] == DBNull.Value ? 0 : Convert.ToInt32(row["slogn"]),
                     Komment = row["komment"] == DBNull.Value ? "" : row["komment"].ToString(),
-                    DataSozd = row["data_sozd"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(Convert.ToDateTime(row["data_sozd"])),
+                    dateCreate = row["data_sozd"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_sozd"]),
                     Diz = row["diz"] == DBNull.Value ? 0 : Convert.ToInt32(row["diz"]),
                     Constr = row["constr"] == DBNull.Value ? 0 : Convert.ToInt32(row["constr"])
                 });
@@ -282,7 +291,7 @@ OUTPUT INSERTED.annID
                 {"@sek_vyaz", row.SekVyaz},
                 {"@sek", row.Sek},
                 {"@komment", row.Komment},
-                {"@data_sozd", row.DataSozd},
+                {"@data_sozd", row.dateCreate},
                 {"@diz", row.Diz},
                 {"@constr", row.Constr},
      {"@data_obn", DateTime.Now },//row.DataObn },
@@ -329,10 +338,10 @@ OUTPUT INSERTED.annID
             {"@sek_vyaz", newItem.SekVyaz},
             {"@sek", newItem.Sek},
             {"@komment", newItem.Komment},
-            {"@data_sozd", newItem.DataSozd},
+            {"@data_sozd", newItem.dateCreate},
             {"@diz", newItem.Diz},
             {"@constr", newItem.Constr},
-            {"@data_obn", newItem.DataObn ?? (object)DBNull.Value},
+            {"@data_obn", newItem.dataUpdate ?? (object)DBNull.Value},
             {"@sek_kr", newItem.SekKr},
             {"@slogn", newItem.Slogn},
             {"@arh", newItem.Arh},
@@ -438,7 +447,7 @@ OUTPUT INSERTED.annID
         /// </summary>
         /// <param name="annId">Идентификатор разделения труда</param>
         /// <returns>Список объектов NormRasz</returns>
-        public async Task<List<NormRasz>> GetNormRaszByAnnId(int annId)
+        public async Task<List<NormRasz>> GetNormRaszList(int annId)
         {
             DataTable table = await GetRelatedNormRasz(annId);
             List<NormRasz> result = new List<NormRasz>();
@@ -482,7 +491,7 @@ OUTPUT INSERTED.annID
                     Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
                     Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
                     Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0
-    };
+                };
                 result.Add(item);
             }
             
@@ -495,9 +504,6 @@ OUTPUT INSERTED.annID
             {
                 string query = "SELECT fio FROM fio WHERE tab = @employeeId";
                 DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@employeeId", employeeId } });
-
-                // Log the result of the query
-                await _logger.LogEventAsync($"Query Result for Employee ID {employeeId}: {result.Rows.Count} rows found.", "GetEmployeeFullName");
 
                 if (result.Rows.Count > 0)
                 {
@@ -685,7 +691,7 @@ OUTPUT INSERTED.annID
         /// <param name="fieldName">Имя поля</param>
         /// <param name="newValue">новое значение</param>
         /// <returns>Задача, представляющая асинхронную операцию</returns>
-        public async Task UpdateAnnIdField(int annId, string fieldName, object newValue)
+        /*public async Task UpdateAnnIdField(int annId, string fieldName, object newValue)
         {
             try
             {
@@ -705,7 +711,7 @@ OUTPUT INSERTED.annID
                 await _logger.LogErrorAsync(ex, $"Ошибка при обновлении поля {fieldName} для ID {annId}");
                 throw;
             }
-        }
+        }*/
 
         /// <summary>
         /// Обновляет annId в таблицах состава разделения труда
@@ -737,7 +743,206 @@ OUTPUT INSERTED.annID
             }
         }
 
-        public async Task UpdateAnnAsync(ArtNormN annData)
+        /// <summary>
+        /// Универсально обновляет одно поле в таблице по заданному условию.
+        /// </summary>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <param name="fieldName">Имя обновляемого поля</param>
+        /// <param name="newValue">Новое значение</param>
+        /// <param name="whereField">Поле условия (например, "AnnId")</param>
+        /// <param name="whereValue">Значение условия</param>
+        public async Task UpdateFieldAsync(string tableName, string fieldName, object newValue, string whereField, object whereValue)
+        {
+            try
+            {
+                string query = $@"UPDATE {tableName}
+                SET {fieldName} = @NewValue
+                WHERE {whereField} = @WhereValue";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@NewValue", newValue ?? DBNull.Value },
+                    { "@WhereValue", whereValue ?? DBNull.Value }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+
+                await _logger.LogEventAsync(
+                    $"Таблица {tableName}: поле {fieldName} обновлено на {newValue}, где {whereField} = {whereValue}.",
+                    "UpdateFieldAsync");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении {fieldName} в таблице {tableName} по условию {whereField} = {whereValue}");
+                throw;
+            }
+        }
+
+        public async Task<int> InsertEntityAsync<T>(string tableName, string keyFieldName, T entity)
+        {
+            try
+            {
+                var properties = typeof(T).GetProperties()
+                    .Where(p => p.CanRead &&
+                                p.Name != keyFieldName &&
+                                !System.Attribute.IsDefined(p, typeof(NotMappedAttribute))) 
+                    .ToList();
+
+                var columns = new List<string>();
+                var values = new List<string>();
+                var parameters = new Dictionary<string, object>();
+
+                foreach (var prop in properties)
+                {
+                    string columnName = prop.Name;
+                    var columnAttr = prop.GetCustomAttributes(typeof(ColumnAttribute), false)
+                     .FirstOrDefault() as ColumnAttribute;
+                    if (columnAttr != null)
+                    {
+                        columnName = columnAttr.Name; 
+                    }
+                    string parameterName = "@" + columnName;
+
+                    columns.Add(columnName);
+                    values.Add(parameterName);
+                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity));
+                }
+
+                string columnsPart = string.Join(", ", columns);
+                string valuesPart = string.Join(", ", values);
+
+                string query = $"INSERT INTO {tableName} ({columnsPart}) VALUES ({valuesPart}); SELECT SCOPE_IDENTITY();";
+
+                object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
+
+                if (result != null && int.TryParse(result.ToString(), out int newId))
+                {
+                    await _logger.LogEventAsync($"Таблица {tableName}: новая запись ID={newId} успешно добавлена", "InsertEntity");
+                    return newId;
+                }
+                else
+                {
+                    throw new Exception("Ошибка получения нового ID после вставки.");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при добавлении записи в таблицу {tableName}");
+                throw;
+            }
+        }
+
+        public async Task UpdateEntityAsync<T>(string tableName, string keyFieldName, T entity)
+        {
+            try
+            {
+                var properties = typeof(T).GetProperties()
+                    .Where(p => p.CanRead &&
+                                p.Name != keyFieldName &&
+                                !System.Attribute.IsDefined(p, typeof(NotMappedAttribute))) // ⬅️ Пропуск NotMapped
+                    .ToList();
+
+                var setClauses = new List<string>();
+                var parameters = new Dictionary<string, object>();
+
+                foreach (var prop in properties)
+                {
+                    string columnName = prop.Name;
+                    var columnAttr = prop.GetCustomAttributes(typeof(ColumnAttribute), false)
+                     .FirstOrDefault() as ColumnAttribute;
+                    if (columnAttr != null)
+                    {
+                        columnName = columnAttr.Name;
+                    }
+                    string parameterName = "@" + columnName;
+                    setClauses.Add($"{columnName} = {parameterName}");
+                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity));
+                }
+
+                // Ключевое поле
+                var keyProperty = typeof(T).GetProperty(keyFieldName);
+                if (keyProperty == null)
+                    throw new Exception($"Ключевое поле {keyFieldName} не найдено в объекте {typeof(T).Name}");
+
+                parameters["@Id"] = keyProperty.GetValue(entity);
+
+                string setClause = string.Join(", ", setClauses);
+                string query = $"UPDATE {tableName} SET {setClause} WHERE {keyFieldName} = @Id";
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+                await _logger.LogEventAsync($"Таблица {tableName}: запись ID={parameters["@Id"]} успешно обновлена", "UpdateEntity");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении записи в таблице {tableName}");
+                throw;
+            }
+        }
+        public async Task<int> SaveEntityAsync<T>(string tableName, string keyFieldName, T entity)
+        {
+            var keyProperty = typeof(T).GetProperty(keyFieldName);
+            if (keyProperty == null)
+                throw new Exception($"Ключевое поле {keyFieldName} не найдено в объекте {typeof(T).Name}");
+
+            var keyValue = keyProperty.GetValue(entity);
+
+            if (keyValue is int id && id > 0)
+            {
+                await UpdateEntityAsync(tableName, keyFieldName, entity);
+                return id; 
+            }
+            else
+            {
+                return await InsertEntityAsync(tableName, keyFieldName, entity);
+            }
+        }
+
+        public async Task DeleteEntityAsync<T>(string tableName, string keyFieldName, T entity)
+        {
+            try
+            {
+                var keyProperty = typeof(T).GetProperty(keyFieldName);
+                if (keyProperty == null)
+                    throw new Exception($"Ключевое поле {keyFieldName} не найдено в объекте {typeof(T).Name}");
+
+                object keyValue = keyProperty.GetValue(entity);
+                if (keyValue == null)
+                    throw new Exception($"Значение ключевого поля {keyFieldName} не установлено в объекте {typeof(T).Name}");
+
+                string query = $"DELETE FROM {tableName} WHERE {keyFieldName} = @Id";
+
+                var parameters = new Dictionary<string, object>
+        {
+            { "@Id", keyValue }
+        };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+                await _logger.LogEventAsync($"Таблица {tableName}: запись ID={keyValue} успешно удалена", "DeleteEntity");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при удалении записи в таблице {tableName}");
+                throw;
+            }
+        }
+        private object NormalizeValue(object value)
+        {
+            if (value == null)
+                return DBNull.Value;
+
+            if (value is DateTime dt)
+            {
+                if (dt < new DateTime(1753, 1, 1))
+                {
+                    return DBNull.Value; 
+                }
+            }
+
+            return value;
+        }
+
+
+        /*public async Task UpdateAnnAsync(ArtNormN annData)
         {
             try
             {
@@ -771,7 +976,7 @@ OUTPUT INSERTED.annID
                 await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных ANN для ID {annData.AnnID}");
                 throw;
             }
-        }
+        }*/
 
         internal async Task<DataTable> GetKod_proizv()
         {
