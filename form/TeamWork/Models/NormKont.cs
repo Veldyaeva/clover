@@ -19,7 +19,7 @@ namespace SewingProduction.Models
         public int Razryad { get; set; }
         public string Obor { get; set; }
         public int Sek { get; set; }
-        public int Sep { get; set; }
+        public int Seb { get; set; }
         public int N { get; set; }
         [Column("n_ch")]
         public int NCh { get; set; }

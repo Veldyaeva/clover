@@ -13,6 +13,7 @@ using DevExpress.XtraGrid.Views.Base;
 using System.Collections.Generic;
 using DevExpress.CodeParser;
 using static SewingProduction.form.TeamWork.Forms.norm_raskrNew;
+using System.Linq;
 
 namespace SewingProduction.form
 {
@@ -154,7 +155,6 @@ namespace SewingProduction.form
                 {
                     case (int)Mode.NewWorkDivision: this.Text = "Добавить предварительное"; nameTextBox.Enabled = true; break;
                     case (int)Mode.ArchAndCopy: this.Text = "Архив+копия"; break;
-                    case (int)Mode.Archive: this.Text = "В архив"; break;
                     case (int)Mode.Edit: this.Text = "Редактировать"; break;
                 }
             }
@@ -307,9 +307,16 @@ namespace SewingProduction.form
         {
             try
             {
-                var annData = await _artNormService.GetArtNormDataById(_selectedAnnId);
+                // При архивировании нам нужны данные из _selectedAnnId
+                int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
+                
+                await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
+                
+                var annData = await _artNormService.GetArtNormDataById(idToLoad);
                 if (annData != null)
                 {
+                    await _logger.LogEventAsync($"Получены данные ANN: Status={annData.Status}, Articul={annData.Articul}", "LoadAnnDataAsync");
+                    
                     await this.InvokeAsync(() =>
                     {
                         nameTextBox.Text = annData.Articul;
@@ -319,12 +326,18 @@ namespace SewingProduction.form
                         if (annData.Diz > 0)
                         {
                             try { designerComboBox.SelectedValue = annData.Diz; }
-                            catch { }
+                            catch (Exception ex) 
+                            { 
+                                _logger.LogErrorAsync(ex, "Ошибка при установке значения дизайнера").Wait();
+                            }
                         }
                         if (annData.Constr > 0)
                         {
                             try { constructorComboBox.SelectedValue = annData.Constr; }
-                            catch { }
+                            catch (Exception ex) 
+                            { 
+                                _logger.LogErrorAsync(ex, "Ошибка при установке значения конструктора").Wait();
+                            }
                         }
                         
                         // Обновляем отображение данных
@@ -335,16 +348,16 @@ namespace SewingProduction.form
                         designerComboBox.Refresh();
                         constructorComboBox.Refresh();
                     });
-                    await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {_bufferWorkDivision}", "LoadAnnDataAsync");
+                    await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {idToLoad}", "LoadAnnDataAsync");
                 }
                 else
                 {
-                    await _logger.LogEventAsync($"Не удалось найти данные ANN для ID {_bufferWorkDivision}", "LoadAnnDataAsync");
+                    await _logger.LogEventAsync($"Не удалось найти данные ANN для ID {idToLoad}", "LoadAnnDataAsync");
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ANN для ID {_bufferWorkDivision}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ANN для ID {_selectedAnnId}");
             }
         }
 
@@ -616,6 +629,18 @@ namespace SewingProduction.form
 
                     if (result == DialogResult.OK && selectionForm.SelectedData != null && selectionForm.SelectedData.Count > 0)
                     {
+                        // Удаляем старые записи из базы данных
+                        foreach (var oldRow in _normRaskList.ToList())
+                        {
+                            if (oldRow.id > 0)
+                            {
+                                await _artNormService.DeleteEntityAsync(TableNames.Rask, TableNames.RaskId, oldRow);
+                            }
+                        }
+
+                        // Очищаем список
+                        _normRaskList.Clear();
+
                         var selectedDataList = selectionForm.SelectedData;
 
                         // Логируем количество выбранных элементов
@@ -627,18 +652,11 @@ namespace SewingProduction.form
                             normRask.AnnId = _newAnnId;
                             _normRaskList.Add(normRask); // Добавляем в список
                         }
+
                         // Обновляем привязку данных и интерфейс
                         _normRaskBindingSource.ResetBindings(false);
                         gridControlRaskr.RefreshDataSource();
-                        gridViewRasz.RefreshData();
-
-                        // Обновляем текущую строку
-                        //gridView.UpdateCurrentRow();
-                        }
-                        else
-                        {
-                        // Если пользователь отменил выбор или не выбрал данные, удаляем строку
-                     //   gridViewRasz.DeleteRow(e.RowHandle);
+                        gridViewRaskr.RefreshData();
                     }
                 }
             }
@@ -655,7 +673,7 @@ namespace SewingProduction.form
 
         private void gridViewRaskr_ShowingEditor(object sender, CancelEventArgs e)
         {
-            var view = sender as DevExpress.XtraGrid.Views.Grid.GridView;
+            var view = sender as GridView;
             if (view == null)
                 return;
 
@@ -859,81 +877,211 @@ namespace SewingProduction.form
             }
             else
             {
-                await SaveAllDataAsync();
                 try
                 {
-                    ArtNormN annData = GetAnnDataFromUI();
+                    await SaveAllDataAsync();
+                    try
+                    {
+                        ArtNormN annData = GetAnnDataFromUI();
 
-                    // Сохраняем данные в таблицу ann
-                   //await _artNormService.UpdateAnnAsync(annData);
-                   await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, annData);
-                    CreatedAnn = annData;
+                        // Устанавливаем статус в зависимости от режима
+                        switch (_mode)
+                        {
+                            case (int)Mode.NewWorkDivision:
+                                annData.Status = (int)Status.Preliminary;
+                                annData.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
+                                break;
+                            case (int)Mode.Edit:
+                                var originalRecord = await _artNormService.GetArtNormDataById(_selectedAnnId);
+                                annData.Status = originalRecord?.Status ?? 0;
+                                annData.StatusText = originalRecord?.StatusText ?? "";
+                                break;
+                        }
 
-                    MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Сохраняем данные в таблицу ann
+                        await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, annData);
+                        CreatedAnn = annData;
 
+                        MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex) 
+                    {
+                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
+                        MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        DialogResult = DialogResult.None;
+                        return;
+                    }
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
-                catch (Exception ex) 
+                catch (Exception ex)
                 {
-                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
+                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
                     MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     DialogResult = DialogResult.None;
-                    return;
                 }
-                this.DialogResult = DialogResult.OK;
-                this.Close();
             }
         }
         private async Task SaveAllDataAsync()
         {
             try
             {
+                bool isEditMode = _mode == (int)Mode.Edit;
 
                 // NormRasz
                 foreach (var rasz in _normRaszList)
                 {
-                    rasz.AnnId = _newAnnId;
                     try
                     {
-                        if (rasz.nrId <= 0)
+                        if (isEditMode)
                         {
-                            rasz.nrId = await _artNormService.InsertEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz);//_artNormService.InsertNormRaszAsync(rasz);
+                            // В режиме редактирования обновляем существующие записи
+                            if (rasz.nrId > 0)
+                            {
+                                await _artNormService.UpdateEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz);
+                            }
+                            else
+                            {
+                                rasz.AnnId = _newAnnId;
+                                rasz.nrId = await _artNormService.InsertEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz);
+                            }
                         }
-                        else { await _artNormService.UpdateEntityAsync(TableNames.Rasz, TableNames.RaszId, rasz); }
+                        else
+                        {
+                            // При добавлении предварительного или копировании создаем новые записи
+                            var newRasz = new NormRasz
+                            {
+                                AnnId = _newAnnId,
+                                Kod_o = rasz.Kod_o,
+                                Text = rasz.Text,
+                                Spec = rasz.Spec,
+                                Razryad = rasz.Razryad,
+                                Obor = rasz.Obor,
+                                Kod = rasz.Kod,
+                                N1 = rasz.N1,
+                                Sek = rasz.Sek
+                            };
+                            newRasz.nrId = await _artNormService.InsertEntityAsync(TableNames.Rasz, TableNames.RaszId, newRasz);
+                        }
                     }
                     catch (Exception ex)
-                    { }
+                    { 
+                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении записи NormRasz");
+                    }
                     IsRaszInserted = true;
                 }
 
                 // NormRask
                 foreach (var rask in _normRaskList)
                 {
-                    rask.AnnId = _newAnnId;
                     try
                     {
-                        if (rask.id <= 0)
-                            rask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, rask);//_artNormService.InsertNormRaskAsync(rask);
+                        if (isEditMode)
+                        {
+                            // В режиме редактирования обновляем существующие записи
+                            if (rask.id > 0)
+                            {
+                                await _artNormService.UpdateEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
+                            }
+                            else
+                            {
+                                rask.AnnId = _newAnnId;
+                                rask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
+                            }
+                        }
                         else
-                            await _artNormService.UpdateEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
+                        {
+                            // При добавлении предварительного или копировании создаем новые записи
+                            var newRask = new NormRask
+                            {
+                                AnnId = _newAnnId,
+                                KodO = rask.KodO,
+                                Text = rask.Text,
+                                Spec = rask.Spec,
+                                Razryad = rask.Razryad,
+                                Obor = rask.Obor,
+                                Kod = rask.Kod,
+                                N1 = rask.N1,
+                                Sek = rask.Sek
+                            };
+                            newRask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, newRask);
+                        }
                     }
-                    catch(Exception ex)
-                    { }
+                    catch (Exception ex)
+                    { 
+                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении записи NormRask");
+                    }
                     IsRaskInserted = true;
                 }
 
                 // NormKont
                 foreach (var kont in _normKontList)
                 {
-                    kont.AnnId = _newAnnId;
-                    await _artNormService.InsertNormKontAsync(kont);
+                    try
+                    {
+                        if (isEditMode)
+                        {
+                            // В режиме редактирования обновляем существующую запись
+                            await _artNormService.UpdateEntityAsync(TableNames.Kont, TableNames.Kont, kont);
+                        }
+                        else
+                        {
+                            // При добавлении предварительного или копировании создаем новую запись
+                            var newKont = new NormKont
+                            {
+                                AnnId = _newAnnId,
+                                Text = kont.Text,
+                                Kod = kont.Kod,
+                                KodO = kont.KodO,
+                                SebS = kont.SebS,
+                                Sek = kont.Sek,
+                                Seb = kont.Seb,
+                                Spec = kont.Spec,
+                                N = kont.N,
+                                N1 = kont.N1,
+                                NCh = kont.NCh,
+                                Razryad = kont.Razryad,
+                                Obor = kont.Obor
+                            };
+                            await _artNormService.InsertNormKontAsync(newKont);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении записи NormKont");
+                    }
                     IsKontInserted = true;
                 }
 
                 // NormDopObr
                 foreach (var dop in _normDopObrList)
                 {
-                    dop.AnnId = _newAnnId;
-                    await _artNormService.InsertDopObrAsync(dop);
+                    try
+                    {
+                        if (isEditMode)
+                        {
+                            // В режиме редактирования обновляем существующую запись
+                            await _artNormService.UpdateEntityAsync(TableNames.Obr, TableNames.ObrId, dop);
+                        }
+                        else
+                        {
+                            // При добавлении предварительного или копировании создаем новую запись
+                            var newDop = new NormDopObr
+                            {
+                                AnnId = _newAnnId,
+                                Kod = dop.Kod,
+                                SekP = dop.SekP,
+                                SekStra = dop.SekStra,
+                                SekTamp = dop.SekTamp,
+                                SekV = dop.SekV
+                            };
+                            await _artNormService.InsertDopObrAsync(newDop);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении записи NormDopObr");
+                    }
                     IsDopObrInserted = true;
                 }
 
@@ -956,6 +1104,8 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+                throw;
             }
         }
 
@@ -997,21 +1147,21 @@ namespace SewingProduction.form
                         await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
                     
-                    if (!string.IsNullOrEmpty(fieldName) && _bufferWorkDivision > 0)
-                    {
-                        if (_mode == (int)Mode.Edit)
-                        {
-                            await _artNormService.UpdateAnnId(TableNames.Ann, _bufferWorkDivision, fieldName, selectedId);
-                            await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
+                    //if (!string.IsNullOrEmpty(fieldName) && _bufferWorkDivision > 0)
+                    //{
+                    //    if (_mode == (int)Mode.Edit)
+                    //    {
+                    //        await _artNormService.UpdateAnnId(TableNames.Ann, _bufferWorkDivision, fieldName, selectedId);
+                    //        await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
                             
-                            // Обновляем UI после изменения
-                            comboBox.Refresh();
-                        }
-                        else
-                        {
-                            await _logger.LogEventAsync($"Выбрано значение {fieldName}={selectedId} для нового разделения труда", "ComboBox_SelectedIndexChanged");
-                        }
-                    }
+                    //        // Обновляем UI после изменения
+                    //        comboBox.Refresh();
+                    //    }
+                    //    else
+                    //    {
+                    //        await _logger.LogEventAsync($"Выбрано значение {fieldName}={selectedId} для нового разделения труда", "ComboBox_SelectedIndexChanged");
+                    //    }
+                    //}
                 }
                 catch (Exception ex)
                 {

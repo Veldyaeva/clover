@@ -78,13 +78,16 @@ namespace SewingProduction.Forms
         private async Task LoadRelatedData(int annId)
         {
             await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
-            //await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, _artNormService.GetRelatedNormRasz1(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
             await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-            //  await GridHelper.LoadGridControlDataAsync(gridControlPreArch, sparticulBindingSource1, await _artNormService.GetRelatedSpArt(annId));
             UpdateNZPStatus();
+
+            // Сортируем каждую таблицу отдельно
+            sortGridView(gridView1);
+            sortGridView(gridView4);
+            sortGridView(gridView3);
         }
         private async void UpdateNZPStatus()
         {
@@ -109,7 +112,7 @@ namespace SewingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void ButtonPreliminaryWd_Click(object sender, EventArgs e)
+        private async void ButtonPreliminaryWd_Click_Internal(object sender, EventArgs e)
         {
             if (ANNgridView == null) return;
 
@@ -272,10 +275,20 @@ namespace SewingProduction.Forms
 
         private async Task BindArticulToNewRowAsync(int oldAnnId, int newAnnId)
         {
-            var tableNames = new List<string> { "norm_rasz", "norm_rask", "norm_kont", "norm_dop_obr" };
-            foreach (var table in tableNames)
+            try
             {
-                await _artNormService.UpdateAnnId(table, oldAnnId, "AnnId", newAnnId);
+                // Копируем записи из старых таблиц в новые с новым annId
+                await _artNormService.CopyTableRecords("norm_rasz", oldAnnId, newAnnId);
+                await _artNormService.CopyTableRecords("norm_rask", oldAnnId, newAnnId);
+                await _artNormService.CopyTableRecords("norm_kont", oldAnnId, newAnnId);
+                await _artNormService.CopyTableRecords("norm_dop_obr", oldAnnId, newAnnId);
+
+                await _logger.LogEventAsync($"Созданы новые записи в таблицах с ID={newAnnId}", "BindArticulToNewRowAsync");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при создании новых записей: {ex.Message}");
+                throw;
             }
         }
 
@@ -299,16 +312,16 @@ namespace SewingProduction.Forms
         private async Task<bool> checkNzp(int selectedAnnId)
         {
             bool hasNZP = false;
-            if (gridView10.RowCount > 0)
-                for (int i = 0; i < gridView10.RowCount; i++)
+            if (gridView10 != null && gridView10.FocusedRowHandle >= 0)
+            {
+                object nzpValue = gridView10.GetRowCellValue(gridView10.FocusedRowHandle, "kolNZP");
+                if (nzpValue != null && nzpValue != DBNull.Value)
                 {
-                    object rowObject = gridView10.GetRow(i);
-                    int nzp = Convert.ToInt32(gridView10.GetRowCellValue(0, "kolNZP"));
+                    int nzp = Convert.ToInt32(nzpValue);
                     hasNZP = nzp > 0;
-                    await _logger.LogEventAsync($"Запись ID={selectedAnnId} имеет НЗП: {hasNZP}", "ArchAndCopy");
-
                 }
-
+                await _logger.LogEventAsync($"Запись ID={selectedAnnId} имеет НЗП: {hasNZP}", "ArchAndCopy");
+            }
             return hasNZP;
         }
 
@@ -380,6 +393,75 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при копировании записи");
                 MessageBox.Show($"Произошла ошибка при копировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
+            }
+        }
+
+        private async Task UpdateRelatedData(int annId)
+        {
+            try
+            {
+                await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+                await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
+                await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
+                await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
+                await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
+
+                UpdateNZPStatus();
+
+                // Сортируем каждую таблицу отдельно
+                sortGridView(gridView1);
+                sortGridView(gridView4);
+                sortGridView(gridView3);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка обновления данных для annId = {annId}");
+                MessageBox.Show($"Ошибка обновления данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void sortGridView(GridView gridView)
+        {
+            if (gridView == null) return;
+
+            gridView.BeginSort();
+            try
+            {
+                gridView.ClearSorting(); // Очистить старую сортировку
+
+                int sortIndex = 0; // Порядковый индекс сортировки
+
+                // Если столбец "N" существует — сортируем
+                var columnN = gridView.Columns.ColumnByFieldName("N");
+                if (columnN != null)
+                {
+                    columnN.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    columnN.SortIndex = sortIndex++;
+                }
+
+                // Если столбец "N1" существует — сортируем
+                var columnN1 = gridView.Columns.ColumnByFieldName("N1");
+                if (columnN1 != null)
+                {
+                    columnN1.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    columnN1.SortIndex = sortIndex++;
+                }
+
+                // Если столбец "Kod_o" существует — сортируем
+                var columnKodO = gridView.Columns.ColumnByFieldName("Kod_o");
+                if (columnKodO != null)
+                {
+                    columnKodO.SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                    columnKodO.SortIndex = sortIndex++;
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сортировке таблицы");
+            }
+            finally
+            {
+                gridView.EndSort();
             }
         }
 

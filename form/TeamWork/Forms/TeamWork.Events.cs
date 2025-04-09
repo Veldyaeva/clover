@@ -22,7 +22,7 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Обработчик смены выбранной строки в customGridControl5
         /// </summary>
-        private async void gridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridView5_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace SewingProduction.Forms
         /// Обработчик изменения состояния customCheckBox6.  
         /// Фильтрует gridView8 по статусу.
         /// </summary>
-        private async void customCheckBox6_CheckedChanged(object sender, EventArgs e)
+        private async void customCheckBox6_CheckedChanged_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace SewingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ButtonCopyWd_Click(object sender, EventArgs e)
+        private void ButtonCopyWd_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace SewingProduction.Forms
         /// Обрабатывает смену выбранной  строки в gridView3 - разделениях труда
         /// Загружает связанные данные в другие таблицы и обновляет UI.
         /// </summary>
-        private async void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridView3_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             if (e.FocusedRowHandle < 0)
                 return;
@@ -229,7 +229,7 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Редактировать РТ
         /// </summary>
-        private void ButtonEditWd_Click(object sender, EventArgs e)
+        private void ButtonEditWd_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -275,93 +275,7 @@ namespace SewingProduction.Forms
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        /// <summary>
-        /// Архив+копия
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
-        {
-            await ArchAndCopy();
-            //GridView annView = ANNgridView;
-            //if (annView == null || annView.FocusedRowHandle < 0)
-            //{
-            //    MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //    return;
-            //}
-            //// Получаем ID выбранной записи
-            //ArtNormN selectedItem = ANNgridView.GetRow(annView.FocusedRowHandle) as ArtNormN;
-            //ArtNormN newRow = null;
-            //int? oldStatus = selectedItem?.Status;
-
-            //bool newRowCreated = false;
-            //bool statusChanged = false;
-            //bool articulRebound = false;
-            //try
-            //{
-            //    // Проверяем наличие незавершенного производства (НЗП)
-            //    bool hasNZP = await checkNzp(selectedItem.AnnID);
-
-            //    // Копируем запись в новую и получаем ID новой записи
-            //    newRow = await CopyRow(hasNZP);
-            //    if (newRow.AnnID <= 0)
-            //        return;
-            //    newRowCreated = true;
-
-            //    using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
-            //    {
-            //        await HandleAnnEditResult(teamWorkAdvanceTW, newRow);
-            //    }
-
-            //    // Обновляем статус исходной записи
-            //    selectedItem.Status = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
-            //    selectedItem.StatusText = StatusHelper.GetStatusText(selectedItem.Status);
-            //    await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive);
-            //    statusChanged = true;
-
-            //    await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "CopyRow");
-
-            //    //перепривязываем артикулы базового РТ
-            //    bindArticulToNewRow(selectedItem.AnnID, newRow.AnnID);
-            //    articulRebound = true;
-            //    await _logger.LogEventAsync($"Артикулы записи {selectedItem.AnnID} привязаны к новой записи ID={newRow.AnnID}", "CopyRow");
-            //    //// Обновляем отображение грида
-            //    _bindingSource.ResetBindings(false);
-            //    ANNgridView.RefreshData();
-
-            //}
-            //catch (Exception ex)
-            //{
-            //    if (articulRebound && newRow?.AnnID > 0)
-            //    {
-            //        await bindArticulToNewRow(newRow.AnnID, selectedItem.AnnID);
-            //    }
-
-            //    if (statusChanged && oldStatus.HasValue)
-            //    {
-            //        selectedItem.Status = oldStatus.Value;
-            //        selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
-            //        await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
-            //    }
-
-            //    if (newRowCreated && newRow != null)
-            //    {
-            //        _bindingList.Remove(newRow);
-            //        _bindingSource.Remove(newRow);
-            //        await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
-            //        await _artNormService.deleteRow("norm_rasz", newRow.AnnID);
-            //        await _artNormService.deleteRow("norm_rask", newRow.AnnID);
-            //        await _artNormService.deleteRow("norm_kont", newRow.AnnID);
-            //        await _artNormService.deleteRow("norm_dop_obr", newRow.AnnID);
-            //    }
-
-            //    await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
-            //    MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-
-        }
-
-        private async void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridView7_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, e.FocusedRowHandle, "Kod", 0);
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
@@ -373,12 +287,12 @@ namespace SewingProduction.Forms
 
             customGridControl2.DataSource = list; //LoadWorksbyArt(kod, articul);
         }
-        private void gridControl2_Leave(object sender, EventArgs e)
+        private void gridControl2_Leave_Internal(object sender, EventArgs e)
         {
             selectedRowHandle = ANNgridView.FocusedRowHandle;
         }
 
-        private void gridControl2_GotFocus(object sender, EventArgs e)
+        private void gridControl2_GotFocus_Internal(object sender, EventArgs e)
         {
             if (selectedRowHandle >= 0)
             {
@@ -393,7 +307,7 @@ namespace SewingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        private void gridView8_CellValueChanged_Internal(object sender, CellValueChangedEventArgs e)
         {
             if (e.Column.FieldName == "IsChecked")
             {
@@ -465,7 +379,7 @@ namespace SewingProduction.Forms
         }
         #region Поиск и фильтрация
 
-        private async void SearchButton_Click(object sender, EventArgs e)
+        private async void SearchButton_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -555,16 +469,10 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            // Вызываем основной метод поиска
-            SearchButton_Click(sender, new EventArgs());
-        }
-
         /// <summary>
         /// Фильтрация данных в gridView3 по введенному значению в filterTextBox1.
         /// </summary>
-        private async void customButton12_Click(object sender, EventArgs e)
+        private async void customButton12_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -593,13 +501,13 @@ namespace SewingProduction.Forms
         }
 
 
-        private async void searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
+        private async void searchControl1_QueryIsSearchColumn_Internal(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
         {
             string colName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
             args.IsSearchColumn = args.FieldName == colName;
         }
 
-        private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
+        private async void customCheckBox4_CheckedChanged_Internal(object sender, EventArgs e)
         {
             int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
@@ -610,7 +518,7 @@ namespace SewingProduction.Forms
             customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
         }
 
-        private void simpleButton2_Click(object sender, EventArgs e)
+        private void simpleButton2_Click_Internal(object sender, EventArgs e)
         {
             //   new TeamWork_AdvanceTW(bufferWorkDivision, (int)Mode.NewWorkDivision).ShowDialog();
         }
@@ -618,12 +526,12 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Переключение фильтров при изменении чекбоксов
         /// </summary>
-        private void Filter_CheckedChanged(object sender, EventArgs e) => filterTable();
+        private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
 
         /// <summary>
         /// Обработчик смены выбранного поля поиска при изменении параметров поиска.
         /// </summary>
-        private async void search_CheckedChanged(object sender, EventArgs e)
+        private async void search_CheckedChanged_Internal(object sender, EventArgs e)
         {
             try
             {

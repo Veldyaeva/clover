@@ -4,6 +4,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using DevExpress.XtraScheduler.Drawing;
 using DevExpress.XtraTab;
 using SewingProduction.form;
 using SewingProduction.Helpers;
@@ -24,7 +25,7 @@ namespace SewingProduction.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DatabaseHelper _dbHelper; 
         private readonly ArtNormService _artNormService;
         private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
@@ -62,8 +63,28 @@ namespace SewingProduction.Forms
                 view8.OptionsSelection.MultiSelect = false;
                 view8.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
             }
+            this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
+            this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
         }
 
+        private void sortGridView()
+        {
+            gridView1.BeginSort();
+            try
+            {
+                gridView1.ClearSorting();
+
+                gridView1.Columns["N"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView1.Columns["N"].SortIndex = 0;
+
+                gridView1.Columns["N1"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
+                gridView1.Columns["N1"].SortIndex = 1;
+            }
+            finally
+            {
+                gridView1.EndSort();
+            }
+        }
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
@@ -84,6 +105,9 @@ namespace SewingProduction.Forms
 
                 // Загружаем данные
                 await LoadWorkDivisions();
+                sortGridView(gridView1);
+                sortGridView(gridView4);
+                sortGridView(gridView3);
 
                 // Обновляем UI
                 ANNgridControl.RefreshDataSource();
@@ -138,6 +162,78 @@ namespace SewingProduction.Forms
         }
 
 
+        private void ButtonEditWd_Click(object sender, EventArgs e)
+        {
+            ButtonEditWd_Click_Internal(sender, e);
+        }
+
+        /// <summary>
+        /// Архив+копия
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
+        {
+            await ArchAndCopy();
+        }
+        private async void customCheckBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            customCheckBox6_CheckedChanged_Internal(sender, e);
+        }
+        private async void ButtonPreliminaryWd_Click(object sender, EventArgs e)
+        {
+            ButtonPreliminaryWd_Click_Internal(sender, e);
+        }
+
+        private async void ButtonCopyWd_Click(object sender, EventArgs e)
+        {
+            ButtonCopyWd_Click_Internal(sender, e);
+        }
+        private async void gridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        { 
+            gridView5_FocusedRowChanged_Internal(sender, e); 
+        }
+        private async void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            gridView7_FocusedRowChanged_Internal(sender, e);
+        }
+        private async void gridView8_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        { gridView8_CellValueChanged_Internal(sender, e); }
+        private void Filter_CheckedChanged(object sender, EventArgs e)
+        {
+            Filter_CheckedChanged_Internal(sender, e);
+        }
+        private async void search_CheckedChanged(object sender, EventArgs e)
+        { search_CheckedChanged_Internal(sender, e); }
+        private void gridControl2_Leave(object sender, EventArgs e)
+        {
+            gridControl2_Leave_Internal(sender, e);
+        }
+        
+        private async void gridControl2_GotFocus(object sender, EventArgs e)
+        { gridControl2_GotFocus_Internal(sender, e); }
+
+        private void searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
+        {
+            searchControl1_QueryIsSearchColumn_Internal(sender, args);
+        }
+
+        private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
+        {
+            SearchButton_Click_Internal(sender, e);
+        }
+
+        private void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            gridView3_FocusedRowChanged_Internal(sender, e);
+        }
+        private async void customButton12_Click(object sender, EventArgs e)
+        { customButton12_Click_Internal(sender, e); }
+        private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
+        { customCheckBox4_CheckedChanged_Internal(sender, e); }
+
+        private async void simpleButton2_Click(object sender, EventArgs e)
+        { simpleButton2_Click_Internal(sender, e); }
 
         /// <summary>
         /// Обработка закрытия формы
@@ -582,9 +678,9 @@ namespace SewingProduction.Forms
         ///// Фильтрация данных в gridView3 по введенному значению в filterTextBox1.
         ///// </summary>
         //private async void customButton12_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
+            //{
+            //    try
+            //    {
         //        string filterString = filterTextBox1.Text.Trim(); // Получаем текст из поля ввода
         //        string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked); // Определяем, по какой колонке искать
 
@@ -601,9 +697,9 @@ namespace SewingProduction.Forms
         //        {
         //            MessageBox.Show("Введите значение для поиска и выберите колонку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
+            //    }
+            //    catch (Exception ex)
+            //    {
         //        await _logger.LogErrorAsync(ex, "Ошибка при поиске по customButton12_Click");
         //        MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }

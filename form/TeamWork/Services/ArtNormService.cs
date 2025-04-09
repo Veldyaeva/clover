@@ -996,5 +996,62 @@ OUTPUT INSERTED.annID
             string query = "select kod_ob, text_ob from oborud_shv";
             return await _dbHelper.ExecuteQueryAsync(query);
         }
+
+        public async Task CopyTableRecords(string tableName, int sourceAnnId, int targetAnnId)
+        {
+            try
+            {
+                // Сначала получаем список колонок таблицы, исключая identity колонки
+                string columnsQuery = $@"
+                    SELECT COLUMN_NAME 
+                    FROM INFORMATION_SCHEMA.COLUMNS 
+                    WHERE TABLE_NAME = @tableName 
+                    AND COLUMNPROPERTY(OBJECT_ID(@tableName), COLUMN_NAME, 'IsIdentity') = 0";
+
+                var columnsResult = await _dbHelper.ExecuteQueryAsync(columnsQuery, new Dictionary<string, object> { { "@tableName", tableName } });
+                
+                var columns = new List<string>();
+                foreach (DataRow row in columnsResult.Rows)
+                {
+                    columns.Add(row["COLUMN_NAME"].ToString());
+                }
+
+                string columnsList = string.Join(", ", columns);
+
+                // Затем выполняем INSERT INTO ... SELECT с полученными колонками
+                string query = $@"
+                    INSERT INTO {tableName} ({columnsList})
+                    SELECT {columnsList}
+                    FROM {tableName}
+                    WHERE annId = @sourceAnnId";
+
+                Dictionary<string, object> parameters = new Dictionary<string, object>
+                {
+                    { "@sourceAnnId", sourceAnnId }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+
+                // Обновляем annId в новых записях
+                string updateQuery = $@"
+                    UPDATE {tableName} 
+                    SET annId = @targetAnnId 
+                    WHERE annId = @sourceAnnId";
+
+                parameters = new Dictionary<string, object>
+                {
+                    { "@sourceAnnId", sourceAnnId },
+                    { "@targetAnnId", targetAnnId }
+                };
+
+                await _dbHelper.ExecuteNonQueryAsync(updateQuery, parameters);
+                await _logger.LogEventAsync($"Записи из таблицы {tableName} успешно скопированы из ID={sourceAnnId} в ID={targetAnnId}", "CopyTableRecords");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при копировании записей из таблицы {tableName}");
+                throw;
+            }
+        }
     }
 }
