@@ -47,6 +47,8 @@ namespace SewingProduction.form
 
         public ArtNormN CreatedAnn { get; private set; }
 
+        private bool _isSelectionFormOpen = false;
+
         /// <summary>
         /// 
         /// </summary>
@@ -228,26 +230,29 @@ namespace SewingProduction.form
                 var dopObrList = ConvertDataTable<NormDopObr>(dopObrTask.Result);
 
                 // Обновляем UI
-                await this.InvokeAsync(() =>
+                await  this.InvokeAsync(async() =>
                 {
+                    // Очищаем списки перед добавлением новых данных
                     _normRaszList.Clear();
-                    foreach (var item in raszList) _normRaszList.Add(item);
-                    _normRaszBindingSource.ResetBindings(false);
-
                     _normRaskList.Clear();
-                    foreach (var item in raskList) _normRaskList.Add(item);
-                    _normRaskBindingSource.ResetBindings(false);
-
                     _normKontList.Clear();
-                    foreach (var item in kontList) _normKontList.Add(item);
-                    _normKontBindingSource.ResetBindings(false);
-
                     _normDopObrList.Clear();
+
+                    // Добавляем новые данные
+                    foreach (var item in raszList) _normRaszList.Add(item);
+                    foreach (var item in raskList) _normRaskList.Add(item);
+                    foreach (var item in kontList) _normKontList.Add(item);
                     foreach (var item in dopObrList) _normDopObrList.Add(item);
+
+                    // Обновляем привязки
+                    _normRaszBindingSource.ResetBindings(false);
+                    _normRaskBindingSource.ResetBindings(false);
+                    _normKontBindingSource.ResetBindings(false);
                     _normDopObrBindingSource.ResetBindings(false);
 
-                    // Обновляем основные поля формы
+                    // var annData = await annDataTask;
                     var annData = annDataTask.Result;
+                    // Обновляем основные поля формы
                     if (annData != null)
                     {
                         nameTextBox.Text = annData.Articul;
@@ -277,7 +282,12 @@ namespace SewingProduction.form
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка загрузки данных в буфер");
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных ANN в WorkDivisionLoadAsync");
+
+                await this.InvokeAsync(() =>
+                {
+                    MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                });
             }
         }
 
@@ -418,10 +428,10 @@ namespace SewingProduction.form
                     DialogResult result = selectionForm.ShowDialog();
 
                     if (result == DialogResult.OK)
+                {
+                    var selectedData = selectionForm.SelectedRowData;
+                    if (selectedData != null)
                     {
-                        var selectedData = selectionForm.SelectedRowData;
-                        if (selectedData != null)
-                        {
                             // Заполняем значения в текущей новой строке
                             gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
                             gridView.SetRowCellValue(e.RowHandle, "KodO", selectedData.Kod_o);
@@ -621,8 +631,12 @@ namespace SewingProduction.form
        // private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
        private async void OpenSelectionForm() 
         {
+            if (_isSelectionFormOpen)
+                return;
+
             try
             {
+                _isSelectionFormOpen = true;
                 using (var selectionForm = new norm_raskrNew(_newAnnId))
                 {
                     DialogResult result = selectionForm.ShowDialog();
@@ -641,16 +655,11 @@ namespace SewingProduction.form
                         // Очищаем список
                         _normRaskList.Clear();
 
-                        var selectedDataList = selectionForm.SelectedData;
-
-                        // Логируем количество выбранных элементов
-                        await _logger.LogEventAsync($"Выбрано элементов: {selectedDataList.Count}", "GridView2_InitNewRow");
-
-                        // Вставляем данные в gridView2
-                        foreach (var normRask in selectedDataList)
+                        // Вставляем новые данные
+                        foreach (var normRask in selectionForm.SelectedData)
                         {
                             normRask.AnnId = _newAnnId;
-                            _normRaskList.Add(normRask); // Добавляем в список
+                            _normRaskList.Add(normRask);
                         }
 
                         // Обновляем привязку данных и интерфейс
@@ -668,6 +677,10 @@ namespace SewingProduction.form
                     MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 });
             }
+            finally
+            {
+                _isSelectionFormOpen = false;
+            }
         }
 
 
@@ -677,11 +690,13 @@ namespace SewingProduction.form
             if (view == null)
                 return;
 
-            // Если пользователь кликает на строку "Добавить новую запись"
             if (view.FocusedRowHandle == DevExpress.XtraGrid.GridControl.NewItemRowHandle)
             {
-                e.Cancel = true; // Отменяем стандартное редактирование новой строки
-                OpenSelectionForm(); // Открываем свою форму выбора
+                e.Cancel = true;
+                if (!_isSelectionFormOpen)
+                {
+                    OpenSelectionForm();
+                }
             }
         }
 
@@ -896,6 +911,11 @@ namespace SewingProduction.form
                                 annData.Status = originalRecord?.Status ?? 0;
                                 annData.StatusText = originalRecord?.StatusText ?? "";
                                 break;
+                            case (int)Mode.ArchAndCopy:
+                                originalRecord = await _artNormService.GetArtNormDataById(_selectedAnnId);
+                                annData.Status = originalRecord.Status;
+                                annData.StatusText = originalRecord.StatusText;//TODO найти, где уже установлен статус, 100%это уже сделано
+                                break;
                         }
 
                         // Сохраняем данные в таблицу ann
@@ -972,22 +992,40 @@ namespace SewingProduction.form
                 }
 
                 // NormRask
+                if (isEditMode)
+                {
+                    // В режиме редактирования сначала удаляем все существующие записи
+                    var existingRecords = await _artNormService.GetRelatedNormRask(_newAnnId);
+                    foreach (DataRow row in existingRecords.Rows)
+                    {
+                        if (row["id"] != DBNull.Value)
+                        {
+                            await _artNormService.DeleteEntityAsync(TableNames.Rask, TableNames.RaskId, 
+                                new NormRask { id = Convert.ToInt32(row["id"]) });
+                        }
+                    }
+                }
+
                 foreach (var rask in _normRaskList)
                 {
                     try
                     {
                         if (isEditMode)
                         {
-                            // В режиме редактирования обновляем существующие записи
-                            if (rask.id > 0)
+                            // В режиме редактирования все записи добавляются как новые
+                            var newRask = new NormRask
                             {
-                                await _artNormService.UpdateEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
-                            }
-                            else
-                            {
-                                rask.AnnId = _newAnnId;
-                                rask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, rask);
-                            }
+                                AnnId = _newAnnId,
+                                KodO = rask.KodO,
+                                Text = rask.Text,
+                                Spec = rask.Spec,
+                                Razryad = rask.Razryad,
+                                Obor = rask.Obor,
+                                Kod = rask.Kod,
+                                N1 = rask.N1,
+                                Sek = rask.Sek
+                            };
+                            newRask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, newRask);
                         }
                         else
                         {
@@ -1160,8 +1198,8 @@ namespace SewingProduction.form
                     //    else
                     //    {
                     //        await _logger.LogEventAsync($"Выбрано значение {fieldName}={selectedId} для нового разделения труда", "ComboBox_SelectedIndexChanged");
-                    //    }
-                    //}
+        //    }
+        //}
                 }
                 catch (Exception ex)
                 {

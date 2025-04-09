@@ -48,8 +48,8 @@ namespace SewingProduction.Forms
             _bindingSource.DataSource = _bindingList;
             if (ANNgridControl != null)
             {
-                ANNgridControl.DataSource = _bindingSource;
-            }
+            ANNgridControl.DataSource = _bindingSource;
+        }
 
             // Настройка гридов
             if (customGridControl1 != null && customGridControl1.MainView is GridView view7)

@@ -184,24 +184,56 @@ namespace SewingProduction.Forms
 
             try
             {
+                await _logger.LogEventAsync($"Начало архивирования. Исходный статус: {oldStatus}", "ArchAndCopy");
+                
                 bool hasNZP = await checkNzp(selectedItem.AnnID);
+                await _logger.LogEventAsync($"Проверка НЗП: {hasNZP}", "ArchAndCopy");
+                
                 newRow = await CopyRow(hasNZP);
+                await _logger.LogEventAsync($"Создана новая запись со статусом: {newRow?.Status}", "ArchAndCopy");
 
+                // Открываем форму для редактирования
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
                 {
-                    await HandleAnnEditResult(teamWorkAdvanceTW, newRow);
+                    if (teamWorkAdvanceTW.ShowDialog() == DialogResult.OK)
+                    {
+                        // Обновляем статус исходной записи только если форма закрыта через OK
+                        int newStatus = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
+                        await _logger.LogEventAsync($"Установка нового статуса: {newStatus}", "ArchAndCopy");
+                        
+                        selectedItem.Status = newStatus;
+                        selectedItem.StatusText = StatusHelper.GetStatusText(selectedItem.Status);
+                        await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", selectedItem.Status);
+
+                        await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "CopyRow");
+
+                        _bindingSource.ResetBindings(false);
+                        ANNgridView.RefreshData();
+                    }
+                    else
+                    {
+                        // Если форма закрыта не через OK, восстанавливаем исходный статус
+                        if (oldStatus.HasValue)
+                        {
+                            await _logger.LogEventAsync($"Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
+                            
+                            selectedItem.Status = oldStatus.Value;
+                            selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
+                            await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
+                        }
+
+                        // Удаляем новую запись, так как она не нужна
+                        if (newRow != null && newRow.AnnID > 0)
+                        {
+                            _bindingList.Remove(newRow);
+                            _bindingSource.Remove(newRow);
+                            await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
+                        }
+
+                        _bindingSource.ResetBindings(false);
+                        ANNgridView.RefreshData();
+                    }
                 }
-
-                selectedItem.Status = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
-                selectedItem.StatusText = StatusHelper.GetStatusText(selectedItem.Status);
-                await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", selectedItem.Status);
-
-                await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "CopyRow");
-
-                await BindArticulToNewRowAsync(selectedItem.AnnID, newRow.AnnID);
-
-                _bindingSource.ResetBindings(false);
-                ANNgridView.RefreshData();
             }
             catch (Exception ex)
             {
@@ -214,6 +246,8 @@ namespace SewingProduction.Forms
 
                 if (oldStatus.HasValue && selectedItem != null)
                 {
+                    await _logger.LogEventAsync($"Ошибка. Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
+                    
                     selectedItem.Status = oldStatus.Value;
                     selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
                     await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
