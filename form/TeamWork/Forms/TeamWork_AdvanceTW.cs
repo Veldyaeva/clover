@@ -135,22 +135,6 @@ namespace SewingProduction.form
         }
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
-            DapperPlusManager.Entity<NormRasz>()
-    .Table(TableNames.Rasz)        
-    .Identity(x => x.nrId);   
-
-            DapperPlusManager.Entity<NormRask>()
-                .Table(TableNames.Rask)
-                .Identity(x => x.id);
-
-            //DapperPlusManager.Entity<NormKont>()
-            //    .Table("NormKont")
-            //    .Identity(x => x.kontId);
-
-            //DapperPlusManager.Entity<NormDopObr>()
-            //    .Table("NormDopObr")
-            //    .Identity(x => x.dopObrId);
-
             try
             {
                 Task gridTask = Task.Run(() =>
@@ -418,10 +402,19 @@ namespace SewingProduction.form
                 {
                     try
                     {
-                        if (_newAnnId > 0)
+                        if (_mode == (int)Mode.NewWorkDivision)
                         {
-                            await _artNormService.DeleteRelatedNormTables(_newAnnId);
-                            await _artNormService.deleteRow("art_norm_n", _newAnnId);
+                            if (_newAnnId > 0)
+                            {
+                                await _artNormService.DeleteRelatedNormTables(_newAnnId);
+                                await _artNormService.deleteRow("art_norm_n", _newAnnId);
+                            }
+                        }
+                        else
+                        {
+                            // Иначе просто сбрасываем данные формы
+                            await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
+                            await LoadAnnDataAsync();
                         }
                     }
                     catch (Exception ex)
@@ -448,7 +441,7 @@ namespace SewingProduction.form
                 _isCustomEditFormOpen = false;
                 return;
             }
-            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)//решаем, показывать ли editForm  (но почему код???)
+            if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)//решаем, показывать ли editForm  
             {
                 e.Allow = true;
                 return;
@@ -472,17 +465,19 @@ namespace SewingProduction.form
                     gridViewRasz.RefreshData();
                     gridView.PostEditor();
                     gridView.UpdateCurrentRow();
-                    int newRowHandle = gridView.LocateByValue(TableNames.RaszId, selected.nrId);//_newAnnId);
-                    
-                    if (newRowHandle >= 0)
+
+                    int indexInList = _normRaszList.IndexOf(selected);
+
+                    if (indexInList >= 0)
                     {
+                        int rowHandle = gridView.GetRowHandle(indexInList);
 
-                        gridView.FocusedRowHandle = newRowHandle;
-                        gridView.ClearSelection();
+                        if (rowHandle >= 0)
+                        {
+                            gridView.FocusedRowHandle = rowHandle;
+                        }
+                        FinalizeRow(rowHandle, gridView);
                     }
-
-                    FinalizeRow(newRowHandle, gridView);
-
                 }
                 else if (result == DialogResult.Cancel)
                 {

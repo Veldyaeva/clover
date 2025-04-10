@@ -12,6 +12,8 @@ namespace SewingProduction.Models
     {
         [NotMapped]
         public bool IsNew { get; set; } = true;
+        [NotMapped]
+        public int id { get; set; }
         public int AnnId { get; set; }
         public int Kod { get; set; }
         [Column("kod_o")]

@@ -113,17 +113,6 @@ namespace SewingProduction.form
                     IsNew = true
                 };
 
-                //// Сохраняем новую запись и получаем её ID
-                //var newId = await _artNormService.InsertNormRaszAsync(SelectedRowData);
-                //if (newId > 0)
-                //{
-                //    SelectedRowData.nrId = newId;
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Ошибка при сохранении записи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

@@ -10,6 +10,8 @@ namespace SewingProduction.Models
 {
    public class NormDopObr : INewable
     {
+        [NotMapped]
+        public int id { get; set; }
         public int AnnId { get; set; }
         public string Kod { get; set; }
         public int SekP { get; set; }

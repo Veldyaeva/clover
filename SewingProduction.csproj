@@ -362,6 +362,7 @@
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
+    <Compile Include="form\TeamWork\Models\DapperMappings.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

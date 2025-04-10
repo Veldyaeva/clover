@@ -41,11 +41,7 @@ namespace SewingProduction.Forms
         public TeamWork()
         {
             InitializeComponent();
-            DapperPlusManager.Entity<NormRasz>().Table("NormRasz").Identity(x => x.nrId);
-            DapperPlusManager.Entity<NormRask>().Table("NormRask").Identity(x => x.id);
-            //DapperPlusManager.Entity<NormKont>().Table("NormKont").Identity(x => x.kontId);
-            //DapperPlusManager.Entity<NormDopObr>().Table("NormDopObr").Identity(x => x.dopObrId);
-
+            DapperMappings.Configure();
             _dbHelper = new DatabaseHelper("ace");
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);

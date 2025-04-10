@@ -70,9 +70,6 @@ namespace SewingProduction.form.TeamWork.Forms
         {
             _raskroyNormBindingSource = new BindingSource();
             gridControl1.DataSource = _raskroyNormBindingSource;
-
-       //     _gridHelper.LoadGridViewSettings(gridView1, "NormRaskrGrid.xml");
-
         }
 
         private async Task LoadGroups()
@@ -257,17 +254,6 @@ namespace SewingProduction.form.TeamWork.Forms
 
         private void norm_raskrNew_FormClosing(object sender, FormClosingEventArgs e)
         {
-            try
-            {
-                // Сохраняем настройки грида при закрытии формы
-                _gridHelper.SaveGridViewSettings(gridView1, "NormRaskrGrid.xml");
-            }
-
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
-            }
-
         }
     }
 } 
