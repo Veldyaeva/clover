@@ -18,6 +18,9 @@ namespace SewingProduction.Helpers
     {
         private readonly string _connectionString;
         private static string _globalConnectionString;
+        private SqlTransaction _currentTransaction;
+        private SqlConnection _currentConnection;
+
         public DatabaseHelper(string _serv)
         {
             switch (_serv.ToLower())
@@ -37,6 +40,20 @@ namespace SewingProduction.Helpers
             }
             return _globalConnectionString;
         }
+
+        public SqlConnection GetConnection()
+        {
+            var connection = new SqlConnection(_connectionString);
+
+            // Важно! Dapper Plus требует, чтобы соединение было открыто
+            if (connection.State != ConnectionState.Open)
+            {
+                connection.Open();
+            }
+
+            return connection;
+        }
+
         #region async
         /// <summary>
         /// Выполнение SQL запроса, возвращает dataTable
@@ -117,6 +134,38 @@ namespace SewingProduction.Helpers
                 }
             }
             return res;
+        }
+        public async Task<SqlTransaction> BeginTransactionAsync()
+        {
+            _currentConnection = new SqlConnection(_connectionString);
+
+            if (_currentConnection.State != ConnectionState.Open)
+            {
+                await _currentConnection.OpenAsync();
+            }
+
+            _currentTransaction = _currentConnection.BeginTransaction();
+            return _currentTransaction;
+        }
+        public async Task CommitTransactionAsync()
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Commit();
+                 _currentConnection.Close();
+                _currentTransaction = null;
+                _currentConnection = null;
+            }
+        }
+        public async Task RollbackTransactionAsync()
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Rollback();
+                 _currentConnection.Close();
+                _currentTransaction = null;
+                _currentConnection = null;
+            }
         }
 
 

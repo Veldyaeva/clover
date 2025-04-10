@@ -852,7 +852,7 @@ OUTPUT INSERTED.annID
                 var properties = typeof(T).GetProperties()
                     .Where(p => p.CanRead &&
                                 p.Name != keyFieldName &&
-                                !System.Attribute.IsDefined(p, typeof(NotMappedAttribute))) // ⬅️ Пропуск NotMapped
+                                !System.Attribute.IsDefined(p, typeof(NotMappedAttribute))) 
                     .ToList();
 
                 var setClauses = new List<string>();

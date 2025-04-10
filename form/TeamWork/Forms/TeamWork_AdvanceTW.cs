@@ -17,6 +17,7 @@ using System.Linq;
 using System.Reflection;
 using SewingProduction.Interfaces;
 using System.Data.SqlClient;
+using Z.Dapper.Plus;
 
 namespace SewingProduction.form
 {
@@ -134,6 +135,22 @@ namespace SewingProduction.form
         }
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
+            DapperPlusManager.Entity<NormRasz>()
+    .Table(TableNames.Rasz)        
+    .Identity(x => x.nrId);   
+
+            DapperPlusManager.Entity<NormRask>()
+                .Table(TableNames.Rask)
+                .Identity(x => x.id);
+
+            //DapperPlusManager.Entity<NormKont>()
+            //    .Table("NormKont")
+            //    .Identity(x => x.kontId);
+
+            //DapperPlusManager.Entity<NormDopObr>()
+            //    .Table("NormDopObr")
+            //    .Identity(x => x.dopObrId);
+
             try
             {
                 Task gridTask = Task.Run(() =>
@@ -897,44 +914,97 @@ namespace SewingProduction.form
                 throw;
             }
         }
-        private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId) where T : class, INewable, new()
+
+        private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId)
+            where T : class, INewable, new()
         {
-            foreach (var item in list)
+            var newItems = list.Where(x => x.IsNew).ToList();
+            var existingItems = list.Where(x => !x.IsNew).ToList();
+
+            if (newItems.Any())
             {
-                try
+                // Обновляем AnnId для новых записей
+                foreach (var item in newItems)
                 {
-                    // Привязываем AnnId, если такое поле есть
-                    PropertyInfo annIdProp = typeof(T).GetProperty("AnnId");
+                    var annIdProp = typeof(T).GetProperty("AnnId");
                     if (annIdProp != null)
                     {
                         annIdProp.SetValue(item, newAnnId);
                     }
-
-                    PropertyInfo keyProp = typeof(T).GetProperty(keyFieldName);
-                    if (keyProp == null)
-                    {
-                        throw new Exception($"Класс {typeof(T).Name} не содержит свойства {keyFieldName}.");
-                    }
-                    if (item.IsNew)
-                    {
-                        // Новая запись — вставляем
-                        var newId = await _artNormService.InsertEntityAsync(tableName, keyFieldName, item);
-                        keyProp.SetValue(item, newId);
-
-                        item.IsNew = false; // После успешной вставки флаг сбрасываем
-                    }
-                    else
-                    {
-                        // Существующая запись — обновляем
-                        await _artNormService.UpdateEntityAsync(tableName, keyFieldName, item);
-                    }
                 }
-                catch (Exception ex)
+
+                // Пакетная вставка через Dapper Plus
+                using (var connection = _dbHelper.GetConnection()) 
                 {
-                    await _logger.LogErrorAsync(ex, $"Ошибка при сохранении записи {typeof(T).Name}");
+                    await connection.BulkInsertAsync(newItems);
+                }
+                // После вставки сбрасываем флаги
+                foreach (var item in newItems)
+                {
+                    item.IsNew = false;
+                }
+            }
+
+            if (existingItems.Any())
+            {
+                using (var transaction = await _dbHelper.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        foreach (var item in existingItems)
+                        {
+                            await _artNormService.UpdateEntityAsync(tableName, keyFieldName, item);
+                        }
+                        await _dbHelper.CommitTransactionAsync();
+                    }
+                    catch (Exception ex)
+                    {
+                        await _dbHelper.RollbackTransactionAsync();
+                        await _logger.LogErrorAsync(ex, $"Ошибка при обновлении записей {typeof(T).Name}");
+                        throw;
+                    }
                 }
             }
         }
+
+        //private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId) where T : class, INewable, new()
+        //{
+        //    foreach (var item in list)
+        //    {
+        //        try
+        //        {
+        //            // Привязываем AnnId, если такое поле есть
+        //            PropertyInfo annIdProp = typeof(T).GetProperty("AnnId");
+        //            if (annIdProp != null)
+        //            {
+        //                annIdProp.SetValue(item, newAnnId);
+        //            }
+
+        //            PropertyInfo keyProp = typeof(T).GetProperty(keyFieldName);
+        //            if (keyProp == null)
+        //            {
+        //                throw new Exception($"Класс {typeof(T).Name} не содержит свойства {keyFieldName}.");
+        //            }
+        //            if (item.IsNew)
+        //            {
+        //                // Новая запись — вставляем
+        //                var newId = await _artNormService.InsertEntityAsync(tableName, keyFieldName, item);
+        //                keyProp.SetValue(item, newId);
+
+        //                item.IsNew = false; // После успешной вставки флаг сбрасываем
+        //            }
+        //            else
+        //            {
+        //                // Существующая запись — обновляем
+        //                await _artNormService.UpdateEntityAsync(tableName, keyFieldName, item);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            await _logger.LogErrorAsync(ex, $"Ошибка при сохранении записи {typeof(T).Name}");
+        //        }
+        //    }
+        //}
 
         private T CloneItem<T>(T source) where T : new()
         {
