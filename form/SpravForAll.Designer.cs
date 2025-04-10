@@ -406,6 +406,7 @@
             this.simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.simpleButtonAddOtm.Location = new System.Drawing.Point(3, 534);
             this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
+            this.simpleButtonAddOtm.ObjectName = null;
             this.simpleButtonAddOtm.Size = new System.Drawing.Size(173, 44);
             this.simpleButtonAddOtm.TabIndex = 32;
             this.simpleButtonAddOtm.Text = "Отмена";
@@ -422,6 +423,7 @@
             this.simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.simpleButtonDel.Location = new System.Drawing.Point(182, 534);
             this.simpleButtonDel.Name = "simpleButtonDel";
+            this.simpleButtonDel.ObjectName = null;
             this.simpleButtonDel.Size = new System.Drawing.Size(174, 44);
             this.simpleButtonDel.TabIndex = 32;
             this.simpleButtonDel.Text = "Удалить";
@@ -438,6 +440,7 @@
             this.simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.simpleButtonAddSave.Location = new System.Drawing.Point(362, 534);
             this.simpleButtonAddSave.Name = "simpleButtonAddSave";
+            this.simpleButtonAddSave.ObjectName = null;
             this.simpleButtonAddSave.Size = new System.Drawing.Size(174, 44);
             this.simpleButtonAddSave.TabIndex = 32;
             this.simpleButtonAddSave.Text = "Сохранить";
@@ -499,6 +502,7 @@
             this.simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.simpleButtonRed.Location = new System.Drawing.Point(334, 3);
             this.simpleButtonRed.Name = "simpleButtonRed";
+            this.simpleButtonRed.ObjectName = null;
             this.simpleButtonRed.Size = new System.Drawing.Size(65, 28);
             this.simpleButtonRed.TabIndex = 12;
             this.simpleButtonRed.Text = "Редактировать";
@@ -515,6 +519,7 @@
             this.simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.simpleButtonAdd.Location = new System.Drawing.Point(405, 3);
             this.simpleButtonAdd.Name = "simpleButtonAdd";
+            this.simpleButtonAdd.ObjectName = null;
             this.simpleButtonAdd.Size = new System.Drawing.Size(66, 28);
             this.simpleButtonAdd.TabIndex = 13;
             this.simpleButtonAdd.Text = "Добавить";

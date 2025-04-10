@@ -12,6 +12,7 @@ using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.form
 {
@@ -24,7 +25,7 @@ namespace SewingProduction.form
         // если редактировали поле:
         bool flagRed = false;
         string filter = "";
-        public Fio(string tableSQL, string rusNameTableSQL)
+        public Fio(UserClass user,string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -35,7 +36,10 @@ namespace SewingProduction.form
             //Имя формы:
             this.Text = rusNameTableSQL;
         }
-
+        public Fio()
+        {
+            InitializeComponent();
+        }
         private void Fio_Load(object sender, EventArgs e)
         {
         }
@@ -168,7 +172,7 @@ namespace SewingProduction.form
         // КНОПКА "Добавить"
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            editFio f = new editFio("АВТО", "Добавление сотрудника");
+            editFio f = new editFio(_user, "АВТО", "Добавление сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 // Обновляем таблицу
@@ -186,7 +190,7 @@ namespace SewingProduction.form
             }
             string computerName = Environment.MachineName;
 
-            editFio f = new editFio(idFIO, "Редактирование сотрудника");
+            editFio f = new editFio(_user, idFIO, "Редактирование сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 flagRed = true;

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions2 = new DevExpress.Utils.Drawing.StubGlyphOptions();
+            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
             this.tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.customButtonINN = new SewingProduction.CustomButton();
@@ -80,10 +80,7 @@
             this.customButtonSpVed = new SewingProduction.CustomButton();
             this.customButtonSpOrg1C = new SewingProduction.CustomButton();
             this.customButtonSpDol1C = new SewingProduction.CustomButton();
-            this.customButtonPdrSP = new SewingProduction.CustomButton();
             this.tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSpOrg = new SewingProduction.CustomButton();
-            this.customButtonSpDol = new SewingProduction.CustomButton();
             this.customButtonPchShk = new SewingProduction.CustomButton();
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabPageX = new DevExpress.XtraTab.XtraTabPage();
@@ -111,9 +108,12 @@
             this.customComboBoxOtch = new SewingProduction.CustomComboBox();
             this.customCheckBoxOsnTab = new SewingProduction.CustomCheckBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.customButtonPdrSP = new SewingProduction.CustomButton();
             this.customButtonSov = new SewingProduction.CustomButton();
             this.customButtonAddSov = new SewingProduction.CustomButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.customButtonSpOrg = new SewingProduction.CustomButton();
+            this.customButtonSpDol = new SewingProduction.CustomButton();
             this.customButtonRed = new SewingProduction.CustomButton();
             this.customButtonAdd = new SewingProduction.CustomButton();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
@@ -217,6 +217,7 @@
             this.customButtonINN.Location = new System.Drawing.Point(3, 93);
             this.customButtonINN.MaximumSize = new System.Drawing.Size(0, 50);
             this.customButtonINN.Name = "customButtonINN";
+            this.customButtonINN.ObjectName = null;
             this.customButtonINN.Size = new System.Drawing.Size(134, 27);
             this.customButtonINN.TabIndex = 7;
             this.customButtonINN.Text = "Найти по ИНН";
@@ -233,6 +234,7 @@
             this.customButtonOtcDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonOtcDol.Location = new System.Drawing.Point(3, 278);
             this.customButtonOtcDol.Name = "customButtonOtcDol";
+            this.customButtonOtcDol.ObjectName = null;
             this.customButtonOtcDol.Size = new System.Drawing.Size(134, 29);
             this.customButtonOtcDol.TabIndex = 2;
             this.customButtonOtcDol.Text = "Отчет по должности";
@@ -247,6 +249,7 @@
             this.customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxInn.Location = new System.Drawing.Point(3, 63);
             this.customTextBoxInn.Name = "customTextBoxInn";
+            this.customTextBoxInn.ObjectName = null;
             this.customTextBoxInn.Size = new System.Drawing.Size(134, 23);
             this.customTextBoxInn.TabIndex = 9;
             // 
@@ -275,6 +278,7 @@
             this.customCheckBoxDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customCheckBoxDel.Location = new System.Drawing.Point(3, 3);
             this.customCheckBoxDel.Name = "customCheckBoxDel";
+            this.customCheckBoxDel.ObjectName = null;
             this.customCheckBoxDel.Size = new System.Drawing.Size(71, 20);
             this.customCheckBoxDel.TabIndex = 8;
             this.customCheckBoxDel.Text = "Уволенные";
@@ -288,6 +292,7 @@
             this.customCheckBoxDei.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customCheckBoxDei.Location = new System.Drawing.Point(3, 30);
             this.customCheckBoxDei.Name = "customCheckBoxDei";
+            this.customCheckBoxDei.ObjectName = null;
             this.customCheckBoxDei.Size = new System.Drawing.Size(71, 20);
             this.customCheckBoxDei.TabIndex = 8;
             this.customCheckBoxDei.Text = "Действующие";
@@ -301,6 +306,7 @@
             this.customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customCheckBoxDekret.Location = new System.Drawing.Point(80, 3);
             this.customCheckBoxDekret.Name = "customCheckBoxDekret";
+            this.customCheckBoxDekret.ObjectName = null;
             this.customCheckBoxDekret.Size = new System.Drawing.Size(51, 20);
             this.customCheckBoxDekret.TabIndex = 10;
             this.customCheckBoxDekret.Text = "Декрет";
@@ -470,10 +476,10 @@
             this.fio1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.fio1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.fio1.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            stubGlyphOptions2.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            stubGlyphOptions2.UseFont = true;
+            stubGlyphOptions1.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            stubGlyphOptions1.UseFont = true;
             this.behaviorManager1.SetBehaviors(this.fio1, new DevExpress.Utils.Behaviors.Behavior[] {
-            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions2, new System.Drawing.Size(16, 16))))});
+            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions1, new System.Drawing.Size(16, 16))))});
             this.fio1.Caption = "ФИО";
             this.fio1.FieldName = "fio";
             this.fio1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
@@ -928,6 +934,7 @@
             this.customButtonSpVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonSpVed.Location = new System.Drawing.Point(294, 38);
             this.customButtonSpVed.Name = "customButtonSpVed";
+            this.customButtonSpVed.ObjectName = null;
             this.customButtonSpVed.Size = new System.Drawing.Size(141, 29);
             this.customButtonSpVed.TabIndex = 9;
             this.customButtonSpVed.Text = "Справочник ведомостей";
@@ -944,6 +951,7 @@
             this.customButtonSpOrg1C.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonSpOrg1C.Location = new System.Drawing.Point(148, 38);
             this.customButtonSpOrg1C.Name = "customButtonSpOrg1C";
+            this.customButtonSpOrg1C.ObjectName = null;
             this.customButtonSpOrg1C.Size = new System.Drawing.Size(140, 29);
             this.customButtonSpOrg1C.TabIndex = 8;
             this.customButtonSpOrg1C.Text = "Подразделения 1С";
@@ -960,27 +968,12 @@
             this.customButtonSpDol1C.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonSpDol1C.Location = new System.Drawing.Point(3, 38);
             this.customButtonSpDol1C.Name = "customButtonSpDol1C";
+            this.customButtonSpDol1C.ObjectName = null;
             this.customButtonSpDol1C.Size = new System.Drawing.Size(139, 29);
             this.customButtonSpDol1C.TabIndex = 7;
             this.customButtonSpDol1C.Text = "Должности 1С";
             this.customButtonSpDol1C.UseVisualStyleBackColor = false;
             this.customButtonSpDol1C.Click += new System.EventHandler(this.customButtonSpDol1C_Click);
-            // 
-            // customButtonPdrSP
-            // 
-            this.customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPdrSP.FlatAppearance.BorderSize = 0;
-            this.customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPdrSP.Location = new System.Drawing.Point(3, 39);
-            this.customButtonPdrSP.Name = "customButtonPdrSP";
-            this.customButtonPdrSP.Size = new System.Drawing.Size(134, 30);
-            this.customButtonPdrSP.TabIndex = 5;
-            this.customButtonPdrSP.Text = "Подразделения ШП - 1С";
-            this.customButtonPdrSP.UseVisualStyleBackColor = false;
-            this.customButtonPdrSP.Click += new System.EventHandler(this.customButtonPdrSP_Click);
             // 
             // tableLayoutPanelPech
             // 
@@ -1010,38 +1003,6 @@
             this.tableLayoutPanelPech.Size = new System.Drawing.Size(140, 250);
             this.tableLayoutPanelPech.TabIndex = 1;
             // 
-            // customButtonSpOrg
-            // 
-            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
-            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
-            this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
-            this.customButtonSpOrg.TabIndex = 6;
-            this.customButtonSpOrg.Text = "Справочник организаций";
-            this.customButtonSpOrg.UseVisualStyleBackColor = false;
-            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
-            // 
-            // customButtonSpDol
-            // 
-            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
-            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
-            this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
-            this.customButtonSpDol.TabIndex = 5;
-            this.customButtonSpDol.Text = "Справочник должностей";
-            this.customButtonSpDol.UseVisualStyleBackColor = false;
-            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
-            // 
             // customButtonPchShk
             // 
             this.customButtonPchShk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
@@ -1052,6 +1013,7 @@
             this.customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonPchShk.Location = new System.Drawing.Point(3, 3);
             this.customButtonPchShk.Name = "customButtonPchShk";
+            this.customButtonPchShk.ObjectName = null;
             this.customButtonPchShk.Size = new System.Drawing.Size(134, 29);
             this.customButtonPchShk.TabIndex = 4;
             this.customButtonPchShk.Text = "Печать ШК";
@@ -1139,6 +1101,7 @@
             this.customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxPechSHK1.Location = new System.Drawing.Point(3, 85);
             this.customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
+            this.customTextBoxPechSHK1.ObjectName = null;
             this.customTextBoxPechSHK1.Size = new System.Drawing.Size(112, 23);
             this.customTextBoxPechSHK1.TabIndex = 28;
             // 
@@ -1152,6 +1115,7 @@
             this.customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxPechVed.Location = new System.Drawing.Point(3, 25);
             this.customComboBoxPechVed.Name = "customComboBoxPechVed";
+            this.customComboBoxPechVed.ObjectName = null;
             this.customComboBoxPechVed.Size = new System.Drawing.Size(112, 24);
             this.customComboBoxPechVed.TabIndex = 26;
             // 
@@ -1166,6 +1130,7 @@
             this.customButtonPech1.Location = new System.Drawing.Point(3, 123);
             this.customButtonPech1.MaximumSize = new System.Drawing.Size(0, 50);
             this.customButtonPech1.Name = "customButtonPech1";
+            this.customButtonPech1.ObjectName = null;
             this.customButtonPech1.Size = new System.Drawing.Size(112, 26);
             this.customButtonPech1.TabIndex = 8;
             this.customButtonPech1.Text = "Печать";
@@ -1180,6 +1145,7 @@
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.customLabel1.Location = new System.Drawing.Point(3, 0);
             this.customLabel1.Name = "customLabel1";
+            this.customLabel1.ObjectName = null;
             this.customLabel1.Size = new System.Drawing.Size(78, 22);
             this.customLabel1.TabIndex = 9;
             this.customLabel1.Text = "Выберите ведомость";
@@ -1193,6 +1159,7 @@
             this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.customLabel2.Location = new System.Drawing.Point(3, 60);
             this.customLabel2.Name = "customLabel2";
+            this.customLabel2.ObjectName = null;
             this.customLabel2.Size = new System.Drawing.Size(112, 22);
             this.customLabel2.TabIndex = 9;
             this.customLabel2.Text = "Кол-во ШК для одного таб.";
@@ -1237,6 +1204,7 @@
             this.customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxPechTab.Location = new System.Drawing.Point(3, 25);
             this.customTextBoxPechTab.Name = "customTextBoxPechTab";
+            this.customTextBoxPechTab.ObjectName = null;
             this.customTextBoxPechTab.Size = new System.Drawing.Size(112, 23);
             this.customTextBoxPechTab.TabIndex = 29;
             // 
@@ -1248,6 +1216,7 @@
             this.customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customTextBoxPechSHK2.Location = new System.Drawing.Point(3, 85);
             this.customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
+            this.customTextBoxPechSHK2.ObjectName = null;
             this.customTextBoxPechSHK2.Size = new System.Drawing.Size(112, 23);
             this.customTextBoxPechSHK2.TabIndex = 28;
             // 
@@ -1262,6 +1231,7 @@
             this.customButtonPech2.Location = new System.Drawing.Point(3, 123);
             this.customButtonPech2.MaximumSize = new System.Drawing.Size(0, 50);
             this.customButtonPech2.Name = "customButtonPech2";
+            this.customButtonPech2.ObjectName = null;
             this.customButtonPech2.Size = new System.Drawing.Size(112, 26);
             this.customButtonPech2.TabIndex = 8;
             this.customButtonPech2.Text = "Печать";
@@ -1276,6 +1246,7 @@
             this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.customLabel3.Location = new System.Drawing.Point(3, 6);
             this.customLabel3.Name = "customLabel3";
+            this.customLabel3.ObjectName = null;
             this.customLabel3.Size = new System.Drawing.Size(112, 16);
             this.customLabel3.TabIndex = 9;
             this.customLabel3.Text = "Введите таб. №";
@@ -1289,6 +1260,7 @@
             this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.customLabel4.Location = new System.Drawing.Point(3, 66);
             this.customLabel4.Name = "customLabel4";
+            this.customLabel4.ObjectName = null;
             this.customLabel4.Size = new System.Drawing.Size(112, 16);
             this.customLabel4.TabIndex = 9;
             this.customLabel4.Text = "Кол-во ШК";
@@ -1333,6 +1305,7 @@
             this.customButtonSforming.Location = new System.Drawing.Point(3, 148);
             this.customButtonSforming.MaximumSize = new System.Drawing.Size(0, 50);
             this.customButtonSforming.Name = "customButtonSforming";
+            this.customButtonSforming.ObjectName = null;
             this.customButtonSforming.Size = new System.Drawing.Size(126, 33);
             this.customButtonSforming.TabIndex = 8;
             this.customButtonSforming.Text = "Сформировать";
@@ -1362,6 +1335,7 @@
             this.customLabelOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.customLabelOtch.Location = new System.Drawing.Point(3, 93);
             this.customLabelOtch.Name = "customLabelOtch";
+            this.customLabelOtch.ObjectName = null;
             this.customLabelOtch.Size = new System.Drawing.Size(43, 16);
             this.customLabelOtch.TabIndex = 9;
             this.customLabelOtch.Text = "Текст";
@@ -1376,6 +1350,7 @@
             this.customComboBoxOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customComboBoxOtch.Location = new System.Drawing.Point(3, 112);
             this.customComboBoxOtch.Name = "customComboBoxOtch";
+            this.customComboBoxOtch.ObjectName = null;
             this.customComboBoxOtch.Size = new System.Drawing.Size(126, 24);
             this.customComboBoxOtch.TabIndex = 26;
             // 
@@ -1388,6 +1363,7 @@
             this.customCheckBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
             this.customCheckBoxOsnTab.Location = new System.Drawing.Point(3, 67);
             this.customCheckBoxOsnTab.Name = "customCheckBoxOsnTab";
+            this.customCheckBoxOsnTab.ObjectName = null;
             this.customCheckBoxOsnTab.Size = new System.Drawing.Size(126, 20);
             this.customCheckBoxOsnTab.TabIndex = 27;
             this.customCheckBoxOsnTab.Text = "Основные табельные";
@@ -1414,6 +1390,23 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(140, 83);
             this.tableLayoutPanel1.TabIndex = 3;
             // 
+            // customButtonPdrSP
+            // 
+            this.customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonPdrSP.FlatAppearance.BorderSize = 0;
+            this.customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonPdrSP.Location = new System.Drawing.Point(3, 39);
+            this.customButtonPdrSP.Name = "customButtonPdrSP";
+            this.customButtonPdrSP.ObjectName = null;
+            this.customButtonPdrSP.Size = new System.Drawing.Size(134, 30);
+            this.customButtonPdrSP.TabIndex = 5;
+            this.customButtonPdrSP.Text = "Подразделения ШП - 1С";
+            this.customButtonPdrSP.UseVisualStyleBackColor = false;
+            this.customButtonPdrSP.Click += new System.EventHandler(this.customButtonPdrSP_Click);
+            // 
             // customButtonSov
             // 
             this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
@@ -1424,6 +1417,7 @@
             this.customButtonSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonSov.Location = new System.Drawing.Point(3, 3);
             this.customButtonSov.Name = "customButtonSov";
+            this.customButtonSov.ObjectName = null;
             this.customButtonSov.Size = new System.Drawing.Size(134, 30);
             this.customButtonSov.TabIndex = 1;
             this.customButtonSov.Text = "Совместители";
@@ -1440,6 +1434,7 @@
             this.customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonAddSov.Location = new System.Drawing.Point(3, 75);
             this.customButtonAddSov.Name = "customButtonAddSov";
+            this.customButtonAddSov.ObjectName = null;
             this.customButtonAddSov.Size = new System.Drawing.Size(134, 5);
             this.customButtonAddSov.TabIndex = 0;
             this.customButtonAddSov.Text = "Добавить совмест.";
@@ -1466,6 +1461,40 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(438, 83);
             this.tableLayoutPanel2.TabIndex = 4;
             // 
+            // customButtonSpOrg
+            // 
+            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
+            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
+            this.customButtonSpOrg.Name = "customButtonSpOrg";
+            this.customButtonSpOrg.ObjectName = null;
+            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
+            this.customButtonSpOrg.TabIndex = 6;
+            this.customButtonSpOrg.Text = "Справочник организаций";
+            this.customButtonSpOrg.UseVisualStyleBackColor = false;
+            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
+            // 
+            // customButtonSpDol
+            // 
+            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
+            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
+            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
+            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
+            this.customButtonSpDol.Name = "customButtonSpDol";
+            this.customButtonSpDol.ObjectName = null;
+            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
+            this.customButtonSpDol.TabIndex = 5;
+            this.customButtonSpDol.Text = "Справочник должностей";
+            this.customButtonSpDol.UseVisualStyleBackColor = false;
+            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
+            // 
             // customButtonRed
             // 
             this.customButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
@@ -1476,6 +1505,7 @@
             this.customButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonRed.Location = new System.Drawing.Point(148, 3);
             this.customButtonRed.Name = "customButtonRed";
+            this.customButtonRed.ObjectName = null;
             this.customButtonRed.Size = new System.Drawing.Size(140, 30);
             this.customButtonRed.TabIndex = 2;
             this.customButtonRed.Text = "Редактировать";
@@ -1492,6 +1522,7 @@
             this.customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButtonAdd.Location = new System.Drawing.Point(3, 3);
             this.customButtonAdd.Name = "customButtonAdd";
+            this.customButtonAdd.ObjectName = null;
             this.customButtonAdd.Size = new System.Drawing.Size(139, 30);
             this.customButtonAdd.TabIndex = 0;
             this.customButtonAdd.Text = "Добавить";

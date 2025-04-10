@@ -34,6 +34,7 @@
             this.labelControlLogin = new DevExpress.XtraEditors.LabelControl();
             this.labelControlPassword = new DevExpress.XtraEditors.LabelControl();
             this.textEditPassword = new DevExpress.XtraEditors.TextEdit();
+            this.labelError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.textEditLogin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             this.SuspendLayout();
@@ -47,15 +48,18 @@
             this.simpleButton.Size = new System.Drawing.Size(186, 42);
             this.simpleButton.TabIndex = 0;
             this.simpleButton.Text = "ВОЙТИ";
+            this.simpleButton.Click += new System.EventHandler(this.simpleButton_Click);
             // 
             // textEditLogin
             // 
+            this.textEditLogin.EditValue = "AdminMaxim";
             this.textEditLogin.Location = new System.Drawing.Point(122, 30);
             this.textEditLogin.Name = "textEditLogin";
             this.textEditLogin.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textEditLogin.Properties.Appearance.Options.UseFont = true;
             this.textEditLogin.Size = new System.Drawing.Size(273, 26);
             this.textEditLogin.TabIndex = 1;
+            this.textEditLogin.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
             // 
             // labelControlLogin
             // 
@@ -79,12 +83,25 @@
             // 
             // textEditPassword
             // 
+            this.textEditPassword.EditValue = "0";
             this.textEditPassword.Location = new System.Drawing.Point(122, 70);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.Appearance.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.textEditPassword.Properties.Appearance.Options.UseFont = true;
             this.textEditPassword.Size = new System.Drawing.Size(273, 26);
             this.textEditPassword.TabIndex = 5;
+            this.textEditPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Location = new System.Drawing.Point(39, 128);
+            this.labelError.MaximumSize = new System.Drawing.Size(150, 60);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(138, 26);
+            this.labelError.TabIndex = 6;
+            this.labelError.Text = "Неверное имя пользователя или пароль";
+            this.labelError.Visible = false;
             // 
             // LoginForm
             // 
@@ -92,6 +109,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.ClientSize = new System.Drawing.Size(428, 183);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.textEditPassword);
             this.Controls.Add(this.labelControlPassword);
             this.Controls.Add(this.labelControlLogin);
@@ -103,6 +121,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Авторизация";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LoginForm_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.textEditLogin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -117,5 +136,6 @@
         private DevExpress.XtraEditors.LabelControl labelControlLogin;
         private DevExpress.XtraEditors.LabelControl labelControlPassword;
         private DevExpress.XtraEditors.TextEdit textEditPassword;
+        private System.Windows.Forms.Label labelError;
     }
 }
