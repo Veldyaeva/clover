@@ -782,11 +782,15 @@ OUTPUT INSERTED.annID
         {
             try
             {
+                await _logger.LogEventAsync($"Начало вставки в таблицу {tableName}", "InsertEntityAsync");
+                
                 var properties = typeof(T).GetProperties()
                     .Where(p => p.CanRead &&
                                 p.Name != keyFieldName &&
                                 !System.Attribute.IsDefined(p, typeof(NotMappedAttribute))) 
                     .ToList();
+
+                await _logger.LogEventAsync($"Найдено {properties.Count} свойств для вставки", "InsertEntityAsync");
 
                 var columns = new List<string>();
                 var values = new List<string>();
@@ -803,15 +807,24 @@ OUTPUT INSERTED.annID
                     }
                     string parameterName = "@" + columnName;
 
+                    var value = prop.GetValue(entity);
+                    await _logger.LogEventAsync($"Свойство {prop.Name} (колонка {columnName}): значение = {value}, тип = {value?.GetType()}", "InsertEntityAsync");
+
                     columns.Add(columnName);
                     values.Add(parameterName);
-                    parameters[parameterName] = NormalizeValue(prop.GetValue(entity));
+                    parameters[parameterName] = NormalizeValue(value);
                 }
 
                 string columnsPart = string.Join(", ", columns);
                 string valuesPart = string.Join(", ", values);
 
                 string query = $"INSERT INTO {tableName} ({columnsPart}) VALUES ({valuesPart}); SELECT SCOPE_IDENTITY();";
+
+                await _logger.LogEventAsync($"SQL Query: {query}", "InsertEntityAsync");
+                foreach (var param in parameters)
+                {
+                    await _logger.LogEventAsync($"Parameter {param.Key}: {param.Value} (тип: {param.Value?.GetType()})", "InsertEntityAsync");
+                }
 
                 object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
 
@@ -932,15 +945,30 @@ OUTPUT INSERTED.annID
 
             if (value is DateTime dt)
             {
-                if (dt < new DateTime(1753, 1, 1))
-                {
-                    return DBNull.Value; 
-                }
+                if (dt == DateTime.MinValue)
+                    return DBNull.Value;
+                return dt;
             }
+
+            if (value is bool boolValue)
+                return boolValue ? 1 : 0;
 
             return value;
         }
 
+        public async Task DeleteRelatedNormTables(int annId)
+        {
+            await DeleteByAnnId("norm_rasz", annId);
+            await DeleteByAnnId("norm_rask", annId);
+            await DeleteByAnnId("norm_kont", annId);
+            await DeleteByAnnId("norm_dop_obr", annId);
+        }
+        public async Task DeleteByAnnId(string tableName, int annId)
+        {
+            string query = $"DELETE FROM {tableName} WHERE AnnId = @AnnId";
+            var parameters = new Dictionary<string, object> { { "@AnnId", annId } };
+            await _dbHelper.ExecuteNonQueryAsync(query, parameters);
+        }
 
         /*public async Task UpdateAnnAsync(ArtNormN annData)
         {

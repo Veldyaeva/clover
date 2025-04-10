@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System;
 using System.ComponentModel;
+using System.Linq;
 
 namespace SewingProduction.Forms
 {
@@ -40,8 +41,6 @@ namespace SewingProduction.Forms
                         ANNgridView.OptionsView.ShowIndicator = false;
                         ANNgridView.OptionsView.ShowPreview = false;
 
-                        // Заменяем _bindingList на новый BindingList с данными
-                        //                        _bindingSource.DataSource = new BindingList<ArtNormN>(data);
                         _bindingList = new BindingList<ArtNormN>(data);
                         _bindingSource.DataSource = _bindingList;
 
@@ -71,10 +70,6 @@ namespace SewingProduction.Forms
         }
 
 
-        private void SearchWorkDivisionsButton_Click(object sender, EventArgs e)
-        {
-            // TODO: Поиск разделений труда
-        }
         private async Task LoadRelatedData(int annId)
         {
             await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
@@ -167,95 +162,117 @@ namespace SewingProduction.Forms
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
-       
+
 
         private async Task ArchAndCopy()
         {
-            GridView annView = ANNgridView;
-            if (annView == null || annView.FocusedRowHandle < 0)
+            if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            ArtNormN selectedItem = ANNgridView.GetRow(annView.FocusedRowHandle) as ArtNormN;
+            var selectedItem = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+            if (selectedItem == null) return;
+
             ArtNormN newRow = null;
-            int? oldStatus = selectedItem?.Status;
+            int? oldStatus = selectedItem.Status;
 
             try
             {
                 await _logger.LogEventAsync($"Начало архивирования. Исходный статус: {oldStatus}", "ArchAndCopy");
-                
+
                 bool hasNZP = await checkNzp(selectedItem.AnnID);
                 await _logger.LogEventAsync($"Проверка НЗП: {hasNZP}", "ArchAndCopy");
-                
+
                 newRow = await CopyRow(hasNZP);
                 await _logger.LogEventAsync($"Создана новая запись со статусом: {newRow?.Status}", "ArchAndCopy");
 
-                // Открываем форму для редактирования
-                using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
+                if (newRow == null)
                 {
-                    if (teamWorkAdvanceTW.ShowDialog() == DialogResult.OK)
+                    MessageBox.Show("Не удалось создать новую запись.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                using (var editForm = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
+                {
+                    if (editForm.ShowDialog() == DialogResult.OK)
                     {
-                        // Обновляем статус исходной записи только если форма закрыта через OK
-                        int newStatus = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
-                        await _logger.LogEventAsync($"Установка нового статуса: {newStatus}", "ArchAndCopy");
-                        
-                        selectedItem.Status = newStatus;
-                        selectedItem.StatusText = StatusHelper.GetStatusText(selectedItem.Status);
-                        await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", selectedItem.Status);
-
-                        await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "CopyRow");
-
-                        _bindingSource.ResetBindings(false);
-                        ANNgridView.RefreshData();
+                        await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
                     }
                     else
                     {
-                        // Если форма закрыта не через OK, восстанавливаем исходный статус
-                        if (oldStatus.HasValue)
-                        {
-                            await _logger.LogEventAsync($"Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
-                            
-                            selectedItem.Status = oldStatus.Value;
-                            selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
-                            await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
-                        }
-
-                        // Удаляем новую запись, так как она не нужна
-                        if (newRow != null && newRow.AnnID > 0)
-                        {
-                            _bindingList.Remove(newRow);
-                            _bindingSource.Remove(newRow);
-                            await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
-                        }
-
-                        _bindingSource.ResetBindings(false);
-                        ANNgridView.RefreshData();
+                        await HandleCancelledEdit(selectedItem, newRow, oldStatus);
                     }
                 }
             }
             catch (Exception ex)
             {
-                if (newRow != null && newRow.AnnID > 0)
-                {
-                    _bindingList.Remove(newRow);
-                    _bindingSource.Remove(newRow);
-                    await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
-                }
-
-                if (oldStatus.HasValue && selectedItem != null)
-                {
-                    await _logger.LogEventAsync($"Ошибка. Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
-                    
-                    selectedItem.Status = oldStatus.Value;
-                    selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
-                    await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
-                }
-
-                await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
-                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await HandleArchAndCopyError(selectedItem, newRow, oldStatus, ex);
             }
+        }
+
+        private async Task HandleSuccessfulEdit(ArtNormN selectedItem, ArtNormN newRow, bool hasNZP)
+        {
+            if (newRow == null) return;
+
+            int newStatus = hasNZP ? (int)Status.PreliminaryArchive : (int)Status.Archive;
+
+            await _logger.LogEventAsync($"Установка нового статуса: {newStatus}", "ArchAndCopy");
+
+            selectedItem.Status = newStatus;
+            selectedItem.StatusText = StatusHelper.GetStatusText(newStatus);
+
+            await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", newStatus);
+
+            UpdateNewRowInBindingList(newRow);
+
+            await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "ArchAndCopy");
+        }
+
+        private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
+        {
+            if (oldStatus.HasValue)
+            {
+                await _logger.LogEventAsync($"Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
+
+                selectedItem.Status = oldStatus.Value;
+                selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
+
+                await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
+            }
+
+            if (newRow != null && newRow.AnnID > 0)
+            {
+                _bindingList.Remove(newRow);
+                _bindingSource.Remove(newRow);
+                await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
+            }
+
+            _bindingSource.ResetBindings(false);
+            ANNgridView.RefreshData();
+        }
+        private async Task HandleArchAndCopyError(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus, Exception ex)
+        {
+            if (newRow != null && newRow.AnnID > 0)
+            {
+                _bindingList.Remove(newRow);
+                _bindingSource.Remove(newRow);
+                await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
+            }
+
+            if (oldStatus.HasValue && selectedItem != null)
+            {
+                await _logger.LogEventAsync($"Ошибка. Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
+
+                selectedItem.Status = oldStatus.Value;
+                selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
+
+                await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
+            }
+
+            await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
+            MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
@@ -306,43 +323,30 @@ namespace SewingProduction.Forms
             }
         }
 
-
-        private async Task BindArticulToNewRowAsync(int oldAnnId, int newAnnId)
+        private void UpdateNewRowInBindingList(ArtNormN newRow)
         {
-            try
+            int index = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == newRow.AnnID));
+            if (index >= 0)
             {
-                // Копируем записи из старых таблиц в новые с новым annId
-                await _artNormService.CopyTableRecords("norm_rasz", oldAnnId, newAnnId);
-                await _artNormService.CopyTableRecords("norm_rask", oldAnnId, newAnnId);
-                await _artNormService.CopyTableRecords("norm_kont", oldAnnId, newAnnId);
-                await _artNormService.CopyTableRecords("norm_dop_obr", oldAnnId, newAnnId);
+                _bindingList[index] = newRow;
+                _bindingSource.ResetBindings(false);
 
-                await _logger.LogEventAsync($"Созданы новые записи в таблицах с ID={newAnnId}", "BindArticulToNewRowAsync");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при создании новых записей: {ex.Message}");
-                throw;
+                int rowHandle = ANNgridView.LocateByValue("AnnID", newRow.AnnID);
+                if (rowHandle >= 0)
+                {
+                    ANNgridView.BeginUpdate();
+                    try
+                    {
+                        ANNgridView.FocusedRowHandle = rowHandle;
+                        ANNgridView.RefreshRow(rowHandle);
+                    }
+                    finally
+                    {
+                        ANNgridView.EndUpdate();
+                    }
+                }
             }
         }
-
-
-        private async Task updateNewRow(int selectedAnnId, int newId)
-        {
-            await LoadWorkDivisions();
-         //   await CurrentWorks_Load();
-            await LoadRelatedData(newId);
-            await _logger.LogEventAsync($"Запись ID={selectedAnnId} успешно архивирована и скопирована как ID={newId}", "ArchAndCopy");
-
-            // Показываем сообщение об успешном завершении операции
-            MessageBox.Show(
-                $"Запись успешно архивирована",
-                "Информация",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information);
-        }
-
-
         private async Task<bool> checkNzp(int selectedAnnId)
         {
             bool hasNZP = false;
@@ -363,6 +367,7 @@ namespace SewingProduction.Forms
         /// Создает копию выбранной записи разделения труда в базе данных
         /// </summary>
         /// <returns>новая запись или null в случае ошибки</returns>
+        /// 
         private async Task<ArtNormN> CopyRow(bool nzp)
         {
             try
@@ -374,46 +379,24 @@ namespace SewingProduction.Forms
                     return null;
                 }
 
-                // Получаем выбранную запись
-                ArtNormN sourceRecord = ANNgridView.GetRow(selectedRowHandle) as ArtNormN;
+                var sourceRecord = ANNgridView.GetRow(selectedRowHandle) as ArtNormN;
                 if (sourceRecord == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return null;
                 }
 
-                // Создаем копию записи с новыми значениями
-                ArtNormN newRecord = new ArtNormN
-                {
-                    Kod = sourceRecord.Kod,
-                    Group = sourceRecord.Group,
-                    Articul = sourceRecord.Articul,
-                    Mod = sourceRecord.Mod,
-                    SekShv = sourceRecord.SekShv,
-                    SekVyaz5 = sourceRecord.SekVyaz5,
-                    SekVyaz6 = sourceRecord.SekVyaz6,
-                    SekVyaz7 = sourceRecord.SekVyaz7,
-                    SekVyaz10 = sourceRecord.SekVyaz10,
-                    SekVyaz12 = sourceRecord.SekVyaz12,
-                    SekVyazo = sourceRecord.SekVyazo,
-                    SekVyaz = sourceRecord.SekVyaz,
-                    Sek = sourceRecord.Sek,
-                    Komment = sourceRecord.Komment == null ? "" : sourceRecord.Komment,
-                    dateCreate = DateTime.Now,
-                    Diz = sourceRecord.Diz,
-                    Constr = sourceRecord.Constr,
-                    dataUpdate = null,
-                    SekKr = sourceRecord.SekKr,
-                    Slogn = sourceRecord.Slogn,
-                    Arh = false,
-                    Status = nzp ? (int)Status.Preliminary : (int)Status.Actual,
-                    StatusText = StatusHelper.GetStatusText(nzp ? (int)Status.Preliminary : (int)Status.Actual),
-                    preArch = ((int)sourceRecord.Status == (int)Status.PreliminaryArchive) ? true : false,
+                ArtNormN newRecord = sourceRecord.CloneProperties();
+                newRecord.dateCreate = DateTime.Now;
+                newRecord.dataUpdate = null;
+                newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
+                newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
+                newRecord.Arh = false;
+                newRecord.AnnID = 0; // чтобы при вставке база сама назначила ID
 
-                };
                 _bindingList.Add(newRecord);
-                // Сохраняем копию в базу данных
-                newRecord.AnnID = await Task.Run(() => _artNormService.SaveCopyToDatabase(newRecord));
+
+                newRecord.AnnID =  _artNormService.SaveCopyToDatabase(newRecord);
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -430,29 +413,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        private async Task UpdateRelatedData(int annId)
-        {
-            try
-            {
-                await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
-                await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
-                await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-
-                UpdateNZPStatus();
-
-                // Сортируем каждую таблицу отдельно
-                sortGridView(gridView1);
-                sortGridView(gridView4);
-                sortGridView(gridView3);
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка обновления данных для annId = {annId}");
-                MessageBox.Show($"Ошибка обновления данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
         private void sortGridView(GridView gridView)
         {

@@ -234,9 +234,11 @@
     <Compile Include="form\TeamWork\Forms\TeamWork.WorkDivisions.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="form\TeamWork\Helpers\BindingListHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\CopyHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

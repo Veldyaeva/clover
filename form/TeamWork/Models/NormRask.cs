@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SewingProduction.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace SewingProduction.Models
 {
-   public class NormRask 
+   public class NormRask : INewable
     {
+        [NotMapped]
+        public bool IsNew { get; set; } = true;
         public int id { get; set; }
         public int AnnId { get; set; }
         [Column("kod_o")]

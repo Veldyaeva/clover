@@ -194,7 +194,7 @@ namespace SewingProduction.form.TeamWork.Forms
         }
         private void ProcessSelectedComplexity()
         {
-            _bandDataList.Clear(); // Очищаем список перед добавлением новых данных
+            _bandDataList.Clear(); 
 
             foreach (var band in _selectedBands)
             {
@@ -242,16 +242,16 @@ namespace SewingProduction.form.TeamWork.Forms
             string obor = raskroyList.Naimen?.TrimEnd();
             return new List<NormRask>
             {
-                new NormRask{AnnId = -1, KodO = "301", Text = "Рассекание на куски диском", Sek = raskroyList.Dras, Razryad =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "302", Text = "Резка диском", Sek = raskroyList.Drez, Razryad = 5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "303", Text = "До проймы диск", Sek = raskroyList.Dpro, Razryad =  5, N_ch = kol, Obor =  obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "311", Text = "Рассекание на куски (лента)",Sek = raskroyList.Lras, Razryad = 5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "313", Text = "До проймы (лента)", Sek = raskroyList.Lpro, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "320", Text = "Перекладывание деталей", Sek = 455, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "330", Text = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "400", Text = "Укладывание шаблона", Sek = 150, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "500", Text = "Вырезание шаблона", Sek = 320, Razryad =5,  N_ch = kol, Obor = obor , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
-                new NormRask{AnnId = -1, KodO = "340", Text = "Разрезание вруч.парных дет/пол", Sek = 300, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
+                new NormRask{IsNew = true, AnnId = -1, KodO = "301", Text = "Рассекание на куски диском", Sek = raskroyList.Dras, Razryad =  5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0,Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "302", Text = "Резка диском", Sek = raskroyList.Drez, Razryad = 5, N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "303", Text = "До проймы диск", Sek = raskroyList.Dpro, Razryad =  5, N_ch = kol, Obor =  obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "311", Text = "Рассекание на куски (лента)",Sek = raskroyList.Lras, Razryad = 5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "313", Text = "До проймы (лента)", Sek = raskroyList.Lpro, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "320", Text = "Перекладывание деталей", Sek = 455, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "330", Text = "Перекладывание деталей/полоска", Sek = _slogn == 1 ? 2275 : _slogn == 2 ? 3000 : 3600, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "400", Text = "Укладывание шаблона", Sek = 150, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "500", Text = "Вырезание шаблона", Sek = 320, Razryad =5,  N_ch = kol, Obor = obor , Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = ""},
+                new NormRask{IsNew = true, AnnId = -1, KodO = "340", Text = "Разрезание вруч.парных дет/пол", Sek = 300, Razryad =5,  N_ch = kol, Obor = obor, Seb = 0, N = 0, N1 = 0, Seb_s = 0, Spec = "" } 
             };
         }
 

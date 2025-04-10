@@ -109,20 +109,21 @@ namespace SewingProduction.form
                     Kod_proizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
                     TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")),
                     TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")),
-                    TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob"))
+                    TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob")),
+                    IsNew = true
                 };
 
-                // Сохраняем новую запись и получаем её ID
-                var newId = await _artNormService.InsertNormRaszAsync(SelectedRowData);
-                if (newId > 0)
-                {
-                    SelectedRowData.nrId = newId;
-                }
-                else
-                {
-                    MessageBox.Show("Ошибка при сохранении записи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+                //// Сохраняем новую запись и получаем её ID
+                //var newId = await _artNormService.InsertNormRaszAsync(SelectedRowData);
+                //if (newId > 0)
+                //{
+                //    SelectedRowData.nrId = newId;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Ошибка при сохранении записи", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

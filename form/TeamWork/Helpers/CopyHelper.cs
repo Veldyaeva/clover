@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,6 +38,24 @@ namespace SewingProduction.Helpers
             }
 
             return target;
+        }
+
+        public static T CloneProperties<T>(this T source) where T : new()
+        {
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            T clone = new T();
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                       .Where(p => p.CanRead && p.CanWrite);
+
+            foreach (var prop in properties)
+            {
+                var value = prop.GetValue(source);
+                prop.SetValue(clone, value);
+            }
+
+            return clone;
         }
     }
 }

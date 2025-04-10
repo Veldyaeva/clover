@@ -1,4 +1,5 @@
 ﻿using DevExpress.Data.Filtering;
+using DevExpress.XtraBars.Customization;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
@@ -239,12 +240,15 @@ namespace SewingProduction.Forms
                     MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                // Создаём новую запись модели `ArtNorm` из выбранной строки
-                ArtNormN newItem = ANNgridView.GetRow(_rowNumber) as ArtNormN;
+                // // Создаём новую запись модели `ArtNorm` из выбранной строки
+                //// ArtNormN newItem = ANNgridView.GetRow(_rowNumber) as ArtNormN;
 
-                // Получаем ID выбранной записи
-                int selectedAnnId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                // // Получаем ID выбранной записи
+                // int selectedAnnId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                var selectedItem = ANNgridView.GetRow(_rowNumber) as ArtNormN;
+                if (selectedItem == null) return;
 
+                int selectedAnnId = selectedItem.AnnID;
                 // Открываем форму редактирования
                 using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
                    bufferId,
@@ -254,9 +258,34 @@ namespace SewingProduction.Forms
 
                     if (result == DialogResult.OK)
                     {
-                        // Обновляем все данные после сохранения
-                        _bindingSource.ResetBindings(false);
-                        ANNgridControl.RefreshDataSource();
+                        var updatedItem = teamWorkAdvanceTW.CreatedAnn;
+
+                        if (updatedItem != null)
+                        {
+                            // Находим индекс и заменяем запись в списке
+                            int index = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == updatedItem.AnnID));
+                            if (index >= 0)
+                            {
+                                _bindingList[index] = updatedItem;
+                                _bindingSource.ResetBindings(false);
+
+                                // Обновляем выделение и перерисовываем строку
+                                int rowHandle = ANNgridView.LocateByValue("AnnID", updatedItem.AnnID);
+                                if (rowHandle >= 0)
+                                {
+                                    ANNgridView.BeginUpdate();
+                                    try
+                                    {
+                                        ANNgridView.FocusedRowHandle = rowHandle;
+                                        ANNgridView.RefreshRow(rowHandle);
+                                    }
+                                    finally
+                                    {
+                                        ANNgridView.EndUpdate();
+                                    }
+                                }
+                            }
+                        }
                         LoadRelatedData(selectedAnnId);
 
                         // Отображаем сообщение об успешном редактировании
