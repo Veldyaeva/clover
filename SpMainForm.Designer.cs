@@ -308,6 +308,7 @@
             this.рабочийСтолМастераToolStripMenuItem.Name = "рабочийСтолМастераToolStripMenuItem";
             this.рабочийСтолМастераToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
             this.рабочийСтолМастераToolStripMenuItem.Text = "Рабочий стол мастера";
+            this.рабочийСтолМастераToolStripMenuItem.Click += new System.EventHandler(this.рабочийСтолМастераToolStripMenuItem_Click_1);
             // 
             // TeamWorktoolStripMenuItem
             // 
