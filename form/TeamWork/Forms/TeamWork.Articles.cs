@@ -252,9 +252,9 @@ namespace SewingProduction.Forms
                 var copy = CloneHelper.CloneAndAssignNewAnnId(rasz, newId, TableNames.RaszId);
                 await _artNormService.SaveEntityAsync(TableNames.Rasz, TableNames.RaszId, copy);
             }
-            await _artNormService.UpdateAnnId("norm_Rask", selectedAnnId, "annId", newId);
-            await _artNormService.UpdateAnnId("norm_Kont", selectedAnnId, "annId", newId);
-            await _artNormService.UpdateAnnId("norm_dop_obr", selectedAnnId, "annId", newId);
+            await _artNormService.UpdateFieldAsync(TableNames.Rask, "annId", newId, "annId", selectedAnnId);
+            await _artNormService.UpdateFieldAsync(TableNames.Kont,"annId", newId, "annId", selectedAnnId);
+            await _artNormService.UpdateFieldAsync(TableNames.Obr, "annId", newId, "annId", selectedAnnId);
 
         }
         #region headerCheckBox

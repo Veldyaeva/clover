@@ -72,7 +72,7 @@ namespace SewingProduction.Forms
 
         private async Task LoadRelatedData(int annId)
         {
-            await GridHelper.LoadGridControlDataAsync(gridControl1, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+            await GridHelper.LoadGridControlDataAsync(statusLabel, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
@@ -223,7 +223,7 @@ namespace SewingProduction.Forms
             selectedItem.Status = newStatus;
             selectedItem.StatusText = StatusHelper.GetStatusText(newStatus);
 
-            await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", newStatus);
+            await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
 
             UpdateNewRowInBindingList(newRow);
 
@@ -239,14 +239,14 @@ namespace SewingProduction.Forms
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
+                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             if (newRow != null && newRow.AnnID > 0)
             {
                 _bindingList.Remove(newRow);
                 _bindingSource.Remove(newRow);
-                await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
+                await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
             }
 
             _bindingSource.ResetBindings(false);
@@ -258,7 +258,7 @@ namespace SewingProduction.Forms
             {
                 _bindingList.Remove(newRow);
                 _bindingSource.Remove(newRow);
-                await _artNormService.deleteRow("art_norm_n", newRow.AnnID);
+                await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
             }
 
             if (oldStatus.HasValue && selectedItem != null)
@@ -268,7 +268,7 @@ namespace SewingProduction.Forms
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateAnnId("art_norm_n", selectedItem.AnnID, "Status", oldStatus.Value);
+                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
@@ -307,15 +307,15 @@ namespace SewingProduction.Forms
                 _bindingList.Remove(newItem);
                 _bindingSource.Remove(newItem);
 
-                await _artNormService.deleteRow("art_norm_n", newItem.AnnID);
+                await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
                 if (teamWorkForm.IsRaszInserted)
-                    await _artNormService.deleteRow("norm_rasz", newItem.AnnID);
+                    await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
                 if (teamWorkForm.IsRaskInserted)
-                    await _artNormService.deleteRow("norm_rask", newItem.AnnID);
+                    await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
                 if (teamWorkForm.IsKontInserted)
-                    await _artNormService.deleteRow("norm_kont", newItem.AnnID);
+                    await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
                 if (teamWorkForm.IsDopObrInserted)
-                    await _artNormService.deleteRow("norm_dop_obr", newItem.AnnID);
+                    await _artNormService.DeleteByAnnId(TableNames.Obr, newItem.AnnID);
 
                 _bindingSource.ResetBindings(false);
                 ANNgridControl.RefreshDataSource();
@@ -396,7 +396,7 @@ namespace SewingProduction.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID =  _artNormService.SaveCopyToDatabase(newRecord);
+                newRecord.AnnID = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord); //SaveCopyToDatabase(newRecord);
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);

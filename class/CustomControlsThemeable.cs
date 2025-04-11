@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraGrid;
+using SewingProduction.form.TeamWork.Interfaces;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -7,11 +8,6 @@ using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction
 {
-    public interface IThemeable
-    {
-        void ApplyTheme();
-    }
-
     public class CustomButton : Button, IThemeable
     {
         public CustomButton()

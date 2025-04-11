@@ -18,6 +18,7 @@ using System.Reflection;
 using SewingProduction.Interfaces;
 using System.Data.SqlClient;
 using Z.Dapper.Plus;
+using System.Drawing;
 
 namespace SewingProduction.form
 {
@@ -407,7 +408,7 @@ namespace SewingProduction.form
                             if (_newAnnId > 0)
                             {
                                 await _artNormService.DeleteRelatedNormTables(_newAnnId);
-                                await _artNormService.deleteRow("art_norm_n", _newAnnId);
+                                await _artNormService.DeleteByAnnId(TableNames.Ann, _newAnnId);//.deleteRow("art_norm_n", _newAnnId);
                             }
                         }
                         else
@@ -674,7 +675,7 @@ namespace SewingProduction.form
                     // Если это новая запись (Id <= 0), сохраняем в БД
                     if (normRask.id <= 0)
                     {
-                        normRask.id = await _artNormService.InsertNormRaskAsync(normRask);
+                        normRask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, normRask);//InsertNormRaskAsync(normRask);
                         if (normRask.id <= 0)
                         {
                             e.Valid = false;
@@ -768,41 +769,93 @@ namespace SewingProduction.form
 
         #endregion
 
-        #region Dop
-        private void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
+        //#region Dop
+        //private void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
+        //{
+        //    var gridView = sender as GridView;
+        //    if (gridView == null)
+        //        return;
+
+        //    // Проверяем, есть ли уже строки в таблице
+        //    if (gridView.DataRowCount > 0)
+        //    {
+        //        // Если есть хотя бы одна строка, удаляем новую строку
+        //        gridView.DeleteRow(e.RowHandle);
+        //        return;
+        //    }
+
+        //    try
+        //    {
+        //        // Заполняем значения в текущей новой строке
+        //        gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
+        //        gridView.SetRowCellValue(e.RowHandle, "Text", "Дополнительная обработка");
+        //        gridView.UpdateCurrentRow();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в GridView4");
+        //        MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        //private void GridView4_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        //{
+        //    if (e.Row is NormDopObr normDopObr)
+        //    {
+        //        normDopObr.AnnId = _newAnnId;
+        //        gridViewDopObr.UpdateCurrentRow();
+        //    }
+        //}
+
+        //private async void GridView4_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        //{
+        //    if (e.Row is NormDopObr normDopObr)
+        //    {
+        //        try
+        //        {
+        //            // Убеждаемся что AnnId установлен
+        //            normDopObr.AnnId = _newAnnId;
+
+        //            // Если это новая запись (Kod пустой), сохраняем в БД
+        //            if (string.IsNullOrEmpty(normDopObr.Kod))
+        //            {
+        //              //  normDopObr.Kod = await _artNormService.InsertNormDopObrAsync(normDopObr);
+        //                if (string.IsNullOrEmpty(normDopObr.Kod))
+        //                {
+        //                    e.Valid = false;
+        //                    e.ErrorText = "Ошибка при сохранении записи в базу данных";
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            e.Valid = false;
+        //            e.ErrorText = $"Ошибка: {ex.Message}";
+        //            await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+        //        }
+        //    }
+        //}
+        //#endregion
+
+        private async void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
         {
             var gridView = sender as GridView;
             if (gridView == null)
                 return;
 
-            // Проверяем, есть ли уже строки в таблице
-            if (gridView.DataRowCount > 0)
-            {
-                // Если есть хотя бы одна строка, удаляем новую строку
-                gridView.DeleteRow(e.RowHandle);
-                return;
-            }
-
             try
             {
-                // Заполняем значения в текущей новой строке
+                // Заполняем значения новой строки
                 gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
                 gridView.SetRowCellValue(e.RowHandle, "Text", "Дополнительная обработка");
+
+                // Обновляем строку в гриде
                 gridView.UpdateCurrentRow();
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в GridView4");
-                MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void GridView4_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        {
-            if (e.Row is NormDopObr normDopObr)
-            {
-                normDopObr.AnnId = _newAnnId;
-                gridViewDopObr.UpdateCurrentRow();
+                await _logger.LogErrorAsync(ex, "Ошибка при инициализации новой строки в GridView4");
+                MessageBox.Show($"Ошибка при добавлении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -812,83 +865,118 @@ namespace SewingProduction.form
             {
                 try
                 {
-                    // Убеждаемся что AnnId установлен
                     normDopObr.AnnId = _newAnnId;
 
-                    // Если это новая запись (Kod пустой), сохраняем в БД
-                    if (string.IsNullOrEmpty(normDopObr.Kod))
-                    {
-                      //  normDopObr.Kod = await _artNormService.InsertNormDopObrAsync(normDopObr);
-                        if (string.IsNullOrEmpty(normDopObr.Kod))
-                        {
-                            e.Valid = false;
-                            e.ErrorText = "Ошибка при сохранении записи в базу данных";
-                        }
-                    }
+                    // Вызываем сохранение строки
+                    await SaveSingleNormDopObrAsync(normDopObr);
                 }
                 catch (Exception ex)
                 {
                     e.Valid = false;
                     e.ErrorText = $"Ошибка: {ex.Message}";
-                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+                    await _logger.LogErrorAsync(ex, "Ошибка при валидации строки NormDopObr");
                 }
             }
         }
-        #endregion
+
+        private async Task SaveSingleNormDopObrAsync(NormDopObr normDopObr)
+        {
+            try
+            {
+                // Удаляем старую запись по AnnId
+                await _artNormService.DeleteByAnnId("norm_dop_obr", normDopObr.AnnId);
+
+                // Вставляем новую запись
+                await _artNormService.InsertEntityAsync(TableNames.Obr, TableNames.ObrId, normDopObr);//InsertDopObrAsync(normDopObr);
+
+                await ShowStatusMessageAsync("Дополнительная обработка успешно сохранена");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении NormDopObr");
+                throw; // Бросаем наверх, чтобы ValidateRow отработал корректно
+            }
+        }
+
+        private async Task ShowStatusMessageAsync(string message)
+        {
+            if (statusLabel != null)
+            {
+                statusLabel.Text = message;
+                await Task.Delay(3000); // Немного подержим сообщение на экране
+                statusLabel.Text = "";
+            }
+        }
+
+
+        //private void HighlightNewRow(GridView gridView, int rowHandle)
+        //{
+        //    gridView.FocusedRowHandle = rowHandle;
+        //    gridView.Appearance.FocusedRow.BackColor = Color.LightGreen;
+        //    Task.Delay(2000).ContinueWith(_ =>
+        //    {
+        //        gridView.Invoke(new Action(() =>
+        //        {
+        //            gridView.Appearance.FocusedRow.BackColor = Color.Empty;
+        //        }));
+        //    });
+        //}
+
         private async void btnOK_Click(object sender, EventArgs e)
         {
             _okPressed = true;
-            if (_mode == (int)Mode.NewWorkDivision)
-                if(nameTextBox.Text.TrimEnd().Length <= 0)
-                {
-                    MessageBox.Show("Заполните поле Артикул", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    DialogResult = DialogResult.None;
-                    return;
-                }
-            if ((groupTextBox.Text.TrimEnd() == "") && (modelTextBox.Text.TrimEnd() == ""))
+
+
+            if (!ValidateForm())
             {
-                MessageBox.Show("Заполните поле Модель либо Группа", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Останавливаем сохранение, если форма заполнена неправильно
+            }
+            try
+            {
+                await _dbHelper.ExecuteInTransactionAsync(async () =>
+                {
+                    await SaveAnnDataAsync();
+                    await SaveAllDataAsync();
+                });
+                await ShowStatusMessage("Данные успешно сохранены!");
+
+                await _artNormService.ExecutePztOperUpdateAsync();
+                await ShowStatusMessage("Плановые загрузки обновлены!");
+                this.DialogResult = DialogResult.OK;
+                this.Close();
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                DialogResult = DialogResult.None;
+            }
+        }
+
+        private async Task SaveAnnDataAsync()
+        {
+            try
+            {
+                // Сохраняем данные в таблицу ann
+                _currentAnnData.AnnID = _newAnnId;
+                await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
+                CreatedAnn = _currentAnnData;
+
+               // MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
+                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
                 return;
             }
-            else
-            {
-                try
-                {
-                    await SaveAllDataAsync();
-                    try
-                    {
-                        // Сохраняем данные в таблицу ann
-                        _currentAnnData.AnnID = _newAnnId;
-                        await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
-                        CreatedAnn = _currentAnnData;
-
-                        MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    catch (Exception ex) 
-                    {
-                        await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в БД");
-                        MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        DialogResult = DialogResult.None;
-                        return;
-                    }
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
-                }
-                catch (Exception ex)
-                {
-                    await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-                    MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    DialogResult = DialogResult.None;
-                }
-            }
-        }
+        }        
         private async Task SaveAllDataAsync()
         {
             try
             {
-                
-
                 await SaveListAsync(_normRaszList, TableNames.Rasz, TableNames.RaszId, _newAnnId);
                 await SaveListAsync(_normRaskList, TableNames.Rask, TableNames.RaskId, _newAnnId);
                 await SaveListAsync(_normKontList, TableNames.Kont, TableNames.KontId, _newAnnId);
@@ -962,44 +1050,6 @@ namespace SewingProduction.form
             }
         }
 
-        //private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId) where T : class, INewable, new()
-        //{
-        //    foreach (var item in list)
-        //    {
-        //        try
-        //        {
-        //            // Привязываем AnnId, если такое поле есть
-        //            PropertyInfo annIdProp = typeof(T).GetProperty("AnnId");
-        //            if (annIdProp != null)
-        //            {
-        //                annIdProp.SetValue(item, newAnnId);
-        //            }
-
-        //            PropertyInfo keyProp = typeof(T).GetProperty(keyFieldName);
-        //            if (keyProp == null)
-        //            {
-        //                throw new Exception($"Класс {typeof(T).Name} не содержит свойства {keyFieldName}.");
-        //            }
-        //            if (item.IsNew)
-        //            {
-        //                // Новая запись — вставляем
-        //                var newId = await _artNormService.InsertEntityAsync(tableName, keyFieldName, item);
-        //                keyProp.SetValue(item, newId);
-
-        //                item.IsNew = false; // После успешной вставки флаг сбрасываем
-        //            }
-        //            else
-        //            {
-        //                // Существующая запись — обновляем
-        //                await _artNormService.UpdateEntityAsync(tableName, keyFieldName, item);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            await _logger.LogErrorAsync(ex, $"Ошибка при сохранении записи {typeof(T).Name}");
-        //        }
-        //    }
-        //}
 
         private T CloneItem<T>(T source) where T : new()
         {
@@ -1141,5 +1191,39 @@ namespace SewingProduction.form
             }
         }
 
+
+        private bool ValidateForm()
+        {
+            bool isValid = true;
+            statusLabel.Text = ""; // Очищаем статус
+            errorProvider1.Clear(); // Очищаем все старые ошибки
+
+            // Проверка поля Артикул
+            if (string.IsNullOrWhiteSpace(nameTextBox.Text))
+            {
+                errorProvider1.SetError(nameTextBox, "Введите артикул.");
+                if (isValid)
+                    statusLabel.Text = "Ошибка: Поле 'Артикул' обязательно для заполнения.";
+                isValid = false;
+            }
+
+            // Проверка поля Модель или Группа
+            if (string.IsNullOrWhiteSpace(groupTextBox.Text) && string.IsNullOrWhiteSpace(modelTextBox.Text))
+            {
+                errorProvider1.SetError(groupTextBox, "Заполните либо 'Модель', либо 'Группу'.");
+                errorProvider1.SetError(modelTextBox, "Заполните либо 'Модель', либо 'Группу'.");
+                if (isValid)
+                    statusLabel.Text = "Ошибка: Заполните либо 'Модель', либо 'Группу'.";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+        private async Task ShowStatusMessage(string message, int delayMs = 3000)
+        {
+            statusLabel.Text = message;
+            await Task.Delay(delayMs);
+            statusLabel.Text = "";
+        }
     }
 }

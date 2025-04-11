@@ -415,8 +415,6 @@
     <Compile Include="form\TeamWork\Helpers\DbHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\GridHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\SplashScreenHelper.cs" />
-    <Compile Include="form\TeamWork\Interfaces\IAnnManager.cs" />
-    <Compile Include="form\TeamWork\Interfaces\IArtNormController.cs" />
     <Compile Include="form\TeamWork\Interfaces\ILogger.cs" />
     <Compile Include="form\TeamWork\Interfaces\INormRaskrManager.cs" />
     <Compile Include="form\TeamWork\Interfaces\INormRaszManager.cs" />

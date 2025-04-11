@@ -100,7 +100,7 @@ namespace SewingProduction.Models
         public bool preArch { get; set; }
         [NotMapped]
         public string StatusText { get; set; }
-        [NotMapped]
+   //     [NotMapped]
         public bool Arh { get; set; }
 
         // Реализация INotifyPropertyChanged

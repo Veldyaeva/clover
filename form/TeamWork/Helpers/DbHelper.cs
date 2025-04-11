@@ -168,6 +168,20 @@ namespace SewingProduction.Helpers
             }
         }
 
+        public async Task ExecuteInTransactionAsync(Func<Task> operation)
+        {
+            await BeginTransactionAsync();
+            try
+            {
+                await operation.Invoke();
+                await CommitTransactionAsync();
+            }
+            catch
+            {
+                await RollbackTransactionAsync();
+                throw;
+            }
+        }
 
         #endregion
 
