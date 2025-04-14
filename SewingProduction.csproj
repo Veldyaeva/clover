@@ -67,6 +67,9 @@
     <Reference Include="Azure.Identity, Version=1.13.2.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.13.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.1.66\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.CodeParser.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -336,6 +339,7 @@
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
     <Compile Include="form\TeamWork\Enums\Status.cs" />
     <Compile Include="form\TeamWork\Enums\TableNames.cs" />
+    <Compile Include="form\TeamWork\Extensions\ControlExtensions.cs" />
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -363,6 +367,7 @@
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
     <Compile Include="form\TeamWork\Models\DapperMappings.cs" />
+    <Compile Include="form\TeamWork\Models\NZP.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

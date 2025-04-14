@@ -12,6 +12,8 @@ using SewingProduction.Models;
 using System.Xml;
 using DevExpress.XtraGrid.Columns;
 using System.Xml.Linq;
+using SewingProduction.Extensions;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace SewingProduction.Helpers
 {
@@ -29,35 +31,53 @@ namespace SewingProduction.Helpers
         {
             await Task.Run(() =>
             {
-                // Подготовка данных в фоновом потоке
-                var newData = data.Copy();
-
                 grid.Invoke((MethodInvoker)(() =>
                 {
-                    source.DataSource = newData;
+                    source.DataSource = data;
                     grid.DataSource = source;
                     grid.RefreshDataSource();
                 }));
             });
         }
 
-        public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
-        {
-            await Task.Run(() =>
-            {
-                source.DataSource = data;
-            });
+        //public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        source.DataSource = data;
+        //    });
 
-            if (source.CurrencyManager?.Current is Control control && control.InvokeRequired)
+        //    if (source.CurrencyManager?.Current is Control control && control.InvokeRequired)
+        //    {
+        //        control.Invoke((MethodInvoker)(() =>
+        //        {
+        //            source.ResetBindings(false);
+        //        }));
+        //    }
+        //    else
+        //    {
+        //        source.ResetBindings(false);
+        //    }
+        //}
+
+        public static async Task LoadListDataAsync<T>(GridControl grid, BindingSource source, List<T> dataList)
+        {
+            if (grid.InvokeRequired)
             {
-                control.Invoke((MethodInvoker)(() =>
+                // Мы не в UI-потоке → оборачиваем всё в Invoke
+                await grid.InvokeAsync(() =>
                 {
-                    source.ResetBindings(false);
-                }));
+                    source.DataSource = dataList;
+                    grid.DataSource = source;
+                    grid.RefreshDataSource();
+                });
             }
             else
             {
-                source.ResetBindings(false);
+                // Уже в UI-потоке
+                source.DataSource = dataList;
+                grid.DataSource = source;
+                grid.RefreshDataSource();
             }
         }
 

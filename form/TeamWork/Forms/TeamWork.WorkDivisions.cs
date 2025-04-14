@@ -9,6 +9,8 @@ using System.Windows.Forms;
 using System;
 using System.ComponentModel;
 using System.Linq;
+using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
+using Dapper;
 
 namespace SewingProduction.Forms
 {
@@ -76,23 +78,31 @@ namespace SewingProduction.Forms
             await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
-            await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetRelatedSpArt(annId));
-            UpdateNZPStatus();
+            // await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetNZPByKoddRtAsync(annId);//.GetRelatedSpArt(annId));
+            List<NZPByKoddRt> nzpData = await _artNormService.GetNZPByKoddRtAsync(annId);
+            await GridHelper.LoadListDataAsync(customGridControl5, sparticulBindingSource, nzpData);//await _artNormService.GetNZPByKoddRtAsync(annId));
+
+
+            GetNZPStatus(nzpData);
 
             // Сортируем каждую таблицу отдельно
             sortGridView(gridView1);
             sortGridView(gridView4);
             sortGridView(gridView3);
         }
-        private async void UpdateNZPStatus()
+        private async void GetNZPStatus(List<NZPByKoddRt> data)
         {
             try
             {
                 var view = customGridControl5.MainView as GridView;
                 if (view == null || view.FocusedRowHandle < 0) return;
+                var annIdList = data.Select(x => x.annId).Distinct().ToList();
 
-                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, view.FocusedRowHandle, "kolNZP", 0);
-                ButtonUnboundWd.Enabled = nzp <= 0;
+                int count = await _artNormService.GetPztRecordCountByAnnIdsAsync(annIdList);
+
+                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, view.FocusedRowHandle, "kolNZP", count);
+                
+                ButtonUnboundWd.Enabled = (nzp <= 0||count<=0);
 
             }
             catch (Exception ex)

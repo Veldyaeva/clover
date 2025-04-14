@@ -237,9 +237,9 @@ namespace SewingProduction.form
                 await this.InvokeAsync(() =>
                 {
                     // Подгружаем справочники в репозитории
-                    repositoryItemLookUpEdit1.DataSource = kod_proizv;
-                    repositoryItemLookUpEdit2.DataSource = podr_vyaz;
-                    repositoryItemLookUpEdit3.DataSource = oborud_shv;
+                    repositoryItemLookUpEdit_kod_proizv.DataSource = kod_proizv;
+                    repositoryItemLookUpEdit_podrVyaz.DataSource = podr_vyaz;
+                    repositoryItemLookUpEdit_oborudShv.DataSource = oborud_shv;
 
                     // Обновляем списки
                     _normRaszList.Clear();
@@ -1225,5 +1225,6 @@ namespace SewingProduction.form
             await Task.Delay(delayMs);
             statusLabel.Text = "";
         }
+
     }
 }
