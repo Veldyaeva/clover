@@ -36,6 +36,16 @@ namespace SewingProduction.Forms
         private BindingList<ArtNormN> _bindingList = new BindingList<ArtNormN>();
         private BindingSource _bindingSource = new BindingSource();
         private bool _hasUnsavedChanges = false;
+        private BindingSource _nzpByKoddRtSource = new BindingSource();
+        private BindingList<NZPByKoddRt> _nzpList = new BindingList<NZPByKoddRt>();
+        private BindingList<NormRasz> _normRaszListTW;
+        private BindingSource _normRaszBindingSourceTW;
+        private BindingList<NormRask> _normRaskListTW;
+        private BindingSource _normRaskBindingSourceTW;
+        private BindingList<NormKont> _normKontListTW;
+        private BindingSource _normKontBindingSourceTW;
+        private BindingList<NormDopObr> _normDopObrListTW;
+        private BindingSource _normDopObrBindingSourceTW;
 
 
         public TeamWork()
@@ -104,6 +114,8 @@ namespace SewingProduction.Forms
                 // Инициализируем привязки данных
                 _bindingSource.DataSource = _bindingList;
                 ANNgridControl.DataSource = _bindingSource;
+                _nzpByKoddRtSource.DataSource = _nzpList;
+                customGridControl5.DataSource = _nzpByKoddRtSource;
 
                 // Загружаем данные
                 await LoadWorkDivisions();
@@ -177,6 +189,15 @@ namespace SewingProduction.Forms
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
         {
             await ArchAndCopy();
+        }
+
+        /// <summary>
+        /// Обработчик кнопки "Отвязать артикул от РТ".
+        /// Удаляет связь между выбранным артикулом и разделением труда.
+        /// </summary>
+        private async void ResetButton_Click(object sender, EventArgs e)
+        {
+            await UnboundWD(sender, e);
         }
         private async void customCheckBox6_CheckedChanged(object sender, EventArgs e)
         {

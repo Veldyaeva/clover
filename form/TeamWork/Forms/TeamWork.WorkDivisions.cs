@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Linq;
 using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 using Dapper;
+using DevExpress.XtraEditors.Controls;
 
 namespace SewingProduction.Forms
 {
@@ -29,39 +30,35 @@ namespace SewingProduction.Forms
                 // Получаем данные
                 var data = await _artNormService.GetArtNormData();
 
-                if (data != null && data.Count > 0)
-                {
-                    // Отключаем обновление UI во время загрузки данных
-                    ANNgridControl.BeginUpdate();
-                    try
-                    {
-                        // Настраиваем отображение GridView
-                        ANNgridView.OptionsView.EnableAppearanceEvenRow = true;
-                        ANNgridView.OptionsView.EnableAppearanceOddRow = true;
-                        ANNgridView.OptionsView.ShowAutoFilterRow = true;
-                        ANNgridView.OptionsView.ShowGroupPanel = false;
-                        ANNgridView.OptionsView.ShowIndicator = false;
-                        ANNgridView.OptionsView.ShowPreview = false;
-
-                        _bindingList = new BindingList<ArtNormN>(data);
-                        _bindingSource.DataSource = _bindingList;
-
-                        // Обновляем источник данных
-                        _bindingSource.ResetBindings(false);
-
-                        // Применяем фильтры
-                        filterTable();
-                    }
-                    finally
-                    {
-                        // Включаем обновление UI
-                        ANNgridControl.EndUpdate();
-                    }
-                }
-                else
+                if (data == null || data.Count == 0)
                 {
                     MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
+                // Отключаем обновление UI во время загрузки данных
+                ANNgridControl.BeginUpdate();
+                // Настраиваем отображение GridView
+                ANNgridView.OptionsView.EnableAppearanceEvenRow = true;
+                ANNgridView.OptionsView.EnableAppearanceOddRow = true;
+                ANNgridView.OptionsView.ShowAutoFilterRow = true;
+                ANNgridView.OptionsView.ShowGroupPanel = false;
+                ANNgridView.OptionsView.ShowIndicator = false;
+                ANNgridView.OptionsView.ShowPreview = false;
+
+                _bindingList = new BindingList<ArtNormN>(data);
+                _bindingSource.DataSource = _bindingList;
+
+                // Обновляем источник данных
+                _bindingSource.ResetBindings(false);
+
+                // Применяем фильтры
+                filterTable();
+                // Включаем обновление UI
+                ANNgridControl.EndUpdate();
+                Task bindingsTask = InitializeBindingsAsync();
+
+                
+
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
@@ -70,19 +67,76 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
             }
         }
+        private async Task InitializeBindingsAsync()
+        {
+            try
+            {
+                var normRaszTask = Task.Run(() =>
+                {
+                    _normRaszListTW = new BindingList<NormRasz>();
+                    _normRaszBindingSourceTW = new BindingSource { DataSource = _normRaszListTW };
+                });
+                var normRaskTask = Task.Run(() =>
+                {
+                    _normRaskListTW = new BindingList<NormRask>();
+                    _normRaskBindingSourceTW = new BindingSource { DataSource = _normRaskListTW };
+                });
+                var normKontTask = Task.Run(() =>
+                {
+                    _normKontListTW = new BindingList<NormKont>();
+                    _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
+                });
+                var normDopObrTask = Task.Run(() =>
+                {
+                    _normDopObrListTW = new BindingList<NormDopObr>();
+                    _normDopObrBindingSourceTW = new BindingSource { DataSource = _normDopObrListTW };
+                });
+                var annTask = Task.Run(() =>
+                {
+                    _nzpList = new BindingList<NZPByKoddRt>();
+                    _bindingSource = new BindingSource { DataSource = _bindingList };
+                });
+                var nzpByKoddRtTask = Task.Run(() =>
+                {
+                    _nzpByKoddRtSource = new BindingSource();
+                });
+
+                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask, normDopObrTask, nzpByKoddRtTask);
+
+                gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
+                gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
+                gridControlKontTW.DataSource = _normKontBindingSourceTW;
+                gridControlDopObrTW.DataSource = _normDopObrBindingSourceTW;
+
+                //nameTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+                //groupTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Group), true, DataSourceUpdateMode.OnPropertyChanged);
+                //modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
+                //secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
+
+                designerTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
+                constructorTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                throw;
+            }
+        }
 
 
         private async Task LoadRelatedData(int annId)
         {
-            await GridHelper.LoadGridControlDataAsync(statusLabel, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl3, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl4, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
-            await GridHelper.LoadGridControlDataAsync(gridControl5, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
-            // await GridHelper.LoadGridControlDataAsync(customGridControl5, sparticulBindingSource, await _artNormService.GetNZPByKoddRtAsync(annId);//.GetRelatedSpArt(annId));
-            List<NZPByKoddRt> nzpData = await _artNormService.GetNZPByKoddRtAsync(annId);
-            await GridHelper.LoadListDataAsync(customGridControl5, sparticulBindingSource, nzpData);//await _artNormService.GetNZPByKoddRtAsync(annId));
+            await GridHelper.LoadListDataAsync(gridControlRaszTW, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+            await GridHelper.LoadListDataAsync(gridControlRaskrTW, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
+            await GridHelper.LoadListDataAsync(gridControlKontTW, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
+            await GridHelper.LoadListDataAsync(gridControlDopObrTW, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
 
-
+            List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);//GetNZPByKoddRtAsync(annId);
+            await GridHelper.LoadListDataAsync(customGridControl5, sparticulBindingSource, nzpData);
+            _nzpByKoddRtSource.DataSource = nzpData;
+            _nzpByKoddRtSource.ResetBindings(false);
+            customGridControl5.DataSource = _nzpByKoddRtSource;
+            customGridControl5.RefreshDataSource();
             GetNZPStatus(nzpData);
 
             // Сортируем каждую таблицу отдельно
@@ -90,20 +144,23 @@ namespace SewingProduction.Forms
             sortGridView(gridView4);
             sortGridView(gridView3);
         }
+
         private async void GetNZPStatus(List<NZPByKoddRt> data)
         {
             try
             {
-                var view = customGridControl5.MainView as GridView;
-                if (view == null || view.FocusedRowHandle < 0) return;
-                var annIdList = data.Select(x => x.annId).Distinct().ToList();
+                var selectedRow = _nzpByKoddRtSource.Current as NZPByKoddRt;
+                if (selectedRow == null)
+                {
+                    ButtonUnboundWd.Enabled = false;
+                    return;
+                }
 
-                int count = await _artNormService.GetPztRecordCountByAnnIdsAsync(annIdList);
+                int nzp = selectedRow.kolNZP;
+                int pzt = selectedRow.PZTCount;
 
-                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, view.FocusedRowHandle, "kolNZP", count);
-                
-                ButtonUnboundWd.Enabled = (nzp <= 0||count<=0);
-
+                // Кнопка активна, если либо нет НЗП, либо нет операций
+                ButtonUnboundWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
@@ -402,6 +459,7 @@ namespace SewingProduction.Forms
                 newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
                 newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
                 newRecord.Arh = false;
+                newRecord.ParentId = sourceRecord.AnnID;
                 newRecord.AnnID = 0; // чтобы при вставке база сама назначила ID
 
                 _bindingList.Add(newRecord);
@@ -423,6 +481,46 @@ namespace SewingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Обработчик кнопки "Отвязать артикул от РТ".
+        /// Удаляет связь между выбранным артикулом и разделением труда.
+        /// </summary>
+        private async Task UnboundWD(object sender, EventArgs e)
+        {
+            try
+            {
+                var view = customGridControl5.MainView as GridView;
+                if (view == null) return;
+
+                var selectedRow = _nzpByKoddRtSource.Current as NZPByKoddRt;
+                if (selectedRow == null)
+                {
+                    MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int kod = selectedRow.kodd_rt;
+                int annId = selectedRow.annId;
+
+                // Вызов метода для отвязки артикула
+                await _artNormService.ResetAnnIdinArticul(kod);
+                await _artNormService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annId);
+
+                // Обновление данных в таблице после отвязки
+                _nzpByKoddRtSource.RemoveCurrent();
+                _nzpByKoddRtSource.ResetBindings(false);
+                customGridControl5.RefreshDataSource();
+                MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                await _logger.LogEventAsync($"Артикул отвязан от РТ", "ResetBtnClick");
+
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при отвязке артикула от РТ");
+                MessageBox.Show($"Ошибка при отвязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void sortGridView(GridView gridView)
         {

@@ -12,9 +12,9 @@ namespace SewingProduction.Models
         [Column("annId")]
         public int annId { get; set; }
         [Column("kodd_rt")]
-        public string kodd_rt { get; set; }
+        public int kodd_rt { get; set; }
         [Column("kodd")]
-        public string kodd { get; set; }
+        public int kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
         [Column("articul")]
@@ -27,13 +27,7 @@ namespace SewingProduction.Models
         public int kolNaklAll { get; set; }
         public int kolGI { get; set; }
         public int kolNZP { get; set; }
-        [NotMapped]
+        [Column("PztCount")]
         public int PZTCount { get; set; } 
-    }
-
-    public class PztCountResult
-    {
-        public string KoddRt { get; set; }
-        public int PztCount { get; set; }
     }
 }

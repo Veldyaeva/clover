@@ -27,7 +27,7 @@ namespace SewingProduction.Helpers
         /// <param name="grid">GridControl, в который загружаются данные</param>
         /// <param name="source">BindingSource для привязки данных</param>
         /// <param name="data">DataTable с данными</param>
-        public static async Task LoadGridControlDataAsync(GridControl grid, BindingSource source, DataTable data)
+        public static async Task LoadGridControlDataAsync<T>(GridControl grid, BindingSource source, List<T> data)
         {
             await Task.Run(() =>
             {

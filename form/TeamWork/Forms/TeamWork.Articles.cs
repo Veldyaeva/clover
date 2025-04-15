@@ -38,7 +38,7 @@ namespace SewingProduction.Forms
             try
             {
                 // Fetch unbound articles
-                DataTable relatedData = await _artNormService.GetRelatedSpArt(0);
+                DataTable relatedData = await _artNormService.GetRelatedSpArt();
                 await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
 
                 if (relatedData != null && relatedData.Rows.Count > 0)
@@ -213,8 +213,7 @@ namespace SewingProduction.Forms
             {
                 annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
             }
-            DataTable relatedRasz = new DataTable();
-            relatedRasz = await _artNormService.GetRelatedNormRasz(annId);
+            var relatedRasz = await _artNormService.GetRelatedNormRasz(annId);
             normraszBindingSource1.DataSource = relatedRasz;
             customGridControl3.DataSource = normraszBindingSource1;
         }
@@ -245,7 +244,7 @@ namespace SewingProduction.Forms
 
         private async Task bindArticulToNewRow(int selectedAnnId, int newId)
         {
-            var oldRaszList = await _artNormService.GetNormRaszList(selectedAnnId);
+            var oldRaszList = await _artNormService.GetRelatedNormRasz(selectedAnnId);
             //           await _artNormService.UpdateAnnId("norm_rasz", selectedAnnId.AnnID, "annId", newId.AnnID);
             foreach (var rasz in oldRaszList)
             {
@@ -464,53 +463,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        /// <summary>
-        /// Обработчик кнопки "Отвязать артикул от РТ".
-        /// Удаляет связь между выбранным артикулом и разделением труда.
-        /// </summary>
-        private async void ResetButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                var view = customGridControl5.MainView as GridView;
-                if (view != null)
-                {
-                    int[] selectedRows = view.GetSelectedRows();
-                    if (selectedRows.Length > 0)
-                    {
-                        int kod = Convert.ToInt32(view.GetRowCellValue(selectedRows[0], "kodd_rt"));
-
-                        try
-                        {
-                            // Вызов метода для отвязки артикула
-                            await _artNormService.ResetAnnIdinArticul(kod);
-
-                            // Обновление данных в таблице после отвязки
-                            view.DeleteRow(selectedRows[0]);
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Ошибка отвязки от РТ", ex.Message);
-                            await _logger.LogErrorAsync(ex, "Ошибка отвязки от РТ " + ex.Message);
-                        }
-                        finally
-                        {
-                            MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            await _logger.LogEventAsync($"Артикул отвязан от РТ", "ResetBtnClick");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при отвязке артикула от РТ");
-                MessageBox.Show($"Ошибка при отвязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
         private void SearchArticlesButton_Click(object sender, EventArgs e)

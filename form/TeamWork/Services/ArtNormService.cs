@@ -10,6 +10,7 @@ using Z.Dapper;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 using Dapper;
+using DevExpress.Mvvm.Native;
 
 namespace SewingProduction.Services
 {
@@ -487,49 +488,14 @@ namespace SewingProduction.Services
         /// <summary>
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
-        /// <param name="kodd_rt"></param>
+        /// <param name="kodd"></param>
         /// <returns></returns>
-        public async Task ResetAnnIdinArticul(int kodd_rt)
+        public async Task ResetAnnIdinArticul(int kodd)
         {
-            // string query = "UPDATE sp_articul SET annId = NULL WHERE kod = @kod";
-            string query = "UPDATE sp_articul SET annId = NULL WHERE kod IN (SELECT kod FROM view_sp_articul WHERE kodd_rt = @kod)";
-            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kodd_rt } });
+            string query = "UPDATE sp_articul SET annId = NULL WHERE left(kod,7) = @kod";
+            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kodd } });
         }
 
-        /// <summary>
-        /// Получение связанных данных из sp_articul
-        /// </summary>
-        /// <param name="annId">annId=null=> загрузка неувязанных артикулов
-        /// annId!=null => загрузка артикулов с НЗП процедурой GetNZPByKoddRT 
-        /// </param>
-        /// <returns></returns>
-        public async Task<DataTable> GetRelatedSpArt(int annId)
-        {
-            string query = annId == 0
-            ? "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL" 
-            : "EXEC dbo.GetNZPByKoddRT @annId";
-
-            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
-            return (DataTable)result;
-        }
-
-        /// <summary>
-        /// Получает список NZP по AnnId
-        /// </summary>
-        /// <param name="annId">Идентификатор изделия (AnnId).</param>
-        /// <returns>Список записей из таблицы plan_zagr_two.</returns>
-        public async Task<List<NZPByKoddRt>> GetNZPByKoddRtAsync(int annId)
-        {
-            using (var connection = _dbHelper.GetConnection())
-            {
-                var results = await connection.QueryAsync<NZPByKoddRt>(
-                    "dbo.GetNZPByKoddRT",
-                    new { xAnnID = annId },
-                    commandType: CommandType.StoredProcedure);
-                return results.ToList();
-            }
-            
-        }
 
 
         public async Task<int> GetPztRecordCountByAnnIdsAsync(List<int> annIdList)
@@ -724,35 +690,35 @@ namespace SewingProduction.Services
             return string.Empty;
         }
 
-        /// <summary>
-        /// Получает список объектов NormRasz для указанного annId
-        /// </summary>
-        /// <param name="annId">Идентификатор разделения труда</param>
-        /// <returns>Список объектов NormRasz</returns>
-        public async Task<List<NormRasz>> GetNormRaszList(int annId)
-        {
-            DataTable table = await GetRelatedNormRasz(annId);
-            List<NormRasz> result = new List<NormRasz>();
+        ///// <summary>
+        ///// Получает список объектов NormRasz для указанного annId
+        ///// </summary>
+        ///// <param name="annId">Идентификатор разделения труда</param>
+        ///// <returns>Список объектов NormRasz</returns>
+        //public async Task<List<NormRasz>> GetNormRaszList(int annId)
+        //{
+        //    DataTable table = await GetRelatedNormRasz(annId);
+        //    List<NormRasz> result = new List<NormRasz>();
 
-            foreach (DataRow row in table.Rows)
-            {
-                NormRasz item = new NormRasz
-                {
-                    AnnId = Convert.ToInt32(row["annId"]),
-                    N = row["n"] != DBNull.Value ? Convert.ToInt32(row["n"]) : 0,
-                    N1 = row["n1"] != DBNull.Value ? Convert.ToInt32(row["n1"]) : 0,
-                    Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
-                    Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
-                    Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0,
-                    Kod = row["kod"] != DBNull.Value ? Convert.ToInt32(row["kod"]) : 0,
-                    Kod_o = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["kod_o"]) : 0,
-                    Kod_ob = row["kod_ob"] != DBNull.Value ? Convert.ToInt32(row["kod_ob"]) : 0
-                };
-                result.Add(item);
-            }
+        //    foreach (DataRow row in table.Rows)
+        //    {
+        //        NormRasz item = new NormRasz
+        //        {
+        //            AnnId = Convert.ToInt32(row["annId"]),
+        //            N = row["n"] != DBNull.Value ? Convert.ToInt32(row["n"]) : 0,
+        //            N1 = row["n1"] != DBNull.Value ? Convert.ToInt32(row["n1"]) : 0,
+        //            Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
+        //            Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
+        //            Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0,
+        //            Kod = row["kod"] != DBNull.Value ? Convert.ToInt32(row["kod"]) : 0,
+        //            Kod_o = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["kod_o"]) : 0,
+        //            Kod_ob = row["kod_ob"] != DBNull.Value ? Convert.ToInt32(row["kod_ob"]) : 0
+        //        };
+        //        result.Add(item);
+        //    }
 
-            return result;
-        }
+        //    return result;
+        //}
 
         #endregion
 
@@ -763,11 +729,15 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-        public Task<DataTable> GetRelatedNormRasz(int annId)
+        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
         {
-            string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, kod_podr as KodPodr, kod_proizv as KodProizv, Seb, Spec, Obor, nrId FROM norm_rasz WHERE annId = @annId";
-            //string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, kod_podr as KodPodr, kod_proizv as KodProizv, Seb, Spec, Obor, nrId FROM norm_rasz WHERE annId = @annId";
+                //string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
+                var result = await connection.QueryAsync<NormRasz>(query, new Dictionary<string, object> { { "@annId", annId } });
+                return result.ToList();
+            }
         }
         public DataTable GetRelatedNormRasz1(int annId)
         {
@@ -777,22 +747,82 @@ namespace SewingProduction.Services
             //.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
-        public Task<DataTable> GetRelatedNormRask(int annId)
+        public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
-            string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd as Razryad, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } });
+                return result.ToList();
+            }
         }
 
-        public Task<DataTable> GetRelatedNormKont(int annId)
+        public async Task<List<NormKont>> GetRelatedNormKont(int annId)
         {
-            string query = "SELECT AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_kont WHERE annId = @annId";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string query = "SELECT AnnId, kod_o as KodO, Text, razryd as Razryad, Sek FROM norm_kont WHERE annId = @annId";
+                //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
+                return result.ToList();
+            }
         }
 
-        public Task<DataTable> GetRelatedNormDopObr(int annId)
+        public async Task<List<NormDopObr>> GetRelatedNormDopObr(int annId)
         {
-            string query = "SELECT AnnId, sek_p as SekP, sek_p_tamp as SekTamp, sek_v as SekV, sek_stra as SekStra FROM norm_dop_obr WHERE annId = @annId";
-            return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string query = "SELECT AnnId, sek_p as SekP, sek_p_tamp as SekTamp, sek_v as SekV, sek_stra as SekStra FROM norm_dop_obr WHERE annId = @annId";
+                // return //_dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                var result = await connection.QueryAsync<NormDopObr>(query, new Dictionary<string, object> { { "@annId", annId } }); 
+                return result.ToList();
+            }
+        }
+        /// <summary>
+        /// Получение неувязанных артикулов из sp_articul
+        /// </summary>
+        /// <returns></returns>
+        public async Task<DataTable> GetRelatedSpArt()
+        {
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+
+            object result = await _dbHelper.ExecuteQueryAsync(query);
+            return (DataTable)result;
+        }
+        /// <summary>
+        /// Получает список NZP и количество назначенных операций по AnnId
+        /// </summary>
+        /// <param name="annId">Идентификатор изделия (AnnId)</param>
+        /// <returns>Список записей из таблицы plan_zagr_two</returns>
+        public async Task<List<NZPByKoddRt>> GetNZPByKoddRtAsync(int annId)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var results = await connection.QueryAsync<NZPByKoddRt>(
+                    "dbo.GetNZPAndOperByKoddRT",
+                    new { xAnnID = annId },
+                    commandType: CommandType.StoredProcedure);
+                return results.ToList();
+            }
+        }
+        public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
+        {
+            var nzpList = (await _dbHelper.GetConnection()
+                .QueryAsync<NZPByKoddRt>("EXEC dbo.GetNZPByKoddRT @xAnnID", new { xAnnID = annId }))
+                .ToList();
+
+            var pztCounts = (await _dbHelper.GetConnection()
+                .QueryAsync<(string kod, int PztCount)>("EXEC dbo.GetPztCountsByKoddRT @xAnnID", new { xAnnID = annId }))
+                .ToDictionary(x => x.kod, x => x.PztCount);
+
+            // Объединение
+            foreach (var row in nzpList)
+            {
+                if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                    row.PZTCount = count;
+            }
+
+            return nzpList;
         }
 
         public Task<DataTable> GetRelDesigner()

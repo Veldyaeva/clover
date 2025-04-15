@@ -230,9 +230,9 @@ namespace SewingProduction.form
 
                 await Task.WhenAll(raszTask, raskTask, kontTask, dopObrTask, annDataTask);
 
-                DataTable kod_proizv = await _artNormService.GetKod_proizv();
-                DataTable podr_vyaz = await _artNormService.GetPodr_vyaz();
-                DataTable oborud_shv = await _artNormService.GetOborud_shv();
+                var kod_proizv = await _artNormService.GetKod_proizv();
+                var podr_vyaz = await _artNormService.GetPodr_vyaz();
+                var oborud_shv = await _artNormService.GetOborud_shv();
 
                 await this.InvokeAsync(() =>
                 {
@@ -247,14 +247,10 @@ namespace SewingProduction.form
                     _normKontList.Clear();
                     _normDopObrList.Clear();
 
-                    var raszList = ConvertDataTable<NormRasz>(raszTask.Result);
-                    var raskList = ConvertDataTable<NormRask>(raskTask.Result);
-                    var kontList = ConvertDataTable<NormKont>(kontTask.Result);
-                    var dopObrList = ConvertDataTable<NormDopObr>(dopObrTask.Result);
-
                     bool isCopyOrBuffer = _mode == (int)Mode.ArchAndCopy || caller == "buffer";
-                    LoadList(raszList, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
-                    LoadList(raskList, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
+
+                    LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
+                    LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
                     //LoadList(kontList, _normKontList, nameof(NormKont.kontId), isCopyOrBuffer);
                     //LoadList(dopObrList, _normDopObrList, nameof(NormDopObr.dopObrId), isCopyOrBuffer);
 

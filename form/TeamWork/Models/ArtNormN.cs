@@ -102,6 +102,8 @@ namespace SewingProduction.Models
         public string StatusText { get; set; }
    //     [NotMapped]
         public bool Arh { get; set; }
+        [Column("parentId")]
+        public int ParentId { get; set; }
 
         // Реализация INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
