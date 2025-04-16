@@ -43,5 +43,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
     </Setting>
+    <Setting Name="NormRaskrNew_GridSettings" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

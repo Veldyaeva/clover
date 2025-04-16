@@ -32,627 +32,472 @@ namespace SewingProduction.form
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.rasz = new SewingProduction.CustomButton();
-            this.customButton2 = new SewingProduction.CustomButton();
-            this.dateCreate = new System.Windows.Forms.DateTimePicker();
-            this.btnOK = new SewingProduction.CustomButton();
-            this.buffer = new SewingProduction.CustomButton();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.gridControl5 = new DevExpress.XtraGrid.GridControl();
-            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod_podr1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod_proizv1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod_ob1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.gridControl3 = new DevExpress.XtraGrid.GridControl();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlDopObr = new DevExpress.XtraGrid.GridControl();
+            this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.gridViewDopObr = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlKont = new DevExpress.XtraGrid.GridControl();
+            this.gridViewKont = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colseb = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln_ch1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControl4 = new DevExpress.XtraGrid.GridControl();
-            this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn26 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn27 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlRaskr = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRaskr = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.customLabel1 = new SewingProduction.CustomLabel();
             this.customLabel2 = new SewingProduction.CustomLabel();
             this.constructorComboBox = new SewingProduction.CustomComboBox();
+            this.constructorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.designerComboBox = new SewingProduction.CustomComboBox();
-            this.label4 = new SewingProduction.CustomLabel();
-            this.SecTimeTextBox = new SewingProduction.CustomTextBox();
-            this.label2 = new SewingProduction.CustomLabel();
-            this.ModelTextBox = new SewingProduction.CustomTextBox();
-            this.label3 = new SewingProduction.CustomLabel();
-            this.NameTextBox = new SewingProduction.CustomTextBox();
+            this.designerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.modelTextBox = new SewingProduction.CustomTextBox();
+            this.nameTextBox = new SewingProduction.CustomTextBox();
             this.label5 = new SewingProduction.CustomLabel();
             this.dateCreate = new System.Windows.Forms.DateTimePicker();
             this.btnOK = new SewingProduction.CustomButton();
             this.buffer = new SewingProduction.CustomButton();
+            this.label4 = new SewingProduction.CustomLabel();
+            this.secTimeTextBox = new SewingProduction.CustomTextBox();
+            this.groupTextBox = new SewingProduction.CustomTextBox();
+            this.customLabel3 = new SewingProduction.CustomLabel();
+            this.label3 = new SewingProduction.CustomLabel();
+            this.label2 = new SewingProduction.CustomLabel();
+            this.customLabel1 = new SewingProduction.CustomLabel();
+            this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Kod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Kod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_oborudShv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.statusLabel = new SewingProduction.CustomLabel();
+            this.rasz = new SewingProduction.CustomButton();
+            this.customButton2 = new SewingProduction.CustomButton();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.customLabel3 = new SewingProduction.CustomLabel();
-            this.groupTextBox = new SewingProduction.CustomTextBox();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDopObr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.splitContainer1, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.gridControlDopObr, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.gridControlKont, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.gridControlRaskr, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.gridControlRasz, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.statusLabel, 0, 5);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.74344F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.25656F));
+            this.tableLayoutPanel2.RowCount = 6;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.19303F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 63.80697F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 240F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 123F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1305, 686);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1319, 864);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 111);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.gridControl5);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.AutoScroll = true;
-            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1299, 572);
-            this.splitContainer1.SplitterDistance = 309;
-            this.splitContainer1.TabIndex = 10;
-            // 
-            // gridControl5
-            // 
-            this.gridControl5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl5.Location = new System.Drawing.Point(0, 0);
-            this.gridControl5.MainView = this.gridView5;
-            this.gridControl5.Name = "gridControl5";
-            this.gridControl5.Size = new System.Drawing.Size(1299, 309);
-            this.gridControl5.TabIndex = 7;
-            this.gridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView5});
-            // 
-            // gridView5
-            // 
-            this.gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn2,
-            this.gridColumn34,
-            this.gridColumn30,
-            this.gridColumn31,
-            this.gridColumn32,
-            this.gridColumn33,
-            this.gridColumn35,
-            this.gridColumn36,
-            this.gridColumn33,
-            this.gridColumn32,
-            this.gridColumn37,
-            this.colspec2,
-            this.gridColumn30,
-            this.gridColumn31,
-            this.gridColumn38,
-            this.colkod_podr1,
-            this.colkod_proizv1,
-            this.colspec2,
-            this.colkod_ob1});
-            this.gridView5.GridControl = this.gridControl5;
-            this.gridView5.Name = "gridView5";
-            this.gridView5.NewItemRowText = "добавить";
-            this.gridView5.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
-            this.gridView5.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gridView5.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView5.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            //this.gridView5.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridView5_EditFormHidden);
-            //this.gridView5.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridView5_InitNewRow);
-            // 
-            // gridColumn2
-            // 
-            this.gridColumn2.Caption = "nrId";
-            this.gridColumn2.FieldName = "nrId";
-            this.gridColumn2.Name = "gridColumn2";
-            // 
-            // gridColumn34
-            // 
-            this.gridColumn34.Caption = "annId";
-            this.gridColumn34.FieldName = "annId";
-            this.gridColumn34.Name = "gridColumn34";
-            // 
-            // gridColumn30
-            // 
-            this.gridColumn30.Caption = "kod";
-            this.gridColumn30.FieldName = "kod";
-            this.gridColumn30.Name = "gridColumn30";
-            this.gridColumn30.Visible = true;
-            this.gridColumn30.VisibleIndex = 1;
-            // 
-            // gridColumn31
-            // 
-            this.gridColumn31.FieldName = "kod_o";
-            this.gridColumn31.Name = "gridColumn31";
-            this.gridColumn31.Visible = true;
-            this.gridColumn31.VisibleIndex = 2;
-            // 
-            // gridColumn32
-            // 
-            this.gridColumn32.Caption = "Наименование операции пошива";
-            this.gridColumn32.FieldName = "text";
-            this.gridColumn32.Name = "gridColumn32";
-            this.gridColumn32.Visible = true;
-            this.gridColumn32.VisibleIndex = 4;
-            // 
-            // gridColumn33
-            // 
-            this.gridColumn33.Caption = "разряд";
-            this.gridColumn33.FieldName = "razryd";
-            this.gridColumn33.Name = "gridColumn33";
-            this.gridColumn33.Visible = true;
-            this.gridColumn33.VisibleIndex = 3;
-            // 
-            // gridColumn34
-            // 
-            this.gridColumn34.Caption = "annId";
-            this.gridColumn34.FieldName = "annId";
-            this.gridColumn34.Name = "gridColumn34";
-            this.gridColumn34.Visible = true;
-            this.gridColumn34.VisibleIndex = 5;
-            // 
-            // gridColumn35
-            // 
-            this.gridColumn35.Caption = "№ оп.";
-            this.gridColumn35.FieldName = "n";
-            this.gridColumn35.Name = "gridColumn35";
-            this.gridColumn35.Visible = true;
-            this.gridColumn35.VisibleIndex = 1;
-            // 
-            // gridColumn36
-            // 
-            this.gridColumn36.Caption = "№п/оп.";
-            this.gridColumn36.FieldName = "n1";
-            this.gridColumn36.Name = "gridColumn36";
-            this.gridColumn36.Visible = true;
-            this.gridColumn36.VisibleIndex = 2;
-            // 
-            // gridColumn37
-            // 
-            this.gridColumn37.Caption = "сек.";
-            this.gridColumn37.FieldName = "sek";
-            this.gridColumn37.Name = "gridColumn37";
-            this.gridColumn37.Visible = true;
-            this.gridColumn37.VisibleIndex = 5;
-            // 
-            // gridColumn38
-            // 
-            this.gridColumn38.Caption = "оборудование";
-            this.gridColumn38.FieldName = "obor";
-            this.gridColumn38.Name = "gridColumn38";
-            this.gridColumn38.Visible = true;
-            this.gridColumn38.VisibleIndex = 8;
-            // 
-            // colkod_podr1
-            // 
-            this.colkod_podr1.FieldName = "kod_podr";
-            this.colkod_podr1.Name = "colkod_podr1";
-            this.colkod_podr1.Visible = true;
-            this.colkod_podr1.VisibleIndex = 10;
-            // 
-            // colkod_proizv1
-            // 
-            this.colkod_proizv1.FieldName = "kod_proizv";
-            this.colkod_proizv1.Name = "colkod_proizv1";
-            this.colkod_proizv1.Visible = true;
-            this.colkod_proizv1.VisibleIndex = 11;
-            // 
-            // colspec2
-            // 
-            this.colspec2.Caption = "спец-ть";
-            this.colspec2.FieldName = "spec";
-            this.colspec2.Name = "colspec2";
-            this.colspec2.Visible = true;
-            this.colspec2.VisibleIndex = 6;
-            // 
-            // colkod_ob1
-            // 
-            this.colkod_ob1.FieldName = "kod_ob";
-            this.colkod_ob1.Name = "colkod_ob1";
-            this.colkod_ob1.Visible = true;
-            this.colkod_ob1.VisibleIndex = 13;
-            // 
-            // splitContainer2
-            // 
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer2.Panel1
-            // 
-            this.splitContainer2.Panel1.Controls.Add(this.gridControl2);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
-            this.splitContainer2.Size = new System.Drawing.Size(1299, 259);
-            this.splitContainer2.SplitterDistance = 153;
-            this.splitContainer2.TabIndex = 0;
-            // 
-            // gridControl2
-            // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(0, 0);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(1299, 153);
-            this.gridControl2.TabIndex = 7;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
-            // 
-            // gridView2
-            // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn9,
-            this.colkod1,
-            this.gridColumn10,
-            this.gridColumn11,
-            this.gridColumn12,
-            this.coln_ch,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.colannId1,
-            this.gridColumn15,
-            this.gridColumn16,
-            this.colspec});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView2.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView2.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn9
-            // 
-            this.gridColumn9.FieldName = "id";
-            this.gridColumn9.Name = "gridColumn9";
-            this.gridColumn9.Visible = true;
-            this.gridColumn9.VisibleIndex = 0;
-            // 
-            // colkod1
-            // 
-            this.colkod1.FieldName = "kod";
-            this.colkod1.Name = "colkod1";
-            this.colkod1.Visible = true;
-            this.colkod1.VisibleIndex = 1;
-            // 
-            // gridColumn10
-            // 
-            this.gridColumn10.FieldName = "kod_o";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 2;
-            // 
-            // gridColumn11
-            // 
-            this.gridColumn11.FieldName = "text";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 3;
-            // 
-            // gridColumn12
-            // 
-            this.gridColumn12.FieldName = "n";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 4;
-            // 
-            // coln_ch
-            // 
-            this.coln_ch.FieldName = "n_ch";
-            this.coln_ch.Name = "coln_ch";
-            this.coln_ch.Visible = true;
-            this.coln_ch.VisibleIndex = 5;
-            // 
-            // gridColumn13
-            // 
-            this.gridColumn13.FieldName = "n1";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 6;
-            // 
-            // gridColumn14
-            // 
-            this.gridColumn14.FieldName = "razryd";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 7;
-            // 
-            // colannId1
-            // 
-            this.colannId1.FieldName = "annId";
-            this.colannId1.Name = "colannId1";
-            this.colannId1.Visible = true;
-            this.colannId1.VisibleIndex = 8;
-            // 
-            // gridColumn15
-            // 
-            this.gridColumn15.FieldName = "sek";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 9;
-            // 
-            // gridColumn16
-            // 
-            this.gridColumn16.FieldName = "obor";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 10;
-            // 
-            // colspec
-            // 
-            this.colspec.FieldName = "spec";
-            this.colspec.Name = "colspec";
-            this.colspec.Visible = true;
-            this.colspec.VisibleIndex = 11;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.gridControl3);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.gridControl4);
-            this.splitContainer3.Size = new System.Drawing.Size(1299, 102);
-            this.splitContainer3.SplitterDistance = 47;
-            this.splitContainer3.TabIndex = 0;
-            // 
-            // gridControl3
-            // 
-            this.gridControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl3.Location = new System.Drawing.Point(0, 0);
-            this.gridControl3.MainView = this.gridView3;
-            this.gridControl3.Name = "gridControl3";
-            this.gridControl3.Size = new System.Drawing.Size(1299, 47);
-            this.gridControl3.TabIndex = 8;
-            this.gridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView3});
-            // 
-            // gridView3
-            // 
-            this.gridView3.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn17,
-            this.gridColumn19,
-            this.gridColumn20,
-            this.gridColumn21,
-            this.colseb,
-            this.gridColumn22,
-            this.coln_ch1,
-            this.gridColumn23,
-            this.colannId2});
-            this.gridView3.GridControl = this.gridControl3;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView3.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView3.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView3.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView3.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumn17
-            // 
-            this.gridColumn17.FieldName = "kod";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 0;
-            // 
-            // gridColumn19
-            // 
-            this.gridColumn19.FieldName = "kod_o";
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 1;
-            // 
-            // gridColumn20
-            // 
-            this.gridColumn20.FieldName = "text";
-            this.gridColumn20.Name = "gridColumn20";
-            this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 2;
-            // 
-            // gridColumn21
-            // 
-            this.gridColumn21.FieldName = "sek";
-            this.gridColumn21.Name = "gridColumn21";
-            this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 3;
-            // 
-            // colseb
-            // 
-            this.colseb.FieldName = "seb";
-            this.colseb.Name = "colseb";
-            this.colseb.Visible = true;
-            this.colseb.VisibleIndex = 4;
-            // 
-            // gridColumn22
-            // 
-            this.gridColumn22.FieldName = "n";
-            this.gridColumn22.Name = "gridColumn22";
-            this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 5;
-            // 
-            // coln_ch1
-            // 
-            this.coln_ch1.FieldName = "n_ch";
-            this.coln_ch1.Name = "coln_ch1";
-            this.coln_ch1.Visible = true;
-            this.coln_ch1.VisibleIndex = 6;
-            // 
-            // gridColumn23
-            // 
-            this.gridColumn23.FieldName = "n1";
-            this.gridColumn23.Name = "gridColumn23";
-            this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 7;
-            // 
-            // colannId2
-            // 
-            this.colannId2.FieldName = "annId";
-            this.colannId2.Name = "colannId2";
-            this.colannId2.Visible = true;
-            this.colannId2.VisibleIndex = 8;
-            // 
-            // gridControl4
-            // 
-            this.gridControl4.DataSource = this.normdopobrBindingSource;
-            this.gridControl4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl4.Location = new System.Drawing.Point(0, 0);
-            this.gridControl4.MainView = this.gridView4;
-            this.gridControl4.Name = "gridControl4";
-            this.gridControl4.Size = new System.Drawing.Size(1299, 51);
-            this.gridControl4.TabIndex = 9;
-            this.gridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView4});
-            // 
-            // gridView4
-            // 
-            this.gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            // gridControlDopObr
+            // 
+            this.gridControlDopObr.DataSource = this.normdopobrBindingSource;
+            this.gridControlDopObr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlDopObr.Location = new System.Drawing.Point(3, 739);
+            this.gridControlDopObr.MainView = this.gridViewDopObr;
+            this.gridControlDopObr.Name = "gridControlDopObr";
+            this.gridControlDopObr.Size = new System.Drawing.Size(1313, 101);
+            this.gridControlDopObr.TabIndex = 9;
+            this.gridControlDopObr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewDopObr});
+            // 
+            // gridViewDopObr
+            // 
+            this.gridViewDopObr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumn24,
             this.gridColumn25,
+            this.gridColumn28,
             this.gridColumn26,
             this.gridColumn27,
-            this.gridColumn28,
             this.gridColumn29});
-            this.gridView4.GridControl = this.gridControl4;
-            this.gridView4.Name = "gridView4";
-            this.gridView4.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridView4.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gridView4.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
-            this.gridView4.OptionsEditForm.EditFormColumnCount = 4;
-            this.gridView4.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridView4.OptionsView.ShowGroupPanel = false;
+            this.gridViewDopObr.GridControl = this.gridControlDopObr;
+            this.gridViewDopObr.Name = "gridViewDopObr";
+            this.gridViewDopObr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewDopObr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewDopObr.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gridViewDopObr.OptionsEditForm.ActionOnModifiedRowChange = DevExpress.XtraGrid.Views.Grid.EditFormModifiedAction.Save;
+            this.gridViewDopObr.OptionsEditForm.EditFormColumnCount = 4;
+            this.gridViewDopObr.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewDopObr.OptionsView.ShowGroupPanel = false;
+            this.gridViewDopObr.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView4_InitNewRow);
+            this.gridViewDopObr.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView4_ValidateRow);
             // 
             // gridColumn24
             // 
-            this.gridColumn24.FieldName = "kod";
+            this.gridColumn24.FieldName = "Kod";
             this.gridColumn24.Name = "gridColumn24";
             this.gridColumn24.Visible = true;
             this.gridColumn24.VisibleIndex = 0;
             // 
             // gridColumn25
             // 
-            this.gridColumn25.FieldName = "sek_p";
+            this.gridColumn25.Caption = "принт (сек.)";
+            this.gridColumn25.FieldName = "SekP";
             this.gridColumn25.Name = "gridColumn25";
             this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 1;
-            // 
-            // gridColumn26
-            // 
-            this.gridColumn26.FieldName = "sek_v";
-            this.gridColumn26.Name = "gridColumn26";
-            this.gridColumn26.Visible = true;
-            this.gridColumn26.VisibleIndex = 2;
-            // 
-            // gridColumn27
-            // 
-            this.gridColumn27.FieldName = "sek_stra";
-            this.gridColumn27.Name = "gridColumn27";
-            this.gridColumn27.Visible = true;
-            this.gridColumn27.VisibleIndex = 3;
+            this.gridColumn25.VisibleIndex = 2;
+            this.gridColumn25.Width = 243;
             // 
             // gridColumn28
             // 
-            this.gridColumn28.FieldName = "sek_p_tamp";
+            this.gridColumn28.Caption = "тамп. печать (сек.)";
+            this.gridColumn28.FieldName = "SekTamp";
             this.gridColumn28.Name = "gridColumn28";
             this.gridColumn28.Visible = true;
-            this.gridColumn28.VisibleIndex = 4;
+            this.gridColumn28.VisibleIndex = 3;
+            this.gridColumn28.Width = 243;
+            // 
+            // gridColumn26
+            // 
+            this.gridColumn26.Caption = "вышивка+пайетки (сек)";
+            this.gridColumn26.FieldName = "SekV";
+            this.gridColumn26.Name = "gridColumn26";
+            this.gridColumn26.Visible = true;
+            this.gridColumn26.VisibleIndex = 4;
+            this.gridColumn26.Width = 243;
+            // 
+            // gridColumn27
+            // 
+            this.gridColumn27.Caption = "стразы (сек.)";
+            this.gridColumn27.FieldName = "SekStra";
+            this.gridColumn27.Name = "gridColumn27";
+            this.gridColumn27.Visible = true;
+            this.gridColumn27.VisibleIndex = 5;
+            this.gridColumn27.Width = 243;
             // 
             // gridColumn29
             // 
-            this.gridColumn29.FieldName = "annId";
+            this.gridColumn29.FieldName = "AnnID";
             this.gridColumn29.Name = "gridColumn29";
             this.gridColumn29.Visible = true;
-            this.gridColumn29.VisibleIndex = 5;
+            this.gridColumn29.VisibleIndex = 1;
+            this.gridColumn29.Width = 67;
+            // 
+            // gridControlKont
+            // 
+            this.gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlKont.Location = new System.Drawing.Point(3, 616);
+            this.gridControlKont.MainView = this.gridViewKont;
+            this.gridControlKont.Name = "gridControlKont";
+            this.gridControlKont.Size = new System.Drawing.Size(1313, 117);
+            this.gridControlKont.TabIndex = 8;
+            this.gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewKont});
+            // 
+            // gridViewKont
+            // 
+            this.gridViewKont.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn19,
+            this.gridColumn23,
+            this.gridColumn20,
+            this.gridColumn21,
+            this.colseb,
+            this.gridColumn22,
+            this.coln_ch1,
+            this.gridColumn17,
+            this.colannId2});
+            this.gridViewKont.GridControl = this.gridControlKont;
+            this.gridViewKont.Name = "gridViewKont";
+            this.gridViewKont.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewKont.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
+            this.gridViewKont.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewKont.OptionsView.ShowGroupPanel = false;
+            this.gridViewKont.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.GridView3_InitNewRow);
+            this.gridViewKont.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView3_ValidateRow);
+            this.gridViewKont.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView3_RowUpdated);
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "№ оп";
+            this.gridColumn19.FieldName = "KodO";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 1;
+            this.gridColumn19.Width = 78;
+            // 
+            // gridColumn23
+            // 
+            this.gridColumn23.Caption = "№ п/оп";
+            this.gridColumn23.FieldName = "N1";
+            this.gridColumn23.Name = "gridColumn23";
+            this.gridColumn23.Visible = true;
+            this.gridColumn23.VisibleIndex = 2;
+            this.gridColumn23.Width = 88;
+            // 
+            // gridColumn20
+            // 
+            this.gridColumn20.Caption = "наименование операции комплектовки";
+            this.gridColumn20.FieldName = "Text";
+            this.gridColumn20.Name = "gridColumn20";
+            this.gridColumn20.Visible = true;
+            this.gridColumn20.VisibleIndex = 4;
+            this.gridColumn20.Width = 190;
+            // 
+            // gridColumn21
+            // 
+            this.gridColumn21.Caption = "сек";
+            this.gridColumn21.FieldName = "Sek";
+            this.gridColumn21.Name = "gridColumn21";
+            this.gridColumn21.Visible = true;
+            this.gridColumn21.VisibleIndex = 6;
+            this.gridColumn21.Width = 124;
+            // 
+            // colseb
+            // 
+            this.colseb.FieldName = "Seb";
+            this.colseb.Name = "colseb";
+            this.colseb.Visible = true;
+            this.colseb.VisibleIndex = 5;
+            // 
+            // gridColumn22
+            // 
+            this.gridColumn22.FieldName = "N";
+            this.gridColumn22.Name = "gridColumn22";
+            this.gridColumn22.Visible = true;
+            this.gridColumn22.VisibleIndex = 7;
+            // 
+            // coln_ch1
+            // 
+            this.coln_ch1.FieldName = "NCh";
+            this.coln_ch1.Name = "coln_ch1";
+            this.coln_ch1.Visible = true;
+            this.coln_ch1.VisibleIndex = 8;
+            // 
+            // gridColumn17
+            // 
+            this.gridColumn17.FieldName = "Kod";
+            this.gridColumn17.Name = "gridColumn17";
+            this.gridColumn17.Visible = true;
+            this.gridColumn17.VisibleIndex = 3;
+            this.gridColumn17.Width = 79;
+            // 
+            // colannId2
+            // 
+            this.colannId2.FieldName = "AnnId";
+            this.colannId2.Name = "colannId2";
+            this.colannId2.Visible = true;
+            this.colannId2.VisibleIndex = 0;
+            this.colannId2.Width = 68;
+            // 
+            // gridControlRaskr
+            // 
+            this.gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRaskr.Location = new System.Drawing.Point(3, 376);
+            this.gridControlRaskr.MainView = this.gridViewRaskr;
+            this.gridControlRaskr.Name = "gridControlRaskr";
+            this.gridControlRaskr.Size = new System.Drawing.Size(1313, 234);
+            this.gridControlRaskr.TabIndex = 7;
+            this.gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRaskr});
+            // 
+            // gridViewRaskr
+            // 
+            this.gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+            this.gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+            this.gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
+            this.gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn9,
+            this.gridColumn10,
+            this.gridColumn13,
+            this.gridColumn14,
+            this.gridColumn11,
+            this.gridColumn15,
+            this.colspec,
+            this.gridColumn16,
+            this.colkod1,
+            this.gridColumn12,
+            this.coln_ch,
+            this.colannId1});
+            this.gridViewRaskr.GridControl = this.gridControlRaskr;
+            this.gridViewRaskr.Name = "gridViewRaskr";
+            this.gridViewRaskr.NewItemRowText = "добавить";
+            this.gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            this.gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
+            this.gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            this.gridViewRaskr.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
+            this.gridViewRaskr.OptionsView.ShowGroupPanel = false;
+            this.gridViewRaskr.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewRaskr_ShowingEditor);
+            this.gridViewRaskr.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView2_ValidateRow);
+            this.gridViewRaskr.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView2_RowUpdated);
+            // 
+            // gridColumn9
+            // 
+            this.gridColumn9.FieldName = "id";
+            this.gridColumn9.Name = "gridColumn9";
+            // 
+            // gridColumn10
+            // 
+            this.gridColumn10.Caption = "№ оп";
+            this.gridColumn10.FieldName = "KodO";
+            this.gridColumn10.Name = "gridColumn10";
+            this.gridColumn10.Visible = true;
+            this.gridColumn10.VisibleIndex = 1;
+            this.gridColumn10.Width = 76;
+            // 
+            // gridColumn13
+            // 
+            this.gridColumn13.Caption = "№ п/оп";
+            this.gridColumn13.FieldName = "n1";
+            this.gridColumn13.Name = "gridColumn13";
+            this.gridColumn13.Visible = true;
+            this.gridColumn13.VisibleIndex = 2;
+            this.gridColumn13.Width = 88;
+            // 
+            // gridColumn14
+            // 
+            this.gridColumn14.Caption = "Разряд";
+            this.gridColumn14.FieldName = "Razryad";
+            this.gridColumn14.Name = "gridColumn14";
+            this.gridColumn14.Visible = true;
+            this.gridColumn14.VisibleIndex = 3;
+            this.gridColumn14.Width = 78;
+            // 
+            // gridColumn11
+            // 
+            this.gridColumn11.Caption = "Наименование операци раскроя";
+            this.gridColumn11.FieldName = "Text";
+            this.gridColumn11.Name = "gridColumn11";
+            this.gridColumn11.Visible = true;
+            this.gridColumn11.VisibleIndex = 4;
+            this.gridColumn11.Width = 186;
+            // 
+            // gridColumn15
+            // 
+            this.gridColumn15.Caption = "сек";
+            this.gridColumn15.FieldName = "Sek";
+            this.gridColumn15.Name = "gridColumn15";
+            this.gridColumn15.Visible = true;
+            this.gridColumn15.VisibleIndex = 6;
+            // 
+            // colspec
+            // 
+            this.colspec.FieldName = "Spec";
+            this.colspec.Name = "colspec";
+            this.colspec.Visible = true;
+            this.colspec.VisibleIndex = 8;
+            // 
+            // gridColumn16
+            // 
+            this.gridColumn16.FieldName = "Obor";
+            this.gridColumn16.Name = "gridColumn16";
+            this.gridColumn16.Visible = true;
+            this.gridColumn16.VisibleIndex = 9;
+            // 
+            // colkod1
+            // 
+            this.colkod1.Caption = "код из";
+            this.colkod1.FieldName = "Kod";
+            this.colkod1.Name = "colkod1";
+            this.colkod1.Visible = true;
+            this.colkod1.VisibleIndex = 10;
+            // 
+            // gridColumn12
+            // 
+            this.gridColumn12.FieldName = "N";
+            this.gridColumn12.Name = "gridColumn12";
+            this.gridColumn12.Visible = true;
+            this.gridColumn12.VisibleIndex = 5;
+            // 
+            // coln_ch
+            // 
+            this.coln_ch.FieldName = "n_ch";
+            this.coln_ch.Name = "coln_ch";
+            this.coln_ch.Visible = true;
+            this.coln_ch.VisibleIndex = 7;
+            // 
+            // colannId1
+            // 
+            this.colannId1.FieldName = "AnnId";
+            this.colannId1.Name = "colannId1";
+            this.colannId1.Visible = true;
+            this.colannId1.VisibleIndex = 0;
+            this.colannId1.Width = 74;
             // 
             // tableLayoutPanel1
             // 
@@ -665,31 +510,33 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 130F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
-            this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.constructorComboBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.designerComboBox, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.ModelTextBox, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.NameTextBox, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.modelTextBox, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.nameTextBox, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.dateCreate, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.btnOK, 8, 0);
             this.tableLayoutPanel1.Controls.Add(this.buffer, 6, 1);
             this.tableLayoutPanel1.Controls.Add(this.label4, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.SecTimeTextBox, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.customLabel3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.secTimeTextBox, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.groupTextBox, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.customLabel3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 5, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1299, 102);
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.25373F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.74627F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 61F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1313, 129);
             this.tableLayoutPanel1.TabIndex = 13;
             // 
             // richTextBox1
@@ -697,29 +544,19 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1038, 54);
+            this.richTextBox1.Location = new System.Drawing.Point(1005, 36);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(258, 45);
+            this.richTextBox1.Size = new System.Drawing.Size(305, 28);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
-            // customLabel1
-            // 
-            this.customLabel1.AutoSize = true;
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(303, 51);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.Size = new System.Drawing.Size(69, 16);
-            this.customLabel1.TabIndex = 14;
-            this.customLabel1.Text = "дизайнер";
-            // 
             // customLabel2
             // 
+            this.customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.customLabel2.AutoSize = true;
             this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel2.Location = new System.Drawing.Point(3, 51);
+            this.customLabel2.Location = new System.Drawing.Point(3, 42);
             this.customLabel2.Name = "customLabel2";
             this.customLabel2.Size = new System.Drawing.Size(87, 16);
             this.customLabel2.TabIndex = 15;
@@ -728,97 +565,63 @@ namespace SewingProduction.form
             // constructorComboBox
             // 
             this.constructorComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.constructorComboBox.DataSource = this.constructorBindingSource;
+            this.constructorComboBox.DisplayMember = "fio";
+            this.constructorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorComboBox.FormattingEnabled = true;
-            this.constructorComboBox.Location = new System.Drawing.Point(113, 54);
+            this.constructorComboBox.Location = new System.Drawing.Point(101, 36);
             this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Size = new System.Drawing.Size(184, 24);
+            this.constructorComboBox.Size = new System.Drawing.Size(163, 24);
             this.constructorComboBox.TabIndex = 16;
+            this.constructorComboBox.ValueMember = "tab";
             this.constructorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // designerComboBox
             // 
             this.designerComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.designerComboBox.DataSource = this.designerBindingSource;
+            this.designerComboBox.DisplayMember = "fio";
+            this.designerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(382, 54);
+            this.designerComboBox.Location = new System.Drawing.Point(349, 36);
             this.designerComboBox.Name = "designerComboBox";
             this.designerComboBox.Size = new System.Drawing.Size(199, 24);
             this.designerComboBox.TabIndex = 17;
+            this.designerComboBox.ValueMember = "tab";
             this.designerComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
-            // label4
+            // modelTextBox
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(588, 51);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 32);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "итоговые сек. \r\nпо изделию";
+            this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.modelTextBox.Location = new System.Drawing.Point(349, 3);
+            this.modelTextBox.Name = "modelTextBox";
+            this.modelTextBox.Size = new System.Drawing.Size(200, 23);
+            this.modelTextBox.TabIndex = 4;
             // 
-            // SecTimeTextBox
+            // nameTextBox
             // 
-            this.SecTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.SecTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.SecTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.SecTimeTextBox.Location = new System.Drawing.Point(712, 54);
-            this.SecTimeTextBox.Name = "SecTimeTextBox";
-            this.SecTimeTextBox.ReadOnly = true;
-            this.SecTimeTextBox.Size = new System.Drawing.Size(74, 23);
-            this.SecTimeTextBox.TabIndex = 6;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 10F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(303, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(57, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "модель";
-            // 
-            // ModelTextBox
-            // 
-            this.ModelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.ModelTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.ModelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.ModelTextBox.Location = new System.Drawing.Point(382, 3);
-            this.ModelTextBox.Name = "ModelTextBox";
-            this.ModelTextBox.Size = new System.Drawing.Size(200, 23);
-            this.ModelTextBox.TabIndex = 4;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(588, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(104, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "наименование";
-            // 
-            // NameTextBox
-            // 
-            this.NameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.NameTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.NameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.NameTextBox.Location = new System.Drawing.Point(712, 3);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(204, 23);
-            this.NameTextBox.TabIndex = 5;
+            this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.nameTextBox.Enabled = false;
+            this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.nameTextBox.Location = new System.Drawing.Point(679, 3);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(204, 23);
+            this.nameTextBox.TabIndex = 5;
             // 
             // label5
             // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(922, 0);
+            this.label5.Location = new System.Drawing.Point(889, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -826,7 +629,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1038, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1005, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -836,7 +639,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1171, 3);
+            this.btnOK.Location = new System.Drawing.Point(1138, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -850,72 +653,428 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(922, 54);
+            this.buffer.Location = new System.Drawing.Point(889, 36);
             this.buffer.Name = "buffer";
-            this.buffer.Size = new System.Drawing.Size(110, 45);
+            this.buffer.Size = new System.Drawing.Size(110, 28);
             this.buffer.TabIndex = 11;
             this.buffer.Text = "Вставить из буфера";
             this.buffer.UseVisualStyleBackColor = false;
             this.buffer.Click += new System.EventHandler(this.buffer_Click);
             // 
-            // customLabel3
+            // label4
             // 
-            this.customLabel3.AutoSize = true;
-            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel3.Location = new System.Drawing.Point(3, 0);
-            this.customLabel3.Name = "customLabel3";
-            this.customLabel3.Size = new System.Drawing.Size(53, 16);
-            this.customLabel3.TabIndex = 18;
-            this.customLabel3.Text = "Группа";
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 10F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label4.Location = new System.Drawing.Point(555, 34);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 32);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "итоговые сек. \r\nпо изделию";
+            // 
+            // secTimeTextBox
+            // 
+            this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.secTimeTextBox.Location = new System.Drawing.Point(679, 36);
+            this.secTimeTextBox.Name = "secTimeTextBox";
+            this.secTimeTextBox.ReadOnly = true;
+            this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
+            this.secTimeTextBox.TabIndex = 6;
             // 
             // groupTextBox
             // 
             this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(113, 3);
+            this.groupTextBox.Location = new System.Drawing.Point(101, 3);
             this.groupTextBox.Name = "groupTextBox";
-            this.groupTextBox.Size = new System.Drawing.Size(184, 23);
+            this.groupTextBox.Size = new System.Drawing.Size(163, 23);
             this.groupTextBox.TabIndex = 19;
+            // 
+            // customLabel3
+            // 
+            this.customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel3.AutoSize = true;
+            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel3.Location = new System.Drawing.Point(3, 8);
+            this.customLabel3.Name = "customLabel3";
+            this.customLabel3.Size = new System.Drawing.Size(53, 16);
+            this.customLabel3.TabIndex = 18;
+            this.customLabel3.Text = "Группа";
+            this.customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 10F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label3.Location = new System.Drawing.Point(555, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(104, 16);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "наименование";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 10F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label2.Location = new System.Drawing.Point(270, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(57, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "модель";
+            // 
+            // customLabel1
+            // 
+            this.customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel1.AutoSize = true;
+            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel1.Location = new System.Drawing.Point(270, 42);
+            this.customLabel1.Name = "customLabel1";
+            this.customLabel1.Size = new System.Drawing.Size(69, 16);
+            this.customLabel1.TabIndex = 14;
+            this.customLabel1.Text = "дизайнер";
+            // 
+            // gridControlRasz
+            // 
+            this.gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRasz.Location = new System.Drawing.Point(3, 138);
+            this.gridControlRasz.MainView = this.gridViewRasz;
+            this.gridControlRasz.Name = "gridControlRasz";
+            this.gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemLookUpEdit_kod_proizv,
+            this.repositoryItemLookUpEdit_podrVyaz,
+            this.repositoryItemLookUpEdit_oborudShv});
+            this.gridControlRasz.Size = new System.Drawing.Size(1313, 232);
+            this.gridControlRasz.TabIndex = 7;
+            this.gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRasz,
+            this.gridView1});
+            // 
+            // gridViewRasz
+            // 
+            this.gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn2,
+            this.gridColumn34,
+            this.gridColumn35,
+            this.gridColumn36,
+            this.gridColumn33,
+            this.gridColumn32,
+            this.gridColumn37,
+            this.colspec2,
+            this.gridColumn4,
+            this.gridColumn38,
+            this.gridColumn30,
+            this.gridColumn31,
+            this.gridColumn5,
+            this.Kod_podr,
+            this.Kod_proizv,
+            this.Kod_ob,
+            this.gridColumn6});
+            this.gridViewRasz.GridControl = this.gridControlRasz;
+            this.gridViewRasz.Name = "gridViewRasz";
+            this.gridViewRasz.NewItemRowText = "добавить";
+            this.gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
+            this.gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            this.gridViewRasz.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
+            this.gridViewRasz.EditFormShowing += new DevExpress.XtraGrid.Views.Grid.EditFormShowingEventHandler(this.gridViewRasz_EditFormShowing);
+            this.gridViewRasz.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridViewRasz_EditFormHidden);
+            this.gridViewRasz.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridViewRasz_ValidateRow);
+            this.gridViewRasz.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowUpdated);
+            this.gridViewRasz.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowEditCanceled);
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "nrId";
+            this.gridColumn2.FieldName = "nrId";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            // 
+            // gridColumn34
+            // 
+            this.gridColumn34.Caption = "AnnId";
+            this.gridColumn34.FieldName = "annId";
+            this.gridColumn34.Name = "gridColumn34";
+            this.gridColumn34.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn34.Visible = true;
+            this.gridColumn34.VisibleIndex = 0;
+            // 
+            // gridColumn35
+            // 
+            this.gridColumn35.Caption = "№ оп.";
+            this.gridColumn35.FieldName = "N";
+            this.gridColumn35.Name = "gridColumn35";
+            this.gridColumn35.OptionsEditForm.VisibleIndex = 1;
+            this.gridColumn35.Visible = true;
+            this.gridColumn35.VisibleIndex = 1;
+            // 
+            // gridColumn36
+            // 
+            this.gridColumn36.Caption = "№п/оп.";
+            this.gridColumn36.FieldName = "N1";
+            this.gridColumn36.Name = "gridColumn36";
+            this.gridColumn36.OptionsEditForm.VisibleIndex = 4;
+            this.gridColumn36.Visible = true;
+            this.gridColumn36.VisibleIndex = 2;
+            // 
+            // gridColumn33
+            // 
+            this.gridColumn33.Caption = "разряд";
+            this.gridColumn33.FieldName = "Razryad";
+            this.gridColumn33.Name = "gridColumn33";
+            this.gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            this.gridColumn33.OptionsEditForm.VisibleIndex = 10;
+            this.gridColumn33.Visible = true;
+            this.gridColumn33.VisibleIndex = 3;
+            // 
+            // gridColumn32
+            // 
+            this.gridColumn32.Caption = "наименование операции пошива";
+            this.gridColumn32.FieldName = "Text";
+            this.gridColumn32.Name = "gridColumn32";
+            this.gridColumn32.OptionsEditForm.ColumnSpan = 3;
+            this.gridColumn32.OptionsEditForm.RowSpan = 2;
+            this.gridColumn32.OptionsEditForm.StartNewRow = true;
+            this.gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
+            this.gridColumn32.Visible = true;
+            this.gridColumn32.VisibleIndex = 4;
+            this.gridColumn32.Width = 131;
+            // 
+            // gridColumn37
+            // 
+            this.gridColumn37.Caption = "сек.";
+            this.gridColumn37.FieldName = "Sek";
+            this.gridColumn37.Name = "gridColumn37";
+            this.gridColumn37.OptionsEditForm.VisibleIndex = 7;
+            this.gridColumn37.Visible = true;
+            this.gridColumn37.VisibleIndex = 5;
+            // 
+            // colspec2
+            // 
+            this.colspec2.Caption = "спец-ть";
+            this.colspec2.FieldName = "Spec";
+            this.colspec2.Name = "colspec2";
+            this.colspec2.OptionsEditForm.VisibleIndex = 11;
+            this.colspec2.Visible = true;
+            this.colspec2.VisibleIndex = 6;
+            // 
+            // gridColumn4
+            // 
+            this.gridColumn4.Caption = "произв";
+            this.gridColumn4.ColumnEdit = this.repositoryItemLookUpEdit_kod_proizv;
+            this.gridColumn4.FieldName = "text_proizv";
+            this.gridColumn4.Name = "gridColumn4";
+            this.gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn4.OptionsEditForm.VisibleIndex = 3;
+            this.gridColumn4.Visible = true;
+            this.gridColumn4.VisibleIndex = 7;
+            // 
+            // repositoryItemLookUpEdit_kod_proizv
+            // 
+            this.repositoryItemLookUpEdit_kod_proizv.AutoHeight = false;
+            this.repositoryItemLookUpEdit_kod_proizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
+            this.repositoryItemLookUpEdit_kod_proizv.Name = "repositoryItemLookUpEdit_kod_proizv";
+            this.repositoryItemLookUpEdit_kod_proizv.NullText = "";
+            this.repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
+            // 
+            // gridColumn38
+            // 
+            this.gridColumn38.Caption = "оборудование";
+            this.gridColumn38.FieldName = "Obor";
+            this.gridColumn38.Name = "gridColumn38";
+            this.gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            this.gridColumn38.OptionsEditForm.VisibleIndex = 9;
+            this.gridColumn38.Visible = true;
+            this.gridColumn38.VisibleIndex = 10;
+            // 
+            // gridColumn30
+            // 
+            this.gridColumn30.Caption = "код из.";
+            this.gridColumn30.FieldName = "Kod";
+            this.gridColumn30.Name = "gridColumn30";
+            this.gridColumn30.OptionsEditForm.Caption = "код из:";
+            this.gridColumn30.OptionsEditForm.VisibleIndex = 2;
+            this.gridColumn30.Visible = true;
+            this.gridColumn30.VisibleIndex = 8;
+            // 
+            // gridColumn31
+            // 
+            this.gridColumn31.Caption = "код оп.";
+            this.gridColumn31.FieldName = "KodO";
+            this.gridColumn31.Name = "gridColumn31";
+            this.gridColumn31.OptionsEditForm.Caption = "код оп:";
+            this.gridColumn31.OptionsEditForm.VisibleIndex = 5;
+            this.gridColumn31.Visible = true;
+            this.gridColumn31.VisibleIndex = 9;
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "gridColumn5";
+            this.gridColumn5.ColumnEdit = this.repositoryItemLookUpEdit_podrVyaz;
+            this.gridColumn5.Name = "gridColumn5";
+            this.gridColumn5.Visible = true;
+            this.gridColumn5.VisibleIndex = 12;
+            // 
+            // repositoryItemLookUpEdit_podrVyaz
+            // 
+            this.repositoryItemLookUpEdit_podrVyaz.AutoHeight = false;
+            this.repositoryItemLookUpEdit_podrVyaz.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
+            this.repositoryItemLookUpEdit_podrVyaz.Name = "repositoryItemLookUpEdit_podrVyaz";
+            this.repositoryItemLookUpEdit_podrVyaz.NullText = "";
+            this.repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_vyaz";
+            // 
+            // Kod_podr
+            // 
+            this.Kod_podr.Caption = "Kod_podr";
+            this.Kod_podr.ColumnEdit = this.repositoryItemLookUpEdit_podrVyaz;
+            this.Kod_podr.FieldName = "Kod_podr";
+            this.Kod_podr.Name = "Kod_podr";
+            this.Kod_podr.OptionsEditForm.VisibleIndex = 7;
+            this.Kod_podr.Visible = true;
+            this.Kod_podr.VisibleIndex = 11;
+            // 
+            // Kod_proizv
+            // 
+            this.Kod_proizv.Caption = "Kod_proizv";
+            this.Kod_proizv.ColumnEdit = this.repositoryItemLookUpEdit_kod_proizv;
+            this.Kod_proizv.FieldName = "Kod_proizv";
+            this.Kod_proizv.Name = "Kod_proizv";
+            this.Kod_proizv.OptionsEditForm.Caption = "Произв:";
+            this.Kod_proizv.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            this.Kod_proizv.OptionsEditForm.VisibleIndex = 3;
+            this.Kod_proizv.Visible = true;
+            this.Kod_proizv.VisibleIndex = 13;
+            // 
+            // Kod_ob
+            // 
+            this.Kod_ob.Caption = "Kod_ob";
+            this.Kod_ob.ColumnEdit = this.repositoryItemLookUpEdit_oborudShv;
+            this.Kod_ob.FieldName = "Kod_ob";
+            this.Kod_ob.Name = "Kod_ob";
+            this.Kod_ob.OptionsEditForm.Caption = "оборуд:";
+            this.Kod_ob.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            this.Kod_ob.OptionsEditForm.VisibleIndex = 9;
+            this.Kod_ob.Visible = true;
+            this.Kod_ob.VisibleIndex = 14;
+            // 
+            // repositoryItemLookUpEdit_oborudShv
+            // 
+            this.repositoryItemLookUpEdit_oborudShv.AutoHeight = false;
+            this.repositoryItemLookUpEdit_oborudShv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
+            this.repositoryItemLookUpEdit_oborudShv.Name = "repositoryItemLookUpEdit_oborudShv";
+            this.repositoryItemLookUpEdit_oborudShv.NullText = "";
+            this.repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
+            // 
+            // gridColumn6
+            // 
+            this.gridColumn6.Caption = "gridColumn6";
+            this.gridColumn6.ColumnEdit = this.repositoryItemLookUpEdit_oborudShv;
+            this.gridColumn6.Name = "gridColumn6";
+            this.gridColumn6.Visible = true;
+            this.gridColumn6.VisibleIndex = 15;
+            this.gridColumn6.Width = 87;
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridControlRasz;
+            this.gridView1.Name = "gridView1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Font = new System.Drawing.Font("Arial", 10F);
+            this.statusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.statusLabel.Location = new System.Drawing.Point(3, 843);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 16);
+            this.statusLabel.TabIndex = 14;
+            // 
+            // rasz
+            // 
+            this.rasz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.rasz.Font = new System.Drawing.Font("Arial", 10F);
+            this.rasz.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.rasz.Location = new System.Drawing.Point(0, 0);
+            this.rasz.Name = "rasz";
+            this.rasz.Size = new System.Drawing.Size(75, 25);
+            this.rasz.TabIndex = 0;
+            this.rasz.UseVisualStyleBackColor = false;
+            // 
+            // customButton2
+            // 
+            this.customButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customButton2.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customButton2.Location = new System.Drawing.Point(0, 0);
+            this.customButton2.Name = "customButton2";
+            this.customButton2.Size = new System.Drawing.Size(75, 25);
+            this.customButton2.TabIndex = 0;
+            this.customButton2.UseVisualStyleBackColor = false;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(679, 70);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(204, 56);
+            this.richTextBox2.TabIndex = 20;
+            this.richTextBox2.Text = "";
             // 
             // TeamWork_AdvanceTW
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1305, 686);
+            this.ClientSize = new System.Drawing.Size(1319, 864);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Name = "TeamWork_AdvanceTW";
-            this.Text = "TeamWork_AdvanceTW";
+            this.Text = "ш";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TeamWork_AdvanceTW_FormClosing);
             this.Load += new System.EventHandler(this.TeamWork_AdvanceTW_Load);
             this.tableLayoutPanel2.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl4)).EndInit();
+            this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewDopObr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -924,11 +1083,11 @@ namespace SewingProduction.form
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private CustomLabel label2;
-        private CustomTextBox ModelTextBox;
+        private CustomTextBox modelTextBox;
         private CustomLabel label3;
-        private CustomTextBox NameTextBox;
+        private CustomTextBox nameTextBox;
         private CustomLabel label4;
-        private CustomTextBox SecTimeTextBox;
+        private CustomTextBox secTimeTextBox;
         private CustomLabel label5;
         private System.Windows.Forms.DateTimePicker dateCreate;
         private DevExpress.XtraGrid.Columns.GridColumn coln;
@@ -940,8 +1099,8 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o;
         private DevExpress.XtraGrid.Columns.GridColumn colannId3;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl gridControlRaskr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRaskr;
         private DevExpress.XtraGrid.Columns.GridColumn colid;
         private DevExpress.XtraGrid.Columns.GridColumn colkod2;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o1;
@@ -950,16 +1109,16 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn coltext1;
         private DevExpress.XtraGrid.Columns.GridColumn colsek2;
         private DevExpress.XtraGrid.Columns.GridColumn colannId4;
-        private DevExpress.XtraGrid.GridControl gridControl3;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.GridControl gridControlKont;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewKont;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd2;
         private DevExpress.XtraGrid.Columns.GridColumn coltext2;
         private DevExpress.XtraGrid.Columns.GridColumn colsek3;
         private DevExpress.XtraGrid.Columns.GridColumn colannId5;
-        private DevExpress.XtraGrid.GridControl gridControl4;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraGrid.GridControl gridControlDopObr;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewDopObr;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p_tamp;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_v;
@@ -1000,27 +1159,11 @@ namespace SewingProduction.form
         private CustomButton customButton2;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private CustomButton buffer;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.SplitContainer splitContainer2;
-        private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.BindingSource normraszBindingSource1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private DevExpress.XtraGrid.GridControl gridControl5;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn34;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn36;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn37;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod_podr1;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod_proizv1;
-        private DevExpress.XtraGrid.Columns.GridColumn colspec2;
-        private DevExpress.XtraGrid.Columns.GridColumn colkod_ob1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn kod_podr;
+        private DevExpress.XtraGrid.Columns.GridColumn kod_proizv;
+        private DevExpress.XtraGrid.Columns.GridColumn kod_ob;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomLabel customLabel1;
         private CustomLabel customLabel2;
@@ -1028,5 +1171,34 @@ namespace SewingProduction.form
         private CustomComboBox designerComboBox;
         private CustomLabel customLabel3;
         private CustomTextBox groupTextBox;
+        private System.Windows.Forms.BindingSource designerBindingSource;
+        private System.Windows.Forms.BindingSource constructorBindingSource;
+        private DevExpress.XtraGrid.GridControl gridControlRasz;
+        private GridView gridViewRasz;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn34;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn32;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn33;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn35;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn36;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn37;
+        private DevExpress.XtraGrid.Columns.GridColumn colspec2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_kod_proizv;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_podrVyaz;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_oborudShv;
+        private GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn Kod_podr;
+        private DevExpress.XtraGrid.Columns.GridColumn Kod_proizv;
+        private DevExpress.XtraGrid.Columns.GridColumn Kod_ob;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private CustomLabel statusLabel;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
