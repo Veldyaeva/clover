@@ -27,7 +27,7 @@ namespace SewingProduction.Forms
     public partial class TeamWork : CustomForm
     {
         private readonly DatabaseHelper _dbHelper; 
-        private readonly ArtNormService _artNormService;
+        private readonly DbService _artNormService;
         private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
@@ -53,7 +53,7 @@ namespace SewingProduction.Forms
             InitializeComponent();
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper("ace");
-            _artNormService = new ArtNormService(_dbHelper);
+            _artNormService = new DbService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
             // Инициализация привязок данных
@@ -77,25 +77,6 @@ namespace SewingProduction.Forms
             }
             this.gridView7.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
             this.gridView8.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
-        }
-
-        private void sortGridView()
-        {
-            gridView1.BeginSort();
-            try
-            {
-                gridView1.ClearSorting();
-
-                gridView1.Columns["N"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                gridView1.Columns["N"].SortIndex = 0;
-
-                gridView1.Columns["N1"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                gridView1.Columns["N1"].SortIndex = 1;
-            }
-            finally
-            {
-                gridView1.EndSort();
-            }
         }
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
@@ -279,6 +260,11 @@ namespace SewingProduction.Forms
             }
             SaveGridSettings();
             await _logger.LogEventAsync("Форма TeamWork закрыта", "FormClosing");
+        }
+
+        private async void customButton2_Click(object sender, EventArgs e)
+        {
+            await Arch(sender, e);
         }
         //public TeamWork()
         //{
@@ -701,9 +687,9 @@ namespace SewingProduction.Forms
         ///// Фильтрация данных в gridView3 по введенному значению в filterTextBox1.
         ///// </summary>
         //private async void customButton12_Click(object sender, EventArgs e)
-            //{
-            //    try
-            //    {
+        //{
+        //    try
+        //    {
         //        string filterString = filterTextBox1.Text.Trim(); // Получаем текст из поля ввода
         //        string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked); // Определяем, по какой колонке искать
 
@@ -720,9 +706,9 @@ namespace SewingProduction.Forms
         //        {
         //            MessageBox.Show("Введите значение для поиска и выберите колонку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         //        }
-            //    }
-            //    catch (Exception ex)
-            //    {
+        //    }
+        //    catch (Exception ex)
+        //    {
         //        await _logger.LogErrorAsync(ex, "Ошибка при поиске по customButton12_Click");
         //        MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         //    }

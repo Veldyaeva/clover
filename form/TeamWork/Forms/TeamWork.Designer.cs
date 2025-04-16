@@ -2413,6 +2413,7 @@ namespace SewingProduction.Forms
             this.customButton2.TabIndex = 1;
             this.customButton2.Text = "В архив";
             this.customButton2.UseVisualStyleBackColor = false;
+            this.customButton2.Click += new System.EventHandler(this.customButton2_Click);
             // 
             // flyoutPanel1
             // 

@@ -201,7 +201,7 @@ namespace SewingProduction.Forms
             var view = grid.MainView as GridView;
             if (view != null && view.FocusedRowHandle >= 0)
             {
-                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
+                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod"));
             }
             return 0;
         }

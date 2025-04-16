@@ -14,6 +14,7 @@ namespace SewingProduction
         public const string Kont = "norm_kont";
         public const string Obr = "norm_dop_obr";
         public const string Art = "sp_articul";
+
         public const string AnnId = "AnnID";
         public const string RaszId = "nrId";
         public const string RaskId = "id";

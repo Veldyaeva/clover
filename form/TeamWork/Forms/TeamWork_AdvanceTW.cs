@@ -24,7 +24,7 @@ namespace SewingProduction.form
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
-        private readonly ArtNormService _artNormService;
+        private readonly DbService _artNormService;
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
         private readonly GridHelper _gridHelper = new GridHelper();
@@ -66,7 +66,7 @@ namespace SewingProduction.form
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
-            _artNormService = new ArtNormService(_dbHelper);
+            _artNormService = new DbService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
             if (!oldId.HasValue)
@@ -302,24 +302,6 @@ namespace SewingProduction.form
 
                 targetList.Add(item);
             }
-        }
-        private static List<T> ConvertDataTable<T>(DataTable table) where T : new()
-        {
-            var list = new List<T>();
-
-            foreach (DataRow row in table.Rows)
-            {
-                var item = new T();
-                foreach (DataColumn col in table.Columns)
-                {
-                    var prop = typeof(T).GetProperty(col.ColumnName);
-                    if (prop != null && row[col] != DBNull.Value)
-                        prop.SetValue(item, Convert.ChangeType(row[col], prop.PropertyType));
-                }
-                list.Add(item);
-            }
-
-            return list;
         }
 
         /// <summary>
@@ -933,6 +915,10 @@ namespace SewingProduction.form
                 {
                     await SaveAnnDataAsync();
                     await SaveAllDataAsync();
+                    if (_mode == (int)Mode.ArchAndCopy)
+                    { 
+
+                    }
                 });
                 await ShowStatusMessage("Данные успешно сохранены!");
 

@@ -432,7 +432,7 @@
     <Compile Include="form\TeamWork\Models\NormRask.cs" />
     <Compile Include="form\TeamWork\Models\NormRasz.cs" />
     <Compile Include="form\TeamWork\Models\RaskroyNorm.cs" />
-    <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
+    <Compile Include="form\TeamWork\Services\DbService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
     </Compile>

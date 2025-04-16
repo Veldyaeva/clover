@@ -18,23 +18,35 @@ namespace SewingProduction.Services
 /// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_raskr, norm_kont и доп.обработки.
 /// Использует Dapper для ускоренного доступа к данным.
 /// </summary>
- public class ArtNormService
+ public class DbService
     {
         private readonly DatabaseHelper _dbHelper;
         //    private readonly HybridLogger _logger = new HybridLogger();
         private readonly FileLogger _logger = new FileLogger();
 
         /// <summary>
-        /// Инициализирует новый экземпляр ArtNormService.
+        /// Инициализирует новый экземпляр dbService.
         /// </summary>
         /// <param name="dbHelper">Помощник для работы с базой данных.</param>
-        public ArtNormService(DatabaseHelper dbHelper)
+        public DbService(DatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
 
         }
 
         #region        // === УНИВЕРСАЛЬНЫЕ МЕТОДЫ ===
+        /// <summary>
+        /// Получает объект из БД
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="query"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        public async Task<T> GetEntityAsync<T>(string query, object parameters)
+        {
+            using (var connection = _dbHelper.GetConnection())
+                return await connection.QueryFirstOrDefaultAsync<T>(query, parameters);
+        }
         /// <summary>
         /// Универсально обновляет одно поле в таблице по заданному условию.
         /// </summary>
@@ -72,7 +84,7 @@ namespace SewingProduction.Services
         /// <summary>
         /// универсально вставляет данные в таблицу
         /// </summary>
-        /// <typeparam name="T">тип объекта для вставки</typeparam>
+        /// <typeparam name="T">тип объекта (из модели) для вставки</typeparam>
         /// <param name="tableName">имя таблицы</param>
         /// <param name="keyFieldName">имя ключевого параметра</param>
         /// <param name="entity">объект для вставки</param>
@@ -445,7 +457,11 @@ namespace SewingProduction.Services
         //    }
         //}
 
-        public async Task DeleteByAnnId(string tableName, int annId)
+
+        #endregion
+
+        #region мои методы
+         public async Task DeleteByAnnId(string tableName, int annId)
         {
             try
             {
@@ -460,11 +476,7 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-
-        #endregion
-
-        #region мои методы
-        public async Task<List<ArtNormN>> GetArtNormData()
+       public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @"
             SELECT 
@@ -474,9 +486,9 @@ namespace SewingProduction.Services
                 data_sozd, diz, constr 
             FROM ArtNormNView 
             JOIN status_ann ON status = status_id";
-
-            DataTable table = await _dbHelper.ExecuteQueryAsync(query);
-            return ConvertToList(table);
+            return await _dbHelper.GetConnection().QueryAsync<ArtNormN>(query).ContinueWith(t => t.Result.ToList());
+            //DataTable table = await _dbHelper.ExecuteQueryAsync(query);
+            //return ConvertToList(table);
         }
 
         public void UpdateAnnIdinArticul(int kod, int annId)
@@ -490,10 +502,10 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="kodd"></param>
         /// <returns></returns>
-        public async Task ResetAnnIdinArticul(int kodd)
+        public async Task ResetAnnIdinArticul(int kod)
         {
             string query = "UPDATE sp_articul SET annId = NULL WHERE left(kod,7) = @kod";
-            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kodd } });
+            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
         }
 
 
@@ -521,6 +533,7 @@ namespace SewingProduction.Services
                         ORDER BY gr";
 
             return await _dbHelper.ExecuteQueryAsync(query);
+
         }
         public async Task<DataTable> GetRaskroyNormByGroup(int groupId)
         {
@@ -556,22 +569,22 @@ namespace SewingProduction.Services
                             FROM ArtNormNView 
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
+                return await GetEntityAsync<ArtNormN>(query, new { annId });
+                //DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
 
-                DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                //if (result != null && result.Rows.Count > 0)
+                //{
+                //    // Возвращаем первую запись
+                //    List<ArtNormN> list = ConvertToList(result);
+                //    if (list.Count > 0)
+                //    {
+                //        await _logger.LogEventAsync($"Успешно получены данные ArtNormN для ID {annId}", "GetArtNormDataById");
+                //        return list[0];
+                //    }
+                //}
 
-                if (result != null && result.Rows.Count > 0)
-                {
-                    // Возвращаем первую запись
-                    List<ArtNormN> list = ConvertToList(result);
-                    if (list.Count > 0)
-                    {
-                        await _logger.LogEventAsync($"Успешно получены данные ArtNormN для ID {annId}", "GetArtNormDataById");
-                        return list[0];
-                    }
-                }
-
-                await _logger.LogEventAsync($"Не найдены данные ArtNormN для ID {annId}", "GetArtNormDataById");
-                return null;
+                //await _logger.LogEventAsync($"Не найдены данные ArtNormN для ID {annId}", "GetArtNormDataById");
+                //return null;
             }
             catch (Exception ex)
             {
@@ -631,12 +644,13 @@ namespace SewingProduction.Services
                     data_sozd, diz, constr FROM ArtNormNView
         JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
-            DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
+            //DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kod", kod } });
             //return (List<ArtNormN>)result;
             //DataTable table = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>);
-            return ConvertToList(result);
+            // return ConvertToList(result);
 
             //return (DataTable)result;
+            return await _dbHelper.GetConnection().QueryAsync<ArtNormN>(query).ContinueWith(t => t.Result.ToList());
         }
 
         public async Task<List<ArtNormN>> GetArtNormDataCurrent(string art)

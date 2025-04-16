@@ -12,6 +12,7 @@ using System.Linq;
 using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 using Dapper;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.DataAccess.Native.Excel;
 
 namespace SewingProduction.Forms
 {
@@ -292,9 +293,30 @@ namespace SewingProduction.Forms
 
             await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
 
-            UpdateNewRowInBindingList(newRow);
-
+            UpdateRowInBindingList(newRow);
+            await _artNormService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "ArchAndCopy");
+        }
+
+        private async Task Arch(object sender, EventArgs e)
+        {
+            //int rowHandle = gridViewPreArch.FocusedRowHandle;
+            //ArtNormN oldRow = gridViewPreArch.GetRow(rowHandle) as ArtNormN;
+            //int newRowId = $"select annId from art_norm_n where parentId = {oldRow.AnnID}";
+            //if (oldRow == null) return;
+
+            //await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
+
+            //oldRow.Status = (int)Status.Archive;
+            //oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
+
+            //await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
+
+            //UpdateRowInBindingList(oldRow);
+
+            //await _artNormService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
+            //await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {newRow.AnnID}", "Arch");
+
         }
 
         private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
@@ -390,7 +412,7 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void UpdateNewRowInBindingList(ArtNormN newRow)
+        private void UpdateRowInBindingList(ArtNormN newRow)
         {
             int index = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == newRow.AnnID));
             if (index >= 0)
@@ -464,7 +486,7 @@ namespace SewingProduction.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord); //SaveCopyToDatabase(newRecord);
+                newRecord.AnnID = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
