@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using DevExpress.XtraGrid.Views.Base;
 using System.Collections;
+using SewingProduction.Services;
+using DevExpress.Xpo.DB.Helpers;
 
 namespace SewingProduction.Forms
 {
@@ -37,74 +39,15 @@ namespace SewingProduction.Forms
         {
             try
             {
-                // Fetch unbound articles
-                DataTable relatedData = await _artNormService.GetRelatedSpArt();
-                await _logger.LogEventAsync($"Related Data Count: {relatedData.Rows.Count}", "MyDataArtLoad");
-
-                if (relatedData != null && relatedData.Rows.Count > 0)
-                {
-                    BindingList<MyDataART> artDataList = new BindingList<MyDataART>();
-
-                    foreach (DataRow row in relatedData.Rows)
-                    {
-                        try
-                        {
-                            artDataList.Add(MapDataRowToMyDataART(row));
-                        }
-                        catch (Exception ex)
-                        {
-                            await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                            MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                        ;
-                    }
-
-                    try
-                    {
-                        customGridControl1.DataSource = artDataList; 
-                    }
-                    catch (Exception ex) { MessageBox.Show("Ошибка приведения artDataList.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
-                }
-                else
-                {
-                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+                List<MyDataART> relatedData = await _dbService.GetListAsync<MyDataART>(query, null);
+                customGridControl1.DataSource = relatedData;
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
                 MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-        private MyDataART MapDataRowToMyDataART(DataRow row)
-        {
-            if (row == null || row.Table == null)
-            {
-                Console.WriteLine("Ошибка: передан пустой DataRow или у него отсутствует таблица!");
-                return null;
-            }
-
-            // Проверяем, содержит ли DataRow нужные колонки
-            bool hasKod = row.Table.Columns.Contains("Kod");
-            bool hasArticul = row.Table.Columns.Contains("Articul");
-            bool hasGrup = row.Table.Columns.Contains("Grup");
-            bool hasMod = row.Table.Columns.Contains("Mod");
-
-            // Логируем список доступных колонок (для отладки)
-            Console.WriteLine("Доступные колонки в DataRow:");
-            foreach (DataColumn col in row.Table.Columns)
-            {
-                Console.WriteLine($" {col.ColumnName}");
-            }
-
-            return new MyDataART
-            {
-                Kod = hasKod && row["Kod"] != DBNull.Value ? Convert.ToInt32(row["Kod"]) : 0,
-                Articul = hasArticul && row["Articul"] != DBNull.Value ? row["Articul"].ToString() : string.Empty,
-                Group = hasGrup && row["Grup"] != DBNull.Value ? row["Grup"].ToString() : string.Empty,
-                Model = hasMod && row["Mod"] != DBNull.Value ? row["Mod"].ToString() : string.Empty,
-                IsChecked = false // Default value
-            };
         }
         private async Task MyDataAnnLoad()
         {
@@ -127,33 +70,6 @@ namespace SewingProduction.Forms
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
             }
-
-            //BindingList<MyDataANN> myDataList = new BindingList<MyDataANN>();
-            //// Заполняем myDataList данными из DataTable 
-            //foreach (MyDataANN row in relatedData)
-            //{
-            //    try
-            //    {
-            //        myDataList.Add(new MyDataANN
-            //        {
-            //            AnnId = row.AnnId,
-            //            Kod = row.Kod,
-            //            Articul = row.Articul,
-            //            Status = row.Status,
-            //            Stat = row.Stat,
-            //            Group = row.Group,
-            //            Model = row.Model,
-            //            IsChecked = false
-            //        });
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-            //        MessageBox.Show("Произошла ошибка. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //    }
-            //    ;
-            //}
-            //customGridControl2.DataSource = myDataList;
         }
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
@@ -201,7 +117,7 @@ namespace SewingProduction.Forms
             var view = grid.MainView as GridView;
             if (view != null && view.FocusedRowHandle >= 0)
             {
-                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod"));
+                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
             }
             return 0;
         }
@@ -249,11 +165,11 @@ namespace SewingProduction.Forms
             foreach (var rasz in oldRaszList)
             {
                 var copy = CloneHelper.CloneAndAssignNewAnnId(rasz, newId, TableNames.RaszId);
-                await _artNormService.SaveEntityAsync(TableNames.Rasz, TableNames.RaszId, copy);
+                await _dbService.SaveEntityAsync(TableNames.Rasz, TableNames.RaszId, copy);
             }
-            await _artNormService.UpdateFieldAsync(TableNames.Rask, "annId", newId, "annId", selectedAnnId);
-            await _artNormService.UpdateFieldAsync(TableNames.Kont,"annId", newId, "annId", selectedAnnId);
-            await _artNormService.UpdateFieldAsync(TableNames.Obr, "annId", newId, "annId", selectedAnnId);
+            await _dbService.UpdateFieldAsync(TableNames.Rask, "annId", newId, "annId", selectedAnnId);
+            await _dbService.UpdateFieldAsync(TableNames.Kont,"annId", newId, "annId", selectedAnnId);
+            await _dbService.UpdateFieldAsync(TableNames.Obr, "annId", newId, "annId", selectedAnnId);
 
         }
         #region headerCheckBox

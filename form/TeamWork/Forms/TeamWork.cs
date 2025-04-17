@@ -27,7 +27,8 @@ namespace SewingProduction.Forms
     public partial class TeamWork : CustomForm
     {
         private readonly DatabaseHelper _dbHelper; 
-        private readonly DbService _artNormService;
+        private readonly DbService _dbService;
+        private readonly ArtNormService _artNormService;
         private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
@@ -53,7 +54,8 @@ namespace SewingProduction.Forms
             InitializeComponent();
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper("ace");
-            _artNormService = new DbService(_dbHelper);
+            _dbService = new DbService(_dbHelper);
+            _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
             // Инициализация привязок данных

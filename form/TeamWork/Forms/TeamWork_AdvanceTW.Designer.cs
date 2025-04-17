@@ -69,9 +69,7 @@ namespace SewingProduction.form
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.customLabel2 = new SewingProduction.CustomLabel();
-            this.constructorComboBox = new SewingProduction.CustomComboBox();
             this.constructorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.designerComboBox = new SewingProduction.CustomComboBox();
             this.designerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.modelTextBox = new SewingProduction.CustomTextBox();
             this.nameTextBox = new SewingProduction.CustomTextBox();
@@ -86,6 +84,7 @@ namespace SewingProduction.form
             this.label3 = new SewingProduction.CustomLabel();
             this.label2 = new SewingProduction.CustomLabel();
             this.customLabel1 = new SewingProduction.CustomLabel();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
             this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -118,7 +117,8 @@ namespace SewingProduction.form
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
+            this.designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
@@ -142,6 +142,8 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -510,11 +512,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 210F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 116F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 177F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 178F));
             this.tableLayoutPanel1.Controls.Add(this.richTextBox1, 7, 1);
             this.tableLayoutPanel1.Controls.Add(this.customLabel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.constructorComboBox, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.designerComboBox, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.modelTextBox, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.nameTextBox, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 6, 0);
@@ -529,6 +529,8 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.customLabel1, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.richTextBox2, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.constructorComboBox, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.designerComboBox, 3, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -544,9 +546,9 @@ namespace SewingProduction.form
             this.tableLayoutPanel1.SetColumnSpan(this.richTextBox1, 2);
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Enabled = false;
-            this.richTextBox1.Location = new System.Drawing.Point(1005, 36);
+            this.richTextBox1.Location = new System.Drawing.Point(1004, 36);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(305, 28);
+            this.richTextBox1.Size = new System.Drawing.Size(306, 28);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -562,44 +564,12 @@ namespace SewingProduction.form
             this.customLabel2.TabIndex = 15;
             this.customLabel2.Text = "конструктор";
             // 
-            // constructorComboBox
-            // 
-            this.constructorComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.constructorComboBox.DataSource = this.constructorBindingSource;
-            this.constructorComboBox.DisplayMember = "fio";
-            this.constructorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.constructorComboBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.constructorComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.constructorComboBox.FormattingEnabled = true;
-            this.constructorComboBox.Location = new System.Drawing.Point(101, 36);
-            this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Size = new System.Drawing.Size(163, 24);
-            this.constructorComboBox.TabIndex = 16;
-            this.constructorComboBox.ValueMember = "tab";
-            this.constructorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
-            // 
-            // designerComboBox
-            // 
-            this.designerComboBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.designerComboBox.DataSource = this.designerBindingSource;
-            this.designerComboBox.DisplayMember = "fio";
-            this.designerComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.designerComboBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.designerComboBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.designerComboBox.FormattingEnabled = true;
-            this.designerComboBox.Location = new System.Drawing.Point(349, 36);
-            this.designerComboBox.Name = "designerComboBox";
-            this.designerComboBox.Size = new System.Drawing.Size(199, 24);
-            this.designerComboBox.TabIndex = 17;
-            this.designerComboBox.ValueMember = "tab";
-            this.designerComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
-            // 
             // modelTextBox
             // 
             this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(349, 3);
+            this.modelTextBox.Location = new System.Drawing.Point(348, 3);
             this.modelTextBox.Name = "modelTextBox";
             this.modelTextBox.Size = new System.Drawing.Size(200, 23);
             this.modelTextBox.TabIndex = 4;
@@ -610,7 +580,7 @@ namespace SewingProduction.form
             this.nameTextBox.Enabled = false;
             this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(679, 3);
+            this.nameTextBox.Location = new System.Drawing.Point(678, 3);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(204, 23);
             this.nameTextBox.TabIndex = 5;
@@ -621,7 +591,7 @@ namespace SewingProduction.form
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Arial", 10F);
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(889, 8);
+            this.label5.Location = new System.Drawing.Point(888, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(103, 16);
             this.label5.TabIndex = 3;
@@ -629,7 +599,7 @@ namespace SewingProduction.form
             // 
             // dateCreate
             // 
-            this.dateCreate.Location = new System.Drawing.Point(1005, 3);
+            this.dateCreate.Location = new System.Drawing.Point(1004, 3);
             this.dateCreate.Name = "dateCreate";
             this.dateCreate.Size = new System.Drawing.Size(123, 20);
             this.dateCreate.TabIndex = 7;
@@ -639,7 +609,7 @@ namespace SewingProduction.form
             this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
             this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(1138, 3);
+            this.btnOK.Location = new System.Drawing.Point(1137, 3);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(75, 25);
             this.btnOK.TabIndex = 8;
@@ -653,7 +623,7 @@ namespace SewingProduction.form
             this.buffer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buffer.Font = new System.Drawing.Font("Arial", 10F);
             this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(889, 36);
+            this.buffer.Location = new System.Drawing.Point(888, 36);
             this.buffer.Name = "buffer";
             this.buffer.Size = new System.Drawing.Size(110, 28);
             this.buffer.TabIndex = 11;
@@ -667,7 +637,7 @@ namespace SewingProduction.form
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Arial", 10F);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(555, 34);
+            this.label4.Location = new System.Drawing.Point(554, 34);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(101, 32);
             this.label4.TabIndex = 2;
@@ -678,7 +648,7 @@ namespace SewingProduction.form
             this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(679, 36);
+            this.secTimeTextBox.Location = new System.Drawing.Point(678, 36);
             this.secTimeTextBox.Name = "secTimeTextBox";
             this.secTimeTextBox.ReadOnly = true;
             this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
@@ -689,7 +659,7 @@ namespace SewingProduction.form
             this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(101, 3);
+            this.groupTextBox.Location = new System.Drawing.Point(100, 3);
             this.groupTextBox.Name = "groupTextBox";
             this.groupTextBox.Size = new System.Drawing.Size(163, 23);
             this.groupTextBox.TabIndex = 19;
@@ -713,7 +683,7 @@ namespace SewingProduction.form
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 10F);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(555, 8);
+            this.label3.Location = new System.Drawing.Point(554, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(104, 16);
             this.label3.TabIndex = 1;
@@ -725,7 +695,7 @@ namespace SewingProduction.form
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Arial", 10F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(270, 8);
+            this.label2.Location = new System.Drawing.Point(269, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 16);
             this.label2.TabIndex = 0;
@@ -737,11 +707,20 @@ namespace SewingProduction.form
             this.customLabel1.AutoSize = true;
             this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(270, 42);
+            this.customLabel1.Location = new System.Drawing.Point(269, 42);
             this.customLabel1.Name = "customLabel1";
             this.customLabel1.Size = new System.Drawing.Size(69, 16);
             this.customLabel1.TabIndex = 14;
             this.customLabel1.Text = "дизайнер";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.richTextBox2.Location = new System.Drawing.Point(678, 70);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(204, 56);
+            this.richTextBox2.TabIndex = 20;
+            this.richTextBox2.Text = "";
             // 
             // gridControlRasz
             // 
@@ -1031,14 +1010,23 @@ namespace SewingProduction.form
             // 
             this.errorProvider1.ContainerControl = this;
             // 
-            // richTextBox2
+            // constructorComboBox
             // 
-            this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.richTextBox2.Location = new System.Drawing.Point(679, 70);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(204, 56);
-            this.richTextBox2.TabIndex = 20;
-            this.richTextBox2.Text = "";
+            this.constructorComboBox.Location = new System.Drawing.Point(100, 36);
+            this.constructorComboBox.Name = "constructorComboBox";
+            this.constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.constructorComboBox.Size = new System.Drawing.Size(100, 20);
+            this.constructorComboBox.TabIndex = 21;
+            // 
+            // designerComboBox
+            // 
+            this.designerComboBox.Location = new System.Drawing.Point(348, 36);
+            this.designerComboBox.Name = "designerComboBox";
+            this.designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.designerComboBox.Size = new System.Drawing.Size(100, 20);
+            this.designerComboBox.TabIndex = 22;
             // 
             // TeamWork_AdvanceTW
             // 
@@ -1075,6 +1063,8 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1167,8 +1157,6 @@ namespace SewingProduction.form
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomLabel customLabel1;
         private CustomLabel customLabel2;
-        private CustomComboBox constructorComboBox;
-        private CustomComboBox designerComboBox;
         private CustomLabel customLabel3;
         private CustomTextBox groupTextBox;
         private System.Windows.Forms.BindingSource designerBindingSource;
@@ -1200,5 +1188,7 @@ namespace SewingProduction.form
         private CustomLabel statusLabel;
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private DevExpress.XtraEditors.LookUpEdit constructorComboBox;
+        private DevExpress.XtraEditors.LookUpEdit designerComboBox;
     }
 }

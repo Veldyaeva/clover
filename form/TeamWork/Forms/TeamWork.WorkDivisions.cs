@@ -208,7 +208,7 @@ namespace SewingProduction.Forms
                 AnnID = 0
             };
 
-            int newId = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
+            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
             if (newId <= 0)
             {
                 MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -291,10 +291,10 @@ namespace SewingProduction.Forms
             selectedItem.Status = newStatus;
             selectedItem.StatusText = StatusHelper.GetStatusText(newStatus);
 
-            await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
 
             UpdateRowInBindingList(newRow);
-            await _artNormService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
+            await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "ArchAndCopy");
         }
 
@@ -328,7 +328,7 @@ namespace SewingProduction.Forms
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             if (newRow != null && newRow.AnnID > 0)
@@ -357,7 +357,7 @@ namespace SewingProduction.Forms
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
@@ -486,7 +486,7 @@ namespace SewingProduction.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
+                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -526,7 +526,7 @@ namespace SewingProduction.Forms
 
                 // Вызов метода для отвязки артикула
                 await _artNormService.ResetAnnIdinArticul(kod);
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annId);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annId);
 
                 // Обновление данных в таблице после отвязки
                 _nzpByKoddRtSource.RemoveCurrent();
