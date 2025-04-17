@@ -310,11 +310,9 @@ namespace SewingProduction.Forms
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
 
 
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
-                await LoadWorksbyArt(0, "") :
-    await LoadWorksbyArt(kod, articul);
+            List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(kod, articul);
 
-            customGridControl2.DataSource = list; //LoadWorksbyArt(kod, articul);
+            customGridControl2.DataSource = list; 
         }
         private void gridControl2_Leave_Internal(object sender, EventArgs e)
         {
@@ -541,7 +539,7 @@ namespace SewingProduction.Forms
             int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
 
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
+            List<MyDataANN> list = loadAllCheckBox.Checked ?
                 await LoadWorksbyArt(0, "") :
                 await LoadWorksbyArt(kod, articul);
             customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);

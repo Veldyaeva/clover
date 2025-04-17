@@ -56,7 +56,7 @@ namespace SewingProduction.Services
         /// <param name="query">запрос</param>
         /// <param name="parameters">объект с параметрами запроса</param>
         /// <returns>Список объектов типа T</returns>
-        public async Task<List<T>> GetListAsync<T>(string query, object parameters = null)
+        public async Task<List<T>> GetListAsync<T>(string query, object parameters)
         {
             using (var connection = _dbHelper.GetConnection())
             {

@@ -54,12 +54,12 @@ namespace SewingProduction.Forms
             try
             {
                 int kod = GetSelectedKodFromGrid(customGridControl1);
-                List<ArtNormN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
-
+                List<MyDataANN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+               
                 if (artNormNs != null)
                 {
-                    var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
-                    customGridControl3.DataSource = relatedMyDataAnn;
+                    //   var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
+                    customGridControl3.DataSource = artNormNs;// relatedMyDataAnn;
                 }
                 else
                 {
@@ -78,36 +78,37 @@ namespace SewingProduction.Forms
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
         /// 
-        private async Task<BindingList<MyDataANN>> LoadWorksbyArt(int kod, string articul)
+        private async Task<List<MyDataANN>> LoadWorksbyArt(int kod, string articul)
         {
             try
             {
-                List<ArtNormN> relatedData;
+                List<MyDataANN> relatedData;
                 bool loadAll = loadAllCheckBox.Checked;
                 // Если включен чекбокс "Загрузить все"
-                //relatedData = //ConvertDataTableToList<ArtNormN>(await _artNormService.GetArtNormDataCurrent(kod, loadAll));
                 relatedData = await _artNormService.GetArtNormDataCurrent(kod, loadAll);
                 if (!loadAll)
                 { // Если артикул содержит "-", фильтруем по его первой части
                     int dashIndex = articul.IndexOf("-");
                     if (dashIndex > 0)
                     {
-                        List<ArtNormN> partialData = await _artNormService.GetArtNormDataCurrent(articul.Substring(0, dashIndex));
+                        string artPrefix = articul.Substring(0, dashIndex);
+                        List<MyDataANN> partialData = await _artNormService.GetArtNormDataByArticulPrefix(artPrefix);
                         if (partialData != null)
                             relatedData.AddRange(partialData);
                     }
                 }
 
-                BindingList<MyDataANN> myDataList = ConvertToMyDataAnn(relatedData);
+               // BindingList<MyDataANN> myDataList = ConvertToMyDataAnn(relatedData);
 
                 await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
-                return myDataList;
+                //return myDataList;
+                return relatedData;
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки РТ для кода {kod} и артикула {articul}");
                 MessageBox.Show("Ошибка загрузки данных. Подробности в логе.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return new BindingList<MyDataANN>(); // Возвращаем пустой список в случае ошибки
+                return new List<MyDataANN>(); // Возвращаем пустой список в случае ошибки
             }
 
         }
@@ -309,7 +310,7 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                int selectedArt = -1;
+                string selectedArt = "";
                 int selectedAnn = -1;
                 MyDataART selectedArtRow = null;
                 MyDataANN selectedAnnRow = null;
@@ -338,7 +339,7 @@ namespace SewingProduction.Forms
                 }
 
                 // Проверяем, выбраны ли оба элемента
-                if (selectedArt == -1 || selectedAnn == -1)
+                if (selectedArt == "" || selectedAnn == -1)
                 {
                     MessageBox.Show("Выберите артикул и разделение труда для привязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;

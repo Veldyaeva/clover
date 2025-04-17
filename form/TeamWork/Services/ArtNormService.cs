@@ -1,4 +1,5 @@
-﻿using SewingProduction.Helpers;
+﻿using Dapper;
+using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Z.Dapper;
-using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
-using Dapper;
-using DevExpress.Mvvm.Native;
-using System.Reflection;
 
 namespace SewingProduction.Services
 {
@@ -111,7 +107,7 @@ namespace SewingProduction.Services
             //}
         }
 
-        public void UpdateAnnIdinArticul(int kod, int annId)
+        public void UpdateAnnIdinArticul(string kod, int annId)
         {
             string query = "UPDATE sp_articul SET annId = @annId WHERE kod like @kod";
             _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", kod + "%" }, { "@annId", annId } });
@@ -126,23 +122,6 @@ namespace SewingProduction.Services
         {
             string query = "UPDATE sp_articul SET annId = NULL WHERE left(kod,7) = @kod";
             await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
-        }
-
-
-
-        public async Task<int> GetPztRecordCountByAnnIdsAsync(List<int> annIdList)
-        {
-            var query = @"
-        SELECT COUNT(pzt.idrecord)
-        FROM plan_zagr_two pzt
-        INNER JOIN norm_rasz nr ON pzt.pztNrID = nr.nrID
-        WHERE (pzt.tab <> 0 and pzt.tab IS NOT NULL)
-          AND nr.annId IN @AnnIdList";
-
-            using (var connection = _dbHelper.GetConnection())
-            {
-                return await connection.ExecuteScalarAsync<int>(query, new { AnnIdList = annIdList });
-            }
         }
 
         public async Task<DataTable> GetRaskroyNormGroups()
@@ -190,21 +169,6 @@ namespace SewingProduction.Services
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
                 return await _dbService.GetEntityAsync<ArtNormN>(query, new { annId });
-                //DataTable result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
-
-                //if (result != null && result.Rows.Count > 0)
-                //{
-                //    // Возвращаем первую запись
-                //    List<ArtNormN> list = ConvertToList(result);
-                //    if (list.Count > 0)
-                //    {
-                //        await _logger.LogEventAsync($"Успешно получены данные ArtNormN для ID {annId}", "GetArtNormDataById");
-                //        return list[0];
-                //    }
-                //}
-
-                //await _logger.LogEventAsync($"Не найдены данные ArtNormN для ID {annId}", "GetArtNormDataById");
-                //return null;
             }
             catch (Exception ex)
             {
@@ -252,36 +216,40 @@ namespace SewingProduction.Services
         /// загрузка артикулов для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public async Task<List<ArtNormN>> GetArtNormDataCurrent(int kod, bool all)
+        public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool all)
         {
             string query = "";
-            if (all)
-            {
-                query = @"SELECT  
+            query = @"SELECT  
                                         SUBSTRING(kod, 1, 7) AS kod, annId, grup, articul, mod, sek, sek_vyaz,
                     data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
                     sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
                     data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status!=3";
-
-            }
-            else
+            if (!all)
             {
-                query =
-@"SELECT                        
-                                        SUBSTRING(kod, 1, 7) AS kod, annId, grup, articul, mod, sek, sek_vyaz,
-                    data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-                    sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-                    data_sozd, diz, constr FROM ArtNormNView
-        JOIN status_ann ON status=status_id WHERE (status<3) AND (annId IN (SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
+                query += " AND(annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
-            return await _dbHelper.GetConnection().QueryAsync<ArtNormN>(query).ContinueWith(t => t.Result.ToList());
+            return await _dbHelper.GetConnection().QueryAsync<MyDataANN>(query).ContinueWith(t => t.Result.ToList());
         }
 
-        public async Task<List<ArtNormN>> GetArtNormDataCurrent(string art)
+        // Renamed from GetArtNormDataCurrent(string art) to avoid overload conflict signature difference only in return type
+        // Changed return type to List<ArtNormN> as the query selects from ArtNormNView
+        public async Task<List<MyDataANN>> GetArtNormDataByArticulPrefix(string artPrefix)
         {
-            string query = $"SELECT * FROM artNormNView WHERE status<{(int)Status.Archive} AND articul IN (SELECT articul FROM View_sp_articul WHERE articul LIKE @art)";
-            object result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "art", art + "%" } });
-            return result as List<ArtNormN>;
+            // Simplified query to directly use LIKE on ArtNormNView
+            string query = $"SELECT * FROM artNormNView WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
+
+            var parameters = new
+            {
+                StatusArchive = (int)Status.Archive,
+                ArtPattern = artPrefix + "%" // Add wildcard for LIKE
+            };
+
+            // Use QueryAsync<ArtNormN> for correct mapping
+            using (var connection = _dbHelper.GetConnection())
+            {
+                 var result = await connection.QueryAsync<MyDataANN>(query, parameters);
+                 return result.ToList();
+            }
         }
 
         /// <summary>
@@ -292,9 +260,8 @@ namespace SewingProduction.Services
         public async Task<string> GetImage(int kod)
         {
             string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            // Use ExecuteScalarAsync to get a single value
             object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object> { { "@kod", kod } });
-            return result?.ToString(); // Return the path as string or null
+            return result?.ToString(); 
         }
 
         internal Task<DataTable> GetNormOper(int i)
@@ -329,36 +296,6 @@ namespace SewingProduction.Services
             return string.Empty;
         }
 
-        ///// <summary>
-        ///// Получает список объектов NormRasz для указанного annId
-        ///// </summary>
-        ///// <param name="annId">Идентификатор разделения труда</param>
-        ///// <returns>Список объектов NormRasz</returns>
-        //public async Task<List<NormRasz>> GetNormRaszList(int annId)
-        //{
-        //    DataTable table = await GetRelatedNormRasz(annId);
-        //    List<NormRasz> result = new List<NormRasz>();
-
-        //    foreach (DataRow row in table.Rows)
-        //    {
-        //        NormRasz item = new NormRasz
-        //        {
-        //            AnnId = Convert.ToInt32(row["annId"]),
-        //            N = row["n"] != DBNull.Value ? Convert.ToInt32(row["n"]) : 0,
-        //            N1 = row["n1"] != DBNull.Value ? Convert.ToInt32(row["n1"]) : 0,
-        //            Razryad = row["razryd"] != DBNull.Value ? Convert.ToInt32(row["razryd"]) : 0,
-        //            Text = row["text"] != DBNull.Value ? row["text"].ToString() : string.Empty,
-        //            Sek = row["sek"] != DBNull.Value ? Convert.ToInt32(row["sek"]) : 0,
-        //            Kod = row["kod"] != DBNull.Value ? Convert.ToInt32(row["kod"]) : 0,
-        //            Kod_o = row["kod_o"] != DBNull.Value ? Convert.ToInt32(row["kod_o"]) : 0,
-        //            Kod_ob = row["kod_ob"] != DBNull.Value ? Convert.ToInt32(row["kod_ob"]) : 0
-        //        };
-        //        result.Add(item);
-        //    }
-
-        //    return result;
-        //}
-
         #endregion
 
         #region работа со связанными данными
@@ -377,13 +314,6 @@ namespace SewingProduction.Services
                 var result = await connection.QueryAsync<NormRasz>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();
             }
-        }
-        public DataTable GetRelatedNormRasz1(int annId)
-        {
-            //string query = "SELECT AnnId, N, N1, Razryd as Rasryad, Text, Sek, Kod, kod_o as KodO, kod_ob as KodOb, nrId FROM norm_rasz WHERE annId = @annId";
-            string query = "SELECT AnnId, N, N1, Razryd, Text, Sek, Kod, kod_o, kod_ob, nrId FROM normRaszView WHERE annId = @annId";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@annId", annId } });
-            //.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
         }
 
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
