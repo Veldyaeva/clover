@@ -114,8 +114,8 @@ namespace SewingProduction.Forms
                 //modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
                 //secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
 
-                designerTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
-                constructorTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+                designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
+                constructorTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
             }
             catch (Exception ex)
             {
@@ -199,7 +199,7 @@ namespace SewingProduction.Forms
                 dateCreate = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
-                dataUpdate = DateTime.MinValue,
+                dateUpdate = DateTime.MinValue,
                 SekKr = 0,
                 Slogn = 0,
                 Status = 1,
@@ -477,7 +477,7 @@ namespace SewingProduction.Forms
 
                 ArtNormN newRecord = sourceRecord.CloneProperties();
                 newRecord.dateCreate = DateTime.Now;
-                newRecord.dataUpdate = null;
+                newRecord.dateUpdate = null;
                 newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
                 newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
                 newRecord.Arh = false;

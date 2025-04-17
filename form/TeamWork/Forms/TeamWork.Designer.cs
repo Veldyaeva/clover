@@ -68,13 +68,13 @@ namespace SewingProduction.Forms
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
             this.ANNgridControl = new DevExpress.XtraGrid.GridControl();
             this.ANNgridView = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.colgrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colgroup = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colarticul = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colmod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldata_sozd = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coldata_obn = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldateCreate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.coldateUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -99,18 +99,6 @@ namespace SewingProduction.Forms
             this.articul = new System.Windows.Forms.RadioButton();
             this.kode = new System.Windows.Forms.RadioButton();
             this.group = new System.Windows.Forms.RadioButton();
-            //this.panel5 = new System.Windows.Forms.Panel();
-            //this.SortBox = new SewingProduction.CustomCheckBox();
-            //this.customButton6 = new SewingProduction.CustomButton();
-            //this.customButton9 = new SewingProduction.CustomButton();
-            //this.customButton8 = new SewingProduction.CustomButton();
-            //this.customButton10 = new SewingProduction.CustomButton();
-            //this.customButton5 = new SewingProduction.CustomButton();
-            //this.panelControl7 = new DevExpress.XtraEditors.PanelControl();
-            //this.label6 = new SewingProduction.CustomLabel();
-            //this.customComboBox1 = new SewingProduction.CustomComboBox();
-            //this.label7 = new SewingProduction.CustomLabel();
-            //this.aproovmentBtn = new SewingProduction.CustomButton();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -776,13 +764,13 @@ namespace SewingProduction.Forms
             this.ANNgridView.Appearance.SelectedRow.Options.UseFont = true;
             this.ANNgridView.Appearance.SelectedRow.Options.UseTextOptions = true;
             this.ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.colgrup,
+            this.colgroup,
             this.colarticul,
             this.colmod,
             this.colsek,
             this.colsek_vyaz,
-            this.coldata_sozd,
-            this.coldata_obn,
+            this.coldateCreate,
+            this.coldateUpdate,
             this.colsek_shv,
             this.gridColumn35,
             this.gridColumn5,
@@ -810,14 +798,14 @@ namespace SewingProduction.Forms
             this.ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.ANNgridView.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView3_FocusedRowChanged);
             // 
-            // colgrup
+            // colgroup
             // 
-            this.colgrup.Caption = "группа";
-            this.colgrup.FieldName = "Group";
-            this.colgrup.Name = "colgrup";
-            this.colgrup.Visible = true;
-            this.colgrup.VisibleIndex = 0;
-            this.colgrup.Width = 55;
+            this.colgroup.Caption = "группа";
+            this.colgroup.FieldName = "Group";
+            this.colgroup.Name = "colgroup";
+            this.colgroup.Visible = true;
+            this.colgroup.VisibleIndex = 0;
+            this.colgroup.Width = 55;
             // 
             // colarticul
             // 
@@ -854,21 +842,21 @@ namespace SewingProduction.Forms
             this.colsek_vyaz.Visible = true;
             this.colsek_vyaz.VisibleIndex = 4;
             // 
-            // coldata_sozd
+            // coldateCreate
             // 
-            this.coldata_sozd.Caption = "создание";
-            this.coldata_sozd.FieldName = "DataSozd";
-            this.coldata_sozd.Name = "coldata_sozd";
-            this.coldata_sozd.Visible = true;
-            this.coldata_sozd.VisibleIndex = 5;
+            this.coldateCreate.Caption = "создание";
+            this.coldateCreate.FieldName = "dateCreate";
+            this.coldateCreate.Name = "coldateCreate";
+            this.coldateCreate.Visible = true;
+            this.coldateCreate.VisibleIndex = 5;
             // 
-            // coldata_obn
+            // coldateUpdate
             // 
-            this.coldata_obn.Caption = "обновление";
-            this.coldata_obn.FieldName = "DataObn";
-            this.coldata_obn.Name = "coldata_obn";
-            this.coldata_obn.Visible = true;
-            this.coldata_obn.VisibleIndex = 6;
+            this.coldateUpdate.Caption = "обновление";
+            this.coldateUpdate.FieldName = "dateUpdate";
+            this.coldateUpdate.Name = "coldateUpdate";
+            this.coldateUpdate.Visible = true;
+            this.coldateUpdate.VisibleIndex = 6;
             // 
             // colsek_shv
             // 
@@ -2959,13 +2947,13 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn23;
         private DevExpress.XtraGrid.Columns.GridColumn kolNZP;
         private DevExpress.XtraGrid.Views.Grid.GridView ANNgridView;
-        private DevExpress.XtraGrid.Columns.GridColumn colgrup;
+        private DevExpress.XtraGrid.Columns.GridColumn colgroup;
         private DevExpress.XtraGrid.Columns.GridColumn colarticul;
         private DevExpress.XtraGrid.Columns.GridColumn colmod;
         private DevExpress.XtraGrid.Columns.GridColumn colsek;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_vyaz;
-        private DevExpress.XtraGrid.Columns.GridColumn coldata_sozd;
-        private DevExpress.XtraGrid.Columns.GridColumn coldata_obn;
+        private DevExpress.XtraGrid.Columns.GridColumn coldateCreate;
+        private DevExpress.XtraGrid.Columns.GridColumn coldateUpdate;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_shv;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_vyazo;

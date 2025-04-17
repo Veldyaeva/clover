@@ -87,7 +87,7 @@ namespace SewingProduction.Models
         }
 
         [Column("data_obn")]
-        public DateTime? dataUpdate { get; set; }
+        public DateTime? dateUpdate { get; set; }
 
         [Column("sek_kr")]
         public int SekKr { get; set; }

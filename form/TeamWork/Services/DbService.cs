@@ -11,11 +11,12 @@ using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 using Dapper;
 using DevExpress.Mvvm.Native;
+using System.Reflection;
 
 namespace SewingProduction.Services
 {
     /// <summary>
-/// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_raskr, norm_kont и доп.обработки.
+/// Сервис работы с базой данных для таблиц art_norm, norm_rasz, norm_rask, norm_kont и доп.обработки.
 /// Использует Dapper для ускоренного доступа к данным.
 /// </summary>
  public class DbService
@@ -476,8 +477,42 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-       public async Task<List<ArtNormN>> GetArtNormData()
+        public async Task<List<ArtNormN>> GetArtNormData()
         {
+            // --- Explicit Mapping for ArtNormN ---
+            var map = new CustomPropertyTypeMap(
+               typeof(ArtNormN),
+               (type, columnName) =>
+               {
+                   // Standard properties matching column names (case-insensitive)
+                   var prop = type.GetProperties().FirstOrDefault(p => p.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+                   if (prop != null && !Attribute.IsDefined(prop, typeof(NotMappedAttribute))) return prop;
+
+                   // Explicit mapping for properties with different names or needing specific handling
+                   if (columnName.Equals("grup", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.Group));
+                   if (columnName.Equals("sek_shv", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekShv));
+                   if (columnName.Equals("sek_vyaz5", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz5));
+                   if (columnName.Equals("sek_vyaz6", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz6));
+                   if (columnName.Equals("sek_vyaz7", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz7));
+                   if (columnName.Equals("sek_vyaz10", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz10));
+                   if (columnName.Equals("sek_vyaz12", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz12));
+                   if (columnName.Equals("sek_vyazo", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyazo));
+                   if (columnName.Equals("sek_vyaz", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz));
+                   if (columnName.Equals("data_sozd", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.dateCreate));
+                   if (columnName.Equals("data_obn", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.dateUpdate));
+                   if (columnName.Equals("sek_kr", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekKr));
+                   if (columnName.Equals("parentId", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.ParentId));
+                   // Explicitly map statusText even though StatusText property is [NotMapped] (Dapper might populate it if mapped)
+                   if (columnName.Equals("statusText", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.StatusText));
+                   // Add other mappings if needed
+
+                   // If no match found by name or explicit rule, ignore the column
+                   return null;
+               });
+
+            SqlMapper.SetTypeMap(typeof(ArtNormN), map);
+            // --- End Explicit Mapping ---
+
             string query = @"
             SELECT 
                 SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
@@ -486,9 +521,18 @@ namespace SewingProduction.Services
                 data_sozd, diz, constr 
             FROM ArtNormNView 
             JOIN status_ann ON status = status_id";
-            return await _dbHelper.GetConnection().QueryAsync<ArtNormN>(query).ContinueWith(t => t.Result.ToList());
-            //DataTable table = await _dbHelper.ExecuteQueryAsync(query);
-            //return ConvertToList(table);
+            using (var connecion = _dbHelper.GetConnection())
+            {
+                var res = await connecion.QueryAsync<ArtNormN>(query);
+                return res.ToList();
+            } 
+            //finally
+            //{
+            //    // --- Reset Type Map ---
+            //    // Important: Reset to default map to avoid affecting other queries/types
+            //     SqlMapper.SetTypeMap(typeof(ArtNormN), null);
+            //     // --- End Reset Type Map ---
+            //}
         }
 
         public void UpdateAnnIdinArticul(int kod, int annId)
@@ -874,7 +918,7 @@ namespace SewingProduction.Services
                     Mod = row["mod"].ToString(),
                     Sek = row["sek"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek"]),
                     SekVyaz = row["sek_vyaz"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_vyaz"]),
-                    dataUpdate = row["data_obn"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_obn"]),
+                    dateUpdate = row["data_obn"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(row["data_obn"]),
                     SekShv = row["sek_shv"] == DBNull.Value ? 0 : Convert.ToInt32(row["sek_shv"]),
                     StatusText = row["statusText"] == DBNull.Value ? "" : row["statusText"].ToString(),
                     Status = row["status"] == DBNull.Value ? 0 : Convert.ToInt32(row["status"]),
