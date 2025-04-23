@@ -1,5 +1,6 @@
 ﻿using DevExpress.Utils.Menu;
 using DevExpress.XtraGrid;
+using SewingProduction.form.TeamWork.Interfaces;
 using DevExpress.XtraReports.Native;
 using SewingProduction.form.UserDistribution;
 using SewingProduction.Helpers;
@@ -19,6 +20,7 @@ namespace SewingProduction
         void ApplyTheme();
     }
     public interface IThemeableControl
+    public class CustomButton : Button, IThemeable
     {
         string ObjectName { get; set; }
         void ApplyPermission(UserClass user);
@@ -147,8 +149,185 @@ namespace SewingProduction
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
     }
-    public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
+
+    public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable
     {
+        public CustomSimpleButton()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+
+        public void ApplyTheme()
+        {
+
+            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
+
+            AppearanceDisabled.BackColor = Color.Green; 
+            AppearanceDisabled.ForeColor = Color.GreenYellow;  
+            AppearanceDisabled.Options.UseBackColor = true;
+            AppearanceDisabled.Options.UseForeColor = true;
+            //BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+            //ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+            //Font = ThemeManager.SharedSettings.DefaultFont;
+
+            //FlatStyle = FlatStyle.Standard;
+            //FlatAppearance.BorderSize = 1;
+            Height = ThemeManager.SharedSettings.ButtonHeight;
+        }
+
+        private void OnThemeChanged() => ApplyTheme();
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomRadioButton : RadioButton, IThemeable
+    {
+        public CustomRadioButton()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomDateTimePicker : DateTimePicker, IThemeable
+    {
+        public CustomDateTimePicker()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomNumericUpDown : NumericUpDown, IThemeable
+    {
+        public CustomNumericUpDown()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomListBox : ListBox, IThemeable
+    {
+        public CustomListBox()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomCheckedListBox : CheckedListBox, IThemeable
+    {
+        public CustomCheckedListBox()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable
+    {
+        public CustomTextBoxEx()
+        {
+            ApplyTheme();
+            ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        public void ApplyTheme()
+        {
+            BackColor = ThemeManager.ActiveTheme.TextBoxBackground;
+            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
+            Font = ThemeManager.SharedSettings.DefaultFont;
+        }
+        private void OnThemeChanged() => ApplyTheme();
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ThemeManager.ThemeChanged -= OnThemeChanged;
+            }
+            base.Dispose(disposing);
+        }
+    }
+
+    public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
         public string ObjectName { get; set; }
         public CustomMaskedTextBox()
         {
@@ -404,7 +583,6 @@ namespace SewingProduction
             //this.ForeColor = Theme.TextBoxText;
             //this.Font = Theme.DefaultFont;
         }
-
         public void ApplyPermission(UserClass user)
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
@@ -431,6 +609,7 @@ namespace SewingProduction
             }
         }
     }
+
     /// <summary>
     /// Кастомная форма с градиентным фоном
     /// </summary>

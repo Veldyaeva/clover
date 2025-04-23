@@ -11,12 +11,15 @@ using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using System.Xml;
 using DevExpress.XtraGrid.Columns;
+using System.Xml.Linq;
+using SewingProduction.Extensions;
+using DevExpress.ClipboardSource.SpreadsheetML;
 
 namespace SewingProduction.Helpers
 {
-    public  class GridHelper
+    public class GridHelper
     {
-        public readonly HybridLogger _logger = new HybridLogger();
+        public readonly FileLogger _logger = new FileLogger();
         #region async
         /// <summary>
         /// Загружает данные в `GridControl` через `BindingSource` асинхронно.
@@ -24,39 +27,57 @@ namespace SewingProduction.Helpers
         /// <param name="grid">GridControl, в который загружаются данные</param>
         /// <param name="source">BindingSource для привязки данных</param>
         /// <param name="data">DataTable с данными</param>
-        public static async Task LoadGridControlDataAsync(GridControl grid, BindingSource source, DataTable data)
+        public static async Task LoadGridControlDataAsync<T>(GridControl grid, BindingSource source, List<T> data)
         {
             await Task.Run(() =>
             {
-                // Подготовка данных в фоновом потоке
-                var newData = data.Copy();
-
                 grid.Invoke((MethodInvoker)(() =>
                 {
-                    source.DataSource = newData;
+                    source.DataSource = data;
                     grid.DataSource = source;
                     grid.RefreshDataSource();
                 }));
             });
         }
 
-        public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
-        {
-            await Task.Run(() =>
-            {
-                source.DataSource = data;
-            });
+        //public static async Task LoadListDataAsync(List<MyDataART> list, BindingSource source, List<MyDataART> data)
+        //{
+        //    await Task.Run(() =>
+        //    {
+        //        source.DataSource = data;
+        //    });
 
-            if (source.CurrencyManager?.Current is Control control && control.InvokeRequired)
+        //    if (source.CurrencyManager?.Current is Control control && control.InvokeRequired)
+        //    {
+        //        control.Invoke((MethodInvoker)(() =>
+        //        {
+        //            source.ResetBindings(false);
+        //        }));
+        //    }
+        //    else
+        //    {
+        //        source.ResetBindings(false);
+        //    }
+        //}
+
+        public static async Task LoadListDataAsync<T>(GridControl grid, BindingSource source, List<T> dataList)
+        {
+            if (grid.InvokeRequired)
             {
-                control.Invoke((MethodInvoker)(() =>
+                // Мы не в UI-потоке → оборачиваем всё в Invoke
+                await grid.InvokeAsync(() =>
                 {
-                    source.ResetBindings(false);
-                }));
+                    source.DataSource = dataList;
+                    grid.DataSource = source;
+                    grid.RefreshDataSource();
+                });
             }
             else
             {
-                source.ResetBindings(false);
+                // Уже в UI-потоке
+                source.DataSource = dataList;
+                grid.DataSource = source;
+                grid.RefreshDataSource();
             }
         }
 
@@ -104,10 +125,10 @@ namespace SewingProduction.Helpers
         public static Task<string> GetSelectedColumnNameAsync(bool kode, bool articul, bool model, bool group)
         {
             return Task.FromResult(
-                kode ? "kod" :
-                articul ? "articul" :
-                model ? "mod" :
-                group ? "grup" :
+                kode ? "Kod" :
+                articul ? "Articul" :
+                model ? "Mod" :
+                group ? "Group" :
                 string.Empty);
         }
         /// <summary>
@@ -159,43 +180,81 @@ namespace SewingProduction.Helpers
 
         #region GridColumnSettings
         // Сохранение настроек грида
-        public void SaveGridViewSettings(GridView gridView, string fileName)
-        {
-            try
-            {
-                string appPath = Application.StartupPath;
-                string settingsPath = Path.Combine(appPath, "Settings");
+        //public void SaveGridViewSettings(GridView gridView, string fileName)
+        //{
+        //    try
+        //    {
+        //        string appPath = System.Windows.Forms.Application.StartupPath;
+        //        string settingsPath = Path.Combine(appPath, "Settings");
 
-                // Создаем директорию, если она не существует
-                if (!Directory.Exists(settingsPath))
-                    Directory.CreateDirectory(settingsPath);
+        //        // Create directory if it doesn't exist
+        //        if (!Directory.Exists(settingsPath))
+        //            Directory.CreateDirectory(settingsPath);
 
-                string fullPath = Path.Combine(settingsPath, fileName);
+        //        string fullPath = Path.Combine(settingsPath, fileName);
 
-                // Создаем XML документ только с информацией о ширине колонок
-                using (XmlWriter writer = XmlWriter.Create(fullPath))
-                {
-                    writer.WriteStartDocument();
-                    writer.WriteStartElement("GridViewLayout");
-                    
-                    // Записываем ширину каждой колонки
-                    foreach (GridColumn column in gridView.Columns)
-                    {
-                        writer.WriteStartElement("Column");
-                        writer.WriteAttributeString("Name", column.Name);
-                        writer.WriteAttributeString("Width", column.Width.ToString());
-                        writer.WriteEndElement(); // Column
-                    }
-                    
-                    writer.WriteEndElement(); // GridViewLayout
-                    writer.WriteEndDocument();
-                }
-            }
-            catch (Exception ex)
-            {
-                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
-            }
-        }
+        //        // Create XML document with column settings
+        //        //using (XmlWriter writer = XmlWriter.Create(fullPath))
+        //        //{
+        //        //    writer.WriteStartDocument();
+        //        //    writer.WriteStartElement("GridViewLayout");
+
+        //        //    writer.WriteStartElement("Columns");
+        //        //    foreach (GridColumn column in gridView.Columns)
+        //        //    {
+        //        //        writer.WriteStartElement("Column");
+        //        //        writer.WriteAttributeString("FieldName", column.FieldName);
+        //        //        writer.WriteAttributeString("Width", column.Width.ToString());
+        //        //        writer.WriteAttributeString("VisibleIndex", column.VisibleIndex.ToString());
+        //        //        writer.WriteAttributeString("Visible", column.Visible.ToString());
+        //        //        writer.WriteEndElement(); // Column
+        //        //    }
+        //        //    writer.WriteEndElement(); // Columns
+
+        //        //    writer.WriteEndElement(); // GridViewLayout
+        //        //    writer.WriteEndDocument();
+        //        //}
+        //        // Сохраняем текущие настройки: запоминаем опции для сохранения внешнего вида и настроек данных
+        //        var storeAppearance = gridView.OptionsLayout.StoreAppearance;
+        //        var storeDataSettings = gridView.OptionsLayout.StoreDataSettings;
+
+        //        // Отключаем сохранение фильтров и поиска, чтобы не сохранить ненужные данные
+        //        gridView.OptionsLayout.StoreAppearance = false;
+        //        gridView.OptionsLayout.StoreDataSettings = false;
+
+        //        // Сохраняем текущий текст поиска, чтобы потом его восстановить
+        //        var findFilterText = gridView.FindFilterText;
+        //        gridView.FindFilterText = string.Empty;
+
+        //        // Сохраняем макет грида в XML
+        //        gridView.SaveLayoutToXml(fullPath);
+
+        //        // Восстанавливаем прежние настройки
+        //        gridView.OptionsLayout.StoreAppearance = storeAppearance;
+        //        gridView.OptionsLayout.StoreDataSettings = storeDataSettings;
+        //        gridView.FindFilterText = findFilterText;
+        //        // Сохраняем текущие значения для восстановления
+        //        var storeVisualOptions = gridView.OptionsLayout.StoreVisualOptions;
+        //         storeAppearance = gridView.OptionsLayout.StoreAppearance;
+        //         storeDataSettings = gridView.OptionsLayout.StoreDataSettings;
+
+        //        // Оставляем только визуальные настройки столбцов (размеры, порядок, видимость)
+        //        gridView.OptionsLayout.StoreVisualOptions = true;
+        //        gridView.OptionsLayout.StoreAppearance = false;
+        //        gridView.OptionsLayout.StoreDataSettings = false;
+
+        //        gridView.SaveLayoutToXml(fullPath);
+
+        //        // Восстанавливаем прежние настройки
+        //        gridView.OptionsLayout.StoreVisualOptions = storeVisualOptions;
+        //        gridView.OptionsLayout.StoreAppearance = storeAppearance;
+        //        gridView.OptionsLayout.StoreDataSettings = storeDataSettings;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Error saving grid view settings");
+        //    }
+        //}
 
         public void GridView_ColumnWidthChanged(object sender, ColumnEventArgs e)
         {
@@ -206,7 +265,92 @@ namespace SewingProduction.Helpers
             }
         }
 
-        public void LoadGridViewSettings(GridView view, string fileName)
+        //public void LoadGridViewSettings(GridView gridView, string fileName)
+        //{
+        //    try
+        //    {
+        //        string appPath = System.Windows.Forms.Application.StartupPath;
+        //        string settingsPath = Path.Combine(appPath, "Settings");
+        //        string fullPath = Path.Combine(settingsPath, fileName);
+
+        //        if (!File.Exists(fullPath))
+        //            return;
+
+        //        using (XmlReader reader = XmlReader.Create(fullPath))
+        //        {
+        //            while (reader.Read())
+        //            {
+        //                if (reader.NodeType == XmlNodeType.Element && reader.Name == "Column")
+        //                {
+        //                    string fieldName = reader.GetAttribute("FieldName");
+        //                    string widthStr = reader.GetAttribute("Width");
+        //                    string visibleIndexStr = reader.GetAttribute("VisibleIndex");
+        //                    string visibleStr = reader.GetAttribute("Visible");
+
+        //                    if (int.TryParse(widthStr, out int width) && 
+        //                        int.TryParse(visibleIndexStr, out int visibleIndex) &&
+        //                        bool.TryParse(visibleStr, out bool visible))
+        //                    {
+        //                        GridColumn column = gridView.Columns[fieldName];
+        //                        if (column != null)
+        //                        {
+        //                            column.Width = width;
+        //                            column.VisibleIndex = visibleIndex;
+        //                            column.Visible = visible;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger.LogErrorAsync(ex, "Error loading grid view settings");
+        //    }
+        //}
+
+        public void SaveGridViewSettings(GridView gridView, string fileName)
+        {
+            try
+            {
+                string appPath = Application.StartupPath;
+                string settingsPath = Path.Combine(appPath, "Settings");
+                if (!Directory.Exists(settingsPath))
+                    Directory.CreateDirectory(settingsPath);
+                string fullPath = Path.Combine(settingsPath, fileName);
+                List<XElement> columnElements = new List<XElement>();
+
+                // Проходим по всем колонкам с помощью цикла
+                for (int i = 0; i < gridView.Columns.Count; i++)
+                {
+                    GridColumn col = gridView.Columns[i];
+                    if (!string.IsNullOrEmpty(col.FieldName))
+                    {
+                        columnElements.Add(
+                            new XElement("Column",
+                                new XAttribute("FieldName", col.FieldName),
+                                new XAttribute("Width", col.Width),
+                                new XAttribute("VisibleIndex", col.VisibleIndex),
+                                new XAttribute("Visible", col.Visible),
+                                new XAttribute("SortOrder", col.SortOrder.ToString()),
+                                new XAttribute("SortIndex", col.SortIndex)
+                                )
+                        );
+                    }
+                }
+
+                XElement columnsElement = new XElement("Columns", columnElements);
+                // Формируем документ и сохраняем его в файл
+                XDocument doc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), columnsElement);
+                doc.Save(fullPath);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида");
+            }
+        }
+
+        public void LoadGridViewSettings(GridView gridView, string fileName)
         {
             try
             {
@@ -214,41 +358,48 @@ namespace SewingProduction.Helpers
                 string settingsPath = Path.Combine(appPath, "Settings");
                 string fullPath = Path.Combine(settingsPath, fileName);
 
-                if (File.Exists(fullPath))
+                if (!File.Exists(fullPath))
+                    return;
+
+                XDocument doc = XDocument.Load(fullPath);
+                var columnElements = doc.Descendants("Column");
+
+                foreach (var element in columnElements)
                 {
-                    using (XmlReader reader = XmlReader.Create(fullPath))
+                    string fieldName = element.Attribute("FieldName")?.Value;
+                    if (string.IsNullOrEmpty(fieldName))
+                        continue;
+
+                    GridColumn column = gridView.Columns[fieldName];
+                    if (column == null)
+                        continue;
+
+                    if (int.TryParse(element.Attribute("Width")?.Value, out int width))
+                        column.Width = width;
+
+                    if (int.TryParse(element.Attribute("VisibleIndex")?.Value, out int visibleIndex))
+                        column.VisibleIndex = visibleIndex;
+
+                    if (bool.TryParse(element.Attribute("Visible")?.Value, out bool visible))
+                        column.Visible = visible;
+                    string sortOrderStr = element.Attribute("SortOrder")?.Value;
+                    if (!string.IsNullOrEmpty(sortOrderStr))
                     {
-                        Dictionary<string, int> columnWidths = new Dictionary<string, int>();
-                        
-                        // Чтение XML и извлечение информации о ширине колонок
-                        while (reader.Read())
+                        if (Enum.TryParse<DevExpress.Data.ColumnSortOrder>(sortOrderStr, out var sortOrder))
                         {
-                            if (reader.NodeType == XmlNodeType.Element && reader.Name == "Column")
-                            {
-                                string name = reader.GetAttribute("Name");
-                                if (int.TryParse(reader.GetAttribute("Width"), out int width) && !string.IsNullOrEmpty(name))
-                                {
-                                    columnWidths[name] = width;
-                                }
-                            }
-                        }
-                        
-                        // Применение сохраненных значений ширины колонок
-                        foreach (GridColumn column in view.Columns)
-                        {
-                            if (columnWidths.TryGetValue(column.Name, out int width))
-                            {
-                                column.Width = width;
-                            }
+                            column.SortOrder = sortOrder;
                         }
                     }
+                    if (int.TryParse(element.Attribute("SortIndex")?.Value, out int sortIndex))
+                        column.SortIndex = sortIndex;
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек грида");
+                _logger.LogErrorAsync(ex, "Error loading grid view settings");
             }
         }
+
         #endregion
 
         #region sync

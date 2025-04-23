@@ -14,11 +14,7 @@ namespace SewingProduction
         /// <summary>
         ///  Редактирование
         /// </summary>
-        Edit = 4,
-        /// <summary>
-        /// Архив
-        /// </summary>
-        Archive = 3,
+        Edit = 3,
         /// <summary>
         /// Архив+копия
         /// </summary>

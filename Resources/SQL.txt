@@ -167,3 +167,17 @@ VALUES
   'раскройный'
 );
 GO
+
+
+
+Индексы для подсчёта назначенных операций
+CREATE NONCLUSTERED INDEX IX_norm_rasz_annId_nrID_kod
+ON norm_rasz (annId, nrID, kod);
+
+CREATE NONCLUSTERED INDEX IX_plan_zagr_two_pztNrID_tab
+ON plan_zagr_two (pztNrID, tab);
+
+
+
+
+
