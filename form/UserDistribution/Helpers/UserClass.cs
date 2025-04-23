@@ -20,6 +20,7 @@ namespace SewingProduction.form.UserDistribution
         public string Fio { get; set; }
         public int BrigID { get; set; }
         public string Brig { get; set; }
+        public string Password { get; set; } = "0";
         public List<string> Roles { get; set; } = new List<string>();
         public List<UserClass> Children { get; set; } = new List<UserClass>();
         public System.Data.DataTable myObjectForm;

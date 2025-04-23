@@ -26,6 +26,7 @@ using System.Drawing;
 using DevExpress.XtraCharts;
 using SewingProduction.Interfaces;
 using System.IO;
+using SewingProduction.form.UserDistribution;
 
 
 namespace SewingProduction.Forms
@@ -40,7 +41,7 @@ namespace SewingProduction.Forms
         private int bufferWorkDivision;
         private readonly BindingList<ArtNormN> _bindingList;
         private readonly BindingSource _bindingSource;
-        public TeamWork()
+        public TeamWork(UserClass user) : base(user)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");

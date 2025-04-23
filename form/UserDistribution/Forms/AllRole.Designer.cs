@@ -45,7 +45,7 @@
             this.HasRole = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridViewRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Б = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Description = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UserName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckedComboBoxEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit();
@@ -59,7 +59,7 @@
             this.customButtonAddRole = new SewingProduction.CustomButton();
             this.customButtonDeleteRole = new SewingProduction.CustomButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.bindingSourceUsers = new System.Windows.Forms.BindingSource(this.components);
+            this.customButtonCopyRole = new SewingProduction.CustomButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewForms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemComboBoxForms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControlRoles)).BeginInit();
@@ -72,7 +72,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditForms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditObject)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUsers)).BeginInit();
             this.SuspendLayout();
             // 
             // gridViewForms
@@ -138,6 +137,7 @@
             // 
             // customGridControlRoles
             // 
+            this.customGridControlRoles.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControlRoles.DataSource = this.bindingSourceRoles;
             this.customGridControlRoles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControlRoles.Font = new System.Drawing.Font("Arial", 10F);
@@ -231,7 +231,7 @@
             this.gridViewRoles.AppearancePrint.Row.Options.UseBackColor = true;
             this.gridViewRoles.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.RoleID,
-            this.Б,
+            this.RoleName,
             this.Description,
             this.UserName});
             this.gridViewRoles.DetailHeight = 3500;
@@ -255,14 +255,14 @@
             this.RoleID.Name = "RoleID";
             this.RoleID.OptionsColumn.ReadOnly = true;
             // 
-            // Б
+            // RoleName
             // 
-            this.Б.Caption = "Название";
-            this.Б.FieldName = "RoleName";
-            this.Б.Name = "Б";
-            this.Б.Visible = true;
-            this.Б.VisibleIndex = 0;
-            this.Б.Width = 255;
+            this.RoleName.Caption = "Название";
+            this.RoleName.FieldName = "RoleName";
+            this.RoleName.Name = "RoleName";
+            this.RoleName.Visible = true;
+            this.RoleName.VisibleIndex = 0;
+            this.RoleName.Width = 255;
             // 
             // Description
             // 
@@ -397,6 +397,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel1.Controls.Add(this.customButtonCopyRole, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.customGridControlRoles, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.customButtonAddRole, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.customButtonDeleteRole, 1, 9);
@@ -416,6 +417,21 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1269, 673);
             this.tableLayoutPanel1.TabIndex = 2;
+            // 
+            // customButtonCopyRole
+            // 
+            this.customButtonCopyRole.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customButtonCopyRole.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonCopyRole.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonCopyRole.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customButtonCopyRole.Location = new System.Drawing.Point(1145, 70);
+            this.customButtonCopyRole.Name = "customButtonCopyRole";
+            this.customButtonCopyRole.ObjectName = null;
+            this.customButtonCopyRole.Size = new System.Drawing.Size(121, 61);
+            this.customButtonCopyRole.TabIndex = 3;
+            this.customButtonCopyRole.Text = "Копировать роль";
+            this.customButtonCopyRole.UseVisualStyleBackColor = false;
+            this.customButtonCopyRole.Click += new System.EventHandler(this.customButtonCopyRole_Click);
             // 
             // AllRole
             // 
@@ -437,7 +453,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditForms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEditObject)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUsers)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -451,7 +466,7 @@
         private CustomButton customButtonAddRole;
         private CustomButton customButtonDeleteRole;
         private DevExpress.XtraGrid.Columns.GridColumn RoleID;
-        private DevExpress.XtraGrid.Columns.GridColumn Б;
+        private DevExpress.XtraGrid.Columns.GridColumn RoleName;
         private DevExpress.XtraGrid.Columns.GridColumn Description;
         private DevExpress.XtraGrid.Columns.GridColumn UserName;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewForms;
@@ -466,11 +481,11 @@
         private DevExpress.XtraGrid.Columns.GridColumn ObjectID;
         private DevExpress.XtraGrid.Columns.GridColumn ObjectName;
         private DevExpress.XtraGrid.Columns.GridColumn HasAccessObject;
-        private System.Windows.Forms.BindingSource bindingSourceUsers;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditForms;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEditObject;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxForms;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxObject;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit1;
+        private CustomButton customButtonCopyRole;
     }
 }

@@ -15,6 +15,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraLayout.Customization;
 using SewingProduction.Helpers;
 using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 
@@ -67,30 +68,43 @@ namespace SewingProduction.form.UserDistribution
         }
         private async void gridViewRoles_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
+            Console.WriteLine("RowUpdated start");
             DataRow row = ((DataRowView)e.Row).Row;
             if (row == null)
                 return;
             gridViewRoles_FocusedRow();
 
+            int rowHandle = gridViewRoles.GetRowHandle(gridViewRoles.DataSource is BindingSource ? ((BindingSource)gridViewRoles.DataSource).IndexOf(e.Row) : -1);
+
             int id = row["RoleID"] != DBNull.Value ? Convert.ToInt32(row["RoleID"]) : 0;
 
             string RoleName = row["RoleName"]?.ToString() ?? "";
             string Description = row["Description"]?.ToString() ?? "";
-
-            if (id > 0)
+            try
             {
-                gridViewRoles_FocusedRow();
-                if (!await checkEditRole())
-                    return;
-                _allRoleDataService.UpdateRoles("RoleName", RoleName, id);
-                _allRoleDataService.UpdateRoles("Description", Description, id);
+                if (id > 0)
+                {
+                    if (!await checkEditRole())
+                        return;
+                    _allRoleDataService.UpdateRoles("RoleName", RoleName, id);
+                    _allRoleDataService.UpdateRoles("Description", Description, id);
+                }
+                else 
+                {
+                    int newId = await _allRoleDataService.InsertRoles(RoleName, Description, _user.UserId);
+                    row["RoleID"] = newId;
+                }
+                await Roles_Load();
+                Console.WriteLine("RowUpdated");
             }
-            else
+            catch (System.Data.SqlClient.SqlException ex)
             {
-                int newId = await _allRoleDataService.InsertRoles(RoleName, Description, _user.UserId);
-                row["RoleID"] = newId;
+                if (ex.Message.Contains("UQ_RoleName"))
+                    MessageBox.Show($"Роль с именем \"{RoleName}\" уже существует. Имя должно быть уникальным.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                else
+                    MessageBox.Show("Ошибка базы данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                gridViewRoles.DeleteRow(gridViewRoles.FocusedRowHandle);
             }
-            await Roles_Load();
         }
         private async void customButtonDeleteRole_Click(object sender, EventArgs e)
         {
@@ -102,7 +116,8 @@ namespace SewingProduction.form.UserDistribution
             var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
                 _allRoleDataService.DeleteRoles(eID);
-            await Roles_Load();
+            //await Roles_Load();
+            gridViewRoles.DeleteRow(gridViewRoles.FocusedRowHandle);
         }
         #endregion
         private async Task<bool> checkEditRole()
@@ -371,6 +386,24 @@ namespace SewingProduction.form.UserDistribution
                 .ToHashSet();
         }
 
+        #region копирование роли
+        private async void customButtonCopyRole_Click(object sender, EventArgs e)
+        {
+            int originalRoleId = selectedRoleId;
+            await _allRoleDataService.CopyRole(originalRoleId, _user.UserId);
+            await Roles_Load();
+            // Устанавливаем фокус на последнюю строку
+            int lastRowHandle = gridViewRoles.RowCount - 1;
+            if (lastRowHandle >= 0)
+            {
+                gridViewRoles.FocusedRowHandle = lastRowHandle;
+                gridViewRoles.ShowPopupEditForm(); // Открываем форму редактирования
+            }
+            int newRoleId = selectedRoleId;
+            Console.WriteLine(originalRoleId.ToString() + ", " + newRoleId.ToString());
+        }
+
+        #endregion
     }
     public class AllRoleDataService
     {
@@ -425,7 +458,18 @@ namespace SewingProduction.form.UserDistribution
                 WHERE RoleID = @eId;";
             await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@eId", eId } });
         }
-
+        public async Task<int> GetCreatorIdByRole(int roleId)
+        {
+            string query = "SELECT CreatorID FROM Roles WHERE RoleID = @RoleID";
+            DataTable dt = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@RoleID", roleId } });
+            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["CreatorID"]) : -1;
+        }
+        public async Task<bool> RoleNameExists(string roleName)
+        {
+            string query = "SELECT COUNT(*) FROM Roles WHERE RoleName = @RoleName";
+            object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object> { { "@RoleName", roleName } });
+            return Convert.ToInt32(result) > 0;
+        }
         #endregion
 
         public async Task<DataTable> GetUsersWithRolesInfo(int roleId, int userId)
@@ -497,6 +541,7 @@ namespace SewingProduction.form.UserDistribution
                 { "@UserID", userId }
             });
         }
+        #region пользователи-роли
         public async Task AddUserRoles(int userId, int roleId)
         {
             string query = "INSERT INTO UserRoles (UserID, RoleID) VALUES (@UserID, @RoleID)";
@@ -506,7 +551,6 @@ namespace SewingProduction.form.UserDistribution
                 { "@RoleID", roleId }
             });
         }
-
         public async Task RemoveUserRoles(int userId, int roleId)
         {
             string query = "DELETE FROM UserRoles WHERE UserID = @UserID AND RoleID = @RoleID";
@@ -517,6 +561,7 @@ namespace SewingProduction.form.UserDistribution
             });
         }
 
+        #endregion
         public async Task UpdateRoleObjectMode(int roleId, int objectId, int mode)
         {
             string deleteQuery = "DELETE FROM RoleObject WHERE RoleID = @RoleID AND ObjectID = @ObjectID";
@@ -569,11 +614,21 @@ namespace SewingProduction.form.UserDistribution
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserID", userId } });
         }
-        public async Task<int> GetCreatorIdByRole(int roleId)
+       
+        public async Task CopyRole(int originalRoleId, int userId)
         {
-            string query = "SELECT CreatorID FROM Roles WHERE RoleID = @RoleID";
-            DataTable dt = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@RoleID", roleId } });
-            return dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["CreatorID"]) : -1;
+            int newRoleId = await InsertRoles("","", userId);
+            // Копируем привязки к объектам (RoleObject)
+            string query = @"
+                INSERT INTO RoleObject (RoleID, ObjectID, ModeID)
+                SELECT @NewRoleID, ObjectID, ModeID
+                FROM RoleObject
+                WHERE RoleID = @OriginalRoleID";
+            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
+            {
+                { "@NewRoleID", newRoleId },
+                { "@OriginalRoleID", originalRoleId }
+            });
         }
     }
 }

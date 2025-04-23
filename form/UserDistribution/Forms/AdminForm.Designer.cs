@@ -48,6 +48,8 @@
             this.NameForm = new DevExpress.XtraGrid.Columns.GridColumn();
             this.NameFormRus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.UserName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Missing = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Added = new DevExpress.XtraGrid.Columns.GridColumn();
             this.bindingSourceGroup = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,6 +57,7 @@
             this.customButtonDeleteObject = new SewingProduction.CustomButton();
             this.customButtonLoadObject = new SewingProduction.CustomButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.customButtonLoadForm = new SewingProduction.CustomButton();
             this.customButtonFormAdd = new SewingProduction.CustomButton();
             this.customButtonDeleteForm = new SewingProduction.CustomButton();
             this.customCheckBoxMyForm = new SewingProduction.CustomCheckBox();
@@ -76,6 +79,8 @@
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.MissingObj = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.AddedObj = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRoles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControlObject)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceObject)).BeginInit();
@@ -98,6 +103,7 @@
             // 
             // customGridControlObject
             // 
+            this.customGridControlObject.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControlObject.DataSource = this.bindingSourceObject;
             this.customGridControlObject.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControlObject.Font = new System.Drawing.Font("Arial", 10F);
@@ -133,13 +139,16 @@
             this.ObjectName,
             this.ObjectNameRus,
             this.UserNameOb,
-            this.ObjectType});
+            this.ObjectType,
+            this.MissingObj,
+            this.AddedObj});
             this.gridViewObject.GridControl = this.customGridControlObject;
             this.gridViewObject.Name = "gridViewObject";
             this.gridViewObject.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridViewObject.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             this.gridViewObject.OptionsDetail.AllowExpandEmptyDetails = true;
             this.gridViewObject.OptionsEditForm.EditFormColumnCount = 1;
+            this.gridViewObject.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridViewObject_RowStyle);
             this.gridViewObject.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridViewObject_InitNewRow);
             this.gridViewObject.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewObject_RowUpdated);
             // 
@@ -192,6 +201,7 @@
             // 
             // customGridControlForms
             // 
+            this.customGridControlForms.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControlForms.DataSource = this.bindingSourceForms;
             this.customGridControlForms.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControlForms.Font = new System.Drawing.Font("Arial", 10F);
@@ -214,12 +224,15 @@
             this.ProjectFormsID,
             this.NameForm,
             this.NameFormRus,
-            this.UserName});
+            this.UserName,
+            this.Missing,
+            this.Added});
             this.gridViewForms.GridControl = this.customGridControlForms;
             this.gridViewForms.Name = "gridViewForms";
             this.gridViewForms.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridViewForms.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
             this.gridViewForms.OptionsEditForm.EditFormColumnCount = 1;
+            this.gridViewForms.RowStyle += new DevExpress.XtraGrid.Views.Grid.RowStyleEventHandler(this.gridViewForms_RowStyle);
             this.gridViewForms.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridViewForms_EditFormHidden);
             this.gridViewForms.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridViewForms_InitNewRow);
             this.gridViewForms.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewForms_RowUpdated);
@@ -261,6 +274,18 @@
             this.UserName.Visible = true;
             this.UserName.VisibleIndex = 3;
             this.UserName.Width = 110;
+            // 
+            // Missing
+            // 
+            this.Missing.Caption = "Missing";
+            this.Missing.FieldName = "Missing";
+            this.Missing.Name = "Missing";
+            // 
+            // Added
+            // 
+            this.Added.Caption = "Added";
+            this.Added.FieldName = "Added";
+            this.Added.Name = "Added";
             // 
             // tableLayoutPanel1
             // 
@@ -359,6 +384,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.customButtonLoadForm, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.customButtonFormAdd, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.customButtonDeleteForm, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.customCheckBoxMyForm, 2, 1);
@@ -370,6 +396,21 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(501, 59);
             this.tableLayoutPanel2.TabIndex = 4;
+            // 
+            // customButtonLoadForm
+            // 
+            this.customButtonLoadForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.customButtonLoadForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.customButtonLoadForm.Font = new System.Drawing.Font("Arial", 10F);
+            this.customButtonLoadForm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customButtonLoadForm.Location = new System.Drawing.Point(3, 3);
+            this.customButtonLoadForm.Name = "customButtonLoadForm";
+            this.customButtonLoadForm.ObjectName = null;
+            this.customButtonLoadForm.Size = new System.Drawing.Size(161, 23);
+            this.customButtonLoadForm.TabIndex = 3;
+            this.customButtonLoadForm.Text = "Загрузить формы";
+            this.customButtonLoadForm.UseVisualStyleBackColor = false;
+            this.customButtonLoadForm.Click += new System.EventHandler(this.customButtonLoadForm_Click);
             // 
             // customButtonFormAdd
             // 
@@ -528,6 +569,18 @@
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 2;
             // 
+            // MissingObj
+            // 
+            this.MissingObj.Caption = "MissingObj";
+            this.MissingObj.FieldName = "MissingObj";
+            this.MissingObj.Name = "MissingObj";
+            // 
+            // AddedObj
+            // 
+            this.AddedObj.Caption = "AddedObj";
+            this.AddedObj.FieldName = "AddedObj";
+            this.AddedObj.Name = "AddedObj";
+            // 
             // AdminForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -602,5 +655,10 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewUsers;
         private CustomButton customButtonLoadObject;
         private DevExpress.XtraGrid.Columns.GridColumn ObjectType;
+        private CustomButton customButtonLoadForm;
+        private DevExpress.XtraGrid.Columns.GridColumn Missing;
+        private DevExpress.XtraGrid.Columns.GridColumn Added;
+        private DevExpress.XtraGrid.Columns.GridColumn MissingObj;
+        private DevExpress.XtraGrid.Columns.GridColumn AddedObj;
     }
 }

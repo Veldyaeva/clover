@@ -2,9 +2,13 @@
 using DevExpress.XtraGrid;
 using DevExpress.XtraReports.Native;
 using SewingProduction.form.UserDistribution;
+using SewingProduction.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Security.AccessControl;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.LookAndFeel.DXSkinColors;
 
@@ -326,7 +330,23 @@ namespace SewingProduction
         }
         public void ApplyPermission(UserClass user)
         {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
+            //PermissionHelper.ApplyTo(this, ObjectName, user);
+
+            if (string.IsNullOrEmpty(ObjectName)) return;
+
+            bool hasWrite = user.HasPermission(ObjectName, "Редактор");
+            bool hasRead = user.HasPermission(ObjectName, "Просмотр");
+
+            this.Visible = hasRead || hasWrite;
+            //this.Enabled = hasWrite;
+            foreach (var view in ViewCollection)
+            {
+                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                {
+                    gridView.OptionsBehavior.ReadOnly = !hasWrite;
+                    gridView.OptionsBehavior.Editable = hasWrite;
+                }
+            }
         }
     }
     /// <summary>
@@ -390,13 +410,35 @@ namespace SewingProduction
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
     }
+    /// <summary>
+    /// Кнопка с записью в бд
+    /// </summary>
+    public class CustomActionButton : CustomButton
+    {
+        public string EventDescription { get; set; } = "Нажатие кнопки";
 
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            _ = LogActionToDatabase(); // Fire-and-forget
+        }
+
+        private async Task LogActionToDatabase()
+        {
+            if (this.FindForm() is CustomForm form && form.User is UserClass user)
+            {
+                await ActionLogger.Log(user.UserId, "Нажатие на кнопку", NameForm: this.FindForm()?.Name, NameObject: this.Name);
+            }
+        }
+    }
     /// <summary>
     /// Кастомная форма с градиентным фоном
     /// </summary>
     public class CustomForm : Form, IThemeable
     {
+        public int FormID;
         protected UserClass _user;
+        public UserClass User => _user;
         public CustomForm()
         {
             ApplyTheme();
@@ -411,7 +453,11 @@ namespace SewingProduction
             ThemeManager.ThemeChanged += OnThemeChanged;
 
             // подписка на загрузку формы
-            this.Load += CustomForm_Load;
+            this.Load += async (s, e) =>
+            {
+                await ActionLogger.Log(_user.UserId, "Открытие формы", NameForm: this.GetType().Name);
+                CustomForm_Load(s, e);
+            };
         }
         public void ApplyTheme()
         {

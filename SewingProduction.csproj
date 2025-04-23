@@ -301,41 +301,60 @@
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\AboutBox.cs">
+    <Compile Include="form\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\AdminForm.cs">
+    <Compile Include="form\UserDistribution\Forms\ActionHistory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\AdminForm.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\ActionHistory.Designer.cs">
+      <DependentUpon>ActionHistory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\Helpers\ActionLogger.cs" />
+    <Compile Include="form\UserDistribution\Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\UsersHierarchy.cs">
+    <Compile Include="form\UserDistribution\Forms\AdminSprav.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\UsersHierarchy.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\AdminSprav.Designer.cs">
+      <DependentUpon>AdminSprav.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\AllUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\AllUser.Designer.cs">
+      <DependentUpon>AllUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\UsersHierarchy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\UsersHierarchy.Designer.cs">
       <DependentUpon>UsersHierarchy.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\AllRole.cs">
+    <Compile Include="form\UserDistribution\Forms\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\AllRole.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\AllRole.Designer.cs">
       <DependentUpon>AllRole.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\LoginForm.cs">
+    <Compile Include="form\UserDistribution\Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\FormScanner.cs" />
-    <Compile Include="form\UserDistribution\SettingsForm.cs">
+    <Compile Include="form\UserDistribution\Helpers\FormScanner.cs" />
+    <Compile Include="form\UserDistribution\Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravBrig.cs">
@@ -416,13 +435,14 @@
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
-    <Compile Include="form\UserDistribution\UserClass.cs" />
-    <Compile Include="form\UserDistribution\UserProfile.cs">
+    <Compile Include="form\UserDistribution\Helpers\UserClass.cs" />
+    <Compile Include="form\UserDistribution\Forms\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
+    <Compile Include="form\UserDistribution\Forms\UserProfile.Designer.cs">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\UserDistribution\Models\UserModel.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -566,22 +586,31 @@
     <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\AdminForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\ActionHistory.resx">
+      <DependentUpon>ActionHistory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\Forms\AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\UsersHierarchy.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\AdminSprav.resx">
+      <DependentUpon>AdminSprav.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\Forms\AllUser.resx">
+      <DependentUpon>AllUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\Forms\UsersHierarchy.resx">
       <DependentUpon>UsersHierarchy.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\AllRole.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\AllRole.resx">
       <DependentUpon>AllRole.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
@@ -615,7 +644,7 @@
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
+    <EmbeddedResource Include="form\UserDistribution\Forms\UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
@@ -735,7 +764,8 @@
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />
- </ItemGroup>  
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

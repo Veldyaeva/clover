@@ -45,6 +45,7 @@
             this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.Fio = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Password = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.customGridControlAllProfile)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).BeginInit();
@@ -53,6 +54,7 @@
             // 
             // customGridControlAllProfile
             // 
+            this.customGridControlAllProfile.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
             this.customGridControlAllProfile.DataSource = this.bindingSourceUsers;
             this.customGridControlAllProfile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.customGridControlAllProfile.Font = new System.Drawing.Font("Arial", 10F);
@@ -66,7 +68,6 @@
             this.customGridControlAllProfile.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewUsers});
             this.customGridControlAllProfile.Load += new System.EventHandler(this.customGridControlUsers_Load);
-            this.customGridControlAllProfile.Click += new System.EventHandler(this.customGridControlAllProfile_Click);
             // 
             // gridViewUsers
             // 
@@ -76,7 +77,8 @@
             this.UserId,
             this.UserName,
             this.FIO1,
-            this.BrigID});
+            this.BrigID,
+            this.Password});
             this.gridViewUsers.GridControl = this.customGridControlAllProfile;
             this.gridViewUsers.Name = "gridViewUsers";
             this.gridViewUsers.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
@@ -97,7 +99,7 @@
             this.UserId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             this.UserId.Visible = true;
             this.UserId.VisibleIndex = 0;
-            this.UserId.Width = 63;
+            this.UserId.Width = 80;
             // 
             // UserName
             // 
@@ -106,7 +108,7 @@
             this.UserName.Name = "UserName";
             this.UserName.Visible = true;
             this.UserName.VisibleIndex = 1;
-            this.UserName.Width = 213;
+            this.UserName.Width = 272;
             // 
             // FIO1
             // 
@@ -116,7 +118,7 @@
             this.FIO1.OptionsEditForm.Caption = "ФИО ID:";
             this.FIO1.Visible = true;
             this.FIO1.VisibleIndex = 2;
-            this.FIO1.Width = 342;
+            this.FIO1.Width = 437;
             // 
             // BrigID
             // 
@@ -126,7 +128,7 @@
             this.BrigID.OptionsEditForm.Caption = "Бригада ID:";
             this.BrigID.Visible = true;
             this.BrigID.VisibleIndex = 3;
-            this.BrigID.Width = 246;
+            this.BrigID.Width = 318;
             // 
             // customButtonAddProfile
             // 
@@ -156,6 +158,7 @@
             this.customButtonDeleteProfile.TabIndex = 2;
             this.customButtonDeleteProfile.Text = "Удалить профиль";
             this.customButtonDeleteProfile.UseVisualStyleBackColor = false;
+            this.customButtonDeleteProfile.Click += new System.EventHandler(this.customButtonDeleteProfile_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -229,6 +232,16 @@
             this.Fio.Visible = true;
             this.Fio.VisibleIndex = 2;
             // 
+            // Password
+            // 
+            this.Password.Caption = "Password";
+            this.Password.FieldName = "Password";
+            this.Password.MaxWidth = 1;
+            this.Password.MinWidth = 10;
+            this.Password.Name = "Password";
+            this.Password.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            this.Password.Width = 10;
+            // 
             // UsersHierarchy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,5 +275,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
         private DevExpress.XtraGrid.Columns.GridColumn Fio;
         private DevExpress.XtraGrid.Columns.GridColumn FIO1;
+        private DevExpress.XtraGrid.Columns.GridColumn Password;
     }
 }

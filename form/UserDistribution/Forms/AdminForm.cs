@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.DataAccess.Native.Data;
+using DevExpress.Utils;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
@@ -89,20 +91,36 @@ namespace SewingProduction.form.UserDistribution
             string nameForm = row["NameForm"]?.ToString() ?? "";
             string nameFormRus = row["NameFormRus"]?.ToString() ?? "";
 
-            if (id > 0)
+            try
             {
-                _adminFormDataService.UpdateProjectForms("NameForm", nameForm, id);
-                _adminFormDataService.UpdateProjectForms("NameFormRus", nameFormRus, id);
+                if (id > 0)
+                {
+                    _adminFormDataService.UpdateProjectForms("NameForm", nameForm, id);
+                    _adminFormDataService.UpdateProjectForms("NameFormRus", nameFormRus, id);
+                }
+                else
+                {
+                    int newId = await _adminFormDataService.InsertProjectForms(nameForm, nameFormRus, _user.UserId);
+                    row["ProjectFormsID"] = newId;
+                    //await _adminFormDataService.InsertObjectForm(nameForm, nameFormRus, "CustomForm", _user.UserId, newId);
+                }
+                await Forms_Load();
+                await Objects_Load();
             }
-            else
+            catch (System.Data.SqlClient.SqlException ex)
             {
-                int newId = await _adminFormDataService.InsertProjectForms(nameForm, nameFormRus, _user.UserId);
-                row["ProjectFormsID"] = newId;
-                await _adminFormDataService.InsertObjectForm(nameForm, nameFormRus, "CustomForm",_user.UserId, newId);
+                if (ex.Message.Contains("UQ_NameForm"))
+                {
+                    MessageBox.Show($"Форма с именем \"{nameForm}\" уже существует. Имя должно быть уникальным.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Ошибка базы данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                gridViewForms.DeleteRow(gridViewForms.FocusedRowHandle);
             }
-            await Forms_Load();
-            await Objects_Load();
         }
+
         private async void gridViewForms_EditFormHidden(object sender, EditFormHiddenEventArgs e)
         {
             //await Forms_Load();
@@ -217,11 +235,76 @@ namespace SewingProduction.form.UserDistribution
             int formID = Convert.ToInt32(gridViewForms.GetFocusedRowCellValue("ProjectFormsID"));
             string formName = gridViewForms.GetFocusedRowCellValue("NameForm")?.ToString();
 
-            System.Data.DataTable existing = (System.Data.DataTable)bindingSourceObject.DataSource;
+            System.Data.DataTable dbObjects = await _adminFormDataService.GetObjectForm(formID);
 
             var scanner = new FormScanner(_adminFormDataService, _user);
-            await scanner.ScanAndSave(formName, formID, existing);
-            await Objects_Load();
+            System.Data.DataTable updated = await scanner.CheckMissingObjectsAsyncAndAdd(formName, formID, dbObjects);
+
+            bindingSourceObject.DataSource = updated;
+            gridViewObject.RefreshData();
+        }
+
+        private async void customButtonLoadForm_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                System.Data.DataTable dbForms = await _adminFormDataService.GetProjectForms();
+                var scanner = new FormScanner(_adminFormDataService, _user);
+                System.Data.DataTable updatedForms = await scanner.CheckMissingFormsAsyncAndAdd(dbForms);
+                bindingSourceForms.DataSource = updatedForms;
+                gridViewForms.RefreshData();
+                MessageBox.Show("Проверка и добавление форм завершено.", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при загрузке форм: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void gridViewForms_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.RowHandle >= 0)
+            {
+                bool isMissing = Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "Missing"));
+                bool isAdded = Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "Added"));
+
+                if (isMissing)
+                {
+                    e.Appearance.BackColor = Color.MistyRose;
+                    e.Appearance.ForeColor = Color.DarkRed;
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                }
+                else if (isAdded)
+                {
+                    e.Appearance.BackColor = Color.Honeydew;
+                    e.Appearance.ForeColor = Color.DarkGreen;
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                }
+            }
+        }
+
+        private void gridViewObject_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (e.RowHandle >= 0)
+            {
+                bool isMissing = Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "MissingObj"));
+                bool isAdded = Convert.ToBoolean(view.GetRowCellValue(e.RowHandle, "AddedObj"));
+
+                if (isMissing)
+                {
+                    e.Appearance.BackColor = Color.MistyRose;
+                    e.Appearance.ForeColor = Color.DarkRed;
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                }
+                else if (isAdded)
+                {
+                    e.Appearance.BackColor = Color.Honeydew;
+                    e.Appearance.ForeColor = Color.DarkGreen;
+                    e.Appearance.Font = new Font(e.Appearance.Font, FontStyle.Bold);
+                }
+            }
         }
     }
 
@@ -259,6 +342,7 @@ namespace SewingProduction.form.UserDistribution
                 { "@eNameFormRus", eNameFormRus },
                 { "@CreatorID", CreatorID }
             });
+            await InsertObjectForm(eNameForm, eNameFormRus, "CustomForm", CreatorID, result);
             return Convert.ToInt32(result);
         }
         public async void DeleteProjectForms( int eId)

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.Helpers;
@@ -47,28 +48,6 @@ namespace SewingProduction.form.UserDistribution
 
             //ConfigureGridView(gridViewUsers);
 
-        }
-
-        private void ConfigureGridView(GridView view)
-        {
-            if (view.Columns["UserId"] != null) view.Columns["UserId"].Visible = false;
-            if (view.Columns["CreatorID"] != null) view.Columns["CreatorID"].Visible = false;
-            if (view.Columns["FioID"] != null) view.Columns["FioID"].Visible = false;
-            if (view.Columns["BrigID"] != null) view.Columns["BrigID"].Visible = false;
-
-            if (view.Columns["UserName"] != null) view.Columns["UserName"].Caption = "Имя пользователя";
-
-            if (view.Columns["Fio"] != null) view.Columns["Fio"].Caption = "ФИО";
-
-            if (view.Columns["Brig"] != null) view.Columns["Brig"].Caption = "Бригада";
-
-            if (view.Columns["Fio"] == null)
-            {
-                DevExpress.XtraGrid.Columns.GridColumn fioColumn = view.Columns.AddField("Fio");
-                fioColumn.VisibleIndex = 1;
-                fioColumn.Caption = "ФИО";  
-                fioColumn.FieldName = "Fio"; 
-            }
         }
 
         private List<UserClass> BuildUserHierarchy(List<UserClass> allUsers, int rootUserId)
@@ -119,17 +98,11 @@ namespace SewingProduction.form.UserDistribution
         private async void gridViewUsers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             var user = e.Row as UserClass;
-
-            if (user == null) return;
-
-            if (user.UserId > 0)
-            {
-                // обновление, если нужно
-                return;
-            }
+            if (user == null || user.UserId > 0) return;
 
             var hasher = new PasswordHasher<UserClass>();
-            string passwordHash = hasher.HashPassword(null, "0");
+            string password = string.IsNullOrWhiteSpace(user.Password) ? "0" : user.Password;
+            string passwordHash = hasher.HashPassword(null, password);
 
             int newUserId = await _allProfileDataService.AddUser(
                 user.UserName,
@@ -144,9 +117,16 @@ namespace SewingProduction.form.UserDistribution
             customGridControlUsers_Load(sender, e);
         }
 
-        private void customGridControlAllProfile_Click(object sender, EventArgs e)
+        private void customButtonDeleteProfile_Click(object sender, EventArgs e)
         {
-
+            int eID = Convert.ToInt32(gridViewUsers.GetFocusedRowCellValue(gridViewUsers.Columns["UserId"]));
+            string UserName = gridViewUsers.GetFocusedRowCellValue(gridViewUsers.Columns["UserName"]).ToString();
+            string message = "Вы уверены что хотите удалить '" + UserName + "' ?";
+            var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+                _allProfileDataService.DeleteUsers(eID);
+            Console.WriteLine("удален пользователь, ID " + eID.ToString());
+            gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
         }
     }
     public class AllProfileDataService
@@ -206,8 +186,7 @@ namespace SewingProduction.form.UserDistribution
         }
         public async Task<System.Data.DataTable> GetUserRole(int CreatorID)
         {
-            string query = $@"
-                SELECT * FROM UserRole ";
+            string query = $@"SELECT * FROM UserRole ";
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@CreatorID", CreatorID } });
         }
         public async Task<int> AddUser(string userName, string passwordHash, string fio, int creatorId, int brigId)
@@ -225,7 +204,27 @@ namespace SewingProduction.form.UserDistribution
                 { "@BrigID", brigId }
             });
 
+            SetPravaForAddUser(result);
             return Convert.ToInt32(result);
+        }
+
+        public async void DeleteUsers(int eId)
+        {
+            string query = $@"
+                DELETE Users 
+                WHERE UserID = @eId
+                DELETE UserRoles
+                WHERE UserID = @eId;";
+            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@eId", eId } });
+        }
+        private async void SetPravaForAddUser(int newId)
+        {
+            string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
+            DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
+            int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
+            AllRoleDataService allRoleDataService = new AllRoleDataService(_dbHelper);
+            await allRoleDataService.AddUserRoles(newId, roleId);
+            Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }
     }
 }
