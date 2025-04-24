@@ -16,6 +16,8 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraVerticalGrid;
 using Microsoft.AspNetCore.Identity;
 using DevExpress.CodeParser;
+using Microsoft.AspNet.Identity;
+
 
 namespace SewingProduction.form.UserDistribution
 {

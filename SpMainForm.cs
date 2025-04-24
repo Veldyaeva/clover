@@ -1,6 +1,7 @@
 ﻿using DevExpress.XtraBars;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTabbedMdi;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.form;
 using SewingProduction.form.UserDistribution;
@@ -23,12 +24,12 @@ namespace SewingProduction
     public partial class SpMainForm : Form
     {
         UserClass _user = new UserClass();
-        private readonly IPasswordHasher<UserClass> _passwordHasher;
+        private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems;
         public SpMainForm()
         {
             InitializeComponent();
-            _passwordHasher = new PasswordHasher<UserClass>();
+            _passwordHasher = new PasswordHasher();
             ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
             if (ThemeManager.CurrentTheme is null) { ThemeSelectorComboBox.SelectedIndex = 0; }
             else
@@ -304,9 +305,9 @@ namespace SewingProduction
 
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserProfile f = new UserProfile(_user);
-            f.MdiParent = this;
-            f.Show();
+            //UserProfile f = new UserProfile(_user);
+            //f.MdiParent = this;
+            //f.Show();
         }
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)

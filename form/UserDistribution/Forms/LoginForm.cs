@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SewingProduction.Helpers;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace SewingProduction.form.UserDistribution
 {
@@ -16,7 +17,7 @@ namespace SewingProduction.form.UserDistribution
     {
         private readonly LoginFormDataService _loginFormDataService;
         private readonly UserClass _user;
-        private readonly IPasswordHasher<UserClass> _passwordHasher;
+        private readonly IPasswordHasher _passwordHasher;
         private string loginHistoryFile = "login_history.txt";
         public LoginForm(UserClass user)
         {
@@ -24,7 +25,7 @@ namespace SewingProduction.form.UserDistribution
             LoadLoginHistory();
 
             _user = user ?? throw new ArgumentNullException(nameof(user));
-            _passwordHasher = new PasswordHasher<UserClass>();
+            _passwordHasher = new PasswordHasher();
 
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
             _loginFormDataService = new LoginFormDataService(dbHelper);
@@ -38,11 +39,12 @@ namespace SewingProduction.form.UserDistribution
             string formPassword = textEditPassword.Text;
 
             string Event = $"Попытка входа {formLogin}: ";
-            //string hashedPassword = _passwordHasher.HashPassword(null, formPassword);
+            string hashedPassword = _passwordHasher.HashPassword(formPassword);
+            Console.WriteLine(hashedPassword);
             string hashedPasswordFromDb = await _loginFormDataService.GetPasswordHash(formLogin);
             if (hashedPasswordFromDb != null)
             {
-                PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(null, hashedPasswordFromDb, formPassword);
+                PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(hashedPasswordFromDb, formPassword);
                 if (result == PasswordVerificationResult.Success)
                 {
                     try

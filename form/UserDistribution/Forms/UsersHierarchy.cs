@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.Helpers;
 
@@ -100,9 +101,9 @@ namespace SewingProduction.form.UserDistribution
             var user = e.Row as UserClass;
             if (user == null || user.UserId > 0) return;
 
-            var hasher = new PasswordHasher<UserClass>();
+            var hasher = new PasswordHasher();
             string password = string.IsNullOrWhiteSpace(user.Password) ? "0" : user.Password;
-            string passwordHash = hasher.HashPassword(null, password);
+            string passwordHash = hasher.HashPassword(password);
 
             int newUserId = await _allProfileDataService.AddUser(
                 user.UserName,

@@ -352,7 +352,7 @@ namespace SewingProduction
     /// <summary>
     /// Кастомный прозрачный группбокс с черной обводкой
     /// </summary>
-    public class CustomGroupBox : GroupBox, IThemeableControl
+    public class CustomGroupBox : GroupBox, IThemeableControl, IThemeable
     {
         public string ObjectName { get; set; }
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
@@ -408,6 +408,11 @@ namespace SewingProduction
         public void ApplyPermission(UserClass user)
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+
+        public void ApplyTheme()
+        {
+            throw new NotImplementedException();
         }
     }
     /// <summary>
