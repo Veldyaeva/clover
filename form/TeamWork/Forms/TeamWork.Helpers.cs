@@ -236,12 +236,13 @@ namespace SewingProduction.Forms
         /// <param name="kod">Идентификатор разделения труда</param>
         private async void LoadGridControlData(PictureBox pictureBox, int kod)
         {
+            string imagePath = null;
             try
             {
-                DataTable dt = await _artNormService.GetImage(kod);
-                if (dt != null && dt.Rows.Count > 0)
+                imagePath = await _artNormService.GetImage(kod);
+                if (!string.IsNullOrEmpty(imagePath))
                 {
-                    pictureBox.ImageLocation = dt.Rows[0]["pathpict"].ToString();
+                    pictureBox.ImageLocation = imagePath;
                 }
                 else
                 {
@@ -250,7 +251,7 @@ namespace SewingProduction.Forms
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения для kod = {kod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}' для kod = {kod}");
                 pictureBox.Image = null;
             }
         }

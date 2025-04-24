@@ -500,6 +500,22 @@ namespace SewingProduction.Helpers
             gridView.RefreshData();
         }
         #endregion
+
+        #region LookUpHelper
+        public void ConfigureComboBox(DevExpress.XtraEditors.LookUpEdit comboBox, BindingSource bindingSource)
+        {
+            if (comboBox != null && bindingSource != null)
+            {
+                comboBox.Properties.DataSource = bindingSource;
+                comboBox.Properties.ValueMember = "tab";
+                comboBox.Properties.DisplayMember = "fio";
+                comboBox.Properties.Columns.Clear();
+                comboBox.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("fio", "ФИО"));
+                comboBox.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+                comboBox.Properties.NullText = "[Выберите значение]";
+            }
+        }
+        #endregion
     }
 }
 

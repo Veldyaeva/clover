@@ -1,6 +1,7 @@
 ﻿using SewingProduction.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SewingProduction.Models
 {
-   public class NormDopObr : INewable
+   public class NormDopObr : INewable, INotifyPropertyChanged, IModifiable
     {
         [NotMapped]
         public int id { get; set; }
@@ -20,5 +21,35 @@ namespace SewingProduction.Models
         public int SekTamp { get; set; }
         [NotMapped]
         public bool IsNew { get; set; } = true;
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
+
+        private int _dopObrId;
+
+        public int dopObrId
+        {
+            get => _dopObrId;
+            set
+            {
+                _dopObrId = value;
+                OnPropertyChanged(nameof(dopObrId));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            // Не вызываем событие для ID, IsNew, IsModified, чтобы избежать проблем с потоками при сохранении
+            // и лишних срабатываний RowStyle
+            bool isInternalProperty = propertyName == nameof(dopObrId) || 
+                                     propertyName == nameof(IsNew) || 
+                                     propertyName == nameof(IsModified);
+
+            if (!isInternalProperty)
+            {
+                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+        }
     }
 }

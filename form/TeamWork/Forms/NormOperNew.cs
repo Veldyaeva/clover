@@ -15,7 +15,8 @@ namespace SewingProduction.form
     public partial class NormOperNew : CustomForm
     {
         private readonly DatabaseHelper _dbHelper;
-        private readonly DbService _artNormService;
+        private readonly DbService _dbService;
+        private readonly ArtNormService _artNormService;
         private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
         private readonly int _annId;
@@ -25,7 +26,9 @@ namespace SewingProduction.form
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
-            _artNormService = new DbService(_dbHelper);
+            _dbService = new DbService(_dbHelper);
+            _artNormService = new ArtNormService(_dbHelper);
+
             _annId = annId;
             ThemeManager.UpdateTheme(this);
         }

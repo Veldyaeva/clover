@@ -10,6 +10,7 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,50 +52,59 @@ namespace SewingProduction.Forms
         /// <typeparam name="T">Тип данных, реализующий `ICheckable`</typeparam>
         /// <param name="gridControl">GridControl, где произошло изменение</param>
         /// <param name="e">Аргумент события `CellValueChangedEventArgs`</param>
-        private async void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class
+        private async void GridView_CellValueChanged<T>(GridControl gridControl, CellValueChangedEventArgs e) where T : class, ICheckable
         {
-            if (e.Column.FieldName != "IsChecked") return;
+            if (e.Column.FieldName != nameof(ICheckable.IsChecked)) return;
 
-            try
+            // Используем поле класса _isUnchecking
+            if (_isUnchecking) return;
+
+            var view = gridControl.MainView as GridView;
+            if (view == null) return;
+
+            var currentItem = view.GetRow(e.RowHandle) as T;
+            if (currentItem == null) return;
+
+            bool isChecked = Convert.ToBoolean(e.Value);
+
+            if (isChecked)
             {
-                SafeInvoke(gridControl, () =>
+                // Устанавливаем флаг перед изменением других строк
+                _isUnchecking = true;
+                try
                 {
-                    if (!(gridControl.MainView is GridView view)) return;
-
-                    var newCheckedRow = view.GetRow(e.RowHandle) as ICheckable;
-                    if (newCheckedRow == null || !(e.Value is bool isChecked)) return;
-
-                    if (!isChecked)
+                    var dataSource = view.DataSource as IList<T>; 
+                    if (dataSource == null)
                     {
-                        view.RefreshRow(e.RowHandle); // просто обновим UI для снятия флажка
-                        return;
-                    }
-
-                    // Снимаем флажки со всех строк, кроме текущей
-                    for (int i = 0; i < view.RowCount; i++)
-                    {
-                        if (i == e.RowHandle) continue; // текущую не трогаем
-
-                        var row = view.GetRow(i) as ICheckable;
-                        if (row != null && row.IsChecked)
+                        if (view.DataSource is BindingSource bs && bs.DataSource is IList<T> list)
                         {
-                            row.IsChecked = false;
-
+                            dataSource = list;
                         }
                     }
-                    view.RefreshData();
 
-                    // Устанавливаем флаг только текущей строке
-                    newCheckedRow.IsChecked = true;
+                    if (dataSource != null)
+                    {
+                        foreach (var item in dataSource)
+                        {
+                            if (item == currentItem) continue;
 
-                    view.RefreshData();
-                });
+                            if (item is ICheckable checkableItem && checkableItem.IsChecked)
+                            {
+                                // Устанавливаем IsChecked в false для других элементов
+                                checkableItem.IsChecked = false;
+                            }
+                        }
+                        // Обновляем данные после цикла, чтобы избежать лишних обновлений
+                        view.RefreshData();
+                    }
+                }
+                finally
+                {
+                    // Сбрасываем флаг в любом случае
+                     _isUnchecking = false;
+                }
             }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при изменении значения в GridView");
-                MessageBox.Show($"Ошибка при изменении значения: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            _hasUnsavedChanges = true;
         }
         /// <summary>
         /// Обработчик изменения состояния customCheckBox6.  
@@ -145,24 +155,6 @@ namespace SewingProduction.Forms
                 MessageBox.Show("Копирование не реализовано", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void RefreshData()
-        {
-            SafeInvoke(ANNgridControl, () =>
-            {
-                ANNgridControl.BeginUpdate();
-                try
-                {
-                    _bindingSource.ResetBindings(false);
-                    ANNgridControl.RefreshDataSource();
-                    ANNgridView.RefreshData();
-                    filterTable();
-                }
-                finally
-                {
-                    ANNgridControl.EndUpdate();
-                }
-            });
-        }
 
         private void SafeInvoke(Control control, Action action)
         {
@@ -189,27 +181,7 @@ namespace SewingProduction.Forms
             {
                 var view = ANNgridView;
 
-                // Получаем значения из выбранной строки
-                string comment = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "Komment", "");
-                int constructorId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "Constr", 0);
-                int designerId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "Diz", 0);
-
-                // Log the retrieved IDs
-                await _logger.LogEventAsync($"Constructor ID: {constructorId}, Designer ID: {designerId}", "RowChange");
-
-                // Устанавливаем значения в соответствующие элементы управления
-                commentRichTextBox.Text = comment;
-
-                // Fetch and set the constructor's full name
-                string constructorName = await _artNormService.GetEmployeeFullName(constructorId);
-                constructorTextBox.Text = constructorName;
-
-                // Fetch and set the designer's full name
-                string designerName = await _artNormService.GetEmployeeFullName(designerId);
-                designerTextBox.Text = designerName;
-
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                //UpdateRelatedData(annId);
                 await LoadRelatedData(annId);
 
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "Kod", "");
@@ -230,7 +202,7 @@ namespace SewingProduction.Forms
         /// <summary>
         /// Редактировать РТ
         /// </summary>
-        private void ButtonEditWd_Click_Internal(object sender, EventArgs e)
+        private async void ButtonEditWd_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -286,7 +258,7 @@ namespace SewingProduction.Forms
                                 }
                             }
                         }
-                        LoadRelatedData(selectedAnnId);
+                        await LoadRelatedData(selectedAnnId);
 
                         // Отображаем сообщение об успешном редактировании
                         MessageBox.Show(
@@ -300,7 +272,7 @@ namespace SewingProduction.Forms
             catch (Exception ex)
             {
                 // Обрабатываем возможные ошибки
-                _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
+                await _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -310,11 +282,9 @@ namespace SewingProduction.Forms
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
 
 
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
-                await LoadWorksbyArt(0, "") :
-    await LoadWorksbyArt(kod, articul);
+            List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(kod, articul);
 
-            customGridControl2.DataSource = list; //LoadWorksbyArt(kod, articul);
+            customGridControl2.DataSource = list; 
         }
         private void gridControl2_Leave_Internal(object sender, EventArgs e)
         {
@@ -331,81 +301,75 @@ namespace SewingProduction.Forms
             }
         }
 
-        /// <summary>
-        /// обработка клика на заголовке, 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void gridView8_CellValueChanged_Internal(object sender, CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                SafeInvoke(gridView8.GridControl, () =>
-                {
-                    var view = sender as GridView;
-                    if (view == null) return;
+        ///// <summary>
+        ///// Переключение фильтров при изменении чекбоксов
+        ///// </summary>
+        //private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
 
-                    var currentRow = view.GetRow(e.RowHandle) as MyDataANN;
-                    if (currentRow == null) return;
+        ///// <summary>
+        ///// Обработчик смены выбранного поля поиска при изменении параметров поиска.
+        ///// </summary>
+        //private async void search_CheckedChanged_Internal(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        // Получаем текст текущего поиска
+        //        string searchText = searchControl1.Text.TrimEnd(' ');
 
-                    bool isChecked = (bool)e.Value;
+        //        // Очищаем текущий фильтр поиска
+        //        searchControl1.ClearFilter();
 
-                    // Если текущая строка отмечается
-                    if (isChecked)
-                    {
-                        // Сначала снимаем все отметки
-                        for (int i = 0; i < view.RowCount; i++)
-                        {
-                            var row = view.GetRow(i) as MyDataANN;
-                            if (row != null)
-                            {
-                                row.IsChecked = false;
-                            }
-                        }
-                        // Затем отмечаем только текущую строку
-                        currentRow.IsChecked = true;
-                    }
+        //        // Если есть текст поиска, применяем его к новому выбранному полю
+        //        if (!string.IsNullOrEmpty(searchText))
+        //        {
+        //            // Создаем фильтр поиска для нового выбранного поля
+        //            string columnName = await GridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
+        //            if (!string.IsNullOrEmpty(columnName))
+        //            {
+        //                var searchFilter = new FunctionOperator(
+        //                    FunctionOperatorType.Contains,
+        //                    new OperandProperty(columnName),
+        //                    new OperandValue(searchText));
 
-                    view.RefreshData();
-                });
-            }
-        }
+        //                // Получаем текущий фильтр статусов
+        //                CriteriaOperator statusFilter = GetStatusFilter();
 
-        //обработка клика на заголовке
-        private void gridView7_CellValueChanged(object sender, CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                SafeInvoke(gridView7.GridControl, () =>
-                {
-                    var view = sender as GridView;
-                    if (view == null) return;
+        //                // Если есть фильтр статусов, объединяем его с новым фильтром поиска
+        //                if (statusFilter != null)
+        //                {
+        //                    ANNgridView.ActiveFilterCriteria = new GroupOperator(
+        //                        GroupOperatorType.And,
+        //                        searchFilter,
+        //                        statusFilter
+        //                    );
+        //                }
+        //                else
+        //                {
+        //                    ANNgridView.ActiveFilterCriteria = searchFilter;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            // Если нет текста поиска, применяем только фильтр статусов
+        //            CriteriaOperator statusFilter = GetStatusFilter();
+        //            if (statusFilter != null)
+        //            {
+        //                ANNgridView.ActiveFilterCriteria = statusFilter;
+        //            }
+        //            else
+        //            {
+        //                ANNgridView.ActiveFilterString = string.Empty;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при обновлении параметров поиска");
+        //    }
+        //}
 
-                    var currentRow = view.GetRow(e.RowHandle) as MyDataART;
-                    if (currentRow == null) return;
 
-                    bool isChecked = (bool)e.Value;
-
-                    // Если текущая строка отмечается
-                    if (isChecked)
-                    {
-                        // Сначала снимаем все отметки
-                        for (int i = 0; i < view.RowCount; i++)
-                        {
-                            var row = view.GetRow(i) as MyDataART;
-                            if (row != null)
-                            {
-                                row.IsChecked = false;
-                            }
-                        }
-                        // Затем отмечаем только текущую строку
-                        currentRow.IsChecked = true;
-                    }
-
-                    view.RefreshData();
-                });
-            }
-        }
         #region Поиск и фильтрация
 
         private async void SearchButton_Click_Internal(object sender, EventArgs e)
@@ -541,7 +505,7 @@ namespace SewingProduction.Forms
             int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
 
-            BindingList<MyDataANN> list = loadAllCheckBox.Checked ?
+            List<MyDataANN> list = loadAllCheckBox.Checked ?
                 await LoadWorksbyArt(0, "") :
                 await LoadWorksbyArt(kod, articul);
             customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);

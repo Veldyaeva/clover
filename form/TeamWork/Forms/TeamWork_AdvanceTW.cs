@@ -19,12 +19,14 @@ using SewingProduction.Interfaces;
 using System.Data.SqlClient;
 using Z.Dapper.Plus;
 using System.Drawing;
+using System.Diagnostics;
 
 namespace SewingProduction.form
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
-        private readonly DbService _artNormService;
+        private readonly DbService _dbService;
+        private readonly ArtNormService _artNormService;
         private int _bufferWorkDivision;
         private readonly DatabaseHelper _dbHelper;
         private readonly GridHelper _gridHelper = new GridHelper();
@@ -33,6 +35,7 @@ namespace SewingProduction.form
         private readonly ILogger _logger = new FileLogger();
         private int _mode;
         private ArtNormN _currentAnnData;
+        private ArtNormN _originalAnnData; // Поле для хранения оригинала
 
         private BindingList<NormRasz> _normRaszList;
         private BindingSource _normRaszBindingSource;
@@ -42,8 +45,7 @@ namespace SewingProduction.form
         private BindingSource _normKontBindingSource;
         private BindingList<NormDopObr> _normDopObrList;
         private BindingSource _normDopObrBindingSource;
-        // Кэш для данных дизайнеров/конструкторов, чтобы не загружать их повторно
-        private static DataTable _cachedFioData;
+        private static List<FioModel> _cachedFioData;
         private bool _isCustomEditFormOpen = false;
         private bool _okPressed = false;
         public bool IsRaszInserted { get; private set; }
@@ -54,6 +56,29 @@ namespace SewingProduction.form
         public ArtNormN CreatedAnn { get; private set; }
 
         private bool _isSelectionFormOpen = false;
+        private bool _hasUnsavedChanges = false;
+
+        #region Highlighting
+        private readonly Color _highlightColor = Color.LightYellow;
+        private Dictionary<Control, Color> _originalColors = new Dictionary<Control, Color>();
+
+        private void HighlightControl(Control control)
+        {
+            if (!_originalColors.ContainsKey(control))
+            {
+                 _originalColors[control] = control.BackColor;
+            }
+            control.BackColor = _highlightColor;
+        }
+
+        private void UnhighlightControl(Control control)
+        {
+            if (_originalColors.TryGetValue(control, out Color originalColor))
+            {
+                 control.BackColor = originalColor; 
+            }
+        }
+        #endregion
 
         /// <summary>
         /// 
@@ -66,7 +91,8 @@ namespace SewingProduction.form
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
-            _artNormService = new DbService(_dbHelper);
+            _dbService = new DbService(_dbHelper);
+            _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
             if (!oldId.HasValue)
@@ -82,9 +108,77 @@ namespace SewingProduction.form
             _mode = mode;
         }
 
+        private void AttachChangeHandlers()
+        {
+            nameTextBox.TextChanged += HandleAnnDataChange;
+            groupTextBox.TextChanged += HandleAnnDataChange;
+            modelTextBox.TextChanged += HandleAnnDataChange;
+            secTimeTextBox.TextChanged += HandleAnnDataChange;
+            textBoxKomment.TextChanged += HandleAnnDataChange;
+            dateCreate.TextChanged += HandleAnnDataChange; 
+
+            designerComboBox.EditValueChanged += HandleAnnDataChange;
+            constructorComboBox.EditValueChanged += HandleAnnDataChange;
+        }
+
+        // Общий обработчик изменений данных ANN
+        private void HandleAnnDataChange(object sender, EventArgs e)
+        {
+            _hasUnsavedChanges = true;
+            var control = sender as Control;
+            if (control == null || _originalAnnData == null || _currentAnnData == null)
+                return;
+
+            string propertyName = GetPropertyNameFromControl(control);
+            if (string.IsNullOrEmpty(propertyName))
+                return;
+
+            try
+            {
+                var currentPropInfo = _currentAnnData.GetType().GetProperty(propertyName);
+                var originalPropInfo = _originalAnnData.GetType().GetProperty(propertyName);
+
+                if (currentPropInfo == null || originalPropInfo == null)
+                    return;
+
+                object currentValue = currentPropInfo.GetValue(_currentAnnData);
+                object originalValue = originalPropInfo.GetValue(_originalAnnData);
+
+                // Сравниваем значения (учитываем null)
+                bool areEqual = Equals(currentValue, originalValue);
+
+                if (!areEqual)
+                {
+                    HighlightControl(control);
+                }
+                else
+                {
+                    UnhighlightControl(control);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, $"Ошибка при сравнении значений для контроля {control.Name}, свойства {propertyName}");
+                // Не прерываем работу, просто логгируем
+            }
+        }
+
+        // Вспомогательный метод для получения имени свойства по элементу управления
+        private string GetPropertyNameFromControl(Control control)
+        {
+            if (control == nameTextBox) return nameof(ArtNormN.Articul);
+            if (control == groupTextBox) return nameof(ArtNormN.Group);
+            if (control == modelTextBox) return nameof(ArtNormN.Mod);
+            if (control == secTimeTextBox) return nameof(ArtNormN.Sek);
+            if (control == textBoxKomment) return nameof(ArtNormN.Komment);
+            if (control == dateCreate) return nameof(ArtNormN.dateCreate); 
+            if (control == designerComboBox) return nameof(ArtNormN.Diz);
+            if (control == constructorComboBox) return nameof(ArtNormN.Constr);
+            return null;
+        }
+
         /// <summary>
         /// Инициализирует привязки для связанных таблиц
-        /// Выполняется в отдельном потоке.
         /// </summary>
         private async Task InitializeBindingsAsync()
         {
@@ -124,16 +218,23 @@ namespace SewingProduction.form
                 groupTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Group), true, DataSourceUpdateMode.OnPropertyChanged);
                 modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
                 secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
-
-                designerComboBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
-                constructorComboBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+                textBoxKomment.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Komment), true, DataSourceUpdateMode.OnPropertyChanged);
+                dateCreate.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
             }
+            finally
+            {
+                _normRaszList.ListChanged += OnDataChanged;
+                _normRaskList.ListChanged += OnDataChanged;
+                _normKontList.ListChanged += OnDataChanged;
+                _normDopObrList.ListChanged += OnDataChanged;
+            }
         }
+
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
             try
@@ -145,7 +246,7 @@ namespace SewingProduction.form
                     _gridHelper.LoadGridViewSettings(gridViewDopObr, "AdvanceTW_gridViewDopObrLayout.xml");
                     _gridHelper.LoadGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml");
                 });
-
+                
                 Task comboBoxTask = LoadAndBindFioListsAsync();
                 Task bindingsTask = InitializeBindingsAsync();
 
@@ -160,7 +261,7 @@ namespace SewingProduction.form
                     {
                         this.Invoke((MethodInvoker)(() =>
                         {
-                            richTextBox1.Text = $"группа: {annData.Group.TrimEnd(' ')}, \r" +
+                            textBoxBuffer.Text = $"группа: {annData.Group.TrimEnd(' ')}, \r" +
                                                  $"модель: {annData.Mod.TrimEnd(' ')}, \r" +
                                                  $"артикул: {annData.Articul.TrimEnd(' ')}";
                         }));
@@ -173,6 +274,21 @@ namespace SewingProduction.form
                     case (int)Mode.ArchAndCopy: this.Text = "Архив+копия"; break;
                     case (int)Mode.Edit: this.Text = "Редактировать"; break;
                 }
+                _hasUnsavedChanges = false;
+
+                AttachChangeHandlers();
+
+                designerComboBox.DataBindings.Clear(); 
+                constructorComboBox.DataBindings.Clear();
+
+                designerComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
+                constructorComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+
+                // Подписываем таблицы на обработчик RowStyle
+                gridViewRasz.RowStyle += GridView_RowStyle;
+                gridViewRaskr.RowStyle += GridView_RowStyle;
+                gridViewKont.RowStyle += GridView_RowStyle;
+                gridViewDopObr.RowStyle += GridView_RowStyle;
             }
             catch (Exception ex)
             {
@@ -182,34 +298,38 @@ namespace SewingProduction.form
 
         private async Task LoadAndBindFioListsAsync()
         {
-            //try
-            //{
-            //    if (_cachedFioData == null)
-            //    {
-            //        var fioData = await _artNormService.GetRelDesigner();
-            //        if (fioData != null && fioData.Rows.Count > 0)
-            //        {
-            //            _cachedFioData = fioData.Copy();
-            //            await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
-        //        }
-        //        else
-        //        {
-            //            await _logger.LogEventAsync("Пустой список FIO", "LoadAndBindFioListsAsync");
-            //            return;
-        //        }
-        //    }
+            try
+            {
+                if (_cachedFioData == null)
+                {
+                    var fioData = await _artNormService.GetRelDesigner();
+                    if (fioData != null && fioData.Count > 0)
+                    {
+                        _cachedFioData = new List<FioModel>(fioData); 
+                        await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO", "LoadAndBindFioListsAsync");
+                        return;
+                    }
+                }
 
-            //    // Обновляем данные в существующих источниках привязки
-            //    await this.InvokeAsync(() =>
-            //    {
-            //        designerBindingSource.DataSource = _cachedFioData.Copy();
-            //        constructorBindingSource.DataSource = _cachedFioData.Copy();
-            //    });
-            //}
-            //catch (Exception ex)
-            //{
-            //    await _logger.LogErrorAsync(ex, "Ошибка при обновлении ComboBox из кеша");
-            //}
+                // Обновляем данные в существующих источниках привязки
+                await this.InvokeAsync(() =>
+                {
+                    designerBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+                    constructorBindingSource.DataSource = new List<FioModel>(_cachedFioData);
+
+                    _gridHelper.ConfigureComboBox(designerComboBox, designerBindingSource);
+                    _gridHelper.ConfigureComboBox(constructorComboBox, constructorBindingSource);
+                });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
+                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -241,6 +361,13 @@ namespace SewingProduction.form
                     repositoryItemLookUpEdit_podrVyaz.DataSource = podr_vyaz;
                     repositoryItemLookUpEdit_oborudShv.DataSource = oborud_shv;
 
+                    repositoryItemLookUpEdit_kod_proizv.ValueMember = nameof(KodProizvModel.kod_proizv);
+                    repositoryItemLookUpEdit_kod_proizv.DisplayMember = nameof(KodProizvModel.text_proizv);
+                    repositoryItemLookUpEdit_podrVyaz.ValueMember = nameof(PodrVyazModel.kod_vyaz);
+                    repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
+                    repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
+                    repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
+
                     // Обновляем списки
                     _normRaszList.Clear();
                     _normRaskList.Clear();
@@ -266,6 +393,7 @@ namespace SewingProduction.form
                     {
                         _currentAnnData = annData;
                         bindingSource1.DataSource = _currentAnnData;
+                        bindingSource1.ResetBindings(false);
                     }
                 });
             }
@@ -325,6 +453,10 @@ namespace SewingProduction.form
                     {
                         _currentAnnData = annData;                // Обновляем текущую модель
                         bindingSource1.DataSource = _currentAnnData; // Привязываем данные к форме
+                        bindingSource1.ResetBindings(false);
+                         // Сохраняем копию для сравнения
+                        _originalAnnData = _currentAnnData?.Clone(); 
+                         _hasUnsavedChanges = false; // Сбрасываем флаг после загрузки оригинала
                     });
 
                     await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {idToLoad}", "LoadAnnDataAsync");
@@ -366,46 +498,51 @@ namespace SewingProduction.form
             }
             else if (e.CloseReason == CloseReason.UserClosing)
             {
-                var result = MessageBox.Show(
+                if (_hasUnsavedChanges)
+                {
+                    var result = MessageBox.Show(
      "Вы уверены, что хотите отменить все изменения?",
      "Подтверждение отмены",
      MessageBoxButtons.YesNo,
      MessageBoxIcon.Question,
      MessageBoxDefaultButton.Button2);
 
-                if (result == DialogResult.No)
-                {
-                    e.Cancel = true; 
+                    if (result == DialogResult.No)
+                    {
+                        e.Cancel = true; 
+                    }
+                    else
+                    {
+                        PerformCleanupOnCancel();
+                    }
                 }
                 else
                 {
-                    try
+                    if (_mode == (int)Mode.NewWorkDivision)
                     {
-                        if (_mode == (int)Mode.NewWorkDivision)
-                        {
-                            if (_newAnnId > 0)
-                            {
-                                await _artNormService.DeleteRelatedNormTables(_newAnnId);
-                                await _artNormService.DeleteByAnnId(TableNames.Ann, _newAnnId);//.deleteRow("art_norm_n", _newAnnId);
-                            }
-                        }
-                        else
-                        {
-                            // Иначе просто сбрасываем данные формы
-                            await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
-                            await LoadAnnDataAsync();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, "Ошибка при удалении данных при отмене создания РТ");
-                        MessageBox.Show($"Ошибка при удалении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        PerformCleanupOnCancel();
                     }
                 }
-
             }
         }
 
+        private async void PerformCleanupOnCancel()
+        {
+             try
+             {
+                 if (_mode == (int)Mode.NewWorkDivision && _newAnnId > 0)
+                 {
+                      await _artNormService.DeleteRelatedNormTables(_newAnnId);
+                      await _artNormService.DeleteByAnnId(TableNames.Ann, _newAnnId);
+                      await _logger.LogEventAsync($"Отмена создания. Удалена запись AnnID: {_newAnnId}", "PerformCleanupOnCancel");
+                 }
+             }
+             catch (Exception ex)
+             {
+                 await _logger.LogErrorAsync(ex, "Ошибка при очистке данных при отмене");
+                 // MessageBox.Show($"Ошибка при удалении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+             }
+        }
 
         #region Rasz
         private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
@@ -503,7 +640,12 @@ namespace SewingProduction.form
         {
             if (e.Row is NormRasz normRasz)
             {
-                gridViewRasz.UpdateCurrentRow();
+                // Если строка не новая, помечаем ее как измененную
+                if (!normRasz.IsNew)
+                {
+                    normRasz.IsModified = true;
+                }
+                gridViewRasz.UpdateCurrentRow(); // Обновляем строку, чтобы RowStyle сработал
             }
         }
 
@@ -539,7 +681,7 @@ namespace SewingProduction.form
                     if (row != null && row.nrId > 0)
                     {
                         // Удаляем из базы данных
-                        await _artNormService.DeleteEntityAsync(TableNames.Rasz, TableNames.RaszId, row);//.DeleteNormRaszAsync(row.nrId);
+                        await _dbService.DeleteEntityAsync(TableNames.Rasz, TableNames.RaszId, row);//.DeleteNormRaszAsync(row.nrId);
                         
                         // Удаляем из списка
                         _normRaszList.Remove(row);
@@ -579,7 +721,7 @@ namespace SewingProduction.form
                         {
                             if (oldRow.id > 0)
                             {
-                                await _artNormService.DeleteEntityAsync(TableNames.Rask, TableNames.RaskId, oldRow);
+                                await _dbService.DeleteEntityAsync(TableNames.Rask, TableNames.RaskId, oldRow);
                             }
                         }
 
@@ -637,7 +779,12 @@ namespace SewingProduction.form
             if (e.Row is NormRask normRask)
             {
                 normRask.AnnId = _newAnnId;
-                gridViewRaskr.UpdateCurrentRow();
+                // Если строка не новая, помечаем ее как измененную
+                if (!normRask.IsNew)
+                {
+                    normRask.IsModified = true;
+                }
+                gridViewRaskr.UpdateCurrentRow(); // Обновляем строку, чтобы RowStyle сработал
             }
         }
 
@@ -653,7 +800,7 @@ namespace SewingProduction.form
                     // Если это новая запись (Id <= 0), сохраняем в БД
                     if (normRask.id <= 0)
                     {
-                        normRask.id = await _artNormService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, normRask);//InsertNormRaskAsync(normRask);
+                        normRask.id = await _dbService.InsertEntityAsync(TableNames.Rask, TableNames.RaskId, normRask);//InsertNormRaskAsync(normRask);
                         if (normRask.id <= 0)
                         {
                             e.Valid = false;
@@ -736,7 +883,12 @@ namespace SewingProduction.form
             if (e.Row is NormKont normKont)
             {
                 normKont.AnnId = _newAnnId;
-                gridViewKont.UpdateCurrentRow();
+                // Если строка не новая, помечаем ее как измененную
+                if (!normKont.IsNew)
+                {
+                    normKont.IsModified = true;
+                }
+                gridViewKont.UpdateCurrentRow(); // Обновляем строку, чтобы RowStyle сработал
             }
         }
 
@@ -865,7 +1017,7 @@ namespace SewingProduction.form
                 await _artNormService.DeleteByAnnId("norm_dop_obr", normDopObr.AnnId);
 
                 // Вставляем новую запись
-                await _artNormService.InsertEntityAsync(TableNames.Obr, TableNames.ObrId, normDopObr);//InsertDopObrAsync(normDopObr);
+                await _dbService.InsertEntityAsync(TableNames.Obr, TableNames.ObrId, normDopObr);//InsertDopObrAsync(normDopObr);
 
                 await ShowStatusMessageAsync("Дополнительная обработка успешно сохранена");
             }
@@ -881,7 +1033,7 @@ namespace SewingProduction.form
             if (statusLabel != null)
             {
                 statusLabel.Text = message;
-                await Task.Delay(3000); // Немного подержим сообщение на экране
+                await Task.Delay(3000); 
                 statusLabel.Text = "";
             }
         }
@@ -903,7 +1055,7 @@ namespace SewingProduction.form
         private async void btnOK_Click(object sender, EventArgs e)
         {
             _okPressed = true;
-
+            var stepStopwatch = Stopwatch.StartNew(); // Таймер для шагов
 
             if (!ValidateForm())
             {
@@ -922,7 +1074,12 @@ namespace SewingProduction.form
                 });
                 await ShowStatusMessage("Данные успешно сохранены!");
 
-                await _artNormService.ExecutePztOperUpdateAsync();
+                await _logger.LogEventAsync("Starting ExecutePztOperUpdateAsync...", "btnOK_Click");
+                stepStopwatch.Restart(); // Замеряем ExecutePztOperUpdateAsync
+
+            //    await _artNormService.ExecutePztOperUpdateAsync();
+                stepStopwatch.Stop();
+                await _logger.LogEventAsync($"Finished ExecutePztOperUpdateAsync. Elapsed: {stepStopwatch.ElapsedMilliseconds} ms", "btnOK_Click");
                 await ShowStatusMessage("Плановые загрузки обновлены!");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -942,7 +1099,7 @@ namespace SewingProduction.form
             {
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
-                await _artNormService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
+                await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
 
                // MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -983,8 +1140,14 @@ namespace SewingProduction.form
         private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId)
             where T : class, INewable, new()
         {
+            var stopwatch = Stopwatch.StartNew(); // Запускаем таймер для всего метода
+            var bulkStopwatch = new Stopwatch(); // Таймер для конкретных Bulk операций
+
             var newItems = list.Where(x => x.IsNew).ToList();
             var existingItems = list.Where(x => !x.IsNew).ToList();
+
+            string itemTypeName = typeof(T).Name;
+            await _logger.LogEventAsync($"[{itemTypeName}] Start saving. New: {newItems.Count}, Existing: {existingItems.Count}\", \"SaveListAsync");
 
             if (newItems.Any())
             {
@@ -1001,7 +1164,11 @@ namespace SewingProduction.form
                 // Пакетная вставка через Dapper Plus
                 using (var connection = _dbHelper.GetConnection()) 
                 {
+                    await _logger.LogEventAsync($"[{itemTypeName}] Starting BulkInsert for {newItems.Count} items...\", \"SaveListAsync");
+                    bulkStopwatch.Restart();
                     await connection.BulkInsertAsync(newItems);
+                    bulkStopwatch.Stop();
+                    await _logger.LogEventAsync($"[{itemTypeName}] Finished BulkInsert. Elapsed: {bulkStopwatch.ElapsedMilliseconds} ms\", \"SaveListAsync");
                 }
                 // После вставки сбрасываем флаги
                 foreach (var item in newItems)
@@ -1010,26 +1177,24 @@ namespace SewingProduction.form
                 }
             }
 
+            // Обновляем существующие записи через BulkUpdate
             if (existingItems.Any())
             {
-                using (var transaction = await _dbHelper.BeginTransactionAsync())
+                // Убеждаемся, что AnnId установлен правильно (если он мог измениться)
+                // Но обычно для существующих записей AnnId не меняется.
+
+                using (var connection = _dbHelper.GetConnection()) 
                 {
-                    try
-                    {
-                        foreach (var item in existingItems)
-                        {
-                            await _artNormService.UpdateEntityAsync(tableName, keyFieldName, item);
-                        }
-                        await _dbHelper.CommitTransactionAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        await _dbHelper.RollbackTransactionAsync();
-                        await _logger.LogErrorAsync(ex, $"Ошибка при обновлении записей {typeof(T).Name}");
-                        throw;
-                    }
+                     await _logger.LogEventAsync($"[{itemTypeName}] Starting BulkUpdate for {existingItems.Count} items...\", \"SaveListAsync");
+                    bulkStopwatch.Restart();
+                    await connection.BulkUpdateAsync(existingItems);
+                     bulkStopwatch.Stop();
+                    await _logger.LogEventAsync($"[{itemTypeName}] Finished BulkUpdate. Elapsed: {bulkStopwatch.ElapsedMilliseconds} ms\", \"SaveListAsync");
                 }
             }
+
+            stopwatch.Stop();
+            await _logger.LogEventAsync($"[{itemTypeName}] Finished saving. Total Elapsed: {stopwatch.ElapsedMilliseconds} ms\", \"SaveListAsync");
         }
 
 
@@ -1049,39 +1214,25 @@ namespace SewingProduction.form
         }
 
 
-        private ArtNormN GetAnnDataFromUI()
-        {
-            // Обновляем данные в таблице ann
-            return new ArtNormN
-            {
-                AnnID = _newAnnId,
-                Articul = nameTextBox.Text,
-                Group = groupTextBox.Text,
-                Mod = modelTextBox.Text,
-                Sek = !string.IsNullOrWhiteSpace(secTimeTextBox.Text)? Convert.ToInt32(secTimeTextBox.Text) : 0,
-                Diz = designerComboBox.SelectedValue != null ? Convert.ToInt32(designerComboBox.SelectedValue) : 0,
-                Constr = constructorComboBox.SelectedValue != null ? Convert.ToInt32(constructorComboBox.SelectedValue) : 0
-            };
-        }
-
         /// <summary>
-        /// Обработчик события изменения выбранного элемента в выпадающих списках конструктора и дизайнера
+        /// Обработчик события изменения выбранного элемента в LookUpEdit конструктора и дизайнера
         /// </summary>
         private async void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (sender is System.Windows.Forms.ComboBox comboBox && comboBox.SelectedValue != null)
+            // Use LookUpEdit and EditValue
+            if (sender is DevExpress.XtraEditors.LookUpEdit lookUpEdit && lookUpEdit.EditValue != null && lookUpEdit.EditValue != DBNull.Value)
             {
                 try
                 {
-                    int selectedId = Convert.ToInt32(comboBox.SelectedValue);
+                    int selectedId = Convert.ToInt32(lookUpEdit.EditValue);
                     string fieldName = string.Empty;
                     
-                    if (comboBox == constructorComboBox)
+                    if (lookUpEdit == constructorComboBox)
                     {
                         fieldName = "constr";
                         await _logger.LogEventAsync($"Выбран конструктор с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
-                    else if (comboBox == designerComboBox)
+                    else if (lookUpEdit == designerComboBox)
                     {
                         fieldName = "diz";
                         await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
@@ -1208,5 +1359,44 @@ namespace SewingProduction.form
             statusLabel.Text = "";
         }
 
+        private void OnDataChanged(object sender, ListChangedEventArgs e)
+        {
+            if (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0 || _normDopObrList.Count > 0)
+            {
+                 _hasUnsavedChanges = true;
+            }
+        }
+
+        // Добавляем новый обработчик RowStyle
+        private void GridView_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view == null || e.RowHandle < 0)
+                return;
+
+            object row = view.GetRow(e.RowHandle);
+
+            // Проверка на INewable для новых записей
+            if (row is INewable newableRow && newableRow.IsNew)
+            {
+                e.Appearance.BackColor = Color.LightGreen;
+                e.HighPriority = true; 
+                return; 
+            }
+
+            // Проверка на IsModified для измененных записей
+            try
+            {
+                if (row is IModifiable modifiable && modifiable.IsModified)
+                {
+                    e.Appearance.BackColor = Color.LightYellow;
+                    e.HighPriority = true;
+                }
+            }
+            catch (Exception ex) 
+            {
+                 _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false); // Логгируем ошибку
+            }
+        }
     }
 }

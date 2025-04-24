@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.props" Condition="Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.props')" />
   <Import Project="packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props" Condition="Exists('packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -367,62 +366,30 @@
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IModifiable.cs" />
     <Compile Include="form\TeamWork\Models\DapperMappings.cs" />
+    <Compile Include="form\TeamWork\Models\FioModel.cs" />
+    <Compile Include="form\TeamWork\Models\KodProizvModel.cs" />
     <Compile Include="form\TeamWork\Models\NZP.cs" />
+    <Compile Include="form\TeamWork\Models\OborudShvModel.cs" />
+    <Compile Include="form\TeamWork\Models\PodrVyazModel.cs" />
+    <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\UserDistribution\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\Forms\AboutBox.Designer.cs">
+    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\Forms\ActionHistory.cs">
+    <Compile Include="form\UserDistribution\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\Forms\ActionHistory.Designer.cs">
-      <DependentUpon>ActionHistory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Helpers\ActionLogger.cs" />
-    <Compile Include="form\UserDistribution\Forms\AdminForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AdminForm.Designer.cs">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AdminSprav.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AdminSprav.Designer.cs">
-      <DependentUpon>AdminSprav.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AllUser.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AllUser.Designer.cs">
-      <DependentUpon>AllUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\UsersHierarchy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\UsersHierarchy.Designer.cs">
-      <DependentUpon>UsersHierarchy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AllRole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\AllRole.Designer.cs">
-      <DependentUpon>AllRole.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\Forms\LoginForm.Designer.cs">
+    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\Helpers\FormScanner.cs" />
-    <Compile Include="form\UserDistribution\Forms\SettingsForm.cs">
+    <Compile Include="form\UserDistribution\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\Forms\SettingsForm.Designer.cs">
+    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="form\SpravBrig.cs">
@@ -494,14 +461,13 @@
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
-    <Compile Include="form\UserDistribution\Helpers\UserClass.cs" />
-    <Compile Include="form\UserDistribution\Forms\UserProfile.cs">
+    <Compile Include="form\UserDistribution\UserClass.cs" />
+    <Compile Include="form\UserDistribution\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="form\UserDistribution\Forms\UserProfile.Designer.cs">
+    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\UserDistribution\Models\UserModel.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -645,31 +611,13 @@
     <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\AboutBox.resx">
+    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\ActionHistory.resx">
-      <DependentUpon>ActionHistory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\AdminForm.resx">
-      <DependentUpon>AdminForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\AdminSprav.resx">
-      <DependentUpon>AdminSprav.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\AllUser.resx">
-      <DependentUpon>AllUser.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\UsersHierarchy.resx">
-      <DependentUpon>UsersHierarchy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\AllRole.resx">
-      <DependentUpon>AllRole.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\LoginForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\SettingsForm.resx">
+    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
@@ -687,6 +635,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
@@ -700,7 +649,7 @@
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\Forms\UserProfile.resx">
+    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
@@ -816,7 +765,6 @@
     <None Include="Resources\winter.ico" />
     <Content Include="Resources\spring.jpg" />
     <Content Include="Resources\valentine.jpg" />
-    <Content Include="winter.ico" />
     <None Include="Resources\icon %281%29.ico" />
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />

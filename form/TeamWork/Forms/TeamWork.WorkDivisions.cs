@@ -1,5 +1,4 @@
-﻿// TeamWork.WorkDivisions.cs
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -13,6 +12,7 @@ using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 using Dapper;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.DataAccess.Native.Excel;
+using SewingProduction.Extensions;
 
 namespace SewingProduction.Forms
 {
@@ -29,6 +29,8 @@ namespace SewingProduction.Forms
             try
             {
                 // Получаем данные
+                var fioList = await _artNormService.GetRelDesigner();
+                ArtNormN.FioSource = fioList;
                 var data = await _artNormService.GetArtNormData();
 
                 if (data == null || data.Count == 0)
@@ -47,7 +49,31 @@ namespace SewingProduction.Forms
                 ANNgridView.OptionsView.ShowPreview = false;
 
                 _bindingList = new BindingList<ArtNormN>(data);
+
+
+
                 _bindingSource.DataSource = _bindingList;
+                designerTextBox.DataBindings.Clear();
+                designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioDiz), true, DataSourceUpdateMode.OnPropertyChanged);
+                try
+                {
+                    designerTextBox.DataBindings["Text"].Format += (s, e) =>
+                    {
+                        if (e.Value is FioModel fio)
+                            e.Value = fio.Fio;
+                    };
+                }
+                catch (Exception ex)
+                { }
+                //  ФИО дизайнера
+                constructorTextBox.DataBindings.Clear();
+                constructorTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioConstr), true, DataSourceUpdateMode.OnPropertyChanged);
+                constructorTextBox.DataBindings["Text"].Format += (s, e) =>
+                {
+                    if (e.Value is FioModel fio)
+                        e.Value = fio.Fio;
+                };
+                commentRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Komment), false);
 
                 // Обновляем источник данных
                 _bindingSource.ResetBindings(false);
@@ -56,10 +82,8 @@ namespace SewingProduction.Forms
                 filterTable();
                 // Включаем обновление UI
                 ANNgridControl.EndUpdate();
+
                 Task bindingsTask = InitializeBindingsAsync();
-
-                
-
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
             }
@@ -108,14 +132,7 @@ namespace SewingProduction.Forms
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
                 gridControlDopObrTW.DataSource = _normDopObrBindingSourceTW;
-
-                //nameTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
-                //groupTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Group), true, DataSourceUpdateMode.OnPropertyChanged);
-                //modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
-                //secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
-
-                designerTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
-                constructorTextBox.DataBindings.Add("SelectedValue", bindingSource1, nameof(ArtNormN.Constr), true, DataSourceUpdateMode.OnPropertyChanged);
+                
             }
             catch (Exception ex)
             {
@@ -124,6 +141,17 @@ namespace SewingProduction.Forms
             }
         }
 
+        private void BindingSource_PositionChanged(object sender, EventArgs e)
+        {
+            //if (_bindingSource.Current is ArtNormN currentRow)
+            //{
+            //    var dizFio = fioList.FirstOrDefault(f => f.tab == currentRow.Diz)?.fio ?? string.Empty;
+            //    var constrFio = fioList.FirstOrDefault(f => f.tab == currentRow.Constr)?.fio ?? string.Empty;
+
+            //    designerTextBox.Text = dizFio;
+            //    constructorTextBox.Text = constrFio;
+            //}
+        }
 
         private async Task LoadRelatedData(int annId)
         {
@@ -131,8 +159,9 @@ namespace SewingProduction.Forms
             await GridHelper.LoadListDataAsync(gridControlRaskrTW, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
             await GridHelper.LoadListDataAsync(gridControlKontTW, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await GridHelper.LoadListDataAsync(gridControlDopObrTW, normdopobrBindingSource, await _artNormService.GetRelatedNormDopObr(annId));
+            await LoadAndBindFioListsAsync();
 
-            List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);//GetNZPByKoddRtAsync(annId);
+            List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
             await GridHelper.LoadListDataAsync(customGridControl5, sparticulBindingSource, nzpData);
             _nzpByKoddRtSource.DataSource = nzpData;
             _nzpByKoddRtSource.ResetBindings(false);
@@ -170,6 +199,59 @@ namespace SewingProduction.Forms
             }
         }
 
+        private async Task LoadAndBindFioListsAsync()
+        {
+
+            ////designerTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Diz));
+            ////designerTextBox.Format += (s, e) =>
+            ////{
+            ////    int tab = (int)e.Value;
+            ////    e.Value = _fioList.FirstOrDefault(f => f.Tab == tab)?.Fio ?? "Не указано";
+            ////};
+
+            try
+            {
+                if (_cachedFioData == null)
+                {
+                    var fioData = await _artNormService.GetRelDesigner();
+                    if (fioData != null && fioData.Count > 0)
+                    {
+                        _cachedFioData = new List<FioModel>(fioData);
+                        await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
+                    }
+                    else
+                    {
+                        await _logger.LogEventAsync("Пустой список FIO", "LoadAndBindFioListsAsync");
+                        return;
+                    }
+                }
+                // Устанавливаем общий источник для модели ArtNormN
+                ArtNormN.FioSource = _cachedFioData;
+                _bindingSource.DataSource = _bindingList;
+                _bindingSource.ResetBindings(false);
+                //// Привязываем к источникам данных для лукапов
+                //await this.InvokeAsync(() =>
+                //{
+                //    desBindingSource.DataSource = _cachedFioData;
+                //    constrBindingSource.DataSource = _cachedFioData;
+
+                //    // Привязываем TextBox вручную, если используешь
+                //    designerTextBox.DataBindings.Clear();
+                //    designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioDiz.fio), true, DataSourceUpdateMode.OnPropertyChanged);
+
+                //    constructorTextBox.DataBindings.Clear();
+                //    constructorTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioConstr.fio), true, DataSourceUpdateMode.OnPropertyChanged);
+                //});
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
+                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
         /// <summary>
         /// Добавить предварительное
         /// </summary>
@@ -199,7 +281,7 @@ namespace SewingProduction.Forms
                 dateCreate = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
-                dataUpdate = DateTime.MinValue,
+                dateUpdate = DateTime.MinValue,
                 SekKr = 0,
                 Slogn = 0,
                 Status = 1,
@@ -208,7 +290,7 @@ namespace SewingProduction.Forms
                 AnnID = 0
             };
 
-            int newId = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
+            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
             if (newId <= 0)
             {
                 MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -230,7 +312,7 @@ namespace SewingProduction.Forms
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
-
+       
 
         private async Task ArchAndCopy()
         {
@@ -291,10 +373,10 @@ namespace SewingProduction.Forms
             selectedItem.Status = newStatus;
             selectedItem.StatusText = StatusHelper.GetStatusText(newStatus);
 
-            await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
 
             UpdateRowInBindingList(newRow);
-            await _artNormService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
+            await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "ArchAndCopy");
         }
 
@@ -328,7 +410,7 @@ namespace SewingProduction.Forms
                 selectedItem.Status = oldStatus.Value;
                 selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
             }
 
             if (newRow != null && newRow.AnnID > 0)
@@ -342,26 +424,26 @@ namespace SewingProduction.Forms
             ANNgridView.RefreshData();
         }
         private async Task HandleArchAndCopyError(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus, Exception ex)
-        {
-            if (newRow != null && newRow.AnnID > 0)
             {
-                _bindingList.Remove(newRow);
-                _bindingSource.Remove(newRow);
+                if (newRow != null && newRow.AnnID > 0)
+                {
+                    _bindingList.Remove(newRow);
+                    _bindingSource.Remove(newRow);
                 await _artNormService.DeleteByAnnId(TableNames.Ann, newRow.AnnID);
-            }
+                }
 
-            if (oldStatus.HasValue && selectedItem != null)
-            {
+                if (oldStatus.HasValue && selectedItem != null)
+                {
                 await _logger.LogEventAsync($"Ошибка. Восстановление исходного статуса: {oldStatus.Value}", "ArchAndCopy");
 
-                selectedItem.Status = oldStatus.Value;
-                selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
+                    selectedItem.Status = oldStatus.Value;
+                    selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
-            }
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
+                }
 
-            await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
-            MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
@@ -477,7 +559,7 @@ namespace SewingProduction.Forms
 
                 ArtNormN newRecord = sourceRecord.CloneProperties();
                 newRecord.dateCreate = DateTime.Now;
-                newRecord.dataUpdate = null;
+                newRecord.dateUpdate = null;
                 newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
                 newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
                 newRecord.Arh = false;
@@ -486,7 +568,7 @@ namespace SewingProduction.Forms
 
                 _bindingList.Add(newRecord);
 
-                newRecord.AnnID = await _artNormService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
+                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
                 if (newRecord.AnnID <= 0)
                 {
                     MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -526,7 +608,7 @@ namespace SewingProduction.Forms
 
                 // Вызов метода для отвязки артикула
                 await _artNormService.ResetAnnIdinArticul(kod);
-                await _artNormService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annId);
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annId);
 
                 // Обновление данных в таблице после отвязки
                 _nzpByKoddRtSource.RemoveCurrent();

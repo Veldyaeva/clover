@@ -1,11 +1,13 @@
 ﻿using SewingProduction.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace SewingProduction.Models
 {
-    public class ArtNormN : INotifyPropertyChanged, IDataErrorInfo, INewable
+    public class ArtNormN : INotifyPropertyChanged, IDataErrorInfo, INewable, IModifiable
     {
         private string _kod;
         private string _group;
@@ -64,7 +66,7 @@ namespace SewingProduction.Models
         public int SekVyazo { get; set; }
         [Column("sek_vyaz")]
         public int SekVyaz { get; set; }
-
+        [Column("komment")]
         public string Komment
         {
             get => _komment;
@@ -74,12 +76,13 @@ namespace SewingProduction.Models
         [Column("data_sozd")]
         public DateTime? dateCreate { get; set; }
 
+        [Column("diz")]
         public int Diz
         {
             get => _diz;
             set { if (_diz != value) { _diz = value; OnPropertyChanged(nameof(Diz)); } }
         }
-
+        [Column("constr")]
         public int Constr
         {
             get => _constr;
@@ -87,7 +90,7 @@ namespace SewingProduction.Models
         }
 
         [Column("data_obn")]
-        public DateTime? dataUpdate { get; set; }
+        public DateTime? dateUpdate { get; set; }
 
         [Column("sek_kr")]
         public int SekKr { get; set; }
@@ -111,6 +114,17 @@ namespace SewingProduction.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+
+        [NotMapped]
+        public static List<FioModel> FioSource { get; set; }
+
+        [NotMapped]
+        public FioModel FioDiz => FioSource?.FirstOrDefault(f => f.Tab == Diz);
+
+        [NotMapped]
+        public FioModel FioConstr => FioSource?.FirstOrDefault(f => f.Tab == Constr);
+
 
         // Реализация IDataErrorInfo для валидации
         [NotMapped]
@@ -143,5 +157,13 @@ namespace SewingProduction.Models
         }
         [NotMapped]
         public string Error => null;
+        [NotMapped]
+        public bool IsModified { get; set; }
+
+        // Добавляем метод Clone для создания копии объекта
+        public ArtNormN Clone()
+        {
+            return (ArtNormN)this.MemberwiseClone();
+        }
     }
 }

@@ -5,13 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-    public class NormRasz : INewable
+    public class NormRasz : INewable, INotifyPropertyChanged, IModifiable
     {
         [NotMapped]
         public bool IsNew { get; set; } = true;
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
         public int nrId { get; set; }
         public int AnnId { get; set; }
         public int Kod { get; set; }
@@ -33,5 +36,20 @@ namespace SewingProduction.Models
         public string TextOb { get; set; }
         [NotMapped]
         public string TextVyaz { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            // Не вызываем событие для ID, IsNew, IsModified
+            bool isInternalProperty = propertyName == nameof(nrId) || // Используем nrId для NormRasz
+                                     propertyName == nameof(IsNew) || 
+                                     propertyName == nameof(IsModified);
+
+            if (!isInternalProperty)
+            {
+                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+        }
     }
 }
