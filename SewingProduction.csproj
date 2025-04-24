@@ -374,24 +374,6 @@
     <Compile Include="form\TeamWork\Models\OborudShvModel.cs" />
     <Compile Include="form\TeamWork\Models\PodrVyazModel.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
-    <Compile Include="form\UserDistribution\AboutBox.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
-      <DependentUpon>AboutBox.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\LoginForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="form\UserDistribution\SettingsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\SpravBrig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -461,6 +443,24 @@
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
+    <Compile Include="form\UserDistribution\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\UserDistribution\UserClass.cs" />
     <Compile Include="form\UserDistribution\UserProfile.cs">
       <SubType>Form</SubType>
@@ -611,15 +611,6 @@
     <EmbeddedResource Include="form\TeamWork\Forms\NormRaskrNew.resx">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
-      <DependentUpon>AboutBox.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
-      <DependentUpon>LoginForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
-      <DependentUpon>SettingsForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="form\SpravBrig.resx">
       <DependentUpon>SpravBrig.cs</DependentUpon>
     </EmbeddedResource>
@@ -648,6 +639,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\LoginForm.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
       <DependentUpon>UserProfile.cs</DependentUpon>
@@ -769,6 +769,7 @@
     <None Include="Resources\icon.ico" />
     <None Include="Resources\Icon1.ico" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

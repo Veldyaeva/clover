@@ -225,7 +225,6 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                // Подтверждение привязки
                 DialogResult result = MessageBox.Show(
                     $"Вы действительно хотите привязать артикул {selectedArtRow.Articul.TrimEnd()} к разделению труда {selectedAnnRow.Articul.TrimEnd()}?",
                     "Подтверждение привязки",
@@ -234,8 +233,6 @@ namespace SewingProduction.Forms
                 );
 
                 if (result == DialogResult.No) return;
-
-                // Выполняем привязку через сервис
                 _artNormService.UpdateAnnIdinArticul(selectedArt, selectedAnn);
 
                 // Обновляем UI
@@ -248,29 +245,25 @@ namespace SewingProduction.Forms
                     if (artDataSourceList != null)
                     {
                         int index = artDataSourceList.IndexOf(selectedArtRow);
-                        if (index > 0) // Если строка найдена и она не первая
+                        if (index > 0) 
                         {
                             artDataSourceList.RemoveAt(index);
                             artDataSourceList.Insert(0, selectedArtRow);
-                            // Обновляем источник данных грида, чтобы он перерисовался с новым порядком
                             customGridControl1.RefreshDataSource();
                            
-                             // Опционально: сфокусироваться на перемещенной строке
+                             // фокус на перемещенной строке
                              if (artView.RowCount > 0) artView.FocusedRowHandle = 0; 
                         }
                         else
                         { 
-                            // Строка не найдена или уже первая, просто обновим данные (без перерисовки всего)
                             artView.RefreshRow(artView.FocusedRowHandle); 
                         }
                     }
                     else
                     {
-                        // Источник данных - не список или null, просто обновим вид
                         artView.RefreshData(); 
                     }
 
-                    // Обновляем вторую таблицу, если нужно (например, если там тоже что-то меняется)
                     annView.RefreshData();
                 }
 
