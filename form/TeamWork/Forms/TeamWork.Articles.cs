@@ -23,6 +23,8 @@ namespace SewingProduction.Forms
     {
         // Вторая вкладка — "Работа с артикулами"
 
+        private bool _isUnchecking = false;
+
         /// <summary>
         /// Загрузка вкладки "текущие работы" (MyDataAnn)
         /// </summary>
@@ -77,7 +79,6 @@ namespace SewingProduction.Forms
         /// <param name="kod">Код артикула</param>
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
-        /// 
         private async Task<List<MyDataANN>> LoadWorksbyArt(int kod, string articul)
         {
             try
@@ -98,10 +99,7 @@ namespace SewingProduction.Forms
                     }
                 }
 
-               // BindingList<MyDataANN> myDataList = ConvertToMyDataAnn(relatedData);
-
                 await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
-                //return myDataList;
                 return relatedData;
             }
             catch (Exception ex)
@@ -142,9 +140,9 @@ namespace SewingProduction.Forms
         ///// <param name="e"></param>
         private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "annId", 0);
+            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "AnnId", 0);
             // await LoadRelatedData(annId);
-            await GridHelper.LoadGridControlDataAsync(customGridControl6, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
+            await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
 
             //int annId = 0;
             //var view = gridView8;//customGridControl2.MainView as GridView;
@@ -173,131 +171,11 @@ namespace SewingProduction.Forms
             await _dbService.UpdateFieldAsync(TableNames.Obr, "annId", newId, "annId", selectedAnnId);
 
         }
-        #region headerCheckBox
-        private bool isHeaderChecked = false; // Состояние CheckBox в заголовке
-        private Dictionary<GridView, bool> gridViewStates = new Dictionary<GridView, bool>();//словарь состояний CheckBox
-        //отрисовка чекБокса в заголовке столбца
-        private void gridView8_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-
-        private void gridView7_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            // DrawCheckBox(e);
-        }
-        private void gridView9_CustomDrawColumnHeader(object sender, ColumnHeaderCustomDrawEventArgs e)
-        {
-            //DrawCheckBox(e);
-        }
-        private void DrawCheckBox(ColumnHeaderCustomDrawEventArgs e)
-        {
-            if (e.Column != null && e.Column.FieldName == "IsChecked") // Убедимся, что это нужный столбец
-            {
-                // Очищаем стандартную отрисовку заголовка
-                e.Handled = true;
-
-                // Отрисовка заголовка
-                e.Painter.DrawObject(e.Info);
-
-                // Отрисовка CheckBox
-                // Получаем размеры области заголовка
-                Rectangle rect = e.Bounds;
-                CheckBoxRenderer.DrawCheckBox(
-                    e.Graphics,
-                    new Point(rect.Left + (rect.Width - 16) / 2, rect.Y + (rect.Height / 2) - 8),   // Рассчитываем позицию чекбокса по центру
-                    isHeaderChecked ? System.Windows.Forms.VisualStyles.CheckBoxState.CheckedNormal : System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal
-                );
-            }
-        }
-        private List<MyDataART> GetCheckedRows<MyDataART>(GridView view)
-        {
-            BindingList<MyDataART> dataSource = view.DataSource as BindingList<MyDataART>;
-            if (dataSource == null) return new List<MyDataART>(); // Обработка null
-            List<MyDataART> list = new List<MyDataART>();
-            foreach (MyDataART row in dataSource)
-            {
-                //if (row.IsChecked = true)
-                {
-                    list.Add(row);
-
-                }
-            }
-            return new List<MyDataART>();//
-                                         //dataSource.Where(item => item.IsChecked).ToList();
-        }
-        private void AddCheckBoxToHeader(GridView gridView)
-        {
-            DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit headerCheckEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            GridColumn column = gridView.Columns["IsChecked"];
-            column.OptionsColumn.AllowEdit = true;
-
-            column.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            column.ColumnEdit = headerCheckEdit;
-
-
-        }
-        //Обработка нажатия на заголовке чекБоксов
-        private void CheckBoxMouseDown(object sender, MouseEventArgs e)
-        {
-            GridView view = sender as GridView;
-            if (view == null) return;
-            GridHitInfo hitInfo = view.CalcHitInfo(e.Location);
-
-            if (!hitInfo.InColumn || hitInfo.Column.FieldName != "IsChecked") return;
-            isHeaderChecked = !isHeaderChecked;
-            //UpdateAllRows(view, isHeaderChecked);
-            //view.RefreshData();
-            // Получаем или устанавливаем состояние для текущего GridView
-            if (!gridViewStates.TryGetValue(view, out bool isChecked))
-            {
-                isChecked = false; // Значение по умолчанию, если GridView еще не был обработан
-            }
-
-            isChecked = !isChecked;
-            gridViewStates[view] = isChecked; // Сохраняем новое состояние
-
-            UpdateAllRows(view, isChecked);
-            view.RefreshData();
-        }
-
-        //обновление статуса CheckBox у всех строк таблицы
-        private void UpdateAllRows(GridView view, bool isChecked)
-        {
-            SafeInvoke(view.GridControl, () =>
-            {
-                IList dataSource = view.DataSource as IList;
-                if (dataSource == null) return;
-
-                foreach (var item in dataSource)
-                {
-                    if (item != null)
-                    {
-                        var property = item.GetType().GetProperty("IsChecked");
-                        if (property != null && property.CanWrite)
-                        {
-                            property.SetValue(item, isChecked);
-                        }
-                    }
-                }
-            });
-        }
-        //переопределяем метод сортировки кликом на заголовке столбца. Хотелось бы оставить, конечно
-        private void gridView_CustomColumnSort(object sender, CustomColumnSortEventArgs e)
-        {
-            if (e.Column.FieldName == "IsChecked")
-            {
-                e.Handled = true; // Отменяем сортировку по колонке "IsChecked"
-            }
-        }
-
-        #endregion
-
 
         /// <summary>
         /// Привязывает выбранные артикулы к выбранному разделению труда (РТ).
         /// </summary>
-        private async void BindButton_Click(object sender, EventArgs e)
+        private async Task BindButton_Click_Internal(object sender, EventArgs e)
         {
             try
             {
@@ -315,28 +193,30 @@ namespace SewingProduction.Forms
                 MyDataART selectedArtRow = null;
                 MyDataANN selectedAnnRow = null;
                 // Получаем выбранные артикулы
-                BindingList<MyDataART> artDataSource = artView.DataSource as BindingList<MyDataART>;
-                foreach (var row in artDataSource)
-                {
-                    if (row.IsChecked)
+                List<MyDataART> artDataSource = artView.DataSource as List<MyDataART>;
+                if (artDataSource != null)
+                    foreach (var row in artDataSource)
                     {
-                        selectedArt = row.Kod;
-                        selectedArtRow = row;
-                        break;
+                        if (row.IsChecked)
+                        {
+                            selectedArt = row.Kod;
+                            selectedArtRow = row;
+                            break;
+                        }
                     }
-                }
 
                 // Получаем выбранное разделение труда
-                BindingList<MyDataANN> annDataSource = annView.DataSource as BindingList<MyDataANN>;
-                foreach (var row in annDataSource)
-                {
-                    if (row.IsChecked)
+                List<MyDataANN> annDataSource = annView.DataSource as List<MyDataANN>;
+                if (annDataSource != null)
+                    foreach (var row in annDataSource)
                     {
-                        selectedAnn = row.AnnId;
-                        selectedAnnRow = row;
-                        break;
+                        if (row.IsChecked)
+                        {
+                            selectedAnn = row.AnnId;
+                            selectedAnnRow = row;
+                            break;
+                        }
                     }
-                }
 
                 // Проверяем, выбраны ли оба элемента
                 if (selectedArt == "" || selectedAnn == -1)
@@ -345,7 +225,6 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                // Подтверждение привязки
                 DialogResult result = MessageBox.Show(
                     $"Вы действительно хотите привязать артикул {selectedArtRow.Articul.TrimEnd()} к разделению труда {selectedAnnRow.Articul.TrimEnd()}?",
                     "Подтверждение привязки",
@@ -354,20 +233,38 @@ namespace SewingProduction.Forms
                 );
 
                 if (result == DialogResult.No) return;
-
-                // Выполняем привязку через сервис
                 _artNormService.UpdateAnnIdinArticul(selectedArt, selectedAnn);
 
                 // Обновляем UI
                 if (selectedArtRow != null && selectedAnnRow != null)
                 {
                     selectedArtRow.BindedArt = selectedAnnRow.Articul;
-                    artView.RefreshData();
-                    annView.RefreshData();
-                    customGridControl1.MainView.RefreshData();
-                    // customGridControl1.MainView;
 
-                    customGridControl2.MainView.RefreshData();
+                    // Перемещаем строку в начало списка
+                    List<MyDataART> artDataSourceList = artDataSource;
+                    if (artDataSourceList != null)
+                    {
+                        int index = artDataSourceList.IndexOf(selectedArtRow);
+                        if (index > 0) 
+                        {
+                            artDataSourceList.RemoveAt(index);
+                            artDataSourceList.Insert(0, selectedArtRow);
+                            customGridControl1.RefreshDataSource();
+                           
+                             // фокус на перемещенной строке
+                             if (artView.RowCount > 0) artView.FocusedRowHandle = 0; 
+                        }
+                        else
+                        { 
+                            artView.RefreshRow(artView.FocusedRowHandle); 
+                        }
+                    }
+                    else
+                    {
+                        artView.RefreshData(); 
+                    }
+
+                    annView.RefreshData();
                 }
 
                 await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArt} привязан к РТ {selectedAnn}");
@@ -378,33 +275,6 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при привязке артикула к РТ");
                 MessageBox.Show($"Ошибка при привязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-
-
-        private void SearchArticlesButton_Click(object sender, EventArgs e)
-        {
-            // TODO: Поиск по артикулам
-        }
-
-        private void ButtonAddArticle_Click(object sender, EventArgs e)
-        {
-            // TODO: Добавление нового артикула
-        }
-
-        private void ButtonEditArticle_Click(object sender, EventArgs e)
-        {
-            // TODO: Редактирование артикула
-        }
-
-        private void ButtonDeleteArticle_Click(object sender, EventArgs e)
-        {
-            // TODO: Удаление артикула
-        }
-
-        private void ANNgridView_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            // TODO: обработка изменения выделенной строки артикула
         }
     }
 }

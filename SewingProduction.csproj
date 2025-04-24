@@ -366,6 +366,7 @@
     <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
     <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
     <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IModifiable.cs" />
     <Compile Include="form\TeamWork\Models\DapperMappings.cs" />
     <Compile Include="form\TeamWork\Models\FioModel.cs" />
     <Compile Include="form\TeamWork\Models\KodProizvModel.cs" />
@@ -634,6 +635,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>

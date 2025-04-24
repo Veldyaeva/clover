@@ -5,13 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-   public class NormKont :INewable
+   public class NormKont :INewable, INotifyPropertyChanged
     {
         [NotMapped]
         public bool IsNew { get; set; } = true;
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
         [NotMapped]
         public int id { get; set; }
         public int AnnId { get; set; }
@@ -30,5 +33,25 @@ namespace SewingProduction.Models
         public int NCh { get; set; }
         public int N1 { get; set; }
         public int SebS { get; set; }
+
+        // Добавляем реализацию INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            // Не вызываем событие для ID, IsNew, IsModified
+            bool isInternalProperty = propertyName == nameof(id) || // Используем 'id', если это имя свойства первичного ключа
+                                     propertyName == nameof(IsNew) || 
+                                     propertyName == nameof(IsModified);
+
+            if (!isInternalProperty)
+            {
+                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+            // Убираем автоматическую установку IsModified отсюда
+            // if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew))
+            // {
+            //      IsModified = !IsNew;
+            // }
+        }
     }
 }

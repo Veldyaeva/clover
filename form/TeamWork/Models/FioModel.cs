@@ -14,11 +14,11 @@ namespace SewingProduction.Models
         /// <summary>
         /// Employee ID (Tabelnyy Nomer).
         /// </summary>
-        public int tab { get; set; }
+        public int Tab { get; set; }
 
         /// <summary>
         /// Employee Full Name.
         /// </summary>
-        public string fio { get; set; }
+        public string Fio { get; set; }
     }
 } 

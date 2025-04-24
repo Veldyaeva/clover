@@ -191,7 +191,6 @@ namespace SewingProduction.Forms
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.actualCheckBox1 = new SewingProduction.CustomCheckBox();
             this.preliminaryCheckBox1 = new SewingProduction.CustomCheckBox();
-            this.customButton4 = new SewingProduction.CustomButton();
             this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
             this.customGridControl2 = new SewingProduction.CustomGridControl();
             this.gridView8 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -246,6 +245,8 @@ namespace SewingProduction.Forms
             this.sparticulBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.imageCollection1 = new DevExpress.Utils.ImageCollection(this.components);
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.desBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.constrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemButtonEdit2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
@@ -346,6 +347,8 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.desBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constrBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -442,20 +445,20 @@ namespace SewingProduction.Forms
             this.constructorTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.constructorTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.constructorTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.constructorTextBox.Location = new System.Drawing.Point(6, 77);
+            this.constructorTextBox.Location = new System.Drawing.Point(3, 77);
             this.constructorTextBox.Name = "constructorTextBox";
-            this.constructorTextBox.Size = new System.Drawing.Size(185, 23);
-            this.constructorTextBox.TabIndex = 17;
+            this.constructorTextBox.Size = new System.Drawing.Size(188, 23);
+            this.constructorTextBox.TabIndex = 13;
             // 
             // designerTextBox
             // 
             this.designerTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
             this.designerTextBox.Font = new System.Drawing.Font("Arial", 10F);
             this.designerTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.designerTextBox.Location = new System.Drawing.Point(10, 24);
+            this.designerTextBox.Location = new System.Drawing.Point(3, 23);
             this.designerTextBox.Name = "designerTextBox";
-            this.designerTextBox.Size = new System.Drawing.Size(182, 23);
-            this.designerTextBox.TabIndex = 16;
+            this.designerTextBox.Size = new System.Drawing.Size(188, 23);
+            this.designerTextBox.TabIndex = 12;
             // 
             // label6
             // 
@@ -1813,7 +1816,7 @@ namespace SewingProduction.Forms
             // coln3
             // 
             this.coln3.Caption = "№оп.";
-            this.coln3.FieldName = "n";
+            this.coln3.FieldName = "N";
             this.coln3.Name = "coln3";
             this.coln3.Visible = true;
             this.coln3.VisibleIndex = 0;
@@ -1821,7 +1824,7 @@ namespace SewingProduction.Forms
             // gridColumn9
             // 
             this.gridColumn9.Caption = "№п/оп.";
-            this.gridColumn9.FieldName = "n1";
+            this.gridColumn9.FieldName = "N1";
             this.gridColumn9.Name = "gridColumn9";
             this.gridColumn9.Visible = true;
             this.gridColumn9.VisibleIndex = 1;
@@ -1830,7 +1833,7 @@ namespace SewingProduction.Forms
             // gridColumn10
             // 
             this.gridColumn10.Caption = "Разряд";
-            this.gridColumn10.FieldName = "razryd";
+            this.gridColumn10.FieldName = "Razryad";
             this.gridColumn10.Name = "gridColumn10";
             this.gridColumn10.Visible = true;
             this.gridColumn10.VisibleIndex = 2;
@@ -1839,7 +1842,7 @@ namespace SewingProduction.Forms
             // gridColumn11
             // 
             this.gridColumn11.Caption = "Наименование операции пошива";
-            this.gridColumn11.FieldName = "text";
+            this.gridColumn11.FieldName = "Text";
             this.gridColumn11.Name = "gridColumn11";
             this.gridColumn11.Visible = true;
             this.gridColumn11.VisibleIndex = 3;
@@ -1924,7 +1927,6 @@ namespace SewingProduction.Forms
             this.panelControl3.Controls.Add(this.simpleButton1);
             this.panelControl3.Controls.Add(this.actualCheckBox1);
             this.panelControl3.Controls.Add(this.preliminaryCheckBox1);
-            this.panelControl3.Controls.Add(this.customButton4);
             this.panelControl3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelControl3.Location = new System.Drawing.Point(421, 38);
             this.panelControl3.Name = "panelControl3";
@@ -2007,22 +2009,6 @@ namespace SewingProduction.Forms
             this.preliminaryCheckBox1.UseVisualStyleBackColor = true;
             this.preliminaryCheckBox1.Visible = false;
             this.preliminaryCheckBox1.CheckedChanged += new System.EventHandler(this.customCheckBox6_CheckedChanged);
-            // 
-            // customButton4
-            // 
-            this.customButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButton4.FlatAppearance.BorderSize = 0;
-            this.customButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButton4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButton4.Location = new System.Drawing.Point(0, 247);
-            this.customButton4.Name = "customButton4";
-            this.customButton4.Size = new System.Drawing.Size(89, 48);
-            this.customButton4.TabIndex = 1;
-            this.customButton4.Text = "Увязать выбранные";
-            this.customButton4.UseVisualStyleBackColor = false;
-            this.customButton4.Visible = false;
-            this.customButton4.Click += new System.EventHandler(this.BindButton_Click);
             // 
             // splitContainerControl3
             // 
@@ -2308,7 +2294,7 @@ namespace SewingProduction.Forms
             // модель
             // 
             this.модель.Caption = "модель";
-            this.модель.FieldName = "Model";
+            this.модель.FieldName = "Mod";
             this.модель.Name = "модель";
             this.модель.Visible = true;
             this.модель.VisibleIndex = 4;
@@ -2318,8 +2304,6 @@ namespace SewingProduction.Forms
             this.gridColumn4.Caption = "gridColumn4";
             this.gridColumn4.FieldName = "_isChecked";
             this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
             // 
             // gridView11
             // 
@@ -2656,6 +2640,8 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.desBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.constrBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2848,7 +2834,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private BindingSource normraszBindingSource1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageWorkDivisions;
-        private CustomButton customButton4;
         private CustomGridControl customGridControl3;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
@@ -2914,8 +2899,6 @@ namespace SewingProduction.Forms
         private TableLayoutPanel tableLayoutPanel3;
         private TableLayoutPanel tableLayoutPanel5;
         private PanelControl panelControl7;
-        private CustomTextBox constructorTextBox;
-        private CustomTextBox designerTextBox;
         private CustomLabel label6;
         private CustomLabel label7;
         private CustomButton ButtonApprovement;
@@ -3036,5 +3019,9 @@ namespace SewingProduction.Forms
         private CustomLabel customLabel3;
         private ErrorProvider errorProvider1;
         private DevExpress.XtraGrid.Columns.GridColumn PztCount;
+        private BindingSource desBindingSource;
+        private BindingSource constrBindingSource;
+        private CustomTextBox constructorTextBox;
+        private CustomTextBox designerTextBox;
     }
 }
