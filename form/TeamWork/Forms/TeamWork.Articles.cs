@@ -92,7 +92,7 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                int kod = GetSelectedKodFromGrid(customGridControl1); // Убедитесь, что этот метод корректно работает с BindingSource
+                int kod = GetCurrentKodFromDataSource();
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
 
                 _myDataAnnList.Clear(); // Очищаем BindingList
@@ -124,34 +124,38 @@ namespace SewingProduction.Forms
             }
         }
 
-        // Убедитесь, что GetSelectedKodFromGrid работает правильно с BindingSource
-        // Возможно, он уже работает, т.к. GetRowCellValue часто универсален.
-        // Если нет, его нужно будет адаптировать. Примерно так:
-        private int GetSelectedKodFromGrid(GridControl grid)
+        //private int GetSelectedKodFromGrid(GridControl grid)
+        //{
+        //    var view = grid.MainView as GridView;
+        //    if (view != null && view.FocusedRowHandle >= 0)
+        //    {
+        //        return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
+        //    }
+        //    return 0;
+        //}
+        /// <summary>
+        /// Получает значение Kod из текущего элемента источника данных _myDataArtBindingSource.
+        /// </summary>
+        /// <returns>Значение Kod или 0, если текущий элемент не найден или Kod не может быть преобразован в число.</returns>
+        private int GetCurrentKodFromDataSource()
         {
-            var view = grid.MainView as GridView;
-            if (view != null && view.FocusedRowHandle >= 0)
+            if (_myDataArtBindingSource != null && _myDataArtBindingSource.Current != null)
             {
-                // Получаем объект данных для строки (MyDataART)
-                var rowData = view.GetRow(view.FocusedRowHandle) as MyDataART;
-                if (rowData != null)
+                var currentItem = _myDataArtBindingSource.Current as MyDataART;
+                if (currentItem != null)
                 {
-                    // Пытаемся получить Kod из объекта
-                    if (int.TryParse(rowData.Kod, out int kodValue)) // Предполагая, что Kod это string
+                    if (int.TryParse(currentItem.Kod, out int kodValue))
                     {
                         return kodValue;
                     }
-                    // Если Kod другого типа (например, int), то просто return rowData.Kod;
-                    // return rowData.Kod; // Если Kod - это int
+                    else
+                    {
+                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.Kod}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
+                    }
                 }
-                // Можно оставить старый вариант как запасной, если GetRow не сработает
-                // return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
             }
             return 0;
         }
-
-
-
 
         //private async Task MyDataArtLoad()
         //{
@@ -173,7 +177,7 @@ namespace SewingProduction.Forms
         //    {
         //        int kod = GetSelectedKodFromGrid(customGridControl1);
         //        List<MyDataANN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
-               
+
         //        if (artNormNs != null)
         //        {
         //            //   var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
@@ -189,6 +193,7 @@ namespace SewingProduction.Forms
         //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
         //    }
         //}
+
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
         /// </summary>
@@ -227,15 +232,6 @@ namespace SewingProduction.Forms
 
         }
 
-        //private int GetSelectedKodFromGrid(GridControl grid)
-        //{
-        //    var view = grid.MainView as GridView;
-        //    if (view != null && view.FocusedRowHandle >= 0)
-        //    {
-        //        return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
-        //    }
-        //    return 0;
-        //}
         async Task NormRaszLoad()
         {
             int annId = 0;

@@ -66,7 +66,7 @@ namespace SewingProduction.Forms
             this.panel2 = new System.Windows.Forms.Panel();
             this.customLabel3 = new SewingProduction.CustomLabel();
             this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            this.ANNgridControl = new DevExpress.XtraGrid.GridControl();
+            this.ANNgridControl = new SewingProduction.CustomGridControl();
             this.ANNgridView = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colgroup = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colarticul = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -116,7 +116,7 @@ namespace SewingProduction.Forms
             this.gridView14 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.ButtonUnboundWd = new SewingProduction.CustomSimpleButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.gridControlRaszTW = new DevExpress.XtraGrid.GridControl();
+            this.gridControlRaszTW = new SewingProduction.CustomGridControl();
             this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.coln = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -132,7 +132,7 @@ namespace SewingProduction.Forms
             this.colkod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView13 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridControlRaskrTW = new DevExpress.XtraGrid.GridControl();
+            this.gridControlRaskrTW = new SewingProduction.CustomGridControl();
             this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colid = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -147,7 +147,7 @@ namespace SewingProduction.Forms
             this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControlKontTW = new DevExpress.XtraGrid.GridControl();
+            this.gridControlKontTW = new SewingProduction.CustomGridControl();
             this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colkod_o2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -156,7 +156,7 @@ namespace SewingProduction.Forms
             this.coltext2 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colsek3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControlDopObrTW = new DevExpress.XtraGrid.GridControl();
+            this.gridControlDopObrTW = new SewingProduction.CustomGridControl();
             this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colsek_p = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -2996,7 +2996,7 @@ namespace SewingProduction.Forms
         private RadioButton kode;
         private RadioButton group;
         private TableLayoutPanel tableLayoutPanel2;
-        private DevExpress.XtraGrid.GridControl gridControlRaszTW;
+        private CustomGridControl gridControlRaszTW;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn coln;
         private DevExpress.XtraGrid.Columns.GridColumn coln1;
@@ -3007,7 +3007,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o;
         private DevExpress.XtraGrid.Columns.GridColumn colannId3;
-        private DevExpress.XtraGrid.GridControl gridControlRaskrTW;
+        private CustomGridControl gridControlRaskrTW;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
         private DevExpress.XtraGrid.Columns.GridColumn colid;
         private DevExpress.XtraGrid.Columns.GridColumn colkod2;
@@ -3017,7 +3017,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn coltext1;
         private DevExpress.XtraGrid.Columns.GridColumn colsek2;
         private DevExpress.XtraGrid.Columns.GridColumn colannId4;
-        private DevExpress.XtraGrid.GridControl gridControlKontTW;
+        private CustomGridControl gridControlKontTW;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o2;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
@@ -3025,7 +3025,7 @@ namespace SewingProduction.Forms
         private DevExpress.XtraGrid.Columns.GridColumn coltext2;
         private DevExpress.XtraGrid.Columns.GridColumn colsek3;
         private DevExpress.XtraGrid.Columns.GridColumn colannId5;
-        private DevExpress.XtraGrid.GridControl gridControlDopObrTW;
+        private CustomGridControl gridControlDopObrTW;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p;
         private DevExpress.XtraGrid.Columns.GridColumn colsek_p_tamp;
