@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SewingProduction.form.UserDistribution
 {
-    public partial class LoginForm : Form
+    public partial class AdminSprav : CustomForm
     {
-        public LoginForm()
+        public AdminSprav(UserClass user) : base(user)
         {
             InitializeComponent();
         }

@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.form.UserDistribution;
 using static SewingProduction.form.SettingsForm;
 
 namespace SewingProduction.form
 {
     public partial class SettingsForm : CustomForm, IDataUpdatableForm
     {
-        public SettingsForm()
+        public SettingsForm(UserClass user) : base(user)
         {
             InitializeComponent();
         }

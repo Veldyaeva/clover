@@ -16,6 +16,7 @@ using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.CodeParser;
 using static SewingProduction.form.SettingsForm;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.form
 {
@@ -35,7 +36,7 @@ namespace SewingProduction.form
         bool flagStartListening = false; //вкл прослушки
         int currentRowIndex = 0;//текущий индекс
         int topRowIndex = 0;//верхний индекс 
-        public OborudBrig()
+        public OborudBrig(UserClass user) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -174,7 +175,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            SpravZeh f = new SpravZeh(_user, "ZehList", "Справочник Цехов");
             f.MdiParent = this.MdiParent;
             f.Show();
         }
@@ -194,7 +195,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
+            SpravBrig f = new SpravBrig(_user, "spBrig", "Справочник Бригад");
             f.MdiParent = this.MdiParent;
             f.Show();
         }

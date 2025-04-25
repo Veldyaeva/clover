@@ -56,27 +56,34 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravForAll(string tableSQL, string columnsSQL, string rusNameTableSQL)
+        public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "")
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper("ace");
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
             ThemeManager.UpdateTheme(this);
-            //Таймер
-            timer = new Timer();
-            timer.Interval = 2000;
+
+            // Таймер
+            timer = new Timer { Interval = 2000 };
             timer.Tick += Timer_Tick;
-            //Таблица:
+
+            // Таблица
             tableString = tableSQL;
             _spravAllDataService._tableString = tableSQL;
             columns = string.IsNullOrEmpty(columnsSQL) ? "*" : columnsSQL;
-            //Имя формы:
+
+            // Имя формы
             this.Text = rusNameTableSQL;
-            //Иницилизация листа столбцов:
+
+            // Инициализация
             fieldsQueryListSQL = new List<string>();
-            labels = new System.Windows.Forms.Label[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
-            textBoxs = new TextBox[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+            labels = new[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
+            textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+        }
+        public SpravForAll()
+        {
+            InitializeComponent();
         }
 
         #region service broker

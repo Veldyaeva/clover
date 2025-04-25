@@ -1,4 +1,10 @@
-﻿using DevExpress.Data.Filtering;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading;
+using System.Windows.Forms;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
@@ -11,7 +17,16 @@ using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using System;
+using SewingProduction.Helpers;
+using DevExpress.XtraExport.Helpers;
+using System.Threading.Tasks;
+using DevExpress.Data.Filtering;
+using DevExpress.CodeParser;
+using SewingProduction.form.TeamWork;
+using DevExpress.XtraBars.Customization;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using NLog;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,7 +35,10 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Z.Dapper.Plus;
-
+using DevExpress.XtraCharts;
+using SewingProduction.Interfaces;
+using System.IO;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.Forms
 {
@@ -32,6 +50,11 @@ namespace SewingProduction.Forms
         private int selectedRowHandle = -1;
         private readonly ILogger _logger = new FileLogger();
         private readonly GridHelper _gridHelper = new GridHelper();
+
+        private int bufferWorkDivision;
+        //private readonly BindingList<ArtNormN> _bindingList;
+        //private readonly BindingSource _bindingSource;
+        //public TeamWork(UserClass user) : base(user);
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList = new BindingList<ArtNormN>();
@@ -51,6 +74,7 @@ namespace SewingProduction.Forms
         private List<FioModel> fioList;
 
         public TeamWork()
+
         {
             InitializeComponent();
             DapperMappings.Configure();

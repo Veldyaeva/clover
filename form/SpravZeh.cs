@@ -15,6 +15,7 @@ using DevExpress.XtraReports.UI;
 using static DevExpress.Mvvm.Native.Either;
 using static SewingProduction.form.SettingsForm;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.form
 {
@@ -30,7 +31,7 @@ namespace SewingProduction.form
         //Таймер для уведомления о сохранении:
         private Timer timer;
 
-        public SpravZeh(string tableSQL, string rusNameTableSQL)
+        public SpravZeh(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -43,7 +44,11 @@ namespace SewingProduction.form
             timer.Tick += Timer_Tick;
             //Имя формы:
             this.Text = rusNameTableSQL;
-            
+
+        }
+        public SpravZeh()
+        {
+            InitializeComponent();
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {

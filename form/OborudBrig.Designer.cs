@@ -107,6 +107,7 @@
             this.gridViewOborud.Name = "gridViewOborud";
             this.gridViewOborud.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
             this.gridViewOborud.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            this.gridViewOborud.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             this.gridViewOborud.OptionsView.ShowGroupPanel = false;
             this.gridViewOborud.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView3_CellValueChanged);
             // 

@@ -12,6 +12,7 @@ using static SewingProduction.form.SettingsForm;
 using System.Collections.Generic;
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
 
 
 namespace SewingProduction.form
@@ -24,7 +25,7 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         //если добавили поле в таблицу:
         bool flagAddDown = false;
-        public SpravOborud()
+        public SpravOborud(UserClass user) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");

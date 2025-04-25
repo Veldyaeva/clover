@@ -22,6 +22,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Customization;
 using DevExpress.XtraRichEdit.Import.Html;
+using SewingProduction.form.UserDistribution;
 using SewingProduction.Helpers;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
@@ -37,7 +38,7 @@ namespace SewingProduction.form
         private ToolTip toolTip = new ToolTip();
         bool isBusy = false;
 
-        public editFio(string idFIO, string openType)
+        public editFio(UserClass user, string idFIO, string openType) : base(user)
         {
             InitializeComponent();
             _editFioDataService = new EditFioDataService(dbHelper);
@@ -47,6 +48,10 @@ namespace SewingProduction.form
             this.Text = openType;
             customTextBoxTab.Text = idFIO;
             toolTipButton();
+        }
+        public editFio()
+        {
+            InitializeComponent();
         }
 
         private void editFio_Load(object sender, EventArgs e)

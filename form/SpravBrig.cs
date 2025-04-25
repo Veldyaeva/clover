@@ -13,6 +13,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using static SewingProduction.form.SettingsForm;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.form
 {
@@ -27,7 +28,7 @@ namespace SewingProduction.form
         bool flagStartListening = false; //вкл прослушки
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravBrig(string tableSQL, string rusNameTableSQL)
+        public SpravBrig(UserClass user, string tableSQL, string rusNameTableSQL):base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -40,6 +41,10 @@ namespace SewingProduction.form
             timer.Tick += Timer_Tick;
             //Имя формы:
             this.Text = rusNameTableSQL;
+        }
+        public SpravBrig()
+        {
+            InitializeComponent();
         }
         private void SpravBrig_Load(object sender, EventArgs e)
         {
@@ -237,7 +242,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            SpravZeh f = new SpravZeh(_user, "ZehList", "Справочник Цехов");
             f.MdiParent = this.MdiParent;
             f.Show();
         }

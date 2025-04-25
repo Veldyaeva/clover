@@ -36,7 +36,7 @@
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.МенюToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.профильToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.настройкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.оПрограммеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -118,7 +118,7 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem1,
+            this.МенюToolStripMenuItem,
             this.справочникиToolStripMenuItem,
             this.производствоToolStripMenuItem,
             this.TeamWorktoolStripMenuItem,
@@ -131,16 +131,16 @@
             this.menuStrip1.Text = "menuStrip1";
             this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
-            // toolStripMenuItem1
+            // МенюToolStripMenuItem
             // 
-            this.toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.МенюToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.профильToolStripMenuItem,
             this.настройкиToolStripMenuItem,
             this.оПрограммеToolStripMenuItem,
             this.помощьToolStripMenuItem});
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(53, 23);
-            this.toolStripMenuItem1.Text = "Меню";
+            this.МенюToolStripMenuItem.Name = "МенюToolStripMenuItem";
+            this.МенюToolStripMenuItem.Size = new System.Drawing.Size(53, 23);
+            this.МенюToolStripMenuItem.Text = "Меню";
             // 
             // профильToolStripMenuItem
             // 
@@ -244,21 +244,21 @@
             // бригадыToolStripMenuItem
             // 
             this.бригадыToolStripMenuItem.Name = "бригадыToolStripMenuItem";
-            this.бригадыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.бригадыToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.бригадыToolStripMenuItem.Text = "Бригады";
             this.бригадыToolStripMenuItem.Click += new System.EventHandler(this.бригадыToolStripMenuItem_Click);
             // 
             // цехаToolStripMenuItem
             // 
             this.цехаToolStripMenuItem.Name = "цехаToolStripMenuItem";
-            this.цехаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.цехаToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.цехаToolStripMenuItem.Text = "Цеха";
             this.цехаToolStripMenuItem.Click += new System.EventHandler(this.цехаToolStripMenuItem1_Click);
             // 
             // видыПроизводствToolStripMenuItem
             // 
             this.видыПроизводствToolStripMenuItem.Name = "видыПроизводствToolStripMenuItem";
-            this.видыПроизводствToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.видыПроизводствToolStripMenuItem.Size = new System.Drawing.Size(175, 22);
             this.видыПроизводствToolStripMenuItem.Text = "Виды производств";
             this.видыПроизводствToolStripMenuItem.Click += new System.EventHandler(this.видыПроизводстваToolStripMenuItem_Click);
             // 
@@ -394,7 +394,7 @@
         private System.Windows.Forms.ToolStripMenuItem тарифыToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem моделиСПризнакомМаркировкToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem артикулToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem МенюToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem профильToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem настройкиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оПрограммеToolStripMenuItem;

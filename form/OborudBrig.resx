@@ -120,9 +120,13 @@
   <metadata name="bindingBrig.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gridBrig.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="gridBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>577, 25</value>
+    <value>376, 18</value>
   </data>
   <data name="gridBrig.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>404, 909</value>
@@ -131,7 +135,7 @@
     <value>140, 300</value>
   </data>
   <data name="gridBrig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 909</value>
+    <value>242, 616</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gridBrig.TabIndex" type="System.Int32, mscorlib">
@@ -152,8 +156,11 @@
   <metadata name="bindingZeh.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>154, 17</value>
   </metadata>
+  <data name="gridZeh.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="gridZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 25</value>
+    <value>3, 18</value>
   </data>
   <data name="gridZeh.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>569, 909</value>
@@ -162,7 +169,7 @@
     <value>190, 300</value>
   </data>
   <data name="gridZeh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>568, 909</value>
+    <value>367, 616</value>
   </data>
   <data name="gridZeh.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -182,8 +189,11 @@
   <metadata name="bindingOborud.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>291, 17</value>
   </metadata>
+  <data name="gridOborud.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
+  </data>
   <data name="gridOborud.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 25</value>
+    <value>624, 18</value>
   </data>
   <data name="gridOborud.MaximumSize" type="System.Drawing.Size, System.Drawing">
     <value>940, 909</value>
@@ -192,7 +202,7 @@
     <value>310, 300</value>
   </data>
   <data name="gridOborud.Size" type="System.Drawing.Size, System.Drawing">
-    <value>940, 909</value>
+    <value>617, 616</value>
   </data>
   <data name="gridOborud.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -209,7 +219,6 @@
   <data name="&gt;&gt;gridOborud.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="label2.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Left</value>
   </data>
@@ -220,10 +229,10 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>959, 1</value>
+    <value>624, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 19</value>
+    <value>217, 15</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -253,10 +262,10 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>577, 1</value>
+    <value>376, 0</value>
   </data>
   <data name="linkLabelBrig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 19</value>
+    <value>73, 15</value>
   </data>
   <data name="linkLabelBrig.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -286,10 +295,10 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 1</value>
+    <value>3, 0</value>
   </data>
   <data name="linkLabelZeh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 19</value>
+    <value>42, 15</value>
   </data>
   <data name="linkLabelZeh.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -322,7 +331,7 @@
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1914, 961</value>
+    <value>1244, 637</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -358,7 +367,7 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1914, 961</value>
+    <value>1244, 637</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Оборудование в бригадах</value>

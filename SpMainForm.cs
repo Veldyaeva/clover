@@ -1,5 +1,8 @@
 ﻿using DevExpress.XtraBars;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTabbedMdi;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using SewingProduction.form;
 using SewingProduction.form.UserDistribution;
 using SewingProduction.Forms;
@@ -20,11 +23,13 @@ namespace SewingProduction
 {
     public partial class SpMainForm : Form
     {
+        UserClass _user = new UserClass();
+        private readonly IPasswordHasher _passwordHasher;
+        private ToolStripMenuItem[] toolStripMenuItems;
         public SpMainForm()
         {
-
-
             InitializeComponent();
+            _passwordHasher = new PasswordHasher();
             ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
             if (ThemeManager.CurrentTheme is null) { ThemeSelectorComboBox.SelectedIndex = 0; }
             else
@@ -37,9 +42,7 @@ namespace SewingProduction
                 string selectedTheme = ThemeSelectorComboBox.SelectedItem.ToString();
                 ThemeManager.SetTheme(selectedTheme);
             };
-        
         }
-
 
 
         XtraTabbedMdiManager mdiManager;
@@ -53,9 +56,22 @@ namespace SewingProduction
 
         }
 
-        private void SpMainForm_Load(object sender, EventArgs e)
+        private async void SpMainForm_Load(object sender, EventArgs e)
         {
-            this.WindowState = FormWindowState.Maximized;
+            LoginForm loginForm = new LoginForm(_user);
+            if (loginForm.ShowDialog() == DialogResult.OK)
+            {
+                this.WindowState = FormWindowState.Maximized;
+
+                await _user.LoadUserData();
+                await _user.LoadObjectForm(this.Name);
+
+                LoadObjectForm(); // Загружаем права доступа и применяем их
+            }
+            else
+            {
+                this.Close();
+            }
             //// Create a Bar Manager that will display a bar of commands at the top of the main form.
             //BarManager barManager = new BarManager();
             //barManager.Form = this;
@@ -73,9 +89,73 @@ namespace SewingProduction
             ////mdiManager.MdiParent = this;
             ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
+#region Видимость для обьектов (в меню)
+        private void LoadObjectForm()
+        {
+            foreach (Control control in this.Controls)
+            {
+                if (control is MenuStrip menuStrip)
+                {
+                    ApplyPermissionsToMenuItems(menuStrip.Items);
+                }
+            }
+            //toolStripMenuItems = new ToolStripMenuItem[] { 
+            //    МенюToolStripMenuItem, 
+            //        профильToolStripMenuItem,
+            //        настройкиToolStripMenuItem,
+            //        оПрограммеToolStripMenuItem,
+            //        помощьToolStripMenuItem,
+            //    справочникиToolStripMenuItem,
+            //        оборудованиеToolStripMenuItem,
+            //            оборудованиеВБригадахToolStripMenuItem,
+            //            оборудованиеToolStripMenuItem1,
+            //            видыОборудованияToolStripMenuItem,
+            //            матрицыКлассовToolStripMenuItem,
+            //            видыОперацийToolStripMenuItem,
+            //        бригадыЦехаToolStripMenuItem,
+            //            бригадыToolStripMenuItem,
+            //            цехаToolStripMenuItem,
+            //            видыПроизводствToolStripMenuItem,
+            //        карточкаРасчетаToolStripMenuItem1,
+            //        работникиToolStripMenuItem,
+            //        тарифыToolStripMenuItem,
+            //        изделияToolStripMenuItem,
+            //        моделиСПризнакомМаркировкToolStripMenuItem,
+            //    производствоToolStripMenuItem,
+            //        рабочийСтолМастераToolStripMenuItem,
+            //    TeamWorktoolStripMenuItem,
+            //    артикулToolStripMenuItem
+            //};
+            //foreach (ToolStripMenuItem menuItem in toolStripMenuItems)
+            //{
+            //    bool hasWrite = _user.HasPermission(menuItem.Name, "Редактор");
+            //    bool hasRead = _user.HasPermission(menuItem.Name, "Просмотр");
+            //    menuItem.Visible = hasRead || hasWrite ? true : false;
+            //    menuItem.Enabled = hasWrite;
+            //}
+        }
+        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (string.IsNullOrWhiteSpace(item.Name)) continue;
 
-        
+                string objectName = item.Tag as string ?? item.Name;
 
+                bool hasWrite = _user.HasPermission(objectName, "Редактор");
+                bool hasRead = _user.HasPermission(objectName, "Просмотр");
+
+                item.Visible = hasRead || hasWrite;
+                item.Enabled = hasWrite;
+
+                // если это пункт меню с подменю — рекурсивно
+                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
+                {
+                    ApplyPermissionsToMenuItems(menuItem.DropDownItems);
+                }
+            }
+        }
+        #endregion
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
         {
@@ -95,7 +175,7 @@ namespace SewingProduction
        
         private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravOborud f = new SpravOborud();
+            SpravOborud f = new SpravOborud(_user);
             f.MdiParent = this;
             f.Show();
         }
@@ -116,52 +196,52 @@ namespace SewingProduction
         }
         private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("oborud_shv_ob", "", "Справочник Группы об.");
+            SpravForAll f = new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.");
             f.MdiParent = this;
             f.Show();
         }
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("matrix_class", "", "Справочник Клас. вяз. об.");
+            SpravForAll f = new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.");
             f.MdiParent = this;
             f.Show();
         }
 
         private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spOborudMachine", "", "Справочник Виды операций");
+            SpravForAll f = new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций");
             f.MdiParent = this;
             f.Show();
         }
 
         private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SpravZeh f = new SpravZeh("ZehList", "Справочник Цехов");
+            SpravZeh f = new SpravZeh(_user, "ZehList", "Справочник Цехов");
             f.MdiParent = this;
             f.Show();
         }
         private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravBrig f = new SpravBrig("spBrig", "Справочник Бригад");
+            SpravBrig f = new SpravBrig(_user, "spBrig", "Справочник Бригад");
             f.MdiParent = this;
             f.Show();
         }
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв.");
+            SpravForAll f = new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв");
             f.MdiParent = this;
             f.Show();
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Fio f = new Fio("fio", "Справочник работников");
+            Fio f = new Fio(_user,"fio", "Справочник работников");
             f.MdiParent = this;
             f.Show();
         }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OborudBrig f = new OborudBrig();
+            OborudBrig f = new OborudBrig(_user);
             f.MdiParent = this;
             f.Show();
 
@@ -218,16 +298,16 @@ namespace SewingProduction
 
         private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SettingsForm f = new SettingsForm();
+            SettingsForm f = new SettingsForm(_user);
             f.Show();
 
         }
 
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UserProfile f = new UserProfile();
-            f.MdiParent = this;
-            f.Show();
+            //UserProfile f = new UserProfile(_user);
+            //f.MdiParent = this;
+            //f.Show();
         }
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
