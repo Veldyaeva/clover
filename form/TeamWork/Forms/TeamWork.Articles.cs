@@ -36,6 +36,7 @@ namespace SewingProduction.Forms
             await MyDataAnnLoad();
             //norm_rasz
             await NormRaszLoad();
+            await PreArchLoad();
         }
         private async Task MyDataArtLoad()
         {
@@ -141,35 +142,45 @@ namespace SewingProduction.Forms
         private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "AnnId", 0);
-            // await LoadRelatedData(annId);
             await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
 
-            //int annId = 0;
-            //var view = gridView8;//customGridControl2.MainView as GridView;
-            //if (view != null)
-            //{
-            //    annId = Convert.ToInt32(view.GetRowCellValue(e.FocusedRowHandle, "AnnId"));
-            //}
-
-            //var relatedData = _artNormService.GetRelatedNormRasz(annId);
-            //normraszBindingSource1.DataSource = relatedData;
-            //customGridControl3.DataSource = normraszBindingSource1;
-
         }
-
-        private async Task bindArticulToNewRow(int selectedAnnId, int newId)
+        private async Task PreArchLoad()
         {
-            var oldRaszList = await _artNormService.GetRelatedNormRasz(selectedAnnId);
-            //           await _artNormService.UpdateAnnId("norm_rasz", selectedAnnId.AnnID, "annId", newId.AnnID);
-            foreach (var rasz in oldRaszList)
+            try
             {
-                var copy = CloneHelper.CloneAndAssignNewAnnId(rasz, newId, TableNames.RaszId);
-                await _dbService.SaveEntityAsync(TableNames.Rasz, TableNames.RaszId, copy);
-            }
-            await _dbService.UpdateFieldAsync(TableNames.Rask, "annId", newId, "annId", selectedAnnId);
-            await _dbService.UpdateFieldAsync(TableNames.Kont,"annId", newId, "annId", selectedAnnId);
-            await _dbService.UpdateFieldAsync(TableNames.Obr, "annId", newId, "annId", selectedAnnId);
+                string query = "SELECT * FROM artNormNView WHERE status = 4"; // Ваш запрос
+                List<MyDataANN> preArchData = await _dbService.GetListAsync<MyDataANN>(query, null);
 
+                // Убедимся, что список и BindingSource существуют (они должны быть инициализированы в TeamWork.cs)
+                if (_preArchList == null || _preArchBindingSource == null)
+                {
+                    await _logger.LogErrorAsync(new NullReferenceException("_preArchList or _preArchBindingSource is null"), "PreArchLoad failed initialization check.");
+                    MessageBox.Show("Ошибка инициализации списка предварительного архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                _preArchList.Clear(); 
+
+                if (preArchData != null)
+                {
+                    foreach (var item in preArchData)
+                    {
+                        _preArchList.Add(item);
+                    }
+                }
+                _preArchBindingSource.ResetBindings(false);
+
+                await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в предварительный архив: {ex.Message}");
+                if (_preArchList != null && _preArchBindingSource != null)
+                {
+                    MessageBox.Show($"Ошибка загрузки данных предварительного архива: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         /// <summary>

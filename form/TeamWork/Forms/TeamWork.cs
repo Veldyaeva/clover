@@ -67,6 +67,8 @@ namespace SewingProduction.Forms
         private BindingSource _normDopObrBindingSourceTW;
         private static List<FioModel> _cachedFioData;
         private List<FioModel> fioList;
+        private BindingList<MyDataANN> _preArchList = new BindingList<MyDataANN>();
+        private BindingSource _preArchBindingSource;
 
         public TeamWork()
 
@@ -80,12 +82,13 @@ namespace SewingProduction.Forms
 
             // Инициализация привязок данных
             _bindingSource.DataSource = _bindingList;
-          //  _bindingSource.PositionChanged += BindingSource_PositionChanged;
             if (ANNgridControl != null)
             {
                 ANNgridControl.DataSource = _bindingSource;
             }
-            //_bindingSource.PositionChanged += BindingSource_PositionChanged;
+            _preArchList = new BindingList<MyDataANN>();
+            _preArchBindingSource = new BindingSource { DataSource = _preArchList };
+            gridControlPreArch.DataSource = _preArchBindingSource;
             // Настройка гридов
             if (customGridControl1 != null && customGridControl1.MainView is GridView view7)
             {
