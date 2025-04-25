@@ -447,6 +447,7 @@ namespace SewingProduction.Forms
             this.constructorTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.constructorTextBox.Location = new System.Drawing.Point(3, 77);
             this.constructorTextBox.Name = "constructorTextBox";
+            this.constructorTextBox.ObjectName = null;
             this.constructorTextBox.Size = new System.Drawing.Size(188, 23);
             this.constructorTextBox.TabIndex = 13;
             // 
@@ -457,6 +458,7 @@ namespace SewingProduction.Forms
             this.designerTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.designerTextBox.Location = new System.Drawing.Point(3, 23);
             this.designerTextBox.Name = "designerTextBox";
+            this.designerTextBox.ObjectName = null;
             this.designerTextBox.Size = new System.Drawing.Size(188, 23);
             this.designerTextBox.TabIndex = 12;
             // 
@@ -468,6 +470,7 @@ namespace SewingProduction.Forms
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.label6.Location = new System.Drawing.Point(7, 4);
             this.label6.Name = "label6";
+            this.label6.ObjectName = null;
             this.label6.Size = new System.Drawing.Size(70, 16);
             this.label6.TabIndex = 0;
             this.label6.Text = "Дизайнер";
@@ -480,6 +483,7 @@ namespace SewingProduction.Forms
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.label7.Location = new System.Drawing.Point(5, 57);
             this.label7.Name = "label7";
+            this.label7.ObjectName = null;
             this.label7.Size = new System.Drawing.Size(89, 16);
             this.label7.TabIndex = 1;
             this.label7.Text = "Конструктор";
@@ -491,6 +495,7 @@ namespace SewingProduction.Forms
             this.ButtonApprovement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.ButtonApprovement.Location = new System.Drawing.Point(3, 106);
             this.ButtonApprovement.Name = "ButtonApprovement";
+            this.ButtonApprovement.ObjectName = null;
             this.ButtonApprovement.Size = new System.Drawing.Size(186, 58);
             this.ButtonApprovement.TabIndex = 11;
             this.ButtonApprovement.Text = "Согласование с технологом";
@@ -531,6 +536,7 @@ namespace SewingProduction.Forms
             this.customButton9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButton9.Location = new System.Drawing.Point(3, 3);
             this.customButton9.Name = "customButton9";
+            this.customButton9.ObjectName = null;
             this.customButton9.Size = new System.Drawing.Size(147, 1);
             this.customButton9.TabIndex = 13;
             this.customButton9.Text = "конф. карта";
@@ -546,6 +552,7 @@ namespace SewingProduction.Forms
             this.ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.ButtonEditWd.Location = new System.Drawing.Point(3, 7);
             this.ButtonEditWd.Name = "ButtonEditWd";
+            this.ButtonEditWd.ObjectName = null;
             this.ButtonEditWd.Size = new System.Drawing.Size(188, 30);
             this.ButtonEditWd.TabIndex = 4;
             this.ButtonEditWd.Text = "редактировать РТ";
@@ -561,6 +568,7 @@ namespace SewingProduction.Forms
             this.customButton8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButton8.Location = new System.Drawing.Point(3, 5);
             this.customButton8.Name = "customButton8";
+            this.customButton8.ObjectName = null;
             this.customButton8.Size = new System.Drawing.Size(147, 1);
             this.customButton8.TabIndex = 12;
             this.customButton8.Text = "печать РТ";
@@ -576,6 +584,7 @@ namespace SewingProduction.Forms
             this.ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.ButtonArchAndCopyWd.Location = new System.Drawing.Point(3, 43);
             this.ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
+            this.ButtonArchAndCopyWd.ObjectName = null;
             this.ButtonArchAndCopyWd.Size = new System.Drawing.Size(188, 30);
             this.ButtonArchAndCopyWd.TabIndex = 14;
             this.ButtonArchAndCopyWd.Text = "архив+копия";
@@ -591,6 +600,7 @@ namespace SewingProduction.Forms
             this.ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.ButtonPreliminaryWd.Location = new System.Drawing.Point(3, 79);
             this.ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
+            this.ButtonPreliminaryWd.ObjectName = null;
             this.ButtonPreliminaryWd.Size = new System.Drawing.Size(188, 42);
             this.ButtonPreliminaryWd.TabIndex = 15;
             this.ButtonPreliminaryWd.Text = "Добавить предварительное ";
@@ -604,6 +614,7 @@ namespace SewingProduction.Forms
             this.ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.ButtonCopyWd.Location = new System.Drawing.Point(3, 127);
             this.ButtonCopyWd.Name = "ButtonCopyWd";
+            this.ButtonCopyWd.ObjectName = null;
             this.ButtonCopyWd.Size = new System.Drawing.Size(188, 36);
             this.ButtonCopyWd.TabIndex = 19;
             this.ButtonCopyWd.Text = "Копировать РТ";
@@ -619,6 +630,7 @@ namespace SewingProduction.Forms
             this.buffer.Location = new System.Drawing.Point(3, 169);
             this.buffer.Multiline = true;
             this.buffer.Name = "buffer";
+            this.buffer.ObjectName = null;
             this.buffer.Size = new System.Drawing.Size(188, 83);
             this.buffer.TabIndex = 20;
             // 
@@ -642,6 +654,7 @@ namespace SewingProduction.Forms
             this.SortBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.SortBox.Location = new System.Drawing.Point(9, 102);
             this.SortBox.Name = "SortBox";
+            this.SortBox.ObjectName = null;
             this.SortBox.Size = new System.Drawing.Size(120, 20);
             this.SortBox.TabIndex = 4;
             this.SortBox.Text = "Не описанные";
@@ -654,6 +667,7 @@ namespace SewingProduction.Forms
             this.archiveCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.archiveCheckBox.Location = new System.Drawing.Point(9, 62);
             this.archiveCheckBox.Name = "archiveCheckBox";
+            this.archiveCheckBox.ObjectName = null;
             this.archiveCheckBox.Size = new System.Drawing.Size(90, 20);
             this.archiveCheckBox.TabIndex = 3;
             this.archiveCheckBox.Text = "Архивные";
@@ -669,6 +683,7 @@ namespace SewingProduction.Forms
             this.actualCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.actualCheckBox.Location = new System.Drawing.Point(9, 36);
             this.actualCheckBox.Name = "actualCheckBox";
+            this.actualCheckBox.ObjectName = null;
             this.actualCheckBox.Size = new System.Drawing.Size(105, 20);
             this.actualCheckBox.TabIndex = 2;
             this.actualCheckBox.Text = "Актуальные";
@@ -684,6 +699,7 @@ namespace SewingProduction.Forms
             this.preliminaryCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.preliminaryCheckBox.Location = new System.Drawing.Point(9, 10);
             this.preliminaryCheckBox.Name = "preliminaryCheckBox";
+            this.preliminaryCheckBox.ObjectName = null;
             this.preliminaryCheckBox.Size = new System.Drawing.Size(147, 20);
             this.preliminaryCheckBox.TabIndex = 1;
             this.preliminaryCheckBox.Text = "Предварительные";
@@ -714,6 +730,7 @@ namespace SewingProduction.Forms
             this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel3.Location = new System.Drawing.Point(5, 124);
             this.customLabel3.Name = "customLabel3";
+            this.customLabel3.ObjectName = null;
             this.customLabel3.Size = new System.Drawing.Size(0, 16);
             this.customLabel3.TabIndex = 7;
             this.customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -1005,6 +1022,7 @@ namespace SewingProduction.Forms
             this.customButton12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(210)))), ((int)(((byte)(105)))), ((int)(((byte)(30)))));
             this.customButton12.Location = new System.Drawing.Point(120, 160);
             this.customButton12.Name = "customButton12";
+            this.customButton12.ObjectName = null;
             this.customButton12.Size = new System.Drawing.Size(28, 23);
             this.customButton12.TabIndex = 4;
             this.customButton12.Text = "Фильтр";
@@ -1018,6 +1036,7 @@ namespace SewingProduction.Forms
             this.filterTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.filterTextBox1.Location = new System.Drawing.Point(23, 160);
             this.filterTextBox1.Name = "filterTextBox1";
+            this.filterTextBox1.ObjectName = null;
             this.filterTextBox1.Size = new System.Drawing.Size(125, 23);
             this.filterTextBox1.TabIndex = 5;
             this.filterTextBox1.Visible = false;
@@ -1084,14 +1103,14 @@ namespace SewingProduction.Forms
             this.splitContainerControl1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1301, 805);
-            this.splitContainerControl1.SplitterPosition = 898;
+            this.splitContainerControl1.SplitterPosition = 924;
             this.splitContainerControl1.TabIndex = 21;
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 481F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 450F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 649F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 282F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.ANNgridControl, 0, 0);
@@ -1104,16 +1123,16 @@ namespace SewingProduction.Forms
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(898, 805);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(924, 805);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(484, 586);
+            this.pictureBox1.Location = new System.Drawing.Point(652, 586);
             this.pictureBox1.Name = "pictureBox1";
             this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 2);
-            this.pictureBox1.Size = new System.Drawing.Size(444, 216);
+            this.pictureBox1.Size = new System.Drawing.Size(276, 216);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -1129,7 +1148,8 @@ namespace SewingProduction.Forms
             this.customGridControl5.LookAndFeel.UseDefaultLookAndFeel = false;
             this.customGridControl5.MainView = this.gridView10;
             this.customGridControl5.Name = "customGridControl5";
-            this.customGridControl5.Size = new System.Drawing.Size(475, 174);
+            this.customGridControl5.ObjectName = null;
+            this.customGridControl5.Size = new System.Drawing.Size(643, 174);
             this.customGridControl5.TabIndex = 3;
             this.customGridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView10,
@@ -1268,7 +1288,7 @@ namespace SewingProduction.Forms
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.98748F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 65F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(393, 805);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(367, 805);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // gridControlRaszTW
@@ -1278,7 +1298,7 @@ namespace SewingProduction.Forms
             this.gridControlRaszTW.Location = new System.Drawing.Point(3, 3);
             this.gridControlRaszTW.MainView = this.gridView1;
             this.gridControlRaszTW.Name = "gridControlRaszTW";
-            this.gridControlRaszTW.Size = new System.Drawing.Size(387, 391);
+            this.gridControlRaszTW.Size = new System.Drawing.Size(361, 391);
             this.gridControlRaszTW.TabIndex = 6;
             this.gridControlRaszTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1,
@@ -1420,7 +1440,7 @@ namespace SewingProduction.Forms
             this.gridControlRaskrTW.Location = new System.Drawing.Point(3, 400);
             this.gridControlRaskrTW.MainView = this.gridView2;
             this.gridControlRaskrTW.Name = "gridControlRaskrTW";
-            this.gridControlRaskrTW.Size = new System.Drawing.Size(387, 129);
+            this.gridControlRaskrTW.Size = new System.Drawing.Size(361, 129);
             this.gridControlRaskrTW.TabIndex = 7;
             this.gridControlRaskrTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView2});
@@ -1544,7 +1564,7 @@ namespace SewingProduction.Forms
             this.gridControlKontTW.Location = new System.Drawing.Point(3, 535);
             this.gridControlKontTW.MainView = this.gridView4;
             this.gridControlKontTW.Name = "gridControlKontTW";
-            this.gridControlKontTW.Size = new System.Drawing.Size(387, 102);
+            this.gridControlKontTW.Size = new System.Drawing.Size(361, 102);
             this.gridControlKontTW.TabIndex = 8;
             this.gridControlKontTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView4});
@@ -1620,7 +1640,7 @@ namespace SewingProduction.Forms
             this.gridControlDopObrTW.Location = new System.Drawing.Point(3, 643);
             this.gridControlDopObrTW.MainView = this.gridView5;
             this.gridControlDopObrTW.Name = "gridControlDopObrTW";
-            this.gridControlDopObrTW.Size = new System.Drawing.Size(387, 73);
+            this.gridControlDopObrTW.Size = new System.Drawing.Size(361, 73);
             this.gridControlDopObrTW.TabIndex = 9;
             this.gridControlDopObrTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView5});
@@ -1683,6 +1703,7 @@ namespace SewingProduction.Forms
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.label8.Location = new System.Drawing.Point(3, 719);
             this.label8.Name = "label8";
+            this.label8.ObjectName = null;
             this.label8.Size = new System.Drawing.Size(149, 16);
             this.label8.TabIndex = 2;
             this.label8.Text = "Особенности модели";
@@ -1786,6 +1807,7 @@ namespace SewingProduction.Forms
             this.customGridControl3.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.customGridControl3.MainView = this.gridView6;
             this.customGridControl3.Name = "customGridControl3";
+            this.customGridControl3.ObjectName = null;
             this.tablePanel2.SetRow(this.customGridControl3, 1);
             this.customGridControl3.Size = new System.Drawing.Size(412, 731);
             this.customGridControl3.TabIndex = 3;
@@ -1875,6 +1897,7 @@ namespace SewingProduction.Forms
             this.loadAllCheckBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
             this.loadAllCheckBox.Location = new System.Drawing.Point(158, 4);
             this.loadAllCheckBox.Name = "loadAllCheckBox";
+            this.loadAllCheckBox.ObjectName = null;
             this.loadAllCheckBox.Size = new System.Drawing.Size(133, 20);
             this.loadAllCheckBox.TabIndex = 9;
             this.loadAllCheckBox.Text = "Показать все РТ";
@@ -1889,6 +1912,7 @@ namespace SewingProduction.Forms
             this.customLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel5.Location = new System.Drawing.Point(5, 4);
             this.customLabel5.Name = "customLabel5";
+            this.customLabel5.ObjectName = null;
             this.customLabel5.Size = new System.Drawing.Size(98, 16);
             this.customLabel5.TabIndex = 8;
             this.customLabel5.Text = "РТ для увязки";
@@ -1911,6 +1935,7 @@ namespace SewingProduction.Forms
             this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel4.Location = new System.Drawing.Point(5, 4);
             this.customLabel4.Name = "customLabel4";
+            this.customLabel4.ObjectName = null;
             this.customLabel4.Size = new System.Drawing.Size(144, 16);
             this.customLabel4.TabIndex = 7;
             this.customLabel4.Text = "Артикулы для увязки";
@@ -1942,6 +1967,7 @@ namespace SewingProduction.Forms
             this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel2.Location = new System.Drawing.Point(9, 104);
             this.customLabel2.Name = "customLabel2";
+            this.customLabel2.ObjectName = null;
             this.customLabel2.Size = new System.Drawing.Size(70, 16);
             this.customLabel2.TabIndex = 10;
             this.customLabel2.Text = "Добавить";
@@ -1955,6 +1981,7 @@ namespace SewingProduction.Forms
             this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customLabel1.Location = new System.Drawing.Point(20, 47);
             this.customLabel1.Name = "customLabel1";
+            this.customLabel1.ObjectName = null;
             this.customLabel1.Size = new System.Drawing.Size(59, 16);
             this.customLabel1.TabIndex = 9;
             this.customLabel1.Text = "Увязать";
@@ -1989,6 +2016,7 @@ namespace SewingProduction.Forms
             this.actualCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.actualCheckBox1.Location = new System.Drawing.Point(26, 39);
             this.actualCheckBox1.Name = "actualCheckBox1";
+            this.actualCheckBox1.ObjectName = null;
             this.actualCheckBox1.Size = new System.Drawing.Size(105, 20);
             this.actualCheckBox1.TabIndex = 5;
             this.actualCheckBox1.Text = "Актуальные";
@@ -2003,6 +2031,7 @@ namespace SewingProduction.Forms
             this.preliminaryCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
             this.preliminaryCheckBox1.Location = new System.Drawing.Point(8, 9);
             this.preliminaryCheckBox1.Name = "preliminaryCheckBox1";
+            this.preliminaryCheckBox1.ObjectName = null;
             this.preliminaryCheckBox1.Size = new System.Drawing.Size(147, 20);
             this.preliminaryCheckBox1.TabIndex = 4;
             this.preliminaryCheckBox1.Text = "Предварительные";
@@ -2043,6 +2072,7 @@ namespace SewingProduction.Forms
             this.customGridControl2.MainView = this.gridView8;
             this.customGridControl2.Margin = new System.Windows.Forms.Padding(0);
             this.customGridControl2.Name = "customGridControl2";
+            this.customGridControl2.ObjectName = null;
             this.customGridControl2.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit3,
             this.repositoryItemCheckEdit4,
@@ -2190,6 +2220,7 @@ namespace SewingProduction.Forms
             this.customGridControl6.LookAndFeel.UseDefaultLookAndFeel = false;
             this.customGridControl6.MainView = this.gridView12;
             this.customGridControl6.Name = "customGridControl6";
+            this.customGridControl6.ObjectName = null;
             this.customGridControl6.Size = new System.Drawing.Size(557, 258);
             this.customGridControl6.TabIndex = 0;
             this.customGridControl6.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -2211,6 +2242,7 @@ namespace SewingProduction.Forms
             this.customGridControl1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.customGridControl1.MainView = this.gridView7;
             this.customGridControl1.Name = "customGridControl1";
+            this.customGridControl1.ObjectName = null;
             this.tablePanel2.SetRow(this.customGridControl1, 1);
             this.customGridControl1.Size = new System.Drawing.Size(404, 731);
             this.customGridControl1.TabIndex = 4;
@@ -2381,6 +2413,7 @@ namespace SewingProduction.Forms
             this.customButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
             this.customButton2.Location = new System.Drawing.Point(10, 19);
             this.customButton2.Name = "customButton2";
+            this.customButton2.ObjectName = null;
             this.customButton2.Size = new System.Drawing.Size(101, 30);
             this.customButton2.TabIndex = 1;
             this.customButton2.Text = "В архив";
@@ -2415,6 +2448,7 @@ namespace SewingProduction.Forms
             this.customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customCancelButton1.Location = new System.Drawing.Point(276, 33);
             this.customCancelButton1.Name = "customCancelButton1";
+            this.customCancelButton1.ObjectName = null;
             this.customCancelButton1.Size = new System.Drawing.Size(75, 25);
             this.customCancelButton1.TabIndex = 2;
             this.customCancelButton1.Text = "customCancelButton1";
@@ -2428,6 +2462,7 @@ namespace SewingProduction.Forms
             this.customComboBox1.FormattingEnabled = true;
             this.customComboBox1.Location = new System.Drawing.Point(218, 125);
             this.customComboBox1.Name = "customComboBox1";
+            this.customComboBox1.ObjectName = null;
             this.customComboBox1.Size = new System.Drawing.Size(121, 24);
             this.customComboBox1.TabIndex = 1;
             // 
@@ -2438,6 +2473,7 @@ namespace SewingProduction.Forms
             this.customButton1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
             this.customButton1.Location = new System.Drawing.Point(52, 34);
             this.customButton1.Name = "customButton1";
+            this.customButton1.ObjectName = null;
             this.customButton1.Size = new System.Drawing.Size(75, 25);
             this.customButton1.TabIndex = 0;
             this.customButton1.Text = "customButton1";
@@ -2454,6 +2490,7 @@ namespace SewingProduction.Forms
             this.gridControlPreArch.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             this.gridControlPreArch.MainView = this.gridViewPreArch;
             this.gridControlPreArch.Name = "gridControlPreArch";
+            this.gridControlPreArch.ObjectName = null;
             this.gridControlPreArch.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemCheckEdit5});
             this.gridControlPreArch.Size = new System.Drawing.Size(604, 786);
@@ -2477,7 +2514,7 @@ namespace SewingProduction.Forms
             // gridColumn14
             // 
             this.gridColumn14.Caption = "код";
-            this.gridColumn14.FieldName = "kod";
+            this.gridColumn14.FieldName = "Kod";
             this.gridColumn14.Name = "gridColumn14";
             this.gridColumn14.Visible = true;
             this.gridColumn14.VisibleIndex = 0;
@@ -2485,7 +2522,7 @@ namespace SewingProduction.Forms
             // gridColumn16
             // 
             this.gridColumn16.Caption = "артикул";
-            this.gridColumn16.FieldName = "articul";
+            this.gridColumn16.FieldName = "Articul";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
             this.gridColumn16.VisibleIndex = 1;

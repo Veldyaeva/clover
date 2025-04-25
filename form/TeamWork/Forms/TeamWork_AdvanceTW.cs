@@ -1055,10 +1055,12 @@ namespace SewingProduction.form
         private async void btnOK_Click(object sender, EventArgs e)
         {
             _okPressed = true;
+            await ShowStatusMessage("Сохранение данных...");
             var stepStopwatch = Stopwatch.StartNew(); // Таймер для шагов
 
             if (!ValidateForm())
             {
+                await ShowStatusMessage("Ошибки заполнения формы");
                 return; // Останавливаем сохранение, если форма заполнена неправильно
             }
             try
@@ -1074,13 +1076,13 @@ namespace SewingProduction.form
                 });
                 await ShowStatusMessage("Данные успешно сохранены!");
 
-                await _logger.LogEventAsync("Starting ExecutePztOperUpdateAsync...", "btnOK_Click");
-                stepStopwatch.Restart(); // Замеряем ExecutePztOperUpdateAsync
+            //    await _logger.LogEventAsync("Starting ExecutePztOperUpdateAsync...", "btnOK_Click");
+            //    stepStopwatch.Restart(); // Замеряем ExecutePztOperUpdateAsync
 
-            //    await _artNormService.ExecutePztOperUpdateAsync();
-                stepStopwatch.Stop();
-                await _logger.LogEventAsync($"Finished ExecutePztOperUpdateAsync. Elapsed: {stepStopwatch.ElapsedMilliseconds} ms", "btnOK_Click");
-                await ShowStatusMessage("Плановые загрузки обновлены!");
+            ////    await _artNormService.ExecutePztOperUpdateAsync();
+            //    stepStopwatch.Stop();
+            //    await _logger.LogEventAsync($"Finished ExecutePztOperUpdateAsync. Elapsed: {stepStopwatch.ElapsedMilliseconds} ms", "btnOK_Click");
+            //    await ShowStatusMessage("Плановые загрузки обновлены!");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 

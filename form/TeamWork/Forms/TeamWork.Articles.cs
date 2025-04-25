@@ -38,42 +38,157 @@ namespace SewingProduction.Forms
             await NormRaszLoad();
             await PreArchLoad();
         }
+
+
         private async Task MyDataArtLoad()
         {
             try
             {
+                // Проверяем, инициализирован ли список/источник (должны быть в TeamWork.cs)
+                if (_myDataArtList == null || _myDataArtBindingSource == null)
+                {
+                    await _logger.LogErrorAsync(new NullReferenceException("_myDataArtList or _myDataArtBindingSource is null"), "MyDataArtLoad initialization check failed.");
+                    MessageBox.Show("Ошибка инициализации списка артикулов.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
-                List<MyDataART> relatedData = await _dbService.GetListAsync<MyDataART>(query, null);
-                customGridControl1.DataSource = relatedData;
+                List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
+
+                _myDataArtList.Clear(); // Очищаем BindingList
+
+                if (loadedData != null)
+                {
+                    foreach (var item in loadedData)
+                    {
+                        _myDataArtList.Add(item); // Добавляем элементы в BindingList
+                    }
+                }
+
+                _myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+
+                await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-                MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных MyDataART: {ex.Message}");
+                // Отображаем сообщение только если инициализация прошла успешно
+                if (_myDataArtList != null && _myDataArtBindingSource != null)
+                {
+                    MessageBox.Show($"Ошибка загрузки данных артикулов: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
         private async Task MyDataAnnLoad()
         {
             try
             {
-                int kod = GetSelectedKodFromGrid(customGridControl1);
-                List<MyDataANN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
-               
-                if (artNormNs != null)
+                // Проверяем, инициализирован ли список/источник (должны быть в TeamWork.cs)
+                if (_myDataAnnList == null || _myDataAnnBindingSource == null)
                 {
-                    //   var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
-                    customGridControl3.DataSource = artNormNs;// relatedMyDataAnn;
+                    await _logger.LogErrorAsync(new NullReferenceException("_myDataAnnList or _myDataAnnBindingSource is null"), "MyDataAnnLoad initialization check failed.");
+                    MessageBox.Show("Ошибка инициализации списка РТ.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                int kod = GetSelectedKodFromGrid(customGridControl1); // Убедитесь, что этот метод корректно работает с BindingSource
+                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+
+                _myDataAnnList.Clear(); // Очищаем BindingList
+
+                if (loadedData != null && loadedData.Count > 0)
+                {
+                    foreach (var item in loadedData)
+                    {
+                        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
+                    }
+                    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
                 }
                 else
                 {
-                    MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Логгируем, если данных нет, вместо MessageBox
+                    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
                 }
+
+                _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных MyDataANN: {ex.Message}");
+                // Отображаем сообщение только если инициализация прошла успешно
+                if (_myDataAnnList != null && _myDataAnnBindingSource != null)
+                {
+                    MessageBox.Show($"Ошибка загрузки данных РТ: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
+        // Убедитесь, что GetSelectedKodFromGrid работает правильно с BindingSource
+        // Возможно, он уже работает, т.к. GetRowCellValue часто универсален.
+        // Если нет, его нужно будет адаптировать. Примерно так:
+        private int GetSelectedKodFromGrid(GridControl grid)
+        {
+            var view = grid.MainView as GridView;
+            if (view != null && view.FocusedRowHandle >= 0)
+            {
+                // Получаем объект данных для строки (MyDataART)
+                var rowData = view.GetRow(view.FocusedRowHandle) as MyDataART;
+                if (rowData != null)
+                {
+                    // Пытаемся получить Kod из объекта
+                    if (int.TryParse(rowData.Kod, out int kodValue)) // Предполагая, что Kod это string
+                    {
+                        return kodValue;
+                    }
+                    // Если Kod другого типа (например, int), то просто return rowData.Kod;
+                    // return rowData.Kod; // Если Kod - это int
+                }
+                // Можно оставить старый вариант как запасной, если GetRow не сработает
+                // return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
+            }
+            return 0;
+        }
+
+
+
+
+        //private async Task MyDataArtLoad()
+        //{
+        //    try
+        //    {
+        //        string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+        //        List<MyDataART> relatedData = await _dbService.GetListAsync<MyDataART>(query, null);
+        //        customGridControl1.DataSource = relatedData;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+        //private async Task MyDataAnnLoad()
+        //{
+        //    try
+        //    {
+        //        int kod = GetSelectedKodFromGrid(customGridControl1);
+        //        List<MyDataANN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+               
+        //        if (artNormNs != null)
+        //        {
+        //            //   var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
+        //            customGridControl3.DataSource = artNormNs;// relatedMyDataAnn;
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
+        //    }
+        //}
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
         /// </summary>
@@ -112,15 +227,15 @@ namespace SewingProduction.Forms
 
         }
 
-        private int GetSelectedKodFromGrid(GridControl grid)
-        {
-            var view = grid.MainView as GridView;
-            if (view != null && view.FocusedRowHandle >= 0)
-            {
-                return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
-            }
-            return 0;
-        }
+        //private int GetSelectedKodFromGrid(GridControl grid)
+        //{
+        //    var view = grid.MainView as GridView;
+        //    if (view != null && view.FocusedRowHandle >= 0)
+        //    {
+        //        return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
+        //    }
+        //    return 0;
+        //}
         async Task NormRaszLoad()
         {
             int annId = 0;

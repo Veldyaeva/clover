@@ -69,7 +69,10 @@ namespace SewingProduction.Forms
         private List<FioModel> fioList;
         private BindingList<MyDataANN> _preArchList = new BindingList<MyDataANN>();
         private BindingSource _preArchBindingSource;
-
+        private BindingList<MyDataART> _myDataArtList;
+        private BindingSource _myDataArtBindingSource;
+        private BindingList<MyDataANN> _myDataAnnList; 
+        private BindingSource _myDataAnnBindingSource;
         public TeamWork()
 
         {
@@ -103,6 +106,19 @@ namespace SewingProduction.Forms
             }
             this.gridView7.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
             this.gridView8.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
+            _myDataArtList = new BindingList<MyDataART>();
+            _myDataArtBindingSource = new BindingSource { DataSource = _myDataArtList };
+            if (customGridControl1 != null)
+            {
+                customGridControl1.DataSource = _myDataArtBindingSource;
+            }
+
+            _myDataAnnList = new BindingList<MyDataANN>();
+            _myDataAnnBindingSource = new BindingSource { DataSource = _myDataAnnList };
+            if (customGridControl2 != null)
+            {
+                customGridControl2.DataSource = _myDataAnnBindingSource;
+            }
         }
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
