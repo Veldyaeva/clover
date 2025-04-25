@@ -312,7 +312,7 @@ namespace SewingProduction.Forms
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
-       
+
 
         private async Task ArchAndCopy()
         {
@@ -376,28 +376,32 @@ namespace SewingProduction.Forms
             await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", newStatus, TableNames.AnnId, selectedItem.AnnID);
 
             UpdateRowInBindingList(newRow);
-            await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
-            await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}", "ArchAndCopy");
+            if (!hasNZP)
+                await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
+            await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
         }
 
         private async Task Arch(object sender, EventArgs e)
         {
-            //int rowHandle = gridViewPreArch.FocusedRowHandle;
-            //ArtNormN oldRow = gridViewPreArch.GetRow(rowHandle) as ArtNormN;
-            //int newRowId = $"select annId from art_norm_n where parentId = {oldRow.AnnID}";
-            //if (oldRow == null) return;
+            int rowHandle = gridViewPreArch.FocusedRowHandle;
+            MyDataANN Row = gridViewPreArch.GetRow(rowHandle) as MyDataANN;
+            int newId = Row.AnnId;
+            ArtNormN oldRow = await _dbService.GetEntityAsync<ArtNormN>(@"Select * from ArtNormNView where annId = @newId", new { newId });
+            int oldId = oldRow.AnnID;
+            int newRowId = await _dbService.GetEntityAsync<int>(@"select annId from art_norm_n where parentId = @oldId", new { oldId });
+            if (oldRow == null) return;
 
-            //await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
+            await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
 
-            //oldRow.Status = (int)Status.Archive;
-            //oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
+            oldRow.Status = (int)Status.Archive;
+            oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
 
-            //await _artNormService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", Status.Actual, TableNames.AnnId, newRowId);
+            UpdateRowInBindingList(oldRow);
 
-            //UpdateRowInBindingList(oldRow);
-
-            //await _artNormService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
-            //await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {newRow.AnnID}", "Arch");
+            await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
+            await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
 
         }
 

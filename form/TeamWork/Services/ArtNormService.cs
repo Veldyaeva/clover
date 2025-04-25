@@ -216,7 +216,7 @@ namespace SewingProduction.Services
                     data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status!=3";
             if (!all)
             {
-                query += " AND (annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
+                query += " AND(annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
             return await _dbHelper.GetConnection().QueryAsync<MyDataANN>(query).ContinueWith(t => t.Result.ToList());
         }

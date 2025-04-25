@@ -1278,21 +1278,27 @@ namespace SewingProduction.form
 
                     if (result == DialogResult.Yes)
                     {
-                        // Очищаем текущие списки
-                        _normRaszList.Clear();
-                        _normRaskList.Clear();
-                        _normKontList.Clear();
-                        _normDopObrList.Clear();
+                        // Гарантируем инициализацию списков, если она ещё не выполнена
+                        if (_normRaszList == null || _normRaskList == null || _normKontList == null || _normDopObrList == null)
+                        {
+                            await InitializeBindingsAsync();
+                        }
 
-                        _normRaszBindingSource.ResetBindings(false);
-                        _normRaskBindingSource.ResetBindings(false);
-                        _normKontBindingSource.ResetBindings(false);
-                        _normDopObrBindingSource.ResetBindings(false);
+                        // Очищаем текущие списки
+                        _normRaszList?.Clear();
+                        _normRaskList?.Clear();
+                        _normKontList?.Clear();
+                        _normDopObrList?.Clear();
+
+                        _normRaszBindingSource?.ResetBindings(false);
+                        _normRaskBindingSource?.ResetBindings(false);
+                        _normKontBindingSource?.ResetBindings(false);
+                        _normDopObrBindingSource?.ResetBindings(false);
                     }
 
                     // Загружаем данные из буфера
                     await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
-
+                    await LoadAnnDataAsync();
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }

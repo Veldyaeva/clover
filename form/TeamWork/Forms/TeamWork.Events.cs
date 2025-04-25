@@ -278,11 +278,11 @@ namespace SewingProduction.Forms
         }
         private async void gridView7_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, e.FocusedRowHandle, "Kod", 0);
+            string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Kod", "");
             string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
 
 
-            List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(kod, articul);
+            List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(Convert.ToInt32(kod), articul);
 
             customGridControl2.DataSource = list; 
         }
