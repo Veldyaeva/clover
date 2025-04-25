@@ -62,6 +62,15 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Azure.Core, Version=1.45.0.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.Core.1.45.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity, Version=1.13.2.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
+      <HintPath>packages\Azure.Identity.1.13.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Dapper.2.1.66\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Charts.v22.2.Core, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.CodeParser.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -390,12 +399,42 @@
     </Compile>
     <Compile Include="form\TeamWork\Enums\AdvanceMode.cs" />
     <Compile Include="form\TeamWork\Enums\Status.cs" />
+    <Compile Include="form\TeamWork\Enums\TableNames.cs" />
+    <Compile Include="form\TeamWork\Extensions\ControlExtensions.cs" />
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="form\TeamWork\Forms\NormRaskrNew.Designer.cs">
       <DependentUpon>NormRaskrNew.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Articles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Data.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.Helpers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Forms\TeamWork.WorkDivisions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\TeamWork\Helpers\BindingListHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\CopyHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\SplitContainerHelper.cs" />
+    <Compile Include="form\TeamWork\Helpers\StatusHelper.cs" />
+    <Compile Include="form\TeamWork\Interfaces\INewable.cs" />
+    <Compile Include="form\TeamWork\Interfaces\IModifiable.cs" />
+    <Compile Include="form\TeamWork\Models\DapperMappings.cs" />
+    <Compile Include="form\TeamWork\Models\FioModel.cs" />
+    <Compile Include="form\TeamWork\Models\KodProizvModel.cs" />
+    <Compile Include="form\TeamWork\Models\NZP.cs" />
+    <Compile Include="form\TeamWork\Models\OborudShvModel.cs" />
+    <Compile Include="form\TeamWork\Models\PodrVyazModel.cs" />
+    <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -501,6 +540,7 @@
     <Compile Include="form\TeamWork\Models\NormRask.cs" />
     <Compile Include="form\TeamWork\Models\NormRasz.cs" />
     <Compile Include="form\TeamWork\Models\RaskroyNorm.cs" />
+    <Compile Include="form\TeamWork\Services\DbService.cs" />
     <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
@@ -520,18 +560,17 @@
     <Compile Include="form\TeamWork\Forms\TeamWork_AdvanceTW.Designer.cs">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
     </Compile>
-    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.Designer.cs">
-      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
-    </Compile>
     <Compile Include="form\TeamWork\Helpers\CommonFunctions.cs" />
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
-    <Compile Include="form\UserDistribution\Helpers\UserClass.cs" />
-    <Compile Include="form\UserDistribution\Models\UserModel.cs" />
+    <Compile Include="form\UserDistribution\UserClass.cs" />
+    <Compile Include="form\UserDistribution\UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
+      <DependentUpon>UserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -717,9 +756,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_AdvanceTW.resx">
       <DependentUpon>TeamWork_AdvanceTW.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\TeamWork\Forms\TeamWork_ArchAndCopy.resx">
-      <DependentUpon>TeamWork_ArchAndCopy.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="form\usercontrol\FurnitZayavView.resx">
       <DependentUpon>FurnitZayavView.cs</DependentUpon>
@@ -732,6 +769,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -859,6 +899,12 @@
     <Error Condition="!Exists('packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.SqlServer.Types.160.1000.6\build\net462\Microsoft.SqlServer.Types.props'))" />
     <Error Condition="!Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.props'))" />
     <Error Condition="!Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets'))" />
+    <Error Condition="!Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
+    <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
+
   </Target>
   <Import Project="packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets" Condition="Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets')" />
+  <Import Project="packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
+  <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
+
 </Project>

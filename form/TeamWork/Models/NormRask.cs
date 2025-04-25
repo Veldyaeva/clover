@@ -1,18 +1,36 @@
-﻿using System;
+﻿using SewingProduction.Interfaces;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-   public class NormRask //заглушка
+   public class NormRask : INewable, INotifyPropertyChanged, IModifiable
     {
-        public int id { get; set; }
+        [NotMapped]
+        public bool IsNew { get; set; } = true;
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
+        private int _id;
+        public int id
+        {
+            get => _id;
+            set
+            {
+                _id = value;
+                OnPropertyChanged(nameof(id));
+            }
+        }
         public int AnnId { get; set; }
+        [Column("kod_o")]
         public string KodO { get; set; }
         public string Text { get; set; }
         public string Spec { get; set; }
+        [Column("razryd")]
         public int Razryad { get; set; }
         public string Obor { get; set; }
         public  int Kod {  get; set; }
@@ -22,5 +40,20 @@ namespace SewingProduction.Models
         public int Sek { get; set; }
         public int Seb  { get; set; }
         public int Seb_s { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+             // Не вызываем событие для ID, IsNew, IsModified
+            bool isInternalProperty = propertyName == nameof(id) || // Используем 'id' для NormRask
+                                     propertyName == nameof(IsNew) || 
+                                     propertyName == nameof(IsModified);
+
+            if (!isInternalProperty)
+            {
+                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
+        }
     }
 }

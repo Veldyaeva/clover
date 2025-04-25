@@ -670,3 +670,35 @@ public class LogEntry
     public string Context { get; set; }
 }
 #endregion
+
+/// <summary>
+/// Кастомный SplitContainer с поддержкой тем
+/// </summary>
+public class CustomSplitContainer : DevExpress.XtraEditors.SplitContainerControl
+{
+    public CustomSplitContainer()
+    {
+        ApplyTheme();
+        ThemeManager.ThemeChanged += OnThemeChanged;
+    }
+
+    public void ApplyTheme()
+    {
+        this.SplitterColor = ThemeManager.ActiveTheme.ButtonBackground;
+    }
+
+    private void OnThemeChanged()
+    {
+        ApplyTheme();
+        Invalidate();
+    }
+
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing)
+        {
+            ThemeManager.ThemeChanged -= OnThemeChanged;
+        }
+        base.Dispose(disposing);
+    }
+}
