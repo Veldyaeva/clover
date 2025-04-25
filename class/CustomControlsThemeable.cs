@@ -16,18 +16,8 @@ using SewingProduction;
 
 namespace SewingProduction
 {
-    public interface IThemeable
+    public class CustomButton : Button, IThemeable
     {
-        void ApplyTheme();
-    }
-    public interface IThemeableControl
-    {
-        string ObjectName { get; set; }
-        void ApplyPermission(UserClass user);
-    }
-    public class CustomButton : Button, IThemeable, IThemeableControl
-    {
-        public string ObjectName { get; set; }
         public CustomButton()
         {
             ApplyTheme();
@@ -330,7 +320,7 @@ namespace SewingProduction
 
     public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
     {
-        public string ObjectName { get; set; }
+    {
         public CustomMaskedTextBox()
         {
             ApplyTheme();
@@ -418,6 +408,7 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+    }
         public void ApplyPermission(UserClass user)
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
@@ -500,7 +491,7 @@ namespace SewingProduction
     /// </summary>
     public class CustomGroupBox : GroupBox, IThemeableControl, IThemeable
     {
-        public string ObjectName { get; set; }
+    {
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
         private int _borderThickness = 1;       // Толщина обводки по умолчанию
 
@@ -637,80 +628,6 @@ namespace SewingProduction
         }
 
         private void OnThemeChanged() => ApplyTheme();
-        private async void CustomForm_Load(object sender, EventArgs e)
-        {
-            string formName = this.GetType().Name;
-
-            await _user.LoadObjectForm(formName);
-
-            // нет вообще доступа — закрываем
-            if (!_user.HasPermission(formName, "Просмотр") && !_user.HasPermission(formName, "Редактор"))
-            {
-                MessageBox.Show(
-                    $"У вас нет доступа к форме '{formName}'.",
-                    "Доступ запрещён",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Warning
-                );
-                this.BeginInvoke((MethodInvoker)(() => this.Close()));
-                return;
-            }
-
-            // если только просмотр — отключаем все контролы
-            if (_user.HasPermission(formName, "Просмотр") && !_user.HasPermission(formName, "Редактор"))
-            {
-                DisableAllControls(this);
-                return;
-            }
-
-            // если редактор — применяем доступ к каждому элементу
-            ApplyPermissionsToControls(this, _user);
-        }
-        private void ApplyPermissionsToControls(Control parent, UserClass user)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (ctrl is IThemeableControl themeable)
-                {
-                    // Если ObjectName не задан вручную — ставим по имени контрола
-                    if (string.IsNullOrEmpty(themeable.ObjectName) && !string.IsNullOrEmpty(ctrl.Name))
-                    {
-                        themeable.ObjectName = ctrl.Name;
-                    }
-
-                    themeable.ApplyPermission(user);
-                }
-
-                if (ctrl.HasChildren)
-                {
-                    ApplyPermissionsToControls(ctrl, user);
-                }
-            }
-        }
-        private void DisableAllControls(Control parent)
-        {
-            foreach (Control ctrl in parent.Controls)
-            {
-                if (!(ctrl is Label || ctrl is PictureBox))
-                    ctrl.Enabled = false;
-
-                if (ctrl.HasChildren)
-                    DisableAllControls(ctrl);
-            }
-        }
-    }
-    public static class PermissionHelper
-    {
-        public static void ApplyTo(Control ctrl, string objectName, UserClass user)
-        {
-            if (string.IsNullOrEmpty(objectName)) return;
-
-            bool hasWrite = user.HasPermission(objectName, "Редактор");
-            bool hasRead = user.HasPermission(objectName, "Просмотр");
-
-            ctrl.Visible = hasRead || hasWrite;
-            ctrl.Enabled = hasWrite;
-        }
     }
 }
 

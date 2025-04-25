@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,18 +8,23 @@ using System.Threading.Tasks;
 namespace SewingProduction.Models
 {
     /// <summary>
-    /// Represents data for an employee (FIO).
+    ///Список ФИО
     /// </summary>
     public class FioModel
     {
         /// <summary>
-        /// Employee ID (Tabelnyy Nomer).
+        /// Табельный номер
         /// </summary>
+        //public int tab { get; set; }
+
+        ///// <summary>
+        /////ФИО
+        ///// </summary>
+        //public string fio { get; set; }
+        [Column("tab")]
         public int Tab { get; set; }
 
-        /// <summary>
-        /// Employee Full Name.
-        /// </summary>
+        [Column("fio")]
         public string Fio { get; set; }
     }
 } 

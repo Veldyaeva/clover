@@ -51,16 +51,13 @@ namespace SewingProduction.Services
         }
         public async Task<List<ArtNormN>> GetArtNormData()
         {
-            // --- Explicit Mapping for ArtNormN ---
             var map = new CustomPropertyTypeMap(
                typeof(ArtNormN),
                (type, columnName) =>
                {
-                   // Standard properties matching column names (case-insensitive)
                    var prop = type.GetProperties().FirstOrDefault(p => p.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
                    if (prop != null && !Attribute.IsDefined(prop, typeof(NotMappedAttribute))) return prop;
 
-                   // Explicit mapping for properties with different names or needing specific handling
                    if (columnName.Equals("grup", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.Group));
                    if (columnName.Equals("sek_shv", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekShv));
                    if (columnName.Equals("sek_vyaz5", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz5));
@@ -74,16 +71,12 @@ namespace SewingProduction.Services
                    if (columnName.Equals("data_obn", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.dateUpdate));
                    if (columnName.Equals("sek_kr", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekKr));
                    if (columnName.Equals("parentId", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.ParentId));
-                   // Explicitly map statusText even though StatusText property is [NotMapped] (Dapper might populate it if mapped)
                    if (columnName.Equals("statusText", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.StatusText));
-                   // Add other mappings if needed
 
-                   // If no match found by name or explicit rule, ignore the column
                    return null;
                });
 
             SqlMapper.SetTypeMap(typeof(ArtNormN), map);
-            // --- End Explicit Mapping ---
 
             string query = @"
             SELECT 
@@ -100,10 +93,7 @@ namespace SewingProduction.Services
             }
             //finally
             //{
-            //    // --- Reset Type Map ---
-            //    // Important: Reset to default map to avoid affecting other queries/types
             //     SqlMapper.SetTypeMap(typeof(ArtNormN), null);
-            //     // --- End Reset Type Map ---
             //}
         }
 
@@ -116,7 +106,7 @@ namespace SewingProduction.Services
         /// <summary>
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
-        /// <param name="kodd"></param>
+        /// <param name="kod"></param>
         /// <returns></returns>
         public async Task ResetAnnIdinArticul(int kod)
         {
@@ -226,25 +216,22 @@ namespace SewingProduction.Services
                     data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status!=3";
             if (!all)
             {
-                query += " AND(annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
+                query += " AND (annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
             }
             return await _dbHelper.GetConnection().QueryAsync<MyDataANN>(query).ContinueWith(t => t.Result.ToList());
         }
 
-        // Renamed from GetArtNormDataCurrent(string art) to avoid overload conflict signature difference only in return type
-        // Changed return type to List<ArtNormN> as the query selects from ArtNormNView
+
         public async Task<List<MyDataANN>> GetArtNormDataByArticulPrefix(string artPrefix)
         {
-            // Simplified query to directly use LIKE on ArtNormNView
             string query = $"SELECT * FROM artNormNView WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
 
             var parameters = new
             {
                 StatusArchive = (int)Status.Archive,
-                ArtPattern = artPrefix + "%" // Add wildcard for LIKE
+                ArtPattern = artPrefix + "%"
             };
 
-            // Use QueryAsync<ArtNormN> for correct mapping
             using (var connection = _dbHelper.GetConnection())
             {
                  var result = await connection.QueryAsync<MyDataANN>(query, parameters);
