@@ -571,7 +571,8 @@
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
     <Compile Include="form\UserDistribution\Helpers\UserClass.cs" />
-    <Compile Include="form\UserDistribution\UserModel.cs" />
+    <Compile Include="form\UserDistribution\Model\UserModel.cs" />
+    <Compile Include="form\UserDistribution\Model\UserRoleModel.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>

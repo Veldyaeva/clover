@@ -15,7 +15,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using DevExpress.XtraTabbedMdi;
+using Newtonsoft.Json;
+using System.IO;
 
 //nemain
 
@@ -25,17 +27,22 @@ namespace SewingProduction
     {
         UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
-        private ToolStripMenuItem[] toolStripMenuItems;
+        private ToolStripMenuItem[] toolStripMenuItems; 
+        private string loginHistoryFile = "login_data.js";
+        private Dictionary<string, Form> openedForms = new Dictionary<string, Form>();
+        private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
+
         public SpMainForm()
         {
             InitializeComponent();
+            this.IsMdiContainer = true;
             _passwordHasher = new PasswordHasher();
             ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
-            if (ThemeManager.CurrentTheme is null) { ThemeSelectorComboBox.SelectedIndex = 0; }
+            if (ThemeManager.CurrentTheme is null)
+                ThemeSelectorComboBox.SelectedIndex = 0;
             else
-            {
                 ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
-            }
+
             // Обработчик смены темы
             ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
             {
@@ -45,7 +52,6 @@ namespace SewingProduction
         }
 
 
-        XtraTabbedMdiManager mdiManager;
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
            
@@ -67,6 +73,7 @@ namespace SewingProduction
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm(); // Загружаем права доступа и применяем их
+                RestoreOpenTabs();
             }
             else
             {
@@ -99,40 +106,6 @@ namespace SewingProduction
                     ApplyPermissionsToMenuItems(menuStrip.Items);
                 }
             }
-            //toolStripMenuItems = new ToolStripMenuItem[] { 
-            //    МенюToolStripMenuItem, 
-            //        профильToolStripMenuItem,
-            //        настройкиToolStripMenuItem,
-            //        оПрограммеToolStripMenuItem,
-            //        помощьToolStripMenuItem,
-            //    справочникиToolStripMenuItem,
-            //        оборудованиеToolStripMenuItem,
-            //            оборудованиеВБригадахToolStripMenuItem,
-            //            оборудованиеToolStripMenuItem1,
-            //            видыОборудованияToolStripMenuItem,
-            //            матрицыКлассовToolStripMenuItem,
-            //            видыОперацийToolStripMenuItem,
-            //        бригадыЦехаToolStripMenuItem,
-            //            бригадыToolStripMenuItem,
-            //            цехаToolStripMenuItem,
-            //            видыПроизводствToolStripMenuItem,
-            //        карточкаРасчетаToolStripMenuItem1,
-            //        работникиToolStripMenuItem,
-            //        тарифыToolStripMenuItem,
-            //        изделияToolStripMenuItem,
-            //        моделиСПризнакомМаркировкToolStripMenuItem,
-            //    производствоToolStripMenuItem,
-            //        рабочийСтолМастераToolStripMenuItem,
-            //    TeamWorktoolStripMenuItem,
-            //    артикулToolStripMenuItem
-            //};
-            //foreach (ToolStripMenuItem menuItem in toolStripMenuItems)
-            //{
-            //    bool hasWrite = _user.HasPermission(menuItem.Name, "Редактор");
-            //    bool hasRead = _user.HasPermission(menuItem.Name, "Просмотр");
-            //    menuItem.Visible = hasRead || hasWrite ? true : false;
-            //    menuItem.Enabled = hasWrite;
-            //}
         }
         private void ApplyPermissionsToMenuItems(ToolStripItemCollection items)
         {
@@ -175,13 +148,8 @@ namespace SewingProduction
        
         private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravOborud f = new SpravOborud(_user);
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravOborud(_user), sender);
         }
-
-
-
 
         private void карточкаРасчетаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
@@ -196,55 +164,38 @@ namespace SewingProduction
         }
         private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об."), sender);
         }
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об."), sender);
         }
 
         private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций"), sender);
         }
 
         private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            SpravZeh f = new SpravZeh(_user, "ZehList", "Справочник Цехов");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravZeh(_user, "ZehList", "Справочник Цехов"), sender);
         }
         private void бригадыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravBrig f = new SpravBrig(_user, "spBrig", "Справочник Бригад");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravBrig(_user, "spBrig", "Справочник Бригад"), sender);
         }
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SpravForAll f = new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв"), sender);
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Fio f = new Fio(_user,"fio", "Справочник работников");
-            f.MdiParent = this;
-            f.Show();
+            OpenForm(new Fio(_user, "fio", "Справочник работников"), sender);
         }
         private void оборудованиеВБригадахToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OborudBrig f = new OborudBrig(_user);
-            f.MdiParent = this;
-            f.Show();
-
+            OpenForm(new OborudBrig(_user), sender);
         }
 
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
@@ -263,10 +214,7 @@ namespace SewingProduction
         
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TeamWork teamWork = new TeamWork();
-            teamWork.MdiParent = this;
-            teamWork.Show();
-
+            OpenForm(new TeamWork(), sender);
         }
 
         private void toolStripComboBox1_Click(object sender, EventArgs e)
@@ -276,11 +224,10 @@ namespace SewingProduction
 
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
-        
             SpravForAll f = new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки");
             f.MdiParent = this;
             f.Show();
-        
+            //OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
         }
 
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
@@ -300,14 +247,11 @@ namespace SewingProduction
         {
             SettingsForm f = new SettingsForm(_user);
             f.Show();
-
         }
 
         private void профильToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //UserProfile f = new UserProfile(_user);
-            //f.MdiParent = this;
-            //f.Show();
+            OpenForm(new UserProfile(_user), sender);
         }
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
@@ -321,6 +265,88 @@ namespace SewingProduction
             PlanZagrBrig planZagrBrig = new PlanZagrBrig();
             planZagrBrig.MdiParent = this;
             planZagrBrig.Show();
+        }
+        private void OpenForm(Form form, object sender)
+        {
+            form.MdiParent = this;
+            form.FormClosed += ChildFormClosed;
+            form.Show();
+
+            string menuItemName = ((ToolStripMenuItem)sender).Name;
+            if (!openedForms.ContainsKey(menuItemName))
+                openedForms.Add(menuItemName, form);
+        }
+
+        private void ChildFormClosed(object sender, FormClosedEventArgs e)
+        {
+            var closedForm = sender as Form;
+            if (closedForm != null)
+            {
+                var item = openedForms.FirstOrDefault(x => x.Value == closedForm);
+                if (!string.IsNullOrEmpty(item.Key))
+                {
+                    openedForms.Remove(item.Key);
+                }
+            }
+        }
+        private ToolStripMenuItem FindMenuItemByName(ToolStripItemCollection items, string name)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (item.Name == name && item is ToolStripMenuItem menuItem)
+                    return menuItem;
+
+                if (item is ToolStripMenuItem parentMenu && parentMenu.DropDownItems.Count > 0)
+                {
+                    var found = FindMenuItemByName(parentMenu.DropDownItems, name);
+                    if (found != null)
+                        return found;
+                }
+            }
+            return null;
+        }
+
+        private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            var realOpenTabs = openedForms.Keys.ToList();
+
+            Dictionary<string, object> data = new Dictionary<string, object>();
+
+            if (System.IO.File.Exists(loginHistoryFile))
+            {
+                string json = System.IO.File.ReadAllText(loginHistoryFile);
+                data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
+            }
+
+            data[_user.UserName] = new { openTabs = realOpenTabs };
+
+            string updatedJson = JsonConvert.SerializeObject(data, Formatting.Indented);
+            System.IO.File.WriteAllText(loginHistoryFile, updatedJson);
+        }
+        private void RestoreOpenTabs()
+        {
+            if (!System.IO.File.Exists(loginHistoryFile)) return;
+
+            string json = System.IO.File.ReadAllText(loginHistoryFile);
+            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
+
+            if (data != null && data.TryGetValue(_user.UserName, out object userDataObj))
+            {
+                var userData = JsonConvert.DeserializeObject<Dictionary<string, object>>(userDataObj.ToString());
+                if (userData != null && userData.ContainsKey("openTabs"))
+                {
+                    var openTabs = JsonConvert.DeserializeObject<List<string>>(userData["openTabs"].ToString());
+
+                    foreach (var menuItemName in openTabs)
+                    {
+                        ToolStripMenuItem menuItem = FindMenuItemByName(this.menuStrip1.Items, menuItemName);
+                        if (menuItem != null)
+                        {
+                            menuItem.PerformClick();
+                        }
+                    }
+                }
+            }
         }
     }
 }
