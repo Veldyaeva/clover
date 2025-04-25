@@ -12,6 +12,7 @@ using System.Security.AccessControl;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.LookAndFeel.DXSkinColors;
+using SewingProduction;
 
 namespace SewingProduction
 {
@@ -148,7 +149,7 @@ namespace SewingProduction
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
     }
-    }
+    
 
     public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable
     {
@@ -424,7 +425,7 @@ namespace SewingProduction
     }
     
 
-    public class CustomGridControl : GridControl, IThemeable, IThemeableControl
+    public class CustomGridControl : GridControl, SewingProduction.IThemeable, IThemeableControl
     {
         public Color? AlternateRowColor { get; set; }
         public string ObjectName { get; set; }
@@ -584,7 +585,7 @@ namespace SewingProduction
     /// <summary>
     /// Кастомная форма с градиентным фоном
     /// </summary>
-    public class CustomForm : Form, IThemeable
+    public class CustomForm : Form, SewingProduction.IThemeable
     {
         public int FormID;
         protected UserClass _user;

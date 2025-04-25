@@ -26,7 +26,7 @@ namespace SewingProduction.form.UserDistribution
         private readonly UserProfileDataService _userProfileDataService;
         DatabaseHelper dbHelper = new DatabaseHelper("ace");
         private readonly UserClass _user;
-        private readonly IPasswordHasher<UserClass> _passwordHasher;
+        private readonly IPasswordHasher _passwordHasher;
         private readonly LoginFormDataService _loginService;
         public UserProfile(UserClass user) : base(user)
         {
@@ -36,7 +36,7 @@ namespace SewingProduction.form.UserDistribution
             customLabelProfileName.Text = _user.UserName;
             listBoxRole.DataSource = _user.Roles;
             customLabelCompName.Text = Environment.MachineName;
-            _passwordHasher = new PasswordHasher<UserClass>();
+            _passwordHasher = new PasswordHasher();
         }
 
         private void customButtonChangeUser_Click(object sender, EventArgs e)
@@ -91,7 +91,7 @@ namespace SewingProduction.form.UserDistribution
             string newPassword2 = customTextBoxNewPassword2.Text;
 
             string dbHash = await _userProfileDataService.GetPasswordHash(_user.UserId);
-            if (_passwordHasher.VerifyHashedPassword(null, dbHash, currentPassword) != PasswordVerificationResult.Success)
+            if (_passwordHasher.VerifyHashedPassword( dbHash, currentPassword) != PasswordVerificationResult.Success)
             {
                 MessageBox.Show("Текущий пароль неверен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -102,7 +102,7 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
-            string newHash = _passwordHasher.HashPassword(null, newPassword);
+            string newHash = _passwordHasher.HashPassword( newPassword);
             await _userProfileDataService.UpdatePasswordHash(_user.UserId, newHash);
             MessageBox.Show("Пароль успешно изменен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //this.Close();

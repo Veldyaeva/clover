@@ -263,7 +263,7 @@ namespace SewingProduction
         
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TeamWork teamWork = new TeamWork(_user);
+            TeamWork teamWork = new TeamWork();
             teamWork.MdiParent = this;
             teamWork.Show();
 

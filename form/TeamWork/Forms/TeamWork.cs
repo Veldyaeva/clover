@@ -52,9 +52,9 @@ namespace SewingProduction.Forms
         private readonly GridHelper _gridHelper = new GridHelper();
 
         private int bufferWorkDivision;
-        private readonly BindingList<ArtNormN> _bindingList;
-        private readonly BindingSource _bindingSource;
-        public TeamWork(UserClass user) : base(user)
+        //private readonly BindingList<ArtNormN> _bindingList;
+        //private readonly BindingSource _bindingSource;
+        //public TeamWork(UserClass user) : base(user);
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList = new BindingList<ArtNormN>();

@@ -447,6 +447,12 @@
     <Compile Include="form\UserDistribution\Forms\ActionHistory.Designer.cs">
       <DependentUpon>ActionHistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="form\UserDistribution\Forms\UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="form\UserDistribution\Forms\UserProfile.Designer.cs">
+      <DependentUpon>UserProfile.cs</DependentUpon>
+    </Compile>
     <Compile Include="form\UserDistribution\Helpers\ActionLogger.cs" />
     <Compile Include="form\UserDistribution\Forms\AdminForm.cs">
       <SubType>Form</SubType>
@@ -564,13 +570,8 @@
     <Compile Include="form\TeamWork\Interfaces\ICheckable.cs" />
     <Compile Include="form\TeamWork\Models\MyDataANN.cs" />
     <Compile Include="form\TeamWork\Models\MyDataART.cs" />
-    <Compile Include="form\UserDistribution\UserClass.cs" />
-    <Compile Include="form\UserDistribution\UserProfile.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="form\UserDistribution\UserProfile.Designer.cs">
-      <DependentUpon>UserProfile.cs</DependentUpon>
-    </Compile>
+    <Compile Include="form\UserDistribution\Helpers\UserClass.cs" />
+    <Compile Include="form\UserDistribution\UserModel.cs" />
     <Compile Include="PrintReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -729,6 +730,9 @@
     <EmbeddedResource Include="form\UserDistribution\Forms\AllUser.resx">
       <DependentUpon>AllUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="form\UserDistribution\Forms\UserProfile.resx">
+      <DependentUpon>UserProfile.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="form\UserDistribution\Forms\UsersHierarchy.resx">
       <DependentUpon>UsersHierarchy.cs</DependentUpon>
     </EmbeddedResource>
@@ -769,9 +773,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="form\SpravOborud.resx">
       <DependentUpon>SpravOborud.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="form\UserDistribution\UserProfile.resx">
-      <DependentUpon>UserProfile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PrintNakl.rdlc">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -901,10 +902,8 @@
     <Error Condition="!Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets'))" />
     <Error Condition="!Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets'))" />
     <Error Condition="!Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets'))" />
-
   </Target>
   <Import Project="packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets" Condition="Exists('packages\Microsoft.AspNetCore.Identity.UI.9.0.3\build\Microsoft.AspNetCore.Identity.UI.targets')" />
   <Import Project="packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets" Condition="Exists('packages\Microsoft.Data.SqlClient.SNI.6.0.2\build\net462\Microsoft.Data.SqlClient.SNI.targets')" />
   <Import Project="packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets" Condition="Exists('packages\System.ValueTuple.4.6.1\build\net471\System.ValueTuple.targets')" />
-
 </Project>
