@@ -315,7 +315,8 @@ namespace SewingProduction.Forms
                 MyDataART selectedArtRow = null;
                 MyDataANN selectedAnnRow = null;
                 // Получаем выбранные артикулы
-                List<MyDataART> artDataSource = artView.DataSource as List<MyDataART>;
+                var artBindingSource = artView.DataSource as BindingSource;
+                var artDataSource = artBindingSource?.DataSource as BindingList<MyDataART>;
                 if (artDataSource != null)
                     foreach (var row in artDataSource)
                     {
