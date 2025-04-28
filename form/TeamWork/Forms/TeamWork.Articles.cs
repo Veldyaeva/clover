@@ -364,7 +364,7 @@ namespace SewingProduction.Forms
                     selectedArtRow.BindedArt = selectedAnnRow.Articul;
 
                     // Перемещаем строку в начало списка
-                    List<MyDataART> artDataSourceList = artDataSource;
+                    BindingList<MyDataART> artDataSourceList = artDataSource;
                     if (artDataSourceList != null)
                     {
                         int index = artDataSourceList.IndexOf(selectedArtRow);
