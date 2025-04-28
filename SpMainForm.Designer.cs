@@ -352,6 +352,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "SpMainForm";
             this.Text = "Швейное производство";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpMainForm_FormClosing);
             this.Load += new System.EventHandler(this.SpMainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.popupMenu1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();

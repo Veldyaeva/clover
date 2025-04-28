@@ -8,8 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.Design;
 using SewingProduction.form.UserDistribution.Models;
 using SewingProduction.Helpers;
+using SewingProduction.Services;
 
 namespace SewingProduction.form.UserDistribution
 {
@@ -17,6 +19,7 @@ namespace SewingProduction.form.UserDistribution
     {
         private readonly AllUserDataService _allUserDataService;
         private readonly UserModel _userModel;
+        private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
         DatabaseHelper dbHelper = new DatabaseHelper("ace");
         private readonly UserClass _user;
         private int selectedRoleId = -1;
@@ -67,7 +70,7 @@ namespace SewingProduction.form.UserDistribution
         }
         private async Task LoadUsers()
         {
-            bindingSourceUsers.DataSource = await _allUserDataService.GetUsersHierarchy(_user.UserId);
+            bindingSourceUsers.DataSource = await _userModelDataService.GetUsersHierarchyAsync(_user.UserId);
         }
 
         private void customButtonAddUser_Click(object sender, EventArgs e)
@@ -89,38 +92,41 @@ namespace SewingProduction.form.UserDistribution
 
         private async void gridViewUsers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            Console.WriteLine("RowUpdated start");
-            DataRow row = ((DataRowView)e.Row).Row;
-            if (row == null)
-                return;
+            var row = (UserModel)((BindingSource)bindingSourceUsers)[gridViewUsers.GetFocusedDataSourceRowIndex()];
+            await _userModelDataService.SaveAsync(row);
+            await LoadUsers();
+            //Console.WriteLine("RowUpdated start");
+            //DataRow row = ((DataRowView)e.Row).Row;
+            //if (row == null)
+            //    return;
 
-            int rowHandle = gridViewUsers.GetRowHandle(gridViewUsers.DataSource is BindingSource ? ((BindingSource)gridViewUsers.DataSource).IndexOf(e.Row) : -1);
+            //int rowHandle = gridViewUsers.GetRowHandle(gridViewUsers.DataSource is BindingSource ? ((BindingSource)gridViewUsers.DataSource).IndexOf(e.Row) : -1);
 
-            int id = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0;
+            //int id = row["UserID"] != DBNull.Value ? Convert.ToInt32(row["UserID"]) : 0;
 
-            string UserName = row["UserName"]?.ToString() ?? "";
-            try
-            {
-                if (id > 0)
-                {
-                    await _allUserDataService.UpdateUser(UserName, id);
-                }
-                else
-                {
-                    int newId = await _allUserDataService.InsertUser(UserName, _user.UserId);
-                    row["RoleID"] = newId;
-                }
-                await LoadUsers();
-                Console.WriteLine("RowUpdated");
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                if (ex.Message.Contains("UQ_UserName"))
-                    MessageBox.Show($"Пользователь с именем \"{UserName}\" уже существует. Имя должно быть уникальным.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                else
-                    MessageBox.Show("Ошибка базы данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
-            }
+            //string UserName = row["UserName"]?.ToString() ?? "";
+            //try
+            //{
+            //    if (id > 0)
+            //    {
+            //        await _allUserDataService.UpdateUser(UserName, id);
+            //    }
+            //    else
+            //    {
+            //        int newId = await _allUserDataService.InsertUser(UserName, _user.UserId);
+            //        row["RoleID"] = newId;
+            //    }
+            //    await LoadUsers();
+            //    Console.WriteLine("RowUpdated");
+            //}
+            //catch (System.Data.SqlClient.SqlException ex)
+            //{
+            //    if (ex.Message.Contains("UQ_UserName"))
+            //        MessageBox.Show($"Пользователь с именем \"{UserName}\" уже существует. Имя должно быть уникальным.", "Ошибка добавления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    else
+            //        MessageBox.Show("Ошибка базы данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
+            //}
 
         }
         private void gridViewUsers_FocusedRow()
@@ -228,16 +234,4 @@ namespace SewingProduction.form.UserDistribution
             return Convert.ToInt32(result);
         }
     }
-    //public class UserInAllUser
-    //{
-    //    private int UserID;
-    //    public string UserName;
-    //    private string PasswordHash;
-    //    private int FioID;
-    //    public string FioName;
-    //    private int CreatorID;
-    //    public string CreatorName;
-    //    private int BrigID;
-    //    public string BrigName;
-    //}
 }

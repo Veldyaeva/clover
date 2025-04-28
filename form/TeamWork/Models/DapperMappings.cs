@@ -1,4 +1,5 @@
-﻿using SewingProduction.Models;
+﻿using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

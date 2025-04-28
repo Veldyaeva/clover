@@ -18,7 +18,7 @@ namespace SewingProduction.form.UserDistribution
         private readonly LoginFormDataService _loginFormDataService;
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
-        private string loginHistoryFile = "login_history.txt";
+        private string loginHistoryFile = "login_data.js";
         public LoginForm(UserClass user)
         {
             InitializeComponent();
@@ -87,30 +87,44 @@ namespace SewingProduction.form.UserDistribution
         {
             if (System.IO.File.Exists(loginHistoryFile))
             {
-                var lines = System.IO.File.ReadAllLines(loginHistoryFile);
+                string json = System.IO.File.ReadAllText(loginHistoryFile);
+                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
 
-                if (lines.Length > 0)
+                if (data != null && data.ContainsKey("logins"))
                 {
-                    comboBoxEditLogin.Properties.Items.AddRange(lines);
-                    comboBoxEditLogin.Text = lines.Last();
+                    var logins = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(data["logins"].ToString());
+                    if (logins.Count > 0)
+                    {
+                        comboBoxEditLogin.Properties.Items.AddRange(logins);
+                        comboBoxEditLogin.Text = logins.Last();
+                    }
                 }
             }
         }
 
         private void SaveLoginToHistory(string login)
         {
-            var logins = new List<string>();
+            Dictionary<string, object> data = new Dictionary<string, object>();
 
             if (System.IO.File.Exists(loginHistoryFile))
             {
-                logins = System.IO.File.ReadAllLines(loginHistoryFile).ToList();
-                logins.RemoveAll(l => l.Equals(login, StringComparison.OrdinalIgnoreCase)); // удалить дубликат
+                string json = System.IO.File.ReadAllText(loginHistoryFile);
+                data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
             }
 
-            logins.Add(login); // добавить в конец
+            List<string> logins = data.ContainsKey("logins")
+                ? Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(data["logins"].ToString())
+                : new List<string>();
 
-            System.IO.File.WriteAllLines(loginHistoryFile, logins); // перезаписать файл
-            comboBoxEditLogin.Properties.Items.Clear();             // обновить список
+            logins.RemoveAll(l => l.Equals(login, StringComparison.OrdinalIgnoreCase));
+            logins.Add(login);
+
+            data["logins"] = logins;
+
+            string updatedJson = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
+            System.IO.File.WriteAllText(loginHistoryFile, updatedJson);
+
+            comboBoxEditLogin.Properties.Items.Clear();
             comboBoxEditLogin.Properties.Items.AddRange(logins);
         }
         private void LoginForm_Shown(object sender, EventArgs e)
