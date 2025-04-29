@@ -503,17 +503,17 @@ namespace SewingProduction.Helpers
         #endregion
 
         #region LookUpHelper
-        public void ConfigureComboBox(DevExpress.XtraEditors.LookUpEdit comboBox, BindingSource bindingSource)
+        public void ConfigureComboBox(DevExpress.XtraEditors.LookUpEdit lookUpEdit, BindingSource bindingSource)
         {
-            if (comboBox != null && bindingSource != null)
+            if (lookUpEdit != null && bindingSource != null)
             {
-                comboBox.Properties.DataSource = bindingSource;
-                comboBox.Properties.ValueMember = "tab";
-                comboBox.Properties.DisplayMember = "fio";
-                comboBox.Properties.Columns.Clear();
-                comboBox.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("fio", "ФИО"));
-                comboBox.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
-                comboBox.Properties.NullText = "[Выберите значение]";
+                lookUpEdit.Properties.DataSource = bindingSource;
+                lookUpEdit.Properties.ValueMember = "Tab";
+                lookUpEdit.Properties.DisplayMember = "Fio";
+                lookUpEdit.Properties.Columns.Clear();
+                lookUpEdit.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Fio", "ФИО"));
+                lookUpEdit.Properties.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+                lookUpEdit.Properties.NullText = "[Выберите значение]";
             }
         }
         #endregion

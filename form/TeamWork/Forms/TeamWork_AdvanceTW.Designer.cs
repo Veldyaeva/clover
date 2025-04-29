@@ -750,6 +750,7 @@ namespace SewingProduction.form
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.constructorComboBox.Size = new System.Drawing.Size(159, 20);
             this.constructorComboBox.TabIndex = 21;
+            this.constructorComboBox.TabIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // designerComboBox
             // 

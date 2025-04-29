@@ -56,16 +56,12 @@ namespace SewingProduction.Forms
 
                 designerTextBox.DataBindings.Clear();
                 designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioDiz), true, DataSourceUpdateMode.OnPropertyChanged);
-                try
+                designerTextBox.DataBindings["Text"].Format += (s, e) =>
                 {
-                    designerTextBox.DataBindings["Text"].Format += (s, e) =>
-                    {
-                        if (e.Value is FioModel fio)
-                            e.Value = fio.Fio;
-                    };
-                }
-                catch (Exception ex)
-                { }
+                    if (e.Value is FioModel fio)
+                        e.Value = fio.Fio;
+                };
+
                 //  ФИО дизайнера
                 constructorTextBox.DataBindings.Clear();
                 constructorTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioConstr), true, DataSourceUpdateMode.OnPropertyChanged);

@@ -1362,7 +1362,7 @@ namespace SewingProduction.form
             }
             catch (Exception ex) 
             {
-                 _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false); // Логгируем ошибку
+                 _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false); 
             }
         }
     }
