@@ -218,10 +218,6 @@ namespace SewingProduction.Forms
             this.группа = new DevExpress.XtraGrid.Columns.GridColumn();
             this.модель = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.customButton2 = new SewingProduction.CustomButton();
@@ -238,6 +234,10 @@ namespace SewingProduction.Forms
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit5 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
             this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView11 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.artnormnBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.sparticulBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -324,7 +324,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridView_binded)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_unboundArts)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_unboundArts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
             this.xtraTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).BeginInit();
@@ -340,6 +339,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPreArch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).BeginInit();
@@ -813,6 +813,7 @@ namespace SewingProduction.Forms
             this.ANNgridView.GridControl = this.ANNgridControl;
             this.ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             this.ANNgridView.Name = "ANNgridView";
+            this.ANNgridView.OptionsBehavior.Editable = false;
             this.ANNgridView.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             this.ANNgridView.OptionsView.ColumnAutoWidth = false;
             this.ANNgridView.OptionsView.ShowGroupPanel = false;
@@ -1175,6 +1176,7 @@ namespace SewingProduction.Forms
             this.gridViewNZP.GridControl = this.gridControlNZP;
             this.gridViewNZP.GroupFormat = "{0}:  {1}{2}";
             this.gridViewNZP.Name = "gridViewNZP";
+            this.gridViewNZP.OptionsBehavior.Editable = false;
             this.gridViewNZP.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gridViewNZP.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             this.gridViewNZP.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DevExpress.Utils.DefaultBoolean.True;
@@ -1472,6 +1474,7 @@ namespace SewingProduction.Forms
             this.colannId4});
             this.gridView2.GridControl = this.gridControlRaskrTW;
             this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.Editable = false;
             this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // colid
@@ -1593,6 +1596,7 @@ namespace SewingProduction.Forms
             this.colannId5});
             this.gridView4.GridControl = this.gridControlKontTW;
             this.gridView4.Name = "gridView4";
+            this.gridView4.OptionsBehavior.Editable = false;
             this.gridView4.OptionsView.ShowGroupPanel = false;
             // 
             // colkod_o2
@@ -1671,6 +1675,7 @@ namespace SewingProduction.Forms
             this.colannId6});
             this.gridView5.GridControl = this.gridControlDopObrTW;
             this.gridView5.Name = "gridView5";
+            this.gridView5.OptionsBehavior.Editable = false;
             this.gridView5.OptionsView.ShowGroupPanel = false;
             this.gridView5.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridView5_FocusedRowChanged);
             // 
@@ -2263,7 +2268,8 @@ namespace SewingProduction.Forms
             this.gridControl_unboundArts.Size = new System.Drawing.Size(404, 731);
             this.gridControl_unboundArts.TabIndex = 4;
             this.gridControl_unboundArts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView_unboundArts});
+            this.gridView_unboundArts,
+            this.gridView11});
             // 
             // gridView_unboundArts
             // 
@@ -2351,36 +2357,6 @@ namespace SewingProduction.Forms
             this.gridColumn4.Caption = "gridColumn4";
             this.gridColumn4.FieldName = "_isChecked";
             this.gridColumn4.Name = "gridColumn4";
-            // 
-            // gridView11
-            // 
-            this.gridView11.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn19,
-            this.gridColumn24,
-            this.gridColumn25});
-            this.gridView11.GridControl = this.gridControl_unboundArts;
-            this.gridView11.Name = "gridView11";
-            // 
-            // gridColumn19
-            // 
-            this.gridColumn19.Caption = "gridColumn19";
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 0;
-            // 
-            // gridColumn24
-            // 
-            this.gridColumn24.Caption = "gridColumn24";
-            this.gridColumn24.Name = "gridColumn24";
-            this.gridColumn24.Visible = true;
-            this.gridColumn24.VisibleIndex = 1;
-            // 
-            // gridColumn25
-            // 
-            this.gridColumn25.Caption = "gridColumn25";
-            this.gridColumn25.Name = "gridColumn25";
-            this.gridColumn25.Visible = true;
-            this.gridColumn25.VisibleIndex = 2;
             // 
             // xtraTabPage3
             // 
@@ -2564,6 +2540,36 @@ namespace SewingProduction.Forms
             this.gridColumn17.Visible = true;
             this.gridColumn17.VisibleIndex = 3;
             // 
+            // gridView11
+            // 
+            this.gridView11.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn19,
+            this.gridColumn24,
+            this.gridColumn25});
+            this.gridView11.GridControl = this.gridControl_unboundArts;
+            this.gridView11.Name = "gridView11";
+            // 
+            // gridColumn19
+            // 
+            this.gridColumn19.Caption = "gridColumn19";
+            this.gridColumn19.Name = "gridColumn19";
+            this.gridColumn19.Visible = true;
+            this.gridColumn19.VisibleIndex = 0;
+            // 
+            // gridColumn24
+            // 
+            this.gridColumn24.Caption = "gridColumn24";
+            this.gridColumn24.Name = "gridColumn24";
+            this.gridColumn24.Visible = true;
+            this.gridColumn24.VisibleIndex = 1;
+            // 
+            // gridColumn25
+            // 
+            this.gridColumn25.Caption = "gridColumn25";
+            this.gridColumn25.Name = "gridColumn25";
+            this.gridColumn25.Visible = true;
+            this.gridColumn25.VisibleIndex = 2;
+            // 
             // imageCollection1
             // 
             this.imageCollection1.ImageStream = ((DevExpress.Utils.ImageCollectionStreamer)(resources.GetObject("imageCollection1.ImageStream")));
@@ -2669,7 +2675,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.gridView_binded)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl_unboundArts)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView_unboundArts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
             this.xtraTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2.Panel1)).EndInit();
             this.splitContainerControl2.Panel1.ResumeLayout(false);
@@ -2685,6 +2690,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewPreArch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.artnormnBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sparticulBindingSource)).EndInit();
