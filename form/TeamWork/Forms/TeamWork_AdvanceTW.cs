@@ -115,7 +115,7 @@ namespace SewingProduction.form
             modelTextBox.TextChanged += HandleAnnDataChange;
             secTimeTextBox.TextChanged += HandleAnnDataChange;
             textBoxKomment.TextChanged += HandleAnnDataChange;
-            dateCreate.TextChanged += HandleAnnDataChange; 
+            dateCreate.ValueChanged += HandleAnnDataChange; 
 
             designerComboBox.EditValueChanged += HandleAnnDataChange;
             constructorComboBox.EditValueChanged += HandleAnnDataChange;
@@ -219,7 +219,7 @@ namespace SewingProduction.form
                 modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
                 secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
                 textBoxKomment.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Komment), true, DataSourceUpdateMode.OnPropertyChanged);
-                dateCreate.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
+                dateCreate.DataBindings.Add("Value", bindingSource1, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
             }
             catch (Exception ex)
             {
@@ -1179,23 +1179,6 @@ namespace SewingProduction.form
             await _logger.LogEventAsync($"[{itemTypeName}] Finished saving. Total Elapsed: {stopwatch.ElapsedMilliseconds} ms\", \"SaveListAsync");
         }
 
-
-        private T CloneItem<T>(T source) where T : new()
-        {
-            T clone = new T();
-            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                                       .Where(p => p.CanRead && p.CanWrite);
-
-            foreach (var prop in properties)
-            {
-                var value = prop.GetValue(source);
-                prop.SetValue(clone, value);
-            }
-
-            return clone;
-        }
-
-
         /// <summary>
         /// Обработчик события изменения выбранного элемента в LookUpEdit конструктора и дизайнера
         /// </summary>
@@ -1364,6 +1347,10 @@ namespace SewingProduction.form
             {
                  _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false); 
             }
+        }
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
