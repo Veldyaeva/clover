@@ -65,6 +65,10 @@ namespace SewingProduction
         {
             await LogToDatabaseAsync(eventMessage, "", context);
         }
+        public async Task LogWarningAsync(string eventMessage, string context = "")
+        {
+            await LogToDatabaseAsync(eventMessage, "", context);
+        }
 
         private async Task LogToDatabaseAsync(string message, string stackTrace, string context)
         {
@@ -139,6 +143,20 @@ namespace SewingProduction
             await WriteLogAsync(logEntry);
         }
 
+        public async Task LogWarningAsync(string eventMessage, string context = "")
+        {
+            var logEntry = new LogEntry
+            {
+                Timestamp = DateTime.UtcNow.ToString("o"),
+                Message = "WARNING!!!: "+ eventMessage,
+                StackTrace = "",
+                Context = context
+            };
+
+            await WriteLogAsync(logEntry);
+        }
+
+
         private static async Task WriteLogAsync(LogEntry logEntry)
         {
             string logFileName = Path.Combine(logDirectory, $"log_{DateTime.UtcNow:yyyy-MM-dd}.json");
@@ -200,6 +218,18 @@ namespace SewingProduction
             catch
             {
                 await _fileLogger.LogEventAsync(eventMessage, context);
+            }
+        }
+
+        public async Task LogWarningAsync(string eventMessage, string context = "")
+        {
+            try
+            {
+                await _databaseLogger.LogWarningAsync(eventMessage, context);
+            }
+            catch
+            {
+                await _fileLogger.LogWarningAsync(eventMessage, context);
             }
         }
     }

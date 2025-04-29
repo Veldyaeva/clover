@@ -30,13 +30,61 @@ namespace SewingProduction.Forms
         /// </summary>
         private async Task CurrentWorks_Load()
         {
-            //загрузка артикулов для увязки (актуальные и предварительные)
-            await MyDataArtLoad();
-            //загрузка  таблицы РТ для увязки (текущие работы)
-            await MyDataAnnLoad();
-            //norm_rasz
-            await NormRaszLoad();
-            await PreArchLoad();
+            // Отписываемся от событий ПЕРЕД загрузкой
+            if (this.gridView_unboundArts != null)
+            {
+                this.gridView_unboundArts.FocusedRowChanged -= gridView_unboundArts_FocusedRowChanged;
+            }
+            if (this.gridView_twToBind != null)
+            {
+                 this.gridView_twToBind.FocusedRowChanged -= gridView8_FocusedRowChanged;
+            }
+
+            try 
+            {
+                Task preArchTask = PreArchLoad();
+
+                // Загружаем основные данные
+                await MyDataArtLoad(); 
+                await MyDataAnnLoad(); 
+
+                await preArchTask;
+
+                if (this.gridView_twToBind != null && gridView_twToBind.RowCount > 0 && gridView_twToBind.FocusedRowHandle >= 0)
+                {
+                    int initialAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_twToBind, gridView_twToBind.FocusedRowHandle, "AnnId", 0);
+                    if (initialAnnId > 0)
+                    {
+                        await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, await _artNormService.GetRelatedNormRasz(initialAnnId));
+                    }
+                    else
+                    {
+                         await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                    }
+                }
+                else
+                {
+                     await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                }
+            }
+            finally
+            {
+                // Подписываемся обратно ПОСЛЕ всей загрузки
+                if (this.gridView_unboundArts != null)
+                {
+                    this.gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
+                }
+                if (this.gridView_twToBind != null)
+                {
+                    this.gridView_twToBind.FocusedRowChanged += gridView8_FocusedRowChanged;
+                }
+            }
+
+            // Опциональные RefreshDataSource, если ResetBindings недостаточно
+            // customGridControl1?.RefreshDataSource();
+            // customGridControl2?.RefreshDataSource();
+            // customGridControl3?.RefreshDataSource();
+            // gridControlPreArch?.RefreshDataSource();
         }
 
 
@@ -124,15 +172,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        //private int GetSelectedKodFromGrid(GridControl grid)
-        //{
-        //    var view = grid.MainView as GridView;
-        //    if (view != null && view.FocusedRowHandle >= 0)
-        //    {
-        //        return Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "Kod"));
-        //    }
-        //    return 0;
-        //}
         /// <summary>
         /// Получает значение Kod из текущего элемента источника данных _myDataArtBindingSource.
         /// </summary>
@@ -156,43 +195,6 @@ namespace SewingProduction.Forms
             }
             return 0;
         }
-
-        //private async Task MyDataArtLoad()
-        //{
-        //    try
-        //    {
-        //        string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
-        //        List<MyDataART> relatedData = await _dbService.GetListAsync<MyDataART>(query, null);
-        //        customGridControl1.DataSource = relatedData;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //        MessageBox.Show($"Ошибка загрузки данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-        //private async Task MyDataAnnLoad()
-        //{
-        //    try
-        //    {
-        //        int kod = GetSelectedKodFromGrid(customGridControl1);
-        //        List<MyDataANN> artNormNs = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
-
-        //        if (artNormNs != null)
-        //        {
-        //            //   var relatedMyDataAnn = ConvertToMyDataAnn(artNormNs);
-        //            customGridControl3.DataSource = artNormNs;// relatedMyDataAnn;
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Нет данных для загрузки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных в текущие работы: {ex.Message}");
-        //    }
-        //}
 
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
@@ -235,7 +237,7 @@ namespace SewingProduction.Forms
         async Task NormRaszLoad()
         {
             int annId = 0;
-            var view = customGridControl2.MainView as GridView;
+            var view = gridControl_wdToBind.MainView as GridView;
             if (view != null)
             {
                 annId = Convert.ToInt32(view.GetRowCellValue(0, "AnnId"));
@@ -245,14 +247,14 @@ namespace SewingProduction.Forms
             customGridControl3.DataSource = normraszBindingSource1;
         }
 
-        ///// <summary>
-        ///// загрузка norm_rasz
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
+        /// <summary>
+        /// загрузка norm_rasz
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView8, e.FocusedRowHandle, "AnnId", 0);
+            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_twToBind, e.FocusedRowHandle, "AnnId", 0);
             await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
 
         }
@@ -260,10 +262,9 @@ namespace SewingProduction.Forms
         {
             try
             {
-                string query = "SELECT * FROM artNormNView WHERE status = 4"; // Ваш запрос
+                string query = "SELECT * FROM artNormNView WHERE status = 4"; 
                 List<MyDataANN> preArchData = await _dbService.GetListAsync<MyDataANN>(query, null);
 
-                // Убедимся, что список и BindingSource существуют (они должны быть инициализированы в TeamWork.cs)
                 if (_preArchList == null || _preArchBindingSource == null)
                 {
                     await _logger.LogErrorAsync(new NullReferenceException("_preArchList or _preArchBindingSource is null"), "PreArchLoad failed initialization check.");
@@ -301,8 +302,8 @@ namespace SewingProduction.Forms
         {
             try
             {
-                GridView artView = customGridControl1.MainView as GridView;
-                GridView annView = customGridControl2.MainView as GridView;
+                GridView artView = gridControl_unboundArts.MainView as GridView;
+                GridView annView = gridControl_wdToBind.MainView as GridView;
 
                 if (artView == null || annView == null)
                 {
@@ -356,47 +357,102 @@ namespace SewingProduction.Forms
                 );
 
                 if (result == DialogResult.No) return;
-                _artNormService.UpdateAnnIdinArticul(selectedArt, selectedAnn);
 
-                // Обновляем UI
-                if (selectedArtRow != null && selectedAnnRow != null)
+
+                // Обновляем annId в базе данных
+                _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnId); // Используем ID/Kod из объектов
+
+                // Обновляем UI:
+                if (artDataSource != null && selectedArtRow != null)
                 {
-                    selectedArtRow.BindedArt = selectedAnnRow.Articul;
+                    // 1. Добавляем привязанный артикул в список для gridView1
+                    _boundArtList?.Add(selectedArtRow); // Используем ?. на случай, если _boundArtList не инициализирован
 
-                    // Перемещаем строку в начало списка
-                    BindingList<MyDataART> artDataSourceList = artDataSource;
-                    if (artDataSourceList != null)
-                    {
-                        int index = artDataSourceList.IndexOf(selectedArtRow);
-                        if (index > 0) 
-                        {
-                            artDataSourceList.RemoveAt(index);
-                            artDataSourceList.Insert(0, selectedArtRow);
-                            customGridControl1.RefreshDataSource();
-                           
-                             // фокус на перемещенной строке
-                             if (artView.RowCount > 0) artView.FocusedRowHandle = 0; 
-                        }
-                        else
-                        { 
-                            artView.RefreshRow(artView.FocusedRowHandle); 
-                        }
-                    }
-                    else
-                    {
-                        artView.RefreshData(); 
-                    }
-
+                    // 2. Удаляем артикул из списка доступных для gridView7
+                    artDataSource.Remove(selectedArtRow);
+                }
+                else
+                {
+                    // Если вдруг artDataSource был null, все равно обновим гриды
+                    artView.RefreshData();
                     annView.RefreshData();
+                    // Обновим и gridView12 на всякий случай
+                    gridControl_binded?.RefreshDataSource(); 
                 }
 
-                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArt} привязан к РТ {selectedAnn}");
+                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.Kod} привязан к РТ {selectedAnnRow.AnnId}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при привязке артикула к РТ");
                 MessageBox.Show($"Ошибка при привязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
+        {
+            var gv_unbound_Arts = sender as GridView; 
+            if (gv_unbound_Arts == null || e.FocusedRowHandle < 0) return;
+
+            string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Kod", "");
+            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "");
+
+            int kodInt = 0;
+            int.TryParse(kod, out kodInt);
+
+            List<MyDataANN> list = await LoadWorksbyArt(kodInt, articul);
+
+            if (_myDataAnnBindingSource != null)
+            {
+                // Очищаем и заполняем BindingList, затем ResetBindings
+                _myDataAnnList.Clear(); 
+                if (list != null)
+                {
+                    foreach(var item in list) _myDataAnnList.Add(item);
+                }
+                _myDataAnnBindingSource.ResetBindings(false); 
+            }
+            else // Fallback if BindingSource isn't used (less ideal)
+            {
+                gridControl_wdToBind.DataSource = list;
+                gridView_twToBind.RefreshData(); // Ensure refresh if DataSource is set directly
+            }
+
+
+            // Явно обновляем/очищаем customGridControl3 после обновления gridView8
+            try
+            {
+                if (list != null && list.Count > 0)
+                {
+                    int rowHandleToUse = gridView_twToBind.FocusedRowHandle >= 0 ? gridView_twToBind.FocusedRowHandle : 0;
+                    if (rowHandleToUse < gridView_twToBind.RowCount)
+                    {
+                        int annIdToLoad = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_twToBind, rowHandleToUse, "AnnId", 0);
+                        if (annIdToLoad > 0)
+                        {
+                            await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annIdToLoad));
+                        }
+                        else
+                        {
+                            await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                        }
+                    }
+                    else 
+                    {
+                         await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                    }
+                }
+                else
+                {
+                    // Если загруженный список ПУСТ, очищаем customGridControl3
+                    await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка обновления customGridControl3 в gridView7_FocusedRowChanged_Internal");
+                await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>()); // Очищаем при ошибке
             }
         }
     }

@@ -29,18 +29,30 @@ namespace SewingProduction.Forms
             try
             {
                 var view = sender as GridView;
-                if (view == null || e.FocusedRowHandle < 0) return;
+                if (view == null || e.FocusedRowHandle < 0)
+                {
+                    ButtonUnboundWd.Enabled = false; 
+                    return;
+                }
 
-                // Получаем значение nzp из выбранной строки
-                int nzp = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "kolNZP", 0);
+                // Получаем объект выбранной строки
+                var selectedRow = view.GetRow(e.FocusedRowHandle) as NZPByKoddRt;
+                if (selectedRow == null)
+                {
+                    ButtonUnboundWd.Enabled = false; 
+                    await _logger.LogWarningAsync($"Не удалось получить объект NZPByKoddRt для строки {e.FocusedRowHandle}", "gridView5_FocusedRowChanged_Internal");
+                    return;
+                }
 
-                // Обновляем видимость кнопки в зависимости от значения nzp
-                //customButton3.Enabled = nzp <= 0;
-                ButtonUnboundWd.Enabled = nzp <= 0;
+                int nzp = selectedRow.kolNZP;
+                int pzt = selectedRow.PZTCount; 
 
+                // Кнопка активна, если либо нет НЗП, либо нет PZT операций
+                ButtonUnboundWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
+                ButtonUnboundWd.Enabled = false; 
                 await _logger.LogErrorAsync(ex, "Ошибка при обработке смены строки в GridView5");
             }
         }
@@ -124,9 +136,9 @@ namespace SewingProduction.Forms
                 }
 
                 // Применяем фильтр к gridView8
-                gridView8.BeginUpdate();
-                gridView8.ActiveFilterString = filterString;
-                gridView8.EndUpdate();
+                gridView_twToBind.BeginUpdate();
+                gridView_twToBind.ActiveFilterString = filterString;
+                gridView_twToBind.EndUpdate();
             }
             catch (Exception ex)
             {
@@ -156,44 +168,74 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void SafeInvoke(Control control, Action action)
-        {
-            if (control.InvokeRequired)
-            {
-                control.Invoke(action);
-            }
-            else
-            {
-                action();
-            }
-        }
-
         /// <summary>
         /// Обрабатывает смену выбранной  строки в gridView3 - разделениях труда
         /// Загружает связанные данные в другие таблицы и обновляет UI.
         /// </summary>
         private async void gridView3_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
-            if (e.FocusedRowHandle < 0)
-                return;
+            // Используем имя view из sender
+            var view = sender as GridView;
 
+            // Проверяем валидность view и rowHandle
+            if (view == null || e.FocusedRowHandle < 0)
+            {
+                // Если строка не выбрана или view невалиден, отключаем кнопку
+                ButtonArchAndCopyWd.Enabled = false;
+                return; // Выходим, если строка не выбрана
+            }
+
+            // --- Новая логика для кнопки "Архив+Копия" ---
+            var selectedItem = view.GetRow(e.FocusedRowHandle) as ArtNormN;
+            if (selectedItem != null)
+            {
+                // Кнопка НЕ доступна для статусов Архив и Предв.Архив
+                bool disableButton = selectedItem.Status == (int)Status.Archive 
+                                  || selectedItem.Status == (int)Status.PreliminaryArchive;
+                ButtonArchAndCopyWd.Enabled = !disableButton;
+            }
+            else
+            {
+                // Если не удалось получить объект строки, отключаем кнопку
+                ButtonArchAndCopyWd.Enabled = false;
+            }
+            // --- Конец новой логики ---
+            
+            // --- Существующая логика для связанных данных и картинки ---
             try
             {
-                var view = ANNgridView;
-
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                await LoadRelatedData(annId);
+                await LoadRelatedData(annId); // Загрузка связанных данных по AnnID
 
-                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(view, e.FocusedRowHandle, "Kod", "");
-                int o = 0;
-                try { o = Convert.ToInt32(kod); }
-                catch (Exception ex) { await _logger.LogErrorAsync(ex, "опять КОД это строка"); return; }
-                finally { if (o > 0) LoadGridControlData(pictureBox1, o); }
+                // Получаем Kod как строку, проверяем на null/пустоту
+                string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
+
+                if (!string.IsNullOrEmpty(kodString))
+                {
+                    // Пытаемся преобразовать в int безопасно
+                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
+                    {
+                        // Загружаем данные для картинки только если kodValue > 0
+                        // Убедись, что pictureBox1 доступен из этого контекста
+                        LoadGridControlData(pictureBox1, kodValue); 
+                    }
+                    else
+                    {
+                        // Логируем, если не удалось преобразовать или kodValue <= 0
+                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                    }
+                }
+                else
+                {
+                    // Логируем, если Kod пустой или null
+                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при смене выбранной строки в gridView3");
-                MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                 // Логируем другие неожиданные ошибки
+                await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в {view.Name} (RowHandle: {e.FocusedRowHandle})");
+                // MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); // Опционально
             }
         }
 
@@ -276,16 +318,16 @@ namespace SewingProduction.Forms
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private async void gridView7_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
-        {
-            string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Kod", "");
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
+        //private async void gridView7_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
+        //{
+        //    string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Kod", "");
+        //    string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, e.FocusedRowHandle, "Articul", "");
 
 
-            List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(Convert.ToInt32(kod), articul);
+        //    List<MyDataANN> list = loadAllCheckBox.Checked ? await LoadWorksbyArt(0, "") : await LoadWorksbyArt(Convert.ToInt32(kod), articul);
 
-            customGridControl2.DataSource = list; 
-        }
+        //    customGridControl2.DataSource = list; 
+        //}
         private void gridControl2_Leave_Internal(object sender, EventArgs e)
         {
             selectedRowHandle = ANNgridView.FocusedRowHandle;
@@ -502,13 +544,13 @@ namespace SewingProduction.Forms
 
         private async void customCheckBox4_CheckedChanged_Internal(object sender, EventArgs e)
         {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView7, gridView7.FocusedRowHandle, "kod", 0);
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView7, gridView7.FocusedRowHandle, "articul", "");
+            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kod", 0);
+            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "articul", "");
 
             List<MyDataANN> list = loadAllCheckBox.Checked ?
                 await LoadWorksbyArt(0, "") :
                 await LoadWorksbyArt(kod, articul);
-            customGridControl2.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
+            gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
         }
 
         private void simpleButton2_Click_Internal(object sender, EventArgs e)

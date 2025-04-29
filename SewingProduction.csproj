@@ -434,7 +434,6 @@
     <Compile Include="form\TeamWork\Models\NZP.cs" />
     <Compile Include="form\TeamWork\Models\OborudShvModel.cs" />
     <Compile Include="form\TeamWork\Models\PodrVyazModel.cs" />
-    <Compile Include="form\TeamWork\Services\ArtNormService.cs" />
     <Compile Include="form\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>

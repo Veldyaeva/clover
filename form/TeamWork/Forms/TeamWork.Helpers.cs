@@ -34,18 +34,18 @@ namespace SewingProduction.Forms
             _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
             _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
             _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView7, "gridView7Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView7Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView_twToBind, "gridView8Layout.xml");
             _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridView9Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView10, "gridView10Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridViewNZP, "gridView10Layout.xml");
             _gridHelper.LoadGridViewSettings(gridView11, "gridView11Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView12, "gridView12Layout.xml");
-            _gridHelper.LoadGridViewSettings(customGridControl1.MainView as GridView, "customGridControl1Layout.xml");
-            _gridHelper.LoadGridViewSettings(customGridControl2.MainView as GridView, "customGridControl2Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridView_binded, "gridView12Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridControl_unboundArts.MainView as GridView, "customGridControl1Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridControl_wdToBind.MainView as GridView, "customGridControl2Layout.xml");
             _gridHelper.LoadGridViewSettings(customGridControl3.MainView as GridView, "customGridControl3Layout.xml");
             _gridHelper.SaveGridViewSettings(gridControlPreArch.MainView as GridView, "customGridControl4Layout.xml");
-            _gridHelper.LoadGridViewSettings(customGridControl5.MainView as GridView, "customGridControl5Layout.xml");
-            _gridHelper.SaveGridViewSettings(customGridControl6.MainView as GridView, "customGridControl6Layout.xml");
+            _gridHelper.LoadGridViewSettings(gridControlNZP.MainView as GridView, "customGridControl5Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridControl_binded.MainView as GridView, "customGridControl6Layout.xml");
         }
         private void SaveGridSettings()
         {
@@ -55,18 +55,18 @@ namespace SewingProduction.Forms
             _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
             _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
             _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView7, "gridView7Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView7Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridView_twToBind, "gridView8Layout.xml");
             _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridView9Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView10, "gridView10Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridViewNZP, "gridView10Layout.xml");
             _gridHelper.SaveGridViewSettings(gridView11, "gridView11Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView12, "gridView12Layout.xml");
-            _gridHelper.SaveGridViewSettings(customGridControl1.MainView as GridView, "customGridControl1Layout.xml");
-            _gridHelper.SaveGridViewSettings(customGridControl2.MainView as GridView, "customGridControl2Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridView_binded, "gridView12Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridControl_unboundArts.MainView as GridView, "customGridControl1Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridControl_wdToBind.MainView as GridView, "customGridControl2Layout.xml");
             _gridHelper.SaveGridViewSettings(customGridControl3.MainView as GridView, "customGridControl3Layout.xml");
             _gridHelper.SaveGridViewSettings(gridControlPreArch.MainView as GridView, "customGridControl4Layout.xml");
-            _gridHelper.SaveGridViewSettings(customGridControl5.MainView as GridView, "customGridControl5Layout.xml");
-            _gridHelper.SaveGridViewSettings(customGridControl6.MainView as GridView, "customGridControl6Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridControlNZP.MainView as GridView, "customGridControl5Layout.xml");
+            _gridHelper.SaveGridViewSettings(gridControl_binded.MainView as GridView, "customGridControl6Layout.xml");
 
             // Save split container settings
             _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl1, "splitContainer1Layout.xml");

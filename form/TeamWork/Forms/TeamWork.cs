@@ -1,44 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Threading;
-using System.Windows.Forms;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraScheduler.Drawing;
-using DevExpress.XtraTab;
-using SewingProduction.form;
 using SewingProduction.Helpers;
-using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
-using SewingProduction.Helpers;
-using DevExpress.XtraExport.Helpers;
-using System.Threading.Tasks;
-using DevExpress.Data.Filtering;
-using DevExpress.CodeParser;
-using SewingProduction.form.TeamWork;
-using DevExpress.XtraBars.Customization;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using NLog;
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Z.Dapper.Plus;
-using DevExpress.XtraCharts;
-using SewingProduction.Interfaces;
-using System.IO;
-using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.Forms
 {
@@ -73,6 +41,10 @@ namespace SewingProduction.Forms
         private BindingSource _myDataArtBindingSource;
         private BindingList<MyDataANN> _myDataAnnList; 
         private BindingSource _myDataAnnBindingSource;
+
+        private BindingList<MyDataART> _boundArtList;
+        private BindingSource _boundArtBindingSource;
+
         public TeamWork()
 
         {
@@ -93,40 +65,53 @@ namespace SewingProduction.Forms
             _preArchBindingSource = new BindingSource { DataSource = _preArchList };
             gridControlPreArch.DataSource = _preArchBindingSource;
             // Настройка гридов
-            if (customGridControl1 != null && customGridControl1.MainView is GridView view7)
+            if (gridControl_unboundArts != null)
             {
-                view7.OptionsSelection.MultiSelect = false;
-                view7.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+                gridView_unboundArts.OptionsSelection.MultiSelect = false;
+                gridView_unboundArts.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
             }
 
-            if (customGridControl2 != null && customGridControl2.MainView is GridView view8)
+            if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView view8)
             {
                 view8.OptionsSelection.MultiSelect = false;
                 view8.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
             }
-            this.gridView7.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(customGridControl1, e);
-            this.gridView8.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(customGridControl2, e);
+            this.gridView_unboundArts.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
+            this.gridView_twToBind.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             _myDataArtList = new BindingList<MyDataART>();
             _myDataArtBindingSource = new BindingSource { DataSource = _myDataArtList };
-            if (customGridControl1 != null)
+            if (gridControl_unboundArts != null)
             {
-                customGridControl1.DataSource = _myDataArtBindingSource;
+                gridControl_unboundArts.DataSource = _myDataArtBindingSource;
             }
 
             _myDataAnnList = new BindingList<MyDataANN>();
             _myDataAnnBindingSource = new BindingSource { DataSource = _myDataAnnList };
-            if (customGridControl2 != null)
+            if (gridControl_wdToBind != null)
             {
-                customGridControl2.DataSource = _myDataAnnBindingSource;
+                gridControl_wdToBind.DataSource = _myDataAnnBindingSource;
+            }
+
+            _boundArtList = new BindingList<MyDataART>();
+            _boundArtBindingSource = new BindingSource { DataSource = _boundArtList };
+            if (gridControl_binded != null) 
+            {
+                gridControl_binded.DataSource = _boundArtBindingSource;
             }
         }
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
+            // Отписываемся от события перед загрузкой данных
+            if (ANNgridView != null) 
+            {
+                ANNgridView.FocusedRowChanged -= gridView3_FocusedRowChanged;
+            }
+
             try
             {
                 // Проверяем инициализацию компонентов
-                if (customGridControl1 == null || customGridControl2 == null || ANNgridControl == null)
+                if (gridControl_unboundArts == null || gridControl_wdToBind == null || ANNgridControl == null)
                 {
                     throw new InvalidOperationException("Критические компоненты формы не инициализированы");
                 }
@@ -138,18 +123,18 @@ namespace SewingProduction.Forms
                 _bindingSource.DataSource = _bindingList;
                 ANNgridControl.DataSource = _bindingSource;
                 _nzpByKoddRtSource.DataSource = _nzpList;
-                customGridControl5.DataSource = _nzpByKoddRtSource;
+                gridControlNZP.DataSource = _nzpByKoddRtSource;
 
                 // Загружаем данные
                 await LoadWorkDivisions();
-                sortGridView(gridView1);
+                sortGridView(ANNgridView); 
                 sortGridView(gridView4);
-                sortGridView(gridView3);
+                // sortGridView(gridView3); 
 
                 // Обновляем UI
                 ANNgridControl.RefreshDataSource();
-                customGridControl1.RefreshDataSource();
-                customGridControl2.RefreshDataSource();
+                gridControl_unboundArts.RefreshDataSource();
+                gridControl_wdToBind.RefreshDataSource();
 
                 //// Привязываем комментарий
                 //if (commentRichTextBox != null)
@@ -178,6 +163,19 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы");
                 MessageBox.Show($"Ошибка при инициализации формы: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+            finally
+            {
+                // Подписываемся обратно на событие ПОСЛЕ загрузки данных
+                if (ANNgridView != null)
+                {
+                    ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
+                    // Инициируем первую обработку, если необходимо
+                    if (ANNgridView.FocusedRowHandle >= 0)
+                    {
+                         gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -187,7 +185,7 @@ namespace SewingProduction.Forms
         {
             switch (xtraTabControl1.SelectedTabPage.Name)
             {
-                case "xtraTabPageWorkDivisions":
+                case "TabPage1":// "xtraTabPageWorkDivisions":
                     await LoadWorkDivisions();
                     break;
 
@@ -238,9 +236,9 @@ namespace SewingProduction.Forms
         { 
             gridView5_FocusedRowChanged_Internal(sender, e); 
         }
-        private async void gridView7_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            gridView7_FocusedRowChanged_Internal(sender, e);
+            gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
         }
         private void Filter_CheckedChanged(object sender, EventArgs e)
         {

@@ -1,4 +1,4 @@
-using Dapper;
+﻿using Dapper;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using DataTable = System.Data.DataTable;
 
@@ -32,6 +33,38 @@ namespace SewingProduction.Services
             _dbHelper = dbHelper ?? throw new ArgumentNullException(nameof(dbHelper));
             _dbService = new DbService(_dbHelper);
 
+            var map = new CustomPropertyTypeMap(
+                typeof(ArtNormN),
+                (type, columnName) =>
+                {
+                    var prop = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                   .FirstOrDefault(p => p.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
+
+                    if (prop != null && !Attribute.IsDefined(prop, typeof(System.ComponentModel.DataAnnotations.Schema.NotMappedAttribute)))
+                        return prop;
+
+                    columnName = columnName.ToLower();
+
+                    if (columnName == "grup") return type.GetProperty(nameof(ArtNormN.Group));
+                    if (columnName == "sek_shv") return type.GetProperty(nameof(ArtNormN.SekShv));
+                    if (columnName == "sek_vyaz5") return type.GetProperty(nameof(ArtNormN.SekVyaz5));
+                    if (columnName == "sek_vyaz6") return type.GetProperty(nameof(ArtNormN.SekVyaz6));
+                    if (columnName == "sek_vyaz7") return type.GetProperty(nameof(ArtNormN.SekVyaz7));
+                    if (columnName == "sek_vyaz10") return type.GetProperty(nameof(ArtNormN.SekVyaz10));
+                    if (columnName == "sek_vyaz12") return type.GetProperty(nameof(ArtNormN.SekVyaz12));
+                    if (columnName == "sek_vyazo") return type.GetProperty(nameof(ArtNormN.SekVyazo));
+                    if (columnName == "sek_vyaz") return type.GetProperty(nameof(ArtNormN.SekVyaz));
+                    if (columnName == "data_sozd") return type.GetProperty(nameof(ArtNormN.dateCreate));
+                    if (columnName == "data_obn") return type.GetProperty(nameof(ArtNormN.dateUpdate));
+                    if (columnName == "sek_kr") return type.GetProperty(nameof(ArtNormN.SekKr));
+                    if (columnName == "parentid") return type.GetProperty(nameof(ArtNormN.ParentId));
+                    if (columnName == "statustext") return type.GetProperty(nameof(ArtNormN.StatusText));
+                    if (columnName == "komment") return type.GetProperty(nameof(ArtNormN.Komment));
+
+                    return null;
+                });
+
+            SqlMapper.SetTypeMap(typeof(ArtNormN), map);
         }
         #region мои методы
         public async Task DeleteByAnnId(string tableName, int annId)
@@ -49,52 +82,22 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-        public async Task<List<ArtNormN>> GetArtNormData()
+            public async Task<List<ArtNormN>> GetArtNormData()
         {
-            var map = new CustomPropertyTypeMap(
-               typeof(ArtNormN),
-               (type, columnName) =>
-               {
-                   var prop = type.GetProperties().FirstOrDefault(p => p.Name.Equals(columnName, StringComparison.OrdinalIgnoreCase));
-                   if (prop != null && !Attribute.IsDefined(prop, typeof(NotMappedAttribute))) return prop;
-
-                   if (columnName.Equals("grup", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.Group));
-                   if (columnName.Equals("sek_shv", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekShv));
-                   if (columnName.Equals("sek_vyaz5", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz5));
-                   if (columnName.Equals("sek_vyaz6", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz6));
-                   if (columnName.Equals("sek_vyaz7", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz7));
-                   if (columnName.Equals("sek_vyaz10", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz10));
-                   if (columnName.Equals("sek_vyaz12", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz12));
-                   if (columnName.Equals("sek_vyazo", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyazo));
-                   if (columnName.Equals("sek_vyaz", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekVyaz));
-                   if (columnName.Equals("data_sozd", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.dateCreate));
-                   if (columnName.Equals("data_obn", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.dateUpdate));
-                   if (columnName.Equals("sek_kr", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.SekKr));
-                   if (columnName.Equals("parentId", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.ParentId));
-                   if (columnName.Equals("statusText", StringComparison.OrdinalIgnoreCase)) return type.GetProperty(nameof(ArtNormN.StatusText));
-
-                   return null;
-               });
-
-            SqlMapper.SetTypeMap(typeof(ArtNormN), map);
-
             string query = @"
-            SELECT 
-                SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
-                data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-                sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-                data_sozd, diz, constr 
-            FROM ArtNormNView 
-            JOIN status_ann ON status = status_id";
+        SELECT 
+            annId, kod, grup, articul, mod, sek, sek_vyaz, 
+            data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+            sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+            data_sozd, diz, constr
+           
+        FROM ArtNormNView JOIN status_ann ON status = status_id";
+
             using (var connecion = _dbHelper.GetConnection())
             {
                 var res = await connecion.QueryAsync<ArtNormN>(query);
                 return res.ToList();
             }
-            //finally
-            //{
-            //     SqlMapper.SetTypeMap(typeof(ArtNormN), null);
-            //}
         }
 
         public void UpdateAnnIdinArticul(string kod, int annId)
@@ -106,7 +109,7 @@ namespace SewingProduction.Services
         /// <summary>
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
-        /// <param name="kod"></param>
+        /// <param name="kodd"></param>
         /// <returns></returns>
         public async Task ResetAnnIdinArticul(int kod)
         {
@@ -148,14 +151,14 @@ namespace SewingProduction.Services
         public async Task<ArtNormN> GetArtNormDataById(int annId)
         {
             try
-            {
-                string query = @"
-                            SELECT 
-                                SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
-                                data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-                                sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-                                data_sozd, diz, constr 
-                            FROM ArtNormNView 
+        {
+            string query = @"
+        SELECT 
+            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
+            data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
+            sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
+            data_sozd, diz, constr 
+        FROM ArtNormNView 
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
                 return await _dbService.GetEntityAsync<ArtNormN>(query, new { annId });
@@ -208,19 +211,46 @@ namespace SewingProduction.Services
         /// <returns>Возвращает таблицу артикулов</returns>
         public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool all)
         {
-            string query = "";
-            query = @"SELECT  
-                                        SUBSTRING(kod, 1, 7) AS kod, annId, grup, articul, mod, sek, sek_vyaz,
-                    data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-                    sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-                    data_sozd, diz, constr FROM ArtNormNView JOIN status_ann ON status=status_id WHERE status!=3";
+            string query = @"
+                SELECT  
+                    SUBSTRING(v.kod, 1, 7) AS kod, v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
+                    v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
+                    v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, 
+                    v.data_sozd, v.diz, v.constr 
+                FROM ArtNormNView v
+                JOIN status_ann sa ON v.status = sa.status_id 
+                WHERE v.status != 3"; // Статус "архивное"
+
+            string finalQuery;
+            object parameters = null; 
+
             if (!all)
             {
-                query += " AND(annId IN(SELECT annId FROM View_sp_articul WHERE kodd_rt = '@kod'))";
+                // Используем EXISTS вместо IN (SELECT...) для потенциальной оптимизации
+                query += @" 
+                  AND EXISTS (SELECT 1
+                              FROM View_sp_articul spa
+                              WHERE spa.annId = v.annId AND spa.kodd_rt = @KodParam)"; 
+                finalQuery = query;
+                parameters = new { KodParam = kod }; // Параметр для Dapper
             }
-            return await _dbHelper.GetConnection().QueryAsync<MyDataANN>(query).ContinueWith(t => t.Result.ToList());
-        }
+            else
+            {
+                // Если all = true, условие по kodd_rt не добавляем
+                finalQuery = query;
+            }
 
+            // Оборачиваем получение и использование соединения в using
+            using (var connection = _dbHelper.GetConnection()) 
+            {
+                // GetConnection уже открывает соединение
+                var result = await connection.QueryAsync<MyDataANN>(finalQuery, parameters);
+                return result.ToList(); 
+                // Соединение будет автоматически закрыто/освобождено здесь,
+                // даже если произойдет ошибка во время QueryAsync
+            } 
+            // Убираем .ContinueWith - он здесь не нужен и менее читаем, чем прямой await + return
+        }
 
         public async Task<List<MyDataANN>> GetArtNormDataByArticulPrefix(string artPrefix)
         {
@@ -229,7 +259,7 @@ namespace SewingProduction.Services
             var parameters = new
             {
                 StatusArchive = (int)Status.Archive,
-                ArtPattern = artPrefix + "%"
+                ArtPattern = artPrefix + "%" 
             };
 
             using (var connection = _dbHelper.GetConnection())
@@ -366,15 +396,28 @@ namespace SewingProduction.Services
         }
         public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId)
         {
-            var nzpList = (await _dbHelper.GetConnection()
-                .QueryAsync<NZPByKoddRt>("EXEC dbo.GetNZPByKoddRT @xAnnID", new { xAnnID = annId }))
-                .ToList();
+            List<NZPByKoddRt> nzpList;
+            Dictionary<string, int> pztCounts;
 
-            var pztCounts = (await _dbHelper.GetConnection()
-                .QueryAsync<(string kod, int PztCount)>("EXEC dbo.GetPztCountsByKoddRT @xAnnID", new { xAnnID = annId }))
-                .ToDictionary(x => x.kod, x => x.PztCount);
+            // Оборачиваем получение и использование соединения в using
+            using (var connection = _dbHelper.GetConnection())
+            {
+                // Выполняем первый запрос и ждем его
+                var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
+                    "dbo.GetNZPByKoddRT",
+                    new { xAnnID = annId },
+                    commandType: CommandType.StoredProcedure);
+                nzpList = nzpResult.ToList();
 
-            // Объединение
+                // Выполняем второй запрос на том же соединении и ждем его
+                var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                    "dbo.GetPztCountsByKoddRT",
+                    new { xAnnID = annId },
+                    commandType: CommandType.StoredProcedure);
+                pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+            } // Соединение будет автоматически закрыто/освобождено здесь
+
+            // Объединение результатов
             foreach (var row in nzpList)
             {
                 if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
@@ -407,4 +450,3 @@ namespace SewingProduction.Services
 
     }
 }
- 

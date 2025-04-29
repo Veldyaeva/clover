@@ -53,6 +53,7 @@ namespace SewingProduction.Forms
 
 
                 _bindingSource.DataSource = _bindingList;
+
                 designerTextBox.DataBindings.Clear();
                 designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioDiz), true, DataSourceUpdateMode.OnPropertyChanged);
                 try
@@ -73,6 +74,7 @@ namespace SewingProduction.Forms
                     if (e.Value is FioModel fio)
                         e.Value = fio.Fio;
                 };
+                commentRichTextBox.DataBindings.Clear();
                 commentRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Komment), false);
 
                 // Обновляем источник данных
@@ -162,11 +164,11 @@ namespace SewingProduction.Forms
             await LoadAndBindFioListsAsync();
 
             List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            await GridHelper.LoadListDataAsync(customGridControl5, sparticulBindingSource, nzpData);
+            await GridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
             _nzpByKoddRtSource.DataSource = nzpData;
             _nzpByKoddRtSource.ResetBindings(false);
-            customGridControl5.DataSource = _nzpByKoddRtSource;
-            customGridControl5.RefreshDataSource();
+            gridControlNZP.DataSource = _nzpByKoddRtSource;
+            gridControlNZP.RefreshDataSource();
             GetNZPStatus(nzpData);
 
             // Сортируем каждую таблицу отдельно
@@ -525,9 +527,9 @@ namespace SewingProduction.Forms
         private async Task<bool> checkNzp(int selectedAnnId)
         {
             bool hasNZP = false;
-            if (gridView10 != null && gridView10.FocusedRowHandle >= 0)
+            if (gridViewNZP != null && gridViewNZP.FocusedRowHandle >= 0)
             {
-                object nzpValue = gridView10.GetRowCellValue(gridView10.FocusedRowHandle, "kolNZP");
+                object nzpValue = gridViewNZP.GetRowCellValue(gridViewNZP.FocusedRowHandle, "kolNZP");
                 if (nzpValue != null && nzpValue != DBNull.Value)
                 {
                     int nzp = Convert.ToInt32(nzpValue);
@@ -597,7 +599,7 @@ namespace SewingProduction.Forms
         {
             try
             {
-                var view = customGridControl5.MainView as GridView;
+                var view = gridControlNZP.MainView as GridView;
                 if (view == null) return;
 
                 var selectedRow = _nzpByKoddRtSource.Current as NZPByKoddRt;
@@ -617,7 +619,7 @@ namespace SewingProduction.Forms
                 // Обновление данных в таблице после отвязки
                 _nzpByKoddRtSource.RemoveCurrent();
                 _nzpByKoddRtSource.ResetBindings(false);
-                customGridControl5.RefreshDataSource();
+                gridControlNZP.RefreshDataSource();
                 MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 await _logger.LogEventAsync($"Артикул отвязан от РТ", "ResetBtnClick");
 

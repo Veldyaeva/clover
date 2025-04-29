@@ -34,6 +34,7 @@ namespace SewingProduction.Helpers
                 grid.Invoke((MethodInvoker)(() =>
                 {
                     source.DataSource = data;
+                    source.ResetBindings(false);
                     grid.DataSource = source;
                     grid.RefreshDataSource();
                 }));
