@@ -1352,5 +1352,15 @@ namespace SewingProduction.form
         {
             this.Close();
         }
+
+        private void customGroupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void customLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

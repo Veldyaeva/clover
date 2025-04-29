@@ -558,7 +558,11 @@ namespace SewingProduction
 
         public void ApplyTheme()
         {
-            throw new NotImplementedException();
+            // Устанавливаем цвет текста и шрифт из текущей темы
+            this.ForeColor = ThemeManager.ActiveTheme.LabelTextColor; // Используем цвет для Label
+            this.Font = ThemeManager.SharedSettings.DefaultFont;
+            this.BorderColor = ThemeManager.ActiveTheme.LabelTextColor; // Можно сделать цвет рамки таким же
+            Invalidate(); // Перерисовать контрол с новыми цветами
         }
     }
     /// <summary>
