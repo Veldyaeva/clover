@@ -35,7 +35,7 @@ namespace SewingProduction.form
         private readonly ILogger _logger = new FileLogger();
         private int _mode;
         private ArtNormN _currentAnnData;
-        private ArtNormN _originalAnnData; // Поле для хранения оригинала
+        private ArtNormN _originalAnnData; 
 
         private BindingList<NormRasz> _normRaszList;
         private BindingSource _normRaszBindingSource;
@@ -252,6 +252,11 @@ namespace SewingProduction.form
 
                 await Task.WhenAll(gridTask, comboBoxTask, bindingsTask);
 
+                if (gridViewKont != null && gridViewKont.Columns["Text"] != null)
+                {
+                    gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
+                }
+
                 await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
                 await LoadAnnDataAsync();
                 if (_bufferWorkDivision > 0)
@@ -378,8 +383,8 @@ namespace SewingProduction.form
 
                     LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
                     LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
-                    //LoadList(kontList, _normKontList, nameof(NormKont.kontId), isCopyOrBuffer);
-                    //LoadList(dopObrList, _normDopObrList, nameof(NormDopObr.dopObrId), isCopyOrBuffer);
+                    LoadList(kontTask.Result, _normKontList, nameof(NormKont.nkId), isCopyOrBuffer);
+                    LoadList(dopObrTask.Result, _normDopObrList, nameof(NormDopObr.doId), isCopyOrBuffer);
 
                     // Обновляем привязки
                     _normRaszBindingSource.ResetBindings(false);
@@ -819,66 +824,7 @@ namespace SewingProduction.form
         #endregion
 
         #region Kont
-        private async void GridView3_InitNewRow(object sender, InitNewRowEventArgs e)
-        {
-            var gridView = sender as GridView;
-            if (gridView == null)
-                return;
-
-            try
-            {
-                // Проверяем существующие строки
-                bool hasNumberingRow = false;
-                bool hasPackingRow = false;
-
-                for (int i = 0; i < gridView.DataRowCount; i++)
-                {
-                    var rowText = gridView.GetRowCellValue(i, "Text")?.ToString();
-                    if (rowText == "Пронумеровать деталь")
-                        hasNumberingRow = true;
-                    else if (rowText == "Номер пачки")
-                        hasPackingRow = true;
-                }
-
-                // Добавляем первую строку, если её нет
-                if (!hasNumberingRow)
-                {
-                    await this.InvokeAsync(() =>
-                    {
-                        gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-                        gridView.SetRowCellValue(e.RowHandle, "Text", "Пронумеровать деталь");
-                        gridView.UpdateCurrentRow();
-                    });
-                }
-
-                // Добавляем вторую строку, если её нет
-                if (!hasPackingRow)
-                {
-                    await this.InvokeAsync(() =>
-                    {
-                        // Добавляем новую строку напрямую в список данных
-                        var normKont = new NormKont
-                        {
-                            AnnId = _newAnnId,
-                            Text = "Номер пачки"
-                        };
-                        normKont.IsNew = true;
-                        _normKontList.Add(normKont);
-                        _normKontBindingSource.ResetBindings(false);
-                    });
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в GridView3");
-                await this.InvokeAsync(() =>
-                {
-                    MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                });
-            }
-        }
-
-        private void GridView3_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
+        private void gridViewKont_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
             if (e.Row is NormKont normKont)
             {
@@ -892,113 +838,178 @@ namespace SewingProduction.form
             }
         }
 
-        private async void GridView3_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        private async void gridViewKont_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
+             e.Valid = true; 
+        }
 
+        private void gridViewKont_ShowingEditor(object sender, CancelEventArgs e)
+        {
+            GridView view = sender as GridView;
+            if (view == null) return;
+
+            if (view.IsNewItemRow(view.FocusedRowHandle))
+            {
+                e.Cancel = true; 
+
+                if (_isSelectionFormOpen) return;
+
+                try
+                {
+                    _isSelectionFormOpen = true;
+
+                    string choice1 = "Пронумеровать деталь";
+                    string choice2 = "Номер пачки";
+                    // Проверяем, какие строки уже есть
+                    bool hasChoice1 = _normKontList.Any(nk => nk.Text == choice1);
+                    bool hasChoice2 = _normKontList.Any(nk => nk.Text == choice2);
+
+                    List<string> options = new List<string>();
+                    if (!hasChoice1) options.Add(choice1);
+                    if (!hasChoice2) options.Add(choice2);
+
+                    string selectedText = null;
+
+                    if (options.Count == 2)
+                    {
+                        DialogResult choiceResult = MessageBox.Show($"Добавить '{options[0]}'?", "Выбор операции", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                        if (choiceResult == DialogResult.Yes)
+                        {
+                            selectedText = options[0];
+                        }
+                        else if (choiceResult == DialogResult.No)
+                        {
+                             DialogResult choiceResult2 = MessageBox.Show($"Добавить '{options[1]}'?", "Выбор операции", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                             if (choiceResult2 == DialogResult.Yes)
+                             {
+                                 selectedText = options[1];
+                             }
+                        }
+                    }
+                    else if (options.Count == 1)
+                    {
+                        selectedText = options[0]; 
+                        MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Обе возможные строки уже добавлены.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+
+                    if (selectedText != null)
+                    {
+                        var newKont = new NormKont
+                        {
+                            AnnId = _newAnnId,
+                            Text = selectedText,
+                            IsNew = true 
+                        };
+                        _normKontList.Add(newKont);
+                        _normKontBindingSource.ResetBindings(false); // Обновляем грид
+                    }
+                }
+                finally
+                {
+                    _isSelectionFormOpen = false;
+                }
+            }
+            else if (view.FocusedColumn.FieldName == "Text")
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                e.Cancel = false;
+            }
         }
 
         #endregion
 
-        //#region Dop
-        //private void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null)
-        //        return;
-
-        //    // Проверяем, есть ли уже строки в таблице
-        //    if (gridView.DataRowCount > 0)
-        //    {
-        //        // Если есть хотя бы одна строка, удаляем новую строку
-        //        gridView.DeleteRow(e.RowHandle);
-        //        return;
-        //    }
-
-        //    try
-        //    {
-        //        // Заполняем значения в текущей новой строке
-        //        gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-        //        gridView.SetRowCellValue(e.RowHandle, "Text", "Дополнительная обработка");
-        //        gridView.UpdateCurrentRow();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger.LogErrorAsync(ex, "Ошибка при добавлении новой строки в GridView4");
-        //        MessageBox.Show($"Ошибка при добавлении новой строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
-
-        //private void GridView4_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        normDopObr.AnnId = _newAnnId;
-        //        gridViewDopObr.UpdateCurrentRow();
-        //    }
-        //}
-
-        //private async void GridView4_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        try
-        //        {
-        //            // Убеждаемся что AnnId установлен
-        //            normDopObr.AnnId = _newAnnId;
-
-        //            // Если это новая запись (Kod пустой), сохраняем в БД
-        //            if (string.IsNullOrEmpty(normDopObr.Kod))
-        //            {
-        //              //  normDopObr.Kod = await _artNormService.InsertNormDopObrAsync(normDopObr);
-        //                if (string.IsNullOrEmpty(normDopObr.Kod))
-        //                {
-        //                    e.Valid = false;
-        //                    e.ErrorText = "Ошибка при сохранении записи в базу данных";
-        //                }
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            e.Valid = false;
-        //            e.ErrorText = $"Ошибка: {ex.Message}";
-        //            await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-        //        }
-        //    }
-        //}
-        //#endregion
-
-        private async void GridView4_InitNewRow(object sender, InitNewRowEventArgs e)
+        #region DopObr
+        private void gridViewDopObr_ShowingEditor(object sender, CancelEventArgs e)
         {
-            var gridView = sender as GridView;
-            if (gridView == null)
-                return;
+            GridView view = sender as GridView;
+            if (view == null) return;
 
-            try
+            if (view.IsNewItemRow(view.FocusedRowHandle))
             {
-                // Заполняем значения новой строки
-                gridView.SetRowCellValue(e.RowHandle, "AnnId", _newAnnId);
-                gridView.SetRowCellValue(e.RowHandle, "Text", "Дополнительная обработка");
+                e.Cancel = true;
 
-                // Обновляем строку в гриде
-                gridView.UpdateCurrentRow();
+                if (_isSelectionFormOpen) return;
+
+                try
+                {
+                    _isSelectionFormOpen = true;
+
+                    if (_normDopObrList == null || _normDopObrList.Count == 0)
+                    {
+                        var newDopObr = new NormDopObr
+                        {
+                            AnnId = _newAnnId,
+                            IsNew = true 
+                        };
+                        _normDopObrList.Add(newDopObr);
+                        _normDopObrBindingSource.ResetBindings(false);
+                        MessageBox.Show("Добавлена строка дополнительной обработки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("В таблице дополнительной обработки может быть только одна строка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                finally
+                {
+                    _isSelectionFormOpen = false;
+                }
             }
-            catch (Exception ex)
+            else
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при инициализации новой строки в GridView4");
-                MessageBox.Show($"Ошибка при добавлении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Cancel = false;
             }
         }
 
-        private async void GridView4_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        private async void gridViewDopObr_KeyDown(object sender, KeyEventArgs e)
+        {
+             GridView view = sender as GridView;
+             if (view == null) return;
+
+             if (e.KeyCode == Keys.Delete && view.FocusedRowHandle >= 0)
+             {
+                 if (MessageBox.Show("Удалить строку дополнительной обработки?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                 {
+                     var rowToDelete = view.GetRow(view.FocusedRowHandle) as NormDopObr;
+                     if (rowToDelete != null)
+                     {
+                         try
+                         {
+                             if (!rowToDelete.IsNew && rowToDelete.doId > 0)
+                             {
+                                 await _dbService.DeleteEntityAsync(TableNames.Obr, TableNames.ObrId, rowToDelete);
+                             }
+                             _normDopObrList.Remove(rowToDelete);
+                             _normDopObrBindingSource.ResetBindings(false);
+                             view.RefreshData(); 
+                             _hasUnsavedChanges = true;
+                         }
+                         catch(Exception ex)
+                         {
+                              await _logger.LogErrorAsync(ex, "Ошибка при удалении строки NormDopObr");
+                              MessageBox.Show($"Ошибка удаления: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                         }
+                     }
+                 }
+                 e.Handled = true; 
+             }
+        }
+
+        private async void gridViewDopObr_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
             if (e.Row is NormDopObr normDopObr)
             {
                 try
                 {
                     normDopObr.AnnId = _newAnnId;
-
-                    // Вызываем сохранение строки
-                    await SaveSingleNormDopObrAsync(normDopObr);
+                    e.Valid = true;
                 }
                 catch (Exception ex)
                 {
@@ -1009,48 +1020,20 @@ namespace SewingProduction.form
             }
         }
 
-        private async Task SaveSingleNormDopObrAsync(NormDopObr normDopObr)
+        private void gridViewDopObr_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            try
+            if (e.Row is NormDopObr normDopObr)
             {
-                // Удаляем старую запись по AnnId
-                await _artNormService.DeleteByAnnId("norm_dop_obr", normDopObr.AnnId);
-
-                // Вставляем новую запись
-                await _dbService.InsertEntityAsync(TableNames.Obr, TableNames.ObrId, normDopObr);//InsertDopObrAsync(normDopObr);
-
-                await ShowStatusMessageAsync("Дополнительная обработка успешно сохранена");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при сохранении NormDopObr");
-                throw; // Бросаем наверх, чтобы ValidateRow отработал корректно
+                normDopObr.AnnId = _newAnnId;
+                if (!normDopObr.IsNew)
+                {
+                    normDopObr.IsModified = true;
+                }
+                gridViewDopObr.UpdateCurrentRow(); 
             }
         }
 
-        private async Task ShowStatusMessageAsync(string message)
-        {
-            if (statusLabel != null)
-            {
-                statusLabel.Text = message;
-                await Task.Delay(3000); 
-                statusLabel.Text = "";
-            }
-        }
-
-
-        //private void HighlightNewRow(GridView gridView, int rowHandle)
-        //{
-        //    gridView.FocusedRowHandle = rowHandle;
-        //    gridView.Appearance.FocusedRow.BackColor = Color.LightGreen;
-        //    Task.Delay(2000).ContinueWith(_ =>
-        //    {
-        //        gridView.Invoke(new Action(() =>
-        //        {
-        //            gridView.Appearance.FocusedRow.BackColor = Color.Empty;
-        //        }));
-        //    });
-        //}
+        #endregion
 
         private async void btnOK_Click(object sender, EventArgs e)
         {
@@ -1061,7 +1044,7 @@ namespace SewingProduction.form
             if (!ValidateForm())
             {
                 await ShowStatusMessage("Ошибки заполнения формы");
-                return; // Останавливаем сохранение, если форма заполнена неправильно
+                return; 
             }
             try
             {
@@ -1182,9 +1165,6 @@ namespace SewingProduction.form
             // Обновляем существующие записи через BulkUpdate
             if (existingItems.Any())
             {
-                // Убеждаемся, что AnnId установлен правильно (если он мог измениться)
-                // Но обычно для существующих записей AnnId не меняется.
-
                 using (var connection = _dbHelper.GetConnection()) 
                 {
                      await _logger.LogEventAsync($"[{itemTypeName}] Starting BulkUpdate for {existingItems.Count} items...\", \"SaveListAsync");
@@ -1221,7 +1201,6 @@ namespace SewingProduction.form
         /// </summary>
         private async void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Use LookUpEdit and EditValue
             if (sender is DevExpress.XtraEditors.LookUpEdit lookUpEdit && lookUpEdit.EditValue != null && lookUpEdit.EditValue != DBNull.Value)
             {
                 try
@@ -1239,22 +1218,6 @@ namespace SewingProduction.form
                         fieldName = "diz";
                         await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
-                    
-                    //if (!string.IsNullOrEmpty(fieldName) && _bufferWorkDivision > 0)
-                    //{
-                    //    if (_mode == (int)Mode.Edit)
-                    //    {
-                    //        await _artNormService.UpdateAnnId(TableNames.Ann, _bufferWorkDivision, fieldName, selectedId);
-                    //        await _logger.LogEventAsync($"Обновлено поле {fieldName} для ID {_bufferWorkDivision} значением {selectedId}", "ComboBox_SelectedIndexChanged");
-                            
-                    //        // Обновляем UI после изменения
-                    //        comboBox.Refresh();
-                    //    }
-                    //    else
-                    //    {
-                    //        await _logger.LogEventAsync($"Выбрано значение {fieldName}={selectedId} для нового разделения труда", "ComboBox_SelectedIndexChanged");
-        //    }
-        //}
                 }
                 catch (Exception ex)
                 {
@@ -1280,7 +1243,6 @@ namespace SewingProduction.form
 
                     if (result == DialogResult.Yes)
                     {
-                        // Гарантируем инициализацию списков, если она ещё не выполнена
                         if (_normRaszList == null || _normRaskList == null || _normKontList == null || _normDopObrList == null)
                         {
                             await InitializeBindingsAsync();
@@ -1375,7 +1337,6 @@ namespace SewingProduction.form
             }
         }
 
-        // Добавляем новый обработчик RowStyle
         private void GridView_RowStyle(object sender, RowStyleEventArgs e)
         {
             GridView view = sender as GridView;
@@ -1384,7 +1345,6 @@ namespace SewingProduction.form
 
             object row = view.GetRow(e.RowHandle);
 
-            // Проверка на INewable для новых записей
             if (row is INewable newableRow && newableRow.IsNew)
             {
                 e.Appearance.BackColor = Color.LightGreen;
@@ -1392,7 +1352,6 @@ namespace SewingProduction.form
                 return; 
             }
 
-            // Проверка на IsModified для измененных записей
             try
             {
                 if (row is IModifiable modifiable && modifiable.IsModified)

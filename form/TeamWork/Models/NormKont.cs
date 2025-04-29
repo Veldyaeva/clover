@@ -16,7 +16,7 @@ namespace SewingProduction.Models
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
-        public int id { get; set; }
+        public int nkId { get; set; }
         public int AnnId { get; set; }
         public int Kod { get; set; }
         [Column("kod_o")]
@@ -39,7 +39,7 @@ namespace SewingProduction.Models
         protected virtual void OnPropertyChanged(string propertyName)
         {
             // Не вызываем событие для ID, IsNew, IsModified
-            bool isInternalProperty = propertyName == nameof(id) || // Используем 'id', если это имя свойства первичного ключа
+            bool isInternalProperty = propertyName == nameof(nkId) ||
                                      propertyName == nameof(IsNew) || 
                                      propertyName == nameof(IsModified);
 

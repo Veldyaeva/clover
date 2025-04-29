@@ -11,8 +11,6 @@ namespace SewingProduction.Models
 {
    public class NormDopObr : INewable, INotifyPropertyChanged, IModifiable
     {
-        [NotMapped]
-        public int id { get; set; }
         public int AnnId { get; set; }
         public string Kod { get; set; }
         public int SekP { get; set; }
@@ -24,15 +22,15 @@ namespace SewingProduction.Models
         [NotMapped]
         public bool IsModified { get; set; } = false;
 
-        private int _dopObrId;
+        private int _doId;
 
-        public int dopObrId
+        public int doId
         {
-            get => _dopObrId;
+            get => _doId;
             set
             {
-                _dopObrId = value;
-                OnPropertyChanged(nameof(dopObrId));
+                _doId = value;
+                OnPropertyChanged(nameof(doId));
             }
         }
 
@@ -41,7 +39,7 @@ namespace SewingProduction.Models
         {
             // Не вызываем событие для ID, IsNew, IsModified, чтобы избежать проблем с потоками при сохранении
             // и лишних срабатываний RowStyle
-            bool isInternalProperty = propertyName == nameof(dopObrId) || 
+            bool isInternalProperty = propertyName == nameof(doId) || 
                                      propertyName == nameof(IsNew) || 
                                      propertyName == nameof(IsModified);
 

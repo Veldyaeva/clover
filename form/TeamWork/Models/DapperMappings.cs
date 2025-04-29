@@ -16,8 +16,8 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<ArtNormN>().Table(TableNames.Ann).Identity(x => x.AnnID);
             DapperPlusManager.Entity<NormRasz>().Table(TableNames.Rasz).Identity(x => x.nrId);
             DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Identity(x => x.id);
-            DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.id);
-            DapperPlusManager.Entity<NormDopObr>().Table(TableNames.Obr).Identity(x => x.id);
+            DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
+            DapperPlusManager.Entity<NormDopObr>().Table(TableNames.Obr).Identity(x => x.doId);
         }
     }
 }
