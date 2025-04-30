@@ -330,7 +330,10 @@ namespace SewingProduction.Forms
                     }
 
                 // Получаем выбранное разделение труда
-                List<MyDataANN> annDataSource = annView.DataSource as List<MyDataANN>;
+                //Обращаемся к источнику данных грида, а не вью!!! Это важно
+                var annBindingSource = gridControl_wdToBind.DataSource as BindingSource;
+                var annDataSource = annBindingSource?.DataSource as BindingList<MyDataANN>;
+
                 if (annDataSource != null)
                     foreach (var row in annDataSource)
                     {
@@ -360,24 +363,26 @@ namespace SewingProduction.Forms
 
 
                 // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnId); // Используем ID/Kod из объектов
+                _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnId); 
 
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
                 {
+                    // 0. Присваиваем привязанному артиклю артикля разделений
+                    selectedArtRow.BindedArt = selectedAnnRow.Articul;
                     // 1. Добавляем привязанный артикул в список для gridView1
-                    _boundArtList?.Add(selectedArtRow); // Используем ?. на случай, если _boundArtList не инициализирован
+                    _boundArtList?.Add(selectedArtRow); 
 
                     // 2. Удаляем артикул из списка доступных для gridView7
                     artDataSource.Remove(selectedArtRow);
                 }
                 else
                 {
-                    // Если вдруг artDataSource был null, все равно обновим гриды
                     artView.RefreshData();
                     annView.RefreshData();
                     // Обновим и gridView12 на всякий случай
                     gridControl_binded?.RefreshDataSource(); 
+                    gridControl_wdToBind?.RefreshDataSource();
                 }
 
                 await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.Kod} привязан к РТ {selectedAnnRow.AnnId}");
@@ -405,7 +410,6 @@ namespace SewingProduction.Forms
 
             if (_myDataAnnBindingSource != null)
             {
-                // Очищаем и заполняем BindingList, затем ResetBindings
                 _myDataAnnList.Clear(); 
                 if (list != null)
                 {
@@ -413,10 +417,10 @@ namespace SewingProduction.Forms
                 }
                 _myDataAnnBindingSource.ResetBindings(false); 
             }
-            else // Fallback if BindingSource isn't used (less ideal)
+            else 
             {
                 gridControl_wdToBind.DataSource = list;
-                gridView_twToBind.RefreshData(); // Ensure refresh if DataSource is set directly
+                gridView_twToBind.RefreshData(); 
             }
 
 
@@ -446,7 +450,9 @@ namespace SewingProduction.Forms
                 else
                 {
                     // Если загруженный список ПУСТ, очищаем customGridControl3
-                    await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                   // await GridHelper.LoadGridControlDataAsync(customGridControl3, normraszBindingSource, new List<NormRasz>());
+                   customGridControl3.DataSource = null;
+                    customGridControl3.RefreshDataSource();
                 }
             }
             catch (Exception ex)
