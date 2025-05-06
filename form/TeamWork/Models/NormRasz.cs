@@ -25,31 +25,59 @@ namespace SewingProduction.Models
         public int N { get; set; }
         public int N1 { get; set; }
         public int Sek { get; set; }
+        public int Seb { get; set; }
         public string Obor { get; set; }
-        public int Kod_podr { get; set; }
-        public int Kod_proizv { get; set; }
         public string Spec { get; set; }
-        public int Kod_ob { get; set; }
         [NotMapped]
         public string TextProizv { get; set; }
         [NotMapped]
+        [Column("text_ob")]
         public string TextOb { get; set; }
         [NotMapped]
         public string TextVyaz { get; set; }
+        private int _kod_proizv;
+        public int KodProizv
+        {
+            get => _kod_proizv;
+            set => SetProperty(ref _kod_proizv, value, nameof(KodProizv));
+        }
+
+        private int _kod_podr;
+        public int KodPodr
+        {
+            get => _kod_podr;
+            set => SetProperty(ref _kod_podr, value, nameof(KodPodr));
+        }
+
+        private int _kod_ob;
+        public int KodOb
+        {
+            get => _kod_ob;
+            set => SetProperty(ref _kod_ob, value, nameof(KodOb));
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            // Не вызываем событие для ID, IsNew, IsModified
-            bool isInternalProperty = propertyName == nameof(nrId) || // Используем nrId для NormRasz
-                                     propertyName == nameof(IsNew) || 
-                                     propertyName == nameof(IsModified);
-
-            if (!isInternalProperty)
+            if (propertyName != nameof(IsModified) &&
+                propertyName != nameof(IsNew) &&
+                propertyName != nameof(nrId))
             {
-                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                IsModified = true;
             }
 
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        protected bool SetProperty<T>(ref T field, T value, string propertyName)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value))
+                return false;
+
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
     }
 }

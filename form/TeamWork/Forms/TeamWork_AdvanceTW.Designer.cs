@@ -65,7 +65,32 @@ namespace SewingProduction.form
             this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.Kod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Kod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEdit_oborudShv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCancel = new SewingProduction.CustomSimpleButton();
+            this.btnOK = new SewingProduction.CustomButton();
             this.customLabel2 = new SewingProduction.CustomLabel();
             this.modelTextBox = new SewingProduction.CustomTextBox();
             this.nameTextBox = new SewingProduction.CustomTextBox();
@@ -82,33 +107,8 @@ namespace SewingProduction.form
             this.designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
             this.customLabel4 = new SewingProduction.CustomLabel();
             this.textBoxKomment = new System.Windows.Forms.RichTextBox();
-            this.btnOK = new SewingProduction.CustomButton();
-            this.btnCancel = new SewingProduction.CustomSimpleButton();
             this.buffer = new SewingProduction.CustomButton();
             this.textBoxBuffer = new System.Windows.Forms.RichTextBox();
-            this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
-            this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Kod_proizv = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Kod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_oborudShv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.constructorBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.designerBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -122,9 +122,9 @@ namespace SewingProduction.form
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.customGroupBox1 = new SewingProduction.CustomGroupBox();
-            this.customGroupBox2 = new SewingProduction.CustomGroupBox();
             this.customGroupBox3 = new SewingProduction.CustomGroupBox();
+            this.customGroupBox2 = new SewingProduction.CustomGroupBox();
+            this.customGroupBox1 = new SewingProduction.CustomGroupBox();
             this.statusLabel = new SewingProduction.CustomLabel();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlDopObr)).BeginInit();
@@ -133,15 +133,14 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).BeginInit();
@@ -153,9 +152,9 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            this.customGroupBox1.SuspendLayout();
-            this.customGroupBox2.SuspendLayout();
             this.customGroupBox3.SuspendLayout();
+            this.customGroupBox2.SuspendLayout();
+            this.customGroupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel2
@@ -472,6 +471,7 @@ namespace SewingProduction.form
             // 
             // colspec
             // 
+            this.colspec.Caption = "Специальность";
             this.colspec.FieldName = "Spec";
             this.colspec.Name = "colspec";
             this.colspec.Visible = true;
@@ -479,6 +479,7 @@ namespace SewingProduction.form
             // 
             // gridColumn16
             // 
+            this.gridColumn16.Caption = "Оборуд.";
             this.gridColumn16.FieldName = "Obor";
             this.gridColumn16.Name = "gridColumn16";
             this.gridColumn16.Visible = true;
@@ -514,265 +515,6 @@ namespace SewingProduction.form
             this.colannId1.VisibleIndex = 0;
             this.colannId1.Width = 74;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.92592F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.07407F));
-            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.btnOK, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(188, 30);
-            this.tableLayoutPanel1.TabIndex = 13;
-            // 
-            // customLabel2
-            // 
-            this.customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel2.AutoSize = true;
-            this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel2.Location = new System.Drawing.Point(3, 29);
-            this.customLabel2.Name = "customLabel2";
-            this.customLabel2.ObjectName = null;
-            this.customLabel2.Size = new System.Drawing.Size(87, 16);
-            this.customLabel2.TabIndex = 15;
-            this.customLabel2.Text = "конструктор";
-            // 
-            // modelTextBox
-            // 
-            this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(44, 150);
-            this.modelTextBox.Name = "modelTextBox";
-            this.modelTextBox.ObjectName = null;
-            this.modelTextBox.Size = new System.Drawing.Size(123, 23);
-            this.modelTextBox.TabIndex = 4;
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.nameTextBox.Enabled = false;
-            this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(71, 186);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.ObjectName = null;
-            this.nameTextBox.Size = new System.Drawing.Size(123, 23);
-            this.nameTextBox.TabIndex = 5;
-            // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 10F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(3, -14);
-            this.label5.Name = "label5";
-            this.label5.ObjectName = null;
-            this.label5.Size = new System.Drawing.Size(103, 16);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "дата создания";
-            // 
-            // dateCreate
-            // 
-            this.dateCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.dateCreate.Font = new System.Drawing.Font("Arial", 10F);
-            this.dateCreate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.dateCreate.Location = new System.Drawing.Point(71, 48);
-            this.dateCreate.Name = "dateCreate";
-            this.dateCreate.Size = new System.Drawing.Size(123, 23);
-            this.dateCreate.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(6, 353);
-            this.label4.Name = "label4";
-            this.label4.ObjectName = null;
-            this.label4.Size = new System.Drawing.Size(101, 32);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "итоговые сек. \r\nпо изделию";
-            // 
-            // secTimeTextBox
-            // 
-            this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(120, 362);
-            this.secTimeTextBox.Name = "secTimeTextBox";
-            this.secTimeTextBox.ObjectName = null;
-            this.secTimeTextBox.ReadOnly = true;
-            this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
-            this.secTimeTextBox.TabIndex = 6;
-            // 
-            // groupTextBox
-            // 
-            this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(44, 105);
-            this.groupTextBox.Name = "groupTextBox";
-            this.groupTextBox.ObjectName = null;
-            this.groupTextBox.Size = new System.Drawing.Size(123, 23);
-            this.groupTextBox.TabIndex = 19;
-            // 
-            // customLabel3
-            // 
-            this.customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel3.AutoSize = true;
-            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel3.Location = new System.Drawing.Point(3, 87);
-            this.customLabel3.Name = "customLabel3";
-            this.customLabel3.ObjectName = null;
-            this.customLabel3.Size = new System.Drawing.Size(53, 16);
-            this.customLabel3.TabIndex = 18;
-            this.customLabel3.Text = "Группа";
-            this.customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Arial", 10F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(-3, 168);
-            this.label3.Name = "label3";
-            this.label3.ObjectName = null;
-            this.label3.Size = new System.Drawing.Size(104, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "наименование";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial", 10F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(1, 131);
-            this.label2.Name = "label2";
-            this.label2.ObjectName = null;
-            this.label2.Size = new System.Drawing.Size(57, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "модель";
-            // 
-            // customLabel1
-            // 
-            this.customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel1.AutoSize = true;
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(6, 85);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.ObjectName = null;
-            this.customLabel1.Size = new System.Drawing.Size(69, 16);
-            this.customLabel1.TabIndex = 14;
-            this.customLabel1.Text = "дизайнер";
-            this.customLabel1.Click += new System.EventHandler(this.customLabel1_Click);
-            // 
-            // constructorComboBox
-            // 
-            this.constructorComboBox.Location = new System.Drawing.Point(6, 62);
-            this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.constructorComboBox.Size = new System.Drawing.Size(188, 20);
-            this.constructorComboBox.TabIndex = 21;
-            this.constructorComboBox.TabIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
-            // 
-            // designerComboBox
-            // 
-            this.designerComboBox.Location = new System.Drawing.Point(6, 104);
-            this.designerComboBox.Name = "designerComboBox";
-            this.designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.designerComboBox.Size = new System.Drawing.Size(188, 20);
-            this.designerComboBox.TabIndex = 22;
-            // 
-            // customLabel4
-            // 
-            this.customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel4.AutoSize = true;
-            this.customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel4.Location = new System.Drawing.Point(0, 224);
-            this.customLabel4.Name = "customLabel4";
-            this.customLabel4.ObjectName = null;
-            this.customLabel4.Size = new System.Drawing.Size(150, 16);
-            this.customLabel4.TabIndex = 23;
-            this.customLabel4.Text = "особенности изделия";
-            // 
-            // textBoxKomment
-            // 
-            this.textBoxKomment.Location = new System.Drawing.Point(22, 243);
-            this.textBoxKomment.Name = "textBoxKomment";
-            this.textBoxKomment.Size = new System.Drawing.Size(172, 95);
-            this.textBoxKomment.TabIndex = 20;
-            this.textBoxKomment.Text = "";
-            // 
-            // btnOK
-            // 
-            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Location = new System.Drawing.Point(3, 3);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.ObjectName = null;
-            this.btnOK.Size = new System.Drawing.Size(89, 24);
-            this.btnOK.TabIndex = 8;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnCancel.Appearance.Options.UseBackColor = true;
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Appearance.Options.UseForeColor = true;
-            this.btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            this.btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            this.btnCancel.AppearanceDisabled.Options.UseBackColor = true;
-            this.btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            this.btnCancel.Location = new System.Drawing.Point(98, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(87, 24);
-            this.btnCancel.TabIndex = 24;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // buffer
-            // 
-            this.buffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.buffer.Font = new System.Drawing.Font("Arial", 10F);
-            this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(0, 19);
-            this.buffer.Name = "buffer";
-            this.buffer.ObjectName = null;
-            this.buffer.Size = new System.Drawing.Size(194, 50);
-            this.buffer.TabIndex = 11;
-            this.buffer.Text = "Вставить из буфера:";
-            this.buffer.UseVisualStyleBackColor = false;
-            this.buffer.Click += new System.EventHandler(this.buffer_Click);
-            // 
-            // textBoxBuffer
-            // 
-            this.textBoxBuffer.Enabled = false;
-            this.textBoxBuffer.Location = new System.Drawing.Point(4, 75);
-            this.textBoxBuffer.Name = "textBoxBuffer";
-            this.textBoxBuffer.Size = new System.Drawing.Size(190, 84);
-            this.textBoxBuffer.TabIndex = 12;
-            this.textBoxBuffer.Text = "";
-            // 
             // gridControlRasz
             // 
             this.gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -786,8 +528,7 @@ namespace SewingProduction.form
             this.gridControlRasz.Size = new System.Drawing.Size(1269, 368);
             this.gridControlRasz.TabIndex = 7;
             this.gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRasz,
-            this.gridView1});
+            this.gridViewRasz});
             // 
             // gridViewRasz
             // 
@@ -804,11 +545,12 @@ namespace SewingProduction.form
             this.gridColumn38,
             this.gridColumn30,
             this.gridColumn31,
-            this.gridColumn5,
             this.Kod_podr,
             this.Kod_proizv,
             this.Kod_ob,
-            this.gridColumn6});
+            this.gridColumn5,
+            this.gridColumn6,
+            this.gridColumn7});
             this.gridViewRasz.GridControl = this.gridControlRasz;
             this.gridViewRasz.Name = "gridViewRasz";
             this.gridViewRasz.NewItemRowText = "добавить";
@@ -921,10 +663,10 @@ namespace SewingProduction.form
             this.repositoryItemLookUpEdit_kod_proizv.AutoHeight = false;
             this.repositoryItemLookUpEdit_kod_proizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
+            this.repositoryItemLookUpEdit_kod_proizv.DisplayMember = "TextProizv";
             this.repositoryItemLookUpEdit_kod_proizv.Name = "repositoryItemLookUpEdit_kod_proizv";
             this.repositoryItemLookUpEdit_kod_proizv.NullText = "";
-            this.repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
+            this.repositoryItemLookUpEdit_kod_proizv.ValueMember = "Kod_proizv";
             // 
             // gridColumn38
             // 
@@ -959,28 +701,9 @@ namespace SewingProduction.form
             this.gridColumn31.VisibleIndex = 9;
             this.gridColumn31.Width = 66;
             // 
-            // gridColumn5
-            // 
-            this.gridColumn5.Caption = "gridColumn5";
-            this.gridColumn5.ColumnEdit = this.repositoryItemLookUpEdit_podrVyaz;
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 12;
-            this.gridColumn5.Width = 66;
-            // 
-            // repositoryItemLookUpEdit_podrVyaz
-            // 
-            this.repositoryItemLookUpEdit_podrVyaz.AutoHeight = false;
-            this.repositoryItemLookUpEdit_podrVyaz.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
-            this.repositoryItemLookUpEdit_podrVyaz.Name = "repositoryItemLookUpEdit_podrVyaz";
-            this.repositoryItemLookUpEdit_podrVyaz.NullText = "";
-            this.repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_vyaz";
-            // 
             // Kod_podr
             // 
-            this.Kod_podr.Caption = "Kod_podr";
+            this.Kod_podr.Caption = "Вяз. подр.";
             this.Kod_podr.ColumnEdit = this.repositoryItemLookUpEdit_podrVyaz;
             this.Kod_podr.FieldName = "Kod_podr";
             this.Kod_podr.Name = "Kod_podr";
@@ -989,9 +712,19 @@ namespace SewingProduction.form
             this.Kod_podr.VisibleIndex = 11;
             this.Kod_podr.Width = 66;
             // 
+            // repositoryItemLookUpEdit_podrVyaz
+            // 
+            this.repositoryItemLookUpEdit_podrVyaz.AutoHeight = false;
+            this.repositoryItemLookUpEdit_podrVyaz.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEdit_podrVyaz.DisplayMember = "TextVyaz";
+            this.repositoryItemLookUpEdit_podrVyaz.Name = "repositoryItemLookUpEdit_podrVyaz";
+            this.repositoryItemLookUpEdit_podrVyaz.NullText = "";
+            this.repositoryItemLookUpEdit_podrVyaz.ValueMember = "Kod_vyaz";
+            // 
             // Kod_proizv
             // 
-            this.Kod_proizv.Caption = "Kod_proizv";
+            this.Kod_proizv.Caption = "Произв.";
             this.Kod_proizv.ColumnEdit = this.repositoryItemLookUpEdit_kod_proizv;
             this.Kod_proizv.FieldName = "Kod_proizv";
             this.Kod_proizv.Name = "Kod_proizv";
@@ -999,12 +732,12 @@ namespace SewingProduction.form
             this.Kod_proizv.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             this.Kod_proizv.OptionsEditForm.VisibleIndex = 3;
             this.Kod_proizv.Visible = true;
-            this.Kod_proizv.VisibleIndex = 13;
+            this.Kod_proizv.VisibleIndex = 12;
             this.Kod_proizv.Width = 66;
             // 
             // Kod_ob
             // 
-            this.Kod_ob.Caption = "Kod_ob";
+            this.Kod_ob.Caption = "Оборуд.";
             this.Kod_ob.ColumnEdit = this.repositoryItemLookUpEdit_oborudShv;
             this.Kod_ob.FieldName = "Kod_ob";
             this.Kod_ob.Name = "Kod_ob";
@@ -1012,7 +745,7 @@ namespace SewingProduction.form
             this.Kod_ob.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             this.Kod_ob.OptionsEditForm.VisibleIndex = 9;
             this.Kod_ob.Visible = true;
-            this.Kod_ob.VisibleIndex = 14;
+            this.Kod_ob.VisibleIndex = 13;
             this.Kod_ob.Width = 66;
             // 
             // repositoryItemLookUpEdit_oborudShv
@@ -1020,24 +753,287 @@ namespace SewingProduction.form
             this.repositoryItemLookUpEdit_oborudShv.AutoHeight = false;
             this.repositoryItemLookUpEdit_oborudShv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
+            this.repositoryItemLookUpEdit_oborudShv.DisplayMember = "TextOb";
             this.repositoryItemLookUpEdit_oborudShv.Name = "repositoryItemLookUpEdit_oborudShv";
             this.repositoryItemLookUpEdit_oborudShv.NullText = "";
-            this.repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
+            this.repositoryItemLookUpEdit_oborudShv.ValueMember = "Kod_ob";
+            // 
+            // gridColumn5
+            // 
+            this.gridColumn5.Caption = "gridColumn5";
+            this.gridColumn5.FieldName = "TextProizv";
+            this.gridColumn5.Name = "gridColumn5";
             // 
             // gridColumn6
             // 
             this.gridColumn6.Caption = "gridColumn6";
-            this.gridColumn6.ColumnEdit = this.repositoryItemLookUpEdit_oborudShv;
+            this.gridColumn6.FieldName = "TextVyaz";
             this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 15;
-            this.gridColumn6.Width = 90;
             // 
-            // gridView1
+            // gridColumn7
             // 
-            this.gridView1.GridControl = this.gridControlRasz;
-            this.gridView1.Name = "gridView1";
+            this.gridColumn7.Caption = "gridColumn7";
+            this.gridColumn7.FieldName = "TextOb";
+            this.gridColumn7.Name = "gridColumn7";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.92592F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.07407F));
+            this.tableLayoutPanel1.Controls.Add(this.btnCancel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnOK, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(188, 27);
+            this.tableLayoutPanel1.TabIndex = 13;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.btnCancel.Appearance.Options.UseBackColor = true;
+            this.btnCancel.Appearance.Options.UseFont = true;
+            this.btnCancel.Appearance.Options.UseForeColor = true;
+            this.btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            this.btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            this.btnCancel.AppearanceDisabled.Options.UseBackColor = true;
+            this.btnCancel.AppearanceDisabled.Options.UseForeColor = true;
+            this.btnCancel.Location = new System.Drawing.Point(98, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(87, 21);
+            this.btnCancel.TabIndex = 24;
+            this.btnCancel.Text = "Отмена";
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // btnOK
+            // 
+            this.btnOK.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.btnOK.Font = new System.Drawing.Font("Arial", 10F);
+            this.btnOK.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.btnOK.Location = new System.Drawing.Point(3, 3);
+            this.btnOK.Name = "btnOK";
+            this.btnOK.ObjectName = null;
+            this.btnOK.Size = new System.Drawing.Size(89, 21);
+            this.btnOK.TabIndex = 8;
+            this.btnOK.Text = "OK";
+            this.btnOK.UseVisualStyleBackColor = false;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            // 
+            // customLabel2
+            // 
+            this.customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel2.AutoSize = true;
+            this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel2.Location = new System.Drawing.Point(3, 29);
+            this.customLabel2.Name = "customLabel2";
+            this.customLabel2.ObjectName = null;
+            this.customLabel2.Size = new System.Drawing.Size(87, 16);
+            this.customLabel2.TabIndex = 15;
+            this.customLabel2.Text = "конструктор";
+            // 
+            // modelTextBox
+            // 
+            this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.modelTextBox.Location = new System.Drawing.Point(59, 125);
+            this.modelTextBox.Name = "modelTextBox";
+            this.modelTextBox.ObjectName = null;
+            this.modelTextBox.Size = new System.Drawing.Size(123, 23);
+            this.modelTextBox.TabIndex = 4;
+            // 
+            // nameTextBox
+            // 
+            this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.nameTextBox.Enabled = false;
+            this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.nameTextBox.Location = new System.Drawing.Point(59, 170);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.ObjectName = null;
+            this.nameTextBox.Size = new System.Drawing.Size(123, 23);
+            this.nameTextBox.TabIndex = 5;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Arial", 10F);
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label5.Location = new System.Drawing.Point(0, 16);
+            this.label5.Name = "label5";
+            this.label5.ObjectName = null;
+            this.label5.Size = new System.Drawing.Size(103, 16);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "дата создания";
+            // 
+            // dateCreate
+            // 
+            this.dateCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.dateCreate.Font = new System.Drawing.Font("Arial", 10F);
+            this.dateCreate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.dateCreate.Location = new System.Drawing.Point(59, 35);
+            this.dateCreate.Name = "dateCreate";
+            this.dateCreate.Size = new System.Drawing.Size(123, 23);
+            this.dateCreate.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 10F);
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label4.Location = new System.Drawing.Point(3, 317);
+            this.label4.Name = "label4";
+            this.label4.ObjectName = null;
+            this.label4.Size = new System.Drawing.Size(101, 32);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "итоговые сек. \r\nпо изделию";
+            // 
+            // secTimeTextBox
+            // 
+            this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.secTimeTextBox.Location = new System.Drawing.Point(108, 336);
+            this.secTimeTextBox.Name = "secTimeTextBox";
+            this.secTimeTextBox.ObjectName = null;
+            this.secTimeTextBox.ReadOnly = true;
+            this.secTimeTextBox.Size = new System.Drawing.Size(74, 23);
+            this.secTimeTextBox.TabIndex = 6;
+            // 
+            // groupTextBox
+            // 
+            this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
+            this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
+            this.groupTextBox.Location = new System.Drawing.Point(59, 80);
+            this.groupTextBox.Name = "groupTextBox";
+            this.groupTextBox.ObjectName = null;
+            this.groupTextBox.Size = new System.Drawing.Size(123, 23);
+            this.groupTextBox.TabIndex = 19;
+            // 
+            // customLabel3
+            // 
+            this.customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel3.AutoSize = true;
+            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel3.Location = new System.Drawing.Point(6, 61);
+            this.customLabel3.Name = "customLabel3";
+            this.customLabel3.ObjectName = null;
+            this.customLabel3.Size = new System.Drawing.Size(53, 16);
+            this.customLabel3.TabIndex = 18;
+            this.customLabel3.Text = "Группа";
+            this.customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 10F);
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label3.Location = new System.Drawing.Point(-1, 151);
+            this.label3.Name = "label3";
+            this.label3.ObjectName = null;
+            this.label3.Size = new System.Drawing.Size(104, 16);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "наименование";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Arial", 10F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.label2.Location = new System.Drawing.Point(3, 106);
+            this.label2.Name = "label2";
+            this.label2.ObjectName = null;
+            this.label2.Size = new System.Drawing.Size(57, 16);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "модель";
+            // 
+            // customLabel1
+            // 
+            this.customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel1.AutoSize = true;
+            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel1.Location = new System.Drawing.Point(6, 71);
+            this.customLabel1.Name = "customLabel1";
+            this.customLabel1.ObjectName = null;
+            this.customLabel1.Size = new System.Drawing.Size(69, 16);
+            this.customLabel1.TabIndex = 14;
+            this.customLabel1.Text = "дизайнер";
+            this.customLabel1.Click += new System.EventHandler(this.customLabel1_Click);
+            // 
+            // constructorComboBox
+            // 
+            this.constructorComboBox.Location = new System.Drawing.Point(4, 48);
+            this.constructorComboBox.Name = "constructorComboBox";
+            this.constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.constructorComboBox.Size = new System.Drawing.Size(188, 20);
+            this.constructorComboBox.TabIndex = 21;
+            this.constructorComboBox.TabIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
+            // 
+            // designerComboBox
+            // 
+            this.designerComboBox.Location = new System.Drawing.Point(4, 90);
+            this.designerComboBox.Name = "designerComboBox";
+            this.designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.designerComboBox.Size = new System.Drawing.Size(188, 20);
+            this.designerComboBox.TabIndex = 22;
+            // 
+            // customLabel4
+            // 
+            this.customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.customLabel4.AutoSize = true;
+            this.customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.customLabel4.Location = new System.Drawing.Point(1, 196);
+            this.customLabel4.Name = "customLabel4";
+            this.customLabel4.ObjectName = null;
+            this.customLabel4.Size = new System.Drawing.Size(150, 16);
+            this.customLabel4.TabIndex = 23;
+            this.customLabel4.Text = "особенности изделия";
+            // 
+            // textBoxKomment
+            // 
+            this.textBoxKomment.Location = new System.Drawing.Point(6, 215);
+            this.textBoxKomment.Name = "textBoxKomment";
+            this.textBoxKomment.Size = new System.Drawing.Size(176, 95);
+            this.textBoxKomment.TabIndex = 20;
+            this.textBoxKomment.Text = "";
+            // 
+            // buffer
+            // 
+            this.buffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
+            this.buffer.Font = new System.Drawing.Font("Arial", 10F);
+            this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
+            this.buffer.Location = new System.Drawing.Point(0, 19);
+            this.buffer.Name = "buffer";
+            this.buffer.ObjectName = null;
+            this.buffer.Size = new System.Drawing.Size(194, 39);
+            this.buffer.TabIndex = 11;
+            this.buffer.Text = "Вставить из буфера:";
+            this.buffer.UseVisualStyleBackColor = false;
+            this.buffer.Click += new System.EventHandler(this.buffer_Click);
+            // 
+            // textBoxBuffer
+            // 
+            this.textBoxBuffer.Enabled = false;
+            this.textBoxBuffer.Location = new System.Drawing.Point(4, 64);
+            this.textBoxBuffer.Name = "textBoxBuffer";
+            this.textBoxBuffer.Size = new System.Drawing.Size(190, 84);
+            this.textBoxBuffer.TabIndex = 12;
+            this.textBoxBuffer.Text = "";
             // 
             // rasz
             // 
@@ -1098,10 +1094,40 @@ namespace SewingProduction.form
             this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.948244F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.05176F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 173F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 238F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 161F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 279F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(194, 864);
             this.tableLayoutPanel4.TabIndex = 4;
+            // 
+            // customGroupBox3
+            // 
+            this.customGroupBox3.BackColor = System.Drawing.Color.Transparent;
+            this.customGroupBox3.BorderColor = System.Drawing.Color.Black;
+            this.customGroupBox3.BorderThickness = 1;
+            this.customGroupBox3.Controls.Add(this.constructorComboBox);
+            this.customGroupBox3.Controls.Add(this.customLabel2);
+            this.customGroupBox3.Controls.Add(this.designerComboBox);
+            this.customGroupBox3.Controls.Add(this.customLabel1);
+            this.customGroupBox3.Location = new System.Drawing.Point(3, 587);
+            this.customGroupBox3.Name = "customGroupBox3";
+            this.customGroupBox3.ObjectName = null;
+            this.customGroupBox3.Size = new System.Drawing.Size(188, 132);
+            this.customGroupBox3.TabIndex = 2;
+            this.customGroupBox3.TabStop = false;
+            // 
+            // customGroupBox2
+            // 
+            this.customGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            this.customGroupBox2.BorderColor = System.Drawing.Color.Black;
+            this.customGroupBox2.BorderThickness = 1;
+            this.customGroupBox2.Controls.Add(this.buffer);
+            this.customGroupBox2.Controls.Add(this.textBoxBuffer);
+            this.customGroupBox2.Location = new System.Drawing.Point(3, 426);
+            this.customGroupBox2.Name = "customGroupBox2";
+            this.customGroupBox2.ObjectName = null;
+            this.customGroupBox2.Size = new System.Drawing.Size(188, 153);
+            this.customGroupBox2.TabIndex = 1;
+            this.customGroupBox2.TabStop = false;
             // 
             // customGroupBox1
             // 
@@ -1120,46 +1146,13 @@ namespace SewingProduction.form
             this.customGroupBox1.Controls.Add(this.label3);
             this.customGroupBox1.Controls.Add(this.customLabel4);
             this.customGroupBox1.Controls.Add(this.textBoxKomment);
-            this.customGroupBox1.Location = new System.Drawing.Point(3, 39);
+            this.customGroupBox1.Location = new System.Drawing.Point(3, 36);
             this.customGroupBox1.Name = "customGroupBox1";
             this.customGroupBox1.ObjectName = null;
-            this.customGroupBox1.Size = new System.Drawing.Size(188, 406);
+            this.customGroupBox1.Size = new System.Drawing.Size(188, 380);
             this.customGroupBox1.TabIndex = 0;
             this.customGroupBox1.TabStop = false;
-            this.customGroupBox1.Text = "customGroupBox1";
             this.customGroupBox1.Enter += new System.EventHandler(this.customGroupBox1_Enter);
-            // 
-            // customGroupBox2
-            // 
-            this.customGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.customGroupBox2.BorderColor = System.Drawing.Color.Black;
-            this.customGroupBox2.BorderThickness = 1;
-            this.customGroupBox2.Controls.Add(this.buffer);
-            this.customGroupBox2.Controls.Add(this.textBoxBuffer);
-            this.customGroupBox2.Location = new System.Drawing.Point(3, 455);
-            this.customGroupBox2.Name = "customGroupBox2";
-            this.customGroupBox2.ObjectName = null;
-            this.customGroupBox2.Size = new System.Drawing.Size(188, 165);
-            this.customGroupBox2.TabIndex = 1;
-            this.customGroupBox2.TabStop = false;
-            this.customGroupBox2.Text = "customGroupBox2";
-            // 
-            // customGroupBox3
-            // 
-            this.customGroupBox3.BackColor = System.Drawing.Color.Transparent;
-            this.customGroupBox3.BorderColor = System.Drawing.Color.Black;
-            this.customGroupBox3.BorderThickness = 1;
-            this.customGroupBox3.Controls.Add(this.constructorComboBox);
-            this.customGroupBox3.Controls.Add(this.customLabel2);
-            this.customGroupBox3.Controls.Add(this.designerComboBox);
-            this.customGroupBox3.Controls.Add(this.customLabel1);
-            this.customGroupBox3.Location = new System.Drawing.Point(3, 628);
-            this.customGroupBox3.Name = "customGroupBox3";
-            this.customGroupBox3.ObjectName = null;
-            this.customGroupBox3.Size = new System.Drawing.Size(188, 132);
-            this.customGroupBox3.TabIndex = 2;
-            this.customGroupBox3.TabStop = false;
-            this.customGroupBox3.Text = "customGroupBox3";
             // 
             // statusLabel
             // 
@@ -1189,15 +1182,14 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).EndInit();
@@ -1210,11 +1202,11 @@ namespace SewingProduction.form
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
-            this.customGroupBox1.ResumeLayout(false);
-            this.customGroupBox1.PerformLayout();
-            this.customGroupBox2.ResumeLayout(false);
             this.customGroupBox3.ResumeLayout(false);
             this.customGroupBox3.PerformLayout();
+            this.customGroupBox2.ResumeLayout(false);
+            this.customGroupBox1.ResumeLayout(false);
+            this.customGroupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1324,12 +1316,9 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_kod_proizv;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_podrVyaz;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_oborudShv;
-        private GridView gridView1;
         private DevExpress.XtraGrid.Columns.GridColumn Kod_podr;
         private DevExpress.XtraGrid.Columns.GridColumn Kod_proizv;
         private DevExpress.XtraGrid.Columns.GridColumn Kod_ob;
@@ -1347,5 +1336,8 @@ namespace SewingProduction.form
         private CustomGroupBox customGroupBox2;
         private CustomGroupBox customGroupBox3;
         private CustomLabel statusLabel;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

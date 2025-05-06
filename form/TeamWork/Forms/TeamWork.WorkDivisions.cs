@@ -18,7 +18,7 @@ namespace SewingProduction.Forms
 {
     public partial class TeamWork
     {
-        // Первая вкладка — "Разделение труда"
+        // Первая вкладка — "Разделения труда"
 
         /// <summary>
         /// Загрузка вкладки "Список РТ"
@@ -49,9 +49,6 @@ namespace SewingProduction.Forms
                 ANNgridView.OptionsView.ShowPreview = false;
 
                 _bindingList = new BindingList<ArtNormN>(data);
-
-
-
                 _bindingSource.DataSource = _bindingList;
 
                 designerTextBox.DataBindings.Clear();
@@ -139,18 +136,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void BindingSource_PositionChanged(object sender, EventArgs e)
-        {
-            //if (_bindingSource.Current is ArtNormN currentRow)
-            //{
-            //    var dizFio = fioList.FirstOrDefault(f => f.tab == currentRow.Diz)?.fio ?? string.Empty;
-            //    var constrFio = fioList.FirstOrDefault(f => f.tab == currentRow.Constr)?.fio ?? string.Empty;
-
-            //    designerTextBox.Text = dizFio;
-            //    constructorTextBox.Text = constrFio;
-            //}
-        }
-
         private async Task LoadRelatedData(int annId)
         {
             await GridHelper.LoadListDataAsync(gridControlRaszTW, normraszBindingSource, await _artNormService.GetRelatedNormRasz(annId));
@@ -171,6 +156,18 @@ namespace SewingProduction.Forms
             sortGridView(gridView1);
             sortGridView(gridView4);
             sortGridView(gridView3);
+            var raszList = await _artNormService.GetRelatedNormRasz(annId);
+
+            //// Заполняем текстовые поля из справочников
+            foreach (var r in raszList)
+            {
+                r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
+                r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
+                r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
+            }
+
+            // Привязка к гриду
+            await GridHelper.LoadListDataAsync(gridControlRaszTW, normraszBindingSource, raszList);
         }
 
         private async void GetNZPStatus(List<NZPByKoddRt> data)
@@ -199,14 +196,6 @@ namespace SewingProduction.Forms
 
         private async Task LoadAndBindFioListsAsync()
         {
-
-            ////designerTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Diz));
-            ////designerTextBox.Format += (s, e) =>
-            ////{
-            ////    int tab = (int)e.Value;
-            ////    e.Value = _fioList.FirstOrDefault(f => f.Tab == tab)?.Fio ?? "Не указано";
-            ////};
-
             try
             {
                 if (_cachedFioData == null)
@@ -227,29 +216,15 @@ namespace SewingProduction.Forms
                 ArtNormN.FioSource = _cachedFioData;
                 _bindingSource.DataSource = _bindingList;
                 _bindingSource.ResetBindings(false);
-                //// Привязываем к источникам данных для лукапов
-                //await this.InvokeAsync(() =>
-                //{
-                //    desBindingSource.DataSource = _cachedFioData;
-                //    constrBindingSource.DataSource = _cachedFioData;
-
-                //    // Привязываем TextBox вручную, если используешь
-                //    designerTextBox.DataBindings.Clear();
-                //    designerTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioDiz.fio), true, DataSourceUpdateMode.OnPropertyChanged);
-
-                //    constructorTextBox.DataBindings.Clear();
-                //    constructorTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.FioConstr.fio), true, DataSourceUpdateMode.OnPropertyChanged);
-                //});
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
-                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
 
-
+        #region Добавить предварительное
         /// <summary>
         /// Добавить предварительное
         /// </summary>
@@ -310,8 +285,84 @@ namespace SewingProduction.Forms
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
+        private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
+        {
+            if (teamWorkForm.ShowDialog() == DialogResult.OK)
+            {
+                var createdItem = teamWorkForm.CreatedAnn;
 
+                if (createdItem != null)
+                {
+                    // Обновляем существующий объект
+                    newItem.Articul = createdItem.Articul;
+                    newItem.Mod = createdItem.Mod;
+                    newItem.Group = createdItem.Group;
+                    newItem.Komment = createdItem.Komment;
+                    newItem.Diz = createdItem.Diz;
+                    newItem.Constr = createdItem.Constr;
+                    newItem.Sek = createdItem.Sek;
+                }
 
+                _bindingSource.ResetBindings(false);
+                int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
+                if (newRowHandle >= 0)
+                {
+                    ANNgridView.FocusedRowHandle = newRowHandle;
+                    ANNgridView.RefreshRow(newRowHandle);
+                }
+            }
+            else
+            {
+                // Удаляем несохранённую строку
+                _bindingList.Remove(newItem);
+                _bindingSource.Remove(newItem);
+
+                await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
+                if (teamWorkForm.IsRaszInserted)
+                    await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
+                if (teamWorkForm.IsRaskInserted)
+                    await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
+                if (teamWorkForm.IsKontInserted)
+                    await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
+                if (teamWorkForm.IsDopObrInserted)
+                    await _artNormService.DeleteByAnnId(TableNames.Obr, newItem.AnnID);
+
+                _bindingSource.ResetBindings(false);
+                ANNgridControl.RefreshDataSource();
+                ANNgridView.RefreshData();
+            }
+        }
+        private async Task Arch(object sender, EventArgs e)
+        {
+            int rowHandle = gridViewPreArch.FocusedRowHandle;
+            MyDataANN Row = gridViewPreArch.GetRow(rowHandle) as MyDataANN;
+            int newId = Row.AnnId;
+            ArtNormN oldRow = await _dbService.GetEntityAsync<ArtNormN>(@"Select * from ArtNormNView where annId = @newId", new { newId });
+            int oldId = oldRow.AnnID;
+            int newRowId = await _dbService.GetEntityAsync<int>(@"select annId from art_norm_n where parentId = @oldId", new { oldId });
+            if (oldRow == null) return;
+
+            await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
+
+            oldRow.Status = (int)Status.Archive;
+            oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
+
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
+            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", Status.Actual, TableNames.AnnId, newRowId);
+            UpdateRowInBindingList(oldRow);
+
+            await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
+            await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
+
+        }
+
+        #endregion
+
+        #region архив+копия
+        /// <summary>
+        /// Архив+копия
+        /// </summary>
+        /// <returns></returns>
         private async Task ArchAndCopy()
         {
             if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
@@ -378,31 +429,6 @@ namespace SewingProduction.Forms
                 await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
         }
-
-        private async Task Arch(object sender, EventArgs e)
-        {
-            int rowHandle = gridViewPreArch.FocusedRowHandle;
-            MyDataANN Row = gridViewPreArch.GetRow(rowHandle) as MyDataANN;
-            int newId = Row.AnnId;
-            ArtNormN oldRow = await _dbService.GetEntityAsync<ArtNormN>(@"Select * from ArtNormNView where annId = @newId", new { newId });
-            int oldId = oldRow.AnnID;
-            int newRowId = await _dbService.GetEntityAsync<int>(@"select annId from art_norm_n where parentId = @oldId", new { oldId });
-            if (oldRow == null) return;
-
-            await _logger.LogEventAsync($"Установка нового статуса: {Status.Archive}", "Arch");
-
-            oldRow.Status = (int)Status.Archive;
-            oldRow.StatusText = StatusHelper.GetStatusText((int)Status.Archive);
-
-            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldRow.Status, TableNames.AnnId, oldRow.AnnID);
-            await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", Status.Actual, TableNames.AnnId, newRowId);
-            UpdateRowInBindingList(oldRow);
-
-            await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
-            await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
-
-        }
-
         private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
         {
             if (oldStatus.HasValue)
@@ -446,54 +472,6 @@ namespace SewingProduction.Forms
 
                 await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
-        {
-            if (teamWorkForm.ShowDialog() == DialogResult.OK)
-            {
-                var createdItem = teamWorkForm.CreatedAnn;
-
-                if (createdItem != null)
-                {
-                    // Обновляем существующий объект
-                    newItem.Articul = createdItem.Articul;
-                    newItem.Mod = createdItem.Mod;
-                    newItem.Group = createdItem.Group;
-                    newItem.Komment = createdItem.Komment;
-                    newItem.Diz = createdItem.Diz;
-                    newItem.Constr = createdItem.Constr;
-                    newItem.Sek = createdItem.Sek;
-                }
-
-                _bindingSource.ResetBindings(false);
-                int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
-                if (newRowHandle >= 0)
-                {
-                    ANNgridView.FocusedRowHandle = newRowHandle;
-                    ANNgridView.RefreshRow(newRowHandle);
-                }
-            }
-            else
-            {
-                // Удаляем несохранённую строку
-                _bindingList.Remove(newItem);
-                _bindingSource.Remove(newItem);
-
-                await _artNormService.DeleteByAnnId(TableNames.Ann, newItem.AnnID);
-                if (teamWorkForm.IsRaszInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Rasz, newItem.AnnID);
-                if (teamWorkForm.IsRaskInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
-                if (teamWorkForm.IsKontInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
-                if (teamWorkForm.IsDopObrInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Obr, newItem.AnnID);
-
-                _bindingSource.ResetBindings(false);
-                ANNgridControl.RefreshDataSource();
-                ANNgridView.RefreshData();
-            }
         }
 
         private void UpdateRowInBindingList(ArtNormN newRow)
@@ -586,6 +564,7 @@ namespace SewingProduction.Forms
                 return null;
             }
         }
+        #endregion
 
         /// <summary>
         /// Обработчик кнопки "Отвязать артикул от РТ".

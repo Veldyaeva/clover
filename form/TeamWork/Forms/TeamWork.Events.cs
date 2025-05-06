@@ -136,9 +136,9 @@ namespace SewingProduction.Forms
                 }
 
                 // Применяем фильтр к gridView8
-                gridView_twToBind.BeginUpdate();
-                gridView_twToBind.ActiveFilterString = filterString;
-                gridView_twToBind.EndUpdate();
+                gridView_wdToBind.BeginUpdate();
+                gridView_wdToBind.ActiveFilterString = filterString;
+                gridView_wdToBind.EndUpdate();
             }
             catch (Exception ex)
             {

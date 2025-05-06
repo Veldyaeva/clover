@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DevExpress.LookAndFeel.DXSkinColors;
 using SewingProduction;
+using DevExpress.XtraLayout;
 
 namespace SewingProduction
 {
@@ -443,10 +444,15 @@ namespace SewingProduction
             Font = ThemeManager.SharedSettings.DefaultFont;
             AlternateRowColor = ThemeManager.ActiveTheme.BandHighlightColor;
 
+
             foreach (var view in ViewCollection)
             {
                 if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                {
                     ApplyRowColors(gridView);
+                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+                    gridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+                }
             }
         }
         private void OnViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)

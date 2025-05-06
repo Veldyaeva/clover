@@ -44,6 +44,9 @@ namespace SewingProduction.Forms
 
         private BindingList<MyDataART> _boundArtList;
         private BindingSource _boundArtBindingSource;
+        private List<KodProizvModel> kodProizvList;
+        private List<PodrVyazModel> podrVyazList;
+        private List<OborudShvModel> oborudShvList;
 
         public TeamWork()
 
@@ -77,7 +80,7 @@ namespace SewingProduction.Forms
                 view8.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
             }
             this.gridView_unboundArts.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-            this.gridView_twToBind.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
+            this.gridView_wdToBind.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             _myDataArtList = new BindingList<MyDataART>();
             _myDataArtBindingSource = new BindingSource { DataSource = _myDataArtList };
             if (gridControl_unboundArts != null)
@@ -130,33 +133,14 @@ namespace SewingProduction.Forms
                 sortGridView(ANNgridView); 
                 sortGridView(gridView4);
                 // sortGridView(gridView3); 
+                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null); 
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select kod_ob, text_ob from oborud_shv", null);
 
                 // Обновляем UI
                 ANNgridControl.RefreshDataSource();
                 gridControl_unboundArts.RefreshDataSource();
                 gridControl_wdToBind.RefreshDataSource();
-
-                //// Привязываем комментарий
-                //if (commentRichTextBox != null)
-                //{
-                //     commentRichTextBox.DataBindings.Clear(); 
-                //     commentRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Komment), true, DataSourceUpdateMode.OnPropertyChanged);
-                //}
-
-                //// Настраиваем и привязываем Дизайнера
-                //if (lookUpDesigner != null && desBindingSource != null) 
-                //{
-                //    // Настройка
-                //    lookUpDesigner.Properties.DataSource = desBindingSource;
-                //    lookUpDesigner.Properties.ValueMember = "tab"; 
-                //    lookUpDesigner.Properties.DisplayMember = "fio";
-                //    lookUpDesigner.Properties.Columns.Clear();
-                //    lookUpDesigner.Properties.Columns.Add(new DevExpress.XtraEditors.Controls.LookUpColumnInfo("fio", "ФИО"));
-
-                //    // Привязка EditValue к ID дизайнера в основной модели
-                //    lookUpDesigner.DataBindings.Clear();
-                //    lookUpDesigner.DataBindings.Add("EditValue", _bindingSource, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
-                //}
             }
             catch (Exception ex)
             {
@@ -169,7 +153,7 @@ namespace SewingProduction.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
-                    // Инициируем первую обработку, если необходимо
+                    // Инициируем первую обработку
                     if (ANNgridView.FocusedRowHandle >= 0)
                     {
                          gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));

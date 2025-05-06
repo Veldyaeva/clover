@@ -66,6 +66,23 @@ namespace SewingProduction.Models
         public int SekVyazo { get; set; }
         [Column("sek_vyaz")]
         public int SekVyaz { get; set; }
+        [Column("sek_vyaz14")]
+        public int SekVyaz14 {get; set;}
+        [Column("sek_vyaz70")]
+        public int SekVyaz70 {get; set;}
+        [Column("sek_vyaz71")]
+        public int SekVyaz71 {get; set;}
+        [Column("sek_vyaz72")]
+        public int SekVyaz72 {get; set;}
+        [Column("sek_vyaz62")]
+        public int SekVyaz62 {get; set;}
+        //[Column("sek_vyaz57")]
+        //public int SekVyaz57 {get; set;}
+        //[Column("sek_vyaz18")]
+        //public int SekVyaz18 {get; set;}
+        [NotMapped]
+        public int SekShv1   {get; set;}
+
         [Column("komment")]
         public string Komment
         {

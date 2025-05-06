@@ -55,8 +55,9 @@ namespace SewingProduction.form.TeamWork.Forms
             _dbService = new DbService(new DatabaseHelper("ace"));
             _artNormService = new ArtNormService(new DatabaseHelper("ace"));
             ThemeManager.UpdateTheme(this);
-
+            // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();
+            _gridHelper.LoadGridViewSettings(gridView1, "NormRaskrGrid.xml");
             this.Load += async (s, e) => await LoadInitialDataAsync();
         }
         private async Task LoadInitialDataAsync()
@@ -232,6 +233,19 @@ namespace SewingProduction.form.TeamWork.Forms
                 }
             }
         }
+
+        private void norm_raskrNew_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                // Сохраняем настройки грида при закрытии
+                _gridHelper.SaveGridViewSettings(gridView1, "NormRaskrGrid.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек грида NormRaskr");
+            }
+        }
         private int GetIntValue(DataRow row, string column) =>
     row[column] is DBNull ? 0 : int.TryParse(row[column]?.ToString(), out var val) ? val : 0;
 
@@ -254,8 +268,5 @@ namespace SewingProduction.form.TeamWork.Forms
             };
         }
 
-        private void norm_raskrNew_FormClosing(object sender, FormClosingEventArgs e)
-        {
-        }
     }
 } 

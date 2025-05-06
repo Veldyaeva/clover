@@ -20,6 +20,7 @@ using System.Data.SqlClient;
 using Z.Dapper.Plus;
 using System.Drawing;
 using System.Diagnostics;
+using Dapper;
 
 namespace SewingProduction.form
 {
@@ -35,7 +36,9 @@ namespace SewingProduction.form
         private readonly ILogger _logger = new FileLogger();
         private int _mode;
         private ArtNormN _currentAnnData;
-        private ArtNormN _originalAnnData; 
+        private ArtNormN _originalAnnData;
+        private readonly Debouncer _sekDebouncer = new Debouncer();
+
 
         private BindingList<NormRasz> _normRaszList;
         private BindingSource _normRaszBindingSource;
@@ -228,13 +231,29 @@ namespace SewingProduction.form
             }
             finally
             {
+                _normRaszList.ListChanged -= OnNormRaszListChanged; // защитная отписка
+                _normRaszList.ListChanged += OnNormRaszListChanged;
+
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
                 _normDopObrList.ListChanged += OnDataChanged;
+                _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                _normDopObrList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+
             }
         }
+        private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
+        {
+            // Запускаем отложенный пересчёт Sek
+            _sekDebouncer.Debounce(500, async () =>
+            {
+                 RecalculateSek();
+            });
 
+            OnDataChanged(sender, e); 
+        }
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
             try
@@ -399,7 +418,17 @@ namespace SewingProduction.form
                         _currentAnnData = annData;
                         bindingSource1.DataSource = _currentAnnData;
                         bindingSource1.ResetBindings(false);
+                        // Если загрузка из буфера, обновим и оригинал для сравнения
+                        if (isCopyOrBuffer) 
+                        {
+                             _originalAnnData = _currentAnnData?.Clone();
+                             _hasUnsavedChanges = false; // Сброс флага после вставки из буфера
+                        }
                     }
+                    Kod_proizv.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
+                    Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
+                    Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
+
                 });
             }
             catch (Exception ex)
@@ -474,6 +503,45 @@ namespace SewingProduction.form
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ANN для ID {_selectedAnnId}");
+            }
+        }
+
+        private void RecalculateSek()
+        {
+            try
+            {
+                var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
+
+                int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
+
+                _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
+                _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
+                _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
+                _currentAnnData.SekVyaz7 = Sum(r => r.KodOb == 26);
+                _currentAnnData.SekVyaz10 = Sum(r => r.KodOb == 37);
+                _currentAnnData.SekVyaz6 = Sum(r => r.KodOb == 38);
+                _currentAnnData.SekVyaz = Sum(r => r.KodOb == 29);
+                _currentAnnData.SekShv = Sum(r => r.KodPodr != 1 && r.KodPodr != 6);
+                _currentAnnData.SekKr = _normRaszList.Where(r => r.KodPodr == 7).Sum(r => r.Sek);
+                _currentAnnData.Sek = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Sek);
+                _currentAnnData.Slogn = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
+                _currentAnnData.SekVyaz14 = Sum(r => r.KodOb == 62);
+                _currentAnnData.SekVyaz70 = Sum(r => r.KodOb == 55);
+                _currentAnnData.SekVyaz71 = Sum(r => r.KodOb == 59);
+                _currentAnnData.SekVyaz72 = Sum(r => r.KodOb == 73);
+                _currentAnnData.SekVyaz62 = Sum(r => r.KodOb == 60);
+                //_currentAnnData.SekVyaz57 = Sum(r => r.Kod_ob == 114);
+                //_currentAnnData.SekVyaz18 = Sum(r => r.Kod_ob == 115);
+                _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+
+                if (!this.IsDisposed && this.IsHandleCreated)
+                {
+                    this.Invoke((MethodInvoker)(() => bindingSource1.ResetBindings(false)));
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при расширенном пересчете секунд");
             }
         }
 
@@ -606,6 +674,7 @@ namespace SewingProduction.form
                     gridView.CancelUpdateCurrentRow();
                     gridView.HideEditForm();
                     gridView.CloseEditForm();
+                    gridView.DeleteRow(e.RowHandle);
                 }
                 else
                 {
@@ -1039,7 +1108,6 @@ namespace SewingProduction.form
         {
             _okPressed = true;
             await ShowStatusMessage("Сохранение данных...");
-            var stepStopwatch = Stopwatch.StartNew(); // Таймер для шагов
 
             if (!ValidateForm())
             {
@@ -1059,13 +1127,6 @@ namespace SewingProduction.form
                 });
                 await ShowStatusMessage("Данные успешно сохранены!");
 
-            //    await _logger.LogEventAsync("Starting ExecutePztOperUpdateAsync...", "btnOK_Click");
-            //    stepStopwatch.Restart(); // Замеряем ExecutePztOperUpdateAsync
-
-            ////    await _artNormService.ExecutePztOperUpdateAsync();
-            //    stepStopwatch.Stop();
-            //    await _logger.LogEventAsync($"Finished ExecutePztOperUpdateAsync. Elapsed: {stepStopwatch.ElapsedMilliseconds} ms", "btnOK_Click");
-            //    await ShowStatusMessage("Плановые загрузки обновлены!");
                 this.DialogResult = DialogResult.OK;
                 this.Close();
 
@@ -1084,6 +1145,8 @@ namespace SewingProduction.form
             {
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
+                if (_newAnnId > 0)
+                     RecalculateSek();
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
 
@@ -1194,12 +1257,12 @@ namespace SewingProduction.form
                     if (lookUpEdit == constructorComboBox)
                     {
                         fieldName = "constr";
-                        await _logger.LogEventAsync($"Выбран конструктор с ID {selectedId}", "ComboBox_SelectedIndexChanged");
+                        //await _logger.LogEventAsync($"Выбран конструктор с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
                     else if (lookUpEdit == designerComboBox)
                     {
                         fieldName = "diz";
-                        await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
+                        //await _logger.LogEventAsync($"Выбран дизайнер с ID {selectedId}", "ComboBox_SelectedIndexChanged");
                     }
                 }
                 catch (Exception ex)
@@ -1245,7 +1308,6 @@ namespace SewingProduction.form
 
                     // Загружаем данные из буфера
                     await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
-                    await LoadAnnDataAsync();
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
