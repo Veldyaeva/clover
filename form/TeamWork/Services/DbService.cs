@@ -155,7 +155,7 @@ namespace SewingProduction.Services
                     await _logger.LogEventAsync($"Parameter {param.Key}: {param.Value} (тип: {param.Value?.GetType()})", "InsertEntityAsync");
                 }
 
-                object result = await _dbHelper.ExecuteScalarAsync(query, parameters);
+                int? result = await _dbHelper.ExecuteScalarAsync<int>(query, parameters);
 
                 if (result != null && int.TryParse(result.ToString(), out int newId))
                 {

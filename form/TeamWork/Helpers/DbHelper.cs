@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraCharts.Native;
+﻿using Dapper;
+using DevExpress.XtraCharts.Native;
 using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
@@ -119,7 +120,7 @@ namespace SewingProduction.Helpers
             int res = -1;
             using (var connection = new SqlConnection(_connectionString))
             {
-               await connection.OpenAsync();
+                await connection.OpenAsync();
                 using (var command = new SqlCommand(query, connection))
                 {
                     if (parameters != null)
@@ -135,6 +136,30 @@ namespace SewingProduction.Helpers
             }
             return res;
         }
+        public async Task<T> ExecuteScalarAsync<T>(string query, object parameters = null)
+        {
+            try
+            {
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+                    var result = await connection.ExecuteScalarAsync(query, parameters);
+
+                    if (result == null || result == DBNull.Value)
+                        return default;
+                    if (typeof(T).IsEnum)
+                        return (T)Enum.Parse(typeof(T), result.ToString());
+
+                    return (T)Convert.ChangeType(result, typeof(T));
+                }
+            }
+            catch (Exception ex)
+            {
+              //  _logger.LogError(ex, $"Ошибка при ExecuteScalarAsync<{typeof(T).Name}>: {query}");
+                throw;
+            }
+        }
+
         public async Task<SqlTransaction> BeginTransactionAsync()
         {
             _currentConnection = new SqlConnection(_connectionString);

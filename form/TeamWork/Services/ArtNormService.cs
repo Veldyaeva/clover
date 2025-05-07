@@ -285,8 +285,8 @@ namespace SewingProduction.Services
         public async Task<string> GetImage(int kod)
         {
             string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object> { { "@kod", kod } });
-            return result?.ToString(); 
+            string result = await _dbHelper.ExecuteScalarAsync<string>(query, new Dictionary<string, object> { { "@kod", kod} });
+            return result; 
         }
 
         internal Task<DataTable> GetNormOper(int i)

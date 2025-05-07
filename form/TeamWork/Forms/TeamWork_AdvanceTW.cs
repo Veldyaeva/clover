@@ -21,6 +21,7 @@ using Z.Dapper.Plus;
 using System.Drawing;
 using System.Diagnostics;
 using Dapper;
+using DevExpress.Utils;
 
 namespace SewingProduction.form
 {
@@ -60,6 +61,9 @@ namespace SewingProduction.form
 
         private bool _isSelectionFormOpen = false;
         private bool _hasUnsavedChanges = false;
+        private List<KodProizvModel> kodProizvList;
+        private List<PodrVyazModel> podrVyazList;
+        private List<OborudShvModel> oborudShvList;
 
         #region Highlighting
         private readonly Color _highlightColor = Color.LightYellow;
@@ -302,6 +306,10 @@ namespace SewingProduction.form
 
                 AttachChangeHandlers();
 
+                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM oborud_shv", null);
+
                 designerComboBox.DataBindings.Clear(); 
                 constructorComboBox.DataBindings.Clear();
 
@@ -391,6 +399,14 @@ namespace SewingProduction.form
                     repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
                     repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
                     repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
+                    foreach (var r in _normRaszList)
+                    {
+                        r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
+                        r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
+                        r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
+                    }
+
+
 
                     // Обновляем списки
                     _normRaszList.Clear();
@@ -425,7 +441,7 @@ namespace SewingProduction.form
                              _hasUnsavedChanges = false; // Сброс флага после вставки из буфера
                         }
                     }
-                    Kod_proizv.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
+                    gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
                     Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
                     Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
 
@@ -1106,37 +1122,18 @@ namespace SewingProduction.form
 
         private async void btnOK_Click(object sender, EventArgs e)
         {
-            _okPressed = true;
-            await ShowStatusMessage("Сохранение данных...");
-
-            if (!ValidateForm())
-            {
-                await ShowStatusMessage("Ошибки заполнения формы");
-                return; 
-            }
             try
             {
-                await _dbHelper.ExecuteInTransactionAsync(async () =>
-                {
-                    await SaveAnnDataAsync();
-                    await SaveAllDataAsync();
-                    if (_mode == (int)Mode.ArchAndCopy)
-                    { 
-
-                    }
-                });
-                await ShowStatusMessage("Данные успешно сохранены!");
-
+                btnSave_Click(sender, e);
                 this.DialogResult = DialogResult.OK;
                 this.Close();
-
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 DialogResult = DialogResult.None;
             }
+
         }
 
         private async Task SaveAnnDataAsync()
@@ -1412,17 +1409,44 @@ namespace SewingProduction.form
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
             this.Close();
+
         }
 
-        private void customGroupBox1_Enter(object sender, EventArgs e)
+        private async void btnSave_Click(object sender, EventArgs e)
         {
+            _okPressed = true;
+            await ShowStatusMessage("Сохранение данных...");
+
+            if (!ValidateForm())
+            {
+                await ShowStatusMessage("Ошибки заполнения формы");
+                return;
+            }
+            try
+            {
+                await _dbHelper.ExecuteInTransactionAsync(async () =>
+                {
+                    await SaveAnnDataAsync();
+                    await SaveAllDataAsync();
+                    if (_mode == (int)Mode.ArchAndCopy)
+                    {
+
+                    }
+                });
+                await ShowStatusMessage("Данные успешно сохранены!");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
+            }
 
         }
 
-        private void customLabel1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

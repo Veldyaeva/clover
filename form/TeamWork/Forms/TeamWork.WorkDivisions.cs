@@ -155,7 +155,7 @@ namespace SewingProduction.Forms
             // Сортируем каждую таблицу отдельно
             sortGridView(gridView1);
             sortGridView(gridView4);
-            sortGridView(gridView3);
+            sortGridView(gridViewRaskrTW);
             var raszList = await _artNormService.GetRelatedNormRasz(annId);
 
             //// Заполняем текстовые поля из справочников

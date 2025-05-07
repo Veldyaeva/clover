@@ -36,6 +36,7 @@ namespace SewingProduction.Models
         [NotMapped]
         public string TextVyaz { get; set; }
         private int _kod_proizv;
+        [Column("kod_proizv")]
         public int KodProizv
         {
             get => _kod_proizv;
@@ -43,6 +44,7 @@ namespace SewingProduction.Models
         }
 
         private int _kod_podr;
+        [Column("kod_podr")]
         public int KodPodr
         {
             get => _kod_podr;
@@ -50,6 +52,7 @@ namespace SewingProduction.Models
         }
 
         private int _kod_ob;
+        [Column("kod_ob")]
         public int KodOb
         {
             get => _kod_ob;
