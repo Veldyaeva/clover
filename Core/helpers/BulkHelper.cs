@@ -17,11 +17,13 @@ public class BulkHelper
         var isModifiedProp = type.GetProperty("IsModified");
         var isDeletedProp = type.GetProperty("IsDeleted");
 
-        if (isNewProp == null || isModifiedProp == null)
-            throw new InvalidOperationException("Тип должен содержать свойства IsNew и IsModified");
+        if (isNewProp == null || isModifiedProp == null || isDeletedProp == null)
+            throw new InvalidOperationException("Тип должен содержать свойства IsNew, IsModified и IsDeleted");
 
-        var insertList = data.Where(d => (bool?)isNewProp.GetValue(d) == true).ToList();
-        var updateList = data.Where(d => (bool?)isModifiedProp.GetValue(d) == true).ToList();
+        //var insertList = data.Where(d => (bool?)isNewProp.GetValue(d) == true).ToList();
+        //var updateList = data.Where(d => (bool?)isModifiedProp.GetValue(d) == true).ToList();
+        var insertList = isNewProp != null ? data.Where(d => (bool?)isNewProp.GetValue(d) == true).ToList() : new List<T>();
+        var updateList = isModifiedProp != null ? data.Where(d => (bool?)isModifiedProp.GetValue(d) == true).ToList() : new List<T>();
         var deleteList = isDeletedProp != null ? data.Where(d => (bool?)isDeletedProp.GetValue(d) == true).ToList() : new List<T>();
 
         if (insertList.Any())
