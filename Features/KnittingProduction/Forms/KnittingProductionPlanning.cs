@@ -90,10 +90,10 @@ namespace SewingProduction.form.Nadezhda
         {
             try
             {
-                var vyazPlanViewTask = Task.Run(() => 
+                var vyazPlanViewTask = Task.Run(() =>
                 {
                     _vyazPlanViewBindingList = new BindingList<VyazPlanView>();
-                    _vyazPlanViewBindingSource = new BindingSource { DataSource = _vyazPlanViewBindingList};
+                    _vyazPlanViewBindingSource = new BindingSource { DataSource = _vyazPlanViewBindingList };
                 });
                 var artPrFioProgrTask = Task.Run(() =>
                 {
@@ -161,7 +161,7 @@ namespace SewingProduction.form.Nadezhda
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
-                gridViewVyazPlan.OptionsBehavior.AutoUpdateTotalSummary = true; 
+                gridViewVyazPlan.OptionsBehavior.AutoUpdateTotalSummary = true;
                 gridViewVyazPlan.OptionsView.ShowIndicator = false;   // Скрываем стандартный индикатор
                 //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = false;
                 //gridViewVyazPlan.OptionsSelection.ShowCheckBoxSelectorInGroupRow = false;
@@ -294,12 +294,12 @@ namespace SewingProduction.form.Nadezhda
                         gridView1.SetRowCellValue(e.RowHandle, gridColumnVyazPlanSyncSelection, newValue);
 
                         if (newValue)
-                        { 
-                            gridViewVyazPlan.SelectRow(e.RowHandle); 
+                        {
+                            gridViewVyazPlan.SelectRow(e.RowHandle);
                         }
                         else
-                        { 
-                            gridViewVyazPlan.UnselectRow(e.RowHandle); 
+                        {
+                            gridViewVyazPlan.UnselectRow(e.RowHandle);
                         }
                     }
                 };
@@ -645,6 +645,61 @@ namespace SewingProduction.form.Nadezhda
                 targetList.Add(item);
             }
         }
+
+        private void KnitMachineStatusUpdate(int rowHandle)
+        {
+            var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
+            switch (selectedItem.pszkmID, selectedItem.KmlID)
+                {
+                    case (0, 0):  // Оба ID = 0
+                        selectedItem.IsNew = false;
+                        selectedItem.IsModified = false;
+                        selectedItem.IsDeleted = false;
+                        break;
+
+                    case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
+                        selectedItem.IsNew = false;
+                        selectedItem.IsModified = false;
+                        selectedItem.IsDeleted = true;
+                        break;
+
+                    case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
+                        selectedItem.IsNew = true;
+                        selectedItem.IsModified = false;
+                        selectedItem.IsDeleted = false;
+                        break;
+
+                    case ( > 0, > 0):  // Оба ID > 0
+                        selectedItem.IsNew = false;
+                        selectedItem.IsModified = true;
+                        selectedItem.IsDeleted = false;
+                        break;
+
+                    default:  // Все остальные случаи (например, отрицательные значения)
+                        Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+                        break;
+                }
+        }
+        private void SimpleButtonSaveVyazStatusUpdate()
+        {
+            // Получаем список строк с флагом IsNew = true или IsModified = true
+            var filteredListNew = vyazPlanViewData
+                .Where(x => x.IsNew || x.IsModified || x.IsDeleted)
+                .Select(x => new PlanSezonZadKnitMachineList
+                {
+                    pszkmPszNom = x.NomZad,
+                    pszkmKmlID = x.KmlID,
+                    pszkmID = x.pszkmID,
+                    pszkmKnitClass = x.IDVyazClass,
+                    pszkmPlanDate = x.pszkmPlanDate,
+                    IsNew = x.IsNew,
+                    IsModified = x.IsModified,
+                    IsDeleted = x.IsDeleted
+                })
+                .ToList();
+            simpleButtonSaveVyaz.Enabled = filteredListNew.Count > 0;
+        }
+
         private async void gridViewVyazPlan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             var selectedRow = _vyazPlanViewBindingSource.Current as VyazPlanView;
@@ -668,7 +723,7 @@ namespace SewingProduction.form.Nadezhda
             {
                 // Получаем список строк с флагом IsNew = true или IsModified = true
                 var filteredListNew = vyazPlanViewData
-                    .Where(x => x.IsNew || x.IsModified)
+                    .Where(x => x.IsNew || x.IsModified || x.IsDeleted)
                     .Select(x => new PlanSezonZadKnitMachineList
                     {
                         pszkmPszNom = x.NomZad,
@@ -677,7 +732,8 @@ namespace SewingProduction.form.Nadezhda
                         pszkmKnitClass = x.IDVyazClass,
                         pszkmPlanDate = x.pszkmPlanDate,
                         IsNew = x.IsNew,
-                        IsModified = x.IsModified
+                        IsModified = x.IsModified,
+                        IsDeleted = x.IsDeleted
                     })
                     .ToList();
                 // Преобразуем в BindingList
@@ -748,6 +804,7 @@ namespace SewingProduction.form.Nadezhda
                 {
                     gridControlVyazPlan.RefreshDataSource();
                 });
+                SimpleButtonSaveVyazStatusUpdate();
             }
             catch (Exception ex)
             {
@@ -766,27 +823,31 @@ namespace SewingProduction.form.Nadezhda
                 selectedItem.KmlNumber = selectedMachine.kmlNumber;
                 selectedItem.SyncSelection = false;
                 gridViewVyazPlan.UnselectRow(rowHandle);
-                if (selectedItem.KmlID > 0 && selectedItem.pszkmID == 0)
-                {
-                    selectedItem.IsNew = true;
-                    selectedItem.IsModified = false;
-                }
-                else
-                {
-                    if (selectedItem.KmlID > 0 && selectedItem.pszkmID != 0)
-                    {
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = true;
-                    }
-                }
-
+                KnitMachineStatusUpdate(rowHandle);
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
+            SimpleButtonSaveVyazStatusUpdate();
         }
 
         private void gridControlArtPrKnitMachineViewRecom1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void simpleButtonClearKnitMachine_Click(object sender, EventArgs e)
+        {
+            foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
+            {
+                //var selectedMachine = _knitMachineListBindingSource.Current as KnitMachineList;
+                var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
+                selectedItem.KmlID = 0;
+                selectedItem.KmlNumber = "0";
+                selectedItem.SyncSelection = false;
+                gridViewVyazPlan.UnselectRow(rowHandle);
+                KnitMachineStatusUpdate(rowHandle);
+            }
+            _vyazPlanViewBindingSource.ResetBindings(false);
+            SimpleButtonSaveVyazStatusUpdate();
         }
     }
 }
