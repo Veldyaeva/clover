@@ -51,7 +51,9 @@
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             pictureBoxEskiz = new System.Windows.Forms.PictureBox();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            simpleButtonClearKnitMachine = new CustomSimpleButton();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            comboBoxKnitMachineList = new CustomComboBox();
+            customLabel2 = new CustomLabel();
             tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             customLabel4 = new CustomLabel();
             gridControlArtPrKnitMachineViewPr2 = new CustomGridControl();
@@ -72,14 +74,13 @@
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnArtPrKnitMachineViewRecom1KmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth = new DevExpress.XtraGrid.Columns.GridColumn();
-            customLabel2 = new CustomLabel();
-            comboBoxKnitMachineList = new CustomComboBox();
-            simpleButtonSetKnitMachine = new CustomSimpleButton();
             simpleButtonSaveVyaz = new CustomSimpleButton();
+            simpleButtonClearKnitMachine = new CustomSimpleButton();
             gridControlPlanSezonZadanyRazmKol = new CustomGridControl();
             gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnPlanSezonZadanyRazmKolKol = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnPlanSezonZadanyRazmKolRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            simpleButtonSetKnitMachine = new CustomSimpleButton();
             gridControlArtPrFioProgr = new CustomGridControl();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -90,6 +91,7 @@
             customTextBox1 = new CustomTextBox();
             customLabel1 = new CustomLabel();
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             ((System.ComponentModel.ISupportInitialize)gridControlVyazPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewVyazPlan).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
@@ -98,6 +100,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxEskiz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).BeginInit();
             tablePanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)tablePanel3).BeginInit();
             tablePanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlArtPrKnitMachineViewPr2).BeginInit();
@@ -115,12 +118,14 @@
             ((System.ComponentModel.ISupportInitialize)gridControlArtPrFioProgr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             SuspendLayout();
             // 
             // gridControlVyazPlan
             // 
             tablePanel1.SetColumn(gridControlVyazPlan, 0);
             tablePanel1.SetColumnSpan(gridControlVyazPlan, 11);
+            gridControlVyazPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlVyazPlan.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlVyazPlan.Font = new System.Drawing.Font("Arial", 10F);
             gridControlVyazPlan.Location = new System.Drawing.Point(15, 13);
@@ -313,14 +318,10 @@
             // 
             // pictureBoxEskiz
             // 
-            tablePanel1.SetColumn(pictureBoxEskiz, 0);
-            tablePanel1.SetColumnSpan(pictureBoxEskiz, 2);
             pictureBoxEskiz.Dock = System.Windows.Forms.DockStyle.Fill;
             pictureBoxEskiz.Location = new System.Drawing.Point(15, 527);
             pictureBoxEskiz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxEskiz.Name = "pictureBoxEskiz";
-            tablePanel1.SetRow(pictureBoxEskiz, 5);
-            tablePanel1.SetRowSpan(pictureBoxEskiz, 2);
             pictureBoxEskiz.Size = new System.Drawing.Size(305, 231);
             pictureBoxEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxEskiz.TabIndex = 26;
@@ -328,15 +329,14 @@
             // 
             // tablePanel1
             // 
-            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 293F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 45.54004F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 240F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 35F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 365F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 365F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 107F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 120F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 150F) });
-            tablePanel1.Controls.Add(simpleButtonClearKnitMachine);
+            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 293F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 45.54004F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 240F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 35F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 410F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 410F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 107F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 120F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 150F) });
+            tablePanel1.Controls.Add(tableLayoutPanel2);
             tablePanel1.Controls.Add(tablePanel3);
             tablePanel1.Controls.Add(tablePanel2);
-            tablePanel1.Controls.Add(customLabel2);
-            tablePanel1.Controls.Add(comboBoxKnitMachineList);
-            tablePanel1.Controls.Add(simpleButtonSetKnitMachine);
             tablePanel1.Controls.Add(simpleButtonSaveVyaz);
+            tablePanel1.Controls.Add(simpleButtonClearKnitMachine);
             tablePanel1.Controls.Add(gridControlPlanSezonZadanyRazmKol);
+            tablePanel1.Controls.Add(simpleButtonSetKnitMachine);
             tablePanel1.Controls.Add(gridControlArtPrFioProgr);
             tablePanel1.Controls.Add(tableLayoutPanel1);
             tablePanel1.Controls.Add(gridControlVyazPlan);
@@ -350,44 +350,68 @@
             tablePanel1.TabIndex = 27;
             tablePanel1.UseSkinIndents = true;
             // 
-            // simpleButtonClearKnitMachine
+            // tableLayoutPanel2
             // 
-            simpleButtonClearKnitMachine.Appearance.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            simpleButtonClearKnitMachine.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonClearKnitMachine.Appearance.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            simpleButtonClearKnitMachine.Appearance.Options.UseBackColor = true;
-            simpleButtonClearKnitMachine.Appearance.Options.UseFont = true;
-            simpleButtonClearKnitMachine.Appearance.Options.UseForeColor = true;
-            simpleButtonClearKnitMachine.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            simpleButtonClearKnitMachine.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseBackColor = true;
-            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
-            tablePanel1.SetColumn(simpleButtonClearKnitMachine, 10);
-            simpleButtonClearKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonClearKnitMachine.ImageOptions.Image");
-            simpleButtonClearKnitMachine.Location = new System.Drawing.Point(1583, 482);
-            simpleButtonClearKnitMachine.Name = "simpleButtonClearKnitMachine";
-            tablePanel1.SetRow(simpleButtonClearKnitMachine, 3);
-            simpleButtonClearKnitMachine.Size = new System.Drawing.Size(191, 25);
-            simpleButtonClearKnitMachine.TabIndex = 37;
-            simpleButtonClearKnitMachine.Text = "Очистить В/М";
-            simpleButtonClearKnitMachine.Click += simpleButtonClearKnitMachine_Click;
+            tablePanel1.SetColumn(tableLayoutPanel2, 6);
+            tableLayoutPanel2.ColumnCount = 2;
+            tablePanel1.SetColumnSpan(tableLayoutPanel2, 4);
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.2489243F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.7510738F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel2.Controls.Add(comboBoxKnitMachineList, 1, 0);
+            tableLayoutPanel2.Controls.Add(customLabel2, 0, 0);
+            tableLayoutPanel2.Location = new System.Drawing.Point(1016, 434);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tablePanel1.SetRow(tableLayoutPanel2, 1);
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(466, 30);
+            tableLayoutPanel2.TabIndex = 38;
+            // 
+            // comboBoxKnitMachineList
+            // 
+            comboBoxKnitMachineList.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            comboBoxKnitMachineList.Dock = System.Windows.Forms.DockStyle.Top;
+            comboBoxKnitMachineList.Font = new System.Drawing.Font("Arial", 10F);
+            comboBoxKnitMachineList.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            comboBoxKnitMachineList.FormattingEnabled = true;
+            comboBoxKnitMachineList.Location = new System.Drawing.Point(350, 3);
+            comboBoxKnitMachineList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            comboBoxKnitMachineList.Name = "comboBoxKnitMachineList";
+            comboBoxKnitMachineList.Size = new System.Drawing.Size(112, 24);
+            comboBoxKnitMachineList.TabIndex = 35;
+            // 
+            // customLabel2
+            // 
+            customLabel2.AutoSize = true;
+            customLabel2.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel2.Location = new System.Drawing.Point(255, 0);
+            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Size = new System.Drawing.Size(87, 30);
+            customLabel2.TabIndex = 36;
+            customLabel2.Text = "Вяз машина";
+            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // tablePanel3
             // 
             tablePanel3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             tablePanel1.SetColumn(tablePanel3, 6);
-            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 92F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
+            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 100F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
             tablePanel3.Controls.Add(customLabel4);
             tablePanel3.Controls.Add(gridControlArtPrKnitMachineViewPr2);
             tablePanel3.Controls.Add(gridControlArtPrKnitMachineViewRecom2);
             tablePanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tablePanel3.Location = new System.Drawing.Point(973, 481);
+            tablePanel3.Location = new System.Drawing.Point(1018, 481);
             tablePanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tablePanel3.Name = "tablePanel3";
             tablePanel1.SetRow(tablePanel3, 3);
             tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
             tablePanel1.SetRowSpan(tablePanel3, 4);
-            tablePanel3.Size = new System.Drawing.Size(357, 277);
+            tablePanel3.Size = new System.Drawing.Size(402, 277);
             tablePanel3.TabIndex = 0;
             tablePanel3.UseSkinIndents = true;
             // 
@@ -403,7 +427,7 @@
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
             tablePanel3.SetRow(customLabel4, 0);
-            customLabel4.Size = new System.Drawing.Size(327, 26);
+            customLabel4.Size = new System.Drawing.Size(372, 26);
             customLabel4.TabIndex = 39;
             customLabel4.Text = "Вспомогательная В/М";
             // 
@@ -418,7 +442,7 @@
             gridControlArtPrKnitMachineViewPr2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewPr2.Name = "gridControlArtPrKnitMachineViewPr2";
             tablePanel3.SetRow(gridControlArtPrKnitMachineViewPr2, 1);
-            gridControlArtPrKnitMachineViewPr2.Size = new System.Drawing.Size(84, 224);
+            gridControlArtPrKnitMachineViewPr2.Size = new System.Drawing.Size(92, 224);
             gridControlArtPrKnitMachineViewPr2.TabIndex = 37;
             gridControlArtPrKnitMachineViewPr2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView5 });
             // 
@@ -436,7 +460,7 @@
             // 
             // gridColumnArtPrKnitMachineViewPr2KmlNumber
             // 
-            gridColumnArtPrKnitMachineViewPr2KmlNumber.Caption = "в/м ПР основн.";
+            gridColumnArtPrKnitMachineViewPr2KmlNumber.Caption = "в/м ПР вспомог.";
             gridColumnArtPrKnitMachineViewPr2KmlNumber.MinWidth = 23;
             gridColumnArtPrKnitMachineViewPr2KmlNumber.Name = "gridColumnArtPrKnitMachineViewPr2KmlNumber";
             gridColumnArtPrKnitMachineViewPr2KmlNumber.Visible = true;
@@ -449,12 +473,12 @@
             gridControlArtPrKnitMachineViewRecom2.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrKnitMachineViewRecom2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom2.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrKnitMachineViewRecom2.Location = new System.Drawing.Point(107, 39);
+            gridControlArtPrKnitMachineViewRecom2.Location = new System.Drawing.Point(115, 39);
             gridControlArtPrKnitMachineViewRecom2.MainView = gridView6;
             gridControlArtPrKnitMachineViewRecom2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom2.Name = "gridControlArtPrKnitMachineViewRecom2";
             tablePanel3.SetRow(gridControlArtPrKnitMachineViewRecom2, 1);
-            gridControlArtPrKnitMachineViewRecom2.Size = new System.Drawing.Size(235, 224);
+            gridControlArtPrKnitMachineViewRecom2.Size = new System.Drawing.Size(272, 224);
             gridControlArtPrKnitMachineViewRecom2.TabIndex = 38;
             gridControlArtPrKnitMachineViewRecom2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
             // 
@@ -472,12 +496,12 @@
             // 
             // gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth
             // 
-            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Caption = "своб. часы";
+            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Caption = "своб. часы тек. месяц";
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.MinWidth = 23;
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Name = "gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth";
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.VisibleIndex = 1;
-            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Width = 86;
+            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Width = 81;
             // 
             // gridColumnArtPrKnitMachineViewRecom2KmlNumber
             // 
@@ -486,7 +510,7 @@
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.Name = "gridColumnArtPrKnitMachineViewRecom2KmlNumber";
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.VisibleIndex = 0;
-            gridColumnArtPrKnitMachineViewRecom2KmlNumber.Width = 45;
+            gridColumnArtPrKnitMachineViewRecom2KmlNumber.Width = 80;
             // 
             // gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth
             // 
@@ -495,13 +519,13 @@
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Name = "gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth";
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.VisibleIndex = 2;
-            gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Width = 79;
+            gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Width = 86;
             // 
             // tablePanel2
             // 
             tablePanel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             tablePanel1.SetColumn(tablePanel2, 4);
-            tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 92F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
+            tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 100F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
             tablePanel2.Controls.Add(customLabel3);
             tablePanel2.Controls.Add(gridControlArtPrKnitMachineViewPr1);
             tablePanel2.Controls.Add(gridControlArtPrKnitMachineViewRecom1);
@@ -512,7 +536,7 @@
             tablePanel1.SetRow(tablePanel2, 3);
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
             tablePanel1.SetRowSpan(tablePanel2, 4);
-            tablePanel2.Size = new System.Drawing.Size(357, 277);
+            tablePanel2.Size = new System.Drawing.Size(402, 277);
             tablePanel2.TabIndex = 0;
             tablePanel2.UseSkinIndents = true;
             // 
@@ -528,7 +552,7 @@
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             tablePanel2.SetRow(customLabel3, 0);
-            customLabel3.Size = new System.Drawing.Size(327, 26);
+            customLabel3.Size = new System.Drawing.Size(372, 26);
             customLabel3.TabIndex = 35;
             customLabel3.Text = "Основная В/М";
             // 
@@ -543,7 +567,7 @@
             gridControlArtPrKnitMachineViewPr1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewPr1.Name = "gridControlArtPrKnitMachineViewPr1";
             tablePanel2.SetRow(gridControlArtPrKnitMachineViewPr1, 1);
-            gridControlArtPrKnitMachineViewPr1.Size = new System.Drawing.Size(84, 224);
+            gridControlArtPrKnitMachineViewPr1.Size = new System.Drawing.Size(92, 224);
             gridControlArtPrKnitMachineViewPr1.TabIndex = 33;
             gridControlArtPrKnitMachineViewPr1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
@@ -574,12 +598,12 @@
             gridControlArtPrKnitMachineViewRecom1.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrKnitMachineViewRecom1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom1.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrKnitMachineViewRecom1.Location = new System.Drawing.Point(107, 39);
+            gridControlArtPrKnitMachineViewRecom1.Location = new System.Drawing.Point(115, 39);
             gridControlArtPrKnitMachineViewRecom1.MainView = gridView4;
             gridControlArtPrKnitMachineViewRecom1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom1.Name = "gridControlArtPrKnitMachineViewRecom1";
             tablePanel2.SetRow(gridControlArtPrKnitMachineViewRecom1, 1);
-            gridControlArtPrKnitMachineViewRecom1.Size = new System.Drawing.Size(235, 224);
+            gridControlArtPrKnitMachineViewRecom1.Size = new System.Drawing.Size(272, 224);
             gridControlArtPrKnitMachineViewRecom1.TabIndex = 34;
             gridControlArtPrKnitMachineViewRecom1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
             gridControlArtPrKnitMachineViewRecom1.Click += gridControlArtPrKnitMachineViewRecom1_Click;
@@ -603,7 +627,7 @@
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Name = "gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth";
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.VisibleIndex = 1;
-            gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Width = 86;
+            gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Width = 81;
             // 
             // gridColumnArtPrKnitMachineViewRecom1KmlNumber
             // 
@@ -612,7 +636,7 @@
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.Name = "gridColumnArtPrKnitMachineViewRecom1KmlNumber";
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.VisibleIndex = 0;
-            gridColumnArtPrKnitMachineViewRecom1KmlNumber.Width = 48;
+            gridColumnArtPrKnitMachineViewRecom1KmlNumber.Width = 80;
             // 
             // gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth
             // 
@@ -621,62 +645,7 @@
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Name = "gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth";
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.VisibleIndex = 2;
-            gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Width = 88;
-            // 
-            // customLabel2
-            // 
-            customLabel2.AutoSize = true;
-            tablePanel1.SetColumn(customLabel2, 8);
-            customLabel2.Dock = System.Windows.Forms.DockStyle.Right;
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(1370, 432);
-            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel2.Name = "customLabel2";
-            tablePanel1.SetRow(customLabel2, 1);
-            customLabel2.Size = new System.Drawing.Size(87, 34);
-            customLabel2.TabIndex = 36;
-            customLabel2.Text = "Вяз машина";
-            customLabel2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // comboBoxKnitMachineList
-            // 
-            comboBoxKnitMachineList.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
-            tablePanel1.SetColumn(comboBoxKnitMachineList, 9);
-            comboBoxKnitMachineList.Dock = System.Windows.Forms.DockStyle.Fill;
-            comboBoxKnitMachineList.Font = new System.Drawing.Font("Arial", 10F);
-            comboBoxKnitMachineList.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
-            comboBoxKnitMachineList.FormattingEnabled = true;
-            comboBoxKnitMachineList.Location = new System.Drawing.Point(1465, 435);
-            comboBoxKnitMachineList.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            comboBoxKnitMachineList.Name = "comboBoxKnitMachineList";
-            tablePanel1.SetRow(comboBoxKnitMachineList, 1);
-            comboBoxKnitMachineList.Size = new System.Drawing.Size(112, 24);
-            comboBoxKnitMachineList.TabIndex = 35;
-            // 
-            // simpleButtonSetKnitMachine
-            // 
-            simpleButtonSetKnitMachine.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            simpleButtonSetKnitMachine.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            simpleButtonSetKnitMachine.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            simpleButtonSetKnitMachine.Appearance.Options.UseBackColor = true;
-            simpleButtonSetKnitMachine.Appearance.Options.UseFont = true;
-            simpleButtonSetKnitMachine.Appearance.Options.UseForeColor = true;
-            simpleButtonSetKnitMachine.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            simpleButtonSetKnitMachine.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            simpleButtonSetKnitMachine.AppearanceDisabled.Options.UseBackColor = true;
-            simpleButtonSetKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
-            tablePanel1.SetColumn(simpleButtonSetKnitMachine, 10);
-            simpleButtonSetKnitMachine.Dock = System.Windows.Forms.DockStyle.Top;
-            simpleButtonSetKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSetKnitMachine.ImageOptions.Image");
-            simpleButtonSetKnitMachine.Location = new System.Drawing.Point(1585, 435);
-            simpleButtonSetKnitMachine.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            simpleButtonSetKnitMachine.Name = "simpleButtonSetKnitMachine";
-            tablePanel1.SetRow(simpleButtonSetKnitMachine, 1);
-            simpleButtonSetKnitMachine.Size = new System.Drawing.Size(187, 25);
-            simpleButtonSetKnitMachine.TabIndex = 32;
-            simpleButtonSetKnitMachine.Text = "Привязать В/М";
-            simpleButtonSetKnitMachine.Click += simpleButtonSetKnitMachine_Click;
+            gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Width = 86;
             // 
             // simpleButtonSaveVyaz
             // 
@@ -694,18 +663,40 @@
             simpleButtonSaveVyaz.Dock = System.Windows.Forms.DockStyle.Top;
             simpleButtonSaveVyaz.Enabled = false;
             simpleButtonSaveVyaz.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSaveVyaz.ImageOptions.Image");
-            simpleButtonSaveVyaz.Location = new System.Drawing.Point(1585, 527);
+            simpleButtonSaveVyaz.Location = new System.Drawing.Point(1488, 527);
             simpleButtonSaveVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonSaveVyaz.Name = "simpleButtonSaveVyaz";
             tablePanel1.SetRow(simpleButtonSaveVyaz, 5);
-            simpleButtonSaveVyaz.Size = new System.Drawing.Size(187, 25);
+            simpleButtonSaveVyaz.Size = new System.Drawing.Size(284, 24);
             simpleButtonSaveVyaz.TabIndex = 31;
             simpleButtonSaveVyaz.Text = "Сохранить";
             simpleButtonSaveVyaz.Click += simpleButtonSaveVyaz_Click;
             // 
+            // simpleButtonClearKnitMachine
+            // 
+            simpleButtonClearKnitMachine.Appearance.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            simpleButtonClearKnitMachine.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonClearKnitMachine.Appearance.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            simpleButtonClearKnitMachine.Appearance.Options.UseBackColor = true;
+            simpleButtonClearKnitMachine.Appearance.Options.UseFont = true;
+            simpleButtonClearKnitMachine.Appearance.Options.UseForeColor = true;
+            simpleButtonClearKnitMachine.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            simpleButtonClearKnitMachine.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseBackColor = true;
+            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
+            tablePanel1.SetColumn(simpleButtonClearKnitMachine, 10);
+            simpleButtonClearKnitMachine.Dock = System.Windows.Forms.DockStyle.Top;
+            simpleButtonClearKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonClearKnitMachine.ImageOptions.Image");
+            simpleButtonClearKnitMachine.Location = new System.Drawing.Point(1486, 480);
+            simpleButtonClearKnitMachine.Name = "simpleButtonClearKnitMachine";
+            tablePanel1.SetRow(simpleButtonClearKnitMachine, 3);
+            simpleButtonClearKnitMachine.Size = new System.Drawing.Size(288, 24);
+            simpleButtonClearKnitMachine.TabIndex = 37;
+            simpleButtonClearKnitMachine.Text = "Очистить В/М";
+            simpleButtonClearKnitMachine.Click += simpleButtonClearKnitMachine_Click;
+            // 
             // gridControlPlanSezonZadanyRazmKol
             // 
-            tablePanel1.SetColumn(gridControlPlanSezonZadanyRazmKol, 2);
             gridControlPlanSezonZadanyRazmKol.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlPlanSezonZadanyRazmKol.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlPlanSezonZadanyRazmKol.Font = new System.Drawing.Font("Arial", 10F);
@@ -713,8 +704,6 @@
             gridControlPlanSezonZadanyRazmKol.MainView = gridView2;
             gridControlPlanSezonZadanyRazmKol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlPlanSezonZadanyRazmKol.Name = "gridControlPlanSezonZadanyRazmKol";
-            tablePanel1.SetRow(gridControlPlanSezonZadanyRazmKol, 5);
-            tablePanel1.SetRowSpan(gridControlPlanSezonZadanyRazmKol, 2);
             gridControlPlanSezonZadanyRazmKol.Size = new System.Drawing.Size(232, 231);
             gridControlPlanSezonZadanyRazmKol.TabIndex = 30;
             gridControlPlanSezonZadanyRazmKol.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
@@ -749,10 +738,31 @@
             gridColumnPlanSezonZadanyRazmKolRazm.VisibleIndex = 0;
             gridColumnPlanSezonZadanyRazmKolRazm.Width = 87;
             // 
+            // simpleButtonSetKnitMachine
+            // 
+            simpleButtonSetKnitMachine.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            simpleButtonSetKnitMachine.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonSetKnitMachine.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            simpleButtonSetKnitMachine.Appearance.Options.UseBackColor = true;
+            simpleButtonSetKnitMachine.Appearance.Options.UseFont = true;
+            simpleButtonSetKnitMachine.Appearance.Options.UseForeColor = true;
+            simpleButtonSetKnitMachine.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            simpleButtonSetKnitMachine.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            simpleButtonSetKnitMachine.AppearanceDisabled.Options.UseBackColor = true;
+            simpleButtonSetKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
+            tablePanel1.SetColumn(simpleButtonSetKnitMachine, 10);
+            simpleButtonSetKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSetKnitMachine.ImageOptions.Image");
+            simpleButtonSetKnitMachine.Location = new System.Drawing.Point(1488, 437);
+            simpleButtonSetKnitMachine.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonSetKnitMachine.Name = "simpleButtonSetKnitMachine";
+            tablePanel1.SetRow(simpleButtonSetKnitMachine, 1);
+            simpleButtonSetKnitMachine.Size = new System.Drawing.Size(284, 24);
+            simpleButtonSetKnitMachine.TabIndex = 32;
+            simpleButtonSetKnitMachine.Text = "Привязать В/М";
+            simpleButtonSetKnitMachine.Click += simpleButtonSetKnitMachine_Click;
+            // 
             // gridControlArtPrFioProgr
             // 
-            tablePanel1.SetColumn(gridControlArtPrFioProgr, 0);
-            tablePanel1.SetColumnSpan(gridControlArtPrFioProgr, 3);
             gridControlArtPrFioProgr.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrFioProgr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrFioProgr.Font = new System.Drawing.Font("Arial", 10F);
@@ -760,7 +770,6 @@
             gridControlArtPrFioProgr.MainView = gridView1;
             gridControlArtPrFioProgr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrFioProgr.Name = "gridControlArtPrFioProgr";
-            tablePanel1.SetRow(gridControlArtPrFioProgr, 8);
             gridControlArtPrFioProgr.Size = new System.Drawing.Size(545, 176);
             gridControlArtPrFioProgr.TabIndex = 29;
             gridControlArtPrFioProgr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
@@ -813,9 +822,7 @@
             // 
             // tableLayoutPanel1
             // 
-            tablePanel1.SetColumn(tableLayoutPanel1, 0);
             tableLayoutPanel1.ColumnCount = 2;
-            tablePanel1.SetColumnSpan(tableLayoutPanel1, 2);
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 107F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 198F));
             tableLayoutPanel1.Controls.Add(customTextBox1, 1, 0);
@@ -823,7 +830,6 @@
             tableLayoutPanel1.Location = new System.Drawing.Point(15, 481);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tablePanel1.SetRow(tableLayoutPanel1, 3);
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
@@ -863,6 +869,12 @@
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 0;
             // 
+            // simpleSeparator1
+            // 
+            simpleSeparator1.Location = new System.Drawing.Point(0, 26);
+            simpleSeparator1.Name = "simpleSeparator1";
+            simpleSeparator1.Size = new System.Drawing.Size(171, 1);
+            // 
             // KnittingProductionPlanning
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -881,7 +893,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBoxEskiz).EndInit();
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
             tablePanel1.ResumeLayout(false);
-            tablePanel1.PerformLayout();
+            tableLayoutPanel2.ResumeLayout(false);
+            tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)tablePanel3).EndInit();
             tablePanel3.ResumeLayout(false);
             tablePanel3.PerformLayout();
@@ -902,6 +915,7 @@
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ResumeLayout(false);
         }
 
@@ -968,5 +982,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth;
         private CustomSimpleButton simpleButtonClearKnitMachine;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
     }
 }
