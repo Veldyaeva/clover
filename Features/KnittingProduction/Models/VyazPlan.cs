@@ -71,6 +71,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int pszkmKnitClass {  set; get; }
         public int pszkmKmlID { get; set; }
         public DateTime? pszkmPlanDate { get; set; }
+        public DateTime? pszkmDateAdd { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]

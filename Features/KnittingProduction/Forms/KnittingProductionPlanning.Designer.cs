@@ -51,6 +51,7 @@
             repositoryItemLookUpEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             pictureBoxEskiz = new System.Windows.Forms.PictureBox();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
+            simpleButtonClearKnitMachine = new CustomSimpleButton();
             tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             customLabel4 = new CustomLabel();
             gridControlArtPrKnitMachineViewPr2 = new CustomGridControl();
@@ -315,12 +316,12 @@
             tablePanel1.SetColumn(pictureBoxEskiz, 0);
             tablePanel1.SetColumnSpan(pictureBoxEskiz, 2);
             pictureBoxEskiz.Dock = System.Windows.Forms.DockStyle.Fill;
-            pictureBoxEskiz.Location = new System.Drawing.Point(15, 515);
+            pictureBoxEskiz.Location = new System.Drawing.Point(15, 527);
             pictureBoxEskiz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxEskiz.Name = "pictureBoxEskiz";
-            tablePanel1.SetRow(pictureBoxEskiz, 4);
+            tablePanel1.SetRow(pictureBoxEskiz, 5);
             tablePanel1.SetRowSpan(pictureBoxEskiz, 2);
-            pictureBoxEskiz.Size = new System.Drawing.Size(305, 209);
+            pictureBoxEskiz.Size = new System.Drawing.Size(305, 231);
             pictureBoxEskiz.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             pictureBoxEskiz.TabIndex = 26;
             pictureBoxEskiz.TabStop = false;
@@ -328,6 +329,7 @@
             // tablePanel1
             // 
             tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 293F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 45.54004F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 240F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 35F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 365F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 365F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 107F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 120F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 150F) });
+            tablePanel1.Controls.Add(simpleButtonClearKnitMachine);
             tablePanel1.Controls.Add(tablePanel3);
             tablePanel1.Controls.Add(tablePanel2);
             tablePanel1.Controls.Add(customLabel2);
@@ -343,16 +345,38 @@
             tablePanel1.Location = new System.Drawing.Point(0, 0);
             tablePanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tablePanel1.Name = "tablePanel1";
-            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 422F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 203F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, -167F) });
+            tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 422F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 203F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 200F) });
             tablePanel1.Size = new System.Drawing.Size(1787, 966);
             tablePanel1.TabIndex = 27;
             tablePanel1.UseSkinIndents = true;
+            // 
+            // simpleButtonClearKnitMachine
+            // 
+            simpleButtonClearKnitMachine.Appearance.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            simpleButtonClearKnitMachine.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonClearKnitMachine.Appearance.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            simpleButtonClearKnitMachine.Appearance.Options.UseBackColor = true;
+            simpleButtonClearKnitMachine.Appearance.Options.UseFont = true;
+            simpleButtonClearKnitMachine.Appearance.Options.UseForeColor = true;
+            simpleButtonClearKnitMachine.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            simpleButtonClearKnitMachine.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseBackColor = true;
+            simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
+            tablePanel1.SetColumn(simpleButtonClearKnitMachine, 10);
+            simpleButtonClearKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonClearKnitMachine.ImageOptions.Image");
+            simpleButtonClearKnitMachine.Location = new System.Drawing.Point(1583, 482);
+            simpleButtonClearKnitMachine.Name = "simpleButtonClearKnitMachine";
+            tablePanel1.SetRow(simpleButtonClearKnitMachine, 3);
+            simpleButtonClearKnitMachine.Size = new System.Drawing.Size(191, 25);
+            simpleButtonClearKnitMachine.TabIndex = 37;
+            simpleButtonClearKnitMachine.Text = "Очистить В/М";
+            simpleButtonClearKnitMachine.Click += simpleButtonClearKnitMachine_Click;
             // 
             // tablePanel3
             // 
             tablePanel3.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             tablePanel1.SetColumn(tablePanel3, 6);
-            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
+            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 92F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
             tablePanel3.Controls.Add(customLabel4);
             tablePanel3.Controls.Add(gridControlArtPrKnitMachineViewPr2);
             tablePanel3.Controls.Add(gridControlArtPrKnitMachineViewRecom2);
@@ -362,8 +386,8 @@
             tablePanel3.Name = "tablePanel3";
             tablePanel1.SetRow(tablePanel3, 3);
             tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel1.SetRowSpan(tablePanel3, 2);
-            tablePanel3.Size = new System.Drawing.Size(357, 231);
+            tablePanel1.SetRowSpan(tablePanel3, 4);
+            tablePanel3.Size = new System.Drawing.Size(357, 277);
             tablePanel3.TabIndex = 0;
             tablePanel3.UseSkinIndents = true;
             // 
@@ -386,14 +410,15 @@
             // gridControlArtPrKnitMachineViewPr2
             // 
             tablePanel3.SetColumn(gridControlArtPrKnitMachineViewPr2, 0);
+            gridControlArtPrKnitMachineViewPr2.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrKnitMachineViewPr2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewPr2.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrKnitMachineViewPr2.Location = new System.Drawing.Point(15, 54);
+            gridControlArtPrKnitMachineViewPr2.Location = new System.Drawing.Point(15, 39);
             gridControlArtPrKnitMachineViewPr2.MainView = gridView5;
             gridControlArtPrKnitMachineViewPr2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewPr2.Name = "gridControlArtPrKnitMachineViewPr2";
             tablePanel3.SetRow(gridControlArtPrKnitMachineViewPr2, 1);
-            gridControlArtPrKnitMachineViewPr2.Size = new System.Drawing.Size(72, 147);
+            gridControlArtPrKnitMachineViewPr2.Size = new System.Drawing.Size(84, 224);
             gridControlArtPrKnitMachineViewPr2.TabIndex = 37;
             gridControlArtPrKnitMachineViewPr2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView5 });
             // 
@@ -421,14 +446,15 @@
             // gridControlArtPrKnitMachineViewRecom2
             // 
             tablePanel3.SetColumn(gridControlArtPrKnitMachineViewRecom2, 1);
+            gridControlArtPrKnitMachineViewRecom2.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrKnitMachineViewRecom2.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom2.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrKnitMachineViewRecom2.Location = new System.Drawing.Point(95, 54);
+            gridControlArtPrKnitMachineViewRecom2.Location = new System.Drawing.Point(107, 39);
             gridControlArtPrKnitMachineViewRecom2.MainView = gridView6;
             gridControlArtPrKnitMachineViewRecom2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom2.Name = "gridControlArtPrKnitMachineViewRecom2";
             tablePanel3.SetRow(gridControlArtPrKnitMachineViewRecom2, 1);
-            gridControlArtPrKnitMachineViewRecom2.Size = new System.Drawing.Size(247, 147);
+            gridControlArtPrKnitMachineViewRecom2.Size = new System.Drawing.Size(235, 224);
             gridControlArtPrKnitMachineViewRecom2.TabIndex = 38;
             gridControlArtPrKnitMachineViewRecom2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
             // 
@@ -451,7 +477,7 @@
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Name = "gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth";
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.VisibleIndex = 1;
-            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom2AvailableHoursCurrMonth.Width = 86;
             // 
             // gridColumnArtPrKnitMachineViewRecom2KmlNumber
             // 
@@ -460,7 +486,7 @@
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.Name = "gridColumnArtPrKnitMachineViewRecom2KmlNumber";
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2KmlNumber.VisibleIndex = 0;
-            gridColumnArtPrKnitMachineViewRecom2KmlNumber.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom2KmlNumber.Width = 45;
             // 
             // gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth
             // 
@@ -469,13 +495,13 @@
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Name = "gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth";
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.VisibleIndex = 2;
-            gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth.Width = 79;
             // 
             // tablePanel2
             // 
             tablePanel2.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.Simple;
             tablePanel1.SetColumn(tablePanel2, 4);
-            tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
+            tablePanel2.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 92F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40.15F) });
             tablePanel2.Controls.Add(customLabel3);
             tablePanel2.Controls.Add(gridControlArtPrKnitMachineViewPr1);
             tablePanel2.Controls.Add(gridControlArtPrKnitMachineViewRecom1);
@@ -485,8 +511,8 @@
             tablePanel2.Name = "tablePanel2";
             tablePanel1.SetRow(tablePanel2, 3);
             tablePanel2.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F) });
-            tablePanel1.SetRowSpan(tablePanel2, 2);
-            tablePanel2.Size = new System.Drawing.Size(357, 231);
+            tablePanel1.SetRowSpan(tablePanel2, 4);
+            tablePanel2.Size = new System.Drawing.Size(357, 277);
             tablePanel2.TabIndex = 0;
             tablePanel2.UseSkinIndents = true;
             // 
@@ -517,7 +543,7 @@
             gridControlArtPrKnitMachineViewPr1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewPr1.Name = "gridControlArtPrKnitMachineViewPr1";
             tablePanel2.SetRow(gridControlArtPrKnitMachineViewPr1, 1);
-            gridControlArtPrKnitMachineViewPr1.Size = new System.Drawing.Size(72, 178);
+            gridControlArtPrKnitMachineViewPr1.Size = new System.Drawing.Size(84, 224);
             gridControlArtPrKnitMachineViewPr1.TabIndex = 33;
             gridControlArtPrKnitMachineViewPr1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
@@ -548,12 +574,12 @@
             gridControlArtPrKnitMachineViewRecom1.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrKnitMachineViewRecom1.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom1.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrKnitMachineViewRecom1.Location = new System.Drawing.Point(95, 39);
+            gridControlArtPrKnitMachineViewRecom1.Location = new System.Drawing.Point(107, 39);
             gridControlArtPrKnitMachineViewRecom1.MainView = gridView4;
             gridControlArtPrKnitMachineViewRecom1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrKnitMachineViewRecom1.Name = "gridControlArtPrKnitMachineViewRecom1";
             tablePanel2.SetRow(gridControlArtPrKnitMachineViewRecom1, 1);
-            gridControlArtPrKnitMachineViewRecom1.Size = new System.Drawing.Size(247, 178);
+            gridControlArtPrKnitMachineViewRecom1.Size = new System.Drawing.Size(235, 224);
             gridControlArtPrKnitMachineViewRecom1.TabIndex = 34;
             gridControlArtPrKnitMachineViewRecom1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
             gridControlArtPrKnitMachineViewRecom1.Click += gridControlArtPrKnitMachineViewRecom1_Click;
@@ -577,7 +603,7 @@
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Name = "gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth";
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.VisibleIndex = 1;
-            gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom1AvailableHoursCurrMonth.Width = 86;
             // 
             // gridColumnArtPrKnitMachineViewRecom1KmlNumber
             // 
@@ -586,7 +612,7 @@
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.Name = "gridColumnArtPrKnitMachineViewRecom1KmlNumber";
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1KmlNumber.VisibleIndex = 0;
-            gridColumnArtPrKnitMachineViewRecom1KmlNumber.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom1KmlNumber.Width = 48;
             // 
             // gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth
             // 
@@ -595,7 +621,7 @@
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Name = "gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth";
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Visible = true;
             gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.VisibleIndex = 2;
-            gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Width = 87;
+            gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth.Width = 88;
             // 
             // customLabel2
             // 
@@ -649,7 +675,7 @@
             tablePanel1.SetRow(simpleButtonSetKnitMachine, 1);
             simpleButtonSetKnitMachine.Size = new System.Drawing.Size(187, 25);
             simpleButtonSetKnitMachine.TabIndex = 32;
-            simpleButtonSetKnitMachine.Text = "Привязать вяз машину";
+            simpleButtonSetKnitMachine.Text = "Привязать В/М";
             simpleButtonSetKnitMachine.Click += simpleButtonSetKnitMachine_Click;
             // 
             // simpleButtonSaveVyaz
@@ -668,10 +694,10 @@
             simpleButtonSaveVyaz.Dock = System.Windows.Forms.DockStyle.Top;
             simpleButtonSaveVyaz.Enabled = false;
             simpleButtonSaveVyaz.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSaveVyaz.ImageOptions.Image");
-            simpleButtonSaveVyaz.Location = new System.Drawing.Point(1585, 481);
+            simpleButtonSaveVyaz.Location = new System.Drawing.Point(1585, 527);
             simpleButtonSaveVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonSaveVyaz.Name = "simpleButtonSaveVyaz";
-            tablePanel1.SetRow(simpleButtonSaveVyaz, 3);
+            tablePanel1.SetRow(simpleButtonSaveVyaz, 5);
             simpleButtonSaveVyaz.Size = new System.Drawing.Size(187, 25);
             simpleButtonSaveVyaz.TabIndex = 31;
             simpleButtonSaveVyaz.Text = "Сохранить";
@@ -683,12 +709,13 @@
             gridControlPlanSezonZadanyRazmKol.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlPlanSezonZadanyRazmKol.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlPlanSezonZadanyRazmKol.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPlanSezonZadanyRazmKol.Location = new System.Drawing.Point(328, 515);
+            gridControlPlanSezonZadanyRazmKol.Location = new System.Drawing.Point(328, 527);
             gridControlPlanSezonZadanyRazmKol.MainView = gridView2;
             gridControlPlanSezonZadanyRazmKol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlPlanSezonZadanyRazmKol.Name = "gridControlPlanSezonZadanyRazmKol";
-            tablePanel1.SetRow(gridControlPlanSezonZadanyRazmKol, 4);
-            gridControlPlanSezonZadanyRazmKol.Size = new System.Drawing.Size(232, 197);
+            tablePanel1.SetRow(gridControlPlanSezonZadanyRazmKol, 5);
+            tablePanel1.SetRowSpan(gridControlPlanSezonZadanyRazmKol, 2);
+            gridControlPlanSezonZadanyRazmKol.Size = new System.Drawing.Size(232, 231);
             gridControlPlanSezonZadanyRazmKol.TabIndex = 30;
             gridControlPlanSezonZadanyRazmKol.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
@@ -729,12 +756,12 @@
             gridControlArtPrFioProgr.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlArtPrFioProgr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrFioProgr.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlArtPrFioProgr.Location = new System.Drawing.Point(15, 730);
+            gridControlArtPrFioProgr.Location = new System.Drawing.Point(15, 776);
             gridControlArtPrFioProgr.MainView = gridView1;
             gridControlArtPrFioProgr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlArtPrFioProgr.Name = "gridControlArtPrFioProgr";
-            tablePanel1.SetRow(gridControlArtPrFioProgr, 6);
-            gridControlArtPrFioProgr.Size = new System.Drawing.Size(545, 222);
+            tablePanel1.SetRow(gridControlArtPrFioProgr, 8);
+            gridControlArtPrFioProgr.Size = new System.Drawing.Size(545, 176);
             gridControlArtPrFioProgr.TabIndex = 29;
             gridControlArtPrFioProgr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -940,5 +967,6 @@
         private CustomLabel customLabel4;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnArtPrKnitMachineViewRecom2AvailableHoursNextMonth;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnArtPrKnitMachineViewRecom1AvailableHoursNextMonth;
+        private CustomSimpleButton simpleButtonClearKnitMachine;
     }
 }
