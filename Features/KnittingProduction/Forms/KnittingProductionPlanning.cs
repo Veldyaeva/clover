@@ -717,6 +717,10 @@ namespace SewingProduction.form.Nadezhda
 
                 comboBoxKnitMachineList.SelectedValue = selectedRow.KmlID;
             }
+            else
+            {
+                comboBoxKnitMachineList.SelectedValue = -1;
+            }
         }
 
         private async void simpleButtonSaveVyaz_Click(object sender, EventArgs e)
@@ -827,7 +831,12 @@ namespace SewingProduction.form.Nadezhda
                 MessageBox.Show("Внимание! Нет выбранных заданий для привязки В/М!");
                 return;
             }
-
+            if (comboBoxKnitMachineList.SelectedIndex == -1)
+            {
+                MessageBox.Show("Внимание! Не выбрана В/М для привязки!");
+                return;
+            }
+            
             foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
             {
                 var selectedMachine = _knitMachineListBindingSource.Current as KnitMachineList;
