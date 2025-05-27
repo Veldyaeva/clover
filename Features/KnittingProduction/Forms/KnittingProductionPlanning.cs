@@ -714,6 +714,8 @@ namespace SewingProduction.form.Nadezhda
                 Task artPrKnitMachineRecom2LoadTask = LoadArtPrKnitMachineViewRecom2DataAsync(selectedRow.Nn);
                 await Task.WhenAll(artPrFioProgrDataViewLoadTask, planSezonZadanyViewLoadTask, knitMachineListLoadTask
                     , artPrKnitMachinePr1LoadTask, artPrKnitMachinePr2LoadTask, artPrKnitMachineRecom1LoadTask, artPrKnitMachineRecom2LoadTask);
+
+                comboBoxKnitMachineList.SelectedValue = selectedRow.KmlID;
             }
         }
 
@@ -779,6 +781,11 @@ namespace SewingProduction.form.Nadezhda
                         }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("Внимание! Нет данных для сохранения!");
+                    return;
+                }
 
                 filteredListNew.Clear();
 
@@ -815,15 +822,24 @@ namespace SewingProduction.form.Nadezhda
 
         private void simpleButtonSetKnitMachine_Click(object sender, EventArgs e)
         {
+            if (gridViewVyazPlan.GetSelectedRows().Length == 0)
+            {
+                MessageBox.Show("Внимание! Нет выбранных заданий для привязки В/М!");
+                return;
+            }
+
             foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
             {
                 var selectedMachine = _knitMachineListBindingSource.Current as KnitMachineList;
                 var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
-                selectedItem.KmlID = selectedMachine.kmlID;
-                selectedItem.KmlNumber = selectedMachine.kmlNumber;
-                selectedItem.SyncSelection = false;
-                gridViewVyazPlan.UnselectRow(rowHandle);
-                KnitMachineStatusUpdate(rowHandle);
+                if (selectedItem.KmlID != selectedMachine.kmlID)
+                {
+                    selectedItem.KmlID = selectedMachine.kmlID;
+                    selectedItem.KmlNumber = selectedMachine.kmlNumber;
+                    selectedItem.SyncSelection = false;
+                    gridViewVyazPlan.UnselectRow(rowHandle);
+                    KnitMachineStatusUpdate(rowHandle);
+                }
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
             SimpleButtonSaveVyazStatusUpdate();
@@ -836,6 +852,12 @@ namespace SewingProduction.form.Nadezhda
 
         private void simpleButtonClearKnitMachine_Click(object sender, EventArgs e)
         {
+            if (gridViewVyazPlan.GetSelectedRows().Length == 0)
+            {
+                MessageBox.Show("Внимание! Нет выбранных заданий для очистки В/М!");
+                return;
+            }
+
             foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
             {
                 //var selectedMachine = _knitMachineListBindingSource.Current as KnitMachineList;
