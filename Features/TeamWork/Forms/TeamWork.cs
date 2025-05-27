@@ -14,7 +14,7 @@ namespace SewingProduction.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper; 
+        private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormService _artNormService;
         private int selectedRowHandle = -1;
@@ -39,7 +39,7 @@ namespace SewingProduction.Forms
         private BindingSource _preArchBindingSource;
         private BindingList<MyDataART> _myDataArtList;
         private BindingSource _myDataArtBindingSource;
-        private BindingList<MyDataANN> _myDataAnnList; 
+        private BindingList<MyDataANN> _myDataAnnList;
         private BindingSource _myDataAnnBindingSource;
 
         private BindingList<MyDataART> _boundArtList;
@@ -69,7 +69,7 @@ namespace SewingProduction.Forms
             _preArchList = new BindingList<MyDataANN>();
             _preArchBindingSource = new BindingSource { DataSource = _preArchList };
             if (gridControlPreArch != null) gridControlPreArch.DataSource = _preArchBindingSource;
-            
+
             _nzpList = new BindingList<NZPByKoddRt>();
             _nzpByKoddRtSource = new BindingSource { DataSource = _nzpList };
             if (gridControlNZP != null) gridControlNZP.DataSource = _nzpByKoddRtSource;
@@ -86,7 +86,7 @@ namespace SewingProduction.Forms
             _boundArtList = new BindingList<MyDataART>();
             _boundArtBindingSource = new BindingSource { DataSource = _boundArtList };
             if (gridControl_binded != null) gridControl_binded.DataSource = _boundArtBindingSource;
-            
+
             // Initialize BindingList and BindingSource for NormRasz on Articles tab
             _normRaszListArticles = new BindingList<NormRasz>();
             _normRaszBindingSourceArticles = new BindingSource { DataSource = _normRaszListArticles };
@@ -100,7 +100,7 @@ namespace SewingProduction.Forms
                 unboundArtsView.OptionsSelection.MultiSelect = false;
                 unboundArtsView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e); 
+                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
 
             if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView wdToBindView)
@@ -113,7 +113,7 @@ namespace SewingProduction.Forms
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
-            if (ANNgridView != null) 
+            if (ANNgridView != null)
             {
                 ANNgridView.FocusedRowChanged -= gridView3_FocusedRowChanged;
             }
@@ -130,12 +130,12 @@ namespace SewingProduction.Forms
                 // Загрузка данных. Методы LoadWorkDivisions и CurrentWorks_Load (через смену вкладок)
                 // должны внутренне обновлять соответствующие BindingList и вызывать ResetBindings(false) 
                 // на их BindingSource. Это приведет к обновлению гридов.
-                await LoadWorkDivisions(); 
-                
+                await LoadWorkDivisions();
+
                 TWGridHelper.sortGridView(ANNgridView);
                 // TWGridHelper.sortGridView(gridView4); // gridView4 не используется в текущем контексте напрямую с _bindingSource
-                
-                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null); 
+
+                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select kod_ob, text_ob from oborud_shv", null);
 
@@ -153,9 +153,9 @@ namespace SewingProduction.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
-                    if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >=0) // Проверка перед вызовом
+                    if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
-                         gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                        gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
                     }
                 }
             }
@@ -206,8 +206,8 @@ namespace SewingProduction.Forms
             ButtonCopyWd_Click_Internal(sender, e);
         }
         private async void gridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        { 
-            gridView5_FocusedRowChanged_Internal(sender, e); 
+        {
+            gridView5_FocusedRowChanged_Internal(sender, e);
         }
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
@@ -300,6 +300,34 @@ namespace SewingProduction.Forms
             //report1.Parameters["_isUpak"].Value = 0;
             //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             //reportPrintTool1.ShowPreviewDialog();
+        }
+
+
+        private void windowsuiButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
+        {
+            var button = e.Button as DevExpress.XtraBars.Docking2010.WindowsUIButton;
+
+            if (button.Tag?.ToString() == "btnAdd")
+            {
+                ButtonPreliminaryWd_Click_Internal(sender, e);
+            }
+            else if (button.Tag?.ToString() == "btnEdit")
+            {
+                ButtonEditWd_Click_Internal(sender, e);
+            }
+            else if (button.Tag?.ToString() == "btnArch")
+            {
+                ArchAndCopy();
+            }
+            else if (button.Tag?.ToString() == "btnArt")
+            {
+                simpleButton2_Click_Internal(sender, e);
+            }
+        }
+
+        private void gridControl_unboundArts_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
