@@ -125,27 +125,27 @@ namespace SewingProduction.Forms
         /// </summary>
         private async void customCheckBox6_CheckedChanged_Internal(object sender, EventArgs e)
         {
-            try
-            {
-                string filterString = "";
+            //try
+            //{
+            //    string filterString = "";
 
-                if (actualCheckBox1.Checked) filterString += $"status = {(int)Status.Actual}";
-                if (preliminaryCheckBox1.Checked)
-                {
-                    if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
-                    filterString += $"status = {(int)Status.Preliminary}";
-                }
+            //    if (actualCheckBox1.Checked) filterString += $"status = {(int)Status.Actual}";
+            //    if (preliminaryCheckBox1.Checked)
+            //    {
+            //        if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
+            //        filterString += $"status = {(int)Status.Preliminary}";
+            //    }
 
-                // Применяем фильтр к gridView8
-                gridView_wdToBind.BeginUpdate();
-                gridView_wdToBind.ActiveFilterString = filterString;
-                gridView_wdToBind.EndUpdate();
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
-                MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //    // Применяем фильтр к gridView8
+            //    gridView_wdToBind.BeginUpdate();
+            //    gridView_wdToBind.ActiveFilterString = filterString;
+            //    gridView_wdToBind.EndUpdate();
+            //}
+            //catch (Exception ex)
+            //{
+            //    await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
+            //    MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         /// <summary>

@@ -72,9 +72,9 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace_copy_12052025;Persist Security Info" +
             "=True;User ID=sa;Password=kf,bhbyn;Encrypt=False")]
-        public string ACEConnectionString2 {
+        public string ACEConnectionString {
             get {
-                return ((string)(this["ACEConnectionString2"]));
+                return ((string)(this["ACEConnectionString"]));
             }
         }
         
@@ -118,9 +118,9 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;U" +
             "ser ID=sa;Password=kf,bhbyn;Encrypt=False")]
-        public string ACEConnectionString {
+        public string ACEConnectionString4 {
             get {
-                return ((string)(this["ACEConnectionString"]));
+                return ((string)(this["ACEConnectionString4"]));
             }
         }
     }

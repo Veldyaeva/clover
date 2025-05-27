@@ -30,1185 +30,1212 @@ namespace SewingProduction.form
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork_AdvanceTW));
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.gridControlKont = new DevExpress.XtraGrid.GridControl();
-            this.gridViewKont = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colseb = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coln_ch1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControlRaskr = new DevExpress.XtraGrid.GridControl();
-            this.gridViewRaskr = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colspec = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridControlRasz = new DevExpress.XtraGrid.GridControl();
-            this.gridViewRasz = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.Kod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEdit_oborudShv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.btnCancel = new SewingProduction.CustomSimpleButton();
-            this.btnSave = new SewingProduction.CustomSimpleButton();
-            this.btnOK = new SewingProduction.CustomSimpleButton();
-            this.customLabel2 = new SewingProduction.CustomLabel();
-            this.modelTextBox = new SewingProduction.CustomTextBox();
-            this.nameTextBox = new SewingProduction.CustomTextBox();
-            this.label5 = new SewingProduction.CustomLabel();
-            this.dateCreate = new SewingProduction.CustomDateTimePicker();
-            this.label4 = new SewingProduction.CustomLabel();
-            this.secTimeTextBox = new SewingProduction.CustomTextBox();
-            this.groupTextBox = new SewingProduction.CustomTextBox();
-            this.customLabel3 = new SewingProduction.CustomLabel();
-            this.label3 = new SewingProduction.CustomLabel();
-            this.label2 = new SewingProduction.CustomLabel();
-            this.customLabel1 = new SewingProduction.CustomLabel();
-            this.constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
-            this.designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
-            this.normdopobrBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.constructorBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.designerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.rasz = new SewingProduction.CustomButton();
-            this.customButton2 = new SewingProduction.CustomButton();
-            this.normraszBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.normraskBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.normkontBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.normraszBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.statusLabel = new SewingProduction.CustomLabel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.customGroupBox2 = new SewingProduction.CustomGroupBox();
-            this.buffer = new SewingProduction.CustomButton();
-            this.textBoxBuffer = new System.Windows.Forms.RichTextBox();
-            this.customGroupBox1 = new SewingProduction.CustomGroupBox();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBoxReco = new System.Windows.Forms.RichTextBox();
-            this.customLabel4 = new SewingProduction.CustomLabel();
-            this.textBoxKomment = new System.Windows.Forms.RichTextBox();
-            this.customLabel5 = new SewingProduction.CustomLabel();
-            this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.customGroupBox2.SuspendLayout();
-            this.customGroupBox1.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.toolStripContainer1.ContentPanel.SuspendLayout();
-            this.toolStripContainer1.SuspendLayout();
-            this.SuspendLayout();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            gridControlKont = new DevExpress.XtraGrid.GridControl();
+            gridViewKont = new GridView();
+            gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn23 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn21 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colseb = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn22 = new DevExpress.XtraGrid.Columns.GridColumn();
+            coln_ch1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridControlRaskr = new DevExpress.XtraGrid.GridControl();
+            gridViewRaskr = new GridView();
+            gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colspec = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
+            colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridControlRasz = new DevExpress.XtraGrid.GridControl();
+            gridViewRasz = new GridView();
+            gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn30 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn31 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            Kod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEdit_oborudShv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            btnCancel = new CustomSimpleButton();
+            btnSave = new CustomSimpleButton();
+            btnOK = new CustomSimpleButton();
+            customLabel2 = new CustomLabel();
+            modelTextBox = new CustomTextBox();
+            nameTextBox = new CustomTextBox();
+            label5 = new CustomLabel();
+            dateCreate = new CustomDateTimePicker();
+            label4 = new CustomLabel();
+            secTimeTextBox = new CustomTextBox();
+            groupTextBox = new CustomTextBox();
+            customLabel3 = new CustomLabel();
+            label3 = new CustomLabel();
+            label2 = new CustomLabel();
+            customLabel1 = new CustomLabel();
+            constructorComboBox = new DevExpress.XtraEditors.LookUpEdit();
+            designerComboBox = new DevExpress.XtraEditors.LookUpEdit();
+            normdopobrBindingSource = new System.Windows.Forms.BindingSource(components);
+            constructorBindingSource = new System.Windows.Forms.BindingSource(components);
+            designerBindingSource = new System.Windows.Forms.BindingSource(components);
+            rasz = new CustomButton();
+            customButton2 = new CustomButton();
+            normraszBindingSource = new System.Windows.Forms.BindingSource(components);
+            normraskBindingSource = new System.Windows.Forms.BindingSource(components);
+            normkontBindingSource = new System.Windows.Forms.BindingSource(components);
+            normraszBindingSource1 = new System.Windows.Forms.BindingSource(components);
+            bindingSource1 = new System.Windows.Forms.BindingSource(components);
+            errorProvider1 = new System.Windows.Forms.ErrorProvider(components);
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            statusLabel = new CustomLabel();
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            customGroupBox2 = new CustomGroupBox();
+            buffer = new CustomButton();
+            textBoxBuffer = new System.Windows.Forms.RichTextBox();
+            customGroupBox1 = new CustomGroupBox();
+            tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            textBoxReco = new System.Windows.Forms.RichTextBox();
+            customLabel4 = new CustomLabel();
+            textBoxKomment = new System.Windows.Forms.RichTextBox();
+            customLabel5 = new CustomLabel();
+            toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
+            tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlKont).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKont).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRasz).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRasz).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kod_proizv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)constructorBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)designerBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normraszBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normraskBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normkontBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normraszBindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            customGroupBox2.SuspendLayout();
+            customGroupBox1.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            toolStripContainer1.ContentPanel.SuspendLayout();
+            toolStripContainer1.SuspendLayout();
+            SuspendLayout();
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Controls.Add(this.gridControlKont, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.gridControlRaskr, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.gridControlRasz, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(253, 23);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 260F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 149F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1275, 864);
-            this.tableLayoutPanel2.TabIndex = 3;
+            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.Controls.Add(gridControlKont, 0, 2);
+            tableLayoutPanel2.Controls.Add(gridControlRaskr, 0, 1);
+            tableLayoutPanel2.Controls.Add(gridControlRasz, 0, 0);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(296, 26);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 3;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(1488, 997);
+            tableLayoutPanel2.TabIndex = 3;
             // 
             // gridControlKont
             // 
-            this.gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlKont.Location = new System.Drawing.Point(3, 718);
-            this.gridControlKont.MainView = this.gridViewKont;
-            this.gridControlKont.Name = "gridControlKont";
-            this.gridControlKont.Size = new System.Drawing.Size(1269, 143);
-            this.gridControlKont.TabIndex = 8;
-            this.gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewKont});
+            gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridControlKont.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlKont.Location = new System.Drawing.Point(4, 828);
+            gridControlKont.MainView = gridViewKont;
+            gridControlKont.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlKont.Name = "gridControlKont";
+            gridControlKont.Size = new System.Drawing.Size(1480, 166);
+            gridControlKont.TabIndex = 8;
+            gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKont });
             // 
             // gridViewKont
             // 
-            this.gridViewKont.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn19,
-            this.gridColumn23,
-            this.gridColumn20,
-            this.gridColumn21,
-            this.colseb,
-            this.gridColumn22,
-            this.coln_ch1,
-            this.gridColumn17,
-            this.colannId2});
-            this.gridViewKont.GridControl = this.gridControlKont;
-            this.gridViewKont.Name = "gridViewKont";
-            this.gridViewKont.NewItemRowText = "добавить";
-            this.gridViewKont.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewKont.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.Inplace;
-            this.gridViewKont.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridViewKont.OptionsView.ShowGroupPanel = false;
-            this.gridViewKont.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewKont_ShowingEditor);
-            this.gridViewKont.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridViewKont_ValidateRow);
-            this.gridViewKont.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewKont_RowUpdated);
+            gridViewKont.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn19, gridColumn23, gridColumn20, gridColumn21, colseb, gridColumn22, coln_ch1, gridColumn17, colannId2 });
+            gridViewKont.DetailHeight = 404;
+            gridViewKont.GridControl = gridControlKont;
+            gridViewKont.Name = "gridViewKont";
+            gridViewKont.NewItemRowText = "добавить";
+            gridViewKont.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewKont.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
+            gridViewKont.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewKont.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewKont.OptionsView.ShowGroupPanel = false;
+            gridViewKont.ShowingEditor += gridViewKont_ShowingEditor;
+            gridViewKont.ValidateRow += gridViewKont_ValidateRow;
+            gridViewKont.RowUpdated += gridViewKont_RowUpdated;
             // 
             // gridColumn19
             // 
-            this.gridColumn19.Caption = "№ оп";
-            this.gridColumn19.FieldName = "KodO";
-            this.gridColumn19.Name = "gridColumn19";
-            this.gridColumn19.Visible = true;
-            this.gridColumn19.VisibleIndex = 1;
-            this.gridColumn19.Width = 78;
+            gridColumn19.Caption = "№ оп";
+            gridColumn19.FieldName = "KodO";
+            gridColumn19.MinWidth = 23;
+            gridColumn19.Name = "gridColumn19";
+            gridColumn19.Visible = true;
+            gridColumn19.VisibleIndex = 1;
+            gridColumn19.Width = 91;
             // 
             // gridColumn23
             // 
-            this.gridColumn23.Caption = "№ п/оп";
-            this.gridColumn23.FieldName = "N1";
-            this.gridColumn23.Name = "gridColumn23";
-            this.gridColumn23.Visible = true;
-            this.gridColumn23.VisibleIndex = 2;
-            this.gridColumn23.Width = 88;
+            gridColumn23.Caption = "№ п/оп";
+            gridColumn23.FieldName = "N1";
+            gridColumn23.MinWidth = 23;
+            gridColumn23.Name = "gridColumn23";
+            gridColumn23.Visible = true;
+            gridColumn23.VisibleIndex = 2;
+            gridColumn23.Width = 103;
             // 
             // gridColumn20
             // 
-            this.gridColumn20.Caption = "наименование операции комплектовки";
-            this.gridColumn20.FieldName = "Text";
-            this.gridColumn20.Name = "gridColumn20";
-            this.gridColumn20.Visible = true;
-            this.gridColumn20.VisibleIndex = 4;
-            this.gridColumn20.Width = 190;
+            gridColumn20.Caption = "наименование операции комплектовки";
+            gridColumn20.FieldName = "Text";
+            gridColumn20.MinWidth = 23;
+            gridColumn20.Name = "gridColumn20";
+            gridColumn20.Visible = true;
+            gridColumn20.VisibleIndex = 4;
+            gridColumn20.Width = 222;
             // 
             // gridColumn21
             // 
-            this.gridColumn21.Caption = "сек";
-            this.gridColumn21.FieldName = "Sek";
-            this.gridColumn21.Name = "gridColumn21";
-            this.gridColumn21.Visible = true;
-            this.gridColumn21.VisibleIndex = 6;
-            this.gridColumn21.Width = 124;
+            gridColumn21.Caption = "сек";
+            gridColumn21.FieldName = "Sek";
+            gridColumn21.MinWidth = 23;
+            gridColumn21.Name = "gridColumn21";
+            gridColumn21.Visible = true;
+            gridColumn21.VisibleIndex = 6;
+            gridColumn21.Width = 145;
             // 
             // colseb
             // 
-            this.colseb.FieldName = "Seb";
-            this.colseb.Name = "colseb";
-            this.colseb.Visible = true;
-            this.colseb.VisibleIndex = 5;
+            colseb.FieldName = "Seb";
+            colseb.MinWidth = 23;
+            colseb.Name = "colseb";
+            colseb.Visible = true;
+            colseb.VisibleIndex = 5;
+            colseb.Width = 87;
             // 
             // gridColumn22
             // 
-            this.gridColumn22.FieldName = "N";
-            this.gridColumn22.Name = "gridColumn22";
-            this.gridColumn22.Visible = true;
-            this.gridColumn22.VisibleIndex = 7;
+            gridColumn22.FieldName = "N";
+            gridColumn22.MinWidth = 23;
+            gridColumn22.Name = "gridColumn22";
+            gridColumn22.Visible = true;
+            gridColumn22.VisibleIndex = 7;
+            gridColumn22.Width = 87;
             // 
             // coln_ch1
             // 
-            this.coln_ch1.FieldName = "NCh";
-            this.coln_ch1.Name = "coln_ch1";
-            this.coln_ch1.Visible = true;
-            this.coln_ch1.VisibleIndex = 8;
+            coln_ch1.FieldName = "NCh";
+            coln_ch1.MinWidth = 23;
+            coln_ch1.Name = "coln_ch1";
+            coln_ch1.Visible = true;
+            coln_ch1.VisibleIndex = 8;
+            coln_ch1.Width = 87;
             // 
             // gridColumn17
             // 
-            this.gridColumn17.FieldName = "Kod";
-            this.gridColumn17.Name = "gridColumn17";
-            this.gridColumn17.Visible = true;
-            this.gridColumn17.VisibleIndex = 3;
-            this.gridColumn17.Width = 79;
+            gridColumn17.FieldName = "Kod";
+            gridColumn17.MinWidth = 23;
+            gridColumn17.Name = "gridColumn17";
+            gridColumn17.Visible = true;
+            gridColumn17.VisibleIndex = 3;
+            gridColumn17.Width = 92;
             // 
             // colannId2
             // 
-            this.colannId2.FieldName = "AnnId";
-            this.colannId2.Name = "colannId2";
-            this.colannId2.Visible = true;
-            this.colannId2.VisibleIndex = 0;
-            this.colannId2.Width = 68;
+            colannId2.FieldName = "AnnId";
+            colannId2.MinWidth = 23;
+            colannId2.Name = "colannId2";
+            colannId2.Visible = true;
+            colannId2.VisibleIndex = 0;
+            colannId2.Width = 79;
             // 
             // gridControlRaskr
             // 
-            this.gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlRaskr.Location = new System.Drawing.Point(3, 458);
-            this.gridControlRaskr.MainView = this.gridViewRaskr;
-            this.gridControlRaskr.Name = "gridControlRaskr";
-            this.gridControlRaskr.Size = new System.Drawing.Size(1269, 254);
-            this.gridControlRaskr.TabIndex = 7;
-            this.gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRaskr});
+            gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridControlRaskr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRaskr.Location = new System.Drawing.Point(4, 528);
+            gridControlRaskr.MainView = gridViewRaskr;
+            gridControlRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRaskr.Name = "gridControlRaskr";
+            gridControlRaskr.Size = new System.Drawing.Size(1480, 294);
+            gridControlRaskr.TabIndex = 7;
+            gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
             // 
             // gridViewRaskr
             // 
-            this.gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
-            this.gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
-            this.gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
-            this.gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn9,
-            this.gridColumn10,
-            this.gridColumn13,
-            this.gridColumn14,
-            this.gridColumn11,
-            this.gridColumn15,
-            this.colspec,
-            this.gridColumn16,
-            this.colkod1,
-            this.gridColumn12,
-            this.coln_ch,
-            this.colannId1});
-            this.gridViewRaskr.GridControl = this.gridControlRaskr;
-            this.gridViewRaskr.Name = "gridViewRaskr";
-            this.gridViewRaskr.NewItemRowText = "добавить";
-            this.gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
-            this.gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
-            this.gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
-            this.gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
-            this.gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
-            this.gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
-            this.gridViewRaskr.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
-            this.gridViewRaskr.OptionsView.ShowGroupPanel = false;
-            this.gridViewRaskr.ShowingEditor += new System.ComponentModel.CancelEventHandler(this.gridViewRaskr_ShowingEditor);
-            this.gridViewRaskr.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.GridView2_ValidateRow);
-            this.gridViewRaskr.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.GridView2_RowUpdated);
+            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
+            gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
+            gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn9, gridColumn10, gridColumn13, gridColumn14, gridColumn11, gridColumn15, colspec, gridColumn16, colkod1, gridColumn12, coln_ch, colannId1 });
+            gridViewRaskr.DetailHeight = 404;
+            gridViewRaskr.GridControl = gridControlRaskr;
+            gridViewRaskr.Name = "gridViewRaskr";
+            gridViewRaskr.NewItemRowText = "добавить";
+            gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRaskr.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
+            gridViewRaskr.OptionsView.ShowGroupPanel = false;
+            gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
+            gridViewRaskr.ValidateRow += GridView2_ValidateRow;
+            gridViewRaskr.RowUpdated += GridView2_RowUpdated;
             // 
             // gridColumn9
             // 
-            this.gridColumn9.FieldName = "id";
-            this.gridColumn9.Name = "gridColumn9";
+            gridColumn9.FieldName = "id";
+            gridColumn9.MinWidth = 23;
+            gridColumn9.Name = "gridColumn9";
+            gridColumn9.Width = 87;
             // 
             // gridColumn10
             // 
-            this.gridColumn10.Caption = "№ оп";
-            this.gridColumn10.FieldName = "KodO";
-            this.gridColumn10.Name = "gridColumn10";
-            this.gridColumn10.Visible = true;
-            this.gridColumn10.VisibleIndex = 1;
-            this.gridColumn10.Width = 76;
+            gridColumn10.Caption = "№ оп";
+            gridColumn10.FieldName = "KodO";
+            gridColumn10.MinWidth = 23;
+            gridColumn10.Name = "gridColumn10";
+            gridColumn10.Visible = true;
+            gridColumn10.VisibleIndex = 1;
+            gridColumn10.Width = 89;
             // 
             // gridColumn13
             // 
-            this.gridColumn13.Caption = "№ п/оп";
-            this.gridColumn13.FieldName = "n1";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 2;
-            this.gridColumn13.Width = 88;
+            gridColumn13.Caption = "№ п/оп";
+            gridColumn13.FieldName = "n1";
+            gridColumn13.MinWidth = 23;
+            gridColumn13.Name = "gridColumn13";
+            gridColumn13.Visible = true;
+            gridColumn13.VisibleIndex = 2;
+            gridColumn13.Width = 103;
             // 
             // gridColumn14
             // 
-            this.gridColumn14.Caption = "Разряд";
-            this.gridColumn14.FieldName = "razryd";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 3;
-            this.gridColumn14.Width = 78;
+            gridColumn14.Caption = "Разряд";
+            gridColumn14.FieldName = "razryd";
+            gridColumn14.MinWidth = 23;
+            gridColumn14.Name = "gridColumn14";
+            gridColumn14.Visible = true;
+            gridColumn14.VisibleIndex = 3;
+            gridColumn14.Width = 91;
             // 
             // gridColumn11
             // 
-            this.gridColumn11.Caption = "Наименование операци раскроя";
-            this.gridColumn11.FieldName = "Text";
-            this.gridColumn11.Name = "gridColumn11";
-            this.gridColumn11.Visible = true;
-            this.gridColumn11.VisibleIndex = 4;
-            this.gridColumn11.Width = 186;
+            gridColumn11.Caption = "Наименование операци раскроя";
+            gridColumn11.FieldName = "Text";
+            gridColumn11.MinWidth = 23;
+            gridColumn11.Name = "gridColumn11";
+            gridColumn11.Visible = true;
+            gridColumn11.VisibleIndex = 4;
+            gridColumn11.Width = 217;
             // 
             // gridColumn15
             // 
-            this.gridColumn15.Caption = "сек";
-            this.gridColumn15.FieldName = "Sek";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 6;
+            gridColumn15.Caption = "сек";
+            gridColumn15.FieldName = "Sek";
+            gridColumn15.MinWidth = 23;
+            gridColumn15.Name = "gridColumn15";
+            gridColumn15.Visible = true;
+            gridColumn15.VisibleIndex = 6;
+            gridColumn15.Width = 87;
             // 
             // colspec
             // 
-            this.colspec.Caption = "Специальность";
-            this.colspec.FieldName = "Spec";
-            this.colspec.Name = "colspec";
-            this.colspec.Visible = true;
-            this.colspec.VisibleIndex = 8;
+            colspec.Caption = "Специальность";
+            colspec.FieldName = "Spec";
+            colspec.MinWidth = 23;
+            colspec.Name = "colspec";
+            colspec.Visible = true;
+            colspec.VisibleIndex = 8;
+            colspec.Width = 87;
             // 
             // gridColumn16
             // 
-            this.gridColumn16.Caption = "Оборуд.";
-            this.gridColumn16.FieldName = "Obor";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 9;
+            gridColumn16.Caption = "Оборуд.";
+            gridColumn16.FieldName = "Obor";
+            gridColumn16.MinWidth = 23;
+            gridColumn16.Name = "gridColumn16";
+            gridColumn16.Visible = true;
+            gridColumn16.VisibleIndex = 9;
+            gridColumn16.Width = 87;
             // 
             // colkod1
             // 
-            this.colkod1.Caption = "код из";
-            this.colkod1.FieldName = "Kod";
-            this.colkod1.Name = "colkod1";
-            this.colkod1.Visible = true;
-            this.colkod1.VisibleIndex = 10;
+            colkod1.Caption = "код из";
+            colkod1.FieldName = "Kod";
+            colkod1.MinWidth = 23;
+            colkod1.Name = "colkod1";
+            colkod1.Visible = true;
+            colkod1.VisibleIndex = 10;
+            colkod1.Width = 87;
             // 
             // gridColumn12
             // 
-            this.gridColumn12.FieldName = "N";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
+            gridColumn12.FieldName = "N";
+            gridColumn12.MinWidth = 23;
+            gridColumn12.Name = "gridColumn12";
+            gridColumn12.Visible = true;
+            gridColumn12.VisibleIndex = 5;
+            gridColumn12.Width = 87;
             // 
             // coln_ch
             // 
-            this.coln_ch.FieldName = "n_ch";
-            this.coln_ch.Name = "coln_ch";
-            this.coln_ch.Visible = true;
-            this.coln_ch.VisibleIndex = 7;
+            coln_ch.FieldName = "n_ch";
+            coln_ch.MinWidth = 23;
+            coln_ch.Name = "coln_ch";
+            coln_ch.Visible = true;
+            coln_ch.VisibleIndex = 7;
+            coln_ch.Width = 87;
             // 
             // colannId1
             // 
-            this.colannId1.FieldName = "AnnId";
-            this.colannId1.Name = "colannId1";
-            this.colannId1.Visible = true;
-            this.colannId1.VisibleIndex = 0;
-            this.colannId1.Width = 74;
+            colannId1.FieldName = "AnnId";
+            colannId1.MinWidth = 23;
+            colannId1.Name = "colannId1";
+            colannId1.Visible = true;
+            colannId1.VisibleIndex = 0;
+            colannId1.Width = 86;
             // 
             // gridControlRasz
             // 
-            this.gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlRasz.Location = new System.Drawing.Point(3, 3);
-            this.gridControlRasz.MainView = this.gridViewRasz;
-            this.gridControlRasz.Name = "gridControlRasz";
-            this.gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemLookUpEdit_kod_proizv,
-            this.repositoryItemLookUpEdit_podrVyaz,
-            this.repositoryItemLookUpEdit_oborudShv});
-            this.gridControlRasz.Size = new System.Drawing.Size(1269, 449);
-            this.gridControlRasz.TabIndex = 7;
-            this.gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewRasz});
+            gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridControlRasz.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRasz.Location = new System.Drawing.Point(4, 3);
+            gridControlRasz.MainView = gridViewRasz;
+            gridControlRasz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRasz.Name = "gridControlRasz";
+            gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit_kod_proizv, repositoryItemLookUpEdit_podrVyaz, repositoryItemLookUpEdit_oborudShv });
+            gridControlRasz.Size = new System.Drawing.Size(1480, 519);
+            gridControlRasz.TabIndex = 7;
+            gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRasz });
             // 
             // gridViewRasz
             // 
-            this.gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumn2,
-            this.gridColumn34,
-            this.gridColumn35,
-            this.gridColumn36,
-            this.gridColumn33,
-            this.gridColumn32,
-            this.gridColumn37,
-            this.colspec2,
-            this.gridColumn38,
-            this.gridColumn30,
-            this.gridColumn31,
-            this.gridColumn4,
-            this.Kod_podr,
-            this.Kod_ob,
-            this.gridColumn5,
-            this.gridColumn6,
-            this.gridColumn7});
-            this.gridViewRasz.GridControl = this.gridControlRasz;
-            this.gridViewRasz.Name = "gridViewRasz";
-            this.gridViewRasz.NewItemRowText = "добавить";
-            this.gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewRasz.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditFormInplace;
-            this.gridViewRasz.OptionsEditForm.EditFormColumnCount = 2;
-            this.gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewRasz.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
-            this.gridViewRasz.OptionsView.ShowGroupPanel = false;
-            this.gridViewRasz.EditFormShowing += new DevExpress.XtraGrid.Views.Grid.EditFormShowingEventHandler(this.gridViewRasz_EditFormShowing);
-            this.gridViewRasz.EditFormHidden += new DevExpress.XtraGrid.Views.Grid.EditFormHiddenEventHandler(this.gridViewRasz_EditFormHidden);
-            this.gridViewRasz.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridViewRasz_ValidateRow);
-            this.gridViewRasz.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowUpdated);
-            this.gridViewRasz.RowEditCanceled += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewRasz_RowEditCanceled);
+            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn30, gridColumn31, gridColumn4, Kod_podr, Kod_ob, gridColumn5, gridColumn6, gridColumn7 });
+            gridViewRasz.DetailHeight = 404;
+            gridViewRasz.GridControl = gridControlRasz;
+            gridViewRasz.Name = "gridViewRasz";
+            gridViewRasz.NewItemRowText = "добавить";
+            gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
+            gridViewRasz.OptionsEditForm.EditFormColumnCount = 2;
+            gridViewRasz.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRasz.OptionsView.ShowGroupPanel = false;
+            gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
+            gridViewRasz.EditFormHidden += gridViewRasz_EditFormHidden;
+            gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
+            gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
+            gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "nrId";
-            this.gridColumn2.FieldName = "nrId";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn2.Caption = "nrId";
+            gridColumn2.FieldName = "nrId";
+            gridColumn2.MinWidth = 23;
+            gridColumn2.Name = "gridColumn2";
+            gridColumn2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn2.Width = 87;
             // 
             // gridColumn34
             // 
-            this.gridColumn34.Caption = "AnnId";
-            this.gridColumn34.FieldName = "annId";
-            this.gridColumn34.Name = "gridColumn34";
-            this.gridColumn34.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn34.Width = 72;
+            gridColumn34.Caption = "AnnId";
+            gridColumn34.FieldName = "annId";
+            gridColumn34.MinWidth = 23;
+            gridColumn34.Name = "gridColumn34";
+            gridColumn34.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn34.Width = 84;
             // 
             // gridColumn35
             // 
-            this.gridColumn35.Caption = "№ оп.";
-            this.gridColumn35.FieldName = "N";
-            this.gridColumn35.Name = "gridColumn35";
-            this.gridColumn35.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn35.OptionsEditForm.VisibleIndex = 1;
-            this.gridColumn35.Visible = true;
-            this.gridColumn35.VisibleIndex = 0;
-            this.gridColumn35.Width = 72;
+            gridColumn35.Caption = "№ оп.";
+            gridColumn35.FieldName = "N";
+            gridColumn35.MinWidth = 23;
+            gridColumn35.Name = "gridColumn35";
+            gridColumn35.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn35.OptionsEditForm.VisibleIndex = 1;
+            gridColumn35.Visible = true;
+            gridColumn35.VisibleIndex = 0;
+            gridColumn35.Width = 84;
             // 
             // gridColumn36
             // 
-            this.gridColumn36.Caption = "№п/оп.";
-            this.gridColumn36.FieldName = "N1";
-            this.gridColumn36.Name = "gridColumn36";
-            this.gridColumn36.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn36.OptionsEditForm.VisibleIndex = 4;
-            this.gridColumn36.Visible = true;
-            this.gridColumn36.VisibleIndex = 1;
-            this.gridColumn36.Width = 72;
+            gridColumn36.Caption = "№п/оп.";
+            gridColumn36.FieldName = "N1";
+            gridColumn36.MinWidth = 23;
+            gridColumn36.Name = "gridColumn36";
+            gridColumn36.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn36.OptionsEditForm.VisibleIndex = 4;
+            gridColumn36.Visible = true;
+            gridColumn36.VisibleIndex = 1;
+            gridColumn36.Width = 84;
             // 
             // gridColumn33
             // 
-            this.gridColumn33.Caption = "разряд";
-            this.gridColumn33.FieldName = "razryd";
-            this.gridColumn33.Name = "gridColumn33";
-            this.gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn33.OptionsEditForm.VisibleIndex = 10;
-            this.gridColumn33.Visible = true;
-            this.gridColumn33.VisibleIndex = 2;
-            this.gridColumn33.Width = 72;
+            gridColumn33.Caption = "разряд";
+            gridColumn33.FieldName = "razryd";
+            gridColumn33.MinWidth = 23;
+            gridColumn33.Name = "gridColumn33";
+            gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn33.OptionsEditForm.VisibleIndex = 10;
+            gridColumn33.Visible = true;
+            gridColumn33.VisibleIndex = 2;
+            gridColumn33.Width = 84;
             // 
             // gridColumn32
             // 
-            this.gridColumn32.Caption = "наименование операции пошива";
-            this.gridColumn32.FieldName = "Text";
-            this.gridColumn32.Name = "gridColumn32";
-            this.gridColumn32.OptionsEditForm.ColumnSpan = 3;
-            this.gridColumn32.OptionsEditForm.RowSpan = 2;
-            this.gridColumn32.OptionsEditForm.StartNewRow = true;
-            this.gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
-            this.gridColumn32.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn32.Visible = true;
-            this.gridColumn32.VisibleIndex = 3;
-            this.gridColumn32.Width = 200;
+            gridColumn32.Caption = "наименование операции пошива";
+            gridColumn32.FieldName = "Text";
+            gridColumn32.MinWidth = 23;
+            gridColumn32.Name = "gridColumn32";
+            gridColumn32.OptionsEditForm.ColumnSpan = 3;
+            gridColumn32.OptionsEditForm.RowSpan = 2;
+            gridColumn32.OptionsEditForm.StartNewRow = true;
+            gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
+            gridColumn32.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn32.Visible = true;
+            gridColumn32.VisibleIndex = 3;
+            gridColumn32.Width = 233;
             // 
             // gridColumn37
             // 
-            this.gridColumn37.Caption = "сек.";
-            this.gridColumn37.FieldName = "Sek";
-            this.gridColumn37.Name = "gridColumn37";
-            this.gridColumn37.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn37.OptionsEditForm.VisibleIndex = 8;
-            this.gridColumn37.Visible = true;
-            this.gridColumn37.VisibleIndex = 4;
-            this.gridColumn37.Width = 54;
+            gridColumn37.Caption = "сек.";
+            gridColumn37.FieldName = "Sek";
+            gridColumn37.MinWidth = 23;
+            gridColumn37.Name = "gridColumn37";
+            gridColumn37.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn37.OptionsEditForm.VisibleIndex = 8;
+            gridColumn37.Visible = true;
+            gridColumn37.VisibleIndex = 4;
+            gridColumn37.Width = 63;
             // 
             // colspec2
             // 
-            this.colspec2.Caption = "спец-ть";
-            this.colspec2.FieldName = "Spec";
-            this.colspec2.Name = "colspec2";
-            this.colspec2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.colspec2.OptionsEditForm.VisibleIndex = 11;
-            this.colspec2.Visible = true;
-            this.colspec2.VisibleIndex = 5;
-            this.colspec2.Width = 66;
+            colspec2.Caption = "спец-ть";
+            colspec2.FieldName = "Spec";
+            colspec2.MinWidth = 23;
+            colspec2.Name = "colspec2";
+            colspec2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            colspec2.OptionsEditForm.VisibleIndex = 11;
+            colspec2.Visible = true;
+            colspec2.VisibleIndex = 5;
+            colspec2.Width = 77;
             // 
             // gridColumn38
             // 
-            this.gridColumn38.Caption = "оборудование";
-            this.gridColumn38.FieldName = "Obor";
-            this.gridColumn38.Name = "gridColumn38";
-            this.gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn38.OptionsEditForm.VisibleIndex = 9;
-            this.gridColumn38.Width = 66;
+            gridColumn38.Caption = "оборудование";
+            gridColumn38.FieldName = "Obor";
+            gridColumn38.MinWidth = 23;
+            gridColumn38.Name = "gridColumn38";
+            gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn38.OptionsEditForm.VisibleIndex = 9;
+            gridColumn38.Width = 77;
             // 
             // gridColumn30
             // 
-            this.gridColumn30.Caption = "код из.";
-            this.gridColumn30.FieldName = "Kod";
-            this.gridColumn30.Name = "gridColumn30";
-            this.gridColumn30.OptionsEditForm.Caption = "код из:";
-            this.gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn30.OptionsEditForm.VisibleIndex = 2;
-            this.gridColumn30.Visible = true;
-            this.gridColumn30.VisibleIndex = 7;
-            this.gridColumn30.Width = 66;
+            gridColumn30.Caption = "код из.";
+            gridColumn30.FieldName = "Kod";
+            gridColumn30.MinWidth = 23;
+            gridColumn30.Name = "gridColumn30";
+            gridColumn30.OptionsEditForm.Caption = "код из:";
+            gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn30.OptionsEditForm.VisibleIndex = 2;
+            gridColumn30.Visible = true;
+            gridColumn30.VisibleIndex = 7;
+            gridColumn30.Width = 77;
             // 
             // gridColumn31
             // 
-            this.gridColumn31.Caption = "код оп.";
-            this.gridColumn31.FieldName = "kod_o";
-            this.gridColumn31.Name = "gridColumn31";
-            this.gridColumn31.OptionsEditForm.Caption = "код оп:";
-            this.gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            this.gridColumn31.OptionsEditForm.VisibleIndex = 5;
-            this.gridColumn31.Visible = true;
-            this.gridColumn31.VisibleIndex = 8;
-            this.gridColumn31.Width = 66;
+            gridColumn31.Caption = "код оп.";
+            gridColumn31.FieldName = "kod_o";
+            gridColumn31.MinWidth = 23;
+            gridColumn31.Name = "gridColumn31";
+            gridColumn31.OptionsEditForm.Caption = "код оп:";
+            gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn31.OptionsEditForm.VisibleIndex = 5;
+            gridColumn31.Visible = true;
+            gridColumn31.VisibleIndex = 8;
+            gridColumn31.Width = 77;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.Caption = "произв.";
-            this.gridColumn4.ColumnEdit = this.repositoryItemLookUpEdit_kod_proizv;
-            this.gridColumn4.FieldName = "KodProizv";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.OptionsEditForm.Caption = "произв.";
-            this.gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.gridColumn4.OptionsEditForm.VisibleIndex = 3;
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 6;
-            this.gridColumn4.Width = 66;
+            gridColumn4.Caption = "произв.";
+            gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
+            gridColumn4.FieldName = "KodProizv";
+            gridColumn4.MinWidth = 23;
+            gridColumn4.Name = "gridColumn4";
+            gridColumn4.OptionsEditForm.Caption = "произв.";
+            gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn4.OptionsEditForm.VisibleIndex = 3;
+            gridColumn4.Visible = true;
+            gridColumn4.VisibleIndex = 6;
+            gridColumn4.Width = 77;
             // 
             // repositoryItemLookUpEdit_kod_proizv
             // 
-            this.repositoryItemLookUpEdit_kod_proizv.AutoHeight = false;
-            this.repositoryItemLookUpEdit_kod_proizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
-            this.repositoryItemLookUpEdit_kod_proizv.Name = "repositoryItemLookUpEdit_kod_proizv";
-            this.repositoryItemLookUpEdit_kod_proizv.NullText = "";
-            this.repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
+            repositoryItemLookUpEdit_kod_proizv.AutoHeight = false;
+            repositoryItemLookUpEdit_kod_proizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
+            repositoryItemLookUpEdit_kod_proizv.Name = "repositoryItemLookUpEdit_kod_proizv";
+            repositoryItemLookUpEdit_kod_proizv.NullText = "";
+            repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
             // 
             // Kod_podr
             // 
-            this.Kod_podr.Caption = "вяз. подр.";
-            this.Kod_podr.ColumnEdit = this.repositoryItemLookUpEdit_podrVyaz;
-            this.Kod_podr.FieldName = "KodPodr";
-            this.Kod_podr.Name = "Kod_podr";
-            this.Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.Kod_podr.OptionsEditForm.VisibleIndex = 7;
-            this.Kod_podr.Visible = true;
-            this.Kod_podr.VisibleIndex = 9;
-            this.Kod_podr.Width = 66;
+            Kod_podr.Caption = "вяз. подр.";
+            Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
+            Kod_podr.FieldName = "KodPodr";
+            Kod_podr.MinWidth = 23;
+            Kod_podr.Name = "Kod_podr";
+            Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            Kod_podr.OptionsEditForm.VisibleIndex = 7;
+            Kod_podr.Visible = true;
+            Kod_podr.VisibleIndex = 9;
+            Kod_podr.Width = 77;
             // 
             // repositoryItemLookUpEdit_podrVyaz
             // 
-            this.repositoryItemLookUpEdit_podrVyaz.AutoHeight = false;
-            this.repositoryItemLookUpEdit_podrVyaz.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
-            this.repositoryItemLookUpEdit_podrVyaz.Name = "repositoryItemLookUpEdit_podrVyaz";
-            this.repositoryItemLookUpEdit_podrVyaz.NullText = "";
-            this.repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_podr";
+            repositoryItemLookUpEdit_podrVyaz.AutoHeight = false;
+            repositoryItemLookUpEdit_podrVyaz.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
+            repositoryItemLookUpEdit_podrVyaz.Name = "repositoryItemLookUpEdit_podrVyaz";
+            repositoryItemLookUpEdit_podrVyaz.NullText = "";
+            repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_podr";
             // 
             // Kod_ob
             // 
-            this.Kod_ob.Caption = "оборуд.";
-            this.Kod_ob.ColumnEdit = this.repositoryItemLookUpEdit_oborudShv;
-            this.Kod_ob.FieldName = "kod_ob";
-            this.Kod_ob.Name = "Kod_ob";
-            this.Kod_ob.OptionsEditForm.Caption = "оборуд:";
-            this.Kod_ob.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.Kod_ob.OptionsEditForm.VisibleIndex = 9;
-            this.Kod_ob.Visible = true;
-            this.Kod_ob.VisibleIndex = 10;
-            this.Kod_ob.Width = 66;
+            Kod_ob.Caption = "оборуд.";
+            Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
+            Kod_ob.FieldName = "kod_ob";
+            Kod_ob.MinWidth = 23;
+            Kod_ob.Name = "Kod_ob";
+            Kod_ob.OptionsEditForm.Caption = "оборуд:";
+            Kod_ob.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            Kod_ob.OptionsEditForm.VisibleIndex = 9;
+            Kod_ob.Visible = true;
+            Kod_ob.VisibleIndex = 10;
+            Kod_ob.Width = 77;
             // 
             // repositoryItemLookUpEdit_oborudShv
             // 
-            this.repositoryItemLookUpEdit_oborudShv.AutoHeight = false;
-            this.repositoryItemLookUpEdit_oborudShv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
-            this.repositoryItemLookUpEdit_oborudShv.Name = "repositoryItemLookUpEdit_oborudShv";
-            this.repositoryItemLookUpEdit_oborudShv.NullText = "";
-            this.repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
+            repositoryItemLookUpEdit_oborudShv.AutoHeight = false;
+            repositoryItemLookUpEdit_oborudShv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
+            repositoryItemLookUpEdit_oborudShv.Name = "repositoryItemLookUpEdit_oborudShv";
+            repositoryItemLookUpEdit_oborudShv.NullText = "";
+            repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
             // 
             // gridColumn5
             // 
-            this.gridColumn5.Caption = "gridColumn5";
-            this.gridColumn5.FieldName = "TextProizv";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn5.Caption = "gridColumn5";
+            gridColumn5.FieldName = "TextProizv";
+            gridColumn5.MinWidth = 23;
+            gridColumn5.Name = "gridColumn5";
+            gridColumn5.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn5.Width = 87;
             // 
             // gridColumn6
             // 
-            this.gridColumn6.Caption = "gridColumn6";
-            this.gridColumn6.FieldName = "TextVyaz";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn6.Caption = "gridColumn6";
+            gridColumn6.FieldName = "TextVyaz";
+            gridColumn6.MinWidth = 23;
+            gridColumn6.Name = "gridColumn6";
+            gridColumn6.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn6.Width = 87;
             // 
             // gridColumn7
             // 
-            this.gridColumn7.Caption = "gridColumn7";
-            this.gridColumn7.FieldName = "TextOb";
-            this.gridColumn7.Name = "gridColumn7";
-            this.gridColumn7.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn7.Caption = "gridColumn7";
+            gridColumn7.FieldName = "TextOb";
+            gridColumn7.MinWidth = 23;
+            gridColumn7.Name = "gridColumn7";
+            gridColumn7.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            gridColumn7.Width = 87;
             // 
             // btnCancel
             // 
-            this.btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnCancel.Appearance.Options.UseBackColor = true;
-            this.btnCancel.Appearance.Options.UseFont = true;
-            this.btnCancel.Appearance.Options.UseForeColor = true;
-            this.btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            this.btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            this.btnCancel.AppearanceDisabled.Options.UseBackColor = true;
-            this.btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            this.btnCancel.Location = new System.Drawing.Point(84, 3);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(70, 21);
-            this.btnCancel.TabIndex = 24;
-            this.btnCancel.Text = "Отмена";
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnCancel.Appearance.Options.UseBackColor = true;
+            btnCancel.Appearance.Options.UseFont = true;
+            btnCancel.Appearance.Options.UseForeColor = true;
+            btnCancel.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnCancel.AppearanceDisabled.Options.UseBackColor = true;
+            btnCancel.AppearanceDisabled.Options.UseForeColor = true;
+            btnCancel.Location = new System.Drawing.Point(98, 3);
+            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnCancel.Name = "btnCancel";
+            btnCancel.Size = new System.Drawing.Size(82, 24);
+            btnCancel.TabIndex = 24;
+            btnCancel.Text = "Отмена";
+            btnCancel.Click += btnCancel_Click;
             // 
             // btnSave
             // 
-            this.btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnSave.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnSave.Appearance.Options.UseBackColor = true;
-            this.btnSave.Appearance.Options.UseFont = true;
-            this.btnSave.Appearance.Options.UseForeColor = true;
-            this.btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            this.btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            this.btnSave.AppearanceDisabled.Options.UseBackColor = true;
-            this.btnSave.AppearanceDisabled.Options.UseForeColor = true;
-            this.btnSave.Location = new System.Drawing.Point(3, 3);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(73, 21);
-            this.btnSave.TabIndex = 25;
-            this.btnSave.Text = "Сохранить";
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnSave.Appearance.Options.UseBackColor = true;
+            btnSave.Appearance.Options.UseFont = true;
+            btnSave.Appearance.Options.UseForeColor = true;
+            btnSave.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnSave.AppearanceDisabled.Options.UseBackColor = true;
+            btnSave.AppearanceDisabled.Options.UseForeColor = true;
+            btnSave.Location = new System.Drawing.Point(4, 3);
+            btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnSave.Name = "btnSave";
+            btnSave.Size = new System.Drawing.Size(85, 24);
+            btnSave.TabIndex = 25;
+            btnSave.Text = "Сохранить";
+            btnSave.Click += btnSave_Click;
             // 
             // btnOK
             // 
-            this.btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.btnOK.Appearance.Font = new System.Drawing.Font("Arial", 10F);
-            this.btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.btnOK.Appearance.Options.UseBackColor = true;
-            this.btnOK.Appearance.Options.UseFont = true;
-            this.btnOK.Appearance.Options.UseForeColor = true;
-            this.btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
-            this.btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
-            this.btnOK.AppearanceDisabled.Options.UseBackColor = true;
-            this.btnOK.AppearanceDisabled.Options.UseForeColor = true;
-            this.btnOK.Location = new System.Drawing.Point(166, 3);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(71, 35);
-            this.btnOK.TabIndex = 26;
-            this.btnOK.Text = "Сохранить+закрыть";
-            this.btnOK.Visible = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnOK.Appearance.Options.UseBackColor = true;
+            btnOK.Appearance.Options.UseFont = true;
+            btnOK.Appearance.Options.UseForeColor = true;
+            btnOK.AppearanceDisabled.BackColor = System.Drawing.Color.Green;
+            btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
+            btnOK.AppearanceDisabled.Options.UseBackColor = true;
+            btnOK.AppearanceDisabled.Options.UseForeColor = true;
+            btnOK.Location = new System.Drawing.Point(194, 3);
+            btnOK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            btnOK.Name = "btnOK";
+            btnOK.Size = new System.Drawing.Size(83, 40);
+            btnOK.TabIndex = 26;
+            btnOK.Text = "Сохранить+закрыть";
+            btnOK.Visible = false;
+            btnOK.Click += btnOK_Click;
             // 
             // customLabel2
             // 
-            this.customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel2.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.customLabel2, 2);
-            this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel2.Location = new System.Drawing.Point(3, 394);
-            this.customLabel2.Name = "customLabel2";
-            this.customLabel2.ObjectName = null;
-            this.customLabel2.Size = new System.Drawing.Size(87, 16);
-            this.customLabel2.TabIndex = 15;
-            this.customLabel2.Text = "конструктор";
+            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customLabel2.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(customLabel2, 2);
+            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel2.Location = new System.Drawing.Point(4, 464);
+            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Size = new System.Drawing.Size(87, 16);
+            customLabel2.TabIndex = 15;
+            customLabel2.Text = "конструктор";
             // 
             // modelTextBox
             // 
-            this.modelTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.tableLayoutPanel5.SetColumnSpan(this.modelTextBox, 3);
-            this.modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.modelTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.modelTextBox.Location = new System.Drawing.Point(3, 118);
-            this.modelTextBox.Name = "modelTextBox";
-            this.modelTextBox.ObjectName = null;
-            this.modelTextBox.Size = new System.Drawing.Size(226, 23);
-            this.modelTextBox.TabIndex = 4;
+            modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
+            modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            modelTextBox.Location = new System.Drawing.Point(4, 138);
+            modelTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            modelTextBox.Name = "modelTextBox";
+            modelTextBox.Size = new System.Drawing.Size(260, 23);
+            modelTextBox.TabIndex = 4;
             // 
             // nameTextBox
             // 
-            this.nameTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.tableLayoutPanel5.SetColumnSpan(this.nameTextBox, 3);
-            this.nameTextBox.Enabled = false;
-            this.nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.nameTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.nameTextBox.Location = new System.Drawing.Point(3, 164);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.ObjectName = null;
-            this.nameTextBox.Size = new System.Drawing.Size(226, 23);
-            this.nameTextBox.TabIndex = 5;
+            nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
+            nameTextBox.Enabled = false;
+            nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            nameTextBox.Location = new System.Drawing.Point(4, 192);
+            nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            nameTextBox.Name = "nameTextBox";
+            nameTextBox.Size = new System.Drawing.Size(260, 23);
+            nameTextBox.TabIndex = 5;
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.label5, 2);
-            this.label5.Font = new System.Drawing.Font("Arial", 10F);
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label5.Location = new System.Drawing.Point(3, 3);
-            this.label5.Name = "label5";
-            this.label5.ObjectName = null;
-            this.label5.Size = new System.Drawing.Size(103, 16);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "дата создания";
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label5.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(label5, 2);
+            label5.Font = new System.Drawing.Font("Arial", 10F);
+            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            label5.Location = new System.Drawing.Point(4, 5);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(103, 16);
+            label5.TabIndex = 3;
+            label5.Text = "дата создания";
             // 
             // dateCreate
             // 
-            this.dateCreate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.tableLayoutPanel5.SetColumnSpan(this.dateCreate, 3);
-            this.dateCreate.Font = new System.Drawing.Font("Arial", 10F);
-            this.dateCreate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.dateCreate.Location = new System.Drawing.Point(3, 26);
-            this.dateCreate.Name = "dateCreate";
-            this.dateCreate.Size = new System.Drawing.Size(226, 23);
-            this.dateCreate.TabIndex = 7;
+            dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tableLayoutPanel5.SetColumnSpan(dateCreate, 3);
+            dateCreate.Font = new System.Drawing.Font("Arial", 10F);
+            dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            dateCreate.Location = new System.Drawing.Point(4, 30);
+            dateCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            dateCreate.Name = "dateCreate";
+            dateCreate.Size = new System.Drawing.Size(260, 23);
+            dateCreate.TabIndex = 7;
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.label4, 3);
-            this.label4.Font = new System.Drawing.Font("Arial", 10F);
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label4.Location = new System.Drawing.Point(3, 348);
-            this.label4.Name = "label4";
-            this.label4.ObjectName = null;
-            this.label4.Size = new System.Drawing.Size(178, 16);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "итоговые сек. по изделию";
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label4.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(label4, 3);
+            label4.Font = new System.Drawing.Font("Arial", 10F);
+            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            label4.Location = new System.Drawing.Point(4, 410);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(178, 16);
+            label4.TabIndex = 2;
+            label4.Text = "итоговые сек. по изделию";
             // 
             // secTimeTextBox
             // 
-            this.secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.secTimeTextBox.Location = new System.Drawing.Point(3, 371);
-            this.secTimeTextBox.Name = "secTimeTextBox";
-            this.secTimeTextBox.ObjectName = null;
-            this.secTimeTextBox.ReadOnly = true;
-            this.secTimeTextBox.Size = new System.Drawing.Size(61, 23);
-            this.secTimeTextBox.TabIndex = 6;
+            secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            secTimeTextBox.Location = new System.Drawing.Point(4, 435);
+            secTimeTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            secTimeTextBox.Name = "secTimeTextBox";
+            secTimeTextBox.ReadOnly = true;
+            secTimeTextBox.Size = new System.Drawing.Size(68, 23);
+            secTimeTextBox.TabIndex = 6;
             // 
             // groupTextBox
             // 
-            this.groupTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(245)))), ((int)(((byte)(230)))));
-            this.tableLayoutPanel5.SetColumnSpan(this.groupTextBox, 3);
-            this.groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            this.groupTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(60)))), ((int)(((byte)(30)))));
-            this.groupTextBox.Location = new System.Drawing.Point(3, 72);
-            this.groupTextBox.Name = "groupTextBox";
-            this.groupTextBox.ObjectName = null;
-            this.groupTextBox.Size = new System.Drawing.Size(226, 23);
-            this.groupTextBox.TabIndex = 19;
+            groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
+            groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            groupTextBox.Location = new System.Drawing.Point(4, 84);
+            groupTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            groupTextBox.Name = "groupTextBox";
+            groupTextBox.Size = new System.Drawing.Size(260, 23);
+            groupTextBox.TabIndex = 19;
             // 
             // customLabel3
             // 
-            this.customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel3.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.customLabel3, 2);
-            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel3.Location = new System.Drawing.Point(3, 49);
-            this.customLabel3.Name = "customLabel3";
-            this.customLabel3.ObjectName = null;
-            this.customLabel3.Size = new System.Drawing.Size(51, 16);
-            this.customLabel3.TabIndex = 18;
-            this.customLabel3.Text = "группа";
-            this.customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customLabel3.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(customLabel3, 2);
+            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel3.Location = new System.Drawing.Point(4, 59);
+            customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel3.Name = "customLabel3";
+            customLabel3.Size = new System.Drawing.Size(51, 16);
+            customLabel3.TabIndex = 18;
+            customLabel3.Text = "группа";
+            customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.label3, 2);
-            this.label3.Font = new System.Drawing.Font("Arial", 10F);
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label3.Location = new System.Drawing.Point(3, 141);
-            this.label3.Name = "label3";
-            this.label3.ObjectName = null;
-            this.label3.Size = new System.Drawing.Size(104, 16);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "наименование";
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label3.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(label3, 2);
+            label3.Font = new System.Drawing.Font("Arial", 10F);
+            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            label3.Location = new System.Drawing.Point(4, 167);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(104, 16);
+            label3.TabIndex = 1;
+            label3.Text = "наименование";
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.label2, 2);
-            this.label2.Font = new System.Drawing.Font("Arial", 10F);
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.label2.Location = new System.Drawing.Point(3, 95);
-            this.label2.Name = "label2";
-            this.label2.ObjectName = null;
-            this.label2.Size = new System.Drawing.Size(57, 16);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "модель";
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label2.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(label2, 2);
+            label2.Font = new System.Drawing.Font("Arial", 10F);
+            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            label2.Location = new System.Drawing.Point(4, 113);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(57, 16);
+            label2.TabIndex = 0;
+            label2.Text = "модель";
             // 
             // customLabel1
             // 
-            this.customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel1.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.customLabel1, 2);
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(3, 440);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.ObjectName = null;
-            this.customLabel1.Size = new System.Drawing.Size(69, 16);
-            this.customLabel1.TabIndex = 14;
-            this.customLabel1.Text = "дизайнер";
+            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customLabel1.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(customLabel1, 2);
+            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel1.Location = new System.Drawing.Point(4, 518);
+            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new System.Drawing.Size(69, 16);
+            customLabel1.TabIndex = 14;
+            customLabel1.Text = "дизайнер";
             // 
             // constructorComboBox
             // 
-            this.tableLayoutPanel5.SetColumnSpan(this.constructorComboBox, 3);
-            this.constructorComboBox.Location = new System.Drawing.Point(3, 417);
-            this.constructorComboBox.Name = "constructorComboBox";
-            this.constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.constructorComboBox.Size = new System.Drawing.Size(226, 20);
-            this.constructorComboBox.TabIndex = 21;
-            this.constructorComboBox.TabIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
+            tableLayoutPanel5.SetColumnSpan(constructorComboBox, 3);
+            constructorComboBox.Location = new System.Drawing.Point(4, 489);
+            constructorComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            constructorComboBox.Name = "constructorComboBox";
+            constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            constructorComboBox.Size = new System.Drawing.Size(260, 20);
+            constructorComboBox.TabIndex = 21;
+            constructorComboBox.TabIndexChanged += ComboBox_SelectedIndexChanged;
             // 
             // designerComboBox
             // 
-            this.tableLayoutPanel5.SetColumnSpan(this.designerComboBox, 3);
-            this.designerComboBox.Location = new System.Drawing.Point(3, 463);
-            this.designerComboBox.Name = "designerComboBox";
-            this.designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.designerComboBox.Size = new System.Drawing.Size(226, 20);
-            this.designerComboBox.TabIndex = 22;
+            tableLayoutPanel5.SetColumnSpan(designerComboBox, 3);
+            designerComboBox.Location = new System.Drawing.Point(4, 543);
+            designerComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            designerComboBox.Name = "designerComboBox";
+            designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            designerComboBox.Size = new System.Drawing.Size(260, 20);
+            designerComboBox.TabIndex = 22;
             // 
             // rasz
             // 
-            this.rasz.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.rasz.Font = new System.Drawing.Font("Arial", 10F);
-            this.rasz.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.rasz.Location = new System.Drawing.Point(0, 0);
-            this.rasz.Name = "rasz";
-            this.rasz.ObjectName = null;
-            this.rasz.Size = new System.Drawing.Size(75, 25);
-            this.rasz.TabIndex = 0;
-            this.rasz.UseVisualStyleBackColor = false;
+            rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            rasz.Font = new System.Drawing.Font("Arial", 10F);
+            rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            rasz.Location = new System.Drawing.Point(0, 0);
+            rasz.Name = "rasz";
+            rasz.Size = new System.Drawing.Size(75, 25);
+            rasz.TabIndex = 0;
+            rasz.UseVisualStyleBackColor = false;
             // 
             // customButton2
             // 
-            this.customButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButton2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customButton2.Location = new System.Drawing.Point(0, 0);
-            this.customButton2.Name = "customButton2";
-            this.customButton2.ObjectName = null;
-            this.customButton2.Size = new System.Drawing.Size(75, 25);
-            this.customButton2.TabIndex = 0;
-            this.customButton2.UseVisualStyleBackColor = false;
+            customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButton2.Font = new System.Drawing.Font("Arial", 10F);
+            customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButton2.Location = new System.Drawing.Point(0, 0);
+            customButton2.Name = "customButton2";
+            customButton2.Size = new System.Drawing.Size(75, 25);
+            customButton2.TabIndex = 0;
+            customButton2.UseVisualStyleBackColor = false;
             // 
             // errorProvider1
             // 
-            this.errorProvider1.ContainerControl = this;
+            errorProvider1.ContainerControl = this;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel2, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.statusLabel, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1481, 839);
-            this.tableLayoutPanel3.TabIndex = 4;
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 292F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 1);
+            tableLayoutPanel3.Controls.Add(statusLabel, 1, 0);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel3.Size = new System.Drawing.Size(1728, 972);
+            tableLayoutPanel3.TabIndex = 4;
             // 
             // statusLabel
             // 
-            this.statusLabel.AutoSize = true;
-            this.statusLabel.Font = new System.Drawing.Font("Arial", 10F);
-            this.statusLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.statusLabel.Location = new System.Drawing.Point(253, 0);
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.ObjectName = null;
-            this.statusLabel.Size = new System.Drawing.Size(0, 16);
-            this.statusLabel.TabIndex = 5;
+            statusLabel.AutoSize = true;
+            statusLabel.Font = new System.Drawing.Font("Arial", 10F);
+            statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            statusLabel.Location = new System.Drawing.Point(296, 0);
+            statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            statusLabel.Name = "statusLabel";
+            statusLabel.Size = new System.Drawing.Size(0, 16);
+            statusLabel.TabIndex = 5;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 81F));
-            this.tableLayoutPanel4.Controls.Add(this.customGroupBox2, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.customGroupBox1, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.btnOK, 2, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btnSave, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.btnCancel, 1, 0);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 23);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.23104F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.76896F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 296F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(244, 864);
-            this.tableLayoutPanel4.TabIndex = 4;
+            tableLayoutPanel4.ColumnCount = 3;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 2);
+            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
+            tableLayoutPanel4.Controls.Add(btnOK, 2, 0);
+            tableLayoutPanel4.Controls.Add(btnSave, 0, 0);
+            tableLayoutPanel4.Controls.Add(btnCancel, 1, 0);
+            tableLayoutPanel4.Location = new System.Drawing.Point(4, 26);
+            tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 3;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.23104F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.76896F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 342F));
+            tableLayoutPanel4.Size = new System.Drawing.Size(284, 997);
+            tableLayoutPanel4.TabIndex = 4;
             // 
             // customGroupBox2
             // 
-            this.customGroupBox2.BackColor = System.Drawing.Color.Transparent;
-            this.customGroupBox2.BorderColor = System.Drawing.Color.Black;
-            this.customGroupBox2.BorderThickness = 1;
-            this.tableLayoutPanel4.SetColumnSpan(this.customGroupBox2, 3);
-            this.customGroupBox2.Controls.Add(this.buffer);
-            this.customGroupBox2.Controls.Add(this.textBoxBuffer);
-            this.customGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customGroupBox2.Location = new System.Drawing.Point(3, 570);
-            this.customGroupBox2.Name = "customGroupBox2";
-            this.customGroupBox2.ObjectName = null;
-            this.customGroupBox2.Size = new System.Drawing.Size(238, 291);
-            this.customGroupBox2.TabIndex = 14;
-            this.customGroupBox2.TabStop = false;
+            customGroupBox2.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel4.SetColumnSpan(customGroupBox2, 3);
+            customGroupBox2.Controls.Add(buffer);
+            customGroupBox2.Controls.Add(textBoxBuffer);
+            customGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox2.Location = new System.Drawing.Point(4, 657);
+            customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBox2.Name = "customGroupBox2";
+            customGroupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBox2.Size = new System.Drawing.Size(276, 337);
+            customGroupBox2.TabIndex = 14;
+            customGroupBox2.TabStop = false;
             // 
             // buffer
             // 
-            this.buffer.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.buffer.Font = new System.Drawing.Font("Arial", 10F);
-            this.buffer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.buffer.Location = new System.Drawing.Point(3, 14);
-            this.buffer.Name = "buffer";
-            this.buffer.ObjectName = null;
-            this.buffer.Size = new System.Drawing.Size(232, 27);
-            this.buffer.TabIndex = 11;
-            this.buffer.Text = "Вставить из буфера:";
-            this.buffer.UseVisualStyleBackColor = false;
-            this.buffer.Click += new System.EventHandler(this.buffer_Click);
+            buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            buffer.Font = new System.Drawing.Font("Arial", 10F);
+            buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            buffer.Location = new System.Drawing.Point(4, 16);
+            buffer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            buffer.Name = "buffer";
+            buffer.Size = new System.Drawing.Size(271, 31);
+            buffer.TabIndex = 11;
+            buffer.Text = "Вставить из буфера:";
+            buffer.UseVisualStyleBackColor = false;
+            buffer.Click += buffer_Click;
             // 
             // textBoxBuffer
             // 
-            this.textBoxBuffer.Enabled = false;
-            this.textBoxBuffer.Location = new System.Drawing.Point(0, 43);
-            this.textBoxBuffer.Name = "textBoxBuffer";
-            this.textBoxBuffer.Size = new System.Drawing.Size(232, 74);
-            this.textBoxBuffer.TabIndex = 12;
-            this.textBoxBuffer.Text = "";
+            textBoxBuffer.Enabled = false;
+            textBoxBuffer.Location = new System.Drawing.Point(0, 50);
+            textBoxBuffer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxBuffer.Name = "textBoxBuffer";
+            textBoxBuffer.Size = new System.Drawing.Size(270, 85);
+            textBoxBuffer.TabIndex = 12;
+            textBoxBuffer.Text = "";
             // 
             // customGroupBox1
             // 
-            this.customGroupBox1.BackColor = System.Drawing.Color.Transparent;
-            this.customGroupBox1.BorderColor = System.Drawing.Color.Black;
-            this.customGroupBox1.BorderThickness = 1;
-            this.tableLayoutPanel4.SetColumnSpan(this.customGroupBox1, 3);
-            this.customGroupBox1.Controls.Add(this.tableLayoutPanel5);
-            this.customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customGroupBox1.Location = new System.Drawing.Point(3, 44);
-            this.customGroupBox1.Name = "customGroupBox1";
-            this.customGroupBox1.ObjectName = null;
-            this.customGroupBox1.Size = new System.Drawing.Size(238, 520);
-            this.customGroupBox1.TabIndex = 0;
-            this.customGroupBox1.TabStop = false;
+            customGroupBox1.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel4.SetColumnSpan(customGroupBox1, 3);
+            customGroupBox1.Controls.Add(tableLayoutPanel5);
+            customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox1.Location = new System.Drawing.Point(4, 50);
+            customGroupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBox1.Name = "customGroupBox1";
+            customGroupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBox1.Size = new System.Drawing.Size(276, 601);
+            customGroupBox1.TabIndex = 0;
+            customGroupBox1.TabStop = false;
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 3;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.97157F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.02843F));
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86F));
-            this.tableLayoutPanel5.Controls.Add(this.textBoxReco, 0, 13);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel4, 0, 8);
-            this.tableLayoutPanel5.Controls.Add(this.designerComboBox, 0, 20);
-            this.tableLayoutPanel5.Controls.Add(this.constructorComboBox, 0, 18);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel1, 0, 19);
-            this.tableLayoutPanel5.Controls.Add(this.label5, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel2, 0, 17);
-            this.tableLayoutPanel5.Controls.Add(this.dateCreate, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.groupTextBox, 0, 3);
-            this.tableLayoutPanel5.Controls.Add(this.nameTextBox, 0, 7);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel3, 0, 2);
-            this.tableLayoutPanel5.Controls.Add(this.label3, 0, 6);
-            this.tableLayoutPanel5.Controls.Add(this.modelTextBox, 0, 5);
-            this.tableLayoutPanel5.Controls.Add(this.label2, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.label4, 0, 15);
-            this.tableLayoutPanel5.Controls.Add(this.secTimeTextBox, 0, 16);
-            this.tableLayoutPanel5.Controls.Add(this.textBoxKomment, 0, 9);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel5, 0, 11);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 19);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 21;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(232, 501);
-            this.tableLayoutPanel5.TabIndex = 24;
+            tableLayoutPanel5.ColumnCount = 3;
+            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.97157F));
+            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.02843F));
+            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
+            tableLayoutPanel5.Controls.Add(textBoxReco, 0, 13);
+            tableLayoutPanel5.Controls.Add(customLabel4, 0, 8);
+            tableLayoutPanel5.Controls.Add(designerComboBox, 0, 20);
+            tableLayoutPanel5.Controls.Add(constructorComboBox, 0, 18);
+            tableLayoutPanel5.Controls.Add(customLabel1, 0, 19);
+            tableLayoutPanel5.Controls.Add(label5, 0, 0);
+            tableLayoutPanel5.Controls.Add(customLabel2, 0, 17);
+            tableLayoutPanel5.Controls.Add(dateCreate, 0, 1);
+            tableLayoutPanel5.Controls.Add(groupTextBox, 0, 3);
+            tableLayoutPanel5.Controls.Add(nameTextBox, 0, 7);
+            tableLayoutPanel5.Controls.Add(customLabel3, 0, 2);
+            tableLayoutPanel5.Controls.Add(label3, 0, 6);
+            tableLayoutPanel5.Controls.Add(modelTextBox, 0, 5);
+            tableLayoutPanel5.Controls.Add(label2, 0, 4);
+            tableLayoutPanel5.Controls.Add(label4, 0, 15);
+            tableLayoutPanel5.Controls.Add(secTimeTextBox, 0, 16);
+            tableLayoutPanel5.Controls.Add(textBoxKomment, 0, 9);
+            tableLayoutPanel5.Controls.Add(customLabel5, 0, 11);
+            tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel5.Location = new System.Drawing.Point(4, 19);
+            tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 21;
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel5.Size = new System.Drawing.Size(268, 579);
+            tableLayoutPanel5.TabIndex = 24;
             // 
             // textBoxReco
             // 
-            this.tableLayoutPanel5.SetColumnSpan(this.textBoxReco, 3);
-            this.textBoxReco.Location = new System.Drawing.Point(3, 302);
-            this.textBoxReco.Name = "textBoxReco";
-            this.tableLayoutPanel5.SetRowSpan(this.textBoxReco, 2);
-            this.textBoxReco.Size = new System.Drawing.Size(226, 34);
-            this.textBoxReco.TabIndex = 26;
-            this.textBoxReco.Text = "";
+            tableLayoutPanel5.SetColumnSpan(textBoxReco, 3);
+            textBoxReco.Location = new System.Drawing.Point(4, 354);
+            textBoxReco.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxReco.Name = "textBoxReco";
+            tableLayoutPanel5.SetRowSpan(textBoxReco, 2);
+            textBoxReco.Size = new System.Drawing.Size(260, 39);
+            textBoxReco.TabIndex = 26;
+            textBoxReco.Text = "";
             // 
             // customLabel4
             // 
-            this.customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.customLabel4.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.customLabel4, 2);
-            this.customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel4.Location = new System.Drawing.Point(3, 184);
-            this.customLabel4.Name = "customLabel4";
-            this.customLabel4.ObjectName = null;
-            this.customLabel4.Size = new System.Drawing.Size(96, 23);
-            this.customLabel4.TabIndex = 25;
-            this.customLabel4.Text = "особенности изделия";
+            customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customLabel4.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(customLabel4, 2);
+            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel4.Location = new System.Drawing.Point(4, 221);
+            customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel4.Name = "customLabel4";
+            customLabel4.Size = new System.Drawing.Size(150, 16);
+            customLabel4.TabIndex = 25;
+            customLabel4.Text = "особенности изделия";
             // 
             // textBoxKomment
             // 
-            this.tableLayoutPanel5.SetColumnSpan(this.textBoxKomment, 3);
-            this.textBoxKomment.Location = new System.Drawing.Point(3, 210);
-            this.textBoxKomment.Name = "textBoxKomment";
-            this.tableLayoutPanel5.SetRowSpan(this.textBoxKomment, 2);
-            this.textBoxKomment.Size = new System.Drawing.Size(226, 34);
-            this.textBoxKomment.TabIndex = 24;
-            this.textBoxKomment.Text = "";
+            tableLayoutPanel5.SetColumnSpan(textBoxKomment, 3);
+            textBoxKomment.Location = new System.Drawing.Point(4, 246);
+            textBoxKomment.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxKomment.Name = "textBoxKomment";
+            tableLayoutPanel5.SetRowSpan(textBoxKomment, 2);
+            textBoxKomment.Size = new System.Drawing.Size(260, 39);
+            textBoxKomment.TabIndex = 24;
+            textBoxKomment.Text = "";
             // 
             // customLabel5
             // 
-            this.customLabel5.AutoSize = true;
-            this.tableLayoutPanel5.SetColumnSpan(this.customLabel5, 3);
-            this.customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel5.Location = new System.Drawing.Point(3, 253);
-            this.customLabel5.Name = "customLabel5";
-            this.customLabel5.ObjectName = null;
-            this.tableLayoutPanel5.SetRowSpan(this.customLabel5, 2);
-            this.customLabel5.Size = new System.Drawing.Size(130, 32);
-            this.customLabel5.TabIndex = 27;
-            this.customLabel5.Text = "рекомендации \r\nдля планирования";
+            customLabel5.AutoSize = true;
+            tableLayoutPanel5.SetColumnSpan(customLabel5, 3);
+            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel5.Location = new System.Drawing.Point(4, 297);
+            customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel5.Name = "customLabel5";
+            tableLayoutPanel5.SetRowSpan(customLabel5, 2);
+            customLabel5.Size = new System.Drawing.Size(130, 32);
+            customLabel5.TabIndex = 27;
+            customLabel5.Text = "рекомендации \r\nдля планирования";
             // 
             // toolStripContainer1
             // 
-            this.toolStripContainer1.BottomToolStripPanelVisible = false;
+            toolStripContainer1.BottomToolStripPanelVisible = false;
             // 
             // toolStripContainer1.ContentPanel
             // 
-            this.toolStripContainer1.ContentPanel.Controls.Add(this.tableLayoutPanel3);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1481, 839);
-            this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
-            this.toolStripContainer1.Name = "toolStripContainer1";
-            this.toolStripContainer1.RightToolStripPanelVisible = false;
-            this.toolStripContainer1.Size = new System.Drawing.Size(1481, 864);
-            this.toolStripContainer1.TabIndex = 5;
-            this.toolStripContainer1.Text = "toolStripContainer1";
+            toolStripContainer1.ContentPanel.Controls.Add(tableLayoutPanel3);
+            toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1728, 972);
+            toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            toolStripContainer1.Location = new System.Drawing.Point(0, 0);
+            toolStripContainer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            toolStripContainer1.Name = "toolStripContainer1";
+            toolStripContainer1.RightToolStripPanelVisible = false;
+            toolStripContainer1.Size = new System.Drawing.Size(1728, 997);
+            toolStripContainer1.TabIndex = 5;
+            toolStripContainer1.Text = "toolStripContainer1";
             // 
             // TeamWork_AdvanceTW
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1481, 864);
-            this.Controls.Add(this.toolStripContainer1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "TeamWork_AdvanceTW";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TeamWork_AdvanceTW_FormClosing);
-            this.Load += new System.EventHandler(this.TeamWork_AdvanceTW_Load);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlKont)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewKont)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRaskr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRaskr)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlRasz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRasz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_kod_proizv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_podrVyaz)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEdit_oborudShv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.constructorComboBox.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerComboBox.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normdopobrBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.constructorBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.designerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraskBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normkontBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.normraszBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.customGroupBox2.ResumeLayout(false);
-            this.customGroupBox1.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
-            this.toolStripContainer1.ContentPanel.ResumeLayout(false);
-            this.toolStripContainer1.ResumeLayout(false);
-            this.toolStripContainer1.PerformLayout();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1728, 997);
+            Controls.Add(toolStripContainer1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "TeamWork_AdvanceTW";
+            WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            FormClosing += TeamWork_AdvanceTW_FormClosing;
+            Load += TeamWork_AdvanceTW_Load;
+            tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridControlKont).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKont).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRasz).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRasz).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kod_proizv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)constructorBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)designerBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normraszBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normraskBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normkontBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normraszBindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            tableLayoutPanel4.ResumeLayout(false);
+            customGroupBox2.ResumeLayout(false);
+            customGroupBox1.ResumeLayout(false);
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
+            toolStripContainer1.ContentPanel.ResumeLayout(false);
+            toolStripContainer1.ResumeLayout(false);
+            toolStripContainer1.PerformLayout();
+            ResumeLayout(false);
 
         }
 
