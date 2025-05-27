@@ -164,6 +164,7 @@
             gridColumnVyazPlanPszkmPlanDate.Caption = "План. дата запуска в произ.";
             gridColumnVyazPlanPszkmPlanDate.MinWidth = 23;
             gridColumnVyazPlanPszkmPlanDate.Name = "gridColumnVyazPlanPszkmPlanDate";
+            gridColumnVyazPlanPszkmPlanDate.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanPszkmPlanDate.Visible = true;
             gridColumnVyazPlanPszkmPlanDate.VisibleIndex = 15;
             gridColumnVyazPlanPszkmPlanDate.Width = 87;
@@ -173,6 +174,7 @@
             gridColumnVyazPlanKmlNumber.Caption = "В/М";
             gridColumnVyazPlanKmlNumber.MinWidth = 23;
             gridColumnVyazPlanKmlNumber.Name = "gridColumnVyazPlanKmlNumber";
+            gridColumnVyazPlanKmlNumber.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKmlNumber.Visible = true;
             gridColumnVyazPlanKmlNumber.VisibleIndex = 14;
             gridColumnVyazPlanKmlNumber.Width = 87;
@@ -182,6 +184,7 @@
             gridColumnVyazPlanSekVyazAll.Caption = "Время вяз. задания, час";
             gridColumnVyazPlanSekVyazAll.MinWidth = 23;
             gridColumnVyazPlanSekVyazAll.Name = "gridColumnVyazPlanSekVyazAll";
+            gridColumnVyazPlanSekVyazAll.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
             gridColumnVyazPlanSekVyazAll.VisibleIndex = 12;
@@ -192,6 +195,7 @@
             gridColumnVyazPlanKol.Caption = "Количество";
             gridColumnVyazPlanKol.MinWidth = 23;
             gridColumnVyazPlanKol.Name = "gridColumnVyazPlanKol";
+            gridColumnVyazPlanKol.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKol.Visible = true;
             gridColumnVyazPlanKol.VisibleIndex = 11;
             gridColumnVyazPlanKol.Width = 87;
@@ -201,6 +205,7 @@
             gridColumnVyazPlanZvetTkan.Caption = "Цвет по заданию (матрица)";
             gridColumnVyazPlanZvetTkan.MinWidth = 23;
             gridColumnVyazPlanZvetTkan.Name = "gridColumnVyazPlanZvetTkan";
+            gridColumnVyazPlanZvetTkan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanZvetTkan.Visible = true;
             gridColumnVyazPlanZvetTkan.VisibleIndex = 10;
             gridColumnVyazPlanZvetTkan.Width = 87;
@@ -210,6 +215,7 @@
             gridColumnVyazPlanSekVyaz.Caption = "Время вяз. 1 изделия";
             gridColumnVyazPlanSekVyaz.MinWidth = 23;
             gridColumnVyazPlanSekVyaz.Name = "gridColumnVyazPlanSekVyaz";
+            gridColumnVyazPlanSekVyaz.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyaz.Visible = true;
             gridColumnVyazPlanSekVyaz.VisibleIndex = 9;
             gridColumnVyazPlanSekVyaz.Width = 87;
@@ -219,6 +225,7 @@
             gridColumnVyazPlanNameVyazClass.Caption = "Класс вязания";
             gridColumnVyazPlanNameVyazClass.MinWidth = 23;
             gridColumnVyazPlanNameVyazClass.Name = "gridColumnVyazPlanNameVyazClass";
+            gridColumnVyazPlanNameVyazClass.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameVyazClass.Visible = true;
             gridColumnVyazPlanNameVyazClass.VisibleIndex = 8;
             gridColumnVyazPlanNameVyazClass.Width = 87;
@@ -228,6 +235,7 @@
             gridColumnVyazPlanGrup.Caption = "Группа";
             gridColumnVyazPlanGrup.MinWidth = 23;
             gridColumnVyazPlanGrup.Name = "gridColumnVyazPlanGrup";
+            gridColumnVyazPlanGrup.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanGrup.Visible = true;
             gridColumnVyazPlanGrup.VisibleIndex = 7;
             gridColumnVyazPlanGrup.Width = 87;
@@ -237,6 +245,7 @@
             gridColumnVyazPlanArticul.Caption = "Артикул";
             gridColumnVyazPlanArticul.MinWidth = 23;
             gridColumnVyazPlanArticul.Name = "gridColumnVyazPlanArticul";
+            gridColumnVyazPlanArticul.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanArticul.Visible = true;
             gridColumnVyazPlanArticul.VisibleIndex = 6;
             gridColumnVyazPlanArticul.Width = 87;
@@ -246,6 +255,7 @@
             gridColumnVyazPlanDateCdPlan.Caption = "Дата сдачи";
             gridColumnVyazPlanDateCdPlan.MinWidth = 23;
             gridColumnVyazPlanDateCdPlan.Name = "gridColumnVyazPlanDateCdPlan";
+            gridColumnVyazPlanDateCdPlan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateCdPlan.Visible = true;
             gridColumnVyazPlanDateCdPlan.VisibleIndex = 5;
             gridColumnVyazPlanDateCdPlan.Width = 87;
@@ -255,6 +265,7 @@
             gridColumnVyazPlanNameSbit.Caption = "Канал сбыта";
             gridColumnVyazPlanNameSbit.MinWidth = 23;
             gridColumnVyazPlanNameSbit.Name = "gridColumnVyazPlanNameSbit";
+            gridColumnVyazPlanNameSbit.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameSbit.Visible = true;
             gridColumnVyazPlanNameSbit.VisibleIndex = 4;
             gridColumnVyazPlanNameSbit.Width = 87;
@@ -264,6 +275,7 @@
             gridColumnVyazPlanDateZap.Caption = "Дата запуска";
             gridColumnVyazPlanDateZap.MinWidth = 23;
             gridColumnVyazPlanDateZap.Name = "gridColumnVyazPlanDateZap";
+            gridColumnVyazPlanDateZap.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateZap.Visible = true;
             gridColumnVyazPlanDateZap.VisibleIndex = 3;
             gridColumnVyazPlanDateZap.Width = 87;
@@ -273,6 +285,7 @@
             gridColumnVyazPlanNomZad.Caption = "№ задания";
             gridColumnVyazPlanNomZad.MinWidth = 23;
             gridColumnVyazPlanNomZad.Name = "gridColumnVyazPlanNomZad";
+            gridColumnVyazPlanNomZad.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNomZad.Visible = true;
             gridColumnVyazPlanNomZad.VisibleIndex = 2;
             gridColumnVyazPlanNomZad.Width = 87;
@@ -300,6 +313,7 @@
             gridColumnVyazPlanNn.Caption = "Код матрицы";
             gridColumnVyazPlanNn.MinWidth = 23;
             gridColumnVyazPlanNn.Name = "gridColumnVyazPlanNn";
+            gridColumnVyazPlanNn.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNn.Visible = true;
             gridColumnVyazPlanNn.VisibleIndex = 1;
             gridColumnVyazPlanNn.Width = 87;
