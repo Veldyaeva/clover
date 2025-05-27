@@ -1,0 +1,354 @@
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE dbo.pztOperUpdate 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	declare @xIDBrig int
+	--	select id_brig, * from brig order by brig
+	
+  ------удаление операций с нулевыми секундами в разделении труда--------------
+  DELETE FROM plan_zagr_two 
+    WHERE pztNrID IN (SELECT nr.nrID FROM norm_rasz nr WHERE sek = 0) 
+      AND ISNULL(tab,0) = 0 
+      AND YEAR(date_Add) = YEAR(GETDATE()) - 1 
+      AND ISNULL(idrecord_osn,0) = 0 
+      AND ISNULL(delenie,0) = 0 
+      AND ISNULL(id_ml_op,0) = 0
+
+  ------обновление секунд по операциям--------------
+  UPDATE plan_zagr_two SET plan_zagr_two.sek = normRaszView.sek, n_chasi = round((normRaszView.sek * plan_zagr_two.kol) / 3600.00, 2)
+--  SELECT *
+    FROM plan_zagr_two
+      INNER JOIN normRaszView ON plan_zagr_two.pztNrID = normRaszView.nrID
+    WHERE plan_zagr_two.date_Add IS NOT NULL AND YEAR(ISNULL(plan_zagr_two.date_Add, '19000101')) >= 2023
+      AND (SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4) = SUBSTRING(CONVERT(nvarchar, ISNULL(plan_zagr_two.dateEnd, '19000101'), 12),1,4)
+        OR plan_zagr_two.dateEnd IS NULL)
+      AND isnull(normRaszView.sek,0) > isnull(plan_zagr_two.sek,0)
+
+  UPDATE ml_op SET sek = plan_zagr_two.sek
+--  SELECT plan_zagr_two.sek, ml_op.sek,  *
+    FROM plan_zagr_two
+      INNER JOIN ml_op ON plan_zagr_two.id_ml_op = ml_op.id AND plan_zagr_two.shtr = ml_op.shtr
+    WHERE SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4) = SUBSTRING(CONVERT(nvarchar, ISNULL(plan_zagr_two.dateEnd, '19000101'), 12),1,4)
+      AND isnull(plan_zagr_two.sek,0) > isnull(ml_op.sek,0)
+      AND isnull(ml_op.tab,0) <> 999
+      AND isnull(plan_zagr_two.tab,0) <> 999
+
+/*  
+  SELECT pzt.date_Add, pzt.idrecord, pzt.pztNrID, pzt.nom, pzt.nom_n, pzt.kod, pzt.articul, pzt.mod
+      , pzt.no, pzt.npo, pzt.operac, pzt.kod_ob, pzt.kol, pzt.sek, rv.sek AS sekNR, pzt.n_chasi
+      , pzt.tab, pzt.data_rab, pzt.data_isp, pzt.dateNazn, pzt.dateStart, pzt.dateEnd, pzt.dateML, pzt.dateMast 
+    from plan_zagr_two pzt 
+      INNER JOIN normRaszView rv ON pzt.pztNrID = rv.nrID
+    WHERE pzt.date_Add IS NOT NULL AND YEAR(ISNULL(pzt.date_Add, '19000101')) >= 2023
+      AND (SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4) = SUBSTRING(CONVERT(nvarchar, ISNULL(pzt.dateEnd, '19000101'), 12),1,4)
+        OR pzt.dateEnd IS NULL)
+      AND isnull(rv.sek,0) > isnull(pzt.sek,0)
+*/
+  --SELECT SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4)
+  --------------------------------------------------
+  
+  
+  declare idBrigList CURSOR FORWARD_ONLY STATIC FOR
+	select id_brig	/*, brig*/ from brig where (brig LIKE 'бригада%' AND brig NOT LIKE '%усл.нам%' AND brig NOT LIKE '%exp%') OR brig LIKE 'текстиль%' order by id_brig
+	Open idBrigList
+	fetch next from idBrigList into @xIDBrig
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+		--	DECLARE @xIDBrig int = 56
+		if object_id('tempdb..#nzpSelect') is not null
+			drop table #nzpSelect
+		CREATE table #nzpSelect (nlNom decimal(8), nlNomN int, nlBrig nvarchar(30), nlNomZad nchar(9), nlKodd varchar(6), nlKoddRt varchar(7), nlGrup nchar(35), nlArticul nchar(25), nlMod nchar(25)
+        , nlGrupK nchar(35), nlArticulK nchar(25), nlModK nchar(25), nlKol decimal(38)
+        , nlIdBrig int, nlNZzeh decimal(6), nlDateZeh datetime, nlDateZehP datetime, nlDateRab datetime, nlDataCdPl datetime, nlDateCd datetime, nlPachMin decimal(8), nlPachMax decimal(8)
+        , nlV int, nlKodd7 varchar(7), nlNzOp INT, nlTbID NVARCHAR(20)
+        , brUsl INT, idBrigFrom INT, idBrigTo INT, iz_nakl int, nn char(10), vidPr char(2))
+		INSERT INTO #nzpSelect Exec [dbo].[rzu_nzp] @xIDBrig		--	1; 64
+		--	select * from #nzpSelect where nlnom = 344063
+		--	select * from #nrSelect where nom = 363420 and nom_n = 2
+		--	select * from #nzpOperSelect where nom = 344063 and no = 2
+		if object_id('tempdb..#nrSelect') is not null
+			drop table #nrSelect
+		select rzu.data_r, rzu.nom, rzu.nom_n, nzp.nlKoddRt
+				, nr.nrID, nr.n, nr.n1, nr.text, nr.kod_ob, nr.sek, nr.spec 
+				, RIGHT(cast(YEAR(rzu.data_r) as NVARCHAR), 1) 
+					+ RIGHT('00000' + CAST(rzu.nom as NVARCHAR),5) 
+					+ CAST(rzu.nom_n as NVARCHAR(1)) 
+					+ RIGHT('00' + CAST(nr.n as NVARCHAR),2) 
+					+ RIGHT('000' + CAST(nr.n1 as NVARCHAR),3) as shtr
+			into #nrSelect
+			from #nzpSelect nzp
+				left join raskr_zeh_up rzu on nzp.nlNom = rzu.nom and nzp.nlKodd = SUBSTRING(rzu.kod,1,6)
+				left join normRaszView nr on nzp.nlKoddRt = nr.kod
+			WHERE isnull(nr.sek,0) > 0
+      group by rzu.data_r, rzu.nom, rzu.nom_n, nzp.nlKoddRt
+				, nr.nrID, nr.n, nr.n1, nr.text, nr.kod_ob, nr.sek, nr.spec
+			order by rzu.nom, nr.n, nr.n1
+
+		if object_id('tempdb..#nzpOperSelect') is not null
+			drop table #nzpOperSelect
+		select nzp.nlNom as nom, nzp.nlNomN as nom_n, nzp.nlArticul as articul, nzp.nlMod as mod, nzp.nlKoddRt as kod
+				, nr.nrID as pztNrID, nr.n as nO, nr.n1 as nPo, nr.text as operac, nr.kod_ob
+				, nr.sek, nr.spec
+				, nzp.nlKol as kol
+				, round((nr.sek * nzp.nlKol) / 3600,2) as n_chasi
+				, 0 as tip_op
+				, 0 as tab
+				, NULL as data_rab
+				, NULL as data_isp
+				, 0 as delenie
+				, nzp.nlBrig as brig
+				, nzp.nlIdBrig
+				, nr.shtr as shtr
+		--		DataRZUStrYear = ALLTRIM(SUBSTR(ALLTRIM(STR(YEAR(dataRZU.data_r))), 4, 1))
+		--		, DataRZUStrYear + ALLTRIM(SUBSTR(STR(YEAR(raskr_nom_zad.data_r)),4,1)+SUBSTR(STR(100000+raschet,6),2,5)+ ;
+		--				STR(nom_n_per,1)+ ;
+		--				SUBSTR(STR(100+norm_rasz.N,3),2,2)+SUBSTR(STR(1000+norm_rasz.n1,4),2,3))
+				, NULL as idRecord_osn
+				, NULL as data_pz
+				, HOST_NAME() as komp_add
+				, GETDATE() as date_add
+				, NULL as id_ml_op
+				, NULL as dateNazn
+				, NULL as dateStart
+				, NULL as dateEnd
+				, NULL as dateML
+				, NULL as dateMast
+				, nzp.nlKol as rKol
+				, nr.kod_ob as kodOb
+				, NULL as pbpID
+				, nzp.vidPr as pztVidPr
+			into #nzpOperSelect
+			from #nzpSelect nzp
+				LEFT JOIN #nrSelect nr on nzp.nlNom = nr.nom and nzp.nlNomN = nr.nom_n and nzp.nlKoddRt = nr.nlKoddRt
+			order by nom, nom_n, articul, nO, nPo
+
+		INSERT INTO plan_zagr_two (nom, nom_n, shtr
+					, kod, articul, mod
+					, pztNrID, no, npo, operac, kod_ob, kodOb, spec, tip_op
+					, sek, sekNazn, n_chasi, chasNazn
+					, kol, rKol, kolNazn
+					, tab, pzIDBrig, brig
+					, data_rab, data_isp, delenie, idrecord_osn, data_pz, id_ml_op
+					, dateNazn, dateStart, dateEnd, dateML, dateMast, pbpID, pztVidPr)
+			select nzp.nom, nzp.nom_n, nzp.shtr
+					, nzp.kod, nzp.articul, nzp.mod
+					, nzp.pztNrID, nzp.no, nzp.npo, nzp.operac, nzp.kod_ob, nzp.kodOb, nzp.spec, nzp.tip_op
+					, nzp.sek, 0 as sekNazn, nzp.n_chasi, 0 as chasNazn
+					, nzp.kol, nzp.rKol, 0 as kolNazn
+					, nzp.tab, nzp.nlIdBrig, nzp.brig
+					, nzp.data_rab, nzp.data_isp, nzp.delenie, nzp.idrecord_osn, nzp.data_pz, nzp.id_ml_op
+					, nzp.dateNazn, nzp.dateStart, nzp.dateEnd, nzp.dateML, nzp.dateMast, nzp.pbpID, nzp.pztVidPr
+				from #nzpOperSelect nzp 
+					left join plan_zagr_two pzt on nzp.nom = pzt.nom and nzp.nom_n = pzt.nom_n and nzp.kod = pzt.kod and nzp.pztNrID = pzt.pztNrID
+					--	and nzp.no = pzt.no and nzp.npo = pzt.npo
+			where pzt.nom IS NULL and nzp.no is not NULL
+		FETCH NEXT FROM idBrigList into @xIDBrig
+	END
+	close idBrigList
+	deallocate idBrigList
+	
+	
+	/*
+	if object_id('tempdb..#rzuNew') is not null
+		drop table #rzuNew
+	select nom, kod into #rzuNew from ace.dbo.raskr_zeh_up
+	if object_id('tempdb..#rzuOld') is not null
+		drop table #rzuOld
+	select nom, kod into #rzuOld from ace_backup.dbo.raskr_zeh_up
+	select rzuNew.nom, SUBSTRING(rzuNew.kod,1,7) as kodd
+		from #rzuNew rzuNew
+			left join #rzuOld rzuOld on rzuNew.nom = rzuOld.nom and rzuNew.kod = rzuOld.kod
+		where rzuOld.nom IS NULL
+		group by rzuNew.nom, SUBSTRING(rzuNew.kod,1,7)
+		order by rzuNew.nom, SUBSTRING(rzuNew.kod,1,7)
+	*/
+/*
+	update plan_zagr_two SET pztNrID = norm_rasz.nrID
+--	select * 
+		from plan_zagr_two
+			inner join norm_rasz on plan_zagr_two.kod = norm_rasz.kod
+				and plan_zagr_two.no = norm_rasz.n 
+				and plan_zagr_two.npo = norm_rasz.n1
+--				and trim(plan_zagr_two.operac) + ' - удалено' = trim(norm_rasz.text)
+		where plan_zagr_two.pztNrID is NULL
+		--isnull(plan_zagr_two.pztNrID,0) <> isnull(norm_rasz.nrID,0)
+	select kod, no, npo, operac from plan_zagr_two where isnull(pztNrID,0) = 0 group by kod, no, npo, operac
+
+	select * from plan_zagr_two where isnull(pztNrID,0) = 0 and isnull(sek,0) <> 0 order by data_rab desc
+
+	select nrID, * 
+		from norm_rasz 
+		where kod = '7027100' 
+			and n in (8)
+			and n1 = 0
+		order by n, n1
+--	select * from ace_log.dbo.norm_rasz_updLog where kod = '1413050' and n = 17 and n1 = 4
+	select * from plan_zagr_two where kod = '7027100' and no = 8 and npo = 0
+
+
+	update plan_zagr_two set pztNrID = 108480225
+--	select * from plan_zagr_two
+	where kod = '1413050' and no = 16 and npo = 3 and operac = 'Закрепить двойной маш. строчкой нижний угол планки, подправляя                                      '
+
+	select * from plan_zagr_two where kod = '1013710' and no = 20 and npo = 0
+                                                          
+*/
+END
+
+
+
+GO 
+
+
+
+
+
+----------------------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!_----------------------------------
+PROCEDURE dbo.pztOperUpdate 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+	declare @xIDBrig int
+	--	select id_brig, * from brig order by brig
+	
+  ------удаление операций с нулевыми секундами в разделении труда--------------
+  DELETE FROM plan_zagr_two 
+    WHERE pztNrID IN (SELECT nr.nrID FROM norm_rasz nr WHERE sek = 0) 
+      AND ISNULL(tab,0) = 0 
+      AND YEAR(date_Add) >= YEAR(GETDATE()) - 1 
+      AND ISNULL(idrecord_osn,0) = 0 
+      AND ISNULL(delenie,0) = 0 
+      AND ISNULL(id_ml_op,0) = 0
+
+  ------обновление секунд по операциям--------------
+  UPDATE plan_zagr_two SET plan_zagr_two.sek = normRaszView.sek, n_chasi = round((normRaszView.sek * plan_zagr_two.kol) / 3600.00, 2)
+--  SELECT *
+    FROM plan_zagr_two
+      INNER JOIN normRaszView ON plan_zagr_two.pztNrID = normRaszView.nrID
+    WHERE plan_zagr_two.date_Add IS NOT NULL AND YEAR(ISNULL(plan_zagr_two.date_Add, '19000101')) >= 2023
+      AND (SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4) = SUBSTRING(CONVERT(nvarchar, ISNULL(plan_zagr_two.dateEnd, '19000101'), 12),1,4)
+        OR plan_zagr_two.dateEnd IS NULL)
+      AND isnull(normRaszView.sek,0) > isnull(plan_zagr_two.sek,0)
+
+  UPDATE ml_op SET sek = plan_zagr_two.sek
+--  SELECT plan_zagr_two.sek, ml_op.sek,  *
+    FROM plan_zagr_two
+      INNER JOIN ml_op ON plan_zagr_two.id_ml_op = ml_op.id AND plan_zagr_two.shtr = ml_op.shtr
+    WHERE SUBSTRING(CONVERT(nvarchar, getdate(), 12),1,4) = SUBSTRING(CONVERT(nvarchar, ISNULL(plan_zagr_two.dateEnd, '19000101'), 12),1,4)
+      AND isnull(plan_zagr_two.sek,0) > isnull(ml_op.sek,0)
+      AND isnull(ml_op.tab,0) <> 999
+      AND isnull(plan_zagr_two.tab,0) <> 999
+
+
+  до этого момента всё выполняется верно
+  дальше зависания и ошибки
+
+  declare idBrigList CURSOR FORWARD_ONLY STATIC FOR
+	select id_brig	/*, brig*/ from brig where (brig LIKE 'бригада%' AND brig NOT LIKE '%усл.нам%' AND brig NOT LIKE '%exp%') OR brig LIKE 'текстиль%' order by id_brig
+	Open idBrigList
+	fetch next from idBrigList into @xIDBrig
+	WHILE @@FETCH_STATUS = 0
+	BEGIN
+
+		if object_id('tempdb..#nzpSelect') is not null
+			drop table #nzpSelect
+		CREATE table #nzpSelect (nlNom decimal(8), nlNomN int, nlBrig nvarchar(30), nlNomZad nchar(9), nlKodd varchar(6), nlKoddRt varchar(7), nlGrup nchar(35), nlArticul nchar(25), nlMod nchar(25)
+        , nlGrupK nchar(35), nlArticulK nchar(25), nlModK nchar(25), nlKol decimal(38)
+        , nlIdBrig int, nlNZzeh decimal(6), nlDateZeh datetime, nlDateZehP datetime, nlDateRab datetime, nlDataCdPl datetime, nlDateCdMin DATETIME, nlDateCd datetime, nlPachMin decimal(8), nlPachMax decimal(8)
+        , nlV int, nlKodd7 varchar(7), nlNzOp INT, nlTbID NVARCHAR(20)
+        , brUsl INT, idBrigFrom INT, idBrigTo INT, iz_nakl int, nn char(10), vidPr char(2), nlRowNumber int, )
+		INSERT INTO #nzpSelect Exec [dbo].[rzu_nzp] @xIDBrig		--	1; 64
+
+		if object_id('tempdb..#nrSelect') is not null
+			drop table #nrSelect
+		select rzu.data_r, rzu.nom, rzu.nom_n, nzp.nlKoddRt
+				, nr.nrID, nr.n, nr.n1, nr.text, nr.kod_ob, nr.sek, nr.spec 
+				, RIGHT(cast(YEAR(rzu.data_r) as NVARCHAR), 1) 
+					+ RIGHT('00000' + CAST(rzu.nom as NVARCHAR),5) 
+					+ CAST(rzu.nom_n as NVARCHAR(1)) 
+					+ RIGHT('00' + CAST(nr.n as NVARCHAR),2) 
+					+ RIGHT('000' + CAST(nr.n1 as NVARCHAR),3) as shtr
+			into #nrSelect
+			from #nzpSelect nzp
+				left join raskr_zeh_up rzu on nzp.nlNom = rzu.nom and nzp.nlKodd = SUBSTRING(rzu.kod,1,6)
+				left join normRaszView nr on nzp.nlKoddRt = nr.kod
+			WHERE isnull(nr.sek,0) > 0
+      group by rzu.data_r, rzu.nom, rzu.nom_n, nzp.nlKoddRt
+				, nr.nrID, nr.n, nr.n1, nr.text, nr.kod_ob, nr.sek, nr.spec
+			order by rzu.nom, nr.n, nr.n1
+
+		if object_id('tempdb..#nzpOperSelect') is not null
+			drop table #nzpOperSelect
+		select nzp.nlNom as nom, nzp.nlNomN as nom_n, nzp.nlArticul as articul, nzp.nlMod as mod, nzp.nlKoddRt as kod
+				, nr.nrID as pztNrID, nr.n as nO, nr.n1 as nPo, nr.text as operac, nr.kod_ob
+				, nr.sek, nr.spec
+				, nzp.nlKol as kol
+				, round((nr.sek * nzp.nlKol) / 3600,2) as n_chasi
+				, 0 as tip_op
+				, 0 as tab
+				, NULL as data_rab
+				, NULL as data_isp
+				, 0 as delenie
+				, nzp.nlBrig as brig
+				, nzp.nlIdBrig
+				, nr.shtr as shtr
+
+				, NULL as idRecord_osn
+				, NULL as data_pz
+				, HOST_NAME() as komp_add
+				, GETDATE() as date_add
+				, NULL as id_ml_op
+				, NULL as dateNazn
+				, NULL as dateStart
+				, NULL as dateEnd
+				, NULL as dateML
+				, NULL as dateMast
+				, nzp.nlKol as rKol
+				, nr.kod_ob as kodOb
+				, NULL as pbpID
+				, nzp.vidPr as pztVidPr
+			into #nzpOperSelect
+			from #nzpSelect nzp
+				LEFT JOIN #nrSelect nr on nzp.nlNom = nr.nom and nzp.nlNomN = nr.nom_n and nzp.nlKoddRt = nr.nlKoddRt
+			order by nom, nom_n, articul, nO, nPo
+
+		INSERT INTO plan_zagr_two (nom, nom_n, shtr
+					, kod, articul, mod
+					, pztNrID, no, npo, operac, kod_ob, kodOb, spec, tip_op
+					, sek, sekNazn, n_chasi, chasNazn
+					, kol, rKol, kolNazn
+					, tab, pzIDBrig, brig
+					, data_rab, data_isp, delenie, idrecord_osn, data_pz, id_ml_op
+					, dateNazn, dateStart, dateEnd, dateML, dateMast, pbpID, pztVidPr)
+			select nzp.nom, nzp.nom_n, nzp.shtr
+					, nzp.kod, nzp.articul, nzp.mod
+					, nzp.pztNrID, nzp.no, nzp.npo, nzp.operac, nzp.kod_ob, nzp.kodOb, nzp.spec, nzp.tip_op
+					, nzp.sek, 0 as sekNazn, nzp.n_chasi, 0 as chasNazn
+					, nzp.kol, nzp.rKol, 0 as kolNazn
+					, nzp.tab, nzp.nlIdBrig, nzp.brig
+					, nzp.data_rab, nzp.data_isp, nzp.delenie, nzp.idrecord_osn, nzp.data_pz, nzp.id_ml_op
+					, nzp.dateNazn, nzp.dateStart, nzp.dateEnd, nzp.dateML, nzp.dateMast, nzp.pbpID, nzp.pztVidPr
+				from #nzpOperSelect nzp 
+					left join plan_zagr_two pzt on nzp.nom = pzt.nom and nzp.nom_n = pzt.nom_n and nzp.kod = pzt.kod and nzp.pztNrID = pzt.pztNrID
+
+			where pzt.nom IS NULL and nzp.no is not NULL
+		FETCH NEXT FROM idBrigList into @xIDBrig
+	END
+	close idBrigList
+	deallocate idBrigList
+	
+END
+
+
+
+
+GO

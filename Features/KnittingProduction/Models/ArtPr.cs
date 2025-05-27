@@ -1,0 +1,159 @@
+﻿using DevExpress.ClipboardSource.SpreadsheetML;
+using DevExpress.Data.Linq.Helpers;
+using DevExpress.Xpo.Logger.Transport;
+using DevExpress.XtraBars.Docking2010.Dragging;
+using DevExpress.XtraReports.Templates;
+using DevExpress.XtraRichEdit.Import.EPub;
+using Newtonsoft.Json.Linq;
+using SewingProduction.form;
+using SewingProduction.Interfaces;
+using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SewingProduction.Features.KnittingProduction.Models
+{
+    public class ArtPrFioProgr
+    {
+        public string kod_pr { get; set; }
+        public string kod { get; set; }
+        public string grup { get; set; }
+        public string art_sh { get; set; }
+        public string art_pr { get; set; }
+        public int n_pach { get; set; }
+        public string razm { get; set; }
+        public int men { get; set; }
+        public string constructr { get; set; }
+        public int tab_c { get; set; }
+        public string avtor { get; set; }
+        public int tab_a { get; set; }
+        public string blok { get; set; }
+        public int baza { get; set; }
+        public DateTime? datapr { get; set; }
+        public decimal seb_rekom { get; set; }
+        public decimal seb_dop { get; set; }
+        public decimal norm_t { get; set; }
+        public decimal seb_z { get; set; }
+        public string text { get; set; }
+        public string articul { get; set; }
+        public int pr { get; set; }
+        public decimal norm_kg { get; set; }
+        public string status { get; set; }
+        public DateTime? data_plan { get; set; }
+        public string kod_matr { get; set; }
+        public int nom_pr { get; set; }
+        public int nal_tkani { get; set; }
+        public int nal_furnit { get; set; }
+        public DateTime? data_zap { get; set; }
+        public int kol_zap { get; set; }
+        public string tema { get; set; }
+        public string v_c { get; set; }
+        public int v { get; set; }
+        public string p_c { get; set; }
+        public int hol_prob { get; set; }
+        public int hol_kleev { get; set; }
+        public int kol_zvet_p { get; set; }
+        public int kol_print { get; set; }
+        public int p { get; set; }
+        public int n_f { get; set; }
+        public DateTime? data_f { get; set; }
+        public string k_p_ok { get; set; }
+        public string zvet_okant { get; set; }
+        public string k_p_ot { get; set; }
+        public string zvet_otd { get; set; }
+        public string k_p_os { get; set; }
+        public string zvet_osn { get; set; }
+        public string dorab { get; set; }
+        public decimal norma_rask { get; set; }
+        public decimal norma_posh { get; set; }
+        public string straz_c { get; set; }
+        public int straz { get; set; }
+        public int tamp { get; set; }
+        public int poet { get; set; }
+        public string dekor_c { get; set; }
+        public int dekor { get; set; }
+        public DateTime? data_utv { get; set; }
+        public int kol_z1 { get; set; }
+        public int kol_z2 { get; set; }
+        public int kol_z3 { get; set; }
+        public int kol_z4 { get; set; }
+        public string form_p1 { get; set; }
+        public string form_p2 { get; set; }
+        public string form_p3 { get; set; }
+        public string form_p4 { get; set; }
+        public string spe1 { get; set; }
+        public string spe2 { get; set; }
+        public string spe3 { get; set; }
+        public string spe4 { get; set; }
+        public decimal p_sum1 { get; set; }
+        public decimal p_sum2 { get; set; }
+        public decimal p_sum3 { get; set; }
+        public decimal p_sum4 { get; set; }
+        public string sez_m { get; set; }
+        public int vyaz_m { get; set; }
+        public int vyaz_km { get; set; }
+        public int vyaz_m2 { get; set; }
+        public int vyaz_km2 { get; set; }
+        public decimal seb_tkan { get; set; }
+        public int norma_sekv { get; set; }
+        public string zv_tkan { get; set; }
+        public int tab { get; set; }
+        public string komp_add { get; set; }
+        public string kod_nn { get; set; }
+        public DateTime? data_del { get; set; }
+        public string komp_del { get; set; }
+        public int id_pror { get; set; }
+        public int kol_v { get; set; }
+        public int nazn { get; set; }
+        public DateTime? date_spis { get; set; }
+        public DateTime? date_sklad { get; set; }
+        public DateTime? date_vozv { get; set; }
+        public string art_gurn { get; set; }
+        public int tip { get; set; }
+        public string primech { get; set; }
+        public DateTime? datesklmen { get; set; }
+        public int statusmen { get; set; }
+        public string commentmen { get; set; }
+        public decimal norma_sek { get; set; }
+        public bool tehn { get; set; }
+        public string prim_gurn { get; set; }
+        public int kod_kompl { get; set; }
+        public int tab_progr { get; set; }
+        public int calc_ff { get; set; }
+        public int id_gost { get; set; }
+        public int id_svyaz { get; set; }
+        public string gost { get; set; }
+        public string sostav { get; set; }
+        public int ap_pp_id { get; set; }
+        public int isclose { get; set; }
+        public int komb { get; set; }
+        public string kod_osn { get; set; }
+        public int id_status { get; set; }
+        public int pf { get; set; }
+        public int methodknit { get; set; }
+        public int month_zap { get; set; }
+        public int year_zap { get; set; }
+        public int isblocked { get; set; }
+        public DateTime? datecreate { get; set; }
+        public DateTime? data_print { get; set; }
+        public DateTime? data_posh { get; set; }
+        public DateTime? data_lek { get; set; }
+        public int id_prinadl { get; set; }
+        public DateTime data_take { get; set; }
+        public string prim_mod { get; set; }
+        public string prim_furn { get; set; }
+        public string komment { get; set; }
+        public string kodd { get; set; }
+        public int t_id { get; set; }
+        public DateTime? date_kodd_add { get; set; }
+        public string komp_kodd_add { get; set; }
+        public string articul_spr { get; set; }
+        public int isosnpror { get; set; }
+        public int koef_mat { get; set; }
+        public int nashivka { get; set; }
+        public int nodecor { get; set; }
+        public int id_rithm_name { get; set; }
+        public int num_cords { get; set; }
+        public string progrFio { get; set; }
+    }
+}

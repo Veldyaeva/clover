@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="Core\Class\CustomControlsThemeable.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\SP_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\Articul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\art_new2024.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\editFio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\Fio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\CardByNom\Forms\CardByNom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Furnit\Forms\FurnUpakDeliveryInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingProductionPlanning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\PlanZagrBrig\Forms\PlanZagrBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\OborudBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\PrintBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\SplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\SpravBrig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\SpravForAll.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\SpravOborud.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\SpravZeh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\NormRaskrNew.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Articles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Data.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.Helpers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\ActionHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AdminSprav.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\AllUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\UserProfile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\UsersHierarchy.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Report\FioListReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\FullConfectionCardReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\FurnUpakZayavReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\ConfectionCardReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\MlRtReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\ReestrListReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\PrintPachListReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\PrintTakingCardReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\Menu\SpMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>
