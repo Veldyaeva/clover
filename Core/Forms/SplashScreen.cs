@@ -1,0 +1,55 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Globalization;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace SewingProduction
+{
+    public partial class SplashScreen : Form
+    {
+        public SplashScreen()
+        {
+            InitializeComponent();
+            Random random = new Random();
+            int minValue = 3;
+            int maxValue = 6; 
+
+            int randomNumber = random.Next(minValue, maxValue + 1);
+
+            int month = DateTime.Now.Month;
+            DateTime today = DateTime.Now.Date;
+            if (month >= 3 && month <= 5)
+            {
+                imageSlider1.CurrentImageIndex = randomNumber;//spring
+            }
+            else if (month >= 6 && month <= 8)
+            {
+                imageSlider1.CurrentImageIndex = 2;//summer
+            }
+            else if (month >= 9 && month <= 11)
+            {
+                imageSlider1.CurrentImageIndex = 3;//fall
+            }
+            else
+            {
+                imageSlider1.CurrentImageIndex = 0;//winter
+            }
+            DateTime sprStart = DateTime.ParseExact("03-05", "MM-dd", CultureInfo.InvariantCulture);
+            DateTime sprEnd = DateTime.ParseExact("03-11", "MM-dd", CultureInfo.InvariantCulture);
+            if (today >= sprStart&& today<=sprEnd)
+            {
+                imageSlider1.CurrentImageIndex = 4;//8.03
+            }
+            if (today == DateTime.ParseExact("02-14", "MM-dd", CultureInfo.InvariantCulture))
+                { imageSlider1.CurrentImageIndex = 7; }//14.02
+            if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture)&&today<=DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
+            { imageSlider1.CurrentImageIndex = 8;}//23.02
+        }
+    }
+}

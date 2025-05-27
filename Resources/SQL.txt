@@ -1,0 +1,235 @@
+--USE ACE_backup
+--UPDATE dbo.sp_articul
+--SET sp_articul.annId = art_norm_n.annID
+--FROM dbo.art_norm_n
+----WHERE art_norm_n.kod = SUBSTRING(sp_articul.kod, 1, 7)
+проставить внешний ключ в sp_articul
+
+--GO
+--USE ACE_backup
+--UPDATE dbo.norm_rasz
+--SET norm_rasz.annId = art_norm_n.annID
+--FROM dbo.art_norm_n
+--WHERE art_norm_n.kod = SUBSTRING(norm_rasz.kod, 1, 7)
+в norm_rasz
+
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_rask
+SET norm_rask.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_rask.kod, 1, 7)
+в norm_rask
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_kont
+SET norm_kont.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_kont.kod, 1, 7)
+
+GO
+USE ACE_backup
+UPDATE dbo.norm_dop_obr
+SET norm_dop_obr.annId = art_norm_n.annID
+FROM dbo.art_norm_n
+WHERE art_norm_n.kod = SUBSTRING(norm_dop_obr.kod, 1, 7)
+
+Заполняет статусы 1 = предв.(код начинается с 9), 2= активный (код не начинается с 9 и арх = 0), 3 = архивный (арх = 1)
+UPDATE art_norm_n SET STATUS = 1 WHERE SUBSTRING(kod, 1,1)=9 AND arh = 0
+UPDATE art_norm_n SET STATUS = 2 WHERE SUBSTRING(kod, 1, 1)!=9 AND arh = 0
+UPDATE art_norm_n SET STATUS = 3 WHERE arh = 1
+
+
+--создание таблицы статусов
+CREATE TABLE dbo.status_ann (
+  status_id int IDENTITY,
+  name text NOT NULL,
+  CONSTRAINT PK_ann_status_status_id PRIMARY KEY CLUSTERED (status_id)
+)
+ON [PRIMARY]
+TEXTIMAGE_ON [PRIMARY]
+--заполнение
+INSERT INTO dbo.status_ann
+(
+  name
+)
+VALUES
+(
+  'предварительный', 'актуальный', 'предварительный архив', 'архив' -- name - text NOT NULL
+);
+
+
+Создание таблицы кодов производства
+CREATE TABLE ACE_backup.dbo.Kod_proizv (
+  kod_proizv INT IDENTITY
+ ,text_proizv VARCHAR(15) NULL
+ ,CONSTRAINT PK_Kod_proizv_kod_proizv PRIMARY KEY CLUSTERED (kod_proizv)
+) ON [PRIMARY]
+GO
+USE ACE_backup
+GO
+
+INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'швейное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'вязальное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'квк'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'носки'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'кручение'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'раскройный'
+);
+GO
+
+Создание таблицы подразделений
+CREATE TABLE ACE_backup.dbo.podr_vyaz (
+  kod_vyaz INT IDENTITY
+ ,text_vyaz VARCHAR(50) NULL
+ ,kod_proizv INT NULL
+ ,CONSTRAINT PK_podr_vyaz_kod_vyaz PRIMARY KEY CLUSTERED (kod_vyaz)
+) ON [PRIMARY]
+GO
+
+
+Заполнение
+USE ACE_backup
+GO
+
+INSERT INTO dbo.podr_vyaz
+(
+  text_vyaz, kod_proizv
+)
+VALUES
+(
+  'вязальное'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'квк'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'носки'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'кручение'
+);INSERT INTO dbo.kod_proizv
+(
+  text_proizv
+)
+VALUES
+(
+  'раскройный'
+);
+GO
+
+
+
+Индексы для подсчёта назначенных операций
+CREATE NONCLUSTERED INDEX IX_norm_rasz_annId_nrID_kod
+ON norm_rasz (annId, nrID, kod);
+
+CREATE NONCLUSTERED INDEX IX_plan_zagr_two_pztNrID_tab
+ON plan_zagr_two (pztNrID, tab);
+
+
+
+
+новые поля в art_norm_n
+CREATE TABLE ACE_backup.dbo.art_norm_n (
+  kod NCHAR(7) NULL
+ ,grup NVARCHAR(35) NULL
+ ,articul NVARCHAR(25) NULL
+ ,mod NVARCHAR(50) NULL
+ ,po NCHAR(1) NULL
+ ,sek_shv INT NULL
+ ,sek_vyaz3 INT NULL
+ ,sek_vyaz5 INT NULL
+ ,sek_vyaz6 INT NULL
+ ,sek_vyaz7 INT NULL
+ ,sek_vyaz10 INT NULL
+ ,sek_vyaz12 INT NULL
+ ,sek_vyaz14 INT NULL
+ ,sek_vyaz18 int null default (0)
+ ,sek_vyaz57 int null default (0)
+ ,sek_vyaz62 INT NULL
+ ,sek_vyaz71 INT NULL
+ ,sek_vyaz72 INT NULL
+ ,sek_vyazo INT NULL
+ ,sek_vyaz INT NULL
+ ,sek INT NULL
+ ,seb NUMERIC(13, 5) NULL
+ ,st INT NULL
+ ,po1 NCHAR(1) NULL
+ ,komment TEXT NULL
+ ,data_sozd DATETIME NULL
+ ,diz INT NULL
+ ,constr INT NULL
+ ,data_obn DATETIME NULL
+ ,sek_vyaz70 INT NULL
+ ,sek_kr INT NULL
+ ,slogn INT NULL
+ ,arh BIT NULL
+ ,sql_pr_add INT NULL
+ ,date_add DATETIME NULL
+ ,komp_name NCHAR(50) NULL
+ ,annDateDel DATETIME NULL
+ ,annCompDel NVARCHAR(50) NULL
+ ,annID INT IDENTITY
+ ,annDateAdd DATETIME NULL CONSTRAINT DF_art_norm_n_annDateAdd DEFAULT (GETDATE())
+ ,annCompAdd NVARCHAR(50) NULL CONSTRAINT DF_art_norm_n_annCompAdd DEFAULT (HOST_NAME())
+ ,status INT NULL
+ ,parentId INT NULL
+ ,annRecommendation TEXT NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+CREATE UNIQUE INDEX UK_art_norm_n_annID
+ON ACE_backup.dbo.art_norm_n (annID)
+ON [PRIMARY]
+GO
