@@ -9,44 +9,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Core\_Class\**" />
-    <Compile Remove="Features\TeamWork\_Models\**" />
-    <EmbeddedResource Remove="Core\_Class\**" />
-    <EmbeddedResource Remove="Features\TeamWork\_Models\**" />
-    <None Remove="Core\_Class\**" />
-    <None Remove="Features\TeamWork\_Models\**" />
-    <Page Remove="Core\_Class\**" />
-    <Page Remove="Features\TeamWork\_Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Core\Class\CustomControls.cs" />
-    <Compile Remove="Core\Class\CustomControlsThemeable_old.cs" />
-    <Compile Remove="Core\Helpers\TWGridHelper.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
-    <Compile Remove="Features\TeamWork\Forms\_TeamWork.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaszManager.cs" />
-    <Compile Remove="Form1.cs" />
-    <Compile Remove="Form1.Designer.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
-    <EmbeddedResource Remove="Features\TeamWork\Forms\TeamWork_ArchAndCopy.resx" />
-    <EmbeddedResource Remove="Form1.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Features\sewingproduction.zip" />
-    <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.1" />
@@ -54,6 +31,7 @@
     <PackageReference Include="DevExpress.Win.Design" Version="24.2.7" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.5" />
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="5.4.0" />
     <PackageReference Include="Z.Dapper.Plus" Version="7.5.12" />
