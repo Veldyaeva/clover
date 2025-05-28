@@ -1,13 +1,18 @@
-﻿using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.XtraBars.Docking;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors.ButtonPanel;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Properties;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace SewingProduction.Forms
@@ -209,6 +214,11 @@ namespace SewingProduction.Forms
         {
             gridView5_FocusedRowChanged_Internal(sender, e);
         }
+        /// <summary>
+        /// Обрабатывает смену строки в неувязанных артикулах
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
@@ -328,6 +338,27 @@ namespace SewingProduction.Forms
         private void gridControl_unboundArts_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void layoutControlGroup6_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
+                    break;
+                case 1:
+                    ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
+                    break;
+                case 2:
+                    ArchAndCopy();
+                    break;
+                case 3:
+                    simpleButton2_Click_Internal(sender, e);
+                    break;
+            }
         }
     }
 }

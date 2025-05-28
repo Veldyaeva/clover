@@ -498,23 +498,13 @@ throw;
             }
         }
 
-        //public async Task<List<NormDopObr>> GetRelatedNormDopObr(int annId)
-        //{
-        //    using (var connection = _dbHelper.GetConnection())
-        //    {
-        //        string query = "SELECT AnnId, sek_p as SekP, sek_p_tamp as SekTamp, sek_v as SekV, sek_stra as SekStra FROM norm_dop_obr WHERE annId = @annId";
-        //        // return //_dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
-        //        var result = await connection.QueryAsync<NormDopObr>(query, new Dictionary<string, object> { { "@annId", annId } });
-        //        return result.ToList();
-        //    }
-        //}
         /// <summary>
         /// Получение неувязанных артикулов из sp_articul
         /// </summary>
         /// <returns></returns>
         public async Task<List<MyDataART>> GetRelatedSpArt()
         {
-            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annID FROM sp_articul WHERE annId IS NULL";
 
             using (var connection = _dbHelper.GetConnection())
             {
@@ -543,23 +533,20 @@ throw;
             List<NZPByKoddRt> nzpList;
             Dictionary<string, int> pztCounts;
 
-            // Оборачиваем получение и использование соединения в using
             using (var connection = _dbHelper.GetConnection())
             {
-                // Выполняем первый запрос и ждем его
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
                     "dbo.GetNZPByKoddRT",
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 nzpList = nzpResult.ToList();
 
-                // Выполняем второй запрос на том же соединении и ждем его
                 var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
                     "dbo.GetPztCountsByKoddRT",
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
-            } // Соединение будет автоматически закрыто/освобождено здесь
+            } 
 
             // Объединение результатов
             foreach (var row in nzpList)

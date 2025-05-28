@@ -123,17 +123,8 @@ namespace SewingProduction.Forms
                     _normKontListTW = new BindingList<NormKont>();
                     _normKontBindingSourceTW = new BindingSource { DataSource = _normKontListTW };
                 });
-                var annTask = Task.Run(() =>
-                {
-                    _nzpList = new BindingList<NZPByKoddRt>();
-                    _bindingSource = new BindingSource { DataSource = _bindingList };
-                });
-                var nzpByKoddRtTask = Task.Run(() =>
-                {
-                    _nzpByKoddRtSource = new BindingSource();
-                });
 
-                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask, nzpByKoddRtTask);
+                await Task.WhenAll(normRaszTask, normRaskTask, normKontTask);
 
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
@@ -153,13 +144,13 @@ namespace SewingProduction.Forms
             await TWGridHelper.LoadListDataAsync(gridControlKontTW, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
             await LoadAndBindFioListsAsync();
 
-            List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
-            _nzpByKoddRtSource.DataSource = nzpData;
-            _nzpByKoddRtSource.ResetBindings(false);
-            gridControlNZP.DataSource = _nzpByKoddRtSource;
-            gridControlNZP.RefreshDataSource();
-            GetNZPStatus(nzpData);
+            // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+            // await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
+            // _nzpByKoddRtSource.DataSource = nzpData;
+            // _nzpByKoddRtSource.ResetBindings(false);
+            // gridControlNZP.DataSource = _nzpByKoddRtSource;
+            // gridControlNZP.RefreshDataSource();
+            // GetNZPStatus(nzpData); // Заменено на UpdateUnboundButtonStatusBasedOnNZP() и вызывается из другого места
 
             // Сортируем каждую таблицу отдельно
             TWGridHelper.sortGridView(gridView1);
@@ -180,12 +171,12 @@ namespace SewingProduction.Forms
             await LoadAndBindFioListsAsync();
 
            // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
-            _nzpByKoddRtSource.DataSource = nzpData;
-            _nzpByKoddRtSource.ResetBindings(false);
-            gridControlNZP.DataSource = _nzpByKoddRtSource;
-            gridControlNZP.RefreshDataSource();
-            GetNZPStatus(nzpData);
+            //await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
+            //_nzpByKoddRtSource.DataSource = nzpData;
+            //_nzpByKoddRtSource.ResetBindings(false);
+            //gridControlNZP.DataSource = _nzpByKoddRtSource;
+            //gridControlNZP.RefreshDataSource();
+            //GetNZPStatus(nzpData);
 
             // Сортируем каждую таблицу отдельно
             TWGridHelper.sortGridView(gridView1);
@@ -194,11 +185,29 @@ namespace SewingProduction.Forms
 
         }
 
-        private async void GetNZPStatus(List<NZPByKoddRt> data)
+        private async Task UpdateUnboundButtonStatusBasedOnNZP()
         {
             try
             {
-                var selectedRow = _nzpByKoddRtSource.Current as NZPByKoddRt;
+                var view = gridControlNZP?.MainView as GridView;
+                NZPByKoddRt selectedRow = null;
+
+                if (view != null && _nzpByKoddRtSource != null && _nzpByKoddRtSource.Count > 0)
+                {
+                    if (_nzpByKoddRtSource.Position >= 0 && _nzpByKoddRtSource.Position < _nzpByKoddRtSource.Count)
+                    {
+                        selectedRow = _nzpByKoddRtSource[_nzpByKoddRtSource.Position] as NZPByKoddRt;
+                    }
+                    else if (view.FocusedRowHandle >= 0)
+                    {
+                        selectedRow = view.GetRow(view.FocusedRowHandle) as NZPByKoddRt;
+                    }
+                    else if (_nzpByKoddRtSource.Count > 0)
+                    {
+                        selectedRow = _nzpByKoddRtSource[0] as NZPByKoddRt;
+                    }
+                }
+
                 if (selectedRow == null)
                 {
                     ButtonUnboundWd.Enabled = false;
@@ -208,13 +217,15 @@ namespace SewingProduction.Forms
                 int nzp = selectedRow.kolNZP;
                 int pzt = selectedRow.PZTCount;
 
-                // Кнопка активна, если либо нет НЗП, либо нет операций
                 ButtonUnboundWd.Enabled = (nzp <= 0 || pzt <= 0);
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка обновления статуса НЗП");
-                MessageBox.Show($"Ошибка при обновлении NZP: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (_logger != null)
+                {
+                    await _logger.LogErrorAsync(ex, "Ошибка при обновлении статуса кнопки отвязки НЗП");
+                }
+                ButtonUnboundWd.Enabled = false; 
             }
         }
 
@@ -635,6 +646,10 @@ namespace SewingProduction.Forms
         }
         #endregion
 
+        private async void GetNZPStatus(List<NZPByKoddRt> data)
+        {
+            // Implementation of GetNZPStatus method
+        }
 
     }
 }

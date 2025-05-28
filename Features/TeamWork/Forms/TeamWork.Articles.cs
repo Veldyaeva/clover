@@ -485,7 +485,7 @@ namespace SewingProduction.Forms
             }
             if (this.gridView_wdToBind != null)
             {
-                this.gridView_wdToBind.FocusedRowChanged -= gridView8_FocusedRowChanged;
+                this.gridView_wdToBind.FocusedRowChanged -= gridViewWdToBind_FocusedRowChanged;
             }
 
             try
@@ -533,7 +533,7 @@ namespace SewingProduction.Forms
                 }
                 if (this.gridView_wdToBind != null)
                 {
-                    this.gridView_wdToBind.FocusedRowChanged += gridView8_FocusedRowChanged;
+                    this.gridView_wdToBind.FocusedRowChanged += gridViewWdToBind_FocusedRowChanged;
                 }
             }
         }
@@ -728,14 +728,15 @@ namespace SewingProduction.Forms
 
 
         /// <summary>
+        /// Обрабатывает событие смены строки в РТ для увязки(вкладка артикулы)
         /// загрузка norm_rasz
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             GridView view = gridView_wdToBind;
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, e.FocusedRowHandle, "AnnId", 0);
+            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, e.FocusedRowHandle, "AnnID", 0);
 
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
@@ -752,7 +753,26 @@ namespace SewingProduction.Forms
                 }
             }
             _normRaszBindingSourceArticles.ResetBindings(false);
-            // customGridControl3.DataSource is already set to _normRaszBindingSourceArticles in TeamWork.cs constructor
+
+            // Загрузка данных НЗП
+            if (_nzpList != null)
+            {
+                _nzpList.Clear();
+                if (annId > 0)
+                {
+                    List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+                    if (nzpData != null)
+                    {
+                        foreach (var item in nzpData)
+                        {
+                            _nzpList.Add(item);
+                        }
+                    }
+                }
+                _nzpByKoddRtSource?.ResetBindings(false);
+                gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
+                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
+            }
 
             string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
 
@@ -892,6 +912,11 @@ namespace SewingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Обрабатывает смену строки в таблице неувязанных артикулов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var gv_unbound_Arts = sender as GridView;
