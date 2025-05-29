@@ -319,7 +319,7 @@ namespace SewingProduction.Forms
 
         }
 
-        private void layoutControlGroup6_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        private void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
 
