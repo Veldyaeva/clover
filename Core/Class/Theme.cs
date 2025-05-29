@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.IO;
+using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction
 {
@@ -339,29 +340,7 @@ namespace SewingProduction
 
         public static void LoadTheme()
         {
-            string path = "settings.json";
-            if (File.Exists(path))
-            {
-                try
-                {
-                    var json = File.ReadAllText(path);
-                    var config = Newtonsoft.Json.Linq.JObject.Parse(json);
-                    string themeName = config["theme"]?.ToString();
-
-                    if (!string.IsNullOrEmpty(themeName))
-                    {
-                        SetTheme(themeName); // применит тему и установит CurrentTheme
-                        return;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Ошибка загрузки темы: " + ex.Message);
-                }
-            }
-
-            // fallback если ничего не найдено
-            SetTheme("Ocean");
+            SettingsManager.LoadTheme();
         }
 
         

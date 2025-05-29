@@ -101,6 +101,9 @@
     <Compile Update="Features\UserDistribution\Forms\AllUser.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
