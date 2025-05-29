@@ -572,6 +572,8 @@ namespace SewingProduction.form
             gridColumn38.Name = "gridColumn38";
             gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn38.OptionsEditForm.VisibleIndex = 9;
+            gridColumn38.Visible = true;
+            gridColumn38.VisibleIndex = 10;
             gridColumn38.Width = 77;
             // 
             // gridColumn30
@@ -655,8 +657,6 @@ namespace SewingProduction.form
             Kod_ob.OptionsEditForm.Caption = "оборуд:";
             Kod_ob.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             Kod_ob.OptionsEditForm.VisibleIndex = 9;
-            Kod_ob.Visible = true;
-            Kod_ob.VisibleIndex = 10;
             Kod_ob.Width = 77;
             // 
             // repositoryItemLookUpEdit_oborudShv
@@ -1331,7 +1331,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn38;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private DevExpress.XtraGrid.Columns.GridColumn Kod_proizv;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_kod_proizv;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_podrVyaz;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_oborudShv;
@@ -1361,5 +1361,6 @@ namespace SewingProduction.form
         private System.Windows.Forms.RichTextBox textBoxKomment;
         private CustomLabel customLabel4;
         private CustomLabel customLabel5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
     }
 }

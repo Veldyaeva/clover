@@ -176,12 +176,6 @@ namespace SewingProduction.Forms
         private async void gridView3_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;
-
-            if (_bindingSource != null && e.FocusedRowHandle >= 0 && e.FocusedRowHandle < _bindingSource.Count)
-            {
-                _bindingSource.Position = e.FocusedRowHandle;
-            }
-
             if (view == null || e.FocusedRowHandle < 0)
             {
                 ButtonArchAndCopyWd.Enabled = false;

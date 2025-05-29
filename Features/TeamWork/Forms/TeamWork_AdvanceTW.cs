@@ -381,7 +381,7 @@ namespace SewingProduction.form
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM oborud_shv", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob_all as kod_ob, text_ob FROM oborud_shv_ob", null);
 
                 designerComboBox.DataBindings.Clear(); 
                 constructorComboBox.DataBindings.Clear();
@@ -470,12 +470,12 @@ namespace SewingProduction.form
                     repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
                     repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
                     repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
-                    foreach (var r in _normRaszList)
-                    {
-                        r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
-                        r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
-                        r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
-                    }
+                    //foreach (var r in _normRaszList)
+                    //{
+                    //    r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
+                    //    r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
+                    //    r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
+                    //}
 
 
 
@@ -501,7 +501,7 @@ namespace SewingProduction.form
                     {
                         _currentAnnData = annData;
                         bindingSource1.DataSource = _currentAnnData;
-                        bindingSource1.ResetBindings(false);
+                        //bindingSource1.ResetBindings(false);
                         // Если загрузка из буфера, обновим и оригинал для сравнения
                         if (isCopyOrBuffer) 
                         {
@@ -711,34 +711,28 @@ namespace SewingProduction.form
             var gridView = sender as GridView;
             if (gridView == null) return;
 
-            if (!gridView.IsNewItemRow(e.RowHandle)) // Editing an existing row or a row added via FinalizeRow
+            if (!gridView.IsNewItemRow(e.RowHandle))
             {
-                if (_isCustomEditFormOpen) // EditForm shown programmatically by FinalizeRow for a newly added row
+                if (_isCustomEditFormOpen) 
                 {
                     _isCustomEditFormOpen = false;
-                    // For a newly added row (IsNew should be true), _originalNormRaszDataBeforeEdit is not needed yet for cancel.
-                    // RowEditCanceled will check IsNew property for deletion.
                 }
-                else // User is initiating edit on an existing, possibly persisted row
+                else 
                 {
                     var currentNormRasz = gridView.GetRow(e.RowHandle) as NormRasz;
-                    if (currentNormRasz != null && !currentNormRasz.IsNew) // It's an existing row, not one just added
+                    if (currentNormRasz != null && !currentNormRasz.IsNew) 
                     {
-                        // Assumes NormRasz has a Clone() method
                         _originalNormRaszDataBeforeEdit = currentNormRasz.Clone();
                     }
                     else
                     {
-                        _originalNormRaszDataBeforeEdit = null; // Ensure it's clear if not applicable
+                        _originalNormRaszDataBeforeEdit = null;
                     }
                 }
                 e.Allow = true;
                 return;
             }
 
-            // If we reach here, gridView.IsNewItemRow(e.RowHandle) is TRUE.
-            // This means the user clicked the "Add New Row" placeholder.
-            // Always execute our custom logic.
             e.Allow = false;
 
             using (var selectionForm = new NormOperNew(_selectedAnnId))
