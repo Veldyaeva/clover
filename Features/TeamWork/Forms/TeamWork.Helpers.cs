@@ -554,5 +554,21 @@ namespace SewingProduction.Forms
             }
         }
         #endregion
+
+        public static MyDataANN ToMyDataANN(ArtNormN ann)
+        {
+            if (ann == null) return null;
+            return new MyDataANN
+            {
+                AnnID = ann.AnnID,
+                Kod = ann.Kod,
+                Articul = ann.Articul,
+                Status = ann.Status,
+                grup = ann.grup,
+                mod = ann.Mod,
+                // Прочие нужные поля — если добавите
+            };
+        }
+
     }
 }

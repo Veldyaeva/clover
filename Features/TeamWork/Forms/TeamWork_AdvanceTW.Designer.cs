@@ -753,7 +753,6 @@ namespace SewingProduction.form
             btnOK.Size = new System.Drawing.Size(83, 40);
             btnOK.TabIndex = 26;
             btnOK.Text = "Сохранить+закрыть";
-            btnOK.Visible = false;
             btnOK.Click += btnOK_Click;
             // 
             // customLabel2
