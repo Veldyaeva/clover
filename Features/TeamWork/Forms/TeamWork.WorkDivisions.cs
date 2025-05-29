@@ -10,6 +10,7 @@ using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -433,7 +434,6 @@ namespace SewingProduction.Forms
         /// <returns></returns>
         private async Task ArchAndCopy()
         {
-      //      int rowNumber = gridView.FocusedRowHandle; 
             if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -477,6 +477,121 @@ namespace SewingProduction.Forms
             catch (Exception ex)
             {
                 await HandleArchAndCopyError(selectedItem, newRow, oldStatus, ex);
+            }
+        }
+
+
+        private async Task ArchAndCopy(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        {
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int rowHandle = gridView.FocusedRowHandle;
+
+            // 1. Определяем исходный объект ArtNormN
+            ArtNormN selectedItem = null;
+            if (!forMyDataAnnView)
+            {
+                selectedItem = gridView.GetRow(rowHandle) as ArtNormN;
+            }
+            else
+            {
+                var myDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
+                if (myDataAnn != null)
+                    selectedItem = await _artNormService.GetArtNormDataById(myDataAnn.AnnID);
+            }
+            if (selectedItem == null) return;
+
+            ArtNormN newRow = null;
+            int? oldStatus = selectedItem.Status;
+
+            try
+            {
+                await _logger.LogEventAsync($"Начало архивирования. Исходный статус: {oldStatus}", "ArchAndCopy");
+
+                bool hasNZP = await checkNzp(selectedItem.AnnID);
+                await _logger.LogEventAsync($"Проверка НЗП: {hasNZP}", "ArchAndCopy");
+
+                // 2. Копируем строку (метод может быть вынесен отдельно по аналогии с CopyRow)
+                newRow = await CopyRowGeneric(selectedItem, hasNZP, list, bindingSource, forMyDataAnnView);
+                await _logger.LogEventAsync($"Создана новая запись со статусом: {newRow?.Status}", "ArchAndCopy");
+
+                if (newRow == null)
+                {
+                    MessageBox.Show("Не удалось создать новую запись.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // 3. Открываем форму редактирования новой записи
+                using (var editForm = new TeamWork_AdvanceTW(bufferId, (int)Mode.ArchAndCopy, newRow.AnnID, selectedItem.AnnID))
+                {
+                    if (editForm.ShowDialog() == DialogResult.OK)
+                    {
+                        await HandleSuccessfulEdit(selectedItem, editForm.CreatedAnn, hasNZP);
+                    }
+                    else
+                    {
+                        await HandleCancelledEdit(selectedItem, newRow, oldStatus);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await HandleArchAndCopyError(selectedItem, newRow, oldStatus, ex);
+            }
+        }
+
+        private async Task<ArtNormN> CopyRowGeneric(ArtNormN sourceRecord, bool nzp, IList list, BindingSource bindingSource, bool forMyDataAnnView)
+        {
+            try
+            {
+                ArtNormN newRecord = sourceRecord.CloneProperties();
+                newRecord.dateCreate = DateTime.Now;
+                newRecord.dateUpdate = null;
+                newRecord.Status = nzp ? (int)Status.Preliminary : (int)Status.Actual;
+                newRecord.StatusText = StatusHelper.GetStatusText(newRecord.Status);
+                newRecord.Arh = false;
+                newRecord.ParentId = sourceRecord.AnnID;
+                newRecord.AnnID = 0; // база присвоит новый
+
+                int tempIndex = -1;
+                object itemToAdd = forMyDataAnnView ? ToMyDataANN(newRecord) : newRecord;
+
+                // Добавляем в нужный список, если это второй грид
+                list.Add(itemToAdd);
+
+                // Сохраняем в базе
+                newRecord.AnnID = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newRecord);
+                if (newRecord.AnnID <= 0)
+                {
+                    MessageBox.Show("Не удалось сохранить копию записи в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    list.Remove(itemToAdd); // удаляем из списка если база не сохранила
+                    return null;
+                }
+
+                // Если это gridView_wdToBind — обновляем MyDataANN с актуальным AnnID
+                if (forMyDataAnnView)
+                {
+                    var updatedMyDataAnn = ToMyDataANN(newRecord);
+                    tempIndex = list.IndexOf(itemToAdd);
+                    if (tempIndex >= 0)
+                    {
+                        list[tempIndex] = updatedMyDataAnn;
+                    }
+                }
+
+                bindingSource.ResetBindings(false);
+
+                return newRecord;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при копировании записи");
+                MessageBox.Show($"Произошла ошибка при копировании: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
             }
         }
 

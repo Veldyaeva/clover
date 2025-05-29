@@ -242,7 +242,6 @@ namespace SewingProduction.Forms
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
             xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
@@ -352,7 +351,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
             xtraTabPage3.SuspendLayout();
@@ -2074,6 +2072,9 @@ namespace SewingProduction.Forms
             gridView_wdToBind.OptionsEditForm.PopupEditFormWidth = 933;
             gridView_wdToBind.OptionsFilter.AllowMRUFilterList = false;
             gridView_wdToBind.OptionsFilter.ShowAllTableValuesInFilterPopup = true;
+            gridView_wdToBind.OptionsFind.AlwaysVisible = true;
+            gridView_wdToBind.OptionsFind.FindDelay = 500;
+            gridView_wdToBind.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
             gridView_wdToBind.OptionsMenu.EnableColumnMenu = false;
             gridView_wdToBind.OptionsView.ShowAutoFilterRow = true;
             gridView_wdToBind.OptionsView.ShowGroupPanel = false;
@@ -2193,12 +2194,12 @@ namespace SewingProduction.Forms
             // 
             gridControl_unboundArts.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControl_unboundArts.Font = new System.Drawing.Font("Arial", 10F);
-            gridControl_unboundArts.Location = new System.Drawing.Point(24, 80);
+            gridControl_unboundArts.Location = new System.Drawing.Point(24, 45);
             gridControl_unboundArts.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             gridControl_unboundArts.MainView = gridView_unboundArts;
             gridControl_unboundArts.Margin = new Padding(4, 3, 4, 3);
             gridControl_unboundArts.Name = "gridControl_unboundArts";
-            gridControl_unboundArts.Size = new System.Drawing.Size(843, 509);
+            gridControl_unboundArts.Size = new System.Drawing.Size(843, 544);
             gridControl_unboundArts.TabIndex = 0;
             gridControl_unboundArts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_unboundArts });
             gridControl_unboundArts.Click += gridControl_unboundArts_Click;
@@ -2214,6 +2215,10 @@ namespace SewingProduction.Forms
             gridView_unboundArts.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.False;
             gridView_unboundArts.OptionsDetail.EnableMasterViewMode = false;
             gridView_unboundArts.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView_unboundArts.OptionsFind.AlwaysVisible = true;
+            gridView_unboundArts.OptionsFind.FindDelay = 500;
+            gridView_unboundArts.OptionsFind.FindMode = FindMode.Always;
+            gridView_unboundArts.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
             gridView_unboundArts.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView_unboundArts.OptionsView.ShowGroupPanel = false;
             gridView_unboundArts.ScrollStyle = DevExpress.XtraGrid.Views.Grid.ScrollStyleFlags.LiveVertScroll;
@@ -2488,7 +2493,7 @@ namespace SewingProduction.Forms
             // 
             layoutControlGroup6.CaptionImageOptions.AllowGlyphSkinning = DevExpress.Utils.DefaultBoolean.True;
             layoutControlGroup6.CustomizationFormText = " Артикулы для увязки";
-            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, emptySpaceItem5, layoutControlItem13, emptySpaceItem7, layoutControlItem9, simpleSeparator3 });
+            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, emptySpaceItem5, layoutControlItem13, layoutControlItem9, simpleSeparator3 });
             layoutControlGroup6.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup6.Name = "layoutControlGroup6";
             layoutControlGroup6.Size = new System.Drawing.Size(871, 891);
@@ -2497,9 +2502,9 @@ namespace SewingProduction.Forms
             // layoutControlItem2
             // 
             layoutControlItem2.Control = gridControl_unboundArts;
-            layoutControlItem2.Location = new System.Drawing.Point(0, 35);
+            layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(847, 513);
+            layoutControlItem2.Size = new System.Drawing.Size(847, 548);
             layoutControlItem2.TextVisible = false;
             // 
             // emptySpaceItem5
@@ -2515,12 +2520,6 @@ namespace SewingProduction.Forms
             layoutControlItem13.Name = "layoutControlItem13";
             layoutControlItem13.Size = new System.Drawing.Size(847, 223);
             layoutControlItem13.TextVisible = false;
-            // 
-            // emptySpaceItem7
-            // 
-            emptySpaceItem7.Location = new System.Drawing.Point(0, 0);
-            emptySpaceItem7.Name = "emptySpaceItem7";
-            emptySpaceItem7.Size = new System.Drawing.Size(847, 35);
             // 
             // layoutControlItem9
             // 
@@ -2830,7 +2829,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
             xtraTabPage3.ResumeLayout(false);
@@ -3247,7 +3245,6 @@ namespace SewingProduction.Forms
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup6;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem7;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem6;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem8;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem9;

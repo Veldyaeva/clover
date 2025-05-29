@@ -191,7 +191,9 @@ namespace SewingProduction.Forms
 
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
         {
-            await ArchAndCopy();
+            //await ArchAndCopy();
+            await ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+
         }
 
         private async void ResetButton_Click(object sender, EventArgs e)
@@ -333,7 +335,7 @@ namespace SewingProduction.Forms
                      EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
                 case 4:
-                    ArchAndCopy();// Третья кнопка
+                    ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
                     break;
                 case 6:
                     simpleButton2_Click_Internal(sender, e); // Четвертая кнопка 
