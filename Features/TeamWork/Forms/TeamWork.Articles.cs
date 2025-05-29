@@ -729,30 +729,19 @@ namespace SewingProduction.Forms
 
         /// <summary>
         /// Обрабатывает событие смены строки в РТ для увязки(вкладка артикулы)
-        /// загрузка norm_rasz
+        /// загрузка norm_rasz и связанных данных (НЗП, картинка).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            GridView view = gridView_wdToBind;
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, e.FocusedRowHandle, "AnnID", 0);
+            GridView view = gridView_wdToBind; // Кастуем sender к GridView один раз
+            if (view == null) return; // Если view null, выходим
 
-            List<NormRasz> raszList = new List<NormRasz>();
-            if (annId > 0)
-            {
-                raszList = await _artNormService.GetRelatedNormRasz(annId);
-            }
+            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
 
-            _normRaszListArticles.Clear();
-            if (raszList != null)
-            {
-                foreach (var item in raszList)
-                {
-                    _normRaszListArticles.Add(item);
-                }
-            }
-            _normRaszBindingSourceArticles.ResetBindings(false);
+            // Обновляем NormRasz для customGridControl3
+            await RefreshNormRaszForArticlesTab(annId);
 
             // Загрузка данных НЗП
             if (_nzpList != null)
@@ -784,13 +773,36 @@ namespace SewingProduction.Forms
                 }
                 else
                 {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
                 }
             }
             else
             {
-                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
             }
+        }
+
+        /// <summary>
+        /// Загружает и обновляет NormRasz данные для вкладки "Артикулы" (customGridControl3).
+        /// </summary>
+        /// <param name="annId">AnnID для загрузки NormRasz.</param>
+        private async Task RefreshNormRaszForArticlesTab(int annId)
+        {
+            List<NormRasz> raszList = new List<NormRasz>();
+            if (annId > 0)
+            {
+                raszList = await _artNormService.GetRelatedNormRasz(annId);
+            }
+
+            _normRaszListArticles.Clear();
+            if (raszList != null)
+            {
+                foreach (var item in raszList)
+                {
+                    _normRaszListArticles.Add(item);
+                }
+            }
+            _normRaszBindingSourceArticles.ResetBindings(false);
         }
 
         private async Task PreArchLoad()

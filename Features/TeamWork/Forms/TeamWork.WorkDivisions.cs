@@ -433,6 +433,7 @@ namespace SewingProduction.Forms
         /// <returns></returns>
         private async Task ArchAndCopy()
         {
+      //      int rowNumber = gridView.FocusedRowHandle; 
             if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите запись для архивирования", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);

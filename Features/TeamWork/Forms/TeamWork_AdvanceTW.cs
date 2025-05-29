@@ -350,15 +350,11 @@ namespace SewingProduction.form
                                 _currentAnnData.Articul = InitialArtData.Articul;
                                 dataChangedByInitialValues = true;
                             }
-                            // Используем свойство 'grup' из MyDataART (с маленькой буквы)
-                            // Свойство в ArtNormN (_currentAnnData) также 'grup' (с маленькой буквы)
                             if (!string.IsNullOrEmpty(InitialArtData.grup))
                             {
                                 _currentAnnData.grup = InitialArtData.grup;
                                 dataChangedByInitialValues = true;
                             }
-                            // Используем свойство 'mod' из MyDataART (с маленькой буквы)
-                            // Свойство в ArtNormN (_currentAnnData) - 'Mod' (с большой буквы)
                             if (!string.IsNullOrEmpty(InitialArtData.mod))
                             {
                                 _currentAnnData.Mod = InitialArtData.mod;
@@ -470,14 +466,6 @@ namespace SewingProduction.form
                     repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
                     repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
                     repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
-                    //foreach (var r in _normRaszList)
-                    //{
-                    //    r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
-                    //    r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
-                    //    r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
-                    //}
-
-
 
                     // Обновляем списки
                     _normRaszList.Clear();
@@ -762,138 +750,6 @@ namespace SewingProduction.form
                 }
             }
         }
-        //private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null) return;
-
-        //    // If we are editing an existing row (not the NewItemRow placeholder)
-        //    // or if this event is for the row just added by our custom logic (FinalizeRow).
-        //    if (!gridView.IsNewItemRow(e.RowHandle))
-        //    {
-        //        if (_isCustomEditFormOpen)
-        //        {
-        //            // This EditForm is being shown programmatically by FinalizeRow
-        //            // for the newly added row. Allow it and reset the flag.
-        //            _isCustomEditFormOpen = false;
-        //        }
-        //        // For any non-NewItemRow, allow the standard editor.
-        //        e.Allow = true;
-        //        return;
-        //    }
-
-        //    // If we reach here, gridView.IsNewItemRow(e.RowHandle) is TRUE.
-        //    // This means the user clicked the "Add New Row" placeholder.
-        //    // Always execute our custom logic.
-        //    e.Allow = false; // Prevent the standard EditForm from appearing for the NewItemRow.
-
-        //    using (var selectionForm = new NormOperNew(_selectedAnnId))
-        //    {
-        //        var result = selectionForm.ShowDialog();
-
-        //        if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
-        //        {
-        //            var selectedData = selectionForm.SelectedRowData;
-        //            selectedData.IsNew = true; // Mark as new for styling/saving logic
-        //            _normRaszList.Add(selectedData);
-
-        //            _normRaszBindingSource.ResetBindings(false);
-
-        //            int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
-        //            if (newRowDataSourceIndex >= 0)
-        //            {
-        //                int newRowHandle = gridView.GetRowHandle(newRowDataSourceIndex);
-        //                if (gridView.IsValidRowHandle(newRowHandle))
-        //                {
-        //                    FinalizeRow(newRowHandle, gridView);
-        //                }
-        //                else
-        //                {
-        //                    // Optional: Log if the new row handle couldn't be found immediately.
-        //                    // This might indicate a timing issue or filtering that prevents the row
-        //                    // from being visible right after adding to the source.
-        //                    _logger.LogEventAsync($"Could not find new row handle for added NormRasz. DataSource Index: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
-        //                }
-        //            }
-        //        }
-        //        // If DialogResult was not OK (e.g., Cancel) or no data selected,
-        //        // the NewItemRow placeholder should typically revert or disappear
-        //        // because e.Allow is false and no data was committed.
-        //        // If the placeholder undesirably persists after cancelling NormOperNew,
-        //        // you might need to add explicit cancellation for the new item row:
-        //        // else if (e.RowHandle == DevExpress.XtraGrid.GridControl.NewItemRowHandle)
-        //        // {
-        //        //     gridView.CancelUpdateCurrentRow(); // This should revert the NewItemRow changes
-        //        // }
-        //    }
-        //}
-        ////private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null || !gridView.IsNewItemRow(e.RowHandle))
-        //        return;
-
-        //    if (_isCustomEditFormOpen)
-        //    {
-        //        // Если флаг установлен, значит мы специально открыли форму
-        //        _isCustomEditFormOpen = false;
-        //        return;
-        //    }
-        //    if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)//решаем, показывать ли editForm  
-        //    {
-        //        e.Allow = true;
-        //        return;
-        //    }
-        //    e.Allow = false;
-
-        //    using (var selectionForm = new NormOperNew(_selectedAnnId))
-        //    {
-        //        var result = selectionForm.ShowDialog();
-
-        //        if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
-        //        {
-        //            var selected = selectionForm.SelectedRowData;
-
-        //            selected.IsNew = true;
-        //            _normRaszList.Add(selected);
-
-        //            // Обновляем привязку данных и интерфейс
-        //            _normRaszBindingSource.ResetBindings(false);
-        //            gridControlRasz.RefreshDataSource();
-        //            gridViewRasz.RefreshData();
-        //            gridView.PostEditor();
-        //            gridView.UpdateCurrentRow();
-
-        //            int indexInList = _normRaszList.IndexOf(selected);
-
-        //            if (indexInList >= 0)
-        //            {
-        //                int rowHandle = gridView.GetRowHandle(indexInList);
-
-        //                if (rowHandle >= 0)
-        //                {
-        //                    gridView.FocusedRowHandle = rowHandle;
-        //                }
-        //                FinalizeRow(rowHandle, gridView);
-        //            }
-        //        }
-        //        else if (result == DialogResult.Cancel)
-        //        {
-        //            // Если пользователь отменил выбор, удаляем строку
-        //            gridView.CancelUpdateCurrentRow();
-        //            gridView.HideEditForm();
-        //            gridView.CloseEditForm();
-        //            gridView.DeleteRow(e.RowHandle);
-        //        }
-        //        else
-        //        {
-        //            e.Allow = false;
-        //            gridView.CancelUpdateCurrentRow();
-        //            gridView.DeleteRow(e.RowHandle);
-        //        }
-        //    }
-        //}
-
         private void FinalizeRow(int rowHandle, GridView gridView)
         {
             // разрешаем показать EditForm
@@ -910,14 +766,6 @@ namespace SewingProduction.form
             }));
         }
 
-        //private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
-        //{
-        //    GridView view = sender as GridView;
-        //    if (view != null)
-        //    {
-        //        view.HideEditForm();
-        //    }
-        //}
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
             GridView view = sender as GridView;
@@ -1035,37 +883,6 @@ namespace SewingProduction.form
             }
             _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено после любого закрытия формы редактирования
         }
-        //private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null) return;
-
-        //    if (e.Result != EditFormResult.Update)
-        //    {
-        //        try
-        //        {
-        //            // Получаем текущую строку
-        //            var row = gridView.GetRow(e.RowHandle) as NormRasz;
-        //            if (row != null && row.nrId > 0)
-        //            {
-        //                // Удаляем из базы данных
-        //                await _dbService.DeleteEntityAsync(TableNames.Rasz, TableNames.RaszId, row);//.DeleteNormRaszAsync(row.nrId);
-
-        //                // Удаляем из списка
-        //                _normRaszList.Remove(row);
-        //                _normRaszBindingSource.ResetBindings(false);
-
-        //                // Удаляем из грида
-        //                gridView.DeleteRow(e.RowHandle);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            await _logger.LogErrorAsync(ex, "Ошибка при удалении строки после закрытия формы редактирования");
-        //            MessageBox.Show($"Ошибка при удалении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
         #endregion
 
         #region Rask
@@ -1398,20 +1215,68 @@ namespace SewingProduction.form
 
         #endregion
 
-        private async void btnOK_Click(object sender, EventArgs e)
+        // Общий метод для обработки сохранения
+        private async Task<bool> ProcessSaveData(bool closeAfterSave)
         {
+            _okPressed = false; // Сбрасываем флаг перед попыткой сохранения
+            await ShowStatusMessage("Сохранение данных...");
+
+            if (!ValidateForm())
+            {
+                await ShowStatusMessage("Ошибки заполнения формы");
+                return false;
+            }
+
             try
             {
-                btnSave_Click(sender, e);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                await _dbHelper.ExecuteInTransactionAsync(async () =>
+                {
+                    await SaveAnnDataAsync(); 
+                    await SaveAllDataAsync();
+                    // В режиме Архива+Копии специфической логики после сохранения здесь нет, 
+                    // она обрабатывается на уровне вызывающей формы TeamWork
+                });
+
+                // Эти действия выполняются ПОСЛЕ успешной транзакции
+                IsRaszInserted = true; // Предполагаем, что если сохранение дошло сюда, то все списки были обработаны
+                IsRaskInserted = true;
+                IsKontInserted = true;
+                IsDopObrInserted = true; // Если есть логика для DopObr
+                _hasUnsavedChanges = false;
+                // UpdateFormTitle(); // Если есть такой метод, раскомментируйте
+
+                if (closeAfterSave)
+                {
+                    await ShowStatusMessage("Данные успешно сохранены! Закрытие формы...", 1500);
+                    this.DialogResult = DialogResult.OK;
+                    _okPressed = true;
+                    this.Close();
+                }
+                else
+                {
+                    await ShowStatusMessage("Данные успешно сохранены!");
+                }
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                DialogResult = DialogResult.None;
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в ProcessSaveData");
+                await ShowStatusMessage($"Ошибка при сохранении: {ex.Message}");
+                // this.DialogResult = DialogResult.None; // Не закрываем при ошибке
+                return false;
             }
+        }
 
+        // Сохранение данных без закрытия формы
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            await ProcessSaveData(false);
+        }
+
+        // Сохранение данных и закрытие формы
+        private async void btnOK_Click(object sender, EventArgs e)
+        {
+            await ProcessSaveData(true);
         }
 
         private async Task SaveAnnDataAsync()
@@ -1697,37 +1562,6 @@ namespace SewingProduction.form
             this.Close();
 
         }
-
-        private async void btnSave_Click(object sender, EventArgs e)
-        {
-            _okPressed = true;
-            await ShowStatusMessage("Сохранение данных...");
-
-            if (!ValidateForm())
-            {
-                await ShowStatusMessage("Ошибки заполнения формы");
-                return;
-            }
-            try
-            {
-                await _dbHelper.ExecuteInTransactionAsync(async () =>
-                {
-                    await SaveAnnDataAsync();
-                    await SaveAllDataAsync();
-                    if (_mode == (int)Mode.ArchAndCopy)
-                    {
-
-                    }
-                });
-                await ShowStatusMessage("Данные успешно сохранены!");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-            }
-
-        }
-
 
     }
 }
