@@ -18,6 +18,8 @@ using DevExpress.XtraVerticalGrid;
 using DevExpress.CodeParser;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Forms;
 
 
 namespace SewingProduction.form.UserDistribution
@@ -29,6 +31,7 @@ namespace SewingProduction.form.UserDistribution
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
         private readonly LoginFormDataService _loginService;
+        private FormManager _formManager;
         public UserProfile(UserClass user) : base(user)
         {
             InitializeComponent();
@@ -38,10 +41,15 @@ namespace SewingProduction.form.UserDistribution
             listBoxRole.DataSource = _user.Roles;
             customLabelCompName.Text = Environment.MachineName;
             _passwordHasher = new PasswordHasher();
+
         }
 
         private void customButtonChangeUser_Click(object sender, EventArgs e)
         {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.SaveOpenTabsSafe(); // ДО ExitUser
+            }
             _user.ExitUser();
             // Перезапуск приложения с авторизацией
             Application.Restart();
@@ -91,6 +99,13 @@ namespace SewingProduction.form.UserDistribution
                 mainForm.OpenForm(new ActionHistory(_user));
             }
         }
+        private void customButtonSpravTable_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new Dictionary(_user));
+            }
+        }
         private async void customButtonEditPassword_Click(object sender, EventArgs e)
         {
             string currentPassword = customTextBoxOldPassword.Text;
@@ -98,7 +113,7 @@ namespace SewingProduction.form.UserDistribution
             string newPassword2 = customTextBoxNewPassword2.Text;
 
             string dbHash = await _userProfileDataService.GetPasswordHash(_user.UserId);
-            if (_passwordHasher.VerifyHashedPassword( dbHash, currentPassword) != PasswordVerificationResult.Success)
+            if (_passwordHasher.VerifyHashedPassword(dbHash, currentPassword) != PasswordVerificationResult.Success)
             {
                 MessageBox.Show("Текущий пароль неверен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -109,7 +124,7 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
-            string newHash = _passwordHasher.HashPassword( newPassword);
+            string newHash = _passwordHasher.HashPassword(newPassword);
             await _userProfileDataService.UpdatePasswordHash(_user.UserId, newHash);
             MessageBox.Show("Пароль успешно изменен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             //this.Close();
