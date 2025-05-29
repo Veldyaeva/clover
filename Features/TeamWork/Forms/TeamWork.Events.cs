@@ -170,10 +170,10 @@ namespace SewingProduction.Forms
         }
 
         /// <summary>
-        /// Обрабатывает смену выбранной  строки в gridView3 - разделениях труда
+        /// Обрабатывает смену выбранной  строки в ANNGridView - разделениях труда
         /// Загружает связанные данные в другие таблицы и обновляет UI.
         /// </summary>
-        private async void gridView3_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
+        private async void ANNgridView_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;
             if (view == null || e.FocusedRowHandle < 0)
@@ -209,12 +209,12 @@ namespace SewingProduction.Forms
                     }
                     else
                     {
-                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
                     }
                 }
                 else
                 {
-                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
+                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
                 }
             }
             catch (Exception ex)
@@ -407,7 +407,7 @@ namespace SewingProduction.Forms
         }
 
         /// <summary>
-        /// Фильтрация данных в gridView3 по введенному значению в filterTextBox1.
+        /// Фильтрация данных в ANNgridView по введенному значению в filterTextBox1.
         /// </summary>
         private async void customButton12_Click_Internal(object sender, EventArgs e)
         {
@@ -418,7 +418,7 @@ namespace SewingProduction.Forms
 
                 if (!string.IsNullOrEmpty(filterString) && !string.IsNullOrEmpty(columnName))
                 {
-                    // Применяем фильтр к gridView3
+                    // Применяем фильтр к ANNgridView
                     ANNgridView.ActiveFilterCriteria = new DevExpress.Data.Filtering.FunctionOperator(
                         DevExpress.Data.Filtering.FunctionOperatorType.Contains,
                         new DevExpress.Data.Filtering.OperandProperty(columnName),

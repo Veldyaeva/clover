@@ -788,7 +788,7 @@ namespace SewingProduction.Forms
             ANNgridView.OptionsView.ShowGroupPanel = false;
             ANNgridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colarticul, DevExpress.Data.ColumnSortOrder.Ascending) });
             ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
+            ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
             // 
             // colgroup
             // 

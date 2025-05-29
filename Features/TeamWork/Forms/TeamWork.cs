@@ -120,7 +120,7 @@ namespace SewingProduction.Forms
         {
             if (ANNgridView != null)
             {
-                ANNgridView.FocusedRowChanged -= gridView3_FocusedRowChanged;
+                ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
             }
 
             try
@@ -142,7 +142,7 @@ namespace SewingProduction.Forms
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select kod_ob, text_ob from oborud_shv", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select ko_ob_all as kod_ob, text_ob from oborud_shv_ob", null);
 
                 // Прямые вызовы RefreshDataSource() здесь обычно не нужны,
                 // если методы загрузки данных (LoadWorkDivisions, MyDataArtLoad, MyDataAnnLoad)
@@ -157,10 +157,10 @@ namespace SewingProduction.Forms
             {
                 if (ANNgridView != null)
                 {
-                    ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
+                    ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
-                        gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                        ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
                     }
                 }
             }
@@ -246,9 +246,9 @@ namespace SewingProduction.Forms
             SearchButton_Click_Internal(sender, e);
         }
 
-        private void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            gridView3_FocusedRowChanged_Internal(sender, e);
+            ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
         private async void customButton12_Click(object sender, EventArgs e)
         { customButton12_Click_Internal(sender, e); }

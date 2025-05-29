@@ -146,32 +146,11 @@ namespace SewingProduction.Forms
             await TWGridHelper.LoadListDataAsync(gridControlRaskrTW, _normRaskBindingSourceTW, await _artNormService.GetRelatedNormRask(annId));
             await TWGridHelper.LoadListDataAsync(gridControlKontTW, _normKontBindingSourceTW, await _artNormService.GetRelatedNormKont(annId));
             await LoadAndBindFioListsAsync();
-
-            // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            // await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
-            // _nzpByKoddRtSource.DataSource = nzpData;
-            // _nzpByKoddRtSource.ResetBindings(false);
-            // gridControlNZP.DataSource = _nzpByKoddRtSource;
-            // gridControlNZP.RefreshDataSource();
-            // GetNZPStatus(nzpData); // Заменено на UpdateUnboundButtonStatusBasedOnNZP() и вызывается из другого места
-
             // Сортируем каждую таблицу отдельно
             TWGridHelper.sortGridView(gridView1);
             TWGridHelper.sortGridView(gridView4);
             TWGridHelper.sortGridView(gridViewRaskrTW);
             var raszList = await _artNormService.GetRelatedNormRasz(annId);
-            // ЕСЛИ SQL-ЗАПРОС В GetRelatedNormRasz ТЕПЕРЬ КОРРЕКТНО ЗАПОЛНЯЕТ TextProizv, TextVyaz, TextOb,
-            // ТО СЛЕДУЮЩИЙ БЛОК if (raszList != null) { foreach ... } МОЖНО УДАЛИТЬ ИЛИ ЗАКОММЕНТИРОВАТЬ.
-            // Оставляем пока проверку на null для самого raszList.
-            // if (raszList != null)
-            // {
-            //    foreach (var r in raszList)
-            //    {
-            //        r.TextProizv = kodProizvList?.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
-            //        r.TextVyaz = podrVyazList?.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz; 
-            //        r.TextOb = oborudShvList?.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
-            //    }
-            // }
             await TWGridHelper.LoadListDataAsync(gridControlRaszTW, _normRaszBindingSourceTW, raszList);
 
             // Сортировка детализирующих таблиц после загрузки данных
