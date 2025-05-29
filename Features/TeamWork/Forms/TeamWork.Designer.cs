@@ -788,6 +788,7 @@ namespace SewingProduction.Forms
             ANNgridView.OptionsView.ShowGroupPanel = false;
             ANNgridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colarticul, DevExpress.Data.ColumnSortOrder.Ascending) });
             ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
             // 
             // colgroup
             // 
@@ -1773,7 +1774,6 @@ namespace SewingProduction.Forms
             gridControl_binded.Size = new System.Drawing.Size(843, 215);
             gridControl_binded.TabIndex = 2;
             gridControl_binded.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_binded, gridView8 });
-            gridControl_binded.Click += gridControl_binded_Click;
             // 
             // gridView_binded
             // 

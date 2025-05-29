@@ -131,6 +131,7 @@ namespace SewingProduction.Forms
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
+                
             }
             catch (Exception ex)
             {
@@ -146,6 +147,18 @@ namespace SewingProduction.Forms
             await TWGridHelper.LoadListDataAsync(gridControlKontTW, _normKontBindingSourceTW, await _artNormService.GetRelatedNormKont(annId));
             await LoadAndBindFioListsAsync();
 
+            // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+            // await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
+            // _nzpByKoddRtSource.DataSource = nzpData;
+            // _nzpByKoddRtSource.ResetBindings(false);
+            // gridControlNZP.DataSource = _nzpByKoddRtSource;
+            // gridControlNZP.RefreshDataSource();
+            // GetNZPStatus(nzpData); // Заменено на UpdateUnboundButtonStatusBasedOnNZP() и вызывается из другого места
+
+            // Сортируем каждую таблицу отдельно
+            TWGridHelper.sortGridView(gridView1);
+            TWGridHelper.sortGridView(gridView4);
+            TWGridHelper.sortGridView(gridViewRaskrTW);
             var raszList = await _artNormService.GetRelatedNormRasz(annId);
             // ЕСЛИ SQL-ЗАПРОС В GetRelatedNormRasz ТЕПЕРЬ КОРРЕКТНО ЗАПОЛНЯЕТ TextProizv, TextVyaz, TextOb,
             // ТО СЛЕДУЮЩИЙ БЛОК if (raszList != null) { foreach ... } МОЖНО УДАЛИТЬ ИЛИ ЗАКОММЕНТИРОВАТЬ.
