@@ -313,7 +313,6 @@ namespace SewingProduction.Forms
         }
 
 
-
         private void gridControl_unboundArts_Click(object sender, EventArgs e)
         {
 
@@ -331,11 +330,11 @@ namespace SewingProduction.Forms
                 case 2:
                     ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
                     break;
-                case 3:
-                    ArchAndCopy();
-                    break;
                 case 4:
-                    simpleButton2_Click_Internal(sender, e);
+                    ArchAndCopy();// Третья кнопка
+                    break;
+                case 6:
+                    simpleButton2_Click_Internal(sender, e); // Четвертая кнопка 
                     break;
             }
         }
