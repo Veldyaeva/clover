@@ -185,7 +185,8 @@ namespace SewingProduction.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            ButtonEditWd_Click_Internal(sender, e);
+            //  ButtonEditWd_Click_Internal(sender, e);
+             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
         }
 
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
@@ -328,7 +329,8 @@ namespace SewingProduction.Forms
                     ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
                     break;
                 case 2:
-                    ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
+                    // ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
+                     EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
                 case 4:
                     ArchAndCopy();// Третья кнопка

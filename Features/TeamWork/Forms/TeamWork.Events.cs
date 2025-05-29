@@ -3,11 +3,13 @@ using DevExpress.XtraBars.Customization;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraScheduler.Commands;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -295,6 +297,202 @@ namespace SewingProduction.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
                 MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        private async Task EditWd_Internal(GridView gridView, IList list, BindingSource bindingSource, bool convertToMyDataAnn = false)
+        {
+            try
+            {
+                int rowNumber = gridView.FocusedRowHandle;
+                if (rowNumber < 0)
+                {
+                    MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Всегда берем ArtNormN — для MyDataAnn тоже, потому что на форме редактируется ArtNormN
+                var selectedItem = gridView.GetRow(rowNumber) as ArtNormN ??
+                    // если грид работает с MyDataANN, получаем через AnnID в общем списке ArtNormN
+                    FindArtNormNByAnnId((gridView.GetRow(rowNumber) as MyDataANN)?.AnnID);
+
+                if (selectedItem == null) return;
+
+                int selectedAnnId = selectedItem.AnnID;
+                using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: selectedAnnId))
+                {
+                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+
+                    if (result == DialogResult.OK)
+                    {
+                        var updatedItem = teamWorkAdvanceTW.CreatedAnn;
+                        if (updatedItem != null)
+                        {
+                            if (!convertToMyDataAnn)
+                            {
+                                // Для ArtNormN
+                                int index = -1;
+                                for (int i = 0; i < list.Count; i++)
+                                {
+                                    if ((list[i] as ArtNormN)?.AnnID == updatedItem.AnnID)
+                                    {
+                                        index = i;
+                                        break;
+                                    }
+                                }
+                                if (index >= 0)
+                                {
+                                    list[index] = updatedItem;
+                                }
+                            }
+                            else
+                            {
+                                // Для MyDataANN — конвертируем!
+                                var updatedMyDataAnn = ToMyDataANN(updatedItem);
+                                int index = -1;
+                                for (int i = 0; i < list.Count; i++)
+                                {
+                                    if ((list[i] as MyDataANN)?.AnnID == updatedMyDataAnn.AnnID)
+                                    {
+                                        index = i;
+                                        break;
+                                    }
+                                }
+                                if (index >= 0)
+                                {
+                                    list[index] = updatedMyDataAnn;
+                                }
+                            }
+
+                            bindingSource.ResetBindings(false);
+
+                            int rowHandle = gridView.LocateByValue("AnnID", updatedItem.AnnID);
+                            if (rowHandle >= 0)
+                            {
+                                gridView.BeginUpdate();
+                                try
+                                {
+                                    gridView.FocusedRowHandle = rowHandle;
+                                    gridView.RefreshRow(rowHandle);
+                                }
+                                finally
+                                {
+                                    gridView.EndUpdate();
+                                }
+                            }
+                        }
+                        await LoadRelatedData(selectedAnnId);
+
+                        MessageBox.Show(
+                            "Запись успешно отредактирована.",
+                            "Информация",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private async Task EditWd_Internal2(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        {
+            try
+            {
+                int rowNumber = gridView.FocusedRowHandle;
+                if (rowNumber < 0)
+                {
+                    MessageBox.Show("Выберите запись для редактирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int annId;
+                ArtNormN selectedArtNormN = null;
+
+                if (!forMyDataAnnView)
+                {
+                    // Первая вкладка: объект - ArtNormN
+                    var selectedAnn = gridView.GetRow(rowNumber) as ArtNormN;
+                    if (selectedAnn == null) return;
+                    annId = selectedAnn.AnnID;
+                    selectedArtNormN = selectedAnn;
+                }
+                else
+                {
+                    // Вторая вкладка: объект - MyDataANN (нужно получить ArtNormN по AnnID)
+                    var selectedMyDataAnn = gridView.GetRow(rowNumber) as MyDataANN;
+                    if (selectedMyDataAnn == null) return;
+                    annId = selectedMyDataAnn.AnnID;
+                    selectedArtNormN = await _artNormService.GetArtNormDataById(annId);
+                    if (selectedArtNormN == null) return;
+                }
+                var updatedArtNormN = new ArtNormN();
+                using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
+                {
+                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        updatedArtNormN = teamWorkAdvanceTW.CreatedAnn;
+                        if (updatedArtNormN == null) return;
+
+                        object updatedDataAnn = forMyDataAnnView
+                            ? ToMyDataANN(updatedArtNormN)
+                            : updatedArtNormN;
+
+                        int annIdToFind = forMyDataAnnView
+                            ? ((MyDataANN)updatedDataAnn).AnnID
+                            : ((ArtNormN)updatedDataAnn).AnnID;
+
+                        int index = list.Cast<object>()
+                            .Select((item, i) => new { item, i })
+                            .FirstOrDefault(x => forMyDataAnnView
+                                ? x.item is MyDataANN mda && mda.AnnID == annIdToFind
+                                : x.item is ArtNormN an && an.AnnID == annIdToFind)
+                            ?.i ?? -1;
+
+                        if (index >= 0)
+                            list[index] = updatedDataAnn;
+
+                        bindingSource.ResetBindings(false);
+                        int rowHandle = gridView.LocateByValue("AnnID", updatedArtNormN.AnnID);
+                        if (rowHandle >= 0)
+                        {
+                            gridView.BeginUpdate();
+                            try
+                            {
+                                gridView.FocusedRowHandle = rowHandle;
+                                gridView.RefreshRow(rowHandle);
+                            }
+                            finally
+                            {
+                                gridView.EndUpdate();
+                            }
+                        }
+                    }
+                    await LoadRelatedData(updatedArtNormN.AnnID);
+
+                    //MessageBox.Show(
+                    //    "Запись успешно отредактирована.",
+                    //    "Информация",
+                    //    MessageBoxButtons.OK,
+                    //    MessageBoxIcon.Information);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при редактировании записи");
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private ArtNormN FindArtNormNByAnnId(int? annId)
+        {
+            if (annId == null) return null;
+            return _bindingList?.FirstOrDefault(x => x.AnnID == annId.Value);
         }
 
         private void gridControl2_Leave_Internal(object sender, EventArgs e)
