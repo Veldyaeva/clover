@@ -51,6 +51,13 @@ namespace SewingProduction.Core
                         return "Сохранить";
                     case GridStringId.EditFormCancelButton:
                         return "Отмена";
+                    case GridStringId.FindControlFindButton:
+                        return "Найти";
+                    case GridStringId.CustomFilterDialogCancelButton:
+                        return "Отмена";
+                    case GridStringId.CustomFilterDialogCaption:
+                        return "Настройка фильтра";
+                    case GridStringId.FilterPanelCustomizeButton: return "Настроить";
                     default:
                         return base.GetLocalizedString(id);
                 }
