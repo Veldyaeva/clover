@@ -343,10 +343,10 @@ namespace SewingProduction.Services
     nr.Spec, nr.Obor, nr.nrId,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
-    ob.text_ob 
+    ob.text_ob as TextOb
 FROM dbo.norm_rasz nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
-LEFT JOIN podr_vyaz pv ON nr.kod_proizv = pv.kod_vyaz
+LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
 LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
 WHERE nr.annId = @annId";
 

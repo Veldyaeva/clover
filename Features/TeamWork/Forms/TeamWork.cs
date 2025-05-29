@@ -313,27 +313,6 @@ namespace SewingProduction.Forms
         }
 
 
-        private void windowsuiButtonPanel1_ButtonClick(object sender, DevExpress.XtraBars.Docking2010.ButtonEventArgs e)
-        {
-            var button = e.Button as DevExpress.XtraBars.Docking2010.WindowsUIButton;
-
-            if (button.Tag?.ToString() == "btnAdd")
-            {
-                ButtonPreliminaryWd_Click_Internal(sender, e);
-            }
-            else if (button.Tag?.ToString() == "btnEdit")
-            {
-                ButtonEditWd_Click_Internal(sender, e);
-            }
-            else if (button.Tag?.ToString() == "btnArch")
-            {
-                ArchAndCopy();
-            }
-            else if (button.Tag?.ToString() == "btnArt")
-            {
-                simpleButton2_Click_Internal(sender, e);
-            }
-        }
 
         private void gridControl_unboundArts_Click(object sender, EventArgs e)
         {
@@ -349,13 +328,13 @@ namespace SewingProduction.Forms
                 case 0:
                     ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
                     break;
-                case 1:
+                case 2:
                     ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
                     break;
-                case 2:
+                case 3:
                     ArchAndCopy();
                     break;
-                case 3:
+                case 4:
                     simpleButton2_Click_Internal(sender, e);
                     break;
             }

@@ -1,19 +1,21 @@
-﻿using DevExpress.XtraGrid.Views.Grid;
+﻿using Dapper;
+using DevExpress.DataAccess.Native.Excel;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.Design;
+using DevExpress.XtraTab;
+using SewingProduction.Extensions;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
-using Dapper;
-using DevExpress.XtraEditors.Controls;
-using DevExpress.DataAccess.Native.Excel;
-using SewingProduction.Extensions;
-using DevExpress.XtraGrid;
 
 namespace SewingProduction.Forms
 {
@@ -66,7 +68,7 @@ namespace SewingProduction.Forms
 
                 // Устанавливаем привязки после позиции
                 BindTextFields();
-                _bindingSource.ResetBindings(false);
+          //      _bindingSource.ResetBindings(false);
                 Task bindingsTask = InitializeBindingsAsync();
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
@@ -129,7 +131,6 @@ namespace SewingProduction.Forms
                 gridControlRaszTW.DataSource = _normRaszBindingSourceTW;
                 gridControlRaskrTW.DataSource = _normRaskBindingSourceTW;
                 gridControlKontTW.DataSource = _normKontBindingSourceTW;
-                
             }
             catch (Exception ex)
             {
@@ -140,49 +141,30 @@ namespace SewingProduction.Forms
 
         private async Task LoadRelatedData(int annId)
         {
-            await TWGridHelper.LoadListDataAsync(gridControlRaskrTW, normraskBindingSource, await _artNormService.GetRelatedNormRask(annId));
-            await TWGridHelper.LoadListDataAsync(gridControlKontTW, normkontBindingSource, await _artNormService.GetRelatedNormKont(annId));
+            // Используем поля класса _normRaskBindingSourceTW, _normKontBindingSourceTW, _normRaszBindingSourceTW
+            await TWGridHelper.LoadListDataAsync(gridControlRaskrTW, _normRaskBindingSourceTW, await _artNormService.GetRelatedNormRask(annId));
+            await TWGridHelper.LoadListDataAsync(gridControlKontTW, _normKontBindingSourceTW, await _artNormService.GetRelatedNormKont(annId));
             await LoadAndBindFioListsAsync();
 
-            // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            // await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
-            // _nzpByKoddRtSource.DataSource = nzpData;
-            // _nzpByKoddRtSource.ResetBindings(false);
-            // gridControlNZP.DataSource = _nzpByKoddRtSource;
-            // gridControlNZP.RefreshDataSource();
-            // GetNZPStatus(nzpData); // Заменено на UpdateUnboundButtonStatusBasedOnNZP() и вызывается из другого места
-
-            // Сортируем каждую таблицу отдельно
-            TWGridHelper.sortGridView(gridView1);
-            TWGridHelper.sortGridView(gridView4);
-            TWGridHelper.sortGridView(gridViewRaskrTW);
             var raszList = await _artNormService.GetRelatedNormRasz(annId);
+            // ЕСЛИ SQL-ЗАПРОС В GetRelatedNormRasz ТЕПЕРЬ КОРРЕКТНО ЗАПОЛНЯЕТ TextProizv, TextVyaz, TextOb,
+            // ТО СЛЕДУЮЩИЙ БЛОК if (raszList != null) { foreach ... } МОЖНО УДАЛИТЬ ИЛИ ЗАКОММЕНТИРОВАТЬ.
+            // Оставляем пока проверку на null для самого raszList.
+            // if (raszList != null)
+            // {
+            //    foreach (var r in raszList)
+            //    {
+            //        r.TextProizv = kodProizvList?.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
+            //        r.TextVyaz = podrVyazList?.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz; 
+            //        r.TextOb = oborudShvList?.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
+            //    }
+            // }
+            await TWGridHelper.LoadListDataAsync(gridControlRaszTW, _normRaszBindingSourceTW, raszList);
 
-            //// Заполняем текстовые поля из справочников
-            foreach (var r in raszList)
-            {
-                r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
-                r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
-                r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
-            }
-
-            // Привязка к гриду
-            await TWGridHelper.LoadListDataAsync(gridControlRaszTW, normraszBindingSource, raszList);
-            await LoadAndBindFioListsAsync();
-
-           // List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-            //await TWGridHelper.LoadListDataAsync(gridControlNZP, sparticulBindingSource, nzpData);
-            //_nzpByKoddRtSource.DataSource = nzpData;
-            //_nzpByKoddRtSource.ResetBindings(false);
-            //gridControlNZP.DataSource = _nzpByKoddRtSource;
-            //gridControlNZP.RefreshDataSource();
-            //GetNZPStatus(nzpData);
-
-            // Сортируем каждую таблицу отдельно
-            TWGridHelper.sortGridView(gridView1);
-            TWGridHelper.sortGridView(gridView4);
-            TWGridHelper.sortGridView(gridViewRaskrTW);
-
+            // Сортировка детализирующих таблиц после загрузки данных
+            if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+            if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+            if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
         }
 
         private async Task UpdateUnboundButtonStatusBasedOnNZP()
@@ -265,11 +247,66 @@ namespace SewingProduction.Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        //private async void ButtonPreliminaryWd_Click_Internal(object sender, EventArgs e, GridControl gridControl)
+        //{
+        //    if (gridControl.MainView == null) return;
+
+        //    // Создаём новую запись модели `ArtNorm`
+        //    ArtNormN newItem = new ArtNormN
+        //    {
+        //        Kod = "0000000",
+        //        grup = "",
+        //        Articul = "",
+        //        Mod = "",
+        //        SekShv = 0,
+        //        SekVyaz5 = 0,
+        //        SekVyaz6 = 0,
+        //        SekVyaz7 = 0,
+        //        SekVyaz10 = 0,
+        //        SekVyaz12 = 0,
+        //        SekVyazo = 0,
+        //        SekVyaz = 0,
+        //        Sek = 0,
+        //        Komment = "",
+        //        Reco = "",
+        //        dateCreate = DateTime.Now,
+        //        Diz = 0,
+        //        Constr = 0,
+        //        dateUpdate = DateTime.MinValue,
+        //        SekKr = 0,
+        //        Slogn = 0,
+        //        Status = 1,
+        //        StatusText = StatusHelper.GetStatusText(1),//"предварительный",
+        //        Arh = false,
+        //        AnnID = 0
+        //    };
+
+        //    int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
+        //    if (newId <= 0)
+        //    {
+        //        MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        return;
+        //    }
+
+        //    // Обновляем ID в объекте
+        //    newItem.AnnID = newId;
+        //    // Добавляем новую строку в источник данных
+        //    _bindingList.Add(newItem);
+        //    //// Обновляем отображение грида
+        //    _bindingSource.ResetBindings(false);
+        //    gridControl.RefreshDataSource();
+
+
+        //    // Открываем форму редактирования
+        //    using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
+        //    {
+        //        await HandleAnnEditResult(teamWork_AdvanceTW, newItem, gridControl);
+        //    }
+        //}
         private async void ButtonPreliminaryWd_Click_Internal(object sender, EventArgs e)
         {
             if (ANNgridView == null) return;
 
-            // Создаём новую запись модели `ArtNorm`
             ArtNormN newItem = new ArtNormN
             {
                 Kod = "0000000",
@@ -294,33 +331,35 @@ namespace SewingProduction.Forms
                 SekKr = 0,
                 Slogn = 0,
                 Status = 1,
-                StatusText = StatusHelper.GetStatusText(1),//"предварительный",
+                StatusText = StatusHelper.GetStatusText(1),
                 Arh = false,
                 AnnID = 0
             };
 
-            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);//InsertANN(newItem);
+            int newId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, newItem);
             if (newId <= 0)
             {
                 MessageBox.Show("Ошибка сохранения в БД!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Обновляем ID в объекте
             newItem.AnnID = newId;
-            // Добавляем новую строку в источник данных
             _bindingList.Add(newItem);
-            //// Обновляем отображение грида
             _bindingSource.ResetBindings(false);
             ANNgridControl.RefreshDataSource();
 
+            // Если на вкладке 2 (Текущие работы)
+            if (xtraTabControl1.SelectedTabPageIndex == 1)
+            {
+                MyDataAnnLoad();
+            }
 
-            // Открываем форму редактирования
             using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
             {
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }
         }
+
         private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkForm, ArtNormN newItem)
         {
             if (teamWorkForm.ShowDialog() == DialogResult.OK)
