@@ -6,6 +6,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
