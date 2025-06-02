@@ -459,9 +459,9 @@ namespace SewingProduction.form
             gridViewRasz.NewItemRowText = "добавить";
             gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditFormInplace;
+            gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 2;
-            gridViewRasz.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewRasz.OptionsView.ShowGroupPanel = false;

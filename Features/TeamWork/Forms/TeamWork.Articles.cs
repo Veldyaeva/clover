@@ -559,17 +559,18 @@ namespace SewingProduction.Forms
                 string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
-                _myDataArtList.Clear(); // Очищаем BindingList
+                //_myDataArtList.Clear(); // Очищаем BindingList
 
-                if (loadedData != null)
-                {
-                    foreach (var item in loadedData)
-                    {
-                        _myDataArtList.Add(item); // Добавляем элементы в BindingList
-                    }
-                }
+                //if (loadedData != null)
+                //{
+                //    foreach (var item in loadedData)
+                //    {
+                //        _myDataArtList.Add(item); // Добавляем элементы в BindingList
+                //    }
+                //}
 
-                _myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+                //_myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+                _myDataArtList.BulkLoad(loadedData);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
             }
@@ -599,23 +600,24 @@ namespace SewingProduction.Forms
                 int kod = GetCurrentKodFromDataSource();
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
 
-                _myDataAnnList.Clear(); // Очищаем BindingList
+                //_myDataAnnList.Clear(); // Очищаем BindingList
 
-                if (loadedData != null && loadedData.Count > 0)
-                {
-                    foreach (var item in loadedData)
-                    {
-                        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
-                    }
-                    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
-                }
-                else
-                {
-                    // Логгируем, если данных нет, вместо MessageBox
-                    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
-                }
+                //if (loadedData != null && loadedData.Count > 0)
+                //{
+                //    foreach (var item in loadedData)
+                //    {
+                //        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
+                //    }
+                //    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
+                //}
+                //else
+                //{
+                //    // Логгируем, если данных нет, вместо MessageBox
+                //    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
+                //}
+                _myDataAnnList.BulkLoad(loadedData);
 
-                _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+               // _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
             }
             catch (Exception ex)
             {
@@ -823,16 +825,17 @@ namespace SewingProduction.Forms
                     MessageBox.Show("Ошибка инициализации списка предварительного архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                _preArchList.Clear();
+                //_preArchList.Clear();
 
-                if (preArchData != null)
-                {
-                    foreach (var item in preArchData)
-                    {
-                        _preArchList.Add(item);
-                    }
-                }
-                _preArchBindingSource.ResetBindings(false);
+                //if (preArchData != null)
+                //{
+                //    foreach (var item in preArchData)
+                //    {
+                //        _preArchList.Add(item);
+                //    }
+                //}
+                //_preArchBindingSource.ResetBindings(false);
+                _preArchList.BulkLoad(preArchData);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
 

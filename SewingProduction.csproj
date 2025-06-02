@@ -12,6 +12,7 @@
   <ItemGroup>
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\ANNGridViewHelper.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
