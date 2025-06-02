@@ -566,7 +566,6 @@ namespace SewingProduction.Forms
                 Status = ann.Status,
                 grup = ann.grup,
                 mod = ann.Mod,
-                // Прочие нужные поля — если добавите
             };
         }
 

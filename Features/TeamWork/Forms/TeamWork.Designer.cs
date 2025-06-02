@@ -91,10 +91,12 @@ namespace SewingProduction.Forms
             colsek_vyaz = new DevExpress.XtraGrid.Columns.GridColumn();
             coldateCreate = new DevExpress.XtraGrid.Columns.GridColumn();
             coldateUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit8 = new RepositoryItemCheckEdit();
             colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit2 = new RepositoryItemCheckEdit();
-            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             colsek_vyazo = new DevExpress.XtraGrid.Columns.GridColumn();
             colsek_vyaz5 = new DevExpress.XtraGrid.Columns.GridColumn();
             colsek_vyaz7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -299,6 +301,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditPodr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskrTW).BeginInit();
@@ -771,7 +774,7 @@ namespace SewingProduction.Forms
             ANNgridControl.MainView = ANNgridView;
             ANNgridControl.Margin = new Padding(4, 3, 4, 3);
             ANNgridControl.Name = "ANNgridControl";
-            ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2 });
+            ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit8 });
             tableLayoutPanel1.SetRowSpan(ANNgridControl, 3);
             ANNgridControl.Size = new System.Drawing.Size(683, 658);
             ANNgridControl.TabIndex = 7;
@@ -786,13 +789,12 @@ namespace SewingProduction.Forms
             ANNgridView.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             ANNgridView.Appearance.SelectedRow.Options.UseFont = true;
             ANNgridView.Appearance.SelectedRow.Options.UseTextOptions = true;
-            ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colgroup, colarticul, colmod, colsek, colsek_vyaz, coldateCreate, coldateUpdate, colsek_shv, gridColumn35, gridColumn5, colsek_vyazo, colsek_vyaz5, colsek_vyaz7, colsek_vyaz12, colsek_vyaz10, colsek_vyaz6, colsek_kr, colslogn, colkomment, colReco, coldiz, colconstr, colannID });
+            ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colgroup, colarticul, colmod, colsek, colsek_vyaz, coldateCreate, coldateUpdate, gridColumn19, colsek_shv, gridColumn5, gridColumn35, colsek_vyazo, colsek_vyaz5, colsek_vyaz7, colsek_vyaz12, colsek_vyaz10, colsek_vyaz6, colsek_kr, colslogn, colkomment, colReco, coldiz, colconstr, colannID });
             ANNgridView.CustomizationFormBounds = new System.Drawing.Rectangle(688, 388, 308, 314);
             ANNgridView.DetailHeight = 404;
             ANNgridView.GridControl = ANNgridControl;
             ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             ANNgridView.Name = "ANNgridView";
-            ANNgridView.OptionsBehavior.Editable = false;
             ANNgridView.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             ANNgridView.OptionsEditForm.PopupEditFormWidth = 933;
             ANNgridView.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -810,6 +812,7 @@ namespace SewingProduction.Forms
             colgroup.FieldName = "grup";
             colgroup.MinWidth = 23;
             colgroup.Name = "colgroup";
+            colgroup.OptionsColumn.AllowEdit = false;
             colgroup.Visible = true;
             colgroup.VisibleIndex = 0;
             colgroup.Width = 64;
@@ -820,6 +823,7 @@ namespace SewingProduction.Forms
             colarticul.FieldName = "Articul";
             colarticul.MinWidth = 23;
             colarticul.Name = "colarticul";
+            colarticul.OptionsColumn.AllowEdit = false;
             colarticul.Visible = true;
             colarticul.VisibleIndex = 1;
             colarticul.Width = 99;
@@ -830,6 +834,7 @@ namespace SewingProduction.Forms
             colmod.FieldName = "mod";
             colmod.MinWidth = 23;
             colmod.Name = "colmod";
+            colmod.OptionsColumn.AllowEdit = false;
             colmod.Visible = true;
             colmod.VisibleIndex = 2;
             colmod.Width = 63;
@@ -840,6 +845,7 @@ namespace SewingProduction.Forms
             colsek.FieldName = "Sek";
             colsek.MinWidth = 23;
             colsek.Name = "colsek";
+            colsek.OptionsColumn.AllowEdit = false;
             colsek.Visible = true;
             colsek.VisibleIndex = 3;
             colsek.Width = 56;
@@ -850,6 +856,7 @@ namespace SewingProduction.Forms
             colsek_vyaz.FieldName = "SekVyaz";
             colsek_vyaz.MinWidth = 23;
             colsek_vyaz.Name = "colsek_vyaz";
+            colsek_vyaz.OptionsColumn.AllowEdit = false;
             colsek_vyaz.Visible = true;
             colsek_vyaz.VisibleIndex = 4;
             colsek_vyaz.Width = 64;
@@ -860,6 +867,7 @@ namespace SewingProduction.Forms
             coldateCreate.FieldName = "dateCreate";
             coldateCreate.MinWidth = 23;
             coldateCreate.Name = "coldateCreate";
+            coldateCreate.OptionsColumn.AllowEdit = false;
             coldateCreate.Visible = true;
             coldateCreate.VisibleIndex = 5;
             coldateCreate.Width = 87;
@@ -870,9 +878,24 @@ namespace SewingProduction.Forms
             coldateUpdate.FieldName = "dateUpdate";
             coldateUpdate.MinWidth = 23;
             coldateUpdate.Name = "coldateUpdate";
+            coldateUpdate.OptionsColumn.AllowEdit = false;
             coldateUpdate.Visible = true;
             coldateUpdate.VisibleIndex = 6;
             coldateUpdate.Width = 87;
+            // 
+            // gridColumn19
+            // 
+            gridColumn19.Caption = "обн.";
+            gridColumn19.ColumnEdit = repositoryItemCheckEdit8;
+            gridColumn19.FieldName = "Upd";
+            gridColumn19.Name = "gridColumn19";
+            gridColumn19.Visible = true;
+            gridColumn19.VisibleIndex = 7;
+            // 
+            // repositoryItemCheckEdit8
+            // 
+            repositoryItemCheckEdit8.AutoHeight = false;
+            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
             // 
             // colsek_shv
             // 
@@ -880,9 +903,21 @@ namespace SewingProduction.Forms
             colsek_shv.FieldName = "SekShv";
             colsek_shv.MinWidth = 23;
             colsek_shv.Name = "colsek_shv";
+            colsek_shv.OptionsColumn.AllowEdit = false;
             colsek_shv.Visible = true;
-            colsek_shv.VisibleIndex = 7;
+            colsek_shv.VisibleIndex = 8;
             colsek_shv.Width = 62;
+            // 
+            // gridColumn5
+            // 
+            gridColumn5.Caption = "статус";
+            gridColumn5.FieldName = "StatusText";
+            gridColumn5.MinWidth = 23;
+            gridColumn5.Name = "gridColumn5";
+            gridColumn5.OptionsColumn.AllowEdit = false;
+            gridColumn5.Visible = true;
+            gridColumn5.VisibleIndex = 10;
+            gridColumn5.Width = 87;
             // 
             // gridColumn35
             // 
@@ -891,8 +926,9 @@ namespace SewingProduction.Forms
             gridColumn35.FieldName = "preArch";
             gridColumn35.MinWidth = 23;
             gridColumn35.Name = "gridColumn35";
+            gridColumn35.OptionsColumn.AllowEdit = false;
             gridColumn35.Visible = true;
-            gridColumn35.VisibleIndex = 10;
+            gridColumn35.VisibleIndex = 11;
             gridColumn35.Width = 87;
             // 
             // repositoryItemCheckEdit2
@@ -900,24 +936,15 @@ namespace SewingProduction.Forms
             repositoryItemCheckEdit2.AutoHeight = false;
             repositoryItemCheckEdit2.Name = "repositoryItemCheckEdit2";
             // 
-            // gridColumn5
-            // 
-            gridColumn5.Caption = "статус";
-            gridColumn5.FieldName = "StatusText";
-            gridColumn5.MinWidth = 23;
-            gridColumn5.Name = "gridColumn5";
-            gridColumn5.Visible = true;
-            gridColumn5.VisibleIndex = 9;
-            gridColumn5.Width = 87;
-            // 
             // colsek_vyazo
             // 
             colsek_vyazo.Caption = "сек.отп.";
             colsek_vyazo.FieldName = "SekVyazo";
             colsek_vyazo.MinWidth = 23;
             colsek_vyazo.Name = "colsek_vyazo";
+            colsek_vyazo.OptionsColumn.AllowEdit = false;
             colsek_vyazo.Visible = true;
-            colsek_vyazo.VisibleIndex = 8;
+            colsek_vyazo.VisibleIndex = 9;
             colsek_vyazo.Width = 87;
             // 
             // colsek_vyaz5
@@ -926,8 +953,9 @@ namespace SewingProduction.Forms
             colsek_vyaz5.FieldName = "SekVyaz5";
             colsek_vyaz5.MinWidth = 23;
             colsek_vyaz5.Name = "colsek_vyaz5";
+            colsek_vyaz5.OptionsColumn.AllowEdit = false;
             colsek_vyaz5.Visible = true;
-            colsek_vyaz5.VisibleIndex = 11;
+            colsek_vyaz5.VisibleIndex = 12;
             colsek_vyaz5.Width = 87;
             // 
             // colsek_vyaz7
@@ -936,8 +964,9 @@ namespace SewingProduction.Forms
             colsek_vyaz7.FieldName = "SekVyaz7";
             colsek_vyaz7.MinWidth = 23;
             colsek_vyaz7.Name = "colsek_vyaz7";
+            colsek_vyaz7.OptionsColumn.AllowEdit = false;
             colsek_vyaz7.Visible = true;
-            colsek_vyaz7.VisibleIndex = 12;
+            colsek_vyaz7.VisibleIndex = 13;
             colsek_vyaz7.Width = 87;
             // 
             // colsek_vyaz12
@@ -946,8 +975,9 @@ namespace SewingProduction.Forms
             colsek_vyaz12.FieldName = "SekVyaz12";
             colsek_vyaz12.MinWidth = 23;
             colsek_vyaz12.Name = "colsek_vyaz12";
+            colsek_vyaz12.OptionsColumn.AllowEdit = false;
             colsek_vyaz12.Visible = true;
-            colsek_vyaz12.VisibleIndex = 13;
+            colsek_vyaz12.VisibleIndex = 14;
             colsek_vyaz12.Width = 87;
             // 
             // colsek_vyaz10
@@ -956,8 +986,9 @@ namespace SewingProduction.Forms
             colsek_vyaz10.FieldName = "SekVyaz10";
             colsek_vyaz10.MinWidth = 23;
             colsek_vyaz10.Name = "colsek_vyaz10";
+            colsek_vyaz10.OptionsColumn.AllowEdit = false;
             colsek_vyaz10.Visible = true;
-            colsek_vyaz10.VisibleIndex = 14;
+            colsek_vyaz10.VisibleIndex = 15;
             colsek_vyaz10.Width = 87;
             // 
             // colsek_vyaz6
@@ -966,8 +997,9 @@ namespace SewingProduction.Forms
             colsek_vyaz6.FieldName = "SekVyaz6";
             colsek_vyaz6.MinWidth = 23;
             colsek_vyaz6.Name = "colsek_vyaz6";
+            colsek_vyaz6.OptionsColumn.AllowEdit = false;
             colsek_vyaz6.Visible = true;
-            colsek_vyaz6.VisibleIndex = 15;
+            colsek_vyaz6.VisibleIndex = 16;
             colsek_vyaz6.Width = 87;
             // 
             // colsek_kr
@@ -976,8 +1008,9 @@ namespace SewingProduction.Forms
             colsek_kr.FieldName = "SekKr";
             colsek_kr.MinWidth = 23;
             colsek_kr.Name = "colsek_kr";
+            colsek_kr.OptionsColumn.AllowEdit = false;
             colsek_kr.Visible = true;
-            colsek_kr.VisibleIndex = 16;
+            colsek_kr.VisibleIndex = 17;
             colsek_kr.Width = 87;
             // 
             // colslogn
@@ -986,8 +1019,9 @@ namespace SewingProduction.Forms
             colslogn.FieldName = "Slogn";
             colslogn.MinWidth = 23;
             colslogn.Name = "colslogn";
+            colslogn.OptionsColumn.AllowEdit = false;
             colslogn.Visible = true;
-            colslogn.VisibleIndex = 17;
+            colslogn.VisibleIndex = 18;
             colslogn.Width = 87;
             // 
             // colkomment
@@ -996,6 +1030,7 @@ namespace SewingProduction.Forms
             colkomment.FieldName = "Komment";
             colkomment.MinWidth = 23;
             colkomment.Name = "colkomment";
+            colkomment.OptionsColumn.AllowEdit = false;
             colkomment.Width = 155;
             // 
             // colReco
@@ -1004,8 +1039,9 @@ namespace SewingProduction.Forms
             colReco.FieldName = "annRecommendation";
             colReco.MinWidth = 23;
             colReco.Name = "colReco";
+            colReco.OptionsColumn.AllowEdit = false;
             colReco.Visible = true;
-            colReco.VisibleIndex = 18;
+            colReco.VisibleIndex = 19;
             colReco.Width = 87;
             // 
             // coldiz
@@ -1014,6 +1050,7 @@ namespace SewingProduction.Forms
             coldiz.FieldName = "Diz";
             coldiz.MinWidth = 23;
             coldiz.Name = "coldiz";
+            coldiz.OptionsColumn.AllowEdit = false;
             coldiz.Width = 87;
             // 
             // colconstr
@@ -1022,6 +1059,7 @@ namespace SewingProduction.Forms
             colconstr.FieldName = "Constr";
             colconstr.MinWidth = 23;
             colconstr.Name = "colconstr";
+            colconstr.OptionsColumn.AllowEdit = false;
             colconstr.Width = 87;
             // 
             // colannID
@@ -1029,8 +1067,9 @@ namespace SewingProduction.Forms
             colannID.FieldName = "AnnID";
             colannID.MinWidth = 23;
             colannID.Name = "colannID";
+            colannID.OptionsColumn.AllowEdit = false;
             colannID.Visible = true;
-            colannID.VisibleIndex = 19;
+            colannID.VisibleIndex = 20;
             colannID.Width = 87;
             // 
             // repositoryItemButtonEdit1
@@ -2863,6 +2902,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditPodr).EndInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskrTW).EndInit();
@@ -3377,5 +3417,7 @@ namespace SewingProduction.Forms
         {
             await DuplicateWorkDivision_Click_Internal(sender, e);
         }
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
+        private RepositoryItemCheckEdit repositoryItemCheckEdit8;
     }
 }
