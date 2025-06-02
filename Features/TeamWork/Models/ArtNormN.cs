@@ -117,6 +117,21 @@ namespace SewingProduction.Models
 
         [Column("data_obn")]
         public DateTime? dateUpdate { get; set; }
+        
+        private bool _upd;
+        [NotMapped]
+        public bool Upd 
+        { 
+            get => _upd;
+            set
+            {
+                if (_upd != value)
+                {
+                    _upd = value;
+                    OnPropertyChanged(nameof(Upd));
+                }
+            }
+        }
 
         [Column("sek_kr")]
         public int SekKr { get; set; }
@@ -185,6 +200,7 @@ namespace SewingProduction.Models
         public string Error => null;
         [NotMapped]
         public bool IsModified { get; set; }
+        public decimal Seb { get; set; }
 
         // Добавляем метод Clone для создания копии объекта
 
@@ -192,9 +208,6 @@ namespace SewingProduction.Models
         {
             if (source == null)
             {
-                // Можно выбросить исключение или просто ничего не делать,
-                // в зависимости от того, как вы хотите обрабатывать null source.
-                // throw new ArgumentNullException(nameof(source));
                 return;
             }
 
@@ -222,6 +235,7 @@ namespace SewingProduction.Models
             this.Status = source.Status;
             this.StatusText = source.StatusText; 
             this.Arh = source.Arh;
+            this.Seb = source.Seb;
             this.ParentId = source.ParentId;
             this.SekVyaz14 = source.SekVyaz14;
             this.SekVyaz70 = source.SekVyaz70;

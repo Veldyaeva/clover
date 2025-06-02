@@ -124,6 +124,8 @@ namespace SewingProduction.Forms
             if (ANNgridView != null)
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
+                ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
+                ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
             }
 
             try
@@ -134,22 +136,13 @@ namespace SewingProduction.Forms
                 }
 
                 LoadGridSettings();
-
-                // Загрузка данных. Методы LoadWorkDivisions и CurrentWorks_Load (через смену вкладок)
-                // должны внутренне обновлять соответствующие BindingList и вызывать ResetBindings(false) 
-                // на их BindingSource. Это приведет к обновлению гридов.
                 await LoadWorkDivisions();
 
                 TWGridHelper.sortGridView(ANNgridView);
-                // TWGridHelper.sortGridView(gridView4); // gridView4 не используется в текущем контексте напрямую с _bindingSource
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select ko_ob_all as kod_ob, text_ob from oborud_shv_ob", null);
-
-                // Прямые вызовы RefreshDataSource() здесь обычно не нужны,
-                // если методы загрузки данных (LoadWorkDivisions, MyDataArtLoad, MyDataAnnLoad)
-                // корректно используют ResetBindings(false) на своих BindingSource.
             }
             catch (Exception ex)
             {
@@ -161,6 +154,8 @@ namespace SewingProduction.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
+                    ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
+                    ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
@@ -173,9 +168,9 @@ namespace SewingProduction.Forms
         {
             if (e.Page == null) return;
 
-            switch (e.Page.Name) // Используем e.Page.Name, так как xtraTabControl1.SelectedTabPage может быть еще старым значением
+            switch (e.Page.Name) 
             {
-                case "TabPage1": // Убедитесь, что имя вкладки xtraTabPageWorkDivisions действительно "TabPage1"
+                case "TabPage1": 
                     await LoadWorkDivisions();
                     break;
 
@@ -188,13 +183,11 @@ namespace SewingProduction.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            //  ButtonEditWd_Click_Internal(sender, e);
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
         }
 
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
         {
-            //await ArchAndCopy();
             await ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
 
         }
@@ -266,20 +259,6 @@ namespace SewingProduction.Forms
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (_hasUnsavedChanges)
-            //{
-            //    var result = MessageBox.Show(
-            //        "Есть несохраненные изменения. Вы уверены, что хотите выйти?",
-            //        "Подтверждение закрытия",
-            //        MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Warning);
-
-            //    if (result == DialogResult.No)
-            //    {
-            //        e.Cancel = true;
-            //        return;
-            //    }
-            //}
             SaveGridSettings();
             await _logger.LogEventAsync("Форма TeamWork закрыта", "FormClosing");
         }
@@ -401,7 +380,7 @@ namespace SewingProduction.Forms
                     ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
                     break;
                 case 6:
-                    simpleButton2_Click_Internal(sender, e); // Четвертая кнопка 
+                    simpleButton2_Click_Internal(sender, e); // Четвертая кнопка  создать из артикула
                     break;
             }
         }
@@ -411,120 +390,56 @@ namespace SewingProduction.Forms
             UnboundWD(sender, e);
         }
 
-        //private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkAdvanceTW, ArtNormN annToUpdate, MyDataANN myDataAnnToUpdate = null)
-        //{
-        //    var result = teamWorkAdvanceTW.DialogResult;
-        //    var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
+        private async void ANNgridView_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Upd")
+            {
+                GridView view = sender as GridView;
+                if (view != null)
+                {
+                    ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
+                    if (row != null)
+                    {
+                        if (e.Value is bool val && val)
+                        {
+                            row.dateUpdate = DateTime.Now;
+                            _hasUnsavedChanges = true;
 
-        //    if (result == DialogResult.OK && createdOrUpdatedAnn != null)
-        //    {
-        //        // Обновляем основной список (первая вкладка)
-        //        var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == createdOrUpdatedAnn.AnnID);
-        //        if (itemInList != null)
-        //        {
-        //            itemInList.UpdateFrom(createdOrUpdatedAnn); // Метод для копирования свойств
-        //        }
-        //        else if (_bindingList != null) // Если это была новая запись
-        //        {
-        //            // _bindingList.Add(createdOrUpdatedAnn); // Уже добавлено перед открытием формы для дублирования
-        //        }
-        //        _bindingSource?.ResetBindings(false);
+                            try
+                            {
+                                decimal updatedSeb = await _artNormService.getArtNormnSeb(row.AnnID);
+                                row.Seb = updatedSeb; 
+                                row.dateUpdate = DateTime.Now;
+                            }
+                            catch (Exception ex)
+                            {
+                                await _logger.LogErrorAsync(ex, $"Ошибка при вызове getArtNormnSeb для AnnID: {row.AnnID}");
+                                MessageBox.Show("Ошибка при обновлении данных после вызова процедуры: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
 
-        //        // Обновляем список на второй вкладке (если применимо)
-        //        if (myDataAnnToUpdate != null)
-        //        {
-        //            var itemInMyDataAnnList = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == createdOrUpdatedAnn.AnnID);
-        //            if (itemInMyDataAnnList != null)
-        //            {
-        //                var converted = ToMyDataANN(createdOrUpdatedAnn);
-        //                itemInMyDataAnnList.UpdateFrom(converted); // Метод для копирования свойств
-        //            }
-        //            _myDataAnnBindingSource?.ResetBindings(false);
-        //        }
+                            view.RefreshRow(e.RowHandle);
+                        }
+                    }
+                }
+            }
+        }
 
-        //        // Установка фокуса на обновленную/новую строку
-        //        int rowHandle = ANNgridView.LocateByValue("AnnID", createdOrUpdatedAnn.AnnID);
-        //        if (rowHandle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
-        //        {
-        //            ANNgridView.FocusedRowHandle = rowHandle;
-        //        }
-
-        //        // После успешного редактирования/создания, перезагружаем связанные данные
-        //        if (xtraTabControl1.SelectedTabPage == TabPage1)
-        //        {
-        //            await LoadRelatedData(createdOrUpdatedAnn.AnnID);
-        //        }
-        //        else if (xtraTabControl1.SelectedTabPage == xtraTabPageArticles)
-        //        {
-        //            await RefreshNormRaszForArticlesTab(createdOrUpdatedAnn.AnnID); // Обновление операций на второй вкладке
-        //            // Также нужно обновить список НЗП
-        //            var selectedWd = gridView_wdToBind.GetRow(gridView_wdToBind.FocusedRowHandle) as MyDataANN;
-        //            if (selectedWd != null)
-        //            {
-        //                await LoadNzpDataForAnnId(selectedWd.AnnID);
-        //            }
-        //        }
-        //    }
-        //    else if (result != DialogResult.OK && annToUpdate != null && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision && teamWorkAdvanceTW.SourceAnnIdToCopyDetailsFrom.HasValue)
-        //    { // Это был режим дублирования, и пользователь нажал Отмена
-        //        // Удаляем созданную оболочку РТ и связанные с ней операции
-        //        bool deleted = await _artNormService.DeleteWorkDivisionAndDetails(annToUpdate.AnnID);
-        //        if (deleted)
-        //        {
-        //            var itemToRemove = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
-        //            if (itemToRemove != null) _bindingList.Remove(itemToRemove);
-        //            _bindingSource?.ResetBindings(false);
-        //            MessageBox.Show("Создание дубликата отменено, запись удалена.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Ошибка при отмене создания дубликата: не удалось удалить временные данные.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    else if (result != DialogResult.OK && annToUpdate != null && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision && teamWorkAdvanceTW.InitialArtData != null)
-        //    {
-        //        // Это был режим создания РТ из артикула, и пользователь нажал Отмена
-        //        bool deleted = await _artNormService.DeleteWorkDivisionAndDetails(annToUpdate.AnnID);
-        //        if (deleted)
-        //        {
-        //            var itemToRemoveList = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
-        //            if (itemToRemoveList != null) _bindingList.Remove(itemToRemoveList);
-        //            _bindingSource?.ResetBindings(false);
-
-        //            var itemToRemoveMyDataAnn = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
-        //            if (itemToRemoveMyDataAnn != null) _myDataAnnList.Remove(itemToRemoveMyDataAnn);
-        //            _myDataAnnBindingSource?.ResetBindings(false);
-
-        //            MessageBox.Show("Создание РТ из артикула отменено, запись удалена.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Ошибка при отмене создания РТ из артикула: не удалось удалить временные данные.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //    else if (result != DialogResult.OK && annToUpdate != null)
-        //    { // Отмена для других режимов (например, простое создание предварительного, если бы оно шло через этот хендлер)
-        //        var itemToRemove = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
-        //        if (itemToRemove != null && itemToRemove.Status == (int)Status.Preliminary && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision) // Только если это новое предварительное, которое мы сами добавили
-        //        {
-        //             // Возможно, потребуется удалить из БД, если оно туда попадает до DialogResult.OK
-        //             // Сейчас предполагаем, что предварительное РТ без операций не пишется в БД до первого сохранения в TeamWork_AdvanceTW
-        //            // _bindingList.Remove(itemToRemove);
-        //            // _bindingSource?.ResetBindings(false);
-        //        }
-
-        //        if (myDataAnnToUpdate != null)
-        //        {
-        //            var itemInMyDataAnnList = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
-        //            if (itemInMyDataAnnList != null && itemInMyDataAnnList.Status == (int)Status.Preliminary && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision)
-        //            {
-        //                // _myDataAnnList.Remove(itemInMyDataAnnList);
-        //                // _myDataAnnBindingSource?.ResetBindings(false);
-        //            }
-        //        }
-        //    }
-        //}
-
+        private void ANNgridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Upd")
+            {
+                GridView view = sender as GridView;
+                if (view != null)
+                {
+                    ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
+                    if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
+                    {
+                        view.SetRowCellValue(e.RowHandle, e.Column, true); 
+                        MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
     }
 }
 

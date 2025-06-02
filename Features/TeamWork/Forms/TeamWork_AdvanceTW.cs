@@ -680,6 +680,11 @@ namespace SewingProduction.form
                     
                     await this.InvokeAsync(() =>
                     {
+                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy)
+                        {
+                            annData.dateCreate = DateTime.Now;
+                            annData.dateUpdate = null;
+                        }
                         _currentAnnData = annData;                // Обновляем текущую модель
                         bindingSource1.SuspendBinding();
                         bindingSource1.DataSource = _currentAnnData;

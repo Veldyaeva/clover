@@ -12,7 +12,7 @@ namespace SewingProduction.Models
    public class NormKont :INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
-        public bool IsNew { get; set; } = true;
+        public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]

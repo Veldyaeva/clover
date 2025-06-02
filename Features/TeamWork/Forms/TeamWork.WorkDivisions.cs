@@ -16,7 +16,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static DevExpress.Xpo.Helpers.CannotLoadObjectsHelper;
 
 namespace SewingProduction.Forms
 {
@@ -82,6 +81,27 @@ namespace SewingProduction.Forms
             }
         }
 
+        //private async Task LoadWorkDivisions()
+        //{
+        //    try
+        //    {
+        //        var data = await _artNormService.GetArtNormNAsync(preliminaryCheckBox.Checked, actualCheckBox.Checked, archiveCheckBox.Checked);
+
+        //        // Очищаем текущий список и добавляем новые данные
+        //        _bindingList.Clear();
+        //        foreach (var item in data)
+        //        {
+        //            item.Upd = item.dateUpdate.HasValue;
+        //            _bindingList.Add(item);
+        //        }
+        //        _bindingSource.ResetBindings(false); // Обновляем привязку данных
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке списка разделений труда");
+        //        MessageBox.Show("Ошибка при загрузке списка разделений труда: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
         private void BindTextFields()
         {
             designerTextBox.DataBindings.Clear();
@@ -831,11 +851,6 @@ namespace SewingProduction.Forms
             }
         }
         #endregion
-
-        private async void GetNZPStatus(List<NZPByKoddRt> data)
-        {
-            // Implementation of GetNZPStatus method
-        }
 
     }
 }

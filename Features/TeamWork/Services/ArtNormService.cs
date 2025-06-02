@@ -1,17 +1,12 @@
 ﻿using Dapper;
-using DevExpress.CodeParser;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using static DevExpress.Mvvm.Native.Either;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.Services
@@ -72,6 +67,7 @@ namespace SewingProduction.Services
                     if (columnName == "statustext") return type.GetProperty(nameof(ArtNormN.StatusText));
                     if (columnName == "komment") return type.GetProperty(nameof(ArtNormN.Komment));
                     if (columnName == "annRecommendation") return type.GetProperty(nameof(ArtNormN.Reco));
+                    if (columnName == "seb") return type.GetProperty(nameof(ArtNormN.Seb));
 
                     return null;
                 });
@@ -105,7 +101,7 @@ namespace SewingProduction.Services
         //    data_sozd, diz, constr  FROM ArtNormNView JOIN status_ann ON status = status_id";
             string query = @" select 
                    AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
-                    sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, 
+                    sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId
              FROM ArtNormNView JOIN status_ann ON status = status_id";
 
@@ -170,7 +166,7 @@ namespace SewingProduction.Services
         {
             string query = @"
         SELECT 
-            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
+            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr 
@@ -556,6 +552,21 @@ throw;
             }
 
             return nzpList;
+        }
+
+        public async Task<decimal> getArtNormnSeb(int annId)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.ExecuteScalarAsync<object>(
+                    "SELECT dbo.getArtNormnSeb(@xAnnID)",
+                    new { xAnnID = annId });
+
+                if (result == null || result == DBNull.Value)
+                    return 0m;
+
+                return Convert.ToDecimal(result);
+            }
         }
 
         public async Task<List<FioModel>> GetRelDesigner()
