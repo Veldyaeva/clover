@@ -20,7 +20,6 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<NormRasz>().Table(TableNames.Rasz).Identity(x => x.nrId);
             DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Identity(x => x.id);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
-            DapperPlusManager.Entity<NormDopObr>().Table(TableNames.Obr).Identity(x => x.doId);
             DapperPlusManager.Entity<NaklViewByPachKod>();
             DapperPlusManager.Entity<RasInfoByPachKod>();
             DapperPlusManager.Entity<HistoryRazdelNaklViewByIz>();
@@ -30,7 +29,6 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<ArtPrFioProgr>();
             DapperPlusManager.Entity<PlanSezonZadanyView>().Table("plan_sezon_zad_knitMachine").Identity("pszkmID");
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
-            DapperPlusManager.Entity<NormDopObr>().Table(TableNames.Obr).Identity(x => x.doId);
             
         }
     }
