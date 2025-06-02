@@ -59,8 +59,11 @@ namespace SewingProduction.Forms
                 int currentPosition = _bindingSource.Position;
 
                 // Назначаем новые данные
-                _bindingList = new BindingList<ArtNormN>(data);
-                _bindingSource.DataSource = _bindingList;
+                //_bindingList = new BindingList<ArtNormN>(data);
+                //_bindingSource.DataSource = _bindingList;
+                _bindingList.BulkLoad(data);
+                _bindingSource.DataSource = _bindingList; // если ещё не привязано
+
                 ANNgridControl.DataSource = _bindingSource;
 
                 // Устанавливаем позицию сразу после DataSource
@@ -81,27 +84,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        //private async Task LoadWorkDivisions()
-        //{
-        //    try
-        //    {
-        //        var data = await _artNormService.GetArtNormNAsync(preliminaryCheckBox.Checked, actualCheckBox.Checked, archiveCheckBox.Checked);
-
-        //        // Очищаем текущий список и добавляем новые данные
-        //        _bindingList.Clear();
-        //        foreach (var item in data)
-        //        {
-        //            item.Upd = item.dateUpdate.HasValue;
-        //            _bindingList.Add(item);
-        //        }
-        //        _bindingSource.ResetBindings(false); // Обновляем привязку данных
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке списка разделений труда");
-        //        MessageBox.Show("Ошибка при загрузке списка разделений труда: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //    }
-        //}
         private void BindTextFields()
         {
             designerTextBox.DataBindings.Clear();
@@ -164,15 +146,19 @@ namespace SewingProduction.Forms
         private async Task LoadRelatedData(int annId)
         {
             // Используем поля класса _normRaskBindingSourceTW, _normKontBindingSourceTW, _normRaszBindingSourceTW
-            await TWGridHelper.LoadListDataAsync(gridControlRaskrTW, _normRaskBindingSourceTW, await _artNormService.GetRelatedNormRask(annId));
-            await TWGridHelper.LoadListDataAsync(gridControlKontTW, _normKontBindingSourceTW, await _artNormService.GetRelatedNormKont(annId));
+            //await TWGridHelper.LoadListDataAsync(gridControlRaskrTW, _normRaskBindingSourceTW, await _artNormService.GetRelatedNormRask(annId));
+            //await TWGridHelper.LoadListDataAsync(gridControlKontTW, _normKontBindingSourceTW, await _artNormService.GetRelatedNormKont(annId));
+            _normRaskListTW.BulkLoad(await _artNormService.GetRelatedNormRask(annId));
+            _normKontListTW.BulkLoad(await _artNormService.GetRelatedNormKont(annId));
+            _normRaszListTW.BulkLoad(await _artNormService.GetRelatedNormRasz(annId));
+
             await LoadAndBindFioListsAsync();
             // Сортируем каждую таблицу отдельно
             TWGridHelper.sortGridView(gridView1);
             TWGridHelper.sortGridView(gridView4);
             TWGridHelper.sortGridView(gridViewRaskrTW);
             var raszList = await _artNormService.GetRelatedNormRasz(annId);
-            await TWGridHelper.LoadListDataAsync(gridControlRaszTW, _normRaszBindingSourceTW, raszList);
+           // await TWGridHelper.LoadListDataAsync(gridControlRaszTW, _normRaszBindingSourceTW, raszList);
 
             // Сортировка детализирующих таблиц после загрузки данных
             if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
@@ -799,11 +785,11 @@ namespace SewingProduction.Forms
                 await _artNormService.ResetAnnIdinArticul(kod);
                 await _logger.LogEventAsync($"UnboundWD: ResetAnnIdinArticul(kod: {kod}) выполнен.", "UnboundWD_Debug");
 
-                // Возможно, стоит пересмотреть эту строку, если она вызывает неожиданное поведение для статуса РТ
+                // Обновление статуса РТ
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
                 await _logger.LogEventAsync($"UnboundWD: UpdateFieldAsync для статуса РТ выполнен.", "UnboundWD_Debug");
 
-                // Получаем AnnID текущего выбранного РТ из gridView_wdToBind (основной грид РТ на вкладке "Артикулы")
+                // Получаем AnnID текущего выбранного РТ из gridView_wdToBind
                 // Это AnnID, для которого нужно обновить список НЗП.
                 int currentWorkDivisionAnnId = 0;
                 if (gridView_wdToBind != null && gridView_wdToBind.FocusedRowHandle >= 0)
@@ -814,8 +800,7 @@ namespace SewingProduction.Forms
 
                 if (_nzpList != null)
                 {
-                    _nzpList.Clear(); // Очищаем текущий список НЗП
-                    await _logger.LogEventAsync($"UnboundWD: _nzpList очищен.", "UnboundWD_Debug");
+                  //  _nzpList.Clear(); // Очищаем текущий список НЗП
                     if (currentWorkDivisionAnnId > 0)
                     {
                         // Перезагружаем НЗП для текущего РТ
@@ -827,11 +812,12 @@ namespace SewingProduction.Forms
                             {
                                 await _logger.LogEventAsync($"UnboundWD: Список nzpData ПУСТ после GetNzpWithPztCounts.", "UnboundWD_Debug");
                             }
-                            foreach (var item in nzpData)
-                            {
-                                _nzpList.Add(item);
-                                await _logger.LogEventAsync($"UnboundWD: В _nzpList добавлена запись: Kodd_rt={item.kodd_rt}, AnnId={item.annId}, KolNZP={item.kolNZP}", "UnboundWD_Debug");
-                            }
+                            _nzpList.BulkLoad(nzpData);
+                            //foreach (var item in nzpData)
+                            //{
+                            //    _nzpList.Add(item);
+                            //   // await _logger.LogEventAsync($"UnboundWD: В _nzpList добавлена запись: Kodd_rt={item.kodd_rt}, AnnId={item.annId}, KolNZP={item.kolNZP}", "UnboundWD_Debug");
+                            //}
                         }
                     }
                 }

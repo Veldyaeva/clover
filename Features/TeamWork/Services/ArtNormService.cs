@@ -353,22 +353,22 @@ WHERE nr.annId = @annId";
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
         result = queryResult.ToList();
 
-                    if (result != null && result.Any())
-                    {
-                        await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper смапил {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz_Success");
-                        foreach (var item in result)
-                        {
-                            await _logger.LogEventAsync(
-                                $"Смаплено: AnnId={item.AnnId}({item.AnnId.GetType().Name}), nrId={item.nrId}({item.nrId.GetType().Name}), razryd={item.razryd}({item.razryd.GetType().Name}), " +
-                                $"N={item.N}({item.N.GetType().Name}), N1={item.N1}({item.N1.GetType().Name}), Sek={item.Sek}({item.Sek.GetType().Name}), Seb={item.Seb}({item.Seb.GetType().Name}),  " +
-                                $"Kod_o={item.kod_o}({item.kod_o.GetType().Name}), KodOb={item.KodOb}({item.KodOb.GetType().Name}), KodPodr={item.KodPodr}({item.KodPodr.GetType().Name}), KodProizv={item.KodProizv}({item.KodProizv.GetType().Name})",
-                                "GetRelatedNormRasz_DapperItem");
-    }
-}
-                    else
-{
-    await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper не вернул данные или результат пуст для AnnId={annId}.", "GetRelatedNormRasz_Empty");
-}
+//                    if (result != null && result.Any())
+//                    {
+//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper смапил {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz_Success");
+//                        foreach (var item in result)
+//                        {
+//                            await _logger.LogEventAsync(
+//                                $"Смаплено: AnnId={item.AnnId}({item.AnnId.GetType().Name}), nrId={item.nrId}({item.nrId.GetType().Name}), razryd={item.razryd}({item.razryd.GetType().Name}), " +
+//                                $"N={item.N}({item.N.GetType().Name}), N1={item.N1}({item.N1.GetType().Name}), Sek={item.Sek}({item.Sek.GetType().Name}), Seb={item.Seb}({item.Seb.GetType().Name}),  " +
+//                                $"Kod_o={item.kod_o}({item.kod_o.GetType().Name}), KodOb={item.KodOb}({item.KodOb.GetType().Name}), KodPodr={item.KodPodr}({item.KodPodr.GetType().Name}), KodProizv={item.KodProizv}({item.KodProizv.GetType().Name})",
+//                                "GetRelatedNormRasz_DapperItem");
+//    }
+//}
+//                    else
+//{
+//    await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper не вернул данные или результат пуст для AnnId={annId}.", "GetRelatedNormRasz_Empty");
+//}
                 }
                 catch(Exception ex)
                 {
