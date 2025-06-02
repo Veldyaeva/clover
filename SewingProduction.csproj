@@ -23,6 +23,7 @@
     <Compile Remove="Core\Class\CustomControls.cs" />
     <Compile Remove="Core\Class\CustomControlsThemeable_old.cs" />
     <Compile Remove="Core\Helpers\TWGridHelper.cs" />
+    <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\_TeamWork.cs" />
