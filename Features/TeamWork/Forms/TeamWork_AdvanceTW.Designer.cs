@@ -785,7 +785,6 @@ namespace SewingProduction.form
             // 
             nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
-            nameTextBox.Enabled = false;
             nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
             nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             nameTextBox.Location = new System.Drawing.Point(4, 192);

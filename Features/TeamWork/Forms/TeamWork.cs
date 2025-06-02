@@ -1,19 +1,22 @@
-﻿using DevExpress.XtraBars.Docking;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.XtraBars.Docking;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.ButtonPanel;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
+using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
-using SewingProduction.Properties;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Forms
 {
@@ -186,7 +189,7 @@ namespace SewingProduction.Forms
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
             //  ButtonEditWd_Click_Internal(sender, e);
-             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
+            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
         }
 
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
@@ -291,36 +294,97 @@ namespace SewingProduction.Forms
             await BindButton_Click_Internal(sender, e);
         }
 
-        private void gridControl_binded_Click(object sender, EventArgs e)
-        {
 
+        private async void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            await DuplicateWorkDivision_Click_Internal(sender, e);
         }
 
-        private void LogMemoryUsage()
+        private async Task DuplicateWorkDivision_Click_Internal(object sender, EventArgs e)
         {
-            long memory = GC.GetTotalMemory(false);
-            Debug.WriteLine($"🔍 Total memory: {memory / 1024} KB");
+            if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите Разделение Труда для дублирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedAnnToDuplicate = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+            if (selectedAnnToDuplicate == null)
+            {
+                MessageBox.Show("Не удалось получить данные выбранного РТ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneProperties();
+            CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
+            CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
+            CopyedWorkDivisionShell.dateCreate = DateTime.Now;
+            CopyedWorkDivisionShell.dateUpdate = null;
+            CopyedWorkDivisionShell.Arh = false;
+            CopyedWorkDivisionShell.ParentId = selectedAnnToDuplicate.AnnID;
+            CopyedWorkDivisionShell.AnnID = 0;
+            CopyedWorkDivisionShell.Mod = "";
+            CopyedWorkDivisionShell.Articul = "";
+            CopyedWorkDivisionShell.grup = "";
+
+            int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
+            if (newAnnId <= 0)
+            {
+                MessageBox.Show("Ошибка при создании новой записи РТ в базе данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Clone, oldId: selectedAnnToDuplicate.AnnID, newId: newAnnId))
+            {
+                DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
+                    if (CopyedWorkDivisionShell == null) return;
+
+                    // object updatedDataAnn =  updatedArtNormN;
+
+                    //    int annIdToFind = forMyDataAnnView ? ((MyDataANN)updatedDataAnn).AnnID : ((ArtNormN)updatedDataAnn).AnnID;
+
+                    //    int index = list.Cast<object>().Select((item, i) => new { item, i }).FirstOrDefault(x => forMyDataAnnView
+                    //            ? x.item is MyDataANN mda && mda.AnnID == annIdToFind
+                    //            : x.item is ArtNormN an && an.AnnID == annIdToFind)
+                    //        ?.i ?? -1;
+
+                    //    if (index >= 0)
+                    //        list[index] = updatedDataAnn;
+
+                    _bindingList.Add(CopyedWorkDivisionShell);
+                    _bindingSource.ResetBindings(false);
+                    int rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
+
+                    //    // Если редактирование было для второй вкладки (MyDataANN view), обновим NormRasz для customGridControl3
+                    //    if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
+                    //    {
+                    //        await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID);
+                    //    }
+                    //    else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
+                    //    {
+                    //        await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки (НЗП, раскрой, контроль)
+                    //    }
+                    //}
+                }
+
+            }
         }
-
-        private void customSimpleButton1_Click(object sender, EventArgs e)
-        {
-            //int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
-            //int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
-            //PrintMlRtReport report1 = new PrintMlRtReport();
-            //report1.RequestParameters = false;
-            //report1.Parameters["_rzuNom"].Value = RzuNom;
-            //report1.Parameters["_isChip"].Value = IsChip;
-            //report1.Parameters["_isUpak"].Value = 0;
-            //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            //reportPrintTool1.ShowPreviewDialog();
-        }
-
-
-        private void gridControl_unboundArts_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
@@ -331,8 +395,7 @@ namespace SewingProduction.Forms
                     ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
                     break;
                 case 2:
-                    // ButtonEditWd_Click_Internal(sender, e); // Вторая кнопка
-                     EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
                 case 4:
                     ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
@@ -342,6 +405,126 @@ namespace SewingProduction.Forms
                     break;
             }
         }
+
+        private void ButtonUnboundWd_Click(object sender, EventArgs e)
+        {
+            UnboundWD(sender, e);
+        }
+
+        //private async Task HandleAnnEditResult(TeamWork_AdvanceTW teamWorkAdvanceTW, ArtNormN annToUpdate, MyDataANN myDataAnnToUpdate = null)
+        //{
+        //    var result = teamWorkAdvanceTW.DialogResult;
+        //    var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
+
+        //    if (result == DialogResult.OK && createdOrUpdatedAnn != null)
+        //    {
+        //        // Обновляем основной список (первая вкладка)
+        //        var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == createdOrUpdatedAnn.AnnID);
+        //        if (itemInList != null)
+        //        {
+        //            itemInList.UpdateFrom(createdOrUpdatedAnn); // Метод для копирования свойств
+        //        }
+        //        else if (_bindingList != null) // Если это была новая запись
+        //        {
+        //            // _bindingList.Add(createdOrUpdatedAnn); // Уже добавлено перед открытием формы для дублирования
+        //        }
+        //        _bindingSource?.ResetBindings(false);
+
+        //        // Обновляем список на второй вкладке (если применимо)
+        //        if (myDataAnnToUpdate != null)
+        //        {
+        //            var itemInMyDataAnnList = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == createdOrUpdatedAnn.AnnID);
+        //            if (itemInMyDataAnnList != null)
+        //            {
+        //                var converted = ToMyDataANN(createdOrUpdatedAnn);
+        //                itemInMyDataAnnList.UpdateFrom(converted); // Метод для копирования свойств
+        //            }
+        //            _myDataAnnBindingSource?.ResetBindings(false);
+        //        }
+
+        //        // Установка фокуса на обновленную/новую строку
+        //        int rowHandle = ANNgridView.LocateByValue("AnnID", createdOrUpdatedAnn.AnnID);
+        //        if (rowHandle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+        //        {
+        //            ANNgridView.FocusedRowHandle = rowHandle;
+        //        }
+
+        //        // После успешного редактирования/создания, перезагружаем связанные данные
+        //        if (xtraTabControl1.SelectedTabPage == TabPage1)
+        //        {
+        //            await LoadRelatedData(createdOrUpdatedAnn.AnnID);
+        //        }
+        //        else if (xtraTabControl1.SelectedTabPage == xtraTabPageArticles)
+        //        {
+        //            await RefreshNormRaszForArticlesTab(createdOrUpdatedAnn.AnnID); // Обновление операций на второй вкладке
+        //            // Также нужно обновить список НЗП
+        //            var selectedWd = gridView_wdToBind.GetRow(gridView_wdToBind.FocusedRowHandle) as MyDataANN;
+        //            if (selectedWd != null)
+        //            {
+        //                await LoadNzpDataForAnnId(selectedWd.AnnID);
+        //            }
+        //        }
+        //    }
+        //    else if (result != DialogResult.OK && annToUpdate != null && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision && teamWorkAdvanceTW.SourceAnnIdToCopyDetailsFrom.HasValue)
+        //    { // Это был режим дублирования, и пользователь нажал Отмена
+        //        // Удаляем созданную оболочку РТ и связанные с ней операции
+        //        bool deleted = await _artNormService.DeleteWorkDivisionAndDetails(annToUpdate.AnnID);
+        //        if (deleted)
+        //        {
+        //            var itemToRemove = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
+        //            if (itemToRemove != null) _bindingList.Remove(itemToRemove);
+        //            _bindingSource?.ResetBindings(false);
+        //            MessageBox.Show("Создание дубликата отменено, запись удалена.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Ошибка при отмене создания дубликата: не удалось удалить временные данные.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
+        //    else if (result != DialogResult.OK && annToUpdate != null && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision && teamWorkAdvanceTW.InitialArtData != null)
+        //    {
+        //        // Это был режим создания РТ из артикула, и пользователь нажал Отмена
+        //        bool deleted = await _artNormService.DeleteWorkDivisionAndDetails(annToUpdate.AnnID);
+        //        if (deleted)
+        //        {
+        //            var itemToRemoveList = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
+        //            if (itemToRemoveList != null) _bindingList.Remove(itemToRemoveList);
+        //            _bindingSource?.ResetBindings(false);
+
+        //            var itemToRemoveMyDataAnn = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
+        //            if (itemToRemoveMyDataAnn != null) _myDataAnnList.Remove(itemToRemoveMyDataAnn);
+        //            _myDataAnnBindingSource?.ResetBindings(false);
+
+        //            MessageBox.Show("Создание РТ из артикула отменено, запись удалена.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Ошибка при отмене создания РТ из артикула: не удалось удалить временные данные.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        }
+        //    }
+        //    else if (result != DialogResult.OK && annToUpdate != null)
+        //    { // Отмена для других режимов (например, простое создание предварительного, если бы оно шло через этот хендлер)
+        //        var itemToRemove = _bindingList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
+        //        if (itemToRemove != null && itemToRemove.Status == (int)Status.Preliminary && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision) // Только если это новое предварительное, которое мы сами добавили
+        //        {
+        //             // Возможно, потребуется удалить из БД, если оно туда попадает до DialogResult.OK
+        //             // Сейчас предполагаем, что предварительное РТ без операций не пишется в БД до первого сохранения в TeamWork_AdvanceTW
+        //            // _bindingList.Remove(itemToRemove);
+        //            // _bindingSource?.ResetBindings(false);
+        //        }
+
+        //        if (myDataAnnToUpdate != null)
+        //        {
+        //            var itemInMyDataAnnList = _myDataAnnList?.FirstOrDefault(ann => ann.AnnID == annToUpdate.AnnID);
+        //            if (itemInMyDataAnnList != null && itemInMyDataAnnList.Status == (int)Status.Preliminary && teamWorkAdvanceTW.CurrentMode == (int)Mode.NewWorkDivision)
+        //            {
+        //                // _myDataAnnList.Remove(itemInMyDataAnnList);
+        //                // _myDataAnnBindingSource?.ResetBindings(false);
+        //            }
+        //        }
+        //    }
+        //}
+
     }
 }
 

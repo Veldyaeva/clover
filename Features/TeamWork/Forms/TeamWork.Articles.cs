@@ -498,6 +498,11 @@ namespace SewingProduction.Forms
 
                 await preArchTask;
 
+                TWGridHelper.sortGridView(gridView6);
+                //TWGridHelper.sortGridView(gridViewRaskr);
+                //TWGridHelper.sortGridView(gridViewKont);
+
+
                 // Load NormRasz data for the Articles tab using the dedicated BindingList and BindingSource
                 if (this.gridView_wdToBind != null && gridView_wdToBind.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
                 {

@@ -11,10 +11,10 @@ using DevExpress.Entity.Model.Metadata;
 
 namespace SewingProduction.Models
 {
-    public class NormRasz : INewable, INotifyPropertyChanged, IModifiable
+    public class NormRasz : INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
-        public bool IsNew { get; set; } = true;
+        public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
         public int nrId { get; set; }
@@ -96,15 +96,13 @@ namespace SewingProduction.Models
             // Если есть вычисляемые свойства или связанные поля, которые нужно обновить,
             // возможно, потребуется вызвать соответствующие методы обновления здесь.
         }
-
         public NormRasz Clone()
         {
             return (NormRasz)this.MemberwiseClone();
         }
 
+        object ICloneable.Clone() => Clone();
 
-
-        
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {
@@ -126,6 +124,5 @@ namespace SewingProduction.Models
             OnPropertyChanged(propertyName);
             return true;
         }
-
     }
 }

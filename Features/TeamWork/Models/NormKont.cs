@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-   public class NormKont :INewable, INotifyPropertyChanged
+   public class NormKont :INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
         public bool IsNew { get; set; } = true;
@@ -45,6 +45,10 @@ namespace SewingProduction.Models
             if (!isInternalProperty)
             {
                  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                 if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew) && propertyName != nameof(nkId) && !IsNew)
+                 {
+                     IsModified = true;
+                 }
             }
             // Убираем автоматическую установку IsModified отсюда
             // if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew))
@@ -52,5 +56,11 @@ namespace SewingProduction.Models
             //      IsModified = !IsNew;
             // }
         }
+        public NormKont Clone()
+        {
+            return (NormKont)this.MemberwiseClone();
+        }
+
+        object ICloneable.Clone() => Clone();
     }
 }

@@ -99,6 +99,33 @@ namespace SewingProduction.form
         }
         #endregion
 
+        private int _originalBufferId;
+        private int? _sourceAnnIdToCopyDetailsFrom = null; // Для копирования операций
+        private ArtNormN _duplicateAnnData = null; // Для копирования шапки РТ
+
+        public int CurrentMode => _mode;
+        public int? SourceAnnIdToCopyDetailsFrom => _sourceAnnIdToCopyDetailsFrom;
+
+        public static class CloneUtils
+        {
+            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName)
+                where T : ICloneable
+            {
+                var list = new List<T>();
+                foreach (var item in source)
+                {
+                    var clone = (T)item.Clone();
+                    typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
+                    typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
+                    typeof(T).GetProperty("IsNew")?.SetValue(clone, true);
+                    typeof(T).GetProperty("IsModified")?.SetValue(clone, true);
+                    list.Add(clone);
+                }
+                return list;
+            }
+        }
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -106,7 +133,7 @@ namespace SewingProduction.form
         /// <param name="oldId">Id исходной записи</param>
         /// <param name="bufferWorkDivision">Id из буфера</param>
         /// <param name="mode">режим</param>
-        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null ,int? oldId = null)
+        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null ,int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
@@ -125,6 +152,8 @@ namespace SewingProduction.form
             }
             _bufferWorkDivision = bufferWorkDivision;
             _mode = mode;
+            _sourceAnnIdToCopyDetailsFrom = sourceAnnIdToCopyDetailsFrom;
+            _duplicateAnnData = duplicateAnnData;
         }
 
         private void AttachChangeHandlers()
@@ -319,8 +348,8 @@ namespace SewingProduction.form
                     gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
                 }
 
-                await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
-                await LoadAnnDataAsync();
+                //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
+                //await LoadAnnDataAsync();
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -337,47 +366,37 @@ namespace SewingProduction.form
 
                 switch (_mode)
                 {
-                    case (int)Mode.NewWorkDivision: this.Text = "Добавить предварительное"; nameTextBox.Enabled = true;// break;
-
-                        // Заполняем поля, если переданы начальные данные из MyDataART
-                        // _currentAnnData должен быть уже инициализирован (например, в InitializeBindingsAsync)
-                        if (InitialArtData != null && _currentAnnData != null)
-                        {
-                            bool dataChangedByInitialValues = false;
-
-                            if (!string.IsNullOrEmpty(InitialArtData.Articul))
-                            {
-                                _currentAnnData.Articul = InitialArtData.Articul;
-                                dataChangedByInitialValues = true;
-                            }
-                            if (!string.IsNullOrEmpty(InitialArtData.grup))
-                            {
-                                _currentAnnData.grup = InitialArtData.grup;
-                                dataChangedByInitialValues = true;
-                            }
-                            if (!string.IsNullOrEmpty(InitialArtData.mod))
-                            {
-                                _currentAnnData.Mod = InitialArtData.mod;
-                                dataChangedByInitialValues = true;
-                            }
-
-                            if (dataChangedByInitialValues && bindingSource1.DataSource == _currentAnnData)
-                            {
-                                // Обновляем привязанные контролы
-                                bindingSource1.ResetBindings(false);
-                            }
-                        }
+                    case (int)Mode.NewWorkDivision:
+                        this.Text = "Добавить предварительное";
+                        nameTextBox.Enabled = true;
+                        // ArtNormN и AnnId уже созданы заранее, коллекции пустые
+                        _normRaszList.Clear();
+                        _normRaskList.Clear();
+                        _normKontList.Clear();
                         break;
-                    case (int)Mode.ArchAndCopy: this.Text = "Архив+копия"; break;
-                    case (int)Mode.Edit: this.Text = "Редактировать"; break;
+                    case (int)Mode.ArchAndCopy:
+                        this.Text = "Архив+копия";
+                        await LoadAndCloneAll(_selectedAnnId, _newAnnId);
+                        _currentAnnData.dateCreate = DateTime.Now;
+                        break;
+                    case (int)Mode.Edit:
+                        this.Text = "Редактировать";
+                        await LoadForEdit(_selectedAnnId);
+                        break;
+                    case (int)Mode.Clone:
+                        this.Text = "Дубль";
+                        await LoadAndCloneAll(_selectedAnnId, _newAnnId);
+                        _currentAnnData.dateCreate = DateTime.Now;
+                        break;
                 }
+                await LoadAnnDataAsync();
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob_all as kod_ob, text_ob FROM oborud_shv_ob", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT ko_ob_all as kod_ob, text_ob FROM oborud_shv_ob", null);
 
                 designerComboBox.DataBindings.Clear(); 
                 constructorComboBox.DataBindings.Clear();
@@ -389,11 +408,102 @@ namespace SewingProduction.form
                 gridViewRasz.RowStyle += GridView_RowStyle;
                 gridViewRaskr.RowStyle += GridView_RowStyle;
                 gridViewKont.RowStyle += GridView_RowStyle;
+
+                if (_currentAnnData != null && _sourceAnnIdToCopyDetailsFrom.HasValue && _duplicateAnnData != null && _mode == (int)Mode.NewWorkDivision)
+                {
+                    // Копирование данных шапки из _duplicateAnnData в _currentAnn (уже загруженный для newAnnId)
+                    _currentAnnData = _duplicateAnnData.CloneProperties();
+                    _currentAnnData.dateUpdate = null;
+                    _currentAnnData.dateCreate = DateTime.Now;
+
+                    _currentAnnData.ParentId = _sourceAnnIdToCopyDetailsFrom.Value;
+
+                    // Загрузка операций из sourceAnnIdToCopyDetailsFrom
+                    int sourceAnnId = _sourceAnnIdToCopyDetailsFrom.Value;
+
+                    List<NormRasz> raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+                    _normRaszList.Clear();
+                    foreach (var item in raszToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true; // Так как это новые записи для нового РТ
+                        item.nrId = 0; // Сброс ID для новой записи
+                        _normRaszList.Add(item);
+                    }
+                    _normRaszBindingSource.ResetBindings(false);
+
+                    List<NormRask> raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                    _normRaskList.Clear();
+                    foreach (var item in raskToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true;
+                        item.id = 0;
+                        _normRaskList.Add(item);
+                    }
+                    _normRaskBindingSource.ResetBindings(false);
+
+                    List<NormKont> kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                    _normKontList.Clear();
+                    foreach (var item in kontToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true;
+                        item.nkId = 0;
+                        _normKontList.Add(item);
+                    }
+                    _normKontBindingSource.ResetBindings(false);
+                    
+
+                    _hasUnsavedChanges = true;
+                    //UpdateFormTitle();
+                    //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
+                }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
             }
+        }
+        private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
+        {
+            var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+            var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
+            var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
+
+            _normRaszList.Clear();
+            foreach (var item in CloneUtils.CloneList(rasz, newAnnId, "nrId"))
+                _normRaszList.Add(item);
+
+            _normRaskList.Clear();
+            foreach (var item in CloneUtils.CloneList(rask, newAnnId, "id"))
+                _normRaskList.Add(item);
+
+            _normKontList.Clear();
+            foreach (var item in CloneUtils.CloneList(kont, newAnnId, "nkId"))
+                _normKontList.Add(item);
+        }
+
+        private async Task LoadForEdit(int annId)
+        {
+            var rasz = await _artNormService.GetRelatedNormRasz(annId);
+            var rask = await _artNormService.GetRelatedNormRask(annId);
+            var kont = await _artNormService.GetRelatedNormKont(annId);
+
+            _normRaszList.Clear();
+            foreach (var item in rasz)
+                _normRaszList.Add(item);
+
+            _normRaskList.Clear();
+            foreach (var item in rask)
+                _normRaskList.Add(item);
+
+            _normKontList.Clear();
+            foreach (var item in kont)
+                _normKontList.Add(item);
         }
 
         private async Task LoadAndBindFioListsAsync()
@@ -432,111 +542,124 @@ namespace SewingProduction.form
             }
         }
 
-        /// <summary>
-        /// Загрузка данных из буфера (NormRasz, NormRask и ANN) с параллельной обработкой.
-        /// </summary>
-        private async Task WorkDivisionLoadAsync(string caller, int id)
-        {
-            if (id <= 0)
-                return;
-            try
-            {
-                // Загружаем все данные параллельно
-                var raszTask = _artNormService.GetRelatedNormRasz(id);
-                var raskTask = _artNormService.GetRelatedNormRask(id);
-                var kontTask = _artNormService.GetRelatedNormKont(id);
-                var annDataTask = _artNormService.GetArtNormDataById(id);
+        ///// <summary>
+        ///// Загрузка данных из буфера (NormRasz, NormRask и ANN) с параллельной обработкой.
+        ///// </summary>
+        //private async Task WorkDivisionLoadAsync(string caller, int id)
+        //{
+        //    if (id <= 0)
+        //        return;
+        //    try
+        //    {
+        //        // Загружаем все данные параллельно
+        //        var raszTask = _artNormService.GetRelatedNormRasz(id);
+        //        var raskTask = _artNormService.GetRelatedNormRask(id);
+        //        var kontTask = _artNormService.GetRelatedNormKont(id);
+        //        var annDataTask = _artNormService.GetArtNormDataById(id);
 
-                await Task.WhenAll(raszTask, raskTask, kontTask, annDataTask);
+        //        await Task.WhenAll(raszTask, raskTask, kontTask, annDataTask);
 
-                var kod_proizv = await _artNormService.GetKod_proizv();
-                var podr_vyaz = await _artNormService.GetPodr_vyaz();
-                var oborud_shv = await _artNormService.GetOborud_shv();
+        //        var kod_proizv = await _artNormService.GetKod_proizv();
+        //        var podr_vyaz = await _artNormService.GetPodr_vyaz();
+        //        var oborud_shv = await _artNormService.GetOborud_shv();
 
-                await this.InvokeAsync(() =>
-                {
-                    // Подгружаем справочники в репозитории
-                    repositoryItemLookUpEdit_kod_proizv.DataSource = kod_proizv;
-                    repositoryItemLookUpEdit_podrVyaz.DataSource = podr_vyaz;
-                    repositoryItemLookUpEdit_oborudShv.DataSource = oborud_shv;
+        //        await this.InvokeAsync(() =>
+        //        {
+        //            // Подгружаем справочники в репозитории
+        //            repositoryItemLookUpEdit_kod_proizv.DataSource = kod_proizv;
+        //            repositoryItemLookUpEdit_podrVyaz.DataSource = podr_vyaz;
+        //            repositoryItemLookUpEdit_oborudShv.DataSource = oborud_shv;
 
-                    repositoryItemLookUpEdit_kod_proizv.ValueMember = nameof(KodProizvModel.kod_proizv);
-                    repositoryItemLookUpEdit_kod_proizv.DisplayMember = nameof(KodProizvModel.text_proizv);
-                    repositoryItemLookUpEdit_podrVyaz.ValueMember = nameof(PodrVyazModel.kod_vyaz);
-                    repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
-                    repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
-                    repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
+        //            repositoryItemLookUpEdit_kod_proizv.ValueMember = nameof(KodProizvModel.kod_proizv);
+        //            repositoryItemLookUpEdit_kod_proizv.DisplayMember = nameof(KodProizvModel.text_proizv);
+        //            repositoryItemLookUpEdit_podrVyaz.ValueMember = nameof(PodrVyazModel.kod_vyaz);
+        //            repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
+        //            repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
+        //            repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
 
-                    // Обновляем списки
-                    _normRaszList.Clear();
-                    _normRaskList.Clear();
-                    _normKontList.Clear();
+        //            // Обновляем списки
+        //            _normRaszList.Clear();
+        //            _normRaskList.Clear();
+        //            _normKontList.Clear();
 
-                    bool isCopyOrBuffer = _mode == (int)Mode.ArchAndCopy || caller == "buffer";
+        //            bool isCopyOrBuffer = _mode == (int)Mode.ArchAndCopy || caller == "buffer";
 
-                    LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
-                    LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
-                    LoadList(kontTask.Result, _normKontList, nameof(NormKont.nkId), isCopyOrBuffer);
+        //            LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
+        //            LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
+        //            LoadList(kontTask.Result, _normKontList, nameof(NormKont.nkId), isCopyOrBuffer);
 
-                    // Обновляем привязки
-                    _normRaszBindingSource.ResetBindings(false);
-                    _normRaskBindingSource.ResetBindings(false);
-                    _normKontBindingSource.ResetBindings(false);
+        //            // Обновляем привязки
+        //            _normRaszBindingSource.ResetBindings(false);
+        //            _normRaskBindingSource.ResetBindings(false);
+        //            _normKontBindingSource.ResetBindings(false);
 
-                    // Обновляем данные ANN через биндинг
-                    var annData = annDataTask.Result;
-                    if (annData != null)
-                    {
-                        _currentAnnData = annData;
-                        bindingSource1.DataSource = _currentAnnData;
-                        //bindingSource1.ResetBindings(false);
-                        // Если загрузка из буфера, обновим и оригинал для сравнения
-                        if (isCopyOrBuffer) 
-                        {
-                             _originalAnnData = _currentAnnData?.Clone();
-                             _hasUnsavedChanges = false; // Сброс флага после вставки из буфера
-                        }
-                    }
-                    gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
-                    Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
-                    Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
+        //            // Обновляем данные ANN через биндинг
+        //            var annData = annDataTask.Result;
+        //            if (annData != null)
+        //            {
+        //                _currentAnnData = annData;
+        //                bindingSource1.DataSource = _currentAnnData;
+        //                //bindingSource1.ResetBindings(false);
+        //                // Если загрузка из буфера, обновим и оригинал для сравнения
+        //                if (isCopyOrBuffer) 
+        //                {
+        //                     _originalAnnData = _currentAnnData?.Clone();
+        //                     _hasUnsavedChanges = false; // Сброс флага после вставки из буфера
+        //                }
+        //            }
+        //            gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
+        //            Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
+        //            Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
 
-                });
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных ANN в WorkDivisionLoadAsync");
+        //        });
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных ANN в WorkDivisionLoadAsync");
 
-                await this.InvokeAsync(() =>
-                {
-                    MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                });
-            }
-        }
-        private void LoadList<T>(List<T> sourceList, BindingList<T> targetList, string idFieldName, bool isCopyOrBuffer) where T : INewable
-        {
-            foreach (var item in sourceList)
-            {
-                var idProp = typeof(T).GetProperty(idFieldName);
+        //        await this.InvokeAsync(() =>
+        //        {
+        //            MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //        });
+        //    }
+        //}
+        //private void LoadList<T>(List<T> sourceList, BindingList<T> targetList, string idFieldName, bool isCopyOrBuffer) where T : INewable
+        //{
+        //    foreach (var item in sourceList)
+        //    {
+        //        var idProp = typeof(T).GetProperty(idFieldName);
 
-                if (isCopyOrBuffer)
-                {
-                    // При Архив+Копия или вставке из буфера: сбрасываем ID, ставим IsNew
-                    if (idProp != null && idProp.PropertyType == typeof(int))
-                    {
-                        idProp.SetValue(item, 0);
-                    }
-                    item.IsNew = true;
-                }
-                else
-                {
-                    // При обычной загрузке для редактирования
-                    item.IsNew = false;
-                }
+        //        if (isCopyOrBuffer)
+        //        {
+        //            // При Архив+Копия или вставке из буфера: сбрасываем ID, ставим IsNew
+        //            if (idProp != null && idProp.PropertyType == typeof(int))
+        //            {
+        //                idProp.SetValue(item, 0);
+        //            }
+        //            item.IsNew = true;
+        //        }
+        //        else
+        //        {
+        //            // При обычной загрузке для редактирования
+        //            item.IsNew = false;
+        //        }
 
-                targetList.Add(item);
-            }
-        }
+        //        targetList.Add(item);
+        //    }
+        //}
+
+        //public static void ResetPropertie<T>(IEnumerable<T> list)
+        //{
+        //    foreach (var item in list)
+        //    {
+        //        var annIdProp = item.GetType().GetProperty("AnnId");
+        //        if (annIdProp != null && annIdProp.PropertyType == typeof(int))
+        //        {
+        //            annIdProp.SetValue(item, 0);
+        //        }
+        //    }
+        //}
+
 
         /// <summary>
         /// Загрузка данных ANN по ID с групповым обновлением UI.
@@ -558,8 +681,6 @@ namespace SewingProduction.form
                     await this.InvokeAsync(() =>
                     {
                         _currentAnnData = annData;                // Обновляем текущую модель
-                        //bindingSource1.DataSource = _currentAnnData; // Привязываем данные к форме
-                        //bindingSource1.ResetBindings(false);
                         bindingSource1.SuspendBinding();
                         bindingSource1.DataSource = _currentAnnData;
                         bindingSource1.ResumeBinding();
@@ -710,7 +831,7 @@ namespace SewingProduction.form
                     var currentNormRasz = gridView.GetRow(e.RowHandle) as NormRasz;
                     if (currentNormRasz != null && !currentNormRasz.IsNew) 
                     {
-                        _originalNormRaszDataBeforeEdit = currentNormRasz.Clone();
+                        _originalNormRaszDataBeforeEdit = (NormRasz)currentNormRasz.Clone();
                     }
                     else
                     {
@@ -838,7 +959,7 @@ namespace SewingProduction.form
             if (e.Result == EditFormResult.Cancel)
             {
                 _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено
-                return; // Явно ничего не делаем для отмены/прерывания.
+                return;
             }
 
             // Обработка других случаев, когда форма скрыта без обновления
@@ -1105,115 +1226,6 @@ namespace SewingProduction.form
 
         #endregion
 
-        #region DopObr
-        //private void gridViewDopObr_ShowingEditor(object sender, CancelEventArgs e)
-        //{
-        //    GridView view = sender as GridView;
-        //    if (view == null) return;
-
-        //    if (view.IsNewItemRow(view.FocusedRowHandle))
-        //    {
-        //        e.Cancel = true;
-
-        //        if (_isSelectionFormOpen) return;
-
-        //        try
-        //        {
-        //            _isSelectionFormOpen = true;
-
-        //            if (_normDopObrList == null || _normDopObrList.Count == 0)
-        //            {
-        //                var newDopObr = new NormDopObr
-        //                {
-        //                    AnnId = _newAnnId,
-        //                    IsNew = true 
-        //                };
-        //                _normDopObrList.Add(newDopObr);
-        //                _normDopObrBindingSource.ResetBindings(false);
-        //                MessageBox.Show("Добавлена строка дополнительной обработки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("В таблице дополнительной обработки может быть только одна строка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            }
-        //        }
-        //        finally
-        //        {
-        //            _isSelectionFormOpen = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        e.Cancel = false;
-        //    }
-        //}
-
-        //private async void gridViewDopObr_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //     GridView view = sender as GridView;
-        //     if (view == null) return;
-
-        //     if (e.KeyCode == Keys.Delete && view.FocusedRowHandle >= 0)
-        //     {
-        //         if (MessageBox.Show("Удалить строку дополнительной обработки?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-        //         {
-        //             var rowToDelete = view.GetRow(view.FocusedRowHandle) as NormDopObr;
-        //             if (rowToDelete != null)
-        //             {
-        //                 try
-        //                 {
-        //                     if (!rowToDelete.IsNew && rowToDelete.doId > 0)
-        //                     {
-        //                         await _dbService.DeleteEntityAsync(TableNames.Obr, TableNames.ObrId, rowToDelete);
-        //                     }
-        //                     _normDopObrList.Remove(rowToDelete);
-        //                     _normDopObrBindingSource.ResetBindings(false);
-        //                     view.RefreshData(); 
-        //                     _hasUnsavedChanges = true;
-        //                 }
-        //                 catch(Exception ex)
-        //                 {
-        //                      await _logger.LogErrorAsync(ex, "Ошибка при удалении строки NormDopObr");
-        //                      MessageBox.Show($"Ошибка удаления: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                 }
-        //             }
-        //         }
-        //         e.Handled = true; 
-        //     }
-        //}
-
-        //private async void gridViewDopObr_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        try
-        //        {
-        //            normDopObr.AnnId = _newAnnId;
-        //            e.Valid = true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            e.Valid = false;
-        //            e.ErrorText = $"Ошибка: {ex.Message}";
-        //            await _logger.LogErrorAsync(ex, "Ошибка при валидации строки NormDopObr");
-        //        }
-        //    }
-        //}
-
-        //private void gridViewDopObr_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        normDopObr.AnnId = _newAnnId;
-        //        if (!normDopObr.IsNew)
-        //        {
-        //            normDopObr.IsModified = true;
-        //        }
-        //        gridViewDopObr.UpdateCurrentRow(); 
-        //    }
-        //}
-
-        #endregion
 
         // Общий метод для обработки сохранения
         private async Task<bool> ProcessSaveData(bool closeAfterSave)
@@ -1233,8 +1245,6 @@ namespace SewingProduction.form
                 {
                     await SaveAnnDataAsync(); 
                     await SaveAllDataAsync();
-                    // В режиме Архива+Копии специфической логики после сохранения здесь нет, 
-                    // она обрабатывается на уровне вызывающей формы TeamWork
                 });
 
                 // Эти действия выполняются ПОСЛЕ успешной транзакции
@@ -1256,6 +1266,13 @@ namespace SewingProduction.form
                 {
                     await ShowStatusMessage("Данные успешно сохранены!");
                 }
+
+                // Для режима дублирования, убедимся, что ParentId сохраняется
+                if (_mode == (int)Mode.NewWorkDivision && _sourceAnnIdToCopyDetailsFrom.HasValue)
+                {
+                    _currentAnnData.ParentId = _sourceAnnIdToCopyDetailsFrom.Value;
+                }
+
                 return true;
             }
             catch (Exception ex)
@@ -1379,6 +1396,15 @@ namespace SewingProduction.form
                     bulkStopwatch.Restart();
                     await connection.BulkUpdateAsync(existingItems);
                     bulkStopwatch.Stop();
+
+                    // Сброс флага IsModified после успешного обновления
+                    foreach (var item in existingItems)
+                    {
+                        if (item is IModifiable modifiableItem)
+                        {
+                            modifiableItem.IsModified = false;
+                        }
+                    }
                 }
             }
 
@@ -1450,9 +1476,14 @@ namespace SewingProduction.form
                     }
 
                     // Загружаем данные из буфера
-                    await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
+                    //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
+                    //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
+                    //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
+                    _currentAnnData.dateCreate = DateTime.Now;
+
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException sqlEx)
                 {
@@ -1497,16 +1528,6 @@ namespace SewingProduction.form
                     statusLabel.Text = "Ошибка: Поле 'Артикул' обязательно для заполнения.";
                 isValid = false;
             }
-
-            //// Проверка поля Модель или Группа
-            //if (string.IsNullOrWhiteSpace(groupTextBox.Text) && string.IsNullOrWhiteSpace(modelTextBox.Text))
-            //{
-            //    errorProvider1.SetError(groupTextBox, "Заполните либо 'Модель', либо 'Группу'.");
-            //    errorProvider1.SetError(modelTextBox, "Заполните либо 'Модель', либо 'Группу'.");
-            //    if (isValid)
-            //        statusLabel.Text = "Ошибка: Заполните либо 'Модель', либо 'Группу'.";
-            //    isValid = false;
-            //}
 
             return isValid;
         }

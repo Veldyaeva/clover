@@ -9,7 +9,7 @@ using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-   public class NormRask : INewable, INotifyPropertyChanged, IModifiable
+   public class NormRask : INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
         public bool IsNew { get; set; } = true;
@@ -50,8 +50,18 @@ namespace SewingProduction.Models
             if (!isInternalProperty)
             {
                  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                 if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew) && propertyName != nameof(id) && !IsNew)
+                 {
+                     IsModified = true;
+                 }
             }
 
         }
+        public NormRask Clone()
+        {
+            return (NormRask)this.MemberwiseClone();
+        }
+
+        object ICloneable.Clone() => Clone();
     }
 }
