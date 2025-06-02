@@ -44,7 +44,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public string KmlNumber { get; set; }
         [NotMapped]
-        public DateTime? pszkmPlanDate { get; set; }
+        public DateTime? DateZapPlanFrom { get; set; }
+        [NotMapped]
+        public DateTime? DateZapPlanTo { get; set; }
         [NotMapped]
         public string PictPath { get; set; }
         [NotMapped]
@@ -70,7 +72,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public string pszkmPszNom {  set; get; }
         public int pszkmKnitClass {  set; get; }
         public int pszkmKmlID { get; set; }
-        public DateTime? pszkmPlanDate { get; set; }
+        public int pszkmlSeconds { set; get; }
+        public DateTime? pszkmPlanDateFrom { get; set; }
+        public DateTime? pszkmPlanDateTo { get; set; }
         public DateTime? pszkmDateAdd { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;

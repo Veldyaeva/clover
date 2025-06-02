@@ -157,7 +157,8 @@ namespace SewingProduction.form.Nadezhda
                 gridColumnVyazPlanSekVyazAll.FieldName = "SekVyazAll";
                 gridColumnVyazPlanSyncSelection.FieldName = "SyncSelection";
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
-                gridColumnVyazPlanPszkmPlanDate.FieldName = "pszkmPlanDate";
+                gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
+                gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
@@ -691,13 +692,14 @@ namespace SewingProduction.form.Nadezhda
                     pszkmKmlID = x.KmlID,
                     pszkmID = x.pszkmID,
                     pszkmKnitClass = x.IDVyazClass,
-                    pszkmPlanDate = x.pszkmPlanDate,
+                    pszkmPlanDateFrom = x.DateZapPlanFrom,
                     IsNew = x.IsNew,
                     IsModified = x.IsModified,
                     IsDeleted = x.IsDeleted
                 })
                 .ToList();
             simpleButtonSaveVyaz.Enabled = filteredListNew.Count > 0;
+            simpleButtonSaveVyaz.Refresh();
         }
 
         private async void gridViewVyazPlan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -736,7 +738,8 @@ namespace SewingProduction.form.Nadezhda
                         pszkmKmlID = x.KmlID,
                         pszkmID = x.pszkmID,
                         pszkmKnitClass = x.IDVyazClass,
-                        pszkmPlanDate = x.pszkmPlanDate,
+                        pszkmlSeconds = x.SekVyaz * x.Kol,
+                        pszkmPlanDateFrom = x.DateZapPlanFrom,
                         IsNew = x.IsNew,
                         IsModified = x.IsModified,
                         IsDeleted = x.IsDeleted
@@ -764,11 +767,11 @@ namespace SewingProduction.form.Nadezhda
                         }
 
                         var query = $@"
-                            SELECT pszkmID, pszkmKnitClass, pszkmPszNom, pszkmPlanDate
+                            SELECT pszkmID, pszkmKnitClass, pszkmPszNom, pszkmPlanDateFrom, pszkmPlanDateTo
                             FROM plan_sezon_zad_knitMachine
                             WHERE {conditions}";
 
-                        var inserted = await connection.QueryAsync<(int pszkmID, int pszkmKnitClass, string pszkmPszNom, DateTime? pszkmPlanDate)>(query, parameters);
+                        var inserted = await connection.QueryAsync<(int pszkmID, int pszkmKnitClass, string pszkmPszNom, DateTime? pszkmPlanDateFrom, DateTime? pszkmPlanDateTo)>(query, parameters);
 
                         foreach (var item in inserted)
                         {
@@ -777,10 +780,46 @@ namespace SewingProduction.form.Nadezhda
 
                             if (match != null)
                             {
+                                //match.pszkmID = item.pszkmID != null ? item.pszkmID : 0;
                                 match.pszkmID = item.pszkmID;
-                                match.pszkmPlanDate = item.pszkmPlanDate;
+                                match.DateZapPlanFrom = item.pszkmPlanDateFrom;
+                                match.DateZapPlanTo = item.pszkmPlanDateTo;
                                 match.IsNew = false;
                                 match.IsModified = false;
+                                match.IsDeleted = false;
+                            }
+                        }
+
+                        if (filteredListNew == null)
+                        {
+                            filteredListNew.Clear();
+                        }
+                        filteredListNew = vyazPlanViewData
+                        .Where(x => x.IsDeleted)
+                        .Select(x => new PlanSezonZadKnitMachineList
+                        {
+                            pszkmPszNom = x.NomZad,
+                            pszkmKmlID = x.KmlID,
+                            pszkmID = x.pszkmID,
+                            pszkmKnitClass = x.IDVyazClass,
+                            pszkmlSeconds = x.SekVyaz * x.Kol,
+                            pszkmPlanDateFrom = x.DateZapPlanFrom,
+                            IsNew = x.IsNew,
+                            IsModified = x.IsModified,
+                            IsDeleted = x.IsDeleted
+                        })
+                        .ToList();
+                        foreach (var item in filteredListNew)
+                        {
+                            var match = vyazPlanViewData.FirstOrDefault(x =>
+                                x.IDVyazClass == item.pszkmKnitClass && x.NomZad == item.pszkmPszNom);
+
+                            if (match != null)
+                            {
+                                match.pszkmID = 0;
+                                match.IsNew = false;
+                                match.IsModified = false;
+                                match.IsDeleted = false;
                             }
                         }
                     }
@@ -873,6 +912,8 @@ namespace SewingProduction.form.Nadezhda
                 var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
                 selectedItem.KmlID = 0;
                 selectedItem.KmlNumber = "0";
+                selectedItem.DateZapPlanFrom = null;
+                selectedItem.DateZapPlanTo = null;
                 selectedItem.SyncSelection = false;
                 gridViewVyazPlan.UnselectRow(rowHandle);
                 KnitMachineStatusUpdate(rowHandle);
