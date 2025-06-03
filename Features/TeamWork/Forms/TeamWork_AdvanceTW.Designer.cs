@@ -164,8 +164,8 @@ namespace SewingProduction.form
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 172F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 257F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel2.Size = new System.Drawing.Size(1488, 997);
             tableLayoutPanel2.TabIndex = 3;
@@ -174,11 +174,11 @@ namespace SewingProduction.form
             // 
             gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlKont.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridControlKont.Location = new System.Drawing.Point(4, 828);
+            gridControlKont.Location = new System.Drawing.Point(4, 743);
             gridControlKont.MainView = gridViewKont;
             gridControlKont.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlKont.Name = "gridControlKont";
-            gridControlKont.Size = new System.Drawing.Size(1480, 166);
+            gridControlKont.Size = new System.Drawing.Size(1480, 251);
             gridControlKont.TabIndex = 8;
             gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKont });
             // 
@@ -207,7 +207,7 @@ namespace SewingProduction.form
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
             gridColumn19.VisibleIndex = 0;
-            gridColumn19.Width = 91;
+            gridColumn19.Width = 144;
             // 
             // gridColumn23
             // 
@@ -217,7 +217,7 @@ namespace SewingProduction.form
             gridColumn23.Name = "gridColumn23";
             gridColumn23.Visible = true;
             gridColumn23.VisibleIndex = 1;
-            gridColumn23.Width = 103;
+            gridColumn23.Width = 163;
             // 
             // gridColumn20
             // 
@@ -227,7 +227,7 @@ namespace SewingProduction.form
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
             gridColumn20.VisibleIndex = 3;
-            gridColumn20.Width = 222;
+            gridColumn20.Width = 272;
             // 
             // gridColumn21
             // 
@@ -237,7 +237,7 @@ namespace SewingProduction.form
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;
             gridColumn21.VisibleIndex = 5;
-            gridColumn21.Width = 145;
+            gridColumn21.Width = 167;
             // 
             // colseb
             // 
@@ -246,7 +246,7 @@ namespace SewingProduction.form
             colseb.Name = "colseb";
             colseb.Visible = true;
             colseb.VisibleIndex = 4;
-            colseb.Width = 87;
+            colseb.Width = 140;
             // 
             // gridColumn22
             // 
@@ -255,7 +255,7 @@ namespace SewingProduction.form
             gridColumn22.Name = "gridColumn22";
             gridColumn22.Visible = true;
             gridColumn22.VisibleIndex = 6;
-            gridColumn22.Width = 87;
+            gridColumn22.Width = 206;
             // 
             // coln_ch1
             // 
@@ -264,7 +264,7 @@ namespace SewingProduction.form
             coln_ch1.Name = "coln_ch1";
             coln_ch1.Visible = true;
             coln_ch1.VisibleIndex = 7;
-            coln_ch1.Width = 87;
+            coln_ch1.Width = 217;
             // 
             // gridColumn17
             // 
@@ -273,7 +273,7 @@ namespace SewingProduction.form
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Visible = true;
             gridColumn17.VisibleIndex = 2;
-            gridColumn17.Width = 92;
+            gridColumn17.Width = 146;
             // 
             // colannId2
             // 
@@ -290,7 +290,7 @@ namespace SewingProduction.form
             gridControlRaskr.MainView = gridViewRaskr;
             gridControlRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlRaskr.Name = "gridControlRaskr";
-            gridControlRaskr.Size = new System.Drawing.Size(1480, 294);
+            gridControlRaskr.Size = new System.Drawing.Size(1480, 209);
             gridControlRaskr.TabIndex = 7;
             gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
             // 
@@ -976,7 +976,7 @@ namespace SewingProduction.form
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel3.Size = new System.Drawing.Size(1728, 972);
+            tableLayoutPanel3.Size = new System.Drawing.Size(1509, 869);
             tableLayoutPanel3.TabIndex = 4;
             // 
             // statusLabel
@@ -1177,13 +1177,13 @@ namespace SewingProduction.form
             // 
             toolStripContainer1.ContentPanel.Controls.Add(tableLayoutPanel3);
             toolStripContainer1.ContentPanel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1728, 972);
+            toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(1509, 869);
             toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             toolStripContainer1.Location = new System.Drawing.Point(0, 0);
             toolStripContainer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             toolStripContainer1.Name = "toolStripContainer1";
             toolStripContainer1.RightToolStripPanelVisible = false;
-            toolStripContainer1.Size = new System.Drawing.Size(1728, 997);
+            toolStripContainer1.Size = new System.Drawing.Size(1509, 894);
             toolStripContainer1.TabIndex = 5;
             toolStripContainer1.Text = "toolStripContainer1";
             // 
@@ -1191,7 +1191,8 @@ namespace SewingProduction.form
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1728, 997);
+            AutoScroll = true;
+            ClientSize = new System.Drawing.Size(1509, 894);
             Controls.Add(toolStripContainer1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
