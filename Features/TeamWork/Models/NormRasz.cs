@@ -65,8 +65,6 @@ namespace SewingProduction.Models
         {
             if (source == null) return; // или throw new ArgumentNullException(nameof(source));
 
-            // Копируем каждое свойство. Перечислите здесь все свойства, которые должны быть скопированы.
-            // Это пример, вам нужно будет указать реальные свойства вашего класса NormRasz.
             this.nrId = source.nrId;
             this.AnnId = source.AnnId;
             this.N = source.N;
@@ -84,17 +82,9 @@ namespace SewingProduction.Models
             this.Seb = source.Seb;           // Предполагается, что тип decimal? или decimal
 
 
-            // Не забудьте также скопировать служебные поля, если они важны для состояния объекта,
-            // например, IsNew, IsModified, если они не должны сбрасываться при восстановлении.
-            // Однако, при отмене редактирования, возможно, IsModified нужно сбросить или установить в false.
-            // Это зависит от вашей логики. В данном случае, если мы восстанавливаем *оригинальное* состояние,
-            // то и IsModified должно быть таким, каким было у оригинала.
-            // Если _originalNormRaszDataBeforeEdit.IsModified было false, то и this.IsModified должно стать false.
             this.IsNew = source.IsNew;
             this.IsModified = source.IsModified;
 
-            // Если есть вычисляемые свойства или связанные поля, которые нужно обновить,
-            // возможно, потребуется вызвать соответствующие методы обновления здесь.
         }
         public NormRasz Clone()
         {
