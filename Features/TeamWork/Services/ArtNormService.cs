@@ -293,7 +293,7 @@ namespace SewingProduction.Services
                              FROM dbo.norm_oper no
                              LEFT JOIN kod_proizv kp ON no.kod_proizv = kp.kod_proizv
                              LEFT JOIN podr_vyaz pv ON no.kod_proizv = pv.kod_vyaz
-                             LEFT JOIN oborud_shv_ob ob ON no.kod_ob = ob.kod_ob_all";
+                             LEFT JOIN oborud_shv_ob ob ON no.kod_ob = ob.ko_ob_all";
             return _dbHelper.ExecuteQueryAsync(query);
         }
 

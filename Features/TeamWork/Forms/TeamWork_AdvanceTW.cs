@@ -1,6 +1,4 @@
 using Dapper;
-using DevExpress.Utils.Extensions;
-using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.form.TeamWork.Forms;
@@ -392,7 +390,10 @@ namespace SewingProduction.form
                         break;
                     case (int)Mode.ArchAndCopy:
                         this.Text = "Архив+копия";
-                        await LoadAndCloneAll(_selectedAnnId, _newAnnId);
+                        var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId"));
+                        _normRaskList.Clear();
+                        _normKontList.Clear();
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
@@ -401,8 +402,10 @@ namespace SewingProduction.form
                         break;
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
-                        await LoadAndCloneAll(_selectedAnnId, _newAnnId);
-                        _currentAnnData.dateCreate = DateTime.Now;
+                        var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId"));
+                        _normRaskList.Clear();
+                        _normKontList.Clear(); _currentAnnData.dateCreate = DateTime.Now;
                         break;
                 }
                 await LoadAnnDataAsync();
@@ -1381,7 +1384,10 @@ namespace SewingProduction.form
                     //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
                     //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
                     //            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
+                    // await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
+                    var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+
                     _currentAnnData.dateCreate = DateTime.Now;
 
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
@@ -1505,45 +1511,33 @@ namespace SewingProduction.form
 
         private void gridViewRasz_EditFormPrepared(object sender, DevExpress.XtraGrid.Views.Grid.EditFormPreparedEventArgs e)
         {
-    //        // Список нужных FieldName
-    //        var fieldNames = new List<string>
-    //{
-    //    "N",        // № оп.
-    //    "N1",       // №п/оп.
-    //    "razryd",   // разряд
-    //    "Text",     // наименование операции пошива
-    //    "Sek",      // сек.
-    //    "Spec",     // спец-ть
-    //    "KodProizv",// произв.
-    //    "KodPodr",  // вяз. подр.
-    //    "Kod_ob"    // оборуд.
-    //};
+            var fieldNames = new List<string>
+    {
+        "№ оп.:", "N1", "razryd", "Text", "сек.:", "Spec", "KodProizv", "KodPodr", "Kod_ob"
+    };
 
-    //        // Собираем контролы для каждого FieldName, если он есть в BindableControls
-    //        var controls = fieldNames
-    //            .Select(fn =>
-    //            {
-    //                var ctrl = e.BindableControls.Find(fn, );
-    //                return ctrl != null ? new
-    //                {
-    //                    FieldName = fn,
-    //                    Control = ctrl,
-    //                    Left = ctrl.Left,
-    //                    Top = ctrl.Top
-    //                } : null;
-    //            })
-    //            .Where(c => c != null)
-    //            .ToList();
+            var controls = fieldNames
+                .Select(fn =>
+                {
+                    var ctrl = e.BindableControls.Find(c => c.AccessibleName == fn); // или AccessibleName
+                    return ctrl != null ? new
+                    {
+                        FieldName = fn,
+                        Control = ctrl,
+                        Left = ctrl.Left,
+                        Top = ctrl.Top
+                    } : null;
+                })
+                .Where(c => c != null)
+                .ToList();
 
-    //        // Сортируем column-by-column: сначала Left (столбцы), потом Top (строки)
-    //        var tabOrder = controls
-    //            .OrderBy(c => c.Left)
-    //            .ThenBy(c => c.Top)
-    //            .ToList();
+            var tabOrder = controls
+                .OrderBy(c => c.Left)
+                .ThenBy(c => c.Top)
+                .ToList();
 
-    //        // Проставляем TabIndex
-    //        for (int i = 0; i < tabOrder.Count; i++)
-    //            tabOrder[i].Control.TabIndex = i;
+            for (int i = 0; i < tabOrder.Count; i++)
+                tabOrder[i].Control.TabIndex = i;
         }
 
 
