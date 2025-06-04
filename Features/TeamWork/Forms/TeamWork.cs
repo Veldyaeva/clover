@@ -35,8 +35,10 @@ namespace SewingProduction.Forms
         private BindingList<ArtNormN> _bindingList;
         private BindingSource _bindingSource;
         private bool _hasUnsavedChanges = false;
-        private BindingSource _nzpByKoddRtSource;
-        private BindingList<NZPByKoddRt> _nzpList;
+        private BindingSource _nzpByKoddRtSourceArt;
+        private BindingSource _nzpByKoddRtSourceWd;
+        private BindingList<NZPByKoddRt> _nzpListArt;
+        private BindingList<NZPByKoddRt> _nzpListWd;
         private BindingList<NormRasz> _normRaszListTW;
         private BindingSource _normRaszBindingSourceTW;
         private BindingList<NormRask> _normRaskListTW;
@@ -80,9 +82,13 @@ namespace SewingProduction.Forms
             _preArchBindingSource = new BindingSource { DataSource = _preArchList };
             if (gridControlPreArch != null) gridControlPreArch.DataSource = _preArchBindingSource;
 
-            _nzpList = new BindingList<NZPByKoddRt>();
-            _nzpByKoddRtSource = new BindingSource { DataSource = _nzpList };
-            if (gridControlNZP != null) gridControlNZP.DataSource = _nzpByKoddRtSource;
+            _nzpListArt = new BindingList<NZPByKoddRt>();
+            _nzpByKoddRtSourceArt = new BindingSource { DataSource = _nzpListArt };
+            if (gridControlNZP != null) gridControlNZP.DataSource = _nzpByKoddRtSourceArt;
+
+            _nzpListWd = new BindingList<NZPByKoddRt>();
+            _nzpByKoddRtSourceWd = new BindingSource { DataSource = _nzpListWd };
+            if (customGridControl4 != null) customGridControl4.DataSource = _nzpByKoddRtSourceWd;
 
             // Инициализация для вкладки "Работа с артикулами"
             _myDataArtList = new BindingList<MyDataART>();
@@ -170,9 +176,9 @@ namespace SewingProduction.Forms
         {
             if (e.Page == null) return;
 
-            switch (e.Page.Name) 
+            switch (e.Page.Name)
             {
-                case "TabPage1": 
+                case "TabPage1":
                     await LoadWorkDivisions();
                     break;
 
@@ -274,9 +280,9 @@ namespace SewingProduction.Forms
                     {
                         // Fallback if a specific search button isn't found, try with a general non-clear button.
                         EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
-                        if (firstNonClearButton != null) 
+                        if (firstNonClearButton != null)
                         {
-                             SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
+                            SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
                         }
                     }
                 }
@@ -439,7 +445,7 @@ namespace SewingProduction.Forms
                             try
                             {
                                 decimal updatedSeb = await _artNormService.getArtNormnSeb(row.AnnID);
-                                row.Seb = updatedSeb; 
+                                row.Seb = updatedSeb;
                                 row.dateUpdate = DateTime.Now;
                             }
                             catch (Exception ex)
@@ -465,7 +471,7 @@ namespace SewingProduction.Forms
                     ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
                     if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
                     {
-                        view.SetRowCellValue(e.RowHandle, e.Column, true); 
+                        view.SetRowCellValue(e.RowHandle, e.Column, true);
                         MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
