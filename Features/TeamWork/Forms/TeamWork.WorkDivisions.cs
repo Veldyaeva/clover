@@ -173,19 +173,19 @@ namespace SewingProduction.Forms
                 var view = gridControlNZP?.MainView as GridView;
                 NZPByKoddRt selectedRow = null;
 
-                if (view != null && _nzpByKoddRtSource != null && _nzpByKoddRtSource.Count > 0)
+                if (view != null && _nzpByKoddRtSourceArt != null && _nzpByKoddRtSourceArt.Count > 0)
                 {
-                    if (_nzpByKoddRtSource.Position >= 0 && _nzpByKoddRtSource.Position < _nzpByKoddRtSource.Count)
+                    if (_nzpByKoddRtSourceArt.Position >= 0 && _nzpByKoddRtSourceArt.Position < _nzpByKoddRtSourceArt.Count)
                     {
-                        selectedRow = _nzpByKoddRtSource[_nzpByKoddRtSource.Position] as NZPByKoddRt;
+                        selectedRow = _nzpByKoddRtSourceArt[_nzpByKoddRtSourceArt.Position] as NZPByKoddRt;
                     }
                     else if (view.FocusedRowHandle >= 0)
                     {
                         selectedRow = view.GetRow(view.FocusedRowHandle) as NZPByKoddRt;
                     }
-                    else if (_nzpByKoddRtSource.Count > 0)
+                    else if (_nzpByKoddRtSourceArt.Count > 0)
                     {
-                        selectedRow = _nzpByKoddRtSource[0] as NZPByKoddRt;
+                        selectedRow = _nzpByKoddRtSourceArt[0] as NZPByKoddRt;
                     }
                 }
 
@@ -770,7 +770,7 @@ namespace SewingProduction.Forms
                 var view = gridControlNZP.MainView as GridView;
                 if (view == null) return;
 
-                var selectedRow = _nzpByKoddRtSource.Current as NZPByKoddRt;
+                var selectedRow = _nzpByKoddRtSourceArt.Current as NZPByKoddRt;
                 if (selectedRow == null)
                 {
                     MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -798,7 +798,7 @@ namespace SewingProduction.Forms
                 }
                 await _logger.LogEventAsync($"UnboundWD: AnnID текущего РТ из gridView_wdToBind: {currentWorkDivisionAnnId}", "UnboundWD_Debug");
 
-                if (_nzpList != null)
+                if (_nzpListArt != null)
                 {
                   //  _nzpList.Clear(); // Очищаем текущий список НЗП
                     if (currentWorkDivisionAnnId > 0)
@@ -812,7 +812,7 @@ namespace SewingProduction.Forms
                             {
                                 await _logger.LogEventAsync($"UnboundWD: Список nzpData ПУСТ после GetNzpWithPztCounts.", "UnboundWD_Debug");
                             }
-                            _nzpList.BulkLoad(nzpData);
+                            _nzpListArt.BulkLoad(nzpData);
                             //foreach (var item in nzpData)
                             //{
                             //    _nzpList.Add(item);
@@ -822,7 +822,7 @@ namespace SewingProduction.Forms
                     }
                 }
 
-                _nzpByKoddRtSource?.ResetBindings(false);
+                _nzpByKoddRtSourceArt?.ResetBindings(false);
                 gridControlNZP?.RefreshDataSource();
                 await UpdateUnboundButtonStatusBasedOnNZP(); // Обновляем состояние кнопки отвязки
                 await _logger.LogEventAsync($"UnboundWD: UI обновлен (_nzpByKoddRtSource.ResetBindings, RefreshDataSource, UpdateUnboundButtonStatusBasedOnNZP).", "UnboundWD_Debug");

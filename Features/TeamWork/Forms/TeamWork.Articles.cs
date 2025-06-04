@@ -742,8 +742,8 @@ namespace SewingProduction.Forms
         /// <param name="e"></param>
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            GridView view = gridView_wdToBind; // Кастуем sender к GridView один раз
-            if (view == null) return; // Если view null, выходим
+            var view = sender as GridView;// gridView_wdToBind; 
+            if (view == null) return;
 
             int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
 
@@ -751,9 +751,9 @@ namespace SewingProduction.Forms
             await RefreshNormRaszForArticlesTab(annId);
 
             // Загрузка данных НЗП
-            if (_nzpList != null)
+            if (_nzpListArt != null)
             {
-                _nzpList.Clear();
+                _nzpListArt.Clear();
                 if (annId > 0)
                 {
                     List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
@@ -761,11 +761,11 @@ namespace SewingProduction.Forms
                     {
                         foreach (var item in nzpData)
                         {
-                            _nzpList.Add(item);
+                            _nzpListArt.Add(item);
                         }
                     }
                 }
-                _nzpByKoddRtSource?.ResetBindings(false);
+                _nzpByKoddRtSourceArt?.ResetBindings(false);
                 gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
                 await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
             }
