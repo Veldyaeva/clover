@@ -92,7 +92,7 @@ namespace SewingProduction.Forms
             coldateCreate = new DevExpress.XtraGrid.Columns.GridColumn();
             coldateUpdate = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemCheckEdit8 = new RepositoryItemCheckEdit();
+            repositoryItemButtonEdit3 = new RepositoryItemButtonEdit();
             colsek_shv = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -136,8 +136,8 @@ namespace SewingProduction.Forms
             buffer = new CustomTextBox();
             ButtonCopyWd = new CustomButton();
             panelControl7 = new PanelControl();
-            constructorTextBox = new CustomTextBox();
-            designerTextBox = new CustomTextBox();
+            constructorTextBox = new RichTextBox();
+            designerTextBox = new RichTextBox();
             label6 = new CustomLabel();
             label7 = new CustomLabel();
             ButtonApprovement = new CustomButton();
@@ -301,7 +301,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditPodr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridView).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskrTW).BeginInit();
@@ -451,7 +451,7 @@ namespace SewingProduction.Forms
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 244F));
+            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 192F));
             tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70.77276F));
             tableLayoutPanel3.Controls.Add(tableLayoutPanel1, 1, 0);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel5, 0, 0);
@@ -468,8 +468,8 @@ namespace SewingProduction.Forms
             // 
             tableLayoutPanel1.ColumnCount = 3;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 328F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 363F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 827F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 383F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 807F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 23F));
             tableLayoutPanel1.Controls.Add(pictureBox1, 2, 3);
             tableLayoutPanel1.Controls.Add(gridControlKontTW, 2, 2);
@@ -481,27 +481,27 @@ namespace SewingProduction.Forms
             tableLayoutPanel1.Controls.Add(commentRichTextBox, 0, 4);
             tableLayoutPanel1.Controls.Add(RecoRichTextBox, 1, 4);
             tableLayoutPanel1.Dock = DockStyle.Fill;
-            tableLayoutPanel1.Location = new System.Drawing.Point(248, 3);
+            tableLayoutPanel1.Location = new System.Drawing.Point(196, 3);
             tableLayoutPanel1.Margin = new Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 6;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 108F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 32F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 18F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 220F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(1517, 934);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 200F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 27F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 9F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 107F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(1569, 934);
             tableLayoutPanel1.TabIndex = 24;
             // 
             // pictureBox1
             // 
             pictureBox1.Dock = DockStyle.Fill;
-            pictureBox1.Location = new System.Drawing.Point(695, 667);
+            pictureBox1.Location = new System.Drawing.Point(715, 794);
             pictureBox1.Margin = new Padding(4, 3, 4, 3);
             pictureBox1.Name = "pictureBox1";
             tableLayoutPanel1.SetRowSpan(pictureBox1, 3);
-            pictureBox1.Size = new System.Drawing.Size(819, 264);
+            pictureBox1.Size = new System.Drawing.Size(850, 137);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
@@ -511,11 +511,11 @@ namespace SewingProduction.Forms
             gridControlKontTW.Dock = DockStyle.Fill;
             gridControlKontTW.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlKontTW.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlKontTW.Location = new System.Drawing.Point(695, 559);
+            gridControlKontTW.Location = new System.Drawing.Point(715, 714);
             gridControlKontTW.MainView = gridView4;
             gridControlKontTW.Margin = new Padding(4, 3, 4, 3);
             gridControlKontTW.Name = "gridControlKontTW";
-            gridControlKontTW.Size = new System.Drawing.Size(819, 102);
+            gridControlKontTW.Size = new System.Drawing.Size(850, 74);
             gridControlKontTW.TabIndex = 8;
             gridControlKontTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
             // 
@@ -595,12 +595,12 @@ namespace SewingProduction.Forms
             gridControlRaszTW.Dock = DockStyle.Fill;
             gridControlRaszTW.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlRaszTW.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlRaszTW.Location = new System.Drawing.Point(695, 3);
+            gridControlRaszTW.Location = new System.Drawing.Point(715, 3);
             gridControlRaszTW.MainView = gridView1;
             gridControlRaszTW.Margin = new Padding(4, 3, 4, 3);
             gridControlRaszTW.Name = "gridControlRaszTW";
             gridControlRaszTW.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemLookUpEditProizv, repositoryItemLookUpEditOb, repositoryItemLookUpEditPodr });
-            gridControlRaszTW.Size = new System.Drawing.Size(819, 422);
+            gridControlRaszTW.Size = new System.Drawing.Size(850, 505);
             gridControlRaszTW.TabIndex = 6;
             gridControlRaszTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -630,7 +630,7 @@ namespace SewingProduction.Forms
             coln.Name = "coln";
             coln.Visible = true;
             coln.VisibleIndex = 0;
-            coln.Width = 55;
+            coln.Width = 49;
             // 
             // coln1
             // 
@@ -640,7 +640,7 @@ namespace SewingProduction.Forms
             coln1.Name = "coln1";
             coln1.Visible = true;
             coln1.VisibleIndex = 1;
-            coln1.Width = 45;
+            coln1.Width = 40;
             // 
             // colrazryd
             // 
@@ -650,7 +650,7 @@ namespace SewingProduction.Forms
             colrazryd.Name = "colrazryd";
             colrazryd.Visible = true;
             colrazryd.VisibleIndex = 2;
-            colrazryd.Width = 62;
+            colrazryd.Width = 56;
             // 
             // coltext
             // 
@@ -660,7 +660,7 @@ namespace SewingProduction.Forms
             coltext.Name = "coltext";
             coltext.Visible = true;
             coltext.VisibleIndex = 3;
-            coltext.Width = 261;
+            coltext.Width = 290;
             // 
             // colsek1
             // 
@@ -670,7 +670,7 @@ namespace SewingProduction.Forms
             colsek1.Name = "colsek1";
             colsek1.Visible = true;
             colsek1.VisibleIndex = 4;
-            colsek1.Width = 49;
+            colsek1.Width = 50;
             // 
             // gridColumn30
             // 
@@ -680,7 +680,7 @@ namespace SewingProduction.Forms
             gridColumn30.Name = "gridColumn30";
             gridColumn30.Visible = true;
             gridColumn30.VisibleIndex = 5;
-            gridColumn30.Width = 87;
+            gridColumn30.Width = 84;
             // 
             // gridColumn27
             // 
@@ -690,7 +690,7 @@ namespace SewingProduction.Forms
             gridColumn27.Name = "gridColumn27";
             gridColumn27.Visible = true;
             gridColumn27.VisibleIndex = 6;
-            gridColumn27.Width = 64;
+            gridColumn27.Width = 69;
             // 
             // colobor
             // 
@@ -699,8 +699,8 @@ namespace SewingProduction.Forms
             colobor.MinWidth = 23;
             colobor.Name = "colobor";
             colobor.Visible = true;
-            colobor.VisibleIndex = 9;
-            colobor.Width = 68;
+            colobor.VisibleIndex = 8;
+            colobor.Width = 103;
             // 
             // gridColumn26
             // 
@@ -710,7 +710,7 @@ namespace SewingProduction.Forms
             gridColumn26.Name = "gridColumn26";
             gridColumn26.Visible = true;
             gridColumn26.VisibleIndex = 7;
-            gridColumn26.Width = 59;
+            gridColumn26.Width = 65;
             // 
             // gridColumn3
             // 
@@ -718,9 +718,7 @@ namespace SewingProduction.Forms
             gridColumn3.FieldName = "Kod";
             gridColumn3.MinWidth = 23;
             gridColumn3.Name = "gridColumn3";
-            gridColumn3.Visible = true;
-            gridColumn3.VisibleIndex = 8;
-            gridColumn3.Width = 43;
+            gridColumn3.Width = 46;
             // 
             // colkod_o
             // 
@@ -774,9 +772,9 @@ namespace SewingProduction.Forms
             ANNgridControl.MainView = ANNgridView;
             ANNgridControl.Margin = new Padding(4, 3, 4, 3);
             ANNgridControl.Name = "ANNgridControl";
-            ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemCheckEdit8 });
+            ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemButtonEdit3 });
             tableLayoutPanel1.SetRowSpan(ANNgridControl, 3);
-            ANNgridControl.Size = new System.Drawing.Size(683, 658);
+            ANNgridControl.Size = new System.Drawing.Size(703, 785);
             ANNgridControl.TabIndex = 7;
             ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { ANNgridView });
             // 
@@ -798,6 +796,13 @@ namespace SewingProduction.Forms
             ANNgridView.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             ANNgridView.OptionsEditForm.PopupEditFormWidth = 933;
             ANNgridView.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            ANNgridView.OptionsFind.AlwaysVisible = true;
+            ANNgridView.OptionsFind.Behavior = FindPanelBehavior.Search;
+            ANNgridView.OptionsFind.Condition = DevExpress.Data.Filtering.FilterCondition.Contains;
+            ANNgridView.OptionsFind.FindDelay = 100;
+            ANNgridView.OptionsFind.FindMode = FindMode.Always;
+            ANNgridView.OptionsFind.FindNullPrompt = "Введите текст для поиска...";
+            ANNgridView.OptionsFind.FindPanelLocation = DevExpress.XtraGrid.Views.Grid.GridFindPanelLocation.Panel;
             ANNgridView.OptionsSelection.MultiSelect = true;
             ANNgridView.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CellSelect;
             ANNgridView.OptionsView.ColumnAutoWidth = false;
@@ -826,12 +831,12 @@ namespace SewingProduction.Forms
             colarticul.OptionsColumn.AllowEdit = false;
             colarticul.Visible = true;
             colarticul.VisibleIndex = 1;
-            colarticul.Width = 99;
+            colarticul.Width = 86;
             // 
             // colmod
             // 
             colmod.Caption = "модель";
-            colmod.FieldName = "mod";
+            colmod.FieldName = "Mod";
             colmod.MinWidth = 23;
             colmod.Name = "colmod";
             colmod.OptionsColumn.AllowEdit = false;
@@ -868,8 +873,6 @@ namespace SewingProduction.Forms
             coldateCreate.MinWidth = 23;
             coldateCreate.Name = "coldateCreate";
             coldateCreate.OptionsColumn.AllowEdit = false;
-            coldateCreate.Visible = true;
-            coldateCreate.VisibleIndex = 5;
             coldateCreate.Width = 87;
             // 
             // coldateUpdate
@@ -880,22 +883,23 @@ namespace SewingProduction.Forms
             coldateUpdate.Name = "coldateUpdate";
             coldateUpdate.OptionsColumn.AllowEdit = false;
             coldateUpdate.Visible = true;
-            coldateUpdate.VisibleIndex = 6;
-            coldateUpdate.Width = 87;
+            coldateUpdate.VisibleIndex = 5;
+            coldateUpdate.Width = 69;
             // 
             // gridColumn19
             // 
             gridColumn19.Caption = "обн.";
-            gridColumn19.ColumnEdit = repositoryItemCheckEdit8;
+            gridColumn19.ColumnEdit = repositoryItemButtonEdit3;
             gridColumn19.FieldName = "Upd";
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
-            gridColumn19.VisibleIndex = 7;
+            gridColumn19.VisibleIndex = 6;
             // 
-            // repositoryItemCheckEdit8
+            // repositoryItemButtonEdit3
             // 
-            repositoryItemCheckEdit8.AutoHeight = false;
-            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
+            repositoryItemButtonEdit3.AutoHeight = false;
+            repositoryItemButtonEdit3.Buttons.AddRange(new EditorButton[] { new EditorButton() });
+            repositoryItemButtonEdit3.Name = "repositoryItemButtonEdit3";
             // 
             // colsek_shv
             // 
@@ -905,7 +909,7 @@ namespace SewingProduction.Forms
             colsek_shv.Name = "colsek_shv";
             colsek_shv.OptionsColumn.AllowEdit = false;
             colsek_shv.Visible = true;
-            colsek_shv.VisibleIndex = 8;
+            colsek_shv.VisibleIndex = 7;
             colsek_shv.Width = 62;
             // 
             // gridColumn5
@@ -916,8 +920,8 @@ namespace SewingProduction.Forms
             gridColumn5.Name = "gridColumn5";
             gridColumn5.OptionsColumn.AllowEdit = false;
             gridColumn5.Visible = true;
-            gridColumn5.VisibleIndex = 10;
-            gridColumn5.Width = 87;
+            gridColumn5.VisibleIndex = 8;
+            gridColumn5.Width = 63;
             // 
             // gridColumn35
             // 
@@ -928,8 +932,8 @@ namespace SewingProduction.Forms
             gridColumn35.Name = "gridColumn35";
             gridColumn35.OptionsColumn.AllowEdit = false;
             gridColumn35.Visible = true;
-            gridColumn35.VisibleIndex = 11;
-            gridColumn35.Width = 87;
+            gridColumn35.VisibleIndex = 9;
+            gridColumn35.Width = 62;
             // 
             // repositoryItemCheckEdit2
             // 
@@ -944,7 +948,7 @@ namespace SewingProduction.Forms
             colsek_vyazo.Name = "colsek_vyazo";
             colsek_vyazo.OptionsColumn.AllowEdit = false;
             colsek_vyazo.Visible = true;
-            colsek_vyazo.VisibleIndex = 9;
+            colsek_vyazo.VisibleIndex = 10;
             colsek_vyazo.Width = 87;
             // 
             // colsek_vyaz5
@@ -955,7 +959,7 @@ namespace SewingProduction.Forms
             colsek_vyaz5.Name = "colsek_vyaz5";
             colsek_vyaz5.OptionsColumn.AllowEdit = false;
             colsek_vyaz5.Visible = true;
-            colsek_vyaz5.VisibleIndex = 12;
+            colsek_vyaz5.VisibleIndex = 11;
             colsek_vyaz5.Width = 87;
             // 
             // colsek_vyaz7
@@ -966,7 +970,7 @@ namespace SewingProduction.Forms
             colsek_vyaz7.Name = "colsek_vyaz7";
             colsek_vyaz7.OptionsColumn.AllowEdit = false;
             colsek_vyaz7.Visible = true;
-            colsek_vyaz7.VisibleIndex = 13;
+            colsek_vyaz7.VisibleIndex = 12;
             colsek_vyaz7.Width = 87;
             // 
             // colsek_vyaz12
@@ -977,7 +981,7 @@ namespace SewingProduction.Forms
             colsek_vyaz12.Name = "colsek_vyaz12";
             colsek_vyaz12.OptionsColumn.AllowEdit = false;
             colsek_vyaz12.Visible = true;
-            colsek_vyaz12.VisibleIndex = 14;
+            colsek_vyaz12.VisibleIndex = 13;
             colsek_vyaz12.Width = 87;
             // 
             // colsek_vyaz10
@@ -988,7 +992,7 @@ namespace SewingProduction.Forms
             colsek_vyaz10.Name = "colsek_vyaz10";
             colsek_vyaz10.OptionsColumn.AllowEdit = false;
             colsek_vyaz10.Visible = true;
-            colsek_vyaz10.VisibleIndex = 15;
+            colsek_vyaz10.VisibleIndex = 14;
             colsek_vyaz10.Width = 87;
             // 
             // colsek_vyaz6
@@ -999,7 +1003,7 @@ namespace SewingProduction.Forms
             colsek_vyaz6.Name = "colsek_vyaz6";
             colsek_vyaz6.OptionsColumn.AllowEdit = false;
             colsek_vyaz6.Visible = true;
-            colsek_vyaz6.VisibleIndex = 16;
+            colsek_vyaz6.VisibleIndex = 15;
             colsek_vyaz6.Width = 87;
             // 
             // colsek_kr
@@ -1010,7 +1014,7 @@ namespace SewingProduction.Forms
             colsek_kr.Name = "colsek_kr";
             colsek_kr.OptionsColumn.AllowEdit = false;
             colsek_kr.Visible = true;
-            colsek_kr.VisibleIndex = 17;
+            colsek_kr.VisibleIndex = 16;
             colsek_kr.Width = 87;
             // 
             // colslogn
@@ -1021,7 +1025,7 @@ namespace SewingProduction.Forms
             colslogn.Name = "colslogn";
             colslogn.OptionsColumn.AllowEdit = false;
             colslogn.Visible = true;
-            colslogn.VisibleIndex = 18;
+            colslogn.VisibleIndex = 17;
             colslogn.Width = 87;
             // 
             // colkomment
@@ -1041,7 +1045,7 @@ namespace SewingProduction.Forms
             colReco.Name = "colReco";
             colReco.OptionsColumn.AllowEdit = false;
             colReco.Visible = true;
-            colReco.VisibleIndex = 19;
+            colReco.VisibleIndex = 18;
             colReco.Width = 87;
             // 
             // coldiz
@@ -1069,7 +1073,7 @@ namespace SewingProduction.Forms
             colannID.Name = "colannID";
             colannID.OptionsColumn.AllowEdit = false;
             colannID.Visible = true;
-            colannID.VisibleIndex = 20;
+            colannID.VisibleIndex = 19;
             colannID.Width = 87;
             // 
             // repositoryItemButtonEdit1
@@ -1081,11 +1085,11 @@ namespace SewingProduction.Forms
             gridControlRaskrTW.Dock = DockStyle.Fill;
             gridControlRaskrTW.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlRaskrTW.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlRaskrTW.Location = new System.Drawing.Point(695, 431);
+            gridControlRaskrTW.Location = new System.Drawing.Point(715, 514);
             gridControlRaskrTW.MainView = gridViewRaskrTW;
             gridControlRaskrTW.Margin = new Padding(4, 3, 4, 3);
             gridControlRaskrTW.Name = "gridControlRaskrTW";
-            gridControlRaskrTW.Size = new System.Drawing.Size(819, 122);
+            gridControlRaskrTW.Size = new System.Drawing.Size(850, 194);
             gridControlRaskrTW.TabIndex = 7;
             gridControlRaskrTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskrTW });
             // 
@@ -1125,7 +1129,7 @@ namespace SewingProduction.Forms
             colkod_o1.Name = "colkod_o1";
             colkod_o1.Visible = true;
             colkod_o1.VisibleIndex = 0;
-            colkod_o1.Width = 58;
+            colkod_o1.Width = 52;
             // 
             // gridColumn18
             // 
@@ -1135,7 +1139,7 @@ namespace SewingProduction.Forms
             gridColumn18.Name = "gridColumn18";
             gridColumn18.Visible = true;
             gridColumn18.VisibleIndex = 1;
-            gridColumn18.Width = 43;
+            gridColumn18.Width = 39;
             // 
             // colrazryd1
             // 
@@ -1145,7 +1149,7 @@ namespace SewingProduction.Forms
             colrazryd1.Name = "colrazryd1";
             colrazryd1.Visible = true;
             colrazryd1.VisibleIndex = 2;
-            colrazryd1.Width = 62;
+            colrazryd1.Width = 56;
             // 
             // coltext1
             // 
@@ -1155,7 +1159,7 @@ namespace SewingProduction.Forms
             coltext1.Name = "coltext1";
             coltext1.Visible = true;
             coltext1.VisibleIndex = 3;
-            coltext1.Width = 355;
+            coltext1.Width = 291;
             // 
             // colsek2
             // 
@@ -1165,7 +1169,7 @@ namespace SewingProduction.Forms
             colsek2.Name = "colsek2";
             colsek2.Visible = true;
             colsek2.VisibleIndex = 4;
-            colsek2.Width = 71;
+            colsek2.Width = 69;
             // 
             // gridColumn34
             // 
@@ -1174,8 +1178,8 @@ namespace SewingProduction.Forms
             gridColumn34.MinWidth = 23;
             gridColumn34.Name = "gridColumn34";
             gridColumn34.Visible = true;
-            gridColumn34.VisibleIndex = 7;
-            gridColumn34.Width = 87;
+            gridColumn34.VisibleIndex = 5;
+            gridColumn34.Width = 85;
             // 
             // gridColumn33
             // 
@@ -1184,8 +1188,8 @@ namespace SewingProduction.Forms
             gridColumn33.MinWidth = 23;
             gridColumn33.Name = "gridColumn33";
             gridColumn33.Visible = true;
-            gridColumn33.VisibleIndex = 8;
-            gridColumn33.Width = 87;
+            gridColumn33.VisibleIndex = 6;
+            gridColumn33.Width = 90;
             // 
             // gridColumn32
             // 
@@ -1193,9 +1197,7 @@ namespace SewingProduction.Forms
             gridColumn32.FieldName = "kod_o";
             gridColumn32.MinWidth = 23;
             gridColumn32.Name = "gridColumn32";
-            gridColumn32.Visible = true;
-            gridColumn32.VisibleIndex = 6;
-            gridColumn32.Width = 87;
+            gridColumn32.Width = 85;
             // 
             // gridColumn31
             // 
@@ -1203,9 +1205,7 @@ namespace SewingProduction.Forms
             gridColumn31.FieldName = "Kod";
             gridColumn31.MinWidth = 23;
             gridColumn31.Name = "gridColumn31";
-            gridColumn31.Visible = true;
-            gridColumn31.VisibleIndex = 5;
-            gridColumn31.Width = 87;
+            gridColumn31.Width = 85;
             // 
             // colannId4
             // 
@@ -1219,7 +1219,7 @@ namespace SewingProduction.Forms
             customLabel8.AutoSize = true;
             customLabel8.Font = new System.Drawing.Font("Arial", 10F);
             customLabel8.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel8.Location = new System.Drawing.Point(332, 664);
+            customLabel8.Location = new System.Drawing.Point(332, 791);
             customLabel8.Margin = new Padding(4, 0, 4, 0);
             customLabel8.Name = "customLabel8";
             customLabel8.Size = new System.Drawing.Size(231, 16);
@@ -1232,7 +1232,7 @@ namespace SewingProduction.Forms
             label8.BackColor = System.Drawing.Color.Transparent;
             label8.Font = new System.Drawing.Font("Arial", 10F);
             label8.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label8.Location = new System.Drawing.Point(4, 664);
+            label8.Location = new System.Drawing.Point(4, 791);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             label8.Size = new System.Drawing.Size(149, 16);
@@ -1243,22 +1243,22 @@ namespace SewingProduction.Forms
             // 
             commentRichTextBox.Dock = DockStyle.Fill;
             commentRichTextBox.Enabled = false;
-            commentRichTextBox.Location = new System.Drawing.Point(4, 699);
+            commentRichTextBox.Location = new System.Drawing.Point(4, 821);
             commentRichTextBox.Margin = new Padding(4, 3, 4, 3);
             commentRichTextBox.Name = "commentRichTextBox";
             tableLayoutPanel1.SetRowSpan(commentRichTextBox, 2);
-            commentRichTextBox.Size = new System.Drawing.Size(320, 232);
+            commentRichTextBox.Size = new System.Drawing.Size(320, 110);
             commentRichTextBox.TabIndex = 5;
             commentRichTextBox.Text = "";
             // 
             // RecoRichTextBox
             // 
             RecoRichTextBox.Dock = DockStyle.Fill;
-            RecoRichTextBox.Location = new System.Drawing.Point(332, 699);
+            RecoRichTextBox.Location = new System.Drawing.Point(332, 821);
             RecoRichTextBox.Margin = new Padding(4, 3, 4, 3);
             RecoRichTextBox.Name = "RecoRichTextBox";
             tableLayoutPanel1.SetRowSpan(RecoRichTextBox, 2);
-            RecoRichTextBox.Size = new System.Drawing.Size(355, 232);
+            RecoRichTextBox.Size = new System.Drawing.Size(375, 110);
             RecoRichTextBox.TabIndex = 10;
             RecoRichTextBox.Text = "";
             // 
@@ -1273,10 +1273,10 @@ namespace SewingProduction.Forms
             tableLayoutPanel5.Margin = new Padding(4, 3, 4, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 3;
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 16.45885F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 16.70823F));
-            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 58.0540543F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(233, 925);
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Absolute, 2F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 22.3484726F));
+            tableLayoutPanel5.RowStyles.Add(new RowStyle(SizeType.Percent, 77.65153F));
+            tableLayoutPanel5.Size = new System.Drawing.Size(184, 925);
             tableLayoutPanel5.TabIndex = 20;
             // 
             // tableLayoutPanel4
@@ -1292,7 +1292,7 @@ namespace SewingProduction.Forms
             tableLayoutPanel4.Controls.Add(PrintButton, 0, 5);
             tableLayoutPanel4.Controls.Add(customSimpleButton1, 0, 3);
             tableLayoutPanel4.Dock = DockStyle.Fill;
-            tableLayoutPanel4.Location = new System.Drawing.Point(4, 338);
+            tableLayoutPanel4.Location = new System.Drawing.Point(4, 211);
             tableLayoutPanel4.Margin = new Padding(4, 3, 4, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 10;
@@ -1307,7 +1307,7 @@ namespace SewingProduction.Forms
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 129F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 8F));
             tableLayoutPanel4.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(225, 584);
+            tableLayoutPanel4.Size = new System.Drawing.Size(176, 711);
             tableLayoutPanel4.TabIndex = 21;
             // 
             // ButtonEditWd
@@ -1320,7 +1320,7 @@ namespace SewingProduction.Forms
             ButtonEditWd.Location = new System.Drawing.Point(4, 3);
             ButtonEditWd.Margin = new Padding(4, 3, 4, 3);
             ButtonEditWd.Name = "ButtonEditWd";
-            ButtonEditWd.Size = new System.Drawing.Size(217, 35);
+            ButtonEditWd.Size = new System.Drawing.Size(168, 35);
             ButtonEditWd.TabIndex = 4;
             ButtonEditWd.Text = "редактировать РТ";
             ButtonEditWd.UseVisualStyleBackColor = false;
@@ -1336,7 +1336,7 @@ namespace SewingProduction.Forms
             ButtonArchAndCopyWd.Location = new System.Drawing.Point(4, 44);
             ButtonArchAndCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
-            ButtonArchAndCopyWd.Size = new System.Drawing.Size(217, 35);
+            ButtonArchAndCopyWd.Size = new System.Drawing.Size(168, 35);
             ButtonArchAndCopyWd.TabIndex = 14;
             ButtonArchAndCopyWd.Text = "архив+копия";
             ButtonArchAndCopyWd.UseVisualStyleBackColor = false;
@@ -1352,7 +1352,7 @@ namespace SewingProduction.Forms
             buffer.Margin = new Padding(4, 3, 4, 3);
             buffer.Multiline = true;
             buffer.Name = "buffer";
-            buffer.Size = new System.Drawing.Size(217, 92);
+            buffer.Size = new System.Drawing.Size(168, 92);
             buffer.TabIndex = 20;
             // 
             // ButtonCopyWd
@@ -1363,7 +1363,7 @@ namespace SewingProduction.Forms
             ButtonCopyWd.Location = new System.Drawing.Point(4, 399);
             ButtonCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonCopyWd.Name = "ButtonCopyWd";
-            ButtonCopyWd.Size = new System.Drawing.Size(217, 38);
+            ButtonCopyWd.Size = new System.Drawing.Size(168, 38);
             ButtonCopyWd.TabIndex = 19;
             ButtonCopyWd.Text = "копировать РТ";
             ButtonCopyWd.UseVisualStyleBackColor = false;
@@ -1379,32 +1379,24 @@ namespace SewingProduction.Forms
             panelControl7.Location = new System.Drawing.Point(4, 183);
             panelControl7.Margin = new Padding(4, 3, 4, 3);
             panelControl7.Name = "panelControl7";
-            panelControl7.Size = new System.Drawing.Size(217, 210);
+            panelControl7.Size = new System.Drawing.Size(168, 210);
             panelControl7.TabIndex = 22;
             // 
             // constructorTextBox
             // 
-            constructorTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            constructorTextBox.Enabled = false;
-            constructorTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            constructorTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            constructorTextBox.Location = new System.Drawing.Point(4, 103);
-            constructorTextBox.Margin = new Padding(4, 3, 4, 3);
+            constructorTextBox.Location = new System.Drawing.Point(7, 99);
             constructorTextBox.Name = "constructorTextBox";
-            constructorTextBox.Size = new System.Drawing.Size(213, 23);
-            constructorTextBox.TabIndex = 13;
+            constructorTextBox.Size = new System.Drawing.Size(158, 39);
+            constructorTextBox.TabIndex = 15;
+            constructorTextBox.Text = "";
             // 
             // designerTextBox
             // 
-            designerTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            designerTextBox.Enabled = false;
-            designerTextBox.Font = new System.Drawing.Font("Arial", 10F);
-            designerTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            designerTextBox.Location = new System.Drawing.Point(4, 41);
-            designerTextBox.Margin = new Padding(4, 3, 4, 3);
+            designerTextBox.Location = new System.Drawing.Point(6, 38);
             designerTextBox.Name = "designerTextBox";
-            designerTextBox.Size = new System.Drawing.Size(213, 23);
-            designerTextBox.TabIndex = 12;
+            designerTextBox.Size = new System.Drawing.Size(157, 39);
+            designerTextBox.TabIndex = 14;
+            designerTextBox.Text = "";
             // 
             // label6
             // 
@@ -1456,7 +1448,7 @@ namespace SewingProduction.Forms
             ButtonPreliminaryWd.Location = new System.Drawing.Point(4, 116);
             ButtonPreliminaryWd.Margin = new Padding(4, 3, 4, 3);
             ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
-            ButtonPreliminaryWd.Size = new System.Drawing.Size(217, 28);
+            ButtonPreliminaryWd.Size = new System.Drawing.Size(168, 28);
             ButtonPreliminaryWd.TabIndex = 15;
             ButtonPreliminaryWd.Text = "создать предварительное ";
             ButtonPreliminaryWd.UseVisualStyleBackColor = false;
@@ -1477,7 +1469,7 @@ namespace SewingProduction.Forms
             PrintButton.Location = new System.Drawing.Point(4, 150);
             PrintButton.Margin = new Padding(4, 3, 4, 3);
             PrintButton.Name = "PrintButton";
-            PrintButton.Size = new System.Drawing.Size(217, 27);
+            PrintButton.Size = new System.Drawing.Size(168, 27);
             PrintButton.TabIndex = 14;
             PrintButton.Text = "печать";
             PrintButton.Click += customSimpleButton1_Click;
@@ -1496,7 +1488,7 @@ namespace SewingProduction.Forms
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
             customSimpleButton1.Location = new System.Drawing.Point(3, 85);
             customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(215, 25);
+            customSimpleButton1.Size = new System.Drawing.Size(170, 25);
             customSimpleButton1.TabIndex = 23;
             customSimpleButton1.Text = "дубль";
             customSimpleButton1.Click += DuplicateWorkDivision_Click_Internal_Wrapper;
@@ -1509,10 +1501,10 @@ namespace SewingProduction.Forms
             panel5.Controls.Add(actualCheckBox);
             panel5.Controls.Add(preliminaryCheckBox);
             panel5.Dock = DockStyle.Fill;
-            panel5.Location = new System.Drawing.Point(4, 169);
+            panel5.Location = new System.Drawing.Point(4, 5);
             panel5.Margin = new Padding(4, 3, 4, 3);
             panel5.Name = "panel5";
-            panel5.Size = new System.Drawing.Size(225, 163);
+            panel5.Size = new System.Drawing.Size(176, 200);
             panel5.TabIndex = 12;
             // 
             // SortBox
@@ -1589,8 +1581,9 @@ namespace SewingProduction.Forms
             panel2.Location = new System.Drawing.Point(4, 3);
             panel2.Margin = new Padding(4, 3, 4, 3);
             panel2.Name = "panel2";
-            panel2.Size = new System.Drawing.Size(225, 145);
+            panel2.Size = new System.Drawing.Size(176, 1);
             panel2.TabIndex = 11;
+            panel2.Visible = false;
             // 
             // customLabel3
             // 
@@ -1609,14 +1602,15 @@ namespace SewingProduction.Forms
             searchControl1.Location = new System.Drawing.Point(4, 3);
             searchControl1.Margin = new Padding(4, 3, 4, 3);
             searchControl1.Name = "searchControl1";
-            searchControl1.Properties.AllowAutoApply = false;
             searchControl1.Properties.Buttons.AddRange(new EditorButton[] { new ClearButton(), new SearchButton(), new MRUButton() });
+            searchControl1.Properties.FindDelay = 100;
             searchControl1.Properties.ShowDefaultButtonsMode = ShowDefaultButtonsMode.AutoShowClear;
             searchControl1.Properties.ShowMRUButton = true;
             searchControl1.Properties.QueryIsSearchColumn += searchControl1_QueryIsSearchColumn;
             searchControl1.Properties.ButtonClick += SearchButton_Click;
-            searchControl1.Size = new System.Drawing.Size(223, 20);
+            searchControl1.Size = new System.Drawing.Size(213, 20);
             searchControl1.TabIndex = 6;
+            searchControl1.KeyDown += searchControl1_KeyDown;
             // 
             // customButton12
             // 
@@ -1776,10 +1770,10 @@ namespace SewingProduction.Forms
             // customGridControl2
             // 
             customGridControl2.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControl2.Location = new System.Drawing.Point(546, 544);
+            customGridControl2.Location = new System.Drawing.Point(546, 535);
             customGridControl2.MainView = gridView3;
             customGridControl2.Name = "customGridControl2";
-            customGridControl2.Size = new System.Drawing.Size(711, 319);
+            customGridControl2.Size = new System.Drawing.Size(711, 328);
             customGridControl2.TabIndex = 10;
             customGridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
@@ -1794,10 +1788,10 @@ namespace SewingProduction.Forms
             // customGridControl1
             // 
             customGridControl1.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControl1.Location = new System.Drawing.Point(546, 544);
+            customGridControl1.Location = new System.Drawing.Point(546, 535);
             customGridControl1.MainView = gridView2;
             customGridControl1.Name = "customGridControl1";
-            customGridControl1.Size = new System.Drawing.Size(711, 319);
+            customGridControl1.Size = new System.Drawing.Size(711, 328);
             customGridControl1.TabIndex = 9;
             customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
@@ -1821,10 +1815,10 @@ namespace SewingProduction.Forms
             // 
             // pictureBox2
             // 
-            pictureBox2.Location = new System.Drawing.Point(1283, 509);
+            pictureBox2.Location = new System.Drawing.Point(1283, 500);
             pictureBox2.Margin = new Padding(4, 3, 4, 3);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new System.Drawing.Size(444, 366);
+            pictureBox2.Size = new System.Drawing.Size(444, 375);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -1916,7 +1910,7 @@ namespace SewingProduction.Forms
             // 
             gridControlNZP.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlNZP.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlNZP.Location = new System.Drawing.Point(942, 391);
+            gridControlNZP.Location = new System.Drawing.Point(942, 382);
             gridControlNZP.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             gridControlNZP.LookAndFeel.UseDefaultLookAndFeel = false;
             gridControlNZP.MainView = gridViewNZP;
@@ -2024,7 +2018,7 @@ namespace SewingProduction.Forms
             ButtonUnboundWd.AppearanceDisabled.BorderColor = System.Drawing.Color.Gray;
             ButtonUnboundWd.AppearanceDisabled.Options.UseBackColor = true;
             ButtonUnboundWd.AppearanceDisabled.Options.UseBorderColor = true;
-            ButtonUnboundWd.Location = new System.Drawing.Point(666, 401);
+            ButtonUnboundWd.Location = new System.Drawing.Point(666, 392);
             ButtonUnboundWd.Margin = new Padding(4, 3, 4, 3);
             ButtonUnboundWd.Name = "ButtonUnboundWd";
             ButtonUnboundWd.Size = new System.Drawing.Size(88, 36);
@@ -2037,7 +2031,7 @@ namespace SewingProduction.Forms
             // 
             loadAllCheckBox.Font = new System.Drawing.Font("Arial", 10F);
             loadAllCheckBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            loadAllCheckBox.Location = new System.Drawing.Point(522, 59);
+            loadAllCheckBox.Location = new System.Drawing.Point(522, 45);
             loadAllCheckBox.Margin = new Padding(4, 3, 4, 3);
             loadAllCheckBox.Name = "loadAllCheckBox";
             loadAllCheckBox.Size = new System.Drawing.Size(1217, 20);
@@ -2051,7 +2045,7 @@ namespace SewingProduction.Forms
             simpleButton1.BackgroundImageLayout = ImageLayout.None;
             simpleButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButton1.ImageOptions.Image");
             simpleButton1.ImageOptions.Location = ImageLocation.MiddleCenter;
-            simpleButton1.Location = new System.Drawing.Point(541, 401);
+            simpleButton1.Location = new System.Drawing.Point(541, 392);
             simpleButton1.Margin = new Padding(4, 3, 4, 3);
             simpleButton1.Name = "simpleButton1";
             simpleButton1.Size = new System.Drawing.Size(100, 36);
@@ -2064,12 +2058,12 @@ namespace SewingProduction.Forms
             // 
             customGridControl3.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             customGridControl3.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControl3.Location = new System.Drawing.Point(546, 544);
+            customGridControl3.Location = new System.Drawing.Point(546, 535);
             customGridControl3.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             customGridControl3.MainView = gridView6;
             customGridControl3.Margin = new Padding(4, 3, 4, 3);
             customGridControl3.Name = "customGridControl3";
-            customGridControl3.Size = new System.Drawing.Size(711, 319);
+            customGridControl3.Size = new System.Drawing.Size(711, 328);
             customGridControl3.TabIndex = 8;
             customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
             customGridControl3.Click += ResetButton_Click;
@@ -2137,13 +2131,13 @@ namespace SewingProduction.Forms
             // 
             gridControl_wdToBind.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControl_wdToBind.Font = new System.Drawing.Font("Arial", 10F);
-            gridControl_wdToBind.Location = new System.Drawing.Point(522, 83);
+            gridControl_wdToBind.Location = new System.Drawing.Point(522, 69);
             gridControl_wdToBind.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             gridControl_wdToBind.MainView = gridView_wdToBind;
             gridControl_wdToBind.Margin = new Padding(0);
             gridControl_wdToBind.Name = "gridControl_wdToBind";
             gridControl_wdToBind.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit6, repositoryItemCheckEdit7 });
-            gridControl_wdToBind.Size = new System.Drawing.Size(1217, 293);
+            gridControl_wdToBind.Size = new System.Drawing.Size(1217, 298);
             gridControl_wdToBind.TabIndex = 4;
             gridControl_wdToBind.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_wdToBind });
             // 
@@ -2403,10 +2397,6 @@ namespace SewingProduction.Forms
             // 
             // layoutControlGroup2
             // 
-            buttonImageOptions1.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("buttonImageOptions1.SvgImage");
-            buttonImageOptions3.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("buttonImageOptions3.SvgImage");
-            buttonImageOptions5.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("buttonImageOptions5.SvgImage");
-            buttonImageOptions7.SvgImage = (DevExpress.Utils.Svg.SvgImage)resources.GetObject("buttonImageOptions7.SvgImage");
             toolTipItem1.Text = "Создаёт разделение труда на основе выбранного артикула, сразу заполняя Группу, Модель и Артикул. Открывает окно редактирования, где можно добавить схему разделения";
             superToolTip1.Items.Add(toolTipItem1);
             layoutControlGroup2.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Добавить", true, buttonImageOptions1, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "Добавить новое пустое разделение труда", -1, true, null, true, false, true, "btnAdd", -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, false, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Редактировать", true, buttonImageOptions3, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "Редактировать выбранное РТ", -1, true, null, true, false, true, "btnEdit", -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions4, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, false, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Архив+копия", true, buttonImageOptions5, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "Создать копию РТ и отправить базовое РТ в архив", -1, true, null, true, false, true, "btnArch", -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("|", true, buttonImageOptions6, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, false, null, true, false, true, null, -1), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Создать из артикула", true, buttonImageOptions7, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "Создать РТ на основе выбранного артикула", -1, true, superToolTip1, true, false, true, "btnArt", -1) });
@@ -2424,13 +2414,13 @@ namespace SewingProduction.Forms
             layoutControlItem3.Control = gridControl_wdToBind;
             layoutControlItem3.Location = new System.Drawing.Point(0, 24);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(1221, 297);
+            layoutControlItem3.Size = new System.Drawing.Size(1221, 302);
             layoutControlItem3.TextVisible = false;
             // 
             // layoutControlItem5
             // 
             layoutControlItem5.Control = simpleButton1;
-            layoutControlItem5.Location = new System.Drawing.Point(19, 342);
+            layoutControlItem5.Location = new System.Drawing.Point(19, 347);
             layoutControlItem5.Name = "layoutControlItem5";
             layoutControlItem5.Size = new System.Drawing.Size(104, 40);
             layoutControlItem5.TextVisible = false;
@@ -2446,23 +2436,23 @@ namespace SewingProduction.Forms
             // layoutControlGroup3
             // 
             layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { splitterItem2, layoutControlItem14, tabbedControlGroup1 });
-            layoutControlGroup3.Location = new System.Drawing.Point(0, 417);
+            layoutControlGroup3.Location = new System.Drawing.Point(0, 422);
             layoutControlGroup3.Name = "layoutControlGroup3";
-            layoutControlGroup3.Size = new System.Drawing.Size(1221, 415);
+            layoutControlGroup3.Size = new System.Drawing.Size(1221, 424);
             layoutControlGroup3.Text = "Схема РТ";
             // 
             // splitterItem2
             // 
             splitterItem2.Location = new System.Drawing.Point(739, 0);
             splitterItem2.Name = "splitterItem2";
-            splitterItem2.Size = new System.Drawing.Size(10, 370);
+            splitterItem2.Size = new System.Drawing.Size(10, 379);
             // 
             // layoutControlItem14
             // 
             layoutControlItem14.Control = pictureBox2;
             layoutControlItem14.Location = new System.Drawing.Point(749, 0);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new System.Drawing.Size(448, 370);
+            layoutControlItem14.Size = new System.Drawing.Size(448, 379);
             layoutControlItem14.TextVisible = false;
             // 
             // tabbedControlGroup1
@@ -2470,7 +2460,7 @@ namespace SewingProduction.Forms
             tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             tabbedControlGroup1.Name = "tabbedControlGroup1";
             tabbedControlGroup1.SelectedTabPage = layoutControlGroup1;
-            tabbedControlGroup1.Size = new System.Drawing.Size(739, 370);
+            tabbedControlGroup1.Size = new System.Drawing.Size(739, 379);
             tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, layoutControlGroup4, layoutControlGroup5 });
             // 
             // layoutControlGroup1
@@ -2479,7 +2469,7 @@ namespace SewingProduction.Forms
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem4 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(715, 323);
+            layoutControlGroup1.Size = new System.Drawing.Size(715, 332);
             layoutControlGroup1.Text = "Пошив";
             // 
             // layoutControlItem4
@@ -2487,7 +2477,7 @@ namespace SewingProduction.Forms
             layoutControlItem4.Control = customGridControl3;
             layoutControlItem4.Location = new System.Drawing.Point(0, 0);
             layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(715, 323);
+            layoutControlItem4.Size = new System.Drawing.Size(715, 332);
             layoutControlItem4.Text = "Пошив";
             layoutControlItem4.TextVisible = false;
             // 
@@ -2496,7 +2486,7 @@ namespace SewingProduction.Forms
             layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem8 });
             layoutControlGroup4.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup4.Name = "layoutControlGroup4";
-            layoutControlGroup4.Size = new System.Drawing.Size(715, 323);
+            layoutControlGroup4.Size = new System.Drawing.Size(715, 332);
             layoutControlGroup4.Text = "Раскрой";
             // 
             // layoutControlItem8
@@ -2504,7 +2494,7 @@ namespace SewingProduction.Forms
             layoutControlItem8.Control = customGridControl2;
             layoutControlItem8.Location = new System.Drawing.Point(0, 0);
             layoutControlItem8.Name = "layoutControlItem8";
-            layoutControlItem8.Size = new System.Drawing.Size(715, 323);
+            layoutControlItem8.Size = new System.Drawing.Size(715, 332);
             layoutControlItem8.TextVisible = false;
             // 
             // layoutControlGroup5
@@ -2512,7 +2502,7 @@ namespace SewingProduction.Forms
             layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
             layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new System.Drawing.Size(715, 323);
+            layoutControlGroup5.Size = new System.Drawing.Size(715, 332);
             layoutControlGroup5.Text = "Комплектовка";
             // 
             // layoutControlItem1
@@ -2520,20 +2510,20 @@ namespace SewingProduction.Forms
             layoutControlItem1.Control = customGridControl1;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(715, 323);
+            layoutControlItem1.Size = new System.Drawing.Size(715, 332);
             layoutControlItem1.TextVisible = false;
             // 
             // layoutControlItem11
             // 
             layoutControlItem11.Control = gridControlNZP;
-            layoutControlItem11.Location = new System.Drawing.Point(420, 332);
+            layoutControlItem11.Location = new System.Drawing.Point(420, 337);
             layoutControlItem11.Name = "layoutControlItem11";
             layoutControlItem11.Size = new System.Drawing.Size(801, 74);
             layoutControlItem11.TextVisible = false;
             // 
             // emptySpaceItem2
             // 
-            emptySpaceItem2.Location = new System.Drawing.Point(123, 332);
+            emptySpaceItem2.Location = new System.Drawing.Point(123, 337);
             emptySpaceItem2.MaxSize = new System.Drawing.Size(21, 74);
             emptySpaceItem2.MinSize = new System.Drawing.Size(21, 74);
             emptySpaceItem2.Name = "emptySpaceItem2";
@@ -2543,7 +2533,7 @@ namespace SewingProduction.Forms
             // layoutControlItem6
             // 
             layoutControlItem6.Control = ButtonUnboundWd;
-            layoutControlItem6.Location = new System.Drawing.Point(144, 342);
+            layoutControlItem6.Location = new System.Drawing.Point(144, 347);
             layoutControlItem6.MinSize = new System.Drawing.Size(60, 26);
             layoutControlItem6.Name = "layoutControlItem6";
             layoutControlItem6.Size = new System.Drawing.Size(92, 40);
@@ -2552,13 +2542,13 @@ namespace SewingProduction.Forms
             // 
             // emptySpaceItem3
             // 
-            emptySpaceItem3.Location = new System.Drawing.Point(236, 332);
+            emptySpaceItem3.Location = new System.Drawing.Point(236, 337);
             emptySpaceItem3.Name = "emptySpaceItem3";
             emptySpaceItem3.Size = new System.Drawing.Size(184, 74);
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(144, 382);
+            emptySpaceItem1.Location = new System.Drawing.Point(144, 387);
             emptySpaceItem1.MaxSize = new System.Drawing.Size(92, 24);
             emptySpaceItem1.MinSize = new System.Drawing.Size(92, 24);
             emptySpaceItem1.Name = "emptySpaceItem1";
@@ -2567,7 +2557,7 @@ namespace SewingProduction.Forms
             // 
             // emptySpaceItem4
             // 
-            emptySpaceItem4.Location = new System.Drawing.Point(19, 382);
+            emptySpaceItem4.Location = new System.Drawing.Point(19, 387);
             emptySpaceItem4.MaxSize = new System.Drawing.Size(104, 24);
             emptySpaceItem4.MinSize = new System.Drawing.Size(104, 24);
             emptySpaceItem4.Name = "emptySpaceItem4";
@@ -2576,7 +2566,7 @@ namespace SewingProduction.Forms
             // 
             // emptySpaceItem6
             // 
-            emptySpaceItem6.Location = new System.Drawing.Point(144, 332);
+            emptySpaceItem6.Location = new System.Drawing.Point(144, 337);
             emptySpaceItem6.MaxSize = new System.Drawing.Size(92, 10);
             emptySpaceItem6.MinSize = new System.Drawing.Size(92, 10);
             emptySpaceItem6.Name = "emptySpaceItem6";
@@ -2585,7 +2575,7 @@ namespace SewingProduction.Forms
             // 
             // emptySpaceItem8
             // 
-            emptySpaceItem8.Location = new System.Drawing.Point(19, 332);
+            emptySpaceItem8.Location = new System.Drawing.Point(19, 337);
             emptySpaceItem8.MaxSize = new System.Drawing.Size(104, 10);
             emptySpaceItem8.MinSize = new System.Drawing.Size(104, 10);
             emptySpaceItem8.Name = "emptySpaceItem8";
@@ -2594,7 +2584,7 @@ namespace SewingProduction.Forms
             // 
             // emptySpaceItem9
             // 
-            emptySpaceItem9.Location = new System.Drawing.Point(0, 332);
+            emptySpaceItem9.Location = new System.Drawing.Point(0, 337);
             emptySpaceItem9.MaxSize = new System.Drawing.Size(19, 74);
             emptySpaceItem9.MinSize = new System.Drawing.Size(19, 74);
             emptySpaceItem9.Name = "emptySpaceItem9";
@@ -2603,25 +2593,25 @@ namespace SewingProduction.Forms
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(0, 416);
+            simpleSeparator1.Location = new System.Drawing.Point(0, 421);
             simpleSeparator1.Name = "simpleSeparator1";
             simpleSeparator1.Size = new System.Drawing.Size(1221, 1);
             // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new System.Drawing.Point(0, 331);
+            simpleSeparator2.Location = new System.Drawing.Point(0, 336);
             simpleSeparator2.Name = "simpleSeparator2";
             simpleSeparator2.Size = new System.Drawing.Size(1221, 1);
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new System.Drawing.Point(0, 406);
+            splitterItem1.Location = new System.Drawing.Point(0, 411);
             splitterItem1.Name = "splitterItem1";
             splitterItem1.Size = new System.Drawing.Size(1221, 10);
             // 
             // splitterItem3
             // 
-            splitterItem3.Location = new System.Drawing.Point(0, 321);
+            splitterItem3.Location = new System.Drawing.Point(0, 326);
             splitterItem3.Name = "splitterItem3";
             splitterItem3.Size = new System.Drawing.Size(1221, 10);
             // 
@@ -2902,7 +2892,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditPodr).EndInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridControl).EndInit();
             ((System.ComponentModel.ISupportInitialize)ANNgridView).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit3).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit2).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskrTW).EndInit();
@@ -3242,8 +3232,6 @@ namespace SewingProduction.Forms
         private ErrorProvider errorProvider1;
         private BindingSource desBindingSource;
         private BindingSource constrBindingSource;
-        private CustomTextBox constructorTextBox;
-        private CustomTextBox designerTextBox;
         private CustomGridControl gridControl_wdToBind;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView_wdToBind;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn12;
@@ -3418,6 +3406,8 @@ namespace SewingProduction.Forms
             await DuplicateWorkDivision_Click_Internal(sender, e);
         }
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
-        private RepositoryItemCheckEdit repositoryItemCheckEdit8;
+        private RepositoryItemButtonEdit repositoryItemButtonEdit3;
+        private RichTextBox constructorTextBox;
+        private RichTextBox designerTextBox;
     }
 }

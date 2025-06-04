@@ -375,7 +375,7 @@ namespace SewingProduction.form
             gridColumn15.MinWidth = 23;
             gridColumn15.Name = "gridColumn15";
             gridColumn15.Visible = true;
-            gridColumn15.VisibleIndex = 5;
+            gridColumn15.VisibleIndex = 4;
             gridColumn15.Width = 146;
             // 
             // colspec
@@ -385,7 +385,7 @@ namespace SewingProduction.form
             colspec.MinWidth = 23;
             colspec.Name = "colspec";
             colspec.Visible = true;
-            colspec.VisibleIndex = 7;
+            colspec.VisibleIndex = 5;
             colspec.Width = 146;
             // 
             // gridColumn16
@@ -395,7 +395,7 @@ namespace SewingProduction.form
             gridColumn16.MinWidth = 23;
             gridColumn16.Name = "gridColumn16";
             gridColumn16.Visible = true;
-            gridColumn16.VisibleIndex = 8;
+            gridColumn16.VisibleIndex = 6;
             gridColumn16.Width = 146;
             // 
             // colkod1
@@ -405,7 +405,7 @@ namespace SewingProduction.form
             colkod1.MinWidth = 23;
             colkod1.Name = "colkod1";
             colkod1.Visible = true;
-            colkod1.VisibleIndex = 9;
+            colkod1.VisibleIndex = 7;
             colkod1.Width = 168;
             // 
             // gridColumn12
@@ -413,8 +413,6 @@ namespace SewingProduction.form
             gridColumn12.FieldName = "N";
             gridColumn12.MinWidth = 23;
             gridColumn12.Name = "gridColumn12";
-            gridColumn12.Visible = true;
-            gridColumn12.VisibleIndex = 4;
             gridColumn12.Width = 146;
             // 
             // coln_ch
@@ -422,8 +420,6 @@ namespace SewingProduction.form
             coln_ch.FieldName = "n_ch";
             coln_ch.MinWidth = 23;
             coln_ch.Name = "coln_ch";
-            coln_ch.Visible = true;
-            coln_ch.VisibleIndex = 6;
             coln_ch.Width = 146;
             // 
             // colannId1

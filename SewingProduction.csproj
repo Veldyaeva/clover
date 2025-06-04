@@ -7,6 +7,7 @@
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ApplicationIcon>Resources\favicon_io (1)\favicon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -24,6 +25,10 @@
   <ItemGroup>
     <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
     <EmbeddedResource Remove="Report\PostReportFio.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\favicon_io (1)\favicon.ico" />
   </ItemGroup>
 
 
