@@ -559,11 +559,13 @@ namespace SewingProduction.form
             // gridColumn38
             // 
             gridColumn38.Caption = "оборудование";
-            gridColumn38.FieldName = "KodOb";
+            gridColumn38.FieldName = "Obor";
             gridColumn38.MinWidth = 23;
             gridColumn38.Name = "gridColumn38";
             gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn38.OptionsEditForm.VisibleIndex = 4;
+            gridColumn38.Visible = true;
+            gridColumn38.VisibleIndex = 11;
             gridColumn38.Width = 158;
             // 
             // gridColumn30
@@ -965,14 +967,13 @@ namespace SewingProduction.form
             tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 1);
             tableLayoutPanel3.Controls.Add(statusLabel, 1, 0);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
-            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel3.Size = new System.Drawing.Size(1509, 869);
+            tableLayoutPanel3.Size = new System.Drawing.Size(1020, 543);
             tableLayoutPanel3.TabIndex = 4;
             // 
             // statusLabel
