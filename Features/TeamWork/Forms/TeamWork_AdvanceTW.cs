@@ -415,7 +415,7 @@ namespace SewingProduction.form
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT ko_ob_all as kod_ob, text_ob FROM oborud_shv_ob", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
 
                 repositoryItemLookUpEdit_kod_proizv.DataSource = kodProizvList;
                 repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
