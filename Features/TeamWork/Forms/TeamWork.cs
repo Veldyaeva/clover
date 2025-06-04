@@ -1,7 +1,9 @@
 ﻿using DevExpress.ChartRangeControlClient.Core;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonPanel;
+using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.form;
@@ -253,6 +255,35 @@ namespace SewingProduction.Forms
         { customButton12_Click_Internal(sender, e); }
         private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
         { customCheckBox4_CheckedChanged_Internal(sender, e); }
+
+        private void searchControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                SearchControl searchControl = sender as SearchControl;
+                if (searchControl != null)
+                {
+                    // Simulate a click on the search button.
+                    // We need to find the actual search button in the SearchControl's buttons collection.
+                    EditorButton searchButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind == ButtonPredefines.Search);// || b.IsDefault);
+                    if (searchButton != null)
+                    {
+                        SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(searchButton));
+                    }
+                    else
+                    {
+                        // Fallback if a specific search button isn't found, try with a general non-clear button.
+                        EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
+                        if (firstNonClearButton != null) 
+                        {
+                             SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
+                        }
+                    }
+                }
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
 
         private async void simpleButton2_Click(object sender, EventArgs e)
         { simpleButton2_Click_Internal(sender, e); }
