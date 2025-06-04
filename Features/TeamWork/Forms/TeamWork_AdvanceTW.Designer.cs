@@ -443,7 +443,7 @@ namespace SewingProduction.form
             // 
             // gridViewRasz
             // 
-            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn30, gridColumn31, gridColumn4, Kod_podr, KodOb, gridColumn5, gridColumn6, gridColumn7 });
+            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
             gridViewRasz.DetailHeight = 404;
             gridViewRasz.GridControl = gridControlRasz;
             gridViewRasz.Name = "gridViewRasz";
@@ -576,7 +576,7 @@ namespace SewingProduction.form
             gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.OptionsEditForm.VisibleIndex = 2;
             gridColumn30.Visible = true;
-            gridColumn30.VisibleIndex = 7;
+            gridColumn30.VisibleIndex = 10;
             gridColumn30.Width = 99;
             // 
             // gridColumn31
@@ -589,7 +589,7 @@ namespace SewingProduction.form
             gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn31.OptionsEditForm.VisibleIndex = 5;
             gridColumn31.Visible = true;
-            gridColumn31.VisibleIndex = 8;
+            gridColumn31.VisibleIndex = 9;
             gridColumn31.Width = 117;
             // 
             // gridColumn4
@@ -626,7 +626,7 @@ namespace SewingProduction.form
             Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             Kod_podr.OptionsEditForm.VisibleIndex = 4;
             Kod_podr.Visible = true;
-            Kod_podr.VisibleIndex = 9;
+            Kod_podr.VisibleIndex = 7;
             Kod_podr.Width = 186;
             // 
             // repositoryItemLookUpEdit_podrVyaz
@@ -649,7 +649,7 @@ namespace SewingProduction.form
             KodOb.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             KodOb.OptionsEditForm.VisibleIndex = 9;
             KodOb.Visible = true;
-            KodOb.VisibleIndex = 10;
+            KodOb.VisibleIndex = 8;
             KodOb.Width = 150;
             // 
             // repositoryItemLookUpEdit_oborudShv
@@ -726,6 +726,7 @@ namespace SewingProduction.form
             btnSave.Size = new System.Drawing.Size(85, 24);
             btnSave.TabIndex = 25;
             btnSave.Text = "Сохранить";
+            btnSave.Visible = false;
             btnSave.Click += btnSave_Click;
             // 
             // btnOK
