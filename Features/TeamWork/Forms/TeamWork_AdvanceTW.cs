@@ -286,12 +286,12 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
+                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 if (_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
-                    AttachDeleteContextMenu(gridViewRaskr, _normRaskList, r => r.id, _deletedNormRaskIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
@@ -1207,6 +1207,7 @@ namespace SewingProduction.form
             {
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
+                _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                     RecalculateSek();
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
