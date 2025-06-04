@@ -200,7 +200,24 @@ namespace SewingProduction.Forms
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
                 await LoadRelatedData(annId);
-
+                // Загрузка данных НЗП
+                if (_nzpListWd != null)
+                {
+                    _nzpListWd.Clear();
+                    if (annId > 0)
+                    {
+                        List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+                        if (nzpData != null)
+                        {
+                            foreach (var item in nzpData)
+                            {
+                                _nzpListWd.Add(item);
+                            }
+                        }
+                    }
+                    _nzpByKoddRtSourceWd?.ResetBindings(false);
+                    customGridControl4?.RefreshDataSource(); // Обновить грид НЗП
+                }
                 string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
 
                 if (!string.IsNullOrEmpty(kodString))
