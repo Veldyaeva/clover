@@ -403,6 +403,7 @@
             customSimpleButton1.Size = new System.Drawing.Size(288, 30);
             customSimpleButton1.TabIndex = 39;
             customSimpleButton1.Text = "Текущий загруз В/М";
+            customSimpleButton1.Click += customSimpleButton1_Click;
             // 
             // tableLayoutPanel2
             // 
