@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 
 namespace SewingProduction.Features.KnittingProduction.Models
 {
@@ -100,4 +101,43 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int typevyazkm { get; set; }
         public string vidVyazKM { get; set; }
     }
+
+    public class KnitMachineLoadAllInfo
+    {
+        [NotMapped]
+        public string yearMonth { get; set; }
+        [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public string kmlID { get; set; }
+        [NotMapped]
+        public string combinedPszNom { get; set; }
+        [NotMapped]
+        public int monthNumber { get; set; }
+        [NotMapped]
+        public int yearNumber { get; set; }
+    }
+
+    public class PlanSezonZadKnitMachine
+    {
+        [NotMapped]
+        public int pszkmID { get; set; }
+        [NotMapped]
+        public string pszkmPszNom { get; set; }
+        [NotMapped]
+        public int pszkmKnitClass { get; set; }
+        [NotMapped]
+        public string pszkmKmlID { get; set; }
+        [NotMapped]
+        public decimal pszkmlSeconds { get; set; }
+        [NotMapped]
+        public DateTime? pszkmPlanDateFrom { get; set; }
+        [NotMapped]
+        public DateTime? pszkmPlanDateTo { get; set; }
+        [NotMapped]
+        public int secondsWorked { get; set; }
+        [NotMapped]
+        public DateTime? pszkmDateAdd { get; set; }
+    }
+
 }

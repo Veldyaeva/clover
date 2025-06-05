@@ -27,6 +27,8 @@ using DevExpress.XtraGrid.Columns;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Core.Services;
 using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Models;
 
 namespace SewingProduction.form.Nadezhda
 {
@@ -651,35 +653,35 @@ namespace SewingProduction.form.Nadezhda
         {
             var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
             switch (selectedItem.pszkmID, selectedItem.KmlID)
-                {
-                    case (0, 0):  // Оба ID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+            {
+                case (0, 0):  // Оба ID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = true;
-                        break;
+                case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = true;
+                    break;
 
-                    case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
-                        selectedItem.IsNew = true;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
+                    selectedItem.IsNew = true;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, > 0):  // Оба ID > 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = true;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case ( > 0, > 0):  // Оба ID > 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = true;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    default:  // Все остальные случаи (например, отрицательные значения)
-                        Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
-                        break;
-                }
+                default:  // Все остальные случаи (например, отрицательные значения)
+                    Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+                    break;
+            }
         }
         private void SimpleButtonSaveVyazStatusUpdate()
         {
@@ -875,7 +877,7 @@ namespace SewingProduction.form.Nadezhda
                 MessageBox.Show("Внимание! Не выбрана В/М для привязки!");
                 return;
             }
-            
+
             foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
             {
                 var selectedMachine = _knitMachineListBindingSource.Current as KnitMachineList;
@@ -920,6 +922,43 @@ namespace SewingProduction.form.Nadezhda
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
             SimpleButtonSaveVyazStatusUpdate();
+        }
+
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            //KnittingMachinesLoading knittingMachinesLoading = new KnittingMachinesLoading();
+            //knittingMachinesLoading.MdiParent = this;
+            //knittingMachinesLoading.Show();
+
+
+            //KnittingMachinesLoading FDI = new KnittingMachinesLoading();
+            //DialogResult result = FDI.ShowDialog();
+
+            int xIDVyazClass = 0;
+            var selectedRow = _vyazPlanViewBindingSource.Current as VyazPlanView;
+            if (selectedRow != null && selectedRow.IDVyazClass != 0)
+            {
+                xIDVyazClass = selectedRow.IDVyazClass;
+            }
+            else
+            {
+                xIDVyazClass = -1;
+            }
+            KnittingMachinesLoading FDI = new KnittingMachinesLoading(xIDVyazClass);
+
+            DialogResult result = FDI.ShowDialog();
+            // Обработка результата, возвращенного модальной формой
+            if (result == DialogResult.OK)
+            {
+                // Действия при успешном завершении работы модальной формы
+                //MessageBox.Show("OK");
+            }
+            else
+            {
+                // Действия при отмене или другом результате
+                //MessageBox.Show("Cancel");
+            }
+
         }
     }
 }
