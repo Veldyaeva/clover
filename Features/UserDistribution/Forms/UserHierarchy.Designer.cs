@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.form.UserDistribution
 {
-    partial class UsersHierarchy
+    partial class UserHierarchy
     {
         /// <summary>
         /// Required designer variable.

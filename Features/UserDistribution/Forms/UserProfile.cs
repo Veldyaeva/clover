@@ -82,14 +82,14 @@ namespace SewingProduction.form.UserDistribution
         {
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new UsersHierarchy(_user));
+                mainForm.OpenForm(new UserHierarchy(_user));
             }
         }
         private void customButtonAdminSprav_Click(object sender, EventArgs e)
         {
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AdminSprav(_user));
+                mainForm.OpenForm(new RoleColumn(_user));
             }
         }
         private void customButtonHistory_Click(object sender, EventArgs e)
