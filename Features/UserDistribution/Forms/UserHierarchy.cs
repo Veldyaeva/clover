@@ -19,14 +19,14 @@ using SewingProduction.Services;
 
 namespace SewingProduction.form.UserDistribution
 {
-    public partial class UsersHierarchy : CustomForm
+    public partial class UserHierarchy : CustomForm
     {
         private readonly AllProfileDataService _allProfileDataService;
         DatabaseHelper dbHelper = new DatabaseHelper("ace");
         private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
         private readonly UserClass _user;
         private List<UserClass> _userHierarchy;
-        public UsersHierarchy(UserClass user) : base(user)
+        public UserHierarchy(UserClass user) : base(user)
         {
             InitializeComponent();
             _allProfileDataService = new AllProfileDataService(dbHelper);

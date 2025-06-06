@@ -30,18 +30,28 @@
         {
             components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonOpen = new CustomButton();
             customGridControlColumn = new CustomGridControl();
             bindingSourceColumn = new System.Windows.Forms.BindingSource(components);
             gridViewColumn = new DevExpress.XtraGrid.Views.Grid.GridView();
+            id_acn = new DevExpress.XtraGrid.Columns.GridColumn();
+            id_atn = new DevExpress.XtraGrid.Columns.GridColumn();
+            ordinal_position = new DevExpress.XtraGrid.Columns.GridColumn();
+            name = new DevExpress.XtraGrid.Columns.GridColumn();
+            name_rus = new DevExpress.XtraGrid.Columns.GridColumn();
+            data_type = new DevExpress.XtraGrid.Columns.GridColumn();
+            Readonly = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlTable = new CustomGridControl();
             bindingSourceTable = new System.Windows.Forms.BindingSource(components);
             gridViewTable = new DevExpress.XtraGrid.Views.Grid.GridView();
             IdAtn = new DevExpress.XtraGrid.Columns.GridColumn();
             TableName = new DevExpress.XtraGrid.Columns.GridColumn();
             TableNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
+            customButtonAddTable = new CustomButton();
             customTextBoxAddTable = new CustomTextBox();
             customLabelAddTable = new CustomLabel();
-            customButtonAddTable = new CustomButton();
+            customButtonDeleteTable = new CustomButton();
+            customButtonDeleteColumn = new CustomButton();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlColumn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).BeginInit();
@@ -60,29 +70,51 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.Controls.Add(customGridControlColumn, 0, 5);
+            tableLayoutPanel1.Controls.Add(customButtonOpen, 4, 0);
+            tableLayoutPanel1.Controls.Add(customGridControlColumn, 0, 8);
             tableLayoutPanel1.Controls.Add(customGridControlTable, 0, 0);
-            tableLayoutPanel1.Controls.Add(customTextBoxAddTable, 4, 1);
-            tableLayoutPanel1.Controls.Add(customLabelAddTable, 4, 0);
-            tableLayoutPanel1.Controls.Add(customButtonAddTable, 4, 2);
+            tableLayoutPanel1.Controls.Add(customButtonAddTable, 4, 3);
+            tableLayoutPanel1.Controls.Add(customTextBoxAddTable, 4, 2);
+            tableLayoutPanel1.Controls.Add(customLabelAddTable, 4, 1);
+            tableLayoutPanel1.Controls.Add(customButtonDeleteTable, 4, 7);
+            tableLayoutPanel1.Controls.Add(customButtonDeleteColumn, 4, 15);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 10;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel1.RowCount = 16;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.24980545F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25293F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1264, 662);
             tableLayoutPanel1.TabIndex = 4;
+            // 
+            // customButtonOpen
+            // 
+            customButtonOpen.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            customButtonOpen.Location = new System.Drawing.Point(1011, 3);
+            customButtonOpen.Name = "customButtonOpen";
+            customButtonOpen.Size = new System.Drawing.Size(250, 35);
+            customButtonOpen.TabIndex = 6;
+            customButtonOpen.Text = "Открыть справочник";
+            customButtonOpen.UseVisualStyleBackColor = false;
+            customButtonOpen.Click += customButtonOpen_Click;
             // 
             // customGridControlColumn
             // 
@@ -90,11 +122,11 @@
             customGridControlColumn.DataSource = bindingSourceColumn;
             customGridControlColumn.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlColumn.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlColumn.Location = new System.Drawing.Point(3, 333);
+            customGridControlColumn.Location = new System.Drawing.Point(3, 331);
             customGridControlColumn.MainView = gridViewColumn;
             customGridControlColumn.Name = "customGridControlColumn";
-            tableLayoutPanel1.SetRowSpan(customGridControlColumn, 5);
-            customGridControlColumn.Size = new System.Drawing.Size(1002, 326);
+            tableLayoutPanel1.SetRowSpan(customGridControlColumn, 8);
+            customGridControlColumn.Size = new System.Drawing.Size(1002, 328);
             customGridControlColumn.TabIndex = 3;
             customGridControlColumn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewColumn });
             // 
@@ -102,9 +134,75 @@
             // 
             gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewColumn.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewColumn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly });
             gridViewColumn.GridControl = customGridControlColumn;
             gridViewColumn.Name = "gridViewColumn";
+            gridViewColumn.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewColumn.OptionsEditForm.EditFormColumnCount = 1;
             gridViewColumn.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewColumn.RowUpdated += gridViewColumn_RowUpdated;
+            // 
+            // id_acn
+            // 
+            id_acn.Caption = "Ид колонки";
+            id_acn.FieldName = "id_acn";
+            id_acn.Name = "id_acn";
+            id_acn.Visible = true;
+            id_acn.VisibleIndex = 0;
+            // 
+            // id_atn
+            // 
+            id_atn.Caption = "Ид таблицы";
+            id_atn.FieldName = "id_atn";
+            id_atn.Name = "id_atn";
+            id_atn.Visible = true;
+            id_atn.VisibleIndex = 1;
+            id_atn.Width = 77;
+            // 
+            // ordinal_position
+            // 
+            ordinal_position.Caption = "Позиция";
+            ordinal_position.FieldName = "ordinal_position";
+            ordinal_position.Name = "ordinal_position";
+            ordinal_position.Visible = true;
+            ordinal_position.VisibleIndex = 2;
+            ordinal_position.Width = 54;
+            // 
+            // name
+            // 
+            name.Caption = "Название столбца";
+            name.FieldName = "name";
+            name.Name = "name";
+            name.Visible = true;
+            name.VisibleIndex = 3;
+            name.Width = 241;
+            // 
+            // name_rus
+            // 
+            name_rus.Caption = "Русское название столбца";
+            name_rus.FieldName = "name_rus";
+            name_rus.Name = "name_rus";
+            name_rus.Visible = true;
+            name_rus.VisibleIndex = 4;
+            name_rus.Width = 317;
+            // 
+            // data_type
+            // 
+            data_type.Caption = "Тип данных";
+            data_type.FieldName = "data_type";
+            data_type.Name = "data_type";
+            data_type.Visible = true;
+            data_type.VisibleIndex = 5;
+            data_type.Width = 123;
+            // 
+            // Readonly
+            // 
+            Readonly.Caption = "Только чтение";
+            Readonly.FieldName = "Readonly";
+            Readonly.Name = "Readonly";
+            Readonly.Visible = true;
+            Readonly.VisibleIndex = 6;
+            Readonly.Width = 90;
             // 
             // customGridControlTable
             // 
@@ -115,12 +213,11 @@
             customGridControlTable.Location = new System.Drawing.Point(3, 3);
             customGridControlTable.MainView = gridViewTable;
             customGridControlTable.Name = "customGridControlTable";
-            tableLayoutPanel1.SetRowSpan(customGridControlTable, 5);
-            customGridControlTable.Size = new System.Drawing.Size(1002, 324);
+            tableLayoutPanel1.SetRowSpan(customGridControlTable, 8);
+            customGridControlTable.Size = new System.Drawing.Size(1002, 322);
             customGridControlTable.TabIndex = 1;
             customGridControlTable.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable });
             customGridControlTable.Load += customGridControlTable_Load;
-            customGridControlTable.Click += customGridControlTable_Click;
             // 
             // gridViewTable
             // 
@@ -129,12 +226,15 @@
             gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
             gridViewTable.GridControl = customGridControlTable;
             gridViewTable.Name = "gridViewTable";
+            gridViewTable.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewTable.OptionsEditForm.EditFormColumnCount = 1;
             gridViewTable.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewTable.RowUpdated += gridViewTable_RowUpdated;
             // 
             // IdAtn
             // 
             IdAtn.Caption = "Ид";
-            IdAtn.FieldName = "IdAtn";
+            IdAtn.FieldName = "id_atn";
             IdAtn.Name = "IdAtn";
             IdAtn.Visible = true;
             IdAtn.VisibleIndex = 0;
@@ -143,7 +243,7 @@
             // TableName
             // 
             TableName.Caption = "Название SQL";
-            TableName.FieldName = "Name";
+            TableName.FieldName = "name";
             TableName.Name = "TableName";
             TableName.Visible = true;
             TableName.VisibleIndex = 1;
@@ -152,11 +252,25 @@
             // TableNameRus
             // 
             TableNameRus.Caption = "Русское название";
-            TableNameRus.FieldName = "NameRus";
+            TableNameRus.FieldName = "name_rus";
             TableNameRus.Name = "TableNameRus";
             TableNameRus.Visible = true;
             TableNameRus.VisibleIndex = 2;
             TableNameRus.Width = 479;
+            // 
+            // customButtonAddTable
+            // 
+            customButtonAddTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            customButtonAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAddTable.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            customButtonAddTable.Location = new System.Drawing.Point(1011, 126);
+            customButtonAddTable.Name = "customButtonAddTable";
+            customButtonAddTable.Size = new System.Drawing.Size(250, 35);
+            customButtonAddTable.TabIndex = 5;
+            customButtonAddTable.Text = "Добавить";
+            customButtonAddTable.UseVisualStyleBackColor = false;
+            customButtonAddTable.Click += customButtonAddTable_Click;
             // 
             // customTextBoxAddTable
             // 
@@ -164,7 +278,7 @@
             customTextBoxAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxAddTable.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxAddTable.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
-            customTextBoxAddTable.Location = new System.Drawing.Point(1011, 69);
+            customTextBoxAddTable.Location = new System.Drawing.Point(1011, 85);
             customTextBoxAddTable.Name = "customTextBoxAddTable";
             customTextBoxAddTable.Size = new System.Drawing.Size(250, 23);
             customTextBoxAddTable.TabIndex = 2;
@@ -175,24 +289,39 @@
             customLabelAddTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             customLabelAddTable.Font = new System.Drawing.Font("Arial", 10F);
             customLabelAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customLabelAddTable.Location = new System.Drawing.Point(1011, 50);
+            customLabelAddTable.Location = new System.Drawing.Point(1011, 66);
             customLabelAddTable.Name = "customLabelAddTable";
             customLabelAddTable.Size = new System.Drawing.Size(250, 16);
             customLabelAddTable.TabIndex = 4;
             customLabelAddTable.Text = "Добавить таблицу из SQL";
             // 
-            // customButtonAddTable
+            // customButtonDeleteTable
             // 
-            customButtonAddTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            customButtonAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAddTable.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customButtonAddTable.Location = new System.Drawing.Point(1011, 135);
-            customButtonAddTable.Name = "customButtonAddTable";
-            customButtonAddTable.Size = new System.Drawing.Size(250, 60);
-            customButtonAddTable.TabIndex = 5;
-            customButtonAddTable.Text = "Добавить";
-            customButtonAddTable.UseVisualStyleBackColor = false;
+            customButtonDeleteTable.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            customButtonDeleteTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonDeleteTable.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonDeleteTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            customButtonDeleteTable.Location = new System.Drawing.Point(1011, 290);
+            customButtonDeleteTable.Name = "customButtonDeleteTable";
+            customButtonDeleteTable.Size = new System.Drawing.Size(250, 35);
+            customButtonDeleteTable.TabIndex = 8;
+            customButtonDeleteTable.Text = "Удалить";
+            customButtonDeleteTable.UseVisualStyleBackColor = false;
+            customButtonDeleteTable.Click += customButtonDeleteTable_Click;
+            // 
+            // customButtonDeleteColumn
+            // 
+            customButtonDeleteColumn.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            customButtonDeleteColumn.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonDeleteColumn.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonDeleteColumn.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            customButtonDeleteColumn.Location = new System.Drawing.Point(1011, 618);
+            customButtonDeleteColumn.Name = "customButtonDeleteColumn";
+            customButtonDeleteColumn.Size = new System.Drawing.Size(250, 41);
+            customButtonDeleteColumn.TabIndex = 9;
+            customButtonDeleteColumn.Text = "Удалить";
+            customButtonDeleteColumn.UseVisualStyleBackColor = false;
+            customButtonDeleteColumn.Click += customButtonDeleteColumn_Click;
             // 
             // Dictionary
             // 
@@ -228,5 +357,15 @@
         private DevExpress.XtraGrid.Columns.GridColumn IdAtn;
         private DevExpress.XtraGrid.Columns.GridColumn TableName;
         private DevExpress.XtraGrid.Columns.GridColumn TableNameRus;
+        private DevExpress.XtraGrid.Columns.GridColumn id_acn;
+        private DevExpress.XtraGrid.Columns.GridColumn id_atn;
+        private DevExpress.XtraGrid.Columns.GridColumn ordinal_position;
+        private DevExpress.XtraGrid.Columns.GridColumn name;
+        private DevExpress.XtraGrid.Columns.GridColumn name_rus;
+        private DevExpress.XtraGrid.Columns.GridColumn data_type;
+        private DevExpress.XtraGrid.Columns.GridColumn Readonly;
+        private CustomButton customButtonOpen;
+        private CustomButton customButtonDeleteTable;
+        private CustomButton customButtonDeleteColumn;
     }
 }

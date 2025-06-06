@@ -21,5 +21,8 @@ namespace SewingProduction
         public const string KontId = "";
         public const string ObrId = "";
         public const string ArtId = "kod";
+
+        public const string ATN = "AllTableName";
+        public const string ACN = "AllColumnName";
     }
 }

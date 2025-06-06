@@ -112,7 +112,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
             }
         }
 
-        private Form CreateFormInstance(Type formType)
+        public Form CreateFormInstance(Type formType)
         {
             try
             {
