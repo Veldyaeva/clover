@@ -426,149 +426,6 @@ namespace SewingProduction.Forms
             }
         }
 
- 
-
-        #region Поиск и фильтрация
-
-        private async void SearchButton_Click_Internal(object sender, EventArgs e)
-        {
-            try
-            {
-                string searchText = searchControl1.Text.TrimEnd(' ');
-                string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
-
-                if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(searchText))
-                {
-                    // Создаем фильтр поиска
-                    var searchFilter = new FunctionOperator(
-                    FunctionOperatorType.Contains,
-                    new OperandProperty(columnName),
-                    new OperandValue(searchText));
-
-                    // Создаем фильтры на основе состояния чекбоксов
-                    CriteriaOperator statusCriteria = null;
-
-                    // Создаем фильтр по статусу
-                    if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
-                    {
-                        var statusFilters = new List<CriteriaOperator>();
-
-                        if (preliminaryCheckBox.Checked)
-                            statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
-
-                        if (actualCheckBox.Checked)
-                        {
-                            statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
-                            statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
-                        }
-
-                        if (archiveCheckBox.Checked)
-                            statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
-
-                        if (statusFilters.Count > 1)
-                        {
-                            statusCriteria = new GroupOperator(GroupOperatorType.Or, statusFilters.ToArray());
-                        }
-                        else if (statusFilters.Count == 1)
-                        {
-                            statusCriteria = statusFilters[0];
-                        }
-                    }
-
-                    // Добавляем фильтр по "Не описанные" если выбран
-                    if (SortBox.Checked)
-                    {
-                        var notDescribedFilter = new GroupOperator(
-                            GroupOperatorType.And,
-                            new BinaryOperator("sek_shv", 0),
-                            new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
-                        );
-
-                        if (statusCriteria != null)
-                        {
-                            statusCriteria = new GroupOperator(
-                                GroupOperatorType.And,
-                                statusCriteria,
-                                notDescribedFilter
-                            );
-                        }
-                        else
-                        {
-                            statusCriteria = notDescribedFilter;
-                        }
-                    }
-
-                    // Если есть фильтр статуса, объединяем его с фильтром поиска
-                    if (statusCriteria != null)
-                    {
-                        ANNgridView.ActiveFilterCriteria = new GroupOperator(
-                            GroupOperatorType.And,
-                            searchFilter,
-                            statusCriteria
-                        );
-                    }
-                    else
-                    {
-                        ANNgridView.ActiveFilterCriteria = searchFilter;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при поиске в SearchButton_Click");
-                MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Фильтрация данных в ANNgridView по введенному значению в filterTextBox1.
-        /// </summary>
-        private async void customButton12_Click_Internal(object sender, EventArgs e)
-        {
-            try
-            {
-                string filterString = filterTextBox1.Text.Trim(); // Получаем текст из поля ввода
-                string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked); // Определяем, по какой колонке искать
-
-                if (!string.IsNullOrEmpty(filterString) && !string.IsNullOrEmpty(columnName))
-                {
-                    // Применяем фильтр к ANNgridView
-                    ANNgridView.ActiveFilterCriteria = new DevExpress.Data.Filtering.FunctionOperator(
-                        DevExpress.Data.Filtering.FunctionOperatorType.Contains,
-                        new DevExpress.Data.Filtering.OperandProperty(columnName),
-                        new DevExpress.Data.Filtering.OperandValue(filterString)
-                    );
-                }
-                else
-                {
-                    MessageBox.Show("Введите значение для поиска и выберите колонку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при поиске по customButton12_Click");
-                MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-
-        private async void searchControl1_QueryIsSearchColumn_Internal(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
-        {
-            string colName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
-            args.IsSearchColumn = args.FieldName == colName;
-        }
-
-        private async void customCheckBox4_CheckedChanged_Internal(object sender, EventArgs e)
-        {
-            int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kod", 0);
-            string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "articul", "");
-
-            List<MyDataANN> list = loadAllCheckBox.Checked ?
-                await LoadWorksbyArt(0, "") :
-                await LoadWorksbyArt(kod, articul);
-            gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
-        }
-
         private async void simpleButton2_Click_Internal(object sender, EventArgs e)
         {
             ArtNormN newItemShell = null; // Объявляем здесь, чтобы был доступен в catch и finally (если нужно)
@@ -641,7 +498,7 @@ namespace SewingProduction.Forms
                 using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
                     0,
                     (int)Mode.NewWorkDivision,
-                    newId: newAnnId) 
+                    newId: newAnnId)
                    )
                 {
                     teamWorkAdvanceTW.InitialArtData = selectedArtData; // Передаем данные из MyDataART
@@ -659,7 +516,7 @@ namespace SewingProduction.Forms
                             {
                                 // Копируем свойства из возвращенного объекта в объект в списке
                                 // Нужен метод CopyPropertiesFrom в ArtNormN или ручное копирование
-                                itemInList.CopyPropertiesFrom(createdOrUpdatedAnn); // Предполагается, что такой метод есть
+                                itemInList.CopyPropertiesFrom(createdOrUpdatedAnn);
                                 itemInList.StatusText = StatusHelper.GetStatusText(itemInList.Status); // Обновляем текстовый статус
                             }
 
@@ -720,66 +577,210 @@ namespace SewingProduction.Forms
             }
         }
 
-        /// <summary>
-        /// Переключение фильтров при изменении чекбоксов
-        /// </summary>
-        private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
 
-        /// <summary>
-        /// Обработчик смены выбранного поля поиска при изменении параметров поиска.
-        /// </summary>
-        private async void search_CheckedChanged_Internal(object sender, EventArgs e)
-        {
-            try
-            {
-                string searchText = searchControl1.Text.TrimEnd(' ');
 
-              //  searchControl1.ClearFilter();
+        #region Поиск и фильтрация
 
-                if (!string.IsNullOrEmpty(searchText))
-                {
-                    string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
-                    if (!string.IsNullOrEmpty(columnName))
-                    {
-                        var searchFilter = new FunctionOperator(
-                            FunctionOperatorType.Contains,
-                            new OperandProperty(columnName),
-                            new OperandValue(searchText));
+        //private async void SearchButton_Click_Internal(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string searchText = searchControl1.Text.TrimEnd(' ');
+        //        string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
 
-                        CriteriaOperator statusFilter = GetStatusFilter();
+        //        if (!string.IsNullOrEmpty(columnName) && !string.IsNullOrEmpty(searchText))
+        //        {
+        //            // Создаем фильтр поиска
+        //            var searchFilter = new FunctionOperator(
+        //            FunctionOperatorType.Contains,
+        //            new OperandProperty(columnName),
+        //            new OperandValue(searchText));
 
-                        if (statusFilter != null)
-                        {
-                            ANNgridView.ActiveFilterCriteria = new GroupOperator(
-                                GroupOperatorType.And,
-                                searchFilter,
-                                statusFilter
-                            );
-                        }
-                        else
-                        {
-                            ANNgridView.ActiveFilterCriteria = searchFilter;
-                        }
-                    }
-                }
-                else
-                {
-                    CriteriaOperator statusFilter = GetStatusFilter();
-                    if (statusFilter != null)
-                    {
-                        ANNgridView.ActiveFilterCriteria = statusFilter;
-                    }
-                    else
-                    {
-                        ANNgridView.ActiveFilterString = string.Empty;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при обновлении параметров поиска");
-            }
-        }
+        //            // Создаем фильтры на основе состояния чекбоксов
+        //            CriteriaOperator statusCriteria = null;
+
+        //            // Создаем фильтр по статусу
+        //            if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
+        //            {
+        //                var statusFilters = new List<CriteriaOperator>();
+
+        //                if (preliminaryCheckBox.Checked)
+        //                    statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
+
+        //                if (actualCheckBox.Checked)
+        //                {
+        //                    statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
+        //                    statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
+        //                }
+
+        //                if (archiveCheckBox.Checked)
+        //                    statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
+
+        //                if (statusFilters.Count > 1)
+        //                {
+        //                    statusCriteria = new GroupOperator(GroupOperatorType.Or, statusFilters.ToArray());
+        //                }
+        //                else if (statusFilters.Count == 1)
+        //                {
+        //                    statusCriteria = statusFilters[0];
+        //                }
+        //            }
+
+        //            // Добавляем фильтр по "Не описанные" если выбран
+        //            if (SortBox.Checked)
+        //            {
+        //                var notDescribedFilter = new GroupOperator(
+        //                    GroupOperatorType.And,
+        //                    new BinaryOperator("sek_shv", 0),
+        //                    new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
+        //                );
+
+        //                if (statusCriteria != null)
+        //                {
+        //                    statusCriteria = new GroupOperator(
+        //                        GroupOperatorType.And,
+        //                        statusCriteria,
+        //                        notDescribedFilter
+        //                    );
+        //                }
+        //                else
+        //                {
+        //                    statusCriteria = notDescribedFilter;
+        //                }
+        //            }
+
+        //            // Если есть фильтр статуса, объединяем его с фильтром поиска
+        //            if (statusCriteria != null)
+        //            {
+        //                ANNgridView.ActiveFilterCriteria = new GroupOperator(
+        //                    GroupOperatorType.And,
+        //                    searchFilter,
+        //                    statusCriteria
+        //                );
+        //            }
+        //            else
+        //            {
+        //                ANNgridView.ActiveFilterCriteria = searchFilter;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при поиске в SearchButton_Click");
+        //        MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+        ///// <summary>
+        ///// Фильтрация данных в ANNgridView по введенному значению в filterTextBox1.
+        ///// </summary>
+        //private async void customButton12_Click_Internal(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string filterString = filterTextBox1.Text.Trim(); // Получаем текст из поля ввода
+        //        string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked); // Определяем, по какой колонке искать
+
+        //        if (!string.IsNullOrEmpty(filterString) && !string.IsNullOrEmpty(columnName))
+        //        {
+        //            // Применяем фильтр к ANNgridView
+        //            ANNgridView.ActiveFilterCriteria = new DevExpress.Data.Filtering.FunctionOperator(
+        //                DevExpress.Data.Filtering.FunctionOperatorType.Contains,
+        //                new DevExpress.Data.Filtering.OperandProperty(columnName),
+        //                new DevExpress.Data.Filtering.OperandValue(filterString)
+        //            );
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Введите значение для поиска и выберите колонку!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при поиске по customButton12_Click");
+        //        MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+
+
+        //private async void searchControl1_QueryIsSearchColumn_Internal(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
+        //{
+        //    string colName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
+        //    args.IsSearchColumn = args.FieldName == colName;
+        //}
+
+        //private async void customCheckBox4_CheckedChanged_Internal(object sender, EventArgs e)
+        //{
+        //    int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kod", 0);
+        //    string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "articul", "");
+
+        //    List<MyDataANN> list = loadAllCheckBox.Checked ?
+        //        await LoadWorksbyArt(0, "") :
+        //        await LoadWorksbyArt(kod, articul);
+        //    gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
+        //}
+
+
+        ///// <summary>
+        ///// Переключение фильтров при изменении чекбоксов
+        ///// </summary>
+        //private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
+
+        ///// <summary>
+        ///// Обработчик смены выбранного поля поиска при изменении параметров поиска.
+        ///// </summary>
+        //private async void search_CheckedChanged_Internal(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        string searchText = searchControl1.Text.TrimEnd(' ');
+
+        //      //  searchControl1.ClearFilter();
+
+        //        if (!string.IsNullOrEmpty(searchText))
+        //        {
+        //            string columnName = await TWGridHelper.GetSelectedColumnNameAsync(kode.Checked, articul.Checked, model.Checked, group.Checked);
+        //            if (!string.IsNullOrEmpty(columnName))
+        //            {
+        //                var searchFilter = new FunctionOperator(
+        //                    FunctionOperatorType.Contains,
+        //                    new OperandProperty(columnName),
+        //                    new OperandValue(searchText));
+
+        //                CriteriaOperator statusFilter = GetStatusFilter();
+
+        //                if (statusFilter != null)
+        //                {
+        //                    ANNgridView.ActiveFilterCriteria = new GroupOperator(
+        //                        GroupOperatorType.And,
+        //                        searchFilter,
+        //                        statusFilter
+        //                    );
+        //                }
+        //                else
+        //                {
+        //                    ANNgridView.ActiveFilterCriteria = searchFilter;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            CriteriaOperator statusFilter = GetStatusFilter();
+        //            if (statusFilter != null)
+        //            {
+        //                ANNgridView.ActiveFilterCriteria = statusFilter;
+        //            }
+        //            else
+        //            {
+        //                ANNgridView.ActiveFilterString = string.Empty;
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        await _logger.LogErrorAsync(ex, "Ошибка при обновлении параметров поиска");
+        //    }
+        //}
 
 
         #endregion

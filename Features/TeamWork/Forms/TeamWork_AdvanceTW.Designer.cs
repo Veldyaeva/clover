@@ -70,7 +70,7 @@ namespace SewingProduction.form
             colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            repositoryItemLookUpEdit_kod_proizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            repositoryItemLookUpEdit_kodProizv = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             Kod_podr = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemLookUpEdit_podrVyaz = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             KodOb = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -128,7 +128,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRasz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRasz).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kod_proizv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
@@ -431,18 +431,25 @@ namespace SewingProduction.form
             // 
             // gridControlRasz
             // 
+            gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlRasz.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlRasz.Location = new System.Drawing.Point(4, 3);
             gridControlRasz.MainView = gridViewRasz;
             gridControlRasz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlRasz.Name = "gridControlRasz";
-            gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit_kod_proizv, repositoryItemLookUpEdit_podrVyaz, repositoryItemLookUpEdit_oborudShv });
-            gridControlRasz.Size = new System.Drawing.Size(1424, 519);
+            gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit_kodProizv, repositoryItemLookUpEdit_podrVyaz, repositoryItemLookUpEdit_oborudShv });
+            gridControlRasz.Size = new System.Drawing.Size(1480, 519);
             gridControlRasz.TabIndex = 7;
             gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRasz });
             // 
             // gridViewRasz
             // 
+            gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewRasz.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
+            gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
             gridViewRasz.DetailHeight = 404;
             gridViewRasz.GridControl = gridControlRasz;
@@ -451,17 +458,20 @@ namespace SewingProduction.form
             gridViewRasz.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
+            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 2;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.ShowGroupPanel = false;
             gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
             gridViewRasz.EditFormPrepared += gridViewRasz_EditFormPrepared;
             gridViewRasz.EditFormHidden += gridViewRasz_EditFormHidden;
-            gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
+            gridViewRasz.InvalidRowException += gridViewRasz_InvalidRowException;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
+            gridViewRasz.ValidatingEditor += gridViewRasz_ValidatingEditor;
             // 
             // gridColumn2
             // 
@@ -564,14 +574,12 @@ namespace SewingProduction.form
             gridColumn38.Name = "gridColumn38";
             gridColumn38.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn38.OptionsEditForm.VisibleIndex = 4;
-            gridColumn38.Visible = true;
-            gridColumn38.VisibleIndex = 11;
             gridColumn38.Width = 158;
             // 
             // gridColumn4
             // 
             gridColumn4.Caption = "произв.";
-            gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
+            gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kodProizv;
             gridColumn4.FieldName = "KodProizv";
             gridColumn4.MinWidth = 23;
             gridColumn4.Name = "gridColumn4";
@@ -582,15 +590,15 @@ namespace SewingProduction.form
             gridColumn4.VisibleIndex = 6;
             gridColumn4.Width = 123;
             // 
-            // repositoryItemLookUpEdit_kod_proizv
+            // repositoryItemLookUpEdit_kodProizv
             // 
-            repositoryItemLookUpEdit_kod_proizv.AutoHeight = false;
-            repositoryItemLookUpEdit_kod_proizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
-            repositoryItemLookUpEdit_kod_proizv.Name = "repositoryItemLookUpEdit_kod_proizv";
-            repositoryItemLookUpEdit_kod_proizv.NullText = "";
-            repositoryItemLookUpEdit_kod_proizv.Tag = "";
-            repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
+            repositoryItemLookUpEdit_kodProizv.AutoHeight = false;
+            repositoryItemLookUpEdit_kodProizv.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
+            repositoryItemLookUpEdit_kodProizv.Name = "repositoryItemLookUpEdit_kodProizv";
+            repositoryItemLookUpEdit_kodProizv.NullText = "";
+            repositoryItemLookUpEdit_kodProizv.Tag = "";
+            repositoryItemLookUpEdit_kodProizv.ValueMember = "kod_proizv";
             // 
             // Kod_podr
             // 
@@ -646,8 +654,6 @@ namespace SewingProduction.form
             gridColumn31.OptionsEditForm.Caption = "код оп:";
             gridColumn31.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn31.OptionsEditForm.VisibleIndex = 5;
-            gridColumn31.Visible = true;
-            gridColumn31.VisibleIndex = 9;
             gridColumn31.Width = 117;
             // 
             // gridColumn30
@@ -659,8 +665,6 @@ namespace SewingProduction.form
             gridColumn30.OptionsEditForm.Caption = "код из:";
             gridColumn30.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn30.OptionsEditForm.VisibleIndex = 2;
-            gridColumn30.Visible = true;
-            gridColumn30.VisibleIndex = 10;
             gridColumn30.Width = 99;
             // 
             // gridColumn5
@@ -702,12 +706,12 @@ namespace SewingProduction.form
             btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btnCancel.AppearanceDisabled.Options.UseBackColor = true;
             btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            btnCancel.Location = new System.Drawing.Point(98, 3);
+            btnCancel.Location = new System.Drawing.Point(161, 3);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(82, 24);
+            btnCancel.Size = new System.Drawing.Size(119, 24);
             btnCancel.TabIndex = 24;
-            btnCancel.Text = "Отмена";
+            btnCancel.Text = "Сброс изменений";
             btnCancel.Click += btnCancel_Click;
             // 
             // btnSave
@@ -725,7 +729,7 @@ namespace SewingProduction.form
             btnSave.Location = new System.Drawing.Point(4, 3);
             btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(85, 24);
+            btnSave.Size = new System.Drawing.Size(85, 17);
             btnSave.TabIndex = 25;
             btnSave.Text = "Сохранить";
             btnSave.Visible = false;
@@ -743,10 +747,11 @@ namespace SewingProduction.form
             btnOK.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btnOK.AppearanceDisabled.Options.UseBackColor = true;
             btnOK.AppearanceDisabled.Options.UseForeColor = true;
-            btnOK.Location = new System.Drawing.Point(194, 3);
+            tableLayoutPanel4.SetColumnSpan(btnOK, 2);
+            btnOK.Location = new System.Drawing.Point(4, 3);
             btnOK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnOK.Name = "btnOK";
-            btnOK.Size = new System.Drawing.Size(83, 40);
+            btnOK.Size = new System.Drawing.Size(148, 40);
             btnOK.TabIndex = 26;
             btnOK.Text = "Сохранить+закрыть";
             btnOK.Click += btnOK_Click;
@@ -968,13 +973,15 @@ namespace SewingProduction.form
             tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 1);
             tableLayoutPanel3.Controls.Add(statusLabel, 1, 0);
             tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
+            tableLayoutPanel3.Controls.Add(btnSave, 0, 0);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 2;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel3.Size = new System.Drawing.Size(1020, 543);
+            tableLayoutPanel3.Size = new System.Drawing.Size(1509, 869);
             tableLayoutPanel3.TabIndex = 4;
             // 
             // statusLabel
@@ -992,13 +999,12 @@ namespace SewingProduction.form
             // 
             tableLayoutPanel4.ColumnCount = 3;
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 96F));
-            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
             tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 2);
             tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
-            tableLayoutPanel4.Controls.Add(btnOK, 2, 0);
-            tableLayoutPanel4.Controls.Add(btnSave, 0, 0);
-            tableLayoutPanel4.Controls.Add(btnCancel, 1, 0);
+            tableLayoutPanel4.Controls.Add(btnOK, 0, 0);
+            tableLayoutPanel4.Controls.Add(btnCancel, 2, 0);
             tableLayoutPanel4.Location = new System.Drawing.Point(4, 26);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -1205,7 +1211,7 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRasz).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRasz).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kod_proizv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).EndInit();
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
@@ -1326,7 +1332,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn30;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn31;
         private DevExpress.XtraGrid.Columns.GridColumn Kod_proizv;
-        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_kod_proizv;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_kodProizv;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_podrVyaz;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEdit_oborudShv;
         private DevExpress.XtraGrid.Columns.GridColumn Kod_podr;

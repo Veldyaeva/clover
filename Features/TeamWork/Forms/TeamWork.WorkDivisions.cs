@@ -71,7 +71,6 @@ namespace SewingProduction.Forms
 
                 // Устанавливаем привязки после позиции
                 BindTextFields();
-          //      _bindingSource.ResetBindings(false);
                 Task bindingsTask = InitializeBindingsAsync();
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");

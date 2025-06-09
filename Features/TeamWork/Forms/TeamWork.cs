@@ -232,10 +232,11 @@ namespace SewingProduction.Forms
         }
         private void Filter_CheckedChanged(object sender, EventArgs e)
         {
-            Filter_CheckedChanged_Internal(sender, e);
+            // Filter_CheckedChanged_Internal(sender, e);
         }
         private async void search_CheckedChanged(object sender, EventArgs e)
-        { search_CheckedChanged_Internal(sender, e); }
+        { //search_CheckedChanged_Internal(sender, e);
+        }
         private void gridControl2_Leave(object sender, EventArgs e)
         {
             gridControl2_Leave_Internal(sender, e);
@@ -245,12 +246,12 @@ namespace SewingProduction.Forms
 
         private void searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
         {
-            searchControl1_QueryIsSearchColumn_Internal(sender, args);
+            //searchControl1_QueryIsSearchColumn_Internal(sender, args);
         }
 
         private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            SearchButton_Click_Internal(sender, e);
+            // SearchButton_Click_Internal(sender, e);
         }
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
@@ -258,41 +259,45 @@ namespace SewingProduction.Forms
             ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
         private async void customButton12_Click(object sender, EventArgs e)
-        { customButton12_Click_Internal(sender, e); }
+        {// customButton12_Click_Internal(sender, e);
+        }
         private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
-        { customCheckBox4_CheckedChanged_Internal(sender, e); }
+        { //customCheckBox4_CheckedChanged_Internal(sender, e); 
+        }
 
         private void searchControl1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                SearchControl searchControl = sender as SearchControl;
-                if (searchControl != null)
-                {
-                    // Simulate a click on the search button.
-                    // We need to find the actual search button in the SearchControl's buttons collection.
-                    EditorButton searchButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind == ButtonPredefines.Search);// || b.IsDefault);
-                    if (searchButton != null)
-                    {
-                        SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(searchButton));
-                    }
-                    else
-                    {
-                        // Fallback if a specific search button isn't found, try with a general non-clear button.
-                        EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
-                        if (firstNonClearButton != null)
-                        {
-                            SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
-                        }
-                    }
-                }
-                e.Handled = true;
-                e.SuppressKeyPress = true;
-            }
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    SearchControl searchControl = sender as SearchControl;
+            //    if (searchControl != null)
+            //    {
+            //        // Simulate a click on the search button.
+            //        // We need to find the actual search button in the SearchControl's buttons collection.
+            //        EditorButton searchButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind == ButtonPredefines.Search);// || b.IsDefault);
+            //        if (searchButton != null)
+            //        {
+            //            SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(searchButton));
+            //        }
+            //        else
+            //        {
+            //            // Fallback if a specific search button isn't found, try with a general non-clear button.
+            //            EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
+            //            if (firstNonClearButton != null)
+            //            {
+            //                SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
+            //            }
+            //        }
+            //    }
+            //    e.Handled = true;
+            //    e.SuppressKeyPress = true;
+            //}
         }
 
         private async void simpleButton2_Click(object sender, EventArgs e)
-        { simpleButton2_Click_Internal(sender, e); }
+        {
+            simpleButton2_Click_Internal(sender, e);
+        }
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -477,6 +482,33 @@ namespace SewingProduction.Forms
                 }
             }
         }
-    }
-}
 
+        private void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    ButtonPreliminaryWd_Click_Internal(sender, e);
+                    break;
+                case 2:
+                    EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    break;
+                case 4:
+                    DuplicateWorkDivision_Click_Internal(sender, e);
+                    break;
+                case 6:
+                    ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true);
+                    break;
+
+            }
+        }
+
+        private void SortBox_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+    }
+
+}

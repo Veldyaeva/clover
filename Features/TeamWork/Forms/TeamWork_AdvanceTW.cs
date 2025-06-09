@@ -1,6 +1,10 @@
 using Dapper;
+using DevExpress.XtraBars.Customization;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using NLog.Filters;
 using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -112,7 +116,6 @@ namespace SewingProduction.form
                     var clone = (T)item.Clone();
                     typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
                     typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
-                    // For items cloned into a new RT, they are inherently "new" and "modified" in the context of that RT
                     if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, true);
                     if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, true);
                     list.Add(clone);
@@ -126,7 +129,7 @@ namespace SewingProduction.form
                 var newList = new BindingList<T>();
                 foreach (var item in sourceList)
                 {
-                    if (item is T clonedItem) // Ensure item is not null and is of type T
+                    if (item is T clonedItem)
                     {
                         newList.Add(clonedItem.Clone() as T);
                     }
@@ -149,6 +152,13 @@ namespace SewingProduction.form
         public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
             InitializeComponent();
+            gridViewRasz.OptionsView.ShowIndicator = true;
+            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.Appearance.Row.ForeColor = Color.Black;
+            gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
+            gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
+            gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
@@ -234,7 +244,7 @@ namespace SewingProduction.form
             if (control == textBoxKomment) return nameof(ArtNormN.Komment);
             if (control == textBoxReco) return nameof(ArtNormN.Reco);
             if (control == dateCreate) return nameof(ArtNormN.dateCreate);
-           // if (control == dateUpdate) return nameof(ArtNormN.dateUpdate);
+            // if (control == dateUpdate) return nameof(ArtNormN.dateUpdate);
             if (control == designerComboBox) return nameof(ArtNormN.Diz);
             if (control == constructorComboBox) return nameof(ArtNormN.Constr);
             return null;
@@ -289,7 +299,8 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                if (_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+                if (!allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
@@ -321,7 +332,6 @@ namespace SewingProduction.form
                             }
 
                             bindingList.Remove(rowObj); // удаляем из источника
-                            view.DeleteRow(rowHandle);  // удаляем визуально
                         }
                     }
                 });
@@ -414,13 +424,13 @@ namespace SewingProduction.form
                 AttachChangeHandlers();
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
 
-                repositoryItemLookUpEdit_kod_proizv.DataSource = kodProizvList;
-                repositoryItemLookUpEdit_kod_proizv.DisplayMember = "text_proizv";
-                repositoryItemLookUpEdit_kod_proizv.ValueMember = "kod_proizv";
-                repositoryItemLookUpEdit_kod_proizv.NullText = "[Выберите значение]";
+                repositoryItemLookUpEdit_kodProizv.DataSource = kodProizvList;
+                repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
+                repositoryItemLookUpEdit_kodProizv.ValueMember = "kod_proizv";
+                repositoryItemLookUpEdit_kodProizv.NullText = "[Выберите значение]";
                 repositoryItemLookUpEdit_podrVyaz.DataSource = podrVyazList;
                 repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
                 repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_vyaz";
@@ -429,6 +439,61 @@ namespace SewingProduction.form
                 repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
                 repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
                 repositoryItemLookUpEdit_oborudShv.NullText = "[Выберите значение]";
+
+                repositoryItemLookUpEdit_oborudShv.EditValueChanged += async (s, e) =>
+    {
+        var editor = s as LookUpEdit;
+        if (editor?.EditValue is int newKodOb)
+        {
+            var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
+            if (!string.IsNullOrEmpty(spec))
+            {
+                gridViewRasz.SetFocusedRowCellValue("Spec", spec);
+            }
+        }
+    };
+
+                repositoryItemLookUpEdit_kodProizv.EditValueChanged += (s, e) =>
+                {
+                    if (gridViewRasz.FocusedRowHandle < 0)
+                        return;
+
+                    if (s is LookUpEdit editor)
+                    {
+                        var value = editor.EditValue;
+                        if (value != null && int.TryParse(value.ToString(), out int kodProizv))
+                        {
+                            // теперь безопасно использовать kodProizv
+                            UpdateFilteredPodrVyaz(kodProizv);
+                        }
+                    }
+                };
+
+
+                repositoryItemLookUpEdit_podrVyaz.QueryPopUp += (s, e) =>
+                {
+                    if (gridViewRasz.FocusedRowHandle < 0)
+                        return;
+
+                    var kodProizvObj = gridViewRasz.GetRowCellValue(gridViewRasz.FocusedRowHandle, "kod_proizv");
+                    if (kodProizvObj != null && int.TryParse(kodProizvObj.ToString(), out int kodProizv))
+                    {
+                        var filtered = podrVyazList
+                            .Where(x => x.kod_proizv == kodProizv || x.kod_proizv == 9)
+                            .ToList();
+
+                        if (s is LookUpEdit editor)
+                        {
+                            // ВАЖНО: нужно перезаписать .Properties, а не просто DataSource
+                            editor.Properties.DataSource = filtered;
+                            editor.Properties.ValueMember = "kod_vyaz";
+                            editor.Properties.DisplayMember = "text_vyaz";
+                            editor.Properties.PopulateColumns();
+
+                            Console.WriteLine($"Фильтрация выполнена: kod_proizv={kodProizv}, filtered={filtered.Count}");
+                        }
+                    }
+                };
 
 
                 designerComboBox.DataBindings.Clear();
@@ -510,6 +575,40 @@ namespace SewingProduction.form
             _normRaskList.BulkLoad(CloneUtils.CloneList(rask, newAnnId, "id"));
             _normKontList.BulkLoad(CloneUtils.CloneList(kont, newAnnId, "nkId"));
         }
+
+        private void UpdateFilteredPodrVyaz(int kodProizv)
+        {
+            if (podrVyazList == null) return;
+
+            var filtered = podrVyazList
+                .Where(x => x.kod_proizv == kodProizv || x.kod_proizv == 9)
+                .ToList();
+
+
+            if (gridViewRasz.FocusedRowHandle >= 0)
+            {
+                object currentKodPodr = null;
+
+                if (gridViewRasz.ActiveEditor is LookUpEdit editor)
+                {
+                    currentKodPodr = editor.EditValue;
+                }
+                else
+                {
+                    currentKodPodr = gridViewRasz.GetFocusedRowCellValue("kod_podr");
+                }
+
+                if (currentKodPodr != null && int.TryParse(currentKodPodr.ToString(), out int kodPodr))
+                {
+                    if (!filtered.Any(x => x.kod_vyaz == kodPodr))
+                    {
+                        gridViewRasz.SetRowCellValue(gridViewRasz.FocusedRowHandle, "kod_podr", null);
+                    }
+                }
+            }
+        }
+
+
 
         private async Task LoadForEdit(int annId)
         {
@@ -759,7 +858,7 @@ namespace SewingProduction.form
                     selectedData.IsNew = true;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
-
+                    gridControlRasz.RefreshDataSource();
                     int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
                     if (newRowDataSourceIndex >= 0)
                     {
@@ -838,23 +937,7 @@ namespace SewingProduction.form
             }
         }
 
-        private async void gridViewRasz_ValidateRow(object sender, ValidateRowEventArgs e)
-        {
-            if (e.Row is NormRasz normRasz)
-            {
-                try
-                {
-                    normRasz.AnnId = _newAnnId;
-                    e.Valid = true;
-                }
-                catch (Exception ex)
-                {
-                    e.Valid = false;
-                    e.ErrorText = $"Ошибка: {ex.Message}";
-                    await _logger.LogErrorAsync(ex, "Ошибка при валидации данных");
-                }
-            }
-        }
+
         private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
         {
             var gridView = sender as GridView;
@@ -1541,6 +1624,27 @@ namespace SewingProduction.form
                 tabOrder[i].Control.TabIndex = i;
         }
 
+        private void gridViewRasz_InvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
 
+        private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (_mode == (int)Mode.Edit &&
+                _currentAnnData?.dateUpdate != null &&
+                _currentAnnData.dateUpdate != DateTime.MinValue)
+            {
+                if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+                {
+                    var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
+                    if (original != null && newSec > original.Sek)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
+                    }
+                }
+            }
+        }
     }
 }
