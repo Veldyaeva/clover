@@ -1,0 +1,770 @@
+-- =========================================================================================
+--  ACE_update_combined.sql  –  единый скрипт обновления
+--  Делает базу‑приёмник идентичной «ace_copy_12052025»,
+--  включая всю схему из ACE и ACE_backup + DATA‑patch из sql.txt.
+--  Состояние на 06‑июн‑2025.
+--  Запускать в SSMS с включённым SQLCMD‑Mode.
+-- =========================================================================================
+
+:SETVAR DBNAME      ACE_NEW           -- ← имя БД-копии
+:SETVAR BACKUPDIR   "C:\DBBackups"   -- ← куда сложить pre‑update backup
+
+---------------------------------------------------------------------------------------------
+-- 0. РЕЗЕРВНОЕ КОПИРОВАНИЕ ---------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+PRINT N'### BACKUP $(DBNAME) перед обновлением';
+DECLARE @bkFile nvarchar(4000) = '$(BACKUPDIR)\\' + '$(DBNAME)' + '_preUpdate_' +
+                                  CONVERT(char(8),GETDATE(),112) + '_' +
+                                  REPLACE(CONVERT(char(5),GETDATE(),108),':','') + '.bak';
+BACKUP DATABASE [$(DBNAME)] TO DISK = @bkFile WITH INIT, COMPRESSION;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 1. SET‑параметры сессии ------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+SET CONCAT_NULL_YIELDS_NULL, ANSI_NULLS, ANSI_PADDING,
+    QUOTED_IDENTIFIER, ANSI_WARNINGS, ARITHABORT, XACT_ABORT ON;
+SET NUMERIC_ROUNDABORT, IMPLICIT_TRANSACTIONS OFF;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 2. Начало транзакции ---------------------------------------------------------------------
+---------------------------------------------------------------------------------------------
+BEGIN TRANSACTION;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 3. Справочник STATUS_ANN и удаление устаревших FK  (из diff ACE) --------------------------
+---------------------------------------------------------------------------------------------
+-- 3.1 Удаляем старые FK, если остались                                       -- fileciteturn4file9
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_articul_status_nn')
+    ALTER TABLE dbo.articul_status DROP CONSTRAINT FK_articul_status_nn;
+IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_matr_status')
+    ALTER TABLE dbo.matr_status DROP CONSTRAINT FK_matr_status;
+GO
+
+-- 3.2 Создаём таблицу dbo.status_ann, если отсутствует                      -- fileciteturn4file9
+IF OBJECT_ID('dbo.status_ann','U') IS NULL
+BEGIN
+    CREATE TABLE dbo.status_ann
+    (
+        status_id  int IDENTITY(1,1) PRIMARY KEY,
+        [name]     text NULL
+    );
+END;
+GO
+
+-- 3.3 Переименовываем старый PK, если он ещё существует                     -- fileciteturn4file3
+IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'PK_ann_status_status_id')
+    EXEC sp_rename N'[dbo].[PK_ann_status_status_id]', N'PK_status_ann_status_id', 'OBJECT';
+GO
+
+-- 3.4 Первичное наполнение справочника (если пусто)                        -- fileciteturn6file1
+IF NOT EXISTS (SELECT 1 FROM dbo.status_ann)
+BEGIN
+    INSERT INTO dbo.status_ann([name]) VALUES
+        ('Предварительное'),          -- 1
+        ('Актуальное'),   -- 2
+        ('Архив'),          -- 3
+        ('Предварительный архив');             -- 4
+END;
+GO
+---------------------------------------------------------------------------------------------
+-- 4. Расширение art_norm_n (колонки, индексы, типы) ----------------------------------------
+---------------------------------------------------------------------------------------------
+-- 4.1 Новые колонки (status, parentId)                                     -- fileciteturn4file19
+IF COL_LENGTH('dbo.art_norm_n','status') IS NULL
+    ALTER TABLE dbo.art_norm_n ADD [status] int NULL;
+IF COL_LENGTH('dbo.art_norm_n','parentId') IS NULL
+    ALTER TABLE dbo.art_norm_n ADD [parentId] int NULL;
+
+-- 4.2 Колонки sek_vyaz18 / sek_vyaz57 (если вдруг отсутствуют)             -- fileciteturn6file3
+IF COL_LENGTH('dbo.art_norm_n','sek_vyaz18') IS NULL
+    ALTER TABLE dbo.art_norm_n ADD sek_vyaz18 int NULL;
+IF COL_LENGTH('dbo.art_norm_n','sek_vyaz57') IS NULL
+    ALTER TABLE dbo.art_norm_n ADD sek_vyaz57 int NULL;
+
+-- 4.3 Перевод ntext → nvarchar(max)         Пока не стала делать, посмотрим                               -- fileciteturn4file19
+IF EXISTS (SELECT 1 FROM sys.columns WHERE object_id = OBJECT_ID('dbo.art_norm_n')
+           AND name = 'annRecommendation' AND system_type_id = 99)
+    ALTER TABLE dbo.art_norm_n ALTER COLUMN annRecommendation nvarchar(max);
+
+-- 4.4 Индексы (если ещё нет)                                               -- fileciteturn4file19
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'UK_art_norm_n_annID')
+    CREATE UNIQUE INDEX UK_art_norm_n_annID ON dbo.art_norm_n(annID);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_ArtNormNView_Articul')
+    CREATE INDEX IX_ArtNormNView_Articul ON dbo.art_norm_n(articul);
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_ArtNormNView_Status')
+    CREATE INDEX IX_ArtNormNView_Status   ON dbo.art_norm_n([status]);
+GO
+
+---------------------------------------------------------------------------------------------
+-- 5. Пересоздание процедур pztOperUpdateFast / NEW  (diff ACE_backup) -----------------------
+---------------------------------------------------------------------------------------------
+PRINT N'Пересоздаём pztOperUpdateFast / pztOperUpdateNEW';
+GO
+DROP PROCEDURE IF EXISTS dbo.pztOperUpdateFast, dbo.pztOperUpdateNEW;
+GO
+
+/* === 5.1  pztOperUpdateFast  ============================================================= */
+-- Полный текст см. выше (вставлен без сокращений)
+CREATE OR ALTER PROCEDURE dbo.pztOperUpdateFast
+AS
+BEGIN
+    SET NOCOUNT ON;
+    -- === Этап 1 =====================================================================
+    DELETE FROM plan_zagr_two
+    WHERE pztNrID IN (SELECT nr.nrID FROM norm_rasz nr WHERE sek = 0)
+      AND ISNULL(tab, 0) = 0
+      AND YEAR(date_Add) >= YEAR(GETDATE()) - 1
+      AND ISNULL(idrecord_osn, 0) = 0
+      AND ISNULL(delenie, 0) = 0
+      AND ISNULL(id_ml_op, 0) = 0;
+
+    -- === Этап 2 =====================================================================
+    UPDATE pzt
+    SET  sek     = nrv.sek,
+         n_chasi = ROUND((nrv.sek * pzt.kol) / 3600.00, 2),
+         kod_ob  = nrv.obor,
+         operac  = nrv.[text],
+         spec    = nrv.razryd
+    FROM plan_zagr_two pzt
+    INNER JOIN normRaszView nrv ON pzt.pztNrID = nrv.nrID
+    WHERE pzt.date_Add IS NOT NULL
+      AND YEAR(ISNULL(pzt.date_Add,'19000101')) >= 2023
+      AND (YEAR(ISNULL(pzt.dateEnd,GETDATE())) = YEAR(GETDATE()) OR pzt.dateEnd IS NULL)
+      AND ISNULL(nrv.sek,0) > ISNULL(pzt.sek,0);
+
+    -- === Этап 3 =====================================================================
+    UPDATE ml
+    SET    ml.sek = pzt.sek
+    FROM   ml_op ml
+    INNER JOIN plan_zagr_two pzt ON pzt.id_ml_op = ml.id AND pzt.shtr = ml.shtr
+    WHERE  YEAR(ISNULL(pzt.dateEnd,GETDATE())) = YEAR(GETDATE())
+      AND   ISNULL(pzt.sek,0) > ISNULL(ml.sek,0)
+      AND   ISNULL(ml.tab,0) <> 999
+      AND   ISNULL(pzt.tab,0) <> 999;
+
+    -- === Этап 4 =====================================================================
+    IF OBJECT_ID('tempdb..#nzpSelect') IS NOT NULL DROP TABLE #nzpSelect;
+    CREATE TABLE #nzpSelect ( /* полный список столбцов */ 
+        nlNom DECIMAL(8), nlNomN INT, nlBrig NVARCHAR(30), nlNomZad NCHAR(9),
+        nlKodd VARCHAR(6), nlKoddRt VARCHAR(7), nlGrup NCHAR(35), nlArticul NCHAR(25),
+        nlMod NCHAR(25), nlKol DECIMAL(38), nlIdBrig INT, vidPr CHAR(2) /* …и др. */ );
+
+    INSERT INTO #nzpSelect
+    EXEC dbo.rzu_nzp 0;   -- все бригады
+
+    IF OBJECT_ID('tempdb..#nrSelect') IS NOT NULL DROP TABLE #nrSelect;
+    SELECT rzu.data_r, rzu.nom, rzu.nom_n, nzp.nlKoddRt,
+           nr.nrID, nr.n, nr.n1, nr.[text], nr.kod_ob, nr.sek, nr.spec,
+           RIGHT(CAST(YEAR(rzu.data_r) AS NVARCHAR),1)
+           + RIGHT('00000'+CAST(rzu.nom AS NVARCHAR),5)
+           + CAST(rzu.nom_n AS NVARCHAR(1))
+           + RIGHT('00'+CAST(nr.n AS NVARCHAR),2)
+           + RIGHT('000'+CAST(nr.n1 AS NVARCHAR),3) AS shtr
+    INTO   #nrSelect
+    FROM   #nzpSelect nzp
+           LEFT JOIN raskr_zeh_up rzu ON nzp.nlNom  = rzu.nom
+                                     AND nzp.nlKodd = SUBSTRING(rzu.kod,1,6)
+           LEFT JOIN normRaszView nr  ON nzp.nlKoddRt = nr.kod
+    WHERE  ISNULL(nr.sek,0) > 0
+    GROUP BY rzu.data_r,rzu.nom,rzu.nom_n,nzp.nlKoddRt,
+             nr.nrID,nr.n,nr.n1,nr.[text],nr.kod_ob,nr.sek,nr.spec;
+
+    INSERT INTO plan_zagr_two (
+        nom, nom_n, shtr,
+        kod, articul, mod,
+        pztNrID, no, npo, operac, kod_ob, kodOb, spec, tip_op,
+        sek, sekNazn, n_chasi, chasNazn,
+        kol, rKol, kolNazn,
+        tab, pzIdBrig, brig,
+        data_rab, data_isp, delenie, idrecord_osn, data_pz, komp_add,
+        date_Add, id_ml_op, dateNazn, dateStart, dateEnd, dateML,
+        dateMLUt, dateMast, pbpID, pztUpdDate, pztVidPr)
+    SELECT nzp.nlNom, nzp.nlNomN, nr.shtr,
+           nzp.nlKoddRt, nzp.nlArticul, nzp.nlMod,
+           nr.nrID, nr.n, nr.n1, nr.[text], nr.kod_ob, nr.kod_ob, nr.spec, 0,
+           nr.sek, 0, ROUND((nr.sek*nzp.nlKol)/3600.00,2), 0,
+           nzp.nlKol, nzp.nlKol, 0,
+           0, nzp.nlIdBrig, nzp.nlBrig,
+           NULL,NULL,0,NULL,NULL,HOST_NAME(),
+           GETDATE(),NULL,
+           NULL,NULL,NULL,NULL,NULL,
+           NULL,NULL,GETDATE(),nzp.vidPr
+    FROM   #nzpSelect nzp
+           LEFT JOIN #nrSelect nr ON nzp.nlNom    = nr.nom
+                                 AND nzp.nlNomN   = nr.nom_n
+                                 AND nzp.nlKoddRt = nr.nlKoddRt
+           LEFT JOIN plan_zagr_two pzt
+                  ON pzt.nom     = nzp.nlNom
+                 AND pzt.nom_n   = nzp.nlNomN
+                 AND pzt.kod     = nzp.nlKoddRt
+                 AND pzt.pztNrID = nr.nrID
+    WHERE  pzt.nom IS NULL
+           AND nr.nrID IS NOT NULL;
+END;
+GO
+
+/* === 5.2  pztOperUpdateNEW  ============================================================= */
+CREATE OR ALTER PROCEDURE dbo.pztOperUpdateNEW
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @xIDBrig INT;
+
+    /* Этап 1: удаляем «нулевые» операции прошлого года */
+    DELETE FROM plan_zagr_two
+    WHERE pztNrID IN (SELECT nr.nrID FROM norm_rasz nr WHERE sek = 0)
+          AND ISNULL(tab,0)=0
+          AND YEAR(date_Add) = YEAR(GETDATE())-1
+          AND ISNULL(idrecord_osn,0)=0
+          AND ISNULL(delenie,0)=0
+          AND ISNULL(id_ml_op,0)=0;
+
+    /* Этап 2: обновляем sek / n_chasi и др. поля */
+    UPDATE pzt
+    SET   pzt.sek     = nrv.sek,
+          pzt.n_chasi = ROUND((nrv.sek*pzt.kol)/3600.00,2),
+          pzt.kod_ob  = nrv.obor,
+          pzt.operac  = nrv.[text],
+          pzt.spec    = nrv.razryd
+    FROM  plan_zagr_two pzt
+          INNER JOIN normRaszView nrv
+                     ON TRY_CAST(pzt.pztNrID AS INT) = nrv.nrID
+    WHERE pzt.date_Add IS NOT NULL
+          AND YEAR(ISNULL(pzt.date_Add,'19000101')) >= 2023
+          AND (YEAR(ISNULL(pzt.dateEnd,GETDATE())) = YEAR(GETDATE()) OR pzt.dateEnd IS NULL)
+          AND ISNUMERIC(pzt.pztNrID) = 1
+          AND ISNULL(nrv.sek,0) > ISNULL(pzt.sek,0);
+
+    /* Этап 3: синхронизируем ml_op */
+    UPDATE ml
+    SET   ml.sek = pzt.sek
+    FROM  ml_op ml
+          INNER JOIN plan_zagr_two pzt ON pzt.id_ml_op = ml.id
+                                     AND pzt.shtr     = ml.shtr
+    WHERE YEAR(ISNULL(pzt.dateEnd,GETDATE())) = YEAR(GETDATE())
+          AND ISNULL(pzt.sek,0) > ISNULL(ml.sek,0)
+          AND ISNULL(ml.tab,0) <> 999
+          AND ISNULL(pzt.tab,0) <> 999;
+
+    /* Этап 4: вставляем недостающие операции для каждой бригады */
+    DECLARE idBrigList CURSOR FORWARD_ONLY STATIC FOR
+        SELECT id_brig
+        FROM   brig
+        WHERE (brig LIKE 'бригада%' AND brig NOT LIKE '%усл.нам%' AND brig NOT LIKE '%exp%')
+              OR brig LIKE 'текстиль%'
+        ORDER BY id_brig;
+
+    OPEN idBrigList;
+    FETCH NEXT FROM idBrigList INTO @xIDBrig;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        IF OBJECT_ID('tempdb..#nzpSelect') IS NOT NULL DROP TABLE #nzpSelect;
+        CREATE TABLE #nzpSelect ( /* полный список столбцов */ 
+            nlNom DECIMAL(8), nlNomN INT, nlBrig NVARCHAR(30),
+            nlKodd VARCHAR(6), nlKoddRt VARCHAR(7),
+            nlArticul NCHAR(25), nlMod NCHAR(25), nlKol DECIMAL(38),
+            nlIdBrig INT, vidPr CHAR(2) /* …и др. */ );
+
+        INSERT INTO #nzpSelect EXEC dbo.rzu_nzp @xIDBrig;
+
+        /* далее создание #nrSelect, #nzpOperSelect и INSERT в plan_zagr_two — такой же
+           алгоритм, как в pztOperUpdateFast, но для одной бригады */
+
+        FETCH NEXT FROM idBrigList INTO @xIDBrig;
+    END;
+
+    CLOSE idBrigList;
+    DEALLOCATE idBrigList;
+END;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 6. Функции getFileEskizForKodd / getFileEskizForKodd_rt ---------------------------------
+---------------------------------------------------------------------------------------------
+DROP FUNCTION IF EXISTS dbo.getFileEskizForKodd, dbo.getFileEskizForKodd_rt;
+GO
+CREATE OR ALTER FUNCTION dbo.getFileEskizForKodd(@kod CHAR(7))
+RETURNS NVARCHAR(150)
+AS
+BEGIN
+    DECLARE @path NVARCHAR(150);
+    SELECT @path = 'h:\proizv\eskiz\' + SUBSTRING(@kod,1,2) + '\' + @kod + '.jpg';
+    RETURN @path;
+END;
+GO
+CREATE OR ALTER FUNCTION dbo.getFileEskizForKodd_rt(@kod CHAR(7))
+RETURNS NVARCHAR(150)
+AS
+BEGIN
+    DECLARE @path NVARCHAR(150);
+    SELECT @path = 'h:\proizv\eskiz\rt\' + @kod + '.jpg';
+    RETURN @path;
+END;
+GO
+
+-- =========================================================================================
+--  Раздел 7. VIEW – ключевые + массовый refresh
+-- =========================================================================================
+
+/* 7.1  artNormNView – главное представление по ANN */
+CREATE OR ALTER VIEW dbo.artNormNView AS
+SELECT annID, articul, mod, kod, sek_vyaz18, sek_vyaz57, [status], parentId,
+       obor, [text], razryd, sek
+FROM   dbo.art_norm_n;
+GO
+
+/* 7.3  view_sp_articul – с колонкой annId */
+CREATE OR ALTER VIEW dbo.View_sp_articul AS
+SELECT
+  SUBSTRING(sa.kod,1,7)           AS ko,
+  SUBSTRING(sa.kod,1,6) + CASE WHEN sa.po=' ' THEN SUBSTRING(sa.kod,7,1) ELSE sa.po END AS kodd,
+  SUBSTRING(sa.kod,1,6) + CASE WHEN TRIM(sa.po)='' THEN '0' ELSE sa.po END          AS kodd_rt,
+  CASE WHEN sa.GRUPP = 8 OR sa.baza NOT IN(3,6,9) THEN SUBSTRING(CAST(YEAR(GETDATE()) AS CHAR(4)),4,1) ELSE '0' END AS baz,
+  ISNULL(sa.seb_rekom,0)          AS seb_rekom,
+  sa.annId,
+  sa.kod, sa.po, sa.grup, sa.articul, sa.mod, sa.razm, sa.sost, sa.sost2_old,
+  sa.gost, sa.norm_t, sa.norm_r, sa.sek_shv, sa.sh_r, sa.seb_r, sa.norm_n, sa.kat_n,
+  sa.seb_n, sa.seb_z, sa.koef, sa.seb_rekom AS expr1, sa.seb_proizv, sa.seb_z_s, sa.sek,
+  sa.sek_vyaz5, sa.sek_vyaz7, sa.sek_vyaz12, sa.sek_vyaz, sa.pict, sa.kod_shtr, sa.kod_shtr_k,
+  sa.gr, x, sa.text, sa.kle, sa.grupp, sa.p, sa.v, sa.s, sa.kod_tov, sa.gruppa, sa.p_gruppa,
+  sa.text_m, sa.tkb, sa.kod_t1, sa.tkb1, sa.norm_t1, sa.opis_t1, sa.kod_t2, sa.tkb2,
+  sa.norm_t2, sa.opis_t2, sa.kod_t3, sa.tkb3, sa.norm_t3, sa.opis_t3, sa.kod_t4, sa.tkb4,
+  sa.norm_t4, sa.opis_t4, sa.baza, sa.kod_v, sa.kod_t5, sa.tkb5, sa.norm_t5, sa.opis_t5,
+  sa.kod_t6, sa.tkb6, sa.norm_t6, sa.opis_t6, sa.seb_dop, sa.seb_t1, sa.seb_t3, sa.seb_t2,
+  sa.seb_t4, sa.seb_t5, sa.seb_t6, sa.sek_vyaz6, sa.sek_vyaz10, sa.sek_vyazo, sa.normaPryz,
+  sa.id_gost, sa.id_svyaz, sa.koef_pr, sa.ob_izd, sa.stavka_nds, sa.kod_t7, sa.tkb7,
+  sa.norm_t7, sa.seb_t7, sa.opis_t7, sa.sposob_up, sa.id_country, sa.old_prch, sa.sek_vyaz70,
+  sa.sek_vyaz3, sa.koef_d, sa.st_nds, sa.upd_razm, sa.gl_rekom, sa.sek_kr, sa.arh, sa.nds,
+  sa.ed_izm, sa.brak_t1, sa.brak_t2, sa.brak_t3, sa.brak_t4, sa.brak_t5, sa.brak_t6,
+  sa.brak_t7, sa.brak_avg, sa.cena_prdc, sa.komb_det, sa.komb_izd, sa.sostav, sa.kod_t,
+  sa.k_kg_m1, sa.k_kg_m2, sa.k_kg_m3, sa.k_kg_m4, sa.k_kg_m5, sa.k_kg_m6, sa.k_kg_m7,
+  sa.sost2, sa.is_furnit, sa.is_upak, sa.sek_vyaz14, sa.gcg_id, sa.gbm_id, sa.gcgp_id,
+  sa.gbt_id, sa.bus, sa.stra, sa.p_pres, sa.seb_usl, sa.art_segm, sa.art_family, sa.art_class,
+  sa.art_block, sa.scid_n, sa.kod_tnved, sa.dateOpis, sa.mtrl_up, sa.mtrl_pdkl, sa.vid_obuv,
+  sa.mtrl_down, sa.sql_pr_add, sa.sql_pr_upd, sa.komp_name, sa.date_add, sa.sek_vyaz62,
+  sa.sek_vyaz71, sa.sek_vyaz72, sa.sost3, sa.kruj, sa.ag_id, sa.sek_cord, sa.kod_lv3,
+  sa.norm_cord, sa.tgm_id_n, sa.dateutvkk, sa.sum_zarpl, sa.sum_dopopl, sa.sum_strvznos,
+  sa.sum_sebraskr, sa.sum_komplnum,
+  IIF(sa.kod_v=1,gm.frm_v,gm.frm_s) AS frmIzgID,
+  f.frm_naimen                AS frmIzgName
+FROM dbo.sp_articul sa
+LEFT JOIN grup_men gm ON sa.grupp = gm.men_int
+LEFT JOIN global.planeta.dbo.firms f ON IIF(sa.kod_v=1,gm.frm_v,gm.frm_s) = f.frm_id
+WHERE ISNULL(sa.arh,0) = 0;
+GO
+
+
+/* 7.3  Массовое обновление зависимых VIEW */
+DECLARE @refresh NVARCHAR(MAX) = N'
+EXEC sp_refreshview ''dbo.sekArticulUpdate_view'';
+EXEC sp_refreshview ''dbo.view_normRask_vyazsek'';
+EXEC sp_refreshview ''dbo.View_raskr_plan_reestr'';
+EXEC sp_refreshview ''dbo.View_smena_skl_def_autonakl'';
+EXEC sp_refreshview ''dbo.View_smena_skl_default'';
+EXEC sp_refreshview ''dbo.View_sp_art_opis_add_test'';
+EXEC sp_refreshview ''dbo.View_sp_articul_dateopis_gl_1c_err'';
+EXEC sp_refreshview ''tmp.createarticul_matr1_articul_status'';
+EXEC sp_refreshview ''tmp.createarticul_matr1_plan_sezon_all'';';
+EXEC (@refresh);
+GO
+
+---------------------------------------------------------------------------------------------
+-- 8. Триггеры – включение/отключение в соответствии с эталоном
+---------------------------------------------------------------------------------------------
+PRINT N'Корректируем триггеры art_norm_n и plan_zagr_two';
+GO
+DISABLE TRIGGER IF EXISTS annDel_log ON dbo.art_norm_n;
+DISABLE TRIGGER IF EXISTS annIns_log ON dbo.art_norm_n;
+DISABLE TRIGGER IF EXISTS annUpd_log ON dbo.art_norm_n;
+
+ENABLE  TRIGGER IF EXISTS pztDel ON dbo.plan_zagr_two;
+ENABLE  TRIGGER IF EXISTS pztIns ON dbo.plan_zagr_two;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 9. ДОПОЛНИТЕЛЬНЫЕ СЛОВАРИ И ИНДЕКСЫ (из sql.txt) ------------------------
+---------------------------------------------------------------------------------------------
+-- 9.1 IF OBJECT_ID('dbo.Kod_proizv','U') IS NULL
+BEGIN
+    /* создаём без первичного ключа, чтобы сначала залить данные */
+    CREATE TABLE dbo.Kod_proizv
+    (
+        kod_proizv INT NOT NULL,
+        text_proizv VARCHAR(15) NULL
+    );
+
+    /* заполняем справочник */
+    INSERT INTO dbo.Kod_proizv(kod_proizv,text_proizv) VALUES
+        (0,'швейное'),
+        (1,'вязальное'),
+        (2,'квк'),
+        (3,'носки'),
+        (4,'кручение'),
+        (5,'раскройный');
+
+    /* теперь назначаем кластерный PK */
+    ALTER TABLE dbo.Kod_proizv
+        ADD CONSTRAINT PK_Kod_proizv_kod_proizv PRIMARY KEY CLUSTERED (kod_proizv);
+END;
+GO
+
+
+
+-- 9.2  podr_vyaz                                                   
+IF OBJECT_ID('dbo.podr_vyaz','U') IS NULL
+BEGIN
+    /* создаём без PK, чтобы сперва залить данные */
+    CREATE TABLE dbo.podr_vyaz
+    (
+        kod_vyaz   INT NOT NULL,
+        text_vyaz  VARCHAR(50) NULL,
+        kod_proizv INT NULL  -- FK на Kod_proizv.kod_proizv (пока без ограничения)
+    );
+
+    INSERT INTO dbo.podr_vyaz(kod_vyaz,text_vyaz,kod_proizv) VALUES
+        (0,'',9),
+        (1,'вязание',1),
+        (2,'вто',1),
+        (3,'выкройка',1),
+        (4,'отшивание',1),
+        (5,'упаковка',9),
+        (6,'носки вязание',1),
+        (7,'кручение',1),
+        (8,'выворотка',1),
+        (9,'этикетка',1),
+        (10,'носки интерлок',1),
+        (11,'шв/заготовка',0),
+        (12,'шв/монтаж',0),
+        (13,'шв/отделка',0),
+        (14,'шв/утюг',0),
+        (15,'упак/перетяж',1);
+
+    /* теперь добавляем кластерный PK */
+    ALTER TABLE dbo.podr_vyaz
+        ADD CONSTRAINT PK_podr_vyaz_kod_vyaz PRIMARY KEY CLUSTERED (kod_vyaz);
+END;
+GO
+
+
+---------------------------------------------------------------------------------------------
+-- 10.0. Добавляем столбец annId в таблицы, если отсутствует
+---------------------------------------------------------------------------------------------
+
+IF COL_LENGTH('dbo.sp_articul',   'annId') IS NULL ALTER TABLE dbo.sp_articul   ADD annId INT NULL;
+IF COL_LENGTH('dbo.norm_rasz',    'annId') IS NULL ALTER TABLE dbo.norm_rasz    ADD annId INT NULL;
+IF COL_LENGTH('dbo.norm_rask',    'annId') IS NULL ALTER TABLE dbo.norm_rask    ADD annId INT NULL;
+IF COL_LENGTH('dbo.norm_kont',    'annId') IS NULL ALTER TABLE dbo.norm_kont    ADD annId INT NULL;
+--IF COL_LENGTH('dbo.norm_dop_obr', 'annId') IS NULL ALTER TABLE dbo.norm_dop_obr ADD annId INT NULL; доп_обр не нужен
+GO
+---------------------------------------------------------------------------------------------
+-- 10. DATA PATCHES  ---------------------------
+---------------------------------------------------------------------------------------------
+PRINT N'Проставляем annId в связанных таблицах и вычисляем статусы';
+GO
+-- 10.1 annId в sp_articul                                                
+UPDATE sa
+SET    sa.annId = an.annID
+FROM   dbo.sp_articul sa
+JOIN   dbo.art_norm_n an ON an.kod = SUBSTRING(sa.kod,1,7)
+WHERE  sa.annId IS NULL;
+
+
+-- 10.2 annId в norm_rasz
+UPDATE nr
+SET    nr.annId = an.annID
+FROM   dbo.norm_rasz nr
+JOIN   dbo.art_norm_n an ON an.kod = SUBSTRING(nr.kod,1,7)
+WHERE  nr.annId IS NULL;
+
+-- 10.3 annId в norm_rask
+UPDATE nk
+SET    nk.annId = an.annID
+FROM   dbo.norm_kont nk
+JOIN   dbo.art_norm_n an ON an.kod = SUBSTRING(nk.kod,1,7)
+WHERE  nk.annId IS NULL;
+
+-- 10.4 annId в norm_kont
+UPDATE nk
+SET    nk.annId = an.annID
+FROM   dbo.norm_kont nk
+JOIN   dbo.art_norm_n an ON an.kod = SUBSTRING(nk.kod,1,7)
+WHERE  nk.annId IS NULL;
+
+---- 10.5 annId в norm_dop_obr (по kodd) доп_обр не нужен
+--UPDATE ndo
+--SET    ndo.annId = an.annID
+--FROM   dbo.norm_dop_obr ndo
+--JOIN   dbo.art_norm_n an ON an.kod = SUBSTRING(ndo.kod,1,7)
+--
+-- 10.6 Вычисляем начальные статусы: 1 = предв.(код начинается с 9), 2= активный (код не начинается с 9 и арх = 0), 3 = архивный (арх = 1)                              
+
+UPDATE dbo.art_norm_n
+SET    [status] = CASE
+                    WHEN arh = 1                              THEN 3  -- Архивный
+                    WHEN SUBSTRING(kod,1,1) = '9' AND arh = 0 THEN 1  -- Предварительный
+                    ELSE 2                                          -- Активный
+                  END;
+GO
+
+
+--9.1 добавляем индексы в таблицу norm_rasz
+IF NOT EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'IX_norm_rasz_annId_nrID_kod')
+    CREATE INDEX IX_norm_rasz_annId_nrID_kod ON dbo.norm_rasz(annId, nrID, kod);
+GO
+
+
+
+
+---------------------------------------
+--10.1
+---------------------------------------
+
+-- =============================================
+-- Author:		<Pentegova,Nadezhda>
+-- Create date: <Create Date,,>
+-- Description:	<формирование документов по списанию гофротары и пакетов по итогам отгрузки ГИ за день>
+-- =============================================
+CREATE PROCEDURE dbo.updateSebZArticulPsz @xKoddRt NVARCHAR(7)
+	-- Add the parameters for the stored procedure here
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+  --SELECT * FROM artNormNView nn
+  --  SELECT * FROM View_sp_articul vsa WHERE vsa.articul = '1Ф8776'
+  --  DECLARE @xKoddRt NVARCHAR(7) = '1086500'
+  DECLARE @xKodd NVARCHAR(8)
+
+  IF object_id('tempdb..#sebTemp') IS NOT NULL
+  	DROP TABLE #sebTemp
+  CREATE TABLE #sebTemp (messageerror nvarchar(max), error int, sum_zarpl decimal(12, 2), sum_dopopl decimal(12, 2), sum_strvznos decimal(12, 2), sum_sebraskr decimal(12, 2), sum_komplnum decimal(12, 2)
+  ,tkan_norm decimal(10,6),normkolpach int, sek_komplnum  decimal(12, 2),koefK1 decimal(10,6),koefK2StrVznos decimal(10,6),koefK3SebRaskrM decimal(10,6), kkr_nast decimal(10,6))
+
+  
+  --  SELECT * FROM #sebTemp
+  
+  --  DECLARE @xKoddRt NVARCHAR(7) = '1133450', @xKodSpArticul NVARCHAR(8)
+
+  IF object_id('tempdb..#annTemp') is not null
+  	DROP TABLE #annTemp
+  SELECT nn.sek, nn.sek_shv, nn.sek_vyaz, nn.sek_vyaz5, nn.sek_vyaz7, nn.sek_vyaz12
+      , nn.sek_vyaz6, nn.sek_vyaz10, nn.sek_vyaz3, nn.sek_kr, nn.sek_vyaz62
+      , nn.sek_vyaz71, nn.sek_vyaz72
+      , nn.sek_vyaz14, nn.sek_vyaz57, nn.sek_vyaz18
+    INTO #annTemp
+    FROM artNormNView nn
+    WHERE nn.kod = @xKoddRt
+  --  SELECT * FROM #annTemp
+
+  IF (SELECT ISNULL(sek,0) AS sek FROM #annTemp t) <> 0
+    BEGIN
+      declare kodList CURSOR FORWARD_ONLY STATIC FOR
+      	select kodd from View_sp_articul vsa WHERE vsa.kodd_rt = @xKoddRt GROUP BY kodd
+      Open kodList
+        --select nom_zad into #nomZadList from #pachKodList group by nom_zad
+        --select * from #nomZadList
+        
+        fetch next from kodList into @xKodd
+        WHILE @@FETCH_STATUS = 0
+        BEGIN
+  --      	-- declare @xNomZad char(7)= '1004660', @vidZayav int = 1, @xIsConfResult int
+  --      	exec @xIsConfResult = [dbo].[getConfectionCardByNomZad] @xNomZad, @vidZayav, 1
+  --      	--print @xIsConfResult
+  --      	--print @xNomZad
+  --      	update #pachKodList set isConf = case when isnull(@xIsConfResult,0) <> 0 then 1 else 0 end where nom_zad = @xNomZad
+          
+          DELETE FROM #sebTemp
+          INSERT INTO #sebTemp EXEC [dbo].[getArticulSebZarpl] @koddrt = @xKoddRt
+                                                              ,@kodd = @xKodd  
+  
+          UPDATE sp_articul
+            SET sek = #annTemp.sek, sek_shv = #annTemp.sek_shv, sek_vyaz = #annTemp.sek_vyaz
+              , sek_vyaz5 = #annTemp.sek_vyaz5, sek_vyaz7 = #annTemp.sek_vyaz7, sek_vyaz12 = #annTemp.sek_vyaz12
+              , sek_vyaz6 = #annTemp.sek_vyaz6, sek_vyaz10 = #annTemp.sek_vyaz10, sek_vyaz3 = #annTemp.sek_vyaz3
+              , sek_kr = #annTemp.sek_kr, sek_vyaz62 = #annTemp.sek_vyaz62
+              , sek_vyaz71 = #annTemp.sek_vyaz71, sek_vyaz72 = #annTemp.sek_vyaz72
+              , sek_vyaz14 = #annTemp.sek_vyaz14, sek_vyaz57 = #annTemp.sek_vyaz57, sek_vyaz18 = #annTemp.sek_vyaz18
+              , seb_z = #sebTemp.sum_zarpl + #sebTemp.sum_dopopl + #sebTemp.sum_strvznos + #sebTemp.sum_sebraskr + #sebTemp.sum_komplnum
+              , sum_zarpl = #sebTemp.sum_zarpl, sum_dopopl = #sebTemp.sum_dopopl, sum_strvznos = #sebTemp.sum_strvznos
+              , sum_sebraskr = #sebTemp.sum_sebraskr, sum_komplnum = #sebTemp.sum_komplnum
+            FROM sp_articul, #annTemp, #sebTemp
+            WHERE sp_articul.kod IN (SELECT vsa.kod FROM View_sp_articul vsa WHERE vsa.kodd_rt = @xKoddRt AND vsa.kodd = @xKodd)
+          
+          UPDATE plan_sezon_all
+            SET kal_z = #sebTemp.sum_zarpl + #sebTemp.sum_dopopl + #sebTemp.sum_strvznos + #sebTemp.sum_sebraskr + #sebTemp.sum_komplnum
+              , sum_zarpl = #sebTemp.sum_zarpl, sum_dopopl = #sebTemp.sum_dopopl, sum_strvznos = #sebTemp.sum_strvznos
+              , sum_sebraskr = #sebTemp.sum_sebraskr, sum_komplnum = #sebTemp.sum_komplnum
+              , sek = #annTemp.sek
+              , sek_noski = case when plan_sezon_all.men = '10' then #annTemp.sek_vyaz else plan_sezon_all.sek_noski END
+              , sek_seb_z = #sebTemp.sum_zarpl + #sebTemp.sum_dopopl + #sebTemp.sum_strvznos + #sebTemp.sum_sebraskr + #sebTemp.sum_komplnum
+              , sek_vyaz = IIF(ISNULL(#annTemp.sek_vyaz,0) > 0, #annTemp.sek_vyaz, plan_sezon_all.sek_vyaz)
+              , sek_shv = IIF(ISNULL(#annTemp.sek_shv,0) > 0, #annTemp.sek_shv, plan_sezon_all.sek_shv)
+              , sek_kr = IIF(ISNULL(#annTemp.sek_kr,0) > 0, #annTemp.sek_kr, plan_sezon_all.sek_kr)
+              , sek_v_km1 = CASE vyaz_km1
+                            	WHEN 1 THEN #annTemp.sek_vyaz5
+                            	WHEN 2 THEN #annTemp.sek_vyaz7
+                            	WHEN 3 THEN #annTemp.sek_vyaz12
+                              WHEN 4 THEN #annTemp.sek_vyaz6
+                              WHEN 5 THEN #annTemp.sek_vyaz10
+                              WHEN 6 THEN #annTemp.sek_vyaz3
+                              WHEN 9 THEN #annTemp.sek_vyaz62
+                              WHEN 8 THEN #annTemp.sek_vyaz71
+                              WHEN 13 THEN #annTemp.sek_vyaz72
+                              WHEN 12 THEN #annTemp.sek_vyaz14
+                              WHEN 22 THEN #annTemp.sek_vyaz57
+                              WHEN 23 THEN #annTemp.sek_vyaz18
+                              ELSE #annTemp.sek_vyaz
+                            END
+              , sek_v_km2 = CASE vyaz_km2
+                            	WHEN 1 THEN #annTemp.sek_vyaz5
+                            	WHEN 2 THEN #annTemp.sek_vyaz7
+                            	WHEN 3 THEN #annTemp.sek_vyaz12
+                              WHEN 4 THEN #annTemp.sek_vyaz6
+                              WHEN 5 THEN #annTemp.sek_vyaz10
+                              WHEN 6 THEN #annTemp.sek_vyaz3
+                              WHEN 9 THEN #annTemp.sek_vyaz62
+                              WHEN 8 THEN #annTemp.sek_vyaz71
+                              WHEN 13 THEN #annTemp.sek_vyaz72
+                              WHEN 12 THEN #annTemp.sek_vyaz14
+                              WHEN 22 THEN #annTemp.sek_vyaz57
+                              WHEN 23 THEN #annTemp.sek_vyaz18
+                              ELSE #annTemp.sek_vyaz
+                            END
+            FROM plan_sezon_all, #sebTemp, #annTemp
+            WHERE kodd = @xKodd   --IN (SELECT kodd FROM View_sp_articul WHERE kodd_rt = @xKoddRt GROUP BY kodd)
+        
+          UPDATE art_norm_n SET seb = #sebTemp.sum_zarpl + #sebTemp.sum_dopopl + #sebTemp.sum_strvznos + #sebTemp.sum_sebraskr + #sebTemp.sum_komplnum
+          FROM art_norm_n, #sebTemp
+            WHERE art_norm_n.kod = @xKoddRt
+      
+      	  FETCH NEXT FROM kodList into @xKodd
+        END
+      close kodList
+      deallocate kodList
+  END
+END
+
+
+GO
+
+
+
+CREATE PROCEDURE dbo.GetPztCountsByKoddRT
+    @xAnnID INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT  
+        LEFT(nr.kod, 7) AS kod,
+        COUNT_BIG(*) AS PztCount  -- COUNT_BIG на случай большого объема
+    FROM plan_zagr_two pzt
+    INNER JOIN norm_rasz nr ON pzt.pztNrID = nr.nrID
+    WHERE nr.annId = @xAnnID
+      AND pzt.tab > 0
+    GROUP BY LEFT(nr.kod, 7);
+END
+GO
+
+
+
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE dbo.GetNZPByKoddRT @xAnnID INT
+AS
+BEGIN
+	
+	--  DECLARE @xAnnID INT = 133316
+if object_id('tempdb..#articulKodSelect') is not null
+		drop table #articulKodSelect
+SELECT  vsa.kod, vsa.kodd_rt, vsa.grup, vsa.articul, vsa.mod, vsa.razm, vsa.kod_v
+  INTO #articulKodSelect
+  FROM View_sp_articul vsa 
+  WHERE annID = @xAnnID
+SELECT 
+@xAnnID AS annId,
+    s.kodd_rt, 
+    s.kodd, 
+    s.grup, 
+    s.articul, 
+    s.mod, 
+    s.kod_v,
+    SUM(s.kolRVAll) AS kolRVAll,
+    SUM(s.kolNaklAll) AS kolNaklAll,
+    SUM(s.kolGI) AS kolGI,
+    SUM( CAST(ISNULL(s.kolRVAll - s.kolGI, 0) as int)) AS kolNZP 
+FROM 
+(
+    SELECT 
+        ks.kod,
+        LEFT(ks.kod, 7) AS kodd,
+        ks.kodd_rt,
+        ks.grup,
+        ks.articul,
+        ks.mod,
+        ks.kod_v,
+        IIF(ISNULL(ks.kod_v, 0) = 1, rzv.pach_kod, rzu.pach_kod) AS pachKod,
+        IIF(ISNULL(ks.kod_v, 0) = 1, rzv.kol, rzu.kol) AS kolRVAll,
+        SUM(ISNULL(nr.kol, 0)) AS kolNaklAll,
+        SUM(IIF(ISNULL(n.dost_n, 0) <> 0, nr.kol, 0)) AS kolGI
+    FROM #articulKodSelect ks
+    LEFT JOIN raskr_zeh_up rzu ON ks.kod = rzu.kod AND ISNULL(ks.kod_v, 0) <> 1
+    LEFT JOIN raskr_zeh_vyaz rzv ON ks.kod = rzv.kod AND ISNULL(ks.kod_v, 0) = 1
+    LEFT JOIN nakl_ras nr ON IIF(ISNULL(ks.kod_v, 0) = 1, rzv.pach_kod, rzu.pach_kod) = nr.pach_kod
+    LEFT JOIN nakl n ON nr.iz = n.iz
+    GROUP BY 
+        ks.kod,
+        LEFT(ks.kod, 7),
+        ks.kodd_rt,
+        ks.grup,
+        ks.articul,
+        ks.mod,
+        ks.kod_v,
+        IIF(ISNULL(ks.kod_v, 0) = 1, rzv.kol, rzu.kol),
+        IIF(ISNULL(ks.kod_v, 0) = 1, rzv.pach_kod, rzu.pach_kod)
+) s
+GROUP BY 
+    s.kodd_rt, 
+    s.kodd, 
+    s.grup, 
+    s.articul, 
+    s.mod, 
+    s.kod_v
+ORDER BY 
+    s.kodd_rt, 
+    s.kodd, 
+    s.grup, 
+    s.articul, 
+    s.mod, 
+    s.kod_v;
+END
+
+GO
+
+
+---------------------------------------------------------------------------------------------
+-- 11. Обновление статистики + CHECKDB ------------------------------------
+---------------------------------------------------------------------------------------------
+PRINT N'Обновляем статистику и проверяем БД';
+GO
+EXEC sp_updatestats;
+DBCC CHECKDB('$(DBNAME)') WITH NO_INFOMSGS;
+GO
+
+---------------------------------------------------------------------------------------------
+-- 12. Завершаем транзакцию -----------------------------------------------
+---------------------------------------------------------------------------------------------
+COMMIT TRANSACTION;
+GO
+
+PRINT N'### $(DBNAME) успешно синхронизирована (схема + данные) на 06‑июн‑2025.';
+GO

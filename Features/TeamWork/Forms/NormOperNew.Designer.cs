@@ -44,6 +44,8 @@ namespace SewingProduction.form
             colrazryd = new DevExpress.XtraGrid.Columns.GridColumn();
             colobor = new DevExpress.XtraGrid.Columns.GridColumn();
             coltext_ob = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             colkod_ob = new DevExpress.XtraGrid.Columns.GridColumn();
             colsek = new DevExpress.XtraGrid.Columns.GridColumn();
             proizv = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -125,7 +127,7 @@ namespace SewingProduction.form
             // 
             // gridView1
             // 
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colkod_o, coltext, colspec, colrazryd, colobor, coltext_ob, colkod_ob, colsek, proizv, colkod_proizv, coltext_proizv, coltext_vyaz, gridColumn6 });
+            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colkod_o, coltext, colspec, colrazryd, colobor, coltext_ob, gridColumn8, gridColumn7, colkod_ob, colsek, proizv, colkod_proizv, coltext_proizv, coltext_vyaz, gridColumn6 });
             gridView1.GridControl = customGridControl1;
             gridView1.Name = "gridView1";
             gridView1.OptionsMenu.ShowAutoFilterRowItem = false;
@@ -172,8 +174,6 @@ namespace SewingProduction.form
             colobor.Caption = "Оборуд";
             colobor.FieldName = "obor";
             colobor.Name = "colobor";
-            colobor.Visible = true;
-            colobor.VisibleIndex = 4;
             colobor.Width = 48;
             // 
             // coltext_ob
@@ -182,16 +182,24 @@ namespace SewingProduction.form
             coltext_ob.FieldName = "text_ob";
             coltext_ob.Name = "coltext_ob";
             coltext_ob.Visible = true;
-            coltext_ob.VisibleIndex = 5;
+            coltext_ob.VisibleIndex = 4;
             coltext_ob.Width = 48;
+            // 
+            // gridColumn8
+            // 
+            gridColumn8.Caption = "gridColumn8";
+            gridColumn8.Name = "gridColumn8";
+            // 
+            // gridColumn7
+            // 
+            gridColumn7.Caption = "gridColumn7";
+            gridColumn7.Name = "gridColumn7";
             // 
             // colkod_ob
             // 
             colkod_ob.Caption = "Код оборудования";
             colkod_ob.FieldName = "kod_ob";
             colkod_ob.Name = "colkod_ob";
-            colkod_ob.Visible = true;
-            colkod_ob.VisibleIndex = 7;
             colkod_ob.Width = 48;
             // 
             // colsek
@@ -225,19 +233,22 @@ namespace SewingProduction.form
             coltext_proizv.Caption = "Произв.";
             coltext_proizv.FieldName = "text_proizv";
             coltext_proizv.Name = "coltext_proizv";
+            coltext_proizv.Visible = true;
+            coltext_proizv.VisibleIndex = 6;
             // 
             // coltext_vyaz
             // 
+            coltext_vyaz.Caption = "Вязание";
             coltext_vyaz.FieldName = "text_vyaz";
             coltext_vyaz.Name = "coltext_vyaz";
+            coltext_vyaz.Visible = true;
+            coltext_vyaz.VisibleIndex = 5;
             // 
             // gridColumn6
             // 
             gridColumn6.Caption = "Код";
             gridColumn6.FieldName = "kod";
             gridColumn6.Name = "gridColumn6";
-            gridColumn6.Visible = true;
-            gridColumn6.VisibleIndex = 6;
             // 
             // repositoryItemResourcesComboBox1
             // 
@@ -365,5 +376,7 @@ namespace SewingProduction.form
         private DevExpress.Utils.Layout.TablePanel tablePanel2;
         private DevExpress.XtraEditors.SearchControl searchControl1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn6;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn8;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn7;
     }
 }

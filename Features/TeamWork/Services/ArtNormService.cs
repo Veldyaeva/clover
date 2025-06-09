@@ -284,16 +284,16 @@ namespace SewingProduction.Services
             return result; 
         }
 
-        internal Task<DataTable> GetNormOper(int i)
+        internal Task<DataTable> GetNormOper()
         {
             string query = @"SELECT no.*, 
-                             kp.text_proizv,
-                             pv.text_vyaz,
-                             ob.text_ob
+                             kp.text_proizv, kp.kod_proizv,
+                             pv.text_vyaz, pv.kod_vyaz,
+                             ob.text_ob, ob.kod_ob
                              FROM dbo.norm_oper no
                              LEFT JOIN kod_proizv kp ON no.kod_proizv = kp.kod_proizv
                              LEFT JOIN podr_vyaz pv ON no.kod_proizv = pv.kod_vyaz
-                             LEFT JOIN oborud_shv_ob ob ON no.kod_ob = ob.ko_ob_all";
+                             LEFT JOIN oborud_shv ob ON no.kod_ob = ob.kod_ob";
             return _dbHelper.ExecuteQueryAsync(query);
         }
 
@@ -353,22 +353,6 @@ WHERE nr.annId = @annId";
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
         result = queryResult.ToList();
 
-//                    if (result != null && result.Any())
-//                    {
-//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper смапил {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz_Success");
-//                        foreach (var item in result)
-//                        {
-//                            await _logger.LogEventAsync(
-//                                $"Смаплено: AnnId={item.AnnId}({item.AnnId.GetType().Name}), nrId={item.nrId}({item.nrId.GetType().Name}), razryd={item.razryd}({item.razryd.GetType().Name}), " +
-//                                $"N={item.N}({item.N.GetType().Name}), N1={item.N1}({item.N1.GetType().Name}), Sek={item.Sek}({item.Sek.GetType().Name}), Seb={item.Seb}({item.Seb.GetType().Name}),  " +
-//                                $"Kod_o={item.kod_o}({item.kod_o.GetType().Name}), KodOb={item.KodOb}({item.KodOb.GetType().Name}), KodPodr={item.KodPodr}({item.KodPodr.GetType().Name}), KodProizv={item.KodProizv}({item.KodProizv.GetType().Name})",
-//                                "GetRelatedNormRasz_DapperItem");
-//    }
-//}
-//                    else
-//{
-//    await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper не вернул данные или результат пуст для AnnId={annId}.", "GetRelatedNormRasz_Empty");
-//}
                 }
                 catch(Exception ex)
                 {
@@ -386,92 +370,13 @@ throw;
                 return result ?? new List<NormRasz>();
             }
         }
-//        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
-//        {
-//            using (var connection = _dbHelper.GetConnection())
-//            {
-//                string query = @"SELECT nr.AnnId, nr.N, nr.N1, nr.razryd AS Rasryad, nr.Text,
-//    nr.Sek,
-//    nr.Seb,
-//    nr.Kod,
-//    nr.kod_o AS KodO,
-//    nr.kod_ob AS KodOb,
-//    nr.kod_podr AS KodPodr,
-//    nr.kod_proizv AS KodProizv,
-//    nr.Spec,
-//    nr.Obor,
-//    nr.nrId,
-//    kp.text_proizv as TextProizv,
-//    pv.text_vyaz as TextVyaz,
-//    ob.text_ob 
-//FROM dbo.normRaszView nr
-//LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
-//LEFT JOIN podr_vyaz pv ON nr.kod_proizv = pv.kod_vyaz 
-//LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
-//WHERE nr.annId = @annId";
+        public async Task<string> GetSpecByOborudKod(int kodOb)
+        {
+            string query = "SELECT no_spec FROM oborud_shv WHERE kod_ob = @kodOb";
+            var result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kodOb", kodOb } });
+            return result.Rows.Count > 0 ? result.Rows[0]["no_spec"]?.ToString() : null;
+        }
 
-//                await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
-
-//                var rawData = await connection.QueryAsync(query, new { annId });
-                
-//                if (rawData != null && rawData.Any())
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Получено {rawData.Count()} сырых строк из БД для AnnId={annId}.", "GetRelatedNormRasz");
-//                    foreach (var row in rawData)
-//                    {
-//                        // Пытаемся получить значение как dynamic, чтобы увидеть, что Dapper вернул
-//                        var dynamicRow = (IDictionary<string, object>)row;
-//                        object razrydValueRaw = "NOT_FOUND";
-//                        if (dynamicRow.ContainsKey("Rasryad")) 
-//                        {
-//                            razrydValueRaw = dynamicRow["Rasryad"] ?? "NULL_IN_RAW_DATA";
-//                        }
-//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Сырая строка: AnnId={dynamicRow.ContainsKey("AnnId")}, nrId={dynamicRow.ContainsKey("nrId")}, Rasryad_Raw={razrydValueRaw} (тип: {razrydValueRaw?.GetType()?.Name ?? "N/A"})", "GetRelatedNormRasz");
-//                    }
-//                }
-//                else
-//                {
-//                     await _logger.LogEventAsync($"GetRelatedNormRasz: Сырые данные из БД для AnnId={annId} не найдены или пусты.", "GetRelatedNormRasz");
-//                }
-
-//                var result = rawData.Select(r => new NormRasz {
-//                    AnnId = r.AnnId,
-//                    N = r.N,
-//                    N1 = r.N1,
-//                    razryd = r.Rasryad, 
-//                    Text = r.Text,
-//                    Sek = r.Sek,
-//                    Seb = r.Seb,
-//                    Kod = r.Kod,
-//                    Kod_o = r.kod_o,
-//                    KodOb = r.kod_ob,
-//                    KodPodr = r.kod_podr,
-//                    KodProizv = r.kod_proizv,
-//                    Spec = r.Spec,
-//                    Obor = r.Obor,
-//                    nrId = r.nrId,
-//                    TextProizv = r.TextProizv,
-//                    TextVyaz = r.TextVyaz,
-//                    TextOb = r.text_ob 
-//                }).ToList();
-
-
-//                if (result.Any())
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Смаплено {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz");
-//                    foreach (var item in result)
-//                    {
-//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Смапленный объект: AnnId={item.AnnId}, nrId={item.nrId}, razryd_Mapped={item.razryd}", "GetRelatedNormRasz");
-//                    }
-//                }
-//                else
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Не удалось смапить объекты NormRasz для AnnId={annId} из сырых данных.", "GetRelatedNormRasz");
-//                }
-                
-//                return result;
-//            }
-//        }
 
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
@@ -571,7 +476,7 @@ throw;
 
         public async Task<List<FioModel>> GetRelDesigner()
         {
-            string query = "SELECT fio, tab FROM fio";
+            string query = "SELECT * FROM fio WHERE rab LIKE '%дизайнер%' OR rab LIKE '%конструктор%'";//"SELECT fio, tab FROM fio";
             using (var connection = _dbHelper.GetConnection())
             {
                 var result = await connection.QueryAsync<FioModel>(query);
