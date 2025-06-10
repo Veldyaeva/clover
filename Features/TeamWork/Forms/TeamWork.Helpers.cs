@@ -411,27 +411,23 @@ namespace SewingProduction.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var notDescribedFilter = new GroupOperator(
-                        GroupOperatorType.And,
-                        new BinaryOperator("sek_shv", 0),
-                        new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual)
+                    var sekNullOrZero = new GroupOperator(
+                        GroupOperatorType.Or,
+                        new BinaryOperator("SekShv", 0),
+                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("SekShv"))
                     );
 
+                    var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
+
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, sekNullOrZero, excludeArchived);
+
                     if (statusCriteria != null)
-                    {
-                        statusCriteria = new GroupOperator(
-                            GroupOperatorType.And,
-                            statusCriteria,
-                            notDescribedFilter
-                        );
-                    }
+                        statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
                     else
-                    {
                         statusCriteria = notDescribedFilter;
-                    }
                 }
 
-                 if (statusCriteria != null)
+                if (statusCriteria != null)
                 {
                     // Только фильтр статуса
                     ANNgridView.ActiveFilterCriteria = statusCriteria;

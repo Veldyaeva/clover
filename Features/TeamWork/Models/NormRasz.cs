@@ -17,6 +17,8 @@ namespace SewingProduction.Models
         public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
+        [NotMapped]
+        public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
         public int nrId { get; set; }
         public int AnnId { get; set; }
         public string Kod { get; set; }
@@ -60,9 +62,6 @@ namespace SewingProduction.Models
             set => SetProperty(ref _kod_ob, value, nameof(KodOb));
         }
 
-
-        [NotMapped]
-        public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
 
         public void CopyPropertiesFrom(NormRasz source)
         {
