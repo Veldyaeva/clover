@@ -109,7 +109,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public string kmlNumber { get; set; }
         [NotMapped]
-        public string kmlID { get; set; }
+        public int kmlID { get; set; }
         [NotMapped]
         public string combinedPszNom { get; set; }
         [NotMapped]
@@ -127,6 +127,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int pszkmKnitClass { get; set; }
         [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
         public string pszkmKmlID { get; set; }
         [NotMapped]
         public decimal pszkmlSeconds { get; set; }
@@ -135,9 +137,27 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public DateTime? pszkmPlanDateTo { get; set; }
         [NotMapped]
-        public int secondsWorked { get; set; }
+        public int SecondsWorked { get; set; }
+        [NotMapped]
+        public decimal hoursTotal { get; set; }
         [NotMapped]
         public DateTime? pszkmDateAdd { get; set; }
+        [NotMapped]
+        public DateTime? DateZap { get; set; }
+        [NotMapped]
+        public string articul { get; set; }
+        [NotMapped]
+        public string yearMonthDateZap { get; set; }
+        [NotMapped]
+        public int monthNumberDateZap { get; set; }
+        [NotMapped]
+        public int yearNumberDateZap { get; set; }
+        [NotMapped]
+        public string yearMonthPlanDate { get; set; }
+        [NotMapped]
+        public int monthNumberPlanDate { get; set; }
+        [NotMapped]
+        public int yearNumberPlanDate { get; set; }
     }
 
 }
