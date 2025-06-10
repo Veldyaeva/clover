@@ -4,6 +4,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraScheduler.Commands;
+using DevExpress.XtraVerticalGrid;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
@@ -127,27 +128,27 @@ namespace SewingProduction.Forms
         /// </summary>
         private async void customCheckBox6_CheckedChanged_Internal(object sender, EventArgs e)
         {
-            //try
-            //{
-            //    string filterString = "";
+            try
+            {
+                string filterString = "";
 
-            //    if (actualCheckBox1.Checked) filterString += $"status = {(int)Status.Actual}";
-            //    if (preliminaryCheckBox1.Checked)
-            //    {
-            //        if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
-            //        filterString += $"status = {(int)Status.Preliminary}";
-            //    }
+                if (actualCheckBox.Checked) filterString += $"status = {(int)Status.Actual}";
+                if (preliminaryCheckBox.Checked)
+                {
+                    if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
+                    filterString += $"status = {(int)Status.Preliminary}";
+                }
 
-            //    // Применяем фильтр к gridView8
-            //    gridView_wdToBind.BeginUpdate();
-            //    gridView_wdToBind.ActiveFilterString = filterString;
-            //    gridView_wdToBind.EndUpdate();
-            //}
-            //catch (Exception ex)
-            //{
-            //    await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
-            //    MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                // Применяем фильтр к gridView8
+                gridView_wdToBind.BeginUpdate();
+                gridView_wdToBind.ActiveFilterString = filterString;
+                gridView_wdToBind.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при фильтрации gridView8");
+                MessageBox.Show($"Ошибка при применении фильтра: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -190,6 +191,10 @@ namespace SewingProduction.Forms
                 bool disableButton = selectedItem.Status == (int)Status.Archive 
                                   || selectedItem.Status == (int)Status.PreliminaryArchive;
                 ButtonArchAndCopyWd.Enabled = !disableButton;
+                textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
+                textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
+                textEditSec.Text = selectedItem.Sek.ToString();
+                textEditCreate.Text = selectedItem.dateCreate.HasValue? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy"):string.Empty;
             }
             else
             {
@@ -239,7 +244,6 @@ namespace SewingProduction.Forms
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в {view.Name} (RowHandle: {e.FocusedRowHandle})");
-                // MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); // Опционально
             }
         }
 
@@ -461,7 +465,10 @@ namespace SewingProduction.Forms
                     Diz = 0, // Значения по умолчанию или будут установлены в TeamWork_AdvanceTW
                     Constr = 0,
                     Arh = false,
-                    AnnID = 0 // БД назначит ID
+                    AnnID = 0, // БД назначит ID
+                    Mod = selectedArtData.mod,
+                    grup = selectedArtData.grup
+
                 };
 
                 // 2. Вставляем "оболочку" в БД для получения AnnID
@@ -551,7 +558,11 @@ namespace SewingProduction.Forms
                         if (teamWorkAdvanceTW.IsDopObrInserted) // Если есть логика для доп. обработки
                             await _artNormService.DeleteByAnnId(TableNames.Obr, newAnnId);
 
-                        MessageBox.Show("Создание новой записи отменено.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Создание новой записи отменено.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        await _logger.LogEventAsync($"Создание новой записи ANN (ID: {newAnnId}) отменено пользователем.", "simpleButton2_Click_Internal_Cancel");
+                      //  await ShowStatusMessage("Сохранение данных...");
+
+
                     }
                 }
                 // Обновляем основную таблицу после всех операций
@@ -709,22 +720,29 @@ namespace SewingProduction.Forms
         //    args.IsSearchColumn = args.FieldName == colName;
         //}
 
-        //private async void customCheckBox4_CheckedChanged_Internal(object sender, EventArgs e)
-        //{
-        //    int kod = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "kod", 0);
-        //    string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "articul", "");
+        private async void loadAllCheckBox_CheckedChanged_Internal(object sender, EventArgs e)
+        {
+            string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
+            if (!int.TryParse(kod, out int kodInt))
+            {
+                await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
+                kodInt = 0;
+            }
 
-        //    List<MyDataANN> list = loadAllCheckBox.Checked ?
-        //        await LoadWorksbyArt(0, "") :
-        //        await LoadWorksbyArt(kod, articul);
-        //    gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
-        //}
+            //CommonFunctions.GetRowCellValueOrDefault<int>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "Kod", 0);
+            string articul = //CommonFunctions.GetRowCellValueOrDefault<string>(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle, "articul", "");
+                gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Articul").ToString();
+            List<MyDataANN> list = loadAllCheckBox.Checked ?
+                await LoadWorksbyArt(0, "") :
+                await LoadWorksbyArt(kodInt, articul);
+            gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
+        }
 
 
-        ///// <summary>
-        ///// Переключение фильтров при изменении чекбоксов
-        ///// </summary>
-        //private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
+        /// <summary>
+        /// Переключение фильтров при изменении чекбоксов
+        /// </summary>
+        private void Filter_CheckedChanged_Internal(object sender, EventArgs e) => filterTable();
 
         ///// <summary>
         ///// Обработчик смены выбранного поля поиска при изменении параметров поиска.

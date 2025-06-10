@@ -414,7 +414,7 @@ namespace SewingProduction.Forms
                     var notDescribedFilter = new GroupOperator(
                         GroupOperatorType.And,
                         new BinaryOperator("sek_shv", 0),
-                        new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
+                        new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual)
                     );
 
                     if (statusCriteria != null)
@@ -431,21 +431,7 @@ namespace SewingProduction.Forms
                     }
                 }
 
-                // Если есть и фильтр поиска, и фильтр статуса
-                if (searchFilter != null && statusCriteria != null)
-                {
-                    ANNgridView.ActiveFilterCriteria = new GroupOperator(
-                        GroupOperatorType.And,
-                        searchFilter,
-                        statusCriteria
-                    );
-                }
-                else if (searchFilter != null)
-                {
-                    // Только фильтр поиска
-                    ANNgridView.ActiveFilterCriteria = searchFilter;
-                }
-                else if (statusCriteria != null)
+                 if (statusCriteria != null)
                 {
                     // Только фильтр статуса
                     ANNgridView.ActiveFilterCriteria = statusCriteria;

@@ -226,7 +226,7 @@ namespace SewingProduction.form
             gridColumn20.MinWidth = 23;
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
-            gridColumn20.VisibleIndex = 3;
+            gridColumn20.VisibleIndex = 2;
             gridColumn20.Width = 272;
             // 
             // gridColumn21
@@ -236,7 +236,7 @@ namespace SewingProduction.form
             gridColumn21.MinWidth = 23;
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;
-            gridColumn21.VisibleIndex = 5;
+            gridColumn21.VisibleIndex = 3;
             gridColumn21.Width = 167;
             // 
             // colseb
@@ -244,8 +244,6 @@ namespace SewingProduction.form
             colseb.FieldName = "Seb";
             colseb.MinWidth = 23;
             colseb.Name = "colseb";
-            colseb.Visible = true;
-            colseb.VisibleIndex = 4;
             colseb.Width = 140;
             // 
             // gridColumn22
@@ -253,8 +251,6 @@ namespace SewingProduction.form
             gridColumn22.FieldName = "N";
             gridColumn22.MinWidth = 23;
             gridColumn22.Name = "gridColumn22";
-            gridColumn22.Visible = true;
-            gridColumn22.VisibleIndex = 6;
             gridColumn22.Width = 206;
             // 
             // coln_ch1
@@ -262,8 +258,6 @@ namespace SewingProduction.form
             coln_ch1.FieldName = "NCh";
             coln_ch1.MinWidth = 23;
             coln_ch1.Name = "coln_ch1";
-            coln_ch1.Visible = true;
-            coln_ch1.VisibleIndex = 7;
             coln_ch1.Width = 217;
             // 
             // gridColumn17
@@ -271,8 +265,6 @@ namespace SewingProduction.form
             gridColumn17.FieldName = "Kod";
             gridColumn17.MinWidth = 23;
             gridColumn17.Name = "gridColumn17";
-            gridColumn17.Visible = true;
-            gridColumn17.VisibleIndex = 2;
             gridColumn17.Width = 146;
             // 
             // colannId2
@@ -350,7 +342,7 @@ namespace SewingProduction.form
             // 
             // gridColumn14
             // 
-            gridColumn14.Caption = "Разряд";
+            gridColumn14.Caption = "разряд";
             gridColumn14.FieldName = "razryd";
             gridColumn14.MinWidth = 23;
             gridColumn14.Name = "gridColumn14";
@@ -360,7 +352,7 @@ namespace SewingProduction.form
             // 
             // gridColumn11
             // 
-            gridColumn11.Caption = "Наименование операци раскроя";
+            gridColumn11.Caption = "наименование операци раскроя";
             gridColumn11.FieldName = "Text";
             gridColumn11.MinWidth = 23;
             gridColumn11.Name = "gridColumn11";
@@ -380,7 +372,7 @@ namespace SewingProduction.form
             // 
             // colspec
             // 
-            colspec.Caption = "Специальность";
+            colspec.Caption = "специальность";
             colspec.FieldName = "Spec";
             colspec.MinWidth = 23;
             colspec.Name = "colspec";
@@ -390,7 +382,7 @@ namespace SewingProduction.form
             // 
             // gridColumn16
             // 
-            gridColumn16.Caption = "Оборуд.";
+            gridColumn16.Caption = "оборуд.";
             gridColumn16.FieldName = "Obor";
             gridColumn16.MinWidth = 23;
             gridColumn16.Name = "gridColumn16";
@@ -459,7 +451,7 @@ namespace SewingProduction.form
             gridViewRasz.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsBehavior.EditingMode = GridEditingMode.EditForm;
             gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
-            gridViewRasz.OptionsEditForm.EditFormColumnCount = 2;
+            gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
@@ -522,7 +514,7 @@ namespace SewingProduction.form
             gridColumn33.MinWidth = 23;
             gridColumn33.Name = "gridColumn33";
             gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            gridColumn33.OptionsEditForm.VisibleIndex = 8;
+            gridColumn33.OptionsEditForm.VisibleIndex = 5;
             gridColumn33.Visible = true;
             gridColumn33.VisibleIndex = 2;
             gridColumn33.Width = 77;
@@ -549,7 +541,7 @@ namespace SewingProduction.form
             gridColumn37.MinWidth = 23;
             gridColumn37.Name = "gridColumn37";
             gridColumn37.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            gridColumn37.OptionsEditForm.VisibleIndex = 5;
+            gridColumn37.OptionsEditForm.VisibleIndex = 4;
             gridColumn37.Visible = true;
             gridColumn37.VisibleIndex = 4;
             gridColumn37.Width = 68;
@@ -561,7 +553,7 @@ namespace SewingProduction.form
             colspec2.MinWidth = 23;
             colspec2.Name = "colspec2";
             colspec2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            colspec2.OptionsEditForm.VisibleIndex = 9;
+            colspec2.OptionsEditForm.VisibleIndex = 6;
             colspec2.Visible = true;
             colspec2.VisibleIndex = 5;
             colspec2.Width = 105;
@@ -585,7 +577,7 @@ namespace SewingProduction.form
             gridColumn4.Name = "gridColumn4";
             gridColumn4.OptionsEditForm.Caption = "произв.";
             gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            gridColumn4.OptionsEditForm.VisibleIndex = 2;
+            gridColumn4.OptionsEditForm.VisibleIndex = 7;
             gridColumn4.Visible = true;
             gridColumn4.VisibleIndex = 6;
             gridColumn4.Width = 123;
@@ -602,13 +594,13 @@ namespace SewingProduction.form
             // 
             // Kod_podr
             // 
-            Kod_podr.Caption = "вяз. подр.";
+            Kod_podr.Caption = "подразделение";
             Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
             Kod_podr.FieldName = "KodPodr";
             Kod_podr.MinWidth = 23;
             Kod_podr.Name = "Kod_podr";
             Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            Kod_podr.OptionsEditForm.VisibleIndex = 4;
+            Kod_podr.OptionsEditForm.VisibleIndex = 8;
             Kod_podr.Visible = true;
             Kod_podr.VisibleIndex = 7;
             Kod_podr.Width = 186;
@@ -774,6 +766,7 @@ namespace SewingProduction.form
             // 
             modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
+            modelTextBox.Enabled = false;
             modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
             modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             modelTextBox.Location = new System.Drawing.Point(4, 138);
@@ -850,6 +843,7 @@ namespace SewingProduction.form
             // 
             groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
+            groupTextBox.Enabled = false;
             groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
             groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             groupTextBox.Location = new System.Drawing.Point(4, 84);
