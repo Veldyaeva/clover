@@ -898,14 +898,21 @@ namespace SewingProduction.Forms
                 // Обновляем annId в базе данных
                 _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnID);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
-                selectedAnnRow.grup = selectedArtRow.grup;//заполняем в РТ из артикула
-                selectedAnnRow.mod = selectedArtRow.mod;//заполняем в РТ из артикула
-                                                        // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
+                if (string.IsNullOrEmpty(selectedAnnRow.grup))
+                {
+                    selectedAnnRow.grup = selectedArtRow.grup;
+                }
+                if (selectedAnnRow.mod == null)
+                    if (string.IsNullOrEmpty(selectedAnnRow.mod))
+                    {
+                        selectedAnnRow.grup = selectedArtRow.mod;
+                    }
+                // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
                 {
-                    // 0. Присваиваем привязанному артиклю артикля разделений
+                    // 0. Присваиваем привязанному артикулу артикул разделений
                     selectedArtRow.BindedArt = selectedAnnRow.Articul;
                     // 1. Добавляем привязанный артикул в список для gridView1
                     _boundArtList?.Add(selectedArtRow);

@@ -1,4 +1,5 @@
 ﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.Data.Filtering;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
@@ -232,7 +233,7 @@ namespace SewingProduction.Forms
         }
         private void Filter_CheckedChanged(object sender, EventArgs e)
         {
-            // Filter_CheckedChanged_Internal(sender, e);
+            Filter_CheckedChanged_Internal(sender, e);
         }
         private async void search_CheckedChanged(object sender, EventArgs e)
         { //search_CheckedChanged_Internal(sender, e);
@@ -261,8 +262,9 @@ namespace SewingProduction.Forms
         private async void customButton12_Click(object sender, EventArgs e)
         {// customButton12_Click_Internal(sender, e);
         }
-        private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
-        { //customCheckBox4_CheckedChanged_Internal(sender, e); 
+        private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            loadAllCheckBox_CheckedChanged_Internal(sender, e); 
         }
 
         private void searchControl1_KeyDown(object sender, KeyEventArgs e)
@@ -493,13 +495,13 @@ namespace SewingProduction.Forms
                     ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
                 case 2:
-                    EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 4:
                     DuplicateWorkDivision_Click_Internal(sender, e);
                     break;
                 case 6:
-                    ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true);
+                    ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
 
             }
@@ -507,7 +509,37 @@ namespace SewingProduction.Forms
 
         private void SortBox_CheckedChanged(object sender, EventArgs e)
         {
+            // Добавляем фильтр по "Не описанные" если выбран
+            //if (SortBox.Checked)
+            //{
+            //    var notDescribedFilter = new GroupOperator(
+            //        GroupOperatorType.And,
+            //        new BinaryOperator("sek_shv", 0),
+            //        new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
+            //    );
 
+            //    if (statusCriteria != null)
+            //    {
+            //        statusCriteria = new GroupOperator(
+            //            GroupOperatorType.And,
+            //            statusCriteria,
+            //            notDescribedFilter
+            //        );
+            //    }
+            //    else
+            //    {
+            //        statusCriteria = notDescribedFilter;
+            //    }
+            //}
+
+        }
+
+        private void ANNgridView_CalcPreviewText(object sender, CalcPreviewTextEventArgs e)
+        {
+            if (e.RowHandle >= 0 && ANNgridView.GetRow(e.RowHandle) is ArtNormN row)
+            {
+                e.PreviewText = $"Дизайнер: {row.Diz}, Конструктор: {row.Constr}, Особенности: {row.Komment}, Рекомендации: {row.Reco}";
+            }
         }
     }
 

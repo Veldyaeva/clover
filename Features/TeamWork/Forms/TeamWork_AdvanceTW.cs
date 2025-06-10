@@ -300,10 +300,15 @@ namespace SewingProduction.form
                 _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
-                if (!allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
+                if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                }
+                else
+                {
+                    gridViewRasz.PopupMenuShowing -= ShowPopUp(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
             }
@@ -311,7 +316,19 @@ namespace SewingProduction.form
         private void AttachDeleteContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId = null, List<int> deletedIds = null)
                     where T : class
         {
-            view.PopupMenuShowing += (s, e) =>
+            try
+            {
+                view.PopupMenuShowing += ShowPopUp(view, bindingList, getId, deletedIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при удалении строки TeamWork_AdvanceTW");
+            }
+        }
+
+        private static PopupMenuShowingEventHandler ShowPopUp<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId, List<int> deletedIds) where T : class
+        {
+            return (s, e) =>
             {
                 if (e.MenuType != GridMenuType.Row)
                     return;
@@ -339,7 +356,6 @@ namespace SewingProduction.form
                 menu.Items.Add(deleteItem);
             };
         }
-
 
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
@@ -1239,7 +1255,6 @@ namespace SewingProduction.form
                 IsRaszInserted = true; // Предполагаем, что если сохранение дошло сюда, то все списки были обработаны
                 IsRaskInserted = true;
                 IsKontInserted = true;
-                IsDopObrInserted = true; // Если есть логика для DopObr
                 _hasUnsavedChanges = false;
                 // UpdateFormTitle(); // Если есть такой метод, раскомментируйте
 

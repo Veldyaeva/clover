@@ -18,6 +18,7 @@
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaszManager.cs" />
+    <Compile Remove="Features\TeamWork\Models\NormRasz1.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
   </ItemGroup>
