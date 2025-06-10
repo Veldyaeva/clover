@@ -33,15 +33,15 @@
             customLabel2 = new CustomLabel();
             gridControlKnitMachineLoadInfo = new CustomGridControl();
             gridViewKnitMachineLoadInfoCards = new DevExpress.XtraGrid.Views.Card.CardView();
-            gridColumnKnitMachineLoadInfoKmlNumberCard = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKnitMachineLoadInfoYearMonthCard = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKnitMachineLoadInfoCombinedPszNomCard = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnKmlNumberCard = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnYearMonthCard = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnCombinedPszNomCard = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemRichTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit();
             repositoryItemMemoEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit();
             gridViewKnitMachineLoadInfo = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridColumnKnitMachineLoadInfoYearMonth = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKnitMachineLoadInfoKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnKnitMachineLoadInfoCombinedPszNom = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnYearMonth = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnKmlNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridKnitMachineLoadInfoColumnCombinedPszNom = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)gridControlKnitMachineLoadInfo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadInfoCards).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemRichTextEdit1).BeginInit();
@@ -54,7 +54,7 @@
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customLabel1.Location = new System.Drawing.Point(848, 40);
+            customLabel1.Location = new System.Drawing.Point(847, 9);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(135, 16);
             customLabel1.TabIndex = 0;
@@ -66,7 +66,7 @@
             сomboBoxKnitMachineClassList.Font = new System.Drawing.Font("Arial", 10F);
             сomboBoxKnitMachineClassList.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
             сomboBoxKnitMachineClassList.FormattingEnabled = true;
-            сomboBoxKnitMachineClassList.Location = new System.Drawing.Point(90, 65);
+            сomboBoxKnitMachineClassList.Location = new System.Drawing.Point(90, 29);
             сomboBoxKnitMachineClassList.Name = "сomboBoxKnitMachineClassList";
             сomboBoxKnitMachineClassList.Size = new System.Drawing.Size(121, 24);
             сomboBoxKnitMachineClassList.TabIndex = 1;
@@ -78,7 +78,7 @@
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customLabel2.Location = new System.Drawing.Point(11, 68);
+            customLabel2.Location = new System.Drawing.Point(11, 32);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(73, 16);
             customLabel2.TabIndex = 2;
@@ -87,17 +87,17 @@
             // gridControlKnitMachineLoadInfo
             // 
             gridControlKnitMachineLoadInfo.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlKnitMachineLoadInfo.Location = new System.Drawing.Point(12, 95);
+            gridControlKnitMachineLoadInfo.Location = new System.Drawing.Point(12, 59);
             gridControlKnitMachineLoadInfo.MainView = gridViewKnitMachineLoadInfoCards;
             gridControlKnitMachineLoadInfo.Name = "gridControlKnitMachineLoadInfo";
             gridControlKnitMachineLoadInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1, repositoryItemRichTextEdit1 });
-            gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(1806, 681);
+            gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(1806, 819);
             gridControlKnitMachineLoadInfo.TabIndex = 3;
             gridControlKnitMachineLoadInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKnitMachineLoadInfoCards, gridViewKnitMachineLoadInfo });
             // 
             // gridViewKnitMachineLoadInfoCards
             // 
-            gridViewKnitMachineLoadInfoCards.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnKnitMachineLoadInfoKmlNumberCard, gridColumnKnitMachineLoadInfoYearMonthCard, gridColumnKnitMachineLoadInfoCombinedPszNomCard });
+            gridViewKnitMachineLoadInfoCards.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridKnitMachineLoadInfoColumnKmlNumberCard, gridKnitMachineLoadInfoColumnYearMonthCard, gridKnitMachineLoadInfoColumnCombinedPszNomCard });
             gridViewKnitMachineLoadInfoCards.DetailHeight = 700;
             gridViewKnitMachineLoadInfoCards.GridControl = gridControlKnitMachineLoadInfo;
             gridViewKnitMachineLoadInfoCards.MaximumCardRows = 3;
@@ -105,25 +105,26 @@
             gridViewKnitMachineLoadInfoCards.OptionsBehavior.FieldAutoHeight = true;
             gridViewKnitMachineLoadInfoCards.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Auto;
             // 
-            // gridColumnKnitMachineLoadInfoKmlNumberCard
+            // gridKnitMachineLoadInfoColumnKmlNumberCard
             // 
-            gridColumnKnitMachineLoadInfoKmlNumberCard.Name = "gridColumnKnitMachineLoadInfoKmlNumberCard";
+            gridKnitMachineLoadInfoColumnKmlNumberCard.Name = "gridKnitMachineLoadInfoColumnKmlNumberCard";
             // 
-            // gridColumnKnitMachineLoadInfoYearMonthCard
+            // gridKnitMachineLoadInfoColumnYearMonthCard
             // 
-            gridColumnKnitMachineLoadInfoYearMonthCard.Name = "gridColumnKnitMachineLoadInfoYearMonthCard";
-            gridColumnKnitMachineLoadInfoYearMonthCard.Visible = true;
-            gridColumnKnitMachineLoadInfoYearMonthCard.VisibleIndex = 0;
+            gridKnitMachineLoadInfoColumnYearMonthCard.Name = "gridKnitMachineLoadInfoColumnYearMonthCard";
+            gridKnitMachineLoadInfoColumnYearMonthCard.Visible = true;
+            gridKnitMachineLoadInfoColumnYearMonthCard.VisibleIndex = 0;
             // 
-            // gridColumnKnitMachineLoadInfoCombinedPszNomCard
+            // gridKnitMachineLoadInfoColumnCombinedPszNomCard
             // 
-            gridColumnKnitMachineLoadInfoCombinedPszNomCard.ColumnEdit = repositoryItemRichTextEdit1;
-            gridColumnKnitMachineLoadInfoCombinedPszNomCard.Name = "gridColumnKnitMachineLoadInfoCombinedPszNomCard";
-            gridColumnKnitMachineLoadInfoCombinedPszNomCard.Visible = true;
-            gridColumnKnitMachineLoadInfoCombinedPszNomCard.VisibleIndex = 1;
+            gridKnitMachineLoadInfoColumnCombinedPszNomCard.ColumnEdit = repositoryItemRichTextEdit1;
+            gridKnitMachineLoadInfoColumnCombinedPszNomCard.Name = "gridKnitMachineLoadInfoColumnCombinedPszNomCard";
+            gridKnitMachineLoadInfoColumnCombinedPszNomCard.Visible = true;
+            gridKnitMachineLoadInfoColumnCombinedPszNomCard.VisibleIndex = 1;
             // 
             // repositoryItemRichTextEdit1
             // 
+            repositoryItemRichTextEdit1.AllowHtmlDraw = DevExpress.Utils.DefaultBoolean.True;
             repositoryItemRichTextEdit1.CustomHeight = 120;
             repositoryItemRichTextEdit1.Name = "repositoryItemRichTextEdit1";
             repositoryItemRichTextEdit1.ShowCaretInReadOnly = false;
@@ -136,33 +137,33 @@
             // 
             gridViewKnitMachineLoadInfo.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewKnitMachineLoadInfo.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKnitMachineLoadInfo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnKnitMachineLoadInfoYearMonth, gridColumnKnitMachineLoadInfoKmlNumber, gridColumnKnitMachineLoadInfoCombinedPszNom });
+            gridViewKnitMachineLoadInfo.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridKnitMachineLoadInfoColumnYearMonth, gridKnitMachineLoadInfoColumnKmlNumber, gridKnitMachineLoadInfoColumnCombinedPszNom });
             gridViewKnitMachineLoadInfo.GridControl = gridControlKnitMachineLoadInfo;
             gridViewKnitMachineLoadInfo.Name = "gridViewKnitMachineLoadInfo";
             gridViewKnitMachineLoadInfo.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKnitMachineLoadInfo.RowHeight = 150;
             // 
-            // gridColumnKnitMachineLoadInfoYearMonth
+            // gridKnitMachineLoadInfoColumnYearMonth
             // 
-            gridColumnKnitMachineLoadInfoYearMonth.Caption = "мес/год";
-            gridColumnKnitMachineLoadInfoYearMonth.Name = "gridColumnKnitMachineLoadInfoYearMonth";
-            gridColumnKnitMachineLoadInfoYearMonth.Visible = true;
-            gridColumnKnitMachineLoadInfoYearMonth.VisibleIndex = 0;
+            gridKnitMachineLoadInfoColumnYearMonth.Caption = "мес/год";
+            gridKnitMachineLoadInfoColumnYearMonth.Name = "gridKnitMachineLoadInfoColumnYearMonth";
+            gridKnitMachineLoadInfoColumnYearMonth.Visible = true;
+            gridKnitMachineLoadInfoColumnYearMonth.VisibleIndex = 0;
             // 
-            // gridColumnKnitMachineLoadInfoKmlNumber
+            // gridKnitMachineLoadInfoColumnKmlNumber
             // 
-            gridColumnKnitMachineLoadInfoKmlNumber.Caption = "№ вяз машины";
-            gridColumnKnitMachineLoadInfoKmlNumber.Name = "gridColumnKnitMachineLoadInfoKmlNumber";
-            gridColumnKnitMachineLoadInfoKmlNumber.Visible = true;
-            gridColumnKnitMachineLoadInfoKmlNumber.VisibleIndex = 1;
+            gridKnitMachineLoadInfoColumnKmlNumber.Caption = "№ вяз машины";
+            gridKnitMachineLoadInfoColumnKmlNumber.Name = "gridKnitMachineLoadInfoColumnKmlNumber";
+            gridKnitMachineLoadInfoColumnKmlNumber.Visible = true;
+            gridKnitMachineLoadInfoColumnKmlNumber.VisibleIndex = 1;
             // 
-            // gridColumnKnitMachineLoadInfoCombinedPszNom
+            // gridKnitMachineLoadInfoColumnCombinedPszNom
             // 
-            gridColumnKnitMachineLoadInfoCombinedPszNom.Caption = "задания";
-            gridColumnKnitMachineLoadInfoCombinedPszNom.ColumnEdit = repositoryItemRichTextEdit1;
-            gridColumnKnitMachineLoadInfoCombinedPszNom.Name = "gridColumnKnitMachineLoadInfoCombinedPszNom";
-            gridColumnKnitMachineLoadInfoCombinedPszNom.Visible = true;
-            gridColumnKnitMachineLoadInfoCombinedPszNom.VisibleIndex = 2;
+            gridKnitMachineLoadInfoColumnCombinedPszNom.Caption = "задания";
+            gridKnitMachineLoadInfoColumnCombinedPszNom.ColumnEdit = repositoryItemRichTextEdit1;
+            gridKnitMachineLoadInfoColumnCombinedPszNom.Name = "gridKnitMachineLoadInfoColumnCombinedPszNom";
+            gridKnitMachineLoadInfoColumnCombinedPszNom.Visible = true;
+            gridKnitMachineLoadInfoColumnCombinedPszNom.VisibleIndex = 2;
             // 
             // KnittingMachinesLoading
             // 
@@ -192,13 +193,13 @@
         private CustomLabel customLabel2;
         private CustomGridControl gridControlKnitMachineLoadInfo;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKnitMachineLoadInfo;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoYearMonth;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoKmlNumber;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoCombinedPszNom;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnYearMonth;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnKmlNumber;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnCombinedPszNom;
         private DevExpress.XtraGrid.Views.Card.CardView gridViewKnitMachineLoadInfoCards;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoYearMonthCard;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoKmlNumberCard;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnKnitMachineLoadInfoCombinedPszNomCard;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnYearMonthCard;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnKmlNumberCard;
+        private DevExpress.XtraGrid.Columns.GridColumn gridKnitMachineLoadInfoColumnCombinedPszNomCard;
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEdit1;
     }

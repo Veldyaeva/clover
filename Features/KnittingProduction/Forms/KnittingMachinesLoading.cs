@@ -1,7 +1,9 @@
 ﻿using DevExpress.Spreadsheet.Charts;
+using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Card;
 using DevExpress.XtraGrid.Views.Card.ViewInfo;
+using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.KnittingProduction.Models;
@@ -67,7 +69,15 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             //}
             сomboBoxKnitMachineClassList.Refresh();
         }
-
+        // Функция конвертации HTML в RTF (используем RichTextBox)
+        private string ConvertHtmlToRtf(string html)
+        {
+            using (RichTextBox rtBox = new RichTextBox())
+            {
+                rtBox.Text = html;
+                return rtBox.Rtf;
+            }
+        }
         private async Task InitializeBindingsAsync()
         {
             try
@@ -98,12 +108,34 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 #region описание gridControlKnitMachineList "текущий загруз В/М"
                 gridControlKnitMachineLoadInfo.DataSource = _knitMachineLoadInfoBindingSource;
-                gridColumnKnitMachineLoadInfoYearMonth.FieldName = "yearMonth";
-                gridColumnKnitMachineLoadInfoYearMonthCard.FieldName = "yearMonth";
-                gridColumnKnitMachineLoadInfoKmlNumber.FieldName = "kmlNumber";
-                gridColumnKnitMachineLoadInfoKmlNumberCard.FieldName = "kmlNumber";
-                gridColumnKnitMachineLoadInfoCombinedPszNom.FieldName = "combinedPszNom";
-                gridColumnKnitMachineLoadInfoCombinedPszNomCard.FieldName = "combinedPszNom";
+                gridKnitMachineLoadInfoColumnYearMonth.FieldName = "yearMonth";
+                gridKnitMachineLoadInfoColumnYearMonthCard.FieldName = "yearMonth";
+                gridKnitMachineLoadInfoColumnKmlNumber.FieldName = "kmlNumber";
+                gridKnitMachineLoadInfoColumnKmlNumberCard.FieldName = "kmlNumber";
+                gridKnitMachineLoadInfoColumnCombinedPszNom.FieldName = "combinedPszNom";
+                gridKnitMachineLoadInfoColumnCombinedPszNomCard.FieldName = "combinedPszNom";
+
+                gridViewKnitMachineLoadInfo.Columns["combinedPszNom"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+                gridViewKnitMachineLoadInfo.Columns["combinedPszNom"].DisplayFormat.format  CustomFormat += (value) =>
+                {
+                    return value?.ToString(); // RTF-текст передается напрямую
+                };
+
+                //// Подключаем обработчик события
+                //gridViewKnitMachineLoadInfo.CustomColumnDisplayText += (sender, e) =>
+                //{
+                //    // Проверяем, что это нужная колонка
+                //    if (e.Column.FieldName == "combinedPszNom")
+                //    {
+                //        // Если значение не пустое, конвертируем его в RTF
+                //        if (e.Value != null)
+                //        {
+                //            string htmlText = e.Value.ToString();
+                //            string rtfText = ConvertHtmlToRtf(htmlText);
+                //            e.DisplayText = rtfText; // Устанавливаем преобразованный текст
+                //        }
+                //    }
+                //};
                 #endregion
                 #region описание comboBox "Список зон обслуживания"
                 //сomboBoxKnitMachineAreaList.DataSource = _knitMachineAreaListViewBindingSource;
@@ -118,6 +150,32 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 сomboBoxKnitMachineClassList.SelectedValue = xClassID;
                 #endregion
 
+                //// Подписываемся на событие отрисовки ячейки
+                //gridViewKnitMachineLoadInfo.CustomDrawCell += (s, e) =>
+                //{
+                //    // Проверяем, что это нужная колонка (например, "Tags")
+                //    if (e.Column.FieldName == "Tags")
+                //    {
+                //        // Получаем данные строки (предположим, что привязан объект с полями DatePlanFrom и DatePlanTo)
+                //        var rowData = gridViewKnitMachineLoadInfo.GetRow(e.RowHandle) as KnitMachineLoadAllInfo;
+                //        if (rowData == null) return;
+
+                //        // Задаем целевой год и месяц (например, текущие)
+                //        int targetYear = DateTime.Now.Year;
+                //        int targetMonth = DateTime.Now.Month;
+
+                //        // Проверяем условие: если год и месяц DatePlanFrom или DatePlanTo не совпадают с целевыми
+                //        bool shouldHighlight =
+                //            (rowData.DatePlanFrom.Year != targetYear || rowData.DatePlanFrom.Month != targetMonth) ||
+                //            (rowData.DatePlanTo.Year != targetYear || rowData.DatePlanTo.Month != targetMonth);
+
+                //        // Если условие выполнено — рисуем текст красным, иначе стандартным цветом
+                //        e.Appearance.ForeColor = shouldHighlight ? Color.Red : e.Appearance.ForeColor;
+
+                //        // Стандартная отрисовка текста
+                //        e.DefaultDraw();
+                //    }
+                //};
             }
             catch (Exception ex)
             {
@@ -424,17 +482,60 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     if (hitInfo.InCard)
                     {
+                        //var selectedRow = _knitMachineLoadInfoBindingSource.Current as KnitMachineLoadAllInfo;
+                        ////string kmlNumber = gridViewKnitMachineLoadInfoCards.GetRowCellValue(hitInfo.RowHandle, "kmlNumber")?.ToString();
+                        ////string kmlID = gridViewKnitMachineLoadInfoCards.GetRowCellValue(hitInfo.RowHandle, "kmlID")?.ToString();
+                        //MessageBox.Show($"Выбрана В/М: {selectedRow.kmlNumber}, ID: {selectedRow.kmlID}");
+                        int xKmlID = 0;
+                        string xKmlNumber = "";
                         var selectedRow = _knitMachineLoadInfoBindingSource.Current as KnitMachineLoadAllInfo;
-                        //string kmlNumber = gridViewKnitMachineLoadInfoCards.GetRowCellValue(hitInfo.RowHandle, "kmlNumber")?.ToString();
-                        //string kmlID = gridViewKnitMachineLoadInfoCards.GetRowCellValue(hitInfo.RowHandle, "kmlID")?.ToString();
-                        MessageBox.Show($"Выбрана В/М: {selectedRow.kmlNumber}, ID: {selectedRow.kmlID}");
+                        if (selectedRow != null && selectedRow.kmlID != 0)
+                        {
+                            xKmlID = selectedRow.kmlID;
+                            xKmlNumber = selectedRow.kmlNumber;
+                        }
+                        else
+                        {
+                            xKmlID = 0;
+                            xKmlNumber = "";
+                        }
+                        KnittingMachinesUnitLoading KML = new KnittingMachinesUnitLoading(xKmlID, xKmlNumber);
+
+                        DialogResult result = KML.ShowDialog();
+                        // Обработка результата, возвращенного модальной формой
+                        if (result == DialogResult.OK)
+                        {
+                            // Действия при успешном завершении работы модальной формы
+                            //MessageBox.Show("OK");
+                        }
+                        else
+                        {
+                            // Действия при отмене или другом результате
+                            //MessageBox.Show("Cancel");
+                        }
                     }
                 }
             };
-
-
-
         }
+        //private void gridViewKnitMachineLoadInfo_RowStyle(object sender, RowStyleEventArgs e)
+        //{
+        //    GridView view = sender as GridView;
+        //    if (view == null) return;
+
+        //    // Получаем данные строки (пример для DataTable)
+        //    DataRow row = view.GetDataRow(e.RowHandle);
+        //    if (row == null) return;
+
+        //    // Условие для раскраски (например, если значение в колонке "Status" равно "Completed")
+        //    if (row["Status"].ToString() == "Completed")
+        //    {
+        //        e.Appearance.BackColor = Color.LightGreen;
+        //    }
+        //    else if (row["Status"].ToString() == "Pending")
+        //    {
+        //        e.Appearance.BackColor = Color.LightYellow;
+        //    }
+        //}
 
     }
 }
