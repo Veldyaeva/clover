@@ -21,14 +21,17 @@ namespace SewingProduction.form.UserDistribution
 {
     public partial class UserHierarchy : CustomForm
     {
-        private readonly AllProfileDataService _allProfileDataService;
         DatabaseHelper dbHelper = new DatabaseHelper("ace");
-        private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
+        DbService dbService;
+        private readonly AllProfileDataService _allProfileDataService;
+        private readonly UserModelDataService _userModelDataService;
         private readonly UserClass _user;
         private List<UserClass> _userHierarchy;
         public UserHierarchy(UserClass user) : base(user)
         {
             InitializeComponent();
+            dbService = new DbService(dbHelper);
+            _userModelDataService = new UserModelDataService(dbService, dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
         }
@@ -107,23 +110,17 @@ namespace SewingProduction.form.UserDistribution
         }
         private async void gridViewUsers_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            try { 
-                var user = e.Row as UserClass;
-                if (user == null || user.UserId > 0) return;
+            try {
+                var user = e.Row as UserModel;
+                if (user == null) return;
 
                 var hasher = new PasswordHasher();
                 string password = string.IsNullOrWhiteSpace(user.Password) ? "0" : user.Password;
-                string passwordHash = hasher.HashPassword(password);
+                user.PasswordHash = hasher.HashPassword(password);
+                user.CreatorID = _user.UserId;
 
-                int newUserId = await _allProfileDataService.AddUser(
-                    user.UserName,
-                    passwordHash,
-                    user.FioID,
-                    _user.UserId,
-                    user.BrigID
-                );
-
-                user.UserId = newUserId;
+                int newUserId = await _userModelDataService.SaveAsync(user);
+                user.UserID = newUserId;
 
                 customGridControlUsers_Load(sender, e);
             }
@@ -211,40 +208,6 @@ namespace SewingProduction.form.UserDistribution
             ORDER BY
                 UserPath;";
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@CreatorID", CreatorID } });
-        }
-        public async Task<System.Data.DataTable> GetUserRole(int CreatorID)
-        {
-            string query = $@"SELECT * FROM UserRole ";
-            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@CreatorID", CreatorID } });
-        }
-        public async Task<int> AddUser(string userName, string passwordHash, int fioId, int creatorId, int brigId)
-        {
-            string query = @"
-            INSERT INTO Users (UserName, PasswordHash,FioID, CreatorID, BrigID)
-            OUTPUT INSERTED.UserId
-            VALUES (@UserName, @PasswordHash, @FioID, @CreatorID, @BrigID)";
-
-            var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
-            {
-                { "@UserName", userName },
-                { "@PasswordHash", passwordHash },
-                { "@FioID", fioId },
-                { "@CreatorID", creatorId },
-                { "@BrigID", brigId }
-            });
-
-            Console.WriteLine($"Создан пользователь {userName}, фио ид: {fioId}, бриг ид: {brigId},");
-            SetPravaForAddUser(result);
-            return Convert.ToInt32(result);
-        }
-        private async void SetPravaForAddUser(int newId)
-        {
-            string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
-            DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
-            int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(new DbService(_dbHelper),_dbHelper);
-            await userRoleDataService.AssignRoleAsync(newId, roleId);
-            Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }
     }
 }

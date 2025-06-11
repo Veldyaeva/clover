@@ -43,7 +43,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
         private async Task LoadTablesAsync()
         {
-            _tables = await _tableService.GetListTable();
+            _tables = await _tableService.GetListTableAsync();
             bindingSourceTable.DataSource = _tables;
         }
 

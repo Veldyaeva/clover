@@ -72,7 +72,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = dbHelper;
         }
 
-        public async Task<List<FormModel>> GetListAsync()
+        public async Task<List<FormModel>> GetListFormsAsync()
         {
             string query = "SELECT ProjectFormsID, NameForm, NameFormRus, CreatorID FROM ProjectForms";
             return await _dbService.GetListAsync<FormModel>(query, new { });
@@ -86,6 +86,16 @@ namespace SewingProduction.Features.UserDistribution.Models
         public async Task DeleteAsync(FormModel form)
         {
             await _dbService.DeleteEntityAsync("ProjectForms", "ProjectFormsID", form);
+        }
+        public async Task<int?> GetFormIdByNameAsync(string formName)
+        {
+            string query = "SELECT ProjectFormsID FROM ProjectForms WHERE NameForm = @name";
+            object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
+            {
+                { "@name", formName }
+            });
+
+            return result != null && result != DBNull.Value ? Convert.ToInt32(result) : (int?)null;
         }
     }
 

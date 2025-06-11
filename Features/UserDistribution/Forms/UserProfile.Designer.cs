@@ -347,7 +347,7 @@
             customButtonAdminSprav.Name = "customButtonAdminSprav";
             customButtonAdminSprav.Size = new System.Drawing.Size(210, 51);
             customButtonAdminSprav.TabIndex = 10;
-            customButtonAdminSprav.Text = "Администрирование справочников";
+            customButtonAdminSprav.Text = "Администрирование колонок";
             customButtonAdminSprav.UseVisualStyleBackColor = false;
             customButtonAdminSprav.Click += customButtonAdminSprav_Click;
             // 
@@ -363,7 +363,7 @@
             customButtonSpravTable.Name = "customButtonSpravTable";
             customButtonSpravTable.Size = new System.Drawing.Size(210, 51);
             customButtonSpravTable.TabIndex = 12;
-            customButtonSpravTable.Text = "Описатель таблиц";
+            customButtonSpravTable.Text = "Администрирование таблиц";
             customButtonSpravTable.UseVisualStyleBackColor = false;
             customButtonSpravTable.Click += customButtonSpravTable_Click;
             // 
