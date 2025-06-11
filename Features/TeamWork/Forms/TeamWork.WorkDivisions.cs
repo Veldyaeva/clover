@@ -76,6 +76,8 @@ namespace SewingProduction.Forms
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
                 ANNgridControl.EndUpdate();
+                if (_bindingList.Count > 0)
+                    await LoadRelatedData(_bindingList[0].AnnID);
             }
             catch (Exception ex)
             {
@@ -398,8 +400,6 @@ namespace SewingProduction.Forms
                     await _artNormService.DeleteByAnnId(TableNames.Rask, newItem.AnnID);
                 if (teamWorkForm.IsKontInserted)
                     await _artNormService.DeleteByAnnId(TableNames.Kont, newItem.AnnID);
-                if (teamWorkForm.IsDopObrInserted)
-                    await _artNormService.DeleteByAnnId(TableNames.Obr, newItem.AnnID);
 
                 _bindingSource.ResetBindings(false);
                 ANNgridControl.RefreshDataSource();

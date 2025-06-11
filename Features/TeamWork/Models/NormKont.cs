@@ -19,19 +19,19 @@ namespace SewingProduction.Models
         public int nkId { get; set; }
         public int AnnId { get; set; }
         [Column("kod")]
-        public int Kod { get; set; }
+        public int kod { get; set; }
         public string kod_o { get; set; }
         [Column("text")]
-        public string Text { get; set; }
-        public string Spec { get; set; }
-        public int razryd { get; set; }
-        public string Obor { get; set; }
-        public int Sek { get; set; }
-        public int Seb { get; set; }
-        public int N { get; set; }
+        public string text { get; set; }
+        public string spec { get; set; }
+        public decimal razryd { get; set; }
+        public string obor { get; set; }
+        public int sek { get; set; }
+        public decimal seb { get; set; }
+        public int n { get; set; }
         public int n_ch { get; set; }
-        public int N1 { get; set; }
-        public int SebS { get; set; }
+        public int n1 { get; set; }
+        public decimal sebS { get; set; }
 
         // Добавляем реализацию INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;

@@ -264,7 +264,7 @@ namespace SewingProduction.Forms
         }
         private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            loadAllCheckBox_CheckedChanged_Internal(sender, e); 
+            loadAllCheckBox_CheckedChanged_Internal(sender, e);
         }
 
         private void searchControl1_KeyDown(object sender, KeyEventArgs e)
@@ -423,9 +423,7 @@ namespace SewingProduction.Forms
                 case 4:
                     ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
                     break;
-                case 6:
-                    simpleButton2_Click_Internal(sender, e); // Четвертая кнопка  создать из артикула
-                    break;
+
             }
         }
 
@@ -507,33 +505,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void SortBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Добавляем фильтр по "Не описанные" если выбран
-            //if (SortBox.Checked)
-            //{
-            //    var notDescribedFilter = new GroupOperator(
-            //        GroupOperatorType.And,
-            //        new BinaryOperator("sek_shv", 0),
-            //        new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
-            //    );
-
-            //    if (statusCriteria != null)
-            //    {
-            //        statusCriteria = new GroupOperator(
-            //            GroupOperatorType.And,
-            //            statusCriteria,
-            //            notDescribedFilter
-            //        );
-            //    }
-            //    else
-            //    {
-            //        statusCriteria = notDescribedFilter;
-            //    }
-            //}
-
-        }
-
         private void ANNgridView_CalcPreviewText(object sender, CalcPreviewTextEventArgs e)
         {
             if (e.RowHandle >= 0 && ANNgridView.GetRow(e.RowHandle) is ArtNormN row)
@@ -541,6 +512,34 @@ namespace SewingProduction.Forms
                 e.PreviewText = $"Дизайнер: {row.Diz}, Конструктор: {row.Constr}, Особенности: {row.Komment}, Рекомендации: {row.Reco}";
             }
         }
+
+        private void layoutControlGroup6_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            //             case 6:
+            simpleButton2_Click_Internal(sender, e); // Четвертая кнопка  создать из артикула
+                                                     // break;
+        }
+
+        private void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    BindButton_Click_Internal(sender, e);// увязать
+                    break;
+                case 2:
+                    UnboundWD(sender, e);
+                    break;
+            }
+        }
+
+        private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
 
 }

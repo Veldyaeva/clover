@@ -700,7 +700,8 @@ namespace SewingProduction.form
                             annData.dateCreate = DateTime.Now;
                             annData.dateUpdate = null;
                         }
-                        _currentAnnData = annData;                // Обновляем текущую модель
+                        _currentAnnData = annData.Clone();                // Обновляем текущую модель
+                        _currentAnnData.CopyPropertiesFrom(annData);
                         bindingSource1.SuspendBinding();
                         bindingSource1.DataSource = _currentAnnData;
                         bindingSource1.ResumeBinding();
@@ -730,7 +731,7 @@ namespace SewingProduction.form
                 var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
 
                 int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
-
+          //      int Sum1(Func<NormRask, bool> condition)=>rask
                 _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
                 _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
                 _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
@@ -929,10 +930,10 @@ namespace SewingProduction.form
                 int index = _normRaszList.IndexOf(canceledNormRasz);
                 if (index != -1)
                 {
-                    // Восстанавливаем оригинальные данные. Убедитесь, что NormRasz.Clone() был эффективен.
-                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); // Нужен метод CopyPropertiesFrom или ручное копирование
+                    // Восстанавливаем оригинальные данные.
+                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); 
                     _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrId}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
-                    _normRaszBindingSource.ResetBindings(false); // Важно для обновления грида
+                    _normRaszBindingSource.ResetBindings(false);
                 }
             }
 
@@ -1152,7 +1153,7 @@ namespace SewingProduction.form
         {
             GridView view = sender as GridView;
             if (view == null) return;
-
+            if (view.RowCount >= 2) return;
             if (view.IsNewItemRow(view.FocusedRowHandle))
             {
                 e.Cancel = true;
@@ -1166,8 +1167,8 @@ namespace SewingProduction.form
                     string choice1 = "Пронумеровать деталь";
                     string choice2 = "Номер пачки";
                     // Проверяем, какие строки уже есть
-                    bool hasChoice1 = _normKontList.Any(nk => nk.Text == choice1);
-                    bool hasChoice2 = _normKontList.Any(nk => nk.Text == choice2);
+                    bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
+                    bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
 
                     List<string> options = new List<string>();
                     if (!hasChoice1) options.Add(choice1);
@@ -1206,7 +1207,7 @@ namespace SewingProduction.form
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
-                            Text = selectedText,
+                            text = selectedText,
                             IsNew = true
                         };
                         _normKontList.Add(newKont);
@@ -1256,7 +1257,6 @@ namespace SewingProduction.form
                 IsRaskInserted = true;
                 IsKontInserted = true;
                 _hasUnsavedChanges = false;
-                // UpdateFormTitle(); // Если есть такой метод, раскомментируйте
 
                 if (closeAfterSave)
                 {
@@ -1487,7 +1487,7 @@ namespace SewingProduction.form
                     var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
                     _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
 
-                    _currentAnnData.dateCreate = DateTime.Now;
+                    //_currentAnnData.dateCreate = DateTime.Now;
 
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -218,7 +218,7 @@ namespace SewingProduction.Services
         }
 
         /// <summary>
-        /// загрузка артикулов для увязки. Статус != архивное
+        /// загрузка РТ для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
         public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool includeAll)
@@ -230,8 +230,8 @@ namespace SewingProduction.Services
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
                     v.data_sozd, v.diz, v.constr 
                 FROM ArtNormNView v
-                JOIN status_ann sa ON v.status = sa.status_id ";
-               // WHERE v.status != 3"; // Статус "архивное"
+                JOIN status_ann sa ON v.status = sa.status_id 
+                WHERE v.status != 3"; // Статус "архивное"
 
             object parameters = null; 
 
