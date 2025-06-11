@@ -15,6 +15,7 @@ namespace SewingProduction.Models
         public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
+        public string DisplayNumber => N1 > 0 ? $"{N}.{N1}" : $"{N}";
         private int _id;
         public int id
         {
@@ -35,8 +36,8 @@ namespace SewingProduction.Models
         public int N {  get; set; }
         public int N1 { get; set; }
         public int N_ch { get; set; }
-        public int Sek { get; set; }
-        public int Seb  { get; set; }
+        public int? Sek { get; set; }
+        public decimal? Seb  { get; set; }
         public int Seb_s { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

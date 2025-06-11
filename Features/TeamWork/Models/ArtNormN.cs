@@ -247,7 +247,6 @@ namespace SewingProduction.Models
             this.SekShv1 = source.SekShv1;
         }
 
-        // Если у вас еще нет метода Clone(), его тоже полезно иметь:
         public ArtNormN Clone()
         {
             // MemberwiseClone создает "поверхностную" копию.

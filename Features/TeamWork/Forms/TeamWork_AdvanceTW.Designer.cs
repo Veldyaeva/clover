@@ -62,6 +62,7 @@ namespace SewingProduction.form
             gridViewRasz = new GridView();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn34 = new DevExpress.XtraGrid.Columns.GridColumn();
+            DisplayNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -202,7 +203,7 @@ namespace SewingProduction.form
             // gridColumn19
             // 
             gridColumn19.Caption = "№ оп";
-            gridColumn19.FieldName = "KodO";
+            gridColumn19.FieldName = "kodO";
             gridColumn19.MinWidth = 23;
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
@@ -212,7 +213,7 @@ namespace SewingProduction.form
             // gridColumn23
             // 
             gridColumn23.Caption = "№ п/оп";
-            gridColumn23.FieldName = "N1";
+            gridColumn23.FieldName = "n1";
             gridColumn23.MinWidth = 23;
             gridColumn23.Name = "gridColumn23";
             gridColumn23.Visible = true;
@@ -222,7 +223,7 @@ namespace SewingProduction.form
             // gridColumn20
             // 
             gridColumn20.Caption = "наименование операции комплектовки";
-            gridColumn20.FieldName = "Text";
+            gridColumn20.FieldName = "text";
             gridColumn20.MinWidth = 23;
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
@@ -232,7 +233,7 @@ namespace SewingProduction.form
             // gridColumn21
             // 
             gridColumn21.Caption = "сек";
-            gridColumn21.FieldName = "Sek";
+            gridColumn21.FieldName = "sek";
             gridColumn21.MinWidth = 23;
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;
@@ -241,28 +242,28 @@ namespace SewingProduction.form
             // 
             // colseb
             // 
-            colseb.FieldName = "Seb";
+            colseb.FieldName = "seb";
             colseb.MinWidth = 23;
             colseb.Name = "colseb";
             colseb.Width = 140;
             // 
             // gridColumn22
             // 
-            gridColumn22.FieldName = "N";
+            gridColumn22.FieldName = "n";
             gridColumn22.MinWidth = 23;
             gridColumn22.Name = "gridColumn22";
             gridColumn22.Width = 206;
             // 
             // coln_ch1
             // 
-            coln_ch1.FieldName = "NCh";
+            coln_ch1.FieldName = "nCh";
             coln_ch1.MinWidth = 23;
             coln_ch1.Name = "coln_ch1";
             coln_ch1.Width = 217;
             // 
             // gridColumn17
             // 
-            gridColumn17.FieldName = "Kod";
+            gridColumn17.FieldName = "kod";
             gridColumn17.MinWidth = 23;
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Width = 146;
@@ -315,7 +316,7 @@ namespace SewingProduction.form
             // 
             // gridColumn9
             // 
-            gridColumn9.FieldName = "id";
+            gridColumn9.FieldName = "nkId";
             gridColumn9.MinWidth = 23;
             gridColumn9.Name = "gridColumn9";
             gridColumn9.Width = 87;
@@ -409,7 +410,7 @@ namespace SewingProduction.form
             // 
             // coln_ch
             // 
-            coln_ch.FieldName = "n_ch";
+            coln_ch.FieldName = "N_ch";
             coln_ch.MinWidth = 23;
             coln_ch.Name = "coln_ch";
             coln_ch.Width = 146;
@@ -442,7 +443,7 @@ namespace SewingProduction.form
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
             gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
+            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, DisplayNumber, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
             gridViewRasz.DetailHeight = 404;
             gridViewRasz.GridControl = gridControlRasz;
             gridViewRasz.Name = "gridViewRasz";
@@ -483,6 +484,16 @@ namespace SewingProduction.form
             gridColumn34.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn34.Width = 84;
             // 
+            // DisplayNumber
+            // 
+            DisplayNumber.Caption = "№ оп.";
+            DisplayNumber.FieldName = "DisplayNumber";
+            DisplayNumber.Name = "DisplayNumber";
+            DisplayNumber.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            DisplayNumber.Visible = true;
+            DisplayNumber.VisibleIndex = 0;
+            DisplayNumber.Width = 47;
+            // 
             // gridColumn35
             // 
             gridColumn35.Caption = "№ оп.";
@@ -491,8 +502,6 @@ namespace SewingProduction.form
             gridColumn35.Name = "gridColumn35";
             gridColumn35.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn35.OptionsEditForm.VisibleIndex = 1;
-            gridColumn35.Visible = true;
-            gridColumn35.VisibleIndex = 0;
             gridColumn35.Width = 45;
             // 
             // gridColumn36
@@ -503,8 +512,6 @@ namespace SewingProduction.form
             gridColumn36.Name = "gridColumn36";
             gridColumn36.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn36.OptionsEditForm.VisibleIndex = 3;
-            gridColumn36.Visible = true;
-            gridColumn36.VisibleIndex = 1;
             gridColumn36.Width = 64;
             // 
             // gridColumn33
@@ -516,8 +523,8 @@ namespace SewingProduction.form
             gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn33.OptionsEditForm.VisibleIndex = 5;
             gridColumn33.Visible = true;
-            gridColumn33.VisibleIndex = 2;
-            gridColumn33.Width = 77;
+            gridColumn33.VisibleIndex = 1;
+            gridColumn33.Width = 48;
             // 
             // gridColumn32
             // 
@@ -531,8 +538,8 @@ namespace SewingProduction.form
             gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
             gridColumn32.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn32.Visible = true;
-            gridColumn32.VisibleIndex = 3;
-            gridColumn32.Width = 365;
+            gridColumn32.VisibleIndex = 2;
+            gridColumn32.Width = 358;
             // 
             // gridColumn37
             // 
@@ -543,8 +550,8 @@ namespace SewingProduction.form
             gridColumn37.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn37.OptionsEditForm.VisibleIndex = 4;
             gridColumn37.Visible = true;
-            gridColumn37.VisibleIndex = 4;
-            gridColumn37.Width = 68;
+            gridColumn37.VisibleIndex = 3;
+            gridColumn37.Width = 69;
             // 
             // colspec2
             // 
@@ -555,8 +562,8 @@ namespace SewingProduction.form
             colspec2.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             colspec2.OptionsEditForm.VisibleIndex = 6;
             colspec2.Visible = true;
-            colspec2.VisibleIndex = 5;
-            colspec2.Width = 105;
+            colspec2.VisibleIndex = 4;
+            colspec2.Width = 169;
             // 
             // gridColumn38
             // 
@@ -579,8 +586,8 @@ namespace SewingProduction.form
             gridColumn4.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn4.OptionsEditForm.VisibleIndex = 7;
             gridColumn4.Visible = true;
-            gridColumn4.VisibleIndex = 6;
-            gridColumn4.Width = 123;
+            gridColumn4.VisibleIndex = 5;
+            gridColumn4.Width = 179;
             // 
             // repositoryItemLookUpEdit_kodProizv
             // 
@@ -602,8 +609,8 @@ namespace SewingProduction.form
             Kod_podr.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             Kod_podr.OptionsEditForm.VisibleIndex = 8;
             Kod_podr.Visible = true;
-            Kod_podr.VisibleIndex = 7;
-            Kod_podr.Width = 186;
+            Kod_podr.VisibleIndex = 6;
+            Kod_podr.Width = 312;
             // 
             // repositoryItemLookUpEdit_podrVyaz
             // 
@@ -625,8 +632,8 @@ namespace SewingProduction.form
             KodOb.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             KodOb.OptionsEditForm.VisibleIndex = 9;
             KodOb.Visible = true;
-            KodOb.VisibleIndex = 8;
-            KodOb.Width = 150;
+            KodOb.VisibleIndex = 7;
+            KodOb.Width = 273;
             // 
             // repositoryItemLookUpEdit_oborudShv
             // 
@@ -1265,7 +1272,7 @@ namespace SewingProduction.form
         private DevExpress.XtraGrid.GridControl gridControlKont;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKont;
         private DevExpress.XtraGrid.Columns.GridColumn colkod_o2;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn DisplayNumber;
         private DevExpress.XtraGrid.Columns.GridColumn colrazryd2;
         private DevExpress.XtraGrid.Columns.GridColumn coltext2;
         private DevExpress.XtraGrid.Columns.GridColumn colsek3;
