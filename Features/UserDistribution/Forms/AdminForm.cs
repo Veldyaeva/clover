@@ -363,6 +363,54 @@ namespace SewingProduction.form.UserDistribution
             }
         }
         #endregion
+
+        private void customButtonOpen_Click(object sender, EventArgs e)
+        {
+            if (gridViewForms.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите форму для открытия.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string formName = gridViewForms.GetFocusedRowCellValue("NameForm")?.ToString();
+
+            if (string.IsNullOrWhiteSpace(formName))
+            {
+                MessageBox.Show("Не удалось получить имя формы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Находим главную форму
+            var mainForm = Application.OpenForms.OfType<SpMainForm>().FirstOrDefault();
+            if (mainForm == null)
+            {
+                MessageBox.Show("Главная форма не найдена.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Используем FormScanner для создания формы
+            var scanner = new FormScanner(_adminFormDataService, _user);
+            var formType = scanner.GetAllFormNamesInProject().FirstOrDefault(name => name == formName);
+
+            if (formType == null)
+            {
+                MessageBox.Show($"Форма '{formName}' не найдена в проекте.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Создаем форму
+            var formInstance = scanner.CreateFormInstance(Type.GetType(formName) ?? AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .FirstOrDefault(t => t.Name == formName));
+
+            if (formInstance == null)
+            {
+                MessageBox.Show($"Не удалось создать экземпляр формы '{formName}'.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            mainForm.OpenForm(formInstance, sender);
+        }
     }
 
     public class AdminFormDataService
