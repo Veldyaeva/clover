@@ -15,6 +15,10 @@ using SewingProduction;
 using DevExpress.XtraLayout;
 using System.ComponentModel;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.UserDistribution.Models;
+using SewingProduction.Services;
+using System.Diagnostics;
+using System.Linq;
 
 namespace SewingProduction
 {
@@ -467,13 +471,15 @@ namespace SewingProduction
         public Color? AlternateRowColor { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private UserClass _user;
+        private List<int> _tableIds;
+        private int _formId;
         public CustomGridControl()
         {
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
             ViewRegistered += OnViewRegistered;
         }
-
         public void ApplyTheme()
         {
             BackColor = ThemeManager.ActiveTheme.GridBackground;
@@ -536,6 +542,104 @@ namespace SewingProduction
                     gridView.OptionsBehavior.Editable = hasWrite;
                 }
             }
+        }
+
+        public async void InitializeAccess(UserClass user, string formName, List<string> tableNames = null)
+        {
+            var dbHelper = new DatabaseHelper("ace");
+            var dbService = new DbService(dbHelper);
+            var roleService = new RoleDataService(dbService, dbHelper);
+            var columnService = new AllColumnNameDataService(dbService, dbHelper);
+            var tableService = new AllTableNameDataService(dbService, dbHelper);
+            var formService = new FormDataService(dbService, dbHelper);
+
+            _user = user;
+
+            // Получаем ID формы
+            _formId = (await formService.GetFormIdByNameAsync(formName)) ?? 0;
+
+            if (_user == null || string.IsNullOrEmpty(ObjectName) || _formId <= 0)
+            {
+                Debug.WriteLine("[InitializeAccess] Ошибка: не заданы обязательные параметры.");
+                return;
+            }
+
+            // Получаем ID ролей пользователя
+            List<int> roleIds = await roleService.GetRoleIdsByNamesAsync(_user.Roles);
+
+            // Готовим словарь с правами на колонки
+            Dictionary<string, int> columnAccess = new();
+
+            await ApplyPermissionPerColumn(roleIds, columnService, tableService, columnAccess, tableNames);
+            await ApplyPermissionPerMode(columnAccess);
+        }
+        private async Task ApplyPermissionPerColumn(
+            List<int> roleIds, 
+            AllColumnNameDataService columnService, 
+            AllTableNameDataService tableService, 
+            Dictionary<string, int> columnAccess, 
+            List<string> tableNames)
+        {
+            if (tableNames != null && tableNames.Any())
+            {
+                // Есть указание конкретных таблиц — применяем по каждой
+                foreach (var tableName in tableNames)
+                {
+                    var tableId = await tableService.GetTableIdByNameAsync(tableName);
+                    if (tableId.HasValue)
+                    {
+                        Debug.WriteLine($"[InitializeAccess] Таблица '{tableName}' → ID: {tableId.Value}");
+                        var columns = await columnService.GetColumnsWithAccessAsync(roleIds, ObjectName, _formId, tableId.Value);
+
+                        foreach (var col in columns)
+                        {
+                            if (columnAccess.TryGetValue(col.name, out int current))
+                                columnAccess[col.name] = Math.Max(current, col.ModeID);
+                            else
+                                columnAccess[col.name] = col.ModeID;
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"[InitializeAccess] Таблица '{tableName}' не найдена.");
+                    }
+                }
+            }
+            else
+            {
+                // Нет конкретных таблиц — берём все доступные по форме
+                var columns = await columnService.GetColumnsWithAccessAsync(roleIds, ObjectName, _formId);
+
+                foreach (var col in columns)
+                {
+                    columnAccess[col.name] = col.ModeID;
+                }
+            }
+        }
+        private async Task ApplyPermissionPerMode(Dictionary<string, int> columnAccess)
+        {
+            foreach (var view in ViewCollection)
+            {
+                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
+                {
+                    foreach (DevExpress.XtraGrid.Columns.GridColumn column in gridView.Columns)
+                    {
+                        if (columnAccess.TryGetValue(column.FieldName, out int mode))
+                        {
+                            column.Visible = mode > 0;
+                            column.OptionsColumn.ReadOnly = mode < 2;
+                            column.OptionsColumn.AllowEdit = mode == 2;
+                            Debug.WriteLine($"[ApplyPermissionPerColumn] Колонка {column.FieldName} → ModeID={mode}");
+                        }
+                        else
+                        {
+                            column.Visible = false;
+                            Debug.WriteLine($"[ApplyPermissionPerColumn] Колонка {column.FieldName} скрыта (нет прав)");
+                        }
+                    }
+                }
+            }
+            Debug.WriteLine("[ApplyPermissionPerColumn] Завершено");
         }
     }
     /// <summary>

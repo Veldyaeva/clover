@@ -26,9 +26,10 @@ namespace SewingProduction.form
         int topRowIndex = 0;//верхний индекс 
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
+        string _tableSQL;
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravBrig(UserClass user, string tableSQL, string rusNameTableSQL):base(user)
+        public SpravBrig(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -41,13 +42,19 @@ namespace SewingProduction.form
             timer.Tick += Timer_Tick;
             //Имя формы:
             this.Text = rusNameTableSQL;
+            _tableSQL = tableSQL;
         }
         public SpravBrig()
         {
             InitializeComponent();
+            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            _spravBrigDataService = new SpravBrigDataService(dbHelper);
+            _serviceBroker = new ServiceBroker(this);
         }
         private void SpravBrig_Load(object sender, EventArgs e)
         {
+            //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
+            gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);
             _serviceBroker.StartBroker();
@@ -68,8 +75,8 @@ namespace SewingProduction.form
         private void gridControlSprav_Load(object sender, EventArgs e)
         {
             spravList.DataSource = _spravBrigDataService.GetSpBrig();
-            gridView1.Columns[0].Visible = false;
-            gridView1.Columns["Номер"].Width = 100;
+            //gridView1.Columns[0].Visible = false;
+            //gridView1.Columns["Номер"].Width = 100;
             gridView1.OptionsView.ColumnAutoWidth = true;
             if (!flagStartListening)
             {
@@ -126,12 +133,12 @@ namespace SewingProduction.form
                 simpleButtonAddOtm.Visible = true;
                 simpleButtonAddSave.Visible = true;
                 // Получаем текущую выделенную строку в текстбокси и др
-                textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-                textBoxBrig.Text = gridView.GetFocusedRowCellValue("Бригада").ToString();
+                textBoxKod.Text = gridView.GetFocusedRowCellValue(id_brig).ToString();
+                textBoxBrig.Text = gridView.GetFocusedRowCellValue("brig").ToString();
                 textBoxBrig.ReadOnly = false;
-                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("Номер").ToString();
+                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("n_brig").ToString();
                 textBoxNBrig.ReadOnly = false;
-                comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех").ToString();
+                comboBoxZeh.Text = gridView.GetFocusedRowCellValue("nameZeh").ToString();
                 comboBoxZeh.Enabled = true;
             }
             catch (Exception Ex)
@@ -153,14 +160,14 @@ namespace SewingProduction.form
                 simpleButtonAddOtm.Visible = false;
                 simpleButtonAddSave.Visible = false;
                 // Получаем текущую выделенную строку в текстбокси и др
-                textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
-                textBoxBrig.Text = gridView.GetFocusedRowCellValue("Бригада").ToString();
+                textBoxKod.Text = gridView.GetFocusedRowCellValue("id_brig").ToString();
+                textBoxBrig.Text = gridView.GetFocusedRowCellValue("brig").ToString();
                 textBoxBrig.ReadOnly = true;
-                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("Номер").ToString();
+                textBoxNBrig.Text = gridView.GetFocusedRowCellValue("n_brig").ToString();
                 textBoxNBrig.ReadOnly = true;
-                //comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех") != DBNull.Value ? gridView.GetFocusedRowCellValue("Цех").ToString() : "";
-                if (gridView.GetFocusedRowCellValue("Цех") != DBNull.Value)
-                    comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех").ToString();
+                ////comboBoxZeh.Text = gridView.GetFocusedRowCellValue("Цех") != DBNull.Value ? gridView.GetFocusedRowCellValue("Цех").ToString() : "";
+                if (gridView.GetFocusedRowCellValue("nameZeh") != DBNull.Value)
+                    comboBoxZeh.Text = gridView.GetFocusedRowCellValue("nameZeh").ToString();
                 else comboBoxZeh.SelectedIndex = -1;
                 comboBoxZeh.Enabled = false;
             }
@@ -213,7 +220,7 @@ namespace SewingProduction.form
                     }
                 case "Редактировать":
                     {
-                        _spravBrigDataService.UpdateSpBrig(textBoxBrig.Text, textBoxNBrig.Text, comboBoxZeh.Text,textBoxKod.Text);
+                        _spravBrigDataService.UpdateSpBrig(textBoxBrig.Text, textBoxNBrig.Text, comboBoxZeh.Text, textBoxKod.Text);
                         break;
                     }
                 default:
@@ -252,7 +259,6 @@ namespace SewingProduction.form
             _serviceBroker.StopListening();
         }
 
-
     }
     public class SpravBrigDataService
     {
@@ -263,7 +269,7 @@ namespace SewingProduction.form
         }
         public DataTable GetSpBrig()
         {
-            string query = $@" SELECT id_brig,n_brig AS 'Номер',brig AS 'Бригада',nameZeh AS 'Цех'
+            string query = $@" SELECT id_brig,n_brig,brig,nameZeh
                             FROM spBrig
                             LEFT JOIN ZehList ON ZehList.idZeh = spBrig.idZeh ";
             return _dbHelper.ExecuteQuery(query);
