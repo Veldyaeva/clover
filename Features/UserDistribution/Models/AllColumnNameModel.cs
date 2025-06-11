@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.Xpo.DB.Helpers;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraLayout.Customization;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -23,6 +24,8 @@ namespace SewingProduction.Features.UserDistribution.Models
         private string _nameRus;
         private string _dataType;
         private int _readonly;
+        private int _modeID;
+        private string _modeName;
 
         [Column("id_acn")]
         public int id_acn
@@ -73,6 +76,20 @@ namespace SewingProduction.Features.UserDistribution.Models
             set { if (_readonly != value) { _readonly = value; OnPropertyChanged(nameof(Readonly)); } }
         }
 
+        [Column("ModeID")]
+        public int ModeID
+        {
+            get => _modeID;
+            set { if (_modeID != value) { _modeID = value; OnPropertyChanged(nameof(ModeID)); } }
+        }
+
+        [Column("ModeName")]
+        public string ModeName
+        {
+            get => _modeName;
+            set { if (_modeName != value) { _modeName = value; OnPropertyChanged(nameof(ModeName)); } }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
@@ -97,6 +114,24 @@ namespace SewingProduction.Features.UserDistribution.Models
                 WHERE id_atn = @IdAtn
                 ORDER BY ordinal_position";
             return await _dbService.GetListAsync<AllColumnNameModel>(query, new { IdAtn = idAtn });
+        }
+
+        public async Task<List<AllColumnNameModel>> GetListColumnWithModeFromTable(int roleId, int objectId, int tableId)
+        {
+            string query = @"
+                SELECT 
+                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly,
+                    ISNULL(rc.ModeID, 0) AS ModeID,
+                    ISNULL(m.ModeName, 'Нет доступа') AS ModeName
+                FROM all_column_name c
+                LEFT JOIN RoleColumn rc ON rc.ColumnID = c.id_acn 
+                    AND rc.RoleID = @RoleID AND rc.ObjectID = @ObjectID
+                LEFT JOIN Mode m ON rc.ModeID = m.ModeID
+                WHERE c.id_atn = @TableID
+                ORDER BY c.ordinal_position"
+            ;
+
+            return await _dbService.GetListAsync<AllColumnNameModel>(query, new { RoleID = roleId, ObjectID = objectId, TableID = tableId });
         }
 
         public async Task<int> SaveAsync(AllColumnNameModel column)
@@ -159,7 +194,74 @@ namespace SewingProduction.Features.UserDistribution.Models
                 { "@id_atn", id_atn }
             });
         }
+        public async Task SaveRoleColumnAccessAsync(int roleId, int objectId, int columnId, int modeId)
+        {
+            // Удалим старую запись
+            string deleteQuery = @"
+                DELETE FROM RoleColumn 
+                WHERE RoleID = @RoleID AND ColumnID = @ColumnID AND ObjectID = @ObjectID";
 
+                    await _dbHelper.ExecuteQueryAsync(deleteQuery, new Dictionary<string, object>
+            {
+                { "@RoleID", roleId },
+                { "@ColumnID", columnId },
+                { "@ObjectID", objectId }
+            });
+
+            // Вставим новую, если задан режим > 0
+            if (modeId > 0)
+            {
+                string insertQuery = @"
+                INSERT INTO RoleColumn (RoleID, ColumnID, ObjectID, ModeID)
+                VALUES (@RoleID, @ColumnID, @ObjectID, @ModeID)";
+
+                await _dbHelper.ExecuteQueryAsync(insertQuery, new Dictionary<string, object>
+                {
+                    { "@RoleID", roleId },
+                    { "@ColumnID", columnId },
+                    { "@ObjectID", objectId },
+                    { "@ModeID", modeId }
+                });
+            }
+        }
+        public async Task<List<AllColumnNameModel>> GetColumnsWithAccessAsync(List<int> roleIds, string objectName, int formId, int tableId = 0)
+        {
+            // Преобразуем список ролей в SQL IN (...) строку
+            string roleIdList = string.Join(",", roleIds);
+
+            string query = $@"
+                SELECT 
+                    c.id_acn,
+                    c.id_atn,
+                    c.ordinal_position,
+                    c.name,
+                    c.name_rus,
+                    c.data_type,
+                    c.readonly,
+                    ISNULL(MAX(rc.ModeID), 0) AS ModeID,
+                    ISNULL(m.ModeName, 'Нет доступа') AS ModeName
+                FROM all_column_name c
+                LEFT JOIN RoleColumn rc ON rc.ColumnID = c.id_acn 
+                    AND rc.ObjectID = (
+                        SELECT ObjectID 
+                        FROM ObjectForm 
+                        WHERE ObjectName = @ObjectName AND FormID = @FormID
+                    )
+                    AND rc.RoleID IN ({roleIdList})
+                LEFT JOIN Mode m ON m.ModeID = ISNULL(rc.ModeID, 0)";
+            if (tableId > 0)
+                query += " WHERE c.id_atn = @TableID";
+            query += $@" GROUP BY 
+                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly, m.ModeName
+                ORDER BY c.ordinal_position;";
+
+            return await _dbService.GetListAsync<AllColumnNameModel>(query, new
+            {
+                ObjectName = objectName,
+                FormID = formId,
+                TableID = tableId
+            });
+        }
     }
 }
 

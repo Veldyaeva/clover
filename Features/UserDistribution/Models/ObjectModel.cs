@@ -82,11 +82,11 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = dbHelper;
         }
 
-        public async Task<List<ObjectModel>> GetListAsync(int formId)
+        public async Task<List<ObjectModel>> GetListObjectGridAsync(int formId)
         {
             string query = @"SELECT ObjectID, ObjectName, ObjectNameRus, FormID, GroupID, CreatorID, ObjectType 
                              FROM ObjectForm 
-                             WHERE FormID = @FormID";
+                             WHERE FormID = @FormID and ObjectType like '%grid%'";
             return await _dbService.GetListAsync<ObjectModel>(query, new { FormID = formId });
         }
 

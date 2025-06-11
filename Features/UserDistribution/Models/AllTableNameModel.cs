@@ -57,7 +57,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = dbHelper;
         }
 
-        public async Task<List<AllTableNameModel>> GetListTable()
+        public async Task<List<AllTableNameModel>> GetListTableAsync()
         {
             string query = "SELECT id_atn, name, name_rus FROM all_table_name";
             return await _dbService.GetListAsync<AllTableNameModel>(query, new { });
@@ -80,6 +80,16 @@ namespace SewingProduction.Features.UserDistribution.Models
             WHERE TABLE_NAME = @tableName";
             object result = await _dbHelper.ExecuteScalarAsync(checkQuery, new Dictionary<string, object> { { "@tableName", tableName } });
             return Convert.ToInt32(result);
+        }
+        public async Task<int?> GetTableIdByNameAsync(string tableName)
+        {
+            string query = "SELECT id_atn FROM all_table_name WHERE name = @name";
+            object result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
+            {
+                { "@name", tableName }
+            });
+
+            return result != null && result != DBNull.Value ? Convert.ToInt32(result) : (int?)null;
         }
     }
 

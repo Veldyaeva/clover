@@ -65,18 +65,18 @@
             // 
             tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
             tableLayoutPanel1.ColumnCount = 5;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.2222214F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.2222214F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.2222214F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.2222214F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.1111107F));
             tableLayoutPanel1.Controls.Add(customButtonOpen, 4, 0);
             tableLayoutPanel1.Controls.Add(customGridControlColumn, 0, 8);
             tableLayoutPanel1.Controls.Add(customGridControlTable, 0, 0);
             tableLayoutPanel1.Controls.Add(customButtonAddTable, 4, 3);
             tableLayoutPanel1.Controls.Add(customTextBoxAddTable, 4, 2);
             tableLayoutPanel1.Controls.Add(customLabelAddTable, 4, 1);
-            tableLayoutPanel1.Controls.Add(customButtonDeleteTable, 4, 7);
+            tableLayoutPanel1.Controls.Add(customButtonDeleteTable, 4, 4);
             tableLayoutPanel1.Controls.Add(customButtonDeleteColumn, 4, 15);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -108,9 +108,9 @@
             customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
             customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customButtonOpen.Location = new System.Drawing.Point(1011, 3);
+            customButtonOpen.Location = new System.Drawing.Point(1123, 3);
             customButtonOpen.Name = "customButtonOpen";
-            customButtonOpen.Size = new System.Drawing.Size(250, 35);
+            customButtonOpen.Size = new System.Drawing.Size(138, 35);
             customButtonOpen.TabIndex = 6;
             customButtonOpen.Text = "Открыть справочник";
             customButtonOpen.UseVisualStyleBackColor = false;
@@ -126,7 +126,7 @@
             customGridControlColumn.MainView = gridViewColumn;
             customGridControlColumn.Name = "customGridControlColumn";
             tableLayoutPanel1.SetRowSpan(customGridControlColumn, 8);
-            customGridControlColumn.Size = new System.Drawing.Size(1002, 328);
+            customGridControlColumn.Size = new System.Drawing.Size(1114, 328);
             customGridControlColumn.TabIndex = 3;
             customGridControlColumn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewColumn });
             // 
@@ -214,7 +214,7 @@
             customGridControlTable.MainView = gridViewTable;
             customGridControlTable.Name = "customGridControlTable";
             tableLayoutPanel1.SetRowSpan(customGridControlTable, 8);
-            customGridControlTable.Size = new System.Drawing.Size(1002, 322);
+            customGridControlTable.Size = new System.Drawing.Size(1114, 322);
             customGridControlTable.TabIndex = 1;
             customGridControlTable.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable });
             customGridControlTable.Load += customGridControlTable_Load;
@@ -264,9 +264,9 @@
             customButtonAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAddTable.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customButtonAddTable.Location = new System.Drawing.Point(1011, 126);
+            customButtonAddTable.Location = new System.Drawing.Point(1123, 126);
             customButtonAddTable.Name = "customButtonAddTable";
-            customButtonAddTable.Size = new System.Drawing.Size(250, 35);
+            customButtonAddTable.Size = new System.Drawing.Size(138, 35);
             customButtonAddTable.TabIndex = 5;
             customButtonAddTable.Text = "Добавить";
             customButtonAddTable.UseVisualStyleBackColor = false;
@@ -278,9 +278,9 @@
             customTextBoxAddTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxAddTable.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxAddTable.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
-            customTextBoxAddTable.Location = new System.Drawing.Point(1011, 85);
+            customTextBoxAddTable.Location = new System.Drawing.Point(1123, 85);
             customTextBoxAddTable.Name = "customTextBoxAddTable";
-            customTextBoxAddTable.Size = new System.Drawing.Size(250, 23);
+            customTextBoxAddTable.Size = new System.Drawing.Size(138, 23);
             customTextBoxAddTable.TabIndex = 2;
             // 
             // customLabelAddTable
@@ -289,9 +289,9 @@
             customLabelAddTable.Dock = System.Windows.Forms.DockStyle.Bottom;
             customLabelAddTable.Font = new System.Drawing.Font("Arial", 10F);
             customLabelAddTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customLabelAddTable.Location = new System.Drawing.Point(1011, 66);
+            customLabelAddTable.Location = new System.Drawing.Point(1123, 50);
             customLabelAddTable.Name = "customLabelAddTable";
-            customLabelAddTable.Size = new System.Drawing.Size(250, 16);
+            customLabelAddTable.Size = new System.Drawing.Size(138, 32);
             customLabelAddTable.TabIndex = 4;
             customLabelAddTable.Text = "Добавить таблицу из SQL";
             // 
@@ -301,9 +301,9 @@
             customButtonDeleteTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteTable.Font = new System.Drawing.Font("Arial", 10F);
             customButtonDeleteTable.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customButtonDeleteTable.Location = new System.Drawing.Point(1011, 290);
+            customButtonDeleteTable.Location = new System.Drawing.Point(1123, 167);
             customButtonDeleteTable.Name = "customButtonDeleteTable";
-            customButtonDeleteTable.Size = new System.Drawing.Size(250, 35);
+            customButtonDeleteTable.Size = new System.Drawing.Size(138, 35);
             customButtonDeleteTable.TabIndex = 8;
             customButtonDeleteTable.Text = "Удалить";
             customButtonDeleteTable.UseVisualStyleBackColor = false;
@@ -315,9 +315,9 @@
             customButtonDeleteColumn.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonDeleteColumn.Font = new System.Drawing.Font("Arial", 10F);
             customButtonDeleteColumn.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customButtonDeleteColumn.Location = new System.Drawing.Point(1011, 618);
+            customButtonDeleteColumn.Location = new System.Drawing.Point(1123, 618);
             customButtonDeleteColumn.Name = "customButtonDeleteColumn";
-            customButtonDeleteColumn.Size = new System.Drawing.Size(250, 41);
+            customButtonDeleteColumn.Size = new System.Drawing.Size(138, 41);
             customButtonDeleteColumn.TabIndex = 9;
             customButtonDeleteColumn.Text = "Удалить";
             customButtonDeleteColumn.UseVisualStyleBackColor = false;

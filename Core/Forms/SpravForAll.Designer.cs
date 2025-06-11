@@ -28,548 +28,581 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.spravList = new System.Windows.Forms.BindingSource(this.components);
-            this.nameColumnList = new System.Windows.Forms.BindingSource(this.components);
-            this.AddTab = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPageAdd = new DevExpress.XtraTab.XtraTabPage();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelKod = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxKod = new System.Windows.Forms.TextBox();
-            this.labelSave = new System.Windows.Forms.Label();
-            this.simpleButtonAddOtm = new SewingProduction.CustomButton();
-            this.simpleButtonDel = new SewingProduction.CustomButton();
-            this.simpleButtonAddSave = new SewingProduction.CustomButton();
-            this.gridControlSprav = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.simpleButtonRed = new SewingProduction.CustomButton();
-            this.simpleButtonAdd = new SewingProduction.CustomButton();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.spravList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nameColumnList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AddTab)).BeginInit();
-            this.AddTab.SuspendLayout();
-            this.xtraTabPageAdd.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlSprav)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            spravList = new System.Windows.Forms.BindingSource(components);
+            nameColumnList = new System.Windows.Forms.BindingSource(components);
+            AddTab = new DevExpress.XtraTab.XtraTabControl();
+            xtraTabPageAdd = new DevExpress.XtraTab.XtraTabPage();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            labelKod = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label1 = new System.Windows.Forms.Label();
+            label2 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
+            label5 = new System.Windows.Forms.Label();
+            label6 = new System.Windows.Forms.Label();
+            label7 = new System.Windows.Forms.Label();
+            textBox8 = new System.Windows.Forms.TextBox();
+            textBox7 = new System.Windows.Forms.TextBox();
+            textBox6 = new System.Windows.Forms.TextBox();
+            textBox5 = new System.Windows.Forms.TextBox();
+            textBox4 = new System.Windows.Forms.TextBox();
+            textBox3 = new System.Windows.Forms.TextBox();
+            label8 = new System.Windows.Forms.Label();
+            textBox2 = new System.Windows.Forms.TextBox();
+            textBox1 = new System.Windows.Forms.TextBox();
+            textBox9 = new System.Windows.Forms.TextBox();
+            textBox10 = new System.Windows.Forms.TextBox();
+            label10 = new System.Windows.Forms.Label();
+            label9 = new System.Windows.Forms.Label();
+            textBoxKod = new System.Windows.Forms.TextBox();
+            labelSave = new System.Windows.Forms.Label();
+            simpleButtonAddOtm = new CustomButton();
+            simpleButtonDel = new CustomButton();
+            simpleButtonAddSave = new CustomButton();
+            gridControlSprav = new DevExpress.XtraGrid.GridControl();
+            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            simpleButtonRed = new CustomButton();
+            simpleButtonAdd = new CustomButton();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)spravList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)nameColumnList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)AddTab).BeginInit();
+            AddTab.SuspendLayout();
+            xtraTabPageAdd.SuspendLayout();
+            tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlSprav).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            SuspendLayout();
             // 
             // AddTab
             // 
-            this.AddTab.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.AddTab.Appearance.Options.UseBackColor = true;
-            this.AddTab.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.AddTab.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
-            this.AddTab.Dock = System.Windows.Forms.DockStyle.Right;
-            this.AddTab.Location = new System.Drawing.Point(483, 3);
-            this.AddTab.Name = "AddTab";
-            this.AddTab.SelectedTabPage = this.xtraTabPageAdd;
-            this.AddTab.Size = new System.Drawing.Size(548, 606);
-            this.AddTab.TabIndex = 8;
-            this.AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPageAdd});
+            AddTab.Appearance.BackColor = System.Drawing.Color.Transparent;
+            AddTab.Appearance.Options.UseBackColor = true;
+            AddTab.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            AddTab.BorderStylePage = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            AddTab.Dock = System.Windows.Forms.DockStyle.Right;
+            AddTab.Location = new System.Drawing.Point(563, 3);
+            AddTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            AddTab.Name = "AddTab";
+            AddTab.SelectedTabPage = xtraTabPageAdd;
+            AddTab.Size = new System.Drawing.Size(639, 701);
+            AddTab.TabIndex = 8;
+            AddTab.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPageAdd });
             // 
             // xtraTabPageAdd
             // 
-            this.xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
-            this.xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
-            this.xtraTabPageAdd.Controls.Add(this.tableLayoutPanel3);
-            this.xtraTabPageAdd.MaximumSize = new System.Drawing.Size(540, 850);
-            this.xtraTabPageAdd.MinimumSize = new System.Drawing.Size(485, 585);
-            this.xtraTabPageAdd.Name = "xtraTabPageAdd";
-            this.xtraTabPageAdd.PageVisible = false;
-            this.xtraTabPageAdd.Size = new System.Drawing.Size(546, 581);
-            this.xtraTabPageAdd.Text = "Добавить/Редактировать";
+            xtraTabPageAdd.Appearance.PageClient.BackColor = System.Drawing.Color.Black;
+            xtraTabPageAdd.Appearance.PageClient.Options.UseBackColor = true;
+            xtraTabPageAdd.Controls.Add(tableLayoutPanel3);
+            xtraTabPageAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            xtraTabPageAdd.MaximumSize = new System.Drawing.Size(630, 981);
+            xtraTabPageAdd.MinimumSize = new System.Drawing.Size(566, 675);
+            xtraTabPageAdd.Name = "xtraTabPageAdd";
+            xtraTabPageAdd.PageVisible = false;
+            xtraTabPageAdd.Size = new System.Drawing.Size(630, 676);
+            xtraTabPageAdd.Text = "Добавить/Редактировать";
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.Controls.Add(this.labelKod, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.label3, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.label4, 0, 4);
-            this.tableLayoutPanel3.Controls.Add(this.label5, 0, 5);
-            this.tableLayoutPanel3.Controls.Add(this.label6, 0, 6);
-            this.tableLayoutPanel3.Controls.Add(this.label7, 0, 7);
-            this.tableLayoutPanel3.Controls.Add(this.textBox8, 1, 8);
-            this.tableLayoutPanel3.Controls.Add(this.textBox7, 1, 7);
-            this.tableLayoutPanel3.Controls.Add(this.textBox6, 1, 6);
-            this.tableLayoutPanel3.Controls.Add(this.textBox5, 1, 5);
-            this.tableLayoutPanel3.Controls.Add(this.textBox4, 1, 4);
-            this.tableLayoutPanel3.Controls.Add(this.textBox3, 1, 3);
-            this.tableLayoutPanel3.Controls.Add(this.label8, 0, 8);
-            this.tableLayoutPanel3.Controls.Add(this.textBox2, 1, 2);
-            this.tableLayoutPanel3.Controls.Add(this.textBox1, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.textBox9, 1, 9);
-            this.tableLayoutPanel3.Controls.Add(this.textBox10, 1, 10);
-            this.tableLayoutPanel3.Controls.Add(this.label10, 0, 10);
-            this.tableLayoutPanel3.Controls.Add(this.label9, 0, 9);
-            this.tableLayoutPanel3.Controls.Add(this.textBoxKod, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.labelSave, 2, 11);
-            this.tableLayoutPanel3.Controls.Add(this.simpleButtonAddOtm, 0, 12);
-            this.tableLayoutPanel3.Controls.Add(this.simpleButtonDel, 1, 12);
-            this.tableLayoutPanel3.Controls.Add(this.simpleButtonAddSave, 2, 12);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel3.MaximumSize = new System.Drawing.Size(540, 850);
-            this.tableLayoutPanel3.MinimumSize = new System.Drawing.Size(300, 400);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 13;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(540, 581);
-            this.tableLayoutPanel3.TabIndex = 31;
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel3.Controls.Add(labelKod, 0, 0);
+            tableLayoutPanel3.Controls.Add(label3, 0, 3);
+            tableLayoutPanel3.Controls.Add(label1, 0, 1);
+            tableLayoutPanel3.Controls.Add(label2, 0, 2);
+            tableLayoutPanel3.Controls.Add(label4, 0, 4);
+            tableLayoutPanel3.Controls.Add(label5, 0, 5);
+            tableLayoutPanel3.Controls.Add(label6, 0, 6);
+            tableLayoutPanel3.Controls.Add(label7, 0, 7);
+            tableLayoutPanel3.Controls.Add(textBox8, 1, 8);
+            tableLayoutPanel3.Controls.Add(textBox7, 1, 7);
+            tableLayoutPanel3.Controls.Add(textBox6, 1, 6);
+            tableLayoutPanel3.Controls.Add(textBox5, 1, 5);
+            tableLayoutPanel3.Controls.Add(textBox4, 1, 4);
+            tableLayoutPanel3.Controls.Add(textBox3, 1, 3);
+            tableLayoutPanel3.Controls.Add(label8, 0, 8);
+            tableLayoutPanel3.Controls.Add(textBox2, 1, 2);
+            tableLayoutPanel3.Controls.Add(textBox1, 1, 1);
+            tableLayoutPanel3.Controls.Add(textBox9, 1, 9);
+            tableLayoutPanel3.Controls.Add(textBox10, 1, 10);
+            tableLayoutPanel3.Controls.Add(label10, 0, 10);
+            tableLayoutPanel3.Controls.Add(label9, 0, 9);
+            tableLayoutPanel3.Controls.Add(textBoxKod, 1, 0);
+            tableLayoutPanel3.Controls.Add(labelSave, 2, 11);
+            tableLayoutPanel3.Controls.Add(simpleButtonAddOtm, 0, 12);
+            tableLayoutPanel3.Controls.Add(simpleButtonDel, 1, 12);
+            tableLayoutPanel3.Controls.Add(simpleButtonAddSave, 2, 12);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel3.MaximumSize = new System.Drawing.Size(630, 981);
+            tableLayoutPanel3.MinimumSize = new System.Drawing.Size(350, 462);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 13;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 39F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(630, 676);
+            tableLayoutPanel3.TabIndex = 31;
             // 
             // labelKod
             // 
-            this.labelKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.labelKod.AutoSize = true;
-            this.labelKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelKod.Location = new System.Drawing.Point(3, 7);
-            this.labelKod.Name = "labelKod";
-            this.labelKod.Size = new System.Drawing.Size(34, 17);
-            this.labelKod.TabIndex = 14;
-            this.labelKod.Text = "Код";
+            labelKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            labelKod.AutoSize = true;
+            labelKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            labelKod.Location = new System.Drawing.Point(4, 7);
+            labelKod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelKod.Name = "labelKod";
+            labelKod.Size = new System.Drawing.Size(34, 17);
+            labelKod.TabIndex = 14;
+            labelKod.Text = "Код";
             // 
             // label3
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(3, 106);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(52, 17);
-            this.label3.TabIndex = 16;
-            this.label3.Text = "Поле3";
+            label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label3.AutoSize = true;
+            label3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label3.Location = new System.Drawing.Point(4, 114);
+            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(52, 17);
+            label3.TabIndex = 16;
+            label3.Text = "Поле3";
             // 
             // label1
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(3, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 17);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Поле1";
+            label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label1.AutoSize = true;
+            label1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label1.Location = new System.Drawing.Point(4, 38);
+            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label1.Name = "label1";
+            label1.Size = new System.Drawing.Size(52, 17);
+            label1.TabIndex = 10;
+            label1.Text = "Поле1";
             // 
             // label2
             // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(3, 71);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 17);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Поле2";
+            label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label2.AutoSize = true;
+            label2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label2.Location = new System.Drawing.Point(4, 73);
+            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label2.Name = "label2";
+            label2.Size = new System.Drawing.Size(52, 17);
+            label2.TabIndex = 12;
+            label2.Text = "Поле2";
             // 
             // label4
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(3, 142);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 17);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "Поле4";
+            label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label4.AutoSize = true;
+            label4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label4.Location = new System.Drawing.Point(4, 155);
+            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(52, 17);
+            label4.TabIndex = 18;
+            label4.Text = "Поле4";
             // 
             // label5
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(3, 176);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 17);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "Поле5";
+            label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label5.AutoSize = true;
+            label5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label5.Location = new System.Drawing.Point(4, 194);
+            label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label5.Name = "label5";
+            label5.Size = new System.Drawing.Size(52, 17);
+            label5.TabIndex = 20;
+            label5.Text = "Поле5";
             // 
             // label6
             // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(3, 210);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 17);
-            this.label6.TabIndex = 22;
-            this.label6.Text = "Поле6";
+            label6.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label6.AutoSize = true;
+            label6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label6.Location = new System.Drawing.Point(4, 233);
+            label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label6.Name = "label6";
+            label6.Size = new System.Drawing.Size(52, 17);
+            label6.TabIndex = 22;
+            label6.Text = "Поле6";
             // 
             // label7
             // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(3, 245);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 17);
-            this.label7.TabIndex = 24;
-            this.label7.Text = "Поле7";
+            label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label7.AutoSize = true;
+            label7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label7.Location = new System.Drawing.Point(4, 273);
+            label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label7.Name = "label7";
+            label7.Size = new System.Drawing.Size(52, 17);
+            label7.TabIndex = 24;
+            label7.Text = "Поле7";
             // 
             // textBox8
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox8, 2);
-            this.textBox8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox8.Location = new System.Drawing.Point(182, 274);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(320, 25);
-            this.textBox8.TabIndex = 25;
+            tableLayoutPanel3.SetColumnSpan(textBox8, 2);
+            textBox8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox8.Location = new System.Drawing.Point(213, 305);
+            textBox8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox8.Name = "textBox8";
+            textBox8.Size = new System.Drawing.Size(373, 25);
+            textBox8.TabIndex = 25;
             // 
             // textBox7
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox7, 2);
-            this.textBox7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(182, 239);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(320, 25);
-            this.textBox7.TabIndex = 23;
+            tableLayoutPanel3.SetColumnSpan(textBox7, 2);
+            textBox7.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox7.Location = new System.Drawing.Point(213, 265);
+            textBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new System.Drawing.Size(373, 25);
+            textBox7.TabIndex = 23;
             // 
             // textBox6
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox6, 2);
-            this.textBox6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(182, 204);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(320, 25);
-            this.textBox6.TabIndex = 21;
+            tableLayoutPanel3.SetColumnSpan(textBox6, 2);
+            textBox6.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox6.Location = new System.Drawing.Point(213, 225);
+            textBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new System.Drawing.Size(373, 25);
+            textBox6.TabIndex = 21;
             // 
             // textBox5
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox5, 2);
-            this.textBox5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(182, 171);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(320, 25);
-            this.textBox5.TabIndex = 19;
+            tableLayoutPanel3.SetColumnSpan(textBox5, 2);
+            textBox5.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox5.Location = new System.Drawing.Point(213, 187);
+            textBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new System.Drawing.Size(373, 25);
+            textBox5.TabIndex = 19;
             // 
             // textBox4
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox4, 2);
-            this.textBox4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(182, 136);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(320, 25);
-            this.textBox4.TabIndex = 17;
+            tableLayoutPanel3.SetColumnSpan(textBox4, 2);
+            textBox4.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox4.Location = new System.Drawing.Point(213, 147);
+            textBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new System.Drawing.Size(373, 25);
+            textBox4.TabIndex = 17;
             // 
             // textBox3
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox3, 2);
-            this.textBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(182, 100);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(320, 25);
-            this.textBox3.TabIndex = 15;
+            tableLayoutPanel3.SetColumnSpan(textBox3, 2);
+            textBox3.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox3.Location = new System.Drawing.Point(213, 105);
+            textBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox3.Name = "textBox3";
+            textBox3.Size = new System.Drawing.Size(373, 25);
+            textBox3.TabIndex = 15;
             // 
             // label8
             // 
-            this.label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(3, 279);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 17);
-            this.label8.TabIndex = 26;
-            this.label8.Text = "Поле8";
+            label8.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label8.AutoSize = true;
+            label8.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label8.Location = new System.Drawing.Point(4, 313);
+            label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label8.Name = "label8";
+            label8.Size = new System.Drawing.Size(52, 17);
+            label8.TabIndex = 26;
+            label8.Text = "Поле8";
             // 
             // textBox2
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox2, 2);
-            this.textBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(182, 65);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(320, 25);
-            this.textBox2.TabIndex = 11;
+            tableLayoutPanel3.SetColumnSpan(textBox2, 2);
+            textBox2.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox2.Location = new System.Drawing.Point(213, 65);
+            textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new System.Drawing.Size(373, 25);
+            textBox2.TabIndex = 11;
             // 
             // textBox1
             // 
-            this.textBox1.BackColor = System.Drawing.Color.White;
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox1, 2);
-            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(182, 34);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(320, 25);
-            this.textBox1.TabIndex = 9;
+            textBox1.BackColor = System.Drawing.Color.White;
+            tableLayoutPanel3.SetColumnSpan(textBox1, 2);
+            textBox1.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox1.Location = new System.Drawing.Point(213, 34);
+            textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new System.Drawing.Size(373, 25);
+            textBox1.TabIndex = 9;
             // 
             // textBox9
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox9, 2);
-            this.textBox9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox9.Location = new System.Drawing.Point(182, 308);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(320, 25);
-            this.textBox9.TabIndex = 27;
+            tableLayoutPanel3.SetColumnSpan(textBox9, 2);
+            textBox9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox9.Location = new System.Drawing.Point(213, 344);
+            textBox9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox9.Name = "textBox9";
+            textBox9.Size = new System.Drawing.Size(373, 25);
+            textBox9.TabIndex = 27;
             // 
             // textBox10
             // 
-            this.tableLayoutPanel3.SetColumnSpan(this.textBox10, 2);
-            this.textBox10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox10.Location = new System.Drawing.Point(182, 342);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(320, 25);
-            this.textBox10.TabIndex = 29;
+            tableLayoutPanel3.SetColumnSpan(textBox10, 2);
+            textBox10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            textBox10.Location = new System.Drawing.Point(213, 383);
+            textBox10.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBox10.Name = "textBox10";
+            textBox10.Size = new System.Drawing.Size(373, 25);
+            textBox10.TabIndex = 29;
             // 
             // label10
             // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(3, 348);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 17);
-            this.label10.TabIndex = 30;
-            this.label10.Text = "Поле10";
+            label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label10.AutoSize = true;
+            label10.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label10.Location = new System.Drawing.Point(4, 392);
+            label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label10.Name = "label10";
+            label10.Size = new System.Drawing.Size(60, 17);
+            label10.TabIndex = 30;
+            label10.Text = "Поле10";
             // 
             // label9
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(3, 313);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(52, 17);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Поле9";
+            label9.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            label9.AutoSize = true;
+            label9.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            label9.Location = new System.Drawing.Point(4, 352);
+            label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            label9.Name = "label9";
+            label9.Size = new System.Drawing.Size(52, 17);
+            label9.TabIndex = 28;
+            label9.Text = "Поле9";
             // 
             // textBoxKod
             // 
-            this.textBoxKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxKod.BackColor = System.Drawing.SystemColors.Control;
-            this.textBoxKod.Cursor = System.Windows.Forms.Cursors.No;
-            this.textBoxKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxKod.ForeColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxKod.Location = new System.Drawing.Point(182, 3);
-            this.textBoxKod.Name = "textBoxKod";
-            this.textBoxKod.ReadOnly = true;
-            this.textBoxKod.Size = new System.Drawing.Size(63, 25);
-            this.textBoxKod.TabIndex = 13;
+            textBoxKod.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            textBoxKod.BackColor = System.Drawing.SystemColors.Control;
+            textBoxKod.Cursor = System.Windows.Forms.Cursors.No;
+            textBoxKod.Font = new System.Drawing.Font("Times New Roman", 11.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, 204);
+            textBoxKod.ForeColor = System.Drawing.SystemColors.InactiveCaption;
+            textBoxKod.Location = new System.Drawing.Point(213, 3);
+            textBoxKod.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            textBoxKod.Name = "textBoxKod";
+            textBoxKod.ReadOnly = true;
+            textBoxKod.Size = new System.Drawing.Size(73, 25);
+            textBoxKod.TabIndex = 13;
             // 
             // labelSave
             // 
-            this.labelSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelSave.AutoSize = true;
-            this.labelSave.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSave.Location = new System.Drawing.Point(397, 390);
-            this.labelSave.Name = "labelSave";
-            this.labelSave.Size = new System.Drawing.Size(105, 19);
-            this.labelSave.TabIndex = 31;
-            this.labelSave.Text = "Сохранено!";
-            this.labelSave.Visible = false;
+            labelSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            labelSave.AutoSize = true;
+            labelSave.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 204);
+            labelSave.Location = new System.Drawing.Point(472, 442);
+            labelSave.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            labelSave.Name = "labelSave";
+            labelSave.Size = new System.Drawing.Size(105, 19);
+            labelSave.TabIndex = 31;
+            labelSave.Text = "Сохранено!";
+            labelSave.Visible = false;
             // 
             // simpleButtonAddOtm
             // 
-            this.simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
-            this.simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
-            this.simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAddOtm.Location = new System.Drawing.Point(3, 534);
-            this.simpleButtonAddOtm.Name = "simpleButtonAddOtm";
-            this.simpleButtonAddOtm.ObjectName = null;
-            this.simpleButtonAddOtm.Size = new System.Drawing.Size(173, 44);
-            this.simpleButtonAddOtm.TabIndex = 32;
-            this.simpleButtonAddOtm.Text = "Отмена";
-            this.simpleButtonAddOtm.UseVisualStyleBackColor = false;
-            this.simpleButtonAddOtm.Click += new System.EventHandler(this.simpleButtonAddOtm_Click);
+            simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
+            simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            simpleButtonAddOtm.Location = new System.Drawing.Point(4, 622);
+            simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonAddOtm.MinimumSize = new System.Drawing.Size(0, 47);
+            simpleButtonAddOtm.Name = "simpleButtonAddOtm";
+            simpleButtonAddOtm.Size = new System.Drawing.Size(201, 51);
+            simpleButtonAddOtm.TabIndex = 32;
+            simpleButtonAddOtm.Text = "Отмена";
+            simpleButtonAddOtm.UseVisualStyleBackColor = false;
+            simpleButtonAddOtm.Click += simpleButtonAddOtm_Click;
             // 
             // simpleButtonDel
             // 
-            this.simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonDel.FlatAppearance.BorderSize = 0;
-            this.simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
-            this.simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonDel.Location = new System.Drawing.Point(182, 534);
-            this.simpleButtonDel.Name = "simpleButtonDel";
-            this.simpleButtonDel.ObjectName = null;
-            this.simpleButtonDel.Size = new System.Drawing.Size(174, 44);
-            this.simpleButtonDel.TabIndex = 32;
-            this.simpleButtonDel.Text = "Удалить";
-            this.simpleButtonDel.UseVisualStyleBackColor = false;
-            this.simpleButtonDel.Click += new System.EventHandler(this.simpleButtonDel_Click);
+            simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            simpleButtonDel.FlatAppearance.BorderSize = 0;
+            simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            simpleButtonDel.Location = new System.Drawing.Point(213, 622);
+            simpleButtonDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonDel.MinimumSize = new System.Drawing.Size(0, 47);
+            simpleButtonDel.Name = "simpleButtonDel";
+            simpleButtonDel.Size = new System.Drawing.Size(202, 51);
+            simpleButtonDel.TabIndex = 32;
+            simpleButtonDel.Text = "Удалить";
+            simpleButtonDel.UseVisualStyleBackColor = false;
+            simpleButtonDel.Click += simpleButtonDel_Click;
             // 
             // simpleButtonAddSave
             // 
-            this.simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonAddSave.FlatAppearance.BorderSize = 0;
-            this.simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
-            this.simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAddSave.Location = new System.Drawing.Point(362, 534);
-            this.simpleButtonAddSave.Name = "simpleButtonAddSave";
-            this.simpleButtonAddSave.ObjectName = null;
-            this.simpleButtonAddSave.Size = new System.Drawing.Size(174, 44);
-            this.simpleButtonAddSave.TabIndex = 32;
-            this.simpleButtonAddSave.Text = "Сохранить";
-            this.simpleButtonAddSave.UseVisualStyleBackColor = false;
-            this.simpleButtonAddSave.Click += new System.EventHandler(this.simpleButtonAddSave_Click);
+            simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            simpleButtonAddSave.FlatAppearance.BorderSize = 0;
+            simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            simpleButtonAddSave.Location = new System.Drawing.Point(423, 622);
+            simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonAddSave.MinimumSize = new System.Drawing.Size(0, 47);
+            simpleButtonAddSave.Name = "simpleButtonAddSave";
+            simpleButtonAddSave.Size = new System.Drawing.Size(203, 51);
+            simpleButtonAddSave.TabIndex = 32;
+            simpleButtonAddSave.Text = "Сохранить";
+            simpleButtonAddSave.UseVisualStyleBackColor = false;
+            simpleButtonAddSave.Click += simpleButtonAddSave_Click;
             // 
             // gridControlSprav
             // 
-            this.gridControlSprav.DataSource = this.spravList;
-            this.gridControlSprav.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlSprav.Location = new System.Drawing.Point(3, 3);
-            this.gridControlSprav.MainView = this.gridView1;
-            this.gridControlSprav.MaximumSize = new System.Drawing.Size(1400, 900);
-            this.gridControlSprav.Name = "gridControlSprav";
-            this.gridControlSprav.Size = new System.Drawing.Size(474, 606);
-            this.gridControlSprav.TabIndex = 0;
-            this.gridControlSprav.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            this.gridControlSprav.Load += new System.EventHandler(this.gridControlSprav_Load);
-            this.gridControlSprav.Click += new System.EventHandler(this.gridControlSprav_Click);
-            this.gridControlSprav.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridControlSprav_KeyUp);
+            gridControlSprav.DataSource = spravList;
+            gridControlSprav.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridControlSprav.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlSprav.Location = new System.Drawing.Point(4, 3);
+            gridControlSprav.MainView = gridView1;
+            gridControlSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlSprav.MaximumSize = new System.Drawing.Size(1633, 1038);
+            gridControlSprav.Name = "gridControlSprav";
+            gridControlSprav.Size = new System.Drawing.Size(551, 701);
+            gridControlSprav.TabIndex = 0;
+            gridControlSprav.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridControlSprav.Load += gridControlSprav_Load;
+            gridControlSprav.Click += gridControlSprav_Click;
+            gridControlSprav.KeyUp += gridControlSprav_KeyUp;
             // 
             // gridView1
             // 
-            this.gridView1.AppearancePrint.FilterPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gridView1.AppearancePrint.FilterPanel.Options.UseBackColor = true;
-            this.gridView1.AppearancePrint.Lines.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.gridView1.AppearancePrint.Lines.Options.UseBackColor = true;
-            this.gridView1.GridControl = this.gridControlSprav;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridView1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.gridView1.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView1_CellValueChanged);
+            gridView1.AppearancePrint.FilterPanel.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            gridView1.AppearancePrint.FilterPanel.Options.UseBackColor = true;
+            gridView1.AppearancePrint.Lines.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            gridView1.AppearancePrint.Lines.Options.UseBackColor = true;
+            gridView1.DetailHeight = 404;
+            gridView1.GridControl = gridControlSprav;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridView1.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            gridView1.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView1.CellValueChanged += gridView1_CellValueChanged;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.Controls.Add(this.simpleButtonRed, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.simpleButtonAdd, 2, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 615);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(474, 43);
-            this.tableLayoutPanel1.TabIndex = 10;
+            tableLayoutPanel1.ColumnCount = 3;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel1.Controls.Add(simpleButtonRed, 1, 0);
+            tableLayoutPanel1.Controls.Add(simpleButtonAdd, 2, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(4, 710);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(551, 50);
+            tableLayoutPanel1.TabIndex = 10;
             // 
             // simpleButtonRed
             // 
-            this.simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.simpleButtonRed.FlatAppearance.BorderSize = 0;
-            this.simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
-            this.simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonRed.Location = new System.Drawing.Point(334, 3);
-            this.simpleButtonRed.Name = "simpleButtonRed";
-            this.simpleButtonRed.ObjectName = null;
-            this.simpleButtonRed.Size = new System.Drawing.Size(65, 28);
-            this.simpleButtonRed.TabIndex = 12;
-            this.simpleButtonRed.Text = "Редактировать";
-            this.simpleButtonRed.UseVisualStyleBackColor = false;
-            this.simpleButtonRed.Click += new System.EventHandler(this.simpleButtonRed_Click);
+            simpleButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            simpleButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
+            simpleButtonRed.FlatAppearance.BorderSize = 0;
+            simpleButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            simpleButtonRed.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonRed.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            simpleButtonRed.Location = new System.Drawing.Point(389, 3);
+            simpleButtonRed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonRed.Name = "simpleButtonRed";
+            simpleButtonRed.Size = new System.Drawing.Size(74, 34);
+            simpleButtonRed.TabIndex = 12;
+            simpleButtonRed.Text = "Редактировать";
+            simpleButtonRed.UseVisualStyleBackColor = false;
+            simpleButtonRed.Click += simpleButtonRed_Click;
             // 
             // simpleButtonAdd
             // 
-            this.simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.simpleButtonAdd.FlatAppearance.BorderSize = 0;
-            this.simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            this.simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.simpleButtonAdd.Location = new System.Drawing.Point(405, 3);
-            this.simpleButtonAdd.Name = "simpleButtonAdd";
-            this.simpleButtonAdd.ObjectName = null;
-            this.simpleButtonAdd.Size = new System.Drawing.Size(66, 28);
-            this.simpleButtonAdd.TabIndex = 13;
-            this.simpleButtonAdd.Text = "Добавить";
-            this.simpleButtonAdd.UseVisualStyleBackColor = false;
-            this.simpleButtonAdd.Click += new System.EventHandler(this.simpleButtonAdd_Click);
+            simpleButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            simpleButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            simpleButtonAdd.FlatAppearance.BorderSize = 0;
+            simpleButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            simpleButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+            simpleButtonAdd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            simpleButtonAdd.Location = new System.Drawing.Point(471, 3);
+            simpleButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            simpleButtonAdd.Name = "simpleButtonAdd";
+            simpleButtonAdd.Size = new System.Drawing.Size(76, 34);
+            simpleButtonAdd.TabIndex = 13;
+            simpleButtonAdd.Text = "Добавить";
+            simpleButtonAdd.UseVisualStyleBackColor = false;
+            simpleButtonAdd.Click += simpleButtonAdd_Click;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.gridControlSprav, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.AddTab, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 1);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.71592F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.284079F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1034, 661);
-            this.tableLayoutPanel2.TabIndex = 11;
+            tableLayoutPanel2.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            tableLayoutPanel2.Controls.Add(gridControlSprav, 0, 0);
+            tableLayoutPanel2.Controls.Add(AddTab, 1, 0);
+            tableLayoutPanel2.Controls.Add(tableLayoutPanel1, 0, 1);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 2;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.71592F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.284079F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(1206, 763);
+            tableLayoutPanel2.TabIndex = 11;
             // 
             // SpravForAll
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1034, 661);
-            this.Controls.Add(this.tableLayoutPanel2);
-            this.MinimumSize = new System.Drawing.Size(16, 39);
-            this.Name = "SpravForAll";
-            this.Text = "Cправочник";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SpravForAll_FormClosing);
-            this.Load += new System.EventHandler(this.SpravForAll_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.spravList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nameColumnList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.AddTab)).EndInit();
-            this.AddTab.ResumeLayout(false);
-            this.xtraTabPageAdd.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlSprav)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            AutoScroll = true;
+            AutoSize = true;
+            ClientSize = new System.Drawing.Size(1206, 763);
+            Controls.Add(tableLayoutPanel2);
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MinimumSize = new System.Drawing.Size(16, 39);
+            Name = "SpravForAll";
+            Text = "Cправочник";
+            FormClosing += SpravForAll_FormClosing;
+            Load += SpravForAll_Load;
+            ((System.ComponentModel.ISupportInitialize)spravList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)nameColumnList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)AddTab).EndInit();
+            AddTab.ResumeLayout(false);
+            xtraTabPageAdd.ResumeLayout(false);
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlSprav).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

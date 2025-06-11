@@ -32,7 +32,7 @@ namespace SewingProduction.form.UserDistribution
         {
             InitializeComponent();
             dbService = new DbService(dbHelper);
-            _userModelDataService = new UserModelDataService(dbService);
+            _userModelDataService = new UserModelDataService(dbService, dbHelper);
             _userRoleDataService = new UserRoleDataService(dbService, dbHelper);
             _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
@@ -116,6 +116,7 @@ namespace SewingProduction.form.UserDistribution
                 var hasher = new PasswordHasher();
                 string password = string.IsNullOrWhiteSpace(user.Password) ? "0" : user.Password;
                 user.PasswordHash = hasher.HashPassword(password);
+                user.CreatorID = _user.UserId;
 
                 int newUserId = await _userModelDataService.SaveAsync(user);
                 user.UserID = newUserId;

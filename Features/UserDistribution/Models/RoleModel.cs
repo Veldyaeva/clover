@@ -69,7 +69,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = dbHelper;
         }
 
-        public async Task<List<RoleModel>> GetRoles(int userId)
+        public async Task<List<RoleModel>> GetListRolesAsync(int userId)
         {
             string query = @"
                 SELECT r.RoleID, r.RoleName, r.Description, r.CreatorID, u.UserName AS CreatorName
@@ -143,6 +143,25 @@ namespace SewingProduction.Features.UserDistribution.Models
             return table.AsEnumerable()
                 .Select(r => Convert.ToInt32(r["UserID"]))
                 .ToHashSet();
+        }
+        public async Task<List<int>> GetRoleIdsByNamesAsync(List<string> roleNames)
+        {
+            if (roleNames == null || roleNames.Count == 0)
+                return new List<int>();
+
+            string query = $@"
+            SELECT RoleID FROM Roles
+            WHERE RoleName IN ({string.Join(",", roleNames.Select((r, i) => $"@name{i}"))})";
+
+            var parameters = roleNames
+                .Select((r, i) => new KeyValuePair<string, object>($"@name{i}", r))
+                .ToDictionary(kvp => kvp.Key, kvp => (object)kvp.Value);
+
+            DataTable result = await _dbHelper.ExecuteQueryAsync(query, parameters);
+
+            return result.AsEnumerable()
+                .Select(r => Convert.ToInt32(r["RoleID"]))
+                .ToList();
         }
     }
 }
