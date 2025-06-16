@@ -28,251 +28,255 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.customGridControlAllProfile = new SewingProduction.CustomGridControl();
-            this.bindingSourceUsers = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.UserId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.UserName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.FIO1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEditFio = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.Brig = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemLookUpEditBrig = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.Password = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.customButtonAddProfile = new SewingProduction.CustomButton();
-            this.customButtonDeleteProfile = new SewingProduction.CustomButton();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.Fio = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.FioID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BrigID = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.customGridControlAllProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditFio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditBrig)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserHierarchy));
+            customGridControlAllProfile = new CustomGridControl();
+            bindingSourceUsers = new System.Windows.Forms.BindingSource(components);
+            gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
+            UserId = new DevExpress.XtraGrid.Columns.GridColumn();
+            UserName = new DevExpress.XtraGrid.Columns.GridColumn();
+            Fio1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEditFio = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            Brig = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEditBrig = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            Password = new DevExpress.XtraGrid.Columns.GridColumn();
+            FioID = new DevExpress.XtraGrid.Columns.GridColumn();
+            BrigID = new DevExpress.XtraGrid.Columns.GridColumn();
+            customButtonAddProfile = new CustomButton();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            Fio = new DevExpress.XtraGrid.Columns.GridColumn();
+            ((System.ComponentModel.ISupportInitialize)customGridControlAllProfile).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceUsers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewUsers).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditFio).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditBrig).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // customGridControlAllProfile
             // 
-            this.customGridControlAllProfile.AlternateRowColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customGridControlAllProfile.DataSource = this.bindingSourceUsers;
-            this.customGridControlAllProfile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customGridControlAllProfile.Font = new System.Drawing.Font("Arial", 10F);
-            this.customGridControlAllProfile.Location = new System.Drawing.Point(3, 3);
-            this.customGridControlAllProfile.MainView = this.gridViewUsers;
-            this.customGridControlAllProfile.Name = "customGridControlAllProfile";
-            this.customGridControlAllProfile.ObjectName = null;
-            this.customGridControlAllProfile.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositoryItemLookUpEditBrig,
-            this.repositoryItemLookUpEditFio});
-            this.tableLayoutPanel1.SetRowSpan(this.customGridControlAllProfile, 10);
-            this.customGridControlAllProfile.Size = new System.Drawing.Size(1142, 641);
-            this.customGridControlAllProfile.TabIndex = 0;
-            this.customGridControlAllProfile.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewUsers});
-            this.customGridControlAllProfile.Load += new System.EventHandler(this.customGridControlUsers_Load);
+            customGridControlAllProfile.DataSource = bindingSourceUsers;
+            customGridControlAllProfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGridControlAllProfile.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGridControlAllProfile.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlAllProfile.Location = new System.Drawing.Point(4, 3);
+            customGridControlAllProfile.MainView = gridViewUsers;
+            customGridControlAllProfile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGridControlAllProfile.Name = "customGridControlAllProfile";
+            customGridControlAllProfile.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEditBrig, repositoryItemLookUpEditFio });
+            tableLayoutPanel1.SetRowSpan(customGridControlAllProfile, 10);
+            customGridControlAllProfile.Size = new System.Drawing.Size(1150, 618);
+            customGridControlAllProfile.TabIndex = 0;
+            customGridControlAllProfile.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewUsers });
+            customGridControlAllProfile.Load += customGridControlUsers_Load;
             // 
             // gridViewUsers
             // 
-            this.gridViewUsers.Appearance.DetailTip.BackColor = System.Drawing.Color.Transparent;
-            this.gridViewUsers.Appearance.DetailTip.Options.UseBackColor = true;
-            this.gridViewUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.UserId,
-            this.UserName,
-            this.FIO1,
-            this.Brig,
-            this.Password,
-            this.FioID,
-            this.BrigID});
-            this.gridViewUsers.GridControl = this.customGridControlAllProfile;
-            this.gridViewUsers.Name = "gridViewUsers";
-            this.gridViewUsers.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridViewUsers.OptionsDetail.SmartDetailHeight = true;
-            this.gridViewUsers.OptionsEditForm.EditFormColumnCount = 1;
-            this.gridViewUsers.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewUsers.OptionsView.RowAutoHeight = true;
-            this.gridViewUsers.OptionsView.ShowChildrenInGroupPanel = true;
-            this.gridViewUsers.OptionsView.ShowGroupPanel = false;
-            this.gridViewUsers.InitNewRow += new DevExpress.XtraGrid.Views.Grid.InitNewRowEventHandler(this.gridViewUsers_InitNewRow);
-            this.gridViewUsers.RowUpdated += new DevExpress.XtraGrid.Views.Base.RowObjectEventHandler(this.gridViewUsers_RowUpdated);
+            gridViewUsers.Appearance.DetailTip.BackColor = System.Drawing.Color.Transparent;
+            gridViewUsers.Appearance.DetailTip.Options.UseBackColor = true;
+            gridViewUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { UserId, UserName, Fio1, Brig, Password, FioID, BrigID });
+            gridViewUsers.DetailHeight = 404;
+            gridViewUsers.GridControl = customGridControlAllProfile;
+            gridViewUsers.Name = "gridViewUsers";
+            gridViewUsers.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewUsers.OptionsDetail.SmartDetailHeight = true;
+            gridViewUsers.OptionsEditForm.EditFormColumnCount = 1;
+            gridViewUsers.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewUsers.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewUsers.OptionsView.RowAutoHeight = true;
+            gridViewUsers.OptionsView.ShowChildrenInGroupPanel = true;
+            gridViewUsers.OptionsView.ShowGroupPanel = false;
+            gridViewUsers.InitNewRow += gridViewUsers_InitNewRow;
+            gridViewUsers.RowUpdated += gridViewUsers_RowUpdated;
             // 
             // UserId
             // 
-            this.UserId.Caption = "ИД";
-            this.UserId.FieldName = "UserId";
-            this.UserId.Name = "UserId";
-            this.UserId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
-            this.UserId.Visible = true;
-            this.UserId.VisibleIndex = 0;
-            this.UserId.Width = 80;
+            UserId.Caption = "ИД";
+            UserId.FieldName = "UserId";
+            UserId.MinWidth = 23;
+            UserId.Name = "UserId";
+            UserId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            UserId.Visible = true;
+            UserId.VisibleIndex = 0;
+            UserId.Width = 93;
             // 
             // UserName
             // 
-            this.UserName.Caption = "Имя пользователя";
-            this.UserName.FieldName = "UserName";
-            this.UserName.Name = "UserName";
-            this.UserName.Visible = true;
-            this.UserName.VisibleIndex = 1;
-            this.UserName.Width = 272;
+            UserName.Caption = "Имя пользователя";
+            UserName.FieldName = "UserName";
+            UserName.MinWidth = 23;
+            UserName.Name = "UserName";
+            UserName.Visible = true;
+            UserName.VisibleIndex = 1;
+            UserName.Width = 317;
+            // 
+            // Fio1
+            // 
+            Fio1.Caption = "ФИО";
+            Fio1.ColumnEdit = repositoryItemLookUpEditFio;
+            Fio1.FieldName = "FioID";
+            Fio1.MinWidth = 23;
+            Fio1.Name = "Fio1";
+            Fio1.Visible = true;
+            Fio1.VisibleIndex = 2;
+            Fio1.Width = 510;
             // 
             // repositoryItemLookUpEditFio
             // 
-            this.repositoryItemLookUpEditFio.AutoHeight = false;
-            this.repositoryItemLookUpEditFio.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEditFio.Name = "repositoryItemLookUpEditFio";
-            this.repositoryItemLookUpEditFio.DisplayMember = "Fio";
-            this.repositoryItemLookUpEditFio.NullText = "-";
-            this.repositoryItemLookUpEditFio.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
-            this.repositoryItemLookUpEditFio.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.repositoryItemLookUpEditFio.ValueMember = "FioID";
+            repositoryItemLookUpEditFio.AutoHeight = false;
+            repositoryItemLookUpEditFio.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEditFio.DisplayMember = "Fio";
+            repositoryItemLookUpEditFio.Name = "repositoryItemLookUpEditFio";
+            repositoryItemLookUpEditFio.NullText = "-";
+            repositoryItemLookUpEditFio.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            repositoryItemLookUpEditFio.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            repositoryItemLookUpEditFio.ValueMember = "FioID";
             // 
             // Brig
             // 
-            this.Brig.Caption = "Бригада";
-            this.Brig.ColumnEdit = this.repositoryItemLookUpEditBrig;
-            this.Brig.FieldName = "BrigID";
-            this.Brig.Name = "Brig";
-            this.Brig.Visible = true;
-            this.Brig.VisibleIndex = 3;
-            this.Brig.Width = 318;
+            Brig.Caption = "Бригада";
+            Brig.ColumnEdit = repositoryItemLookUpEditBrig;
+            Brig.FieldName = "BrigID";
+            Brig.MinWidth = 23;
+            Brig.Name = "Brig";
+            Brig.Visible = true;
+            Brig.VisibleIndex = 3;
+            Brig.Width = 371;
             // 
             // repositoryItemLookUpEditBrig
             // 
-            this.repositoryItemLookUpEditBrig.AutoHeight = false;
-            this.repositoryItemLookUpEditBrig.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.repositoryItemLookUpEditBrig.DisplayMember = "Brig";
-            this.repositoryItemLookUpEditBrig.Name = "repositoryItemLookUpEditBrig";
-            this.repositoryItemLookUpEditBrig.NullText = "-";
-            this.repositoryItemLookUpEditBrig.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
-            this.repositoryItemLookUpEditBrig.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            this.repositoryItemLookUpEditBrig.ValueMember = "BrigID";
+            repositoryItemLookUpEditBrig.AutoHeight = false;
+            repositoryItemLookUpEditBrig.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEditBrig.DisplayMember = "Brig";
+            repositoryItemLookUpEditBrig.Name = "repositoryItemLookUpEditBrig";
+            repositoryItemLookUpEditBrig.NullText = "-";
+            repositoryItemLookUpEditBrig.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            repositoryItemLookUpEditBrig.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            repositoryItemLookUpEditBrig.ValueMember = "BrigID";
             // 
             // Password
             // 
-            this.Password.Caption = "Password";
-            this.Password.FieldName = "Password";
-            this.Password.MaxWidth = 1;
-            this.Password.MinWidth = 10;
-            this.Password.Name = "Password";
-            this.Password.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            this.Password.Width = 10;
-            // 
-            // customButtonAddProfile
-            // 
-            this.customButtonAddProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customButtonAddProfile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonAddProfile.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonAddProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customButtonAddProfile.Location = new System.Drawing.Point(1151, 3);
-            this.customButtonAddProfile.Name = "customButtonAddProfile";
-            this.customButtonAddProfile.ObjectName = null;
-            this.customButtonAddProfile.Size = new System.Drawing.Size(122, 58);
-            this.customButtonAddProfile.TabIndex = 1;
-            this.customButtonAddProfile.Text = "Добавить профиль";
-            this.customButtonAddProfile.UseVisualStyleBackColor = false;
-            this.customButtonAddProfile.Click += new System.EventHandler(this.customButtonAddProfile_Click);
-            // 
-            // customButtonDeleteProfile
-            // 
-            this.customButtonDeleteProfile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(223)))), ((int)(((byte)(196)))));
-            this.customButtonDeleteProfile.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonDeleteProfile.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonDeleteProfile.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customButtonDeleteProfile.Location = new System.Drawing.Point(1151, 579);
-            this.customButtonDeleteProfile.Name = "customButtonDeleteProfile";
-            this.customButtonDeleteProfile.ObjectName = null;
-            this.customButtonDeleteProfile.Size = new System.Drawing.Size(122, 65);
-            this.customButtonDeleteProfile.TabIndex = 2;
-            this.customButtonDeleteProfile.Text = "Удалить профиль";
-            this.customButtonDeleteProfile.UseVisualStyleBackColor = false;
-            this.customButtonDeleteProfile.Click += new System.EventHandler(this.customButtonDeleteProfile_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Controls.Add(this.customGridControlAllProfile, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButtonAddProfile, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButtonDeleteProfile, 1, 9);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 10;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1276, 647);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // RoleName
-            // 
-            this.RoleName.Caption = "Название";
-            this.RoleName.FieldName = "RoleName";
-            this.RoleName.Name = "RoleName";
-            this.RoleName.Visible = true;
-            this.RoleName.VisibleIndex = 0;
-            this.RoleName.Width = 255;
-            // 
-            // Fio
-            // 
-            this.FIO1.Caption = "ФИО";
-            this.FIO1.ColumnEdit = this.repositoryItemLookUpEditFio;
-            this.FIO1.FieldName = "FioID";
-            this.FIO1.Name = "Fio1";
-            this.FIO1.Visible = true;
-            this.FIO1.VisibleIndex = 2;
-            this.FIO1.Width = 437;
+            Password.Caption = "Password";
+            Password.FieldName = "Password";
+            Password.MaxWidth = 1;
+            Password.MinWidth = 12;
+            Password.Name = "Password";
+            Password.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            Password.Width = 12;
             // 
             // FioID
             // 
-            this.FioID.Caption = "FioID";
-            this.FioID.FieldName = "FioID";
-            this.FioID.Name = "FioID";
-            this.FioID.Visible = true;
-            this.FioID.VisibleIndex = 4;
+            FioID.Caption = "FioID";
+            FioID.FieldName = "FioID";
+            FioID.MinWidth = 23;
+            FioID.Name = "FioID";
+            FioID.Visible = true;
+            FioID.VisibleIndex = 4;
+            FioID.Width = 87;
             // 
             // BrigID
             // 
-            this.BrigID.Caption = "BrigID";
-            this.BrigID.FieldName = "BrigID";
-            this.BrigID.Name = "BrigID";
-            this.BrigID.Visible = true;
-            this.BrigID.VisibleIndex = 5;
+            BrigID.Caption = "BrigID";
+            BrigID.FieldName = "BrigID";
+            BrigID.MinWidth = 23;
+            BrigID.Name = "BrigID";
+            BrigID.Visible = true;
+            BrigID.VisibleIndex = 5;
+            BrigID.Width = 87;
             // 
-            // UsersHierarchy
+            // customButtonAddProfile
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1276, 647);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "UsersHierarchy";
-            this.Text = "Иерархия пользователей";
-            this.Load += new System.EventHandler(this.UsersHierarchy_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.customGridControlAllProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditFio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditBrig)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.ResumeLayout(false);
-
+            customButtonAddProfile.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonAddProfile.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAddProfile.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAddProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonAddProfile.Location = new System.Drawing.Point(1162, 3);
+            customButtonAddProfile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAddProfile.Name = "customButtonAddProfile";
+            customButtonAddProfile.Size = new System.Drawing.Size(121, 56);
+            customButtonAddProfile.TabIndex = 1;
+            customButtonAddProfile.Text = "Добавить профиль";
+            customButtonAddProfile.UseVisualStyleBackColor = false;
+            customButtonAddProfile.Click += customButtonAddProfile_Click;
+            // 
+            // tableLayoutPanel1
+            // 
+            tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.ColumnCount = 2;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.Controls.Add(customGridControlAllProfile, 0, 0);
+            tableLayoutPanel1.Controls.Add(customButtonAddProfile, 1, 0);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 10;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(1287, 624);
+            tableLayoutPanel1.TabIndex = 2;
+            // 
+            // RoleName
+            // 
+            RoleName.Caption = "Название";
+            RoleName.FieldName = "RoleName";
+            RoleName.Name = "RoleName";
+            RoleName.Visible = true;
+            RoleName.VisibleIndex = 0;
+            RoleName.Width = 255;
+            // 
+            // gridColumn1
+            // 
+            gridColumn1.Name = "gridColumn1";
+            // 
+            // gridColumn2
+            // 
+            gridColumn2.Name = "gridColumn2";
+            // 
+            // gridColumn3
+            // 
+            gridColumn3.Name = "gridColumn3";
+            // 
+            // gridColumn4
+            // 
+            gridColumn4.Name = "gridColumn4";
+            // 
+            // Fio
+            // 
+            Fio.Name = "Fio";
+            // 
+            // UserHierarchy
+            // 
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1287, 624);
+            Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "UserHierarchy";
+            Text = "Иерархия пользователей";
+            Load += UsersHierarchy_Load;
+            ((System.ComponentModel.ISupportInitialize)customGridControlAllProfile).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceUsers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewUsers).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditFio).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditBrig).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion
@@ -281,7 +285,6 @@
         private CustomGridControl customGridControlAllProfile;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private CustomButton customButtonAddProfile;
-        private CustomButton customButtonDeleteProfile;
         private DevExpress.XtraGrid.Columns.GridColumn UserId;
         private DevExpress.XtraGrid.Columns.GridColumn UserName;
         private DevExpress.XtraGrid.Columns.GridColumn Brig;
@@ -297,5 +300,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditBrig;
         private DevExpress.XtraGrid.Columns.GridColumn FioID;
         private DevExpress.XtraGrid.Columns.GridColumn BrigID;
+        private DevExpress.XtraGrid.Columns.GridColumn Fio1;
     }
 }

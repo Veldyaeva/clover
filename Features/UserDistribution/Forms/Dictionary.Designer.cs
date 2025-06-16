@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Dictionary));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customButtonOpen = new CustomButton();
             customGridControlColumn = new CustomGridControl();
@@ -329,6 +330,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1264, 662);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "Dictionary";
             Text = "Описатель";
             tableLayoutPanel1.ResumeLayout(false);

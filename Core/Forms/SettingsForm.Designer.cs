@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             customLabelTheme = new CustomLabel();
-            customLabelSize = new CustomLabel();
             customComboBoxTheme = new CustomComboBox();
-            customComboBoxSize = new CustomComboBox();
+            customComboBoxSizeText = new CustomComboBox();
+            customLabelSizeText = new CustomLabel();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -47,52 +47,53 @@
             customLabelTheme.TabIndex = 0;
             customLabelTheme.Text = "Тема";
             // 
-            // customLabelSize
-            // 
-            customLabelSize.AutoSize = true;
-            customLabelSize.BackColor = System.Drawing.Color.Transparent;
-            customLabelSize.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelSize.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelSize.Location = new System.Drawing.Point(14, 69);
-            customLabelSize.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabelSize.Name = "customLabelSize";
-            customLabelSize.Size = new System.Drawing.Size(56, 16);
-            customLabelSize.TabIndex = 1;
-            customLabelSize.Text = "Размер";
-            // 
             // customComboBoxTheme
             // 
             customComboBoxTheme.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
             customComboBoxTheme.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxTheme.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
             customComboBoxTheme.FormattingEnabled = true;
-            customComboBoxTheme.Location = new System.Drawing.Point(90, 22);
+            customComboBoxTheme.Location = new System.Drawing.Point(125, 22);
             customComboBoxTheme.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customComboBoxTheme.Name = "customComboBoxTheme";
             customComboBoxTheme.Size = new System.Drawing.Size(140, 24);
             customComboBoxTheme.TabIndex = 3;
             customComboBoxTheme.SelectedIndexChanged += customComboBoxTheme_SelectedIndexChanged;
             // 
-            // customComboBoxSize
+            // customComboBoxSizeText
             // 
-            customComboBoxSize.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
-            customComboBoxSize.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxSize.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
-            customComboBoxSize.FormattingEnabled = true;
-            customComboBoxSize.Location = new System.Drawing.Point(90, 66);
-            customComboBoxSize.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBoxSize.Name = "customComboBoxSize";
-            customComboBoxSize.Size = new System.Drawing.Size(140, 24);
-            customComboBoxSize.TabIndex = 4;
+            customComboBoxSizeText.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            customComboBoxSizeText.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBoxSizeText.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            customComboBoxSizeText.FormattingEnabled = true;
+            customComboBoxSizeText.Location = new System.Drawing.Point(125, 67);
+            customComboBoxSizeText.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customComboBoxSizeText.Name = "customComboBoxSizeText";
+            customComboBoxSizeText.Size = new System.Drawing.Size(140, 24);
+            customComboBoxSizeText.TabIndex = 6;
+            customComboBoxSizeText.SelectedIndexChanged += customComboBoxSizeText_SelectedIndexChanged;
+            // 
+            // customLabelSizeText
+            // 
+            customLabelSizeText.AutoSize = true;
+            customLabelSizeText.BackColor = System.Drawing.Color.Transparent;
+            customLabelSizeText.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelSizeText.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelSizeText.Location = new System.Drawing.Point(14, 70);
+            customLabelSizeText.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelSizeText.Name = "customLabelSizeText";
+            customLabelSizeText.Size = new System.Drawing.Size(103, 16);
+            customLabelSizeText.TabIndex = 5;
+            customLabelSizeText.Text = "Размер текста";
             // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
-            Controls.Add(customComboBoxSize);
+            Controls.Add(customComboBoxSizeText);
+            Controls.Add(customLabelSizeText);
             Controls.Add(customComboBoxTheme);
-            Controls.Add(customLabelSize);
             Controls.Add(customLabelTheme);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SettingsForm";
@@ -105,8 +106,8 @@
         #endregion
 
         private CustomLabel customLabelTheme;
-        private CustomLabel customLabelSize;
         private CustomComboBox customComboBoxTheme;
-        private CustomComboBox customComboBoxSize;
+        private CustomComboBox customComboBoxSizeText;
+        private CustomLabel customLabelSizeText;
     }
 }

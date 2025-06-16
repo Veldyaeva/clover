@@ -30,6 +30,7 @@
         {
             components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AllUser));
             gridViewRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
             RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -373,6 +374,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1258, 652);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "AllUser";
             Text = "Пользователи";

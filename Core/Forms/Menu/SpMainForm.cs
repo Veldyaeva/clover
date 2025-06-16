@@ -23,6 +23,8 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
+using System.Diagnostics;
+
 
 //nemain
 
@@ -30,7 +32,7 @@ namespace SewingProduction
 {
     public partial class SpMainForm : Form
     {
-        UserClass _user = new UserClass();
+        public UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems; 
         private string loginHistoryFile = "settings.json";
@@ -124,17 +126,17 @@ namespace SewingProduction
         }
         private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об."), sender);
+            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.", user: _user), sender);
         }
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об."), sender);
+            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.", user: _user), sender);
         }
 
         private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций"), sender);
+            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций", user: _user), sender);
         }
 
         private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -147,7 +149,7 @@ namespace SewingProduction
         }
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв"), sender);
+            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", user: _user), sender);
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -308,5 +310,22 @@ namespace SewingProduction
             }
         }
         #endregion
+        private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
+        {
+            if (e.Page != null && e.Page.MdiChild != null)
+            {
+                e.Page.Text = TruncateWithEllipsis(e.Page.MdiChild.Text, 25); // обрезка с многоточием
+                e.Page.Tooltip = e.Page.MdiChild.Text; // полное имя во всплывающей подсказке
+            }
+        }
+
+        // Вспомогательный метод для обрезки
+        private string TruncateWithEllipsis(string text, int maxLength)
+        {
+            if (string.IsNullOrEmpty(text) || text.Length <= maxLength)
+                return text;
+            return text.Substring(0, maxLength - 3) + "...";
+        }
+
     }
 }

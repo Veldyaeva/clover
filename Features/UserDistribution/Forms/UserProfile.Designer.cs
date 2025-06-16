@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(UserProfile));
             gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
             customGridControl1 = new CustomGridControl();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -38,12 +39,12 @@
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             customButtonChangeUser = new CustomButton();
+            customButtonHistory = new CustomButton();
             customButtonAllRpofile = new CustomButton();
             customButtonUserHierarchy = new CustomButton();
             customActionButtonNon = new CustomActionButton();
             tableLayoutPanelButton = new System.Windows.Forms.TableLayoutPanel();
             customButtonAllRole = new CustomButton();
-            customButtonHistory = new CustomButton();
             customButtonAdminSprav = new CustomButton();
             customButtonSpravTable = new CustomButton();
             customButtonAdminForm = new CustomButton();
@@ -183,7 +184,7 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.5301F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 34.9486F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.43172F));
-            tableLayoutPanel2.Size = new System.Drawing.Size(1475, 786);
+            tableLayoutPanel2.Size = new System.Drawing.Size(1372, 634);
             tableLayoutPanel2.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -191,6 +192,7 @@
             tableLayoutPanel4.ColumnCount = 1;
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel4.Controls.Add(customButtonChangeUser, 0, 0);
+            tableLayoutPanel4.Controls.Add(customButtonHistory, 0, 8);
             tableLayoutPanel4.Controls.Add(customButtonAllRpofile, 0, 1);
             tableLayoutPanel4.Controls.Add(customButtonUserHierarchy, 0, 2);
             tableLayoutPanel4.Controls.Add(customActionButtonNon, 0, 9);
@@ -210,7 +212,7 @@
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.00263F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(213, 571);
+            tableLayoutPanel4.Size = new System.Drawing.Size(197, 459);
             tableLayoutPanel4.TabIndex = 10;
             // 
             // customButtonChangeUser
@@ -223,11 +225,27 @@
             customButtonChangeUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonChangeUser.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonChangeUser.Name = "customButtonChangeUser";
-            customButtonChangeUser.Size = new System.Drawing.Size(210, 51);
+            customButtonChangeUser.Size = new System.Drawing.Size(210, 39);
             customButtonChangeUser.TabIndex = 6;
             customButtonChangeUser.Text = "Cменить пользователя";
             customButtonChangeUser.UseVisualStyleBackColor = false;
             customButtonChangeUser.Click += customButtonChangeUser_Click;
+            // 
+            // customButtonHistory
+            // 
+            customButtonHistory.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonHistory.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonHistory.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonHistory.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonHistory.Location = new System.Drawing.Point(4, 363);
+            customButtonHistory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonHistory.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonHistory.Name = "customButtonHistory";
+            customButtonHistory.Size = new System.Drawing.Size(210, 39);
+            customButtonHistory.TabIndex = 11;
+            customButtonHistory.Text = "История действий";
+            customButtonHistory.UseVisualStyleBackColor = false;
+            customButtonHistory.Click += customButtonHistory_Click;
             // 
             // customButtonAllRpofile
             // 
@@ -235,11 +253,11 @@
             customButtonAllRpofile.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAllRpofile.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAllRpofile.Location = new System.Drawing.Point(4, 60);
+            customButtonAllRpofile.Location = new System.Drawing.Point(4, 48);
             customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAllRpofile.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonAllRpofile.Name = "customButtonAllRpofile";
-            customButtonAllRpofile.Size = new System.Drawing.Size(210, 51);
+            customButtonAllRpofile.Size = new System.Drawing.Size(210, 39);
             customButtonAllRpofile.TabIndex = 0;
             customButtonAllRpofile.Text = "Пользователи";
             customButtonAllRpofile.UseVisualStyleBackColor = false;
@@ -251,11 +269,11 @@
             customButtonUserHierarchy.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonUserHierarchy.Font = new System.Drawing.Font("Arial", 10F);
             customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonUserHierarchy.Location = new System.Drawing.Point(4, 117);
+            customButtonUserHierarchy.Location = new System.Drawing.Point(4, 93);
             customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonUserHierarchy.Name = "customButtonUserHierarchy";
-            customButtonUserHierarchy.Size = new System.Drawing.Size(210, 51);
+            customButtonUserHierarchy.Size = new System.Drawing.Size(210, 39);
             customButtonUserHierarchy.TabIndex = 9;
             customButtonUserHierarchy.Text = "Иерархия пользователей";
             customButtonUserHierarchy.UseVisualStyleBackColor = false;
@@ -267,10 +285,10 @@
             customActionButtonNon.Dock = System.Windows.Forms.DockStyle.Fill;
             customActionButtonNon.Font = new System.Drawing.Font("Arial", 10F);
             customActionButtonNon.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customActionButtonNon.Location = new System.Drawing.Point(4, 516);
+            customActionButtonNon.Location = new System.Drawing.Point(4, 408);
             customActionButtonNon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customActionButtonNon.Name = "customActionButtonNon";
-            customActionButtonNon.Size = new System.Drawing.Size(205, 52);
+            customActionButtonNon.Size = new System.Drawing.Size(189, 48);
             customActionButtonNon.TabIndex = 12;
             customActionButtonNon.Text = "Не нажимать";
             customActionButtonNon.UseVisualStyleBackColor = false;
@@ -280,12 +298,11 @@
             tableLayoutPanelButton.ColumnCount = 1;
             tableLayoutPanelButton.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanelButton.Controls.Add(customButtonAllRole, 0, 0);
-            tableLayoutPanelButton.Controls.Add(customButtonHistory, 0, 9);
             tableLayoutPanelButton.Controls.Add(customButtonAdminSprav, 0, 8);
             tableLayoutPanelButton.Controls.Add(customButtonSpravTable, 0, 7);
             tableLayoutPanelButton.Controls.Add(customButtonAdminForm, 0, 6);
             tableLayoutPanelButton.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanelButton.Location = new System.Drawing.Point(1257, 3);
+            tableLayoutPanelButton.Location = new System.Drawing.Point(1169, 3);
             tableLayoutPanelButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanelButton.Name = "tableLayoutPanelButton";
             tableLayoutPanelButton.RowCount = 10;
@@ -300,7 +317,7 @@
             tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.00263F));
             tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             tableLayoutPanelButton.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            tableLayoutPanelButton.Size = new System.Drawing.Size(214, 571);
+            tableLayoutPanelButton.Size = new System.Drawing.Size(199, 459);
             tableLayoutPanelButton.TabIndex = 7;
             // 
             // customButtonAllRole
@@ -313,27 +330,11 @@
             customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAllRole.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonAllRole.Name = "customButtonAllRole";
-            customButtonAllRole.Size = new System.Drawing.Size(210, 51);
+            customButtonAllRole.Size = new System.Drawing.Size(210, 39);
             customButtonAllRole.TabIndex = 7;
             customButtonAllRole.Text = "Роли";
             customButtonAllRole.UseVisualStyleBackColor = false;
             customButtonAllRole.Click += customButtonAllRole_Click;
-            // 
-            // customButtonHistory
-            // 
-            customButtonHistory.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonHistory.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonHistory.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonHistory.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonHistory.Location = new System.Drawing.Point(4, 516);
-            customButtonHistory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonHistory.MinimumSize = new System.Drawing.Size(210, 23);
-            customButtonHistory.Name = "customButtonHistory";
-            customButtonHistory.Size = new System.Drawing.Size(210, 52);
-            customButtonHistory.TabIndex = 11;
-            customButtonHistory.Text = "История действий";
-            customButtonHistory.UseVisualStyleBackColor = false;
-            customButtonHistory.Click += customButtonHistory_Click;
             // 
             // customButtonAdminSprav
             // 
@@ -341,11 +342,11 @@
             customButtonAdminSprav.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAdminSprav.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAdminSprav.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAdminSprav.Location = new System.Drawing.Point(4, 459);
+            customButtonAdminSprav.Location = new System.Drawing.Point(4, 363);
             customButtonAdminSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAdminSprav.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonAdminSprav.Name = "customButtonAdminSprav";
-            customButtonAdminSprav.Size = new System.Drawing.Size(210, 51);
+            customButtonAdminSprav.Size = new System.Drawing.Size(210, 39);
             customButtonAdminSprav.TabIndex = 10;
             customButtonAdminSprav.Text = "Администрирование колонок";
             customButtonAdminSprav.UseVisualStyleBackColor = false;
@@ -357,11 +358,11 @@
             customButtonSpravTable.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonSpravTable.Font = new System.Drawing.Font("Arial", 10F);
             customButtonSpravTable.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonSpravTable.Location = new System.Drawing.Point(4, 402);
+            customButtonSpravTable.Location = new System.Drawing.Point(4, 318);
             customButtonSpravTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonSpravTable.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonSpravTable.Name = "customButtonSpravTable";
-            customButtonSpravTable.Size = new System.Drawing.Size(210, 51);
+            customButtonSpravTable.Size = new System.Drawing.Size(210, 39);
             customButtonSpravTable.TabIndex = 12;
             customButtonSpravTable.Text = "Администрирование таблиц";
             customButtonSpravTable.UseVisualStyleBackColor = false;
@@ -373,11 +374,11 @@
             customButtonAdminForm.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonAdminForm.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAdminForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonAdminForm.Location = new System.Drawing.Point(4, 345);
+            customButtonAdminForm.Location = new System.Drawing.Point(4, 273);
             customButtonAdminForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAdminForm.MinimumSize = new System.Drawing.Size(210, 23);
             customButtonAdminForm.Name = "customButtonAdminForm";
-            customButtonAdminForm.Size = new System.Drawing.Size(210, 51);
+            customButtonAdminForm.Size = new System.Drawing.Size(210, 39);
             customButtonAdminForm.TabIndex = 8;
             customButtonAdminForm.Text = "Администрирование форм";
             customButtonAdminForm.UseVisualStyleBackColor = false;
@@ -386,7 +387,6 @@
             // tableLayoutPanel3
             // 
             tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel2.SetColumnSpan(tableLayoutPanel3, 2);
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel3.Controls.Add(customLabelProfileName, 1, 0);
@@ -394,14 +394,15 @@
             tableLayoutPanel3.Controls.Add(customLabelProfile, 0, 0);
             tableLayoutPanel3.Controls.Add(customLabelCompName, 1, 1);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel3.Location = new System.Drawing.Point(225, 3);
+            tableLayoutPanel3.Location = new System.Drawing.Point(209, 3);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 3;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(1024, 144);
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(472, 115);
             tableLayoutPanel3.TabIndex = 9;
             // 
             // customLabelProfileName
@@ -410,7 +411,7 @@
             customLabelProfileName.AutoSize = true;
             customLabelProfileName.Font = new System.Drawing.Font("Arial", 10F);
             customLabelProfileName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelProfileName.Location = new System.Drawing.Point(734, 15);
+            customLabelProfileName.Location = new System.Drawing.Point(320, 11);
             customLabelProfileName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelProfileName.Name = "customLabelProfileName";
             customLabelProfileName.Size = new System.Drawing.Size(67, 16);
@@ -423,7 +424,7 @@
             customLabelComp.AutoSize = true;
             customLabelComp.Font = new System.Drawing.Font("Arial", 10F);
             customLabelComp.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelComp.Location = new System.Drawing.Point(214, 62);
+            customLabelComp.Location = new System.Drawing.Point(76, 49);
             customLabelComp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelComp.Name = "customLabelComp";
             customLabelComp.Size = new System.Drawing.Size(83, 16);
@@ -436,7 +437,7 @@
             customLabelProfile.AutoSize = true;
             customLabelProfile.Font = new System.Drawing.Font("Arial", 10F);
             customLabelProfile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelProfile.Location = new System.Drawing.Point(222, 15);
+            customLabelProfile.Location = new System.Drawing.Point(84, 11);
             customLabelProfile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelProfile.Name = "customLabelProfile";
             customLabelProfile.Size = new System.Drawing.Size(67, 16);
@@ -449,7 +450,7 @@
             customLabelCompName.AutoSize = true;
             customLabelCompName.Font = new System.Drawing.Font("Arial", 10F);
             customLabelCompName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabelCompName.Location = new System.Drawing.Point(726, 62);
+            customLabelCompName.Location = new System.Drawing.Point(312, 49);
             customLabelCompName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabelCompName.Name = "customLabelCompName";
             customLabelCompName.Size = new System.Drawing.Size(83, 16);
@@ -459,15 +460,14 @@
             // customGroupBoxMyRole
             // 
             customGroupBoxMyRole.BackColor = System.Drawing.Color.Transparent;
-            tableLayoutPanel2.SetColumnSpan(customGroupBoxMyRole, 2);
             customGroupBoxMyRole.Controls.Add(listBoxRole);
             customGroupBoxMyRole.Dock = System.Windows.Forms.DockStyle.Fill;
             customGroupBoxMyRole.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBoxMyRole.Location = new System.Drawing.Point(225, 153);
+            customGroupBoxMyRole.Location = new System.Drawing.Point(209, 124);
             customGroupBoxMyRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBoxMyRole.Name = "customGroupBoxMyRole";
             customGroupBoxMyRole.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBoxMyRole.Size = new System.Drawing.Size(1024, 147);
+            customGroupBoxMyRole.Size = new System.Drawing.Size(472, 117);
             customGroupBoxMyRole.TabIndex = 8;
             customGroupBoxMyRole.TabStop = false;
             customGroupBoxMyRole.Text = "Мои роли";
@@ -482,21 +482,20 @@
             listBoxRole.Location = new System.Drawing.Point(4, 19);
             listBoxRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxRole.Name = "listBoxRole";
-            listBoxRole.Size = new System.Drawing.Size(1016, 125);
+            listBoxRole.Size = new System.Drawing.Size(464, 95);
             listBoxRole.TabIndex = 4;
             // 
             // customGroupBoxEditPassword
             // 
-            customGroupBoxEditPassword.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             customGroupBoxEditPassword.BackColor = System.Drawing.Color.Transparent;
-            tableLayoutPanel2.SetColumnSpan(customGroupBoxEditPassword, 2);
             customGroupBoxEditPassword.Controls.Add(tableLayoutPanel5);
+            customGroupBoxEditPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             customGroupBoxEditPassword.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBoxEditPassword.Location = new System.Drawing.Point(225, 585);
+            customGroupBoxEditPassword.Location = new System.Drawing.Point(209, 468);
             customGroupBoxEditPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBoxEditPassword.Name = "customGroupBoxEditPassword";
             customGroupBoxEditPassword.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBoxEditPassword.Size = new System.Drawing.Size(1024, 198);
+            customGroupBoxEditPassword.Size = new System.Drawing.Size(472, 163);
             customGroupBoxEditPassword.TabIndex = 5;
             customGroupBoxEditPassword.TabStop = false;
             customGroupBoxEditPassword.Text = "Сменить пароль";
@@ -522,7 +521,7 @@
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(1016, 176);
+            tableLayoutPanel5.Size = new System.Drawing.Size(464, 141);
             tableLayoutPanel5.TabIndex = 9;
             // 
             // customLabel1
@@ -531,7 +530,7 @@
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(199, 14);
+            customLabel1.Location = new System.Drawing.Point(61, 9);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(110, 16);
@@ -544,7 +543,7 @@
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(203, 58);
+            customLabel2.Location = new System.Drawing.Point(65, 44);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(101, 16);
@@ -556,10 +555,10 @@
             customTextBoxNewPassword2.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword2.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxNewPassword2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxNewPassword2.Location = new System.Drawing.Point(512, 91);
+            customTextBoxNewPassword2.Location = new System.Drawing.Point(236, 73);
             customTextBoxNewPassword2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNewPassword2.Name = "customTextBoxNewPassword2";
-            customTextBoxNewPassword2.Size = new System.Drawing.Size(328, 23);
+            customTextBoxNewPassword2.Size = new System.Drawing.Size(224, 23);
             customTextBoxNewPassword2.TabIndex = 6;
             // 
             // customLabel3
@@ -568,7 +567,7 @@
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(189, 102);
+            customLabel3.Location = new System.Drawing.Point(51, 79);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(129, 16);
@@ -580,10 +579,10 @@
             customTextBoxNewPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxNewPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxNewPassword.Location = new System.Drawing.Point(512, 47);
+            customTextBoxNewPassword.Location = new System.Drawing.Point(236, 38);
             customTextBoxNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxNewPassword.Name = "customTextBoxNewPassword";
-            customTextBoxNewPassword.Size = new System.Drawing.Size(328, 23);
+            customTextBoxNewPassword.Size = new System.Drawing.Size(224, 23);
             customTextBoxNewPassword.TabIndex = 4;
             // 
             // customTextBoxOldPassword
@@ -591,21 +590,22 @@
             customTextBoxOldPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxOldPassword.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxOldPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxOldPassword.Location = new System.Drawing.Point(512, 3);
+            customTextBoxOldPassword.Location = new System.Drawing.Point(236, 3);
             customTextBoxOldPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customTextBoxOldPassword.Name = "customTextBoxOldPassword";
-            customTextBoxOldPassword.Size = new System.Drawing.Size(328, 23);
+            customTextBoxOldPassword.Size = new System.Drawing.Size(224, 23);
             customTextBoxOldPassword.TabIndex = 2;
             // 
             // customActionButtonEditPassword
             // 
             customActionButtonEditPassword.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customActionButtonEditPassword.Dock = System.Windows.Forms.DockStyle.Fill;
             customActionButtonEditPassword.Font = new System.Drawing.Font("Arial", 10F);
             customActionButtonEditPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customActionButtonEditPassword.Location = new System.Drawing.Point(512, 135);
+            customActionButtonEditPassword.Location = new System.Drawing.Point(236, 108);
             customActionButtonEditPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customActionButtonEditPassword.Name = "customActionButtonEditPassword";
-            customActionButtonEditPassword.Size = new System.Drawing.Size(170, 29);
+            customActionButtonEditPassword.Size = new System.Drawing.Size(224, 30);
             customActionButtonEditPassword.TabIndex = 9;
             customActionButtonEditPassword.Text = "Cменить ";
             customActionButtonEditPassword.UseVisualStyleBackColor = false;
@@ -615,8 +615,9 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1475, 786);
+            ClientSize = new System.Drawing.Size(1372, 634);
             Controls.Add(tableLayoutPanel2);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "UserProfile";
             Text = "Профиль";
