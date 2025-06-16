@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
@@ -43,6 +44,7 @@ namespace SewingProduction.form.UserDistribution
         {
             repositoryItemLookUpEditBrig.DataSource = await _userModelDataService.LoadBrigList();
             repositoryItemLookUpEditFio.DataSource = await _userModelDataService.LoadFioList();
+            //customGridControlUser.InitializeAccess(_user, this.Name, new List<string> { "Users" });
         }
         private void SetupGrid()
         {

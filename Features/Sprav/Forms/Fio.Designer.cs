@@ -28,1648 +28,1689 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions2 = new DevExpress.Utils.Drawing.StubGlyphOptions();
-            this.tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonINN = new SewingProduction.CustomButton();
-            this.customButtonOtcDol = new SewingProduction.CustomButton();
-            this.customTextBoxInn = new SewingProduction.CustomTextBox();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            this.customCheckBoxDel = new SewingProduction.CustomCheckBox();
-            this.customCheckBoxDei = new SewingProduction.CustomCheckBox();
-            this.customCheckBoxDekret = new SewingProduction.CustomCheckBox();
-            this.fioGrid = new DevExpress.XtraGrid.GridControl();
-            this.fioList = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewFio = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.tab = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.fio1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.rab = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.data_p = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.firms_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.BRIG_object_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ved = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ftabn = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.ftabnsort = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.fgrd = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.dekret = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.datau = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.sovm = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositorySovm = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.tel_s = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.bday = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.f_fvr_kod = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.sdel = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositorySdel = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.tab1c = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.itr = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.repositoryItr = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.tab_sovm = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.podr1cname = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tel_r = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tel_d = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.mast = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.okl = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tab_new = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.spisok1c_inn = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.spisok1c_id = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.spisok1c_orgName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.spisok1c_podrName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSpVed = new SewingProduction.CustomButton();
-            this.customButtonSpOrg1C = new SewingProduction.CustomButton();
-            this.customButtonSpDol1C = new SewingProduction.CustomButton();
-            this.customButtonPdrSP = new SewingProduction.CustomButton();
-            this.tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSpOrg = new SewingProduction.CustomButton();
-            this.customButtonSpDol = new SewingProduction.CustomButton();
-            this.customButtonPchShk = new SewingProduction.CustomButton();
-            this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            this.xtraTabPageX = new DevExpress.XtraTab.XtraTabPage();
-            this.xtraTabPagePechSHk = new DevExpress.XtraTab.XtraTabPage();
-            this.tabControlSHK = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            this.customTextBoxPechSHK1 = new SewingProduction.CustomTextBox();
-            this.customComboBoxPechVed = new SewingProduction.CustomComboBox();
-            this.customButtonPech1 = new SewingProduction.CustomButton();
-            this.customLabel1 = new SewingProduction.CustomLabel();
-            this.customLabel2 = new SewingProduction.CustomLabel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.customTextBoxPechTab = new SewingProduction.CustomTextBox();
-            this.customTextBoxPechSHK2 = new SewingProduction.CustomTextBox();
-            this.customButtonPech2 = new SewingProduction.CustomButton();
-            this.customLabel3 = new SewingProduction.CustomLabel();
-            this.customLabel4 = new SewingProduction.CustomLabel();
-            this.xtraTabPageOtchDolg = new DevExpress.XtraTab.XtraTabPage();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSforming = new SewingProduction.CustomButton();
-            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.customLabelOtch = new SewingProduction.CustomLabel();
-            this.customComboBoxOtch = new SewingProduction.CustomComboBox();
-            this.customCheckBoxOsnTab = new SewingProduction.CustomCheckBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonSov = new SewingProduction.CustomButton();
-            this.customButtonAddSov = new SewingProduction.CustomButton();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.customButtonRed = new SewingProduction.CustomButton();
-            this.customButtonAdd = new SewingProduction.CustomButton();
-            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
-            this.gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.text_ob_tip = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.nam = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.for_reports_excel = new System.Windows.Forms.BindingSource(this.components);
-            this.tableLayoutPanelAll.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            this.tableLayoutPanel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioList)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItr)).BeginInit();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanelPech.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
-            this.xtraTabControl1.SuspendLayout();
-            this.xtraTabPagePechSHk.SuspendLayout();
-            this.tabControlSHK.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tableLayoutPanel5.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel6.SuspendLayout();
-            this.xtraTabPageOtchDolg.SuspendLayout();
-            this.tableLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.for_reports_excel)).BeginInit();
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            DevExpress.Utils.Drawing.StubGlyphOptions stubGlyphOptions1 = new DevExpress.Utils.Drawing.StubGlyphOptions();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Fio));
+            tableLayoutPanelAll = new System.Windows.Forms.TableLayoutPanel();
+            tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonINN = new CustomButton();
+            customButtonOtcDol = new CustomButton();
+            customTextBoxInn = new CustomTextBox();
+            tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            customCheckBoxDel = new CustomCheckBox();
+            customCheckBoxDei = new CustomCheckBox();
+            customCheckBoxDekret = new CustomCheckBox();
+            fioGrid = new DevExpress.XtraGrid.GridControl();
+            fioList = new System.Windows.Forms.BindingSource(components);
+            gridViewFio = new DevExpress.XtraGrid.Views.Grid.GridView();
+            tab = new DevExpress.XtraGrid.Columns.GridColumn();
+            fio1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            rab = new DevExpress.XtraGrid.Columns.GridColumn();
+            data_p = new DevExpress.XtraGrid.Columns.GridColumn();
+            firms_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            BRIG_object_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            ved = new DevExpress.XtraGrid.Columns.GridColumn();
+            ftabn = new DevExpress.XtraGrid.Columns.GridColumn();
+            ftabnsort = new DevExpress.XtraGrid.Columns.GridColumn();
+            fgrd = new DevExpress.XtraGrid.Columns.GridColumn();
+            dekret = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            datau = new DevExpress.XtraGrid.Columns.GridColumn();
+            sovm = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositorySovm = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            tel_s = new DevExpress.XtraGrid.Columns.GridColumn();
+            bday = new DevExpress.XtraGrid.Columns.GridColumn();
+            f_fvr_kod = new DevExpress.XtraGrid.Columns.GridColumn();
+            sdel = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositorySdel = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            tab1c = new DevExpress.XtraGrid.Columns.GridColumn();
+            itr = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItr = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
+            tab_sovm = new DevExpress.XtraGrid.Columns.GridColumn();
+            podr1cname = new DevExpress.XtraGrid.Columns.GridColumn();
+            tel_r = new DevExpress.XtraGrid.Columns.GridColumn();
+            tel_d = new DevExpress.XtraGrid.Columns.GridColumn();
+            mast = new DevExpress.XtraGrid.Columns.GridColumn();
+            okl = new DevExpress.XtraGrid.Columns.GridColumn();
+            tab_new = new DevExpress.XtraGrid.Columns.GridColumn();
+            spisok1c_inn = new DevExpress.XtraGrid.Columns.GridColumn();
+            spisok1c_id = new DevExpress.XtraGrid.Columns.GridColumn();
+            spisok1c_orgName = new DevExpress.XtraGrid.Columns.GridColumn();
+            spisok1c_podrName = new DevExpress.XtraGrid.Columns.GridColumn();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonSpVed = new CustomButton();
+            customButtonSpOrg1C = new CustomButton();
+            customButtonSpDol1C = new CustomButton();
+            tableLayoutPanelPech = new System.Windows.Forms.TableLayoutPanel();
+            customButtonPchShk = new CustomButton();
+            xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
+            xtraTabPageX = new DevExpress.XtraTab.XtraTabPage();
+            xtraTabPagePechSHk = new DevExpress.XtraTab.XtraTabPage();
+            tabControlSHK = new System.Windows.Forms.TabControl();
+            tabPage1 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
+            customTextBoxPechSHK1 = new CustomTextBox();
+            customComboBoxPechVed = new CustomComboBox();
+            customButtonPech1 = new CustomButton();
+            customLabel1 = new CustomLabel();
+            customLabel2 = new CustomLabel();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            customTextBoxPechTab = new CustomTextBox();
+            customTextBoxPechSHK2 = new CustomTextBox();
+            customButtonPech2 = new CustomButton();
+            customLabel3 = new CustomLabel();
+            customLabel4 = new CustomLabel();
+            xtraTabPageOtchDolg = new DevExpress.XtraTab.XtraTabPage();
+            tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonSforming = new CustomButton();
+            radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            customLabelOtch = new CustomLabel();
+            customComboBoxOtch = new CustomComboBox();
+            customCheckBoxOsnTab = new CustomCheckBox();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonPdrSP = new CustomButton();
+            customButtonSov = new CustomButton();
+            customButtonAddSov = new CustomButton();
+            tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonRed = new CustomButton();
+            customButtonAdd = new CustomButton();
+            customButtonSpOrg = new CustomButton();
+            customButtonSpDol = new CustomButton();
+            behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(components);
+            gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
+            text_ob_tip = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            nam = new DevExpress.XtraGrid.Columns.GridColumn();
+            for_reports_excel = new System.Windows.Forms.BindingSource(components);
+            tableLayoutPanelAll.SuspendLayout();
+            tableLayoutPanel4.SuspendLayout();
+            tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)fioGrid).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)fioList).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewFio).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositorySovm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositorySdel).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItr).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
+            tableLayoutPanelPech.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
+            xtraTabControl1.SuspendLayout();
+            xtraTabPagePechSHk.SuspendLayout();
+            tabControlSHK.SuspendLayout();
+            tabPage1.SuspendLayout();
+            tableLayoutPanel5.SuspendLayout();
+            tabPage2.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
+            xtraTabPageOtchDolg.SuspendLayout();
+            tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)for_reports_excel).BeginInit();
+            SuspendLayout();
             // 
             // tableLayoutPanelAll
             // 
-            this.tableLayoutPanelAll.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanelAll.ColumnCount = 3;
-            this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
-            this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
-            this.tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
-            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel4, 2, 0);
-            this.tableLayoutPanelAll.Controls.Add(this.fioGrid, 0, 0);
-            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel3, 1, 2);
-            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanelPech, 2, 1);
-            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel1, 2, 2);
-            this.tableLayoutPanelAll.Controls.Add(this.tableLayoutPanel2, 0, 2);
-            this.tableLayoutPanelAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelAll.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelAll.Name = "tableLayoutPanelAll";
-            this.tableLayoutPanelAll.RowCount = 3;
-            this.tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.76275F));
-            this.tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.81374F));
-            this.tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.31946F));
-            this.tableLayoutPanelAll.Size = new System.Drawing.Size(1034, 661);
-            this.tableLayoutPanelAll.TabIndex = 0;
+            tableLayoutPanelAll.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanelAll.ColumnCount = 3;
+            tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
+            tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43F));
+            tableLayoutPanelAll.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14F));
+            tableLayoutPanelAll.Controls.Add(tableLayoutPanel4, 2, 0);
+            tableLayoutPanelAll.Controls.Add(fioGrid, 0, 0);
+            tableLayoutPanelAll.Controls.Add(tableLayoutPanel3, 1, 2);
+            tableLayoutPanelAll.Controls.Add(tableLayoutPanelPech, 2, 1);
+            tableLayoutPanelAll.Controls.Add(tableLayoutPanel1, 2, 2);
+            tableLayoutPanelAll.Controls.Add(tableLayoutPanel2, 0, 2);
+            tableLayoutPanelAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanelAll.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanelAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanelAll.Name = "tableLayoutPanelAll";
+            tableLayoutPanelAll.RowCount = 3;
+            tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.76275F));
+            tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.81374F));
+            tableLayoutPanelAll.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.31946F));
+            tableLayoutPanelAll.Size = new System.Drawing.Size(1206, 763);
+            tableLayoutPanelAll.TabIndex = 0;
             // 
             // tableLayoutPanel4
             // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.customButtonINN, 0, 3);
-            this.tableLayoutPanel4.Controls.Add(this.customButtonOtcDol, 0, 8);
-            this.tableLayoutPanel4.Controls.Add(this.customTextBoxInn, 0, 2);
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel7, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(891, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 9;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37402F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31559F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37402F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(140, 310);
-            this.tableLayoutPanel4.TabIndex = 7;
+            tableLayoutPanel4.ColumnCount = 1;
+            tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel4.Controls.Add(customButtonINN, 0, 3);
+            tableLayoutPanel4.Controls.Add(customButtonOtcDol, 0, 8);
+            tableLayoutPanel4.Controls.Add(customTextBoxInn, 0, 2);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel7, 0, 0);
+            tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel4.Location = new System.Drawing.Point(1040, 3);
+            tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel4.Name = "tableLayoutPanel4";
+            tableLayoutPanel4.RowCount = 9;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37402F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31213F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.31559F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.37402F));
+            tableLayoutPanel4.Size = new System.Drawing.Size(162, 358);
+            tableLayoutPanel4.TabIndex = 7;
             // 
             // customButtonINN
             // 
-            this.customButtonINN.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonINN.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonINN.FlatAppearance.BorderSize = 0;
-            this.customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonINN.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonINN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonINN.Location = new System.Drawing.Point(3, 93);
-            this.customButtonINN.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonINN.Name = "customButtonINN";
-            this.customButtonINN.Size = new System.Drawing.Size(134, 27);
-            this.customButtonINN.TabIndex = 7;
-            this.customButtonINN.Text = "Найти по ИНН";
-            this.customButtonINN.UseVisualStyleBackColor = false;
-            this.customButtonINN.Click += new System.EventHandler(this.customButtonINN_Click);
+            customButtonINN.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonINN.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonINN.FlatAppearance.BorderSize = 0;
+            customButtonINN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonINN.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonINN.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonINN.Location = new System.Drawing.Point(4, 108);
+            customButtonINN.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonINN.MaximumSize = new System.Drawing.Size(0, 58);
+            customButtonINN.Name = "customButtonINN";
+            customButtonINN.Size = new System.Drawing.Size(154, 32);
+            customButtonINN.TabIndex = 7;
+            customButtonINN.Text = "Найти по ИНН";
+            customButtonINN.UseVisualStyleBackColor = false;
+            customButtonINN.Click += customButtonINN_Click;
             // 
             // customButtonOtcDol
             // 
-            this.customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonOtcDol.FlatAppearance.BorderSize = 0;
-            this.customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonOtcDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonOtcDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonOtcDol.Location = new System.Drawing.Point(3, 278);
-            this.customButtonOtcDol.Name = "customButtonOtcDol";
-            this.customButtonOtcDol.Size = new System.Drawing.Size(134, 29);
-            this.customButtonOtcDol.TabIndex = 2;
-            this.customButtonOtcDol.Text = "Отчет по должности";
-            this.customButtonOtcDol.UseVisualStyleBackColor = false;
-            this.customButtonOtcDol.Click += new System.EventHandler(this.customButtonOtcDol_Click);
+            customButtonOtcDol.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonOtcDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonOtcDol.FlatAppearance.BorderSize = 0;
+            customButtonOtcDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonOtcDol.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtcDol.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonOtcDol.Location = new System.Drawing.Point(4, 318);
+            customButtonOtcDol.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonOtcDol.Name = "customButtonOtcDol";
+            customButtonOtcDol.Size = new System.Drawing.Size(154, 37);
+            customButtonOtcDol.TabIndex = 2;
+            customButtonOtcDol.Text = "Отчет по должности";
+            customButtonOtcDol.UseVisualStyleBackColor = false;
+            customButtonOtcDol.Click += customButtonOtcDol_Click;
             // 
             // customTextBoxInn
             // 
-            this.customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxInn.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxInn.Location = new System.Drawing.Point(3, 63);
-            this.customTextBoxInn.Name = "customTextBoxInn";
-            this.customTextBoxInn.Size = new System.Drawing.Size(134, 23);
-            this.customTextBoxInn.TabIndex = 9;
+            customTextBoxInn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxInn.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxInn.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxInn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxInn.Location = new System.Drawing.Point(4, 73);
+            customTextBoxInn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxInn.Name = "customTextBoxInn";
+            customTextBoxInn.Size = new System.Drawing.Size(154, 23);
+            customTextBoxInn.TabIndex = 9;
             // 
             // tableLayoutPanel7
             // 
-            this.tableLayoutPanel7.ColumnCount = 2;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.73196F));
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.26804F));
-            this.tableLayoutPanel7.Controls.Add(this.customCheckBoxDel, 0, 0);
-            this.tableLayoutPanel7.Controls.Add(this.customCheckBoxDei, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.customCheckBoxDekret, 1, 0);
-            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 2;
-            this.tableLayoutPanel4.SetRowSpan(this.tableLayoutPanel7, 2);
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(134, 54);
-            this.tableLayoutPanel7.TabIndex = 11;
+            tableLayoutPanel7.ColumnCount = 2;
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 57.73196F));
+            tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.26804F));
+            tableLayoutPanel7.Controls.Add(customCheckBoxDel, 0, 0);
+            tableLayoutPanel7.Controls.Add(customCheckBoxDei, 0, 1);
+            tableLayoutPanel7.Controls.Add(customCheckBoxDekret, 1, 0);
+            tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel7.Location = new System.Drawing.Point(4, 3);
+            tableLayoutPanel7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 2;
+            tableLayoutPanel4.SetRowSpan(tableLayoutPanel7, 2);
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel7.Size = new System.Drawing.Size(154, 64);
+            tableLayoutPanel7.TabIndex = 11;
             // 
             // customCheckBoxDel
             // 
-            this.customCheckBoxDel.AutoSize = true;
-            this.customCheckBoxDel.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCheckBoxDel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxDel.Location = new System.Drawing.Point(3, 3);
-            this.customCheckBoxDel.Name = "customCheckBoxDel";
-            this.customCheckBoxDel.Size = new System.Drawing.Size(71, 20);
-            this.customCheckBoxDel.TabIndex = 8;
-            this.customCheckBoxDel.Text = "Уволенные";
-            this.customCheckBoxDel.UseVisualStyleBackColor = true;
-            this.customCheckBoxDel.CheckedChanged += new System.EventHandler(this.customCheckBoxDel_CheckedChanged);
+            customCheckBoxDel.AutoSize = true;
+            customCheckBoxDel.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxDel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customCheckBoxDel.Location = new System.Drawing.Point(4, 3);
+            customCheckBoxDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBoxDel.Name = "customCheckBoxDel";
+            customCheckBoxDel.Size = new System.Drawing.Size(80, 20);
+            customCheckBoxDel.TabIndex = 8;
+            customCheckBoxDel.Text = "Уволенные";
+            customCheckBoxDel.UseVisualStyleBackColor = true;
+            customCheckBoxDel.CheckedChanged += customCheckBoxDel_CheckedChanged;
             // 
             // customCheckBoxDei
             // 
-            this.customCheckBoxDei.AutoSize = true;
-            this.customCheckBoxDei.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCheckBoxDei.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxDei.Location = new System.Drawing.Point(3, 30);
-            this.customCheckBoxDei.Name = "customCheckBoxDei";
-            this.customCheckBoxDei.Size = new System.Drawing.Size(71, 20);
-            this.customCheckBoxDei.TabIndex = 8;
-            this.customCheckBoxDei.Text = "Действующие";
-            this.customCheckBoxDei.UseVisualStyleBackColor = true;
-            this.customCheckBoxDei.CheckedChanged += new System.EventHandler(this.customCheckBoxDei_CheckedChanged);
+            customCheckBoxDei.AutoSize = true;
+            customCheckBoxDei.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxDei.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customCheckBoxDei.Location = new System.Drawing.Point(4, 35);
+            customCheckBoxDei.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBoxDei.Name = "customCheckBoxDei";
+            customCheckBoxDei.Size = new System.Drawing.Size(80, 20);
+            customCheckBoxDei.TabIndex = 8;
+            customCheckBoxDei.Text = "Действующие";
+            customCheckBoxDei.UseVisualStyleBackColor = true;
+            customCheckBoxDei.CheckedChanged += customCheckBoxDei_CheckedChanged;
             // 
             // customCheckBoxDekret
             // 
-            this.customCheckBoxDekret.AutoSize = true;
-            this.customCheckBoxDekret.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxDekret.Location = new System.Drawing.Point(80, 3);
-            this.customCheckBoxDekret.Name = "customCheckBoxDekret";
-            this.customCheckBoxDekret.Size = new System.Drawing.Size(51, 20);
-            this.customCheckBoxDekret.TabIndex = 10;
-            this.customCheckBoxDekret.Text = "Декрет";
-            this.customCheckBoxDekret.UseVisualStyleBackColor = true;
-            this.customCheckBoxDekret.CheckedChanged += new System.EventHandler(this.customCheckBoxDekret_CheckedChanged);
+            customCheckBoxDekret.AutoSize = true;
+            customCheckBoxDekret.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxDekret.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customCheckBoxDekret.Location = new System.Drawing.Point(92, 3);
+            customCheckBoxDekret.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBoxDekret.Name = "customCheckBoxDekret";
+            customCheckBoxDekret.Size = new System.Drawing.Size(58, 20);
+            customCheckBoxDekret.TabIndex = 10;
+            customCheckBoxDekret.Text = "Декрет";
+            customCheckBoxDekret.UseVisualStyleBackColor = true;
+            customCheckBoxDekret.CheckedChanged += customCheckBoxDekret_CheckedChanged;
             // 
             // fioGrid
             // 
-            this.tableLayoutPanelAll.SetColumnSpan(this.fioGrid, 2);
-            this.fioGrid.DataSource = this.fioList;
-            this.fioGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.fioGrid.EmbeddedNavigator.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
-            this.fioGrid.EmbeddedNavigator.Appearance.Options.UseTextOptions = true;
-            this.fioGrid.EmbeddedNavigator.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.fioGrid.Location = new System.Drawing.Point(3, 3);
-            this.fioGrid.MainView = this.gridViewFio;
-            this.fioGrid.Name = "fioGrid";
-            this.fioGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
-            this.repositorySovm,
-            this.repositorySdel,
-            this.repositoryItr,
-            this.repositoryItemCheckEdit1});
-            this.tableLayoutPanelAll.SetRowSpan(this.fioGrid, 2);
-            this.fioGrid.Size = new System.Drawing.Size(882, 566);
-            this.fioGrid.TabIndex = 6;
-            this.fioGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewFio});
-            this.fioGrid.Load += new System.EventHandler(this.fioGrid_Load);
-            this.fioGrid.KeyUp += new System.Windows.Forms.KeyEventHandler(this.fioGrid_KeyUp);
+            tableLayoutPanelAll.SetColumnSpan(fioGrid, 2);
+            fioGrid.DataSource = fioList;
+            fioGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            fioGrid.EmbeddedNavigator.AllowHtmlTextInToolTip = DevExpress.Utils.DefaultBoolean.True;
+            fioGrid.EmbeddedNavigator.Appearance.Options.UseTextOptions = true;
+            fioGrid.EmbeddedNavigator.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            fioGrid.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            fioGrid.Location = new System.Drawing.Point(4, 3);
+            fioGrid.MainView = gridViewFio;
+            fioGrid.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            fioGrid.Name = "fioGrid";
+            fioGrid.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositorySovm, repositorySdel, repositoryItr, repositoryItemCheckEdit1 });
+            tableLayoutPanelAll.SetRowSpan(fioGrid, 2);
+            fioGrid.Size = new System.Drawing.Size(1028, 654);
+            fioGrid.TabIndex = 6;
+            fioGrid.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewFio });
+            fioGrid.Load += fioGrid_Load;
+            fioGrid.KeyUp += fioGrid_KeyUp;
             // 
             // gridViewFio
             // 
-            this.gridViewFio.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridViewFio.Appearance.DetailTip.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.EvenRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FilterCloseButton.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FilterPanel.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FixedLine.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FocusedCell.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FocusedRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.FooterPanel.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.GroupButton.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.GroupFooter.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.GroupPanel.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.GroupRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.gridViewFio.Appearance.HeaderPanel.Options.UseFont = true;
-            this.gridViewFio.Appearance.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridViewFio.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
-            this.gridViewFio.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
-            this.gridViewFio.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.HideSelectionRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.HorzLine.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.HotTrackedRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.OddRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.Preview.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.Row.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.SelectedRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.TopNewRow.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.Appearance.VertLine.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.ViewCaption.Options.UseTextOptions = true;
-            this.gridViewFio.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridViewFio.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
-            this.gridViewFio.AppearancePrint.EvenRow.Options.UseBackColor = true;
-            this.gridViewFio.AppearancePrint.EvenRow.Options.UseTextOptions = true;
-            this.gridViewFio.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
-            this.gridViewFio.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
-            this.gridViewFio.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
-            this.gridViewFio.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.AppearancePrint.GroupRow.Options.UseTextOptions = true;
-            this.gridViewFio.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
-            this.gridViewFio.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridViewFio.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
-            this.gridViewFio.AppearancePrint.Row.Options.UseBorderColor = true;
-            this.gridViewFio.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.tab,
-            this.fio1,
-            this.rab,
-            this.data_p,
-            this.firms_name,
-            this.BRIG_object_name,
-            this.ved,
-            this.ftabn,
-            this.ftabnsort,
-            this.fgrd,
-            this.dekret,
-            this.datau,
-            this.sovm,
-            this.tel_s,
-            this.bday,
-            this.f_fvr_kod,
-            this.sdel,
-            this.tab1c,
-            this.itr,
-            this.tab_sovm,
-            this.podr1cname,
-            this.tel_r,
-            this.tel_d,
-            this.mast,
-            this.okl,
-            this.tab_new,
-            this.spisok1c_inn,
-            this.spisok1c_id,
-            this.spisok1c_orgName,
-            this.spisok1c_podrName});
-            this.gridViewFio.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 768, 264, 272);
-            this.gridViewFio.GridControl = this.fioGrid;
-            this.gridViewFio.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            this.gridViewFio.Name = "gridViewFio";
-            this.gridViewFio.OptionsBehavior.ReadOnly = true;
-            this.gridViewFio.OptionsPrint.EnableAppearanceEvenRow = true;
-            this.gridViewFio.OptionsPrint.ExpandAllGroups = false;
-            this.gridViewFio.OptionsPrint.PrintFooter = false;
-            this.gridViewFio.OptionsView.ColumnAutoWidth = false;
-            this.gridViewFio.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewFio.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
-            this.gridViewFio.FocusedRowChanged += new DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventHandler(this.gridViewFio_FocusedRowChanged);
+            gridViewFio.Appearance.ColumnFilterButton.Options.UseTextOptions = true;
+            gridViewFio.Appearance.ColumnFilterButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.ColumnFilterButtonActive.Options.UseTextOptions = true;
+            gridViewFio.Appearance.ColumnFilterButtonActive.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.CustomizationFormHint.Options.UseTextOptions = true;
+            gridViewFio.Appearance.CustomizationFormHint.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            gridViewFio.Appearance.DetailTip.Options.UseTextOptions = true;
+            gridViewFio.Appearance.DetailTip.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.EvenRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FilterCloseButton.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FilterCloseButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FilterPanel.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FilterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FixedLine.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FixedLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FocusedCell.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FocusedCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FocusedRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FocusedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.FooterPanel.Options.UseTextOptions = true;
+            gridViewFio.Appearance.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.GroupButton.Options.UseTextOptions = true;
+            gridViewFio.Appearance.GroupButton.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.GroupFooter.Options.UseTextOptions = true;
+            gridViewFio.Appearance.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.GroupPanel.Options.UseTextOptions = true;
+            gridViewFio.Appearance.GroupPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.GroupRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.HeaderPanel.Font = new System.Drawing.Font("Times New Roman", 9F);
+            gridViewFio.Appearance.HeaderPanel.Options.UseFont = true;
+            gridViewFio.Appearance.HeaderPanel.Options.UseTextOptions = true;
+            gridViewFio.Appearance.HeaderPanel.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridViewFio.Appearance.HeaderPanel.TextOptions.Trimming = DevExpress.Utils.Trimming.Word;
+            gridViewFio.Appearance.HeaderPanel.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Top;
+            gridViewFio.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.HideSelectionRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.HideSelectionRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.HorzLine.Options.UseTextOptions = true;
+            gridViewFio.Appearance.HorzLine.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.HotTrackedRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.HotTrackedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.OddRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.OddRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.Preview.Options.UseTextOptions = true;
+            gridViewFio.Appearance.Preview.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.Row.Options.UseTextOptions = true;
+            gridViewFio.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.SelectedRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.SelectedRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.TopNewRow.Options.UseTextOptions = true;
+            gridViewFio.Appearance.TopNewRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.Appearance.VertLine.Options.UseTextOptions = true;
+            gridViewFio.Appearance.ViewCaption.Options.UseTextOptions = true;
+            gridViewFio.Appearance.ViewCaption.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            gridViewFio.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.White;
+            gridViewFio.AppearancePrint.EvenRow.Options.UseBackColor = true;
+            gridViewFio.AppearancePrint.EvenRow.Options.UseTextOptions = true;
+            gridViewFio.AppearancePrint.EvenRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.AppearancePrint.FooterPanel.Options.UseTextOptions = true;
+            gridViewFio.AppearancePrint.FooterPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.NoWrap;
+            gridViewFio.AppearancePrint.GroupFooter.Options.UseTextOptions = true;
+            gridViewFio.AppearancePrint.GroupFooter.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.AppearancePrint.GroupRow.Options.UseTextOptions = true;
+            gridViewFio.AppearancePrint.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.AppearancePrint.HeaderPanel.Options.UseTextOptions = true;
+            gridViewFio.AppearancePrint.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridViewFio.AppearancePrint.Row.BorderColor = System.Drawing.SystemColors.MenuHighlight;
+            gridViewFio.AppearancePrint.Row.Options.UseBorderColor = true;
+            gridViewFio.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { tab, fio1, rab, data_p, firms_name, BRIG_object_name, ved, ftabn, ftabnsort, fgrd, dekret, datau, sovm, tel_s, bday, f_fvr_kod, sdel, tab1c, itr, tab_sovm, podr1cname, tel_r, tel_d, mast, okl, tab_new, spisok1c_inn, spisok1c_id, spisok1c_orgName, spisok1c_podrName });
+            gridViewFio.CustomizationFormBounds = new System.Drawing.Rectangle(1598, 454, 308, 314);
+            gridViewFio.DetailHeight = 404;
+            gridViewFio.GridControl = fioGrid;
+            gridViewFio.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            gridViewFio.Name = "gridViewFio";
+            gridViewFio.OptionsBehavior.ReadOnly = true;
+            gridViewFio.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewFio.OptionsPrint.EnableAppearanceEvenRow = true;
+            gridViewFio.OptionsPrint.ExpandAllGroups = false;
+            gridViewFio.OptionsPrint.PrintFooter = false;
+            gridViewFio.OptionsView.ColumnAutoWidth = false;
+            gridViewFio.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewFio.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            gridViewFio.FocusedRowChanged += gridViewFio_FocusedRowChanged;
             // 
             // tab
             // 
-            this.tab.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9F);
-            this.tab.AppearanceHeader.Options.UseTextOptions = true;
-            this.tab.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tab.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tab.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tab.Caption = "Таб. №";
-            this.tab.FieldName = "tab";
-            this.tab.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            this.tab.Name = "tab";
-            this.tab.Visible = true;
-            this.tab.VisibleIndex = 0;
-            this.tab.Width = 45;
+            tab.AppearanceHeader.Font = new System.Drawing.Font("Times New Roman", 9F);
+            tab.AppearanceHeader.Options.UseTextOptions = true;
+            tab.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tab.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tab.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tab.Caption = "Таб. №";
+            tab.FieldName = "tab";
+            tab.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            tab.MinWidth = 23;
+            tab.Name = "tab";
+            tab.Visible = true;
+            tab.VisibleIndex = 0;
+            tab.Width = 52;
             // 
             // fio1
             // 
-            this.fio1.AppearanceCell.Options.UseTextOptions = true;
-            this.fio1.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.fio1.AppearanceHeader.Options.UseTextOptions = true;
-            this.fio1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.fio1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.fio1.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            stubGlyphOptions2.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            stubGlyphOptions2.UseFont = true;
-            this.behaviorManager1.SetBehaviors(this.fio1, new DevExpress.Utils.Behaviors.Behavior[] {
-            ((DevExpress.Utils.Behaviors.Behavior)(DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions2, new System.Drawing.Size(16, 16))))});
-            this.fio1.Caption = "ФИО";
-            this.fio1.FieldName = "fio";
-            this.fio1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
-            this.fio1.Name = "fio1";
-            this.fio1.Visible = true;
-            this.fio1.VisibleIndex = 1;
-            this.fio1.Width = 230;
+            fio1.AppearanceCell.Options.UseTextOptions = true;
+            fio1.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            fio1.AppearanceHeader.Options.UseTextOptions = true;
+            fio1.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            fio1.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            fio1.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            stubGlyphOptions1.Font = new System.Drawing.Font("Showcard Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            stubGlyphOptions1.UseFont = true;
+            behaviorManager1.SetBehaviors(fio1, new DevExpress.Utils.Behaviors.Behavior[] { DevExpress.Utils.Behaviors.Common.StubGlyphBehavior.Create(typeof(DevExpress.XtraGrid.Views.Grid.BehaviorSource.StubGlyphBehaviorSourceForGridColumn), stubGlyphOptions1, new System.Drawing.Size(16, 16)) });
+            fio1.Caption = "ФИО";
+            fio1.FieldName = "fio";
+            fio1.Fixed = DevExpress.XtraGrid.Columns.FixedStyle.Left;
+            fio1.MinWidth = 23;
+            fio1.Name = "fio1";
+            fio1.Visible = true;
+            fio1.VisibleIndex = 1;
+            fio1.Width = 268;
             // 
             // rab
             // 
-            this.rab.AppearanceHeader.Options.UseTextOptions = true;
-            this.rab.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.rab.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.rab.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.rab.Caption = "Должность";
-            this.rab.FieldName = "rab";
-            this.rab.Name = "rab";
-            this.rab.Visible = true;
-            this.rab.VisibleIndex = 2;
-            this.rab.Width = 89;
+            rab.AppearanceHeader.Options.UseTextOptions = true;
+            rab.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            rab.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            rab.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            rab.Caption = "Должность";
+            rab.FieldName = "rab";
+            rab.MinWidth = 23;
+            rab.Name = "rab";
+            rab.Visible = true;
+            rab.VisibleIndex = 2;
+            rab.Width = 104;
             // 
             // data_p
             // 
-            this.data_p.AppearanceHeader.Options.UseTextOptions = true;
-            this.data_p.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.data_p.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.data_p.Caption = "Дата приема";
-            this.data_p.FieldName = "data_p";
-            this.data_p.Name = "data_p";
-            this.data_p.Visible = true;
-            this.data_p.VisibleIndex = 8;
-            this.data_p.Width = 65;
+            data_p.AppearanceHeader.Options.UseTextOptions = true;
+            data_p.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            data_p.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            data_p.Caption = "Дата приема";
+            data_p.FieldName = "data_p";
+            data_p.MinWidth = 23;
+            data_p.Name = "data_p";
+            data_p.Visible = true;
+            data_p.VisibleIndex = 8;
+            data_p.Width = 76;
             // 
             // firms_name
             // 
-            this.firms_name.AppearanceCell.Options.UseTextOptions = true;
-            this.firms_name.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.firms_name.AppearanceHeader.Options.UseTextOptions = true;
-            this.firms_name.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.firms_name.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.firms_name.Caption = "Организация";
-            this.firms_name.FieldName = "firms_name";
-            this.firms_name.Name = "firms_name";
-            this.firms_name.Visible = true;
-            this.firms_name.VisibleIndex = 3;
-            this.firms_name.Width = 120;
+            firms_name.AppearanceCell.Options.UseTextOptions = true;
+            firms_name.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            firms_name.AppearanceHeader.Options.UseTextOptions = true;
+            firms_name.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            firms_name.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            firms_name.Caption = "Организация";
+            firms_name.FieldName = "firms_name";
+            firms_name.MinWidth = 23;
+            firms_name.Name = "firms_name";
+            firms_name.Visible = true;
+            firms_name.VisibleIndex = 3;
+            firms_name.Width = 140;
             // 
             // BRIG_object_name
             // 
-            this.BRIG_object_name.AppearanceHeader.Options.UseTextOptions = true;
-            this.BRIG_object_name.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.BRIG_object_name.Caption = "Подразделение";
-            this.BRIG_object_name.FieldName = "BRIG_object_name";
-            this.BRIG_object_name.Name = "BRIG_object_name";
-            this.BRIG_object_name.Visible = true;
-            this.BRIG_object_name.VisibleIndex = 4;
-            this.BRIG_object_name.Width = 100;
+            BRIG_object_name.AppearanceHeader.Options.UseTextOptions = true;
+            BRIG_object_name.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            BRIG_object_name.Caption = "Подразделение";
+            BRIG_object_name.FieldName = "BRIG_object_name";
+            BRIG_object_name.MinWidth = 23;
+            BRIG_object_name.Name = "BRIG_object_name";
+            BRIG_object_name.Visible = true;
+            BRIG_object_name.VisibleIndex = 4;
+            BRIG_object_name.Width = 117;
             // 
             // ved
             // 
-            this.ved.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ved.AppearanceHeader.Options.UseTextOptions = true;
-            this.ved.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.ved.Caption = "№ ве д.";
-            this.ved.FieldName = "ved";
-            this.ved.Name = "ved";
-            this.ved.Visible = true;
-            this.ved.VisibleIndex = 5;
-            this.ved.Width = 35;
+            ved.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            ved.AppearanceHeader.Options.UseTextOptions = true;
+            ved.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            ved.Caption = "№ ве д.";
+            ved.FieldName = "ved";
+            ved.MinWidth = 23;
+            ved.Name = "ved";
+            ved.Visible = true;
+            ved.VisibleIndex = 5;
+            ved.Width = 41;
             // 
             // ftabn
             // 
-            this.ftabn.AppearanceHeader.Options.UseTextOptions = true;
-            this.ftabn.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.ftabn.Caption = "№ та б.";
-            this.ftabn.FieldName = "ftabn";
-            this.ftabn.Name = "ftabn";
-            this.ftabn.Visible = true;
-            this.ftabn.VisibleIndex = 6;
-            this.ftabn.Width = 35;
+            ftabn.AppearanceHeader.Options.UseTextOptions = true;
+            ftabn.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            ftabn.Caption = "№ та б.";
+            ftabn.FieldName = "ftabn";
+            ftabn.MinWidth = 23;
+            ftabn.Name = "ftabn";
+            ftabn.Visible = true;
+            ftabn.VisibleIndex = 6;
+            ftabn.Width = 41;
             // 
             // ftabnsort
             // 
-            this.ftabnsort.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ftabnsort.AppearanceHeader.Options.UseFont = true;
-            this.ftabnsort.AppearanceHeader.Options.UseTextOptions = true;
-            this.ftabnsort.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.ftabnsort.AppearanceHeader.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
-            this.ftabnsort.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.ftabnsort.Caption = "со рт ир ов ка";
-            this.ftabnsort.FieldName = "ftabnsort";
-            this.ftabnsort.Name = "ftabnsort";
-            this.ftabnsort.Visible = true;
-            this.ftabnsort.VisibleIndex = 7;
-            this.ftabnsort.Width = 35;
+            ftabnsort.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            ftabnsort.AppearanceHeader.Options.UseFont = true;
+            ftabnsort.AppearanceHeader.Options.UseTextOptions = true;
+            ftabnsort.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            ftabnsort.AppearanceHeader.TextOptions.HotkeyPrefix = DevExpress.Utils.HKeyPrefix.None;
+            ftabnsort.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            ftabnsort.Caption = "со рт ир ов ка";
+            ftabnsort.FieldName = "ftabnsort";
+            ftabnsort.MinWidth = 23;
+            ftabnsort.Name = "ftabnsort";
+            ftabnsort.Visible = true;
+            ftabnsort.VisibleIndex = 7;
+            ftabnsort.Width = 41;
             // 
             // fgrd
             // 
-            this.fgrd.AppearanceCell.Options.UseTextOptions = true;
-            this.fgrd.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.fgrd.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fgrd.AppearanceHeader.Options.UseFont = true;
-            this.fgrd.AppearanceHeader.Options.UseTextOptions = true;
-            this.fgrd.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.fgrd.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.fgrd.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.fgrd.Caption = "Гр аф ик";
-            this.fgrd.FieldName = "fgrd";
-            this.fgrd.Name = "fgrd";
-            this.fgrd.Visible = true;
-            this.fgrd.VisibleIndex = 9;
-            this.fgrd.Width = 35;
+            fgrd.AppearanceCell.Options.UseTextOptions = true;
+            fgrd.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            fgrd.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            fgrd.AppearanceHeader.Options.UseFont = true;
+            fgrd.AppearanceHeader.Options.UseTextOptions = true;
+            fgrd.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            fgrd.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            fgrd.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            fgrd.Caption = "Гр аф ик";
+            fgrd.FieldName = "fgrd";
+            fgrd.MinWidth = 23;
+            fgrd.Name = "fgrd";
+            fgrd.Visible = true;
+            fgrd.VisibleIndex = 9;
+            fgrd.Width = 41;
             // 
             // dekret
             // 
-            this.dekret.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dekret.AppearanceHeader.Options.UseFont = true;
-            this.dekret.AppearanceHeader.Options.UseTextOptions = true;
-            this.dekret.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.dekret.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.dekret.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.dekret.Caption = "Де кр ет";
-            this.dekret.ColumnEdit = this.repositoryItemCheckEdit1;
-            this.dekret.FieldName = "dekret";
-            this.dekret.MaxWidth = 35;
-            this.dekret.Name = "dekret";
-            this.dekret.Visible = true;
-            this.dekret.VisibleIndex = 11;
-            this.dekret.Width = 35;
+            dekret.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            dekret.AppearanceHeader.Options.UseFont = true;
+            dekret.AppearanceHeader.Options.UseTextOptions = true;
+            dekret.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            dekret.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            dekret.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            dekret.Caption = "Де кр ет";
+            dekret.ColumnEdit = repositoryItemCheckEdit1;
+            dekret.FieldName = "dekret";
+            dekret.MaxWidth = 41;
+            dekret.MinWidth = 23;
+            dekret.Name = "dekret";
+            dekret.Visible = true;
+            dekret.VisibleIndex = 11;
+            dekret.Width = 41;
             // 
             // repositoryItemCheckEdit1
             // 
-            this.repositoryItemCheckEdit1.AutoHeight = false;
-            this.repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
-            this.repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItemCheckEdit1.AutoHeight = false;
+            repositoryItemCheckEdit1.Name = "repositoryItemCheckEdit1";
+            repositoryItemCheckEdit1.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
             // 
             // datau
             // 
-            this.datau.AppearanceHeader.Options.UseTextOptions = true;
-            this.datau.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.datau.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.datau.Caption = "Дата увол.";
-            this.datau.FieldName = "datau";
-            this.datau.Name = "datau";
-            this.datau.Visible = true;
-            this.datau.VisibleIndex = 10;
-            this.datau.Width = 65;
+            datau.AppearanceHeader.Options.UseTextOptions = true;
+            datau.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            datau.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            datau.Caption = "Дата увол.";
+            datau.FieldName = "datau";
+            datau.MinWidth = 23;
+            datau.Name = "datau";
+            datau.Visible = true;
+            datau.VisibleIndex = 10;
+            datau.Width = 76;
             // 
             // sovm
             // 
-            this.sovm.AppearanceCell.Options.UseTextOptions = true;
-            this.sovm.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.sovm.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.sovm.AppearanceHeader.Options.UseFont = true;
-            this.sovm.AppearanceHeader.Options.UseTextOptions = true;
-            this.sovm.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.sovm.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.sovm.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.sovm.Caption = "Со вм";
-            this.sovm.ColumnEdit = this.repositorySovm;
-            this.sovm.FieldName = "sovm";
-            this.sovm.Name = "sovm";
-            this.sovm.Visible = true;
-            this.sovm.VisibleIndex = 16;
-            this.sovm.Width = 35;
+            sovm.AppearanceCell.Options.UseTextOptions = true;
+            sovm.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            sovm.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            sovm.AppearanceHeader.Options.UseFont = true;
+            sovm.AppearanceHeader.Options.UseTextOptions = true;
+            sovm.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            sovm.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            sovm.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            sovm.Caption = "Со вм";
+            sovm.ColumnEdit = repositorySovm;
+            sovm.FieldName = "sovm";
+            sovm.MinWidth = 23;
+            sovm.Name = "sovm";
+            sovm.Visible = true;
+            sovm.VisibleIndex = 16;
+            sovm.Width = 41;
             // 
             // repositorySovm
             // 
-            this.repositorySovm.AutoHeight = false;
-            this.repositorySovm.Name = "repositorySovm";
-            this.repositorySovm.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            this.repositorySovm.ValueChecked = "1";
-            this.repositorySovm.ValueUnchecked = "0";
+            repositorySovm.AutoHeight = false;
+            repositorySovm.Name = "repositorySovm";
+            repositorySovm.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositorySovm.ValueChecked = "1";
+            repositorySovm.ValueUnchecked = "0";
             // 
             // tel_s
             // 
-            this.tel_s.AppearanceHeader.Options.UseTextOptions = true;
-            this.tel_s.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tel_s.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tel_s.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tel_s.Caption = "Тел. сот.";
-            this.tel_s.FieldName = "tel_s";
-            this.tel_s.Name = "tel_s";
-            this.tel_s.Visible = true;
-            this.tel_s.VisibleIndex = 13;
-            this.tel_s.Width = 80;
+            tel_s.AppearanceHeader.Options.UseTextOptions = true;
+            tel_s.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tel_s.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tel_s.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tel_s.Caption = "Тел. сот.";
+            tel_s.FieldName = "tel_s";
+            tel_s.MinWidth = 23;
+            tel_s.Name = "tel_s";
+            tel_s.Visible = true;
+            tel_s.VisibleIndex = 13;
+            tel_s.Width = 93;
             // 
             // bday
             // 
-            this.bday.AppearanceHeader.Options.UseTextOptions = true;
-            this.bday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.bday.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.bday.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.bday.Caption = "Дата рожд.";
-            this.bday.FieldName = "bday";
-            this.bday.Name = "bday";
-            this.bday.Visible = true;
-            this.bday.VisibleIndex = 12;
-            this.bday.Width = 65;
+            bday.AppearanceHeader.Options.UseTextOptions = true;
+            bday.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            bday.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            bday.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            bday.Caption = "Дата рожд.";
+            bday.FieldName = "bday";
+            bday.MinWidth = 23;
+            bday.Name = "bday";
+            bday.Visible = true;
+            bday.VisibleIndex = 12;
+            bday.Width = 76;
             // 
             // f_fvr_kod
             // 
-            this.f_fvr_kod.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.f_fvr_kod.AppearanceHeader.Options.UseFont = true;
-            this.f_fvr_kod.AppearanceHeader.Options.UseTextOptions = true;
-            this.f_fvr_kod.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.f_fvr_kod.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.f_fvr_kod.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.f_fvr_kod.Caption = "Обор удов ание";
-            this.f_fvr_kod.FieldName = "f_fvr_kod";
-            this.f_fvr_kod.Name = "f_fvr_kod";
-            this.f_fvr_kod.Visible = true;
-            this.f_fvr_kod.VisibleIndex = 14;
-            this.f_fvr_kod.Width = 45;
+            f_fvr_kod.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            f_fvr_kod.AppearanceHeader.Options.UseFont = true;
+            f_fvr_kod.AppearanceHeader.Options.UseTextOptions = true;
+            f_fvr_kod.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            f_fvr_kod.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            f_fvr_kod.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            f_fvr_kod.Caption = "Обор удов ание";
+            f_fvr_kod.FieldName = "f_fvr_kod";
+            f_fvr_kod.MinWidth = 23;
+            f_fvr_kod.Name = "f_fvr_kod";
+            f_fvr_kod.Visible = true;
+            f_fvr_kod.VisibleIndex = 14;
+            f_fvr_kod.Width = 52;
             // 
             // sdel
             // 
-            this.sdel.AppearanceHeader.Options.UseTextOptions = true;
-            this.sdel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.sdel.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.sdel.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.sdel.Caption = "Сд ел ьн";
-            this.sdel.ColumnEdit = this.repositorySdel;
-            this.sdel.FieldName = "sdel";
-            this.sdel.Name = "sdel";
-            this.sdel.Visible = true;
-            this.sdel.VisibleIndex = 15;
-            this.sdel.Width = 35;
+            sdel.AppearanceHeader.Options.UseTextOptions = true;
+            sdel.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            sdel.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            sdel.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            sdel.Caption = "Сд ел ьн";
+            sdel.ColumnEdit = repositorySdel;
+            sdel.FieldName = "sdel";
+            sdel.MinWidth = 23;
+            sdel.Name = "sdel";
+            sdel.Visible = true;
+            sdel.VisibleIndex = 15;
+            sdel.Width = 41;
             // 
             // repositorySdel
             // 
-            this.repositorySdel.AutoHeight = false;
-            this.repositorySdel.Name = "repositorySdel";
-            this.repositorySdel.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            this.repositorySdel.ValueChecked = ((short)(1));
-            this.repositorySdel.ValueGrayed = "0";
-            this.repositorySdel.ValueUnchecked = ((short)(0));
+            repositorySdel.AutoHeight = false;
+            repositorySdel.Name = "repositorySdel";
+            repositorySdel.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositorySdel.ValueChecked = (short)1;
+            repositorySdel.ValueGrayed = "0";
+            repositorySdel.ValueUnchecked = (short)0;
             // 
             // tab1c
             // 
-            this.tab1c.AppearanceHeader.Options.UseFont = true;
-            this.tab1c.AppearanceHeader.Options.UseTextOptions = true;
-            this.tab1c.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tab1c.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tab1c.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tab1c.Caption = "Таб. № 1С";
-            this.tab1c.FieldName = "tab1c";
-            this.tab1c.Name = "tab1c";
-            this.tab1c.Visible = true;
-            this.tab1c.VisibleIndex = 17;
-            this.tab1c.Width = 72;
+            tab1c.AppearanceHeader.Options.UseFont = true;
+            tab1c.AppearanceHeader.Options.UseTextOptions = true;
+            tab1c.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tab1c.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tab1c.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tab1c.Caption = "Таб. № 1С";
+            tab1c.FieldName = "tab1c";
+            tab1c.MinWidth = 23;
+            tab1c.Name = "tab1c";
+            tab1c.Visible = true;
+            tab1c.VisibleIndex = 17;
+            tab1c.Width = 84;
             // 
             // itr
             // 
-            this.itr.AppearanceCell.Options.UseFont = true;
-            this.itr.AppearanceHeader.Options.UseFont = true;
-            this.itr.AppearanceHeader.Options.UseTextOptions = true;
-            this.itr.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.itr.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.itr.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.itr.Caption = "и т р";
-            this.itr.ColumnEdit = this.repositoryItr;
-            this.itr.FieldName = "itr";
-            this.itr.Name = "itr";
-            this.itr.Visible = true;
-            this.itr.VisibleIndex = 18;
-            this.itr.Width = 35;
+            itr.AppearanceCell.Options.UseFont = true;
+            itr.AppearanceHeader.Options.UseFont = true;
+            itr.AppearanceHeader.Options.UseTextOptions = true;
+            itr.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            itr.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            itr.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            itr.Caption = "и т р";
+            itr.ColumnEdit = repositoryItr;
+            itr.FieldName = "itr";
+            itr.MinWidth = 23;
+            itr.Name = "itr";
+            itr.Visible = true;
+            itr.VisibleIndex = 18;
+            itr.Width = 41;
             // 
             // repositoryItr
             // 
-            this.repositoryItr.AutoHeight = false;
-            this.repositoryItr.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.CheckBox;
-            this.repositoryItr.Name = "repositoryItr";
-            this.repositoryItr.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
-            this.repositoryItr.ValueChecked = "1";
-            this.repositoryItr.ValueGrayed = "0";
-            this.repositoryItr.ValueUnchecked = "0";
+            repositoryItr.AutoHeight = false;
+            repositoryItr.CheckBoxOptions.Style = DevExpress.XtraEditors.Controls.CheckBoxStyle.CheckBox;
+            repositoryItr.Name = "repositoryItr";
+            repositoryItr.NullStyle = DevExpress.XtraEditors.Controls.StyleIndeterminate.Unchecked;
+            repositoryItr.ValueChecked = "1";
+            repositoryItr.ValueGrayed = "0";
+            repositoryItr.ValueUnchecked = "0";
             // 
             // tab_sovm
             // 
-            this.tab_sovm.AppearanceHeader.Options.UseTextOptions = true;
-            this.tab_sovm.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tab_sovm.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tab_sovm.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tab_sovm.Caption = "Осн. таб. №";
-            this.tab_sovm.FieldName = "tab_sovm";
-            this.tab_sovm.Name = "tab_sovm";
-            this.tab_sovm.Visible = true;
-            this.tab_sovm.VisibleIndex = 19;
-            this.tab_sovm.Width = 45;
+            tab_sovm.AppearanceHeader.Options.UseTextOptions = true;
+            tab_sovm.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tab_sovm.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tab_sovm.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tab_sovm.Caption = "Осн. таб. №";
+            tab_sovm.FieldName = "tab_sovm";
+            tab_sovm.MinWidth = 23;
+            tab_sovm.Name = "tab_sovm";
+            tab_sovm.Visible = true;
+            tab_sovm.VisibleIndex = 19;
+            tab_sovm.Width = 52;
             // 
             // podr1cname
             // 
-            this.podr1cname.AppearanceHeader.Options.UseTextOptions = true;
-            this.podr1cname.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.podr1cname.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.podr1cname.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.podr1cname.Caption = "По др. 1С";
-            this.podr1cname.FieldName = "podr1cname";
-            this.podr1cname.Name = "podr1cname";
-            this.podr1cname.Visible = true;
-            this.podr1cname.VisibleIndex = 20;
-            this.podr1cname.Width = 45;
+            podr1cname.AppearanceHeader.Options.UseTextOptions = true;
+            podr1cname.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            podr1cname.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            podr1cname.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            podr1cname.Caption = "По др. 1С";
+            podr1cname.FieldName = "podr1cname";
+            podr1cname.MinWidth = 23;
+            podr1cname.Name = "podr1cname";
+            podr1cname.Visible = true;
+            podr1cname.VisibleIndex = 20;
+            podr1cname.Width = 52;
             // 
             // tel_r
             // 
-            this.tel_r.AppearanceHeader.Options.UseTextOptions = true;
-            this.tel_r.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tel_r.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tel_r.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tel_r.Caption = "Тел. раб.";
-            this.tel_r.FieldName = "tel_r";
-            this.tel_r.Name = "tel_r";
-            this.tel_r.Visible = true;
-            this.tel_r.VisibleIndex = 21;
-            this.tel_r.Width = 80;
+            tel_r.AppearanceHeader.Options.UseTextOptions = true;
+            tel_r.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tel_r.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tel_r.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tel_r.Caption = "Тел. раб.";
+            tel_r.FieldName = "tel_r";
+            tel_r.MinWidth = 23;
+            tel_r.Name = "tel_r";
+            tel_r.Visible = true;
+            tel_r.VisibleIndex = 21;
+            tel_r.Width = 93;
             // 
             // tel_d
             // 
-            this.tel_d.AppearanceHeader.Options.UseTextOptions = true;
-            this.tel_d.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tel_d.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tel_d.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tel_d.Caption = "Тел. дом.";
-            this.tel_d.FieldName = "tel_d";
-            this.tel_d.Name = "tel_d";
-            this.tel_d.Visible = true;
-            this.tel_d.VisibleIndex = 22;
-            this.tel_d.Width = 80;
+            tel_d.AppearanceHeader.Options.UseTextOptions = true;
+            tel_d.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tel_d.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tel_d.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tel_d.Caption = "Тел. дом.";
+            tel_d.FieldName = "tel_d";
+            tel_d.MinWidth = 23;
+            tel_d.Name = "tel_d";
+            tel_d.Visible = true;
+            tel_d.VisibleIndex = 22;
+            tel_d.Width = 93;
             // 
             // mast
             // 
-            this.mast.AppearanceHeader.Options.UseTextOptions = true;
-            this.mast.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.mast.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.mast.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.mast.Caption = "*";
-            this.mast.FieldName = "mast";
-            this.mast.Name = "mast";
-            this.mast.Visible = true;
-            this.mast.VisibleIndex = 23;
-            this.mast.Width = 45;
+            mast.AppearanceHeader.Options.UseTextOptions = true;
+            mast.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            mast.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            mast.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            mast.Caption = "*";
+            mast.FieldName = "mast";
+            mast.MinWidth = 23;
+            mast.Name = "mast";
+            mast.Visible = true;
+            mast.VisibleIndex = 23;
+            mast.Width = 52;
             // 
             // okl
             // 
-            this.okl.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.okl.AppearanceHeader.Options.UseFont = true;
-            this.okl.AppearanceHeader.Options.UseTextOptions = true;
-            this.okl.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.okl.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.okl.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.okl.Caption = "Под раз дел ение";
-            this.okl.FieldName = "okl";
-            this.okl.Name = "okl";
-            this.okl.Visible = true;
-            this.okl.VisibleIndex = 24;
-            this.okl.Width = 50;
+            okl.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            okl.AppearanceHeader.Options.UseFont = true;
+            okl.AppearanceHeader.Options.UseTextOptions = true;
+            okl.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            okl.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            okl.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            okl.Caption = "Под раз дел ение";
+            okl.FieldName = "okl";
+            okl.MinWidth = 23;
+            okl.Name = "okl";
+            okl.Visible = true;
+            okl.VisibleIndex = 24;
+            okl.Width = 58;
             // 
             // tab_new
             // 
-            this.tab_new.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tab_new.AppearanceHeader.Options.UseFont = true;
-            this.tab_new.AppearanceHeader.Options.UseTextOptions = true;
-            this.tab_new.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tab_new.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.tab_new.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.tab_new.Caption = "№ таб / вед";
-            this.tab_new.FieldName = "tab_new";
-            this.tab_new.Name = "tab_new";
-            this.tab_new.Visible = true;
-            this.tab_new.VisibleIndex = 25;
-            this.tab_new.Width = 40;
+            tab_new.AppearanceHeader.Font = new System.Drawing.Font("Tahoma", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            tab_new.AppearanceHeader.Options.UseFont = true;
+            tab_new.AppearanceHeader.Options.UseTextOptions = true;
+            tab_new.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            tab_new.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            tab_new.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            tab_new.Caption = "№ таб / вед";
+            tab_new.FieldName = "tab_new";
+            tab_new.MinWidth = 23;
+            tab_new.Name = "tab_new";
+            tab_new.Visible = true;
+            tab_new.VisibleIndex = 25;
+            tab_new.Width = 47;
             // 
             // spisok1c_inn
             // 
-            this.spisok1c_inn.AppearanceHeader.Options.UseTextOptions = true;
-            this.spisok1c_inn.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.spisok1c_inn.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.spisok1c_inn.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.spisok1c_inn.Caption = "ИНН";
-            this.spisok1c_inn.FieldName = "spisok1c_inn";
-            this.spisok1c_inn.Name = "spisok1c_inn";
-            this.spisok1c_inn.Visible = true;
-            this.spisok1c_inn.VisibleIndex = 26;
-            this.spisok1c_inn.Width = 100;
+            spisok1c_inn.AppearanceHeader.Options.UseTextOptions = true;
+            spisok1c_inn.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            spisok1c_inn.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            spisok1c_inn.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            spisok1c_inn.Caption = "ИНН";
+            spisok1c_inn.FieldName = "spisok1c_inn";
+            spisok1c_inn.MinWidth = 23;
+            spisok1c_inn.Name = "spisok1c_inn";
+            spisok1c_inn.Visible = true;
+            spisok1c_inn.VisibleIndex = 26;
+            spisok1c_inn.Width = 117;
             // 
             // spisok1c_id
             // 
-            this.spisok1c_id.AppearanceHeader.Options.UseTextOptions = true;
-            this.spisok1c_id.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.spisok1c_id.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.spisok1c_id.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.spisok1c_id.Caption = "ид 1С";
-            this.spisok1c_id.FieldName = "spisok1c_id";
-            this.spisok1c_id.Name = "spisok1c_id";
-            this.spisok1c_id.Visible = true;
-            this.spisok1c_id.VisibleIndex = 29;
-            this.spisok1c_id.Width = 35;
+            spisok1c_id.AppearanceHeader.Options.UseTextOptions = true;
+            spisok1c_id.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            spisok1c_id.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            spisok1c_id.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            spisok1c_id.Caption = "ид 1С";
+            spisok1c_id.FieldName = "spisok1c_id";
+            spisok1c_id.MinWidth = 23;
+            spisok1c_id.Name = "spisok1c_id";
+            spisok1c_id.Visible = true;
+            spisok1c_id.VisibleIndex = 29;
+            spisok1c_id.Width = 41;
             // 
             // spisok1c_orgName
             // 
-            this.spisok1c_orgName.AppearanceHeader.Options.UseTextOptions = true;
-            this.spisok1c_orgName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.spisok1c_orgName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.spisok1c_orgName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.spisok1c_orgName.Caption = "Организация 1С";
-            this.spisok1c_orgName.FieldName = "spisok1c_orgName";
-            this.spisok1c_orgName.Name = "spisok1c_orgName";
-            this.spisok1c_orgName.Visible = true;
-            this.spisok1c_orgName.VisibleIndex = 28;
-            this.spisok1c_orgName.Width = 100;
+            spisok1c_orgName.AppearanceHeader.Options.UseTextOptions = true;
+            spisok1c_orgName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            spisok1c_orgName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            spisok1c_orgName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            spisok1c_orgName.Caption = "Организация 1С";
+            spisok1c_orgName.FieldName = "spisok1c_orgName";
+            spisok1c_orgName.MinWidth = 23;
+            spisok1c_orgName.Name = "spisok1c_orgName";
+            spisok1c_orgName.Visible = true;
+            spisok1c_orgName.VisibleIndex = 28;
+            spisok1c_orgName.Width = 117;
             // 
             // spisok1c_podrName
             // 
-            this.spisok1c_podrName.AppearanceHeader.Options.UseTextOptions = true;
-            this.spisok1c_podrName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.spisok1c_podrName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
-            this.spisok1c_podrName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.spisok1c_podrName.Caption = "Подразделение 1С";
-            this.spisok1c_podrName.FieldName = "spisok1c_podrName";
-            this.spisok1c_podrName.Name = "spisok1c_podrName";
-            this.spisok1c_podrName.Visible = true;
-            this.spisok1c_podrName.VisibleIndex = 27;
-            this.spisok1c_podrName.Width = 160;
+            spisok1c_podrName.AppearanceHeader.Options.UseTextOptions = true;
+            spisok1c_podrName.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            spisok1c_podrName.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            spisok1c_podrName.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            spisok1c_podrName.Caption = "Подразделение 1С";
+            spisok1c_podrName.FieldName = "spisok1c_podrName";
+            spisok1c_podrName.MinWidth = 23;
+            spisok1c_podrName.Name = "spisok1c_podrName";
+            spisok1c_podrName.Visible = true;
+            spisok1c_podrName.VisibleIndex = 27;
+            spisok1c_podrName.Width = 187;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel3.Controls.Add(this.customButtonSpVed, 2, 1);
-            this.tableLayoutPanel3.Controls.Add(this.customButtonSpOrg1C, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.customButtonSpDol1C, 0, 1);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(447, 575);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.22392F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.22392F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.55216F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(438, 83);
-            this.tableLayoutPanel3.TabIndex = 5;
+            tableLayoutPanel3.ColumnCount = 3;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel3.Controls.Add(customButtonSpVed, 2, 1);
+            tableLayoutPanel3.Controls.Add(customButtonSpOrg1C, 1, 1);
+            tableLayoutPanel3.Controls.Add(customButtonSpDol1C, 0, 1);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(522, 663);
+            tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 3;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.22392F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.22392F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.55216F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(510, 97);
+            tableLayoutPanel3.TabIndex = 5;
             // 
             // customButtonSpVed
             // 
-            this.customButtonSpVed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpVed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpVed.FlatAppearance.BorderSize = 0;
-            this.customButtonSpVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpVed.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpVed.Location = new System.Drawing.Point(294, 38);
-            this.customButtonSpVed.Name = "customButtonSpVed";
-            this.customButtonSpVed.Size = new System.Drawing.Size(141, 29);
-            this.customButtonSpVed.TabIndex = 9;
-            this.customButtonSpVed.Text = "Справочник ведомостей";
-            this.customButtonSpVed.UseVisualStyleBackColor = false;
-            this.customButtonSpVed.Click += new System.EventHandler(this.customButtonSpVed_Click);
+            customButtonSpVed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSpVed.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpVed.FlatAppearance.BorderSize = 0;
+            customButtonSpVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSpVed.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpVed.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSpVed.Location = new System.Drawing.Point(343, 44);
+            customButtonSpVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSpVed.Name = "customButtonSpVed";
+            customButtonSpVed.Size = new System.Drawing.Size(163, 35);
+            customButtonSpVed.TabIndex = 9;
+            customButtonSpVed.Text = "Справочник ведомостей";
+            customButtonSpVed.UseVisualStyleBackColor = false;
+            customButtonSpVed.Click += customButtonSpVed_Click;
             // 
             // customButtonSpOrg1C
             // 
-            this.customButtonSpOrg1C.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg1C.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpOrg1C.FlatAppearance.BorderSize = 0;
-            this.customButtonSpOrg1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpOrg1C.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpOrg1C.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg1C.Location = new System.Drawing.Point(148, 38);
-            this.customButtonSpOrg1C.Name = "customButtonSpOrg1C";
-            this.customButtonSpOrg1C.Size = new System.Drawing.Size(140, 29);
-            this.customButtonSpOrg1C.TabIndex = 8;
-            this.customButtonSpOrg1C.Text = "Подразделения 1С";
-            this.customButtonSpOrg1C.UseVisualStyleBackColor = false;
-            this.customButtonSpOrg1C.Click += new System.EventHandler(this.customButtonSpOrg1C_Click);
+            customButtonSpOrg1C.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSpOrg1C.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpOrg1C.FlatAppearance.BorderSize = 0;
+            customButtonSpOrg1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSpOrg1C.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpOrg1C.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSpOrg1C.Location = new System.Drawing.Point(173, 44);
+            customButtonSpOrg1C.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSpOrg1C.Name = "customButtonSpOrg1C";
+            customButtonSpOrg1C.Size = new System.Drawing.Size(162, 35);
+            customButtonSpOrg1C.TabIndex = 8;
+            customButtonSpOrg1C.Text = "Подразделения 1С";
+            customButtonSpOrg1C.UseVisualStyleBackColor = false;
+            customButtonSpOrg1C.Click += customButtonSpOrg1C_Click;
             // 
             // customButtonSpDol1C
             // 
-            this.customButtonSpDol1C.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol1C.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpDol1C.FlatAppearance.BorderSize = 0;
-            this.customButtonSpDol1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpDol1C.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpDol1C.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol1C.Location = new System.Drawing.Point(3, 38);
-            this.customButtonSpDol1C.Name = "customButtonSpDol1C";
-            this.customButtonSpDol1C.Size = new System.Drawing.Size(139, 29);
-            this.customButtonSpDol1C.TabIndex = 7;
-            this.customButtonSpDol1C.Text = "Должности 1С";
-            this.customButtonSpDol1C.UseVisualStyleBackColor = false;
-            this.customButtonSpDol1C.Click += new System.EventHandler(this.customButtonSpDol1C_Click);
-            // 
-            // customButtonPdrSP
-            // 
-            this.customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPdrSP.FlatAppearance.BorderSize = 0;
-            this.customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPdrSP.Location = new System.Drawing.Point(3, 39);
-            this.customButtonPdrSP.Name = "customButtonPdrSP";
-            this.customButtonPdrSP.Size = new System.Drawing.Size(134, 30);
-            this.customButtonPdrSP.TabIndex = 5;
-            this.customButtonPdrSP.Text = "Подразделения ШП - 1С";
-            this.customButtonPdrSP.UseVisualStyleBackColor = false;
-            this.customButtonPdrSP.Click += new System.EventHandler(this.customButtonPdrSP_Click);
+            customButtonSpDol1C.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSpDol1C.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpDol1C.FlatAppearance.BorderSize = 0;
+            customButtonSpDol1C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSpDol1C.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpDol1C.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSpDol1C.Location = new System.Drawing.Point(4, 44);
+            customButtonSpDol1C.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSpDol1C.Name = "customButtonSpDol1C";
+            customButtonSpDol1C.Size = new System.Drawing.Size(161, 35);
+            customButtonSpDol1C.TabIndex = 7;
+            customButtonSpDol1C.Text = "Должности 1С";
+            customButtonSpDol1C.UseVisualStyleBackColor = false;
+            customButtonSpDol1C.Click += customButtonSpDol1C_Click;
             // 
             // tableLayoutPanelPech
             // 
-            this.tableLayoutPanelPech.ColumnCount = 1;
-            this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelPech.Controls.Add(this.customButtonPchShk, 0, 0);
-            this.tableLayoutPanelPech.Controls.Add(this.xtraTabControl1, 0, 1);
-            this.tableLayoutPanelPech.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelPech.Location = new System.Drawing.Point(891, 319);
-            this.tableLayoutPanelPech.Name = "tableLayoutPanelPech";
-            this.tableLayoutPanelPech.RowCount = 7;
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
-            this.tableLayoutPanelPech.Size = new System.Drawing.Size(140, 250);
-            this.tableLayoutPanelPech.TabIndex = 1;
-            // 
-            // customButtonSpOrg
-            // 
-            this.customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpOrg.FlatAppearance.BorderSize = 0;
-            this.customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
-            this.customButtonSpOrg.Name = "customButtonSpOrg";
-            this.customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
-            this.customButtonSpOrg.TabIndex = 6;
-            this.customButtonSpOrg.Text = "Справочник организаций";
-            this.customButtonSpOrg.UseVisualStyleBackColor = false;
-            this.customButtonSpOrg.Click += new System.EventHandler(this.customButtonSpOrg_Click);
-            // 
-            // customButtonSpDol
-            // 
-            this.customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSpDol.FlatAppearance.BorderSize = 0;
-            this.customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSpDol.Location = new System.Drawing.Point(3, 39);
-            this.customButtonSpDol.Name = "customButtonSpDol";
-            this.customButtonSpDol.Size = new System.Drawing.Size(139, 30);
-            this.customButtonSpDol.TabIndex = 5;
-            this.customButtonSpDol.Text = "Справочник должностей";
-            this.customButtonSpDol.UseVisualStyleBackColor = false;
-            this.customButtonSpDol.Click += new System.EventHandler(this.customButtonSpDol_Click);
+            tableLayoutPanelPech.ColumnCount = 1;
+            tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanelPech.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanelPech.Controls.Add(customButtonPchShk, 0, 0);
+            tableLayoutPanelPech.Controls.Add(xtraTabControl1, 0, 1);
+            tableLayoutPanelPech.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanelPech.Location = new System.Drawing.Point(1040, 367);
+            tableLayoutPanelPech.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanelPech.Name = "tableLayoutPanelPech";
+            tableLayoutPanelPech.RowCount = 7;
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28695F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            tableLayoutPanelPech.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28263F));
+            tableLayoutPanelPech.Size = new System.Drawing.Size(162, 290);
+            tableLayoutPanelPech.TabIndex = 1;
             // 
             // customButtonPchShk
             // 
-            this.customButtonPchShk.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPchShk.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPchShk.FlatAppearance.BorderSize = 0;
-            this.customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPchShk.Location = new System.Drawing.Point(3, 3);
-            this.customButtonPchShk.Name = "customButtonPchShk";
-            this.customButtonPchShk.Size = new System.Drawing.Size(134, 29);
-            this.customButtonPchShk.TabIndex = 4;
-            this.customButtonPchShk.Text = "Печать ШК";
-            this.customButtonPchShk.UseVisualStyleBackColor = false;
-            this.customButtonPchShk.Click += new System.EventHandler(this.customButtonPchShk_Click);
+            customButtonPchShk.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonPchShk.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonPchShk.FlatAppearance.BorderSize = 0;
+            customButtonPchShk.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonPchShk.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPchShk.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonPchShk.Location = new System.Drawing.Point(4, 3);
+            customButtonPchShk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonPchShk.Name = "customButtonPchShk";
+            customButtonPchShk.Size = new System.Drawing.Size(154, 35);
+            customButtonPchShk.TabIndex = 4;
+            customButtonPchShk.Text = "Печать ШК";
+            customButtonPchShk.UseVisualStyleBackColor = false;
+            customButtonPchShk.Click += customButtonPchShk_Click;
             // 
             // xtraTabControl1
             // 
-            this.xtraTabControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.xtraTabControl1.Appearance.Options.UseBackColor = true;
-            this.xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.xtraTabControl1.Location = new System.Drawing.Point(3, 38);
-            this.xtraTabControl1.Name = "xtraTabControl1";
-            this.tableLayoutPanelPech.SetRowSpan(this.xtraTabControl1, 6);
-            this.xtraTabControl1.SelectedTabPage = this.xtraTabPageX;
-            this.xtraTabControl1.Size = new System.Drawing.Size(134, 209);
-            this.xtraTabControl1.TabIndex = 1;
-            this.xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
-            this.xtraTabPagePechSHk,
-            this.xtraTabPageOtchDolg,
-            this.xtraTabPageX});
+            xtraTabControl1.Appearance.BackColor = System.Drawing.Color.Transparent;
+            xtraTabControl1.Appearance.Options.UseBackColor = true;
+            xtraTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            xtraTabControl1.Location = new System.Drawing.Point(4, 44);
+            xtraTabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            xtraTabControl1.Name = "xtraTabControl1";
+            tableLayoutPanelPech.SetRowSpan(xtraTabControl1, 6);
+            xtraTabControl1.SelectedTabPage = xtraTabPageX;
+            xtraTabControl1.Size = new System.Drawing.Size(154, 243);
+            xtraTabControl1.TabIndex = 1;
+            xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPagePechSHk, xtraTabPageOtchDolg, xtraTabPageX });
             // 
             // xtraTabPageX
             // 
-            this.xtraTabPageX.Name = "xtraTabPageX";
-            this.xtraTabPageX.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPageX.Text = "Х";
-            this.xtraTabPageX.Paint += new System.Windows.Forms.PaintEventHandler(this.xtraTabPageX_Paint);
+            xtraTabPageX.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            xtraTabPageX.Name = "xtraTabPageX";
+            xtraTabPageX.Size = new System.Drawing.Size(152, 218);
+            xtraTabPageX.Text = "Х";
+            xtraTabPageX.Paint += xtraTabPageX_Paint;
             // 
             // xtraTabPagePechSHk
             // 
-            this.xtraTabPagePechSHk.Controls.Add(this.tabControlSHK);
-            this.xtraTabPagePechSHk.Name = "xtraTabPagePechSHk";
-            this.xtraTabPagePechSHk.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPagePechSHk.Text = "Печать ШК";
+            xtraTabPagePechSHk.Controls.Add(tabControlSHK);
+            xtraTabPagePechSHk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            xtraTabPagePechSHk.Name = "xtraTabPagePechSHk";
+            xtraTabPagePechSHk.Size = new System.Drawing.Size(152, 218);
+            xtraTabPagePechSHk.Text = "Печать ШК";
             // 
             // tabControlSHK
             // 
-            this.tabControlSHK.Controls.Add(this.tabPage1);
-            this.tabControlSHK.Controls.Add(this.tabPage2);
-            this.tabControlSHK.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlSHK.Location = new System.Drawing.Point(0, 0);
-            this.tabControlSHK.Name = "tabControlSHK";
-            this.tabControlSHK.SelectedIndex = 0;
-            this.tabControlSHK.Size = new System.Drawing.Size(132, 184);
-            this.tabControlSHK.TabIndex = 5;
+            tabControlSHK.Controls.Add(tabPage1);
+            tabControlSHK.Controls.Add(tabPage2);
+            tabControlSHK.Dock = System.Windows.Forms.DockStyle.Fill;
+            tabControlSHK.Location = new System.Drawing.Point(0, 0);
+            tabControlSHK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabControlSHK.Name = "tabControlSHK";
+            tabControlSHK.SelectedIndex = 0;
+            tabControlSHK.Size = new System.Drawing.Size(152, 218);
+            tabControlSHK.TabIndex = 5;
             // 
             // tabPage1
             // 
-            this.tabPage1.BackColor = System.Drawing.Color.Silver;
-            this.tabPage1.Controls.Add(this.tableLayoutPanel5);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(124, 158);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "По ведомости";
+            tabPage1.BackColor = System.Drawing.Color.Silver;
+            tabPage1.Controls.Add(tableLayoutPanel5);
+            tabPage1.Location = new System.Drawing.Point(4, 22);
+            tabPage1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPage1.Name = "tabPage1";
+            tabPage1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPage1.Size = new System.Drawing.Size(144, 192);
+            tabPage1.TabIndex = 0;
+            tabPage1.Text = "По ведомости";
             // 
             // tableLayoutPanel5
             // 
-            this.tableLayoutPanel5.ColumnCount = 1;
-            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Controls.Add(this.customTextBoxPechSHK1, 0, 3);
-            this.tableLayoutPanel5.Controls.Add(this.customComboBoxPechVed, 0, 1);
-            this.tableLayoutPanel5.Controls.Add(this.customButtonPech1, 0, 4);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel1, 0, 0);
-            this.tableLayoutPanel5.Controls.Add(this.customLabel2, 0, 2);
-            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
-            this.tableLayoutPanel5.RowCount = 5;
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(118, 152);
-            this.tableLayoutPanel5.TabIndex = 0;
+            tableLayoutPanel5.ColumnCount = 1;
+            tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel5.Controls.Add(customTextBoxPechSHK1, 0, 3);
+            tableLayoutPanel5.Controls.Add(customComboBoxPechVed, 0, 1);
+            tableLayoutPanel5.Controls.Add(customButtonPech1, 0, 4);
+            tableLayoutPanel5.Controls.Add(customLabel1, 0, 0);
+            tableLayoutPanel5.Controls.Add(customLabel2, 0, 2);
+            tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel5.Location = new System.Drawing.Point(4, 3);
+            tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel5.Name = "tableLayoutPanel5";
+            tableLayoutPanel5.RowCount = 5;
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel5.Size = new System.Drawing.Size(136, 186);
+            tableLayoutPanel5.TabIndex = 0;
             // 
             // customTextBoxPechSHK1
             // 
-            this.customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechSHK1.Location = new System.Drawing.Point(3, 85);
-            this.customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
-            this.customTextBoxPechSHK1.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechSHK1.TabIndex = 28;
+            customTextBoxPechSHK1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechSHK1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechSHK1.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxPechSHK1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxPechSHK1.Location = new System.Drawing.Point(4, 103);
+            customTextBoxPechSHK1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPechSHK1.Name = "customTextBoxPechSHK1";
+            customTextBoxPechSHK1.Size = new System.Drawing.Size(128, 23);
+            customTextBoxPechSHK1.TabIndex = 28;
             // 
             // customComboBoxPechVed
             // 
-            this.customComboBoxPechVed.BackColor = System.Drawing.SystemColors.Window;
-            this.customComboBoxPechVed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customComboBoxPechVed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.customComboBoxPechVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customComboBoxPechVed.Font = new System.Drawing.Font("Arial", 10F);
-            this.customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customComboBoxPechVed.Location = new System.Drawing.Point(3, 25);
-            this.customComboBoxPechVed.Name = "customComboBoxPechVed";
-            this.customComboBoxPechVed.Size = new System.Drawing.Size(112, 24);
-            this.customComboBoxPechVed.TabIndex = 26;
+            customComboBoxPechVed.BackColor = System.Drawing.SystemColors.Window;
+            customComboBoxPechVed.Dock = System.Windows.Forms.DockStyle.Fill;
+            customComboBoxPechVed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            customComboBoxPechVed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customComboBoxPechVed.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBoxPechVed.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customComboBoxPechVed.Location = new System.Drawing.Point(4, 30);
+            customComboBoxPechVed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customComboBoxPechVed.Name = "customComboBoxPechVed";
+            customComboBoxPechVed.Size = new System.Drawing.Size(128, 24);
+            customComboBoxPechVed.TabIndex = 26;
             // 
             // customButtonPech1
             // 
-            this.customButtonPech1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPech1.FlatAppearance.BorderSize = 0;
-            this.customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPech1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPech1.Location = new System.Drawing.Point(3, 123);
-            this.customButtonPech1.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonPech1.Name = "customButtonPech1";
-            this.customButtonPech1.Size = new System.Drawing.Size(112, 26);
-            this.customButtonPech1.TabIndex = 8;
-            this.customButtonPech1.Text = "Печать";
-            this.customButtonPech1.UseVisualStyleBackColor = false;
+            customButtonPech1.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonPech1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonPech1.FlatAppearance.BorderSize = 0;
+            customButtonPech1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonPech1.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPech1.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonPech1.Location = new System.Drawing.Point(4, 149);
+            customButtonPech1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonPech1.MaximumSize = new System.Drawing.Size(0, 58);
+            customButtonPech1.Name = "customButtonPech1";
+            customButtonPech1.Size = new System.Drawing.Size(128, 34);
+            customButtonPech1.TabIndex = 8;
+            customButtonPech1.Text = "Печать";
+            customButtonPech1.UseVisualStyleBackColor = false;
             // 
             // customLabel1
             // 
-            this.customLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabel1.AutoSize = true;
-            this.customLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel1.Location = new System.Drawing.Point(3, 0);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.Size = new System.Drawing.Size(78, 22);
-            this.customLabel1.TabIndex = 9;
-            this.customLabel1.Text = "Выберите ведомость";
+            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            customLabel1.AutoSize = true;
+            customLabel1.BackColor = System.Drawing.Color.Transparent;
+            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            customLabel1.Location = new System.Drawing.Point(4, 0);
+            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new System.Drawing.Size(78, 27);
+            customLabel1.TabIndex = 9;
+            customLabel1.Text = "Выберите ведомость";
             // 
             // customLabel2
             // 
-            this.customLabel2.AutoSize = true;
-            this.customLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel2.Location = new System.Drawing.Point(3, 60);
-            this.customLabel2.Name = "customLabel2";
-            this.customLabel2.Size = new System.Drawing.Size(112, 22);
-            this.customLabel2.TabIndex = 9;
-            this.customLabel2.Text = "Кол-во ШК для одного таб.";
+            customLabel2.AutoSize = true;
+            customLabel2.BackColor = System.Drawing.Color.Transparent;
+            customLabel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            customLabel2.Location = new System.Drawing.Point(4, 73);
+            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel2.Name = "customLabel2";
+            customLabel2.Size = new System.Drawing.Size(128, 27);
+            customLabel2.TabIndex = 9;
+            customLabel2.Text = "Кол-во ШК для одного таб.";
             // 
             // tabPage2
             // 
-            this.tabPage2.BackColor = System.Drawing.Color.Silver;
-            this.tabPage2.Controls.Add(this.tableLayoutPanel6);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(124, 158);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "По таб. №";
+            tabPage2.BackColor = System.Drawing.Color.Silver;
+            tabPage2.Controls.Add(tableLayoutPanel6);
+            tabPage2.Location = new System.Drawing.Point(4, 22);
+            tabPage2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tabPage2.Size = new System.Drawing.Size(144, 192);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "По таб. №";
             // 
             // tableLayoutPanel6
             // 
-            this.tableLayoutPanel6.ColumnCount = 1;
-            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.customTextBoxPechTab, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.customTextBoxPechSHK2, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.customButtonPech2, 0, 4);
-            this.tableLayoutPanel6.Controls.Add(this.customLabel3, 0, 0);
-            this.tableLayoutPanel6.Controls.Add(this.customLabel4, 0, 2);
-            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 5;
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(118, 152);
-            this.tableLayoutPanel6.TabIndex = 1;
+            tableLayoutPanel6.ColumnCount = 1;
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel6.Controls.Add(customTextBoxPechTab, 0, 1);
+            tableLayoutPanel6.Controls.Add(customTextBoxPechSHK2, 0, 3);
+            tableLayoutPanel6.Controls.Add(customButtonPech2, 0, 4);
+            tableLayoutPanel6.Controls.Add(customLabel3, 0, 0);
+            tableLayoutPanel6.Controls.Add(customLabel4, 0, 2);
+            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel6.Location = new System.Drawing.Point(4, 3);
+            tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 5;
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel6.Size = new System.Drawing.Size(136, 186);
+            tableLayoutPanel6.TabIndex = 1;
             // 
             // customTextBoxPechTab
             // 
-            this.customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechTab.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechTab.Location = new System.Drawing.Point(3, 25);
-            this.customTextBoxPechTab.Name = "customTextBoxPechTab";
-            this.customTextBoxPechTab.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechTab.TabIndex = 29;
+            customTextBoxPechTab.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechTab.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechTab.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxPechTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxPechTab.Location = new System.Drawing.Point(4, 30);
+            customTextBoxPechTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPechTab.Name = "customTextBoxPechTab";
+            customTextBoxPechTab.Size = new System.Drawing.Size(128, 23);
+            customTextBoxPechTab.TabIndex = 29;
             // 
             // customTextBoxPechSHK2
             // 
-            this.customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxPechSHK2.Location = new System.Drawing.Point(3, 85);
-            this.customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
-            this.customTextBoxPechSHK2.Size = new System.Drawing.Size(112, 23);
-            this.customTextBoxPechSHK2.TabIndex = 28;
+            customTextBoxPechSHK2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxPechSHK2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxPechSHK2.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxPechSHK2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxPechSHK2.Location = new System.Drawing.Point(4, 103);
+            customTextBoxPechSHK2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPechSHK2.Name = "customTextBoxPechSHK2";
+            customTextBoxPechSHK2.Size = new System.Drawing.Size(128, 23);
+            customTextBoxPechSHK2.TabIndex = 28;
             // 
             // customButtonPech2
             // 
-            this.customButtonPech2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonPech2.FlatAppearance.BorderSize = 0;
-            this.customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonPech2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonPech2.Location = new System.Drawing.Point(3, 123);
-            this.customButtonPech2.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonPech2.Name = "customButtonPech2";
-            this.customButtonPech2.Size = new System.Drawing.Size(112, 26);
-            this.customButtonPech2.TabIndex = 8;
-            this.customButtonPech2.Text = "Печать";
-            this.customButtonPech2.UseVisualStyleBackColor = false;
+            customButtonPech2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonPech2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonPech2.FlatAppearance.BorderSize = 0;
+            customButtonPech2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonPech2.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPech2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonPech2.Location = new System.Drawing.Point(4, 149);
+            customButtonPech2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonPech2.MaximumSize = new System.Drawing.Size(0, 58);
+            customButtonPech2.Name = "customButtonPech2";
+            customButtonPech2.Size = new System.Drawing.Size(128, 34);
+            customButtonPech2.TabIndex = 8;
+            customButtonPech2.Text = "Печать";
+            customButtonPech2.UseVisualStyleBackColor = false;
             // 
             // customLabel3
             // 
-            this.customLabel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabel3.AutoSize = true;
-            this.customLabel3.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel3.Location = new System.Drawing.Point(3, 6);
-            this.customLabel3.Name = "customLabel3";
-            this.customLabel3.Size = new System.Drawing.Size(112, 16);
-            this.customLabel3.TabIndex = 9;
-            this.customLabel3.Text = "Введите таб. №";
+            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            customLabel3.AutoSize = true;
+            customLabel3.BackColor = System.Drawing.Color.Transparent;
+            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            customLabel3.Location = new System.Drawing.Point(4, 11);
+            customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel3.Name = "customLabel3";
+            customLabel3.Size = new System.Drawing.Size(112, 16);
+            customLabel3.TabIndex = 9;
+            customLabel3.Text = "Введите таб. №";
             // 
             // customLabel4
             // 
-            this.customLabel4.AutoSize = true;
-            this.customLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.customLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabel4.Location = new System.Drawing.Point(3, 66);
-            this.customLabel4.Name = "customLabel4";
-            this.customLabel4.Size = new System.Drawing.Size(112, 16);
-            this.customLabel4.TabIndex = 9;
-            this.customLabel4.Text = "Кол-во ШК";
+            customLabel4.AutoSize = true;
+            customLabel4.BackColor = System.Drawing.Color.Transparent;
+            customLabel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            customLabel4.Location = new System.Drawing.Point(4, 84);
+            customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel4.Name = "customLabel4";
+            customLabel4.Size = new System.Drawing.Size(128, 16);
+            customLabel4.TabIndex = 9;
+            customLabel4.Text = "Кол-во ШК";
             // 
             // xtraTabPageOtchDolg
             // 
-            this.xtraTabPageOtchDolg.Controls.Add(this.tableLayoutPanel8);
-            this.xtraTabPageOtchDolg.Name = "xtraTabPageOtchDolg";
-            this.xtraTabPageOtchDolg.PageVisible = false;
-            this.xtraTabPageOtchDolg.Size = new System.Drawing.Size(132, 184);
-            this.xtraTabPageOtchDolg.Text = "Отчет по должности";
+            xtraTabPageOtchDolg.Controls.Add(tableLayoutPanel8);
+            xtraTabPageOtchDolg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            xtraTabPageOtchDolg.Name = "xtraTabPageOtchDolg";
+            xtraTabPageOtchDolg.PageVisible = false;
+            xtraTabPageOtchDolg.Size = new System.Drawing.Size(152, 218);
+            xtraTabPageOtchDolg.Text = "Отчет по должности";
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 1;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Controls.Add(this.customButtonSforming, 0, 4);
-            this.tableLayoutPanel8.Controls.Add(this.radioGroup1, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.customLabelOtch, 0, 2);
-            this.tableLayoutPanel8.Controls.Add(this.customComboBoxOtch, 0, 3);
-            this.tableLayoutPanel8.Controls.Add(this.customCheckBoxOsnTab, 0, 1);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 5;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(132, 184);
-            this.tableLayoutPanel8.TabIndex = 1;
+            tableLayoutPanel8.ColumnCount = 1;
+            tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel8.Controls.Add(customButtonSforming, 0, 4);
+            tableLayoutPanel8.Controls.Add(radioGroup1, 0, 0);
+            tableLayoutPanel8.Controls.Add(customLabelOtch, 0, 2);
+            tableLayoutPanel8.Controls.Add(customComboBoxOtch, 0, 3);
+            tableLayoutPanel8.Controls.Add(customCheckBoxOsnTab, 0, 1);
+            tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel8.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel8.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel8.Name = "tableLayoutPanel8";
+            tableLayoutPanel8.RowCount = 5;
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            tableLayoutPanel8.Size = new System.Drawing.Size(152, 218);
+            tableLayoutPanel8.TabIndex = 1;
             // 
             // customButtonSforming
             // 
-            this.customButtonSforming.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSforming.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSforming.FlatAppearance.BorderSize = 0;
-            this.customButtonSforming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSforming.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSforming.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSforming.Location = new System.Drawing.Point(3, 148);
-            this.customButtonSforming.MaximumSize = new System.Drawing.Size(0, 50);
-            this.customButtonSforming.Name = "customButtonSforming";
-            this.customButtonSforming.Size = new System.Drawing.Size(126, 33);
-            this.customButtonSforming.TabIndex = 8;
-            this.customButtonSforming.Text = "Сформировать";
-            this.customButtonSforming.UseVisualStyleBackColor = false;
-            this.customButtonSforming.Click += new System.EventHandler(this.customButtonSforming_Click);
+            customButtonSforming.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSforming.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSforming.FlatAppearance.BorderSize = 0;
+            customButtonSforming.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSforming.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSforming.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSforming.Location = new System.Drawing.Point(4, 175);
+            customButtonSforming.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSforming.MaximumSize = new System.Drawing.Size(0, 58);
+            customButtonSforming.Name = "customButtonSforming";
+            customButtonSforming.Size = new System.Drawing.Size(144, 40);
+            customButtonSforming.TabIndex = 8;
+            customButtonSforming.Text = "Сформировать";
+            customButtonSforming.UseVisualStyleBackColor = false;
+            customButtonSforming.Click += customButtonSforming_Click;
             // 
             // radioGroup1
             // 
-            this.radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioGroup1.Location = new System.Drawing.Point(3, 3);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Columns = 1;
-            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По организации", true, null, ""),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По подразделению 1С"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По табелю ШП")});
-            this.radioGroup1.Size = new System.Drawing.Size(126, 58);
-            this.radioGroup1.TabIndex = 28;
-            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
+            radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
+            radioGroup1.Location = new System.Drawing.Point(4, 3);
+            radioGroup1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radioGroup1.Name = "radioGroup1";
+            radioGroup1.Properties.Columns = 1;
+            radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По организации", true, null, ""), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По подразделению 1С"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "По табелю ШП") });
+            radioGroup1.Size = new System.Drawing.Size(144, 70);
+            radioGroup1.TabIndex = 28;
+            radioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
             // 
             // customLabelOtch
             // 
-            this.customLabelOtch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.customLabelOtch.AutoSize = true;
-            this.customLabelOtch.BackColor = System.Drawing.Color.Transparent;
-            this.customLabelOtch.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.customLabelOtch.Location = new System.Drawing.Point(3, 93);
-            this.customLabelOtch.Name = "customLabelOtch";
-            this.customLabelOtch.Size = new System.Drawing.Size(43, 16);
-            this.customLabelOtch.TabIndex = 9;
-            this.customLabelOtch.Text = "Текст";
+            customLabelOtch.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            customLabelOtch.AutoSize = true;
+            customLabelOtch.BackColor = System.Drawing.Color.Transparent;
+            customLabelOtch.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelOtch.ForeColor = System.Drawing.Color.FromArgb(0, 0, 0);
+            customLabelOtch.Location = new System.Drawing.Point(4, 113);
+            customLabelOtch.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelOtch.Name = "customLabelOtch";
+            customLabelOtch.Size = new System.Drawing.Size(43, 16);
+            customLabelOtch.TabIndex = 9;
+            customLabelOtch.Text = "Текст";
             // 
             // customComboBoxOtch
             // 
-            this.customComboBoxOtch.BackColor = System.Drawing.SystemColors.Window;
-            this.customComboBoxOtch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customComboBoxOtch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.customComboBoxOtch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customComboBoxOtch.Font = new System.Drawing.Font("Arial", 10F);
-            this.customComboBoxOtch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customComboBoxOtch.Location = new System.Drawing.Point(3, 112);
-            this.customComboBoxOtch.Name = "customComboBoxOtch";
-            this.customComboBoxOtch.Size = new System.Drawing.Size(126, 24);
-            this.customComboBoxOtch.TabIndex = 26;
+            customComboBoxOtch.BackColor = System.Drawing.SystemColors.Window;
+            customComboBoxOtch.Dock = System.Windows.Forms.DockStyle.Fill;
+            customComboBoxOtch.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            customComboBoxOtch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customComboBoxOtch.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBoxOtch.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customComboBoxOtch.Location = new System.Drawing.Point(4, 132);
+            customComboBoxOtch.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customComboBoxOtch.Name = "customComboBoxOtch";
+            customComboBoxOtch.Size = new System.Drawing.Size(144, 24);
+            customComboBoxOtch.TabIndex = 26;
             // 
             // customCheckBoxOsnTab
             // 
-            this.customCheckBoxOsnTab.AutoSize = true;
-            this.customCheckBoxOsnTab.Checked = true;
-            this.customCheckBoxOsnTab.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.customCheckBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCheckBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customCheckBoxOsnTab.Location = new System.Drawing.Point(3, 67);
-            this.customCheckBoxOsnTab.Name = "customCheckBoxOsnTab";
-            this.customCheckBoxOsnTab.Size = new System.Drawing.Size(126, 20);
-            this.customCheckBoxOsnTab.TabIndex = 27;
-            this.customCheckBoxOsnTab.Text = "Основные табельные";
-            this.customCheckBoxOsnTab.UseVisualStyleBackColor = true;
+            customCheckBoxOsnTab.AutoSize = true;
+            customCheckBoxOsnTab.Checked = true;
+            customCheckBoxOsnTab.CheckState = System.Windows.Forms.CheckState.Checked;
+            customCheckBoxOsnTab.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxOsnTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customCheckBoxOsnTab.Location = new System.Drawing.Point(4, 79);
+            customCheckBoxOsnTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCheckBoxOsnTab.Name = "customCheckBoxOsnTab";
+            customCheckBoxOsnTab.Size = new System.Drawing.Size(144, 20);
+            customCheckBoxOsnTab.TabIndex = 27;
+            customCheckBoxOsnTab.Text = "Основные табельные";
+            customCheckBoxOsnTab.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.customButtonPdrSP, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButtonSov, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customButtonAddSov, 0, 1);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(891, 575);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(140, 83);
-            this.tableLayoutPanel1.TabIndex = 3;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(customButtonPdrSP, 0, 0);
+            tableLayoutPanel1.Controls.Add(customButtonSov, 0, 0);
+            tableLayoutPanel1.Controls.Add(customButtonAddSov, 0, 1);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(1040, 663);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 3;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.44124F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(162, 97);
+            tableLayoutPanel1.TabIndex = 3;
+            // 
+            // customButtonPdrSP
+            // 
+            customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonPdrSP.FlatAppearance.BorderSize = 0;
+            customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonPdrSP.Location = new System.Drawing.Point(4, 45);
+            customButtonPdrSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonPdrSP.Name = "customButtonPdrSP";
+            customButtonPdrSP.Size = new System.Drawing.Size(154, 36);
+            customButtonPdrSP.TabIndex = 5;
+            customButtonPdrSP.Text = "Подразделения ШП - 1С";
+            customButtonPdrSP.UseVisualStyleBackColor = false;
+            customButtonPdrSP.Click += customButtonPdrSP_Click;
             // 
             // customButtonSov
             // 
-            this.customButtonSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonSov.FlatAppearance.BorderSize = 0;
-            this.customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonSov.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonSov.Location = new System.Drawing.Point(3, 3);
-            this.customButtonSov.Name = "customButtonSov";
-            this.customButtonSov.Size = new System.Drawing.Size(134, 30);
-            this.customButtonSov.TabIndex = 1;
-            this.customButtonSov.Text = "Совместители";
-            this.customButtonSov.UseVisualStyleBackColor = false;
-            this.customButtonSov.Click += new System.EventHandler(this.customButtonSov_Click);
+            customButtonSov.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSov.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSov.FlatAppearance.BorderSize = 0;
+            customButtonSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSov.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSov.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSov.Location = new System.Drawing.Point(4, 3);
+            customButtonSov.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonSov.Name = "customButtonSov";
+            customButtonSov.Size = new System.Drawing.Size(154, 36);
+            customButtonSov.TabIndex = 1;
+            customButtonSov.Text = "Совместители";
+            customButtonSov.UseVisualStyleBackColor = false;
+            customButtonSov.Click += customButtonSov_Click;
             // 
             // customButtonAddSov
             // 
-            this.customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonAddSov.FlatAppearance.BorderSize = 0;
-            this.customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonAddSov.Location = new System.Drawing.Point(3, 75);
-            this.customButtonAddSov.Name = "customButtonAddSov";
-            this.customButtonAddSov.Size = new System.Drawing.Size(134, 5);
-            this.customButtonAddSov.TabIndex = 0;
-            this.customButtonAddSov.Text = "Добавить совмест.";
-            this.customButtonAddSov.UseVisualStyleBackColor = false;
-            this.customButtonAddSov.Click += new System.EventHandler(this.customButtonAddSov_Click);
+            customButtonAddSov.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonAddSov.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAddSov.FlatAppearance.BorderSize = 0;
+            customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonAddSov.Location = new System.Drawing.Point(4, 87);
+            customButtonAddSov.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAddSov.Name = "customButtonAddSov";
+            customButtonAddSov.Size = new System.Drawing.Size(154, 7);
+            customButtonAddSov.TabIndex = 0;
+            customButtonAddSov.Text = "Добавить совмест.";
+            customButtonAddSov.UseVisualStyleBackColor = false;
+            customButtonAddSov.Click += customButtonAddSov_Click;
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
-            this.tableLayoutPanel2.Controls.Add(this.customButtonRed, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.customButtonAdd, 0, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 575);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.54903F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.54903F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.90195F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(438, 83);
-            this.tableLayoutPanel2.TabIndex = 4;
+            tableLayoutPanel2.ColumnCount = 3;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel2.Controls.Add(customButtonRed, 1, 0);
+            tableLayoutPanel2.Controls.Add(customButtonAdd, 0, 0);
+            tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel2.Location = new System.Drawing.Point(4, 663);
+            tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 3;
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.54903F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 43.54903F));
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.90195F));
+            tableLayoutPanel2.Size = new System.Drawing.Size(510, 97);
+            tableLayoutPanel2.TabIndex = 4;
             // 
             // customButtonRed
             // 
-            this.customButtonRed.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonRed.FlatAppearance.BorderSize = 0;
-            this.customButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonRed.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonRed.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonRed.Location = new System.Drawing.Point(148, 3);
-            this.customButtonRed.Name = "customButtonRed";
-            this.customButtonRed.Size = new System.Drawing.Size(140, 30);
-            this.customButtonRed.TabIndex = 2;
-            this.customButtonRed.Text = "Редактировать";
-            this.customButtonRed.UseVisualStyleBackColor = false;
-            this.customButtonRed.Click += new System.EventHandler(this.customButtonRed_Click);
+            customButtonRed.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonRed.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonRed.FlatAppearance.BorderSize = 0;
+            customButtonRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonRed.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonRed.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonRed.Location = new System.Drawing.Point(173, 3);
+            customButtonRed.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonRed.Name = "customButtonRed";
+            customButtonRed.Size = new System.Drawing.Size(162, 36);
+            customButtonRed.TabIndex = 2;
+            customButtonRed.Text = "Редактировать";
+            customButtonRed.UseVisualStyleBackColor = false;
+            customButtonRed.Click += customButtonRed_Click;
             // 
             // customButtonAdd
             // 
-            this.customButtonAdd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
-            this.customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customButtonAdd.FlatAppearance.BorderSize = 0;
-            this.customButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            this.customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(106)))), ((int)(((byte)(90)))), ((int)(((byte)(205)))));
-            this.customButtonAdd.Location = new System.Drawing.Point(3, 3);
-            this.customButtonAdd.Name = "customButtonAdd";
-            this.customButtonAdd.Size = new System.Drawing.Size(139, 30);
-            this.customButtonAdd.TabIndex = 0;
-            this.customButtonAdd.Text = "Добавить";
-            this.customButtonAdd.UseVisualStyleBackColor = false;
-            this.customButtonAdd.Click += new System.EventHandler(this.customButtonAdd_Click);
+            customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAdd.FlatAppearance.BorderSize = 0;
+            customButtonAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonAdd.Location = new System.Drawing.Point(4, 3);
+            customButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAdd.Name = "customButtonAdd";
+            customButtonAdd.Size = new System.Drawing.Size(161, 36);
+            customButtonAdd.TabIndex = 0;
+            customButtonAdd.Text = "Добавить";
+            customButtonAdd.UseVisualStyleBackColor = false;
+            customButtonAdd.Click += customButtonAdd_Click;
+            // 
+            // customButtonSpOrg
+            // 
+            customButtonSpOrg.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSpOrg.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpOrg.FlatAppearance.BorderSize = 0;
+            customButtonSpOrg.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSpOrg.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpOrg.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSpOrg.Location = new System.Drawing.Point(148, 39);
+            customButtonSpOrg.Name = "customButtonSpOrg";
+            customButtonSpOrg.Size = new System.Drawing.Size(140, 30);
+            customButtonSpOrg.TabIndex = 6;
+            customButtonSpOrg.Text = "Справочник организаций";
+            customButtonSpOrg.UseVisualStyleBackColor = false;
+            customButtonSpOrg.Click += customButtonSpOrg_Click;
+            // 
+            // customButtonSpDol
+            // 
+            customButtonSpDol.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSpDol.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSpDol.FlatAppearance.BorderSize = 0;
+            customButtonSpDol.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonSpDol.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSpDol.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonSpDol.Location = new System.Drawing.Point(3, 39);
+            customButtonSpDol.Name = "customButtonSpDol";
+            customButtonSpDol.Size = new System.Drawing.Size(139, 30);
+            customButtonSpDol.TabIndex = 5;
+            customButtonSpDol.Text = "Справочник должностей";
+            customButtonSpDol.UseVisualStyleBackColor = false;
+            customButtonSpDol.Click += customButtonSpDol_Click;
             // 
             // gridColumn4
             // 
-            this.gridColumn4.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn4.Caption = "ФИО";
-            this.gridColumn4.FieldName = "text_ob";
-            this.gridColumn4.Name = "gridColumn4";
-            this.gridColumn4.Visible = true;
-            this.gridColumn4.VisibleIndex = 1;
-            this.gridColumn4.Width = 206;
+            gridColumn4.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn4.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn4.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn4.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn4.Caption = "ФИО";
+            gridColumn4.FieldName = "text_ob";
+            gridColumn4.Name = "gridColumn4";
+            gridColumn4.Visible = true;
+            gridColumn4.VisibleIndex = 1;
+            gridColumn4.Width = 206;
             // 
             // gridColumn5
             // 
-            this.gridColumn5.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn5.Caption = "ФИО";
-            this.gridColumn5.FieldName = "text_ob";
-            this.gridColumn5.Name = "gridColumn5";
-            this.gridColumn5.Visible = true;
-            this.gridColumn5.VisibleIndex = 1;
-            this.gridColumn5.Width = 206;
+            gridColumn5.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn5.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn5.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn5.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn5.Caption = "ФИО";
+            gridColumn5.FieldName = "text_ob";
+            gridColumn5.Name = "gridColumn5";
+            gridColumn5.Visible = true;
+            gridColumn5.VisibleIndex = 1;
+            gridColumn5.Width = 206;
             // 
             // text_ob_tip
             // 
-            this.text_ob_tip.AppearanceCell.Options.UseTextOptions = true;
-            this.text_ob_tip.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.text_ob_tip.AppearanceHeader.Options.UseTextOptions = true;
-            this.text_ob_tip.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.text_ob_tip.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.text_ob_tip.Caption = "Совм.";
-            this.text_ob_tip.FieldName = "text_ob_tip";
-            this.text_ob_tip.Name = "text_ob_tip";
-            this.text_ob_tip.Visible = true;
-            this.text_ob_tip.VisibleIndex = 3;
-            this.text_ob_tip.Width = 42;
+            text_ob_tip.AppearanceCell.Options.UseTextOptions = true;
+            text_ob_tip.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            text_ob_tip.AppearanceHeader.Options.UseTextOptions = true;
+            text_ob_tip.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            text_ob_tip.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            text_ob_tip.Caption = "Совм.";
+            text_ob_tip.FieldName = "text_ob_tip";
+            text_ob_tip.Name = "text_ob_tip";
+            text_ob_tip.Visible = true;
+            text_ob_tip.VisibleIndex = 3;
+            text_ob_tip.Width = 42;
             // 
             // gridColumn6
             // 
-            this.gridColumn6.AppearanceCell.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn6.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            this.gridColumn6.Caption = "Совм.";
-            this.gridColumn6.FieldName = "text_ob_tip";
-            this.gridColumn6.Name = "gridColumn6";
-            this.gridColumn6.Visible = true;
-            this.gridColumn6.VisibleIndex = 3;
-            this.gridColumn6.Width = 42;
+            gridColumn6.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn6.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn6.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn6.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridColumn6.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            gridColumn6.Caption = "Совм.";
+            gridColumn6.FieldName = "text_ob_tip";
+            gridColumn6.Name = "gridColumn6";
+            gridColumn6.Visible = true;
+            gridColumn6.VisibleIndex = 3;
+            gridColumn6.Width = 42;
             // 
             // gridColumn12
             // 
-            this.gridColumn12.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn12.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn12.Caption = "Подразделение";
-            this.gridColumn12.FieldName = "ftabnsort";
-            this.gridColumn12.Name = "gridColumn12";
-            this.gridColumn12.Visible = true;
-            this.gridColumn12.VisibleIndex = 5;
-            this.gridColumn12.Width = 78;
+            gridColumn12.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn12.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridColumn12.Caption = "Подразделение";
+            gridColumn12.FieldName = "ftabnsort";
+            gridColumn12.Name = "gridColumn12";
+            gridColumn12.Visible = true;
+            gridColumn12.VisibleIndex = 5;
+            gridColumn12.Width = 78;
             // 
             // gridColumn13
             // 
-            this.gridColumn13.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn13.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn13.Caption = "Подразделение";
-            this.gridColumn13.FieldName = "ftabnsort";
-            this.gridColumn13.Name = "gridColumn13";
-            this.gridColumn13.Visible = true;
-            this.gridColumn13.VisibleIndex = 5;
-            this.gridColumn13.Width = 78;
+            gridColumn13.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn13.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridColumn13.Caption = "Подразделение";
+            gridColumn13.FieldName = "ftabnsort";
+            gridColumn13.Name = "gridColumn13";
+            gridColumn13.Visible = true;
+            gridColumn13.VisibleIndex = 5;
+            gridColumn13.Width = 78;
             // 
             // gridColumn14
             // 
-            this.gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn14.Caption = "Подразделение";
-            this.gridColumn14.FieldName = "ftabnsort";
-            this.gridColumn14.Name = "gridColumn14";
-            this.gridColumn14.Visible = true;
-            this.gridColumn14.VisibleIndex = 5;
-            this.gridColumn14.Width = 78;
+            gridColumn14.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn14.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridColumn14.Caption = "Подразделение";
+            gridColumn14.FieldName = "ftabnsort";
+            gridColumn14.Name = "gridColumn14";
+            gridColumn14.Visible = true;
+            gridColumn14.VisibleIndex = 5;
+            gridColumn14.Width = 78;
             // 
             // gridColumn15
             // 
-            this.gridColumn15.AppearanceHeader.Options.UseTextOptions = true;
-            this.gridColumn15.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.gridColumn15.Caption = "Подразделение";
-            this.gridColumn15.FieldName = "ftabnsort";
-            this.gridColumn15.Name = "gridColumn15";
-            this.gridColumn15.Visible = true;
-            this.gridColumn15.VisibleIndex = 5;
-            this.gridColumn15.Width = 78;
+            gridColumn15.AppearanceHeader.Options.UseTextOptions = true;
+            gridColumn15.AppearanceHeader.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            gridColumn15.Caption = "Подразделение";
+            gridColumn15.FieldName = "ftabnsort";
+            gridColumn15.Name = "gridColumn15";
+            gridColumn15.Visible = true;
+            gridColumn15.VisibleIndex = 5;
+            gridColumn15.Width = 78;
             // 
             // gridColumn2
             // 
-            this.gridColumn2.Caption = "Дата рожд.";
-            this.gridColumn2.Name = "gridColumn2";
-            this.gridColumn2.Visible = true;
-            this.gridColumn2.VisibleIndex = 13;
-            this.gridColumn2.Width = 61;
+            gridColumn2.Caption = "Дата рожд.";
+            gridColumn2.Name = "gridColumn2";
+            gridColumn2.Visible = true;
+            gridColumn2.VisibleIndex = 13;
+            gridColumn2.Width = 61;
             // 
             // gridColumn16
             // 
-            this.gridColumn16.Caption = "Дата рожд.";
-            this.gridColumn16.Name = "gridColumn16";
-            this.gridColumn16.Visible = true;
-            this.gridColumn16.VisibleIndex = 13;
-            this.gridColumn16.Width = 61;
+            gridColumn16.Caption = "Дата рожд.";
+            gridColumn16.Name = "gridColumn16";
+            gridColumn16.Visible = true;
+            gridColumn16.VisibleIndex = 13;
+            gridColumn16.Width = 61;
             // 
             // gridColumn1
             // 
-            this.gridColumn1.Caption = "Телефон";
-            this.gridColumn1.Name = "gridColumn1";
-            this.gridColumn1.Visible = true;
-            this.gridColumn1.VisibleIndex = 14;
-            this.gridColumn1.Width = 77;
+            gridColumn1.Caption = "Телефон";
+            gridColumn1.Name = "gridColumn1";
+            gridColumn1.Visible = true;
+            gridColumn1.VisibleIndex = 14;
+            gridColumn1.Width = 77;
             // 
             // nam
             // 
-            this.nam.Caption = "Подр. 1С";
-            this.nam.FieldName = "кап";
-            this.nam.Name = "nam";
-            this.nam.Visible = true;
-            this.nam.VisibleIndex = 20;
-            this.nam.Width = 116;
+            nam.Caption = "Подр. 1С";
+            nam.FieldName = "кап";
+            nam.Name = "nam";
+            nam.Visible = true;
+            nam.VisibleIndex = 20;
+            nam.Width = 116;
             // 
             // Fio
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1034, 661);
-            this.Controls.Add(this.tableLayoutPanelAll);
-            this.Name = "Fio";
-            this.Text = "Fio";
-            this.Load += new System.EventHandler(this.Fio_Load);
-            this.tableLayoutPanelAll.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            this.tableLayoutPanel7.ResumeLayout(false);
-            this.tableLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.fioGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.fioList)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewFio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemCheckEdit1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositorySovm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositorySdel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.repositoryItr)).EndInit();
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanelPech.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).EndInit();
-            this.xtraTabControl1.ResumeLayout(false);
-            this.xtraTabPagePechSHk.ResumeLayout(false);
-            this.tabControlSHK.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tableLayoutPanel5.ResumeLayout(false);
-            this.tableLayoutPanel5.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tableLayoutPanel6.ResumeLayout(false);
-            this.tableLayoutPanel6.PerformLayout();
-            this.xtraTabPageOtchDolg.ResumeLayout(false);
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.for_reports_excel)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(1206, 763);
+            Controls.Add(tableLayoutPanelAll);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "Fio";
+            Text = "Fio";
+            Load += Fio_Load;
+            tableLayoutPanelAll.ResumeLayout(false);
+            tableLayoutPanel4.ResumeLayout(false);
+            tableLayoutPanel4.PerformLayout();
+            tableLayoutPanel7.ResumeLayout(false);
+            tableLayoutPanel7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)fioGrid).EndInit();
+            ((System.ComponentModel.ISupportInitialize)fioList).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewFio).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositorySovm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositorySdel).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItr).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanelPech.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)xtraTabControl1).EndInit();
+            xtraTabControl1.ResumeLayout(false);
+            xtraTabPagePechSHk.ResumeLayout(false);
+            tabControlSHK.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
+            tableLayoutPanel5.ResumeLayout(false);
+            tableLayoutPanel5.PerformLayout();
+            tabPage2.ResumeLayout(false);
+            tableLayoutPanel6.ResumeLayout(false);
+            tableLayoutPanel6.PerformLayout();
+            xtraTabPageOtchDolg.ResumeLayout(false);
+            tableLayoutPanel8.ResumeLayout(false);
+            tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)behaviorManager1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)for_reports_excel).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

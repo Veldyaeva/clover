@@ -31,6 +31,7 @@
             components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             DevExpress.XtraGrid.GridLevelNode gridLevelNode2 = new DevExpress.XtraGrid.GridLevelNode();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminForm));
             gridViewRoles = new DevExpress.XtraGrid.Views.Grid.GridView();
             customGridControlObject = new CustomGridControl();
             bindingSourceObject = new System.Windows.Forms.BindingSource(components);
@@ -43,6 +44,7 @@
             ObjectType = new DevExpress.XtraGrid.Columns.GridColumn();
             MissingObj = new DevExpress.XtraGrid.Columns.GridColumn();
             AddedObj = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemLookUpEditCreator = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             customGridControlForms = new CustomGridControl();
             bindingSourceForms = new System.Windows.Forms.BindingSource(components);
             gridViewForms = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -59,6 +61,7 @@
             customButtonDeleteObject = new CustomButton();
             customButtonLoadObject = new CustomButton();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonOpen = new CustomButton();
             customButtonLoadMenu = new CustomButton();
             customButtonLoadForm = new CustomButton();
             customButtonFormAdd = new CustomButton();
@@ -82,12 +85,12 @@
             gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
-            customButtonOpen = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridViewRoles).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlObject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceObject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewUsers).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewObject).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditCreator).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewForms).BeginInit();
@@ -216,6 +219,18 @@
             AddedObj.Name = "AddedObj";
             AddedObj.Width = 87;
             // 
+            // repositoryItemLookUpEditCreator
+            // 
+            repositoryItemLookUpEditCreator.AutoHeight = false;
+            repositoryItemLookUpEditCreator.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFit;
+            repositoryItemLookUpEditCreator.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            repositoryItemLookUpEditCreator.DisplayMember = "UserName";
+            repositoryItemLookUpEditCreator.Name = "repositoryItemLookUpEditCreator";
+            repositoryItemLookUpEditCreator.NullText = "-";
+            repositoryItemLookUpEditCreator.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            repositoryItemLookUpEditCreator.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            repositoryItemLookUpEditCreator.ValueMember = "CreatorID";
+            // 
             // customGridControlForms
             // 
             customGridControlForms.DataSource = bindingSourceForms;
@@ -226,6 +241,7 @@
             customGridControlForms.MainView = gridViewForms;
             customGridControlForms.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGridControlForms.Name = "customGridControlForms";
+            customGridControlForms.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEditCreator });
             tableLayoutPanel1.SetRowSpan(customGridControlForms, 9);
             customGridControlForms.Size = new System.Drawing.Size(583, 674);
             customGridControlForms.TabIndex = 1;
@@ -283,10 +299,11 @@
             // UserName
             // 
             UserName.Caption = "Создатель";
-            UserName.FieldName = "UserName";
+            UserName.ColumnEdit = repositoryItemLookUpEditCreator;
+            UserName.FieldName = "CreatorID";
             UserName.MinWidth = 23;
             UserName.Name = "UserName";
-            UserName.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
+            UserName.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             UserName.Visible = true;
             UserName.VisibleIndex = 3;
             UserName.Width = 128;
@@ -421,6 +438,21 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel2.Size = new System.Drawing.Size(583, 69);
             tableLayoutPanel2.TabIndex = 4;
+            // 
+            // customButtonOpen
+            // 
+            customButtonOpen.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButtonOpen.Location = new System.Drawing.Point(392, 37);
+            customButtonOpen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonOpen.Name = "customButtonOpen";
+            customButtonOpen.Size = new System.Drawing.Size(187, 29);
+            customButtonOpen.TabIndex = 5;
+            customButtonOpen.Text = "Открыть форму";
+            customButtonOpen.UseVisualStyleBackColor = false;
+            customButtonOpen.Click += customButtonOpen_Click;
             // 
             // customButtonLoadMenu
             // 
@@ -609,27 +641,13 @@
             gridColumn17.Visible = true;
             gridColumn17.VisibleIndex = 2;
             // 
-            // customButtonOpen
-            // 
-            customButtonOpen.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButtonOpen.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonOpen.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOpen.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButtonOpen.Location = new System.Drawing.Point(392, 37);
-            customButtonOpen.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonOpen.Name = "customButtonOpen";
-            customButtonOpen.Size = new System.Drawing.Size(187, 29);
-            customButtonOpen.TabIndex = 5;
-            customButtonOpen.Text = "Открыть форму";
-            customButtonOpen.UseVisualStyleBackColor = false;
-            customButtonOpen.Click += customButtonOpen_Click;
-            // 
             // AdminForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1479, 755);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "AdminForm";
             Text = "Администрирование форм";
@@ -639,6 +657,7 @@
             ((System.ComponentModel.ISupportInitialize)bindingSourceObject).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewUsers).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewObject).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEditCreator).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlForms).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceForms).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewForms).EndInit();
@@ -705,5 +724,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn AddedObj;
         private CustomButton customButtonLoadMenu;
         private CustomButton customButtonOpen;
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCreator;
     }
 }

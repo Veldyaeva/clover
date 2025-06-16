@@ -558,6 +558,10 @@ namespace SewingProduction
             // Получаем ID формы
             _formId = (await formService.GetFormIdByNameAsync(formName)) ?? 0;
 
+            Debug.WriteLine($" _user.name: {_user.UserName}");
+            Debug.WriteLine($" ObjectName: {ObjectName}");
+            Debug.WriteLine($" formName: {formName}");
+            Debug.WriteLine($" _formId: {_formId}");
             if (_user == null || string.IsNullOrEmpty(ObjectName) || _formId <= 0)
             {
                 Debug.WriteLine("[InitializeAccess] Ошибка: не заданы обязательные параметры.");
