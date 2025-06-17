@@ -31,6 +31,7 @@ namespace SewingProduction.form
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SpravBrig));
             nameColumnList = new System.Windows.Forms.BindingSource(components);
             textBoxKod = new System.Windows.Forms.TextBox();
             comboBoxZeh = new System.Windows.Forms.ComboBox();
@@ -451,6 +452,7 @@ namespace SewingProduction.form
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1206, 763);
             Controls.Add(tableLayoutPanel2);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SpravBrig";
             Text = "SpravBrig";

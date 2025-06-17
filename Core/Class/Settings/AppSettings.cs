@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
+using System.Drawing;
 
 namespace SewingProduction.Core.Class.Settings
 {
     public class AppSettings
     {
-        public string Theme { get; set; } = "Ocean";
+        public string Theme { get; set; } = "Gray";
+        public int FontSize { get; set; } = 10;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
     }
 
@@ -95,5 +97,12 @@ namespace SewingProduction.Core.Class.Settings
             }
             return new AppSettings();
         }
+        public static void SetFontSize(int size)
+        {
+            Current.FontSize = size;
+            ThemeManager.UpdateDefaultFont(new Font("Arial", size));
+            Save();
+        }
+
     }
 }

@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RoleColumn));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customGridControlRole = new CustomGridControl();
             gridViewRole = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -447,6 +448,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1264, 662);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "RoleColumn";
             Text = "Адм. Колонки";
             Load += RoleColumn_Load;

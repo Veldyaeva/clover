@@ -23,11 +23,18 @@ namespace SewingProduction.form
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            var current = SettingsManager.Current.Theme;
+            // Тема
+            var currentTheme = SettingsManager.Current.Theme;
             customComboBoxTheme.Items.Clear();
             customComboBoxTheme.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
-            customComboBoxTheme.SelectedItem = current;
+            customComboBoxTheme.SelectedItem = currentTheme;
+
+            // Размер текста
+            customComboBoxSizeText.Items.Clear();
+            customComboBoxSizeText.Items.AddRange(new object[] { 8, 9, 10, 11, 12, 14, 16 });
+            customComboBoxSizeText.SelectedItem = SettingsManager.Current.FontSize;
         }
+
         public interface IDataUpdatableForm
         {
             void UpdateDataInForm();
@@ -45,6 +52,14 @@ namespace SewingProduction.form
 
             ThemeManager.SetTheme(selectedTheme);
             SettingsManager.SetTheme(selectedTheme);
+        }
+        
+        private void customComboBoxSizeText_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(customComboBoxSizeText.SelectedItem?.ToString(), out int fontSize))
+            {
+                SettingsManager.SetFontSize(fontSize);
+            }
         }
     }
 }

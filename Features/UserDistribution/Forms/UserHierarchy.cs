@@ -50,7 +50,7 @@ namespace SewingProduction.form.UserDistribution
                     UserId = row.Field<int>("UserId"),
                     UserName = row.Field<string>("UserName"),
                     CreatorID = row.Field<int>("CreatorID"),
-                    Fio = row.Field<string>("FIO"),
+                    Fio = row.Field<string>("Fio"),
                     Brig = row.Field<string>("Brig"),
                     FioID = row.Table.Columns.Contains("FioID") && row["FioID"] != DBNull.Value ? row.Field<int>("FioID") : 0,
                     BrigID = row.Table.Columns.Contains("BrigID") && row["BrigID"] != DBNull.Value ? row.Field<int>("BrigID") : 0,
@@ -138,20 +138,6 @@ namespace SewingProduction.form.UserDistribution
             }
         }
 
-        private async void customButtonDeleteProfile_Click(object sender, EventArgs e)
-        {
-            var user = gridViewUsers.GetFocusedRow() as UserModel;
-            if (user == null) return;
-
-            string message = "Вы уверены что хотите удалить '" + user.UserName + "' ?";
-            var result = MessageBox.Show(message, "Удалить?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
-            {
-                await _userModelDataService.DeleteAsync(user);
-                Console.WriteLine("удален пользователь, ID " + user.UserID);
-                gridViewUsers.DeleteRow(gridViewUsers.FocusedRowHandle);
-            }
-        }
 
     }
     public class AllProfileDataService
@@ -199,7 +185,9 @@ namespace SewingProduction.form.UserDistribution
                 uh.CreatorID,
                 uh.UserPath,
                 uh.Generation,
-                f.fio AS FIO,
+                uh.FioID,
+                uh.BrigID,
+                f.fio AS Fio,
                 sb.Brig
             FROM
                 UserHierarchy uh
