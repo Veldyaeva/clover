@@ -92,9 +92,6 @@
     <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AdminSprav.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
