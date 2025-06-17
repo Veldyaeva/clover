@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -120,22 +120,29 @@
   <metadata name="bindingBrig.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gridBrig.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="gridBrig.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="gridBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 18</value>
+    <value>407, 22</value>
+  </data>
+  <data name="gridBrig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
   </data>
   <data name="gridBrig.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>404, 909</value>
+    <value>471, 1049</value>
   </data>
   <data name="gridBrig.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>140, 300</value>
+    <value>163, 346</value>
   </data>
   <data name="gridBrig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 616</value>
+    <value>260, 555</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="gridBrig.TabIndex" type="System.Int32, mscorlib">
@@ -145,7 +152,7 @@
     <value>gridBrig</value>
   </data>
   <data name="&gt;&gt;gridBrig.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gridBrig.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -159,17 +166,23 @@
   <data name="gridZeh.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="gridZeh.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
   <data name="gridZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 18</value>
+    <value>4, 22</value>
+  </data>
+  <data name="gridZeh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
   </data>
   <data name="gridZeh.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>569, 909</value>
+    <value>664, 1049</value>
   </data>
   <data name="gridZeh.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>190, 300</value>
+    <value>222, 346</value>
   </data>
   <data name="gridZeh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>367, 616</value>
+    <value>395, 555</value>
   </data>
   <data name="gridZeh.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -178,7 +191,7 @@
     <value>gridZeh</value>
   </data>
   <data name="&gt;&gt;gridZeh.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gridZeh.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -192,17 +205,23 @@
   <data name="gridOborud.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
+  <data name="gridOborud.EmbeddedNavigator.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
   <data name="gridOborud.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 18</value>
+    <value>675, 22</value>
+  </data>
+  <data name="gridOborud.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
   </data>
   <data name="gridOborud.MaximumSize" type="System.Drawing.Size, System.Drawing">
-    <value>940, 909</value>
+    <value>1097, 1049</value>
   </data>
   <data name="gridOborud.MinimumSize" type="System.Drawing.Size, System.Drawing">
-    <value>310, 300</value>
+    <value>362, 346</value>
   </data>
   <data name="gridOborud.Size" type="System.Drawing.Size, System.Drawing">
-    <value>617, 616</value>
+    <value>665, 555</value>
   </data>
   <data name="gridOborud.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -211,7 +230,7 @@
     <value>gridOborud</value>
   </data>
   <data name="&gt;&gt;gridOborud.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.GridControl, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;gridOborud.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -229,10 +248,13 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>624, 0</value>
+    <value>675, 0</value>
+  </data>
+  <data name="label2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="label2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>217, 15</value>
+    <value>217, 19</value>
   </data>
   <data name="label2.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -244,7 +266,7 @@
     <value>label2</value>
   </data>
   <data name="&gt;&gt;label2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;label2.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -262,10 +284,13 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelBrig.Location" type="System.Drawing.Point, System.Drawing">
-    <value>376, 0</value>
+    <value>407, 0</value>
+  </data>
+  <data name="linkLabelBrig.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="linkLabelBrig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 15</value>
+    <value>73, 19</value>
   </data>
   <data name="linkLabelBrig.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -277,7 +302,7 @@
     <value>linkLabelBrig</value>
   </data>
   <data name="&gt;&gt;linkLabelBrig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelBrig.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -295,10 +320,13 @@
     <value>Times New Roman, 12pt, style=Bold</value>
   </data>
   <data name="linkLabelZeh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
+    <value>4, 0</value>
+  </data>
+  <data name="linkLabelZeh.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 0, 4, 0</value>
   </data>
   <data name="linkLabelZeh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>42, 15</value>
+    <value>42, 19</value>
   </data>
   <data name="linkLabelZeh.TabIndex" type="System.Int32, mscorlib">
     <value>37</value>
@@ -310,7 +338,7 @@
     <value>linkLabelZeh</value>
   </data>
   <data name="&gt;&gt;linkLabelZeh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.LinkLabel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;linkLabelZeh.Parent" xml:space="preserve">
     <value>tableLayoutPanel1</value>
@@ -327,11 +355,14 @@
   <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="tableLayoutPanel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
+  </data>
   <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>1244, 637</value>
+    <value>1344, 580</value>
   </data>
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>38</value>
@@ -340,7 +371,7 @@
     <value>tableLayoutPanel1</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.TableLayoutPanel, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Parent" xml:space="preserve">
     <value>$this</value>
@@ -349,7 +380,7 @@
     <value>0</value>
   </data>
   <data name="tableLayoutPanel1.LayoutSettings" type="System.Windows.Forms.TableLayoutSettings, System.Windows.Forms">
-    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabelBrig" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridZeh" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelZeh" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gridOborud" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridBrig" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,30,Percent,20,Percent,50" /&gt;&lt;Rows Styles="Percent,2,39334,Percent,97,60666" /&gt;&lt;/TableLayoutSettings&gt;</value>
+    <value>&lt;?xml version="1.0" encoding="utf-16"?&gt;&lt;TableLayoutSettings&gt;&lt;Controls&gt;&lt;Control Name="linkLabelBrig" Row="0" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;Control Name="label2" Row="0" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridZeh" Row="1" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="linkLabelZeh" Row="0" RowSpan="1" Column="0" ColumnSpan="1" /&gt;&lt;Control Name="gridOborud" Row="1" RowSpan="1" Column="2" ColumnSpan="1" /&gt;&lt;Control Name="gridBrig" Row="1" RowSpan="1" Column="1" ColumnSpan="1" /&gt;&lt;/Controls&gt;&lt;Columns Styles="Percent,30,Percent,20,Percent,50" /&gt;&lt;Rows Styles="Percent,3,275862,Percent,96,72414" /&gt;&lt;/TableLayoutSettings&gt;</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -358,7 +389,7 @@
     <value>39</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>7, 15</value>
   </data>
   <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -367,7 +398,57 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1244, 637</value>
+    <value>1344, 580</value>
+  </data>
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+        Rf9HRUX/R0VF/0dFRf9HRUX/R0VF/0dFRf9HRUX/R0VF/0lHR9ZjYmH/Z2Ri/2BcW/9hXl3/XVpZ/19c
+        W/9gW1r/XlpZ/1xZWP9cWFj/XVpZ/1hVVf9HRUX/R0VF/2VhYP9PTUz/a2hn/5WSkP98d3f/joqI/3Zy
+        cv+Jh4P/dnJy/4WBfv92cnL/h4SB/396ef9HRUX/L240/y5fMP9HRUX/VVJR/3l0cv+3tLH/m5eU/6+r
+        qv+QjIn/qaWi/5CMif+qpqP/kIyJ/6ekov+hlZX/SFxJ/0D/xf8r54n/R0VF/2plZv+HhoL/19PS/7m3
+        s//MyMb/rain/8TAv/+tqKf/x8PC/62op//GxML/uLCw/4yGgv9SsZv/Sp1+/6uenv94c3L/npya////
+        ///n5eX/9vX1/9zb2P/w8O//3NvY//Ly8f/c29j/8vLx/+Hg3//Szcr/18fG/9jIyf/q6OX/mpiV9o2M
+        iv6pp6L/nJeV/5uYlv+Wk4//nJiV/5mXlf+dmZb/mZaU/52Zl/+Wk5D/k4+M/5WRj/+XlJL/oJ2b/29t
+        bP4AAAAAhoKA/9rZ1/+/vLr/vru4/727uP++u7j/vbu4/767uP+9u7j/vr25/8C+u//Avrv/1NLP/4R/
+        fv8AAAAAAAAAAAAAAAChn53/9vX0/+3s6//s6ur/7Orq/+zq6v/s6ur/7Orq/+zq6v/s6un/9vb0/7e1
+        s/8AAAAAAAAAAAAAAAAAAAAAAAAAAJmVk+iioJ7/npya/56cmv+enJr/npya/56cmv+enJr/o6Gf/6Oh
+        n/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAgAEAAMADAADgBwAA//8AAP//AAD//wAA
+</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 3, 4, 3</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Оборудование в бригадах</value>
@@ -376,42 +457,42 @@
     <value>bindingBrig</value>
   </data>
   <data name="&gt;&gt;bindingBrig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gridViewBrig.Name" xml:space="preserve">
     <value>gridViewBrig</value>
   </data>
   <data name="&gt;&gt;gridViewBrig.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingZeh.Name" xml:space="preserve">
     <value>bindingZeh</value>
   </data>
   <data name="&gt;&gt;bindingZeh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gridViewZeh.Name" xml:space="preserve">
     <value>gridViewZeh</value>
   </data>
   <data name="&gt;&gt;gridViewZeh.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;bindingOborud.Name" xml:space="preserve">
     <value>bindingOborud</value>
   </data>
   <data name="&gt;&gt;bindingOborud.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;gridViewOborud.Name" xml:space="preserve">
     <value>gridViewOborud</value>
   </data>
   <data name="&gt;&gt;gridViewOborud.Type" xml:space="preserve">
-    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v22.2, Version=22.2.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>DevExpress.XtraGrid.Views.Grid.GridView, DevExpress.XtraGrid.v24.2, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OborudBrig</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>SewingProduction.CustomForm, SewingProduction, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>SewingProduction.CustomForm, SewingProduction, Culture=neutral, PublicKeyToken=null</value>
   </data>
 </root>

@@ -26,6 +26,51 @@ namespace SewingProduction
         // Переменные для текущей темы
         public static string CurrentTheme { get; private set; }// = "Lavander";
 
+        #region White
+        public static readonly Theme White = new Theme
+        {
+            ButtonBackground = Color.FromArgb(224, 224, 224), // LightGray
+            ButtonTextColor = Color.Black,
+            LabelTextColor = Color.Black,
+            TextBoxBackground = Color.White,
+            TextBoxText = Color.Black,
+            HighlightBackground = Color.FromArgb(200, 200, 200),
+            BandHighlightColor = Color.FromArgb(180, 180, 180),
+            GradientStartColor = Color.FromArgb(255, 255, 255),
+            GradientEndColor = Color.FromArgb(255, 255, 255)
+        };
+        #endregion
+
+        #region Gray
+        public static readonly Theme Gray = new Theme
+        {
+            ButtonBackground = Color.FromArgb(224, 224, 224), // LightGray
+            ButtonTextColor = Color.Black,
+            LabelTextColor = Color.Black,
+            TextBoxBackground = Color.White,
+            TextBoxText = Color.Black,
+            HighlightBackground = Color.FromArgb(200, 200, 200),
+            BandHighlightColor = Color.FromArgb(180, 180, 180),
+            GradientStartColor = Color.FromArgb(240, 240, 240),
+            GradientEndColor = Color.FromArgb(200, 200, 200)
+        };
+        #endregion
+
+        #region Rainbow
+        public static readonly Theme Rainbow = new Theme
+        {
+            ButtonBackground = ColorTranslator.FromHtml("#B388FF"),        // светло-фиолетовый
+            ButtonTextColor = ColorTranslator.FromHtml("#1C1C1C"),         // тёмный текст
+            LabelTextColor = ColorTranslator.FromHtml("#333333"),
+            TextBoxBackground = ColorTranslator.FromHtml("#FFF59D"),       // светло-жёлтый
+            TextBoxText = ColorTranslator.FromHtml("#000000"),             // чёрный текст
+            HighlightBackground = ColorTranslator.FromHtml("#80DEEA"),     // бирюзовый
+            BandHighlightColor = ColorTranslator.FromHtml("#81C784"),      // зелёный
+            GradientStartColor = ColorTranslator.FromHtml("#FF8A80"),      // розово-красный
+            GradientEndColor = ColorTranslator.FromHtml("#82B1FF")         // голубой
+        };
+        #endregion
+
         #region Blue
         public static readonly Theme Blue = new Theme
         {
@@ -278,7 +323,7 @@ namespace SewingProduction
         static ThemeManager() { LoadTheme(); }
         public static List<string> GetAvailableThemes()
         {
-            return new List<string> { "Gold", "Lavander", "Peach", "Sea", "Green", "Pink", "Orange", "Blue", "Wine", "Sky", "Mint", "Sand", "Lilac", "Sunset", "Forest", "Ocean" }; // Все доступные темы
+            return new List<string> { "Gray", "White", "Rainbow", "Gold", "Lavander", "Peach", "Sea", "Green", "Pink", "Orange", "Blue", "Wine", "Sky", "Mint", "Sand", "Lilac", "Sunset", "Forest", "Ocean" }; // Все доступные темы
         }
 
         public static void SetTheme(string themeName)
@@ -286,6 +331,12 @@ namespace SewingProduction
             CurrentTheme = themeName;
             switch (themeName)
             {
+                case "White":
+                    ActiveTheme = White;
+                    break;
+                case "Rainbow":
+                    ActiveTheme = Rainbow;
+                    break;
                 case "Gold":
                     ActiveTheme = Gold;
                     break;
@@ -333,6 +384,9 @@ namespace SewingProduction
                     break;
                 case "Ocean":
                     ActiveTheme = Ocean;
+                    break;
+                default:
+                    ActiveTheme = Gray;
                     break;
             }
             ThemeChanged?.Invoke(); // Уведомление всех подписчиков

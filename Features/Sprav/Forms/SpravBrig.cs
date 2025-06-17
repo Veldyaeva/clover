@@ -53,8 +53,8 @@ namespace SewingProduction.form
         }
         private void SpravBrig_Load(object sender, EventArgs e)
         {
-            //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
-            gridControlSprav.InitializeAccess(_user, this.Name);
+            gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
+            //gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);
             _serviceBroker.StartBroker();
