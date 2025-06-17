@@ -200,8 +200,10 @@ namespace SewingProduction.form
                         // текст = колонке
                         labels[i].Text = gridView.Columns[i].Caption;
                         // Делаем метку видимой
-                        labels[i].Visible = true;
-                        textBoxs[i].Visible = true; 
+                        //labels[i].Visible = true;
+                        //textBoxs[i].Visible = true;
+                        labels[i].Visible = gridView.Columns[i].Visible;
+                        textBoxs[i].Visible = gridView.Columns[i].Visible;
                     }
                     else
                     {
