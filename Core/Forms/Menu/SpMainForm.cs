@@ -177,7 +177,7 @@ namespace SewingProduction
         
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TeamWork(), sender);
+            //OpenForm(new TeamWork(), sender);
         }
 
         private void toolStripComboBox1_Click(object sender, EventArgs e)

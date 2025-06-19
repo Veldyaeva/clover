@@ -10,15 +10,13 @@
 
   <ItemGroup>
     <Compile Remove="Core\_Class\**" />
-    <Compile Remove="Features\Sprav\Helpers\**" />
-    <Compile Remove="Features\Sprav\Models\**" />
+    <Compile Remove="Features\TeamWork\_Models\**" />
     <EmbeddedResource Remove="Core\_Class\**" />
-    <EmbeddedResource Remove="Features\Sprav\Helpers\**" />
-    <EmbeddedResource Remove="Features\Sprav\Models\**" />
+    <EmbeddedResource Remove="Features\TeamWork\_Models\**" />
     <None Remove="Core\_Class\**" />
-    <None Remove="Features\Sprav\Helpers\**" />
-    <None Remove="Features\Sprav\Models\**" />
+    <None Remove="Features\TeamWork\_Models\**" />
     <Page Remove="Core\_Class\**" />
+    <Page Remove="Features\TeamWork\_Models\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,12 +25,23 @@
     <Compile Remove="Core\Helpers\TWGridHelper.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
+    <Compile Remove="Features\TeamWork\Forms\_TeamWork.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\NormRaszManager.cs" />
     <Compile Remove="Form1.cs" />
     <Compile Remove="Form1.Designer.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Remove="Core\Class\CustomControls.resx" />
+    <EmbeddedResource Remove="Features\TeamWork\Forms\TeamWork_ArchAndCopy.resx" />
+    <EmbeddedResource Remove="Form1.resx" />
+    <EmbeddedResource Remove="Report\PostReportFio.resx" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Remove="Features\sewingproduction.zip" />
@@ -77,6 +86,8 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\Sprav\Models\" />
+    <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
