@@ -130,6 +130,13 @@ namespace SewingProduction.form.UserDistribution
             //this.Close();
         }
 
+        private void customActionButtonNon_Click(object sender, EventArgs e)
+        {
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new TestForm1(_user));
+            }
+        }
     }
     public class UserProfileDataService
     {

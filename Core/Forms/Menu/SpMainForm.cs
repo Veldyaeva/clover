@@ -18,12 +18,12 @@ using System.Windows.Forms;
 using DevExpress.XtraTabbedMdi;
 using Newtonsoft.Json;
 using System.IO;
-using SewingProduction.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Forms;
 
 
 //nemain
@@ -36,8 +36,8 @@ namespace SewingProduction
         private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems; 
         private string loginHistoryFile = "settings.json";
-        private Dictionary<string, Form> openedForms = new Dictionary<string, Form>(); 
-        private FormManager _formManager;
+        //private Dictionary<string, Form> openedForms = new Dictionary<string, Form>(); 
+        public FormManager _formManager;
         private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
 
         public SpMainForm()
@@ -219,7 +219,8 @@ namespace SewingProduction
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var helpForm = new HelpForm(this._formManager);
+            helpForm.Show();
         }
         #endregion
 

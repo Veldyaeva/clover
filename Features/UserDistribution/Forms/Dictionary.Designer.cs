@@ -53,6 +53,7 @@
             customLabelAddTable = new CustomLabel();
             customButtonDeleteTable = new CustomButton();
             customButtonDeleteColumn = new CustomButton();
+            customButtonAddButton = new CustomButton();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlColumn).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).BeginInit();
@@ -79,6 +80,7 @@
             tableLayoutPanel1.Controls.Add(customLabelAddTable, 4, 1);
             tableLayoutPanel1.Controls.Add(customButtonDeleteTable, 4, 4);
             tableLayoutPanel1.Controls.Add(customButtonDeleteColumn, 4, 15);
+            tableLayoutPanel1.Controls.Add(customButtonAddButton, 4, 8);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -324,6 +326,20 @@
             customButtonDeleteColumn.UseVisualStyleBackColor = false;
             customButtonDeleteColumn.Click += customButtonDeleteColumn_Click;
             // 
+            // customButtonAddButton
+            // 
+            customButtonAddButton.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            customButtonAddButton.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAddButton.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAddButton.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            customButtonAddButton.Location = new System.Drawing.Point(1123, 331);
+            customButtonAddButton.Name = "customButtonAddButton";
+            customButtonAddButton.Size = new System.Drawing.Size(138, 35);
+            customButtonAddButton.TabIndex = 10;
+            customButtonAddButton.Text = "Добавить кнопки для справочника";
+            customButtonAddButton.UseVisualStyleBackColor = false;
+            customButtonAddButton.Click += customButtonAddButton_Click;
+            // 
             // Dictionary
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -369,5 +385,6 @@
         private CustomButton customButtonOpen;
         private CustomButton customButtonDeleteTable;
         private CustomButton customButtonDeleteColumn;
+        private CustomButton customButtonAddButton;
     }
 }
