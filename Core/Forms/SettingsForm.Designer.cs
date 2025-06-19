@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             customLabelTheme = new CustomLabel();
             customComboBoxTheme = new CustomComboBox();
             customComboBoxSizeText = new CustomComboBox();
@@ -95,6 +96,7 @@
             Controls.Add(customLabelSizeText);
             Controls.Add(customComboBoxTheme);
             Controls.Add(customLabelTheme);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "SettingsForm";
             Text = "SettingsForm";

@@ -36,12 +36,17 @@
             RoleID = new DevExpress.XtraGrid.Columns.GridColumn();
             RoleName = new DevExpress.XtraGrid.Columns.GridColumn();
             Description = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlTable = new CustomGridControl();
-            bindingSourceTable = new System.Windows.Forms.BindingSource(components);
-            gridViewTable = new DevExpress.XtraGrid.Views.Grid.GridView();
-            IdAtn = new DevExpress.XtraGrid.Columns.GridColumn();
-            TableName = new DevExpress.XtraGrid.Columns.GridColumn();
-            TableNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
+            customGridControlObject = new CustomGridControl();
+            gridViewObject = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ObjectID = new DevExpress.XtraGrid.Columns.GridColumn();
+            ObjectName = new DevExpress.XtraGrid.Columns.GridColumn();
+            ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
+            ObjectType = new DevExpress.XtraGrid.Columns.GridColumn();
+            customGridControlForm = new CustomGridControl();
+            gridViewForm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ProjectFormsID = new DevExpress.XtraGrid.Columns.GridColumn();
+            NameForm = new DevExpress.XtraGrid.Columns.GridColumn();
+            NameFormRus = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlColumn = new CustomGridControl();
             bindingSourceColumn = new System.Windows.Forms.BindingSource(components);
             gridViewColumn = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -54,34 +59,31 @@
             Readonly = new DevExpress.XtraGrid.Columns.GridColumn();
             ModeName = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemComboBoxColumnMode = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
-            customGridControlObject = new CustomGridControl();
-            gridViewObject = new DevExpress.XtraGrid.Views.Grid.GridView();
-            ObjectID = new DevExpress.XtraGrid.Columns.GridColumn();
-            ObjectName = new DevExpress.XtraGrid.Columns.GridColumn();
-            ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
-            ObjectType = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlForm = new CustomGridControl();
-            gridViewForm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            ProjectFormsID = new DevExpress.XtraGrid.Columns.GridColumn();
-            NameForm = new DevExpress.XtraGrid.Columns.GridColumn();
-            NameFormRus = new DevExpress.XtraGrid.Columns.GridColumn();
+            bindingSourceButton = new System.Windows.Forms.BindingSource(components);
+            customGridControlTable = new CustomGridControl();
+            bindingSourceTable = new System.Windows.Forms.BindingSource(components);
+            gridViewTable = new DevExpress.XtraGrid.Views.Grid.GridView();
+            IdAtn = new DevExpress.XtraGrid.Columns.GridColumn();
+            TableName = new DevExpress.XtraGrid.Columns.GridColumn();
+            TableNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
             bindingSourceRole = new System.Windows.Forms.BindingSource(components);
             bindingSourceForm = new System.Windows.Forms.BindingSource(components);
             bindingSourceObject = new System.Windows.Forms.BindingSource(components);
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlRole).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRole).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControlTable).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceTable).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewTable).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControlColumn).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewColumn).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxColumnMode).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlObject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewObject).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlForm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewForm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlColumn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewColumn).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxColumnMode).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceButton).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlTable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceTable).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTable).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceRole).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceForm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceObject).BeginInit();
@@ -97,16 +99,16 @@
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.666666F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.666666F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.666666F));
+            tableLayoutPanel1.Controls.Add(customGridControlColumn, 2, 7);
             tableLayoutPanel1.Controls.Add(customGridControlRole, 0, 0);
-            tableLayoutPanel1.Controls.Add(customGridControlTable, 0, 8);
-            tableLayoutPanel1.Controls.Add(customGridControlColumn, 2, 8);
             tableLayoutPanel1.Controls.Add(customGridControlObject, 4, 0);
             tableLayoutPanel1.Controls.Add(customGridControlForm, 2, 0);
+            tableLayoutPanel1.Controls.Add(customGridControlTable, 0, 7);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 16;
+            tableLayoutPanel1.RowCount = 15;
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
@@ -122,7 +124,6 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.24980545F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.25293F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1264, 662);
             tableLayoutPanel1.TabIndex = 4;
             // 
@@ -135,7 +136,7 @@
             customGridControlRole.MainView = gridViewRole;
             customGridControlRole.Name = "customGridControlRole";
             tableLayoutPanel1.SetRowSpan(customGridControlRole, 7);
-            customGridControlRole.Size = new System.Drawing.Size(414, 281);
+            customGridControlRole.Size = new System.Drawing.Size(414, 302);
             customGridControlRole.TabIndex = 11;
             customGridControlRole.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRole });
             // 
@@ -176,57 +177,114 @@
             Description.VisibleIndex = 2;
             Description.Width = 196;
             // 
-            // customGridControlTable
+            // customGridControlObject
             // 
-            tableLayoutPanel1.SetColumnSpan(customGridControlTable, 2);
-            customGridControlTable.DataSource = bindingSourceTable;
-            customGridControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGridControlTable.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlTable.Location = new System.Drawing.Point(3, 331);
-            customGridControlTable.MainView = gridViewTable;
-            customGridControlTable.Name = "customGridControlTable";
-            tableLayoutPanel1.SetRowSpan(customGridControlTable, 8);
-            customGridControlTable.Size = new System.Drawing.Size(414, 328);
-            customGridControlTable.TabIndex = 1;
-            customGridControlTable.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable });
+            tableLayoutPanel1.SetColumnSpan(customGridControlObject, 2);
+            customGridControlObject.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGridControlObject.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlObject.Location = new System.Drawing.Point(843, 3);
+            customGridControlObject.MainView = gridViewObject;
+            customGridControlObject.Name = "customGridControlObject";
+            tableLayoutPanel1.SetRowSpan(customGridControlObject, 7);
+            customGridControlObject.Size = new System.Drawing.Size(418, 302);
+            customGridControlObject.TabIndex = 5;
+            customGridControlObject.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewObject });
             // 
-            // gridViewTable
+            // gridViewObject
             // 
-            gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
-            gridViewTable.GridControl = customGridControlTable;
-            gridViewTable.Name = "gridViewTable";
-            gridViewTable.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            gridViewTable.OptionsEditForm.EditFormColumnCount = 1;
-            gridViewTable.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewObject.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridViewObject.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, ObjectNameRus, ObjectType });
+            gridViewObject.GridControl = customGridControlObject;
+            gridViewObject.Name = "gridViewObject";
+            gridViewObject.OptionsBehavior.Editable = false;
+            gridViewObject.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // IdAtn
+            // ObjectID
             // 
-            IdAtn.Caption = "Ид таблицы";
-            IdAtn.FieldName = "id_atn";
-            IdAtn.Name = "IdAtn";
-            IdAtn.Visible = true;
-            IdAtn.VisibleIndex = 0;
-            IdAtn.Width = 99;
+            ObjectID.Caption = "ИД объекта";
+            ObjectID.FieldName = "ObjectID";
+            ObjectID.Name = "ObjectID";
+            ObjectID.Visible = true;
+            ObjectID.VisibleIndex = 0;
+            ObjectID.Width = 67;
             // 
-            // TableName
+            // ObjectName
             // 
-            TableName.Caption = "Название SQL";
-            TableName.FieldName = "name";
-            TableName.Name = "TableName";
-            TableName.Visible = true;
-            TableName.VisibleIndex = 1;
-            TableName.Width = 399;
+            ObjectName.Caption = "Имя объекта";
+            ObjectName.FieldName = "ObjectName";
+            ObjectName.Name = "ObjectName";
+            ObjectName.Visible = true;
+            ObjectName.VisibleIndex = 1;
+            ObjectName.Width = 106;
             // 
-            // TableNameRus
+            // ObjectNameRus
             // 
-            TableNameRus.Caption = "Русское название";
-            TableNameRus.FieldName = "name_rus";
-            TableNameRus.Name = "TableNameRus";
-            TableNameRus.Visible = true;
-            TableNameRus.VisibleIndex = 2;
-            TableNameRus.Width = 479;
+            ObjectNameRus.Caption = "Русское имя";
+            ObjectNameRus.FieldName = "ObjectNameRus";
+            ObjectNameRus.Name = "ObjectNameRus";
+            ObjectNameRus.Visible = true;
+            ObjectNameRus.VisibleIndex = 2;
+            ObjectNameRus.Width = 106;
+            // 
+            // ObjectType
+            // 
+            ObjectType.Caption = "Тип объекта";
+            ObjectType.FieldName = "ObjectType";
+            ObjectType.Name = "ObjectType";
+            ObjectType.Visible = true;
+            ObjectType.VisibleIndex = 3;
+            ObjectType.Width = 110;
+            // 
+            // customGridControlForm
+            // 
+            tableLayoutPanel1.SetColumnSpan(customGridControlForm, 2);
+            customGridControlForm.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGridControlForm.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlForm.Location = new System.Drawing.Point(423, 3);
+            customGridControlForm.MainView = gridViewForm;
+            customGridControlForm.Name = "customGridControlForm";
+            tableLayoutPanel1.SetRowSpan(customGridControlForm, 7);
+            customGridControlForm.Size = new System.Drawing.Size(414, 302);
+            customGridControlForm.TabIndex = 4;
+            customGridControlForm.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewForm });
+            // 
+            // gridViewForm
+            // 
+            gridViewForm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridViewForm.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, NameFormRus });
+            gridViewForm.GridControl = customGridControlForm;
+            gridViewForm.Name = "gridViewForm";
+            gridViewForm.OptionsBehavior.Editable = false;
+            gridViewForm.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // ProjectFormsID
+            // 
+            ProjectFormsID.Caption = "ИД формы";
+            ProjectFormsID.FieldName = "ProjectFormsID";
+            ProjectFormsID.Name = "ProjectFormsID";
+            ProjectFormsID.Visible = true;
+            ProjectFormsID.VisibleIndex = 0;
+            ProjectFormsID.Width = 60;
+            // 
+            // NameForm
+            // 
+            NameForm.Caption = "Имя формы";
+            NameForm.FieldName = "NameForm";
+            NameForm.Name = "NameForm";
+            NameForm.Visible = true;
+            NameForm.VisibleIndex = 1;
+            NameForm.Width = 162;
+            // 
+            // NameFormRus
+            // 
+            NameFormRus.Caption = "Русское имя";
+            NameFormRus.FieldName = "NameFormRus";
+            NameFormRus.Name = "NameFormRus";
+            NameFormRus.Visible = true;
+            NameFormRus.VisibleIndex = 2;
+            NameFormRus.Width = 167;
             // 
             // customGridControlColumn
             // 
@@ -234,12 +292,12 @@
             customGridControlColumn.DataSource = bindingSourceColumn;
             customGridControlColumn.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlColumn.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlColumn.Location = new System.Drawing.Point(423, 331);
+            customGridControlColumn.Location = new System.Drawing.Point(423, 311);
             customGridControlColumn.MainView = gridViewColumn;
             customGridControlColumn.Name = "customGridControlColumn";
             customGridControlColumn.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemComboBoxColumnMode });
             tableLayoutPanel1.SetRowSpan(customGridControlColumn, 8);
-            customGridControlColumn.Size = new System.Drawing.Size(838, 328);
+            customGridControlColumn.Size = new System.Drawing.Size(838, 348);
             customGridControlColumn.TabIndex = 3;
             customGridControlColumn.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewColumn });
             // 
@@ -333,114 +391,57 @@
             repositoryItemComboBoxColumnMode.Items.AddRange(new object[] { "Нет доступа", "Просмотр", "Редактор" });
             repositoryItemComboBoxColumnMode.Name = "repositoryItemComboBoxColumnMode";
             // 
-            // customGridControlObject
+            // customGridControlTable
             // 
-            tableLayoutPanel1.SetColumnSpan(customGridControlObject, 2);
-            customGridControlObject.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGridControlObject.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlObject.Location = new System.Drawing.Point(843, 3);
-            customGridControlObject.MainView = gridViewObject;
-            customGridControlObject.Name = "customGridControlObject";
-            tableLayoutPanel1.SetRowSpan(customGridControlObject, 7);
-            customGridControlObject.Size = new System.Drawing.Size(418, 281);
-            customGridControlObject.TabIndex = 5;
-            customGridControlObject.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewObject });
+            tableLayoutPanel1.SetColumnSpan(customGridControlTable, 2);
+            customGridControlTable.DataSource = bindingSourceTable;
+            customGridControlTable.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGridControlTable.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControlTable.Location = new System.Drawing.Point(3, 311);
+            customGridControlTable.MainView = gridViewTable;
+            customGridControlTable.Name = "customGridControlTable";
+            tableLayoutPanel1.SetRowSpan(customGridControlTable, 8);
+            customGridControlTable.Size = new System.Drawing.Size(414, 348);
+            customGridControlTable.TabIndex = 1;
+            customGridControlTable.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTable });
             // 
-            // gridViewObject
+            // gridViewTable
             // 
-            gridViewObject.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            gridViewObject.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, ObjectNameRus, ObjectType });
-            gridViewObject.GridControl = customGridControlObject;
-            gridViewObject.Name = "gridViewObject";
-            gridViewObject.OptionsBehavior.Editable = false;
-            gridViewObject.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewTable.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridViewTable.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewTable.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { IdAtn, TableName, TableNameRus });
+            gridViewTable.GridControl = customGridControlTable;
+            gridViewTable.Name = "gridViewTable";
+            gridViewTable.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewTable.OptionsEditForm.EditFormColumnCount = 1;
+            gridViewTable.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // ObjectID
+            // IdAtn
             // 
-            ObjectID.Caption = "ИД объекта";
-            ObjectID.FieldName = "ObjectID";
-            ObjectID.Name = "ObjectID";
-            ObjectID.Visible = true;
-            ObjectID.VisibleIndex = 0;
-            ObjectID.Width = 67;
+            IdAtn.Caption = "Ид таблицы";
+            IdAtn.FieldName = "id_atn";
+            IdAtn.Name = "IdAtn";
+            IdAtn.Visible = true;
+            IdAtn.VisibleIndex = 0;
+            IdAtn.Width = 99;
             // 
-            // ObjectName
+            // TableName
             // 
-            ObjectName.Caption = "Имя объекта";
-            ObjectName.FieldName = "ObjectName";
-            ObjectName.Name = "ObjectName";
-            ObjectName.Visible = true;
-            ObjectName.VisibleIndex = 1;
-            ObjectName.Width = 106;
+            TableName.Caption = "Название SQL";
+            TableName.FieldName = "name";
+            TableName.Name = "TableName";
+            TableName.Visible = true;
+            TableName.VisibleIndex = 1;
+            TableName.Width = 399;
             // 
-            // ObjectNameRus
+            // TableNameRus
             // 
-            ObjectNameRus.Caption = "Русское имя";
-            ObjectNameRus.FieldName = "ObjectNameRus";
-            ObjectNameRus.Name = "ObjectNameRus";
-            ObjectNameRus.Visible = true;
-            ObjectNameRus.VisibleIndex = 2;
-            ObjectNameRus.Width = 106;
-            // 
-            // ObjectType
-            // 
-            ObjectType.Caption = "Тип объекта";
-            ObjectType.FieldName = "ObjectType";
-            ObjectType.Name = "ObjectType";
-            ObjectType.Visible = true;
-            ObjectType.VisibleIndex = 3;
-            ObjectType.Width = 110;
-            // 
-            // customGridControlForm
-            // 
-            tableLayoutPanel1.SetColumnSpan(customGridControlForm, 2);
-            customGridControlForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGridControlForm.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlForm.Location = new System.Drawing.Point(423, 3);
-            customGridControlForm.MainView = gridViewForm;
-            customGridControlForm.Name = "customGridControlForm";
-            tableLayoutPanel1.SetRowSpan(customGridControlForm, 7);
-            customGridControlForm.Size = new System.Drawing.Size(414, 281);
-            customGridControlForm.TabIndex = 4;
-            customGridControlForm.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewForm });
-            // 
-            // gridViewForm
-            // 
-            gridViewForm.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            gridViewForm.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewForm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, NameFormRus });
-            gridViewForm.GridControl = customGridControlForm;
-            gridViewForm.Name = "gridViewForm";
-            gridViewForm.OptionsBehavior.Editable = false;
-            gridViewForm.OptionsView.EnableAppearanceEvenRow = true;
-            // 
-            // ProjectFormsID
-            // 
-            ProjectFormsID.Caption = "ИД формы";
-            ProjectFormsID.FieldName = "ProjectFormsID";
-            ProjectFormsID.Name = "ProjectFormsID";
-            ProjectFormsID.Visible = true;
-            ProjectFormsID.VisibleIndex = 0;
-            ProjectFormsID.Width = 60;
-            // 
-            // NameForm
-            // 
-            NameForm.Caption = "Имя формы";
-            NameForm.FieldName = "NameForm";
-            NameForm.Name = "NameForm";
-            NameForm.Visible = true;
-            NameForm.VisibleIndex = 1;
-            NameForm.Width = 162;
-            // 
-            // NameFormRus
-            // 
-            NameFormRus.Caption = "Русское имя";
-            NameFormRus.FieldName = "NameFormRus";
-            NameFormRus.Name = "NameFormRus";
-            NameFormRus.Visible = true;
-            NameFormRus.VisibleIndex = 2;
-            NameFormRus.Width = 167;
+            TableNameRus.Caption = "Русское название";
+            TableNameRus.FieldName = "name_rus";
+            TableNameRus.Name = "TableNameRus";
+            TableNameRus.Visible = true;
+            TableNameRus.VisibleIndex = 2;
+            TableNameRus.Width = 479;
             // 
             // RoleColumn
             // 
@@ -455,17 +456,18 @@
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customGridControlRole).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRole).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControlTable).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceTable).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewTable).EndInit();
-            ((System.ComponentModel.ISupportInitialize)customGridControlColumn).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewColumn).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxColumnMode).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlObject).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewObject).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlForm).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewForm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlColumn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceColumn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewColumn).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxColumnMode).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceButton).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControlTable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceTable).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTable).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceRole).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceForm).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceObject).EndInit();
@@ -512,5 +514,6 @@
         private System.Windows.Forms.BindingSource bindingSourceForm;
         private System.Windows.Forms.BindingSource bindingSourceObject;
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxColumnMode;
+        private System.Windows.Forms.BindingSource bindingSourceButton;
     }
 }

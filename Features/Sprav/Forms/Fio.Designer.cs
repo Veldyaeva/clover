@@ -1676,7 +1676,7 @@
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Fio";
-            Text = "Fio";
+            Text = "Работники";
             Load += Fio_Load;
             tableLayoutPanelAll.ResumeLayout(false);
             tableLayoutPanel4.ResumeLayout(false);

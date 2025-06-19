@@ -83,7 +83,7 @@
             gridViewUsers.DetailHeight = 404;
             gridViewUsers.GridControl = customGridControlAllProfile;
             gridViewUsers.Name = "gridViewUsers";
-            gridViewUsers.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewUsers.OptionsBehavior.Editable = false;
             gridViewUsers.OptionsDetail.SmartDetailHeight = true;
             gridViewUsers.OptionsEditForm.EditFormColumnCount = 1;
             gridViewUsers.OptionsEditForm.PopupEditFormWidth = 933;

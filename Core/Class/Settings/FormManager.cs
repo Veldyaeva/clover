@@ -79,7 +79,10 @@ namespace SewingProduction.Core.Class.Settings
         {
             SettingsManager.SetOpenTabs(_user.UserName, _openedForms.Keys.ToList());
         }
-
+        public ToolStripMenuItem GetMenuItemByName(string name)
+        {
+            return FindMenuItemByName(_menuStrip.Items, name);
+        }
         private ToolStripMenuItem FindMenuItemByName(ToolStripItemCollection items, string name)
         {
             foreach (ToolStripItem item in items)

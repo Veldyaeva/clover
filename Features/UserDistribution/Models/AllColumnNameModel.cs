@@ -174,19 +174,31 @@ namespace SewingProduction.Features.UserDistribution.Models
         {
             string query = @"
             INSERT INTO dbo.all_column_name (id_atn, ordinal_position, name, name_rus, data_type, readonly)
-            SELECT 
-                @id_atn,
-                ORDINAL_POSITION,
-                COLUMN_NAME,
-                COLUMN_NAME,
-                DATA_TYPE,
-                0
-            FROM INFORMATION_SCHEMA.COLUMNS AS cols
-            WHERE TABLE_NAME = @tableName
-            AND NOT EXISTS (
-                SELECT 1 FROM all_column_name AS acn
-                WHERE acn.id_atn = @id_atn AND acn.name = cols.COLUMN_NAME
-            )";
+                SELECT 
+                    @id_atn,
+                    cols.ORDINAL_POSITION,
+                    cols.COLUMN_NAME,
+                    cols.COLUMN_NAME,
+                    cols.DATA_TYPE,
+                    CASE 
+                        WHEN tc.CONSTRAINT_TYPE = 'PRIMARY KEY' THEN 1 
+                        ELSE 0 
+                    END AS readonly
+                FROM INFORMATION_SCHEMA.COLUMNS AS cols
+                LEFT JOIN INFORMATION_SCHEMA.KEY_COLUMN_USAGE AS kcu 
+                    ON cols.TABLE_NAME = kcu.TABLE_NAME 
+                    AND cols.COLUMN_NAME = kcu.COLUMN_NAME 
+                    AND cols.TABLE_SCHEMA = kcu.TABLE_SCHEMA
+                LEFT JOIN INFORMATION_SCHEMA.TABLE_CONSTRAINTS AS tc 
+                    ON kcu.CONSTRAINT_NAME = tc.CONSTRAINT_NAME 
+                    AND tc.CONSTRAINT_TYPE = 'PRIMARY KEY'
+                    AND tc.TABLE_NAME = cols.TABLE_NAME
+                    AND tc.TABLE_SCHEMA = cols.TABLE_SCHEMA
+                WHERE cols.TABLE_NAME = @tableName
+                  AND NOT EXISTS (
+                      SELECT 1 FROM all_column_name AS acn
+                      WHERE acn.id_atn = @id_atn AND acn.name = cols.COLUMN_NAME
+                  )";
 
             await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object>
             {
@@ -262,6 +274,21 @@ namespace SewingProduction.Features.UserDistribution.Models
                 TableID = tableId
             });
         }
+
+        public async Task InsertButtonForSprav(int id_atn)
+        {
+            string query = @"
+            INSERT INTO dbo.all_column_name (id_atn, ordinal_position, name, name_rus, data_type, readonly)
+            Values (   @id_atn,    0,    'simpleButtonAdd',    'кнопка добавить запись',    'button',    0),
+                  (    @id_atn,    0,    'simpleButtonDel',    'кнопка удалить запись',    'button',    0),
+                  (    @id_atn,    0,    'simpleButtonRed',    'кнопка редактировать запись',    'button',    0)";
+
+            await _dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object>
+            {
+                { "@id_atn", id_atn }
+            });
+        }
+
     }
 }
 

@@ -47,7 +47,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             bindingSourceTable.DataSource = _tables;
         }
 
-
         private async Task LoadColumnsFromSelectedTableAsync()
         {
             if (bindingSourceTable.Current is AllTableNameModel selectedTable)
@@ -206,6 +205,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
         }
 
+        private async void customButtonAddButton_Click(object sender, EventArgs e)
+        {
+            if (bindingSourceTable.Current is not AllTableNameModel selectedTable)
+                return;
+            await _columnService.InsertButtonForSprav(selectedTable.id_atn);
+            await LoadColumnsFromSelectedTableAsync();
+        }
     }
 
 }

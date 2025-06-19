@@ -52,6 +52,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customGridControlRole.DataSource = bindingSourceRole;
             customGridControlTable.DataSource = bindingSourceTable;
             customGridControlColumn.DataSource = bindingSourceColumn;
+            //customGridControlButton.DataSource = bindingSourceButton;
         }
 
         private async void RoleColumn_Load(object sender, EventArgs e)
@@ -94,12 +95,27 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _columns = await _columnService.GetListColumnWithModeFromTable(role.RoleID, obj.ObjectID, table.id_atn);
             bindingSourceColumn.DataSource = _columns;
         }
+        //private async Task LoadButtonsAsync()
+        //{
+        //    if (gridViewRole.GetFocusedRow() is not RoleModel role ||
+        //        gridViewObject.GetFocusedRow() is not ObjectModel obj)
+        //        return;
 
+        //    var allControls = await _columnService.GetListColumnWithModeFromTable(role.RoleID, obj.ObjectID, 0);
+        //    var buttonControls = allControls
+        //        .Where(c => c.data_type == "button")
+        //        .ToList();
+
+        //    bindingSourceButton.DataSource = buttonControls;
+        //}
 
         private async Task LoadColumnsFromSelectedTableAsync()
         {
             if (bindingSourceTable.Current is AllTableNameModel selectedTable)
+            {
                 await LoadColumnsAsync();
+                //await LoadButtonsAsync(); 
+            }
         }
         private async Task LoadObjectsFromSelectedFormAsync()
         {
@@ -144,13 +160,34 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 _ => 0
             };
 
+            if (column.Readonly == 1 && modeId > 1)
+            {
+                MessageBox.Show($"Столбец \"{column.name}\" доступен только для чтения. Установлен режим 'Просмотр'.", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                modeId = 1;
+                editor.SelectedIndex = 1;
+            }
+
             if (gridViewRole.GetFocusedRow() is not RoleModel role ||
                 gridViewObject.GetFocusedRow() is not ObjectModel obj)
                 return;
 
             await _columnService.SaveRoleColumnAccessAsync(role.RoleID, obj.ObjectID, column.id_acn, modeId);
         }
+        //private async void RepositoryItemCheckEditButton_EditValueChanged(object sender, EventArgs e)
+        //{
+        //    if (gridViewButton.FocusedRowHandle < 0) return;
 
+        //    var row = gridViewButton.GetRow(gridViewButton.FocusedRowHandle) as AllColumnNameModel;
+        //    if (row == null) return;
+
+        //    if (gridViewRole.GetFocusedRow() is not RoleModel role ||
+        //        gridViewObject.GetFocusedRow() is not ObjectModel obj)
+        //        return;
+
+        //    int modeId = Convert.ToInt32(gridViewButton.GetRowCellValue(gridViewButton.FocusedRowHandle, "ModeID"));
+
+        //    await _columnService.SaveRoleColumnAccessAsync(role.RoleID, obj.ObjectID, row.id_acn, modeId);
+        //}
     }
 
 }

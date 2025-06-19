@@ -292,6 +292,7 @@
             customActionButtonNon.TabIndex = 12;
             customActionButtonNon.Text = "Не нажимать";
             customActionButtonNon.UseVisualStyleBackColor = false;
+            customActionButtonNon.Click += customActionButtonNon_Click;
             // 
             // tableLayoutPanelButton
             // 
@@ -526,11 +527,11 @@
             // 
             // customLabel1
             // 
-            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(61, 9);
+            customLabel1.Location = new System.Drawing.Point(118, 9);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new System.Drawing.Size(110, 16);
@@ -539,11 +540,11 @@
             // 
             // customLabel2
             // 
-            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel2.AutoSize = true;
             customLabel2.Font = new System.Drawing.Font("Arial", 10F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(65, 44);
+            customLabel2.Location = new System.Drawing.Point(127, 44);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new System.Drawing.Size(101, 16);
@@ -552,22 +553,24 @@
             // 
             // customTextBoxNewPassword2
             // 
+            customTextBoxNewPassword2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customTextBoxNewPassword2.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword2.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxNewPassword2.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxNewPassword2.Location = new System.Drawing.Point(236, 73);
+            customTextBoxNewPassword2.Location = new System.Drawing.Point(236, 76);
             customTextBoxNewPassword2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxNewPassword2.MaximumSize = new System.Drawing.Size(224, 0);
             customTextBoxNewPassword2.Name = "customTextBoxNewPassword2";
             customTextBoxNewPassword2.Size = new System.Drawing.Size(224, 23);
             customTextBoxNewPassword2.TabIndex = 6;
             // 
             // customLabel3
             // 
-            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             customLabel3.AutoSize = true;
             customLabel3.Font = new System.Drawing.Font("Arial", 10F);
             customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(51, 79);
+            customLabel3.Location = new System.Drawing.Point(99, 79);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new System.Drawing.Size(129, 16);
@@ -576,22 +579,26 @@
             // 
             // customTextBoxNewPassword
             // 
+            customTextBoxNewPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customTextBoxNewPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxNewPassword.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxNewPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxNewPassword.Location = new System.Drawing.Point(236, 38);
+            customTextBoxNewPassword.Location = new System.Drawing.Point(236, 41);
             customTextBoxNewPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxNewPassword.MaximumSize = new System.Drawing.Size(224, 0);
             customTextBoxNewPassword.Name = "customTextBoxNewPassword";
             customTextBoxNewPassword.Size = new System.Drawing.Size(224, 23);
             customTextBoxNewPassword.TabIndex = 4;
             // 
             // customTextBoxOldPassword
             // 
+            customTextBoxOldPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customTextBoxOldPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             customTextBoxOldPassword.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxOldPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customTextBoxOldPassword.Location = new System.Drawing.Point(236, 3);
+            customTextBoxOldPassword.Location = new System.Drawing.Point(236, 6);
             customTextBoxOldPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxOldPassword.MaximumSize = new System.Drawing.Size(224, 0);
             customTextBoxOldPassword.Name = "customTextBoxOldPassword";
             customTextBoxOldPassword.Size = new System.Drawing.Size(224, 23);
             customTextBoxOldPassword.TabIndex = 2;
@@ -604,6 +611,7 @@
             customActionButtonEditPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customActionButtonEditPassword.Location = new System.Drawing.Point(236, 108);
             customActionButtonEditPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customActionButtonEditPassword.MaximumSize = new System.Drawing.Size(224, 0);
             customActionButtonEditPassword.Name = "customActionButtonEditPassword";
             customActionButtonEditPassword.Size = new System.Drawing.Size(224, 30);
             customActionButtonEditPassword.TabIndex = 9;
