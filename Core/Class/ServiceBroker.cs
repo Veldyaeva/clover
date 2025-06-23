@@ -10,9 +10,8 @@ using DevExpress.XtraEditors;
 //using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using SewingProduction.form;
 using DataTable = System.Data.DataTable;
-using static SewingProduction.form.SettingsForm;
 using System.Threading.Tasks;
-
+using SewingProduction.Core.interfaces;
 
 namespace SewingProduction
 {
@@ -21,16 +20,20 @@ namespace SewingProduction
     /// </summary>
     public class ServiceBroker
     {
-        private readonly IDataUpdatableForm _form;
+        private readonly object _form;
         // ИЗМЕНЕНИЯ СОМТРТСЯ НА ТЕСТОВОЙ БАЗЕ:(удалить коммент после изменения)
         private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
+
         private SqlConnection _connection;
-        private SqlDependency sqlDependency;
+        private SqlCommand _command;
+        private SqlDependency _dependency;
+
         private bool _flagStartListening = false;
+        private bool _brokerStopped = false;
+
         private string _fields;
         private string _table;
-        private bool _brokerStopped = false;
-        public ServiceBroker(IDataUpdatableForm form)
+        public ServiceBroker(object form)
         {
             _form = form;
         }
@@ -70,10 +73,7 @@ namespace SewingProduction
             }
         }
 
-        public bool GetFlagStartListening()
-        {
-            return _flagStartListening;
-        }
+        public bool GetFlagStartListening() => _flagStartListening;
 
         public void StartListening(string fields, string table)
         {
@@ -86,19 +86,19 @@ namespace SewingProduction
                 // Остановка предыдущего прослушивания, если оно было активно:
                 StopListening();
                 // SQL-запрос
-                string query= $"SELECT {fields} FROM dbo.{table}";
+                string query= $"SELECT {_fields} FROM dbo.{table}";
                 // Создание соединения с базой данных
                 _connection = new SqlConnection(_connectionString);
                 // Открытие соединения
                 _connection.Open();
                 // Создание команды для выполнения SQL-запроса
-                SqlCommand command = new SqlCommand(query, _connection);
-                // Создание зависимости, чтобы отслеживать изменения
-                sqlDependency = new SqlDependency(command);
-                // Подписка на событие изменения
-                sqlDependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
+                _command = new SqlCommand(query, _connection);
+                // Dependency
+                _dependency = new SqlDependency(_command);
+                _dependency.OnChange += OnDependencyChange;
+
                 // Выполнение команды
-                command.ExecuteReader(CommandBehavior.CloseConnection);
+                _command.ExecuteReader(CommandBehavior.CloseConnection);
                 Debug.WriteLine($"Listening from broker is Started");
             }
             catch (SqlException sqlEx)
@@ -113,29 +113,41 @@ namespace SewingProduction
 
         public bool StopListening()
         {
-            _flagStartListening = false;
-            // Закрываем подключение
-            if (_connection != null)
-            {
-                try
+            try 
+            { 
+                //_flagStartListening = false;
+                // Закрываем подключение
+                if (_dependency != null)
+                {
+                    _dependency.OnChange -= OnDependencyChange;
+                    _dependency = null;
+                    Debug.WriteLine("SqlDependency unsubscribed.");
+                }
+                if (_command != null)
+                {
+                    _command.Dispose();
+                    _command = null;
+                    Debug.WriteLine("SqlCommand disposed.");
+                }
+                if (_connection != null)
                 {
                     _connection.Close();
                     _connection.Dispose();
-                    Debug.WriteLine("Broker is stopped");
-                    return false;
+                    _connection = null;
+                    Debug.WriteLine("SqlConnection closed.");
                 }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"Error closing connection: {ex.Message}");
-                    return true; // Сообщаем о проблеме
-                }
+                Debug.WriteLine($"Broker job");
+                return true;
             }
-            Debug.WriteLine($"Broker job");
-            return true;
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error during StopListening: {ex.Message}");
+                return false;
+            }
         }
         private async void OnDependencyChange(object sender, SqlNotificationEventArgs e)
         {
-            Debug.WriteLine($"Notification received: Type={e.Type}, Info={e.Info}, Source={e.Source}");
+            Debug.WriteLine($"Notification received: Table= {_table}, Type={e.Type}, Info={e.Info}, Source={e.Source}");
 
             if (e.Type == SqlNotificationType.Change)
             {
@@ -145,25 +157,51 @@ namespace SewingProduction
                     case SqlNotificationInfo.Update:
                     case SqlNotificationInfo.Delete:
                         Debug.WriteLine("Data was changed");
+
                         try
                         {
-                            ((Form)_form).Invoke((MethodInvoker)delegate
+                            if (_form is Form winForm)
                             {
-                                try
+                                await winForm.InvokeAsync(async () =>
                                 {
-                                    _form.UpdateDataInForm();
-                                }
-                                catch (Exception formEx)
-                                {
-                                    Debug.WriteLine($"Error updating form: {formEx.Message}");
-                                    // Обработка ошибок при обновлении формы
-                                }
-                            });
+                                    try
+                                    {
+                                        Debug.WriteLine("Calling UpdateDataInForm...");
+
+                                        if (_form is IDataUpdatableFormAsync asyncForm)
+                                        {
+                                            await asyncForm.UpdateDataInFormAsync(_table);
+                                            Debug.WriteLine("Async form updated." + _table);
+                                        }
+                                        if (_form is IDataUpdatableForm syncForm)
+                                        {
+                                            syncForm.UpdateDataInForm(_table);
+                                            Debug.WriteLine("Sync form updated." + _table);
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Debug.WriteLine($"Ошибка при обновлении формы: {ex.Message}");
+                                    }
+                                    finally
+                                    {
+                                        // ⬅️ Перезапускаем внутри UI потока, после обновления данных
+                                        if (_flagStartListening && !_brokerStopped)
+                                        {
+                                            Debug.WriteLine("Restarting listener after update.");
+                                            StartListening(_fields, _table);
+                                        }
+                                        else
+                                        {
+                                            Debug.WriteLine("Listener not restarted (stopped or disabled).");
+                                        }
+                                    }
+                                });
+                            }
                         }
                         catch (Exception invokeEx)
                         {
                             Debug.WriteLine($"Error invoking update on form: {invokeEx.Message}");
-                            // Обработка ошибок при вызове Invoke
                         }
                         break;
 
@@ -179,39 +217,6 @@ namespace SewingProduction
                         Debug.WriteLine($"Unknown notification info: {e.Info}");
                         break;
                 }
-            }
-            else if (e.Type == SqlNotificationType.Subscribe)
-            {
-                switch (e.Source)
-                {
-                    case SqlNotificationSource.Timeout:
-                        Debug.WriteLine("Subscription timed out, restarting listener.");
-                        break;
-                    case SqlNotificationSource.Statement:
-                        Debug.WriteLine("Statement executed successfully.");
-                        break;
-                    case SqlNotificationSource.Client:
-                        Debug.WriteLine("Client initiated notification.");
-                        break;
-                    default:
-                        Debug.WriteLine($"Unknown notification source: {e.Source}");
-                        break;
-                }
-            }
-            else
-            {
-                Debug.WriteLine($"Unexpected notification type: {e.Type}");
-            }
-            // Проверяем флаг и brokerStopped перед перезапуском прослушивания
-            if (_flagStartListening && !_brokerStopped)
-            {
-                // Задержка перед перезапуском (можно сделать экспоненциальную)
-                await Task.Delay(TimeSpan.FromSeconds(5));
-                StartListening(_fields, _table);
-            }
-            else
-            {
-                Debug.WriteLine("Not restarting listener because it was stopped.");
             }
         }
     }
