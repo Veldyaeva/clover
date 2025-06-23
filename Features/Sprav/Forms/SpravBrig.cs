@@ -107,7 +107,8 @@ namespace SewingProduction.form
                 simpleButtonAddOtm.Visible = true;
                 simpleButtonAddSave.Visible = true;
                 // Код = последнему коду в таблице + 1
-                textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
+                //textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
+                textBoxKod.Text = gridView.GetDataRow(gridView.RowCount - 1)?.Field<int?>(0)?.ToString() ?? "";
                 textBoxBrig.Text = "";
                 textBoxBrig.ReadOnly = false;
                 textBoxNBrig.Text = "";

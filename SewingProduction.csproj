@@ -34,6 +34,7 @@
     <Compile Remove="Form1.Designer.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
+    <Compile Remove="ВсеФормы.cs" />
   </ItemGroup>
 
   <ItemGroup>
