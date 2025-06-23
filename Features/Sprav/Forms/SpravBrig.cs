@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
-using static SewingProduction.form.SettingsForm;
 using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Core.interfaces;
 
 namespace SewingProduction.form
 {
@@ -66,7 +66,7 @@ namespace SewingProduction.form
             void UpdateDataInForm();
         }
         // Процедура, которая вызывается из брокера при поступлении обновления?
-        public void UpdateDataInForm()
+        public void UpdateDataInForm(string table = null)
         {
             gridControlSprav_Load(null, EventArgs.Empty);
         }

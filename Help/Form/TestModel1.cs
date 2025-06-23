@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
-namespace SewingProduction.Features.UserDistribution.Models
+namespace SewingProduction.Help.Form
 {
     public class TestModel1 : INotifyPropertyChanged
     {
@@ -52,19 +52,17 @@ namespace SewingProduction.Features.UserDistribution.Models
     public class TestModel1DataService
     {
         private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
 
-        public TestModel1DataService(DbService dbService, DatabaseHelper dbHelper)
+        public TestModel1DataService(DbService dbService)
         {
             _dbService = dbService;
-            _dbHelper = dbHelper;
         }
 
         // Получение всех записей
         public async Task<List<TestModel1>> GetAllAsync()
         {
             string query = @"SELECT TestID, TestName, TestFirst, TestSecond FROM TestTable1";
-            return await _dbService.GetListAsync<TestModel1>(query,null);
+            return await _dbService.GetListAsync<TestModel1>(query, new { });
         }
 
         // Сохранение (вставка или обновление)
