@@ -1,5 +1,6 @@
 using Dapper;
 using DevExpress.XtraBars.Customization;
+using DevExpress.XtraDiagram.Bars;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Base;
@@ -886,7 +887,7 @@ namespace SewingProduction.form
                         }
                         else
                         {
-                            _logger.LogEventAsync($"Could not find new row handle for added NormRasz. DataSource Index: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
+                            _logger.LogEventAsync($"Не найдена строка для добавления в NormRasz. Номер строки в DataSource: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
                         }
                     }
                 }
@@ -1307,7 +1308,14 @@ namespace SewingProduction.form
                 _currentAnnData.AnnID = _newAnnId;
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
-                    RecalculateSek();
+                {
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@KoddRt", _currentAnnData.Kod }
+                    };
+                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters);
+//                    RecalculateSek();
+                }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
 

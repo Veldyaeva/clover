@@ -4,6 +4,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraScheduler.Commands;
+using DevExpress.XtraScheduler.Reporting;
 using DevExpress.XtraVerticalGrid;
 using SewingProduction.form;
 using SewingProduction.Helpers;
@@ -17,6 +18,7 @@ using System.Data;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -179,67 +181,29 @@ namespace SewingProduction.Forms
         private async void ANNgridView_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;
-            if (view == null || e.FocusedRowHandle < 0)
-            {
-                ButtonArchAndCopyWd.Enabled = false;
-                return; 
-            }
+            if (!await PrepareUiAsync(view, e.FocusedRowHandle)) return;
 
-            var selectedItem = view.GetRow(e.FocusedRowHandle) as ArtNormN;
-            if (selectedItem != null)
-            {
-                bool disableButton = selectedItem.Status == (int)Status.Archive 
-                                  || selectedItem.Status == (int)Status.PreliminaryArchive;
-                ButtonArchAndCopyWd.Enabled = !disableButton;
-                textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
-                textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
-                textEditSec.Text = selectedItem.Sek.ToString();
-                textEditCreate.Text = selectedItem.dateCreate.HasValue? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy"):string.Empty;
-            }
-            else
-            {
-                ButtonArchAndCopyWd.Enabled = false;
-            }
-            
+            var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            oldCts?.Cancel();
+            oldCts?.Dispose();
+            var token = _loadCts.Token;
+
+            //bool flowControl = await ButtonsEnabled(e, view);
+            //if (!flowControl)
+            //{
+            //    return;
+            //}
+
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                await LoadRelatedData(annId);
-                // Загрузка данных НЗП
-                if (_nzpListWd != null)
-                {
-                    _nzpListWd.Clear();
-                    if (annId > 0)
-                    {
-                        List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-                        if (nzpData != null)
-                        {
-                            foreach (var item in nzpData)
-                            {
-                                _nzpListWd.Add(item);
-                            }
-                        }
-                    }
-                    _nzpByKoddRtSourceWd?.ResetBindings(false);
-                    customGridControl4?.RefreshDataSource(); // Обновить грид НЗП
-                }
-                string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
-
-                if (!string.IsNullOrEmpty(kodString))
-                {
-                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
-                    {
-                        LoadGridControlData(pictureBox1, kodValue); 
-                    }
-                    else
-                    {
-                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                    }
-                }
-                else
-                {
-                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                }
+                var tRelated = LoadRelatedData(annId, token);
+                var tNzp = LoadNZP(annId, token);
+                await Task.WhenAll(tRelated, tNzp);
+            }
+            catch (OperationCanceledException)
+            {
+                // тихо игнорируем
             }
             catch (Exception ex)
             {
@@ -247,7 +211,73 @@ namespace SewingProduction.Forms
             }
         }
 
+        public async Task<bool> PrepareUiAsync(GridView view, int FocusedRowHandle)
+        {
+            try
+            {
+                if (view == null || FocusedRowHandle < 0)
+                {
+                    ButtonArchAndCopyWd.Enabled = false;
+                    return false;
+                }
 
+                var selectedItem = view.GetRow(FocusedRowHandle) as ArtNormN;
+                string kodString = view.GetRowCellValue(FocusedRowHandle, "Kod")?.ToString();
+
+                if (!string.IsNullOrEmpty(kodString))
+                {
+                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
+                    {
+                        LoadGridControlData(pictureBox1, kodValue);
+                    }
+                    else
+                    {
+                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
+                    }
+                }
+                else
+                {
+                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
+                }
+
+                if (selectedItem != null)
+                {
+                    bool disableButton = selectedItem.Status == (int)Status.Archive
+                                      || selectedItem.Status == (int)Status.PreliminaryArchive;
+                    ButtonArchAndCopyWd.Enabled = !disableButton;
+                    textEditMod.Text = selectedItem.Mod?.TrimEnd(' ') ?? string.Empty;
+                    textEditArt.Text = selectedItem.Articul?.TrimEnd(' ') ?? string.Empty;
+                    textEditSec.Text = selectedItem.Sek.ToString();
+                    textEditCreate.Text = selectedItem.dateCreate.HasValue ? selectedItem.dateCreate.Value.ToString("dd.MM.yyyy") : string.Empty;
+                }
+                else
+                {
+                    ButtonArchAndCopyWd.Enabled = false;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex); return false;
+            }
+
+            return true;
+        }
+
+
+        private async Task LoadNZP(int annId, CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            var list = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, ct) : new List<NZPByKoddRt>();
+            ct.ThrowIfCancellationRequested();
+            _nzpListWd.RaiseListChangedEvents = false;
+            _nzpListWd.Clear();
+            foreach (var item in list)
+                _nzpListWd.Add(item);
+            _nzpListWd.RaiseListChangedEvents = true;
+
+            _nzpByKoddRtSourceWd.ResetBindings(false);
+        }
 
         /// <summary>
         /// Редактировать РТ
@@ -403,7 +433,7 @@ namespace SewingProduction.Forms
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
-                            await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки (НЗП, раскрой, контроль)
+                            await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки 
                         }
                     }
                 }

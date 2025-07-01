@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using DataTable = System.Data.DataTable;
 
@@ -325,7 +326,55 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
+    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = @"SELECT 
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+    nr.Sek, nr.Seb, nr.Kod, 
+    nr.kod_o AS Kod_o,       
+    nr.kod_ob AS KodOb,   
+    nr.kod_podr AS KodPodr,  
+    nr.kod_proizv AS KodProizv,
+    nr.Spec, nr.Obor, nr.nrId,
+    kp.text_proizv as TextProizv,
+    pv.text_vyaz as TextVyaz,
+    ob.text_ob as TextOb
+FROM dbo.norm_rasz nr
+LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
+LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
+LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
+WHERE nr.annId = @annId";
+
+                    await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
+                    List<NormRasz> result = null;
+                    try
+                    {
+                        var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
+                        result = queryResult.ToList();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"GetRelatedNormRasz: ОШИБКА QueryAsync<NormRasz> для AnnId={annId}. Проверьте типы данных в модели NormRasz и таблице norm_rasz, особенно для свойств, которые должны быть int, но могут приходить как string или decimal из БД.");
+                        // Дополнительно логируем информацию о свойствах модели NormRasz
+                        var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
+                        foreach (var prop in typeof(NormRasz).GetProperties())
+                        {
+                            sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
+                        }
+                        await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
+                        throw;
+                    }
+
+                    return result ?? new List<NormRasz>();
+                }
+            }, ct);
+        }
+        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
@@ -346,30 +395,31 @@ LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
 LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
 WHERE nr.annId = @annId";
 
-        await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
-        List<NormRasz> result = null;
+                await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
+                List<NormRasz> result = null;
                 try
                 {
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
-        result = queryResult.ToList();
+                    result = queryResult.ToList();
 
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await _logger.LogErrorAsync(ex, $"GetRelatedNormRasz: ОШИБКА QueryAsync<NormRasz> для AnnId={annId}. Проверьте типы данных в модели NormRasz и таблице norm_rasz, особенно для свойств, которые должны быть int, но могут приходить как string или decimal из БД.");
-// Дополнительно логируем информацию о свойствах модели NormRasz
-var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
-foreach (var prop in typeof(NormRasz).GetProperties())
-{
-    sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
-}
-await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
-throw; 
+                    // Дополнительно логируем информацию о свойствах модели NormRasz
+                    var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
+                    foreach (var prop in typeof(NormRasz).GetProperties())
+                    {
+                        sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
+                    }
+                    await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
+                    throw;
                 }
-                
+
                 return result ?? new List<NormRasz>();
             }
         }
+
         public async Task<string> GetSpecByOborudKod(int kodOb)
         {
             string query = "SELECT no_spec FROM oborud_shv WHERE kod_ob = @kodOb";
@@ -378,16 +428,59 @@ throw;
         }
 
 
+        public async Task<List<NormRask>> GetRelatedNormRask(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
+                    //return result.ToList();
+                    var list = await connection.QueryAsync<NormRask>(
+                       query,
+                       new { annId },
+                       transaction: null,
+                       commandTimeout: null,
+                       commandType: null
+                       );
+
+                    return list.AsList();
+                }
+            }, ct); 
+        }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
-                var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } });
-                return result.ToList();
+                //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
+                //return result.ToList();
+                var list = await connection.QueryAsync<NormRask>(
+                   query,
+                   new { annId },
+                   transaction: null,
+                   commandTimeout: null,
+                   commandType: null
+                   );
+
+                return list.AsList();
             }
         }
 
+        public async Task<List<NormKont>> GetRelatedNormKont(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                    //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                    var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
+                    return result.ToList();
+                }
+            }, ct);
+        }
         public async Task<List<NormKont>> GetRelatedNormKont(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
@@ -398,7 +491,6 @@ throw;
                 return result.ToList();
             }
         }
-
         /// <summary>
         /// Получение неувязанных артикулов из sp_articul
         /// </summary>
@@ -458,6 +550,38 @@ throw;
 
             return nzpList;
         }
+        public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
+        {
+            List<NZPByKoddRt> nzpList;
+            Dictionary<string, int> pztCounts;
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
+                        "dbo.GetNZPByKoddRT",
+                        new { xAnnID = annId },
+                        commandType: CommandType.StoredProcedure);
+                    nzpList = nzpResult.ToList();
+
+                    var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                        "dbo.GetPztCountsByKoddRT",
+                        new { xAnnID = annId },
+                        commandType: CommandType.StoredProcedure);
+                    pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+                }
+
+                // Объединение результатов
+                foreach (var row in nzpList)
+                {
+                    if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                        row.PZTCount = count;
+                }
+
+                return nzpList;
+            }, ct);
+        }
+
 
         public async Task<decimal> getArtNormnSeb(int annId)
         {

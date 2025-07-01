@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
@@ -65,6 +66,8 @@ namespace SewingProduction.Forms
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
+
+        private CancellationTokenSource _loadCts = new CancellationTokenSource();
 
         public TeamWork()
         {
@@ -119,6 +122,7 @@ namespace SewingProduction.Forms
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
                 unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
+            ANNgridView.CalcPreviewText += CalcPreviewText;
 
             if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView wdToBindView)
             {
@@ -127,6 +131,30 @@ namespace SewingProduction.Forms
                 wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             }
         }
+
+        private void CalcPreviewText(object sender,
+                                       CalcPreviewTextEventArgs e)
+        {
+            var row = e.Row as ArtNormN;
+            if (row == null) return;
+
+            var parts = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add(row.Komment);
+
+            // выводим всегда
+            parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
+
+            if (!string.IsNullOrWhiteSpace(row.Reco))
+                parts.Add($"Рекомендация: {row.Reco}");
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add($"Комментарий: {row.Komment}");
+
+            e.PreviewText = string.Join(Environment.NewLine, parts);
+        }
+
+
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
