@@ -24,6 +24,7 @@ using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using System.Diagnostics;
 using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Forms;
 
 
 //nemain
@@ -177,7 +178,7 @@ namespace SewingProduction
         
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //OpenForm(new TeamWork(), sender);
+            OpenForm(new TeamWork(), sender);
         }
 
         private void toolStripComboBox1_Click(object sender, EventArgs e)

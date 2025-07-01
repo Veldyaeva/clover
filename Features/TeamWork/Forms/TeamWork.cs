@@ -1,6 +1,13 @@
-﻿using DevExpress.XtraGrid.Views.Base;
+﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.Data.Filtering;
+using DevExpress.XtraBars.Docking;
+using DevExpress.XtraBars.Docking2010;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.ButtonPanel;
+using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
+using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -8,13 +15,18 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction.Forms
 {
     public partial class TeamWork : CustomForm
     {
-        private readonly DatabaseHelper _dbHelper; 
+        private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormService _artNormService;
         private int selectedRowHandle = -1;
@@ -25,8 +37,10 @@ namespace SewingProduction.Forms
         private BindingList<ArtNormN> _bindingList;
         private BindingSource _bindingSource;
         private bool _hasUnsavedChanges = false;
-        private BindingSource _nzpByKoddRtSource;
-        private BindingList<NZPByKoddRt> _nzpList;
+        private BindingSource _nzpByKoddRtSourceArt;
+        private BindingSource _nzpByKoddRtSourceWd;
+        private BindingList<NZPByKoddRt> _nzpListArt;
+        private BindingList<NZPByKoddRt> _nzpListWd;
         private BindingList<NormRasz> _normRaszListTW;
         private BindingSource _normRaszBindingSourceTW;
         private BindingList<NormRask> _normRaskListTW;
@@ -39,7 +53,7 @@ namespace SewingProduction.Forms
         private BindingSource _preArchBindingSource;
         private BindingList<MyDataART> _myDataArtList;
         private BindingSource _myDataArtBindingSource;
-        private BindingList<MyDataANN> _myDataAnnList; 
+        private BindingList<MyDataANN> _myDataAnnList;
         private BindingSource _myDataAnnBindingSource;
 
         private BindingList<MyDataART> _boundArtList;
@@ -52,6 +66,8 @@ namespace SewingProduction.Forms
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
+
+        private CancellationTokenSource _loadCts = new CancellationTokenSource();
 
         public TeamWork()
         {
@@ -69,10 +85,14 @@ namespace SewingProduction.Forms
             _preArchList = new BindingList<MyDataANN>();
             _preArchBindingSource = new BindingSource { DataSource = _preArchList };
             if (gridControlPreArch != null) gridControlPreArch.DataSource = _preArchBindingSource;
-            
-            _nzpList = new BindingList<NZPByKoddRt>();
-            _nzpByKoddRtSource = new BindingSource { DataSource = _nzpList };
-            if (gridControlNZP != null) gridControlNZP.DataSource = _nzpByKoddRtSource;
+
+            _nzpListArt = new BindingList<NZPByKoddRt>();
+            _nzpByKoddRtSourceArt = new BindingSource { DataSource = _nzpListArt };
+            if (gridControlNZP != null) gridControlNZP.DataSource = _nzpByKoddRtSourceArt;
+
+            _nzpListWd = new BindingList<NZPByKoddRt>();
+            _nzpByKoddRtSourceWd = new BindingSource { DataSource = _nzpListWd };
+            if (customGridControl4 != null) customGridControl4.DataSource = _nzpByKoddRtSourceWd;
 
             // Инициализация для вкладки "Работа с артикулами"
             _myDataArtList = new BindingList<MyDataART>();
@@ -86,7 +106,7 @@ namespace SewingProduction.Forms
             _boundArtList = new BindingList<MyDataART>();
             _boundArtBindingSource = new BindingSource { DataSource = _boundArtList };
             if (gridControl_binded != null) gridControl_binded.DataSource = _boundArtBindingSource;
-            
+
             // Initialize BindingList and BindingSource for NormRasz on Articles tab
             _normRaszListArticles = new BindingList<NormRasz>();
             _normRaszBindingSourceArticles = new BindingSource { DataSource = _normRaszListArticles };
@@ -100,8 +120,9 @@ namespace SewingProduction.Forms
                 unboundArtsView.OptionsSelection.MultiSelect = false;
                 unboundArtsView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
-                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e); 
+                unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
+            ANNgridView.CalcPreviewText += CalcPreviewText;
 
             if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView wdToBindView)
             {
@@ -111,11 +132,37 @@ namespace SewingProduction.Forms
             }
         }
 
+        private void CalcPreviewText(object sender,
+                                       CalcPreviewTextEventArgs e)
+        {
+            var row = e.Row as ArtNormN;
+            if (row == null) return;
+
+            var parts = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add(row.Komment);
+
+            // выводим всегда
+            parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
+
+            if (!string.IsNullOrWhiteSpace(row.Reco))
+                parts.Add($"Рекомендация: {row.Reco}");
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add($"Комментарий: {row.Komment}");
+
+            e.PreviewText = string.Join(Environment.NewLine, parts);
+        }
+
+
+
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
-            if (ANNgridView != null) 
+            if (ANNgridView != null)
             {
-                ANNgridView.FocusedRowChanged -= gridView3_FocusedRowChanged;
+                ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
+                ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
+                ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
             }
 
             try
@@ -126,22 +173,13 @@ namespace SewingProduction.Forms
                 }
 
                 LoadGridSettings();
+                await LoadWorkDivisions();
 
-                // Загрузка данных. Методы LoadWorkDivisions и CurrentWorks_Load (через смену вкладок)
-                // должны внутренне обновлять соответствующие BindingList и вызывать ResetBindings(false) 
-                // на их BindingSource. Это приведет к обновлению гридов.
-                await LoadWorkDivisions(); 
-                
                 TWGridHelper.sortGridView(ANNgridView);
-                // TWGridHelper.sortGridView(gridView4); // gridView4 не используется в текущем контексте напрямую с _bindingSource
-                
-                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null); 
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select kod_ob, text_ob from oborud_shv", null);
 
-                // Прямые вызовы RefreshDataSource() здесь обычно не нужны,
-                // если методы загрузки данных (LoadWorkDivisions, MyDataArtLoad, MyDataAnnLoad)
-                // корректно используют ResetBindings(false) на своих BindingSource.
+                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select ko_ob_all as kod_ob, text_ob from oborud_shv_ob", null);
             }
             catch (Exception ex)
             {
@@ -152,10 +190,12 @@ namespace SewingProduction.Forms
             {
                 if (ANNgridView != null)
                 {
-                    ANNgridView.FocusedRowChanged += gridView3_FocusedRowChanged;
-                    if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >=0) // Проверка перед вызовом
+                    ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
+                    ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
+                    ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
+                    if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
-                         gridView3_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                        ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
                     }
                 }
             }
@@ -165,9 +205,9 @@ namespace SewingProduction.Forms
         {
             if (e.Page == null) return;
 
-            switch (e.Page.Name) // Используем e.Page.Name, так как xtraTabControl1.SelectedTabPage может быть еще старым значением
+            switch (e.Page.Name)
             {
-                case "TabPage1": // Убедитесь, что имя вкладки xtraTabPageWorkDivisions действительно "TabPage1"
+                case "TabPage1":
                     await LoadWorkDivisions();
                     break;
 
@@ -180,12 +220,13 @@ namespace SewingProduction.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            ButtonEditWd_Click_Internal(sender, e);
+            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
         }
 
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
         {
-            await ArchAndCopy();
+            await ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+
         }
 
         private async void ResetButton_Click(object sender, EventArgs e)
@@ -206,9 +247,14 @@ namespace SewingProduction.Forms
             ButtonCopyWd_Click_Internal(sender, e);
         }
         private async void gridView5_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        { 
-            gridView5_FocusedRowChanged_Internal(sender, e); 
+        {
+            gridView5_FocusedRowChanged_Internal(sender, e);
         }
+        /// <summary>
+        /// Обрабатывает смену строки в неувязанных артикулах
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void gridView_unboundArts_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             gridView_unboundArts_FocusedRowChanged_Internal(sender, e);
@@ -218,7 +264,8 @@ namespace SewingProduction.Forms
             Filter_CheckedChanged_Internal(sender, e);
         }
         private async void search_CheckedChanged(object sender, EventArgs e)
-        { search_CheckedChanged_Internal(sender, e); }
+        { //search_CheckedChanged_Internal(sender, e);
+        }
         private void gridControl2_Leave(object sender, EventArgs e)
         {
             gridControl2_Leave_Internal(sender, e);
@@ -228,42 +275,62 @@ namespace SewingProduction.Forms
 
         private void searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
         {
-            searchControl1_QueryIsSearchColumn_Internal(sender, args);
+            //searchControl1_QueryIsSearchColumn_Internal(sender, args);
         }
 
         private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
         {
-            SearchButton_Click_Internal(sender, e);
+            // SearchButton_Click_Internal(sender, e);
         }
 
-        private void gridView3_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            gridView3_FocusedRowChanged_Internal(sender, e);
+            ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
         private async void customButton12_Click(object sender, EventArgs e)
-        { customButton12_Click_Internal(sender, e); }
-        private async void customCheckBox4_CheckedChanged(object sender, EventArgs e)
-        { customCheckBox4_CheckedChanged_Internal(sender, e); }
+        {// customButton12_Click_Internal(sender, e);
+        }
+        private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            loadAllCheckBox_CheckedChanged_Internal(sender, e);
+        }
+
+        private void searchControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyCode == Keys.Enter)
+            //{
+            //    SearchControl searchControl = sender as SearchControl;
+            //    if (searchControl != null)
+            //    {
+            //        // Simulate a click on the search button.
+            //        // We need to find the actual search button in the SearchControl's buttons collection.
+            //        EditorButton searchButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind == ButtonPredefines.Search);// || b.IsDefault);
+            //        if (searchButton != null)
+            //        {
+            //            SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(searchButton));
+            //        }
+            //        else
+            //        {
+            //            // Fallback if a specific search button isn't found, try with a general non-clear button.
+            //            EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
+            //            if (firstNonClearButton != null)
+            //            {
+            //                SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
+            //            }
+            //        }
+            //    }
+            //    e.Handled = true;
+            //    e.SuppressKeyPress = true;
+            //}
+        }
 
         private async void simpleButton2_Click(object sender, EventArgs e)
-        { simpleButton2_Click_Internal(sender, e); }
+        {
+            simpleButton2_Click_Internal(sender, e);
+        }
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //if (_hasUnsavedChanges)
-            //{
-            //    var result = MessageBox.Show(
-            //        "Есть несохраненные изменения. Вы уверены, что хотите выйти?",
-            //        "Подтверждение закрытия",
-            //        MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Warning);
-
-            //    if (result == DialogResult.No)
-            //    {
-            //        e.Cancel = true;
-            //        return;
-            //    }
-            //}
             SaveGridSettings();
             await _logger.LogEventAsync("Форма TeamWork закрыта", "FormClosing");
         }
@@ -278,29 +345,229 @@ namespace SewingProduction.Forms
             await BindButton_Click_Internal(sender, e);
         }
 
-        private void gridControl_binded_Click(object sender, EventArgs e)
-        {
 
+        private async void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            await DuplicateWorkDivision_Click_Internal(sender, e);
         }
 
-        private void LogMemoryUsage()
+        private async Task DuplicateWorkDivision_Click_Internal(object sender, EventArgs e)
         {
-            long memory = GC.GetTotalMemory(false);
-            Debug.WriteLine($"🔍 Total memory: {memory / 1024} KB");
+            if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите Разделение Труда для дублирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var selectedAnnToDuplicate = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+            if (selectedAnnToDuplicate == null)
+            {
+                MessageBox.Show("Не удалось получить данные выбранного РТ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ArtNormN CopyedWorkDivisionShell = selectedAnnToDuplicate.CloneProperties();
+            CopyedWorkDivisionShell.Status = (int)Status.Preliminary;
+            CopyedWorkDivisionShell.StatusText = StatusHelper.GetStatusText((int)Status.Preliminary);
+            CopyedWorkDivisionShell.dateCreate = DateTime.Now;
+            CopyedWorkDivisionShell.dateUpdate = null;
+            CopyedWorkDivisionShell.Arh = false;
+            CopyedWorkDivisionShell.ParentId = selectedAnnToDuplicate.AnnID;
+            CopyedWorkDivisionShell.AnnID = 0;
+            CopyedWorkDivisionShell.Mod = "";
+            CopyedWorkDivisionShell.Articul = "";
+            CopyedWorkDivisionShell.grup = "";
+
+            int newAnnId = await _dbService.InsertEntityAsync(TableNames.Ann, TableNames.AnnId, CopyedWorkDivisionShell);
+            if (newAnnId <= 0)
+            {
+                MessageBox.Show("Ошибка при создании новой записи РТ в базе данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Clone, oldId: selectedAnnToDuplicate.AnnID, newId: newAnnId))
+            {
+                DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                if (result == DialogResult.OK)
+                {
+                    CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
+                    if (CopyedWorkDivisionShell == null) return;
+
+                    // object updatedDataAnn =  updatedArtNormN;
+
+                    //    int annIdToFind = forMyDataAnnView ? ((MyDataANN)updatedDataAnn).AnnID : ((ArtNormN)updatedDataAnn).AnnID;
+
+                    //    int index = list.Cast<object>().Select((item, i) => new { item, i }).FirstOrDefault(x => forMyDataAnnView
+                    //            ? x.item is MyDataANN mda && mda.AnnID == annIdToFind
+                    //            : x.item is ArtNormN an && an.AnnID == annIdToFind)
+                    //        ?.i ?? -1;
+
+                    //    if (index >= 0)
+                    //        list[index] = updatedDataAnn;
+
+                    _bindingList.Add(CopyedWorkDivisionShell);
+                    _bindingSource.ResetBindings(false);
+                    int rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
+
+                    //    // Если редактирование было для второй вкладки (MyDataANN view), обновим NormRasz для customGridControl3
+                    //    if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
+                    //    {
+                    //        await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID);
+                    //    }
+                    //    else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
+                    //    {
+                    //        await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки (НЗП, раскрой, контроль)
+                    //    }
+                    //}
+                }
+
+            }
+        }
+        private void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
+                    break;
+                case 2:
+                    EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    break;
+                case 4:
+                    ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
+                    break;
+
+            }
         }
 
-        private void customSimpleButton1_Click(object sender, EventArgs e)
+        private void ButtonUnboundWd_Click(object sender, EventArgs e)
         {
-            //int RzuNom = Convert.ToInt32(this.tbRzuNom.Text);
-            //int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
-            //PrintMlRtReport report1 = new PrintMlRtReport();
-            //report1.RequestParameters = false;
-            //report1.Parameters["_rzuNom"].Value = RzuNom;
-            //report1.Parameters["_isChip"].Value = IsChip;
-            //report1.Parameters["_isUpak"].Value = 0;
-            //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            //reportPrintTool1.ShowPreviewDialog();
+            UnboundWD(sender, e);
+        }
+
+        private async void ANNgridView_CellValueChanged(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Upd")
+            {
+                GridView view = sender as GridView;
+                if (view != null)
+                {
+                    ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
+                    if (row != null)
+                    {
+                        if (e.Value is bool val && val)
+                        {
+                            row.dateUpdate = DateTime.Now;
+                            _hasUnsavedChanges = true;
+
+                            try
+                            {
+                                decimal updatedSeb = await _artNormService.getArtNormnSeb(row.AnnID);
+                                row.Seb = updatedSeb;
+                                row.dateUpdate = DateTime.Now;
+                            }
+                            catch (Exception ex)
+                            {
+                                await _logger.LogErrorAsync(ex, $"Ошибка при вызове getArtNormnSeb для AnnID: {row.AnnID}");
+                                MessageBox.Show("Ошибка при обновлении данных после вызова процедуры: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+
+                            view.RefreshRow(e.RowHandle);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ANNgridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        {
+            if (e.Column.FieldName == "Upd")
+            {
+                GridView view = sender as GridView;
+                if (view != null)
+                {
+                    ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
+                    if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
+                    {
+                        view.SetRowCellValue(e.RowHandle, e.Column, true);
+                        MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+        }
+
+        private void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    ButtonPreliminaryWd_Click_Internal(sender, e);
+                    break;
+                case 2:
+                    EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
+                    break;
+                case 4:
+                    DuplicateWorkDivision_Click_Internal(sender, e);
+                    break;
+                case 6:
+                    ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+                    break;
+
+            }
+        }
+
+        private void ANNgridView_CalcPreviewText(object sender, CalcPreviewTextEventArgs e)
+        {
+            if (e.RowHandle >= 0 && ANNgridView.GetRow(e.RowHandle) is ArtNormN row)
+            {
+                e.PreviewText = $"Дизайнер: {row.Diz}, Конструктор: {row.Constr}, Особенности: {row.Komment}, Рекомендации: {row.Reco}";
+            }
+        }
+
+        private void layoutControlGroup6_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            //             case 6:
+            simpleButton2_Click_Internal(sender, e); // Четвертая кнопка  создать из артикула
+                                                     // break;
+        }
+
+        private void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    BindButton_Click_Internal(sender, e);// увязать
+                    break;
+                case 2:
+                    UnboundWD(sender, e);
+                    break;
+            }
+        }
+
+        private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
         }
     }
-}
 
+
+}

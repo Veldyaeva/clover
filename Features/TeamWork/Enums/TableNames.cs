@@ -18,7 +18,7 @@ namespace SewingProduction
         public const string AnnId = "AnnID";
         public const string RaszId = "nrId";
         public const string RaskId = "id";
-        public const string KontId = "";
+        public const string KontId = "nkId";
         public const string ObrId = "";
         public const string ArtId = "kod";
 

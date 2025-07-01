@@ -485,7 +485,7 @@ namespace SewingProduction.Forms
             }
             if (this.gridView_wdToBind != null)
             {
-                this.gridView_wdToBind.FocusedRowChanged -= gridView8_FocusedRowChanged;
+                this.gridView_wdToBind.FocusedRowChanged -= gridViewWdToBind_FocusedRowChanged;
             }
 
             try
@@ -497,6 +497,11 @@ namespace SewingProduction.Forms
                 await MyDataAnnLoad();
 
                 await preArchTask;
+
+                TWGridHelper.sortGridView(gridView6);
+                //TWGridHelper.sortGridView(gridViewRaskr);
+                //TWGridHelper.sortGridView(gridViewKont);
+
 
                 // Load NormRasz data for the Articles tab using the dedicated BindingList and BindingSource
                 if (this.gridView_wdToBind != null && gridView_wdToBind.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
@@ -533,7 +538,7 @@ namespace SewingProduction.Forms
                 }
                 if (this.gridView_wdToBind != null)
                 {
-                    this.gridView_wdToBind.FocusedRowChanged += gridView8_FocusedRowChanged;
+                    this.gridView_wdToBind.FocusedRowChanged += gridViewWdToBind_FocusedRowChanged;
                 }
             }
         }
@@ -554,17 +559,18 @@ namespace SewingProduction.Forms
                 string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
-                _myDataArtList.Clear(); // Очищаем BindingList
+                //_myDataArtList.Clear(); // Очищаем BindingList
 
-                if (loadedData != null)
-                {
-                    foreach (var item in loadedData)
-                    {
-                        _myDataArtList.Add(item); // Добавляем элементы в BindingList
-                    }
-                }
+                //if (loadedData != null)
+                //{
+                //    foreach (var item in loadedData)
+                //    {
+                //        _myDataArtList.Add(item); // Добавляем элементы в BindingList
+                //    }
+                //}
 
-                _myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+                //_myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+                _myDataArtList.BulkLoad(loadedData);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
             }
@@ -594,23 +600,24 @@ namespace SewingProduction.Forms
                 int kod = GetCurrentKodFromDataSource();
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
 
-                _myDataAnnList.Clear(); // Очищаем BindingList
+                //_myDataAnnList.Clear(); // Очищаем BindingList
 
-                if (loadedData != null && loadedData.Count > 0)
-                {
-                    foreach (var item in loadedData)
-                    {
-                        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
-                    }
-                    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
-                }
-                else
-                {
-                    // Логгируем, если данных нет, вместо MessageBox
-                    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
-                }
+                //if (loadedData != null && loadedData.Count > 0)
+                //{
+                //    foreach (var item in loadedData)
+                //    {
+                //        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
+                //    }
+                //    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
+                //}
+                //else
+                //{
+                //    // Логгируем, если данных нет, вместо MessageBox
+                //    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
+                //}
+                _myDataAnnList.BulkLoad(loadedData);
 
-                _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
+               // _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
             }
             catch (Exception ex)
             {
@@ -728,15 +735,66 @@ namespace SewingProduction.Forms
 
 
         /// <summary>
-        /// загрузка norm_rasz
+        /// Обрабатывает событие смены строки в РТ для увязки(вкладка артикулы)
+        /// загрузка norm_rasz и связанных данных (НЗП, картинка).
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void gridView8_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            GridView view = gridView_wdToBind;
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, e.FocusedRowHandle, "AnnId", 0);
+            var view = sender as GridView;// gridView_wdToBind; 
+            if (view == null) return;
 
+            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+
+            // Обновляем NormRasz для customGridControl3
+            await RefreshNormRaszForArticlesTab(annId);
+
+            // Загрузка данных НЗП
+            if (_nzpListArt != null)
+            {
+                _nzpListArt.Clear();
+                if (annId > 0)
+                {
+                    List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
+                    if (nzpData != null)
+                    {
+                        foreach (var item in nzpData)
+                        {
+                            _nzpListArt.Add(item);
+                        }
+                    }
+                }
+                _nzpByKoddRtSourceArt?.ResetBindings(false);
+                gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
+                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
+            }
+
+            string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
+
+            if (!string.IsNullOrEmpty(kodString))
+            {
+                if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
+                {
+                    LoadGridControlData(pictureBox2, kodValue);
+                }
+                else
+                {
+                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
+                }
+            }
+            else
+            {
+                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
+            }
+        }
+
+        /// <summary>
+        /// Загружает и обновляет NormRasz данные для вкладки "Артикулы" (customGridControl3).
+        /// </summary>
+        /// <param name="annId">AnnID для загрузки NormRasz.</param>
+        private async Task RefreshNormRaszForArticlesTab(int annId)
+        {
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
             {
@@ -752,25 +810,6 @@ namespace SewingProduction.Forms
                 }
             }
             _normRaszBindingSourceArticles.ResetBindings(false);
-            // customGridControl3.DataSource is already set to _normRaszBindingSourceArticles in TeamWork.cs constructor
-
-            string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
-
-            if (!string.IsNullOrEmpty(kodString))
-            {
-                if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
-                {
-                    LoadGridControlData(pictureBox2, kodValue);
-                }
-                else
-                {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
-                }
-            }
-            else
-            {
-                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridView3_FocusedRowChanged_Internal");
-            }
         }
 
         private async Task PreArchLoad()
@@ -786,16 +825,17 @@ namespace SewingProduction.Forms
                     MessageBox.Show("Ошибка инициализации списка предварительного архива.", "Критическая ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                _preArchList.Clear();
+                //_preArchList.Clear();
 
-                if (preArchData != null)
-                {
-                    foreach (var item in preArchData)
-                    {
-                        _preArchList.Add(item);
-                    }
-                }
-                _preArchBindingSource.ResetBindings(false);
+                //if (preArchData != null)
+                //{
+                //    foreach (var item in preArchData)
+                //    {
+                //        _preArchList.Add(item);
+                //    }
+                //}
+                //_preArchBindingSource.ResetBindings(false);
+                _preArchList.BulkLoad(preArchData);
 
                 await _logger.LogEventAsync($"Загружено {_preArchList.Count} записей в предварительный архив.", "PreArchLoad");
 
@@ -858,14 +898,21 @@ namespace SewingProduction.Forms
                 // Обновляем annId в базе данных
                 _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnID);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
-                selectedAnnRow.grup = selectedArtRow.grup;//заполняем в РТ из артикула
-                selectedAnnRow.mod = selectedArtRow.mod;//заполняем в РТ из артикула
-                                                        // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
+                if (string.IsNullOrEmpty(selectedAnnRow.grup))
+                {
+                    selectedAnnRow.grup = selectedArtRow.grup;
+                }
+                if (selectedAnnRow.mod == null)
+                    if (string.IsNullOrEmpty(selectedAnnRow.mod))
+                    {
+                        selectedAnnRow.grup = selectedArtRow.mod;
+                    }
+                // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
                 {
-                    // 0. Присваиваем привязанному артиклю артикля разделений
+                    // 0. Присваиваем привязанному артикулу артикул разделений
                     selectedArtRow.BindedArt = selectedAnnRow.Articul;
                     // 1. Добавляем привязанный артикул в список для gridView1
                     _boundArtList?.Add(selectedArtRow);
@@ -892,6 +939,11 @@ namespace SewingProduction.Forms
             }
         }
 
+        /// <summary>
+        /// Обрабатывает смену строки в таблице неувязанных артикулов
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var gv_unbound_Arts = sender as GridView;

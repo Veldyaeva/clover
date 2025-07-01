@@ -411,41 +411,23 @@ namespace SewingProduction.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var notDescribedFilter = new GroupOperator(
-                        GroupOperatorType.And,
-                        new BinaryOperator("sek_shv", 0),
-                        new BinaryOperator("status", 0, DevExpress.Data.Filtering.BinaryOperatorType.Greater)
+                    var sekNullOrZero = new GroupOperator(
+                        GroupOperatorType.Or,
+                        new BinaryOperator("SekShv", 0),
+                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("SekShv"))
                     );
+
+                    var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
+
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, sekNullOrZero, excludeArchived);
 
                     if (statusCriteria != null)
-                    {
-                        statusCriteria = new GroupOperator(
-                            GroupOperatorType.And,
-                            statusCriteria,
-                            notDescribedFilter
-                        );
-                    }
+                        statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
                     else
-                    {
                         statusCriteria = notDescribedFilter;
-                    }
                 }
 
-                // Если есть и фильтр поиска, и фильтр статуса
-                if (searchFilter != null && statusCriteria != null)
-                {
-                    ANNgridView.ActiveFilterCriteria = new GroupOperator(
-                        GroupOperatorType.And,
-                        searchFilter,
-                        statusCriteria
-                    );
-                }
-                else if (searchFilter != null)
-                {
-                    // Только фильтр поиска
-                    ANNgridView.ActiveFilterCriteria = searchFilter;
-                }
-                else if (statusCriteria != null)
+                if (statusCriteria != null)
                 {
                     // Только фильтр статуса
                     ANNgridView.ActiveFilterCriteria = statusCriteria;
@@ -554,5 +536,20 @@ namespace SewingProduction.Forms
             }
         }
         #endregion
+
+        public static MyDataANN ToMyDataANN(ArtNormN ann)
+        {
+            if (ann == null) return null;
+            return new MyDataANN
+            {
+                AnnID = ann.AnnID,
+                Kod = ann.Kod,
+                Articul = ann.Articul,
+                Status = ann.Status,
+                grup = ann.grup,
+                mod = ann.Mod,
+            };
+        }
+
     }
 }
