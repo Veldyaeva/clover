@@ -1,0 +1,12 @@
+﻿<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g>
+    <rect width="32" height="32" fill="none"/>
+    <!-- Задняя папка/лист -->
+    <rect x="9" y="7" width="14" height="18" rx="2" stroke="#4B4B4B" stroke-width="2" fill="none"/>
+    <!-- Передняя папка/лист -->
+    <rect x="5" y="11" width="14" height="18" rx="2" stroke="#4B4B4B" stroke-width="2" fill="none"/>
+    <!-- Значок копии/стрелка -->
+    <path d="M15 19 L12 22 L15 25" stroke="#4B4B4B" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12 22 H20" stroke="#4B4B4B" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>
+</svg>
