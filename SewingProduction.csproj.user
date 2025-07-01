@@ -55,6 +55,9 @@
     <Compile Update="Features\Sprav\Forms\SpravZeh.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Features\TeamWork\Forms\NormOperNew.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,9 +85,6 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Furnit\UserControl\FurnitZayavView.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
     <Compile Update="Features\UserDistribution\Forms\AboutBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -94,13 +94,19 @@
     <Compile Update="Features\UserDistribution\Forms\AdminForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\AdminSprav.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllRole.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\AllUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\UserDistribution\Forms\TestForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Help\Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\UserDistribution\Forms\LoginForm.cs">
@@ -109,10 +115,13 @@
     <Compile Update="Core\Forms\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\UserDistribution\Forms\RoleColumn.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\UserDistribution\Forms\UserProfile.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\UsersHierarchy.cs">
+    <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Report\FioListReport.cs">

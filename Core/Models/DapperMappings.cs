@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Z.Dapper.Plus;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Features.UserDistribution.Models;
 
 namespace SewingProduction.Models
 {
@@ -29,7 +30,9 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<ArtPrFioProgr>();
             DapperPlusManager.Entity<PlanSezonZadanyView>().Table("plan_sezon_zad_knitMachine").Identity("pszkmID");
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
-            
+            DapperPlusManager.Entity<AllTableNameModel>().Table(TableNames.ATN).Identity(x => x.id_atn);
+            DapperPlusManager.Entity<AllColumnNameModel>().Table(TableNames.ACN).Identity(x => x.id_acn);
+
         }
     }
 }
