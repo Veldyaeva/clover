@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Helpers;
 using static SewingProduction.form.SettingsForm;
 
@@ -22,8 +23,18 @@ namespace SewingProduction.form
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            // Тема
+            var currentTheme = SettingsManager.Current.Theme;
+            customComboBoxTheme.Items.Clear();
+            customComboBoxTheme.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
+            customComboBoxTheme.SelectedItem = currentTheme;
 
+            // Размер текста
+            customComboBoxSizeText.Items.Clear();
+            customComboBoxSizeText.Items.AddRange(new object[] { 8, 9, 10, 11, 12, 14, 16 });
+            customComboBoxSizeText.SelectedItem = SettingsManager.Current.FontSize;
         }
+
         public interface IDataUpdatableForm
         {
             void UpdateDataInForm();
@@ -32,24 +43,23 @@ namespace SewingProduction.form
         {
             SettingsForm_Load(null, EventArgs.Empty);
         }
-        private void SaveThemeToJson(string theme)
+
+        private void customComboBoxTheme_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = "settings.json";
-            Dictionary<string, object> config;
+            string selectedTheme = customComboBoxTheme.SelectedItem?.ToString();
+            if (string.IsNullOrWhiteSpace(selectedTheme))
+                return;
 
-            if (File.Exists(path))
+            ThemeManager.SetTheme(selectedTheme);
+            SettingsManager.SetTheme(selectedTheme);
+        }
+        
+        private void customComboBoxSizeText_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(customComboBoxSizeText.SelectedItem?.ToString(), out int fontSize))
             {
-                string json = File.ReadAllText(path);
-                config = JsonConvert.DeserializeObject<Dictionary<string, object>>(json)
-                         ?? new Dictionary<string, object>();
+                SettingsManager.SetFontSize(fontSize);
             }
-            else
-            {
-                config = new Dictionary<string, object>();
-            }
-
-            config["theme"] = theme;
-            File.WriteAllText(path, JsonConvert.SerializeObject(config, Formatting.Indented));
         }
     }
 }

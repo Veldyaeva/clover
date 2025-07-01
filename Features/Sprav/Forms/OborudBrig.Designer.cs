@@ -28,143 +28,148 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OborudBrig));
-            this.gridBrig = new DevExpress.XtraGrid.GridControl();
-            this.bindingBrig = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewBrig = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridZeh = new DevExpress.XtraGrid.GridControl();
-            this.bindingZeh = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewZeh = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridOborud = new DevExpress.XtraGrid.GridControl();
-            this.bindingOborud = new System.Windows.Forms.BindingSource(this.components);
-            this.gridViewOborud = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.linkLabelBrig = new System.Windows.Forms.LinkLabel();
-            this.linkLabelZeh = new System.Windows.Forms.LinkLabel();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.gridBrig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingBrig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewBrig)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridZeh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingZeh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewZeh)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOborud)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingOborud)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewOborud)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.SuspendLayout();
+            gridBrig = new DevExpress.XtraGrid.GridControl();
+            bindingBrig = new System.Windows.Forms.BindingSource(components);
+            gridViewBrig = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridZeh = new DevExpress.XtraGrid.GridControl();
+            bindingZeh = new System.Windows.Forms.BindingSource(components);
+            gridViewZeh = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridOborud = new DevExpress.XtraGrid.GridControl();
+            bindingOborud = new System.Windows.Forms.BindingSource(components);
+            gridViewOborud = new DevExpress.XtraGrid.Views.Grid.GridView();
+            label2 = new System.Windows.Forms.Label();
+            linkLabelBrig = new System.Windows.Forms.LinkLabel();
+            linkLabelZeh = new System.Windows.Forms.LinkLabel();
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            ((System.ComponentModel.ISupportInitialize)gridBrig).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingBrig).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewBrig).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridZeh).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingZeh).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewZeh).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridOborud).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingOborud).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewOborud).BeginInit();
+            tableLayoutPanel1.SuspendLayout();
+            SuspendLayout();
             // 
             // gridBrig
             // 
-            this.gridBrig.DataSource = this.bindingBrig;
-            resources.ApplyResources(this.gridBrig, "gridBrig");
-            this.gridBrig.MainView = this.gridViewBrig;
-            this.gridBrig.Name = "gridBrig";
-            this.gridBrig.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewBrig});
-            this.gridBrig.Click += new System.EventHandler(this.gridBrig_Click);
+            gridBrig.DataSource = bindingBrig;
+            resources.ApplyResources(gridBrig, "gridBrig");
+            gridBrig.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridBrig.EmbeddedNavigator.Margin");
+            gridBrig.MainView = gridViewBrig;
+            gridBrig.Name = "gridBrig";
+            gridBrig.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewBrig });
+            gridBrig.Click += gridBrig_Click;
             // 
             // gridViewBrig
             // 
-            this.gridViewBrig.GridControl = this.gridBrig;
-            this.gridViewBrig.Name = "gridViewBrig";
-            this.gridViewBrig.OptionsView.ShowGroupPanel = false;
+            gridViewBrig.DetailHeight = 404;
+            gridViewBrig.GridControl = gridBrig;
+            gridViewBrig.Name = "gridViewBrig";
+            gridViewBrig.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewBrig.OptionsView.ShowGroupPanel = false;
             // 
             // gridZeh
             // 
-            this.gridZeh.DataSource = this.bindingZeh;
-            resources.ApplyResources(this.gridZeh, "gridZeh");
-            this.gridZeh.MainView = this.gridViewZeh;
-            this.gridZeh.Name = "gridZeh";
-            this.gridZeh.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewZeh});
-            this.gridZeh.Click += new System.EventHandler(this.gridZeh_Click);
-            this.gridZeh.KeyUp += new System.Windows.Forms.KeyEventHandler(this.gridZeh_KeyUp);
+            gridZeh.DataSource = bindingZeh;
+            resources.ApplyResources(gridZeh, "gridZeh");
+            gridZeh.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridZeh.EmbeddedNavigator.Margin");
+            gridZeh.MainView = gridViewZeh;
+            gridZeh.Name = "gridZeh";
+            gridZeh.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewZeh });
+            gridZeh.Click += gridZeh_Click;
+            gridZeh.KeyUp += gridZeh_KeyUp;
             // 
             // gridViewZeh
             // 
-            this.gridViewZeh.Appearance.ColumnFilterButton.BackColor = System.Drawing.Color.Transparent;
-            this.gridViewZeh.Appearance.ColumnFilterButton.Options.UseBackColor = true;
-            this.gridViewZeh.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.gridViewZeh.Appearance.OddRow.Options.UseBackColor = true;
-            this.gridViewZeh.GridControl = this.gridZeh;
-            this.gridViewZeh.Name = "gridViewZeh";
-            this.gridViewZeh.OptionsView.ShowGroupPanel = false;
+            gridViewZeh.Appearance.ColumnFilterButton.BackColor = System.Drawing.Color.Transparent;
+            gridViewZeh.Appearance.ColumnFilterButton.Options.UseBackColor = true;
+            gridViewZeh.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 192, 192);
+            gridViewZeh.Appearance.OddRow.Options.UseBackColor = true;
+            gridViewZeh.DetailHeight = 404;
+            gridViewZeh.GridControl = gridZeh;
+            gridViewZeh.Name = "gridViewZeh";
+            gridViewZeh.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewZeh.OptionsView.ShowGroupPanel = false;
             // 
             // gridOborud
             // 
-            this.gridOborud.DataSource = this.bindingOborud;
-            resources.ApplyResources(this.gridOborud, "gridOborud");
-            this.gridOborud.MainView = this.gridViewOborud;
-            this.gridOborud.Name = "gridOborud";
-            this.gridOborud.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewOborud});
+            gridOborud.DataSource = bindingOborud;
+            resources.ApplyResources(gridOborud, "gridOborud");
+            gridOborud.EmbeddedNavigator.Margin = (System.Windows.Forms.Padding)resources.GetObject("gridOborud.EmbeddedNavigator.Margin");
+            gridOborud.MainView = gridViewOborud;
+            gridOborud.Name = "gridOborud";
+            gridOborud.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewOborud });
             // 
             // gridViewOborud
             // 
-            this.gridViewOborud.GridControl = this.gridOborud;
-            this.gridViewOborud.Name = "gridViewOborud";
-            this.gridViewOborud.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
-            this.gridViewOborud.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
-            this.gridViewOborud.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-            this.gridViewOborud.OptionsView.ShowGroupPanel = false;
-            this.gridViewOborud.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridView3_CellValueChanged);
+            gridViewOborud.DetailHeight = 404;
+            gridViewOborud.GridControl = gridOborud;
+            gridViewOborud.Name = "gridViewOborud";
+            gridViewOborud.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
+            gridViewOborud.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.Click;
+            gridViewOborud.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewOborud.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
+            gridViewOborud.OptionsView.ShowGroupPanel = false;
+            gridViewOborud.CellValueChanged += gridView3_CellValueChanged;
             // 
             // label2
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.Name = "label2";
+            resources.ApplyResources(label2, "label2");
+            label2.Name = "label2";
             // 
             // linkLabelBrig
             // 
-            resources.ApplyResources(this.linkLabelBrig, "linkLabelBrig");
-            this.linkLabelBrig.LinkColor = System.Drawing.Color.Black;
-            this.linkLabelBrig.Name = "linkLabelBrig";
-            this.linkLabelBrig.TabStop = true;
-            this.linkLabelBrig.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelBrig_LinkClicked);
+            resources.ApplyResources(linkLabelBrig, "linkLabelBrig");
+            linkLabelBrig.LinkColor = System.Drawing.Color.Black;
+            linkLabelBrig.Name = "linkLabelBrig";
+            linkLabelBrig.TabStop = true;
+            linkLabelBrig.LinkClicked += linkLabelBrig_LinkClicked;
             // 
             // linkLabelZeh
             // 
-            resources.ApplyResources(this.linkLabelZeh, "linkLabelZeh");
-            this.linkLabelZeh.LinkColor = System.Drawing.Color.Black;
-            this.linkLabelZeh.Name = "linkLabelZeh";
-            this.linkLabelZeh.TabStop = true;
-            this.linkLabelZeh.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.labelZeh_LinkClicked);
+            resources.ApplyResources(linkLabelZeh, "linkLabelZeh");
+            linkLabelZeh.LinkColor = System.Drawing.Color.Black;
+            linkLabelZeh.Name = "linkLabelZeh";
+            linkLabelZeh.TabStop = true;
+            linkLabelZeh.LinkClicked += labelZeh_LinkClicked;
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            resources.ApplyResources(this.tableLayoutPanel1, "tableLayoutPanel1");
-            this.tableLayoutPanel1.Controls.Add(this.linkLabelBrig, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gridZeh, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.linkLabelZeh, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gridOborud, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.gridBrig, 1, 1);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            resources.ApplyResources(tableLayoutPanel1, "tableLayoutPanel1");
+            tableLayoutPanel1.Controls.Add(linkLabelBrig, 1, 0);
+            tableLayoutPanel1.Controls.Add(label2, 2, 0);
+            tableLayoutPanel1.Controls.Add(gridZeh, 0, 1);
+            tableLayoutPanel1.Controls.Add(linkLabelZeh, 0, 0);
+            tableLayoutPanel1.Controls.Add(gridOborud, 2, 1);
+            tableLayoutPanel1.Controls.Add(gridBrig, 1, 1);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
             // 
             // OborudBrig
             // 
             resources.ApplyResources(this, "$this");
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "OborudBrig";
-            this.Activated += new System.EventHandler(this.OborudBrig_Activated);
-            this.Load += new System.EventHandler(this.OborudBrig_Load_1);
-            ((System.ComponentModel.ISupportInitialize)(this.gridBrig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingBrig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewBrig)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridZeh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingZeh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewZeh)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridOborud)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingOborud)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewOborud)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            Controls.Add(tableLayoutPanel1);
+            Name = "OborudBrig";
+            Activated += OborudBrig_Activated;
+            Load += OborudBrig_Load_1;
+            ((System.ComponentModel.ISupportInitialize)gridBrig).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingBrig).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewBrig).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridZeh).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingZeh).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewZeh).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridOborud).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingOborud).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewOborud).EndInit();
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ResumeLayout(false);
         }
 
         #endregion

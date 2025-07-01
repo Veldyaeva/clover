@@ -2,9 +2,5 @@
 /.vs/
 /bin/
 /obj/
-/Properties/PublishProfiles/FolderProfile1.pubxml
-/Properties/PublishProfiles/FolderProfile1.pubxml.user
-/Properties/PublishProfiles/FolderProfile.pubxml
-/Properties/PublishProfiles/FolderProfile.pubxml.user
-/Properties/PublishProfiles/x64(Багаева, Чиркова).pubxml
-/Properties/PublishProfiles/x64(Багаева, Чиркова).pubxml.user
+*.pubxml.user
+*.pubxml
