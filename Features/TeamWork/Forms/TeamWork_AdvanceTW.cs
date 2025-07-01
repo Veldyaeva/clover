@@ -865,7 +865,13 @@ namespace SewingProduction.form
             }
 
             e.Allow = false;
-
+            int maxN = 0;
+            for (int i = 0; i < gridViewRasz.DataRowCount; i++)
+            {
+                var value = gridViewRasz.GetRowCellValue(i, "N");
+                if (value != null && int.TryParse(value.ToString(), out int n))
+                    if (n > maxN) maxN = n;
+            }
             using (var selectionForm = new NormOperNew(_selectedAnnId))
             {
                 var result = selectionForm.ShowDialog();
@@ -874,6 +880,7 @@ namespace SewingProduction.form
                 {
                     var selectedData = selectionForm.SelectedRowData;
                     selectedData.IsNew = true;
+                    selectedData.N = maxN;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
                     gridControlRasz.RefreshDataSource();
