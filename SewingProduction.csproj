@@ -31,6 +31,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Features\TeamWork.zip" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="Resources\favicon_io (1)\favicon.ico" />
   </ItemGroup>
 
