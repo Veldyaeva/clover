@@ -56,6 +56,10 @@ namespace SewingProduction.form.UserDistribution
                         this.DialogResult = DialogResult.OK;
                         Event += "Вход осуществлен!";
                         SaveLoginToHistory(comboBoxEditLogin.Text);
+                        if (customCheckBox1.Checked)
+                            SettingsManager.SavePassword(formLogin, formPassword);
+                        else
+                            SettingsManager.ClearSavedPassword(formLogin);
                         this.Close();
                     }
                     catch (Exception ex)
@@ -81,8 +85,10 @@ namespace SewingProduction.form.UserDistribution
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
+                if (e.Control)
+                    customCheckBox1.Checked = true;
                 simpleButton_Click(sender, e);
             }
         }
@@ -98,8 +104,22 @@ namespace SewingProduction.form.UserDistribution
         }
         private void LoginForm_Shown(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(comboBoxEditLogin.Text))
+            string login = comboBoxEditLogin.Text;
+
+            if (!string.IsNullOrWhiteSpace(login))
             {
+                string savedPassword = SettingsManager.GetSavedPassword(login);
+                if (!string.IsNullOrWhiteSpace(savedPassword))
+                {
+                    textEditPassword.Text = savedPassword;
+                    customCheckBox1.Visible = true;
+                    customCheckBox1.Checked = true;
+                }
+                else
+                {
+                    customCheckBox1.Visible = false;
+                    customCheckBox1.Checked = false;
+                }
                 textEditPassword.Focus();
             }
             else
@@ -108,6 +128,17 @@ namespace SewingProduction.form.UserDistribution
             }
         }
 
+        private void labelGlaz_MouseMove(object sender, MouseEventArgs e)
+        {
+            labelGlaz.Text = "👀";
+            textEditPassword.Properties.UseSystemPasswordChar = false;
+        }
+
+        private void labelGlaz_MouseLeave(object sender, EventArgs e)
+        {
+            labelGlaz.Text = "👁";
+            textEditPassword.Properties.UseSystemPasswordChar = true;
+        }
     }
 
     public class LoginFormDataService

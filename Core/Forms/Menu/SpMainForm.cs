@@ -266,14 +266,12 @@ namespace SewingProduction
 
         private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            _formManager.SaveOpenTabs();
+            SaveOpenTabsSafe();
         }
         public void SaveOpenTabsSafe()
         {
             if (!string.IsNullOrWhiteSpace(_user?.UserName))
-            {
                 _formManager.SaveOpenTabs();
-            }
         }
 
         /// <summary>
