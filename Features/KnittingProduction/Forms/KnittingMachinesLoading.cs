@@ -116,10 +116,10 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridKnitMachineLoadInfoColumnCombinedPszNomCard.FieldName = "combinedPszNom";
 
                 gridViewKnitMachineLoadInfo.Columns["combinedPszNom"].DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-                gridViewKnitMachineLoadInfo.Columns["combinedPszNom"].DisplayFormat.format  CustomFormat += (value) =>
-                {
-                    return value?.ToString(); // RTF-текст передается напрямую
-                };
+                //gridViewKnitMachineLoadInfo.Columns["combinedPszNom"].DisplayFormat.CustomFormat += (value) =>
+                //{
+                //    return value?.ToString(); // RTF-текст передается напрямую
+                //};
 
                 //// Подключаем обработчик события
                 //gridViewKnitMachineLoadInfo.CustomColumnDisplayText += (sender, e) =>
