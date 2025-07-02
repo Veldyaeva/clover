@@ -25,6 +25,8 @@ using SewingProduction.Core.Class.Settings;
 using System.Diagnostics;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Forms;
+using DevExpress.XtraReports.Native;
+using DevExpress.XtraVerticalGrid.ViewInfo;
 
 
 //nemain
@@ -35,7 +37,7 @@ namespace SewingProduction
     {
         public UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
-        private ToolStripMenuItem[] toolStripMenuItems; 
+        private ToolStripMenuItem[] toolStripMenuItems;
         private string loginHistoryFile = "settings.json";
         //private Dictionary<string, Form> openedForms = new Dictionary<string, Form>(); 
         public FormManager _formManager;
@@ -63,7 +65,7 @@ namespace SewingProduction
 
         private void отгрузкаToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -83,7 +85,7 @@ namespace SewingProduction
                 await _user.LoadUserData();
                 await _user.LoadObjectForm(this.Name);
 
-                LoadObjectForm(); // Загружаем права доступа и применяем их
+                LoadObjectForm();
                 await _formManager.RestoreOpenTabs();
                 //RestoreOpenTabs();
             }
@@ -92,7 +94,7 @@ namespace SewingProduction
                 this.Close();
             }
         }
-        
+
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
         {
             XtraMdiTabPage page = e.Page;
@@ -108,7 +110,7 @@ namespace SewingProduction
             //f.Show();
         }
 
-       
+
         private void оборудованиеToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new SpravOborud(_user), sender);
@@ -175,7 +177,7 @@ namespace SewingProduction
             f.MdiParent = this;
             f.Show();
         }
-        
+
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new TeamWork(), sender);
@@ -288,7 +290,7 @@ namespace SewingProduction
                 }
             }
         }
-        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items)
+        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
         {
             foreach (ToolStripItem item in items)
             {
@@ -301,11 +303,13 @@ namespace SewingProduction
 
                 item.Visible = hasRead || hasWrite;
                 item.Enabled = hasWrite;
-                Console.WriteLine(" Объект: " + objectName + " Чтение: " + hasRead + " Запись: " + hasWrite);
+                string indent = new string(' ', indentLevel);
+                Debug.WriteLine($"{indent}Объект: {objectName,-40} | Видим: {item.Visible,-5} | Чтение: {hasRead,-5} | Запись: {hasWrite,-5} | indentLevel: {indentLevel,-5}");
+
                 // если это пункт меню с подменю — рекурсивно
                 if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
                 {
-                    ApplyPermissionsToMenuItems(menuItem.DropDownItems);
+                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
                 }
             }
         }

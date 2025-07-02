@@ -21,8 +21,9 @@ namespace SewingProduction
     public class ServiceBroker
     {
         private readonly object _form;
-        // ИЗМЕНЕНИЯ СОМТРТСЯ НА ТЕСТОВОЙ БАЗЕ:(удалить коммент после изменения)
-        private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        // Для теста:
+        // private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
+        private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
 
         private SqlConnection _connection;
         private SqlCommand _command;
