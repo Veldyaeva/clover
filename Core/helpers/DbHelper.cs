@@ -26,7 +26,7 @@ namespace SewingProduction.Helpers
         {
             switch (_serv.ToLower())
             {
-                case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString3; break;
+                case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
                 case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
                 case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
             }

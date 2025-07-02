@@ -112,7 +112,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
             }
         }
 
-        private Form CreateFormInstance(Type formType)
+        public Form CreateFormInstance(Type formType)
         {
             try
             {
@@ -161,12 +161,19 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public List<string> GetAllFormNamesInProject()
         {
             return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())
+                .Where(a => !a.IsDynamic)
+                .SelectMany(a =>
+                {
+                    try { return a.GetTypes(); }
+                    catch (ReflectionTypeLoadException ex)
+                    {
+                        return ex.Types.Where(t => t != null);
+                    }
+                })
                 .Where(t =>
                     typeof(CustomForm).IsAssignableFrom(t) &&
                     t.IsClass &&
-                    !t.IsAbstract
-                )
+                    !t.IsAbstract)
                 .Select(t => t.Name)
                 .Distinct()
                 .ToList();

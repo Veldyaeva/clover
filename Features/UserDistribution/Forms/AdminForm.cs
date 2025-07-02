@@ -19,6 +19,7 @@ using DevExpress.XtraReports.Native;
 using DevExpress.XtraRichEdit.Import.Html;
 using NLog.Filters;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.form.UserDistribution.Models;
 using SewingProduction.Helpers;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
@@ -50,6 +51,7 @@ namespace SewingProduction.form.UserDistribution
             int eFocusedRowHandle = gridViewForms.FocusedRowHandle;
             bindingSourceForms.DataSource = await _adminFormDataService.GetProjectForms();
             gridViewForms.FocusedRowHandle = eFocusedRowHandle;
+            repositoryItemLookUpEditCreator.DataSource = await _adminFormDataService.GetUser();
         }
         private void customCheckBoxMyForm_CheckedChanged(object sender, EventArgs e)
         {
@@ -58,7 +60,7 @@ namespace SewingProduction.form.UserDistribution
             gridViewForms.ActiveFilterString = filter;
             Objects_Load();
         }
-        private void customGridControlForms_Click(object sender, EventArgs e)
+        private async void customGridControlForms_Click(object sender, EventArgs e)
         {
             Objects_Load();
         }
@@ -90,7 +92,9 @@ namespace SewingProduction.form.UserDistribution
             int id = row["ProjectFormsID"] != DBNull.Value ? Convert.ToInt32(row["ProjectFormsID"]) : 0;
 
             string nameForm = row["NameForm"]?.ToString() ?? "";
-            string nameFormRus = row["NameFormRus"]?.ToString() ?? "";
+            string nameFormRus = row["NameFormRus"]?.ToString() ?? ""; 
+            int creatorID = row["CreatorID"] != DBNull.Value ? Convert.ToInt32(row["CreatorID"]) : _user.UserId;
+
 
             try
             {
@@ -98,6 +102,7 @@ namespace SewingProduction.form.UserDistribution
                 {
                     _adminFormDataService.UpdateProjectForms("NameForm", nameForm, id);
                     _adminFormDataService.UpdateProjectForms("NameFormRus", nameFormRus, id);
+                    _adminFormDataService.UpdateProjectForms("CreatorID", creatorID, id);
                 }
                 else
                 {
@@ -313,12 +318,18 @@ namespace SewingProduction.form.UserDistribution
         {
             if (gridViewForms.FocusedRowHandle < 0)
             {
-                MessageBox.Show("Выберите форму.");
+                MessageBox.Show("Выберите форму!");
                 return;
             }
 
             int formID = Convert.ToInt32(gridViewForms.GetFocusedRowCellValue("ProjectFormsID"));
             string formName = gridViewForms.GetFocusedRowCellValue("NameForm")?.ToString();
+
+            if (formName != "SpMainForm")
+            {
+                MessageBox.Show("Выберите основную форму!");
+                return;
+            }
 
             var mainForm = Application.OpenForms.OfType<SpMainForm>().FirstOrDefault();
             if (mainForm == null)
@@ -363,6 +374,54 @@ namespace SewingProduction.form.UserDistribution
             }
         }
         #endregion
+
+        private void customButtonOpen_Click(object sender, EventArgs e)
+        {
+            if (gridViewForms.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите форму для открытия.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string formName = gridViewForms.GetFocusedRowCellValue("NameForm")?.ToString();
+
+            if (string.IsNullOrWhiteSpace(formName))
+            {
+                MessageBox.Show("Не удалось получить имя формы.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Находим главную форму
+            var mainForm = Application.OpenForms.OfType<SpMainForm>().FirstOrDefault();
+            if (mainForm == null)
+            {
+                MessageBox.Show("Главная форма не найдена.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Используем FormScanner для создания формы
+            var scanner = new FormScanner(_adminFormDataService, _user);
+            var formType = scanner.GetAllFormNamesInProject().FirstOrDefault(name => name == formName);
+
+            if (formType == null)
+            {
+                MessageBox.Show($"Форма '{formName}' не найдена в проекте.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Создаем форму
+            var formInstance = scanner.CreateFormInstance(Type.GetType(formName) ?? AppDomain.CurrentDomain
+                .GetAssemblies()
+                .SelectMany(a => a.GetTypes())
+                .FirstOrDefault(t => t.Name == formName));
+
+            if (formInstance == null)
+            {
+                MessageBox.Show($"Не удалось создать экземпляр формы '{formName}'.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            mainForm.OpenForm(formInstance, sender);
+        }
     }
 
     public class AdminFormDataService
@@ -372,11 +431,16 @@ namespace SewingProduction.form.UserDistribution
         {
             _dbHelper = dbHelper;
         }
+        public async Task<System.Data.DataTable> GetUser()
+        {
+            string query = $@" SELECT UserName, UserID AS CreatorID FROM Users";
+            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { });
+        }
         #region Формы
         public async Task<System.Data.DataTable> GetProjectForms()
         {
             string query = $@"
-                SELECT pf.ProjectFormsID,pf.NameForm,pf.NameFormRus,UserName FROM ProjectForms pf
+                SELECT pf.ProjectFormsID, pf.NameForm, pf.NameFormRus, UserName, pf.CreatorID FROM ProjectForms pf
                 LEFT JOIN Users u ON pf.CreatorID = u.UserID";
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> {});
         }

@@ -1,17 +1,13 @@
 ﻿using Dapper;
-using DevExpress.CodeParser;
-using DevExpress.DataProcessing.InMemoryDataProcessor;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
-using static DevExpress.Mvvm.Native.Either;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 using DataTable = System.Data.DataTable;
 
 namespace SewingProduction.Services
@@ -72,6 +68,7 @@ namespace SewingProduction.Services
                     if (columnName == "statustext") return type.GetProperty(nameof(ArtNormN.StatusText));
                     if (columnName == "komment") return type.GetProperty(nameof(ArtNormN.Komment));
                     if (columnName == "annRecommendation") return type.GetProperty(nameof(ArtNormN.Reco));
+                    if (columnName == "seb") return type.GetProperty(nameof(ArtNormN.Seb));
 
                     return null;
                 });
@@ -105,7 +102,7 @@ namespace SewingProduction.Services
         //    data_sozd, diz, constr  FROM ArtNormNView JOIN status_ann ON status = status_id";
             string query = @" select 
                    AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
-                    sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, 
+                    sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId
              FROM ArtNormNView JOIN status_ann ON status = status_id";
 
@@ -170,7 +167,7 @@ namespace SewingProduction.Services
         {
             string query = @"
         SELECT 
-            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, sek_vyaz, 
+            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr 
@@ -222,7 +219,7 @@ namespace SewingProduction.Services
         }
 
         /// <summary>
-        /// загрузка артикулов для увязки. Статус != архивное
+        /// загрузка РТ для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
         public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool includeAll)
@@ -288,12 +285,12 @@ namespace SewingProduction.Services
             return result; 
         }
 
-        internal Task<DataTable> GetNormOper(int i)
+        internal Task<DataTable> GetNormOper()
         {
             string query = @"SELECT no.*, 
-                             kp.text_proizv,
-                             pv.text_vyaz,
-                             ob.text_ob
+                             kp.text_proizv, kp.kod_proizv,
+                             pv.text_vyaz, pv.kod_vyaz,
+                             ob.text_ob, ob.kod_ob
                              FROM dbo.norm_oper no
                              LEFT JOIN kod_proizv kp ON no.kod_proizv = kp.kod_proizv
                              LEFT JOIN podr_vyaz pv ON no.kod_proizv = pv.kod_vyaz
@@ -329,7 +326,55 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="annId">идентификатор РТ</param>
         /// <returns></returns>
-    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
+    public async Task<List<NormRasz>> GetRelatedNormRasz(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = @"SELECT 
+ nr.AnnId, nr.N, nr.N1,nr.razryd, nr.Text,
+    nr.Sek, nr.Seb, nr.Kod, 
+    nr.kod_o AS Kod_o,       
+    nr.kod_ob AS KodOb,   
+    nr.kod_podr AS KodPodr,  
+    nr.kod_proizv AS KodProizv,
+    nr.Spec, nr.Obor, nr.nrId,
+    kp.text_proizv as TextProizv,
+    pv.text_vyaz as TextVyaz,
+    ob.text_ob as TextOb
+FROM dbo.norm_rasz nr
+LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
+LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
+LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
+WHERE nr.annId = @annId";
+
+                    await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
+                    List<NormRasz> result = null;
+                    try
+                    {
+                        var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
+                        result = queryResult.ToList();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        await _logger.LogErrorAsync(ex, $"GetRelatedNormRasz: ОШИБКА QueryAsync<NormRasz> для AnnId={annId}. Проверьте типы данных в модели NormRasz и таблице norm_rasz, особенно для свойств, которые должны быть int, но могут приходить как string или decimal из БД.");
+                        // Дополнительно логируем информацию о свойствах модели NormRasz
+                        var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
+                        foreach (var prop in typeof(NormRasz).GetProperties())
+                        {
+                            sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
+                        }
+                        await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
+                        throw;
+                    }
+
+                    return result ?? new List<NormRasz>();
+                }
+            }, ct);
+        }
+        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
@@ -343,150 +388,99 @@ namespace SewingProduction.Services
     nr.Spec, nr.Obor, nr.nrId,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
-    ob.text_ob 
+    ob.text_ob as TextOb
 FROM dbo.norm_rasz nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
-LEFT JOIN podr_vyaz pv ON nr.kod_proizv = pv.kod_vyaz
+LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
 LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
 WHERE nr.annId = @annId";
 
-        await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
-        List<NormRasz> result = null;
+                await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
+                List<NormRasz> result = null;
                 try
                 {
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
-        result = queryResult.ToList();
+                    result = queryResult.ToList();
 
-                    if (result != null && result.Any())
-                    {
-                        await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper смапил {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz_Success");
-                        foreach (var item in result)
-                        {
-                            await _logger.LogEventAsync(
-                                $"Смаплено: AnnId={item.AnnId}({item.AnnId.GetType().Name}), nrId={item.nrId}({item.nrId.GetType().Name}), razryd={item.razryd}({item.razryd.GetType().Name}), " +
-                                $"N={item.N}({item.N.GetType().Name}), N1={item.N1}({item.N1.GetType().Name}), Sek={item.Sek}({item.Sek.GetType().Name}), Seb={item.Seb}({item.Seb.GetType().Name}),  " +
-                                $"Kod_o={item.kod_o}({item.kod_o.GetType().Name}), KodOb={item.KodOb}({item.KodOb.GetType().Name}), KodPodr={item.KodPodr}({item.KodPodr.GetType().Name}), KodProizv={item.KodProizv}({item.KodProizv.GetType().Name})",
-                                "GetRelatedNormRasz_DapperItem");
-    }
-}
-                    else
-{
-    await _logger.LogEventAsync($"GetRelatedNormRasz: Dapper не вернул данные или результат пуст для AnnId={annId}.", "GetRelatedNormRasz_Empty");
-}
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     await _logger.LogErrorAsync(ex, $"GetRelatedNormRasz: ОШИБКА QueryAsync<NormRasz> для AnnId={annId}. Проверьте типы данных в модели NormRasz и таблице norm_rasz, особенно для свойств, которые должны быть int, но могут приходить как string или decimal из БД.");
-// Дополнительно логируем информацию о свойствах модели NormRasz
-var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
-foreach (var prop in typeof(NormRasz).GetProperties())
-{
-    sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
-}
-await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
-throw; 
+                    // Дополнительно логируем информацию о свойствах модели NormRasz
+                    var sb = new System.Text.StringBuilder("Свойства модели NormRasz:\n");
+                    foreach (var prop in typeof(NormRasz).GetProperties())
+                    {
+                        sb.AppendLine($" - {prop.Name} (Тип: {prop.PropertyType.Name})");
+                    }
+                    await _logger.LogEventAsync(sb.ToString(), "GetRelatedNormRasz_ModelProps");
+                    throw;
                 }
-                
+
                 return result ?? new List<NormRasz>();
             }
         }
-//        public async Task<List<NormRasz>> GetRelatedNormRasz(int annId)
-//        {
-//            using (var connection = _dbHelper.GetConnection())
-//            {
-//                string query = @"SELECT nr.AnnId, nr.N, nr.N1, nr.razryd AS Rasryad, nr.Text,
-//    nr.Sek,
-//    nr.Seb,
-//    nr.Kod,
-//    nr.kod_o AS KodO,
-//    nr.kod_ob AS KodOb,
-//    nr.kod_podr AS KodPodr,
-//    nr.kod_proizv AS KodProizv,
-//    nr.Spec,
-//    nr.Obor,
-//    nr.nrId,
-//    kp.text_proizv as TextProizv,
-//    pv.text_vyaz as TextVyaz,
-//    ob.text_ob 
-//FROM dbo.normRaszView nr
-//LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
-//LEFT JOIN podr_vyaz pv ON nr.kod_proizv = pv.kod_vyaz 
-//LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
-//WHERE nr.annId = @annId";
 
-//                await _logger.LogEventAsync($"GetRelatedNormRasz: Выполняется SQL-запрос для AnnId={annId}: {query}", "GetRelatedNormRasz");
-
-//                var rawData = await connection.QueryAsync(query, new { annId });
-                
-//                if (rawData != null && rawData.Any())
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Получено {rawData.Count()} сырых строк из БД для AnnId={annId}.", "GetRelatedNormRasz");
-//                    foreach (var row in rawData)
-//                    {
-//                        // Пытаемся получить значение как dynamic, чтобы увидеть, что Dapper вернул
-//                        var dynamicRow = (IDictionary<string, object>)row;
-//                        object razrydValueRaw = "NOT_FOUND";
-//                        if (dynamicRow.ContainsKey("Rasryad")) 
-//                        {
-//                            razrydValueRaw = dynamicRow["Rasryad"] ?? "NULL_IN_RAW_DATA";
-//                        }
-//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Сырая строка: AnnId={dynamicRow.ContainsKey("AnnId")}, nrId={dynamicRow.ContainsKey("nrId")}, Rasryad_Raw={razrydValueRaw} (тип: {razrydValueRaw?.GetType()?.Name ?? "N/A"})", "GetRelatedNormRasz");
-//                    }
-//                }
-//                else
-//                {
-//                     await _logger.LogEventAsync($"GetRelatedNormRasz: Сырые данные из БД для AnnId={annId} не найдены или пусты.", "GetRelatedNormRasz");
-//                }
-
-//                var result = rawData.Select(r => new NormRasz {
-//                    AnnId = r.AnnId,
-//                    N = r.N,
-//                    N1 = r.N1,
-//                    razryd = r.Rasryad, 
-//                    Text = r.Text,
-//                    Sek = r.Sek,
-//                    Seb = r.Seb,
-//                    Kod = r.Kod,
-//                    Kod_o = r.kod_o,
-//                    KodOb = r.kod_ob,
-//                    KodPodr = r.kod_podr,
-//                    KodProizv = r.kod_proizv,
-//                    Spec = r.Spec,
-//                    Obor = r.Obor,
-//                    nrId = r.nrId,
-//                    TextProizv = r.TextProizv,
-//                    TextVyaz = r.TextVyaz,
-//                    TextOb = r.text_ob 
-//                }).ToList();
+        public async Task<string> GetSpecByOborudKod(int kodOb)
+        {
+            string query = "SELECT no_spec FROM oborud_shv WHERE kod_ob = @kodOb";
+            var result = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "kodOb", kodOb } });
+            return result.Rows.Count > 0 ? result.Rows[0]["no_spec"]?.ToString() : null;
+        }
 
 
-//                if (result.Any())
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Смаплено {result.Count} объектов NormRasz для AnnId={annId}.", "GetRelatedNormRasz");
-//                    foreach (var item in result)
-//                    {
-//                        await _logger.LogEventAsync($"GetRelatedNormRasz: Смапленный объект: AnnId={item.AnnId}, nrId={item.nrId}, razryd_Mapped={item.razryd}", "GetRelatedNormRasz");
-//                    }
-//                }
-//                else
-//                {
-//                    await _logger.LogEventAsync($"GetRelatedNormRasz: Не удалось смапить объекты NormRasz для AnnId={annId} из сырых данных.", "GetRelatedNormRasz");
-//                }
-                
-//                return result;
-//            }
-//        }
+        public async Task<List<NormRask>> GetRelatedNormRask(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
+                    //return result.ToList();
+                    var list = await connection.QueryAsync<NormRask>(
+                       query,
+                       new { annId },
+                       transaction: null,
+                       commandTimeout: null,
+                       commandType: null
+                       );
 
+                    return list.AsList();
+                }
+            }, ct); 
+        }
         public async Task<List<NormRask>> GetRelatedNormRask(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
-                var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } });
-                return result.ToList();
+                //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
+                //return result.ToList();
+                var list = await connection.QueryAsync<NormRask>(
+                   query,
+                   new { annId },
+                   transaction: null,
+                   commandTimeout: null,
+                   commandType: null
+                   );
+
+                return list.AsList();
             }
         }
 
+        public async Task<List<NormKont>> GetRelatedNormKont(int annId, CancellationToken ct)
+        {
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                    //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
+                    var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
+                    return result.ToList();
+                }
+            }, ct);
+        }
         public async Task<List<NormKont>> GetRelatedNormKont(int annId)
         {
             using (var connection = _dbHelper.GetConnection())
@@ -497,24 +491,13 @@ throw;
                 return result.ToList();
             }
         }
-
-        //public async Task<List<NormDopObr>> GetRelatedNormDopObr(int annId)
-        //{
-        //    using (var connection = _dbHelper.GetConnection())
-        //    {
-        //        string query = "SELECT AnnId, sek_p as SekP, sek_p_tamp as SekTamp, sek_v as SekV, sek_stra as SekStra FROM norm_dop_obr WHERE annId = @annId";
-        //        // return //_dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
-        //        var result = await connection.QueryAsync<NormDopObr>(query, new Dictionary<string, object> { { "@annId", annId } });
-        //        return result.ToList();
-        //    }
-        //}
         /// <summary>
         /// Получение неувязанных артикулов из sp_articul
         /// </summary>
         /// <returns></returns>
         public async Task<List<MyDataART>> GetRelatedSpArt()
         {
-            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annID FROM sp_articul WHERE annId IS NULL";
 
             using (var connection = _dbHelper.GetConnection())
             {
@@ -543,23 +526,20 @@ throw;
             List<NZPByKoddRt> nzpList;
             Dictionary<string, int> pztCounts;
 
-            // Оборачиваем получение и использование соединения в using
             using (var connection = _dbHelper.GetConnection())
             {
-                // Выполняем первый запрос и ждем его
                 var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
                     "dbo.GetNZPByKoddRT",
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 nzpList = nzpResult.ToList();
 
-                // Выполняем второй запрос на том же соединении и ждем его
                 var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
                     "dbo.GetPztCountsByKoddRT",
                     new { xAnnID = annId },
                     commandType: CommandType.StoredProcedure);
                 pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
-            } // Соединение будет автоматически закрыто/освобождено здесь
+            } 
 
             // Объединение результатов
             foreach (var row in nzpList)
@@ -570,10 +550,57 @@ throw;
 
             return nzpList;
         }
+        public async Task<List<NZPByKoddRt>> GetNzpWithPztCounts(int annId, CancellationToken ct)
+        {
+            List<NZPByKoddRt> nzpList;
+            Dictionary<string, int> pztCounts;
+            return await Task.Run(async () =>
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    var nzpResult = await connection.QueryAsync<NZPByKoddRt>(
+                        "dbo.GetNZPByKoddRT",
+                        new { xAnnID = annId },
+                        commandType: CommandType.StoredProcedure);
+                    nzpList = nzpResult.ToList();
+
+                    var pztResult = await connection.QueryAsync<(string kod, int PztCount)>(
+                        "dbo.GetPztCountsByKoddRT",
+                        new { xAnnID = annId },
+                        commandType: CommandType.StoredProcedure);
+                    pztCounts = pztResult.ToDictionary(x => x.kod, x => x.PztCount);
+                }
+
+                // Объединение результатов
+                foreach (var row in nzpList)
+                {
+                    if (pztCounts.TryGetValue(row.kodd.ToString(), out int count))
+                        row.PZTCount = count;
+                }
+
+                return nzpList;
+            }, ct);
+        }
+
+
+        public async Task<decimal> getArtNormnSeb(int annId)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                var result = await connection.ExecuteScalarAsync<object>(
+                    "SELECT dbo.getArtNormnSeb(@xAnnID)",
+                    new { xAnnID = annId });
+
+                if (result == null || result == DBNull.Value)
+                    return 0m;
+
+                return Convert.ToDecimal(result);
+            }
+        }
 
         public async Task<List<FioModel>> GetRelDesigner()
         {
-            string query = "SELECT fio, tab FROM fio";
+            string query = "SELECT * FROM fio WHERE rab LIKE '%дизайнер%' OR rab LIKE '%конструктор%'";//"SELECT fio, tab FROM fio";
             using (var connection = _dbHelper.GetConnection())
             {
                 var result = await connection.QueryAsync<FioModel>(query);

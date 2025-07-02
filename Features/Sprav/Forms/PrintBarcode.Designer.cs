@@ -290,7 +290,6 @@
             tableLayoutPanel6.ResumeLayout(false);
             tableLayoutPanel6.PerformLayout();
             ResumeLayout(false);
-
         }
 
         #endregion

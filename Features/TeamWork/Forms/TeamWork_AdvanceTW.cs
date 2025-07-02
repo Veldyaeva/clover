@@ -1,28 +1,28 @@
+using Dapper;
+using DevExpress.XtraBars.Customization;
+using DevExpress.XtraDiagram.Bars;
+using DevExpress.XtraEditors;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using NLog.Filters;
+using SewingProduction.form.TeamWork.Forms;
 using SewingProduction.Helpers;
+using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BindingSource = System.Windows.Forms.BindingSource;
-using SewingProduction.form.TeamWork.Forms;
-using DevExpress.XtraGrid.Views.Base;
-using System.Collections.Generic;
-using DevExpress.CodeParser;
-using static SewingProduction.form.TeamWork.Forms.norm_raskrNew;
-using System.Linq;
-using System.Reflection;
-using SewingProduction.Interfaces;
-using System.Data.SqlClient;
 using Z.Dapper.Plus;
-using System.Drawing;
-using System.Diagnostics;
-using Dapper;
-using DevExpress.Utils;
-using DevExpress.XtraExport.Helpers;
+using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
 namespace SewingProduction.form
@@ -85,7 +85,7 @@ namespace SewingProduction.form
         {
             if (!_originalColors.ContainsKey(control))
             {
-                 _originalColors[control] = control.BackColor;
+                _originalColors[control] = control.BackColor;
             }
             control.BackColor = _highlightColor;
         }
@@ -94,10 +94,54 @@ namespace SewingProduction.form
         {
             if (_originalColors.TryGetValue(control, out Color originalColor))
             {
-                 control.BackColor = originalColor; 
+                control.BackColor = originalColor;
             }
         }
         #endregion
+
+        private int _originalBufferId;
+        private int? _sourceAnnIdToCopyDetailsFrom = null; // Для копирования операций
+        private ArtNormN _duplicateAnnData = null; // Для копирования шапки РТ
+
+        public int CurrentMode => _mode;
+        public int? SourceAnnIdToCopyDetailsFrom => _sourceAnnIdToCopyDetailsFrom;
+
+        public static class CloneUtils
+        {
+            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName)
+                where T : ICloneable
+            {
+                var list = new List<T>();
+                foreach (var item in source)
+                {
+                    var clone = (T)item.Clone();
+                    typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
+                    typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
+                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, true);
+                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, true);
+                    list.Add(clone);
+                }
+                return list;
+            }
+
+            public static BindingList<T> DeepCloneBindingList<T>(IEnumerable<T> sourceList) where T : class, ICloneable
+            {
+                if (sourceList == null) return new BindingList<T>();
+                var newList = new BindingList<T>();
+                foreach (var item in sourceList)
+                {
+                    if (item is T clonedItem)
+                    {
+                        newList.Add(clonedItem.Clone() as T);
+                    }
+                }
+                return newList;
+            }
+        }
+
+        private BindingList<NormRasz> _originalNormRaszList;
+        private BindingList<NormRask> _originalNormRaskList;
+        private BindingList<NormKont> _originalNormKontList;
 
         /// <summary>
         /// 
@@ -106,25 +150,34 @@ namespace SewingProduction.form
         /// <param name="oldId">Id исходной записи</param>
         /// <param name="bufferWorkDivision">Id из буфера</param>
         /// <param name="mode">режим</param>
-        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null ,int? oldId = null)
+        public TeamWork_AdvanceTW(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
         {
             InitializeComponent();
+            gridViewRasz.OptionsView.ShowIndicator = true;
+            gridViewRasz.OptionsBehavior.EditorShowMode = DevExpress.Utils.EditorShowMode.MouseDownFocused;
+            gridViewRasz.Appearance.Row.ForeColor = Color.Black;
+            gridViewRasz.Appearance.FocusedRow.ForeColor = Color.Black;
+            gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
+            gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
 
             if (!oldId.HasValue)
-                _selectedAnnId =_newAnnId =newId.Value;
+                _selectedAnnId = _newAnnId = newId.Value;
             if (!newId.HasValue)
                 _selectedAnnId = _newAnnId = oldId.Value;
-            if (oldId.HasValue&&newId.HasValue)
+            if (oldId.HasValue && newId.HasValue)
             {
                 _newAnnId = newId.Value;
                 _selectedAnnId = oldId.Value;
             }
             _bufferWorkDivision = bufferWorkDivision;
             _mode = mode;
+            _sourceAnnIdToCopyDetailsFrom = sourceAnnIdToCopyDetailsFrom;
+            _duplicateAnnData = duplicateAnnData;
         }
 
         private void AttachChangeHandlers()
@@ -191,7 +244,8 @@ namespace SewingProduction.form
             if (control == secTimeTextBox) return nameof(ArtNormN.Sek);
             if (control == textBoxKomment) return nameof(ArtNormN.Komment);
             if (control == textBoxReco) return nameof(ArtNormN.Reco);
-            if (control == dateCreate) return nameof(ArtNormN.dateCreate); 
+            if (control == dateCreate) return nameof(ArtNormN.dateCreate);
+            // if (control == dateUpdate) return nameof(ArtNormN.dateUpdate);
             if (control == designerComboBox) return nameof(ArtNormN.Diz);
             if (control == constructorComboBox) return nameof(ArtNormN.Constr);
             return null;
@@ -204,12 +258,12 @@ namespace SewingProduction.form
         {
             try
             {
-                    _normRaszList = new BindingList<NormRasz>();
-                    _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
-                    _normRaskList = new BindingList<NormRask>();
-                    _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
-                    _normKontList = new BindingList<NormKont>();
-                    _normKontBindingSource = new BindingSource { DataSource = _normKontList };
+                _normRaszList = new BindingList<NormRasz>();
+                _normRaszBindingSource = new BindingSource { DataSource = _normRaszList };
+                _normRaskList = new BindingList<NormRask>();
+                _normRaskBindingSource = new BindingSource { DataSource = _normRaskList };
+                _normKontList = new BindingList<NormKont>();
+                _normKontBindingSource = new BindingSource { DataSource = _normKontList };
 
                 gridControlRasz.DataSource = _normRaszBindingSource;
                 gridControlRaskr.DataSource = _normRaskBindingSource;
@@ -243,13 +297,19 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
+                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                if (_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision)
+                bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
+                if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
-                    AttachDeleteContextMenu(gridViewRaskr, _normRaskList, r => r.id, _deletedNormRaskIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                }
+                else
+                {
+                    gridViewRasz.PopupMenuShowing -= ShowPopUp(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
             }
@@ -257,7 +317,19 @@ namespace SewingProduction.form
         private void AttachDeleteContextMenu<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId = null, List<int> deletedIds = null)
                     where T : class
         {
-            view.PopupMenuShowing += (s, e) =>
+            try
+            {
+                view.PopupMenuShowing += ShowPopUp(view, bindingList, getId, deletedIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при удалении строки TeamWork_AdvanceTW");
+            }
+        }
+
+        private static PopupMenuShowingEventHandler ShowPopUp<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId, List<int> deletedIds) where T : class
+        {
+            return (s, e) =>
             {
                 if (e.MenuType != GridMenuType.Row)
                     return;
@@ -278,7 +350,6 @@ namespace SewingProduction.form
                             }
 
                             bindingList.Remove(rowObj); // удаляем из источника
-                            view.DeleteRow(rowHandle);  // удаляем визуально
                         }
                     }
                 });
@@ -287,16 +358,15 @@ namespace SewingProduction.form
             };
         }
 
-
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
             // Запускаем отложенный пересчёт Sek
             _sekDebouncer.Debounce(500, async () =>
             {
-                 RecalculateSek();
+                RecalculateSek();
             });
 
-            OnDataChanged(sender, e); 
+            OnDataChanged(sender, e);
         }
         private async void TeamWork_AdvanceTW_Load(object sender, EventArgs e)
         {
@@ -308,7 +378,7 @@ namespace SewingProduction.form
                     _gridHelper.LoadGridViewSettings(gridViewKont, "AdvanceTW_gridViewKontLayout.xml");
                     _gridHelper.LoadGridViewSettings(gridViewRasz, "AdvanceTW_gridViewRaszLayout.xml");
                 });
-                
+
                 Task comboBoxTask = LoadAndBindFioListsAsync();
                 Task bindingsTask = InitializeBindingsAsync();
 
@@ -319,8 +389,8 @@ namespace SewingProduction.form
                     gridViewKont.Columns["Text"].OptionsColumn.AllowEdit = false;
                 }
 
-                await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
-                await LoadAnnDataAsync();
+                //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
+                //await LoadAnnDataAsync();
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -337,53 +407,113 @@ namespace SewingProduction.form
 
                 switch (_mode)
                 {
-                    case (int)Mode.NewWorkDivision: this.Text = "Добавить предварительное"; nameTextBox.Enabled = true;// break;
-
-                        // Заполняем поля, если переданы начальные данные из MyDataART
-                        // _currentAnnData должен быть уже инициализирован (например, в InitializeBindingsAsync)
-                        if (InitialArtData != null && _currentAnnData != null)
-                        {
-                            bool dataChangedByInitialValues = false;
-
-                            if (!string.IsNullOrEmpty(InitialArtData.Articul))
-                            {
-                                _currentAnnData.Articul = InitialArtData.Articul;
-                                dataChangedByInitialValues = true;
-                            }
-                            // Используем свойство 'grup' из MyDataART (с маленькой буквы)
-                            // Свойство в ArtNormN (_currentAnnData) также 'grup' (с маленькой буквы)
-                            if (!string.IsNullOrEmpty(InitialArtData.grup))
-                            {
-                                _currentAnnData.grup = InitialArtData.grup;
-                                dataChangedByInitialValues = true;
-                            }
-                            // Используем свойство 'mod' из MyDataART (с маленькой буквы)
-                            // Свойство в ArtNormN (_currentAnnData) - 'Mod' (с большой буквы)
-                            if (!string.IsNullOrEmpty(InitialArtData.mod))
-                            {
-                                _currentAnnData.Mod = InitialArtData.mod;
-                                dataChangedByInitialValues = true;
-                            }
-
-                            if (dataChangedByInitialValues && bindingSource1.DataSource == _currentAnnData)
-                            {
-                                // Обновляем привязанные контролы
-                                bindingSource1.ResetBindings(false);
-                            }
-                        }
+                    case (int)Mode.NewWorkDivision:
+                        this.Text = "Добавить предварительное";
+                        nameTextBox.Enabled = true;
+                        // ArtNormN и AnnId уже созданы заранее, коллекции пустые
+                        _normRaszList.Clear();
+                        _normRaskList.Clear();
+                        _normKontList.Clear();
                         break;
-                    case (int)Mode.ArchAndCopy: this.Text = "Архив+копия"; break;
-                    case (int)Mode.Edit: this.Text = "Редактировать"; break;
+                    case (int)Mode.ArchAndCopy:
+                        this.Text = "Архив+копия";
+                        var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId"));
+                        _normRaskList.Clear();
+                        _normKontList.Clear();
+                        _currentAnnData.dateCreate = DateTime.Now;
+                        break;
+                    case (int)Mode.Edit:
+                        this.Text = "Редактировать";
+                        await LoadForEdit(_selectedAnnId);
+                        break;
+                    case (int)Mode.Clone:
+                        this.Text = "Дубль";
+                        var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId"));
+                        _normRaskList.Clear();
+                        _normKontList.Clear(); _currentAnnData.dateCreate = DateTime.Now;
+                        break;
                 }
+                await LoadAnnDataAsync();
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
 
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz FROM podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM oborud_shv", null);
+                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
+                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
 
-                designerComboBox.DataBindings.Clear(); 
+                repositoryItemLookUpEdit_kodProizv.DataSource = kodProizvList;
+                repositoryItemLookUpEdit_kodProizv.DisplayMember = "text_proizv";
+                repositoryItemLookUpEdit_kodProizv.ValueMember = "kod_proizv";
+                repositoryItemLookUpEdit_kodProizv.NullText = "[Выберите значение]";
+                repositoryItemLookUpEdit_podrVyaz.DataSource = podrVyazList;
+                repositoryItemLookUpEdit_podrVyaz.DisplayMember = "text_vyaz";
+                repositoryItemLookUpEdit_podrVyaz.ValueMember = "kod_vyaz";
+                repositoryItemLookUpEdit_podrVyaz.NullText = "[Выберите значение]";
+                repositoryItemLookUpEdit_oborudShv.DataSource = oborudShvList;
+                repositoryItemLookUpEdit_oborudShv.DisplayMember = "text_ob";
+                repositoryItemLookUpEdit_oborudShv.ValueMember = "kod_ob";
+                repositoryItemLookUpEdit_oborudShv.NullText = "[Выберите значение]";
+
+                repositoryItemLookUpEdit_oborudShv.EditValueChanged += async (s, e) =>
+    {
+        var editor = s as LookUpEdit;
+        if (editor?.EditValue is int newKodOb)
+        {
+            var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
+            if (!string.IsNullOrEmpty(spec))
+            {
+                gridViewRasz.SetFocusedRowCellValue("Spec", spec);
+            }
+        }
+    };
+
+                repositoryItemLookUpEdit_kodProizv.EditValueChanged += (s, e) =>
+                {
+                    if (gridViewRasz.FocusedRowHandle < 0)
+                        return;
+
+                    if (s is LookUpEdit editor)
+                    {
+                        var value = editor.EditValue;
+                        if (value != null && int.TryParse(value.ToString(), out int kodProizv))
+                        {
+                            // теперь безопасно использовать kodProizv
+                            UpdateFilteredPodrVyaz(kodProizv);
+                        }
+                    }
+                };
+
+
+                repositoryItemLookUpEdit_podrVyaz.QueryPopUp += (s, e) =>
+                {
+                    if (gridViewRasz.FocusedRowHandle < 0)
+                        return;
+
+                    var kodProizvObj = gridViewRasz.GetRowCellValue(gridViewRasz.FocusedRowHandle, "kod_proizv");
+                    if (kodProizvObj != null && int.TryParse(kodProizvObj.ToString(), out int kodProizv))
+                    {
+                        var filtered = podrVyazList
+                            .Where(x => x.kod_proizv == kodProizv || x.kod_proizv == 9)
+                            .ToList();
+
+                        if (s is LookUpEdit editor)
+                        {
+                            // ВАЖНО: нужно перезаписать .Properties, а не просто DataSource
+                            editor.Properties.DataSource = filtered;
+                            editor.Properties.ValueMember = "kod_vyaz";
+                            editor.Properties.DisplayMember = "text_vyaz";
+                            editor.Properties.PopulateColumns();
+
+                            Console.WriteLine($"Фильтрация выполнена: kod_proizv={kodProizv}, filtered={filtered.Count}");
+                        }
+                    }
+                };
+
+
+                designerComboBox.DataBindings.Clear();
                 constructorComboBox.DataBindings.Clear();
 
                 designerComboBox.DataBindings.Add("EditValue", bindingSource1, nameof(ArtNormN.Diz), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -393,11 +523,122 @@ namespace SewingProduction.form
                 gridViewRasz.RowStyle += GridView_RowStyle;
                 gridViewRaskr.RowStyle += GridView_RowStyle;
                 gridViewKont.RowStyle += GridView_RowStyle;
+
+                if (_currentAnnData != null && _sourceAnnIdToCopyDetailsFrom.HasValue && _duplicateAnnData != null && _mode == (int)Mode.NewWorkDivision)
+                {
+                    // Копирование данных шапки из _duplicateAnnData в _currentAnn (уже загруженный для newAnnId)
+                    _currentAnnData = _duplicateAnnData.CloneProperties();
+                    _currentAnnData.dateUpdate = null;
+                    _currentAnnData.dateCreate = DateTime.Now;
+
+                    _currentAnnData.ParentId = _sourceAnnIdToCopyDetailsFrom.Value;
+
+                    // Загрузка операций из sourceAnnIdToCopyDetailsFrom
+                    int sourceAnnId = _sourceAnnIdToCopyDetailsFrom.Value;
+
+                    List<NormRasz> raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+                    _normRaszList.Clear();
+                    foreach (var item in raszToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true; // Так как это новые записи для нового РТ
+                        item.nrId = 0; // Сброс ID для новой записи
+                        _normRaszList.Add(item);
+                    }
+                    _normRaszBindingSource.ResetBindings(false);
+
+                    List<NormRask> raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                    _normRaskList.Clear();
+                    foreach (var item in raskToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true;
+                        item.id = 0;
+                        _normRaskList.Add(item);
+                    }
+                    _normRaskBindingSource.ResetBindings(false);
+
+                    List<NormKont> kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                    _normKontList.Clear();
+                    foreach (var item in kontToCopy)
+                    {
+                        item.AnnId = _currentAnnData.AnnID;
+                        item.IsNew = true;
+                        item.IsModified = true;
+                        item.nkId = 0;
+                        _normKontList.Add(item);
+                    }
+                    _normKontBindingSource.ResetBindings(false);
+
+
+                    _hasUnsavedChanges = true;
+                    //UpdateFormTitle();
+                    //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
+                }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
             }
+        }
+        private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
+        {
+            var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+            var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
+            var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
+            _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, newAnnId, "nrId"));
+            _normRaskList.BulkLoad(CloneUtils.CloneList(rask, newAnnId, "id"));
+            _normKontList.BulkLoad(CloneUtils.CloneList(kont, newAnnId, "nkId"));
+        }
+
+        private void UpdateFilteredPodrVyaz(int kodProizv)
+        {
+            if (podrVyazList == null) return;
+
+            var filtered = podrVyazList
+                .Where(x => x.kod_proizv == kodProizv || x.kod_proizv == 9)
+                .ToList();
+
+
+            if (gridViewRasz.FocusedRowHandle >= 0)
+            {
+                object currentKodPodr = null;
+
+                if (gridViewRasz.ActiveEditor is LookUpEdit editor)
+                {
+                    currentKodPodr = editor.EditValue;
+                }
+                else
+                {
+                    currentKodPodr = gridViewRasz.GetFocusedRowCellValue("kod_podr");
+                }
+
+                if (currentKodPodr != null && int.TryParse(currentKodPodr.ToString(), out int kodPodr))
+                {
+                    if (!filtered.Any(x => x.kod_vyaz == kodPodr))
+                    {
+                        gridViewRasz.SetRowCellValue(gridViewRasz.FocusedRowHandle, "kod_podr", null);
+                    }
+                }
+            }
+        }
+
+
+
+        private async Task LoadForEdit(int annId)
+        {
+            var rasz = await _artNormService.GetRelatedNormRasz(annId);
+            var rask = await _artNormService.GetRelatedNormRask(annId);
+            var kont = await _artNormService.GetRelatedNormKont(annId);
+            _normRaszList.BulkLoad(rasz);
+            _normRaskList.BulkLoad(rask);
+            _normKontList.BulkLoad(kont);
+            // Сохраняем оригинальные списки для отката
+            _originalNormRaszList = CloneUtils.DeepCloneBindingList(_normRaszList);
+            _originalNormRaskList = CloneUtils.DeepCloneBindingList(_normRaskList);
+            _originalNormKontList = CloneUtils.DeepCloneBindingList(_normKontList);
         }
 
         private async Task LoadAndBindFioListsAsync()
@@ -409,7 +650,7 @@ namespace SewingProduction.form
                     var fioData = await _artNormService.GetRelDesigner();
                     if (fioData != null && fioData.Count > 0)
                     {
-                        _cachedFioData = new List<FioModel>(fioData); 
+                        _cachedFioData = new List<FioModel>(fioData);
                         await _logger.LogEventAsync("FIO загружено и закешировано", "LoadAndBindFioListsAsync");
                     }
                     else
@@ -437,120 +678,6 @@ namespace SewingProduction.form
         }
 
         /// <summary>
-        /// Загрузка данных из буфера (NormRasz, NormRask и ANN) с параллельной обработкой.
-        /// </summary>
-        private async Task WorkDivisionLoadAsync(string caller, int id)
-        {
-            if (id <= 0)
-                return;
-            try
-            {
-                // Загружаем все данные параллельно
-                var raszTask = _artNormService.GetRelatedNormRasz(id);
-                var raskTask = _artNormService.GetRelatedNormRask(id);
-                var kontTask = _artNormService.GetRelatedNormKont(id);
-                var annDataTask = _artNormService.GetArtNormDataById(id);
-
-                await Task.WhenAll(raszTask, raskTask, kontTask, annDataTask);
-
-                var kod_proizv = await _artNormService.GetKod_proizv();
-                var podr_vyaz = await _artNormService.GetPodr_vyaz();
-                var oborud_shv = await _artNormService.GetOborud_shv();
-
-                await this.InvokeAsync(() =>
-                {
-                    // Подгружаем справочники в репозитории
-                    repositoryItemLookUpEdit_kod_proizv.DataSource = kod_proizv;
-                    repositoryItemLookUpEdit_podrVyaz.DataSource = podr_vyaz;
-                    repositoryItemLookUpEdit_oborudShv.DataSource = oborud_shv;
-
-                    repositoryItemLookUpEdit_kod_proizv.ValueMember = nameof(KodProizvModel.kod_proizv);
-                    repositoryItemLookUpEdit_kod_proizv.DisplayMember = nameof(KodProizvModel.text_proizv);
-                    repositoryItemLookUpEdit_podrVyaz.ValueMember = nameof(PodrVyazModel.kod_vyaz);
-                    repositoryItemLookUpEdit_podrVyaz.DisplayMember = nameof(PodrVyazModel.text_vyaz);
-                    repositoryItemLookUpEdit_oborudShv.ValueMember = nameof(OborudShvModel.kod_ob);
-                    repositoryItemLookUpEdit_oborudShv.DisplayMember = nameof(OborudShvModel.text_ob);
-                    foreach (var r in _normRaszList)
-                    {
-                        r.TextProizv = kodProizvList.FirstOrDefault(x => x.kod_proizv == r.KodProizv)?.text_proizv;
-                        r.TextVyaz = podrVyazList.FirstOrDefault(x => x.kod_vyaz == r.KodPodr)?.text_vyaz;
-                        r.TextOb = oborudShvList.FirstOrDefault(x => x.kod_ob == r.KodOb)?.text_ob;
-                    }
-
-
-
-                    // Обновляем списки
-                    _normRaszList.Clear();
-                    _normRaskList.Clear();
-                    _normKontList.Clear();
-
-                    bool isCopyOrBuffer = _mode == (int)Mode.ArchAndCopy || caller == "buffer";
-
-                    LoadList(raszTask.Result, _normRaszList, nameof(NormRasz.nrId), isCopyOrBuffer);
-                    LoadList(raskTask.Result, _normRaskList, nameof(NormRask.id), isCopyOrBuffer);
-                    LoadList(kontTask.Result, _normKontList, nameof(NormKont.nkId), isCopyOrBuffer);
-
-                    // Обновляем привязки
-                    _normRaszBindingSource.ResetBindings(false);
-                    _normRaskBindingSource.ResetBindings(false);
-                    _normKontBindingSource.ResetBindings(false);
-
-                    // Обновляем данные ANN через биндинг
-                    var annData = annDataTask.Result;
-                    if (annData != null)
-                    {
-                        _currentAnnData = annData;
-                        bindingSource1.DataSource = _currentAnnData;
-                        bindingSource1.ResetBindings(false);
-                        // Если загрузка из буфера, обновим и оригинал для сравнения
-                        if (isCopyOrBuffer) 
-                        {
-                             _originalAnnData = _currentAnnData?.Clone();
-                             _hasUnsavedChanges = false; // Сброс флага после вставки из буфера
-                        }
-                    }
-                    gridColumn4.ColumnEdit = repositoryItemLookUpEdit_kod_proizv;
-                    Kod_podr.ColumnEdit = repositoryItemLookUpEdit_podrVyaz;
-                    Kod_ob.ColumnEdit = repositoryItemLookUpEdit_oborudShv;
-
-                });
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных ANN в WorkDivisionLoadAsync");
-
-                await this.InvokeAsync(() =>
-                {
-                    MessageBox.Show($"Ошибка при загрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                });
-            }
-        }
-        private void LoadList<T>(List<T> sourceList, BindingList<T> targetList, string idFieldName, bool isCopyOrBuffer) where T : INewable
-        {
-            foreach (var item in sourceList)
-            {
-                var idProp = typeof(T).GetProperty(idFieldName);
-
-                if (isCopyOrBuffer)
-                {
-                    // При Архив+Копия или вставке из буфера: сбрасываем ID, ставим IsNew
-                    if (idProp != null && idProp.PropertyType == typeof(int))
-                    {
-                        idProp.SetValue(item, 0);
-                    }
-                    item.IsNew = true;
-                }
-                else
-                {
-                    // При обычной загрузке для редактирования
-                    item.IsNew = false;
-                }
-
-                targetList.Add(item);
-            }
-        }
-
-        /// <summary>
         /// Загрузка данных ANN по ID с групповым обновлением UI.
         /// </summary>
         private async Task LoadAnnDataAsync()
@@ -559,26 +686,30 @@ namespace SewingProduction.form
             {
                 // При архивировании нам нужны данные из _selectedAnnId
                 int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
-                
+
                 await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
-                
+
                 var annData = await _artNormService.GetArtNormDataById(idToLoad);
                 if (annData != null)
                 {
                     await _logger.LogEventAsync($"Получены данные ANN: Status={annData.Status}, Articul={annData.Articul}", "LoadAnnDataAsync");
-                    
+
                     await this.InvokeAsync(() =>
                     {
-                        _currentAnnData = annData;                // Обновляем текущую модель
-                        //bindingSource1.DataSource = _currentAnnData; // Привязываем данные к форме
-                        //bindingSource1.ResetBindings(false);
+                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy)
+                        {
+                            annData.dateCreate = DateTime.Now;
+                            annData.dateUpdate = null;
+                        }
+                        _currentAnnData = annData.Clone();                // Обновляем текущую модель
+                        _currentAnnData.CopyPropertiesFrom(annData);
                         bindingSource1.SuspendBinding();
                         bindingSource1.DataSource = _currentAnnData;
                         bindingSource1.ResumeBinding();
                         bindingSource1.ResetBindings(true);
                         // Сохраняем копию для сравнения
-                        _originalAnnData = _currentAnnData?.Clone(); 
-                         _hasUnsavedChanges = false; // Сбрасываем флаг после загрузки оригинала
+                        _originalAnnData = _currentAnnData?.Clone();
+                        _hasUnsavedChanges = false; // Сбрасываем флаг после загрузки оригинала
                     });
 
                     await _logger.LogEventAsync($"Данные ANN успешно загружены для ID {idToLoad}", "LoadAnnDataAsync");
@@ -601,7 +732,7 @@ namespace SewingProduction.form
                 var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
 
                 int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
-
+          //      int Sum1(Func<NormRask, bool> condition)=>rask
                 _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
                 _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
                 _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
@@ -669,7 +800,7 @@ namespace SewingProduction.form
 
                     if (result == DialogResult.No)
                     {
-                        e.Cancel = true; 
+                        e.Cancel = true;
                     }
                     else
                     {
@@ -688,20 +819,20 @@ namespace SewingProduction.form
 
         private async void PerformCleanupOnCancel()
         {
-             try
-             {
-                 if (_mode == (int)Mode.NewWorkDivision && _newAnnId > 0)
-                 {
-                      await _artNormService.DeleteRelatedNormTables(_newAnnId);
-                      await _artNormService.DeleteByAnnId(TableNames.Ann, _newAnnId);
-                      await _logger.LogEventAsync($"Отмена создания. Удалена запись AnnID: {_newAnnId}", "PerformCleanupOnCancel");
-                 }
-             }
-             catch (Exception ex)
-             {
-                 await _logger.LogErrorAsync(ex, "Ошибка при очистке данных при отмене");
-                 // MessageBox.Show($"Ошибка при удалении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-             }
+            try
+            {
+                if (_mode == (int)Mode.NewWorkDivision && _newAnnId > 0)
+                {
+                    await _artNormService.DeleteRelatedNormTables(_newAnnId);
+                    await _artNormService.DeleteByAnnId(TableNames.Ann, _newAnnId);
+                    await _logger.LogEventAsync($"Отмена создания. Удалена запись AnnID: {_newAnnId}", "PerformCleanupOnCancel");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при очистке данных при отмене");
+                // MessageBox.Show($"Ошибка при удалении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         #region Rasz
@@ -711,34 +842,28 @@ namespace SewingProduction.form
             var gridView = sender as GridView;
             if (gridView == null) return;
 
-            if (!gridView.IsNewItemRow(e.RowHandle)) // Editing an existing row or a row added via FinalizeRow
+            if (!gridView.IsNewItemRow(e.RowHandle))
             {
-                if (_isCustomEditFormOpen) // EditForm shown programmatically by FinalizeRow for a newly added row
+                if (_isCustomEditFormOpen)
                 {
                     _isCustomEditFormOpen = false;
-                    // For a newly added row (IsNew should be true), _originalNormRaszDataBeforeEdit is not needed yet for cancel.
-                    // RowEditCanceled will check IsNew property for deletion.
                 }
-                else // User is initiating edit on an existing, possibly persisted row
+                else
                 {
                     var currentNormRasz = gridView.GetRow(e.RowHandle) as NormRasz;
-                    if (currentNormRasz != null && !currentNormRasz.IsNew) // It's an existing row, not one just added
+                    if (currentNormRasz != null && !currentNormRasz.IsNew)
                     {
-                        // Assumes NormRasz has a Clone() method
-                        _originalNormRaszDataBeforeEdit = currentNormRasz.Clone();
+                        _originalNormRaszDataBeforeEdit = (NormRasz)currentNormRasz.Clone();
                     }
                     else
                     {
-                        _originalNormRaszDataBeforeEdit = null; // Ensure it's clear if not applicable
+                        _originalNormRaszDataBeforeEdit = null;
                     }
                 }
                 e.Allow = true;
                 return;
             }
 
-            // If we reach here, gridView.IsNewItemRow(e.RowHandle) is TRUE.
-            // This means the user clicked the "Add New Row" placeholder.
-            // Always execute our custom logic.
             e.Allow = false;
 
             using (var selectionForm = new NormOperNew(_selectedAnnId))
@@ -751,7 +876,7 @@ namespace SewingProduction.form
                     selectedData.IsNew = true;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
-
+                    gridControlRasz.RefreshDataSource();
                     int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
                     if (newRowDataSourceIndex >= 0)
                     {
@@ -762,144 +887,12 @@ namespace SewingProduction.form
                         }
                         else
                         {
-                            _logger.LogEventAsync($"Could not find new row handle for added NormRasz. DataSource Index: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
+                            _logger.LogEventAsync($"Не найдена строка для добавления в NormRasz. Номер строки в DataSource: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
                         }
                     }
                 }
             }
         }
-        //private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null) return;
-
-        //    // If we are editing an existing row (not the NewItemRow placeholder)
-        //    // or if this event is for the row just added by our custom logic (FinalizeRow).
-        //    if (!gridView.IsNewItemRow(e.RowHandle))
-        //    {
-        //        if (_isCustomEditFormOpen)
-        //        {
-        //            // This EditForm is being shown programmatically by FinalizeRow
-        //            // for the newly added row. Allow it and reset the flag.
-        //            _isCustomEditFormOpen = false;
-        //        }
-        //        // For any non-NewItemRow, allow the standard editor.
-        //        e.Allow = true;
-        //        return;
-        //    }
-
-        //    // If we reach here, gridView.IsNewItemRow(e.RowHandle) is TRUE.
-        //    // This means the user clicked the "Add New Row" placeholder.
-        //    // Always execute our custom logic.
-        //    e.Allow = false; // Prevent the standard EditForm from appearing for the NewItemRow.
-
-        //    using (var selectionForm = new NormOperNew(_selectedAnnId))
-        //    {
-        //        var result = selectionForm.ShowDialog();
-
-        //        if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
-        //        {
-        //            var selectedData = selectionForm.SelectedRowData;
-        //            selectedData.IsNew = true; // Mark as new for styling/saving logic
-        //            _normRaszList.Add(selectedData);
-
-        //            _normRaszBindingSource.ResetBindings(false);
-
-        //            int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
-        //            if (newRowDataSourceIndex >= 0)
-        //            {
-        //                int newRowHandle = gridView.GetRowHandle(newRowDataSourceIndex);
-        //                if (gridView.IsValidRowHandle(newRowHandle))
-        //                {
-        //                    FinalizeRow(newRowHandle, gridView);
-        //                }
-        //                else
-        //                {
-        //                    // Optional: Log if the new row handle couldn't be found immediately.
-        //                    // This might indicate a timing issue or filtering that prevents the row
-        //                    // from being visible right after adding to the source.
-        //                    _logger.LogEventAsync($"Could not find new row handle for added NormRasz. DataSource Index: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
-        //                }
-        //            }
-        //        }
-        //        // If DialogResult was not OK (e.g., Cancel) or no data selected,
-        //        // the NewItemRow placeholder should typically revert or disappear
-        //        // because e.Allow is false and no data was committed.
-        //        // If the placeholder undesirably persists after cancelling NormOperNew,
-        //        // you might need to add explicit cancellation for the new item row:
-        //        // else if (e.RowHandle == DevExpress.XtraGrid.GridControl.NewItemRowHandle)
-        //        // {
-        //        //     gridView.CancelUpdateCurrentRow(); // This should revert the NewItemRow changes
-        //        // }
-        //    }
-        //}
-        ////private void gridViewRasz_EditFormShowing(object sender, EditFormShowingEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null || !gridView.IsNewItemRow(e.RowHandle))
-        //        return;
-
-        //    if (_isCustomEditFormOpen)
-        //    {
-        //        // Если флаг установлен, значит мы специально открыли форму
-        //        _isCustomEditFormOpen = false;
-        //        return;
-        //    }
-        //    if (gridView.GetRowCellValue(e.RowHandle, "Kod") != null)//решаем, показывать ли editForm  
-        //    {
-        //        e.Allow = true;
-        //        return;
-        //    }
-        //    e.Allow = false;
-
-        //    using (var selectionForm = new NormOperNew(_selectedAnnId))
-        //    {
-        //        var result = selectionForm.ShowDialog();
-
-        //        if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
-        //        {
-        //            var selected = selectionForm.SelectedRowData;
-
-        //            selected.IsNew = true;
-        //            _normRaszList.Add(selected);
-
-        //            // Обновляем привязку данных и интерфейс
-        //            _normRaszBindingSource.ResetBindings(false);
-        //            gridControlRasz.RefreshDataSource();
-        //            gridViewRasz.RefreshData();
-        //            gridView.PostEditor();
-        //            gridView.UpdateCurrentRow();
-
-        //            int indexInList = _normRaszList.IndexOf(selected);
-
-        //            if (indexInList >= 0)
-        //            {
-        //                int rowHandle = gridView.GetRowHandle(indexInList);
-
-        //                if (rowHandle >= 0)
-        //                {
-        //                    gridView.FocusedRowHandle = rowHandle;
-        //                }
-        //                FinalizeRow(rowHandle, gridView);
-        //            }
-        //        }
-        //        else if (result == DialogResult.Cancel)
-        //        {
-        //            // Если пользователь отменил выбор, удаляем строку
-        //            gridView.CancelUpdateCurrentRow();
-        //            gridView.HideEditForm();
-        //            gridView.CloseEditForm();
-        //            gridView.DeleteRow(e.RowHandle);
-        //        }
-        //        else
-        //        {
-        //            e.Allow = false;
-        //            gridView.CancelUpdateCurrentRow();
-        //            gridView.DeleteRow(e.RowHandle);
-        //        }
-        //    }
-        //}
-
         private void FinalizeRow(int rowHandle, GridView gridView)
         {
             // разрешаем показать EditForm
@@ -911,19 +904,11 @@ namespace SewingProduction.form
 
             gridView.GridControl.BeginInvoke(new Action(() =>
             {
-                gridView.FocusedRowHandle = rowHandle; 
-                gridView.ShowEditForm();               
+                gridView.FocusedRowHandle = rowHandle;
+                gridView.ShowEditForm();
             }));
         }
 
-        //private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
-        //{
-        //    GridView view = sender as GridView;
-        //    if (view != null)
-        //    {
-        //        view.HideEditForm();
-        //    }
-        //}
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
             GridView view = sender as GridView;
@@ -946,10 +931,10 @@ namespace SewingProduction.form
                 int index = _normRaszList.IndexOf(canceledNormRasz);
                 if (index != -1)
                 {
-                    // Восстанавливаем оригинальные данные. Убедитесь, что NormRasz.Clone() был эффективен.
-                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); // Нужен метод CopyPropertiesFrom или ручное копирование
+                    // Восстанавливаем оригинальные данные.
+                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); 
                     _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrId}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
-                    _normRaszBindingSource.ResetBindings(false); // Важно для обновления грида
+                    _normRaszBindingSource.ResetBindings(false);
                 }
             }
 
@@ -970,23 +955,7 @@ namespace SewingProduction.form
             }
         }
 
-        private async void gridViewRasz_ValidateRow(object sender, ValidateRowEventArgs e)
-        {
-            if (e.Row is NormRasz normRasz)
-            {
-                try
-                {
-                    normRasz.AnnId = _newAnnId;
-                    e.Valid = true;
-                }
-                catch (Exception ex)
-                {
-                    e.Valid = false;
-                    e.ErrorText = $"Ошибка: {ex.Message}";
-                    await _logger.LogErrorAsync(ex, "Ошибка при валидации данных");
-                }
-            }
-        }
+
         private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
         {
             var gridView = sender as GridView;
@@ -996,7 +965,7 @@ namespace SewingProduction.form
             if (e.Result == EditFormResult.Cancel)
             {
                 _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено
-                return; // Явно ничего не делаем для отмены/прерывания.
+                return;
             }
 
             // Обработка других случаев, когда форма скрыта без обновления
@@ -1041,42 +1010,11 @@ namespace SewingProduction.form
             }
             _originalNormRaszDataBeforeEdit = null; // Убедимся, что очищено после любого закрытия формы редактирования
         }
-        //private async void gridViewRasz_EditFormHidden(object sender, EditFormHiddenEventArgs e)
-        //{
-        //    var gridView = sender as GridView;
-        //    if (gridView == null) return;
-
-        //    if (e.Result != EditFormResult.Update)
-        //    {
-        //        try
-        //        {
-        //            // Получаем текущую строку
-        //            var row = gridView.GetRow(e.RowHandle) as NormRasz;
-        //            if (row != null && row.nrId > 0)
-        //            {
-        //                // Удаляем из базы данных
-        //                await _dbService.DeleteEntityAsync(TableNames.Rasz, TableNames.RaszId, row);//.DeleteNormRaszAsync(row.nrId);
-
-        //                // Удаляем из списка
-        //                _normRaszList.Remove(row);
-        //                _normRaszBindingSource.ResetBindings(false);
-
-        //                // Удаляем из грида
-        //                gridView.DeleteRow(e.RowHandle);
-        //            }
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            await _logger.LogErrorAsync(ex, "Ошибка при удалении строки после закрытия формы редактирования");
-        //            MessageBox.Show($"Ошибка при удалении строки: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //        }
-        //    }
-        //}
         #endregion
 
         #region Rask
         // private async void GridView2_InitNewRow(object sender, InitNewRowEventArgs e)
-        private async void OpenSelectionForm() 
+        private async void OpenSelectionForm()
         {
             if (_isSelectionFormOpen)
                 return;
@@ -1209,17 +1147,17 @@ namespace SewingProduction.form
 
         private async void gridViewKont_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
         {
-             e.Valid = true; 
+            e.Valid = true;
         }
 
         private void gridViewKont_ShowingEditor(object sender, CancelEventArgs e)
         {
             GridView view = sender as GridView;
             if (view == null) return;
-
+            if (view.RowCount >= 2) return;
             if (view.IsNewItemRow(view.FocusedRowHandle))
             {
-                e.Cancel = true; 
+                e.Cancel = true;
 
                 if (_isSelectionFormOpen) return;
 
@@ -1230,8 +1168,8 @@ namespace SewingProduction.form
                     string choice1 = "Пронумеровать деталь";
                     string choice2 = "Номер пачки";
                     // Проверяем, какие строки уже есть
-                    bool hasChoice1 = _normKontList.Any(nk => nk.Text == choice1);
-                    bool hasChoice2 = _normKontList.Any(nk => nk.Text == choice2);
+                    bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
+                    bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
 
                     List<string> options = new List<string>();
                     if (!hasChoice1) options.Add(choice1);
@@ -1248,16 +1186,16 @@ namespace SewingProduction.form
                         }
                         else if (choiceResult == DialogResult.No)
                         {
-                             DialogResult choiceResult2 = MessageBox.Show($"Добавить '{options[1]}'?", "Выбор операции", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                             if (choiceResult2 == DialogResult.Yes)
-                             {
-                                 selectedText = options[1];
-                             }
+                            DialogResult choiceResult2 = MessageBox.Show($"Добавить '{options[1]}'?", "Выбор операции", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (choiceResult2 == DialogResult.Yes)
+                            {
+                                selectedText = options[1];
+                            }
                         }
                     }
                     else if (options.Count == 1)
                     {
-                        selectedText = options[0]; 
+                        selectedText = options[0];
                         MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -1270,8 +1208,8 @@ namespace SewingProduction.form
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
-                            Text = selectedText,
-                            IsNew = true 
+                            text = selectedText,
+                            IsNew = true
                         };
                         _normKontList.Add(newKont);
                         _normKontBindingSource.ResetBindings(false); // Обновляем грид
@@ -1294,130 +1232,72 @@ namespace SewingProduction.form
 
         #endregion
 
-        #region DopObr
-        //private void gridViewDopObr_ShowingEditor(object sender, CancelEventArgs e)
-        //{
-        //    GridView view = sender as GridView;
-        //    if (view == null) return;
 
-        //    if (view.IsNewItemRow(view.FocusedRowHandle))
-        //    {
-        //        e.Cancel = true;
-
-        //        if (_isSelectionFormOpen) return;
-
-        //        try
-        //        {
-        //            _isSelectionFormOpen = true;
-
-        //            if (_normDopObrList == null || _normDopObrList.Count == 0)
-        //            {
-        //                var newDopObr = new NormDopObr
-        //                {
-        //                    AnnId = _newAnnId,
-        //                    IsNew = true 
-        //                };
-        //                _normDopObrList.Add(newDopObr);
-        //                _normDopObrBindingSource.ResetBindings(false);
-        //                MessageBox.Show("Добавлена строка дополнительной обработки.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        //            }
-        //            else
-        //            {
-        //                MessageBox.Show("В таблице дополнительной обработки может быть только одна строка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            }
-        //        }
-        //        finally
-        //        {
-        //            _isSelectionFormOpen = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        e.Cancel = false;
-        //    }
-        //}
-
-        //private async void gridViewDopObr_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //     GridView view = sender as GridView;
-        //     if (view == null) return;
-
-        //     if (e.KeyCode == Keys.Delete && view.FocusedRowHandle >= 0)
-        //     {
-        //         if (MessageBox.Show("Удалить строку дополнительной обработки?", "Подтверждение", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-        //         {
-        //             var rowToDelete = view.GetRow(view.FocusedRowHandle) as NormDopObr;
-        //             if (rowToDelete != null)
-        //             {
-        //                 try
-        //                 {
-        //                     if (!rowToDelete.IsNew && rowToDelete.doId > 0)
-        //                     {
-        //                         await _dbService.DeleteEntityAsync(TableNames.Obr, TableNames.ObrId, rowToDelete);
-        //                     }
-        //                     _normDopObrList.Remove(rowToDelete);
-        //                     _normDopObrBindingSource.ResetBindings(false);
-        //                     view.RefreshData(); 
-        //                     _hasUnsavedChanges = true;
-        //                 }
-        //                 catch(Exception ex)
-        //                 {
-        //                      await _logger.LogErrorAsync(ex, "Ошибка при удалении строки NormDopObr");
-        //                      MessageBox.Show($"Ошибка удаления: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //                 }
-        //             }
-        //         }
-        //         e.Handled = true; 
-        //     }
-        //}
-
-        //private async void gridViewDopObr_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        try
-        //        {
-        //            normDopObr.AnnId = _newAnnId;
-        //            e.Valid = true;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            e.Valid = false;
-        //            e.ErrorText = $"Ошибка: {ex.Message}";
-        //            await _logger.LogErrorAsync(ex, "Ошибка при валидации строки NormDopObr");
-        //        }
-        //    }
-        //}
-
-        //private void gridViewDopObr_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
-        //{
-        //    if (e.Row is NormDopObr normDopObr)
-        //    {
-        //        normDopObr.AnnId = _newAnnId;
-        //        if (!normDopObr.IsNew)
-        //        {
-        //            normDopObr.IsModified = true;
-        //        }
-        //        gridViewDopObr.UpdateCurrentRow(); 
-        //    }
-        //}
-
-        #endregion
-
-        private async void btnOK_Click(object sender, EventArgs e)
+        // Общий метод для обработки сохранения
+        private async Task<bool> ProcessSaveData(bool closeAfterSave)
         {
+            _okPressed = false; // Сбрасываем флаг перед попыткой сохранения
+            await ShowStatusMessage("Сохранение данных...");
+
+            if (!ValidateForm())
+            {
+                await ShowStatusMessage("Ошибки заполнения формы");
+                return false;
+            }
+
             try
             {
-                btnSave_Click(sender, e);
-                this.DialogResult = DialogResult.OK;
-                this.Close();
+                await _dbHelper.ExecuteInTransactionAsync(async () =>
+                {
+                    await SaveAnnDataAsync();
+                    await SaveAllDataAsync();
+                });
+
+                // Эти действия выполняются ПОСЛЕ успешной транзакции
+                IsRaszInserted = true; // Предполагаем, что если сохранение дошло сюда, то все списки были обработаны
+                IsRaskInserted = true;
+                IsKontInserted = true;
+                _hasUnsavedChanges = false;
+
+                if (closeAfterSave)
+                {
+                    await ShowStatusMessage("Данные успешно сохранены! Закрытие формы...", 1500);
+                    this.DialogResult = DialogResult.OK;
+                    _okPressed = true;
+                    this.Close();
+                }
+                else
+                {
+                    await ShowStatusMessage("Данные успешно сохранены!");
+                }
+
+                // Для режима дублирования, убедимся, что ParentId сохраняется
+                if (_mode == (int)Mode.NewWorkDivision && _sourceAnnIdToCopyDetailsFrom.HasValue)
+                {
+                    _currentAnnData.ParentId = _sourceAnnIdToCopyDetailsFrom.Value;
+                }
+
+                return true;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                DialogResult = DialogResult.None;
+                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных в ProcessSaveData");
+                await ShowStatusMessage($"Ошибка при сохранении: {ex.Message}");
+                // this.DialogResult = DialogResult.None; // Не закрываем при ошибке
+                return false;
             }
+        }
 
+        // Сохранение данных без закрытия формы
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            await ProcessSaveData(false);
+        }
+
+        // Сохранение данных и закрытие формы
+        private async void btnOK_Click(object sender, EventArgs e)
+        {
+            await ProcessSaveData(true);
         }
 
         private async Task SaveAnnDataAsync()
@@ -1426,12 +1306,20 @@ namespace SewingProduction.form
             {
                 // Сохраняем данные в таблицу ann
                 _currentAnnData.AnnID = _newAnnId;
+                _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
-                     RecalculateSek();
+                {
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@KoddRt", _currentAnnData.Kod }
+                    };
+                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters);
+//                    RecalculateSek();
+                }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
 
-               // MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // MessageBox.Show("Данные успешно сохранены", "Сохранение", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -1440,7 +1328,7 @@ namespace SewingProduction.form
                 DialogResult = DialogResult.None;
                 return;
             }
-        }        
+        }
         private async Task SaveAllDataAsync()
         {
             try
@@ -1455,7 +1343,7 @@ namespace SewingProduction.form
                     gridControlRasz.RefreshDataSource();
                     gridControlRaskr.RefreshDataSource();
                     gridControlKont.RefreshDataSource();
-                 });
+                });
             }
             catch (Exception ex)
             {
@@ -1520,6 +1408,15 @@ namespace SewingProduction.form
                     bulkStopwatch.Restart();
                     await connection.BulkUpdateAsync(existingItems);
                     bulkStopwatch.Stop();
+
+                    // Сброс флага IsModified после успешного обновления
+                    foreach (var item in existingItems)
+                    {
+                        if (item is IModifiable modifiableItem)
+                        {
+                            modifiableItem.IsModified = false;
+                        }
+                    }
                 }
             }
 
@@ -1539,7 +1436,7 @@ namespace SewingProduction.form
                 {
                     int selectedId = Convert.ToInt32(lookUpEdit.EditValue);
                     string fieldName = string.Empty;
-                    
+
                     if (lookUpEdit == constructorComboBox)
                     {
                         fieldName = "constr";
@@ -1591,9 +1488,17 @@ namespace SewingProduction.form
                     }
 
                     // Загружаем данные из буфера
-                    await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
+                    //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
+                    //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
+                    //            MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
+                    var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+
+                    //_currentAnnData.dateCreate = DateTime.Now;
+
                     MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (SqlException sqlEx)
                 {
@@ -1639,16 +1544,6 @@ namespace SewingProduction.form
                 isValid = false;
             }
 
-            //// Проверка поля Модель или Группа
-            //if (string.IsNullOrWhiteSpace(groupTextBox.Text) && string.IsNullOrWhiteSpace(modelTextBox.Text))
-            //{
-            //    errorProvider1.SetError(groupTextBox, "Заполните либо 'Модель', либо 'Группу'.");
-            //    errorProvider1.SetError(modelTextBox, "Заполните либо 'Модель', либо 'Группу'.");
-            //    if (isValid)
-            //        statusLabel.Text = "Ошибка: Заполните либо 'Модель', либо 'Группу'.";
-            //    isValid = false;
-            //}
-
             return isValid;
         }
         private async Task ShowStatusMessage(string message, int delayMs = 3000)
@@ -1662,7 +1557,7 @@ namespace SewingProduction.form
         {
             if (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0)
             {
-                 _hasUnsavedChanges = true;
+                _hasUnsavedChanges = true;
             }
         }
 
@@ -1677,8 +1572,8 @@ namespace SewingProduction.form
             if (row is INewable newableRow && newableRow.IsNew)
             {
                 e.Appearance.BackColor = Color.LightGreen;
-                e.HighPriority = true; 
-                return; 
+                e.HighPriority = true;
+                return;
             }
 
             try
@@ -1689,51 +1584,90 @@ namespace SewingProduction.form
                     e.HighPriority = true;
                 }
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
-                 _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false); 
+                _logger.LogErrorAsync(ex, $"Ошибка в GridView_RowStyle при проверке IsModified для строки {e.RowHandle}").ConfigureAwait(false);
             }
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-        }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
-        {
-            this.Close();
-
-        }
-
-        private async void btnSave_Click(object sender, EventArgs e)
-        {
-            _okPressed = true;
-            await ShowStatusMessage("Сохранение данных...");
-
-            if (!ValidateForm())
+            if (_originalAnnData != null)
             {
-                await ShowStatusMessage("Ошибки заполнения формы");
-                return;
+                _currentAnnData.CopyPropertiesFrom(_originalAnnData);
+                bindingSource1.ResetBindings(false);
             }
-            try
+
+            if (_originalNormRaszList != null)
             {
-                await _dbHelper.ExecuteInTransactionAsync(async () =>
+                _normRaszList.BulkLoad(_originalNormRaszList);
+            }
+            if (_originalNormRaskList != null)
+            {
+                _normRaskList.BulkLoad(_originalNormRaskList);
+            }
+            if (_originalNormKontList != null)
+            {
+                _normKontList.BulkLoad(_originalNormKontList);
+            }
+
+            _hasUnsavedChanges = false;
+
+            MessageBox.Show("Изменения успешно отменены и восстановлены до исходного состояния.", "Отмена изменений", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+        private void gridViewRasz_EditFormPrepared(object sender, DevExpress.XtraGrid.Views.Grid.EditFormPreparedEventArgs e)
+        {
+            var fieldNames = new List<string>
+    {
+        "№ оп.:", "N1", "razryd", "Text", "сек.:", "Spec", "KodProizv", "KodPodr", "Kod_ob"
+    };
+
+            var controls = fieldNames
+                .Select(fn =>
                 {
-                    await SaveAnnDataAsync();
-                    await SaveAllDataAsync();
-                    if (_mode == (int)Mode.ArchAndCopy)
+                    var ctrl = e.BindableControls.Find(c => c.AccessibleName == fn); // или AccessibleName
+                    return ctrl != null ? new
                     {
+                        FieldName = fn,
+                        Control = ctrl,
+                        Left = ctrl.Left,
+                        Top = ctrl.Top
+                    } : null;
+                })
+                .Where(c => c != null)
+                .ToList();
 
-                    }
-                });
-                await ShowStatusMessage("Данные успешно сохранены!");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при сохранении данных");
-            }
+            var tabOrder = controls
+                .OrderBy(c => c.Left)
+                .ThenBy(c => c.Top)
+                .ToList();
 
+            for (int i = 0; i < tabOrder.Count; i++)
+                tabOrder[i].Control.TabIndex = i;
         }
 
+        private void gridViewRasz_InvalidRowException(object sender, InvalidRowExceptionEventArgs e)
+        {
+            e.ExceptionMode = DevExpress.XtraEditors.Controls.ExceptionMode.NoAction;
+        }
 
+        private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
+        {
+            if (_mode == (int)Mode.Edit &&
+                _currentAnnData?.dateUpdate != null &&
+                _currentAnnData.dateUpdate != DateTime.MinValue)
+            {
+                if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+                {
+                    var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
+                    if (original != null && newSec > original.Sek)
+                    {
+                        e.Valid = false;
+                        e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
+                    }
+                }
+            }
+        }
     }
 }

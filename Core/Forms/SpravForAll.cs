@@ -26,6 +26,10 @@ using DevExpress.Mvvm.Native;
 using static SewingProduction.form.SettingsForm;
 using static SewingProduction.ThemeManager;
 using SewingProduction.Helpers;
+using SewingProduction.form.UserDistribution;
+using SewingProduction.Features.UserDistribution.Helpers;
+using DevExpress.XtraReports.Native;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 
 namespace SewingProduction.form
 {
@@ -48,7 +52,8 @@ namespace SewingProduction.form
         bool flagAddDown = false; //если добавили поле в таблицу
         bool flagStartListening = false; //вкл прослушки
         private System.Windows.Forms.Label[] labels;
-        private TextBox[] textBoxs;
+        private TextBox[] textBoxs; 
+        UserClass _user = new UserClass();
         //словари для рус названий столбцов:
         Dictionary<string, string> eng_rus = new Dictionary<string, string>();
         Dictionary<string, string> rus_eng = new Dictionary<string, string>();
@@ -56,14 +61,15 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "")
+        public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "", UserClass user = null, bool del = false, bool add = false)
         {
             InitializeComponent();
             var dbHelper = new DatabaseHelper("ace");
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
             ThemeManager.UpdateTheme(this);
-
+            // Пользователь:
+            _user = user;
             // Таймер
             timer = new Timer { Interval = 2000 };
             timer.Tick += Timer_Tick;
@@ -80,6 +86,10 @@ namespace SewingProduction.form
             fieldsQueryListSQL = new List<string>();
             labels = new[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
             textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
+
+            // Кнопки удалить добавить
+            //simpleButtonDel.Enabled = del;
+            //simpleButtonAdd.Enabled = add;
         }
         public SpravForAll()
         {
@@ -100,8 +110,29 @@ namespace SewingProduction.form
         #endregion
         private void SpravForAll_Load(object sender, EventArgs e)
         {
-            _serviceBroker.StartBroker();
+            if (_user == null)
+                Debug.WriteLine("[SpravForAll] ВНИМАНИЕ: пользователь не передан!");
+            else
+            {
+                gridControlSprav.ObjectName = "gridControlSprav";
+                gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { tableString });
+                _serviceBroker.StartBroker();
+                SpravForAll_V();
+            }
         }
+        private void SpravForAll_V()
+        {
+            var vButtonAcc= _spravAllDataService.LoadButton(_user.UserId);
+
+            simpleButtonDel.Visible = simpleButtonDel.Enabled = GetMode(vButtonAcc, "simpleButtonDel") > 0;
+            simpleButtonAdd.Visible = simpleButtonAdd.Enabled = GetMode(vButtonAcc, "simpleButtonAdd") > 0;
+            simpleButtonRed.Visible = simpleButtonRed.Enabled = GetMode(vButtonAcc, "simpleButtonRed") > 0;
+
+            gridView1.OptionsBehavior.Editable = simpleButtonRed.Enabled;
+        }
+        private int GetMode(System.Data.DataTable dt, string name) =>
+        dt.AsEnumerable().FirstOrDefault(r => r["name"].ToString() == name)?["ModeID"] as int? ?? 0;
+
         //Рус нэйминг столбцов:
         private async System.Threading.Tasks.Task LoadRusNamesAsync()
         {
@@ -137,6 +168,7 @@ namespace SewingProduction.form
         }
         private void LoadData()
         {
+            //gridControlSprav.InitializeAccess(_user, this.Name);
             System.Data.DataTable tableList = _spravAllDataService.GetRecord(columns);
             spravList.DataSource = tableList;
             fieldsQueryListSQL.Clear();
@@ -183,8 +215,10 @@ namespace SewingProduction.form
                         // текст = колонке
                         labels[i].Text = gridView.Columns[i].Caption;
                         // Делаем метку видимой
-                        labels[i].Visible = true;
-                        textBoxs[i].Visible = true; 
+                        //labels[i].Visible = true;
+                        //textBoxs[i].Visible = true;
+                        labels[i].Visible = gridView.Columns[i].Visible;
+                        textBoxs[i].Visible = gridView.Columns[i].Visible;
                     }
                     else
                     {
@@ -238,8 +272,11 @@ namespace SewingProduction.form
                 textBoxKod.Text = gridView.GetFocusedRowCellValue(gridView.Columns[0]).ToString();
                 for (int i = 1; i < fieldsQueryListSQL.Count; i++)
                 {
-                    textBoxs[i].ReadOnly = false;
-                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
+                    //textBoxs[i].ReadOnly = false;
+                    //textBoxs[i].Text = gridView.GetFocusedRowCellValue(gridView.Columns[i]).ToString();
+                    var column = gridView.Columns[i];
+                    textBoxs[i].ReadOnly = column.OptionsColumn.ReadOnly;
+                    textBoxs[i].Text = gridView.GetFocusedRowCellValue(column)?.ToString();
                 }
             }
             catch (Exception Ex)
@@ -345,6 +382,7 @@ namespace SewingProduction.form
                 MessageBox.Show($"Ошибка {ex.Message}");
             }
         }
+
         //закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -374,6 +412,18 @@ namespace SewingProduction.form
                                 WHERE atn.name = @tableName
                                 ORDER BY ORDINAL_POSITION";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tableName", _tableString } });
+        }
+        public System.Data.DataTable LoadButton(int UserID)
+        {
+            string query = @"SELECT acn.name , max(ModeID) AS ModeID FROM RoleColumn rc
+                            LEFT JOIN all_column_name acn ON acn.id_acn = rc.ColumnID
+                            LEFT JOIN all_table_name atn ON acn.id_atn = atn.id_atn
+                            LEFT JOIN UserRoles ur ON rc.RoleID = ur.RoleID
+                                WHERE acn.data_type = 'button' 
+                                AND atn.name = @tableName
+                                AND ur.UserID = @UserID
+                                GROUP BY acn.name";
+            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@tableName", _tableString }, { "@UserID", UserID } });
         }
         public void InsertRecord(List<string> fieldsQueryListSQL, TextBox[] textBoxs, Dictionary<string, string> eng_type)
         {

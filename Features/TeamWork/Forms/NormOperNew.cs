@@ -70,7 +70,7 @@ namespace SewingProduction.form
         {
             try
             {
-                DataTable data = await _artNormService.GetNormOper(0);
+                DataTable data = await _artNormService.GetNormOper();
 
                 if (data != null && data.Rows.Count > 0)
                 {
@@ -88,49 +88,6 @@ namespace SewingProduction.form
             }
         }
 
-        /// <summary>
-        /// Выбор строки и передача данных в `TeamWork_AdvanceTW`
-        /// </summary>
-        //      private async void customOkButton1_Click(object sender, EventArgs e)
-        //      {
-        //          try
-        //          {
-        //              GridView view = gridView1;
-        //              if (view == null || view.FocusedRowHandle < 0) return;
-
-        //              SelectedRowData = new NormRasz
-        //              {
-        //                  AnnId = _annId,
-        //                  kod_o = view.GetRowCellValue(view.FocusedRowHandle, "kod_o").ToString(),
-        //                  Text = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text")).TrimEnd(' '),
-        //                  Spec = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "spec")).TrimEnd(' '),
-        //                  razryd = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "razryd")),
-        //                  Obor = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "obor")).TrimEnd(' '),
-        ////                  Kod = view.GetRowCellValue(view.FocusedRowHandle, "Kod").ToString(),
-        //                  N1 = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "n1")),
-        //                  Sek = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "sek")),
-        //                  KodOb = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_ob")),
-        //                  KodPodr = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_podr")),
-        //                  KodProizv = Convert.ToInt32(view.GetRowCellValue(view.FocusedRowHandle, "kod_proizv")),
-        //                  TextProizv = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_proizv")).TrimEnd(' '),
-        //                  TextVyaz = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_vyaz")).TrimEnd(' '),
-        //                  TextOb = Convert.ToString(view.GetRowCellValue(view.FocusedRowHandle, "text_ob")).TrimEnd(' '),
-        //                  IsNew = true
-        //              };
-
-        //              this.DialogResult = DialogResult.OK;
-        //              this.Close();
-        //          }
-        //          catch (InvalidOperationException ex)
-        //          {
-        //              MessageBox.Show($"Ошибка: {ex.Message}", "Ошибка вставки", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //          }
-        //          catch (Exception ex)
-        //          {
-        //              await _logger.LogErrorAsync(ex, "Ошибка при выборе строки в NormOperNew");
-        //              MessageBox.Show($"Неизвестная ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        //          }
-        //      }
         private async void customOkButton1_Click(object sender, EventArgs e)
         {
             try
@@ -174,14 +131,13 @@ namespace SewingProduction.form
             normRasz.kod_o = view.GetRowCellValue(rowHandle, "kod_o")?.ToString();
             normRasz.Text = Convert.ToString(view.GetRowCellValue(rowHandle, "text"))?.TrimEnd(' ');
             normRasz.Spec = Convert.ToString(view.GetRowCellValue(rowHandle, "spec"))?.TrimEnd(' ');
-            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); // Используем 0 как defaultValue
             normRasz.Obor = Convert.ToString(view.GetRowCellValue(rowHandle, "obor"))?.TrimEnd(' ');
-            // normRasz.Kod = view.GetRowCellValue(rowHandle, "Kod")?.ToString(); // Если это поле нужно
-            normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); // Используем 0 как defaultValue
-            normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); // Используем 0 как defaultValue
-            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob"); // Используем 0 как defaultValue
-            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr"); // Используем 0 как defaultValue
-            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv"); // Используем 0 как defaultValue
+            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); 
+            normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); 
+            normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); 
+            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob"); 
+            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr"); 
+            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv"); 
             normRasz.TextProizv = Convert.ToString(view.GetRowCellValue(rowHandle, "text_proizv"))?.TrimEnd(' ');
             normRasz.TextVyaz = Convert.ToString(view.GetRowCellValue(rowHandle, "text_vyaz"))?.TrimEnd(' ');
             normRasz.TextOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');

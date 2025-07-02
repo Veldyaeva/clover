@@ -29,44 +29,54 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SplashScreen));
-            this.imageSlider1 = new DevExpress.XtraEditors.Controls.ImageSlider();
-            ((System.ComponentModel.ISupportInitialize)(this.imageSlider1)).BeginInit();
-            this.SuspendLayout();
+            imageSlider1 = new DevExpress.XtraEditors.Controls.ImageSlider();
+            ((System.ComponentModel.ISupportInitialize)imageSlider1).BeginInit();
+            SuspendLayout();
             // 
             // imageSlider1
             // 
-            this.imageSlider1.CurrentImageIndex = 0;
-            this.imageSlider1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images1"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images2"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images3"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images4"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images5"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images6"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images7"))));
-            this.imageSlider1.Images.Add(((System.Drawing.Image)(resources.GetObject("imageSlider1.Images8"))));
-            this.imageSlider1.LayoutMode = DevExpress.Utils.Drawing.ImageLayoutMode.MiddleCenter;
-            this.imageSlider1.Location = new System.Drawing.Point(0, 0);
-            this.imageSlider1.Name = "imageSlider1";
-            this.imageSlider1.Size = new System.Drawing.Size(800, 450);
-            this.imageSlider1.TabIndex = 0;
-            this.imageSlider1.Text = "imageSlider1";
+            imageSlider1.CurrentImageIndex = 0;
+            imageSlider1.Dock = System.Windows.Forms.DockStyle.Fill;
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images1"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images2"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images3"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images4"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images5"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images6"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images7"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images8"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images9"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images10"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images11"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images12"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images13"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images14"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images15"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images16"));
+            imageSlider1.LayoutMode = DevExpress.Utils.Drawing.ImageLayoutMode.MiddleCenter;
+            imageSlider1.Location = new System.Drawing.Point(0, 0);
+            imageSlider1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            imageSlider1.Name = "imageSlider1";
+            imageSlider1.Size = new System.Drawing.Size(933, 519);
+            imageSlider1.TabIndex = 0;
+            imageSlider1.Text = "imageSlider1";
             // 
             // SplashScreen
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.imageSlider1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "SplashScreen";
-            this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SplashScreen";
-            this.TopMost = true;
-            ((System.ComponentModel.ISupportInitialize)(this.imageSlider1)).EndInit();
-            this.ResumeLayout(false);
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(imageSlider1);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "SplashScreen";
+            ShowInTaskbar = false;
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            Text = "SplashScreen";
+            TopMost = true;
+            ((System.ComponentModel.ISupportInitialize)imageSlider1).EndInit();
+            ResumeLayout(false);
 
         }
 

@@ -18,7 +18,7 @@ namespace SewingProduction
             InitializeComponent();
             Random random = new Random();
             int minValue = 3;
-            int maxValue = 6; 
+            int maxValue = 16; 
 
             int randomNumber = random.Next(minValue, maxValue + 1);
 
@@ -30,7 +30,10 @@ namespace SewingProduction
             }
             else if (month >= 6 && month <= 8)
             {
-                imageSlider1.CurrentImageIndex = 2;//summer
+                minValue = 9;
+                maxValue = 16;
+                randomNumber = random.Next(minValue,maxValue + 1);
+                imageSlider1.CurrentImageIndex = randomNumber;//summer
             }
             else if (month >= 9 && month <= 11)
             {
