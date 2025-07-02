@@ -21,6 +21,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -294,12 +295,16 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged -= OnNormRaszListChanged; // защитная отписка
                 _normRaszList.ListChanged += OnNormRaszListChanged;
 
+                _normRaszList.ListChanged -= OnDataChanged;
+                _normRaskList.ListChanged -= OnDataChanged;
+                _normKontList.ListChanged -= OnDataChanged;
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
+                _normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+            //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
+            //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
@@ -673,7 +678,6 @@ namespace SewingProduction.form
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
-                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -866,12 +870,14 @@ namespace SewingProduction.form
 
             e.Allow = false;
             int maxN = 0;
-            for (int i = 0; i < gridViewRasz.DataRowCount; i++)
+            if (_normRaszList != null && _normRaszList.Count > 0)
             {
-                var value = gridViewRasz.GetRowCellValue(i, "N");
-                if (value != null && int.TryParse(value.ToString(), out int n))
-                    if (n > maxN) maxN = n;
+                maxN = _normRaszList
+                    .Select(x => x.N)
+                    .DefaultIfEmpty(0)
+                    .Max();
             }
+
             using (var selectionForm = new NormOperNew(_selectedAnnId))
             {
                 var result = selectionForm.ShowDialog();
@@ -880,7 +886,7 @@ namespace SewingProduction.form
                 {
                     var selectedData = selectionForm.SelectedRowData;
                     selectedData.IsNew = true;
-                    selectedData.N = maxN;
+                    selectedData.N = maxN+1;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
                     gridControlRasz.RefreshDataSource();
@@ -900,6 +906,24 @@ namespace SewingProduction.form
                 }
             }
         }
+
+        private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            if (e.Row is NormRasz row)
+            {
+                // Проверяем уникальность сочетания N/N1
+                bool duplicate = _normRaszList.Any(x =>
+                    x != row && // исключаем саму себя при редактировании
+                    x.N == row.N && x.N1 == row.N1);
+
+                if (duplicate)
+                {
+                    e.Valid = false;
+                    e.ErrorText = $"Операция с номером {row.N} и подоперацией {row.N1} уже существует!";
+                }
+            }
+        }
+
         private void FinalizeRow(int rowHandle, GridView gridView)
         {
             // разрешаем показать EditForm
@@ -1173,7 +1197,7 @@ namespace SewingProduction.form
                     _isSelectionFormOpen = true;
 
                     string choice1 = "Пронумеровать деталь";
-                    string choice2 = "Номер пачки";
+                    string choice2 = "Комплектация пачки";
                     // Проверяем, какие строки уже есть
                     bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
                     bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
@@ -1316,12 +1340,51 @@ namespace SewingProduction.form
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
+                    //var parameters = new Dictionary<string, object>
+                    //{
+                    //    { "@KoddRt", _currentAnnData.Kod }
+                    //};
+                     
+                    RecalculateSek();
+
+                    var ann = _currentAnnData; // уже рассчитаны значения
+                    var xDoc = new XDocument(
+                        new XElement("VFPData",
+                            new XElement("annupdate",
+                                new XElement("sek_shv", ann.SekShv),
+                                new XElement("sek_vyaz5", ann.SekVyaz5),
+                                new XElement("sek_vyaz6", ann.SekVyaz6),
+                                new XElement("sek_vyaz7", ann.SekVyaz7),
+                                new XElement("sek_vyaz10", ann.SekVyaz10),
+                                new XElement("sek_vyaz12", ann.SekVyaz12),
+                                new XElement("sek_vyaz14", ann.SekVyaz14),
+                                new XElement("sek_vyaz18", ann.SekVyaz18),
+                                new XElement("sek_vyaz57", ann.SekVyaz57),
+                                new XElement("sek_vyaz62", ann.SekVyaz62),
+                                new XElement("sek_vyaz70", ann.SekVyaz70),
+                                new XElement("sek_vyaz71", ann.SekVyaz71),
+                                new XElement("sek_vyaz72", ann.SekVyaz72),
+                                new XElement("sek_vyazo", ann.SekVyazo),
+                                new XElement("sek_vyaz", ann.SekVyaz),
+                                new XElement("sek", ann.Sek),
+                                new XElement("sek_kr", ann.SekKr),
+                                new XElement("slogn", ann.Slogn),
+                                new XElement("annid", ann.AnnID)
+                            )
+                        )
+                    );
+
+                    // Получить XML-строку для передачи в процедуру:
+                    string xmlString = xDoc.ToString();
                     var parameters = new Dictionary<string, object>
                     {
-                        { "@KoddRt", _currentAnnData.Kod }
+                        { "@xXml", xmlString }
                     };
-                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters);
-//                    RecalculateSek();
+
+                    await _dbHelper.ExecuteQueryAsync("artNormN_update", parameters, CommandType.StoredProcedure);
+
+                    //await _dbHelper.ExecuteQueryAsync("EXEC dbo.artNormN_update", parameters);
+                    //await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters); - при простановке даты обн
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
@@ -1467,6 +1530,7 @@ namespace SewingProduction.form
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
+            int Nome = 0;
             if (_bufferWorkDivision > 0)
             {
                 try
@@ -1494,13 +1558,21 @@ namespace SewingProduction.form
                         _normKontBindingSource?.ResetBindings(false);
                     }
 
-                    // Загружаем данные из буфера
-                    //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
-                    //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                    //            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
-                    var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
-                    _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+                    if (_normRaszList != null && _normRaszList.Count > 0)
+                    {
+                        Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
+                    }
+                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision); 
+                    if (raszList == null) raszList = new List<NormRasz>();
+
+                    int nextN = Nome;
+                    foreach (var item in raszList)
+                    {
+                        item.N = item.N + Nome;
+                        _normRaszList.Add(item);
+                    }
+                    //var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    //_normRaszList.Add(rasz);//.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
 
                     //_currentAnnData.dateCreate = DateTime.Now;
 
@@ -1661,20 +1733,20 @@ namespace SewingProduction.form
 
         private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            if (_mode == (int)Mode.Edit &&
-                _currentAnnData?.dateUpdate != null &&
-                _currentAnnData.dateUpdate != DateTime.MinValue)
-            {
-                if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
-                {
-                    var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
-                    if (original != null && newSec > original.Sek)
-                    {
-                        e.Valid = false;
-                        e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
-                    }
-                }
-            }
+            //if (_mode == (int)Mode.Edit &&
+            //    _currentAnnData?.dateUpdate != null &&
+            //    _currentAnnData.dateUpdate != DateTime.MinValue)
+            //{
+            //    if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+            //    {
+            //        var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
+            //        if (original != null && newSec > original.Sek)
+            //        {
+            //            e.Valid = false;
+            //            e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
+            //        }
+            //    }
+            //}
         }
     }
 }
