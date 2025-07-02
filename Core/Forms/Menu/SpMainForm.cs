@@ -86,7 +86,8 @@ namespace SewingProduction
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();
-                await _formManager.RestoreOpenTabs();
+                if (SettingsManager.GetSaveOpenTabs())
+                    await _formManager.RestoreOpenTabs();
                 //RestoreOpenTabs();
             }
             else
@@ -269,7 +270,8 @@ namespace SewingProduction
 
         private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveOpenTabsSafe();
+            if (SettingsManager.GetSaveOpenTabs())
+                SaveOpenTabsSafe();
         }
         public void SaveOpenTabsSafe()
         {
@@ -282,38 +284,15 @@ namespace SewingProduction
         /// </summary>
         private void LoadObjectForm()
         {
+            var scanner = new MenuScanner(null, _user);
             foreach (Control control in this.Controls)
             {
                 if (control is MenuStrip menuStrip)
                 {
-                    ApplyPermissionsToMenuItems(menuStrip.Items);
+                    scanner.ApplyPermissionsToMenu(menuStrip);
                 }
             }
         }
-        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (string.IsNullOrWhiteSpace(item.Name)) continue;
-
-                string objectName = item.Tag as string ?? item.Name;
-
-                bool hasWrite = _user.HasPermission(objectName, "Редактор");
-                bool hasRead = _user.HasPermission(objectName, "Просмотр");
-
-                item.Visible = hasRead || hasWrite;
-                item.Enabled = hasWrite;
-                string indent = new string(' ', indentLevel);
-                Debug.WriteLine($"{indent}Объект: {objectName,-40} | Видим: {item.Visible,-5} | Чтение: {hasRead,-5} | Запись: {hasWrite,-5} | indentLevel: {indentLevel,-5}");
-
-                // если это пункт меню с подменю — рекурсивно
-                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
-                {
-                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
-                }
-            }
-        }
-        #endregion
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
@@ -330,6 +309,6 @@ namespace SewingProduction
                 return text;
             return text.Substring(0, maxLength - 3) + "...";
         }
-
+        #endregion
     }
 }
