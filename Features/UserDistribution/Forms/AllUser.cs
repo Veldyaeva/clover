@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraGrid.Views.Grid;
@@ -17,9 +18,13 @@ namespace SewingProduction.form.UserDistribution
         private readonly UserModel _userModel;
         //private BindingList<UserModel> _userModelList;
         DatabaseHelper dbHelper = new DatabaseHelper("ace");
-        private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
-        private readonly UserRoleDataService _userRoleDataService = new UserRoleDataService(new DbService(new DatabaseHelper("ace")), new DatabaseHelper("ace")); 
-        private readonly AllRoleDataService _allRoleDataService = new AllRoleDataService(new DatabaseHelper("ace"));
+        DbService dbService;
+        //private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
+        //private readonly UserRoleDataService _userRoleDataService = new UserRoleDataService(new DbService(new DatabaseHelper("ace")), new DatabaseHelper("ace"));
+        //private readonly AllRoleDataService _allRoleDataService = new AllRoleDataService(new DatabaseHelper("ace"));
+        private readonly UserModelDataService _userModelDataService;
+        private readonly UserRoleDataService _userRoleDataService;
+        private readonly AllRoleDataService _allRoleDataService;
         private readonly AllProfileDataService _allProfileDataService;
         private readonly UserClass _user;
         private int selectedRoleId = -1;
@@ -27,6 +32,10 @@ namespace SewingProduction.form.UserDistribution
         public AllUser(UserClass user) : base(user)
         {
             InitializeComponent();
+            dbService = new DbService(dbHelper);
+            _userModelDataService = new UserModelDataService(dbService, dbHelper);
+            _userRoleDataService = new UserRoleDataService(dbService, dbHelper);
+            _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
             SetupGrid();
@@ -35,6 +44,7 @@ namespace SewingProduction.form.UserDistribution
         {
             repositoryItemLookUpEditBrig.DataSource = await _userModelDataService.LoadBrigList();
             repositoryItemLookUpEditFio.DataSource = await _userModelDataService.LoadFioList();
+            //customGridControlUser.InitializeAccess(_user, this.Name, new List<string> { "Users" });
         }
         private void SetupGrid()
         {
@@ -108,6 +118,7 @@ namespace SewingProduction.form.UserDistribution
                 var hasher = new PasswordHasher();
                 string password = string.IsNullOrWhiteSpace(user.Password) ? "0" : user.Password;
                 user.PasswordHash = hasher.HashPassword(password);
+                user.CreatorID = _user.UserId;
 
                 int newUserId = await _userModelDataService.SaveAsync(user);
                 user.UserID = newUserId;

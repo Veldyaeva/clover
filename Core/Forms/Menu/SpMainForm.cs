@@ -18,10 +18,14 @@ using System.Windows.Forms;
 using DevExpress.XtraTabbedMdi;
 using Newtonsoft.Json;
 using System.IO;
-using SewingProduction.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Forms;
+
 
 //nemain
 
@@ -29,11 +33,12 @@ namespace SewingProduction
 {
     public partial class SpMainForm : Form
     {
-        UserClass _user = new UserClass();
+        public UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems; 
         private string loginHistoryFile = "settings.json";
-        private Dictionary<string, Form> openedForms = new Dictionary<string, Form>();
+        //private Dictionary<string, Form> openedForms = new Dictionary<string, Form>(); 
+        public FormManager _formManager;
         private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
 
         public SpMainForm()
@@ -41,18 +46,18 @@ namespace SewingProduction
             InitializeComponent();
             this.IsMdiContainer = true;
             _passwordHasher = new PasswordHasher();
-            ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
-            if (ThemeManager.CurrentTheme is null)
-                ThemeSelectorComboBox.SelectedIndex = 0;
-            else
-                ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
+            //ThemeSelectorComboBox.Items.AddRange(ThemeManager.GetAvailableThemes().ToArray());
+            //if (ThemeManager.CurrentTheme is null)
+            //    ThemeSelectorComboBox.SelectedIndex = 0;
+            //else
+            //    ThemeSelectorComboBox.SelectedItem = ThemeManager.CurrentTheme;
 
-            // Обработчик смены темы
-            ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
-            {
-                string selectedTheme = ThemeSelectorComboBox.SelectedItem.ToString();
-                ThemeManager.SetTheme(selectedTheme);
-            };
+            //// Обработчик смены темы
+            //ThemeSelectorComboBox.SelectedIndexChanged += (sender, e) =>
+            //{
+            //    string selectedTheme = ThemeSelectorComboBox.SelectedItem.ToString();
+            //    ThemeManager.SetTheme(selectedTheme);
+            //};
         }
 
 
@@ -74,32 +79,18 @@ namespace SewingProduction
             {
                 this.WindowState = FormWindowState.Maximized;
 
+                _formManager = new FormManager(this, menuStrip1, _user);
                 await _user.LoadUserData();
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm(); // Загружаем права доступа и применяем их
-                RestoreOpenTabs();
+                await _formManager.RestoreOpenTabs();
+                //RestoreOpenTabs();
             }
             else
             {
                 this.Close();
             }
-            //// Create a Bar Manager that will display a bar of commands at the top of the main form.
-            //BarManager barManager = new BarManager();
-            //barManager.Form = this;
-            //// Create a bar with a New button.
-            //barManager.BeginUpdate();
-            //Bar bar = new Bar(barManager, "My Bar");
-            //bar.DockStyle = BarDockStyle.Top;
-            //barManager.MainMenu = bar;
-            //BarItem barItem = new BarButtonItem(barManager, "New");
-            //barItem.ItemClick += new ItemClickEventHandler(barItem_ItemClick);
-            //bar.ItemLinks.Add(barItem);
-            //barManager.EndUpdate();
-            //// Create an XtraTabbedMdiManager that will manage MDI child windows.
-            ////mdiManager = new XtraTabbedMdiManager(components);
-            ////mdiManager.MdiParent = this;
-            ////mdiManager.PageAdded += xtraTabbedMdiManager1_PageAdded;
         }
         
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
@@ -136,17 +127,17 @@ namespace SewingProduction
         }
         private void видыОборудованияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об."), sender);
+            OpenForm(new SpravForAll("oborud_shv_ob", rusNameTableSQL: "Справочник Группы об.", user: _user), sender);
         }
 
         private void матрицаКлассовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об."), sender);
+            OpenForm(new SpravForAll("matrix_class", rusNameTableSQL: "Справочник Клас. вяз. об.", user: _user), sender);
         }
 
         private void видОперацToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций"), sender);
+            OpenForm(new SpravForAll("spOborudMachine", rusNameTableSQL: "Справочник Виды операций", user: _user), sender);
         }
 
         private void цехаToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -159,7 +150,7 @@ namespace SewingProduction
         }
         private void видыПроизводстваToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв"), sender);
+            OpenForm(new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", user: _user), sender);
         }
         private void работникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -229,7 +220,8 @@ namespace SewingProduction
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            var helpForm = new HelpForm(this._formManager);
+            helpForm.Show();
         }
         #endregion
 
@@ -262,6 +254,7 @@ namespace SewingProduction
             //knittingProductionPlanning.Show();
             OpenForm(new KnittingProductionPlanning(), sender);
         }
+        #region процедуры
         /// <summary>
         /// Универсальное открытие формы, если форма открыта, сделает активной
         /// </summary>
@@ -269,112 +262,24 @@ namespace SewingProduction
         /// <param name="sender">Пункт меню (объект или название) (Можно не передавать)</param>
         public void OpenForm(Form form, object sender = null)
         {
-            form.MdiParent = this;
-            string menuItemName = null;
-
-            if (sender is ToolStripMenuItem menuItem) // объект
-            {
-                menuItemName = menuItem.Name;
-            }
-            else if (sender is string name) // название
-            {
-                menuItemName = name;
-            }
-
-            if (!string.IsNullOrEmpty(menuItemName))
-            {
-                if (openedForms.TryGetValue(menuItemName, out Form existingForm))
-                {
-                    if (existingForm != null && !existingForm.IsDisposed)
-                    {
-                        existingForm.Activate(); // Активируем уже открытую форму
-                        return; // Выходим, НЕ открываем новую
-                    }
-                    else
-                        openedForms.Remove(menuItemName); // Если форма была закрыта, убираем её из списка
-                }
-                openedForms.Add(menuItemName, form);
-            }
-
-            form.FormClosed += ChildFormClosed;
-            form.Show();
-        }
-        #region Сохранение последних вкладок
-        private void ChildFormClosed(object sender, FormClosedEventArgs e)
-        {
-            var closedForm = sender as Form;
-            if (closedForm != null)
-            {
-                var item = openedForms.FirstOrDefault(x => x.Value == closedForm);
-                if (!string.IsNullOrEmpty(item.Key))
-                {
-                    openedForms.Remove(item.Key);
-                }
-            }
-        }
-        private ToolStripMenuItem FindMenuItemByName(ToolStripItemCollection items, string name)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item.Name == name && item is ToolStripMenuItem menuItem)
-                    return menuItem;
-
-                if (item is ToolStripMenuItem parentMenu && parentMenu.DropDownItems.Count > 0)
-                {
-                    var found = FindMenuItemByName(parentMenu.DropDownItems, name);
-                    if (found != null)
-                        return found;
-                }
-            }
-            return null;
+            _formManager.OpenForm(form, sender);
         }
 
         private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var realOpenTabs = openedForms.Keys.ToList();
-
-            Dictionary<string, object> data = new Dictionary<string, object>();
-
-            if (System.IO.File.Exists(loginHistoryFile))
-            {
-                string json = System.IO.File.ReadAllText(loginHistoryFile);
-                data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
-            }
-
-            data[_user.UserName] = new { openTabs = realOpenTabs };
-
-            string updatedJson = JsonConvert.SerializeObject(data, Formatting.Indented);
-            System.IO.File.WriteAllText(loginHistoryFile, updatedJson);
+            _formManager.SaveOpenTabs();
         }
-        private async void RestoreOpenTabs()
+        public void SaveOpenTabsSafe()
         {
-            if (!System.IO.File.Exists(loginHistoryFile)) return;
-            //string json = System.IO.File.ReadAllText(loginHistoryFile);
-            string json = await Task.Run(() => System.IO.File.ReadAllText(loginHistoryFile));
-
-            var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-
-            if (data != null && data.TryGetValue(_user.UserName, out object userDataObj))
+            if (!string.IsNullOrWhiteSpace(_user?.UserName))
             {
-                var userData = JsonConvert.DeserializeObject<Dictionary<string, object>>(userDataObj.ToString());
-                if (userData != null && userData.ContainsKey("openTabs"))
-                {
-                    var openTabs = JsonConvert.DeserializeObject<List<string>>(userData["openTabs"].ToString());
-
-                    foreach (var menuItemName in openTabs)
-                    {
-                        ToolStripMenuItem menuItem = FindMenuItemByName(this.menuStrip1.Items, menuItemName);
-                        if (menuItem != null)
-                        {
-                            await Task.Delay(100);
-                            menuItem.PerformClick();
-                        }
-                    }
-                }
+                _formManager.SaveOpenTabs();
             }
         }
-        #endregion
-        #region Видимость для обьектов (в меню)
+
+        /// <summary>
+        /// Видимость для обьектов (в меню)
+        /// </summary>
         private void LoadObjectForm()
         {
             foreach (Control control in this.Controls)
@@ -407,6 +312,22 @@ namespace SewingProduction
             }
         }
         #endregion
+        private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
+        {
+            if (e.Page != null && e.Page.MdiChild != null)
+            {
+                e.Page.Text = TruncateWithEllipsis(e.Page.MdiChild.Text, 25); // обрезка с многоточием
+                e.Page.Tooltip = e.Page.MdiChild.Text; // полное имя во всплывающей подсказке
+            }
+        }
+
+        // Вспомогательный метод для обрезки
+        private string TruncateWithEllipsis(string text, int maxLength)
+        {
+            if (string.IsNullOrEmpty(text) || text.Length <= maxLength)
+                return text;
+            return text.Substring(0, maxLength - 3) + "...";
+        }
 
     }
 }

@@ -12,6 +12,7 @@ using Microsoft.Extensions.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction.form.UserDistribution
 {
@@ -20,7 +21,7 @@ namespace SewingProduction.form.UserDistribution
         private readonly LoginFormDataService _loginFormDataService;
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
-        private string loginHistoryFile = "login_data.js";
+        private string loginHistoryFile = "settings.json";
         public LoginForm(UserClass user)
         {
             InitializeComponent();
@@ -87,47 +88,13 @@ namespace SewingProduction.form.UserDistribution
         }
         private void LoadLoginHistory()
         {
-            if (System.IO.File.Exists(loginHistoryFile))
-            {
-                string json = System.IO.File.ReadAllText(loginHistoryFile);
-                var data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(json);
-
-                if (data != null && data.ContainsKey("logins"))
-                {
-                    var logins = Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(data["logins"].ToString());
-                    if (logins.Count > 0)
-                    {
-                        comboBoxEditLogin.Properties.Items.AddRange(logins);
-                        comboBoxEditLogin.Text = logins.Last();
-                    }
-                }
-            }
+            comboBoxEditLogin.Properties.Items.AddRange(SettingsManager.GetLoginHistory());
+            comboBoxEditLogin.Text = SettingsManager.GetLoginHistory().LastOrDefault() ?? "";
         }
 
         private void SaveLoginToHistory(string login)
         {
-            Dictionary<string, object> data = new Dictionary<string, object>();
-
-            if (System.IO.File.Exists(loginHistoryFile))
-            {
-                string json = System.IO.File.ReadAllText(loginHistoryFile);
-                data = Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
-            }
-
-            List<string> logins = data.ContainsKey("logins")
-                ? Newtonsoft.Json.JsonConvert.DeserializeObject<List<string>>(data["logins"].ToString())
-                : new List<string>();
-
-            logins.RemoveAll(l => l.Equals(login, StringComparison.OrdinalIgnoreCase));
-            logins.Add(login);
-
-            data["logins"] = logins;
-
-            string updatedJson = Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented);
-            System.IO.File.WriteAllText(loginHistoryFile, updatedJson);
-
-            comboBoxEditLogin.Properties.Items.Clear();
-            comboBoxEditLogin.Properties.Items.AddRange(logins);
+            SettingsManager.AddLogin(login);
         }
         private void LoginForm_Shown(object sender, EventArgs e)
         {

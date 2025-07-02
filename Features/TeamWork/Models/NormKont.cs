@@ -9,29 +9,29 @@ using System.ComponentModel;
 
 namespace SewingProduction.Models
 {
-   public class NormKont :INewable, INotifyPropertyChanged
+   public class NormKont :INewable, INotifyPropertyChanged, IModifiable, ICloneable
     {
         [NotMapped]
-        public bool IsNew { get; set; } = true;
+        public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
         [NotMapped]
         public int nkId { get; set; }
         public int AnnId { get; set; }
         [Column("kod")]
-        public int Kod { get; set; }
+        public int kod { get; set; }
         public string kod_o { get; set; }
         [Column("text")]
-        public string Text { get; set; }
-        public string Spec { get; set; }
-        public int razryd { get; set; }
-        public string Obor { get; set; }
-        public int Sek { get; set; }
-        public int Seb { get; set; }
-        public int N { get; set; }
+        public string text { get; set; }
+        public string spec { get; set; }
+        public decimal razryd { get; set; }
+        public string obor { get; set; }
+        public int sek { get; set; }
+        public decimal seb { get; set; }
+        public int n { get; set; }
         public int n_ch { get; set; }
-        public int N1 { get; set; }
-        public int SebS { get; set; }
+        public int n1 { get; set; }
+        public decimal sebS { get; set; }
 
         // Добавляем реализацию INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
@@ -45,6 +45,10 @@ namespace SewingProduction.Models
             if (!isInternalProperty)
             {
                  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                 if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew) && propertyName != nameof(nkId) && !IsNew)
+                 {
+                     IsModified = true;
+                 }
             }
             // Убираем автоматическую установку IsModified отсюда
             // if (propertyName != nameof(IsModified) && propertyName != nameof(IsNew))
@@ -52,5 +56,11 @@ namespace SewingProduction.Models
             //      IsModified = !IsNew;
             // }
         }
+        public NormKont Clone()
+        {
+            return (NormKont)this.MemberwiseClone();
+        }
+
+        object ICloneable.Clone() => Clone();
     }
 }

@@ -12,6 +12,10 @@ namespace SewingProduction
     public enum Mode
     {
         /// <summary>
+        /// Дубль
+        /// </summary>
+        Clone = 4,
+        /// <summary>
         ///  Редактирование
         /// </summary>
         Edit = 3,

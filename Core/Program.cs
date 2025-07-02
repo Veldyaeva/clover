@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace SewingProduction.Core
 {
@@ -20,7 +21,7 @@ namespace SewingProduction.Core
         [STAThread]
         static void Main()
         {
-           
+            SetIEFeatureMode();
             DapperMappings.Configure();
             GridLocalizer.Active = new CustomLocalizer();
 
@@ -51,10 +52,31 @@ namespace SewingProduction.Core
                         return "Сохранить";
                     case GridStringId.EditFormCancelButton:
                         return "Отмена";
+                    case GridStringId.FindControlFindButton:
+                        return "Найти";
+                    case GridStringId.CustomFilterDialogCancelButton:
+                        return "Отмена";
+                    case GridStringId.CustomFilterDialogCaption:
+                        return "Настройка фильтра";
+                    case GridStringId.FilterPanelCustomizeButton: return "Настроить";
                     default:
                         return base.GetLocalizedString(id);
                 }
             }
+        }
+        private static void SetIEFeatureMode()
+        {
+            try
+            {
+                string appName = System.IO.Path.GetFileName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+                RegistryKey key = Registry.CurrentUser.CreateSubKey(@"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION");
+                if (key.GetValue(appName) == null)
+                {
+                    // 11001 = IE11, 10001 = IE10, 9999 = IE9, 8000 = IE8, 7000 = IE7
+                    key.SetValue(appName, 11001, RegistryValueKind.DWord);
+                }
+            }
+            catch { /* ignore */ }
         }
     }
 }
