@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Security.AccessControl;
@@ -338,6 +339,7 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
+
             var menuStrip = mainForm.MainMenuStrip;
             if (menuStrip == null)
             {
@@ -345,33 +347,11 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
-            await ScanToolStripItemsAsync(menuStrip.Items, formID);
+            var scanner = new MenuScanner(_adminFormDataService, _user);
+            await scanner.ScanAndInsertMenuAsync(menuStrip, formID);
+
             await Objects_Load();
-
-        }
-        private async Task ScanToolStripItemsAsync(ToolStripItemCollection items, int formId)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item is ToolStripMenuItem menuItem)
-                {
-                    string name = menuItem.Name;
-                    string text = menuItem.Text;
-
-                    // Пропускаем, если уже есть в базе
-                    bool exists = await _adminFormDataService.ObjectExists(formId, name);
-                    if (!exists)
-                    {
-                        await _adminFormDataService.InsertObjectForm(name, text, "ToolStripMenuItem", _user.UserId, formId);
-                    }
-
-                    // Рекурсивно обработать подменю
-                    if (menuItem.HasDropDownItems)
-                    {
-                        await ScanToolStripItemsAsync(menuItem.DropDownItems, formId);
-                    }
-                }
-            }
+            MessageBox.Show("Пункты меню успешно добавлены в базу данных.");
         }
         #endregion
 
