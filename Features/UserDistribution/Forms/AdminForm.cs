@@ -1,28 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.Utils;
-using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraRichEdit.Import.Html;
-using NLog.Filters;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
 using SewingProduction.Helpers;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.form.UserDistribution
 {

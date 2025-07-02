@@ -13,6 +13,7 @@ namespace SewingProduction.Core.Class.Settings
     {
         public string Theme { get; set; } = "Gray";
         public int FontSize { get; set; } = 10;
+        public bool SaveOpenTabs { get; set; } = true;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
     }
 
@@ -114,6 +115,16 @@ namespace SewingProduction.Core.Class.Settings
             Current.Users[username].OpenTabs = tabs;
             Save();
         }
+        public static bool GetSaveOpenTabs()
+        {
+            return Current.SaveOpenTabs;
+        }
+
+        public static void SetSaveOpenTabs(bool value)
+        {
+            Current.SaveOpenTabs = value;
+            Save();
+        }
         #endregion
 
         private static AppSettings Load()
@@ -138,6 +149,19 @@ namespace SewingProduction.Core.Class.Settings
             ThemeManager.UpdateDefaultFont(new Font("Arial", size));
             Save();
         }
+        public static void ClearLoginAndPasswordHistory()
+        {
+            if (Current.Users.ContainsKey("logins"))
+            {
+                Current.Users.Remove("logins");
+            }
 
+            foreach (var user in Current.Users.Values)
+            {
+                user.SavedPassword = "";
+            }
+
+            Save();
+        }
     }
 }

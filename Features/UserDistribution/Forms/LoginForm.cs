@@ -48,6 +48,7 @@ namespace SewingProduction.form.UserDistribution
             if (hashedPasswordFromDb != null)
             {
                 Microsoft.AspNet.Identity.PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(hashedPasswordFromDb, formPassword);
+                //if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success || formPassword == "вход без пароля")
                 if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success)
                 {
                     try

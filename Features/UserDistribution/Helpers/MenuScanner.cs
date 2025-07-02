@@ -56,6 +56,31 @@ namespace SewingProduction.Features.UserDistribution.Helpers
                 }
             }
         }
+        public void ApplyPermissionsToMenu(MenuStrip menuStrip)
+        {
+            ApplyPermissionsToMenuItems(menuStrip.Items);
+        }
+
+        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (string.IsNullOrWhiteSpace(item.Name)) continue;
+
+                string objectName = item.Tag as string ?? item.Name;
+
+                bool hasWrite = _user.HasPermission(objectName, "Редактор");
+                bool hasRead = _user.HasPermission(objectName, "Просмотр");
+
+                item.Visible = hasRead || hasWrite;
+                item.Enabled = hasWrite;
+
+                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
+                {
+                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
+                }
+            }
+        }
     }
 
 }
