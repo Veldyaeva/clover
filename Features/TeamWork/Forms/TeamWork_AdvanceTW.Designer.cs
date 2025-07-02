@@ -439,7 +439,9 @@ namespace SewingProduction.form
             // 
             gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
             gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRasz.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewRasz.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
             gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
@@ -455,13 +457,15 @@ namespace SewingProduction.form
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRasz.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
             gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.ShowGroupPanel = false;
             gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
             gridViewRasz.EditFormPrepared += gridViewRasz_EditFormPrepared;
             gridViewRasz.EditFormHidden += gridViewRasz_EditFormHidden;
             gridViewRasz.InvalidRowException += gridViewRasz_InvalidRowException;
+            gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
             gridViewRasz.ValidatingEditor += gridViewRasz_ValidatingEditor;

@@ -107,11 +107,8 @@ namespace SewingProduction.Forms
             _boundArtBindingSource = new BindingSource { DataSource = _boundArtList };
             if (gridControl_binded != null) gridControl_binded.DataSource = _boundArtBindingSource;
 
-            // Initialize BindingList and BindingSource for NormRasz on Articles tab
             _normRaszListArticles = new BindingList<NormRasz>();
             _normRaszBindingSourceArticles = new BindingSource { DataSource = _normRaszListArticles };
-            // Assuming customGridControl3 is the correct name for the NormRasz grid on the Articles tab.
-            // The user will need to confirm/correct 'customGridControl3' if it's different.
             if (customGridControl3 != null) customGridControl3.DataSource = _normRaszBindingSourceArticles;
 
             // Настройка гридов (общие настройки, не связанные с данными DataSource)
@@ -442,13 +439,13 @@ namespace SewingProduction.Forms
 
             switch (buttonIndex)
             {
-                case 0:
+                case 2:
                     ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
                     break;
-                case 2:
+                case 4:
                     EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
                     break;
-                case 4:
+                case 6:
                     ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
                     break;
 
