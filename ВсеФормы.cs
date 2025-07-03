@@ -13,6 +13,7 @@ namespace SewingProduction.Core.Class.Settings
     {
         public string Theme { get; set; } = "Gray";
         public int FontSize { get; set; } = 10;
+        public bool SaveOpenTabs { get; set; } = true;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
     }
 
@@ -114,6 +115,16 @@ namespace SewingProduction.Core.Class.Settings
             Current.Users[username].OpenTabs = tabs;
             Save();
         }
+        public static bool GetSaveOpenTabs()
+        {
+            return Current.SaveOpenTabs;
+        }
+
+        public static void SetSaveOpenTabs(bool value)
+        {
+            Current.SaveOpenTabs = value;
+            Save();
+        }
         #endregion
 
         private static AppSettings Load()
@@ -138,7 +149,20 @@ namespace SewingProduction.Core.Class.Settings
             ThemeManager.UpdateDefaultFont(new Font("Arial", size));
             Save();
         }
+        public static void ClearLoginAndPasswordHistory()
+        {
+            if (Current.Users.ContainsKey("logins"))
+            {
+                Current.Users.Remove("logins");
+            }
 
+            foreach (var user in Current.Users.Values)
+            {
+                user.SavedPassword = "";
+            }
+
+            Save();
+        }
     }
 }
 using System;
@@ -3179,7 +3203,6 @@ namespace SewingProduction
 
         private async void SpMainForm_Load(object sender, EventArgs e)
         {
-            Debug.WriteLine($"start SpMainForm_Load");
             //RestoreOpenTabs();
             LoginForm loginForm = new LoginForm(_user);
             if (loginForm.ShowDialog() == DialogResult.OK)
@@ -3190,17 +3213,15 @@ namespace SewingProduction
                 await _user.LoadUserData();
                 await _user.LoadObjectForm(this.Name);
 
-                Debug.WriteLine($"Загружаем права доступа и применяем их");
-
                 LoadObjectForm();
-                await _formManager.RestoreOpenTabs();
+                if (SettingsManager.GetSaveOpenTabs())
+                    await _formManager.RestoreOpenTabs();
                 //RestoreOpenTabs();
             }
             else
             {
                 this.Close();
             }
-            Debug.WriteLine($"stop SpMainForm_Load");
         }
 
         private void xtraTabbedMdiManager1_PageAdded(object sender, MdiTabPageEventArgs e)
@@ -3377,7 +3398,8 @@ namespace SewingProduction
 
         private void SpMainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            SaveOpenTabsSafe();
+            if (SettingsManager.GetSaveOpenTabs())
+                SaveOpenTabsSafe();
         }
         public void SaveOpenTabsSafe()
         {
@@ -3390,42 +3412,15 @@ namespace SewingProduction
         /// </summary>
         private void LoadObjectForm()
         {
-            Debug.WriteLine($"start LoadObjectForm");
+            var scanner = new MenuScanner(null, _user);
             foreach (Control control in this.Controls)
             {
                 if (control is MenuStrip menuStrip)
                 {
-                    ApplyPermissionsToMenuItems(menuStrip.Items);
+                    scanner.ApplyPermissionsToMenu(menuStrip);
                 }
             }
-            Debug.WriteLine($"stop LoadObjectForm");
         }
-        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
-        {
-            Debug.WriteLine($"start ApplyPermissionsToMenuItems");
-            foreach (ToolStripItem item in items)
-            {
-                if (string.IsNullOrWhiteSpace(item.Name)) continue;
-
-                string objectName = item.Tag as string ?? item.Name;
-
-                bool hasWrite = _user.HasPermission(objectName, "Редактор");
-                bool hasRead = _user.HasPermission(objectName, "Просмотр");
-
-                item.Visible = hasRead || hasWrite;
-                item.Enabled = hasWrite;
-                string indent = new string(' ', indentLevel);
-                Debug.WriteLine($"{indent}Объект: {objectName,-40} | Видим: {item.Visible,-5} | Чтение: {hasRead,-5} | Запись: {hasWrite,-5} | indentLevel: {indentLevel,-5}");
-
-                // если это пункт меню с подменю — рекурсивно
-                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
-                {
-                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
-                }
-            }
-            Debug.WriteLine($"stop ApplyPermissionsToMenuItems");
-        }
-        #endregion
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
@@ -3442,7 +3437,7 @@ namespace SewingProduction
                 return text;
             return text.Substring(0, maxLength - 3) + "...";
         }
-
+        #endregion
     }
 }
 using System.Drawing;
@@ -3930,6 +3925,9 @@ namespace SewingProduction.form
             customComboBoxSizeText.Items.Clear();
             customComboBoxSizeText.Items.AddRange(new object[] { 8, 9, 10, 11, 12, 14, 16 });
             customComboBoxSizeText.SelectedItem = SettingsManager.Current.FontSize;
+
+            // Сохранение вкладок
+            customCheckBoxSaveOpenTabs.Checked = SettingsManager.GetSaveOpenTabs();
         }
 
         public interface IDataUpdatableForm
@@ -3950,12 +3948,31 @@ namespace SewingProduction.form
             ThemeManager.SetTheme(selectedTheme);
             SettingsManager.SetTheme(selectedTheme);
         }
-        
+
         private void customComboBoxSizeText_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (int.TryParse(customComboBoxSizeText.SelectedItem?.ToString(), out int fontSize))
             {
                 SettingsManager.SetFontSize(fontSize);
+            }
+        }
+
+        private void customCheckBoxSaveOpenTabs_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingsManager.SetSaveOpenTabs(customCheckBoxSaveOpenTabs.Checked);
+        }
+
+        private void customButtonClearProfile_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show("Вы действительно хотите очистить историю профилей?",
+                                           "Подтверждение",
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                SettingsManager.ClearLoginAndPasswordHistory();
+                MessageBox.Show("История профилей очищена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
@@ -3995,6 +4012,8 @@ namespace SewingProduction.form
             customComboBoxTheme = new CustomComboBox();
             customComboBoxSizeText = new CustomComboBox();
             customLabelSizeText = new CustomLabel();
+            customCheckBoxSaveOpenTabs = new CustomCheckBox();
+            customButtonClearProfile = new CustomButton();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -4049,11 +4068,41 @@ namespace SewingProduction.form
             customLabelSizeText.TabIndex = 5;
             customLabelSizeText.Text = "Размер текста";
             // 
+            // customCheckBoxSaveOpenTabs
+            // 
+            customCheckBoxSaveOpenTabs.AutoSize = true;
+            customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
+            customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(14, 120);
+            customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
+            customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            customCheckBoxSaveOpenTabs.Size = new System.Drawing.Size(227, 20);
+            customCheckBoxSaveOpenTabs.TabIndex = 8;
+            customCheckBoxSaveOpenTabs.Text = "Сохранение открытых вкладок";
+            customCheckBoxSaveOpenTabs.UseVisualStyleBackColor = true;
+            customCheckBoxSaveOpenTabs.CheckedChanged += customCheckBoxSaveOpenTabs_CheckedChanged;
+            // 
+            // customButtonClearProfile
+            // 
+            customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
+            customButtonClearProfile.Location = new System.Drawing.Point(14, 171);
+            customButtonClearProfile.Name = "customButtonClearProfile";
+            customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
+            customButtonClearProfile.TabIndex = 9;
+            customButtonClearProfile.Text = "Очистить историю профилей";
+            customButtonClearProfile.UseVisualStyleBackColor = false;
+            customButtonClearProfile.Click += customButtonClearProfile_Click;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customButtonClearProfile);
+            Controls.Add(customCheckBoxSaveOpenTabs);
             Controls.Add(customComboBoxSizeText);
             Controls.Add(customLabelSizeText);
             Controls.Add(customComboBoxTheme);
@@ -4073,6 +4122,8 @@ namespace SewingProduction.form
         private CustomComboBox customComboBoxTheme;
         private CustomComboBox customComboBoxSizeText;
         private CustomLabel customLabelSizeText;
+        private CustomCheckBox customCheckBoxSaveOpenTabs;
+        private CustomButton customButtonClearProfile;
     }
 }
 using System;
@@ -53612,29 +53663,14 @@ namespace SewingProduction.form.UserDistribution
 }
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.Utils;
-using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraRichEdit.Import.Html;
-using NLog.Filters;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
 using SewingProduction.Helpers;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.form.UserDistribution
 {
@@ -53952,7 +53988,18 @@ namespace SewingProduction.form.UserDistribution
             }
 
 
+            var menuStrip = mainForm.MainMenuStrip;
+            if (menuStrip == null)
+            {
+                MessageBox.Show("MenuStrip не найден.");
+                return;
+            }
+
+            var scanner = new MenuScanner(_adminFormDataService, _user);
+            await scanner.ScanAndInsertMenuAsync(menuStrip, formID);
+
             await Objects_Load();
+            MessageBox.Show("Пункты меню успешно добавлены в базу данных.");
         }
         #endregion
 
@@ -57286,6 +57333,7 @@ namespace SewingProduction.form.UserDistribution
             if (hashedPasswordFromDb != null)
             {
                 Microsoft.AspNet.Identity.PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(hashedPasswordFromDb, formPassword);
+                //if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success || formPassword == "вход без пароля")
                 if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success)
                 {
                     try
@@ -60000,15 +60048,87 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 }
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SewingProduction.form.UserDistribution;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {
-    public static class MenuScanner
+    public class MenuScanner
     {
+        private readonly AdminFormDataService _adminFormDataService;
+        private readonly UserClass _user;
+
+        public MenuScanner(AdminFormDataService adminFormDataService, UserClass user)
+        {
+            _adminFormDataService = adminFormDataService;
+            _user = user;
+        }
+
+        public async Task ScanAndInsertMenuAsync(MenuStrip menuStrip, int formId)
+        {
+            foreach (ToolStripMenuItem item in menuStrip.Items)
+            {
+                await ScanMenuItemAsync(item, formId);
+            }
+        }
+
+        private async Task ScanMenuItemAsync(ToolStripMenuItem item, int formId)
+        {
+            string name = item.Name;
+            string text = item.Text;
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                bool exists = await _adminFormDataService.ObjectExists(formId, name);
+
+                if (!exists)
+                {
+                    await _adminFormDataService.InsertObjectForm(name, text, "ToolStripMenuItem", _user.UserId, formId);
+                    Debug.WriteLine($"[MenuScanner] ✅ Добавлен: Name = {name}, Text = {text}");
+                }
+                else
+                {
+                    Debug.WriteLine($"[MenuScanner] ⚠️ Уже существует: Name = {name}, Text = {text}");
+                }
+            }
+
+            foreach (ToolStripItem subItem in item.DropDownItems)
+            {
+                if (subItem is ToolStripMenuItem subMenuItem)
+                {
+                    await ScanMenuItemAsync(subMenuItem, formId);
+                }
+            }
+        }
+        public void ApplyPermissionsToMenu(MenuStrip menuStrip)
+        {
+            ApplyPermissionsToMenuItems(menuStrip.Items);
+        }
+
+        private void ApplyPermissionsToMenuItems(ToolStripItemCollection items, int indentLevel = 0)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                if (string.IsNullOrWhiteSpace(item.Name)) continue;
+
+                string objectName = item.Tag as string ?? item.Name;
+
+                bool hasWrite = _user.HasPermission(objectName, "Редактор");
+                bool hasRead = _user.HasPermission(objectName, "Просмотр");
+
+                item.Visible = hasRead || hasWrite;
+                item.Enabled = hasWrite;
+
+                if (item is ToolStripMenuItem menuItem && menuItem.HasDropDownItems)
+                {
+                    ApplyPermissionsToMenuItems(menuItem.DropDownItems, indentLevel + 1);
+                }
+            }
+        }
     }
 
 }
@@ -61753,7 +61873,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SewingProduction")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2bce29c91f7d21c98f673c185bce44f4f205834e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+544102834a726ccccd09e6e97205a6c24f043828")]
 [assembly: System.Reflection.AssemblyProductAttribute("SewingProduction")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SewingProduction")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
