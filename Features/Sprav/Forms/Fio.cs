@@ -427,14 +427,14 @@ namespace SewingProduction.form
         {
             var pbForm = new PrintBarcode();
             pbForm.Pech1(customComboBoxPechVed.Text, customTextBoxPechSHK1.Text);
-            pbForm.Show();
+            //pbForm.Show();
         }
 
         private void customButtonPech2_Click(object sender, EventArgs e)
         {
             var pbForm = new PrintBarcode();
             pbForm.Pech2(customTextBoxPechTab.Text.Trim(), customTextBoxPechSHK2.Text.Trim());
-            pbForm.Show();
+            //pbForm.Show();
 
         }
     }
