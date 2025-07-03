@@ -78,6 +78,7 @@
             spisok1c_orgName = new DevExpress.XtraGrid.Columns.GridColumn();
             spisok1c_podrName = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            customButtonPdrSP = new CustomButton();
             customButtonSpVed = new CustomButton();
             customButtonSpOrg1C = new CustomButton();
             customButtonSpDol1C = new CustomButton();
@@ -109,7 +110,6 @@
             customComboBoxOtch = new CustomComboBox();
             customCheckBoxOsnTab = new CustomCheckBox();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonPdrSP = new CustomButton();
             customButtonSov = new CustomButton();
             customButtonAddSov = new CustomButton();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -913,6 +913,7 @@
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33334F));
+            tableLayoutPanel3.Controls.Add(customButtonPdrSP, 2, 0);
             tableLayoutPanel3.Controls.Add(customButtonSpVed, 2, 1);
             tableLayoutPanel3.Controls.Add(customButtonSpOrg1C, 1, 1);
             tableLayoutPanel3.Controls.Add(customButtonSpDol1C, 0, 1);
@@ -926,6 +927,23 @@
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.55216F));
             tableLayoutPanel3.Size = new System.Drawing.Size(510, 97);
             tableLayoutPanel3.TabIndex = 5;
+            // 
+            // customButtonPdrSP
+            // 
+            customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonPdrSP.FlatAppearance.BorderSize = 0;
+            customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            customButtonPdrSP.Location = new System.Drawing.Point(343, 3);
+            customButtonPdrSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonPdrSP.Name = "customButtonPdrSP";
+            customButtonPdrSP.Size = new System.Drawing.Size(163, 35);
+            customButtonPdrSP.TabIndex = 5;
+            customButtonPdrSP.Text = "Подразделения ШП - 1С";
+            customButtonPdrSP.UseVisualStyleBackColor = false;
+            customButtonPdrSP.Click += customButtonPdrSP_Click;
             // 
             // customButtonSpVed
             // 
@@ -1142,6 +1160,7 @@
             customButtonPech1.TabIndex = 8;
             customButtonPech1.Text = "Печать";
             customButtonPech1.UseVisualStyleBackColor = false;
+            customButtonPech1.Click += customButtonPech1_Click;
             // 
             // customLabel1
             // 
@@ -1245,6 +1264,7 @@
             customButtonPech2.TabIndex = 8;
             customButtonPech2.Text = "Печать";
             customButtonPech2.UseVisualStyleBackColor = false;
+            customButtonPech2.Click += customButtonPech2_Click;
             // 
             // customLabel3
             // 
@@ -1383,7 +1403,6 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel1.Controls.Add(customButtonPdrSP, 0, 0);
             tableLayoutPanel1.Controls.Add(customButtonSov, 0, 0);
             tableLayoutPanel1.Controls.Add(customButtonAddSov, 0, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -1399,23 +1418,6 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.11751F));
             tableLayoutPanel1.Size = new System.Drawing.Size(162, 97);
             tableLayoutPanel1.TabIndex = 3;
-            // 
-            // customButtonPdrSP
-            // 
-            customButtonPdrSP.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonPdrSP.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonPdrSP.FlatAppearance.BorderSize = 0;
-            customButtonPdrSP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            customButtonPdrSP.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonPdrSP.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            customButtonPdrSP.Location = new System.Drawing.Point(4, 45);
-            customButtonPdrSP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonPdrSP.Name = "customButtonPdrSP";
-            customButtonPdrSP.Size = new System.Drawing.Size(154, 36);
-            customButtonPdrSP.TabIndex = 5;
-            customButtonPdrSP.Text = "Подразделения ШП - 1С";
-            customButtonPdrSP.UseVisualStyleBackColor = false;
-            customButtonPdrSP.Click += customButtonPdrSP_Click;
             // 
             // customButtonSov
             // 
@@ -1442,10 +1444,10 @@
             customButtonAddSov.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             customButtonAddSov.Font = new System.Drawing.Font("Arial", 10F);
             customButtonAddSov.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            customButtonAddSov.Location = new System.Drawing.Point(4, 87);
+            customButtonAddSov.Location = new System.Drawing.Point(4, 45);
             customButtonAddSov.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonAddSov.Name = "customButtonAddSov";
-            customButtonAddSov.Size = new System.Drawing.Size(154, 7);
+            customButtonAddSov.Size = new System.Drawing.Size(154, 36);
             customButtonAddSov.TabIndex = 0;
             customButtonAddSov.Text = "Добавить совмест.";
             customButtonAddSov.UseVisualStyleBackColor = false;

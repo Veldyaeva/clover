@@ -22,16 +22,44 @@ namespace SewingProduction.form
 
         private void customButtonPech1_Click(object sender, EventArgs e)
         {
-            string code = "0123456789012";
-            string ean13Code = _barcodePrinter.GenerateEAN13(code);
-            MessageBox.Show($"EAN13 code : {ean13Code}");
+            Pech1(customComboBoxPechVed.Text, customTextBoxPechSHK1.Text);
+        }
+        public void Pech1(string PechVed, string PechSHK1)
+        {
+            if (string.IsNullOrEmpty(PechVed) || string.IsNullOrEmpty(PechSHK1))
+            {
+                MessageBox.Show("Выберите ведомость и количество ШК", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            int vedId = int.Parse(PechVed);
+            int kolvo = int.Parse(PechSHK1);
+            DataTable data = GetDataForPrintByVed(vedId);
+
+            foreach (DataRow row in data.Rows)
+            {
+                string kod_sh = row["k_sh"].ToString();
+                string ean13 = _barcodePrinter.GenerateEAN13(kod_sh);
+                // Печать или сбор в список
+            }
+
+            MessageBox.Show($"Сгенерировано {data.Rows.Count} ШК");
         }
 
         private void customButtonPech2_Click(object sender, EventArgs e)
         {
-            string code = "123456789012";
-            string checkSum = _barcodePrinter.CalculateCheckSum(code);
-            MessageBox.Show($"CheckSum: {checkSum}");
+            Pech2(customTextBoxPechTab.Text.Trim(), customTextBoxPechSHK2.Text.Trim());
+        }
+        public void Pech2(string tab, string kolvo)
+        {
+            if (string.IsNullOrEmpty(tab) || string.IsNullOrEmpty(kolvo))
+            {
+                MessageBox.Show("Введите табельный номер и количество ШК", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string kod_sh = tab.PadLeft(12, '0'); // или другая логика
+            string ean13 = _barcodePrinter.GenerateEAN13(kod_sh);
+            MessageBox.Show($"Штрихкод: {ean13}");
         }
         // Метод для получения данных для печати по ведомости (command2.click)
         public DataTable GetDataForPrintByVed(int vdId)
