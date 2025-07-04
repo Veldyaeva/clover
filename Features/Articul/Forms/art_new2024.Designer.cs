@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(art_new2024));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customLabelModel = new CustomLabel();
             customLabelRazm = new CustomLabel();
@@ -705,6 +706,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(710, 555);
             Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "art_new2024";
             Text = "Добавление артикула";
