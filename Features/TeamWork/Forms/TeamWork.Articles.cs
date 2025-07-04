@@ -776,7 +776,7 @@ namespace SewingProduction.Forms
             {
                 if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
                 {
-                    LoadGridControlData(pictureBox2, kodValue);
+                    LoadGridImage(pictureBox2, kod: kodValue);
                 }
                 else
                 {
@@ -1023,7 +1023,7 @@ namespace SewingProduction.Forms
                 // Загружаем изображение, если есть код
                 if (kodInt > 0)
                 {
-                    await Task.Run(() => LoadGridControlData(pictureBox2, kodInt));
+                    await Task.Run(() => LoadGridImage(pictureBox2, kod: kodInt));
                 }
             }
             catch (Exception ex)

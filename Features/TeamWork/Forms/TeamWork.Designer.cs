@@ -1151,8 +1151,6 @@ namespace SewingProduction.Forms
             ANNgridView.GridControl = ANNgridControl;
             ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             ANNgridView.Name = "ANNgridView";
-            ANNgridView.OptionsBehavior.Editable = false;
-            ANNgridView.OptionsBehavior.ReadOnly = true;
             ANNgridView.OptionsClipboard.AllowCopy = DevExpress.Utils.DefaultBoolean.True;
             ANNgridView.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             ANNgridView.OptionsEditForm.PopupEditFormWidth = 933;
