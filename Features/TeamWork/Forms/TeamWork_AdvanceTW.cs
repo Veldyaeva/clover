@@ -1568,6 +1568,7 @@ namespace SewingProduction.form
                     int nextN = Nome;
                     foreach (var item in raszList)
                     {
+                        item.IsNew = true; 
                         item.N = item.N + Nome;
                         _normRaszList.Add(item);
                     }

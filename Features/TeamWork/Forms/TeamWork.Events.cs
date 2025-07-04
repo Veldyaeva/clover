@@ -222,25 +222,7 @@ namespace SewingProduction.Forms
                 }
 
                 var selectedItem = view.GetRow(FocusedRowHandle) as ArtNormN;
-                string kodString = view.GetRowCellValue(FocusedRowHandle, "Kod")?.ToString();
-
-                if (!string.IsNullOrEmpty(kodString))
-                {
-                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
-                    {
-                        LoadGridControlData(pictureBox1, kodValue);
-                    }
-                    else
-                    {
-                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                    }
-                }
-                else
-                {
-                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                }
-
-                if (selectedItem != null)
+                LoadGridImage(pictureBox1, annId: selectedItem.AnnID); if (selectedItem != null)
                 {
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;

@@ -5,6 +5,8 @@ using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
 using DevExpress.XtraEditors.ButtonPanel;
 using DevExpress.XtraEditors.Controls;
+using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.form;
@@ -127,6 +129,50 @@ namespace SewingProduction.Forms
                 wdToBindView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
                 wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             }
+
+            // 
+            RepositoryItemButtonEdit commandsEditDateNull = new RepositoryItemButtonEdit { AutoHeight = false, Name = "CommandsEdit", TextEditStyle = TextEditStyles.HideTextEditor };
+            RepositoryItemButtonEdit commandsEditDateNotNull = new RepositoryItemButtonEdit { AutoHeight = false, Name = "CommandsEdit", TextEditStyle = TextEditStyles.HideTextEditor };
+            commandsEditDateNull.ButtonClick += CommandsEdit_ButtonClick;
+            commandsEditDateNotNull.ButtonClick += CommandsEdit_ButtonClick;
+            commandsEditDateNull.Buttons.Clear();
+            commandsEditDateNotNull.Buttons.Clear();
+            commandsEditDateNull.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetDeleteImage()) });
+            commandsEditDateNotNull.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Glyph, "Дата готова", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetEditImage()) });
+
+            //кнопка "Проставить дату обн"
+            GridColumn Updated = ANNgridView.Columns["Upd"];
+            Updated.ColumnEdit = commandsEditDateNull;
+
+            ANNgridView.CustomRowCellEdit += (s, e) => {
+                if (e.Column == Updated)
+                {
+                    var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
+                    e.RepositoryItem = (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
+                        ? commandsEditDateNull
+                        : commandsEditDateNotNull;
+                }
+            };
+        }
+
+        private void CommandsEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
+            var view = ANNgridView;
+            var rowHandle = view.FocusedRowHandle;
+            var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
+
+            // Действие только если дата не задана
+            if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
+            {
+                setDateUpdate();
+                view.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
+                view.RefreshRowCell(rowHandle, view.Columns["Upd"]);
+            }
+        }
+
+        private void setDateUpdate()
+        {
+            Console.WriteLine("Click");
         }
 
         private void CalcPreviewText(object sender,
@@ -150,8 +196,6 @@ namespace SewingProduction.Forms
 
             e.PreviewText = string.Join(Environment.NewLine, parts);
         }
-
-
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
@@ -564,7 +608,55 @@ namespace SewingProduction.Forms
         {
 
         }
+
+        private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
+        {
+
+            var row = e.Row as ArtNormN;
+            if (row == null) return;
+
+            var parts = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add(row.Komment);
+
+            // выводим всегда
+            parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
+
+            if (!string.IsNullOrWhiteSpace(row.Reco))
+                parts.Add($"Рекомендация: {row.Reco}");
+            if (!string.IsNullOrWhiteSpace(row.Komment))
+                parts.Add($"Комментарий: {row.Komment}");
+
+            e.PreviewText = string.Join(Environment.NewLine, parts);
+
+
+        }
     }
 
-
 }
+public static class DemoHelper
+{
+
+    public static Image GetDeleteImage()
+    {
+        return GetImage(Brushes.Red);
+    }
+
+    public static Image GetEditImage()
+    {
+        return GetImage(Brushes.Green);
+    }
+
+    public static Image GetImage(Brush b)
+    {
+        Image img = new Bitmap(16, 16);
+        using (Graphics g = Graphics.FromImage(img))
+        {
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.FillEllipse(b, new Rectangle(0, 0, img.Width - 1, img.Height - 1));
+        }
+        return img;
+    }
+}
+   
