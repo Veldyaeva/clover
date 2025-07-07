@@ -18,13 +18,13 @@ namespace SewingProduction
         public UserClass _user = new UserClass();
         private readonly IPasswordHasher _passwordHasher;
         private ToolStripMenuItem[] toolStripMenuItems;
-        private string loginHistoryFile = "settings.json";
         public FormManager _formManager;
         private XtraTabbedMdiManager mdiManager => xtraTabbedMdiManager1;
 
         public SpMainForm()
         {
             InitializeComponent();
+            UserFilePaths.EnsureFolderExists();
             this.IsMdiContainer = true;
             _passwordHasher = new PasswordHasher();
         }
