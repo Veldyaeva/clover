@@ -21,7 +21,6 @@ namespace SewingProduction.form.UserDistribution
         private readonly LoginFormDataService _loginFormDataService;
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
-        private string loginHistoryFile = "settings.json";
         public LoginForm(UserClass user)
         {
             InitializeComponent();

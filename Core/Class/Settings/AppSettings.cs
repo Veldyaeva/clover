@@ -26,7 +26,7 @@ namespace SewingProduction.Core.Class.Settings
 
     public static class SettingsManager
     {
-        private static readonly string SettingsPath = "settings.json";
+        private static readonly string SettingsPath = UserFilePaths.Settings;
         private static AppSettings _settings;
 
         public static AppSettings Current => _settings ??= Load();
@@ -162,6 +162,21 @@ namespace SewingProduction.Core.Class.Settings
             }
 
             Save();
+        }
+    }
+    public static class UserFilePaths
+    {
+        public static string BaseFolder => Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "SewingProduction");
+
+        public static string Settings => Path.Combine(BaseFolder, "settings.json");
+        public static string LogFile => Path.Combine(BaseFolder, "log.txt");
+
+        public static void EnsureFolderExists()
+        {
+            if (!Directory.Exists(BaseFolder))
+                Directory.CreateDirectory(BaseFolder);
         }
     }
 }
