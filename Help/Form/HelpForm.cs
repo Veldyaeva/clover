@@ -29,7 +29,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         private void HelpForm_Load(object sender, EventArgs e)
         {
-            string projectRoot = Directory.GetParent(Application.StartupPath).Parent.Parent.Parent.FullName;
+            string projectRoot = AppContext.BaseDirectory;
+
             Debug.WriteLine("1)" + projectRoot);
             string fileToOpen = _filePath;
             Debug.WriteLine("2)" + fileToOpen);
