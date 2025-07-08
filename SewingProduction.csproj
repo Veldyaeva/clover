@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <None Remove="Features\TeamWork.zip" />
+    <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
   </ItemGroup>
 
   <ItemGroup>

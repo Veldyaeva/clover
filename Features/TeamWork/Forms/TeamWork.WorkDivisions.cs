@@ -277,7 +277,7 @@ namespace SewingProduction.Forms
                 dateCreate = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
-                dateUpdate = DateTime.MinValue,
+                dateUpdate = null,//DateTime.MinValue,
                 SekKr = 0,
                 Slogn = 0,
                 Status = 1,
