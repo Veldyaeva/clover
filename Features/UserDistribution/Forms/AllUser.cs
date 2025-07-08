@@ -6,12 +6,12 @@ using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllUser : CustomForm
     {

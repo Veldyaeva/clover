@@ -68,6 +68,7 @@ namespace SewingProduction
             TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             артикулToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             карточкаРасчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -127,7 +128,7 @@ namespace SewingProduction
             // menuStrip1
             // 
             menuStrip1.BackColor = SystemColors.ButtonFace;
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -338,6 +339,17 @@ namespace SewingProduction
             карточкаРасчетаToolStripMenuItem.Text = "Карточка расчета";
             карточкаРасчетаToolStripMenuItem.Click += карточкаРасчетаToolStripMenuItem_Click;
             // 
+            // кнопкаToolStripMenuItem
+            // 
+            кнопкаToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            кнопкаToolStripMenuItem.BackColor = SystemColors.ButtonFace;
+            кнопкаToolStripMenuItem.ForeColor = SystemColors.ActiveCaptionText;
+            кнопкаToolStripMenuItem.Name = "кнопкаToolStripMenuItem";
+            кнопкаToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            кнопкаToolStripMenuItem.Size = new Size(28, 20);
+            кнопкаToolStripMenuItem.Text = "❓";
+            кнопкаToolStripMenuItem.Click += кнопкаToolStripMenuItem_Click;
+            // 
             // xtraTabbedMdiManager1
             // 
             xtraTabbedMdiManager1.AppearancePage.Header.Font = new Font("Segoe UI", 10F);
@@ -373,6 +385,7 @@ namespace SewingProduction
             Text = "Швейное производство";
             FormClosing += SpMainForm_FormClosing;
             Load += SpMainForm_Load;
+            KeyDown += SpMainForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)popupMenu1).EndInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -421,5 +434,6 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem швейноеПроизводствоToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оперативноеПланированиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
     }
 }

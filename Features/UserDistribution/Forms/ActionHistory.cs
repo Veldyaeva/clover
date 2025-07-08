@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class ActionHistory : CustomForm
     {

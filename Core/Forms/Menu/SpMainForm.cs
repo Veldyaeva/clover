@@ -2,7 +2,6 @@
 using DevExpress.XtraTabbedMdi;
 using SewingProduction.form;
 using SewingProduction.form.Nadezhda;
-using SewingProduction.form.UserDistribution;
 using System;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -26,6 +25,7 @@ namespace SewingProduction
             InitializeComponent();
             UserFilePaths.EnsureFolderExists();
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
             _passwordHasher = new PasswordHasher();
         }
         private async void SpMainForm_Load(object sender, EventArgs e)
@@ -66,8 +66,7 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var helpForm = new HelpForm(this._formManager);
-            helpForm.Show();
+            showHelpForm();
         }
         #endregion
         #region Справочники
@@ -203,5 +202,21 @@ namespace SewingProduction
             return text.Substring(0, maxLength - 3) + "...";
         }
         #endregion
+        private void SpMainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                showHelpForm();
+            }
+        }
+        private void кнопкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showHelpForm();
+        }
+        private void showHelpForm()
+        {
+            var helpForm = new HelpForm(this._formManager);
+            helpForm.Show();
+        }
     }
 }

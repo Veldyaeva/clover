@@ -10,19 +10,13 @@ using DevExpress.Xpo.DB.Helpers;
 using System.Windows.Forms;
 using SewingProduction.Helpers;
 using DevExpress.Utils.Menu;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraVerticalGrid;
-//using Microsoft.AspNetCore.Identity;
 using DevExpress.CodeParser;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
 
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class UserProfile : CustomForm
     {
