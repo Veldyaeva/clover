@@ -200,9 +200,13 @@ namespace SewingProduction.Features.UserDistribution.Forms
             int newUserId = await _userModelDataService.SaveAsync(copyUser);
 
             var roleIds = await _userRoleDataService.GetRoleIdsByUser(copyUserId);
+
+            var existingRoles = await _userRoleDataService.GetRoleIdsByUser(newUserId);
+
             foreach (var roleId in roleIds)
             {
-                await _userRoleDataService.AssignRoleAsync(newUserId, roleId);
+                if (!existingRoles.Contains(roleId))
+                    await _userRoleDataService.AssignRoleAsync(newUserId, roleId);
             }
 
             await LoadUsers();
