@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs" />

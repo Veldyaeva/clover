@@ -64,14 +64,19 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn" +
-                        $"  , mc.name_class, mc.mc_id " +
+                    //string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn" +
+                    //    $"  , mc.name_class, mc.mc_id " +
+                    //    $"FROM knitMachineList_view mlv " +
+                    //    $"  LEFT JOIN matrix_class mc ON mlv.kmlIdVyazClass = mc.id_class" +
+                    //    $"WHERE mlv.machNazn = 'вяз.подразделение' " +
+                    //    $"  AND mc.id_class = {xIDClass} " +
+                    //    $"ORDER BY mlv.kmlNumber";
+                    string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn, mc.name_class, mc.mc_id " +
                         $"FROM knitMachineList_view mlv " +
-                        $"  LEFT JOIN matrix_class mc ON mlv.kmlIdVyazClass = mc.id_class" +
+                        $"  LEFT JOIN matrix_class mc ON mlv.kmlIdVyazClass = mc.id_class " +
                         $"WHERE mlv.machNazn = 'вяз.подразделение' " +
                         $"  AND mc.id_class = {xIDClass} " +
                         $"ORDER BY mlv.kmlNumber";
-
                     var result = await connection.QueryAsync<KnitMachineList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
