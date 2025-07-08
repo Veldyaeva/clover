@@ -70,7 +70,7 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace_backup_new;Persist Security Info=Tr" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace_backup;Persist Security Info=Tr" +
             "ue;User ID=sa;Password=kf,bhbyn;Encrypt=False")]
         public string ACEConnectionString {
             get {

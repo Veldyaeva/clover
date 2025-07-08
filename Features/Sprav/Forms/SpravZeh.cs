@@ -13,7 +13,7 @@ using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using static DevExpress.Mvvm.Native.Either;
-using static SewingProduction.form.SettingsForm;
+using SewingProduction.Core.interfaces;
 using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
 
@@ -30,6 +30,7 @@ namespace SewingProduction.form
         bool flagStartListening = false; //вкл прослушки
         //Таймер для уведомления о сохранении:
         private Timer timer;
+        string _tableSQL;
 
         public SpravZeh(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
@@ -41,7 +42,8 @@ namespace SewingProduction.form
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;
-            timer.Tick += Timer_Tick;
+            timer.Tick += Timer_Tick; 
+            _tableSQL = tableSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
 
@@ -52,6 +54,7 @@ namespace SewingProduction.form
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {
+            gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
             comboBoxVidProizv_Enter(sender, e);
             _serviceBroker.StartBroker();
         }
@@ -62,7 +65,7 @@ namespace SewingProduction.form
             void UpdateDataInForm();
         }
         // Процедура, которая вызывается из брокера при поступлении обновления?
-        public void UpdateDataInForm()
+        public void UpdateDataInForm(string _table = null)
         {
             gridControlSprav_Load(null, EventArgs.Empty);
         }

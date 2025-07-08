@@ -33,6 +33,9 @@ namespace SewingProduction.form
             customComboBoxSizeText.Items.Clear();
             customComboBoxSizeText.Items.AddRange(new object[] { 8, 9, 10, 11, 12, 14, 16 });
             customComboBoxSizeText.SelectedItem = SettingsManager.Current.FontSize;
+
+            // Сохранение вкладок
+            customCheckBoxSaveOpenTabs.Checked = SettingsManager.GetSaveOpenTabs();
         }
 
         public interface IDataUpdatableForm
@@ -53,12 +56,31 @@ namespace SewingProduction.form
             ThemeManager.SetTheme(selectedTheme);
             SettingsManager.SetTheme(selectedTheme);
         }
-        
+
         private void customComboBoxSizeText_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (int.TryParse(customComboBoxSizeText.SelectedItem?.ToString(), out int fontSize))
             {
                 SettingsManager.SetFontSize(fontSize);
+            }
+        }
+
+        private void customCheckBoxSaveOpenTabs_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingsManager.SetSaveOpenTabs(customCheckBoxSaveOpenTabs.Checked);
+        }
+
+        private void customButtonClearProfile_Click(object sender, EventArgs e)
+        {
+            var confirm = MessageBox.Show("Вы действительно хотите очистить историю профилей?",
+                                           "Подтверждение",
+                                           MessageBoxButtons.YesNo,
+                                           MessageBoxIcon.Question);
+
+            if (confirm == DialogResult.Yes)
+            {
+                SettingsManager.ClearLoginAndPasswordHistory();
+                MessageBox.Show("История профилей очищена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

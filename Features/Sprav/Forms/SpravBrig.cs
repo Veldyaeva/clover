@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
-using static SewingProduction.form.SettingsForm;
 using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Core.interfaces;
 
 namespace SewingProduction.form
 {
@@ -66,7 +66,7 @@ namespace SewingProduction.form
             void UpdateDataInForm();
         }
         // Процедура, которая вызывается из брокера при поступлении обновления?
-        public void UpdateDataInForm()
+        public void UpdateDataInForm(string table = null)
         {
             gridControlSprav_Load(null, EventArgs.Empty);
         }
@@ -107,7 +107,8 @@ namespace SewingProduction.form
                 simpleButtonAddOtm.Visible = true;
                 simpleButtonAddSave.Visible = true;
                 // Код = последнему коду в таблице + 1
-                textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
+                //textBoxKod.Text = (Convert.ToInt32(gridView.GetDataRow(gridView.RowCount - 1)[0]) + 1).ToString();
+                textBoxKod.Text = gridView.GetDataRow(gridView.RowCount - 1)?.Field<int?>(0)?.ToString() ?? "";
                 textBoxBrig.Text = "";
                 textBoxBrig.ReadOnly = false;
                 textBoxNBrig.Text = "";
