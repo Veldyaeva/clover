@@ -9,7 +9,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AdminForm : CustomForm
     {

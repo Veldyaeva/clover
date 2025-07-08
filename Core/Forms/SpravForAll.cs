@@ -26,7 +26,7 @@ using DevExpress.Mvvm.Native;
 using SewingProduction.Core.interfaces;
 using static SewingProduction.ThemeManager;
 using SewingProduction.Helpers;
-using SewingProduction.form.UserDistribution;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using DevExpress.XtraReports.Native;
 using DevExpress.XtraGrid.Views.Base.ViewInfo;

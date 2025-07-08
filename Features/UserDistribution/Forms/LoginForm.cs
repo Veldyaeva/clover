@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class LoginForm : Form
     {

@@ -100,6 +100,19 @@ namespace SewingProduction.Core.Class.Settings
             return null;
         }
 
+        public Form GetActiveForm()
+        {
+            if (_mainForm == null)
+                return null;
 
+            // Ищем форму, у которой сейчас фокус или которая активна
+            foreach (var form in _mainForm.MdiChildren)
+            {
+                if (form.ContainsFocus || form == _mainForm.ActiveMdiChild)
+                    return form;
+            }
+
+            return null;
+        }
     }
 }
