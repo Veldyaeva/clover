@@ -10,11 +10,13 @@ using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
+using SewingProduction.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -162,15 +164,61 @@ namespace SewingProduction.Forms
         {
             try
             {
-                bufferId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "grup").ToString().TrimEnd(' ')},\n\r" +
+                var annId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                var selectedItem = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                
+                var displayText = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "grup").ToString().TrimEnd(' ')},\n\r" +
                     $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')},\n\r" +
                     $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
+
+                // Копируем в глобальный буфер
+                TeamWorkBuffer.CopyToBuffer(annId, displayText, selectedItem);
+                
+                // Обновляем локальный буфер для обратной совместимости
+                bufferId = annId;
+                buffer.Text = displayText;
+
+                // Показываем статус в statusLabel (если он существует)
+                if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                {
+                    statusLabel.Text = "Данные скопированы в буфер";
+                    // Автоматически очищаем через 3 секунды
+                    _ = Task.Delay(3000).ContinueWith(t => 
+                    {
+                        if (!this.IsDisposed && statusLabel != null)
+                        {
+                            this.Invoke((MethodInvoker)(() => statusLabel.Text = ""));
+                        }
+                    });
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 bufferId = 0;
-                MessageBox.Show("Копирование не реализовано", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TeamWorkBuffer.ClearBuffer();
+                
+                // Показываем ошибку в statusLabel (если он существует)
+                if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                {
+                    statusLabel.Text = $"Ошибка копирования: {ex.Message}";
+                    statusLabel.ForeColor = Color.Red;
+                    // Автоматически очищаем через 5 секунд
+                    _ = Task.Delay(5000).ContinueWith(t => 
+                    {
+                        if (!this.IsDisposed && statusLabel != null)
+                        {
+                            this.Invoke((MethodInvoker)(() => 
+                            {
+                                statusLabel.Text = "";
+                                statusLabel.ForeColor = Color.Black;
+                            }));
+                        }
+                    });
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка копирования: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -222,25 +270,7 @@ namespace SewingProduction.Forms
                 }
 
                 var selectedItem = view.GetRow(FocusedRowHandle) as ArtNormN;
-                string kodString = view.GetRowCellValue(FocusedRowHandle, "Kod")?.ToString();
-
-                if (!string.IsNullOrEmpty(kodString))
-                {
-                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
-                    {
-                        LoadGridControlData(pictureBox1, kodValue);
-                    }
-                    else
-                    {
-                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                    }
-                }
-                else
-                {
-                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                }
-
-                if (selectedItem != null)
+                LoadGridImage(pictureBox1, annId: selectedItem.AnnID); if (selectedItem != null)
                 {
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;

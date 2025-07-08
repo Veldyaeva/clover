@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <None Remove="Features\TeamWork.zip" />
+    <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,11 +46,11 @@
     <PackageReference Include="DevExpress.Win.Design" Version="24.2.7" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.5" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.6" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NLog" Version="5.4.0" />
-    <PackageReference Include="Z.Dapper.Plus" Version="7.5.12" />
+    <PackageReference Include="NLog" Version="6.0.1" />
+    <PackageReference Include="Z.Dapper.Plus" Version="7.6.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -23,7 +23,10 @@ namespace SewingProduction.form
         private readonly int _annId;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
         public NormRasz SelectedRowData { get; private set; }
-
+        public NormOperNew()
+        {
+            InitializeComponent();
+        }
         public NormOperNew(int annId)
         {
             InitializeComponent();
