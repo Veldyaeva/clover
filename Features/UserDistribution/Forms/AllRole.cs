@@ -493,7 +493,7 @@ namespace SewingProduction.form.UserDistribution
 
         public async Task<DataTable> GetFormsForRoles(int roleId, int userId)
         {
-            string query = @"SELECT DISTINCT pf.ProjectFormsID, pf.NameFormRus AS NameForm,
+            string query = @"SELECT DISTINCT pf.ProjectFormsID, pf.NameFormRus, pf.NameForm,
                 CASE ISNULL((
                     SELECT TOP 1 ro.ModeID
                     FROM RoleObject ro

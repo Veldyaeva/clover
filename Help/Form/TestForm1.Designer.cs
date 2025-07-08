@@ -30,12 +30,12 @@
         {
             components = new System.ComponentModel.Container();
             customGridControl1 = new CustomGridControl();
+            bindingSource1 = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             TestID = new DevExpress.XtraGrid.Columns.GridColumn();
             TestName = new DevExpress.XtraGrid.Columns.GridColumn();
             TestFirst = new DevExpress.XtraGrid.Columns.GridColumn();
             TestSecond = new DevExpress.XtraGrid.Columns.GridColumn();
-            bindingSource1 = new System.Windows.Forms.BindingSource(components);
             customGroupBox1 = new CustomGroupBox();
             customLabel1 = new CustomLabel();
             customTextBox1 = new CustomTextBox();
@@ -44,8 +44,8 @@
             customButton2 = new CustomButton();
             customLabel2 = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             customGroupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,10 +56,9 @@
             customGridControl1.Location = new System.Drawing.Point(12, 12);
             customGridControl1.MainView = gridView1;
             customGridControl1.Name = "customGridControl1";
-            customGridControl1.Size = new System.Drawing.Size(618, 195);
+            customGridControl1.Size = new System.Drawing.Size(492, 195);
             customGridControl1.TabIndex = 0;
             customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
-            customGridControl1.Load += customGridControl1_Load;
             // 
             // gridView1
             // 
@@ -187,7 +186,7 @@
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(663, 508);
+            ClientSize = new System.Drawing.Size(590, 508);
             Controls.Add(customLabel2);
             Controls.Add(customButton2);
             Controls.Add(customTextBox2);
@@ -195,9 +194,11 @@
             Controls.Add(customGridControl1);
             Name = "TestForm1";
             Text = "TestForm1";
+            FormClosing += ProductForm_FormClosing;
+            Load += TestForm1_Load;
             ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             customGroupBox1.ResumeLayout(false);
             customGroupBox1.PerformLayout();
             ResumeLayout(false);

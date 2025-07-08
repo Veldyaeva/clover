@@ -24,6 +24,7 @@
     <Compile Remove="Features\TeamWork\Models\NormRasz2.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
+    <Compile Remove="ВсеФормы.cs" />
   </ItemGroup>
 
   <ItemGroup>
