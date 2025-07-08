@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -36,6 +37,9 @@ namespace SewingProduction.form
 
             // Сохранение вкладок
             customCheckBoxSaveOpenTabs.Checked = SettingsManager.GetSaveOpenTabs();
+            // Сокращенное Название Вкладок
+            customCheckBoxSokrNameTabs.Checked = SettingsManager.GetShortTabNames();
+            customCheckBoxPovtOpenTabs.Checked = SettingsManager.GetAllowDuplicateTabs();
         }
 
         public interface IDataUpdatableForm
@@ -69,7 +73,16 @@ namespace SewingProduction.form
         {
             SettingsManager.SetSaveOpenTabs(customCheckBoxSaveOpenTabs.Checked);
         }
+        private void customCheckBoxSokrNameVklad_CheckedChanged(object sender, EventArgs e)
+        {
+            bool checkedValue = customCheckBoxSokrNameTabs.Checked;
+            SettingsManager.SetShortTabNames(checkedValue);
+        }
 
+        private void customCheckBoxPovtOpenTabs_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingsManager.SetAllowDuplicateTabs(customCheckBoxPovtOpenTabs.Checked);
+        }
         private void customButtonClearProfile_Click(object sender, EventArgs e)
         {
             var confirm = MessageBox.Show("Вы действительно хотите очистить историю профилей?",
@@ -83,5 +96,6 @@ namespace SewingProduction.form
                 MessageBox.Show("История профилей очищена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
     }
 }

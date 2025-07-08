@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Forms;
+using System.Diagnostics;
 
 namespace SewingProduction
 {
@@ -188,9 +189,22 @@ namespace SewingProduction
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
-            {
-                e.Page.Text = TruncateWithEllipsis(e.Page.MdiChild.Text, 25); // обрезка с многоточием
-                e.Page.Tooltip = e.Page.MdiChild.Text; // полное имя во всплывающей подсказке
+            { 
+                string fullText = e.Page.MdiChild.Text;
+                bool shortNames = SettingsManager.GetShortTabNames(); // новая настройка
+
+                if (shortNames)
+                {
+                    e.Page.Text = TruncateWithEllipsis(fullText, 25);
+                    xtraTabbedMdiManager1.TabPageWidth = 150;
+                }
+                else
+                {
+                    e.Page.Text = fullText;
+                    xtraTabbedMdiManager1.TabPageWidth = 0;
+                }
+
+                    e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
             }
         }
 
@@ -201,6 +215,7 @@ namespace SewingProduction
                 return text;
             return text.Substring(0, maxLength - 3) + "...";
         }
+
         #endregion
         private void SpMainForm_KeyDown(object sender, KeyEventArgs e)
         {

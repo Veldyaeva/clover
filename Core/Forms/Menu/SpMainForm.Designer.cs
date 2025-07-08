@@ -363,7 +363,6 @@ namespace SewingProduction
             xtraTabbedMdiManager1.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Horizontal;
             xtraTabbedMdiManager1.MdiParent = this;
             xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
-            xtraTabbedMdiManager1.TabPageWidth = 150;
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
             // 
