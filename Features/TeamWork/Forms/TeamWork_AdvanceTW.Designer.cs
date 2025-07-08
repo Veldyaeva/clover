@@ -439,12 +439,15 @@ namespace SewingProduction.form
             // 
             gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
             gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewRasz.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewRasz.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
             gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, DisplayNumber, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
             gridViewRasz.DetailHeight = 404;
+            gridViewRasz.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewRasz.GridControl = gridControlRasz;
             gridViewRasz.Name = "gridViewRasz";
             gridViewRasz.NewItemRowText = "добавить";
@@ -455,13 +458,15 @@ namespace SewingProduction.form
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRasz.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Bottom;
             gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.ShowGroupPanel = false;
             gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
             gridViewRasz.EditFormPrepared += gridViewRasz_EditFormPrepared;
             gridViewRasz.EditFormHidden += gridViewRasz_EditFormHidden;
             gridViewRasz.InvalidRowException += gridViewRasz_InvalidRowException;
+            gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;
             gridViewRasz.RowEditCanceled += gridViewRasz_RowEditCanceled;
             gridViewRasz.ValidatingEditor += gridViewRasz_ValidatingEditor;
@@ -791,7 +796,7 @@ namespace SewingProduction.form
             nameTextBox.Location = new System.Drawing.Point(4, 192);
             nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new System.Drawing.Size(260, 23);
+            nameTextBox.Size = new System.Drawing.Size(235, 23);
             nameTextBox.TabIndex = 5;
             // 
             // label5
@@ -1199,6 +1204,7 @@ namespace SewingProduction.form
             AutoScroll = true;
             ClientSize = new System.Drawing.Size(1509, 894);
             Controls.Add(toolStripContainer1);
+            HelpButton = true;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "TeamWork_AdvanceTW";

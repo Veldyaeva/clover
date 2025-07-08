@@ -804,16 +804,16 @@ namespace SewingProduction
         }
         protected override void OnPaint(PaintEventArgs e)
         {
-            base.OnPaint(e); // Call base.OnPaint first
-            Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
-            using (LinearGradientBrush brush = new LinearGradientBrush(
-                rect,
-                ThemeManager.ActiveTheme.GradientStartColor, 
-                ThemeManager.ActiveTheme.GradientEndColor,
-                LinearGradientMode.ForwardDiagonal))
-            {
-                e.Graphics.FillRectangle(brush, rect);
-            }
+            //base.OnPaint(e); // Call base.OnPaint first
+            //Rectangle rect = new Rectangle(0, 0, this.Width, this.Height);
+            //using (LinearGradientBrush brush = new LinearGradientBrush(
+            //    rect,
+            //    ThemeManager.ActiveTheme.GradientStartColor, 
+            //    ThemeManager.ActiveTheme.GradientEndColor,
+            //    LinearGradientMode.ForwardDiagonal))
+            //{
+            //    e.Graphics.FillRectangle(brush, rect);
+            //}
         }
         protected override void Dispose(bool disposing)
         {

@@ -47,7 +47,8 @@ namespace SewingProduction.form.TeamWork.Forms
             public int Lrez { get; set; }
             public int Lpro { get; set; }
         }
-
+        public norm_raskrNew()
+        { InitializeComponent(); }
         public norm_raskrNew(int annId)
         {
             InitializeComponent();
