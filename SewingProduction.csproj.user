@@ -43,10 +43,10 @@
     <Compile Update="Features\Sprav\Forms\OborudBrig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\PrintBarcode.cs">
+    <Compile Update="Core\Forms\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Forms\SplashScreen.cs">
+    <Compile Update="Features\Sprav\Forms\PrintBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\SpravBrig.cs">
@@ -112,7 +112,7 @@
     <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\TestForm1.cs">
+    <Compile Update="Help\Form\TestForm1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
@@ -149,6 +149,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\PrintShkReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\ReestrListReport.cs">

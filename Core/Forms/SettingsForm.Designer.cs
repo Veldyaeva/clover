@@ -33,6 +33,8 @@
             customComboBoxTheme = new CustomComboBox();
             customComboBoxSizeText = new CustomComboBox();
             customLabelSizeText = new CustomLabel();
+            customCheckBoxSaveOpenTabs = new CustomCheckBox();
+            customButtonClearProfile = new CustomButton();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -87,11 +89,41 @@
             customLabelSizeText.TabIndex = 5;
             customLabelSizeText.Text = "Размер текста";
             // 
+            // customCheckBoxSaveOpenTabs
+            // 
+            customCheckBoxSaveOpenTabs.AutoSize = true;
+            customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
+            customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(14, 120);
+            customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
+            customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            customCheckBoxSaveOpenTabs.Size = new System.Drawing.Size(227, 20);
+            customCheckBoxSaveOpenTabs.TabIndex = 8;
+            customCheckBoxSaveOpenTabs.Text = "Сохранение открытых вкладок";
+            customCheckBoxSaveOpenTabs.UseVisualStyleBackColor = true;
+            customCheckBoxSaveOpenTabs.CheckedChanged += customCheckBoxSaveOpenTabs_CheckedChanged;
+            // 
+            // customButtonClearProfile
+            // 
+            customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
+            customButtonClearProfile.Location = new System.Drawing.Point(14, 171);
+            customButtonClearProfile.Name = "customButtonClearProfile";
+            customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
+            customButtonClearProfile.TabIndex = 9;
+            customButtonClearProfile.Text = "Очистить историю профилей";
+            customButtonClearProfile.UseVisualStyleBackColor = false;
+            customButtonClearProfile.Click += customButtonClearProfile_Click;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customButtonClearProfile);
+            Controls.Add(customCheckBoxSaveOpenTabs);
             Controls.Add(customComboBoxSizeText);
             Controls.Add(customLabelSizeText);
             Controls.Add(customComboBoxTheme);
@@ -111,5 +143,7 @@
         private CustomComboBox customComboBoxTheme;
         private CustomComboBox customComboBoxSizeText;
         private CustomLabel customLabelSizeText;
+        private CustomCheckBox customCheckBoxSaveOpenTabs;
+        private CustomButton customButtonClearProfile;
     }
 }

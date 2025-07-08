@@ -23,7 +23,7 @@ using DevExpress.CodeParser;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using System.Reflection;
 using DevExpress.Mvvm.Native;
-using static SewingProduction.form.SettingsForm;
+using SewingProduction.Core.interfaces;
 using static SewingProduction.ThemeManager;
 using SewingProduction.Helpers;
 using SewingProduction.form.UserDistribution;
@@ -61,7 +61,7 @@ namespace SewingProduction.form
         Dictionary<string, int> rus_read = new Dictionary<string, int>();
         //Таймер для уведомления о сохранении:
         private Timer timer;
-        public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "", UserClass user = null, bool del = false, bool add = false)
+        public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "", UserClass user = null, bool del = true, bool add = true)
         {
             InitializeComponent();
             var dbHelper = new DatabaseHelper("ace");
@@ -88,8 +88,8 @@ namespace SewingProduction.form
             textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
 
             // Кнопки удалить добавить
-            //simpleButtonDel.Enabled = del;
-            //simpleButtonAdd.Enabled = add;
+            simpleButtonDel.Enabled = del;
+            simpleButtonAdd.Enabled = add;
         }
         public SpravForAll()
         {
@@ -103,7 +103,7 @@ namespace SewingProduction.form
             void UpdateDataInForm();
         }
         // Процедура, которая вызывается из брокера при поступлении обновления?
-        public void UpdateDataInForm()
+        public void UpdateDataInForm(string _table)
         {
             LoadData();
         }
