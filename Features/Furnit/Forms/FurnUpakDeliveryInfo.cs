@@ -46,6 +46,10 @@ namespace SewingProduction.form
             ThemeManager.UpdateTheme(this);
 
         }
+        public FurnUpakDeliveryInfo()
+        {
+            InitializeComponent();
+        }
 
         private async Task InitializeBindingsAsync()
         {

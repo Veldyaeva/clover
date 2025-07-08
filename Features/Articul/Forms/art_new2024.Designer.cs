@@ -28,660 +28,706 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.customLabelModel = new SewingProduction.CustomLabel();
-            this.customLabelRazm = new SewingProduction.CustomLabel();
-            this.customLabelArt = new SewingProduction.CustomLabel();
-            this.customLabelTM = new SewingProduction.CustomLabel();
-            this.customLabelGroup = new SewingProduction.CustomLabel();
-            this.customLabelGOST = new SewingProduction.CustomLabel();
-            this.radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
-            this.customLabelKod = new SewingProduction.CustomLabel();
-            this.customTextBoxKod1 = new SewingProduction.CustomTextBox();
-            this.customTextBoxKod2 = new SewingProduction.CustomTextBox();
-            this.customTextBoxArt = new SewingProduction.CustomTextBox();
-            this.customTextBoxModel = new SewingProduction.CustomTextBox();
-            this.customTextBoxKodFurn = new SewingProduction.CustomTextBox();
-            this.customTextBox1 = new SewingProduction.CustomTextBox();
-            this.customTextBoxDlin = new SewingProduction.CustomTextBox();
-            this.customTextBoxTimePlet = new SewingProduction.CustomTextBox();
-            this.customTextBoxNormP = new SewingProduction.CustomTextBox();
-            this.customLabelKodFurn = new SewingProduction.CustomLabel();
-            this.customLabel1 = new SewingProduction.CustomLabel();
-            this.customLabelDlin = new SewingProduction.CustomLabel();
-            this.customLabelTimePlet = new SewingProduction.CustomLabel();
-            this.customLabelNormP = new SewingProduction.CustomLabel();
-            this.customLabelPrizn = new SewingProduction.CustomLabel();
-            this.customLabelM = new SewingProduction.CustomLabel();
-            this.customLabelM1 = new SewingProduction.CustomLabel();
-            this.customLabelM2 = new SewingProduction.CustomLabel();
-            this.customCancelButton1 = new SewingProduction.CustomCancelButton();
-            this.customOkButton1 = new SewingProduction.CustomOkButton();
-            this.searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchLookUpEditGost = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchLookUpEditGroup = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchLookUpEditTm1 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchLookUpEditRazm = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridViewRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.searchLookUpEditTm2 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditPrizn.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGost.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGroup.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm1.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditRazm.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRazm)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm2.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
-            this.SuspendLayout();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(art_new2024));
+            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelModel = new CustomLabel();
+            customLabelRazm = new CustomLabel();
+            customLabelArt = new CustomLabel();
+            customLabelTM = new CustomLabel();
+            customLabelGroup = new CustomLabel();
+            customLabelGOST = new CustomLabel();
+            radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            customLabelKod = new CustomLabel();
+            customTextBoxKod1 = new CustomTextBox();
+            customTextBoxKod2 = new CustomTextBox();
+            customTextBoxArt = new CustomTextBox();
+            customTextBoxModel = new CustomTextBox();
+            customTextBoxKodFurn = new CustomTextBox();
+            customTextBox1 = new CustomTextBox();
+            customTextBoxDlin = new CustomTextBox();
+            customTextBoxTimePlet = new CustomTextBox();
+            customTextBoxNormP = new CustomTextBox();
+            customLabelKodFurn = new CustomLabel();
+            customLabel1 = new CustomLabel();
+            customLabelDlin = new CustomLabel();
+            customLabelTimePlet = new CustomLabel();
+            customLabelNormP = new CustomLabel();
+            customLabelPrizn = new CustomLabel();
+            customLabelM = new CustomLabel();
+            customLabelM1 = new CustomLabel();
+            customLabelM2 = new CustomLabel();
+            customCancelButton1 = new CustomCancelButton();
+            customOkButton1 = new CustomOkButton();
+            searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
+            gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditGost = new DevExpress.XtraEditors.SearchLookUpEdit();
+            searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditGroup = new DevExpress.XtraEditors.SearchLookUpEdit();
+            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditTm1 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditRazm = new DevExpress.XtraEditors.SearchLookUpEdit();
+            gridViewRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            searchLookUpEditTm2 = new DevExpress.XtraEditors.SearchLookUpEdit();
+            gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditPrizn.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditGost.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditGroup.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditRazm.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRazm).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm2.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
+            SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66506F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66506F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
-            this.tableLayoutPanel1.Controls.Add(this.customLabelModel, 0, 8);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelRazm, 0, 7);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelArt, 0, 6);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelTM, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelGroup, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelGOST, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.radioGroup1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelKod, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxKod1, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxKod2, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxArt, 2, 6);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxModel, 2, 8);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxKodFurn, 2, 9);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBox1, 2, 10);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxDlin, 2, 11);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxTimePlet, 2, 12);
-            this.tableLayoutPanel1.Controls.Add(this.customTextBoxNormP, 2, 13);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelKodFurn, 0, 9);
-            this.tableLayoutPanel1.Controls.Add(this.customLabel1, 0, 10);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelDlin, 0, 11);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelTimePlet, 0, 12);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelNormP, 0, 13);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelPrizn, 0, 14);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelM, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelM1, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.customLabelM2, 4, 13);
-            this.tableLayoutPanel1.Controls.Add(this.customCancelButton1, 4, 15);
-            this.tableLayoutPanel1.Controls.Add(this.customOkButton1, 1, 15);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditPrizn, 2, 14);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditGost, 2, 3);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditGroup, 2, 4);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditTm1, 2, 5);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditRazm, 2, 7);
-            this.tableLayoutPanel1.Controls.Add(this.searchLookUpEditTm2, 3, 5);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 16;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.252931F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(609, 481);
-            this.tableLayoutPanel1.TabIndex = 0;
+            tableLayoutPanel1.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.ColumnCount = 6;
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66506F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66506F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
+            tableLayoutPanel1.Controls.Add(customLabelModel, 0, 8);
+            tableLayoutPanel1.Controls.Add(customLabelRazm, 0, 7);
+            tableLayoutPanel1.Controls.Add(customLabelArt, 0, 6);
+            tableLayoutPanel1.Controls.Add(customLabelTM, 0, 5);
+            tableLayoutPanel1.Controls.Add(customLabelGroup, 0, 4);
+            tableLayoutPanel1.Controls.Add(customLabelGOST, 0, 3);
+            tableLayoutPanel1.Controls.Add(radioGroup1, 1, 0);
+            tableLayoutPanel1.Controls.Add(customLabelKod, 0, 2);
+            tableLayoutPanel1.Controls.Add(customTextBoxKod1, 2, 2);
+            tableLayoutPanel1.Controls.Add(customTextBoxKod2, 4, 2);
+            tableLayoutPanel1.Controls.Add(customTextBoxArt, 2, 6);
+            tableLayoutPanel1.Controls.Add(customTextBoxModel, 2, 8);
+            tableLayoutPanel1.Controls.Add(customTextBoxKodFurn, 2, 9);
+            tableLayoutPanel1.Controls.Add(customTextBox1, 2, 10);
+            tableLayoutPanel1.Controls.Add(customTextBoxDlin, 2, 11);
+            tableLayoutPanel1.Controls.Add(customTextBoxTimePlet, 2, 12);
+            tableLayoutPanel1.Controls.Add(customTextBoxNormP, 2, 13);
+            tableLayoutPanel1.Controls.Add(customLabelKodFurn, 0, 9);
+            tableLayoutPanel1.Controls.Add(customLabel1, 0, 10);
+            tableLayoutPanel1.Controls.Add(customLabelDlin, 0, 11);
+            tableLayoutPanel1.Controls.Add(customLabelTimePlet, 0, 12);
+            tableLayoutPanel1.Controls.Add(customLabelNormP, 0, 13);
+            tableLayoutPanel1.Controls.Add(customLabelPrizn, 0, 14);
+            tableLayoutPanel1.Controls.Add(customLabelM, 4, 11);
+            tableLayoutPanel1.Controls.Add(customLabelM1, 4, 12);
+            tableLayoutPanel1.Controls.Add(customLabelM2, 4, 13);
+            tableLayoutPanel1.Controls.Add(customCancelButton1, 4, 15);
+            tableLayoutPanel1.Controls.Add(customOkButton1, 1, 15);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditPrizn, 2, 14);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditGost, 2, 3);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditGroup, 2, 4);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditTm1, 2, 5);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditRazm, 2, 7);
+            tableLayoutPanel1.Controls.Add(searchLookUpEditTm2, 3, 5);
+            tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 16;
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.252931F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.249805F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(710, 555);
+            tableLayoutPanel1.TabIndex = 0;
             // 
             // customLabelModel
             // 
-            this.customLabelModel.AutoSize = true;
-            this.customLabelModel.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelModel, 2);
-            this.customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelModel.Location = new System.Drawing.Point(141, 240);
-            this.customLabelModel.Name = "customLabelModel";
-            this.customLabelModel.Size = new System.Drawing.Size(58, 30);
-            this.customLabelModel.TabIndex = 29;
-            this.customLabelModel.Text = "Модель";
-            this.customLabelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelModel.AutoSize = true;
+            customLabelModel.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelModel, 2);
+            customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelModel.Location = new System.Drawing.Point(174, 272);
+            customLabelModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelModel.Name = "customLabelModel";
+            customLabelModel.Size = new System.Drawing.Size(58, 34);
+            customLabelModel.TabIndex = 29;
+            customLabelModel.Text = "Модель";
+            customLabelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelRazm
             // 
-            this.customLabelRazm.AutoSize = true;
-            this.customLabelRazm.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelRazm, 2);
-            this.customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelRazm.Location = new System.Drawing.Point(143, 210);
-            this.customLabelRazm.Name = "customLabelRazm";
-            this.customLabelRazm.Size = new System.Drawing.Size(56, 30);
-            this.customLabelRazm.TabIndex = 27;
-            this.customLabelRazm.Text = "Размер";
-            this.customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelRazm.AutoSize = true;
+            customLabelRazm.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelRazm, 2);
+            customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelRazm.Location = new System.Drawing.Point(176, 238);
+            customLabelRazm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelRazm.Name = "customLabelRazm";
+            customLabelRazm.Size = new System.Drawing.Size(56, 34);
+            customLabelRazm.TabIndex = 27;
+            customLabelRazm.Text = "Размер";
+            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelArt
             // 
-            this.customLabelArt.AutoSize = true;
-            this.customLabelArt.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelArt, 2);
-            this.customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelArt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelArt.Location = new System.Drawing.Point(139, 180);
-            this.customLabelArt.Name = "customLabelArt";
-            this.customLabelArt.Size = new System.Drawing.Size(60, 30);
-            this.customLabelArt.TabIndex = 25;
-            this.customLabelArt.Text = "Артикул";
-            this.customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelArt.AutoSize = true;
+            customLabelArt.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelArt, 2);
+            customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelArt.Location = new System.Drawing.Point(172, 204);
+            customLabelArt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelArt.Name = "customLabelArt";
+            customLabelArt.Size = new System.Drawing.Size(60, 34);
+            customLabelArt.TabIndex = 25;
+            customLabelArt.Text = "Артикул";
+            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelTM
             // 
-            this.customLabelTM.AutoSize = true;
-            this.customLabelTM.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelTM, 2);
-            this.customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelTM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelTM.Location = new System.Drawing.Point(172, 150);
-            this.customLabelTM.Name = "customLabelTM";
-            this.customLabelTM.Size = new System.Drawing.Size(27, 30);
-            this.customLabelTM.TabIndex = 23;
-            this.customLabelTM.Text = "ТМ";
-            this.customLabelTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelTM.AutoSize = true;
+            customLabelTM.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelTM, 2);
+            customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelTM.Location = new System.Drawing.Point(205, 170);
+            customLabelTM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelTM.Name = "customLabelTM";
+            customLabelTM.Size = new System.Drawing.Size(27, 34);
+            customLabelTM.TabIndex = 23;
+            customLabelTM.Text = "ТМ";
+            customLabelTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelGroup
             // 
-            this.customLabelGroup.AutoSize = true;
-            this.customLabelGroup.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelGroup, 2);
-            this.customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelGroup.Location = new System.Drawing.Point(146, 120);
-            this.customLabelGroup.Name = "customLabelGroup";
-            this.customLabelGroup.Size = new System.Drawing.Size(53, 30);
-            this.customLabelGroup.TabIndex = 21;
-            this.customLabelGroup.Text = "Группа";
-            this.customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelGroup.AutoSize = true;
+            customLabelGroup.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelGroup, 2);
+            customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelGroup.Location = new System.Drawing.Point(179, 136);
+            customLabelGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelGroup.Name = "customLabelGroup";
+            customLabelGroup.Size = new System.Drawing.Size(53, 34);
+            customLabelGroup.TabIndex = 21;
+            customLabelGroup.Text = "Группа";
+            customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelGOST
             // 
-            this.customLabelGOST.AutoSize = true;
-            this.customLabelGOST.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelGOST, 2);
-            this.customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelGOST.Location = new System.Drawing.Point(155, 90);
-            this.customLabelGOST.Name = "customLabelGOST";
-            this.customLabelGOST.Size = new System.Drawing.Size(44, 30);
-            this.customLabelGOST.TabIndex = 19;
-            this.customLabelGOST.Text = "ГОСТ";
-            this.customLabelGOST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelGOST.AutoSize = true;
+            customLabelGOST.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelGOST, 2);
+            customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelGOST.Location = new System.Drawing.Point(188, 102);
+            customLabelGOST.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelGOST.Name = "customLabelGOST";
+            customLabelGOST.Size = new System.Drawing.Size(44, 34);
+            customLabelGOST.TabIndex = 19;
+            customLabelGOST.Text = "ГОСТ";
+            customLabelGOST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // radioGroup1
             // 
-            this.radioGroup1.AutoSizeInLayoutControl = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.radioGroup1, 5);
-            this.radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.radioGroup1.Location = new System.Drawing.Point(104, 3);
-            this.radioGroup1.Name = "radioGroup1";
-            this.radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.radioGroup1.Properties.Appearance.Options.UseBackColor = true;
-            this.radioGroup1.Properties.Columns = 2;
-            this.radioGroup1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
-            this.radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] {
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул", true, null, "Новый артикул"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул СП (шнуры,резинка)", true, null, "Новый артикул СП (шнуры,резинка)"),
-            new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Копия артикула", true, null, "Копия артикула")});
-            this.tableLayoutPanel1.SetRowSpan(this.radioGroup1, 2);
-            this.radioGroup1.Size = new System.Drawing.Size(502, 54);
-            this.radioGroup1.TabIndex = 0;
-            this.radioGroup1.SelectedIndexChanged += new System.EventHandler(this.radioGroup1_SelectedIndexChanged);
+            radioGroup1.AutoSizeInLayoutControl = true;
+            tableLayoutPanel1.SetColumnSpan(radioGroup1, 5);
+            radioGroup1.Dock = System.Windows.Forms.DockStyle.Fill;
+            radioGroup1.Location = new System.Drawing.Point(122, 3);
+            radioGroup1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            radioGroup1.Name = "radioGroup1";
+            radioGroup1.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            radioGroup1.Properties.Appearance.Options.UseBackColor = true;
+            radioGroup1.Properties.Columns = 2;
+            radioGroup1.Properties.GlyphAlignment = DevExpress.Utils.HorzAlignment.Default;
+            radioGroup1.Properties.Items.AddRange(new DevExpress.XtraEditors.Controls.RadioGroupItem[] { new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул", true, null, "Новый артикул"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Новый артикул СП (шнуры,резинка)", true, null, "Новый артикул СП (шнуры,резинка)"), new DevExpress.XtraEditors.Controls.RadioGroupItem(null, "Копия артикула", true, null, "Копия артикула") });
+            tableLayoutPanel1.SetRowSpan(radioGroup1, 2);
+            radioGroup1.Size = new System.Drawing.Size(584, 62);
+            radioGroup1.TabIndex = 0;
+            radioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
             // 
             // customLabelKod
             // 
-            this.customLabelKod.AutoSize = true;
-            this.customLabelKod.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelKod, 2);
-            this.customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelKod.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelKod.Location = new System.Drawing.Point(168, 60);
-            this.customLabelKod.Name = "customLabelKod";
-            this.customLabelKod.Size = new System.Drawing.Size(31, 30);
-            this.customLabelKod.TabIndex = 1;
-            this.customLabelKod.Text = "Код";
-            this.customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelKod.AutoSize = true;
+            customLabelKod.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelKod, 2);
+            customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKod.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelKod.Location = new System.Drawing.Point(201, 68);
+            customLabelKod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelKod.Name = "customLabelKod";
+            customLabelKod.Size = new System.Drawing.Size(31, 34);
+            customLabelKod.TabIndex = 1;
+            customLabelKod.Text = "Код";
+            customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customTextBoxKod1
             // 
-            this.customTextBoxKod1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxKod1, 2);
-            this.customTextBoxKod1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxKod1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxKod1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxKod1.Location = new System.Drawing.Point(205, 63);
-            this.customTextBoxKod1.Name = "customTextBoxKod1";
-            this.customTextBoxKod1.Size = new System.Drawing.Size(196, 23);
-            this.customTextBoxKod1.TabIndex = 2;
+            customTextBoxKod1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxKod1, 2);
+            customTextBoxKod1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxKod1.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxKod1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxKod1.Location = new System.Drawing.Point(240, 71);
+            customTextBoxKod1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxKod1.Name = "customTextBoxKod1";
+            customTextBoxKod1.Size = new System.Drawing.Size(228, 23);
+            customTextBoxKod1.TabIndex = 2;
             // 
             // customTextBoxKod2
             // 
-            this.customTextBoxKod2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.customTextBoxKod2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxKod2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxKod2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxKod2.Location = new System.Drawing.Point(407, 63);
-            this.customTextBoxKod2.Name = "customTextBoxKod2";
-            this.customTextBoxKod2.Size = new System.Drawing.Size(95, 23);
-            this.customTextBoxKod2.TabIndex = 3;
+            customTextBoxKod2.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            customTextBoxKod2.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxKod2.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxKod2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxKod2.Location = new System.Drawing.Point(476, 71);
+            customTextBoxKod2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxKod2.Name = "customTextBoxKod2";
+            customTextBoxKod2.Size = new System.Drawing.Size(110, 23);
+            customTextBoxKod2.TabIndex = 3;
             // 
             // customTextBoxArt
             // 
-            this.customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxArt, 3);
-            this.customTextBoxArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxArt.Location = new System.Drawing.Point(205, 183);
-            this.customTextBoxArt.Name = "customTextBoxArt";
-            this.customTextBoxArt.Size = new System.Drawing.Size(297, 23);
-            this.customTextBoxArt.TabIndex = 4;
+            customTextBoxArt.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxArt, 3);
+            customTextBoxArt.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxArt.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxArt.Location = new System.Drawing.Point(240, 207);
+            customTextBoxArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxArt.Name = "customTextBoxArt";
+            customTextBoxArt.Size = new System.Drawing.Size(346, 23);
+            customTextBoxArt.TabIndex = 4;
             // 
             // customTextBoxModel
             // 
-            this.customTextBoxModel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxModel, 3);
-            this.customTextBoxModel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxModel.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxModel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxModel.Location = new System.Drawing.Point(205, 243);
-            this.customTextBoxModel.Name = "customTextBoxModel";
-            this.customTextBoxModel.Size = new System.Drawing.Size(297, 23);
-            this.customTextBoxModel.TabIndex = 6;
+            customTextBoxModel.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxModel, 3);
+            customTextBoxModel.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxModel.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxModel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxModel.Location = new System.Drawing.Point(240, 275);
+            customTextBoxModel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxModel.Name = "customTextBoxModel";
+            customTextBoxModel.Size = new System.Drawing.Size(346, 23);
+            customTextBoxModel.TabIndex = 6;
             // 
             // customTextBoxKodFurn
             // 
-            this.customTextBoxKodFurn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxKodFurn, 3);
-            this.customTextBoxKodFurn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxKodFurn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxKodFurn.Location = new System.Drawing.Point(205, 273);
-            this.customTextBoxKodFurn.Name = "customTextBoxKodFurn";
-            this.customTextBoxKodFurn.Size = new System.Drawing.Size(297, 23);
-            this.customTextBoxKodFurn.TabIndex = 7;
+            customTextBoxKodFurn.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxKodFurn, 3);
+            customTextBoxKodFurn.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxKodFurn.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxKodFurn.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxKodFurn.Location = new System.Drawing.Point(240, 309);
+            customTextBoxKodFurn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxKodFurn.Name = "customTextBoxKodFurn";
+            customTextBoxKodFurn.Size = new System.Drawing.Size(346, 23);
+            customTextBoxKodFurn.TabIndex = 7;
             // 
             // customTextBox1
             // 
-            this.customTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBox1, 3);
-            this.customTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBox1.Location = new System.Drawing.Point(205, 303);
-            this.customTextBox1.Name = "customTextBox1";
-            this.customTextBox1.Size = new System.Drawing.Size(297, 23);
-            this.customTextBox1.TabIndex = 8;
+            customTextBox1.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBox1, 3);
+            customTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBox1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBox1.Location = new System.Drawing.Point(240, 343);
+            customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBox1.Name = "customTextBox1";
+            customTextBox1.Size = new System.Drawing.Size(346, 23);
+            customTextBox1.TabIndex = 8;
             // 
             // customTextBoxDlin
             // 
-            this.customTextBoxDlin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxDlin, 2);
-            this.customTextBoxDlin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxDlin.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxDlin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxDlin.Location = new System.Drawing.Point(205, 333);
-            this.customTextBoxDlin.Name = "customTextBoxDlin";
-            this.customTextBoxDlin.Size = new System.Drawing.Size(196, 23);
-            this.customTextBoxDlin.TabIndex = 9;
+            customTextBoxDlin.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxDlin, 2);
+            customTextBoxDlin.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxDlin.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxDlin.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxDlin.Location = new System.Drawing.Point(240, 377);
+            customTextBoxDlin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxDlin.Name = "customTextBoxDlin";
+            customTextBoxDlin.Size = new System.Drawing.Size(228, 23);
+            customTextBoxDlin.TabIndex = 9;
             // 
             // customTextBoxTimePlet
             // 
-            this.customTextBoxTimePlet.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxTimePlet, 2);
-            this.customTextBoxTimePlet.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxTimePlet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxTimePlet.Location = new System.Drawing.Point(205, 363);
-            this.customTextBoxTimePlet.Name = "customTextBoxTimePlet";
-            this.customTextBoxTimePlet.Size = new System.Drawing.Size(196, 23);
-            this.customTextBoxTimePlet.TabIndex = 10;
+            customTextBoxTimePlet.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxTimePlet, 2);
+            customTextBoxTimePlet.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxTimePlet.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxTimePlet.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxTimePlet.Location = new System.Drawing.Point(240, 411);
+            customTextBoxTimePlet.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxTimePlet.Name = "customTextBoxTimePlet";
+            customTextBoxTimePlet.Size = new System.Drawing.Size(228, 23);
+            customTextBoxTimePlet.TabIndex = 10;
             // 
             // customTextBoxNormP
             // 
-            this.customTextBoxNormP.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(248)))), ((int)(((byte)(248)))), ((int)(((byte)(255)))));
-            this.tableLayoutPanel1.SetColumnSpan(this.customTextBoxNormP, 2);
-            this.customTextBoxNormP.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customTextBoxNormP.Font = new System.Drawing.Font("Arial", 10F);
-            this.customTextBoxNormP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(72)))), ((int)(((byte)(61)))), ((int)(((byte)(139)))));
-            this.customTextBoxNormP.Location = new System.Drawing.Point(205, 393);
-            this.customTextBoxNormP.Name = "customTextBoxNormP";
-            this.customTextBoxNormP.Size = new System.Drawing.Size(196, 23);
-            this.customTextBoxNormP.TabIndex = 11;
+            customTextBoxNormP.BackColor = System.Drawing.Color.FromArgb(248, 248, 255);
+            tableLayoutPanel1.SetColumnSpan(customTextBoxNormP, 2);
+            customTextBoxNormP.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxNormP.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxNormP.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customTextBoxNormP.Location = new System.Drawing.Point(240, 445);
+            customTextBoxNormP.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxNormP.Name = "customTextBoxNormP";
+            customTextBoxNormP.Size = new System.Drawing.Size(228, 23);
+            customTextBoxNormP.TabIndex = 11;
             // 
             // customLabelKodFurn
             // 
-            this.customLabelKodFurn.AutoSize = true;
-            this.customLabelKodFurn.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelKodFurn, 2);
-            this.customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelKodFurn.Location = new System.Drawing.Point(64, 270);
-            this.customLabelKodFurn.Name = "customLabelKodFurn";
-            this.customLabelKodFurn.Size = new System.Drawing.Size(135, 30);
-            this.customLabelKodFurn.TabIndex = 18;
-            this.customLabelKodFurn.Text = "Код фурн. длинный";
-            this.customLabelKodFurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelKodFurn.AutoSize = true;
+            customLabelKodFurn.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelKodFurn, 2);
+            customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelKodFurn.Location = new System.Drawing.Point(97, 306);
+            customLabelKodFurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelKodFurn.Name = "customLabelKodFurn";
+            customLabelKodFurn.Size = new System.Drawing.Size(135, 34);
+            customLabelKodFurn.TabIndex = 18;
+            customLabelKodFurn.Text = "Код фурн. длинный";
+            customLabelKodFurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabel1
             // 
-            this.customLabel1.AutoSize = true;
-            this.customLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabel1, 2);
-            this.customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabel1.Location = new System.Drawing.Point(188, 300);
-            this.customLabel1.Name = "customLabel1";
-            this.customLabel1.Size = new System.Drawing.Size(11, 30);
-            this.customLabel1.TabIndex = 20;
-            this.customLabel1.Text = " ";
-            this.customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabel1.AutoSize = true;
+            customLabel1.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabel1, 2);
+            customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel1.Location = new System.Drawing.Point(221, 340);
+            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new System.Drawing.Size(11, 34);
+            customLabel1.TabIndex = 20;
+            customLabel1.Text = " ";
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelDlin
             // 
-            this.customLabelDlin.AutoSize = true;
-            this.customLabelDlin.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelDlin, 2);
-            this.customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelDlin.Location = new System.Drawing.Point(151, 330);
-            this.customLabelDlin.Name = "customLabelDlin";
-            this.customLabelDlin.Size = new System.Drawing.Size(48, 30);
-            this.customLabelDlin.TabIndex = 22;
-            this.customLabelDlin.Text = "Длина";
-            this.customLabelDlin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelDlin.AutoSize = true;
+            customLabelDlin.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelDlin, 2);
+            customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelDlin.Location = new System.Drawing.Point(184, 374);
+            customLabelDlin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelDlin.Name = "customLabelDlin";
+            customLabelDlin.Size = new System.Drawing.Size(48, 34);
+            customLabelDlin.TabIndex = 22;
+            customLabelDlin.Text = "Длина";
+            customLabelDlin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelTimePlet
             // 
-            this.customLabelTimePlet.AutoSize = true;
-            this.customLabelTimePlet.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelTimePlet, 2);
-            this.customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelTimePlet.Location = new System.Drawing.Point(53, 360);
-            this.customLabelTimePlet.Name = "customLabelTimePlet";
-            this.customLabelTimePlet.Size = new System.Drawing.Size(146, 30);
-            this.customLabelTimePlet.TabIndex = 24;
-            this.customLabelTimePlet.Text = "Время плетения, сек";
-            this.customLabelTimePlet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelTimePlet.AutoSize = true;
+            customLabelTimePlet.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelTimePlet, 2);
+            customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelTimePlet.Location = new System.Drawing.Point(86, 408);
+            customLabelTimePlet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelTimePlet.Name = "customLabelTimePlet";
+            customLabelTimePlet.Size = new System.Drawing.Size(146, 34);
+            customLabelTimePlet.TabIndex = 24;
+            customLabelTimePlet.Text = "Время плетения, сек";
+            customLabelTimePlet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelNormP
             // 
-            this.customLabelNormP.AutoSize = true;
-            this.customLabelNormP.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelNormP, 2);
-            this.customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelNormP.Location = new System.Drawing.Point(85, 390);
-            this.customLabelNormP.Name = "customLabelNormP";
-            this.customLabelNormP.Size = new System.Drawing.Size(114, 30);
-            this.customLabelNormP.TabIndex = 26;
-            this.customLabelNormP.Text = "Норма пряжи, кг";
-            this.customLabelNormP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelNormP.AutoSize = true;
+            customLabelNormP.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelNormP, 2);
+            customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelNormP.Location = new System.Drawing.Point(118, 442);
+            customLabelNormP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelNormP.Name = "customLabelNormP";
+            customLabelNormP.Size = new System.Drawing.Size(114, 34);
+            customLabelNormP.TabIndex = 26;
+            customLabelNormP.Text = "Норма пряжи, кг";
+            customLabelNormP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelPrizn
             // 
-            this.customLabelPrizn.AutoSize = true;
-            this.customLabelPrizn.BackColor = System.Drawing.Color.Transparent;
-            this.tableLayoutPanel1.SetColumnSpan(this.customLabelPrizn, 2);
-            this.customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelPrizn.Location = new System.Drawing.Point(139, 420);
-            this.customLabelPrizn.Name = "customLabelPrizn";
-            this.customLabelPrizn.Size = new System.Drawing.Size(60, 30);
-            this.customLabelPrizn.TabIndex = 28;
-            this.customLabelPrizn.Text = "Признак";
-            this.customLabelPrizn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            customLabelPrizn.AutoSize = true;
+            customLabelPrizn.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelPrizn, 2);
+            customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelPrizn.Location = new System.Drawing.Point(172, 476);
+            customLabelPrizn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelPrizn.Name = "customLabelPrizn";
+            customLabelPrizn.Size = new System.Drawing.Size(60, 34);
+            customLabelPrizn.TabIndex = 28;
+            customLabelPrizn.Text = "Признак";
+            customLabelPrizn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customLabelM
             // 
-            this.customLabelM.AutoSize = true;
-            this.customLabelM.BackColor = System.Drawing.Color.Transparent;
-            this.customLabelM.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabelM.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelM.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelM.Location = new System.Drawing.Point(407, 344);
-            this.customLabelM.Name = "customLabelM";
-            this.customLabelM.Size = new System.Drawing.Size(95, 16);
-            this.customLabelM.TabIndex = 32;
-            this.customLabelM.Text = "м.";
-            this.customLabelM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabelM.AutoSize = true;
+            customLabelM.BackColor = System.Drawing.Color.Transparent;
+            customLabelM.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM.Location = new System.Drawing.Point(476, 392);
+            customLabelM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM.Name = "customLabelM";
+            customLabelM.Size = new System.Drawing.Size(110, 16);
+            customLabelM.TabIndex = 32;
+            customLabelM.Text = "м.";
+            customLabelM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelM1
             // 
-            this.customLabelM1.AutoSize = true;
-            this.customLabelM1.BackColor = System.Drawing.Color.Transparent;
-            this.customLabelM1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelM1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelM1.Location = new System.Drawing.Point(407, 374);
-            this.customLabelM1.Name = "customLabelM1";
-            this.customLabelM1.Size = new System.Drawing.Size(95, 16);
-            this.customLabelM1.TabIndex = 31;
-            this.customLabelM1.Text = "на 1 метр";
-            this.customLabelM1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabelM1.AutoSize = true;
+            customLabelM1.BackColor = System.Drawing.Color.Transparent;
+            customLabelM1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM1.Location = new System.Drawing.Point(476, 426);
+            customLabelM1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM1.Name = "customLabelM1";
+            customLabelM1.Size = new System.Drawing.Size(110, 16);
+            customLabelM1.TabIndex = 31;
+            customLabelM1.Text = "на 1 метр";
+            customLabelM1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customLabelM2
             // 
-            this.customLabelM2.AutoSize = true;
-            this.customLabelM2.BackColor = System.Drawing.Color.Transparent;
-            this.customLabelM2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
-            this.customLabelM2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(139)))), ((int)(((byte)(69)))), ((int)(((byte)(19)))));
-            this.customLabelM2.Location = new System.Drawing.Point(407, 404);
-            this.customLabelM2.Name = "customLabelM2";
-            this.customLabelM2.Size = new System.Drawing.Size(95, 16);
-            this.customLabelM2.TabIndex = 30;
-            this.customLabelM2.Text = "на 1 метр";
-            this.customLabelM2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customLabelM2.AutoSize = true;
+            customLabelM2.BackColor = System.Drawing.Color.Transparent;
+            customLabelM2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM2.Location = new System.Drawing.Point(476, 460);
+            customLabelM2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM2.Name = "customLabelM2";
+            customLabelM2.Size = new System.Drawing.Size(110, 16);
+            customLabelM2.TabIndex = 30;
+            customLabelM2.Text = "на 1 метр";
+            customLabelM2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customCancelButton1
             // 
-            this.customCancelButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customCancelButton1.Location = new System.Drawing.Point(407, 453);
-            this.customCancelButton1.Name = "customCancelButton1";
-            this.customCancelButton1.Size = new System.Drawing.Size(95, 25);
-            this.customCancelButton1.TabIndex = 34;
-            this.customCancelButton1.Text = "Отмена";
-            this.customCancelButton1.UseVisualStyleBackColor = false;
-            this.customCancelButton1.Click += new System.EventHandler(this.customCancelButton1_Click);
+            customCancelButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            customCancelButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
+            customCancelButton1.ForeColor = System.Drawing.Color.Black;
+            customCancelButton1.Location = new System.Drawing.Point(476, 513);
+            customCancelButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customCancelButton1.Name = "customCancelButton1";
+            customCancelButton1.Size = new System.Drawing.Size(110, 39);
+            customCancelButton1.TabIndex = 34;
+            customCancelButton1.Text = "Отмена";
+            customCancelButton1.UseVisualStyleBackColor = false;
+            customCancelButton1.Click += customCancelButton1_Click;
             // 
             // customOkButton1
             // 
-            this.customOkButton1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
-            this.customOkButton1.Location = new System.Drawing.Point(104, 453);
-            this.customOkButton1.Name = "customOkButton1";
-            this.customOkButton1.Size = new System.Drawing.Size(95, 25);
-            this.customOkButton1.TabIndex = 33;
-            this.customOkButton1.Text = "Сохранить";
-            this.customOkButton1.UseVisualStyleBackColor = false;
-            this.customOkButton1.Click += new System.EventHandler(this.customOkButton1_Click);
+            customOkButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customOkButton1.DialogResult = System.Windows.Forms.DialogResult.OK;
+            customOkButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customOkButton1.Font = new System.Drawing.Font("Arial", 10F);
+            customOkButton1.ForeColor = System.Drawing.Color.Black;
+            customOkButton1.Location = new System.Drawing.Point(122, 513);
+            customOkButton1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customOkButton1.Name = "customOkButton1";
+            customOkButton1.Size = new System.Drawing.Size(110, 39);
+            customOkButton1.TabIndex = 33;
+            customOkButton1.Text = "Сохранить";
+            customOkButton1.UseVisualStyleBackColor = false;
+            customOkButton1.Click += customOkButton1_Click;
             // 
             // searchLookUpEditPrizn
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditPrizn, 3);
-            this.searchLookUpEditPrizn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditPrizn.Location = new System.Drawing.Point(205, 423);
-            this.searchLookUpEditPrizn.Name = "searchLookUpEditPrizn";
-            this.searchLookUpEditPrizn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditPrizn.Properties.PopupView = this.gridView5;
-            this.searchLookUpEditPrizn.Size = new System.Drawing.Size(297, 20);
-            this.searchLookUpEditPrizn.TabIndex = 46;
+            tableLayoutPanel1.SetColumnSpan(searchLookUpEditPrizn, 3);
+            searchLookUpEditPrizn.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditPrizn.Location = new System.Drawing.Point(240, 479);
+            searchLookUpEditPrizn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditPrizn.Name = "searchLookUpEditPrizn";
+            searchLookUpEditPrizn.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditPrizn.Properties.PopupView = gridView5;
+            searchLookUpEditPrizn.Size = new System.Drawing.Size(346, 20);
+            searchLookUpEditPrizn.TabIndex = 46;
             // 
             // gridView5
             // 
-            this.gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView5.Name = "gridView5";
-            this.gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView5.OptionsView.ShowGroupPanel = false;
+            gridView5.DetailHeight = 404;
+            gridView5.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridView5.Name = "gridView5";
+            gridView5.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView5.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView5.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditGost
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditGost, 3);
-            this.searchLookUpEditGost.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditGost.Location = new System.Drawing.Point(205, 93);
-            this.searchLookUpEditGost.Name = "searchLookUpEditGost";
-            this.searchLookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditGost.Properties.PopupView = this.searchLookUpEdit1View;
-            this.searchLookUpEditGost.Size = new System.Drawing.Size(297, 20);
-            this.searchLookUpEditGost.TabIndex = 41;
-            this.searchLookUpEditGost.EditValueChanged += new System.EventHandler(this.lookUpEditGost_EditValueChanged);
+            tableLayoutPanel1.SetColumnSpan(searchLookUpEditGost, 3);
+            searchLookUpEditGost.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditGost.Location = new System.Drawing.Point(240, 105);
+            searchLookUpEditGost.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditGost.Name = "searchLookUpEditGost";
+            searchLookUpEditGost.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditGost.Properties.PopupView = searchLookUpEdit1View;
+            searchLookUpEditGost.Size = new System.Drawing.Size(346, 20);
+            searchLookUpEditGost.TabIndex = 41;
+            searchLookUpEditGost.EditValueChanged += lookUpEditGost_EditValueChanged;
             // 
             // searchLookUpEdit1View
             // 
-            this.searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            this.searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            searchLookUpEdit1View.DetailHeight = 404;
+            searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            searchLookUpEdit1View.Name = "searchLookUpEdit1View";
+            searchLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
+            searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
+            searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditGroup
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditGroup, 3);
-            this.searchLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditGroup.Location = new System.Drawing.Point(205, 123);
-            this.searchLookUpEditGroup.Name = "searchLookUpEditGroup";
-            this.searchLookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditGroup.Properties.PopupView = this.gridView1;
-            this.searchLookUpEditGroup.Size = new System.Drawing.Size(297, 20);
-            this.searchLookUpEditGroup.TabIndex = 42;
+            tableLayoutPanel1.SetColumnSpan(searchLookUpEditGroup, 3);
+            searchLookUpEditGroup.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditGroup.Location = new System.Drawing.Point(240, 139);
+            searchLookUpEditGroup.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditGroup.Name = "searchLookUpEditGroup";
+            searchLookUpEditGroup.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditGroup.Properties.PopupView = gridView1;
+            searchLookUpEditGroup.Size = new System.Drawing.Size(346, 20);
+            searchLookUpEditGroup.TabIndex = 42;
             // 
             // gridView1
             // 
-            this.gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.DetailHeight = 404;
+            gridView1.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridView1.Name = "gridView1";
+            gridView1.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView1.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView1.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditTm1
             // 
-            this.searchLookUpEditTm1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditTm1.Location = new System.Drawing.Point(205, 153);
-            this.searchLookUpEditTm1.Name = "searchLookUpEditTm1";
-            this.searchLookUpEditTm1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditTm1.Properties.PopupView = this.gridView2;
-            this.searchLookUpEditTm1.Size = new System.Drawing.Size(95, 20);
-            this.searchLookUpEditTm1.TabIndex = 43;
+            searchLookUpEditTm1.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditTm1.Location = new System.Drawing.Point(240, 173);
+            searchLookUpEditTm1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditTm1.Name = "searchLookUpEditTm1";
+            searchLookUpEditTm1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditTm1.Properties.PopupView = gridView2;
+            searchLookUpEditTm1.Size = new System.Drawing.Size(110, 20);
+            searchLookUpEditTm1.TabIndex = 43;
             // 
             // gridView2
             // 
-            this.gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView2.Name = "gridView2";
-            this.gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView2.OptionsView.ShowGroupPanel = false;
+            gridView2.DetailHeight = 404;
+            gridView2.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridView2.Name = "gridView2";
+            gridView2.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView2.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditRazm
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditRazm, 3);
-            this.searchLookUpEditRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditRazm.EditValue = "0";
-            this.searchLookUpEditRazm.Location = new System.Drawing.Point(205, 213);
-            this.searchLookUpEditRazm.Name = "searchLookUpEditRazm";
-            this.searchLookUpEditRazm.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditRazm.Properties.PopupView = this.gridViewRazm;
-            this.searchLookUpEditRazm.Size = new System.Drawing.Size(297, 20);
-            this.searchLookUpEditRazm.TabIndex = 45;
+            tableLayoutPanel1.SetColumnSpan(searchLookUpEditRazm, 3);
+            searchLookUpEditRazm.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditRazm.EditValue = "0";
+            searchLookUpEditRazm.Location = new System.Drawing.Point(240, 241);
+            searchLookUpEditRazm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditRazm.Name = "searchLookUpEditRazm";
+            searchLookUpEditRazm.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditRazm.Properties.PopupView = gridViewRazm;
+            searchLookUpEditRazm.Size = new System.Drawing.Size(346, 20);
+            searchLookUpEditRazm.TabIndex = 45;
             // 
             // gridViewRazm
             // 
-            this.gridViewRazm.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridViewRazm.Name = "gridViewRazm";
-            this.gridViewRazm.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridViewRazm.OptionsView.ShowGroupPanel = false;
+            gridViewRazm.DetailHeight = 404;
+            gridViewRazm.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridViewRazm.Name = "gridViewRazm";
+            gridViewRazm.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRazm.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridViewRazm.OptionsView.ShowGroupPanel = false;
             // 
             // searchLookUpEditTm2
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.searchLookUpEditTm2, 2);
-            this.searchLookUpEditTm2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.searchLookUpEditTm2.Location = new System.Drawing.Point(306, 153);
-            this.searchLookUpEditTm2.Name = "searchLookUpEditTm2";
-            this.searchLookUpEditTm2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.searchLookUpEditTm2.Properties.PopupView = this.gridView3;
-            this.searchLookUpEditTm2.Size = new System.Drawing.Size(196, 20);
-            this.searchLookUpEditTm2.TabIndex = 47;
+            tableLayoutPanel1.SetColumnSpan(searchLookUpEditTm2, 2);
+            searchLookUpEditTm2.Dock = System.Windows.Forms.DockStyle.Fill;
+            searchLookUpEditTm2.Location = new System.Drawing.Point(358, 173);
+            searchLookUpEditTm2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            searchLookUpEditTm2.Name = "searchLookUpEditTm2";
+            searchLookUpEditTm2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
+            searchLookUpEditTm2.Properties.PopupView = gridView3;
+            searchLookUpEditTm2.Size = new System.Drawing.Size(228, 20);
+            searchLookUpEditTm2.TabIndex = 47;
             // 
             // gridView3
             // 
-            this.gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            this.gridView3.Name = "gridView3";
-            this.gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
-            this.gridView3.OptionsView.ShowGroupPanel = false;
+            gridView3.DetailHeight = 404;
+            gridView3.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
+            gridView3.Name = "gridView3";
+            gridView3.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
+            gridView3.OptionsView.ShowGroupPanel = false;
             // 
             // art_new2024
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(609, 481);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "art_new2024";
-            this.Text = "Добавление артикула";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.editFio_FormClosing);
-            this.Load += new System.EventHandler(this.art_new2024_Load);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.radioGroup1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditPrizn.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGost.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEdit1View)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditGroup.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm1.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditRazm.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewRazm)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchLookUpEditTm2.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            ClientSize = new System.Drawing.Size(710, 555);
+            Controls.Add(tableLayoutPanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            Name = "art_new2024";
+            Text = "Добавление артикула";
+            FormClosing += editFio_FormClosing;
+            Load += art_new2024_Load;
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)radioGroup1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditPrizn.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditGost.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditGroup.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditRazm.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRazm).EndInit();
+            ((System.ComponentModel.ISupportInitialize)searchLookUpEditTm2.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
+            ResumeLayout(false);
         }
 
         #endregion

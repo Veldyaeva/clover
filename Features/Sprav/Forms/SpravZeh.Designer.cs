@@ -34,7 +34,7 @@
             label3 = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             gridViewZeh = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridControlSprav = new DevExpress.XtraGrid.GridControl();
+            gridControlSprav = new CustomGridControl();
             spravList = new System.Windows.Forms.BindingSource(components);
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customButton1 = new CustomButton();
@@ -437,7 +437,7 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxKod;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewZeh;
-        private DevExpress.XtraGrid.GridControl gridControlSprav;
+        private SewingProduction.CustomGridControl gridControlSprav;
         private System.Windows.Forms.BindingSource spravList;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

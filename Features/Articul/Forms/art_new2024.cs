@@ -35,6 +35,10 @@ namespace SewingProduction.form
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
         }
+        public art_new2024()
+        {
+            InitializeComponent();
+        }
 
         private void art_new2024_Load(object sender, EventArgs e)
         {

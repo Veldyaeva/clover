@@ -8,7 +8,7 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraEditors.Controls;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
-using static SewingProduction.form.SettingsForm;
+using SewingProduction.Core.interfaces;
 using System.Collections.Generic;
 using static DevExpress.Utils.Drawing.Helpers.NativeMethods;
 using SewingProduction.Helpers;
@@ -50,7 +50,7 @@ namespace SewingProduction.form
             void UpdateDataInForm();
         }
         // Процедура, которая вызывается из брокера при поступлении обновления?
-        public void UpdateDataInForm()
+        public void UpdateDataInForm(string _table)
         {
             LoadData();
         }
