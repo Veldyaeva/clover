@@ -278,13 +278,27 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="kod">код</param>
         /// <returns></returns>
-        public async Task<string> GetImage(int kod)
+        public async Task<string> GetImage(int? annId = null, int? kod = null)
         {
-            string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            string result = await _dbHelper.ExecuteScalarAsync<string>(query, new Dictionary<string, object> { { "@kod", kod} });
-            return result; 
-        }
+            string sql;
+            var p = new DynamicParameters();
 
+            if (annId != null)        // поиск по AnnID
+            {
+                sql = @"SELECT TOP (1) 
+                       dbo.getFileEskizForKodd(vsa.kod)
+                FROM   dbo.View_sp_articul vsa
+                WHERE  vsa.annId = @annId";
+                p.Add("@annId", annId);
+            }
+            else                      // прямой поиск по kodd
+            {
+                sql = "SELECT dbo.getFileEskizForKodd(@kod)";
+                p.Add("@kod", kod);
+            }
+
+            return await _dbHelper.ExecuteScalarAsync<string>(sql, p);
+        }
         internal Task<DataTable> GetNormOper()
         {
             string query = @"SELECT no.*, 
@@ -497,7 +511,7 @@ WHERE nr.annId = @annId";
         /// <returns></returns>
         public async Task<List<MyDataART>> GetRelatedSpArt()
         {
-            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annID FROM sp_articul WHERE annId IS NULL";
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, razm, annID FROM sp_articul WHERE annId IS NULL";
 
             using (var connection = _dbHelper.GetConnection())
             {
