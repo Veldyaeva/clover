@@ -1,4 +1,5 @@
 ﻿using DevExpress.ChartRangeControlClient.Core;
+using DevExpress.CodeParser.VB;
 using DevExpress.Data.Filtering;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraBars.Docking2010;
@@ -74,6 +75,9 @@ namespace SewingProduction.Forms
         public TeamWork()
         {
             InitializeComponent();
+            ANNgridView.OptionsView.ShowPreview = true;
+            ANNgridView.PreviewLineCount = 1;
+          //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
@@ -121,7 +125,7 @@ namespace SewingProduction.Forms
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
                 unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
-            ANNgridView.CalcPreviewText += CalcPreviewText;
+        //    ANNgridView.CalcPreviewText += CalcPreviewText;
 
             if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView wdToBindView)
             {
@@ -130,71 +134,103 @@ namespace SewingProduction.Forms
                 wdToBindView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataANN>(gridControl_wdToBind, e);
             }
 
-            // 
-            RepositoryItemButtonEdit commandsEditDateNull = new RepositoryItemButtonEdit { AutoHeight = false, Name = "CommandsEdit", TextEditStyle = TextEditStyles.HideTextEditor };
-            RepositoryItemButtonEdit commandsEditDateNotNull = new RepositoryItemButtonEdit { AutoHeight = false, Name = "CommandsEdit", TextEditStyle = TextEditStyles.HideTextEditor };
-            commandsEditDateNull.ButtonClick += CommandsEdit_ButtonClick;
-            commandsEditDateNotNull.ButtonClick += CommandsEdit_ButtonClick;
+            var commandsEditDateNull = new RepositoryItemButtonEdit { TextEditStyle = TextEditStyles.HideTextEditor };
             commandsEditDateNull.Buttons.Clear();
-            commandsEditDateNotNull.Buttons.Clear();
-            commandsEditDateNull.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetDeleteImage()) });
-            commandsEditDateNotNull.Buttons.AddRange(new EditorButton[] { new EditorButton(ButtonPredefines.Glyph, "Дата готова", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetEditImage()) });
+            commandsEditDateNull.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetEditImage()));
+            ////кнопка "Проставить дату обн"
+       //     commandsEditDateNull.ButtonClick += CommandsEdit_ButtonClick;
+            commandsEditDateNull.DoubleClick -= CommandsEditDateNull_DoubleClick;
+            commandsEditDateNull.DoubleClick += CommandsEditDateNull_DoubleClick;
+            GridColumn Updated = ANNgridView.Columns["dateUpdate"];
+            // Updated.ColumnEdit = commandsEditDateNull;
 
-            //кнопка "Проставить дату обн"
-            GridColumn Updated = ANNgridView.Columns["Upd"];
-            Updated.ColumnEdit = commandsEditDateNull;
-
-            ANNgridView.CustomRowCellEdit += (s, e) => {
-                if (e.Column == Updated)
+            // Репозиторий для отображения только текста
+            var commandsEditDateText = new RepositoryItemTextEdit();
+            commandsEditDateText.ReadOnly = true;
+            
+            GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
+            
+            // Устанавливаем формат отображения даты без времени
+            colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+            
+            ANNgridView.CustomRowCellEdit += (s, e) =>
+            {
+                if (e.Column == colDateUpdate)
                 {
                     var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
-                    e.RepositoryItem = (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
-                        ? commandsEditDateNull
-                        : commandsEditDateNotNull;
+                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                        e.RepositoryItem = commandsEditDateNull;
+                    else e.RepositoryItem = commandsEditDateText;
                 }
             };
+            ANNgridView.CalcPreviewText += CalcPreviewText;
         }
 
-        private void CommandsEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        private async void CommandsEditDateNull_DoubleClick(object sender, EventArgs e)
         {
             var view = ANNgridView;
             var rowHandle = view.FocusedRowHandle;
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
-
+            var annId = view.GetRowCellValue(rowHandle, "AnnID");
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
-                setDateUpdate();
-                view.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                view.RefreshRowCell(rowHandle, view.Columns["Upd"]);
+                var result = MessageBox.Show("Обновить данные во всех справочниках?",
+     "Пересчёт себ.",
+     MessageBoxButtons.YesNo,
+     MessageBoxIcon.Question,
+     MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.Yes)
+                {
+                    var parameters = new Dictionary<string, object>
+                    {
+                        { "@xAnnID", annId}
+                    };
+                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters); //пересчитать себ. - при простановке даты обн
+
+                    view.RefreshRowCell(rowHandle, view.Columns["dateUpdate"]);
+
+                    await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
+                    await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+                    view.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
+                    view.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
+                    view.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
+
+                    setDateUpdate();
+                }
             }
+        }
+
+        private async void CommandsEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
+        {
         }
 
         private void setDateUpdate()
         {
-            Console.WriteLine("Click");
         }
 
         private void CalcPreviewText(object sender,
                                        CalcPreviewTextEventArgs e)
         {
-            var row = e.Row as ArtNormN;
-            if (row == null) return;
+            e.PreviewText = "Тест превью";
+            //var row = e.Row as ArtNormN;
+            //if (row == null) return;
 
-            var parts = new List<string>();
+            //var parts = new List<string>();
 
-            if (!string.IsNullOrWhiteSpace(row.Komment))
-                parts.Add(row.Komment);
+            //if (!string.IsNullOrWhiteSpace(row.Komment))
+            //    parts.Add(row.Komment);
 
-            // выводим всегда
-            parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
+            //// выводим всегда
+            //parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
 
-            if (!string.IsNullOrWhiteSpace(row.Reco))
-                parts.Add($"Рекомендация: {row.Reco}");
-            if (!string.IsNullOrWhiteSpace(row.Komment))
-                parts.Add($"Комментарий: {row.Komment}");
+            //if (!string.IsNullOrWhiteSpace(row.Reco))
+            //    parts.Add($"Рекомендация: {row.Reco}");
+            //if (!string.IsNullOrWhiteSpace(row.Komment))
+            //    parts.Add($"Комментарий: {row.Komment}");
 
-            e.PreviewText = string.Join(Environment.NewLine, parts);
+            //e.PreviewText = string.Join(Environment.NewLine, parts);
         }
 
         private async void TeamWorkForm_Load(object sender, EventArgs e)
@@ -202,8 +238,8 @@ namespace SewingProduction.Forms
             if (ANNgridView != null)
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
-                ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
-                ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
+                //ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
+               // ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
             }
 
             try
@@ -232,8 +268,8 @@ namespace SewingProduction.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
-                    ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
-                    ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
+                  //  ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
+                 //   ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
@@ -535,22 +571,22 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void ANNgridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
-        {
-            if (e.Column.FieldName == "Upd")
-            {
-                GridView view = sender as GridView;
-                if (view != null)
-                {
-                    ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
-                    if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
-                    {
-                        view.SetRowCellValue(e.RowHandle, e.Column, true);
-                        MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-            }
-        }
+        //private void ANNgridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
+        //{
+        //    if (e.Column.FieldName == "Upd")
+        //    {
+        //        GridView view = sender as GridView;
+        //        if (view != null)
+        //        {
+        //            ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
+        //            if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
+        //            {
+        //                view.SetRowCellValue(e.RowHandle, e.Column, true);
+        //                MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //            }
+        //        }
+        //    }
+        //}
 
         private void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
@@ -584,7 +620,6 @@ namespace SewingProduction.Forms
 
         private void layoutControlGroup6_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
-            //             case 6:
             simpleButton2_Click_Internal(sender, e); // Четвертая кнопка  создать из артикула
                                                      // break;
         }
@@ -609,29 +644,29 @@ namespace SewingProduction.Forms
 
         }
 
-        private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
-        {
+    //    private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
+    //    {
 
-            var row = e.Row as ArtNormN;
-            if (row == null) return;
+    //        var row = e.Row as ArtNormN;
+    //        if (row == null) return;
 
-            var parts = new List<string>();
+    //        var parts = new List<string>();
 
-            if (!string.IsNullOrWhiteSpace(row.Komment))
-                parts.Add(row.Komment);
+    //        if (!string.IsNullOrWhiteSpace(row.Komment))
+    //            parts.Add(row.Komment);
 
-            // выводим всегда
-            parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
+    //        // выводим всегда
+    //        parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
 
-            if (!string.IsNullOrWhiteSpace(row.Reco))
-                parts.Add($"Рекомендация: {row.Reco}");
-            if (!string.IsNullOrWhiteSpace(row.Komment))
-                parts.Add($"Комментарий: {row.Komment}");
+    //        if (!string.IsNullOrWhiteSpace(row.Reco))
+    //            parts.Add($"Рекомендация: {row.Reco}");
+    //        if (!string.IsNullOrWhiteSpace(row.Komment))
+    //            parts.Add($"Комментарий: {row.Komment}");
 
-            e.PreviewText = string.Join(Environment.NewLine, parts);
+    //        e.PreviewText = string.Join(Environment.NewLine, parts);
 
 
-        }
+    //    }
     }
 
 }

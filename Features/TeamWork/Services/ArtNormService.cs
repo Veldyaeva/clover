@@ -511,7 +511,7 @@ WHERE nr.annId = @annId";
         /// <returns></returns>
         public async Task<List<MyDataART>> GetRelatedSpArt()
         {
-            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annID FROM sp_articul WHERE annId IS NULL";
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, razm, annID FROM sp_articul WHERE annId IS NULL";
 
             using (var connection = _dbHelper.GetConnection())
             {

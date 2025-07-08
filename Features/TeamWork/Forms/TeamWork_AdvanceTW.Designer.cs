@@ -796,7 +796,7 @@ namespace SewingProduction.form
             nameTextBox.Location = new System.Drawing.Point(4, 192);
             nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new System.Drawing.Size(260, 23);
+            nameTextBox.Size = new System.Drawing.Size(235, 23);
             nameTextBox.TabIndex = 5;
             // 
             // label5
@@ -1204,6 +1204,7 @@ namespace SewingProduction.form
             AutoScroll = true;
             ClientSize = new System.Drawing.Size(1509, 894);
             Controls.Add(toolStripContainer1);
+            HelpButton = true;
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "TeamWork_AdvanceTW";
