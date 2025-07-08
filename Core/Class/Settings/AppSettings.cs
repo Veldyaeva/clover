@@ -14,6 +14,8 @@ namespace SewingProduction.Core.Class.Settings
         public string Theme { get; set; } = "Gray";
         public int FontSize { get; set; } = 10;
         public bool SaveOpenTabs { get; set; } = true;
+        public bool ShortTabNames { get; set; } = true;
+        public bool AllowDuplicateTabs { get; set; } = false;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
     }
 
@@ -161,6 +163,26 @@ namespace SewingProduction.Core.Class.Settings
                 user.SavedPassword = "";
             }
 
+            Save();
+        }
+        public static bool GetShortTabNames()
+        {
+            return Current.ShortTabNames;
+        }
+
+        public static void SetShortTabNames(bool value)
+        {
+            Current.ShortTabNames = value;
+            Save();
+        }
+        public static bool GetAllowDuplicateTabs()
+        {
+            return Current.AllowDuplicateTabs;
+        }
+
+        public static void SetAllowDuplicateTabs(bool value)
+        {
+            Current.AllowDuplicateTabs = value;
             Save();
         }
     }

@@ -26,16 +26,20 @@ namespace SewingProduction.Core.Class.Settings
         public void OpenForm(Form form, object sender = null)
         {
             form.MdiParent = _mainForm;
-            string menuItemName = sender switch
+
+            bool allowDuplicates = SettingsManager.GetAllowDuplicateTabs();
+
+            string key = sender switch
             {
                 ToolStripMenuItem menuItem => menuItem.Name,
                 string name => name,
-                _ => null
+                _ => form.Text // если не из меню — используем заголовок формы как ключ
             };
 
-            if (!string.IsNullOrEmpty(menuItemName))
+            // 🔐 Проверка по ключу
+            if (!allowDuplicates && !string.IsNullOrEmpty(key))
             {
-                if (_openedForms.TryGetValue(menuItemName, out Form existingForm))
+                if (_openedForms.TryGetValue(key, out Form existingForm))
                 {
                     if (existingForm != null && !existingForm.IsDisposed)
                     {
@@ -43,19 +47,25 @@ namespace SewingProduction.Core.Class.Settings
                         return;
                     }
                     else
-                        _openedForms.Remove(menuItemName);
+                    {
+                        _openedForms.Remove(key);
+                    }
                 }
-                _openedForms.Add(menuItemName, form);
             }
 
+            // Регистрируем форму по ключу (если включено отслеживание)
+            if (!string.IsNullOrEmpty(key) && !_openedForms.ContainsKey(key))
+            {
+                _openedForms[key] = form;
+            }
+
+            // Удаление формы из словаря при закрытии
             form.FormClosed += (s, e) =>
             {
                 var closedForm = s as Form;
                 var item = _openedForms.FirstOrDefault(x => x.Value == closedForm);
                 if (!string.IsNullOrEmpty(item.Key))
-                {
                     _openedForms.Remove(item.Key);
-                }
             };
 
             form.Show();
