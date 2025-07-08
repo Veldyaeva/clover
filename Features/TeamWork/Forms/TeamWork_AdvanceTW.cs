@@ -21,6 +21,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
@@ -73,6 +74,7 @@ namespace SewingProduction.form
 
         private bool _isSelectionFormOpen = false;
         private bool _hasUnsavedChanges = false;
+        private bool _isInitialLoading = false; // Флаг для отслеживания начальной загрузки
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
@@ -108,7 +110,7 @@ namespace SewingProduction.form
 
         public static class CloneUtils
         {
-            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName)
+            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
                 where T : ICloneable
             {
                 var list = new List<T>();
@@ -117,8 +119,8 @@ namespace SewingProduction.form
                     var clone = (T)item.Clone();
                     typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
                     typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
-                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, true);
-                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, true);
+                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, markAsNew);
+                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, markAsNew);
                     list.Add(clone);
                 }
                 return list;
@@ -143,6 +145,7 @@ namespace SewingProduction.form
         private BindingList<NormRask> _originalNormRaskList;
         private BindingList<NormKont> _originalNormKontList;
 
+        public TeamWork_AdvanceTW() { InitializeComponent(); }
         /// <summary>
         /// 
         /// </summary>
@@ -196,6 +199,8 @@ namespace SewingProduction.form
         // Общий обработчик изменений данных ANN
         private void HandleAnnDataChange(object sender, EventArgs e)
         {
+            if (_isInitialLoading) return; // Игнорируем изменения во время начальной загрузки
+            
             _hasUnsavedChanges = true;
             var control = sender as Control;
             if (control == null || _originalAnnData == null || _currentAnnData == null)
@@ -294,12 +299,16 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged -= OnNormRaszListChanged; // защитная отписка
                 _normRaszList.ListChanged += OnNormRaszListChanged;
 
+                _normRaszList.ListChanged -= OnDataChanged;
+                _normRaskList.ListChanged -= OnDataChanged;
+                _normKontList.ListChanged -= OnDataChanged;
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
-                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                _normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+            //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
+            //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
@@ -360,11 +369,14 @@ namespace SewingProduction.form
 
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
-            // Запускаем отложенный пересчёт Sek
-            _sekDebouncer.Debounce(500, async () =>
+            // Запускаем отложенный пересчёт Sek только если не идёт начальная загрузка
+            if (!_isInitialLoading)
             {
-                RecalculateSek();
-            });
+                _sekDebouncer.Debounce(500, async () =>
+                {
+                    RecalculateSek();
+                });
+            }
 
             OnDataChanged(sender, e);
         }
@@ -372,6 +384,8 @@ namespace SewingProduction.form
         {
             try
             {
+                _isInitialLoading = true; // Устанавливаем флаг начальной загрузки
+                
                 Task gridTask = Task.Run(() =>
                 {
                     _gridHelper.LoadGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml");
@@ -391,6 +405,13 @@ namespace SewingProduction.form
 
                 //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
                 //await LoadAnnDataAsync();
+                
+                // Обновляем текстовое поле буфера из глобального состояния или локального
+                UpdateBufferDisplay();
+                
+                // Подписываемся на изменения глобального буфера
+                TeamWorkBuffer.BufferChanged += OnBufferChanged;
+                
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -418,7 +439,7 @@ namespace SewingProduction.form
                     case (int)Mode.ArchAndCopy:
                         this.Text = "Архив+копия";
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
-                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId"));
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _currentAnnData.dateCreate = DateTime.Now;
@@ -430,7 +451,7 @@ namespace SewingProduction.form
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
-                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId"));
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
                         _normKontList.Clear(); _currentAnnData.dateCreate = DateTime.Now;
                         break;
@@ -541,8 +562,10 @@ namespace SewingProduction.form
                     foreach (var item in raszToCopy)
                     {
                         item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true; // Так как это новые записи для нового РТ
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
                         item.nrId = 0; // Сброс ID для новой записи
                         _normRaszList.Add(item);
                     }
@@ -553,8 +576,10 @@ namespace SewingProduction.form
                     foreach (var item in raskToCopy)
                     {
                         item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true;
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
                         item.id = 0;
                         _normRaskList.Add(item);
                     }
@@ -565,22 +590,32 @@ namespace SewingProduction.form
                     foreach (var item in kontToCopy)
                     {
                         item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true;
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
                         item.nkId = 0;
                         _normKontList.Add(item);
                     }
                     _normKontBindingSource.ResetBindings(false);
 
 
-                    _hasUnsavedChanges = true;
+                    //  _hasUnsavedChanges = true;
                     //UpdateFormTitle();
                     //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
                 }
+                    _hasUnsavedChanges = false;
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
+            }
+            finally
+            {
+                _isInitialLoading = false; // Сбрасываем флаг начальной загрузки
+                
+                // Отписываемся от событий при выходе из формы
+                this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
             }
         }
         private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
@@ -588,9 +623,14 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
             var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
             var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
-            _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, newAnnId, "nrId"));
-            _normRaskList.BulkLoad(CloneUtils.CloneList(rask, newAnnId, "id"));
-            _normKontList.BulkLoad(CloneUtils.CloneList(kont, newAnnId, "nkId"));
+            
+            var clonedRasz = CloneUtils.CloneList(rasz, newAnnId, "nrId", false); // markAsNew = false для начальной загрузки
+            var clonedRask = CloneUtils.CloneList(rask, newAnnId, "id", false);
+            var clonedKont = CloneUtils.CloneList(kont, newAnnId, "nkId", false);
+            
+            _normRaszList.BulkLoad(clonedRasz);
+            _normRaskList.BulkLoad(clonedRask);
+            _normKontList.BulkLoad(clonedKont);
         }
 
         private void UpdateFilteredPodrVyaz(int kodProizv)
@@ -632,6 +672,24 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(annId);
             var rask = await _artNormService.GetRelatedNormRask(annId);
             var kont = await _artNormService.GetRelatedNormKont(annId);
+            
+            // Убеждаемся, что все элементы помечены как неизмененные
+            foreach (var item in rasz)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+            foreach (var item in rask)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+            foreach (var item in kont)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+            
             _normRaszList.BulkLoad(rasz);
             _normRaskList.BulkLoad(rask);
             _normKontList.BulkLoad(kont);
@@ -673,7 +731,6 @@ namespace SewingProduction.form
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
-                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -865,6 +922,14 @@ namespace SewingProduction.form
             }
 
             e.Allow = false;
+            int maxN = 0;
+            if (_normRaszList != null && _normRaszList.Count > 0)
+            {
+                maxN = _normRaszList
+                    .Select(x => x.N)
+                    .DefaultIfEmpty(0)
+                    .Max();
+            }
 
             using (var selectionForm = new NormOperNew(_selectedAnnId))
             {
@@ -874,6 +939,7 @@ namespace SewingProduction.form
                 {
                     var selectedData = selectionForm.SelectedRowData;
                     selectedData.IsNew = true;
+                    selectedData.N = maxN+1;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
                     gridControlRasz.RefreshDataSource();
@@ -893,6 +959,24 @@ namespace SewingProduction.form
                 }
             }
         }
+
+        private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            if (e.Row is NormRasz row)
+            {
+                // Проверяем уникальность сочетания N/N1
+                bool duplicate = _normRaszList.Any(x =>
+                    x != row && // исключаем саму себя при редактировании
+                    x.N == row.N && x.N1 == row.N1);
+
+                if (duplicate)
+                {
+                    e.Valid = false;
+                    e.ErrorText = $"Операция с номером {row.N} и подоперацией {row.N1} уже существует!";
+                }
+            }
+        }
+
         private void FinalizeRow(int rowHandle, GridView gridView)
         {
             // разрешаем показать EditForm
@@ -944,7 +1028,7 @@ namespace SewingProduction.form
         }
         private void gridViewRasz_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            if (e.Row is NormRasz normRasz)
+            if (e.Row is NormRasz normRasz && !_isInitialLoading)
             {
                 // Если строка не новая, помечаем ее как измененную
                 if (!normRasz.IsNew)
@@ -1088,7 +1172,7 @@ namespace SewingProduction.form
 
         private void GridView2_RowUpdated(object sender, RowObjectEventArgs e)
         {
-            if (e.Row is NormRask normRask)
+            if (e.Row is NormRask normRask && !_isInitialLoading)
             {
                 normRask.AnnId = _newAnnId;
                 // Если строка не новая, помечаем ее как измененную
@@ -1133,10 +1217,10 @@ namespace SewingProduction.form
         #region Kont
         private void gridViewKont_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            if (e.Row is NormKont normKont)
+            if (e.Row is NormKont normKont && !_isInitialLoading)
             {
                 normKont.AnnId = _newAnnId;
-                // Если строка не новая, помечаем ее как измененную
+                // Если строка не новая, помечаем ее как izmененную
                 if (!normKont.IsNew)
                 {
                     normKont.IsModified = true;
@@ -1166,7 +1250,7 @@ namespace SewingProduction.form
                     _isSelectionFormOpen = true;
 
                     string choice1 = "Пронумеровать деталь";
-                    string choice2 = "Номер пачки";
+                    string choice2 = "Комплектация пачки";
                     // Проверяем, какие строки уже есть
                     bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
                     bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
@@ -1309,12 +1393,50 @@ namespace SewingProduction.form
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
+                    //var parameters = new Dictionary<string, object>
+                    //{
+                    //    { "@KoddRt", _currentAnnData.Kod }
+                    //};
+                     
+                    RecalculateSek();
+
+                    var ann = _currentAnnData; // уже рассчитаны значения
+                    var xDoc = new XDocument(
+                        new XElement("VFPData",
+                            new XElement("annupdate",
+                                new XElement("sek_shv", ann.SekShv),
+                                new XElement("sek_vyaz5", ann.SekVyaz5),
+                                new XElement("sek_vyaz6", ann.SekVyaz6),
+                                new XElement("sek_vyaz7", ann.SekVyaz7),
+                                new XElement("sek_vyaz10", ann.SekVyaz10),
+                                new XElement("sek_vyaz12", ann.SekVyaz12),
+                                new XElement("sek_vyaz14", ann.SekVyaz14),
+                                new XElement("sek_vyaz18", ann.SekVyaz18),
+                                new XElement("sek_vyaz57", ann.SekVyaz57),
+                                new XElement("sek_vyaz62", ann.SekVyaz62),
+                                new XElement("sek_vyaz70", ann.SekVyaz70),
+                                new XElement("sek_vyaz71", ann.SekVyaz71),
+                                new XElement("sek_vyaz72", ann.SekVyaz72),
+                                new XElement("sek_vyazo", ann.SekVyazo),
+                                new XElement("sek_vyaz", ann.SekVyaz),
+                                new XElement("sek", ann.Sek),
+                                new XElement("sek_kr", ann.SekKr),
+                                new XElement("slogn", ann.Slogn),
+                                new XElement("annid", ann.AnnID)
+                            )
+                        )
+                    );
+
+                    // Получить XML-строку для передачи в процедуру:
+                    string xmlString = xDoc.ToString();
                     var parameters = new Dictionary<string, object>
                     {
-                        { "@KoddRt", _currentAnnData.Kod }
+                        { "@xXml", xmlString }
                     };
-                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters);
-//                    RecalculateSek();
+
+                    await _dbHelper.ExecuteQueryAsync("artNormN_update", parameters, CommandType.StoredProcedure);
+
+                    //await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters); - при простановке даты обн
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
@@ -1460,7 +1582,12 @@ namespace SewingProduction.form
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            if (_bufferWorkDivision > 0)
+            int Nome = 0;
+            
+            // Используем глобальный буфер если доступен, иначе локальный
+            int bufferIdToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferId : _bufferWorkDivision;
+            
+            if (bufferIdToUse > 0)
             {
                 try
                 {
@@ -1487,33 +1614,45 @@ namespace SewingProduction.form
                         _normKontBindingSource?.ResetBindings(false);
                     }
 
-                    // Загружаем данные из буфера
-                    //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
-                    //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                    //            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
-                    var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
-                    _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+                    if (_normRaszList != null && _normRaszList.Count > 0)
+                    {
+                        Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
+                    }
+                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse); 
+                    if (raszList == null) raszList = new List<NormRasz>();
+
+                    int nextN = Nome;
+                    foreach (var item in raszList)
+                    {
+                        item.IsNew = true; 
+                        item.N = item.N + Nome;
+                        _normRaszList.Add(item);
+                    }
+                    //var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    //_normRaszList.Add(rasz);//.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
 
                     //_currentAnnData.dateCreate = DateTime.Now;
 
-                    MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    
+                    // Показываем статус успешной загрузки
+                    await ShowStatusMessage("Данные из буфера успешно загружены");
                 }
                 catch (SqlException sqlEx)
                 {
                     await _logger.LogErrorAsync(sqlEx, "Ошибка при вставке данных из буфера");
-                    MessageBox.Show($"Ошибка при вставке данных из буфера: {sqlEx.Message}", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {sqlEx.Message}", 5000, Color.Red);
                 }
                 catch (Exception ex)
                 {
                     await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
-                    MessageBox.Show($"Ошибка при вставке данных из буфера: {ex.Message}", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {ex.Message}", 5000, Color.Red);
                 }
             }
-            else { MessageBox.Show("В буфере пусто", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            else 
+            { 
+                await ShowStatusMessage("В буфере пусто", 3000, Color.Orange); 
+            }
         }
 
         private async Task InvokeAsync(Action action)
@@ -1546,18 +1685,77 @@ namespace SewingProduction.form
 
             return isValid;
         }
-        private async Task ShowStatusMessage(string message, int delayMs = 3000)
+        private async Task ShowStatusMessage(string message, int delayMs = 3000, Color? color = null)
         {
             statusLabel.Text = message;
-            await Task.Delay(delayMs);
-            statusLabel.Text = "";
+            
+            if (color.HasValue)
+            {
+                var originalColor = statusLabel.ForeColor;
+                statusLabel.ForeColor = color.Value;
+                
+                await Task.Delay(delayMs);
+                statusLabel.Text = "";
+                statusLabel.ForeColor = originalColor;
+            }
+            else
+            {
+                await Task.Delay(delayMs);
+                statusLabel.Text = "";
+            }
         }
 
         private void OnDataChanged(object sender, ListChangedEventArgs e)
         {
-            if (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0)
+            // Помечаем изменения только если не идёт начальная загрузка
+            if (!_isInitialLoading && (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0))
             {
                 _hasUnsavedChanges = true;
+            }
+        }
+
+        /// <summary>
+        /// Обновляет отображение буфера на основе глобального или локального состояния
+        /// </summary>
+        private void UpdateBufferDisplay()
+        {
+            try
+            {
+                if (TeamWorkBuffer.HasData)
+                {
+                    textBoxBuffer.Text = TeamWorkBuffer.BufferText;
+                }
+                else if (_bufferWorkDivision > 0)
+                {
+                    // Оставляем существующую логику для обратной совместимости
+                    // Текст будет установлен в основном методе загрузки
+                }
+                else
+                {
+                    textBoxBuffer.Text = "Буфер пуст";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при обновлении отображения буфера");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик события изменения глобального буфера
+        /// </summary>
+        private void OnBufferChanged(object sender, BufferChangedEventArgs e)
+        {
+            try
+            {
+                this.Invoke((MethodInvoker)(() =>
+                {
+                    UpdateBufferDisplay();
+                }));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при обработке изменения буфера");
             }
         }
 
@@ -1654,20 +1852,21 @@ namespace SewingProduction.form
 
         private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            if (_mode == (int)Mode.Edit &&
-                _currentAnnData?.dateUpdate != null &&
-                _currentAnnData.dateUpdate != DateTime.MinValue)
-            {
-                if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
-                {
-                    var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
-                    if (original != null && newSec > original.Sek)
-                    {
-                        e.Valid = false;
-                        e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
-                    }
-                }
-            }
+            //if (_mode == (int)Mode.Edit &&
+            //    _currentAnnData?.dateUpdate != null &&
+            //    _currentAnnData.dateUpdate != DateTime.MinValue)
+            //{
+            //    if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+            //    {
+            //        var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
+            //        if (original != null && newSec > original.Sek)
+            //        {
+            //            e.Valid = false;
+            //            e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
+            //        }
+            //    }
+            //}
         }
     }
 }
+

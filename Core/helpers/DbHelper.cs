@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DevExpress.XtraCharts.Designer.Native;
 using DevExpress.XtraCharts.Native;
 //using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
@@ -62,13 +63,14 @@ namespace SewingProduction.Helpers
         /// <param name="query">запрос</param>
         /// <param name="parameters">параметры</param>
         /// <returns>DataTable</returns>
-        public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object> parameters = null)
+        public async Task<DataTable> ExecuteQueryAsync(string query, Dictionary<string, object> parameters = null, CommandType type = CommandType.Text)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 using (var command = new SqlCommand(query, connection))
                 {
                     DataTable table = new DataTable();
+                    command.CommandType = type; 
                     if (parameters != null)
                     {
                         foreach (var param in parameters)

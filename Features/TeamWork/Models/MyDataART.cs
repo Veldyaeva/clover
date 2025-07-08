@@ -12,6 +12,8 @@ namespace SewingProduction.Models
         public string grup { get; set; }
         [Column("mod")]
         public string mod { get; set; }
+        [Column("razm")]
+        public string razm { get; set; }
         [NotMapped]
         public string BindedArt { get; set; }
 
