@@ -80,7 +80,7 @@ namespace SewingProduction.Forms
             InitializeComponent();
             ANNgridView.OptionsView.ShowPreview = true;
             ANNgridView.PreviewLineCount = 1;
-          //  ANNgridView.CalcPreviewText += CalcPreviewText;
+            //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper("ace");
             _dbService = new DbService(_dbHelper);
@@ -128,7 +128,7 @@ namespace SewingProduction.Forms
                 unboundArtsView.CellValueChanged += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
                 unboundArtsView.CellValueChanging += (s, e) => GridView_CellValueChanged<MyDataART>(gridControl_unboundArts, e);
             }
-        //    ANNgridView.CalcPreviewText += CalcPreviewText;
+            //    ANNgridView.CalcPreviewText += CalcPreviewText;
 
             if (gridControl_wdToBind != null && gridControl_wdToBind.MainView is GridView wdToBindView)
             {
@@ -141,7 +141,7 @@ namespace SewingProduction.Forms
             commandsEditDateNull.Buttons.Clear();
             commandsEditDateNull.Buttons.Add(new EditorButton(ButtonPredefines.Glyph, "Проставить дату", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleLeft, DemoHelper.GetEditImage()));
             ////кнопка "Проставить дату обн"
-       //     commandsEditDateNull.ButtonClick += CommandsEdit_ButtonClick;
+            //     commandsEditDateNull.ButtonClick += CommandsEdit_ButtonClick;
             commandsEditDateNull.DoubleClick -= CommandsEditDateNull_DoubleClick;
             commandsEditDateNull.DoubleClick += CommandsEditDateNull_DoubleClick;
             GridColumn Updated = ANNgridView.Columns["dateUpdate"];
@@ -150,13 +150,13 @@ namespace SewingProduction.Forms
             // Репозиторий для отображения только текста
             var commandsEditDateText = new RepositoryItemTextEdit();
             commandsEditDateText.ReadOnly = true;
-            
+
             GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
-            
+
             // Устанавливаем формат отображения даты без времени
             colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
-            
+
             ANNgridView.CustomRowCellEdit += (s, e) =>
             {
                 if (e.Column == colDateUpdate)
@@ -238,7 +238,7 @@ namespace SewingProduction.Forms
             {
                 ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
                 //ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
-               // ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
+                // ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
             }
 
             try
@@ -267,8 +267,8 @@ namespace SewingProduction.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
-                  //  ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
-                 //   ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
+                    //  ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
+                    //   ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
@@ -581,34 +581,29 @@ namespace SewingProduction.Forms
             }
         }
 
-        private void gridControl_wdToBind_Click(object sender, EventArgs e)
-        {
+        //    private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
+        //    {
 
-        }
+        //        var row = e.Row as ArtNormN;
+        //        if (row == null) return;
 
-    //    private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
-    //    {
+        //        var parts = new List<string>();
 
-    //        var row = e.Row as ArtNormN;
-    //        if (row == null) return;
+        //        if (!string.IsNullOrWhiteSpace(row.Komment))
+        //            parts.Add(row.Komment);
 
-    //        var parts = new List<string>();
+        //        // выводим всегда
+        //        parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
 
-    //        if (!string.IsNullOrWhiteSpace(row.Komment))
-    //            parts.Add(row.Komment);
+        //        if (!string.IsNullOrWhiteSpace(row.Reco))
+        //            parts.Add($"Рекомендация: {row.Reco}");
+        //        if (!string.IsNullOrWhiteSpace(row.Komment))
+        //            parts.Add($"Комментарий: {row.Komment}");
 
-    //        // выводим всегда
-    //        parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
-
-    //        if (!string.IsNullOrWhiteSpace(row.Reco))
-    //            parts.Add($"Рекомендация: {row.Reco}");
-    //        if (!string.IsNullOrWhiteSpace(row.Komment))
-    //            parts.Add($"Комментарий: {row.Komment}");
-
-    //        e.PreviewText = string.Join(Environment.NewLine, parts);
+        //        e.PreviewText = string.Join(Environment.NewLine, parts);
 
 
-    //    }
+        //    }
     }
 
 }

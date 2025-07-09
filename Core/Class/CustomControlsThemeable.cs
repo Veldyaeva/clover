@@ -470,6 +470,10 @@ namespace SewingProduction
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Color? AlternateRowColor { get; set; }
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Color? FocusedRowColor { get; set; }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool FocusedRowBold { get; set; } = true;
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         private UserClass _user;
         private List<int> _tableIds;
@@ -486,6 +490,7 @@ namespace SewingProduction
             ForeColor = ThemeManager.ActiveTheme.TextBoxText;
             Font = ThemeManager.SharedSettings.DefaultFont;
             AlternateRowColor = ThemeManager.ActiveTheme.BandHighlightColor;
+            FocusedRowColor = ThemeManager.ActiveTheme.ButtonBackground;
 
 
             foreach (var view in ViewCollection)
@@ -493,6 +498,7 @@ namespace SewingProduction
                 if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
                 {
                     ApplyRowColors(gridView);
+                    ApplyFocusedRowStyle(gridView);
                     gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
                     gridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
                 }
@@ -503,6 +509,7 @@ namespace SewingProduction
             if (e.View is DevExpress.XtraGrid.Views.Grid.GridView gridView)
             {
                 ApplyRowColors(gridView);
+                ApplyFocusedRowStyle(gridView);
             }
         }
         private void ApplyRowColors(DevExpress.XtraGrid.Views.Grid.GridView gridView)
@@ -511,6 +518,21 @@ namespace SewingProduction
             {
                 gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
                 gridView.OptionsView.EnableAppearanceEvenRow = true;
+            }
+        }
+
+        private void ApplyFocusedRowStyle(DevExpress.XtraGrid.Views.Grid.GridView gridView)
+        {
+            if (FocusedRowColor.HasValue)
+            {
+                gridView.Appearance.FocusedRow.BackColor = FocusedRowColor.Value;
+                gridView.Appearance.FocusedRow.Options.UseBackColor = true;
+            }
+
+            if (FocusedRowBold)
+            {
+                gridView.Appearance.FocusedRow.Font = new Font(gridView.Appearance.FocusedRow.Font ?? Font, FontStyle.Bold);
+                gridView.Appearance.FocusedRow.Options.UseFont = true;
             }
         }
         private void OnThemeChanged() => ApplyTheme();
