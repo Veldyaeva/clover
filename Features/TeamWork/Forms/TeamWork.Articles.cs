@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Threading;
 using System;
 using SewingProduction.Models;
 using System.ComponentModel;
@@ -109,7 +110,10 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+                string query = "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
+                    "FROM sp_articul sa " +
+                    "   left join kompl k on sa.kod = k.kod_k " +
+                    "WHERE sa.annID IS NULL and k.kod_k is null";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
                 //_myDataArtList.Clear(); // Очищаем BindingList
@@ -298,47 +302,43 @@ namespace SewingProduction.Forms
             var view = sender as GridView;// gridView_wdToBind; 
             if (view == null) return;
 
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+            // Отменяем предыдущие операции загрузки для Articles tab
+            var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            oldCts?.Cancel();
+            oldCts?.Dispose();
+            var token = _loadCts.Token;
 
-            // Обновляем NormRasz для customGridControl3
-            await RefreshNormRaszForArticlesTab(annId);
-
-            // Загрузка данных НЗП
-            if (_nzpListArt != null)
+            try
             {
-                _nzpListArt.Clear();
-                if (annId > 0)
-                {
-                    List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-                    if (nzpData != null)
-                    {
-                        foreach (var item in nzpData)
-                        {
-                            _nzpListArt.Add(item);
-                        }
-                    }
-                }
-                _nzpByKoddRtSourceArt?.ResetBindings(false);
-                gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
-                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
-            }
+                int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
 
-            string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
-
-            if (!string.IsNullOrEmpty(kodString))
-            {
-                if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
+                //1.Сначала загружаем изображение(быстрая операция)
+                if (annId >0)
                 {
-                    LoadGridImage(pictureBox2, kod: kodValue);
+                        LoadGridImage(pictureBox2, annId: annId);
                 }
                 else
                 {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
+                    //await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
                 }
+
+                // 2. Затем загружаем основные данные
+                token.ThrowIfCancellationRequested();
+                
+                // Обновляем NormRasz для customGridControl3
+                await RefreshNormRaszForArticlesTab(annId, token);
+
+                // 3. Загрузка данных НЗП только для выбранной строки
+                token.ThrowIfCancellationRequested();
+                await LoadNZPForArticlesTab(annId, token);
             }
-            else
+            catch (OperationCanceledException)
             {
-                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
+                // Тихо игнорируем отмену операции
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в gridViewWdToBind (RowHandle: {e.FocusedRowHandle})");
             }
         }
 
@@ -346,14 +346,19 @@ namespace SewingProduction.Forms
         /// Загружает и обновляет NormRasz данные для вкладки "Артикулы" (customGridControl3).
         /// </summary>
         /// <param name="annId">AnnID для загрузки NormRasz.</param>
-        private async Task RefreshNormRaszForArticlesTab(int annId)
+        /// <param name="cancellationToken">Токен отмены операции.</param>
+        private async Task RefreshNormRaszForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+            
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
             {
                 raszList = await _artNormService.GetRelatedNormRasz(annId);
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
+            _normRaszListArticles.RaiseListChangedEvents = false;
             _normRaszListArticles.Clear();
             if (raszList != null)
             {
@@ -362,7 +367,34 @@ namespace SewingProduction.Forms
                     _normRaszListArticles.Add(item);
                 }
             }
+            _normRaszListArticles.RaiseListChangedEvents = true;
             _normRaszBindingSourceArticles.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Загружает данные НЗП для вкладки "Артикулы".
+        /// </summary>
+        /// <param name="annId">AnnID для загрузки НЗП.</param>
+        /// <param name="cancellationToken">Токен отмены операции.</param>
+        private async Task LoadNZPForArticlesTab(int annId, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            var nzpData = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, cancellationToken) : new List<NZPByKoddRt>();
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            _nzpListArt.RaiseListChangedEvents = false;
+            _nzpListArt.Clear();
+            foreach (var item in nzpData)
+            {
+                _nzpListArt.Add(item);
+            }
+            _nzpListArt.RaiseListChangedEvents = true;
+            
+            _nzpByKoddRtSourceArt?.ResetBindings(false);
+            gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
+            await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
         }
 
         private async Task PreArchLoad()
@@ -579,7 +611,7 @@ namespace SewingProduction.Forms
                 // Загружаем изображение, если есть код
                 if (kodInt > 0)
                 {
-                    await Task.Run(() => LoadGridImage(pictureBox2, kod: kodInt));
+                    await Task.Run(() => LoadGridImage(pictureBox3, kod: kodInt));
                 }
             }
             catch (Exception ex)

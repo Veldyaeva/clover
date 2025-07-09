@@ -245,6 +245,10 @@ namespace SewingProduction.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+                
+                // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
+                await Task.Delay(200, token);
+                
                 var tRelated = LoadRelatedData(annId, token);
                 var tNzp = LoadNZP(annId, token);
                 await Task.WhenAll(tRelated, tNzp);
@@ -459,7 +463,7 @@ namespace SewingProduction.Forms
                         // Если редактирование было для второй вкладки (MyDataANN view), обновим NormRasz для customGridControl3
                         if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
                         {
-                            await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID);
+                            await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
