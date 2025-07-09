@@ -8,6 +8,7 @@
     <StartupObject>SewingProduction.Core.Program</StartupObject>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>Resources\favicon_io (1)\favicon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,9 +34,180 @@
   <ItemGroup>
     <None Remove="Features\TeamWork.zip" />
     <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
+    <None Remove="Help\Features\TeamWork\Forms\img\1.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\10.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\11.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\12.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\13.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\14.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\2.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\3.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\4.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\5.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\6.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\7.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\8.png" />
+    <None Remove="Help\Features\TeamWork\Forms\img\9.png" />
+    <None Remove="Help\Features\TeamWork\Forms\TeamWork.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\ActionHistory.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\AdminForm.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\AllRole.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\AllUser.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\Dictionary.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\ActionHistory.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AdminForm.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole-SetForm.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole-SetUser.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllRole.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser2.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser-SetRole.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\AllUser.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary-add.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary-add2.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\Dictionary.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\RoleColumn.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\RoleColumnY.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\Settings.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\UserHierarchy.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\Img\UserProfile.png" />
+    <None Remove="Help\Features\UserDistribution\Forms\RoleColumn.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\Settings.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\UserHierarchy.html" />
+    <None Remove="Help\Features\UserDistribution\Forms\UserProfile.html" />
+    <None Remove="Help\Help.html" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Help\Features\TeamWork\Forms\img\1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\7.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\8.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\img\9.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\TeamWork\Forms\TeamWork.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\AllRole.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Help\Features\UserDistribution\Forms\ActionHistory.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\AdminForm.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\AllUser.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Dictionary.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\ActionHistory.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AdminForm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllRole-SetForm.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllRole-SetUser.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllRole.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllUser-AddUser2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllUser-SetRole.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\AllUser.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\Dictionary-add.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\Dictionary-add2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\Dictionary.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\RoleColumn.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\RoleColumnY.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\Settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\UserHierarchy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Img\UserProfile.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\RoleColumn.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\Settings.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\UserHierarchy.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Features\UserDistribution\Forms\UserProfile.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Help\Help.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\favicon_io (1)\favicon.ico" />
   </ItemGroup>
 

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing.Printing;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -145,38 +147,34 @@ namespace SewingProduction
         // Принимает строку shtr и возвращает контрольную цифру
         public string CalculateCheckSum(string shtr)
         {
-            // Сумма цифр на четных позициях
+            if (string.IsNullOrWhiteSpace(shtr))
+                throw new ArgumentException("Штрихкод пуст");
+
+            // Удалим пробелы, если есть
+            shtr = shtr.Trim().Replace(" ", "");
+
+            Debug.WriteLine($"DEBUG: shtr = '{shtr}', length = {shtr.Length}");
+            if (shtr.Length != 12 || !shtr.All(char.IsDigit))
+                throw new FormatException("Штрихкод должен содержать 12 цифр");
+
             int sumEvenPositions = 0;
-            // Сумма цифр на нечетных позициях
             int sumOddPositions = 0;
 
-            // Цикл для расчета суммы цифр на нечетных позициях
-            for (int i = 1; i <= 11; i += 2)
+            for (int i = 0; i < 12; i++)
             {
-                sumOddPositions += int.Parse(shtr.Substring(i - 1, 1));
-            }
-            // Цикл для расчета суммы цифр на четных позициях
-            for (int i = 2; i <= 12; i += 2)
-            {
-                sumEvenPositions += int.Parse(shtr.Substring(i - 1, 1));
+                int digit = int.Parse(shtr.Substring(i, 1));
+                if ((i + 1) % 2 == 0)
+                    sumEvenPositions += digit;
+                else
+                    sumOddPositions += digit;
             }
 
-            // Общая сумма по формуле (сумма четных * 3 + сумма нечетных)
             int totalSum = sumEvenPositions * 3 + sumOddPositions;
-            // Эмуляция ROUND(ff,-1) из FoxPro. Округление до ближайшего десятка
-            int roundedSum = (int)Math.Round((double)totalSum / 10.0) * 10;
+            int checkSumDigit = (10 - (totalSum % 10)) % 10;
 
-            // Расчет контрольной цифры
-            int checkSumDigit;
-            if (roundedSum > totalSum)
-                checkSumDigit = (roundedSum - totalSum);
-            else if (roundedSum == totalSum)
-                checkSumDigit = 0;
-            else
-                checkSumDigit = (roundedSum + 10 - totalSum);
-            // Возвращаем контрольную цифру в виде строки
-            return checkSumDigit.ToString();
+            return shtr + checkSumDigit.ToString();
         }
+
 
     }
 }

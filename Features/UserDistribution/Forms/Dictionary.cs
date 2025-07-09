@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.form;
-using SewingProduction.form.UserDistribution;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 

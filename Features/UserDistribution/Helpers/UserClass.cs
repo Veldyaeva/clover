@@ -20,7 +20,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public string Fio { get; set; }
         public int BrigID { get; set; }
         public string Brig { get; set; }
-        public string Password { get; set; } = "0";
+        public string Password { get; set; } = "";
         public List<string> Roles { get; set; } = new List<string>();
         public List<UserClass> Children { get; set; } = new List<UserClass>();
         public DataTable myObjectForm;
@@ -43,7 +43,6 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public async Task LoadObjectForm(string NameForm)
         {
             myObjectForm = await _userClassDataService.GetObjectForm(UserId, NameForm);
-            int U111 = 0;
         }
         public bool HasPermission(string objectName, string permissionType)
         {

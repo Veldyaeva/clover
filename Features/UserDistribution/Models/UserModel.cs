@@ -12,7 +12,7 @@ using SewingProduction.Services;
 using SewingProduction.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace SewingProduction.form.UserDistribution.Models
+namespace SewingProduction.Features.UserDistribution.Models
 {
     public class UserModel : INotifyPropertyChanged//, INewable
     {

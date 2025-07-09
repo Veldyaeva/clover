@@ -12,7 +12,7 @@ using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 using System.Data;
 
-namespace SewingProduction.Models
+namespace SewingProduction.Features.UserDistribution.Models
 {
     public class UserRoleModel : INotifyPropertyChanged//, INewable
     {

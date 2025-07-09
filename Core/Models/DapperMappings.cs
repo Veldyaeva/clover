@@ -1,6 +1,6 @@
 ﻿using DevExpress.Mvvm.Native;
 using SewingProduction.Services;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

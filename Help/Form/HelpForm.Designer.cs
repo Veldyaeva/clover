@@ -45,7 +45,7 @@
             // buttonBack
             // 
             buttonBack.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            buttonBack.Location = new System.Drawing.Point(1026, 12);
+            buttonBack.Location = new System.Drawing.Point(1023, 12);
             buttonBack.Name = "buttonBack";
             buttonBack.Size = new System.Drawing.Size(100, 23);
             buttonBack.TabIndex = 1;
