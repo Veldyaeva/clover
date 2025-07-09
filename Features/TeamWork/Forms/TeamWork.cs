@@ -1,6 +1,7 @@
 ﻿using DevExpress.ChartRangeControlClient.Core;
 using DevExpress.CodeParser.VB;
 using DevExpress.Data.Filtering;
+using DevExpress.Xpo;
 using DevExpress.XtraBars.Docking;
 using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors;
@@ -10,11 +11,13 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSpreadsheet.Import.Xls;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -202,10 +205,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        private async void CommandsEdit_ButtonClick(object sender, ButtonPressedEventArgs e)
-        {
-        }
-
         private void setDateUpdate()
         {
         }
@@ -310,10 +309,7 @@ namespace SewingProduction.Forms
         {
             await UnboundWD(sender, e);
         }
-        private async void customCheckBox6_CheckedChanged(object sender, EventArgs e)
-        {
-            customCheckBox6_CheckedChanged_Internal(sender, e);
-        }
+
         private async void ButtonPreliminaryWd_Click(object sender, EventArgs e)
         {
             ButtonPreliminaryWd_Click_Internal(sender, e);
@@ -340,25 +336,6 @@ namespace SewingProduction.Forms
         {
             Filter_CheckedChanged_Internal(sender, e);
         }
-        private async void search_CheckedChanged(object sender, EventArgs e)
-        { //search_CheckedChanged_Internal(sender, e);
-        }
-        private void gridControl2_Leave(object sender, EventArgs e)
-        {
-            gridControl2_Leave_Internal(sender, e);
-        }
-        private async void gridControl2_GotFocus(object sender, EventArgs e)
-        { gridControl2_GotFocus_Internal(sender, e); }
-
-        private void searchControl1_QueryIsSearchColumn(object sender, DevExpress.XtraEditors.QueryIsSearchColumnEventArgs args)
-        {
-            //searchControl1_QueryIsSearchColumn_Internal(sender, args);
-        }
-
-        private void SearchButton_Click(object sender, DevExpress.XtraEditors.Controls.ButtonPressedEventArgs e)
-        {
-            // SearchButton_Click_Internal(sender, e);
-        }
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
@@ -370,35 +347,6 @@ namespace SewingProduction.Forms
         private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             loadAllCheckBox_CheckedChanged_Internal(sender, e);
-        }
-
-        private void searchControl1_KeyDown(object sender, KeyEventArgs e)
-        {
-            //if (e.KeyCode == Keys.Enter)
-            //{
-            //    SearchControl searchControl = sender as SearchControl;
-            //    if (searchControl != null)
-            //    {
-            //        // Simulate a click on the search button.
-            //        // We need to find the actual search button in the SearchControl's buttons collection.
-            //        EditorButton searchButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind == ButtonPredefines.Search);// || b.IsDefault);
-            //        if (searchButton != null)
-            //        {
-            //            SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(searchButton));
-            //        }
-            //        else
-            //        {
-            //            // Fallback if a specific search button isn't found, try with a general non-clear button.
-            //            EditorButton firstNonClearButton = searchControl.Properties.Buttons.OfType<EditorButton>().FirstOrDefault(b => b.Kind != ButtonPredefines.Clear);
-            //            if (firstNonClearButton != null)
-            //            {
-            //                SearchButton_Click_Internal(searchControl, new ButtonPressedEventArgs(firstNonClearButton));
-            //            }
-            //        }
-            //    }
-            //    e.Handled = true;
-            //    e.SuppressKeyPress = true;
-            //}
         }
 
         private async void simpleButton2_Click(object sender, EventArgs e)
@@ -425,18 +373,30 @@ namespace SewingProduction.Forms
 
         private async void customSimpleButton1_Click(object sender, EventArgs e)
         {
-            await DuplicateWorkDivision_Click_Internal(sender, e);
+            await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource, false);
         }
 
-        private async Task DuplicateWorkDivision_Click_Internal(object sender, EventArgs e)
+        private async Task DuplicateWorkDivision_Click_Internal(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
         {
-            if (ANNgridView == null || ANNgridView.FocusedRowHandle < 0)
+            if (gridView == null || gridView.FocusedRowHandle < 0)
             {
                 MessageBox.Show("Выберите Разделение Труда для дублирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            var selectedAnnToDuplicate = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+            var selectedAnnToDuplicate = gridView.GetRow(gridView.FocusedRowHandle) as ArtNormN;
+            int rowHandle = gridView.FocusedRowHandle;
+
+            if (!forMyDataAnnView)
+            { }
+            else
+            { // Вторая вкладка: объект - MyDataANN (нужно получить ArtNormN по AnnID)
+                var selectedMyDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
+                if (selectedMyDataAnn == null) return;
+                int annId = selectedMyDataAnn.AnnID;
+                selectedAnnToDuplicate = await _artNormService.GetArtNormDataById(annId);
+                if (selectedAnnToDuplicate == null) return;
+            }
             if (selectedAnnToDuplicate == null)
             {
                 MessageBox.Show("Не удалось получить данные выбранного РТ.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -484,7 +444,7 @@ namespace SewingProduction.Forms
 
                     _bindingList.Add(CopyedWorkDivisionShell);
                     _bindingSource.ResetBindings(false);
-                    int rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
+                    rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
                     if (rowHandle >= 0)
                     {
                         ANNgridView.BeginUpdate();
@@ -513,7 +473,7 @@ namespace SewingProduction.Forms
 
             }
         }
-        private void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
 
@@ -523,10 +483,11 @@ namespace SewingProduction.Forms
                     ButtonPreliminaryWd_Click_Internal(sender, e); // Первая кнопка
                     break;
                 case 4:
-                    EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    //EditWd_Internal2(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true);
+                    await DuplicateWorkDivision_Click_Internal(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, forMyDataAnnView: true); // Вторая кнопка
                     break;
                 case 6:
-                    ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
+                    await ArchAndCopy(gridView_wdToBind, _myDataAnnList, _myDataAnnBindingSource, true); // Третья кнопка
                     break;
 
             }
@@ -571,23 +532,6 @@ namespace SewingProduction.Forms
             }
         }
 
-        //private void ANNgridView_CellValueChanging(object sender, CellValueChangedEventArgs e)
-        //{
-        //    if (e.Column.FieldName == "Upd")
-        //    {
-        //        GridView view = sender as GridView;
-        //        if (view != null)
-        //        {
-        //            ArtNormN row = view.GetRow(e.RowHandle) as ArtNormN;
-        //            if (row != null && row.dateUpdate.HasValue && e.Value is bool val && !val)
-        //            {
-        //                view.SetRowCellValue(e.RowHandle, e.Column, true);
-        //                MessageBox.Show("Нельзя снять отметку 'обн.', если дата обновления уже установлена.", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //            }
-        //        }
-        //    }
-        //}
-
         private void layoutControlGroup8_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
@@ -601,7 +545,7 @@ namespace SewingProduction.Forms
                     EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 4:
-                    DuplicateWorkDivision_Click_Internal(sender, e);
+                    DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 6:
                     ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
