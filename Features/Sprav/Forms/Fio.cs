@@ -25,7 +25,7 @@ namespace SewingProduction.form
         // если редактировали поле:
         bool flagRed = false;
         string filter = "";
-        public Fio(UserClass user,string tableSQL, string rusNameTableSQL) : base(user)
+        public Fio(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper("ace");
@@ -422,6 +422,21 @@ namespace SewingProduction.form
             f.Show();
         }
         #endregion
+
+        private void customButtonPech1_Click(object sender, EventArgs e)
+        {
+            var pbForm = new PrintBarcode();
+            pbForm.Pech1(customComboBoxPechVed.Text, customTextBoxPechSHK1.Text);
+            //pbForm.Show();
+        }
+
+        private void customButtonPech2_Click(object sender, EventArgs e)
+        {
+            var pbForm = new PrintBarcode();
+            pbForm.Pech2(customTextBoxPechTab.Text.Trim(), customTextBoxPechSHK2.Text.Trim());
+            //pbForm.Show();
+
+        }
     }
-    
+
 }

@@ -886,6 +886,7 @@ namespace SewingProduction
                     DisableAllControls(ctrl);
             }
         }
+
     }
     public static class PermissionHelper
     {

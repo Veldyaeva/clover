@@ -6,12 +6,12 @@ using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllUser : CustomForm
     {
@@ -200,9 +200,13 @@ namespace SewingProduction.form.UserDistribution
             int newUserId = await _userModelDataService.SaveAsync(copyUser);
 
             var roleIds = await _userRoleDataService.GetRoleIdsByUser(copyUserId);
+
+            var existingRoles = await _userRoleDataService.GetRoleIdsByUser(newUserId);
+
             foreach (var roleId in roleIds)
             {
-                await _userRoleDataService.AssignRoleAsync(newUserId, roleId);
+                if (!existingRoles.Contains(roleId))
+                    await _userRoleDataService.AssignRoleAsync(newUserId, roleId);
             }
 
             await LoadUsers();

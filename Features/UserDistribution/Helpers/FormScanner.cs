@@ -5,7 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.form.UserDistribution;
+using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {
@@ -139,11 +139,26 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 
         private Type FindFormTypeByName(string formClassName)
         {
-            return AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(a => a.GetTypes())
-                .FirstOrDefault(t =>
-                    t.IsSubclassOf(typeof(Form)) &&
-                    t.Name == formClassName);
+            foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                Type[] types;
+                try
+                {
+                    types = assembly.GetTypes();
+                }
+                catch (ReflectionTypeLoadException ex)
+                {
+                    types = ex.Types.Where(t => t != null).ToArray(); // пропускаем битые типы
+                }
+
+                foreach (var type in types)
+                {
+                    if (type.IsSubclassOf(typeof(Form)) && type.Name == formClassName)
+                        return type;
+                }
+            }
+
+            return null;
         }
 
         private List<Control> GetAllControls(Control root)
@@ -254,9 +269,15 @@ namespace SewingProduction.Features.UserDistribution.Helpers
             if (!dbObjects.Columns.Contains("AddedObj"))
                 dbObjects.Columns.Add("AddedObj", typeof(bool));
 
-            var knownControls = GetAllControls(formInstance)
-                .Where(c => !string.IsNullOrWhiteSpace(c.Name))
-                .ToList();
+            var knownControls = new List<Control>();
+
+            // Добавляем саму форму как контрол
+            if (!string.IsNullOrWhiteSpace(formInstance.Name))
+                knownControls.Add(formInstance);
+
+            // Добавляем все вложенные контролы
+            knownControls.AddRange(GetAllControls(formInstance)
+                .Where(c => !string.IsNullOrWhiteSpace(c.Name)));
 
             var dbObjectNames = dbObjects.AsEnumerable()
                 .Select(r => r["ObjectName"].ToString())

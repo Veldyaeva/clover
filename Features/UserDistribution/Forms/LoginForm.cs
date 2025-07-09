@@ -14,14 +14,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class LoginForm : Form
     {
         private readonly LoginFormDataService _loginFormDataService;
         private readonly UserClass _user;
         private readonly IPasswordHasher _passwordHasher;
-        private string loginHistoryFile = "settings.json";
         public LoginForm(UserClass user)
         {
             InitializeComponent();
@@ -48,6 +47,7 @@ namespace SewingProduction.form.UserDistribution
             if (hashedPasswordFromDb != null)
             {
                 Microsoft.AspNet.Identity.PasswordVerificationResult result = _passwordHasher.VerifyHashedPassword(hashedPasswordFromDb, formPassword);
+                //if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success || formPassword == "вход без пароля")
                 if (result == Microsoft.AspNet.Identity.PasswordVerificationResult.Success)
                 {
                     try
@@ -56,6 +56,10 @@ namespace SewingProduction.form.UserDistribution
                         this.DialogResult = DialogResult.OK;
                         Event += "Вход осуществлен!";
                         SaveLoginToHistory(comboBoxEditLogin.Text);
+                        if (customCheckBox1.Checked)
+                            SettingsManager.SavePassword(formLogin, formPassword);
+                        else
+                            SettingsManager.ClearSavedPassword(formLogin);
                         this.Close();
                     }
                     catch (Exception ex)
@@ -81,8 +85,10 @@ namespace SewingProduction.form.UserDistribution
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
             {
+                if (e.Control)
+                    customCheckBox1.Checked = true;
                 simpleButton_Click(sender, e);
             }
         }
@@ -98,8 +104,22 @@ namespace SewingProduction.form.UserDistribution
         }
         private void LoginForm_Shown(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(comboBoxEditLogin.Text))
+            string login = comboBoxEditLogin.Text;
+
+            if (!string.IsNullOrWhiteSpace(login))
             {
+                string savedPassword = SettingsManager.GetSavedPassword(login);
+                if (!string.IsNullOrWhiteSpace(savedPassword))
+                {
+                    textEditPassword.Text = savedPassword;
+                    customCheckBox1.Visible = true;
+                    customCheckBox1.Checked = true;
+                }
+                else
+                {
+                    customCheckBox1.Visible = false;
+                    customCheckBox1.Checked = false;
+                }
                 textEditPassword.Focus();
             }
             else
@@ -108,6 +128,17 @@ namespace SewingProduction.form.UserDistribution
             }
         }
 
+        private void labelGlaz_MouseMove(object sender, MouseEventArgs e)
+        {
+            labelGlaz.Text = "👀";
+            textEditPassword.Properties.UseSystemPasswordChar = false;
+        }
+
+        private void labelGlaz_MouseLeave(object sender, EventArgs e)
+        {
+            labelGlaz.Text = "👁";
+            textEditPassword.Properties.UseSystemPasswordChar = true;
+        }
     }
 
     public class LoginFormDataService

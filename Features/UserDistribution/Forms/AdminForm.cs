@@ -1,29 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.AccessControl;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.Utils;
-using DevExpress.XtraBars.Ribbon;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
-using DevExpress.XtraReports.Native;
-using DevExpress.XtraRichEdit.Import.Html;
-using NLog.Filters;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
 using SewingProduction.Helpers;
-using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AdminForm : CustomForm
     {
@@ -338,6 +324,7 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
+
             var menuStrip = mainForm.MainMenuStrip;
             if (menuStrip == null)
             {
@@ -345,33 +332,11 @@ namespace SewingProduction.form.UserDistribution
                 return;
             }
 
-            await ScanToolStripItemsAsync(menuStrip.Items, formID);
+            var scanner = new MenuScanner(_adminFormDataService, _user);
+            await scanner.ScanAndInsertMenuAsync(menuStrip, formID);
+
             await Objects_Load();
-
-        }
-        private async Task ScanToolStripItemsAsync(ToolStripItemCollection items, int formId)
-        {
-            foreach (ToolStripItem item in items)
-            {
-                if (item is ToolStripMenuItem menuItem)
-                {
-                    string name = menuItem.Name;
-                    string text = menuItem.Text;
-
-                    // Пропускаем, если уже есть в базе
-                    bool exists = await _adminFormDataService.ObjectExists(formId, name);
-                    if (!exists)
-                    {
-                        await _adminFormDataService.InsertObjectForm(name, text, "ToolStripMenuItem", _user.UserId, formId);
-                    }
-
-                    // Рекурсивно обработать подменю
-                    if (menuItem.HasDropDownItems)
-                    {
-                        await ScanToolStripItemsAsync(menuItem.DropDownItems, formId);
-                    }
-                }
-            }
+            MessageBox.Show("Пункты меню успешно добавлены в базу данных.");
         }
         #endregion
 

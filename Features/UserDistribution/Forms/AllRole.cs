@@ -17,10 +17,11 @@ using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Customization;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllRole : CustomForm
     {
@@ -493,7 +494,7 @@ namespace SewingProduction.form.UserDistribution
 
         public async Task<DataTable> GetFormsForRoles(int roleId, int userId)
         {
-            string query = @"SELECT DISTINCT pf.ProjectFormsID, pf.NameFormRus AS NameForm,
+            string query = @"SELECT DISTINCT pf.ProjectFormsID, pf.NameFormRus, pf.NameForm,
                 CASE ISNULL((
                     SELECT TOP 1 ro.ModeID
                     FROM RoleObject ro

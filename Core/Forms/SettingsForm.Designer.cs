@@ -33,6 +33,10 @@
             customComboBoxTheme = new CustomComboBox();
             customComboBoxSizeText = new CustomComboBox();
             customLabelSizeText = new CustomLabel();
+            customCheckBoxSaveOpenTabs = new CustomCheckBox();
+            customButtonClearProfile = new CustomButton();
+            customCheckBoxSokrNameTabs = new CustomCheckBox();
+            customCheckBoxPovtOpenTabs = new CustomCheckBox();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -87,11 +91,76 @@
             customLabelSizeText.TabIndex = 5;
             customLabelSizeText.Text = "Размер текста";
             // 
+            // customCheckBoxSaveOpenTabs
+            // 
+            customCheckBoxSaveOpenTabs.AutoSize = true;
+            customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
+            customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(14, 120);
+            customCheckBoxSaveOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
+            customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
+            customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            customCheckBoxSaveOpenTabs.Size = new System.Drawing.Size(251, 20);
+            customCheckBoxSaveOpenTabs.TabIndex = 8;
+            customCheckBoxSaveOpenTabs.Text = "Сохранение открытых вкладок";
+            customCheckBoxSaveOpenTabs.UseVisualStyleBackColor = true;
+            customCheckBoxSaveOpenTabs.CheckedChanged += customCheckBoxSaveOpenTabs_CheckedChanged;
+            // 
+            // customButtonClearProfile
+            // 
+            customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
+            customButtonClearProfile.Location = new System.Drawing.Point(14, 235);
+            customButtonClearProfile.Name = "customButtonClearProfile";
+            customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
+            customButtonClearProfile.TabIndex = 9;
+            customButtonClearProfile.Text = "Очистить историю профилей";
+            customButtonClearProfile.UseVisualStyleBackColor = false;
+            customButtonClearProfile.Click += customButtonClearProfile_Click;
+            // 
+            // customCheckBoxSokrNameTabs
+            // 
+            customCheckBoxSokrNameTabs.AutoSize = true;
+            customCheckBoxSokrNameTabs.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
+            customCheckBoxSokrNameTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(14, 156);
+            customCheckBoxSokrNameTabs.MinimumSize = new System.Drawing.Size(251, 0);
+            customCheckBoxSokrNameTabs.Name = "customCheckBoxSokrNameTabs";
+            customCheckBoxSokrNameTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            customCheckBoxSokrNameTabs.Size = new System.Drawing.Size(251, 20);
+            customCheckBoxSokrNameTabs.TabIndex = 10;
+            customCheckBoxSokrNameTabs.Text = "Сокращенное название вкладок";
+            customCheckBoxSokrNameTabs.UseVisualStyleBackColor = true;
+            customCheckBoxSokrNameTabs.CheckedChanged += customCheckBoxSokrNameVklad_CheckedChanged;
+            // 
+            // customCheckBoxPovtOpenTabs
+            // 
+            customCheckBoxPovtOpenTabs.AutoSize = true;
+            customCheckBoxPovtOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
+            customCheckBoxPovtOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(14, 194);
+            customCheckBoxPovtOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
+            customCheckBoxPovtOpenTabs.Name = "customCheckBoxPovtOpenTabs";
+            customCheckBoxPovtOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            customCheckBoxPovtOpenTabs.Size = new System.Drawing.Size(251, 20);
+            customCheckBoxPovtOpenTabs.TabIndex = 11;
+            customCheckBoxPovtOpenTabs.Text = "Повторное открытие вкладок";
+            customCheckBoxPovtOpenTabs.UseVisualStyleBackColor = true;
+            customCheckBoxPovtOpenTabs.CheckedChanged += customCheckBoxPovtOpenTabs_CheckedChanged;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customCheckBoxPovtOpenTabs);
+            Controls.Add(customCheckBoxSokrNameTabs);
+            Controls.Add(customButtonClearProfile);
+            Controls.Add(customCheckBoxSaveOpenTabs);
             Controls.Add(customComboBoxSizeText);
             Controls.Add(customLabelSizeText);
             Controls.Add(customComboBoxTheme);
@@ -111,5 +180,9 @@
         private CustomComboBox customComboBoxTheme;
         private CustomComboBox customComboBoxSizeText;
         private CustomLabel customLabelSizeText;
+        private CustomCheckBox customCheckBoxSaveOpenTabs;
+        private CustomButton customButtonClearProfile;
+        private CustomCheckBox customCheckBoxSokrNameTabs;
+        private CustomCheckBox customCheckBoxPovtOpenTabs;
     }
 }

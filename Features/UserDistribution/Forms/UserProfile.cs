@@ -10,19 +10,13 @@ using DevExpress.Xpo.DB.Helpers;
 using System.Windows.Forms;
 using SewingProduction.Helpers;
 using DevExpress.Utils.Menu;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraVerticalGrid;
-//using Microsoft.AspNetCore.Identity;
 using DevExpress.CodeParser;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
 
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class UserProfile : CustomForm
     {
@@ -57,53 +51,39 @@ namespace SewingProduction.form.UserDistribution
 
         private void customButtonAllRpofile_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new AllUser(_user));
-            }
+            OpenForm(new AllUser(_user));
         }
 
         private void customButtonAllRole_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new AllRole(_user));
-            }
+            OpenForm(new AllRole(_user));
         }
         private void customButtonAdminForm_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new AdminForm(_user));
-            }
+            OpenForm(new AdminForm(_user));
         }
 
         private void customButtonUserHierarchy_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new UserHierarchy(_user));
-            }
+            OpenForm(new UserHierarchy(_user));
         }
         private void customButtonAdminSprav_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new RoleColumn(_user));
-            }
+            OpenForm(new RoleColumn(_user));
         }
         private void customButtonHistory_Click(object sender, EventArgs e)
         {
-            if (this.MdiParent is SpMainForm mainForm)
-            {
-                mainForm.OpenForm(new ActionHistory(_user));
-            }
+            OpenForm(new ActionHistory(_user));
         }
         private void customButtonSpravTable_Click(object sender, EventArgs e)
         {
+            OpenForm(new Dictionary(_user));
+        }
+        private void OpenForm(Form oForm)
+        {
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new Dictionary(_user));
+                mainForm.OpenForm(oForm);
             }
         }
         private async void customButtonEditPassword_Click(object sender, EventArgs e)

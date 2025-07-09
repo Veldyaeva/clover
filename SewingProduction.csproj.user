@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\x64%28Багаева, Чиркова%29.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ClickOnceProfile1.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -37,10 +37,10 @@
     <Compile Update="Features\Sprav\Forms\OborudBrig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\PrintBarcode.cs">
+    <Compile Update="Core\Forms\SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Core\Forms\SplashScreen.cs">
+    <Compile Update="Features\Sprav\Forms\PrintBarcode.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\SpravBrig.cs">
@@ -121,6 +121,9 @@
     <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Help\Form\TestForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Report\FioListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -137,6 +140,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\PrintShkReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\ReestrListReport.cs">

@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.form.UserDistribution
+﻿namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class AllRole
     {
@@ -38,6 +38,7 @@
             NameForm = new DevExpress.XtraGrid.Columns.GridColumn();
             HasAccess = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemComboBoxForms = new DevExpress.XtraEditors.Repository.RepositoryItemComboBox();
+            NameFormRus = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlRoles = new CustomGridControl();
             bindingSourceRoles = new System.Windows.Forms.BindingSource(components);
             gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -81,7 +82,7 @@
             gridViewForms.Appearance.Row.Options.UseBackColor = true;
             gridViewForms.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(192, 255, 255);
             gridViewForms.AppearancePrint.EvenRow.Options.UseBackColor = true;
-            gridViewForms.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, HasAccess });
+            gridViewForms.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ProjectFormsID, NameForm, HasAccess, NameFormRus });
             gridViewForms.DetailHeight = 4038;
             gridViewForms.GridControl = customGridControlRoles;
             gridViewForms.Name = "gridViewForms";
@@ -112,7 +113,7 @@
             NameForm.OptionsColumn.ReadOnly = true;
             NameForm.Visible = true;
             NameForm.VisibleIndex = 0;
-            NameForm.Width = 660;
+            NameForm.Width = 388;
             // 
             // HasAccess
             // 
@@ -122,8 +123,8 @@
             HasAccess.MinWidth = 23;
             HasAccess.Name = "HasAccess";
             HasAccess.Visible = true;
-            HasAccess.VisibleIndex = 1;
-            HasAccess.Width = 474;
+            HasAccess.VisibleIndex = 2;
+            HasAccess.Width = 317;
             // 
             // repositoryItemComboBoxForms
             // 
@@ -132,6 +133,16 @@
             repositoryItemComboBoxForms.Items.AddRange(new object[] { "Нет доступа", "Просмотр", "Редактор" });
             repositoryItemComboBoxForms.Name = "repositoryItemComboBoxForms";
             repositoryItemComboBoxForms.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            // 
+            // NameFormRus
+            // 
+            NameFormRus.Caption = "Название формы (рус)";
+            NameFormRus.FieldName = "NameFormRus";
+            NameFormRus.Name = "NameFormRus";
+            NameFormRus.OptionsColumn.ReadOnly = true;
+            NameFormRus.Visible = true;
+            NameFormRus.VisibleIndex = 1;
+            NameFormRus.Width = 383;
             // 
             // customGridControlRoles
             // 
@@ -480,5 +491,6 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemComboBox repositoryItemComboBoxObject;
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit1;
         private CustomButton customButtonCopyRole;
+        private DevExpress.XtraGrid.Columns.GridColumn NameFormRus;
     }
 }
