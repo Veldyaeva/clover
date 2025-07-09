@@ -387,9 +387,7 @@ namespace SewingProduction.Forms
             var selectedAnnToDuplicate = gridView.GetRow(gridView.FocusedRowHandle) as ArtNormN;
             int rowHandle = gridView.FocusedRowHandle;
 
-            if (!forMyDataAnnView)
-            { }
-            else
+            if (forMyDataAnnView)
             { // Вторая вкладка: объект - MyDataANN (нужно получить ArtNormN по AnnID)
                 var selectedMyDataAnn = gridView.GetRow(rowHandle) as MyDataANN;
                 if (selectedMyDataAnn == null) return;
