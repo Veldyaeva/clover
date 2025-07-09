@@ -459,11 +459,10 @@ namespace SewingProduction.Forms
                 {
                     selectedAnnRow.grup = selectedArtRow.grup;
                 }
-                if (selectedAnnRow.mod == null)
-                    if (string.IsNullOrEmpty(selectedAnnRow.mod))
-                    {
-                        selectedAnnRow.grup = selectedArtRow.mod;
-                    }
+                if (string.IsNullOrEmpty(selectedAnnRow.mod))
+                {
+                    selectedAnnRow.mod = selectedArtRow.mod;
+                }
                 // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
                 // Обновляем UI:

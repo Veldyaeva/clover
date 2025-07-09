@@ -103,9 +103,6 @@
     <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\UserDistribution\Forms\TestForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
