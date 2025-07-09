@@ -1220,7 +1220,7 @@ namespace SewingProduction.form
             if (e.Row is NormKont normKont && !_isInitialLoading)
             {
                 normKont.AnnId = _newAnnId;
-                // Если строка не новая, помечаем ее как izmененную
+                // Если строка не новая, помечаем ее как измененную
                 if (!normKont.IsNew)
                 {
                     normKont.IsModified = true;
@@ -1480,11 +1480,29 @@ namespace SewingProduction.form
             var stopwatch = Stopwatch.StartNew();
             var bulkStopwatch = new Stopwatch();
 
-            var newItems = list.Where(x => x.IsNew).ToList();
-            var existingItems = list.Where(x => !x.IsNew).ToList();
+            // Определяем, нужно ли вставлять все записи как новые
+            // Это происходит когда создается новый ANN ID (режимы Clone, ArchAndCopy, NewWorkDivision)
+            // или когда загружаем существующие данные для нового ANN ID
+            bool shouldInsertAllAsNew = newAnnId != _selectedAnnId || _mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision;
+
+            List<T> itemsToInsert;
+            List<T> itemsToUpdate;
+
+            if (shouldInsertAllAsNew)
+            {
+                // Все записи должны быть вставлены как новые
+                itemsToInsert = list.ToList();
+                itemsToUpdate = new List<T>();
+            }
+            else
+            {
+                // Обычная логика: новые записи - вставка, существующие - обновление
+                itemsToInsert = list.Where(x => x.IsNew).ToList();
+                itemsToUpdate = list.Where(x => !x.IsNew).ToList();
+            }
 
             string itemTypeName = typeof(T).Name;
-            await _logger.LogEventAsync($"[{itemTypeName}] Start saving. New: {newItems.Count}, Existing: {existingItems.Count}", "SaveListAsync");
+            await _logger.LogEventAsync($"[{itemTypeName}] Start saving. Insert: {itemsToInsert.Count}, Update: {itemsToUpdate.Count}, Mode: {_mode}, NewAnnId: {newAnnId}, SelectedAnnId: {_selectedAnnId}", "SaveListAsync");
 
             // 1. Удаление
             if (deletedIds?.Any() == true)
@@ -1497,10 +1515,10 @@ namespace SewingProduction.form
                 }
             }
 
-            // 2. Обработка новых
-            if (newItems.Any())
+            // 2. Обработка вставки
+            if (itemsToInsert.Any())
             {
-                foreach (var item in newItems)
+                foreach (var item in itemsToInsert)
                 {
                     var annIdProp = typeof(T).GetProperty("AnnId");
                     if (annIdProp != null)
@@ -1511,28 +1529,28 @@ namespace SewingProduction.form
 
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {newItems.Count}", "SaveListAsync");
+                    await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", "SaveListAsync");
                     bulkStopwatch.Restart();
-                    await connection.BulkInsertAsync(newItems);
+                    await connection.BulkInsertAsync(itemsToInsert);
                     bulkStopwatch.Stop();
                 }
 
-                foreach (var item in newItems)
+                foreach (var item in itemsToInsert)
                     item.IsNew = false;
             }
 
-            // 3. Обновление
-            if (existingItems.Any())
+            // 3. Обновление (только если не shouldInsertAllAsNew)
+            if (itemsToUpdate.Any())
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {existingItems.Count}", "SaveListAsync");
+                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", "SaveListAsync");
                     bulkStopwatch.Restart();
-                    await connection.BulkUpdateAsync(existingItems);
+                    await connection.BulkUpdateAsync(itemsToUpdate);
                     bulkStopwatch.Stop();
 
                     // Сброс флага IsModified после успешного обновления
-                    foreach (var item in existingItems)
+                    foreach (var item in itemsToUpdate)
                     {
                         if (item is IModifiable modifiableItem)
                         {
