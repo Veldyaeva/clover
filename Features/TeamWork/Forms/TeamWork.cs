@@ -27,6 +27,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
+using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
 namespace SewingProduction.Forms
 {
@@ -449,6 +450,7 @@ namespace SewingProduction.Forms
                         try
                         {
                             ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                             ANNgridView.RefreshRow(rowHandle);
                         }
                         finally
@@ -467,6 +469,30 @@ namespace SewingProduction.Forms
                     //        await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки (НЗП, раскрой, контроль)
                     //    }
                     //}
+                }
+                else
+                {
+                    // При отмене дублирования возвращаемся к исходной строке
+                    rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
+
+                    // Удаляем созданную запись из списка и базы
+                    _bindingList.Remove(CopyedWorkDivisionShell);
+                    _bindingSource.ResetBindings(false);
+                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                 }
 
             }
@@ -581,6 +607,11 @@ namespace SewingProduction.Forms
             }
         }
 
+        private void splitContainerControl2_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         //    private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
         //    {
 
@@ -604,31 +635,54 @@ namespace SewingProduction.Forms
 
 
         //    }
-    }
-
-}
-public static class DemoHelper
-{
-
-    public static Image GetDeleteImage()
-    {
-        return GetImage(Brushes.Red);
-    }
-
-    public static Image GetEditImage()
-    {
-        return GetImage(Brushes.Green);
-    }
-
-    public static Image GetImage(Brush b)
-    {
-        Image img = new Bitmap(16, 16);
-        using (Graphics g = Graphics.FromImage(img))
+        private void gridView_unboundArts_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            g.FillEllipse(b, new Rectangle(0, 0, img.Width - 1, img.Height - 1));
+            _gridHelper.popUpMenuCopy(sender, e);
         }
-        return img;
+
+        private void ANNgridView_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        private void gridView_binded_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        private void gridViewRaskrTW_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        private void gridView1_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+    }
+    public static class DemoHelper
+    {
+
+        public static Image GetDeleteImage()
+        {
+            return GetImage(Brushes.Red);
+        }
+
+        public static Image GetEditImage()
+        {
+            return GetImage(Brushes.Green);
+        }
+
+        public static Image GetImage(Brush b)
+        {
+            Image img = new Bitmap(16, 16);
+            using (Graphics g = Graphics.FromImage(img))
+            {
+                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+                g.FillEllipse(b, new Rectangle(0, 0, img.Width - 1, img.Height - 1));
+            }
+            return img;
+        }
     }
 }
    

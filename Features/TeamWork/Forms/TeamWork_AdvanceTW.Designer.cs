@@ -196,6 +196,7 @@ namespace SewingProduction.form
             gridViewKont.OptionsEditForm.PopupEditFormWidth = 933;
             gridViewKont.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewKont.OptionsView.ShowGroupPanel = false;
+            gridViewKont.PopupMenuShowing += gridViewKont_PopupMenuShowing;
             gridViewKont.ShowingEditor += gridViewKont_ShowingEditor;
             gridViewKont.ValidateRow += gridViewKont_ValidateRow;
             gridViewKont.RowUpdated += gridViewKont_RowUpdated;
@@ -310,6 +311,7 @@ namespace SewingProduction.form
             gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
             gridViewRaskr.OptionsView.ShowGroupPanel = false;
+            gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
             gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
             gridViewRaskr.ValidateRow += GridView2_ValidateRow;
             gridViewRaskr.RowUpdated += GridView2_RowUpdated;
@@ -465,6 +467,7 @@ namespace SewingProduction.form
             gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
             gridViewRasz.EditFormPrepared += gridViewRasz_EditFormPrepared;
             gridViewRasz.EditFormHidden += gridViewRasz_EditFormHidden;
+            gridViewRasz.PopupMenuShowing += gridViewRasz_PopupMenuShowing;
             gridViewRasz.InvalidRowException += gridViewRasz_InvalidRowException;
             gridViewRasz.ValidateRow += gridViewRasz_ValidateRow;
             gridViewRasz.RowUpdated += gridViewRasz_RowUpdated;

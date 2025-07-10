@@ -298,7 +298,6 @@ namespace SewingProduction.Forms
             return true;
         }
 
-
         private async Task LoadNZP(int annId, CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
@@ -357,6 +356,7 @@ namespace SewingProduction.Forms
                                     try
                                     {
                                         ANNgridView.FocusedRowHandle = rowHandle;
+                                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                                         ANNgridView.RefreshRow(rowHandle);
                                     }
                                     finally
@@ -452,6 +452,7 @@ namespace SewingProduction.Forms
                             try
                             {
                                 gridView.FocusedRowHandle = rowHandle;
+                                gridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                                 gridView.RefreshRow(rowHandle);
                             }
                             finally
@@ -559,6 +560,7 @@ namespace SewingProduction.Forms
                     if (rowHandle != GridControl.InvalidRowHandle)
                     {
                         ANNgridView.FocusedRowHandle = rowHandle;
+                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                     }
                 }
                 else
@@ -594,8 +596,32 @@ namespace SewingProduction.Forms
 
                             _myDataAnnBindingSource.ResetBindings(false);
                             int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
-                            if (finalRowHandle != GridControl.InvalidRowHandle) gridView_wdToBind.RefreshRow(finalRowHandle);
+                            if (finalRowHandle != GridControl.InvalidRowHandle) 
+                            {
+                                gridView_wdToBind.RefreshRow(finalRowHandle);
+                                // Фокусируемся на созданной записи в gridView_wdToBind
+                                gridView_wdToBind.FocusedRowHandle = finalRowHandle;
+                                gridView_wdToBind.MakeRowVisible(finalRowHandle); // Прокручиваем до строки
+                            }
                             gridView_wdToBind.RefreshData();
+                            
+                            // Также фокусируемся на записи в основном ANNgridView
+                            _bindingSource.ResetBindings(false);
+                            int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
+                            if (annRowHandle >= 0)
+                            {
+                                ANNgridView.BeginUpdate();
+                                try
+                                {
+                                    ANNgridView.FocusedRowHandle = annRowHandle;
+                                    ANNgridView.MakeRowVisible(annRowHandle); // Прокручиваем до строки
+                                    ANNgridView.RefreshRow(annRowHandle);
+                                }
+                                finally
+                                {
+                                    ANNgridView.EndUpdate();
+                                }
+                            }
 
                             await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
                             MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
