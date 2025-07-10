@@ -333,8 +333,17 @@ namespace SewingProduction.Forms
                 int newRowHandle = ANNgridView.LocateByValue("AnnID", newItem.AnnID);
                 if (newRowHandle >= 0)
                 {
-                    ANNgridView.FocusedRowHandle = newRowHandle;
-                    ANNgridView.RefreshRow(newRowHandle);
+                    ANNgridView.BeginUpdate();
+                    try
+                    {
+                        ANNgridView.FocusedRowHandle = newRowHandle;
+                        ANNgridView.MakeRowVisible(newRowHandle); // Прокручиваем до строки
+                        ANNgridView.RefreshRow(newRowHandle);
+                    }
+                    finally
+                    {
+                        ANNgridView.EndUpdate();
+                    }
                 }
             }
             else
@@ -568,6 +577,24 @@ namespace SewingProduction.Forms
             UpdateRowInBindingList(newRow);
             if (!hasNZP)
                 await _dbService.UpdateFieldAsync("sp_Articul", "annId", newRow.AnnID, "annId", selectedItem.AnnID);
+            
+            // Фокусируемся на новой строке после успешного редактирования
+            int rowHandle = ANNgridView.LocateByValue("AnnID", newRow.AnnID);
+            if (rowHandle >= 0)
+            {
+                ANNgridView.BeginUpdate();
+                try
+                {
+                    ANNgridView.FocusedRowHandle = rowHandle;
+                    ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
+                    ANNgridView.RefreshRow(rowHandle);
+                }
+                finally
+                {
+                    ANNgridView.EndUpdate();
+                }
+            }
+            
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
         }
         private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
@@ -591,6 +618,26 @@ namespace SewingProduction.Forms
 
             _bindingSource.ResetBindings(false);
             ANNgridView.RefreshData();
+            
+            // Фокусируемся на исходной строке после отмены
+            if (selectedItem != null)
+            {
+                int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
+                if (rowHandle >= 0)
+                {
+                    ANNgridView.BeginUpdate();
+                    try
+                    {
+                        ANNgridView.FocusedRowHandle = rowHandle;
+                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
+                        ANNgridView.RefreshRow(rowHandle);
+                    }
+                    finally
+                    {
+                        ANNgridView.EndUpdate();
+                    }
+                }
+            }
         }
         private async Task HandleArchAndCopyError(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus, Exception ex)
             {
@@ -609,6 +656,27 @@ namespace SewingProduction.Forms
                     selectedItem.StatusText = StatusHelper.GetStatusText(oldStatus.Value);
 
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "Status", oldStatus.Value, TableNames.AnnId, selectedItem.AnnID);
+                }
+
+                // Фокусируемся на исходной строке после ошибки
+                if (selectedItem != null)
+                {
+                    _bindingSource.ResetBindings(false);
+                    int rowHandle = ANNgridView.LocateByValue("AnnID", selectedItem.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
                 }
 
                 await _logger.LogErrorAsync(ex, "Ошибка при архивировании и копировании записи");
@@ -630,6 +698,7 @@ namespace SewingProduction.Forms
                     try
                     {
                         ANNgridView.FocusedRowHandle = rowHandle;
+                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                         ANNgridView.RefreshRow(rowHandle);
                     }
                     finally

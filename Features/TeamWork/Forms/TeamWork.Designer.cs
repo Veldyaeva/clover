@@ -219,6 +219,7 @@ namespace SewingProduction.Forms
             xtraTabPageWorkDivisions = new DevExpress.XtraTab.XtraTabPage();
             panelControl2 = new PanelControl();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            pictureBox3 = new PictureBox();
             customGridControl2 = new CustomGridControl();
             gridView3 = new GridView();
             customGridControl1 = new CustomGridControl();
@@ -307,6 +308,7 @@ namespace SewingProduction.Forms
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
+            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
             splitContainerControl2 = new SplitContainerControl();
             customButton2 = new CustomButton();
@@ -336,8 +338,6 @@ namespace SewingProduction.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
-            pictureBox3 = new PictureBox();
-            layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -408,6 +408,7 @@ namespace SewingProduction.Forms
             panelControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
@@ -458,6 +459,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             xtraTabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel1).BeginInit();
@@ -486,8 +488,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)desBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)constrBindingSource).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -633,6 +633,7 @@ namespace SewingProduction.Forms
             gridView4.OptionsSelection.MultiSelect = true;
             gridView4.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridView4.OptionsView.ShowGroupPanel = false;
+            gridView4.PopupMenuShowing += gridView1_PopupMenuShowing;
             // 
             // colkod_o2
             // 
@@ -723,6 +724,7 @@ namespace SewingProduction.Forms
             gridView5.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridView5.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DevExpress.Utils.DefaultBoolean.True;
             gridView5.OptionsView.ShowGroupPanel = false;
+            gridView5.PopupMenuShowing += gridView1_PopupMenuShowing;
             // 
             // gridColumn24
             // 
@@ -821,6 +823,7 @@ namespace SewingProduction.Forms
             gridViewRaskrTW.OptionsSelection.MultiSelect = true;
             gridViewRaskrTW.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridViewRaskrTW.OptionsView.ShowGroupPanel = false;
+            gridViewRaskrTW.PopupMenuShowing += gridViewRaskrTW_PopupMenuShowing;
             // 
             // gridColumn47
             // 
@@ -963,6 +966,7 @@ namespace SewingProduction.Forms
             gridView1.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridView1.OptionsView.ShowGroupPanel = false;
             gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coln, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coln1, DevExpress.Data.ColumnSortOrder.Ascending) });
+            gridView1.PopupMenuShowing += gridView1_PopupMenuShowing;
             // 
             // DisplayNumber
             // 
@@ -1182,6 +1186,7 @@ namespace SewingProduction.Forms
             ANNgridView.PreviewLineCount = 2;
             ANNgridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colarticul, DevExpress.Data.ColumnSortOrder.Ascending) });
             ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
+            ANNgridView.PopupMenuShowing += ANNgridView_PopupMenuShowing;
             ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
             // 
             // colgroup
@@ -2140,6 +2145,16 @@ namespace SewingProduction.Forms
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
             // 
+            // pictureBox3
+            // 
+            pictureBox3.Location = new System.Drawing.Point(24, 456);
+            pictureBox3.Margin = new Padding(4, 3, 4, 3);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new System.Drawing.Size(470, 278);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 2;
+            pictureBox3.TabStop = false;
+            // 
             // customGridControl2
             // 
             customGridControl2.Font = new System.Drawing.Font("Arial", 10F);
@@ -2218,6 +2233,7 @@ namespace SewingProduction.Forms
             gridView_binded.Name = "gridView_binded";
             gridView_binded.OptionsEditForm.PopupEditFormWidth = 933;
             gridView_binded.OptionsView.ShowGroupPanel = false;
+            gridView_binded.PopupMenuShowing += gridView_binded_PopupMenuShowing;
             // 
             // gridColumn36
             // 
@@ -2316,6 +2332,7 @@ namespace SewingProduction.Forms
             gridViewNZP.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewNZP.OptionsSelection.ShowCheckBoxSelectorInGroupRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewNZP.OptionsView.ShowGroupPanel = false;
+            gridViewNZP.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             gridViewNZP.FocusedRowChanged += gridView5_FocusedRowChanged;
             // 
             // kodd_rt
@@ -2463,6 +2480,7 @@ namespace SewingProduction.Forms
             gridView6.OptionsEditForm.PopupEditFormWidth = 933;
             gridView6.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView6.OptionsView.ShowGroupPanel = false;
+            gridView6.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             // 
             // colannId1
             // 
@@ -2547,7 +2565,8 @@ namespace SewingProduction.Forms
             gridView_wdToBind.OptionsMenu.EnableColumnMenu = false;
             gridView_wdToBind.OptionsView.ShowAutoFilterRow = true;
             gridView_wdToBind.OptionsView.ShowGroupPanel = false;
-            gridView_wdToBind.FocusedRowChanged += this.gridViewWdToBind_FocusedRowChanged;
+            gridView_wdToBind.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
+            gridView_wdToBind.FocusedRowChanged += gridViewWdToBind_FocusedRowChanged;
             // 
             // gridColumn12
             // 
@@ -2681,7 +2700,11 @@ namespace SewingProduction.Forms
             gridView_unboundArts.DetailHeight = 404;
             gridView_unboundArts.GridControl = gridControl_unboundArts;
             gridView_unboundArts.Name = "gridView_unboundArts";
+            gridView_unboundArts.OptionsBehavior.AllowIncrementalSearch = true;
             gridView_unboundArts.OptionsBehavior.AllowPixelScrolling = DevExpress.Utils.DefaultBoolean.False;
+            gridView_unboundArts.OptionsClipboard.AllowCopy = DevExpress.Utils.DefaultBoolean.True;
+            gridView_unboundArts.OptionsClipboard.AllowTxtFormat = DevExpress.Utils.DefaultBoolean.True;
+            gridView_unboundArts.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridView_unboundArts.OptionsDetail.EnableMasterViewMode = false;
             gridView_unboundArts.OptionsEditForm.PopupEditFormWidth = 933;
             gridView_unboundArts.OptionsFind.AlwaysVisible = true;
@@ -2691,6 +2714,7 @@ namespace SewingProduction.Forms
             gridView_unboundArts.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView_unboundArts.OptionsView.ShowGroupPanel = false;
             gridView_unboundArts.ScrollStyle = ScrollStyleFlags.LiveVertScroll;
+            gridView_unboundArts.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
             // 
             // код
@@ -3022,6 +3046,14 @@ namespace SewingProduction.Forms
             simpleSeparator3.Name = "simpleSeparator3";
             simpleSeparator3.Size = new System.Drawing.Size(474, 1);
             // 
+            // layoutControlItem19
+            // 
+            layoutControlItem19.Control = pictureBox3;
+            layoutControlItem19.Location = new System.Drawing.Point(0, 411);
+            layoutControlItem19.Name = "layoutControlItem19";
+            layoutControlItem19.Size = new System.Drawing.Size(474, 282);
+            layoutControlItem19.TextVisible = false;
+            // 
             // xtraTabPage3
             // 
             xtraTabPage3.Appearance.Header.BackColor = System.Drawing.Color.Transparent;
@@ -3051,6 +3083,7 @@ namespace SewingProduction.Forms
             // 
             splitContainerControl2.Panel1.Controls.Add(customButton2);
             splitContainerControl2.Panel1.Text = "Panel1";
+            splitContainerControl2.Panel1.Paint += splitContainerControl2_Panel1_Paint;
             // 
             // splitContainerControl2.Panel2
             // 
@@ -3220,24 +3253,6 @@ namespace SewingProduction.Forms
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // pictureBox3
-            // 
-            pictureBox3.Location = new System.Drawing.Point(24, 456);
-            pictureBox3.Margin = new Padding(4, 3, 4, 3);
-            pictureBox3.Name = "pictureBox3";
-            pictureBox3.Size = new System.Drawing.Size(470, 278);
-            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox3.TabIndex = 2;
-            pictureBox3.TabStop = false;
-            // 
-            // layoutControlItem19
-            // 
-            layoutControlItem19.Control = pictureBox3;
-            layoutControlItem19.Location = new System.Drawing.Point(0, 411);
-            layoutControlItem19.Name = "layoutControlItem19";
-            layoutControlItem19.Size = new System.Drawing.Size(474, 282);
-            layoutControlItem19.TextVisible = false;
-            // 
             // TeamWork
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -3324,6 +3339,7 @@ namespace SewingProduction.Forms
             panelControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl2).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
@@ -3374,6 +3390,7 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             xtraTabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel1).EndInit();
             splitContainerControl2.Panel1.ResumeLayout(false);
@@ -3402,8 +3419,6 @@ namespace SewingProduction.Forms
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)desBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)constrBindingSource).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem19).EndInit();
             ResumeLayout(false);
 
         }

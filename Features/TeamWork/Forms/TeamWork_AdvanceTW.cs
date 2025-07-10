@@ -200,7 +200,7 @@ namespace SewingProduction.form
         private void HandleAnnDataChange(object sender, EventArgs e)
         {
             if (_isInitialLoading) return; // Игнорируем изменения во время начальной загрузки
-            
+
             _hasUnsavedChanges = true;
             var control = sender as Control;
             if (control == null || _originalAnnData == null || _currentAnnData == null)
@@ -307,8 +307,8 @@ namespace SewingProduction.form
                 _normKontList.ListChanged += OnDataChanged;
                 _normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
-            //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
-            //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
+                //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
@@ -336,7 +336,12 @@ namespace SewingProduction.form
             }
         }
 
-        private static PopupMenuShowingEventHandler ShowPopUp<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId, List<int> deletedIds) where T : class
+        private static PopupMenuShowingEventHandler ShowPopUp<T>(
+            GridView view,
+            BindingList<T> bindingList,
+            Func<T, int> getId,
+            List<int> deletedIds
+        ) where T : class
         {
             return (s, e) =>
             {
@@ -347,25 +352,44 @@ namespace SewingProduction.form
                 var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
                 {
                     int rowHandle = e.HitInfo.RowHandle;
-                    if (view.IsValidRowHandle(rowHandle))
-                    {
-                        var rowObj = view.GetRow(rowHandle) as T;
-                        if (rowObj != null)
-                        {
-                            if (getId != null && deletedIds != null)
-                            {
-                                int id = getId(rowObj);
-                                if (id > 0) deletedIds.Add(id);
-                            }
+                    if (!view.IsValidRowHandle(rowHandle)) return;
 
-                            bindingList.Remove(rowObj); // удаляем из источника
-                        }
+                    var rowObj = view.GetRow(rowHandle) as T;
+                    if (rowObj == null) return;
+
+                    // Добавляем в список удалённых
+                    if (getId != null && deletedIds != null)
+                    {
+                        int id = getId(rowObj);
+                        if (id > 0)
+                            deletedIds.Add(id);
                     }
+
+                    // Удаляем строку
+                    bindingList.Remove(rowObj);
+
+                    // Переносим фокус на новую строку
+                    view.GridControl.BeginInvoke(new Action(() =>
+                    {
+                        if (view.DataRowCount == 0) return;
+
+                        // Если удалили не последнюю строку — фокус остаётся на том же индексе
+                        // Если удалили последнюю — фокус на новую последнюю строку
+                        int newRowHandle = Math.Min(rowHandle, view.RowCount - 1);
+                        newRowHandle = view.GetVisibleRowHandle(newRowHandle);
+
+                        if (view.IsValidRowHandle(newRowHandle))
+                        {
+                            view.FocusedRowHandle = newRowHandle;
+                            view.MakeRowVisible(newRowHandle);
+                        }
+                    }));
                 });
 
                 menu.Items.Add(deleteItem);
             };
         }
+
 
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
@@ -385,7 +409,7 @@ namespace SewingProduction.form
             try
             {
                 _isInitialLoading = true; // Устанавливаем флаг начальной загрузки
-                
+
                 Task gridTask = Task.Run(() =>
                 {
                     _gridHelper.LoadGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml");
@@ -405,13 +429,13 @@ namespace SewingProduction.form
 
                 //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
                 //await LoadAnnDataAsync();
-                
+
                 // Обновляем текстовое поле буфера из глобального состояния или локального
                 UpdateBufferDisplay();
-                
+
                 // Подписываемся на изменения глобального буфера
                 TeamWorkBuffer.BufferChanged += OnBufferChanged;
-                
+
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -604,7 +628,7 @@ namespace SewingProduction.form
                     //UpdateFormTitle();
                     //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
                 }
-                    _hasUnsavedChanges = false;
+                _hasUnsavedChanges = false;
             }
             catch (Exception ex)
             {
@@ -613,7 +637,7 @@ namespace SewingProduction.form
             finally
             {
                 _isInitialLoading = false; // Сбрасываем флаг начальной загрузки
-                
+
                 // Отписываемся от событий при выходе из формы
                 this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
             }
@@ -623,11 +647,11 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
             var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
             var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
-            
+
             var clonedRasz = CloneUtils.CloneList(rasz, newAnnId, "nrId", false); // markAsNew = false для начальной загрузки
             var clonedRask = CloneUtils.CloneList(rask, newAnnId, "id", false);
             var clonedKont = CloneUtils.CloneList(kont, newAnnId, "nkId", false);
-            
+
             _normRaszList.BulkLoad(clonedRasz);
             _normRaskList.BulkLoad(clonedRask);
             _normKontList.BulkLoad(clonedKont);
@@ -672,7 +696,7 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(annId);
             var rask = await _artNormService.GetRelatedNormRask(annId);
             var kont = await _artNormService.GetRelatedNormKont(annId);
-            
+
             // Убеждаемся, что все элементы помечены как неизмененные
             foreach (var item in rasz)
             {
@@ -689,7 +713,7 @@ namespace SewingProduction.form
                 item.IsNew = false;
                 item.IsModified = false;
             }
-            
+
             _normRaszList.BulkLoad(rasz);
             _normRaskList.BulkLoad(rask);
             _normKontList.BulkLoad(kont);
@@ -789,7 +813,7 @@ namespace SewingProduction.form
                 var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
 
                 int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
-          //      int Sum1(Func<NormRask, bool> condition)=>rask
+                //      int Sum1(Func<NormRask, bool> condition)=>rask
                 _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
                 _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
                 _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
@@ -939,7 +963,7 @@ namespace SewingProduction.form
                 {
                     var selectedData = selectionForm.SelectedRowData;
                     selectedData.IsNew = true;
-                    selectedData.N = maxN+1;
+                    selectedData.N = maxN + 1;
                     _normRaszList.Add(selectedData);
                     _normRaszBindingSource.ResetBindings(false);
                     gridControlRasz.RefreshDataSource();
@@ -1016,7 +1040,7 @@ namespace SewingProduction.form
                 if (index != -1)
                 {
                     // Восстанавливаем оригинальные данные.
-                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); 
+                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit);
                     _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrId}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
                     _normRaszBindingSource.ResetBindings(false);
                 }
@@ -1397,7 +1421,7 @@ namespace SewingProduction.form
                     //{
                     //    { "@KoddRt", _currentAnnData.Kod }
                     //};
-                     
+
                     RecalculateSek();
 
                     var ann = _currentAnnData; // уже рассчитаны значения
@@ -1601,10 +1625,10 @@ namespace SewingProduction.form
         private async void buffer_Click(object sender, EventArgs e)
         {
             int Nome = 0;
-            
+
             // Используем глобальный буфер если доступен, иначе локальный
             int bufferIdToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferId : _bufferWorkDivision;
-            
+
             if (bufferIdToUse > 0)
             {
                 try
@@ -1636,13 +1660,13 @@ namespace SewingProduction.form
                     {
                         Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
                     }
-                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse); 
+                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse);
                     if (raszList == null) raszList = new List<NormRasz>();
 
                     int nextN = Nome;
                     foreach (var item in raszList)
                     {
-                        item.IsNew = true; 
+                        item.IsNew = true;
                         item.N = item.N + Nome;
                         _normRaszList.Add(item);
                     }
@@ -1652,7 +1676,7 @@ namespace SewingProduction.form
                     //_currentAnnData.dateCreate = DateTime.Now;
 
 
-                    
+
                     // Показываем статус успешной загрузки
                     await ShowStatusMessage("Данные из буфера успешно загружены");
                 }
@@ -1667,9 +1691,9 @@ namespace SewingProduction.form
                     await ShowStatusMessage($"Ошибка при вставке данных из буфера: {ex.Message}", 5000, Color.Red);
                 }
             }
-            else 
-            { 
-                await ShowStatusMessage("В буфере пусто", 3000, Color.Orange); 
+            else
+            {
+                await ShowStatusMessage("В буфере пусто", 3000, Color.Orange);
             }
         }
 
@@ -1706,12 +1730,12 @@ namespace SewingProduction.form
         private async Task ShowStatusMessage(string message, int delayMs = 3000, Color? color = null)
         {
             statusLabel.Text = message;
-            
+
             if (color.HasValue)
             {
                 var originalColor = statusLabel.ForeColor;
                 statusLabel.ForeColor = color.Value;
-                
+
                 await Task.Delay(delayMs);
                 statusLabel.Text = "";
                 statusLabel.ForeColor = originalColor;
@@ -1884,6 +1908,19 @@ namespace SewingProduction.form
             //        }
             //    }
             //}
+        }
+
+        private void gridViewKont_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+        private void gridViewRaskr_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+        private void gridViewRasz_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
         }
     }
 }
