@@ -11,7 +11,10 @@ using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 using DevExpress.XtraSpreadsheet.Import.Xls;
+using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Features.TeamWork;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -306,11 +309,6 @@ namespace SewingProduction.Forms
 
         }
 
-        private async void ResetButton_Click(object sender, EventArgs e)
-        {
-            await UnboundWD(sender, e);
-        }
-
         private async void ButtonPreliminaryWd_Click(object sender, EventArgs e)
         {
             ButtonPreliminaryWd_Click_Internal(sender, e);
@@ -574,7 +572,10 @@ namespace SewingProduction.Forms
                 case 6:
                     ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
-
+                case 8:
+                    // Отчет технологической схемы разделения труда
+                    PrintWorkDivisionScheme_Click(null, null);
+                    break;
             }
         }
 
@@ -658,6 +659,23 @@ namespace SewingProduction.Forms
         private void gridView1_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        private void PrintButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// Печать технологической схемы разделения труда
+        /// </summary>
+        private async void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public static class DemoHelper
