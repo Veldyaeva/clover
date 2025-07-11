@@ -136,6 +136,9 @@
     <Compile Update="Report\ConfectionCardReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\GetItogVibKartReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\MlRtReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
