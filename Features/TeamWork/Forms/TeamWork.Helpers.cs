@@ -113,22 +113,22 @@ namespace SewingProduction.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var sekNullOrZero = new GroupOperator(
+                    var updateIsEmpty = new GroupOperator(
                         GroupOperatorType.Or,
-                        new BinaryOperator("SekShv", 0),
-                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("SekShv"))
+                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
                     );
 
                     var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
-
-                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, sekNullOrZero, excludeArchived);
+                    archiveCheckBox.Checked = false;
+                    archiveCheckBox.Enabled = false;
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
 
                     if (statusCriteria != null)
                         statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
                     else
                         statusCriteria = notDescribedFilter;
                 }
-
+                else archiveCheckBox.Enabled = true;
                 if (statusCriteria != null)
                 {
                     // Только фильтр статуса
