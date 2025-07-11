@@ -1555,9 +1555,9 @@ namespace SewingProduction.Forms
             SortBox.Location = new System.Drawing.Point(10, 118);
             SortBox.Margin = new Padding(4, 3, 4, 3);
             SortBox.Name = "SortBox";
-            SortBox.Size = new System.Drawing.Size(120, 20);
+            SortBox.Size = new System.Drawing.Size(143, 20);
             SortBox.TabIndex = 4;
-            SortBox.Text = "Не описанные";
+            SortBox.Text = "Не утверждённые";
             SortBox.UseVisualStyleBackColor = true;
             SortBox.CheckedChanged += Filter_CheckedChanged;
             // 
@@ -1626,7 +1626,7 @@ namespace SewingProduction.Forms
             customSimpleButton1.TabIndex = 10;
             customSimpleButton1.Text = "дубль";
             customSimpleButton1.Visible = false;
-            customSimpleButton1.Click += DuplicateWorkDivision_Click_Internal_Wrapper;
+            customSimpleButton1.Click += customSimpleButton1_Click;
             // 
             // textEditMod
             // 
@@ -3760,10 +3760,10 @@ namespace SewingProduction.Forms
         private CustomTextBox buffer;
         private CustomSimpleButton customSimpleButton1;
 
-        private async void DuplicateWorkDivision_Click_Internal_Wrapper(object sender, EventArgs e)
-        {
-            await DuplicateWorkDivision_Click_Internal(sender, e);
-        }
+        //private async void DuplicateWorkDivision_Click_Internal_Wrapper(object sender, EventArgs e)
+        //{
+        //    await DuplicateWorkDivision_Click_Internal(sender, e);
+        //}
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn19;
         private RepositoryItemButtonEdit repositoryItemButtonEdit3;
         private RichTextBox constructorTextBox;
