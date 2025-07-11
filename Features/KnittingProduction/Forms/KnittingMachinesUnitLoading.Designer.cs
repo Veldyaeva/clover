@@ -49,10 +49,10 @@
             // gridControlPlanSezonZadKnitMachine
             // 
             gridControlPlanSezonZadKnitMachine.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPlanSezonZadKnitMachine.Location = new System.Drawing.Point(12, 63);
+            gridControlPlanSezonZadKnitMachine.Location = new System.Drawing.Point(12, 35);
             gridControlPlanSezonZadKnitMachine.MainView = gridViewPlanSezonZadKnitMachine;
             gridControlPlanSezonZadKnitMachine.Name = "gridControlPlanSezonZadKnitMachine";
-            gridControlPlanSezonZadKnitMachine.Size = new System.Drawing.Size(820, 612);
+            gridControlPlanSezonZadKnitMachine.Size = new System.Drawing.Size(820, 640);
             gridControlPlanSezonZadKnitMachine.TabIndex = 0;
             gridControlPlanSezonZadKnitMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPlanSezonZadKnitMachine });
             // 
@@ -156,7 +156,7 @@
             labelKmlNumber.AutoSize = true;
             labelKmlNumber.Font = new System.Drawing.Font("Arial", 10F);
             labelKmlNumber.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            labelKmlNumber.Location = new System.Drawing.Point(375, 16);
+            labelKmlNumber.Location = new System.Drawing.Point(372, 9);
             labelKmlNumber.Name = "labelKmlNumber";
             labelKmlNumber.Size = new System.Drawing.Size(95, 16);
             labelKmlNumber.TabIndex = 1;

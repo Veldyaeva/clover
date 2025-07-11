@@ -942,6 +942,7 @@
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(1787, 966);
             Controls.Add(tablePanel1);
+            Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "KnittingProductionPlanning";
             Text = "Оперативное планирование вязального производства";

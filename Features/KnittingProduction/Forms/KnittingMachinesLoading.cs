@@ -19,6 +19,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraGrid.Views.Layout;
+using DevExpress.XtraGrid.Views.Layout.Events;
+using DevExpress.XtraEditors;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -334,12 +338,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных LoadKnitMachineListByClassIDDataAsync");
             }
         }
-        private async void сomboBoxKnitMachineAreaList_DisplayMemberChanged(object sender, EventArgs e)
+        private async void сomboBoxKnitMachineClassList_DisplayMemberChanged(object sender, EventArgs e)
         {
 
         }
 
-        private async void сomboBoxKnitMachineAreaList_SelectedIndexChanged(object sender, EventArgs e)
+        private async void сomboBoxKnitMachineClassList_SelectedIndexChanged(object sender, EventArgs e)
         {
             //var selectedRow = _knitMachineAreaListViewBindingSource.Current as KnitMachineAreaListView;
             int selectedClassID = Convert.ToInt32(сomboBoxKnitMachineClassList.SelectedValue);
@@ -349,7 +353,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 Task knitMachineListTask = LoadKnitMachineListByClassIDDataAsync(selectedClassID);
                 await Task.WhenAll(knitMachineLoadInfoTask, knitMachineListTask);
 
-                ConfigureCardView();
+                //ConfigureCardView();
+                ConfigureLayoutView();
                 //gridViewKnitMachineLoadInfoCards.CardWidth = 185;
                 //gridViewKnitMachineLoadInfoCards.CardCaptionFormat = " ";
 
@@ -432,16 +437,43 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 };
 
                 //// 4. Настройка внешнего вида
-                //if (_knitMachineListBindingSource != null)
+                if (_knitMachineListBindingSource != null)
+                {
+                    gridViewKnitMachineLoadInfoCards.MaximumCardColumns = _knitMachineListBindingSource.Count;
+                    gridViewKnitMachineLoadInfoCards.MaximumCardRows = _knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count;
+                }
+                else
+                {
+                    gridViewKnitMachineLoadInfoCards.MaximumCardColumns = -1;
+                    gridViewKnitMachineLoadInfoCards.MaximumCardRows = -1;
+                }
+
+                //------------------------------
+                //gridViewKnitMachineLoadInfoCards.CustomDrawCell += (s, e) =>
                 //{
-                //    gridViewKnitMachineLoadInfoCards.MaximumCardColumns = _knitMachineListBindingSource.Count;
-                //    gridViewKnitMachineLoadInfoCards.MaximumCardRows = _knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count;
-                //}
-                //else
-                //{
-                //    gridViewKnitMachineLoadInfoCards.MaximumCardColumns = -1;
-                //    gridViewKnitMachineLoadInfoCards.MaximumCardRows = -1;
-                //}
+                //    if (e.Column == gridColumn1)
+                //    {
+                //        string rtf = e.CellValue as string;
+
+                //        if (!string.IsNullOrEmpty(rtf))
+                //        {
+                //            using (var rtfControl = new DevExpress.XtraRichEdit.RichEditControl())
+                //            {
+                //                rtfControl.RtfText = rtf;
+
+                //                rtfControl.DocumentLayoutUnit = DevExpress.XtraRichEdit.DocumentLayoutUnit.Pixel;
+
+                //                rtfControl.Appearance.Text.Options.UseTextOptions = true;
+
+                //                Bitmap bmp = new Bitmap(e.Bounds.Width, e.Bounds.Height);
+                //                rtfControl.ExportToImage(bmp, new DevExpress.XtraRichEdit.API.Native.Range(rtfControl.Document.Range.Start, rtfControl.Document.Range.End));
+                //                e.Cache.DrawImage(bmp, e.Bounds);
+                //                e.Handled = true;
+                //            }
+                //        }
+                //    }
+                //};
+
                 //gridViewKnitMachineLoadInfoCards.Appearance.Card.BackColor = Color.White;
                 //gridViewKnitMachineLoadInfoCards.Appearance.Card.BorderColor = Color.LightGray;
                 ////gridViewKnitMachineLoadInfoCards.OptionsView.ShowCardCaption = false;
@@ -452,7 +484,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             {
                 gridViewKnitMachineLoadInfoCards.EndUpdate();
             }
-
+            //richEditControl1.RtfText = @"{\rtf1\ansi\deff0 {\fonttbl{\f0 Arial;}} \f0\fs24 Привет мир!}";
+            //richEditControl1.RtfText = gridViewKnitMachineLoadInfoCards.GetRowCellValue(gridViewKnitMachineLoadInfoCards.FocusedRowHandle, "combinedPszNom").ToString();
             // 5. Обработчик клика по карточке
             //gridViewKnitMachineLoadInfoCards.DoubleClick += (s, e) =>
             //{
@@ -517,25 +550,83 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 }
             };
         }
-        //private void gridViewKnitMachineLoadInfo_RowStyle(object sender, RowStyleEventArgs e)
-        //{
-        //    GridView view = sender as GridView;
-        //    if (view == null) return;
 
-        //    // Получаем данные строки (пример для DataTable)
-        //    DataRow row = view.GetDataRow(e.RowHandle);
-        //    if (row == null) return;
+        private void ConfigureLayoutView()
+        {
+            gridViewKnitMachineLoadLayoutView.BeginUpdate();
+            try
+            {
+                gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(gridViewKnitMachineLoadLayoutView.CardMinSize.Width, gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1));
+            }
+            finally
+            {
+                gridViewKnitMachineLoadLayoutView.EndUpdate();
+            }
+        }
 
-        //    // Условие для раскраски (например, если значение в колонке "Status" равно "Completed")
-        //    if (row["Status"].ToString() == "Completed")
-        //    {
-        //        e.Appearance.BackColor = Color.LightGreen;
-        //    }
-        //    else if (row["Status"].ToString() == "Pending")
-        //    {
-        //        e.Appearance.BackColor = Color.LightYellow;
-        //    }
-        //}
+        private void customLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridControlKnitMachineLoadInfo_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            cardDBClick();
+        }
+
+        private void repositoryItemTextEditKmlNumber_DoubleClick(object sender, EventArgs e)
+        {
+            cardDBClick();
+        }
+
+        private void cardDBClick()
+        {
+            //var selectedItem = _knitMachineLoadInfoBindingSource.Current as KnitMachineLoadAllInfo;
+            //MessageBox.Show($"Выбрано: {selectedItem.kmlNumber}");
+
+            int xKmlID = 0;
+            string xKmlNumber = "";
+            var selectedRow = _knitMachineLoadInfoBindingSource.Current as KnitMachineLoadAllInfo;
+            if (selectedRow != null && selectedRow.kmlID != 0)
+            {
+                xKmlID = selectedRow.kmlID;
+                xKmlNumber = selectedRow.kmlNumber;
+            }
+            else
+            {
+                xKmlID = 0;
+                xKmlNumber = "";
+            }
+            KnittingMachinesUnitLoading KML = new KnittingMachinesUnitLoading(xKmlID, xKmlNumber);
+
+            DialogResult result = KML.ShowDialog();
+            // Обработка результата, возвращенного модальной формой
+            if (result == DialogResult.OK)
+            {
+                // Действия при успешном завершении работы модальной формы
+                //MessageBox.Show("OK");
+            }
+            else
+            {
+                // Действия при отмене или другом результате
+                //MessageBox.Show("Cancel");
+            }
+        }
+
+        private void repositoryItemTextEditYearMonth_DoubleClick(object sender, EventArgs e)
+        {
+            cardDBClick();
+        }
+
+        private void repositoryItemRichTextEditCombinedPszNomCard_DoubleClick(object sender, EventArgs e)
+        {
+            cardDBClick();
+        }
+
+        private void repositoryItemHypertextLabelCombinedPszNomCard_DoubleClick(object sender, EventArgs e)
+        {
+            cardDBClick();
+        }
 
     }
 }
