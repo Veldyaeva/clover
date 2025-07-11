@@ -113,7 +113,7 @@ namespace SewingProduction.Forms
                 string query = "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
                     "FROM sp_articul sa " +
                     "   left join kompl k on sa.kod = k.kod_k " +
-                    "WHERE sa.annID IS NULL and k.kod_k is null";
+                    "WHERE sa.annID IS NULL and k.kod_k is null";//"SELECT * FROM articulListUnboundRTBySizeLabel"
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
                 _myDataArtList.BulkLoad(loadedData);
@@ -442,28 +442,77 @@ namespace SewingProduction.Forms
                 // Проверяем, выбраны ли оба элемента
                 if (selectedArtRow is null || selectedAnnRow is null)
                 {
-                    MessageBox.Show("Выберите артикул и разделение труда для привязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Выберите артикул и разделение труда для увязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
-                DialogResult result = MessageBox.Show(
-                    $"Вы действительно хотите привязать артикул {selectedArtRow.Articul.TrimEnd()} к разделению труда {selectedAnnRow.Articul.TrimEnd()}?",
-                    "Подтверждение привязки",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
+                // Создаем диалог подтверждения с опциями заполнения
+                var confirmDialog = new Form()
+                {
+                    Text = "Подтверждение увязки",
+                    Size = new Size(450, 250),
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
 
-                if (result == DialogResult.No) return;
+                var label = new Label()
+                {
+                    Text = $"Вы действительно хотите увязать артикул {selectedArtRow.Articul.TrimEnd()} с разделением труда {selectedAnnRow.Articul.TrimEnd()}?",
+                    Location = new Point(20, 20),
+                    Size = new Size(400, 40),
+                    TextAlign = ContentAlignment.TopLeft
+                };
 
+                var fillGroupCheckBox = new CheckBox()
+                {
+                    Text = "Заполнить группу из справочника артикулов",
+                    Location = new Point(20, 70),
+                    Size = new Size(350, 20),
+                    Checked = string.IsNullOrEmpty(selectedAnnRow.grup) // Автоматически отмечаем, если группа пустая
+                };
+
+                var fillModelCheckBox = new CheckBox()
+                {
+                    Text = "Заполнить модель из справочника артикулов",
+                    Location = new Point(20, 100),
+                    Size = new Size(350, 20),
+                    Checked = string.IsNullOrEmpty(selectedAnnRow.mod) // Автоматически отмечаем, если модель пустая
+                };
+
+                var okButton = new Button()
+                {
+                    Text = "Да",
+                    Location = new Point(270, 150),
+                    Size = new Size(75, 25),
+                    DialogResult = DialogResult.OK
+                };
+
+                var cancelButton = new Button()
+                {
+                    Text = "Отмена",
+                    Location = new Point(355, 150),
+                    Size = new Size(75, 25),
+                    DialogResult = DialogResult.Cancel
+                };
+
+                confirmDialog.Controls.AddRange(new Control[] { label, fillGroupCheckBox, fillModelCheckBox, okButton, cancelButton });
+                confirmDialog.AcceptButton = okButton;
+                confirmDialog.CancelButton = cancelButton;
+
+                if (confirmDialog.ShowDialog() != DialogResult.OK) return;
 
                 // Обновляем annId в базе данных
                 _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnID);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
-                if (string.IsNullOrEmpty(selectedAnnRow.grup))
+                
+                // Заполняем группу и модель в зависимости от выбора пользователя
+                if (fillGroupCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.grup))
                 {
                     selectedAnnRow.grup = selectedArtRow.grup;
                 }
-                if (string.IsNullOrEmpty(selectedAnnRow.mod))
+                if (fillModelCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.mod))
                 {
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }

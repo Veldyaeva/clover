@@ -533,7 +533,8 @@ namespace SewingProduction.Forms
                     Arh = false,
                     AnnID = 0, // БД назначит ID
                     Mod = selectedArtData.mod,
-                    grup = selectedArtData.grup
+                    grup = selectedArtData.grup,
+                    Articul = selectedArtData.Articul
 
                 };
 

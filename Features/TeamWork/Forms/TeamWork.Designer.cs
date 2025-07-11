@@ -1506,7 +1506,7 @@ namespace SewingProduction.Forms
             PrintButton.TabIndex = 12;
             PrintButton.Text = "печать";
             PrintButton.Visible = false;
-            PrintButton.Click += customSimpleButton1_Click;
+            PrintButton.Click += PrintButton_Click;
             // 
             // ButtonPreliminaryWd
             // 
@@ -2467,7 +2467,6 @@ namespace SewingProduction.Forms
             customGridControl3.Size = new System.Drawing.Size(609, 291);
             customGridControl3.TabIndex = 9;
             customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
-            customGridControl3.Click += ResetButton_Click;
             // 
             // gridView6
             // 
@@ -2546,6 +2545,7 @@ namespace SewingProduction.Forms
             gridControl_wdToBind.Size = new System.Drawing.Size(622, 362);
             gridControl_wdToBind.TabIndex = 6;
             gridControl_wdToBind.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_wdToBind });
+            gridControl_wdToBind.Click += gridControl_wdToBind_Click;
             // 
             // gridView_wdToBind
             // 
