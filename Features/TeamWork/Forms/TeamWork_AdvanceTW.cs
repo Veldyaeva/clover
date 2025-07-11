@@ -459,6 +459,8 @@ namespace SewingProduction.form
                         _normRaszList.Clear();
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
                         break;
                     case (int)Mode.ArchAndCopy:
                         this.Text = "Архив+копия";
@@ -466,6 +468,8 @@ namespace SewingProduction.form
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
@@ -477,7 +481,10 @@ namespace SewingProduction.form
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
-                        _normKontList.Clear(); _currentAnnData.dateCreate = DateTime.Now;
+                        _normKontList.Clear();
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
+                        _currentAnnData.dateCreate = DateTime.Now;
                         break;
                 }
                 await LoadAnnDataAsync();
@@ -1262,9 +1269,17 @@ namespace SewingProduction.form
         {
             GridView view = sender as GridView;
             if (view == null) return;
-            if (view.RowCount >= 2) return;
+            
+            // Запрещаем добавление новых строк, если уже есть 2 записи
             if (view.IsNewItemRow(view.FocusedRowHandle))
             {
+                if (_normKontList.Count >= 2)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("На одно РТ можно добавить максимум 2 строки контроля.", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                
                 e.Cancel = true;
 
                 if (_isSelectionFormOpen) return;
@@ -1275,6 +1290,7 @@ namespace SewingProduction.form
 
                     string choice1 = "Пронумеровать деталь";
                     string choice2 = "Комплектация пачки";
+                    
                     // Проверяем, какие строки уже есть
                     bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
                     bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
@@ -1330,11 +1346,11 @@ namespace SewingProduction.form
             }
             else if (view.FocusedColumn.FieldName == "Text")
             {
-                e.Cancel = true;
+                e.Cancel = true; // Запрещаем редактирование поля Text для существующих строк
             }
             else
             {
-                e.Cancel = false;
+                e.Cancel = false; // Разрешаем редактирование других полей
             }
         }
 
@@ -1921,6 +1937,53 @@ namespace SewingProduction.form
         private void gridViewRasz_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
         {
             _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        /// <summary>
+        /// Автоматически добавляет две стандартные строки в norm_kont для новых РТ
+        /// </summary>
+        private void AddStandardKontRows()
+        {
+            try
+            {
+                string choice1 = "Пронумеровать деталь";
+                string choice2 = "Комплектация пачки";
+
+                // Проверяем, что строки еще не добавлены
+                bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
+                bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
+
+                if (!hasChoice1)
+                {
+                    var newKont1 = new NormKont
+                    {
+                        AnnId = _newAnnId,
+                        text = choice1,
+                        IsNew = true
+                    };
+                    _normKontList.Add(newKont1);
+                }
+
+                if (!hasChoice2)
+                {
+                    var newKont2 = new NormKont
+                    {
+                        AnnId = _newAnnId,
+                        text = choice2,
+                        IsNew = true
+                    };
+                    _normKontList.Add(newKont2);
+                }
+
+                // Обновляем грид
+                _normKontBindingSource?.ResetBindings(false);
+
+                _logger.LogEventAsync($"Добавлены стандартные строки norm_kont для AnnId: {_newAnnId}", "AddStandardKontRows").ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
+            }
         }
     }
 }
