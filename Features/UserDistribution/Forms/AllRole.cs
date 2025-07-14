@@ -26,7 +26,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public partial class AllRole : CustomForm
     {
         private readonly AllRoleDataService _allRoleDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         private readonly UserClass _user;
         private int selectedRoleId = -1;
         private int selectedUserId = -1;

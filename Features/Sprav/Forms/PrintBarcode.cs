@@ -22,7 +22,7 @@ namespace SewingProduction.form
         {
             InitializeComponent();
             _barcodePrinter = new BarcodePrinter();
-            _dbService = new DbService(new DatabaseHelper("ace"));
+            _dbService = new DbService(new DatabaseHelper());
         }
         private void PrintBarcode_Load(object sender, EventArgs e)
         {

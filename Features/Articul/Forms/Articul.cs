@@ -11,6 +11,9 @@ using SewingProduction.Report;
 using System.Diagnostics;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Help.Form;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -23,7 +26,7 @@ namespace SewingProduction.form
         //public Articul(UserClass user) : base(user)
         public Articul()
         {
-            _dbHelperAce = new DatabaseHelper("ace");
+            _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
 
         }
@@ -266,12 +269,45 @@ namespace SewingProduction.form
         {
             GetItogVibKartReport report = new GetItogVibKartReport();
             report.RequestParameters = false;
+
             object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
             var kod = ((DataRowView)data).Row["kod"].ToString();
+            //var kod = "30367001";
             Debug.WriteLine(kod);
             report.Parameters["kod"].Value = kod;
+
+            var ds = report.sqlDataSource1;
+            var query = ds.Queries[0] as DevExpress.DataAccess.Sql.StoredProcQuery;
+            query.Parameters[0].Value = kod;
+
+            ds.Fill();
+
+            report.DataSource = ds;
+            report.DataMember = "GetItogVibKart";
+
             ReportPrintTool reportPrintTool = new ReportPrintTool(report);
             reportPrintTool.ShowPreviewDialog();
+
+            //для теста:
+            //DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            //string testquery = "EXEC dbo.GetItogVibKart @kod = " + kod.ToString();
+            //DataTable testdt = dbHelper.ExecuteQuery(testquery);
+            //foreach (DataRow row in testdt.Rows)
+            //{
+            //    Debug.WriteLine($"Test / kod: {row["kod"]}, artikul: {row["articul"]}");
+            //}
+
+            // Принудительно заполнить источник
+
+            // Получаем таблицу
+            //var table = report.sqlDataSource1.Result["GetItogVibKart"];
+            //if (table is System.Data.DataTable dt)
+            //{
+            //    foreach (DataRow row in dt.Rows)
+            //    {
+            //        Debug.WriteLine($"kod: {row["kod"]}, artikul: {row["articul"]}");
+            //    }
+            //}
 
             //    // Получаем выбранную строку из GridView
             //    var view = gridView1; // имя твоего GridView
@@ -304,6 +340,5 @@ namespace SewingProduction.form
             //    var printTool = new DevExpress.XtraReports.UI.ReportPrintTool(report);
             //    printTool.ShowPreview();
         }
-
     }
 }
