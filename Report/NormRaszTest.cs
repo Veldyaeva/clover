@@ -19,7 +19,7 @@ namespace SewingProduction.Report
 
         private void PrintMlRtReport_BeforePrint(object sender, CancelEventArgs e)
         {
-            this.xrSubreport1.CanShrink = true;
+            //this.xrSubreport1.CanShrink = true;
         }
 
         private void xrTableCell38_BeforePrint(object sender, CancelEventArgs e)
