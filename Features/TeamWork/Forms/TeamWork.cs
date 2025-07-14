@@ -661,16 +661,23 @@ namespace SewingProduction.Forms
             _gridHelper.popUpMenuCopy(sender, e);
         }
 
-        private void PrintButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// Печать технологической схемы разделения труда
         /// </summary>
         private async void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
         {
+            int rowNumber = ANNgridView.FocusedRowHandle;
+
+            // int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
+            MlRtReport report1 = new MlRtReport();
+            //report1.RequestParameters = false;
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+
+            //report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
+            //report1.Parameters["_isChip"].Value = IsChip;
+            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
 
         private void gridControl_wdToBind_Click(object sender, EventArgs e)

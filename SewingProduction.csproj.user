@@ -142,6 +142,9 @@
     <Compile Update="Report\NaklReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\NormRaszTest.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\PrintShkReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>

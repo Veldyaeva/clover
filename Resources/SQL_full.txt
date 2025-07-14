@@ -768,3 +768,12 @@ GO
 
 PRINT N'### $(DBNAME) успешно синхронизирована (схема + данные) на 06‑июн‑2025.';
 GO
+
+
+запиши себе где-нибудь, что когда на рабочую базу переселим разделения труда, нужно в функции getArtNormnSeb изменить:
+WHERE nr.kod = (SELECT kod FROM art_norm_n ann WHERE ann.annID = @xAnnID)
+на
+WHERE nr.annId = @xAnnID
+
+
+поменять ХВОСТИК (Спросить у Лены)
