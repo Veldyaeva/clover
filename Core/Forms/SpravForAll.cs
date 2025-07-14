@@ -64,7 +64,7 @@ namespace SewingProduction.form
         public SpravForAll(string tableSQL, string columnsSQL = "*", string rusNameTableSQL = "", UserClass user = null, bool del = true, bool add = true)
         {
             InitializeComponent();
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             _spravAllDataService = new SpravAllDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
             ThemeManager.UpdateTheme(this);

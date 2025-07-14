@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using DevExpress.XtraCharts.Designer.Native;
 using DevExpress.XtraCharts.Native;
+using SewingProduction.Core.Class.Settings;
+
 //using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 using System;
 using System.Collections.Generic;
@@ -27,13 +29,39 @@ namespace SewingProduction.Helpers
         {
             switch (_serv.ToLower())
             {
-                case "ace": _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString; break;
-                case "oms": _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString; break;
-                case "global": _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString; break;
+                case "ace":
+                case "aceconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString;
+                    break;
+                case "ace_test":
+                case "acetestconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.ACEtestConnectionString;
+                    break;
+                case "ace_backup":
+                case "acebackupconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.ACEbackupConnectionString;
+                    break;
+                case "global":
+                case "globalconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString;
+                    break;
+                case "oms":
+                case "omsconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.OMSConnectionString;
+                    break;
+                default:
+                    _connectionString = SewingProduction.Properties.Settings.Default.ACEConnectionString;
+                    break;
             }
+
+            if (string.IsNullOrWhiteSpace(_connectionString))
+                throw new InvalidOperationException("Строка подключения не инициализирована");
+
             _globalConnectionString = _connectionString;
         }
-
+        public DatabaseHelper() : this(SettingsManager.GetCurrentDatabase())
+        {
+        }
         public static string GetGlobalConnectionString()
         {
             if (string.IsNullOrEmpty(_globalConnectionString))

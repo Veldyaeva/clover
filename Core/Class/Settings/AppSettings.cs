@@ -24,6 +24,7 @@ namespace SewingProduction.Core.Class.Settings
         public List<string> OpenTabs { get; set; } = new();
         public List<string> Logins { get; set; } = new();
         public string SavedPassword { get; set; } = "";
+        public string SelectedDatabase { get; set; } = "ACEConnectionString";
     }
 
     public static class SettingsManager
@@ -185,6 +186,37 @@ namespace SewingProduction.Core.Class.Settings
             Current.AllowDuplicateTabs = value;
             Save();
         }
+        #region база данных
+        public static void SaveSelectedDatabase(string login, string connectionName)
+        {
+            if (!Current.Users.ContainsKey(login))
+                Current.Users[login] = new UserSettings();
+
+            Current.Users[login].SelectedDatabase = connectionName;
+            Save();
+        }
+
+        public static string GetSelectedDatabase(string login)
+        {
+            if (Current.Users.TryGetValue(login, out var settings))
+                return string.IsNullOrEmpty(settings.SelectedDatabase) ? "ACEConnectionString" : settings.SelectedDatabase;
+
+            return "ACEConnectionString";
+        }
+        public static string GetCurrentDatabase()
+        {
+            var login = GetLoginHistory().LastOrDefault();
+
+            if (!string.IsNullOrEmpty(login))
+            {
+                var db = GetSelectedDatabase(login);
+                if (!string.IsNullOrWhiteSpace(db))
+                    return db;
+            }
+
+            return "ace"; // дефолт, если ничего не выбрано
+        }
+        #endregion
     }
     public static class UserFilePaths
     {

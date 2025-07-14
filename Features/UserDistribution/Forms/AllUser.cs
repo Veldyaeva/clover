@@ -17,7 +17,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     {
         private readonly UserModel _userModel;
         //private BindingList<UserModel> _userModelList;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         DbService dbService;
         //private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
         //private readonly UserRoleDataService _userRoleDataService = new UserRoleDataService(new DbService(new DatabaseHelper("ace")), new DatabaseHelper("ace"));
