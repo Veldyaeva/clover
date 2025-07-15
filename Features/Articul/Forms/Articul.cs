@@ -288,6 +288,15 @@ namespace SewingProduction.form
             ReportPrintTool reportPrintTool = new ReportPrintTool(report);
             reportPrintTool.ShowPreviewDialog();
 
+            //сокарщенный :
+            GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
+            reportSokr.RequestParameters = false;
+            reportSokr.Parameters["kod"].Value = kod;
+            reportSokr.DataSource = ds;
+            reportSokr.DataMember = "GetItogVibKart";
+            ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
+            reportSokrPrintTool.ShowPreviewDialog();
+
             //для теста:
             //DatabaseHelper dbHelper = new DatabaseHelper("ace");
             //string testquery = "EXEC dbo.GetItogVibKart @kod = " + kod.ToString();

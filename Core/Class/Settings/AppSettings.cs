@@ -199,9 +199,9 @@ namespace SewingProduction.Core.Class.Settings
         public static string GetSelectedDatabase(string login)
         {
             if (Current.Users.TryGetValue(login, out var settings))
-                return string.IsNullOrEmpty(settings.SelectedDatabase) ? "ACEConnectionString" : settings.SelectedDatabase;
+                return string.IsNullOrEmpty(settings.SelectedDatabase) ? "ace" : settings.SelectedDatabase;
 
-            return "ACEConnectionString";
+            return "ace";
         }
         public static string GetCurrentDatabase()
         {
@@ -214,7 +214,7 @@ namespace SewingProduction.Core.Class.Settings
                     return db;
             }
 
-            return "ace"; // дефолт, если ничего не выбрано
+            return "ace"; // дефолт
         }
         #endregion
     }
