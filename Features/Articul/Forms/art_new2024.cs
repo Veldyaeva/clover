@@ -27,10 +27,10 @@ namespace SewingProduction.form
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public art_new2024(string kodArtSQL)
+        public art_new2024(string kodArtSQL = null)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _artNewDataService = new ArtNewDataService(dbHelper);
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
