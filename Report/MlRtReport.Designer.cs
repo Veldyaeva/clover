@@ -2406,7 +2406,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(?_isUpak = 0, \'Yes\', \'No\')")});
             this.xrSubreport2.LocationFloat = new DevExpress.Utils.PointFloat(0.9999593F, 44.70844F);
             this.xrSubreport2.Name = "xrSubreport2";
-            this.xrSubreport2.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_kodRT", null, "MlRtPrintSelect.AKoddRT"));
+            this.xrSubreport2.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_annID", null, "MlRtPrintSelect.annId"));
             this.xrSubreport2.ReportSource = new SewingProduction.PrintGroupNROborudReport();
             this.xrSubreport2.SizeF = new System.Drawing.SizeF(100F, 23F);
             // 

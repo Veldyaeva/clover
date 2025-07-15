@@ -31,15 +31,18 @@
             сomboBoxKnitMachineClassList = new CustomComboBox();
             gridControlKnitMachineLoadInfo = new CustomGridControl();
             gridViewKnitMachineLoadLayoutView = new DevExpress.XtraGrid.Views.Layout.LayoutView();
-            layoutViewColumn1 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            layoutViewColumnKmlNumber = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
             repositoryItemTextEditKmlNumber = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            layoutViewField_layoutViewColumn1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
-            layoutViewColumn2 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            layoutViewField_layoutViewColumnKmlNumber = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            layoutViewColumnYearMonth = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
             repositoryItemTextEditYearMonth = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
-            layoutViewField_layoutViewColumn2 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
-            layoutViewColumn3 = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            layoutViewField_layoutViewColumnYearMonth = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            layoutViewColumnCombinedPszNomCard = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
             repositoryItemHypertextLabelCombinedPszNomCard = new DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel();
-            layoutViewField_layoutViewColumn3 = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            layoutViewField_layoutViewColumnCombinedPszNomCard = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
+            layoutViewColumnKmlID = new DevExpress.XtraGrid.Columns.LayoutViewColumn();
+            repositoryItemTextEditKmlID = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            layoutViewField_layoutViewColumnKmlID = new DevExpress.XtraGrid.Views.Layout.LayoutViewField();
             layoutViewCard1 = new DevExpress.XtraGrid.Views.Layout.LayoutViewCard();
             item1 = new DevExpress.XtraLayout.SimpleSeparator();
             item2 = new DevExpress.XtraLayout.SimpleSeparator();
@@ -64,11 +67,13 @@
             ((System.ComponentModel.ISupportInitialize)gridControlKnitMachineLoadInfo).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadLayoutView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlNumber).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnYearMonth).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnCombinedPszNomCard).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlID).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewCard1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)item2).BeginInit();
@@ -106,7 +111,7 @@
             gridControlKnitMachineLoadInfo.Location = new System.Drawing.Point(24, 70);
             gridControlKnitMachineLoadInfo.MainView = gridViewKnitMachineLoadLayoutView;
             gridControlKnitMachineLoadInfo.Name = "gridControlKnitMachineLoadInfo";
-            gridControlKnitMachineLoadInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1, repositoryItemRichTextEditCombinedPszNomCard, repositoryItemHypertextLabelCombinedPszNomCard, repositoryItemTextEditKmlNumber, repositoryItemTextEditYearMonth });
+            gridControlKnitMachineLoadInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1, repositoryItemRichTextEditCombinedPszNomCard, repositoryItemHypertextLabelCombinedPszNomCard, repositoryItemTextEditKmlNumber, repositoryItemTextEditYearMonth, repositoryItemTextEditKmlID });
             gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(1781, 786);
             gridControlKnitMachineLoadInfo.TabIndex = 2;
             gridControlKnitMachineLoadInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKnitMachineLoadLayoutView, gridViewKnitMachineLoadInfoCards, gridViewKnitMachineLoadInfo });
@@ -116,9 +121,9 @@
             // gridViewKnitMachineLoadLayoutView
             // 
             gridViewKnitMachineLoadLayoutView.CardHorzInterval = 0;
-            gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(200, 46);
+            gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(249, 66);
             gridViewKnitMachineLoadLayoutView.CardVertInterval = 0;
-            gridViewKnitMachineLoadLayoutView.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] { layoutViewColumn1, layoutViewColumn2, layoutViewColumn3 });
+            gridViewKnitMachineLoadLayoutView.Columns.AddRange(new DevExpress.XtraGrid.Columns.LayoutViewColumn[] { layoutViewColumnKmlNumber, layoutViewColumnYearMonth, layoutViewColumnCombinedPszNomCard, layoutViewColumnKmlID });
             gridViewKnitMachineLoadLayoutView.DetailHeight = 700;
             gridViewKnitMachineLoadLayoutView.GridControl = gridControlKnitMachineLoadInfo;
             gridViewKnitMachineLoadLayoutView.Name = "gridViewKnitMachineLoadLayoutView";
@@ -130,16 +135,17 @@
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardExpandButton = false;
             gridViewKnitMachineLoadLayoutView.OptionsView.ShowCardFieldBorders = true;
             gridViewKnitMachineLoadLayoutView.OptionsView.ViewMode = DevExpress.XtraGrid.Views.Layout.LayoutViewMode.MultiColumn;
+            gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(layoutViewColumnKmlID, DevExpress.Data.ColumnSortOrder.Ascending) });
             gridViewKnitMachineLoadLayoutView.TemplateCard = layoutViewCard1;
             // 
-            // layoutViewColumn1
+            // layoutViewColumnKmlNumber
             // 
-            layoutViewColumn1.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            layoutViewColumn1.AppearanceCell.Options.UseFont = true;
-            layoutViewColumn1.ColumnEdit = repositoryItemTextEditKmlNumber;
-            layoutViewColumn1.FieldName = "kmlNumber";
-            layoutViewColumn1.LayoutViewField = layoutViewField_layoutViewColumn1;
-            layoutViewColumn1.Name = "layoutViewColumn1";
+            layoutViewColumnKmlNumber.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            layoutViewColumnKmlNumber.AppearanceCell.Options.UseFont = true;
+            layoutViewColumnKmlNumber.ColumnEdit = repositoryItemTextEditKmlNumber;
+            layoutViewColumnKmlNumber.FieldName = "kmlNumber";
+            layoutViewColumnKmlNumber.LayoutViewField = layoutViewField_layoutViewColumnKmlNumber;
+            layoutViewColumnKmlNumber.Name = "layoutViewColumnKmlNumber";
             // 
             // repositoryItemTextEditKmlNumber
             // 
@@ -147,24 +153,24 @@
             repositoryItemTextEditKmlNumber.Name = "repositoryItemTextEditKmlNumber";
             repositoryItemTextEditKmlNumber.DoubleClick += repositoryItemTextEditKmlNumber_DoubleClick;
             // 
-            // layoutViewField_layoutViewColumn1
+            // layoutViewField_layoutViewColumnKmlNumber
             // 
-            layoutViewField_layoutViewColumn1.EditorPreferredWidth = 95;
-            layoutViewField_layoutViewColumn1.Location = new System.Drawing.Point(0, 0);
-            layoutViewField_layoutViewColumn1.Name = "layoutViewField_layoutViewColumn1";
-            layoutViewField_layoutViewColumn1.Size = new System.Drawing.Size(99, 24);
-            layoutViewField_layoutViewColumn1.TextVisible = false;
+            layoutViewField_layoutViewColumnKmlNumber.EditorPreferredWidth = 64;
+            layoutViewField_layoutViewColumnKmlNumber.Location = new System.Drawing.Point(0, 0);
+            layoutViewField_layoutViewColumnKmlNumber.Name = "layoutViewField_layoutViewColumnKmlNumber";
+            layoutViewField_layoutViewColumnKmlNumber.Size = new System.Drawing.Size(68, 24);
+            layoutViewField_layoutViewColumnKmlNumber.TextVisible = false;
             // 
-            // layoutViewColumn2
+            // layoutViewColumnYearMonth
             // 
-            layoutViewColumn2.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            layoutViewColumn2.AppearanceCell.Options.UseFont = true;
-            layoutViewColumn2.AppearanceCell.Options.UseTextOptions = true;
-            layoutViewColumn2.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
-            layoutViewColumn2.ColumnEdit = repositoryItemTextEditYearMonth;
-            layoutViewColumn2.FieldName = "yearMonth";
-            layoutViewColumn2.LayoutViewField = layoutViewField_layoutViewColumn2;
-            layoutViewColumn2.Name = "layoutViewColumn2";
+            layoutViewColumnYearMonth.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
+            layoutViewColumnYearMonth.AppearanceCell.Options.UseFont = true;
+            layoutViewColumnYearMonth.AppearanceCell.Options.UseTextOptions = true;
+            layoutViewColumnYearMonth.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Far;
+            layoutViewColumnYearMonth.ColumnEdit = repositoryItemTextEditYearMonth;
+            layoutViewColumnYearMonth.FieldName = "yearMonth";
+            layoutViewColumnYearMonth.LayoutViewField = layoutViewField_layoutViewColumnYearMonth;
+            layoutViewColumnYearMonth.Name = "layoutViewColumnYearMonth";
             // 
             // repositoryItemTextEditYearMonth
             // 
@@ -172,37 +178,69 @@
             repositoryItemTextEditYearMonth.Name = "repositoryItemTextEditYearMonth";
             repositoryItemTextEditYearMonth.DoubleClick += repositoryItemTextEditYearMonth_DoubleClick;
             // 
-            // layoutViewField_layoutViewColumn2
+            // layoutViewField_layoutViewColumnYearMonth
             // 
-            layoutViewField_layoutViewColumn2.EditorPreferredWidth = 96;
-            layoutViewField_layoutViewColumn2.Location = new System.Drawing.Point(100, 0);
-            layoutViewField_layoutViewColumn2.Name = "layoutViewField_layoutViewColumn2";
-            layoutViewField_layoutViewColumn2.OptionsTableLayoutItem.ColumnIndex = 1;
-            layoutViewField_layoutViewColumn2.Size = new System.Drawing.Size(100, 24);
-            layoutViewField_layoutViewColumn2.TextVisible = false;
+            layoutViewField_layoutViewColumnYearMonth.EditorPreferredWidth = 83;
+            layoutViewField_layoutViewColumnYearMonth.Location = new System.Drawing.Point(142, 0);
+            layoutViewField_layoutViewColumnYearMonth.Name = "layoutViewField_layoutViewColumnYearMonth";
+            layoutViewField_layoutViewColumnYearMonth.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutViewField_layoutViewColumnYearMonth.Size = new System.Drawing.Size(87, 24);
+            layoutViewField_layoutViewColumnYearMonth.TextVisible = false;
             // 
-            // layoutViewColumn3
+            // layoutViewColumnCombinedPszNomCard
             // 
-            layoutViewColumn3.ColumnEdit = repositoryItemHypertextLabelCombinedPszNomCard;
-            layoutViewColumn3.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
-            layoutViewColumn3.FieldName = "combinedPszNom";
-            layoutViewColumn3.LayoutViewField = layoutViewField_layoutViewColumn3;
-            layoutViewColumn3.Name = "layoutViewColumn3";
+            layoutViewColumnCombinedPszNomCard.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.5F);
+            layoutViewColumnCombinedPszNomCard.AppearanceCell.Options.UseFont = true;
+            layoutViewColumnCombinedPszNomCard.ColumnEdit = repositoryItemHypertextLabelCombinedPszNomCard;
+            layoutViewColumnCombinedPszNomCard.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Custom;
+            layoutViewColumnCombinedPszNomCard.FieldName = "combinedPszNom";
+            layoutViewColumnCombinedPszNomCard.LayoutViewField = layoutViewField_layoutViewColumnCombinedPszNomCard;
+            layoutViewColumnCombinedPszNomCard.Name = "layoutViewColumnCombinedPszNomCard";
             // 
             // repositoryItemHypertextLabelCombinedPszNomCard
             // 
             repositoryItemHypertextLabelCombinedPszNomCard.Name = "repositoryItemHypertextLabelCombinedPszNomCard";
             repositoryItemHypertextLabelCombinedPszNomCard.DoubleClick += repositoryItemHypertextLabelCombinedPszNomCard_DoubleClick;
             // 
-            // layoutViewField_layoutViewColumn3
+            // layoutViewField_layoutViewColumnCombinedPszNomCard
             // 
-            layoutViewField_layoutViewColumn3.EditorPreferredWidth = 196;
-            layoutViewField_layoutViewColumn3.Location = new System.Drawing.Point(0, 25);
-            layoutViewField_layoutViewColumn3.Name = "layoutViewField_layoutViewColumn3";
-            layoutViewField_layoutViewColumn3.OptionsTableLayoutItem.RowIndex = 1;
-            layoutViewField_layoutViewColumn3.Size = new System.Drawing.Size(200, 21);
-            layoutViewField_layoutViewColumn3.StartNewLine = true;
-            layoutViewField_layoutViewColumn3.TextVisible = false;
+            layoutViewField_layoutViewColumnCombinedPszNomCard.EditorPreferredWidth = 225;
+            layoutViewField_layoutViewColumnCombinedPszNomCard.Location = new System.Drawing.Point(0, 25);
+            layoutViewField_layoutViewColumnCombinedPszNomCard.Name = "layoutViewField_layoutViewColumnCombinedPszNomCard";
+            layoutViewField_layoutViewColumnCombinedPszNomCard.OptionsTableLayoutItem.RowIndex = 1;
+            layoutViewField_layoutViewColumnCombinedPszNomCard.Size = new System.Drawing.Size(229, 21);
+            layoutViewField_layoutViewColumnCombinedPszNomCard.StartNewLine = true;
+            layoutViewField_layoutViewColumnCombinedPszNomCard.TextVisible = false;
+            // 
+            // layoutViewColumnKmlID
+            // 
+            layoutViewColumnKmlID.AppearanceCell.Font = new System.Drawing.Font("Tahoma", 8.5F);
+            layoutViewColumnKmlID.AppearanceCell.Options.UseFont = true;
+            layoutViewColumnKmlID.AppearanceCell.Options.UseTextOptions = true;
+            layoutViewColumnKmlID.AppearanceCell.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            layoutViewColumnKmlID.AppearanceCell.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            layoutViewColumnKmlID.AppearanceHeader.Options.UseTextOptions = true;
+            layoutViewColumnKmlID.AppearanceHeader.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Bottom;
+            layoutViewColumnKmlID.Caption = "ID";
+            layoutViewColumnKmlID.ColumnEdit = repositoryItemTextEditKmlID;
+            layoutViewColumnKmlID.CustomizationCaption = "ID";
+            layoutViewColumnKmlID.FieldName = "kmlID";
+            layoutViewColumnKmlID.LayoutViewField = layoutViewField_layoutViewColumnKmlID;
+            layoutViewColumnKmlID.Name = "layoutViewColumnKmlID";
+            // 
+            // repositoryItemTextEditKmlID
+            // 
+            repositoryItemTextEditKmlID.AutoHeight = false;
+            repositoryItemTextEditKmlID.Name = "repositoryItemTextEditKmlID";
+            repositoryItemTextEditKmlID.DoubleClick += repositoryItemTextEditKmlID_DoubleClick;
+            // 
+            // layoutViewField_layoutViewColumnKmlID
+            // 
+            layoutViewField_layoutViewColumnKmlID.EditorPreferredWidth = 49;
+            layoutViewField_layoutViewColumnKmlID.Location = new System.Drawing.Point(68, 0);
+            layoutViewField_layoutViewColumnKmlID.Name = "layoutViewField_layoutViewColumnKmlID";
+            layoutViewField_layoutViewColumnKmlID.Size = new System.Drawing.Size(73, 24);
+            layoutViewField_layoutViewColumnKmlID.TextSize = new System.Drawing.Size(15, 13);
             // 
             // layoutViewCard1
             // 
@@ -210,8 +248,8 @@
             layoutViewCard1.GroupBordersVisible = false;
             layoutViewCard1.GroupStyle = DevExpress.Utils.GroupStyle.Card;
             layoutViewCard1.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
-            layoutViewCard1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutViewField_layoutViewColumn1, layoutViewField_layoutViewColumn3, layoutViewField_layoutViewColumn2, item1, item2 });
-            layoutViewCard1.Name = "layoutViewCard1";
+            layoutViewCard1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutViewField_layoutViewColumnKmlNumber, layoutViewField_layoutViewColumnCombinedPszNomCard, layoutViewField_layoutViewColumnYearMonth, item1, item2, layoutViewField_layoutViewColumnKmlID });
+            layoutViewCard1.Name = "layoutViewTemplateCard";
             layoutViewCard1.OptionsItemText.TextToControlDistance = 5;
             layoutViewCard1.StartNewLine = true;
             layoutViewCard1.Text = "TemplateCard";
@@ -221,12 +259,12 @@
             item1.CustomizationFormText = "item1";
             item1.Location = new System.Drawing.Point(0, 24);
             item1.Name = "item1";
-            item1.Size = new System.Drawing.Size(200, 1);
+            item1.Size = new System.Drawing.Size(229, 1);
             // 
             // item2
             // 
             item2.CustomizationFormText = "item2";
-            item2.Location = new System.Drawing.Point(99, 0);
+            item2.Location = new System.Drawing.Point(141, 0);
             item2.Name = "item2";
             item2.Size = new System.Drawing.Size(1, 24);
             // 
@@ -387,11 +425,13 @@
             ((System.ComponentModel.ISupportInitialize)gridControlKnitMachineLoadInfo).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKnitMachineLoadLayoutView).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlNumber).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlNumber).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditYearMonth).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnYearMonth).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemHypertextLabelCombinedPszNomCard).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumn3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnCombinedPszNomCard).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemTextEditKmlID).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutViewField_layoutViewColumnKmlID).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutViewCard1).EndInit();
             ((System.ComponentModel.ISupportInitialize)item1).EndInit();
             ((System.ComponentModel.ISupportInitialize)item2).EndInit();
@@ -425,9 +465,9 @@
         private DevExpress.XtraEditors.Repository.RepositoryItemMemoEdit repositoryItemMemoEdit1;
         private DevExpress.XtraEditors.Repository.RepositoryItemRichTextEdit repositoryItemRichTextEditCombinedPszNomCard;
         private DevExpress.XtraGrid.Views.Layout.LayoutView gridViewKnitMachineLoadLayoutView;
-        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumn1;
-        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumn2;
-        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumn3;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnKmlNumber;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnYearMonth;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnCombinedPszNomCard;
         private DevExpress.XtraEditors.Repository.RepositoryItemHypertextLabel repositoryItemHypertextLabelCombinedPszNomCard;
         private DevExpress.XtraLayout.LayoutControl layoutControl1;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
@@ -437,13 +477,16 @@
         private DevExpress.XtraLayout.SplitterItem splitterItem1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn1;
-        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn2;
-        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumn3;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlNumber;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditYearMonth;
+        private DevExpress.XtraGrid.Columns.LayoutViewColumn layoutViewColumnKmlID;
+        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlID;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnKmlNumber;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnYearMonth;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnCombinedPszNomCard;
+        private DevExpress.XtraGrid.Views.Layout.LayoutViewField layoutViewField_layoutViewColumnKmlID;
         private DevExpress.XtraGrid.Views.Layout.LayoutViewCard layoutViewCard1;
         private DevExpress.XtraLayout.SimpleSeparator item1;
         private DevExpress.XtraLayout.SimpleSeparator item2;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditKmlNumber;
-        private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEditYearMonth;
     }
 }

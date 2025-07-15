@@ -293,10 +293,14 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     {
                         _currentKnitMachineLoadInfoData = knitMachineLoadInfoData;                // Обновляем текущую модель
                         _knitMachineLoadInfoBindingSource.DataSource = _currentKnitMachineLoadInfoData; // Привязываем данные к форме
+                        _knitMachineLoadInfoBindingSource.Sort = "kmlNumber, yearMonth";
                     });
+
+                    
 
                     await _logger.LogEventAsync($"Данные KnitMachineLoadInfo успешно загружены", "LoadKnitMachineLoadInfoByClassIDDataAsync");
                     _knitMachineLoadInfoBindingSource.ResetBindings(false);
+                    
                 }
                 else
                 {
@@ -557,6 +561,21 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             try
             {
                 gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(gridViewKnitMachineLoadLayoutView.CardMinSize.Width, gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1));
+
+                //---------------------------------------------
+                gridViewKnitMachineLoadLayoutView.BeginSort();
+                gridViewKnitMachineLoadLayoutView.ClearSorting();
+
+                gridViewKnitMachineLoadLayoutView.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewKnitMachineLoadLayoutView.Columns["kmlNumber"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewKnitMachineLoadLayoutView.Columns["yearNumber"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewKnitMachineLoadLayoutView.Columns["monthNumber"], DevExpress.Data.ColumnSortOrder.Ascending)
+                    });
+                gridViewKnitMachineLoadLayoutView.EndSort();
+                //gridViewKnitMachineLoadLayoutView.Refresh();
+                //gridViewKnitMachineLoadLayoutView.SelectRow(0);
+                gridViewKnitMachineLoadLayoutView.FocusedRowHandle = 0;
+                //---------------------------------------------
             }
             finally
             {
@@ -624,6 +643,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         }
 
         private void repositoryItemHypertextLabelCombinedPszNomCard_DoubleClick(object sender, EventArgs e)
+        {
+            cardDBClick();
+        }
+
+        private void repositoryItemTextEditKmlID_DoubleClick(object sender, EventArgs e)
         {
             cardDBClick();
         }

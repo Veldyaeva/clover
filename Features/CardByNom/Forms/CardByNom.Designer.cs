@@ -2405,6 +2405,8 @@ namespace SewingProduction
             simpleButtonFurnKKPrint.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
             simpleButtonFurnKKPrint.Appearance.Options.UseFont = true;
             simpleButtonFurnKKPrint.Appearance.Options.UseForeColor = true;
+            simpleButtonFurnKKPrint.Appearance.Options.UseTextOptions = true;
+            simpleButtonFurnKKPrint.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             tablePanel7.SetColumn(simpleButtonFurnKKPrint, 0);
             tablePanel7.SetColumnSpan(simpleButtonFurnKKPrint, 5);
             simpleButtonFurnKKPrint.Dock = DockStyle.Fill;

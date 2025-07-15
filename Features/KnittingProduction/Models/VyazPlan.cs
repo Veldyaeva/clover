@@ -158,6 +158,8 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int monthNumberPlanDate { get; set; }
         [NotMapped]
         public int yearNumberPlanDate { get; set; }
+        [NotMapped]
+        public int pszkmYearMonthInt { get; set; }
     }
 
 }
