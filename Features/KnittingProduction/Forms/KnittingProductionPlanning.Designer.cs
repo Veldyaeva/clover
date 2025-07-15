@@ -171,7 +171,7 @@
             gridColumnVyazPlanPszkmPlanDateFrom.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanPszkmPlanDateFrom.Visible = true;
             gridColumnVyazPlanPszkmPlanDateFrom.VisibleIndex = 15;
-            gridColumnVyazPlanPszkmPlanDateFrom.Width = 186;
+            gridColumnVyazPlanPszkmPlanDateFrom.Width = 159;
             // 
             // gridColumnVyazPlanKmlNumber
             // 
@@ -181,7 +181,7 @@
             gridColumnVyazPlanKmlNumber.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKmlNumber.Visible = true;
             gridColumnVyazPlanKmlNumber.VisibleIndex = 14;
-            gridColumnVyazPlanKmlNumber.Width = 77;
+            gridColumnVyazPlanKmlNumber.Width = 63;
             // 
             // gridColumnVyazPlanSekVyazAll
             // 
@@ -192,7 +192,7 @@
             gridColumnVyazPlanSekVyazAll.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, DevExpress.Data.SummaryMode.Selection, "SekVyazAll", "(Итого: {0:0.##})") });
             gridColumnVyazPlanSekVyazAll.Visible = true;
             gridColumnVyazPlanSekVyazAll.VisibleIndex = 12;
-            gridColumnVyazPlanSekVyazAll.Width = 70;
+            gridColumnVyazPlanSekVyazAll.Width = 137;
             // 
             // gridColumnVyazPlanKol
             // 
@@ -202,7 +202,7 @@
             gridColumnVyazPlanKol.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanKol.Visible = true;
             gridColumnVyazPlanKol.VisibleIndex = 11;
-            gridColumnVyazPlanKol.Width = 68;
+            gridColumnVyazPlanKol.Width = 64;
             // 
             // gridColumnVyazPlanZvetTkan
             // 
@@ -212,7 +212,7 @@
             gridColumnVyazPlanZvetTkan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanZvetTkan.Visible = true;
             gridColumnVyazPlanZvetTkan.VisibleIndex = 10;
-            gridColumnVyazPlanZvetTkan.Width = 116;
+            gridColumnVyazPlanZvetTkan.Width = 152;
             // 
             // gridColumnVyazPlanSekVyaz
             // 
@@ -222,7 +222,7 @@
             gridColumnVyazPlanSekVyaz.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanSekVyaz.Visible = true;
             gridColumnVyazPlanSekVyaz.VisibleIndex = 9;
-            gridColumnVyazPlanSekVyaz.Width = 70;
+            gridColumnVyazPlanSekVyaz.Width = 71;
             // 
             // gridColumnVyazPlanNameVyazClass
             // 
@@ -232,7 +232,7 @@
             gridColumnVyazPlanNameVyazClass.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameVyazClass.Visible = true;
             gridColumnVyazPlanNameVyazClass.VisibleIndex = 8;
-            gridColumnVyazPlanNameVyazClass.Width = 80;
+            gridColumnVyazPlanNameVyazClass.Width = 81;
             // 
             // gridColumnVyazPlanGrup
             // 
@@ -242,7 +242,7 @@
             gridColumnVyazPlanGrup.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanGrup.Visible = true;
             gridColumnVyazPlanGrup.VisibleIndex = 7;
-            gridColumnVyazPlanGrup.Width = 108;
+            gridColumnVyazPlanGrup.Width = 109;
             // 
             // gridColumnVyazPlanArticul
             // 
@@ -252,7 +252,7 @@
             gridColumnVyazPlanArticul.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanArticul.Visible = true;
             gridColumnVyazPlanArticul.VisibleIndex = 6;
-            gridColumnVyazPlanArticul.Width = 108;
+            gridColumnVyazPlanArticul.Width = 109;
             // 
             // gridColumnVyazPlanDateCdPlan
             // 
@@ -262,7 +262,7 @@
             gridColumnVyazPlanDateCdPlan.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanDateCdPlan.Visible = true;
             gridColumnVyazPlanDateCdPlan.VisibleIndex = 5;
-            gridColumnVyazPlanDateCdPlan.Width = 108;
+            gridColumnVyazPlanDateCdPlan.Width = 109;
             // 
             // gridColumnVyazPlanNameSbit
             // 
@@ -272,7 +272,7 @@
             gridColumnVyazPlanNameSbit.OptionsColumn.ReadOnly = true;
             gridColumnVyazPlanNameSbit.Visible = true;
             gridColumnVyazPlanNameSbit.VisibleIndex = 4;
-            gridColumnVyazPlanNameSbit.Width = 108;
+            gridColumnVyazPlanNameSbit.Width = 85;
             // 
             // gridColumnVyazPlanDateZap
             // 
@@ -305,7 +305,7 @@
             gridColumnVyazPlanSyncSelection.UnboundDataType = typeof(bool);
             gridColumnVyazPlanSyncSelection.Visible = true;
             gridColumnVyazPlanSyncSelection.VisibleIndex = 13;
-            gridColumnVyazPlanSyncSelection.Width = 70;
+            gridColumnVyazPlanSyncSelection.Width = 23;
             // 
             // repositoryItemCheckEdit1
             // 
@@ -331,7 +331,7 @@
             gridColumnVyazPlanPszkmPlanDateTo.Name = "gridColumnVyazPlanPszkmPlanDateTo";
             gridColumnVyazPlanPszkmPlanDateTo.Visible = true;
             gridColumnVyazPlanPszkmPlanDateTo.VisibleIndex = 16;
-            gridColumnVyazPlanPszkmPlanDateTo.Width = 215;
+            gridColumnVyazPlanPszkmPlanDateTo.Width = 222;
             // 
             // repositoryItemCheckedComboBoxEdit1
             // 

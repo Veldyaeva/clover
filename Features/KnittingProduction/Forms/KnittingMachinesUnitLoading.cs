@@ -18,6 +18,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.Data;
 using DevExpress.Charts.Native;
+using DevExpress.XtraExport.Helpers;
+using DevExpress.XtraGrid.Columns;
+using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -72,6 +76,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate.FieldName = "monthNumberPlanDate";
                 gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate.Visible = false;
                 gridPlanSezonZadKnitMachineColumnYearMonthText.FieldName = "yearMonthText";
+                gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt.FieldName = "pszkmYearMonthInt";
 
                 gridViewPlanSezonZadKnitMachine.RowStyle += (s, e) =>
                 {
@@ -115,36 +120,142 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //    }
                 //};
 
-                gridViewPlanSezonZadKnitMachine.CustomUnboundColumnData += (s, e) =>
-                {
-                    if (e.Column.FieldName == "yearMonthText")
-                    {
-                        int year = Convert.ToInt32(gridViewPlanSezonZadKnitMachine.GetListSourceRowCellValue(e.ListSourceRowIndex, "yearNumberPlanDate"));
-                        int month = Convert.ToInt32(gridViewPlanSezonZadKnitMachine.GetListSourceRowCellValue(e.ListSourceRowIndex, "monthNumberPlanDate"));
-                        e.Value = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month)} {year}";
-                    }
-                };
+                //gridViewPlanSezonZadKnitMachine.CustomUnboundColumnData += (s, e) =>
+                //{
+                //    if (e.Column.FieldName == "yearMonthText")
+                //    {
+                //        int year = Convert.ToInt32(gridViewPlanSezonZadKnitMachine.GetListSourceRowCellValue(e.ListSourceRowIndex, "yearNumberPlanDate"));
+                //        int month = Convert.ToInt32(gridViewPlanSezonZadKnitMachine.GetListSourceRowCellValue(e.ListSourceRowIndex, "monthNumberPlanDate"));
+                //        //e.Value = $"{CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(month)} {year}";
+                //        //var date = new DateTime(year, month, 1);
+                //        //e.Value = date.ToString("MMMM-yy"); // "Июль-25"
+                //        string mg = $"{year}{month}";
+                //    }
+                //};
+
                 gridViewPlanSezonZadKnitMachine.OptionsView.GroupFooterShowMode = GroupFooterShowMode.VisibleAlways;
 
-                gridViewPlanSezonZadKnitMachine.Columns["kmlNumber"].SortIndex = 0;
-                gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].SortIndex = 1;
-                gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"].SortIndex = 2;
+                //gridViewPlanSezonZadKnitMachine.Columns["kmlNumber"].SortIndex = 0;
+                //gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].SortIndex = 1;
+                //gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"].SortIndex = 2;
 
 
+                //gridViewPlanSezonZadKnitMachine.Columns["kmlNumber"].GroupIndex = 0;
+                //if (gridViewPlanSezonZadKnitMachine.Columns["yearMonthText"] != null)
+                //{
+                //    gridViewPlanSezonZadKnitMachine.Columns["yearMonthText"].GroupIndex = 1;
+                //    gridViewPlanSezonZadKnitMachine.RefreshData();
+                //}
+
+                //gridViewPlanSezonZadKnitMachine.BeginUpdate();
+                gridViewPlanSezonZadKnitMachine.BeginSort();
+                gridViewPlanSezonZadKnitMachine.ClearGrouping();
+                gridViewPlanSezonZadKnitMachine.ClearSorting();
+
+                // Сначала группируем по номеру машины
                 gridViewPlanSezonZadKnitMachine.Columns["kmlNumber"].GroupIndex = 0;
-                if (gridViewPlanSezonZadKnitMachine.Columns["yearMonthText"] != null)
-                {
-                    gridViewPlanSezonZadKnitMachine.Columns["yearMonthText"].GroupIndex = 1;
-                    gridViewPlanSezonZadKnitMachine.RefreshData();
-                }
+                gridViewPlanSezonZadKnitMachine.SortInfo.Add(new GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["kmlNumber"], ColumnSortOrder.Ascending));
 
-                
+                // Потом по году-месяцу
+                gridViewPlanSezonZadKnitMachine.Columns["pszkmYearMonthInt"].GroupIndex = 1;
+                gridViewPlanSezonZadKnitMachine.SortInfo.Add(new GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["pszkmYearMonthInt"], ColumnSortOrder.Ascending));
+
+                //// Потом по году
+                //gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].GroupIndex = 1;
+                //gridViewPlanSezonZadKnitMachine.SortInfo.Add(new GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"], ColumnSortOrder.Ascending));
+
+                //// Потом по месяцу (цифровому!)
+                //gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"].GroupIndex = 2;
+                //gridViewPlanSezonZadKnitMachine.SortInfo.Add(new GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"], ColumnSortOrder.Ascending));
+
+                gridViewPlanSezonZadKnitMachine.EndSort();
+
+                gridViewPlanSezonZadKnitMachine.GroupFormat = "{1}: [#image]{2}"; // Показывает: <Caption>: <value>
+
+                gridViewPlanSezonZadKnitMachine.CustomDrawGroupRow += (s, e) =>
+                {
+                    GridView view = s as GridView;
+                    int rowHandle = e.RowHandle;
+
+                    int level = view.GetRowLevel(rowHandle);
+
+                    GridGroupRowInfo groupInfo = e.Info as GridGroupRowInfo;
+                    //groupInfo.GroupExpanded = true;
+                    if (level == 1) // mg
+                    {
+                        //string mg = view.GetGroupRowValue(e.RowHandle, view.Columns["yearMonthText"]).ToString();
+                        //groupInfo.GroupText = $"{mg}";
+                        int year = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["yearNumberPlanDate"]));
+                        int month = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["monthNumberPlanDate"]));
+                        DateTime dt = new DateTime(year, month, 1);
+                        string formatted = dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"));
+
+                        //groupInfo.GroupText = $"Месяц: {formatted}";
+                        //groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
+                        groupInfo.GroupText = $"{dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
+                        
+                    }
+
+                    //if (level == 1) // yearNumber
+                    //{
+                    //    // Пропустить отображение группы по году
+                    //    groupInfo.GroupText = ""; // Пусто
+                    //}
+                    //if (level == 2) // уровень месяца
+                    //{
+                    //    int year = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["yearNumberPlanDate"]));
+                    //    int month = Convert.ToInt32(view.GetGroupRowValue(e.RowHandle, view.Columns["monthNumberPlanDate"]));
+                    //    DateTime dt = new DateTime(year, month, 1);
+                    //    string formatted = dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"));
+
+                    //    //groupInfo.GroupText = $"Месяц: {formatted}";
+                    //    groupInfo.GroupText = $"Месяц: {dt.ToString("MMMM-yy", new System.Globalization.CultureInfo("ru-RU"))}";
+                    //}
+                };
+
+
+                //gridViewPlanSezonZadKnitMachine.CustomDrawGroupRow += (s, e) =>
+                //{
+                //    GridView view = s as GridView;
+                //    GridGroupRowInfo info = e.Info as GridGroupRowInfo;
+
+                //    if (view.GetRowLevel(e.RowHandle) == 1) // нужный уровень группировки
+                //    {
+                //        // Получить сумму или другой агрегат
+                //        GridSummaryItem gridSummaryItem = gridViewPlanSezonZadKnitMachine.GroupSummary[0];
+                //        decimal sum = Convert.ToDecimal(view.GetGroupSummaryValue(e.RowHandle, (GridGroupSummaryItem)gridSummaryItem));
+
+                //        string caption = "Итого по в/м, ч/ч: " + sum.ToString("N2");
+
+                //        // Нарисовать заголовок вручную
+                //        info.GroupText = caption; // ← здесь можно задать длинный текст, он не обрезается
+                //    }
+                //};
+                gridViewPlanSezonZadKnitMachine.GroupSummary.Clear();
+
+                gridViewPlanSezonZadKnitMachine.GroupSummary.Add(new GridGroupSummaryItem()
+                {
+                    FieldName = "hoursTotal",
+                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                    ShowInGroupColumnFooterName = "hoursTotal"
+                });
+
+                gridViewPlanSezonZadKnitMachine.DataSourceChanged += (s, e) =>
+                {
+                    gridViewPlanSezonZadKnitMachine.BeginUpdate();
+                    gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
+                    gridViewPlanSezonZadKnitMachine.EndUpdate();
+                };
+
+
+                //gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
+
                 //gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].GroupIndex = 1;
                 //gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"].GroupIndex = 2;
-                
+
                 //gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
                 //gridViewPlanSezonZadKnitMachine.Columns["monthNumberPlanDate"].SortOrder = DevExpress.Data.ColumnSortOrder.Ascending;
-                
+
                 ////gridViewPlanSezonZadKnitMachine.Columns["yearMonthText"].Group();
 
                 //gridViewPlanSezonZadKnitMachine.Columns["yearNumberPlanDate"].Group();
@@ -220,7 +331,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                     await _logger.LogEventAsync($"Данные PlanSezonZadKnitMachine успешно загружены", "LoadKnitMachineUnitLoadingDataAsync");
                     _planSezonZadKnitMachineBindingSource.ResetBindings(false);
-                    _planSezonZadKnitMachineBindingSource.Sort = "yearNumberPlanDate, monthNumberPlanDate, pszkmPlanDateFrom";
+                    _planSezonZadKnitMachineBindingSource.Sort = "pszkmYearMonthInt, pszkmPlanDateFrom";
                     gridControlPlanSezonZadKnitMachine.DataSource = _planSezonZadKnitMachineBindingSource;
                     
                 }
@@ -246,6 +357,20 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await LoadKnitMachineUnitLoadingDataAsync(_xKmlID);
 
                 labelKmlNumber.Text = _xKmlNumber;
+
+                //---------------------------------------------
+                gridViewPlanSezonZadKnitMachine.BeginSort();
+                gridViewPlanSezonZadKnitMachine.ClearSorting();
+
+                gridViewPlanSezonZadKnitMachine.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["pszkmYearMonthInt"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["DateZap"], DevExpress.Data.ColumnSortOrder.Ascending)
+                    });
+                gridViewPlanSezonZadKnitMachine.EndSort();
+                //gridViewPlanSezonZadKnitMachine.Refresh();
+                //gridControlPlanSezonZadKnitMachine.Refresh();
+                //---------------------------------------------
+
             }
             catch (Exception ex)
             {

@@ -376,6 +376,21 @@ namespace SewingProduction.form.Nadezhda
                 await Task.WhenAll(bindingsTask);
 
                 await LoadVyazPlanDataAsync();
+
+                // устанавливаем фильтр: запланированные задания, которые не распределены по В/М
+                //_vyazPlanViewBindingSource.Filter = "DateZapPlanFrom is null";
+                gridViewVyazPlan.ActiveFilter.Clear(); // очищаем старые фильтры
+
+                gridViewVyazPlan.ActiveFilter.Add(
+                    gridViewVyazPlan.Columns["DateZapPlanFrom"],
+                    new ColumnFilterInfo("[DateZapPlanFrom] = null")
+                );
+                gridViewVyazPlan.SortInfo.Add(
+                    new DevExpress.XtraGrid.Columns.GridColumnSortInfo(
+                        gridViewVyazPlan.Columns["NomZad"],
+                        DevExpress.Data.ColumnSortOrder.Ascending
+                    )
+                );
             }
             catch (Exception ex)
             {
