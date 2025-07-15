@@ -40,7 +40,6 @@ namespace SewingProduction.form
         int strForAdd;
         string columns;
         string tableString;
-        //string tableString;
         List<string> fieldsQueryListSQL;
         // Отслеживание изменений в базе данных:
         //private SqlDependency sqlDependency;
