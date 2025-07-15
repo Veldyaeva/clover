@@ -18,6 +18,7 @@ using SewingProduction.Features.TeamWork;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
 using System.Collections;
@@ -668,13 +669,10 @@ namespace SewingProduction.Forms
         {
             int rowNumber = ANNgridView.FocusedRowHandle;
 
-            // int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
-            MlRtReport report1 = new MlRtReport();
+            NormRaszTest report1 = new NormRaszTest();
             //report1.RequestParameters = false;
             var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
 
-            //report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
-            //report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_annId"].Value = selectedAnn.AnnID;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
