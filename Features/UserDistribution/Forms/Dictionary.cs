@@ -26,7 +26,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             gridViewTable.FocusedRowChanged += gridViewTable_FocusedRowChanged;
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
             _tableService = new AllTableNameDataService(dbService, dbHelper);
             _columnService = new AllColumnNameDataService(dbService, dbHelper);
