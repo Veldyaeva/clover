@@ -7,7 +7,7 @@ using SewingProduction.Models;
 using System;
 using System.Windows.Forms;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class TeamWork : CustomForm
     {
@@ -1464,7 +1464,7 @@ namespace SewingProduction.Forms
             ButtonCopyWd.Name = "ButtonCopyWd";
             ButtonCopyWd.Size = new System.Drawing.Size(228, 33);
             ButtonCopyWd.TabIndex = 18;
-            ButtonCopyWd.Text = "копировать РТ";
+            ButtonCopyWd.Text = "копировать в буфер";
             ButtonCopyWd.UseVisualStyleBackColor = false;
             ButtonCopyWd.Visible = false;
             ButtonCopyWd.Click += ButtonCopyWd_Click;

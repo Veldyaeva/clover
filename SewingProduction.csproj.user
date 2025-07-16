@@ -70,9 +70,6 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\TeamWork\Forms\TeamWork.Data.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -16,7 +16,7 @@ namespace SewingProduction
     public class BarcodePrinter
     {
         // Строка подключения к базе данных, берется из настроек приложения
-        private string connectionString = Properties.Settings.Default.ACEConnectionString3;
+        private string connectionString = Properties.Settings.Default.ACEConnectionString2;
         // Имя текущего компьютера
         private string kompName = System.Environment.MachineName;
 

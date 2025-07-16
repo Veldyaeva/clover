@@ -26,7 +26,7 @@ using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
