@@ -1580,50 +1580,38 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
-                    //var parameters = new Dictionary<string, object>
-                    //{
-                    //    { "@KoddRt", _currentAnnData.Kod }
-                    //};
+                        //  RecalculateSek();
+                    var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
 
-                    RecalculateSek();
-
-                    var ann = _currentAnnData; // уже рассчитаны значения
-                    var xDoc = new XDocument(
-                        new XElement("VFPData",
-                            new XElement("annupdate",
-                                new XElement("sek_shv", ann.SekShv),
-                                new XElement("sek_vyaz5", ann.SekVyaz5),
-                                new XElement("sek_vyaz6", ann.SekVyaz6),
-                                new XElement("sek_vyaz7", ann.SekVyaz7),
-                                new XElement("sek_vyaz10", ann.SekVyaz10),
-                                new XElement("sek_vyaz12", ann.SekVyaz12),
-                                new XElement("sek_vyaz14", ann.SekVyaz14),
-                                new XElement("sek_vyaz18", ann.SekVyaz18),
-                                new XElement("sek_vyaz57", ann.SekVyaz57),
-                                new XElement("sek_vyaz62", ann.SekVyaz62),
-                                new XElement("sek_vyaz70", ann.SekVyaz70),
-                                new XElement("sek_vyaz71", ann.SekVyaz71),
-                                new XElement("sek_vyaz72", ann.SekVyaz72),
-                                new XElement("sek_vyazo", ann.SekVyazo),
-                                new XElement("sek_vyaz", ann.SekVyaz),
-                                new XElement("sek", ann.Sek),
-                                new XElement("sek_kr", ann.SekKr),
-                                new XElement("slogn", ann.Slogn),
-                                new XElement("annid", ann.AnnID)
-                            )
-                        )
-                    );
-
-                    // Получить XML-строку для передачи в процедуру:
-                    string xmlString = xDoc.ToString();
-                    var parameters = new Dictionary<string, object>
+                    // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
+                    if (calculatedData != null)
                     {
-                        { "@xXml", xmlString }
-                    };
+                        _currentAnnData.SekVyazo = calculatedData.sek_O;
+                        _currentAnnData.SekVyaz5 = calculatedData.sek_5;
+                        _currentAnnData.SekVyaz12 = calculatedData.sek_12;
+                        _currentAnnData.SekVyaz7 = calculatedData.sek_7;
+                        _currentAnnData.SekVyaz10 = calculatedData.sek_10;
+                        _currentAnnData.SekVyaz6 = calculatedData.sek_6;
+                        _currentAnnData.SekVyaz = calculatedData.sek_3; // В старом коде sek_vyaz был для kod_ob=29, что в view = sek_3
+                        _currentAnnData.SekVyaz70 = calculatedData.sek_70;
+                        _currentAnnData.SekVyaz71 = calculatedData.sek_71;
+                        _currentAnnData.SekVyaz72 = calculatedData.sek_72;
+                        _currentAnnData.SekVyaz62 = calculatedData.sek_62;
+                        _currentAnnData.SekVyaz14 = calculatedData.sek_14;
+                        _currentAnnData.SekVyaz57 = calculatedData.sek_57;
+                        _currentAnnData.SekVyaz18 = calculatedData.sek_18;
+                        _currentAnnData.SekShv = calculatedData.sek_sh;
+                        _currentAnnData.SekShv1 = calculatedData.sek_sh1;
+                        _currentAnnData.SekKr = calculatedData.sek_kr;
+                        _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
+                        _currentAnnData.Slogn = (int)calculatedData.sb; // 'sb' из view - это себестоимость (slogn)
+                    }
+                    else
+                    {
+                        // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
+                         //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                    }
 
-                    await _dbHelper.ExecuteQueryAsync("artNormN_update", parameters, CommandType.StoredProcedure);
-
-                    //await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters); - при простановке даты обн
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;

@@ -91,7 +91,17 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-            
+        // ArtNormService.cs
+        public async Task<NormRaszSekView> GetCalculatedSekFromViewAsync(int annId)
+        {
+            string query = "SELECT * FROM dbo.NormRaszSek_view WHERE annId = @annId";
+            var parameters = new { annId = annId };
+
+            // Используем ваш существующий DbService или DbHelper
+            // Этот метод должен уметь выполнять запрос и возвращать один объект
+            return await _dbService.GetFirstOrDefaultAsync<NormRaszSekView>(query, parameters);
+        }
+
         public async Task<List<ArtNormN>> GetArtNormData()
         {
         //    string query = @"

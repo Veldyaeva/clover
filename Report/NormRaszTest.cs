@@ -27,6 +27,8 @@ namespace SewingProduction.Report
 
         }
 
-
+        private void xrTableCell3_BeforePrint(object sender, CancelEventArgs e)
+        {
+        }
     }
 }
