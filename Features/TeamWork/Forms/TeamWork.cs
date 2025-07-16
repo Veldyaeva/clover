@@ -86,7 +86,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.PreviewLineCount = 1;
             //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
 

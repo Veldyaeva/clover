@@ -41,6 +41,10 @@ namespace SewingProduction.Helpers
                 case "acebackupconnectionstring":
                     _connectionString = SewingProduction.Properties.Settings.Default.ACEbackupConnectionString;
                     break;
+                case "ace_backup_new":
+                case "acebackupnewconnectionstring":
+                    _connectionString = SewingProduction.Properties.Settings.Default.ACEbackupnewConnectionString;
+                    break;
                 case "global":
                 case "globalconnectionstring":
                     _connectionString = SewingProduction.Properties.Settings.Default.GlobalConnectionString;

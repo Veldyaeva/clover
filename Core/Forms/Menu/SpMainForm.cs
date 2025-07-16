@@ -68,7 +68,7 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string helpPath = Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
             showHelpForm(helpPath);
         }
         #endregion
