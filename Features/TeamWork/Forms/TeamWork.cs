@@ -33,7 +33,7 @@ using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
@@ -87,7 +87,7 @@ namespace SewingProduction.Forms
             ANNgridView.PreviewLineCount = 1;
             //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
 

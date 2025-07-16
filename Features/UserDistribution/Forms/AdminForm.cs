@@ -14,7 +14,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
     public partial class AdminForm : CustomForm
     {
         private readonly AdminFormDataService _adminFormDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         private readonly UserClass _user;
         public AdminForm(UserClass user) : base(user)
         {

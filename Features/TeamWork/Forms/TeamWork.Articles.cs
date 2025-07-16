@@ -18,7 +18,7 @@ using SewingProduction.Services;
 using DevExpress.Xpo.DB.Helpers;
 using System.Linq;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork
     {

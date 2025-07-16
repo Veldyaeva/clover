@@ -36,14 +36,14 @@ GO
 ---------------------------------------------------------------------------------------------
 -- 3. Справочник STATUS_ANN и удаление устаревших FK  (из diff ACE) --------------------------
 ---------------------------------------------------------------------------------------------
--- 3.1 Удаляем старые FK, если остались                                       -- fileciteturn4file9
+-- 3.1 ace+  Удаляем старые FK, если остались                                       -- fileciteturn4file9
 IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_articul_status_nn')
     ALTER TABLE dbo.articul_status DROP CONSTRAINT FK_articul_status_nn;
 IF EXISTS (SELECT 1 FROM sys.foreign_keys WHERE name = 'FK_matr_status')
     ALTER TABLE dbo.matr_status DROP CONSTRAINT FK_matr_status;
 GO
 
--- 3.2 Создаём таблицу dbo.status_ann, если отсутствует                      -- fileciteturn4file9
+-- 3.2 ace+, ace_log+ Создаём таблицу dbo.status_ann, если отсутствует                      -- fileciteturn4file9
 IF OBJECT_ID('dbo.status_ann','U') IS NULL
 BEGIN
     CREATE TABLE dbo.status_ann
@@ -54,12 +54,12 @@ BEGIN
 END;
 GO
 
--- 3.3 Переименовываем старый PK, если он ещё существует                     -- fileciteturn4file3
+-- ace+, ace_log+ 3.3 Переименовываем старый PK, если он ещё существует                     -- fileciteturn4file3
 IF EXISTS (SELECT 1 FROM sys.indexes WHERE name = 'PK_ann_status_status_id')
     EXEC sp_rename N'[dbo].[PK_ann_status_status_id]', N'PK_status_ann_status_id', 'OBJECT';
 GO
 
--- 3.4 Первичное наполнение справочника (если пусто)                        -- fileciteturn6file1
+-- 3.4  ace+, ace_log+ Первичное наполнение справочника (если пусто)                        -- fileciteturn6file1
 IF NOT EXISTS (SELECT 1 FROM dbo.status_ann)
 BEGIN
     INSERT INTO dbo.status_ann([name]) VALUES
@@ -70,9 +70,9 @@ BEGIN
 END;
 GO
 ---------------------------------------------------------------------------------------------
--- 4. Расширение art_norm_n (колонки, индексы, типы) ----------------------------------------
+-- 4.  Расширение art_norm_n (колонки, индексы, типы) ----------------------------------------
 ---------------------------------------------------------------------------------------------
--- 4.1 Новые колонки (status, parentId)                                     -- fileciteturn4file19
+-- 4.1 ace+, ace_log+ Новые колонки (status, parentId)                                     -- fileciteturn4file19
 IF COL_LENGTH('dbo.art_norm_n','status') IS NULL
     ALTER TABLE dbo.art_norm_n ADD [status] int NULL;
 IF COL_LENGTH('dbo.art_norm_n','parentId') IS NULL
@@ -311,12 +311,19 @@ GO
 --  Раздел 7. VIEW – ключевые + массовый refresh
 -- =========================================================================================
 
-/* 7.1  artNormNView – главное представление по ANN */
+--/* 7.1  artNormNView – главное представление по ANN */ ПОСЛЕ п.10!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 CREATE OR ALTER VIEW dbo.artNormNView AS
-SELECT annID, articul, mod, kod, sek_vyaz18, sek_vyaz57, [status], parentId,
-       obor, [text], razryd, sek
-FROM   dbo.art_norm_n;
-GO
+SELECT  ann.*
+ ,ISNULL(nr.annID, SPACE(7)) AS nrannID
+FROM dbo.art_norm_n ann
+LEFT JOIN (SELECT
+    annId
+  FROM norm_rasz
+  GROUP BY annId) nr
+  ON ann.annID = nr.annId
+WHERE (annDateDel IS NULL)
+
+
 
 /* 7.3  view_sp_articul – с колонкой annId */
 CREATE OR ALTER VIEW dbo.View_sp_articul AS

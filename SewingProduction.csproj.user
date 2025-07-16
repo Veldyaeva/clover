@@ -70,9 +70,6 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\TeamWork\Forms\TeamWork.Data.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -134,6 +131,12 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\ConfectionCardReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\GetItogVibKartReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\GetItogVibKartSokrReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\MlRtReport.cs">
