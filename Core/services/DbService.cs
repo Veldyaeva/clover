@@ -103,6 +103,29 @@ namespace SewingProduction.Services
             }
         }
         /// <summary>
+        /// Получает первую запись, соответствующую запросу, или значение по умолчанию (null), если ничего не найдено.
+        /// </summary>
+        /// <typeparam name="T">Тип модели</typeparam>
+        /// <param name="query">SQL-запрос</param>
+        /// <param name="parameters">Объект с параметрами запроса</param>
+        /// <returns>Один объект типа T или null</returns>
+        public async Task<T> GetFirstOrDefaultAsync<T>(string query, object parameters)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    return await connection.QueryFirstOrDefaultAsync<T>(query, parameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при выполнении запроса GetFirstOrDefaultAsync: {query}");
+                throw; // Пробрасываем исключение, чтобы вызывающий код мог его обработать
+            }
+        }
+
+        /// <summary>
         /// Вставляет данные в таблицу
         /// </summary>
         /// <typeparam name="T">тип объекта (из модели) для вставки</typeparam>
