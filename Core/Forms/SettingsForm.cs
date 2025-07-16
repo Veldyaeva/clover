@@ -104,6 +104,7 @@ namespace SewingProduction.form
                 "ace",
                 "ace_test",
                 "ace_backup",
+                "ace_backup_new",
                 "global",
                 "oms"
             });
@@ -123,6 +124,7 @@ namespace SewingProduction.form
                 SettingsManager.SaveSelectedDatabase(_user.UserName, selectedDb);
                 MessageBox.Show("Настройки сохранены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            this.Close();
         }
     }
 }

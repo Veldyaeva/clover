@@ -1,7 +1,6 @@
 ﻿using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraGrid.Localization;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using DevExpress.XtraReports.Design;
 using SewingProduction.form;
 using SewingProduction.Models;

@@ -47,7 +47,7 @@ namespace SewingProduction.form
         public SpravBrig()
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
         }

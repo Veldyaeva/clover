@@ -26,17 +26,6 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;U" +
-            "ser ID=sa;Password=kf,bhbyn;Encrypt=False")]
-        public string ACEbackupConnectionString{
-            get {
-                return ((string)(this["ACEbackupConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GLOBAL;Initial Catalog=PLANETA;Integrated Security=True;Encrypt=False" +
             "")]
         public string GlobalConnectionString {
@@ -53,17 +42,6 @@ namespace SewingProduction.Properties {
         public string OMSConnectionString {
             get {
                 return ((string)(this["OMSConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE;Persist Security Info=Tr" +
-            "ue;User ID=sa;Password=kf,bhbyn;Encrypt=False")]
-        public string ACEConnectionString {
-            get {
-                return ((string)(this["ACEConnectionString"]));
             }
         }
         
@@ -99,6 +77,39 @@ namespace SewingProduction.Properties {
             }
             set {
                 this["SelectedTheme"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;U" +
+            "ser ID=sa;Password=kf,bhbyn;Encrypt=False")]
+        public string ACEbackupConnectionString {
+            get {
+                return ((string)(this["ACEbackupConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup_new;User ID=sa;Password=kf,b" +
+            "hbyn;Encrypt=False")]
+        public string ACEbackupnewConnectionString {
+            get {
+                return ((string)(this["ACEbackupnewConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace;Persist Security Info=True;User ID=" +
+            "sa;Password=kf,bhbyn;Encrypt=False")]
+        public string ACEConnectionString {
+            get {
+                return ((string)(this["ACEConnectionString"]));
             }
         }
     }
