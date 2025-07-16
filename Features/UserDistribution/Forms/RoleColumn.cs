@@ -38,7 +38,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             repositoryItemComboBoxColumnMode.EditValueChanged += RepositoryItemComboBoxColumnMode_EditValueChanged;
 
 
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
             _formService = new FormDataService(dbService, dbHelper);
             _objectService = new ObjectDataService(dbService, dbHelper);

@@ -568,7 +568,7 @@ namespace SewingProduction
 
         public async void InitializeAccess(UserClass user, string formName, List<string> tableNames = null)
         {
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
             var roleService = new RoleDataService(dbService, dbHelper);
             var columnService = new AllColumnNameDataService(dbService, dbHelper);

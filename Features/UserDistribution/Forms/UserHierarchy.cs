@@ -21,7 +21,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class UserHierarchy : CustomForm
     {
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         DbService dbService;
         private readonly AllProfileDataService _allProfileDataService;
         private readonly UserModelDataService _userModelDataService;

@@ -26,7 +26,7 @@ using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
@@ -163,7 +163,7 @@ namespace SewingProduction.form
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
@@ -312,12 +312,12 @@ namespace SewingProduction.form
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
-                    AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
                 {
-                    gridViewRasz.PopupMenuShowing -= ShowPopUp(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    gridViewRasz.PopupMenuShowing -= ShowPopUpForRasz(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
                     gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
@@ -390,6 +390,153 @@ namespace SewingProduction.form
             };
         }
 
+        /// <summary>
+        /// Специальный метод для подключения контекстного меню удаления для norm_rasz с перенумерацией
+        /// </summary>
+        private void AttachDeleteContextMenuForRasz(GridView view, BindingList<NormRasz> bindingList, Func<NormRasz, int> getId = null, List<int> deletedIds = null)
+        {
+            try
+            {
+                view.PopupMenuShowing += ShowPopUpForRasz(view, bindingList, getId, deletedIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при удалении строки norm_rasz с перенумерацией");
+            }
+        }
+
+        /// <summary>
+        /// Специальный обработчик контекстного меню для norm_rasz с перенумерацией операций
+        /// </summary>
+        private static PopupMenuShowingEventHandler ShowPopUpForRasz(
+            GridView view,
+            BindingList<NormRasz> bindingList,
+            Func<NormRasz, int> getId,
+            List<int> deletedIds
+        )
+        {
+            return (s, e) =>
+            {
+                if (e.MenuType != GridMenuType.Row)
+                    return;
+
+                var menu = e.Menu;
+                var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    if (!view.IsValidRowHandle(rowHandle)) return;
+
+                    var rowObj = view.GetRow(rowHandle) as NormRasz;
+                    if (rowObj == null) return;
+
+                    // Сохраняем номер удаляемой операции для перенумерации
+                    int deletedOperationN = rowObj.N;
+                    int deletedOperationN1 = rowObj.N1;
+
+                    // Добавляем в список удалённых
+                    if (getId != null && deletedIds != null)
+                    {
+                        int id = getId(rowObj);
+                        if (id > 0)
+                            deletedIds.Add(id);
+                    }
+
+                    // Удаляем строку
+                    bindingList.Remove(rowObj);
+
+                    // Перенумеровываем операции с номерами больше удаленной
+                    RenumberOperationsAfterDeletion(bindingList, deletedOperationN, deletedOperationN1);
+
+                    // Переносим фокус на новую строку
+                    view.GridControl.BeginInvoke(new Action(() =>
+                    {
+                        if (view.DataRowCount == 0) return;
+
+                        // Если удалили не последнюю строку — фокус остаётся на том же индексе
+                        // Если удалили последнюю — фокус на новую последнюю строку
+                        int newRowHandle = Math.Min(rowHandle, view.RowCount - 1);
+                        newRowHandle = view.GetVisibleRowHandle(newRowHandle);
+
+                        if (view.IsValidRowHandle(newRowHandle))
+                        {
+                            view.FocusedRowHandle = newRowHandle;
+                            view.MakeRowVisible(newRowHandle);
+                        }
+
+                        // Обновляем отображение после перенумерации
+                        view.RefreshData();
+                    }));
+                });
+
+                menu.Items.Add(deleteItem);
+            };
+        }
+
+        /// <summary>
+        /// Перенумеровывает операции после удаления строки
+        /// </summary>
+        /// <param name="normRaszList">Список операций</param>
+        /// <param name="deletedOperationN">Номер удаленной операции</param>
+        /// <param name="deletedOperationN1">Номер удаленной подоперации</param>
+        private static void RenumberOperationsAfterDeletion(BindingList<NormRasz> normRaszList, int deletedOperationN, int deletedOperationN1)
+        {
+            if (deletedOperationN1 == 0)
+            {
+                // Удаляется основная операция (например, 3.0)
+                // Нужно перенумеровать все операции с N > deletedOperationN
+                var operationsToRenumber = normRaszList
+                    .Where(r => r.N > deletedOperationN)
+                    .ToList();
+
+                foreach (var operation in operationsToRenumber)
+                {
+                    operation.N -= 1;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                }
+            }
+            else
+            {
+                // Удаляется подоперация (например, 2.3)
+                // Нужно перенумеровать только подоперации с тем же N и N1 > deletedOperationN1
+                var suboperationsToRenumber = normRaszList
+                    .Where(r => r.N == deletedOperationN && r.N1 > deletedOperationN1)
+                    .ToList();
+
+                foreach (var operation in suboperationsToRenumber)
+                {
+                    operation.N1 -= 1;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                }
+
+                // Проверяем, осталась ли только одна операция с данным номером
+                var remainingOperationsWithSameN = normRaszList
+                    .Where(r => r.N == deletedOperationN)
+                    .ToList();
+
+                if (remainingOperationsWithSameN.Count == 1)
+                {
+                    // Если осталась только одна операция, делаем её основной (N1 = 0)
+                    var lastOperation = remainingOperationsWithSameN.First();
+                    if (lastOperation.N1 > 0)
+                    {
+                        lastOperation.N1 = 0;
+                        // Помечаем как измененную, если это не новая запись
+                        if (!lastOperation.IsNew)
+                        {
+                            lastOperation.IsModified = true;
+                        }
+                    }
+                }
+            }
+        }
 
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
