@@ -26,22 +26,22 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GLOBAL;Initial Catalog=PLANETA;Integrated Security=True;Encrypt=False" +
-            "")]
-        public string GlobalConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;U" +
+            "ser ID=sa;Password=kf,bhbyn;Encrypt=False")]
+        public string ACEbackupConnectionString{
             get {
-                return ((string)(this["GlobalConnectionString"]));
+                return ((string)(this["ACEbackupConnectionString"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE_backup;User ID=sa;Password=kf,bhbyn" +
-            ";Encrypt=False")]
-        public string ACEConnectionString1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GLOBAL;Initial Catalog=PLANETA;Integrated Security=True;Encrypt=False" +
+            "")]
+        public string GlobalConnectionString {
             get {
-                return ((string)(this["ACEConnectionString1"]));
+                return ((string)(this["GlobalConnectionString"]));
             }
         }
         
@@ -59,7 +59,7 @@ namespace SewingProduction.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ace_backup_new;Persist Security Info=Tr" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE;Persist Security Info=Tr" +
             "ue;User ID=sa;Password=kf,bhbyn;Encrypt=False")]
         public string ACEConnectionString {
             get {
@@ -99,17 +99,6 @@ namespace SewingProduction.Properties {
             }
             set {
                 this["SelectedTheme"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DBFSV\\DBF2008;Initial Catalog=ACE;Persist Security Info=True;User ID=" +
-            "sa;Password=kf,bhbyn;Encrypt=False")]
-        public string ACEConnectionString2 {
-            get {
-                return ((string)(this["ACEConnectionString2"]));
             }
         }
     }

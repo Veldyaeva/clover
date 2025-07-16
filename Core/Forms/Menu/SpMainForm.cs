@@ -68,7 +68,8 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showHelpForm();
+            string helpPath = Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            showHelpForm(helpPath);
         }
         #endregion
         #region Справочники
@@ -229,9 +230,9 @@ namespace SewingProduction
         {
             showHelpForm();
         }
-        private void showHelpForm()
+        private void showHelpForm(string filePath = null)
         {
-            var helpForm = new HelpForm(this._formManager);
+            var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.Show();
         }
     }
