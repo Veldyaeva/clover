@@ -783,4 +783,37 @@ WHERE nr.kod = (SELECT kod FROM art_norm_n ann WHERE ann.annID = @xAnnID)
 WHERE nr.annId = @xAnnID
 
 
-поменять ХВОСТИК (Спросить у Лены)
+CREATE PROCEDURE dbo.getTbAndImageForRaszReport
+    @annId INT
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @kod CHAR(7), @path NVARCHAR(150), @tb_Id VARCHAR(20);
+
+    -- Получаем kod по annId
+    SELECT TOP 1 @kod = vsa.kod
+    FROM dbo.View_sp_articul vsa
+    WHERE vsa.annId = @annId;
+
+    -- Основная логика поиска файла и tbId
+    SELECT TOP 1
+        @path = N'h:\proizv\eskiz\' + TRIM(psa.nn) + N'.jpg',
+        @tb_Id = psa.tb_Id
+    FROM (
+        SELECT kodd, MAX(nn) nn, MAX(tb_Id) tb_Id
+        FROM plan_sezon_all
+        WHERE pict_prn = 1
+        GROUP BY kodd
+    ) psa
+    WHERE psa.kodd = @kod;
+
+    IF ISNULL(@path, N'') = N''
+    BEGIN
+        SET @path = N'h:\proizv\picture\' + TRIM(@kod) + N'.jpg';
+        SET @tb_Id = NULL;
+    END
+
+    SELECT @path AS FileEskizPath, @tb_Id AS tb_Id, @kod AS kod;
+END
+GO
