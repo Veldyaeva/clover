@@ -35,7 +35,7 @@ namespace SewingProduction.form
         public SpravZeh(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _spravZehDataService = new SpravZehDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
             ThemeManager.UpdateTheme(this);

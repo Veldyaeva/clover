@@ -8,8 +8,9 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Forms;
+using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
+using SewingProduction.Features.TeamWork.Forms;
 
 namespace SewingProduction
 {
@@ -67,7 +68,8 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showHelpForm();
+            string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            showHelpForm(helpPath);
         }
         #endregion
         #region Справочники
@@ -228,9 +230,9 @@ namespace SewingProduction
         {
             showHelpForm();
         }
-        private void showHelpForm()
+        private void showHelpForm(string filePath = null)
         {
-            var helpForm = new HelpForm(this._formManager);
+            var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.Show();
         }
     }

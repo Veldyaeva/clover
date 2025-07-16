@@ -26,7 +26,7 @@ using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
@@ -163,7 +163,7 @@ namespace SewingProduction.form
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);

@@ -11,7 +11,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class NormOperNew : CustomForm
     {
@@ -30,7 +30,7 @@ namespace SewingProduction.form
         public NormOperNew(int annId)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
 
