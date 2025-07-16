@@ -1033,6 +1033,7 @@ namespace SewingProduction.form
             customButton3.TabIndex = 0;
             customButton3.Text = "Добавить";
             customButton3.UseVisualStyleBackColor = false;
+            customButton3.Click += customButton3_Click;
             // 
             // customButton4
             // 
@@ -1046,6 +1047,7 @@ namespace SewingProduction.form
             customButton4.TabIndex = 1;
             customButton4.Text = "Копия";
             customButton4.UseVisualStyleBackColor = false;
+            customButton4.Click += customButton4_Click;
             // 
             // customButton5
             // 

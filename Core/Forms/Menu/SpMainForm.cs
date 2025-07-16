@@ -8,9 +8,9 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Forms;
+using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
-using System.IO;
+using SewingProduction.Features.TeamWork.Forms;
 
 namespace SewingProduction
 {
@@ -68,7 +68,7 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            string helpPath = Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
             showHelpForm(helpPath);
         }
         #endregion

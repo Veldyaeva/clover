@@ -11,6 +11,9 @@ using SewingProduction.Report;
 using System.Diagnostics;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Help.Form;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -23,7 +26,7 @@ namespace SewingProduction.form
         //public Articul(UserClass user) : base(user)
         public Articul()
         {
-            _dbHelperAce = new DatabaseHelper("ace");
+            _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
 
         }
@@ -266,44 +269,50 @@ namespace SewingProduction.form
         {
             GetItogVibKartReport report = new GetItogVibKartReport();
             report.RequestParameters = false;
+
             object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
             var kod = ((DataRowView)data).Row["kod"].ToString();
+            //var kod = "30367001";
             Debug.WriteLine(kod);
             report.Parameters["kod"].Value = kod;
+
+            var ds = report.sqlDataSource1;
+            var query = ds.Queries[0] as DevExpress.DataAccess.Sql.StoredProcQuery;
+            query.Parameters[0].Value = kod;
+
+            ds.Fill();
+
+            report.DataSource = ds;
+            report.DataMember = "GetItogVibKart";
+
             ReportPrintTool reportPrintTool = new ReportPrintTool(report);
             reportPrintTool.ShowPreviewDialog();
 
-            //    // Получаем выбранную строку из GridView
-            //    var view = gridView1; // имя твоего GridView
+            //сокарщенный :
+            GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
+            reportSokr.RequestParameters = false;
+            reportSokr.Parameters["kod"].Value = kod;
+            reportSokr.DataSource = ds;
+            reportSokr.DataMember = "GetItogVibKart";
+            ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
+            reportSokrPrintTool.ShowPreviewDialog();
 
-            //    // Получаем значение kol из выбранной строки
-            //    var kod = view.GetRowCellValue(view.FocusedRowHandle, "kod")?.ToString();
-
-            //    object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
-            //    if (data != null)
-            //    { 
-            //        kod = ((DataRowView)data).Row["kod"].ToString();
-            //    }
-
-            //    if (string.IsNullOrWhiteSpace(kod))
-            //    {
-            //        MessageBox.Show("Поле 'kod' пустое.");
-            //        return;
-            //    }
-            //    Debug.WriteLine(kod);
-            //    // Создаем отчет
-            //    var report = new GetItogVibKartReport(); // имя твоего отчета
-            //    report.Parameters["kod"].Value = kod;
-            //    report.Parameters["kod"].Visible = false;
-            //    report.Parameters["kod"].AllowNull = false;
-            //    report.Parameters["kod"].Description = "kod";
-            //    report.Parameters["kod"].Type = typeof(string);
-            //    report.RequestParameters = false;
-
-            //    // Показываем отчет
-            //    var printTool = new DevExpress.XtraReports.UI.ReportPrintTool(report);
-            //    printTool.ShowPreview();
         }
 
+        private void customButton3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void customButton4_Click(object sender, EventArgs e)
+        {
+            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
+            var kod = ((DataRowView)data).Row["kod"].ToString();
+            art_new2024 f = new art_new2024(kod);
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                // Обновляем таблицу
+                Articul_Load(sender, e);
+            }
+        }
     }
 }

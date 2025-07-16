@@ -16,7 +16,7 @@ using System.Data;
 using DevExpress.XtraGrid;
 using System.ComponentModel;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {

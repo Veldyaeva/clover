@@ -1,6 +1,6 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class TeamWork_AdvanceTW
     {

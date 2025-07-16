@@ -18,6 +18,7 @@ using SewingProduction.Features.TeamWork;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
+using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
 using System.Collections;
@@ -32,7 +33,7 @@ using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
 using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
@@ -86,7 +87,7 @@ namespace SewingProduction.Forms
             ANNgridView.PreviewLineCount = 1;
             //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
 
@@ -661,16 +662,20 @@ namespace SewingProduction.Forms
             _gridHelper.popUpMenuCopy(sender, e);
         }
 
-        private void PrintButton_Click(object sender, EventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// Печать технологической схемы разделения труда
         /// </summary>
         private async void PrintWorkDivisionScheme_Click(object sender, EventArgs e)
         {
+            int rowNumber = ANNgridView.FocusedRowHandle;
+
+            NormRaszTest report1 = new NormRaszTest();
+            //report1.RequestParameters = false;
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+
+            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
         }
 
         private void gridControl_wdToBind_Click(object sender, EventArgs e)
