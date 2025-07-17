@@ -443,7 +443,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                         if (index >= 0)
                             list[index] = updatedDataAnn;
-
+                        // 4. НАХОДИМ И ЗАМЕНЯЕМ СТАРЫЙ ОБЪЕКТ В ИСТОЧНИКЕ ДАННЫХ (ЭТО КЛЮЧЕВОЙ ШАГ)
+                        // Находим индекс старой записи в списке _bindingList
+                        int i = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == updatedArtNormN.AnnID));
+                        if (i >= 0)
+                        {
+                            // Заменяем старый объект на новый. Это гарантирует, что все поля,
+                            // включая `Sek`, будут обновлены в источнике данных.
+                            _bindingList[i] = updatedArtNormN;
+                        }
                         bindingSource.ResetBindings(false);
                         int rowHandle = gridView.LocateByValue("AnnID", updatedArtNormN.AnnID);
                         if (rowHandle >= 0)

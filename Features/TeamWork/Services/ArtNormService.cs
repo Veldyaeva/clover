@@ -498,7 +498,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -509,7 +509,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();
