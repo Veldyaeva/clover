@@ -12,38 +12,69 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.Win32;
+using System.Runtime.InteropServices;
 using Z.Dapper.Plus;
+
 
 namespace SewingProduction.Core
 {
     internal static class Program
     {
+        // WinAPI — функции для управления окнами
+        [DllImport("user32.dll")]
+        private static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
+
+        private const int SW_RESTORE = 9;
         /// <summary>
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
         static void Main()
         {
-                SetIEFeatureMode();
-            DapperMappings.Configure();
-            GridLocalizer.Active = new CustomLocalizer();
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            DapperMappings.Configure();
-            using (SplashScreen splashScreen = new SplashScreen())
+            // Уникальное имя Mutex
+            bool createdNew;
+            using (var mutex = new Mutex(true, "SewingProductionAppMutex", out createdNew))
             {
-                SplashScreen splash = new SplashScreen();
-                splash.Show();
-                splash.Update(); // Чтобы экран сразу отобразился
-                Application.DoEvents(); // Важно для обновления UI заставки                     
-                SpMainForm mainForm = new SpMainForm();// Загружаем основную форму
-                Thread.Sleep(2000); // Пример задержки - 2 секунды
-                ThemeManager.LoadTheme();//Загружаем тему
-                splash.Close(); // Закрываем сплэш
-                Application.Run(new SpMainForm());
-            }
+                if (!createdNew)
+                {
+                    // Ищем главное окно по заголовку (он должен быть уникальным!)
+                    IntPtr hWnd = FindWindow(null, "Швейное производство"); // название главной формы
+                    if (hWnd != IntPtr.Zero)
+                    {
+                        ShowWindow(hWnd, SW_RESTORE); // восстанавливаем, если свернуто
+                        SetForegroundWindow(hWnd);    // переводим в активное
+                    }
+                    return;
+                }
 
+                SetIEFeatureMode();
+                GridLocalizer.Active = new CustomLocalizer();
+
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                DapperMappings.Configure();
+
+                using (SplashScreen splashScreen = new SplashScreen())
+                {
+                    splashScreen.Show();
+                    splashScreen.Update();
+                    Application.DoEvents();
+
+                    SpMainForm mainForm = new SpMainForm();
+                    Thread.Sleep(2000);
+                    ThemeManager.LoadTheme();
+                    splashScreen.Close();
+
+                    Application.Run(mainForm);
+                }
+            }
         }
         public class CustomLocalizer : GridLocalizer
         {

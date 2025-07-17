@@ -249,6 +249,10 @@
             DevExpress.DataAccess.Sql.Column column99 = new DevExpress.DataAccess.Sql.Column();
             DevExpress.DataAccess.Sql.ColumnExpression columnExpression99 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter4 = new DevExpress.DataAccess.Sql.QueryParameter();
+            DevExpress.DataAccess.Sql.Sorting sorting1 = new DevExpress.DataAccess.Sql.Sorting();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression100 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Sorting sorting2 = new DevExpress.DataAccess.Sql.Sorting();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression101 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter5 = new DevExpress.DataAccess.Sql.QueryParameter();
             DevExpress.DataAccess.Sql.SelectQuery selectQuery5 = new DevExpress.DataAccess.Sql.SelectQuery();
@@ -1264,6 +1268,8 @@
             this.xrTable1});
             this.Detail1.HeightF = 27F;
             this.Detail1.Name = "Detail1";
+            this.Detail1.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("n1", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             // 
             // xrTable1
             // 
@@ -2502,6 +2508,14 @@
             queryParameter4.Value = new DevExpress.DataAccess.Expression("?_annId", typeof(int));
             selectQuery4.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter4});
+            columnExpression100.ColumnName = "n";
+            columnExpression100.Table = table6;
+            sorting1.Expression = columnExpression100;
+            columnExpression101.ColumnName = "n1";
+            columnExpression101.Table = table6;
+            sorting2.Expression = columnExpression101;
+            selectQuery4.Sorting.Add(sorting1);
+            selectQuery4.Sorting.Add(sorting2);
             selectQuery4.Tables.Add(table6);
             storedProcQuery1.MetaSerializable = "<Meta X=\"784\" Y=\"20\" Width=\"115\" Height=\"101\" />";
             storedProcQuery1.Name = "getImageAndTb";
@@ -2565,6 +2579,7 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(90697, "джемпер женский"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(91970, "джемпер женский"));
             this._annId.ValueSourceSettings = staticListLookUpSettings1;
+            this._annId.Visible = false;
             // 
             // GroupFooter3
             // 
