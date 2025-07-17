@@ -314,6 +314,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                   // AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
@@ -1696,7 +1697,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 foreach (var item in itemsToInsert)
                 {
-                    var annIdProp = typeof(T).GetProperty("AnnId");
+                    var annIdProp = typeof(T).GetProperty("annId");
                     if (annIdProp != null)
                     {
                         annIdProp.SetValue(item, newAnnId);
