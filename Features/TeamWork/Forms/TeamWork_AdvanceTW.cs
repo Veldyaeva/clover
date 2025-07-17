@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -312,12 +313,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
-                    AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
                 {
-                    gridViewRasz.PopupMenuShowing -= ShowPopUpForRasz(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    gridViewRasz.PopupMenuShowing -= ShowPopUpForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
                     gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
@@ -739,12 +740,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _normRaszList.Clear();
                     foreach (var item in raszToCopy)
                     {
-                        item.AnnId = _currentAnnData.AnnID;
+                        item.annId = _currentAnnData.AnnID;
                         //item.IsNew = true;
                         //item.IsModified = true;
                         item.IsNew = false;
                         item.IsModified = false;
-                        item.nrId = 0; // Сброс ID для новой записи
+                        item.nrID = 0; // Сброс ID для новой записи
                         _normRaszList.Add(item);
                     }
                     _normRaszBindingSource.ResetBindings(false);
@@ -1195,7 +1196,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Восстанавливаем оригинальные данные.
                     _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit);
-                    _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrId}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
+                    _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrID}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
                     _normRaszBindingSource.ResetBindings(false);
                 }
             }
@@ -1237,7 +1238,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     var row = gridView.GetRow(e.RowHandle) as NormRasz;
                     // Если это существующая, сохраненная строка, и EditForm была закрыта без Update (и не Cancel/Abort)
-                    if (row != null && row.nrId > 0 && !row.IsNew)
+                    if (row != null && row.nrID > 0 && !row.IsNew)
                     {
                         // Эта логика подразумевает, что закрытие EditForm для существующей строки
                         // способами, отличными от "Update", "Cancel", или "Abort", может привести к удалению.
@@ -1251,7 +1252,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             _normRaszList.Remove(row);
                         }
                         */
-                        await _logger.LogEventAsync($"EditFormHidden for existing row (nrId: {row.nrId}) with Result: {e.Result}. Original delete logic is currently commented.", "gridViewRasz_EditFormHidden");
+                        await _logger.LogEventAsync($"EditFormHidden for existing row (nrId: {row.nrID}) with Result: {e.Result}. Original delete logic is currently commented.", "gridViewRasz_EditFormHidden");
                     }
                     // Запасной вариант для новой строки, которая могла не быть обработана RowEditCanceled (должно быть редко)
                     else if (row != null && row.IsNew)
@@ -1650,7 +1651,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId, List<int> deletedIds)
-    where T : class, INewable, new()
+    where T : class, INewable, IModifiable, new()
         {
             var stopwatch = Stopwatch.StartNew();
             var bulkStopwatch = new Stopwatch();
@@ -1673,7 +1674,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 // Обычная логика: новые записи - вставка, существующие - обновление
                 itemsToInsert = list.Where(x => x.IsNew).ToList();
-                itemsToUpdate = list.Where(x => !x.IsNew).ToList();
+                itemsToUpdate = list.Where(x => x.IsModified && !x.IsNew).ToList();
             }
 
             string itemTypeName = typeof(T).Name;
@@ -1701,16 +1702,31 @@ namespace SewingProduction.Features.TeamWork.Forms
                         annIdProp.SetValue(item, newAnnId);
                     }
                 }
-
+                var logStringBuilder = new StringBuilder();
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", "SaveListAsync");
-                    bulkStopwatch.Restart();
-                    await connection.BulkInsertAsync(itemsToInsert);
-                    bulkStopwatch.Stop();
+                    try
+                    {
+                        await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", "SaveListAsync");
+                        bulkStopwatch.Restart();
+                        //await connection.BulkInsertAsync(itemsToInsert);
+                        await connection.UseBulkOptions(options =>
+                        {
+                            // Включаем логирование и указываем, куда записывать лог
+                            options.Log = (log) => logStringBuilder.AppendLine(log);
+                        })
+                   .BulkInsertAsync(itemsToInsert);
+                        bulkStopwatch.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Если произошла ошибка, сначала записываем перехваченный SQL-запрос
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}]. Перехваченный SQL:\n{logStringBuilder.ToString()}");
+                        throw; // Пробрасываем исключение дальше
+                    }
                 }
 
-                foreach (var item in itemsToInsert)
+                    foreach (var item in itemsToInsert)
                     item.IsNew = false;
             }
 

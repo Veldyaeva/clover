@@ -99,7 +99,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (view == null || view.FocusedRowHandle < 0) return;
 
                 SelectedRowData = NormalizeDataFromView(view, view.FocusedRowHandle);
-                SelectedRowData.AnnId = _annId; // AnnId устанавливается здесь
+                SelectedRowData.annId = _annId; // AnnId устанавливается здесь
                 SelectedRowData.IsNew = true;   // IsNew также устанавливается здесь
 
                 this.DialogResult = DialogResult.OK;

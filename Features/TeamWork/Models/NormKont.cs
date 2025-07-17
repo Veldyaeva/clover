@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace SewingProduction.Models
 {
@@ -15,7 +16,8 @@ namespace SewingProduction.Models
         public bool IsNew { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
-        [NotMapped]
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)] // Указываем, что значение генерируется БД
         public int nkId { get; set; }
         public int AnnId { get; set; }
         [Column("kod")]
