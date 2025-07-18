@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form
 {
     partial class PlanZagrBrig
     {
@@ -42,7 +43,7 @@
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.simpleButton20 = new SewingProduction.CustomSimpleButton();
-            this.gridControlMlOp = new SewingProduction.CustomGridControl();
+            this.gridControlMlOp = new CustomGridControl();
             this.gridViewMlOp = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn51 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -134,7 +135,7 @@
             this.customLabel17 = new SewingProduction.CustomLabel();
             this.customLabel18 = new SewingProduction.CustomLabel();
             this.customLabel19 = new SewingProduction.CustomLabel();
-            this.gridControlPzOperList = new SewingProduction.CustomGridControl();
+            this.gridControlPzOperList = new    CustomGridControl();
             this.gridViewPzOperList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -170,7 +171,7 @@
             this.simpleButton2 = new SewingProduction.CustomSimpleButton();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.tbPList = new SewingProduction.CustomTextBox();
-            this.gridControlPzArticulList = new SewingProduction.CustomGridControl();
+            this.gridControlPzArticulList = new CustomGridControl();
             this.gridViewPzArticulList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -181,7 +182,7 @@
             this.gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridControlPzNomList = new SewingProduction.CustomGridControl();
+            this.gridControlPzNomList = new CustomGridControl();
             this.gridViewPzNomList = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
