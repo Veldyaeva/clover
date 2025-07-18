@@ -79,7 +79,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             repositoryItemCheckEdit1 = new RepositoryItemCheckEdit();
             repositoryItemButtonEdit2 = new RepositoryItemButtonEdit();
             xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
-            TabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            TabPage1 = new CustomTabPage();
             layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
             constructorTextBox = new RichTextBox();
             designerTextBox = new RichTextBox();
@@ -215,9 +215,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             simpleSeparator6 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlItem24 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
-            xtraTabPageArticles = new DevExpress.XtraTab.XtraTabPage();
+            xtraTabPageArticles = new CustomTabPage();
             xtraTabControl2 = new DevExpress.XtraTab.XtraTabControl();
-            xtraTabPageWorkDivisions = new DevExpress.XtraTab.XtraTabPage();
+            xtraTabPageWorkDivisions = new CustomTabPage();
             panelControl2 = new PanelControl();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             pictureBox3 = new PictureBox();
@@ -310,7 +310,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlItem19 = new DevExpress.XtraLayout.LayoutControlItem();
-            xtraTabPage3 = new DevExpress.XtraTab.XtraTabPage();
+            xtraTabPage3 = new CustomTabPage();
             splitContainerControl2 = new SplitContainerControl();
             customButton2 = new CustomButton();
             flyoutPanel1 = new DevExpress.Utils.FlyoutPanel();
@@ -3427,8 +3427,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         #endregion
 
         private DevExpress.XtraTab.XtraTabControl xtraTabControl1;
-        private DevExpress.XtraTab.XtraTabPage TabPage1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageArticles;
+        private CustomTabPage TabPage1;
+        private CustomTabPage xtraTabPageArticles;
         private System.Windows.Forms.BindingSource normraszBindingSource;
         private System.Windows.Forms.BindingSource normraskBindingSource;
         private System.Windows.Forms.BindingSource normkontBindingSource;
@@ -3597,7 +3597,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraGrid.Columns.GridColumn colkod;
         private System.Windows.Forms.BindingSource bindingSource1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPage3;
+        private CustomTabPage xtraTabPage3;
         private CustomButton customButton2;
         private CustomGridControl gridControlPreArch;
         private BindingSource sparticulBindingSource;
@@ -3611,7 +3611,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private BindingSource normraszBindingSource1;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageWorkDivisions;
+        private CustomTabPage xtraTabPageWorkDivisions;
         private BindingSource artnormnBindingSource2;
         RepositoryItemButtonEdit buttonEdit = new RepositoryItemButtonEdit();
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;

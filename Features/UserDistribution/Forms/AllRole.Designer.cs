@@ -63,6 +63,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonDeleteRole = new CustomButton();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customButtonCopyRole = new CustomButton();
+            ObjectNameRus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)gridViewForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemComboBoxForms).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlRoles).BeginInit();
@@ -307,7 +308,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewObject.Appearance.Row.Options.UseBackColor = true;
             gridViewObject.AppearancePrint.EvenRow.BackColor = System.Drawing.Color.FromArgb(192, 192, 255);
             gridViewObject.AppearancePrint.EvenRow.Options.UseBackColor = true;
-            gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, HasAccessObject });
+            gridViewObject.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ObjectID, ObjectName, HasAccessObject, ObjectNameRus });
             gridViewObject.DetailHeight = 4038;
             gridViewObject.GridControl = customGridControlRoles;
             gridViewObject.Name = "gridViewObject";
@@ -337,7 +338,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             ObjectName.OptionsColumn.ReadOnly = true;
             ObjectName.Visible = true;
             ObjectName.VisibleIndex = 0;
-            ObjectName.Width = 633;
+            ObjectName.Width = 399;
             // 
             // HasAccessObject
             // 
@@ -347,8 +348,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             HasAccessObject.MinWidth = 23;
             HasAccessObject.Name = "HasAccessObject";
             HasAccessObject.Visible = true;
-            HasAccessObject.VisibleIndex = 1;
-            HasAccessObject.Width = 478;
+            HasAccessObject.VisibleIndex = 2;
+            HasAccessObject.Width = 328;
             // 
             // repositoryItemCheckEditForms
             // 
@@ -437,6 +438,15 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customButtonCopyRole.UseVisualStyleBackColor = false;
             customButtonCopyRole.Click += customButtonCopyRole_Click;
             // 
+            // ObjectNameRus
+            // 
+            ObjectNameRus.Caption = "Имя объекта (рус)";
+            ObjectNameRus.FieldName = "ObjectNameRus";
+            ObjectNameRus.Name = "ObjectNameRus";
+            ObjectNameRus.Visible = true;
+            ObjectNameRus.VisibleIndex = 1;
+            ObjectNameRus.Width = 361;
+            // 
             // AllRole
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -493,5 +503,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraEditors.Repository.RepositoryItemCheckedComboBoxEdit repositoryItemCheckedComboBoxEdit1;
         private CustomButton customButtonCopyRole;
         private DevExpress.XtraGrid.Columns.GridColumn NameFormRus;
+        private DevExpress.XtraGrid.Columns.GridColumn ObjectNameRus;
     }
 }

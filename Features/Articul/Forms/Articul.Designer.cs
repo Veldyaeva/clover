@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.form
 {

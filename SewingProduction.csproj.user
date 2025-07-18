@@ -7,10 +7,16 @@
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomGridControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\CustomControls\CustomGridControlColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
