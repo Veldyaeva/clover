@@ -6,6 +6,7 @@ using SewingProduction.form.TeamWork;
 using SewingProduction.Models;
 using System;
 using System.Windows.Forms;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {

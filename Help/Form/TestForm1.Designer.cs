@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class TestForm1
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            customGridControl1 = new CustomGridControl();
+            customGridControl1 = new CustomGridControlColumn();
             bindingSource1 = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             TestID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -207,7 +208,7 @@
 
         #endregion
 
-        private CustomGridControl customGridControl1;
+        private CustomGridControlColumn customGridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private CustomGroupBox customGroupBox1;
         private CustomLabel customLabel1;
