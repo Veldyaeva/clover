@@ -142,7 +142,7 @@ namespace SewingProduction
         #endregion
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TeamWork(), sender);
+            OpenForm(new TeamWork(_user), sender);
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {

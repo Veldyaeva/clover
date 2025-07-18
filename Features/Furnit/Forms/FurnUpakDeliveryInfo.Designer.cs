@@ -92,11 +92,11 @@ namespace SewingProduction.form
             this.gridColumnReestrFurnDeliveryBagSostRfdbsShtr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnDeliveryBagSostRfdbsNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReestrFurnDeliveryBagSostRfdbsID = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.button1 = new SewingProduction.CustomButton();
-            this.button2 = new SewingProduction.CustomButton();
-            this.button3 = new SewingProduction.CustomButton();
-            this.button4 = new SewingProduction.CustomButton();
-            this.button5 = new SewingProduction.CustomButton();
+            this.button1 = new CustomButton();
+            this.button2 = new CustomButton();
+            this.button3 = new CustomButton();
+            this.button4 = new CustomButton();
+            this.button5 = new CustomButton();
             this.gridColumn24 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumn25 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
@@ -105,7 +105,7 @@ namespace SewingProduction.form
             this.tablePanel4 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel3 = new DevExpress.Utils.Layout.TablePanel();
             this.tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            this.customSimpleButton1 = new SewingProduction.CustomSimpleButton();
+            this.customSimpleButton1 = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlReestrFurn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsReestrFurn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewReestrFurn)).BeginInit();

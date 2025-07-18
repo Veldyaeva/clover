@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {

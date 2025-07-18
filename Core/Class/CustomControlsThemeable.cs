@@ -19,6 +19,7 @@ using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Services;
 using System.Diagnostics;
 using System.Linq;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction
 {
@@ -31,70 +32,70 @@ namespace SewingProduction
         string ObjectName { get; set; }
         void ApplyPermission(UserClass user);
     }
-    public class CustomButton : Button, IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomButton()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
+    //public class CustomButton : Button, IThemeable, IThemeableControl
+    //{
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public string ObjectName { get; set; }
+    //    public CustomButton()
+    //    {
+    //        ApplyTheme();
+    //        ThemeManager.ThemeChanged += OnThemeChanged;
+    //    }
 
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-            FlatStyle = FlatStyle.Standard;
-            FlatAppearance.BorderSize = 1;
-            Height = ThemeManager.SharedSettings.ButtonHeight;
-        }
+    //    public void ApplyTheme()
+    //    {
+    //        BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+    //        ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+    //        Font = ThemeManager.SharedSettings.DefaultFont;
+    //        FlatStyle = FlatStyle.Standard;
+    //        FlatAppearance.BorderSize = 1;
+    //        Height = ThemeManager.SharedSettings.ButtonHeight;
+    //    }
 
-        private void OnThemeChanged() => ApplyTheme();
+    //    private void OnThemeChanged() => ApplyTheme();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
-    public class CustomOkButton : CustomButton, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomOkButton()
-        {
-            Text = "OK";
-            DialogResult = DialogResult.OK;
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            ThemeManager.ThemeChanged -= OnThemeChanged;
+    //        }
+    //        base.Dispose(disposing);
+    //    }
+    //    public void ApplyPermission(UserClass user)
+    //    {
+    //        PermissionHelper.ApplyTo(this, ObjectName, user);
+    //    }
+    //}
+    //public class CustomOkButton : CustomButton, IThemeableControl
+    //{
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public string ObjectName { get; set; }
+    //    public CustomOkButton()
+    //    {
+    //        Text = "OK";
+    //        DialogResult = DialogResult.OK;
+    //    }
+    //    public void ApplyPermission(UserClass user)
+    //    {
+    //        PermissionHelper.ApplyTo(this, ObjectName, user);
+    //    }
+    //}
 
-    public class CustomCancelButton : CustomButton, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomCancelButton()
-        {
-            Text = "Cancel";
-            DialogResult = DialogResult.Cancel;
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
+    //public class CustomCancelButton : CustomButton, IThemeableControl
+    //{
+    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+    //    public string ObjectName { get; set; }
+    //    public CustomCancelButton()
+    //    {
+    //        Text = "Cancel";
+    //        DialogResult = DialogResult.Cancel;
+    //    }
+    //    public void ApplyPermission(UserClass user)
+    //    {
+    //        PermissionHelper.ApplyTo(this, ObjectName, user);
+    //    }
+    //}
 
     public class CustomTextBox : TextBox, IThemeable, IThemeableControl
     {
@@ -162,47 +163,54 @@ namespace SewingProduction
     }
 
 
-    public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable
+    //public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable, IThemeableControl
+    //{
+    //    public string ObjectName { get; set; }
+    //    public CustomSimpleButton()
+    //    {
+    //        ApplyTheme();
+    //        ThemeManager.ThemeChanged += OnThemeChanged;
+    //    }
+
+    //    public void ApplyTheme()
+    //    {
+
+    //        Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+    //        Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+    //        Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
+
+    //        AppearanceDisabled.BackColor = Color.Green;
+    //        AppearanceDisabled.ForeColor = Color.GreenYellow;
+    //        AppearanceDisabled.Options.UseBackColor = true;
+    //        AppearanceDisabled.Options.UseForeColor = true;
+    //        //BackColor = ThemeManager.ActiveTheme.ButtonBackground;
+    //        //ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
+    //        //Font = ThemeManager.SharedSettings.DefaultFont;
+
+    //        //FlatStyle = FlatStyle.Standard;
+    //        //FlatAppearance.BorderSize = 1;
+    //        Height = ThemeManager.SharedSettings.ButtonHeight;
+    //    }
+
+    //    private void OnThemeChanged() => ApplyTheme();
+
+    //    protected override void Dispose(bool disposing)
+    //    {
+    //        if (disposing)
+    //        {
+    //            ThemeManager.ThemeChanged -= OnThemeChanged;
+    //        }
+    //        base.Dispose(disposing);
+    //    }
+
+    //    public void ApplyPermission(UserClass user)
+    //    {
+    //        PermissionHelper.ApplyTo(this, ObjectName, user);
+    //    }
+    //}
+    public class CustomRadioButton : RadioButton, IThemeable, IThemeableControl
     {
-        public CustomSimpleButton()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
-
-        public void ApplyTheme()
-        {
-
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
-            //BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            //ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            //Font = ThemeManager.SharedSettings.DefaultFont;
-
-            //FlatStyle = FlatStyle.Standard;
-            //FlatAppearance.BorderSize = 1;
-            Height = ThemeManager.SharedSettings.ButtonHeight;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-    }
-    public class CustomRadioButton : RadioButton, IThemeable
-    {
+        public string ObjectName { get; set; }
         public CustomRadioButton()
         {
             ApplyTheme();
@@ -222,9 +230,14 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
     }
-    public class CustomDateTimePicker : DateTimePicker, IThemeable
+    public class CustomDateTimePicker : DateTimePicker, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomDateTimePicker()
         {
             ApplyTheme();
@@ -245,9 +258,14 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
     }
-    public class CustomNumericUpDown : NumericUpDown, IThemeable
+    public class CustomNumericUpDown : NumericUpDown, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomNumericUpDown()
         {
             ApplyTheme();
@@ -268,9 +286,14 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
     }
-    public class CustomListBox : ListBox, IThemeable
+    public class CustomListBox : ListBox, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomListBox()
         {
             ApplyTheme();
@@ -291,9 +314,14 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
     }
-    public class CustomCheckedListBox : CheckedListBox, IThemeable
+    public class CustomCheckedListBox : CheckedListBox, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomCheckedListBox()
         {
             ApplyTheme();
@@ -314,9 +342,14 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
     }
-    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable
+    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomTextBoxEx()
         {
             ApplyTheme();
@@ -336,6 +369,10 @@ namespace SewingProduction
                 ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
+        }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
         }
     }
 
@@ -406,8 +443,9 @@ namespace SewingProduction
         }
     }
 
-    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable
+    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
         public CustomTabControl()
         {
             ApplyTheme();
@@ -429,6 +467,10 @@ namespace SewingProduction
                 ThemeManager.ThemeChanged -= OnThemeChanged;
             }
             base.Dispose(disposing);
+        }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
         }
     }
 
@@ -593,6 +635,7 @@ namespace SewingProduction
         }
         public CustomForm(UserClass user)
         {
+            Debug.WriteLine("кастом форма");
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
@@ -679,21 +722,51 @@ namespace SewingProduction
             {
                 if (ctrl is IThemeableControl themeable)
                 {
-                    // Если ObjectName не задан вручную — ставим по имени контрола
                     if (string.IsNullOrEmpty(themeable.ObjectName) && !string.IsNullOrEmpty(ctrl.Name))
-                    {
                         themeable.ObjectName = ctrl.Name;
-                    }
 
-                    themeable.ApplyPermission(user);
+                    string name = themeable.ObjectName ?? ctrl.Name;
+                    bool hasWrite = user.HasPermission(name, "Редактор");
+                    bool hasRead = user.HasPermission(name, "Просмотр");
+
+                    Debug.WriteLine($"[Доступ Control] Объект: {name}, Просмотр: {hasRead}, Редактор: {hasWrite}");
+
+                    if (!ctrl.GetType().Name.StartsWith("Custom"))
+                        PermissionHelper.ApplyTo(ctrl, name, user);
+                    else
+                        themeable.ApplyPermission(user);
                 }
 
-                if (ctrl.HasChildren)
+                // Обработка табов — обязательно
+                if (ctrl is DevExpress.XtraTab.XtraTabControl tabControl)
                 {
-                    ApplyPermissionsToControls(ctrl, user);
+                    foreach (DevExpress.XtraTab.XtraTabPage tabPage in tabControl.TabPages)
+                    {
+                        if (tabPage is IThemeableControl themeableTab)
+                        {
+                            if (string.IsNullOrEmpty(themeableTab.ObjectName) && !string.IsNullOrEmpty(tabPage.Name))
+                                themeableTab.ObjectName = tabPage.Name;
+
+                            string tabName = themeableTab.ObjectName ?? tabPage.Name;
+                            bool hasWrite = user.HasPermission(tabName, "Редактор");
+                            bool hasRead = user.HasPermission(tabName, "Просмотр");
+
+                            Debug.WriteLine($"[Доступ TabPage] Вкладка: {tabName}, Просмотр: {hasRead}, Редактор: {hasWrite}");
+
+                            themeableTab.ApplyPermission(user);
+                        }
+
+                        // 🔁 Обработка всех контролов внутри вкладки
+                        ApplyPermissionsToControls(tabPage, user);
+                    }
                 }
+
+                // 🔁 Рекурсивно обрабатываем все вложенные контролы
+                if (ctrl.HasChildren)
+                    ApplyPermissionsToControls(ctrl, user);
             }
         }
+
         private void DisableAllControls(Control parent)
         {
             foreach (Control ctrl in parent.Controls)
@@ -711,13 +784,22 @@ namespace SewingProduction
     {
         public static void ApplyTo(Control ctrl, string objectName, UserClass user)
         {
-            if (string.IsNullOrEmpty(objectName)) return;
+            if (string.IsNullOrEmpty(objectName))
+                objectName = ctrl.Name;
+
+            if (string.IsNullOrEmpty(objectName))
+            {
+                Debug.WriteLine("[PermissionHelper] objectName не найден");
+                return;
+            }
 
             bool hasWrite = user.HasPermission(objectName, "Редактор");
             bool hasRead = user.HasPermission(objectName, "Просмотр");
 
-            ctrl.Visible = hasRead || hasWrite;
+            //Debug.WriteLine($"[PermissionHelper] {objectName}: Просмотр={hasRead}, Редактор={hasWrite}");
+
             ctrl.Enabled = hasWrite;
+            ctrl.Visible = hasRead || hasWrite;
         }
     }
 }

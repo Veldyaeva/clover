@@ -15,6 +15,7 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraSpreadsheet.Import.Xls;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.TeamWork;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -80,7 +81,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private CancellationTokenSource _loadCts = new CancellationTokenSource();
 
-        public TeamWork()
+        public TeamWork(UserClass user) : base(user)
         {
             InitializeComponent();
             ANNgridView.OptionsView.ShowPreview = true;

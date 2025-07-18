@@ -13,6 +13,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
+using System.Diagnostics;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -156,6 +157,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         public async Task<int> GetId(string login)
         {
+            Debug.WriteLine(login);
             string query = "SELECT UserId FROM Users WHERE UserName = @Login";
             System.Data.DataTable sqlId = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@Login", login } });
             return Convert.ToInt32(sqlId.Rows[0]["UserId"]);

@@ -80,7 +80,7 @@ namespace SewingProduction
             this.label3 = new SewingProduction.CustomLabel();
             this.label4 = new SewingProduction.CustomLabel();
             this.label5 = new SewingProduction.CustomLabel();
-            this.button1 = new SewingProduction.CustomButton();
+            this.button1 = new CustomButton();
             this.label6 = new SewingProduction.CustomLabel();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tbViewType = new SewingProduction.CustomTextBox();

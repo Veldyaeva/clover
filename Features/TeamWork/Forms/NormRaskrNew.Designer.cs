@@ -1,3 +1,4 @@
+using SewingProduction.Core.Class;
 namespace SewingProduction.form.TeamWork.Forms
 {
     partial class norm_raskrNew
@@ -58,8 +59,8 @@ namespace SewingProduction.form.TeamWork.Forms
             this.gridColumn17 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColumn18 = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnCancel = new SewingProduction.CustomCancelButton();
-            this.btnOk = new SewingProduction.CustomOkButton();
+            this.btnCancel = new CustomCancelButton();
+            this.btnOk = new CustomOkButton();
             this.tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
             this.customComboBox1 = new SewingProduction.CustomComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -451,8 +452,8 @@ namespace SewingProduction.form.TeamWork.Forms
 
         private DevExpress.XtraGrid.GridControl gridControl1;
         private System.Windows.Forms.Panel panel1;
-        private SewingProduction.CustomCancelButton btnCancel;
-        private SewingProduction.CustomOkButton btnOk;
+        private CustomCancelButton btnCancel;
+        private CustomOkButton btnOk;
         private DevExpress.Utils.Layout.TablePanel tablePanel1;
         private CustomComboBox customComboBox1;
         private DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView gridView1;
