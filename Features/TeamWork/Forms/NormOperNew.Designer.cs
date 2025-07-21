@@ -1,5 +1,5 @@
 ﻿using SewingProduction.form.TeamWork;
-
+using SewingProduction.Core.Class;
 namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class NormOperNew

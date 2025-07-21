@@ -520,7 +520,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public async Task<DataTable> GetObjectsForFormRoles(int roleId, int formId, int userId)
         {
             string query = @"
-            SELECT o.ObjectID, o.ObjectNameRus AS ObjectName,
+            SELECT o.ObjectID, o.ObjectNameRus, o.ObjectName,
                 CASE ISNULL(ro.ModeID, 0)
                     WHEN 0 THEN N'Нет доступа'
                     WHEN 1 THEN N'Просмотр'

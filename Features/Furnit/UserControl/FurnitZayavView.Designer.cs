@@ -1,4 +1,5 @@
-﻿namespace SewingProduction
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction
 {
     partial class FurnitZayavView
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.gcFurnitArt = new SewingProduction.CustomGridControl();
+            this.gcFurnitArt = new CustomGridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnFurnitArtFaSpecRez = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit3 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -41,7 +42,7 @@
             this.gridColumnFurnitArtMod = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFurnitArtArticul = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
-            this.gcFurnitPach = new SewingProduction.CustomGridControl();
+            this.gcFurnitPach = new CustomGridControl();
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnFurnitPachRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFurnitPachKol = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,7 +53,7 @@
             this.tbVidFName = new SewingProduction.CustomTextBox();
             this.label2 = new SewingProduction.CustomLabel();
             this.label1 = new SewingProduction.CustomLabel();
-            this.gcFurnitF = new SewingProduction.CustomGridControl();
+            this.gcFurnitF = new CustomGridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnFurnitFFfSpecRez = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemCheckEdit2 = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit();
@@ -63,7 +64,7 @@
             this.gridColumnFurnitFkodDr = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFurnitFNPp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFurnitFKolF = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gcFurnitFIt = new SewingProduction.CustomGridControl();
+            this.gcFurnitFIt = new CustomGridControl();
             this.bsFurnitFIt = new System.Windows.Forms.BindingSource(this.components);
             this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnFurnitFItNPp = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -79,7 +80,7 @@
             this.label3 = new SewingProduction.CustomLabel();
             this.label4 = new SewingProduction.CustomLabel();
             this.label5 = new SewingProduction.CustomLabel();
-            this.button1 = new SewingProduction.CustomButton();
+            this.button1 = new CustomButton();
             this.label6 = new SewingProduction.CustomLabel();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tbViewType = new SewingProduction.CustomTextBox();

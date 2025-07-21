@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form
 {
     partial class editFio
     {
