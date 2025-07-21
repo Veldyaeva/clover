@@ -181,5 +181,8 @@
     <Compile Update="Core\Forms\Menu\SpMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Report\subreport\secByKodPodrAnnIdReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

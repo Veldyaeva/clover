@@ -7,8 +7,9 @@
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <ApplicationIcon>Resources\favicon_io (1)\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\ICOnki2\Untitled-25.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -208,7 +209,7 @@
     <Content Include="Help\Help.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\favicon_io (1)\favicon.ico" />
+    <Content Include="Resources\ICOnki2\Untitled-25.ico" />
   </ItemGroup>
 
 
