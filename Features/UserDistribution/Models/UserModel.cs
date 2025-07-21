@@ -136,7 +136,6 @@ namespace SewingProduction.Features.UserDistribution.Models
         {
             var result = await _dbService.SaveEntityAsync("Users", "UserID", user);
             Console.WriteLine($"Создан пользователь {user.UserName}, фио ид: {user.FioID}, бриг ид: {user.BrigID},");
-            SetPravaForAddUser(result);
             return result;
         }
 
@@ -154,7 +153,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             string query = "SELECT f_id AS FioID, Fio FROM fio";
             return await _dbService.GetListAsync<FioDto>(query, new Dictionary<string, object>());
         }
-        private async void SetPravaForAddUser(int newId)
+        public async void SetPravaForAddUser(int newId)
         {
             string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
             DataTable dt = await _dbHelper.ExecuteQueryAsync(query);

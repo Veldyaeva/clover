@@ -10,6 +10,7 @@ using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -123,6 +124,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 int newUserId = await _userModelDataService.SaveAsync(user);
                 user.UserID = newUserId;
 
+                _userModelDataService.SetPravaForAddUser(newUserId);
                 customGridControlUsers_Load(sender, e);
             }
             catch (System.Data.SqlClient.SqlException ex)
