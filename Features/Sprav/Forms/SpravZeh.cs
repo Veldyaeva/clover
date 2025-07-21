@@ -54,7 +54,7 @@ namespace SewingProduction.form
         }
         private void SpravZeh_Load(object sender, EventArgs e)
         {
-            gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
+            //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
             comboBoxVidProizv_Enter(sender, e);
             _serviceBroker.StartBroker();
         }

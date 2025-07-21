@@ -25,6 +25,7 @@ namespace SewingProduction.form
         // если редактировали поле:
         bool flagRed = false;
         string filter = "";
+        UserClass _user;
         public Fio(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
@@ -35,6 +36,7 @@ namespace SewingProduction.form
             tableString = tableSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
+            _user = user;
         }
         public Fio()
         {
@@ -397,7 +399,7 @@ namespace SewingProduction.form
         }
         private void customButtonSpVed_Click(object sender, EventArgs e)
         {
-            openSprav("brig_ved", "vdID,brig,object,name,ip_proizv", "Ведомости");
+            openSprav("brig_ved", "vdID,brig,obgect,name,ip_proizv", "Ведомости");
         }
         /// <summary>
         /// Функция для открытия справочников:
@@ -417,7 +419,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll(nameSprav, columns, nameSpravRus);
+            SpravForAll f = new SpravForAll(nameSprav, columns, nameSpravRus,_user);
             f.MdiParent = this.MdiParent;
             f.Show();
         }

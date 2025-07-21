@@ -15,6 +15,7 @@ using DevExpress.XtraReports.UI;
 using DevExpress.XtraSpreadsheet.Import.Xls;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.TeamWork;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -80,9 +81,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private CancellationTokenSource _loadCts = new CancellationTokenSource();
 
-        public TeamWork()
+
+        public TeamWork(UserClass user) : base(user)
         {
             InitializeComponent();
+
+
             ANNgridView.OptionsView.ShowPreview = true;
             ANNgridView.PreviewLineCount = 1;
             //  ANNgridView.CalcPreviewText += CalcPreviewText;
@@ -562,20 +566,30 @@ namespace SewingProduction.Features.TeamWork.Forms
             switch (buttonIndex)
             {
                 case 0:
-                    ButtonPreliminaryWd_Click_Internal(sender, e);
+                    //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
+                    if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
+                        ButtonPreliminaryWd_Click_Internal(sender, e);
                     break;
                 case 2:
-                    EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
+                    //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
+                    if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
+                        EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 4:
-                    DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
+                    //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
+                    if (customSimpleButton1.Enabled && customSimpleButton1.Visible)
+                        DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 6:
-                    ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+                    //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
+                    if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
+                        ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
                 case 9:
+                    //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
+                    if (PrintButton.Enabled && PrintButton.Visible)
                     // Отчет технологической схемы разделения труда
-                    PrintWorkDivisionScheme_Click(null, null);
+                        PrintWorkDivisionScheme_Click(null, null);
                     break;
             }
         }
@@ -682,6 +696,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
 
         }
+
+
+
+
+
     }
     public static class DemoHelper
     {

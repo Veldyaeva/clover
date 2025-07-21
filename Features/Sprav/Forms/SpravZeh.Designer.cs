@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form
 {
     partial class SpravZeh
     {
@@ -437,7 +438,7 @@
         private System.Windows.Forms.TextBox textBoxName;
         private System.Windows.Forms.TextBox textBoxKod;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewZeh;
-        private SewingProduction.CustomGridControl gridControlSprav;
+        private CustomGridControl gridControlSprav;
         private System.Windows.Forms.BindingSource spravList;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

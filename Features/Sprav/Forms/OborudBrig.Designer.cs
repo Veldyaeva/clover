@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.form
 {
     partial class OborudBrig
     {
@@ -30,13 +32,13 @@
         {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OborudBrig));
-            gridBrig = new DevExpress.XtraGrid.GridControl();
+            gridBrig = new CustomGridControl();
             bindingBrig = new System.Windows.Forms.BindingSource(components);
             gridViewBrig = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridZeh = new DevExpress.XtraGrid.GridControl();
+            gridZeh = new CustomGridControl();
             bindingZeh = new System.Windows.Forms.BindingSource(components);
             gridViewZeh = new DevExpress.XtraGrid.Views.Grid.GridView();
-            gridOborud = new DevExpress.XtraGrid.GridControl();
+            gridOborud = new CustomGridControl();
             bindingOborud = new System.Windows.Forms.BindingSource(components);
             gridViewOborud = new DevExpress.XtraGrid.Views.Grid.GridView();
             label2 = new System.Windows.Forms.Label();
@@ -174,11 +176,11 @@
 
         #endregion
 
-        private DevExpress.XtraGrid.GridControl gridBrig;
+        private CustomGridControl gridBrig;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewBrig;
-        private DevExpress.XtraGrid.GridControl gridZeh;
+        private CustomGridControl gridZeh;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewZeh;
-        private DevExpress.XtraGrid.GridControl gridOborud;
+        private CustomGridControl gridOborud;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewOborud;
         private System.Windows.Forms.BindingSource bindingBrig;
         private System.Windows.Forms.BindingSource bindingZeh;
