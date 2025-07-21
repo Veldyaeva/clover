@@ -110,10 +110,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                string query = "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
-                    "FROM sp_articul sa " +
-                    "   left join kompl k on sa.kod = k.kod_k " +
-                    "WHERE sa.annID IS NULL and k.kod_k is null";//"SELECT * FROM articulListUnboundRTBySizeLabel"
+                string query =// "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
+                //    "FROM sp_articul sa " +
+                //    "   left join kompl k on sa.kod = k.kod_k " +
+                //    "WHERE sa.annID IS NULL and k.kod_k is null";//
+                                                                 "SELECT * FROM articulListUnboundRTBySizeLabel";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
                 _myDataArtList.BulkLoad(loadedData);
@@ -144,7 +145,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 int kod = GetCurrentKodFromDataSource();
-                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAllCheckBox.Checked);
 
                 _myDataAnnList.BulkLoad(loadedData);
             }
@@ -170,13 +171,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var currentItem = _myDataArtBindingSource.Current as MyDataART;
                 if (currentItem != null)
                 {
-                    if (int.TryParse(currentItem.Kod, out int kodValue))
+                    if (int.TryParse(currentItem.kodd_rt, out int kodValue))
                     {
                         return kodValue;
                     }
                     else
                     {
-                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.Kod}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
+                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.kodd_rt}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
                     }
                 }
             }
@@ -189,7 +190,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="kod">Код артикула</param>
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
-        private async Task<List<MyDataANN>> LoadWorksbyArt(int kod, string articul)
+        private async Task<List<MyDataANN>> LoadWorksbyArt(string articul)
         {
             try
             {
@@ -199,14 +200,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Если включен чекбокс "Загрузить все"
                 if (loadAll)
                 {
-                    return await _artNormService.GetArtNormDataCurrent(kod, true);
+                    return await _artNormService.GetArtNormDataCurrent(true);
                 }
 
                 // Загружаем все данные параллельно
                 var tasks = new List<Task<List<MyDataANN>>>();
 
                 // Загружаем данные по коду
-                tasks.Add(_artNormService.GetArtNormDataCurrent(kod, false));
+                //tasks.Add(_artNormService.GetArtNormDataCurrent(false));
 
                 // Если артикул не пустой, добавляем задачи для поиска по артикулу
                 if (!string.IsNullOrEmpty(articul))
@@ -252,12 +253,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
-                await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
+                await _logger.LogEventAsync($"Успешная загрузка РТ для артикула {articul}", "LoadWorksbyArt");
                 return uniqueData.Values.ToList();
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке РТ для кода {kod} и артикула {articul}");
+                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке РТ для артикула {articul}");
                 return new List<MyDataANN>();
             }
         }
@@ -504,7 +505,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (confirmDialog.ShowDialog() != DialogResult.OK) return;
 
                 // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnID);
+                _artNormService.UpdateAnnIdinArticul(selectedArtRow.kodd_rt, selectedAnnRow.AnnID);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
                 
                 // Заполняем группу и модель в зависимости от выбора пользователя
@@ -537,7 +538,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControl_wdToBind?.RefreshDataSource();
                 }
 
-                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.Kod} привязан к РТ {selectedAnnRow.AnnID}");
+                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.kodd_rt} привязан к РТ {selectedAnnRow.AnnID}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -560,17 +561,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 // Получаем данные из текущей строки
-                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Kod", "");
-                string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "");
+                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
+                string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "").TrimEnd(' ');
 
                 if (!int.TryParse(kod, out int kodInt))
                 {
                     await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                    return;
+                   // return;
                 }
 
                 // Загружаем данные параллельно
-                var loadWorksTask = LoadWorksbyArt(kodInt, articul);
+                var loadWorksTask = LoadWorksbyArt(articul);
                 var loadRaszTask = Task.Run(async () =>
                 {
                     if (gridView_wdToBind.FocusedRowHandle >= 0)

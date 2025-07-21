@@ -65,8 +65,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             DisplayNumber = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn35 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn32 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn33 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
             colspec2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -447,7 +447,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
             gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, DisplayNumber, gridColumn35, gridColumn36, gridColumn33, gridColumn32, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
+            gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, DisplayNumber, gridColumn35, gridColumn36, gridColumn32, gridColumn33, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
             gridViewRasz.DetailHeight = 404;
             gridViewRasz.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewRasz.GridControl = gridControlRasz;
@@ -497,6 +497,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             DisplayNumber.Caption = "№ оп.";
             DisplayNumber.FieldName = "DisplayNumber";
             DisplayNumber.Name = "DisplayNumber";
+            DisplayNumber.OptionsColumn.AllowSort = DevExpress.Utils.DefaultBoolean.False;
             DisplayNumber.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             DisplayNumber.Visible = true;
             DisplayNumber.VisibleIndex = 0;
@@ -522,18 +523,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn36.OptionsEditForm.VisibleIndex = 3;
             gridColumn36.Width = 64;
             // 
-            // gridColumn33
-            // 
-            gridColumn33.Caption = "разряд";
-            gridColumn33.FieldName = "razryd";
-            gridColumn33.MinWidth = 23;
-            gridColumn33.Name = "gridColumn33";
-            gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
-            gridColumn33.OptionsEditForm.VisibleIndex = 5;
-            gridColumn33.Visible = true;
-            gridColumn33.VisibleIndex = 1;
-            gridColumn33.Width = 48;
-            // 
             // gridColumn32
             // 
             gridColumn32.Caption = "наименование операции пошива";
@@ -546,8 +535,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn32.OptionsEditForm.UseEditorColRowSpan = false;
             gridColumn32.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
             gridColumn32.Visible = true;
-            gridColumn32.VisibleIndex = 2;
+            gridColumn32.VisibleIndex = 1;
             gridColumn32.Width = 358;
+            // 
+            // gridColumn33
+            // 
+            gridColumn33.Caption = "разряд";
+            gridColumn33.FieldName = "razryd";
+            gridColumn33.MinWidth = 23;
+            gridColumn33.Name = "gridColumn33";
+            gridColumn33.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
+            gridColumn33.OptionsEditForm.VisibleIndex = 5;
+            gridColumn33.Visible = true;
+            gridColumn33.VisibleIndex = 2;
+            gridColumn33.Width = 48;
             // 
             // gridColumn37
             // 

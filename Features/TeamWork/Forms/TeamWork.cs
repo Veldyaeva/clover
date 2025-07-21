@@ -573,7 +573,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 6:
                     ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
-                case 8:
+                case 9:
                     // Отчет технологической схемы разделения труда
                     PrintWorkDivisionScheme_Click(null, null);
                     break;

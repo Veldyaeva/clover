@@ -2720,7 +2720,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // код
             // 
             код.Caption = "код";
-            код.FieldName = "Kod";
+            код.FieldName = "kodd_rt";
             код.MinWidth = 23;
             код.Name = "код";
             код.OptionsColumn.AllowEdit = false;

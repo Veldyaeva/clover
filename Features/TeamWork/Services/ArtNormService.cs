@@ -232,11 +232,11 @@ namespace SewingProduction.Services
         /// загрузка РТ для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool includeAll)
+        public async Task<List<MyDataANN>> GetArtNormDataCurrent(bool includeAll)
         {
             string query = @"
                 SELECT  
-                    SUBSTRING(v.kod, 1, 7) AS kod, v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
+                    v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
                     v.data_sozd, v.diz, v.constr 
@@ -249,10 +249,10 @@ namespace SewingProduction.Services
             if (!includeAll)
             {
                 query += @" 
-                  AND EXISTS (SELECT 1
+                  AND EXISTS (SELECT top 1 *
                               FROM View_sp_articul spa
-                              WHERE spa.annId = v.annId AND spa.kodd_rt = @KodParam)"; 
-                parameters = new { KodParam = kod }; // Параметр для Dapper
+                              WHERE spa.annId = v.annId)"; 
+       //         parameters = new { KodParam = kod }; // Параметр для Dapper
             }
             else
             {
@@ -292,11 +292,11 @@ namespace SewingProduction.Services
         {
             string sql;
             var p = new DynamicParameters();
-
+            
             if (annId != null)        // поиск по AnnID
             {
                 sql = @"SELECT TOP (1) 
-                       dbo.getFileEskizForKodd(vsa.kod)
+                       dbo.getFileEskizForKodd_rt(vsa.annId)
                 FROM   dbo.View_sp_articul vsa
                 WHERE  vsa.annId = @annId";
                 p.Add("@annId", annId);
