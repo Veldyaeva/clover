@@ -194,10 +194,10 @@
             selectQuery1.GroupFilterString = "";
             selectQuery1.Name = "raskr_zeh_up";
             queryParameter1.Name = "_rzuNom";
-            queryParameter1.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("?_rzuNom", typeof(int));
             queryParameter2.Name = "_rzuNomN";
-            queryParameter2.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter2.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter2.Value = new DevExpress.DataAccess.Expression("?_rzuNomN", typeof(int));
             selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1,
@@ -366,7 +366,7 @@
             this.GroupFooterBackground3,
             this.DetailData3_Odd,
             this.PageInfo});
-            this.Version = "22.2";
+            this.Version = "24.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
 
