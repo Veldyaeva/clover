@@ -18,11 +18,23 @@ namespace SewingProduction.Core.Class
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private UserClass _lastUser;
 
         public CustomButton()
         {
             ApplyTheme();
             ThemeManager.ThemeChanged += OnThemeChanged;
+        }
+        protected override void OnHandleCreated(EventArgs e)
+        {
+            base.OnHandleCreated(e);
+
+            // Здесь уже точно Name, Parent, Visible и всё остальное готово
+            if (!DesignMode && _lastUser != null)
+            {
+                // Отложенный вызов ApplyPermission, чтобы точно ничего не перезаписалось
+                BeginInvoke(new MethodInvoker(() => ApplyPermission(_lastUser)));
+            }
         }
 
         public void ApplyTheme()
@@ -45,10 +57,16 @@ namespace SewingProduction.Core.Class
             }
             base.Dispose(disposing);
         }
-
         public void ApplyPermission(UserClass user)
         {
-            // Гарантируем, что ObjectName есть
+            _lastUser = user;
+
+            if (!this.IsHandleCreated)
+            {
+                this.HandleCreated += (_, _) => ApplyPermission(user);
+                return;
+            }
+
             if (string.IsNullOrEmpty(ObjectName))
                 ObjectName = this.Name;
 
@@ -63,6 +81,15 @@ namespace SewingProduction.Core.Class
 
             this.Visible = hasRead || hasWrite;
             this.Enabled = hasWrite;
+
+            if (!hasRead && !hasWrite)
+            {
+                this.Visible = false;
+                this.Enabled = false;
+                this.TabStop = false;
+                this.Size = Size.Empty;
+                this.Location = new Point(-10000, -10000);
+            }
 
             Debug.WriteLine($"[Доступ Button] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
         }
