@@ -68,6 +68,21 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly List<int> _deletedNormRaszIds = new List<int>();
         private readonly List<int> _deletedNormRaskIds = new List<int>();
         private readonly List<int> _deletedNormKontIds = new List<int>();
+        
+        // Поле для хранения последней выбранной операции
+        private NormRasz _lastFocusedRaszOperation = null;
+        
+        /// <summary>
+        /// Структура для возврата результата диалога выбора позиции операции
+        /// </summary>
+        private struct OperationInsertChoice
+        {
+            public int OperationN { get; set; }
+            public int OperationN1 { get; set; }
+            public bool IsSuboperation { get; set; }
+            public bool Cancel { get; set; }
+            public bool ConvertMainToSuboperation { get; set; } // Нужно ли преобразовать основную операцию в подоперацию
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [NotifyParentProperty(true)]
@@ -338,7 +353,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private static PopupMenuShowingEventHandler ShowPopUp<T>(
+        private PopupMenuShowingEventHandler ShowPopUp<T>(
             GridView view,
             BindingList<T> bindingList,
             Func<T, int> getId,
@@ -369,7 +384,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     // Удаляем строку
                     bindingList.Remove(rowObj);
-
+                    TWGridHelper.sortGridView(gridViewRasz);
                     // Переносим фокус на новую строку
                     view.GridControl.BeginInvoke(new Action(() =>
                     {
@@ -410,7 +425,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Специальный обработчик контекстного меню для norm_rasz с перенумерацией операций
         /// </summary>
-        private static PopupMenuShowingEventHandler ShowPopUpForRasz(
+        private  PopupMenuShowingEventHandler ShowPopUpForRasz(
             GridView view,
             BindingList<NormRasz> bindingList,
             Func<NormRasz, int> getId,
@@ -434,6 +449,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Сохраняем номер удаляемой операции для перенумерации
                     int deletedOperationN = rowObj.N;
                     int deletedOperationN1 = rowObj.N1;
+
+                    // Если удаляем последнюю сфокусированную операцию, сбрасываем ссылку
+                    if (_lastFocusedRaszOperation != null &&
+                        deletedOperationN == _lastFocusedRaszOperation.N && 
+                        deletedOperationN1 == _lastFocusedRaszOperation.N1)
+                    {
+                        _lastFocusedRaszOperation = null;
+                    }
 
                     // Добавляем в список удалённых
                     if (getId != null && deletedIds != null)
@@ -470,8 +493,397 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }));
                 });
 
+                // Добавляем пункт "Добавить строку"
+                var addItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить строку", (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    
+                    // Определяем тип строки и соответствующую логику
+                    if (view.IsNewItemRow(rowHandle))
+                    {
+                        // Клик по newRow - добавляем в конец списка без диалога
+                        AddNewRaszOperation(null, true);
+                    }
+                    else if (view.IsValidRowHandle(rowHandle))
+                    {
+                        // Клик по обычной строке - предлагаем варианты
+                        var rowObj = view.GetRow(rowHandle) as NormRasz;
+                        if (rowObj != null)
+                        {
+                            AddNewRaszOperation(rowObj, false);
+                        }
+                    }
+                    else
+                    {
+                        // Клик в пустой области - добавляем в конец
+                        AddNewRaszOperation(null, true);
+                    }
+                });
+
+                menu.Items.Add(addItem);
                 menu.Items.Add(deleteItem);
             };
+        }
+
+        /// <summary>
+        /// Показывает диалог выбора типа и позиции для новой операции
+        /// </summary>
+        /// <param name="currentOperation">Текущая операция, относительно которой делается вставка</param>
+        /// <returns>Выбор пользователя</returns>
+        private OperationInsertChoice ShowOperationInsertDialog(NormRasz currentOperation)
+        {
+            try
+            {
+                int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                
+                // Проверяем, есть ли подоперации у текущей операции
+                bool hasSuboperations = _normRaszList?.Any(r => r.N == currentOperation.N && r.N1 > 0) ?? false;
+                int maxN1InOperation = hasSuboperations ? 
+                    _normRaszList.Where(r => r.N == currentOperation.N).Max(r => r.N1) : 0;
+
+                // Определяем варианты в зависимости от типа текущей операции
+                if (currentOperation.N1 == 0)
+                {
+                    // Текущая операция основная - предлагаем сначала подоперацию
+                    string subopMessage;
+                    if (!hasSuboperations)
+                    {
+                        // Если у операции еще нет подопераций, объясняем что произойдет
+                        subopMessage = $"Добавить подоперацию к операции №{currentOperation.N}?\n\n" +
+                                      $"Текущая операция №{currentOperation.N} станет №{currentOperation.N}.1\n" +
+                                      $"Новая подоперация получит номер {currentOperation.N}.2";
+                    }
+                    else
+                    {
+                        // Если уже есть подоперации, просто добавляем следующую
+                        subopMessage = $"Добавить подоперацию к операции №{currentOperation.N}?\n" +
+                                      $"Новая подоперация получит номер {currentOperation.N}.{maxN1InOperation + 1}";
+                    }
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
+                                                     MessageBoxIcon.Question,
+                                                     MessageBoxDefaultButton.Button1);
+                    
+                    if (subopResult == DialogResult.Yes)
+                    {
+                        if (!hasSuboperations)
+                        {
+                            // Первая подоперация - основная операция станет X.1, новая X.2
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
+                                OperationN1 = 2, // Новая подоперация будет X.2
+                                IsSuboperation = true,
+                                ConvertMainToSuboperation = true // Флаг для преобразования основной операции
+                            };
+                        }
+                        else
+                        {
+                            // Обычная подоперация к уже существующим
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
+                                OperationN1 = maxN1InOperation + 1, 
+                                IsSuboperation = true 
+                            };
+                        }
+                    }
+                    else if (subopResult == DialogResult.Cancel)
+                    {
+                        return new OperationInsertChoice { Cancel = true };
+                    }
+                    // Если "Нет" - продолжаем к выбору основной операции
+                }
+                else
+                {
+                    // Текущая операция подоперация - сначала предлагаем вставить подоперацию
+                    string subopMessage = $"Добавить подоперацию после №{currentOperation.N}.{currentOperation.N1}?\n" +
+                                         $"Новая подоперация получит номер {currentOperation.N}.{currentOperation.N1 + 1}";
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
+                                                     MessageBoxIcon.Question,
+                                                     MessageBoxDefaultButton.Button1);
+                    
+                    if (subopResult == DialogResult.Yes)
+                    {
+                        // Подоперация после текущей подоперации
+                        return new OperationInsertChoice 
+                        { 
+                            OperationN = currentOperation.N, 
+                            OperationN1 = currentOperation.N1 + 1, 
+                            IsSuboperation = true 
+                        };
+                    }
+                    else if (subopResult == DialogResult.Cancel)
+                    {
+                        return new OperationInsertChoice { Cancel = true };
+                    }
+                    // Если "Нет" - продолжаем к выбору основной операции
+                }
+
+                // Второй диалог для выбора основной операции
+                string mainOpMessage = $"Добавить основную операцию:\n\n" +
+                                      $"Да - После операции №{currentOperation.N} (получит номер {currentOperation.N + 1})\n" +
+                                      $"Нет - В конец списка (получит номер {maxN + 1})";
+                
+                var mainOpResult = MessageBox.Show(mainOpMessage, "Позиция основной операции", 
+                                                  MessageBoxButtons.YesNoCancel, 
+                                                  MessageBoxIcon.Question,
+                                                  MessageBoxDefaultButton.Button1);
+                
+                if (mainOpResult == DialogResult.Yes)
+                {
+                    // Основная операция после текущей
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = currentOperation.N + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
+                    };
+                }
+                else if (mainOpResult == DialogResult.No)
+                {
+                    // В конец списка
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = maxN + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
+                    };
+                }
+                else
+                {
+                    return new OperationInsertChoice { Cancel = true };
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка в диалоге выбора позиции операции");
+                return new OperationInsertChoice { Cancel = true };
+            }
+        }
+
+        /// <summary>
+        /// Добавляет новую операцию с возможностью выбора позиции вставки
+        /// </summary>
+        /// <param name="insertAfterOperation">Операция, после которой нужно вставить новую (null = в конец)</param>
+        /// <param name="forceAppendToEnd">Принудительно добавить в конец без диалога выбора</param>
+        private async void AddNewRaszOperation(NormRasz insertAfterOperation = null, bool forceAppendToEnd = false)
+        {
+            try
+            {
+                int insertOperationN;
+                int insertOperationN1 = 0;
+                bool isSuboperation = false;
+                OperationInsertChoice choice = new OperationInsertChoice(); // Объявляем в более широкой области видимости
+                
+                if (forceAppendToEnd || insertAfterOperation == null)
+                {
+                    // Добавляем в конец списка как основную операцию
+                    int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                    insertOperationN = maxN + 1;
+                    insertOperationN1 = 0;
+                }
+                else
+                {
+                    // Предлагаем пользователю выбрать тип операции и позицию
+                    choice = ShowOperationInsertDialog(insertAfterOperation);
+                    
+                    if (choice.Cancel)
+                    {
+                        return; // Отмена
+                    }
+                    
+                    insertOperationN = choice.OperationN;
+                    insertOperationN1 = choice.OperationN1;
+                    isSuboperation = choice.IsSuboperation;
+                }
+
+                using (var selectionForm = new NormOperNew(_selectedAnnId))
+                {
+                    var result = selectionForm.ShowDialog();
+
+                    if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
+                    {
+                        var selectedData = selectionForm.SelectedRowData;
+                        selectedData.IsNew = true;
+                        
+                        // Выполняем перенумерацию в зависимости от типа операции
+                        if (isSuboperation)
+                        {
+                            if (choice.ConvertMainToSuboperation)
+                            {
+                                // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
+                                ConvertMainOperationToSuboperation(insertOperationN);
+                            }
+                            else
+                            {
+                                // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
+                                RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
+                            }
+                        }
+                        else
+                        {
+                            // Для основной операции - перенумеровываем все операции начиная с указанной позиции
+                            int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                            if (insertOperationN <= maxN)
+                            {
+                                RenumberOperationsForInsertion(insertOperationN);
+                            }
+                        }
+                        
+                        // Присваиваем новой операции нужные номера
+                        selectedData.N = insertOperationN;
+                        selectedData.N1 = insertOperationN1;
+                        
+                        _normRaszList.Add(selectedData);
+                        _normRaszBindingSource.ResetBindings(false);
+                        gridControlRasz.RefreshDataSource();
+                        
+                        // Обновляем сортировку после добавления
+                        TWGridHelper.sortGridView(gridViewRasz);
+                        
+                        // Автоматически открываем форму редактирования для новой операции
+                        int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
+                        if (newRowDataSourceIndex >= 0)
+                        {
+                            int newRowHandle = gridViewRasz.GetRowHandle(newRowDataSourceIndex);
+                            if (gridViewRasz.IsValidRowHandle(newRowHandle))
+                            {
+                                // Устанавливаем фокус и открываем форму редактирования
+                                gridViewRasz.FocusedRowHandle = newRowHandle;
+                                gridViewRasz.MakeRowVisible(newRowHandle);
+                                
+                                // Открываем форму редактирования через небольшую задержку
+                                gridViewRasz.GridControl.BeginInvoke(new Action(() =>
+                                {
+                                    _isCustomEditFormOpen = true;
+                                    gridViewRasz.ShowEditForm();
+                                }));
+                            }
+                        }
+                        
+                        await _logger.LogEventAsync($"Добавлена новая операция №{selectedData.N}.{selectedData.N1} через контекстное меню", "AddNewRaszOperation");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при добавлении операции через контекстное меню");
+                MessageBox.Show($"Ошибка при добавлении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Обработчик изменения фокуса для сохранения последней выбранной операции
+        /// </summary>
+        private void GridViewRasz_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var gridView = sender as GridView;
+            if (gridView == null) return;
+
+            // Сохраняем последнюю валидную операцию (не newRow)
+            if (e.FocusedRowHandle >= 0 && e.FocusedRowHandle < gridView.DataRowCount && !gridView.IsNewItemRow(e.FocusedRowHandle))
+            {
+                var currentRow = gridView.GetRow(e.FocusedRowHandle) as NormRasz;
+                if (currentRow != null)
+                {
+                    _lastFocusedRaszOperation = currentRow;
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Преобразует основную операцию в подоперацию при добавлении первой подоперации
+        /// </summary>
+        /// <param name="operationN">Номер основной операции для преобразования</param>
+        private void ConvertMainOperationToSuboperation(int operationN)
+        {
+            // Находим основную операцию (N.0) и преобразуем её в подоперацию (N.1)
+            var mainOperation = _normRaszList?.FirstOrDefault(r => r.N == operationN && r.N1 == 0);
+            
+            if (mainOperation != null)
+            {
+                int oldN1 = mainOperation.N1;
+                mainOperation.N1 = 1; // Основная операция становится первой подоперацией
+                
+                // Помечаем как измененную, если это не новая запись
+                if (!mainOperation.IsNew)
+                {
+                    mainOperation.IsModified = true;
+                }
+                
+                _logger.LogEventAsync($"Основная операция преобразована: {operationN}.{oldN1} -> {operationN}.{mainOperation.N1}", "ConvertMainOperationToSuboperation");
+            }
+        }
+
+        /// <summary>
+        /// Перенумеровывает подоперации для освобождения места под новую подоперацию
+        /// </summary>
+        /// <param name="operationN">Номер основной операции</param>
+        /// <param name="insertSuboperationN1">Номер подоперации, начиная с которого нужно сдвинуть нумерацию</param>
+        private void RenumberSuboperationsForInsertion(int operationN, int insertSuboperationN1)
+        {
+            // Находим все подоперации с тем же N и N1 >= insertSuboperationN1 и увеличиваем их N1 на 1
+            var suboperationsToRenumber = _normRaszList
+                .Where(r => r.N == operationN && r.N1 >= insertSuboperationN1)
+                .OrderByDescending(r => r.N1) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
+                .ToList();
+
+            if (suboperationsToRenumber.Any())
+            {
+                _logger.LogEventAsync($"Перенумерация подопераций: сдвиг {suboperationsToRenumber.Count} подопераций операции №{operationN} начиная с {insertSuboperationN1}", "RenumberSuboperationsForInsertion");
+                
+                foreach (var operation in suboperationsToRenumber)
+                {
+                    int oldN1 = operation.N1;
+                    operation.N1 += 1;
+                    
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                    
+                    _logger.LogEventAsync($"Подоперация перенумерована: {operation.N}.{oldN1} -> {operation.N}.{operation.N1}", "RenumberSuboperationsForInsertion");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Перенумеровывает операции для освобождения места под новую операцию
+        /// </summary>
+        /// <param name="insertOperationN">Номер операции, начиная с которого нужно сдвинуть нумерацию</param>
+        private void RenumberOperationsForInsertion(int insertOperationN)
+        {
+            // Находим все операции с номерами >= insertOperationN и увеличиваем их номера на 1
+            var operationsToRenumber = _normRaszList
+                .Where(r => r.N >= insertOperationN)
+                .OrderByDescending(r => r.N) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
+                .ToList();
+
+            if (operationsToRenumber.Any())
+            {
+                _logger.LogEventAsync($"Перенумерация операций: сдвиг {operationsToRenumber.Count} операций начиная с номера {insertOperationN}", "RenumberOperationsForInsertion");
+                
+                foreach (var operation in operationsToRenumber)
+                {
+                    int oldN = operation.N;
+                    operation.N += 1;
+                    
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                    
+                    _logger.LogEventAsync($"Операция перенумерована: {oldN}.{operation.N1} -> {operation.N}.{operation.N1}", "RenumberOperationsForInsertion");
+                }
+            }
         }
 
         /// <summary>
@@ -518,24 +930,27 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
-                // Проверяем, осталась ли только одна операция с данным номером
-                var remainingOperationsWithSameN = normRaszList
-                    .Where(r => r.N == deletedOperationN)
+                // Проверяем, осталась ли только одна подоперация с данным номером
+                var remainingSuboperationsWithSameN = normRaszList
+                    .Where(r => r.N == deletedOperationN && r.N1 > 0)
                     .ToList();
 
-                if (remainingOperationsWithSameN.Count == 1)
+                if (remainingSuboperationsWithSameN.Count == 1)
                 {
-                    // Если осталась только одна операция, делаем её основной (N1 = 0)
-                    var lastOperation = remainingOperationsWithSameN.First();
-                    if (lastOperation.N1 > 0)
+                    // Если осталась только одна подоперация, делаем её основной (N1 = 0)
+                    var lastSuboperation = remainingSuboperationsWithSameN.First();
+                    lastSuboperation.N1 = 0;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!lastSuboperation.IsNew)
                     {
-                        lastOperation.N1 = 0;
-                        // Помечаем как измененную, если это не новая запись
-                        if (!lastOperation.IsNew)
-                        {
-                            lastOperation.IsModified = true;
-                        }
+                        lastSuboperation.IsModified = true;
                     }
+                }
+                else if (remainingSuboperationsWithSameN.Count == 0)
+                {
+                    // Если не осталось ни одной подоперации, проверяем есть ли основная операция
+                    var mainOperation = normRaszList.FirstOrDefault(r => r.N == deletedOperationN && r.N1 == 0);
+                    // Основная операция остается без изменений (это нормально)
                 }
             }
         }
@@ -608,6 +1023,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList.Clear();
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
                         // Автоматически добавляем две стандартные строки в norm_kont
                         AddStandardKontRows();
                         break;
@@ -617,6 +1033,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
                         // Автоматически добавляем две стандартные строки в norm_kont
                         AddStandardKontRows();
                         _currentAnnData.dateCreate = DateTime.Now;
@@ -631,6 +1048,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
                         // Автоматически добавляем две стандартные строки в norm_kont
                         AddStandardKontRows();
                         _currentAnnData.dateCreate = DateTime.Now;
@@ -724,6 +1142,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridViewRasz.RowStyle += GridView_RowStyle;
                 gridViewRaskr.RowStyle += GridView_RowStyle;
                 gridViewKont.RowStyle += GridView_RowStyle;
+                
+                // Подписываемся на изменение фокуса для сохранения последней выбранной операции
+                gridViewRasz.FocusedRowChanged += GridViewRasz_FocusedRowChanged;
 
                 if (_currentAnnData != null && _sourceAnnIdToCopyDetailsFrom.HasValue && _duplicateAnnData != null && _mode == (int)Mode.NewWorkDivision)
                 {
@@ -1102,41 +1523,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             e.Allow = false;
-            int maxN = 0;
-            if (_normRaszList != null && _normRaszList.Count > 0)
+            
+            // Используем новый метод для добавления операции
+            // Определяем, нужно ли предлагать позицию или добавить в конец
+            bool shouldOfferPosition = _lastFocusedRaszOperation != null && _normRaszList?.Count > 0;
+            
+            if (shouldOfferPosition)
             {
-                maxN = _normRaszList
-                    .Select(x => x.N)
-                    .DefaultIfEmpty(0)
-                    .Max();
+                // Предлагаем позицию на основе последней сфокусированной операции
+                AddNewRaszOperation(_lastFocusedRaszOperation, false);
             }
-
-            using (var selectionForm = new NormOperNew(_selectedAnnId))
+            else
             {
-                var result = selectionForm.ShowDialog();
-
-                if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
-                {
-                    var selectedData = selectionForm.SelectedRowData;
-                    selectedData.IsNew = true;
-                    selectedData.N = maxN + 1;
-                    _normRaszList.Add(selectedData);
-                    _normRaszBindingSource.ResetBindings(false);
-                    gridControlRasz.RefreshDataSource();
-                    int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
-                    if (newRowDataSourceIndex >= 0)
-                    {
-                        int newRowHandle = gridView.GetRowHandle(newRowDataSourceIndex);
-                        if (gridView.IsValidRowHandle(newRowHandle))
-                        {
-                            FinalizeRow(newRowHandle, gridView);
-                        }
-                        else
-                        {
-                            _logger.LogEventAsync($"Не найдена строка для добавления в NormRasz. Номер строки в DataSource: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
-                        }
-                    }
-                }
+                // Добавляем в конец списка
+                AddNewRaszOperation(null, true);
             }
         }
 
@@ -1157,21 +1557,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void FinalizeRow(int rowHandle, GridView gridView)
-        {
-            // разрешаем показать EditForm
-            gridView.PostEditor();
-            gridView.UpdateCurrentRow();
-            gridView.RefreshRow(rowHandle);
 
-            _isCustomEditFormOpen = true;
-
-            gridView.GridControl.BeginInvoke(new Action(() =>
-            {
-                gridView.FocusedRowHandle = rowHandle;
-                gridView.ShowEditForm();
-            }));
-        }
 
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
@@ -1818,6 +2204,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normRaszList?.Clear();
                         _normRaskList?.Clear();
                         _normKontList?.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
 
                         _normRaszBindingSource?.ResetBindings(false);
                         _normRaskBindingSource?.ResetBindings(false);
@@ -1838,14 +2225,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                         item.N = item.N + Nome;
                         _normRaszList.Add(item);
                     }
+
+                    TWGridHelper.sortGridView(gridViewRasz);
+                    //if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                    //if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                
                     //var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
                     //_normRaszList.Add(rasz);//.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
 
-                    //_currentAnnData.dateCreate = DateTime.Now;
+                //_currentAnnData.dateCreate = DateTime.Now;
 
 
 
-                    // Показываем статус успешной загрузки
+                // Показываем статус успешной загрузки
                     await ShowStatusMessage("Данные из буфера успешно загружены");
                 }
                 catch (SqlException sqlEx)

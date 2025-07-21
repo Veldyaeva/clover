@@ -695,18 +695,18 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             List<MyDataANN> list = null;
             if (loadAllCheckBox.Checked)
-                list = await LoadWorksbyArt(0, "");
+                list = await LoadWorksbyArt("");
             else if (!loadAllCheckBox.Checked)
             {
-                string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
-                if (!int.TryParse(kod, out int kodInt))
-                {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                    kodInt = 0;
-                }
+                //string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
+                //if (!int.TryParse(kod, out int kodInt))
+                //{
+                //    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
+                //    kodInt = 0;
+                //}
 
                 string articul = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Articul").ToString();
-                list = await LoadWorksbyArt(kodInt, articul);
+                list = await LoadWorksbyArt(articul);
             }
             // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
             //var bindingList = new BindingList<MyDataANN>(list);
