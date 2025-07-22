@@ -81,7 +81,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             gridViewUsers.Appearance.DetailTip.BackColor = System.Drawing.Color.Transparent;
             gridViewUsers.Appearance.DetailTip.Options.UseBackColor = true;
             gridViewUsers.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { UserId, UserName, Fio1, Brig, Password, FioID, BrigID });
-            gridViewUsers.DetailHeight = 404;
+            gridViewUsers.DetailHeight = 900;
             gridViewUsers.GridControl = customGridControlAllProfile;
             gridViewUsers.Name = "gridViewUsers";
             gridViewUsers.OptionsBehavior.Editable = false;

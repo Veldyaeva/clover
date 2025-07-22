@@ -58,7 +58,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 })
                 .ToList();
 
-            _userHierarchy = BuildUserHierarchy(allUsers, _user.UserId);
+            _userHierarchy = BuildUserHierarchy(allUsers, 0);
 
             bindingSourceUsers.DataSource = _userHierarchy;
         }
@@ -162,7 +162,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                     CAST(UserID AS VARCHAR(MAX)) AS UserPath,
                     0 AS Generation
                 FROM Users
-                WHERE CreatorID = @CreatorID 
+                WHERE CreatorID = 0
 
                 UNION ALL
 

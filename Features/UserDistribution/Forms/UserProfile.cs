@@ -14,6 +14,8 @@ using DevExpress.CodeParser;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Core.Class.Settings;
+using SewingProduction.Services;
+using SewingProduction.Features.UserDistribution.Models;
 
 
 namespace SewingProduction.Features.UserDistribution.Forms
@@ -117,32 +119,45 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 mainForm.OpenForm(new TestForm1(_user));
             }
         }
+
+        private async void customActionButtonEditLogin_Click(object sender, EventArgs e)
+        {
+            string currentPassword = customTextBoxPassword.Text;
+            string newLogin = customTextBoxNewLogin.Text;
+
+            string dbHash = await _userProfileDataService.GetPasswordHash(_user.UserId);
+            if (_passwordHasher.VerifyHashedPassword(dbHash, currentPassword) != PasswordVerificationResult.Success)
+            {
+                MessageBox.Show("Пароль неверен!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            await _userProfileDataService.UpdateLogin(_user.UserId, newLogin);
+            MessageBox.Show("Логин успешно изменен!", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+        }
     }
     public class UserProfileDataService
     {
-        private readonly DatabaseHelper _dbHelper;
+        private readonly DbService _dbService;
         public UserProfileDataService(DatabaseHelper dbHelper)
         {
-            _dbHelper = dbHelper;
+            _dbService = new DbService(dbHelper);
         }
         public async Task<string> GetPasswordHash(int userId)
         {
-            string query = "SELECT PasswordHash FROM Users WHERE UserID = @UserId";
-            DataTable dt = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
-            {
-                { "@UserId", userId }
-            });
-            string PasswordHash = dt.Rows.Count > 0 ? dt.Rows[0]["PasswordHash"].ToString() : "0";
-            return PasswordHash;
+            return await _dbService.SelectOneFieldAsync<string>(
+                "Users",
+                "PasswordHash",
+                new Dictionary<string, object> { { "UserID", userId } }) ?? "0";
         }
         public async Task UpdatePasswordHash(int userId, string newPasswordHash)
         {
-            string query = "UPDATE Users SET PasswordHash = @NewHash WHERE UserId = @UserId";
-            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
-            {
-                { "@NewHash", newPasswordHash },
-                { "@UserId", userId }
-            });
+            await _dbService.UpdateFieldAsync(TableNames.Users, "PasswordHash", newPasswordHash, "UserId", userId);
+        }
+        public async Task UpdateLogin(int userId, string login)
+        {
+            await _dbService.UpdateFieldAsync(TableNames.Users, "login", login, "UserId", userId);
         }
     }
 }
