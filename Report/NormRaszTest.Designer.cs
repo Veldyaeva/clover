@@ -2595,8 +2595,8 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(131246, "футболка женская 1Ф7968"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(90697, "джемпер женский"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(91970, "джемпер женский"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(136777, "джемпер без артикула"));
             this._annId.ValueSourceSettings = staticListLookUpSettings1;
-            this._annId.Visible = false;
             // 
             // GroupFooter3
             // 
