@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.CodeParser;
+using DevExpress.DataAccess.Sql;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.Utils;
 using DevExpress.Utils.VisualEffects;
 using DevExpress.XtraEditors;
@@ -126,6 +128,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             if (selectedRoleId <= 0)
                 gridViewRoles_FocusedRow();
+            if (_user.Roles.Contains("Администратор"))
+                return true;
             int creatorId = await _allRoleDataService.GetCreatorIdByRole(selectedRoleId);
             if (!_editableRoleCreatorIds.Contains(creatorId))
             {
@@ -419,13 +423,33 @@ namespace SewingProduction.Features.UserDistribution.Forms
         public async Task<DataTable> GetRoles(int userId)
         {
             string query = @"
-                SELECT r.RoleID, r.RoleName, r.Description, u.UserName
-                FROM Roles r
-                LEFT JOIN Users u ON r.CreatorID = u.UserID
-                WHERE 
-                    r.CreatorID = @UserID
-                    OR r.RoleID IN (SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
-                    OR r.CreatorID IN (SELECT UserID FROM GetDescendants(@UserID))";
+            SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            FROM Roles r
+            JOIN Users u ON r.CreatorID = u.UserID
+            WHERE NOT EXISTS(
+                SELECT 1
+                FROM RoleObject ro
+                WHERE ro.RoleID = r.RoleID
+                AND NOT EXISTS(
+                    SELECT 1
+                    FROM
+                      (SELECT ro.ObjectID, MAX(ro.ModeID) AS UserModeID
+                      FROM RoleObject ro
+                      JOIN UserRoles ur ON ro.RoleID = ur.RoleID
+                      WHERE ur.UserID = @UserID
+                      GROUP BY ro.ObjectID) uo
+                    WHERE uo.ObjectID = ro.ObjectID
+                    AND uo.UserModeID >= ro.ModeID
+                )
+            )";
+
+            //@"SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            //FROM Roles r
+            //    LEFT JOIN Users u ON r.CreatorID = u.UserID
+            //    WHERE
+            //        r.CreatorID = @UserID
+            //        OR r.RoleID IN(SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
+            //        OR r.CreatorID IN(SELECT UserID FROM GetDescendants(@UserID))";
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserID", userId } });
         }

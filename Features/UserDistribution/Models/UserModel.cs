@@ -11,6 +11,7 @@ using SewingProduction.Interfaces;
 using SewingProduction.Services;
 using SewingProduction.Models;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {
@@ -117,18 +118,38 @@ namespace SewingProduction.Features.UserDistribution.Models
             _dbHelper = dbHelper;
         }
 
-        public async Task<List<UserModel>> GetUsersHierarchyAsync(int creatorId)
+        public async Task<List<UserModel>> GetUsersHierarchyAsync(UserClass user)
         {
-            string query = @"
-                SELECT u.UserID, u.UserName, u.CreatorID, u2.UserName AS CreatorName, u.FioID, u.BrigID, u.PasswordHash
-                FROM Users u
-                LEFT JOIN Users u2 ON u.CreatorId = u2.UserId
-                WHERE u.UserId IN (
-                    SELECT UserId FROM GetDescendants(@UserId)
-                    UNION SELECT @UserId
-                )";
+            string query;
 
-            return await _dbService.GetListAsync<UserModel>(query, new { UserId = creatorId });
+            bool isAdmin = user.Roles.Contains("Администратор");
+
+            if (isAdmin)
+            {
+                // Администратор — получает всех пользователей
+                query = @"
+                    SELECT u.UserID, u.UserName, u.CreatorID, u2.UserName AS CreatorName, 
+                           u.FioID, u.BrigID, u.PasswordHash
+                    FROM Users u
+                    LEFT JOIN Users u2 ON u.CreatorId = u2.UserId";
+
+                return await _dbService.GetListAsync<UserModel>(query, new { });
+            }
+            else
+            {
+                // Обычный пользователь — только себя и потомков
+                query = @"
+                    SELECT u.UserID, u.UserName, u.CreatorID, u2.UserName AS CreatorName, 
+                           u.FioID, u.BrigID, u.PasswordHash
+                    FROM Users u
+                    LEFT JOIN Users u2 ON u.CreatorId = u2.UserId
+                    WHERE u.UserId IN (
+                        SELECT UserId FROM GetDescendants(@UserId)
+                        UNION SELECT @UserId
+                    )";
+
+                return await _dbService.GetListAsync<UserModel>(query, new { UserId = user.UserId });
+            }
         }
 
 
@@ -158,7 +179,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
             DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
             int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
-            UserRoleDataService userRoleDataService = new UserRoleDataService(new DbService(_dbHelper), _dbHelper);
+            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
             await userRoleDataService.AssignRoleAsync(newId, roleId);
             Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }

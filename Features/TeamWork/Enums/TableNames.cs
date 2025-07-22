@@ -24,5 +24,6 @@ namespace SewingProduction
 
         public const string ATN = "AllTableName";
         public const string ACN = "AllColumnName";
+        public const string Users = "Users";
     }
 }

@@ -76,14 +76,16 @@ namespace SewingProduction.Features.UserDistribution.Models
             set { if (_readonly != value) { _readonly = value; OnPropertyChanged(nameof(Readonly)); } }
         }
 
-        [Column("ModeID")]
+        //[Column("ModeID")]
+        [NotMapped]
         public int ModeID
         {
             get => _modeID;
             set { if (_modeID != value) { _modeID = value; OnPropertyChanged(nameof(ModeID)); } }
         }
 
-        [Column("ModeName")]
+        //[Column("ModeName")]
+        [NotMapped]
         public string ModeName
         {
             get => _modeName;

@@ -15,6 +15,7 @@ using SewingProduction.Interfaces;
 using System.ComponentModel;
 using System.Diagnostics;
 using Z.Dapper.Plus;
+using System.Text;
 
 namespace SewingProduction.Services
 {
@@ -68,6 +69,34 @@ namespace SewingProduction.Services
             }
         }
 
+        /// <summary>
+        /// Выполняет SQL-запрос и возвращает объект типа T
+        /// </summary>
+        /// <typeparam name="T">Тип модели</typeparam>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <param name="fieldName">Столбцы</param>
+        /// <param name="whereConditions">Словарь параметров</param>
+        /// <returns>Список объектов типа T</returns>
+        public async Task<T> SelectOneFieldAsync<T>(
+            string tableName,
+            string fieldName,
+            Dictionary<string, object> whereConditions = null)
+        {
+            var query = new StringBuilder($"SELECT {fieldName} FROM {tableName}");
+
+            if (whereConditions != null && whereConditions.Any())
+            {
+                query.Append(" WHERE ");
+                var conditions = whereConditions.Select(kvp =>
+                    kvp.Value == null ? $"{kvp.Key} IS NULL" : $"{kvp.Key} = @{kvp.Key}");
+                query.Append(string.Join(" AND ", conditions));
+            }
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                return await connection.QueryFirstOrDefaultAsync<T>(query.ToString(), whereConditions);
+            }
+        }
         /// <summary>
         /// Обновляет одно поле в таблице по заданному условию.
         /// </summary>
