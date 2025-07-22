@@ -827,6 +827,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             dateCreate.Location = new System.Drawing.Point(4, 30);
             dateCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dateCreate.Name = "dateCreate";
+            dateCreate.ObjectName = null;
             dateCreate.Size = new System.Drawing.Size(260, 23);
             dateCreate.TabIndex = 7;
             // 

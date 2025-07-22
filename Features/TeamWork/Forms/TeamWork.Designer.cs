@@ -103,6 +103,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn44 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn45 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn46 = new DevExpress.XtraGrid.Columns.GridColumn();
+            data_r = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControlRaskrTW = new CustomGridControl();
             gridViewRaskrTW = new GridView();
             gridColumn47 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -704,7 +705,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView5.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             gridView5.Appearance.SelectedRow.Options.UseFont = true;
-            gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn24, gridColumn25, gridColumn41, gridColumn42, gridColumn43, gridColumn44, gridColumn45, gridColumn46 });
+            gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn24, gridColumn25, gridColumn41, gridColumn42, gridColumn43, gridColumn44, gridColumn45, gridColumn46, data_r });
             gridView5.DetailHeight = 404;
             gridView5.GridControl = customGridControl4;
             gridView5.GroupFormat = "{0}:  {1}{2}";
@@ -791,6 +792,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn46.Visible = true;
             gridColumn46.VisibleIndex = 4;
             gridColumn46.Width = 87;
+            // 
+            // data_r
+            // 
+            data_r.Caption = "Дата посл. пачки";
+            data_r.FieldName = "data_r";
+            data_r.Name = "data_r";
+            data_r.Visible = true;
+            data_r.VisibleIndex = 5;
             // 
             // gridControlRaskrTW
             // 
@@ -3821,5 +3830,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomGroupBox customGroupBox1;
         private CustomGroupBox customGroupBoxWithButtons;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem36;
+        private DevExpress.XtraGrid.Columns.GridColumn data_r;
     }
 }
