@@ -43,7 +43,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             string Event = $"Попытка входа {formLogin}: ";
             string hashedPassword = _passwordHasher.HashPassword(formPassword);
-            Console.WriteLine(hashedPassword);
+            //Console.WriteLine(hashedPassword);
             string hashedPasswordFromDb = await _loginFormDataService.GetPasswordHash(formLogin);
             if (hashedPasswordFromDb != null)
             {
@@ -81,7 +81,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 Event += $"Логин не найден!";
                 MessageBox.Show(Event, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            _loginFormDataService.EventForHistory(_user.UserId, Event);
+            Debug.WriteLine(Event);
+            await _loginFormDataService.EventForHistory(_user.UserId, Event);
         }
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
