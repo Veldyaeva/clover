@@ -21,7 +21,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
                 (UserID, NameObject, NameForm, Event, EventDate, Komp)
                 VALUES (@UserID, @NameObject, @NameForm, @Event, @EventDate, @Komp)";
 
-            await dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
+            await dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object>
             {
                 ["@UserID"] = userId,
                 ["@NameObject"] = NameObject ?? (object)DBNull.Value,

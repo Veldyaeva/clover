@@ -163,5 +163,14 @@ namespace SewingProduction.Features.UserDistribution.Models
                 .Select(r => Convert.ToInt32(r["RoleID"]))
                 .ToList();
         }
+        public async void SetPravaForAddUser(int newId)
+        {
+            string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
+            DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
+            int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
+            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
+            await userRoleDataService.AssignRoleAsync(newId, roleId);
+            Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
+        }
     }
 }
