@@ -1968,7 +1968,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
-                        //  RecalculateSek();
+                          RecalculateSek();
                     var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
 
                     // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными

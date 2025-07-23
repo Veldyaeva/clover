@@ -45,6 +45,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly SplitContainerHelper _splitContainerHelper = new SplitContainerHelper();
+        private readonly FormSettingsHelper _formSettingsHelper = new FormSettingsHelper();
         private int bufferId = 0;
         private BindingList<ArtNormN> _bindingList;
         private BindingSource _bindingSource;
@@ -249,6 +250,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //ANNgridView.CellValueChanged -= ANNgridView_CellValueChanged;
                 // ANNgridView.CellValueChanging -= ANNgridView_CellValueChanging;
             }
+
+            // Загружаем сохраненные настройки интерфейса
+            LoadGridSettings();
 
             try
             {

@@ -22,33 +22,79 @@ namespace SewingProduction.Features.TeamWork.Forms
     {
         private void LoadGridSettings()
         {
-            // Load split container settings
+            try
+            {
+                // Загружаем настройки размера и положения формы
+                _formSettingsHelper.LoadFormSettings(this, "TeamWorkFormLayout.xml");
 
-            // Загружаем настройки для всех гридов
-            _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-            _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView7Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView8Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridView9Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridViewNZP, "gridView10Layout.xml");
-            _gridHelper.LoadGridViewSettings(gridView_binded, "gridView12Layout.xml");
+                // Загружаем настройки split container
+                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+
+                // Загружаем настройки для всех гридов
+                _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
+                _gridHelper.LoadGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
+
+                // Добавляем другие гриды, если они есть
+                if (gridViewRaskrTW != null)
+                    _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
+                if (gridView5 != null)
+                    _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
+                if (gridView2 != null)
+                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+                if (gridView3 != null)
+                    _gridHelper.LoadGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (gridView8 != null)
+                    _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при загрузке настроек интерфейса");
+            }
         }
         private void SaveGridSettings()
         {
-            _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
-            _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView7Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView8Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridView9Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridViewNZP, "gridView10Layout.xml");
-            //            _gridHelper.SaveGridViewSettings(gridView11, "gridView11Layout.xml");
-            _gridHelper.SaveGridViewSettings(gridView_binded, "gridView12Layout.xml");
-            // Save split container settings
-            _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+            try
+            {
+                // Сохраняем настройки размера и положения формы
+                _formSettingsHelper.SaveFormSettings(this, "TeamWorkFormLayout.xml");
+
+                // Сохраняем настройки split container
+                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+
+                // Сохраняем настройки для всех гридов
+                _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridViewNZP, "gridViewNZPLayout.xml");
+                _gridHelper.SaveGridViewSettings(gridView_binded, "gridView_bindedLayout.xml");
+
+                // Добавляем другие гриды, если они есть
+                if (gridViewRaskrTW != null)
+                    _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
+                if (gridView5 != null)
+                    _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
+                if (gridView2 != null)
+                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
+                if (gridView3 != null)
+                    _gridHelper.SaveGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (gridView8 != null)
+                    _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при сохранении настроек интерфейса");
+            }
         }
         /// <summary>
         /// Применяет фильтры к данным в gridView3

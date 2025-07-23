@@ -164,12 +164,46 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                var annId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                // Проверяем, что строка выбрана
+                if (ANNgridView.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите запись для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Безопасно получаем значения из грида
+                var annIdValue = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                if (annIdValue == null || annIdValue == DBNull.Value || !int.TryParse(annIdValue.ToString(), out int annId))
+                {
+                    MessageBox.Show("Не удалось получить идентификатор записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 var selectedItem = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                if (selectedItem == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Безопасно получаем значения полей с обработкой null/empty
+                string GetSafeValue(string fieldName)
+                {
+                    var value = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, fieldName);
+                    if (value == null || value == DBNull.Value)
+                        return " ";
+                    
+                    string stringValue = value.ToString();
+                    return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                }
+
+                var grup = GetSafeValue("grup");
+                var mod = GetSafeValue("Mod");
+                var articul = GetSafeValue("Articul");
                 
-                var displayText = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "grup").ToString().TrimEnd(' ')},\n\r" +
-                    $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')},\n\r" +
-                    $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
+                var displayText = $"группа: {grup},\n\r" +
+                    $"модель: {mod},\n\r" +
+                    $"артикул: {articul}";
 
                 // Копируем в глобальный буфер
                 TeamWorkBuffer.CopyToBuffer(annId, displayText, selectedItem);

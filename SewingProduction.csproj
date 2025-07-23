@@ -7,7 +7,7 @@
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <ApplicationIcon>Resources\ICOnki2\Untitled-25.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
@@ -209,7 +209,7 @@
     <Content Include="Help\Help.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\ICOnki2\Untitled-25.ico" />
+    <Content Include="Resources\AppIcons\favicon.ico" />
   </ItemGroup>
 
 
