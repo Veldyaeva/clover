@@ -262,7 +262,6 @@
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
-            this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.pageInfo2 = new DevExpress.XtraReports.UI.XRPageInfo();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable6 = new DevExpress.XtraReports.UI.XRTable();
@@ -435,18 +434,9 @@
             // BottomMargin
             // 
             this.BottomMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.pageInfo1,
             this.pageInfo2});
             this.BottomMargin.HeightF = 25F;
             this.BottomMargin.Name = "BottomMargin";
-            // 
-            // pageInfo1
-            // 
-            this.pageInfo1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
-            this.pageInfo1.Name = "pageInfo1";
-            this.pageInfo1.PageInfo = DevExpress.XtraPrinting.PageInfo.DateTime;
-            this.pageInfo1.SizeF = new System.Drawing.SizeF(325F, 23F);
-            this.pageInfo1.StyleName = "PageInfo";
             // 
             // pageInfo2
             // 
@@ -455,7 +445,7 @@
             this.pageInfo2.SizeF = new System.Drawing.SizeF(325F, 23F);
             this.pageInfo2.StyleName = "PageInfo";
             this.pageInfo2.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.pageInfo2.TextFormatString = "Page {0} of {1}";
+            this.pageInfo2.TextFormatString = "страница {0} из {1}";
             // 
             // Detail
             // 
@@ -1105,7 +1095,7 @@
             this.xrLabel17.CanShrink = true;
             this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "AccessibleDescription", "[articul]"),
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[annView].[articul]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[articul]")});
             this.xrLabel17.Font = new DevExpress.Drawing.DXFont("Arial", 35F, DevExpress.Drawing.DXFontStyle.Bold);
             this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(0.9999593F, 5.24958F);
             this.xrLabel17.Multiline = true;
@@ -2394,13 +2384,13 @@
             join1.KeyColumns.Add(relationColumnInfo1);
             join1.Nested = table4;
             join1.Parent = table3;
-            join1.SqlJoinType = ((DevExpress.DataAccess.Sql.SqlJoinType)(DevExpress.DataAccess.Sql.SqlJoinType.RightOuter));
+            join1.SqlJoinType = ((DevExpress.DataAccess.Sql.SqlJoinType)(DevExpress.DataAccess.Sql.SqlJoinType.LeftOuter));
             relationColumnInfo2.NestedKeyColumn = "tab";
             relationColumnInfo2.ParentKeyColumn = "constr";
             join2.KeyColumns.Add(relationColumnInfo2);
             join2.Nested = table5;
             join2.Parent = table3;
-            join2.SqlJoinType = ((DevExpress.DataAccess.Sql.SqlJoinType)(DevExpress.DataAccess.Sql.SqlJoinType.RightOuter));
+            join2.SqlJoinType = ((DevExpress.DataAccess.Sql.SqlJoinType)(DevExpress.DataAccess.Sql.SqlJoinType.LeftOuter));
             selectQuery3.Relations.Add(join1);
             selectQuery3.Relations.Add(join2);
             selectQuery3.Tables.Add(table3);
@@ -2596,22 +2586,24 @@
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(90697, "джемпер женский"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(91970, "джемпер женский"));
             staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(136777, "джемпер без артикула"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(136983, "чиркова1"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(136989, "чиркова2"));
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(90674, "1Ф4940                   "));
             this._annId.ValueSourceSettings = staticListLookUpSettings1;
+            this._annId.Visible = false;
             // 
             // GroupFooter3
             // 
             this.GroupFooter3.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel16,
             this.xrSubreport2});
-            this.GroupFooter3.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Visible", "Iif(?_isUpak = 0, \'Yes\', \'No\')")});
             this.GroupFooter3.HeightF = 115.1255F;
             this.GroupFooter3.Name = "GroupFooter3";
             // 
             // timeHours
             // 
             this.timeHours.DataMember = "annView";
-            this.timeHours.Expression = " Round(ToDecimal([sek]) / 60, 2) +\' час \'";
+            this.timeHours.Expression = " Round(ToDecimal([sek]) / 360, 2) +\' час \'";
             this.timeHours.Name = "timeHours";
             // 
             // GroupFooter4
@@ -2625,7 +2617,7 @@
             // 
             // xrSubreport1
             // 
-            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(507.6219F, 0F);
+            this.xrSubreport1.LocationFloat = new DevExpress.Utils.PointFloat(474.675F, 9.999974F);
             this.xrSubreport1.Name = "xrSubreport1";
             this.xrSubreport1.ParameterBindings.Add(new DevExpress.XtraReports.UI.ParameterBinding("_annId", this._annId));
             this.xrSubreport1.ReportSource = new SewingProduction.Report.subreport.secByKodPodrAnnIdReport();
@@ -2761,7 +2753,6 @@
         #endregion
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
-        private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo2;
         private DevExpress.XtraReports.UI.DetailBand Detail;
         private DevExpress.XtraReports.UI.XRControlStyle Title;

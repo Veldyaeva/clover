@@ -97,19 +97,11 @@ namespace SewingProduction.Services
             string query = "SELECT * FROM dbo.NormRaszSek_view WHERE annId = @annId";
             var parameters = new { annId = annId };
 
-            // Используем ваш существующий DbService или DbHelper
-            // Этот метод должен уметь выполнять запрос и возвращать один объект
             return await _dbService.GetFirstOrDefaultAsync<NormRaszSekView>(query, parameters);
         }
 
         public async Task<List<ArtNormN>> GetArtNormData()
         {
-        //    string query = @"
-        //SELECT 
-        //    annId, kod, grup, articul, mod, sek, sek_vyaz,
-        //    data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-        //    sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-        //    data_sozd, diz, constr  FROM ArtNormNView JOIN status_ann ON status = status_id";
             string query = @" select 
                    AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
