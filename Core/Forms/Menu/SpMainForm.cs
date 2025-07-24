@@ -11,6 +11,7 @@ using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.Sprav;
 
 namespace SewingProduction
 {
@@ -119,7 +120,7 @@ namespace SewingProduction
         }
         private void тарифыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenForm(new EditTarif(_user), sender);
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
