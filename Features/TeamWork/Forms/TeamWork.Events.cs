@@ -461,16 +461,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                //Проверяем статус "актуальный" и наличие даты обновления
-                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                {
-                    MessageBox.Show(
-                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
-                        "Ограничение редактирования",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
-                    return;
-                }
+                ////Проверяем статус "актуальный" и наличие даты обновления
+                //if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                //{
+                //    MessageBox.Show(
+                //        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                //        "Ограничение редактирования",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Information);
+                //    return;
+                //}
                 var updatedArtNormN = new ArtNormN();
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
                 {
