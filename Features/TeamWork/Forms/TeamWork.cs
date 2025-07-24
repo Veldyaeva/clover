@@ -666,7 +666,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 6:
                     //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
                     if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
-                        ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+                       SetArchiveStatus_Internal(sender, e);//МЕНЯЮ НА АРХИВ для Чирковой
+                    //ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
@@ -976,6 +977,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 string articul = selectedNzp.articul.TrimEnd(' ');
+                string kod = "3";//selectedNzp.kod.TrimEnd(' ');
                 if (string.IsNullOrEmpty(articul))
                 {
                     MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -988,8 +990,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 $"Артикул: {articul}\n\n" +
                                 $"Это затронет записи, где:\n" +
                                 $"- sa.annid = ann.annID\n" +
-                                $"- left(sa.kod, 7) = ann.kod\n" +
-                                $"- ann.articul LIKE '{articul}%'\n" +
+                                $"- left(sa.kod, 7) = {kod}\n" +
+                                $"- sa.articul = '{articul}'\n" +
                                 $"- ann.annID = {annId}";
 
                 var result = MessageBox.Show(
@@ -1006,16 +1008,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 string sqlQuery = @"
                     UPDATE sa 
                     SET sa.arh = 1
-                    FROM sp_articul sa 
-                    INNER JOIN art_norm_n ann ON sa.annid = ann.annID 
-                    WHERE left(sa.kod, 7) = ann.kod 
-                    AND ann.articul LIKE @art + '%' 
+                    WHERE left(sa.kod, 7) = @kod 
+                    AND ann.articul = @art  
                     AND ann.annID = @annId";
 
                 var parameters = new Dictionary<string, object>
                 {
                     { "@annId", annId },
-                    { "@art", articul }
+                    { "@art", articul },
+                    { "@kod", kod }
                 };
 
                 // Выполняем обновление
