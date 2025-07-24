@@ -2072,7 +2072,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string deleteSql = $"DELETE FROM {tableName} WHERE {keyFieldName} IN @ids";
+                    string deleteSql = $"Update {tableName} SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() where {keyFieldName} in @ids";
                     await connection.ExecuteAsync(deleteSql, new { ids = deletedIds });
                     await _logger.LogEventAsync($"[{itemTypeName}] Удалено записей: {deletedIds.Count}", "SaveListAsync");
                 }
