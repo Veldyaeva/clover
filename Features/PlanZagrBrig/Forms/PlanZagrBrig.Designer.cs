@@ -2361,7 +2361,7 @@
             // gridColumn17
             // 
             gridColumn17.Caption = "код РТ";
-            gridColumn17.FieldName = "nlKoddRt";
+            gridColumn17.FieldName = "nlAnnID";
             gridColumn17.MinWidth = 23;
             gridColumn17.Name = "gridColumn17";
             gridColumn17.Width = 87;
