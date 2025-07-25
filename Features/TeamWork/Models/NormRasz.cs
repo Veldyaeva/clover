@@ -134,6 +134,9 @@ namespace SewingProduction.Models
             KodPodr = source.KodPodr;
             KodOb = source.KodOb;
             Seb = source.Seb;
+            // Служебные поля не копируются - они должны быть актуальными для каждой записи:
+            // nrDateAdd и nrCompAdd устанавливаются автоматически при INSERT (DEFAULT)
+            // nrDateDel и nrCompDel устанавливаются только при пометке на удаление
             IsNew = source.IsNew;
             IsModified = source.IsModified;
         }

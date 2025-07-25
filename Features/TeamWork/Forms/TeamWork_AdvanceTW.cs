@@ -1031,6 +1031,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         this.Text = "Архив+копия";
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
@@ -1041,11 +1042,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                     case (int)Mode.Edit:
                         this.Text = "Редактировать";
                         await LoadForEdit(_selectedAnnId);
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
@@ -1058,7 +1061,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
-
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
@@ -1217,6 +1219,27 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Отписываемся от событий при выходе из формы
                 this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
+            }
+        }
+        private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
+        {
+            string imagePath = null;
+            try
+            {
+                imagePath = await _artNormService.GetImage(annId, kod);
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    pictureBox.ImageLocation = imagePath;
+                }
+                else
+                {
+                    pictureBox.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}' для annId = {annId}");
+                pictureBox.Image = null;
             }
         }
         private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
@@ -2072,7 +2095,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string deleteSql = $"DELETE FROM {tableName} WHERE {keyFieldName} IN @ids";
+                    string deleteSql = $"Update {tableName} SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() where {keyFieldName} in @ids";
                     await connection.ExecuteAsync(deleteSql, new { ids = deletedIds });
                     await _logger.LogEventAsync($"[{itemTypeName}] Удалено записей: {deletedIds.Count}", "SaveListAsync");
                 }

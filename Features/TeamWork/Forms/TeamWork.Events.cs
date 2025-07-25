@@ -283,7 +283,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
                 await Task.Delay(200, token);
                 
-                var tRelated = LoadRelatedData(annId, token);
+                var tRelated = LoadRelatedDataFromView(annId, token);
                 var tNzp = LoadNZP(annId, token);
                 await Task.WhenAll(tRelated, tNzp);
             }
@@ -402,6 +402,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         await LoadRelatedData(selectedAnnId);
 
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(selectedAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
+
                         // Отображаем сообщение об успешном редактировании
                         MessageBox.Show(
                             "Запись успешно отредактирована.",
@@ -452,16 +461,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                // Проверяем статус "актуальный" и наличие даты обновления
-                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                {
-                    MessageBox.Show(
-                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.", 
-                        "Ограничение редактирования", 
-                        MessageBoxButtons.OK, 
-                        MessageBoxIcon.Information);
-                    return;
-                }
+                ////Проверяем статус "актуальный" и наличие даты обновления
+                //if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                //{
+                //    MessageBox.Show(
+                //        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                //        "Ограничение редактирования",
+                //        MessageBoxButtons.OK,
+                //        MessageBoxIcon.Information);
+                //    return;
+                //}
                 var updatedArtNormN = new ArtNormN();
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
                 {
@@ -522,6 +531,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
                             await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки 
+                        }
+
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        if (updatedArtNormN != null && updatedArtNormN.AnnID > 0)
+                        {
+                            _ = Task.Run(async () =>
+                            {
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView, 
+                                    forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
+                                // Очищаем статус через 3 секунды после завершения
+                                await Task.Delay(3000);
+                                ClearSecondsUpdateStatus();
+                            });
                         }
                     }
                 }
@@ -677,8 +699,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 }
                             }
 
-                            await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
-                            MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
+                        
+                        // Запускаем асинхронное обновление секунд для созданной/обновленной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
+                        
+                        MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else // DialogResult.Cancel или другое

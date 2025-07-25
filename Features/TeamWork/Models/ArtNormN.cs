@@ -132,6 +132,14 @@ namespace SewingProduction.Models
                 }
             }
         }
+        [Column("annDateDel")]
+        public DateTime? dateDel { get; set; }
+        [Column("annCompDel")]
+        public string compDel { get; set; }
+        [Column("annDateAdd")]
+        public DateTime? dateAdd { get; set; }
+        [Column("annCompAdd")]
+        public string compAdd { get; set; }
 
         [Column("sek_kr")]
         public int SekKr { get; set; }
@@ -245,6 +253,10 @@ namespace SewingProduction.Models
             this.SekVyaz57 = source.SekVyaz57;
             this.SekVyaz18 = source.SekVyaz18;
             this.SekShv1 = source.SekShv1;
+            this.dateDel = source.dateDel;
+            this.compDel = source.compDel;
+            this.dateAdd = source.dateAdd;
+            this.compAdd = source.compAdd;
         }
 
         public ArtNormN Clone()
