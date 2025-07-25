@@ -185,4 +185,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
