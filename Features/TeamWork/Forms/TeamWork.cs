@@ -707,34 +707,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void splitContainerControl2_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        //    private void ANNgridView_CalcPreviewText_1(object sender, CalcPreviewTextEventArgs e)
-        //    {
-
-        //        var row = e.Row as ArtNormN;
-        //        if (row == null) return;
-
-        //        var parts = new List<string>();
-
-        //        if (!string.IsNullOrWhiteSpace(row.Komment))
-        //            parts.Add(row.Komment);
-
-        //        // выводим всегда
-        //        parts.Add($"Дизайнер: {row.Diz}, конструктор: {row.Constr}");
-
-        //        if (!string.IsNullOrWhiteSpace(row.Reco))
-        //            parts.Add($"Рекомендация: {row.Reco}");
-        //        if (!string.IsNullOrWhiteSpace(row.Komment))
-        //            parts.Add($"Комментарий: {row.Komment}");
-
-        //        e.PreviewText = string.Join(Environment.NewLine, parts);
-
-
-        //    }
         private void gridView_unboundArts_PopupMenuShowing(object sender, DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventArgs e)
         {
             _gridHelper.popUpMenuCopy(sender, e);
@@ -774,11 +746,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             report1.Parameters["_annId"].Value = selectedAnn.AnnID;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
-        }
-
-        private void gridControl_wdToBind_Click(object sender, EventArgs e)
-        {
-
         }
 
         private async void customSimpleButton2_Click(object sender, EventArgs e)
@@ -922,11 +889,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void ANNgridControl_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private async void customSimpleButton3_Click(object sender, EventArgs e)
         {
             await UpdateSpArticulArch_Internal(sender, e);
@@ -977,7 +939,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 string articul = selectedNzp.articul.TrimEnd(' ');
-                string kod = "3";//selectedNzp.kod.TrimEnd(' ');
+                int kod = selectedNzp.kodd;
                 if (string.IsNullOrEmpty(articul))
                 {
                     MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -1204,6 +1166,29 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 int annId = selectedAnn.AnnID;
+                // Получаем артикул из выбранной строки в gridView5
+                if (gridView5.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите запись в гриде НЗП (gridView5).", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var selectedNzp = gridView5.GetRow(gridView5.FocusedRowHandle) as NZPByKoddRt;
+                if (selectedNzp == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи в гриде НЗП.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string articul = selectedNzp.articul.TrimEnd(' ');
+                int kod = selectedNzp.kodd;
+                if (string.IsNullOrEmpty(articul))
+                {
+                    MessageBox.Show("Артикул в выбранной записи НЗП пустой.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+
                 string displayInfo = $"Группа: {selectedAnn.grup?.TrimEnd(' ')}, " +
                                    $"Модель: {selectedAnn.Mod?.TrimEnd(' ')}, " +
                                    $"Артикул: {selectedAnn.Articul?.TrimEnd(' ')}";
@@ -1227,11 +1212,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
 
                 // SQL запрос для отвязывания артикулов
-                string sqlQuery = "UPDATE sp_articul SET annid = 0 WHERE annid = @annID";
-                
+                string sqlQuery =
+                    //"UPDATE sp_articul SET annid = 0 WHERE annid = @annID";
+                    "UPDATE sp_articul SET annid = 0 WHERE left(kod, 7) = @kod AND articul = @art AND annID = @annId";
+
+
                 var parameters = new Dictionary<string, object>
                 {
-                    { "@annID", annId }
+                    { "@annID", annId },
+                    { "@kod", kod },
+                    { "@art", articul}
                 };
 
                 // Выполняем обновление
