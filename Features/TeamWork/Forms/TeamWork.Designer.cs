@@ -2661,7 +2661,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl_wdToBind.Size = new System.Drawing.Size(622, 362);
             gridControl_wdToBind.TabIndex = 6;
             gridControl_wdToBind.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_wdToBind });
-            gridControl_wdToBind.Click += gridControl_wdToBind_Click;
             // 
             // gridView_wdToBind
             // 
@@ -3199,7 +3198,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             splitContainerControl2.Panel1.Controls.Add(customButton2);
             splitContainerControl2.Panel1.Text = "Panel1";
-            splitContainerControl2.Panel1.Paint += splitContainerControl2_Panel1_Paint;
             // 
             // splitContainerControl2.Panel2
             // 

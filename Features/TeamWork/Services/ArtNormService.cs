@@ -81,6 +81,12 @@ namespace SewingProduction.Services
             SqlMapper.SetTypeMap(typeof(ArtNormN), map);
         }
         #region мои методы
+        /// <summary>
+        /// Удалять можно ТОЛЬКО при отмене создания новой строки. Никакие существующие строки нельзя удалять!
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="annId"></param>
+        /// <returns></returns>
         public async Task DeleteByAnnId(string tableName, int annId)
         {
             try
@@ -414,7 +420,7 @@ WHERE nr.annId = @annId";
     nr.kod_ob AS KodOb,   
     nr.kod_podr AS KodPodr,  
     nr.kod_proizv AS KodProizv,
-    nr.Spec, nr.Obor, nr.nrId,
+    nr.Spec, nr.nrId,
     nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,

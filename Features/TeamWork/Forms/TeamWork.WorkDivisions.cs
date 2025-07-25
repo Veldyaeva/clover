@@ -145,55 +145,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private async Task LoadRelatedData(int annId, CancellationToken ct)
-        {
-            ct.ThrowIfCancellationRequested();
-            
-            // Загружаем данные асинхронно
-            var normRaskResult = await _artNormService.GetRelatedNormRask(annId, ct);
-            var normKontResult = await _artNormService.GetRelatedNormKont(annId, ct);
-            var normRaszResult = await _artNormService.GetRelatedNormRasz(annId, ct);
-            
-            ct.ThrowIfCancellationRequested();
 
-            // Обновление UI должно происходить в UI потоке
-            if (this.InvokeRequired)
-            {
-                await this.InvokeAsync(() =>
-                {
-                    _normRaskListTW.BulkLoad(normRaskResult);
-                    _normKontListTW.BulkLoad(normKontResult);
-                    _normRaszListTW.BulkLoad(normRaszResult);
-                });
-            }
-            else
-            {
-                _normRaskListTW.BulkLoad(normRaskResult);
-                _normKontListTW.BulkLoad(normKontResult);
-                _normRaszListTW.BulkLoad(normRaszResult);
-            }
-
-            ct.ThrowIfCancellationRequested();
-
-            await LoadAndBindFioListsAsync();
-
-            // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
-            if (this.InvokeRequired)
-            {
-                await this.InvokeAsync(() =>
-                {
-                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                    if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                    if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-                });
-            }
-            else
-            {
-                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-                if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-                if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-            }
-        }
         private async Task LoadRelatedData(int annId)
         {
             // Загружаем данные асинхронно
@@ -409,6 +361,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,
+                dateAdd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
                 dateUpdate = null,//DateTime.MinValue,
