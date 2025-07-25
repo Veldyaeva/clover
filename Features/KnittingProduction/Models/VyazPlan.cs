@@ -22,8 +22,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? DateCdPlan { get; set; }
         [NotMapped]
         public string kod { get; set; }
+        //[NotMapped]
+        //public string KoddRt { get; set; }
         [NotMapped]
-        public string KoddRt { get; set; }
+        public int annID { get; set; }
         [NotMapped]
         public string Articul { get; set; }
         [NotMapped]

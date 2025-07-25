@@ -231,21 +231,22 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //        info.GroupText = caption; // ← здесь можно задать длинный текст, он не обрезается
                 //    }
                 //};
-                gridViewPlanSezonZadKnitMachine.GroupSummary.Clear();
 
-                gridViewPlanSezonZadKnitMachine.GroupSummary.Add(new GridGroupSummaryItem()
-                {
-                    FieldName = "hoursTotal",
-                    SummaryType = DevExpress.Data.SummaryItemType.Sum,
-                    ShowInGroupColumnFooterName = "hoursTotal"
-                });
+                //gridViewPlanSezonZadKnitMachine.GroupSummary.Clear();
 
-                gridViewPlanSezonZadKnitMachine.DataSourceChanged += (s, e) =>
-                {
-                    gridViewPlanSezonZadKnitMachine.BeginUpdate();
-                    gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
-                    gridViewPlanSezonZadKnitMachine.EndUpdate();
-                };
+                //gridViewPlanSezonZadKnitMachine.GroupSummary.Add(new GridGroupSummaryItem()
+                //{
+                //    FieldName = "hoursTotal",
+                //    SummaryType = DevExpress.Data.SummaryItemType.Sum,
+                //    ShowInGroupColumnFooterName = "hoursTotal"
+                //});
+
+                //gridViewPlanSezonZadKnitMachine.DataSourceChanged += (s, e) =>
+                //{
+                //    gridViewPlanSezonZadKnitMachine.BeginUpdate();
+                //    gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
+                //    gridViewPlanSezonZadKnitMachine.EndUpdate();
+                //};
 
 
                 //gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
