@@ -82,14 +82,14 @@ namespace SewingProduction.Core.Class
             this.Visible = hasRead || hasWrite;
             this.Enabled = hasWrite;
 
-            if (!hasRead && !hasWrite)
-            {
-                this.Visible = false;
-                this.Enabled = false;
-                this.TabStop = false;
-                this.Size = Size.Empty;
-                this.Location = new Point(-10000, -10000);
-            }
+            //if (!hasRead && !hasWrite)
+            //{
+            //    this.Visible = false;
+            //    this.Enabled = false;
+            //    this.TabStop = false;
+            //    this.Size = Size.Empty;
+            //    this.Location = new Point(-10000, -10000);
+            //}
 
             Debug.WriteLine($"[Доступ Button] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
         }
@@ -132,6 +132,12 @@ namespace SewingProduction.Core.Class
 
         public void ApplyPermission(UserClass user)
         {
+
+            if (!this.IsHandleCreated)
+            {
+                this.HandleCreated += (_, _) => ApplyPermission(user);
+                return;
+            }
             // Гарантия, что ObjectName задан
             if (string.IsNullOrEmpty(ObjectName))
                 ObjectName = this.Name;

@@ -234,11 +234,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         #region Загрузка данных LoadGridControlData
 
-        /// <summary>
-        /// Загружает изображение в PictureBox по идентификатору разделения труда.
-        /// </summary>
-        /// <param name="pictureBox">Целевой PictureBox</param>
-        /// <param name="kod">Идентификатор разделения труда</param>
         private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
         {
             string imagePath = null;
