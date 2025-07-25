@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -1031,6 +1032,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         this.Text = "Архив+копия";
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
@@ -1041,6 +1043,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     case (int)Mode.Edit:
                         this.Text = "Редактировать";
                         await LoadForEdit(_selectedAnnId);
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
@@ -1058,7 +1061,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
-
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
@@ -1196,6 +1198,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         item.IsNew = false;
                         item.IsModified = false;
                         item.nkId = 0;
+                        //item.kod_o = "100";
+
                         _normKontList.Add(item);
                     }
                     _normKontBindingSource.ResetBindings(false);
@@ -1217,6 +1221,27 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Отписываемся от событий при выходе из формы
                 this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
+            }
+        }
+        private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
+        {
+            string imagePath = null;
+            try
+            {
+                imagePath = await _artNormService.GetImage(annId, kod);
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    pictureBox.ImageLocation = imagePath;
+                }
+                else
+                {
+                    pictureBox.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}' для annId = {annId}");
+                pictureBox.Image = null;
             }
         }
         private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
@@ -1835,6 +1860,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (!hasChoice2) options.Add(choice2);
 
                     string selectedText = null;
+                    string kod_o = null;
 
                     if (options.Count == 2)
                     {
@@ -1842,6 +1868,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (choiceResult == DialogResult.Yes)
                         {
                             selectedText = options[0];
+                            kod_o = "001"; 
                         }
                         else if (choiceResult == DialogResult.No)
                         {
@@ -1849,12 +1876,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                             if (choiceResult2 == DialogResult.Yes)
                             {
                                 selectedText = options[1];
+                                kod_o = "100";
                             }
                         }
                     }
                     else if (options.Count == 1)
                     {
                         selectedText = options[0];
+                        kod_o = "100";
                         MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -1867,6 +1896,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
+                            kod_o = kod_o,
                             text = selectedText,
                             IsNew = true
                         };
@@ -1970,6 +2000,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                           RecalculateSek();
                     var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  //  Thread.Sleep(5000);
 
                     // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
                     if (calculatedData != null)
@@ -2072,7 +2103,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string deleteSql = $"DELETE FROM {tableName} WHERE {keyFieldName} IN @ids";
+                    string deleteSql = $"Update {tableName} SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() where {keyFieldName} in @ids";
                     await connection.ExecuteAsync(deleteSql, new { ids = deletedIds });
                     await _logger.LogEventAsync($"[{itemTypeName}] Удалено записей: {deletedIds.Count}", "SaveListAsync");
                 }
@@ -2503,6 +2534,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice1,
+                        kod_o = "001",
                         IsNew = true
                     };
                     _normKontList.Add(newKont1);
@@ -2514,6 +2546,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice2,
+                        kod_o = "100",
                         IsNew = true
                     };
                     _normKontList.Add(newKont2);
