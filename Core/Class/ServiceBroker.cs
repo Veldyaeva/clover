@@ -25,7 +25,7 @@ namespace SewingProduction
         // Для теста:
         // private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
         //private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
-        private readonly string _connectionString = SettingsManager.GetCurrentDatabase();
+        private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
         private SqlConnection _connection;
         private SqlCommand _command;
         private SqlDependency _dependency;

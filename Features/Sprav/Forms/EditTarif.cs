@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,161 +64,105 @@ namespace SewingProduction.Features.Sprav
             }
             gridViewZp.ActiveFilterString = filter;
         }
+
+        private async void customButtonSave_Click(object sender, EventArgs e)
+        {
+            if (!proverka()) return;
+
+            int pcstId = (int)customComboBoxType.SelectedValue;
+            string znach = customTextBoxZnach.Text.Trim();
+
+            var model = new TarifModel
+            {
+                constant_name = customTextBoxName.Text.Trim(),
+                dimens = customTextBoxRazm.Text.Trim(),
+                describe = customTextBoxOpis.Text.Trim(),
+                pcstId = pcstId,
+                begin_dt = customDateTimePickerBegin.Value,
+                firm = customComboBoxOrg.SelectedValue?.ToString(),
+                typeConst = customComboBoxType.Text, 
+                nameTable = "proizv_constant_stor",
+                nameField = "pscdt_id"
+            };
+
+            // Установка значения в нужное поле
+            try
+            {
+                switch (pcstId)
+                {
+                    case 1: model.value_numeric = decimal.Parse(znach.Replace(',', '.'), CultureInfo.InvariantCulture); break;
+                    case 2: model.value_integer = int.Parse(znach); break;
+                    case 3:
+                        MessageBox.Show("Тип 'float' не поддерживается");
+                        return;
+                    case 4: model.value_character = znach; break;
+                    case 5: model.value_datetime = DateTime.Parse(znach); break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка преобразования значения: {ex.Message}");
+                return;
+            }
+
+            try
+            {
+                await _tarifService.SaveTarifAsync(model);
+                MessageBox.Show("Сохранено успешно.");
+                customGroupBoxAdd.Visible = false;
+
+                var updated = await _tarifService.LoadTarifList();
+                customGridControlZp.DataSource = updated;
+                customGridControlZp.RefreshDataSource();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при сохранении: " + ex.Message);
+            }
+        }
+        public bool proverka()
+        {
+            var requiredFields = new Dictionary<string, (Func<bool> condition, string message)>
+            {
+                ["Имя константы"] = (() => string.IsNullOrWhiteSpace(customTextBoxName.Text), "Не заполнено поле Имя константы!"),
+                ["Размерность"] = (() => string.IsNullOrWhiteSpace(customTextBoxRazm.Text), "Не заполнена размерность! Если неизвестна, поставьте галочку 'Нет размерности'"),
+                ["Описание"] = (() => string.IsNullOrWhiteSpace(customTextBoxOpis.Text), "Не заполнено поле Описание!"),
+                ["Тип данных"] = (() => string.IsNullOrWhiteSpace(customComboBoxType.Text), "Не выбран тип данных!"),
+                ["Значение"] = (() => string.IsNullOrWhiteSpace(customTextBoxZnach.Text), "Не заполнено поле Значение!")
+            };
+            foreach (var field in requiredFields.Values)
+            {
+                if (field.condition())
+                {
+                    MessageBox.Show(field.message);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private async void customButtonAdd_Click(object sender, EventArgs e)
+        {
+            customGroupBoxAdd.Visible = true;
+            customComboBoxOrg.DataSource = await _tarifService.LoadFirmAsync();
+            var typeList = await _tarifService.LoadTypeAsync();
+            customComboBoxType.DisplayMember = "field_name";
+            customComboBoxType.ValueMember = "pcst_id";
+            customComboBoxType.DataSource = typeList;
+
+        }
+
+        private void customCheckBoxNotRazm_CheckedChanged(object sender, EventArgs e)
+        {
+            customTextBoxRazm.Text = customCheckBoxNotRazm.Checked ? customCheckBoxNotRazm.Text : "";
+        }
+
+        private void customButtonOtm_Click(object sender, EventArgs e)
+        {
+            customGroupBoxAdd.Visible = false;
+        }
     }
-    public class TarifDataService
-    {
-        private readonly DbService _dbService;
-        private readonly DatabaseHelper _dbHelper;
-
-        public TarifDataService(DbService dbService, DatabaseHelper dbHelper)
-        {
-            _dbService = dbService;
-            _dbHelper = dbHelper;
-        }
-        public async Task<List<TarifModel>> LoadTarifList()
-        {
-            string query = @$"SELECT  TOP 1 with TIES * 
-                            FROM proizv_view_constants pvc 
-                            WHERE describe IS NOT NULL 
-                            ORDER BY rank() over(partition by pvc.pc_id order by pvc.pc_id, pvc.begin_dt desc)";
-            return await _dbService.GetListAsync<TarifModel>(query, new Dictionary<string, object>());
-        }
-        public async Task<List<TarifRabotModel>> LoadTarifRabotList()
-        {
-            string query = @$"SELECT * FROM sp_ras_rabot  
-                            WHERE text IS NOT NULL ";
-            return await _dbService.GetListAsync<TarifRabotModel>(query, new Dictionary<string, object>());
-        }
-    }
-    public class TarifModel : INotifyPropertyChanged
-    {
-        private string _describe;
-        [Column("describe")]
-        public string describe
-        {
-            get => _describe;
-            set { if (_describe != value) { _describe = value; OnPropertyChanged(nameof(describe)); } }
-        }
-        private DateTime _begin_dt;
-        [Column("begin_dt")]
-        public DateTime begin_dt
-        {
-            get => _begin_dt;
-            set { if (_begin_dt != value) { _begin_dt = value; OnPropertyChanged(nameof(begin_dt)); } }
-        }
-
-        private decimal _value_numeric;
-        [Column("value_numeric")]
-        public decimal value_numeric
-        {
-            get => _value_numeric;
-            set { if (_value_numeric != value) { _value_numeric = value; OnPropertyChanged(nameof(value_numeric)); } }
-        }
-
-        private int _value_integer;
-        [Column("value_integer")]
-        public int value_integer
-        {
-            get => _value_integer;
-            set { if (_value_integer != value) { _value_integer = value; OnPropertyChanged(nameof(value_integer)); } }
-        }
-
-        private float _value_float;
-        [Column("value_float")]
-        public float value_float
-        {
-            get => _value_float;
-            set { if (_value_float != value) { _value_float = value; OnPropertyChanged(nameof(value_float)); } }
-        }
-
-        private string _value_character;
-        [Column("value_character")]
-        public string value_character
-        {
-            get => _value_character;
-            set { if (_value_character != value) { _value_character = value; OnPropertyChanged(nameof(value_character)); } }
-        }
-
-        private DateTime _value_datetime;
-        [Column("value_datetime")]
-        public DateTime value_datetime
-        {
-            get => _value_datetime;
-            set { if (_value_datetime != value) { _value_datetime = value; OnPropertyChanged(nameof(value_datetime)); } }
-        }
-
-        private string _firm;
-        [Column("firm")]
-        public string firm
-        {
-            get => _firm;
-            set { if (_firm != value) { _firm = value; OnPropertyChanged(nameof(firm)); } }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-    }
-    public class TarifRabotModel : INotifyPropertyChanged
-    {
-        private int _id_kod_o;
-        [Column("id_kod_o")]
-        public int id_kod_o
-        {
-            get => _id_kod_o;
-            set { if (_id_kod_o != value) { _id_kod_o = value; OnPropertyChanged(nameof(id_kod_o)); } }
-        }
-        private string _Text;
-        [Column("Text")]
-        public string Text
-        {
-            get => _Text;
-            set { if (_Text != value) { _Text = value; OnPropertyChanged(nameof(Text)); } }
-        }
-
-        private int _prizn_podr;
-        [Column("prizn_podr")]
-        public int prizn_podr
-        {
-            get => _prizn_podr;
-            set { if (_prizn_podr != value) { _prizn_podr = value; OnPropertyChanged(nameof(prizn_podr)); } }
-        }
-
-        private decimal _tarif;
-        [Column("tarif")]
-        public decimal tarif
-        {
-            get => _tarif;
-            set { if (_tarif != value) { _tarif = value; OnPropertyChanged(nameof(tarif)); } }
-        }
-
-        private string _ed_izm;
-        [Column("ed_izm")]
-        public string ed_izm
-        {
-            get => _ed_izm;
-            set { if (_ed_izm != value) { _ed_izm = value; OnPropertyChanged(nameof(ed_izm)); } }
-        }
-
-        private decimal _koef_chas;
-        [Column("koef_chas")]
-        public decimal koef_chas
-        {
-            get => _koef_chas;
-            set { if (_koef_chas != value) { _koef_chas = value; OnPropertyChanged(nameof(koef_chas)); } }
-        }
-
-        private int _razr;
-        [Column("razr")]
-        public int razr
-        {
-            get => _razr;
-            set { if (_razr != value) { _razr = value; OnPropertyChanged(nameof(razr)); } }
-        }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propName) =>
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));
-    }
+
 }

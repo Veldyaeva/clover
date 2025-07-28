@@ -61,18 +61,17 @@
             customTextBoxName = new CustomTextBox();
             customLabelName = new CustomLabel();
             customTextBoxZnach = new CustomTextBox();
-            customTextBoxDate = new CustomTextBox();
             customTextBoxRazm = new CustomTextBox();
             customCheckBoxNotRazm = new CustomCheckBox();
             customButtonOtm = new Core.Class.CustomButton();
             customButtonSave = new Core.Class.CustomButton();
             customComboBoxType = new CustomComboBox();
+            customDateTimePickerBegin = new CustomDateTimePicker();
+            customButtonAdd = new Core.Class.CustomButton();
             customGridControlHistory = new Core.Class.CustomGridControl();
             gridViewHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
-            customButtonAdd = new Core.Class.CustomButton();
-            xtraTabPageTarif = new DevExpress.XtraTab.XtraTabPage();
             customGridControlTR = new Core.Class.CustomGridControl();
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridViewTR = new DevExpress.XtraGrid.Views.Grid.GridView();
             id_kod_o = new DevExpress.XtraGrid.Columns.GridColumn();
             prizn_podr = new DevExpress.XtraGrid.Columns.GridColumn();
             tarif = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -80,6 +79,7 @@
             koef_chas = new DevExpress.XtraGrid.Columns.GridColumn();
             razr = new DevExpress.XtraGrid.Columns.GridColumn();
             Text = new DevExpress.XtraGrid.Columns.GridColumn();
+            xtraTabPageTarif = new DevExpress.XtraTab.XtraTabPage();
             Название = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)customTabControlZpTarif).BeginInit();
             customTabControlZpTarif.SuspendLayout();
@@ -92,9 +92,8 @@
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlHistory).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewHistory).BeginInit();
-            xtraTabPageTarif.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlTR).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTR).BeginInit();
             SuspendLayout();
             // 
             // customTabControlZpTarif
@@ -121,14 +120,15 @@
             // 
             tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.6005363F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 24.5755138F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.6899014F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.6005363F));
             tableLayoutPanel1.Controls.Add(customGroupBoxFiltr, 0, 0);
             tableLayoutPanel1.Controls.Add(customGridControlZp, 0, 1);
             tableLayoutPanel1.Controls.Add(customGroupBoxAdd, 2, 3);
-            tableLayoutPanel1.Controls.Add(customGridControlHistory, 0, 4);
             tableLayoutPanel1.Controls.Add(customButtonAdd, 2, 1);
+            tableLayoutPanel1.Controls.Add(customGridControlHistory, 0, 4);
+            tableLayoutPanel1.Controls.Add(customGridControlTR, 1, 4);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -136,8 +136,8 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.8589344F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.48589325F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.48589325F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.5078354F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.6614418F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.8213158F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.3479633F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1119, 638);
             tableLayoutPanel1.TabIndex = 3;
             // 
@@ -151,7 +151,7 @@
             customGroupBoxFiltr.Dock = System.Windows.Forms.DockStyle.Fill;
             customGroupBoxFiltr.Location = new System.Drawing.Point(3, 3);
             customGroupBoxFiltr.Name = "customGroupBoxFiltr";
-            customGroupBoxFiltr.Size = new System.Drawing.Size(552, 25);
+            customGroupBoxFiltr.Size = new System.Drawing.Size(554, 25);
             customGroupBoxFiltr.TabIndex = 1;
             customGroupBoxFiltr.TabStop = false;
             // 
@@ -161,7 +161,7 @@
             customRadioButtonMay.AutoSize = true;
             customRadioButtonMay.Font = new System.Drawing.Font("Arial", 10F);
             customRadioButtonMay.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonMay.Location = new System.Drawing.Point(276, 0);
+            customRadioButtonMay.Location = new System.Drawing.Point(277, 0);
             customRadioButtonMay.Name = "customRadioButtonMay";
             customRadioButtonMay.ObjectName = null;
             customRadioButtonMay.Size = new System.Drawing.Size(52, 20);
@@ -178,7 +178,7 @@
             customRadioButtonAll.Checked = true;
             customRadioButtonAll.Font = new System.Drawing.Font("Arial", 10F);
             customRadioButtonAll.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonAll.Location = new System.Drawing.Point(358, 0);
+            customRadioButtonAll.Location = new System.Drawing.Point(359, 0);
             customRadioButtonAll.Name = "customRadioButtonAll";
             customRadioButtonAll.ObjectName = null;
             customRadioButtonAll.Size = new System.Drawing.Size(49, 20);
@@ -194,7 +194,7 @@
             customRadioButtonExp.AutoSize = true;
             customRadioButtonExp.Font = new System.Drawing.Font("Arial", 10F);
             customRadioButtonExp.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonExp.Location = new System.Drawing.Point(130, 0);
+            customRadioButtonExp.Location = new System.Drawing.Point(131, 0);
             customRadioButtonExp.Name = "customRadioButtonExp";
             customRadioButtonExp.ObjectName = null;
             customRadioButtonExp.Size = new System.Drawing.Size(113, 20);
@@ -209,7 +209,7 @@
             customRadioButtonAceKle.AutoSize = true;
             customRadioButtonAceKle.Font = new System.Drawing.Font("Arial", 10F);
             customRadioButtonAceKle.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonAceKle.Location = new System.Drawing.Point(4, 0);
+            customRadioButtonAceKle.Location = new System.Drawing.Point(5, 0);
             customRadioButtonAceKle.Name = "customRadioButtonAceKle";
             customRadioButtonAceKle.ObjectName = null;
             customRadioButtonAceKle.Size = new System.Drawing.Size(105, 20);
@@ -227,7 +227,7 @@
             customGridControlZp.MainView = gridViewZp;
             customGridControlZp.Name = "customGridControlZp";
             tableLayoutPanel1.SetRowSpan(customGridControlZp, 3);
-            customGridControlZp.Size = new System.Drawing.Size(831, 399);
+            customGridControlZp.Size = new System.Drawing.Size(829, 401);
             customGridControlZp.TabIndex = 2;
             customGridControlZp.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewZp });
             customGridControlZp.Load += customGridControlZp_Load;
@@ -361,12 +361,13 @@
             tableLayoutPanel1.SetColumnSpan(customGroupBoxAdd, 2);
             customGroupBoxAdd.Controls.Add(tableLayoutPanel2);
             customGroupBoxAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBoxAdd.Location = new System.Drawing.Point(840, 104);
+            customGroupBoxAdd.Location = new System.Drawing.Point(838, 104);
             customGroupBoxAdd.Name = "customGroupBoxAdd";
-            customGroupBoxAdd.Size = new System.Drawing.Size(276, 329);
+            customGroupBoxAdd.Size = new System.Drawing.Size(278, 331);
             customGroupBoxAdd.TabIndex = 4;
             customGroupBoxAdd.TabStop = false;
             customGroupBoxAdd.Text = "Добавление";
+            customGroupBoxAdd.Visible = false;
             // 
             // tableLayoutPanel2
             // 
@@ -385,12 +386,12 @@
             tableLayoutPanel2.Controls.Add(customTextBoxName, 1, 0);
             tableLayoutPanel2.Controls.Add(customLabelName, 0, 0);
             tableLayoutPanel2.Controls.Add(customTextBoxZnach, 1, 6);
-            tableLayoutPanel2.Controls.Add(customTextBoxDate, 1, 5);
             tableLayoutPanel2.Controls.Add(customTextBoxRazm, 1, 1);
             tableLayoutPanel2.Controls.Add(customCheckBoxNotRazm, 1, 2);
             tableLayoutPanel2.Controls.Add(customButtonOtm, 0, 8);
             tableLayoutPanel2.Controls.Add(customButtonSave, 1, 8);
             tableLayoutPanel2.Controls.Add(customComboBoxType, 1, 4);
+            tableLayoutPanel2.Controls.Add(customDateTimePickerBegin, 1, 5);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -404,7 +405,7 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(270, 309);
+            tableLayoutPanel2.Size = new System.Drawing.Size(272, 311);
             tableLayoutPanel2.TabIndex = 3;
             // 
             // customComboBoxOrg
@@ -416,7 +417,7 @@
             customComboBoxOrg.FormattingEnabled = true;
             customComboBoxOrg.Location = new System.Drawing.Point(84, 254);
             customComboBoxOrg.Name = "customComboBoxOrg";
-            customComboBoxOrg.Size = new System.Drawing.Size(183, 24);
+            customComboBoxOrg.Size = new System.Drawing.Size(185, 24);
             customComboBoxOrg.TabIndex = 43;
             // 
             // customTextBoxOpis
@@ -428,7 +429,7 @@
             customTextBoxOpis.Location = new System.Drawing.Point(84, 90);
             customTextBoxOpis.Multiline = true;
             customTextBoxOpis.Name = "customTextBoxOpis";
-            customTextBoxOpis.Size = new System.Drawing.Size(183, 51);
+            customTextBoxOpis.Size = new System.Drawing.Size(185, 51);
             customTextBoxOpis.TabIndex = 41;
             // 
             // customLabelNull
@@ -528,7 +529,7 @@
             customTextBoxName.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxName.Location = new System.Drawing.Point(84, 3);
             customTextBoxName.Name = "customTextBoxName";
-            customTextBoxName.Size = new System.Drawing.Size(183, 23);
+            customTextBoxName.Size = new System.Drawing.Size(185, 23);
             customTextBoxName.TabIndex = 30;
             // 
             // customLabelName
@@ -552,19 +553,8 @@
             customTextBoxZnach.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxZnach.Location = new System.Drawing.Point(84, 225);
             customTextBoxZnach.Name = "customTextBoxZnach";
-            customTextBoxZnach.Size = new System.Drawing.Size(183, 23);
+            customTextBoxZnach.Size = new System.Drawing.Size(185, 23);
             customTextBoxZnach.TabIndex = 21;
-            // 
-            // customTextBoxDate
-            // 
-            customTextBoxDate.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBoxDate.Dock = System.Windows.Forms.DockStyle.Fill;
-            customTextBoxDate.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBoxDate.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxDate.Location = new System.Drawing.Point(84, 177);
-            customTextBoxDate.Name = "customTextBoxDate";
-            customTextBoxDate.Size = new System.Drawing.Size(183, 23);
-            customTextBoxDate.TabIndex = 20;
             // 
             // customTextBoxRazm
             // 
@@ -574,7 +564,7 @@
             customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customTextBoxRazm.Location = new System.Drawing.Point(84, 32);
             customTextBoxRazm.Name = "customTextBoxRazm";
-            customTextBoxRazm.Size = new System.Drawing.Size(183, 23);
+            customTextBoxRazm.Size = new System.Drawing.Size(185, 23);
             customTextBoxRazm.TabIndex = 0;
             // 
             // customCheckBoxNotRazm
@@ -588,6 +578,7 @@
             customCheckBoxNotRazm.TabIndex = 33;
             customCheckBoxNotRazm.Text = "нет размерности";
             customCheckBoxNotRazm.UseVisualStyleBackColor = true;
+            customCheckBoxNotRazm.CheckedChanged += customCheckBoxNotRazm_CheckedChanged;
             // 
             // customButtonOtm
             // 
@@ -598,10 +589,11 @@
             customButtonOtm.Location = new System.Drawing.Point(3, 286);
             customButtonOtm.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonOtm.Name = "customButtonOtm";
-            customButtonOtm.Size = new System.Drawing.Size(75, 20);
+            customButtonOtm.Size = new System.Drawing.Size(75, 22);
             customButtonOtm.TabIndex = 25;
             customButtonOtm.Text = "Отмена";
             customButtonOtm.UseVisualStyleBackColor = false;
+            customButtonOtm.Click += customButtonOtm_Click;
             // 
             // customButtonSave
             // 
@@ -612,10 +604,11 @@
             customButtonSave.Location = new System.Drawing.Point(84, 286);
             customButtonSave.MaximumSize = new System.Drawing.Size(0, 40);
             customButtonSave.Name = "customButtonSave";
-            customButtonSave.Size = new System.Drawing.Size(183, 20);
+            customButtonSave.Size = new System.Drawing.Size(185, 22);
             customButtonSave.TabIndex = 24;
             customButtonSave.Text = "Сохранить";
             customButtonSave.UseVisualStyleBackColor = false;
+            customButtonSave.Click += customButtonSave_Click;
             // 
             // customComboBoxType
             // 
@@ -626,16 +619,43 @@
             customComboBoxType.FormattingEnabled = true;
             customComboBoxType.Location = new System.Drawing.Point(84, 147);
             customComboBoxType.Name = "customComboBoxType";
-            customComboBoxType.Size = new System.Drawing.Size(183, 24);
+            customComboBoxType.Size = new System.Drawing.Size(185, 24);
             customComboBoxType.TabIndex = 42;
+            // 
+            // customDateTimePickerBegin
+            // 
+            customDateTimePickerBegin.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customDateTimePickerBegin.Font = new System.Drawing.Font("Arial", 10F);
+            customDateTimePickerBegin.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customDateTimePickerBegin.Location = new System.Drawing.Point(84, 177);
+            customDateTimePickerBegin.Name = "customDateTimePickerBegin";
+            customDateTimePickerBegin.ObjectName = null;
+            customDateTimePickerBegin.Size = new System.Drawing.Size(185, 23);
+            customDateTimePickerBegin.TabIndex = 44;
+            // 
+            // customButtonAdd
+            // 
+            customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonAdd.Location = new System.Drawing.Point(838, 34);
+            customButtonAdd.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonAdd.Name = "customButtonAdd";
+            customButtonAdd.Size = new System.Drawing.Size(136, 29);
+            customButtonAdd.TabIndex = 6;
+            customButtonAdd.Text = "Добавить";
+            customButtonAdd.UseVisualStyleBackColor = false;
+            customButtonAdd.Click += customButtonAdd_Click;
             // 
             // customGridControlHistory
             // 
+            customGridControlHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlHistory.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlHistory.Location = new System.Drawing.Point(3, 439);
+            customGridControlHistory.Location = new System.Drawing.Point(3, 441);
             customGridControlHistory.MainView = gridViewHistory;
             customGridControlHistory.Name = "customGridControlHistory";
-            customGridControlHistory.Size = new System.Drawing.Size(552, 196);
+            customGridControlHistory.Size = new System.Drawing.Size(554, 194);
             customGridControlHistory.TabIndex = 7;
             customGridControlHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewHistory });
             // 
@@ -651,50 +671,31 @@
             gridViewHistory.Name = "gridViewHistory";
             gridViewHistory.OptionsView.EnableAppearanceEvenRow = true;
             // 
-            // customButtonAdd
-            // 
-            customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonAdd.Location = new System.Drawing.Point(840, 34);
-            customButtonAdd.MaximumSize = new System.Drawing.Size(0, 40);
-            customButtonAdd.Name = "customButtonAdd";
-            customButtonAdd.Size = new System.Drawing.Size(134, 29);
-            customButtonAdd.TabIndex = 6;
-            customButtonAdd.Text = "Добавить";
-            customButtonAdd.UseVisualStyleBackColor = false;
-            // 
-            // xtraTabPageTarif
-            // 
-            xtraTabPageTarif.Controls.Add(customGridControlTR);
-            xtraTabPageTarif.Name = "xtraTabPageTarif";
-            xtraTabPageTarif.Size = new System.Drawing.Size(1119, 638);
-            xtraTabPageTarif.Text = "Тарифы";
-            // 
             // customGridControlTR
             // 
+            tableLayoutPanel1.SetColumnSpan(customGridControlTR, 3);
+            customGridControlTR.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlTR.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlTR.Location = new System.Drawing.Point(11, 3);
-            customGridControlTR.MainView = gridView1;
+            customGridControlTR.Location = new System.Drawing.Point(563, 441);
+            customGridControlTR.MainView = gridViewTR;
             customGridControlTR.Name = "customGridControlTR";
-            customGridControlTR.Size = new System.Drawing.Size(760, 495);
-            customGridControlTR.TabIndex = 0;
-            customGridControlTR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            customGridControlTR.Size = new System.Drawing.Size(553, 194);
+            customGridControlTR.TabIndex = 8;
+            customGridControlTR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTR });
             customGridControlTR.Load += customGridControlTR_Load;
             // 
-            // gridView1
+            // gridViewTR
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
-            gridView1.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridView1.Appearance.FocusedRow.Options.UseFont = true;
-            gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_kod_o, prizn_podr, tarif, ed_izm, koef_chas, razr, Text });
-            gridView1.GridControl = customGridControlTR;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewTR.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            gridViewTR.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewTR.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            gridViewTR.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewTR.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewTR.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewTR.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_kod_o, prizn_podr, tarif, ed_izm, koef_chas, razr, Text });
+            gridViewTR.GridControl = customGridControlTR;
+            gridViewTR.Name = "gridViewTR";
+            gridViewTR.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // id_kod_o
             // 
@@ -759,6 +760,12 @@
             Text.VisibleIndex = 1;
             Text.Width = 330;
             // 
+            // xtraTabPageTarif
+            // 
+            xtraTabPageTarif.Name = "xtraTabPageTarif";
+            xtraTabPageTarif.Size = new System.Drawing.Size(1119, 638);
+            xtraTabPageTarif.Text = "Тарифы";
+            // 
             // Название
             // 
             Название.Caption = "text";
@@ -787,9 +794,8 @@
             tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlHistory).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewHistory).EndInit();
-            xtraTabPageTarif.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customGridControlTR).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewTR).EndInit();
             ResumeLayout(false);
         }
 
@@ -809,7 +815,6 @@
         private CustomTextBox customTextBoxRazm;
         private Core.Class.CustomButton customButtonOtm;
         private CustomTextBox customTextBoxZnach;
-        private CustomTextBox customTextBoxDate;
         private Core.Class.CustomButton customButtonSave;
         private CustomGroupBox customGroupBoxAdd;
         private CustomComboBox customComboBoxOrg;
@@ -836,16 +841,17 @@
         private DevExpress.XtraGrid.Columns.GridColumn value_float;
         private DevExpress.XtraGrid.Columns.GridColumn value_character;
         private DevExpress.XtraGrid.Columns.GridColumn firm;
+        private DevExpress.XtraGrid.Columns.GridColumn Название;
+        private CustomRadioButton customRadioButtonMay;
         private Core.Class.CustomGridControl customGridControlTR;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTR;
         private DevExpress.XtraGrid.Columns.GridColumn id_kod_o;
         private DevExpress.XtraGrid.Columns.GridColumn prizn_podr;
         private DevExpress.XtraGrid.Columns.GridColumn tarif;
         private DevExpress.XtraGrid.Columns.GridColumn ed_izm;
         private DevExpress.XtraGrid.Columns.GridColumn koef_chas;
         private DevExpress.XtraGrid.Columns.GridColumn razr;
-        private DevExpress.XtraGrid.Columns.GridColumn Название;
         private DevExpress.XtraGrid.Columns.GridColumn Text;
-        private CustomRadioButton customRadioButtonMay;
+        private CustomDateTimePicker customDateTimePickerBegin;
     }
 }
