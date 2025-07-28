@@ -186,9 +186,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditSec = new TextEdit();
             textEditCreate = new TextEdit();
             customGroupBoxWithButtons = new CustomGroupBox();
-            ButtonEditWd = new CustomButton();
+            tableLayoutPanel1 = new TableLayoutPanel();
+            ButtonEditWDConstantly = new CustomButton();
             ButtonPreliminaryWd = new CustomButton();
-            customSimpleButton1 = new CustomButton();
+            ButtonEditWd = new CustomButton();
+            ButtonDouble = new CustomButton();
             ButtonArchAndCopyWd = new CustomButton();
             layoutControlGroup7 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem10 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -377,6 +379,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)textEditSec.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)textEditCreate.Properties).BeginInit();
             customGroupBoxWithButtons.SuspendLayout();
+            tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).BeginInit();
@@ -581,9 +584,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxForAdmins.Controls.Add(customSimpleButton2);
             customGroupBoxForAdmins.Controls.Add(customSimpleButton3);
             customGroupBoxForAdmins.Controls.Add(customSimpleButton4);
-            customGroupBoxForAdmins.Location = new System.Drawing.Point(24, 780);
+            customGroupBoxForAdmins.Location = new System.Drawing.Point(24, 849);
             customGroupBoxForAdmins.Name = "customGroupBoxForAdmins";
-            customGroupBoxForAdmins.Size = new System.Drawing.Size(204, 126);
+            customGroupBoxForAdmins.Size = new System.Drawing.Size(204, 57);
             customGroupBoxForAdmins.TabIndex = 18;
             customGroupBoxForAdmins.TabStop = false;
             customGroupBoxForAdmins.Visible = false;
@@ -686,7 +689,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // constructorTextBox
             // 
             constructorTextBox.Enabled = false;
-            constructorTextBox.Location = new System.Drawing.Point(12, 563);
+            constructorTextBox.Location = new System.Drawing.Point(12, 632);
             constructorTextBox.Name = "constructorTextBox";
             constructorTextBox.Size = new System.Drawing.Size(228, 26);
             constructorTextBox.TabIndex = 13;
@@ -695,7 +698,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // designerTextBox
             // 
             designerTextBox.Enabled = false;
-            designerTextBox.Location = new System.Drawing.Point(12, 512);
+            designerTextBox.Location = new System.Drawing.Point(12, 581);
             designerTextBox.Name = "designerTextBox";
             designerTextBox.Size = new System.Drawing.Size(228, 26);
             designerTextBox.TabIndex = 12;
@@ -717,7 +720,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             buffer.Enabled = false;
             buffer.Font = new System.Drawing.Font("Arial", 10F);
             buffer.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            buffer.Location = new System.Drawing.Point(12, 388);
+            buffer.Location = new System.Drawing.Point(12, 457);
             buffer.Margin = new Padding(4, 3, 4, 3);
             buffer.Multiline = true;
             buffer.Name = "buffer";
@@ -1238,7 +1241,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // RecoRichTextBox
             // 
             RecoRichTextBox.Enabled = false;
-            RecoRichTextBox.Location = new System.Drawing.Point(12, 614);
+            RecoRichTextBox.Location = new System.Drawing.Point(12, 683);
             RecoRichTextBox.Margin = new Padding(4, 3, 4, 3);
             RecoRichTextBox.Name = "RecoRichTextBox";
             RecoRichTextBox.Size = new System.Drawing.Size(228, 63);
@@ -1248,7 +1251,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // commentRichTextBox
             // 
             commentRichTextBox.Enabled = false;
-            commentRichTextBox.Location = new System.Drawing.Point(12, 702);
+            commentRichTextBox.Location = new System.Drawing.Point(12, 771);
             commentRichTextBox.Margin = new Padding(4, 3, 4, 3);
             commentRichTextBox.Name = "commentRichTextBox";
             commentRichTextBox.Size = new System.Drawing.Size(228, 62);
@@ -1586,7 +1589,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonCopyWd.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             ButtonCopyWd.Font = new System.Drawing.Font("Arial", 10F);
             ButtonCopyWd.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            ButtonCopyWd.Location = new System.Drawing.Point(12, 351);
+            ButtonCopyWd.Location = new System.Drawing.Point(12, 420);
             ButtonCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonCopyWd.Name = "ButtonCopyWd";
             ButtonCopyWd.Size = new System.Drawing.Size(228, 33);
@@ -1753,31 +1756,47 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customGroupBoxWithButtons
             // 
             customGroupBoxWithButtons.BackColor = System.Drawing.Color.Transparent;
-            customGroupBoxWithButtons.Controls.Add(ButtonEditWd);
-            customGroupBoxWithButtons.Controls.Add(ButtonPreliminaryWd);
-            customGroupBoxWithButtons.Controls.Add(customSimpleButton1);
-            customGroupBoxWithButtons.Controls.Add(ButtonArchAndCopyWd);
+            customGroupBoxWithButtons.Controls.Add(tableLayoutPanel1);
             customGroupBoxWithButtons.Location = new System.Drawing.Point(12, 202);
             customGroupBoxWithButtons.Name = "customGroupBoxWithButtons";
-            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 145);
+            customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 214);
             customGroupBoxWithButtons.TabIndex = 9;
             customGroupBoxWithButtons.TabStop = false;
             // 
-            // ButtonEditWd
+            // tableLayoutPanel1
             // 
-            ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            ButtonEditWd.FlatAppearance.BorderSize = 0;
-            ButtonEditWd.FlatStyle = FlatStyle.Flat;
-            ButtonEditWd.Font = new System.Drawing.Font("Arial", 12F);
-            ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            ButtonEditWd.Location = new System.Drawing.Point(7, 2);
-            ButtonEditWd.Margin = new Padding(4, 3, 4, 3);
-            ButtonEditWd.Name = "ButtonEditWd";
-            ButtonEditWd.Size = new System.Drawing.Size(215, 32);
-            ButtonEditWd.TabIndex = 8;
-            ButtonEditWd.Text = "редактировать РТ";
-            ButtonEditWd.UseVisualStyleBackColor = false;
-            ButtonEditWd.Click += ButtonEditWd_Click;
+            tableLayoutPanel1.ColumnCount = 1;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(ButtonEditWDConstantly, 0, 0);
+            tableLayoutPanel1.Controls.Add(ButtonPreliminaryWd, 0, 4);
+            tableLayoutPanel1.Controls.Add(ButtonEditWd, 0, 1);
+            tableLayoutPanel1.Controls.Add(ButtonDouble, 0, 3);
+            tableLayoutPanel1.Controls.Add(ButtonArchAndCopyWd, 0, 2);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.RowCount = 5;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(222, 194);
+            tableLayoutPanel1.TabIndex = 13;
+            // 
+            // ButtonEditWDConstantly
+            // 
+            ButtonEditWDConstantly.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            ButtonEditWDConstantly.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonEditWDConstantly.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            ButtonEditWDConstantly.Location = new System.Drawing.Point(4, 3);
+            ButtonEditWDConstantly.Margin = new Padding(4, 3, 4, 3);
+            ButtonEditWDConstantly.Name = "ButtonEditWDConstantly";
+            ButtonEditWDConstantly.Size = new System.Drawing.Size(214, 32);
+            ButtonEditWDConstantly.TabIndex = 12;
+            ButtonEditWDConstantly.Text = "Редактировать РТ";
+            ButtonEditWDConstantly.UseVisualStyleBackColor = false;
+            ButtonEditWDConstantly.Click += ButtonEditWDConstantly_Click;
             // 
             // ButtonPreliminaryWd
             // 
@@ -1795,18 +1814,37 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonPreliminaryWd.UseVisualStyleBackColor = false;
             ButtonPreliminaryWd.Click += ButtonPreliminaryWd_Click;
             // 
-            // customSimpleButton1
+            // ButtonEditWd
             // 
-            customSimpleButton1.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            customSimpleButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customSimpleButton1.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
-            customSimpleButton1.Location = new System.Drawing.Point(6, 74);
-            customSimpleButton1.Name = "customSimpleButton1";
-            customSimpleButton1.Size = new System.Drawing.Size(215, 31);
-            customSimpleButton1.TabIndex = 10;
-            customSimpleButton1.Text = "дубль";
-            customSimpleButton1.UseVisualStyleBackColor = false;
-            customSimpleButton1.Click += customSimpleButton1_Click;
+            ButtonEditWd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            ButtonEditWd.FlatAppearance.BorderSize = 0;
+            ButtonEditWd.FlatStyle = FlatStyle.Flat;
+            ButtonEditWd.Font = new System.Drawing.Font("Arial", 12F);
+            ButtonEditWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
+            ButtonEditWd.Location = new System.Drawing.Point(4, 41);
+            ButtonEditWd.Margin = new Padding(4, 3, 4, 3);
+            ButtonEditWd.Name = "ButtonEditWd";
+            ButtonEditWd.Size = new System.Drawing.Size(214, 32);
+            ButtonEditWd.TabIndex = 8;
+            ButtonEditWd.Text = "редактировать РТ";
+            ButtonEditWd.UseVisualStyleBackColor = false;
+            ButtonEditWd.Click += ButtonEditWd_Click;
+            // 
+            // ButtonDouble
+            // 
+            ButtonDouble.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            ButtonDouble.FlatAppearance.BorderSize = 0;
+            ButtonDouble.FlatStyle = FlatStyle.Flat;
+            ButtonDouble.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonDouble.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
+            ButtonDouble.Location = new System.Drawing.Point(4, 117);
+            ButtonDouble.Margin = new Padding(4, 3, 4, 3);
+            ButtonDouble.Name = "ButtonDouble";
+            ButtonDouble.Size = new System.Drawing.Size(214, 31);
+            ButtonDouble.TabIndex = 10;
+            ButtonDouble.Text = "дубль";
+            ButtonDouble.UseVisualStyleBackColor = false;
+            ButtonDouble.Click += customSimpleButton1_Click;
             // 
             // ButtonArchAndCopyWd
             // 
@@ -1815,10 +1853,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonArchAndCopyWd.FlatStyle = FlatStyle.Flat;
             ButtonArchAndCopyWd.Font = new System.Drawing.Font("Arial", 12F);
             ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            ButtonArchAndCopyWd.Location = new System.Drawing.Point(6, 40);
+            ButtonArchAndCopyWd.Location = new System.Drawing.Point(4, 79);
             ButtonArchAndCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
-            ButtonArchAndCopyWd.Size = new System.Drawing.Size(215, 28);
+            ButtonArchAndCopyWd.Size = new System.Drawing.Size(214, 28);
             ButtonArchAndCopyWd.TabIndex = 9;
             ButtonArchAndCopyWd.Text = "архив+копия";
             ButtonArchAndCopyWd.UseVisualStyleBackColor = false;
@@ -1849,7 +1887,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem23.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem23.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem23.Control = RecoRichTextBox;
-            layoutControlItem23.Location = new System.Drawing.Point(0, 581);
+            layoutControlItem23.Location = new System.Drawing.Point(0, 650);
             layoutControlItem23.MaxSize = new System.Drawing.Size(232, 88);
             layoutControlItem23.MinSize = new System.Drawing.Size(232, 88);
             layoutControlItem23.Name = "layoutControlItem23";
@@ -2074,7 +2112,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem20.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem20.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem20.Control = designerTextBox;
-            layoutControlItem20.Location = new System.Drawing.Point(0, 479);
+            layoutControlItem20.Location = new System.Drawing.Point(0, 548);
             layoutControlItem20.MaxSize = new System.Drawing.Size(232, 51);
             layoutControlItem20.MinSize = new System.Drawing.Size(232, 51);
             layoutControlItem20.Name = "layoutControlItem20";
@@ -2089,7 +2127,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem21.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem21.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem21.Control = constructorTextBox;
-            layoutControlItem21.Location = new System.Drawing.Point(0, 530);
+            layoutControlItem21.Location = new System.Drawing.Point(0, 599);
             layoutControlItem21.MaxSize = new System.Drawing.Size(232, 51);
             layoutControlItem21.MinSize = new System.Drawing.Size(232, 51);
             layoutControlItem21.Name = "layoutControlItem21";
@@ -2117,14 +2155,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem36.Control = customGroupBoxWithButtons;
             layoutControlItem36.Location = new System.Drawing.Point(0, 190);
             layoutControlItem36.Name = "layoutControlItem36";
-            layoutControlItem36.Size = new System.Drawing.Size(232, 149);
+            layoutControlItem36.Size = new System.Drawing.Size(232, 218);
             layoutControlItem36.TextLocation = DevExpress.Utils.Locations.Top;
             layoutControlItem36.TextVisible = false;
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = ButtonCopyWd;
-            layoutControlItem24.Location = new System.Drawing.Point(0, 339);
+            layoutControlItem24.Location = new System.Drawing.Point(0, 408);
             layoutControlItem24.MaxSize = new System.Drawing.Size(232, 37);
             layoutControlItem24.MinSize = new System.Drawing.Size(232, 37);
             layoutControlItem24.Name = "layoutControlItem24";
@@ -2135,7 +2173,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlItem25
             // 
             layoutControlItem25.Control = buffer;
-            layoutControlItem25.Location = new System.Drawing.Point(0, 376);
+            layoutControlItem25.Location = new System.Drawing.Point(0, 445);
             layoutControlItem25.MaxSize = new System.Drawing.Size(232, 103);
             layoutControlItem25.MinSize = new System.Drawing.Size(232, 103);
             layoutControlItem25.Name = "layoutControlItem25";
@@ -2154,9 +2192,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             // layoutControlGroup16
             // 
             layoutControlGroup16.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem12 });
-            layoutControlGroup16.Location = new System.Drawing.Point(0, 756);
+            layoutControlGroup16.Location = new System.Drawing.Point(0, 825);
             layoutControlGroup16.Name = "layoutControlGroup16";
-            layoutControlGroup16.Size = new System.Drawing.Size(232, 154);
+            layoutControlGroup16.Size = new System.Drawing.Size(232, 85);
             layoutControlGroup16.TextVisible = false;
             layoutControlGroup16.Visibility = DevExpress.XtraLayout.Utils.LayoutVisibility.OnlyInRuntime;
             // 
@@ -2165,7 +2203,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem12.Control = customGroupBoxForAdmins;
             layoutControlItem12.Location = new System.Drawing.Point(0, 0);
             layoutControlItem12.Name = "layoutControlItem12";
-            layoutControlItem12.Size = new System.Drawing.Size(208, 130);
+            layoutControlItem12.Size = new System.Drawing.Size(208, 61);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem22
@@ -2173,7 +2211,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem22.AppearanceItemCaption.Font = new System.Drawing.Font("Tahoma", 11F);
             layoutControlItem22.AppearanceItemCaption.Options.UseFont = true;
             layoutControlItem22.Control = commentRichTextBox;
-            layoutControlItem22.Location = new System.Drawing.Point(0, 669);
+            layoutControlItem22.Location = new System.Drawing.Point(0, 738);
             layoutControlItem22.MaxSize = new System.Drawing.Size(232, 87);
             layoutControlItem22.MinSize = new System.Drawing.Size(232, 87);
             layoutControlItem22.Name = "layoutControlItem22";
@@ -3414,6 +3452,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)textEditSec.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)textEditCreate.Properties).EndInit();
             customGroupBoxWithButtons.ResumeLayout(false);
+            tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem23).EndInit();
@@ -3905,7 +3944,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private CustomTextBox buffer;
-        private CustomButton customSimpleButton1;
+        private CustomButton ButtonDouble;
 
         //private async void DuplicateWorkDivision_Click_Internal_Wrapper(object sender, EventArgs e)
         //{

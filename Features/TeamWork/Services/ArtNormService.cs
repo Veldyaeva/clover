@@ -127,13 +127,13 @@ namespace SewingProduction.Services
             }
         }
 
-        public void UpdateAnnIdinArticul(string kod, int annId)
+        public void UpdateAnnIdinArticul(int annId, string kodd, string kodd_rt, string art)
         {
-            string query = "UPDATE sp_articul SET annId = @annId WHERE kod like @kod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", kod + "%" }, { "@annId", annId } });
+            string query = "UPDATE view_sp_articul SET annId = @annId WHERE ko = @kodd and articul = @art and kodd_rt = @kodd_rt";
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kodd_rt", kodd_rt }, { "@annId", annId }, { "@art", art }, { "@kodd", kodd } });
         }
 
-        /// <summary>
+        /// <summary> 
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
         /// <param name="kodd"></param>
