@@ -514,7 +514,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
                 // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedArtRow.kodd_rt, selectedAnnRow.AnnID);
+                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt,selectedArtRow.Articul);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
 
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
