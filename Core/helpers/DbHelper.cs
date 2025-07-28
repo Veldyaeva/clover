@@ -63,7 +63,7 @@ namespace SewingProduction.Helpers
 
             _globalConnectionString = _connectionString;
         }
-        public DatabaseHelper() : this(SettingsManager.GetCurrentDatabase())
+        public DatabaseHelper() : this(SettingsManager.GetSelectedDatabase())
         {
         }
         public static string GetGlobalConnectionString()
