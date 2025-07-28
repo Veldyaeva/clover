@@ -109,7 +109,7 @@ namespace SewingProduction.form
                 "oms"
             });
 
-            var savedDb = SettingsManager.GetSelectedDatabase(_user.UserName);
+            var savedDb = SettingsManager.GetSelectedDatabase();
             if (customComboBoxRejimRab.Items.Contains(savedDb))
                 customComboBoxRejimRab.SelectedItem = savedDb;
             else
