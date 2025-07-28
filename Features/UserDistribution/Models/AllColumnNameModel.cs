@@ -14,7 +14,6 @@ using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.UserDistribution.Models
 {
-
     public class AllColumnNameModel : INotifyPropertyChanged
     {
         private int _idAcn;
@@ -26,6 +25,7 @@ namespace SewingProduction.Features.UserDistribution.Models
         private int _readonly;
         private int _modeID;
         private string _modeName;
+        private string _defaultValue;
 
         [Column("id_acn")]
         public int id_acn
@@ -76,6 +76,13 @@ namespace SewingProduction.Features.UserDistribution.Models
             set { if (_readonly != value) { _readonly = value; OnPropertyChanged(nameof(Readonly)); } }
         }
 
+        [Column("default_value")]
+        public string default_value
+        {
+            get => _defaultValue;
+            set { if (_defaultValue != value) { _defaultValue = value; OnPropertyChanged(nameof(default_value)); } }
+        }
+
         //[Column("ModeID")]
         [NotMapped]
         public int ModeID
@@ -111,7 +118,7 @@ namespace SewingProduction.Features.UserDistribution.Models
         public async Task<List<AllColumnNameModel>> GetListColumnFromTable(int idAtn)
         {
             string query = @"
-                SELECT id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly
+                SELECT id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly, default_value
                 FROM all_column_name
                 WHERE id_atn = @IdAtn
                 ORDER BY ordinal_position";
@@ -122,7 +129,7 @@ namespace SewingProduction.Features.UserDistribution.Models
         {
             string query = @"
                 SELECT 
-                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly,
+                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly, c.default_value,
                     ISNULL(rc.ModeID, 0) AS ModeID,
                     ISNULL(m.ModeName, 'Нет доступа') AS ModeName
                 FROM all_column_name c
@@ -252,6 +259,7 @@ namespace SewingProduction.Features.UserDistribution.Models
                     c.name_rus,
                     c.data_type,
                     c.readonly,
+                    c.default_value,
                     ISNULL(MAX(rc.ModeID), 0) AS ModeID,
                     ISNULL(m.ModeName, 'Нет доступа') AS ModeName
                 FROM all_column_name c
@@ -266,7 +274,7 @@ namespace SewingProduction.Features.UserDistribution.Models
             if (tableId > 0)
                 query += " WHERE c.id_atn = @TableID";
             query += $@" GROUP BY 
-                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly, m.ModeName
+                    c.id_acn, c.id_atn, c.ordinal_position, c.name, c.name_rus, c.data_type, c.readonly, c.default_value, m.ModeName
                 ORDER BY c.ordinal_position;";
 
             return await _dbService.GetListAsync<AllColumnNameModel>(query, new
