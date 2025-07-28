@@ -36,13 +36,14 @@ namespace SewingProduction.Core
         /// Главная точка входа для приложения.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             // Уникальное имя Mutex
             bool createdNew;
+            bool isRestarting = args.Contains("--restart");
             using (var mutex = new Mutex(true, "SewingProductionAppMutex", out createdNew))
             {
-                if (!createdNew)
+                if (!createdNew && !isRestarting)
                 {
                     // Ищем главное окно по заголовку (он должен быть уникальным!)
                     IntPtr hWnd = FindWindow(null, "Швейное производство"); // название главной формы
