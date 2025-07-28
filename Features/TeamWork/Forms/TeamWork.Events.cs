@@ -448,7 +448,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var selectedAnn = gridView.GetRow(rowNumber) as ArtNormN;
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
-         //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
+                    //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
                     selectedArtNormN = selectedAnn.CloneProperties();
                 }
                 else
@@ -538,7 +538,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             _ = Task.Run(async () =>
                             {
-                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView, 
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView,
                                     forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
                                 // Очищаем статус через 3 секунды после завершения
                                 await Task.Delay(3000);

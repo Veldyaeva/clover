@@ -910,9 +910,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             label3.Location = new System.Drawing.Point(4, 167);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(104, 16);
+            label3.Size = new System.Drawing.Size(59, 16);
             label3.TabIndex = 1;
-            label3.Text = "наименование";
+            label3.Text = "артикул";
             // 
             // label2
             // 

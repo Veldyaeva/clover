@@ -660,7 +660,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
                 case 4:
                     //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
-                    if (customSimpleButton1.Enabled && customSimpleButton1.Visible)
+                    if (ButtonDouble.Enabled && ButtonDouble.Visible)
                         DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 6:
