@@ -254,7 +254,6 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
-    <Folder Include="Features\Sprav\Models\" />
     <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 

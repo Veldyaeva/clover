@@ -130,6 +130,13 @@ namespace SewingProduction
         {
             OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
         }
+        #region Виды браков пряжи
+        private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "Виды браков пряжи - Носки", _user), sender);
+            //OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "id_ndsp, namedefect, arh, id_parent_dep", "Виды браков пряжи", _user), sender);
+        }
+        #endregion
         #endregion
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,7 +199,7 @@ namespace SewingProduction
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
-            { 
+            {
                 string fullText = e.Page.MdiChild.Text;
                 bool shortNames = SettingsManager.GetShortTabNames(); // новая настройка
 
@@ -207,7 +214,7 @@ namespace SewingProduction
                     xtraTabbedMdiManager1.TabPageWidth = 0;
                 }
 
-                    e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
+                e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
             }
         }
 
@@ -236,5 +243,6 @@ namespace SewingProduction
             var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.Show();
         }
+
     }
 }
