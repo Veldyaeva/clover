@@ -660,13 +660,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
                 case 4:
                     //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
-                    if (customSimpleButton1.Enabled && customSimpleButton1.Visible)
+                    if (ButtonDouble.Enabled && ButtonDouble.Visible)
                         DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
                     break;
                 case 6:
                     //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
                     if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
-                       SetArchiveStatus_Internal(sender, e);//МЕНЯЮ НА АРХИВ для Чирковой
+                        SetArchiveStatus_Internal(sender, e);//МЕНЯЮ НА АРХИВ для Чирковой
                     //ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
                     break;
                 case 9:
@@ -1388,7 +1388,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             // SQL запрос для пометки на удаление
                             string sqlQuery = "UPDATE art_norm_n SET annDateDel = @currentDate, annCompDel = @computerName WHERE annID = @annID";
-                            
+
                             var parameters = new Dictionary<string, object>
                             {
                                 { "@annID", item.AnnID },
@@ -1461,6 +1461,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 MessageBox.Show($"Ошибка при пометке разделений труда на удаление: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await _logger.LogErrorAsync(ex, "Ошибка в MarkWorkDivisionForDeletion_Internal");
             }
+        }
+
+        private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public static class DemoHelper

@@ -8,6 +8,7 @@ namespace SewingProduction.Models
     {
         public string Articul { get; set; }
         public string kodd_rt { get; set; }
+        public string kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
         [Column("mod")]

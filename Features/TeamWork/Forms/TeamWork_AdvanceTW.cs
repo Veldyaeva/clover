@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -1048,7 +1049,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                         this.Text = "Дубль";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
-                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
@@ -1198,6 +1198,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         item.IsNew = false;
                         item.IsModified = false;
                         item.nkId = 0;
+                        //item.kod_o = "100";
+
                         _normKontList.Add(item);
                     }
                     _normKontBindingSource.ResetBindings(false);
@@ -1858,6 +1860,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (!hasChoice2) options.Add(choice2);
 
                     string selectedText = null;
+                    string kod_o = null;
 
                     if (options.Count == 2)
                     {
@@ -1865,6 +1868,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (choiceResult == DialogResult.Yes)
                         {
                             selectedText = options[0];
+                            kod_o = "001"; 
                         }
                         else if (choiceResult == DialogResult.No)
                         {
@@ -1872,12 +1876,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                             if (choiceResult2 == DialogResult.Yes)
                             {
                                 selectedText = options[1];
+                                kod_o = "100";
                             }
                         }
                     }
                     else if (options.Count == 1)
                     {
                         selectedText = options[0];
+                        kod_o = "100";
                         MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -1890,6 +1896,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
+                            kod_o = kod_o,
                             text = selectedText,
                             IsNew = true
                         };
@@ -1993,6 +2000,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                           RecalculateSek();
                     var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  //  Thread.Sleep(5000);
 
                     // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
                     if (calculatedData != null)
@@ -2526,6 +2534,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice1,
+                        kod_o = "001",
                         IsNew = true
                     };
                     _normKontList.Add(newKont1);
@@ -2537,6 +2546,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice2,
+                        kod_o = "100",
                         IsNew = true
                     };
                     _normKontList.Add(newKont2);
