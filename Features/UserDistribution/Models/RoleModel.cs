@@ -72,13 +72,25 @@ namespace SewingProduction.Features.UserDistribution.Models
         public async Task<List<RoleModel>> GetListRolesAsync(int userId)
         {
             string query = @"
-                SELECT r.RoleID, r.RoleName, r.Description, r.CreatorID, u.UserName AS CreatorName
-                FROM Roles r
-                LEFT JOIN Users u ON r.CreatorID = u.UserID
-                WHERE 
-                    r.CreatorID = @UserID
-                    OR r.RoleID IN (SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
-                    OR r.CreatorID IN (SELECT UserID FROM GetDescendants(@UserID))";
+            SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            FROM Roles r
+            JOIN Users u ON r.CreatorID = u.UserID
+            WHERE NOT EXISTS(
+                SELECT 1
+                FROM RoleObject ro
+                WHERE ro.RoleID = r.RoleID
+                AND NOT EXISTS(
+                    SELECT 1
+                    FROM
+                      (SELECT ro.ObjectID, MAX(ro.ModeID) AS UserModeID
+                      FROM RoleObject ro
+                      JOIN UserRoles ur ON ro.RoleID = ur.RoleID
+                      WHERE ur.UserID = @UserID
+                      GROUP BY ro.ObjectID) uo
+                    WHERE uo.ObjectID = ro.ObjectID
+                    AND uo.UserModeID >= ro.ModeID
+                )
+            )";
 
             return await _dbService.GetListAsync<RoleModel>(query, new { UserID = userId });
         }
