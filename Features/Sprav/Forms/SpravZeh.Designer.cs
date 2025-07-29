@@ -121,6 +121,7 @@ namespace SewingProduction.form
             gridControlSprav.DataSource = spravList;
             gridControlSprav.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlSprav.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlSprav.Font = new System.Drawing.Font("Arial", 10F);
             gridControlSprav.Location = new System.Drawing.Point(4, 3);
             gridControlSprav.MainView = gridViewZeh;
             gridControlSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -350,13 +351,13 @@ namespace SewingProduction.form
             // 
             // simpleButtonAddSave
             // 
-            simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonAddSave.Anchor = System.Windows.Forms.AnchorStyles.Top;
             simpleButtonAddSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddSave.FlatAppearance.BorderSize = 0;
             simpleButtonAddSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddSave.Font = new System.Drawing.Font("Arial", 10F);
             simpleButtonAddSave.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            simpleButtonAddSave.Location = new System.Drawing.Point(429, 622);
+            simpleButtonAddSave.Location = new System.Drawing.Point(429, 186);
             simpleButtonAddSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddSave.MinimumSize = new System.Drawing.Size(0, 47);
             simpleButtonAddSave.Name = "simpleButtonAddSave";
@@ -368,13 +369,13 @@ namespace SewingProduction.form
             // 
             // simpleButtonDel
             // 
-            simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonDel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             simpleButtonDel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonDel.FlatAppearance.BorderSize = 0;
             simpleButtonDel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonDel.Font = new System.Drawing.Font("Arial", 10F);
             simpleButtonDel.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            simpleButtonDel.Location = new System.Drawing.Point(216, 622);
+            simpleButtonDel.Location = new System.Drawing.Point(216, 186);
             simpleButtonDel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonDel.MinimumSize = new System.Drawing.Size(0, 47);
             simpleButtonDel.Name = "simpleButtonDel";
@@ -386,13 +387,13 @@ namespace SewingProduction.form
             // 
             // simpleButtonAddOtm
             // 
-            simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            simpleButtonAddOtm.Anchor = System.Windows.Forms.AnchorStyles.Top;
             simpleButtonAddOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             simpleButtonAddOtm.FlatAppearance.BorderSize = 0;
             simpleButtonAddOtm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             simpleButtonAddOtm.Font = new System.Drawing.Font("Arial", 10F);
             simpleButtonAddOtm.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            simpleButtonAddOtm.Location = new System.Drawing.Point(4, 622);
+            simpleButtonAddOtm.Location = new System.Drawing.Point(4, 186);
             simpleButtonAddOtm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonAddOtm.MinimumSize = new System.Drawing.Size(0, 47);
             simpleButtonAddOtm.Name = "simpleButtonAddOtm";
