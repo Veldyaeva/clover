@@ -303,7 +303,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
 
                 case "xtraTabPageArticles":
+                    // Загружаем данные для вкладки артикулов
                     await CurrentWorks_Load();
+                    break;
+                    
+                default:
+                    // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
                     break;
             }
         }
