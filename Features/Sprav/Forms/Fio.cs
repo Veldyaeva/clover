@@ -419,7 +419,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll(nameSprav, columns, nameSpravRus,_user);
+            SpravForAll f = new SpravForAll(nameSprav, columns, "", nameSpravRus, user: _user);
             f.MdiParent = this.MdiParent;
             f.Show();
         }

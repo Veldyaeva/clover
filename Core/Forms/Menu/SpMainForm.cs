@@ -128,13 +128,12 @@ namespace SewingProduction
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
+            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), sender);
         }
         #region Виды браков пряжи
         private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "Виды браков пряжи - Носки", _user), sender);
-            //OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "id_ndsp, namedefect, arh, id_parent_dep", "Виды браков пряжи", _user), sender);
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
         }
         #endregion
         #endregion
