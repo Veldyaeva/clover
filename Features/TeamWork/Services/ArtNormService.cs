@@ -127,13 +127,13 @@ namespace SewingProduction.Services
             }
         }
 
-        public void UpdateAnnIdinArticul(string kod, int annId)
+        public void UpdateAnnIdinArticul(int annId, string kodd, string kodd_rt, string art)
         {
-            string query = "UPDATE sp_articul SET annId = @annId WHERE kod like @kod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", kod + "%" }, { "@annId", annId } });
+            string query = "UPDATE view_sp_articul SET annId = @annId WHERE ko = @kodd and articul = @art and kodd_rt = @kodd_rt";
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kodd_rt", kodd_rt }, { "@annId", annId }, { "@art", art }, { "@kodd", kodd } });
         }
 
-        /// <summary>
+        /// <summary> 
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
         /// <param name="kodd"></param>
@@ -470,7 +470,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -489,7 +489,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -510,7 +510,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -521,7 +521,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();

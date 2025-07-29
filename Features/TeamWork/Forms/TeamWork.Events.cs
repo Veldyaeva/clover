@@ -448,7 +448,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var selectedAnn = gridView.GetRow(rowNumber) as ArtNormN;
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
-         //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
+                    //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
                     selectedArtNormN = selectedAnn.CloneProperties();
                 }
                 else
@@ -461,16 +461,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                ////Проверяем статус "актуальный" и наличие даты обновления
-                //if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                //{
-                //    MessageBox.Show(
-                //        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
-                //        "Ограничение редактирования",
-                //        MessageBoxButtons.OK,
-                //        MessageBoxIcon.Information);
-                //    return;
-                //}
+                //Проверяем статус "актуальный" и наличие даты обновления
+                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                {
+                    MessageBox.Show(
+                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                        "Ограничение редактирования",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
                 var updatedArtNormN = new ArtNormN();
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
                 {
@@ -538,7 +538,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             _ = Task.Run(async () =>
                             {
-                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView, 
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView,
                                     forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
                                 // Очищаем статус через 3 секунды после завершения
                                 await Task.Delay(3000);

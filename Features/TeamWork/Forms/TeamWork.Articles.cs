@@ -503,10 +503,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 confirmDialog.CancelButton = cancelButton;
 
                 if (confirmDialog.ShowDialog() != DialogResult.OK) return;
-
-                // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedArtRow.kodd_rt, selectedAnnRow.AnnID);
-                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
                 
                 // Заполняем группу и модель в зависимости от выбора пользователя
                 if (fillGroupCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.grup))
@@ -517,6 +513,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
+                // Обновляем annId в базе данных
+                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt,selectedArtRow.Articul);
+                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
+
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
