@@ -739,14 +739,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView4
             // 
+            gridView4.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView4.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView4.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView4.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView4.Appearance.FocusedRow.Options.UseFont = true;
+            gridView4.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView4.Appearance.Row.Options.UseTextOptions = true;
+            gridView4.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView4.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colkod_o2, gridColumn1, colrazryd2, coltext2, colsek3, colannId5 });
             gridView4.DetailHeight = 404;
+            gridView4.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView4.GridControl = gridControlKontTW;
             gridView4.Name = "gridView4";
             gridView4.OptionsBehavior.Editable = false;
             gridView4.OptionsBehavior.ReadOnly = true;
             gridView4.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridView4.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView4.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView4.OptionsSelection.MultiSelect = true;
             gridView4.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridView4.OptionsView.ShowGroupPanel = false;
@@ -825,10 +835,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView5
             // 
+            gridView5.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView5.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView5.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView5.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView5.Appearance.FocusedRow.Options.UseFont = true;
+            gridView5.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView5.Appearance.Row.Options.UseTextOptions = true;
+            gridView5.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView5.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             gridView5.Appearance.SelectedRow.Options.UseFont = true;
             gridView5.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn24, gridColumn25, gridColumn41, gridColumn42, gridColumn43, gridColumn44, gridColumn45, gridColumn46, data_r });
             gridView5.DetailHeight = 404;
+            gridView5.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView5.GridControl = customGridControl4;
             gridView5.GroupFormat = "{0}:  {1}{2}";
             gridView5.Name = "gridView5";
@@ -836,6 +855,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView5.OptionsBehavior.ReadOnly = true;
             gridView5.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridView5.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView5.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView5.OptionsSelection.MultiSelect = true;
             gridView5.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridView5.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
@@ -938,14 +958,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewRaskrTW
             // 
+            gridViewRaskrTW.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridViewRaskrTW.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewRaskrTW.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridViewRaskrTW.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewRaskrTW.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewRaskrTW.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridViewRaskrTW.Appearance.Row.Options.UseTextOptions = true;
+            gridViewRaskrTW.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridViewRaskrTW.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn47, colid, colkod2, colkod_o1, gridColumn18, colrazryd1, coltext1, colsek2, gridColumn34, gridColumn33, gridColumn32, gridColumn31, colannId4 });
             gridViewRaskrTW.DetailHeight = 404;
+            gridViewRaskrTW.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewRaskrTW.GridControl = gridControlRaskrTW;
             gridViewRaskrTW.Name = "gridViewRaskrTW";
             gridViewRaskrTW.OptionsBehavior.Editable = false;
             gridViewRaskrTW.OptionsBehavior.ReadOnly = true;
             gridViewRaskrTW.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskrTW.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRaskrTW.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewRaskrTW.OptionsSelection.MultiSelect = true;
             gridViewRaskrTW.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridViewRaskrTW.OptionsView.ShowGroupPanel = false;
@@ -1077,8 +1107,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView1
             // 
+            gridView1.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView1.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView1.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView1.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView1.Appearance.FocusedRow.Options.UseFont = true;
+            gridView1.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView1.Appearance.Row.Options.UseTextOptions = true;
+            gridView1.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { DisplayNumber, coln, coln1, colrazryd, coltext, colsek1, gridColumn30, gridColumn27, colobor, gridColumn26, gridColumn3, colkod_o, colannId3 });
             gridView1.DetailHeight = 404;
+            gridView1.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView1.GridControl = gridControlRaszTW;
             gridView1.Name = "gridView1";
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1088,6 +1127,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView1.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridView1.OptionsCustomization.AllowSort = false;
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView1.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView1.OptionsSelection.MultiSelect = true;
             gridView1.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridView1.OptionsView.ShowGroupPanel = false;
@@ -1274,10 +1314,16 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // ANNgridView
             // 
-            ANNgridView.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            ANNgridView.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            ANNgridView.Appearance.FocusedCell.Options.UseForeColor = true;
+            ANNgridView.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            ANNgridView.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
             ANNgridView.Appearance.FocusedRow.Options.UseFont = true;
+            ANNgridView.Appearance.FocusedRow.Options.UseForeColor = true;
             ANNgridView.Appearance.HeaderPanel.Options.UseTextOptions = true;
             ANNgridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            ANNgridView.Appearance.Row.Options.UseTextOptions = true;
+            ANNgridView.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             ANNgridView.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             ANNgridView.Appearance.SelectedRow.Options.UseFont = true;
             ANNgridView.Appearance.SelectedRow.Options.UseTextOptions = true;
@@ -1302,6 +1348,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsFind.FindPanelLocation = GridFindPanelLocation.Panel;
             ANNgridView.OptionsSelection.CheckBoxSelectorColumnWidth = 20;
             ANNgridView.OptionsSelection.EnableAppearanceFocusedCell = false;
+            ANNgridView.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             ANNgridView.OptionsSelection.MultiSelect = true;
             ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
             ANNgridView.OptionsView.AutoCalcPreviewLineCount = true;
@@ -2292,8 +2339,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView3.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridView3.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView3.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView3.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView3.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView3.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView3.Appearance.FocusedRow.Options.UseFont = true;
+            gridView3.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView3.Appearance.Row.Options.UseTextOptions = true;
+            gridView3.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            gridView3.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView3.GridControl = customGridControl2;
             gridView3.Name = "gridView3";
+            gridView3.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView3.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // customGridControl1
@@ -2310,8 +2367,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridView2.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView2.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView2.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView2.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView2.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView2.Appearance.FocusedRow.Options.UseFont = true;
+            gridView2.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView2.Appearance.Row.Options.UseTextOptions = true;
+            gridView2.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            gridView2.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView2.GridControl = customGridControl1;
             gridView2.Name = "gridView2";
+            gridView2.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView2.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // customLabel2
@@ -2350,11 +2417,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView_binded
             // 
+            gridView_binded.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView_binded.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView_binded.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView_binded.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView_binded.Appearance.FocusedRow.Options.UseFont = true;
+            gridView_binded.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView_binded.Appearance.Row.Options.UseTextOptions = true;
+            gridView_binded.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView_binded.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn36, gridColumn37, gridColumn38, gridColumn39, gridColumn40 });
             gridView_binded.DetailHeight = 404;
+            gridView_binded.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView_binded.GridControl = gridControl_binded;
             gridView_binded.Name = "gridView_binded";
             gridView_binded.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView_binded.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView_binded.OptionsView.ShowGroupPanel = false;
             gridView_binded.PopupMenuShowing += gridView_binded_PopupMenuShowing;
             // 
@@ -2417,10 +2494,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView8.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
             gridView8.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView8.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView8.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView8.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView8.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView8.Appearance.FocusedRow.Options.UseFont = true;
+            gridView8.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView8.Appearance.Row.Options.UseTextOptions = true;
+            gridView8.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView8.DetailHeight = 404;
+            gridView8.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView8.GridControl = gridControl_binded;
             gridView8.Name = "gridView8";
             gridView8.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView8.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView8.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // gridControlNZP
@@ -2439,10 +2526,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewNZP
             // 
+            gridViewNZP.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridViewNZP.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewNZP.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridViewNZP.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewNZP.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewNZP.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridViewNZP.Appearance.Row.Options.UseTextOptions = true;
+            gridViewNZP.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridViewNZP.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             gridViewNZP.Appearance.SelectedRow.Options.UseFont = true;
             gridViewNZP.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { kodd_rt, colannId2, gridColumn20, gridColumn21, gridColumn22, gridColumn23, kolNZP, PztCount });
             gridViewNZP.DetailHeight = 404;
+            gridViewNZP.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewNZP.GridControl = gridControlNZP;
             gridViewNZP.GroupFormat = "{0}:  {1}{2}";
             gridViewNZP.Name = "gridViewNZP";
@@ -2450,6 +2546,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewNZP.OptionsBehavior.ReadOnly = true;
             gridViewNZP.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
             gridViewNZP.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewNZP.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewNZP.OptionsSelection.MultiSelect = true;
             gridViewNZP.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
             gridViewNZP.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
@@ -2593,13 +2690,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView6
             // 
+            gridView6.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView6.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView6.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView6.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView6.Appearance.FocusedRow.Options.UseFont = true;
+            gridView6.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView6.Appearance.Row.Options.UseTextOptions = true;
+            gridView6.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView6.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridView6.Appearance.SelectedRow.Options.UseBackColor = true;
             gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colannId1, coln3, gridColumn9, gridColumn10, gridColumn11 });
             gridView6.DetailHeight = 404;
+            gridView6.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView6.GridControl = customGridControl3;
             gridView6.Name = "gridView6";
             gridView6.OptionsEditForm.PopupEditFormWidth = 933;
+            gridView6.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView6.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView6.OptionsView.ShowGroupPanel = false;
             gridView6.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
@@ -2674,8 +2781,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView_wdToBind.Appearance.ColumnFilterButton.BackColor = System.Drawing.Color.Yellow;
             gridView_wdToBind.Appearance.ColumnFilterButton.Options.UseBackColor = true;
+            gridView_wdToBind.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView_wdToBind.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView_wdToBind.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView_wdToBind.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView_wdToBind.Appearance.FocusedRow.Options.UseFont = true;
+            gridView_wdToBind.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView_wdToBind.Appearance.Row.Options.UseTextOptions = true;
+            gridView_wdToBind.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView_wdToBind.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn12, gridColumn13, colarticul1, gridColumn8, gridColumn29, gridColumn28, colstatus1, gridColumn6, colannId7 });
             gridView_wdToBind.DetailHeight = 404;
+            gridView_wdToBind.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView_wdToBind.GridControl = gridControl_wdToBind;
             gridView_wdToBind.Name = "gridView_wdToBind";
             gridView_wdToBind.OptionsCustomization.AllowColumnMoving = false;
@@ -2686,6 +2802,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView_wdToBind.OptionsFind.FindDelay = 500;
             gridView_wdToBind.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
             gridView_wdToBind.OptionsMenu.EnableColumnMenu = false;
+            gridView_wdToBind.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView_wdToBind.OptionsView.ShowAutoFilterRow = true;
             gridView_wdToBind.OptionsView.ShowGroupPanel = false;
             gridView_wdToBind.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
@@ -2817,10 +2934,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView_unboundArts
             // 
+            gridView_unboundArts.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridView_unboundArts.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridView_unboundArts.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridView_unboundArts.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridView_unboundArts.Appearance.FocusedRow.Options.UseFont = true;
+            gridView_unboundArts.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridView_unboundArts.Appearance.Row.Options.UseTextOptions = true;
+            gridView_unboundArts.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridView_unboundArts.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridView_unboundArts.Appearance.SelectedRow.Options.UseBackColor = true;
             gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, артикул, gridColumn2, gridColumn7, группа, модель, gridColumn4 });
             gridView_unboundArts.DetailHeight = 404;
+            gridView_unboundArts.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridView_unboundArts.GridControl = gridControl_unboundArts;
             gridView_unboundArts.Name = "gridView_unboundArts";
             gridView_unboundArts.OptionsBehavior.AllowIncrementalSearch = true;
@@ -2834,6 +2960,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView_unboundArts.OptionsFind.FindDelay = 500;
             gridView_unboundArts.OptionsFind.FindMode = FindMode.Always;
             gridView_unboundArts.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
+            gridView_unboundArts.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridView_unboundArts.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView_unboundArts.OptionsView.ShowGroupPanel = false;
             gridView_unboundArts.ScrollStyle = ScrollStyleFlags.LiveVertScroll;
@@ -3311,13 +3438,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridViewPreArch
             // 
+            gridViewPreArch.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
+            gridViewPreArch.Appearance.FocusedCell.Options.UseForeColor = true;
+            gridViewPreArch.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
+            gridViewPreArch.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
+            gridViewPreArch.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewPreArch.Appearance.FocusedRow.Options.UseForeColor = true;
+            gridViewPreArch.Appearance.Row.Options.UseTextOptions = true;
+            gridViewPreArch.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
             gridViewPreArch.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridViewPreArch.Appearance.SelectedRow.Options.UseBackColor = true;
             gridViewPreArch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn14, gridColumn16, gridColumn15, gridColumn17 });
             gridViewPreArch.DetailHeight = 404;
+            gridViewPreArch.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewPreArch.GridControl = gridControlPreArch;
             gridViewPreArch.Name = "gridViewPreArch";
             gridViewPreArch.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewPreArch.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewPreArch.OptionsView.RowAutoHeight = true;
             gridViewPreArch.OptionsView.ShowGroupPanel = false;
             // 
