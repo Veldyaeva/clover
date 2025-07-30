@@ -8,7 +8,6 @@ using DevExpress.XtraScheduler.Reporting;
 using DevExpress.XtraVerticalGrid;
 using SewingProduction.form;
 using SewingProduction.Helpers;
-using SewingProduction.Services; // for TeamWorkBuffer
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.Services;
@@ -165,81 +164,60 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                // Выбираем строки в гриде. Если выбрано несколько строк (например, для режима комплекта),
-                // копируем все выбранные ANnID. При выборе более двух строк выводим предупреждение.
-                int[] selectedRows = ANNgridView.GetSelectedRows();
-                if (selectedRows == null || selectedRows.Length == 0)
+                // Проверяем, что строка выбрана
+                if (ANNgridView.FocusedRowHandle < 0)
                 {
-                    MessageBox.Show("Выберите одну или две записи для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                if (selectedRows.Length > 2)
-                {
-                    MessageBox.Show("Выберите не более двух записей для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Выберите запись для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                var annIds = new List<int>();
-                var displayBuilder = new System.Text.StringBuilder();
-                ArtNormN firstSelectedItem = null;
-
-                foreach (int rowHandle in selectedRows)
+                // Безопасно получаем значения из грида
+                var annIdValue = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                if (annIdValue == null || annIdValue == DBNull.Value || !int.TryParse(annIdValue.ToString(), out int annId))
                 {
-                    // Получаем AnnID
-                    var annIdVal = ANNgridView.GetRowCellValue(rowHandle, "AnnID");
-                    if (annIdVal == null || annIdVal == DBNull.Value || !int.TryParse(annIdVal.ToString(), out int annIdTmp))
-                    {
-                        continue;
-                    }
-                    annIds.Add(annIdTmp);
-
-                    // Получаем строку как ArtNormN для передачи в буфер (для первой выбранной строки)
-                    if (firstSelectedItem == null)
-                    {
-                        firstSelectedItem = ANNgridView.GetRow(rowHandle) as ArtNormN;
-                    }
-
-                    // Функция для безопасного получения значений полей
-                    string GetSafeValue(string fieldName)
-                    {
-                        var value = ANNgridView.GetRowCellValue(rowHandle, fieldName);
-                        if (value == null || value == DBNull.Value)
-                            return " ";
-                        string stringValue = value.ToString();
-                        return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
-                    }
-
-                    var grupVal = GetSafeValue("grup");
-                    var modVal = GetSafeValue("Mod");
-                    var articulVal = GetSafeValue("Articul");
-                    // Добавляем в текст буфера информацию о каждой записи на новой строке
-                    if (displayBuilder.Length > 0) displayBuilder.AppendLine().AppendLine("----------------------------");
-                    displayBuilder.AppendLine($"группа: {grupVal},");
-                    displayBuilder.AppendLine($"модель: {modVal},");
-                    displayBuilder.Append($"артикул: {articulVal}");
-                }
-                if (annIds.Count == 0)
-                {
-                    MessageBox.Show("Не удалось получить идентификаторы выбранных записей.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Не удалось получить идентификатор записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
-                var combinedDisplayText = displayBuilder.ToString();
+                var selectedItem = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                if (selectedItem == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
-                // Копируем в глобальный буфер (обновлённый метод принимает коллекцию идентификаторов)
-                TeamWorkBuffer.CopyToBuffer(annIds, combinedDisplayText, firstSelectedItem);
+                // Безопасно получаем значения полей с обработкой null/empty
+                string GetSafeValue(string fieldName)
+                {
+                    var value = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, fieldName);
+                    if (value == null || value == DBNull.Value)
+                        return " ";
+                    
+                    string stringValue = value.ToString();
+                    return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                }
 
-                // Обновляем локальный буфер для обратной совместимости: сохраняем первый идентификатор и текст
-                bufferId = annIds.First();
-                buffer.Text = combinedDisplayText;
+                var grup = GetSafeValue("grup");
+                var mod = GetSafeValue("Mod");
+                var articul = GetSafeValue("Articul");
+                
+                var displayText = $"группа: {grup},\n\r" +
+                    $"модель: {mod},\n\r" +
+                    $"артикул: {articul}";
+
+                // Копируем в глобальный буфер
+                TeamWorkBuffer.CopyToBuffer(annId, displayText, selectedItem);
+                
+                // Обновляем локальный буфер для обратной совместимости
+                bufferId = annId;
+                buffer.Text = displayText;
 
                 // Показываем статус в statusLabel (если он существует)
                 if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
                 {
-                    statusLabel.ForeColor = System.Drawing.Color.Black;
-                    statusLabel.Text = annIds.Count > 1 ? "Данные двух записей скопированы в буфер" : "Данные скопированы в буфер";
+                    statusLabel.Text = "Данные скопированы в буфер";
                     // Автоматически очищаем через 3 секунды
-                    _ = Task.Delay(3000).ContinueWith(t =>
+                    _ = Task.Delay(3000).ContinueWith(t => 
                     {
                         if (!this.IsDisposed && statusLabel != null)
                         {
@@ -484,15 +462,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 //Проверяем статус "актуальный" и наличие даты обновления
-                //if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
-                //{
-                //    MessageBox.Show(
-                //        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
-                //        "Ограничение редактирования",
-                //        MessageBoxButtons.OK,
-                //        MessageBoxIcon.Information);
-                //    return;
-                //}
+                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                {
+                    MessageBox.Show(
+                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                        "Ограничение редактирования",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
+                }
                 var updatedArtNormN = new ArtNormN();
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
                 {
@@ -667,16 +645,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 // 4. Открываем форму TeamWork_AdvanceTW
-                // Если в глобальном буфере находится более одного идентификатора,
-                // это означает, что пользователь выбрал два разделения и хочет
-                // создать новый РТ в режиме комплекта. В этом случае устанавливаем
-                // режим Kit, иначе создаём обычное предварительное разделение.
-                int modeForNewForm = (TeamWorkBuffer.BufferIds != null && TeamWorkBuffer.BufferIds.Count > 1)
-                    ? (int)Mode.Kit
-                    : (int)Mode.NewWorkDivision;
                 using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
                     0,
-                    modeForNewForm,
+                    (int)Mode.NewWorkDivision,
                     newId: newAnnId)
                    )
                 {

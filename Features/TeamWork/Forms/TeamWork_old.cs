@@ -303,7 +303,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
 
                 case "xtraTabPageArticles":
+                    // Загружаем данные для вкладки артикулов
                     await CurrentWorks_Load();
+                    break;
+
+                default:
+                    // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
                     break;
             }
         }
@@ -1464,6 +1469,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gridControl_wdToBind_Click_1(object sender, EventArgs e)
         {
 
         }

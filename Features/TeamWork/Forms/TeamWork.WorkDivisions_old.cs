@@ -8,7 +8,6 @@ using DevExpress.XtraTab;
 using SewingProduction.Extensions;
 using SewingProduction.form;
 using SewingProduction.Helpers;
-using SewingProduction.Services; // for TeamWorkBuffer
 using SewingProduction.Models;
 using System;
 using System.Collections;
@@ -392,16 +391,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 MyDataAnnLoad();
             }
 
-            // Определяем режим для новой формы: если в буфере находятся два ID,
-            // значит выполняется создание комплекта (режим Kit), иначе обычный
-            // режим создания нового разделения труда. TeamWorkBuffer предоставляет
-            // список идентификаторов Ann в буфере, где при режиме комплекта
-            // ожидается ровно две записи.
-            int modeForNewForm = (TeamWorkBuffer.BufferIds != null && TeamWorkBuffer.BufferIds.Count > 1)
-                ? (int)Mode.Kit
-                : (int)Mode.NewWorkDivision;
-
-            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, modeForNewForm, newId: newId))
+            using (TeamWork_AdvanceTW teamWork_AdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.NewWorkDivision, newId: newId))
             {
                 await HandleAnnEditResult(teamWork_AdvanceTW, newItem);
             }

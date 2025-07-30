@@ -69,10 +69,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly List<int> _deletedNormRaszIds = new List<int>();
         private readonly List<int> _deletedNormRaskIds = new List<int>();
         private readonly List<int> _deletedNormKontIds = new List<int>();
-
+        
         // Поле для хранения последней выбранной операции
         private NormRasz _lastFocusedRaszOperation = null;
-
+        
         /// <summary>
         /// Структура для возврата результата диалога выбора позиции операции
         /// </summary>
@@ -330,7 +330,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
                     AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
-                    // AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
+                   // AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
@@ -426,7 +426,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <summary>
         /// Специальный обработчик контекстного меню для norm_rasz с перенумерацией операций
         /// </summary>
-        private PopupMenuShowingEventHandler ShowPopUpForRasz(
+        private  PopupMenuShowingEventHandler ShowPopUpForRasz(
             GridView view,
             BindingList<NormRasz> bindingList,
             Func<NormRasz, int> getId,
@@ -453,7 +453,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     // Если удаляем последнюю сфокусированную операцию, сбрасываем ссылку
                     if (_lastFocusedRaszOperation != null &&
-                        deletedOperationN == _lastFocusedRaszOperation.N &&
+                        deletedOperationN == _lastFocusedRaszOperation.N && 
                         deletedOperationN1 == _lastFocusedRaszOperation.N1)
                     {
                         _lastFocusedRaszOperation = null;
@@ -498,7 +498,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 var addItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить строку", (_, __) =>
                 {
                     int rowHandle = e.HitInfo.RowHandle;
-
+                    
                     // Определяем тип строки и соответствующую логику
                     if (view.IsNewItemRow(rowHandle))
                     {
@@ -536,10 +536,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
-
+                
                 // Проверяем, есть ли подоперации у текущей операции
                 bool hasSuboperations = _normRaszList?.Any(r => r.N == currentOperation.N && r.N1 > 0) ?? false;
-                int maxN1InOperation = hasSuboperations ?
+                int maxN1InOperation = hasSuboperations ? 
                     _normRaszList.Where(r => r.N == currentOperation.N).Max(r => r.N1) : 0;
 
                 // Определяем варианты в зависимости от типа текущей операции
@@ -560,20 +560,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                         subopMessage = $"Добавить подоперацию к операции №{currentOperation.N}?\n" +
                                       $"Новая подоперация получит номер {currentOperation.N}.{maxN1InOperation + 1}";
                     }
-
-                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции",
-                                                     MessageBoxButtons.YesNoCancel,
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
                                                      MessageBoxIcon.Question,
                                                      MessageBoxDefaultButton.Button1);
-
+                    
                     if (subopResult == DialogResult.Yes)
                     {
                         if (!hasSuboperations)
                         {
                             // Первая подоперация - основная операция станет X.1, новая X.2
-                            return new OperationInsertChoice
-                            {
-                                OperationN = currentOperation.N,
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
                                 OperationN1 = 2, // Новая подоперация будет X.2
                                 IsSuboperation = true,
                                 ConvertMainToSuboperation = true // Флаг для преобразования основной операции
@@ -582,11 +582,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                         else
                         {
                             // Обычная подоперация к уже существующим
-                            return new OperationInsertChoice
-                            {
-                                OperationN = currentOperation.N,
-                                OperationN1 = maxN1InOperation + 1,
-                                IsSuboperation = true
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
+                                OperationN1 = maxN1InOperation + 1, 
+                                IsSuboperation = true 
                             };
                         }
                     }
@@ -601,20 +601,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Текущая операция подоперация - сначала предлагаем вставить подоперацию
                     string subopMessage = $"Добавить подоперацию после №{currentOperation.N}.{currentOperation.N1}?\n" +
                                          $"Новая подоперация получит номер {currentOperation.N}.{currentOperation.N1 + 1}";
-
-                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции",
-                                                     MessageBoxButtons.YesNoCancel,
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
                                                      MessageBoxIcon.Question,
                                                      MessageBoxDefaultButton.Button1);
-
+                    
                     if (subopResult == DialogResult.Yes)
                     {
                         // Подоперация после текущей подоперации
-                        return new OperationInsertChoice
-                        {
-                            OperationN = currentOperation.N,
-                            OperationN1 = currentOperation.N1 + 1,
-                            IsSuboperation = true
+                        return new OperationInsertChoice 
+                        { 
+                            OperationN = currentOperation.N, 
+                            OperationN1 = currentOperation.N1 + 1, 
+                            IsSuboperation = true 
                         };
                     }
                     else if (subopResult == DialogResult.Cancel)
@@ -628,30 +628,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 string mainOpMessage = $"Добавить основную операцию:\n\n" +
                                       $"Да - После операции №{currentOperation.N} (получит номер {currentOperation.N + 1})\n" +
                                       $"Нет - В конец списка (получит номер {maxN + 1})";
-
-                var mainOpResult = MessageBox.Show(mainOpMessage, "Позиция основной операции",
-                                                  MessageBoxButtons.YesNoCancel,
+                
+                var mainOpResult = MessageBox.Show(mainOpMessage, "Позиция основной операции", 
+                                                  MessageBoxButtons.YesNoCancel, 
                                                   MessageBoxIcon.Question,
                                                   MessageBoxDefaultButton.Button1);
-
+                
                 if (mainOpResult == DialogResult.Yes)
                 {
                     // Основная операция после текущей
-                    return new OperationInsertChoice
-                    {
-                        OperationN = currentOperation.N + 1,
-                        OperationN1 = 0,
-                        IsSuboperation = false
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = currentOperation.N + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
                     };
                 }
                 else if (mainOpResult == DialogResult.No)
                 {
                     // В конец списка
-                    return new OperationInsertChoice
-                    {
-                        OperationN = maxN + 1,
-                        OperationN1 = 0,
-                        IsSuboperation = false
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = maxN + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
                     };
                 }
                 else
@@ -679,7 +679,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int insertOperationN1 = 0;
                 bool isSuboperation = false;
                 OperationInsertChoice choice = new OperationInsertChoice(); // Объявляем в более широкой области видимости
-
+                
                 if (forceAppendToEnd || insertAfterOperation == null)
                 {
                     // Добавляем в конец списка как основную операцию
@@ -691,12 +691,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Предлагаем пользователю выбрать тип операции и позицию
                     choice = ShowOperationInsertDialog(insertAfterOperation);
-
+                    
                     if (choice.Cancel)
                     {
                         return; // Отмена
                     }
-
+                    
                     insertOperationN = choice.OperationN;
                     insertOperationN1 = choice.OperationN1;
                     isSuboperation = choice.IsSuboperation;
@@ -741,18 +741,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 }
                             }
                         }
-
+                        
                         // Присваиваем новой операции нужные номера
                         selectedData.N = insertOperationN;
                         selectedData.N1 = insertOperationN1;
-
+                        
                         _normRaszList.Add(selectedData);
                         _normRaszBindingSource.ResetBindings(false);
                         gridControlRasz.RefreshDataSource();
-
+                        
                         // Обновляем сортировку после добавления
                         TWGridHelper.sortGridView(gridViewRasz);
-
+                        
                         // Автоматически открываем форму редактирования для новой операции
                         int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
                         if (newRowDataSourceIndex >= 0)
@@ -763,7 +763,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 // Устанавливаем фокус и открываем форму редактирования
                                 gridViewRasz.FocusedRowHandle = newRowHandle;
                                 gridViewRasz.MakeRowVisible(newRowHandle);
-
+                                
                                 // Открываем форму редактирования через небольшую задержку
                                 gridViewRasz.GridControl.BeginInvoke(new Action(() =>
                                 {
@@ -772,7 +772,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 }));
                             }
                         }
-
+                        
                         await _logger.LogEventAsync($"Добавлена новая операция №{selectedData.N}.{selectedData.N1} через контекстное меню", "AddNewRaszOperation");
                     }
                 }
@@ -824,18 +824,18 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             // Находим основную операцию (N.0) и преобразуем её в подоперацию (N.1)
             var mainOperation = _normRaszList?.FirstOrDefault(r => r.N == operationN && r.N1 == 0);
-
+            
             if (mainOperation != null)
             {
                 int oldN1 = mainOperation.N1;
                 mainOperation.N1 = 1; // Основная операция становится первой подоперацией
-
+                
                 // Помечаем как измененную, если это не новая запись
                 if (!mainOperation.IsNew)
                 {
                     mainOperation.IsModified = true;
                 }
-
+                
                 _logger.LogEventAsync($"Основная операция преобразована: {operationN}.{oldN1} -> {operationN}.{mainOperation.N1}", "ConvertMainOperationToSuboperation");
             }
         }
@@ -856,18 +856,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (suboperationsToRenumber.Any())
             {
                 _logger.LogEventAsync($"Перенумерация подопераций: сдвиг {suboperationsToRenumber.Count} подопераций операции №{operationN} начиная с {insertSuboperationN1}", "RenumberSuboperationsForInsertion");
-
+                
                 foreach (var operation in suboperationsToRenumber)
                 {
                     int oldN1 = operation.N1;
                     operation.N1 += 1;
-
+                    
                     // Помечаем как измененную, если это не новая запись
                     if (!operation.IsNew)
                     {
                         operation.IsModified = true;
                     }
-
+                    
                     _logger.LogEventAsync($"Подоперация перенумерована: {operation.N}.{oldN1} -> {operation.N}.{operation.N1}", "RenumberSuboperationsForInsertion");
                 }
             }
@@ -888,18 +888,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             if (operationsToRenumber.Any())
             {
                 _logger.LogEventAsync($"Перенумерация операций: сдвиг {operationsToRenumber.Count} операций начиная с номера {insertOperationN}", "RenumberOperationsForInsertion");
-
+                
                 foreach (var operation in operationsToRenumber)
                 {
                     int oldN = operation.N;
                     operation.N += 1;
-
+                    
                     // Помечаем как измененную, если это не новая запись
                     if (!operation.IsNew)
                     {
                         operation.IsModified = true;
                     }
-
+                    
                     _logger.LogEventAsync($"Операция перенумерована: {oldN}.{operation.N1} -> {operation.N}.{operation.N1}", "RenumberOperationsForInsertion");
                 }
             }
@@ -1074,37 +1074,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                         AddStandardKontRows();
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
-
-                    case (int)Mode.Kit:
-                        // Режим создания комплекта: аналогичен предварительному, но
-                        // отличается заголовком формы и тем, что операции из
-                        // выбранных разделений будут автоматически перенесены
-                        // в список _normRaszList в конце загрузки.
-                        this.Text = "Создание комплекта";
-                        nameTextBox.Enabled = true;
-                        // Очищаем списки операций и добавляем стандартные строки в norm_kont
-                        _normRaszList.Clear();
-                        _normRaskList.Clear();
-                        _normKontList.Clear();
-                        _lastFocusedRaszOperation = null;
-                        AddStandardKontRows();
-                        break;
                 }
                 await LoadAnnDataAsync();
                 _hasUnsavedChanges = false;
-
-                // Если выбран режим комплекта, автоматически подгружаем операции из буфера
-                if (_mode == (int)Mode.Kit)
-                {
-                    try
-                    {
-                        await InsertOperationsFromBufferAsync();
-                    }
-                    catch (Exception ex)
-                    {
-                        await _logger.LogErrorAsync(ex, "Ошибка при автозагрузке операций из буфера в режиме комплекта");
-                    }
-                }
 
                 AttachChangeHandlers();
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
@@ -1190,7 +1162,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 gridViewRasz.RowStyle += GridView_RowStyle;
                 gridViewRaskr.RowStyle += GridView_RowStyle;
                 gridViewKont.RowStyle += GridView_RowStyle;
-
+                
                 // Подписываемся на изменение фокуса для сохранения последней выбранной операции
                 gridViewRasz.FocusedRowChanged += GridViewRasz_FocusedRowChanged;
 
@@ -1594,11 +1566,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             e.Allow = false;
-
+            
             // Используем новый метод для добавления операции
             // Определяем, нужно ли предлагать позицию или добавить в конец
             bool shouldOfferPosition = _lastFocusedRaszOperation != null && _normRaszList?.Count > 0;
-
+            
             if (shouldOfferPosition)
             {
                 // Предлагаем позицию на основе последней сфокусированной операции
@@ -1875,7 +1847,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             GridView view = sender as GridView;
             if (view == null) return;
-
+            
             // Запрещаем добавление новых строк, если уже есть 2 записи
             if (view.IsNewItemRow(view.FocusedRowHandle))
             {
@@ -1885,7 +1857,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     MessageBox.Show("На одно РТ можно добавить максимум 2 строки контроля.", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
+                
                 e.Cancel = true;
 
                 if (_isSelectionFormOpen) return;
@@ -1896,7 +1868,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     string choice1 = "Пронумеровать деталь";
                     string choice2 = "Комплектация пачки";
-
+                    
                     // Проверяем, какие строки уже есть
                     bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
                     bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
@@ -1914,7 +1886,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (choiceResult == DialogResult.Yes)
                         {
                             selectedText = options[0];
-                            kod_o = "001";
+                            kod_o = "001"; 
                         }
                         else if (choiceResult == DialogResult.No)
                         {
@@ -2044,9 +2016,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
-                    RecalculateSek();
+                          RecalculateSek();
                     var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
-                    //  Thread.Sleep(5000);
+                  //  Thread.Sleep(5000);
 
                     // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
                     if (calculatedData != null)
@@ -2074,7 +2046,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     else
                     {
                         // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
-                        //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                         //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
                     }
 
                 }
@@ -2190,7 +2162,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                 }
 
-                foreach (var item in itemsToInsert)
+                    foreach (var item in itemsToInsert)
                     item.IsNew = false;
             }
 
@@ -2258,9 +2230,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             int Nome = 0;
 
             // Используем глобальный буфер если доступен, иначе локальный
-            IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : (_bufferWorkDivision > 0 ? new List<int> { _bufferWorkDivision } : new List<int>());
+            int bufferIdToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferId : _bufferWorkDivision;
 
-            if (bufferIdsToUse != null && bufferIdsToUse.Count > 0)
+            if (bufferIdToUse > 0)
             {
                 try
                 {
@@ -2288,31 +2260,33 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _normKontBindingSource?.ResetBindings(false);
                     }
 
-                    // Определяем стартовый номер N для новых операций
-                    int currentMaxN = 0;
                     if (_normRaszList != null && _normRaszList.Count > 0)
                     {
-                        currentMaxN = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
+                        Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
                     }
+                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse);
+                    if (raszList == null) raszList = new List<NormRasz>();
 
-                    // Итерация по всем идентификаторам в буфере; добавляем операции по порядку
-                    foreach (var id in bufferIdsToUse)
+                    int nextN = Nome;
+                    foreach (var item in raszList)
                     {
-                        List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(id);
-                        if (raszList == null) continue;
-                        foreach (var item in raszList)
-                        {
-                            item.IsNew = true;
-                            // Устанавливаем новый порядковый номер, увеличивая счётчик
-                            currentMaxN += 1;
-                            item.N = currentMaxN;
-                            _normRaszList.Add(item);
-                        }
+                        item.IsNew = true;
+                        item.N = item.N + Nome;
+                        _normRaszList.Add(item);
                     }
 
                     TWGridHelper.sortGridView(gridViewRasz);
+                    //if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                    //if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                
+                    //var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    //_normRaszList.Add(rasz);//.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
 
-                    // Показываем статус успешной загрузки
+                //_currentAnnData.dateCreate = DateTime.Now;
+
+
+
+                // Показываем статус успешной загрузки
                     await ShowStatusMessage("Данные из буфера успешно загружены");
                 }
                 catch (SqlException sqlEx)
@@ -2606,52 +2580,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
-    
 
-        /// <summary>
-        /// Вставляет операции из глобального буфера в текущий список NormRasz.
-        /// Используется для режима комплекта, чтобы автоматически
-        /// объединить операции из нескольких разделений труда, выбранных
-        /// пользователем. В отличие от <see cref="buffer_Click"/>, этот метод
-        /// не запрашивает подтверждение пользователя и не очищает списки
-        /// операций — предполагается, что список уже подготовлен и пуст.
-        /// </summary>
-        private async Task InsertOperationsFromBufferAsync()
-        {
-            // Используем глобальный буфер
-            IReadOnlyList<int> bufferIdsToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferIds : null;
-            if (bufferIdsToUse == null || bufferIdsToUse.Count == 0)
-            {
-                return;
-            }
-
-            // Определяем стартовый номер N для новых операций
-            int currentMaxN = 0;
-            if (_normRaszList != null && _normRaszList.Count > 0)
-            {
-                currentMaxN = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
-            }
-
-            foreach (var id in bufferIdsToUse)
-            {
-                var raszList = await _artNormService.GetRelatedNormRasz(id);
-                if (raszList == null) continue;
-                foreach (var item in raszList)
-                {
-                    item.IsNew = true;
-                    currentMaxN += 1;
-                    item.N = currentMaxN;
-                    _normRaszList.Add(item);
-                }
-            }
-            // После добавления сортируем таблицу, чтобы новые элементы встали
-            // в порядке возрастания N
-            TWGridHelper.sortGridView(gridViewRasz);
-            // Обновляем биндинги, чтобы изменения отобразились в UI
-            _normRaszBindingSource?.ResetBindings(false);
-            await ShowStatusMessage("Операции из буфера добавлены для комплекта");
-        }
-                #region Управление порядком и нумерацией операций
+        #region Управление порядком и нумерацией операций
 
         /// <summary>
         /// Полный пересчет нумерации всех операций
@@ -2936,6 +2866,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         #endregion
-
-    } }
+    }
+}
 
