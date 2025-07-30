@@ -711,27 +711,34 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         
-                        // Выполняем перенумерацию в зависимости от типа операции
-                        if (isSuboperation)
+                        // Проверяем и исправляем дублирующиеся номера ПЕРЕД добавлением
+                        if (HasDuplicateNumbers(insertOperationN, insertOperationN1))
                         {
-                            if (choice.ConvertMainToSuboperation)
+                            // Если такой номер уже существует, пересчитываем нумерацию
+                            await _logger.LogEventAsync($"Обнаружен дублирующий номер {insertOperationN}.{insertOperationN1}, выполняется пересчет", "AddNewRaszOperation");
+                            
+                            // Выполняем перенумерацию в зависимости от типа операции
+                            if (isSuboperation)
                             {
-                                // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
-                                ConvertMainOperationToSuboperation(insertOperationN);
+                                if (choice.ConvertMainToSuboperation)
+                                {
+                                    // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
+                                    ConvertMainOperationToSuboperation(insertOperationN);
+                                }
+                                else
+                                {
+                                    // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
+                                    RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
+                                }
                             }
                             else
                             {
-                                // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
-                                RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
-                            }
-                        }
-                        else
-                        {
-                            // Для основной операции - перенумеровываем все операции начиная с указанной позиции
-                            int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
-                            if (insertOperationN <= maxN)
-                            {
-                                RenumberOperationsForInsertion(insertOperationN);
+                                // Для основной операции - перенумеровываем все операции начиная с указанной позиции
+                                int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                                if (insertOperationN <= maxN)
+                                {
+                                    RenumberOperationsForInsertion(insertOperationN);
+                                }
                             }
                         }
                         
@@ -775,6 +782,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при добавлении операции через контекстное меню");
                 MessageBox.Show($"Ошибка при добавлении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// Проверяет наличие дублирующихся номеров операций
+        /// </summary>
+        /// <param name="n">Номер операции</param>
+        /// <param name="n1">Номер подоперации</param>
+        /// <returns>True если такой номер уже существует</returns>
+        private bool HasDuplicateNumbers(int n, int n1)
+        {
+            return _normRaszList?.Any(r => r.N == n && r.N1 == n1) ?? false;
         }
 
         /// <summary>
@@ -2562,6 +2580,292 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
+
+        #region Управление порядком и нумерацией операций
+
+        /// <summary>
+        /// Полный пересчет нумерации всех операций
+        /// </summary>
+        public void RecalculateAllOperationNumbers()
+        {
+            try
+            {
+                if (_normRaszList == null || _normRaszList.Count == 0)
+                    return;
+
+                // Группируем операции по основным номерам (N), сортируем по текущему порядку
+                var operationGroups = _normRaszList
+                    .GroupBy(r => r.N)
+                    .OrderBy(g => g.Key)
+                    .ToList();
+
+                int currentMainNumber = 1;
+
+                foreach (var group in operationGroups)
+                {
+                    var operations = group.OrderBy(r => r.N1).ToList();
+                    
+                    foreach (var operation in operations)
+                    {
+                        operation.N = currentMainNumber;
+                        
+                        // Если это единственная операция в группе, то N1 = 0
+                        if (operations.Count == 1)
+                        {
+                            operation.N1 = 0;
+                        }
+                        else
+                        {
+                            // Если есть несколько операций, нумеруем подоперации с 1
+                            operation.N1 = operations.IndexOf(operation) + 1;
+                        }
+
+                        // Помечаем как измененную, если это не новая запись
+                        if (!operation.IsNew)
+                        {
+                            operation.IsModified = true;
+                        }
+                    }
+
+                    currentMainNumber++;
+                }
+
+                // Обновляем UI
+                _normRaszBindingSource.ResetBindings(false);
+                TWGridHelper.sortGridView(gridViewRasz);
+
+                _logger.LogEventAsync($"Выполнен полный пересчет нумерации для {_normRaszList.Count} операций", "RecalculateAllOperationNumbers");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при пересчете нумерации операций");
+                MessageBox.Show($"Ошибка при пересчете нумерации: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Перемещает выбранную операцию вверх
+        /// </summary>
+        public void MoveOperationUp()
+        {
+            try
+            {
+                var selectedOperation = GetSelectedOperation();
+                if (selectedOperation == null)
+                {
+                    MessageBox.Show("Выберите операцию для перемещения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var allOperations = _normRaszList.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
+                int currentIndex = allOperations.IndexOf(selectedOperation);
+
+                if (currentIndex <= 0)
+                {
+                    MessageBox.Show("Операция уже находится в начале списка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Меняем местами текущую операцию с предыдущей
+                var previousOperation = allOperations[currentIndex - 1];
+                SwapOperationPositions(selectedOperation, previousOperation);
+
+                // Пересчитываем нумерацию
+                RecalculateAllOperationNumbers();
+
+                // Устанавливаем фокус на перемещенную операцию
+                SetFocusToOperation(selectedOperation);
+
+                _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вверх", "MoveOperationUp");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при перемещении операции вверх");
+                MessageBox.Show($"Ошибка при перемещении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Перемещает выбранную операцию вниз
+        /// </summary>
+        public void MoveOperationDown()
+        {
+            try
+            {
+                var selectedOperation = GetSelectedOperation();
+                if (selectedOperation == null)
+                {
+                    MessageBox.Show("Выберите операцию для перемещения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var allOperations = _normRaszList.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
+                int currentIndex = allOperations.IndexOf(selectedOperation);
+
+                if (currentIndex >= allOperations.Count - 1)
+                {
+                    MessageBox.Show("Операция уже находится в конце списка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Меняем местами текущую операцию со следующей
+                var nextOperation = allOperations[currentIndex + 1];
+                SwapOperationPositions(selectedOperation, nextOperation);
+
+                // Пересчитываем нумерацию
+                RecalculateAllOperationNumbers();
+
+                // Устанавливаем фокус на перемещенную операцию
+                SetFocusToOperation(selectedOperation);
+
+                _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вниз", "MoveOperationDown");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при перемещении операции вниз");
+                MessageBox.Show($"Ошибка при перемещении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Получает выбранную операцию из грида
+        /// </summary>
+        /// <returns>Выбранная операция или null</returns>
+        private NormRasz GetSelectedOperation()
+        {
+            if (gridViewRasz.FocusedRowHandle < 0)
+                return null;
+
+            return gridViewRasz.GetRow(gridViewRasz.FocusedRowHandle) as NormRasz;
+        }
+
+        /// <summary>
+        /// Меняет местами две операции в списке (логически)
+        /// </summary>
+        /// <param name="operation1">Первая операция</param>
+        /// <param name="operation2">Вторая операция</param>
+        private void SwapOperationPositions(NormRasz operation1, NormRasz operation2)
+        {
+            // Меняем местами номера операций для логического изменения порядка
+            int tempN = operation1.N;
+            int tempN1 = operation1.N1;
+
+            operation1.N = operation2.N;
+            operation1.N1 = operation2.N1;
+
+            operation2.N = tempN;
+            operation2.N1 = tempN1;
+
+            // Помечаем операции как измененные
+            if (!operation1.IsNew) operation1.IsModified = true;
+            if (!operation2.IsNew) operation2.IsModified = true;
+        }
+
+        /// <summary>
+        /// Устанавливает фокус на указанную операцию в гриде
+        /// </summary>
+        /// <param name="operation">Операция для фокусировки</param>
+        private void SetFocusToOperation(NormRasz operation)
+        {
+            try
+            {
+                int rowIndex = _normRaszList.IndexOf(operation);
+                if (rowIndex >= 0)
+                {
+                    int rowHandle = gridViewRasz.GetRowHandle(rowIndex);
+                    if (gridViewRasz.IsValidRowHandle(rowHandle))
+                    {
+                        gridViewRasz.FocusedRowHandle = rowHandle;
+                        gridViewRasz.MakeRowVisible(rowHandle);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при установке фокуса на операцию");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет и исправляет дублирующиеся номера операций
+        /// </summary>
+        public void ValidateAndFixOperationNumbers()
+        {
+            try
+            {
+                if (_normRaszList == null || _normRaszList.Count == 0)
+                    return;
+
+                var duplicates = _normRaszList
+                    .GroupBy(r => new { r.N, r.N1 })
+                    .Where(g => g.Count() > 1)
+                    .ToList();
+
+                if (duplicates.Any())
+                {
+                    string duplicatesList = string.Join(", ", duplicates.Select(d => $"{d.Key.N}.{d.Key.N1}"));
+                    
+                    var result = MessageBox.Show(
+                        $"Обнаружены дублирующиеся номера операций: {duplicatesList}\n\n" +
+                        "Выполнить автоматический пересчет нумерации?",
+                        "Проблема с нумерацией",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        RecalculateAllOperationNumbers();
+                        MessageBox.Show("Нумерация операций исправлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Проблем с нумерацией не обнаружено.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при проверке нумерации операций");
+                MessageBox.Show($"Ошибка при проверке нумерации: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region Обработчики кнопок управления нумерацией операций
+
+        private void btnMoveUp_Click(object sender, EventArgs e)
+        {
+            MoveOperationUp();
+        }
+
+        private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+            MoveOperationDown();
+        }
+
+        private void btnRecalculateNumbers_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Выполнить полный пересчет нумерации всех операций?\n\n" +
+                "Это действие изменит номера всех операций в порядке их текущего расположения.",
+                "Подтверждение пересчета",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                RecalculateAllOperationNumbers();
+                MessageBox.Show("Нумерация операций обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnValidateNumbers_Click(object sender, EventArgs e)
+        {
+            ValidateAndFixOperationNumbers();
+        }
+
+        #endregion
     }
 }
 
