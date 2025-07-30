@@ -315,7 +315,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
             gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
-            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
             gridViewRasz.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
             gridViewRasz.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
@@ -727,7 +727,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnCancel
             // 
             btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnCancel.Appearance.Options.UseBackColor = true;
             btnCancel.Appearance.Options.UseFont = true;
@@ -747,7 +747,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnSave
             // 
             btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnSave.Appearance.Options.UseBackColor = true;
             btnSave.Appearance.Options.UseFont = true;
@@ -768,7 +768,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnOK
             // 
             btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnOK.Appearance.Options.UseBackColor = true;
             btnOK.Appearance.Options.UseFont = true;
@@ -789,7 +789,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnMoveUp
             // 
             btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveUp.Appearance.Font = new System.Drawing.Font("Arial", 9F);
+            btnMoveUp.Appearance.Font = new System.Drawing.Font("Arial", 15F);
             btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnMoveUp.Appearance.Options.UseBackColor = true;
             btnMoveUp.Appearance.Options.UseFont = true;
@@ -804,7 +804,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnMoveDown
             // 
             btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnMoveDown.Appearance.Font = new System.Drawing.Font("Arial", 9F);
+            btnMoveDown.Appearance.Font = new System.Drawing.Font("Arial", 15F);
             btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnMoveDown.Appearance.Options.UseBackColor = true;
             btnMoveDown.Appearance.Options.UseFont = true;
@@ -819,7 +819,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnRecalculateNumbers
             // 
             btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
-            btnRecalculateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 9F);
+            btnRecalculateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
             btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
             btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
             btnRecalculateNumbers.Appearance.Options.UseFont = true;
@@ -834,7 +834,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnValidateNumbers
             // 
             btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
-            btnValidateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 9F);
+            btnValidateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
             btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
             btnValidateNumbers.Appearance.Options.UseBackColor = true;
             btnValidateNumbers.Appearance.Options.UseFont = true;
@@ -864,12 +864,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel2.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel2, 2);
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Font = new System.Drawing.Font("Arial", 16F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(4, 518);
+            customLabel2.Location = new System.Drawing.Point(4, 514);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(87, 16);
+            customLabel2.Size = new System.Drawing.Size(135, 25);
             customLabel2.TabIndex = 15;
             customLabel2.Text = "конструктор";
             // 
@@ -878,24 +878,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
             modelTextBox.Enabled = false;
-            modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            modelTextBox.Font = new System.Drawing.Font("Arial", 16F);
             modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             modelTextBox.Location = new System.Drawing.Point(4, 138);
             modelTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             modelTextBox.Name = "modelTextBox";
-            modelTextBox.Size = new System.Drawing.Size(260, 23);
+            modelTextBox.Size = new System.Drawing.Size(260, 32);
             modelTextBox.TabIndex = 4;
             // 
             // nameTextBox
             // 
             nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
-            nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            nameTextBox.Font = new System.Drawing.Font("Arial", 16F);
             nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             nameTextBox.Location = new System.Drawing.Point(4, 192);
             nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new System.Drawing.Size(235, 23);
+            nameTextBox.Size = new System.Drawing.Size(235, 32);
             nameTextBox.TabIndex = 5;
             // 
             // label5
@@ -903,12 +903,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label5.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label5, 2);
-            label5.Font = new System.Drawing.Font("Arial", 10F);
+            label5.Font = new System.Drawing.Font("Arial", 16F);
             label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(4, 5);
+            label5.Location = new System.Drawing.Point(4, 0);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(103, 16);
+            label5.Size = new System.Drawing.Size(106, 27);
             label5.TabIndex = 3;
             label5.Text = "дата создания";
             // 
@@ -916,13 +916,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(dateCreate, 3);
-            dateCreate.Font = new System.Drawing.Font("Arial", 10F);
+            dateCreate.Font = new System.Drawing.Font("Arial", 16F);
             dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             dateCreate.Location = new System.Drawing.Point(4, 30);
             dateCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dateCreate.Name = "dateCreate";
             dateCreate.ObjectName = null;
-            dateCreate.Size = new System.Drawing.Size(260, 23);
+            dateCreate.Size = new System.Drawing.Size(260, 32);
             dateCreate.TabIndex = 7;
             // 
             // label4
@@ -930,25 +930,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label4.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label4, 3);
-            label4.Font = new System.Drawing.Font("Arial", 10F);
+            label4.Font = new System.Drawing.Font("Arial", 16F);
             label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(4, 410);
+            label4.Location = new System.Drawing.Point(4, 405);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(178, 16);
+            label4.Size = new System.Drawing.Size(191, 27);
             label4.TabIndex = 2;
             label4.Text = "итоговые сек. по изделию";
             // 
             // secTimeTextBox
             // 
             secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            secTimeTextBox.Font = new System.Drawing.Font("Arial", 16F);
             secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             secTimeTextBox.Location = new System.Drawing.Point(4, 435);
             secTimeTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             secTimeTextBox.Name = "secTimeTextBox";
             secTimeTextBox.ReadOnly = true;
-            secTimeTextBox.Size = new System.Drawing.Size(68, 23);
+            secTimeTextBox.Size = new System.Drawing.Size(68, 32);
             secTimeTextBox.TabIndex = 6;
             // 
             // groupTextBox
@@ -956,12 +956,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
             groupTextBox.Enabled = false;
-            groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            groupTextBox.Font = new System.Drawing.Font("Arial", 16F);
             groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             groupTextBox.Location = new System.Drawing.Point(4, 84);
             groupTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupTextBox.Name = "groupTextBox";
-            groupTextBox.Size = new System.Drawing.Size(260, 23);
+            groupTextBox.Size = new System.Drawing.Size(260, 32);
             groupTextBox.TabIndex = 19;
             // 
             // customLabel3
@@ -969,12 +969,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel3.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel3, 2);
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.Font = new System.Drawing.Font("Arial", 16F);
             customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(4, 59);
+            customLabel3.Location = new System.Drawing.Point(4, 55);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(51, 16);
+            customLabel3.Size = new System.Drawing.Size(79, 25);
             customLabel3.TabIndex = 18;
             customLabel3.Text = "группа";
             customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -984,12 +984,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label3.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label3, 2);
-            label3.Font = new System.Drawing.Font("Arial", 10F);
+            label3.Font = new System.Drawing.Font("Arial", 16F);
             label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(4, 167);
+            label3.Location = new System.Drawing.Point(4, 163);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(59, 16);
+            label3.Size = new System.Drawing.Size(92, 25);
             label3.TabIndex = 1;
             label3.Text = "артикул";
             // 
@@ -998,12 +998,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label2.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label2, 2);
-            label2.Font = new System.Drawing.Font("Arial", 10F);
+            label2.Font = new System.Drawing.Font("Arial", 16F);
             label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(4, 113);
+            label2.Location = new System.Drawing.Point(4, 109);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(57, 16);
+            label2.Size = new System.Drawing.Size(89, 25);
             label2.TabIndex = 0;
             label2.Text = "модель";
             // 
@@ -1012,12 +1012,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel1.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel1, 2);
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Font = new System.Drawing.Font("Arial", 16F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(4, 562);
+            customLabel1.Location = new System.Drawing.Point(4, 560);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(69, 16);
+            customLabel1.Size = new System.Drawing.Size(106, 20);
             customLabel1.TabIndex = 14;
             customLabel1.Text = "дизайнер";
             // 
@@ -1045,7 +1045,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // rasz
             // 
             rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            rasz.Font = new System.Drawing.Font("Arial", 10F);
+            rasz.Font = new System.Drawing.Font("Arial", 16F);
             rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             rasz.Location = new System.Drawing.Point(0, 0);
             rasz.Name = "rasz";
@@ -1056,7 +1056,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customButton2
             // 
             customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButton2.Font = new System.Drawing.Font("Arial", 10F);
+            customButton2.Font = new System.Drawing.Font("Arial", 16F);
             customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButton2.Location = new System.Drawing.Point(0, 0);
             customButton2.Name = "customButton2";
@@ -1093,12 +1093,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             statusLabel.AutoSize = true;
-            statusLabel.Font = new System.Drawing.Font("Arial", 10F);
+            statusLabel.Font = new System.Drawing.Font("Arial", 16F);
             statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             statusLabel.Location = new System.Drawing.Point(296, 0);
             statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             statusLabel.Name = "statusLabel";
-            statusLabel.Size = new System.Drawing.Size(0, 16);
+            statusLabel.Size = new System.Drawing.Size(0, 23);
             statusLabel.TabIndex = 5;
             // 
             // tableLayoutPanel4
@@ -1128,7 +1128,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBox2.Controls.Add(buffer);
             customGroupBox2.Controls.Add(textBoxBuffer);
             customGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox2.Font = new System.Drawing.Font("Arial", 16F);
             customGroupBox2.Location = new System.Drawing.Point(4, 657);
             customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox2.Name = "customGroupBox2";
@@ -1140,7 +1140,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // buffer
             // 
             buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            buffer.Font = new System.Drawing.Font("Arial", 10F);
+            buffer.Font = new System.Drawing.Font("Arial", 16F);
             buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             buffer.Location = new System.Drawing.Point(4, 16);
             buffer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1167,7 +1167,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel4.SetColumnSpan(customGroupBox1, 3);
             customGroupBox1.Controls.Add(tableLayoutPanel5);
             customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox1.Font = new System.Drawing.Font("Arial", 16F);
             customGroupBox1.Location = new System.Drawing.Point(4, 50);
             customGroupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox1.Name = "customGroupBox1";
@@ -1204,7 +1204,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.Controls.Add(customLabel5, 0, 11);
             tableLayoutPanel5.Controls.Add(btnMoveUp, 2, 2);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel5.Location = new System.Drawing.Point(4, 19);
+            tableLayoutPanel5.Location = new System.Drawing.Point(4, 28);
             tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 21;
@@ -1231,7 +1231,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(268, 579);
+            tableLayoutPanel5.Size = new System.Drawing.Size(268, 570);
             tableLayoutPanel5.TabIndex = 24;
             // 
             // textBoxReco
@@ -1250,12 +1250,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel4.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel4, 2);
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.Font = new System.Drawing.Font("Arial", 16F);
             customLabel4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel4.Location = new System.Drawing.Point(4, 221);
+            customLabel4.Location = new System.Drawing.Point(4, 216);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(150, 16);
+            customLabel4.Size = new System.Drawing.Size(148, 27);
             customLabel4.TabIndex = 25;
             customLabel4.Text = "особенности изделия";
             // 
@@ -1274,13 +1274,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             customLabel5.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel5, 3);
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.Font = new System.Drawing.Font("Arial", 16F);
             customLabel5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel5.Location = new System.Drawing.Point(4, 297);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
             tableLayoutPanel5.SetRowSpan(customLabel5, 2);
-            customLabel5.Size = new System.Drawing.Size(130, 32);
+            customLabel5.Size = new System.Drawing.Size(201, 50);
             customLabel5.TabIndex = 27;
             customLabel5.Text = "рекомендации \r\nдля планирования";
             // 
@@ -1486,3 +1486,4 @@ namespace SewingProduction.Features.TeamWork.Forms
         private System.Windows.Forms.Panel panelOperationButtons;
     }
 }
+
