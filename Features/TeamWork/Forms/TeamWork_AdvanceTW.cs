@@ -2400,16 +2400,62 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 if (TeamWorkBuffer.HasData)
                 {
-                    textBoxBuffer.Text = TeamWorkBuffer.BufferText;
+                    // Проверяем, является ли это комплектом (Kit режим)
+                    if (TeamWorkBuffer.BufferIds?.Count > 1)
+                    {
+                        // Форматируем отображение для комплекта
+                        var bufferText = TeamWorkBuffer.BufferText;
+                        if (!string.IsNullOrEmpty(bufferText))
+                        {
+                            // Разделяем части комплекта по разделителю
+                            var parts = bufferText.Split(new string[] { "----------------------------" }, StringSplitOptions.RemoveEmptyEntries);
+                            
+                            if (parts.Length >= 2)
+                            {
+                                var formattedText = new System.Text.StringBuilder();
+                                formattedText.AppendLine("📦 КОМПЛЕКТ (2 части):");
+                                formattedText.AppendLine();
+                                
+                                formattedText.AppendLine("🔸 Часть 1:");
+                                formattedText.AppendLine(parts[0].Trim());
+                                formattedText.AppendLine();
+                                
+                                formattedText.AppendLine("🔸 Часть 2:");
+                                formattedText.Append(parts[1].Trim());
+                                
+                                textBoxBuffer.Text = formattedText.ToString();
+                            }
+                            else
+                            {
+                                // Если разделитель не найден, показываем как есть
+                                textBoxBuffer.Text = "📦 КОМПЛЕКТ:\n\n" + bufferText;
+                            }
+                        }
+                        else
+                        {
+                            textBoxBuffer.Text = "📦 КОМПЛЕКТ (2 части)";
+                        }
+                        
+                        // Обновляем текст кнопки для комплекта
+                        buffer.Text = "Вставить комплект из буфера:";
+                    }
+                    else
+                    {
+                        // Обычный режим (одна запись)
+                        textBoxBuffer.Text = TeamWorkBuffer.BufferText;
+                        buffer.Text = "Вставить из буфера:";
+                    }
                 }
                 else if (_bufferWorkDivision > 0)
                 {
                     // Оставляем существующую логику для обратной совместимости
                     // Текст будет установлен в основном методе загрузки
+                    buffer.Text = "Вставить из буфера:";
                 }
                 else
                 {
                     textBoxBuffer.Text = "Буфер пуст";
+                    buffer.Text = "Вставить из буфера:";
                 }
             }
             catch (Exception ex)

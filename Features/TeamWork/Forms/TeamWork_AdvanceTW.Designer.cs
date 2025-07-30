@@ -1133,7 +1133,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox2.Name = "customGroupBox2";
             customGroupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBox2.Size = new System.Drawing.Size(276, 337);
+            customGroupBox2.Size = new System.Drawing.Size(276, 372);
             customGroupBox2.TabIndex = 14;
             customGroupBox2.TabStop = false;
             // 
@@ -1157,7 +1157,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textBoxBuffer.Location = new System.Drawing.Point(0, 50);
             textBoxBuffer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             textBoxBuffer.Name = "textBoxBuffer";
-            textBoxBuffer.Size = new System.Drawing.Size(270, 85);
+            textBoxBuffer.Size = new System.Drawing.Size(270, 120);
             textBoxBuffer.TabIndex = 12;
             textBoxBuffer.Text = "";
             // 
