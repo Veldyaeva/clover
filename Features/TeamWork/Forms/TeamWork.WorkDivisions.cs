@@ -346,7 +346,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             ArtNormN newItem = new ArtNormN
             {
-                Kod = "0000000",
+//                Kod = "0000000",
                 grup = "",
                 Articul = "",
                 Mod = "",

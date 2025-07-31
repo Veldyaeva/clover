@@ -165,18 +165,34 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
-                // Выбираем строки в гриде. Если выбрано несколько строк (например, для режима комплекта),
-                // копируем все выбранные ANnID. При выборе более двух строк выводим предупреждение.
+                // Проверяем текущий режим работы
+                bool isKitMode = kitModeRadio?.Checked == true;
+                
                 int[] selectedRows = ANNgridView.GetSelectedRows();
                 if (selectedRows == null || selectedRows.Length == 0)
                 {
-                    MessageBox.Show("Выберите одну или две записи для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    string message = isKitMode ? "Выберите две записи для создания комплекта." : "Выберите запись для копирования.";
+                    MessageBox.Show(message, "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                if (selectedRows.Length > 2)
+                
+                if (isKitMode)
                 {
-                    MessageBox.Show("Выберите не более двух записей для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    // В режиме комплекта должно быть выбрано точно 2 записи
+                    if (selectedRows.Length != 2)
+                    {
+                        MessageBox.Show("Для создания комплекта выберите точно две записи.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                }
+                else
+                {
+                    // В обычном режиме должна быть выбрана только 1 запись
+                    if (selectedRows.Length != 1)
+                    {
+                        MessageBox.Show("В обычном режиме можно выбрать только одну запись.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
                 }
 
                 var annIds = new List<int>();

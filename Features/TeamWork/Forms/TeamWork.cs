@@ -289,6 +289,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
                     }
                 }
+                
+                // Устанавливаем начальный режим (обычный)
+                SetNormalMode();
             }
         }
 
@@ -1467,6 +1470,85 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
 
         }
+
+        #region Mode Management
+
+        /// <summary>
+        /// Обработчик изменения режима работы (обычный/комплект)
+        /// </summary>
+        private void ModeRadio_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (sender == normalModeRadio && normalModeRadio.Checked)
+                {
+                    SetNormalMode();
+                }
+                else if (sender == kitModeRadio && kitModeRadio.Checked)
+                {
+                    SetKitMode();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при переключении режима: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Устанавливает обычный режим работы
+        /// </summary>
+        private void SetNormalMode()
+        {
+            // Отключаем множественный выбор
+            ANNgridView.OptionsSelection.MultiSelect = false;
+            ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.RowSelect;
+            
+            // Показываем все кнопки в customGroupBoxWithButtons
+            ButtonEditWd.Visible = true;
+            ButtonArchAndCopyWd.Visible = true;
+            ButtonDouble.Visible = true;
+            ButtonPreliminaryWd.Visible = true;
+            ButtonCopyWd.Visible = true;
+            KITlabel.Visible = false;
+
+            // Восстанавливаем обычный текст кнопки
+            ButtonPreliminaryWd.Text = "добавить предварительное РТ";
+            ButtonCopyWd.Text = "копировать РТ в буфер";
+
+            // Очищаем буфер при переключении режима
+            TeamWorkBuffer.ClearBuffer();
+        }
+
+        /// <summary>
+        /// Устанавливает режим создания комплекта
+        /// </summary>
+        private void SetKitMode()
+        {
+            // Включаем множественный выбор
+            ANNgridView.OptionsSelection.MultiSelect = true;
+            ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
+            
+            // Скрываем все кнопки кроме ButtonPreliminaryWd
+            ButtonEditWd.Visible = false;
+            ButtonArchAndCopyWd.Visible = false;
+            ButtonDouble.Visible = false;
+            ButtonPreliminaryWd.Visible = true;
+            KITlabel.Visible = true;
+            KITlabel.ForeColor = Color.Red;
+
+            // Показываем кнопку копирования (нужна для выбора 2 записей)
+            ButtonCopyWd.Visible = true;
+            ButtonCopyWd.Text = "копировать комплект в буфер";
+            
+            // Изменяем текст кнопки для режима комплекта
+            ButtonPreliminaryWd.Text = "создать комплект";
+            
+            // Очищаем буфер при переключении режима
+            TeamWorkBuffer.ClearBuffer();
+        }
+
+        #endregion
     }
     public static class DemoHelper
     {

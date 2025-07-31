@@ -90,7 +90,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnMoveDown = new CustomSimpleButton();
             btnRecalculateNumbers = new CustomSimpleButton();
             btnValidateNumbers = new CustomSimpleButton();
-            panelOperationButtons = new System.Windows.Forms.Panel();
             customLabel2 = new CustomLabel();
             modelTextBox = new CustomTextBox();
             nameTextBox = new CustomTextBox();
@@ -140,7 +139,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
-            panelOperationButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).BeginInit();
@@ -171,7 +169,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel2.Controls.Add(gridControlRasz, 0, 0);
             tableLayoutPanel2.Controls.Add(gridControlRaskr, 1, 1);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel2.Location = new System.Drawing.Point(296, 26);
+            tableLayoutPanel2.Location = new System.Drawing.Point(296, 46);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 3;
@@ -215,6 +213,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewKont.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
             gridViewKont.OptionsBehavior.EditingMode = GridEditingMode.Inplace;
             gridViewKont.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewKont.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewKont.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewKont.OptionsView.ShowGroupPanel = false;
             gridViewKont.PopupMenuShowing += gridViewKont_PopupMenuShowing;
@@ -334,6 +333,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsEditForm.EditFormColumnCount = 1;
             gridViewRasz.OptionsEditForm.PopupEditFormWidth = 600;
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRasz.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewRasz.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
             gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
@@ -606,6 +606,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
             gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsSelection.EnableAppearanceHideSelection = false;
             gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
             gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
             gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
@@ -736,7 +737,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btnCancel.AppearanceDisabled.Options.UseBackColor = true;
             btnCancel.AppearanceDisabled.Options.UseForeColor = true;
-            btnCancel.Location = new System.Drawing.Point(161, 3);
+            btnCancel.Location = new System.Drawing.Point(161, 90);
             btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new System.Drawing.Size(119, 24);
@@ -756,10 +757,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnSave.AppearanceDisabled.ForeColor = System.Drawing.Color.GreenYellow;
             btnSave.AppearanceDisabled.Options.UseBackColor = true;
             btnSave.AppearanceDisabled.Options.UseForeColor = true;
-            btnSave.Location = new System.Drawing.Point(4, 3);
+            btnSave.Location = new System.Drawing.Point(4, 58);
             btnSave.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnSave.Name = "btnSave";
-            btnSave.Size = new System.Drawing.Size(85, 17);
+            btnSave.Size = new System.Drawing.Size(85, 26);
             btnSave.TabIndex = 25;
             btnSave.Text = "Сохранить";
             btnSave.Visible = false;
@@ -778,10 +779,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnOK.AppearanceDisabled.Options.UseBackColor = true;
             btnOK.AppearanceDisabled.Options.UseForeColor = true;
             tableLayoutPanel4.SetColumnSpan(btnOK, 2);
-            btnOK.Location = new System.Drawing.Point(4, 3);
+            btnOK.Location = new System.Drawing.Point(4, 90);
             btnOK.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             btnOK.Name = "btnOK";
-            btnOK.Size = new System.Drawing.Size(148, 40);
+            btnOK.Size = new System.Drawing.Size(149, 24);
             btnOK.TabIndex = 26;
             btnOK.Text = "Сохранить+закрыть";
             btnOK.Click += btnOK_Click;
@@ -794,9 +795,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnMoveUp.Appearance.Options.UseBackColor = true;
             btnMoveUp.Appearance.Options.UseFont = true;
             btnMoveUp.Appearance.Options.UseForeColor = true;
-            btnMoveUp.Location = new System.Drawing.Point(168, 57);
+            btnMoveUp.Location = new System.Drawing.Point(97, 3);
             btnMoveUp.Name = "btnMoveUp";
-            btnMoveUp.Size = new System.Drawing.Size(67, 16);
+            btnMoveUp.Size = new System.Drawing.Size(57, 16);
             btnMoveUp.TabIndex = 101;
             btnMoveUp.Text = "↑ Вверх";
             btnMoveUp.Click += btnMoveUp_Click;
@@ -809,9 +810,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnMoveDown.Appearance.Options.UseBackColor = true;
             btnMoveDown.Appearance.Options.UseFont = true;
             btnMoveDown.Appearance.Options.UseForeColor = true;
-            btnMoveDown.Location = new System.Drawing.Point(168, 111);
+            btnMoveDown.Location = new System.Drawing.Point(97, 30);
             btnMoveDown.Name = "btnMoveDown";
-            btnMoveDown.Size = new System.Drawing.Size(96, 19);
+            btnMoveDown.Size = new System.Drawing.Size(57, 19);
             btnMoveDown.TabIndex = 102;
             btnMoveDown.Text = "↓ Вниз";
             btnMoveDown.Click += btnMoveDown_Click;
@@ -824,9 +825,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
             btnRecalculateNumbers.Appearance.Options.UseFont = true;
             btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
-            btnRecalculateNumbers.Location = new System.Drawing.Point(7, 55);
+            btnRecalculateNumbers.Location = new System.Drawing.Point(160, 30);
             btnRecalculateNumbers.Name = "btnRecalculateNumbers";
-            btnRecalculateNumbers.Size = new System.Drawing.Size(207, 22);
+            btnRecalculateNumbers.Size = new System.Drawing.Size(121, 22);
             btnRecalculateNumbers.TabIndex = 103;
             btnRecalculateNumbers.Text = "Обновить нумерацию";
             btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
@@ -839,25 +840,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnValidateNumbers.Appearance.Options.UseBackColor = true;
             btnValidateNumbers.Appearance.Options.UseFont = true;
             btnValidateNumbers.Appearance.Options.UseForeColor = true;
-            btnValidateNumbers.Location = new System.Drawing.Point(7, 19);
+            btnValidateNumbers.Location = new System.Drawing.Point(160, 3);
             btnValidateNumbers.Name = "btnValidateNumbers";
-            btnValidateNumbers.Size = new System.Drawing.Size(207, 30);
+            btnValidateNumbers.Size = new System.Drawing.Size(121, 21);
             btnValidateNumbers.TabIndex = 104;
             btnValidateNumbers.Text = "Проверить нумерацию";
             btnValidateNumbers.Click += btnValidateNumbers_Click;
-            // 
-            // panelOperationButtons
-            // 
-            panelOperationButtons.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
-            panelOperationButtons.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
-            tableLayoutPanel5.SetColumnSpan(panelOperationButtons, 2);
-            panelOperationButtons.Controls.Add(btnRecalculateNumbers);
-            panelOperationButtons.Controls.Add(btnValidateNumbers);
-            panelOperationButtons.Location = new System.Drawing.Point(79, 435);
-            panelOperationButtons.Name = "panelOperationButtons";
-            tableLayoutPanel5.SetRowSpan(panelOperationButtons, 3);
-            panelOperationButtons.Size = new System.Drawing.Size(186, 75);
-            panelOperationButtons.TabIndex = 100;
             // 
             // customLabel2
             // 
@@ -1073,18 +1061,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel3.ColumnCount = 2;
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 292F));
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 23F));
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 1);
-            tableLayoutPanel3.Controls.Add(statusLabel, 1, 0);
-            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 1);
-            tableLayoutPanel3.Controls.Add(btnSave, 0, 0);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel2, 1, 2);
+            tableLayoutPanel3.Controls.Add(statusLabel, 1, 1);
+            tableLayoutPanel3.Controls.Add(tableLayoutPanel4, 0, 2);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
+            tableLayoutPanel3.RowCount = 3;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel3.Size = new System.Drawing.Size(1509, 869);
@@ -1095,7 +1080,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             statusLabel.AutoSize = true;
             statusLabel.Font = new System.Drawing.Font("Arial", 10F);
             statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            statusLabel.Location = new System.Drawing.Point(296, 0);
+            statusLabel.Location = new System.Drawing.Point(296, 20);
             statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             statusLabel.Name = "statusLabel";
             statusLabel.Size = new System.Drawing.Size(0, 16);
@@ -1107,14 +1092,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
-            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 2);
-            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
-            tableLayoutPanel4.Controls.Add(btnOK, 0, 0);
-            tableLayoutPanel4.Controls.Add(btnCancel, 2, 0);
-            tableLayoutPanel4.Location = new System.Drawing.Point(4, 26);
+            tableLayoutPanel4.Controls.Add(btnRecalculateNumbers, 2, 1);
+            tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 5);
+            tableLayoutPanel4.Controls.Add(btnValidateNumbers, 2, 0);
+            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 4);
+            tableLayoutPanel4.Controls.Add(btnOK, 0, 3);
+            tableLayoutPanel4.Controls.Add(btnMoveUp, 1, 0);
+            tableLayoutPanel4.Controls.Add(btnCancel, 2, 3);
+            tableLayoutPanel4.Controls.Add(btnSave, 0, 2);
+            tableLayoutPanel4.Controls.Add(btnMoveDown, 1, 1);
+            tableLayoutPanel4.Location = new System.Drawing.Point(4, 46);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
-            tableLayoutPanel4.RowCount = 3;
+            tableLayoutPanel4.RowCount = 6;
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 28F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.23104F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.76896F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 342F));
@@ -1133,7 +1126,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox2.Name = "customGroupBox2";
             customGroupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBox2.Size = new System.Drawing.Size(276, 372);
+            customGroupBox2.Size = new System.Drawing.Size(276, 337);
             customGroupBox2.TabIndex = 14;
             customGroupBox2.TabStop = false;
             // 
@@ -1168,11 +1161,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBox1.Controls.Add(tableLayoutPanel5);
             customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customGroupBox1.Location = new System.Drawing.Point(4, 50);
+            customGroupBox1.Location = new System.Drawing.Point(4, 131);
             customGroupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox1.Name = "customGroupBox1";
             customGroupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBox1.Size = new System.Drawing.Size(276, 601);
+            customGroupBox1.Size = new System.Drawing.Size(276, 520);
             customGroupBox1.TabIndex = 0;
             customGroupBox1.TabStop = false;
             // 
@@ -1183,8 +1176,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.02843F));
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
             tableLayoutPanel5.Controls.Add(textBoxReco, 0, 13);
-            tableLayoutPanel5.Controls.Add(panelOperationButtons, 1, 16);
-            tableLayoutPanel5.Controls.Add(btnMoveDown, 2, 4);
             tableLayoutPanel5.Controls.Add(customLabel4, 0, 8);
             tableLayoutPanel5.Controls.Add(designerComboBox, 0, 20);
             tableLayoutPanel5.Controls.Add(constructorComboBox, 0, 18);
@@ -1202,7 +1193,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.Controls.Add(secTimeTextBox, 0, 16);
             tableLayoutPanel5.Controls.Add(textBoxKomment, 0, 9);
             tableLayoutPanel5.Controls.Add(customLabel5, 0, 11);
-            tableLayoutPanel5.Controls.Add(btnMoveUp, 2, 2);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel5.Location = new System.Drawing.Point(4, 19);
             tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1231,7 +1221,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(268, 570);
+            tableLayoutPanel5.Size = new System.Drawing.Size(268, 498);
             tableLayoutPanel5.TabIndex = 24;
             // 
             // textBoxReco
@@ -1327,7 +1317,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRaskr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
-            panelOperationButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).EndInit();
@@ -1483,6 +1472,5 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomSimpleButton btnMoveDown;
         private CustomSimpleButton btnRecalculateNumbers;
         private CustomSimpleButton btnValidateNumbers;
-        private System.Windows.Forms.Panel panelOperationButtons;
     }
 }
