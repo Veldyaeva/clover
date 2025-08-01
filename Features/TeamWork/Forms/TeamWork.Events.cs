@@ -599,7 +599,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Основные поля будут заполнены в TeamWork_AdvanceTW из InitialArtData
                     // Здесь устанавливаем только необходимые для вставки и начального отображения значения
-                    Kod = "0000000", // Или другой плейсхолдер, если нужно
+                 //   Kod = "0000000", // Или другой плейсхолдер, если нужно
                     Status = (int)Status.Preliminary, // Новая запись всегда предварительная
                     StatusText = StatusHelper.GetStatusText((int)Status.Preliminary),
                     dateCreate = DateTime.Now,
