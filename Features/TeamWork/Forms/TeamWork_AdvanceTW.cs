@@ -1456,6 +1456,8 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 
+                _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
+
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
                     this.Invoke((MethodInvoker)(() => bindingSource1.ResetBindings(false)));
