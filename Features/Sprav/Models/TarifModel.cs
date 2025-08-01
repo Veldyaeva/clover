@@ -110,6 +110,13 @@ namespace SewingProduction.Features.Sprav
         //public string valCh { get; set; }
         //[NotMapped]
         //public DateTime valDat { get; set; }
+        private int _priznSign;
+        [Column("priznSign")]
+        public int priznSign
+        {
+            get => _priznSign;
+            set { if (_priznSign != value) { _priznSign = value; OnPropertyChanged(nameof(priznSign)); } }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>

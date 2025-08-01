@@ -409,19 +409,11 @@ namespace SewingProduction.form
         /// <param name="nameSpravRus">Имя справочника на русском</param>
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
         {
-            foreach (Form child in this.MdiParent.MdiChildren)
+            if (this.MdiParent is SpMainForm mainForm)
             {
-                if (child is SpravForAll && child.Text.ToString() == nameSpravRus)
-                {
-                    // Если форма уже открыта, переключаем на нее
-                    child.BringToFront();
-                    return;
-                }
+                var form = new SpravForAll(nameSprav, columns, "", nameSpravRus, user: _user);
+                mainForm.OpenForm(form);
             }
-            // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll(nameSprav, columns, "", nameSpravRus, user: _user);
-            f.MdiParent = this.MdiParent;
-            f.Show();
         }
         #endregion
 

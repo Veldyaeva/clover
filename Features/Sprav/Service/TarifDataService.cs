@@ -33,8 +33,7 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TarifRabotModel>> LoadTarifRabotList()
         {
-            string query = @$"SELECT * FROM sp_ras_rabot  
-                            WHERE text IS NOT NULL ";
+            string query = @$"SELECT * FROM sp_ras_rabot WHERE text IS NOT NULL ";
             return await _dbService.GetListAsync<TarifRabotModel>(query, new Dictionary<string, object>());
         }
         public async Task<List<string>> LoadFirmAsync()
@@ -95,7 +94,7 @@ namespace SewingProduction.Features.Sprav
             string xml = await File.ReadAllTextAsync(path, Encoding.GetEncoding("utf-16"));
 
             // 4. Вызов процедуры
-            string sql = "exec Add_Const @xXml";
+            string sql = "exec ACE_backup_new.dbo.Add_Const @xXml";
             var parameters = new Dictionary<string, object>
             {
                 { "@xXml", xml }
@@ -148,6 +147,7 @@ namespace SewingProduction.Features.Sprav
                 WriteTag("valflo", model.value_float);
                 WriteTag("valch", model.value_character);
                 WriteTag("valdat", model.value_datetime);
+                WriteTag("priznsign", model.priznSign);
 
                 stream.WriteLine("  </constnew>");
                 stream.WriteLine("</VFPData>");

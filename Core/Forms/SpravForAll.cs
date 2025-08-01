@@ -70,7 +70,7 @@ namespace SewingProduction.form
             string whereSQL = "",
             string rusNameTableSQL = "",
             UserClass user = null,
-            bool del = true,
+            bool red = true,
             bool add = true,
             bool servBrok = true)
         {
@@ -100,8 +100,8 @@ namespace SewingProduction.form
             labels = new[] { labelKod, label1, label2, label3, label4, label5, label6, label7, label8, label9, label10 };
             textBoxs = new[] { textBoxKod, textBox1, textBox2, textBox3, textBox4, textBox5, textBox6, textBox7, textBox8, textBox9, textBox10 };
 
-            // Кнопки удалить добавить
-            simpleButtonDel.Enabled = del;
+            // Кнопки редактированить добавить
+            simpleButtonRed.Enabled = red;
             simpleButtonAdd.Enabled = add;
         }
         public SpravForAll()
