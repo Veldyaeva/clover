@@ -410,12 +410,12 @@
             // customLabelPriznSign
             // 
             customLabelPriznSign.AutoSize = true;
-            customLabelPriznSign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelPriznSign.Dock = System.Windows.Forms.DockStyle.Left;
             customLabelPriznSign.Font = new System.Drawing.Font("Arial", 10F);
             customLabelPriznSign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelPriznSign.Location = new System.Drawing.Point(3, 283);
             customLabelPriznSign.Name = "customLabelPriznSign";
-            customLabelPriznSign.Size = new System.Drawing.Size(75, 30);
+            customLabelPriznSign.Size = new System.Drawing.Size(60, 30);
             customLabelPriznSign.TabIndex = 45;
             customLabelPriznSign.Text = "Признак";
             customLabelPriznSign.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

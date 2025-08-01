@@ -1062,6 +1062,7 @@ namespace SewingProduction.form
             customButton5.TabIndex = 2;
             customButton5.Text = "Комплект";
             customButton5.UseVisualStyleBackColor = false;
+            customButton5.Click += customButton5_Click;
             // 
             // grBoxMainInfo
             // 

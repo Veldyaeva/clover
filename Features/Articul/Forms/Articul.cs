@@ -14,6 +14,7 @@ using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Help.Form;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SewingProduction.Features.Articul.Forms;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -307,12 +308,18 @@ namespace SewingProduction.form
         {
             object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
             var kod = ((DataRowView)data).Row["kod"].ToString();
-            art_new2024 f = new art_new2024(kod);
+            EditAricul f = new EditAricul(kod);
             if (f.ShowDialog() == DialogResult.OK)
             {
                 // Обновляем таблицу
                 Articul_Load(sender, e);
             }
+        }
+
+        private void customButton5_Click(object sender, EventArgs e)
+        {
+            AddNewKopml f = new AddNewKopml();
+
         }
     }
 }
