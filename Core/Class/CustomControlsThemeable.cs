@@ -30,77 +30,18 @@ namespace SewingProduction
     public interface IThemeableControl
     {
         string ObjectName { get; set; }
+        bool VisiblePermission { get; set; }
+        bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
     }
-    //public class CustomButton : Button, IThemeable, IThemeableControl
-    //{
-    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    //    public string ObjectName { get; set; }
-    //    public CustomButton()
-    //    {
-    //        ApplyTheme();
-    //        ThemeManager.ThemeChanged += OnThemeChanged;
-    //    }
-
-    //    public void ApplyTheme()
-    //    {
-    //        BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-    //        ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-    //        Font = ThemeManager.SharedSettings.DefaultFont;
-    //        FlatStyle = FlatStyle.Standard;
-    //        FlatAppearance.BorderSize = 1;
-    //        Height = ThemeManager.SharedSettings.ButtonHeight;
-    //    }
-
-    //    private void OnThemeChanged() => ApplyTheme();
-
-    //    protected override void Dispose(bool disposing)
-    //    {
-    //        if (disposing)
-    //        {
-    //            ThemeManager.ThemeChanged -= OnThemeChanged;
-    //        }
-    //        base.Dispose(disposing);
-    //    }
-    //    public void ApplyPermission(UserClass user)
-    //    {
-    //        PermissionHelper.ApplyTo(this, ObjectName, user);
-    //    }
-    //}
-    //public class CustomOkButton : CustomButton, IThemeableControl
-    //{
-    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    //    public string ObjectName { get; set; }
-    //    public CustomOkButton()
-    //    {
-    //        Text = "OK";
-    //        DialogResult = DialogResult.OK;
-    //    }
-    //    public void ApplyPermission(UserClass user)
-    //    {
-    //        PermissionHelper.ApplyTo(this, ObjectName, user);
-    //    }
-    //}
-
-    //public class CustomCancelButton : CustomButton, IThemeableControl
-    //{
-    //    [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-    //    public string ObjectName { get; set; }
-    //    public CustomCancelButton()
-    //    {
-    //        Text = "Cancel";
-    //        DialogResult = DialogResult.Cancel;
-    //    }
-    //    public void ApplyPermission(UserClass user)
-    //    {
-    //        PermissionHelper.ApplyTo(this, ObjectName, user);
-    //    }
-    //}
+    
 
     public class CustomTextBox : TextBox, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTextBox()
         {
             ApplyTheme();
@@ -128,10 +69,45 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
     }
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
     {
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         public CustomCheckBox()
@@ -160,57 +136,44 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
-
-    //public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable, IThemeableControl
-    //{
-    //    public string ObjectName { get; set; }
-    //    public CustomSimpleButton()
-    //    {
-    //        ApplyTheme();
-    //        ThemeManager.ThemeChanged += OnThemeChanged;
-    //    }
-
-    //    public void ApplyTheme()
-    //    {
-
-    //        Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-    //        Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-    //        Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-    //        AppearanceDisabled.BackColor = Color.Green;
-    //        AppearanceDisabled.ForeColor = Color.GreenYellow;
-    //        AppearanceDisabled.Options.UseBackColor = true;
-    //        AppearanceDisabled.Options.UseForeColor = true;
-    //        //BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-    //        //ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-    //        //Font = ThemeManager.SharedSettings.DefaultFont;
-
-    //        //FlatStyle = FlatStyle.Standard;
-    //        //FlatAppearance.BorderSize = 1;
-    //        Height = ThemeManager.SharedSettings.ButtonHeight;
-    //    }
-
-    //    private void OnThemeChanged() => ApplyTheme();
-
-    //    protected override void Dispose(bool disposing)
-    //    {
-    //        if (disposing)
-    //        {
-    //            ThemeManager.ThemeChanged -= OnThemeChanged;
-    //        }
-    //        base.Dispose(disposing);
-    //    }
-
-    //    public void ApplyPermission(UserClass user)
-    //    {
-    //        PermissionHelper.ApplyTo(this, ObjectName, user);
-    //    }
-    //}
     public class CustomRadioButton : RadioButton, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomRadioButton()
         {
             ApplyTheme();
@@ -234,10 +197,43 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
     public class CustomDateTimePicker : DateTimePicker, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomDateTimePicker()
         {
             ApplyTheme();
@@ -262,10 +258,43 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
     public class CustomNumericUpDown : NumericUpDown, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomNumericUpDown()
         {
             ApplyTheme();
@@ -290,10 +319,43 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
     public class CustomListBox : ListBox, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomListBox()
         {
             ApplyTheme();
@@ -318,10 +380,43 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
     public class CustomCheckedListBox : CheckedListBox, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomCheckedListBox()
         {
             ApplyTheme();
@@ -346,10 +441,43 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
     public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTextBoxEx()
         {
             ApplyTheme();
@@ -374,12 +502,45 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
     public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomMaskedTextBox()
         {
             ApplyTheme();
@@ -407,6 +568,37 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
 
@@ -414,6 +606,8 @@ namespace SewingProduction
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomComboBox()
         {
             ApplyTheme();
@@ -441,11 +635,44 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
     public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable, IThemeableControl
     {
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTabControl()
         {
             ApplyTheme();
@@ -472,12 +699,45 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
     public class CustomLabel : Label, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomLabel()
         {
             ApplyTheme();
@@ -504,6 +764,37 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
 
@@ -514,6 +805,8 @@ namespace SewingProduction
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
         private int _borderThickness = 1;       // Толщина обводки по умолчанию
 
@@ -579,26 +872,35 @@ namespace SewingProduction
             this.BorderColor = ThemeManager.ActiveTheme.LabelTextColor; // Можно сделать цвет рамки таким же
             Invalidate(); // Перерисовать контрол с новыми цветами
         }
-    }
-    /// <summary>
-    /// Кнопка с записью в бд
-    /// </summary>
-    public class CustomActionButton : CustomButton
-    {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string EventDescription { get; set; } = "Нажатие кнопки";
-
-        protected override void OnClick(EventArgs e)
+        public bool VisiblePermission
         {
-            base.OnClick(e);
-            _ = LogActionToDatabase(); // Fire-and-forget
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
         }
 
-        private async Task LogActionToDatabase()
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
         {
-            if (this.FindForm() is CustomForm form && form.User is UserClass user)
+            get => _visibleLogic;
+            set
             {
-                await ActionLogger.Log(user.UserId, "Нажатие на кнопку", NameForm: this.FindForm()?.Name, NameObject: this.Name);
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
             }
         }
     }
@@ -800,6 +1102,13 @@ namespace SewingProduction
 
             ctrl.Enabled = hasWrite;
             ctrl.Visible = hasRead || hasWrite;
+        }
+    }
+    public static class VisibilityHelper
+    {
+        public static void UpdateVisibility(Control ctrl, bool visiblePermission, bool visibleLogic)
+        {
+            ctrl.Visible = visiblePermission && visibleLogic;
         }
     }
 }

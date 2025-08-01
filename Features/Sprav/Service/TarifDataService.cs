@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -23,8 +24,9 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TarifModel>> LoadTarifList()
         {
-            string query = @$"SELECT  TOP 1 with TIES * 
-                            FROM proizv_view_constants pvc 
+            string query = @$"SELECT  TOP 1 with TIES pvc.* , store_name, pcs.name_field_id
+                                FROM proizv_view_constants pvc 
+                                LEFT JOIN proizv_constant_stores pcs ON pvc.pcst_id = pcs.pcst_id
                             WHERE describe IS NOT NULL 
                             ORDER BY rank() over(partition by pvc.pc_id order by pvc.pc_id, pvc.begin_dt desc)";
             return await _dbService.GetListAsync<TarifModel>(query, new Dictionary<string, object>());
@@ -42,12 +44,37 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TypeItemModel>> LoadTypeAsync()
         {
-            string query = "SELECT field_name, pcst_id FROM proizv_constant_stores";
+            string query = "SELECT field_name, pcst_id, name_field_id, store_name FROM proizv_constant_stores";
             return await _dbService.GetListAsync<TypeItemModel>(query, new Dictionary<string, object>());
+        }
+        public async Task<List<TarifModelHistory>> LoadHistoryAsync(int pcid)
+        {
+            string query = @"
+            SELECT 
+                a.pc_id,
+                a.begin_dt,
+                a.event_dt,
+                COALESCE(
+                    CAST(n.constant_value AS VARCHAR),
+                    CAST(i.constant_value AS VARCHAR),
+                    CAST(f.constant_value AS VARCHAR),
+                    c.constant_value,
+                    FORMAT(d.constant_value, 'yyyy-MM-dd')
+                ) AS value
+            FROM proizv_constant_apply_time a
+            LEFT JOIN proizv_constant_store_numeric n ON a.value_id = n.pcsn_id
+            LEFT JOIN proizv_constant_store_integer i ON a.value_id = i.pcsi_id
+            LEFT JOIN proizv_constant_store_float f ON a.value_id = f.pcsf_id
+            LEFT JOIN proizv_constant_store_character c ON a.value_id = c.pcsc_id
+            LEFT JOIN proizv_constant_store_datetime d ON a.value_id = d.pcsdt_id
+            WHERE a.pc_id = @pcid
+            ORDER BY a.begin_dt DESC";
+
+            return await _dbService.GetListAsync<TarifModelHistory>(query, new { pcid = pcid });
         }
 
 
-        public async Task SaveTarifAsync(TarifModel model)
+        public async Task SaveTarifAsync(TarifModel model, bool isEditMode)
         {
             // 1. Проверка на дубликат
             string checkQuery = "SELECT COUNT(*) FROM proizv_constants WHERE constant_name = @name";
@@ -57,56 +84,76 @@ namespace SewingProduction.Features.Sprav
             };
 
             int count = await _dbHelper.ExecuteScalarAsync<int>(checkQuery, checkParams);
-            if (count > 0)
+            if (count > 0 && !isEditMode)
                 throw new InvalidOperationException("Константа с таким именем уже существует!");
 
             // 2. Формирование XML
-            string xml = CreateXmlFromModel(model);
+            string path = @$"C:\1\ConstNew_xml.txt";
+            CreateXmlFileFromModel(model, path);
 
-            string path = @$"C:\1\ConstNew_{DateTime.Now:yyyyMMdd_HHmmss}.xml";
-            await File.WriteAllTextAsync(path, xml, Encoding.UTF8);
+            // 3. Чтение XML из файла
+            string xml = await File.ReadAllTextAsync(path, Encoding.GetEncoding("utf-16"));
 
-            // 3. Вызов процедуры
+            // 4. Вызов процедуры
             string sql = "exec Add_Const @xXml";
             var parameters = new Dictionary<string, object>
             {
                 { "@xXml", xml }
             };
 
-            //await _dbHelper.ExecuteNonQueryAsync(sql, parameters);
+            await _dbHelper.ExecuteNonQueryAsync(sql, parameters);
         }
 
-        // Вспомогательный метод
-        private string CreateXmlFromModel(TarifModel model)
+        private void CreateXmlFileFromModel(TarifModel model, string path)
         {
-            var sb = new StringBuilder();
-            using var writer = XmlWriter.Create(sb, new XmlWriterSettings { Indent = false });
+            var encoding = Encoding.GetEncoding("utf-16");
 
-            writer.WriteStartElement("VFPData");
-            writer.WriteStartElement("constnew");
+            using (var stream = new StreamWriter(path, false, encoding))
+            {
+                stream.WriteLine(@"<?xml version=""1.0"" encoding=""utf-16"" standalone=""yes""?>");
+                stream.WriteLine("<VFPData>");
+                stream.WriteLine("  <constnew>");
 
-            writer.WriteElementString("pcid", "0"); // всегда 0 при добавлении
-            writer.WriteElementString("constname", model.constant_name);
-            writer.WriteElementString("dimens", model.dimens);
-            writer.WriteElementString("deskr", model.describe);
-            writer.WriteElementString("pcstid", model.pcstId.ToString());
-            writer.WriteElementString("begindat", model.begin_dt.ToString("yyyy-MM-dd"));
-            writer.WriteElementString("firm", model.firm ?? "");
-            writer.WriteElementString("typeconst", model.typeConst ?? "");
-            writer.WriteElementString("nametable", "proizv_constant_stor");
-            writer.WriteElementString("namefield", "pscdt_id");
+                void WriteTag(string name, object? value)
+                {
+                    if (value == null) return;
 
-            writer.WriteElementString("valnum", model.value_numeric?.ToString(CultureInfo.InvariantCulture) ?? "");
-            writer.WriteElementString("valint", model.value_integer?.ToString() ?? "");
-            writer.WriteElementString("valflo", model.value_float?.ToString(CultureInfo.InvariantCulture) ?? "");
-            writer.WriteElementString("valch", model.value_character ?? "");
-            writer.WriteElementString("valdat", model.value_datetime?.ToString("yyyy-MM-dd") ?? "");
+                    string str = value switch
+                    {
+                        DateTime dt => dt.ToString("yyyy-MM-dd"),
+                        float f => f.ToString(CultureInfo.InvariantCulture),
+                        decimal d => d.ToString(CultureInfo.InvariantCulture),
+                        _ => value.ToString()
+                    };
 
-            writer.WriteEndElement(); // constnew
-            writer.WriteEndElement(); // VFPData
-            writer.Flush();
+                    if (!string.IsNullOrWhiteSpace(str))
+                    {
+                        string escaped = System.Security.SecurityElement.Escape(str);
+                        stream.WriteLine($"    <{name}>{escaped}</{name}>");
+                    }
+                }
 
-            return sb.ToString();
+                WriteTag("pcid", model.pc_id);
+                WriteTag("constname", model.constant_name);
+                WriteTag("dimens", model.dimension);
+                WriteTag("deskr", model.describe);
+                WriteTag("pcstid", model.pcstId);
+                WriteTag("begindat", model.begin_dt);
+                WriteTag("firm", model.firm);
+                WriteTag("typeconst", model.typeConst);
+                WriteTag("nametable", model.store_name);
+                WriteTag("namefield", model.name_field_id);
+                WriteTag("valnum", model.value_numeric);
+                WriteTag("valint", model.value_integer);
+                WriteTag("valflo", model.value_float);
+                WriteTag("valch", model.value_character);
+                WriteTag("valdat", model.value_datetime);
+
+                stream.WriteLine("  </constnew>");
+                stream.WriteLine("</VFPData>");
+            }
         }
+
+
     }
 }
