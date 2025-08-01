@@ -23,11 +23,11 @@ namespace SewingProduction.form
     /// <summary>
     /// Добавление артикула
     /// </summary>
-    public partial class art_new2024 : CustomForm
+    public partial class EditAricul : CustomForm // FoxPro: art_new2024
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public art_new2024(string kodArtSQL = null)
+        public EditAricul(string kodArtSQL = null)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
@@ -35,7 +35,7 @@ namespace SewingProduction.form
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
         }
-        public art_new2024()
+        public EditAricul()
         {
             InitializeComponent();
         }
