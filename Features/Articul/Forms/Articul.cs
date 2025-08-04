@@ -15,6 +15,8 @@ using SewingProduction.Help.Form;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.UserDistribution.Forms;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -318,8 +320,10 @@ namespace SewingProduction.form
 
         private void customButton5_Click(object sender, EventArgs e)
         {
-            AddNewKopml f = new AddNewKopml();
-
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new AddNewKopml());
+            }
         }
     }
 }
