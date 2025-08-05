@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using SewingProduction.Features.Articul.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -25,13 +26,12 @@ namespace SewingProduction.form
     public partial class Articul : CustomForm
     {
         private readonly DatabaseHelper _dbHelperAce;
-
-        //public Articul(UserClass user) : base(user)
-        public Articul()
+        private UserClass _user;
+        public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
-
+            _user = user;
         }
 
 
@@ -320,9 +320,11 @@ namespace SewingProduction.form
 
         private void customButton5_Click(object sender, EventArgs e)
         {
+            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
+            var kod = ((DataRowView)data).Row["kod"].ToString();
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml());
+                mainForm.OpenForm(new AddNewKopml(_user,kod));
             }
         }
     }

@@ -124,7 +124,7 @@ namespace SewingProduction
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -153,7 +153,7 @@ namespace SewingProduction
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
