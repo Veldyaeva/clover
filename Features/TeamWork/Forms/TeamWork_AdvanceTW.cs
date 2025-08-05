@@ -1434,7 +1434,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz62 = Sum(r => r.KodOb == 60);
                 _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
                 _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
-                _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+                _currentAnnData.SekVyaz = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
 
                 _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 
