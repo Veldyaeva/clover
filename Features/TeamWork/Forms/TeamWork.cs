@@ -317,9 +317,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
 
-            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
+            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
+        private void customActionButton1_Click(object sender, EventArgs e)
+        {
+            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
+        }
         private async void ButtonArchAndCopyWd_Click(object sender, EventArgs e)
         {
             await ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
@@ -1468,15 +1472,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void gridControl_wdToBind_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gridControl_wdToBind_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
     public static class DemoHelper
     {

@@ -47,6 +47,7 @@ namespace SewingProduction.Services
 
                     if (columnName == "grup") return type.GetProperty(nameof(ArtNormN.grup));
                     if (columnName == "sek_shv") return type.GetProperty(nameof(ArtNormN.SekShv));
+                    if (columnName == "sek_vyaz3") return type.GetProperty(nameof(ArtNormN.SekVyaz3));
                     if (columnName == "sek_vyaz5") return type.GetProperty(nameof(ArtNormN.SekVyaz5));
                     if (columnName == "sek_vyaz6") return type.GetProperty(nameof(ArtNormN.SekVyaz6));
                     if (columnName == "sek_vyaz7") return type.GetProperty(nameof(ArtNormN.SekVyaz7));
@@ -228,7 +229,7 @@ namespace SewingProduction.Services
         }
         public async Task ExecutePztOperUpdateAsync()
         {
-            const string sql = "EXEC dbo.pztOperUpdateFast";
+            const string sql = "EXEC dbo.pztOperUpdateFast"; //"EXEC dbo.pztOperUpdateFast";
             await _dbHelper.ExecuteNonQueryAsync(sql);
         }
 

@@ -184,7 +184,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 }
                 else if (e.RelationIndex == 1)
                 {
-                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.UserId);
+                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.CreatorID);
                     e.ChildList = users.DefaultView;
                 }
             };
@@ -514,6 +514,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 WHERE u.UserID IN (SELECT UserID FROM GetDescendants(@UserID))";
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@RoleID", roleId }, { "@UserID", userId } });
+
         }
 
         public async Task<DataTable> GetFormsForRoles(int roleId, int userId)

@@ -10,11 +10,30 @@ namespace SewingProduction.Features.Sprav
 {
     public class TarifModel : INotifyPropertyChanged
     {
-        public int pcId { get; set; } = 0;
         public string constant_name { get; set; }
-        public string dimens { get; set; }
-        public int pcstId { get; set; }
         public string typeConst { get; set; }
+
+        private int _pcId;
+        [Column("pc_id")]
+        public int pc_id
+        {
+            get => _pcId;
+            set { if (_pcId != value) { _pcId = value; OnPropertyChanged(nameof(pc_id)); } }
+        }
+        private int pcst_id;
+        [Column("pcst_id")]
+        public int pcstId
+        {
+            get => pcst_id;
+            set { if (pcst_id != value) { pcst_id = value; OnPropertyChanged(nameof(pcstId)); } }
+        }
+        private string _dimension;
+        [Column("dimension")]
+        public string dimension
+        {
+            get => _dimension;
+            set { if (_dimension != value) { _dimension = value; OnPropertyChanged(nameof(dimension)); } }
+        }
         private string _describe;
         [Column("describe")]
         public string describe
@@ -78,9 +97,9 @@ namespace SewingProduction.Features.Sprav
             set { if (_firm != value) { _firm = value; OnPropertyChanged(nameof(firm)); } }
         }
         [NotMapped]
-        public string nameTable { get; set; }
+        public string store_name { get; set; }
         [NotMapped]
-        public string nameField { get; set; }
+        public string name_field_id { get; set; }
         //[NotMapped]
         //public decimal valNum { get; set; }
         //[NotMapped]
@@ -101,5 +120,14 @@ namespace SewingProduction.Features.Sprav
         public int pcst_id { get; set; }
         public string field_name { get; set; }
         public int type_n { get; set; }
+        public string store_name { get; set; }
+        public string name_field_id { get; set; }
+    }
+    public class TarifModelHistory
+    {
+        public int pcst_id { get; set; }
+        public object value { get; set; }
+        public DateTime event_dt { get; set; }
+        public DateTime begin_dt { get; set; }
     }
 }
