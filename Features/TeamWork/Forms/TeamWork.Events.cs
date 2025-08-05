@@ -396,6 +396,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                     finally
                                     {
                                         ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                                     }
                                 }
                             }
@@ -697,6 +698,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 finally
                                 {
                                     ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                                 }
                             }
 

@@ -1078,8 +1078,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridView1
             // 
+            gridView1.Appearance.Row.Options.UseTextOptions = true;
+            gridView1.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { DisplayNumber, coln, coln1, colrazryd, coltext, colsek1, gridColumn30, gridColumn27, colobor, gridColumn26, gridColumn3, colkod_o, colannId3 });
-            gridView1.DetailHeight = 404;
+            // DetailHeight закомментирован для корректной работы RowAutoHeight
+            // gridView1.DetailHeight = 404;
             gridView1.GridControl = gridControlRaszTW;
             gridView1.Name = "gridView1";
             gridView1.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.False;
@@ -1091,6 +1094,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
             gridView1.OptionsSelection.MultiSelect = true;
             gridView1.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CellSelect;
+            gridView1.OptionsView.RowAutoHeight = true;
             gridView1.OptionsView.ShowGroupPanel = false;
             gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coln, DevExpress.Data.ColumnSortOrder.Ascending), new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coln1, DevExpress.Data.ColumnSortOrder.Ascending) });
             gridView1.PopupMenuShowing += gridView1_PopupMenuShowing;
@@ -1132,10 +1136,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // coltext
             // 
+            coltext.AppearanceCell.Options.UseTextOptions = true;
+            coltext.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             coltext.Caption = "наименование операции пошива";
             coltext.FieldName = "Text";
             coltext.MinWidth = 23;
             coltext.Name = "coltext";
+            coltext.OptionsColumn.AllowEdit = false;
             coltext.Visible = true;
             coltext.VisibleIndex = 2;
             coltext.Width = 311;
@@ -1172,20 +1179,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // colobor
             // 
+            colobor.AppearanceCell.Options.UseTextOptions = true;
+            colobor.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             colobor.Caption = "оборудование";
             colobor.FieldName = "TextOb";
             colobor.MinWidth = 23;
             colobor.Name = "colobor";
+            colobor.OptionsColumn.AllowEdit = false;
             colobor.Visible = true;
             colobor.VisibleIndex = 7;
             colobor.Width = 137;
             // 
             // gridColumn26
             // 
+            gridColumn26.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn26.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridColumn26.Caption = "вяз. подр.";
             gridColumn26.FieldName = "TextVyaz";
             gridColumn26.MinWidth = 23;
             gridColumn26.Name = "gridColumn26";
+            gridColumn26.OptionsColumn.AllowEdit = false;
             gridColumn26.Visible = true;
             gridColumn26.VisibleIndex = 6;
             gridColumn26.Width = 82;
@@ -1279,12 +1292,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.Appearance.FocusedRow.Options.UseFont = true;
             ANNgridView.Appearance.HeaderPanel.Options.UseTextOptions = true;
             ANNgridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            ANNgridView.Appearance.Row.Options.UseTextOptions = true;
+            ANNgridView.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             ANNgridView.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             ANNgridView.Appearance.SelectedRow.Options.UseFont = true;
             ANNgridView.Appearance.SelectedRow.Options.UseTextOptions = true;
             ANNgridView.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colgroup, colarticul, colmod, colsek, colsek_vyaz, coldateCreate, coldateUpdate, gridColumn19, colsek_shv, gridColumn5, gridColumn35, colsek_vyazo, colsek_vyaz5, colsek_vyaz7, colsek_vyaz12, colsek_vyaz10, colsek_vyaz6, colsek_kr, colslogn, colkomment, colReco, coldiz, colconstr, colannID });
             ANNgridView.CustomizationFormBounds = new System.Drawing.Rectangle(688, 388, 308, 314);
-            ANNgridView.DetailHeight = 404;
+            // DetailHeight закомментирован для корректной работы RowAutoHeight
+            // ANNgridView.DetailHeight = 404;
             ANNgridView.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             ANNgridView.GridControl = ANNgridControl;
             ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
@@ -1305,15 +1321,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.OptionsSelection.EnableAppearanceFocusedCell = false;
             ANNgridView.OptionsSelection.MultiSelect = true;
             ANNgridView.OptionsSelection.MultiSelectMode = GridMultiSelectMode.CheckBoxRowSelect;
-            ANNgridView.OptionsView.AutoCalcPreviewLineCount = true;
             ANNgridView.OptionsView.ColumnAutoWidth = false;
             ANNgridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
             ANNgridView.OptionsView.RowAutoHeight = true;
             ANNgridView.OptionsView.ShowGroupPanel = false;
-            ANNgridView.OptionsView.ShowPreview = true;
-            ANNgridView.OptionsView.ShowPreviewRowLines = DevExpress.Utils.DefaultBoolean.True;
-            ANNgridView.PreviewIndent = 10;
-            ANNgridView.PreviewLineCount = 2;
             ANNgridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colannID, DevExpress.Data.ColumnSortOrder.Descending) });
             ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             ANNgridView.PopupMenuShowing += ANNgridView_PopupMenuShowing;

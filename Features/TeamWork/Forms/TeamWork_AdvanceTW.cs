@@ -746,6 +746,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Обновляем сортировку после добавления
                         TWGridHelper.sortGridView(gridViewRasz);
                         
+                        // Принудительное обновление высоты строк для RowAutoHeight
+                        gridViewRasz.LayoutChanged();
+                        
                         // Автоматически открываем форму редактирования для новой операции
                         int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
                         if (newRowDataSourceIndex >= 0)
@@ -2063,6 +2066,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridControlRasz.RefreshDataSource();
                     gridControlRaskr.RefreshDataSource();
                     gridControlKont.RefreshDataSource();
+                    
+                    // Принудительное обновление высоты строк для RowAutoHeight
+                    gridViewRasz.LayoutChanged();
                 });
             }
             catch (Exception ex)

@@ -51,7 +51,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 ANNgridView.OptionsView.ShowAutoFilterRow = true;
                 ANNgridView.OptionsView.ShowGroupPanel = false;
                 ANNgridView.OptionsView.ShowIndicator = false;
-                ANNgridView.OptionsView.ShowPreview = false;
+                // Preview режим отключен в Designer
 
 
                 // Применяем фильтры
@@ -186,14 +186,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 await this.InvokeAsync(() =>
                 {
-                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                    if (gridControlRaszTW.MainView is GridView raszView) 
+                    {
+                        TWGridHelper.sortGridView(raszView);
+                        raszView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
+                    }
                     if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
                     if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
                 });
             }
             else
             {
-                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                if (gridControlRaszTW.MainView is GridView raszView) 
+                {
+                    TWGridHelper.sortGridView(raszView);
+                    raszView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
+                }
                 if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
                 if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
             }
@@ -256,14 +264,22 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 await this.InvokeAsync(() =>
                 {
-                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                    if (gridControlRaszTW.MainView is GridView raszView) 
+                    {
+                        TWGridHelper.sortGridView(raszView);
+                        raszView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
+                    }
                     if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
                     if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
                 });
             }
             else
             {
-                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                if (gridControlRaszTW.MainView is GridView raszView) 
+                {
+                    TWGridHelper.sortGridView(raszView);
+                    raszView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
+                }
                 if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
                 if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
             }
@@ -442,6 +458,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     finally
                     {
                         ANNgridView.EndUpdate();
+        ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                     }
                 }
 
@@ -700,6 +717,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 finally
                 {
                     ANNgridView.EndUpdate();
+        ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                 }
             }
             
@@ -752,6 +770,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     finally
                     {
                         ANNgridView.EndUpdate();
+        ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                     }
                 }
             }
@@ -792,6 +811,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         finally
                         {
                             ANNgridView.EndUpdate();
+        ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                         }
                     }
                 }
@@ -821,6 +841,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     finally
                     {
                         ANNgridView.EndUpdate();
+        ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                     }
                 }
             }

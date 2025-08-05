@@ -315,8 +315,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
             gridViewRasz.Appearance.Row.Options.UseTextOptions = true;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
+            gridViewRasz.Appearance.Row.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewRasz.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn2, gridColumn34, DisplayNumber, gridColumn35, gridColumn36, gridColumn32, gridColumn33, gridColumn37, colspec2, gridColumn38, gridColumn4, Kod_podr, KodOb, gridColumn31, gridColumn30, gridColumn5, gridColumn6, gridColumn7 });
-            gridViewRasz.DetailHeight = 404;
+            // DetailHeight закомментирован для корректной работы RowAutoHeight
+            // gridViewRasz.DetailHeight = 404;
             gridViewRasz.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             gridViewRasz.GridControl = gridControlRasz;
             gridViewRasz.Name = "gridViewRasz";
@@ -330,6 +332,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewRasz.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsSelection.EnableAppearanceHotTrackedRow = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRasz.OptionsView.RowAutoHeight = true;
             gridViewRasz.OptionsView.ShowErrorPanel = DevExpress.Utils.DefaultBoolean.True;
             gridViewRasz.OptionsView.ShowGroupPanel = false;
             gridViewRasz.EditFormShowing += gridViewRasz_EditFormShowing;
@@ -393,6 +396,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn32
             // 
+            gridColumn32.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn32.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridColumn32.Caption = "наименование операции пошива";
             gridColumn32.FieldName = "Text";
             gridColumn32.MinWidth = 23;
@@ -444,6 +449,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn38
             // 
+            gridColumn38.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn38.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridColumn38.Caption = "оборудование";
             gridColumn38.FieldName = "Obor";
             gridColumn38.MinWidth = 23;
@@ -554,6 +561,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn6
             // 
+            gridColumn6.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn6.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridColumn6.Caption = "gridColumn6";
             gridColumn6.FieldName = "TextVyaz";
             gridColumn6.MinWidth = 23;
@@ -563,6 +572,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // gridColumn7
             // 
+            gridColumn7.AppearanceCell.Options.UseTextOptions = true;
+            gridColumn7.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridColumn7.Caption = "gridColumn7";
             gridColumn7.FieldName = "TextOb";
             gridColumn7.MinWidth = 23;

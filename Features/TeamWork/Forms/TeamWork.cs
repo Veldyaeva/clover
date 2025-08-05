@@ -89,8 +89,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             InitializeComponent();
 
 
-            ANNgridView.OptionsView.ShowPreview = true;
-            ANNgridView.PreviewLineCount = 1;
+            // Preview режим отключен в Designer для корректной работы RowAutoHeight
             //  ANNgridView.CalcPreviewText += CalcPreviewText;
             DapperMappings.Configure();
             _dbHelper = new DatabaseHelper();
@@ -179,7 +178,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     else e.RepositoryItem = commandsEditDateText;
                 }
             };
-            ANNgridView.CalcPreviewText += CalcPreviewText;
+            // CalcPreviewText отключен поскольку Preview режим отключен
+            // ANNgridView.CalcPreviewText += CalcPreviewText;
         }
 
         private async void CommandsEditDateNull_DoubleClick(object sender, EventArgs e)
@@ -551,6 +551,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         finally
                         {
                             ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                         }
                     }
 
@@ -581,6 +582,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         finally
                         {
                             ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                         }
                     }
 
@@ -871,6 +873,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 finally
                 {
                     ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                 }
 
                 // Обновляем привязку данных
@@ -1114,6 +1117,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 finally
                 {
                     ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                 }
 
                 // Обновляем привязку данных
@@ -1442,6 +1446,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 finally
                 {
                     ANNgridView.EndUpdate();
+            ANNgridView.LayoutChanged(); // Принудительное обновление высоты строк для RowAutoHeight
                 }
 
                 // Обновляем привязку данных
