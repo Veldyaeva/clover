@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
@@ -21,67 +22,52 @@ namespace SewingProduction.Features.Articul.Models
         private string _kod_v;
         private string _kle;
 
-        public int Kod
+        public int kod
         {
             get => _kod;
-            set { if (_kod != value) { _kod = value; OnPropertyChanged(nameof(Kod)); } }
+            set { if (_kod != value) { _kod = value; OnPropertyChanged(nameof(kod)); } }
         }
 
-        [Column("grup")]
-        public string Group
+        public string grup
         {
             get => _grup;
-            set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(Group)); } }
+            set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         }
 
-        public string Articul
+        public string articul
         {
             get => _articul;
-            set { if (_articul != value) { _articul = value; OnPropertyChanged(nameof(Articul)); } }
+            set { if (_articul != value) { _articul = value; OnPropertyChanged(nameof(articul)); } }
         }
 
-        public string Mod
+        public string mod
         {
             get => _mod;
-            set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
+            set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(mod)); } }
         }
 
-        public string Razm
+        public string razm
         {
             get => _razm;
-            set { if (_razm != value) { _razm = value; OnPropertyChanged(nameof(Razm)); } }
+            set { if (_razm != value) { _razm = value; OnPropertyChanged(nameof(razm)); } }
         }
 
-        public string Sost
+        public string sost
         {
             get => _sost;
-            set { if (_sost != value) { _sost = value; OnPropertyChanged(nameof(Sost)); } }
+            set { if (_sost != value) { _sost = value; OnPropertyChanged(nameof(sost)); } }
         }
 
-        [NotMapped]
-        public string Po
-        {
-            get => _po;
-            set { if (_po != value) { _po = value; OnPropertyChanged(nameof(Po)); } }
-        }
-
-        [NotMapped]
-        public int PrPo
-        {
-            get => _pr_po;
-            set { if (_pr_po != value) { _pr_po = value; OnPropertyChanged(nameof(PrPo)); } }
-        }
-
-        public string KodV
+        public string kodV
         {
             get => _kod_v;
-            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(KodV)); } }
+            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(kodV)); } }
         }
 
-        public string Kle
+        public string kle
         {
             get => _kle;
-            set { if (_kle != value) { _kle = value; OnPropertyChanged(nameof(Kle)); } }
+            set { if (_kle != value) { _kle = value; OnPropertyChanged(nameof(kle)); } }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

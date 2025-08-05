@@ -28,18 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewKopml));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customLabel5 = new CustomLabel();
-            customButton2 = new Core.Class.CustomButton();
             customButtonKompl = new Core.Class.CustomButton();
             customGridControlKompl = new Core.Class.CustomGridControl();
             gridViewKompl = new DevExpress.XtraGrid.Views.Grid.GridView();
+            GrupKompl = new DevExpress.XtraGrid.Columns.GridColumn();
+            ArticulKompl = new DevExpress.XtraGrid.Columns.GridColumn();
+            ModKompl = new DevExpress.XtraGrid.Columns.GridColumn();
+            RazmKompl = new DevExpress.XtraGrid.Columns.GridColumn();
+            customButton2 = new Core.Class.CustomButton();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             customButton3 = new Core.Class.CustomButton();
             customGridControlKomplSelected = new Core.Class.CustomGridControl();
             gridViewKomplSelected = new DevExpress.XtraGrid.Views.Grid.GridView();
+            po_mn = new DevExpress.XtraGrid.Columns.GridColumn();
+            po = new DevExpress.XtraGrid.Columns.GridColumn();
+            grupSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            ArticulSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            ModSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            RazmSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             customCheckBoxVerified = new CustomCheckBox();
             customTabControlKomplRazm = new CustomTabControl();
             xtraTabPageKomplRazm1 = new DevExpress.XtraTab.XtraTabPage();
@@ -48,14 +63,27 @@
             gridViewKomplRazm1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ArticulRazm1 = new DevExpress.XtraGrid.Columns.GridColumn();
             ModRazm1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            Kod1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            Razm1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            Check1 = new DevExpress.XtraGrid.Columns.GridColumn();
             customButton4 = new Core.Class.CustomButton();
             customGridControlKomplArt = new Core.Class.CustomGridControl();
             gridViewKomplArt = new DevExpress.XtraGrid.Views.Grid.GridView();
+            Grup = new DevExpress.XtraGrid.Columns.GridColumn();
+            Articul = new DevExpress.XtraGrid.Columns.GridColumn();
+            Mod = new DevExpress.XtraGrid.Columns.GridColumn();
+            Razm = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnAdd = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemButtonEditAddRazm = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customButton5 = new Core.Class.CustomButton();
             customLabel6 = new CustomLabel();
             customGridControlKomplRazm = new Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ArticulRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            ModRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            KodKRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            RazmRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             customNumericUpDownValueTab = new CustomNumericUpDown();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             customButton8 = new Core.Class.CustomButton();
@@ -67,30 +95,6 @@
             tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             customButtonBack = new Core.Class.CustomButton();
             customButtonNext = new Core.Class.CustomButton();
-            Kod1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            Razm1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            Check1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            ArticulRazm = new DevExpress.XtraGrid.Columns.GridColumn();
-            ModRazm = new DevExpress.XtraGrid.Columns.GridColumn();
-            KodKRazm = new DevExpress.XtraGrid.Columns.GridColumn();
-            RazmRazm = new DevExpress.XtraGrid.Columns.GridColumn();
-            Grup = new DevExpress.XtraGrid.Columns.GridColumn();
-            Articul = new DevExpress.XtraGrid.Columns.GridColumn();
-            Mod = new DevExpress.XtraGrid.Columns.GridColumn();
-            Razm = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumnAdd = new DevExpress.XtraGrid.Columns.GridColumn();
-            po_mn = new DevExpress.XtraGrid.Columns.GridColumn();
-            po = new DevExpress.XtraGrid.Columns.GridColumn();
-            grupSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-            ArticulSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-            ModSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-            RazmSelected = new DevExpress.XtraGrid.Columns.GridColumn();
-            GrupKompl = new DevExpress.XtraGrid.Columns.GridColumn();
-            ArticulKompl = new DevExpress.XtraGrid.Columns.GridColumn();
-            ModKompl = new DevExpress.XtraGrid.Columns.GridColumn();
-            RazmKompl = new DevExpress.XtraGrid.Columns.GridColumn();
-            customTextBox1 = new CustomTextBox();
-            button1 = new System.Windows.Forms.Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKompl).BeginInit();
@@ -106,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)gridViewKomplRazm1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditAddRazm).BeginInit();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplRazm).BeginInit();
@@ -145,9 +150,9 @@
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7F));
             tableLayoutPanel5.Controls.Add(customLabel5, 0, 0);
-            tableLayoutPanel5.Controls.Add(customButton2, 2, 0);
             tableLayoutPanel5.Controls.Add(customButtonKompl, 1, 0);
             tableLayoutPanel5.Controls.Add(customGridControlKompl, 0, 1);
+            tableLayoutPanel5.Controls.Add(customButton2, 2, 1);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel5.Location = new System.Drawing.Point(629, 341);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
@@ -170,21 +175,6 @@
             customLabel5.TabIndex = 5;
             customLabel5.Text = "Группа комплекта";
             customLabel5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customButton2
-            // 
-            customButton2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButton2.Font = new System.Drawing.Font("Arial", 10F);
-            customButton2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButton2.Location = new System.Drawing.Point(458, 3);
-            customButton2.MaximumSize = new System.Drawing.Size(25, 25);
-            customButton2.MinimumSize = new System.Drawing.Size(25, 25);
-            customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(25, 25);
-            customButton2.TabIndex = 4;
-            customButton2.Text = "X";
-            customButton2.UseVisualStyleBackColor = false;
             // 
             // customButtonKompl
             // 
@@ -223,6 +213,53 @@
             gridViewKompl.GridControl = customGridControlKompl;
             gridViewKompl.Name = "gridViewKompl";
             gridViewKompl.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // GrupKompl
+            // 
+            GrupKompl.Caption = "Группа";
+            GrupKompl.FieldName = "grup_k";
+            GrupKompl.Name = "GrupKompl";
+            GrupKompl.Visible = true;
+            GrupKompl.VisibleIndex = 0;
+            // 
+            // ArticulKompl
+            // 
+            ArticulKompl.Caption = "Арт.";
+            ArticulKompl.FieldName = "articul_k";
+            ArticulKompl.Name = "ArticulKompl";
+            ArticulKompl.Visible = true;
+            ArticulKompl.VisibleIndex = 1;
+            // 
+            // ModKompl
+            // 
+            ModKompl.Caption = "Мод.";
+            ModKompl.FieldName = "mod_k";
+            ModKompl.Name = "ModKompl";
+            ModKompl.Visible = true;
+            ModKompl.VisibleIndex = 2;
+            // 
+            // RazmKompl
+            // 
+            RazmKompl.Caption = "Размер";
+            RazmKompl.FieldName = "razm_k";
+            RazmKompl.Name = "RazmKompl";
+            RazmKompl.Visible = true;
+            RazmKompl.VisibleIndex = 3;
+            // 
+            // customButton2
+            // 
+            customButton2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            customButton2.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButton2.Font = new System.Drawing.Font("Arial", 10F);
+            customButton2.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButton2.Location = new System.Drawing.Point(458, 33);
+            customButton2.MaximumSize = new System.Drawing.Size(25, 25);
+            customButton2.MinimumSize = new System.Drawing.Size(25, 25);
+            customButton2.Name = "customButton2";
+            customButton2.Size = new System.Drawing.Size(25, 25);
+            customButton2.TabIndex = 4;
+            customButton2.Text = "X";
+            customButton2.UseVisualStyleBackColor = false;
             // 
             // tableLayoutPanel4
             // 
@@ -281,6 +318,60 @@
             gridViewKomplSelected.Name = "gridViewKomplSelected";
             gridViewKomplSelected.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKomplSelected.OptionsView.ShowGroupPanel = false;
+            // 
+            // po_mn
+            // 
+            po_mn.Caption = "X";
+            po_mn.FieldName = "po_mn";
+            po_mn.Name = "po_mn";
+            po_mn.Visible = true;
+            po_mn.VisibleIndex = 0;
+            po_mn.Width = 24;
+            // 
+            // po
+            // 
+            po.Caption = "*";
+            po.FieldName = "po";
+            po.Name = "po";
+            po.Visible = true;
+            po.VisibleIndex = 1;
+            po.Width = 23;
+            // 
+            // grupSelected
+            // 
+            grupSelected.Caption = "Группа";
+            grupSelected.FieldName = "grup";
+            grupSelected.Name = "grupSelected";
+            grupSelected.Visible = true;
+            grupSelected.VisibleIndex = 2;
+            grupSelected.Width = 92;
+            // 
+            // ArticulSelected
+            // 
+            ArticulSelected.Caption = "Арт.";
+            ArticulSelected.FieldName = "articul";
+            ArticulSelected.Name = "ArticulSelected";
+            ArticulSelected.Visible = true;
+            ArticulSelected.VisibleIndex = 3;
+            ArticulSelected.Width = 92;
+            // 
+            // ModSelected
+            // 
+            ModSelected.Caption = "Мод.";
+            ModSelected.FieldName = "mod";
+            ModSelected.Name = "ModSelected";
+            ModSelected.Visible = true;
+            ModSelected.VisibleIndex = 4;
+            ModSelected.Width = 92;
+            // 
+            // RazmSelected
+            // 
+            RazmSelected.Caption = "Размер";
+            RazmSelected.FieldName = "razm";
+            RazmSelected.Name = "RazmSelected";
+            RazmSelected.Visible = true;
+            RazmSelected.VisibleIndex = 5;
+            RazmSelected.Width = 99;
             // 
             // customCheckBoxVerified
             // 
@@ -362,6 +453,7 @@
             // ArticulRazm1
             // 
             ArticulRazm1.Caption = "Арт.";
+            ArticulRazm1.FieldName = "articul";
             ArticulRazm1.Name = "ArticulRazm1";
             ArticulRazm1.Visible = true;
             ArticulRazm1.VisibleIndex = 0;
@@ -369,9 +461,34 @@
             // ModRazm1
             // 
             ModRazm1.Caption = "Мод.";
+            ModRazm1.FieldName = "mod";
             ModRazm1.Name = "ModRazm1";
             ModRazm1.Visible = true;
             ModRazm1.VisibleIndex = 1;
+            // 
+            // Kod1
+            // 
+            Kod1.Caption = "Код";
+            Kod1.FieldName = "kod_k";
+            Kod1.Name = "Kod1";
+            Kod1.Visible = true;
+            Kod1.VisibleIndex = 2;
+            // 
+            // Razm1
+            // 
+            Razm1.Caption = "Размер";
+            Razm1.FieldName = "razm";
+            Razm1.Name = "Razm1";
+            Razm1.Visible = true;
+            Razm1.VisibleIndex = 3;
+            // 
+            // Check1
+            // 
+            Check1.Caption = "Выбор";
+            Check1.FieldName = "pr_po";
+            Check1.Name = "Check1";
+            Check1.Visible = true;
+            Check1.VisibleIndex = 4;
             // 
             // customButton4
             // 
@@ -395,10 +512,12 @@
             customGridControlKomplArt.Location = new System.Drawing.Point(3, 172);
             customGridControlKomplArt.MainView = gridViewKomplArt;
             customGridControlKomplArt.Name = "customGridControlKomplArt";
+            customGridControlKomplArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditAddRazm });
             tableLayoutPanel1.SetRowSpan(customGridControlKomplArt, 3);
             customGridControlKomplArt.Size = new System.Drawing.Size(307, 504);
             customGridControlKomplArt.TabIndex = 8;
             customGridControlKomplArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplArt });
+            customGridControlKomplArt.Load += customGridControlKomplArt_Load;
             // 
             // gridViewKomplArt
             // 
@@ -412,6 +531,59 @@
             gridViewKomplArt.GridControl = customGridControlKomplArt;
             gridViewKomplArt.Name = "gridViewKomplArt";
             gridViewKomplArt.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // Grup
+            // 
+            Grup.Caption = "Группа";
+            Grup.FieldName = "grup";
+            Grup.Name = "Grup";
+            Grup.Visible = true;
+            Grup.VisibleIndex = 0;
+            Grup.Width = 56;
+            // 
+            // Articul
+            // 
+            Articul.Caption = "Артикул";
+            Articul.FieldName = "articul";
+            Articul.Name = "Articul";
+            Articul.Visible = true;
+            Articul.VisibleIndex = 1;
+            Articul.Width = 56;
+            // 
+            // Mod
+            // 
+            Mod.Caption = "Мод.";
+            Mod.FieldName = "mod";
+            Mod.Name = "Mod";
+            Mod.Visible = true;
+            Mod.VisibleIndex = 2;
+            Mod.Width = 56;
+            // 
+            // Razm
+            // 
+            Razm.Caption = "Размер";
+            Razm.FieldName = "razm";
+            Razm.Name = "Razm";
+            Razm.Visible = true;
+            Razm.VisibleIndex = 3;
+            Razm.Width = 49;
+            // 
+            // gridColumnAdd
+            // 
+            gridColumnAdd.Caption = "Добавить";
+            gridColumnAdd.ColumnEdit = repositoryItemButtonEditAddRazm;
+            gridColumnAdd.Name = "gridColumnAdd";
+            gridColumnAdd.Visible = true;
+            gridColumnAdd.VisibleIndex = 4;
+            gridColumnAdd.Width = 65;
+            // 
+            // repositoryItemButtonEditAddRazm
+            // 
+            repositoryItemButtonEditAddRazm.AutoHeight = false;
+            repositoryItemButtonEditAddRazm.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "➕", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default) });
+            repositoryItemButtonEditAddRazm.Name = "repositoryItemButtonEditAddRazm";
+            repositoryItemButtonEditAddRazm.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
+            repositoryItemButtonEditAddRazm.Click += repositoryItemButtonEditAddRazm_Click;
             // 
             // tableLayoutPanel2
             // 
@@ -486,6 +658,38 @@
             gridViewKomplRazm.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKomplRazm.OptionsView.ShowGroupPanel = false;
             // 
+            // ArticulRazm
+            // 
+            ArticulRazm.Caption = "Арт. компл.";
+            ArticulRazm.FieldName = "articul";
+            ArticulRazm.Name = "ArticulRazm";
+            ArticulRazm.Visible = true;
+            ArticulRazm.VisibleIndex = 0;
+            // 
+            // ModRazm
+            // 
+            ModRazm.Caption = "Мод. компл.";
+            ModRazm.FieldName = "mod";
+            ModRazm.Name = "ModRazm";
+            ModRazm.Visible = true;
+            ModRazm.VisibleIndex = 1;
+            // 
+            // KodKRazm
+            // 
+            KodKRazm.Caption = "Код К.";
+            KodKRazm.FieldName = "kod_k";
+            KodKRazm.Name = "KodKRazm";
+            KodKRazm.Visible = true;
+            KodKRazm.VisibleIndex = 2;
+            // 
+            // RazmRazm
+            // 
+            RazmRazm.Caption = "Размер К.";
+            RazmRazm.FieldName = "razm";
+            RazmRazm.Name = "RazmRazm";
+            RazmRazm.Visible = true;
+            RazmRazm.VisibleIndex = 3;
+            // 
             // customNumericUpDownValueTab
             // 
             customNumericUpDownValueTab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -497,6 +701,7 @@
             customNumericUpDownValueTab.ObjectName = null;
             customNumericUpDownValueTab.Size = new System.Drawing.Size(147, 23);
             customNumericUpDownValueTab.TabIndex = 6;
+            customNumericUpDownValueTab.Value = new decimal(new int[] { 1, 0, 0, 0 });
             customNumericUpDownValueTab.ValueChanged += customNumericUpDownValueTab_ValueChanged;
             // 
             // tableLayoutPanel6
@@ -510,8 +715,7 @@
             tableLayoutPanel6.Controls.Add(customLabel1, 0, 1);
             tableLayoutPanel6.Controls.Add(customLabel2, 0, 2);
             tableLayoutPanel6.Controls.Add(customLabel4, 1, 2);
-            tableLayoutPanel6.Controls.Add(customTextBox1, 0, 4);
-            tableLayoutPanel6.Controls.Add(button1, 1, 4);
+            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel6.Location = new System.Drawing.Point(3, 3);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
             tableLayoutPanel6.RowCount = 5;
@@ -645,203 +849,6 @@
             customButtonNext.UseVisualStyleBackColor = false;
             customButtonNext.Click += customButtonNext_Click;
             // 
-            // Kod1
-            // 
-            Kod1.Caption = "Код";
-            Kod1.Name = "Kod1";
-            Kod1.Visible = true;
-            Kod1.VisibleIndex = 2;
-            // 
-            // Razm1
-            // 
-            Razm1.Caption = "Размер";
-            Razm1.Name = "Razm1";
-            Razm1.Visible = true;
-            Razm1.VisibleIndex = 3;
-            // 
-            // Check1
-            // 
-            Check1.Caption = "Выбор";
-            Check1.Name = "Check1";
-            Check1.Visible = true;
-            Check1.VisibleIndex = 4;
-            // 
-            // ArticulRazm
-            // 
-            ArticulRazm.Caption = "Арт. компл.";
-            ArticulRazm.FieldName = "articul";
-            ArticulRazm.Name = "ArticulRazm";
-            ArticulRazm.Visible = true;
-            ArticulRazm.VisibleIndex = 0;
-            // 
-            // ModRazm
-            // 
-            ModRazm.Caption = "Мод. компл.";
-            ModRazm.FieldName = "mod";
-            ModRazm.Name = "ModRazm";
-            ModRazm.Visible = true;
-            ModRazm.VisibleIndex = 1;
-            // 
-            // KodKRazm
-            // 
-            KodKRazm.Caption = "Код К.";
-            KodKRazm.FieldName = "kod_k";
-            KodKRazm.Name = "KodKRazm";
-            KodKRazm.Visible = true;
-            KodKRazm.VisibleIndex = 2;
-            // 
-            // RazmRazm
-            // 
-            RazmRazm.Caption = "Размер К.";
-            RazmRazm.FieldName = "razm";
-            RazmRazm.Name = "RazmRazm";
-            RazmRazm.Visible = true;
-            RazmRazm.VisibleIndex = 3;
-            // 
-            // Grup
-            // 
-            Grup.Caption = "Группа";
-            Grup.FieldName = "Grup";
-            Grup.Name = "Grup";
-            Grup.Visible = true;
-            Grup.VisibleIndex = 0;
-            // 
-            // Articul
-            // 
-            Articul.Caption = "Артикул";
-            Articul.FieldName = "Articul";
-            Articul.Name = "Articul";
-            Articul.Visible = true;
-            Articul.VisibleIndex = 1;
-            // 
-            // Mod
-            // 
-            Mod.Caption = "Мод.";
-            Mod.FieldName = "Mod";
-            Mod.Name = "Mod";
-            Mod.Visible = true;
-            Mod.VisibleIndex = 2;
-            // 
-            // Razm
-            // 
-            Razm.Caption = "Размер";
-            Razm.FieldName = "Razm";
-            Razm.Name = "Razm";
-            Razm.Visible = true;
-            Razm.VisibleIndex = 3;
-            // 
-            // gridColumnAdd
-            // 
-            gridColumnAdd.Caption = "Добавить";
-            gridColumnAdd.Name = "gridColumnAdd";
-            gridColumnAdd.Visible = true;
-            gridColumnAdd.VisibleIndex = 4;
-            // 
-            // po_mn
-            // 
-            po_mn.Caption = "X";
-            po_mn.FieldName = "po_mn";
-            po_mn.Name = "po_mn";
-            po_mn.Visible = true;
-            po_mn.VisibleIndex = 0;
-            po_mn.Width = 24;
-            // 
-            // po
-            // 
-            po.Caption = "*";
-            po.FieldName = "po";
-            po.Name = "po";
-            po.Visible = true;
-            po.VisibleIndex = 1;
-            po.Width = 23;
-            // 
-            // grupSelected
-            // 
-            grupSelected.Caption = "Группа";
-            grupSelected.FieldName = "grup";
-            grupSelected.Name = "grupSelected";
-            grupSelected.Visible = true;
-            grupSelected.VisibleIndex = 2;
-            grupSelected.Width = 92;
-            // 
-            // ArticulSelected
-            // 
-            ArticulSelected.Caption = "Арт.";
-            ArticulSelected.FieldName = "Articul";
-            ArticulSelected.Name = "ArticulSelected";
-            ArticulSelected.Visible = true;
-            ArticulSelected.VisibleIndex = 3;
-            ArticulSelected.Width = 92;
-            // 
-            // ModSelected
-            // 
-            ModSelected.Caption = "Мод.";
-            ModSelected.FieldName = "Mod";
-            ModSelected.Name = "ModSelected";
-            ModSelected.Visible = true;
-            ModSelected.VisibleIndex = 4;
-            ModSelected.Width = 92;
-            // 
-            // RazmSelected
-            // 
-            RazmSelected.Caption = "Размер";
-            RazmSelected.FieldName = "Razm";
-            RazmSelected.Name = "RazmSelected";
-            RazmSelected.Visible = true;
-            RazmSelected.VisibleIndex = 5;
-            RazmSelected.Width = 99;
-            // 
-            // GrupKompl
-            // 
-            GrupKompl.Caption = "Группа";
-            GrupKompl.FieldName = "grup_k";
-            GrupKompl.Name = "GrupKompl";
-            GrupKompl.Visible = true;
-            GrupKompl.VisibleIndex = 0;
-            // 
-            // ArticulKompl
-            // 
-            ArticulKompl.Caption = "Арт.";
-            ArticulKompl.FieldName = "articul_k";
-            ArticulKompl.Name = "ArticulKompl";
-            ArticulKompl.Visible = true;
-            ArticulKompl.VisibleIndex = 1;
-            // 
-            // ModKompl
-            // 
-            ModKompl.Caption = "Мод.";
-            ModKompl.FieldName = "mod_k";
-            ModKompl.Name = "ModKompl";
-            ModKompl.Visible = true;
-            ModKompl.VisibleIndex = 2;
-            // 
-            // RazmKompl
-            // 
-            RazmKompl.Caption = "Размер";
-            RazmKompl.FieldName = "razm_k";
-            RazmKompl.Name = "RazmKompl";
-            RazmKompl.Visible = true;
-            RazmKompl.VisibleIndex = 3;
-            // 
-            // customTextBox1
-            // 
-            customTextBox1.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customTextBox1.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBox1.Location = new System.Drawing.Point(3, 131);
-            customTextBox1.Name = "customTextBox1";
-            customTextBox1.Size = new System.Drawing.Size(100, 23);
-            customTextBox1.TabIndex = 5;
-            // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(156, 131);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 23);
-            button1.TabIndex = 6;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            // 
             // AddNewKopml
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -867,6 +874,7 @@
             ((System.ComponentModel.ISupportInitialize)gridViewKomplRazm1).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditAddRazm).EndInit();
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplRazm).EndInit();
@@ -940,7 +948,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn ArticulKompl;
         private DevExpress.XtraGrid.Columns.GridColumn ModKompl;
         private DevExpress.XtraGrid.Columns.GridColumn RazmKompl;
-        private CustomTextBox customTextBox1;
-        private System.Windows.Forms.Button button1;
+        private DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit repositoryItemButtonEditAddRazm;
     }
 }
