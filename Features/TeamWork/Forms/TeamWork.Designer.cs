@@ -186,6 +186,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             textEditSec = new TextEdit();
             textEditCreate = new TextEdit();
             customGroupBoxWithButtons = new CustomGroupBox();
+            ButtonEditOnlyAdv = new CustomActionButton();
             ButtonEditWd = new CustomButton();
             ButtonPreliminaryWd = new CustomButton();
             ButtonDouble = new CustomButton();
@@ -1757,6 +1758,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customGroupBoxWithButtons
             // 
             customGroupBoxWithButtons.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxWithButtons.Controls.Add(ButtonEditOnlyAdv);
             customGroupBoxWithButtons.Controls.Add(ButtonEditWd);
             customGroupBoxWithButtons.Controls.Add(ButtonPreliminaryWd);
             customGroupBoxWithButtons.Controls.Add(ButtonDouble);
@@ -1766,6 +1768,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBoxWithButtons.Size = new System.Drawing.Size(228, 169);
             customGroupBoxWithButtons.TabIndex = 9;
             customGroupBoxWithButtons.TabStop = false;
+            // 
+            // ButtonEditOnlyAdv
+            // 
+            ButtonEditOnlyAdv.BackColor = System.Drawing.Color.FromArgb(255, 235, 205);
+            ButtonEditOnlyAdv.Font = new System.Drawing.Font("Arial", 10F);
+            ButtonEditOnlyAdv.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            ButtonEditOnlyAdv.Location = new System.Drawing.Point(4, 14);
+            ButtonEditOnlyAdv.Name = "ButtonEditOnlyAdv";
+            ButtonEditOnlyAdv.Size = new System.Drawing.Size(218, 32);
+            ButtonEditOnlyAdv.TabIndex = 12;
+            ButtonEditOnlyAdv.Text = "редактировать РТ";
+            ButtonEditOnlyAdv.UseVisualStyleBackColor = false;
+            ButtonEditOnlyAdv.Click += customActionButton1_Click;
             // 
             // ButtonEditWd
             // 
@@ -1790,10 +1805,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonPreliminaryWd.FlatStyle = FlatStyle.Flat;
             ButtonPreliminaryWd.Font = new System.Drawing.Font("Arial", 10F);
             ButtonPreliminaryWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            ButtonPreliminaryWd.Location = new System.Drawing.Point(4, 91);
+            ButtonPreliminaryWd.Location = new System.Drawing.Point(4, 90);
             ButtonPreliminaryWd.Margin = new Padding(4, 3, 4, 3);
             ButtonPreliminaryWd.Name = "ButtonPreliminaryWd";
-            ButtonPreliminaryWd.Size = new System.Drawing.Size(214, 25);
+            ButtonPreliminaryWd.Size = new System.Drawing.Size(218, 25);
             ButtonPreliminaryWd.TabIndex = 11;
             ButtonPreliminaryWd.Text = "добавить предв";
             ButtonPreliminaryWd.UseVisualStyleBackColor = false;
@@ -1809,7 +1824,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonDouble.Location = new System.Drawing.Point(4, 52);
             ButtonDouble.Margin = new Padding(4, 3, 4, 3);
             ButtonDouble.Name = "ButtonDouble";
-            ButtonDouble.Size = new System.Drawing.Size(214, 31);
+            ButtonDouble.Size = new System.Drawing.Size(218, 31);
             ButtonDouble.TabIndex = 10;
             ButtonDouble.Text = "дубль";
             ButtonDouble.UseVisualStyleBackColor = false;
@@ -1822,10 +1837,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonArchAndCopyWd.FlatStyle = FlatStyle.Flat;
             ButtonArchAndCopyWd.Font = new System.Drawing.Font("Arial", 12F);
             ButtonArchAndCopyWd.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            ButtonArchAndCopyWd.Location = new System.Drawing.Point(4, 125);
+            ButtonArchAndCopyWd.Location = new System.Drawing.Point(4, 123);
             ButtonArchAndCopyWd.Margin = new Padding(4, 3, 4, 3);
             ButtonArchAndCopyWd.Name = "ButtonArchAndCopyWd";
-            ButtonArchAndCopyWd.Size = new System.Drawing.Size(214, 28);
+            ButtonArchAndCopyWd.Size = new System.Drawing.Size(218, 28);
             ButtonArchAndCopyWd.TabIndex = 9;
             ButtonArchAndCopyWd.Text = "архив+копия";
             ButtonArchAndCopyWd.UseVisualStyleBackColor = false;
@@ -3990,5 +4005,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup16;
         private CustomSimpleButton customSimpleButton6;
         private CustomSimpleButton customSimpleButton5;
+        private CustomActionButton ButtonEditOnlyAdv;
     }
 }

@@ -428,7 +428,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
 
-        private async Task EditWd_Internal2(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        private async Task EditWd_Internal2(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false, bool Editing = false)
         {
             try
             {
@@ -461,6 +461,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
+                if (!Editing) //если можно редактировать
                 //Проверяем статус "актуальный" и наличие даты обновления
                 if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
                 {
