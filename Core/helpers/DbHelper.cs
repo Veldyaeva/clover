@@ -63,7 +63,7 @@ namespace SewingProduction.Helpers
 
             _globalConnectionString = _connectionString;
         }
-        public DatabaseHelper() : this(SettingsManager.GetCurrentDatabase())
+        public DatabaseHelper() : this(SettingsManager.GetSelectedDatabase())
         {
         }
         public static string GetGlobalConnectionString()
@@ -140,6 +140,31 @@ namespace SewingProduction.Helpers
                         }
                     }
                     await command.ExecuteNonQueryAsync();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Выполнение SQL запроса с возвратом количества затронутых строк
+        /// </summary>
+        /// <param name="query">запрос</param>
+        /// <param name="parameters">параметры</param>
+        /// <returns>Количество затронутых строк</returns>
+        public async Task<int> ExecuteNonQueryWithRowCountAsync(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                await connection.OpenAsync();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                    return await command.ExecuteNonQueryAsync();
                 }
             }
         }
@@ -288,6 +313,31 @@ namespace SewingProduction.Helpers
                         }
                     }
                     command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Выполнение SQL запроса с возвратом количества затронутых строк
+        /// </summary>
+        /// <param name="query">запрос</param>
+        /// <param name="parameters">параметры</param>
+        /// <returns>Количество затронутых строк</returns>
+        public int ExecuteNonQueryWithRowCount(string query, Dictionary<string, object> parameters = null)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(query, connection))
+                {
+                    if (parameters != null)
+                    {
+                        foreach (var param in parameters)
+                        {
+                            command.Parameters.AddWithValue(param.Key, param.Value);
+                        }
+                    }
+                    return command.ExecuteNonQuery();
                 }
             }
         }

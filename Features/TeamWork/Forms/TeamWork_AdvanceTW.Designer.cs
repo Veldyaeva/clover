@@ -34,6 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TeamWork_AdvanceTW));
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            pictureBox1 = new System.Windows.Forms.PictureBox();
             gridControlKont = new DevExpress.XtraGrid.GridControl();
             gridViewKont = new GridView();
             gridColumn19 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -45,20 +46,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             coln_ch1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
             colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridControlRaskr = new DevExpress.XtraGrid.GridControl();
-            gridViewRaskr = new GridView();
-            gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
-            colspec = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
-            colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
-            coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
-            colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControlRasz = new DevExpress.XtraGrid.GridControl();
             gridViewRasz = new GridView();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,9 +69,28 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn7 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridControlRaskr = new DevExpress.XtraGrid.GridControl();
+            gridViewRaskr = new GridView();
+            gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn13 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colspec = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn16 = new DevExpress.XtraGrid.Columns.GridColumn();
+            colkod1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
+            coln_ch = new DevExpress.XtraGrid.Columns.GridColumn();
+            colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             btnCancel = new CustomSimpleButton();
             btnSave = new CustomSimpleButton();
             btnOK = new CustomSimpleButton();
+            btnMoveUp = new CustomSimpleButton();
+            btnMoveDown = new CustomSimpleButton();
+            btnRecalculateNumbers = new CustomSimpleButton();
+            btnValidateNumbers = new CustomSimpleButton();
+            panelOperationButtons = new System.Windows.Forms.Panel();
             customLabel2 = new CustomLabel();
             modelTextBox = new CustomTextBox();
             nameTextBox = new CustomTextBox();
@@ -124,15 +130,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel5 = new CustomLabel();
             toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKont).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKont).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRasz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRasz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).BeginInit();
+            panelOperationButtons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).BeginInit();
@@ -155,11 +163,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 1;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 260F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel2.Controls.Add(gridControlKont, 0, 2);
-            tableLayoutPanel2.Controls.Add(gridControlRaskr, 0, 1);
+            tableLayoutPanel2.Controls.Add(pictureBox1, 0, 1);
+            tableLayoutPanel2.Controls.Add(gridControlKont, 1, 2);
             tableLayoutPanel2.Controls.Add(gridControlRasz, 0, 0);
+            tableLayoutPanel2.Controls.Add(gridControlRaskr, 1, 1);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(296, 26);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -168,19 +178,29 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 215F));
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 257F));
-            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel2.Size = new System.Drawing.Size(1488, 997);
             tableLayoutPanel2.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            pictureBox1.Location = new System.Drawing.Point(3, 528);
+            pictureBox1.Name = "pictureBox1";
+            tableLayoutPanel2.SetRowSpan(pictureBox1, 2);
+            pictureBox1.Size = new System.Drawing.Size(254, 466);
+            pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 25;
+            pictureBox1.TabStop = false;
             // 
             // gridControlKont
             // 
             gridControlKont.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlKont.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridControlKont.Location = new System.Drawing.Point(4, 743);
+            gridControlKont.Location = new System.Drawing.Point(264, 743);
             gridControlKont.MainView = gridViewKont;
             gridControlKont.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlKont.Name = "gridControlKont";
-            gridControlKont.Size = new System.Drawing.Size(1480, 251);
+            gridControlKont.Size = new System.Drawing.Size(1220, 251);
             gridControlKont.TabIndex = 8;
             gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKont });
             // 
@@ -205,12 +225,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn19
             // 
             gridColumn19.Caption = "№ оп";
-            gridColumn19.FieldName = "kodO";
+            gridColumn19.FieldName = "kod_o";
             gridColumn19.MinWidth = 23;
             gridColumn19.Name = "gridColumn19";
             gridColumn19.Visible = true;
             gridColumn19.VisibleIndex = 0;
-            gridColumn19.Width = 144;
+            gridColumn19.Width = 49;
             // 
             // gridColumn23
             // 
@@ -220,7 +240,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn23.Name = "gridColumn23";
             gridColumn23.Visible = true;
             gridColumn23.VisibleIndex = 1;
-            gridColumn23.Width = 163;
+            gridColumn23.Width = 57;
             // 
             // gridColumn20
             // 
@@ -230,7 +250,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn20.Name = "gridColumn20";
             gridColumn20.Visible = true;
             gridColumn20.VisibleIndex = 2;
-            gridColumn20.Width = 272;
+            gridColumn20.Width = 462;
             // 
             // gridColumn21
             // 
@@ -240,7 +260,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn21.Name = "gridColumn21";
             gridColumn21.Visible = true;
             gridColumn21.VisibleIndex = 3;
-            gridColumn21.Width = 167;
+            gridColumn21.Width = 627;
             // 
             // colseb
             // 
@@ -277,156 +297,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             colannId2.Name = "colannId2";
             colannId2.Width = 79;
             // 
-            // gridControlRaskr
-            // 
-            gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
-            gridControlRaskr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridControlRaskr.Location = new System.Drawing.Point(4, 528);
-            gridControlRaskr.MainView = gridViewRaskr;
-            gridControlRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridControlRaskr.Name = "gridControlRaskr";
-            gridControlRaskr.Size = new System.Drawing.Size(1480, 209);
-            gridControlRaskr.TabIndex = 7;
-            gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
-            // 
-            // gridViewRaskr
-            // 
-            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
-            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
-            gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
-            gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn9, gridColumn10, gridColumn13, gridColumn14, gridColumn11, gridColumn15, colspec, gridColumn16, colkod1, gridColumn12, coln_ch, colannId1 });
-            gridViewRaskr.DetailHeight = 404;
-            gridViewRaskr.GridControl = gridControlRaskr;
-            gridViewRaskr.Name = "gridViewRaskr";
-            gridViewRaskr.NewItemRowText = "добавить";
-            gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
-            gridViewRaskr.OptionsEditForm.PopupEditFormWidth = 933;
-            gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
-            gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
-            gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
-            gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
-            gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
-            gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
-            gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
-            gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
-            gridViewRaskr.OptionsView.ShowGroupPanel = false;
-            gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
-            gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
-            gridViewRaskr.ValidateRow += GridView2_ValidateRow;
-            gridViewRaskr.RowUpdated += GridView2_RowUpdated;
-            // 
-            // gridColumn9
-            // 
-            gridColumn9.FieldName = "nkId";
-            gridColumn9.MinWidth = 23;
-            gridColumn9.Name = "gridColumn9";
-            gridColumn9.Width = 87;
-            // 
-            // gridColumn10
-            // 
-            gridColumn10.Caption = "№ оп";
-            gridColumn10.FieldName = "KodO";
-            gridColumn10.MinWidth = 23;
-            gridColumn10.Name = "gridColumn10";
-            gridColumn10.Visible = true;
-            gridColumn10.VisibleIndex = 0;
-            gridColumn10.Width = 45;
-            // 
-            // gridColumn13
-            // 
-            gridColumn13.Caption = "№ п/оп";
-            gridColumn13.FieldName = "n1";
-            gridColumn13.MinWidth = 23;
-            gridColumn13.Name = "gridColumn13";
-            gridColumn13.Visible = true;
-            gridColumn13.VisibleIndex = 1;
-            gridColumn13.Width = 63;
-            // 
-            // gridColumn14
-            // 
-            gridColumn14.Caption = "разряд";
-            gridColumn14.FieldName = "razryd";
-            gridColumn14.MinWidth = 23;
-            gridColumn14.Name = "gridColumn14";
-            gridColumn14.Visible = true;
-            gridColumn14.VisibleIndex = 2;
-            gridColumn14.Width = 82;
-            // 
-            // gridColumn11
-            // 
-            gridColumn11.Caption = "наименование операци раскроя";
-            gridColumn11.FieldName = "Text";
-            gridColumn11.MinWidth = 23;
-            gridColumn11.Name = "gridColumn11";
-            gridColumn11.Visible = true;
-            gridColumn11.VisibleIndex = 3;
-            gridColumn11.Width = 367;
-            // 
-            // gridColumn15
-            // 
-            gridColumn15.Caption = "сек";
-            gridColumn15.FieldName = "Sek";
-            gridColumn15.MinWidth = 23;
-            gridColumn15.Name = "gridColumn15";
-            gridColumn15.Visible = true;
-            gridColumn15.VisibleIndex = 4;
-            gridColumn15.Width = 146;
-            // 
-            // colspec
-            // 
-            colspec.Caption = "специальность";
-            colspec.FieldName = "Spec";
-            colspec.MinWidth = 23;
-            colspec.Name = "colspec";
-            colspec.Visible = true;
-            colspec.VisibleIndex = 5;
-            colspec.Width = 146;
-            // 
-            // gridColumn16
-            // 
-            gridColumn16.Caption = "оборуд.";
-            gridColumn16.FieldName = "Obor";
-            gridColumn16.MinWidth = 23;
-            gridColumn16.Name = "gridColumn16";
-            gridColumn16.Visible = true;
-            gridColumn16.VisibleIndex = 6;
-            gridColumn16.Width = 146;
-            // 
-            // colkod1
-            // 
-            colkod1.Caption = "код из";
-            colkod1.FieldName = "Kod";
-            colkod1.MinWidth = 23;
-            colkod1.Name = "colkod1";
-            colkod1.Visible = true;
-            colkod1.VisibleIndex = 7;
-            colkod1.Width = 168;
-            // 
-            // gridColumn12
-            // 
-            gridColumn12.FieldName = "N";
-            gridColumn12.MinWidth = 23;
-            gridColumn12.Name = "gridColumn12";
-            gridColumn12.Width = 146;
-            // 
-            // coln_ch
-            // 
-            coln_ch.FieldName = "N_ch";
-            coln_ch.MinWidth = 23;
-            coln_ch.Name = "coln_ch";
-            coln_ch.Width = 146;
-            // 
-            // colannId1
-            // 
-            colannId1.FieldName = "AnnId";
-            colannId1.MinWidth = 23;
-            colannId1.Name = "colannId1";
-            colannId1.Width = 86;
-            // 
             // gridControlRasz
             // 
+            tableLayoutPanel2.SetColumnSpan(gridControlRasz, 2);
             gridControlRasz.Dock = System.Windows.Forms.DockStyle.Fill;
             gridControlRasz.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridControlRasz.Location = new System.Drawing.Point(4, 3);
@@ -442,7 +315,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridViewRasz.Appearance.FocusedCell.ForeColor = System.Drawing.Color.FromArgb(255, 192, 128);
             gridViewRasz.Appearance.FocusedCell.Options.UseForeColor = true;
-            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridViewRasz.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 10.25F, System.Drawing.FontStyle.Bold);
             gridViewRasz.Appearance.FocusedRow.ForeColor = System.Drawing.Color.FromArgb(255, 128, 128);
             gridViewRasz.Appearance.FocusedRow.Options.UseFont = true;
             gridViewRasz.Appearance.FocusedRow.Options.UseForeColor = true;
@@ -703,10 +576,158 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn7.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             gridColumn7.Width = 87;
             // 
+            // gridControlRaskr
+            // 
+            gridControlRaskr.Dock = System.Windows.Forms.DockStyle.Fill;
+            gridControlRaskr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRaskr.Location = new System.Drawing.Point(264, 528);
+            gridControlRaskr.MainView = gridViewRaskr;
+            gridControlRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            gridControlRaskr.Name = "gridControlRaskr";
+            gridControlRaskr.Size = new System.Drawing.Size(1220, 209);
+            gridControlRaskr.TabIndex = 7;
+            gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
+            // 
+            // gridViewRaskr
+            // 
+            gridViewRaskr.Appearance.EvenRow.BackColor = System.Drawing.Color.White;
+            gridViewRaskr.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewRaskr.Appearance.OddRow.BackColor = System.Drawing.Color.FromArgb(255, 224, 192);
+            gridViewRaskr.Appearance.OddRow.Options.UseBackColor = true;
+            gridViewRaskr.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn9, gridColumn10, gridColumn13, gridColumn14, gridColumn11, gridColumn15, colspec, gridColumn16, colkod1, gridColumn12, coln_ch, colannId1 });
+            gridViewRaskr.DetailHeight = 404;
+            gridViewRaskr.GridControl = gridControlRaskr;
+            gridViewRaskr.Name = "gridViewRaskr";
+            gridViewRaskr.NewItemRowText = "добавить";
+            gridViewRaskr.OptionsBehavior.AllowAddRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRaskr.OptionsBehavior.AllowDeleteRows = DevExpress.Utils.DefaultBoolean.True;
+            gridViewRaskr.OptionsEditForm.PopupEditFormWidth = 933;
+            gridViewRaskr.OptionsEditForm.ShowOnDoubleClick = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowOnEnterKey = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowOnF2Key = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsEditForm.ShowUpdateCancelPanel = DevExpress.Utils.DefaultBoolean.False;
+            gridViewRaskr.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewRaskr.OptionsView.EnableAppearanceOddRow = true;
+            gridViewRaskr.OptionsView.NewItemRowPosition = NewItemRowPosition.Top;
+            gridViewRaskr.OptionsView.ShowAutoFilterRow = true;
+            gridViewRaskr.OptionsView.ShowGroupPanel = false;
+            gridViewRaskr.PopupMenuShowing += gridViewRaskr_PopupMenuShowing;
+            gridViewRaskr.ShowingEditor += gridViewRaskr_ShowingEditor;
+            gridViewRaskr.ValidateRow += GridView2_ValidateRow;
+            gridViewRaskr.RowUpdated += GridView2_RowUpdated;
+            // 
+            // gridColumn9
+            // 
+            gridColumn9.FieldName = "nkId";
+            gridColumn9.MinWidth = 23;
+            gridColumn9.Name = "gridColumn9";
+            gridColumn9.Width = 87;
+            // 
+            // gridColumn10
+            // 
+            gridColumn10.Caption = "№ оп";
+            gridColumn10.FieldName = "KodO";
+            gridColumn10.MinWidth = 23;
+            gridColumn10.Name = "gridColumn10";
+            gridColumn10.Visible = true;
+            gridColumn10.VisibleIndex = 0;
+            gridColumn10.Width = 46;
+            // 
+            // gridColumn13
+            // 
+            gridColumn13.Caption = "№ п/оп";
+            gridColumn13.FieldName = "n1";
+            gridColumn13.MinWidth = 23;
+            gridColumn13.Name = "gridColumn13";
+            gridColumn13.Visible = true;
+            gridColumn13.VisibleIndex = 1;
+            gridColumn13.Width = 64;
+            // 
+            // gridColumn14
+            // 
+            gridColumn14.Caption = "разряд";
+            gridColumn14.FieldName = "razryd";
+            gridColumn14.MinWidth = 23;
+            gridColumn14.Name = "gridColumn14";
+            gridColumn14.Visible = true;
+            gridColumn14.VisibleIndex = 2;
+            gridColumn14.Width = 84;
+            // 
+            // gridColumn11
+            // 
+            gridColumn11.Caption = "наименование операци раскроя";
+            gridColumn11.FieldName = "Text";
+            gridColumn11.MinWidth = 23;
+            gridColumn11.Name = "gridColumn11";
+            gridColumn11.Visible = true;
+            gridColumn11.VisibleIndex = 3;
+            gridColumn11.Width = 377;
+            // 
+            // gridColumn15
+            // 
+            gridColumn15.Caption = "сек";
+            gridColumn15.FieldName = "Sek";
+            gridColumn15.MinWidth = 23;
+            gridColumn15.Name = "gridColumn15";
+            gridColumn15.Visible = true;
+            gridColumn15.VisibleIndex = 4;
+            gridColumn15.Width = 62;
+            // 
+            // colspec
+            // 
+            colspec.Caption = "специальность";
+            colspec.FieldName = "Spec";
+            colspec.MinWidth = 23;
+            colspec.Name = "colspec";
+            colspec.Visible = true;
+            colspec.VisibleIndex = 5;
+            colspec.Width = 87;
+            // 
+            // gridColumn16
+            // 
+            gridColumn16.Caption = "оборуд.";
+            gridColumn16.FieldName = "Obor";
+            gridColumn16.MinWidth = 23;
+            gridColumn16.Name = "gridColumn16";
+            gridColumn16.Visible = true;
+            gridColumn16.VisibleIndex = 6;
+            gridColumn16.Width = 218;
+            // 
+            // colkod1
+            // 
+            colkod1.Caption = "код из";
+            colkod1.FieldName = "Kod";
+            colkod1.MinWidth = 23;
+            colkod1.Name = "colkod1";
+            colkod1.Visible = true;
+            colkod1.VisibleIndex = 7;
+            colkod1.Width = 257;
+            // 
+            // gridColumn12
+            // 
+            gridColumn12.FieldName = "N";
+            gridColumn12.MinWidth = 23;
+            gridColumn12.Name = "gridColumn12";
+            gridColumn12.Width = 146;
+            // 
+            // coln_ch
+            // 
+            coln_ch.FieldName = "N_ch";
+            coln_ch.MinWidth = 23;
+            coln_ch.Name = "coln_ch";
+            coln_ch.Width = 146;
+            // 
+            // colannId1
+            // 
+            colannId1.FieldName = "AnnId";
+            colannId1.MinWidth = 23;
+            colannId1.Name = "colannId1";
+            colannId1.Width = 86;
+            // 
             // btnCancel
             // 
             btnCancel.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnCancel.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnCancel.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnCancel.Appearance.Options.UseBackColor = true;
             btnCancel.Appearance.Options.UseFont = true;
@@ -726,7 +747,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnSave
             // 
             btnSave.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnSave.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnSave.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnSave.Appearance.Options.UseBackColor = true;
             btnSave.Appearance.Options.UseFont = true;
@@ -747,7 +768,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // btnOK
             // 
             btnOK.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 10F);
+            btnOK.Appearance.Font = new System.Drawing.Font("Arial", 16F);
             btnOK.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             btnOK.Appearance.Options.UseBackColor = true;
             btnOK.Appearance.Options.UseFont = true;
@@ -765,17 +786,90 @@ namespace SewingProduction.Features.TeamWork.Forms
             btnOK.Text = "Сохранить+закрыть";
             btnOK.Click += btnOK_Click;
             // 
+            // btnMoveUp
+            // 
+            btnMoveUp.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveUp.Appearance.Font = new System.Drawing.Font("Arial", 15F);
+            btnMoveUp.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveUp.Appearance.Options.UseBackColor = true;
+            btnMoveUp.Appearance.Options.UseFont = true;
+            btnMoveUp.Appearance.Options.UseForeColor = true;
+            btnMoveUp.Location = new System.Drawing.Point(168, 57);
+            btnMoveUp.Name = "btnMoveUp";
+            btnMoveUp.Size = new System.Drawing.Size(67, 16);
+            btnMoveUp.TabIndex = 101;
+            btnMoveUp.Text = "↑ Вверх";
+            btnMoveUp.Click += btnMoveUp_Click;
+            // 
+            // btnMoveDown
+            // 
+            btnMoveDown.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            btnMoveDown.Appearance.Font = new System.Drawing.Font("Arial", 15F);
+            btnMoveDown.Appearance.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            btnMoveDown.Appearance.Options.UseBackColor = true;
+            btnMoveDown.Appearance.Options.UseFont = true;
+            btnMoveDown.Appearance.Options.UseForeColor = true;
+            btnMoveDown.Location = new System.Drawing.Point(168, 111);
+            btnMoveDown.Name = "btnMoveDown";
+            btnMoveDown.Size = new System.Drawing.Size(96, 19);
+            btnMoveDown.TabIndex = 102;
+            btnMoveDown.Text = "↓ Вниз";
+            btnMoveDown.Click += btnMoveDown_Click;
+            // 
+            // btnRecalculateNumbers
+            // 
+            btnRecalculateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(200, 255, 200);
+            btnRecalculateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
+            btnRecalculateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(0, 100, 0);
+            btnRecalculateNumbers.Appearance.Options.UseBackColor = true;
+            btnRecalculateNumbers.Appearance.Options.UseFont = true;
+            btnRecalculateNumbers.Appearance.Options.UseForeColor = true;
+            btnRecalculateNumbers.Location = new System.Drawing.Point(7, 55);
+            btnRecalculateNumbers.Name = "btnRecalculateNumbers";
+            btnRecalculateNumbers.Size = new System.Drawing.Size(207, 22);
+            btnRecalculateNumbers.TabIndex = 103;
+            btnRecalculateNumbers.Text = "Обновить нумерацию";
+            btnRecalculateNumbers.Click += btnRecalculateNumbers_Click;
+            // 
+            // btnValidateNumbers
+            // 
+            btnValidateNumbers.Appearance.BackColor = System.Drawing.Color.FromArgb(255, 255, 200);
+            btnValidateNumbers.Appearance.Font = new System.Drawing.Font("Arial", 15F);
+            btnValidateNumbers.Appearance.ForeColor = System.Drawing.Color.FromArgb(100, 100, 0);
+            btnValidateNumbers.Appearance.Options.UseBackColor = true;
+            btnValidateNumbers.Appearance.Options.UseFont = true;
+            btnValidateNumbers.Appearance.Options.UseForeColor = true;
+            btnValidateNumbers.Location = new System.Drawing.Point(7, 19);
+            btnValidateNumbers.Name = "btnValidateNumbers";
+            btnValidateNumbers.Size = new System.Drawing.Size(207, 30);
+            btnValidateNumbers.TabIndex = 104;
+            btnValidateNumbers.Text = "Проверить нумерацию";
+            btnValidateNumbers.Click += btnValidateNumbers_Click;
+            // 
+            // panelOperationButtons
+            // 
+            panelOperationButtons.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
+            panelOperationButtons.BackColor = System.Drawing.Color.FromArgb(240, 240, 240);
+            tableLayoutPanel5.SetColumnSpan(panelOperationButtons, 2);
+            panelOperationButtons.Controls.Add(btnRecalculateNumbers);
+            panelOperationButtons.Controls.Add(btnValidateNumbers);
+            panelOperationButtons.Location = new System.Drawing.Point(79, 435);
+            panelOperationButtons.Name = "panelOperationButtons";
+            tableLayoutPanel5.SetRowSpan(panelOperationButtons, 3);
+            panelOperationButtons.Size = new System.Drawing.Size(186, 75);
+            panelOperationButtons.TabIndex = 100;
+            // 
             // customLabel2
             // 
             customLabel2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel2.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel2, 2);
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel2.Font = new System.Drawing.Font("Arial", 16F);
             customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(4, 464);
+            customLabel2.Location = new System.Drawing.Point(4, 514);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(87, 16);
+            customLabel2.Size = new System.Drawing.Size(135, 25);
             customLabel2.TabIndex = 15;
             customLabel2.Text = "конструктор";
             // 
@@ -784,24 +878,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             modelTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(modelTextBox, 3);
             modelTextBox.Enabled = false;
-            modelTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            modelTextBox.Font = new System.Drawing.Font("Arial", 16F);
             modelTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             modelTextBox.Location = new System.Drawing.Point(4, 138);
             modelTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             modelTextBox.Name = "modelTextBox";
-            modelTextBox.Size = new System.Drawing.Size(260, 23);
+            modelTextBox.Size = new System.Drawing.Size(260, 32);
             modelTextBox.TabIndex = 4;
             // 
             // nameTextBox
             // 
             nameTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(nameTextBox, 3);
-            nameTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            nameTextBox.Font = new System.Drawing.Font("Arial", 16F);
             nameTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             nameTextBox.Location = new System.Drawing.Point(4, 192);
             nameTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             nameTextBox.Name = "nameTextBox";
-            nameTextBox.Size = new System.Drawing.Size(235, 23);
+            nameTextBox.Size = new System.Drawing.Size(235, 32);
             nameTextBox.TabIndex = 5;
             // 
             // label5
@@ -809,12 +903,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label5.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label5, 2);
-            label5.Font = new System.Drawing.Font("Arial", 10F);
+            label5.Font = new System.Drawing.Font("Arial", 16F);
             label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(4, 5);
+            label5.Location = new System.Drawing.Point(4, 0);
             label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(103, 16);
+            label5.Size = new System.Drawing.Size(106, 27);
             label5.TabIndex = 3;
             label5.Text = "дата создания";
             // 
@@ -822,13 +916,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             dateCreate.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(dateCreate, 3);
-            dateCreate.Font = new System.Drawing.Font("Arial", 10F);
+            dateCreate.Font = new System.Drawing.Font("Arial", 16F);
             dateCreate.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             dateCreate.Location = new System.Drawing.Point(4, 30);
             dateCreate.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             dateCreate.Name = "dateCreate";
             dateCreate.ObjectName = null;
-            dateCreate.Size = new System.Drawing.Size(260, 23);
+            dateCreate.Size = new System.Drawing.Size(260, 32);
             dateCreate.TabIndex = 7;
             // 
             // label4
@@ -836,25 +930,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label4.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label4, 3);
-            label4.Font = new System.Drawing.Font("Arial", 10F);
+            label4.Font = new System.Drawing.Font("Arial", 16F);
             label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(4, 410);
+            label4.Location = new System.Drawing.Point(4, 405);
             label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(178, 16);
+            label4.Size = new System.Drawing.Size(191, 27);
             label4.TabIndex = 2;
             label4.Text = "итоговые сек. по изделию";
             // 
             // secTimeTextBox
             // 
             secTimeTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            secTimeTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            secTimeTextBox.Font = new System.Drawing.Font("Arial", 16F);
             secTimeTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             secTimeTextBox.Location = new System.Drawing.Point(4, 435);
             secTimeTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             secTimeTextBox.Name = "secTimeTextBox";
             secTimeTextBox.ReadOnly = true;
-            secTimeTextBox.Size = new System.Drawing.Size(68, 23);
+            secTimeTextBox.Size = new System.Drawing.Size(68, 32);
             secTimeTextBox.TabIndex = 6;
             // 
             // groupTextBox
@@ -862,12 +956,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             groupTextBox.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
             tableLayoutPanel5.SetColumnSpan(groupTextBox, 3);
             groupTextBox.Enabled = false;
-            groupTextBox.Font = new System.Drawing.Font("Arial", 10F);
+            groupTextBox.Font = new System.Drawing.Font("Arial", 16F);
             groupTextBox.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
             groupTextBox.Location = new System.Drawing.Point(4, 84);
             groupTextBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupTextBox.Name = "groupTextBox";
-            groupTextBox.Size = new System.Drawing.Size(260, 23);
+            groupTextBox.Size = new System.Drawing.Size(260, 32);
             groupTextBox.TabIndex = 19;
             // 
             // customLabel3
@@ -875,12 +969,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel3.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel3, 2);
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel3.Font = new System.Drawing.Font("Arial", 16F);
             customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(4, 59);
+            customLabel3.Location = new System.Drawing.Point(4, 55);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(51, 16);
+            customLabel3.Size = new System.Drawing.Size(79, 25);
             customLabel3.TabIndex = 18;
             customLabel3.Text = "группа";
             customLabel3.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
@@ -890,26 +984,26 @@ namespace SewingProduction.Features.TeamWork.Forms
             label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label3.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label3, 2);
-            label3.Font = new System.Drawing.Font("Arial", 10F);
+            label3.Font = new System.Drawing.Font("Arial", 16F);
             label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(4, 167);
+            label3.Location = new System.Drawing.Point(4, 163);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(104, 16);
+            label3.Size = new System.Drawing.Size(92, 25);
             label3.TabIndex = 1;
-            label3.Text = "наименование";
+            label3.Text = "артикул";
             // 
             // label2
             // 
             label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             label2.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(label2, 2);
-            label2.Font = new System.Drawing.Font("Arial", 10F);
+            label2.Font = new System.Drawing.Font("Arial", 16F);
             label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(4, 113);
+            label2.Location = new System.Drawing.Point(4, 109);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(57, 16);
+            label2.Size = new System.Drawing.Size(89, 25);
             label2.TabIndex = 0;
             label2.Text = "модель";
             // 
@@ -918,19 +1012,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel1.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel1.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel1, 2);
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.Font = new System.Drawing.Font("Arial", 16F);
             customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(4, 518);
+            customLabel1.Location = new System.Drawing.Point(4, 560);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(69, 16);
+            customLabel1.Size = new System.Drawing.Size(106, 20);
             customLabel1.TabIndex = 14;
             customLabel1.Text = "дизайнер";
             // 
             // constructorComboBox
             // 
             tableLayoutPanel5.SetColumnSpan(constructorComboBox, 3);
-            constructorComboBox.Location = new System.Drawing.Point(4, 489);
+            constructorComboBox.Location = new System.Drawing.Point(4, 543);
             constructorComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             constructorComboBox.Name = "constructorComboBox";
             constructorComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -941,7 +1035,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // designerComboBox
             // 
             tableLayoutPanel5.SetColumnSpan(designerComboBox, 3);
-            designerComboBox.Location = new System.Drawing.Point(4, 543);
+            designerComboBox.Location = new System.Drawing.Point(4, 583);
             designerComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             designerComboBox.Name = "designerComboBox";
             designerComboBox.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
@@ -951,7 +1045,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // rasz
             // 
             rasz.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            rasz.Font = new System.Drawing.Font("Arial", 10F);
+            rasz.Font = new System.Drawing.Font("Arial", 16F);
             rasz.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             rasz.Location = new System.Drawing.Point(0, 0);
             rasz.Name = "rasz";
@@ -962,7 +1056,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // customButton2
             // 
             customButton2.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButton2.Font = new System.Drawing.Font("Arial", 10F);
+            customButton2.Font = new System.Drawing.Font("Arial", 16F);
             customButton2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButton2.Location = new System.Drawing.Point(0, 0);
             customButton2.Name = "customButton2";
@@ -999,12 +1093,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             // statusLabel
             // 
             statusLabel.AutoSize = true;
-            statusLabel.Font = new System.Drawing.Font("Arial", 10F);
+            statusLabel.Font = new System.Drawing.Font("Arial", 16F);
             statusLabel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             statusLabel.Location = new System.Drawing.Point(296, 0);
             statusLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             statusLabel.Name = "statusLabel";
-            statusLabel.Size = new System.Drawing.Size(0, 16);
+            statusLabel.Size = new System.Drawing.Size(0, 23);
             statusLabel.TabIndex = 5;
             // 
             // tableLayoutPanel4
@@ -1014,9 +1108,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 63F));
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
             tableLayoutPanel4.Controls.Add(customGroupBox2, 0, 2);
-            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
-            tableLayoutPanel4.Controls.Add(btnOK, 0, 0);
             tableLayoutPanel4.Controls.Add(btnCancel, 2, 0);
+            tableLayoutPanel4.Controls.Add(btnOK, 0, 0);
+            tableLayoutPanel4.Controls.Add(customGroupBox1, 0, 1);
             tableLayoutPanel4.Location = new System.Drawing.Point(4, 26);
             tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -1034,7 +1128,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGroupBox2.Controls.Add(buffer);
             customGroupBox2.Controls.Add(textBoxBuffer);
             customGroupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBox2.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox2.Font = new System.Drawing.Font("Arial", 16F);
             customGroupBox2.Location = new System.Drawing.Point(4, 657);
             customGroupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox2.Name = "customGroupBox2";
@@ -1046,7 +1140,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // buffer
             // 
             buffer.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            buffer.Font = new System.Drawing.Font("Arial", 10F);
+            buffer.Font = new System.Drawing.Font("Arial", 16F);
             buffer.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             buffer.Location = new System.Drawing.Point(4, 16);
             buffer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1073,7 +1167,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel4.SetColumnSpan(customGroupBox1, 3);
             customGroupBox1.Controls.Add(tableLayoutPanel5);
             customGroupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBox1.Font = new System.Drawing.Font("Arial", 16F);
             customGroupBox1.Location = new System.Drawing.Point(4, 50);
             customGroupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBox1.Name = "customGroupBox1";
@@ -1089,6 +1183,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.02843F));
             tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
             tableLayoutPanel5.Controls.Add(textBoxReco, 0, 13);
+            tableLayoutPanel5.Controls.Add(panelOperationButtons, 1, 16);
+            tableLayoutPanel5.Controls.Add(btnMoveDown, 2, 4);
             tableLayoutPanel5.Controls.Add(customLabel4, 0, 8);
             tableLayoutPanel5.Controls.Add(designerComboBox, 0, 20);
             tableLayoutPanel5.Controls.Add(constructorComboBox, 0, 18);
@@ -1106,8 +1202,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.Controls.Add(secTimeTextBox, 0, 16);
             tableLayoutPanel5.Controls.Add(textBoxKomment, 0, 9);
             tableLayoutPanel5.Controls.Add(customLabel5, 0, 11);
+            tableLayoutPanel5.Controls.Add(btnMoveUp, 2, 2);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel5.Location = new System.Drawing.Point(4, 19);
+            tableLayoutPanel5.Location = new System.Drawing.Point(4, 28);
             tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 21;
@@ -1131,8 +1228,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 27F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(268, 579);
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel5.Size = new System.Drawing.Size(268, 570);
             tableLayoutPanel5.TabIndex = 24;
             // 
             // textBoxReco
@@ -1151,12 +1250,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             customLabel4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             customLabel4.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel4, 2);
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.Font = new System.Drawing.Font("Arial", 16F);
             customLabel4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel4.Location = new System.Drawing.Point(4, 221);
+            customLabel4.Location = new System.Drawing.Point(4, 216);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(150, 16);
+            customLabel4.Size = new System.Drawing.Size(148, 27);
             customLabel4.TabIndex = 25;
             customLabel4.Text = "особенности изделия";
             // 
@@ -1175,13 +1274,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             customLabel5.AutoSize = true;
             tableLayoutPanel5.SetColumnSpan(customLabel5, 3);
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel5.Font = new System.Drawing.Font("Arial", 16F);
             customLabel5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customLabel5.Location = new System.Drawing.Point(4, 297);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
             tableLayoutPanel5.SetRowSpan(customLabel5, 2);
-            customLabel5.Size = new System.Drawing.Size(130, 32);
+            customLabel5.Size = new System.Drawing.Size(201, 50);
             customLabel5.TabIndex = 27;
             customLabel5.Text = "рекомендации \r\nдля планирования";
             // 
@@ -1218,15 +1317,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             FormClosing += TeamWork_AdvanceTW_FormClosing;
             Load += TeamWork_AdvanceTW_Load;
             tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlKont).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKont).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlRasz).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewRasz).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_kodProizv).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_podrVyaz).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemLookUpEdit_oborudShv).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlRaskr).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewRaskr).EndInit();
+            panelOperationButtons.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)constructorComboBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)designerComboBox.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)normdopobrBindingSource).EndInit();
@@ -1375,5 +1476,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomLabel customLabel4;
         private CustomLabel customLabel5;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn4;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        
+        // Кнопки управления нумерацией операций
+        private CustomSimpleButton btnMoveUp;
+        private CustomSimpleButton btnMoveDown;
+        private CustomSimpleButton btnRecalculateNumbers;
+        private CustomSimpleButton btnValidateNumbers;
+        private System.Windows.Forms.Panel panelOperationButtons;
     }
 }
+

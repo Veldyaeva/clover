@@ -19,6 +19,8 @@ namespace SewingProduction.Core.Class
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         private UserClass _lastUser;
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
 
         public CustomButton()
         {
@@ -72,32 +74,62 @@ namespace SewingProduction.Core.Class
 
             if (string.IsNullOrEmpty(ObjectName))
             {
-                this.Visible = false;
+                this.VisiblePermission = false;
                 return;
             }
 
             bool hasWrite = user.HasPermission(ObjectName, "Редактор");
             bool hasRead = user.HasPermission(ObjectName, "Просмотр");
 
-            this.Visible = hasRead || hasWrite;
+            this.VisiblePermission = hasRead || hasWrite;
             this.Enabled = hasWrite;
 
-            if (!hasRead && !hasWrite)
-            {
-                this.Visible = false;
-                this.Enabled = false;
-                this.TabStop = false;
-                this.Size = Size.Empty;
-                this.Location = new Point(-10000, -10000);
-            }
+            Debug.WriteLine($"[Доступ Button] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, VisiblePermission={this.VisiblePermission}, Enabled={this.Enabled}");
+        }
 
-            Debug.WriteLine($"[Доступ Button] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                UpdateVisibility();
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                UpdateVisibility();
+            }
+        }
+
+        private void UpdateVisibility()
+        {
+            base.Visible = _visiblePermission && _visibleLogic;
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                UpdateVisibility();
+            }
         }
     }
     public class CustomSimpleButton : SimpleButton, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
 
         public CustomSimpleButton()
         {
@@ -132,6 +164,12 @@ namespace SewingProduction.Core.Class
 
         public void ApplyPermission(UserClass user)
         {
+
+            if (!this.IsHandleCreated)
+            {
+                this.HandleCreated += (_, _) => ApplyPermission(user);
+                return;
+            }
             // Гарантия, что ObjectName задан
             if (string.IsNullOrEmpty(ObjectName))
                 ObjectName = this.Name;
@@ -149,6 +187,64 @@ namespace SewingProduction.Core.Class
             this.Enabled = hasWrite;
 
             Debug.WriteLine($"[Доступ SimpleButton] {ObjectName}: Просмотр={hasRead}, Редактор={hasWrite}, Visible={this.Visible}, Enabled={this.Enabled}");
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                UpdateVisibility();
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                UpdateVisibility();
+            }
+        }
+
+        private void UpdateVisibility()
+        {
+            base.Visible = _visiblePermission && _visibleLogic;
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                UpdateVisibility();
+            }
+        }
+    }
+    /// <summary>
+    /// Кнопка с записью в бд
+    /// </summary>
+    public class CustomActionButton : CustomButton
+    {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string EventDescription { get; set; } = "Нажатие кнопки";
+
+        protected override void OnClick(EventArgs e)
+        {
+            base.OnClick(e);
+            _ = LogActionToDatabase(); // Fire-and-forget
+        }
+
+        private async Task LogActionToDatabase()
+        {
+            if (this.FindForm() is CustomForm form && form.User is UserClass user)
+            {
+                await ActionLogger.Log(user.UserId, "Нажатие на кнопку", NameForm: this.FindForm()?.Name, NameObject: this.Name);
+            }
         }
     }
     public class CustomOkButton : CustomButton

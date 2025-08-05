@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Drawing;
+using System.Configuration;
 
 namespace SewingProduction.Core.Class.Settings
 {
@@ -17,6 +18,8 @@ namespace SewingProduction.Core.Class.Settings
         public bool ShortTabNames { get; set; } = true;
         public bool AllowDuplicateTabs { get; set; } = false;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
+        public string SelectedDatabase { get; set; } = "ace";
+
     }
 
     public class UserSettings
@@ -24,7 +27,6 @@ namespace SewingProduction.Core.Class.Settings
         public List<string> OpenTabs { get; set; } = new();
         public List<string> Logins { get; set; } = new();
         public string SavedPassword { get; set; } = "";
-        public string SelectedDatabase { get; set; } = "ACEConnectionString";
     }
 
     public static class SettingsManager
@@ -192,29 +194,47 @@ namespace SewingProduction.Core.Class.Settings
             if (!Current.Users.ContainsKey(login))
                 Current.Users[login] = new UserSettings();
 
-            Current.Users[login].SelectedDatabase = connectionName;
+            Current.SelectedDatabase = connectionName;
             Save();
         }
 
-        public static string GetSelectedDatabase(string login)
+        public static string GetSelectedDatabase()
         {
-            if (Current.Users.TryGetValue(login, out var settings))
-                return string.IsNullOrEmpty(settings.SelectedDatabase) ? "ace" : settings.SelectedDatabase;
-
-            return "ace";
+            return Current.SelectedDatabase ?? "ace";
         }
-        public static string GetCurrentDatabase()
+        public static string GetCurrentConnectionString()
         {
-            var login = GetLoginHistory().LastOrDefault();
+            var dbKey = GetSelectedDatabase();
 
-            if (!string.IsNullOrEmpty(login))
+            switch (dbKey.ToLower())
             {
-                var db = GetSelectedDatabase(login);
-                if (!string.IsNullOrWhiteSpace(db))
-                    return db;
-            }
+                case "ace":
+                case "aceconnectionstring":
+                    return Properties.Settings.Default.ACEConnectionString;
 
-            return "ace"; // дефолт
+                case "ace_test":
+                case "acetestconnectionstring":
+                    return Properties.Settings.Default.ACEtestConnectionString;
+
+                case "ace_backup":
+                case "acebackupconnectionstring":
+                    return Properties.Settings.Default.ACEbackupConnectionString;
+
+                case "ace_backup_new":
+                case "acebackupnewconnectionstring":
+                    return Properties.Settings.Default.ACEbackupnewConnectionString;
+
+                case "oms":
+                case "omsconnectionstring":
+                    return Properties.Settings.Default.OMSConnectionString;
+
+                case "global":
+                case "globalconnectionstring":
+                    return Properties.Settings.Default.GlobalConnectionString;
+
+                default:
+                    throw new Exception($"Неизвестное имя строки подключения: '{dbKey}'");
+            }
         }
         #endregion
     }

@@ -29,7 +29,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             _user = user;
-            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper("ace")));
+            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
         }
@@ -76,5 +76,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _serviceBrokerForTable2.StopBroker();
         }
 
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            customButton2.Visible = !customButton2.Visible;
+        }
     }
 }

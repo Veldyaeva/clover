@@ -20,6 +20,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -321,8 +322,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
-                _normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
                 //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
@@ -710,27 +711,34 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var selectedData = selectionForm.SelectedRowData;
                         selectedData.IsNew = true;
                         
-                        // Выполняем перенумерацию в зависимости от типа операции
-                        if (isSuboperation)
+                        // Проверяем и исправляем дублирующиеся номера ПЕРЕД добавлением
+                        if (HasDuplicateNumbers(insertOperationN, insertOperationN1))
                         {
-                            if (choice.ConvertMainToSuboperation)
+                            // Если такой номер уже существует, пересчитываем нумерацию
+                            await _logger.LogEventAsync($"Обнаружен дублирующий номер {insertOperationN}.{insertOperationN1}, выполняется пересчет", "AddNewRaszOperation");
+                            
+                            // Выполняем перенумерацию в зависимости от типа операции
+                            if (isSuboperation)
                             {
-                                // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
-                                ConvertMainOperationToSuboperation(insertOperationN);
+                                if (choice.ConvertMainToSuboperation)
+                                {
+                                    // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
+                                    ConvertMainOperationToSuboperation(insertOperationN);
+                                }
+                                else
+                                {
+                                    // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
+                                    RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
+                                }
                             }
                             else
                             {
-                                // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
-                                RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
-                            }
-                        }
-                        else
-                        {
-                            // Для основной операции - перенумеровываем все операции начиная с указанной позиции
-                            int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
-                            if (insertOperationN <= maxN)
-                            {
-                                RenumberOperationsForInsertion(insertOperationN);
+                                // Для основной операции - перенумеровываем все операции начиная с указанной позиции
+                                int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                                if (insertOperationN <= maxN)
+                                {
+                                    RenumberOperationsForInsertion(insertOperationN);
+                                }
                             }
                         }
                         
@@ -774,6 +782,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                 await _logger.LogErrorAsync(ex, "Ошибка при добавлении операции через контекстное меню");
                 MessageBox.Show($"Ошибка при добавлении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        /// <summary>
+        /// Проверяет наличие дублирующихся номеров операций
+        /// </summary>
+        /// <param name="n">Номер операции</param>
+        /// <param name="n1">Номер подоперации</param>
+        /// <returns>True если такой номер уже существует</returns>
+        private bool HasDuplicateNumbers(int n, int n1)
+        {
+            return _normRaszList?.Any(r => r.N == n && r.N1 == n1) ?? false;
         }
 
         /// <summary>
@@ -960,7 +979,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Запускаем отложенный пересчёт Sek только если не идёт начальная загрузка
             if (!_isInitialLoading)
             {
-                _sekDebouncer.Debounce(500, async () =>
+                _sekDebouncer.Debounce(5, async () =>
                 {
                     RecalculateSek();
                 });
@@ -1031,6 +1050,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         this.Text = "Архив+копия";
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
                         _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
@@ -1041,6 +1061,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     case (int)Mode.Edit:
                         this.Text = "Редактировать";
                         await LoadForEdit(_selectedAnnId);
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
@@ -1058,7 +1079,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
-
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
@@ -1196,6 +1216,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         item.IsNew = false;
                         item.IsModified = false;
                         item.nkId = 0;
+                        //item.kod_o = "100";
+
                         _normKontList.Add(item);
                     }
                     _normKontBindingSource.ResetBindings(false);
@@ -1217,6 +1239,27 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Отписываемся от событий при выходе из формы
                 this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
+            }
+        }
+        private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
+        {
+            string imagePath = null;
+            try
+            {
+                imagePath = await _artNormService.GetImage(annId, kod);
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    pictureBox.ImageLocation = imagePath;
+                }
+                else
+                {
+                    pictureBox.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}' для annId = {annId}");
+                pictureBox.Image = null;
             }
         }
         private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
@@ -1397,11 +1440,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz7 = Sum(r => r.KodOb == 26);
                 _currentAnnData.SekVyaz10 = Sum(r => r.KodOb == 37);
                 _currentAnnData.SekVyaz6 = Sum(r => r.KodOb == 38);
-                _currentAnnData.SekVyaz = Sum(r => r.KodOb == 29);
+                _currentAnnData.SekVyaz3 = Sum(r => r.KodOb == 29);
                 _currentAnnData.SekShv = Sum(r => r.KodPodr != 1 && r.KodPodr != 6);
                 _currentAnnData.SekKr = _normRaszList.Where(r => r.KodPodr == 7).Sum(r => r.Sek);
                 _currentAnnData.Sek = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Sek);
-                _currentAnnData.Slogn = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
+                _currentAnnData.Seb = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
                 _currentAnnData.SekVyaz14 = Sum(r => r.KodOb == 62);
                 _currentAnnData.SekVyaz70 = Sum(r => r.KodOb == 55);
                 _currentAnnData.SekVyaz71 = Sum(r => r.KodOb == 59);
@@ -1409,7 +1452,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz62 = Sum(r => r.KodOb == 60);
                 _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
                 _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
-                _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+                _currentAnnData.SekVyaz = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+
+                _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
@@ -1835,6 +1880,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (!hasChoice2) options.Add(choice2);
 
                     string selectedText = null;
+                    string kod_o = null;
 
                     if (options.Count == 2)
                     {
@@ -1842,6 +1888,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (choiceResult == DialogResult.Yes)
                         {
                             selectedText = options[0];
+                            kod_o = "001"; 
                         }
                         else if (choiceResult == DialogResult.No)
                         {
@@ -1849,12 +1896,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                             if (choiceResult2 == DialogResult.Yes)
                             {
                                 selectedText = options[1];
+                                kod_o = "100";
                             }
                         }
                     }
                     else if (options.Count == 1)
                     {
                         selectedText = options[0];
+                        kod_o = "100";
                         MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -1867,6 +1916,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
+                            kod_o = kod_o,
                             text = selectedText,
                             IsNew = true
                         };
@@ -1969,36 +2019,39 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_newAnnId > 0)
                 {
                           RecalculateSek();
-                    var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  //  var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  ////  Thread.Sleep(5000);
 
-                    // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
-                    if (calculatedData != null)
-                    {
-                        _currentAnnData.SekVyazo = calculatedData.sek_O;
-                        _currentAnnData.SekVyaz5 = calculatedData.sek_5;
-                        _currentAnnData.SekVyaz12 = calculatedData.sek_12;
-                        _currentAnnData.SekVyaz7 = calculatedData.sek_7;
-                        _currentAnnData.SekVyaz10 = calculatedData.sek_10;
-                        _currentAnnData.SekVyaz6 = calculatedData.sek_6;
-                        _currentAnnData.SekVyaz = calculatedData.sek_3; // В старом коде sek_vyaz был для kod_ob=29, что в view = sek_3
-                        _currentAnnData.SekVyaz70 = calculatedData.sek_70;
-                        _currentAnnData.SekVyaz71 = calculatedData.sek_71;
-                        _currentAnnData.SekVyaz72 = calculatedData.sek_72;
-                        _currentAnnData.SekVyaz62 = calculatedData.sek_62;
-                        _currentAnnData.SekVyaz14 = calculatedData.sek_14;
-                        _currentAnnData.SekVyaz57 = calculatedData.sek_57;
-                        _currentAnnData.SekVyaz18 = calculatedData.sek_18;
-                        _currentAnnData.SekShv = calculatedData.sek_sh;
-                        _currentAnnData.SekShv1 = calculatedData.sek_sh1;
-                        _currentAnnData.SekKr = calculatedData.sek_kr;
-                        _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
-                        _currentAnnData.Slogn = (int)calculatedData.sb; // 'sb' из view - это себестоимость (slogn)
-                    }
-                    else
-                    {
-                        // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
-                         //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
-                    }
+                  //  // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
+                  //  if (calculatedData != null)
+                  //  {
+                  //      _currentAnnData.SekVyaz = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekVyazo = calculatedData.sek_O;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3;
+                  //      _currentAnnData.SekVyaz5 = calculatedData.sek_5;
+                  //      _currentAnnData.SekVyaz12 = calculatedData.sek_12;
+                  //      _currentAnnData.SekVyaz7 = calculatedData.sek_7;
+                  //      _currentAnnData.SekVyaz10 = calculatedData.sek_10;
+                  //      _currentAnnData.SekVyaz6 = calculatedData.sek_6;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3; 
+                  //      _currentAnnData.SekVyaz70 = calculatedData.sek_70;
+                  //      _currentAnnData.SekVyaz71 = calculatedData.sek_71;
+                  //      _currentAnnData.SekVyaz72 = calculatedData.sek_72;
+                  //      _currentAnnData.SekVyaz62 = calculatedData.sek_62;
+                  //      _currentAnnData.SekVyaz14 = calculatedData.sek_14;
+                  //      _currentAnnData.SekVyaz57 = calculatedData.sek_57;
+                  //      _currentAnnData.SekVyaz18 = calculatedData.sek_18;
+                  //      _currentAnnData.SekShv = calculatedData.sek_shv;
+                  //      //_currentAnnData.SekShv1 = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekKr = calculatedData.sek_kr;
+                  //      _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
+                  //      _currentAnnData.Seb = (int)calculatedData.sb; // 'sb' из view - это себестоимость 
+                  //  }
+                  //  else
+                  //  {
+                  //      // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
+                  //       //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                  //  }
 
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
@@ -2072,7 +2125,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string deleteSql = $"DELETE FROM {tableName} WHERE {keyFieldName} IN @ids";
+                    string deleteSql = $"Update {tableName} SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() where {keyFieldName} in @ids";
                     await connection.ExecuteAsync(deleteSql, new { ids = deletedIds });
                     await _logger.LogEventAsync($"[{itemTypeName}] Удалено записей: {deletedIds.Count}", "SaveListAsync");
                 }
@@ -2503,6 +2556,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice1,
+                        kod_o = "001",
                         IsNew = true
                     };
                     _normKontList.Add(newKont1);
@@ -2514,6 +2568,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         AnnId = _newAnnId,
                         text = choice2,
+                        kod_o = "100",
                         IsNew = true
                     };
                     _normKontList.Add(newKont2);
@@ -2529,6 +2584,292 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
+
+        #region Управление порядком и нумерацией операций
+
+        /// <summary>
+        /// Полный пересчет нумерации всех операций
+        /// </summary>
+        public void RecalculateAllOperationNumbers()
+        {
+            try
+            {
+                if (_normRaszList == null || _normRaszList.Count == 0)
+                    return;
+
+                // Группируем операции по основным номерам (N), сортируем по текущему порядку
+                var operationGroups = _normRaszList
+                    .GroupBy(r => r.N)
+                    .OrderBy(g => g.Key)
+                    .ToList();
+
+                int currentMainNumber = 1;
+
+                foreach (var group in operationGroups)
+                {
+                    var operations = group.OrderBy(r => r.N1).ToList();
+                    
+                    foreach (var operation in operations)
+                    {
+                        operation.N = currentMainNumber;
+                        
+                        // Если это единственная операция в группе, то N1 = 0
+                        if (operations.Count == 1)
+                        {
+                            operation.N1 = 0;
+                        }
+                        else
+                        {
+                            // Если есть несколько операций, нумеруем подоперации с 1
+                            operation.N1 = operations.IndexOf(operation) + 1;
+                        }
+
+                        // Помечаем как измененную, если это не новая запись
+                        if (!operation.IsNew)
+                        {
+                            operation.IsModified = true;
+                        }
+                    }
+
+                    currentMainNumber++;
+                }
+
+                // Обновляем UI
+                _normRaszBindingSource.ResetBindings(false);
+                TWGridHelper.sortGridView(gridViewRasz);
+
+                _logger.LogEventAsync($"Выполнен полный пересчет нумерации для {_normRaszList.Count} операций", "RecalculateAllOperationNumbers");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при пересчете нумерации операций");
+                MessageBox.Show($"Ошибка при пересчете нумерации: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Перемещает выбранную операцию вверх
+        /// </summary>
+        public void MoveOperationUp()
+        {
+            try
+            {
+                var selectedOperation = GetSelectedOperation();
+                if (selectedOperation == null)
+                {
+                    MessageBox.Show("Выберите операцию для перемещения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var allOperations = _normRaszList.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
+                int currentIndex = allOperations.IndexOf(selectedOperation);
+
+                if (currentIndex <= 0)
+                {
+                    MessageBox.Show("Операция уже находится в начале списка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Меняем местами текущую операцию с предыдущей
+                var previousOperation = allOperations[currentIndex - 1];
+                SwapOperationPositions(selectedOperation, previousOperation);
+
+                // Пересчитываем нумерацию
+                RecalculateAllOperationNumbers();
+
+                // Устанавливаем фокус на перемещенную операцию
+                SetFocusToOperation(selectedOperation);
+
+                _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вверх", "MoveOperationUp");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при перемещении операции вверх");
+                MessageBox.Show($"Ошибка при перемещении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Перемещает выбранную операцию вниз
+        /// </summary>
+        public void MoveOperationDown()
+        {
+            try
+            {
+                var selectedOperation = GetSelectedOperation();
+                if (selectedOperation == null)
+                {
+                    MessageBox.Show("Выберите операцию для перемещения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var allOperations = _normRaszList.OrderBy(r => r.N).ThenBy(r => r.N1).ToList();
+                int currentIndex = allOperations.IndexOf(selectedOperation);
+
+                if (currentIndex >= allOperations.Count - 1)
+                {
+                    MessageBox.Show("Операция уже находится в конце списка.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                // Меняем местами текущую операцию со следующей
+                var nextOperation = allOperations[currentIndex + 1];
+                SwapOperationPositions(selectedOperation, nextOperation);
+
+                // Пересчитываем нумерацию
+                RecalculateAllOperationNumbers();
+
+                // Устанавливаем фокус на перемещенную операцию
+                SetFocusToOperation(selectedOperation);
+
+                _logger.LogEventAsync($"Операция {selectedOperation.N}.{selectedOperation.N1} перемещена вниз", "MoveOperationDown");
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при перемещении операции вниз");
+                MessageBox.Show($"Ошибка при перемещении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Получает выбранную операцию из грида
+        /// </summary>
+        /// <returns>Выбранная операция или null</returns>
+        private NormRasz GetSelectedOperation()
+        {
+            if (gridViewRasz.FocusedRowHandle < 0)
+                return null;
+
+            return gridViewRasz.GetRow(gridViewRasz.FocusedRowHandle) as NormRasz;
+        }
+
+        /// <summary>
+        /// Меняет местами две операции в списке (логически)
+        /// </summary>
+        /// <param name="operation1">Первая операция</param>
+        /// <param name="operation2">Вторая операция</param>
+        private void SwapOperationPositions(NormRasz operation1, NormRasz operation2)
+        {
+            // Меняем местами номера операций для логического изменения порядка
+            int tempN = operation1.N;
+            int tempN1 = operation1.N1;
+
+            operation1.N = operation2.N;
+            operation1.N1 = operation2.N1;
+
+            operation2.N = tempN;
+            operation2.N1 = tempN1;
+
+            // Помечаем операции как измененные
+            if (!operation1.IsNew) operation1.IsModified = true;
+            if (!operation2.IsNew) operation2.IsModified = true;
+        }
+
+        /// <summary>
+        /// Устанавливает фокус на указанную операцию в гриде
+        /// </summary>
+        /// <param name="operation">Операция для фокусировки</param>
+        private void SetFocusToOperation(NormRasz operation)
+        {
+            try
+            {
+                int rowIndex = _normRaszList.IndexOf(operation);
+                if (rowIndex >= 0)
+                {
+                    int rowHandle = gridViewRasz.GetRowHandle(rowIndex);
+                    if (gridViewRasz.IsValidRowHandle(rowHandle))
+                    {
+                        gridViewRasz.FocusedRowHandle = rowHandle;
+                        gridViewRasz.MakeRowVisible(rowHandle);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при установке фокуса на операцию");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет и исправляет дублирующиеся номера операций
+        /// </summary>
+        public void ValidateAndFixOperationNumbers()
+        {
+            try
+            {
+                if (_normRaszList == null || _normRaszList.Count == 0)
+                    return;
+
+                var duplicates = _normRaszList
+                    .GroupBy(r => new { r.N, r.N1 })
+                    .Where(g => g.Count() > 1)
+                    .ToList();
+
+                if (duplicates.Any())
+                {
+                    string duplicatesList = string.Join(", ", duplicates.Select(d => $"{d.Key.N}.{d.Key.N1}"));
+                    
+                    var result = MessageBox.Show(
+                        $"Обнаружены дублирующиеся номера операций: {duplicatesList}\n\n" +
+                        "Выполнить автоматический пересчет нумерации?",
+                        "Проблема с нумерацией",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        RecalculateAllOperationNumbers();
+                        MessageBox.Show("Нумерация операций исправлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Проблем с нумерацией не обнаружено.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при проверке нумерации операций");
+                MessageBox.Show($"Ошибка при проверке нумерации: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        #endregion
+
+        #region Обработчики кнопок управления нумерацией операций
+
+        private void btnMoveUp_Click(object sender, EventArgs e)
+        {
+            MoveOperationUp();
+        }
+
+        private void btnMoveDown_Click(object sender, EventArgs e)
+        {
+            MoveOperationDown();
+        }
+
+        private void btnRecalculateNumbers_Click(object sender, EventArgs e)
+        {
+            var result = MessageBox.Show(
+                "Выполнить полный пересчет нумерации всех операций?\n\n" +
+                "Это действие изменит номера всех операций в порядке их текущего расположения.",
+                "Подтверждение пересчета",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                RecalculateAllOperationNumbers();
+                MessageBox.Show("Нумерация операций обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnValidateNumbers_Click(object sender, EventArgs e)
+        {
+            ValidateAndFixOperationNumbers();
+        }
+
+        #endregion
     }
 }
 

@@ -109,6 +109,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             RecoRichTextBox.DataBindings.Clear();
             RecoRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Reco), false);
+
+            textEditMod.DataBindings.Clear();
+            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditArt.DataBindings.Clear();
+            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditSec.DataBindings.Clear();
+            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditCreate.DataBindings.Clear();
+            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private async Task InitializeBindingsAsync()
@@ -145,33 +154,119 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private async Task LoadRelatedData(int annId, CancellationToken ct)
-        {
-            ct.ThrowIfCancellationRequested();
-            _normRaskListTW.BulkLoad(await _artNormService.GetRelatedNormRask(annId, ct));
-            _normKontListTW.BulkLoad(await _artNormService.GetRelatedNormKont(annId, ct));
-            _normRaszListTW.BulkLoad(await _artNormService.GetRelatedNormRasz(annId, ct));
-            ct.ThrowIfCancellationRequested();
 
-            await LoadAndBindFioListsAsync();
-
-            // Сортировка детализирующих таблиц после загрузки данных
-            if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-            if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-            if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-        }
         private async Task LoadRelatedData(int annId)
         {
-            _normRaskListTW.BulkLoad(await _artNormService.GetRelatedNormRask(annId));
-            _normKontListTW.BulkLoad(await _artNormService.GetRelatedNormKont(annId));
-            _normRaszListTW.BulkLoad(await _artNormService.GetRelatedNormRasz(annId));
+            // Загружаем данные асинхронно
+            var normRaskResult = await _artNormService.GetRelatedNormRask(annId);
+            var normKontResult = await _artNormService.GetRelatedNormKont(annId);
+            var normRaszResult = await _artNormService.GetRelatedNormRasz(annId);
+
+            // Обновление UI должно происходить в UI потоке
+            if (this.InvokeRequired)
+            {
+                await this.InvokeAsync(() =>
+                {
+                    _normRaskListTW.BulkLoad(normRaskResult);
+                    _normKontListTW.BulkLoad(normKontResult);
+                    _normRaszListTW.BulkLoad(normRaszResult);
+                });
+            }
+            else
+            {
+                _normRaskListTW.BulkLoad(normRaskResult);
+                _normKontListTW.BulkLoad(normKontResult);
+                _normRaszListTW.BulkLoad(normRaszResult);
+            }
 
             await LoadAndBindFioListsAsync();
 
-            // Сортировка детализирующих таблиц после загрузки данных
-            if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-            if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-            if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+            // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
+            if (this.InvokeRequired)
+            {
+                await this.InvokeAsync(() =>
+                {
+                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                    if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                    if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                });
+            }
+            else
+            {
+                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+            }
+        }
+
+        /// <summary>
+        /// Загружает связанные данные из normraszview (без CancellationToken, но с возможностью отмены через внешний токен)
+        /// </summary>
+        private async Task LoadRelatedDataFromView(int annId, CancellationToken ct)
+        {
+            ct.ThrowIfCancellationRequested();
+            
+            // Загружаем данные в фоновом потоке
+            var dataLoadTask = Task.Run(async () =>
+            {
+                ct.ThrowIfCancellationRequested();
+                
+                // Параллельная загрузка данных из БД
+                Task<List<NormRask>> normRaskTask = _artNormService.GetRelatedNormRask(annId);
+                Task<List<NormKont>> normKontTask = _artNormService.GetRelatedNormKont(annId);
+                Task<List<NormRasz>> normRaszTask = _artNormService.GetRelatedNormRasz(annId); // Этот метод использует normraszview
+                
+                ct.ThrowIfCancellationRequested();
+                
+                var normRaskResult = await normRaskTask;
+                var normKontResult = await normKontTask;
+                var normRaszResult = await normRaszTask;
+                
+                ct.ThrowIfCancellationRequested();
+                
+                return new { normRaskResult, normKontResult, normRaszResult };
+            }, ct);
+
+            var data = await dataLoadTask;
+            ct.ThrowIfCancellationRequested();
+
+            // Обновление UI должно происходить в UI потоке
+            if (this.InvokeRequired)
+            {
+                await this.InvokeAsync(() =>
+                {
+                    _normRaskListTW.BulkLoad(data.normRaskResult);
+                    _normKontListTW.BulkLoad(data.normKontResult);
+                    _normRaszListTW.BulkLoad(data.normRaszResult); // Данные из normraszview
+                });
+            }
+            else
+            {
+                _normRaskListTW.BulkLoad(data.normRaskResult);
+                _normKontListTW.BulkLoad(data.normKontResult);
+                _normRaszListTW.BulkLoad(data.normRaszResult); // Данные из normraszview
+            }
+
+            ct.ThrowIfCancellationRequested();
+
+            await LoadAndBindFioListsAsync();
+
+            // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
+            if (this.InvokeRequired)
+            {
+                await this.InvokeAsync(() =>
+                {
+                    if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                    if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                    if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                });
+            }
+            else
+            {
+                if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
+                if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+            }
         }
         private async Task UpdateUnboundButtonStatusBasedOnNZP()
         {
@@ -259,11 +354,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             ArtNormN newItem = new ArtNormN
             {
-                Kod = "0000000",
+         //       Kod = "0000000",
                 grup = "",
                 Articul = "",
                 Mod = "",
                 SekShv = 0,
+                SekVyaz3 = 0,
                 SekVyaz5 = 0,
                 SekVyaz6 = 0,
                 SekVyaz7 = 0,
@@ -272,9 +368,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                 SekVyazo = 0,
                 SekVyaz = 0,
                 Sek = 0,
+                st = 0,
+                Seb = '0',
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,
+                dateAdd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
                 dateUpdate = null,//DateTime.MinValue,
@@ -345,6 +444,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         ANNgridView.EndUpdate();
                     }
                 }
+
+                // Запускаем асинхронное обновление секунд для созданного/отредактированного РТ
+                _ = Task.Run(async () =>
+                {
+                    await _secondsUpdateManager.StartSecondsUpdateAsync(newItem.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                    // Очищаем статус через 3 секунды после завершения
+                    await Task.Delay(3000);
+                    ClearSecondsUpdateStatus();
+                });
             }
             else
             {
@@ -596,6 +704,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
+            
+            // Запускаем асинхронное обновление секунд для новой записи
+            _ = Task.Run(async () =>
+            {
+                await _secondsUpdateManager.StartSecondsUpdateAsync(newRow.AnnID, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                // Очищаем статус через 3 секунды после завершения
+                await Task.Delay(3000);
+                ClearSecondsUpdateStatus();
+            });
         }
         private async Task HandleCancelledEdit(ArtNormN selectedItem, ArtNormN newRow, int? oldStatus)
         {

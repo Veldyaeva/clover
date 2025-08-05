@@ -225,7 +225,7 @@
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="6.0.1" />
-    <PackageReference Include="Z.Dapper.Plus" Version="7.6.0" />
+    <PackageReference Include="Z.Dapper.Plus" Version="7.6.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -254,7 +254,6 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
-    <Folder Include="Features\Sprav\Models\" />
     <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 

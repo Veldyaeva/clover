@@ -11,6 +11,7 @@ using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.Sprav;
 
 namespace SewingProduction
 {
@@ -119,7 +120,7 @@ namespace SewingProduction
         }
         private void тарифыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenForm(new EditTarif(_user), sender);
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -127,8 +128,14 @@ namespace SewingProduction
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
+            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), sender);
         }
+        #region Виды браков пряжи
+        private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+        }
+        #endregion
         #endregion
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -191,7 +198,7 @@ namespace SewingProduction
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
-            { 
+            {
                 string fullText = e.Page.MdiChild.Text;
                 bool shortNames = SettingsManager.GetShortTabNames(); // новая настройка
 
@@ -206,7 +213,7 @@ namespace SewingProduction
                     xtraTabbedMdiManager1.TabPageWidth = 0;
                 }
 
-                    e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
+                e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
             }
         }
 
@@ -235,5 +242,6 @@ namespace SewingProduction
             var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.Show();
         }
+
     }
 }

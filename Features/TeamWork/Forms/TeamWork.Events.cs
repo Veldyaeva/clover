@@ -283,7 +283,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
                 await Task.Delay(200, token);
                 
-                var tRelated = LoadRelatedData(annId, token);
+                var tRelated = LoadRelatedDataFromView(annId, token);
                 var tNzp = LoadNZP(annId, token);
                 await Task.WhenAll(tRelated, tNzp);
             }
@@ -402,6 +402,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                         await LoadRelatedData(selectedAnnId);
 
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(selectedAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
+
                         // Отображаем сообщение об успешном редактировании
                         MessageBox.Show(
                             "Запись успешно отредактирована.",
@@ -419,7 +428,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
 
-        private async Task EditWd_Internal2(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        private async Task EditWd_Internal2(GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false, bool Editing = false)
         {
             try
             {
@@ -439,7 +448,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var selectedAnn = gridView.GetRow(rowNumber) as ArtNormN;
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
-         //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
+                    //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
                     selectedArtNormN = selectedAnn.CloneProperties();
                 }
                 else
@@ -452,13 +461,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (selectedArtNormN == null) return;
                 }
 
-                // Проверяем статус "актуальный" и наличие даты обновления
+                if (!Editing) //если можно редактировать
+                //Проверяем статус "актуальный" и наличие даты обновления
                 if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
                 {
                     MessageBox.Show(
-                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.", 
-                        "Ограничение редактирования", 
-                        MessageBoxButtons.OK, 
+                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                        "Ограничение редактирования",
+                        MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
                     return;
                 }
@@ -523,6 +533,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                         {
                             await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки 
                         }
+
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        if (updatedArtNormN != null && updatedArtNormN.AnnID > 0)
+                        {
+                            _ = Task.Run(async () =>
+                            {
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView,
+                                    forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
+                                // Очищаем статус через 3 секунды после завершения
+                                await Task.Delay(3000);
+                                ClearSecondsUpdateStatus();
+                            });
+                        }
                     }
                 }
             }
@@ -577,7 +600,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Основные поля будут заполнены в TeamWork_AdvanceTW из InitialArtData
                     // Здесь устанавливаем только необходимые для вставки и начального отображения значения
-                    Kod = "0000000", // Или другой плейсхолдер, если нужно
+                 //   Kod = "0000000", // Или другой плейсхолдер, если нужно
                     Status = (int)Status.Preliminary, // Новая запись всегда предварительная
                     StatusText = StatusHelper.GetStatusText((int)Status.Preliminary),
                     dateCreate = DateTime.Now,
@@ -677,8 +700,18 @@ namespace SewingProduction.Features.TeamWork.Forms
                                 }
                             }
 
-                            await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
-                            MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
+                        
+                        // Запускаем асинхронное обновление секунд для созданной/обновленной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
+                        
+                        MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else // DialogResult.Cancel или другое

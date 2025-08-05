@@ -244,7 +244,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll("spVidProizv", "", "Справочник Вид произв");
+            SpravForAll f = new SpravForAll("spVidProizv", "", "", "Справочник Вид произв");
             f.MdiParent = this.MdiParent;
             f.Show();
         }

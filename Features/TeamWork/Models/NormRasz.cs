@@ -55,8 +55,8 @@ namespace SewingProduction.Models
         private string _obor;
         public string Obor
         {
-            get => _obor;
-            set => _obor = value?.Length > 35 ? value.Substring(0, 35) : value;
+            get => TextOb;
+            set => TextOb = value?.Length > 35 ? value.Substring(0, 35) : value;
         }
 
         private string _spec;
@@ -134,6 +134,9 @@ namespace SewingProduction.Models
             KodPodr = source.KodPodr;
             KodOb = source.KodOb;
             Seb = source.Seb;
+            // Служебные поля не копируются - они должны быть актуальными для каждой записи:
+            // nrDateAdd и nrCompAdd устанавливаются автоматически при INSERT (DEFAULT)
+            // nrDateDel и nrCompDel устанавливаются только при пометке на удаление
             IsNew = source.IsNew;
             IsModified = source.IsModified;
         }

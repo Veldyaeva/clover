@@ -174,7 +174,7 @@ namespace SewingProduction.form
         // КНОПКА "Добавить"
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            editFio f = new editFio(_user, "АВТО", "Добавление сотрудника");
+            EditFio f = new EditFio(_user, "АВТО", "Добавление сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 // Обновляем таблицу
@@ -192,7 +192,7 @@ namespace SewingProduction.form
             }
             string computerName = Environment.MachineName;
 
-            editFio f = new editFio(_user, idFIO, "Редактирование сотрудника");
+            EditFio f = new EditFio(_user, idFIO, "Редактирование сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 flagRed = true;
@@ -419,7 +419,7 @@ namespace SewingProduction.form
                 }
             }
             // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll(nameSprav, columns, nameSpravRus,_user);
+            SpravForAll f = new SpravForAll(nameSprav, columns, "", nameSpravRus, user: _user);
             f.MdiParent = this.MdiParent;
             f.Show();
         }

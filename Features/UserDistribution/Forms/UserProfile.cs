@@ -16,6 +16,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Services;
 using SewingProduction.Features.UserDistribution.Models;
+using System.Diagnostics;
 
 
 namespace SewingProduction.Features.UserDistribution.Forms
@@ -48,7 +49,10 @@ namespace SewingProduction.Features.UserDistribution.Forms
             }
             _user.ExitUser();
             // Перезапуск приложения с авторизацией
-            Application.Restart();
+            //Application.Restart();
+            string exePath = Application.ExecutablePath;
+            Process.Start(exePath, "--restart");
+            Application.Exit();
         }
 
         private void customButtonAllRpofile_Click(object sender, EventArgs e)
