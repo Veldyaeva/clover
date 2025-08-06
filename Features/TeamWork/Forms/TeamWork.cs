@@ -13,8 +13,10 @@ using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraSpreadsheet.Import.Xls;
+using SewingProduction.Core;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.TeamWork;
+using SewingProduction.Features.TeamWork.Services;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.Helpers;
@@ -80,7 +82,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
-
+        //private readonly HybridLogger _logger;
+        private readonly ITeamWorkDataService _teamWorkDataService;
         private CancellationTokenSource _loadCts = new CancellationTokenSource();
 
 
@@ -97,7 +100,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
             _secondsUpdateManager = new SecondsUpdateManager(_artNormService, _logger);
+            _teamWorkDataService = ServiceLocator.GetService<ITeamWorkDataService>();
+            //LoadUserRoles();
+            //CheckFormAccess();
 
+            //InitializeDataSources();
+            //LoadMyDataTable();
+            //LoadMyDataAnns();
+            //LoadMyDataART();
+            //LoadWorkDivisions();
+
+            //ConfigureGridColumns();
+            //SetupEventHandlers();
             // Инициализация основных BindingList и BindingSource
             _bindingList = new BindingList<ArtNormN>();
             _bindingSource = new BindingSource { DataSource = _bindingList };

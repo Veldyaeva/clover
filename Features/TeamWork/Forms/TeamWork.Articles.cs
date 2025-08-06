@@ -152,7 +152,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                int kod = GetCurrentKodFromDataSource();
+                int kod = await GetCurrentKodFromDataSourceAsync();
+                if (kod == 0)
+                {
+                    MessageBox.Show("Не удалось получить Kod из источника данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAllCheckBox.Checked);
 
                 _myDataAnnList.BulkLoad(loadedData);
@@ -172,26 +177,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// Получает значение Kod из текущего элемента источника данных _myDataArtBindingSource.
         /// </summary>
         /// <returns>Значение Kod или 0, если текущий элемент не найден или Kod не может быть преобразован в число.</returns>
-        private int GetCurrentKodFromDataSource()
+        private async Task<int> GetCurrentKodFromDataSourceAsync()
         {
-            if (_myDataArtBindingSource != null && _myDataArtBindingSource.Current != null)
-            {
-                var currentItem = _myDataArtBindingSource.Current as MyDataART;
-                if (currentItem != null)
-                {
-                    if (int.TryParse(currentItem.kodd_rt, out int kodValue))
-                    {
-                        return kodValue;
-                    }
-                    else
-                    {
-                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.kodd_rt}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
-                    }
-                }
-            }
-            return 0;
+            var currentArtData = _teamWorkDataService.GetCurrentArtData(_myDataArtBindingSource);
+            return await _teamWorkDataService.GetKodFromArtDataAsync(currentArtData, "GetCurrentKodFromDataSource");
         }
-
         /// <summary>
         /// Загружает список разделений труда (РТ) для указанного артикула или кода.
         /// </summary>
