@@ -1,4 +1,5 @@
 ﻿using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraGrid.Views.Base;
 using SewingProduction.Core.Class;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -202,7 +203,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlKont.Name = "gridControlKont";
             gridControlKont.Size = new System.Drawing.Size(1220, 251);
             gridControlKont.TabIndex = 8;
-            gridControlKont.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKont });
+            gridControlKont.ViewCollection.AddRange(new BaseView[] { gridViewKont });
             // 
             // gridViewKont
             // 
@@ -309,7 +310,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRasz.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemLookUpEdit_kodProizv, repositoryItemLookUpEdit_podrVyaz, repositoryItemLookUpEdit_oborudShv });
             gridControlRasz.Size = new System.Drawing.Size(1480, 519);
             gridControlRasz.TabIndex = 7;
-            gridControlRasz.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRasz });
+            gridControlRasz.ViewCollection.AddRange(new BaseView[] { gridViewRasz });
             // 
             // gridViewRasz
             // 
@@ -586,7 +587,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaskr.Name = "gridControlRaskr";
             gridControlRaskr.Size = new System.Drawing.Size(1220, 209);
             gridControlRaskr.TabIndex = 7;
-            gridControlRaskr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskr });
+            gridControlRaskr.ViewCollection.AddRange(new BaseView[] { gridViewRaskr });
             // 
             // gridViewRaskr
             // 
