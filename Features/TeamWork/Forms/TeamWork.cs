@@ -320,7 +320,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
-        private void customActionButton1_Click(object sender, EventArgs e)
+        private void ButtonEditOnlyAdv_Click(object sender, EventArgs e)
         {
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
         }
@@ -665,7 +665,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 2:
                     //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
                     if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
-                        EditWd_Internal2(ANNgridView, _bindingList, _bindingSource);
+                        if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
+                            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
+                        else
+                            EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
                     break;
                 case 4:
                     //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
