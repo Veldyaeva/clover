@@ -1780,7 +1780,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonEditOnlyAdv.TabIndex = 12;
             ButtonEditOnlyAdv.Text = "редактировать РТ";
             ButtonEditOnlyAdv.UseVisualStyleBackColor = false;
-            ButtonEditOnlyAdv.Click += customActionButton1_Click;
+            ButtonEditOnlyAdv.Click += ButtonEditOnlyAdv_Click;
             // 
             // ButtonEditWd
             // 
