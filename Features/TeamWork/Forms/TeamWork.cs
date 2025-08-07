@@ -40,6 +40,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork : CustomForm
     {
+        // Статическое поле для отслеживания открытых экземпляров TeamWork_AdvanceTW
+        private static readonly List<TeamWork_AdvanceTW> _openAdvanceForms = new List<TeamWork_AdvanceTW>();
+        private static readonly object _lockObject = new object();
+
         private readonly DatabaseHelper _dbHelper;
         private readonly DbService _dbService;
         private readonly ArtNormService _artNormService;
@@ -542,6 +546,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
+
+                    // Подписываемся на событие изменения фильтра поиска
+                    ANNgridView.ColumnFilterChanged += ANNgridView_ActiveFilterChanged;
+
+                    // Подписываемся на событие изменения текста поиска
+                    //   ANNgridView.FindFilterTextChanged += ANNgridView_FindFilterTextChanged;
+
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
@@ -574,7 +585,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            
+
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
@@ -619,6 +630,102 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
+
+        /// <summary>
+        /// Обрабатывает изменение фильтра поиска в ANNgridView
+        /// Автоматически переходит на первую строку результатов поиска
+        /// </summary>
+        private void ANNgridView_ActiveFilterChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                var gridView = sender as GridView;
+                if (gridView == null) return;
+
+                // Проверяем, есть ли активный фильтр поиска
+                if (gridView.ActiveFilterCriteria != null)
+                {
+                    // Небольшая задержка для завершения применения фильтра
+                    //gridView.BeginInvoke(new Action(() =>
+                    //{
+                    try
+                    {
+                        // Проверяем, есть ли видимые строки после применения фильтра
+                        if (gridView.DataRowCount > 0)
+                        {
+                            // Переходим на первую строку результатов поиска
+                            int firstVisibleRow = gridView.GetVisibleRowHandle(0);
+                            if (gridView.IsValidRowHandle(firstVisibleRow))
+                            {
+                                gridView.FocusedRowHandle = firstVisibleRow;
+                                gridView.MakeRowVisible(firstVisibleRow);
+
+                                // Логируем действие
+                                _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска. Всего строк: {gridView.DataRowCount}", "ANNgridView_ActiveFilterChanged");
+                                ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска");
+                    }
+                    // }));
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка в обработчике изменения фильтра поиска");
+            }
+        }
+
+        ///// <summary>
+        ///// Обрабатывает изменение текста поиска в ANNgridView
+        ///// Автоматически переходит на первую строку результатов поиска
+        ///// </summary>
+        //private void ANNgridView_FindFilterTextChanged(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        var gridView = sender as GridView;
+        //        if (gridView == null) return;
+
+        //        // Проверяем, есть ли текст поиска
+        //        if (!string.IsNullOrEmpty(gridView.FindFilterText))
+        //        {
+        //            // Небольшая задержка для завершения применения фильтра поиска
+        //            gridView.BeginInvoke(new Action(() =>
+        //            {
+        //                try
+        //                {
+        //                    // Проверяем, есть ли видимые строки после применения поиска
+        //                    if (gridView.DataRowCount > 0)
+        //                    {
+        //                        // Переходим на первую строку результатов поиска
+        //                        int firstVisibleRow = gridView.GetVisibleRowHandle(0);
+        //                        if (gridView.IsValidRowHandle(firstVisibleRow))
+        //                        {
+        //                            gridView.FocusedRowHandle = firstVisibleRow;
+        //                            gridView.MakeRowVisible(firstVisibleRow);
+
+        //                            // Логируем действие
+        //                            _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска по тексту '{gridView.FindFilterText}'. Всего строк: {gridView.DataRowCount}", "ANNgridView_FindFilterTextChanged");
+        //                        }
+        //                    }
+        //                }
+        //                catch (Exception ex)
+        //                {
+        //                    _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска по тексту");
+        //                }
+        //            }));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        _logger?.LogErrorAsync(ex, "Ошибка в обработчике изменения текста поиска");
+        //    }
+        //}
+
         private async void customButton12_Click(object sender, EventArgs e)
         {// customButton12_Click_Internal(sender, e);
         }
@@ -634,6 +741,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private async void TeamWork_FormClosing(object sender, FormClosingEventArgs e)
         {
+            // Отписываемся от событий
+            if (ANNgridView != null)
+            {
+                ANNgridView.FocusedRowChanged -= ANNgridView_FocusedRowChanged;
+                ANNgridView.ColumnFilterChanged -= ANNgridView_ActiveFilterChanged;
+                //ANNgridView.FindFilterTextChanged -= ANNgridView_FindFilterTextChanged;
+            }
+
             _secondsUpdateManager?.CancelUpdate();
             _secondsUpdateManager?.Dispose();
             SaveGridSettings();
@@ -924,7 +1039,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
                     if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
                         if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
-                           await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
+                            await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
                         else
                             await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
                     break;
@@ -942,7 +1057,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
                     if (PrintButton.Enabled && PrintButton.Visible)
-                    // Отчет технологической схемы разделения труда
+                        // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
@@ -1862,6 +1977,102 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Проверяет, есть ли уже открытые экземпляры TeamWork_AdvanceTW
+        /// </summary>
+        /// <returns>true если есть открытые экземпляры, иначе false</returns>
+        private static bool HasOpenAdvanceForms()
+        {
+            lock (_lockObject)
+            {
+                // Очищаем закрытые формы из списка
+                _openAdvanceForms.RemoveAll(form => form == null || form.IsDisposed);
+                return _openAdvanceForms.Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Добавляет экземпляр TeamWork_AdvanceTW в список открытых форм
+        /// </summary>
+        /// <param name="form">Форма для добавления</param>
+        private static void AddOpenAdvanceForm(TeamWork_AdvanceTW form)
+        {
+            lock (_lockObject)
+            {
+                if (form != null && !form.IsDisposed && !_openAdvanceForms.Contains(form))
+                {
+                    _openAdvanceForms.Add(form);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Удаляет экземпляр TeamWork_AdvanceTW из списка открытых форм
+        /// </summary>
+        /// <param name="form">Форма для удаления</param>
+        private static void RemoveOpenAdvanceForm(TeamWork_AdvanceTW form)
+        {
+            lock (_lockObject)
+            {
+                _openAdvanceForms.Remove(form);
+            }
+        }
+
+        /// <summary>
+        /// Открывает TeamWork_AdvanceTW не в модальном режиме с проверкой на уже открытые экземпляры
+        /// </summary>
+        /// <param name="bufferWorkDivision">ID из буфера</param>
+        /// <param name="mode">Режим работы</param>
+        /// <param name="newId">ID новой записи</param>
+        /// <param name="oldId">ID исходной записи</param>
+        /// <param name="sourceAnnIdToCopyDetailsFrom">ID источника для копирования деталей</param>
+        /// <param name="initialArtData">Начальные данные артикула</param>
+        /// <param name="duplicateAnnData">Данные для дублирования</param>
+        /// <returns>Созданная форма или существующая форма если уже есть открытые экземпляры</returns>
+        public TeamWork_AdvanceTW OpenAdvanceFormNonModal(int bufferWorkDivision, int mode, int? newId = null, int? oldId = null, int? sourceAnnIdToCopyDetailsFrom = null, MyDataART initialArtData = null, ArtNormN duplicateAnnData = null)
+        {
+            // Проверяем, есть ли уже открытые экземпляры
+            if (HasOpenAdvanceForms())
+            {
+                // Получаем первый открытый экземпляр
+                TeamWork_AdvanceTW existingForm = null;
+                lock (_lockObject)
+                {
+                    existingForm = _openAdvanceForms.FirstOrDefault(form => form != null && !form.IsDisposed);
+                }
+
+                if (existingForm != null)
+                {
+                    MessageBox.Show("Уже открыта форма для работы с разделением труда. Пожалуйста, закройте её перед открытием новой.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Приводим форму на передний план
+                    existingForm.BringToFront();
+                    existingForm.Activate();
+                    return existingForm;
+                }
+            }
+
+            // Создаем новую форму
+            var advanceForm = new TeamWork_AdvanceTW(bufferWorkDivision, mode, newId, oldId, sourceAnnIdToCopyDetailsFrom, initialArtData, duplicateAnnData);
+
+            // Добавляем в список открытых форм
+            AddOpenAdvanceForm(advanceForm);
+
+            // Подписываемся на событие закрытия формы
+            advanceForm.FormClosed += (sender, e) =>
+            {
+                RemoveOpenAdvanceForm(advanceForm);
+            };
+
+            // Открываем форму не в модальном режиме
+            advanceForm.Show();
+
+            return advanceForm;
+        }
+
+        private void gridControl_wdToBind_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public static class DemoHelper
     {

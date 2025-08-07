@@ -1379,9 +1379,10 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     await this.InvokeAsync(() =>
                     {
-                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy)
+                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision)
                         {
                             annData.dateCreate = DateTime.Now;
+                            annData.dateAdd = DateTime.Now;
                             annData.dateUpdate = null;
                         }
                         _currentAnnData = annData.Clone();                // Обновляем текущую модель
@@ -1988,7 +1989,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Сохранение данных и закрытие формы
         private async void btnOK_Click(object sender, EventArgs e)
         {
-            await ProcessSaveData(true);
+            bool success = await ProcessSaveData(true);
+            if (success)
+            {
+                _okPressed = true;
+                DialogResult = DialogResult.OK;
+                this.Close();
+            }
         }
 
         private async Task SaveAnnDataAsync()
@@ -2426,28 +2433,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            if (_originalAnnData != null)
-            {
-                _currentAnnData.CopyPropertiesFrom(_originalAnnData);
-                bindingSource1.ResetBindings(false);
-            }
-
-            if (_originalNormRaszList != null)
-            {
-                _normRaszList.BulkLoad(_originalNormRaszList);
-            }
-            if (_originalNormRaskList != null)
-            {
-                _normRaskList.BulkLoad(_originalNormRaskList);
-            }
-            if (_originalNormKontList != null)
-            {
-                _normKontList.BulkLoad(_originalNormKontList);
-            }
-
-            _hasUnsavedChanges = false;
-
-            MessageBox.Show("Изменения успешно отменены и восстановлены до исходного состояния.", "Отмена изменений", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DialogResult = DialogResult.Cancel;
+            this.Close();
         }
 
 
@@ -2566,6 +2553,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
+
+        // Свойство для отслеживания результата в не-модальном режиме
+        public DialogResult DialogResult { get; private set; } = DialogResult.Cancel;
     }
 }
 

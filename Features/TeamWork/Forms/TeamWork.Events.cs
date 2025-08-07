@@ -363,13 +363,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (selectedItem == null) return;
 
                 int selectedAnnId = selectedItem.AnnID;
-                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
-                   bufferId,
-                    (int)Mode.Edit, oldId: selectedAnnId))
+                
+                // Используем новый метод для открытия формы не в модальном режиме
+                var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Edit, oldId: selectedAnnId);
+                
+                if (teamWorkAdvanceTW == null)
                 {
-                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+                    // Форма уже открыта или произошла ошибка
+                    return;
+                }
 
-                    if (result == DialogResult.OK)
+                // Подписываемся на событие закрытия формы для обработки результата
+                teamWorkAdvanceTW.FormClosed += async (s, args) =>
+                {
+                    if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
                     {
                         var updatedItem = teamWorkAdvanceTW.CreatedAnn;
 
@@ -418,7 +425,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
                     }
-                }
+                };
             }
             catch (Exception ex)
             {
@@ -473,10 +480,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
                 var updatedArtNormN = new ArtNormN();
-                using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
+                
+                // Используем новый метод для открытия формы не в модальном режиме
+                var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Edit, oldId: annId);
+                
+                if (teamWorkAdvanceTW == null)
                 {
-                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
-                    if (result == DialogResult.OK)
+                    // Форма уже открыта или произошла ошибка
+                    return;
+                }
+
+                // Подписываемся на событие закрытия формы для обработки результата
+                teamWorkAdvanceTW.FormClosed += async (s, args) =>
+                {
+                    if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
                     {
                         updatedArtNormN = teamWorkAdvanceTW.CreatedAnn;
                         if (updatedArtNormN == null) return;
@@ -498,13 +515,13 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                         if (index >= 0)
                             list[index] = updatedDataAnn;
-                        // 4. НАХОДИМ И ЗАМЕНЯЕМ СТАРЫЙ ОБЪЕКТ В ИСТОЧНИКЕ ДАННЫХ (ЭТО КЛЮЧЕВОЙ ШАГ)
+                        // 4. НАХОДИМ И ЗАМЕНЯЕМ СТАРЫЙ ОБЪЕКТ В ИСТОЧНИКЕ ДАННЫХ
                         // Находим индекс старой записи в списке _bindingList
                         int i = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == updatedArtNormN.AnnID));
                         if (i >= 0)
                         {
-                            // Заменяем старый объект на новый. Это гарантирует, что все поля,
-                            // включая `Sek`, будут обновлены в источнике данных.
+                            // Заменяем старый объект на новый. Это гарантирует, что все поля
+                            // будут обновлены в источнике данных.
                             _bindingList[i] = updatedArtNormN;
                         }
                         bindingSource.ResetBindings(false);
@@ -547,7 +564,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             });
                         }
                     }
-                }
+                };
             }
 
             catch (Exception ex)

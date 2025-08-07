@@ -2688,6 +2688,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl_wdToBind.Size = new System.Drawing.Size(622, 362);
             gridControl_wdToBind.TabIndex = 6;
             gridControl_wdToBind.ViewCollection.AddRange(new BaseView[] { gridView_wdToBind });
+            gridControl_wdToBind.Click += gridControl_wdToBind_Click;
             // 
             // gridView_wdToBind
             // 
