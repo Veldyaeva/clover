@@ -179,6 +179,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     // Только фильтр статуса
                     ANNgridView.ActiveFilterCriteria = statusCriteria;
+                    
+                    // Автоматически переходим на первую строку результатов фильтрации
+                    //ANNgridView.BeginInvoke(new Action(() =>
+                    //{
+                        try
+                        {
+                            if (ANNgridView.DataRowCount > 0)
+                            {
+                                int firstVisibleRow = ANNgridView.GetVisibleRowHandle(0);
+                                if (ANNgridView.IsValidRowHandle(firstVisibleRow))
+                                {
+                                    ANNgridView.FocusedRowHandle = firstVisibleRow;
+                                    ANNgridView.MakeRowVisible(firstVisibleRow);
+                                    
+                                    // Логируем действие
+                                    _logger?.LogEventAsync($"Автоматический переход на первую строку после применения фильтра. Всего строк: {ANNgridView.DataRowCount}", "filterTable");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку после применения фильтра");
+                        }
+                  //  }));
                 }
                 else
                 {
@@ -271,6 +295,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 view.BeginUpdate();
                 view.ActiveFilterString = filter;
                 view.EndUpdate();
+                
+                // Автоматически переходим на первую строку результатов фильтрации
+                //view.BeginInvoke(new Action(() =>
+                //{
+                    try
+                    {
+                        if (view.DataRowCount > 0)
+                        {
+                            int firstVisibleRow = view.GetVisibleRowHandle(0);
+                            if (view.IsValidRowHandle(firstVisibleRow))
+                            {
+                                view.FocusedRowHandle = firstVisibleRow;
+                                view.MakeRowVisible(firstVisibleRow);
+                                
+                                // Логируем действие
+                                _logger?.LogEventAsync($"Автоматический переход на первую строку после применения фильтра по annId {_annId}. Всего строк: {view.DataRowCount}", "LoadGridControlData");
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку после применения фильтра по annId");
+                    }
+              //  }));
             }
             catch (Exception ex)
             {
