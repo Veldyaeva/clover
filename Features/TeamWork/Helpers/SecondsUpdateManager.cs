@@ -148,11 +148,19 @@ namespace SewingProduction.Helpers
             return oldData.Sek != newData.Sek ||
                    oldData.SekShv != newData.SekShv ||
                    oldData.SekVyaz != newData.SekVyaz ||
+                   oldData.SekVyaz3 != newData.SekVyaz3 ||
                    oldData.SekVyaz5 != newData.SekVyaz5 ||
                    oldData.SekVyaz6 != newData.SekVyaz6 ||
                    oldData.SekVyaz7 != newData.SekVyaz7 ||
                    oldData.SekVyaz10 != newData.SekVyaz10 ||
                    oldData.SekVyaz12 != newData.SekVyaz12 ||
+                   oldData.SekVyaz14 != newData.SekVyaz14 ||
+                   oldData.SekVyaz70 != newData.SekVyaz70 ||
+                   oldData.SekVyaz71 != newData.SekVyaz71 ||
+                   oldData.SekVyaz72 != newData.SekVyaz72 ||
+                   oldData.SekVyaz62 != newData.SekVyaz62 ||
+                   oldData.SekVyaz57 != newData.SekVyaz57 ||
+                   oldData.SekVyaz18 != newData.SekVyaz18 ||
                    oldData.SekVyazo != newData.SekVyazo ||
                    oldData.dateUpdate != newData.dateUpdate ||
                    Math.Abs(oldData.Seb - newData.Seb) > 0.01m; // для decimal

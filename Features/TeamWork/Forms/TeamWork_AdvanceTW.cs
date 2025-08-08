@@ -322,8 +322,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
-                _normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
                 //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
@@ -961,7 +961,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // Запускаем отложенный пересчёт Sek только если не идёт начальная загрузка
             if (!_isInitialLoading)
             {
-                _sekDebouncer.Debounce(500, async () =>
+                _sekDebouncer.Debounce(5, async () =>
                 {
                     RecalculateSek();
                 });
@@ -1422,11 +1422,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz7 = Sum(r => r.KodOb == 26);
                 _currentAnnData.SekVyaz10 = Sum(r => r.KodOb == 37);
                 _currentAnnData.SekVyaz6 = Sum(r => r.KodOb == 38);
-                _currentAnnData.SekVyaz = Sum(r => r.KodOb == 29);
+                _currentAnnData.SekVyaz3 = Sum(r => r.KodOb == 29);
                 _currentAnnData.SekShv = Sum(r => r.KodPodr != 1 && r.KodPodr != 6);
                 _currentAnnData.SekKr = _normRaszList.Where(r => r.KodPodr == 7).Sum(r => r.Sek);
                 _currentAnnData.Sek = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Sek);
-                _currentAnnData.Slogn = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
+                _currentAnnData.Seb = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
                 _currentAnnData.SekVyaz14 = Sum(r => r.KodOb == 62);
                 _currentAnnData.SekVyaz70 = Sum(r => r.KodOb == 55);
                 _currentAnnData.SekVyaz71 = Sum(r => r.KodOb == 59);
@@ -1435,6 +1435,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
                 _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
                 _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+
+                _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
@@ -1999,37 +2001,39 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (_newAnnId > 0)
                 {
                           RecalculateSek();
-                    var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
-                  //  Thread.Sleep(5000);
+                  //  var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  ////  Thread.Sleep(5000);
 
-                    // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
-                    if (calculatedData != null)
-                    {
-                        _currentAnnData.SekVyazo = calculatedData.sek_O;
-                        _currentAnnData.SekVyaz5 = calculatedData.sek_5;
-                        _currentAnnData.SekVyaz12 = calculatedData.sek_12;
-                        _currentAnnData.SekVyaz7 = calculatedData.sek_7;
-                        _currentAnnData.SekVyaz10 = calculatedData.sek_10;
-                        _currentAnnData.SekVyaz6 = calculatedData.sek_6;
-                        _currentAnnData.SekVyaz = calculatedData.sek_3; // В старом коде sek_vyaz был для kod_ob=29, что в view = sek_3
-                        _currentAnnData.SekVyaz70 = calculatedData.sek_70;
-                        _currentAnnData.SekVyaz71 = calculatedData.sek_71;
-                        _currentAnnData.SekVyaz72 = calculatedData.sek_72;
-                        _currentAnnData.SekVyaz62 = calculatedData.sek_62;
-                        _currentAnnData.SekVyaz14 = calculatedData.sek_14;
-                        _currentAnnData.SekVyaz57 = calculatedData.sek_57;
-                        _currentAnnData.SekVyaz18 = calculatedData.sek_18;
-                        _currentAnnData.SekShv = calculatedData.sek_sh;
-                        _currentAnnData.SekShv1 = calculatedData.sek_sh1;
-                        _currentAnnData.SekKr = calculatedData.sek_kr;
-                        _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
-                        _currentAnnData.Slogn = (int)calculatedData.sb; // 'sb' из view - это себестоимость (slogn)
-                    }
-                    else
-                    {
-                        // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
-                         //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
-                    }
+                  //  // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
+                  //  if (calculatedData != null)
+                  //  {
+                  //      _currentAnnData.SekVyaz = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekVyazo = calculatedData.sek_O;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3;
+                  //      _currentAnnData.SekVyaz5 = calculatedData.sek_5;
+                  //      _currentAnnData.SekVyaz12 = calculatedData.sek_12;
+                  //      _currentAnnData.SekVyaz7 = calculatedData.sek_7;
+                  //      _currentAnnData.SekVyaz10 = calculatedData.sek_10;
+                  //      _currentAnnData.SekVyaz6 = calculatedData.sek_6;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3; 
+                  //      _currentAnnData.SekVyaz70 = calculatedData.sek_70;
+                  //      _currentAnnData.SekVyaz71 = calculatedData.sek_71;
+                  //      _currentAnnData.SekVyaz72 = calculatedData.sek_72;
+                  //      _currentAnnData.SekVyaz62 = calculatedData.sek_62;
+                  //      _currentAnnData.SekVyaz14 = calculatedData.sek_14;
+                  //      _currentAnnData.SekVyaz57 = calculatedData.sek_57;
+                  //      _currentAnnData.SekVyaz18 = calculatedData.sek_18;
+                  //      _currentAnnData.SekShv = calculatedData.sek_shv;
+                  //      //_currentAnnData.SekShv1 = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekKr = calculatedData.sek_kr;
+                  //      _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
+                  //      _currentAnnData.Seb = (int)calculatedData.sb; // 'sb' из view - это себестоимость 
+                  //  }
+                  //  else
+                  //  {
+                  //      // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
+                  //       //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                  //  }
 
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);

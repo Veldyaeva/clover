@@ -21,7 +21,7 @@ namespace SewingProduction.Models
         public int sek_14 { get; set; }
         public int sek_57 { get; set; }
         public int sek_18 { get; set; }
-        public int sek_sh { get; set; }
+        public int sek_shv { get; set; }
         public int sek_sh1 { get; set; }
         public int sek_kr { get; set; }
         public decimal sb { get; set; } 

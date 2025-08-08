@@ -79,13 +79,21 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
+                    // Если нет выбранных строк в gridView_wdToBind - очищаем все связанные данные
                     _normRaszListArticles.Clear();
                     _normRaszBindingSourceArticles.ResetBindings(false);
+                    await ClearWdToBindRelatedData();
+                }
+
+                // Проверяем gridView_unboundArts и очищаем данные если нет выбранных строк
+                if (this.gridView_unboundArts == null || gridView_unboundArts.RowCount == 0 || gridView_unboundArts.FocusedRowHandle < 0)
+                {
+                    await ClearUnboundArtsRelatedData();
                 }
             }
             finally
             {
-                // Подписываемся обратно ПОСЛЕ всей загрузки
+                // Подписываемся на события ПОСЛЕ загрузки
                 if (this.gridView_unboundArts != null)
                 {
                     this.gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
@@ -273,7 +281,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;// gridView_wdToBind; 
-            if (view == null) return;
+            if (view == null) 
+            {
+                await ClearWdToBindRelatedData();
+                return;
+            }
 
             // Отменяем предыдущие операции загрузки для Articles tab
             var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
@@ -285,15 +297,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
 
+                // Если строка не выбрана или AnnID невалидный - очищаем данные
+                if (e.FocusedRowHandle < 0 || annId <= 0)
+                {
+                    await ClearWdToBindRelatedData();
+                    return;
+                }
+
                 //1.Сначала загружаем изображение(быстрая операция)
-                if (annId >0)
-                {
-                        LoadGridImage(pictureBox2, annId: annId);
-                }
-                else
-                {
-                    //await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
-                }
+                LoadGridImage(pictureBox2, annId: annId);
 
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
@@ -312,6 +324,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в gridViewWdToBind (RowHandle: {e.FocusedRowHandle})");
+                // В случае ошибки очищаем данные
+                await ClearWdToBindRelatedData();
             }
         }
 
@@ -556,7 +570,18 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var gv_unbound_Arts = sender as GridView;
-            if (gv_unbound_Arts == null || e.FocusedRowHandle < 0) return;
+            if (gv_unbound_Arts == null) 
+            {
+                await ClearUnboundArtsRelatedData();
+                return;
+            }
+
+            // Если строка не выбрана - очищаем все связанные данные
+            if (e.FocusedRowHandle < 0)
+            {
+                await ClearUnboundArtsRelatedData();
+                return;
+            }
 
             try
             {
@@ -567,7 +592,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (!int.TryParse(kod, out int kodInt))
                 {
                     await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                   // return;
+                    kodInt = 0; // Устанавливаем 0 для дальнейшей обработки
+                }
+
+                // Если нет артикула и кода - очищаем данные
+                if (string.IsNullOrEmpty(articul) && kodInt <= 0)
+                {
+                    await ClearUnboundArtsRelatedData();
+                    return;
                 }
 
                 // Загружаем данные параллельно
@@ -629,25 +661,117 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 _normRaszBindingSourceArticles.ResetBindings(false);
 
-                // Загружаем изображение, если есть код
+                // Загружаем или очищаем изображение
                 if (kodInt > 0)
                 {
                     await Task.Run(() => LoadGridImage(pictureBox3, kod: kodInt));
+                }
+                else
+                {
+                    // Очищаем картинку если нет кода
+                    if (pictureBox3.InvokeRequired)
+                    {
+                        pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox3.Image = null;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка в gridView_unboundArts_FocusedRowChanged_Internal");
                 // В случае ошибки очищаем данные
-                if (_myDataAnnBindingSource != null)
+                await ClearUnboundArtsRelatedData();
+            }
+        }
+
+        /// <summary>
+        /// Очищает все связанные данные для неувязанных артикулов
+        /// </summary>
+        private async Task ClearUnboundArtsRelatedData()
+        {
+            try
+            {
+                // Очищаем список РТ
+                if (_myDataAnnBindingSource != null && _myDataAnnList != null)
                 {
                     _myDataAnnList.Clear();
                     _myDataAnnBindingSource.ResetBindings(false);
                 }
-                gridView_wdToBind.RefreshData();
-                gridControl_wdToBind.RefreshDataSource();
-                _normRaszListArticles.Clear(); // Clear in case of error
-                _normRaszBindingSourceArticles.ResetBindings(false);
+
+                // Обновляем UI
+                gridView_wdToBind?.RefreshData();
+                gridControl_wdToBind?.RefreshDataSource();
+
+                // Очищаем норм расценки
+                if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
+                {
+                    _normRaszListArticles.Clear();
+                    _normRaszBindingSourceArticles.ResetBindings(false);
+                }
+
+                // Очищаем картинку
+                if (pictureBox3 != null)
+                {
+                    if (pictureBox3.InvokeRequired)
+                    {
+                        pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox3.Image = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при очистке связанных данных для неувязанных артикулов");
+            }
+        }
+
+        /// <summary>
+        /// Очищает все связанные данные для РТ увязки
+        /// </summary>
+        private async Task ClearWdToBindRelatedData()
+        {
+            try
+            {
+                // Очищаем картинку
+                if (pictureBox2 != null)
+                {
+                    if (pictureBox2.InvokeRequired)
+                    {
+                        pictureBox2.Invoke((MethodInvoker)(() => pictureBox2.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox2.Image = null;
+                    }
+                }
+
+                // Очищаем норм расценки
+                if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
+                {
+                    _normRaszListArticles.Clear();
+                    _normRaszBindingSourceArticles.ResetBindings(false);
+                }
+
+                // Очищаем НЗП
+                if (_nzpListArt != null && _nzpByKoddRtSourceArt != null)
+                {
+                    _nzpListArt.Clear();
+                    _nzpByKoddRtSourceArt.ResetBindings(false);
+                }
+
+                // Обновляем UI
+                gridControlNZP?.RefreshDataSource();
+                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при очистке связанных данных для РТ увязки");
             }
         }
     }
