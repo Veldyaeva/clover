@@ -109,6 +109,15 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             RecoRichTextBox.DataBindings.Clear();
             RecoRichTextBox.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Reco), false);
+
+            textEditMod.DataBindings.Clear();
+            textEditMod.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditArt.DataBindings.Clear();
+            textEditArt.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditSec.DataBindings.Clear();
+            textEditSec.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
+            textEditCreate.DataBindings.Clear();
+            textEditCreate.DataBindings.Add("Text", _bindingSource, nameof(ArtNormN.dateCreate), true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
         private async Task InitializeBindingsAsync()
@@ -345,11 +354,12 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             ArtNormN newItem = new ArtNormN
             {
-                Kod = "0000000",
+         //       Kod = "0000000",
                 grup = "",
                 Articul = "",
                 Mod = "",
                 SekShv = 0,
+                SekVyaz3 = 0,
                 SekVyaz5 = 0,
                 SekVyaz6 = 0,
                 SekVyaz7 = 0,
@@ -358,6 +368,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                 SekVyazo = 0,
                 SekVyaz = 0,
                 Sek = 0,
+                st = 0,
+                Seb = '0',
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,

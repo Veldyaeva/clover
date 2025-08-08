@@ -266,11 +266,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                 LoadGridSettings();
                 await LoadWorkDivisions();
 
-                TWGridHelper.sortGridView(ANNgridView);
+                //TWGridHelper.sortGridView(ANNgridView);
 
-                kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
-                podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
-                oborudShvList = await _dbService.GetListAsync<OborudShvModel>("select ko_ob_all as kod_ob, text_ob from oborud_shv_ob", null);
+                //kodProizvList = await _dbService.GetListAsync<KodProizvModel>("select kod_proizv, text_proizv from kod_proizv", null);
+                //podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("select kod_vyaz, text_vyaz from podr_vyaz", null);
+                //oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
             }
             catch (Exception ex)
             {
@@ -303,7 +303,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                     break;
 
                 case "xtraTabPageArticles":
+                    // Загружаем данные для вкладки артикулов
                     await CurrentWorks_Load();
+                    break;
+                    
+                default:
+                    // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
                     break;
             }
         }
