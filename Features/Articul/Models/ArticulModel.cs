@@ -19,7 +19,7 @@ namespace SewingProduction.Features.Articul.Models
         private string _sost;
         private string _po = " ";
         private int _pr_po = 0;
-        private string _kod_v;
+        private int _kod_v;
         private string _kle;
 
         public int kod
@@ -58,10 +58,10 @@ namespace SewingProduction.Features.Articul.Models
             set { if (_sost != value) { _sost = value; OnPropertyChanged(nameof(sost)); } }
         }
 
-        public string kodV
+        public int kod_v
         {
             get => _kod_v;
-            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(kodV)); } }
+            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(kod_v)); } }
         }
 
         public string kle
