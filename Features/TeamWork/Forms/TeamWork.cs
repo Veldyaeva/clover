@@ -1475,6 +1475,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        private void customSimpleButton1_Click_1(object sender, EventArgs e)
+        {
+            int rowNumber = ANNgridView.FocusedRowHandle;
+
+            NormRaszForEconomist report1 = new NormRaszForEconomist();
+            //report1.RequestParameters = false;
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+
+            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+
+        }
     }
     public static class DemoHelper
     {
