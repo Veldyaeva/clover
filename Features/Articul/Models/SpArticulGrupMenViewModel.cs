@@ -14,36 +14,23 @@ namespace SewingProduction.Features.Articul.Models
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
 
-        private string _po = " ";
-        private int _prPo = 0;
-
         [NotMapped]
-        public string po
+        public string po = " ";
+
+        private bool _pr_po;
+        public bool pr_po
         {
-            get => _po;
+            get => _pr_po;
             set
             {
-                if (_po != value)
+                if (_pr_po != value)
                 {
-                    _po = value;
-                    OnPropertyChanged(nameof(po));
+                    _pr_po = value;
+                    OnPropertyChanged(nameof(pr_po));
                 }
             }
         }
-
-        [NotMapped]
-        public int prPo
-        {
-            get => _prPo;
-            set
-            {
-                if (_prPo != value)
-                {
-                    _prPo = value;
-                    OnPropertyChanged(nameof(prPo));
-                }
-            }
-        }
+        public int TabIndex { get; set; } = -1;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

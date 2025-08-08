@@ -126,7 +126,7 @@
             xtraTabPageZP.Controls.Add(tableLayoutPanel1);
             xtraTabPageZP.Name = "xtraTabPageZP";
             xtraTabPageZP.Size = new System.Drawing.Size(1119, 661);
-            xtraTabPageZP.Text = "Зарплата";
+            xtraTabPageZP.Text = "Тарифы";
             // 
             // tableLayoutPanel1
             // 
