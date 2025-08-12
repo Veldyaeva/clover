@@ -685,6 +685,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
+                case 11:
+                    if (printButtonPlus.Enabled && printButtonPlus.Visible)
+                        // Отчет технологической схемы разделения труда
+                        printButtonPlus_Click(null, null);
+                    break;
+
             }
         }
 
@@ -1473,7 +1479,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        private void customSimpleButton1_Click_1(object sender, EventArgs e)
+        private void printButtonPlus_Click(object sender, EventArgs e)
         {
             int rowNumber = ANNgridView.FocusedRowHandle;
 
