@@ -411,6 +411,7 @@
             this.xrTableRow27 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell83 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell84 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabbedMdiManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable3)).BeginInit();
@@ -837,6 +838,7 @@
             // GroupHeader2
             // 
             this.GroupHeader2.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel1,
             this.xrTable3,
             this.xrTable2,
             this.xrLabel17});
@@ -985,14 +987,14 @@
             // 
             // xrTable2
             // 
-            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(264.4528F, 129.2501F);
+            this.xrTable2.LocationFloat = new DevExpress.Utils.PointFloat(186.7225F, 129.2501F);
             this.xrTable2.Name = "xrTable2";
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow12,
             this.xrTableRow5,
             this.xrTableRow7});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(521.5748F, 75F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(599.305F, 75F);
             // 
             // xrTableRow12
             // 
@@ -1010,7 +1012,7 @@
             this.xrTableCell23.Name = "xrTableCell23";
             this.xrTableCell23.StylePriority.UseFont = false;
             this.xrTableCell23.Text = "Разработал: технолог";
-            this.xrTableCell23.Weight = 0.86202630038746608D;
+            this.xrTableCell23.Weight = 0.77215133026572369D;
             // 
             // xrTableCell41
             // 
@@ -1020,7 +1022,7 @@
             this.xrTableCell41.Name = "xrTableCell41";
             this.xrTableCell41.StylePriority.UseBorders = false;
             this.xrTableCell41.StylePriority.UseFont = false;
-            this.xrTableCell41.Weight = 0.53440140634790989D;
+            this.xrTableCell41.Weight = 0.42113538867383205D;
             // 
             // xrTableCell24
             // 
@@ -1029,7 +1031,7 @@
             this.xrTableCell24.Name = "xrTableCell24";
             this.xrTableCell24.StylePriority.UseFont = false;
             this.xrTableCell24.Text = "(Чиркова Т.А.)";
-            this.xrTableCell24.Weight = 0.60357229326462414D;
+            this.xrTableCell24.Weight = 0.80671328106044438D;
             // 
             // xrTableRow5
             // 
@@ -2682,6 +2684,20 @@
             this.xrTableCell84.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell84.Weight = 1.3944987463901037D;
             // 
+            // xrLabel1
+            // 
+            this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[annID]")});
+            this.xrLabel1.ForeColor = System.Drawing.Color.DarkGray;
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0.9999593F, 196.0001F);
+            this.xrLabel1.Multiline = true;
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel1.StylePriority.UseForeColor = false;
+            this.xrLabel1.Text = "xrLabel1";
+            this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            // 
             // NormRaszTest
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -2879,5 +2895,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell83;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell84;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell37;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
     }
 }
