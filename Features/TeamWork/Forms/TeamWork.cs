@@ -282,8 +282,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (ANNgridView != null)
                 {
                     ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
-                    //  ANNgridView.CellValueChanged += ANNgridView_CellValueChanged;
-                    //   ANNgridView.CellValueChanging += ANNgridView_CellValueChanging;
                     if (ANNgridView.IsFocusedView && ANNgridView.RowCount > 0 && ANNgridView.FocusedRowHandle >= 0) // Проверка перед вызовом
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));

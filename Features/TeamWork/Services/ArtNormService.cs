@@ -115,7 +115,7 @@ namespace SewingProduction.Services
         public async Task<List<ArtNormN>> GetArtNormData()
         {
             string query = @" select 
-                   AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
+                   AnnID, kod, grup, RTRIM(LTRIM(articul)) articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
                     slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
                     annDateDel, annCompDel, annDateAdd, annCompAdd, arh
