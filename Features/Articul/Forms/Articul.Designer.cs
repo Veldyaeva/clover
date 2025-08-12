@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using SewingProduction.Core.Class;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.Articul
 {
     partial class Articul
     {

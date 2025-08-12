@@ -12,6 +12,7 @@ using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Articul;
 
 namespace SewingProduction
 {
