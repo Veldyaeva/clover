@@ -312,5 +312,10 @@ namespace SewingProduction.Features.Sprav
                 await _dbService.UpdateFieldAsync("sp_ras_rabot", e.Column.FieldName, e.Value, "id_kod_o", model.id_kod_o);
             }
         }
+
+        private void customGridControlTR_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

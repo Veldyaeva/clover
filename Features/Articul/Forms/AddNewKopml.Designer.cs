@@ -48,6 +48,7 @@
             ArticulKompl = new DevExpress.XtraGrid.Columns.GridColumn();
             ModKompl = new DevExpress.XtraGrid.Columns.GridColumn();
             RazmKompl = new DevExpress.XtraGrid.Columns.GridColumn();
+            KodKompl = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customLabelGrupKompl = new CustomLabel();
@@ -64,6 +65,11 @@
             ArticulSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             ModSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             RazmSelected = new DevExpress.XtraGrid.Columns.GridColumn();
+            tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelRazmText = new CustomLabel();
+            customLabelRazm = new CustomLabel();
+            customLabelKodText = new CustomLabel();
+            customLabelKod = new CustomLabel();
             customCheckBoxVerified = new CustomCheckBox();
             customTabControlKomplRazm = new CustomTabControl();
             customGridControlKomplArt = new Core.Class.CustomGridControl();
@@ -88,9 +94,9 @@
             frm_s1 = new DevExpress.XtraGrid.Columns.GridColumn();
             cle1 = new DevExpress.XtraGrid.Columns.GridColumn();
             kod_v1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            grup1 = new DevExpress.XtraGrid.Columns.GridColumn();
             customNumericUpDownValueTab = new CustomNumericUpDown();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonForm = new Core.Class.CustomButton();
             customLabelModText = new CustomLabel();
             customLabelArtText = new CustomLabel();
             customLabelMod = new CustomLabel();
@@ -108,6 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplSelected).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplSelected).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditDelRazm).BeginInit();
+            tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customTabControlKomplRazm).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).BeginInit();
@@ -159,7 +166,7 @@
             gridViewKompl.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKompl.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKompl.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewKompl.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { GrupKompl, ArticulKompl, ModKompl, RazmKompl });
+            gridViewKompl.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { GrupKompl, ArticulKompl, ModKompl, RazmKompl, KodKompl });
             gridViewKompl.GridControl = customGridControlKompl;
             gridViewKompl.Name = "gridViewKompl";
             gridViewKompl.OptionsBehavior.Editable = false;
@@ -196,6 +203,12 @@
             RazmKompl.Name = "RazmKompl";
             RazmKompl.Visible = true;
             RazmKompl.VisibleIndex = 3;
+            // 
+            // KodKompl
+            // 
+            KodKompl.Caption = "KodKompl";
+            KodKompl.FieldName = "kod_k";
+            KodKompl.Name = "KodKompl";
             // 
             // tableLayoutPanel1
             // 
@@ -291,14 +304,14 @@
             tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             tableLayoutPanel4.Controls.Add(customButtonDelKomplSelected, 1, 0);
             tableLayoutPanel4.Controls.Add(customGridControlKomplSelected, 0, 0);
-            tableLayoutPanel4.Controls.Add(customCheckBoxVerified, 0, 1);
+            tableLayoutPanel4.Controls.Add(tableLayoutPanel3, 0, 1);
             tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel4.Location = new System.Drawing.Point(629, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel4, 2);
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91F));
-            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel4.Size = new System.Drawing.Size(488, 332);
             tableLayoutPanel4.TabIndex = 6;
             // 
@@ -326,7 +339,7 @@
             customGridControlKomplSelected.MainView = gridViewKomplSelected;
             customGridControlKomplSelected.Name = "customGridControlKomplSelected";
             customGridControlKomplSelected.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditDelRazm });
-            customGridControlKomplSelected.Size = new System.Drawing.Size(457, 296);
+            customGridControlKomplSelected.Size = new System.Drawing.Size(457, 259);
             customGridControlKomplSelected.TabIndex = 2;
             customGridControlKomplSelected.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSelected });
             // 
@@ -407,15 +420,87 @@
             RazmSelected.VisibleIndex = 5;
             RazmSelected.Width = 99;
             // 
+            // tableLayoutPanel3
+            // 
+            tableLayoutPanel3.ColumnCount = 2;
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel3.Controls.Add(customLabelRazmText, 1, 1);
+            tableLayoutPanel3.Controls.Add(customLabelRazm, 0, 1);
+            tableLayoutPanel3.Controls.Add(customLabelKodText, 1, 0);
+            tableLayoutPanel3.Controls.Add(customLabelKod, 0, 0);
+            tableLayoutPanel3.Controls.Add(customCheckBoxVerified, 1, 2);
+            tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 268);
+            tableLayoutPanel3.Name = "tableLayoutPanel3";
+            tableLayoutPanel3.RowCount = 3;
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel3.Size = new System.Drawing.Size(457, 61);
+            tableLayoutPanel3.TabIndex = 6;
+            // 
+            // customLabelRazmText
+            // 
+            customLabelRazmText.AutoSize = true;
+            customLabelRazmText.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelRazmText.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazmText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelRazmText.Location = new System.Drawing.Point(231, 20);
+            customLabelRazmText.Name = "customLabelRazmText";
+            customLabelRazmText.Size = new System.Drawing.Size(223, 20);
+            customLabelRazmText.TabIndex = 7;
+            customLabelRazmText.Text = "Размер_Текст";
+            customLabelRazmText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelRazm
+            // 
+            customLabelRazm.AutoSize = true;
+            customLabelRazm.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelRazm.Location = new System.Drawing.Point(3, 20);
+            customLabelRazm.Name = "customLabelRazm";
+            customLabelRazm.Size = new System.Drawing.Size(222, 20);
+            customLabelRazm.TabIndex = 6;
+            customLabelRazm.Text = "Размер комплекта:";
+            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // customLabelKodText
+            // 
+            customLabelKodText.AutoSize = true;
+            customLabelKodText.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelKodText.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKodText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelKodText.Location = new System.Drawing.Point(231, 0);
+            customLabelKodText.Name = "customLabelKodText";
+            customLabelKodText.Size = new System.Drawing.Size(223, 20);
+            customLabelKodText.TabIndex = 5;
+            customLabelKodText.Text = "Код_Текст";
+            customLabelKodText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelKod
+            // 
+            customLabelKod.AutoSize = true;
+            customLabelKod.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelKod.Location = new System.Drawing.Point(3, 0);
+            customLabelKod.Name = "customLabelKod";
+            customLabelKod.Size = new System.Drawing.Size(222, 20);
+            customLabelKod.TabIndex = 4;
+            customLabelKod.Text = "Код комплекта:";
+            customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // customCheckBoxVerified
             // 
             customCheckBoxVerified.Dock = System.Windows.Forms.DockStyle.Fill;
             customCheckBoxVerified.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxVerified.Location = new System.Drawing.Point(3, 305);
+            customCheckBoxVerified.Location = new System.Drawing.Point(231, 43);
             customCheckBoxVerified.Name = "customCheckBoxVerified";
             customCheckBoxVerified.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            customCheckBoxVerified.Size = new System.Drawing.Size(457, 24);
+            customCheckBoxVerified.Size = new System.Drawing.Size(223, 15);
             customCheckBoxVerified.TabIndex = 3;
             customCheckBoxVerified.Text = "Все проверено, готово к комплектовке";
             customCheckBoxVerified.UseVisualStyleBackColor = true;
@@ -582,11 +667,12 @@
             gridViewKomplRazm.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplRazm.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewKomplRazm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ArticulRazm, ModRazm, KodKRazm, RazmRazm, frm_s1, cle1, kod_v1 });
+            gridViewKomplRazm.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { ArticulRazm, ModRazm, KodKRazm, RazmRazm, frm_s1, cle1, kod_v1, grup1 });
             gridViewKomplRazm.GridControl = customGridControlKomplRazm;
             gridViewKomplRazm.Name = "gridViewKomplRazm";
             gridViewKomplRazm.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKomplRazm.OptionsView.ShowGroupPanel = false;
+            gridViewKomplRazm.FocusedRowChanged += gridViewKomplRazm_FocusedRowChanged;
             // 
             // ArticulRazm
             // 
@@ -638,6 +724,12 @@
             kod_v1.FieldName = "kod_v";
             kod_v1.Name = "kod_v1";
             // 
+            // grup1
+            // 
+            grup1.Caption = "grup";
+            grup1.FieldName = "grup";
+            grup1.Name = "grup1";
+            // 
             // customNumericUpDownValueTab
             // 
             customNumericUpDownValueTab.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
@@ -656,7 +748,6 @@
             tableLayoutPanel6.ColumnCount = 2;
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            tableLayoutPanel6.Controls.Add(customButtonForm, 0, 0);
             tableLayoutPanel6.Controls.Add(customLabelModText, 1, 3);
             tableLayoutPanel6.Controls.Add(customLabelArtText, 1, 2);
             tableLayoutPanel6.Controls.Add(customLabelMod, 0, 3);
@@ -673,21 +764,6 @@
             tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel6.Size = new System.Drawing.Size(307, 163);
             tableLayoutPanel6.TabIndex = 10;
-            // 
-            // customButtonForm
-            // 
-            customButtonForm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            tableLayoutPanel6.SetColumnSpan(customButtonForm, 2);
-            customButtonForm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonForm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonForm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonForm.Location = new System.Drawing.Point(3, 3);
-            customButtonForm.Name = "customButtonForm";
-            customButtonForm.Size = new System.Drawing.Size(301, 26);
-            customButtonForm.TabIndex = 4;
-            customButtonForm.Text = "Формировать новый комплект";
-            customButtonForm.UseVisualStyleBackColor = false;
-            customButtonForm.Click += customButtonForm_Click;
             // 
             // customLabelModText
             // 
@@ -818,6 +894,8 @@
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplSelected).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplSelected).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEditDelRazm).EndInit();
+            tableLayoutPanel3.ResumeLayout(false);
+            tableLayoutPanel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customTabControlKomplRazm).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKomplArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplArt).EndInit();
@@ -863,7 +941,6 @@
         private CustomLabel customLabelGrupKompl;
         private CustomLabel customLabelKolTab;
         private CustomLabel customLabelGrup;
-        private Core.Class.CustomButton customButtonForm;
         private CustomNumericUpDown customNumericUpDownValueTab;
         private DevExpress.XtraGrid.Columns.GridColumn Grup;
         private DevExpress.XtraGrid.Columns.GridColumn Articul;
@@ -894,5 +971,12 @@
         private DevExpress.XtraGrid.Columns.GridColumn cle1;
         private DevExpress.XtraGrid.Columns.GridColumn kod_v;
         private DevExpress.XtraGrid.Columns.GridColumn kod_v1;
+        private DevExpress.XtraGrid.Columns.GridColumn KodKompl;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private CustomLabel customLabelRazmText;
+        private CustomLabel customLabelRazm;
+        private CustomLabel customLabelKodText;
+        private CustomLabel customLabelKod;
+        private DevExpress.XtraGrid.Columns.GridColumn grup1;
     }
 }

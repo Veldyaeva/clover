@@ -723,6 +723,7 @@
             customGridControlTR.TabIndex = 8;
             customGridControlTR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTR, gridView1 });
             customGridControlTR.Load += customGridControlTR_Load;
+            customGridControlTR.Click += customGridControlTR_Click;
             // 
             // gridViewTR
             // 
@@ -961,9 +962,9 @@
             customCheckBoxByh.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customCheckBoxByh.Location = new System.Drawing.Point(141, 2);
             customCheckBoxByh.Name = "customCheckBoxByh";
-            customCheckBoxByh.Size = new System.Drawing.Size(106, 20);
+            customCheckBoxByh.Size = new System.Drawing.Size(113, 20);
             customCheckBoxByh.TabIndex = 1;
-            customCheckBoxByh.Text = "2 - Бухгалер";
+            customCheckBoxByh.Text = "2 - Бухгалтер";
             customCheckBoxByh.UseVisualStyleBackColor = true;
             customCheckBoxByh.CheckedChanged += Filter;
             // 

@@ -18,7 +18,7 @@ using DevExpress.XtraGrid.Views.Grid.ViewInfo;
 using SewingProduction.Helpers;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.Articul
 {
     /// <summary>
     /// Добавление артикула
@@ -195,61 +195,5 @@ namespace SewingProduction.form
             }
         }
     }
-    public class ArtNewDataService
-    {
-        private readonly DatabaseHelper _dbHelper;
-        public ArtNewDataService(DatabaseHelper dbHelper)
-        {
-            _dbHelper = dbHelper;
-        }
-        #region art_new2024
-        public DataTable GetGostUst()
-        {
-            string query = "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,TRIM(opi_gost) AS 'Описание' FROM gost WHERE ust=1";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvPictAndArticulGrup()
-        {
-            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetViewTovarMarka()
-        {
-            string query = "SELECT TRIM(kodsp) AS kle, TRIM(m_naimen) AS 'Наименование' FROM dbo.view_tovar_marka WHERE tmOwn = 1 ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetViewGrupMen()
-        {
-            string query = "SELECT men_id, TRIM(name) AS 'Наименование' FROM view_grup_men WHERE men_id >0 order by men_id ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvRazmerAndGostRazmer()
-        {
-            string query = "SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetTovarCatDynsign()
-        {
-            string query = "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvPictAndArticulGrupWhere(string opiGost)
-        {
-            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
-            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art" + condition;
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvRazmerAndGostRazmerWhere(string opiGost)
-        {
-            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
-            string query = $"SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost" + condition;
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetSpArticulKod(string kodSQL)
-        {
-            string query = $"SELECT kod, articul, razm AS 'Размер', kle, mod, grup, ag_id, kod_tnved, CAST(grupp AS INT) AS men_id FROM sp_articul WHERE kod = '@kodSQL'";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kodSQL", kodSQL } });
-        }
-        #endregion
-    }
+    
 }

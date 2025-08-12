@@ -26,10 +26,30 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetListAsync<KomplModel>(query, new { });
         }
 
-        public async Task<KomplModel> GetByKodAsync(int kod_k)
+        public async Task<List<KomplModel>> GetByArticulAsync(string articul_k)
         {
-            string query = "SELECT * FROM kompl WHERE kod_k = @kod_k";
-            return await _dbService.GetEntityAsync<KomplModel>(query, new { kod_k });
+            string query = @"
+                SELECT
+                    kod_k,
+                    grup_k,
+                    articul_k,
+                    mod_k,
+                    razm_k,
+                    sost_k,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod1),  ''))  AS kod1,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod2),  ''))  AS kod2,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod3),  ''))  AS kod3,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod4),  ''))  AS kod4,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod5),  ''))  AS kod5,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod6),  ''))  AS kod6,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod7),  ''))  AS kod7,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod8),  ''))  AS kod8,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod9),  ''))  AS kod9,
+                    TRY_CONVERT(int, NULLIF(TRIM(kod10), ''))  AS kod10,
+                    compName
+                FROM kompl
+                WHERE articul_k = @articul_k";
+            return await _dbService.GetListAsync<KomplModel>(query, new { articul_k });
         }
 
         public async Task SaveAsync(KomplModel model)
