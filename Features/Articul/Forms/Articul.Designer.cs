@@ -96,9 +96,9 @@ namespace SewingProduction.Features.Articul
             bsTM = new System.Windows.Forms.BindingSource(components);
             bsArticul = new System.Windows.Forms.BindingSource(components);
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customButton3 = new CustomButton();
-            customButton4 = new CustomButton();
-            customButton5 = new CustomButton();
+            customButtonAdd = new CustomButton();
+            customButtonCopy = new CustomButton();
+            customButtonKompl = new CustomButton();
             grBoxMainInfo = new System.Windows.Forms.GroupBox();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             customButton1 = new CustomButton();
@@ -1009,9 +1009,9 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.69893F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.Controls.Add(customButton3, 0, 0);
-            tableLayoutPanel1.Controls.Add(customButton4, 0, 1);
-            tableLayoutPanel1.Controls.Add(customButton5, 0, 2);
+            tableLayoutPanel1.Controls.Add(customButtonAdd, 0, 0);
+            tableLayoutPanel1.Controls.Add(customButtonCopy, 0, 1);
+            tableLayoutPanel1.Controls.Add(customButtonKompl, 0, 2);
             tableLayoutPanel1.Location = new Point(1, 748);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -1022,47 +1022,47 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Size = new Size(583, 120);
             tableLayoutPanel1.TabIndex = 8;
             // 
-            // customButton3
+            // customButtonAdd
             // 
-            customButton3.BackColor = Color.FromArgb(230, 230, 250);
-            customButton3.Font = new Font("Arial", 10F);
-            customButton3.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton3.Location = new Point(4, 3);
-            customButton3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton3.Name = "customButton3";
-            customButton3.Size = new Size(115, 32);
-            customButton3.TabIndex = 0;
-            customButton3.Text = "Добавить";
-            customButton3.UseVisualStyleBackColor = false;
-            customButton3.Click += customButton3_Click;
+            customButtonAdd.BackColor = Color.FromArgb(230, 230, 250);
+            customButtonAdd.Font = new Font("Arial", 10F);
+            customButtonAdd.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonAdd.Location = new Point(4, 3);
+            customButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonAdd.Name = "customButtonAdd";
+            customButtonAdd.Size = new Size(115, 32);
+            customButtonAdd.TabIndex = 0;
+            customButtonAdd.Text = "Добавить";
+            customButtonAdd.UseVisualStyleBackColor = false;
+            customButtonAdd.Click += customButtonAdd_Click;
             // 
-            // customButton4
+            // customButtonCopy
             // 
-            customButton4.BackColor = Color.FromArgb(230, 230, 250);
-            customButton4.Font = new Font("Arial", 10F);
-            customButton4.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton4.Location = new Point(4, 43);
-            customButton4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton4.Name = "customButton4";
-            customButton4.Size = new Size(115, 32);
-            customButton4.TabIndex = 1;
-            customButton4.Text = "Копия";
-            customButton4.UseVisualStyleBackColor = false;
-            customButton4.Click += customButton4_Click;
+            customButtonCopy.BackColor = Color.FromArgb(230, 230, 250);
+            customButtonCopy.Font = new Font("Arial", 10F);
+            customButtonCopy.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonCopy.Location = new Point(4, 43);
+            customButtonCopy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonCopy.Name = "customButtonCopy";
+            customButtonCopy.Size = new Size(115, 32);
+            customButtonCopy.TabIndex = 1;
+            customButtonCopy.Text = "Копия";
+            customButtonCopy.UseVisualStyleBackColor = false;
+            customButtonCopy.Click += customButtonCopy_Click;
             // 
-            // customButton5
+            // customButtonKompl
             // 
-            customButton5.BackColor = Color.FromArgb(230, 230, 250);
-            customButton5.Font = new Font("Arial", 10F);
-            customButton5.ForeColor = Color.FromArgb(106, 90, 205);
-            customButton5.Location = new Point(4, 83);
-            customButton5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButton5.Name = "customButton5";
-            customButton5.Size = new Size(115, 31);
-            customButton5.TabIndex = 2;
-            customButton5.Text = "Комплект";
-            customButton5.UseVisualStyleBackColor = false;
-            customButton5.Click += customButton5_Click;
+            customButtonKompl.BackColor = Color.FromArgb(230, 230, 250);
+            customButtonKompl.Font = new Font("Arial", 10F);
+            customButtonKompl.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonKompl.Location = new Point(4, 83);
+            customButtonKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonKompl.Name = "customButtonKompl";
+            customButtonKompl.Size = new Size(115, 31);
+            customButtonKompl.TabIndex = 2;
+            customButtonKompl.Text = "Комплект";
+            customButtonKompl.UseVisualStyleBackColor = false;
+            customButtonKompl.Click += customButtonKompl_Click;
             // 
             // grBoxMainInfo
             // 
@@ -2586,9 +2586,9 @@ namespace SewingProduction.Features.Articul
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.GroupBox grBoxMainInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton customButton3;
-        private CustomButton customButton4;
-        private CustomButton customButton5;
+        private CustomButton customButtonAdd;
+        private CustomButton customButtonCopy;
+        private CustomButton customButtonKompl;
         private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEdit2;
         private CustomComboBox customComboBox7;
         private CustomComboBox customComboBox6;

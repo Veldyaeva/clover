@@ -310,23 +310,24 @@ namespace SewingProduction.Features.Articul
 
         }
 
-        private void customButton3_Click(object sender, EventArgs e)
+        private void customButtonAdd_Click(object sender, EventArgs e)
         {
-        }
-
-        private void customButton4_Click(object sender, EventArgs e)
-        {
-            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
-            var kod = ((DataRowView)data).Row["kod"].ToString();
-            EditAricul f = new EditAricul(kod);
+            EditAricul f = new EditAricul(_user);
             if (f.ShowDialog() == DialogResult.OK)
             {
-                // Обновляем таблицу
                 Articul_Load(sender, e);
             }
         }
-
-        private void customButton5_Click(object sender, EventArgs e)
+        private void customButtonCopy_Click(object sender, EventArgs e)
+        {
+            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            EditAricul f = new EditAricul(_user, kodObj.ToString());
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                Articul_Load(sender, e);
+            }
+        }
+        private void customButtonKompl_Click(object sender, EventArgs e)
         {
             var kodObj = gridControl1.GetFocusedRowCellValue("kod");
             if (this.MdiParent is SpMainForm mainForm)

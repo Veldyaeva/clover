@@ -15,6 +15,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
@@ -27,13 +28,15 @@ namespace SewingProduction.Features.Articul
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditAricul(string kodArtSQL = null)
+        public EditAricul(UserClass user, string kodArtSQL = null) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _artNewDataService = new ArtNewDataService(dbHelper);
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
+            customTextBoxKod1.Text = kodSQL;
+            radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2;
         }
         public EditAricul()
         {
@@ -43,7 +46,7 @@ namespace SewingProduction.Features.Articul
         private void art_new2024_Load(object sender, EventArgs e)
         {
             comboAllTableItems();
-            radioGroup1.SelectedIndex = 0;
+            //radioGroup1.SelectedIndex = 0;
         }
 
         private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
@@ -62,8 +65,18 @@ namespace SewingProduction.Features.Articul
                     break;
                 // Копия артикула
                 case 2:
-                    visibleSP(false);
-                    copyArt();
+                    if (customTextBoxKod1.Text == "")
+                    {
+                        MessageBox.Show("Введите код артикула!");
+                        radioGroup1.SelectedIndex = 0;
+                        customTextBoxKod1.Focus();
+                    }
+                    else
+                    {
+                        visibleSP(false);
+                        kodSQL = customTextBoxKod1.Text;
+                        copyArt(); 
+                    }
                     break;
             }
         }

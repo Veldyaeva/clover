@@ -46,7 +46,7 @@ namespace SewingProduction.Features.Articul
         }
         public DataTable GetTovarCatDynsign()
         {
-            string query = "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
+            string query = "SELECT tcds_name AS 'Признак' FROM global.planeta.dbo.TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
             return _dbHelper.ExecuteQuery(query);
         }
         public DataTable GetGostSvPictAndArticulGrupWhere(string opiGost)
