@@ -10,8 +10,8 @@ namespace SewingProduction.Features.Sprav
 {
     public class TarifModel : INotifyPropertyChanged
     {
-        public string constant_name { get; set; }
         public string typeConst { get; set; }
+        public string constant_name { get; set; }
 
         private int _pcId;
         [Column("pc_id")]
@@ -117,6 +117,13 @@ namespace SewingProduction.Features.Sprav
             get => _priznSign;
             set { if (_priznSign != value) { _priznSign = value; OnPropertyChanged(nameof(priznSign)); } }
         }
+        private int _whereUses;
+        [Column("whereUses")]
+        public int whereUses
+        {
+            get => _whereUses;
+            set { if (_whereUses != value) { _whereUses = value; OnPropertyChanged(nameof(whereUses)); } }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>
@@ -126,7 +133,7 @@ namespace SewingProduction.Features.Sprav
     {
         public int pcst_id { get; set; }
         public string field_name { get; set; }
-        public int type_n { get; set; }
+        public string type_n { get; set; }
         public string store_name { get; set; }
         public string name_field_id { get; set; }
     }
@@ -136,5 +143,7 @@ namespace SewingProduction.Features.Sprav
         public object value { get; set; }
         public DateTime event_dt { get; set; }
         public DateTime begin_dt { get; set; }
+        public int userID { get; set; }
+        public string userComp { get; set; }
     }
 }

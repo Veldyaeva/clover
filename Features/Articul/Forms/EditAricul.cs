@@ -36,6 +36,7 @@ namespace SewingProduction.Features.Articul
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
             customTextBoxKod1.Text = kodSQL;
+            visibleSP(false);
             radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2;
         }
         public EditAricul()
@@ -113,7 +114,7 @@ namespace SewingProduction.Features.Articul
             customLabelM.Visible = boolShow;
             customLabelM1.Visible = boolShow;
             customLabelM2.Visible = boolShow;
-            customTextBoxKodFurn.Visible = boolShow;
+            customTextBoxKodFurn.VisiblePermission = boolShow;
             customTextBox1.Visible = boolShow;
             customTextBoxDlin.Visible = boolShow;
             customTextBoxTimePlet.Visible = boolShow;

@@ -147,7 +147,7 @@ namespace SewingProduction.Features.Sprav
             model.firm = customComboBoxOrg.SelectedValue?.ToString();
 
             var selectedType = customComboBoxType.SelectedItem as TypeItemModel;
-            model.typeConst = selectedType.field_name;
+            model.typeConst = selectedType.type_n;
             model.store_name = selectedType.store_name;
             model.name_field_id = selectedType.name_field_id;
             model.priznSign = (int)customComboBoxPriznSign.SelectedItem;
@@ -173,7 +173,7 @@ namespace SewingProduction.Features.Sprav
 
             try
             {
-                await _tarifService.SaveTarifAsync(model, isEditMode);
+                await _tarifService.SaveTarifAsync(model, isEditMode, _user.UserId);
                 MessageBox.Show("Сохранено успешно.");
                 customGroupBoxAdd.Visible = false;
 
