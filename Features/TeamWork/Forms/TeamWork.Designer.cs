@@ -2,7 +2,6 @@
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
 using SewingProduction.form.TeamWork;
 using SewingProduction.Models;
 using System;
@@ -765,7 +764,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlKontTW.Name = "gridControlKontTW";
             gridControlKontTW.Size = new System.Drawing.Size(883, 74);
             gridControlKontTW.TabIndex = 19;
-            gridControlKontTW.ViewCollection.AddRange(new BaseView[] { gridView4 });
+            gridControlKontTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView4 });
             // 
             // gridView4
             // 
@@ -851,7 +850,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl4.Name = "customGridControl4";
             customGridControl4.Size = new System.Drawing.Size(368, 255);
             customGridControl4.TabIndex = 16;
-            customGridControl4.ViewCollection.AddRange(new BaseView[] { gridView5 });
+            customGridControl4.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView5 });
             // 
             // gridView5
             // 
@@ -964,7 +963,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaskrTW.Name = "gridControlRaskrTW";
             gridControlRaskrTW.Size = new System.Drawing.Size(883, 168);
             gridControlRaskrTW.TabIndex = 15;
-            gridControlRaskrTW.ViewCollection.AddRange(new BaseView[] { gridViewRaskrTW });
+            gridControlRaskrTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewRaskrTW });
             // 
             // gridViewRaskrTW
             // 
@@ -1103,7 +1102,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlRaszTW.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemLookUpEditProizv, repositoryItemLookUpEditOb, repositoryItemLookUpEditPodr });
             gridControlRaszTW.Size = new System.Drawing.Size(907, 471);
             gridControlRaszTW.TabIndex = 7;
-            gridControlRaszTW.ViewCollection.AddRange(new BaseView[] { gridView1 });
+            gridControlRaszTW.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
             // gridView1
             // 
@@ -1300,7 +1299,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridControl.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemButtonEdit1, repositoryItemCheckEdit2, repositoryItemButtonEdit3 });
             ANNgridControl.Size = new System.Drawing.Size(568, 565);
             ANNgridControl.TabIndex = 2;
-            ANNgridControl.ViewCollection.AddRange(new BaseView[] { ANNgridView });
+            ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { ANNgridView });
             // 
             // ANNgridView
             // 
@@ -1316,7 +1315,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.DetailHeight = 404;
             ANNgridView.FocusRectStyle = DrawFocusRectStyle.RowFocus;
             ANNgridView.GridControl = ANNgridControl;
-            ANNgridView.HorzScrollVisibility = ScrollVisibility.Always;
+            ANNgridView.HorzScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             ANNgridView.Name = "ANNgridView";
             ANNgridView.OptionsClipboard.AllowCopy = DevExpress.Utils.DefaultBoolean.True;
             ANNgridView.OptionsClipboard.CopyColumnHeaders = DevExpress.Utils.DefaultBoolean.False;
@@ -1344,7 +1343,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.PreviewIndent = 10;
             ANNgridView.PreviewLineCount = 2;
             ANNgridView.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(colannID, DevExpress.Data.ColumnSortOrder.Descending) });
-            ANNgridView.VertScrollVisibility = ScrollVisibility.Always;
+            ANNgridView.VertScrollVisibility = DevExpress.XtraGrid.Views.Base.ScrollVisibility.Always;
             ANNgridView.PopupMenuShowing += ANNgridView_PopupMenuShowing;
             ANNgridView.FocusedRowChanged += ANNgridView_FocusedRowChanged;
             // 
@@ -2338,7 +2337,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl2.Name = "customGridControl2";
             customGridControl2.Size = new System.Drawing.Size(609, 291);
             customGridControl2.TabIndex = 1;
-            customGridControl2.ViewCollection.AddRange(new BaseView[] { gridView3 });
+            customGridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView3 });
             // 
             // gridView3
             // 
@@ -2356,7 +2355,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl1.Name = "customGridControl1";
             customGridControl1.Size = new System.Drawing.Size(609, 291);
             customGridControl1.TabIndex = 1;
-            customGridControl1.ViewCollection.AddRange(new BaseView[] { gridView2 });
+            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
             // 
             // gridView2
             // 
@@ -2398,7 +2397,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl_binded.Name = "gridControl_binded";
             gridControl_binded.Size = new System.Drawing.Size(470, 115);
             gridControl_binded.TabIndex = 2;
-            gridControl_binded.ViewCollection.AddRange(new BaseView[] { gridView_binded, gridView8 });
+            gridControl_binded.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_binded, gridView8 });
             // 
             // gridView_binded
             // 
@@ -2487,7 +2486,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlNZP.Name = "gridControlNZP";
             gridControlNZP.Size = new System.Drawing.Size(543, 372);
             gridControlNZP.TabIndex = 7;
-            gridControlNZP.ViewCollection.AddRange(new BaseView[] { gridViewNZP });
+            gridControlNZP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNZP });
             // 
             // gridViewNZP
             // 
@@ -2641,7 +2640,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl3.Name = "customGridControl3";
             customGridControl3.Size = new System.Drawing.Size(609, 291);
             customGridControl3.TabIndex = 9;
-            customGridControl3.ViewCollection.AddRange(new BaseView[] { gridView6 });
+            customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
             // 
             // gridView6
             // 
@@ -2652,7 +2651,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView6.GridControl = customGridControl3;
             gridView6.Name = "gridView6";
             gridView6.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView6.OptionsView.ShowFilterPanelMode = ShowFilterPanelMode.Never;
+            gridView6.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView6.OptionsView.ShowGroupPanel = false;
             gridView6.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             // 
@@ -2719,8 +2718,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl_wdToBind.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemCheckEdit3, repositoryItemCheckEdit4, repositoryItemCheckEdit6, repositoryItemCheckEdit7 });
             gridControl_wdToBind.Size = new System.Drawing.Size(622, 362);
             gridControl_wdToBind.TabIndex = 6;
-            gridControl_wdToBind.ViewCollection.AddRange(new BaseView[] { gridView_wdToBind });
-            gridControl_wdToBind.Click += gridControl_wdToBind_Click;
+            gridControl_wdToBind.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_wdToBind });
             // 
             // gridView_wdToBind
             // 
@@ -2763,7 +2761,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn13.OptionsFilter.AllowAutoFilter = false;
             gridColumn13.OptionsFilter.AllowFilter = false;
             gridColumn13.OptionsFilter.ShowEmptyDateFilter = false;
-            gridColumn13.ShowButtonMode = ShowButtonModeEnum.ShowOnlyInEditor;
+            gridColumn13.ShowButtonMode = DevExpress.XtraGrid.Views.Base.ShowButtonModeEnum.ShowOnlyInEditor;
             gridColumn13.UnboundDataType = typeof(bool);
             gridColumn13.Visible = true;
             gridColumn13.VisibleIndex = 0;
@@ -2865,7 +2863,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControl_unboundArts.Name = "gridControl_unboundArts";
             gridControl_unboundArts.Size = new System.Drawing.Size(470, 406);
             gridControl_unboundArts.TabIndex = 0;
-            gridControl_unboundArts.ViewCollection.AddRange(new BaseView[] { gridView_unboundArts });
+            gridControl_unboundArts.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView_unboundArts });
             // 
             // gridView_unboundArts
             // 
@@ -2886,7 +2884,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView_unboundArts.OptionsFind.FindDelay = 500;
             gridView_unboundArts.OptionsFind.FindMode = FindMode.Always;
             gridView_unboundArts.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
-            gridView_unboundArts.OptionsView.ShowFilterPanelMode = ShowFilterPanelMode.Never;
+            gridView_unboundArts.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
             gridView_unboundArts.OptionsView.ShowGroupPanel = false;
             gridView_unboundArts.ScrollStyle = ScrollStyleFlags.LiveVertScroll;
             gridView_unboundArts.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
@@ -3359,7 +3357,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlPreArch.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemCheckEdit5 });
             gridControlPreArch.Size = new System.Drawing.Size(705, 915);
             gridControlPreArch.TabIndex = 0;
-            gridControlPreArch.ViewCollection.AddRange(new BaseView[] { gridViewPreArch });
+            gridControlPreArch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPreArch });
             // 
             // gridViewPreArch
             // 

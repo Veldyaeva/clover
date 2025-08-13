@@ -105,6 +105,28 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 await _logger.LogErrorAsync(ex, "Ошибка при обновлении UI связанных данных");
             }
         }
+        /// <summary>
+        /// Применяет сортировку к связанным гридам
+        /// </summary>
+        private void ApplySortingToRelatedGrids(
+            GridControl raszControl,
+            GridControl raskrControl,
+            GridControl kontControl)
+        {
+            try
+            {
+                if (raszControl?.MainView is GridView raszView)
+                    TWGridHelper.sortGridView(raszView);
+                if (raskrControl?.MainView is GridView raskrView)
+                    TWGridHelper.sortGridView(raskrView);
+                if (kontControl?.MainView is GridView kontView)
+                    TWGridHelper.sortGridView(kontView);
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Ошибка при применении сортировки к связанным гридам");
+            }
+        }
 
         private void UpdateRelatedDataSync(
             RelatedDataResult data,
@@ -126,13 +148,8 @@ namespace SewingProduction.Features.TeamWork.Helpers
                 if (normRaszList != null && data.NormRasz != null)
                     normRaszList.BulkLoad(data.NormRasz);
 
-                // Сортировка
-                if (raszControl?.MainView is GridView raszView)
-                    TWGridHelper.sortGridView(raszView);
-                if (raskrControl?.MainView is GridView raskrView)
-                    TWGridHelper.sortGridView(raskrView);
-                if (kontControl?.MainView is GridView kontView)
-                    TWGridHelper.sortGridView(kontView);
+                // Применяем сортировку через отдельный метод
+                ApplySortingToRelatedGrids(raszControl, raskrControl, kontControl);
             }
             catch (Exception ex)
             {

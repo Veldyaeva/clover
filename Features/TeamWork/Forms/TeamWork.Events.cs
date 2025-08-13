@@ -662,106 +662,94 @@ namespace SewingProduction.Features.TeamWork.Forms
                     await _logger.LogWarningAsync("_bindingList is null, cannot add newItemShell to UI.", "simpleButton2_Click_Internal");
                 }
 
-                // 4. Открываем форму TeamWork_AdvanceTW
-                using (TeamWork_AdvanceTW teamWorkAdvanceTW = new TeamWork_AdvanceTW(
-                    0,
-                    (int)Mode.NewWorkDivision,
-                    newId: newAnnId)
-                   )
-                {
-                    teamWorkAdvanceTW.InitialArtData = selectedArtData; // Передаем данные из MyDataART
-                    DialogResult result = teamWorkAdvanceTW.ShowDialog();
+				// 4. Открываем форму TeamWork_AdvanceTW (немодально)
+				var teamWorkAdvanceTW = OpenAdvanceFormNonModal(
+					0,
+					(int)Mode.NewWorkDivision,
+					newId: newAnnId);
+				if (teamWorkAdvanceTW == null)
+				{
+					return;
+				}
+				teamWorkAdvanceTW.InitialArtData = selectedArtData; // Передаем данные из MyDataART
 
-                    // 5. Обрабатываем результат диалога
-                    if (result == DialogResult.OK)
-                    {
-                        var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
-                        if (createdOrUpdatedAnn != null)
-                        {
-                            // Находим и обновляем элемент в _bindingList
-                            var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == newAnnId);
-                            if (itemInList != null)
-                            {
-                                // Копируем свойства из возвращенного объекта в объект в списке
-                                // Нужен метод CopyPropertiesFrom в ArtNormN или ручное копирование
-                                itemInList.CopyPropertiesFrom(createdOrUpdatedAnn);
-                                itemInList.StatusText = StatusHelper.GetStatusText(itemInList.Status); // Обновляем текстовый статус
-                            }
+				// Подписываемся на событие закрытия формы для обработки результата
+				teamWorkAdvanceTW.FormClosed += async (s, args) =>
+				{
+					// 5. Обрабатываем результат диалога
+					if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
+					{
+						var createdOrUpdatedAnn = teamWorkAdvanceTW.CreatedAnn;
+						if (createdOrUpdatedAnn != null)
+						{
+							// Находим и обновляем элемент в _bindingList
+							var itemInList = _bindingList?.FirstOrDefault(ann => ann.AnnID == newAnnId);
+							if (itemInList != null)
+							{
+								// Копируем свойства из возвращенного объекта в объект в списке
+								itemInList.CopyPropertiesFrom(createdOrUpdatedAnn);
+								itemInList.StatusText = StatusHelper.GetStatusText(itemInList.Status);
+							}
 
-                            _myDataAnnBindingSource.ResetBindings(false);
-                            int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
-                            if (finalRowHandle != GridControl.InvalidRowHandle) 
-                            {
-                                gridView_wdToBind.RefreshRow(finalRowHandle);
-                                // Фокусируемся на созданной записи в gridView_wdToBind
-                                gridView_wdToBind.FocusedRowHandle = finalRowHandle;
-                                gridView_wdToBind.MakeRowVisible(finalRowHandle); // Прокручиваем до строки
-                            }
-                            gridView_wdToBind.RefreshData();
-                            
-                            // Также фокусируемся на записи в основном ANNgridView
-                            _bindingSource.ResetBindings(false);
-                            int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
-                            if (annRowHandle >= 0)
-                            {
-                                ANNgridView.BeginUpdate();
-                                try
-                                {
-                                    ANNgridView.FocusedRowHandle = annRowHandle;
-                                    ANNgridView.MakeRowVisible(annRowHandle); // Прокручиваем до строки
-                                    ANNgridView.RefreshRow(annRowHandle);
-                                }
-                                finally
-                                {
-                                    ANNgridView.EndUpdate();
-                                }
-                            }
+							_myDataAnnBindingSource.ResetBindings(false);
+							int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
+							if (finalRowHandle != GridControl.InvalidRowHandle) 
+							{
+								gridView_wdToBind.RefreshRow(finalRowHandle);
+								gridView_wdToBind.FocusedRowHandle = finalRowHandle;
+								gridView_wdToBind.MakeRowVisible(finalRowHandle);
+							}
+							gridView_wdToBind.RefreshData();
+							
+							// Также фокусируемся на записи в основном ANNgridView
+							_bindingSource.ResetBindings(false);
+							int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
+							if (annRowHandle >= 0)
+							{
+								ANNgridView.BeginUpdate();
+								try
+								{
+									ANNgridView.FocusedRowHandle = annRowHandle;
+									ANNgridView.MakeRowVisible(annRowHandle);
+									ANNgridView.RefreshRow(annRowHandle);
+								}
+								finally
+								{
+									ANNgridView.EndUpdate();
+								}
+							}
 
-                                                    await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
-                        
-                        // Запускаем асинхронное обновление секунд для созданной/обновленной записи
-                        _ = Task.Run(async () =>
-                        {
-                            await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
-                            // Очищаем статус через 3 секунды после завершения
-                            await Task.Delay(3000);
-                            ClearSecondsUpdateStatus();
-                        });
-                        
-                        MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                    }
-                    else // DialogResult.Cancel или другое
-                    {
-                        await _logger.LogEventAsync($"Создание записи ANN (ID: {newAnnId}) отменено пользователем в TeamWork_AdvanceTW.", "simpleButton2_Click_Internal");
-                        // Удаляем "оболочку" из списка
-                        if (newItemShell != null && _bindingList != null && _bindingList.Contains(newItemShell))
-                        {
-                            _bindingList.Remove(newItemShell);
-                        }
-                        _bindingSource?.ResetBindings(false); // Обновить DataGridView
-                        ANNgridControl?.RefreshDataSource();
+							await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
+							
+							_ = Task.Run(async () =>
+							{
+								await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+								await Task.Delay(3000);
+								ClearSecondsUpdateStatus();
+							});
+							
+							MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+						}
+					}
+					else
+					{
+						await _logger.LogEventAsync($"Создание записи ANN (ID: {newAnnId}) отменено пользователем в TeamWork_AdvanceTW.", "simpleButton2_Click_Internal");
+						if (newItemShell != null && _bindingList != null && _bindingList.Contains(newItemShell))
+						{
+							_bindingList.Remove(newItemShell);
+						}
+						_bindingSource?.ResetBindings(false);
+						ANNgridControl?.RefreshDataSource();
 
-                        // Удаляем запись из БД и связанные данные
-                        await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaszInserted) // Проверяем, были ли вставлены связанные данные
-                            await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
-                        if (teamWorkAdvanceTW.IsRaskInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
-                        if (teamWorkAdvanceTW.IsKontInserted)
-                            await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
-                        if (teamWorkAdvanceTW.IsDopObrInserted) // Если есть логика для доп. обработки
-                            await _artNormService.DeleteByAnnId(TableNames.Obr, newAnnId);
-
-                        //MessageBox.Show("Создание новой записи отменено.", "Отмена", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        await _logger.LogEventAsync($"Создание новой записи ANN (ID: {newAnnId}) отменено пользователем.", "simpleButton2_Click_Internal_Cancel");
-                      //  await ShowStatusMessage("Сохранение данных...");
-
-
-                    }
-                }
-                // Обновляем основную таблицу после всех операций
-                filterTable(); // Вызываем метод обновления/фильтрации главной таблицы ANN
+						await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+						if (teamWorkAdvanceTW.IsRaszInserted)
+							await _artNormService.DeleteByAnnId(TableNames.Rasz, newAnnId);
+						if (teamWorkAdvanceTW.IsRaskInserted)
+							await _artNormService.DeleteByAnnId(TableNames.Rask, newAnnId);
+						if (teamWorkAdvanceTW.IsKontInserted)
+							await _artNormService.DeleteByAnnId(TableNames.Kont, newAnnId);
+					}
+				};
             }
             catch (Exception ex)
             {
