@@ -1061,134 +1061,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
-                    await HandleRefreshRelatedData();
-                    //var ann = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN; 
-                    //int annId = ann.AnnID;
-                    //LoadRelatedData(annId);
+                    if (printButtonPlus.Enabled && printButtonPlus.Visible)
+                        // Отчет технологической схемы разделения труда
+                        printButtonPlus_Click(null, null);
                     break;
-                case 13:
-                    await HandleReloadAllDataWithReset();
-                    break;
-            }
-        }
 
-        /// <summary>
-        /// Case 11: Обновляет связанные данные без потери фокуса
-        /// </summary>
-        private async Task HandleRefreshRelatedData()
-        {
-            try
-            {
-                var currentAnn = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
-                if (currentAnn == null) return;
-
-                // Использовать сервис
-                var result = await _teamWorkService.RefreshRelatedDataAsync(currentAnn.AnnID);
-
-                if (result.Success)
-                {
-                    await _uiHelper.UpdateRelatedDataUIAsync(result,
-                        _normRaskListTW,
-                        _normKontListTW,
-                        _normRaszListTW,
-                        gridControlRaszTW,
-                        gridControlRaskrTW,
-                        gridControlKontTW,
-                        this);
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка в HandleRefreshRelatedData");
-                MessageBox.Show($"Ошибка при обновлении связанных данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Case 13: Перезагружает все данные с сохранением фокуса и сбросом фильтров
-        /// </summary>
-        private async Task HandleReloadAllDataWithReset()
-        {
-            try
-            {
-                // Сохраняем текущий AnnID для восстановления фокуса
-                int? currentAnnId = null;
-                if (ANNgridView.FocusedRowHandle >= 0)
-                {
-                    var currentRow = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
-                    currentAnnId = currentRow?.AnnID;
-                }
-
-                await _logger.LogEventAsync($"Начало полной перезагрузки со сбросом. Текущий AnnID: {currentAnnId}", "HandleReloadAllDataWithReset");
-
-                //// Очищаем элементы управления поиском на форме
-                ClearSearchControls();
-
-                // Применяем базовые настройки ко всем гридам
-                ApplyBaseGridSettings(ANNgridView, "main");
-
-                // Сбрасываем настройки связанных гридов
-                if (gridControlRaszTW.MainView is GridView raszView)
-                    ApplyBaseGridSettings(raszView, "rasz");
-                if (gridControlRaskrTW.MainView is GridView raskrView)
-                    ApplyBaseGridSettings(raskrView, "raskr");
-                if (gridControlKontTW.MainView is GridView kontView)
-                    ApplyBaseGridSettings(kontView, "kont");
-                if (gridControlNZP.MainView is GridView nzpView)
-                    ApplyBaseGridSettings(nzpView, "nzp");
-
-                var result = await _teamWorkService.LoadWorkDivisionsWithFocusAsync(currentAnnId);
-
-                if (result.Success)
-                {
-                    _bindingList.BulkLoad(result.Data);
-                    _bindingSource.ResetBindings(false);
-
-                    // Применяем базовые фильтры после загрузки
-                    ApplyBaseFilters();
-
-                    // Восстанавливаем фокус
-                    if (currentAnnId.HasValue && _bindingList.Count > 0)
-                    {
-                        bool focusRestored = await _uiHelper.RestoreFocusAsync(ANNgridView, _bindingList, currentAnnId.Value);
-
-                        if (focusRestored)
-                        {
-                            // Загружаем связанные данные для восстановленной записи
-                            var relatedDataResult = await _teamWorkService.RefreshRelatedDataAsync(currentAnnId.Value);
-                            if (relatedDataResult.Success)
-                            {
-                                await _uiHelper.UpdateRelatedDataUIAsync(
-                                    relatedDataResult,
-                                    _normRaskListTW,
-                                    _normKontListTW,
-                                    _normRaszListTW,
-                                    gridControlRaszTW,
-                                    gridControlRaskrTW,
-                                    gridControlKontTW,
-                                    this);
-                            }
-                        }
-                    }
-                    else if (_bindingList.Count > 0)
-                    {
-                        // Устанавливаем фокус на первую запись
-                        ANNgridView.FocusedRowHandle = 0;
-                        await LoadRelatedData(_bindingList[0].AnnID);
-                    }
-
-                    await _logger.LogEventAsync("Полная перезагрузка с сбросом завершена успешно", "HandleReloadAllDataWithReset");
-                    ShowStatusMessage("Данные перезагружены, все настройки и поиск сброшены");
-                }
-                else
-                {
-                    MessageBox.Show($"Ошибка при перезагрузке данных: {result.Error}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при полной перезагрузке с сбросом");
-                MessageBox.Show($"Ошибка при перезагрузке данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1975,6 +1852,20 @@ namespace SewingProduction.Features.TeamWork.Forms
                 MessageBox.Show($"Ошибка при пометке разделений труда на удаление: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 await _logger.LogErrorAsync(ex, "Ошибка в MarkWorkDivisionForDeletion_Internal");
             }
+        }
+
+        private void printButtonPlus_Click(object sender, EventArgs e)
+        {
+            int rowNumber = ANNgridView.FocusedRowHandle;
+
+            NormRaszForEconomist report1 = new NormRaszForEconomist();
+            //report1.RequestParameters = false;
+            var selectedAnn = ANNgridView.GetRow(rowNumber) as ArtNormN;
+
+            report1.Parameters["_annId"].Value = selectedAnn.AnnID;
+            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+            reportPrintTool1.ShowPreviewDialog();
+
         }
 
         /// <summary>
