@@ -124,6 +124,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         public int CurrentMode => _mode;
         public int? SourceAnnIdToCopyDetailsFrom => _sourceAnnIdToCopyDetailsFrom;
+        public string CurrentArticul => (_currentAnnData?.Articul ?? CreatedAnn?.Articul) ?? string.Empty;
 
         public static class CloneUtils
         {
@@ -1029,7 +1030,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         AddStandardKontRows();
                         break;
                     case (int)Mode.ArchAndCopy:
-                        this.Text = "Архив+копия";
+                        this.Text = $"Архив+копия";//. Артикул: {CreatedAnn.Articul}" ;
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
@@ -1041,12 +1042,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
-                        this.Text = "Редактировать";
+                        this.Text = $"Редактировать";//. Артикул: {_selectedAnnId.Articul}";
                         await LoadForEdit(_selectedAnnId);
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
-                        this.Text = "Дубль";
+                        this.Text = $"Дубль";//. Артикул: {CreatedAnn.Articul}";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
@@ -1379,10 +1380,9 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                     await this.InvokeAsync(() =>
                     {
-                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision)
+                        if (_mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy)
                         {
                             annData.dateCreate = DateTime.Now;
-                            annData.dateAdd = DateTime.Now;
                             annData.dateUpdate = null;
                         }
                         _currentAnnData = annData.Clone();                // Обновляем текущую модель
@@ -1989,13 +1989,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         // Сохранение данных и закрытие формы
         private async void btnOK_Click(object sender, EventArgs e)
         {
-            bool success = await ProcessSaveData(true);
-            if (success)
-            {
-                _okPressed = true;
-                DialogResult = DialogResult.OK;
-                this.Close();
-            }
+            await ProcessSaveData(true);
         }
 
         private async Task SaveAnnDataAsync()
@@ -2433,8 +2427,28 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            this.Close();
+            if (_originalAnnData != null)
+            {
+                _currentAnnData.CopyPropertiesFrom(_originalAnnData);
+                bindingSource1.ResetBindings(false);
+            }
+
+            if (_originalNormRaszList != null)
+            {
+                _normRaszList.BulkLoad(_originalNormRaszList);
+            }
+            if (_originalNormRaskList != null)
+            {
+                _normRaskList.BulkLoad(_originalNormRaskList);
+            }
+            if (_originalNormKontList != null)
+            {
+                _normKontList.BulkLoad(_originalNormKontList);
+            }
+
+            _hasUnsavedChanges = false;
+
+            MessageBox.Show("Изменения успешно отменены и восстановлены до исходного состояния.", "Отмена изменений", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
 
@@ -2553,9 +2567,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
-
-        // Свойство для отслеживания результата в не-модальном режиме
-        public DialogResult DialogResult { get; private set; } = DialogResult.Cancel;
     }
 }
 
