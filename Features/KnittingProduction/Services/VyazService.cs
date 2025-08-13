@@ -45,7 +45,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select * from VyazPlanView ";
+                    string query = $"select * from VyazPlanView where men not in (10, 30, 33) ";
 
                     var result = await connection.QueryAsync<VyazPlanView>(query, new Dictionary<string, object> {  });
                     return result.ToList();
