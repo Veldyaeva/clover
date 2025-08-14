@@ -628,7 +628,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // gridColumn7
             // 
             resources.ApplyResources(gridColumn7, "gridColumn7");
-            gridColumn7.FieldName = "TextOb";
+            gridColumn7.FieldName = "Obor";
             gridColumn7.ImageOptions.ImageKey = resources.GetString("gridColumn7.ImageOptions.ImageKey");
             gridColumn7.MinWidth = 23;
             gridColumn7.Name = "gridColumn7";

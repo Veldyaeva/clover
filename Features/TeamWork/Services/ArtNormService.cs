@@ -392,6 +392,18 @@ WHERE nr.annId = @annId";
                         var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
                         result = queryResult.ToList();
 
+                        // Убедимся, что Obor правильно загрузилось (есичо, берём TextOb из джойна)
+                        if (result != null)
+                        {
+                            foreach (var r in result)
+                            {
+                                if (string.IsNullOrWhiteSpace(r.Obor) && !string.IsNullOrWhiteSpace(r.TextOb))
+                                {
+                                    r.Obor = r.TextOb;
+                                }
+                            }
+                        }
+
                     }
                     catch (Exception ex)
                     {
@@ -438,6 +450,18 @@ WHERE nr.annId = @annId";
                 {
                     var queryResult = await connection.QueryAsync<NormRasz>(query, new { annId });
                     result = queryResult.ToList();
+
+                    // Убедимся, что Obor правильно загрузилось (есичо, берём TextOb из вьюхи)
+                    if (result != null)
+                    {
+                        foreach (var r in result)
+                        {
+                            if (string.IsNullOrWhiteSpace(r.Obor) && !string.IsNullOrWhiteSpace(r.TextOb))
+                            {
+                                r.Obor = r.TextOb;
+                            }
+                        }
+                    }
 
                 }
                 catch (Exception ex)
