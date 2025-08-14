@@ -10,8 +10,7 @@ using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.form;
-using SewingProduction.form.UserDistribution;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -27,7 +26,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             gridViewTable.FocusedRowChanged += gridViewTable_FocusedRowChanged;
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
             _tableService = new AllTableNameDataService(dbService, dbHelper);
             _columnService = new AllColumnNameDataService(dbService, dbHelper);

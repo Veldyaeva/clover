@@ -12,7 +12,7 @@ using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 using System.Data;
 
-namespace SewingProduction.Models
+namespace SewingProduction.Features.UserDistribution.Models
 {
     public class UserRoleModel : INotifyPropertyChanged//, INewable
     {
@@ -74,10 +74,10 @@ namespace SewingProduction.Models
         private readonly DbService _dbService;
         private readonly DatabaseHelper _dbHelper;
 
-        public UserRoleDataService(DbService dbService, DatabaseHelper dbHelper)
+        public UserRoleDataService(DatabaseHelper dbHelper)
         {
-            _dbService = dbService;
             _dbHelper = dbHelper;
+            _dbService = new DbService(dbHelper);
         }
         public async Task<int> AssignRoleAsync(int userId, int roleId)
         {

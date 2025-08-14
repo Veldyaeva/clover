@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.form.UserDistribution;
+using SewingProduction.Features.UserDistribution.Forms;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {

@@ -10,11 +10,13 @@ using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
+using SewingProduction.Services;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
 using System.Text;
@@ -22,7 +24,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork 
     {
@@ -162,15 +164,95 @@ namespace SewingProduction.Forms
         {
             try
             {
-                bufferId = (int)ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
-                buffer.Text = $"группа: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "grup").ToString().TrimEnd(' ')},\n\r" +
-                    $"модель: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Mod").ToString().TrimEnd(' ')},\n\r" +
-                    $"артикул: {ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "Articul").ToString().TrimEnd(' ')}";
+                // Проверяем, что строка выбрана
+                if (ANNgridView.FocusedRowHandle < 0)
+                {
+                    MessageBox.Show("Выберите запись для копирования.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Безопасно получаем значения из грида
+                var annIdValue = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, "AnnID");
+                if (annIdValue == null || annIdValue == DBNull.Value || !int.TryParse(annIdValue.ToString(), out int annId))
+                {
+                    MessageBox.Show("Не удалось получить идентификатор записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                var selectedItem = ANNgridView.GetRow(ANNgridView.FocusedRowHandle) as ArtNormN;
+                if (selectedItem == null)
+                {
+                    MessageBox.Show("Не удалось получить данные выбранной записи.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Безопасно получаем значения полей с обработкой null/empty
+                string GetSafeValue(string fieldName)
+                {
+                    var value = ANNgridView.GetRowCellValue(ANNgridView.FocusedRowHandle, fieldName);
+                    if (value == null || value == DBNull.Value)
+                        return " ";
+                    
+                    string stringValue = value.ToString();
+                    return string.IsNullOrEmpty(stringValue) ? " " : stringValue.TrimEnd(' ');
+                }
+
+                var grup = GetSafeValue("grup");
+                var mod = GetSafeValue("Mod");
+                var articul = GetSafeValue("Articul");
+                
+                var displayText = $"группа: {grup},\n\r" +
+                    $"модель: {mod},\n\r" +
+                    $"артикул: {articul}";
+
+                // Копируем в глобальный буфер
+                TeamWorkBuffer.CopyToBuffer(annId, displayText, selectedItem);
+                
+                // Обновляем локальный буфер для обратной совместимости
+                bufferId = annId;
+                buffer.Text = displayText;
+
+                // Показываем статус в statusLabel (если он существует)
+                if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                {
+                    statusLabel.Text = "Данные скопированы в буфер";
+                    // Автоматически очищаем через 3 секунды
+                    _ = Task.Delay(3000).ContinueWith(t => 
+                    {
+                        if (!this.IsDisposed && statusLabel != null)
+                        {
+                            this.Invoke((MethodInvoker)(() => statusLabel.Text = ""));
+                        }
+                    });
+                }
             }
-            catch
+            catch (Exception ex)
             {
                 bufferId = 0;
-                MessageBox.Show("Копирование не реализовано", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TeamWorkBuffer.ClearBuffer();
+                
+                // Показываем ошибку в statusLabel (если он существует)
+                if (this.Controls.Find("statusLabel", true).FirstOrDefault() is Label statusLabel)
+                {
+                    statusLabel.Text = $"Ошибка копирования: {ex.Message}";
+                    statusLabel.ForeColor = Color.Red;
+                    // Автоматически очищаем через 5 секунд
+                    _ = Task.Delay(5000).ContinueWith(t => 
+                    {
+                        if (!this.IsDisposed && statusLabel != null)
+                        {
+                            this.Invoke((MethodInvoker)(() => 
+                            {
+                                statusLabel.Text = "";
+                                statusLabel.ForeColor = Color.Black;
+                            }));
+                        }
+                    });
+                }
+                else
+                {
+                    MessageBox.Show($"Ошибка копирования: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 
@@ -197,7 +279,11 @@ namespace SewingProduction.Forms
             try
             {
                 int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-                var tRelated = LoadRelatedData(annId, token);
+                
+                // Добавляем небольшую задержку для предотвращения частых вызовов при быстром поиске
+                await Task.Delay(200, token);
+                
+                var tRelated = LoadRelatedDataFromView(annId, token);
                 var tNzp = LoadNZP(annId, token);
                 await Task.WhenAll(tRelated, tNzp);
             }
@@ -222,25 +308,7 @@ namespace SewingProduction.Forms
                 }
 
                 var selectedItem = view.GetRow(FocusedRowHandle) as ArtNormN;
-                string kodString = view.GetRowCellValue(FocusedRowHandle, "Kod")?.ToString();
-
-                if (!string.IsNullOrEmpty(kodString))
-                {
-                    if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
-                    {
-                        LoadGridControlData(pictureBox1, kodValue);
-                    }
-                    else
-                    {
-                        await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                    }
-                }
-                else
-                {
-                    await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {FocusedRowHandle}.", "ANNgridView_FocusedRowChanged_Internal");
-                }
-
-                if (selectedItem != null)
+                LoadGridImage(pictureBox1, annId: selectedItem.AnnID); if (selectedItem != null)
                 {
                     bool disableButton = selectedItem.Status == (int)Status.Archive
                                       || selectedItem.Status == (int)Status.PreliminaryArchive;
@@ -263,7 +331,6 @@ namespace SewingProduction.Forms
 
             return true;
         }
-
 
         private async Task LoadNZP(int annId, CancellationToken ct)
         {
@@ -323,6 +390,7 @@ namespace SewingProduction.Forms
                                     try
                                     {
                                         ANNgridView.FocusedRowHandle = rowHandle;
+                                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                                         ANNgridView.RefreshRow(rowHandle);
                                     }
                                     finally
@@ -333,6 +401,15 @@ namespace SewingProduction.Forms
                             }
                         }
                         await LoadRelatedData(selectedAnnId);
+
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(selectedAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
 
                         // Отображаем сообщение об успешном редактировании
                         MessageBox.Show(
@@ -371,7 +448,7 @@ namespace SewingProduction.Forms
                     var selectedAnn = gridView.GetRow(rowNumber) as ArtNormN;
                     if (selectedAnn == null) return;
                     annId = selectedAnn.AnnID;
-         //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
+                    //          selectedArtNormN.CopyPropertiesFrom(selectedAnn);// = selectedAnn;
                     selectedArtNormN = selectedAnn.CloneProperties();
                 }
                 else
@@ -382,6 +459,17 @@ namespace SewingProduction.Forms
                     annId = selectedMyDataAnn.AnnID;
                     selectedArtNormN = await _artNormService.GetArtNormDataById(annId);
                     if (selectedArtNormN == null) return;
+                }
+
+                //Проверяем статус "актуальный" и наличие даты обновления
+                if (selectedArtNormN.Status == (int)Status.Actual && selectedArtNormN.dateUpdate.HasValue)
+                {
+                    MessageBox.Show(
+                        "Редактирование недоступно.\nЗапись имеет статус 'Актуальный' и уже была обновлена.",
+                        "Ограничение редактирования",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    return;
                 }
                 var updatedArtNormN = new ArtNormN();
                 using (var teamWorkAdvanceTW = new TeamWork_AdvanceTW(bufferId, (int)Mode.Edit, oldId: annId))
@@ -409,7 +497,15 @@ namespace SewingProduction.Forms
 
                         if (index >= 0)
                             list[index] = updatedDataAnn;
-
+                        // 4. НАХОДИМ И ЗАМЕНЯЕМ СТАРЫЙ ОБЪЕКТ В ИСТОЧНИКЕ ДАННЫХ (ЭТО КЛЮЧЕВОЙ ШАГ)
+                        // Находим индекс старой записи в списке _bindingList
+                        int i = _bindingList.IndexOf(_bindingList.FirstOrDefault(x => x.AnnID == updatedArtNormN.AnnID));
+                        if (i >= 0)
+                        {
+                            // Заменяем старый объект на новый. Это гарантирует, что все поля,
+                            // включая `Sek`, будут обновлены в источнике данных.
+                            _bindingList[i] = updatedArtNormN;
+                        }
                         bindingSource.ResetBindings(false);
                         int rowHandle = gridView.LocateByValue("AnnID", updatedArtNormN.AnnID);
                         if (rowHandle >= 0)
@@ -418,6 +514,7 @@ namespace SewingProduction.Forms
                             try
                             {
                                 gridView.FocusedRowHandle = rowHandle;
+                                gridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                                 gridView.RefreshRow(rowHandle);
                             }
                             finally
@@ -429,11 +526,24 @@ namespace SewingProduction.Forms
                         // Если редактирование было для второй вкладки (MyDataANN view), обновим NormRasz для customGridControl3
                         if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
                         {
-                            await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID);
+                            await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
                             await LoadRelatedData(updatedArtNormN.AnnID); // Загружаем связанные данные для первой вкладки 
+                        }
+
+                        // Запускаем асинхронное обновление секунд для отредактированной записи
+                        if (updatedArtNormN != null && updatedArtNormN.AnnID > 0)
+                        {
+                            _ = Task.Run(async () =>
+                            {
+                                await _secondsUpdateManager.StartSecondsUpdateAsync(updatedArtNormN.AnnID, gridView,
+                                    forMyDataAnnView ? null : _bindingList, ShowSecondsUpdateStatus);
+                                // Очищаем статус через 3 секунды после завершения
+                                await Task.Delay(3000);
+                                ClearSecondsUpdateStatus();
+                            });
                         }
                     }
                 }
@@ -489,7 +599,7 @@ namespace SewingProduction.Forms
                 {
                     // Основные поля будут заполнены в TeamWork_AdvanceTW из InitialArtData
                     // Здесь устанавливаем только необходимые для вставки и начального отображения значения
-                    Kod = "0000000", // Или другой плейсхолдер, если нужно
+                 //   Kod = "0000000", // Или другой плейсхолдер, если нужно
                     Status = (int)Status.Preliminary, // Новая запись всегда предварительная
                     StatusText = StatusHelper.GetStatusText((int)Status.Preliminary),
                     dateCreate = DateTime.Now,
@@ -498,7 +608,8 @@ namespace SewingProduction.Forms
                     Arh = false,
                     AnnID = 0, // БД назначит ID
                     Mod = selectedArtData.mod,
-                    grup = selectedArtData.grup
+                    grup = selectedArtData.grup,
+                    Articul = selectedArtData.Articul
 
                 };
 
@@ -525,6 +636,7 @@ namespace SewingProduction.Forms
                     if (rowHandle != GridControl.InvalidRowHandle)
                     {
                         ANNgridView.FocusedRowHandle = rowHandle;
+                        ANNgridView.MakeRowVisible(rowHandle); // Прокручиваем до строки
                     }
                 }
                 else
@@ -560,11 +672,45 @@ namespace SewingProduction.Forms
 
                             _myDataAnnBindingSource.ResetBindings(false);
                             int finalRowHandle = gridView_wdToBind.LocateByValue("AnnID", newAnnId);
-                            if (finalRowHandle != GridControl.InvalidRowHandle) gridView_wdToBind.RefreshRow(finalRowHandle);
+                            if (finalRowHandle != GridControl.InvalidRowHandle) 
+                            {
+                                gridView_wdToBind.RefreshRow(finalRowHandle);
+                                // Фокусируемся на созданной записи в gridView_wdToBind
+                                gridView_wdToBind.FocusedRowHandle = finalRowHandle;
+                                gridView_wdToBind.MakeRowVisible(finalRowHandle); // Прокручиваем до строки
+                            }
                             gridView_wdToBind.RefreshData();
+                            
+                            // Также фокусируемся на записи в основном ANNgridView
+                            _bindingSource.ResetBindings(false);
+                            int annRowHandle = ANNgridView.LocateByValue("AnnID", newAnnId);
+                            if (annRowHandle >= 0)
+                            {
+                                ANNgridView.BeginUpdate();
+                                try
+                                {
+                                    ANNgridView.FocusedRowHandle = annRowHandle;
+                                    ANNgridView.MakeRowVisible(annRowHandle); // Прокручиваем до строки
+                                    ANNgridView.RefreshRow(annRowHandle);
+                                }
+                                finally
+                                {
+                                    ANNgridView.EndUpdate();
+                                }
+                            }
 
-                            await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
-                            MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    await _logger.LogEventAsync($"Запись ANN (ID: {newAnnId}) успешно создана/обновлена из артикула.", "simpleButton2_Click_Internal");
+                        
+                        // Запускаем асинхронное обновление секунд для созданной/обновленной записи
+                        _ = Task.Run(async () =>
+                        {
+                            await _secondsUpdateManager.StartSecondsUpdateAsync(newAnnId, ANNgridView, _bindingList, ShowSecondsUpdateStatus);
+                            // Очищаем статус через 3 секунды после завершения
+                            await Task.Delay(3000);
+                            ClearSecondsUpdateStatus();
+                        });
+                        
+                        MessageBox.Show("Новая предварительная запись успешно создана/обновлена.", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                     else // DialogResult.Cancel или другое
@@ -626,18 +772,18 @@ namespace SewingProduction.Forms
         {
             List<MyDataANN> list = null;
             if (loadAllCheckBox.Checked)
-                list = await LoadWorksbyArt(0, "");
+                list = await LoadWorksbyArt("");
             else if (!loadAllCheckBox.Checked)
             {
-                string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
-                if (!int.TryParse(kod, out int kodInt))
-                {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                    kodInt = 0;
-                }
+                //string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
+                //if (!int.TryParse(kod, out int kodInt))
+                //{
+                //    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
+                //    kodInt = 0;
+                //}
 
                 string articul = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Articul").ToString();
-                list = await LoadWorksbyArt(kodInt, articul);
+                list = await LoadWorksbyArt(articul);
             }
             // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
             //var bindingList = new BindingList<MyDataANN>(list);

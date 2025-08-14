@@ -60,6 +60,8 @@ namespace SewingProduction
             тарифыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             моделиСПризнакомМаркировкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            видыБраковПряжиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            видыБраковНосковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             вязальноеПроизводствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             оперативноеПланированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,6 +70,7 @@ namespace SewingProduction
             TeamWorktoolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             артикулToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             карточкаРасчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
@@ -127,7 +130,7 @@ namespace SewingProduction
             // menuStrip1
             // 
             menuStrip1.BackColor = SystemColors.ButtonFace;
-            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem });
+            menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { МенюToolStripMenuItem, справочникиToolStripMenuItem, производствоToolStripMenuItem, TeamWorktoolStripMenuItem, артикулToolStripMenuItem, карточкаРасчетаToolStripMenuItem, кнопкаToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -145,34 +148,34 @@ namespace SewingProduction
             // профильToolStripMenuItem
             // 
             профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            профильToolStripMenuItem.Size = new Size(149, 22);
+            профильToolStripMenuItem.Size = new Size(180, 22);
             профильToolStripMenuItem.Text = "Профиль";
             профильToolStripMenuItem.Click += профильToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
             настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            настройкиToolStripMenuItem.Size = new Size(149, 22);
+            настройкиToolStripMenuItem.Size = new Size(180, 22);
             настройкиToolStripMenuItem.Text = "Настройки";
             настройкиToolStripMenuItem.Click += настройкиToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // помощьToolStripMenuItem
             // 
             помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            помощьToolStripMenuItem.Size = new Size(149, 22);
+            помощьToolStripMenuItem.Size = new Size(180, 22);
             помощьToolStripMenuItem.Text = "Помощь";
             помощьToolStripMenuItem.Click += помощьToolStripMenuItem_Click;
             // 
             // справочникиToolStripMenuItem
             // 
-            справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { оборудованиеToolStripMenuItem, бригадыЦехаToolStripMenuItem, карточкаРасчетаToolStripMenuItem1, работникиToolStripMenuItem, тарифыToolStripMenuItem, изделияToolStripMenuItem, моделиСПризнакомМаркировкToolStripMenuItem });
+            справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { оборудованиеToolStripMenuItem, бригадыЦехаToolStripMenuItem, карточкаРасчетаToolStripMenuItem1, работникиToolStripMenuItem, тарифыToolStripMenuItem, изделияToolStripMenuItem, моделиСПризнакомМаркировкToolStripMenuItem, видыБраковПряжиToolStripMenuItem });
             справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
             справочникиToolStripMenuItem.Size = new Size(94, 20);
             справочникиToolStripMenuItem.Text = "&Справочники";
@@ -265,7 +268,7 @@ namespace SewingProduction
             // 
             тарифыToolStripMenuItem.Name = "тарифыToolStripMenuItem";
             тарифыToolStripMenuItem.Size = new Size(262, 22);
-            тарифыToolStripMenuItem.Text = "Тарифы";
+            тарифыToolStripMenuItem.Text = "Тарифы/Константы";
             тарифыToolStripMenuItem.Click += тарифыToolStripMenuItem_Click;
             // 
             // изделияToolStripMenuItem
@@ -281,6 +284,20 @@ namespace SewingProduction
             моделиСПризнакомМаркировкToolStripMenuItem.Size = new Size(262, 22);
             моделиСПризнакомМаркировкToolStripMenuItem.Text = "Модели с признаком маркировки";
             моделиСПризнакомМаркировкToolStripMenuItem.Click += моделиСПризнакомМаркировкToolStripMenuItem_Click;
+            // 
+            // видыБраковПряжиToolStripMenuItem
+            // 
+            видыБраковПряжиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { видыБраковНосковToolStripMenuItem });
+            видыБраковПряжиToolStripMenuItem.Name = "видыБраковПряжиToolStripMenuItem";
+            видыБраковПряжиToolStripMenuItem.Size = new Size(262, 22);
+            видыБраковПряжиToolStripMenuItem.Text = "Виды браков";
+            // 
+            // видыБраковНосковToolStripMenuItem
+            // 
+            видыБраковНосковToolStripMenuItem.Name = "видыБраковНосковToolStripMenuItem";
+            видыБраковНосковToolStripMenuItem.Size = new Size(187, 22);
+            видыБраковНосковToolStripMenuItem.Text = "Виды браков носков";
+            видыБраковНосковToolStripMenuItem.Click += видыБраковНосковToolStripMenuItem_Click;
             // 
             // производствоToolStripMenuItem
             // 
@@ -338,6 +355,17 @@ namespace SewingProduction
             карточкаРасчетаToolStripMenuItem.Text = "Карточка расчета";
             карточкаРасчетаToolStripMenuItem.Click += карточкаРасчетаToolStripMenuItem_Click;
             // 
+            // кнопкаToolStripMenuItem
+            // 
+            кнопкаToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            кнопкаToolStripMenuItem.BackColor = SystemColors.ButtonFace;
+            кнопкаToolStripMenuItem.ForeColor = SystemColors.ActiveCaptionText;
+            кнопкаToolStripMenuItem.Name = "кнопкаToolStripMenuItem";
+            кнопкаToolStripMenuItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            кнопкаToolStripMenuItem.Size = new Size(28, 20);
+            кнопкаToolStripMenuItem.Text = "❓";
+            кнопкаToolStripMenuItem.Click += кнопкаToolStripMenuItem_Click;
+            // 
             // xtraTabbedMdiManager1
             // 
             xtraTabbedMdiManager1.AppearancePage.Header.Font = new Font("Segoe UI", 10F);
@@ -351,7 +379,6 @@ namespace SewingProduction
             xtraTabbedMdiManager1.HeaderOrientation = DevExpress.XtraTab.TabOrientation.Horizontal;
             xtraTabbedMdiManager1.MdiParent = this;
             xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
-            xtraTabbedMdiManager1.TabPageWidth = 150;
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
             // 
@@ -365,6 +392,7 @@ namespace SewingProduction
             Controls.Add(barDockControlRight);
             Controls.Add(barDockControlBottom);
             Controls.Add(barDockControlTop);
+            HelpButton = true;
             Icon = (Icon)resources.GetObject("$this.Icon");
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
@@ -373,6 +401,7 @@ namespace SewingProduction
             Text = "Швейное производство";
             FormClosing += SpMainForm_FormClosing;
             Load += SpMainForm_Load;
+            KeyDown += SpMainForm_KeyDown;
             ((System.ComponentModel.ISupportInitialize)popupMenu1).EndInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).EndInit();
             menuStrip1.ResumeLayout(false);
@@ -421,5 +450,8 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem швейноеПроизводствоToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem оперативноеПланированиеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem видыБраковПряжиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem видыБраковНосковToolStripMenuItem;
     }
 }

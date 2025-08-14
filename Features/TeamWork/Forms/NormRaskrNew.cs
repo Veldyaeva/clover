@@ -47,14 +47,15 @@ namespace SewingProduction.form.TeamWork.Forms
             public int Lrez { get; set; }
             public int Lpro { get; set; }
         }
-
+        public norm_raskrNew()
+        { InitializeComponent(); }
         public norm_raskrNew(int annId)
         {
             InitializeComponent();
             _annId = annId;
 
-            _dbService = new DbService(new DatabaseHelper("ace"));
-            _artNormService = new ArtNormService(new DatabaseHelper("ace"));
+            _dbService = new DbService(new DatabaseHelper());
+            _artNormService = new ArtNormService(new DatabaseHelper());
             ThemeManager.UpdateTheme(this);
             // Загружаем настройки грида перед загрузкой данных
             ConfigureGrid();

@@ -1,6 +1,7 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form
 {
-    partial class editFio
+    partial class EditFio
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(editFio));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditFio));
             customCancelButton1 = new CustomCancelButton();
             customOkButton1 = new CustomOkButton();
             customLabel1 = new CustomLabel();
@@ -1338,7 +1339,7 @@
             customGroupBox6.TabStop = false;
             customGroupBox6.Text = "Организация 1C";
             // 
-            // editFio
+            // EditFio
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1357,7 +1358,7 @@
             Controls.Add(customCancelButton1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "editFio";
+            Name = "EditFio";
             Text = "Редактирование/Добавление ФИО";
             FormClosing += editFio_FormClosing;
             Load += editFio_Load;

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.CodeParser;
+using DevExpress.DataAccess.Sql;
+using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.Utils;
 using DevExpress.Utils.VisualEffects;
 using DevExpress.XtraEditors;
@@ -17,15 +19,16 @@ using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraLayout.Customization;
 using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using static DevExpress.DataProcessing.InMemoryDataProcessor.AddSurrogateOperationAlgorithm;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllRole : CustomForm
     {
         private readonly AllRoleDataService _allRoleDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         private readonly UserClass _user;
         private int selectedRoleId = -1;
         private int selectedUserId = -1;
@@ -125,6 +128,8 @@ namespace SewingProduction.form.UserDistribution
         {
             if (selectedRoleId <= 0)
                 gridViewRoles_FocusedRow();
+            if (_user.Roles.Contains("Администратор"))
+                return true;
             int creatorId = await _allRoleDataService.GetCreatorIdByRole(selectedRoleId);
             if (!_editableRoleCreatorIds.Contains(creatorId))
             {
@@ -179,7 +184,7 @@ namespace SewingProduction.form.UserDistribution
                 }
                 else if (e.RelationIndex == 1)
                 {
-                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.UserId);
+                    DataTable users = await _allRoleDataService.GetUsersWithRolesInfo(selectedRoleId, _user.CreatorID);
                     e.ChildList = users.DefaultView;
                 }
             };
@@ -418,13 +423,33 @@ namespace SewingProduction.form.UserDistribution
         public async Task<DataTable> GetRoles(int userId)
         {
             string query = @"
-                SELECT r.RoleID, r.RoleName, r.Description, u.UserName
-                FROM Roles r
-                LEFT JOIN Users u ON r.CreatorID = u.UserID
-                WHERE 
-                    r.CreatorID = @UserID
-                    OR r.RoleID IN (SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
-                    OR r.CreatorID IN (SELECT UserID FROM GetDescendants(@UserID))";
+            SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            FROM Roles r
+            JOIN Users u ON r.CreatorID = u.UserID
+            WHERE NOT EXISTS(
+                SELECT 1
+                FROM RoleObject ro
+                WHERE ro.RoleID = r.RoleID
+                AND NOT EXISTS(
+                    SELECT 1
+                    FROM
+                      (SELECT ro.ObjectID, MAX(ro.ModeID) AS UserModeID
+                      FROM RoleObject ro
+                      JOIN UserRoles ur ON ro.RoleID = ur.RoleID
+                      WHERE ur.UserID = @UserID
+                      GROUP BY ro.ObjectID) uo
+                    WHERE uo.ObjectID = ro.ObjectID
+                    AND uo.UserModeID >= ro.ModeID
+                )
+            )";
+
+            //@"SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            //FROM Roles r
+            //    LEFT JOIN Users u ON r.CreatorID = u.UserID
+            //    WHERE
+            //        r.CreatorID = @UserID
+            //        OR r.RoleID IN(SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
+            //        OR r.CreatorID IN(SELECT UserID FROM GetDescendants(@UserID))";
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserID", userId } });
         }
@@ -489,6 +514,7 @@ namespace SewingProduction.form.UserDistribution
                 WHERE u.UserID IN (SELECT UserID FROM GetDescendants(@UserID))";
 
             return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@RoleID", roleId }, { "@UserID", userId } });
+
         }
 
         public async Task<DataTable> GetFormsForRoles(int roleId, int userId)
@@ -519,7 +545,7 @@ namespace SewingProduction.form.UserDistribution
         public async Task<DataTable> GetObjectsForFormRoles(int roleId, int formId, int userId)
         {
             string query = @"
-            SELECT o.ObjectID, o.ObjectNameRus AS ObjectName,
+            SELECT o.ObjectID, o.ObjectNameRus, o.ObjectName,
                 CASE ISNULL(ro.ModeID, 0)
                     WHEN 0 THEN N'Нет доступа'
                     WHEN 1 THEN N'Просмотр'

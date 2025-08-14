@@ -1,6 +1,6 @@
 ﻿using DevExpress.Mvvm.Native;
 using SewingProduction.Services;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +18,12 @@ namespace SewingProduction.Models
         public static void Configure()
         {
             DapperPlusManager.Entity<ArtNormN>().Table(TableNames.Ann).Identity(x => x.AnnID);
-            DapperPlusManager.Entity<NormRasz>().Table(TableNames.Rasz).Identity(x => x.nrId);
+            DapperPlusManager.Entity<NormRasz>().Table(TableNames.Rasz).Identity(x => x.nrID);
+            DapperPlusManager.Entity<NormRasz>().Table(TableNames.Rasz).Key(x => x.nrID);
             DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Identity(x => x.id);
+            DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Key(x => x.id);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
+            DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Key(x => x.nkId);
             DapperPlusManager.Entity<NaklViewByPachKod>();
             DapperPlusManager.Entity<RasInfoByPachKod>();
             DapperPlusManager.Entity<HistoryRazdelNaklViewByIz>();

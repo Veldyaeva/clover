@@ -19,13 +19,16 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using Z.Dapper.Plus;
 using BindingSource = System.Windows.Forms.BindingSource;
 using MethodInvoker = System.Windows.Forms.MethodInvoker;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork_AdvanceTW : CustomForm
     {
@@ -66,6 +69,21 @@ namespace SewingProduction.form
         private readonly List<int> _deletedNormRaszIds = new List<int>();
         private readonly List<int> _deletedNormRaskIds = new List<int>();
         private readonly List<int> _deletedNormKontIds = new List<int>();
+        
+        // Поле для хранения последней выбранной операции
+        private NormRasz _lastFocusedRaszOperation = null;
+        
+        /// <summary>
+        /// Структура для возврата результата диалога выбора позиции операции
+        /// </summary>
+        private struct OperationInsertChoice
+        {
+            public int OperationN { get; set; }
+            public int OperationN1 { get; set; }
+            public bool IsSuboperation { get; set; }
+            public bool Cancel { get; set; }
+            public bool ConvertMainToSuboperation { get; set; } // Нужно ли преобразовать основную операцию в подоперацию
+        }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [NotifyParentProperty(true)]
@@ -73,6 +91,7 @@ namespace SewingProduction.form
 
         private bool _isSelectionFormOpen = false;
         private bool _hasUnsavedChanges = false;
+        private bool _isInitialLoading = false; // Флаг для отслеживания начальной загрузки
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
         private List<OborudShvModel> oborudShvList;
@@ -108,7 +127,7 @@ namespace SewingProduction.form
 
         public static class CloneUtils
         {
-            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName)
+            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
                 where T : ICloneable
             {
                 var list = new List<T>();
@@ -117,8 +136,8 @@ namespace SewingProduction.form
                     var clone = (T)item.Clone();
                     typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
                     typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
-                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, true);
-                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, true);
+                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, markAsNew);
+                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, markAsNew);
                     list.Add(clone);
                 }
                 return list;
@@ -143,6 +162,7 @@ namespace SewingProduction.form
         private BindingList<NormRask> _originalNormRaskList;
         private BindingList<NormKont> _originalNormKontList;
 
+        public TeamWork_AdvanceTW() { InitializeComponent(); }
         /// <summary>
         /// 
         /// </summary>
@@ -160,7 +180,7 @@ namespace SewingProduction.form
             gridViewRasz.Appearance.FocusedCell.ForeColor = Color.Black;
             gridViewRasz.Appearance.Row.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
 
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
             ThemeManager.UpdateTheme(this);
@@ -196,6 +216,8 @@ namespace SewingProduction.form
         // Общий обработчик изменений данных ANN
         private void HandleAnnDataChange(object sender, EventArgs e)
         {
+            if (_isInitialLoading) return; // Игнорируем изменения во время начальной загрузки
+
             _hasUnsavedChanges = true;
             var control = sender as Control;
             if (control == null || _originalAnnData == null || _currentAnnData == null)
@@ -294,21 +316,26 @@ namespace SewingProduction.form
                 _normRaszList.ListChanged -= OnNormRaszListChanged; // защитная отписка
                 _normRaszList.ListChanged += OnNormRaszListChanged;
 
+                _normRaszList.ListChanged -= OnDataChanged;
+                _normRaskList.ListChanged -= OnDataChanged;
+                _normKontList.ListChanged -= OnDataChanged;
                 _normRaszList.ListChanged += OnDataChanged;
                 _normRaskList.ListChanged += OnDataChanged;
                 _normKontList.ListChanged += OnDataChanged;
-                _normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
-                _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged -= (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //_normRaszList.ListChanged += (_, __) => _sekDebouncer.Debounce(10, async () => { if (_newAnnId > 0) RecalculateSek(); });
+                //    _normRaskList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); }); это другие какие-то секунды
+                //    _normKontList.ListChanged += (_, __) => _sekDebouncer.Debounce(500, async () => { if (_newAnnId > 0) RecalculateSek(); });
                 bool allowDelete = _currentAnnData?.dateUpdate == null || _currentAnnData.dateUpdate == DateTime.MinValue;
                 if (allowDelete)//(_mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision || _mode ==(int)Mode.Clone)
                 {
-                    AttachDeleteContextMenu(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    AttachDeleteContextMenuForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
+                   // AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                     AttachDeleteContextMenu(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
                 else
                 {
-                    gridViewRasz.PopupMenuShowing -= ShowPopUp(gridViewRasz, _normRaszList, r => r.nrId, _deletedNormRaszIds);
+                    gridViewRasz.PopupMenuShowing -= ShowPopUpForRasz(gridViewRasz, _normRaszList, r => r.nrID, _deletedNormRaszIds);
                     gridViewKont.PopupMenuShowing -= ShowPopUp(gridViewKont, _normKontList, k => k.nkId, _deletedNormKontIds);
                 }
 
@@ -327,7 +354,12 @@ namespace SewingProduction.form
             }
         }
 
-        private static PopupMenuShowingEventHandler ShowPopUp<T>(GridView view, BindingList<T> bindingList, Func<T, int> getId, List<int> deletedIds) where T : class
+        private PopupMenuShowingEventHandler ShowPopUp<T>(
+            GridView view,
+            BindingList<T> bindingList,
+            Func<T, int> getId,
+            List<int> deletedIds
+        ) where T : class
         {
             return (s, e) =>
             {
@@ -338,33 +370,602 @@ namespace SewingProduction.form
                 var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
                 {
                     int rowHandle = e.HitInfo.RowHandle;
-                    if (view.IsValidRowHandle(rowHandle))
-                    {
-                        var rowObj = view.GetRow(rowHandle) as T;
-                        if (rowObj != null)
-                        {
-                            if (getId != null && deletedIds != null)
-                            {
-                                int id = getId(rowObj);
-                                if (id > 0) deletedIds.Add(id);
-                            }
+                    if (!view.IsValidRowHandle(rowHandle)) return;
 
-                            bindingList.Remove(rowObj); // удаляем из источника
-                        }
+                    var rowObj = view.GetRow(rowHandle) as T;
+                    if (rowObj == null) return;
+
+                    // Добавляем в список удалённых
+                    if (getId != null && deletedIds != null)
+                    {
+                        int id = getId(rowObj);
+                        if (id > 0)
+                            deletedIds.Add(id);
                     }
+
+                    // Удаляем строку
+                    bindingList.Remove(rowObj);
+                    TWGridHelper.sortGridView(gridViewRasz);
+                    // Переносим фокус на новую строку
+                    view.GridControl.BeginInvoke(new Action(() =>
+                    {
+                        if (view.DataRowCount == 0) return;
+
+                        // Если удалили не последнюю строку — фокус остаётся на том же индексе
+                        // Если удалили последнюю — фокус на новую последнюю строку
+                        int newRowHandle = Math.Min(rowHandle, view.RowCount - 1);
+                        newRowHandle = view.GetVisibleRowHandle(newRowHandle);
+
+                        if (view.IsValidRowHandle(newRowHandle))
+                        {
+                            view.FocusedRowHandle = newRowHandle;
+                            view.MakeRowVisible(newRowHandle);
+                        }
+                    }));
                 });
 
                 menu.Items.Add(deleteItem);
             };
         }
 
+        /// <summary>
+        /// Специальный метод для подключения контекстного меню удаления для norm_rasz с перенумерацией
+        /// </summary>
+        private void AttachDeleteContextMenuForRasz(GridView view, BindingList<NormRasz> bindingList, Func<NormRasz, int> getId = null, List<int> deletedIds = null)
+        {
+            try
+            {
+                view.PopupMenuShowing += ShowPopUpForRasz(view, bindingList, getId, deletedIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при удалении строки norm_rasz с перенумерацией");
+            }
+        }
+
+        /// <summary>
+        /// Специальный обработчик контекстного меню для norm_rasz с перенумерацией операций
+        /// </summary>
+        private  PopupMenuShowingEventHandler ShowPopUpForRasz(
+            GridView view,
+            BindingList<NormRasz> bindingList,
+            Func<NormRasz, int> getId,
+            List<int> deletedIds
+        )
+        {
+            return (s, e) =>
+            {
+                if (e.MenuType != GridMenuType.Row)
+                    return;
+
+                var menu = e.Menu;
+                var deleteItem = new DevExpress.Utils.Menu.DXMenuItem("Удалить строку", (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    if (!view.IsValidRowHandle(rowHandle)) return;
+
+                    var rowObj = view.GetRow(rowHandle) as NormRasz;
+                    if (rowObj == null) return;
+
+                    // Сохраняем номер удаляемой операции для перенумерации
+                    int deletedOperationN = rowObj.N;
+                    int deletedOperationN1 = rowObj.N1;
+
+                    // Если удаляем последнюю сфокусированную операцию, сбрасываем ссылку
+                    if (_lastFocusedRaszOperation != null &&
+                        deletedOperationN == _lastFocusedRaszOperation.N && 
+                        deletedOperationN1 == _lastFocusedRaszOperation.N1)
+                    {
+                        _lastFocusedRaszOperation = null;
+                    }
+
+                    // Добавляем в список удалённых
+                    if (getId != null && deletedIds != null)
+                    {
+                        int id = getId(rowObj);
+                        if (id > 0)
+                            deletedIds.Add(id);
+                    }
+
+                    // Удаляем строку
+                    bindingList.Remove(rowObj);
+
+                    // Перенумеровываем операции с номерами больше удаленной
+                    RenumberOperationsAfterDeletion(bindingList, deletedOperationN, deletedOperationN1);
+
+                    // Переносим фокус на новую строку
+                    view.GridControl.BeginInvoke(new Action(() =>
+                    {
+                        if (view.DataRowCount == 0) return;
+
+                        // Если удалили не последнюю строку — фокус остаётся на том же индексе
+                        // Если удалили последнюю — фокус на новую последнюю строку
+                        int newRowHandle = Math.Min(rowHandle, view.RowCount - 1);
+                        newRowHandle = view.GetVisibleRowHandle(newRowHandle);
+
+                        if (view.IsValidRowHandle(newRowHandle))
+                        {
+                            view.FocusedRowHandle = newRowHandle;
+                            view.MakeRowVisible(newRowHandle);
+                        }
+
+                        // Обновляем отображение после перенумерации
+                        view.RefreshData();
+                    }));
+                });
+
+                // Добавляем пункт "Добавить строку"
+                var addItem = new DevExpress.Utils.Menu.DXMenuItem("Добавить строку", (_, __) =>
+                {
+                    int rowHandle = e.HitInfo.RowHandle;
+                    
+                    // Определяем тип строки и соответствующую логику
+                    if (view.IsNewItemRow(rowHandle))
+                    {
+                        // Клик по newRow - добавляем в конец списка без диалога
+                        AddNewRaszOperation(null, true);
+                    }
+                    else if (view.IsValidRowHandle(rowHandle))
+                    {
+                        // Клик по обычной строке - предлагаем варианты
+                        var rowObj = view.GetRow(rowHandle) as NormRasz;
+                        if (rowObj != null)
+                        {
+                            AddNewRaszOperation(rowObj, false);
+                        }
+                    }
+                    else
+                    {
+                        // Клик в пустой области - добавляем в конец
+                        AddNewRaszOperation(null, true);
+                    }
+                });
+
+                menu.Items.Add(addItem);
+                menu.Items.Add(deleteItem);
+            };
+        }
+
+        /// <summary>
+        /// Показывает диалог выбора типа и позиции для новой операции
+        /// </summary>
+        /// <param name="currentOperation">Текущая операция, относительно которой делается вставка</param>
+        /// <returns>Выбор пользователя</returns>
+        private OperationInsertChoice ShowOperationInsertDialog(NormRasz currentOperation)
+        {
+            try
+            {
+                int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                
+                // Проверяем, есть ли подоперации у текущей операции
+                bool hasSuboperations = _normRaszList?.Any(r => r.N == currentOperation.N && r.N1 > 0) ?? false;
+                int maxN1InOperation = hasSuboperations ? 
+                    _normRaszList.Where(r => r.N == currentOperation.N).Max(r => r.N1) : 0;
+
+                // Определяем варианты в зависимости от типа текущей операции
+                if (currentOperation.N1 == 0)
+                {
+                    // Текущая операция основная - предлагаем сначала подоперацию
+                    string subopMessage;
+                    if (!hasSuboperations)
+                    {
+                        // Если у операции еще нет подопераций, объясняем что произойдет
+                        subopMessage = $"Добавить подоперацию к операции №{currentOperation.N}?\n\n" +
+                                      $"Текущая операция №{currentOperation.N} станет №{currentOperation.N}.1\n" +
+                                      $"Новая подоперация получит номер {currentOperation.N}.2";
+                    }
+                    else
+                    {
+                        // Если уже есть подоперации, просто добавляем следующую
+                        subopMessage = $"Добавить подоперацию к операции №{currentOperation.N}?\n" +
+                                      $"Новая подоперация получит номер {currentOperation.N}.{maxN1InOperation + 1}";
+                    }
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
+                                                     MessageBoxIcon.Question,
+                                                     MessageBoxDefaultButton.Button1);
+                    
+                    if (subopResult == DialogResult.Yes)
+                    {
+                        if (!hasSuboperations)
+                        {
+                            // Первая подоперация - основная операция станет X.1, новая X.2
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
+                                OperationN1 = 2, // Новая подоперация будет X.2
+                                IsSuboperation = true,
+                                ConvertMainToSuboperation = true // Флаг для преобразования основной операции
+                            };
+                        }
+                        else
+                        {
+                            // Обычная подоперация к уже существующим
+                            return new OperationInsertChoice 
+                            { 
+                                OperationN = currentOperation.N, 
+                                OperationN1 = maxN1InOperation + 1, 
+                                IsSuboperation = true 
+                            };
+                        }
+                    }
+                    else if (subopResult == DialogResult.Cancel)
+                    {
+                        return new OperationInsertChoice { Cancel = true };
+                    }
+                    // Если "Нет" - продолжаем к выбору основной операции
+                }
+                else
+                {
+                    // Текущая операция подоперация - сначала предлагаем вставить подоперацию
+                    string subopMessage = $"Добавить подоперацию после №{currentOperation.N}.{currentOperation.N1}?\n" +
+                                         $"Новая подоперация получит номер {currentOperation.N}.{currentOperation.N1 + 1}";
+                    
+                    var subopResult = MessageBox.Show(subopMessage, "Тип новой операции", 
+                                                     MessageBoxButtons.YesNoCancel, 
+                                                     MessageBoxIcon.Question,
+                                                     MessageBoxDefaultButton.Button1);
+                    
+                    if (subopResult == DialogResult.Yes)
+                    {
+                        // Подоперация после текущей подоперации
+                        return new OperationInsertChoice 
+                        { 
+                            OperationN = currentOperation.N, 
+                            OperationN1 = currentOperation.N1 + 1, 
+                            IsSuboperation = true 
+                        };
+                    }
+                    else if (subopResult == DialogResult.Cancel)
+                    {
+                        return new OperationInsertChoice { Cancel = true };
+                    }
+                    // Если "Нет" - продолжаем к выбору основной операции
+                }
+
+                // Второй диалог для выбора основной операции
+                string mainOpMessage = $"Добавить основную операцию:\n\n" +
+                                      $"Да - После операции №{currentOperation.N} (получит номер {currentOperation.N + 1})\n" +
+                                      $"Нет - В конец списка (получит номер {maxN + 1})";
+                
+                var mainOpResult = MessageBox.Show(mainOpMessage, "Позиция основной операции", 
+                                                  MessageBoxButtons.YesNoCancel, 
+                                                  MessageBoxIcon.Question,
+                                                  MessageBoxDefaultButton.Button1);
+                
+                if (mainOpResult == DialogResult.Yes)
+                {
+                    // Основная операция после текущей
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = currentOperation.N + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
+                    };
+                }
+                else if (mainOpResult == DialogResult.No)
+                {
+                    // В конец списка
+                    return new OperationInsertChoice 
+                    { 
+                        OperationN = maxN + 1, 
+                        OperationN1 = 0, 
+                        IsSuboperation = false 
+                    };
+                }
+                else
+                {
+                    return new OperationInsertChoice { Cancel = true };
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка в диалоге выбора позиции операции");
+                return new OperationInsertChoice { Cancel = true };
+            }
+        }
+
+        /// <summary>
+        /// Добавляет новую операцию с возможностью выбора позиции вставки
+        /// </summary>
+        /// <param name="insertAfterOperation">Операция, после которой нужно вставить новую (null = в конец)</param>
+        /// <param name="forceAppendToEnd">Принудительно добавить в конец без диалога выбора</param>
+        private async void AddNewRaszOperation(NormRasz insertAfterOperation = null, bool forceAppendToEnd = false)
+        {
+            try
+            {
+                int insertOperationN;
+                int insertOperationN1 = 0;
+                bool isSuboperation = false;
+                OperationInsertChoice choice = new OperationInsertChoice(); // Объявляем в более широкой области видимости
+                
+                if (forceAppendToEnd || insertAfterOperation == null)
+                {
+                    // Добавляем в конец списка как основную операцию
+                    int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                    insertOperationN = maxN + 1;
+                    insertOperationN1 = 0;
+                }
+                else
+                {
+                    // Предлагаем пользователю выбрать тип операции и позицию
+                    choice = ShowOperationInsertDialog(insertAfterOperation);
+                    
+                    if (choice.Cancel)
+                    {
+                        return; // Отмена
+                    }
+                    
+                    insertOperationN = choice.OperationN;
+                    insertOperationN1 = choice.OperationN1;
+                    isSuboperation = choice.IsSuboperation;
+                }
+
+                using (var selectionForm = new NormOperNew(_selectedAnnId))
+                {
+                    var result = selectionForm.ShowDialog();
+
+                    if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
+                    {
+                        var selectedData = selectionForm.SelectedRowData;
+                        selectedData.IsNew = true;
+                        
+                        // Выполняем перенумерацию в зависимости от типа операции
+                        if (isSuboperation)
+                        {
+                            if (choice.ConvertMainToSuboperation)
+                            {
+                                // Преобразуем основную операцию в подоперацию и добавляем новую подоперацию
+                                ConvertMainOperationToSuboperation(insertOperationN);
+                            }
+                            else
+                            {
+                                // Для обычной подоперации - перенумеровываем только подоперации в рамках той же основной операции
+                                RenumberSuboperationsForInsertion(insertOperationN, insertOperationN1);
+                            }
+                        }
+                        else
+                        {
+                            // Для основной операции - перенумеровываем все операции начиная с указанной позиции
+                            int maxN = _normRaszList?.Select(x => x.N).DefaultIfEmpty(0).Max() ?? 0;
+                            if (insertOperationN <= maxN)
+                            {
+                                RenumberOperationsForInsertion(insertOperationN);
+                            }
+                        }
+                        
+                        // Присваиваем новой операции нужные номера
+                        selectedData.N = insertOperationN;
+                        selectedData.N1 = insertOperationN1;
+                        
+                        _normRaszList.Add(selectedData);
+                        _normRaszBindingSource.ResetBindings(false);
+                        gridControlRasz.RefreshDataSource();
+                        
+                        // Обновляем сортировку после добавления
+                        TWGridHelper.sortGridView(gridViewRasz);
+                        
+                        // Автоматически открываем форму редактирования для новой операции
+                        int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
+                        if (newRowDataSourceIndex >= 0)
+                        {
+                            int newRowHandle = gridViewRasz.GetRowHandle(newRowDataSourceIndex);
+                            if (gridViewRasz.IsValidRowHandle(newRowHandle))
+                            {
+                                // Устанавливаем фокус и открываем форму редактирования
+                                gridViewRasz.FocusedRowHandle = newRowHandle;
+                                gridViewRasz.MakeRowVisible(newRowHandle);
+                                
+                                // Открываем форму редактирования через небольшую задержку
+                                gridViewRasz.GridControl.BeginInvoke(new Action(() =>
+                                {
+                                    _isCustomEditFormOpen = true;
+                                    gridViewRasz.ShowEditForm();
+                                }));
+                            }
+                        }
+                        
+                        await _logger.LogEventAsync($"Добавлена новая операция №{selectedData.N}.{selectedData.N1} через контекстное меню", "AddNewRaszOperation");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при добавлении операции через контекстное меню");
+                MessageBox.Show($"Ошибка при добавлении операции: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Обработчик изменения фокуса для сохранения последней выбранной операции
+        /// </summary>
+        private void GridViewRasz_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            var gridView = sender as GridView;
+            if (gridView == null) return;
+
+            // Сохраняем последнюю валидную операцию (не newRow)
+            if (e.FocusedRowHandle >= 0 && e.FocusedRowHandle < gridView.DataRowCount && !gridView.IsNewItemRow(e.FocusedRowHandle))
+            {
+                var currentRow = gridView.GetRow(e.FocusedRowHandle) as NormRasz;
+                if (currentRow != null)
+                {
+                    _lastFocusedRaszOperation = currentRow;
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Преобразует основную операцию в подоперацию при добавлении первой подоперации
+        /// </summary>
+        /// <param name="operationN">Номер основной операции для преобразования</param>
+        private void ConvertMainOperationToSuboperation(int operationN)
+        {
+            // Находим основную операцию (N.0) и преобразуем её в подоперацию (N.1)
+            var mainOperation = _normRaszList?.FirstOrDefault(r => r.N == operationN && r.N1 == 0);
+            
+            if (mainOperation != null)
+            {
+                int oldN1 = mainOperation.N1;
+                mainOperation.N1 = 1; // Основная операция становится первой подоперацией
+                
+                // Помечаем как измененную, если это не новая запись
+                if (!mainOperation.IsNew)
+                {
+                    mainOperation.IsModified = true;
+                }
+                
+                _logger.LogEventAsync($"Основная операция преобразована: {operationN}.{oldN1} -> {operationN}.{mainOperation.N1}", "ConvertMainOperationToSuboperation");
+            }
+        }
+
+        /// <summary>
+        /// Перенумеровывает подоперации для освобождения места под новую подоперацию
+        /// </summary>
+        /// <param name="operationN">Номер основной операции</param>
+        /// <param name="insertSuboperationN1">Номер подоперации, начиная с которого нужно сдвинуть нумерацию</param>
+        private void RenumberSuboperationsForInsertion(int operationN, int insertSuboperationN1)
+        {
+            // Находим все подоперации с тем же N и N1 >= insertSuboperationN1 и увеличиваем их N1 на 1
+            var suboperationsToRenumber = _normRaszList
+                .Where(r => r.N == operationN && r.N1 >= insertSuboperationN1)
+                .OrderByDescending(r => r.N1) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
+                .ToList();
+
+            if (suboperationsToRenumber.Any())
+            {
+                _logger.LogEventAsync($"Перенумерация подопераций: сдвиг {suboperationsToRenumber.Count} подопераций операции №{operationN} начиная с {insertSuboperationN1}", "RenumberSuboperationsForInsertion");
+                
+                foreach (var operation in suboperationsToRenumber)
+                {
+                    int oldN1 = operation.N1;
+                    operation.N1 += 1;
+                    
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                    
+                    _logger.LogEventAsync($"Подоперация перенумерована: {operation.N}.{oldN1} -> {operation.N}.{operation.N1}", "RenumberSuboperationsForInsertion");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Перенумеровывает операции для освобождения места под новую операцию
+        /// </summary>
+        /// <param name="insertOperationN">Номер операции, начиная с которого нужно сдвинуть нумерацию</param>
+        private void RenumberOperationsForInsertion(int insertOperationN)
+        {
+            // Находим все операции с номерами >= insertOperationN и увеличиваем их номера на 1
+            var operationsToRenumber = _normRaszList
+                .Where(r => r.N >= insertOperationN)
+                .OrderByDescending(r => r.N) // Обрабатываем в обратном порядке, чтобы избежать конфликтов
+                .ToList();
+
+            if (operationsToRenumber.Any())
+            {
+                _logger.LogEventAsync($"Перенумерация операций: сдвиг {operationsToRenumber.Count} операций начиная с номера {insertOperationN}", "RenumberOperationsForInsertion");
+                
+                foreach (var operation in operationsToRenumber)
+                {
+                    int oldN = operation.N;
+                    operation.N += 1;
+                    
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                    
+                    _logger.LogEventAsync($"Операция перенумерована: {oldN}.{operation.N1} -> {operation.N}.{operation.N1}", "RenumberOperationsForInsertion");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Перенумеровывает операции после удаления строки
+        /// </summary>
+        /// <param name="normRaszList">Список операций</param>
+        /// <param name="deletedOperationN">Номер удаленной операции</param>
+        /// <param name="deletedOperationN1">Номер удаленной подоперации</param>
+        private static void RenumberOperationsAfterDeletion(BindingList<NormRasz> normRaszList, int deletedOperationN, int deletedOperationN1)
+        {
+            if (deletedOperationN1 == 0)
+            {
+                // Удаляется основная операция (например, 3.0)
+                // Нужно перенумеровать все операции с N > deletedOperationN
+                var operationsToRenumber = normRaszList
+                    .Where(r => r.N > deletedOperationN)
+                    .ToList();
+
+                foreach (var operation in operationsToRenumber)
+                {
+                    operation.N -= 1;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                }
+            }
+            else
+            {
+                // Удаляется подоперация (например, 2.3)
+                // Нужно перенумеровать только подоперации с тем же N и N1 > deletedOperationN1
+                var suboperationsToRenumber = normRaszList
+                    .Where(r => r.N == deletedOperationN && r.N1 > deletedOperationN1)
+                    .ToList();
+
+                foreach (var operation in suboperationsToRenumber)
+                {
+                    operation.N1 -= 1;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!operation.IsNew)
+                    {
+                        operation.IsModified = true;
+                    }
+                }
+
+                // Проверяем, осталась ли только одна подоперация с данным номером
+                var remainingSuboperationsWithSameN = normRaszList
+                    .Where(r => r.N == deletedOperationN && r.N1 > 0)
+                    .ToList();
+
+                if (remainingSuboperationsWithSameN.Count == 1)
+                {
+                    // Если осталась только одна подоперация, делаем её основной (N1 = 0)
+                    var lastSuboperation = remainingSuboperationsWithSameN.First();
+                    lastSuboperation.N1 = 0;
+                    // Помечаем как измененную, если это не новая запись
+                    if (!lastSuboperation.IsNew)
+                    {
+                        lastSuboperation.IsModified = true;
+                    }
+                }
+                else if (remainingSuboperationsWithSameN.Count == 0)
+                {
+                    // Если не осталось ни одной подоперации, проверяем есть ли основная операция
+                    var mainOperation = normRaszList.FirstOrDefault(r => r.N == deletedOperationN && r.N1 == 0);
+                    // Основная операция остается без изменений (это нормально)
+                }
+            }
+        }
+
         private void OnNormRaszListChanged(object sender, ListChangedEventArgs e)
         {
-            // Запускаем отложенный пересчёт Sek
-            _sekDebouncer.Debounce(500, async () =>
+            // Запускаем отложенный пересчёт Sek только если не идёт начальная загрузка
+            if (!_isInitialLoading)
             {
-                RecalculateSek();
-            });
+                _sekDebouncer.Debounce(5, async () =>
+                {
+                    RecalculateSek();
+                });
+            }
 
             OnDataChanged(sender, e);
         }
@@ -372,6 +973,8 @@ namespace SewingProduction.form
         {
             try
             {
+                _isInitialLoading = true; // Устанавливаем флаг начальной загрузки
+
                 Task gridTask = Task.Run(() =>
                 {
                     _gridHelper.LoadGridViewSettings(gridViewRaskr, "AdvanceTW_gridViewRaskrLayout.xml");
@@ -391,6 +994,13 @@ namespace SewingProduction.form
 
                 //await WorkDivisionLoadAsync(caller: "DataLoad", _selectedAnnId);
                 //await LoadAnnDataAsync();
+
+                // Обновляем текстовое поле буфера из глобального состояния или локального
+                UpdateBufferDisplay();
+
+                // Подписываемся на изменения глобального буфера
+                TeamWorkBuffer.BufferChanged += OnBufferChanged;
+
                 if (_bufferWorkDivision > 0)
                 {
                     var annData = await _artNormService.GetArtNormDataById(_bufferWorkDivision);
@@ -414,32 +1024,43 @@ namespace SewingProduction.form
                         _normRaszList.Clear();
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
                         break;
                     case (int)Mode.ArchAndCopy:
                         this.Text = "Архив+копия";
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
-                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId"));
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         _normRaskList.Clear();
                         _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
                         this.Text = "Редактировать";
                         await LoadForEdit(_selectedAnnId);
+                        LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
                         this.Text = "Дубль";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
-                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId"));
+                        _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
-                        _normKontList.Clear(); _currentAnnData.dateCreate = DateTime.Now;
+                        _normKontList.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
+                        // Автоматически добавляем две стандартные строки в norm_kont
+                        AddStandardKontRows();
+                        _currentAnnData.dateCreate = DateTime.Now;
                         break;
                 }
                 await LoadAnnDataAsync();
                 _hasUnsavedChanges = false;
 
                 AttachChangeHandlers();
-
                 kodProizvList = await _dbService.GetListAsync<KodProizvModel>("SELECT kod_proizv, text_proizv FROM kod_proizv", null);
                 podrVyazList = await _dbService.GetListAsync<PodrVyazModel>("SELECT kod_vyaz, text_vyaz, kod_proizv FROM podr_vyaz", null);
                 oborudShvList = await _dbService.GetListAsync<OborudShvModel>("SELECT kod_ob, text_ob FROM spOborudShv", null);
@@ -523,6 +1144,9 @@ namespace SewingProduction.form
                 gridViewRasz.RowStyle += GridView_RowStyle;
                 gridViewRaskr.RowStyle += GridView_RowStyle;
                 gridViewKont.RowStyle += GridView_RowStyle;
+                
+                // Подписываемся на изменение фокуса для сохранения последней выбранной операции
+                gridViewRasz.FocusedRowChanged += GridViewRasz_FocusedRowChanged;
 
                 if (_currentAnnData != null && _sourceAnnIdToCopyDetailsFrom.HasValue && _duplicateAnnData != null && _mode == (int)Mode.NewWorkDivision)
                 {
@@ -540,10 +1164,12 @@ namespace SewingProduction.form
                     _normRaszList.Clear();
                     foreach (var item in raszToCopy)
                     {
-                        item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true; // Так как это новые записи для нового РТ
-                        item.nrId = 0; // Сброс ID для новой записи
+                        item.annId = _currentAnnData.AnnID;
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
+                        item.nrID = 0; // Сброс ID для новой записи
                         _normRaszList.Add(item);
                     }
                     _normRaszBindingSource.ResetBindings(false);
@@ -553,8 +1179,10 @@ namespace SewingProduction.form
                     foreach (var item in raskToCopy)
                     {
                         item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true;
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
                         item.id = 0;
                         _normRaskList.Add(item);
                     }
@@ -565,22 +1193,55 @@ namespace SewingProduction.form
                     foreach (var item in kontToCopy)
                     {
                         item.AnnId = _currentAnnData.AnnID;
-                        item.IsNew = true;
-                        item.IsModified = true;
+                        //item.IsNew = true;
+                        //item.IsModified = true;
+                        item.IsNew = false;
+                        item.IsModified = false;
                         item.nkId = 0;
+                        //item.kod_o = "100";
+
                         _normKontList.Add(item);
                     }
                     _normKontBindingSource.ResetBindings(false);
 
 
-                    _hasUnsavedChanges = true;
+                    //  _hasUnsavedChanges = true;
                     //UpdateFormTitle();
                     //DisplayCurrentAnnData(); // Обновить поля на форме данными из _currentAnn
                 }
+                _hasUnsavedChanges = false;
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы TeamWork_AdvanceTW");
+            }
+            finally
+            {
+                _isInitialLoading = false; // Сбрасываем флаг начальной загрузки
+
+                // Отписываемся от событий при выходе из формы
+                this.FormClosed += (s, args) => TeamWorkBuffer.BufferChanged -= OnBufferChanged;
+            }
+        }
+        private async void LoadGridImage(PictureBox pictureBox, int? annId = null, int? kod = null)
+        {
+            string imagePath = null;
+            try
+            {
+                imagePath = await _artNormService.GetImage(annId, kod);
+                if (!string.IsNullOrEmpty(imagePath))
+                {
+                    pictureBox.ImageLocation = imagePath;
+                }
+                else
+                {
+                    pictureBox.Image = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки изображения по пути '{imagePath ?? "NULL"}' для annId = {annId}");
+                pictureBox.Image = null;
             }
         }
         private async Task LoadAndCloneAll(int sourceAnnId, int newAnnId)
@@ -588,9 +1249,14 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(sourceAnnId);
             var rask = await _artNormService.GetRelatedNormRask(sourceAnnId);
             var kont = await _artNormService.GetRelatedNormKont(sourceAnnId);
-            _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, newAnnId, "nrId"));
-            _normRaskList.BulkLoad(CloneUtils.CloneList(rask, newAnnId, "id"));
-            _normKontList.BulkLoad(CloneUtils.CloneList(kont, newAnnId, "nkId"));
+
+            var clonedRasz = CloneUtils.CloneList(rasz, newAnnId, "nrId", false); // markAsNew = false для начальной загрузки
+            var clonedRask = CloneUtils.CloneList(rask, newAnnId, "id", false);
+            var clonedKont = CloneUtils.CloneList(kont, newAnnId, "nkId", false);
+
+            _normRaszList.BulkLoad(clonedRasz);
+            _normRaskList.BulkLoad(clonedRask);
+            _normKontList.BulkLoad(clonedKont);
         }
 
         private void UpdateFilteredPodrVyaz(int kodProizv)
@@ -632,6 +1298,24 @@ namespace SewingProduction.form
             var rasz = await _artNormService.GetRelatedNormRasz(annId);
             var rask = await _artNormService.GetRelatedNormRask(annId);
             var kont = await _artNormService.GetRelatedNormKont(annId);
+
+            // Убеждаемся, что все элементы помечены как неизмененные
+            foreach (var item in rasz)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+            foreach (var item in rask)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+            foreach (var item in kont)
+            {
+                item.IsNew = false;
+                item.IsModified = false;
+            }
+
             _normRaszList.BulkLoad(rasz);
             _normRaskList.BulkLoad(rask);
             _normKontList.BulkLoad(kont);
@@ -673,7 +1357,6 @@ namespace SewingProduction.form
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке или привязке списка ФИО");
-                // MessageBox.Show("Не удалось загрузить список сотрудников.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -732,18 +1415,18 @@ namespace SewingProduction.form
                 var rasz = _normRaszList?.Where(r => r.N1 < 100 && (r.KodProizv == 1 || r.KodProizv == 3)).ToList() ?? new List<NormRasz>();
 
                 int Sum(Func<NormRasz, bool> condition) => rasz.Where(condition).Sum(r => r.Sek);
-          //      int Sum1(Func<NormRask, bool> condition)=>rask
+                //      int Sum1(Func<NormRask, bool> condition)=>rask
                 _currentAnnData.SekVyazo = Sum(r => r.KodOb == 28);
                 _currentAnnData.SekVyaz5 = Sum(r => r.KodOb == 25);
                 _currentAnnData.SekVyaz12 = Sum(r => r.KodOb == 35);
                 _currentAnnData.SekVyaz7 = Sum(r => r.KodOb == 26);
                 _currentAnnData.SekVyaz10 = Sum(r => r.KodOb == 37);
                 _currentAnnData.SekVyaz6 = Sum(r => r.KodOb == 38);
-                _currentAnnData.SekVyaz = Sum(r => r.KodOb == 29);
+                _currentAnnData.SekVyaz3 = Sum(r => r.KodOb == 29);
                 _currentAnnData.SekShv = Sum(r => r.KodPodr != 1 && r.KodPodr != 6);
                 _currentAnnData.SekKr = _normRaszList.Where(r => r.KodPodr == 7).Sum(r => r.Sek);
                 _currentAnnData.Sek = _normRaszList.Where(r => r.N1 < 100).Sum(r => r.Sek);
-                _currentAnnData.Slogn = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
+                _currentAnnData.Seb = (int)_normRaszList.Where(r => r.N1 < 100).Sum(r => r.Seb); // sb
                 _currentAnnData.SekVyaz14 = Sum(r => r.KodOb == 62);
                 _currentAnnData.SekVyaz70 = Sum(r => r.KodOb == 55);
                 _currentAnnData.SekVyaz71 = Sum(r => r.KodOb == 59);
@@ -752,6 +1435,8 @@ namespace SewingProduction.form
                 _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
                 _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
                 _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+
+                _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 
                 if (!this.IsDisposed && this.IsHandleCreated)
                 {
@@ -865,49 +1550,41 @@ namespace SewingProduction.form
             }
 
             e.Allow = false;
-
-            using (var selectionForm = new NormOperNew(_selectedAnnId))
+            
+            // Используем новый метод для добавления операции
+            // Определяем, нужно ли предлагать позицию или добавить в конец
+            bool shouldOfferPosition = _lastFocusedRaszOperation != null && _normRaszList?.Count > 0;
+            
+            if (shouldOfferPosition)
             {
-                var result = selectionForm.ShowDialog();
+                // Предлагаем позицию на основе последней сфокусированной операции
+                AddNewRaszOperation(_lastFocusedRaszOperation, false);
+            }
+            else
+            {
+                // Добавляем в конец списка
+                AddNewRaszOperation(null, true);
+            }
+        }
 
-                if (result == DialogResult.OK && selectionForm.SelectedRowData != null)
+        private void gridViewRasz_ValidateRow(object sender, DevExpress.XtraGrid.Views.Base.ValidateRowEventArgs e)
+        {
+            if (e.Row is NormRasz row)
+            {
+                // Проверяем уникальность сочетания N/N1
+                bool duplicate = _normRaszList.Any(x =>
+                    x != row && // исключаем саму себя при редактировании
+                    x.N == row.N && x.N1 == row.N1);
+
+                if (duplicate)
                 {
-                    var selectedData = selectionForm.SelectedRowData;
-                    selectedData.IsNew = true;
-                    _normRaszList.Add(selectedData);
-                    _normRaszBindingSource.ResetBindings(false);
-                    gridControlRasz.RefreshDataSource();
-                    int newRowDataSourceIndex = _normRaszList.IndexOf(selectedData);
-                    if (newRowDataSourceIndex >= 0)
-                    {
-                        int newRowHandle = gridView.GetRowHandle(newRowDataSourceIndex);
-                        if (gridView.IsValidRowHandle(newRowHandle))
-                        {
-                            FinalizeRow(newRowHandle, gridView);
-                        }
-                        else
-                        {
-                            _logger.LogEventAsync($"Не найдена строка для добавления в NormRasz. Номер строки в DataSource: {newRowDataSourceIndex}", "gridViewRasz_EditFormShowing_NewRowFail");
-                        }
-                    }
+                    e.Valid = false;
+                    e.ErrorText = $"Операция с номером {row.N} и подоперацией {row.N1} уже существует!";
                 }
             }
         }
-        private void FinalizeRow(int rowHandle, GridView gridView)
-        {
-            // разрешаем показать EditForm
-            gridView.PostEditor();
-            gridView.UpdateCurrentRow();
-            gridView.RefreshRow(rowHandle);
 
-            _isCustomEditFormOpen = true;
 
-            gridView.GridControl.BeginInvoke(new Action(() =>
-            {
-                gridView.FocusedRowHandle = rowHandle;
-                gridView.ShowEditForm();
-            }));
-        }
 
         private void gridViewRasz_RowEditCanceled(object sender, RowObjectEventArgs e)
         {
@@ -932,8 +1609,8 @@ namespace SewingProduction.form
                 if (index != -1)
                 {
                     // Восстанавливаем оригинальные данные.
-                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit); 
-                    _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrId}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
+                    _normRaszList[index].CopyPropertiesFrom(_originalNormRaszDataBeforeEdit);
+                    _logger.LogEventAsync($"NormRasz row (nrId: {_originalNormRaszDataBeforeEdit.nrID}) edit canceled, reverted to original state.", "gridViewRasz_RowEditCanceled");
                     _normRaszBindingSource.ResetBindings(false);
                 }
             }
@@ -944,7 +1621,7 @@ namespace SewingProduction.form
         }
         private void gridViewRasz_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            if (e.Row is NormRasz normRasz)
+            if (e.Row is NormRasz normRasz && !_isInitialLoading)
             {
                 // Если строка не новая, помечаем ее как измененную
                 if (!normRasz.IsNew)
@@ -975,7 +1652,7 @@ namespace SewingProduction.form
                 {
                     var row = gridView.GetRow(e.RowHandle) as NormRasz;
                     // Если это существующая, сохраненная строка, и EditForm была закрыта без Update (и не Cancel/Abort)
-                    if (row != null && row.nrId > 0 && !row.IsNew)
+                    if (row != null && row.nrID > 0 && !row.IsNew)
                     {
                         // Эта логика подразумевает, что закрытие EditForm для существующей строки
                         // способами, отличными от "Update", "Cancel", или "Abort", может привести к удалению.
@@ -989,7 +1666,7 @@ namespace SewingProduction.form
                             _normRaszList.Remove(row);
                         }
                         */
-                        await _logger.LogEventAsync($"EditFormHidden for existing row (nrId: {row.nrId}) with Result: {e.Result}. Original delete logic is currently commented.", "gridViewRasz_EditFormHidden");
+                        await _logger.LogEventAsync($"EditFormHidden for existing row (nrId: {row.nrID}) with Result: {e.Result}. Original delete logic is currently commented.", "gridViewRasz_EditFormHidden");
                     }
                     // Запасной вариант для новой строки, которая могла не быть обработана RowEditCanceled (должно быть редко)
                     else if (row != null && row.IsNew)
@@ -1088,7 +1765,7 @@ namespace SewingProduction.form
 
         private void GridView2_RowUpdated(object sender, RowObjectEventArgs e)
         {
-            if (e.Row is NormRask normRask)
+            if (e.Row is NormRask normRask && !_isInitialLoading)
             {
                 normRask.AnnId = _newAnnId;
                 // Если строка не новая, помечаем ее как измененную
@@ -1133,7 +1810,7 @@ namespace SewingProduction.form
         #region Kont
         private void gridViewKont_RowUpdated(object sender, DevExpress.XtraGrid.Views.Base.RowObjectEventArgs e)
         {
-            if (e.Row is NormKont normKont)
+            if (e.Row is NormKont normKont && !_isInitialLoading)
             {
                 normKont.AnnId = _newAnnId;
                 // Если строка не новая, помечаем ее как измененную
@@ -1154,9 +1831,17 @@ namespace SewingProduction.form
         {
             GridView view = sender as GridView;
             if (view == null) return;
-            if (view.RowCount >= 2) return;
+            
+            // Запрещаем добавление новых строк, если уже есть 2 записи
             if (view.IsNewItemRow(view.FocusedRowHandle))
             {
+                if (_normKontList.Count >= 2)
+                {
+                    e.Cancel = true;
+                    MessageBox.Show("На одно РТ можно добавить максимум 2 строки контроля.", "Ограничение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                
                 e.Cancel = true;
 
                 if (_isSelectionFormOpen) return;
@@ -1166,7 +1851,8 @@ namespace SewingProduction.form
                     _isSelectionFormOpen = true;
 
                     string choice1 = "Пронумеровать деталь";
-                    string choice2 = "Номер пачки";
+                    string choice2 = "Комплектация пачки";
+                    
                     // Проверяем, какие строки уже есть
                     bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
                     bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
@@ -1176,6 +1862,7 @@ namespace SewingProduction.form
                     if (!hasChoice2) options.Add(choice2);
 
                     string selectedText = null;
+                    string kod_o = null;
 
                     if (options.Count == 2)
                     {
@@ -1183,6 +1870,7 @@ namespace SewingProduction.form
                         if (choiceResult == DialogResult.Yes)
                         {
                             selectedText = options[0];
+                            kod_o = "001"; 
                         }
                         else if (choiceResult == DialogResult.No)
                         {
@@ -1190,12 +1878,14 @@ namespace SewingProduction.form
                             if (choiceResult2 == DialogResult.Yes)
                             {
                                 selectedText = options[1];
+                                kod_o = "100";
                             }
                         }
                     }
                     else if (options.Count == 1)
                     {
                         selectedText = options[0];
+                        kod_o = "100";
                         MessageBox.Show($"Добавлена строка: {selectedText}", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
@@ -1208,6 +1898,7 @@ namespace SewingProduction.form
                         var newKont = new NormKont
                         {
                             AnnId = _newAnnId,
+                            kod_o = kod_o,
                             text = selectedText,
                             IsNew = true
                         };
@@ -1222,11 +1913,11 @@ namespace SewingProduction.form
             }
             else if (view.FocusedColumn.FieldName == "Text")
             {
-                e.Cancel = true;
+                e.Cancel = true; // Запрещаем редактирование поля Text для существующих строк
             }
             else
             {
-                e.Cancel = false;
+                e.Cancel = false; // Разрешаем редактирование других полей
             }
         }
 
@@ -1309,12 +2000,41 @@ namespace SewingProduction.form
                 _currentAnnData.dateUpdate = null;
                 if (_newAnnId > 0)
                 {
-                    var parameters = new Dictionary<string, object>
-                    {
-                        { "@KoddRt", _currentAnnData.Kod }
-                    };
-                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @KoddRt", parameters);
-//                    RecalculateSek();
+                          RecalculateSek();
+                  //  var calculatedData = await _artNormService.GetCalculatedSekFromViewAsync(_newAnnId);
+                  ////  Thread.Sleep(5000);
+
+                  //  // 3. ОБНОВЛЯЕМ нашу основную модель _currentAnnData этими данными
+                  //  if (calculatedData != null)
+                  //  {
+                  //      _currentAnnData.SekVyaz = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekVyazo = calculatedData.sek_O;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3;
+                  //      _currentAnnData.SekVyaz5 = calculatedData.sek_5;
+                  //      _currentAnnData.SekVyaz12 = calculatedData.sek_12;
+                  //      _currentAnnData.SekVyaz7 = calculatedData.sek_7;
+                  //      _currentAnnData.SekVyaz10 = calculatedData.sek_10;
+                  //      _currentAnnData.SekVyaz6 = calculatedData.sek_6;
+                  //      _currentAnnData.SekVyaz3 = calculatedData.sek_3; 
+                  //      _currentAnnData.SekVyaz70 = calculatedData.sek_70;
+                  //      _currentAnnData.SekVyaz71 = calculatedData.sek_71;
+                  //      _currentAnnData.SekVyaz72 = calculatedData.sek_72;
+                  //      _currentAnnData.SekVyaz62 = calculatedData.sek_62;
+                  //      _currentAnnData.SekVyaz14 = calculatedData.sek_14;
+                  //      _currentAnnData.SekVyaz57 = calculatedData.sek_57;
+                  //      _currentAnnData.SekVyaz18 = calculatedData.sek_18;
+                  //      _currentAnnData.SekShv = calculatedData.sek_shv;
+                  //      //_currentAnnData.SekShv1 = calculatedData.sek_sh1;
+                  //      _currentAnnData.SekKr = calculatedData.sek_kr;
+                  //      _currentAnnData.Sek = calculatedData.sk;       // 'sk' из view - это общая сумма секунд
+                  //      _currentAnnData.Seb = (int)calculatedData.sb; // 'sb' из view - это себестоимость 
+                  //  }
+                  //  else
+                  //  {
+                  //      // Обработка случая, если для annId нет данных в представлении (например, если нет операций)
+                  //       //_logger.LogWarningAsync()$"Не найдены расчетные данные в NormRaszSek_view для annId: {_newAnnId}");
+                  //  }
+
                 }
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, _currentAnnData);
                 CreatedAnn = _currentAnnData;
@@ -1353,64 +2073,97 @@ namespace SewingProduction.form
         }
 
         private async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, int newAnnId, List<int> deletedIds)
-    where T : class, INewable, new()
+    where T : class, INewable, IModifiable, new()
         {
             var stopwatch = Stopwatch.StartNew();
             var bulkStopwatch = new Stopwatch();
 
-            var newItems = list.Where(x => x.IsNew).ToList();
-            var existingItems = list.Where(x => !x.IsNew).ToList();
+            // Определяем, нужно ли вставлять все записи как новые
+            // Это происходит когда создается новый ANN ID (режимы Clone, ArchAndCopy, NewWorkDivision)
+            // или когда загружаем существующие данные для нового ANN ID
+            bool shouldInsertAllAsNew = newAnnId != _selectedAnnId || _mode == (int)Mode.Clone || _mode == (int)Mode.ArchAndCopy || _mode == (int)Mode.NewWorkDivision;
+
+            List<T> itemsToInsert;
+            List<T> itemsToUpdate;
+
+            if (shouldInsertAllAsNew)
+            {
+                // Все записи должны быть вставлены как новые
+                itemsToInsert = list.ToList();
+                itemsToUpdate = new List<T>();
+            }
+            else
+            {
+                // Обычная логика: новые записи - вставка, существующие - обновление
+                itemsToInsert = list.Where(x => x.IsNew).ToList();
+                itemsToUpdate = list.Where(x => x.IsModified && !x.IsNew).ToList();
+            }
 
             string itemTypeName = typeof(T).Name;
-            await _logger.LogEventAsync($"[{itemTypeName}] Start saving. New: {newItems.Count}, Existing: {existingItems.Count}", "SaveListAsync");
+            await _logger.LogEventAsync($"[{itemTypeName}] Start saving. Insert: {itemsToInsert.Count}, Update: {itemsToUpdate.Count}, Mode: {_mode}, NewAnnId: {newAnnId}, SelectedAnnId: {_selectedAnnId}", "SaveListAsync");
 
             // 1. Удаление
             if (deletedIds?.Any() == true)
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string deleteSql = $"DELETE FROM {tableName} WHERE {keyFieldName} IN @ids";
+                    string deleteSql = $"Update {tableName} SET nrDateDel = GETDATE(), nrCompDel = HOST_NAME() where {keyFieldName} in @ids";
                     await connection.ExecuteAsync(deleteSql, new { ids = deletedIds });
                     await _logger.LogEventAsync($"[{itemTypeName}] Удалено записей: {deletedIds.Count}", "SaveListAsync");
                 }
             }
 
-            // 2. Обработка новых
-            if (newItems.Any())
+            // 2. Обработка вставки
+            if (itemsToInsert.Any())
             {
-                foreach (var item in newItems)
+                foreach (var item in itemsToInsert)
                 {
-                    var annIdProp = typeof(T).GetProperty("AnnId");
+                    var annIdProp = typeof(T).GetProperty("annId");
                     if (annIdProp != null)
                     {
                         annIdProp.SetValue(item, newAnnId);
                     }
                 }
-
+                var logStringBuilder = new StringBuilder();
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {newItems.Count}", "SaveListAsync");
-                    bulkStopwatch.Restart();
-                    await connection.BulkInsertAsync(newItems);
-                    bulkStopwatch.Stop();
+                    try
+                    {
+                        await _logger.LogEventAsync($"[{itemTypeName}] BulkInsert: {itemsToInsert.Count}", "SaveListAsync");
+                        bulkStopwatch.Restart();
+                        //await connection.BulkInsertAsync(itemsToInsert);
+                        await connection.UseBulkOptions(options =>
+                        {
+                            // Включаем логирование и указываем, куда записывать лог
+                            options.Log = (log) => logStringBuilder.AppendLine(log);
+                        })
+                   .BulkInsertAsync(itemsToInsert);
+                        bulkStopwatch.Stop();
+                    }
+                    catch (Exception ex)
+                    {
+                        // Если произошла ошибка, сначала записываем перехваченный SQL-запрос
+                        await _logger.LogErrorAsync(ex, $"Ошибка при BulkInsert [{itemTypeName}]. Перехваченный SQL:\n{logStringBuilder.ToString()}");
+                        throw; // Пробрасываем исключение дальше
+                    }
                 }
 
-                foreach (var item in newItems)
+                    foreach (var item in itemsToInsert)
                     item.IsNew = false;
             }
 
-            // 3. Обновление
-            if (existingItems.Any())
+            // 3. Обновление (только если не shouldInsertAllAsNew)
+            if (itemsToUpdate.Any())
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {existingItems.Count}", "SaveListAsync");
+                    await _logger.LogEventAsync($"[{itemTypeName}] BulkUpdate: {itemsToUpdate.Count}", "SaveListAsync");
                     bulkStopwatch.Restart();
-                    await connection.BulkUpdateAsync(existingItems);
+                    await connection.BulkUpdateAsync(itemsToUpdate);
                     bulkStopwatch.Stop();
 
                     // Сброс флага IsModified после успешного обновления
-                    foreach (var item in existingItems)
+                    foreach (var item in itemsToUpdate)
                     {
                         if (item is IModifiable modifiableItem)
                         {
@@ -1460,7 +2213,12 @@ namespace SewingProduction.form
         /// </summary>
         private async void buffer_Click(object sender, EventArgs e)
         {
-            if (_bufferWorkDivision > 0)
+            int Nome = 0;
+
+            // Используем глобальный буфер если доступен, иначе локальный
+            int bufferIdToUse = TeamWorkBuffer.HasData ? TeamWorkBuffer.BufferId : _bufferWorkDivision;
+
+            if (bufferIdToUse > 0)
             {
                 try
                 {
@@ -1481,39 +2239,57 @@ namespace SewingProduction.form
                         _normRaszList?.Clear();
                         _normRaskList?.Clear();
                         _normKontList?.Clear();
+                        _lastFocusedRaszOperation = null; // Сбрасываем последнюю операцию
 
                         _normRaszBindingSource?.ResetBindings(false);
                         _normRaskBindingSource?.ResetBindings(false);
                         _normKontBindingSource?.ResetBindings(false);
                     }
 
-                    // Загружаем данные из буфера
-                    //await WorkDivisionLoadAsync(caller: "buffer", _bufferWorkDivision);
-                    //MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                    //            MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    // await LoadAndCloneAll(_bufferWorkDivision, _newAnnId);
-                    var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
-                    _normRaszList.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+                    if (_normRaszList != null && _normRaszList.Count > 0)
+                    {
+                        Nome = _normRaszList.Select(x => x.N).DefaultIfEmpty(0).Max();
+                    }
+                    List<NormRasz> raszList = await _artNormService.GetRelatedNormRasz(bufferIdToUse);
+                    if (raszList == null) raszList = new List<NormRasz>();
 
-                    //_currentAnnData.dateCreate = DateTime.Now;
+                    int nextN = Nome;
+                    foreach (var item in raszList)
+                    {
+                        item.IsNew = true;
+                        item.N = item.N + Nome;
+                        _normRaszList.Add(item);
+                    }
 
-                    MessageBox.Show("Данные из буфера успешно загружены", "Информация",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    TWGridHelper.sortGridView(gridViewRasz);
+                    //if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
+                    //if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
+                
+                    //var rasz = await _artNormService.GetRelatedNormRasz(_bufferWorkDivision);
+                    //_normRaszList.Add(rasz);//.BulkLoad(CloneUtils.CloneList(rasz, _newAnnId, "nrId"));
+
+                //_currentAnnData.dateCreate = DateTime.Now;
+
+
+
+                // Показываем статус успешной загрузки
+                    await ShowStatusMessage("Данные из буфера успешно загружены");
                 }
                 catch (SqlException sqlEx)
                 {
                     await _logger.LogErrorAsync(sqlEx, "Ошибка при вставке данных из буфера");
-                    MessageBox.Show($"Ошибка при вставке данных из буфера: {sqlEx.Message}", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {sqlEx.Message}", 5000, Color.Red);
                 }
                 catch (Exception ex)
                 {
                     await _logger.LogErrorAsync(ex, "Ошибка при вставке данных из буфера");
-                    MessageBox.Show($"Ошибка при вставке данных из буфера: {ex.Message}", "Ошибка",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    await ShowStatusMessage($"Ошибка при вставке данных из буфера: {ex.Message}", 5000, Color.Red);
                 }
             }
-            else { MessageBox.Show("В буфере пусто", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information); }
+            else
+            {
+                await ShowStatusMessage("В буфере пусто", 3000, Color.Orange);
+            }
         }
 
         private async Task InvokeAsync(Action action)
@@ -1546,18 +2322,77 @@ namespace SewingProduction.form
 
             return isValid;
         }
-        private async Task ShowStatusMessage(string message, int delayMs = 3000)
+        private async Task ShowStatusMessage(string message, int delayMs = 3000, Color? color = null)
         {
             statusLabel.Text = message;
-            await Task.Delay(delayMs);
-            statusLabel.Text = "";
+
+            if (color.HasValue)
+            {
+                var originalColor = statusLabel.ForeColor;
+                statusLabel.ForeColor = color.Value;
+
+                await Task.Delay(delayMs);
+                statusLabel.Text = "";
+                statusLabel.ForeColor = originalColor;
+            }
+            else
+            {
+                await Task.Delay(delayMs);
+                statusLabel.Text = "";
+            }
         }
 
         private void OnDataChanged(object sender, ListChangedEventArgs e)
         {
-            if (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0)
+            // Помечаем изменения только если не идёт начальная загрузка
+            if (!_isInitialLoading && (e.ListChangedType != ListChangedType.Reset || _normRaszList.Count > 0 || _normRaskList.Count > 0 || _normKontList.Count > 0))
             {
                 _hasUnsavedChanges = true;
+            }
+        }
+
+        /// <summary>
+        /// Обновляет отображение буфера на основе глобального или локального состояния
+        /// </summary>
+        private void UpdateBufferDisplay()
+        {
+            try
+            {
+                if (TeamWorkBuffer.HasData)
+                {
+                    textBoxBuffer.Text = TeamWorkBuffer.BufferText;
+                }
+                else if (_bufferWorkDivision > 0)
+                {
+                    // Оставляем существующую логику для обратной совместимости
+                    // Текст будет установлен в основном методе загрузки
+                }
+                else
+                {
+                    textBoxBuffer.Text = "Буфер пуст";
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при обновлении отображения буфера");
+            }
+        }
+
+        /// <summary>
+        /// Обработчик события изменения глобального буфера
+        /// </summary>
+        private void OnBufferChanged(object sender, BufferChangedEventArgs e)
+        {
+            try
+            {
+                this.Invoke((MethodInvoker)(() =>
+                {
+                    UpdateBufferDisplay();
+                }));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при обработке изменения буфера");
             }
         }
 
@@ -1654,20 +2489,83 @@ namespace SewingProduction.form
 
         private void gridViewRasz_ValidatingEditor(object sender, DevExpress.XtraEditors.Controls.BaseContainerValidateEditorEventArgs e)
         {
-            if (_mode == (int)Mode.Edit &&
-                _currentAnnData?.dateUpdate != null &&
-                _currentAnnData.dateUpdate != DateTime.MinValue)
+            //if (_mode == (int)Mode.Edit &&
+            //    _currentAnnData?.dateUpdate != null &&
+            //    _currentAnnData.dateUpdate != DateTime.MinValue)
+            //{
+            //    if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+            //    {
+            //        var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
+            //        if (original != null && newSec > original.Sek)
+            //        {
+            //            e.Valid = false;
+            //            e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
+            //        }
+            //    }
+            //}
+        }
+
+        private void gridViewKont_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+        private void gridViewRaskr_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+        private void gridViewRasz_PopupMenuShowing(object sender, PopupMenuShowingEventArgs e)
+        {
+            _gridHelper.popUpMenuCopy(sender, e);
+        }
+
+        /// <summary>
+        /// Автоматически добавляет две стандартные строки в norm_kont для новых РТ
+        /// </summary>
+        private void AddStandardKontRows()
+        {
+            try
             {
-                if (e.Value is int newSec && gridViewRasz.GetFocusedRow() is NormRasz row)
+                string choice1 = "Пронумеровать деталь";
+                string choice2 = "Комплектация пачки";
+
+                // Проверяем, что строки еще не добавлены
+                bool hasChoice1 = _normKontList.Any(nk => nk.text == choice1);
+                bool hasChoice2 = _normKontList.Any(nk => nk.text == choice2);
+
+                if (!hasChoice1)
                 {
-                    var original = _originalNormRaszList.FirstOrDefault(x => x.nrId == row.nrId);
-                    if (original != null && newSec > original.Sek)
+                    var newKont1 = new NormKont
                     {
-                        e.Valid = false;
-                        e.ErrorText = $"Значение нельзя увеличивать. Было: {original.Sek}, стало: {newSec}";
-                    }
+                        AnnId = _newAnnId,
+                        text = choice1,
+                        kod_o = "001",
+                        IsNew = true
+                    };
+                    _normKontList.Add(newKont1);
                 }
+
+                if (!hasChoice2)
+                {
+                    var newKont2 = new NormKont
+                    {
+                        AnnId = _newAnnId,
+                        text = choice2,
+                        kod_o = "100",
+                        IsNew = true
+                    };
+                    _normKontList.Add(newKont2);
+                }
+
+                // Обновляем грид
+                _normKontBindingSource?.ResetBindings(false);
+
+                _logger.LogEventAsync($"Добавлены стандартные строки norm_kont для AnnId: {_newAnnId}", "AddStandardKontRows").ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogErrorAsync(ex, "Ошибка при добавлении стандартных строк norm_kont").ConfigureAwait(false);
             }
         }
     }
 }
+

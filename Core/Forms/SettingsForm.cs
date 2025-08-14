@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace SewingProduction.form
         }
         private void SettingsForm_Load(object sender, EventArgs e)
         {
+            InitDatabaseSelector();
             // Тема
             var currentTheme = SettingsManager.Current.Theme;
             customComboBoxTheme.Items.Clear();
@@ -36,6 +38,9 @@ namespace SewingProduction.form
 
             // Сохранение вкладок
             customCheckBoxSaveOpenTabs.Checked = SettingsManager.GetSaveOpenTabs();
+            // Сокращенное Название Вкладок
+            customCheckBoxSokrNameTabs.Checked = SettingsManager.GetShortTabNames();
+            customCheckBoxPovtOpenTabs.Checked = SettingsManager.GetAllowDuplicateTabs();
         }
 
         public interface IDataUpdatableForm
@@ -69,7 +74,16 @@ namespace SewingProduction.form
         {
             SettingsManager.SetSaveOpenTabs(customCheckBoxSaveOpenTabs.Checked);
         }
+        private void customCheckBoxSokrNameVklad_CheckedChanged(object sender, EventArgs e)
+        {
+            bool checkedValue = customCheckBoxSokrNameTabs.Checked;
+            SettingsManager.SetShortTabNames(checkedValue);
+        }
 
+        private void customCheckBoxPovtOpenTabs_CheckedChanged(object sender, EventArgs e)
+        {
+            SettingsManager.SetAllowDuplicateTabs(customCheckBoxPovtOpenTabs.Checked);
+        }
         private void customButtonClearProfile_Click(object sender, EventArgs e)
         {
             var confirm = MessageBox.Show("Вы действительно хотите очистить историю профилей?",
@@ -82,6 +96,35 @@ namespace SewingProduction.form
                 SettingsManager.ClearLoginAndPasswordHistory();
                 MessageBox.Show("История профилей очищена", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+        private void InitDatabaseSelector()
+        {
+            customComboBoxRejimRab.Items.AddRange(new string[]
+            {
+                "ace",
+                "ace_test",
+                "ace_backup",
+                "ace_backup_new",
+                "global",
+                "oms"
+            });
+
+            var savedDb = SettingsManager.GetSelectedDatabase();
+            if (customComboBoxRejimRab.Items.Contains(savedDb))
+                customComboBoxRejimRab.SelectedItem = savedDb;
+            else
+                customComboBoxRejimRab.SelectedIndex = 0;
+        }
+
+        private void customButtonSaveExit_Click(object sender, EventArgs e)
+        {
+            var selectedDb = customComboBoxRejimRab.SelectedItem?.ToString();
+            if (!string.IsNullOrEmpty(selectedDb))
+            {
+                SettingsManager.SaveSelectedDatabase(_user.UserName, selectedDb);
+                MessageBox.Show("Настройки сохранены", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            this.Close();
         }
     }
 }

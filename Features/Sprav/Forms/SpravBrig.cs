@@ -32,7 +32,7 @@ namespace SewingProduction.form
         public SpravBrig(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
             ThemeManager.UpdateTheme(this);
@@ -47,13 +47,13 @@ namespace SewingProduction.form
         public SpravBrig()
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _spravBrigDataService = new SpravBrigDataService(dbHelper);
             _serviceBroker = new ServiceBroker(this);
         }
         private void SpravBrig_Load(object sender, EventArgs e)
         {
-            gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
+            //gridControlSprav.InitializeAccess(_user, this.Name, new List<string> { _tableSQL });
             //gridControlSprav.InitializeAccess(_user, this.Name);
             //Загрузка комбобокса:
             comboBoxZeh_Enter(sender, e);

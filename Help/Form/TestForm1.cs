@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Help.Form;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
@@ -29,7 +29,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         {
             InitializeComponent();
             _user = user;
-            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper("ace")));
+            _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
         }
@@ -76,5 +76,9 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _serviceBrokerForTable2.StopBroker();
         }
 
+        private void customButton1_Click(object sender, EventArgs e)
+        {
+            customButton2.Visible = !customButton2.Visible;
+        }
     }
 }

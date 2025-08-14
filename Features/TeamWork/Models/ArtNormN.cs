@@ -55,6 +55,8 @@ namespace SewingProduction.Models
 
         [Column("sek_shv")]
         public int SekShv { get; set; }
+        [Column("sek_vyaz3")]
+        public int SekVyaz3 { get; set; }
         [Column("sek_vyaz5")]
         public int SekVyaz5 { get; set; }
         [Column("sek_vyaz6")]
@@ -85,6 +87,8 @@ namespace SewingProduction.Models
         public int SekVyaz18 { get; set; }
         [NotMapped]
         public int SekShv1   {get; set;}
+        [Column("st")]
+        public int st { get; set; } // Стоимость?
 
         [Column("komment")]
         public string Komment
@@ -132,6 +136,14 @@ namespace SewingProduction.Models
                 }
             }
         }
+        [Column("annDateDel")]
+        public DateTime? dateDel { get; set; }
+        [Column("annCompDel")]
+        public string compDel { get; set; }
+        [Column("annDateAdd")]
+        public DateTime? dateAdd { get; set; }
+        [Column("annCompAdd")]
+        public string compAdd { get; set; }
 
         [Column("sek_kr")]
         public int SekKr { get; set; }
@@ -216,6 +228,7 @@ namespace SewingProduction.Models
             this.Articul = source.Articul;
             this.Mod = source.Mod;
             this.SekShv = source.SekShv;
+            this.SekVyaz3 = source.SekVyaz3;
             this.SekVyaz5 = source.SekVyaz5;
             this.SekVyaz6 = source.SekVyaz6;
             this.SekVyaz7 = source.SekVyaz7;
@@ -245,6 +258,10 @@ namespace SewingProduction.Models
             this.SekVyaz57 = source.SekVyaz57;
             this.SekVyaz18 = source.SekVyaz18;
             this.SekShv1 = source.SekShv1;
+            this.dateDel = source.dateDel;
+            this.compDel = source.compDel;
+            this.dateAdd = source.dateAdd;
+            this.compAdd = source.compAdd;
         }
 
         public ArtNormN Clone()

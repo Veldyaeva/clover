@@ -2,14 +2,17 @@
 using DevExpress.XtraTabbedMdi;
 using SewingProduction.form;
 using SewingProduction.form.Nadezhda;
-using SewingProduction.form.UserDistribution;
 using System;
 using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Forms;
+using SewingProduction.Features.TeamWork;
+using System.Diagnostics;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Articul;
 
 namespace SewingProduction
 {
@@ -26,6 +29,7 @@ namespace SewingProduction
             InitializeComponent();
             UserFilePaths.EnsureFolderExists();
             this.IsMdiContainer = true;
+            this.KeyPreview = true;
             _passwordHasher = new PasswordHasher();
         }
         private async void SpMainForm_Load(object sender, EventArgs e)
@@ -66,8 +70,8 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var helpForm = new HelpForm(this._formManager);
-            helpForm.Show();
+            string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            showHelpForm(helpPath);
         }
         #endregion
         #region Справочники
@@ -117,16 +121,22 @@ namespace SewingProduction
         }
         private void тарифыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenForm(new EditTarif(_user), sender);
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
+            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), sender);
         }
+        #region Виды браков пряжи
+        private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+        }
+        #endregion
         #endregion
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -140,11 +150,11 @@ namespace SewingProduction
         #endregion
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TeamWork(), sender);
+            OpenForm(new TeamWork(_user), sender);
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -190,8 +200,21 @@ namespace SewingProduction
         {
             if (e.Page != null && e.Page.MdiChild != null)
             {
-                e.Page.Text = TruncateWithEllipsis(e.Page.MdiChild.Text, 25); // обрезка с многоточием
-                e.Page.Tooltip = e.Page.MdiChild.Text; // полное имя во всплывающей подсказке
+                string fullText = e.Page.MdiChild.Text;
+                bool shortNames = SettingsManager.GetShortTabNames(); // новая настройка
+
+                if (shortNames)
+                {
+                    e.Page.Text = TruncateWithEllipsis(fullText, 25);
+                    xtraTabbedMdiManager1.TabPageWidth = 150;
+                }
+                else
+                {
+                    e.Page.Text = fullText;
+                    xtraTabbedMdiManager1.TabPageWidth = 0;
+                }
+
+                e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
             }
         }
 
@@ -202,6 +225,24 @@ namespace SewingProduction
                 return text;
             return text.Substring(0, maxLength - 3) + "...";
         }
+
         #endregion
+        private void SpMainForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                showHelpForm();
+            }
+        }
+        private void кнопкаToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showHelpForm();
+        }
+        private void showHelpForm(string filePath = null)
+        {
+            var helpForm = new HelpForm(this._formManager, filePath);
+            helpForm.Show();
+        }
+
     }
 }

@@ -12,16 +12,16 @@ using DevExpress.XtraGrid.Views.Grid;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form.UserDistribution.Models;
+using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class UserHierarchy : CustomForm
     {
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         DbService dbService;
         private readonly AllProfileDataService _allProfileDataService;
         private readonly UserModelDataService _userModelDataService;
@@ -58,7 +58,7 @@ namespace SewingProduction.form.UserDistribution
                 })
                 .ToList();
 
-            _userHierarchy = BuildUserHierarchy(allUsers, _user.UserId);
+            _userHierarchy = BuildUserHierarchy(allUsers, 0);
 
             bindingSourceUsers.DataSource = _userHierarchy;
         }
@@ -162,7 +162,7 @@ namespace SewingProduction.form.UserDistribution
                     CAST(UserID AS VARCHAR(MAX)) AS UserPath,
                     0 AS Generation
                 FROM Users
-                WHERE CreatorID = @CreatorID 
+                WHERE CreatorID = 0
 
                 UNION ALL
 

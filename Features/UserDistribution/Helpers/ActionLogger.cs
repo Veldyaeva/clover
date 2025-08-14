@@ -10,7 +10,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
 {
     public static class ActionLogger
     {
-        private static readonly DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        private static readonly DatabaseHelper dbHelper = new DatabaseHelper();
 
         public static async Task Log(int userId, string eventDescription, string komp = null, string NameForm = null, string NameObject = null)
         {
@@ -21,7 +21,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
                 (UserID, NameObject, NameForm, Event, EventDate, Komp)
                 VALUES (@UserID, @NameObject, @NameForm, @Event, @EventDate, @Komp)";
 
-            await dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object>
+            await dbHelper.ExecuteNonQueryAsync(query, new Dictionary<string, object>
             {
                 ["@UserID"] = userId,
                 ["@NameObject"] = NameObject ?? (object)DBNull.Value,

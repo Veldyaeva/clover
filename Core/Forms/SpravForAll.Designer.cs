@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form
 {
     partial class SpravForAll
     {
@@ -61,7 +62,7 @@
             simpleButtonAddOtm = new CustomButton();
             simpleButtonDel = new CustomButton();
             simpleButtonAddSave = new CustomButton();
-            gridControlSprav = new CustomGridControl();
+            gridControlSprav = new CustomGridControlColumn();
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             simpleButtonRed = new CustomButton();
@@ -614,7 +615,7 @@
         private System.Windows.Forms.BindingSource nameColumnList;
         private DevExpress.XtraTab.XtraTabControl AddTab;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private SewingProduction.CustomGridControl gridControlSprav;
+        private CustomGridControlColumn gridControlSprav;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageAdd;
         private System.Windows.Forms.Label label10;

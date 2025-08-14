@@ -10,12 +10,12 @@ using System.Windows.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 
-namespace SewingProduction.form.UserDistribution
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class ActionHistory : CustomForm
     {
         private readonly ActionHistoryDataService _actionHistoryDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         public ActionHistory(UserClass user) : base(user)
         {
             InitializeComponent();

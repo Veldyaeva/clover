@@ -1,4 +1,4 @@
-﻿namespace SewingProduction.form.UserDistribution
+﻿namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class AboutBox
     {
@@ -165,7 +165,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "AboutBox";
-            Padding = new System.Windows.Forms.Padding(10, 10, 10, 10);
+            Padding = new System.Windows.Forms.Padding(10);
             ShowIcon = false;
             ShowInTaskbar = false;
             StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

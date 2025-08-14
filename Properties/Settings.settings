@@ -2,13 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SewingProduction.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ACEConnectionString3" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
-    </Setting>
     <Setting Name="GlobalConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
@@ -17,28 +10,12 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=GLOBAL;Initial Catalog=PLANETA;Integrated Security=True;Encrypt=False</Value>
     </Setting>
-    <Setting Name="ACEConnectionString1" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
-    </Setting>
     <Setting Name="OMSConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;ConnectionString&gt;Data Source=OMS;Initial Catalog=PLANETA;User ID=readonly;Password=qwerty12345;Encrypt=False&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=OMS;Initial Catalog=PLANETA;User ID=readonly;Password=qwerty12345;Encrypt=False</Value>
-    </Setting>
-    <Setting Name="ACEConnectionString" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ace_backup_new;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
-  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ace_backup_new;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
     </Setting>
     <Setting Name="NormRaskrNew_GridSettings" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -53,12 +30,28 @@
     <Setting Name="SelectedTheme" Type="System.String" Scope="User">
       <Value Profile="(Default)">Gold</Value>
     </Setting>
-    <Setting Name="ACEConnectionString4" Type="(Connection string)" Scope="Application">
+    <Setting Name="ACEbackupConnectionString" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
   &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
+    </Setting>
+    <Setting Name="ACEbackupnewConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup_new;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ACE_backup_new;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
+    </Setting>
+    <Setting Name="ACEConnectionString" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=DBFSV\DBF2008;Initial Catalog=ace;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False&lt;/ConnectionString&gt;
+  &lt;ProviderName&gt;System.Data.SqlClient&lt;/ProviderName&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=DBFSV\DBF2008;Initial Catalog=ace;Persist Security Info=True;User ID=sa;Password=kf,bhbyn;Encrypt=False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
