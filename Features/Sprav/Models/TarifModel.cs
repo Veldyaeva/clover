@@ -49,6 +49,14 @@ namespace SewingProduction.Features.Sprav
             set { if (_begin_dt != value) { _begin_dt = value; OnPropertyChanged(nameof(begin_dt)); } }
         }
 
+        private string _value;
+        [Column("value")]
+        public string value
+        {
+            get => _value;
+            set { if (_value != value) { _value = value; OnPropertyChanged(nameof(value)); } }
+        }
+
         private decimal? _value_numeric;
         [Column("value_numeric")]
         public decimal? value_numeric
@@ -117,12 +125,19 @@ namespace SewingProduction.Features.Sprav
             get => _priznSign;
             set { if (_priznSign != value) { _priznSign = value; OnPropertyChanged(nameof(priznSign)); } }
         }
-        private int _whereUses;
+        private string _whereUses;
         [Column("whereUses")]
-        public int whereUses
+        public string whereUses
         {
             get => _whereUses;
             set { if (_whereUses != value) { _whereUses = value; OnPropertyChanged(nameof(whereUses)); } }
+        }
+        private int _arhiv;
+        [Column("arhiv")]
+        public int arhiv
+        {
+            get => _arhiv;
+            set { if (_arhiv != value) { _arhiv = value; OnPropertyChanged(nameof(arhiv)); } }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

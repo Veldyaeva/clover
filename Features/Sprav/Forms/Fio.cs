@@ -431,6 +431,11 @@ namespace SewingProduction.form
             //pbForm.Show();
 
         }
+
+        private void tableLayoutPanel8_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 }
