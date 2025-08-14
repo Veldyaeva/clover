@@ -1080,17 +1080,28 @@ namespace SewingProduction.Features.TeamWork.Forms
                 repositoryItemLookUpEdit_oborudShv.NullText = "[Выберите значение]";
 
                 repositoryItemLookUpEdit_oborudShv.EditValueChanged += async (s, e) =>
-    {
-        var editor = s as LookUpEdit;
-        if (editor?.EditValue is int newKodOb)
-        {
-            var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
-            if (!string.IsNullOrEmpty(spec))
-            {
-                gridViewRasz.SetFocusedRowCellValue("Spec", spec);
-            }
-        }
-    };
+                {
+                    var editor = s as LookUpEdit;
+                    if (editor?.EditValue is int newKodOb)
+                    {
+                        // 1) Проставляем код оборудования
+                        gridViewRasz.SetFocusedRowCellValue("KodOb", newKodOb);
+
+                        // 2) Проставляем текст оборудования в Obor
+                        var obItem = oborudShvList?.FirstOrDefault(x => x.kod_ob == newKodOb);
+                        if (obItem != null)
+                        {
+                            gridViewRasz.SetFocusedRowCellValue("Obor", obItem.text_ob);
+                        }
+
+                        // 3) Подтягиваем spec
+                        var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
+                        if (!string.IsNullOrEmpty(spec))
+                        {
+                            gridViewRasz.SetFocusedRowCellValue("Spec", spec);
+                        }
+                    }
+                };
 
                 repositoryItemLookUpEdit_kodProizv.EditValueChanged += (s, e) =>
                 {

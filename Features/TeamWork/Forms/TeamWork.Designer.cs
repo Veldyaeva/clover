@@ -1201,7 +1201,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // colobor
             // 
             colobor.Caption = "оборудование";
-            colobor.FieldName = "TextOb";
+            colobor.FieldName = "Obor";
             colobor.MinWidth = 23;
             colobor.Name = "colobor";
             colobor.Visible = true;
