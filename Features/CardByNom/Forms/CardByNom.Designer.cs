@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 //using System.Windows.Media;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction
 {

@@ -47,6 +47,7 @@ namespace SewingProduction.Services
 
                     if (columnName == "grup") return type.GetProperty(nameof(ArtNormN.grup));
                     if (columnName == "sek_shv") return type.GetProperty(nameof(ArtNormN.SekShv));
+                    if (columnName == "sek_vyaz3") return type.GetProperty(nameof(ArtNormN.SekVyaz3));
                     if (columnName == "sek_vyaz5") return type.GetProperty(nameof(ArtNormN.SekVyaz5));
                     if (columnName == "sek_vyaz6") return type.GetProperty(nameof(ArtNormN.SekVyaz6));
                     if (columnName == "sek_vyaz7") return type.GetProperty(nameof(ArtNormN.SekVyaz7));
@@ -67,8 +68,13 @@ namespace SewingProduction.Services
                     if (columnName == "parentid") return type.GetProperty(nameof(ArtNormN.ParentId));
                     if (columnName == "statustext") return type.GetProperty(nameof(ArtNormN.StatusText));
                     if (columnName == "komment") return type.GetProperty(nameof(ArtNormN.Komment));
-                    if (columnName == "annRecommendation") return type.GetProperty(nameof(ArtNormN.Reco));
+                    if (columnName == "annrecommendation") return type.GetProperty(nameof(ArtNormN.Reco));
                     if (columnName == "seb") return type.GetProperty(nameof(ArtNormN.Seb));
+                    if (columnName == "anndatedel") return type.GetProperty(nameof(ArtNormN.dateDel));
+                    if (columnName == "anncompdel") return type.GetProperty(nameof(ArtNormN.compDel));
+                    if (columnName == "anndateadd") return type.GetProperty(nameof(ArtNormN.dateAdd));
+                    if (columnName == "anncompadd") return type.GetProperty(nameof(ArtNormN.compAdd));
+                    if (columnName == "arh") return type.GetProperty(nameof(ArtNormN.Arh));
 
                     return null;
                 });
@@ -76,6 +82,12 @@ namespace SewingProduction.Services
             SqlMapper.SetTypeMap(typeof(ArtNormN), map);
         }
         #region мои методы
+        /// <summary>
+        /// Удалять можно ТОЛЬКО при отмене создания новой строки. Никакие существующие строки нельзя удалять!
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="annId"></param>
+        /// <returns></returns>
         public async Task DeleteByAnnId(string tableName, int annId)
         {
             try
@@ -91,19 +103,22 @@ namespace SewingProduction.Services
                 throw;
             }
         }
-            
+        // ArtNormService.cs
+        public async Task<NormRaszSekView> GetCalculatedSekFromViewAsync(int annId)
+        {
+            string query = "SELECT * FROM dbo.NormRaszSek_view WHERE annId = @annId";
+            var parameters = new { annId = annId };
+
+            return await _dbService.GetFirstOrDefaultAsync<NormRaszSekView>(query, parameters);
+        }
+
         public async Task<List<ArtNormN>> GetArtNormData()
         {
-        //    string query = @"
-        //SELECT 
-        //    annId, kod, grup, articul, mod, sek, sek_vyaz,
-        //    data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
-        //    sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_kr, slogn, komment, 
-        //    data_sozd, diz, constr  FROM ArtNormNView JOIN status_ann ON status = status_id";
             string query = @" select 
                    AnnID, kod, grup, articul, mod, sek, sek_shv, sek_vyaz5, sek_vyaz6, sek_vyaz7, sek_vyaz10, sek_vyaz12, sek_vyazo,
                     sek_vyaz, sek_vyaz14, sek_vyaz70, sek_vyaz71, sek_vyaz72, sek_vyaz62, sek_vyaz18, sek_vyaz57, sek_kr, seb, 
-                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId
+                    slogn, komment, annRecommendation as Reco, data_sozd, data_obn, diz, constr, status_ann.name AS statusText, status, parentId,
+                    annDateDel, annCompDel, annDateAdd, annCompAdd, arh
              FROM ArtNormNView JOIN status_ann ON status = status_id";
 
             using (var connecion = _dbHelper.GetConnection())
@@ -113,13 +128,13 @@ namespace SewingProduction.Services
             }
         }
 
-        public void UpdateAnnIdinArticul(string kod, int annId)
+        public void UpdateAnnIdinArticul(int annId, string kodd, string kodd_rt, string art)
         {
-            string query = "UPDATE sp_articul SET annId = @annId WHERE kod like @kod";
-            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kod", kod + "%" }, { "@annId", annId } });
+            string query = "UPDATE view_sp_articul SET annId = @annId WHERE ko = @kodd and articul = @art and kodd_rt = @kodd_rt";
+            _dbHelper.ExecuteNonQuery(query, new Dictionary<string, object> { { "@kodd_rt", kodd_rt }, { "@annId", annId }, { "@art", art }, { "@kodd", kodd } });
         }
 
-        /// <summary>
+        /// <summary> 
         /// Сбрасывает annId в таблице sp_articul для всех записей, связанных с указанным kodd_rt.
         /// </summary>
         /// <param name="kodd"></param>
@@ -170,7 +185,7 @@ namespace SewingProduction.Services
             SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
-            data_sozd, diz, constr 
+            data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
         FROM ArtNormNView 
                             JOIN status_ann ON status = status_id
                             WHERE annId = @annId";
@@ -214,7 +229,7 @@ namespace SewingProduction.Services
         }
         public async Task ExecutePztOperUpdateAsync()
         {
-            const string sql = "EXEC dbo.pztOperUpdateFast";
+            const string sql = "EXEC dbo.pztOperUpdateFast"; //"EXEC dbo.pztOperUpdateFast";
             await _dbHelper.ExecuteNonQueryAsync(sql);
         }
 
@@ -222,14 +237,14 @@ namespace SewingProduction.Services
         /// загрузка РТ для увязки. Статус != архивное
         /// </summary>
         /// <returns>Возвращает таблицу артикулов</returns>
-        public async Task<List<MyDataANN>> GetArtNormDataCurrent(int kod, bool includeAll)
+        public async Task<List<MyDataANN>> GetArtNormDataCurrent(bool includeAll)
         {
             string query = @"
                 SELECT  
-                    SUBSTRING(v.kod, 1, 7) AS kod, v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
+                    v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
-                    v.data_sozd, v.diz, v.constr 
+                    v.data_sozd, v.diz, v.constr, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
                 FROM ArtNormNView v
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
@@ -239,10 +254,10 @@ namespace SewingProduction.Services
             if (!includeAll)
             {
                 query += @" 
-                  AND EXISTS (SELECT 1
+                  AND EXISTS (SELECT top 1 *
                               FROM View_sp_articul spa
-                              WHERE spa.annId = v.annId AND spa.kodd_rt = @KodParam)"; 
-                parameters = new { KodParam = kod }; // Параметр для Dapper
+                              WHERE spa.annId = v.annId)"; 
+       //         parameters = new { KodParam = kod }; // Параметр для Dapper
             }
             else
             {
@@ -258,7 +273,13 @@ namespace SewingProduction.Services
 
         public async Task<List<MyDataANN>> GetArtNormDataByArticul(string artPrefix)
         {
-            string query = $"SELECT * FROM artNormNView WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
+            string query = @"SELECT 
+                annId, grup, articul, mod, sek, sek_vyaz, data_obn, sek_shv, 
+                status, sek_vyazo, sek_vyaz5, sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, 
+                sek_kr, slogn, komment, annRecommendation, data_sozd, diz, constr,
+                annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
+                FROM artNormNView 
+                WHERE status <> @StatusArchive AND articul LIKE @ArtPattern";
 
             var parameters = new
             {
@@ -278,13 +299,27 @@ namespace SewingProduction.Services
         /// </summary>
         /// <param name="kod">код</param>
         /// <returns></returns>
-        public async Task<string> GetImage(int kod)
+        public async Task<string> GetImage(int? annId = null, int? kod = null)
         {
-            string query = "select dbo.getFileEskizForKodd(@kod) as pathpict ";
-            string result = await _dbHelper.ExecuteScalarAsync<string>(query, new Dictionary<string, object> { { "@kod", kod} });
-            return result; 
-        }
+            string sql;
+            var p = new DynamicParameters();
+            
+            if (annId != null)        // поиск по AnnID
+            {
+                sql = @"SELECT TOP (1) 
+                       dbo.getFileEskizForKodd_rt(vsa.annId)
+                FROM   dbo.View_sp_articul vsa
+                WHERE  vsa.annId = @annId";
+                p.Add("@annId", annId);
+            }
+            else                      // прямой поиск по kodd
+            {
+                sql = "SELECT dbo.getFileEskizForKodd(@kod)";
+                p.Add("@kod", kod);
+            }
 
+            return await _dbHelper.ExecuteScalarAsync<string>(sql, p);
+        }
         internal Task<DataTable> GetNormOper()
         {
             string query = @"SELECT no.*, 
@@ -340,6 +375,7 @@ namespace SewingProduction.Services
     nr.kod_podr AS KodPodr,  
     nr.kod_proizv AS KodProizv,
     nr.Spec, nr.Obor, nr.nrId,
+    nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
     ob.text_ob as TextOb
@@ -385,11 +421,12 @@ WHERE nr.annId = @annId";
     nr.kod_ob AS KodOb,   
     nr.kod_podr AS KodPodr,  
     nr.kod_proizv AS KodProizv,
-    nr.Spec, nr.Obor, nr.nrId,
+    nr.Spec, nr.nrId,
+    nr.nrDateAdd, nr.nrCompAdd, nr.nrDateDel, nr.nrCompDel,
     kp.text_proizv as TextProizv,
     pv.text_vyaz as TextVyaz,
     ob.text_ob as TextOb
-FROM dbo.norm_rasz nr
+FROM dbo.normraszview nr
 LEFT JOIN kod_proizv kp ON nr.kod_proizv = kp.kod_proizv
 LEFT JOIN podr_vyaz pv ON nr.kod_podr = pv.kod_vyaz
 LEFT JOIN oborud_shv ob ON nr.kod_ob = ob.kod_ob
@@ -434,7 +471,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                    string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                     //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                     //return result.ToList();
                     var list = await connection.QueryAsync<NormRask>(
@@ -453,7 +490,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT id, AnnId, kod_o as KodO, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
+                string query = "SELECT id, AnnId, kod_o, Text, razryd, Sek, Kod, Seb, N, n_ch as NCh, N1, seb_s as SebS, Obor FROM norm_rask WHERE annId = @annId";
                 //var result = await connection.QueryAsync<NormRask>(query, new Dictionary<string, object> { { "@annId", annId } }, cancellationToken: ct);
                 //return result.ToList();
                 var list = await connection.QueryAsync<NormRask>(
@@ -474,7 +511,7 @@ WHERE nr.annId = @annId";
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                    string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                     //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                     var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                     return result.ToList();
@@ -485,7 +522,7 @@ WHERE nr.annId = @annId";
         {
             using (var connection = _dbHelper.GetConnection())
             {
-                string query = "SELECT AnnId, kod_o as KodO, Text, razryd, Sek FROM norm_kont WHERE annId = @annId";
+                string query = "SELECT AnnId, kod_o, Text, razryd, Sek, nkId FROM norm_kont WHERE annId = @annId";
                 //return _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@annId", annId } });
                 var result = await connection.QueryAsync<NormKont>(query, new Dictionary<string, object> { { "@annId", annId } });
                 return result.ToList();
@@ -497,7 +534,7 @@ WHERE nr.annId = @annId";
         /// <returns></returns>
         public async Task<List<MyDataART>> GetRelatedSpArt()
         {
-            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annID FROM sp_articul WHERE annId IS NULL";
+            string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, razm, annID FROM sp_articul WHERE annId IS NULL";
 
             using (var connection = _dbHelper.GetConnection())
             {

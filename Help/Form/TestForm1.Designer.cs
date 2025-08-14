@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class TestForm1
     {
@@ -29,7 +30,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            customGridControl1 = new CustomGridControl();
+            customGridControl1 = new CustomGridControlColumn();
             bindingSource1 = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             TestID = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -106,7 +107,6 @@
             customGroupBox1.BackColor = System.Drawing.Color.Transparent;
             customGroupBox1.Controls.Add(customLabel1);
             customGroupBox1.Controls.Add(customTextBox1);
-            customGroupBox1.Controls.Add(customButton1);
             customGroupBox1.Location = new System.Drawing.Point(12, 229);
             customGroupBox1.Name = "customGroupBox1";
             customGroupBox1.Size = new System.Drawing.Size(259, 250);
@@ -141,19 +141,20 @@
             customButton1.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton1.Font = new System.Drawing.Font("Arial", 10F);
             customButton1.ForeColor = System.Drawing.Color.Black;
-            customButton1.Location = new System.Drawing.Point(15, 90);
+            customButton1.Location = new System.Drawing.Point(313, 289);
             customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(187, 30);
+            customButton1.Size = new System.Drawing.Size(187, 51);
             customButton1.TabIndex = 2;
-            customButton1.Text = "customButton1";
+            customButton1.Text = "изменить визибл у 2 кнопки";
             customButton1.UseVisualStyleBackColor = false;
+            customButton1.Click += customButton1_Click;
             // 
             // customTextBox2
             // 
             customTextBox2.BackColor = System.Drawing.Color.White;
             customTextBox2.Font = new System.Drawing.Font("Arial", 10F);
             customTextBox2.ForeColor = System.Drawing.Color.Black;
-            customTextBox2.Location = new System.Drawing.Point(313, 382);
+            customTextBox2.Location = new System.Drawing.Point(313, 398);
             customTextBox2.Name = "customTextBox2";
             customTextBox2.Size = new System.Drawing.Size(191, 23);
             customTextBox2.TabIndex = 1;
@@ -164,11 +165,11 @@
             customButton2.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButton2.Font = new System.Drawing.Font("Arial", 10F);
             customButton2.ForeColor = System.Drawing.Color.Black;
-            customButton2.Location = new System.Drawing.Point(313, 319);
+            customButton2.Location = new System.Drawing.Point(313, 346);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(191, 30);
+            customButton2.Size = new System.Drawing.Size(187, 30);
             customButton2.TabIndex = 2;
-            customButton2.Text = "customButton2";
+            customButton2.Text = "вторая кнопка";
             customButton2.UseVisualStyleBackColor = false;
             // 
             // customLabel2
@@ -189,6 +190,7 @@
             ClientSize = new System.Drawing.Size(590, 508);
             Controls.Add(customLabel2);
             Controls.Add(customButton2);
+            Controls.Add(customButton1);
             Controls.Add(customTextBox2);
             Controls.Add(customGroupBox1);
             Controls.Add(customGridControl1);
@@ -207,7 +209,7 @@
 
         #endregion
 
-        private CustomGridControl customGridControl1;
+        private CustomGridControlColumn customGridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private CustomGroupBox customGroupBox1;
         private CustomLabel customLabel1;

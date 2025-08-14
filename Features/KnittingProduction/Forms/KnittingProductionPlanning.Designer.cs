@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form.Nadezhda
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.form.Nadezhda
 {
     partial class KnittingProductionPlanning
     {

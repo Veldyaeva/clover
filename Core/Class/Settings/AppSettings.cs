@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using System.IO;
 using System.Drawing;
+using System.Configuration;
 
 namespace SewingProduction.Core.Class.Settings
 {
@@ -14,7 +15,11 @@ namespace SewingProduction.Core.Class.Settings
         public string Theme { get; set; } = "Gray";
         public int FontSize { get; set; } = 10;
         public bool SaveOpenTabs { get; set; } = true;
+        public bool ShortTabNames { get; set; } = true;
+        public bool AllowDuplicateTabs { get; set; } = false;
         public Dictionary<string, UserSettings> Users { get; set; } = new();
+        public string SelectedDatabase { get; set; } = "ace";
+
     }
 
     public class UserSettings
@@ -163,6 +168,75 @@ namespace SewingProduction.Core.Class.Settings
 
             Save();
         }
+        public static bool GetShortTabNames()
+        {
+            return Current.ShortTabNames;
+        }
+
+        public static void SetShortTabNames(bool value)
+        {
+            Current.ShortTabNames = value;
+            Save();
+        }
+        public static bool GetAllowDuplicateTabs()
+        {
+            return Current.AllowDuplicateTabs;
+        }
+
+        public static void SetAllowDuplicateTabs(bool value)
+        {
+            Current.AllowDuplicateTabs = value;
+            Save();
+        }
+        #region база данных
+        public static void SaveSelectedDatabase(string login, string connectionName)
+        {
+            if (!Current.Users.ContainsKey(login))
+                Current.Users[login] = new UserSettings();
+
+            Current.SelectedDatabase = connectionName;
+            Save();
+        }
+
+        public static string GetSelectedDatabase()
+        {
+            return Current.SelectedDatabase ?? "ace";
+        }
+        public static string GetCurrentConnectionString()
+        {
+            var dbKey = GetSelectedDatabase();
+
+            switch (dbKey.ToLower())
+            {
+                case "ace":
+                case "aceconnectionstring":
+                    return Properties.Settings.Default.ACEConnectionString;
+
+                case "ace_test":
+                case "acetestconnectionstring":
+                    return Properties.Settings.Default.ACEtestConnectionString;
+
+                case "ace_backup":
+                case "acebackupconnectionstring":
+                    return Properties.Settings.Default.ACEbackupConnectionString;
+
+                case "ace_backup_new":
+                case "acebackupnewconnectionstring":
+                    return Properties.Settings.Default.ACEbackupnewConnectionString;
+
+                case "oms":
+                case "omsconnectionstring":
+                    return Properties.Settings.Default.OMSConnectionString;
+
+                case "global":
+                case "globalconnectionstring":
+                    return Properties.Settings.Default.GlobalConnectionString;
+
+                default:
+                    throw new Exception($"Неизвестное имя строки подключения: '{dbKey}'");
+            }
+        }
+        #endregion
     }
     public static class UserFilePaths
     {

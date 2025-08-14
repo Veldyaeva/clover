@@ -1,19 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\Work\sewingproduction\Properties\PublishProfiles\x64%28Багаева, Чиркова%29.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomGridControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomGridControlColumn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\SP_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\art_new2024.cs">
+    <Compile Update="Features\Articul\Forms\EditAricul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\EditTarif.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesUnitLoading.cs">
@@ -76,9 +94,6 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\TeamWork\Forms\TeamWork.Data.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork.Events.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,9 +127,6 @@
     <Compile Update="Features\UserDistribution\Forms\Dictionary.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Help\Form\TestForm1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Help\Form\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -133,6 +145,9 @@
     <Compile Update="Features\UserDistribution\Forms\UserHierarchy.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Help\Form\TestForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Report\FioListReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -145,10 +160,19 @@
     <Compile Update="Report\ConfectionCardReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\GetItogVibKartReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\GetItogVibKartSokrReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\MlRtReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\NormRaszTest.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\PrintShkReport.cs">
@@ -172,5 +196,13 @@
     <Compile Update="Core\Forms\Menu\SpMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Report\subreport\secByKodPodrAnnIdReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

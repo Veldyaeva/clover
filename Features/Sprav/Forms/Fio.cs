@@ -25,16 +25,18 @@ namespace SewingProduction.form
         // если редактировали поле:
         bool flagRed = false;
         string filter = "";
+        UserClass _user;
         public Fio(UserClass user, string tableSQL, string rusNameTableSQL) : base(user)
         {
             InitializeComponent();
-            DatabaseHelper dbHelper = new DatabaseHelper("ace");
+            DatabaseHelper dbHelper = new DatabaseHelper();
             _fioDataService = new Features.Sprav.FioDataService(dbHelper);
             ThemeManager.UpdateTheme(this);
             //Таблица fio:
             tableString = tableSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
+            _user = user;
         }
         public Fio()
         {
@@ -172,7 +174,7 @@ namespace SewingProduction.form
         // КНОПКА "Добавить"
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            editFio f = new editFio(_user, "АВТО", "Добавление сотрудника");
+            EditFio f = new EditFio(_user, "АВТО", "Добавление сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 // Обновляем таблицу
@@ -190,7 +192,7 @@ namespace SewingProduction.form
             }
             string computerName = Environment.MachineName;
 
-            editFio f = new editFio(_user, idFIO, "Редактирование сотрудника");
+            EditFio f = new EditFio(_user, idFIO, "Редактирование сотрудника");
             if (f.ShowDialog() == DialogResult.OK)
             {
                 flagRed = true;
@@ -397,7 +399,7 @@ namespace SewingProduction.form
         }
         private void customButtonSpVed_Click(object sender, EventArgs e)
         {
-            openSprav("brig_ved", "vdID,brig,object,name,ip_proizv", "Ведомости");
+            openSprav("brig_ved", "vdID,brig,obgect,name,ip_proizv", "Ведомости");
         }
         /// <summary>
         /// Функция для открытия справочников:
@@ -407,19 +409,11 @@ namespace SewingProduction.form
         /// <param name="nameSpravRus">Имя справочника на русском</param>
         private void openSprav(string nameSprav, string columns, string nameSpravRus)
         {
-            foreach (Form child in this.MdiParent.MdiChildren)
+            if (this.MdiParent is SpMainForm mainForm)
             {
-                if (child is SpravForAll && child.Text.ToString() == nameSpravRus)
-                {
-                    // Если форма уже открыта, переключаем на нее
-                    child.BringToFront();
-                    return;
-                }
+                var form = new SpravForAll(nameSprav, columns, "", nameSpravRus, user: _user);
+                mainForm.OpenForm(form);
             }
-            // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll(nameSprav, columns, nameSpravRus);
-            f.MdiParent = this.MdiParent;
-            f.Show();
         }
         #endregion
 

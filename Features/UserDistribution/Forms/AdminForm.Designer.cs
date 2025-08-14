@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.form.UserDistribution
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class AdminForm
     {

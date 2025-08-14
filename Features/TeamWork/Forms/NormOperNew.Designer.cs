@@ -1,6 +1,6 @@
 ﻿using SewingProduction.form.TeamWork;
-
-namespace SewingProduction.form
+using SewingProduction.Core.Class;
+namespace SewingProduction.Features.TeamWork.Forms
 {
     partial class NormOperNew
     {
@@ -132,6 +132,7 @@ namespace SewingProduction.form
             gridView1.Name = "gridView1";
             gridView1.OptionsMenu.ShowAutoFilterRowItem = false;
             gridView1.OptionsView.ShowGroupPanel = false;
+            gridView1.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] { new DevExpress.XtraGrid.Columns.GridColumnSortInfo(coltext, DevExpress.Data.ColumnSortOrder.Ascending) });
             gridView1.DoubleClick += customOkButton1_Click;
             // 
             // colkod_o
@@ -147,6 +148,7 @@ namespace SewingProduction.form
             coltext.Caption = "Наименование";
             coltext.FieldName = "text";
             coltext.Name = "coltext";
+            coltext.SortMode = DevExpress.XtraGrid.ColumnSortMode.DisplayText;
             coltext.Visible = true;
             coltext.VisibleIndex = 1;
             coltext.Width = 278;

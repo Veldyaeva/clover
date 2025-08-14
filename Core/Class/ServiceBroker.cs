@@ -12,6 +12,7 @@ using SewingProduction.form;
 using DataTable = System.Data.DataTable;
 using System.Threading.Tasks;
 using SewingProduction.Core.interfaces;
+using SewingProduction.Core.Class.Settings;
 
 namespace SewingProduction
 {
@@ -23,8 +24,8 @@ namespace SewingProduction
         private readonly object _form;
         // Для теста:
         // private readonly string _connectionString = Properties.Settings.Default.ACEtestConnectionString;
-        private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
-
+        //private readonly string _connectionString = Properties.Settings.Default.ACEConnectionString;
+        private readonly string _connectionString = SettingsManager.GetCurrentConnectionString();
         private SqlConnection _connection;
         private SqlCommand _command;
         private SqlDependency _dependency;

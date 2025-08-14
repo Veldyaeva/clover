@@ -7,41 +7,59 @@ using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 using BindingSource = System.Windows.Forms.BindingSource;
 using SewingProduction.Helpers;
+using SewingProduction.Report;
+using System.Diagnostics;
+using DevExpress.XtraReports.UI;
+using SewingProduction.Features.CardByNom.Models;
+using SewingProduction.Help.Form;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
+using DevExpress.XtraGrid.Views.Grid;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.Articul
 {
     public partial class Articul : CustomForm
     {
         private readonly DatabaseHelper _dbHelperAce;
-        
-        //public Articul(UserClass user) : base(user)
-        public Articul()
-        {   
-            _dbHelperAce = new DatabaseHelper("ace");
+        private UserClass _user;
+        List<ArticulModel> _articuls;
+        ArticulDataService _articulDataService = new ArticulDataService();
+        public Articul(UserClass user) : base(user)
+        {
+            _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
-            
+            _user = user;
         }
-     
 
-        private void Articul_Load(object sender, EventArgs e)
+
+        private async void Articul_Load(object sender, EventArgs e)
         {
             // данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
             //this.art_norm_nTableAdapter.Fill(this.aCE_backupDataSet.art_norm_n);
             try
             {
+                _articuls = await _articulDataService.GetAllAsync();
                 //загрузка перечня кодов из справочника, часть полей
-                string query = $"select * from dbo.view_art";
+                //string query = $"select * from dbo.view_art";
                 //kodd,kod, grup, articul, razm, mod, kle
-                var dt = _dbHelperAce.ExecuteQuery(query);
-                    
-                bsArt.DataSource = dt;
+                //var dt = _dbHelperAce.ExecuteQuery(query);
+
+                //bsArt.DataSource = dt;
+                bsArt.DataSource = _articuls;
                 // загрузка одиночного кода из справочника, все поля  
                 getArticulFromSQl("0");
 
                 // загрузка комбиков для выбора полотна
-                bindComboBoxTkanName();
+                //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
 
                 /*// тест 
                 comboBoxEdit1.Properties.DataSource = dt;
@@ -66,7 +84,7 @@ namespace SewingProduction.form
             {
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
         private void bindComboBoxTkanName()
@@ -96,7 +114,7 @@ namespace SewingProduction.form
                 string queryArticul = $"select * from dbo.view_art_dr where kod = '{kod}'";
                 DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
                 bsArtDr.DataSource = dt;
-                
+
             }
             catch (Exception ex)
             {
@@ -106,7 +124,7 @@ namespace SewingProduction.form
         private void getArticulFromSQl(string kod)
         {
             try
-            {   
+            {
                 string queryArticul = $"select * from dbo.viewArticul_preview where va_kod = '{kod}'";
                 DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
                 bsArticul.DataSource = dt;
@@ -136,7 +154,7 @@ namespace SewingProduction.form
                     txbRazm.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_razm"].ToString();
                     txbNormt.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_norm_t"].ToString();
                     txbBrakAll.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_BrakAll"].ToString();
-                    
+
                     //va_seb_z
 
                     //галки вяз отделки
@@ -147,7 +165,7 @@ namespace SewingProduction.form
                     //отделка
                     chbIsUpak.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_isUpak"]);
                     chbIsFurnit.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_isFurnit"]);
-                    
+
                     chkP.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_p"]);
                     chkV.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_v"]);
                     chkBus.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_bus"]);
@@ -193,7 +211,7 @@ namespace SewingProduction.form
                             el.Text = string.Format("{0:F2}", el.Text);
                         }
                     }
-                    
+
 
                     foreach (CustomTextBox el in gbBrakPercent.Controls)
                     {
@@ -203,7 +221,7 @@ namespace SewingProduction.form
                             //el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_brakpercent{si}"].ToString();
                             // вывод строки в формате 2 знака после запятой 
                             el.Text = $"{((DataTable)bsArticul.DataSource).Rows[0][$"va_brakpercent{si}"]:F2}";
-                            
+
                         }
                     }
 
@@ -226,10 +244,11 @@ namespace SewingProduction.form
 
         private void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            /* ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
             //var kod = Convert.ToInt32(gridControl1.GetDataRow(gridControl1.FocusedRowHandle)["kod"]);
             string kod = "";
             string kodd = "";
-            
+
             try
             {
                 object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
@@ -240,7 +259,7 @@ namespace SewingProduction.form
                 }
 
                 getArticulFromSQl(kod);
-            
+
                 string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                 var dt = _dbHelperAce.ExecuteQuery(query);
                 if (dt != null)
@@ -254,10 +273,67 @@ namespace SewingProduction.form
             {
                 kod = "";
             }
+            */
         }
 
-        
+        private void customButtonKart_Click(object sender, EventArgs e)
+        {
+            GetItogVibKartReport report = new GetItogVibKartReport();
+            report.RequestParameters = false;
 
-       
+            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
+            var kod = ((DataRowView)data).Row["kod"].ToString();
+            //var kod = "30367001";
+            Debug.WriteLine(kod);
+            report.Parameters["kod"].Value = kod;
+
+            var ds = report.sqlDataSource1;
+            var query = ds.Queries[0] as DevExpress.DataAccess.Sql.StoredProcQuery;
+            query.Parameters[0].Value = kod;
+
+            ds.Fill();
+
+            report.DataSource = ds;
+            report.DataMember = "GetItogVibKart";
+
+            ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+            reportPrintTool.ShowPreviewDialog();
+
+            //сокарщенный :
+            GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
+            reportSokr.RequestParameters = false;
+            reportSokr.Parameters["kod"].Value = kod;
+            reportSokr.DataSource = ds;
+            reportSokr.DataMember = "GetItogVibKart";
+            ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
+            reportSokrPrintTool.ShowPreviewDialog();
+
+        }
+
+        private void customButtonAdd_Click(object sender, EventArgs e)
+        {
+            EditAricul f = new EditAricul(_user);
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                Articul_Load(sender, e);
+            }
+        }
+        private void customButtonCopy_Click(object sender, EventArgs e)
+        {
+            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            EditAricul f = new EditAricul(_user, kodObj.ToString());
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                Articul_Load(sender, e);
+            }
+        }
+        private void customButtonKompl_Click(object sender, EventArgs e)
+        {
+            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new AddNewKopml(_user, _articuls, kodObj.ToString()));
+            }
+        }
     }
 }
