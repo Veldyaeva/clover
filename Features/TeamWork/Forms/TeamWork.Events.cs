@@ -136,11 +136,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 string filterString = "";
 
-                if (actualCheckBox.Checked) filterString += $"status = {(int)Status.Actual}";
+                if (actualCheckBox.Checked) filterString += $"Status = {(int)Status.Actual}";
                 if (preliminaryCheckBox.Checked)
                 {
                     if (!string.IsNullOrEmpty(filterString)) filterString += " OR ";
-                    filterString += $"status = {(int)Status.Preliminary}";
+                    filterString += $"Status = {(int)Status.Preliminary}";
                 }
 
                 // Применяем фильтр к gridView8

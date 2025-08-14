@@ -154,7 +154,6 @@ namespace SewingProduction.Features.TeamWork.Forms
                 throw;
             }
         }
-
         /// <summary>
         /// Загружает связанные данные для указанного AnnID с использованием сервисной архитектуры
         /// </summary>
@@ -212,75 +211,31 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        //private async Task LoadRelatedData(int annId)
-        //{
-        //    // Загружаем данные асинхронно
-        //    var normRaskResult = await _artNormService.GetRelatedNormRask(annId);
-        //    var normKontResult = await _artNormService.GetRelatedNormKont(annId);
-        //    var normRaszResult = await _artNormService.GetRelatedNormRasz(annId);
-
-        //    // Обновление UI должно происходить в UI потоке
-        //    if (this.InvokeRequired)
-        //    {
-        //        await this.InvokeAsync(() =>
-        //        {
-        //            _normRaskListTW.BulkLoad(normRaskResult);
-        //            _normKontListTW.BulkLoad(normKontResult);
-        //            _normRaszListTW.BulkLoad(normRaszResult);
-        //        });
-        //    }
-        //    else
-        //    {
-        //        _normRaskListTW.BulkLoad(normRaskResult);
-        //        _normKontListTW.BulkLoad(normKontResult);
-        //        _normRaszListTW.BulkLoad(normRaszResult);
-        //    }
-
-        //    await LoadAndBindFioListsAsync();
-
-        //    // Сортировка детализирующих таблиц после загрузки данных - тоже в UI потоке
-        //    if (this.InvokeRequired)
-        //    {
-        //        await this.InvokeAsync(() =>
-        //        {
-        //            if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-        //            if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-        //            if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-        //        });
-        //    }
-        //    else
-        //    {
-        //        if (gridControlRaszTW.MainView is GridView raszView) TWGridHelper.sortGridView(raszView);
-        //        if (gridControlRaskrTW.MainView is GridView raskrView) TWGridHelper.sortGridView(raskrView);
-        //        if (gridControlKontTW.MainView is GridView kontView) TWGridHelper.sortGridView(kontView);
-        //    }
-        //}
-
         /// <summary>
         /// Загружает связанные данные из normraszview (без CancellationToken, но с возможностью отмены через внешний токен)
         /// </summary>
         private async Task LoadRelatedDataFromView(int annId, CancellationToken ct)
         {
             ct.ThrowIfCancellationRequested();
-            
+
             // Загружаем данные в фоновом потоке
             var dataLoadTask = Task.Run(async () =>
             {
                 ct.ThrowIfCancellationRequested();
-                
+
                 // Параллельная загрузка данных из БД
                 Task<List<NormRask>> normRaskTask = _artNormService.GetRelatedNormRask(annId);
                 Task<List<NormKont>> normKontTask = _artNormService.GetRelatedNormKont(annId);
                 Task<List<NormRasz>> normRaszTask = _artNormService.GetRelatedNormRasz(annId); // Этот метод использует normraszview
-                
+
                 ct.ThrowIfCancellationRequested();
-                
+
                 var normRaskResult = await normRaskTask;
                 var normKontResult = await normKontTask;
                 var normRaszResult = await normRaszTask;
-                
+
                 ct.ThrowIfCancellationRequested();
-                
+
                 return new { normRaskResult, normKontResult, normRaszResult };
             }, ct);
 
