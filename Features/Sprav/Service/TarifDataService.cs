@@ -39,8 +39,12 @@ namespace SewingProduction.Features.Sprav
         }
         public async Task<List<TypeItemModel>> LoadTypeAsync()
         {
-            string query = "SELECT field_name, pcst_id, name_field_id, store_name FROM proizv_constant_stores";
+            string query = "SELECT * FROM proizv_constant_stores";
             return await _dbService.GetListAsync<TypeItemModel>(query, new Dictionary<string, object>());
+        }
+        public async Task ArhivTarifAsync(int pcID)
+        {
+            await _dbService.UpdateFieldAsync("proizv_constants", "arhiv",1,"pc_id", pcID);
         }
         public async Task<List<TarifModelHistory>> LoadHistoryAsync(int pcid)
         {
@@ -72,7 +76,7 @@ namespace SewingProduction.Features.Sprav
         }
 
 
-        public async Task SaveTarifAsync(TarifModel model, bool isEditMode, int userID)
+        public void SaveTarifAsync(TarifModel model, bool isEditMode, int userID)
         {
             // 1. Проверка на дубликат
             string checkQuery = "SELECT COUNT(*) FROM proizv_constants WHERE constant_name = @name";
@@ -81,7 +85,7 @@ namespace SewingProduction.Features.Sprav
                 { "@name", model.constant_name }
             };
 
-            int count = await _dbHelper.ExecuteScalarAsync<int>(checkQuery, checkParams);
+            int count = _dbHelper.ExecuteScalar(checkQuery, checkParams);
             if (count > 0 && !isEditMode)
                 throw new InvalidOperationException("Константа с таким именем уже существует!");
 
@@ -90,7 +94,7 @@ namespace SewingProduction.Features.Sprav
             CreateXmlFileFromModel(model, path, userID);
 
             // 3. Чтение XML из файла
-            string xml = await File.ReadAllTextAsync(path, Encoding.GetEncoding("utf-16"));
+            string xml = File.ReadAllText(path, Encoding.GetEncoding("utf-16"));
 
             // 4. Вызов процедуры
             string sql = "exec ACE_backup_new.dbo.Add_Const @xXml";
@@ -99,7 +103,7 @@ namespace SewingProduction.Features.Sprav
                 { "@xXml", xml }
             };
 
-            await _dbHelper.ExecuteNonQueryAsync(sql, parameters);
+            _dbHelper.ExecuteNonQuery(sql, parameters);
         }
 
         private void CreateXmlFileFromModel(TarifModel model, string path, int userID)
