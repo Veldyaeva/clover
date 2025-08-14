@@ -22,7 +22,7 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Загружает все данные разделений труда с сохранением информации о фокусе
+        /// Загружает все данные разделений труда с сохранением информации о фокусе. Для кнопки перезагрузить
         /// </summary>
         public async Task<TeamWorkReloadResult> LoadWorkDivisionsWithFocusAsync(int? currentAnnId = null)
         {
@@ -60,7 +60,7 @@ namespace SewingProduction.Features.TeamWork.Services
         }
 
         /// <summary>
-        /// Обновляет только связанные данные для указанного AnnID
+        /// Обновляет только связанные данные для указанного AnnID. Для кнопки "Обновить связанные данные"
         /// </summary>
         public async Task<RelatedDataResult> RefreshRelatedDataAsync(int annId)
         {

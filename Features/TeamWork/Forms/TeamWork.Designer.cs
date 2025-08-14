@@ -2975,14 +2975,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup2, layoutControlGroup6 });
             Root.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table;
             Root.Name = "Root";
-            columnDefinition1.SizeType = SizeType.Percent;
-            columnDefinition1.Width = 40D;
-            columnDefinition2.SizeType = SizeType.Percent;
-            columnDefinition2.Width = 100D;
-            Root.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] { columnDefinition1, columnDefinition2 });
-            rowDefinition1.Height = 100D;
-            rowDefinition1.SizeType = SizeType.Percent;
-            Root.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] { rowDefinition1 });
+            //columnDefinition3.SizeType = SizeType.Percent;
+            //columnDefinition3.Width = 40D;
+            //columnDefinition4.SizeType = SizeType.Percent;
+            //columnDefinition4.Width = 100D;
+            //Root.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] { columnDefinition3, columnDefinition4 });
+            //rowDefinition2.Height = 100D;
+            //rowDefinition2.SizeType = SizeType.Percent;
+            //Root.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] { rowDefinition2 });
             Root.Size = new System.Drawing.Size(1763, 911);
             // 
             // layoutControlGroup2
