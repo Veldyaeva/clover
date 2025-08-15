@@ -28,7 +28,7 @@ namespace SewingProduction.Features.Articul
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditAricul(UserClass user, string kodArtSQL = null) : base(user)
+        public EditAricul(string kodArtSQL = null)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();

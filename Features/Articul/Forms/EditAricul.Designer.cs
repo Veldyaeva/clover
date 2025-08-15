@@ -32,7 +32,14 @@ namespace SewingProduction.Features.Articul
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditAricul));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelModel = new CustomLabel();
+            customLabelRazm = new CustomLabel();
+            customLabelArt = new CustomLabel();
+            customLabelTM = new CustomLabel();
+            customLabelGroup = new CustomLabel();
+            customLabelGOST = new CustomLabel();
             radioGroup1 = new DevExpress.XtraEditors.RadioGroup();
+            customLabelKod = new CustomLabel();
             customTextBoxKod1 = new CustomTextBox();
             customTextBoxKod2 = new CustomTextBox();
             customTextBoxArt = new CustomTextBox();
@@ -42,6 +49,15 @@ namespace SewingProduction.Features.Articul
             customTextBoxDlin = new CustomTextBox();
             customTextBoxTimePlet = new CustomTextBox();
             customTextBoxNormP = new CustomTextBox();
+            customLabelKodFurn = new CustomLabel();
+            customLabel1 = new CustomLabel();
+            customLabelDlin = new CustomLabel();
+            customLabelTimePlet = new CustomLabel();
+            customLabelNormP = new CustomLabel();
+            customLabelPrizn = new CustomLabel();
+            customLabelM = new CustomLabel();
+            customLabelM1 = new CustomLabel();
+            customLabelM2 = new CustomLabel();
             customCancelButton1 = new CustomCancelButton();
             customOkButton1 = new CustomOkButton();
             searchLookUpEditPrizn = new DevExpress.XtraEditors.SearchLookUpEdit();
@@ -82,7 +98,14 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66747F));
+            tableLayoutPanel1.Controls.Add(customLabelModel, 0, 8);
+            tableLayoutPanel1.Controls.Add(customLabelRazm, 0, 7);
+            tableLayoutPanel1.Controls.Add(customLabelArt, 0, 6);
+            tableLayoutPanel1.Controls.Add(customLabelTM, 0, 5);
+            tableLayoutPanel1.Controls.Add(customLabelGroup, 0, 4);
+            tableLayoutPanel1.Controls.Add(customLabelGOST, 0, 3);
             tableLayoutPanel1.Controls.Add(radioGroup1, 1, 0);
+            tableLayoutPanel1.Controls.Add(customLabelKod, 0, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxKod1, 2, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxKod2, 4, 2);
             tableLayoutPanel1.Controls.Add(customTextBoxArt, 2, 6);
@@ -92,6 +115,15 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Controls.Add(customTextBoxDlin, 2, 11);
             tableLayoutPanel1.Controls.Add(customTextBoxTimePlet, 2, 12);
             tableLayoutPanel1.Controls.Add(customTextBoxNormP, 2, 13);
+            tableLayoutPanel1.Controls.Add(customLabelKodFurn, 0, 9);
+            tableLayoutPanel1.Controls.Add(customLabel1, 0, 10);
+            tableLayoutPanel1.Controls.Add(customLabelDlin, 0, 11);
+            tableLayoutPanel1.Controls.Add(customLabelTimePlet, 0, 12);
+            tableLayoutPanel1.Controls.Add(customLabelNormP, 0, 13);
+            tableLayoutPanel1.Controls.Add(customLabelPrizn, 0, 14);
+            tableLayoutPanel1.Controls.Add(customLabelM, 4, 11);
+            tableLayoutPanel1.Controls.Add(customLabelM1, 4, 12);
+            tableLayoutPanel1.Controls.Add(customLabelM2, 4, 13);
             tableLayoutPanel1.Controls.Add(customCancelButton1, 4, 15);
             tableLayoutPanel1.Controls.Add(customOkButton1, 1, 15);
             tableLayoutPanel1.Controls.Add(searchLookUpEditPrizn, 2, 14);
@@ -124,6 +156,102 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel1.Size = new System.Drawing.Size(710, 555);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // customLabelModel
+            // 
+            customLabelModel.AutoSize = true;
+            customLabelModel.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelModel, 2);
+            customLabelModel.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelModel.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelModel.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelModel.Location = new System.Drawing.Point(174, 272);
+            customLabelModel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelModel.Name = "customLabelModel";
+            customLabelModel.Size = new System.Drawing.Size(58, 34);
+            customLabelModel.TabIndex = 29;
+            customLabelModel.Text = "Модель";
+            customLabelModel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelRazm
+            // 
+            customLabelRazm.AutoSize = true;
+            customLabelRazm.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelRazm, 2);
+            customLabelRazm.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelRazm.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRazm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelRazm.Location = new System.Drawing.Point(176, 238);
+            customLabelRazm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelRazm.Name = "customLabelRazm";
+            customLabelRazm.Size = new System.Drawing.Size(56, 34);
+            customLabelRazm.TabIndex = 27;
+            customLabelRazm.Text = "Размер";
+            customLabelRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelArt
+            // 
+            customLabelArt.AutoSize = true;
+            customLabelArt.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelArt, 2);
+            customLabelArt.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelArt.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelArt.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelArt.Location = new System.Drawing.Point(172, 204);
+            customLabelArt.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelArt.Name = "customLabelArt";
+            customLabelArt.Size = new System.Drawing.Size(60, 34);
+            customLabelArt.TabIndex = 25;
+            customLabelArt.Text = "Артикул";
+            customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelTM
+            // 
+            customLabelTM.AutoSize = true;
+            customLabelTM.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelTM, 2);
+            customLabelTM.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelTM.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelTM.Location = new System.Drawing.Point(205, 170);
+            customLabelTM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelTM.Name = "customLabelTM";
+            customLabelTM.Size = new System.Drawing.Size(27, 34);
+            customLabelTM.TabIndex = 23;
+            customLabelTM.Text = "ТМ";
+            customLabelTM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelGroup
+            // 
+            customLabelGroup.AutoSize = true;
+            customLabelGroup.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelGroup, 2);
+            customLabelGroup.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelGroup.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGroup.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelGroup.Location = new System.Drawing.Point(179, 136);
+            customLabelGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelGroup.Name = "customLabelGroup";
+            customLabelGroup.Size = new System.Drawing.Size(53, 34);
+            customLabelGroup.TabIndex = 21;
+            customLabelGroup.Text = "Группа";
+            customLabelGroup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelGOST
+            // 
+            customLabelGOST.AutoSize = true;
+            customLabelGOST.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelGOST, 2);
+            customLabelGOST.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelGOST.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelGOST.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelGOST.Location = new System.Drawing.Point(188, 102);
+            customLabelGOST.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelGOST.Name = "customLabelGOST";
+            customLabelGOST.Size = new System.Drawing.Size(44, 34);
+            customLabelGOST.TabIndex = 19;
+            customLabelGOST.Text = "ГОСТ";
+            customLabelGOST.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // radioGroup1
             // 
             radioGroup1.AutoSizeInLayoutControl = true;
@@ -141,6 +269,22 @@ namespace SewingProduction.Features.Articul
             radioGroup1.Size = new System.Drawing.Size(584, 62);
             radioGroup1.TabIndex = 0;
             radioGroup1.SelectedIndexChanged += radioGroup1_SelectedIndexChanged;
+            // 
+            // customLabelKod
+            // 
+            customLabelKod.AutoSize = true;
+            customLabelKod.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelKod, 2);
+            customLabelKod.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelKod.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKod.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelKod.Location = new System.Drawing.Point(201, 68);
+            customLabelKod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelKod.Name = "customLabelKod";
+            customLabelKod.Size = new System.Drawing.Size(31, 34);
+            customLabelKod.TabIndex = 1;
+            customLabelKod.Text = "Код";
+            customLabelKod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customTextBoxKod1
             // 
@@ -257,6 +401,147 @@ namespace SewingProduction.Features.Articul
             customTextBoxNormP.Name = "customTextBoxNormP";
             customTextBoxNormP.Size = new System.Drawing.Size(228, 23);
             customTextBoxNormP.TabIndex = 11;
+            // 
+            // customLabelKodFurn
+            // 
+            customLabelKodFurn.AutoSize = true;
+            customLabelKodFurn.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelKodFurn, 2);
+            customLabelKodFurn.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelKodFurn.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelKodFurn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelKodFurn.Location = new System.Drawing.Point(97, 306);
+            customLabelKodFurn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelKodFurn.Name = "customLabelKodFurn";
+            customLabelKodFurn.Size = new System.Drawing.Size(135, 34);
+            customLabelKodFurn.TabIndex = 18;
+            customLabelKodFurn.Text = "Код фурн. длинный";
+            customLabelKodFurn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabel1
+            // 
+            customLabel1.AutoSize = true;
+            customLabel1.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabel1, 2);
+            customLabel1.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabel1.Location = new System.Drawing.Point(221, 340);
+            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel1.Name = "customLabel1";
+            customLabel1.Size = new System.Drawing.Size(11, 34);
+            customLabel1.TabIndex = 20;
+            customLabel1.Text = " ";
+            customLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelDlin
+            // 
+            customLabelDlin.AutoSize = true;
+            customLabelDlin.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelDlin, 2);
+            customLabelDlin.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelDlin.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelDlin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelDlin.Location = new System.Drawing.Point(184, 374);
+            customLabelDlin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelDlin.Name = "customLabelDlin";
+            customLabelDlin.Size = new System.Drawing.Size(48, 34);
+            customLabelDlin.TabIndex = 22;
+            customLabelDlin.Text = "Длина";
+            customLabelDlin.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelTimePlet
+            // 
+            customLabelTimePlet.AutoSize = true;
+            customLabelTimePlet.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelTimePlet, 2);
+            customLabelTimePlet.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelTimePlet.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelTimePlet.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelTimePlet.Location = new System.Drawing.Point(86, 408);
+            customLabelTimePlet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelTimePlet.Name = "customLabelTimePlet";
+            customLabelTimePlet.Size = new System.Drawing.Size(146, 34);
+            customLabelTimePlet.TabIndex = 24;
+            customLabelTimePlet.Text = "Время плетения, сек";
+            customLabelTimePlet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelNormP
+            // 
+            customLabelNormP.AutoSize = true;
+            customLabelNormP.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelNormP, 2);
+            customLabelNormP.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelNormP.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelNormP.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelNormP.Location = new System.Drawing.Point(118, 442);
+            customLabelNormP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelNormP.Name = "customLabelNormP";
+            customLabelNormP.Size = new System.Drawing.Size(114, 34);
+            customLabelNormP.TabIndex = 26;
+            customLabelNormP.Text = "Норма пряжи, кг";
+            customLabelNormP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelPrizn
+            // 
+            customLabelPrizn.AutoSize = true;
+            customLabelPrizn.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customLabelPrizn, 2);
+            customLabelPrizn.Dock = System.Windows.Forms.DockStyle.Right;
+            customLabelPrizn.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPrizn.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelPrizn.Location = new System.Drawing.Point(172, 476);
+            customLabelPrizn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelPrizn.Name = "customLabelPrizn";
+            customLabelPrizn.Size = new System.Drawing.Size(60, 34);
+            customLabelPrizn.TabIndex = 28;
+            customLabelPrizn.Text = "Признак";
+            customLabelPrizn.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customLabelM
+            // 
+            customLabelM.AutoSize = true;
+            customLabelM.BackColor = System.Drawing.Color.Transparent;
+            customLabelM.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM.Location = new System.Drawing.Point(476, 392);
+            customLabelM.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM.Name = "customLabelM";
+            customLabelM.Size = new System.Drawing.Size(110, 16);
+            customLabelM.TabIndex = 32;
+            customLabelM.Text = "м.";
+            customLabelM.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customLabelM1
+            // 
+            customLabelM1.AutoSize = true;
+            customLabelM1.BackColor = System.Drawing.Color.Transparent;
+            customLabelM1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM1.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM1.Location = new System.Drawing.Point(476, 426);
+            customLabelM1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM1.Name = "customLabelM1";
+            customLabelM1.Size = new System.Drawing.Size(110, 16);
+            customLabelM1.TabIndex = 31;
+            customLabelM1.Text = "на 1 метр";
+            customLabelM1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // customLabelM2
+            // 
+            customLabelM2.AutoSize = true;
+            customLabelM2.BackColor = System.Drawing.Color.Transparent;
+            customLabelM2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            customLabelM2.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelM2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelM2.Location = new System.Drawing.Point(476, 460);
+            customLabelM2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelM2.Name = "customLabelM2";
+            customLabelM2.Size = new System.Drawing.Size(110, 16);
+            customLabelM2.TabIndex = 30;
+            customLabelM2.Text = "на 1 метр";
+            customLabelM2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // customCancelButton1
             // 
