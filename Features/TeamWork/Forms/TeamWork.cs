@@ -720,53 +720,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
-        ///// <summary>
-        ///// Обрабатывает изменение текста поиска в ANNgridView
-        ///// Автоматически переходит на первую строку результатов поиска
-        ///// </summary>
-        //private void ANNgridView_FindFilterTextChanged(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        var gridView = sender as GridView;
-        //        if (gridView == null) return;
-
-        //        // Проверяем, есть ли текст поиска
-        //        if (!string.IsNullOrEmpty(gridView.FindFilterText))
-        //        {
-        //            // Небольшая задержка для завершения применения фильтра поиска
-        //            gridView.BeginInvoke(new Action(() =>
-        //            {
-        //                try
-        //                {
-        //                    // Проверяем, есть ли видимые строки после применения поиска
-        //                    if (gridView.DataRowCount > 0)
-        //                    {
-        //                        // Переходим на первую строку результатов поиска
-        //                        int firstVisibleRow = gridView.GetVisibleRowHandle(0);
-        //                        if (gridView.IsValidRowHandle(firstVisibleRow))
-        //                        {
-        //                            gridView.FocusedRowHandle = firstVisibleRow;
-        //                            gridView.MakeRowVisible(firstVisibleRow);
-
-        //                            // Логируем действие
-        //                            _logger?.LogEventAsync($"Автоматический переход на первую строку результатов поиска по тексту '{gridView.FindFilterText}'. Всего строк: {gridView.DataRowCount}", "ANNgridView_FindFilterTextChanged");
-        //                        }
-        //                    }
-        //                }
-        //                catch (Exception ex)
-        //                {
-        //                    _logger?.LogErrorAsync(ex, "Ошибка при автоматическом переходе на первую строку результатов поиска по тексту");
-        //                }
-        //            }));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        _logger?.LogErrorAsync(ex, "Ошибка в обработчике изменения текста поиска");
-        //    }
-        //}
-
         private async void loadAllCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             loadAllCheckBox_CheckedChanged_Internal(sender, e);
