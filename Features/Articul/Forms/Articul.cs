@@ -30,14 +30,12 @@ namespace SewingProduction.Features.Articul
     public partial class Articul : CustomForm
     {
         private readonly DatabaseHelper _dbHelperAce;
-        private UserClass _user;
         List<ArticulModel> _articuls;
         ArticulDataService _articulDataService = new ArticulDataService();
-        public Articul(UserClass user) : base(user)
+        public Articul() 
         {
             _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
-            _user = user;
         }
 
 
@@ -312,7 +310,7 @@ namespace SewingProduction.Features.Articul
 
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            EditAricul f = new EditAricul(_user);
+            EditAricul f = new EditAricul();
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -321,7 +319,7 @@ namespace SewingProduction.Features.Articul
         private void customButtonCopy_Click(object sender, EventArgs e)
         {
             var kodObj = gridControl1.GetFocusedRowCellValue("kod");
-            EditAricul f = new EditAricul(_user, kodObj.ToString());
+            EditAricul f = new EditAricul(kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
