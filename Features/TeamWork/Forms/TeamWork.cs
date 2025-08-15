@@ -77,9 +77,15 @@ namespace SewingProduction.Features.TeamWork.Forms
         private BindingList<MyDataART> _boundArtList;
         private BindingSource _boundArtBindingSource;
 
-        // BindingList and BindingSource for NormRasz on Articles tab
+        // BindingList и BindingSource схемы разденеий на вкладке Articles 
         private BindingList<NormRasz> _normRaszListArticles;
         private BindingSource _normRaszBindingSourceArticles;
+
+        private BindingList<NormRask> _normRaskListArticles;
+        private BindingSource _normRaskBindingSourceArticles;
+
+        private BindingList<NormKont> _normKontListArticles;
+        private BindingSource _normKontBindingSourceArticles;
 
         private List<KodProizvModel> kodProizvList;
         private List<PodrVyazModel> podrVyazList;
@@ -468,6 +474,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        private int _lastFocusedAnnId = 0;
+
         private async void TeamWorkForm_Load(object sender, EventArgs e)
         {
             if (ANNgridView != null)
@@ -485,6 +493,11 @@ namespace SewingProduction.Features.TeamWork.Forms
                     throw new InvalidOperationException("Критические компоненты формы не инициализированы.");
                 }
                 await LoadWorkDivisions();
+                // После загрузки восстановим фокус, если есть сохранённый AnnID
+                if (_lastFocusedAnnId > 0)
+                {
+                    await RestoreFocusAsync(_lastFocusedAnnId);
+                }
             }
             catch (Exception ex)
             {
@@ -505,8 +518,42 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         ANNgridView_FocusedRowChanged_Internal(ANNgridView, new FocusedRowChangedEventArgs(-1, ANNgridView.FocusedRowHandle));
                     }
+
+                    // Включаем подсветку строк
+                    ApplyAnnGridRowStyling();
                 }
             }
+        }
+
+        private void ApplyAnnGridRowStyling()
+        {
+            try
+            {
+                if (ANNgridView == null) return;
+                ANNgridView.RowStyle -= ANNgridView_RowStyle;
+                ANNgridView.RowStyle += ANNgridView_RowStyle;
+            }
+            catch { }
+        }
+
+        private void ANNgridView_RowStyle(object sender, RowStyleEventArgs e)
+        {
+            try
+            {
+                var view = sender as GridView;
+                if (view == null) return;
+                if (e.RowHandle < 0) return;
+
+                // Подсветка фокусной строки
+                if (e.RowHandle == view.FocusedRowHandle)
+                {
+                    e.Appearance.BackColor = Color.Coral;//.FromArgb(255, 255, 230);
+                    e.Appearance.BackColor2 = Color.Coral;//.FromArgb(255, 240, 200);
+                    e.HighPriority = true;
+                    return;
+                }
+            }
+            catch { }
         }
 
         private void FocusFirstResultAndLoadRelated()
@@ -614,6 +661,14 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ANNgridView_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            try
+            {
+                if (e.FocusedRowHandle >= 0 && ANNgridView.GetRow(e.FocusedRowHandle) is ArtNormN row)
+                {
+                    _lastFocusedAnnId = row.AnnID;
+                }
+            }
+            catch { }
             ANNgridView_FocusedRowChanged_Internal(sender, e);
         }
 
