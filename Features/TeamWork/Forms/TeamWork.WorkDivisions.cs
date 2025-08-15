@@ -77,9 +77,31 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await _logger.LogEventAsync("Данные загружены успешно", "LoadData");
                 // Включаем обновление UI
-                ANNgridControl.EndUpdate();
-                if (_bindingList.Count > 0)
-                    await LoadRelatedData(_bindingList[0].AnnID);
+				ANNgridControl.EndUpdate();
+				// Загружаем связанные данные для текущей строки, а не для первой
+				int targetAnnId = 0;
+				try
+				{
+					if (ANNgridView != null && ANNgridView.FocusedRowHandle >= 0)
+					{
+						if (ANNgridView.GetRow(ANNgridView.FocusedRowHandle) is ArtNormN focusedRow)
+							targetAnnId = focusedRow.AnnID;
+					}
+
+					if (targetAnnId == 0 && _bindingSource != null)
+					{
+						int pos = _bindingSource.Position;
+						if (pos >= 0 && pos < _bindingList.Count)
+							targetAnnId = _bindingList[pos].AnnID;
+					}
+
+					if (targetAnnId == 0 && _bindingList.Count > 0)
+						targetAnnId = _bindingList[0].AnnID;
+				}
+				catch { }
+
+				if (targetAnnId > 0)
+					await LoadRelatedData(targetAnnId);
             }
             catch (Exception ex)
             {

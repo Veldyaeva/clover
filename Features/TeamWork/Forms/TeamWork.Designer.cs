@@ -526,7 +526,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.AppearancePage.Header.BackColor = System.Drawing.Color.Transparent;
             xtraTabControl1.AppearancePage.Header.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.BackColor = System.Drawing.Color.Transparent;
+            xtraTabControl1.AppearancePage.HeaderActive.ForeColor = System.Drawing.Color.Black;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseBackColor = true;
+            xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
+            xtraTabControl1.AppearancePage.HeaderActive.Options.UseForeColor = true;
             xtraTabControl1.Dock = DockStyle.Fill;
             xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             xtraTabControl1.LookAndFeel.UseDefaultLookAndFeel = false;
@@ -543,12 +546,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             TabPage1.Appearance.Header.BackColor = System.Drawing.Color.Transparent;
             TabPage1.Appearance.Header.Options.UseBackColor = true;
             TabPage1.Appearance.HeaderActive.BackColor = System.Drawing.Color.Transparent;
+            TabPage1.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            TabPage1.Appearance.HeaderActive.ForeColor = System.Drawing.Color.FromArgb(192, 0, 0);
             TabPage1.Appearance.HeaderActive.Options.UseBackColor = true;
+            TabPage1.Appearance.HeaderActive.Options.UseFont = true;
+            TabPage1.Appearance.HeaderActive.Options.UseForeColor = true;
+            TabPage1.Appearance.PageClient.BackColor = System.Drawing.Color.Transparent;
+            TabPage1.Appearance.PageClient.Options.UseBackColor = true;
             TabPage1.Controls.Add(layoutControl2);
             TabPage1.Margin = new Padding(4, 3, 4, 3);
             TabPage1.Name = "TabPage1";
             TabPage1.Size = new System.Drawing.Size(1769, 940);
-            TabPage1.Text = "1. Разделения труда";
+            TabPage1.Text = "1. Разделения труда                        ";
             // 
             // layoutControl2
             // 
@@ -2243,11 +2252,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             // xtraTabPageArticles
             // 
+            xtraTabPageArticles.Appearance.HeaderActive.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            xtraTabPageArticles.Appearance.HeaderActive.ForeColor = System.Drawing.Color.FromArgb(192, 0, 0);
+            xtraTabPageArticles.Appearance.HeaderActive.Options.UseFont = true;
+            xtraTabPageArticles.Appearance.HeaderActive.Options.UseForeColor = true;
             xtraTabPageArticles.Controls.Add(xtraTabControl2);
             xtraTabPageArticles.Margin = new Padding(4, 3, 4, 3);
             xtraTabPageArticles.Name = "xtraTabPageArticles";
             xtraTabPageArticles.Size = new System.Drawing.Size(1769, 940);
-            xtraTabPageArticles.Text = "2. Текущие работы";
+            xtraTabPageArticles.Text = "2. Текущие работы                             ";
             // 
             // xtraTabControl2
             // 
@@ -2975,14 +2988,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup2, layoutControlGroup6 });
             Root.LayoutMode = DevExpress.XtraLayout.Utils.LayoutMode.Table;
             Root.Name = "Root";
-            //columnDefinition3.SizeType = SizeType.Percent;
-            //columnDefinition3.Width = 40D;
-            //columnDefinition4.SizeType = SizeType.Percent;
-            //columnDefinition4.Width = 100D;
-            //Root.OptionsTableLayoutGroup.ColumnDefinitions.AddRange(new DevExpress.XtraLayout.ColumnDefinition[] { columnDefinition3, columnDefinition4 });
-            //rowDefinition2.Height = 100D;
-            //rowDefinition2.SizeType = SizeType.Percent;
-            //Root.OptionsTableLayoutGroup.RowDefinitions.AddRange(new DevExpress.XtraLayout.RowDefinition[] { rowDefinition2 });
             Root.Size = new System.Drawing.Size(1763, 911);
             // 
             // layoutControlGroup2
