@@ -311,7 +311,7 @@ namespace SewingProduction.Features.Articul
 
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            EditAricul f = new EditAricul(CurrentUser.User);
+            EditAricul f = new EditAricul();
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -320,7 +320,7 @@ namespace SewingProduction.Features.Articul
         private void customButtonCopy_Click(object sender, EventArgs e)
         {
             var kodObj = gridControl1.GetFocusedRowCellValue("kod");
-            EditAricul f = new EditAricul(CurrentUser.User,kodObj.ToString());
+            EditAricul f = new EditAricul(kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
