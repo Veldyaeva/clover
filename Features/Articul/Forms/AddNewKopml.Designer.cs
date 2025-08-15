@@ -51,7 +51,7 @@
             KodKompl = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelGrupKompl = new CustomLabel();
+            customLabelGrupKompl = new Core.Class.CustomLabel();
             customButtonKompl = new Core.Class.CustomButton();
             customButtonDelKompl = new Core.Class.CustomButton();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
@@ -66,10 +66,10 @@
             ModSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             RazmSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelRazmText = new CustomLabel();
-            customLabelRazm = new CustomLabel();
-            customLabelKodText = new CustomLabel();
-            customLabelKod = new CustomLabel();
+            customLabelRazmText = new Core.Class.CustomLabel();
+            customLabelRazm = new Core.Class.CustomLabel();
+            customLabelKodText = new Core.Class.CustomLabel();
+            customLabelKod = new Core.Class.CustomLabel();
             customCheckBoxVerified = new CustomCheckBox();
             customTabControlKomplRazm = new CustomTabControl();
             customGridControlKomplArt = new Core.Class.CustomGridControl();
@@ -84,7 +84,7 @@
             cle = new DevExpress.XtraGrid.Columns.GridColumn();
             kod_v = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelKolTab = new CustomLabel();
+            customLabelKolTab = new Core.Class.CustomLabel();
             customGridControlKomplRazm = new Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
             ArticulRazm = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -97,11 +97,11 @@
             grup1 = new DevExpress.XtraGrid.Columns.GridColumn();
             customNumericUpDownValueTab = new CustomNumericUpDown();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            customLabelModText = new CustomLabel();
-            customLabelArtText = new CustomLabel();
-            customLabelMod = new CustomLabel();
-            customLabelArt = new CustomLabel();
-            customLabelGrup = new CustomLabel();
+            customLabelModText = new Core.Class.CustomLabel();
+            customLabelArtText = new Core.Class.CustomLabel();
+            customLabelMod = new Core.Class.CustomLabel();
+            customLabelArt = new Core.Class.CustomLabel();
+            customLabelGrup = new Core.Class.CustomLabel();
             tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             customButtonBack = new Core.Class.CustomButton();
             customButtonNext = new Core.Class.CustomButton();
@@ -934,13 +934,13 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private Core.Class.CustomButton customButtonBack;
         private Core.Class.CustomButton customButtonNext;
-        private CustomLabel customLabelArt;
-        private CustomLabel customLabelMod;
-        private CustomLabel customLabelArtText;
-        private CustomLabel customLabelModText;
-        private CustomLabel customLabelGrupKompl;
-        private CustomLabel customLabelKolTab;
-        private CustomLabel customLabelGrup;
+        private Core.Class.CustomLabel customLabelArt;
+        private Core.Class.CustomLabel customLabelMod;
+        private Core.Class.CustomLabel customLabelArtText;
+        private Core.Class.CustomLabel customLabelModText;
+        private Core.Class.CustomLabel customLabelGrupKompl;
+        private Core.Class.CustomLabel customLabelKolTab;
+        private Core.Class.CustomLabel customLabelGrup;
         private CustomNumericUpDown customNumericUpDownValueTab;
         private DevExpress.XtraGrid.Columns.GridColumn Grup;
         private DevExpress.XtraGrid.Columns.GridColumn Articul;
@@ -973,10 +973,10 @@
         private DevExpress.XtraGrid.Columns.GridColumn kod_v1;
         private DevExpress.XtraGrid.Columns.GridColumn KodKompl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private CustomLabel customLabelRazmText;
-        private CustomLabel customLabelRazm;
-        private CustomLabel customLabelKodText;
-        private CustomLabel customLabelKod;
+        private Core.Class.CustomLabel customLabelRazmText;
+        private Core.Class.CustomLabel customLabelRazm;
+        private Core.Class.CustomLabel customLabelKodText;
+        private Core.Class.CustomLabel customLabelKod;
         private DevExpress.XtraGrid.Columns.GridColumn grup1;
     }
 }

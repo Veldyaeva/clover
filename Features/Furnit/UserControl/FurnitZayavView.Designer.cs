@@ -51,8 +51,8 @@ namespace SewingProduction
             this.tbDataFO = new SewingProduction.CustomTextBox();
             this.tbNZ = new SewingProduction.CustomTextBox();
             this.tbVidFName = new SewingProduction.CustomTextBox();
-            this.label2 = new SewingProduction.CustomLabel();
-            this.label1 = new SewingProduction.CustomLabel();
+            this.label2 = new SewingProduction.Core.Class.CustomLabel();
+            this.label1 = new SewingProduction.Core.Class.CustomLabel();
             this.gcFurnitF = new CustomGridControl();
             this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnFurnitFFfSpecRez = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -77,11 +77,11 @@ namespace SewingProduction
             this.gridColumnFurnitFItKolFUp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFurnitFItKolFRa = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tbKodF = new SewingProduction.CustomTextBox();
-            this.label3 = new SewingProduction.CustomLabel();
-            this.label4 = new SewingProduction.CustomLabel();
-            this.label5 = new SewingProduction.CustomLabel();
+            this.label3 = new SewingProduction.Core.Class.CustomLabel();
+            this.label4 = new SewingProduction.Core.Class.CustomLabel();
+            this.label5 = new SewingProduction.Core.Class.CustomLabel();
             this.button1 = new CustomButton();
-            this.label6 = new SewingProduction.CustomLabel();
+            this.label6 = new SewingProduction.Core.Class.CustomLabel();
             this.gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tbViewType = new SewingProduction.CustomTextBox();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);

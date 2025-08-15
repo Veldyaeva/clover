@@ -28,7 +28,7 @@ namespace SewingProduction.Features.Articul
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditAricul( string kodArtSQL = null)
+        public EditAricul(UserClass user, string kodArtSQL = null) : base(user)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
@@ -40,11 +40,7 @@ namespace SewingProduction.Features.Articul
             radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2;
         }
 
-        private void art_new2024_Load(object sender, EventArgs e)
-        {
-            comboAllTableItems();
-            //radioGroup1.SelectedIndex = 0;
-        }
+        private void art_new2024_Load(object sender, EventArgs e) => comboAllTableItems();
 
         private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -110,7 +106,7 @@ namespace SewingProduction.Features.Articul
             customLabelM.Visible = boolShow;
             customLabelM1.Visible = boolShow;
             customLabelM2.Visible = boolShow;
-            customTextBoxKodFurn.VisiblePermission = boolShow;
+            customTextBoxKodFurn.Visible = boolShow;
             customTextBox1.Visible = boolShow;
             customTextBoxDlin.Visible = boolShow;
             customTextBoxTimePlet.Visible = boolShow;
