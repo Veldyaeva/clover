@@ -38,6 +38,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private BindingList<PlanSezonZadKnitMachine> _planSezonZadKnitMachineBindingList;
         private BindingSource _planSezonZadKnitMachineBindingSource;
         private List<PlanSezonZadKnitMachine> _planSezonZadKnitMachineData = new List<PlanSezonZadKnitMachine>();
+        
+        private List<PlanSezonZadKnitMachineLoadingSummary> _currentPlanSezonZadKnitMachineLoadingSummaryData = new List<PlanSezonZadKnitMachineLoadingSummary>();
+        private BindingList<PlanSezonZadKnitMachineLoadingSummary> _planSezonZadKnitMachineLoadingSummaryBindingList;
+        private BindingSource _planSezonZadKnitMachineLoadingSummaryBindingSource;
+        private List<PlanSezonZadKnitMachineLoadingSummary> _planSezonZadKnitMachineLoadingSummaryData = new List<PlanSezonZadKnitMachineLoadingSummary>();
+
         public KnittingMachinesUnitLoading(int xKmlID, string xKmlNumber)
         {
             InitializeComponent();
@@ -47,6 +53,8 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             _bulkHelper = new BulkHelper();
             _xKmlID = xKmlID;
             _xKmlNumber = xKmlNumber;
+            gridViewPlanSezonZadKnitMachineLoadingSummary.OptionsView.ShowColumnHeaders = false;
+
         }
         private async Task InitializeBindingsAsync()
         {
@@ -57,8 +65,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _planSezonZadKnitMachineBindingList = new BindingList<PlanSezonZadKnitMachine>();
                     _planSezonZadKnitMachineBindingSource = new BindingSource { DataSource = _planSezonZadKnitMachineBindingList };
                 });
-
-                await Task.WhenAll(planSezonZadKnitMachineTask);
+                var planSezonZadKnitMachineLoadingSummaryTask = Task.Run(() =>
+                {
+                    _planSezonZadKnitMachineLoadingSummaryBindingList = new BindingList<PlanSezonZadKnitMachineLoadingSummary>();
+                    _planSezonZadKnitMachineLoadingSummaryBindingSource = new BindingSource { DataSource = _planSezonZadKnitMachineLoadingSummaryBindingList };
+                });
+                await Task.WhenAll(planSezonZadKnitMachineTask, planSezonZadKnitMachineLoadingSummaryTask);
 
                 #region описание gridControlPlanSezonZadKnitMachine "текущий загруз В/М"
                 gridControlPlanSezonZadKnitMachine.DataSource = _planSezonZadKnitMachineBindingSource;
@@ -292,18 +304,12 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //};
 
                 #endregion
-                //#region описание comboBox "Список зон обслуживания"
-                ////сomboBoxKnitMachineAreaList.DataSource = _knitMachineAreaListViewBindingSource;
-                ////сomboBoxKnitMachineAreaList.SelectedIndex = -1;
-                ////сomboBoxKnitMachineAreaList.ValueMember = "kmaID";
-                ////сomboBoxKnitMachineAreaList.DisplayMember = "kmaNumber";
-                ////int xSelectedIndex = сomboBoxKnitMachineClassList.SelectedIndex;
-                //сomboBoxKnitMachineClassList.DataSource = _knitMachineClassListBindingSource;
-                ////сomboBoxKnitMachineClassList.SelectedIndex = xSelectedIndex;
-                //сomboBoxKnitMachineClassList.ValueMember = "id_class";
-                //сomboBoxKnitMachineClassList.DisplayMember = "caption";
-                //сomboBoxKnitMachineClassList.SelectedValue = xClassID;
-                //#endregion
+
+                #region описание gridControlPlanSezonZadKnitMachineLoadingSummary "итоги по текущему загрузу В/М"
+                gridControlPlanSezonZadKnitMachineLoadingSummary.DataSource = _planSezonZadKnitMachineLoadingSummaryBindingSource;
+                gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod.FieldName = "period";
+                gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal.FieldName = "hoursTotal";
+                #endregion
 
             }
             catch (Exception ex)
@@ -334,6 +340,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _planSezonZadKnitMachineBindingSource.ResetBindings(false);
                     _planSezonZadKnitMachineBindingSource.Sort = "pszkmYearMonthInt, pszkmPlanDateFrom";
                     gridControlPlanSezonZadKnitMachine.DataSource = _planSezonZadKnitMachineBindingSource;
+                    //gridViewPlanSezonZadKnitMachine.ExpandAllGroups = true;
                     
                 }
                 else
@@ -347,6 +354,41 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             }
         }
 
+        private async Task LoadKnitMachineUnitLoadingSummaryDataAsync(int xKmlID)
+        {
+            try
+            {
+                _planSezonZadKnitMachineLoadingSummaryBindingSource.Clear();
+                _planSezonZadKnitMachineLoadingSummaryBindingSource.ResetBindings(false);
+                _planSezonZadKnitMachineLoadingSummaryData = await _vyazService.GetPlanSezonZadKnitMachineLoadingSummary(xKmlID);
+                if (_planSezonZadKnitMachineLoadingSummaryData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные PlanSezonZadKnitMachineLoadingSummary", "LoadKnitMachineUnitLoadingSummaryDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentPlanSezonZadKnitMachineLoadingSummaryData = _planSezonZadKnitMachineLoadingSummaryData;                // Обновляем текущую модель
+                        _planSezonZadKnitMachineLoadingSummaryBindingSource.DataSource = _currentPlanSezonZadKnitMachineLoadingSummaryData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные PlanSezonZadKnitMachineLoadingSummary успешно загружены", "LoadKnitMachineUnitLoadingSummaryDataAsync");
+                    _planSezonZadKnitMachineLoadingSummaryBindingSource.ResetBindings(false);
+                    _planSezonZadKnitMachineLoadingSummaryBindingSource.Sort = "sortOrder, yearNumberDateZap, monthNumberDateZap";
+                    gridControlPlanSezonZadKnitMachineLoadingSummary.DataSource = _planSezonZadKnitMachineLoadingSummaryBindingSource;
+                    //gridViewPlanSezonZadKnitMachine.ExpandAllGroups = true;
+
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные PlanSezonZadKnitMachineLoadingSummary", "LoadKnitMachineUnitLoadingSummaryDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных PlanSezonZadKnitMachineLoadingSummary");
+            }
+        }
+
         private async void KnittingMachinesUnitLoading_Load(object sender, EventArgs e)
         {
             try
@@ -356,22 +398,70 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 //await LoadKnitMachineAreaListDataAsync();
                 await LoadKnitMachineUnitLoadingDataAsync(_xKmlID);
-
+                await LoadKnitMachineUnitLoadingSummaryDataAsync(_xKmlID);
                 labelKmlNumber.Text = _xKmlNumber;
 
+                gridViewPlanSezonZadKnitMachine.Columns["hoursTotal"].Summary.Add(DevExpress.Data.SummaryItemType.Sum, "hoursTotal", "(ч/ч: {0:0.##})");    //"(ч/ч: {0:c})" - с - отображение валюты руб
+                //gridViewPlanSezonZadKnitMachine.Columns["hoursTotal"].Summary.Add(DevExpress.Data.SummaryItemType.Custom, "hoursTotal", "(дней: {0:0})");
+                GridColumnSummaryItem _daysTotal;
+                _daysTotal = new GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Custom, "hoursTotal", "(дней: {0:n2})");
+                gridViewPlanSezonZadKnitMachine.Columns["hoursTotal"].Summary.Add(_daysTotal);
+                decimal _acc = 0m;
+
+
+                gridViewPlanSezonZadKnitMachine.CustomSummaryCalculate += (sender, e) =>
+                {
+                    // Сработали по «чужому» итогу? Выходим — его не трогаем.
+                    if (!ReferenceEquals(e.Item, _daysTotal)) return; //    && !ReferenceEquals(e.Item, _sumWithNds)
+
+                    if (e.SummaryProcess == CustomSummaryProcess.Start)
+                    {
+                        _acc = 0m; // обнуляем аккумулятор для ЭТОГО итога
+                    }
+                    else if (e.SummaryProcess == CustomSummaryProcess.Calculate)
+                    {
+                        // На каждой строке берём значение поля "Amount" и копим
+                        var val = e.FieldValue;
+                        if (val != null && val != DBNull.Value)
+                            _acc += Convert.ToDecimal(val);
+
+                        // Если формула сложнее, можно читать любые другие поля строки:
+                        // var v = Convert.ToDecimal(gridView1.GetRowCellValue(e.RowHandle, "OtherField"));
+                    }
+                    else if (e.SummaryProcess == CustomSummaryProcess.Finalize)
+                    {
+                        // Выдаём результат — зависит от того, КАКОЙ именно итог мы сейчас закрываем
+                        if (ReferenceEquals(e.Item, _daysTotal))
+                            e.TotalValue = _acc / 23;    // количество дней
+                        //else if (ReferenceEquals(e.Item, _sumWithNds))
+                        //    e.TotalValue = _acc * 1.20m;    // сумма + НДС
+                    }
+                };
                 //---------------------------------------------
                 gridViewPlanSezonZadKnitMachine.BeginSort();
                 gridViewPlanSezonZadKnitMachine.ClearSorting();
 
                 gridViewPlanSezonZadKnitMachine.SortInfo.AddRange(new[] {
-                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["pszkmYearMonthInt"], DevExpress.Data.ColumnSortOrder.Ascending),
-                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["DateZap"], DevExpress.Data.ColumnSortOrder.Ascending)
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachineLoadingSummary.Columns["pszkmYearMonthInt"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachineLoadingSummary.Columns["DateZap"], DevExpress.Data.ColumnSortOrder.Ascending)
                     });
                 gridViewPlanSezonZadKnitMachine.EndSort();
-                //gridViewPlanSezonZadKnitMachine.Refresh();
-                //gridControlPlanSezonZadKnitMachine.Refresh();
                 //---------------------------------------------
 
+                gridViewPlanSezonZadKnitMachine.ExpandAllGroups();
+                gridViewPlanSezonZadKnitMachine.OptionsView.ShowGroupPanel = false;
+
+                //---------------------------------------------
+                gridViewPlanSezonZadKnitMachineLoadingSummary.BeginSort();
+                gridViewPlanSezonZadKnitMachineLoadingSummary.ClearSorting();
+
+                gridViewPlanSezonZadKnitMachineLoadingSummary.SortInfo.AddRange(new[] {
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["sortOrder"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["yearNumberDateZap"], DevExpress.Data.ColumnSortOrder.Ascending),
+                        new DevExpress.XtraGrid.Columns.GridColumnSortInfo(gridViewPlanSezonZadKnitMachine.Columns["monthNumberDateZap"], DevExpress.Data.ColumnSortOrder.Ascending)
+                    });
+                gridViewPlanSezonZadKnitMachineLoadingSummary.EndSort();
+                //---------------------------------------------
             }
             catch (Exception ex)
             {

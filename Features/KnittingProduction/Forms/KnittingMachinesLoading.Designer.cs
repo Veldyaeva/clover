@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class KnittingMachinesLoading
     {
@@ -95,12 +97,13 @@
             // сomboBoxKnitMachineClassList
             // 
             сomboBoxKnitMachineClassList.BackColor = System.Drawing.Color.FromArgb(220, 240, 250);
+            сomboBoxKnitMachineClassList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             сomboBoxKnitMachineClassList.Font = new System.Drawing.Font("Arial", 10F);
             сomboBoxKnitMachineClassList.ForeColor = System.Drawing.Color.FromArgb(25, 75, 105);
             сomboBoxKnitMachineClassList.FormattingEnabled = true;
             сomboBoxKnitMachineClassList.Location = new System.Drawing.Point(86, 45);
             сomboBoxKnitMachineClassList.Name = "сomboBoxKnitMachineClassList";
-            сomboBoxKnitMachineClassList.Size = new System.Drawing.Size(136, 24);
+            сomboBoxKnitMachineClassList.Size = new System.Drawing.Size(128, 24);
             сomboBoxKnitMachineClassList.TabIndex = 0;
             сomboBoxKnitMachineClassList.SelectedIndexChanged += сomboBoxKnitMachineClassList_SelectedIndexChanged;
             сomboBoxKnitMachineClassList.DisplayMemberChanged += сomboBoxKnitMachineClassList_DisplayMemberChanged;
@@ -112,7 +115,7 @@
             gridControlKnitMachineLoadInfo.MainView = gridViewKnitMachineLoadLayoutView;
             gridControlKnitMachineLoadInfo.Name = "gridControlKnitMachineLoadInfo";
             gridControlKnitMachineLoadInfo.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemMemoEdit1, repositoryItemRichTextEditCombinedPszNomCard, repositoryItemHypertextLabelCombinedPszNomCard, repositoryItemTextEditKmlNumber, repositoryItemTextEditYearMonth, repositoryItemTextEditKmlID });
-            gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(1781, 786);
+            gridControlKnitMachineLoadInfo.Size = new System.Drawing.Size(983, 494);
             gridControlKnitMachineLoadInfo.TabIndex = 2;
             gridControlKnitMachineLoadInfo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKnitMachineLoadLayoutView, gridViewKnitMachineLoadInfoCards, gridViewKnitMachineLoadInfo });
             gridControlKnitMachineLoadInfo.Click += repositoryItemTextEditKmlNumber_DoubleClick;
@@ -356,7 +359,7 @@
             layoutControl1.Name = "layoutControl1";
             layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(1148, 288, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(1830, 890);
+            layoutControl1.Size = new System.Drawing.Size(1032, 598);
             layoutControl1.TabIndex = 4;
             layoutControl1.Text = "layoutControl1";
             // 
@@ -366,26 +369,26 @@
             Root.GroupBordersVisible = false;
             Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleSeparator1, splitterItem1, layoutControlGroup1 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(1830, 890);
+            Root.Size = new System.Drawing.Size(1032, 598);
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(1809, 0);
+            simpleSeparator1.Location = new System.Drawing.Point(1011, 0);
             simpleSeparator1.Name = "simpleSeparator1";
-            simpleSeparator1.Size = new System.Drawing.Size(1, 870);
+            simpleSeparator1.Size = new System.Drawing.Size(1, 578);
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new System.Drawing.Point(0, 860);
+            splitterItem1.Location = new System.Drawing.Point(0, 568);
             splitterItem1.Name = "splitterItem1";
-            splitterItem1.Size = new System.Drawing.Size(1809, 10);
+            splitterItem1.Size = new System.Drawing.Size(1011, 10);
             // 
             // layoutControlGroup1
             // 
             layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem2, layoutControlItem3, emptySpaceItem1 });
             layoutControlGroup1.Location = new System.Drawing.Point(0, 0);
             layoutControlGroup1.Name = "layoutControlGroup1";
-            layoutControlGroup1.Size = new System.Drawing.Size(1809, 860);
+            layoutControlGroup1.Size = new System.Drawing.Size(1011, 568);
             layoutControlGroup1.Text = "Текущий загруз В/М";
             // 
             // layoutControlItem2
@@ -393,7 +396,7 @@
             layoutControlItem2.Control = сomboBoxKnitMachineClassList;
             layoutControlItem2.Location = new System.Drawing.Point(0, 0);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(202, 25);
+            layoutControlItem2.Size = new System.Drawing.Size(194, 25);
             layoutControlItem2.Text = "Класс В/М";
             layoutControlItem2.TextLocation = DevExpress.Utils.Locations.Left;
             layoutControlItem2.TextSize = new System.Drawing.Size(50, 13);
@@ -403,20 +406,20 @@
             layoutControlItem3.Control = gridControlKnitMachineLoadInfo;
             layoutControlItem3.Location = new System.Drawing.Point(0, 25);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(1785, 790);
+            layoutControlItem3.Size = new System.Drawing.Size(987, 498);
             layoutControlItem3.TextVisible = false;
             // 
             // emptySpaceItem1
             // 
-            emptySpaceItem1.Location = new System.Drawing.Point(202, 0);
+            emptySpaceItem1.Location = new System.Drawing.Point(194, 0);
             emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(1583, 25);
+            emptySpaceItem1.Size = new System.Drawing.Size(793, 25);
             // 
             // KnittingMachinesLoading
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1830, 890);
+            ClientSize = new System.Drawing.Size(1032, 598);
             Controls.Add(layoutControl1);
             Name = "KnittingMachinesLoading";
             Text = "Текущий загурз В/М";
