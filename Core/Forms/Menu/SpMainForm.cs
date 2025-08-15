@@ -13,6 +13,7 @@ using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.Articul;
+using SewingProduction.Features.UserDistribution.Class;
 
 namespace SewingProduction
 {
@@ -41,6 +42,7 @@ namespace SewingProduction
 
                 _formManager = new FormManager(this, menuStrip1, _user);
                 await _user.LoadUserData();
+                CurrentUser.SetUser(_user);
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();
@@ -125,7 +127,7 @@ namespace SewingProduction
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(_user), sender);
+            OpenForm(new Articul(), sender);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -154,7 +156,7 @@ namespace SewingProduction
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(_user), sender);
+            OpenForm(new Articul(), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {

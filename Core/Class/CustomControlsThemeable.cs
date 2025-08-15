@@ -20,6 +20,7 @@ using SewingProduction.Services;
 using System.Diagnostics;
 using System.Linq;
 using SewingProduction.Core.Class;
+using SewingProduction.Features.UserDistribution.Class;
 
 namespace SewingProduction
 {
@@ -928,7 +929,7 @@ namespace SewingProduction
             }
         }
 
-        public CustomForm()
+        public CustomForm() : this(CurrentUser.User ?? throw new InvalidOperationException("Пользователь не авторизован"))
         {
             ApplyTheme(); // Применяем тему к самой форме (фон)
             ThemeManager.ThemeChanged += OnThemeChanged;
@@ -953,6 +954,7 @@ namespace SewingProduction
                 CustomForm_Load(s, e);
             };
         }
+
         public void ApplyTheme() 
         {
             if (this.IsDisposed || !this.IsHandleCreated) return;

@@ -28,7 +28,7 @@ namespace SewingProduction.Features.Articul
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public EditAricul(UserClass user, string kodArtSQL = null) : base(user)
+        public EditAricul( string kodArtSQL = null)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
@@ -38,10 +38,6 @@ namespace SewingProduction.Features.Articul
             customTextBoxKod1.Text = kodSQL;
             visibleSP(false);
             radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2;
-        }
-        public EditAricul()
-        {
-            InitializeComponent();
         }
 
         private void art_new2024_Load(object sender, EventArgs e)
