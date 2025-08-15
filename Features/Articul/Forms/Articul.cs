@@ -22,6 +22,7 @@ using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Class;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -32,7 +33,7 @@ namespace SewingProduction.Features.Articul
         private readonly DatabaseHelper _dbHelperAce;
         List<ArticulModel> _articuls;
         ArticulDataService _articulDataService = new ArticulDataService();
-        public Articul() 
+        public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
@@ -310,7 +311,7 @@ namespace SewingProduction.Features.Articul
 
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
-            EditAricul f = new EditAricul();
+            EditAricul f = new EditAricul(CurrentUser.User);
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -319,7 +320,7 @@ namespace SewingProduction.Features.Articul
         private void customButtonCopy_Click(object sender, EventArgs e)
         {
             var kodObj = gridControl1.GetFocusedRowCellValue("kod");
-            EditAricul f = new EditAricul(kodObj.ToString());
+            EditAricul f = new EditAricul(CurrentUser.User,kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
@@ -330,7 +331,7 @@ namespace SewingProduction.Features.Articul
             var kodObj = gridControl1.GetFocusedRowCellValue("kod");
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(_user, _articuls, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));
             }
         }
     }
