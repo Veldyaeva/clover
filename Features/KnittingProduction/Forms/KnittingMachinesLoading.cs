@@ -560,7 +560,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
             gridViewKnitMachineLoadLayoutView.BeginUpdate();
             try
             {
-                gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(gridViewKnitMachineLoadLayoutView.CardMinSize.Width, gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1));
+                if (_knitMachineLoadInfoBindingSource.Count != 0)
+                {
+                    gridViewKnitMachineLoadLayoutView.CardMinSize = new System.Drawing.Size(gridViewKnitMachineLoadLayoutView.CardMinSize.Width, gridControlKnitMachineLoadInfo.Size.Height / (_knitMachineLoadInfoBindingSource.Count / _knitMachineListBindingSource.Count + 1));
+                }
+                
 
                 //---------------------------------------------
                 gridViewKnitMachineLoadLayoutView.BeginSort();

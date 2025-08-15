@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class KnittingMachinesUnitLoading
     {
@@ -44,40 +46,32 @@
             gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt = new DevExpress.XtraGrid.Columns.GridColumn();
             labelKmlNumber = new CustomLabel();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            customGridControl1 = new CustomGridControl();
-            gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            gridControlPlanSezonZadKnitMachineLoadingSummary = new CustomGridControl();
+            gridViewPlanSezonZadKnitMachineLoadingSummary = new DevExpress.XtraGrid.Views.Grid.GridView();
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal = new DevExpress.XtraGrid.Columns.GridColumn();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator2 = new DevExpress.XtraLayout.SimpleSeparator();
-            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
-            emptySpaceItem2 = new DevExpress.XtraLayout.EmptySpaceItem();
             simpleSeparator4 = new DevExpress.XtraLayout.SimpleSeparator();
-            emptySpaceItem3 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)gridControlPlanSezonZadKnitMachine).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewPlanSezonZadKnitMachine).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
             layoutControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlPlanSezonZadKnitMachineLoadingSummary).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPlanSezonZadKnitMachineLoadingSummary).BeginInit();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).BeginInit();
             SuspendLayout();
             // 
             // gridControlPlanSezonZadKnitMachine
@@ -86,7 +80,7 @@
             gridControlPlanSezonZadKnitMachine.Location = new System.Drawing.Point(12, 51);
             gridControlPlanSezonZadKnitMachine.MainView = gridViewPlanSezonZadKnitMachine;
             gridControlPlanSezonZadKnitMachine.Name = "gridControlPlanSezonZadKnitMachine";
-            gridControlPlanSezonZadKnitMachine.Size = new System.Drawing.Size(820, 460);
+            gridControlPlanSezonZadKnitMachine.Size = new System.Drawing.Size(651, 535);
             gridControlPlanSezonZadKnitMachine.TabIndex = 0;
             gridControlPlanSezonZadKnitMachine.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPlanSezonZadKnitMachine });
             // 
@@ -97,7 +91,6 @@
             gridViewPlanSezonZadKnitMachine.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineColumnArticul, gridPlanSezonZadKnitMachineColumnPszkmPszNom, gridPlanSezonZadKnitMachineColumnHoursTotal, gridPlanSezonZadKnitMachineColumnDateZap, gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom, gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo, gridPlanSezonZadKnitMachineColumnYearMonthPlanDate, gridPlanSezonZadKnitMachineColumnKmlNumber, gridPlanSezonZadKnitMachineColumnYearNumberPlanDate, gridPlanSezonZadKnitMachineColumnMonthNumberPlanDate, gridPlanSezonZadKnitMachineColumnYearMonthText, gridPlanSezonZadKnitMachineColumnPszkmYearMonthInt });
             gridViewPlanSezonZadKnitMachine.GridControl = gridControlPlanSezonZadKnitMachine;
             gridViewPlanSezonZadKnitMachine.GroupCount = 1;
-            gridViewPlanSezonZadKnitMachine.GroupSummary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridGroupSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotal", gridPlanSezonZadKnitMachineColumnHoursTotal, "(ч/ч: {0:0.##})") });
             gridViewPlanSezonZadKnitMachine.Name = "gridViewPlanSezonZadKnitMachine";
             gridViewPlanSezonZadKnitMachine.OptionsView.EnableAppearanceEvenRow = true;
             gridViewPlanSezonZadKnitMachine.OptionsView.GroupFooterShowMode = DevExpress.XtraGrid.Views.Grid.GroupFooterShowMode.VisibleAlways;
@@ -110,7 +103,7 @@
             gridPlanSezonZadKnitMachineColumnArticul.Name = "gridPlanSezonZadKnitMachineColumnArticul";
             gridPlanSezonZadKnitMachineColumnArticul.Visible = true;
             gridPlanSezonZadKnitMachineColumnArticul.VisibleIndex = 0;
-            gridPlanSezonZadKnitMachineColumnArticul.Width = 83;
+            gridPlanSezonZadKnitMachineColumnArticul.Width = 142;
             // 
             // gridPlanSezonZadKnitMachineColumnPszkmPszNom
             // 
@@ -118,14 +111,15 @@
             gridPlanSezonZadKnitMachineColumnPszkmPszNom.Name = "gridPlanSezonZadKnitMachineColumnPszkmPszNom";
             gridPlanSezonZadKnitMachineColumnPszkmPszNom.Visible = true;
             gridPlanSezonZadKnitMachineColumnPszkmPszNom.VisibleIndex = 1;
+            gridPlanSezonZadKnitMachineColumnPszkmPszNom.Width = 102;
             // 
             // gridPlanSezonZadKnitMachineColumnHoursTotal
             // 
             gridPlanSezonZadKnitMachineColumnHoursTotal.Caption = "ч/ч";
             gridPlanSezonZadKnitMachineColumnHoursTotal.Name = "gridPlanSezonZadKnitMachineColumnHoursTotal";
-            gridPlanSezonZadKnitMachineColumnHoursTotal.Summary.AddRange(new DevExpress.XtraGrid.GridSummaryItem[] { new DevExpress.XtraGrid.GridColumnSummaryItem(DevExpress.Data.SummaryItemType.Sum, "hoursTotal", "(ч/ч: {0:0.##})") });
             gridPlanSezonZadKnitMachineColumnHoursTotal.Visible = true;
             gridPlanSezonZadKnitMachineColumnHoursTotal.VisibleIndex = 2;
+            gridPlanSezonZadKnitMachineColumnHoursTotal.Width = 121;
             // 
             // gridPlanSezonZadKnitMachineColumnDateZap
             // 
@@ -133,6 +127,7 @@
             gridPlanSezonZadKnitMachineColumnDateZap.Name = "gridPlanSezonZadKnitMachineColumnDateZap";
             gridPlanSezonZadKnitMachineColumnDateZap.Visible = true;
             gridPlanSezonZadKnitMachineColumnDateZap.VisibleIndex = 3;
+            gridPlanSezonZadKnitMachineColumnDateZap.Width = 62;
             // 
             // gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom
             // 
@@ -140,6 +135,7 @@
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom.Name = "gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom";
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom.Visible = true;
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom.VisibleIndex = 4;
+            gridPlanSezonZadKnitMachineColumnPszkmPlanDateFrom.Width = 101;
             // 
             // gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo
             // 
@@ -147,6 +143,7 @@
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo.Name = "gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo";
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo.Visible = true;
             gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo.VisibleIndex = 5;
+            gridPlanSezonZadKnitMachineColumnPszkmPlanDateTo.Width = 98;
             // 
             // gridPlanSezonZadKnitMachineColumnYearMonthPlanDate
             // 
@@ -185,63 +182,68 @@
             // 
             // labelKmlNumber
             // 
-            labelKmlNumber.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold);
+            labelKmlNumber.Font = new System.Drawing.Font("Arial", 20F, System.Drawing.FontStyle.Bold);
             labelKmlNumber.ForeColor = System.Drawing.Color.FromArgb(20, 70, 100);
             labelKmlNumber.Location = new System.Drawing.Point(12, 12);
             labelKmlNumber.Name = "labelKmlNumber";
-            labelKmlNumber.Size = new System.Drawing.Size(819, 35);
+            labelKmlNumber.Size = new System.Drawing.Size(650, 35);
             labelKmlNumber.TabIndex = 1;
             labelKmlNumber.Text = "customLabel1";
             labelKmlNumber.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // layoutControl1
             // 
-            layoutControl1.Controls.Add(customGridControl1);
+            layoutControl1.Controls.Add(gridControlPlanSezonZadKnitMachineLoadingSummary);
             layoutControl1.Controls.Add(gridControlPlanSezonZadKnitMachine);
             layoutControl1.Controls.Add(labelKmlNumber);
-            layoutControl1.Controls.Add(textEdit1);
             layoutControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             layoutControl1.Location = new System.Drawing.Point(0, 0);
             layoutControl1.Name = "layoutControl1";
-            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(246, 0, 650, 400);
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(989, 212, 650, 400);
             layoutControl1.Root = Root;
-            layoutControl1.Size = new System.Drawing.Size(844, 783);
+            layoutControl1.Size = new System.Drawing.Size(675, 783);
             layoutControl1.TabIndex = 2;
             layoutControl1.Text = "layoutControl1";
             // 
-            // customGridControl1
+            // gridControlPlanSezonZadKnitMachineLoadingSummary
             // 
-            customGridControl1.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControl1.Location = new System.Drawing.Point(12, 515);
-            customGridControl1.MainView = gridView1;
-            customGridControl1.Name = "customGridControl1";
-            customGridControl1.Size = new System.Drawing.Size(507, 256);
-            customGridControl1.TabIndex = 2;
-            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
+            gridControlPlanSezonZadKnitMachineLoadingSummary.Font = new System.Drawing.Font("Arial", 10F);
+            gridControlPlanSezonZadKnitMachineLoadingSummary.Location = new System.Drawing.Point(12, 590);
+            gridControlPlanSezonZadKnitMachineLoadingSummary.MainView = gridViewPlanSezonZadKnitMachineLoadingSummary;
+            gridControlPlanSezonZadKnitMachineLoadingSummary.Name = "gridControlPlanSezonZadKnitMachineLoadingSummary";
+            gridControlPlanSezonZadKnitMachineLoadingSummary.Size = new System.Drawing.Size(648, 181);
+            gridControlPlanSezonZadKnitMachineLoadingSummary.TabIndex = 2;
+            gridControlPlanSezonZadKnitMachineLoadingSummary.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPlanSezonZadKnitMachineLoadingSummary });
             // 
-            // gridView1
+            // gridViewPlanSezonZadKnitMachineLoadingSummary
             // 
-            gridView1.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
-            gridView1.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView1.GridControl = customGridControl1;
-            gridView1.Name = "gridView1";
-            gridView1.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(129, 199, 132);
+            gridViewPlanSezonZadKnitMachineLoadingSummary.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewPlanSezonZadKnitMachineLoadingSummary.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod, gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal });
+            gridViewPlanSezonZadKnitMachineLoadingSummary.GridControl = gridControlPlanSezonZadKnitMachineLoadingSummary;
+            gridViewPlanSezonZadKnitMachineLoadingSummary.Name = "gridViewPlanSezonZadKnitMachineLoadingSummary";
+            gridViewPlanSezonZadKnitMachineLoadingSummary.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewPlanSezonZadKnitMachineLoadingSummary.OptionsView.ShowGroupPanel = false;
             // 
-            // textEdit1
+            // gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod
             // 
-            textEdit1.Location = new System.Drawing.Point(622, 515);
-            textEdit1.Name = "textEdit1";
-            textEdit1.Size = new System.Drawing.Size(51, 20);
-            textEdit1.StyleController = layoutControl1;
-            textEdit1.TabIndex = 3;
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod.Name = "gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod";
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod.Visible = true;
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod.VisibleIndex = 0;
+            // 
+            // gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal
+            // 
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal.Name = "gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal";
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal.Visible = true;
+            gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal.VisibleIndex = 1;
             // 
             // Root
             // 
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
-            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, layoutControlItem2, emptySpaceItem1, layoutControlItem3, simpleSeparator2, layoutControlItem4, simpleSeparator3, emptySpaceItem2, simpleSeparator4, emptySpaceItem3 });
+            Root.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, simpleSeparator1, layoutControlItem2, layoutControlItem3, simpleSeparator2, simpleSeparator3, simpleSeparator4 });
             Root.Name = "Root";
-            Root.Size = new System.Drawing.Size(844, 783);
+            Root.Size = new System.Drawing.Size(675, 783);
             Root.TextVisible = false;
             // 
             // layoutControlItem1
@@ -249,12 +251,12 @@
             layoutControlItem1.Control = labelKmlNumber;
             layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(823, 39);
+            layoutControlItem1.Size = new System.Drawing.Size(654, 39);
             layoutControlItem1.TextVisible = false;
             // 
             // simpleSeparator1
             // 
-            simpleSeparator1.Location = new System.Drawing.Point(823, 0);
+            simpleSeparator1.Location = new System.Drawing.Point(654, 0);
             simpleSeparator1.Name = "simpleSeparator1";
             simpleSeparator1.Size = new System.Drawing.Size(1, 39);
             // 
@@ -263,69 +265,40 @@
             layoutControlItem2.Control = gridControlPlanSezonZadKnitMachine;
             layoutControlItem2.Location = new System.Drawing.Point(0, 39);
             layoutControlItem2.Name = "layoutControlItem2";
-            layoutControlItem2.Size = new System.Drawing.Size(824, 464);
+            layoutControlItem2.Size = new System.Drawing.Size(655, 539);
             layoutControlItem2.TextVisible = false;
-            // 
-            // emptySpaceItem1
-            // 
-            emptySpaceItem1.Location = new System.Drawing.Point(512, 527);
-            emptySpaceItem1.Name = "emptySpaceItem1";
-            emptySpaceItem1.Size = new System.Drawing.Size(312, 236);
             // 
             // layoutControlItem3
             // 
-            layoutControlItem3.Control = customGridControl1;
-            layoutControlItem3.Location = new System.Drawing.Point(0, 503);
+            layoutControlItem3.Control = gridControlPlanSezonZadKnitMachineLoadingSummary;
+            layoutControlItem3.Location = new System.Drawing.Point(0, 578);
             layoutControlItem3.Name = "layoutControlItem3";
-            layoutControlItem3.Size = new System.Drawing.Size(511, 260);
+            layoutControlItem3.Size = new System.Drawing.Size(652, 185);
             layoutControlItem3.TextVisible = false;
             // 
             // simpleSeparator2
             // 
-            simpleSeparator2.Location = new System.Drawing.Point(511, 503);
+            simpleSeparator2.Location = new System.Drawing.Point(652, 578);
             simpleSeparator2.Name = "simpleSeparator2";
-            simpleSeparator2.Size = new System.Drawing.Size(1, 260);
-            // 
-            // layoutControlItem4
-            // 
-            layoutControlItem4.AppearanceItemCaption.Options.UseTextOptions = true;
-            layoutControlItem4.AppearanceItemCaption.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Near;
-            layoutControlItem4.Control = textEdit1;
-            layoutControlItem4.Location = new System.Drawing.Point(573, 503);
-            layoutControlItem4.Name = "layoutControlItem4";
-            layoutControlItem4.Size = new System.Drawing.Size(92, 24);
-            layoutControlItem4.Text = "дней";
-            layoutControlItem4.TextSize = new System.Drawing.Size(25, 13);
+            simpleSeparator2.Size = new System.Drawing.Size(1, 185);
             // 
             // simpleSeparator3
             // 
-            simpleSeparator3.Location = new System.Drawing.Point(823, 503);
+            simpleSeparator3.Location = new System.Drawing.Point(654, 578);
             simpleSeparator3.Name = "simpleSeparator3";
-            simpleSeparator3.Size = new System.Drawing.Size(1, 24);
-            // 
-            // emptySpaceItem2
-            // 
-            emptySpaceItem2.Location = new System.Drawing.Point(665, 503);
-            emptySpaceItem2.Name = "emptySpaceItem2";
-            emptySpaceItem2.Size = new System.Drawing.Size(158, 24);
+            simpleSeparator3.Size = new System.Drawing.Size(1, 185);
             // 
             // simpleSeparator4
             // 
-            simpleSeparator4.Location = new System.Drawing.Point(512, 503);
+            simpleSeparator4.Location = new System.Drawing.Point(653, 578);
             simpleSeparator4.Name = "simpleSeparator4";
-            simpleSeparator4.Size = new System.Drawing.Size(1, 24);
-            // 
-            // emptySpaceItem3
-            // 
-            emptySpaceItem3.Location = new System.Drawing.Point(513, 503);
-            emptySpaceItem3.Name = "emptySpaceItem3";
-            emptySpaceItem3.Size = new System.Drawing.Size(60, 24);
+            simpleSeparator4.Size = new System.Drawing.Size(1, 185);
             // 
             // KnittingMachinesUnitLoading
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(844, 783);
+            ClientSize = new System.Drawing.Size(675, 783);
             Controls.Add(layoutControl1);
             Name = "KnittingMachinesUnitLoading";
             Text = "Загруз В/М";
@@ -334,21 +307,16 @@
             ((System.ComponentModel.ISupportInitialize)gridViewPlanSezonZadKnitMachine).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
             layoutControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)textEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControlPlanSezonZadKnitMachineLoadingSummary).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPlanSezonZadKnitMachineLoadingSummary).EndInit();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem3).EndInit();
             ResumeLayout(false);
         }
 
@@ -374,16 +342,13 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
-        private CustomGridControl customGridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private CustomGridControl gridControlPlanSezonZadKnitMachineLoadingSummary;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPlanSezonZadKnitMachineLoadingSummary;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator2;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator3;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem2;
         private DevExpress.XtraLayout.SimpleSeparator simpleSeparator4;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem3;
+        private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineLoadingSummaryColumnPeriod;
+        private DevExpress.XtraGrid.Columns.GridColumn gridPlanSezonZadKnitMachineLoadingSummaryColumnHoursTotal;
     }
 }

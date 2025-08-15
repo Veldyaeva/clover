@@ -164,4 +164,18 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int pszkmYearMonthInt { get; set; }
     }
 
+    public class PlanSezonZadKnitMachineLoadingSummary
+    {
+        [NotMapped]
+        public string period { get; set; }
+        [NotMapped]
+        public int yearNumberDateZap { get; set; }
+        [NotMapped]
+        public int monthNumberDateZap { get; set; }
+        [NotMapped]
+        public decimal hoursTotal { get; set; }
+        [NotMapped]
+        public decimal sortOrder { get; set; }
+    }
+
 }
