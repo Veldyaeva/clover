@@ -34,7 +34,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -46,8 +46,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)
@@ -72,7 +72,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -84,8 +84,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)

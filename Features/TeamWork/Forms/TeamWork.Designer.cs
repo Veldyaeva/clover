@@ -234,8 +234,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             pictureBox3 = new PictureBox();
             customGridControl2 = new CustomGridControl();
             normRaskArt = new GridView();
+            Kod_o = new DevExpress.XtraGrid.Columns.GridColumn();
+            TextRask = new DevExpress.XtraGrid.Columns.GridColumn();
+            razryd = new DevExpress.XtraGrid.Columns.GridColumn();
+            sek = new DevExpress.XtraGrid.Columns.GridColumn();
+            spec = new DevExpress.XtraGrid.Columns.GridColumn();
+            Obor = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControl1 = new CustomGridControl();
-            gridView2 = new GridView();
+            normKontTab = new GridView();
             customLabel2 = new CustomLabel();
             pictureBox2 = new PictureBox();
             gridControl_binded = new CustomGridControl();
@@ -260,7 +266,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             loadAllCheckBox = new CustomCheckBox();
             simpleButton1 = new SimpleButton();
             customGridControl3 = new CustomGridControl();
-            gridView6 = new GridView();
+            normRaszTab = new GridView();
             colannId1 = new DevExpress.XtraGrid.Columns.GridColumn();
             coln3 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -312,12 +318,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem2 = new DevExpress.XtraLayout.SplitterItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
-            layoutControlGroup5 = new DevExpress.XtraLayout.LayoutControlGroup();
-            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup13 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem11 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlGroup6 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -355,12 +361,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
-            N = new DevExpress.XtraGrid.Columns.GridColumn();
-            text = new DevExpress.XtraGrid.Columns.GridColumn();
-            razryd = new DevExpress.XtraGrid.Columns.GridColumn();
-            Sek = new DevExpress.XtraGrid.Columns.GridColumn();
-            Spec = new DevExpress.XtraGrid.Columns.GridColumn();
-            Obor = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -437,7 +437,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normRaskArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normKontTab).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_binded).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView_binded).BeginInit();
@@ -445,7 +445,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)gridControlNZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridView6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)normRaszTab).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_wdToBind).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView_wdToBind).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).BeginInit();
@@ -471,12 +471,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).BeginInit();
@@ -1048,7 +1048,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // coltext1
             // 
             coltext1.Caption = "наименование операции раскроя";
-            coltext1.FieldName = "Text";
+            coltext1.FieldName = "TextRask";
             coltext1.MinWidth = 23;
             coltext1.Name = "coltext1";
             coltext1.Visible = true;
@@ -2359,33 +2359,94 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl2.Size = new System.Drawing.Size(903, 291);
             customGridControl2.TabIndex = 1;
             customGridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { normRaskArt });
+            customGridControl2.Visible = true;
+            customGridControl2.Enabled = true;
             // 
             // normRaskArt
             // 
             normRaskArt.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             normRaskArt.Appearance.EvenRow.Options.UseBackColor = true;
-            normRaskArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { N, text, razryd, Sek, Spec, Obor });
+            normRaskArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Kod_o, TextRask, razryd, sek, spec, Obor });
             normRaskArt.GridControl = customGridControl2;
             normRaskArt.Name = "normRaskArt";
             normRaskArt.OptionsView.EnableAppearanceEvenRow = true;
+            normRaskArt.OptionsView.ShowIndicator = false;
+            normRaskArt.OptionsView.ShowGroupPanel = false;
+            normRaskArt.OptionsView.ShowAutoFilterRow = false;
+            normRaskArt.OptionsView.ShowFooter = false;
+            normRaskArt.OptionsView.ShowDetailButtons = false;
+            // 
+            // Kod_o
+            // 
+            Kod_o.Caption = "№";
+            Kod_o.FieldName = "Kod_o";
+            Kod_o.Name = "Kod_o";
+            Kod_o.Visible = true;
+            Kod_o.VisibleIndex = 0;
+            Kod_o.Width = 50;
+            // 
+            // TextRask
+            // 
+            TextRask.Caption = "наименование операции раскроя";
+            TextRask.FieldName = "TextRask";
+            TextRask.Name = "TextRask";
+            TextRask.Visible = true;
+            TextRask.VisibleIndex = 1;
+            TextRask.Width = 300;
+            // 
+            // razryd
+            // 
+            razryd.Caption = "разряд";
+            razryd.FieldName = "razryd";
+            razryd.Name = "razryd";
+            razryd.Visible = true;
+            razryd.VisibleIndex = 2;
+            razryd.Width = 80;
+            // 
+            // sek
+            // 
+            sek.Caption = "сек.";
+            sek.FieldName = "Sek";
+            sek.Name = "sek";
+            sek.Visible = true;
+            sek.VisibleIndex = 3;
+            sek.Width = 60;
+            // 
+            // spec
+            // 
+            spec.Caption = "спец-ть";
+            spec.FieldName = "Spec";
+            spec.Name = "spec";
+            spec.Visible = true;
+            spec.VisibleIndex = 4;
+            spec.Width = 100;
+            // 
+            // Obor
+            // 
+            Obor.Caption = "обор.";
+            Obor.FieldName = "Obor";
+            Obor.Name = "Obor";
+            Obor.Visible = true;
+            Obor.VisibleIndex = 5;
+            Obor.Width = 150;
             // 
             // customGridControl1
             // 
             customGridControl1.Font = new System.Drawing.Font("Arial", 10F);
             customGridControl1.Location = new System.Drawing.Point(546, 560);
-            customGridControl1.MainView = gridView2;
+            customGridControl1.MainView = normKontTab;
             customGridControl1.Name = "customGridControl1";
             customGridControl1.Size = new System.Drawing.Size(903, 291);
             customGridControl1.TabIndex = 1;
-            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
+            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { normKontTab });
             // 
-            // gridView2
+            // normKontTab
             // 
-            gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
-            gridView2.Appearance.EvenRow.Options.UseBackColor = true;
-            gridView2.GridControl = customGridControl1;
-            gridView2.Name = "gridView2";
-            gridView2.OptionsView.EnableAppearanceEvenRow = true;
+            normKontTab.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            normKontTab.Appearance.EvenRow.Options.UseBackColor = true;
+            normKontTab.GridControl = customGridControl1;
+            normKontTab.Name = "normKontTab";
+            normKontTab.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // customLabel2
             // 
@@ -2657,25 +2718,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             customGridControl3.Font = new System.Drawing.Font("Arial", 10F);
             customGridControl3.Location = new System.Drawing.Point(546, 560);
             customGridControl3.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
-            customGridControl3.MainView = gridView6;
+            customGridControl3.MainView = normRaszTab;
             customGridControl3.Margin = new Padding(4, 3, 4, 3);
             customGridControl3.Name = "customGridControl3";
             customGridControl3.Size = new System.Drawing.Size(903, 291);
             customGridControl3.TabIndex = 9;
-            customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView6 });
+            customGridControl3.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { normRaszTab });
             // 
-            // gridView6
+            // normRaszTab
             // 
-            gridView6.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
-            gridView6.Appearance.SelectedRow.Options.UseBackColor = true;
-            gridView6.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colannId1, coln3, gridColumn9, gridColumn10, gridColumn11, gridColumn48, gridColumn49, gridColumn50, gridColumn51, gridColumn52 });
-            gridView6.DetailHeight = 404;
-            gridView6.GridControl = customGridControl3;
-            gridView6.Name = "gridView6";
-            gridView6.OptionsEditForm.PopupEditFormWidth = 933;
-            gridView6.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
-            gridView6.OptionsView.ShowGroupPanel = false;
-            gridView6.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
+            normRaszTab.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
+            normRaszTab.Appearance.SelectedRow.Options.UseBackColor = true;
+            normRaszTab.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { colannId1, coln3, gridColumn9, gridColumn10, gridColumn11, gridColumn48, gridColumn49, gridColumn50, gridColumn51, gridColumn52 });
+            normRaszTab.DetailHeight = 404;
+            normRaszTab.GridControl = customGridControl3;
+            normRaszTab.Name = "normRaszTab";
+            normRaszTab.OptionsEditForm.PopupEditFormWidth = 933;
+            normRaszTab.OptionsView.ShowFilterPanelMode = DevExpress.XtraGrid.Views.Base.ShowFilterPanelMode.Never;
+            normRaszTab.OptionsView.ShowGroupPanel = false;
+            normRaszTab.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             // 
             // colannId1
             // 
@@ -3164,9 +3225,25 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             tabbedControlGroup1.Location = new System.Drawing.Point(0, 0);
             tabbedControlGroup1.Name = "tabbedControlGroup1";
-            tabbedControlGroup1.SelectedTabPage = layoutControlGroup4;
+            tabbedControlGroup1.SelectedTabPage = layoutControlGroup5;
             tabbedControlGroup1.Size = new System.Drawing.Size(931, 342);
             tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup1, layoutControlGroup4, layoutControlGroup5 });
+            // 
+            // layoutControlGroup5
+            // 
+            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
+            layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
+            layoutControlGroup5.Name = "layoutControlGroup5";
+            layoutControlGroup5.Size = new System.Drawing.Size(907, 295);
+            layoutControlGroup5.Text = "Комплектовка";
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customGridControl1;
+            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new System.Drawing.Size(907, 295);
+            layoutControlItem1.TextVisible = false;
             // 
             // layoutControlGroup1
             // 
@@ -3201,22 +3278,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             layoutControlItem8.Name = "layoutControlItem8";
             layoutControlItem8.Size = new System.Drawing.Size(907, 295);
             layoutControlItem8.TextVisible = false;
-            // 
-            // layoutControlGroup5
-            // 
-            layoutControlGroup5.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
-            layoutControlGroup5.Location = new System.Drawing.Point(0, 0);
-            layoutControlGroup5.Name = "layoutControlGroup5";
-            layoutControlGroup5.Size = new System.Drawing.Size(907, 295);
-            layoutControlGroup5.Text = "Комплектовка";
-            // 
-            // layoutControlItem1
-            // 
-            layoutControlItem1.Control = customGridControl1;
-            layoutControlItem1.Location = new System.Drawing.Point(0, 0);
-            layoutControlItem1.Name = "layoutControlItem1";
-            layoutControlItem1.Size = new System.Drawing.Size(907, 295);
-            layoutControlItem1.TextVisible = false;
             // 
             // layoutControlGroup13
             // 
@@ -3484,48 +3545,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // N
-            // 
-            N.Caption = "№";
-            N.Name = "N";
-            N.Visible = true;
-            N.VisibleIndex = 0;
-            // 
-            // Text
-            // 
-            text.Caption = "наименование операции раскроя";
-            text.Name = "Text";
-            text.Visible = true;
-            text.VisibleIndex = 1;
-            // 
-            // razryd
-            // 
-            razryd.Caption = "разряд";
-            razryd.Name = "razryd";
-            razryd.Visible = true;
-            razryd.VisibleIndex = 2;
-            // 
-            // Sek
-            // 
-            Sek.Caption = "сек.";
-            Sek.Name = "Sek";
-            Sek.Visible = true;
-            Sek.VisibleIndex = 3;
-            // 
-            // Spec
-            // 
-            Spec.Caption = "спец-ть";
-            Spec.Name = "Spec";
-            Spec.Visible = true;
-            Spec.VisibleIndex = 4;
-            // 
-            // Obor
-            // 
-            Obor.Caption = "обор.";
-            Obor.Name = "Obor";
-            Obor.Visible = true;
-            Obor.VisibleIndex = 5;
-            // 
             // TeamWork
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -3618,7 +3637,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)customGridControl2).EndInit();
             ((System.ComponentModel.ISupportInitialize)normRaskArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normKontTab).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_binded).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView_binded).EndInit();
@@ -3626,7 +3645,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)gridControlNZP).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNZP).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridView6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)normRaszTab).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_wdToBind).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView_wdToBind).EndInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit3).EndInit();
@@ -3652,12 +3671,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlGroup5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem11).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup6).EndInit();
@@ -3937,7 +3956,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraGrid.Columns.GridColumn kolNZP;
         private DevExpress.XtraGrid.Columns.GridColumn PztCount;
         private CustomGridControl customGridControl3;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
+        private DevExpress.XtraGrid.Views.Grid.GridView normRaszTab;
         private DevExpress.XtraGrid.Columns.GridColumn colannId1;
         private DevExpress.XtraGrid.Columns.GridColumn coln3;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn9;
@@ -4061,7 +4080,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomGridControl customGridControl2;
         private DevExpress.XtraGrid.Views.Grid.GridView normRaskArt;
         private CustomGridControl customGridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Views.Grid.GridView normKontTab;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
         private CustomTextBox buffer;
@@ -4151,11 +4170,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn50;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn51;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn52;
-        private DevExpress.XtraGrid.Columns.GridColumn N;
-        private DevExpress.XtraGrid.Columns.GridColumn text;
+        private DevExpress.XtraGrid.Columns.GridColumn Kod_o;
+        private DevExpress.XtraGrid.Columns.GridColumn NameOfOperationRask;
         private DevExpress.XtraGrid.Columns.GridColumn razryd;
-        private DevExpress.XtraGrid.Columns.GridColumn Sek;
-        private DevExpress.XtraGrid.Columns.GridColumn Spec;
+        private DevExpress.XtraGrid.Columns.GridColumn sek;
+        private DevExpress.XtraGrid.Columns.GridColumn spec;
         private DevExpress.XtraGrid.Columns.GridColumn Obor;
+        private DevExpress.XtraGrid.Columns.GridColumn NameOfOperationKont;
+        private DevExpress.XtraGrid.Columns.GridColumn TextRask;
     }
 }

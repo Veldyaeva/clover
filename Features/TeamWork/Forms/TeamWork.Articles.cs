@@ -52,21 +52,24 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 await preArchTask;
 
-                TWGridHelper.sortGridView(gridView6);
+                TWGridHelper.sortGridView(normRaszTab);
                 //TWGridHelper.sortGridView(gridViewRaskr);
                 //TWGridHelper.sortGridView(gridViewKont);
 
 
-                // Load NormRasz data for the Articles tab using the dedicated BindingList and BindingSource
+                // Load NormRasz and NormRask data for the Articles tab using the dedicated BindingList and BindingSource
                 if (this.gridView_wdToBind != null && gridView_wdToBind.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
                 {
                     int initialAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnId", 0);
                     List<NormRasz> raszData = new List<NormRasz>();
+                    List<NormRask> raskData = new List<NormRask>();
                     if (initialAnnId > 0)
                     {
                         raszData = await _artNormService.GetRelatedNormRasz(initialAnnId);
+                        raskData = await _artNormService.GetRelatedNormRask(initialAnnId);
                     }
 
+                    // Load NormRasz data
                     _normRaszListArticles.Clear();
                     if (raszData != null)
                     {
@@ -76,12 +79,25 @@ namespace SewingProduction.Features.TeamWork.Forms
                         }
                     }
                     _normRaszBindingSourceArticles.ResetBindings(false);
+
+                    // Load NormRask data
+                    _normRaskListArticles.Clear();
+                    if (raskData != null)
+                    {
+                        foreach (var item in raskData)
+                        {
+                            _normRaskListArticles.Add(item);
+                        }
+                    }
+                    _normRaskBindingSourceArticles.ResetBindings(false);
                 }
                 else
                 {
                     // Если нет выбранных строк в gridView_wdToBind - очищаем все связанные данные
                     _normRaszListArticles.Clear();
                     _normRaszBindingSourceArticles.ResetBindings(false);
+                    _normRaskListArticles.Clear();
+                    _normRaskBindingSourceArticles.ResetBindings(false);
                     await ClearWdToBindRelatedData();
                 }
 
@@ -279,7 +295,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
-        {
+        {            
             var view = sender as GridView;// gridView_wdToBind; 
             if (view == null) 
             {
@@ -310,9 +326,14 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
                 
+                await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Starting to load data for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
+                
                 // Обновляем NormRasz для customGridControl3
                 await RefreshNormRaszForArticlesTab(annId, token);
-
+                await RefreshNormRaskForArticlesTab(annId, token);
+                
+                await _logger.LogEventAsync($"gridViewWdToBind_FocusedRowChanged: Finished loading NormRasz and NormRask for annId={annId}", "gridViewWdToBind_FocusedRowChanged");
+                
                 // 3. Загрузка данных НЗП только для выбранной строки
                 token.ThrowIfCancellationRequested();
                 await LoadNZPForArticlesTab(annId, token);
@@ -338,6 +359,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             cancellationToken.ThrowIfCancellationRequested();
             
+            // Проверяем инициализацию
+            if (_normRaszListArticles == null || _normRaszBindingSourceArticles == null)
+            {
+                await _logger.LogErrorAsync(new NullReferenceException("_normRaszListArticles or _normRaszBindingSourceArticles is null"), "RefreshNormRaszForArticlesTab failed initialization check.");
+                return;
+            }
+            
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
             {
@@ -358,6 +386,80 @@ namespace SewingProduction.Features.TeamWork.Forms
             _normRaszBindingSourceArticles.ResetBindings(false);
         }
 
+                private async Task RefreshNormRaskForArticlesTab(int annId, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            // Проверяем инициализацию
+            if (_normRaskListArticles == null || _normRaskBindingSourceArticles == null)
+            {
+                await _logger.LogErrorAsync(new NullReferenceException("_normRaskListArticles or _normRaskBindingSourceArticles is null"), "RefreshNormRaskForArticlesTab failed initialization check.");
+                return;
+            }
+            
+            List<NormRask> raskList = new List<NormRask>();
+            if (annId > 0)
+            {
+                raskList = await _artNormService.GetRelatedNormRask(annId);
+                cancellationToken.ThrowIfCancellationRequested();
+            }
+
+            await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: annId={annId}, loaded {raskList?.Count ?? 0} items", "RefreshNormRaskForArticlesTab");
+
+            _normRaskListArticles.RaiseListChangedEvents = false;
+            _normRaskListArticles.Clear();
+            if (raskList != null)
+            {
+                foreach (var item in raskList)
+                {
+                    _normRaskListArticles.Add(item);
+                    await _logger.LogEventAsync($"Added NormRask: kod_o={item.Kod_o}, text={item.TextRask}, razryd={item.razryd}, sek={item.Sek}, spec={item.Spec}, obor={item.Obor}", "RefreshNormRaskForArticlesTab");
+                }
+            }
+            _normRaskListArticles.RaiseListChangedEvents = true;
+            _normRaskBindingSourceArticles.ResetBindings(false);
+
+            // Log the actual data in the binding source
+            if (_normRaskBindingSourceArticles.DataSource is BindingList<NormRask> bindingList)
+            {
+                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: BindingSource contains {bindingList.Count} items", "RefreshNormRaskForArticlesTab");
+                if (bindingList.Count > 0)
+                {
+                    var firstItem = bindingList[0];
+                    await _logger.LogEventAsync($"First item: kod_o='{firstItem.Kod_o}', text='{firstItem.TextRask}', razryd={firstItem.razryd}, sek={firstItem.Sek}, spec='{firstItem.Spec}', obor='{firstItem.Obor}'", "RefreshNormRaskForArticlesTab");
+                }
+            }
+
+            await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: _normRaskListArticles.Count={_normRaskListArticles.Count}, BindingSource.DataSource={_normRaskBindingSourceArticles.DataSource}", "RefreshNormRaskForArticlesTab");
+            
+            // Force refresh the grid to ensure data is displayed
+            if (customGridControl2?.MainView is GridView gridView)
+            {
+                gridView.RefreshData();
+                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Forced grid refresh for customGridControl2", "RefreshNormRaskForArticlesTab");
+                
+                // Additional verification
+                await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Grid row count: {gridView.RowCount}, DataRowCount: {gridView.DataRowCount}", "RefreshNormRaskForArticlesTab");
+                
+                // Force the grid to repaint
+                gridView.Invalidate();
+                customGridControl2.Refresh();
+                
+                // Ensure the grid is visible and enabled
+                if (!customGridControl2.Visible)
+                {
+                    customGridControl2.Visible = true;
+                    await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Made customGridControl2 visible", "RefreshNormRaskForArticlesTab");
+                }
+                
+                if (!customGridControl2.Enabled)
+                {
+                    customGridControl2.Enabled = true;
+                    await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Made customGridControl2 enabled", "RefreshNormRaskForArticlesTab");
+                }
+            }
+        }
+
         /// <summary>
         /// Загружает данные НЗП для вкладки "Артикулы".
         /// </summary>
@@ -366,6 +468,13 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async Task LoadNZPForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
+            
+            // Проверяем инициализацию
+            if (_nzpListArt == null || _nzpByKoddRtSourceArt == null)
+            {
+                await _logger.LogErrorAsync(new NullReferenceException("_nzpListArt or _nzpByKoddRtSourceArt is null"), "LoadNZPForArticlesTab failed initialization check.");
+                return;
+            }
             
             var nzpData = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, cancellationToken) : new List<NZPByKoddRt>();
             
@@ -724,6 +833,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _normRaszBindingSourceArticles.ResetBindings(false);
                 }
 
+                // Очищаем норм раскроя
+                if (_normRaskListArticles != null && _normRaskBindingSourceArticles != null)
+                {
+                    _normRaskListArticles.Clear();
+                    _normRaskBindingSourceArticles.ResetBindings(false);
+                }
+
                 // Очищаем картинку
                 if (pictureBox3 != null)
                 {
@@ -750,6 +866,8 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
             try
             {
+                await _logger.LogEventAsync("ClearWdToBindRelatedData: Starting to clear data", "ClearWdToBindRelatedData");
+                
                 // Очищаем картинку
                 if (pictureBox2 != null)
                 {
@@ -768,6 +886,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     _normRaszListArticles.Clear();
                     _normRaszBindingSourceArticles.ResetBindings(false);
+                    await _logger.LogEventAsync("ClearWdToBindRelatedData: Cleared _normRaszListArticles", "ClearWdToBindRelatedData");
+                }
+
+                // Очищаем норм раскроя
+                if (_normRaskListArticles != null && _normRaskBindingSourceArticles != null)
+                {
+                    _normRaskListArticles.Clear();
+                    _normRaskBindingSourceArticles.ResetBindings(false);
+                    await _logger.LogEventAsync("ClearWdToBindRelatedData: Cleared _normRaskListArticles", "ClearWdToBindRelatedData");
                 }
 
                 // Очищаем НЗП

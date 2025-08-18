@@ -545,6 +545,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
                         {
                             await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
+                            await RefreshNormRaskForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
+                            
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
