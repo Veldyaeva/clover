@@ -10,23 +10,25 @@ using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Services;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
     public partial class AllUser : CustomForm
     {
         private readonly UserModel _userModel;
+        private readonly UserClass _user;
         //private BindingList<UserModel> _userModelList;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         DbService dbService;
         //private readonly UserModelDataService _userModelDataService = new UserModelDataService(new DbService(new DatabaseHelper("ace")));
         //private readonly UserRoleDataService _userRoleDataService = new UserRoleDataService(new DbService(new DatabaseHelper("ace")), new DatabaseHelper("ace"));
         //private readonly AllRoleDataService _allRoleDataService = new AllRoleDataService(new DatabaseHelper("ace"));
         private readonly UserModelDataService _userModelDataService;
+        private readonly RoleDataService _roleDataService;
         private readonly UserRoleDataService _userRoleDataService;
         private readonly AllRoleDataService _allRoleDataService;
         private readonly AllProfileDataService _allProfileDataService;
-        private readonly UserClass _user;
         private int selectedRoleId = -1;
         private int selectedUserId = -1;
         public AllUser(UserClass user) : base(user)
@@ -34,7 +36,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             InitializeComponent();
             dbService = new DbService(dbHelper);
             _userModelDataService = new UserModelDataService(dbService, dbHelper);
-            _userRoleDataService = new UserRoleDataService(dbService, dbHelper);
+            _userRoleDataService = new UserRoleDataService(dbHelper);
+            _roleDataService = new RoleDataService(dbService, dbHelper);
             _allRoleDataService = new AllRoleDataService(dbHelper);
             _allProfileDataService = new AllProfileDataService(dbHelper);
             _user = user;
@@ -88,7 +91,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         private async Task LoadUsers()
         {
-            bindingSourceUsers.DataSource = await _userModelDataService.GetUsersHierarchyAsync(_user.UserId);
+            bindingSourceUsers.DataSource = await _userModelDataService.GetUsersHierarchyAsync(_user);
         }
         #region добавление/редакитрование пользователя
         private void customButtonAddUser_Click(object sender, EventArgs e)
@@ -123,6 +126,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 int newUserId = await _userModelDataService.SaveAsync(user);
                 user.UserID = newUserId;
 
+                _userModelDataService.SetPravaForAddUser(newUserId);
                 customGridControlUsers_Load(sender, e);
             }
             catch (System.Data.SqlClient.SqlException ex)

@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class Dictionary
     {
@@ -42,6 +43,7 @@
             name_rus = new DevExpress.XtraGrid.Columns.GridColumn();
             data_type = new DevExpress.XtraGrid.Columns.GridColumn();
             Readonly = new DevExpress.XtraGrid.Columns.GridColumn();
+            default_value = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlTable = new CustomGridControl();
             bindingSourceTable = new System.Windows.Forms.BindingSource(components);
             gridViewTable = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -137,7 +139,7 @@
             // 
             gridViewColumn.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
             gridViewColumn.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewColumn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly });
+            gridViewColumn.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { id_acn, id_atn, ordinal_position, name, name_rus, data_type, Readonly, default_value });
             gridViewColumn.GridControl = customGridControlColumn;
             gridViewColumn.Name = "gridViewColumn";
             gridViewColumn.OptionsBehavior.EditingMode = DevExpress.XtraGrid.Views.Grid.GridEditingMode.EditForm;
@@ -152,6 +154,7 @@
             id_acn.Name = "id_acn";
             id_acn.Visible = true;
             id_acn.VisibleIndex = 0;
+            id_acn.Width = 77;
             // 
             // id_atn
             // 
@@ -160,7 +163,7 @@
             id_atn.Name = "id_atn";
             id_atn.Visible = true;
             id_atn.VisibleIndex = 1;
-            id_atn.Width = 77;
+            id_atn.Width = 79;
             // 
             // ordinal_position
             // 
@@ -169,7 +172,7 @@
             ordinal_position.Name = "ordinal_position";
             ordinal_position.Visible = true;
             ordinal_position.VisibleIndex = 2;
-            ordinal_position.Width = 54;
+            ordinal_position.Width = 55;
             // 
             // name
             // 
@@ -178,7 +181,7 @@
             name.Name = "name";
             name.Visible = true;
             name.VisibleIndex = 3;
-            name.Width = 241;
+            name.Width = 249;
             // 
             // name_rus
             // 
@@ -187,7 +190,7 @@
             name_rus.Name = "name_rus";
             name_rus.Visible = true;
             name_rus.VisibleIndex = 4;
-            name_rus.Width = 317;
+            name_rus.Width = 216;
             // 
             // data_type
             // 
@@ -195,8 +198,8 @@
             data_type.FieldName = "data_type";
             data_type.Name = "data_type";
             data_type.Visible = true;
-            data_type.VisibleIndex = 5;
-            data_type.Width = 123;
+            data_type.VisibleIndex = 6;
+            data_type.Width = 141;
             // 
             // Readonly
             // 
@@ -204,8 +207,17 @@
             Readonly.FieldName = "Readonly";
             Readonly.Name = "Readonly";
             Readonly.Visible = true;
-            Readonly.VisibleIndex = 6;
-            Readonly.Width = 90;
+            Readonly.VisibleIndex = 7;
+            Readonly.Width = 114;
+            // 
+            // default_value
+            // 
+            default_value.Caption = "Знач. по умолч.";
+            default_value.FieldName = "default_value";
+            default_value.Name = "default_value";
+            default_value.Visible = true;
+            default_value.VisibleIndex = 5;
+            default_value.Width = 158;
             // 
             // customGridControlTable
             // 
@@ -386,5 +398,6 @@
         private CustomButton customButtonDeleteTable;
         private CustomButton customButtonDeleteColumn;
         private CustomButton customButtonAddButton;
+        private DevExpress.XtraGrid.Columns.GridColumn default_value;
     }
 }

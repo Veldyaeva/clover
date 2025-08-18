@@ -7,7 +7,8 @@ namespace SewingProduction.Models
     public class MyDataART : Interfaces.ICheckable, INotifyPropertyChanged
     {
         public string Articul { get; set; }
-        public string Kod { get; set; }
+        public string kodd_rt { get; set; }
+        public string kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
         [Column("mod")]

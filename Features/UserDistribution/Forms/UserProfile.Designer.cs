@@ -1,4 +1,5 @@
-﻿namespace SewingProduction.Features.UserDistribution.Forms
+﻿using SewingProduction.Core.Class;
+namespace SewingProduction.Features.UserDistribution.Forms
 {
     partial class UserProfile
     {
@@ -64,6 +65,13 @@
             customTextBoxNewPassword = new CustomTextBox();
             customTextBoxOldPassword = new CustomTextBox();
             customActionButtonEditPassword = new CustomActionButton();
+            customGroupBoxEditLogin = new CustomGroupBox();
+            tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelNewLogin = new CustomLabel();
+            customLabelPassword = new CustomLabel();
+            customTextBoxPassword = new CustomTextBox();
+            customTextBoxNewLogin = new CustomTextBox();
+            customActionButtonEditLogin = new CustomActionButton();
             ((System.ComponentModel.ISupportInitialize)gridViewRole).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
             tableLayoutPanel1.SuspendLayout();
@@ -76,6 +84,8 @@
             customGroupBoxMyRole.SuspendLayout();
             customGroupBoxEditPassword.SuspendLayout();
             tableLayoutPanel5.SuspendLayout();
+            customGroupBoxEditLogin.SuspendLayout();
+            tableLayoutPanel6.SuspendLayout();
             SuspendLayout();
             // 
             // gridViewRole
@@ -175,6 +185,7 @@
             tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 1, 0);
             tableLayoutPanel2.Controls.Add(customGroupBoxMyRole, 1, 1);
             tableLayoutPanel2.Controls.Add(customGroupBoxEditPassword, 1, 3);
+            tableLayoutPanel2.Controls.Add(customGroupBoxEditLogin, 2, 3);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -223,9 +234,9 @@
             customButtonChangeUser.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonChangeUser.Location = new System.Drawing.Point(4, 3);
             customButtonChangeUser.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonChangeUser.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonChangeUser.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonChangeUser.Name = "customButtonChangeUser";
-            customButtonChangeUser.Size = new System.Drawing.Size(210, 39);
+            customButtonChangeUser.Size = new System.Drawing.Size(189, 39);
             customButtonChangeUser.TabIndex = 6;
             customButtonChangeUser.Text = "Cменить пользователя";
             customButtonChangeUser.UseVisualStyleBackColor = false;
@@ -239,9 +250,9 @@
             customButtonHistory.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonHistory.Location = new System.Drawing.Point(4, 363);
             customButtonHistory.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonHistory.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonHistory.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonHistory.Name = "customButtonHistory";
-            customButtonHistory.Size = new System.Drawing.Size(210, 39);
+            customButtonHistory.Size = new System.Drawing.Size(189, 39);
             customButtonHistory.TabIndex = 11;
             customButtonHistory.Text = "История действий";
             customButtonHistory.UseVisualStyleBackColor = false;
@@ -255,9 +266,9 @@
             customButtonAllRpofile.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAllRpofile.Location = new System.Drawing.Point(4, 48);
             customButtonAllRpofile.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonAllRpofile.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonAllRpofile.Name = "customButtonAllRpofile";
-            customButtonAllRpofile.Size = new System.Drawing.Size(210, 39);
+            customButtonAllRpofile.Size = new System.Drawing.Size(189, 39);
             customButtonAllRpofile.TabIndex = 0;
             customButtonAllRpofile.Text = "Пользователи";
             customButtonAllRpofile.UseVisualStyleBackColor = false;
@@ -271,9 +282,9 @@
             customButtonUserHierarchy.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonUserHierarchy.Location = new System.Drawing.Point(4, 93);
             customButtonUserHierarchy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonUserHierarchy.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonUserHierarchy.Name = "customButtonUserHierarchy";
-            customButtonUserHierarchy.Size = new System.Drawing.Size(210, 39);
+            customButtonUserHierarchy.Size = new System.Drawing.Size(189, 39);
             customButtonUserHierarchy.TabIndex = 9;
             customButtonUserHierarchy.Text = "Иерархия пользователей";
             customButtonUserHierarchy.UseVisualStyleBackColor = false;
@@ -287,11 +298,13 @@
             customActionButtonNon.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customActionButtonNon.Location = new System.Drawing.Point(4, 408);
             customActionButtonNon.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customActionButtonNon.MinimumSize = new System.Drawing.Size(160, 20);
             customActionButtonNon.Name = "customActionButtonNon";
             customActionButtonNon.Size = new System.Drawing.Size(189, 48);
             customActionButtonNon.TabIndex = 12;
             customActionButtonNon.Text = "Не нажимать";
             customActionButtonNon.UseVisualStyleBackColor = false;
+            customActionButtonNon.Visible = false;
             customActionButtonNon.Click += customActionButtonNon_Click;
             // 
             // tableLayoutPanelButton
@@ -329,9 +342,9 @@
             customButtonAllRole.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAllRole.Location = new System.Drawing.Point(4, 3);
             customButtonAllRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAllRole.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonAllRole.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonAllRole.Name = "customButtonAllRole";
-            customButtonAllRole.Size = new System.Drawing.Size(210, 39);
+            customButtonAllRole.Size = new System.Drawing.Size(191, 39);
             customButtonAllRole.TabIndex = 7;
             customButtonAllRole.Text = "Роли";
             customButtonAllRole.UseVisualStyleBackColor = false;
@@ -345,9 +358,9 @@
             customButtonAdminSprav.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAdminSprav.Location = new System.Drawing.Point(4, 363);
             customButtonAdminSprav.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdminSprav.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonAdminSprav.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonAdminSprav.Name = "customButtonAdminSprav";
-            customButtonAdminSprav.Size = new System.Drawing.Size(210, 39);
+            customButtonAdminSprav.Size = new System.Drawing.Size(191, 39);
             customButtonAdminSprav.TabIndex = 10;
             customButtonAdminSprav.Text = "Администрирование колонок";
             customButtonAdminSprav.UseVisualStyleBackColor = false;
@@ -361,9 +374,9 @@
             customButtonSpravTable.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonSpravTable.Location = new System.Drawing.Point(4, 318);
             customButtonSpravTable.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonSpravTable.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonSpravTable.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonSpravTable.Name = "customButtonSpravTable";
-            customButtonSpravTable.Size = new System.Drawing.Size(210, 39);
+            customButtonSpravTable.Size = new System.Drawing.Size(191, 39);
             customButtonSpravTable.TabIndex = 12;
             customButtonSpravTable.Text = "Администрирование таблиц";
             customButtonSpravTable.UseVisualStyleBackColor = false;
@@ -377,9 +390,9 @@
             customButtonAdminForm.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
             customButtonAdminForm.Location = new System.Drawing.Point(4, 273);
             customButtonAdminForm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdminForm.MinimumSize = new System.Drawing.Size(210, 23);
+            customButtonAdminForm.MinimumSize = new System.Drawing.Size(160, 20);
             customButtonAdminForm.Name = "customButtonAdminForm";
-            customButtonAdminForm.Size = new System.Drawing.Size(210, 39);
+            customButtonAdminForm.Size = new System.Drawing.Size(191, 39);
             customButtonAdminForm.TabIndex = 8;
             customButtonAdminForm.Text = "Администрирование форм";
             customButtonAdminForm.UseVisualStyleBackColor = false;
@@ -468,7 +481,8 @@
             customGroupBoxMyRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customGroupBoxMyRole.Name = "customGroupBoxMyRole";
             customGroupBoxMyRole.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customGroupBoxMyRole.Size = new System.Drawing.Size(472, 117);
+            tableLayoutPanel2.SetRowSpan(customGroupBoxMyRole, 2);
+            customGroupBoxMyRole.Size = new System.Drawing.Size(472, 338);
             customGroupBoxMyRole.TabIndex = 8;
             customGroupBoxMyRole.TabStop = false;
             customGroupBoxMyRole.Text = "Мои роли";
@@ -483,7 +497,7 @@
             listBoxRole.Location = new System.Drawing.Point(4, 19);
             listBoxRole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             listBoxRole.Name = "listBoxRole";
-            listBoxRole.Size = new System.Drawing.Size(464, 95);
+            listBoxRole.Size = new System.Drawing.Size(464, 316);
             listBoxRole.TabIndex = 4;
             // 
             // customGroupBoxEditPassword
@@ -619,6 +633,111 @@
             customActionButtonEditPassword.UseVisualStyleBackColor = false;
             customActionButtonEditPassword.Click += customButtonEditPassword_Click;
             // 
+            // customGroupBoxEditLogin
+            // 
+            customGroupBoxEditLogin.BackColor = System.Drawing.Color.Transparent;
+            customGroupBoxEditLogin.Controls.Add(tableLayoutPanel6);
+            customGroupBoxEditLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxEditLogin.Font = new System.Drawing.Font("Arial", 10F);
+            customGroupBoxEditLogin.Location = new System.Drawing.Point(689, 468);
+            customGroupBoxEditLogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBoxEditLogin.Name = "customGroupBoxEditLogin";
+            customGroupBoxEditLogin.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customGroupBoxEditLogin.Size = new System.Drawing.Size(472, 163);
+            customGroupBoxEditLogin.TabIndex = 11;
+            customGroupBoxEditLogin.TabStop = false;
+            customGroupBoxEditLogin.Text = "Сменить логин";
+            // 
+            // tableLayoutPanel6
+            // 
+            tableLayoutPanel6.ColumnCount = 2;
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel6.Controls.Add(customLabelNewLogin, 0, 0);
+            tableLayoutPanel6.Controls.Add(customLabelPassword, 0, 1);
+            tableLayoutPanel6.Controls.Add(customTextBoxPassword, 1, 1);
+            tableLayoutPanel6.Controls.Add(customTextBoxNewLogin, 1, 0);
+            tableLayoutPanel6.Controls.Add(customActionButtonEditLogin, 1, 3);
+            tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            tableLayoutPanel6.Location = new System.Drawing.Point(4, 19);
+            tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            tableLayoutPanel6.Name = "tableLayoutPanel6";
+            tableLayoutPanel6.RowCount = 4;
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00062F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.00063F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.99813F));
+            tableLayoutPanel6.Size = new System.Drawing.Size(464, 141);
+            tableLayoutPanel6.TabIndex = 9;
+            // 
+            // customLabelNewLogin
+            // 
+            customLabelNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabelNewLogin.AutoSize = true;
+            customLabelNewLogin.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelNewLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelNewLogin.Location = new System.Drawing.Point(138, 9);
+            customLabelNewLogin.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelNewLogin.Name = "customLabelNewLogin";
+            customLabelNewLogin.Size = new System.Drawing.Size(90, 16);
+            customLabelNewLogin.TabIndex = 3;
+            customLabelNewLogin.Text = "Новый логин";
+            // 
+            // customLabelPassword
+            // 
+            customLabelPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            customLabelPassword.AutoSize = true;
+            customLabelPassword.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPassword.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelPassword.Location = new System.Drawing.Point(172, 44);
+            customLabelPassword.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelPassword.Name = "customLabelPassword";
+            customLabelPassword.Size = new System.Drawing.Size(56, 16);
+            customLabelPassword.TabIndex = 5;
+            customLabelPassword.Text = "Пароль";
+            // 
+            // customTextBoxPassword
+            // 
+            customTextBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customTextBoxPassword.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBoxPassword.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxPassword.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            customTextBoxPassword.Location = new System.Drawing.Point(236, 41);
+            customTextBoxPassword.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxPassword.MaximumSize = new System.Drawing.Size(224, 0);
+            customTextBoxPassword.Name = "customTextBoxPassword";
+            customTextBoxPassword.Size = new System.Drawing.Size(224, 23);
+            customTextBoxPassword.TabIndex = 4;
+            // 
+            // customTextBoxNewLogin
+            // 
+            customTextBoxNewLogin.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            customTextBoxNewLogin.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customTextBoxNewLogin.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxNewLogin.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            customTextBoxNewLogin.Location = new System.Drawing.Point(236, 6);
+            customTextBoxNewLogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBoxNewLogin.MaximumSize = new System.Drawing.Size(224, 0);
+            customTextBoxNewLogin.Name = "customTextBoxNewLogin";
+            customTextBoxNewLogin.Size = new System.Drawing.Size(224, 23);
+            customTextBoxNewLogin.TabIndex = 2;
+            // 
+            // customActionButtonEditLogin
+            // 
+            customActionButtonEditLogin.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customActionButtonEditLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            customActionButtonEditLogin.Font = new System.Drawing.Font("Arial", 10F);
+            customActionButtonEditLogin.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customActionButtonEditLogin.Location = new System.Drawing.Point(236, 108);
+            customActionButtonEditLogin.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customActionButtonEditLogin.MaximumSize = new System.Drawing.Size(224, 0);
+            customActionButtonEditLogin.Name = "customActionButtonEditLogin";
+            customActionButtonEditLogin.Size = new System.Drawing.Size(224, 30);
+            customActionButtonEditLogin.TabIndex = 9;
+            customActionButtonEditLogin.Text = "Cменить ";
+            customActionButtonEditLogin.UseVisualStyleBackColor = false;
+            customActionButtonEditLogin.Click += customActionButtonEditLogin_Click;
+            // 
             // UserProfile
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -643,6 +762,9 @@
             customGroupBoxEditPassword.ResumeLayout(false);
             tableLayoutPanel5.ResumeLayout(false);
             tableLayoutPanel5.PerformLayout();
+            customGroupBoxEditLogin.ResumeLayout(false);
+            tableLayoutPanel6.ResumeLayout(false);
+            tableLayoutPanel6.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -684,5 +806,12 @@
         private CustomActionButton customActionButtonNon;
         private CustomActionButton customActionButtonEditPassword;
         private CustomButton customButtonSpravTable;
+        private CustomGroupBox customGroupBoxEditLogin;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private CustomLabel customLabelNewLogin;
+        private CustomLabel customLabelPassword;
+        private CustomTextBox customTextBoxPassword;
+        private CustomTextBox customTextBoxNewLogin;
+        private CustomActionButton customActionButtonEditLogin;
     }
 }

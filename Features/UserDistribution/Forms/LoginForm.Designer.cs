@@ -48,7 +48,7 @@
             simpleButton.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButton.Name = "simpleButton";
             simpleButton.Size = new System.Drawing.Size(217, 48);
-            simpleButton.TabIndex = 0;
+            simpleButton.TabIndex = 3;
             simpleButton.Text = "ВОЙТИ";
             simpleButton.Click += simpleButton_Click;
             // 
@@ -84,7 +84,7 @@
             textEditPassword.Properties.Appearance.Options.UseFont = true;
             textEditPassword.Properties.UseSystemPasswordChar = true;
             textEditPassword.Size = new System.Drawing.Size(318, 26);
-            textEditPassword.TabIndex = 5;
+            textEditPassword.TabIndex = 2;
             textEditPassword.KeyDown += LoginForm_KeyDown;
             // 
             // comboBoxEditLogin
@@ -96,7 +96,7 @@
             comboBoxEditLogin.Properties.Appearance.Options.UseFont = true;
             comboBoxEditLogin.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
             comboBoxEditLogin.Size = new System.Drawing.Size(318, 26);
-            comboBoxEditLogin.TabIndex = 8;
+            comboBoxEditLogin.TabIndex = 1;
             // 
             // customCheckBox1
             // 
@@ -106,7 +106,7 @@
             customCheckBox1.Location = new System.Drawing.Point(49, 154);
             customCheckBox1.Name = "customCheckBox1";
             customCheckBox1.Size = new System.Drawing.Size(149, 20);
-            customCheckBox1.TabIndex = 9;
+            customCheckBox1.TabIndex = 4;
             customCheckBox1.Text = "Сохранять пароль";
             customCheckBox1.UseVisualStyleBackColor = true;
             customCheckBox1.Visible = false;

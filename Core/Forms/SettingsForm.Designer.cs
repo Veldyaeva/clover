@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.form
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.form
 {
     partial class SettingsForm
     {
@@ -37,6 +39,9 @@
             customButtonClearProfile = new CustomButton();
             customCheckBoxSokrNameTabs = new CustomCheckBox();
             customCheckBoxPovtOpenTabs = new CustomCheckBox();
+            customComboBoxRejimRab = new CustomComboBox();
+            customLabelRejimRab = new CustomLabel();
+            customButtonSaveExit = new CustomButton();
             SuspendLayout();
             // 
             // customLabelTheme
@@ -97,7 +102,7 @@
             customCheckBoxSaveOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxSaveOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSaveOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(14, 120);
+            customCheckBoxSaveOpenTabs.Location = new System.Drawing.Point(327, 21);
             customCheckBoxSaveOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSaveOpenTabs.Name = "customCheckBoxSaveOpenTabs";
             customCheckBoxSaveOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -112,7 +117,7 @@
             customButtonClearProfile.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
             customButtonClearProfile.Font = new System.Drawing.Font("Arial", 10F);
             customButtonClearProfile.ForeColor = System.Drawing.Color.Black;
-            customButtonClearProfile.Location = new System.Drawing.Point(14, 235);
+            customButtonClearProfile.Location = new System.Drawing.Point(654, 17);
             customButtonClearProfile.Name = "customButtonClearProfile";
             customButtonClearProfile.Size = new System.Drawing.Size(251, 29);
             customButtonClearProfile.TabIndex = 9;
@@ -126,7 +131,7 @@
             customCheckBoxSokrNameTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxSokrNameTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxSokrNameTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(14, 156);
+            customCheckBoxSokrNameTabs.Location = new System.Drawing.Point(327, 66);
             customCheckBoxSokrNameTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxSokrNameTabs.Name = "customCheckBoxSokrNameTabs";
             customCheckBoxSokrNameTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -142,7 +147,7 @@
             customCheckBoxPovtOpenTabs.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxPovtOpenTabs.ForeColor = System.Drawing.Color.Black;
             customCheckBoxPovtOpenTabs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(14, 194);
+            customCheckBoxPovtOpenTabs.Location = new System.Drawing.Point(327, 107);
             customCheckBoxPovtOpenTabs.MinimumSize = new System.Drawing.Size(251, 0);
             customCheckBoxPovtOpenTabs.Name = "customCheckBoxPovtOpenTabs";
             customCheckBoxPovtOpenTabs.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -152,11 +157,52 @@
             customCheckBoxPovtOpenTabs.UseVisualStyleBackColor = true;
             customCheckBoxPovtOpenTabs.CheckedChanged += customCheckBoxPovtOpenTabs_CheckedChanged;
             // 
+            // customComboBoxRejimRab
+            // 
+            customComboBoxRejimRab.BackColor = System.Drawing.Color.FromArgb(250, 240, 230);
+            customComboBoxRejimRab.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBoxRejimRab.ForeColor = System.Drawing.Color.FromArgb(105, 75, 45);
+            customComboBoxRejimRab.FormattingEnabled = true;
+            customComboBoxRejimRab.Location = new System.Drawing.Point(125, 110);
+            customComboBoxRejimRab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customComboBoxRejimRab.Name = "customComboBoxRejimRab";
+            customComboBoxRejimRab.Size = new System.Drawing.Size(140, 24);
+            customComboBoxRejimRab.TabIndex = 13;
+            // 
+            // customLabelRejimRab
+            // 
+            customLabelRejimRab.AutoSize = true;
+            customLabelRejimRab.BackColor = System.Drawing.Color.Transparent;
+            customLabelRejimRab.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelRejimRab.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customLabelRejimRab.Location = new System.Drawing.Point(14, 113);
+            customLabelRejimRab.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabelRejimRab.Name = "customLabelRejimRab";
+            customLabelRejimRab.Size = new System.Drawing.Size(103, 16);
+            customLabelRejimRab.TabIndex = 12;
+            customLabelRejimRab.Text = "Режим работы";
+            // 
+            // customButtonSaveExit
+            // 
+            customButtonSaveExit.BackColor = System.Drawing.Color.FromArgb(224, 224, 224);
+            customButtonSaveExit.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSaveExit.ForeColor = System.Drawing.Color.Black;
+            customButtonSaveExit.Location = new System.Drawing.Point(327, 478);
+            customButtonSaveExit.Name = "customButtonSaveExit";
+            customButtonSaveExit.Size = new System.Drawing.Size(251, 29);
+            customButtonSaveExit.TabIndex = 14;
+            customButtonSaveExit.Text = "Сохранить и Выйти";
+            customButtonSaveExit.UseVisualStyleBackColor = false;
+            customButtonSaveExit.Click += customButtonSaveExit_Click;
+            // 
             // SettingsForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(933, 519);
+            Controls.Add(customButtonSaveExit);
+            Controls.Add(customComboBoxRejimRab);
+            Controls.Add(customLabelRejimRab);
             Controls.Add(customCheckBoxPovtOpenTabs);
             Controls.Add(customCheckBoxSokrNameTabs);
             Controls.Add(customButtonClearProfile);
@@ -184,5 +230,8 @@
         private CustomButton customButtonClearProfile;
         private CustomCheckBox customCheckBoxSokrNameTabs;
         private CustomCheckBox customCheckBoxPovtOpenTabs;
+        private CustomComboBox customComboBoxRejimRab;
+        private CustomLabel customLabelRejimRab;
+        private CustomButton customButtonSaveExit;
     }
 }

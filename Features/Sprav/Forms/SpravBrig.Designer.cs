@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using SewingProduction.Core.Class;
 namespace SewingProduction.form
 {
     partial class SpravBrig
@@ -484,7 +484,7 @@ namespace SewingProduction.form
         private System.Windows.Forms.TextBox textBoxNBrig;
         private System.Windows.Forms.TextBox textBoxBrig;
         private System.Windows.Forms.LinkLabel linkLabelZeh;
-        private SewingProduction.CustomGridControl gridControlSprav;
+        private CustomGridControl gridControlSprav;
         private System.Windows.Forms.BindingSource spravList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageAdd;

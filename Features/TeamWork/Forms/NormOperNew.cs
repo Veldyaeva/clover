@@ -11,7 +11,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class NormOperNew : CustomForm
     {
@@ -30,7 +30,7 @@ namespace SewingProduction.form
         public NormOperNew(int annId)
         {
             InitializeComponent();
-            _dbHelper = new DatabaseHelper("ace");
+            _dbHelper = new DatabaseHelper();
             _dbService = new DbService(_dbHelper);
             _artNormService = new ArtNormService(_dbHelper);
 
@@ -99,7 +99,7 @@ namespace SewingProduction.form
                 if (view == null || view.FocusedRowHandle < 0) return;
 
                 SelectedRowData = NormalizeDataFromView(view, view.FocusedRowHandle);
-                SelectedRowData.AnnId = _annId; // AnnId устанавливается здесь
+                SelectedRowData.annId = _annId; // AnnId устанавливается здесь
                 SelectedRowData.IsNew = true;   // IsNew также устанавливается здесь
 
                 this.DialogResult = DialogResult.OK;
@@ -134,7 +134,8 @@ namespace SewingProduction.form
             normRasz.kod_o = view.GetRowCellValue(rowHandle, "kod_o")?.ToString();
             normRasz.Text = Convert.ToString(view.GetRowCellValue(rowHandle, "text"))?.TrimEnd(' ');
             normRasz.Spec = Convert.ToString(view.GetRowCellValue(rowHandle, "spec"))?.TrimEnd(' ');
-            normRasz.Obor = Convert.ToString(view.GetRowCellValue(rowHandle, "obor"))?.TrimEnd(' ');
+            // Записываем текст из поля text_ob (из таблицы norm_oper) в поле obor записи norm_rasz
+            normRasz.Obor = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
             normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); 
             normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); 
             normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); 

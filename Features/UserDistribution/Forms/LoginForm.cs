@@ -13,6 +13,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
+using System.Diagnostics;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -42,7 +43,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
 
             string Event = $"Попытка входа {formLogin}: ";
             string hashedPassword = _passwordHasher.HashPassword(formPassword);
-            Console.WriteLine(hashedPassword);
+            //Console.WriteLine(hashedPassword);
             string hashedPasswordFromDb = await _loginFormDataService.GetPasswordHash(formLogin);
             if (hashedPasswordFromDb != null)
             {
@@ -80,7 +81,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 Event += $"Логин не найден!";
                 MessageBox.Show(Event, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            _loginFormDataService.EventForHistory(_user.UserId, Event);
+            Debug.WriteLine(Event);
+            await _loginFormDataService.EventForHistory(_user.UserId, Event);
         }
 
         private void LoginForm_KeyDown(object sender, KeyEventArgs e)
@@ -156,6 +158,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
         }
         public async Task<int> GetId(string login)
         {
+            Debug.WriteLine(login);
             string query = "SELECT UserId FROM Users WHERE UserName = @Login";
             System.Data.DataTable sqlId = await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@Login", login } });
             return Convert.ToInt32(sqlId.Rows[0]["UserId"]);

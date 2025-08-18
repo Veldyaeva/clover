@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using System.Threading;
 using System;
 using SewingProduction.Models;
 using System.ComponentModel;
@@ -17,7 +18,7 @@ using SewingProduction.Services;
 using DevExpress.Xpo.DB.Helpers;
 using System.Linq;
 
-namespace SewingProduction.Forms
+namespace SewingProduction.Features.TeamWork.Forms
 {
     public partial class TeamWork
     {
@@ -78,13 +79,21 @@ namespace SewingProduction.Forms
                 }
                 else
                 {
+                    // Если нет выбранных строк в gridView_wdToBind - очищаем все связанные данные
                     _normRaszListArticles.Clear();
                     _normRaszBindingSourceArticles.ResetBindings(false);
+                    await ClearWdToBindRelatedData();
+                }
+
+                // Проверяем gridView_unboundArts и очищаем данные если нет выбранных строк
+                if (this.gridView_unboundArts == null || gridView_unboundArts.RowCount == 0 || gridView_unboundArts.FocusedRowHandle < 0)
+                {
+                    await ClearUnboundArtsRelatedData();
                 }
             }
             finally
             {
-                // Подписываемся обратно ПОСЛЕ всей загрузки
+                // Подписываемся на события ПОСЛЕ загрузки
                 if (this.gridView_unboundArts != null)
                 {
                     this.gridView_unboundArts.FocusedRowChanged += gridView_unboundArts_FocusedRowChanged;
@@ -109,20 +118,13 @@ namespace SewingProduction.Forms
                     return;
                 }
 
-                string query = "SELECT DISTINCT SUBSTRING(kod,1,7) as kod, grup, articul, mod, annId FROM sp_articul WHERE annID IS NULL";
+                string query =// "SELECT DISTINCT SUBSTRING(sa.kod,1,7) as kod, sa.grup, sa.articul, sa.mod, sa.annId " +
+                //    "FROM sp_articul sa " +
+                //    "   left join kompl k on sa.kod = k.kod_k " +
+                //    "WHERE sa.annID IS NULL and k.kod_k is null";//
+                                                                 "SELECT * FROM articulListUnboundRTBySizeLabel";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
-                //_myDataArtList.Clear(); // Очищаем BindingList
-
-                //if (loadedData != null)
-                //{
-                //    foreach (var item in loadedData)
-                //    {
-                //        _myDataArtList.Add(item); // Добавляем элементы в BindingList
-                //    }
-                //}
-
-                //_myDataArtBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
                 _myDataArtList.BulkLoad(loadedData);
 
                 await _logger.LogEventAsync($"Загружено {_myDataArtList.Count} записей MyDataART.", "MyDataArtLoad");
@@ -151,26 +153,9 @@ namespace SewingProduction.Forms
                 }
 
                 int kod = GetCurrentKodFromDataSource();
-                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(kod, loadAllCheckBox.Checked);
+                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAllCheckBox.Checked);
 
-                //_myDataAnnList.Clear(); // Очищаем BindingList
-
-                //if (loadedData != null && loadedData.Count > 0)
-                //{
-                //    foreach (var item in loadedData)
-                //    {
-                //        _myDataAnnList.Add(item); // Добавляем элементы в BindingList
-                //    }
-                //    await _logger.LogEventAsync($"Загружено {_myDataAnnList.Count} записей MyDataANN (kod: {kod}, loadAll: {loadAllCheckBox.Checked}).", "MyDataAnnLoad");
-                //}
-                //else
-                //{
-                //    // Логгируем, если данных нет, вместо MessageBox
-                //    await _logger.LogEventAsync($"Нет данных MyDataANN для загрузки (kod: {kod}, loadAll: {loadAllCheckBox.Checked})", "MyDataAnnLoad");
-                //}
                 _myDataAnnList.BulkLoad(loadedData);
-
-               // _myDataAnnBindingSource.ResetBindings(false); // Уведомляем BindingSource (и грид) об изменениях
             }
             catch (Exception ex)
             {
@@ -194,13 +179,13 @@ namespace SewingProduction.Forms
                 var currentItem = _myDataArtBindingSource.Current as MyDataART;
                 if (currentItem != null)
                 {
-                    if (int.TryParse(currentItem.Kod, out int kodValue))
+                    if (int.TryParse(currentItem.kodd_rt, out int kodValue))
                     {
                         return kodValue;
                     }
                     else
                     {
-                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.Kod}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
+                        _logger.LogEventAsync($"Не удалось преобразовать Kod '{currentItem.kodd_rt}' в число.", "GetCurrentKodFromDataSource").ConfigureAwait(false);
                     }
                 }
             }
@@ -213,7 +198,7 @@ namespace SewingProduction.Forms
         /// <param name="kod">Код артикула</param>
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
-        private async Task<List<MyDataANN>> LoadWorksbyArt(int kod, string articul)
+        private async Task<List<MyDataANN>> LoadWorksbyArt(string articul)
         {
             try
             {
@@ -223,14 +208,14 @@ namespace SewingProduction.Forms
                 // Если включен чекбокс "Загрузить все"
                 if (loadAll)
                 {
-                    return await _artNormService.GetArtNormDataCurrent(kod, true);
+                    return await _artNormService.GetArtNormDataCurrent(true);
                 }
 
                 // Загружаем все данные параллельно
                 var tasks = new List<Task<List<MyDataANN>>>();
 
                 // Загружаем данные по коду
-                tasks.Add(_artNormService.GetArtNormDataCurrent(kod, false));
+                //tasks.Add(_artNormService.GetArtNormDataCurrent(false));
 
                 // Если артикул не пустой, добавляем задачи для поиска по артикулу
                 if (!string.IsNullOrEmpty(articul))
@@ -276,12 +261,12 @@ namespace SewingProduction.Forms
                     }
                 }
 
-                await _logger.LogEventAsync($"Успешная загрузка РТ для кода {kod} и артикула {articul}", "LoadWorksbyArt");
+                await _logger.LogEventAsync($"Успешная загрузка РТ для артикула {articul}", "LoadWorksbyArt");
                 return uniqueData.Values.ToList();
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке РТ для кода {kod} и артикула {articul}");
+                await _logger.LogErrorAsync(ex, $"Ошибка при загрузке РТ для артикула {articul}");
                 return new List<MyDataANN>();
             }
         }
@@ -296,49 +281,51 @@ namespace SewingProduction.Forms
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;// gridView_wdToBind; 
-            if (view == null) return;
-
-            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
-
-            // Обновляем NormRasz для customGridControl3
-            await RefreshNormRaszForArticlesTab(annId);
-
-            // Загрузка данных НЗП
-            if (_nzpListArt != null)
+            if (view == null) 
             {
-                _nzpListArt.Clear();
-                if (annId > 0)
-                {
-                    List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(annId);
-                    if (nzpData != null)
-                    {
-                        foreach (var item in nzpData)
-                        {
-                            _nzpListArt.Add(item);
-                        }
-                    }
-                }
-                _nzpByKoddRtSourceArt?.ResetBindings(false);
-                gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
-                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
+                await ClearWdToBindRelatedData();
+                return;
             }
 
-            string kodString = view.GetRowCellValue(e.FocusedRowHandle, "Kod")?.ToString();
+            // Отменяем предыдущие операции загрузки для Articles tab
+            var oldCts = Interlocked.Exchange(ref _loadCts, new CancellationTokenSource());
+            oldCts?.Cancel();
+            oldCts?.Dispose();
+            var token = _loadCts.Token;
 
-            if (!string.IsNullOrEmpty(kodString))
+            try
             {
-                if (int.TryParse(kodString, out int kodValue) && kodValue > 0)
+                int annId = CommonFunctions.GetRowCellValueOrDefault<int>(view, e.FocusedRowHandle, "AnnID", 0);
+
+                // Если строка не выбрана или AnnID невалидный - очищаем данные
+                if (e.FocusedRowHandle < 0 || annId <= 0)
                 {
-                    LoadGridImage(pictureBox2, kod: kodValue);
+                    await ClearWdToBindRelatedData();
+                    return;
                 }
-                else
-                {
-                    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kodString}' в корректное число > 0 для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
-                }
+
+                //1.Сначала загружаем изображение(быстрая операция)
+                LoadGridImage(pictureBox2, annId: annId);
+
+                // 2. Затем загружаем основные данные
+                token.ThrowIfCancellationRequested();
+                
+                // Обновляем NormRasz для customGridControl3
+                await RefreshNormRaszForArticlesTab(annId, token);
+
+                // 3. Загрузка данных НЗП только для выбранной строки
+                token.ThrowIfCancellationRequested();
+                await LoadNZPForArticlesTab(annId, token);
             }
-            else
+            catch (OperationCanceledException)
             {
-                await _logger.LogWarningAsync($"Значение Kod пустое или null для строки {e.FocusedRowHandle}.", "gridViewWdToBind_FocusedRowChanged");
+                // Тихо игнорируем отмену операции
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при смене выбранной строки в gridViewWdToBind (RowHandle: {e.FocusedRowHandle})");
+                // В случае ошибки очищаем данные
+                await ClearWdToBindRelatedData();
             }
         }
 
@@ -346,14 +333,19 @@ namespace SewingProduction.Forms
         /// Загружает и обновляет NormRasz данные для вкладки "Артикулы" (customGridControl3).
         /// </summary>
         /// <param name="annId">AnnID для загрузки NormRasz.</param>
-        private async Task RefreshNormRaszForArticlesTab(int annId)
+        /// <param name="cancellationToken">Токен отмены операции.</param>
+        private async Task RefreshNormRaszForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
+            cancellationToken.ThrowIfCancellationRequested();
+            
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
             {
                 raszList = await _artNormService.GetRelatedNormRasz(annId);
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
+            _normRaszListArticles.RaiseListChangedEvents = false;
             _normRaszListArticles.Clear();
             if (raszList != null)
             {
@@ -362,7 +354,34 @@ namespace SewingProduction.Forms
                     _normRaszListArticles.Add(item);
                 }
             }
+            _normRaszListArticles.RaiseListChangedEvents = true;
             _normRaszBindingSourceArticles.ResetBindings(false);
+        }
+
+        /// <summary>
+        /// Загружает данные НЗП для вкладки "Артикулы".
+        /// </summary>
+        /// <param name="annId">AnnID для загрузки НЗП.</param>
+        /// <param name="cancellationToken">Токен отмены операции.</param>
+        private async Task LoadNZPForArticlesTab(int annId, CancellationToken cancellationToken = default)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            var nzpData = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, cancellationToken) : new List<NZPByKoddRt>();
+            
+            cancellationToken.ThrowIfCancellationRequested();
+            
+            _nzpListArt.RaiseListChangedEvents = false;
+            _nzpListArt.Clear();
+            foreach (var item in nzpData)
+            {
+                _nzpListArt.Add(item);
+            }
+            _nzpListArt.RaiseListChangedEvents = true;
+            
+            _nzpByKoddRtSourceArt?.ResetBindings(false);
+            gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
+            await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
         }
 
         private async Task PreArchLoad()
@@ -438,32 +457,80 @@ namespace SewingProduction.Forms
                 // Проверяем, выбраны ли оба элемента
                 if (selectedArtRow is null || selectedAnnRow is null)
                 {
-                    MessageBox.Show("Выберите артикул и разделение труда для привязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Выберите артикул и разделение труда для увязки!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
 
-                DialogResult result = MessageBox.Show(
-                    $"Вы действительно хотите привязать артикул {selectedArtRow.Articul.TrimEnd()} к разделению труда {selectedAnnRow.Articul.TrimEnd()}?",
-                    "Подтверждение привязки",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question
-                );
+                // Создаем диалог подтверждения с опциями заполнения
+                var confirmDialog = new Form()
+                {
+                    Text = "Подтверждение увязки",
+                    Size = new Size(450, 250),
+                    StartPosition = FormStartPosition.CenterParent,
+                    FormBorderStyle = FormBorderStyle.FixedDialog,
+                    MaximizeBox = false,
+                    MinimizeBox = false
+                };
 
-                if (result == DialogResult.No) return;
+                var label = new Label()
+                {
+                    Text = $"Вы действительно хотите увязать артикул {selectedArtRow.Articul.TrimEnd()} с разделением труда {selectedAnnRow.Articul.TrimEnd()}?",
+                    Location = new Point(20, 20),
+                    Size = new Size(400, 40),
+                    TextAlign = ContentAlignment.TopLeft
+                };
 
+                var fillGroupCheckBox = new CheckBox()
+                {
+                    Text = "Заполнить группу из справочника артикулов",
+                    Location = new Point(20, 70),
+                    Size = new Size(350, 20),
+                    Checked = string.IsNullOrEmpty(selectedAnnRow.grup) // Автоматически отмечаем, если группа пустая
+                };
 
-                // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedArtRow.Kod, selectedAnnRow.AnnID);
-                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
-                if (string.IsNullOrEmpty(selectedAnnRow.grup))
+                var fillModelCheckBox = new CheckBox()
+                {
+                    Text = "Заполнить модель из справочника артикулов",
+                    Location = new Point(20, 100),
+                    Size = new Size(350, 20),
+                    Checked = string.IsNullOrEmpty(selectedAnnRow.mod) // Автоматически отмечаем, если модель пустая
+                };
+
+                var okButton = new Button()
+                {
+                    Text = "Да",
+                    Location = new Point(270, 150),
+                    Size = new Size(75, 25),
+                    DialogResult = DialogResult.OK
+                };
+
+                var cancelButton = new Button()
+                {
+                    Text = "Отмена",
+                    Location = new Point(355, 150),
+                    Size = new Size(75, 25),
+                    DialogResult = DialogResult.Cancel
+                };
+
+                confirmDialog.Controls.AddRange(new Control[] { label, fillGroupCheckBox, fillModelCheckBox, okButton, cancelButton });
+                confirmDialog.AcceptButton = okButton;
+                confirmDialog.CancelButton = cancelButton;
+
+                if (confirmDialog.ShowDialog() != DialogResult.OK) return;
+                
+                // Заполняем группу и модель в зависимости от выбора пользователя
+                if (fillGroupCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.grup))
                 {
                     selectedAnnRow.grup = selectedArtRow.grup;
                 }
-                if (string.IsNullOrEmpty(selectedAnnRow.mod))
+                if (fillModelCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.mod))
                 {
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
-                // await _dbService.UpdateFieldAsync(TableNames.Art, "annId", selectedAnnRow.AnnID, "kod", selectedArtRow.Kod);//хочу поменять обновление annId в артикуле, но пока не могу
+                // Обновляем annId в базе данных
+                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt,selectedArtRow.Articul);
+                selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
+
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
                 // Обновляем UI:
                 if (artDataSource != null && selectedArtRow != null)
@@ -485,7 +552,7 @@ namespace SewingProduction.Forms
                     gridControl_wdToBind?.RefreshDataSource();
                 }
 
-                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.Kod} привязан к РТ {selectedAnnRow.AnnID}");
+                await _logger.LogEventAsync("Привязка завершена", $"Артикул {selectedArtRow.kodd_rt} привязан к РТ {selectedAnnRow.AnnID}");
                 MessageBox.Show("Привязка успешно выполнена.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -503,22 +570,40 @@ namespace SewingProduction.Forms
         private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var gv_unbound_Arts = sender as GridView;
-            if (gv_unbound_Arts == null || e.FocusedRowHandle < 0) return;
+            if (gv_unbound_Arts == null) 
+            {
+                await ClearUnboundArtsRelatedData();
+                return;
+            }
+
+            // Если строка не выбрана - очищаем все связанные данные
+            if (e.FocusedRowHandle < 0)
+            {
+                await ClearUnboundArtsRelatedData();
+                return;
+            }
 
             try
             {
                 // Получаем данные из текущей строки
-                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Kod", "");
-                string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "");
+                string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
+                string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "").TrimEnd(' ');
 
                 if (!int.TryParse(kod, out int kodInt))
                 {
                     await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
+                    kodInt = 0; // Устанавливаем 0 для дальнейшей обработки
+                }
+
+                // Если нет артикула и кода - очищаем данные
+                if (string.IsNullOrEmpty(articul) && kodInt <= 0)
+                {
+                    await ClearUnboundArtsRelatedData();
                     return;
                 }
 
                 // Загружаем данные параллельно
-                var loadWorksTask = LoadWorksbyArt(kodInt, articul);
+                var loadWorksTask = LoadWorksbyArt(articul);
                 var loadRaszTask = Task.Run(async () =>
                 {
                     if (gridView_wdToBind.FocusedRowHandle >= 0)
@@ -576,25 +661,117 @@ namespace SewingProduction.Forms
                 }
                 _normRaszBindingSourceArticles.ResetBindings(false);
 
-                // Загружаем изображение, если есть код
+                // Загружаем или очищаем изображение
                 if (kodInt > 0)
                 {
-                    await Task.Run(() => LoadGridImage(pictureBox2, kod: kodInt));
+                    await Task.Run(() => LoadGridImage(pictureBox3, kod: kodInt));
+                }
+                else
+                {
+                    // Очищаем картинку если нет кода
+                    if (pictureBox3.InvokeRequired)
+                    {
+                        pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox3.Image = null;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка в gridView_unboundArts_FocusedRowChanged_Internal");
                 // В случае ошибки очищаем данные
-                if (_myDataAnnBindingSource != null)
+                await ClearUnboundArtsRelatedData();
+            }
+        }
+
+        /// <summary>
+        /// Очищает все связанные данные для неувязанных артикулов
+        /// </summary>
+        private async Task ClearUnboundArtsRelatedData()
+        {
+            try
+            {
+                // Очищаем список РТ
+                if (_myDataAnnBindingSource != null && _myDataAnnList != null)
                 {
                     _myDataAnnList.Clear();
                     _myDataAnnBindingSource.ResetBindings(false);
                 }
-                gridView_wdToBind.RefreshData();
-                gridControl_wdToBind.RefreshDataSource();
-                _normRaszListArticles.Clear(); // Clear in case of error
-                _normRaszBindingSourceArticles.ResetBindings(false);
+
+                // Обновляем UI
+                gridView_wdToBind?.RefreshData();
+                gridControl_wdToBind?.RefreshDataSource();
+
+                // Очищаем норм расценки
+                if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
+                {
+                    _normRaszListArticles.Clear();
+                    _normRaszBindingSourceArticles.ResetBindings(false);
+                }
+
+                // Очищаем картинку
+                if (pictureBox3 != null)
+                {
+                    if (pictureBox3.InvokeRequired)
+                    {
+                        pictureBox3.Invoke((MethodInvoker)(() => pictureBox3.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox3.Image = null;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при очистке связанных данных для неувязанных артикулов");
+            }
+        }
+
+        /// <summary>
+        /// Очищает все связанные данные для РТ увязки
+        /// </summary>
+        private async Task ClearWdToBindRelatedData()
+        {
+            try
+            {
+                // Очищаем картинку
+                if (pictureBox2 != null)
+                {
+                    if (pictureBox2.InvokeRequired)
+                    {
+                        pictureBox2.Invoke((MethodInvoker)(() => pictureBox2.Image = null));
+                    }
+                    else
+                    {
+                        pictureBox2.Image = null;
+                    }
+                }
+
+                // Очищаем норм расценки
+                if (_normRaszListArticles != null && _normRaszBindingSourceArticles != null)
+                {
+                    _normRaszListArticles.Clear();
+                    _normRaszBindingSourceArticles.ResetBindings(false);
+                }
+
+                // Очищаем НЗП
+                if (_nzpListArt != null && _nzpByKoddRtSourceArt != null)
+                {
+                    _nzpListArt.Clear();
+                    _nzpByKoddRtSourceArt.ResetBindings(false);
+                }
+
+                // Обновляем UI
+                gridControlNZP?.RefreshDataSource();
+                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при очистке связанных данных для РТ увязки");
             }
         }
     }

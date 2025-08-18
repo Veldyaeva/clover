@@ -19,6 +19,7 @@ using SewingProduction.Features.UserDistribution.Models;
 using SewingProduction.Services;
 using System.Diagnostics;
 using System.Linq;
+using SewingProduction.Core.Class;
 
 namespace SewingProduction
 {
@@ -29,77 +30,18 @@ namespace SewingProduction
     public interface IThemeableControl
     {
         string ObjectName { get; set; }
+        bool VisiblePermission { get; set; }
+        bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
     }
-    public class CustomButton : Button, IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomButton()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
-
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-            FlatStyle = FlatStyle.Standard;
-            FlatAppearance.BorderSize = 1;
-            Height = ThemeManager.SharedSettings.ButtonHeight;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
-    public class CustomOkButton : CustomButton, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomOkButton()
-        {
-            Text = "OK";
-            DialogResult = DialogResult.OK;
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
-
-    public class CustomCancelButton : CustomButton, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        public CustomCancelButton()
-        {
-            Text = "Cancel";
-            DialogResult = DialogResult.Cancel;
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            PermissionHelper.ApplyTo(this, ObjectName, user);
-        }
-    }
+    
 
     public class CustomTextBox : TextBox, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTextBox()
         {
             ApplyTheme();
@@ -127,10 +69,45 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
     }
 
     public class CustomCheckBox : CheckBox, IThemeable, IThemeableControl
     {
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
         public CustomCheckBox()
@@ -159,50 +136,44 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
-    }
-
-
-    public class CustomSimpleButton : DevExpress.XtraEditors.SimpleButton, IThemeable
-    {
-        public CustomSimpleButton()
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
         {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-        }
-
-        public void ApplyTheme()
-        {
-
-            Appearance.BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            Appearance.ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            Appearance.Font = ThemeManager.SharedSettings.DefaultFont;
-
-            AppearanceDisabled.BackColor = Color.Green;
-            AppearanceDisabled.ForeColor = Color.GreenYellow;
-            AppearanceDisabled.Options.UseBackColor = true;
-            AppearanceDisabled.Options.UseForeColor = true;
-            //BackColor = ThemeManager.ActiveTheme.ButtonBackground;
-            //ForeColor = ThemeManager.ActiveTheme.ButtonTextColor;
-            //Font = ThemeManager.SharedSettings.DefaultFont;
-
-            //FlatStyle = FlatStyle.Standard;
-            //FlatAppearance.BorderSize = 1;
-            Height = ThemeManager.SharedSettings.ButtonHeight;
-        }
-
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            get => _visiblePermission;
+            set
             {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
             }
-            base.Dispose(disposing);
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
         }
     }
-    public class CustomRadioButton : RadioButton, IThemeable
+
+    public class CustomRadioButton : RadioButton, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomRadioButton()
         {
             ApplyTheme();
@@ -222,9 +193,47 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
-    public class CustomDateTimePicker : DateTimePicker, IThemeable
+    public class CustomDateTimePicker : DateTimePicker, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomDateTimePicker()
         {
             ApplyTheme();
@@ -245,9 +254,47 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
-    public class CustomNumericUpDown : NumericUpDown, IThemeable
+    public class CustomNumericUpDown : NumericUpDown, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomNumericUpDown()
         {
             ApplyTheme();
@@ -268,9 +315,47 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
-    public class CustomListBox : ListBox, IThemeable
+    public class CustomListBox : ListBox, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomListBox()
         {
             ApplyTheme();
@@ -291,9 +376,47 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
-    public class CustomCheckedListBox : CheckedListBox, IThemeable
+    public class CustomCheckedListBox : CheckedListBox, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomCheckedListBox()
         {
             ApplyTheme();
@@ -314,9 +437,47 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
-    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable
+    public class CustomTextBoxEx : DevExpress.XtraEditors.TextEdit, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTextBoxEx()
         {
             ApplyTheme();
@@ -337,12 +498,49 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
     public class CustomMaskedTextBox : MaskedTextBox, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomMaskedTextBox()
         {
             ApplyTheme();
@@ -370,6 +568,37 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
 
@@ -377,6 +606,8 @@ namespace SewingProduction
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomComboBox()
         {
             ApplyTheme();
@@ -404,10 +635,44 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
-    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable
+    public class CustomTabControl : DevExpress.XtraTab.XtraTabControl, IThemeable, IThemeableControl
     {
+        public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomTabControl()
         {
             ApplyTheme();
@@ -430,12 +695,49 @@ namespace SewingProduction
             }
             base.Dispose(disposing);
         }
+        public void ApplyPermission(UserClass user)
+        {
+            PermissionHelper.ApplyTo(this, ObjectName, user);
+        }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
     public class CustomLabel : Label, IThemeable, IThemeableControl
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         public CustomLabel()
         {
             ApplyTheme();
@@ -462,190 +764,40 @@ namespace SewingProduction
         {
             PermissionHelper.ApplyTo(this, ObjectName, user);
         }
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisiblePermission
+        {
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
+        {
+            get => _visibleLogic;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
     }
 
 
-    public class CustomGridControl : GridControl, SewingProduction.IThemeable, IThemeableControl
-    {
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Color? AlternateRowColor { get; set; }
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string ObjectName { get; set; }
-        private UserClass _user;
-        private List<int> _tableIds;
-        private int _formId;
-        public CustomGridControl()
-        {
-            ApplyTheme();
-            ThemeManager.ThemeChanged += OnThemeChanged;
-            ViewRegistered += OnViewRegistered;
-        }
-        public void ApplyTheme()
-        {
-            BackColor = ThemeManager.ActiveTheme.GridBackground;
-            ForeColor = ThemeManager.ActiveTheme.TextBoxText;
-            Font = ThemeManager.SharedSettings.DefaultFont;
-            AlternateRowColor = ThemeManager.ActiveTheme.BandHighlightColor;
-
-
-            foreach (var view in ViewCollection)
-            {
-                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
-                {
-                    ApplyRowColors(gridView);
-                    gridView.OptionsView.ColumnHeaderAutoHeight = DevExpress.Utils.DefaultBoolean.True;
-                    gridView.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-                }
-            }
-        }
-        private void OnViewRegistered(object sender, DevExpress.XtraGrid.ViewOperationEventArgs e)
-        {
-            if (e.View is DevExpress.XtraGrid.Views.Grid.GridView gridView)
-            {
-                ApplyRowColors(gridView);
-            }
-        }
-        private void ApplyRowColors(DevExpress.XtraGrid.Views.Grid.GridView gridView)
-        {
-            if (AlternateRowColor.HasValue)
-            {
-                gridView.Appearance.EvenRow.BackColor = AlternateRowColor.Value;
-                gridView.OptionsView.EnableAppearanceEvenRow = true;
-            }
-        }
-        private void OnThemeChanged() => ApplyTheme();
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                ThemeManager.ThemeChanged -= OnThemeChanged;
-            }
-            base.Dispose(disposing);
-        }
-        public void ApplyPermission(UserClass user)
-        {
-            //PermissionHelper.ApplyTo(this, ObjectName, user);
-
-            if (string.IsNullOrEmpty(ObjectName)) return;
-
-            bool hasWrite = user.HasPermission(ObjectName, "Редактор");
-            bool hasRead = user.HasPermission(ObjectName, "Просмотр");
-
-            this.Visible = hasRead || hasWrite;
-            //this.Enabled = hasWrite;
-            foreach (var view in ViewCollection)
-            {
-                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
-                {
-                    gridView.OptionsBehavior.ReadOnly = !hasWrite;
-                    gridView.OptionsBehavior.Editable = hasWrite;
-                }
-            }
-        }
-
-        public async void InitializeAccess(UserClass user, string formName, List<string> tableNames = null)
-        {
-            var dbHelper = new DatabaseHelper("ace");
-            var dbService = new DbService(dbHelper);
-            var roleService = new RoleDataService(dbService, dbHelper);
-            var columnService = new AllColumnNameDataService(dbService, dbHelper);
-            var tableService = new AllTableNameDataService(dbService, dbHelper);
-            var formService = new FormDataService(dbService, dbHelper);
-
-            _user = user;
-
-            // Получаем ID формы
-            _formId = (await formService.GetFormIdByNameAsync(formName)) ?? 0;
-
-            Debug.WriteLine($" _user.name: {_user.UserName}");
-            Debug.WriteLine($" ObjectName: {ObjectName}");
-            Debug.WriteLine($" formName: {formName}");
-            Debug.WriteLine($" _formId: {_formId}");
-            if (_user == null || string.IsNullOrEmpty(ObjectName) || _formId <= 0)
-            {
-                Debug.WriteLine("[InitializeAccess] Ошибка: не заданы обязательные параметры.");
-                return;
-            }
-
-            // Получаем ID ролей пользователя
-            List<int> roleIds = await roleService.GetRoleIdsByNamesAsync(_user.Roles);
-
-            // Готовим словарь с правами на колонки
-            Dictionary<string, int> columnAccess = new();
-
-            await ApplyPermissionPerColumn(roleIds, columnService, tableService, columnAccess, tableNames);
-            await ApplyPermissionPerMode(columnAccess);
-        }
-        private async Task ApplyPermissionPerColumn(
-            List<int> roleIds, 
-            AllColumnNameDataService columnService, 
-            AllTableNameDataService tableService, 
-            Dictionary<string, int> columnAccess, 
-            List<string> tableNames)
-        {
-            if (tableNames != null && tableNames.Any())
-            {
-                // Есть указание конкретных таблиц — применяем по каждой
-                foreach (var tableName in tableNames)
-                {
-                    var tableId = await tableService.GetTableIdByNameAsync(tableName);
-                    if (tableId.HasValue)
-                    {
-                        Debug.WriteLine($"[InitializeAccess] Таблица '{tableName}' → ID: {tableId.Value}");
-                        var columns = await columnService.GetColumnsWithAccessAsync(roleIds, ObjectName, _formId, tableId.Value);
-
-                        foreach (var col in columns)
-                        {
-                            if (columnAccess.TryGetValue(col.name, out int current))
-                                columnAccess[col.name] = Math.Max(current, col.ModeID);
-                            else
-                                columnAccess[col.name] = col.ModeID;
-                        }
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"[InitializeAccess] Таблица '{tableName}' не найдена.");
-                    }
-                }
-            }
-            else
-            {
-                // Нет конкретных таблиц — берём все доступные по форме
-                var columns = await columnService.GetColumnsWithAccessAsync(roleIds, ObjectName, _formId);
-
-                foreach (var col in columns)
-                {
-                    columnAccess[col.name] = col.ModeID;
-                }
-            }
-        }
-        private async Task ApplyPermissionPerMode(Dictionary<string, int> columnAccess)
-        {
-            foreach (var view in ViewCollection)
-            {
-                if (view is DevExpress.XtraGrid.Views.Grid.GridView gridView)
-                {
-                    foreach (DevExpress.XtraGrid.Columns.GridColumn column in gridView.Columns)
-                    {
-                        if (columnAccess.TryGetValue(column.FieldName, out int mode))
-                        {
-                            column.Visible = mode > 0;
-                            column.OptionsColumn.ReadOnly = mode < 2;
-                            column.OptionsColumn.AllowEdit = mode == 2;
-                            Debug.WriteLine($"[ApplyPermissionPerColumn] Колонка {column.FieldName} → ModeID={mode}");
-                        }
-                        else
-                        {
-                            column.Visible = false;
-                            Debug.WriteLine($"[ApplyPermissionPerColumn] Колонка {column.FieldName} скрыта (нет прав)");
-                        }
-                    }
-                }
-            }
-            Debug.WriteLine("[ApplyPermissionPerColumn] Завершено");
-        }
-    }
     /// <summary>
     /// Кастомный прозрачный группбокс с черной обводкой
     /// </summary>
@@ -653,6 +805,8 @@ namespace SewingProduction
     {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string ObjectName { get; set; }
+        private bool _visiblePermission = true;
+        private bool _visibleLogic = true;
         private Color _borderColor = Color.Black; // Цвет обводки по умолчанию
         private int _borderThickness = 1;       // Толщина обводки по умолчанию
 
@@ -718,26 +872,35 @@ namespace SewingProduction
             this.BorderColor = ThemeManager.ActiveTheme.LabelTextColor; // Можно сделать цвет рамки таким же
             Invalidate(); // Перерисовать контрол с новыми цветами
         }
-    }
-    /// <summary>
-    /// Кнопка с записью в бд
-    /// </summary>
-    public class CustomActionButton : CustomButton
-    {
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string EventDescription { get; set; } = "Нажатие кнопки";
-
-        protected override void OnClick(EventArgs e)
+        public bool VisiblePermission
         {
-            base.OnClick(e);
-            _ = LogActionToDatabase(); // Fire-and-forget
+            get => _visiblePermission;
+            set
+            {
+                _visiblePermission = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
         }
 
-        private async Task LogActionToDatabase()
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool VisibleLogic
         {
-            if (this.FindForm() is CustomForm form && form.User is UserClass user)
+            get => _visibleLogic;
+            set
             {
-                await ActionLogger.Log(user.UserId, "Нажатие на кнопку", NameForm: this.FindForm()?.Name, NameObject: this.Name);
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
+            }
+        }
+
+        public new bool Visible
+        {
+            get => base.Visible;
+            set
+            {
+                _visibleLogic = value;
+                VisibilityHelper.UpdateVisibility(this, _visiblePermission, _visibleLogic);
             }
         }
     }
@@ -774,6 +937,7 @@ namespace SewingProduction
         }
         public CustomForm(UserClass user)
         {
+            Debug.WriteLine("кастом форма");
             // сохраняем пользователя
             _user = user ?? throw new ArgumentNullException(nameof(user));
 
@@ -860,21 +1024,51 @@ namespace SewingProduction
             {
                 if (ctrl is IThemeableControl themeable)
                 {
-                    // Если ObjectName не задан вручную — ставим по имени контрола
                     if (string.IsNullOrEmpty(themeable.ObjectName) && !string.IsNullOrEmpty(ctrl.Name))
-                    {
                         themeable.ObjectName = ctrl.Name;
-                    }
 
-                    themeable.ApplyPermission(user);
+                    string name = themeable.ObjectName ?? ctrl.Name;
+                    bool hasWrite = user.HasPermission(name, "Редактор");
+                    bool hasRead = user.HasPermission(name, "Просмотр");
+
+                    Debug.WriteLine($"[Доступ Control] Объект: {name}, Просмотр: {hasRead}, Редактор: {hasWrite}");
+
+                    if (!ctrl.GetType().Name.StartsWith("Custom"))
+                        PermissionHelper.ApplyTo(ctrl, name, user);
+                    else
+                        themeable.ApplyPermission(user);
                 }
 
-                if (ctrl.HasChildren)
+                // Обработка табов — обязательно
+                if (ctrl is DevExpress.XtraTab.XtraTabControl tabControl)
                 {
-                    ApplyPermissionsToControls(ctrl, user);
+                    foreach (DevExpress.XtraTab.XtraTabPage tabPage in tabControl.TabPages)
+                    {
+                        if (tabPage is IThemeableControl themeableTab)
+                        {
+                            if (string.IsNullOrEmpty(themeableTab.ObjectName) && !string.IsNullOrEmpty(tabPage.Name))
+                                themeableTab.ObjectName = tabPage.Name;
+
+                            string tabName = themeableTab.ObjectName ?? tabPage.Name;
+                            bool hasWrite = user.HasPermission(tabName, "Редактор");
+                            bool hasRead = user.HasPermission(tabName, "Просмотр");
+
+                            Debug.WriteLine($"[Доступ TabPage] Вкладка: {tabName}, Просмотр: {hasRead}, Редактор: {hasWrite}");
+
+                            themeableTab.ApplyPermission(user);
+                        }
+
+                        // 🔁 Обработка всех контролов внутри вкладки
+                        ApplyPermissionsToControls(tabPage, user);
+                    }
                 }
+
+                // 🔁 Рекурсивно обрабатываем все вложенные контролы
+                if (ctrl.HasChildren)
+                    ApplyPermissionsToControls(ctrl, user);
             }
         }
+
         private void DisableAllControls(Control parent)
         {
             foreach (Control ctrl in parent.Controls)
@@ -892,13 +1086,29 @@ namespace SewingProduction
     {
         public static void ApplyTo(Control ctrl, string objectName, UserClass user)
         {
-            if (string.IsNullOrEmpty(objectName)) return;
+            if (string.IsNullOrEmpty(objectName))
+                objectName = ctrl.Name;
+
+            if (string.IsNullOrEmpty(objectName))
+            {
+                Debug.WriteLine("[PermissionHelper] objectName не найден");
+                return;
+            }
 
             bool hasWrite = user.HasPermission(objectName, "Редактор");
             bool hasRead = user.HasPermission(objectName, "Просмотр");
 
-            ctrl.Visible = hasRead || hasWrite;
+            //Debug.WriteLine($"[PermissionHelper] {objectName}: Просмотр={hasRead}, Редактор={hasWrite}");
+
             ctrl.Enabled = hasWrite;
+            ctrl.Visible = hasRead || hasWrite;
+        }
+    }
+    public static class VisibilityHelper
+    {
+        public static void UpdateVisibility(Control ctrl, bool visiblePermission, bool visibleLogic)
+        {
+            ctrl.Visible = visiblePermission && visibleLogic;
         }
     }
 }

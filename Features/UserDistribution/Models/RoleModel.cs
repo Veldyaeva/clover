@@ -72,13 +72,25 @@ namespace SewingProduction.Features.UserDistribution.Models
         public async Task<List<RoleModel>> GetListRolesAsync(int userId)
         {
             string query = @"
-                SELECT r.RoleID, r.RoleName, r.Description, r.CreatorID, u.UserName AS CreatorName
-                FROM Roles r
-                LEFT JOIN Users u ON r.CreatorID = u.UserID
-                WHERE 
-                    r.CreatorID = @UserID
-                    OR r.RoleID IN (SELECT ur.RoleID FROM UserRoles ur WHERE ur.UserID = @UserID)
-                    OR r.CreatorID IN (SELECT UserID FROM GetDescendants(@UserID))";
+            SELECT r.RoleID, r.RoleName, r.Description, u.UserName
+            FROM Roles r
+            JOIN Users u ON r.CreatorID = u.UserID
+            WHERE NOT EXISTS(
+                SELECT 1
+                FROM RoleObject ro
+                WHERE ro.RoleID = r.RoleID
+                AND NOT EXISTS(
+                    SELECT 1
+                    FROM
+                      (SELECT ro.ObjectID, MAX(ro.ModeID) AS UserModeID
+                      FROM RoleObject ro
+                      JOIN UserRoles ur ON ro.RoleID = ur.RoleID
+                      WHERE ur.UserID = @UserID
+                      GROUP BY ro.ObjectID) uo
+                    WHERE uo.ObjectID = ro.ObjectID
+                    AND uo.UserModeID >= ro.ModeID
+                )
+            )";
 
             return await _dbService.GetListAsync<RoleModel>(query, new { UserID = userId });
         }
@@ -162,6 +174,15 @@ namespace SewingProduction.Features.UserDistribution.Models
             return result.AsEnumerable()
                 .Select(r => Convert.ToInt32(r["RoleID"]))
                 .ToList();
+        }
+        public async void SetPravaForAddUser(int newId)
+        {
+            string query = $@"SELECT RoleID FROM Roles WHERE RoleName = 'Базовая'";
+            DataTable dt = await _dbHelper.ExecuteQueryAsync(query);
+            int roleId = dt.Rows.Count > 0 ? Convert.ToInt32(dt.Rows[0]["RoleID"]) : -1;
+            UserRoleDataService userRoleDataService = new UserRoleDataService(_dbHelper);
+            await userRoleDataService.AssignRoleAsync(newId, roleId);
+            Console.WriteLine($"Назначены базовые ({roleId}) права, профиль:" + newId.ToString());
         }
     }
 }

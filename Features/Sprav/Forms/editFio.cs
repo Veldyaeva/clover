@@ -30,15 +30,15 @@ using SewingProduction.Features.Sprav;
 
 namespace SewingProduction.form
 {
-    public partial class editFio : CustomForm
+    public partial class EditFio : CustomForm
     {
         private readonly EditFioDataService _editFioDataService;
-        DatabaseHelper dbHelper = new DatabaseHelper("ace");
+        DatabaseHelper dbHelper = new DatabaseHelper();
         private Person _person;
         private ToolTip toolTip = new ToolTip();
         bool isBusy = false;
 
-        public editFio(UserClass user, string idFIO, string openType) : base(user)
+        public EditFio(UserClass user, string idFIO, string openType) : base(user)
         {
             InitializeComponent();
             _editFioDataService = new EditFioDataService(dbHelper);
@@ -49,7 +49,7 @@ namespace SewingProduction.form
             customTextBoxTab.Text = idFIO;
             toolTipButton();
         }
-        public editFio()
+        public EditFio()
         {
             InitializeComponent();
         }

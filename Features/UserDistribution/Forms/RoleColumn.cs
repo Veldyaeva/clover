@@ -38,7 +38,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             repositoryItemComboBoxColumnMode.EditValueChanged += RepositoryItemComboBoxColumnMode_EditValueChanged;
 
 
-            var dbHelper = new DatabaseHelper("ace");
+            var dbHelper = new DatabaseHelper();
             var dbService = new DbService(dbHelper);
             _formService = new FormDataService(dbService, dbHelper);
             _objectService = new ObjectDataService(dbService, dbHelper);
@@ -171,6 +171,42 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 return;
 
             await _columnService.SaveRoleColumnAccessAsync(role.RoleID, obj.ObjectID, column.id_acn, modeId);
+        }
+
+        private async void customComboBoxRightForTable_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (gridViewRole.GetFocusedRow() is not RoleModel role ||
+                gridViewObject.GetFocusedRow() is not ObjectModel obj ||
+                gridViewTable.GetFocusedRow() is not AllTableNameModel table)
+                return;
+
+            var modeText = customComboBoxRightForTable.Text;
+            int modeId = modeText switch
+            {
+                "Просмотр" => 1,
+                "Редактор" => 2,
+                _ => 0 // "Нет доступа"
+            };
+
+            if (_columns == null || _columns.Count == 0)
+                return;
+
+            foreach (var column in _columns)
+            {
+                // если колонка только для чтения, не даём право выше "Просмотр"
+                int finalModeId = column.Readonly == 1 && modeId > 1 ? 1 : modeId;
+
+                await _columnService.SaveRoleColumnAccessAsync(role.RoleID, obj.ObjectID, column.id_acn, finalModeId);
+                column.ModeID = finalModeId;
+                column.ModeName = finalModeId switch
+                {
+                    1 => "Просмотр",
+                    2 => "Редактор",
+                    _ => "Нет доступа"
+                };
+            }
+
+            customGridControlColumn.RefreshDataSource();
         }
         //private async void RepositoryItemCheckEditButton_EditValueChanged(object sender, EventArgs e)
         //{

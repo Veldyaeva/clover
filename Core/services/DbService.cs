@@ -15,6 +15,8 @@ using SewingProduction.Interfaces;
 using System.ComponentModel;
 using System.Diagnostics;
 using Z.Dapper.Plus;
+using System.Text;
+using DevExpress.Xpo.DB.Helpers;
 
 namespace SewingProduction.Services
 {
@@ -69,6 +71,34 @@ namespace SewingProduction.Services
         }
 
         /// <summary>
+        /// Выполняет SQL-запрос и возвращает объект типа T
+        /// </summary>
+        /// <typeparam name="T">Тип модели</typeparam>
+        /// <param name="tableName">Имя таблицы</param>
+        /// <param name="fieldName">Столбцы</param>
+        /// <param name="whereConditions">Словарь параметров</param>
+        /// <returns>Список объектов типа T</returns>
+        public async Task<T> SelectOneFieldAsync<T>(
+            string tableName,
+            string fieldName,
+            Dictionary<string, object> whereConditions = null)
+        {
+            var query = new StringBuilder($"SELECT {fieldName} FROM {tableName}");
+
+            if (whereConditions != null && whereConditions.Any())
+            {
+                query.Append(" WHERE ");
+                var conditions = whereConditions.Select(kvp =>
+                    kvp.Value == null ? $"{kvp.Key} IS NULL" : $"{kvp.Key} = @{kvp.Key}");
+                query.Append(string.Join(" AND ", conditions));
+            }
+
+            using (var connection = _dbHelper.GetConnection())
+            {
+                return await connection.QueryFirstOrDefaultAsync<T>(query.ToString(), whereConditions);
+            }
+        }
+        /// <summary>
         /// Обновляет одно поле в таблице по заданному условию.
         /// </summary>
         /// <param name="tableName">Имя таблицы</param>
@@ -103,6 +133,29 @@ namespace SewingProduction.Services
             }
         }
         /// <summary>
+        /// Получает первую запись, соответствующую запросу, или значение по умолчанию (null), если ничего не найдено.
+        /// </summary>
+        /// <typeparam name="T">Тип модели</typeparam>
+        /// <param name="query">SQL-запрос</param>
+        /// <param name="parameters">Объект с параметрами запроса</param>
+        /// <returns>Один объект типа T или null</returns>
+        public async Task<T> GetFirstOrDefaultAsync<T>(string query, object parameters)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    return await connection.QueryFirstOrDefaultAsync<T>(query, parameters);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при выполнении запроса GetFirstOrDefaultAsync: {query}");
+                throw; // Пробрасываем исключение, чтобы вызывающий код мог его обработать
+            }
+        }
+
+        /// <summary>
         /// Вставляет данные в таблицу
         /// </summary>
         /// <typeparam name="T">тип объекта (из модели) для вставки</typeparam>
@@ -118,7 +171,6 @@ namespace SewingProduction.Services
 
                 var properties = typeof(T).GetProperties()
                     .Where(p => p.CanRead &&
-                                p.Name != keyFieldName &&
                                 !System.Attribute.IsDefined(p, typeof(NotMappedAttribute)))
                     .ToList();
 
@@ -134,12 +186,15 @@ namespace SewingProduction.Services
                     var columnAttr = prop.GetCustomAttributes(typeof(ColumnAttribute), false)
                      .FirstOrDefault() as ColumnAttribute;
                     if (columnAttr != null)
-                    {
                         columnName = columnAttr.Name;
-                    }
+
                     string parameterName = "@" + columnName;
 
                     var value = prop.GetValue(entity);
+
+                    if (prop.Name == keyFieldName && (value == null || value.ToString() == "0" || string.IsNullOrWhiteSpace(value.ToString())))
+                        continue;
+
                     await _logger.LogEventAsync($"Свойство {prop.Name} (колонка {columnName}): значение = {value}, тип = {value?.GetType()}", "InsertEntityAsync");
 
                     columns.Add(columnName);
@@ -222,6 +277,7 @@ namespace SewingProduction.Services
                 string setClause = string.Join(", ", setClauses);
                 string query = $"UPDATE {tableName} SET {setClause} WHERE {keyFieldName} = @Id";
 
+                Debug.WriteLine(query);
                 await _dbHelper.ExecuteNonQueryAsync(query, parameters);
                 await _logger.LogEventAsync($"Таблица {tableName}: запись ID={parameters["@Id"]} успешно обновлена", "UpdateEntity");
             }
@@ -248,16 +304,41 @@ namespace SewingProduction.Services
 
             var keyValue = keyProperty.GetValue(entity);
 
-            if (keyValue is int id && id > 0)
-            {
-                await UpdateEntityAsync(tableName, keyFieldName, entity);
-                return id;
-            }
-            else
+            // ключ не задан или равен 0 — вставка без ключа
+            if (keyValue == null || (keyValue is int val && val == 0))
             {
                 return await InsertEntityAsync(tableName, keyFieldName, entity);
             }
+
+            // Универсальная обработка nullable значений
+            int keyId;
+            try
+            {
+                keyId = Convert.ToInt32(keyValue);
+            }
+            catch
+            {
+                throw new Exception("Ключевое поле не может быть преобразовано к числу.");
+            }
+
+            var filters = new Dictionary<string, object> { { keyFieldName, keyId } };
+            var exists = await SelectOneFieldAsync<string>(tableName, keyFieldName, filters);
+
+            if (exists != null)
+            {
+                // обновление
+                await UpdateEntityAsync(tableName, keyFieldName, entity);
+                return keyId;
+            }
+            else
+            {
+                // вставка с заданным ключом
+                return await InsertEntityAsync(tableName, keyFieldName, entity);
+            }
         }
+
+
+
 
         public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()

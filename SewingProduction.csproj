@@ -7,8 +7,9 @@
     <UseWPF>False</UseWPF>
     <StartupObject>SewingProduction.Core.Program</StartupObject>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <ApplicationIcon>Resources\favicon_io (1)\favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\AppIcons\favicon.ico</ApplicationIcon>
     <SignAssembly>False</SignAssembly>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -208,7 +209,7 @@
     <Content Include="Help\Help.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\favicon_io (1)\favicon.ico" />
+    <Content Include="Resources\AppIcons\favicon.ico" />
   </ItemGroup>
 
 
@@ -218,11 +219,13 @@
     <PackageReference Include="DevExpress.Win.Design" Version="24.2.7" />
     <PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.4" />
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.7" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.7" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.6" />
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WebForms" Version="150.1652.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NLog" Version="6.0.1" />
-    <PackageReference Include="Z.Dapper.Plus" Version="7.6.0" />
+    <PackageReference Include="Z.Dapper.Plus" Version="7.6.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -251,7 +254,6 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
-    <Folder Include="Features\Sprav\Models\" />
     <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 

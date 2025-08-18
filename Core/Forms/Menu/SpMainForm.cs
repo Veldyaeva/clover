@@ -8,8 +8,11 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Forms;
+using SewingProduction.Features.TeamWork;
 using System.Diagnostics;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.Articul;
 
 namespace SewingProduction
 {
@@ -67,7 +70,8 @@ namespace SewingProduction
         }
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            showHelpForm();
+            string helpPath = System.IO.Path.Combine(AppContext.BaseDirectory, "Help", "Help.html");
+            showHelpForm(helpPath);
         }
         #endregion
         #region Справочники
@@ -117,16 +121,22 @@ namespace SewingProduction
         }
         private void тарифыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            OpenForm(new EditTarif(_user), sender);
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", "Список моделей для маркировки"), sender);
+            OpenForm(new SpravForAll("spisok_t_id_nn_crpt", "snc_id,t_id,nn", rusNameTableSQL: "Список моделей для маркировки"), sender);
         }
+        #region Виды браков пряжи
+        private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+        }
+        #endregion
         #endregion
         #region Производство
         private void оперативноеПланированиеToolStripMenuItem_Click(object sender, EventArgs e)
@@ -140,11 +150,11 @@ namespace SewingProduction
         #endregion
         private void TeamWorktoolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TeamWork(), sender);
+            OpenForm(new TeamWork(_user), sender);
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -189,7 +199,7 @@ namespace SewingProduction
         private void XtraTabbedMdiManager1_PageAdded(object sender, DevExpress.XtraTabbedMdi.MdiTabPageEventArgs e)
         {
             if (e.Page != null && e.Page.MdiChild != null)
-            { 
+            {
                 string fullText = e.Page.MdiChild.Text;
                 bool shortNames = SettingsManager.GetShortTabNames(); // новая настройка
 
@@ -204,7 +214,7 @@ namespace SewingProduction
                     xtraTabbedMdiManager1.TabPageWidth = 0;
                 }
 
-                    e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
+                e.Page.Tooltip = fullText; // полное имя во всплывающей подсказке
             }
         }
 
@@ -228,10 +238,11 @@ namespace SewingProduction
         {
             showHelpForm();
         }
-        private void showHelpForm()
+        private void showHelpForm(string filePath = null)
         {
-            var helpForm = new HelpForm(this._formManager);
+            var helpForm = new HelpForm(this._formManager, filePath);
             helpForm.Show();
         }
+
     }
 }
