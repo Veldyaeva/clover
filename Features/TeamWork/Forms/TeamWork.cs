@@ -144,8 +144,39 @@ namespace SewingProduction.Features.TeamWork.Forms
             _normRaszBindingSourceArticles = new BindingSource { DataSource = _normRaszListArticles };
             if (customGridControl3 != null) customGridControl3.DataSource = _normRaszBindingSourceArticles;
 
+            // Инициализация для NormRask на вкладке Articles
+            _normRaskListArticles = new BindingList<NormRask>();
+            _normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
+            if (customGridControl2 != null) 
+            {
+                customGridControl2.DataSource = _normRaskBindingSourceArticles;
+                _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
+                
+                // Verify the grid view configuration
+                if (customGridControl2.MainView is GridView gridView)
+                {
+                    _logger?.LogEventAsync($"Constructor: customGridControl2.MainView is GridView with {gridView.Columns.Count} columns", "TeamWork.Constructor");
+                    foreach (var col in gridView.Columns)
+                    {
+                        _logger?.LogEventAsync($"Constructor: Column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "TeamWork.Constructor");
+                    }
+                }
+            }
+            else
+            {
+                _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
+            }
+
+            // Инициализация для NormKont на вкладке Articles
+            _normKontListArticles = new BindingList<NormKont>();
+            _normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
+            if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
+
             InitializeGridSettings();
             SetupDateUpdateColumn();
+            
+            // Verify grid configurations after initialization
+            VerifyGridConfigurations();
         }
 
         /// <summary>
@@ -170,6 +201,152 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridView.CalcPreviewText += CalcPreviewText;
         }
         /// <summary>
+        /// Принудительно обновляет данные в normRaskArt гриде
+        /// </summary>
+        public async Task ForceRefreshNormRaskArt()
+        {
+            try
+            {
+                if (gridView_wdToBind?.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
+                {
+                    int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
+                    if (annId > 0)
+                    {
+                        await _logger.LogEventAsync($"ForceRefreshNormRaskArt: Refreshing data for annId={annId}", "ForceRefreshNormRaskArt");
+                        
+                        // Call the method from TeamWork.Articles.cs
+                        var articlesForm = this as dynamic;
+                        if (articlesForm != null)
+                        {
+                            await articlesForm.RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
+                        }
+                    }
+                }
+                else
+                {
+                    await _logger.LogWarningAsync("ForceRefreshNormRaskArt: No focused row in gridView_wdToBind", "ForceRefreshNormRaskArt");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Error in ForceRefreshNormRaskArt");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет текущее состояние normRaskArt грида
+        /// </summary>
+        public async Task CheckNormRaskArtState()
+        {
+            try
+            {
+                await _logger.LogEventAsync($"CheckNormRaskArtState: Starting grid state check", "CheckNormRaskArtState");
+                
+                if (customGridControl2 == null)
+                {
+                    await _logger.LogWarningAsync("CheckNormRaskArtState: customGridControl2 is null", "CheckNormRaskArtState");
+                    return;
+                }
+
+                await _logger.LogEventAsync($"CheckNormRaskArtState: customGridControl2.Visible={customGridControl2.Visible}, Enabled={customGridControl2.Enabled}", "CheckNormRaskArtState");
+                
+                if (customGridControl2.MainView is GridView gridView)
+                {
+                    await _logger.LogEventAsync($"CheckNormRaskArtState: GridView.RowCount={gridView.RowCount}, DataRowCount={gridView.DataRowCount}", "CheckNormRaskArtState");
+                    await _logger.LogEventAsync($"CheckNormRaskArtState: GridView.DataSource={gridView.GridControl?.DataSource}", "CheckNormRaskArtState");
+                    
+                    if (gridView.DataSource is BindingSource bindingSource)
+                    {
+                        await _logger.LogEventAsync($"CheckNormRaskArtState: BindingSource.DataSource={bindingSource.DataSource}, Count={bindingSource.Count}", "CheckNormRaskArtState");
+                        
+                        if (bindingSource.DataSource is BindingList<NormRask> bindingList)
+                        {
+                            await _logger.LogEventAsync($"CheckNormRaskArtState: BindingList.Count={bindingList.Count}", "CheckNormRaskArtState");
+                            if (bindingList.Count > 0)
+                            {
+                                var firstItem = bindingList[0];
+                                await _logger.LogEventAsync($"CheckNormRaskArtState: First item - kod_o='{firstItem.Kod_o}', text='{firstItem.TextRask}', razryd={firstItem.razryd}, sek={firstItem.Sek}, spec='{firstItem.Spec}', obor='{firstItem.Obor}'", "CheckNormRaskArtState");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    await _logger.LogWarningAsync("CheckNormRaskArtState: customGridControl2.MainView is not GridView", "CheckNormRaskArtState");
+                }
+                
+                await _logger.LogEventAsync($"CheckNormRaskArtState: Grid state check completed", "CheckNormRaskArtState");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Error in CheckNormRaskArtState");
+            }
+        }
+
+        /// <summary>
+        /// Принудительно обновляет и проверяет состояние normRaskArt грида
+        /// </summary>
+        public async Task ForceRefreshAndCheckNormRaskArt()
+        {
+            try
+            {
+                await _logger.LogEventAsync($"ForceRefreshAndCheckNormRaskArt: Starting forced refresh and check", "ForceRefreshAndCheckNormRaskArt");
+                
+                // First check current state
+                await CheckNormRaskArtState();
+                
+                // Then force refresh
+                await ForceRefreshNormRaskArt();
+                
+                // Wait a bit for the refresh to complete
+                await Task.Delay(100);
+                
+                // Check state again after refresh
+                await CheckNormRaskArtState();
+                
+                await _logger.LogEventAsync($"ForceRefreshAndCheckNormRaskArt: Completed forced refresh and check", "ForceRefreshAndCheckNormRaskArt");
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Error in ForceRefreshAndCheckNormRaskArt");
+            }
+        }
+
+        /// <summary>
+        /// Проверяет конфигурацию всех гридов после инициализации
+        /// </summary>
+        private void VerifyGridConfigurations()
+        {
+            try
+            {
+                // Verify normRaskArt grid configuration
+                if (customGridControl2?.MainView is GridView normRaskArtView)
+                {
+                    _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt has {normRaskArtView.Columns.Count} columns", "VerifyGridConfigurations");
+                    foreach (var col in normRaskArtView.Columns)
+                    {
+                        _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "VerifyGridConfigurations");
+                    }
+                    
+                    // Verify data source binding
+                    _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt DataSource: {normRaskArtView.GridControl?.DataSource}", "VerifyGridConfigurations");
+                    
+                    // Verify grid visibility and accessibility
+                    _logger?.LogEventAsync($"VerifyGridConfigurations: customGridControl2.Visible={customGridControl2.Visible}, Enabled={customGridControl2.Enabled}", "VerifyGridConfigurations");
+                    _logger?.LogEventAsync($"VerifyGridConfigurations: customGridControl2.Parent={customGridControl2.Parent?.Name}, Parent.Visible={customGridControl2.Parent?.Visible}", "VerifyGridConfigurations");
+                }
+                else
+                {
+                    _logger?.LogWarningAsync("VerifyGridConfigurations: customGridControl2 or its MainView is null", "VerifyGridConfigurations");
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger?.LogErrorAsync(ex, "Error in VerifyGridConfigurations");
+            }
+        }
+
+        /// <summary>
         /// Настраивает колонку dateUpdate с кнопкой для проставления даты
         /// </summary>
         private void SetupDateUpdateColumn()
@@ -187,20 +364,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
             if (colDateUpdate != null)
             {
-                // Устанавливаем формат отображения даты без времени
-                colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-                colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+            // Устанавливаем формат отображения даты без времени
+            colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
 
-                ANNgridView.CustomRowCellEdit += (s, e) =>
+            ANNgridView.CustomRowCellEdit += (s, e) =>
+            {
+                if (e.Column == colDateUpdate)
                 {
-                    if (e.Column == colDateUpdate)
-                    {
-                        var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
-                        if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
-                            e.RepositoryItem = commandsEditDateNull;
-                        else e.RepositoryItem = commandsEditDateText;
-                    }
-                };
+                    var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
+                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                        e.RepositoryItem = commandsEditDateNull;
+                    else e.RepositoryItem = commandsEditDateText;
+                }
+            };
             }
         }
 
@@ -654,10 +831,55 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Обрабатывает смену вложенной вкладки в "Текущие работы"
+        /// </summary>
+        private async void XtraTabControl2_SelectedPageChanged(object sender, DevExpress.XtraTab.TabPageChangedEventArgs e)
+        {
+            if (e.Page == null) return;
+
+            try
+            {
+                switch (e.Page.Name)
+                {
+                    case "xtraTabPageWorkDivisions":
+                        // Когда переходим на вкладку "Требуют увязки", обновляем данные для normRaskArt
+                        if (gridView_wdToBind?.RowCount > 0 && gridView_wdToBind.FocusedRowHandle >= 0)
+                        {
+                            int annId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
+                            if (annId > 0)
+                            {
+                                await _logger.LogEventAsync($"XtraTabControl2_SelectedPageChanged: Refreshing NormRask data for annId={annId} on xtraTabPageWorkDivisions", "XtraTabControl2_SelectedPageChanged");
+                                await RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
+                                
+                                // Check the grid state after refresh
+                                await CheckNormRaskArtState();
+                            }
+                        }
+                        else
+                        {
+                            await _logger.LogWarningAsync("XtraTabControl2_SelectedPageChanged: No focused row in gridView_wdToBind", "XtraTabControl2_SelectedPageChanged");
+                        }
+                        break;
+
+                    case "xtraTabPage3":
+                        // Можно добавить логику для другой вложенной вкладки если необходимо
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Error in XtraTabControl2_SelectedPageChanged");
+            }
+        }
+
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-
+            
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
@@ -985,7 +1207,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         try
                         {
                             ANNgridView.FocusedRowHandle = rowHandle;
-                            ANNgridView.MakeRowVisible(rowHandle);
+							ANNgridView.MakeRowVisible(rowHandle);
                             ANNgridView.RefreshRow(rowHandle);
                         }
                         finally
@@ -996,7 +1218,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
-                    // Возврат к исходной строке
+					// Возврат к исходной строке
                     rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
                     if (rowHandle >= 0)
                     {
@@ -1004,7 +1226,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         try
                         {
                             ANNgridView.FocusedRowHandle = rowHandle;
-                            ANNgridView.MakeRowVisible(rowHandle);
+							ANNgridView.MakeRowVisible(rowHandle);
                             ANNgridView.RefreshRow(rowHandle);
                         }
                         finally
@@ -1018,7 +1240,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _bindingSource.ResetBindings(false);
                     await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                 }
-            };
+			};
         }
         private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
@@ -1112,7 +1334,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
                     if (PrintButton.Enabled && PrintButton.Visible)
-                        // Отчет технологической схемы разделения труда
+                    // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
