@@ -376,12 +376,12 @@
             selectQuery2});
             masterDetailInfo1.DetailQueryName = "NormRaszView";
             relationColumnInfo2.NestedKeyColumn = "kod";
-            relationColumnInfo2.ParentKeyColumn = "AKoddRT";
+            relationColumnInfo2.ParentKeyColumn = "AAnnID";
             masterDetailInfo1.KeyColumns.Add(relationColumnInfo2);
             masterDetailInfo1.MasterQueryName = "MlRtPrintSelect";
             masterDetailInfo2.DetailQueryName = "NormRaszViewGroup";
             relationColumnInfo3.NestedKeyColumn = "kod";
-            relationColumnInfo3.ParentKeyColumn = "AKoddRT";
+            relationColumnInfo3.ParentKeyColumn = "AAnnID";
             masterDetailInfo2.KeyColumns.Add(relationColumnInfo3);
             masterDetailInfo2.MasterQueryName = "MlRtPrintSelect";
             this.sqlDataSource1.Relations.AddRange(new DevExpress.DataAccess.Sql.MasterDetailInfo[] {

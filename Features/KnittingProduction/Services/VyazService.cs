@@ -45,7 +45,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"select * from VyazPlanView ";
+                    string query = $"select * from VyazPlanView where men not in (10, 30, 33) ";
 
                     var result = await connection.QueryAsync<VyazPlanView>(query, new Dictionary<string, object> {  });
                     return result.ToList();
@@ -64,15 +64,19 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn" +
-                        $"  , mc.name_class, mc.mc_id " +
-                        $"FROM matrix_class mc " +
-                        $"  LEFT JOIN oborud_shv os ON mc.id_class = os.id_class " +
-                        $"  LEFT JOIN knitMachineList_view mlv ON os.kod_ob = mlv.kmlKodOb " +
+                    //string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn" +
+                    //    $"  , mc.name_class, mc.mc_id " +
+                    //    $"FROM knitMachineList_view mlv " +
+                    //    $"  LEFT JOIN matrix_class mc ON mlv.kmlIdVyazClass = mc.id_class" +
+                    //    $"WHERE mlv.machNazn = 'вяз.подразделение' " +
+                    //    $"  AND mc.id_class = {xIDClass} " +
+                    //    $"ORDER BY mlv.kmlNumber";
+                    string query = $"SELECT mlv.kmlID, mlv.kmlNumber, mlv.kmlKmaID, mlv.kmaNumber, mlv.machNazn, mc.name_class, mc.mc_id " +
+                        $"FROM knitMachineList_view mlv " +
+                        $"  LEFT JOIN matrix_class mc ON mlv.kmlIdVyazClass = mc.id_class " +
                         $"WHERE mlv.machNazn = 'вяз.подразделение' " +
                         $"  AND mc.id_class = {xIDClass} " +
                         $"ORDER BY mlv.kmlNumber";
-
                     var result = await connection.QueryAsync<KnitMachineList>(query, new Dictionary<string, object> { });
                     return result.ToList();
                 }
@@ -80,6 +84,86 @@ namespace SewingProduction.Features.KnittingProduction.Services
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineListByClassID");
+                return null;
+            }
+        }
+        public async Task<List<KnitMachineClassList>> GetKnitMachineClassList()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT * " +
+                        $"  FROM matrix_class mc " +
+                        $"  ORDER BY mc.name_class";
+
+                    var result = await connection.QueryAsync<KnitMachineClassList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineClassList");
+                return null;
+            }
+        }
+        public async Task<List<KnitMachineAreaListView>> GetKnitMachineAreaList()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT * " +
+                        $"FROM knitMachineArea_view " +
+                        $"where kmaIDNazn = 6" +
+                        $"ORDER BY kmaNumber";
+
+                    var result = await connection.QueryAsync<KnitMachineAreaListView>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineAreaList");
+                return null;
+            }
+        }
+        public async Task<List<KnitMachineList>> GetKnitMachineListByAreaID(int kmaID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT * " +
+                        $"FROM knitMachineList_view " +
+                        $"where kmlKmaID = {kmaID}" +
+                        $"ORDER BY kmlNumber";
+
+                    var result = await connection.QueryAsync<KnitMachineList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineListByAreaID");
+                return null;
+            }
+        }
+        public async Task<List<KnitMachineLoadAllInfo>> GetKnitMachineLoadInfoByClassID(int xIDClass)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC getKnitMachineLoadInfo {xIDClass} ";
+
+                    var result = await connection.QueryAsync<KnitMachineLoadAllInfo>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetKnitMachineLoadInfoByClassID");
                 return null;
             }
         }
@@ -103,6 +187,81 @@ namespace SewingProduction.Features.KnittingProduction.Services
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetArtPrKnitMachineByKodMatr");
+                return null;
+            }
+        }
+
+        public async Task<List<PlanSezonZadKnitMachine>> GetPlanSezonZadKnitMachineDivisionByDay(int kmlID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    //string query = $"SELECT * " +
+                    //    $"FROM ArtPrKnitMachineView " +
+                    //    $"WHERE kod_matr = '{nn}' " +
+                    //    $"  AND typevyazkm = {typeVyazKM} " +
+                    //    $"  AND vidVyazKM = '{vidVyazKM}'";
+                    string query = $"SELECT * " +
+                        $"  FROM planSezonZadKnitMachineDivisionByDay " +
+                        $"  WHERE pszkmKmlID = {kmlID} " +
+                        $"  ORDER BY pszkmPlanDateFrom";
+                    var result = await connection.QueryAsync<PlanSezonZadKnitMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetplanSezonZadKnitMachineDivisionByDay");
+                return null;
+            }
+        }
+
+        public async Task<List<PlanSezonZadKnitMachine>> GetPlanSezonZadKnitMachine(int kmlID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    //string query = $"SELECT * " +
+                    //    $"FROM ArtPrKnitMachineView " +
+                    //    $"WHERE kod_matr = '{nn}' " +
+                    //    $"  AND typevyazkm = {typeVyazKM} " +
+                    //    $"  AND vidVyazKM = '{vidVyazKM}'";
+                    string query = $"SELECT * " +
+                        $"  FROM planSezonZadKnitMachine " +
+                        $"  WHERE pszkmKmlID = {kmlID} " +
+                        $"  ORDER BY pszkmYearMonthInt, pszkmPlanDateFrom";
+                    var result = await connection.QueryAsync<PlanSezonZadKnitMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetplanSezonZadKnitMachine");
+                return null;
+            }
+        }
+
+        public async Task<List<PlanSezonZadKnitMachineLoadingSummary>> GetPlanSezonZadKnitMachineLoadingSummary(int kmlID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    //string query = $"SELECT * " +
+                    //    $"FROM ArtPrKnitMachineView " +
+                    //    $"WHERE kod_matr = '{nn}' " +
+                    //    $"  AND typevyazkm = {typeVyazKM} " +
+                    //    $"  AND vidVyazKM = '{vidVyazKM}'";
+                    string query = $"exec getPlanSezonZadKnitMachineLoadingSummary {kmlID} ";
+                    var result = await connection.QueryAsync<PlanSezonZadKnitMachineLoadingSummary>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных getPlanSezonZadKnitMachineLoadingSummary");
                 return null;
             }
         }

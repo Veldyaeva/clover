@@ -16,6 +16,7 @@ using static DevExpress.Mvvm.Native.Either;
 using SewingProduction.Core.interfaces;
 using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
+using Org.BouncyCastle.Ocsp;
 
 namespace SewingProduction.form
 {
@@ -234,19 +235,11 @@ namespace SewingProduction.form
         // ЛейблЛинк виды производств:
         private void linkLabelVid_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            foreach (Form child in this.MdiParent.MdiChildren)
+            if (this.MdiParent is SpMainForm mainForm)
             {
-                if (child is SpravForAll)
-                {
-                    // Если форма уже открыта, переключаем на нее
-                    child.BringToFront();
-                    return;
-                }
+                var form = new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", red : false);
+                mainForm.OpenForm(form, sender);
             }
-            // Если форма не открыта, создаем новую
-            SpravForAll f = new SpravForAll("spVidProizv", "", "", "Справочник Вид произв");
-            f.MdiParent = this.MdiParent;
-            f.Show();
         }
         // Закрытие формы:
         private void SpravForAll_FormClosing(object sender, FormClosingEventArgs e)
