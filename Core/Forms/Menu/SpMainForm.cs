@@ -13,6 +13,7 @@ using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.Articul;
+using SewingProduction.Features.KnittingProduction.Forms;
 
 namespace SewingProduction
 {
@@ -134,7 +135,7 @@ namespace SewingProduction
         #region Виды браков пряжи
         private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user: _user, servBrok: false), sender);
         }
         #endregion
         #endregion
@@ -244,5 +245,9 @@ namespace SewingProduction
             helpForm.Show();
         }
 
+        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(), sender);
+        }
     }
 }
