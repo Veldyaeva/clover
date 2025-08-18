@@ -25,16 +25,28 @@
     <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\art_new2024.cs">
+    <Compile Update="Features\Articul\Forms\EditAricul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\EditTarif.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\EditFio.cs">
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesUnitLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\editFio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\Fio.cs">
