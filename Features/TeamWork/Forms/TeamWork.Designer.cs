@@ -266,6 +266,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn49 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControl_wdToBind = new CustomGridControl();
             gridView_wdToBind = new GridView();
             gridColumn12 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -350,8 +352,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
-            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn49 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -2718,6 +2718,24 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn11.VisibleIndex = 3;
             gridColumn11.Width = 300;
             // 
+            // gridColumn48
+            // 
+            gridColumn48.Caption = "Сек.";
+            gridColumn48.FieldName = "Sek";
+            gridColumn48.Name = "gridColumn48";
+            gridColumn48.Visible = true;
+            gridColumn48.VisibleIndex = 4;
+            gridColumn48.Width = 57;
+            // 
+            // gridColumn49
+            // 
+            gridColumn49.Caption = "Оборудование";
+            gridColumn49.FieldName = "Obor";
+            gridColumn49.Name = "gridColumn49";
+            gridColumn49.Visible = true;
+            gridColumn49.VisibleIndex = 5;
+            gridColumn49.Width = 150;
+            // 
             // gridControl_wdToBind
             // 
             gridControl_wdToBind.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
@@ -3428,24 +3446,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
-            // 
-            // gridColumn48
-            // 
-            gridColumn48.Caption = "Сек.";
-            gridColumn48.FieldName = "Sek";
-            gridColumn48.Name = "gridColumn48";
-            gridColumn48.Visible = true;
-            gridColumn48.VisibleIndex = 4;
-            gridColumn48.Width = 57;
-            // 
-            // gridColumn49
-            // 
-            gridColumn49.Caption = "Оборудование";
-            gridColumn49.FieldName = "Obor";
-            gridColumn49.Name = "gridColumn49";
-            gridColumn49.Visible = true;
-            gridColumn49.VisibleIndex = 5;
-            gridColumn49.Width = 150;
             // 
             // TeamWork
             // 
