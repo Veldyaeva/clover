@@ -16,6 +16,9 @@
     <Compile Update="Core\Class\CustomControls\CustomGridControlColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -29,6 +32,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\EditAricul.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
