@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SharpProj\sewingproduction-9.0.net\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -23,6 +23,9 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Update="Core\Class\SP_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Core\Forms\TextSplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
@@ -115,9 +118,6 @@
     <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -182,6 +182,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\NormRaszForEconomist.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NormRaszTest.cs">
