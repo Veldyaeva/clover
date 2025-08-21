@@ -1330,66 +1330,134 @@ namespace SewingProduction.Features.Articul.Forms
             loadKodForKompl();
         }
         // В AddNewKopml.cs
+        // Локальная DTO для детальной таблицы (без количества)
+        private class KodRow
+        {
+            public int? kod { get; set; }
+            public string grup { get; set; }
+            public string articul { get; set; }
+            public string mod { get; set; }
+            public string razm { get; set; }
+        }
 
         void loadKodForKompl()
         {
+            // Настройка уровня детальной таблицы
             customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes[0].LevelTemplate = gridViewKomplKod;
 
-            // Настраиваем детальный грид: показываем заголовки и нужные поля
+            // Важно: управляем колонками сами
+            gridViewKomplKod.OptionsBehavior.AutoPopulateColumns = false;
             gridViewKomplKod.Columns.Clear();
             gridViewKomplKod.OptionsView.ShowColumnHeaders = true;
-            gridViewKomplKod.OptionsBehavior.Editable = false;
 
-            // Строим список дочерних строк (по кодам kod1..kod10) с полями Kod/Grup/Articul/Mod/Razm
+            // Колонки (русские заголовки)
+            var cKod = gridViewKomplKod.Columns.AddField(nameof(KodRow.kod));
+            cKod.Caption = "Код";
+            cKod.Visible = true;
+
+            var cGrup = gridViewKomplKod.Columns.AddField(nameof(KodRow.grup));
+            cGrup.Caption = "Группа";
+            cGrup.Visible = true;
+
+            var cArt = gridViewKomplKod.Columns.AddField(nameof(KodRow.articul));
+            cArt.Caption = "Арт.";
+            cArt.Visible = true;
+
+            var cMod = gridViewKomplKod.Columns.AddField(nameof(KodRow.mod));
+            cMod.Caption = "Мод.";
+            cMod.Visible = true;
+
+            var cRazm = gridViewKomplKod.Columns.AddField(nameof(KodRow.razm));
+            cRazm.Caption = "Размер";
+            cRazm.Visible = true;
+
+            // Кэш по коду для быстрых поисков между вызовами событий
+            var cache = new Dictionary<int, SpArticulGrupMenViewModel>();
+
+            SpArticulGrupMenViewModel LookupByKod(int kod)
+            {
+                if (cache.TryGetValue(kod, out var hit))
+                    return hit;
+
+                // Обходим вкладки и их источники данных
+                foreach (DevExpress.XtraTab.XtraTabPage tab in customTabControlKomplRazm.TabPages)
+                {
+                    if (tab.Controls.Count == 0) continue;
+                    if (tab.Controls[0] is not TableLayoutPanel layout) continue;
+
+                    var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                    if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
+                    {
+                        // ищем первый попавшийся элемент по коду
+                        var found = list.FirstOrDefault(x => x.kod == kod);
+                        if (found != null)
+                        {
+                            cache[kod] = found;
+                            return found;
+                        }
+                    }
+                }
+                return null;
+            }
+
+            // Сообщаем гриду, что у каждой строки один "Relation" (если есть что раскрывать)
+            gridViewKompl.MasterRowGetRelationCount += (s, e) =>
+            {
+                var view = s as DevExpress.XtraGrid.Views.Grid.GridView;
+                var row = view?.GetRow(e.RowHandle) as KomplModel;
+                e.RelationCount = HasAnyKod(row) ? 1 : 0;
+            };
+
+            gridViewKompl.MasterRowGetRelationName += (s, e) => e.RelationName = "Коды";
+
+            // Сообщаем, пуста ли детальная коллекция
+            gridViewKompl.MasterRowEmpty += (s, e) =>
+            {
+                var view = s as DevExpress.XtraGrid.Views.Grid.GridView;
+                var row = view?.GetRow(e.RowHandle) as KomplModel;
+                e.IsEmpty = !HasAnyKod(row);
+            };
+
+            // Отдаём саму детальную коллекцию
             gridViewKompl.MasterRowGetChildList += (s, e) =>
             {
                 var view = s as DevExpress.XtraGrid.Views.Grid.GridView;
                 var row = view?.GetRow(e.RowHandle) as KomplModel;
-                if (row == null) return;
+                if (row == null) { e.ChildList = new List<KodRow>(); return; }
 
-                var codes = new List<int>();
-                if (row.kod1.HasValue) codes.Add(row.kod1.Value);
-                if (row.kod2.HasValue) codes.Add(row.kod2.Value);
-                if (row.kod3.HasValue) codes.Add(row.kod3.Value);
-                if (row.kod4.HasValue) codes.Add(row.kod4.Value);
-                if (row.kod5.HasValue) codes.Add(row.kod5.Value);
-                if (row.kod6.HasValue) codes.Add(row.kod6.Value);
-                if (row.kod7.HasValue) codes.Add(row.kod7.Value);
-                if (row.kod8.HasValue) codes.Add(row.kod8.Value);
-                if (row.kod9.HasValue) codes.Add(row.kod9.Value);
-                if (row.kod10.HasValue) codes.Add(row.kod10.Value);
+                var child = new List<KodRow>();
 
-                // Берём карточки по кодам из уже загруженного списка articuls
-                var map = (articuls ?? new List<ArticulModel>())
-                    .ToDictionary(a => a.kod, a => a, EqualityComparer<int>.Default);
-
-                var childRows = new List<dynamic>();
-                foreach (var k in codes.Distinct())
+                void add(int? k)
                 {
-                    if (map.TryGetValue(k, out var a))
+                    if (!k.HasValue) return;                 // null — пропускаем
+                    var info = LookupByKod(k.Value);         // ищем данные по коду среди уже загруженных списков
+                    child.Add(new KodRow
                     {
-                        childRows.Add(new
-                        {
-                            kod = k,
-                            a.grup,
-                            a.articul,
-                            a.mod,
-                            a.razm
-                        });
-                    }
-                    else
-                    {
-                        // если кода нет в кэше articuls, покажем только код
-                        childRows.Add(new { Kod = k, Grup = "", Articul = "", Mod = "", Razm = "" });
-                    }
+                        kod = k,
+                        grup = info?.grup,
+                        articul = info?.articul,
+                        mod = info?.mod,
+                        razm = info?.razm
+                    });
                 }
 
-                e.ChildList = childRows;
+                add(row.kod1); add(row.kod2); add(row.kod3); add(row.kod4); add(row.kod5);
+                add(row.kod6); add(row.kod7); add(row.kod8); add(row.kod9); add(row.kod10);
+
+                // ВАЖНО: не убираем дубликаты — пусть одинаковые коды идут отдельными строками
+                e.ChildList = child;
             };
 
-            gridViewKompl.MasterRowGetRelationCount += (s, e) => e.RelationCount = 1;
-            gridViewKompl.MasterRowGetRelationName += (s, e) => e.RelationName = "Коды";
+            // Раскрыть нужный комплект, если он задан
+            int handle = gridViewKompl.LocateByValue("kod_k", Convert.ToInt32(xkod));
+            if (handle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
+                gridViewKompl.ExpandMasterRow(handle);
+
+            // Локальная проверка наличия хотя бы одного кода
+            static bool HasAnyKod(KomplModel r) =>
+                r != null && (r.kod1.HasValue || r.kod2.HasValue || r.kod3.HasValue || r.kod4.HasValue || r.kod5.HasValue ||
+                              r.kod6.HasValue || r.kod7.HasValue || r.kod8.HasValue || r.kod9.HasValue || r.kod10.HasValue);
         }
 
         #endregion
