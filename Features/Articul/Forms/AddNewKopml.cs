@@ -21,6 +21,7 @@ using SewingProduction.form;
 using SewingProduction.Features.Articul;
 using DevExpress.XtraGrid;
 using DevExpress.XtraVerticalGrid;
+using DevExpress.XtraGrid.Columns;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -1114,65 +1115,213 @@ namespace SewingProduction.Features.Articul.Forms
                 customButtonKompl.Enabled = false;
 
         }
+        private static void ClearKodSlots(KomplModel k)
+        {
+            k.kod1 = k.kod2 = k.kod3 = k.kod4 = k.kod5 =
+            k.kod6 = k.kod7 = k.kod8 = k.kod9 = k.kod10 = null;
+        }
+
+        private static void SetKodByIndex(KomplModel k, int idx, int kod)
+        {
+            switch (idx)
+            {
+                case 0: k.kod1 = kod; break;
+                case 1: k.kod2 = kod; break;
+                case 2: k.kod3 = kod; break;
+                case 3: k.kod4 = kod; break;
+                case 4: k.kod5 = kod; break;
+                case 5: k.kod6 = kod; break;
+                case 6: k.kod7 = kod; break;
+                case 7: k.kod8 = kod; break;
+                case 8: k.kod9 = kod; break;
+                case 9: k.kod10 = kod; break;
+            }
+        }
+
+        /// Разворачиваем список выбранных по countStr в «плоский» список кодов (макс. 10)
+        private static List<int> BuildFlatCodesByCountStr(IEnumerable<SpArticulGrupMenViewModel> items)
+        {
+            var flat = new List<int>(10);
+            foreach (var it in items)
+            {
+                int times = it.countStr > 0 ? it.countStr : 1;
+                for (int r = 0; r < times && flat.Count < 10; r++)
+                    if (it.kod > 0) flat.Add(it.kod);
+                if (flat.Count >= 10) break;
+            }
+            return flat;
+        }
+
+        /// Заполняем kod1..kod10 из списка кодов
+        private static void FillKodSlots(KomplModel k, IList<int> codes)
+        {
+            ClearKodSlots(k);
+            int n = Math.Min(10, codes.Count);
+            for (int i = 0; i < n; i++)
+                SetKodByIndex(k, i, codes[i]);
+        }
+
         private async void customButtonKompl_Click(object sender, EventArgs e)
         {
-            if (!customCheckBoxVerified.Checked) return;
+            if (!customCheckBoxVerified.Checked)
+                return;
 
-            var leftData = gridViewKomplRazm?.DataSource as List<SpArticulGrupMenViewModel>;
-            if (leftData == null || leftData.Count == 0)
+            var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
+            if (razmList == null || razmList.Count == 0)
             {
-                MessageBox.Show("Нет данных по размерам.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Нет данных артикула для комплектования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var service = new KomplDataService();
-            int repeat = Math.Max(1, (int)customNumericUpDownValueTab.Value);
+            var komplService = new KomplDataService();
 
-            //НЕ GetFocusedRow а у нас есть галочки в repositoryItemCheckEditViborRazm по ним формируем список
-            var header = gridViewKomplRazm.GetFocusedRow() as SpArticulGrupMenViewModel;
-            if (header == null)
+            // =========================
+            // НЕ АВТОРАЗМЕР — одна галочка слева, один комплект
+            // =========================
+            if (!customCheckBoxAutoRazm.Checked)
             {
-                MessageBox.Show("Не выбран размер в левом списке.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                var selectedLeft = razmList.Where(x => x.pr_po).ToList();
+                if (selectedLeft.Count != 1)
+                {
+                    MessageBox.Show("Выберите слева ровно один размер (одна галочка).", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var mainItem = selectedLeft[0];
+                if (mainItem.kod == null || mainItem.kod == 0)
+                {
+                    MessageBox.Show("Код комплекта не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Берём внизу в том порядке, как они отображаются, и разворачиваем по countStr
+                var flatCodes = BuildFlatCodesByCountStr(_selectedKomplItems);
+                if (flatCodes.Count == 0)
+                {
+                    MessageBox.Show("Нет выбранных позиций для комплекта.", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                var kompl = new KomplModel
+                {
+                    kod_k = mainItem.kod,
+                    grup_k = mainItem.grup,
+                    articul_k = mainItem.articul,
+                    mod_k = mainItem.mod,
+                    razm_k = mainItem.razm,
+                    sost_k = mainItem.sost,
+                    compName = Environment.MachineName
+                };
+                FillKodSlots(kompl, flatCodes);
+
+                if (await komplService.ExistsExactAsync(kompl))
+                {
+                    var result = MessageBox.Show("Комплект уже существует. Перезаписать?",
+                        "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.Yes) return;
+
+                    await komplService.DeleteAsync(kompl);
+                }
+
+                await komplService.SaveAsync(kompl);
+                MessageBox.Show("Комплект успешно сохранён.", "Готово",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Очистка
+                _selectedKomplItems.Clear();
+                customGridControlKomplSelected.DataSource = _selectedKomplItems;
+                customGridControlKomplSelected.RefreshDataSource();
+                customCheckBoxVerified.Checked = false;
+
+                // Снимаем галочки и чистим вкладки
+                foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+                {
+                    if (tab.Controls.Count == 0 || tab.Controls[0] is not TableLayoutPanel layout) continue;
+                    var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                    if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
+                    {
+                        foreach (var row in list) row.pr_po = false;
+                        list.Clear();
+                        grid.RefreshDataSource();
+                    }
+                }
+                foreach (var r in razmList) r.pr_po = false;
+                gridViewKomplRazm.RefreshData();
+
+                await loadKomplByArticul(komplService, kompl.articul_k);
+                customNumericUpDownValueTab.Value = 0;
                 return;
             }
 
-            var model = new KomplModel
+            // =========================
+            // АВТОРАЗМЕР — несколько галочек слева → по записи на каждую галочку
+            // =========================
+            var selectedAuto = razmList.Where(x => x.pr_po).ToList();
+            if (selectedAuto.Count == 0)
             {
-                kod_k = header.kod,
-                grup_k = header.grup,
-                articul_k = header.articul,
-                mod_k = header.mod,
-                razm_k = header.razm,
-                sost_k = header.sost,
-                compName = Environment.MachineName
-            };
-
-            //еще надо заполнять kod1 kod2 и другие их взять из customGridControlKomplSelected 
-            //в нем сгруппировано по размеру, один размер это одна model, в модель входят коды
-
-            if (await service.ExistsExactAsync(model))
-            {
-                var ans = MessageBox.Show(
-                    "Точно такой же комплект уже существует. Создать дубль?",
-                    "Дубликат", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (ans != DialogResult.Yes) return;
+                MessageBox.Show("Не выбраны общие размеры (галочки слева).", "Ошибка",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            //await service.SaveAsync(model);
-            //MessageBox.Show("Комплект сохранён.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            int saved = 0;
 
+            foreach (var leftRow in selectedAuto)
+            {
+                var keyRazmAll = (leftRow.razm_all ?? "").Trim();
+                if (string.IsNullOrEmpty(keyRazmAll)) continue;
+
+                // Фильтруем нижние выбранные по razm_all, разворачиваем по countStr в плоский список кодов
+                var flatCodes = BuildFlatCodesByCountStr(
+                    _selectedKomplItems.Where(x =>
+                        string.Equals((x.razm_all ?? "").Trim(), keyRazmAll, StringComparison.OrdinalIgnoreCase) &&
+                        x.pr_po && x.kod > 0));
+
+                if (flatCodes.Count == 0)
+                    continue;
+
+                var kompl = new KomplModel
+                {
+                    kod_k = leftRow.kod,
+                    grup_k = leftRow.grup,
+                    articul_k = leftRow.articul,
+                    mod_k = leftRow.mod,
+                    razm_k = leftRow.razm,       // раздельный размер из левого списка
+                    sost_k = leftRow.sost,
+                    compName = Environment.MachineName
+                };
+                FillKodSlots(kompl, flatCodes);
+
+                if (await komplService.ExistsExactAsync(kompl))
+                {
+                    var result = MessageBox.Show(
+                        $"Комплект по razm_all='{keyRazmAll}' уже существует. Перезаписать?",
+                        "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result != DialogResult.Yes) continue;
+
+                    await komplService.DeleteAsync(kompl);
+                }
+
+                await komplService.SaveAsync(kompl);
+                saved++;
+            }
+
+            MessageBox.Show(saved > 0
+                ? $"Сохранено комплектов: {saved}."
+                : "Нет данных для сохранения по выбранным размерам.",
+                "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Сброс после авто режима
             _selectedKomplItems.Clear();
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
             customGridControlKomplSelected.RefreshDataSource();
             customCheckBoxVerified.Checked = false;
 
-            if (customCheckBoxAutoRazm.Checked)
-            {
-                foreach (var r in leftData) r.pr_po = false;
-                gridViewKomplRazm.RefreshData();
-            }
+            foreach (var r in razmList) r.pr_po = false;
+            gridViewKomplRazm.RefreshData();
         }
-
 
         async Task loadKomplByArticul(KomplDataService komplService, string articul_k)
         {
@@ -1180,50 +1329,69 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlKompl.RefreshDataSource();
             loadKodForKompl();
         }
+        // В AddNewKopml.cs
+
         void loadKodForKompl()
         {
             customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes[0].LevelTemplate = gridViewKomplKod;
 
+            // Настраиваем детальный грид: показываем заголовки и нужные поля
             gridViewKomplKod.Columns.Clear();
-            //gridViewKomplKod.OptionsView.ShowViewCaption = false;
-            gridViewKomplKod.OptionsView.ShowColumnHeaders = false;
+            gridViewKomplKod.OptionsView.ShowColumnHeaders = true;
+            gridViewKomplKod.OptionsBehavior.Editable = false;
 
-            var col = gridViewKomplKod.Columns.AddField("Kod");
-            col.Caption = "Код";
-            col.Visible = true;
-            col.UnboundType = DevExpress.Data.UnboundColumnType.String;
-
+            // Строим список дочерних строк (по кодам kod1..kod10) с полями Kod/Grup/Articul/Mod/Razm
             gridViewKompl.MasterRowGetChildList += (s, e) =>
             {
-                var view = s as GridView;
-                var row = view.GetRow(e.RowHandle) as KomplModel;
+                var view = s as DevExpress.XtraGrid.Views.Grid.GridView;
+                var row = view?.GetRow(e.RowHandle) as KomplModel;
                 if (row == null) return;
 
-                var kodList = new List<dynamic>();
+                var codes = new List<int>();
+                if (row.kod1.HasValue) codes.Add(row.kod1.Value);
+                if (row.kod2.HasValue) codes.Add(row.kod2.Value);
+                if (row.kod3.HasValue) codes.Add(row.kod3.Value);
+                if (row.kod4.HasValue) codes.Add(row.kod4.Value);
+                if (row.kod5.HasValue) codes.Add(row.kod5.Value);
+                if (row.kod6.HasValue) codes.Add(row.kod6.Value);
+                if (row.kod7.HasValue) codes.Add(row.kod7.Value);
+                if (row.kod8.HasValue) codes.Add(row.kod8.Value);
+                if (row.kod9.HasValue) codes.Add(row.kod9.Value);
+                if (row.kod10.HasValue) codes.Add(row.kod10.Value);
 
-                if (row.kod1.HasValue) kodList.Add(new { Kod = row.kod1.Value.ToString() });
-                if (row.kod2.HasValue) kodList.Add(new { Kod = row.kod2.Value.ToString() });
-                if (row.kod3.HasValue) kodList.Add(new { Kod = row.kod3.Value.ToString() });
-                if (row.kod4.HasValue) kodList.Add(new { Kod = row.kod4.Value.ToString() });
-                if (row.kod5.HasValue) kodList.Add(new { Kod = row.kod5.Value.ToString() });
-                if (row.kod6.HasValue) kodList.Add(new { Kod = row.kod6.Value.ToString() });
-                if (row.kod7.HasValue) kodList.Add(new { Kod = row.kod7.Value.ToString() });
-                if (row.kod8.HasValue) kodList.Add(new { Kod = row.kod8.Value.ToString() });
-                if (row.kod9.HasValue) kodList.Add(new { Kod = row.kod9.Value.ToString() });
-                if (row.kod10.HasValue) kodList.Add(new { Kod = row.kod10.Value.ToString() });
+                // Берём карточки по кодам из уже загруженного списка articuls
+                var map = (articuls ?? new List<ArticulModel>())
+                    .ToDictionary(a => a.kod, a => a, EqualityComparer<int>.Default);
 
-                e.ChildList = kodList;
+                var childRows = new List<dynamic>();
+                foreach (var k in codes.Distinct())
+                {
+                    if (map.TryGetValue(k, out var a))
+                    {
+                        childRows.Add(new
+                        {
+                            kod = k,
+                            a.grup,
+                            a.articul,
+                            a.mod,
+                            a.razm
+                        });
+                    }
+                    else
+                    {
+                        // если кода нет в кэше articuls, покажем только код
+                        childRows.Add(new { Kod = k, Grup = "", Articul = "", Mod = "", Razm = "" });
+                    }
+                }
+
+                e.ChildList = childRows;
             };
 
             gridViewKompl.MasterRowGetRelationCount += (s, e) => e.RelationCount = 1;
             gridViewKompl.MasterRowGetRelationName += (s, e) => e.RelationName = "Коды";
-            int handle = gridViewKompl.LocateByValue("kod_k", Convert.ToInt32(xkod));
-            if (handle != DevExpress.XtraGrid.GridControl.InvalidRowHandle)
-            {
-                gridViewKompl.ExpandMasterRow(handle);
-            }
         }
+
         #endregion
     }
 }
