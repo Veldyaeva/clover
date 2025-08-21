@@ -422,10 +422,12 @@ namespace SewingProduction.Features.Articul.Forms
                     else _selectedKomplItems.Remove(agg);
                 }
 
+
                 _tabSelection.Remove(tabIndex);
                 customGridControlKomplSelected.RefreshDataSource();
                 return;
             }
+
 
             // Установка новой
             foreach (var item in data) item.pr_po = false;
@@ -454,6 +456,23 @@ namespace SewingProduction.Features.Articul.Forms
 
             _tabSelection[tabIndex] = (selected.kod, selected.razm);
             customGridControlKomplSelected.RefreshDataSource();
+
+            if (!xAutoRazm && !xAllZap)
+                // Переход на следующую незаполненную вкладку
+                for (int i = 0; i < customTabControlKomplRazm.TabPages.Count; i++)
+                {
+                    var tab = customTabControlKomplRazm.TabPages[i];
+                    if (tab.Controls[0] is not TableLayoutPanel layout)
+                        continue;
+                    var nextGrid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                    if (nextGrid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list)
+                        continue;
+                    if (!list.Any(x => x.pr_po))
+                    {
+                        customTabControlKomplRazm.SelectedTabPageIndex = i;
+                        break;
+                    }
+                }
         }
 
         private void customButtonNext_Click(object sender, EventArgs e)
@@ -613,6 +632,45 @@ namespace SewingProduction.Features.Articul.Forms
         //Button on TabPage
         void RemoveButtonClick(Object s, CustomGridControl grid)
         {
+            if (xAllZap)
+            {
+                // 1) очищаем выбранные элементы (нижний грид)
+                _selectedKomplItems.Clear();
+                customGridControlKomplSelected.DataSource = _selectedKomplItems;
+                customGridControlKomplSelected.RefreshDataSource();
+
+                // 2) сбрасываем чек "проверено"
+                customCheckBoxVerified.Checked = false;
+
+                // 3) Сбрасываем pr_po и очищаем списки на КАЖДОЙ вкладке
+                foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+                {
+                    if (tab.Controls.Count == 0) continue;
+                    if (tab.Controls[0] is not TableLayoutPanel layout) continue;
+
+                    var pageGrid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                    if (pageGrid?.DataSource is BindingList<SpArticulGrupMenViewModel> pageList)
+                    {
+                        foreach (var item in pageList)
+                            item.pr_po = false;
+
+                        pageList.Clear();
+                        pageGrid.RefreshDataSource();
+                    }
+                }
+
+                // 4) дополнительно (если нужно) снять галочки слева в общем списке размеров
+                //    чтобы «авторазмер» тоже сбросился визуально
+                var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
+                if (razmList != null)
+                {
+                    foreach (var r in razmList) r.pr_po = false;
+                    gridViewKomplRazm?.RefreshData();
+                }
+
+                return;
+            }
+
             var list = grid.DataSource as BindingList<SpArticulGrupMenViewModel>;
             if (list == null || list.Count == 0) return;
 
@@ -644,6 +702,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             // Очищаем грид этой вкладки
             list.Clear();
+
         }
 
         // Button on customGridControlKomplSelected — удаление выбранной строки
@@ -655,7 +714,7 @@ namespace SewingProduction.Features.Articul.Forms
             var selected = viewSel.GetFocusedRow() as SpArticulGrupMenViewModel;
             if (selected == null) return;
 
-            // 🔹 РЕЖИМ АВТОРАЗМЕР: снимаем флажок в ЛЕВОМ гриде (по razm_all) и перестраиваем всё автоматически
+            // РЕЖИМ АВТОРАЗМЕР
             if (xAutoRazm)
             {
                 // найти в левом гриде запись с тем же razm_all и снять pr_po
@@ -679,7 +738,6 @@ namespace SewingProduction.Features.Articul.Forms
                 return;
             }
 
-            // 🔹 ОБЫЧНЫЙ РЕЖИМ: твоя прежняя логика — удаляем из нижнего и снимаем на конкретной вкладке
             _selectedKomplItems.Remove(selected);
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
 
