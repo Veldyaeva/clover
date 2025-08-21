@@ -13,9 +13,12 @@ namespace SewingProduction.Features.Articul.Models
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
+        public int countStr { get; set; } = 1;
 
         [NotMapped]
         public string po = " ";
+        [NotMapped]
+        public string razm_all { get; set; }
 
         private bool _pr_po;
         public bool pr_po

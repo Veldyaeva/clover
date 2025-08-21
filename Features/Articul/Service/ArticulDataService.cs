@@ -39,5 +39,10 @@ namespace SewingProduction.Features.Articul.Service
         {
             await _dbService.DeleteEntityAsync("sp_articul", "Kod", model);
         }
+        public async Task<string> GetAllRazmByRazmAsync(string Razm)
+        {
+            string query = "SELECT Razm_all FROM Razm WHERE Razm = @Razm";
+            return await _dbService.GetEntityAsync<string>(query, new { Razm });
+        }
     }
 }
