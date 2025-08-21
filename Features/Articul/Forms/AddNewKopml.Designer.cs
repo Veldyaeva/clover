@@ -46,6 +46,7 @@
             gridColumnArticul = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnMod = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumnRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumnCount = new DevExpress.XtraGrid.Columns.GridColumn();
             customGridControlKompl = new Core.Class.CustomGridControl();
             gridViewKompl = new DevExpress.XtraGrid.Views.Grid.GridView();
             GrupKompl = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -149,7 +150,7 @@
             // 
             // gridViewKomplKod
             // 
-            gridViewKomplKod.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnKod, gridColumnGrup, gridColumnArticul, gridColumnMod, gridColumnRazm });
+            gridViewKomplKod.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumnKod, gridColumnGrup, gridColumnArticul, gridColumnMod, gridColumnRazm, gridColumnCount });
             gridViewKomplKod.GridControl = customGridControlKompl;
             gridViewKomplKod.Name = "gridViewKomplKod";
             gridViewKomplKod.OptionsBehavior.Editable = false;
@@ -166,6 +167,7 @@
             // gridColumnGrup
             // 
             gridColumnGrup.Caption = "группа";
+            gridColumnGrup.FieldName = "grup";
             gridColumnGrup.Name = "gridColumnGrup";
             gridColumnGrup.Visible = true;
             gridColumnGrup.VisibleIndex = 1;
@@ -173,6 +175,7 @@
             // gridColumnArticul
             // 
             gridColumnArticul.Caption = "артикул";
+            gridColumnArticul.FieldName = "articul";
             gridColumnArticul.Name = "gridColumnArticul";
             gridColumnArticul.Visible = true;
             gridColumnArticul.VisibleIndex = 2;
@@ -180,6 +183,7 @@
             // gridColumnMod
             // 
             gridColumnMod.Caption = "мод.";
+            gridColumnMod.FieldName = "mod";
             gridColumnMod.Name = "gridColumnMod";
             gridColumnMod.Visible = true;
             gridColumnMod.VisibleIndex = 3;
@@ -187,9 +191,18 @@
             // gridColumnRazm
             // 
             gridColumnRazm.Caption = "размер";
+            gridColumnRazm.FieldName = "razm";
             gridColumnRazm.Name = "gridColumnRazm";
             gridColumnRazm.Visible = true;
             gridColumnRazm.VisibleIndex = 4;
+            // 
+            // gridColumnCount
+            // 
+            gridColumnCount.Caption = "кол-во";
+            gridColumnCount.FieldName = "countstr";
+            gridColumnCount.Name = "gridColumnCount";
+            gridColumnCount.Visible = true;
+            gridColumnCount.VisibleIndex = 5;
             // 
             // customGridControlKompl
             // 
@@ -683,7 +696,7 @@
             customLabelGrup.AutoSize = true;
             tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
             customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGrup.Font = new System.Drawing.Font("Arial", 612F, System.Drawing.FontStyle.Bold);
+            customLabelGrup.Font = new System.Drawing.Font("Arial", 672F, System.Drawing.FontStyle.Bold);
             customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrup.Location = new System.Drawing.Point(3, 0);
             customLabelGrup.Name = "customLabelGrup";
@@ -1232,5 +1245,6 @@
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand Razm_All1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn count;
         private Core.Class.CustomButton customButtonClearFilter;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCount;
     }
 }
