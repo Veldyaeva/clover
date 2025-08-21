@@ -29,9 +29,12 @@ namespace SewingProduction.Features.Articul.Forms
         ArticulDataService _articulDataService = new ArticulDataService();
         GrupMenDataService _grupMenDataService = new GrupMenDataService();
         private BindingList<SpArticulGrupMenViewModel> _selectedRazmItems = new();
+        public BindingList<KomplModel> _previewKompls = new();
         List<ArticulModel> articuls;
-        string xkod;
+        string xkod; //код комплекта
         bool xFlagKod = false;
+        bool xAutoRazm = false; //галочка авторазмер
+        bool xAllZap = false; //галочка все записи одинаковые
 
         public AddNewKopml(UserClass user, List<ArticulModel> articuls, string kod) : base(user)
         {
@@ -71,7 +74,10 @@ namespace SewingProduction.Features.Articul.Forms
                              pr_po = false
                          };
 
-            customGridControlKomplArt.DataSource = result.ToList();
+            var resultList = result.ToList();
+            await FillRazmAllAsync(resultList);
+            customGridControlKomplArt.DataSource = resultList;
+
 
             var resulRazm = from a in articuls
                             where a.kod.ToString().PadLeft(7, '0').Substring(0, 7) == xkod.Substring(0, 7)
@@ -91,7 +97,9 @@ namespace SewingProduction.Features.Articul.Forms
                                 po = " ",
                                 pr_po = false
                             };
-            customGridControlKomplRazm.DataSource = resulRazm.ToList();
+            var resulRazmList = resulRazm.ToList();
+            await FillRazmAllAsync(resulRazmList); // 🔹 заполняем razm_all
+            customGridControlKomplRazm.DataSource = resulRazmList;
 
             var firstRazm = resulRazm.FirstOrDefault();
             if (firstRazm != null)
@@ -108,25 +116,52 @@ namespace SewingProduction.Features.Articul.Forms
                 if (int.TryParse(xkod, out var val))
                 {
                     int h = gridViewKomplRazm.LocateByValue("kod", val);
-                    if (h >= 0) 
-                    { 
-                        gridViewKomplRazm.FocusedRowHandle = h; 
+                    if (h >= 0)
+                    {
+                        gridViewKomplRazm.FocusedRowHandle = h;
                         gridViewKomplRazm.MakeRowVisible(h);
                         xFlagKod = true;
                     }
                 }
             }));
         }
-        private void gridViewKomplRazm_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        // галочка Авторазмер
+        private void customCheckBoxAutoRazm_CheckedChanged(object sender, EventArgs e)
         {
-            if (xFlagKod)
-                xkod = gridViewKomplRazm.GetFocusedRowCellValue("kod").ToString().Trim();
+            xAutoRazm = customCheckBoxAutoRazm.Checked;
+
+            // Сброс значений
             customNumericUpDownValueTab.Value = 0;
-            customLabelKodText.Text = xkod;
-            customLabelRazmText.Text = gridViewKomplRazm.GetFocusedRowCellValue("razm").ToString().Trim();
-            customLabelGrupKompl.Text = gridViewKomplRazm.GetFocusedRowCellValue("grup").ToString().Trim();
+            customButtonKompl.Enabled = false;
+            customCheckBoxVerified.Checked = false;
+
+            if (gridViewKomplRazm?.DataSource is not List<SpArticulGrupMenViewModel> data)
+                return;
+
+            foreach (var item in data)
+                item.pr_po = false;
+
+            gridViewKomplRazm.RefreshData();
+
+            // В ЛЮБОМ режиме колонка pr_po остаётся редактируемой
+            var col = gridViewKomplRazm.Columns["pr_po"];
+            if (col != null)
+                col.OptionsColumn.AllowEdit = true;
+
+            ApplyGroupingByRazmAll(xAutoRazm ? true : false);
         }
+
+        //галочка все записи одинковые 
+        private void customCheckBoxOdinak_CheckedChanged(object sender, EventArgs e)
+        {
+            xAllZap = customCheckBoxOdinak.Checked;
+            customNumericUpDownValueTab.Value = 0;
+            customButtonKompl.Enabled = false;
+            customCheckBoxVerified.Checked = false;
+        }
+
         #region TabPage
+        //выбор количества страниц
         private void customNumericUpDownValueTab_ValueChanged(object sender, EventArgs e)
         {
             int count = (int)customNumericUpDownValueTab.Value;
@@ -146,16 +181,18 @@ namespace SewingProduction.Features.Articul.Forms
             customCheckBoxVerified.Checked = false;
             customButtonKompl.Enabled = false;
         }
+        //создание вкладок
         private void CreateKomplRazmTabPage(int index)
         {
-            // Создаём вкладку
+            // создаем страницу
             var tabPage = new XtraTabPage
             {
                 Name = $"xtraTabPageKomplRazm{index}",
-                Text = $"{index}"
+                Text = $"{index}",
             };
-
-            // Таблица внутри вкладки
+            if (xAllZap)
+                tabPage.PageVisible = index > 1 ? false : true;
+            // Таблица внутри страницы
             var layout = new TableLayoutPanel
             {
                 Dock = DockStyle.Fill,
@@ -183,7 +220,6 @@ namespace SewingProduction.Features.Articul.Forms
             layout.Controls.Add(removeButton, 1, 0);
             removeButton.Click += (s, e) => RemoveButtonClick(s, grid);
 
-
             // Создаём GridView
             var view = new DevExpress.XtraGrid.Views.Grid.GridView(grid);
             grid.MainView = view;
@@ -198,6 +234,12 @@ namespace SewingProduction.Features.Articul.Forms
             view.Columns.AddVisible("kod", "Код");
             view.Columns.AddVisible("razm", "Размер");
             view.Columns.AddVisible("kle", "ТМ");
+            view.Columns.AddVisible("razm_all", "Основной Размер");
+
+            //view.OptionsBehavior.Editable = false; 
+            foreach (var col in view.Columns.Cast<DevExpress.XtraGrid.Columns.GridColumn>())
+                col.OptionsColumn.AllowEdit = false;
+            //col.OptionsColumn.AllowEdit = col.FieldName == "pr_po" ? true : false;
 
             // Колонка выбора (pr_po)
             var checkColumn = new DevExpress.XtraGrid.Columns.GridColumn
@@ -206,6 +248,7 @@ namespace SewingProduction.Features.Articul.Forms
                 FieldName = "pr_po",
                 Visible = true
             };
+            checkColumn.OptionsColumn.AllowEdit = !xAutoRazm;
 
             var checkEdit = new DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit
             {
@@ -230,102 +273,187 @@ namespace SewingProduction.Features.Articul.Forms
 
         private BindingList<SpArticulGrupMenViewModel> _selectedKomplItems = new();
 
-        //private void AddToKomplSelected(SpArticulGrupMenViewModel selected)
-        //{
-        //    // 1. Удаляем старую выбранную строку с той же вкладки (по TabIndex)
-        //    var existing = _selectedKomplItems
-        //        .FirstOrDefault(x => x.TabIndex == selected.TabIndex);
+        // карта выбранного на вкладках: tabIndex -> (kod, razm)
+        private readonly Dictionary<int, (int kod, string razm)> _tabSelection = new();
 
-        //    if (existing != null)
-        //    {
-        //        _selectedKomplItems.Remove(existing);
-        //    }
-
-        //    // 2. Добавляем новую строку
-        //    _selectedKomplItems.Add(selected);
-        //    customGridControlKomplSelected.DataSource = _selectedKomplItems;
-        //}
-
-        // Расстановка галочек
-        void CheckEditValueChanged(Object s, CustomGridControl grid)
+        private void CheckEditValueChanged(object sender, CustomGridControl grid)
         {
             customCheckBoxVerified.Checked = false;
 
-            var editor = s as DevExpress.XtraEditors.CheckEdit;
-            var gridView = grid.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
-            if (gridView == null || editor == null) return;
+            var editor = sender as DevExpress.XtraEditors.CheckEdit; // нужен, чтобы понять — сняли или поставили
+            var view = grid?.MainView as DevExpress.XtraGrid.Views.Grid.GridView;
+            if (view == null || view.FocusedRowHandle < 0) return;
 
-            var selected = gridView.GetFocusedRow() as SpArticulGrupMenViewModel;
+            var selected = view.GetRow(view.FocusedRowHandle) as SpArticulGrupMenViewModel;
             if (selected == null) return;
 
-            var data = grid.DataSource as BindingList<SpArticulGrupMenViewModel>;
-            if (data == null) return;
+            if (grid.DataSource is not BindingList<SpArticulGrupMenViewModel> data) return;
 
-            // Получаем текущий TabIndex
-            var parentTab = customTabControlKomplRazm.TabPages
-                .FirstOrDefault(tab => tab.Controls[0].Controls.Contains(grid));
-            if (parentTab == null) return;
+            int tabIndex = customTabControlKomplRazm.SelectedTabPageIndex;
 
-            int tabIndex = customTabControlKomplRazm.TabPages.IndexOf(parentTab);
+            bool wasChecked = selected.pr_po;
+            bool newChecked = editor?.Checked ?? !wasChecked; // если нет editor — считаем, что клик инвертирует
 
-            // Если галочка уже стояла — считаем это снятием
-            if (selected.pr_po)
+            // ===== 1) АВТО + ОДИНАКОВО =====
+            if (xAutoRazm && xAllZap)
             {
-                selected.pr_po = false;
+                // Обычно ручной клик в табах при авторазмере блокируется.
+                // Если всё же пришёл — трактуем как выбор образца: одна строка внизу, количество = вкладки * галочки слева.
+                int tabsCount = (int)customNumericUpDownValueTab.Value;
+                int checkedCount = 0;
+                for (int i = 0; i < gridViewKomplRazm.RowCount; i++)
+                    if (gridViewKomplRazm.GetRow(i) is SpArticulGrupMenViewModel r && r.pr_po)
+                        checkedCount++;
+                if (checkedCount <= 0) checkedCount = 1;
 
-                // Удаляем из выбранных только по TabIndex
-                var toRemove = _selectedKomplItems
-                    .FirstOrDefault(x => x.TabIndex == tabIndex);
+                _selectedKomplItems.Clear();
+                _selectedKomplItems.Add(new SpArticulGrupMenViewModel
+                {
+                    kod = selected.kod,
+                    grup = selected.grup,
+                    articul = selected.articul,
+                    mod = selected.mod,
+                    razm = selected.razm,
+                    razm_all = selected.razm_all,
+                    sost = selected.sost,
+                    kod_v = selected.kod_v,
+                    kle = selected.kle,
+                    po = selected.po,
+                    pr_po = true,
+                    GrupMen = selected.GrupMen,
+                    TabIndex = 0,
+                    countStr = tabsCount * checkedCount
+                });
 
-                if (toRemove != null)
-                    _selectedKomplItems.Remove(toRemove);
-
-                grid.MainView.RefreshData();
-                customGridControlKomplSelected.DataSource = _selectedKomplItems;
                 customGridControlKomplSelected.RefreshDataSource();
-
                 return;
             }
 
-            // Иначе — это установка новой галочки
+            // ===== 2) АВТО + РАЗНЫЕ =====
+            if (xAutoRazm && !xAllZap)
+            {
+                // В авторазмере обычно табы нередактируемые; но если клик прошёл — агрегируем по (kod, razm)
+                selected.pr_po = newChecked;
+                selected.TabIndex = tabIndex;
 
-            // Снимаем все галочки в текущем гриде
-            foreach (var item in data)
-                item.pr_po = false;
+                var agg = _selectedKomplItems.FirstOrDefault(x => x.kod == selected.kod && x.razm == selected.razm);
+                if (newChecked)
+                {
+                    if (agg != null) agg.countStr += 1;
+                    else { selected.countStr = 1; _selectedKomplItems.Add(selected); }
+                }
+                else
+                {
+                    if (agg != null)
+                    {
+                        if (agg.countStr > 1) agg.countStr -= 1;
+                        else _selectedKomplItems.Remove(agg);
+                    }
+                }
 
+                view.RefreshData();
+                customGridControlKomplSelected.RefreshDataSource();
+                return;
+            }
+
+            // ===== 3) НЕ АВТО + ОДИНАКОВО =====
+            if (!xAutoRazm && xAllZap)
+            {
+                // Здесь как раз твой кейс: при СНЯТИИ галочки строка внизу должна пропасть.
+                if (wasChecked && !newChecked)
+                {
+                    // Снятие: просто убираем выбор и чистим низ
+                    selected.pr_po = false;
+                    view.RefreshData();
+
+                    _selectedKomplItems.Clear();
+                    customGridControlKomplSelected.RefreshDataSource();
+
+                    _tabSelection.Remove(tabIndex);
+                    return;
+                }
+
+                // Установка: на странице ровно одна галочка, одна строка с количеством = числу вкладок
+                foreach (var item in data) item.pr_po = false;
+                selected.pr_po = true;
+                selected.TabIndex = tabIndex;
+                view.RefreshData();
+
+                int tabsCount = (int)customNumericUpDownValueTab.Value;
+
+                _selectedKomplItems.Clear();
+                _selectedKomplItems.Add(new SpArticulGrupMenViewModel
+                {
+                    kod = selected.kod,
+                    grup = selected.grup,
+                    articul = selected.articul,
+                    mod = selected.mod,
+                    razm = selected.razm,
+                    razm_all = selected.razm_all,
+                    sost = selected.sost,
+                    kod_v = selected.kod_v,
+                    kle = selected.kle,
+                    po = selected.po,
+                    pr_po = true,
+                    GrupMen = selected.GrupMen,
+                    TabIndex = 0,
+                    countStr = tabsCount
+                });
+
+                _tabSelection[tabIndex] = (selected.kod, selected.razm);
+                customGridControlKomplSelected.RefreshDataSource();
+                return;
+            }
+
+            // ===== 4) НЕ АВТО + РАЗНЫЕ =====
+            // На странице можно выбрать максимум одну строку.
+            if (wasChecked && !newChecked)
+            {
+                // Снятие текущего выбора этой вкладки
+                selected.pr_po = false;
+                view.RefreshData();
+
+                // Уменьшаем агрегат у пары, снятой на этой вкладке
+                var agg = _selectedKomplItems.FirstOrDefault(x => x.kod == selected.kod && x.razm == selected.razm);
+                if (agg != null)
+                {
+                    if (agg.countStr > 1) agg.countStr -= 1;
+                    else _selectedKomplItems.Remove(agg);
+                }
+
+                _tabSelection.Remove(tabIndex);
+                customGridControlKomplSelected.RefreshDataSource();
+                return;
+            }
+
+            // Установка новой
+            foreach (var item in data) item.pr_po = false;
             selected.pr_po = true;
             selected.TabIndex = tabIndex;
+            view.RefreshData();
 
-            gridView.RefreshData();
-
-            // Удаляем старую запись с этой вкладки (если была)
-            var existing = _selectedKomplItems
-                .FirstOrDefault(x => x.TabIndex == tabIndex);
-
-            if (existing != null)
-                _selectedKomplItems.Remove(existing);
-
-            _selectedKomplItems.Add(selected);
-            customGridControlKomplSelected.DataSource = _selectedKomplItems;
-            customGridControlKomplSelected.RefreshDataSource();
-
-            // Переход на следующую незаполненную вкладку
-            for (int i = 0; i < customTabControlKomplRazm.TabPages.Count; i++)
+            // Если на вкладке раньше была другая пара — её нужно уменьшить
+            if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
-                var tab = customTabControlKomplRazm.TabPages[i];
-                if (tab.Controls[0] is not TableLayoutPanel layout) continue;
-
-                var nextGrid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
-                if (nextGrid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list) continue;
-
-                if (!list.Any(x => x.pr_po))
+                if (prev.kod != selected.kod || prev.razm != selected.razm)
                 {
-                    customTabControlKomplRazm.SelectedTabPageIndex = i;
-                    break;
+                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => x.kod == prev.kod && x.razm == prev.razm);
+                    if (prevAgg != null)
+                    {
+                        if (prevAgg.countStr > 1) prevAgg.countStr -= 1;
+                        else _selectedKomplItems.Remove(prevAgg);
+                    }
                 }
             }
-        }
 
+            // Учесть новую пару
+            var curAgg = _selectedKomplItems.FirstOrDefault(x => x.kod == selected.kod && x.razm == selected.razm);
+            if (curAgg != null) curAgg.countStr += 1;
+            else { selected.countStr = 1; _selectedKomplItems.Add(selected); }
+
+            _tabSelection[tabIndex] = (selected.kod, selected.razm);
+            customGridControlKomplSelected.RefreshDataSource();
+        }
 
         private void customButtonNext_Click(object sender, EventArgs e)
         {
@@ -343,6 +471,35 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         #endregion
+        //
+        private void repositoryItemCheckEditViborRazm_CheckedChanged(object sender, EventArgs e)
+        {
+            var view = gridViewKomplRazm;
+            if (view?.GetFocusedRow() is not SpArticulGrupMenViewModel selected) return;
+            var data = view.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data == null) return;
+
+            if (xAutoRazm)
+            {
+                // переключаем состояние конкретной записи
+                selected.pr_po = !selected.pr_po;
+                view.RefreshData();
+                AutoRazmForForming();
+            }
+            else
+            {
+                // только одна галочка
+                foreach (var item in data)
+                    item.pr_po = false;
+
+                selected.pr_po = true;
+                view.RefreshData();
+            }
+
+            customCheckBoxVerified.Checked = false;
+        }
+
+        // кнопки "+" для добавления записей на таблицу
         private async void repositoryItemButtonEditAddRazm_Click(object sender, EventArgs e)
         {
             var view = gridViewKomplArt;
@@ -377,6 +534,9 @@ namespace SewingProduction.Features.Articul.Forms
 
             if (sameArticulRows.Count == 0) return;
 
+            // заполняем razm_all для добавляемых строк
+            await FillRazmAllAsync(sameArticulRows);
+
             // Ищем первую свободную вкладку
             BindingList<SpArticulGrupMenViewModel> targetList = null;
             int targetIndex = -1;
@@ -409,10 +569,10 @@ namespace SewingProduction.Features.Articul.Forms
                 return;
             }
 
-            // Переключаемся
+            // Переключаемся на нужную вкладку
             customTabControlKomplRazm.SelectedTabPageIndex = targetIndex;
 
-            // Добавляем строки
+            // Добавляем строки без дублей по (kod, razm)
             var kodRazmSet = new HashSet<(int, string)>(targetList.Select(x => (x.kod, x.razm)));
 
             foreach (var row in sameArticulRows)
@@ -427,6 +587,7 @@ namespace SewingProduction.Features.Articul.Forms
                         articul = row.articul,
                         mod = row.mod,
                         razm = row.razm,
+                        razm_all = row.razm_all, // 🔹 переносим общий размер
                         sost = row.sost,
                         kod_v = row.kod_v,
                         kle = row.kle,
@@ -435,10 +596,18 @@ namespace SewingProduction.Features.Articul.Forms
                         GrupMen = row.GrupMen,
                         TabIndex = targetIndex
                     });
-                    kodRazmSet.Add(key); // обновим множество, если вдруг в будущем ещё нужно
+                    kodRazmSet.Add(key);
                 }
             }
+
+            // Если авторазмер включён — сразу авторасставим галки в вкладках
+            if (xAutoRazm)
+                AutoRazmForForming();
+            // если все записи одинаковые создаем дубликаты
+            if (xAllZap && targetIndex < customNumericUpDownValueTab.Value - 1)
+                repositoryItemButtonEditAddRazm_Click(sender, e);
         }
+
         #region button for delete
         //Button on TabPage
         void RemoveButtonClick(Object s, CustomGridControl grid)
@@ -476,19 +645,43 @@ namespace SewingProduction.Features.Articul.Forms
             list.Clear();
         }
 
-        //Button on customGridControlKomplSelected
+        // Button on customGridControlKomplSelected — удаление выбранной строки
         private void repositoryItemButtonEditDelRazm_Click(object sender, EventArgs e)
         {
-            var view = gridViewKomplSelected;
-            if (view == null) return;
+            var viewSel = bandedGridViewSelected;
+            if (viewSel == null) return;
 
-            var selected = view.GetFocusedRow() as SpArticulGrupMenViewModel;
+            var selected = viewSel.GetFocusedRow() as SpArticulGrupMenViewModel;
             if (selected == null) return;
 
+            // 🔹 РЕЖИМ АВТОРАЗМЕР: снимаем флажок в ЛЕВОМ гриде (по razm_all) и перестраиваем всё автоматически
+            if (xAutoRazm)
+            {
+                // найти в левом гриде запись с тем же razm_all и снять pr_po
+                var leftData = gridViewKomplRazm?.DataSource as List<SpArticulGrupMenViewModel>;
+                if (leftData != null)
+                {
+                    var leftRow = leftData.FirstOrDefault(r =>
+                        string.Equals(r.razm_all?.Trim(), selected.razm_all?.Trim(), StringComparison.OrdinalIgnoreCase));
+
+                    if (leftRow != null)
+                    {
+                        leftRow.pr_po = false;
+                        gridViewKomplRazm.RefreshData(); // визуально обновим левый список
+                    }
+                }
+
+                // перестроить галочки на вкладках и нижний список
+                AutoRazmForForming(); // учтёт новые pr_po в левом гриде и обновит _selectedKomplItems
+
+                customCheckBoxVerified.Checked = false;
+                return;
+            }
+
+            // 🔹 ОБЫЧНЫЙ РЕЖИМ: твоя прежняя логика — удаляем из нижнего и снимаем на конкретной вкладке
             _selectedKomplItems.Remove(selected);
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
 
-            // Используем TabIndex для точного удаления из вкладки
             if (selected.TabIndex >= 0 && selected.TabIndex < customTabControlKomplRazm.TabPages.Count)
             {
                 var tab = customTabControlKomplRazm.TabPages[selected.TabIndex];
@@ -506,8 +699,10 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
+
             customCheckBoxVerified.Checked = false;
         }
+
 
         private void customButtonDelKomplSelected_Click(object sender, EventArgs e)
         {
@@ -546,13 +741,348 @@ namespace SewingProduction.Features.Articul.Forms
             customGridControlKompl.RefreshDataSource();
         }
         #endregion
+        #region Filter
+        private bool _grupLoaded = false;
+        private bool _articulLoaded = false;
+        private bool _modLoaded = false;
+        private bool _razmLoaded = false;
+
+        private async Task LoadFilterValuesAsync(CustomComboBox comboBox, IEnumerable<string> values)
+        {
+            await Task.Run(() =>
+            {
+                var set = new HashSet<string>();
+                var list = new List<string>();
+
+                foreach (var val in values)
+                {
+                    if (!string.IsNullOrWhiteSpace(val) && set.Add(val))
+                        list.Add(val);
+                }
+
+                Invoke(new Action(() =>
+                {
+                    comboBox.BeginUpdate();
+                    comboBox.Items.Clear();
+                    comboBox.Items.Add(""); // Пустой фильтр
+                    comboBox.Items.AddRange(list.ToArray());
+                    comboBox.SelectedIndex = 0;
+                    comboBox.EndUpdate();
+                }));
+            });
+        }
+
+        private void ApplyGridFilters(object sender, EventArgs e)
+        {
+            var view = gridViewKomplArt;
+            if (view == null) return;
+
+            var filters = new List<string>();
+
+            // Важно: Экранируем одинарные кавычки
+            string Esc(string s) => s?.Replace("'", "''");
+
+            if (!string.IsNullOrWhiteSpace(customComboBoxGrup.Text))
+                filters.Add($"[grup] = '{Esc(customComboBoxGrup.Text.Trim())}'");
+
+            if (!string.IsNullOrWhiteSpace(customComboBoxArt.Text))
+                filters.Add($"[articul] = '{Esc(customComboBoxArt.Text.Trim())}'");
+
+            if (!string.IsNullOrWhiteSpace(customComboBoxMod.Text))
+                filters.Add($"[mod] = '{Esc(customComboBoxMod.Text.Trim())}'");
+
+            if (!string.IsNullOrWhiteSpace(customComboBoxRazm.Text))
+                filters.Add($"[razm] = '{Esc(customComboBoxRazm.Text).Trim()}'");
+
+            // применяем
+            view.ActiveFilter.Clear();
+            if (filters.Count > 0)
+                view.ActiveFilterString = string.Join(" AND ", filters);
+        }
+
+        private async void customComboBoxGrup_DropDown(object sender, EventArgs e)
+        {
+            if (_grupLoaded) return;
+
+            var data = customGridControlKomplArt.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data != null)
+            {
+                await LoadFilterValuesAsync(customComboBoxGrup, data.Select(x => x.grup.Trim()));
+                _grupLoaded = true;
+            }
+        }
+
+        private async void customComboBoxArt_DropDown(object sender, EventArgs e)
+        {
+            if (_articulLoaded) return;
+
+            var data = customGridControlKomplArt.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data != null)
+            {
+                await LoadFilterValuesAsync(customComboBoxArt, data.Select(x => x.articul.Trim()));
+                _articulLoaded = true;
+            }
+        }
+
+        private async void customComboBoxMod_DropDown(object sender, EventArgs e)
+        {
+            if (_modLoaded) return;
+
+            var data = customGridControlKomplArt.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data != null)
+            {
+                await LoadFilterValuesAsync(customComboBoxMod, data.Select(x => x.mod.Trim()));
+                _modLoaded = true;
+            }
+        }
+
+        private async void customComboBoxRazm_DropDown(object sender, EventArgs e)
+        {
+            if (_razmLoaded) return;
+
+            var data = customGridControlKomplArt.DataSource as List<SpArticulGrupMenViewModel>;
+            if (data != null)
+            {
+                await LoadFilterValuesAsync(customComboBoxRazm, data.Select(x => x.razm.Trim()));
+                _razmLoaded = true;
+            }
+        }
+
+        private void customButtonClearFilter_Click(object sender, EventArgs e)
+        {
+            // Сбрасываем тексты
+            if (_grupLoaded) customComboBoxGrup.SelectedIndex = 0;
+            if (_articulLoaded) customComboBoxArt.SelectedIndex = 0;
+            if (_modLoaded) customComboBoxMod.SelectedIndex = 0;
+            if (_razmLoaded) customComboBoxRazm.SelectedIndex = 0;
+
+            // Сбрасываем фильтр
+            gridViewKomplArt.ActiveFilter.Clear();
+        }
+        #endregion
+
+
+        // Авторасстановка галочек + автоформирование списка выбранных по razm_all с накоплением countStr
+        private void AutoRazmForForming()
+        {
+            var gridData = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
+            if (gridData == null) return;
+
+            // 1) какие общие размеры выбраны слева
+            var selectedRazmAll = gridData
+                .Where(x => x.pr_po)
+                .Select(x => x.razm_all?.Trim())
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Distinct()
+                .ToList();
+
+            // если ничего не выбрано — очистить
+            if (selectedRazmAll.Count == 0)
+            {
+                _selectedKomplItems.Clear();
+                customGridControlKomplSelected.DataSource = _selectedKomplItems;
+                customGridControlKomplSelected.RefreshDataSource();
+                SetupSelectedGroupingByRazmAll();
+                customCheckBoxVerified.Checked = false;
+                return;
+            }
+
+            // 2) проставляем галочки во всех вкладках по razm_all
+            foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+            {
+                if (tab.Controls[0] is not TableLayoutPanel layout)
+                    continue;
+
+                var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                if (grid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list)
+                    continue;
+
+                foreach (var row in list)
+                    row.pr_po = selectedRazmAll.Contains(row.razm_all?.Trim());
+
+                grid.RefreshDataSource();
+            }
+
+            // 3) Сформировать выбранные с НАКОПЛЕНИЕМ countStr по (kod, razm)
+            _selectedKomplItems.Clear();
+            var agg = new Dictionary<(int kod, string razm), SpArticulGrupMenViewModel>();
+
+            for (int i = 0; i < customTabControlKomplRazm.TabPages.Count; i++)
+            {
+                var tab = customTabControlKomplRazm.TabPages[i];
+                if (tab.Controls[0] is not TableLayoutPanel layout) continue;
+
+                var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
+                if (grid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list) continue;
+
+                foreach (var row in list.Where(r => r.pr_po))
+                {
+                    var key = (row.kod, row.razm);
+                    if (!agg.TryGetValue(key, out var acc))
+                    {
+                        // копируем ссылку/объект и обнуляем счётчик перед накоплением
+                        row.TabIndex = i;
+                        row.countStr = 1;
+                        agg[key] = row;
+                    }
+                    else
+                    {
+                        acc.countStr += 1;
+                    }
+                }
+            }
+
+            foreach (var item in agg.Values)
+                _selectedKomplItems.Add(item);
+
+            customGridControlKomplSelected.DataSource = _selectedKomplItems;
+            customGridControlKomplSelected.RefreshDataSource();
+
+            // 4) группировка по razm_all (если она у тебя включается при авторазмере)
+            SetupSelectedGroupingByRazmAll();
+
+            // просим перепроверить
+            customCheckBoxVerified.Checked = false;
+        }
+
+        /// <summary>
+        /// Группируем customGridControlKomplSelected по общему размеру razm_all.
+        /// Создаём колонку/бэнд при необходимости.
+        /// Вызывать сразу после установки DataSource у customGridControlKomplSelected.
+        /// </summary>
+        // группировка выбранных по razm_all (общему размеру)
+        private void SetupSelectedGroupingByRazmAll()
+        {
+            var view = bandedGridViewSelected;
+            if (view == null) return;
+
+            // Бэнд "Размер" — создаём если нет
+            var band = view.Bands.FirstOrDefault(b => b.Name == "bandRazmAll");
+            if (band == null)
+            {
+                band = view.Bands.AddBand("Размер");
+                band.Name = "bandRazmAll";
+            }
+
+            // Колонка razm_all — создаём если нет
+            var colRazmAll = view.Columns.ColumnByFieldName("razm_all");
+            if (colRazmAll == null)
+            {
+                colRazmAll = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn
+                {
+                    FieldName = "razm_all",
+                    Caption = "Размер",
+                    Visible = true
+                };
+                view.Columns.Add(colRazmAll);
+                band.Columns.Add(colRazmAll);
+            }
+            else
+            {
+                if (colRazmAll.OwnerBand != band)
+                    band.Columns.Add(colRazmAll);
+                colRazmAll.Visible = true;
+                colRazmAll.Caption = "Размер";
+            }
+
+            view.BeginUpdate();
+            try
+            {
+                view.ClearGrouping();
+                view.SortInfo.Clear();
+                colRazmAll.GroupIndex = 0;
+                view.SortInfo.Add(colRazmAll, DevExpress.Data.ColumnSortOrder.Ascending);
+                view.OptionsBehavior.AutoExpandAllGroups = true;
+                view.ExpandAllGroups();
+                view.OptionsView.ShowGroupPanel = false;
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+        }
+        private async Task FillRazmAllAsync(IEnumerable<SpArticulGrupMenViewModel> items)
+        {
+            if (items == null) return;
+
+            // Группируем уникальные значения раздельных размеров
+            var byRazm = items
+                .Where(x => !string.IsNullOrWhiteSpace(x.razm))
+                .GroupBy(x => x.razm.Trim())
+                .ToDictionary(g => g.Key, g => g.ToList());
+
+            foreach (var key in byRazm.Keys.ToList())
+            {
+                // Берём общий размер из таблицы Razm (ArticulDataService.GetAllRazmByRazmAsync)
+                var razmAll = await _articulDataService.GetAllRazmByRazmAsync(key);
+                if (!string.IsNullOrWhiteSpace(razmAll))
+                {
+                    foreach (var row in byRazm[key])
+                        row.razm_all = razmAll.Trim();
+                }
+            }
+        }
+        // Включает/выключает группировку по общему размеру (razm_all) в customGridControlKomplSelected
+        private void ApplyGroupingByRazmAll(bool enabled)
+        {
+            var view = bandedGridViewSelected;                  // MainView у customGridControlKomplSelected
+            if (view == null) return;
+
+            var colRazmAll = view.Columns.ColumnByFieldName("razm_all");
+            if (colRazmAll == null) return;                     // колонка должна быть добавлена в дизайнере
+
+            view.BeginUpdate();
+            try
+            {
+                // Полный сброс прошлого состояния
+                view.ClearGrouping();
+                view.GroupCount = 0;
+                view.SortInfo.Clear();
+                colRazmAll.GroupIndex = -1;
+                colRazmAll.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default; // на всякий случай
+                colRazmAll.SortOrder = DevExpress.Data.ColumnSortOrder.None;
+
+                if (enabled)
+                {
+                    // Вариант без дублирования SortInfo при повторных вызовах
+                    view.GroupCount = 1;
+                    view.SortInfo.Add(new DevExpress.XtraGrid.Columns.GridColumnSortInfo(
+                        colRazmAll, DevExpress.Data.ColumnSortOrder.Ascending));
+
+                    view.OptionsBehavior.AutoExpandAllGroups = true;
+                    view.OptionsView.ShowGroupPanel = false;
+                    view.ExpandAllGroups();
+                }
+                else
+                {
+                    view.OptionsBehavior.AutoExpandAllGroups = false;
+                    view.OptionsView.ShowGroupPanel = false;
+                }
+            }
+            finally
+            {
+                view.EndUpdate();
+            }
+        }
+
         #region kompl
         private void customCheckBoxVerified_CheckedChanged(object sender, EventArgs e)
         {
             int requiredCount = (int)customNumericUpDownValueTab.Value;
-            int selectedCount = _selectedKomplItems.Count;
+            int selectedCount = _selectedKomplItems.Sum(x => x.countStr);
+            // Считаем галочки в gridViewKomplRazm
+            int checkedCount = 0;
+            for (int i = 0; i < gridViewKomplRazm.RowCount; i++)
+            {
+                var row = gridViewKomplRazm.GetRow(i) as SpArticulGrupMenViewModel;
+                if (row != null && row.pr_po)
+                    checkedCount++;
+            }
 
-            if (selectedCount == 0 || requiredCount == 0)
+            // Умножаем требуемое количество на число галочек
+            requiredCount *= checkedCount;
+
+            if (requiredCount == 0)
             {
                 customCheckBoxVerified.CheckedChanged -= customCheckBoxVerified_CheckedChanged;
                 customCheckBoxVerified.Checked = false;
@@ -586,99 +1116,63 @@ namespace SewingProduction.Features.Articul.Forms
         }
         private async void customButtonKompl_Click(object sender, EventArgs e)
         {
-            if (!customCheckBoxVerified.Checked)
-                return;
+            if (!customCheckBoxVerified.Checked) return;
 
-            var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
-            if (razmList == null || razmList.Count == 0)
+            var leftData = gridViewKomplRazm?.DataSource as List<SpArticulGrupMenViewModel>;
+            if (leftData == null || leftData.Count == 0)
             {
-                MessageBox.Show("Нет данных артикула для комплектования.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var mainItem = gridViewKomplRazm.GetFocusedRow() as SpArticulGrupMenViewModel;
-
-            if (mainItem.kod == null || mainItem.kod == 0)
-            {
-                MessageBox.Show("Код комплекта не найден", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Нет данных по размерам.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            Debug.WriteLine($"kod_k: {mainItem.kod}, artikul: {mainItem.articul}, poz: {_selectedKomplItems.Count}");
+            var service = new KomplDataService();
+            int repeat = Math.Max(1, (int)customNumericUpDownValueTab.Value);
 
-            var kompl = new KomplModel
+            //НЕ GetFocusedRow а у нас есть галочки в repositoryItemCheckEditViborRazm по ним формируем список
+            var header = gridViewKomplRazm.GetFocusedRow() as SpArticulGrupMenViewModel;
+            if (header == null)
             {
-                kod_k = mainItem.kod,
-                grup_k = mainItem.grup,
-                articul_k = mainItem.articul,
-                mod_k = mainItem.mod,
-                razm_k = mainItem.razm,
-                sost_k = mainItem.sost,
+                MessageBox.Show("Не выбран размер в левом списке.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            var model = new KomplModel
+            {
+                kod_k = header.kod,
+                grup_k = header.grup,
+                articul_k = header.articul,
+                mod_k = header.mod,
+                razm_k = header.razm,
+                sost_k = header.sost,
                 compName = Environment.MachineName
             };
 
-            for (int i = 0; i < _selectedKomplItems.Count; i++)
+            //еще надо заполнять kod1 kod2 и другие их взять из customGridControlKomplSelected 
+            //в нем сгруппировано по размеру, один размер это одна model, в модель входят коды
+
+            if (await service.ExistsExactAsync(model))
             {
-                var item = _selectedKomplItems[i];
-                switch (i)
-                {
-                    case 0: kompl.kod1 = item.kod; break;
-                    case 1: kompl.kod2 = item.kod; break;
-                    case 2: kompl.kod3 = item.kod; break;
-                    case 3: kompl.kod4 = item.kod; break;
-                    case 4: kompl.kod5 = item.kod; break;
-                    case 5: kompl.kod6 = item.kod; break;
-                    case 6: kompl.kod7 = item.kod; break;
-                    case 7: kompl.kod8 = item.kod; break;
-                    case 8: kompl.kod9 = item.kod; break;
-                    case 9: kompl.kod10 = item.kod; break;
-                }
+                var ans = MessageBox.Show(
+                    "Точно такой же комплект уже существует. Создать дубль?",
+                    "Дубликат", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (ans != DialogResult.Yes) return;
             }
 
-            var komplService = new KomplDataService();
-            if (await komplService.ExistsAsync(kompl))
-            {
-                var result = MessageBox.Show("Комплект уже существует. Перезаписать?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (result != DialogResult.Yes)
-                    return;
-
-                await komplService.DeleteAsync(kompl);
-            }
-
-            await komplService.SaveAsync(kompl);
-            MessageBox.Show("Комплект успешно сохранён.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //await service.SaveAsync(model);
+            //MessageBox.Show("Комплект сохранён.", "Готово", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             _selectedKomplItems.Clear();
             customGridControlKomplSelected.DataSource = _selectedKomplItems;
+            customGridControlKomplSelected.RefreshDataSource();
             customCheckBoxVerified.Checked = false;
 
-            foreach (XtraTabPage tab in customTabControlKomplRazm.TabPages)
+            if (customCheckBoxAutoRazm.Checked)
             {
-                if (tab.Controls[0] is not TableLayoutPanel layout) continue;
-
-                var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
-                if (grid?.DataSource is BindingList<SpArticulGrupMenViewModel> list)
-                {
-                    foreach (var row in list)
-                        row.pr_po = false;
-
-                    list.Clear();
-                    grid.RefreshDataSource();
-                }
+                foreach (var r in leftData) r.pr_po = false;
+                gridViewKomplRazm.RefreshData();
             }
-
-            await loadKomplByArticul(komplService, kompl.articul_k);
-            //customTabControlKomplRazm.SelectedTabPageIndex = 0;
-            //var newKompl = await komplService.GetByArticulAsync(mainItem.articul);
-            //if (newKompl != null)
-            //{
-            //    customGridControlKompl.DataSource = new List<KomplModel> { newKompl };
-            //    customGridControlKompl.RefreshDataSource();
-            //    loadKodForKompl();
-            //}
-
-            customNumericUpDownValueTab.Value = 0;
         }
+
 
         async Task loadKomplByArticul(KomplDataService komplService, string articul_k)
         {
@@ -731,6 +1225,5 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         #endregion
-
     }
 }
