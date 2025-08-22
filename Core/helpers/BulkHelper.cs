@@ -60,7 +60,7 @@ public class BulkHelper
             columnMappings = autoMappings;
         }
 
-        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction))
+        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.FireTriggers, transaction))
         {
             bulkCopy.DestinationTableName = tableName;
             bulkCopy.BatchSize = batchSize;
@@ -100,7 +100,7 @@ public class BulkHelper
         }
 
         // Bulk insert into temp table
-        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction))
+        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.FireTriggers, transaction))
         {
             bulkCopy.DestinationTableName = tempTableName;
             bulkCopy.BatchSize = batchSize;
@@ -145,7 +145,7 @@ public class BulkHelper
             cmd.ExecuteNonQuery();
         }
 
-        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.Default, transaction))
+        using (var bulkCopy = new SqlBulkCopy(connection, SqlBulkCopyOptions.FireTriggers, transaction))
         {
             bulkCopy.DestinationTableName = tempTableName;
             foreach (DataColumn col in table.Columns)

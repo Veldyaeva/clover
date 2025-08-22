@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <_LastSelectedProfileId>D:\SewingProduction\Properties\PublishProfiles\ClickOnceProfile.pubxml</_LastSelectedProfileId>
+    <_LastSelectedProfileId>D:\SharpProj\sewingproduction-9.0.net\Properties\PublishProfiles\ver.x32.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="Core\Class\CustomControlsThemeable.cs">
@@ -25,6 +25,9 @@
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Core\Forms\TextSplashScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -34,10 +37,19 @@
     <Compile Update="Features\Articul\Forms\EditAricul.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\Sprav\Forms\EditTarif.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Sprav\Forms\EditFio.cs">
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesUnitLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\KnittingMachinesLoading.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\Sprav\Forms\editFio.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\Fio.cs">
@@ -164,6 +176,9 @@
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NaklReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\NormRaszForEconomist.cs">
       <SubType>XtraReport</SubType>
     </Compile>
     <Compile Update="Report\NormRaszTest.cs">
