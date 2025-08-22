@@ -10,18 +10,22 @@ namespace SewingProduction
     /// </summary>
     public static class SplashScreenHelper
     {
-        private static SplashScreen _splashScreen;
+        private static Form _splashScreen;
         private static Thread _splashThread;
 
         /// <summary>
         /// Показывает сплеш-скрин в отдельном потоке
         /// </summary>
-        public static void ShowSplash()
+        public static void ShowSplash(string message = null, bool textOnly = false)
         {
             // Создаем и запускаем сплеш-скрин в отдельном потоке
             _splashThread = new Thread(() =>
             {
-                _splashScreen = new SplashScreen();
+                _splashScreen = textOnly ? new TextSplashScreen(message) : new SplashScreen();
+                if (!textOnly && !string.IsNullOrWhiteSpace(message))
+                {
+                    try { _splashScreen.Text = message; } catch { }
+                }
                 _splashScreen.FormClosed += (s, e) => Application.ExitThread();
                 _splashScreen.StartPosition = FormStartPosition.CenterScreen;
                 _splashScreen.TopMost = true;

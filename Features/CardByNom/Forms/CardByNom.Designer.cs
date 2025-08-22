@@ -479,11 +479,11 @@ namespace SewingProduction
             tablePanel2.SetColumn(tbYearPach, 6);
             tbYearPach.Font = new Font("Arial", 10F);
             tbYearPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbYearPach.Location = new Point(324, 19);
+            tbYearPach.Location = new Point(285, 19);
             tbYearPach.Margin = new Padding(0);
             tbYearPach.Name = "tbYearPach";
             tablePanel2.SetRow(tbYearPach, 0);
-            tbYearPach.Size = new Size(69, 23);
+            tbYearPach.Size = new Size(108, 23);
             tbYearPach.TabIndex = 7;
             // 
             // tbNomPach
@@ -492,11 +492,11 @@ namespace SewingProduction
             tablePanel2.SetColumn(tbNomPach, 3);
             tbNomPach.Font = new Font("Arial", 10F);
             tbNomPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbNomPach.Location = new Point(189, 19);
+            tbNomPach.Location = new Point(166, 19);
             tbNomPach.Margin = new Padding(0);
             tbNomPach.Name = "tbNomPach";
             tablePanel2.SetRow(tbNomPach, 0);
-            tbNomPach.Size = new Size(71, 23);
+            tbNomPach.Size = new Size(61, 23);
             tbNomPach.TabIndex = 5;
             tbNomPach.KeyDown += tbNomPach_KeyDown;
             // 
@@ -507,11 +507,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaKombIzd, 2);
             tbPsaKombIzd.Font = new Font("Arial", 10F);
             tbPsaKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKombIzd.Location = new Point(1619, 115);
+            tbPsaKombIzd.Location = new Point(1407, 108);
             tbPsaKombIzd.Margin = new Padding(0);
             tbPsaKombIzd.Name = "tbPsaKombIzd";
             tablePanel1.SetRow(tbPsaKombIzd, 3);
-            tbPsaKombIzd.Size = new Size(61, 23);
+            tbPsaKombIzd.Size = new Size(52, 23);
             tbPsaKombIzd.TabIndex = 38;
             // 
             // tbPsaKombOsn
@@ -520,11 +520,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaKombOsn, 27);
             tbPsaKombOsn.Font = new Font("Arial", 10F);
             tbPsaKombOsn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKombOsn.Location = new Point(1813, 115);
+            tbPsaKombOsn.Location = new Point(1579, 108);
             tbPsaKombOsn.Margin = new Padding(0);
             tbPsaKombOsn.Name = "tbPsaKombOsn";
             tablePanel1.SetRow(tbPsaKombOsn, 3);
-            tbPsaKombOsn.Size = new Size(64, 23);
+            tbPsaKombOsn.Size = new Size(60, 23);
             tbPsaKombOsn.TabIndex = 36;
             // 
             // tbPsaPsaIDOsn
@@ -533,11 +533,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaPsaIDOsn, 27);
             tbPsaPsaIDOsn.Font = new Font("Arial", 10F);
             tbPsaPsaIDOsn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPsaIDOsn.Location = new Point(1813, 85);
+            tbPsaPsaIDOsn.Location = new Point(1579, 74);
             tbPsaPsaIDOsn.Margin = new Padding(0);
             tbPsaPsaIDOsn.Name = "tbPsaPsaIDOsn";
             tablePanel1.SetRow(tbPsaPsaIDOsn, 2);
-            tbPsaPsaIDOsn.Size = new Size(64, 23);
+            tbPsaPsaIDOsn.Size = new Size(60, 23);
             tbPsaPsaIDOsn.TabIndex = 34;
             // 
             // tbPsaPsaID
@@ -547,11 +547,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaPsaID, 2);
             tbPsaPsaID.Font = new Font("Arial", 10F);
             tbPsaPsaID.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPsaID.Location = new Point(1619, 85);
+            tbPsaPsaID.Location = new Point(1407, 74);
             tbPsaPsaID.Margin = new Padding(0);
             tbPsaPsaID.Name = "tbPsaPsaID";
             tablePanel1.SetRow(tbPsaPsaID, 2);
-            tbPsaPsaID.Size = new Size(61, 23);
+            tbPsaPsaID.Size = new Size(52, 23);
             tbPsaPsaID.TabIndex = 32;
             // 
             // label66
@@ -561,11 +561,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(label66, 21);
             label66.Font = new Font("Arial", 10F);
             label66.ForeColor = Color.FromArgb(0, 0, 0);
-            label66.Location = new Point(1539, 118);
+            label66.Location = new Point(1339, 104);
             label66.Margin = new Padding(4, 0, 4, 0);
             label66.Name = "label66";
             tablePanel1.SetRow(label66, 3);
-            label66.Size = new Size(66, 16);
+            label66.Size = new Size(58, 32);
             label66.TabIndex = 39;
             label66.Text = "komb_izd";
             // 
@@ -577,7 +577,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label67, 2);
             label67.Font = new Font("Arial", 10F);
             label67.ForeColor = Color.FromArgb(0, 0, 0);
-            label67.Location = new Point(1704, 118);
+            label67.Location = new Point(1483, 112);
             label67.Margin = new Padding(4, 0, 4, 0);
             label67.Name = "label67";
             tablePanel1.SetRow(label67, 3);
@@ -593,7 +593,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label65, 2);
             label65.Font = new Font("Arial", 10F);
             label65.ForeColor = Color.FromArgb(0, 0, 0);
-            label65.Location = new Point(1704, 88);
+            label65.Location = new Point(1483, 77);
             label65.Margin = new Padding(4, 0, 4, 0);
             label65.Name = "label65";
             tablePanel1.SetRow(label65, 2);
@@ -608,7 +608,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label62, 21);
             label62.Font = new Font("Arial", 10F);
             label62.ForeColor = Color.FromArgb(0, 0, 0);
-            label62.Location = new Point(1539, 88);
+            label62.Location = new Point(1339, 77);
             label62.Margin = new Padding(4, 0, 4, 0);
             label62.Name = "label62";
             tablePanel1.SetRow(label62, 2);
@@ -619,12 +619,12 @@ namespace SewingProduction
             // pbEskiz
             // 
             tablePanel1.SetColumn(pbEskiz, 28);
-            pbEskiz.Location = new Point(1881, 17);
+            pbEskiz.Location = new Point(1643, 17);
             pbEskiz.Margin = new Padding(4, 3, 4, 3);
             pbEskiz.Name = "pbEskiz";
             tablePanel1.SetRow(pbEskiz, 0);
             tablePanel1.SetRowSpan(pbEskiz, 4);
-            pbEskiz.Size = new Size(152, 119);
+            pbEskiz.Size = new Size(189, 119);
             pbEskiz.SizeMode = PictureBoxSizeMode.Zoom;
             pbEskiz.TabIndex = 25;
             pbEskiz.TabStop = false;
@@ -636,7 +636,7 @@ namespace SewingProduction
             tablePanel2.SetColumn(label4, 5);
             label4.Font = new Font("Arial", 10F);
             label4.ForeColor = Color.FromArgb(0, 0, 0);
-            label4.Location = new Point(284, 22);
+            label4.Location = new Point(251, 22);
             label4.Margin = new Padding(4, 0, 4, 0);
             label4.Name = "label4";
             tablePanel2.SetRow(label4, 0);
@@ -651,7 +651,7 @@ namespace SewingProduction
             tablePanel2.SetColumn(label3, 2);
             label3.Font = new Font("Arial", 9F);
             label3.ForeColor = Color.FromArgb(0, 0, 0);
-            label3.Location = new Point(112, 23);
+            label3.Location = new Point(100, 23);
             label3.Margin = new Padding(0);
             label3.Name = "label3";
             tablePanel2.SetRow(label3, 0);
@@ -665,11 +665,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbRzuKol, 6);
             tbRzuKol.Font = new Font("Arial", 10F);
             tbRzuKol.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuKol.Location = new Point(375, 17);
+            tbRzuKol.Location = new Point(326, 14);
             tbRzuKol.Margin = new Padding(0);
             tbRzuKol.Name = "tbRzuKol";
             tablePanel1.SetRow(tbRzuKol, 0);
-            tbRzuKol.Size = new Size(39, 23);
+            tbRzuKol.Size = new Size(33, 23);
             tbRzuKol.TabIndex = 29;
             // 
             // tbPsaNomZad
@@ -679,11 +679,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaNomZad, 2);
             tbPsaNomZad.Font = new Font("Arial", 10F);
             tbPsaNomZad.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNomZad.Location = new Point(114, 54);
+            tbPsaNomZad.Location = new Point(99, 46);
             tbPsaNomZad.Margin = new Padding(0);
             tbPsaNomZad.Name = "tbPsaNomZad";
             tablePanel1.SetRow(tbPsaNomZad, 1);
-            tbPsaNomZad.Size = new Size(93, 23);
+            tbPsaNomZad.Size = new Size(80, 23);
             tbPsaNomZad.TabIndex = 26;
             // 
             // tbRzuDostZeh
@@ -693,11 +693,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbRzuDostZeh, 2);
             tbRzuDostZeh.Font = new Font("Arial", 10F);
             tbRzuDostZeh.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuDostZeh.Location = new Point(330, 54);
+            tbRzuDostZeh.Location = new Point(287, 46);
             tbRzuDostZeh.Margin = new Padding(0);
             tbRzuDostZeh.Name = "tbRzuDostZeh";
             tablePanel1.SetRow(tbRzuDostZeh, 1);
-            tbRzuDostZeh.Size = new Size(84, 23);
+            tbRzuDostZeh.Size = new Size(72, 23);
             tbRzuDostZeh.TabIndex = 21;
             // 
             // tbRzuPach
@@ -707,11 +707,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbRzuPach, 5);
             tbRzuPach.Font = new Font("Arial", 10F);
             tbRzuPach.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuPach.Location = new Point(172, 85);
+            tbRzuPach.Location = new Point(149, 74);
             tbRzuPach.Margin = new Padding(0);
             tbRzuPach.Name = "tbRzuPach";
             tablePanel1.SetRow(tbRzuPach, 2);
-            tbRzuPach.Size = new Size(242, 23);
+            tbRzuPach.Size = new Size(210, 23);
             tbRzuPach.TabIndex = 11;
             // 
             // tbRzuNom
@@ -721,11 +721,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbRzuNom, 2);
             tbRzuNom.Font = new Font("Arial", 10F);
             tbRzuNom.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuNom.Location = new Point(114, 17);
+            tbRzuNom.Location = new Point(99, 14);
             tbRzuNom.Margin = new Padding(0);
             tbRzuNom.Name = "tbRzuNom";
             tablePanel1.SetRow(tbRzuNom, 0);
-            tbRzuNom.Size = new Size(93, 23);
+            tbRzuNom.Size = new Size(80, 23);
             tbRzuNom.TabIndex = 9;
             // 
             // tbPsaKodZv2
@@ -734,11 +734,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaKodZv2, 13);
             tbPsaKodZv2.Font = new Font("Arial", 10F);
             tbPsaKodZv2.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKodZv2.Location = new Point(716, 115);
+            tbPsaKodZv2.Location = new Point(624, 108);
             tbPsaKodZv2.Margin = new Padding(0);
             tbPsaKodZv2.Name = "tbPsaKodZv2";
             tablePanel1.SetRow(tbPsaKodZv2, 3);
-            tbPsaKodZv2.Size = new Size(56, 23);
+            tbPsaKodZv2.Size = new Size(48, 23);
             tbPsaKodZv2.TabIndex = 29;
             // 
             // tbPsaKodZv1
@@ -748,11 +748,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaKodZv1, 2);
             tbPsaKodZv1.Font = new Font("Arial", 10F);
             tbPsaKodZv1.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaKodZv1.Location = new Point(560, 115);
+            tbPsaKodZv1.Location = new Point(487, 108);
             tbPsaKodZv1.Margin = new Padding(0);
             tbPsaKodZv1.Name = "tbPsaKodZv1";
             tablePanel1.SetRow(tbPsaKodZv1, 3);
-            tbPsaKodZv1.Size = new Size(55, 23);
+            tbPsaKodZv1.Size = new Size(48, 23);
             tbPsaKodZv1.TabIndex = 26;
             // 
             // tbRzuMod
@@ -762,11 +762,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbRzuMod, 5);
             tbRzuMod.Font = new Font("Arial", 10F);
             tbRzuMod.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuMod.Location = new Point(560, 54);
+            tbRzuMod.Location = new Point(487, 46);
             tbRzuMod.Margin = new Padding(0);
             tbRzuMod.Name = "tbRzuMod";
             tablePanel1.SetRow(tbRzuMod, 1);
-            tbRzuMod.Size = new Size(212, 23);
+            tbRzuMod.Size = new Size(185, 23);
             tbRzuMod.TabIndex = 19;
             // 
             // tbRzuArticul
@@ -776,11 +776,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbRzuArticul, 5);
             tbRzuArticul.Font = new Font("Arial", 10F);
             tbRzuArticul.ForeColor = Color.FromArgb(72, 61, 139);
-            tbRzuArticul.Location = new Point(560, 17);
+            tbRzuArticul.Location = new Point(487, 14);
             tbRzuArticul.Margin = new Padding(0);
             tbRzuArticul.Name = "tbRzuArticul";
             tablePanel1.SetRow(tbRzuArticul, 0);
-            tbRzuArticul.Size = new Size(212, 23);
+            tbRzuArticul.Size = new Size(185, 23);
             tbRzuArticul.TabIndex = 17;
             // 
             // tbPsaPrn
@@ -790,12 +790,12 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaPrn, 4);
             tbPsaPrn.Font = new Font("Arial", 10F);
             tbPsaPrn.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaPrn.Location = new Point(585, 84);
+            tbPsaPrn.Location = new Point(509, 74);
             tbPsaPrn.Margin = new Padding(0);
             tbPsaPrn.Multiline = true;
             tbPsaPrn.Name = "tbPsaPrn";
             tablePanel1.SetRow(tbPsaPrn, 2);
-            tbPsaPrn.Size = new Size(187, 24);
+            tbPsaPrn.Size = new Size(163, 22);
             tbPsaPrn.TabIndex = 15;
             // 
             // tbSostPoln
@@ -804,13 +804,13 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbSostPoln, 16);
             tbSostPoln.Font = new Font("Arial", 10F);
             tbSostPoln.ForeColor = Color.FromArgb(72, 61, 139);
-            tbSostPoln.Location = new Point(925, 51);
+            tbSostPoln.Location = new Point(806, 48);
             tbSostPoln.Margin = new Padding(0);
             tbSostPoln.Multiline = true;
             tbSostPoln.Name = "tbSostPoln";
             tablePanel1.SetRow(tbSostPoln, 1);
             tablePanel1.SetRowSpan(tbSostPoln, 3);
-            tbSostPoln.Size = new Size(230, 89);
+            tbSostPoln.Size = new Size(197, 89);
             tbSostPoln.TabIndex = 25;
             // 
             // tbArtGrup
@@ -819,11 +819,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbArtGrup, 16);
             tbArtGrup.Font = new Font("Arial", 10F);
             tbArtGrup.ForeColor = Color.FromArgb(72, 61, 139);
-            tbArtGrup.Location = new Point(925, 17);
+            tbArtGrup.Location = new Point(806, 14);
             tbArtGrup.Margin = new Padding(0);
             tbArtGrup.Name = "tbArtGrup";
             tablePanel1.SetRow(tbArtGrup, 0);
-            tbArtGrup.Size = new Size(230, 23);
+            tbArtGrup.Size = new Size(197, 23);
             tbArtGrup.TabIndex = 21;
             // 
             // tbArtTradeMark
@@ -832,11 +832,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbArtTradeMark, 19);
             tbArtTradeMark.Font = new Font("Arial", 10F);
             tbArtTradeMark.ForeColor = Color.FromArgb(72, 61, 139);
-            tbArtTradeMark.Location = new Point(1315, 115);
+            tbArtTradeMark.Location = new Point(1143, 108);
             tbArtTradeMark.Margin = new Padding(0);
             tbArtTradeMark.Name = "tbArtTradeMark";
             tablePanel1.SetRow(tbArtTradeMark, 3);
-            tbArtTradeMark.Size = new Size(200, 23);
+            tbArtTradeMark.Size = new Size(172, 23);
             tbArtTradeMark.TabIndex = 40;
             // 
             // tbPsaMenName
@@ -845,12 +845,12 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaMenName, 19);
             tbPsaMenName.Font = new Font("Arial", 10F);
             tbPsaMenName.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaMenName.Location = new Point(1315, 53);
+            tbPsaMenName.Location = new Point(1143, 45);
             tbPsaMenName.Margin = new Padding(0);
             tbPsaMenName.Multiline = true;
             tbPsaMenName.Name = "tbPsaMenName";
             tablePanel1.SetRow(tbPsaMenName, 1);
-            tbPsaMenName.Size = new Size(200, 25);
+            tbPsaMenName.Size = new Size(172, 25);
             tbPsaMenName.TabIndex = 11;
             // 
             // tbPsaNameSbit
@@ -859,11 +859,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaNameSbit, 19);
             tbPsaNameSbit.Font = new Font("Arial", 10F);
             tbPsaNameSbit.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNameSbit.Location = new Point(1315, 85);
+            tbPsaNameSbit.Location = new Point(1143, 74);
             tbPsaNameSbit.Margin = new Padding(0);
             tbPsaNameSbit.Name = "tbPsaNameSbit";
             tablePanel1.SetRow(tbPsaNameSbit, 2);
-            tbPsaNameSbit.Size = new Size(200, 23);
+            tbPsaNameSbit.Size = new Size(172, 23);
             tbPsaNameSbit.TabIndex = 23;
             // 
             // tbPsaTbID
@@ -872,11 +872,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(tbPsaTbID, 19);
             tbPsaTbID.Font = new Font("Arial", 10F);
             tbPsaTbID.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaTbID.Location = new Point(1315, 17);
+            tbPsaTbID.Location = new Point(1143, 14);
             tbPsaTbID.Margin = new Padding(0);
             tbPsaTbID.Name = "tbPsaTbID";
             tablePanel1.SetRow(tbPsaTbID, 0);
-            tbPsaTbID.Size = new Size(200, 23);
+            tbPsaTbID.Size = new Size(172, 23);
             tbPsaTbID.TabIndex = 13;
             // 
             // cbIsChip
@@ -886,7 +886,7 @@ namespace SewingProduction
             cbIsChip.Enabled = false;
             cbIsChip.Font = new Font("Arial", 10F);
             cbIsChip.ForeColor = Color.FromArgb(120, 60, 30);
-            cbIsChip.Location = new Point(1817, 18);
+            cbIsChip.Location = new Point(1583, 16);
             cbIsChip.Margin = new Padding(4, 3, 4, 3);
             cbIsChip.Name = "cbIsChip";
             tablePanel1.SetRow(cbIsChip, 0);
@@ -901,11 +901,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(psaSezName, 27);
             psaSezName.Font = new Font("Arial", 10F);
             psaSezName.ForeColor = Color.FromArgb(72, 61, 139);
-            psaSezName.Location = new Point(1813, 54);
+            psaSezName.Location = new Point(1579, 46);
             psaSezName.Margin = new Padding(0);
             psaSezName.Name = "psaSezName";
             tablePanel1.SetRow(psaSezName, 1);
-            psaSezName.Size = new Size(64, 23);
+            psaSezName.Size = new Size(60, 23);
             psaSezName.TabIndex = 19;
             // 
             // tbPsaYear
@@ -915,11 +915,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaYear, 2);
             tbPsaYear.Font = new Font("Arial", 10F);
             tbPsaYear.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaYear.Location = new Point(1619, 54);
+            tbPsaYear.Location = new Point(1407, 46);
             tbPsaYear.Margin = new Padding(0);
             tbPsaYear.Name = "tbPsaYear";
             tablePanel1.SetRow(tbPsaYear, 1);
-            tbPsaYear.Size = new Size(61, 23);
+            tbPsaYear.Size = new Size(52, 23);
             tbPsaYear.TabIndex = 17;
             // 
             // tbPsaNN
@@ -929,11 +929,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(tbPsaNN, 3);
             tbPsaNN.Font = new Font("Arial", 10F);
             tbPsaNN.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPsaNN.Location = new Point(1661, 17);
+            tbPsaNN.Location = new Point(1443, 14);
             tbPsaNN.Margin = new Padding(0);
             tbPsaNN.Name = "tbPsaNN";
             tablePanel1.SetRow(tbPsaNN, 0);
-            tbPsaNN.Size = new Size(132, 23);
+            tbPsaNN.Size = new Size(116, 23);
             tbPsaNN.TabIndex = 9;
             // 
             // label68
@@ -943,7 +943,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label68, 18);
             label68.Font = new Font("Arial", 10F);
             label68.ForeColor = Color.FromArgb(0, 0, 0);
-            label68.Location = new Point(1179, 118);
+            label68.Location = new Point(1027, 112);
             label68.Margin = new Padding(4, 0, 4, 0);
             label68.Name = "label68";
             tablePanel1.SetRow(label68, 3);
@@ -959,7 +959,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label16, 2);
             label16.Font = new Font("Arial", 10F);
             label16.ForeColor = Color.FromArgb(0, 0, 0);
-            label16.Location = new Point(1704, 57);
+            label16.Location = new Point(1483, 50);
             label16.Margin = new Padding(4, 0, 4, 0);
             label16.Name = "label16";
             tablePanel1.SetRow(label16, 1);
@@ -974,7 +974,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label17, 21);
             label17.Font = new Font("Arial", 10F);
             label17.ForeColor = Color.FromArgb(0, 0, 0);
-            label17.Location = new Point(1539, 57);
+            label17.Location = new Point(1339, 50);
             label17.Margin = new Padding(4, 0, 4, 0);
             label17.Name = "label17";
             tablePanel1.SetRow(label17, 1);
@@ -989,11 +989,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(label22, 12);
             label22.Font = new Font("Arial", 10F);
             label22.ForeColor = Color.FromArgb(0, 0, 0);
-            label22.Location = new Point(640, 118);
+            label22.Location = new Point(559, 104);
             label22.Margin = new Padding(4, 0, 4, 0);
             label22.Name = "label22";
             tablePanel1.SetRow(label22, 3);
-            label22.Size = new Size(63, 16);
+            label22.Size = new Size(35, 32);
             label22.TabIndex = 30;
             label22.Text = "Код цв.2";
             // 
@@ -1004,7 +1004,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label53, 0);
             label53.Font = new Font("Arial", 10F);
             label53.ForeColor = Color.FromArgb(0, 0, 0);
-            label53.Location = new Point(15, 57);
+            label53.Location = new Point(15, 50);
             label53.Margin = new Padding(4, 0, 4, 0);
             label53.Name = "label53";
             tablePanel1.SetRow(label53, 1);
@@ -1019,7 +1019,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label23, 8);
             label23.Font = new Font("Arial", 10F);
             label23.ForeColor = Color.FromArgb(0, 0, 0);
-            label23.Location = new Point(438, 118);
+            label23.Location = new Point(383, 112);
             label23.Margin = new Padding(4, 0, 4, 0);
             label23.Name = "label23";
             tablePanel1.SetRow(label23, 3);
@@ -1034,7 +1034,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label20, 18);
             label20.Font = new Font("Arial", 10F);
             label20.ForeColor = Color.FromArgb(0, 0, 0);
-            label20.Location = new Point(1179, 49);
+            label20.Location = new Point(1027, 42);
             label20.Margin = new Padding(4, 0, 4, 0);
             label20.Name = "label20";
             tablePanel1.SetRow(label20, 1);
@@ -1049,7 +1049,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label13, 15);
             label13.Font = new Font("Arial", 10F);
             label13.ForeColor = Color.FromArgb(0, 0, 0);
-            label13.Location = new Point(796, 49);
+            label13.Location = new Point(696, 42);
             label13.Margin = new Padding(4, 0, 4, 0);
             label13.Name = "label13";
             tablePanel1.SetRow(label13, 1);
@@ -1064,7 +1064,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label11, 18);
             label11.Font = new Font("Arial", 10F);
             label11.ForeColor = Color.FromArgb(0, 0, 0);
-            label11.Location = new Point(1179, 88);
+            label11.Location = new Point(1027, 77);
             label11.Margin = new Padding(4, 0, 4, 0);
             label11.Name = "label11";
             tablePanel1.SetRow(label11, 2);
@@ -1079,7 +1079,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label15, 15);
             label15.Font = new Font("Arial", 10F);
             label15.ForeColor = Color.FromArgb(0, 0, 0);
-            label15.Location = new Point(796, 12);
+            label15.Location = new Point(696, 10);
             label15.Margin = new Padding(4, 0, 4, 0);
             label15.Name = "label15";
             tablePanel1.SetRow(label15, 0);
@@ -1094,7 +1094,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label12, 4);
             label12.Font = new Font("Arial", 10F);
             label12.ForeColor = Color.FromArgb(0, 0, 0);
-            label12.Location = new Point(231, 57);
+            label12.Location = new Point(203, 50);
             label12.Margin = new Padding(4, 0, 4, 0);
             label12.Name = "label12";
             tablePanel1.SetRow(label12, 1);
@@ -1109,11 +1109,11 @@ namespace SewingProduction
             tablePanel1.SetColumn(label10, 8);
             label10.Font = new Font("Arial", 10F);
             label10.ForeColor = Color.FromArgb(0, 0, 0);
-            label10.Location = new Point(438, 57);
+            label10.Location = new Point(383, 42);
             label10.Margin = new Padding(4, 0, 4, 0);
             label10.Name = "label10";
             tablePanel1.SetRow(label10, 1);
-            label10.Size = new Size(102, 16);
+            label10.Size = new Size(62, 32);
             label10.TabIndex = 20;
             label10.Text = "Модель (торг.)";
             // 
@@ -1124,7 +1124,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label19, 18);
             label19.Font = new Font("Arial", 10F);
             label19.ForeColor = Color.FromArgb(0, 0, 0);
-            label19.Location = new Point(1179, 20);
+            label19.Location = new Point(1027, 18);
             label19.Margin = new Padding(4, 0, 4, 0);
             label19.Name = "label19";
             tablePanel1.SetRow(label19, 0);
@@ -1139,7 +1139,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label9, 8);
             label9.Font = new Font("Arial", 10F);
             label9.ForeColor = Color.FromArgb(0, 0, 0);
-            label9.Location = new Point(438, 20);
+            label9.Location = new Point(383, 18);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
             tablePanel1.SetRow(label9, 0);
@@ -1155,7 +1155,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label8, 2);
             label8.Font = new Font("Arial", 10F);
             label8.ForeColor = Color.FromArgb(0, 0, 0);
-            label8.Location = new Point(438, 88);
+            label8.Location = new Point(383, 77);
             label8.Margin = new Padding(4, 0, 4, 0);
             label8.Name = "label8";
             tablePanel1.SetRow(label8, 2);
@@ -1171,7 +1171,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label7, 2);
             label7.Font = new Font("Arial", 10F);
             label7.ForeColor = Color.FromArgb(0, 0, 0);
-            label7.Location = new Point(231, 20);
+            label7.Location = new Point(203, 18);
             label7.Margin = new Padding(4, 0, 4, 0);
             label7.Name = "label7";
             tablePanel1.SetRow(label7, 0);
@@ -1187,11 +1187,11 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label6, 2);
             label6.Font = new Font("Arial", 10F);
             label6.ForeColor = Color.FromArgb(0, 0, 0);
-            label6.Location = new Point(15, 88);
+            label6.Location = new Point(15, 74);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             tablePanel1.SetRow(label6, 2);
-            label6.Size = new Size(131, 16);
+            label6.Size = new Size(78, 22);
             label6.TabIndex = 12;
             label6.Text = "№ пачек в расчете";
             // 
@@ -1202,7 +1202,7 @@ namespace SewingProduction
             tablePanel1.SetColumn(label5, 0);
             label5.Font = new Font("Arial", 10F);
             label5.ForeColor = Color.FromArgb(0, 0, 0);
-            label5.Location = new Point(15, 20);
+            label5.Location = new Point(15, 18);
             label5.Margin = new Padding(4, 0, 4, 0);
             label5.Name = "label5";
             tablePanel1.SetRow(label5, 0);
@@ -1218,7 +1218,7 @@ namespace SewingProduction
             tablePanel1.SetColumnSpan(label21, 2);
             label21.Font = new Font("Arial", 10F);
             label21.ForeColor = Color.FromArgb(0, 0, 0);
-            label21.Location = new Point(1539, 20);
+            label21.Location = new Point(1339, 18);
             label21.Margin = new Padding(4, 0, 4, 0);
             label21.Name = "label21";
             tablePanel1.SetRow(label21, 0);
@@ -1248,7 +1248,7 @@ namespace SewingProduction
             OtdelkaInfo.Controls.Add(splitContainer2);
             OtdelkaInfo.Margin = new Padding(4, 3, 4, 3);
             OtdelkaInfo.Name = "OtdelkaInfo";
-            OtdelkaInfo.Size = new Size(2049, 698);
+            OtdelkaInfo.Size = new Size(1848, 698);
             OtdelkaInfo.Text = "ДЕТАЛИ ОТДЕЛКИ";
             // 
             // splitContainer2
@@ -1267,7 +1267,7 @@ namespace SewingProduction
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(customGroupBox8);
-            splitContainer2.Size = new Size(2049, 698);
+            splitContainer2.Size = new Size(1848, 698);
             splitContainer2.SplitterDistance = 348;
             splitContainer2.SplitterWidth = 5;
             splitContainer2.TabIndex = 8;
@@ -1282,7 +1282,7 @@ namespace SewingProduction
             customGroupBox7.Margin = new Padding(4, 3, 4, 3);
             customGroupBox7.Name = "customGroupBox7";
             customGroupBox7.Padding = new Padding(4, 3, 4, 3);
-            customGroupBox7.Size = new Size(2049, 348);
+            customGroupBox7.Size = new Size(1848, 348);
             customGroupBox7.TabIndex = 0;
             customGroupBox7.TabStop = false;
             customGroupBox7.Text = "ШП";
@@ -1301,7 +1301,7 @@ namespace SewingProduction
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 89.70588F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 10.29412F));
-            tableLayoutPanel1.Size = new Size(2041, 323);
+            tableLayoutPanel1.Size = new Size(1840, 323);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // gridControlProizvCombIzdSP
@@ -1315,7 +1315,7 @@ namespace SewingProduction
             gridControlProizvCombIzdSP.MainView = gridViewProizvCombIzdSP;
             gridControlProizvCombIzdSP.Margin = new Padding(4, 3, 4, 3);
             gridControlProizvCombIzdSP.Name = "gridControlProizvCombIzdSP";
-            gridControlProizvCombIzdSP.Size = new Size(2033, 283);
+            gridControlProizvCombIzdSP.Size = new Size(1832, 283);
             gridControlProizvCombIzdSP.TabIndex = 4;
             gridControlProizvCombIzdSP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewProizvCombIzdSP });
             // 
@@ -1516,10 +1516,10 @@ namespace SewingProduction
             // sbProizvCombIzdSP
             // 
             sbProizvCombIzdSP.Dock = DockStyle.Fill;
-            sbProizvCombIzdSP.Location = new Point(1889, 292);
+            sbProizvCombIzdSP.Location = new Point(1704, 292);
             sbProizvCombIzdSP.Margin = new Padding(4, 3, 4, 3);
             sbProizvCombIzdSP.Name = "sbProizvCombIzdSP";
-            sbProizvCombIzdSP.Size = new Size(148, 28);
+            sbProizvCombIzdSP.Size = new Size(132, 28);
             sbProizvCombIzdSP.TabIndex = 7;
             sbProizvCombIzdSP.Text = "Печать";
             sbProizvCombIzdSP.Click += sbProizvCombIzdSP_Click;
@@ -1534,7 +1534,7 @@ namespace SewingProduction
             customGroupBox8.Margin = new Padding(4, 3, 4, 3);
             customGroupBox8.Name = "customGroupBox8";
             customGroupBox8.Padding = new Padding(4, 3, 4, 3);
-            customGroupBox8.Size = new Size(2049, 345);
+            customGroupBox8.Size = new Size(1848, 345);
             customGroupBox8.TabIndex = 0;
             customGroupBox8.TabStop = false;
             customGroupBox8.Text = "ВЗП";
@@ -1549,7 +1549,7 @@ namespace SewingProduction
             gridControlProizvCombIzdVZP.MainView = gridViewProizvCombIzdVZP;
             gridControlProizvCombIzdVZP.Margin = new Padding(4, 3, 4, 3);
             gridControlProizvCombIzdVZP.Name = "gridControlProizvCombIzdVZP";
-            gridControlProizvCombIzdVZP.Size = new Size(2041, 320);
+            gridControlProizvCombIzdVZP.Size = new Size(1840, 320);
             gridControlProizvCombIzdVZP.TabIndex = 4;
             gridControlProizvCombIzdVZP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewProizvCombIzdVZP });
             // 
@@ -2160,13 +2160,13 @@ namespace SewingProduction
             tablePanel5.SetColumn(gridControlOtdelka, 18);
             gridControlOtdelka.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlOtdelka.Font = new Font("Arial", 10F);
-            gridControlOtdelka.Location = new Point(1173, 16);
+            gridControlOtdelka.Location = new Point(1025, 16);
             gridControlOtdelka.MainView = gridViewOtdelka;
             gridControlOtdelka.Margin = new Padding(4, 3, 4, 3);
             gridControlOtdelka.Name = "gridControlOtdelka";
             tablePanel5.SetRow(gridControlOtdelka, 0);
             tablePanel5.SetRowSpan(gridControlOtdelka, 6);
-            gridControlOtdelka.Size = new Size(641, 172);
+            gridControlOtdelka.Size = new Size(789, 172);
             gridControlOtdelka.TabIndex = 5;
             gridControlOtdelka.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewOtdelka });
             // 
@@ -2176,7 +2176,7 @@ namespace SewingProduction
             WorkInfo.Appearance.HeaderActive.Options.UseFont = true;
             WorkInfo.Margin = new Padding(4, 3, 4, 3);
             WorkInfo.Name = "WorkInfo";
-            WorkInfo.Size = new Size(2049, 698);
+            WorkInfo.Size = new Size(1848, 698);
             WorkInfo.Text = "ВЫПОЛНЕННАЯ РАБОТА";
             // 
             // FurnInfo
@@ -2186,7 +2186,7 @@ namespace SewingProduction
             FurnInfo.Controls.Add(panelControl7);
             FurnInfo.Margin = new Padding(4, 3, 4, 3);
             FurnInfo.Name = "FurnInfo";
-            FurnInfo.Size = new Size(2049, 698);
+            FurnInfo.Size = new Size(1848, 698);
             FurnInfo.Text = "КОНФЕКЦИОН";
             // 
             // splitContainer1
@@ -2299,7 +2299,7 @@ namespace SewingProduction
             simpleButtonFullKKPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonFullKKPrint.Name = "simpleButtonFullKKPrint";
             tablePanel7.SetRow(simpleButtonFullKKPrint, 0);
-            simpleButtonFullKKPrint.Size = new Size(230, 40);
+            simpleButtonFullKKPrint.Size = new Size(230, 34);
             simpleButtonFullKKPrint.TabIndex = 78;
             simpleButtonFullKKPrint.Text = "КК общая (просмотр/печать)";
             simpleButtonFullKKPrint.Click += simpleButtonFullKKPrint_Click_1;
@@ -2314,11 +2314,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonUpakDeliveryInfoShow, 6);
             simpleButtonUpakDeliveryInfoShow.Dock = DockStyle.Fill;
             simpleButtonUpakDeliveryInfoShow.ImageOptions.Image = (Image)resources.GetObject("simpleButtonUpakDeliveryInfoShow.ImageOptions.Image");
-            simpleButtonUpakDeliveryInfoShow.Location = new Point(15, 425);
+            simpleButtonUpakDeliveryInfoShow.Location = new Point(15, 377);
             simpleButtonUpakDeliveryInfoShow.Margin = new Padding(4, 3, 4, 3);
             simpleButtonUpakDeliveryInfoShow.Name = "simpleButtonUpakDeliveryInfoShow";
             tablePanel7.SetRow(simpleButtonUpakDeliveryInfoShow, 15);
-            simpleButtonUpakDeliveryInfoShow.Size = new Size(230, 23);
+            simpleButtonUpakDeliveryInfoShow.Size = new Size(230, 19);
             simpleButtonUpakDeliveryInfoShow.TabIndex = 77;
             simpleButtonUpakDeliveryInfoShow.Text = "Инфо по доставке упак";
             simpleButtonUpakDeliveryInfoShow.Click += simpleButtonUpakDeliveryInfoShow_Click;
@@ -2334,11 +2334,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonFurnDeliveryInfoShow, 6);
             simpleButtonFurnDeliveryInfoShow.Dock = DockStyle.Fill;
             simpleButtonFurnDeliveryInfoShow.ImageOptions.Image = (Image)resources.GetObject("simpleButtonFurnDeliveryInfoShow.ImageOptions.Image");
-            simpleButtonFurnDeliveryInfoShow.Location = new Point(15, 221);
+            simpleButtonFurnDeliveryInfoShow.Location = new Point(15, 196);
             simpleButtonFurnDeliveryInfoShow.Margin = new Padding(4, 3, 4, 3);
             simpleButtonFurnDeliveryInfoShow.Name = "simpleButtonFurnDeliveryInfoShow";
             tablePanel7.SetRow(simpleButtonFurnDeliveryInfoShow, 7);
-            simpleButtonFurnDeliveryInfoShow.Size = new Size(230, 24);
+            simpleButtonFurnDeliveryInfoShow.Size = new Size(230, 20);
             simpleButtonFurnDeliveryInfoShow.TabIndex = 76;
             simpleButtonFurnDeliveryInfoShow.Text = "Инфо по доставке фурн";
             simpleButtonFurnDeliveryInfoShow.Click += simpleButtonFurnUpakDeliveryInfoShow_Click;
@@ -2353,11 +2353,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonZayavUpakPrint, 6);
             simpleButtonZayavUpakPrint.Dock = DockStyle.Fill;
             simpleButtonZayavUpakPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonZayavUpakPrint.ImageOptions.Image");
-            simpleButtonZayavUpakPrint.Location = new Point(15, 396);
+            simpleButtonZayavUpakPrint.Location = new Point(15, 352);
             simpleButtonZayavUpakPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonZayavUpakPrint.Name = "simpleButtonZayavUpakPrint";
             tablePanel7.SetRow(simpleButtonZayavUpakPrint, 14);
-            simpleButtonZayavUpakPrint.Size = new Size(230, 23);
+            simpleButtonZayavUpakPrint.Size = new Size(230, 19);
             simpleButtonZayavUpakPrint.TabIndex = 75;
             simpleButtonZayavUpakPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
             simpleButtonZayavUpakPrint.Click += simpleButtonZayavUpakPrint_Click;
@@ -2372,11 +2372,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonUpakKKPrint, 5);
             simpleButtonUpakKKPrint.Dock = DockStyle.Fill;
             simpleButtonUpakKKPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonUpakKKPrint.ImageOptions.Image");
-            simpleButtonUpakKKPrint.Location = new Point(15, 275);
+            simpleButtonUpakKKPrint.Location = new Point(15, 246);
             simpleButtonUpakKKPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonUpakKKPrint.Name = "simpleButtonUpakKKPrint";
             tablePanel7.SetRow(simpleButtonUpakKKPrint, 10);
-            simpleButtonUpakKKPrint.Size = new Size(198, 40);
+            simpleButtonUpakKKPrint.Size = new Size(169, 34);
             simpleButtonUpakKKPrint.TabIndex = 74;
             simpleButtonUpakKKPrint.Text = "КК на упаковку \r\n(просмотр/печать)";
             simpleButtonUpakKKPrint.Click += simpleButtonUpakKKPrint_Click;
@@ -2391,11 +2391,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonZayavFurnPrint, 6);
             simpleButtonZayavFurnPrint.Dock = DockStyle.Fill;
             simpleButtonZayavFurnPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonZayavFurnPrint.ImageOptions.Image");
-            simpleButtonZayavFurnPrint.Location = new Point(15, 192);
+            simpleButtonZayavFurnPrint.Location = new Point(15, 171);
             simpleButtonZayavFurnPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonZayavFurnPrint.Name = "simpleButtonZayavFurnPrint";
             tablePanel7.SetRow(simpleButtonZayavFurnPrint, 6);
-            simpleButtonZayavFurnPrint.Size = new Size(230, 23);
+            simpleButtonZayavFurnPrint.Size = new Size(230, 19);
             simpleButtonZayavFurnPrint.TabIndex = 73;
             simpleButtonZayavFurnPrint.Text = "ПРОСМОТР / ПЕЧАТЬ";
             simpleButtonZayavFurnPrint.Click += simpleButtonZayavFurnPrint_Click;
@@ -2412,11 +2412,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(simpleButtonFurnKKPrint, 5);
             simpleButtonFurnKKPrint.Dock = DockStyle.Fill;
             simpleButtonFurnKKPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonFurnKKPrint.ImageOptions.Image");
-            simpleButtonFurnKKPrint.Location = new Point(15, 71);
+            simpleButtonFurnKKPrint.Location = new Point(15, 65);
             simpleButtonFurnKKPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonFurnKKPrint.Name = "simpleButtonFurnKKPrint";
             tablePanel7.SetRow(simpleButtonFurnKKPrint, 2);
-            simpleButtonFurnKKPrint.Size = new Size(198, 40);
+            simpleButtonFurnKKPrint.Size = new Size(169, 34);
             simpleButtonFurnKKPrint.TabIndex = 72;
             simpleButtonFurnKKPrint.Text = "КК на фурнитуру (просмотр/печать)";
             simpleButtonFurnKKPrint.Click += simpleButtonFurnKKPrint_Click;
@@ -2428,11 +2428,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbDatZayav, 5);
             tbDatZayav.Font = new Font("Arial", 10F);
             tbDatZayav.ForeColor = Color.FromArgb(72, 61, 139);
-            tbDatZayav.Location = new Point(95, 607);
+            tbDatZayav.Location = new Point(83, 574);
             tbDatZayav.Margin = new Padding(0);
             tbDatZayav.Name = "tbDatZayav";
             tablePanel7.SetRow(tbDatZayav, 21);
-            tbDatZayav.Size = new Size(154, 23);
+            tbDatZayav.Size = new Size(166, 23);
             tbDatZayav.TabIndex = 70;
             // 
             // tbOtgrStat
@@ -2441,11 +2441,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbOtgrStat, 5);
             tbOtgrStat.Font = new Font("Arial", 10F);
             tbOtgrStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbOtgrStat.Location = new Point(217, 494);
+            tbOtgrStat.Location = new Point(188, 436);
             tbOtgrStat.Margin = new Padding(0);
             tbOtgrStat.Name = "tbOtgrStat";
             tablePanel7.SetRow(tbOtgrStat, 18);
-            tbOtgrStat.Size = new Size(32, 23);
+            tbOtgrStat.Size = new Size(61, 23);
             tbOtgrStat.TabIndex = 59;
             tbOtgrStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2456,12 +2456,12 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(mtbData_cd, 3);
             mtbData_cd.Font = new Font("Arial", 9F);
             mtbData_cd.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbData_cd.Location = new Point(99, 495);
+            mtbData_cd.Location = new Point(87, 437);
             mtbData_cd.Margin = new Padding(4, 3, 4, 3);
             mtbData_cd.Mask = "00/00/0000";
             mtbData_cd.Name = "mtbData_cd";
             tablePanel7.SetRow(mtbData_cd, 18);
-            mtbData_cd.Size = new Size(105, 21);
+            mtbData_cd.Size = new Size(89, 21);
             mtbData_cd.TabIndex = 65;
             // 
             // label61
@@ -2473,11 +2473,11 @@ namespace SewingProduction
             label61.Dock = DockStyle.Fill;
             label61.Font = new Font("Arial", 9F);
             label61.ForeColor = Color.FromArgb(0, 0, 0);
-            label61.Location = new Point(15, 535);
+            label61.Location = new Point(15, 475);
             label61.Margin = new Padding(4, 0, 4, 0);
             label61.Name = "label61";
             tablePanel7.SetRow(label61, 20);
-            label61.Size = new Size(230, 52);
+            label61.Size = new Size(230, 45);
             label61.TabIndex = 0;
             label61.Text = "Предположительная дата создания заявки (при выполнении всех условий)";
             label61.TextAlign = ContentAlignment.TopCenter;
@@ -2489,12 +2489,12 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(mtbData_zeh, 3);
             mtbData_zeh.Font = new Font("Arial", 9F);
             mtbData_zeh.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbData_zeh.Location = new Point(99, 466);
+            mtbData_zeh.Location = new Point(87, 414);
             mtbData_zeh.Margin = new Padding(4, 3, 4, 3);
             mtbData_zeh.Mask = "00/00/0000";
             mtbData_zeh.Name = "mtbData_zeh";
             tablePanel7.SetRow(mtbData_zeh, 17);
-            mtbData_zeh.Size = new Size(105, 21);
+            mtbData_zeh.Size = new Size(89, 21);
             mtbData_zeh.TabIndex = 64;
             // 
             // label60
@@ -2504,11 +2504,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(label60, 0);
             label60.Font = new Font("Arial", 9F);
             label60.ForeColor = Color.FromArgb(0, 0, 0);
-            label60.Location = new Point(15, 488);
+            label60.Location = new Point(15, 433);
             label60.Margin = new Padding(4, 0, 4, 0);
             label60.Name = "label60";
             tablePanel7.SetRow(label60, 18);
-            label60.Size = new Size(72, 35);
+            label60.Size = new Size(61, 30);
             label60.TabIndex = 55;
             label60.Text = "Дата отгрузки \r\nс производства";
             // 
@@ -2518,11 +2518,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbIs_got, 5);
             tbIs_got.Font = new Font("Arial", 10F);
             tbIs_got.ForeColor = Color.FromArgb(72, 61, 139);
-            tbIs_got.Location = new Point(217, 464);
+            tbIs_got.Location = new Point(188, 411);
             tbIs_got.Margin = new Padding(0);
             tbIs_got.Name = "tbIs_got";
             tablePanel7.SetRow(tbIs_got, 17);
-            tbIs_got.Size = new Size(32, 23);
+            tbIs_got.Size = new Size(61, 23);
             tbIs_got.TabIndex = 58;
             tbIs_got.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2533,11 +2533,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbData_f_z_u, 3);
             tbData_f_z_u.Font = new Font("Arial", 10F);
             tbData_f_z_u.ForeColor = Color.FromArgb(72, 61, 139);
-            tbData_f_z_u.Location = new Point(95, 369);
+            tbData_f_z_u.Location = new Point(83, 327);
             tbData_f_z_u.Margin = new Padding(0);
             tbData_f_z_u.Name = "tbData_f_z_u";
             tablePanel7.SetRow(tbData_f_z_u, 13);
-            tbData_f_z_u.Size = new Size(113, 23);
+            tbData_f_z_u.Size = new Size(97, 23);
             tbData_f_z_u.TabIndex = 69;
             // 
             // tbFurnKKStat
@@ -2546,11 +2546,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbFurnKKStat, 5);
             tbFurnKKStat.Font = new Font("Arial", 10F);
             tbFurnKKStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbFurnKKStat.Location = new Point(217, 79);
+            tbFurnKKStat.Location = new Point(188, 70);
             tbFurnKKStat.Margin = new Padding(0);
             tbFurnKKStat.Name = "tbFurnKKStat";
             tablePanel7.SetRow(tbFurnKKStat, 2);
-            tbFurnKKStat.Size = new Size(32, 23);
+            tbFurnKKStat.Size = new Size(61, 23);
             tbFurnKKStat.TabIndex = 33;
             tbFurnKKStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2561,11 +2561,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbData_f_o_u, 3);
             tbData_f_o_u.Font = new Font("Arial", 10F);
             tbData_f_o_u.ForeColor = Color.FromArgb(72, 61, 139);
-            tbData_f_o_u.Location = new Point(95, 344);
+            tbData_f_o_u.Location = new Point(83, 305);
             tbData_f_o_u.Margin = new Padding(0);
             tbData_f_o_u.Name = "tbData_f_o_u";
             tablePanel7.SetRow(tbData_f_o_u, 12);
-            tbData_f_o_u.Size = new Size(113, 23);
+            tbData_f_o_u.Size = new Size(97, 23);
             tbData_f_o_u.TabIndex = 68;
             // 
             // label59
@@ -2575,11 +2575,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(label59, 0);
             label59.Font = new Font("Arial", 9F);
             label59.ForeColor = Color.FromArgb(0, 0, 0);
-            label59.Location = new Point(15, 468);
+            label59.Location = new Point(15, 411);
             label59.Margin = new Padding(4, 0, 4, 0);
             label59.Name = "label59";
             tablePanel7.SetRow(label59, 17);
-            label59.Size = new Size(65, 15);
+            label59.Size = new Size(46, 22);
             label59.TabIndex = 54;
             label59.Text = "Дата в цех";
             // 
@@ -2590,11 +2590,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbData_f_z, 3);
             tbData_f_z.Font = new Font("Arial", 10F);
             tbData_f_z.ForeColor = Color.FromArgb(72, 61, 139);
-            tbData_f_z.Location = new Point(95, 165);
+            tbData_f_z.Location = new Point(83, 146);
             tbData_f_z.Margin = new Padding(0);
             tbData_f_z.Name = "tbData_f_z";
             tablePanel7.SetRow(tbData_f_z, 5);
-            tbData_f_z.Size = new Size(113, 23);
+            tbData_f_z.Size = new Size(97, 23);
             tbData_f_z.TabIndex = 67;
             // 
             // tbUpakKKStat
@@ -2603,11 +2603,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbUpakKKStat, 5);
             tbUpakKKStat.Font = new Font("Arial", 10F);
             tbUpakKKStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbUpakKKStat.Location = new Point(217, 283);
+            tbUpakKKStat.Location = new Point(188, 251);
             tbUpakKKStat.Margin = new Padding(0);
             tbUpakKKStat.Name = "tbUpakKKStat";
             tablePanel7.SetRow(tbUpakKKStat, 10);
-            tbUpakKKStat.Size = new Size(32, 23);
+            tbUpakKKStat.Size = new Size(61, 23);
             tbUpakKKStat.TabIndex = 34;
             tbUpakKKStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2617,11 +2617,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbUZSobrStat, 5);
             tbUZSobrStat.Font = new Font("Arial", 10F);
             tbUZSobrStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbUZSobrStat.Location = new Point(217, 369);
+            tbUZSobrStat.Location = new Point(188, 327);
             tbUZSobrStat.Margin = new Padding(0);
             tbUZSobrStat.Name = "tbUZSobrStat";
             tablePanel7.SetRow(tbUZSobrStat, 13);
-            tbUZSobrStat.Size = new Size(32, 23);
+            tbUZSobrStat.Size = new Size(61, 23);
             tbUZSobrStat.TabIndex = 52;
             tbUZSobrStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2632,11 +2632,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbData_f_o, 3);
             tbData_f_o.Font = new Font("Arial", 10F);
             tbData_f_o.ForeColor = Color.FromArgb(72, 61, 139);
-            tbData_f_o.Location = new Point(95, 140);
+            tbData_f_o.Location = new Point(83, 124);
             tbData_f_o.Margin = new Padding(0);
             tbData_f_o.Name = "tbData_f_o";
             tablePanel7.SetRow(tbData_f_o, 4);
-            tbData_f_o.Size = new Size(113, 23);
+            tbData_f_o.Size = new Size(97, 23);
             tbData_f_o.TabIndex = 66;
             // 
             // label25
@@ -2647,7 +2647,7 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(label25, 4);
             label25.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             label25.ForeColor = Color.FromArgb(0, 0, 0);
-            label25.Location = new Point(15, 120);
+            label25.Location = new Point(15, 106);
             label25.Margin = new Padding(4, 0, 4, 0);
             label25.Name = "label25";
             tablePanel7.SetRow(label25, 3);
@@ -2662,7 +2662,7 @@ namespace SewingProduction
             tablePanel7.SetColumn(label56, 0);
             label56.Font = new Font("Arial", 9F);
             label56.ForeColor = Color.FromArgb(0, 0, 0);
-            label56.Location = new Point(15, 373);
+            label56.Location = new Point(15, 330);
             label56.Margin = new Padding(4, 0, 4, 0);
             label56.Name = "label56";
             tablePanel7.SetRow(label56, 13);
@@ -2677,11 +2677,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbFurnZayav, 3);
             tbFurnZayav.Font = new Font("Arial", 10F);
             tbFurnZayav.ForeColor = Color.FromArgb(72, 61, 139);
-            tbFurnZayav.Location = new Point(192, 115);
+            tbFurnZayav.Location = new Point(166, 102);
             tbFurnZayav.Margin = new Padding(0);
             tbFurnZayav.Name = "tbFurnZayav";
             tablePanel7.SetRow(tbFurnZayav, 3);
-            tbFurnZayav.Size = new Size(57, 23);
+            tbFurnZayav.Size = new Size(83, 23);
             tbFurnZayav.TabIndex = 37;
             // 
             // tbUZSozdStat
@@ -2690,11 +2690,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbUZSozdStat, 5);
             tbUZSozdStat.Font = new Font("Arial", 10F);
             tbUZSozdStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbUZSozdStat.Location = new Point(217, 344);
+            tbUZSozdStat.Location = new Point(188, 305);
             tbUZSozdStat.Margin = new Padding(0);
             tbUZSozdStat.Name = "tbUZSozdStat";
             tablePanel7.SetRow(tbUZSozdStat, 12);
-            tbUZSozdStat.Size = new Size(32, 23);
+            tbUZSozdStat.Size = new Size(61, 23);
             tbUZSozdStat.TabIndex = 48;
             tbUZSozdStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2705,7 +2705,7 @@ namespace SewingProduction
             tablePanel7.SetColumn(label54, 0);
             label54.Font = new Font("Arial", 9F);
             label54.ForeColor = Color.FromArgb(0, 0, 0);
-            label54.Location = new Point(15, 144);
+            label54.Location = new Point(15, 127);
             label54.Margin = new Padding(4, 0, 4, 0);
             label54.Name = "label54";
             tablePanel7.SetRow(label54, 4);
@@ -2719,11 +2719,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbFZSozdStat, 5);
             tbFZSozdStat.Font = new Font("Arial", 10F);
             tbFZSozdStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbFZSozdStat.Location = new Point(217, 140);
+            tbFZSozdStat.Location = new Point(188, 124);
             tbFZSozdStat.Margin = new Padding(0);
             tbFZSozdStat.Name = "tbFZSozdStat";
             tablePanel7.SetRow(tbFZSozdStat, 4);
-            tbFZSozdStat.Size = new Size(32, 23);
+            tbFZSozdStat.Size = new Size(61, 23);
             tbFZSozdStat.TabIndex = 39;
             tbFZSozdStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2734,7 +2734,7 @@ namespace SewingProduction
             tablePanel7.SetColumn(label55, 0);
             label55.Font = new Font("Arial", 9F);
             label55.ForeColor = Color.FromArgb(0, 0, 0);
-            label55.Location = new Point(15, 169);
+            label55.Location = new Point(15, 149);
             label55.Margin = new Padding(4, 0, 4, 0);
             label55.Name = "label55";
             tablePanel7.SetRow(label55, 5);
@@ -2749,7 +2749,7 @@ namespace SewingProduction
             tablePanel7.SetColumn(label57, 0);
             label57.Font = new Font("Arial", 9F);
             label57.ForeColor = Color.FromArgb(0, 0, 0);
-            label57.Location = new Point(15, 348);
+            label57.Location = new Point(15, 308);
             label57.Margin = new Padding(4, 0, 4, 0);
             label57.Name = "label57";
             tablePanel7.SetRow(label57, 12);
@@ -2763,11 +2763,11 @@ namespace SewingProduction
             tablePanel7.SetColumn(tbFZSobrStat, 5);
             tbFZSobrStat.Font = new Font("Arial", 10F);
             tbFZSobrStat.ForeColor = Color.FromArgb(72, 61, 139);
-            tbFZSobrStat.Location = new Point(217, 165);
+            tbFZSobrStat.Location = new Point(188, 146);
             tbFZSobrStat.Margin = new Padding(0);
             tbFZSobrStat.Name = "tbFZSobrStat";
             tablePanel7.SetRow(tbFZSobrStat, 5);
-            tbFZSobrStat.Size = new Size(32, 23);
+            tbFZSobrStat.Size = new Size(61, 23);
             tbFZSobrStat.TabIndex = 43;
             tbFZSobrStat.TextAlign = HorizontalAlignment.Center;
             // 
@@ -2778,11 +2778,11 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(tbUpakZayav, 3);
             tbUpakZayav.Font = new Font("Arial", 10F);
             tbUpakZayav.ForeColor = Color.FromArgb(72, 61, 139);
-            tbUpakZayav.Location = new Point(192, 319);
+            tbUpakZayav.Location = new Point(166, 283);
             tbUpakZayav.Margin = new Padding(0);
             tbUpakZayav.Name = "tbUpakZayav";
             tablePanel7.SetRow(tbUpakZayav, 11);
-            tbUpakZayav.Size = new Size(57, 23);
+            tbUpakZayav.Size = new Size(83, 23);
             tbUpakZayav.TabIndex = 46;
             // 
             // label58
@@ -2793,7 +2793,7 @@ namespace SewingProduction
             tablePanel7.SetColumnSpan(label58, 4);
             label58.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
             label58.ForeColor = Color.FromArgb(0, 0, 0);
-            label58.Location = new Point(15, 324);
+            label58.Location = new Point(15, 287);
             label58.Margin = new Padding(4, 0, 4, 0);
             label58.Name = "label58";
             tablePanel7.SetRow(label58, 11);
@@ -2823,7 +2823,7 @@ namespace SewingProduction
             RasInfo.Controls.Add(ContDates);
             RasInfo.Margin = new Padding(4, 3, 4, 3);
             RasInfo.Name = "RasInfo";
-            RasInfo.Size = new Size(2049, 698);
+            RasInfo.Size = new Size(1848, 698);
             RasInfo.Text = "ИНФОРМАЦИЯ ПО РАСЧЕТУ";
             // 
             // customGroupBox5
@@ -2863,11 +2863,11 @@ namespace SewingProduction
             simpleButtonReestrListPrint.Appearance.Options.UseForeColor = true;
             tablePanel6.SetColumn(simpleButtonReestrListPrint, 4);
             simpleButtonReestrListPrint.ImageOptions.Image = (Image)resources.GetObject("simpleButtonReestrListPrint.ImageOptions.Image");
-            simpleButtonReestrListPrint.Location = new Point(592, 16);
+            simpleButtonReestrListPrint.Location = new Point(515, 16);
             simpleButtonReestrListPrint.Margin = new Padding(4, 3, 4, 3);
             simpleButtonReestrListPrint.Name = "simpleButtonReestrListPrint";
             tablePanel6.SetRow(simpleButtonReestrListPrint, 0);
-            simpleButtonReestrListPrint.Size = new Size(260, 29);
+            simpleButtonReestrListPrint.Size = new Size(222, 29);
             simpleButtonReestrListPrint.TabIndex = 11;
             simpleButtonReestrListPrint.Text = "Сопроводительные реестры";
             simpleButtonReestrListPrint.Click += simpleButtonReestrListPrint_Click;
@@ -2880,11 +2880,11 @@ namespace SewingProduction
             simpleButtonPrintMLRTUpak.Appearance.Options.UseForeColor = true;
             tablePanel6.SetColumn(simpleButtonPrintMLRTUpak, 2);
             simpleButtonPrintMLRTUpak.ImageOptions.Image = (Image)resources.GetObject("simpleButtonPrintMLRTUpak.ImageOptions.Image");
-            simpleButtonPrintMLRTUpak.Location = new Point(303, 16);
+            simpleButtonPrintMLRTUpak.Location = new Point(265, 16);
             simpleButtonPrintMLRTUpak.Margin = new Padding(4, 3, 4, 3);
             simpleButtonPrintMLRTUpak.Name = "simpleButtonPrintMLRTUpak";
             tablePanel6.SetRow(simpleButtonPrintMLRTUpak, 0);
-            simpleButtonPrintMLRTUpak.Size = new Size(260, 29);
+            simpleButtonPrintMLRTUpak.Size = new Size(222, 29);
             simpleButtonPrintMLRTUpak.TabIndex = 10;
             simpleButtonPrintMLRTUpak.Text = "Задание упак.";
             simpleButtonPrintMLRTUpak.Click += simpleButtonPrintMLRTUpak_Click;
@@ -2901,7 +2901,7 @@ namespace SewingProduction
             simpleButtonPrintMLRTAll.Margin = new Padding(4, 3, 4, 3);
             simpleButtonPrintMLRTAll.Name = "simpleButtonPrintMLRTAll";
             tablePanel6.SetRow(simpleButtonPrintMLRTAll, 0);
-            simpleButtonPrintMLRTAll.Size = new Size(260, 29);
+            simpleButtonPrintMLRTAll.Size = new Size(222, 29);
             simpleButtonPrintMLRTAll.TabIndex = 9;
             simpleButtonPrintMLRTAll.Text = "Задание общ.";
             simpleButtonPrintMLRTAll.Click += simpleButtonPrintMLRTAll_Click;
@@ -2978,12 +2978,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuVidStir, 10);
             mtbRzuVidStir.Font = new Font("Arial", 9F);
             mtbRzuVidStir.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuVidStir.Location = new Point(746, 162);
+            mtbRzuVidStir.Location = new Point(650, 153);
             mtbRzuVidStir.Margin = new Padding(4, 3, 4, 3);
             mtbRzuVidStir.Mask = "00/00/0000";
             mtbRzuVidStir.Name = "mtbRzuVidStir";
             tablePanel5.SetRow(mtbRzuVidStir, 5);
-            mtbRzuVidStir.Size = new Size(74, 21);
+            mtbRzuVidStir.Size = new Size(62, 21);
             mtbRzuVidStir.TabIndex = 63;
             // 
             // cbRzuStirFact
@@ -2992,11 +2992,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbRzuStirFact, 4);
             cbRzuStirFact.Font = new Font("Arial", 10F);
             cbRzuStirFact.ForeColor = Color.FromArgb(72, 61, 139);
-            cbRzuStirFact.Location = new Point(327, 131);
+            cbRzuStirFact.Location = new Point(285, 115);
             cbRzuStirFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuStirFact.Name = "cbRzuStirFact";
             tablePanel5.SetRow(cbRzuStirFact, 4);
-            cbRzuStirFact.Size = new Size(58, 18);
+            cbRzuStirFact.Size = new Size(58, 15);
             cbRzuStirFact.TabIndex = 72;
             cbRzuStirFact.Text = "Факт";
             cbRzuStirFact.UseVisualStyleBackColor = true;
@@ -3008,7 +3008,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label44, 9);
             label44.Font = new Font("Arial", 9F);
             label44.ForeColor = Color.FromArgb(0, 0, 0);
-            label44.Location = new Point(635, 165);
+            label44.Location = new Point(555, 156);
             label44.Margin = new Padding(4, 0, 4, 0);
             label44.Name = "label44";
             tablePanel5.SetRow(label44, 5);
@@ -3022,12 +3022,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataStCd, 7);
             mtbRzuDataStCd.Font = new Font("Arial", 9F);
             mtbRzuDataStCd.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataStCd.Location = new Point(533, 162);
+            mtbRzuDataStCd.Location = new Point(465, 153);
             mtbRzuDataStCd.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataStCd.Mask = "00/00/0000";
             mtbRzuDataStCd.Name = "mtbRzuDataStCd";
             tablePanel5.SetRow(mtbRzuDataStCd, 5);
-            mtbRzuDataStCd.Size = new Size(74, 21);
+            mtbRzuDataStCd.Size = new Size(62, 21);
             mtbRzuDataStCd.TabIndex = 60;
             // 
             // label32
@@ -3037,7 +3037,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label32, 0);
             label32.Font = new Font("Arial", 10F, FontStyle.Bold);
             label32.ForeColor = Color.FromArgb(0, 0, 0);
-            label32.Location = new Point(15, 14);
+            label32.Location = new Point(15, 12);
             label32.Margin = new Padding(4, 0, 4, 0);
             label32.Name = "label32";
             tablePanel5.SetRow(label32, 0);
@@ -3051,12 +3051,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataStR, 4);
             mtbRzuDataStR.Font = new Font("Arial", 9F);
             mtbRzuDataStR.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataStR.Location = new Point(327, 162);
+            mtbRzuDataStR.Location = new Point(285, 153);
             mtbRzuDataStR.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataStR.Mask = "00/00/0000";
             mtbRzuDataStR.Name = "mtbRzuDataStR";
             tablePanel5.SetRow(mtbRzuDataStR, 5);
-            mtbRzuDataStR.Size = new Size(74, 21);
+            mtbRzuDataStR.Size = new Size(62, 21);
             mtbRzuDataStR.TabIndex = 57;
             // 
             // label49
@@ -3066,7 +3066,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label49, 6);
             label49.Font = new Font("Arial", 9F);
             label49.ForeColor = Color.FromArgb(0, 0, 0);
-            label49.Location = new Point(428, 165);
+            label49.Location = new Point(375, 156);
             label49.Margin = new Padding(4, 0, 4, 0);
             label49.Name = "label49";
             tablePanel5.SetRow(label49, 5);
@@ -3080,11 +3080,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbPszStirPlan, 3);
             cbPszStirPlan.Font = new Font("Arial", 10F);
             cbPszStirPlan.ForeColor = Color.FromArgb(72, 61, 139);
-            cbPszStirPlan.Location = new Point(222, 131);
+            cbPszStirPlan.Location = new Point(195, 115);
             cbPszStirPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszStirPlan.Name = "cbPszStirPlan";
             tablePanel5.SetRow(cbPszStirPlan, 4);
-            cbPszStirPlan.Size = new Size(59, 18);
+            cbPszStirPlan.Size = new Size(59, 15);
             cbPszStirPlan.TabIndex = 71;
             cbPszStirPlan.Text = "План";
             cbPszStirPlan.UseVisualStyleBackColor = true;
@@ -3095,12 +3095,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataStP, 1);
             mtbRzuDataStP.Font = new Font("Arial", 9F);
             mtbRzuDataStP.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataStP.Location = new Point(120, 162);
+            mtbRzuDataStP.Location = new Point(105, 153);
             mtbRzuDataStP.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataStP.Mask = "00/00/0000";
             mtbRzuDataStP.Name = "mtbRzuDataStP";
             tablePanel5.SetRow(mtbRzuDataStP, 5);
-            mtbRzuDataStP.Size = new Size(74, 21);
+            mtbRzuDataStP.Size = new Size(62, 21);
             mtbRzuDataStP.TabIndex = 54;
             // 
             // cbPszPrintPlan
@@ -3109,11 +3109,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbPszPrintPlan, 3);
             cbPszPrintPlan.Font = new Font("Arial", 10F);
             cbPszPrintPlan.ForeColor = Color.FromArgb(72, 61, 139);
-            cbPszPrintPlan.Location = new Point(222, 13);
+            cbPszPrintPlan.Location = new Point(195, 13);
             cbPszPrintPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszPrintPlan.Name = "cbPszPrintPlan";
             tablePanel5.SetRow(cbPszPrintPlan, 0);
-            cbPszPrintPlan.Size = new Size(59, 18);
+            cbPszPrintPlan.Size = new Size(59, 15);
             cbPszPrintPlan.TabIndex = 67;
             cbPszPrintPlan.Text = "План";
             cbPszPrintPlan.UseVisualStyleBackColor = true;
@@ -3125,7 +3125,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label50, 3);
             label50.Font = new Font("Arial", 9F);
             label50.ForeColor = Color.FromArgb(0, 0, 0);
-            label50.Location = new Point(222, 165);
+            label50.Location = new Point(195, 156);
             label50.Margin = new Padding(4, 0, 4, 0);
             label50.Name = "label50";
             tablePanel5.SetRow(label50, 5);
@@ -3139,12 +3139,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataVCd, 13);
             mtbRzuDataVCd.Font = new Font("Arial", 9F);
             mtbRzuDataVCd.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataVCd.Location = new Point(912, 100);
+            mtbRzuDataVCd.Location = new Point(795, 86);
             mtbRzuDataVCd.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataVCd.Mask = "00/00/0000";
             mtbRzuDataVCd.Name = "mtbRzuDataVCd";
             tablePanel5.SetRow(mtbRzuDataVCd, 3);
-            mtbRzuDataVCd.Size = new Size(74, 21);
+            mtbRzuDataVCd.Size = new Size(62, 21);
             mtbRzuDataVCd.TabIndex = 65;
             // 
             // cbRzuVishFact
@@ -3153,11 +3153,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbRzuVishFact, 4);
             cbRzuVishFact.Font = new Font("Arial", 10F);
             cbRzuVishFact.ForeColor = Color.FromArgb(72, 61, 139);
-            cbRzuVishFact.Location = new Point(327, 72);
+            cbRzuVishFact.Location = new Point(285, 64);
             cbRzuVishFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuVishFact.Name = "cbRzuVishFact";
             tablePanel5.SetRow(cbRzuVishFact, 2);
-            cbRzuVishFact.Size = new Size(58, 18);
+            cbRzuVishFact.Size = new Size(58, 15);
             cbRzuVishFact.TabIndex = 70;
             cbRzuVishFact.Text = "Факт";
             cbRzuVishFact.UseVisualStyleBackColor = true;
@@ -3168,11 +3168,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbRzuPrintFact, 4);
             cbRzuPrintFact.Font = new Font("Arial", 10F);
             cbRzuPrintFact.ForeColor = Color.FromArgb(72, 61, 139);
-            cbRzuPrintFact.Location = new Point(327, 13);
+            cbRzuPrintFact.Location = new Point(285, 13);
             cbRzuPrintFact.Margin = new Padding(4, 3, 4, 3);
             cbRzuPrintFact.Name = "cbRzuPrintFact";
             tablePanel5.SetRow(cbRzuPrintFact, 0);
-            cbRzuPrintFact.Size = new Size(58, 18);
+            cbRzuPrintFact.Size = new Size(58, 15);
             cbRzuPrintFact.TabIndex = 68;
             cbRzuPrintFact.Text = "Факт";
             cbRzuPrintFact.UseVisualStyleBackColor = true;
@@ -3184,11 +3184,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label51, 0);
             label51.Font = new Font("Arial", 9F);
             label51.ForeColor = Color.FromArgb(0, 0, 0);
-            label51.Location = new Point(15, 158);
+            label51.Location = new Point(15, 141);
             label51.Margin = new Padding(4, 0, 4, 0);
             label51.Name = "label51";
             tablePanel5.SetRow(label51, 5);
-            label51.Size = new Size(84, 30);
+            label51.Size = new Size(60, 45);
             label51.TabIndex = 46;
             label51.Text = "Дата принято\r\nна стирку";
             // 
@@ -3198,12 +3198,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataVChi, 10);
             mtbRzuDataVChi.Font = new Font("Arial", 9F);
             mtbRzuDataVChi.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataVChi.Location = new Point(746, 100);
+            mtbRzuDataVChi.Location = new Point(650, 86);
             mtbRzuDataVChi.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataVChi.Mask = "00/00/0000";
             mtbRzuDataVChi.Name = "mtbRzuDataVChi";
             tablePanel5.SetRow(mtbRzuDataVChi, 3);
-            mtbRzuDataVChi.Size = new Size(74, 21);
+            mtbRzuDataVChi.Size = new Size(62, 21);
             mtbRzuDataVChi.TabIndex = 62;
             // 
             // cbPszVishPlan
@@ -3212,11 +3212,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(cbPszVishPlan, 3);
             cbPszVishPlan.Font = new Font("Arial", 10F);
             cbPszVishPlan.ForeColor = Color.FromArgb(72, 61, 139);
-            cbPszVishPlan.Location = new Point(222, 72);
+            cbPszVishPlan.Location = new Point(195, 64);
             cbPszVishPlan.Margin = new Padding(4, 3, 4, 3);
             cbPszVishPlan.Name = "cbPszVishPlan";
             tablePanel5.SetRow(cbPszVishPlan, 2);
-            cbPszVishPlan.Size = new Size(59, 18);
+            cbPszVishPlan.Size = new Size(59, 15);
             cbPszVishPlan.TabIndex = 69;
             cbPszVishPlan.Text = "План";
             cbPszVishPlan.UseVisualStyleBackColor = true;
@@ -3228,7 +3228,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label37, 0);
             label37.Font = new Font("Arial", 9F);
             label37.ForeColor = Color.FromArgb(0, 0, 0);
-            label37.Location = new Point(15, 36);
+            label37.Location = new Point(15, 31);
             label37.Margin = new Padding(4, 0, 4, 0);
             label37.Name = "label37";
             tablePanel5.SetRow(label37, 1);
@@ -3242,12 +3242,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataVR, 7);
             mtbRzuDataVR.Font = new Font("Arial", 9F);
             mtbRzuDataVR.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataVR.Location = new Point(533, 100);
+            mtbRzuDataVR.Location = new Point(465, 86);
             mtbRzuDataVR.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataVR.Mask = "00/00/0000";
             mtbRzuDataVR.Name = "mtbRzuDataVR";
             tablePanel5.SetRow(mtbRzuDataVR, 3);
-            mtbRzuDataVR.Size = new Size(74, 21);
+            mtbRzuDataVR.Size = new Size(62, 21);
             mtbRzuDataVR.TabIndex = 59;
             // 
             // mtbRzuDataPrCd
@@ -3256,12 +3256,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataPrCd, 16);
             mtbRzuDataPrCd.Font = new Font("Arial", 9F);
             mtbRzuDataPrCd.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataPrCd.Location = new Point(1072, 41);
+            mtbRzuDataPrCd.Location = new Point(935, 35);
             mtbRzuDataPrCd.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataPrCd.Mask = "00/00/0000";
             mtbRzuDataPrCd.Name = "mtbRzuDataPrCd";
             tablePanel5.SetRow(mtbRzuDataPrCd, 1);
-            mtbRzuDataPrCd.Size = new Size(74, 21);
+            mtbRzuDataPrCd.Size = new Size(62, 21);
             mtbRzuDataPrCd.TabIndex = 66;
             // 
             // label35
@@ -3272,7 +3272,7 @@ namespace SewingProduction
             tablePanel5.SetColumnSpan(label35, 2);
             label35.Font = new Font("Arial", 10F, FontStyle.Bold);
             label35.ForeColor = Color.FromArgb(0, 0, 0);
-            label35.Location = new Point(15, 132);
+            label35.Location = new Point(15, 114);
             label35.Margin = new Padding(4, 0, 4, 0);
             label35.Name = "label35";
             tablePanel5.SetRow(label35, 4);
@@ -3286,12 +3286,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataRasp, 1);
             mtbRzuDataRasp.Font = new Font("Arial", 9F);
             mtbRzuDataRasp.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataRasp.Location = new Point(120, 41);
+            mtbRzuDataRasp.Location = new Point(105, 35);
             mtbRzuDataRasp.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataRasp.Mask = "00/00/0000";
             mtbRzuDataRasp.Name = "mtbRzuDataRasp";
             tablePanel5.SetRow(mtbRzuDataRasp, 1);
-            mtbRzuDataRasp.Size = new Size(74, 21);
+            mtbRzuDataRasp.Size = new Size(62, 21);
             mtbRzuDataRasp.TabIndex = 38;
             // 
             // mtbRzuDataVP
@@ -3300,12 +3300,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataVP, 4);
             mtbRzuDataVP.Font = new Font("Arial", 9F);
             mtbRzuDataVP.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataVP.Location = new Point(327, 100);
+            mtbRzuDataVP.Location = new Point(285, 86);
             mtbRzuDataVP.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataVP.Mask = "00/00/0000";
             mtbRzuDataVP.Name = "mtbRzuDataVP";
             tablePanel5.SetRow(mtbRzuDataVP, 3);
-            mtbRzuDataVP.Size = new Size(74, 21);
+            mtbRzuDataVP.Size = new Size(62, 21);
             mtbRzuDataVP.TabIndex = 56;
             // 
             // label43
@@ -3315,7 +3315,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label43, 12);
             label43.Font = new Font("Arial", 9F);
             label43.ForeColor = Color.FromArgb(0, 0, 0);
-            label43.Location = new Point(848, 95);
+            label43.Location = new Point(740, 82);
             label43.Margin = new Padding(4, 0, 4, 0);
             label43.Name = "label43";
             tablePanel5.SetRow(label43, 3);
@@ -3330,11 +3330,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label38, 3);
             label38.Font = new Font("Arial", 9F);
             label38.ForeColor = Color.FromArgb(0, 0, 0);
-            label38.Location = new Point(222, 36);
+            label38.Location = new Point(195, 31);
             label38.Margin = new Padding(4, 0, 4, 0);
             label38.Name = "label38";
             tablePanel5.SetRow(label38, 1);
-            label38.Size = new Size(84, 30);
+            label38.Size = new Size(57, 30);
             label38.TabIndex = 22;
             label38.Text = "Дата принято\r\nна принт";
             // 
@@ -3344,12 +3344,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataPrKm, 13);
             mtbRzuDataPrKm.Font = new Font("Arial", 9F);
             mtbRzuDataPrKm.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataPrKm.Location = new Point(912, 41);
+            mtbRzuDataPrKm.Location = new Point(795, 35);
             mtbRzuDataPrKm.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataPrKm.Mask = "00/00/0000";
             mtbRzuDataPrKm.Name = "mtbRzuDataPrKm";
             tablePanel5.SetRow(mtbRzuDataPrKm, 1);
-            mtbRzuDataPrKm.Size = new Size(74, 21);
+            mtbRzuDataPrKm.Size = new Size(62, 21);
             mtbRzuDataPrKm.TabIndex = 64;
             // 
             // mtbRzuDataRasv
@@ -3358,12 +3358,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataRasv, 1);
             mtbRzuDataRasv.Font = new Font("Arial", 9F);
             mtbRzuDataRasv.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataRasv.Location = new Point(120, 100);
+            mtbRzuDataRasv.Location = new Point(105, 86);
             mtbRzuDataRasv.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataRasv.Mask = "00/00/0000";
             mtbRzuDataRasv.Name = "mtbRzuDataRasv";
             tablePanel5.SetRow(mtbRzuDataRasv, 3);
-            mtbRzuDataRasv.Size = new Size(74, 21);
+            mtbRzuDataRasv.Size = new Size(62, 21);
             mtbRzuDataRasv.TabIndex = 53;
             // 
             // label45
@@ -3373,11 +3373,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label45, 9);
             label45.Font = new Font("Arial", 9F);
             label45.ForeColor = Color.FromArgb(0, 0, 0);
-            label45.Location = new Point(635, 103);
+            label45.Location = new Point(555, 82);
             label45.Margin = new Padding(4, 0, 4, 0);
             label45.Name = "label45";
             tablePanel5.SetRow(label45, 3);
-            label45.Size = new Size(89, 15);
+            label45.Size = new Size(54, 30);
             label45.TabIndex = 38;
             label45.Text = "Дата на чистку";
             // 
@@ -3387,12 +3387,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataPrP, 4);
             mtbRzuDataPrP.Font = new Font("Arial", 9F);
             mtbRzuDataPrP.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataPrP.Location = new Point(327, 41);
+            mtbRzuDataPrP.Location = new Point(285, 35);
             mtbRzuDataPrP.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataPrP.Mask = "00/00/0000";
             mtbRzuDataPrP.Name = "mtbRzuDataPrP";
             tablePanel5.SetRow(mtbRzuDataPrP, 1);
-            mtbRzuDataPrP.Size = new Size(74, 21);
+            mtbRzuDataPrP.Size = new Size(62, 21);
             mtbRzuDataPrP.TabIndex = 55;
             // 
             // label39
@@ -3402,11 +3402,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label39, 6);
             label39.Font = new Font("Arial", 9F);
             label39.ForeColor = Color.FromArgb(0, 0, 0);
-            label39.Location = new Point(428, 36);
+            label39.Location = new Point(375, 31);
             label39.Margin = new Padding(4, 0, 4, 0);
             label39.Name = "label39";
             tablePanel5.SetRow(label39, 1);
-            label39.Size = new Size(84, 30);
+            label39.Size = new Size(46, 30);
             label39.TabIndex = 24;
             label39.Text = "Дата в работу\r\nпринт";
             // 
@@ -3416,12 +3416,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataPrR, 7);
             mtbRzuDataPrR.Font = new Font("Arial", 9F);
             mtbRzuDataPrR.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataPrR.Location = new Point(533, 41);
+            mtbRzuDataPrR.Location = new Point(465, 35);
             mtbRzuDataPrR.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataPrR.Mask = "00/00/0000";
             mtbRzuDataPrR.Name = "mtbRzuDataPrR";
             tablePanel5.SetRow(mtbRzuDataPrR, 1);
-            mtbRzuDataPrR.Size = new Size(74, 21);
+            mtbRzuDataPrR.Size = new Size(62, 21);
             mtbRzuDataPrR.TabIndex = 58;
             // 
             // label46
@@ -3431,11 +3431,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label46, 6);
             label46.Font = new Font("Arial", 9F);
             label46.ForeColor = Color.FromArgb(0, 0, 0);
-            label46.Location = new Point(428, 95);
+            label46.Location = new Point(375, 82);
             label46.Margin = new Padding(4, 0, 4, 0);
             label46.Name = "label46";
             tablePanel5.SetRow(label46, 3);
-            label46.Size = new Size(84, 30);
+            label46.Size = new Size(57, 30);
             label46.TabIndex = 36;
             label46.Text = "Дата в работу\r\nвышивка";
             // 
@@ -3445,12 +3445,12 @@ namespace SewingProduction
             tablePanel5.SetColumn(mtbRzuDataPrPe, 10);
             mtbRzuDataPrPe.Font = new Font("Arial", 9F);
             mtbRzuDataPrPe.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataPrPe.Location = new Point(746, 41);
+            mtbRzuDataPrPe.Location = new Point(650, 35);
             mtbRzuDataPrPe.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataPrPe.Mask = "00/00/0000";
             mtbRzuDataPrPe.Name = "mtbRzuDataPrPe";
             tablePanel5.SetRow(mtbRzuDataPrPe, 1);
-            mtbRzuDataPrPe.Size = new Size(74, 21);
+            mtbRzuDataPrPe.Size = new Size(62, 21);
             mtbRzuDataPrPe.TabIndex = 61;
             // 
             // label40
@@ -3460,7 +3460,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label40, 9);
             label40.Font = new Font("Arial", 9F);
             label40.ForeColor = Color.FromArgb(0, 0, 0);
-            label40.Location = new Point(635, 36);
+            label40.Location = new Point(555, 31);
             label40.Margin = new Padding(4, 0, 4, 0);
             label40.Name = "label40";
             tablePanel5.SetRow(label40, 1);
@@ -3475,7 +3475,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label41, 12);
             label41.Font = new Font("Arial", 9F);
             label41.ForeColor = Color.FromArgb(0, 0, 0);
-            label41.Location = new Point(848, 36);
+            label41.Location = new Point(740, 31);
             label41.Margin = new Padding(4, 0, 4, 0);
             label41.Name = "label41";
             tablePanel5.SetRow(label41, 1);
@@ -3490,11 +3490,11 @@ namespace SewingProduction
             tablePanel5.SetColumn(label47, 3);
             label47.Font = new Font("Arial", 9F);
             label47.ForeColor = Color.FromArgb(0, 0, 0);
-            label47.Location = new Point(222, 95);
+            label47.Location = new Point(195, 82);
             label47.Margin = new Padding(4, 0, 4, 0);
             label47.Name = "label47";
             tablePanel5.SetRow(label47, 3);
-            label47.Size = new Size(84, 30);
+            label47.Size = new Size(72, 30);
             label47.TabIndex = 34;
             label47.Text = "Дата принято\r\nна вышивку";
             // 
@@ -3505,7 +3505,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label42, 15);
             label42.Font = new Font("Arial", 9F);
             label42.ForeColor = Color.FromArgb(0, 0, 0);
-            label42.Location = new Point(1013, 36);
+            label42.Location = new Point(885, 31);
             label42.Margin = new Padding(4, 0, 4, 0);
             label42.Name = "label42";
             tablePanel5.SetRow(label42, 1);
@@ -3521,7 +3521,7 @@ namespace SewingProduction
             tablePanel5.SetColumnSpan(label36, 2);
             label36.Font = new Font("Arial", 10F, FontStyle.Bold);
             label36.ForeColor = Color.FromArgb(0, 0, 0);
-            label36.Location = new Point(15, 73);
+            label36.Location = new Point(15, 63);
             label36.Margin = new Padding(4, 0, 4, 0);
             label36.Name = "label36";
             tablePanel5.SetRow(label36, 2);
@@ -3536,7 +3536,7 @@ namespace SewingProduction
             tablePanel5.SetColumn(label48, 0);
             label48.Font = new Font("Arial", 9F);
             label48.ForeColor = Color.FromArgb(0, 0, 0);
-            label48.Location = new Point(15, 95);
+            label48.Location = new Point(15, 82);
             label48.Margin = new Padding(4, 0, 4, 0);
             label48.Name = "label48";
             tablePanel5.SetRow(label48, 3);
@@ -3583,11 +3583,11 @@ namespace SewingProduction
             simpleButtonNaklPart.Appearance.Options.UseForeColor = true;
             tablePanel4.SetColumn(simpleButtonNaklPart, 1);
             simpleButtonNaklPart.ImageOptions.Image = (Image)resources.GetObject("simpleButtonNaklPart.ImageOptions.Image");
-            simpleButtonNaklPart.Location = new Point(21, 184);
+            simpleButtonNaklPart.Location = new Point(20, 173);
             simpleButtonNaklPart.Margin = new Padding(4, 3, 4, 3);
             simpleButtonNaklPart.Name = "simpleButtonNaklPart";
             tablePanel4.SetRow(simpleButtonNaklPart, 1);
-            simpleButtonNaklPart.Size = new Size(353, 29);
+            simpleButtonNaklPart.Size = new Size(301, 29);
             simpleButtonNaklPart.TabIndex = 12;
             simpleButtonNaklPart.Text = "Показать информацию по делению накладной";
             simpleButtonNaklPart.Click += simpleButtonNaklPart_Click;
@@ -3600,11 +3600,11 @@ namespace SewingProduction
             simpleButtonPrintNaklXtraReport.Appearance.Options.UseForeColor = true;
             tablePanel4.SetColumn(simpleButtonPrintNaklXtraReport, 3);
             simpleButtonPrintNaklXtraReport.ImageOptions.Image = (Image)resources.GetObject("simpleButtonPrintNaklXtraReport.ImageOptions.Image");
-            simpleButtonPrintNaklXtraReport.Location = new Point(401, 184);
+            simpleButtonPrintNaklXtraReport.Location = new Point(349, 173);
             simpleButtonPrintNaklXtraReport.Margin = new Padding(4, 3, 4, 3);
             simpleButtonPrintNaklXtraReport.Name = "simpleButtonPrintNaklXtraReport";
             tablePanel4.SetRow(simpleButtonPrintNaklXtraReport, 1);
-            simpleButtonPrintNaklXtraReport.Size = new Size(178, 29);
+            simpleButtonPrintNaklXtraReport.Size = new Size(151, 29);
             simpleButtonPrintNaklXtraReport.TabIndex = 11;
             simpleButtonPrintNaklXtraReport.Text = "Печать накладной";
             simpleButtonPrintNaklXtraReport.Click += simpleButtonPrintNaklXtraReport_Click;
@@ -3617,11 +3617,11 @@ namespace SewingProduction
             btnNaklAbsent.FlatStyle = FlatStyle.Flat;
             btnNaklAbsent.Font = new Font("Arial", 10F);
             btnNaklAbsent.ForeColor = Color.FromArgb(106, 90, 205);
-            btnNaklAbsent.Location = new Point(1503, 181);
+            btnNaklAbsent.Location = new Point(1293, 159);
             btnNaklAbsent.Margin = new Padding(4, 3, 4, 3);
             btnNaklAbsent.Name = "btnNaklAbsent";
             tablePanel4.SetRow(btnNaklAbsent, 1);
-            btnNaklAbsent.Size = new Size(309, 35);
+            btnNaklAbsent.Size = new Size(519, 57);
             btnNaklAbsent.TabIndex = 8;
             btnNaklAbsent.Text = "Накладная не создана. Причина";
             btnNaklAbsent.UseVisualStyleBackColor = true;
@@ -3638,7 +3638,7 @@ namespace SewingProduction
             panelControl1.Margin = new Padding(4, 3, 4, 3);
             panelControl1.Name = "panelControl1";
             tablePanel4.SetRow(panelControl1, 0);
-            panelControl1.Size = new Size(1797, 162);
+            panelControl1.Size = new Size(1797, 140);
             panelControl1.TabIndex = 0;
             // 
             // gridControlPartNaklList
@@ -3900,14 +3900,14 @@ namespace SewingProduction
             ContDates.Margin = new Padding(4, 3, 4, 3);
             ContDates.Name = "ContDates";
             ContDates.Padding = new Padding(4, 3, 4, 3);
-            ContDates.Size = new Size(2042, 89);
+            ContDates.Size = new Size(1845, 89);
             ContDates.TabIndex = 32;
             ContDates.TabStop = false;
             ContDates.Text = "КОНТРОЛЬНЫЕ ДАТЫ";
             // 
             // tablePanel3
             // 
-            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 95F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 16F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 75F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 21F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 115F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 29F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 90F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 28F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 34F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 20F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 75F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 24F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 70F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 38F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 70F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 90F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 95F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F) });
+            tablePanel3.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 16F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 75F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 21F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 125F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 29F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 28F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 40F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 20F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 65F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 24F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 70F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 38F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 70F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 26F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 90F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 95F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F) });
             tablePanel3.Controls.Add(customLabel3);
             tablePanel3.Controls.Add(mtbRzuData1С);
             tablePanel3.Controls.Add(tbPszRpcNom);
@@ -3933,7 +3933,7 @@ namespace SewingProduction
             tablePanel3.Margin = new Padding(4, 3, 4, 3);
             tablePanel3.Name = "tablePanel3";
             tablePanel3.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F) });
-            tablePanel3.Size = new Size(2034, 64);
+            tablePanel3.Size = new Size(1837, 64);
             tablePanel3.TabIndex = 0;
             tablePanel3.UseSkinIndents = true;
             // 
@@ -3944,7 +3944,7 @@ namespace SewingProduction
             tablePanel3.SetColumn(customLabel3, 12);
             customLabel3.Font = new Font("Arial", 9F);
             customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel3.Location = new Point(935, 24);
+            customLabel3.Location = new Point(775, 24);
             customLabel3.Margin = new Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             tablePanel3.SetRow(customLabel3, 0);
@@ -3958,12 +3958,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuData1С, 27);
             mtbRzuData1С.Font = new Font("Arial", 9F);
             mtbRzuData1С.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuData1С.Location = new Point(1927, 21);
+            mtbRzuData1С.Location = new Point(1625, 21);
             mtbRzuData1С.Margin = new Padding(4, 3, 4, 3);
             mtbRzuData1С.Mask = "00/00/0000";
             mtbRzuData1С.Name = "mtbRzuData1С";
             tablePanel3.SetRow(mtbRzuData1С, 0);
-            mtbRzuData1С.Size = new Size(93, 21);
+            mtbRzuData1С.Size = new Size(197, 21);
             mtbRzuData1С.TabIndex = 39;
             // 
             // tbPszRpcNom
@@ -3972,11 +3972,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(tbPszRpcNom, 13);
             tbPszRpcNom.Font = new Font("Arial", 10F);
             tbPszRpcNom.ForeColor = Color.FromArgb(72, 61, 139);
-            tbPszRpcNom.Location = new Point(971, 20);
+            tbPszRpcNom.Location = new Point(811, 20);
             tbPszRpcNom.Margin = new Padding(0);
             tbPszRpcNom.Name = "tbPszRpcNom";
             tablePanel3.SetRow(tbPszRpcNom, 0);
-            tbPszRpcNom.Size = new Size(23, 23);
+            tbPszRpcNom.Size = new Size(20, 23);
             tbPszRpcNom.TabIndex = 34;
             // 
             // label63
@@ -3986,11 +3986,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(label63, 26);
             label63.Font = new Font("Arial", 9F);
             label63.ForeColor = Color.FromArgb(0, 0, 0);
-            label63.Location = new Point(1816, 24);
+            label63.Location = new Point(1530, 16);
             label63.Margin = new Padding(4, 0, 4, 0);
             label63.Name = "label63";
             tablePanel3.SetRow(label63, 0);
-            label63.Size = new Size(88, 15);
+            label63.Size = new Size(72, 30);
             label63.TabIndex = 38;
             label63.Text = "Дата 1к.т. в 1С";
             // 
@@ -4001,11 +4001,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(label29, 0);
             label29.Font = new Font("Arial", 9F);
             label29.ForeColor = Color.FromArgb(0, 0, 0);
-            label29.Location = new Point(15, 24);
+            label29.Location = new Point(15, 16);
             label29.Margin = new Padding(4, 0, 4, 0);
             label29.Name = "label29";
             tablePanel3.SetRow(label29, 0);
-            label29.Size = new Size(81, 15);
+            label29.Size = new Size(51, 30);
             label29.TabIndex = 10;
             label29.Text = "Дата запуска";
             // 
@@ -4015,12 +4015,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataCd, 25);
             mtbRzuDataCd.Font = new Font("Arial", 9F);
             mtbRzuDataCd.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataCd.Location = new Point(1722, 21);
+            mtbRzuDataCd.Location = new Point(1450, 21);
             mtbRzuDataCd.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataCd.Mask = "00/00/0000";
             mtbRzuDataCd.Name = "mtbRzuDataCd";
             tablePanel3.SetRow(mtbRzuDataCd, 0);
-            mtbRzuDataCd.Size = new Size(85, 21);
+            mtbRzuDataCd.Size = new Size(72, 21);
             mtbRzuDataCd.TabIndex = 37;
             // 
             // mtbRzuDataR
@@ -4029,12 +4029,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataR, 10);
             mtbRzuDataR.Font = new Font("Arial", 9F);
             mtbRzuDataR.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataR.Location = new Point(809, 21);
+            mtbRzuDataR.Location = new Point(675, 21);
             mtbRzuDataR.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataR.Mask = "00/00/0000";
             mtbRzuDataR.Name = "mtbRzuDataR";
             tablePanel3.SetRow(mtbRzuDataR, 0);
-            mtbRzuDataR.Size = new Size(85, 21);
+            mtbRzuDataR.Size = new Size(72, 21);
             mtbRzuDataR.TabIndex = 41;
             // 
             // label14
@@ -4044,7 +4044,7 @@ namespace SewingProduction
             tablePanel3.SetColumn(label14, 24);
             label14.Font = new Font("Arial", 9F);
             label14.ForeColor = Color.FromArgb(0, 0, 0);
-            label14.Location = new Point(1617, 16);
+            label14.Location = new Point(1360, 16);
             label14.Margin = new Padding(4, 0, 4, 0);
             label14.Name = "label14";
             tablePanel3.SetRow(label14, 0);
@@ -4058,12 +4058,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataUp, 22);
             mtbRzuDataUp.Font = new Font("Arial", 9F);
             mtbRzuDataUp.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataUp.Location = new Point(1504, 21);
+            mtbRzuDataUp.Location = new Point(1260, 21);
             mtbRzuDataUp.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataUp.Mask = "00/00/0000";
             mtbRzuDataUp.Name = "mtbRzuDataUp";
             tablePanel3.SetRow(mtbRzuDataUp, 0);
-            mtbRzuDataUp.Size = new Size(85, 21);
+            mtbRzuDataUp.Size = new Size(72, 21);
             mtbRzuDataUp.TabIndex = 36;
             // 
             // mtbPsaDataZap
@@ -4072,12 +4072,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbPsaDataZap, 1);
             mtbPsaDataZap.Font = new Font("Arial", 9F);
             mtbPsaDataZap.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbPsaDataZap.Location = new Point(126, 21);
+            mtbPsaDataZap.Location = new Point(95, 21);
             mtbPsaDataZap.Margin = new Padding(4, 3, 4, 3);
             mtbPsaDataZap.Mask = "00/00/0000";
             mtbPsaDataZap.Name = "mtbPsaDataZap";
             tablePanel3.SetRow(mtbPsaDataZap, 0);
-            mtbPsaDataZap.Size = new Size(85, 21);
+            mtbPsaDataZap.Size = new Size(72, 21);
             mtbPsaDataZap.TabIndex = 31;
             // 
             // mtbRzuDataRab
@@ -4086,12 +4086,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataRab, 19);
             mtbRzuDataRab.Font = new Font("Arial", 9F);
             mtbRzuDataRab.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataRab.Location = new Point(1309, 21);
+            mtbRzuDataRab.Location = new Point(1090, 21);
             mtbRzuDataRab.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataRab.Mask = "00/00/0000";
             mtbRzuDataRab.Name = "mtbRzuDataRab";
             tablePanel3.SetRow(mtbRzuDataRab, 0);
-            mtbRzuDataRab.Size = new Size(85, 21);
+            mtbRzuDataRab.Size = new Size(72, 21);
             mtbRzuDataRab.TabIndex = 35;
             // 
             // label33
@@ -4101,7 +4101,7 @@ namespace SewingProduction
             tablePanel3.SetColumn(label33, 21);
             label33.Font = new Font("Arial", 9F);
             label33.ForeColor = Color.FromArgb(0, 0, 0);
-            label33.Location = new Point(1422, 16);
+            label33.Location = new Point(1190, 16);
             label33.Margin = new Padding(4, 0, 4, 0);
             label33.Name = "label33";
             tablePanel3.SetRow(label33, 0);
@@ -4116,11 +4116,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(label64, 9);
             label64.Font = new Font("Arial", 9F);
             label64.ForeColor = Color.FromArgb(0, 0, 0);
-            label64.Location = new Point(704, 24);
+            label64.Location = new Point(595, 16);
             label64.Margin = new Padding(4, 0, 4, 0);
             label64.Name = "label64";
             tablePanel3.SetRow(label64, 0);
-            label64.Size = new Size(84, 15);
+            label64.Size = new Size(54, 30);
             label64.TabIndex = 40;
             label64.Text = "Дата раскроя";
             // 
@@ -4130,12 +4130,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataZeh, 16);
             mtbRzuDataZeh.Font = new Font("Arial", 9F);
             mtbRzuDataZeh.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataZeh.Location = new Point(1106, 21);
+            mtbRzuDataZeh.Location = new Point(920, 21);
             mtbRzuDataZeh.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataZeh.Mask = "00/00/0000";
             mtbRzuDataZeh.Name = "mtbRzuDataZeh";
             tablePanel3.SetRow(mtbRzuDataZeh, 0);
-            mtbRzuDataZeh.Size = new Size(85, 21);
+            mtbRzuDataZeh.Size = new Size(72, 21);
             mtbRzuDataZeh.TabIndex = 34;
             // 
             // label28
@@ -4145,11 +4145,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(label28, 3);
             label28.Font = new Font("Arial", 9F);
             label28.ForeColor = Color.FromArgb(0, 0, 0);
-            label28.Location = new Point(238, 16);
+            label28.Location = new Point(195, 10);
             label28.Margin = new Padding(4, 0, 4, 0);
             label28.Name = "label28";
             tablePanel3.SetRow(label28, 0);
-            label28.Size = new Size(72, 30);
+            label28.Size = new Size(43, 43);
             label28.TabIndex = 12;
             label28.Text = "План. дата сдачи";
             // 
@@ -4160,7 +4160,7 @@ namespace SewingProduction
             tablePanel3.SetColumn(label26, 18);
             label26.Font = new Font("Arial", 9F);
             label26.ForeColor = Color.FromArgb(0, 0, 0);
-            label26.Location = new Point(1227, 16);
+            label26.Location = new Point(1020, 16);
             label26.Margin = new Padding(4, 0, 4, 0);
             label26.Name = "label26";
             tablePanel3.SetRow(label26, 0);
@@ -4174,12 +4174,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbPsaDataCdPlan, 4);
             mtbPsaDataCdPlan.Font = new Font("Arial", 9F);
             mtbPsaDataCdPlan.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbPsaDataCdPlan.Location = new Point(325, 21);
+            mtbPsaDataCdPlan.Location = new Point(270, 21);
             mtbPsaDataCdPlan.Margin = new Padding(4, 3, 4, 3);
             mtbPsaDataCdPlan.Mask = "00/00/0000";
             mtbPsaDataCdPlan.Name = "mtbPsaDataCdPlan";
             tablePanel3.SetRow(mtbPsaDataCdPlan, 0);
-            mtbPsaDataCdPlan.Size = new Size(85, 21);
+            mtbPsaDataCdPlan.Size = new Size(72, 21);
             mtbPsaDataCdPlan.TabIndex = 32;
             // 
             // label34
@@ -4189,7 +4189,7 @@ namespace SewingProduction
             tablePanel3.SetColumn(label34, 6);
             label34.Font = new Font("Arial", 9F);
             label34.ForeColor = Color.FromArgb(0, 0, 0);
-            label34.Location = new Point(443, 16);
+            label34.Location = new Point(370, 16);
             label34.Margin = new Padding(4, 0, 4, 0);
             label34.Name = "label34";
             tablePanel3.SetRow(label34, 0);
@@ -4203,12 +4203,12 @@ namespace SewingProduction
             tablePanel3.SetColumn(mtbRzuDataCdUt, 7);
             mtbRzuDataCdUt.Font = new Font("Arial", 9F);
             mtbRzuDataCdUt.ForeColor = Color.FromArgb(72, 61, 139);
-            mtbRzuDataCdUt.Location = new Point(577, 21);
+            mtbRzuDataCdUt.Location = new Point(495, 21);
             mtbRzuDataCdUt.Margin = new Padding(4, 3, 4, 3);
             mtbRzuDataCdUt.Mask = "00/00/0000";
             mtbRzuDataCdUt.Name = "mtbRzuDataCdUt";
             tablePanel3.SetRow(mtbRzuDataCdUt, 0);
-            mtbRzuDataCdUt.Size = new Size(85, 21);
+            mtbRzuDataCdUt.Size = new Size(72, 21);
             mtbRzuDataCdUt.TabIndex = 33;
             // 
             // label27
@@ -4218,11 +4218,11 @@ namespace SewingProduction
             tablePanel3.SetColumn(label27, 15);
             label27.Font = new Font("Arial", 9F);
             label27.ForeColor = Color.FromArgb(0, 0, 0);
-            label27.Location = new Point(1018, 24);
+            label27.Location = new Point(855, 16);
             label27.Margin = new Padding(4, 0, 4, 0);
             label27.Name = "label27";
             tablePanel3.SetRow(label27, 0);
-            label27.Size = new Size(65, 15);
+            label27.Size = new Size(46, 30);
             label27.TabIndex = 14;
             label27.Text = "Дата в цех";
             // 
@@ -4239,7 +4239,7 @@ namespace SewingProduction
             xtraTabControl1.Margin = new Padding(4, 3, 4, 3);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = RasInfo;
-            xtraTabControl1.Size = new Size(2051, 726);
+            xtraTabControl1.Size = new Size(1850, 726);
             xtraTabControl1.TabIndex = 3;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { RasInfo, FurnInfo, WorkInfo, OtdelkaInfo });
             xtraTabControl1.SelectedPageChanged += xtraTabControl1_SelectedPageChanged;
@@ -4262,7 +4262,7 @@ namespace SewingProduction
             RasCard.Margin = new Padding(4, 3, 4, 3);
             RasCard.Name = "RasCard";
             RasCard.Padding = new Padding(4, 3, 4, 3);
-            RasCard.Size = new Size(2056, 180);
+            RasCard.Size = new Size(1855, 180);
             RasCard.TabIndex = 4;
             RasCard.TabStop = false;
             RasCard.Text = "КАРТОЧКА РАСЧЕТА";
@@ -4271,7 +4271,7 @@ namespace SewingProduction
             // 
             tablePanel1.AllowDrop = true;
             tablePanel1.AutoSize = true;
-            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.530001F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 39F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.549999F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 108F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 13.69F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 69F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 48F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.59F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 114F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 197F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 120F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 171.72F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.540001F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 72F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 16F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.699997F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 54.93F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 84F) });
+            tablePanel1.Columns.AddRange(new DevExpress.Utils.Layout.TablePanelColumn[] { new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 50F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 30F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.530001F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 88F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 39F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 33F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.549999F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 108F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 26F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 13.69F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 69F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 48F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.59F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 114F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 197F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 120F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 171.72F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.540001F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 72F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 36F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 16F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 7.699997F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 80F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Separator, 8F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 59.93F), new DevExpress.Utils.Layout.TablePanelColumn(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 84F) });
             tablePanel1.Controls.Add(pbEskiz);
             tablePanel1.Controls.Add(tbPsaKombOsn);
             tablePanel1.Controls.Add(tbPsaPsaIDOsn);
@@ -4325,7 +4325,7 @@ namespace SewingProduction
             tablePanel1.Margin = new Padding(4, 3, 4, 3);
             tablePanel1.Name = "tablePanel1";
             tablePanel1.Rows.AddRange(new DevExpress.Utils.Layout.TablePanelRow[] { new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 32F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F), new DevExpress.Utils.Layout.TablePanelRow(DevExpress.Utils.Layout.TablePanelEntityStyle.Absolute, 22F) });
-            tablePanel1.Size = new Size(2048, 155);
+            tablePanel1.Size = new Size(1847, 155);
             tablePanel1.TabIndex = 5;
             tablePanel1.UseSkinIndents = true;
             // 
@@ -4371,7 +4371,7 @@ namespace SewingProduction
             tablePanel2.SetColumn(customLabel1, 2);
             customLabel1.Font = new Font("Arial", 10F);
             customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel1.Location = new Point(112, 22);
+            customLabel1.Location = new Point(100, 22);
             customLabel1.Margin = new Padding(0);
             customLabel1.Name = "customLabel1";
             tablePanel2.SetRow(customLabel1, 0);
@@ -4455,7 +4455,6 @@ namespace SewingProduction
             tablePanel2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
-
         }
 
         #endregion

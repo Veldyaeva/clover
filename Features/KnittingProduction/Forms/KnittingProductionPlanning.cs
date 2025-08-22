@@ -27,6 +27,8 @@ using DevExpress.XtraGrid.Columns;
 using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Core.Services;
 using SewingProduction.Features.KnittingProduction.Services;
+using SewingProduction.Features.KnittingProduction.Forms;
+using SewingProduction.Models;
 
 namespace SewingProduction.form.Nadezhda
 {
@@ -157,7 +159,8 @@ namespace SewingProduction.form.Nadezhda
                 gridColumnVyazPlanSekVyazAll.FieldName = "SekVyazAll";
                 gridColumnVyazPlanSyncSelection.FieldName = "SyncSelection";
                 gridColumnVyazPlanKmlNumber.FieldName = "KmlNumber";
-                gridColumnVyazPlanPszkmPlanDate.FieldName = "pszkmPlanDate";
+                gridColumnVyazPlanPszkmPlanDateFrom.FieldName = "DateZapPlanFrom";
+                gridColumnVyazPlanPszkmPlanDateTo.FieldName = "DateZapPlanTo";
 
                 // 1. Настраиваем стандартный MultiSelect
                 gridViewVyazPlan.OptionsSelection.MultiSelect = true;  // Включаем множественный выбор
@@ -373,6 +376,21 @@ namespace SewingProduction.form.Nadezhda
                 await Task.WhenAll(bindingsTask);
 
                 await LoadVyazPlanDataAsync();
+
+                // устанавливаем фильтр: запланированные задания, которые не распределены по В/М
+                //_vyazPlanViewBindingSource.Filter = "DateZapPlanFrom is null";
+                gridViewVyazPlan.ActiveFilter.Clear(); // очищаем старые фильтры
+
+                gridViewVyazPlan.ActiveFilter.Add(
+                    gridViewVyazPlan.Columns["DateZapPlanFrom"],
+                    new ColumnFilterInfo("[DateZapPlanFrom] = null")
+                );
+                gridViewVyazPlan.SortInfo.Add(
+                    new DevExpress.XtraGrid.Columns.GridColumnSortInfo(
+                        gridViewVyazPlan.Columns["NomZad"],
+                        DevExpress.Data.ColumnSortOrder.Ascending
+                    )
+                );
             }
             catch (Exception ex)
             {
@@ -650,35 +668,35 @@ namespace SewingProduction.form.Nadezhda
         {
             var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
             switch (selectedItem.pszkmID, selectedItem.KmlID)
-                {
-                    case (0, 0):  // Оба ID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+            {
+                case (0, 0):  // Оба ID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = true;
-                        break;
+                case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = true;
+                    break;
 
-                    case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
-                        selectedItem.IsNew = true;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
+                    selectedItem.IsNew = true;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, > 0):  // Оба ID > 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = true;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case ( > 0, > 0):  // Оба ID > 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = true;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    default:  // Все остальные случаи (например, отрицательные значения)
-                        Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
-                        break;
-                }
+                default:  // Все остальные случаи (например, отрицательные значения)
+                    Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+                    break;
+            }
         }
         private void SimpleButtonSaveVyazStatusUpdate()
         {
@@ -691,13 +709,14 @@ namespace SewingProduction.form.Nadezhda
                     pszkmKmlID = x.KmlID,
                     pszkmID = x.pszkmID,
                     pszkmKnitClass = x.IDVyazClass,
-                    pszkmPlanDate = x.pszkmPlanDate,
+                    pszkmPlanDateFrom = x.DateZapPlanFrom,
                     IsNew = x.IsNew,
                     IsModified = x.IsModified,
                     IsDeleted = x.IsDeleted
                 })
                 .ToList();
             simpleButtonSaveVyaz.Enabled = filteredListNew.Count > 0;
+            simpleButtonSaveVyaz.Refresh();
         }
 
         private async void gridViewVyazPlan_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -717,6 +736,10 @@ namespace SewingProduction.form.Nadezhda
 
                 comboBoxKnitMachineList.SelectedValue = selectedRow.KmlID;
             }
+            else
+            {
+                comboBoxKnitMachineList.SelectedValue = -1;
+            }
         }
 
         private async void simpleButtonSaveVyaz_Click(object sender, EventArgs e)
@@ -732,7 +755,8 @@ namespace SewingProduction.form.Nadezhda
                         pszkmKmlID = x.KmlID,
                         pszkmID = x.pszkmID,
                         pszkmKnitClass = x.IDVyazClass,
-                        pszkmPlanDate = x.pszkmPlanDate,
+                        pszkmlSeconds = x.SekVyaz * x.Kol,
+                        pszkmPlanDateFrom = x.DateZapPlanFrom,
                         IsNew = x.IsNew,
                         IsModified = x.IsModified,
                         IsDeleted = x.IsDeleted
@@ -760,11 +784,11 @@ namespace SewingProduction.form.Nadezhda
                         }
 
                         var query = $@"
-                            SELECT pszkmID, pszkmKnitClass, pszkmPszNom, pszkmPlanDate
+                            SELECT pszkmID, pszkmKnitClass, pszkmPszNom, pszkmPlanDateFrom, pszkmPlanDateTo
                             FROM plan_sezon_zad_knitMachine
                             WHERE {conditions}";
 
-                        var inserted = await connection.QueryAsync<(int pszkmID, int pszkmKnitClass, string pszkmPszNom, DateTime? pszkmPlanDate)>(query, parameters);
+                        var inserted = await connection.QueryAsync<(int pszkmID, int pszkmKnitClass, string pszkmPszNom, DateTime? pszkmPlanDateFrom, DateTime? pszkmPlanDateTo)>(query, parameters);
 
                         foreach (var item in inserted)
                         {
@@ -773,10 +797,46 @@ namespace SewingProduction.form.Nadezhda
 
                             if (match != null)
                             {
+                                //match.pszkmID = item.pszkmID != null ? item.pszkmID : 0;
                                 match.pszkmID = item.pszkmID;
-                                match.pszkmPlanDate = item.pszkmPlanDate;
+                                match.DateZapPlanFrom = item.pszkmPlanDateFrom;
+                                match.DateZapPlanTo = item.pszkmPlanDateTo;
                                 match.IsNew = false;
                                 match.IsModified = false;
+                                match.IsDeleted = false;
+                            }
+                        }
+
+                        if (filteredListNew == null)
+                        {
+                            filteredListNew.Clear();
+                        }
+                        filteredListNew = vyazPlanViewData
+                        .Where(x => x.IsDeleted)
+                        .Select(x => new PlanSezonZadKnitMachineList
+                        {
+                            pszkmPszNom = x.NomZad,
+                            pszkmKmlID = x.KmlID,
+                            pszkmID = x.pszkmID,
+                            pszkmKnitClass = x.IDVyazClass,
+                            pszkmlSeconds = x.SekVyaz * x.Kol,
+                            pszkmPlanDateFrom = x.DateZapPlanFrom,
+                            IsNew = x.IsNew,
+                            IsModified = x.IsModified,
+                            IsDeleted = x.IsDeleted
+                        })
+                        .ToList();
+                        foreach (var item in filteredListNew)
+                        {
+                            var match = vyazPlanViewData.FirstOrDefault(x =>
+                                x.IDVyazClass == item.pszkmKnitClass && x.NomZad == item.pszkmPszNom);
+
+                            if (match != null)
+                            {
+                                match.pszkmID = 0;
+                                match.IsNew = false;
+                                match.IsModified = false;
+                                match.IsDeleted = false;
                             }
                         }
                     }
@@ -827,6 +887,11 @@ namespace SewingProduction.form.Nadezhda
                 MessageBox.Show("Внимание! Нет выбранных заданий для привязки В/М!");
                 return;
             }
+            if (comboBoxKnitMachineList.SelectedIndex == -1)
+            {
+                MessageBox.Show("Внимание! Не выбрана В/М для привязки!");
+                return;
+            }
 
             foreach (var rowHandle in gridViewVyazPlan.GetSelectedRows())
             {
@@ -864,12 +929,51 @@ namespace SewingProduction.form.Nadezhda
                 var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
                 selectedItem.KmlID = 0;
                 selectedItem.KmlNumber = "0";
+                selectedItem.DateZapPlanFrom = null;
+                selectedItem.DateZapPlanTo = null;
                 selectedItem.SyncSelection = false;
                 gridViewVyazPlan.UnselectRow(rowHandle);
                 KnitMachineStatusUpdate(rowHandle);
             }
             _vyazPlanViewBindingSource.ResetBindings(false);
             SimpleButtonSaveVyazStatusUpdate();
+        }
+
+        private void customSimpleButton1_Click(object sender, EventArgs e)
+        {
+            //KnittingMachinesLoading knittingMachinesLoading = new KnittingMachinesLoading();
+            //knittingMachinesLoading.MdiParent = this;
+            //knittingMachinesLoading.Show();
+
+
+            //KnittingMachinesLoading FDI = new KnittingMachinesLoading();
+            //DialogResult result = FDI.ShowDialog();
+
+            int xIDVyazClass = 0;
+            var selectedRow = _vyazPlanViewBindingSource.Current as VyazPlanView;
+            if (selectedRow != null && selectedRow.IDVyazClass != 0)
+            {
+                xIDVyazClass = selectedRow.IDVyazClass;
+            }
+            else
+            {
+                xIDVyazClass = -1;
+            }
+            KnittingMachinesLoading FDI = new KnittingMachinesLoading(xIDVyazClass);
+
+            DialogResult result = FDI.ShowDialog();
+            // Обработка результата, возвращенного модальной формой
+            if (result == DialogResult.OK)
+            {
+                // Действия при успешном завершении работы модальной формы
+                //MessageBox.Show("OK");
+            }
+            else
+            {
+                // Действия при отмене или другом результате
+                //MessageBox.Show("Cancel");
+            }
+
         }
     }
 }

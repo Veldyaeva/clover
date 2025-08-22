@@ -14,6 +14,7 @@ using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.UserDistribution.Class;
+using SewingProduction.Features.KnittingProduction.Forms;
 
 namespace SewingProduction
 {
@@ -127,7 +128,7 @@ namespace SewingProduction
         }
         private void изделияToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(CurrentUser.User), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void моделиСПризнакомМаркировкToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -136,7 +137,7 @@ namespace SewingProduction
         #region Виды браков пряжи
         private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user: _user, servBrok: false), sender);
         }
         #endregion
         #endregion
@@ -156,7 +157,7 @@ namespace SewingProduction
         }
         private void артикулToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new Articul(CurrentUser.User), sender);
+            OpenForm(new Articul(_user), sender);
         }
         private void карточкаРасчетаToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -246,5 +247,9 @@ namespace SewingProduction
             helpForm.Show();
         }
 
+        private void рабочийСтолМастераToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenForm(new PlanZagrVyaz(), sender);
+        }
     }
 }
