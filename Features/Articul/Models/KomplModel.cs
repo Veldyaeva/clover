@@ -9,25 +9,25 @@ namespace SewingProduction.Features.Articul.Models
 {    
     public class KomplModel : INotifyPropertyChanged
     {
-        public int? kod_k { get; set; }
-        public string grup_k { get; set; }
-        public string articul_k { get; set; }
-        public string mod_k { get; set; }
-        public string razm_k { get; set; }
-        public string sost_k { get; set; }
+        public int? Kod_k { get; set; }
+        public string Grup_k { get; set; }
+        public string Articul_k { get; set; }
+        public string Mod_k { get; set; }
+        public string Razm_k { get; set; }
+        public string Sost_k { get; set; }
 
-        public int? kod1 { get; set; }
-        public int? kod2 { get; set; }
-        public int? kod3 { get; set; }
-        public int? kod4 { get; set; }
-        public int? kod5 { get; set; }
-        public int? kod6 { get; set; }
-        public int? kod7 { get; set; }
-        public int? kod8 { get; set; }
-        public int? kod9 { get; set; }
-        public int? kod10 { get; set; }
+        public int? Kod1 { get; set; }
+        public int? Kod2 { get; set; }
+        public int? Kod3 { get; set; }
+        public int? Kod4 { get; set; }
+        public int? Kod5 { get; set; }
+        public int? Kod6 { get; set; }
+        public int? Kod7 { get; set; }
+        public int? Kod8 { get; set; }
+        public int? Kod9 { get; set; }
+        public int? Kod10 { get; set; }
 
-        public string compName { get; set; } = Environment.MachineName;
+        public string CompName { get; set; } = Environment.MachineName;
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName) =>

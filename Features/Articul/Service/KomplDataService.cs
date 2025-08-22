@@ -87,21 +87,31 @@ namespace SewingProduction.Features.Articul.Service
                   AND ISNULL(sost_k,'') = ISNULL(@sost_k,'')";
             int cnt = await _dbHelper.ExecuteScalarAsync<int>(query, new
             {
-                model.kod1,
-                model.kod2,
-                model.kod3,
-                model.kod4,
-                model.kod5,
-                model.kod6,
-                model.kod7,
-                model.kod8,
-                model.kod9,
-                model.kod10,
-                model.sost_k
+                model.Kod1,
+                model.Kod2,
+                model.Kod3,
+                model.Kod4,
+                model.Kod5,
+                model.Kod6,
+                model.Kod7,
+                model.Kod8,
+                model.Kod9,
+                model.Kod10,
+                model.Sost_k
             });
             return cnt > 0;
         }
 
+        public bool CheckInProizv(string kod)
+        {
+            string query = "SELECT 1 FROM View_rzu_rzv_nom_zad WHERE kod_k_pach  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
+        public bool CheckNaklRas(string kod)
+        {
+            string query = "SELECT 1 FROM nakl_ras WHERE kod_k  = @kod";
+            return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
     }
 
 }

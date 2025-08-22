@@ -319,7 +319,7 @@ namespace SewingProduction.Features.Articul
         }
         private void customButtonCopy_Click(object sender, EventArgs e)
         {
-            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             EditAricul f = new EditAricul(kodObj.ToString());
             if (f.ShowDialog() == DialogResult.OK)
             {
@@ -328,7 +328,7 @@ namespace SewingProduction.Features.Articul
         }
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
-            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));

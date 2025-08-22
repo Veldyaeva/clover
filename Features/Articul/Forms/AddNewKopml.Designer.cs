@@ -88,21 +88,13 @@
             frm_s = new DevExpress.XtraGrid.Columns.GridColumn();
             cle = new DevExpress.XtraGrid.Columns.GridColumn();
             kod_v = new DevExpress.XtraGrid.Columns.GridColumn();
+            kodArt = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             customLabelGrup = new Core.Class.CustomHeaderLabel();
             customLabelArt = new Core.Class.CustomLabel();
             customLabelMod = new Core.Class.CustomLabel();
             customLabelArtText = new Core.Class.CustomLabel();
             customLabelModText = new Core.Class.CustomLabel();
-            customComboBoxGrup = new CustomComboBox();
-            customComboBoxArt = new CustomComboBox();
-            customComboBoxMod = new CustomComboBox();
-            customComboBoxRazm = new CustomComboBox();
-            customLabelFiltrArt = new Core.Class.CustomLabel();
-            customLabelFiltrGrup = new Core.Class.CustomLabel();
-            customLabelFiltrRazm = new Core.Class.CustomLabel();
-            customLabelFiltrMod = new Core.Class.CustomLabel();
-            customButtonClearFilter = new Core.Class.CustomButton();
             tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             customGridControlKomplRazm = new Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -159,7 +151,7 @@
             // gridColumnKod
             // 
             gridColumnKod.Caption = "код";
-            gridColumnKod.FieldName = "kod";
+            gridColumnKod.FieldName = "Kod";
             gridColumnKod.Name = "gridColumnKod";
             gridColumnKod.Visible = true;
             gridColumnKod.VisibleIndex = 0;
@@ -167,7 +159,7 @@
             // gridColumnGrup
             // 
             gridColumnGrup.Caption = "группа";
-            gridColumnGrup.FieldName = "grup";
+            gridColumnGrup.FieldName = "Grup";
             gridColumnGrup.Name = "gridColumnGrup";
             gridColumnGrup.Visible = true;
             gridColumnGrup.VisibleIndex = 1;
@@ -175,7 +167,7 @@
             // gridColumnArticul
             // 
             gridColumnArticul.Caption = "артикул";
-            gridColumnArticul.FieldName = "articul";
+            gridColumnArticul.FieldName = "Articul";
             gridColumnArticul.Name = "gridColumnArticul";
             gridColumnArticul.Visible = true;
             gridColumnArticul.VisibleIndex = 2;
@@ -183,7 +175,7 @@
             // gridColumnMod
             // 
             gridColumnMod.Caption = "мод.";
-            gridColumnMod.FieldName = "mod";
+            gridColumnMod.FieldName = "Mod";
             gridColumnMod.Name = "gridColumnMod";
             gridColumnMod.Visible = true;
             gridColumnMod.VisibleIndex = 3;
@@ -191,7 +183,7 @@
             // gridColumnRazm
             // 
             gridColumnRazm.Caption = "размер";
-            gridColumnRazm.FieldName = "razm";
+            gridColumnRazm.FieldName = "Razm";
             gridColumnRazm.Name = "gridColumnRazm";
             gridColumnRazm.Visible = true;
             gridColumnRazm.VisibleIndex = 4;
@@ -199,7 +191,7 @@
             // gridColumnCount
             // 
             gridColumnCount.Caption = "кол-во";
-            gridColumnCount.FieldName = "countstr";
+            gridColumnCount.FieldName = "Countstr";
             gridColumnCount.Name = "gridColumnCount";
             gridColumnCount.Visible = true;
             gridColumnCount.VisibleIndex = 5;
@@ -212,10 +204,10 @@
             gridLevelNode1.LevelTemplate = gridViewKomplKod;
             gridLevelNode1.RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] { gridLevelNode1 });
-            customGridControlKompl.Location = new System.Drawing.Point(3, 33);
+            customGridControlKompl.Location = new System.Drawing.Point(3, 37);
             customGridControlKompl.MainView = gridViewKompl;
             customGridControlKompl.Name = "customGridControlKompl";
-            customGridControlKompl.Size = new System.Drawing.Size(457, 299);
+            customGridControlKompl.Size = new System.Drawing.Size(440, 347);
             customGridControlKompl.TabIndex = 2;
             customGridControlKompl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKompl, gridViewKomplKod });
             // 
@@ -236,7 +228,7 @@
             // GrupKompl
             // 
             GrupKompl.Caption = "Группа";
-            GrupKompl.FieldName = "grup_k";
+            GrupKompl.FieldName = "Grup_k";
             GrupKompl.Name = "GrupKompl";
             GrupKompl.OptionsColumn.AllowEdit = false;
             GrupKompl.Visible = true;
@@ -245,7 +237,7 @@
             // ArticulKompl
             // 
             ArticulKompl.Caption = "Арт.";
-            ArticulKompl.FieldName = "articul_k";
+            ArticulKompl.FieldName = "Articul_k";
             ArticulKompl.Name = "ArticulKompl";
             ArticulKompl.OptionsColumn.AllowEdit = false;
             ArticulKompl.Visible = true;
@@ -254,7 +246,7 @@
             // ModKompl
             // 
             ModKompl.Caption = "Мод.";
-            ModKompl.FieldName = "mod_k";
+            ModKompl.FieldName = "Mod_k";
             ModKompl.Name = "ModKompl";
             ModKompl.OptionsColumn.AllowEdit = false;
             ModKompl.Visible = true;
@@ -263,7 +255,7 @@
             // RazmKompl
             // 
             RazmKompl.Caption = "Размер";
-            RazmKompl.FieldName = "razm_k";
+            RazmKompl.FieldName = "Razm_k";
             RazmKompl.Name = "RazmKompl";
             RazmKompl.OptionsColumn.AllowEdit = false;
             RazmKompl.Visible = true;
@@ -272,7 +264,7 @@
             // KodKompl
             // 
             KodKompl.Caption = "KodKompl";
-            KodKompl.FieldName = "kod_k";
+            KodKompl.FieldName = "Kod_k";
             KodKompl.Name = "KodKompl";
             // 
             // gridView1
@@ -289,7 +281,7 @@
             customGridControlKomplSelected.MainView = bandedGridViewSelected;
             customGridControlKomplSelected.Name = "customGridControlKomplSelected";
             customGridControlKomplSelected.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditDelRazm });
-            customGridControlKomplSelected.Size = new System.Drawing.Size(457, 292);
+            customGridControlKomplSelected.Size = new System.Drawing.Size(440, 245);
             customGridControlKomplSelected.TabIndex = 2;
             customGridControlKomplSelected.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { bandedGridViewSelected, gridView1 });
             // 
@@ -321,7 +313,7 @@
             // 
             po_mn.Caption = "✖";
             po_mn.ColumnEdit = repositoryItemButtonEditDelRazm;
-            po_mn.FieldName = "po_mn";
+            po_mn.FieldName = "Ro_mn";
             po_mn.Name = "po_mn";
             po_mn.Visible = true;
             po_mn.Width = 24;
@@ -337,7 +329,7 @@
             // po
             // 
             po.Caption = "*";
-            po.FieldName = "po";
+            po.FieldName = "Ro";
             po.Name = "po";
             po.OptionsColumn.AllowEdit = false;
             po.Width = 23;
@@ -345,7 +337,7 @@
             // grupSelected
             // 
             grupSelected.Caption = "Группа";
-            grupSelected.FieldName = "grup";
+            grupSelected.FieldName = "Grup";
             grupSelected.Name = "grupSelected";
             grupSelected.OptionsColumn.AllowEdit = false;
             grupSelected.Visible = true;
@@ -354,7 +346,7 @@
             // ArticulSelected
             // 
             ArticulSelected.Caption = "Арт.";
-            ArticulSelected.FieldName = "articul";
+            ArticulSelected.FieldName = "Articul";
             ArticulSelected.Name = "ArticulSelected";
             ArticulSelected.OptionsColumn.AllowEdit = false;
             ArticulSelected.Visible = true;
@@ -363,7 +355,7 @@
             // ModSelected
             // 
             ModSelected.Caption = "Мод.";
-            ModSelected.FieldName = "mod";
+            ModSelected.FieldName = "Mod";
             ModSelected.Name = "ModSelected";
             ModSelected.OptionsColumn.AllowEdit = false;
             ModSelected.Visible = true;
@@ -372,7 +364,7 @@
             // RazmSelected
             // 
             RazmSelected.Caption = "Размер";
-            RazmSelected.FieldName = "razm";
+            RazmSelected.FieldName = "Razm";
             RazmSelected.Name = "RazmSelected";
             RazmSelected.OptionsColumn.AllowEdit = false;
             RazmSelected.Visible = true;
@@ -381,7 +373,7 @@
             // count
             // 
             count.Caption = "Кол-во";
-            count.FieldName = "countStr";
+            count.FieldName = "CountStr";
             count.Name = "count";
             count.OptionsColumn.AllowEdit = false;
             count.Visible = true;
@@ -389,15 +381,15 @@
             // RazmAllSelected
             // 
             RazmAllSelected.Caption = "Размер";
-            RazmAllSelected.FieldName = "razm_all";
+            RazmAllSelected.FieldName = "Razm_all";
             RazmAllSelected.Name = "RazmAllSelected";
             // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 3;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 28F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 44F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.5892849F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 29.9107151F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 42.4107132F));
             tableLayoutPanel1.Controls.Add(pictureBoxArticul, 0, 0);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel5, 2, 2);
             tableLayoutPanel1.Controls.Add(tableLayoutPanel4, 2, 0);
@@ -408,19 +400,20 @@
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 4;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.67894F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.4550819F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.6656847F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.1899834F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.541973F));
             tableLayoutPanel1.Size = new System.Drawing.Size(1120, 679);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // pictureBoxArticul
             // 
+            pictureBoxArticul.Dock = System.Windows.Forms.DockStyle.Fill;
             pictureBoxArticul.Location = new System.Drawing.Point(4, 3);
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new System.Drawing.Size(305, 163);
+            pictureBoxArticul.Size = new System.Drawing.Size(301, 194);
             pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             pictureBoxArticul.TabIndex = 13;
             pictureBoxArticul.TabStop = false;
@@ -436,13 +429,13 @@
             tableLayoutPanel5.Controls.Add(customGridControlKompl, 0, 1);
             tableLayoutPanel5.Controls.Add(customButtonDelKompl, 2, 1);
             tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel5.Location = new System.Drawing.Point(629, 341);
+            tableLayoutPanel5.Location = new System.Drawing.Point(647, 289);
             tableLayoutPanel5.Name = "tableLayoutPanel5";
             tableLayoutPanel5.RowCount = 1;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel5, 2);
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9F));
             tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91F));
-            tableLayoutPanel5.Size = new System.Drawing.Size(488, 335);
+            tableLayoutPanel5.Size = new System.Drawing.Size(470, 387);
             tableLayoutPanel5.TabIndex = 7;
             // 
             // customLabelGrupKompl
@@ -453,7 +446,7 @@
             customLabelGrupKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrupKompl.Location = new System.Drawing.Point(3, 0);
             customLabelGrupKompl.Name = "customLabelGrupKompl";
-            customLabelGrupKompl.Size = new System.Drawing.Size(213, 30);
+            customLabelGrupKompl.Size = new System.Drawing.Size(205, 34);
             customLabelGrupKompl.TabIndex = 5;
             customLabelGrupKompl.Text = "Группа комплекта";
             customLabelGrupKompl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -464,9 +457,9 @@
             customButtonKompl.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonKompl.Font = new System.Drawing.Font("Arial", 10F);
             customButtonKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonKompl.Location = new System.Drawing.Point(222, 3);
+            customButtonKompl.Location = new System.Drawing.Point(214, 3);
             customButtonKompl.Name = "customButtonKompl";
-            customButtonKompl.Size = new System.Drawing.Size(238, 24);
+            customButtonKompl.Size = new System.Drawing.Size(229, 28);
             customButtonKompl.TabIndex = 3;
             customButtonKompl.Text = "Комплектовать";
             customButtonKompl.UseVisualStyleBackColor = false;
@@ -478,7 +471,7 @@
             customButtonDelKompl.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonDelKompl.Font = new System.Drawing.Font("Arial", 10F);
             customButtonDelKompl.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonDelKompl.Location = new System.Drawing.Point(466, 33);
+            customButtonDelKompl.Location = new System.Drawing.Point(449, 37);
             customButtonDelKompl.MaximumSize = new System.Drawing.Size(25, 25);
             customButtonDelKompl.MinimumSize = new System.Drawing.Size(25, 25);
             customButtonDelKompl.Name = "customButtonDelKompl";
@@ -497,13 +490,13 @@
             tableLayoutPanel4.Controls.Add(customGridControlKomplSelected, 0, 0);
             tableLayoutPanel4.Controls.Add(tableLayoutPanel3, 0, 1);
             tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel4.Location = new System.Drawing.Point(629, 3);
+            tableLayoutPanel4.Location = new System.Drawing.Point(647, 3);
             tableLayoutPanel4.Name = "tableLayoutPanel4";
             tableLayoutPanel4.RowCount = 2;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel4, 2);
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.75903F));
             tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.2409639F));
-            tableLayoutPanel4.Size = new System.Drawing.Size(488, 332);
+            tableLayoutPanel4.Size = new System.Drawing.Size(470, 280);
             tableLayoutPanel4.TabIndex = 6;
             // 
             // customButtonDelKomplSelected
@@ -512,7 +505,7 @@
             customButtonDelKomplSelected.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
             customButtonDelKomplSelected.Font = new System.Drawing.Font("Arial", 10F);
             customButtonDelKomplSelected.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonDelKomplSelected.Location = new System.Drawing.Point(466, 3);
+            customButtonDelKomplSelected.Location = new System.Drawing.Point(449, 3);
             customButtonDelKomplSelected.MaximumSize = new System.Drawing.Size(25, 25);
             customButtonDelKomplSelected.MinimumSize = new System.Drawing.Size(25, 25);
             customButtonDelKomplSelected.Name = "customButtonDelKomplSelected";
@@ -529,13 +522,13 @@
             tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             tableLayoutPanel3.Controls.Add(customCheckBoxVerified, 1, 2);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel3.Location = new System.Drawing.Point(3, 301);
+            tableLayoutPanel3.Location = new System.Drawing.Point(3, 254);
             tableLayoutPanel3.Name = "tableLayoutPanel3";
             tableLayoutPanel3.RowCount = 3;
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            tableLayoutPanel3.Size = new System.Drawing.Size(457, 28);
+            tableLayoutPanel3.Size = new System.Drawing.Size(440, 23);
             tableLayoutPanel3.TabIndex = 6;
             // 
             // customCheckBoxVerified
@@ -543,10 +536,10 @@
             customCheckBoxVerified.Dock = System.Windows.Forms.DockStyle.Fill;
             customCheckBoxVerified.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxVerified.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxVerified.Location = new System.Drawing.Point(231, 3);
+            customCheckBoxVerified.Location = new System.Drawing.Point(223, 3);
             customCheckBoxVerified.Name = "customCheckBoxVerified";
             customCheckBoxVerified.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            customCheckBoxVerified.Size = new System.Drawing.Size(223, 22);
+            customCheckBoxVerified.Size = new System.Drawing.Size(214, 17);
             customCheckBoxVerified.TabIndex = 3;
             customCheckBoxVerified.Text = "Все проверено, готово к комплектовке";
             customCheckBoxVerified.UseVisualStyleBackColor = true;
@@ -556,12 +549,12 @@
             // 
             customGridControlKomplArt.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlKomplArt.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlKomplArt.Location = new System.Drawing.Point(3, 341);
+            customGridControlKomplArt.Location = new System.Drawing.Point(3, 289);
             customGridControlKomplArt.MainView = gridViewKomplArt;
             customGridControlKomplArt.Name = "customGridControlKomplArt";
             customGridControlKomplArt.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemButtonEditAddRazm });
             tableLayoutPanel1.SetRowSpan(customGridControlKomplArt, 2);
-            customGridControlKomplArt.Size = new System.Drawing.Size(307, 335);
+            customGridControlKomplArt.Size = new System.Drawing.Size(303, 387);
             customGridControlKomplArt.TabIndex = 8;
             customGridControlKomplArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplArt });
             customGridControlKomplArt.Load += customGridControlKomplArt_Load;
@@ -574,17 +567,21 @@
             gridViewKomplArt.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewKomplArt.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewKomplArt.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewKomplArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Grup, Articul, Mod, Razm, gridColumnAdd, frm_s, cle, kod_v });
+            gridViewKomplArt.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Grup, Articul, Mod, Razm, gridColumnAdd, frm_s, cle, kod_v, kodArt });
             gridViewKomplArt.GridControl = customGridControlKomplArt;
             gridViewKomplArt.Name = "gridViewKomplArt";
             gridViewKomplArt.OptionsBehavior.Editable = false;
             gridViewKomplArt.OptionsBehavior.ReadOnly = true;
+            gridViewKomplArt.OptionsFind.Behavior = DevExpress.XtraEditors.FindPanelBehavior.Filter;
             gridViewKomplArt.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewKomplArt.OptionsView.ShowAutoFilterRow = true;
+            gridViewKomplArt.OptionsView.ShowGroupPanel = false;
+            gridViewKomplArt.FocusedRowChanged += gridViewKomplArt_FocusedRowChanged;
             // 
             // Grup
             // 
             Grup.Caption = "Группа";
-            Grup.FieldName = "grup";
+            Grup.FieldName = "Grup";
             Grup.Name = "Grup";
             Grup.OptionsColumn.AllowEdit = false;
             Grup.Visible = true;
@@ -594,7 +591,7 @@
             // Articul
             // 
             Articul.Caption = "Артикул";
-            Articul.FieldName = "articul";
+            Articul.FieldName = "Articul";
             Articul.Name = "Articul";
             Articul.OptionsColumn.AllowEdit = false;
             Articul.Visible = true;
@@ -604,7 +601,7 @@
             // Mod
             // 
             Mod.Caption = "Мод.";
-            Mod.FieldName = "mod";
+            Mod.FieldName = "Mod";
             Mod.Name = "Mod";
             Mod.OptionsColumn.AllowEdit = false;
             Mod.Visible = true;
@@ -614,7 +611,7 @@
             // Razm
             // 
             Razm.Caption = "Размер";
-            Razm.FieldName = "razm";
+            Razm.FieldName = "Razm";
             Razm.Name = "Razm";
             Razm.OptionsColumn.AllowEdit = false;
             Razm.Visible = true;
@@ -641,25 +638,31 @@
             // frm_s
             // 
             frm_s.Caption = "frm_s";
-            frm_s.FieldName = "GrupMen.frm_s";
+            frm_s.FieldName = "GrupMen.Frm_s";
             frm_s.Name = "frm_s";
             // 
             // cle
             // 
             cle.Caption = "cle";
-            cle.FieldName = "cle";
+            cle.FieldName = "Cle";
             cle.Name = "cle";
             // 
             // kod_v
             // 
             kod_v.Caption = "kod_v";
-            kod_v.FieldName = "kod_v";
+            kod_v.FieldName = "Kod_v";
             kod_v.Name = "kod_v";
+            // 
+            // kodArt
+            // 
+            kodArt.Caption = "kodArt";
+            kodArt.FieldName = "Kod";
+            kodArt.Name = "kodArt";
             // 
             // tableLayoutPanel6
             // 
             tableLayoutPanel6.ColumnCount = 5;
-            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331421F));
+            tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.03314F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
             tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.0331383F));
@@ -669,26 +672,17 @@
             tableLayoutPanel6.Controls.Add(customLabelMod, 0, 2);
             tableLayoutPanel6.Controls.Add(customLabelArtText, 2, 1);
             tableLayoutPanel6.Controls.Add(customLabelModText, 2, 2);
-            tableLayoutPanel6.Controls.Add(customComboBoxGrup, 0, 5);
-            tableLayoutPanel6.Controls.Add(customComboBoxArt, 1, 5);
-            tableLayoutPanel6.Controls.Add(customComboBoxMod, 2, 5);
-            tableLayoutPanel6.Controls.Add(customComboBoxRazm, 3, 5);
-            tableLayoutPanel6.Controls.Add(customLabelFiltrArt, 1, 4);
-            tableLayoutPanel6.Controls.Add(customLabelFiltrGrup, 0, 4);
-            tableLayoutPanel6.Controls.Add(customLabelFiltrRazm, 3, 4);
-            tableLayoutPanel6.Controls.Add(customLabelFiltrMod, 2, 4);
-            tableLayoutPanel6.Controls.Add(customButtonClearFilter, 4, 5);
             tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel6.Location = new System.Drawing.Point(3, 172);
+            tableLayoutPanel6.Location = new System.Drawing.Point(3, 203);
             tableLayoutPanel6.Name = "tableLayoutPanel6";
-            tableLayoutPanel6.RowCount = 6;
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel6.Size = new System.Drawing.Size(307, 163);
+            tableLayoutPanel6.RowCount = 3;
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.3333321F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel6.Size = new System.Drawing.Size(303, 80);
             tableLayoutPanel6.TabIndex = 10;
             // 
             // customLabelGrup
@@ -696,11 +690,11 @@
             customLabelGrup.AutoSize = true;
             tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
             customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGrup.Font = new System.Drawing.Font("Arial", 702F, System.Drawing.FontStyle.Bold);
+            customLabelGrup.Font = new System.Drawing.Font("Arial", 116F, System.Drawing.FontStyle.Bold);
             customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrup.Location = new System.Drawing.Point(3, 0);
             customLabelGrup.Name = "customLabelGrup";
-            customLabelGrup.Size = new System.Drawing.Size(301, 26);
+            customLabelGrup.Size = new System.Drawing.Size(297, 26);
             customLabelGrup.TabIndex = 3;
             customLabelGrup.Text = "Группа";
             customLabelGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -714,7 +708,7 @@
             customLabelArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelArt.Location = new System.Drawing.Point(3, 26);
             customLabelArt.Name = "customLabelArt";
-            customLabelArt.Size = new System.Drawing.Size(134, 26);
+            customLabelArt.Size = new System.Drawing.Size(132, 26);
             customLabelArt.TabIndex = 0;
             customLabelArt.Text = "Артикул";
             customLabelArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -728,7 +722,7 @@
             customLabelMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelMod.Location = new System.Drawing.Point(3, 52);
             customLabelMod.Name = "customLabelMod";
-            customLabelMod.Size = new System.Drawing.Size(134, 26);
+            customLabelMod.Size = new System.Drawing.Size(132, 28);
             customLabelMod.TabIndex = 1;
             customLabelMod.Text = "Модель";
             customLabelMod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -740,9 +734,9 @@
             customLabelArtText.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelArtText.Font = new System.Drawing.Font("Arial", 10F);
             customLabelArtText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelArtText.Location = new System.Drawing.Point(143, 26);
+            customLabelArtText.Location = new System.Drawing.Point(141, 26);
             customLabelArtText.Name = "customLabelArtText";
-            customLabelArtText.Size = new System.Drawing.Size(161, 26);
+            customLabelArtText.Size = new System.Drawing.Size(159, 26);
             customLabelArtText.TabIndex = 0;
             customLabelArtText.Text = "Артикул_Текст";
             customLabelArtText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -754,136 +748,12 @@
             customLabelModText.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelModText.Font = new System.Drawing.Font("Arial", 10F);
             customLabelModText.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelModText.Location = new System.Drawing.Point(143, 52);
+            customLabelModText.Location = new System.Drawing.Point(141, 52);
             customLabelModText.Name = "customLabelModText";
-            customLabelModText.Size = new System.Drawing.Size(161, 26);
+            customLabelModText.Size = new System.Drawing.Size(159, 28);
             customLabelModText.TabIndex = 1;
             customLabelModText.Text = "Модель_Текст";
             customLabelModText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customComboBoxGrup
-            // 
-            customComboBoxGrup.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBoxGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBoxGrup.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxGrup.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBoxGrup.FormattingEnabled = true;
-            customComboBoxGrup.Location = new System.Drawing.Point(3, 133);
-            customComboBoxGrup.Name = "customComboBoxGrup";
-            customComboBoxGrup.Size = new System.Drawing.Size(64, 24);
-            customComboBoxGrup.TabIndex = 4;
-            customComboBoxGrup.DropDown += customComboBoxGrup_DropDown;
-            customComboBoxGrup.SelectedIndexChanged += ApplyGridFilters;
-            // 
-            // customComboBoxArt
-            // 
-            customComboBoxArt.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBoxArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBoxArt.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxArt.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBoxArt.FormattingEnabled = true;
-            customComboBoxArt.Location = new System.Drawing.Point(73, 133);
-            customComboBoxArt.Name = "customComboBoxArt";
-            customComboBoxArt.Size = new System.Drawing.Size(64, 24);
-            customComboBoxArt.TabIndex = 5;
-            customComboBoxArt.DropDown += customComboBoxArt_DropDown;
-            customComboBoxArt.SelectedIndexChanged += ApplyGridFilters;
-            // 
-            // customComboBoxMod
-            // 
-            customComboBoxMod.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBoxMod.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBoxMod.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxMod.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBoxMod.FormattingEnabled = true;
-            customComboBoxMod.Location = new System.Drawing.Point(143, 133);
-            customComboBoxMod.Name = "customComboBoxMod";
-            customComboBoxMod.Size = new System.Drawing.Size(64, 24);
-            customComboBoxMod.TabIndex = 6;
-            customComboBoxMod.DropDown += customComboBoxMod_DropDown;
-            customComboBoxMod.SelectedIndexChanged += ApplyGridFilters;
-            // 
-            // customComboBoxRazm
-            // 
-            customComboBoxRazm.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
-            customComboBoxRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customComboBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customComboBoxRazm.FormattingEnabled = true;
-            customComboBoxRazm.Location = new System.Drawing.Point(213, 133);
-            customComboBoxRazm.Name = "customComboBoxRazm";
-            customComboBoxRazm.Size = new System.Drawing.Size(64, 24);
-            customComboBoxRazm.TabIndex = 7;
-            customComboBoxRazm.DropDown += customComboBoxRazm_DropDown;
-            customComboBoxRazm.SelectedIndexChanged += ApplyGridFilters;
-            // 
-            // customLabelFiltrArt
-            // 
-            customLabelFiltrArt.AutoSize = true;
-            customLabelFiltrArt.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelFiltrArt.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelFiltrArt.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelFiltrArt.Location = new System.Drawing.Point(73, 104);
-            customLabelFiltrArt.Name = "customLabelFiltrArt";
-            customLabelFiltrArt.Size = new System.Drawing.Size(64, 26);
-            customLabelFiltrArt.TabIndex = 10;
-            customLabelFiltrArt.Text = "Артикул";
-            customLabelFiltrArt.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelFiltrGrup
-            // 
-            customLabelFiltrGrup.AutoSize = true;
-            customLabelFiltrGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelFiltrGrup.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelFiltrGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelFiltrGrup.Location = new System.Drawing.Point(3, 104);
-            customLabelFiltrGrup.Name = "customLabelFiltrGrup";
-            customLabelFiltrGrup.Size = new System.Drawing.Size(64, 26);
-            customLabelFiltrGrup.TabIndex = 8;
-            customLabelFiltrGrup.Text = "Группа";
-            customLabelFiltrGrup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelFiltrRazm
-            // 
-            customLabelFiltrRazm.AutoSize = true;
-            customLabelFiltrRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelFiltrRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelFiltrRazm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelFiltrRazm.Location = new System.Drawing.Point(213, 104);
-            customLabelFiltrRazm.Name = "customLabelFiltrRazm";
-            customLabelFiltrRazm.Size = new System.Drawing.Size(64, 26);
-            customLabelFiltrRazm.TabIndex = 11;
-            customLabelFiltrRazm.Text = "Размер";
-            customLabelFiltrRazm.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customLabelFiltrMod
-            // 
-            customLabelFiltrMod.AutoSize = true;
-            customLabelFiltrMod.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelFiltrMod.Font = new System.Drawing.Font("Arial", 10F);
-            customLabelFiltrMod.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelFiltrMod.Location = new System.Drawing.Point(143, 104);
-            customLabelFiltrMod.Name = "customLabelFiltrMod";
-            customLabelFiltrMod.Size = new System.Drawing.Size(64, 26);
-            customLabelFiltrMod.TabIndex = 9;
-            customLabelFiltrMod.Text = "Модель";
-            customLabelFiltrMod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // customButtonClearFilter
-            // 
-            customButtonClearFilter.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            customButtonClearFilter.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonClearFilter.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonClearFilter.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonClearFilter.Location = new System.Drawing.Point(283, 133);
-            customButtonClearFilter.MaximumSize = new System.Drawing.Size(25, 25);
-            customButtonClearFilter.MinimumSize = new System.Drawing.Size(25, 25);
-            customButtonClearFilter.Name = "customButtonClearFilter";
-            customButtonClearFilter.Size = new System.Drawing.Size(25, 25);
-            customButtonClearFilter.TabIndex = 12;
-            customButtonClearFilter.Text = "✖";
-            customButtonClearFilter.UseVisualStyleBackColor = false;
-            customButtonClearFilter.Click += customButtonClearFilter_Click;
             // 
             // tableLayoutPanel8
             // 
@@ -897,21 +767,21 @@
             tableLayoutPanel8.Controls.Add(customCheckBoxAutoRazm, 0, 0);
             tableLayoutPanel8.Controls.Add(customNumericUpDownValueTab, 1, 2);
             tableLayoutPanel8.Controls.Add(customLabelKolTab, 0, 2);
-            tableLayoutPanel8.Controls.Add(customCheckBoxOdinak, 0, 1);
+            tableLayoutPanel8.Controls.Add(customCheckBoxOdinak, 1, 0);
             tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            tableLayoutPanel8.Location = new System.Drawing.Point(316, 3);
+            tableLayoutPanel8.Location = new System.Drawing.Point(312, 3);
             tableLayoutPanel8.Name = "tableLayoutPanel8";
             tableLayoutPanel8.RowCount = 7;
             tableLayoutPanel1.SetRowSpan(tableLayoutPanel8, 4);
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.9999924F));
-            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0000076F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.4421577F));
+            tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 47.5578423F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            tableLayoutPanel8.Size = new System.Drawing.Size(307, 673);
+            tableLayoutPanel8.Size = new System.Drawing.Size(329, 673);
             tableLayoutPanel8.TabIndex = 12;
             // 
             // customGridControlKomplRazm
@@ -919,11 +789,11 @@
             tableLayoutPanel8.SetColumnSpan(customGridControlKomplRazm, 2);
             customGridControlKomplRazm.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlKomplRazm.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlKomplRazm.Location = new System.Drawing.Point(3, 84);
+            customGridControlKomplRazm.Location = new System.Drawing.Point(3, 58);
             customGridControlKomplRazm.MainView = gridViewKomplRazm;
             customGridControlKomplRazm.Name = "customGridControlKomplRazm";
             customGridControlKomplRazm.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] { repositoryItemCheckEditViborRazm });
-            customGridControlKomplRazm.Size = new System.Drawing.Size(301, 179);
+            customGridControlKomplRazm.Size = new System.Drawing.Size(323, 201);
             customGridControlKomplRazm.TabIndex = 2;
             customGridControlKomplRazm.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplRazm });
             // 
@@ -940,11 +810,12 @@
             gridViewKomplRazm.Name = "gridViewKomplRazm";
             gridViewKomplRazm.OptionsView.EnableAppearanceEvenRow = true;
             gridViewKomplRazm.OptionsView.ShowGroupPanel = false;
+            gridViewKomplRazm.FocusedRowChanged += gridViewKomplArt_FocusedRowChanged;
             // 
             // ArticulRazm
             // 
             ArticulRazm.Caption = "Арт. компл.";
-            ArticulRazm.FieldName = "articul";
+            ArticulRazm.FieldName = "Articul";
             ArticulRazm.Name = "ArticulRazm";
             ArticulRazm.OptionsColumn.AllowEdit = false;
             ArticulRazm.Visible = true;
@@ -953,7 +824,7 @@
             // ModRazm
             // 
             ModRazm.Caption = "Мод. компл.";
-            ModRazm.FieldName = "mod";
+            ModRazm.FieldName = "Mod";
             ModRazm.Name = "ModRazm";
             ModRazm.OptionsColumn.AllowEdit = false;
             ModRazm.Visible = true;
@@ -962,7 +833,7 @@
             // KodKRazm
             // 
             KodKRazm.Caption = "Код К.";
-            KodKRazm.FieldName = "kod";
+            KodKRazm.FieldName = "Kod";
             KodKRazm.Name = "KodKRazm";
             KodKRazm.OptionsColumn.AllowEdit = false;
             KodKRazm.Visible = true;
@@ -971,7 +842,7 @@
             // RazmRazm
             // 
             RazmRazm.Caption = "Размер К.";
-            RazmRazm.FieldName = "razm";
+            RazmRazm.FieldName = "Razm";
             RazmRazm.Name = "RazmRazm";
             RazmRazm.OptionsColumn.AllowEdit = false;
             RazmRazm.Visible = true;
@@ -980,35 +851,35 @@
             // frm_s1
             // 
             frm_s1.Caption = "frm_s";
-            frm_s1.FieldName = "GrupMen.frm_s";
+            frm_s1.FieldName = "GrupMen.Frm_s";
             frm_s1.Name = "frm_s1";
             // 
             // cle1
             // 
             cle1.Caption = "cle";
-            cle1.FieldName = "cle";
+            cle1.FieldName = "Cle";
             cle1.Name = "cle1";
             // 
             // kod_v1
             // 
             kod_v1.Caption = "kod_v";
-            kod_v1.FieldName = "kod_v";
+            kod_v1.FieldName = "Kod_v";
             kod_v1.Name = "kod_v1";
             // 
             // grup1
             // 
             grup1.Caption = "grup";
-            grup1.FieldName = "grup";
+            grup1.FieldName = "Grup";
             grup1.Name = "grup1";
             // 
             // pr_po
             // 
             pr_po.Caption = "Выбор";
             pr_po.ColumnEdit = repositoryItemCheckEditViborRazm;
-            pr_po.FieldName = "pr_po";
+            pr_po.FieldName = "Pr_po";
             pr_po.Name = "pr_po";
             pr_po.Visible = true;
-            pr_po.VisibleIndex = 4;
+            pr_po.VisibleIndex = 5;
             // 
             // repositoryItemCheckEditViborRazm
             // 
@@ -1019,9 +890,11 @@
             // 
             // RazmAll
             // 
-            RazmAll.Caption = "RazmAll";
-            RazmAll.FieldName = "razm_all";
+            RazmAll.Caption = "Общий размер";
+            RazmAll.FieldName = "Razm_all";
             RazmAll.Name = "RazmAll";
+            RazmAll.Visible = true;
+            RazmAll.VisibleIndex = 4;
             // 
             // customButtonBack
             // 
@@ -1031,7 +904,7 @@
             customButtonBack.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customButtonBack.Location = new System.Drawing.Point(3, 642);
             customButtonBack.Name = "customButtonBack";
-            customButtonBack.Size = new System.Drawing.Size(147, 28);
+            customButtonBack.Size = new System.Drawing.Size(158, 28);
             customButtonBack.TabIndex = 1;
             customButtonBack.Text = "Назад";
             customButtonBack.UseVisualStyleBackColor = false;
@@ -1043,9 +916,9 @@
             customButtonNext.Dock = System.Windows.Forms.DockStyle.Fill;
             customButtonNext.Font = new System.Drawing.Font("Arial", 10F);
             customButtonNext.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonNext.Location = new System.Drawing.Point(156, 642);
+            customButtonNext.Location = new System.Drawing.Point(167, 642);
             customButtonNext.Name = "customButtonNext";
-            customButtonNext.Size = new System.Drawing.Size(148, 28);
+            customButtonNext.Size = new System.Drawing.Size(159, 28);
             customButtonNext.TabIndex = 0;
             customButtonNext.Text = "Вперед";
             customButtonNext.UseVisualStyleBackColor = false;
@@ -1057,26 +930,24 @@
             customTabControlKomplRazm.Appearance.Options.UseForeColor = true;
             tableLayoutPanel8.SetColumnSpan(customTabControlKomplRazm, 2);
             customTabControlKomplRazm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customTabControlKomplRazm.Location = new System.Drawing.Point(3, 269);
+            customTabControlKomplRazm.Location = new System.Drawing.Point(3, 265);
             customTabControlKomplRazm.Name = "customTabControlKomplRazm";
             customTabControlKomplRazm.ObjectName = null;
             tableLayoutPanel8.SetRowSpan(customTabControlKomplRazm, 2);
-            customTabControlKomplRazm.Size = new System.Drawing.Size(301, 367);
+            customTabControlKomplRazm.Size = new System.Drawing.Size(323, 371);
             customTabControlKomplRazm.TabIndex = 4;
             // 
             // customCheckBoxAutoRazm
             // 
-            customCheckBoxAutoRazm.Anchor = System.Windows.Forms.AnchorStyles.Top;
             customCheckBoxAutoRazm.AutoSize = true;
             customCheckBoxAutoRazm.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            tableLayoutPanel8.SetColumnSpan(customCheckBoxAutoRazm, 2);
             customCheckBoxAutoRazm.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxAutoRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxAutoRazm.Location = new System.Drawing.Point(101, 3);
+            customCheckBoxAutoRazm.Location = new System.Drawing.Point(3, 3);
             customCheckBoxAutoRazm.Name = "customCheckBoxAutoRazm";
             customCheckBoxAutoRazm.Size = new System.Drawing.Size(105, 20);
             customCheckBoxAutoRazm.TabIndex = 8;
-            customCheckBoxAutoRazm.Text = "Авторазмер";
+            customCheckBoxAutoRazm.Text = "Автоподбор";
             customCheckBoxAutoRazm.UseVisualStyleBackColor = true;
             customCheckBoxAutoRazm.CheckedChanged += customCheckBoxAutoRazm_CheckedChanged;
             // 
@@ -1086,7 +957,7 @@
             customNumericUpDownValueTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customNumericUpDownValueTab.Font = new System.Drawing.Font("Arial", 10F);
             customNumericUpDownValueTab.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customNumericUpDownValueTab.Location = new System.Drawing.Point(156, 55);
+            customNumericUpDownValueTab.Location = new System.Drawing.Point(167, 29);
             customNumericUpDownValueTab.MaximumSize = new System.Drawing.Size(100, 0);
             customNumericUpDownValueTab.Name = "customNumericUpDownValueTab";
             customNumericUpDownValueTab.ObjectName = null;
@@ -1100,26 +971,24 @@
             customLabelKolTab.Dock = System.Windows.Forms.DockStyle.Fill;
             customLabelKolTab.Font = new System.Drawing.Font("Arial", 10F);
             customLabelKolTab.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customLabelKolTab.Location = new System.Drawing.Point(3, 52);
+            customLabelKolTab.Location = new System.Drawing.Point(3, 26);
             customLabelKolTab.Name = "customLabelKolTab";
-            customLabelKolTab.Size = new System.Drawing.Size(147, 29);
+            customLabelKolTab.Size = new System.Drawing.Size(158, 29);
             customLabelKolTab.TabIndex = 2;
             customLabelKolTab.Text = "Количество:";
             customLabelKolTab.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // customCheckBoxOdinak
             // 
-            customCheckBoxOdinak.Anchor = System.Windows.Forms.AnchorStyles.Top;
             customCheckBoxOdinak.AutoSize = true;
             customCheckBoxOdinak.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
-            tableLayoutPanel8.SetColumnSpan(customCheckBoxOdinak, 2);
             customCheckBoxOdinak.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxOdinak.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxOdinak.Location = new System.Drawing.Point(62, 29);
+            customCheckBoxOdinak.Location = new System.Drawing.Point(167, 3);
             customCheckBoxOdinak.Name = "customCheckBoxOdinak";
-            customCheckBoxOdinak.Size = new System.Drawing.Size(182, 20);
+            customCheckBoxOdinak.Size = new System.Drawing.Size(159, 20);
             customCheckBoxOdinak.TabIndex = 7;
-            customCheckBoxOdinak.Text = "Все записи одинаковые";
+            customCheckBoxOdinak.Text = "Один артикул в составе";
             customCheckBoxOdinak.UseVisualStyleBackColor = true;
             customCheckBoxOdinak.CheckedChanged += customCheckBoxOdinak_CheckedChanged;
             // 
@@ -1212,14 +1081,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn KodKompl;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private DevExpress.XtraGrid.Columns.GridColumn grup1;
-        private CustomComboBox customComboBoxGrup;
-        private CustomComboBox customComboBoxArt;
-        private CustomComboBox customComboBoxMod;
-        private CustomComboBox customComboBoxRazm;
-        private Core.Class.CustomLabel customLabelFiltrArt;
-        private Core.Class.CustomLabel customLabelFiltrGrup;
-        private Core.Class.CustomLabel customLabelFiltrRazm;
-        private Core.Class.CustomLabel customLabelFiltrMod;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel8;
         private CustomCheckBox customCheckBoxOdinak;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
@@ -1244,7 +1105,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRazm;
         private DevExpress.XtraGrid.Views.BandedGrid.GridBand Razm_All1;
         private DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn count;
-        private Core.Class.CustomButton customButtonClearFilter;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCount;
+        private DevExpress.XtraGrid.Columns.GridColumn kodArt;
     }
 }
