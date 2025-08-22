@@ -1,4 +1,6 @@
-﻿using SewingProduction.Interfaces;
+﻿using Org.BouncyCastle.Asn1.X509;
+using SewingProduction.Features.Articul;
+using SewingProduction.Interfaces;
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -162,6 +164,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int yearNumberPlanDate { get; set; }
         [NotMapped]
         public int pszkmYearMonthInt { get; set; }
+        [NotMapped]
+        public int kmlKmaID { get; set; }
+        [NotMapped]
+        public string kmaNumber { get; set; }
     }
 
     public class PlanSezonZadKnitMachineLoadingSummary
@@ -178,4 +184,70 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public decimal sortOrder { get; set; }
     }
 
+    public class PlanTotalHoursByKnitMachine
+    {
+        [NotMapped]
+        public int kmaID { get; set; }
+        [NotMapped]
+        public string kmaNumber { get; set; }
+        [NotMapped]
+        public int kmlID { get; set; }
+        [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public DateTime? DateZap { get; set; }
+        [NotMapped]
+        public string mgZap { get; set; }
+
+        [NotMapped]
+        public int hoursTotal { get; set; }
+
+        [NotMapped]
+        public int idVyazClass { get; set; }
+        [NotMapped]
+        public int knitClass { get; set; }
+    }
+
+    public class ZadanyListByMachine
+    { 
+        [NotMapped]
+        public string pszNom { get; set; }
+        [NotMapped]
+        public int nom { get; set; }
+        [NotMapped]
+        public string articul { get; set; }
+        [NotMapped]
+        public string zvet { get; set; }
+        [NotMapped]
+        public int kol { get; set; }
+        [NotMapped]
+        public int pryazZayav { get; set; }
+        [NotMapped]
+        public DateTime? data_plan { get; set; }
+        [NotMapped]
+        public string vid_stir { get; set; }
+        [NotMapped]
+        public string dopr_name { get; set; }
+        [NotMapped]
+        public int kmlID { get; set; }
+        [NotMapped]
+        public int SyncSelection { get; set; } = 0;
+    }
+    public class RzvPachListByNom
+    {
+        [NotMapped]
+        public string nomZad {  get; set; }
+        [NotMapped]
+        public int nom { get; set; }
+        [NotMapped]
+        public int n_pach { get; set; }
+        [NotMapped]
+        public string razm { get; set; }
+        [NotMapped]
+        public int kol { get; set; }
+        [NotMapped]
+        public int grad { get; set; }
+        [NotMapped]
+        public int SyncSelection { get; set; } = 0;
+    }
 }
