@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
 
 namespace SewingProduction.Features.KnittingProduction.Models
 {
@@ -21,8 +22,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? DateCdPlan { get; set; }
         [NotMapped]
         public string kod { get; set; }
+        //[NotMapped]
+        //public string KoddRt { get; set; }
         [NotMapped]
-        public string KoddRt { get; set; }
+        public int annID { get; set; }
         [NotMapped]
         public string Articul { get; set; }
         [NotMapped]
@@ -44,7 +47,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public string KmlNumber { get; set; }
         [NotMapped]
-        public DateTime? pszkmPlanDate { get; set; }
+        public DateTime? DateZapPlanFrom { get; set; }
+        [NotMapped]
+        public DateTime? DateZapPlanTo { get; set; }
         [NotMapped]
         public string PictPath { get; set; }
         [NotMapped]
@@ -70,7 +75,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public string pszkmPszNom {  set; get; }
         public int pszkmKnitClass {  set; get; }
         public int pszkmKmlID { get; set; }
-        public DateTime? pszkmPlanDate { get; set; }
+        public int pszkmlSeconds { set; get; }
+        public DateTime? pszkmPlanDateFrom { get; set; }
+        public DateTime? pszkmPlanDateTo { get; set; }
         public DateTime? pszkmDateAdd { get; set; }
         [NotMapped]
         public bool IsModified { get; set; } = false;
@@ -96,4 +103,79 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int typevyazkm { get; set; }
         public string vidVyazKM { get; set; }
     }
+
+    public class KnitMachineLoadAllInfo
+    {
+        [NotMapped]
+        public string yearMonth { get; set; }
+        [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public int kmlID { get; set; }
+        [NotMapped]
+        public string combinedPszNom { get; set; }
+        [NotMapped]
+        public int monthNumber { get; set; }
+        [NotMapped]
+        public int yearNumber { get; set; }
+    }
+
+    public class PlanSezonZadKnitMachine
+    {
+        [NotMapped]
+        public int pszkmID { get; set; }
+        [NotMapped]
+        public string pszkmPszNom { get; set; }
+        [NotMapped]
+        public int pszkmKnitClass { get; set; }
+        [NotMapped]
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public string pszkmKmlID { get; set; }
+        [NotMapped]
+        public decimal pszkmlSeconds { get; set; }
+        [NotMapped]
+        public DateTime? pszkmPlanDateFrom { get; set; }
+        [NotMapped]
+        public DateTime? pszkmPlanDateTo { get; set; }
+        [NotMapped]
+        public int SecondsWorked { get; set; }
+        [NotMapped]
+        public decimal hoursTotal { get; set; }
+        [NotMapped]
+        public DateTime? pszkmDateAdd { get; set; }
+        [NotMapped]
+        public DateTime? DateZap { get; set; }
+        [NotMapped]
+        public string articul { get; set; }
+        [NotMapped]
+        public string yearMonthDateZap { get; set; }
+        [NotMapped]
+        public int monthNumberDateZap { get; set; }
+        [NotMapped]
+        public int yearNumberDateZap { get; set; }
+        [NotMapped]
+        public string yearMonthPlanDate { get; set; }
+        [NotMapped]
+        public int monthNumberPlanDate { get; set; }
+        [NotMapped]
+        public int yearNumberPlanDate { get; set; }
+        [NotMapped]
+        public int pszkmYearMonthInt { get; set; }
+    }
+
+    public class PlanSezonZadKnitMachineLoadingSummary
+    {
+        [NotMapped]
+        public string period { get; set; }
+        [NotMapped]
+        public int yearNumberDateZap { get; set; }
+        [NotMapped]
+        public int monthNumberDateZap { get; set; }
+        [NotMapped]
+        public decimal hoursTotal { get; set; }
+        [NotMapped]
+        public decimal sortOrder { get; set; }
+    }
+
 }

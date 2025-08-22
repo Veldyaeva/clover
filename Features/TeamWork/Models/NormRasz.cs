@@ -55,8 +55,12 @@ namespace SewingProduction.Models
         private string _obor;
         public string Obor
         {
-            get => TextOb;
-            set => TextOb = value?.Length > 35 ? value.Substring(0, 35) : value;
+            get => _obor;
+            set
+            {
+                var newValue = value?.Length > 35 ? value.Substring(0, 35) : value;
+                SetProperty(ref _obor, newValue, nameof(Obor));
+            }
         }
 
         private string _spec;

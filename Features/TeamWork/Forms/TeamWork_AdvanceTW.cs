@@ -124,6 +124,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         public int CurrentMode => _mode;
         public int? SourceAnnIdToCopyDetailsFrom => _sourceAnnIdToCopyDetailsFrom;
+        public string CurrentArticul => (_currentAnnData?.Articul ?? CreatedAnn?.Articul) ?? string.Empty;
 
         public static class CloneUtils
         {
@@ -1029,7 +1030,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         AddStandardKontRows();
                         break;
                     case (int)Mode.ArchAndCopy:
-                        this.Text = "Архив+копия";
+                        this.Text = $"Архив+копия";//. Артикул: {CreatedAnn.Articul}" ;
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
@@ -1041,12 +1042,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
-                        this.Text = "Редактировать";
+                        this.Text = $"Редактировать";//. Артикул: {_selectedAnnId.Articul}";
                         await LoadForEdit(_selectedAnnId);
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
-                        this.Text = "Дубль";
+                        this.Text = $"Дубль";//. Артикул: {CreatedAnn.Articul}";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();
@@ -1079,17 +1080,28 @@ namespace SewingProduction.Features.TeamWork.Forms
                 repositoryItemLookUpEdit_oborudShv.NullText = "[Выберите значение]";
 
                 repositoryItemLookUpEdit_oborudShv.EditValueChanged += async (s, e) =>
-    {
-        var editor = s as LookUpEdit;
-        if (editor?.EditValue is int newKodOb)
-        {
-            var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
-            if (!string.IsNullOrEmpty(spec))
-            {
-                gridViewRasz.SetFocusedRowCellValue("Spec", spec);
-            }
-        }
-    };
+                {
+                    var editor = s as LookUpEdit;
+                    if (editor?.EditValue is int newKodOb)
+                    {
+                        // 1) Проставляем код оборудования
+                        gridViewRasz.SetFocusedRowCellValue("KodOb", newKodOb);
+
+                        // 2) Проставляем текст оборудования в Obor
+                        var obItem = oborudShvList?.FirstOrDefault(x => x.kod_ob == newKodOb);
+                        if (obItem != null)
+                        {
+                            gridViewRasz.SetFocusedRowCellValue("Obor", obItem.text_ob);
+                        }
+
+                        // 3) Подтягиваем spec
+                        var spec = await _artNormService.GetSpecByOborudKod(newKodOb);
+                        if (!string.IsNullOrEmpty(spec))
+                        {
+                            gridViewRasz.SetFocusedRowCellValue("Spec", spec);
+                        }
+                    }
+                };
 
                 repositoryItemLookUpEdit_kodProizv.EditValueChanged += (s, e) =>
                 {
@@ -1434,7 +1446,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _currentAnnData.SekVyaz62 = Sum(r => r.KodOb == 60);
                 _currentAnnData.SekVyaz57 = Sum(r => r.KodOb == 114);
                 _currentAnnData.SekVyaz18 = Sum(r => r.KodOb == 115);
-                _currentAnnData.SekShv1 = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
+                _currentAnnData.SekVyaz = Sum(r => r.KodPodr == 1 || r.KodPodr == 6);
 
                 _currentAnnData.SekShv = _currentAnnData.SekVyaz != 0 ? Sum(r => r.KodPodr != 1 && r.KodPodr != 6) : _currentAnnData.Sek;
 

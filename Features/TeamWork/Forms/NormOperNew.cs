@@ -134,8 +134,9 @@ namespace SewingProduction.Features.TeamWork.Forms
             normRasz.kod_o = view.GetRowCellValue(rowHandle, "kod_o")?.ToString();
             normRasz.Text = Convert.ToString(view.GetRowCellValue(rowHandle, "text"))?.TrimEnd(' ');
             normRasz.Spec = Convert.ToString(view.GetRowCellValue(rowHandle, "spec"))?.TrimEnd(' ');
-            // Записываем текст из поля text_ob (из таблицы norm_oper) в поле obor записи norm_rasz
-            normRasz.Obor = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
+            // Объединяем источник: проставляем и код, и текст из одной строки norm_oper
+            var textOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
+            normRasz.Obor = textOb;
             normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); 
             normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); 
             normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); 
