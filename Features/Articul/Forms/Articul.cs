@@ -31,7 +31,8 @@ namespace SewingProduction.Features.Articul
     {
         private readonly DatabaseHelper _dbHelperAce;
         private UserClass _user;
-        List<ArticulModel> _articuls;
+        ArticulModel _articulByKod;
+        List<ArticulModel> _artPreview;
         ArticulDataService _articulDataService = new ArticulDataService();
         public Articul(UserClass user) : base(user)
         {
@@ -47,14 +48,14 @@ namespace SewingProduction.Features.Articul
             //this.art_norm_nTableAdapter.Fill(this.aCE_backupDataSet.art_norm_n);
             try
             {
-                _articuls = await _articulDataService.GetAllAsync();
+                _artPreview = await _articulDataService.GetArtPreviewAsync();
                 //загрузка перечня кодов из справочника, часть полей
                 //string query = $"select * from dbo.view_art";
                 //kodd,kod, grup, articul, razm, mod, kle
                 //var dt = _dbHelperAce.ExecuteQuery(query);
 
                 //bsArt.DataSource = dt;
-                bsArt.DataSource = _articuls;
+                bsArt.DataSource = _artPreview;
                 // загрузка одиночного кода из справочника, все поля  
                 getArticulFromSQl("0");
 
@@ -121,12 +122,14 @@ namespace SewingProduction.Features.Articul
                 MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private void getArticulFromSQl(string kod)
+        private async Task getArticulFromSQl(string kod)
         {
             try
             {
-                string queryArticul = $"select * from dbo.viewArticul_preview where va_kod = '{kod}'";
-                DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
+                //string queryArticul = $"select * from dbo.viewArticul_preview where va_kod = '{kod}'";
+                //DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
+                _articulByKod = await _articulDataService.GetByKodAsync(kod);
+
                 bsArticul.DataSource = dt;
                 if (bsArticul.Count > 0)
                 {

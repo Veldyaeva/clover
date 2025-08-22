@@ -9,13 +9,14 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulGrupMenViewModel : ArticulModel, INotifyPropertyChanged
+    public class SpArticulGrupMenViewModel : ArticulModel
+        //, INotifyPropertyChanged
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
 
-        [NotMapped]
-        public string po = " ";
+        //[NotMapped]
+        //public string po = " ";
 
         private bool _pr_po;
         public bool pr_po
@@ -32,8 +33,8 @@ namespace SewingProduction.Features.Articul.Models
         }
         public int TabIndex { get; set; } = -1;
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //protected void OnPropertyChanged(string propertyName)
+        //    => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

@@ -42,7 +42,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddNewKopml));
             gridViewKomplKod = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumnKod = new DevExpress.XtraGrid.Columns.GridColumn();
-            customGridControlKompl = new Core.Class.CustomGridControl();
+            customGridControlKompl = new SewingProduction.Core.Class.CustomGridControl();
             gridViewKompl = new DevExpress.XtraGrid.Views.Grid.GridView();
             GrupKompl = new DevExpress.XtraGrid.Columns.GridColumn();
             ArticulKompl = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,11 +52,11 @@
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             customLabelGrupKompl = new CustomLabel();
-            customButtonKompl = new Core.Class.CustomButton();
-            customButtonDelKompl = new Core.Class.CustomButton();
+            customButtonKompl = new SewingProduction.Core.Class.CustomButton();
+            customButtonDelKompl = new SewingProduction.Core.Class.CustomButton();
             tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonDelKomplSelected = new Core.Class.CustomButton();
-            customGridControlKomplSelected = new Core.Class.CustomGridControl();
+            customButtonDelKomplSelected = new SewingProduction.Core.Class.CustomButton();
+            customGridControlKomplSelected = new SewingProduction.Core.Class.CustomGridControl();
             gridViewKomplSelected = new DevExpress.XtraGrid.Views.Grid.GridView();
             po_mn = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemButtonEditDelRazm = new DevExpress.XtraEditors.Repository.RepositoryItemButtonEdit();
@@ -72,7 +72,7 @@
             customLabelKod = new CustomLabel();
             customCheckBoxVerified = new CustomCheckBox();
             customTabControlKomplRazm = new CustomTabControl();
-            customGridControlKomplArt = new Core.Class.CustomGridControl();
+            customGridControlKomplArt = new SewingProduction.Core.Class.CustomGridControl();
             gridViewKomplArt = new DevExpress.XtraGrid.Views.Grid.GridView();
             Grup = new DevExpress.XtraGrid.Columns.GridColumn();
             Articul = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -85,7 +85,7 @@
             kod_v = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customLabelKolTab = new CustomLabel();
-            customGridControlKomplRazm = new Core.Class.CustomGridControl();
+            customGridControlKomplRazm = new SewingProduction.Core.Class.CustomGridControl();
             gridViewKomplRazm = new DevExpress.XtraGrid.Views.Grid.GridView();
             ArticulRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             ModRazm = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -103,8 +103,8 @@
             customLabelArt = new CustomLabel();
             customLabelGrup = new CustomLabel();
             tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonBack = new Core.Class.CustomButton();
-            customButtonNext = new Core.Class.CustomButton();
+            customButtonBack = new SewingProduction.Core.Class.CustomButton();
+            customButtonNext = new SewingProduction.Core.Class.CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridViewKomplKod).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControlKompl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewKompl).BeginInit();

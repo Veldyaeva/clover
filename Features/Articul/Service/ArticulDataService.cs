@@ -23,10 +23,17 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT * FROM sp_articul";
             return await _dbService.GetListAsync<ArticulModel>(query, new { });
         }
-
-        public async Task<ArticulModel> GetByKodAsync(int kod)
+        public async Task<List<ArticulModel>> GetArtPreviewAsync()
         {
-            string query = "SELECT * FROM sp_articul WHERE kod = @kod";
+            string query = "select * from dbo.view_art";
+
+            return await _dbService.GetListAsync<ArticulModel>(query, new { });
+            //string query = $"select * from dbo.view_art";
+            //kodd,kod, grup, articul, razm, mod, kle
+        }
+        public async Task<ArticulModel> GetByKodAsync(string kod)
+        {
+            string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
             return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
         }
 

@@ -22,9 +22,6 @@
     <Compile Update="Core\Class\SP_form.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Features\Articul\Forms\AddNewKopml.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Features\Articul\Forms\Articul.cs">
       <SubType>Form</SubType>
     </Compile>
