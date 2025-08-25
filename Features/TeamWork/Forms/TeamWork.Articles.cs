@@ -585,6 +585,18 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             try
             {
+                // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку loadAllCheckBox
+                if (gridView_wdToBind != null)
+                {
+                    gridView_wdToBind.ActiveFilter.Clear();
+                    gridView_wdToBind.ActiveFilterString = string.Empty;
+                }
+                
+                if (loadAllCheckBox != null)
+                {
+                    loadAllCheckBox.Checked = false;
+                }
+
                 // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
                 string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "").TrimEnd(' ');
