@@ -283,7 +283,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn1
             // 
             gridColumn1.Caption = "Код";
-            gridColumn1.FieldName = "kod";
+            gridColumn1.FieldName = "Kod";
             gridColumn1.MinWidth = 23;
             gridColumn1.Name = "gridColumn1";
             gridColumn1.Visible = true;
@@ -293,7 +293,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn2
             // 
             gridColumn2.Caption = "Группа";
-            gridColumn2.FieldName = "grup";
+            gridColumn2.FieldName = "Grup";
             gridColumn2.MinWidth = 23;
             gridColumn2.Name = "gridColumn2";
             gridColumn2.Visible = true;
@@ -303,7 +303,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn3
             // 
             gridColumn3.Caption = "Артикул";
-            gridColumn3.FieldName = "articul";
+            gridColumn3.FieldName = "Articul";
             gridColumn3.MinWidth = 23;
             gridColumn3.Name = "gridColumn3";
             gridColumn3.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.True;
@@ -314,7 +314,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn4
             // 
             gridColumn4.Caption = "Размер";
-            gridColumn4.FieldName = "razm";
+            gridColumn4.FieldName = "Razm";
             gridColumn4.MinWidth = 23;
             gridColumn4.Name = "gridColumn4";
             gridColumn4.Visible = true;
@@ -324,7 +324,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn5
             // 
             gridColumn5.Caption = "Модель";
-            gridColumn5.FieldName = "mod";
+            gridColumn5.FieldName = "Mod";
             gridColumn5.MinWidth = 23;
             gridColumn5.Name = "gridColumn5";
             gridColumn5.Visible = true;
@@ -334,7 +334,7 @@ namespace SewingProduction.Features.Articul
             // gridColumn6
             // 
             gridColumn6.Caption = "ТМ";
-            gridColumn6.FieldName = "kle";
+            gridColumn6.FieldName = "Kle";
             gridColumn6.MinWidth = 23;
             gridColumn6.Name = "gridColumn6";
             gridColumn6.Visible = true;

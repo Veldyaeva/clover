@@ -304,7 +304,6 @@ namespace SewingProduction.Features.UserDistribution.Forms
             customActionButtonNon.TabIndex = 12;
             customActionButtonNon.Text = "Не нажимать";
             customActionButtonNon.UseVisualStyleBackColor = false;
-            customActionButtonNon.Visible = false;
             customActionButtonNon.Click += customActionButtonNon_Click;
             // 
             // tableLayoutPanelButton

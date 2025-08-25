@@ -38,6 +38,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
             TestFirst = new DevExpress.XtraGrid.Columns.GridColumn();
             TestSecond = new DevExpress.XtraGrid.Columns.GridColumn();
             customGroupBox1 = new CustomGroupBox();
+            customHeaderLabel1 = new CustomHeaderLabel();
+            customLabel4 = new CustomLabel();
             customLabel1 = new CustomLabel();
             customTextBox1 = new CustomTextBox();
             customButton1 = new CustomButton();
@@ -105,32 +107,56 @@ namespace SewingProduction.Features.UserDistribution.Forms
             // customGroupBox1
             // 
             customGroupBox1.BackColor = System.Drawing.Color.Transparent;
+            customGroupBox1.Controls.Add(customHeaderLabel1);
+            customGroupBox1.Controls.Add(customLabel4);
             customGroupBox1.Controls.Add(customLabel1);
             customGroupBox1.Controls.Add(customTextBox1);
-            customGroupBox1.Location = new System.Drawing.Point(12, 229);
+            customGroupBox1.Location = new System.Drawing.Point(24, 225);
             customGroupBox1.Name = "customGroupBox1";
             customGroupBox1.Size = new System.Drawing.Size(259, 250);
             customGroupBox1.TabIndex = 1;
             customGroupBox1.TabStop = false;
             customGroupBox1.Text = "customGroupBox1";
             // 
+            // customHeaderLabel1
+            // 
+            customHeaderLabel1.AutoSize = true;
+            customHeaderLabel1.Font = new System.Drawing.Font("Arial", 13F, System.Drawing.FontStyle.Bold);
+            customHeaderLabel1.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customHeaderLabel1.Location = new System.Drawing.Point(15, 32);
+            customHeaderLabel1.Name = "customHeaderLabel1";
+            customHeaderLabel1.Size = new System.Drawing.Size(103, 21);
+            customHeaderLabel1.TabIndex = 6;
+            customHeaderLabel1.Text = "Заголовок";
+            // 
+            // customLabel4
+            // 
+            customLabel4.AutoSize = true;
+            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
+            customLabel4.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabel4.Location = new System.Drawing.Point(15, 135);
+            customLabel4.Name = "customLabel4";
+            customLabel4.Size = new System.Drawing.Size(126, 16);
+            customLabel4.TabIndex = 5;
+            customLabel4.Text = "размер побольше";
+            // 
             // customLabel1
             // 
             customLabel1.AutoSize = true;
             customLabel1.Font = new System.Drawing.Font("Arial", 10F);
             customLabel1.ForeColor = System.Drawing.Color.Black;
-            customLabel1.Location = new System.Drawing.Point(15, 41);
+            customLabel1.Location = new System.Drawing.Point(15, 99);
             customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(95, 16);
+            customLabel1.Size = new System.Drawing.Size(118, 16);
             customLabel1.TabIndex = 0;
-            customLabel1.Text = "customLabel1";
+            customLabel1.Text = "обычный размер";
             // 
             // customTextBox1
             // 
             customTextBox1.BackColor = System.Drawing.Color.White;
             customTextBox1.Font = new System.Drawing.Font("Arial", 10F);
             customTextBox1.ForeColor = System.Drawing.Color.Black;
-            customTextBox1.Location = new System.Drawing.Point(15, 153);
+            customTextBox1.Location = new System.Drawing.Point(15, 204);
             customTextBox1.Name = "customTextBox1";
             customTextBox1.Size = new System.Drawing.Size(187, 23);
             customTextBox1.TabIndex = 3;
@@ -223,5 +249,8 @@ namespace SewingProduction.Features.UserDistribution.Forms
         private DevExpress.XtraGrid.Columns.GridColumn TestName;
         private DevExpress.XtraGrid.Columns.GridColumn TestFirst;
         private DevExpress.XtraGrid.Columns.GridColumn TestSecond;
+        private CustomLabel customLabel4;
+        private CustomHeaderLabel customHeaderLabel3;
+        private CustomHeaderLabel customHeaderLabel1;
     }
 }

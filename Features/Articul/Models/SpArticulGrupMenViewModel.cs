@@ -15,6 +15,8 @@ namespace SewingProduction.Features.Articul.Models
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
+        public int countStr { get; set; } = 1;
+
 
         //[NotMapped]
         //public string po = " ";

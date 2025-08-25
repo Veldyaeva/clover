@@ -45,5 +45,15 @@ namespace SewingProduction.Features.Articul.Service
         {
             await _dbService.DeleteEntityAsync("sp_articul", "Kod", model);
         }
+        public async Task<string> GetAllRazmByRazmAsync(string razm)
+        {
+            string query = "SELECT Razm_all FROM Razm WHERE Razm = @razm";
+            return await _dbService.GetEntityAsync<string>(query, new { razm });
+        }
+        public async Task<string> GetFileEskizForKod(string kod)
+        {
+            string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
+            return await _dbService.GetEntityAsync<string>(query, new { kod });
+        }
     }
 }
