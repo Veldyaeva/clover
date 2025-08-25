@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SewingProduction.Models;
 
-namespace SewingProduction.Features.Articul.Models
+namespace SewingProduction.Core.Models
 {
     public class GrupMenModel : INotifyPropertyChanged
     {

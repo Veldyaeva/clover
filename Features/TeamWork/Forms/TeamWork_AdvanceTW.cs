@@ -1030,7 +1030,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         AddStandardKontRows();
                         break;
                     case (int)Mode.ArchAndCopy:
-                        this.Text = $"Архив+копия";//. Артикул: {CreatedAnn.Articul}" ;
+                        this.Text = $"Архив+копия";//. Артикул: {CreatedAnn.ArticulModel}" ;
                         var raszArch = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszArch, _newAnnId, "nrId", false)); // markAsNew = false
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
@@ -1042,12 +1042,12 @@ namespace SewingProduction.Features.TeamWork.Forms
                         _currentAnnData.dateCreate = DateTime.Now;
                         break;
                     case (int)Mode.Edit:
-                        this.Text = $"Редактировать";//. Артикул: {_selectedAnnId.Articul}";
+                        this.Text = $"Редактировать";//. Артикул: {_selectedAnnId.ArticulModel}";
                         await LoadForEdit(_selectedAnnId);
                         LoadGridImage(pictureBox1, annId: _selectedAnnId);
                         break;
                     case (int)Mode.Clone:
-                        this.Text = $"Дубль";//. Артикул: {CreatedAnn.Articul}";
+                        this.Text = $"Дубль";//. Артикул: {CreatedAnn.ArticulModel}";
                         var raszClone = await _artNormService.GetRelatedNormRasz(_selectedAnnId);
                         _normRaszList.BulkLoad(CloneUtils.CloneList(raszClone, _newAnnId, "nrId", false)); // markAsNew = false
                         _normRaskList.Clear();

@@ -32,11 +32,10 @@ namespace SewingProduction.Features.Articul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
-            bsArt = new System.Windows.Forms.BindingSource(components);
             gridControl1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -44,6 +43,7 @@ namespace SewingProduction.Features.Articul
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
+            bsArt = new System.Windows.Forms.BindingSource(components);
             chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             chbKombDet = new CustomCheckBox();
@@ -207,8 +207,8 @@ namespace SewingProduction.Features.Articul
             dataGridView2 = new System.Windows.Forms.DataGridView();
             customButtonKart = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsTM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
@@ -925,7 +925,7 @@ namespace SewingProduction.Features.Articul
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 8.25F);
             label2.ForeColor = Color.FromArgb(0, 0, 0);
-            label2.Location = new Point(257, 50);
+            label2.Location = new Point(276, 39);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(50, 14);
@@ -2162,13 +2162,13 @@ namespace SewingProduction.Features.Articul
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grArtDrName, grArtDrEd, artDrSeb, grArtDrKol, grArtDrSum, grArtDrKod_fur, grArtDrKod_furn_ar, grArtDrData_nitki });
             gridView1.DetailHeight = 404;
-            gridFormatRule1.ColumnApplyTo = grArtDrName;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.ForeColor = Color.Cyan;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Expression = "1=1";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridView1.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ColumnApplyTo = grArtDrName;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.ForeColor = Color.Cyan;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Expression = "1=1";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridView1.FormatRules.Add(gridFormatRule2);
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
@@ -2454,7 +2454,7 @@ namespace SewingProduction.Features.Articul
             customButtonKart.UseVisualStyleBackColor = false;
             customButtonKart.Click += customButtonKart_Click;
             // 
-            // Articul
+            // ArticulModel
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -2480,8 +2480,8 @@ namespace SewingProduction.Features.Articul
             Text = "Справочник изделий";
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsTM).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();

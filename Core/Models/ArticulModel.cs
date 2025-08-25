@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace SewingProduction.Features.Articul.Models
+namespace SewingProduction.Core.Models
 {
     public class ArticulModel :  INewable, IModifiable, IDeletable, INotifyPropertyChanged
     {

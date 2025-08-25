@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SewingProduction.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulGrupMenViewModel : ArticulModel
+    public class SpArticulGrupMenViewModel : Core.Models.ArticulModel
         //, INotifyPropertyChanged
     {
 

@@ -4,7 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -66,13 +66,13 @@ namespace SewingProduction.Features.Articul
             string query = $"SELECT kod, articul, razm AS 'Размер', kle, mod, grup, ag_id, kod_tnved, CAST(grupp AS INT) AS men_id FROM sp_articul WHERE kod = '@kodSQL'";
             return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kodSQL", kodSQL } });
         }
-        public async Task<ArticulModel> GetByKodAsync(int kod)
+        public async Task<Core.Models.ArticulModel> GetByKodAsync(int kod)
         {
             string query = "SELECT * FROM sp_articul WHERE kod = @kod";
-            return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
+            return await _dbService.GetEntityAsync<Core.Models.ArticulModel>(query, new { kod });
         }
 
-        public async Task SaveAsync(ArticulModel model)
+        public async Task SaveAsync(Core.Models.ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
         }

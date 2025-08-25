@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -18,31 +18,30 @@ namespace SewingProduction.Features.Articul.Service
             _dbService = new DbService(new DatabaseHelper());
         }
 
-        public async Task<List<ArticulModel>> GetAllAsync()
+        public async Task<List<Core.Models.ArticulModel>> GetAllAsync()
         {
             string query = "SELECT * FROM sp_articul";
-            return await _dbService.GetListAsync<ArticulModel>(query, new { });
+            return await _dbService.GetListAsync<Core.Models.ArticulModel>(query, new { });
         }
-        public async Task<List<ArticulModel>> GetArtPreviewAsync()
+        public async Task<List<Core.Models.ArticulModel>> GetArtPreviewAsync()
         {
             string query = "select * from dbo.view_art";
 
-            return await _dbService.GetListAsync<ArticulModel>(query, new { });
-            //string query = $"select * from dbo.view_art";
-            //kodd,kod, grup, articul, razm, mod, kle
+            return await _dbService.GetListAsync<Core.Models.ArticulModel>(query, new { });
+
         }
-        public async Task<ArticulModel> GetByKodAsync(string kod)
+        public async Task<Core.Models.ArticulModel> GetByKodAsync(string kod)
         {
             string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
-            return await _dbService.GetEntityAsync<ArticulModel>(query, new { kod });
+            return await _dbService.GetEntityAsync<Core.Models.ArticulModel>(query, new { kod });
         }
 
-        public async Task SaveAsync(ArticulModel model)
+        public async Task SaveAsync(Core.Models.ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
         }
 
-        public async Task DeleteAsync(ArticulModel model)
+        public async Task DeleteAsync(Core.Models.ArticulModel model)
         {
             await _dbService.DeleteEntityAsync("sp_articul", "Kod", model);
         }

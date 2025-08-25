@@ -1,27 +1,28 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
-using System;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using BindingSource = System.Windows.Forms.BindingSource;
-using SewingProduction.Helpers;
-using SewingProduction.Report;
-using System.Diagnostics;
+using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Help.Form;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Service;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.Articul;
-using SewingProduction.Features.Articul.Models;
-using SewingProduction.Features.Articul.Service;
-using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Help.Form;
+using SewingProduction.Helpers;
+using SewingProduction.Report;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Drawing;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
+using DataTable = System.Data.DataTable;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -31,33 +32,41 @@ namespace SewingProduction.Features.Articul
     {
         private readonly DatabaseHelper _dbHelperAce;
         private UserClass _user;
-        ArticulModel _articulByKod;
-        List<ArticulModel> _artPreview;
+        private readonly ILogger _logger = new FileLogger();
+
+        private Core.Models.ArticulModel _articulByKod;
+        //краткий перечень полей таблицы
+        private List<Core.Models.ArticulModel> _artPreview;
+        //все поля таблицы Артикул
+        private BindingList<Core.Models.ArticulModel> _articulBindingList;
+        private BindingSource _articulBindingSource;
+
         ArticulDataService _articulDataService = new ArticulDataService();
         public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
             _user = user;
-        }
+            ThemeManager.UpdateTheme(this);
 
+        }
 
         private async void Articul_Load(object sender, EventArgs e)
         {
-            // данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
-            //this.art_norm_nTableAdapter.Fill(this.aCE_backupDataSet.art_norm_n);
+
             try
             {
-                _artPreview = await _articulDataService.GetArtPreviewAsync();
                 //загрузка перечня кодов из справочника, часть полей
-                //string query = $"select * from dbo.view_art";
-                //kodd,kod, grup, articul, razm, mod, kle
-                //var dt = _dbHelperAce.ExecuteQuery(query);
-
-                //bsArt.DataSource = dt;
+                _artPreview = await _articulDataService.GetArtPreviewAsync();
                 bsArt.DataSource = _artPreview;
+
+                
+                // инициализация привязок данных к элементам
+                Task bindingsTask = InitializeBindingsAsync();
+                await Task.WhenAll(bindingsTask);
+
                 // загрузка одиночного кода из справочника, все поля  
-                getArticulFromSQl("0");
+                //getArticulFromSQl("0");
 
                 // загрузка комбиков для выбора полотна
                 //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
@@ -83,11 +92,41 @@ namespace SewingProduction.Features.Articul
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "Ошибка при загрузке формы Articul");
             }
 
-
         }
+
+        private async Task InitializeBindingsAsync()
+        {
+            try
+            {
+                var artPreviewTask = Task.Run(() =>
+                {
+                    //загрузка перечня кодов из справочника, часть полей
+                    _articulBindingList = new BindingList<Core.Models.ArticulModel>();
+                    _articulBindingSource = new BindingSource { DataSource = _articulBindingList };
+
+                });
+
+                await Task.WhenAll(artPreviewTask);
+
+                #region заполнение блока основных данных артикула
+                txbKod.DataBindings.Add("Text", _articulBindingSource, nameof(Core.Models.ArticulModel.Kod), true, DataSourceUpdateMode.Never);
+                txbArticul.DataBindings.Add("Text", _articulBindingSource, nameof(Core.Models.ArticulModel.Articul), true, DataSourceUpdateMode.Never);
+
+                #endregion
+
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
+                throw;
+            }
+        }
+
         private void bindComboBoxTkanName()
         {
             string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";
@@ -130,7 +169,7 @@ namespace SewingProduction.Features.Articul
                 //DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
                 _articulByKod = await _articulDataService.GetByKodAsync(kod);
 
-                bsArticul.DataSource = dt;
+                bsArticul.DataSource = _articulByKod;
                 if (bsArticul.Count > 0)
                 {
                     // нормы , с\стоимость
@@ -302,7 +341,7 @@ namespace SewingProduction.Features.Articul
             ReportPrintTool reportPrintTool = new ReportPrintTool(report);
             reportPrintTool.ShowPreviewDialog();
 
-            //сокарщенный :
+            //сокращенный :
             GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
             reportSokr.RequestParameters = false;
             reportSokr.Parameters["kod"].Value = kod;
@@ -332,11 +371,13 @@ namespace SewingProduction.Features.Articul
         }
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
-            var kodObj = gridControl1.GetFocusedRowCellValue("kod");
+            /*Максим, убрала пока, у меня ругалось 20250822 Бакулина 
+             * var kodObj = gridControl1.GetFocusedRowCellValue("kod");
             if (this.MdiParent is SpMainForm mainForm)
             {
                 mainForm.OpenForm(new AddNewKopml(_user, _articuls, kodObj.ToString()));
             }
+            */
         }
     }
 }
