@@ -47,6 +47,10 @@ namespace SewingProduction.Features.TeamWork.Forms
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            EditorButtonImageOptions editorButtonImageOptions1 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
+            EditorButtonImageOptions editorButtonImageOptions2 = new EditorButtonImageOptions();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions1 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions2 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions3 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
@@ -61,9 +65,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions12 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions13 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions14 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
-            DevExpress.XtraLayout.ColumnDefinition columnDefinition1 = new DevExpress.XtraLayout.ColumnDefinition();
-            DevExpress.XtraLayout.ColumnDefinition columnDefinition2 = new DevExpress.XtraLayout.ColumnDefinition();
-            DevExpress.XtraLayout.RowDefinition rowDefinition1 = new DevExpress.XtraLayout.RowDefinition();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions15 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions16 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
             DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions buttonImageOptions17 = new DevExpress.XtraEditors.ButtonsPanelControl.ButtonImageOptions();
@@ -530,12 +531,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseBackColor = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseFont = true;
             xtraTabControl1.AppearancePage.HeaderActive.Options.UseForeColor = true;
+            xtraTabControl1.CustomHeaderButtons.AddRange(new DevExpress.XtraTab.Buttons.CustomHeaderButton[] { new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Combo, "qqqqq", -1, true, true, editorButtonImageOptions1, serializableAppearanceObject1, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Ellipsis, "34534534", -1, true, true, editorButtonImageOptions2, serializableAppearanceObject2, "", null, null), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Redo), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.OK), new DevExpress.XtraTab.Buttons.CustomHeaderButton(ButtonPredefines.Plus), new DevExpress.XtraTab.Buttons.CustomHeaderButton() });
             xtraTabControl1.Dock = DockStyle.Fill;
+            xtraTabControl1.HeaderAutoFill = DevExpress.Utils.DefaultBoolean.True;
+            xtraTabControl1.HeaderButtons = DevExpress.XtraTab.TabButtons.Prev | DevExpress.XtraTab.TabButtons.Next | DevExpress.XtraTab.TabButtons.Default;
             xtraTabControl1.Location = new System.Drawing.Point(0, 0);
             xtraTabControl1.LookAndFeel.UseDefaultLookAndFeel = false;
             xtraTabControl1.Margin = new Padding(4, 3, 4, 3);
             xtraTabControl1.Name = "xtraTabControl1";
             xtraTabControl1.SelectedTabPage = TabPage1;
+            xtraTabControl1.ShowHeaderFocus = DevExpress.Utils.DefaultBoolean.True;
+            xtraTabControl1.ShowTabHeader = DevExpress.Utils.DefaultBoolean.True;
             xtraTabControl1.Size = new System.Drawing.Size(1771, 965);
             xtraTabControl1.TabIndex = 0;
             xtraTabControl1.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { TabPage1, xtraTabPageArticles });
@@ -1849,6 +1855,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ButtonPreliminaryWd.TabIndex = 11;
             ButtonPreliminaryWd.Text = "добавить предв";
             ButtonPreliminaryWd.UseVisualStyleBackColor = false;
+            ButtonPreliminaryWd.Visible = false;
             ButtonPreliminaryWd.Click += ButtonPreliminaryWd_Click;
             // 
             // ButtonDouble
