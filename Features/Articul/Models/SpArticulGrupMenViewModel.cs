@@ -22,7 +22,7 @@ namespace SewingProduction.Features.Articul.Models
         //public string po = " ";
 
         private bool _pr_po;
-        public bool pr_po
+        public bool Pr_po
         {
             get => _pr_po;
             set
@@ -30,11 +30,12 @@ namespace SewingProduction.Features.Articul.Models
                 if (_pr_po != value)
                 {
                     _pr_po = value;
-                    OnPropertyChanged(nameof(pr_po));
+                    OnPropertyChanged(nameof(Pr_po));
                 }
             }
         }
         public int TabIndex { get; set; } = -1;
+        public string Razm_all { get; set; }
 
         //public event PropertyChangedEventHandler PropertyChanged;
         //protected void OnPropertyChanged(string propertyName)
