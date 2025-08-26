@@ -22,52 +22,52 @@ namespace SewingProduction.Features.Articul.Models
         private int _kod_v;
         private string _kle;
 
-        public int kod
+        public int Kod
         {
             get => _kod;
-            set { if (_kod != value) { _kod = value; OnPropertyChanged(nameof(kod)); } }
+            set { if (_kod != value) { _kod = value; OnPropertyChanged(nameof(Kod)); } }
         }
 
-        public string grup
+        public string Grup
         {
             get => _grup;
-            set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
+            set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(Grup)); } }
         }
 
-        public string articul
+        public string Articul
         {
             get => _articul;
-            set { if (_articul != value) { _articul = value; OnPropertyChanged(nameof(articul)); } }
+            set { if (_articul != value) { _articul = value; OnPropertyChanged(nameof(Articul)); } }
         }
 
-        public string mod
+        public string Mod
         {
             get => _mod;
-            set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(mod)); } }
+            set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
         }
 
-        public string razm
+        public string Razm
         {
             get => _razm;
-            set { if (_razm != value) { _razm = value; OnPropertyChanged(nameof(razm)); } }
+            set { if (_razm != value) { _razm = value; OnPropertyChanged(nameof(Razm)); } }
         }
 
-        public string sost
+        public string Sost
         {
             get => _sost;
-            set { if (_sost != value) { _sost = value; OnPropertyChanged(nameof(sost)); } }
+            set { if (_sost != value) { _sost = value; OnPropertyChanged(nameof(Sost)); } }
         }
 
-        public int kod_v
+        public int Kod_v
         {
             get => _kod_v;
-            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(kod_v)); } }
+            set { if (_kod_v != value) { _kod_v = value; OnPropertyChanged(nameof(Kod_v)); } }
         }
 
-        public string kle
+        public string Kle
         {
             get => _kle;
-            set { if (_kle != value) { _kle = value; OnPropertyChanged(nameof(kle)); } }
+            set { if (_kle != value) { _kle = value; OnPropertyChanged(nameof(Kle)); } }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
