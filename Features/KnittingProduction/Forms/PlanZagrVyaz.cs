@@ -34,6 +34,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace SewingProduction.Features.KnittingProduction.Forms
 {
@@ -68,6 +69,11 @@ namespace SewingProduction.Features.KnittingProduction.Forms
         private List<RzvPachListByNom> rzvPachListByNomNewData = new List<RzvPachListByNom>();
         private BindingList<RzvPachListByNom> _rzvPachListByNomNewBindingList;
         private BindingSource _rzvPachListByNomNewBindingSource;
+
+        private List<PZVOperList> _currentPZVOperListByPachListData = new List<PZVOperList>();
+        private List<PZVOperList> pZVOperListByPachListData = new List<PZVOperList>();
+        private BindingList<PZVOperList> _pZVOperListByPachListBindingList;
+        private BindingSource _pZVOperListByPachListBindingSource;
 
         public PlanZagrVyaz()
         {
@@ -108,10 +114,16 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                     _rzvPachListByNomNewBindingList = new BindingList<RzvPachListByNom>();
                     _rzvPachListByNomNewBindingSource = new BindingSource { DataSource = _rzvPachListByNomNewBindingList };
                 });
+                var pZVOperListByPachListTask = Task.Run(() =>
+                {
+                    _pZVOperListByPachListBindingList = new BindingList<PZVOperList>();
+                    _pZVOperListByPachListBindingSource = new BindingSource { DataSource = _pZVOperListByPachListBindingList };
+                });
                 //await Task.WhenAll(vyazPlanViewTask, artPrFioProgrTask, planSezonZadanyTask, knitMachineListTask
                 //        , artPrKnitMachineViewPr1Task, artPrKnitMachineViewPr2Task, artPrKnitMachineViewRecom1Task, artPrKnitMachineViewRecom2Task);
 
-                await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListByMachineTask, zadanyListByMachineNewTask, rzvPachListByNomTask, rzvPachListByNomNewTask);
+                await Task.WhenAll(planTotalHoursByKnitMachineTask, zadanyListByMachineTask, zadanyListByMachineNewTask
+                        , rzvPachListByNomTask, rzvPachListByNomNewTask, pZVOperListByPachListTask);
 
                 //#region описание comboBox "Список машин"
                 //comboBoxKnitMachineList.DataSource = _knitMachineListBindingSource;
@@ -275,7 +287,9 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
                 #region описание gridControlRzvPachListByNom "пачки по расчету вяз"
                 gridControlRzvPachListByNom.DataSource = _rzvPachListByNomBindingSource;
+                gridColumnRzvPachListByNomNomZad.FieldName = "nomZad";
                 gridColumnRzvPachListByNomNom.FieldName = "nom";
+                gridColumnRzvPachListByNomNom_n.FieldName = "nom_n";
                 gridColumnRzvPachListByNomN_pach.FieldName = "n_pach";
                 gridColumnRzvPachListByNomRazm.FieldName = "razm";
                 gridColumnRzvPachListByNomKol.FieldName = "kol";
@@ -317,6 +331,41 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 //#endregion
 
                 //pictureBoxEskiz.DataBindings.Add("ImageLocation", _vyazPlanViewBindingSource, nameof(VyazPlanView.PictPath), true, DataSourceUpdateMode.Never);
+
+                #region описание gridControlPZVOperList
+                gridControlPZVOperList.DataSource = _pZVOperListByPachListBindingSource;
+                gridColumnPZVOperListOlPzvID.FieldName = "olPzvID";
+                gridColumnPZVOperListOlPzvIDParent.FieldName = "olPzvIDParent";
+                gridColumnPZVOperListOlPzvIDMlOp.FieldName = "olPzvIDMlOp";
+                gridColumnPZVOperListOlNom.FieldName = "olNom";
+                gridColumnPZVOperListOlNomN.FieldName = "olNomN";
+                gridColumnPZVOperListOlNomZad.FieldName = "olNomZad";
+                gridColumnPZVOperListOlPzvAnnID.FieldName = "olPzvAnnID";
+                gridColumnPZVOperListOlPzvNrID.FieldName = "olPzvNrID";
+                gridColumnPZVOperListOlPzvIdBrig.FieldName = "olPzvIdBrig";
+                gridColumnPZVOperListOlPzvKmlID.FieldName = "olPzvKmlID";
+                gridColumnPZVOperListOlPzvArticul.FieldName = "olPzvArticul";
+                gridColumnPZVOperListOlNPach.FieldName = "olNPach";
+                gridColumnPZVOperListOlNo.FieldName = "olNo";
+                gridColumnPZVOperListOlNpo.FieldName = "olNpo";
+                gridColumnPZVOperListOlOperName.FieldName = "olOperName";
+                gridColumnPZVOperListOlKodOb.FieldName = "olKodOb";
+                gridColumnPZVOperListOlOborudClass.FieldName = "olOborudClass";
+                gridColumnPZVOperListOlRazryd.FieldName = "olRazryd";
+                gridColumnPZVOperListOlSekEd.FieldName = "olSekEd";
+                gridColumnPZVOperListOlKol.FieldName = "olKol";
+                gridColumnPZVOperListOlSekAll.FieldName = "olSekAll";
+                gridColumnPZVOperListOlKmlNumber.FieldName = "olKmlNumber";
+                gridColumnPZVOperListOlPvDateNaznKm.FieldName = "olPvDateNaznKm";
+                gridColumnPZVOperListOlPzvTab.FieldName = "olPzvTab";
+                gridColumnPZVOperListOlPzvDateNaznTab.FieldName = "olPzvDateNaznTab";
+                gridColumnPZVOperListOlPzvDateStart.FieldName = "olPzvDateStart";
+                gridColumnPZVOperListOlPzvDateEnd.FieldName = "olPzvDateEnd";
+                gridColumnPZVOperListOlPzvDateML.FieldName = "olPzvDateML";
+                gridColumnPZVOperListOlPzvDateMast.FieldName = "olPzvDateMast";
+                gridColumnPZVOperListSyncSelection.FieldName = "olSyncSelection";
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -435,50 +484,114 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных RzvPachListByNom");
             }
         }
+        private async Task LoadPZVOperListByPachListDataAsync(string pachList)
+        {
+            try
+            {
+                _pZVOperListByPachListBindingSource.Clear();
+                _pZVOperListByPachListBindingSource.ResetBindings(false);
 
+                if (pachList.Length > 0)
+                {
+                    pZVOperListByPachListData = await _vyazService.GetPZVOperListByPachList(pachList);
+                }
+                else
+                {
+                    pZVOperListByPachListData = null;
+                }
+
+                if (pZVOperListByPachListData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные PZVOperListByPachList", "LoadPZVOperListByPachListDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentPZVOperListByPachListData = pZVOperListByPachListData;                // Обновляем текущую модель
+                        _pZVOperListByPachListBindingSource.DataSource = _currentPZVOperListByPachListData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные PZVOperListByPachList успешно загружены", "LoadPZVOperListByPachListDataAsync");
+                    //LoadList(vyazPlanViewData, _vyazPlanViewBindingList, nameof(NormRasz.nrId));
+                    _pZVOperListByPachListBindingList.Add(pZVOperListByPachListData[0]);
+                    _pZVOperListByPachListBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные PZVOperListByPachList", "LoadPZVOperListByPachListDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных PZVOperListByPachList");
+            }
+        }
         private void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
         {
-            //int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
 
-            //switch (buttonIndex)
-            //{
-            //    case 0:
-            //        //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
-            //        if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
-            //            ButtonPreliminaryWd_Click_Internal(sender, e);
-            //        break;
-            //    case 2:
-            //        //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
-            //        if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
-            //            if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
-            //                await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
-            //            else
-            //                await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
-            //        break;
-            //    case 4:
-            //        //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
-            //        if (ButtonDouble.Enabled && ButtonDouble.Visible)
-            //            await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
-            //        break;
-            //    case 6:
-            //        //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
-            //        if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
-            //            await SetArchiveStatus_Internal(sender, e);//МЕНЯЮ НА АРХИВ для Чирковой
-            //        //ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
-            //        break;
-            //    case 9:
-            //        //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
-            //        if (PrintButton.Enabled && PrintButton.Visible)
-            //            // Отчет технологической схемы разделения труда
-            //            PrintWorkDivisionScheme_Click(null, null);
-            //        break;
-            //    case 11:
-            //        if (printButtonPlus.Enabled && printButtonPlus.Visible)
-            //            // Отчет технологической схемы разделения труда
-            //            printButtonPlus_Click(null, null);
-            //        break;
+            switch (buttonIndex)
+            {
+                case 0:
+                    //Debug.WriteLine(ButtonPreliminaryWd.Enabled + " " + ButtonPreliminaryWd.Visible);
+                    //if (ButtonPreliminaryWd.Enabled && ButtonPreliminaryWd.Visible)
+                    //    ButtonPreliminaryWd_Click_Internal(sender, e);
+                    MessageBox.Show("Просмотр работы к подтверждению");
+                    break;
+                case 2:
+                    //Debug.WriteLine(ButtonEditWd.Enabled + " " + ButtonEditWd.Visible);
+                    //if (ButtonEditWd.Enabled && ButtonEditWd.Visible)
+                    //    if (ButtonEditOnlyAdv.Enabled && ButtonEditOnlyAdv.Visible)
+                    //        await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: true);
+                    //    else
+                    //        await EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
+                    MessageBox.Show("История по операции");
+                    break;
+                case 4:
+                    //Debug.WriteLine(customSimpleButton1.Enabled + " " + customSimpleButton1.Visible);
+                    //if (ButtonDouble.Enabled && ButtonDouble.Visible)
+                    //    await DuplicateWorkDivision_Click_Internal(ANNgridView, _bindingList, _bindingSource);
+                    MessageBox.Show("Выгрузить операции в XLS");
+                    break;
+                case 6:
+                    //Debug.WriteLine(ButtonArchAndCopyWd.Enabled + " " + ButtonArchAndCopyWd.Visible);
+                    //if (ButtonArchAndCopyWd.Enabled && ButtonArchAndCopyWd.Visible)
+                    //    await SetArchiveStatus_Internal(sender, e);//МЕНЯЮ НА АРХИВ для Чирковой
+                    //ArchAndCopy(ANNgridView, _bindingList, _bindingSource, false);
+                    //MessageBox.Show("Загрузить операции");
+                    gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["data_paln"];
+                    gridViewRzvPachListByNom.FocusedColumn = gridViewRzvPachListByNom.Columns["SyncSelection"];
+                    LoadPlanZagrVyazByZadanySelection();
+                    break;
+                //case 9:
+                //    //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
+                //    //if (PrintButton.Enabled && PrintButton.Visible)
+                //    //    // Отчет технологической схемы разделения труда
+                //    //    PrintWorkDivisionScheme_Click(null, null);
+                //    break;
+                //case 11:
+                //    if (printButtonPlus.Enabled && printButtonPlus.Visible)
+                //        // Отчет технологической схемы разделения труда
+                //        //printButtonPlus_Click(null, null);
+                //    break;
 
-            //}
+            }
+        }
+
+        private void LoadPlanZagrVyazByZadanySelection()
+        {
+            // Фильтруем записи где syncSelection = 1
+            var filteredRecords = _rzvPachListByNomBindingSource.Cast<object>()
+                .Where(item =>
+                {
+                    var property = item.GetType().GetProperty("SyncSelection");
+                    return property != null && Convert.ToInt32(property.GetValue(item)) == 1;
+                })
+                .ToList();
+
+            // Преобразуем в JSON
+            string jsonString = JsonConvert.SerializeObject(filteredRecords, Formatting.Indented);
+            //MessageBox.Show(jsonString);
+            LoadPZVOperListByPachListDataAsync(jsonString);
         }
 
         private async void PlanZagrVyaz_Load(object sender, EventArgs e)
@@ -517,7 +630,7 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private async void gridViewRzvPachListByNom_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-
+            
         }
 
         private async void gridViewZadanyListByMachine_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)

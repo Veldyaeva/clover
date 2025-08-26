@@ -250,4 +250,67 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int SyncSelection { get; set; } = 0;
     }
+
+    public class PZVOperList
+    {
+        [NotMapped]
+        public int olPzvID {  get; set; }
+        [NotMapped]
+        public int olPzvIDParent { get; set; }
+        [NotMapped]
+        public int olPzvIDMlOp { get; set; }
+        [NotMapped]
+        public int olNom { get; set; }
+        [NotMapped]
+        public int olNomN { get; set; }
+        [NotMapped]
+        public string olNomZad { get; set; }
+        [NotMapped]
+        public int olPzvAnnID { get; set; }
+        [NotMapped]
+        public int olPzvNrID { get; set; }
+        [NotMapped]
+        public int olPzvIdBrig { get; set; }
+        [NotMapped]
+        public int olPzvKmlID { get; set; }
+        [NotMapped]
+        public string olPzvArticul { get; set; }
+        [NotMapped]
+        public int olNPach { get; set; }
+        [NotMapped]
+        public int olNo { get; set; }
+        [NotMapped]
+        public int olNpo { get; set; }
+        [NotMapped]
+        public string olOperName { get; set; }
+        [NotMapped]
+        public int olKodOb { get; set; }
+        [NotMapped]
+        public string olOborudClass { get; set; }
+        [NotMapped]
+        public int olRazryd { get; set; }
+        [NotMapped]
+        public int olSekEd { get; set; }
+        [NotMapped]
+        public int olKol { get; set; }
+        [NotMapped]
+        public int olSekAll { get; set; }
+        [NotMapped]
+        public string olKmlNumber { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateNaznKm { get; set; }
+        [NotMapped]
+        public int olPzvTab { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateNaznTab { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateStart { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateEnd { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateML { get; set; }
+        [NotMapped]
+        public DateTime? olPzvDateMast { get; set; }
+        public int SyncSelection { get; set; } = 0;
+    }
 }

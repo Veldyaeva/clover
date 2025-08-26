@@ -309,7 +309,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.n_pach, rzv.razm, rzv.kol, 0 AS grad " +
+                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.razm, rzv.kol, 0 AS grad " +
                         $"FROM raskr_zeh_vyaz rzv" +
                         $" WHERE rzv.nom = {nom} and zad_pl = {nomZad}";
 
@@ -320,6 +320,25 @@ namespace SewingProduction.Features.KnittingProduction.Services
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetRzvPachListByNom");
+                return null;
+            }
+        }
+
+        public async Task<List<PZVOperList>> GetPZVOperListByPachList(string pachList)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = '{pachList}'";
+
+                    var result = await connection.QueryAsync<PZVOperList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanZagrVyazByPachList");
                 return null;
             }
         }
