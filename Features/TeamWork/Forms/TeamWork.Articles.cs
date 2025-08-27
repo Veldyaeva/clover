@@ -80,16 +80,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     }
                     _normRaszBindingSourceArticles.ResetBindings(false);
 
-                    // Load NormRask data
-                    _normRaskListArticles.Clear();
-                    if (raskData != null)
-                    {
-                        foreach (var item in raskData)
-                        {
-                            _normRaskListArticles.Add(item);
-                        }
-                    }
-                    _normRaskBindingSourceArticles.ResetBindings(false);
+                    //// Load NormRask data
+                    //_normRaskListArticles.Clear();
+                    //if (raskData != null)
+                    //{
+                    //    foreach (var item in raskData)
+                    //    {
+                    //        _normRaskListArticles.Add(item);
+                    //    }
+                    //}
+                    //_normRaskBindingSourceArticles.ResetBindings(false);
                 }
                 else
                 {

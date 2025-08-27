@@ -17,6 +17,8 @@
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs" />
+    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Designer.cs" />
+    <Compile Remove="Features\TeamWork\Forms\_TeamWork.Helpers.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ANNGridViewHelper.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
