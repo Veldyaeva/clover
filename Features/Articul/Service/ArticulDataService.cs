@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SewingProduction.Core.Models;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 
@@ -18,30 +19,30 @@ namespace SewingProduction.Features.Articul.Service
             _dbService = new DbService(new DatabaseHelper());
         }
 
-        public async Task<List<Core.Models.ArticulModel>> GetAllAsync()
+        public async Task<List<ArticulModel>> GetAllAsync()
         {
             string query = "SELECT * FROM sp_articul";
-            return await _dbService.GetListAsync<Core.Models.ArticulModel>(query, new { });
+            return await _dbService.GetListAsync<ArticulModel>(query, new { });
         }
-        public async Task<List<Core.Models.ArticulModel>> GetArtPreviewAsync()
+        public async Task<List<ArticulModel>> GetArtPreviewAsync()
         {
             string query = "select * from dbo.view_art";
 
-            return await _dbService.GetListAsync<Core.Models.ArticulModel>(query, new { });
+            return await _dbService.GetListAsync<ArticulModel>(query, new { });
 
         }
-        public async Task<Core.Models.ArticulModel> GetByKodAsync(string kod)
+        public async Task<SpArticulPreviewModel> GetByKodAsync(string kod)
         {
             string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
-            return await _dbService.GetEntityAsync<Core.Models.ArticulModel>(query, new { kod });
+            return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
         }
 
-        public async Task SaveAsync(Core.Models.ArticulModel model)
+        public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
         }
 
-        public async Task DeleteAsync(Core.Models.ArticulModel model)
+        public async Task DeleteAsync(ArticulModel model)
         {
             await _dbService.DeleteEntityAsync("sp_articul", "Kod", model);
         }
@@ -54,6 +55,7 @@ namespace SewingProduction.Features.Articul.Service
         {
             string query = "SELECT dbo.getFileEskizForKodd(@kod) AS pathpict";
             return await _dbService.GetEntityAsync<string>(query, new { kod });
+
         }
     }
 }

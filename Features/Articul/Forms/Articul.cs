@@ -1,11 +1,13 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
+using SewingProduction.Core.interfaces;
 using SewingProduction.Core.Models;
+using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
@@ -34,11 +36,12 @@ namespace SewingProduction.Features.Articul
         private UserClass _user;
         private readonly ILogger _logger = new FileLogger();
 
-        private Core.Models.ArticulModel _articulByKod;
+        private SpArticulPreviewModel _articulByKod;
         //краткий перечень полей таблицы
-        private List<Core.Models.ArticulModel> _artPreview;
+        private List<ArticulModel> _artPreview;
+
         //все поля таблицы Артикул
-        private BindingList<Core.Models.ArticulModel> _articulBindingList;
+        private BindingList<SpArticulPreviewModel> _articulBindingList;
         private BindingSource _articulBindingSource;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -105,7 +108,7 @@ namespace SewingProduction.Features.Articul
                 var artPreviewTask = Task.Run(() =>
                 {
                     //загрузка перечня кодов из справочника, часть полей
-                    _articulBindingList = new BindingList<Core.Models.ArticulModel>();
+                    _articulBindingList = new BindingList<SpArticulPreviewModel>();
                     _articulBindingSource = new BindingSource { DataSource = _articulBindingList };
 
                 });
@@ -113,8 +116,8 @@ namespace SewingProduction.Features.Articul
                 await Task.WhenAll(artPreviewTask);
 
                 #region заполнение блока основных данных артикула
-                txbKod.DataBindings.Add("Text", _articulBindingSource, nameof(Core.Models.ArticulModel.Kod), true, DataSourceUpdateMode.Never);
-                txbArticul.DataBindings.Add("Text", _articulBindingSource, nameof(Core.Models.ArticulModel.Articul), true, DataSourceUpdateMode.Never);
+                txbKod.DataBindings.Add("Text", _articulBindingSource, nameof(ArticulModel.Kod), true, DataSourceUpdateMode.Never);
+                txbArticul.DataBindings.Add("Text", _articulBindingSource, nameof(ArticulModel.Articul), true, DataSourceUpdateMode.Never);
 
                 #endregion
 
@@ -124,6 +127,37 @@ namespace SewingProduction.Features.Articul
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
+            }
+        }
+        private async Task getArticulFromSQlAsync(string kod)
+        {
+            try
+            {
+                bsArticul.Clear();
+                bsArticul.ResetBindings(false);
+
+                _articulByKod = await _articulDataService.GetByKodAsync(kod);
+
+                if (_articulByKod != null)
+                {
+                    //await _logger.LogEventAsync($"Получены данные History_razdel_nakl_view: iz_b={_articulByKod[0].iz_b}", "LoadHistoryRazdelNaklViewDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentHistoryRazdelNaklViewData = historyRazdelNaklViewData;                // Обновляем текущую модель
+                        _historyRazdelNaklViewByIzBindingSource.DataSource = _currentHistoryRazdelNaklViewData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные History_razdel_nakl_view успешно загружены для iz {iz}", "LoadHistoryRazdelNaklViewDataAsync");
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные History_razdel_nakl_view для iz {iz}", "LoadHistoryRazdelNaklViewDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для iz {kod}");
             }
         }
 

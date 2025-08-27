@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulGrupMenViewModel : Core.Models.ArticulModel
+    public class SpArticulGrupMenViewModel : ArticulModel
         //, INotifyPropertyChanged
     {
 
