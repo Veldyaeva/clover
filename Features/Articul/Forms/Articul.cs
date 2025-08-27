@@ -162,8 +162,7 @@ namespace SewingProduction.Features.Articul
                 
                 if (articulByKodTemp != null)
                 {
-                    //await _logger.LogEventAsync($"Получены данные History_razdel_nakl_view: iz_b={_articulByKod[0].iz_b}", "LoadHistoryRazdelNaklViewDataAsync");
-
+                    
                     await this.InvokeAsync(() =>
                     {
                         _articulByKod = articulByKodTemp;                // Обновляем текущую модель
@@ -338,7 +337,7 @@ namespace SewingProduction.Features.Articul
         }
         
         /// <summary>
-        /// обновлениме данных на форме по коду 
+        /// обновлениме данных на форме по коду при перемещении по таблице артикулов
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -356,10 +355,11 @@ namespace SewingProduction.Features.Articul
 
                     //getArticulFromSQl(kod);
                     Task getData = getArticulFromSQlAsync(kod);
-                    await Task.WhenAll(getData);
+                    //await Task.WhenAll(getData);
+                    Task.Run(()=>  getData);
 
                     //getArticulFromSQlAsync(kod);
-                //TODO:  !!! определить kodd!!!!
+                    //TODO:  !!! определить kodd!!!!
                     string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                     var dt = _dbHelperAce.ExecuteQuery(query);
                     if (dt != null)
@@ -367,51 +367,60 @@ namespace SewingProduction.Features.Articul
                         pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
 
                     }
-
                 }
-
             }
             catch
             {
                 kod = "";
             }
-
-
-            /* ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
-            //var kod = Convert.ToInt32(gridControl1.GetDataRow(gridControl1.FocusedRowHandle)["kod"]);
-            string kod = "";
-            string kodd = "";
-
-            try
-            {
-                object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
-                if (data != null)
-                {
-                    kod = ((DataRowView)data).Row["kod"].ToString();
-                    kodd = ((DataRowView)data).Row["kodd"].ToString();
-                }
-
-                getArticulFromSQl(kod);
-
-                string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
-                var dt = _dbHelperAce.ExecuteQuery(query);
-                if (dt != null)
-                {
-                    pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
-
-                }
-
-            }
-            catch
-            {
-                kod = "";
-            }
-            */
         }
 
         private void customButtonKart_Click(object sender, EventArgs e)
         {
-            GetItogVibKartReport report = new GetItogVibKartReport();
+            string kod = "";
+            try
+            {
+                GetItogVibKartReport report = new GetItogVibKartReport();
+                report.RequestParameters = false;
+
+                var currentRow = bsArt.Current as ArticulModel;
+                if (currentRow != null)
+                {
+                    kod = currentRow.Kod;
+
+
+                    report.Parameters["kod"].Value = kod;
+
+                    var ds = report.sqlDataSource1;
+                    var query = ds.Queries[0] as DevExpress.DataAccess.Sql.StoredProcQuery;
+                    query.Parameters[0].Value = kod;
+
+                    ds.Fill();
+
+                    report.DataSource = ds;
+                    report.DataMember = "GetItogVibKart";
+
+                    ReportPrintTool reportPrintTool = new ReportPrintTool(report);
+                    reportPrintTool.ShowPreviewDialog();
+
+                    //сокращенный :
+                    GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
+                    reportSokr.RequestParameters = false;
+                    reportSokr.Parameters["kod"].Value = kod;
+                    reportSokr.DataSource = ds;
+                    reportSokr.DataMember = "GetItogVibKart";
+                    ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
+                    reportSokrPrintTool.ShowPreviewDialog();
+
+                }
+            }
+            catch
+            {
+                kod = "";
+            }
+
+
+            /*GetItogVibKartReport report = new GetItogVibKartReport();
             report.RequestParameters = false;
 
             object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
@@ -440,7 +449,7 @@ namespace SewingProduction.Features.Articul
             reportSokr.DataMember = "GetItogVibKart";
             ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
             reportSokrPrintTool.ShowPreviewDialog();
-
+            */
         }
 
         private void customButtonAdd_Click(object sender, EventArgs e)
