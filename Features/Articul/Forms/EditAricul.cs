@@ -15,36 +15,32 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.Articul
 {
     /// <summary>
     /// Добавление артикула
     /// </summary>
-    public partial class art_new2024 : CustomForm
+    public partial class EditAricul : CustomForm // FoxPro: art_new2024
     {
         private readonly ArtNewDataService _artNewDataService;
         string kodSQL;
-        public art_new2024(string kodArtSQL = null)
+        public EditAricul(string kodArtSQL = null)
         {
             InitializeComponent();
             DatabaseHelper dbHelper = new DatabaseHelper();
             _artNewDataService = new ArtNewDataService(dbHelper);
             ThemeManager.UpdateTheme(this);
             kodSQL = kodArtSQL;
-        }
-        public art_new2024()
-        {
-            InitializeComponent();
+            customTextBoxKod1.Text = kodSQL;
+            visibleSP(false);
+            radioGroup1.SelectedIndex = kodArtSQL == null ? 0 : 2;
         }
 
-        private void art_new2024_Load(object sender, EventArgs e)
-        {
-            comboAllTableItems();
-            radioGroup1.SelectedIndex = 0;
-        }
+        private void art_new2024_Load(object sender, EventArgs e) => comboAllTableItems();
 
         private void radioGroup1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -62,8 +58,18 @@ namespace SewingProduction.form
                     break;
                 // Копия артикула
                 case 2:
-                    visibleSP(false);
-                    copyArt();
+                    if (customTextBoxKod1.Text == "")
+                    {
+                        MessageBox.Show("Введите код артикула!");
+                        radioGroup1.SelectedIndex = 0;
+                        customTextBoxKod1.Focus();
+                    }
+                    else
+                    {
+                        visibleSP(false);
+                        kodSQL = customTextBoxKod1.Text;
+                        copyArt(); 
+                    }
                     break;
             }
         }
@@ -195,61 +201,5 @@ namespace SewingProduction.form
             }
         }
     }
-    public class ArtNewDataService
-    {
-        private readonly DatabaseHelper _dbHelper;
-        public ArtNewDataService(DatabaseHelper dbHelper)
-        {
-            _dbHelper = dbHelper;
-        }
-        #region art_new2024
-        public DataTable GetGostUst()
-        {
-            string query = "SELECT id_gost AS 'ИД' ,name_gost AS 'Имя' ,TRIM(opi_gost) AS 'Описание' FROM gost WHERE ust=1";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvPictAndArticulGrup()
-        {
-            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetViewTovarMarka()
-        {
-            string query = "SELECT TRIM(kodsp) AS kle, TRIM(m_naimen) AS 'Наименование' FROM dbo.view_tovar_marka WHERE tmOwn = 1 ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetViewGrupMen()
-        {
-            string query = "SELECT men_id, TRIM(name) AS 'Наименование' FROM view_grup_men WHERE men_id >0 order by men_id ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvRazmerAndGostRazmer()
-        {
-            string query = "SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetTovarCatDynsign()
-        {
-            string query = "SELECT tcds_name AS 'Признак' FROM TOVAR_CAT_DYNSIGN WHERE tcds_tcat_id in (886,895) ORDER BY TCDS_NAME ";
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvPictAndArticulGrupWhere(string opiGost)
-        {
-            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
-            string query = $"SELECT TRIM(ag_naimen) AS 'Наименование' FROM gost_sv_pict,articul_grup  WHERE articul_grup.ag_id=gost_sv_pict.id_art" + condition;
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetGostSvRazmerAndGostRazmerWhere(string opiGost)
-        {
-            string condition = string.IsNullOrWhiteSpace(opiGost) ? "" : $" AND id_gost = (SELECT id_gost FROM gost WHERE ust=1 AND opi_gost = '{opiGost}')";
-            string query = $"SELECT DISTINCT TRIM(razm) AS 'Размер' FROM gost_sv_razmer, gost_razmer WHERE gost_sv_razmer.id_razmer=gost_razmer.id_rost" + condition;
-            return _dbHelper.ExecuteQuery(query);
-        }
-        public DataTable GetSpArticulKod(string kodSQL)
-        {
-            string query = $"SELECT kod, articul, razm AS 'Размер', kle, mod, grup, ag_id, kod_tnved, CAST(grupp AS INT) AS men_id FROM sp_articul WHERE kod = '@kodSQL'";
-            return _dbHelper.ExecuteQuery(query, new Dictionary<string, object> { { "@kodSQL", kodSQL } });
-        }
-        #endregion
-    }
+    
 }

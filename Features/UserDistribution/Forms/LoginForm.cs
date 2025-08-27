@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using SewingProduction.Core.Class.Settings;
 using System.Diagnostics;
+using SewingProduction.Features.UserDistribution.Class;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {

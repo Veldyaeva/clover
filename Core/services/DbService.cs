@@ -16,6 +16,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Z.Dapper.Plus;
 using System.Text;
+using DevExpress.Xpo.DB.Helpers;
 
 namespace SewingProduction.Services
 {
@@ -170,7 +171,6 @@ namespace SewingProduction.Services
 
                 var properties = typeof(T).GetProperties()
                     .Where(p => p.CanRead &&
-                                p.Name != keyFieldName &&
                                 !System.Attribute.IsDefined(p, typeof(NotMappedAttribute)))
                     .ToList();
 
@@ -186,12 +186,15 @@ namespace SewingProduction.Services
                     var columnAttr = prop.GetCustomAttributes(typeof(ColumnAttribute), false)
                      .FirstOrDefault() as ColumnAttribute;
                     if (columnAttr != null)
-                    {
                         columnName = columnAttr.Name;
-                    }
+
                     string parameterName = "@" + columnName;
 
                     var value = prop.GetValue(entity);
+
+                    if (prop.Name == keyFieldName && (value == null || value.ToString() == "0" || string.IsNullOrWhiteSpace(value.ToString())))
+                        continue;
+
                     await _logger.LogEventAsync($"Свойство {prop.Name} (колонка {columnName}): значение = {value}, тип = {value?.GetType()}", "InsertEntityAsync");
 
                     columns.Add(columnName);
@@ -274,6 +277,7 @@ namespace SewingProduction.Services
                 string setClause = string.Join(", ", setClauses);
                 string query = $"UPDATE {tableName} SET {setClause} WHERE {keyFieldName} = @Id";
 
+                Debug.WriteLine(query);
                 await _dbHelper.ExecuteNonQueryAsync(query, parameters);
                 await _logger.LogEventAsync($"Таблица {tableName}: запись ID={parameters["@Id"]} успешно обновлена", "UpdateEntity");
             }
@@ -300,16 +304,41 @@ namespace SewingProduction.Services
 
             var keyValue = keyProperty.GetValue(entity);
 
-            if (keyValue is int id && id > 0)
-            {
-                await UpdateEntityAsync(tableName, keyFieldName, entity);
-                return id;
-            }
-            else
+            // ключ не задан или равен 0 — вставка без ключа
+            if (keyValue == null || (keyValue is int val && val == 0))
             {
                 return await InsertEntityAsync(tableName, keyFieldName, entity);
             }
+
+            // Универсальная обработка nullable значений
+            int keyId;
+            try
+            {
+                keyId = Convert.ToInt32(keyValue);
+            }
+            catch
+            {
+                throw new Exception("Ключевое поле не может быть преобразовано к числу.");
+            }
+
+            var filters = new Dictionary<string, object> { { keyFieldName, keyId } };
+            var exists = await SelectOneFieldAsync<string>(tableName, keyFieldName, filters);
+
+            if (exists != null)
+            {
+                // обновление
+                await UpdateEntityAsync(tableName, keyFieldName, entity);
+                return keyId;
+            }
+            else
+            {
+                // вставка с заданным ключом
+                return await InsertEntityAsync(tableName, keyFieldName, entity);
+            }
         }
+
+
+
 
         public async Task SaveListAsync<T>(BindingList<T> list, string tableName, string keyFieldName, List<int> deletedIds)
     where T : class, INewable, new()

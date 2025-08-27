@@ -1,7 +1,8 @@
 ﻿using SewingProduction.Core.Class;
-namespace SewingProduction.form
+
+namespace SewingProduction.Features.Articul
 {
-    partial class art_new2024
+    partial class EditAricul
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +30,7 @@ namespace SewingProduction.form
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(art_new2024));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditAricul));
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customLabelModel = new CustomLabel();
             customLabelRazm = new CustomLabel();
@@ -701,7 +702,7 @@ namespace SewingProduction.form
             gridView3.OptionsSelection.EnableAppearanceFocusedCell = false;
             gridView3.OptionsView.ShowGroupPanel = false;
             // 
-            // art_new2024
+            // EditAricul
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -709,7 +710,7 @@ namespace SewingProduction.form
             Controls.Add(tableLayoutPanel1);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "art_new2024";
+            Name = "EditAricul";
             Text = "Добавление артикула";
             FormClosing += editFio_FormClosing;
             Load += art_new2024_Load;

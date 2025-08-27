@@ -193,8 +193,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         /// <summary>
-        /// Загружает список разделений труда (РТ) для указанного артикула
+        /// Загружает список разделений труда (РТ) для указанного артикула или кода.
         /// </summary>
+        /// <param name="kod">Код артикула</param>
         /// <param name="articul">Название артикула</param>
         /// <returns>Список разделений труда (BindingList&lt;MyDataANN&gt;)</returns>
         private async Task<List<MyDataANN>> LoadWorksbyArt(string articul)
@@ -311,7 +312,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 
                 // Обновляем NormRasz для customGridControl3
                 await RefreshNormRaszForArticlesTab(annId, token);
-                await RefreshNormRaskForArticlesTab(annId, token);
+
                 // 3. Загрузка данных НЗП только для выбранной строки
                 token.ThrowIfCancellationRequested();
                 await LoadNZPForArticlesTab(annId, token);
@@ -355,30 +356,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
             _normRaszListArticles.RaiseListChangedEvents = true;
             _normRaszBindingSourceArticles.ResetBindings(false);
-        }
-
-        private async Task RefreshNormRaskForArticlesTab(int annId, CancellationToken cancellationToken = default)
-        {
-            cancellationToken.ThrowIfCancellationRequested();
-
-            List<NormRask> raskList = new List<NormRask>();
-            if (annId > 0)
-            {
-                raskList = await _artNormService.GetRelatedNormRask(annId);
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-
-            _normRaskListArticles.RaiseListChangedEvents = false;
-            _normRaskListArticles.Clear();
-            if (raskList != null)
-            {
-                foreach (var item in raskList)
-                {
-                    _normRaskListArticles.Add(item);
-                }
-            }
-            _normRaskListArticles.RaiseListChangedEvents = true;
-            _normRaskBindingSourceArticles.ResetBindings(false);
         }
 
         /// <summary>
@@ -608,6 +585,18 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             try
             {
+                // При смене строки очищаем фильтры gridView_wdToBind и снимаем галку loadAllCheckBox
+                if (gridView_wdToBind != null)
+                {
+                    gridView_wdToBind.ActiveFilter.Clear();
+                    gridView_wdToBind.ActiveFilterString = string.Empty;
+                }
+                
+                if (loadAllCheckBox != null)
+                {
+                    loadAllCheckBox.Checked = false;
+                }
+
                 // Получаем данные из текущей строки
                 string kod = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "kodd_rt", "");
                 string articul = CommonFunctions.GetRowCellValueOrDefault<string>(gv_unbound_Arts, e.FocusedRowHandle, "Articul", "").TrimEnd(' ');

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DevExpress.XtraBars.Ribbon;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
@@ -71,6 +72,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
             FioID = 0;
             Roles.Clear();
             myObjectForm?.Clear();
+            CurrentUser.Clear();
         }
     }
     public class UserClassDataService

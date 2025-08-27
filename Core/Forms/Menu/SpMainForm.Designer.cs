@@ -61,6 +61,7 @@ namespace SewingProduction
             изделияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             моделиСПризнакомМаркировкToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             видыБраковПряжиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            видыБраковНосковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             производствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             вязальноеПроизводствоToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             оперативноеПланированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,7 +72,7 @@ namespace SewingProduction
             карточкаРасчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
-            видыБраковНосковToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            рабочийСтолМастераToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -268,7 +269,7 @@ namespace SewingProduction
             // 
             тарифыToolStripMenuItem.Name = "тарифыToolStripMenuItem";
             тарифыToolStripMenuItem.Size = new Size(262, 22);
-            тарифыToolStripMenuItem.Text = "Тарифы";
+            тарифыToolStripMenuItem.Text = "Тарифы/Константы";
             тарифыToolStripMenuItem.Click += тарифыToolStripMenuItem_Click;
             // 
             // изделияToolStripMenuItem
@@ -292,6 +293,13 @@ namespace SewingProduction
             видыБраковПряжиToolStripMenuItem.Size = new Size(262, 22);
             видыБраковПряжиToolStripMenuItem.Text = "Виды браков";
             // 
+            // видыБраковНосковToolStripMenuItem
+            // 
+            видыБраковНосковToolStripMenuItem.Name = "видыБраковНосковToolStripMenuItem";
+            видыБраковНосковToolStripMenuItem.Size = new Size(187, 22);
+            видыБраковНосковToolStripMenuItem.Text = "Виды браков носков";
+            видыБраковНосковToolStripMenuItem.Click += видыБраковНосковToolStripMenuItem_Click;
+            // 
             // производствоToolStripMenuItem
             // 
             производствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { вязальноеПроизводствоToolStripMenuItem, швейноеПроизводствоToolStripMenuItem });
@@ -301,7 +309,7 @@ namespace SewingProduction
             // 
             // вязальноеПроизводствоToolStripMenuItem
             // 
-            вязальноеПроизводствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { оперативноеПланированиеToolStripMenuItem });
+            вязальноеПроизводствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { оперативноеПланированиеToolStripMenuItem, рабочийСтолМастераToolStripMenuItem1 });
             вязальноеПроизводствоToolStripMenuItem.Name = "вязальноеПроизводствоToolStripMenuItem";
             вязальноеПроизводствоToolStripMenuItem.Size = new Size(210, 22);
             вязальноеПроизводствоToolStripMenuItem.Text = "Вязальное производство";
@@ -375,12 +383,12 @@ namespace SewingProduction
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
             // 
-            // видыБраковНосковToolStripMenuItem
+            // рабочийСтолМастераToolStripMenuItem1
             // 
-            видыБраковНосковToolStripMenuItem.Name = "видыБраковНосковToolStripMenuItem";
-            видыБраковНосковToolStripMenuItem.Size = new Size(187, 22);
-            видыБраковНосковToolStripMenuItem.Text = "Виды браков носков";
-            видыБраковНосковToolStripMenuItem.Click += видыБраковНосковToolStripMenuItem_Click;
+            рабочийСтолМастераToolStripMenuItem1.Name = "рабочийСтолМастераToolStripMenuItem1";
+            рабочийСтолМастераToolStripMenuItem1.Size = new Size(230, 22);
+            рабочийСтолМастераToolStripMenuItem1.Text = "Рабочий стол мастера";
+            рабочийСтолМастераToolStripMenuItem1.Click += рабочийСтолМастераToolStripMenuItem1_Click;
             // 
             // SpMainForm
             // 
@@ -453,5 +461,6 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковПряжиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковНосковToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem рабочийСтолМастераToolStripMenuItem1;
     }
 }
