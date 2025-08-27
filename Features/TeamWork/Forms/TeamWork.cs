@@ -1206,7 +1206,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         try
                         {
                             ANNgridView.FocusedRowHandle = rowHandle;
-							ANNgridView.MakeRowVisible(rowHandle);
+                            ANNgridView.MakeRowVisible(rowHandle);
                             ANNgridView.RefreshRow(rowHandle);
                         }
                         finally
@@ -1217,7 +1217,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
                 else
                 {
-					// Возврат к исходной строке
+                    // Возврат к исходной строке
                     rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
                     if (rowHandle >= 0)
                     {
@@ -1225,7 +1225,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         try
                         {
                             ANNgridView.FocusedRowHandle = rowHandle;
-							ANNgridView.MakeRowVisible(rowHandle);
+                            ANNgridView.MakeRowVisible(rowHandle);
                             ANNgridView.RefreshRow(rowHandle);
                         }
                         finally
@@ -1239,7 +1239,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _bindingSource.ResetBindings(false);
                     await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
                 }
-			};
+            };
         }
         private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {

@@ -210,6 +210,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Features\TeamWork\Forms\TeamWork_AdvanceTW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
