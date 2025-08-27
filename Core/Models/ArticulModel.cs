@@ -25,6 +25,7 @@ namespace SewingProduction.Core.Models
         //    set { if (_grup != value) { _grup = value; OnPropertyChanged(nameof(grup)); } }
         //}
         public string Kod { get; set; }
+        public string Kodd { get; set; }
         public string Grup { get; set; }
         public string Articul { get; set; }
         public string Mod { get; set; }
@@ -165,7 +166,7 @@ namespace SewingProduction.Core.Models
         public decimal Art_block { get; set; }
         public int Scid_n { get; set; }
         public string Kod_tnved { get; set; }
-        public DateTime? Dateopis { get; set; }
+        public DateTime? DateOpis { get; set; }
         public string Mtrl_up { get; set; }
         public string Mtrl_pdkl { get; set; }
         public decimal? Vid_obuv { get; set; }

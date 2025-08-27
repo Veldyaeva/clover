@@ -34,7 +34,9 @@ namespace SewingProduction.Features.Articul.Service
         public async Task<SpArticulPreviewModel> GetByKodAsync(string kod)
         {
             string query = "SELECT * FROM dbo.viewArticul_preview WHERE kod = @kod";
+
             return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
+
         }
 
         public async Task SaveAsync(ArticulModel model)

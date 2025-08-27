@@ -1,19 +1,32 @@
-﻿using System;
+﻿using SewingProduction.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulPreviewModel
+    public class SpArticulPreviewModel : ArticulModel
     {
         [NotMapped]
-        public string Va_kod{get;set;}
+        public string SeasonName { get;set;}
+        [NotMapped]
+        public string TmName { get;set; }
+        [NotMapped]
+        public string AssortName { get;set; }
+        [NotMapped]
+        public string CountryName { get; set; }
+        [NotMapped]
+        public string GrupMenName { get; set; }
+        [NotMapped]
+        public string GostName { get; set; }
+        [NotMapped]
+        public string GostOpi { get; set; }
+        [NotMapped]
+        public string ScNomer { get; set; }
         
-        public string Va_po{get;set;}
-        public string Va_articul{get;set;}
-        public string Va_mod{get;set;}
-        public string Va_seasonname { get;set;}
+        
+
 
 
 

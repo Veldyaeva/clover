@@ -32,10 +32,11 @@ namespace SewingProduction.Features.Articul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
+            bsArt = new System.Windows.Forms.BindingSource(components);
             gridControl1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -43,7 +44,6 @@ namespace SewingProduction.Features.Articul
             gridColumn4 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn5 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
-            bsArt = new System.Windows.Forms.BindingSource(components);
             chbArh = new CustomCheckBox();
             chbKombIzd = new CustomCheckBox();
             chbKombDet = new CustomCheckBox();
@@ -99,7 +99,8 @@ namespace SewingProduction.Features.Articul
             customButtonAdd = new CustomButton();
             customButtonCopy = new CustomButton();
             customButtonKompl = new CustomButton();
-            grBoxMainInfo = new System.Windows.Forms.GroupBox();
+            lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             customButton1 = new CustomButton();
             customButton2 = new CustomButton();
@@ -207,13 +208,15 @@ namespace SewingProduction.Features.Articul
             dataGridView2 = new System.Windows.Forms.DataGridView();
             customButtonKart = new CustomButton();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsTM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
             tableLayoutPanel1.SuspendLayout();
-            grBoxMainInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
+            lContrBoxMainInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             gbTkanName.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).BeginInit();
@@ -483,7 +486,7 @@ namespace SewingProduction.Features.Articul
             customLabel16.BackColor = Color.Transparent;
             customLabel16.Font = new Font("Arial", 8.25F);
             customLabel16.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel16.Location = new Point(265, 228);
+            customLabel16.Location = new Point(269, 228);
             customLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel16.Name = "customLabel16";
             customLabel16.Size = new Size(84, 14);
@@ -756,7 +759,7 @@ namespace SewingProduction.Features.Articul
             customLabel5.BackColor = Color.Transparent;
             customLabel5.Font = new Font("Arial", 8.25F);
             customLabel5.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel5.Location = new Point(265, 202);
+            customLabel5.Location = new Point(269, 202);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new Size(59, 14);
@@ -783,7 +786,7 @@ namespace SewingProduction.Features.Articul
             customLabel4.BackColor = Color.Transparent;
             customLabel4.Font = new Font("Arial", 8.25F);
             customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel4.Location = new Point(282, 178);
+            customLabel4.Location = new Point(284, 178);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new Size(44, 14);
@@ -809,7 +812,7 @@ namespace SewingProduction.Features.Articul
             customLabel3.BackColor = Color.Transparent;
             customLabel3.Font = new Font("Arial", 8.25F);
             customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel3.Location = new Point(279, 149);
+            customLabel3.Location = new Point(281, 149);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new Size(47, 14);
@@ -835,7 +838,7 @@ namespace SewingProduction.Features.Articul
             customLabel2.BackColor = Color.Transparent;
             customLabel2.Font = new Font("Arial", 8.25F);
             customLabel2.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel2.Location = new Point(309, 95);
+            customLabel2.Location = new Point(307, 95);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new Size(21, 14);
@@ -861,7 +864,7 @@ namespace SewingProduction.Features.Articul
             customLabel1.BackColor = Color.Transparent;
             customLabel1.Font = new Font("Arial", 8.25F);
             customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel1.Location = new Point(290, 121);
+            customLabel1.Location = new Point(291, 121);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new Size(37, 14);
@@ -886,7 +889,7 @@ namespace SewingProduction.Features.Articul
             pictureBoxArticul.Location = new Point(7, 3);
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new Size(255, 245);
+            pictureBoxArticul.Size = new Size(261, 239);
             pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             pictureBoxArticul.TabIndex = 8;
             pictureBoxArticul.TabStop = false;
@@ -897,7 +900,7 @@ namespace SewingProduction.Features.Articul
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Arial", 8.25F);
             label3.ForeColor = Color.FromArgb(0, 0, 0);
-            label3.Location = new Point(281, 66);
+            label3.Location = new Point(283, 66);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(45, 14);
@@ -925,7 +928,7 @@ namespace SewingProduction.Features.Articul
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 8.25F);
             label2.ForeColor = Color.FromArgb(0, 0, 0);
-            label2.Location = new Point(276, 39);
+            label2.Location = new Point(278, 39);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(50, 14);
@@ -966,7 +969,7 @@ namespace SewingProduction.Features.Articul
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Arial", 8.25F);
             label1.ForeColor = Color.FromArgb(0, 0, 0);
-            label1.Location = new Point(303, 12);
+            label1.Location = new Point(302, 12);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(26, 14);
@@ -1064,65 +1067,76 @@ namespace SewingProduction.Features.Articul
             customButtonKompl.UseVisualStyleBackColor = false;
             customButtonKompl.Click += customButtonKompl_Click;
             // 
-            // grBoxMainInfo
+            // lContrBoxMainInfo
             // 
-            grBoxMainInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            grBoxMainInfo.BackColor = Color.Transparent;
-            grBoxMainInfo.Controls.Add(customLabel10);
-            grBoxMainInfo.Controls.Add(chbArh);
-            grBoxMainInfo.Controls.Add(customLabel9);
-            grBoxMainInfo.Controls.Add(customLabel8);
-            grBoxMainInfo.Controls.Add(pictureBoxArticul);
-            grBoxMainInfo.Controls.Add(chbKombIzd);
-            grBoxMainInfo.Controls.Add(txbKod);
-            grBoxMainInfo.Controls.Add(chbKombDet);
-            grBoxMainInfo.Controls.Add(label1);
-            grBoxMainInfo.Controls.Add(customLabel19);
-            grBoxMainInfo.Controls.Add(txbTM);
-            grBoxMainInfo.Controls.Add(txbNDS);
-            grBoxMainInfo.Controls.Add(txbPo);
-            grBoxMainInfo.Controls.Add(customLabel18);
-            grBoxMainInfo.Controls.Add(txbArticul);
-            grBoxMainInfo.Controls.Add(txbKodTnved);
-            grBoxMainInfo.Controls.Add(label2);
-            grBoxMainInfo.Controls.Add(customLabel17);
-            grBoxMainInfo.Controls.Add(txbMod);
-            grBoxMainInfo.Controls.Add(txbScNomer);
-            grBoxMainInfo.Controls.Add(label3);
-            grBoxMainInfo.Controls.Add(mtbDateOpis);
-            grBoxMainInfo.Controls.Add(txbSeason);
-            grBoxMainInfo.Controls.Add(customLabel16);
-            grBoxMainInfo.Controls.Add(customLabel1);
-            grBoxMainInfo.Controls.Add(customLabel15);
-            grBoxMainInfo.Controls.Add(customLabel2);
-            grBoxMainInfo.Controls.Add(txbRazmPrint);
-            grBoxMainInfo.Controls.Add(txbAssort);
-            grBoxMainInfo.Controls.Add(customLabel14);
-            grBoxMainInfo.Controls.Add(customLabel3);
-            grBoxMainInfo.Controls.Add(txbRazm);
-            grBoxMainInfo.Controls.Add(txbCountry);
-            grBoxMainInfo.Controls.Add(customLabel13);
-            grBoxMainInfo.Controls.Add(customLabel4);
-            grBoxMainInfo.Controls.Add(txbSost3);
-            grBoxMainInfo.Controls.Add(txbGrupMenName);
-            grBoxMainInfo.Controls.Add(customLabel12);
-            grBoxMainInfo.Controls.Add(customLabel5);
-            grBoxMainInfo.Controls.Add(txbSost2);
-            grBoxMainInfo.Controls.Add(txbGrup);
-            grBoxMainInfo.Controls.Add(customLabel11);
-            grBoxMainInfo.Controls.Add(customLabel6);
-            grBoxMainInfo.Controls.Add(txbSost);
-            grBoxMainInfo.Controls.Add(txbIdGost);
-            grBoxMainInfo.Controls.Add(customLabel7);
-            grBoxMainInfo.Controls.Add(txbOpiGost);
-            grBoxMainInfo.Controls.Add(txbNameGost);
-            grBoxMainInfo.Location = new Point(590, 1);
-            grBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            grBoxMainInfo.Name = "grBoxMainInfo";
-            grBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            grBoxMainInfo.Size = new Size(1157, 254);
-            grBoxMainInfo.TabIndex = 10;
-            grBoxMainInfo.TabStop = false;
+            lContrBoxMainInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            lContrBoxMainInfo.BackColor = Color.Transparent;
+            lContrBoxMainInfo.Controls.Add(customLabel10);
+            lContrBoxMainInfo.Controls.Add(chbArh);
+            lContrBoxMainInfo.Controls.Add(customLabel9);
+            lContrBoxMainInfo.Controls.Add(customLabel8);
+            lContrBoxMainInfo.Controls.Add(pictureBoxArticul);
+            lContrBoxMainInfo.Controls.Add(chbKombIzd);
+            lContrBoxMainInfo.Controls.Add(txbKod);
+            lContrBoxMainInfo.Controls.Add(chbKombDet);
+            lContrBoxMainInfo.Controls.Add(label1);
+            lContrBoxMainInfo.Controls.Add(customLabel19);
+            lContrBoxMainInfo.Controls.Add(txbTM);
+            lContrBoxMainInfo.Controls.Add(txbNDS);
+            lContrBoxMainInfo.Controls.Add(txbPo);
+            lContrBoxMainInfo.Controls.Add(customLabel18);
+            lContrBoxMainInfo.Controls.Add(txbArticul);
+            lContrBoxMainInfo.Controls.Add(txbKodTnved);
+            lContrBoxMainInfo.Controls.Add(label2);
+            lContrBoxMainInfo.Controls.Add(customLabel17);
+            lContrBoxMainInfo.Controls.Add(txbMod);
+            lContrBoxMainInfo.Controls.Add(txbScNomer);
+            lContrBoxMainInfo.Controls.Add(label3);
+            lContrBoxMainInfo.Controls.Add(mtbDateOpis);
+            lContrBoxMainInfo.Controls.Add(txbSeason);
+            lContrBoxMainInfo.Controls.Add(customLabel16);
+            lContrBoxMainInfo.Controls.Add(customLabel1);
+            lContrBoxMainInfo.Controls.Add(customLabel15);
+            lContrBoxMainInfo.Controls.Add(customLabel2);
+            lContrBoxMainInfo.Controls.Add(txbRazmPrint);
+            lContrBoxMainInfo.Controls.Add(txbAssort);
+            lContrBoxMainInfo.Controls.Add(customLabel14);
+            lContrBoxMainInfo.Controls.Add(customLabel3);
+            lContrBoxMainInfo.Controls.Add(txbRazm);
+            lContrBoxMainInfo.Controls.Add(txbCountry);
+            lContrBoxMainInfo.Controls.Add(customLabel13);
+            lContrBoxMainInfo.Controls.Add(customLabel4);
+            lContrBoxMainInfo.Controls.Add(txbSost3);
+            lContrBoxMainInfo.Controls.Add(txbGrupMenName);
+            lContrBoxMainInfo.Controls.Add(customLabel12);
+            lContrBoxMainInfo.Controls.Add(customLabel5);
+            lContrBoxMainInfo.Controls.Add(txbSost2);
+            lContrBoxMainInfo.Controls.Add(txbGrup);
+            lContrBoxMainInfo.Controls.Add(customLabel11);
+            lContrBoxMainInfo.Controls.Add(customLabel6);
+            lContrBoxMainInfo.Controls.Add(txbSost);
+            lContrBoxMainInfo.Controls.Add(txbIdGost);
+            lContrBoxMainInfo.Controls.Add(customLabel7);
+            lContrBoxMainInfo.Controls.Add(txbOpiGost);
+            lContrBoxMainInfo.Controls.Add(txbNameGost);
+            lContrBoxMainInfo.Location = new Point(589, 2);
+            lContrBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            lContrBoxMainInfo.Name = "lContrBoxMainInfo";
+            lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
+            lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            lContrBoxMainInfo.Root = Root;
+            lContrBoxMainInfo.Size = new Size(1176, 249);
+            lContrBoxMainInfo.TabIndex = 31;
+            lContrBoxMainInfo.TabStop = false;
+            lContrBoxMainInfo.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Name = "Root";
+            Root.Size = new Size(1176, 249);
+            Root.TextVisible = false;
             // 
             // flowLayoutPanel1
             // 
@@ -2162,13 +2176,13 @@ namespace SewingProduction.Features.Articul
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grArtDrName, grArtDrEd, artDrSeb, grArtDrKol, grArtDrSum, grArtDrKod_fur, grArtDrKod_furn_ar, grArtDrData_nitki });
             gridView1.DetailHeight = 404;
-            gridFormatRule2.ColumnApplyTo = grArtDrName;
-            gridFormatRule2.Name = "Format0";
-            formatConditionRuleValue2.Appearance.ForeColor = Color.Cyan;
-            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue2.Expression = "1=1";
-            gridFormatRule2.Rule = formatConditionRuleValue2;
-            gridView1.FormatRules.Add(gridFormatRule2);
+            gridFormatRule1.ColumnApplyTo = grArtDrName;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.ForeColor = Color.Cyan;
+            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue1.Expression = "1=1";
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridView1.FormatRules.Add(gridFormatRule1);
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
@@ -2454,7 +2468,7 @@ namespace SewingProduction.Features.Articul
             customButtonKart.UseVisualStyleBackColor = false;
             customButtonKart.Click += customButtonKart_Click;
             // 
-            // ArticulModel
+            // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -2471,7 +2485,7 @@ namespace SewingProduction.Features.Articul
             Controls.Add(lookUpEdit1);
             Controls.Add(checkedComboBoxEdit2);
             Controls.Add(cbTM);
-            Controls.Add(grBoxMainInfo);
+            Controls.Add(lContrBoxMainInfo);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(gridArt);
             Controls.Add(comboBoxEdit1);
@@ -2480,14 +2494,16 @@ namespace SewingProduction.Features.Articul
             Text = "Справочник изделий";
             Load += Articul_Load;
             ((System.ComponentModel.ISupportInitialize)gridArt).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsTM).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
-            grBoxMainInfo.ResumeLayout(false);
-            grBoxMainInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();
+            lContrBoxMainInfo.ResumeLayout(false);
+            lContrBoxMainInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             gbTkanName.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).EndInit();
@@ -2584,7 +2600,7 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbKombDet;
         private CustomCheckBox chbArh;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox grBoxMainInfo;
+        //private System.Windows.Forms.GroupBox grBoxMainInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private CustomButton customButtonAdd;
         private CustomButton customButtonCopy;
@@ -2695,5 +2711,7 @@ namespace SewingProduction.Features.Articul
         private System.Windows.Forms.GroupBox gbNabor;
         private System.Windows.Forms.DataGridView dataGridView2;
         private CustomButton customButtonKart;
+        private DevExpress.XtraLayout.LayoutControl lContrBoxMainInfo;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
     }
 }

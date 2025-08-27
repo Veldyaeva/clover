@@ -1,4 +1,5 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
+using DevExpress.Data.Internal;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Core.interfaces;
@@ -35,14 +36,14 @@ namespace SewingProduction.Features.Articul
         private readonly DatabaseHelper _dbHelperAce;
         private UserClass _user;
         private readonly ILogger _logger = new FileLogger();
-
+        //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
 
-        //все поля таблицы Артикул
+        ////все поля таблицы Артикул
         private BindingList<SpArticulPreviewModel> _articulBindingList;
-        private BindingSource _articulBindingSource;
+        //private BindingSource _articulBindingSource;
 
         ArticulDataService _articulDataService = new ArticulDataService();
         public Articul(UserClass user) : base(user)
@@ -62,14 +63,18 @@ namespace SewingProduction.Features.Articul
                 //загрузка перечня кодов из справочника, часть полей
                 _artPreview = await _articulDataService.GetArtPreviewAsync();
                 bsArt.DataSource = _artPreview;
+                // инициализация привязок данных к элементам
+                InitializeBindingsAsync();
 
                 
-                // инициализация привязок данных к элементам
-                Task bindingsTask = InitializeBindingsAsync();
-                await Task.WhenAll(bindingsTask);
+                //Task bindingsTask = InitializeBindingsAsync();
+                Task getData = getArticulFromSQlAsync("0");
+                await Task.WhenAll(getData);
+                
 
                 // загрузка одиночного кода из справочника, все поля  
                 //getArticulFromSQl("0");
+                
 
                 // загрузка комбиков для выбора полотна
                 //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
@@ -105,19 +110,36 @@ namespace SewingProduction.Features.Articul
         {
             try
             {
-                var artPreviewTask = Task.Run(() =>
-                {
-                    //загрузка перечня кодов из справочника, часть полей
-                    _articulBindingList = new BindingList<SpArticulPreviewModel>();
-                    _articulBindingSource = new BindingSource { DataSource = _articulBindingList };
+                //var artPreviewTask = Task.Run(() =>
+                //{
+                //загрузка перечня кодов из справочника, часть полей
+                _articulBindingList = new BindingList<SpArticulPreviewModel>();
+                bsArticul = new BindingSource { DataSource = _articulBindingList };
+                //});
 
-                });
-
-                await Task.WhenAll(artPreviewTask);
-
+                //await Task.WhenAll(artPreviewTask);
+                
                 #region заполнение блока основных данных артикула
-                txbKod.DataBindings.Add("Text", _articulBindingSource, nameof(ArticulModel.Kod), true, DataSourceUpdateMode.Never);
-                txbArticul.DataBindings.Add("Text", _articulBindingSource, nameof(ArticulModel.Articul), true, DataSourceUpdateMode.Never);
+                txbKod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod), true, DataSourceUpdateMode.Never);
+                txbArticul.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Articul), true, DataSourceUpdateMode.Never);
+                txbMod.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Mod), true);
+                txbTM.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.TmName), true);
+                txbSeason.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.SeasonName), true);
+                txbAssort.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.AssortName), true);
+                txbCountry.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.CountryName), true);
+                txbGrupMenName.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GrupMenName), true);
+                mtbDateOpis.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.DateOpis), true);
+                txbGrup.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Grup), true);
+                txbIdGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Id_gost), true);
+                txbNameGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostName), true);
+                txbOpiGost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.GostOpi), true);
+                txbSost.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost), true);
+                txbSost2.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost2), true);
+                txbSost3.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sost3), true);
+                txbRazm.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Razm), true);
+                txbScNomer.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.ScNomer), true);
+                txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
+                txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
 
                 #endregion
 
@@ -136,28 +158,25 @@ namespace SewingProduction.Features.Articul
                 bsArticul.Clear();
                 bsArticul.ResetBindings(false);
 
-                _articulByKod = await _articulDataService.GetByKodAsync(kod);
-
-                if (_articulByKod != null)
+                var articulByKodTemp = await _articulDataService.GetByKodAsync(kod);
+                
+                if (articulByKodTemp != null)
                 {
                     //await _logger.LogEventAsync($"Получены данные History_razdel_nakl_view: iz_b={_articulByKod[0].iz_b}", "LoadHistoryRazdelNaklViewDataAsync");
 
                     await this.InvokeAsync(() =>
                     {
-                        _currentHistoryRazdelNaklViewData = historyRazdelNaklViewData;                // Обновляем текущую модель
-                        _historyRazdelNaklViewByIzBindingSource.DataSource = _currentHistoryRazdelNaklViewData; // Привязываем данные к форме
-                    });
+                        _articulByKod = articulByKodTemp;                // Обновляем текущую модель
+                        bsArticul.DataSource = _articulByKod; // Привязываем данные к форме
 
-                    await _logger.LogEventAsync($"Данные History_razdel_nakl_view успешно загружены для iz {iz}", "LoadHistoryRazdelNaklViewDataAsync");
+                    });
+                    bsArticul.ResetBindings(false);
                 }
-                else
-                {
-                    await _logger.LogEventAsync($"Не удалось найти данные History_razdel_nakl_view для iz {iz}", "LoadHistoryRazdelNaklViewDataAsync");
-                }
+                
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для iz {kod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
             }
         }
 
@@ -317,9 +336,47 @@ namespace SewingProduction.Features.Articul
 
 
         }
-
-        private void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        
+        /// <summary>
+        /// обновлениме данных на форме по коду 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void gridControl1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
+            string kod = "";
+            string kodd = "";
+
+            try
+            {
+                var currentRow = bsArt.Current as ArticulModel;
+                if (currentRow != null) {
+                    kod = currentRow.Kod;
+                    kodd = currentRow.Kodd;
+
+                    //getArticulFromSQl(kod);
+                    Task getData = getArticulFromSQlAsync(kod);
+                    await Task.WhenAll(getData);
+
+                    //getArticulFromSQlAsync(kod);
+                //TODO:  !!! определить kodd!!!!
+                    string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
+                    var dt = _dbHelperAce.ExecuteQuery(query);
+                    if (dt != null)
+                    {
+                        pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
+
+                    }
+
+                }
+
+            }
+            catch
+            {
+                kod = "";
+            }
+
+
             /* ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
             //var kod = Convert.ToInt32(gridControl1.GetDataRow(gridControl1.FocusedRowHandle)["kod"]);
             string kod = "";
