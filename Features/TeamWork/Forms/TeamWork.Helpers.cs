@@ -46,17 +46,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-//<<<<<<< Updated upstream
                 if (normKontTab != null)
                     _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
-//=======
-//                if (gridView2 != null)
-//                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-//                if (gridView3 != null)
-//                    _gridHelper.LoadGridViewSettings(gridView3, "gridView3Layout.xml");
-//>>>>>>> Stashed changes
                 if (gridView8 != null)
                     _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -91,17 +84,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-//<<<<<<< Updated upstream
                 if (normKontTab != null)
                     _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
-//=======
-//                if (gridView2 != null)
-//                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
-//                if (gridView3 != null)
-//                    _gridHelper.SaveGridViewSettings(gridView3, "gridView3Layout.xml");
-//>>>>>>> Stashed changes
                 if (gridView8 != null)
                     _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
             }

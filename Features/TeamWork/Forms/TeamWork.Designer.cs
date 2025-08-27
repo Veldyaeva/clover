@@ -365,6 +365,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
+            gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -3563,6 +3564,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
+            // 
+            // gridColumn50
+            // 
+            gridColumn50.Caption = "Сек.";
+            gridColumn50.FieldName = "Sek";
+            gridColumn50.Name = "gridColumn50";
+            gridColumn50.Visible = true;
+            gridColumn50.VisibleIndex = 5;
             // 
             // TeamWork
             // 
