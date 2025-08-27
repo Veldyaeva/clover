@@ -144,38 +144,37 @@ namespace SewingProduction.Features.TeamWork.Forms
             _normRaszBindingSourceArticles = new BindingSource { DataSource = _normRaszListArticles };
             if (customGridControl3 != null) customGridControl3.DataSource = _normRaszBindingSourceArticles;
 
-            // Инициализация для NormRask на вкладке Articles
-            _normRaskListArticles = new BindingList<NormRask>();
-            _normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
-            if (customGridControl2 != null) 
-            {
-                customGridControl2.DataSource = _normRaskBindingSourceArticles;
-                _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
+            //// Инициализация для NormRask на вкладке Articles
+            //_normRaskListArticles = new BindingList<NormRask>();
+            //_normRaskBindingSourceArticles = new BindingSource { DataSource = _normRaskListArticles };
+            //if (customGridControl2 != null) 
+            //{
+            //    customGridControl2.DataSource = _normRaskBindingSourceArticles;
+            //    _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
                 
-                // Verify the grid view configuration
-                if (customGridControl2.MainView is GridView gridView)
-                {
-                    _logger?.LogEventAsync($"Constructor: customGridControl2.MainView is GridView with {gridView.Columns.Count} columns", "TeamWork.Constructor");
-                    foreach (var col in gridView.Columns)
-                    {
-                        _logger?.LogEventAsync($"Constructor: Column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "TeamWork.Constructor");
-                    }
-                }
-            }
-            else
-            {
-                _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
-            }
+            //    // Verify the grid view configuration
+            //    if (customGridControl2.MainView is GridView gridView)
+            //    {
+            //        _logger?.LogEventAsync($"Constructor: customGridControl2.MainView is GridView with {gridView.Columns.Count} columns", "TeamWork.Constructor");
+            //        foreach (var col in gridView.Columns)
+            //        {
+            //            _logger?.LogEventAsync($"Constructor: Column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "TeamWork.Constructor");
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    _logger?.LogWarningAsync("Constructor: customGridControl2 is null, cannot set DataSource", "TeamWork.Constructor");
+            //}
 
-            // Инициализация для NormKont на вкладке Articles
-            _normKontListArticles = new BindingList<NormKont>();
-            _normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
-            if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
+            //// Инициализация для NormKont на вкладке Articles
+            //_normKontListArticles = new BindingList<NormKont>();
+            //_normKontBindingSourceArticles = new BindingSource { DataSource = _normKontListArticles };
+            //if (customGridControl1 != null) customGridControl1.DataSource = _normKontBindingSourceArticles;
 
             InitializeGridSettings();
             SetupDateUpdateColumn();
             
-            // Verify grid configurations after initialization
             VerifyGridConfigurations();
         }
 
@@ -323,7 +322,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 if (customGridControl2?.MainView is GridView normRaskArtView)
                 {
                     _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt has {normRaskArtView.Columns.Count} columns", "VerifyGridConfigurations");
-                    foreach (var col in normRaskArtView.Columns)
+                    foreach (GridColumn col in normRaskArtView.Columns)
                     {
                         _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "VerifyGridConfigurations");
                     }

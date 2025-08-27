@@ -46,10 +46,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
+//<<<<<<< Updated upstream
                 if (normKontTab != null)
                     _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
+//=======
+//                if (gridView2 != null)
+//                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
+//                if (gridView3 != null)
+//                    _gridHelper.LoadGridViewSettings(gridView3, "gridView3Layout.xml");
+//>>>>>>> Stashed changes
                 if (gridView8 != null)
                     _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -84,10 +91,17 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
+//<<<<<<< Updated upstream
                 if (normKontTab != null)
                     _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
                 if (normRaskArt != null)
                     _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
+//=======
+//                if (gridView2 != null)
+//                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
+//                if (gridView3 != null)
+//                    _gridHelper.SaveGridViewSettings(gridView3, "gridView3Layout.xml");
+//>>>>>>> Stashed changes
                 if (gridView8 != null)
                     _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -101,10 +115,123 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private void filterTable()
         {
+            //try
+            //{
+            //    // Сохраняем текущий общий фильтр (включая поиск и фильтры колонок)
+            //    CriteriaOperator existingFilter = ANNgridView.ActiveFilterCriteria;
+
+            //    // Создаем фильтры на основе состояния чекбоксов
+            //    CriteriaOperator statusCriteria = null;
+            //    GroupOperator statusGroup = null;
+
+            //    // Создаем фильтр по статусу
+            //    if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
+            //    {
+            //        var statusFilters = new List<CriteriaOperator>();
+
+            //        if (preliminaryCheckBox.Checked)
+            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Preliminary));
+
+            //        if (actualCheckBox.Checked)
+            //        {
+            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.PreliminaryArchive));
+            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Actual));
+            //        }
+
+            //        if (archiveCheckBox.Checked)
+            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Archive));
+
+            //        if (statusFilters.Count > 1)
+            //        {
+            //            statusGroup = new GroupOperator(GroupOperatorType.Or, statusFilters.ToArray());
+            //            statusCriteria = statusGroup;
+            //        }
+            //        else if (statusFilters.Count == 1)
+            //        {
+            //            statusCriteria = statusFilters[0];
+            //        }
+            //    }
+
+            //    // Добавляем фильтр по "Не описанные" если выбран
+            //    if (SortBox.Checked)
+            //    {
+            //        var updateIsEmpty = new GroupOperator(
+            //            GroupOperatorType.Or,
+            //            new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
+            //        );
+
+            //        var excludeArchived = new BinaryOperator("Status", (int)Status.Archive, BinaryOperatorType.NotEqual);
+            //        archiveCheckBox.Checked = false;
+            //        archiveCheckBox.Enabled = false;
+            //        var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
+
+            //        if (statusCriteria != null)
+            //            statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
+            //        else
+            //            statusCriteria = notDescribedFilter;
+            //    }
+            //    else archiveCheckBox.Enabled = true;
+
+            //    // Собираем итоговый фильтр, не стирая текущие фильтры (поиск, фильтры колонок)
+            //    ANNgridView.BeginUpdate();
+            //    try
+            //    {
+            //        CriteriaOperator combinedFilter = null;
+
+            //        if (statusCriteria != null && existingFilter != null)
+            //        {
+            //            combinedFilter = new GroupOperator(GroupOperatorType.And, existingFilter, statusCriteria);
+            //        }
+            //        else if (statusCriteria != null)
+            //        {
+            //            combinedFilter = statusCriteria;
+            //        }
+            //        else if (existingFilter != null)
+            //        {
+            //            combinedFilter = existingFilter;
+            //        }
+
+            //        if (combinedFilter != null)
+            //        {
+            //            ANNgridView.ActiveFilterCriteria = combinedFilter;
+            //        }
+            //        else
+            //        {
+            //            // Нет ни статусного фильтра, ни текущего поискового фильтра
+            //            ANNgridView.ActiveFilterString = string.Empty;
+            //        }
+            //    }
+            //    finally
+            //    {
+            //        ANNgridView.EndUpdate();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
+            //}
             try
             {
-                // Сохраняем текущий общий фильтр (включая поиск и фильтры колонок)
-                CriteriaOperator existingFilter = ANNgridView.ActiveFilterCriteria;
+                // Сохраняем текущий фильтр поиска, если он есть
+                CriteriaOperator searchFilter = null;
+                if (ANNgridView.ActiveFilterCriteria is GroupOperator groupFilter)
+                {
+                    // Проверяем, есть ли фильтр поиска в группе операторов
+                    foreach (var criteria in groupFilter.Operands)
+                    {
+                        if (criteria is FunctionOperator functionOp &&
+                            functionOp.OperatorType == FunctionOperatorType.Contains)
+                        {
+                            searchFilter = criteria;
+                            break;
+                        }
+                    }
+                }
+                else if (ANNgridView.ActiveFilterCriteria is FunctionOperator functionFilter &&
+                         functionFilter.OperatorType == FunctionOperatorType.Contains)
+                {
+                    searchFilter = functionFilter;
+                }
 
                 // Создаем фильтры на основе состояния чекбоксов
                 CriteriaOperator statusCriteria = null;
@@ -116,16 +243,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                     var statusFilters = new List<CriteriaOperator>();
 
                     if (preliminaryCheckBox.Checked)
-                        statusFilters.Add(new BinaryOperator("Status", (int)Status.Preliminary));
+                        statusFilters.Add(new BinaryOperator("status", (int)Status.Preliminary));
 
                     if (actualCheckBox.Checked)
                     {
-                        statusFilters.Add(new BinaryOperator("Status", (int)Status.PreliminaryArchive));
-                        statusFilters.Add(new BinaryOperator("Status", (int)Status.Actual));
+                        statusFilters.Add(new BinaryOperator("status", (int)Status.PreliminaryArchive));
+                        statusFilters.Add(new BinaryOperator("status", (int)Status.Actual));
                     }
 
                     if (archiveCheckBox.Checked)
-                        statusFilters.Add(new BinaryOperator("Status", (int)Status.Archive));
+                        statusFilters.Add(new BinaryOperator("status", (int)Status.Archive));
 
                     if (statusFilters.Count > 1)
                     {
@@ -146,7 +273,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
                     );
 
-                    var excludeArchived = new BinaryOperator("Status", (int)Status.Archive, BinaryOperatorType.NotEqual);
+                    var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
                     archiveCheckBox.Checked = false;
                     archiveCheckBox.Enabled = false;
                     var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
@@ -157,45 +284,22 @@ namespace SewingProduction.Features.TeamWork.Forms
                         statusCriteria = notDescribedFilter;
                 }
                 else archiveCheckBox.Enabled = true;
-
-                // Собираем итоговый фильтр, не стирая текущие фильтры (поиск, фильтры колонок)
-                ANNgridView.BeginUpdate();
-                try
+                if (statusCriteria != null)
                 {
-                    CriteriaOperator combinedFilter = null;
-
-                    if (statusCriteria != null && existingFilter != null)
-                    {
-                        combinedFilter = new GroupOperator(GroupOperatorType.And, existingFilter, statusCriteria);
-                    }
-                    else if (statusCriteria != null)
-                    {
-                        combinedFilter = statusCriteria;
-                    }
-                    else if (existingFilter != null)
-                    {
-                        combinedFilter = existingFilter;
-                    }
-
-                    if (combinedFilter != null)
-                    {
-                        ANNgridView.ActiveFilterCriteria = combinedFilter;
-                    }
-                    else
-                    {
-                        // Нет ни статусного фильтра, ни текущего поискового фильтра
-                        ANNgridView.ActiveFilterString = string.Empty;
-                    }
+                    // Только фильтр статуса
+                    ANNgridView.ActiveFilterCriteria = statusCriteria;
                 }
-                finally
+                else
                 {
-                    ANNgridView.EndUpdate();
+                    // Нет фильтров
+                    ANNgridView.ActiveFilterString = string.Empty;
                 }
             }
             catch (Exception ex)
             {
                 _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
             }
+
         }
 
         private CriteriaOperator GetStatusFilter()
