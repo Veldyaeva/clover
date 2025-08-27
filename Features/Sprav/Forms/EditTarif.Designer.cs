@@ -29,50 +29,66 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EditTarif));
-            customTabControlZpTarif = new CustomTabControl();
+            Название = new DevExpress.XtraGrid.Columns.GridColumn();
             xtraTabPageZP = new DevExpress.XtraTab.XtraTabPage();
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customGroupBoxFiltr = new CustomGroupBox();
-            customRadioButtonMay = new CustomRadioButton();
-            customRadioButtonAll = new CustomRadioButton();
-            customRadioButtonExp = new CustomRadioButton();
-            customRadioButtonAceKle = new CustomRadioButton();
-            customGridControlZp = new Core.Class.CustomGridControl();
+            customButtonExcel = new Core.Class.CustomButton();
+            customButtonArhiv = new Core.Class.CustomButton();
+            customGridControlZp = new Core.Class.CustomGridControlColumn();
             gridViewZp = new DevExpress.XtraGrid.Views.Grid.GridView();
             describe = new DevExpress.XtraGrid.Columns.GridColumn();
             begin_dt = new DevExpress.XtraGrid.Columns.GridColumn();
-            value_numeric = new DevExpress.XtraGrid.Columns.GridColumn();
-            value_integer = new DevExpress.XtraGrid.Columns.GridColumn();
-            value_float = new DevExpress.XtraGrid.Columns.GridColumn();
-            value_character = new DevExpress.XtraGrid.Columns.GridColumn();
-            value_datetime = new DevExpress.XtraGrid.Columns.GridColumn();
+            valueSign = new DevExpress.XtraGrid.Columns.GridColumn();
             firm = new DevExpress.XtraGrid.Columns.GridColumn();
+            whereUses = new DevExpress.XtraGrid.Columns.GridColumn();
             pcId = new DevExpress.XtraGrid.Columns.GridColumn();
+            priznSign = new DevExpress.XtraGrid.Columns.GridColumn();
+            constant_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            arhiv = new DevExpress.XtraGrid.Columns.GridColumn();
             customGroupBoxAdd = new CustomGroupBox();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            customLabelWhereUses = new Core.Class.CustomLabel();
+            customComboBoxPriznSign = new CustomComboBox();
+            customLabelPriznSign = new Core.Class.CustomLabel();
             customComboBoxOrg = new CustomComboBox();
             customTextBoxOpis = new CustomTextBox();
-            customLabelNull = new CustomLabel();
-            customLabelOrg = new CustomLabel();
-            customLabelZnach = new CustomLabel();
-            customLabelDate = new CustomLabel();
-            customLabelType = new CustomLabel();
-            customLabelOpis = new CustomLabel();
-            customLabelRazm = new CustomLabel();
+            customLabelNull = new Core.Class.CustomLabel();
+            customLabelOrg = new Core.Class.CustomLabel();
+            customLabelZnach = new Core.Class.CustomLabel();
+            customLabelDate = new Core.Class.CustomLabel();
+            customLabelType = new Core.Class.CustomLabel();
+            customLabelOpis = new Core.Class.CustomLabel();
+            customLabelRazm = new Core.Class.CustomLabel();
             customTextBoxName = new CustomTextBox();
-            customLabelName = new CustomLabel();
+            customLabelName = new Core.Class.CustomLabel();
             customTextBoxZnach = new CustomTextBox();
             customTextBoxRazm = new CustomTextBox();
             customCheckBoxNotRazm = new CustomCheckBox();
-            customButtonOtm = new Core.Class.CustomButton();
-            customButtonSave = new Core.Class.CustomButton();
             customComboBoxType = new CustomComboBox();
             customDateTimePickerBegin = new CustomDateTimePicker();
+            customButtonSave = new Core.Class.CustomButton();
+            customTextBoxWhereUses = new CustomTextBox();
+            customButtonOtm = new Core.Class.CustomButton();
             customGridControlHistory = new Core.Class.CustomGridControl();
             gridViewHistory = new DevExpress.XtraGrid.Views.Grid.GridView();
             Value = new DevExpress.XtraGrid.Columns.GridColumn();
             begin_dt_h = new DevExpress.XtraGrid.Columns.GridColumn();
             event_dt = new DevExpress.XtraGrid.Columns.GridColumn();
+            userName = new DevExpress.XtraGrid.Columns.GridColumn();
+            userComp = new DevExpress.XtraGrid.Columns.GridColumn();
+            customButtonEdit = new Core.Class.CustomButton();
+            customButtonAdd = new Core.Class.CustomButton();
+            customGroupBoxFiltr = new CustomGroupBox();
+            customRadioButtonMay = new CustomRadioButton();
+            customRadioButtonAll = new CustomRadioButton();
+            customRadioButtonExp = new CustomRadioButton();
+            customRadioButtonAceKle = new CustomRadioButton();
+            customGroupBoxPriznSign = new CustomGroupBox();
+            customCheckBoxProg = new CustomCheckBox();
+            customCheckBoxByh = new CustomCheckBox();
+            customCheckBoxEco = new CustomCheckBox();
+            customTabControlZpTarif = new CustomTabControl();
+            xtraTabPageTRR = new DevExpress.XtraTab.XtraTabPage();
             customGridControlTR = new Core.Class.CustomGridControl();
             gridViewTR = new DevExpress.XtraGrid.Views.Grid.GridView();
             id_kod_o = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -82,59 +98,55 @@
             koef_chas = new DevExpress.XtraGrid.Columns.GridColumn();
             razr = new DevExpress.XtraGrid.Columns.GridColumn();
             text_name = new DevExpress.XtraGrid.Columns.GridColumn();
-            customButtonEdit = new Core.Class.CustomButton();
-            customButtonAdd = new Core.Class.CustomButton();
-            xtraTabPageTarif = new DevExpress.XtraTab.XtraTabPage();
-            Название = new DevExpress.XtraGrid.Columns.GridColumn();
-            ((System.ComponentModel.ISupportInitialize)customTabControlZpTarif).BeginInit();
-            customTabControlZpTarif.SuspendLayout();
             xtraTabPageZP.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
-            customGroupBoxFiltr.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlZp).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZp).BeginInit();
             customGroupBoxAdd.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlHistory).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewHistory).BeginInit();
+            customGroupBoxFiltr.SuspendLayout();
+            customGroupBoxPriznSign.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customTabControlZpTarif).BeginInit();
+            customTabControlZpTarif.SuspendLayout();
+            xtraTabPageTRR.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlTR).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTR).BeginInit();
             SuspendLayout();
             // 
-            // customTabControlZpTarif
+            // Название
             // 
-            customTabControlZpTarif.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTabControlZpTarif.Appearance.Options.UseForeColor = true;
-            customTabControlZpTarif.Dock = System.Windows.Forms.DockStyle.Fill;
-            customTabControlZpTarif.Location = new System.Drawing.Point(0, 0);
-            customTabControlZpTarif.Name = "customTabControlZpTarif";
-            customTabControlZpTarif.ObjectName = null;
-            customTabControlZpTarif.SelectedTabPage = xtraTabPageZP;
-            customTabControlZpTarif.Size = new System.Drawing.Size(1121, 663);
-            customTabControlZpTarif.TabIndex = 0;
-            customTabControlZpTarif.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPageZP, xtraTabPageTarif });
+            Название.Caption = "text";
+            Название.Name = "Название";
+            Название.Visible = true;
+            Название.VisibleIndex = 1;
             // 
             // xtraTabPageZP
             // 
             xtraTabPageZP.Controls.Add(tableLayoutPanel1);
             xtraTabPageZP.Name = "xtraTabPageZP";
-            xtraTabPageZP.Size = new System.Drawing.Size(1119, 638);
-            xtraTabPageZP.Text = "Зарплата";
+            xtraTabPageZP.Size = new System.Drawing.Size(1119, 661);
+            xtraTabPageZP.Text = "Константы";
             // 
             // tableLayoutPanel1
             // 
-            tableLayoutPanel1.ColumnCount = 4;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            tableLayoutPanel1.ColumnCount = 6;
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
-            tableLayoutPanel1.Controls.Add(customGroupBoxFiltr, 0, 0);
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
+            tableLayoutPanel1.Controls.Add(customButtonExcel, 5, 0);
+            tableLayoutPanel1.Controls.Add(customButtonArhiv, 4, 0);
             tableLayoutPanel1.Controls.Add(customGridControlZp, 0, 1);
-            tableLayoutPanel1.Controls.Add(customGroupBoxAdd, 2, 3);
+            tableLayoutPanel1.Controls.Add(customGroupBoxAdd, 4, 3);
             tableLayoutPanel1.Controls.Add(customGridControlHistory, 0, 4);
-            tableLayoutPanel1.Controls.Add(customGridControlTR, 1, 4);
-            tableLayoutPanel1.Controls.Add(customButtonEdit, 2, 1);
-            tableLayoutPanel1.Controls.Add(customButtonAdd, 3, 1);
+            tableLayoutPanel1.Controls.Add(customButtonEdit, 4, 1);
+            tableLayoutPanel1.Controls.Add(customButtonAdd, 5, 1);
+            tableLayoutPanel1.Controls.Add(customGroupBoxFiltr, 2, 0);
+            tableLayoutPanel1.Controls.Add(customGroupBoxPriznSign, 0, 0);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -142,98 +154,52 @@
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            tableLayoutPanel1.Size = new System.Drawing.Size(1119, 638);
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 56.73981F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.6833858F));
+            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            tableLayoutPanel1.Size = new System.Drawing.Size(1119, 661);
             tableLayoutPanel1.TabIndex = 3;
             // 
-            // customGroupBoxFiltr
+            // customButtonExcel
             // 
-            customGroupBoxFiltr.BackColor = System.Drawing.Color.Transparent;
-            customGroupBoxFiltr.Controls.Add(customRadioButtonMay);
-            customGroupBoxFiltr.Controls.Add(customRadioButtonAll);
-            customGroupBoxFiltr.Controls.Add(customRadioButtonExp);
-            customGroupBoxFiltr.Controls.Add(customRadioButtonAceKle);
-            customGroupBoxFiltr.Dock = System.Windows.Forms.DockStyle.Fill;
-            customGroupBoxFiltr.Location = new System.Drawing.Point(3, 3);
-            customGroupBoxFiltr.Name = "customGroupBoxFiltr";
-            customGroupBoxFiltr.Size = new System.Drawing.Size(553, 25);
-            customGroupBoxFiltr.TabIndex = 1;
-            customGroupBoxFiltr.TabStop = false;
+            customButtonExcel.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonExcel.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonExcel.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonExcel.Location = new System.Drawing.Point(978, 3);
+            customButtonExcel.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonExcel.Name = "customButtonExcel";
+            customButtonExcel.Size = new System.Drawing.Size(138, 26);
+            customButtonExcel.TabIndex = 12;
+            customButtonExcel.Text = "Выгрузить в Excel";
+            customButtonExcel.UseVisualStyleBackColor = false;
+            customButtonExcel.Click += customButtonExcel_Click;
             // 
-            // customRadioButtonMay
+            // customButtonArhiv
             // 
-            customRadioButtonMay.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customRadioButtonMay.AutoSize = true;
-            customRadioButtonMay.Font = new System.Drawing.Font("Arial", 10F);
-            customRadioButtonMay.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonMay.Location = new System.Drawing.Point(276, 0);
-            customRadioButtonMay.Name = "customRadioButtonMay";
-            customRadioButtonMay.ObjectName = null;
-            customRadioButtonMay.Size = new System.Drawing.Size(52, 20);
-            customRadioButtonMay.TabIndex = 3;
-            customRadioButtonMay.TabStop = true;
-            customRadioButtonMay.Text = "Май";
-            customRadioButtonMay.UseVisualStyleBackColor = true;
-            customRadioButtonMay.CheckedChanged += Filter;
-            // 
-            // customRadioButtonAll
-            // 
-            customRadioButtonAll.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customRadioButtonAll.AutoSize = true;
-            customRadioButtonAll.Checked = true;
-            customRadioButtonAll.Font = new System.Drawing.Font("Arial", 10F);
-            customRadioButtonAll.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonAll.Location = new System.Drawing.Point(358, 0);
-            customRadioButtonAll.Name = "customRadioButtonAll";
-            customRadioButtonAll.ObjectName = null;
-            customRadioButtonAll.Size = new System.Drawing.Size(49, 20);
-            customRadioButtonAll.TabIndex = 2;
-            customRadioButtonAll.TabStop = true;
-            customRadioButtonAll.Text = "Все";
-            customRadioButtonAll.UseVisualStyleBackColor = true;
-            customRadioButtonAll.CheckedChanged += Filter;
-            // 
-            // customRadioButtonExp
-            // 
-            customRadioButtonExp.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customRadioButtonExp.AutoSize = true;
-            customRadioButtonExp.Font = new System.Drawing.Font("Arial", 10F);
-            customRadioButtonExp.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonExp.Location = new System.Drawing.Point(130, 0);
-            customRadioButtonExp.Name = "customRadioButtonExp";
-            customRadioButtonExp.ObjectName = null;
-            customRadioButtonExp.Size = new System.Drawing.Size(113, 20);
-            customRadioButtonExp.TabIndex = 1;
-            customRadioButtonExp.Text = "Эксперимент";
-            customRadioButtonExp.UseVisualStyleBackColor = true;
-            customRadioButtonExp.CheckedChanged += Filter;
-            // 
-            // customRadioButtonAceKle
-            // 
-            customRadioButtonAceKle.Anchor = System.Windows.Forms.AnchorStyles.None;
-            customRadioButtonAceKle.AutoSize = true;
-            customRadioButtonAceKle.Font = new System.Drawing.Font("Arial", 10F);
-            customRadioButtonAceKle.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customRadioButtonAceKle.Location = new System.Drawing.Point(4, 0);
-            customRadioButtonAceKle.Name = "customRadioButtonAceKle";
-            customRadioButtonAceKle.ObjectName = null;
-            customRadioButtonAceKle.Size = new System.Drawing.Size(105, 20);
-            customRadioButtonAceKle.TabIndex = 0;
-            customRadioButtonAceKle.Text = "Эйс, Клевер";
-            customRadioButtonAceKle.UseVisualStyleBackColor = true;
-            customRadioButtonAceKle.CheckedChanged += Filter;
+            customButtonArhiv.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonArhiv.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonArhiv.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonArhiv.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonArhiv.Location = new System.Drawing.Point(839, 3);
+            customButtonArhiv.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonArhiv.Name = "customButtonArhiv";
+            customButtonArhiv.Size = new System.Drawing.Size(133, 26);
+            customButtonArhiv.TabIndex = 11;
+            customButtonArhiv.Text = "Убрать в архив";
+            customButtonArhiv.UseVisualStyleBackColor = false;
+            customButtonArhiv.Click += customButtonArhiv_Click;
             // 
             // customGridControlZp
             // 
-            tableLayoutPanel1.SetColumnSpan(customGridControlZp, 2);
+            tableLayoutPanel1.SetColumnSpan(customGridControlZp, 4);
             customGridControlZp.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlZp.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlZp.Location = new System.Drawing.Point(3, 34);
+            customGridControlZp.Location = new System.Drawing.Point(3, 35);
             customGridControlZp.MainView = gridViewZp;
             customGridControlZp.Name = "customGridControlZp";
             tableLayoutPanel1.SetRowSpan(customGridControlZp, 3);
-            customGridControlZp.Size = new System.Drawing.Size(832, 406);
+            customGridControlZp.Size = new System.Drawing.Size(830, 431);
             customGridControlZp.TabIndex = 2;
             customGridControlZp.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewZp });
             customGridControlZp.Load += customGridControlZp_Load;
@@ -250,7 +216,7 @@
             gridViewZp.Appearance.GroupRow.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
             gridViewZp.Appearance.HeaderPanel.Options.UseTextOptions = true;
             gridViewZp.Appearance.HeaderPanel.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            gridViewZp.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { describe, begin_dt, value_numeric, value_integer, value_float, value_character, value_datetime, firm, pcId });
+            gridViewZp.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { describe, begin_dt, valueSign, firm, whereUses, pcId, priznSign, constant_name, arhiv });
             gridViewZp.GridControl = customGridControlZp;
             gridViewZp.Name = "gridViewZp";
             gridViewZp.OptionsBehavior.Editable = false;
@@ -274,7 +240,7 @@
             describe.OptionsColumn.ReadOnly = true;
             describe.Visible = true;
             describe.VisibleIndex = 0;
-            describe.Width = 187;
+            describe.Width = 217;
             // 
             // begin_dt
             // 
@@ -289,78 +255,17 @@
             begin_dt.Name = "begin_dt";
             begin_dt.OptionsColumn.ReadOnly = true;
             begin_dt.Visible = true;
-            begin_dt.VisibleIndex = 2;
-            begin_dt.Width = 87;
+            begin_dt.VisibleIndex = 4;
+            begin_dt.Width = 101;
             // 
-            // value_numeric
+            // valueSign
             // 
-            value_numeric.AppearanceCell.Options.UseTextOptions = true;
-            value_numeric.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_numeric.AppearanceHeader.Options.UseTextOptions = true;
-            value_numeric.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_numeric.Caption = "Значение numeric";
-            value_numeric.FieldName = "value_numeric";
-            value_numeric.Name = "value_numeric";
-            value_numeric.OptionsColumn.ReadOnly = true;
-            value_numeric.Visible = true;
-            value_numeric.VisibleIndex = 3;
-            value_numeric.Width = 87;
-            // 
-            // value_integer
-            // 
-            value_integer.AppearanceCell.Options.UseTextOptions = true;
-            value_integer.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_integer.AppearanceHeader.Options.UseTextOptions = true;
-            value_integer.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_integer.Caption = "Значение integer";
-            value_integer.FieldName = "value_integer";
-            value_integer.Name = "value_integer";
-            value_integer.OptionsColumn.ReadOnly = true;
-            value_integer.Visible = true;
-            value_integer.VisibleIndex = 4;
-            value_integer.Width = 87;
-            // 
-            // value_float
-            // 
-            value_float.AppearanceCell.Options.UseTextOptions = true;
-            value_float.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_float.AppearanceHeader.Options.UseTextOptions = true;
-            value_float.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_float.Caption = "Значение float";
-            value_float.FieldName = "value_float";
-            value_float.Name = "value_float";
-            value_float.OptionsColumn.ReadOnly = true;
-            value_float.Visible = true;
-            value_float.VisibleIndex = 7;
-            value_float.Width = 87;
-            // 
-            // value_character
-            // 
-            value_character.AppearanceCell.Options.UseTextOptions = true;
-            value_character.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_character.AppearanceHeader.Options.UseTextOptions = true;
-            value_character.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_character.Caption = "Значение character";
-            value_character.FieldName = "value_character";
-            value_character.Name = "value_character";
-            value_character.OptionsColumn.ReadOnly = true;
-            value_character.Visible = true;
-            value_character.VisibleIndex = 5;
-            value_character.Width = 87;
-            // 
-            // value_datetime
-            // 
-            value_datetime.AppearanceCell.Options.UseTextOptions = true;
-            value_datetime.AppearanceCell.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_datetime.AppearanceHeader.Options.UseTextOptions = true;
-            value_datetime.AppearanceHeader.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
-            value_datetime.Caption = "Значение datetime";
-            value_datetime.FieldName = "value_datetime";
-            value_datetime.Name = "value_datetime";
-            value_datetime.OptionsColumn.ReadOnly = true;
-            value_datetime.Visible = true;
-            value_datetime.VisibleIndex = 6;
-            value_datetime.Width = 97;
+            valueSign.Caption = "Значение";
+            valueSign.FieldName = "value";
+            valueSign.Name = "valueSign";
+            valueSign.Visible = true;
+            valueSign.VisibleIndex = 3;
+            valueSign.Width = 96;
             // 
             // firm
             // 
@@ -373,8 +278,17 @@
             firm.Name = "firm";
             firm.OptionsColumn.ReadOnly = true;
             firm.Visible = true;
-            firm.VisibleIndex = 1;
-            firm.Width = 87;
+            firm.VisibleIndex = 2;
+            firm.Width = 101;
+            // 
+            // whereUses
+            // 
+            whereUses.Caption = "Где используется";
+            whereUses.FieldName = "whereUses";
+            whereUses.Name = "whereUses";
+            whereUses.Visible = true;
+            whereUses.VisibleIndex = 5;
+            whereUses.Width = 148;
             // 
             // pcId
             // 
@@ -383,6 +297,31 @@
             pcId.Name = "pcId";
             pcId.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             // 
+            // priznSign
+            // 
+            priznSign.Caption = "priznSign";
+            priznSign.FieldName = "priznSign";
+            priznSign.Name = "priznSign";
+            priznSign.Width = 47;
+            // 
+            // constant_name
+            // 
+            constant_name.Caption = "Имя константы";
+            constant_name.FieldName = "constant_name";
+            constant_name.Name = "constant_name";
+            constant_name.Visible = true;
+            constant_name.VisibleIndex = 1;
+            constant_name.Width = 96;
+            // 
+            // arhiv
+            // 
+            arhiv.Caption = "архив";
+            arhiv.FieldName = "arhiv";
+            arhiv.Name = "arhiv";
+            arhiv.Visible = true;
+            arhiv.VisibleIndex = 6;
+            arhiv.Width = 46;
+            // 
             // customGroupBoxAdd
             // 
             customGroupBoxAdd.BackColor = System.Drawing.Color.Transparent;
@@ -390,9 +329,10 @@
             customGroupBoxAdd.Controls.Add(tableLayoutPanel2);
             customGroupBoxAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             customGroupBoxAdd.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            customGroupBoxAdd.Location = new System.Drawing.Point(841, 96);
+            customGroupBoxAdd.Location = new System.Drawing.Point(839, 99);
             customGroupBoxAdd.Name = "customGroupBoxAdd";
-            customGroupBoxAdd.Size = new System.Drawing.Size(275, 344);
+            tableLayoutPanel1.SetRowSpan(customGroupBoxAdd, 2);
+            customGroupBoxAdd.Size = new System.Drawing.Size(277, 559);
             customGroupBoxAdd.TabIndex = 4;
             customGroupBoxAdd.TabStop = false;
             customGroupBoxAdd.Text = "Добавление";
@@ -403,6 +343,9 @@
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            tableLayoutPanel2.Controls.Add(customLabelWhereUses, 0, 9);
+            tableLayoutPanel2.Controls.Add(customComboBoxPriznSign, 1, 8);
+            tableLayoutPanel2.Controls.Add(customLabelPriznSign, 0, 8);
             tableLayoutPanel2.Controls.Add(customComboBoxOrg, 1, 7);
             tableLayoutPanel2.Controls.Add(customTextBoxOpis, 1, 3);
             tableLayoutPanel2.Controls.Add(customLabelNull, 0, 2);
@@ -417,14 +360,15 @@
             tableLayoutPanel2.Controls.Add(customTextBoxZnach, 1, 6);
             tableLayoutPanel2.Controls.Add(customTextBoxRazm, 1, 1);
             tableLayoutPanel2.Controls.Add(customCheckBoxNotRazm, 1, 2);
-            tableLayoutPanel2.Controls.Add(customButtonOtm, 0, 8);
-            tableLayoutPanel2.Controls.Add(customButtonSave, 1, 8);
             tableLayoutPanel2.Controls.Add(customComboBoxType, 1, 4);
             tableLayoutPanel2.Controls.Add(customDateTimePickerBegin, 1, 5);
+            tableLayoutPanel2.Controls.Add(customButtonSave, 1, 10);
+            tableLayoutPanel2.Controls.Add(customTextBoxWhereUses, 1, 9);
+            tableLayoutPanel2.Controls.Add(customButtonOtm, 0, 10);
             tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 9;
+            tableLayoutPanel2.RowCount = 11;
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -434,8 +378,49 @@
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            tableLayoutPanel2.Size = new System.Drawing.Size(269, 324);
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            tableLayoutPanel2.Size = new System.Drawing.Size(271, 539);
             tableLayoutPanel2.TabIndex = 3;
+            // 
+            // customLabelWhereUses
+            // 
+            customLabelWhereUses.AutoSize = true;
+            customLabelWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
+            customLabelWhereUses.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelWhereUses.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelWhereUses.Location = new System.Drawing.Point(3, 313);
+            customLabelWhereUses.Name = "customLabelWhereUses";
+            customLabelWhereUses.Size = new System.Drawing.Size(75, 63);
+            customLabelWhereUses.TabIndex = 48;
+            customLabelWhereUses.Text = "Где используется";
+            customLabelWhereUses.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // customComboBoxPriznSign
+            // 
+            customComboBoxPriznSign.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customComboBoxPriznSign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customComboBoxPriznSign.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBoxPriznSign.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customComboBoxPriznSign.FormattingEnabled = true;
+            customComboBoxPriznSign.Items.AddRange(new object[] { "1 - Экономист", "2 - Бухгалер", "3 - Программист" });
+            customComboBoxPriznSign.Location = new System.Drawing.Point(84, 286);
+            customComboBoxPriznSign.Name = "customComboBoxPriznSign";
+            customComboBoxPriznSign.Size = new System.Drawing.Size(184, 24);
+            customComboBoxPriznSign.TabIndex = 46;
+            // 
+            // customLabelPriznSign
+            // 
+            customLabelPriznSign.AutoSize = true;
+            customLabelPriznSign.Dock = System.Windows.Forms.DockStyle.Left;
+            customLabelPriznSign.Font = new System.Drawing.Font("Arial", 10F);
+            customLabelPriznSign.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customLabelPriznSign.Location = new System.Drawing.Point(3, 283);
+            customLabelPriznSign.Name = "customLabelPriznSign";
+            customLabelPriznSign.Size = new System.Drawing.Size(60, 30);
+            customLabelPriznSign.TabIndex = 45;
+            customLabelPriznSign.Text = "Признак";
+            customLabelPriznSign.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // customComboBoxOrg
             // 
@@ -444,9 +429,9 @@
             customComboBoxOrg.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxOrg.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxOrg.FormattingEnabled = true;
-            customComboBoxOrg.Location = new System.Drawing.Point(83, 254);
+            customComboBoxOrg.Location = new System.Drawing.Point(84, 254);
             customComboBoxOrg.Name = "customComboBoxOrg";
-            customComboBoxOrg.Size = new System.Drawing.Size(183, 24);
+            customComboBoxOrg.Size = new System.Drawing.Size(184, 24);
             customComboBoxOrg.TabIndex = 43;
             // 
             // customTextBoxOpis
@@ -455,10 +440,10 @@
             customTextBoxOpis.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxOpis.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxOpis.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxOpis.Location = new System.Drawing.Point(83, 90);
+            customTextBoxOpis.Location = new System.Drawing.Point(84, 90);
             customTextBoxOpis.Multiline = true;
             customTextBoxOpis.Name = "customTextBoxOpis";
-            customTextBoxOpis.Size = new System.Drawing.Size(183, 51);
+            customTextBoxOpis.Size = new System.Drawing.Size(184, 51);
             customTextBoxOpis.TabIndex = 41;
             // 
             // customLabelNull
@@ -556,9 +541,9 @@
             customTextBoxName.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxName.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxName.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxName.Location = new System.Drawing.Point(83, 3);
+            customTextBoxName.Location = new System.Drawing.Point(84, 3);
             customTextBoxName.Name = "customTextBoxName";
-            customTextBoxName.Size = new System.Drawing.Size(183, 23);
+            customTextBoxName.Size = new System.Drawing.Size(184, 23);
             customTextBoxName.TabIndex = 30;
             // 
             // customLabelName
@@ -580,9 +565,9 @@
             customTextBoxZnach.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxZnach.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxZnach.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxZnach.Location = new System.Drawing.Point(83, 225);
+            customTextBoxZnach.Location = new System.Drawing.Point(84, 225);
             customTextBoxZnach.Name = "customTextBoxZnach";
-            customTextBoxZnach.Size = new System.Drawing.Size(183, 23);
+            customTextBoxZnach.Size = new System.Drawing.Size(184, 23);
             customTextBoxZnach.TabIndex = 21;
             // 
             // customTextBoxRazm
@@ -591,9 +576,9 @@
             customTextBoxRazm.Dock = System.Windows.Forms.DockStyle.Fill;
             customTextBoxRazm.Font = new System.Drawing.Font("Arial", 10F);
             customTextBoxRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customTextBoxRazm.Location = new System.Drawing.Point(83, 32);
+            customTextBoxRazm.Location = new System.Drawing.Point(84, 32);
             customTextBoxRazm.Name = "customTextBoxRazm";
-            customTextBoxRazm.Size = new System.Drawing.Size(183, 23);
+            customTextBoxRazm.Size = new System.Drawing.Size(184, 23);
             customTextBoxRazm.TabIndex = 0;
             // 
             // customCheckBoxNotRazm
@@ -601,43 +586,13 @@
             customCheckBoxNotRazm.AutoSize = true;
             customCheckBoxNotRazm.Font = new System.Drawing.Font("Arial", 10F);
             customCheckBoxNotRazm.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customCheckBoxNotRazm.Location = new System.Drawing.Point(83, 64);
+            customCheckBoxNotRazm.Location = new System.Drawing.Point(84, 64);
             customCheckBoxNotRazm.Name = "customCheckBoxNotRazm";
             customCheckBoxNotRazm.Size = new System.Drawing.Size(139, 20);
             customCheckBoxNotRazm.TabIndex = 33;
             customCheckBoxNotRazm.Text = "нет размерности";
             customCheckBoxNotRazm.UseVisualStyleBackColor = true;
             customCheckBoxNotRazm.CheckedChanged += customCheckBoxNotRazm_CheckedChanged;
-            // 
-            // customButtonOtm
-            // 
-            customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonOtm.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonOtm.Location = new System.Drawing.Point(3, 286);
-            customButtonOtm.MaximumSize = new System.Drawing.Size(0, 40);
-            customButtonOtm.Name = "customButtonOtm";
-            customButtonOtm.Size = new System.Drawing.Size(74, 35);
-            customButtonOtm.TabIndex = 25;
-            customButtonOtm.Text = "Отмена";
-            customButtonOtm.UseVisualStyleBackColor = false;
-            customButtonOtm.Click += customButtonOtm_Click;
-            // 
-            // customButtonSave
-            // 
-            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonSave.Location = new System.Drawing.Point(83, 286);
-            customButtonSave.MaximumSize = new System.Drawing.Size(0, 40);
-            customButtonSave.Name = "customButtonSave";
-            customButtonSave.Size = new System.Drawing.Size(183, 35);
-            customButtonSave.TabIndex = 24;
-            customButtonSave.Text = "Сохранить";
-            customButtonSave.UseVisualStyleBackColor = false;
-            customButtonSave.Click += customButtonSave_Click;
             // 
             // customComboBoxType
             // 
@@ -646,9 +601,9 @@
             customComboBoxType.Font = new System.Drawing.Font("Arial", 10F);
             customComboBoxType.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
             customComboBoxType.FormattingEnabled = true;
-            customComboBoxType.Location = new System.Drawing.Point(83, 147);
+            customComboBoxType.Location = new System.Drawing.Point(84, 147);
             customComboBoxType.Name = "customComboBoxType";
-            customComboBoxType.Size = new System.Drawing.Size(183, 24);
+            customComboBoxType.Size = new System.Drawing.Size(184, 24);
             customComboBoxType.TabIndex = 42;
             // 
             // customDateTimePickerBegin
@@ -656,20 +611,64 @@
             customDateTimePickerBegin.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
             customDateTimePickerBegin.Font = new System.Drawing.Font("Arial", 10F);
             customDateTimePickerBegin.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
-            customDateTimePickerBegin.Location = new System.Drawing.Point(83, 177);
+            customDateTimePickerBegin.Location = new System.Drawing.Point(84, 177);
             customDateTimePickerBegin.Name = "customDateTimePickerBegin";
             customDateTimePickerBegin.ObjectName = null;
             customDateTimePickerBegin.Size = new System.Drawing.Size(183, 23);
             customDateTimePickerBegin.TabIndex = 44;
             // 
+            // customButtonSave
+            // 
+            customButtonSave.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonSave.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonSave.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonSave.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonSave.Location = new System.Drawing.Point(84, 379);
+            customButtonSave.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonSave.Name = "customButtonSave";
+            customButtonSave.Size = new System.Drawing.Size(184, 40);
+            customButtonSave.TabIndex = 24;
+            customButtonSave.Text = "Сохранить";
+            customButtonSave.UseVisualStyleBackColor = false;
+            customButtonSave.Click += customButtonSave_Click;
+            // 
+            // customTextBoxWhereUses
+            // 
+            customTextBoxWhereUses.BackColor = System.Drawing.Color.FromArgb(245, 245, 250);
+            customTextBoxWhereUses.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTextBoxWhereUses.Font = new System.Drawing.Font("Arial", 10F);
+            customTextBoxWhereUses.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTextBoxWhereUses.Location = new System.Drawing.Point(84, 316);
+            customTextBoxWhereUses.MaximumSize = new System.Drawing.Size(0, 80);
+            customTextBoxWhereUses.Multiline = true;
+            customTextBoxWhereUses.Name = "customTextBoxWhereUses";
+            customTextBoxWhereUses.Size = new System.Drawing.Size(184, 57);
+            customTextBoxWhereUses.TabIndex = 47;
+            // 
+            // customButtonOtm
+            // 
+            customButtonOtm.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonOtm.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonOtm.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonOtm.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonOtm.Location = new System.Drawing.Point(3, 379);
+            customButtonOtm.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonOtm.Name = "customButtonOtm";
+            customButtonOtm.Size = new System.Drawing.Size(75, 40);
+            customButtonOtm.TabIndex = 25;
+            customButtonOtm.Text = "Отмена";
+            customButtonOtm.UseVisualStyleBackColor = false;
+            customButtonOtm.Click += customButtonOtm_Click;
+            // 
             // customGridControlHistory
             // 
+            tableLayoutPanel1.SetColumnSpan(customGridControlHistory, 4);
             customGridControlHistory.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlHistory.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlHistory.Location = new System.Drawing.Point(3, 446);
+            customGridControlHistory.Location = new System.Drawing.Point(3, 472);
             customGridControlHistory.MainView = gridViewHistory;
             customGridControlHistory.Name = "customGridControlHistory";
-            customGridControlHistory.Size = new System.Drawing.Size(553, 189);
+            customGridControlHistory.Size = new System.Drawing.Size(830, 186);
             customGridControlHistory.TabIndex = 7;
             customGridControlHistory.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewHistory });
             // 
@@ -681,7 +680,7 @@
             gridViewHistory.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
             gridViewHistory.Appearance.FocusedRow.Options.UseBackColor = true;
             gridViewHistory.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Value, begin_dt_h, event_dt });
+            gridViewHistory.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { Value, begin_dt_h, event_dt, userName, userComp });
             gridViewHistory.GridControl = customGridControlHistory;
             gridViewHistory.Name = "gridViewHistory";
             gridViewHistory.OptionsBehavior.Editable = false;
@@ -715,16 +714,215 @@
             event_dt.Visible = true;
             event_dt.VisibleIndex = 0;
             // 
+            // userName
+            // 
+            userName.Caption = "Пользователь";
+            userName.FieldName = "userName";
+            userName.Name = "userName";
+            userName.Visible = true;
+            userName.VisibleIndex = 3;
+            // 
+            // userComp
+            // 
+            userComp.Caption = "Компьютер";
+            userComp.FieldName = "userComp";
+            userComp.Name = "userComp";
+            userComp.Visible = true;
+            userComp.VisibleIndex = 4;
+            // 
+            // customButtonEdit
+            // 
+            customButtonEdit.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonEdit.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonEdit.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonEdit.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonEdit.Location = new System.Drawing.Point(839, 35);
+            customButtonEdit.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonEdit.Name = "customButtonEdit";
+            customButtonEdit.Size = new System.Drawing.Size(133, 26);
+            customButtonEdit.TabIndex = 9;
+            customButtonEdit.Text = "Редактировать";
+            customButtonEdit.UseVisualStyleBackColor = false;
+            customButtonEdit.Click += customButtonEdit_Click;
+            // 
+            // customButtonAdd
+            // 
+            customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
+            customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
+            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
+            customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
+            customButtonAdd.Location = new System.Drawing.Point(978, 35);
+            customButtonAdd.MaximumSize = new System.Drawing.Size(0, 40);
+            customButtonAdd.Name = "customButtonAdd";
+            customButtonAdd.Size = new System.Drawing.Size(138, 26);
+            customButtonAdd.TabIndex = 6;
+            customButtonAdd.Text = "Добавить";
+            customButtonAdd.UseVisualStyleBackColor = false;
+            customButtonAdd.Click += customButtonAdd_Click;
+            // 
+            // customGroupBoxFiltr
+            // 
+            customGroupBoxFiltr.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customGroupBoxFiltr, 2);
+            customGroupBoxFiltr.Controls.Add(customRadioButtonMay);
+            customGroupBoxFiltr.Controls.Add(customRadioButtonAll);
+            customGroupBoxFiltr.Controls.Add(customRadioButtonExp);
+            customGroupBoxFiltr.Controls.Add(customRadioButtonAceKle);
+            customGroupBoxFiltr.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxFiltr.Location = new System.Drawing.Point(421, 3);
+            customGroupBoxFiltr.Name = "customGroupBoxFiltr";
+            customGroupBoxFiltr.Size = new System.Drawing.Size(412, 26);
+            customGroupBoxFiltr.TabIndex = 1;
+            customGroupBoxFiltr.TabStop = false;
+            // 
+            // customRadioButtonMay
+            // 
+            customRadioButtonMay.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customRadioButtonMay.AutoSize = true;
+            customRadioButtonMay.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioButtonMay.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customRadioButtonMay.Location = new System.Drawing.Point(261, 2);
+            customRadioButtonMay.Name = "customRadioButtonMay";
+            customRadioButtonMay.ObjectName = null;
+            customRadioButtonMay.Size = new System.Drawing.Size(52, 20);
+            customRadioButtonMay.TabIndex = 3;
+            customRadioButtonMay.TabStop = true;
+            customRadioButtonMay.Text = "Май";
+            customRadioButtonMay.UseVisualStyleBackColor = true;
+            customRadioButtonMay.CheckedChanged += Filter;
+            // 
+            // customRadioButtonAll
+            // 
+            customRadioButtonAll.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customRadioButtonAll.AutoSize = true;
+            customRadioButtonAll.Checked = true;
+            customRadioButtonAll.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioButtonAll.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customRadioButtonAll.Location = new System.Drawing.Point(332, 2);
+            customRadioButtonAll.Name = "customRadioButtonAll";
+            customRadioButtonAll.ObjectName = null;
+            customRadioButtonAll.Size = new System.Drawing.Size(49, 20);
+            customRadioButtonAll.TabIndex = 2;
+            customRadioButtonAll.TabStop = true;
+            customRadioButtonAll.Text = "Все";
+            customRadioButtonAll.UseVisualStyleBackColor = true;
+            customRadioButtonAll.CheckedChanged += Filter;
+            // 
+            // customRadioButtonExp
+            // 
+            customRadioButtonExp.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customRadioButtonExp.AutoSize = true;
+            customRadioButtonExp.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioButtonExp.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customRadioButtonExp.Location = new System.Drawing.Point(127, 2);
+            customRadioButtonExp.Name = "customRadioButtonExp";
+            customRadioButtonExp.ObjectName = null;
+            customRadioButtonExp.Size = new System.Drawing.Size(113, 20);
+            customRadioButtonExp.TabIndex = 1;
+            customRadioButtonExp.Text = "Эксперимент";
+            customRadioButtonExp.UseVisualStyleBackColor = true;
+            customRadioButtonExp.CheckedChanged += Filter;
+            // 
+            // customRadioButtonAceKle
+            // 
+            customRadioButtonAceKle.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customRadioButtonAceKle.AutoSize = true;
+            customRadioButtonAceKle.Font = new System.Drawing.Font("Arial", 10F);
+            customRadioButtonAceKle.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customRadioButtonAceKle.Location = new System.Drawing.Point(16, 2);
+            customRadioButtonAceKle.Name = "customRadioButtonAceKle";
+            customRadioButtonAceKle.ObjectName = null;
+            customRadioButtonAceKle.Size = new System.Drawing.Size(105, 20);
+            customRadioButtonAceKle.TabIndex = 0;
+            customRadioButtonAceKle.Text = "Эйс, Клевер";
+            customRadioButtonAceKle.UseVisualStyleBackColor = true;
+            customRadioButtonAceKle.CheckedChanged += Filter;
+            // 
+            // customGroupBoxPriznSign
+            // 
+            customGroupBoxPriznSign.BackColor = System.Drawing.Color.Transparent;
+            tableLayoutPanel1.SetColumnSpan(customGroupBoxPriznSign, 2);
+            customGroupBoxPriznSign.Controls.Add(customCheckBoxProg);
+            customGroupBoxPriznSign.Controls.Add(customCheckBoxByh);
+            customGroupBoxPriznSign.Controls.Add(customCheckBoxEco);
+            customGroupBoxPriznSign.Dock = System.Windows.Forms.DockStyle.Fill;
+            customGroupBoxPriznSign.Location = new System.Drawing.Point(3, 3);
+            customGroupBoxPriznSign.Name = "customGroupBoxPriznSign";
+            customGroupBoxPriznSign.Size = new System.Drawing.Size(412, 26);
+            customGroupBoxPriznSign.TabIndex = 10;
+            customGroupBoxPriznSign.TabStop = false;
+            // 
+            // customCheckBoxProg
+            // 
+            customCheckBoxProg.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customCheckBoxProg.AutoSize = true;
+            customCheckBoxProg.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxProg.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customCheckBoxProg.Location = new System.Drawing.Point(277, 2);
+            customCheckBoxProg.Name = "customCheckBoxProg";
+            customCheckBoxProg.Size = new System.Drawing.Size(135, 20);
+            customCheckBoxProg.TabIndex = 2;
+            customCheckBoxProg.Text = "3 - Программист";
+            customCheckBoxProg.UseVisualStyleBackColor = true;
+            customCheckBoxProg.CheckedChanged += Filter;
+            // 
+            // customCheckBoxByh
+            // 
+            customCheckBoxByh.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customCheckBoxByh.AutoSize = true;
+            customCheckBoxByh.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxByh.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customCheckBoxByh.Location = new System.Drawing.Point(141, 2);
+            customCheckBoxByh.Name = "customCheckBoxByh";
+            customCheckBoxByh.Size = new System.Drawing.Size(113, 20);
+            customCheckBoxByh.TabIndex = 1;
+            customCheckBoxByh.Text = "2 - Бухгалтер";
+            customCheckBoxByh.UseVisualStyleBackColor = true;
+            customCheckBoxByh.CheckedChanged += Filter;
+            // 
+            // customCheckBoxEco
+            // 
+            customCheckBoxEco.Anchor = System.Windows.Forms.AnchorStyles.None;
+            customCheckBoxEco.AutoSize = true;
+            customCheckBoxEco.Font = new System.Drawing.Font("Arial", 10F);
+            customCheckBoxEco.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customCheckBoxEco.Location = new System.Drawing.Point(6, 2);
+            customCheckBoxEco.Name = "customCheckBoxEco";
+            customCheckBoxEco.Size = new System.Drawing.Size(119, 20);
+            customCheckBoxEco.TabIndex = 0;
+            customCheckBoxEco.Text = "1 - Экономист";
+            customCheckBoxEco.UseVisualStyleBackColor = true;
+            customCheckBoxEco.CheckedChanged += Filter;
+            // 
+            // customTabControlZpTarif
+            // 
+            customTabControlZpTarif.Appearance.ForeColor = System.Drawing.Color.FromArgb(85, 45, 115);
+            customTabControlZpTarif.Appearance.Options.UseForeColor = true;
+            customTabControlZpTarif.Dock = System.Windows.Forms.DockStyle.Fill;
+            customTabControlZpTarif.Location = new System.Drawing.Point(0, 0);
+            customTabControlZpTarif.Name = "customTabControlZpTarif";
+            customTabControlZpTarif.ObjectName = null;
+            customTabControlZpTarif.SelectedTabPage = xtraTabPageZP;
+            customTabControlZpTarif.Size = new System.Drawing.Size(1121, 686);
+            customTabControlZpTarif.TabIndex = 0;
+            customTabControlZpTarif.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { xtraTabPageZP, xtraTabPageTRR });
+            // 
+            // xtraTabPageTRR
+            // 
+            xtraTabPageTRR.Controls.Add(customGridControlTR);
+            xtraTabPageTRR.Name = "xtraTabPageTRR";
+            xtraTabPageTRR.Size = new System.Drawing.Size(1119, 661);
+            xtraTabPageTRR.Text = "Тарифы разовых работ";
+            // 
             // customGridControlTR
             // 
-            tableLayoutPanel1.SetColumnSpan(customGridControlTR, 3);
             customGridControlTR.Dock = System.Windows.Forms.DockStyle.Fill;
             customGridControlTR.Font = new System.Drawing.Font("Arial", 10F);
-            customGridControlTR.Location = new System.Drawing.Point(562, 446);
+            customGridControlTR.Location = new System.Drawing.Point(0, 0);
             customGridControlTR.MainView = gridViewTR;
             customGridControlTR.Name = "customGridControlTR";
-            customGridControlTR.Size = new System.Drawing.Size(554, 189);
-            customGridControlTR.TabIndex = 8;
+            customGridControlTR.Size = new System.Drawing.Size(1119, 661);
+            customGridControlTR.TabIndex = 9;
             customGridControlTR.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewTR });
             customGridControlTR.Load += customGridControlTR_Load;
             // 
@@ -809,64 +1007,18 @@
             text_name.VisibleIndex = 1;
             text_name.Width = 330;
             // 
-            // customButtonEdit
-            // 
-            customButtonEdit.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonEdit.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonEdit.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonEdit.Location = new System.Drawing.Point(841, 34);
-            customButtonEdit.MaximumSize = new System.Drawing.Size(0, 40);
-            customButtonEdit.Name = "customButtonEdit";
-            customButtonEdit.Size = new System.Drawing.Size(133, 25);
-            customButtonEdit.TabIndex = 9;
-            customButtonEdit.Text = "Редактировать";
-            customButtonEdit.UseVisualStyleBackColor = false;
-            customButtonEdit.Click += customButtonEdit_Click;
-            // 
-            // customButtonAdd
-            // 
-            customButtonAdd.BackColor = System.Drawing.Color.FromArgb(230, 230, 250);
-            customButtonAdd.Dock = System.Windows.Forms.DockStyle.Fill;
-            customButtonAdd.Font = new System.Drawing.Font("Arial", 10F);
-            customButtonAdd.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
-            customButtonAdd.Location = new System.Drawing.Point(980, 34);
-            customButtonAdd.MaximumSize = new System.Drawing.Size(0, 40);
-            customButtonAdd.Name = "customButtonAdd";
-            customButtonAdd.Size = new System.Drawing.Size(136, 25);
-            customButtonAdd.TabIndex = 6;
-            customButtonAdd.Text = "Добавить";
-            customButtonAdd.UseVisualStyleBackColor = false;
-            customButtonAdd.Click += customButtonAdd_Click;
-            // 
-            // xtraTabPageTarif
-            // 
-            xtraTabPageTarif.Name = "xtraTabPageTarif";
-            xtraTabPageTarif.Size = new System.Drawing.Size(1119, 638);
-            xtraTabPageTarif.Text = "Тарифы";
-            // 
-            // Название
-            // 
-            Название.Caption = "text";
-            Название.Name = "Название";
-            Название.Visible = true;
-            Название.VisibleIndex = 1;
-            // 
             // EditTarif
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1121, 663);
+            ClientSize = new System.Drawing.Size(1121, 686);
             Controls.Add(customTabControlZpTarif);
             Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             Name = "EditTarif";
             Text = "Изменение тарифов, констант";
-            ((System.ComponentModel.ISupportInitialize)customTabControlZpTarif).EndInit();
-            customTabControlZpTarif.ResumeLayout(false);
+            Shown += EditTarif_Shown;
             xtraTabPageZP.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
-            customGroupBoxFiltr.ResumeLayout(false);
-            customGroupBoxFiltr.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlZp).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewZp).EndInit();
             customGroupBoxAdd.ResumeLayout(false);
@@ -874,55 +1026,71 @@
             tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)customGridControlHistory).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewHistory).EndInit();
+            customGroupBoxFiltr.ResumeLayout(false);
+            customGroupBoxFiltr.PerformLayout();
+            customGroupBoxPriznSign.ResumeLayout(false);
+            customGroupBoxPriznSign.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)customTabControlZpTarif).EndInit();
+            customTabControlZpTarif.ResumeLayout(false);
+            xtraTabPageTRR.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)customGridControlTR).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewTR).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
-
-        private CustomTabControl customTabControlZpTarif;
+        private DevExpress.XtraGrid.Columns.GridColumn Название;
         private DevExpress.XtraTab.XtraTabPage xtraTabPageZP;
-        private DevExpress.XtraTab.XtraTabPage xtraTabPageTarif;
-        private CustomRadioButton customRadioButtonAceKle;
-        private Core.Class.CustomGridControl customGridControlZp;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewZp;
-        private CustomGroupBox customGroupBoxFiltr;
-        private CustomRadioButton customRadioButtonAll;
-        private CustomRadioButton customRadioButtonExp;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private CustomTextBox customTextBoxRazm;
-        private Core.Class.CustomButton customButtonOtm;
-        private CustomTextBox customTextBoxZnach;
-        private Core.Class.CustomButton customButtonSave;
-        private CustomGroupBox customGroupBoxAdd;
-        private CustomComboBox customComboBoxOrg;
-        private CustomTextBox customTextBoxOpis;
-        private CustomLabel customLabelNull;
-        private CustomLabel customLabelOrg;
-        private CustomLabel customLabelZnach;
-        private CustomLabel customLabelDate;
-        private CustomLabel customLabelType;
-        private CustomLabel customLabelOpis;
-        private CustomLabel customLabelRazm;
-        private CustomTextBox customTextBoxName;
-        private CustomLabel customLabelName;
-        private CustomCheckBox customCheckBoxNotRazm;
-        private CustomComboBox customComboBoxType;
-        private Core.Class.CustomButton customButtonAdd;
-        private Core.Class.CustomGridControl customGridControlHistory;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewHistory;
+        private Core.Class.CustomGridControlColumn customGridControlZp;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewZp;
         private DevExpress.XtraGrid.Columns.GridColumn describe;
         private DevExpress.XtraGrid.Columns.GridColumn begin_dt;
-        private DevExpress.XtraGrid.Columns.GridColumn value_numeric;
-        private DevExpress.XtraGrid.Columns.GridColumn value_datetime;
-        private DevExpress.XtraGrid.Columns.GridColumn value_integer;
-        private DevExpress.XtraGrid.Columns.GridColumn value_float;
-        private DevExpress.XtraGrid.Columns.GridColumn value_character;
         private DevExpress.XtraGrid.Columns.GridColumn firm;
-        private DevExpress.XtraGrid.Columns.GridColumn Название;
+        private DevExpress.XtraGrid.Columns.GridColumn pcId;
+        private DevExpress.XtraGrid.Columns.GridColumn priznSign;
+        private CustomGroupBox customGroupBoxAdd;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private CustomComboBox customComboBoxOrg;
+        private CustomTextBox customTextBoxOpis;
+        private Core.Class.CustomLabel customLabelNull;
+        private Core.Class.CustomLabel customLabelOrg;
+        private Core.Class.CustomLabel customLabelZnach;
+        private Core.Class.CustomLabel customLabelDate;
+        private Core.Class.CustomLabel customLabelType;
+        private Core.Class.CustomLabel customLabelOpis;
+        private Core.Class.CustomLabel customLabelRazm;
+        private CustomTextBox customTextBoxName;
+        private Core.Class.CustomLabel customLabelName;
+        private CustomTextBox customTextBoxZnach;
+        private CustomTextBox customTextBoxRazm;
+        private CustomCheckBox customCheckBoxNotRazm;
+        private Core.Class.CustomButton customButtonOtm;
+        private Core.Class.CustomButton customButtonSave;
+        private CustomComboBox customComboBoxType;
+        private CustomDateTimePicker customDateTimePickerBegin;
+        private Core.Class.CustomGridControl customGridControlHistory;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewHistory;
+        private DevExpress.XtraGrid.Columns.GridColumn Value;
+        private DevExpress.XtraGrid.Columns.GridColumn begin_dt_h;
+        private DevExpress.XtraGrid.Columns.GridColumn event_dt;
+        private Core.Class.CustomButton customButtonEdit;
+        private Core.Class.CustomButton customButtonAdd;
+        private CustomGroupBox customGroupBoxFiltr;
         private CustomRadioButton customRadioButtonMay;
+        private CustomRadioButton customRadioButtonAll;
+        private CustomRadioButton customRadioButtonExp;
+        private CustomRadioButton customRadioButtonAceKle;
+        private CustomGroupBox customGroupBoxPriznSign;
+        private CustomCheckBox customCheckBoxProg;
+        private CustomCheckBox customCheckBoxByh;
+        private CustomCheckBox customCheckBoxEco;
+        private CustomTabControl customTabControlZpTarif;
+        private CustomComboBox customComboBoxPriznSign;
+        private Core.Class.CustomLabel customLabelPriznSign;
+        private DevExpress.XtraGrid.Columns.GridColumn userName;
+        private DevExpress.XtraGrid.Columns.GridColumn userComp;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageTRR;
         private Core.Class.CustomGridControl customGridControlTR;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewTR;
         private DevExpress.XtraGrid.Columns.GridColumn id_kod_o;
@@ -932,11 +1100,13 @@
         private DevExpress.XtraGrid.Columns.GridColumn koef_chas;
         private DevExpress.XtraGrid.Columns.GridColumn razr;
         private DevExpress.XtraGrid.Columns.GridColumn text_name;
-        private CustomDateTimePicker customDateTimePickerBegin;
-        private Core.Class.CustomButton customButtonEdit;
-        private DevExpress.XtraGrid.Columns.GridColumn pcId;
-        private DevExpress.XtraGrid.Columns.GridColumn Value;
-        private DevExpress.XtraGrid.Columns.GridColumn begin_dt_h;
-        private DevExpress.XtraGrid.Columns.GridColumn event_dt;
+        private DevExpress.XtraGrid.Columns.GridColumn valueSign;
+        private DevExpress.XtraGrid.Columns.GridColumn whereUses;
+        private Core.Class.CustomLabel customLabelWhereUses;
+        private CustomTextBox customTextBoxWhereUses;
+        private DevExpress.XtraGrid.Columns.GridColumn constant_name;
+        private Core.Class.CustomButton customButtonExcel;
+        private Core.Class.CustomButton customButtonArhiv;
+        private DevExpress.XtraGrid.Columns.GridColumn arhiv;
     }
 }

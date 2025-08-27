@@ -10,8 +10,8 @@ namespace SewingProduction.Features.Sprav
 {
     public class TarifModel : INotifyPropertyChanged
     {
-        public string constant_name { get; set; }
         public string typeConst { get; set; }
+        public string constant_name { get; set; }
 
         private int _pcId;
         [Column("pc_id")]
@@ -47,6 +47,14 @@ namespace SewingProduction.Features.Sprav
         {
             get => _begin_dt;
             set { if (_begin_dt != value) { _begin_dt = value; OnPropertyChanged(nameof(begin_dt)); } }
+        }
+
+        private string _value;
+        [Column("value")]
+        public string value
+        {
+            get => _value;
+            set { if (_value != value) { _value = value; OnPropertyChanged(nameof(value)); } }
         }
 
         private decimal? _value_numeric;
@@ -110,6 +118,27 @@ namespace SewingProduction.Features.Sprav
         //public string valCh { get; set; }
         //[NotMapped]
         //public DateTime valDat { get; set; }
+        private int _priznSign;
+        [Column("priznSign")]
+        public int priznSign
+        {
+            get => _priznSign;
+            set { if (_priznSign != value) { _priznSign = value; OnPropertyChanged(nameof(priznSign)); } }
+        }
+        private string _whereUses;
+        [Column("whereUses")]
+        public string whereUses
+        {
+            get => _whereUses;
+            set { if (_whereUses != value) { _whereUses = value; OnPropertyChanged(nameof(whereUses)); } }
+        }
+        private int _arhiv;
+        [Column("arhiv")]
+        public int arhiv
+        {
+            get => _arhiv;
+            set { if (_arhiv != value) { _arhiv = value; OnPropertyChanged(nameof(arhiv)); } }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propName) =>
@@ -119,7 +148,7 @@ namespace SewingProduction.Features.Sprav
     {
         public int pcst_id { get; set; }
         public string field_name { get; set; }
-        public int type_n { get; set; }
+        public string type_n { get; set; }
         public string store_name { get; set; }
         public string name_field_id { get; set; }
     }
@@ -129,5 +158,7 @@ namespace SewingProduction.Features.Sprav
         public object value { get; set; }
         public DateTime event_dt { get; set; }
         public DateTime begin_dt { get; set; }
+        public int userID { get; set; }
+        public string userComp { get; set; }
     }
 }

@@ -194,7 +194,7 @@ namespace SewingProduction.Core.Class
                 foreach (var tableName in tableNames)
                 {
                     var tableId = await tableService.GetTableIdByNameAsync(tableName);
-                    if (tableId.HasValue)
+                    if (tableId.HasValue && tableId.Value > 0)
                     {
                         Debug.WriteLine($"[InitializeAccess] Таблица '{tableName}' → ID: {tableId.Value}");
                         var columns = await columnService.GetColumnsWithAccessAsync(roleIds, ObjectName, _formId, tableId.Value);

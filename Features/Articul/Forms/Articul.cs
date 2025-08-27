@@ -14,36 +14,46 @@ using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Help.Form;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using SewingProduction.Features.Articul.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.Articul.Models;
+using SewingProduction.Features.Articul.Service;
+using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Class;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
-namespace SewingProduction.form
+namespace SewingProduction.Features.Articul
 {
     public partial class Articul : CustomForm
     {
         private readonly DatabaseHelper _dbHelperAce;
-
-        //public Articul(UserClass user) : base(user)
-        public Articul()
+        List<ArticulModel> _articuls;
+        ArticulDataService _articulDataService = new ArticulDataService();
+        public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
             InitializeComponent();
-
         }
 
 
-        private void Articul_Load(object sender, EventArgs e)
+        private async void Articul_Load(object sender, EventArgs e)
         {
             // данная строка кода позволяет загрузить данные в таблицу "aCE_backupDataSet.art_norm_n". При необходимости она может быть перемещена или удалена.
             //this.art_norm_nTableAdapter.Fill(this.aCE_backupDataSet.art_norm_n);
             try
             {
+                _articuls = await _articulDataService.GetAllAsync();
                 //загрузка перечня кодов из справочника, часть полей
-                string query = $"select * from dbo.view_art";
+                //string query = $"select * from dbo.view_art";
                 //kodd,kod, grup, articul, razm, mod, kle
-                var dt = _dbHelperAce.ExecuteQuery(query);
+                //var dt = _dbHelperAce.ExecuteQuery(query);
 
-                bsArt.DataSource = dt;
+                //bsArt.DataSource = dt;
+                bsArt.DataSource = _articuls;
                 // загрузка одиночного кода из справочника, все поля  
                 getArticulFromSQl("0");
 
@@ -299,19 +309,29 @@ namespace SewingProduction.form
 
         }
 
-        private void customButton3_Click(object sender, EventArgs e)
+        private void customButtonAdd_Click(object sender, EventArgs e)
         {
-        }
-
-        private void customButton4_Click(object sender, EventArgs e)
-        {
-            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
-            var kod = ((DataRowView)data).Row["kod"].ToString();
-            art_new2024 f = new art_new2024(kod);
+            EditAricul f = new EditAricul();
             if (f.ShowDialog() == DialogResult.OK)
             {
-                // Обновляем таблицу
                 Articul_Load(sender, e);
+            }
+        }
+        private void customButtonCopy_Click(object sender, EventArgs e)
+        {
+            var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            EditAricul f = new EditAricul(kodObj.ToString());
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                Articul_Load(sender, e);
+            }
+        }
+        private void customButtonKompl_Click(object sender, EventArgs e)
+        {
+            var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            if (this.MdiParent is SpMainForm mainForm)
+            {
+                mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));
             }
         }
     }
