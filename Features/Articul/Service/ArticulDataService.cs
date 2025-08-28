@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -38,7 +39,13 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetEntityAsync<SpArticulPreviewModel>(query, new { kod });
 
         }
+        public async Task<List<ArtDrModel>> GetArtDrByKod(string kod)
+        {
+            string query = $"select * from dbo.view_art_dr where kod = @kod";
 
+            return await _dbService.GetListAsync<ArtDrModel>(query, new { kod });
+
+        }
         public async Task SaveAsync(ArticulModel model)
         {
             await _dbService.SaveEntityAsync("sp_articul", "Kod", model);
@@ -59,5 +66,7 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetEntityAsync<string>(query, new { kod });
 
         }
+
+        public List<>
     }
 }

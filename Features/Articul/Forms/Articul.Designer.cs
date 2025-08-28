@@ -32,8 +32,8 @@ namespace SewingProduction.Features.Articul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
-            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
             bsArt = new System.Windows.Forms.BindingSource(components);
@@ -92,8 +92,6 @@ namespace SewingProduction.Features.Articul
             txbPo = new CustomTextBox();
             label1 = new CustomLabel();
             txbKod = new CustomTextBox();
-            cbTM = new CustomComboBox();
-            bsTM = new System.Windows.Forms.BindingSource(components);
             bsArticul = new System.Windows.Forms.BindingSource(components);
             tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             customButtonAdd = new CustomButton();
@@ -113,10 +111,8 @@ namespace SewingProduction.Features.Articul
             customComboBox5 = new CustomComboBox();
             customComboBox3 = new CustomComboBox();
             customComboBox4 = new CustomComboBox();
-            checkedComboBoxEdit2 = new DevExpress.XtraEditors.CheckedComboBoxEdit();
             comboBoxEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
             searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
             gbTkanInfo = new System.Windows.Forms.GroupBox();
             customLabel30 = new CustomLabel();
             customLabel31 = new CustomLabel();
@@ -180,8 +176,6 @@ namespace SewingProduction.Features.Articul
             txbSekShv = new CustomTextBox();
             txbSekVyaz = new CustomTextBox();
             txbSek = new CustomTextBox();
-            gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
-            gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridArtDr = new DevExpress.XtraGrid.GridControl();
             bsArtDr = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -203,7 +197,8 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customButton7 = new CustomButton();
             gbKompl = new System.Windows.Forms.GroupBox();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
+            cGridKomplSost = new CustomGridControl();
+            gridViewKomplSost = new DevExpress.XtraGrid.Views.Grid.GridView();
             gbNabor = new System.Windows.Forms.GroupBox();
             dataGridView2 = new System.Windows.Forms.DataGridView();
             customButtonKart = new CustomButton();
@@ -211,7 +206,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsTM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
             tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
@@ -219,33 +213,30 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             flowLayoutPanel1.SuspendLayout();
             gbTkanName.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).BeginInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEdit1.Properties).BeginInit();
             gbTkanInfo.SuspendLayout();
             gbBrakPercent.SuspendLayout();
             gbTkanBrak.SuspendLayout();
             gbTkanSeb.SuspendLayout();
             gbTkanNorm.SuspendLayout();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             groupBox2.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             gbKompl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).BeginInit();
             gbNabor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
             SuspendLayout();
             // 
             // grArtDrName
             // 
-            grArtDrName.Caption = "название";
-            grArtDrName.FieldName = "articul_poln";
+            grArtDrName.Caption = "Название";
+            grArtDrName.FieldName = "Articul_poln";
             grArtDrName.MinWidth = 23;
             grArtDrName.Name = "grArtDrName";
             grArtDrName.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
@@ -989,19 +980,6 @@ namespace SewingProduction.Features.Articul
             txbKod.Size = new Size(86, 15);
             txbKod.TabIndex = 0;
             // 
-            // cbTM
-            // 
-            cbTM.BackColor = Color.FromArgb(248, 248, 255);
-            cbTM.DataSource = bsTM;
-            cbTM.Font = new Font("Arial", 10F);
-            cbTM.ForeColor = Color.FromArgb(72, 61, 139);
-            cbTM.FormattingEnabled = true;
-            cbTM.Location = new Point(1640, 310);
-            cbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cbTM.Name = "cbTM";
-            cbTM.Size = new Size(119, 24);
-            cbTM.TabIndex = 7;
-            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
@@ -1199,7 +1177,7 @@ namespace SewingProduction.Features.Articul
             gbTkanName.Controls.Add(customComboBox5);
             gbTkanName.Controls.Add(customComboBox3);
             gbTkanName.Controls.Add(customComboBox4);
-            gbTkanName.Location = new Point(103, 3);
+            gbTkanName.Location = new Point(103, 8);
             gbTkanName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbTkanName.Name = "gbTkanName";
             gbTkanName.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1291,16 +1269,6 @@ namespace SewingProduction.Features.Articul
             customComboBox4.Size = new Size(81, 22);
             customComboBox4.TabIndex = 20;
             // 
-            // checkedComboBoxEdit2
-            // 
-            checkedComboBoxEdit2.Location = new Point(1660, 358);
-            checkedComboBoxEdit2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            checkedComboBoxEdit2.Name = "checkedComboBoxEdit2";
-            checkedComboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            checkedComboBoxEdit2.Properties.DataSource = bsTM;
-            checkedComboBoxEdit2.Size = new Size(117, 20);
-            checkedComboBoxEdit2.TabIndex = 15;
-            // 
             // comboBoxEdit1
             // 
             comboBoxEdit1.Location = new Point(1644, 267);
@@ -1321,15 +1289,6 @@ namespace SewingProduction.Features.Articul
             searchLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
             searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
             searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
-            // 
-            // lookUpEdit1
-            // 
-            lookUpEdit1.Location = new Point(1674, 444);
-            lookUpEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            lookUpEdit1.Name = "lookUpEdit1";
-            lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            lookUpEdit1.Size = new Size(113, 20);
-            lookUpEdit1.TabIndex = 18;
             // 
             // gbTkanInfo
             // 
@@ -1728,7 +1687,7 @@ namespace SewingProduction.Features.Articul
             gbTkanSeb.Controls.Add(txbTkanSeb_t3);
             gbTkanSeb.Controls.Add(txbTkanSeb_t2);
             gbTkanSeb.Controls.Add(txbTkanSeb_t1);
-            gbTkanSeb.Location = new Point(308, 3);
+            gbTkanSeb.Location = new Point(308, 8);
             gbTkanSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbTkanSeb.Name = "gbTkanSeb";
             gbTkanSeb.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1883,7 +1842,7 @@ namespace SewingProduction.Features.Articul
             gbTkanNorm.Controls.Add(txbNorm_t3);
             gbTkanNorm.Controls.Add(txbNorm_t2);
             gbTkanNorm.Controls.Add(txbNorm_t1);
-            gbTkanNorm.Location = new Point(202, 3);
+            gbTkanNorm.Location = new Point(202, 8);
             gbTkanNorm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbTkanNorm.Name = "gbTkanNorm";
             gbTkanNorm.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2131,32 +2090,14 @@ namespace SewingProduction.Features.Articul
             // txbSek
             // 
             txbSek.BackColor = Color.FromArgb(248, 248, 255);
+            txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSek.Font = new Font("Arial", 10F);
             txbSek.ForeColor = Color.FromArgb(72, 61, 139);
             txbSek.Location = new Point(9, 23);
             txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSek.Name = "txbSek";
-            txbSek.Size = new Size(90, 23);
+            txbSek.Size = new Size(90, 16);
             txbSek.TabIndex = 0;
-            // 
-            // gridLookUpEdit1
-            // 
-            gridLookUpEdit1.Location = new Point(1643, 474);
-            gridLookUpEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridLookUpEdit1.Name = "gridLookUpEdit1";
-            gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            gridLookUpEdit1.Properties.PopupView = gridLookUpEdit1View;
-            gridLookUpEdit1.Size = new Size(161, 20);
-            gridLookUpEdit1.TabIndex = 25;
-            // 
-            // gridLookUpEdit1View
-            // 
-            gridLookUpEdit1View.DetailHeight = 404;
-            gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            gridLookUpEdit1View.Name = "gridLookUpEdit1View";
-            gridLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
-            gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gridArtDr
             // 
@@ -2176,13 +2117,13 @@ namespace SewingProduction.Features.Articul
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grArtDrName, grArtDrEd, artDrSeb, grArtDrKol, grArtDrSum, grArtDrKod_fur, grArtDrKod_furn_ar, grArtDrData_nitki });
             gridView1.DetailHeight = 404;
-            gridFormatRule1.ColumnApplyTo = grArtDrName;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.ForeColor = Color.Cyan;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Expression = "1=1";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridView1.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ColumnApplyTo = grArtDrName;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.ForeColor = Color.Cyan;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Expression = "1=1";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridView1.FormatRules.Add(gridFormatRule2);
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
@@ -2190,8 +2131,8 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrEd
             // 
-            grArtDrEd.Caption = "ед.изм.";
-            grArtDrEd.FieldName = "t_ed";
+            grArtDrEd.Caption = "Ед.изм.";
+            grArtDrEd.FieldName = "T_ed";
             grArtDrEd.MinWidth = 23;
             grArtDrEd.Name = "grArtDrEd";
             grArtDrEd.Visible = true;
@@ -2200,8 +2141,8 @@ namespace SewingProduction.Features.Articul
             // 
             // artDrSeb
             // 
-            artDrSeb.Caption = "себ-ть";
-            artDrSeb.FieldName = "t_seb";
+            artDrSeb.Caption = "Себ-ть";
+            artDrSeb.FieldName = "T_seb";
             artDrSeb.MinWidth = 23;
             artDrSeb.Name = "artDrSeb";
             artDrSeb.Visible = true;
@@ -2210,8 +2151,8 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrKol
             // 
-            grArtDrKol.Caption = "кол-во";
-            grArtDrKol.FieldName = "kol";
+            grArtDrKol.Caption = "Кол-во";
+            grArtDrKol.FieldName = "Kol";
             grArtDrKol.MinWidth = 23;
             grArtDrKol.Name = "grArtDrKol";
             grArtDrKol.Visible = true;
@@ -2220,8 +2161,8 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrSum
             // 
-            grArtDrSum.Caption = "сумма";
-            grArtDrSum.FieldName = "sum";
+            grArtDrSum.Caption = "Сумма";
+            grArtDrSum.FieldName = "Sum";
             grArtDrSum.MinWidth = 23;
             grArtDrSum.Name = "grArtDrSum";
             grArtDrSum.Visible = true;
@@ -2230,7 +2171,7 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrKod_fur
             // 
-            grArtDrKod_fur.Caption = "код фурн";
+            grArtDrKod_fur.Caption = "Код фурн";
             grArtDrKod_fur.FieldName = "Kod_fur";
             grArtDrKod_fur.MinWidth = 23;
             grArtDrKod_fur.Name = "grArtDrKod_fur";
@@ -2240,7 +2181,7 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrKod_furn_ar
             // 
-            grArtDrKod_furn_ar.Caption = "код арт фурн";
+            grArtDrKod_furn_ar.Caption = "Код арт фурн";
             grArtDrKod_furn_ar.FieldName = "Kod_furn_ar";
             grArtDrKod_furn_ar.MinWidth = 23;
             grArtDrKod_furn_ar.Name = "grArtDrKod_furn_ar";
@@ -2250,8 +2191,8 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrData_nitki
             // 
-            grArtDrData_nitki.Caption = "дата нитки";
-            grArtDrData_nitki.FieldName = "data_nitki";
+            grArtDrData_nitki.Caption = "Дата нитки";
+            grArtDrData_nitki.FieldName = "Data_nitki";
             grArtDrData_nitki.MinWidth = 23;
             grArtDrData_nitki.Name = "grArtDrData_nitki";
             grArtDrData_nitki.Visible = true;
@@ -2405,28 +2346,37 @@ namespace SewingProduction.Features.Articul
             // gbKompl
             // 
             gbKompl.BackColor = Color.Transparent;
-            gbKompl.Controls.Add(dataGridView1);
-            gbKompl.Location = new Point(169, 875);
+            gbKompl.Controls.Add(cGridKomplSost);
+            gbKompl.Location = new Point(128, 617);
             gbKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbKompl.Name = "gbKompl";
             gbKompl.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbKompl.Size = new Size(578, 134);
+            gbKompl.Size = new Size(759, 320);
             gbKompl.TabIndex = 29;
             gbKompl.TabStop = false;
             gbKompl.Text = "Комплект";
             // 
-            // dataGridView1
+            // cGridKomplSost
             // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.DataSource = bsArt;
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new Point(4, 19);
-            dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(570, 112);
-            dataGridView1.TabIndex = 0;
+            cGridKomplSost.Font = new Font("Arial", 10F);
+            cGridKomplSost.Location = new Point(6, 18);
+            cGridKomplSost.MainView = gridViewKomplSost;
+            cGridKomplSost.Name = "cGridKomplSost";
+            cGridKomplSost.Size = new Size(490, 156);
+            cGridKomplSost.TabIndex = 34;
+            cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
+            // 
+            // gridViewKomplSost
+            // 
+            gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewKomplSost.GridControl = cGridKomplSost;
+            gridViewKomplSost.Name = "gridViewKomplSost";
+            gridViewKomplSost.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // gbNabor
             // 
@@ -2480,11 +2430,7 @@ namespace SewingProduction.Features.Articul
             Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
             Controls.Add(gridArtDr);
-            Controls.Add(gridLookUpEdit1);
             Controls.Add(groupBox1);
-            Controls.Add(lookUpEdit1);
-            Controls.Add(checkedComboBoxEdit2);
-            Controls.Add(cbTM);
             Controls.Add(lContrBoxMainInfo);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(gridArt);
@@ -2497,7 +2443,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsTM).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();
@@ -2506,10 +2451,8 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
             gbTkanName.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).EndInit();
             ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEdit1.Properties).EndInit();
             gbTkanInfo.ResumeLayout(false);
             gbTkanInfo.PerformLayout();
             gbBrakPercent.ResumeLayout(false);
@@ -2522,8 +2465,6 @@ namespace SewingProduction.Features.Articul
             gbTkanNorm.PerformLayout();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
@@ -2531,7 +2472,8 @@ namespace SewingProduction.Features.Articul
             groupBox2.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
             gbKompl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).EndInit();
             gbNabor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
             ResumeLayout(false);
@@ -2552,9 +2494,6 @@ namespace SewingProduction.Features.Articul
         private System.Windows.Forms.BindingSource bsArticul;
         private System.Windows.Forms.BindingSource bsArt;
         private CustomTextBox txbMod;
-        private SewingProduction.CustomComboBox cbTM;
-        //private System.Windows.Forms.ComboBox cbTM;
-        private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
         private CustomLabel label1;
         private CustomLabel label2;
@@ -2605,7 +2544,6 @@ namespace SewingProduction.Features.Articul
         private CustomButton customButtonAdd;
         private CustomButton customButtonCopy;
         private CustomButton customButtonKompl;
-        private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEdit2;
         private CustomComboBox customComboBox7;
         private CustomComboBox customComboBox6;
         private CustomComboBox customComboBox5;
@@ -2615,7 +2553,6 @@ namespace SewingProduction.Features.Articul
         private CustomComboBox customComboBox1;
         private DevExpress.XtraEditors.SearchLookUpEdit comboBoxEdit1;
         private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
         private System.Windows.Forms.GroupBox gbTkanName;
         private System.Windows.Forms.GroupBox gbTkanInfo;
         private System.Windows.Forms.GroupBox gbTkanNorm;
@@ -2678,8 +2615,6 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel37;
         private CustomLabel customLabel39;
         private CustomLabel customLabel38;
-        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private CustomButton customButton1;
         private CustomButton customButton2;
         private CustomButton customButton6;
@@ -2707,11 +2642,12 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chkBus;
         private CustomCheckBox chkV;
         private System.Windows.Forms.GroupBox gbKompl;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox gbNabor;
         private System.Windows.Forms.DataGridView dataGridView2;
         private CustomButton customButtonKart;
         private DevExpress.XtraLayout.LayoutControl lContrBoxMainInfo;
         private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private CustomGridControl cGridKomplSost;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplSost;
     }
 }

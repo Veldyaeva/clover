@@ -28,8 +28,6 @@ namespace SewingProduction.Features.Articul.Models
         
 
 
-
-
         //контроль изменения поля
         //public event PropertyChangedEventHandler PropertyChanged;
         //protected void OnPropertyChanged(string propertyName)

@@ -40,9 +40,12 @@ namespace SewingProduction.Features.Articul
         private SpArticulPreviewModel _articulByKod;
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
+        //фурнитура на артикул
+        private List<ArtDrModel> _artDrForKod;
 
         ////все поля таблицы Артикул
         private BindingList<SpArticulPreviewModel> _articulBindingList;
+
         //private BindingSource _articulBindingSource;
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -65,26 +68,11 @@ namespace SewingProduction.Features.Articul
                 bsArt.DataSource = _artPreview;
                 // инициализация привязок данных к элементам
                 InitializeBindingsAsync();
-
-                
-                //Task bindingsTask = InitializeBindingsAsync();
-                Task getData = getArticulFromSQlAsync("0");
-                await Task.WhenAll(getData);
-                
-
-                // загрузка одиночного кода из справочника, все поля  
-                //getArticulFromSQl("0");
-                
+          
 
                 // загрузка комбиков для выбора полотна
                 //bindComboBoxTkanName(); // ЛЕНА ТУТ ОШИБКА Я ЗАКОМЕНТИЛ
 
-                /*// тест 
-                comboBoxEdit1.Properties.DataSource = dt;
-                lookUpEdit1.Properties.DataSource = dt;
-                lookUpEdit1.Properties.DisplayMember = "tkb";
-                lookUpEdit1.Properties.ValueMember = "kod_t";
-                */
 
                 //customComboBox1.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t1"].ToString();
 
@@ -105,7 +93,7 @@ namespace SewingProduction.Features.Articul
             }
 
         }
-
+        
         private async Task InitializeBindingsAsync()
         {
             try
@@ -140,15 +128,60 @@ namespace SewingProduction.Features.Articul
                 txbScNomer.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.ScNomer), true);
                 txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
                 txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
-
                 #endregion
+                #region галки с отделками
 
+                //галки вяз отделки
+                chbKombIzd.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_izd), true );
+                chbKombDet.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Komb_det), true);
+                chbArh.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Arh), true);
+
+                //отделка
+                chbIsUpak.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Is_upak), true); 
+                chbIsFurnit.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Is_furnit), true);
+
+                chkP.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.P), true);
+                chkV.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.V), true);
+                chkBus.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Bus), true);
+                chkStra.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.Stra), true);
+                chkPres.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.P_pres), true);
+                #endregion
 
             }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
+            }
+        }
+        /// <summary>
+        /// Получение фурнитуры по коду справочника
+        /// </summary>
+        /// <param name="kod"></param>
+        /// <returns></returns>
+        private async Task getArtDrForKodAsync(string kod)
+        {
+            try
+            {
+                bsArtDr.Clear();
+                bsArtDr.ResetBindings(false);
+
+                var articulByKodTemp = await _articulDataService.GetArtDrByKod(kod);
+
+                if (articulByKodTemp != null)
+                {
+                    await this.InvokeAsync(() =>
+                    {
+                        _artDrForKod = articulByKodTemp;       // Обновляем текущую модель
+                        bsArtDr.DataSource = _artDrForKod; // Привязываем данные к форме
+
+                    });
+                    bsArtDr.ResetBindings(false);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getArticulFromSQlAsync для kod {kod}");
             }
         }
         private async Task getArticulFromSQlAsync(string kod)
@@ -199,20 +232,25 @@ namespace SewingProduction.Features.Articul
                 }
             }
         }
-        private void getArt_drFromSQl(string kod)
-        {
-            try
-            {
-                string queryArticul = $"select * from dbo.view_art_dr where kod = '{kod}'";
-                DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
-                bsArtDr.DataSource = dt;
+        //private void getArt_drFromSQl(string kod)
+        //{
+        //    try
+        //    {
+        //        string queryArticul = $"select * from dbo.view_art_dr where kod = '{kod}'";
+        //        DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
+        //        bsArtDr.DataSource = dt;
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //    }
+        //}
+        /// <summary>
+        ////используется в закоменченном методе при добавлении и копировании кода
+        /// </summary>
+        /// <param name="kod"></param>
+        /// <returns></returns>
         private async Task getArticulFromSQl(string kod)
         {
             try
@@ -319,12 +357,12 @@ namespace SewingProduction.Features.Articul
                         }
                     }
 
-                    getArt_drFromSQl(kod);
-
+                    //getArt_drFromSQl(kod);
+                    /*
                     //customComboBox1.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t1"].ToString();
                     //customComboBox2.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t2"].ToString();
                     //customComboBox3.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t3"].ToString();
-
+                    */
                 }
 
             }
@@ -355,11 +393,10 @@ namespace SewingProduction.Features.Articul
 
                     //getArticulFromSQl(kod);
                     Task getData = getArticulFromSQlAsync(kod);
-                    //await Task.WhenAll(getData);
-                    Task.Run(()=>  getData);
+                    Task getArtDrData = getArtDrForKodAsync(kod);
+                    await Task.WhenAll(getData,getArtDrData);
+                    //Task.Run(()=>  getData);
 
-                    //getArticulFromSQlAsync(kod);
-                    //TODO:  !!! определить kodd!!!!
                     string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                     var dt = _dbHelperAce.ExecuteQuery(query);
                     if (dt != null)
@@ -369,13 +406,19 @@ namespace SewingProduction.Features.Articul
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                kod = "";
+                
+                await _logger.LogErrorAsync(ex, $"Ошибка получения данных gridControl1_FocusedRowChanged для kod {kod}");
+
             }
         }
-
-        private void customButtonKart_Click(object sender, EventArgs e)
+        /// <summary>
+        /// вызывает карточку по коду из справочника ШП
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void customButtonKart_Click(object sender, EventArgs e)
         {
             string kod = "";
             try
@@ -387,7 +430,6 @@ namespace SewingProduction.Features.Articul
                 if (currentRow != null)
                 {
                     kod = currentRow.Kod;
-
 
                     report.Parameters["kod"].Value = kod;
 
@@ -414,44 +456,18 @@ namespace SewingProduction.Features.Articul
 
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                await _logger.LogErrorAsync(ex, $"Ошибка получения данных customButtonKart_Click для kod {kod} для отображенияк карточки");
                 kod = "";
             }
 
-
-            /*GetItogVibKartReport report = new GetItogVibKartReport();
-            report.RequestParameters = false;
-
-            object data = gridControl1.GetRow(gridControl1.FocusedRowHandle);
-            var kod = ((DataRowView)data).Row["kod"].ToString();
-            //var kod = "30367001";
-            Debug.WriteLine(kod);
-            report.Parameters["kod"].Value = kod;
-
-            var ds = report.sqlDataSource1;
-            var query = ds.Queries[0] as DevExpress.DataAccess.Sql.StoredProcQuery;
-            query.Parameters[0].Value = kod;
-
-            ds.Fill();
-
-            report.DataSource = ds;
-            report.DataMember = "GetItogVibKart";
-
-            ReportPrintTool reportPrintTool = new ReportPrintTool(report);
-            reportPrintTool.ShowPreviewDialog();
-
-            //сокращенный :
-            GetItogVibKartSokrReport reportSokr = new GetItogVibKartSokrReport();
-            reportSokr.RequestParameters = false;
-            reportSokr.Parameters["kod"].Value = kod;
-            reportSokr.DataSource = ds;
-            reportSokr.DataMember = "GetItogVibKart";
-            ReportPrintTool reportSokrPrintTool = new ReportPrintTool(reportSokr);
-            reportSokrPrintTool.ShowPreviewDialog();
-            */
         }
-
+        /// <summary>
+        /// добавление нового кода 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customButtonAdd_Click(object sender, EventArgs e)
         {
             /*EditAricul f = new EditAricul(_user);
