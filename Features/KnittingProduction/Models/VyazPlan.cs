@@ -240,7 +240,13 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public int nom { get; set; }
         [NotMapped]
+        public int nom_n { get; set; }
+        [NotMapped]
         public int n_pach { get; set; }
+        [NotMapped]
+        public string pach_kod { get; set; }
+        [NotMapped]
+        public string kod { get; set; }
         [NotMapped]
         public string razm { get; set; }
         [NotMapped]
@@ -251,7 +257,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public int SyncSelection { get; set; } = 0;
     }
 
-    public class PZVOperList
+    public class PZVOperList : INewable, IModifiable, IDeletable
     {
         [NotMapped]
         public int olPzvID {  get; set; }
@@ -277,6 +283,10 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public string olPzvArticul { get; set; }
         [NotMapped]
         public int olNPach { get; set; }
+        [NotMapped]
+        public string olNPachKod { get; set; }
+        [NotMapped]
+        public string olKod { get; set; }
         [NotMapped]
         public int olNo { get; set; }
         [NotMapped]
@@ -311,6 +321,20 @@ namespace SewingProduction.Features.KnittingProduction.Models
         public DateTime? olPzvDateML { get; set; }
         [NotMapped]
         public DateTime? olPzvDateMast { get; set; }
+        [NotMapped]
+        public DateTime? olPzvUpdDate { get; set; }
         public int SyncSelection { get; set; } = 0;
+        [NotMapped]
+        public bool IsModified { get; set; } = false;
+        [NotMapped]
+        public bool IsNew { get; set; } = false;
+        [NotMapped]
+        public bool IsDeleted { get; set; } = false;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
