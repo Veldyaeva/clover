@@ -386,17 +386,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             _normRaszBindingSourceArticles.ResetBindings(false);
         }
 
-                private async Task RefreshNormRaskForArticlesTab(int annId, CancellationToken cancellationToken = default)
+        private async Task RefreshNormRaskForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             // Проверяем инициализацию
             if (_normRaskListArticles == null || _normRaskBindingSourceArticles == null)
             {
                 await _logger.LogErrorAsync(new NullReferenceException("_normRaskListArticles or _normRaskBindingSourceArticles is null"), "RefreshNormRaskForArticlesTab failed initialization check.");
                 return;
             }
-            
+
             List<NormRask> raskList = new List<NormRask>();
             if (annId > 0)
             {
@@ -431,27 +431,27 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
 
             await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: _normRaskListArticles.Count={_normRaskListArticles.Count}, BindingSource.DataSource={_normRaskBindingSourceArticles.DataSource}", "RefreshNormRaskForArticlesTab");
-            
+
             // Force refresh the grid to ensure data is displayed
             if (customGridControl2?.MainView is GridView gridView)
             {
                 gridView.RefreshData();
                 await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Forced grid refresh for customGridControl2", "RefreshNormRaskForArticlesTab");
-                
+
                 // Additional verification
                 await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Grid row count: {gridView.RowCount}, DataRowCount: {gridView.DataRowCount}", "RefreshNormRaskForArticlesTab");
-                
+
                 // Force the grid to repaint
                 gridView.Invalidate();
                 customGridControl2.Refresh();
-                
+
                 // Ensure the grid is visible and enabled
                 if (!customGridControl2.Visible)
                 {
                     customGridControl2.Visible = true;
                     await _logger.LogEventAsync($"RefreshNormRaskForArticlesTab: Made customGridControl2 visible", "RefreshNormRaskForArticlesTab");
                 }
-                
+
                 if (!customGridControl2.Enabled)
                 {
                     customGridControl2.Enabled = true;

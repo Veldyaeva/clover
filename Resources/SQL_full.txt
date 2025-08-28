@@ -314,13 +314,7 @@ GO
 --/* 7.1  artNormNView – главное представление по ANN */ ПОСЛЕ п.10!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 CREATE OR ALTER VIEW dbo.artNormNView AS
 SELECT  ann.*
- ,ISNULL(nr.annID, SPACE(7)) AS nrannID
 FROM dbo.art_norm_n ann
-LEFT JOIN (SELECT
-    annId
-  FROM norm_rasz
-  GROUP BY annId) nr
-  ON ann.annID = nr.annId
 WHERE (annDateDel IS NULL)
 
 
