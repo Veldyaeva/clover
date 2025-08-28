@@ -405,11 +405,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             return new MyDataANN
             {
                 AnnID = ann.AnnID,
-                Kod = ann.Kod,
+                //Kod = ann.Kod,
                 Articul = ann.Articul,
                 Status = ann.Status,
                 grup = ann.grup,
                 mod = ann.Mod,
+                dateUpdate = ann.dateUpdate,
             };
         }
 

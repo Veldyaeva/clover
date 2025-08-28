@@ -1,4 +1,5 @@
 ﻿using DevExpress.Mvvm.Native;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -12,6 +13,8 @@ namespace SewingProduction.Models
         public int Status { get; set; }
         public string grup { get; set; }
         public string mod { get; set; }
+        [Column("data_obn")]
+        public DateTime? dateUpdate { get; set; }
         [NotMapped]
         public string Stat { get; set; }
         [NotMapped]

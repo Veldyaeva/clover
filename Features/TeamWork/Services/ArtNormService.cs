@@ -244,7 +244,7 @@ namespace SewingProduction.Services
                     v.annId, v.grup, v.articul, v.mod, v.sek, v.sek_vyaz,
                     v.data_obn, v.sek_shv, sa.name AS statusText, v.status, v.sek_vyazo, v.sek_vyaz5, 
                     v.sek_vyaz7, v.sek_vyaz12, v.sek_vyaz10, v.sek_vyaz6, v.sek_kr, v.slogn, v.komment, v.annRecommendation, 
-                    v.data_sozd, v.diz, v.constr, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
+                    v.data_sozd, v.diz, v.constr, v.data_obn as dateUpdate, v.annDateDel, v.annCompDel, v.annDateAdd, v.annCompAdd, v.arh, v.parentId
                 FROM ArtNormNView v
                 JOIN status_ann sa ON v.status = sa.status_id 
                 WHERE v.status != 3"; // Статус "архивное"
