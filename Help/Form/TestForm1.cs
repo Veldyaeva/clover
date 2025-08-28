@@ -32,6 +32,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             _testModel1DataService = new TestModel1DataService(new DbService(new DatabaseHelper()));
             _serviceBrokerForTable1 = new ServiceBroker(this);
             _serviceBrokerForTable2 = new ServiceBroker(this);
+            customLabel4.FontSizePermission = customLabel4.Font.Size + 2;
         }
         private async void TestForm1_Load(object sender, EventArgs e)
         {

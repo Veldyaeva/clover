@@ -431,12 +431,56 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+        /// <summary>
+        /// Общий метод для обновления даты и статуса записи
+        /// </summary>
+        /// <param name="annId">ID записи для обновления</param>
+        /// <param name="gridView">Грид для обновления UI</param>
+        /// <param name="rowHandle">Номер строки в гриде</param>
+        /// <returns>true если обновление прошло успешно</returns>
+        private async Task<bool> UpdateDateAndStatusAsync(int annId, GridView gridView, int rowHandle)
+        {
+            try
+            {
+                // Вызываем процедуру updateSebZArticulPsz для обновления данных во всех справочниках
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@xAnnID", annId }
+                };
+                await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters);
+
+                // Обновляем дату обновления в базе данных
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
+                
+                // Обновляем статус на "Актуальное"
+                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
+
+                // Обновляем UI в гриде
+                if (gridView != null && rowHandle >= 0)
+                {
+                    gridView.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
+                    gridView.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
+                    gridView.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
+                    gridView.RefreshRow(rowHandle);
+                }
+
+                await _logger.LogEventAsync($"Данные обновлены для записи AnnID: {annId}, дата: {DateTime.Now:dd.MM.yyyy}, статус: Актуальное", "UpdateDateAndStatus");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
+                return false;
+            }
+        }
+
         private async void CommandsEditDateNull_DoubleClick(object sender, EventArgs e)
         {
             var view = ANNgridView;
             var rowHandle = view.FocusedRowHandle;
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
-            var annId = view.GetRowCellValue(rowHandle, "AnnID");
+            int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
+            
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
@@ -447,20 +491,15 @@ namespace SewingProduction.Features.TeamWork.Forms
      MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.Yes)
                 {
-                    var parameters = new Dictionary<string, object>
+                    bool success = await UpdateDateAndStatusAsync(annId, view, rowHandle);
+                    if (success)
                     {
-                        { "@xAnnID", annId}
-                    };
-                    await _dbHelper.ExecuteQueryAsync("EXEC dbo.updateSebZArticulPsz @xAnnID", parameters); //пересчитать себ. - при простановке даты обн
-
-                    view.RefreshRowCell(rowHandle, view.Columns["dateUpdate"]);
-
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
-                    await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
-                    view.SetRowCellValue(rowHandle, "dateUpdate", DateTime.Now);
-                    view.SetRowCellValue(rowHandle, "status", (int)Status.Actual);
-                    view.SetRowCellValue(rowHandle, "StatusText", "Актуальное");
-
+                        MessageBox.Show("Данные успешно обновлены!", "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Ошибка при обновлении данных!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
         }
@@ -922,64 +961,64 @@ namespace SewingProduction.Features.TeamWork.Forms
                 return;
             }
 
-			// Открываем форму редактирования клона (немодально)
-			var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Clone, newId: newAnnId, oldId: selectedAnnToDuplicate.AnnID);
-			if (teamWorkAdvanceTW == null)
-			{
-				// Форма уже открыта или произошла ошибка
-				return;
-			}
+            // Открываем форму редактирования клона (немодально)
+            var teamWorkAdvanceTW = OpenAdvanceFormNonModal(bufferId, (int)Mode.Clone, newId: newAnnId, oldId: selectedAnnToDuplicate.AnnID);
+            if (teamWorkAdvanceTW == null)
+            {
+                // Форма уже открыта или произошла ошибка
+                return;
+            }
 
-			teamWorkAdvanceTW.FormClosed += async (s, args) =>
-			{
-				if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
-				{
-					CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
-					if (CopyedWorkDivisionShell == null) return;
+            teamWorkAdvanceTW.FormClosed += async (s, args) =>
+            {
+                if (teamWorkAdvanceTW.DialogResult == DialogResult.OK)
+                {
+                    CopyedWorkDivisionShell = teamWorkAdvanceTW.CreatedAnn;
+                    if (CopyedWorkDivisionShell == null) return;
 
-					_bindingList.Add(CopyedWorkDivisionShell);
-					_bindingSource.ResetBindings(false);
-					rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
-					if (rowHandle >= 0)
-					{
-						ANNgridView.BeginUpdate();
-						try
-						{
-							ANNgridView.FocusedRowHandle = rowHandle;
-							ANNgridView.MakeRowVisible(rowHandle);
-							ANNgridView.RefreshRow(rowHandle);
-						}
-						finally
-						{
-							ANNgridView.EndUpdate();
-						}
-					}
-				}
-				else
-				{
-					// Возврат к исходной строке
-					rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
-					if (rowHandle >= 0)
-					{
-						ANNgridView.BeginUpdate();
-						try
-						{
-							ANNgridView.FocusedRowHandle = rowHandle;
-							ANNgridView.MakeRowVisible(rowHandle);
-							ANNgridView.RefreshRow(rowHandle);
-						}
-						finally
-						{
-							ANNgridView.EndUpdate();
-						}
-					}
+                    _bindingList.Add(CopyedWorkDivisionShell);
+                    _bindingSource.ResetBindings(false);
+                    rowHandle = ANNgridView.LocateByValue("AnnID", CopyedWorkDivisionShell.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle);
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
+                }
+                else
+                {
+                    // Возврат к исходной строке
+                    rowHandle = ANNgridView.LocateByValue("AnnID", selectedAnnToDuplicate.AnnID);
+                    if (rowHandle >= 0)
+                    {
+                        ANNgridView.BeginUpdate();
+                        try
+                        {
+                            ANNgridView.FocusedRowHandle = rowHandle;
+                            ANNgridView.MakeRowVisible(rowHandle);
+                            ANNgridView.RefreshRow(rowHandle);
+                        }
+                        finally
+                        {
+                            ANNgridView.EndUpdate();
+                        }
+                    }
 
-					// Удаляем созданную запись из списка и базы
-					_bindingList.Remove(CopyedWorkDivisionShell);
-					_bindingSource.ResetBindings(false);
-					await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
-				}
-			};
+                    // Удаляем созданную запись из списка и базы
+                    _bindingList.Remove(CopyedWorkDivisionShell);
+                    _bindingSource.ResetBindings(false);
+                    await _artNormService.DeleteByAnnId(TableNames.Ann, newAnnId);
+                }
+            };
         }
         private async void layoutControlGroup2_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
@@ -1408,61 +1447,99 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
 
         /// <summary>
-        /// Устанавливает дату обновления (data_obn) сегодняшним числом для выбранных строк в ANNgridView
+        /// Устанавливает дату обновления (data_obn) сегодняшним числом для выбранных строк
+        /// Работает с двумя вкладками: "Разделения труда" (ANNgridView) и "Текущие работы" (gridView_wdToBind)
+        /// Использует процедуру updateSebZArticulPsz для обновления данных во всех справочниках
         /// </summary>
         private async Task SetUpdateDate_Internal(object sender, EventArgs e)
         {
             try
             {
-                if (ANNgridView == null)
+                // Определяем, какая вкладка активна и какой грид использовать
+                GridView activeGridView = null;
+                string gridType = "";
+                BindingSource activeBindingSource = null;
+
+                // Проверяем, какая вкладка активна
+                if (xtraTabControl1.SelectedTabPage?.Name == "xtraTabPageArticles")
                 {
-                    MessageBox.Show("Грид не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    // Вкладка "Текущие работы" - используем gridView_wdToBind
+                    if (gridView_wdToBind == null)
+                    {
+                        MessageBox.Show("Грид текущих работ не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    activeGridView = gridView_wdToBind;
+                    gridType = "текущих работ";
+                    activeBindingSource = _myDataAnnBindingSource;
+                }
+                else
+                {
+                    // Вкладка "Разделения труда" - используем ANNgridView
+                    if (ANNgridView == null)
+                    {
+                        MessageBox.Show("Грид разделений труда не инициализирован.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    activeGridView = ANNgridView;
+                    gridType = "разделений труда";
+                    activeBindingSource = _bindingSource;
                 }
 
                 // Получаем выбранные строки
-                var selectedRowHandles = ANNgridView.GetSelectedRows();
+                var selectedRowHandles = activeGridView.GetSelectedRows();
 
                 // Если нет выбранных строк, берем текущую строку
                 if (selectedRowHandles == null || selectedRowHandles.Length == 0)
                 {
-                    if (ANNgridView.FocusedRowHandle < 0)
+                    if (activeGridView.FocusedRowHandle < 0)
                     {
-                        MessageBox.Show("Выберите записи для обновления даты.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"Выберите записи для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         return;
                     }
-                    selectedRowHandles = new int[] { ANNgridView.FocusedRowHandle };
+                    selectedRowHandles = new int[] { activeGridView.FocusedRowHandle };
                 }
 
-                var selectedItems = new List<ArtNormN>();
+                var selectedItems = new List<object>();
+                var selectedAnnIds = new List<int>();
 
-                // Собираем данные выбранных строк
+                // Собираем данные выбранных строк в зависимости от типа грида
                 foreach (int rowHandle in selectedRowHandles)
                 {
                     if (rowHandle >= 0)
                     {
-                        var item = ANNgridView.GetRow(rowHandle) as ArtNormN;
+                        var item = activeGridView.GetRow(rowHandle);
                         if (item != null)
                         {
                             selectedItems.Add(item);
+                            
+                            // Получаем AnnID в зависимости от типа объекта
+                            if (item is ArtNormN artNorm)
+                            {
+                                selectedAnnIds.Add(artNorm.AnnID);
+                            }
+                            else if (item is MyDataANN myDataAnn)
+                            {
+                                selectedAnnIds.Add(myDataAnn.AnnID);
+                            }
                         }
                     }
                 }
 
                 if (selectedItems.Count == 0)
                 {
-                    MessageBox.Show("Не найдено записей для обновления даты.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Не найдено записей для обновления даты на вкладке \"{gridType}\".", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Подтверждение операции
                 string message = selectedItems.Count == 1
-                    ? $"Установить дату обновления для записи:\n{selectedItems[0].Articul} - {selectedItems[0].Mod}?"
-                    : $"Установить дату обновления для {selectedItems.Count} записей?";
+                    ? $"Обновить данные во всех справочниках для записи на вкладке \"{gridType}\"?"
+                    : $"Обновить данные во всех справочниках для {selectedItems.Count} записей на вкладке \"{gridType}\"?";
 
                 var result = MessageBox.Show(
                     message,
-                    "Подтверждение обновления даты",
+                    "Пересчёт себ.",
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question,
                     MessageBoxDefaultButton.Button2);
@@ -1477,65 +1554,85 @@ namespace SewingProduction.Features.TeamWork.Forms
                 int successCount = 0;
                 var errors = new List<string>();
 
-                ANNgridView.BeginUpdate();
+                activeGridView.BeginUpdate();
                 try
                 {
-                    foreach (var item in selectedItems)
+                    foreach (int annId in selectedAnnIds)
                     {
                         try
                         {
-                            // Обновляем дату обновления в базе данных
-                            await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", currentDate, TableNames.AnnId, item.AnnID);
-
-                            // Обновляем объект в памяти
-                            item.dateUpdate = currentDate;
-
-                            // Обновляем строку в гриде
-                            int rowHandle = ANNgridView.LocateByValue("AnnID", item.AnnID);
-                            if (rowHandle >= 0)
+                            // Используем общий метод для обновления даты и статуса
+                            int rowHandle = activeGridView.LocateByValue("AnnID", annId);
+                            bool success = await UpdateDateAndStatusAsync(annId, activeGridView, rowHandle);
+                            
+                            if (success)
                             {
-                                ANNgridView.SetRowCellValue(rowHandle, "dateUpdate", currentDate);
-                                ANNgridView.RefreshRow(rowHandle);
-                            }
+                                // Обновляем объект в памяти в зависимости от типа
+                                foreach (var item in selectedItems)
+                                {
+                                    if (item is ArtNormN artNorm && artNorm.AnnID == annId)
+                                    {
+                                        artNorm.dateUpdate = currentDate;
+                                        artNorm.Status = (int)Status.Actual;
+                                        artNorm.StatusText = "Актуальное";
+                                        break;
+                                    }
+                                    else if (item is MyDataANN myDataAnn && myDataAnn.AnnID == annId)
+                                    {
+                                        // MyDataANN может не иметь поля dateUpdate, но мы обновляем в БД
+                                        break;
+                                    }
+                                }
 
-                            successCount++;
-                            await _logger.LogEventAsync($"Дата обновления для записи AnnID: {item.AnnID} установлена: {currentDate:dd.MM.yyyy}", "SetUpdateDate");
+                                successCount++;
+                            }
+                            else
+                            {
+                                string errorMsg = $"AnnID: {annId} - не удалось обновить данные";
+                                errors.Add(errorMsg);
+                            }
                         }
                         catch (Exception ex)
                         {
-                            string errorMsg = $"AnnID: {item.AnnID} - {ex.Message}";
+                            string errorMsg = $"AnnID: {annId} - {ex.Message}";
                             errors.Add(errorMsg);
-                            await _logger.LogErrorAsync(ex, $"Ошибка при обновлении даты для записи AnnID: {item.AnnID}");
+                            await _logger.LogErrorAsync(ex, $"Ошибка при обновлении данных для записи AnnID: {annId}");
                         }
                     }
                 }
                 finally
                 {
-                    ANNgridView.EndUpdate();
+                    activeGridView.EndUpdate();
                 }
 
                 // Обновляем привязку данных
-                _bindingSource.ResetBindings(false);
+                if (activeBindingSource != null)
+                {
+                    activeBindingSource.ResetBindings(false);
+                }
 
                 // Показываем результат операции
                 if (errors.Count == 0)
                 {
                     string successMessage = successCount == 1
-                        ? $"Дата обновления успешно установлена: {currentDate:dd.MM.yyyy}"
-                        : $"Дата обновления установлена для {successCount} записей: {currentDate:dd.MM.yyyy}";
+                        ? $"Данные успешно обновлены для записи. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное"
+                        : $"Данные обновлены для {successCount} записей. Дата: {currentDate:dd.MM.yyyy}, статус: Актуальное";
 
                     MessageBox.Show(successMessage, "Информация", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    string errorMessage = $"Обновлено: {successCount} записей.\nОшибки:\n" + string.Join("\n", errors);
-                    MessageBox.Show(errorMessage, "Результат обновления даты", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    string errorMessage = $"Обновлено: {successCount} записей.\nОшибок: {errors.Count}\n\nОшибки:\n" + string.Join("\n", errors.Take(5));
+                    if (errors.Count > 5)
+                        errorMessage += $"\n... и еще {errors.Count - 5} ошибок";
+
+                    MessageBox.Show(errorMessage, "Результат обновления", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, "Ошибка при выполнении обновления даты");
-                MessageBox.Show($"Ошибка при обновлении даты: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await _logger.LogErrorAsync(ex, "Ошибка при выполнении обновления данных");
+                MessageBox.Show($"Ошибка при обновлении данных: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1986,6 +2083,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             advanceForm.Show();
 
             return advanceForm;
+        }
+
+        private async void updateButton_Click(object sender, EventArgs e)
+        {
+            await SetUpdateDate_Internal(sender, e);
         }
     }
     public static class DemoHelper

@@ -128,21 +128,59 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         public static class CloneUtils
         {
-            public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
+                    public static List<T> CloneList<T>(IEnumerable<T> source, int newAnnId, string idFieldName, bool markAsNew = true)
                 where T : ICloneable
+        {
+            var list = new List<T>();
+            foreach (var item in source)
             {
-                var list = new List<T>();
-                foreach (var item in source)
+                var clone = (T)item.Clone();
+                
+                // Принудительно сбрасываем ID в 0
+                var idProperty = typeof(T).GetProperty(idFieldName);
+                if (idProperty != null)
                 {
-                    var clone = (T)item.Clone();
-                    typeof(T).GetProperty(idFieldName)?.SetValue(clone, 0);
-                    typeof(T).GetProperty("AnnId")?.SetValue(clone, newAnnId);
-                    if (typeof(T).GetProperty("IsNew") != null) typeof(T).GetProperty("IsNew").SetValue(clone, markAsNew);
-                    if (typeof(T).GetProperty("IsModified") != null) typeof(T).GetProperty("IsModified").SetValue(clone, markAsNew);
-                    list.Add(clone);
+                    idProperty.SetValue(clone, 0);
                 }
-                return list;
+                else
+                {
+                    // Если свойство не найдено через рефлексию, пробуем альтернативные имена
+                    var alternativeNames = new[] { "nrID", "id", "nkId", "NrID", "Id", "NkId" };
+                    foreach (var altName in alternativeNames)
+                    {
+                        var altProperty = typeof(T).GetProperty(altName);
+                        if (altProperty != null)
+                        {
+                            altProperty.SetValue(clone, 0);
+                            break;
+                        }
+                    }
+                }
+                
+                // Устанавливаем новый AnnId
+                var annIdProperty = typeof(T).GetProperty("AnnId") ?? typeof(T).GetProperty("annId");
+                if (annIdProperty != null)
+                {
+                    annIdProperty.SetValue(clone, newAnnId);
+                }
+                
+                // Устанавливаем флаги
+                var isNewProperty = typeof(T).GetProperty("IsNew");
+                if (isNewProperty != null)
+                {
+                    isNewProperty.SetValue(clone, markAsNew);
+                }
+                
+                var isModifiedProperty = typeof(T).GetProperty("IsModified");
+                if (isModifiedProperty != null)
+                {
+                    isModifiedProperty.SetValue(clone, markAsNew);
+                }
+                
+                list.Add(clone);
             }
+            return list;
+        }
 
             public static BindingList<T> DeepCloneBindingList<T>(IEnumerable<T> sourceList) where T : class, ICloneable
             {
@@ -1172,48 +1210,54 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Загрузка операций из sourceAnnIdToCopyDetailsFrom
                     int sourceAnnId = _sourceAnnIdToCopyDetailsFrom.Value;
 
-                    List<NormRasz> raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+                    // Используем CloneUtils.CloneList для автоматического сброса ID
+                    var raszToCopy = await _artNormService.GetRelatedNormRasz(sourceAnnId);
+                    var clonedRasz = CloneUtils.CloneList(raszToCopy, _currentAnnData.AnnID, "nrId", false);
+                    
+                    // Дополнительная проверка - убеждаемся, что все ID сброшены
+                    foreach (var item in clonedRasz)
+                    {
+                        if (item.nrID != 0)
+                        {
+                            item.nrID = 0; // Принудительно сбрасываем ID
+                        }
+                    }
+                    
                     _normRaszList.Clear();
-                    foreach (var item in raszToCopy)
-                    {
-                        item.annId = _currentAnnData.AnnID;
-                        //item.IsNew = true;
-                        //item.IsModified = true;
-                        item.IsNew = false;
-                        item.IsModified = false;
-                        item.nrID = 0; // Сброс ID для новой записи
-                        _normRaszList.Add(item);
-                    }
-                    _normRaszBindingSource.ResetBindings(false);
+                    _normRaszList.BulkLoad(clonedRasz);
 
-                    List<NormRask> raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                    var raskToCopy = await _artNormService.GetRelatedNormRask(sourceAnnId);
+                    var clonedRask = CloneUtils.CloneList(raskToCopy, _currentAnnData.AnnID, "id", false);
+                    
+                    // Дополнительная проверка для NormRask
+                    foreach (var item in clonedRask)
+                    {
+                        if (item.id != 0)
+                        {
+                            item.id = 0; // Принудительно сбрасываем ID
+                        }
+                    }
+                    
                     _normRaskList.Clear();
-                    foreach (var item in raskToCopy)
-                    {
-                        item.AnnId = _currentAnnData.AnnID;
-                        //item.IsNew = true;
-                        //item.IsModified = true;
-                        item.IsNew = false;
-                        item.IsModified = false;
-                        item.id = 0;
-                        _normRaskList.Add(item);
-                    }
-                    _normRaskBindingSource.ResetBindings(false);
+                    _normRaskList.BulkLoad(clonedRask);
 
-                    List<NormKont> kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                    var kontToCopy = await _artNormService.GetRelatedNormKont(sourceAnnId);
+                    var clonedKont = CloneUtils.CloneList(kontToCopy, _currentAnnData.AnnID, "nkId", false);
+                    
+                    // Дополнительная проверка для NormKont
+                    foreach (var item in clonedKont)
+                    {
+                        if (item.nkId != 0)
+                        {
+                            item.nkId = 0; // Принудительно сбрасываем ID
+                        }
+                    }
+                    
                     _normKontList.Clear();
-                    foreach (var item in kontToCopy)
-                    {
-                        item.AnnId = _currentAnnData.AnnID;
-                        //item.IsNew = true;
-                        //item.IsModified = true;
-                        item.IsNew = false;
-                        item.IsModified = false;
-                        item.nkId = 0;
-                        //item.kod_o = "100";
+                    _normKontList.BulkLoad(clonedKont);
 
-                        _normKontList.Add(item);
-                    }
+                    _normRaszBindingSource.ResetBindings(false);
+                    _normRaskBindingSource.ResetBindings(false);
                     _normKontBindingSource.ResetBindings(false);
 
 

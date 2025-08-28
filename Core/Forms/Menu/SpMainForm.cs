@@ -13,6 +13,7 @@ using System.Diagnostics;
 using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.Sprav;
 using SewingProduction.Features.Articul;
+using SewingProduction.Features.UserDistribution.Class;
 using SewingProduction.Features.KnittingProduction.Forms;
 
 namespace SewingProduction
@@ -42,6 +43,7 @@ namespace SewingProduction
 
                 _formManager = new FormManager(this, menuStrip1, _user);
                 await _user.LoadUserData();
+                CurrentUser.SetUser(_user);
                 await _user.LoadObjectForm(this.Name);
 
                 LoadObjectForm();

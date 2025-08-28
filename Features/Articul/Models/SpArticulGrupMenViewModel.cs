@@ -13,12 +13,15 @@ namespace SewingProduction.Features.Articul.Models
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
+        public int countStr { get; set; } = 1;
 
         [NotMapped]
-        public string po = " ";
+        public string Po = " ";
+        [NotMapped]
+        public string Razm_all { get; set; }
 
         private bool _pr_po;
-        public bool pr_po
+        public bool Pr_po
         {
             get => _pr_po;
             set
@@ -26,7 +29,7 @@ namespace SewingProduction.Features.Articul.Models
                 if (_pr_po != value)
                 {
                     _pr_po = value;
-                    OnPropertyChanged(nameof(pr_po));
+                    OnPropertyChanged(nameof(Pr_po));
                 }
             }
         }
