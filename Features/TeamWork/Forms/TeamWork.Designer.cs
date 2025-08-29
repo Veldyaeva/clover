@@ -277,6 +277,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn49 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControl_wdToBind = new CustomGridControl();
@@ -2818,6 +2820,23 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn11.Visible = true;
             gridColumn11.VisibleIndex = 3;
             gridColumn11.Width = 300;
+            // 
+            // gridColumn50
+            // 
+            gridColumn50.Caption = "Сек.";
+            gridColumn50.FieldName = "Sek";
+            gridColumn50.Name = "gridColumn50";
+            gridColumn50.Visible = true;
+            gridColumn50.VisibleIndex = 4;
+            // 
+            // gridColumn48
+            // 
+            gridColumn48.Caption = "дата обн.";
+            gridColumn48.FieldName = "dateUpdate";
+            gridColumn48.Name = "gridColumn48";
+            gridColumn48.Visible = true;
+            gridColumn48.VisibleIndex = 5;
+            gridColumn48.Width = 57;
             // 
             // gridColumn49
             // 
