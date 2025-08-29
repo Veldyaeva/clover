@@ -1,4 +1,6 @@
-﻿namespace SewingProduction.Features.KnittingProduction.Forms
+﻿using SewingProduction.Core.Class;
+
+namespace SewingProduction.Features.KnittingProduction.Forms
 {
     partial class PlanZagrVyaz
     {

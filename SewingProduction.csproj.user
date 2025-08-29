@@ -16,6 +16,9 @@
     <Compile Update="Core\Class\CustomControls\CustomGridControlColumn.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -44,6 +47,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\EditTarif.cs">
