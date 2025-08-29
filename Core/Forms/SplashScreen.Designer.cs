@@ -54,6 +54,16 @@
             imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images14"));
             imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images15"));
             imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images16"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images17"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images18"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images19"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images20"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images21"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images22"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images23"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images24"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images25"));
+            imageSlider1.Images.Add((System.Drawing.Image)resources.GetObject("imageSlider1.Images26"));
             imageSlider1.LayoutMode = DevExpress.Utils.Drawing.ImageLayoutMode.MiddleCenter;
             imageSlider1.Location = new System.Drawing.Point(0, 0);
             imageSlider1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
