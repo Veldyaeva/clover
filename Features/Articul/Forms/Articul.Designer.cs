@@ -32,8 +32,12 @@ namespace SewingProduction.Features.Articul
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            grColKomplHasDifference = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostSost = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
             bsArt = new System.Windows.Forms.BindingSource(components);
@@ -93,8 +97,6 @@ namespace SewingProduction.Features.Articul
             label1 = new CustomLabel();
             txbKod = new CustomTextBox();
             bsArticul = new System.Windows.Forms.BindingSource(components);
-            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonAdd = new CustomButton();
             customButtonCopy = new CustomButton();
             customButtonKompl = new CustomButton();
             lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
@@ -166,6 +168,14 @@ namespace SewingProduction.Features.Articul
             customLabel22 = new CustomLabel();
             customLabel21 = new CustomLabel();
             customLabel20 = new CustomLabel();
+            cGridKomplSost = new CustomGridControl();
+            bsSostKompl = new System.Windows.Forms.BindingSource(components);
+            gridViewKomplSost = new DevExpress.XtraGrid.Views.Grid.GridView();
+            grColKomplSostKod = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostGrup_k = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             groupBox1 = new System.Windows.Forms.GroupBox();
             customLabel40 = new CustomLabel();
             txbSebz = new CustomTextBox();
@@ -197,17 +207,36 @@ namespace SewingProduction.Features.Articul
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customButton7 = new CustomButton();
             gbKompl = new System.Windows.Forms.GroupBox();
-            cGridKomplSost = new CustomGridControl();
-            gridViewKomplSost = new DevExpress.XtraGrid.Views.Grid.GridView();
             gbNabor = new System.Windows.Forms.GroupBox();
             dataGridView2 = new System.Windows.Forms.DataGridView();
             customButtonKart = new CustomButton();
+            buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            customGridControl1 = new CustomGridControl();
+            gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            customSimpleButton2 = new CustomSimpleButton();
+            csButtonNew = new CustomSimpleButton();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            simpleSeparator2 = new DevExpress.XtraLayout.SimpleSeparator();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            tabbedControlGroup2 = new DevExpress.XtraLayout.TabbedControlGroup();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
             lContrBoxMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
@@ -220,18 +249,57 @@ namespace SewingProduction.Features.Articul
             gbTkanBrak.SuspendLayout();
             gbTkanSeb.SuspendLayout();
             gbTkanNorm.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostKompl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).BeginInit();
             groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             groupBox2.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            gbKompl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).BeginInit();
             gbNabor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).BeginInit();
+            splitContainerControl1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel2).BeginInit();
+            splitContainerControl1.Panel2.SuspendLayout();
+            splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
+            layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customGridControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
             SuspendLayout();
+            // 
+            // grColKomplHasDifference
+            // 
+            grColKomplHasDifference.Caption = "gridColumn7";
+            grColKomplHasDifference.Name = "grColKomplHasDifference";
+            // 
+            // grColKomplSostSost
+            // 
+            grColKomplSostSost.Caption = "Состав";
+            grColKomplSostSost.FieldName = "Sost";
+            grColKomplSostSost.Name = "grColKomplSostSost";
+            grColKomplSostSost.Visible = true;
+            grColKomplSostSost.VisibleIndex = 5;
             // 
             // grArtDrName
             // 
@@ -252,12 +320,12 @@ namespace SewingProduction.Features.Articul
             gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
             gridArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            gridArt.Location = new Point(1, 1);
+            gridArt.Location = new Point(0, 0);
             gridArt.MainView = gridControl1;
             gridArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Name = "gridArt";
-            gridArt.Size = new Size(582, 743);
-            gridArt.TabIndex = 1;
+            gridArt.Size = new Size(577, 659);
+            gridArt.TabIndex = 2;
             gridArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridControl1 });
             // 
             // gridControl1
@@ -980,53 +1048,16 @@ namespace SewingProduction.Features.Articul
             txbKod.Size = new Size(86, 15);
             txbKod.TabIndex = 0;
             // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            tableLayoutPanel1.BackColor = Color.Transparent;
-            tableLayoutPanel1.ColumnCount = 5;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.58064F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.29032F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.69893F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.Controls.Add(customButtonAdd, 0, 0);
-            tableLayoutPanel1.Controls.Add(customButtonCopy, 0, 1);
-            tableLayoutPanel1.Controls.Add(customButtonKompl, 0, 2);
-            tableLayoutPanel1.Location = new Point(1, 748);
-            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.Size = new Size(583, 120);
-            tableLayoutPanel1.TabIndex = 8;
-            // 
-            // customButtonAdd
-            // 
-            customButtonAdd.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonAdd.Font = new Font("Arial", 10F);
-            customButtonAdd.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonAdd.Location = new Point(4, 3);
-            customButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdd.Name = "customButtonAdd";
-            customButtonAdd.Size = new Size(115, 32);
-            customButtonAdd.TabIndex = 0;
-            customButtonAdd.Text = "Добавить";
-            customButtonAdd.UseVisualStyleBackColor = false;
-            customButtonAdd.Click += customButtonAdd_Click;
-            // 
             // customButtonCopy
             // 
             customButtonCopy.BackColor = Color.FromArgb(230, 230, 250);
             customButtonCopy.Font = new Font("Arial", 10F);
             customButtonCopy.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonCopy.Location = new Point(4, 43);
+            customButtonCopy.Location = new Point(12, 62);
             customButtonCopy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonCopy.Name = "customButtonCopy";
-            customButtonCopy.Size = new Size(115, 32);
-            customButtonCopy.TabIndex = 1;
+            customButtonCopy.Size = new Size(268, 26);
+            customButtonCopy.TabIndex = 4;
             customButtonCopy.Text = "Копия";
             customButtonCopy.UseVisualStyleBackColor = false;
             customButtonCopy.Click += customButtonCopy_Click;
@@ -1036,11 +1067,11 @@ namespace SewingProduction.Features.Articul
             customButtonKompl.BackColor = Color.FromArgb(230, 230, 250);
             customButtonKompl.Font = new Font("Arial", 10F);
             customButtonKompl.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonKompl.Location = new Point(4, 83);
+            customButtonKompl.Location = new Point(12, 38);
             customButtonKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonKompl.Name = "customButtonKompl";
-            customButtonKompl.Size = new Size(115, 31);
-            customButtonKompl.TabIndex = 2;
+            customButtonKompl.Size = new Size(268, 20);
+            customButtonKompl.TabIndex = 3;
             customButtonKompl.Text = "Комплект";
             customButtonKompl.UseVisualStyleBackColor = false;
             customButtonKompl.Click += customButtonKompl_Click;
@@ -1103,7 +1134,7 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
             lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             lContrBoxMainInfo.Root = Root;
-            lContrBoxMainInfo.Size = new Size(1176, 249);
+            lContrBoxMainInfo.Size = new Size(1167, 249);
             lContrBoxMainInfo.TabIndex = 31;
             lContrBoxMainInfo.TabStop = false;
             lContrBoxMainInfo.Text = "layoutControl1";
@@ -1113,7 +1144,7 @@ namespace SewingProduction.Features.Articul
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
             Root.Name = "Root";
-            Root.Size = new Size(1176, 249);
+            Root.Size = new Size(1167, 249);
             Root.TextVisible = false;
             // 
             // flowLayoutPanel1
@@ -1966,6 +1997,81 @@ namespace SewingProduction.Features.Articul
             customLabel20.TabIndex = 7;
             customLabel20.Text = "руб.";
             // 
+            // cGridKomplSost
+            // 
+            cGridKomplSost.DataSource = bsSostKompl;
+            cGridKomplSost.Font = new Font("Arial", 10F);
+            cGridKomplSost.Location = new Point(24, 127);
+            cGridKomplSost.MainView = gridViewKomplSost;
+            cGridKomplSost.Name = "cGridKomplSost";
+            cGridKomplSost.Size = new Size(517, 169);
+            cGridKomplSost.TabIndex = 6;
+            cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
+            // 
+            // gridViewKomplSost
+            // 
+            gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewKomplSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grColKomplSostKod, grColKomplSostGrup_k, grColKomplSostGrup, grColKomplSostArticul, grColKomplSostRazm, grColKomplSostSost, grColKomplHasDifference });
+            gridFormatRule1.Column = grColKomplHasDifference;
+            gridFormatRule1.ColumnApplyTo = grColKomplSostSost;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.BackColor = Color.FromArgb(255, 192, 192);
+            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = true;
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridViewKomplSost.FormatRules.Add(gridFormatRule1);
+            gridViewKomplSost.GridControl = cGridKomplSost;
+            gridViewKomplSost.Name = "gridViewKomplSost";
+            gridViewKomplSost.OptionsBehavior.Editable = false;
+            gridViewKomplSost.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewKomplSost.OptionsView.ShowGroupPanel = false;
+            // 
+            // grColKomplSostKod
+            // 
+            grColKomplSostKod.Caption = "Код";
+            grColKomplSostKod.FieldName = "Kod_k";
+            grColKomplSostKod.Name = "grColKomplSostKod";
+            grColKomplSostKod.Visible = true;
+            grColKomplSostKod.VisibleIndex = 0;
+            // 
+            // grColKomplSostGrup_k
+            // 
+            grColKomplSostGrup_k.Caption = "Группа компл";
+            grColKomplSostGrup_k.FieldName = "Grup_k";
+            grColKomplSostGrup_k.Name = "grColKomplSostGrup_k";
+            grColKomplSostGrup_k.Visible = true;
+            grColKomplSostGrup_k.VisibleIndex = 1;
+            // 
+            // grColKomplSostGrup
+            // 
+            grColKomplSostGrup.Caption = "Группа";
+            grColKomplSostGrup.FieldName = "Grup";
+            grColKomplSostGrup.Name = "grColKomplSostGrup";
+            grColKomplSostGrup.Visible = true;
+            grColKomplSostGrup.VisibleIndex = 2;
+            // 
+            // grColKomplSostArticul
+            // 
+            grColKomplSostArticul.Caption = "Артикул";
+            grColKomplSostArticul.FieldName = "Articul";
+            grColKomplSostArticul.Name = "grColKomplSostArticul";
+            grColKomplSostArticul.Visible = true;
+            grColKomplSostArticul.VisibleIndex = 3;
+            // 
+            // grColKomplSostRazm
+            // 
+            grColKomplSostRazm.Caption = "Размер";
+            grColKomplSostRazm.FieldName = "Razm";
+            grColKomplSostRazm.Name = "grColKomplSostRazm";
+            grColKomplSostRazm.Visible = true;
+            grColKomplSostRazm.VisibleIndex = 4;
+            // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
@@ -2346,43 +2452,20 @@ namespace SewingProduction.Features.Articul
             // gbKompl
             // 
             gbKompl.BackColor = Color.Transparent;
-            gbKompl.Controls.Add(cGridKomplSost);
-            gbKompl.Location = new Point(128, 617);
+            gbKompl.Location = new Point(1413, 908);
             gbKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbKompl.Name = "gbKompl";
             gbKompl.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbKompl.Size = new Size(759, 320);
-            gbKompl.TabIndex = 29;
+            gbKompl.Size = new Size(541, 167);
+            gbKompl.TabIndex = 5;
             gbKompl.TabStop = false;
             gbKompl.Text = "Комплект";
-            // 
-            // cGridKomplSost
-            // 
-            cGridKomplSost.Font = new Font("Arial", 10F);
-            cGridKomplSost.Location = new Point(6, 18);
-            cGridKomplSost.MainView = gridViewKomplSost;
-            cGridKomplSost.Name = "cGridKomplSost";
-            cGridKomplSost.Size = new Size(490, 156);
-            cGridKomplSost.TabIndex = 34;
-            cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
-            // 
-            // gridViewKomplSost
-            // 
-            gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
-            gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
-            gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
-            gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
-            gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
-            gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
-            gridViewKomplSost.GridControl = cGridKomplSost;
-            gridViewKomplSost.Name = "gridViewKomplSost";
-            gridViewKomplSost.OptionsView.EnableAppearanceEvenRow = true;
             // 
             // gbNabor
             // 
             gbNabor.BackColor = Color.Transparent;
             gbNabor.Controls.Add(dataGridView2);
-            gbNabor.Location = new Point(51, 924);
+            gbNabor.Location = new Point(1413, 557);
             gbNabor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gbNabor.Name = "gbNabor";
             gbNabor.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2409,31 +2492,254 @@ namespace SewingProduction.Features.Articul
             customButtonKart.BackColor = Color.FromArgb(230, 230, 250);
             customButtonKart.Font = new Font("Arial", 10F);
             customButtonKart.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonKart.Location = new Point(483, 13);
+            customButtonKart.Location = new Point(485, 10);
             customButtonKart.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonKart.Name = "customButtonKart";
-            customButtonKart.Size = new Size(89, 23);
-            customButtonKart.TabIndex = 3;
+            customButtonKart.Size = new Size(83, 26);
+            customButtonKart.TabIndex = 0;
             customButtonKart.Text = "Карточка";
             customButtonKart.UseVisualStyleBackColor = false;
             customButtonKart.Click += customButtonKart_Click;
+            // 
+            // buttonEdit1
+            // 
+            buttonEdit1.Location = new Point(117, 508);
+            buttonEdit1.Name = "buttonEdit1";
+            buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton() });
+            buttonEdit1.Size = new Size(460, 20);
+            buttonEdit1.TabIndex = 4;
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = buttonEdit1;
+            layoutControlItem3.Location = new Point(0, 496);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(569, 24);
+            layoutControlItem3.TextSize = new Size(50, 20);
+            // 
+            // splitContainerControl1
+            // 
+            splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.None;
+            splitContainerControl1.Horizontal = false;
+            splitContainerControl1.Location = new Point(6, 2);
+            splitContainerControl1.Name = "splitContainerControl1";
+            // 
+            // splitContainerControl1.Panel1
+            // 
+            splitContainerControl1.Panel1.AutoScroll = true;
+            splitContainerControl1.Panel1.Controls.Add(customButtonKart);
+            splitContainerControl1.Panel1.Controls.Add(gridArt);
+            splitContainerControl1.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControl1.Panel2
+            // 
+            splitContainerControl1.Panel2.AutoScroll = true;
+            splitContainerControl1.Panel2.Controls.Add(layoutControl1);
+            splitContainerControl1.Panel2.Text = "Panel2";
+            splitContainerControl1.Size = new Size(581, 1021);
+            splitContainerControl1.SplitterPosition = 664;
+            splitContainerControl1.TabIndex = 33;
+            // 
+            // layoutControl1
+            // 
+            layoutControl1.Controls.Add(customGridControl1);
+            layoutControl1.Controls.Add(cGridKomplSost);
+            layoutControl1.Controls.Add(customSimpleButton2);
+            layoutControl1.Controls.Add(customButtonKompl);
+            layoutControl1.Controls.Add(customButtonCopy);
+            layoutControl1.Controls.Add(csButtonNew);
+            layoutControl1.Location = new Point(8, 6);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(842, 208, 650, 400);
+            layoutControl1.Root = layoutControlGroup1;
+            layoutControl1.Size = new Size(565, 321);
+            layoutControl1.TabIndex = 0;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // customGridControl1
+            // 
+            customGridControl1.Font = new Font("Arial", 10F);
+            customGridControl1.Location = new Point(24, 127);
+            customGridControl1.MainView = gridView2;
+            customGridControl1.Name = "customGridControl1";
+            customGridControl1.Size = new Size(517, 169);
+            customGridControl1.TabIndex = 1;
+            customGridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
+            // 
+            // gridView2
+            // 
+            gridView2.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridView2.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView2.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridView2.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            gridView2.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridView2.Appearance.FocusedRow.Options.UseFont = true;
+            gridView2.GridControl = customGridControl1;
+            gridView2.Name = "gridView2";
+            gridView2.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // customSimpleButton2
+            // 
+            customSimpleButton2.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton2.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton2.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton2.Appearance.Options.UseBackColor = true;
+            customSimpleButton2.Appearance.Options.UseFont = true;
+            customSimpleButton2.Appearance.Options.UseForeColor = true;
+            customSimpleButton2.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton2.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton2.Location = new Point(284, 12);
+            customSimpleButton2.Name = "customSimpleButton2";
+            customSimpleButton2.Size = new Size(269, 22);
+            customSimpleButton2.StyleController = layoutControl1;
+            customSimpleButton2.TabIndex = 2;
+            customSimpleButton2.Text = "customSimpleButton2";
+            // 
+            // csButtonNew
+            // 
+            csButtonNew.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            csButtonNew.Appearance.Font = new Font("Arial", 10F);
+            csButtonNew.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            csButtonNew.Appearance.Options.UseBackColor = true;
+            csButtonNew.Appearance.Options.UseFont = true;
+            csButtonNew.Appearance.Options.UseForeColor = true;
+            csButtonNew.AppearanceDisabled.BackColor = Color.Green;
+            csButtonNew.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            csButtonNew.AppearanceDisabled.Options.UseBackColor = true;
+            csButtonNew.AppearanceDisabled.Options.UseForeColor = true;
+            csButtonNew.Location = new Point(12, 12);
+            csButtonNew.Name = "csButtonNew";
+            csButtonNew.Size = new Size(268, 22);
+            csButtonNew.StyleController = layoutControl1;
+            csButtonNew.TabIndex = 0;
+            csButtonNew.Text = "Добавить";
+            csButtonNew.Click += csButtonNew_Click;
+            // 
+            // layoutControlGroup1
+            // 
+            layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup1.GroupBordersVisible = false;
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { simpleSeparator2, layoutControlItem2, tabbedControlGroup2, layoutControlItem6, layoutControlItem4, emptySpaceItem1, layoutControlItem5 });
+            layoutControlGroup1.Name = "Root";
+            layoutControlGroup1.Size = new Size(565, 321);
+            layoutControlGroup1.TextVisible = false;
+            // 
+            // simpleSeparator2
+            // 
+            simpleSeparator2.Location = new Point(0, 300);
+            simpleSeparator2.Name = "simpleSeparator2";
+            simpleSeparator2.OptionsTableLayoutItem.ColumnIndex = 1;
+            simpleSeparator2.OptionsTableLayoutItem.RowIndex = 1;
+            simpleSeparator2.Size = new Size(545, 1);
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = customButtonKompl;
+            layoutControlItem5.Location = new Point(0, 26);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem5.Size = new Size(272, 24);
+            layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = csButtonNew;
+            layoutControlItem2.Location = new Point(0, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.OptionsTableLayoutItem.RowIndex = 1;
+            layoutControlItem2.Size = new Size(272, 26);
+            layoutControlItem2.TextVisible = false;
+            // 
+            // tabbedControlGroup2
+            // 
+            tabbedControlGroup2.Location = new Point(0, 80);
+            tabbedControlGroup2.Name = "tabbedControlGroup2";
+            tabbedControlGroup2.SelectedTabPage = layoutControlGroup3;
+            tabbedControlGroup2.Size = new Size(545, 220);
+            tabbedControlGroup2.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup3, layoutControlGroup4 });
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1 });
+            layoutControlGroup3.Location = new Point(0, 0);
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new Size(521, 173);
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = cGridKomplSost;
+            layoutControlItem1.Location = new Point(0, 0);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(521, 173);
+            layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem7 });
+            layoutControlGroup4.Location = new Point(0, 0);
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Size = new Size(521, 173);
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = customGridControl1;
+            layoutControlItem7.Location = new Point(0, 0);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new Size(521, 173);
+            layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = customSimpleButton2;
+            layoutControlItem6.Location = new Point(272, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(273, 50);
+            layoutControlItem6.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = customButtonCopy;
+            layoutControlItem4.Location = new Point(0, 50);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new Size(272, 30);
+            layoutControlItem4.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            emptySpaceItem1.Location = new Point(272, 50);
+            emptySpaceItem1.Name = "emptySpaceItem1";
+            emptySpaceItem1.Size = new Size(273, 30);
+            // 
+            // tabbedControlGroup1
+            // 
+            tabbedControlGroup1.Location = new Point(0, 207);
+            tabbedControlGroup1.Name = "tabbedControlGroup1";
+            tabbedControlGroup1.SelectedTabPage = layoutControlGroup2;
+            tabbedControlGroup1.Size = new Size(545, 94);
+            tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup2 });
+            // 
+            // layoutControlGroup2
+            // 
+            layoutControlGroup2.Location = new Point(0, 0);
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Size = new Size(521, 47);
             // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new Size(1777, 1010);
+            ClientSize = new Size(1768, 1010);
             Controls.Add(gbNabor);
-            Controls.Add(gbKompl);
+            Controls.Add(splitContainerControl1);
             Controls.Add(gbTkanInfo);
-            Controls.Add(customButtonKart);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
             Controls.Add(gridArtDr);
             Controls.Add(groupBox1);
+            Controls.Add(gbKompl);
             Controls.Add(lContrBoxMainInfo);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(gridArt);
             Controls.Add(comboBoxEdit1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Articul";
@@ -2444,7 +2750,6 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();
             lContrBoxMainInfo.ResumeLayout(false);
             lContrBoxMainInfo.PerformLayout();
@@ -2463,6 +2768,9 @@ namespace SewingProduction.Features.Articul
             gbTkanSeb.PerformLayout();
             gbTkanNorm.ResumeLayout(false);
             gbTkanNorm.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostKompl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).EndInit();
@@ -2471,11 +2779,34 @@ namespace SewingProduction.Features.Articul
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
-            gbKompl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).EndInit();
             gbNabor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).EndInit();
+            splitContainerControl1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel2).EndInit();
+            splitContainerControl1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1).EndInit();
+            splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
+            layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customGridControl1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)simpleSeparator2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
             ResumeLayout(false);
         }
 
@@ -2538,10 +2869,8 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbKombIzd;
         private CustomCheckBox chbKombDet;
         private CustomCheckBox chbArh;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         //private System.Windows.Forms.GroupBox grBoxMainInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton customButtonAdd;
         private CustomButton customButtonCopy;
         private CustomButton customButtonKompl;
         private CustomComboBox customComboBox7;
@@ -2649,5 +2978,35 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraLayout.LayoutControlGroup Root;
         private CustomGridControl cGridKomplSost;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplSost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostKod;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostGrup_k;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostGrup;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostArticul;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostRazm;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostSost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplHasDifference;
+        private System.Windows.Forms.BindingSource bsSostKompl;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private CustomSimpleButton csButtonNew;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.SimpleSeparator simpleSeparator2;
+        private CustomSimpleButton customSimpleButton2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private CustomGridControl customGridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
     }
 }

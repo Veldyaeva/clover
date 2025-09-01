@@ -66,7 +66,12 @@ namespace SewingProduction.Features.Articul.Service
             return await _dbService.GetEntityAsync<string>(query, new { kod });
 
         }
+        public async Task<List<SpArticulKomplSostModel>> GetSostavkomplForKod(string kod)
+        {
+            string query = "SELECT * from view_KomplSostav where kod_k = @kod";
+            return await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
 
-        public List<>
+        }
+
     }
 }
