@@ -153,7 +153,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 int kod = GetCurrentKodFromDataSource();
-                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAllCheckBox.Checked);
+                bool loadAll = loadAllCheckBox.Checked;
+                    //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
+                List<MyDataANN> loadedData = await _artNormService.GetArtNormDataCurrent(loadAll);
 
                 _myDataAnnList.BulkLoad(loadedData);
             }
@@ -204,6 +206,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             {
                 List<MyDataANN> relatedData = new List<MyDataANN>();
                 bool loadAll = loadAllCheckBox.Checked;
+                ////loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
 
                 // Если включен чекбокс "Загрузить все"
                 if (loadAll)
@@ -591,10 +594,15 @@ namespace SewingProduction.Features.TeamWork.Forms
                     gridView_wdToBind.ActiveFilter.Clear();
                     gridView_wdToBind.ActiveFilterString = string.Empty;
                 }
-                
+
                 if (loadAllCheckBox != null)
                 {
                     loadAllCheckBox.Checked = false;
+                }
+                if (layoutControlGroup14 != null)
+                {
+                    var btn = layoutControlGroup14.CustomHeaderButtons[6];
+                    btn.Properties.Checked = false;
                 }
 
                 // Получаем данные из текущей строки
