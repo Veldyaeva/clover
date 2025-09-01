@@ -2821,23 +2821,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn11.VisibleIndex = 3;
             gridColumn11.Width = 300;
             // 
-            // gridColumn50
-            // 
-            gridColumn50.Caption = "Сек.";
-            gridColumn50.FieldName = "Sek";
-            gridColumn50.Name = "gridColumn50";
-            gridColumn50.Visible = true;
-            gridColumn50.VisibleIndex = 4;
-            // 
-            // gridColumn48
-            // 
-            gridColumn48.Caption = "дата обн.";
-            gridColumn48.FieldName = "dateUpdate";
-            gridColumn48.Name = "gridColumn48";
-            gridColumn48.Visible = true;
-            gridColumn48.VisibleIndex = 5;
-            gridColumn48.Width = 57;
-            // 
             // gridColumn49
             // 
             gridColumn49.Caption = "Оборудование";
@@ -2972,6 +2955,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn48.Name = "gridColumn48";
             gridColumn48.Visible = true;
             gridColumn48.VisibleIndex = 5;
+            gridColumn48.Width = 57;
             // 
             // colstatus1
             // 

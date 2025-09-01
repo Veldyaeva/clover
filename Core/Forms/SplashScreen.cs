@@ -29,16 +29,16 @@ namespace SewingProduction
                 imageSlider1.CurrentImageIndex = randomNumber;//spring
             }
             else if (month >= 6 && month <= 8)
-            //{
-            //    minValue = 9;
-            //    maxValue = 16;
-            //    randomNumber = random.Next(minValue,maxValue + 1);
-            //    imageSlider1.CurrentImageIndex = randomNumber;//summer
-            //}
-            //else if (month >= 9 && month <= 11)
+            {
+                minValue = 9;
+                maxValue = 16;
+                randomNumber = random.Next(minValue,maxValue + 1);
+                imageSlider1.CurrentImageIndex = randomNumber;//summer
+            }
+            else if (month >= 9 && month <= 11)
             {
                 minValue = 17;
-                maxValue = 27;
+                maxValue = 38;
                 randomNumber = random.Next(minValue, maxValue + 1);
                 imageSlider1.CurrentImageIndex = randomNumber;//fall
                 //imageSlider1.CurrentImageIndex = 3;
