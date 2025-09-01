@@ -32,7 +32,7 @@ namespace SewingProduction
             {
                 minValue = 9;
                 maxValue = 16;
-                randomNumber = random.Next(minValue,maxValue + 1);
+                randomNumber = random.Next(minValue, maxValue + 1);
                 imageSlider1.CurrentImageIndex = randomNumber;//summer
             }
             else if (month >= 9 && month <= 11)

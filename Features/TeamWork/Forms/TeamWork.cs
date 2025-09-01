@@ -627,7 +627,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // Обновляем дату обновления в базе данных
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "data_obn", DateTime.Now, TableNames.AnnId, annId);
-                
+
                 // Обновляем статус на "Актуальное"
                 await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, TableNames.AnnId, annId);
 
@@ -656,7 +656,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             var rowHandle = view.FocusedRowHandle;
             var dateUpdate = view.GetRowCellValue(rowHandle, "dateUpdate");
             int annId = (int)view.GetRowCellValue(rowHandle, "AnnID");
-            
+
             // Действие только если дата не задана
             if (dateUpdate == null || dateUpdate == DBNull.Value || string.IsNullOrEmpty(dateUpdate.ToString()))
             {
@@ -1359,17 +1359,23 @@ namespace SewingProduction.Features.TeamWork.Forms
                                                      // break;
         }
 
-        private void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
+        private async void layoutControlGroup14_CustomButtonClick(object sender, BaseButtonEventArgs e)
         {
             int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
 
             switch (buttonIndex)
             {
                 case 0:
-                    BindButton_Click_Internal(sender, e);// увязать
+                    await BindButton_Click_Internal(sender, e);// увязать
                     break;
                 case 2:
-                    UnboundWD(sender, e);
+                    await UnboundWD(sender, e);
+                    break;
+                case 4:
+                    await SetUpdateDate_Internal(sender, e);
+                    break;
+                case 6:
+                    loadAllCheckBox_CheckedChanged_Internal(sender, e);
                     break;
             }
         }
@@ -1733,7 +1739,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (item != null)
                         {
                             selectedItems.Add(item);
-                            
+
                             // Получаем AnnID в зависимости от типа объекта
                             if (item is ArtNormN artNorm)
                             {
@@ -1785,7 +1791,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             // Используем общий метод для обновления даты и статуса
                             int rowHandle = activeGridView.LocateByValue("AnnID", annId);
                             bool success = await UpdateDateAndStatusAsync(annId, activeGridView, rowHandle);
-                            
+
                             if (success)
                             {
                                 // Обновляем объект в памяти в зависимости от типа
@@ -2309,6 +2315,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void updateButton_Click(object sender, EventArgs e)
         {
             await SetUpdateDate_Internal(sender, e);
+        }
+
+        private void xtraTabControl2_Click(object sender, EventArgs e)
+        {
+
         }
     }
     public static class DemoHelper
