@@ -239,17 +239,17 @@ namespace SewingProduction.Models
             this.Sek = source.Sek;
             this.Komment = source.Komment;
             this.Reco = source.Reco; 
-            this.dateCreate = source.dateCreate;
+            //this.dateCreate = source.dateCreate;
             this.Diz = source.Diz;
             this.Constr = source.Constr;
-            this.dateUpdate = source.dateUpdate;
+            //this.dateUpdate = source.dateUpdate;
             this.SekKr = source.SekKr;
             this.Slogn = source.Slogn;
-            this.Status = source.Status;
-            this.StatusText = source.StatusText; 
-            this.Arh = source.Arh;
+            //this.Status = source.Status;
+            //this.StatusText = source.StatusText; 
+            //this.Arh = source.Arh;
             this.Seb = source.Seb;
-            this.ParentId = source.ParentId;
+            //this.ParentId = source.ParentId;
             this.SekVyaz14 = source.SekVyaz14;
             this.SekVyaz70 = source.SekVyaz70;
             this.SekVyaz71 = source.SekVyaz71;
@@ -258,10 +258,10 @@ namespace SewingProduction.Models
             this.SekVyaz57 = source.SekVyaz57;
             this.SekVyaz18 = source.SekVyaz18;
             this.SekShv1 = source.SekShv1;
-            this.dateDel = source.dateDel;
-            this.compDel = source.compDel;
-            this.dateAdd = source.dateAdd;
-            this.compAdd = source.compAdd;
+            //this.dateDel = source.dateDel;
+            //this.compDel = source.compDel;
+            //this.dateAdd = source.dateAdd;
+            //this.compAdd = source.compAdd;
         }
 
         public ArtNormN Clone()

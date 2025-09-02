@@ -263,6 +263,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridView8 = new GridView();
             gridControlNZP = new CustomGridControl();
             gridViewNZP = new GridView();
+            gridColumn53 = new DevExpress.XtraGrid.Columns.GridColumn();
+            repositoryItemCheckEdit8 = new RepositoryItemCheckEdit();
             kodd_rt = new DevExpress.XtraGrid.Columns.GridColumn();
             colannId2 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn20 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -281,8 +283,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn9 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn10 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn49 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn50 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridControl_wdToBind = new CustomGridControl();
@@ -294,7 +294,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn29 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn28 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn8 = new DevExpress.XtraGrid.Columns.GridColumn();
-            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
             colstatus1 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn6 = new DevExpress.XtraGrid.Columns.GridColumn();
             colannId7 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -359,6 +358,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit5 = new RepositoryItemCheckEdit();
             gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
             artnormnBindingSource1 = new BindingSource(components);
             normraszBindingSource = new BindingSource(components);
             normraskBindingSource = new BindingSource(components);
@@ -456,6 +456,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)gridView8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControlNZP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNZP).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normRaszTab).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_wdToBind).BeginInit();
@@ -2604,6 +2605,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridControlNZP.MainView = gridViewNZP;
             gridControlNZP.Margin = new Padding(4, 3, 4, 3);
             gridControlNZP.Name = "gridControlNZP";
+            gridControlNZP.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemCheckEdit8 });
             gridControlNZP.Size = new System.Drawing.Size(543, 372);
             gridControlNZP.TabIndex = 7;
             gridControlNZP.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNZP });
@@ -2612,7 +2614,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridViewNZP.Appearance.SelectedRow.FontStyleDelta = System.Drawing.FontStyle.Bold;
             gridViewNZP.Appearance.SelectedRow.Options.UseFont = true;
-            gridViewNZP.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { kodd_rt, colannId2, gridColumn20, gridColumn21, gridColumn22, gridColumn23, kolNZP, PztCount });
+            gridViewNZP.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn53, kodd_rt, colannId2, gridColumn20, gridColumn21, gridColumn22, gridColumn23, kolNZP, PztCount });
             gridViewNZP.DetailHeight = 404;
             gridViewNZP.GridControl = gridControlNZP;
             gridViewNZP.GroupFormat = "{0}:  {1}{2}";
@@ -2628,6 +2630,21 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewNZP.OptionsView.ShowGroupPanel = false;
             gridViewNZP.PopupMenuShowing += gridView_unboundArts_PopupMenuShowing;
             gridViewNZP.FocusedRowChanged += gridView5_FocusedRowChanged;
+            // 
+            // gridColumn53
+            // 
+            gridColumn53.Caption = " ";
+            gridColumn53.ColumnEdit = repositoryItemCheckEdit8;
+            gridColumn53.FieldName = "IsChecked";
+            gridColumn53.Name = "gridColumn53";
+            gridColumn53.Visible = true;
+            gridColumn53.VisibleIndex = 0;
+            gridColumn53.Width = 36;
+            // 
+            // repositoryItemCheckEdit8
+            // 
+            repositoryItemCheckEdit8.AutoHeight = false;
+            repositoryItemCheckEdit8.Name = "repositoryItemCheckEdit8";
             // 
             // kodd_rt
             // 
@@ -2659,8 +2676,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn21.Name = "gridColumn21";
             gridColumn21.OptionsColumn.AllowEdit = false;
             gridColumn21.Visible = true;
-            gridColumn21.VisibleIndex = 0;
-            gridColumn21.Width = 103;
+            gridColumn21.VisibleIndex = 1;
+            gridColumn21.Width = 108;
             // 
             // gridColumn22
             // 
@@ -2670,8 +2687,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn22.Name = "gridColumn22";
             gridColumn22.OptionsColumn.AllowEdit = false;
             gridColumn22.Visible = true;
-            gridColumn22.VisibleIndex = 1;
-            gridColumn22.Width = 99;
+            gridColumn22.VisibleIndex = 2;
+            gridColumn22.Width = 102;
             // 
             // gridColumn23
             // 
@@ -2681,8 +2698,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn23.Name = "gridColumn23";
             gridColumn23.OptionsColumn.AllowEdit = false;
             gridColumn23.Visible = true;
-            gridColumn23.VisibleIndex = 2;
-            gridColumn23.Width = 110;
+            gridColumn23.VisibleIndex = 3;
+            gridColumn23.Width = 115;
             // 
             // kolNZP
             // 
@@ -2692,8 +2709,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             kolNZP.Name = "kolNZP";
             kolNZP.OptionsColumn.AllowEdit = false;
             kolNZP.Visible = true;
-            kolNZP.VisibleIndex = 3;
-            kolNZP.Width = 65;
+            kolNZP.VisibleIndex = 4;
+            kolNZP.Width = 67;
             // 
             // PztCount
             // 
@@ -2703,8 +2720,8 @@ namespace SewingProduction.Features.TeamWork.Forms
             PztCount.Name = "PztCount";
             PztCount.OptionsColumn.AllowEdit = false;
             PztCount.Visible = true;
-            PztCount.VisibleIndex = 4;
-            PztCount.Width = 87;
+            PztCount.VisibleIndex = 5;
+            PztCount.Width = 98;
             // 
             // ButtonUnboundWd
             // 
@@ -2953,15 +2970,6 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn8.VisibleIndex = 4;
             gridColumn8.Width = 87;
             // 
-            // gridColumn48
-            // 
-            gridColumn48.Caption = "Дата обн.";
-            gridColumn48.FieldName = "dateUpdate";
-            gridColumn48.Name = "gridColumn48";
-            gridColumn48.Visible = true;
-            gridColumn48.VisibleIndex = 5;
-            gridColumn48.Width = 57;
-            // 
             // colstatus1
             // 
             colstatus1.Caption = "статус";
@@ -3017,7 +3025,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             // 
             gridView_unboundArts.Appearance.SelectedRow.BackColor = System.Drawing.Color.Red;
             gridView_unboundArts.Appearance.SelectedRow.Options.UseBackColor = true;
-            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, артикул, gridColumn2, gridColumn7, группа, модель, gridColumn4 });
+            gridView_unboundArts.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { код, артикул, gridColumn2, gridColumn7, группа, модель, gridColumn4, gridColumn51, gridColumn52 });
             gridView_unboundArts.DetailHeight = 404;
             gridView_unboundArts.GridControl = gridControl_unboundArts;
             gridView_unboundArts.Name = "gridView_unboundArts";
@@ -3047,7 +3055,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             код.OptionsColumn.AllowEdit = false;
             код.Visible = true;
             код.VisibleIndex = 0;
-            код.Width = 49;
+            код.Width = 53;
             // 
             // артикул
             // 
@@ -3058,7 +3066,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             артикул.OptionsColumn.AllowEdit = false;
             артикул.Visible = true;
             артикул.VisibleIndex = 1;
-            артикул.Width = 76;
+            артикул.Width = 83;
             // 
             // gridColumn2
             // 
@@ -3095,7 +3103,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             группа.OptionsColumn.AllowEdit = false;
             группа.Visible = true;
             группа.VisibleIndex = 3;
-            группа.Width = 87;
+            группа.Width = 95;
             // 
             // модель
             // 
@@ -3106,7 +3114,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             модель.OptionsColumn.AllowEdit = false;
             модель.Visible = true;
             модель.VisibleIndex = 4;
-            модель.Width = 87;
+            модель.Width = 67;
             // 
             // gridColumn4
             // 
@@ -3123,6 +3131,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn51.Name = "gridColumn51";
             gridColumn51.Visible = true;
             gridColumn51.VisibleIndex = 5;
+            gridColumn51.Width = 56;
             // 
             // gridColumn52
             // 
@@ -3131,6 +3140,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn52.Name = "gridColumn52";
             gridColumn52.Visible = true;
             gridColumn52.VisibleIndex = 6;
+            gridColumn52.Width = 60;
             // 
             // Root
             // 
@@ -3581,6 +3591,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn17.VisibleIndex = 3;
             gridColumn17.Width = 87;
             // 
+            // gridColumn48
+            // 
+            gridColumn48.Caption = "Дата обн.";
+            gridColumn48.FieldName = "dateUpdate";
+            gridColumn48.Name = "gridColumn48";
+            gridColumn48.Visible = true;
+            gridColumn48.VisibleIndex = 5;
+            gridColumn48.Width = 57;
+            // 
             // imageCollection1
             // 
             imageCollection1.ImageStream = (DevExpress.Utils.ImageCollectionStreamer)resources.GetObject("imageCollection1.ImageStream");
@@ -3688,6 +3707,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)gridView8).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControlNZP).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridViewNZP).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit8).EndInit();
             ((System.ComponentModel.ISupportInitialize)customGridControl3).EndInit();
             ((System.ComponentModel.ISupportInitialize)normRaszTab).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl_wdToBind).EndInit();
@@ -4225,5 +4245,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraGrid.Columns.GridColumn NameOfOperationKont;
         private DevExpress.XtraGrid.Columns.GridColumn TextRask;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn48;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn53;
+        private RepositoryItemCheckEdit repositoryItemCheckEdit8;
     }
 }

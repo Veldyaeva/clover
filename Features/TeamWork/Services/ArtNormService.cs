@@ -179,10 +179,10 @@ namespace SewingProduction.Services
         public async Task<ArtNormN> GetArtNormDataById(int annId)
         {
             try
-        {
-            string query = @"
+            {//            SUBSTRING(kod,1,7) AS kod, 
+                string query = @"
         SELECT 
-            SUBSTRING(kod,1,7) AS kod, annId, grup, articul, mod, sek, seb, sek_vyaz, 
+                annId, grup,  RTRIM(LTRIM(articul)) articul, mod, sek, seb, sek_vyaz, 
             data_obn, sek_shv, status_ann.name AS statusText, status, sek_vyazo, sek_vyaz5, 
             sek_vyaz7, sek_vyaz12, sek_vyaz10, sek_vyaz6, sek_vyaz18, sek_vyaz57, sek_kr, slogn, komment, annRecommendation as Reco,
             data_sozd, diz, constr, annDateDel, annCompDel, annDateAdd, annCompAdd, arh, parentId
