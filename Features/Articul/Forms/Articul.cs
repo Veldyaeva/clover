@@ -48,7 +48,9 @@ namespace SewingProduction.Features.Articul
         ////все поля таблицы Артикул
         private BindingList<SpArticulPreviewModel> _articulBindingList;
 
+
         private List<SpArticulKomplSostModel> _articulKomplSostList;
+        private List<spArticulNaborSostav> _articulNaborSostList;
 
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
@@ -109,6 +111,7 @@ namespace SewingProduction.Features.Articul
                 //загрузка перечня кодов из справочника, часть полей
                 _articulBindingList = new BindingList<SpArticulPreviewModel>();
                 bsArticul = new BindingSource { DataSource = _articulBindingList };
+
                 //состав комплекта 
                 //_articulKomplSostList = new BindingList<SpArticulKomplSostModel>();
                 //bsSostKompl = new BindingSource { DataSource = _articulKomplSostList };
@@ -246,6 +249,33 @@ namespace SewingProduction.Features.Articul
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostKomplFromSQlAsync для kod {kod}");
+            }
+        }
+        private async Task getSostNaborFromSQlAsync(string kod)
+        {
+            try
+            {
+                bsSostNabor.Clear();
+                bsSostNabor.ResetBindings(false);
+
+                var articulByKodTemp = await _articulDataService.GetSostavNaborForKod(kod);
+
+                if (articulByKodTemp != null)
+                {
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _articulNaborSostList = articulByKodTemp;                // Обновляем текущую модель
+                        bsSostNabor.DataSource = _articulNaborSostList; // Привязываем данные к форме
+
+                    });
+                    bsSostNabor.ResetBindings(false);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных getSostNaborFromSQlAsync для kod {kod}");
             }
         }
         private void bindComboBoxTkanName()
@@ -416,19 +446,38 @@ namespace SewingProduction.Features.Articul
                     kod = currentRow.Kod;
                     kodd = currentRow.Kodd;
 
-                    //getArticulFromSQl(kod);
+                    
                     Task getData = getArticulFromSQlAsync(kod);
                     Task getArtDrData = getArtDrForKodAsync(kod);
                     Task getKomplSostData = getSostKomplFromSQlAsync(kod);
-                    await Task.WhenAll(getData, getArtDrData, getKomplSostData);
-                    //Task.Run(()=>  getData);
+                    Task getNaborSostData = getSostNaborFromSQlAsync(kod);
 
-                    string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
+                    await Task.WhenAll(getData, getArtDrData, getKomplSostData, getNaborSostData);
+
+                    cTabPage1.PageVisible = false;
+                    cTabPage2.PageVisible = false;
+
+                    switch (bsSostKompl.Current, bsSostNabor.Current) {
+
+                        case ( not null, null):
+
+                            cTabPage1.PageVisible = true;
+                            break;
+                        case ( null, not null):
+                            cTabPage2.PageVisible = true;
+                            break;
+                        default:
+                            cTabPage1.PageVisible = false;
+                            cTabPage2.PageVisible = false;
+                            break;
+                    }
+
+
+                            string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                     var dt = _dbHelperAce.ExecuteQuery(query);
                     if (dt != null)
                     {
                         pictureBoxArticul.Image = Image.FromFile(((DataTable)dt).Rows[0]["pathpict"].ToString());
-
                     }
                 }
             }
@@ -494,7 +543,6 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
         private void customButtonCopy_Click(object sender, EventArgs e)
         {
             //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
@@ -506,6 +554,11 @@ namespace SewingProduction.Features.Articul
                 Articul_Load(sender, e);
             }
         }
+        /// <summary>
+        /// создание состава комплекта kompl
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
             /*//var kodObj = gridControl1.GetFocusedRowCellValue("Kod");

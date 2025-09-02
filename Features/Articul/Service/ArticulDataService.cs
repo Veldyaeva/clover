@@ -1,4 +1,5 @@
-﻿using DevExpress.Xpo.DB.Helpers;
+﻿using DevExpress.DataProcessing.InMemoryDataProcessor;
+using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
@@ -71,6 +72,13 @@ namespace SewingProduction.Features.Articul.Service
             string query = "SELECT * from view_KomplSostav where kod_k = @kod";
             return await _dbService.GetListAsync<SpArticulKomplSostModel>(query, new { kod });
 
+        }
+
+        public async Task<List<spArticulNaborSostav>> GetSostavNaborForKod(string kod)
+        {
+            string query = "SELECT kod, tk_name, tat_name, id_gost, name_gost, ag_naimen, sostav, razm" +
+                " FROM view_articulNaborSostav where kod  = @kod";
+            return await _dbService.GetListAsync<spArticulNaborSostav>(query, new { kod });
         }
 
     }
