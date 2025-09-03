@@ -24,8 +24,22 @@ namespace SewingProduction.Features.Articul.Models
         public string GostOpi { get; set; }
         [NotMapped]
         public string ScNomer { get; set; }
-        
-        
+        [NotMapped]
+        public decimal Kf_tkan_kach1 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach2 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach3 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach4 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach5 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach6 { get; set; }
+        [NotMapped]
+        public decimal Kf_tkan_kach7 { get; set; }
+
+
 
 
         //контроль изменения поля

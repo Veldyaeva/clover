@@ -142,6 +142,7 @@ namespace SewingProduction.Features.Articul
                 txbKodTnved.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Kod_tnved), true);
                 txbNDS.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Nds), true);
                 #endregion
+
                 #region галки с отделками
 
                 //галки вяз отделки
@@ -160,6 +161,97 @@ namespace SewingProduction.Features.Articul
                 chkPres.DataBindings.Add("Checked", bsArticul, nameof(SpArticulPreviewModel.P_pres), true);
                 #endregion
 
+                #region Затраты на изготовление
+                txbNormt.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Norm_t), true, DataSourceUpdateMode.Never);
+
+                // TODO: добавить расчет полной с\ст на изделие по коду 
+                //txbSeb.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb), true, DataSourceUpdateMode.Never);
+
+                // нормы на полотно 
+                foreach (CustomTextBox el in cgbTkanNorm.Controls)
+                {
+                    char si = el.Name.Last();
+                    var name = $"Norm_t{si}";
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        el.DataBindings.Add("Text",bsArticul,name,true,DataSourceUpdateMode.Never);
+                        el.Text = string.Format("{0:F2}", el.Text);
+                    }
+                }
+                //себестоимость
+                foreach (CustomTextBox el in cgbTkanSeb.Controls)
+                {
+                    char si = el.Name.Last();
+                    var name = $"Seb_t{si}";
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
+                    }
+                }
+                // брак
+                foreach (CustomTextBox el in cgbTkanBrak.Controls)
+                {
+                    char si = el.Name.Last();
+                    //var name = $"nameof(SpArticulPreviewModel.Brak_t{si})";
+                    var name = $"Brak_t{si}";
+
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
+                        //el.Text = string.Format("{0:F2}", el.Text);
+                    }
+                }
+                // % брака 
+                foreach (CustomTextBox el in cgbBrakPercent.Controls)
+                {
+                    char si = el.Name.Last();
+                    var name = $"Brak_percent{si}";
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        // вывод строки в формате 2 знака после запятой 
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never,null, "F2");
+                        
+                    }
+                }
+                // коэф-т качества полотна
+                foreach (CustomTextBox el in cgbKfKach.Controls)
+                {
+                    char si = el.Name.Last();
+                    var name = $"Kf_tkan_kach{si}";
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        // вывод строки в формате 2 знака после запятой 
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never, null, "F2");
+                    }
+                }
+                // назначение полотна 
+                foreach (CustomTextBox el in cgbTkanPurpose.Controls)
+                {
+                    char si = el.Name.Last();
+                    var name = $"Opis_t{si}";
+                    if (el.GetType() == typeof(CustomTextBox))
+                    {
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
+                    }
+                }
+
+                #endregion
+
+                #region Норма/сек + зарплата 
+
+                txbSek.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek), true, DataSourceUpdateMode.Never);
+                txbSekVyaz.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_vyaz), true, DataSourceUpdateMode.Never);
+                txbSekShv.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_shv), true, DataSourceUpdateMode.Never);
+                txbSekKr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sek_kr), true, DataSourceUpdateMode.Never);
+                //зарплата
+                txbSumZarpl.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_zarpl), true, DataSourceUpdateMode.Never);
+                txbSumDopOpl.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_dopopl), true, DataSourceUpdateMode.Never);
+                txbSumStrVznos.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_strvznos), true, DataSourceUpdateMode.Never);
+                txbSumSebRaskr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_sebraskr), true, DataSourceUpdateMode.Never);
+                txbSumKomplNum.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Sum_komplnum), true, DataSourceUpdateMode.Never);
+
+
+                #endregion
             }
             catch (Exception ex)
             {
@@ -367,7 +459,7 @@ namespace SewingProduction.Features.Articul
                     txbSebz.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_Sebz"].ToString();
 
                     // нормы на полотно 
-                    foreach (CustomTextBox el in gbTkanNorm.Controls)
+                    foreach (CustomTextBox el in cgbTkanNorm.Controls)
                     {
                         char si = el.Name.Last();
                         if (el.GetType() == typeof(CustomTextBox))
@@ -378,7 +470,7 @@ namespace SewingProduction.Features.Articul
                         }
                     }
                     //себестоимость
-                    foreach (CustomTextBox el in gbTkanSeb.Controls)
+                    foreach (CustomTextBox el in cgbTkanSeb.Controls)
                     {
                         char si = el.Name.Last();
                         if (el.GetType() == typeof(CustomTextBox))
@@ -387,19 +479,19 @@ namespace SewingProduction.Features.Articul
                         }
                     }
                     //брак
-                    foreach (CustomTextBox el in gbTkanBrak.Controls)
-                    {
-                        char si = el.Name.Last();
-                        if (el.GetType() == typeof(CustomTextBox))
-                        {
-                            el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_brak{si}"].ToString();
-                            // вывод строки в формате 2 знака после запятой 
-                            el.Text = string.Format("{0:F2}", el.Text);
-                        }
-                    }
+                    //foreach (CustomTextBox el in gbTkanBrak_old.Controls)
+                    //{
+                    //    char si = el.Name.Last();
+                    //    if (el.GetType() == typeof(CustomTextBox))
+                    //    {
+                    //        el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_brak{si}"].ToString();
+                    //        // вывод строки в формате 2 знака после запятой 
+                    //        el.Text = string.Format("{0:F2}", el.Text);
+                    //    }
+                    //}
 
 
-                    foreach (CustomTextBox el in gbBrakPercent.Controls)
+                    foreach (CustomTextBox el in cgbBrakPercent.Controls)
                     {
                         char si = el.Name.Last();
                         if (el.GetType() == typeof(CustomTextBox))
