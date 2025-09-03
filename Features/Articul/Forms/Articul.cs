@@ -372,23 +372,23 @@ namespace SewingProduction.Features.Articul
         }
         private void bindComboBoxTkanName()
         {
-            string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";
-            DataTable dt = _dbHelperAce.ExecuteQuery(query);
+            //string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";
+            //DataTable dt = _dbHelperAce.ExecuteQuery(query);
 
-            foreach (CustomComboBox el in gbTkanName.Controls)
-            {
-                if (el.GetType() == typeof(CustomComboBox))
-                {
-                    char si = el.Name.Last();
-                    BindingSource bs = new BindingSource();
-                    bs.DataSource = dt;
+            //foreach (CustomComboBox el in gbTkanName.Controls)
+            //{
+            //    if (el.GetType() == typeof(CustomComboBox))
+            //    {
+            //        char si = el.Name.Last();
+            //        BindingSource bs = new BindingSource();
+            //        bs.DataSource = dt;
 
-                    el.DataSource = bs;
-                    el.DisplayMember = "tkb";
-                    el.ValueMember = "kod_t";
-                    el.DataBindings.Add("SelectedValue", bsArticul, $"va_kod_t{si}", true, DataSourceUpdateMode.OnPropertyChanged);
-                }
-            }
+            //        el.DataSource = bs;
+            //        el.DisplayMember = "tkb";
+            //        el.ValueMember = "kod_t";
+            //        el.DataBindings.Add("SelectedValue", bsArticul, $"va_kod_t{si}", true, DataSourceUpdateMode.OnPropertyChanged);
+            //    }
+            //}
         }
 
 
@@ -397,128 +397,7 @@ namespace SewingProduction.Features.Articul
         /// </summary>
         /// <param name="kod"></param>
         /// <returns></returns>
-        private async Task getArticulFromSQl(string kod)
-        {
-            try
-            {
-                //string queryArticul = $"select * from dbo.viewArticul_preview where va_kod = '{kod}'";
-                //DataTable dt = _dbHelperAce.ExecuteQuery(queryArticul);
-                _articulByKod = await _articulDataService.GetByKodAsync(kod);
-
-                bsArticul.DataSource = _articulByKod;
-                if (bsArticul.Count > 0)
-                {
-                    // нормы , с\стоимость
-                    txbKod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod"].ToString();
-                    //txbArticul.Text = dt.Rows[0]["va_articul"].ToString();
-                    txbArticul.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_articul"].ToString();
-                    txbMod.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_mod"].ToString();
-                    txbSeason.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_seasonName"].ToString();
-                    txbTM.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_kleNaimen"].ToString();
-                    txbAssort.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_assort"].ToString();
-                    txbCountry.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_countryName"].ToString();
-                    txbGrupMenName.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_grupMenName"].ToString();
-                    txbGrup.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_grup"].ToString();
-                    txbIdGost.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_idGost"].ToString();
-                    txbNameGost.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_nameGost"].ToString();
-                    txbOpiGost.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_opiGost"].ToString();
-                    txbSost.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_sost"].ToString();
-                    txbSost2.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_sost2"].ToString();
-                    txbSost3.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_sost3"].ToString();
-                    mtbDateOpis.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_dateOpis"].ToString();
-                    txbScNomer.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_scNomer"].ToString();
-                    txbKodTnved.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_kodTnved"].ToString();
-                    txbNDS.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_kodTnved"].ToString();
-                    txbRazm.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_razm"].ToString();
-                    txbNormt.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_norm_t"].ToString();
-                    txbBrakAll.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_BrakAll"].ToString();
-
-                    //va_seb_z
-
-                    //галки вяз отделки
-                    chbKombIzd.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_kombIzd"]);
-                    chbKombDet.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_kombdet"]);
-                    chbArh.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_arh"]);
-
-                    //отделка
-                    chbIsUpak.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_isUpak"]);
-                    chbIsFurnit.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_isFurnit"]);
-
-                    chkP.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_p"]);
-                    chkV.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_v"]);
-                    chkBus.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_bus"]);
-                    chkStra.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_stra"]);
-                    chkPres.Checked = Convert.ToBoolean(((DataTable)bsArticul.DataSource).Rows[0]["va_pPres"]);
-
-                    //Норма, сек
-
-                    txbSek.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_sek"].ToString();
-                    txbSekVyaz.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_SekVyaz"].ToString();
-                    txbSekShv.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_SekShv"].ToString();
-                    txbSekKr.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_SekKr"].ToString();
-                    txbSebz.Text = ((DataTable)bsArticul.DataSource).Rows[0]["va_Sebz"].ToString();
-
-                    // нормы на полотно 
-                    foreach (CustomTextBox el in cgbTkanNorm.Controls)
-                    {
-                        char si = el.Name.Last();
-                        if (el.GetType() == typeof(CustomTextBox))
-                        {
-                            //.Format("{0:C}", price)
-                            el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_norm_t{si}"].ToString();
-                            el.Text = string.Format("{0:F2}", el.Text);
-                        }
-                    }
-                    //себестоимость
-                    foreach (CustomTextBox el in cgbTkanSeb.Controls)
-                    {
-                        char si = el.Name.Last();
-                        if (el.GetType() == typeof(CustomTextBox))
-                        {
-                            el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_seb_t{si}"].ToString();
-                        }
-                    }
-                    //брак
-                    //foreach (CustomTextBox el in gbTkanBrak_old.Controls)
-                    //{
-                    //    char si = el.Name.Last();
-                    //    if (el.GetType() == typeof(CustomTextBox))
-                    //    {
-                    //        el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_brak{si}"].ToString();
-                    //        // вывод строки в формате 2 знака после запятой 
-                    //        el.Text = string.Format("{0:F2}", el.Text);
-                    //    }
-                    //}
-
-
-                    foreach (CustomTextBox el in cgbBrakPercent.Controls)
-                    {
-                        char si = el.Name.Last();
-                        if (el.GetType() == typeof(CustomTextBox))
-                        {
-                            //el.Text = ((DataTable)bsArticul.DataSource).Rows[0][$"va_brakpercent{si}"].ToString();
-                            // вывод строки в формате 2 знака после запятой 
-                            el.Text = $"{((DataTable)bsArticul.DataSource).Rows[0][$"va_brakpercent{si}"]:F2}";
-
-                        }
-                    }
-
-                    //getArt_drFromSQl(kod);
-                    /*
-                    //customComboBox1.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t1"].ToString();
-                    //customComboBox2.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t2"].ToString();
-                    //customComboBox3.SelectedValue = ((DataTable)bsArticul.DataSource).Rows[0]["va_kod_t3"].ToString();
-                    */
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Ошибка при загрузке данных: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-
-        }
+        
 
         /// <summary>
         /// обновлениме данных на форме по коду при перемещении по таблице артикулов
