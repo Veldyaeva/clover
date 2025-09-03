@@ -545,6 +545,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                         if (forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0)
                         {
                             await RefreshNormRaszForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
+                            await RefreshNormRaskForArticlesTab(updatedArtNormN.AnnID, CancellationToken.None);
+                            
                         }
                         else if (!forMyDataAnnView && updatedArtNormN != null && updatedArtNormN.AnnID > 0) // Иначе, если для первой вкладки
                         {
@@ -777,9 +779,9 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void loadAllCheckBox_CheckedChanged_Internal(object sender, EventArgs e)
         {
             List<MyDataANN> list = null;
-            if (loadAllCheckBox.Checked)
+            if (loadAllCheckBox.Checked) //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
                 list = await LoadWorksbyArt("");
-            else if (!loadAllCheckBox.Checked)
+            else if (!loadAllCheckBox.Checked) //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
             {
                 //string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
                 //if (!int.TryParse(kod, out int kodInt))
