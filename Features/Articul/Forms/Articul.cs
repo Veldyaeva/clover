@@ -1,5 +1,6 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
 using DevExpress.Data.Internal;
+using DevExpress.Office.Utils;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Core.interfaces;
@@ -15,6 +16,7 @@ using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Help.Form;
 using SewingProduction.Helpers;
 using SewingProduction.Report;
+using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,10 +36,14 @@ namespace SewingProduction.Features.Articul
     public partial class Articul : CustomForm
     {
         private readonly DatabaseHelper _dbHelperAce;
+
+        private readonly DbService _dbService;
         private UserClass _user;
         private readonly ILogger _logger = new FileLogger();
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
+        
+
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
         //фурнитура на артикул
@@ -60,6 +66,7 @@ namespace SewingProduction.Features.Articul
         public Articul(UserClass user) : base(user)
         {
             _dbHelperAce = new DatabaseHelper();
+            _dbService = new DbService(_dbHelperAce);
             InitializeComponent();
             _user = user;
             ThemeManager.UpdateTheme(this);
@@ -174,7 +181,7 @@ namespace SewingProduction.Features.Articul
                     var name = $"Norm_t{si}";
                     if (el.GetType() == typeof(CustomTextBox))
                     {
-                        el.DataBindings.Add("Text",bsArticul,name,true,DataSourceUpdateMode.Never);
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never);
                         el.Text = string.Format("{0:F2}", el.Text);
                     }
                 }
@@ -209,8 +216,8 @@ namespace SewingProduction.Features.Articul
                     if (el.GetType() == typeof(CustomTextBox))
                     {
                         // вывод строки в формате 2 знака после запятой 
-                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never,null, "F2");
-                        
+                        el.DataBindings.Add("Text", bsArticul, name, true, DataSourceUpdateMode.Never, null, "F2");
+
                     }
                 }
                 // коэф-т качества полотна
@@ -252,6 +259,12 @@ namespace SewingProduction.Features.Articul
 
 
                 #endregion
+                #region коэфициенты
+                txbSebDop.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_dop), true, DataSourceUpdateMode.Never);
+
+
+                #endregion
+
             }
             catch (Exception ex)
             {
@@ -391,14 +404,6 @@ namespace SewingProduction.Features.Articul
             //}
         }
 
-
-        /// <summary>
-        ////используется в закоменченном методе при добавлении и копировании кода
-        /// </summary>
-        /// <param name="kod"></param>
-        /// <returns></returns>
-        
-
         /// <summary>
         /// обновлениме данных на форме по коду при перемещении по таблице артикулов
         /// </summary>
@@ -417,7 +422,7 @@ namespace SewingProduction.Features.Articul
                     kod = currentRow.Kod;
                     kodd = currentRow.Kodd;
 
-                    
+
                     Task getData = getArticulFromSQlAsync(kod);
                     Task getArtDrData = getArtDrForKodAsync(kod);
                     Task getKomplSostData = getSostKomplFromSQlAsync(kod);
@@ -428,13 +433,14 @@ namespace SewingProduction.Features.Articul
                     cTabPage1.PageVisible = false;
                     cTabPage2.PageVisible = false;
 
-                    switch (bsSostKompl.Current, bsSostNabor.Current) {
+                    switch (bsSostKompl.Current, bsSostNabor.Current)
+                    {
 
-                        case ( not null, null):
+                        case (not null, null):
 
                             cTabPage1.PageVisible = true;
                             break;
-                        case ( null, not null):
+                        case (null, not null):
                             cTabPage2.PageVisible = true;
                             break;
                         default:
@@ -444,7 +450,7 @@ namespace SewingProduction.Features.Articul
                     }
 
 
-                            string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
+                    string query = $"select dbo.getFileEskizForKodd('{kodd}') as pathpict ";
                     var dt = _dbHelperAce.ExecuteQuery(query);
                     if (dt != null)
                     {
@@ -549,6 +555,45 @@ namespace SewingProduction.Features.Articul
                 Articul_Load(sender, e);
             }
             */
+        }
+
+        private async void  sButtodDeleteKod_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var kod = (bsArt.Current as ArticulModel).Kod;
+
+                string query = "exec dbo.kodArticulisUsed @kod = @kod";
+                DataTable result = await _dbHelperAce.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@kod", kod } });
+                ArticulModel cuRow = (ArticulModel)bsArt.Current;
+
+                if (result.Rows.Count > 0)
+                {
+                    //return result.Rows[0]["fio"].ToString(); 
+                    if (result.Rows[0].Field<int>("error") != 0)
+                    {
+
+                        MessageBox.Show("Ошибка удаления" + result.Rows[0].Field<string>("messageerror"));
+                        return;
+                    }
+                    //удаление кода 
+                    
+                    await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
+
+                    _artPreview.Remove(cuRow);
+                    bsArt.ResetBindings(false);
+
+                    //Task delKod = _articulDataService.DeleteAsync((ArticulModel)bsArt.Current);
+                    //await Task.WhenAll(delKod);
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
+            }
+            
         }
     }
 }

@@ -229,7 +229,7 @@ namespace SewingProduction.Features.Articul
             layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            sButtodDeleteKod = new DevExpress.XtraEditors.SimpleButton();
             customSimpleButton7 = new CustomSimpleButton();
             customTabControlKomplNabor = new CustomTabControl();
             cTabPage1 = new DevExpress.XtraTab.XtraTabPage();
@@ -2868,7 +2868,7 @@ namespace SewingProduction.Features.Articul
             // layoutControl1
             // 
             layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            layoutControl1.Controls.Add(simpleButton1);
+            layoutControl1.Controls.Add(sButtodDeleteKod);
             layoutControl1.Controls.Add(customSimpleButton7);
             layoutControl1.Controls.Add(customTabControlKomplNabor);
             layoutControl1.Controls.Add(customSimpleButton2);
@@ -2883,20 +2883,24 @@ namespace SewingProduction.Features.Articul
             layoutControl1.TabIndex = 0;
             layoutControl1.Text = "layoutControl1";
             // 
-            // simpleButton1
+            // sButtodDeleteKod
             // 
-            simpleButton1.Appearance.BackColor = Color.FromArgb(224, 224, 224);
-            simpleButton1.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
-            simpleButton1.Appearance.ForeColor = Color.Red;
-            simpleButton1.Location = new Point(291, 62);
-            simpleButton1.Margin = new System.Windows.Forms.Padding(0);
-            simpleButton1.MaximumSize = new Size(285, 26);
-            simpleButton1.MinimumSize = new Size(285, 26);
-            simpleButton1.Name = "simpleButton1";
-            simpleButton1.Size = new Size(285, 26);
-            simpleButton1.StyleController = layoutControl1;
-            simpleButton1.TabIndex = 8;
-            simpleButton1.Text = "Удалить";
+            sButtodDeleteKod.Appearance.BackColor = Color.FromArgb(224, 224, 224);
+            sButtodDeleteKod.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            sButtodDeleteKod.Appearance.ForeColor = Color.Red;
+            sButtodDeleteKod.Appearance.Options.UseBackColor = true;
+            sButtodDeleteKod.Appearance.Options.UseFont = true;
+            sButtodDeleteKod.Appearance.Options.UseForeColor = true;
+            sButtodDeleteKod.Location = new Point(291, 62);
+            sButtodDeleteKod.Margin = new System.Windows.Forms.Padding(0);
+            sButtodDeleteKod.MaximumSize = new Size(285, 26);
+            sButtodDeleteKod.MinimumSize = new Size(285, 26);
+            sButtodDeleteKod.Name = "sButtodDeleteKod";
+            sButtodDeleteKod.Size = new Size(285, 26);
+            sButtodDeleteKod.StyleController = layoutControl1;
+            sButtodDeleteKod.TabIndex = 8;
+            sButtodDeleteKod.Text = "Удалить";
+            sButtodDeleteKod.Click += sButtodDeleteKod_Click;
             // 
             // customSimpleButton7
             // 
@@ -3142,7 +3146,7 @@ namespace SewingProduction.Features.Articul
             // 
             // layoutControlItem8
             // 
-            layoutControlItem8.Control = simpleButton1;
+            layoutControlItem8.Control = sButtodDeleteKod;
             layoutControlItem8.Location = new Point(289, 60);
             layoutControlItem8.Name = "layoutControlItem8";
             layoutControlItem8.Size = new Size(291, 30);
@@ -3835,7 +3839,7 @@ namespace SewingProduction.Features.Articul
         private CustomSimpleButton customSimpleButton4;
         private CustomSimpleButton customSimpleButton3;
         private CustomSimpleButton customSimpleButton1;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton sButtodDeleteKod;
         private CustomSimpleButton customSimpleButton7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
