@@ -1019,7 +1019,8 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
                 }
 
-                int kod = selectedRow.kodd_rt; // код артикула из строки НЗП
+                //int kod = selectedRow.kodd_rt; // код артикула из строки НЗП
+                int kod = selectedRow.kodd;
                 int annIdNzpRow = selectedRow.annId; // AnnID РТ из строки НЗП
                 await _logger.LogEventAsync($"UnboundWD: Начало. Артикул KOD: {kod}, РТ AnnID из строки НЗП: {annIdNzpRow}", "UnboundWD_Debug");
 
