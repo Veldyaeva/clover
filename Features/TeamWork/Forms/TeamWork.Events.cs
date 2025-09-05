@@ -297,6 +297,133 @@ namespace SewingProduction.Features.TeamWork.Forms
             }
         }
 
+
+        /// <summary>
+        /// Выполняет поиск артикулов по тексту из textEdit1
+        /// </summary>
+        private async Task SearchArticulesByText()
+        {
+            try
+            {
+                string searchText = customTextBox1.Text?.Trim();
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    await _logger.LogWarningAsync("Пустой текст для поиска артикулов", "SearchArticulesByText");
+                    return;
+                }
+
+                await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}'", "SearchArticulesByText");
+
+                // Строим SQL запрос
+                string query = @"SELECT * FROM art_norm_n ann 
+                               WHERE ann.annId IN (
+                                   SELECT sa.annId 
+                                   FROM sp_articul sa 
+                                   WHERE sa.articul LIKE @searchPattern
+                               )
+                               ORDER BY ann.annId DESC";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@searchPattern", $"%{searchText}%" }
+                };
+
+                // Выполняем запрос через DbService для модели MyDataANN
+                var searchResults = await _dbService.GetListAsync<MyDataANN>(query, parameters);
+
+                // Обновляем данные в gridView_wdToBind
+                if (searchResults != null && searchResults.Any())
+                {
+                    _myDataAnnList.Clear();
+                    _myDataAnnList.BulkLoad(searchResults);
+
+                    await _logger.LogEventAsync($"Найдено {searchResults.Count} артикулов в текущих работах по запросу '{searchText}'", "SearchArticulesForCurrentWorks");
+
+                    // Устанавливаем фокус на первую строку в gridView_wdToBind
+                    if (gridView_wdToBind.DataRowCount > 0)
+                    {
+                        gridView_wdToBind.FocusedRowHandle = 0;
+                        // Фокус автоматически загрузит связанные данные через существующий обработчик
+                    }
+                }
+                else
+                {
+                    _myDataAnnList.Clear();
+                    await _logger.LogEventAsync($"По запросу '{searchText}' артикулы в текущих работах не найдены", "SearchArticulesForCurrentWorks");
+                    MessageBox.Show($"По запросу '{searchText}' артикулы не найдены", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при поиске артикулов в текущих работах по тексту: '{textEdit1.Text}'");
+                MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        /// <summary>
+        /// Выполняет поиск артикулов для вкладки "Текущие работы" из searchLookUpEditByBindedArts
+        /// </summary>
+        private async Task SearchArticulesForCurrentWorks()
+        {
+            try
+            {
+                string searchText = textEdit1.Text?.Trim();
+                if (string.IsNullOrEmpty(searchText))
+                {
+                    await _logger.LogWarningAsync("Пустой текст для поиска артикулов в текущих работах", "SearchArticulesForCurrentWorks");
+                    return;
+                }
+
+                await _logger.LogEventAsync($"Начало поиска артикулов в текущих работах по тексту: '{searchText}'", "SearchArticulesForCurrentWorks");
+
+                // Адаптированный SQL запрос для модели MyDataANN
+                string query = @"SELECT ann.annId as AnnID, ann.kod as Kod, ann.articul as Articul, 
+                               ann.status as Status, ann.grup, ann.mod, ann.data_obn as dateUpdate
+                               FROM art_norm_n ann 
+                               WHERE ann.annId IN (
+                                   SELECT sa.annId 
+                                   FROM sp_articul sa 
+                                   WHERE sa.articul LIKE @searchPattern
+                               )
+                               ORDER BY ann.annId DESC";
+
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@searchPattern", $"%{searchText}%" }
+                };
+
+                // Выполняем запрос через DbService для модели MyDataANN
+                var searchResults = await _dbService.GetListAsync<MyDataANN>(query, parameters);
+
+                // Обновляем данные в gridView_wdToBind
+                if (searchResults != null && searchResults.Any())
+                {
+                    _myDataAnnList.Clear();
+                    _myDataAnnList.BulkLoad(searchResults);
+                    
+                    await _logger.LogEventAsync($"Найдено {searchResults.Count} артикулов в текущих работах по запросу '{searchText}'", "SearchArticulesForCurrentWorks");
+                    
+                    // Устанавливаем фокус на первую строку в gridView_wdToBind
+                    if (gridView_wdToBind.DataRowCount > 0)
+                    {
+                        gridView_wdToBind.FocusedRowHandle = 0;
+                        // Фокус автоматически загрузит связанные данные через существующий обработчик
+                    }
+                }
+                else
+                {
+                    _myDataAnnList.Clear();
+                    await _logger.LogEventAsync($"По запросу '{searchText}' артикулы в текущих работах не найдены", "SearchArticulesForCurrentWorks");
+                    MessageBox.Show($"По запросу '{searchText}' артикулы не найдены", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при поиске артикулов в текущих работах по тексту: '{textEdit1.Text}'");
+                MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public async Task<bool> PrepareUiAsync(GridView view, int FocusedRowHandle)
         {
             try

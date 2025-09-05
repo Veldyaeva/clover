@@ -141,8 +141,10 @@ namespace SewingProduction.Models
         [Column("annCompDel")]
         public string compDel { get; set; }
         [Column("annDateAdd")]
+        [NotMapped]
         public DateTime? dateAdd { get; set; }
         [Column("annCompAdd")]
+        [NotMapped]
         public string compAdd { get; set; }
 
         [Column("sek_kr")]

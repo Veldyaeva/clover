@@ -151,7 +151,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             //{
             //    customGridControl2.DataSource = _normRaskBindingSourceArticles;
             //    _logger?.LogEventAsync($"Constructor: customGridControl2.DataSource set to _normRaskBindingSourceArticles", "TeamWork.Constructor");
-                
+
             //    // Verify the grid view configuration
             //    if (customGridControl2.MainView is GridView gridView)
             //    {
@@ -174,7 +174,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             InitializeGridSettings();
             SetupDateUpdateColumn();
-            
+
             VerifyGridConfigurations();
         }
 
@@ -212,7 +212,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     if (annId > 0)
                     {
                         await _logger.LogEventAsync($"ForceRefreshNormRaskArt: Refreshing data for annId={annId}", "ForceRefreshNormRaskArt");
-                        
+
                         // Call the method from TeamWork.Articles.cs
                         var articlesForm = this as dynamic;
                         if (articlesForm != null)
@@ -240,7 +240,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 await _logger.LogEventAsync($"CheckNormRaskArtState: Starting grid state check", "CheckNormRaskArtState");
-                
+
                 if (customGridControl2 == null)
                 {
                     await _logger.LogWarningAsync("CheckNormRaskArtState: customGridControl2 is null", "CheckNormRaskArtState");
@@ -248,16 +248,16 @@ namespace SewingProduction.Features.TeamWork.Forms
                 }
 
                 await _logger.LogEventAsync($"CheckNormRaskArtState: customGridControl2.Visible={customGridControl2.Visible}, Enabled={customGridControl2.Enabled}", "CheckNormRaskArtState");
-                
+
                 if (customGridControl2.MainView is GridView gridView)
                 {
                     await _logger.LogEventAsync($"CheckNormRaskArtState: GridView.RowCount={gridView.RowCount}, DataRowCount={gridView.DataRowCount}", "CheckNormRaskArtState");
                     await _logger.LogEventAsync($"CheckNormRaskArtState: GridView.DataSource={gridView.GridControl?.DataSource}", "CheckNormRaskArtState");
-                    
+
                     if (gridView.DataSource is BindingSource bindingSource)
                     {
                         await _logger.LogEventAsync($"CheckNormRaskArtState: BindingSource.DataSource={bindingSource.DataSource}, Count={bindingSource.Count}", "CheckNormRaskArtState");
-                        
+
                         if (bindingSource.DataSource is BindingList<NormRask> bindingList)
                         {
                             await _logger.LogEventAsync($"CheckNormRaskArtState: BindingList.Count={bindingList.Count}", "CheckNormRaskArtState");
@@ -273,7 +273,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 {
                     await _logger.LogWarningAsync("CheckNormRaskArtState: customGridControl2.MainView is not GridView", "CheckNormRaskArtState");
                 }
-                
+
                 await _logger.LogEventAsync($"CheckNormRaskArtState: Grid state check completed", "CheckNormRaskArtState");
             }
             catch (Exception ex)
@@ -290,19 +290,19 @@ namespace SewingProduction.Features.TeamWork.Forms
             try
             {
                 await _logger.LogEventAsync($"ForceRefreshAndCheckNormRaskArt: Starting forced refresh and check", "ForceRefreshAndCheckNormRaskArt");
-                
+
                 // First check current state
                 await CheckNormRaskArtState();
-                
+
                 // Then force refresh
                 await ForceRefreshNormRaskArt();
-                
+
                 // Wait a bit for the refresh to complete
                 await Task.Delay(100);
-                
+
                 // Check state again after refresh
                 await CheckNormRaskArtState();
-                
+
                 await _logger.LogEventAsync($"ForceRefreshAndCheckNormRaskArt: Completed forced refresh and check", "ForceRefreshAndCheckNormRaskArt");
             }
             catch (Exception ex)
@@ -326,10 +326,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     {
                         _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt column '{col.Name}' - FieldName: '{col.FieldName}', Visible: {col.Visible}, Width: {col.Width}", "VerifyGridConfigurations");
                     }
-                    
+
                     // Verify data source binding
                     _logger?.LogEventAsync($"VerifyGridConfigurations: normRaskArt DataSource: {normRaskArtView.GridControl?.DataSource}", "VerifyGridConfigurations");
-                    
+
                     // Verify grid visibility and accessibility
                     _logger?.LogEventAsync($"VerifyGridConfigurations: customGridControl2.Visible={customGridControl2.Visible}, Enabled={customGridControl2.Enabled}", "VerifyGridConfigurations");
                     _logger?.LogEventAsync($"VerifyGridConfigurations: customGridControl2.Parent={customGridControl2.Parent?.Name}, Parent.Visible={customGridControl2.Parent?.Visible}", "VerifyGridConfigurations");
@@ -363,20 +363,20 @@ namespace SewingProduction.Features.TeamWork.Forms
             GridColumn colDateUpdate = ANNgridView.Columns["dateUpdate"];
             if (colDateUpdate != null)
             {
-            // Устанавливаем формат отображения даты без времени
-            colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
-            colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
+                // Устанавливаем формат отображения даты без времени
+                colDateUpdate.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+                colDateUpdate.DisplayFormat.FormatString = "dd.MM.yyyy";
 
-            ANNgridView.CustomRowCellEdit += (s, e) =>
-            {
-                if (e.Column == colDateUpdate)
+                ANNgridView.CustomRowCellEdit += (s, e) =>
                 {
-                    var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
-                    if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
-                        e.RepositoryItem = commandsEditDateNull;
-                    else e.RepositoryItem = commandsEditDateText;
-                }
-            };
+                    if (e.Column == colDateUpdate)
+                    {
+                        var dateUpdate = ANNgridView.GetRowCellValue(e.RowHandle, "dateUpdate");
+                        if (dateUpdate == null || string.IsNullOrEmpty(dateUpdate.ToString()))
+                            e.RepositoryItem = commandsEditDateNull;
+                        else e.RepositoryItem = commandsEditDateText;
+                    }
+                };
             }
         }
 
@@ -850,7 +850,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                             {
                                 await _logger.LogEventAsync($"XtraTabControl2_SelectedPageChanged: Refreshing NormRask data for annId={annId} on xtraTabPageWorkDivisions", "XtraTabControl2_SelectedPageChanged");
                                 await RefreshNormRaskForArticlesTab(annId, _loadCts.Token);
-                                
+
                                 // Check the grid state after refresh
                                 await CheckNormRaskArtState();
                             }
@@ -878,7 +878,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         private void ButtonEditWd_Click(object sender, EventArgs e)
         {
-            
+
             EditWd_Internal2(ANNgridView, _bindingList, _bindingSource, Editing: false);
         }
 
@@ -1333,7 +1333,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 case 9:
                     //Debug.WriteLine(PrintButton.Enabled + " " + PrintButton.Visible);
                     if (PrintButton.Enabled && PrintButton.Visible)
-                    // Отчет технологической схемы разделения труда
+                        // Отчет технологической схемы разделения труда
                         PrintWorkDivisionScheme_Click(null, null);
                     break;
                 case 11:
@@ -1640,13 +1640,19 @@ namespace SewingProduction.Features.TeamWork.Forms
                     return;
 
                 // SQL запрос для обновления поля arch
-                string sqlQuery = @"
-                    UPDATE sa 
+                //string sqlQuery = @"
+                //    UPDATE sp_articul sa 
+                //    SET sa.arh = 1
+                //    WHERE left(sa.kod, 7) = @kod 
+                //    AND ann.articul = @art  
+                //    AND ann.annID = @annId";
+                string sqlQuery = @"UPDATE sa
                     SET sa.arh = 1
+                    FROM dbo.sp_articul AS sa
+                    JOIN dbo.art_norm_n AS ann ON ann.AnnID = sa.AnnID
                     WHERE left(sa.kod, 7) = @kod 
-                    AND ann.articul = @art  
+                    AND sa.articul = @art  
                     AND ann.annID = @annId";
-
                 var parameters = new Dictionary<string, object>
                 {
                     { "@annId", annId },
@@ -2317,10 +2323,18 @@ namespace SewingProduction.Features.TeamWork.Forms
             await SetUpdateDate_Internal(sender, e);
         }
 
-        private void xtraTabControl2_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Обработчик нажатия клавиш в textEdit1 для поиска артикулов (основная вкладка)
+        /// </summary>
+        private async void textEdit1_KeyPress(object sender, KeyPressEventArgs e)
         {
-
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                await SearchArticulesByText();
+            }
         }
+
     }
     public static class DemoHelper
     {

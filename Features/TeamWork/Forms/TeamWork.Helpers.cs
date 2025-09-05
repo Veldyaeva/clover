@@ -101,101 +101,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private void filterTable()
         {
-            //try
-            //{
-            //    // Сохраняем текущий общий фильтр (включая поиск и фильтры колонок)
-            //    CriteriaOperator existingFilter = ANNgridView.ActiveFilterCriteria;
-
-            //    // Создаем фильтры на основе состояния чекбоксов
-            //    CriteriaOperator statusCriteria = null;
-            //    GroupOperator statusGroup = null;
-
-            //    // Создаем фильтр по статусу
-            //    if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
-            //    {
-            //        var statusFilters = new List<CriteriaOperator>();
-
-            //        if (preliminaryCheckBox.Checked)
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Preliminary));
-
-            //        if (actualCheckBox.Checked)
-            //        {
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.PreliminaryArchive));
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Actual));
-            //        }
-
-            //        if (archiveCheckBox.Checked)
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Archive));
-
-            //        if (statusFilters.Count > 1)
-            //        {
-            //            statusGroup = new GroupOperator(GroupOperatorType.Or, statusFilters.ToArray());
-            //            statusCriteria = statusGroup;
-            //        }
-            //        else if (statusFilters.Count == 1)
-            //        {
-            //            statusCriteria = statusFilters[0];
-            //        }
-            //    }
-
-            //    // Добавляем фильтр по "Не описанные" если выбран
-            //    if (SortBox.Checked)
-            //    {
-            //        var updateIsEmpty = new GroupOperator(
-            //            GroupOperatorType.Or,
-            //            new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
-            //        );
-
-            //        var excludeArchived = new BinaryOperator("Status", (int)Status.Archive, BinaryOperatorType.NotEqual);
-            //        archiveCheckBox.Checked = false;
-            //        archiveCheckBox.Enabled = false;
-            //        var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
-
-            //        if (statusCriteria != null)
-            //            statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
-            //        else
-            //            statusCriteria = notDescribedFilter;
-            //    }
-            //    else archiveCheckBox.Enabled = true;
-
-            //    // Собираем итоговый фильтр, не стирая текущие фильтры (поиск, фильтры колонок)
-            //    ANNgridView.BeginUpdate();
-            //    try
-            //    {
-            //        CriteriaOperator combinedFilter = null;
-
-            //        if (statusCriteria != null && existingFilter != null)
-            //        {
-            //            combinedFilter = new GroupOperator(GroupOperatorType.And, existingFilter, statusCriteria);
-            //        }
-            //        else if (statusCriteria != null)
-            //        {
-            //            combinedFilter = statusCriteria;
-            //        }
-            //        else if (existingFilter != null)
-            //        {
-            //            combinedFilter = existingFilter;
-            //        }
-
-            //        if (combinedFilter != null)
-            //        {
-            //            ANNgridView.ActiveFilterCriteria = combinedFilter;
-            //        }
-            //        else
-            //        {
-            //            // Нет ни статусного фильтра, ни текущего поискового фильтра
-            //            ANNgridView.ActiveFilterString = string.Empty;
-            //        }
-            //    }
-            //    finally
-            //    {
-            //        ANNgridView.EndUpdate();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
-            //}
             try
             {
                 // Сохраняем текущий фильтр поиска, если он есть
@@ -254,15 +159,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var updateIsEmpty = new GroupOperator(
+                    // Условие: dateUpdate IS NULL OR дата dateUpdate = сегодня (без времени)
+                    // Необходимо, чтоб пользователь видел записи, с которыми работал сегодня
+                    var updateIsEmpty = new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"));
+                    
+                    // Сравниваем диапазон: от начала дня до конца дня
+                    var todayStart = DateTime.Today; // 00:00:00
+                    var todayEnd = DateTime.Today.AddDays(1).AddTicks(-1); // 23:59:59.9999999
+                    
+                    var updateIsToday = new GroupOperator(
+                        GroupOperatorType.And,
+                        new BinaryOperator("dateUpdate", todayStart, BinaryOperatorType.GreaterOrEqual),
+                        new BinaryOperator("dateUpdate", todayEnd, BinaryOperatorType.LessOrEqual)
+                    );
+                    
+                    var updateCondition = new GroupOperator(
                         GroupOperatorType.Or,
-                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
+                        updateIsEmpty,
+                        updateIsToday
                     );
 
                     var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
                     archiveCheckBox.Checked = false;
                     archiveCheckBox.Enabled = false;
-                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateCondition, excludeArchived);
 
                     if (statusCriteria != null)
                         statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
