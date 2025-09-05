@@ -31,6 +31,7 @@ namespace SewingProduction.Features.CardByNom.Models
         public string ChipScanForeColor { get; set; }
         public string ChipOtgr { get; set; }
         public string ChipOtgrForeColor { get; set; }
+        public string nom_zad { get; set; }
 
     }
 }

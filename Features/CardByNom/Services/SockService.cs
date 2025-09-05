@@ -2,7 +2,7 @@
 using DevExpress.CodeParser;
 using DevExpress.DataProcessing.InMemoryDataProcessor;
 using DevExpress.Mvvm.Native;
-using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
@@ -15,7 +15,7 @@ using System.Windows.Forms;
 using Z.Dapper;
 using DataTable = System.Data.DataTable;
 
-namespace SewingProduction.Features.KnittingProduction.Services
+namespace SewingProduction.Features.CardByNom.Services
 {
     /// <summary>
     /// Сервис работы с вяз производством.
@@ -41,6 +41,27 @@ namespace SewingProduction.Features.KnittingProduction.Services
         #endregion
 
         #region
+        
+        public async Task<List<SockZadanyInfo>> GetSockKnitZadanyInfo(string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec dbo.knitZadany_info '{nomZad}'";
+
+                    var result = await connection.QueryAsync<SockZadanyInfo>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных SockZadanySmenList");
+                return null;
+            }
+        }
+
+
         public async Task<List<SockZadanySmenList>> GetSockZadanySmenListByNomZad(string nomZad)
         {
             try
@@ -53,7 +74,7 @@ namespace SewingProduction.Features.KnittingProduction.Services
                         $"  FROM knitZadany_view " +
                         $"  WHERE kzPszNom = '{nomZad}'" +
                         $")" +
-                        $"SELECT *," +  
+                        $"SELECT *," +
                         $"  CASE " +        //Количество дней(целое число)
                         $"      WHEN kzDateEnd IS NOT NULL AND NextKzDateAdd IS NOT NULL" +
                         $"      THEN DATEDIFF(SECOND, kzDateEnd, NextKzDateAdd) / 86400 " +
@@ -66,7 +87,6 @@ namespace SewingProduction.Features.KnittingProduction.Services
                         $"  END AS TimeDiff " +
                         $"FROM OrderedData " +
                         $"ORDER BY kzDateAdd";
-
                     var result = await connection.QueryAsync<SockZadanySmenList>(query, new Dictionary<string, object> {  });
                     return result.ToList();
                 }
@@ -77,7 +97,23 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return null;
             }
         }
-
+        public async Task<List<SockServiceList>> GetSockServiceListByNomZad(string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select * from KnitMashineServiceByNomZad where kzPszNom = '{nomZad}'";
+                    var result = await connection.QueryAsync<SockServiceList>(query, new Dictionary<string, object> {  });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных SockServiceList");
+                return null;
+            }
+        }
         #endregion
 
     }

@@ -773,7 +773,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
 
         private void repositoryItemCheckEdit1_CheckedChanged(object sender, EventArgs e)
         {
-            //MessageBox.Show(gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection").ToString());
             gridViewZadanyListByMachine.FocusedColumn = gridViewZadanyListByMachine.Columns["data_paln"];
             gridViewZadanyListByMachine.FocusedColumn = gridViewZadanyListByMachine.Columns["SyncSelection"];
             //MessageBox.Show(gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection").ToString());
@@ -789,8 +788,6 @@ namespace SewingProduction.Features.KnittingProduction.Forms
                 int isSelected = Convert.ToInt32(gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection"));
                 foreach (var record in recordsToUpdate)
                 {
-                    //MessageBox.Show(gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection").ToString());
-                    //record.SyncSelection = (int)gridViewZadanyListByMachine.GetRowCellValue(gridViewZadanyListByMachine.FocusedRowHandle, "SyncSelection");
                     record.SyncSelection = isSelected;
                 }
 

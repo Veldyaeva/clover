@@ -25,7 +25,7 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Key(x => x.nkId);
             DapperPlusManager.Entity<NaklViewByPachKod>();
-            DapperPlusManager.Entity<RasInfoByPachKod>();
+            DapperPlusManager.Entity<RasInfo>();
             DapperPlusManager.Entity<HistoryRazdelNaklViewByIz>();
             DapperPlusManager.Entity<ChipInfoByNomZad>();
             DapperPlusManager.Entity<ProizvCombIzd>();

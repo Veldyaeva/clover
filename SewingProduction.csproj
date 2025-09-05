@@ -264,6 +264,8 @@
     <Folder Include="Core\Models\Prorabotki\" />
     <Folder Include="Core\Models\Raskr\" />
     <Folder Include="Core\Models\Vyaz\" />
+    <Folder Include="Features\SockProduction\Models\" />
+    <Folder Include="Features\SockProduction\Services\" />
     <Folder Include="Features\Sprav\Helpers\" />
   </ItemGroup>
 

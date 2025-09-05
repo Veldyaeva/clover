@@ -55,6 +55,17 @@ namespace SewingProduction.Features.CardByNom.Services
                 return result.ToList();
             }
         }
+
+        public async Task<List<NaklViewByPachKod>> GetNaklViewByNomZad(string nomZad)
+        {
+            using (var connection = _dbHelper.GetConnection())
+            {
+                string query = $"select * from NaklView where nom_zad = @nomZad";
+                var result = await connection.QueryAsync<NaklViewByPachKod>(query, new Dictionary<string, object> { { "@nomZad", nomZad } });
+                return result.ToList();
+            }
+        }
+
         /// <summary>
         /// Получает данные из таблицы View_History_razdel_nakl по iz 
         /// </summary>

@@ -1,5 +1,4 @@
 ﻿using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Features.KnittingProduction.Models;
 using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
