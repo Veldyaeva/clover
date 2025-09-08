@@ -2,9 +2,8 @@
 /.vs/
 /bin/
 /obj/
-*.pubxml.user
-*.pubxml
 /Features/TeamWork/Forms/TeamWork.Articles.resx
 /Features/TeamWork/Forms/TeamWork.Events.resx
 /Features/TeamWork/Forms/TeamWork.Helpers.resx
 /Features/TeamWork/Forms/TeamWork.WorkDivisions.resx
+/Properties/_PublishProfiles/anyCPU.pubxml

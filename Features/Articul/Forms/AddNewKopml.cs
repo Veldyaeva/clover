@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SewingProduction.Core.Class;
-using SewingProduction.Features.Articul.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
@@ -25,6 +25,7 @@ using DevExpress.XtraGrid.Columns;
 using System.IO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using ToolTip = System.Windows.Forms.ToolTip;
+using SewingProduction.Features.Articul.Models;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -431,7 +432,7 @@ namespace SewingProduction.Features.Articul.Forms
                     countStr = tabsCount
                 });
 
-                _tabSelection[tabIndex] = (selected.Kod, selected.Razm);
+                //_tabSelection[tabIndex] = (selected.Kod, selected.Razm);
                 customGridControlKomplSelected.RefreshDataSource();
                 return;
             }
@@ -466,11 +467,12 @@ namespace SewingProduction.Features.Articul.Forms
             view.RefreshData();
 
             // Если на вкладке раньше была другая пара — её нужно уменьшить
+            
             if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
-                if (prev.kod != selected.Kod || prev.razm != selected.Razm)
+                if (prev.kod != Convert.ToInt32(selected.Kod) || prev.razm != selected.Razm)
                 {
-                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == prev.kod && x.Razm == prev.razm);
+                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => Convert.ToInt32(x.Kod) == prev.kod && x.Razm == prev.razm);
                     if (prevAgg != null)
                     {
                         if (prevAgg.countStr > 1) prevAgg.countStr -= 1;
@@ -478,13 +480,14 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
+            
 
             // Учесть новую пару
             var curAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == selected.Kod && x.Razm == selected.Razm);
             if (curAgg != null) curAgg.countStr += 1;
             else { selected.countStr = 1; _selectedKomplItems.Add(selected); }
 
-            _tabSelection[tabIndex] = (selected.Kod, selected.Razm);
+            _tabSelection[tabIndex] = (Convert.ToInt32(selected.Kod), selected.Razm);
             customGridControlKomplSelected.RefreshDataSource();
 
             if (!xAutoRazm && !xAllZap)
@@ -1259,6 +1262,7 @@ namespace SewingProduction.Features.Articul.Forms
                     Sost_k = mainItem.Sost,
                     CompName = Environment.MachineName
                 };
+                
                 FillKodSlots(kompl, flatCodes);
 
                 if (await komplService.ExistsExactAsync(kompl))
@@ -1298,6 +1302,7 @@ namespace SewingProduction.Features.Articul.Forms
                 await loadKomplByArticul(kompl.Articul_k);
                 customNumericUpDownValueTab.Value = 0;
                 return;
+            
             }
 
             // =========================
@@ -1418,7 +1423,7 @@ namespace SewingProduction.Features.Articul.Forms
                 _artByKod = (articuls ?? new List<ArticulModel>()).GroupBy(a => a.Kod)
                              .ToDictionary(g => g.Key, g => g.First());
             }
-
+            
             // fallback-поиск по вкладкам, если кода нет в кэше articuls
             ArticulModel LookupArt(int kod)
             {
@@ -1449,6 +1454,7 @@ namespace SewingProduction.Features.Articul.Forms
                         }
                     }
                 }
+            
                 return null;
             }
             // =======================================================================
@@ -1502,6 +1508,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 gridViewKompl.ExpandMasterRow(handle);
             }
+            */
         }
 
         #endregion

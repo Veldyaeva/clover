@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;

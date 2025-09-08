@@ -358,7 +358,7 @@ namespace SewingProduction
                 gridColumnProizvCombIzdVZPDateFurnPrihSkl.FieldName = "DateFurnPrinSkl";
                 #endregion
 
-                //nameTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
+                //nameTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.ArticulModel), true, DataSourceUpdateMode.OnPropertyChanged);
                 //groupTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Group), true, DataSourceUpdateMode.OnPropertyChanged);
                 //modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
                 //secTimeTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Sek), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -580,6 +580,7 @@ namespace SewingProduction
                 Task bindingsTask = InitializeBindingsAsync();
 
                 await Task.WhenAll(bindingsTask);
+
             }
             catch (Exception ex)
             {

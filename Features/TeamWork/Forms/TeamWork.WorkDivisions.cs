@@ -408,7 +408,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,
-                dateAdd = DateTime.Now,
+                //dateAdd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
                 dateUpdate = null,//DateTime.MinValue,

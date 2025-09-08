@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SewingProduction.Features.Articul.Models
+namespace SewingProduction.Core.Models
 {    
     public class KomplModel : INotifyPropertyChanged
     {
