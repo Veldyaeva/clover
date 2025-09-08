@@ -260,9 +260,12 @@ namespace SewingProduction.Features.Articul
 
                 #endregion
                 #region коэфициенты
+
                 txbSebDop.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_dop), true, DataSourceUpdateMode.Never);
-
-
+                txbKoefPr.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef_pr), true, DataSourceUpdateMode.Never);
+                txbKoefVedDG.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef_d), true, DataSourceUpdateMode.Never);
+                txbSebProizv.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Seb_proizv), true, DataSourceUpdateMode.Never);
+                txbKoef.DataBindings.Add("Text", bsArticul, nameof(SpArticulPreviewModel.Koef), true, DataSourceUpdateMode.Never);
                 #endregion
 
             }
@@ -572,7 +575,6 @@ namespace SewingProduction.Features.Articul
                     //return result.Rows[0]["fio"].ToString(); 
                     if (result.Rows[0].Field<int>("error") != 0)
                     {
-
                         MessageBox.Show("Ошибка удаления" + result.Rows[0].Field<string>("messageerror"));
                         return;
                     }

@@ -98,16 +98,14 @@ namespace SewingProduction.Features.Articul
             label1 = new CustomLabel();
             txbKod = new CustomTextBox();
             bsArticul = new System.Windows.Forms.BindingSource(components);
-            customButtonCopy = new CustomButton();
-            customButtonKompl = new CustomButton();
+            customButtonCopy = new CustomSimpleButton();
+            customButtonKompl = new CustomSimpleButton();
             lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
             Root = new DevExpress.XtraLayout.LayoutControlGroup();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             customButton1 = new CustomButton();
             customButton2 = new CustomButton();
             customButton6 = new CustomButton();
-            gbTkanInfo = new System.Windows.Forms.GroupBox();
-            customCancelButton1 = new CustomCancelButton();
             cgbTkanPurpose = new System.Windows.Forms.GroupBox();
             txbOpis_t7 = new CustomTextBox();
             txbOpis_t6 = new CustomTextBox();
@@ -282,6 +280,9 @@ namespace SewingProduction.Features.Articul
             txbKoefPr = new CustomTextBox();
             label4 = new System.Windows.Forms.Label();
             txbSebDop = new CustomTextBox();
+            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            customGroupBox1 = new CustomGroupBox();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -291,7 +292,6 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             flowLayoutPanel1.SuspendLayout();
-            gbTkanInfo.SuspendLayout();
             cgbTkanPurpose.SuspendLayout();
             cgbKfKach.SuspendLayout();
             cgbBrakPercent.SuspendLayout();
@@ -338,6 +338,9 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)lCTabsControl).BeginInit();
             ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).BeginInit();
             groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            customGroupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // grColKomplHasDifference
@@ -1102,34 +1105,36 @@ namespace SewingProduction.Features.Articul
             // 
             // customButtonCopy
             // 
-            customButtonCopy.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonCopy.Font = new Font("Arial", 10F);
-            customButtonCopy.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonCopy.Appearance.Font = new Font("Arial", 10F);
+            customButtonCopy.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonCopy.Appearance.Options.UseFont = true;
+            customButtonCopy.Appearance.Options.UseForeColor = true;
             customButtonCopy.Location = new Point(2, 32);
             customButtonCopy.Margin = new System.Windows.Forms.Padding(1);
             customButtonCopy.MaximumSize = new Size(285, 26);
             customButtonCopy.MinimumSize = new Size(285, 26);
             customButtonCopy.Name = "customButtonCopy";
             customButtonCopy.Size = new Size(285, 26);
+            customButtonCopy.StyleController = layoutControl1;
             customButtonCopy.TabIndex = 3;
             customButtonCopy.Text = "Копия";
-            customButtonCopy.UseVisualStyleBackColor = false;
             customButtonCopy.Click += customButtonCopy_Click;
             // 
             // customButtonKompl
             // 
-            customButtonKompl.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonKompl.Font = new Font("Arial", 10F);
-            customButtonKompl.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonKompl.Appearance.Font = new Font("Arial", 10F);
+            customButtonKompl.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonKompl.Appearance.Options.UseFont = true;
+            customButtonKompl.Appearance.Options.UseForeColor = true;
             customButtonKompl.Location = new Point(2, 62);
             customButtonKompl.Margin = new System.Windows.Forms.Padding(0);
             customButtonKompl.MaximumSize = new Size(285, 26);
             customButtonKompl.MinimumSize = new Size(285, 26);
             customButtonKompl.Name = "customButtonKompl";
             customButtonKompl.Size = new Size(285, 26);
+            customButtonKompl.StyleController = layoutControl1;
             customButtonKompl.TabIndex = 5;
             customButtonKompl.Text = "Комплект";
-            customButtonKompl.UseVisualStyleBackColor = false;
             customButtonKompl.Click += customButtonKompl_Click;
             // 
             // lContrBoxMainInfo
@@ -1254,58 +1259,6 @@ namespace SewingProduction.Features.Articul
             customButton6.Text = "Несоответствие спр-ка и разд.труда";
             customButton6.UseVisualStyleBackColor = false;
             // 
-            // gbTkanInfo
-            // 
-            gbTkanInfo.BackColor = Color.Transparent;
-            gbTkanInfo.Controls.Add(customCancelButton1);
-            gbTkanInfo.Controls.Add(cgbTkanPurpose);
-            gbTkanInfo.Controls.Add(cgbKfKach);
-            gbTkanInfo.Controls.Add(cgbBrakPercent);
-            gbTkanInfo.Controls.Add(cgbTkanSeb);
-            gbTkanInfo.Controls.Add(cgbTkanNorm);
-            gbTkanInfo.Controls.Add(cgbTkanBrak);
-            gbTkanInfo.Controls.Add(customLabel30);
-            gbTkanInfo.Controls.Add(customLabel31);
-            gbTkanInfo.Controls.Add(customLabel32);
-            gbTkanInfo.Controls.Add(customLabel33);
-            gbTkanInfo.Controls.Add(customLabel34);
-            gbTkanInfo.Controls.Add(customLabel35);
-            gbTkanInfo.Controls.Add(customLabel36);
-            gbTkanInfo.Controls.Add(customLabel29);
-            gbTkanInfo.Controls.Add(txbBrakAll);
-            gbTkanInfo.Controls.Add(customLabel28);
-            gbTkanInfo.Controls.Add(customLabel27);
-            gbTkanInfo.Controls.Add(customLabel26);
-            gbTkanInfo.Controls.Add(customLabel25);
-            gbTkanInfo.Controls.Add(txbSeb);
-            gbTkanInfo.Controls.Add(customLabel24);
-            gbTkanInfo.Controls.Add(txbNormt);
-            gbTkanInfo.Controls.Add(customLabel23);
-            gbTkanInfo.Controls.Add(customLabel22);
-            gbTkanInfo.Controls.Add(customLabel21);
-            gbTkanInfo.Controls.Add(customLabel20);
-            gbTkanInfo.Location = new Point(591, 254);
-            gbTkanInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanInfo.Name = "gbTkanInfo";
-            gbTkanInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanInfo.Size = new Size(606, 250);
-            gbTkanInfo.TabIndex = 20;
-            gbTkanInfo.TabStop = false;
-            gbTkanInfo.Text = "Затраты на изготовление";
-            // 
-            // customCancelButton1
-            // 
-            customCancelButton1.BackColor = Color.FromArgb(230, 230, 250);
-            customCancelButton1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            customCancelButton1.Font = new Font("Arial", 10F);
-            customCancelButton1.ForeColor = Color.FromArgb(72, 61, 139);
-            customCancelButton1.Location = new Point(119, 225);
-            customCancelButton1.Name = "customCancelButton1";
-            customCancelButton1.Size = new Size(224, 25);
-            customCancelButton1.TabIndex = 38;
-            customCancelButton1.Text = "customCancelButton1";
-            customCancelButton1.UseVisualStyleBackColor = false;
-            // 
             // cgbTkanPurpose
             // 
             cgbTkanPurpose.BackColor = Color.Transparent;
@@ -1316,7 +1269,7 @@ namespace SewingProduction.Features.Articul
             cgbTkanPurpose.Controls.Add(txbOpis_t2);
             cgbTkanPurpose.Controls.Add(txbOpis_t4);
             cgbTkanPurpose.Controls.Add(txbOpis_t3);
-            cgbTkanPurpose.Location = new Point(348, 11);
+            cgbTkanPurpose.Location = new Point(347, 22);
             cgbTkanPurpose.Name = "cgbTkanPurpose";
             cgbTkanPurpose.Size = new Size(82, 200);
             cgbTkanPurpose.TabIndex = 37;
@@ -1423,7 +1376,7 @@ namespace SewingProduction.Features.Articul
             cgbKfKach.Controls.Add(txbKfKach3);
             cgbKfKach.Controls.Add(txbKfKach2);
             cgbKfKach.Controls.Add(txbKfKach1);
-            cgbKfKach.Location = new Point(300, 11);
+            cgbKfKach.Location = new Point(299, 22);
             cgbKfKach.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             cgbKfKach.Name = "cgbKfKach";
             cgbKfKach.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1533,7 +1486,7 @@ namespace SewingProduction.Features.Articul
             cgbBrakPercent.Controls.Add(txtBrakPercent2);
             cgbBrakPercent.Controls.Add(txtBrakPercent4);
             cgbBrakPercent.Controls.Add(txtBrakPercent3);
-            cgbBrakPercent.Location = new Point(526, 6);
+            cgbBrakPercent.Location = new Point(525, 22);
             cgbBrakPercent.Name = "cgbBrakPercent";
             cgbBrakPercent.Size = new Size(75, 204);
             cgbBrakPercent.TabIndex = 37;
@@ -1641,7 +1594,7 @@ namespace SewingProduction.Features.Articul
             cgbTkanSeb.Controls.Add(txbTkanSeb_t2);
             cgbTkanSeb.Controls.Add(txbTkanSeb_t4);
             cgbTkanSeb.Controls.Add(txbTkanSeb_t3);
-            cgbTkanSeb.Location = new Point(200, 6);
+            cgbTkanSeb.Location = new Point(186, 22);
             cgbTkanSeb.Name = "cgbTkanSeb";
             cgbTkanSeb.Size = new Size(74, 203);
             cgbTkanSeb.TabIndex = 36;
@@ -1748,7 +1701,7 @@ namespace SewingProduction.Features.Articul
             cgbTkanNorm.Controls.Add(txbNorm_t2);
             cgbTkanNorm.Controls.Add(txbNorm_t4);
             cgbTkanNorm.Controls.Add(txbNorm_t3);
-            cgbTkanNorm.Location = new Point(84, 11);
+            cgbTkanNorm.Location = new Point(83, 22);
             cgbTkanNorm.Name = "cgbTkanNorm";
             cgbTkanNorm.Size = new Size(71, 199);
             cgbTkanNorm.TabIndex = 35;
@@ -1760,11 +1713,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t7.Font = new Font("Arial", 9F);
             txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t7.Location = new Point(3, 177);
+            txbNorm_t7.Location = new Point(5, 177);
             txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t7.Name = "txbNorm_t7";
             txbNorm_t7.ReadOnly = true;
-            txbNorm_t7.Size = new Size(68, 14);
+            txbNorm_t7.Size = new Size(58, 14);
             txbNorm_t7.TabIndex = 6;
             // 
             // txbNorm_t6
@@ -1773,11 +1726,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t6.Font = new Font("Arial", 9F);
             txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t6.Location = new Point(3, 149);
+            txbNorm_t6.Location = new Point(5, 149);
             txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t6.Name = "txbNorm_t6";
             txbNorm_t6.ReadOnly = true;
-            txbNorm_t6.Size = new Size(68, 14);
+            txbNorm_t6.Size = new Size(58, 14);
             txbNorm_t6.TabIndex = 5;
             // 
             // txbNorm_t1
@@ -1786,11 +1739,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t1.Font = new Font("Arial", 9F);
             txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t1.Location = new Point(3, 13);
+            txbNorm_t1.Location = new Point(5, 13);
             txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t1.Name = "txbNorm_t1";
             txbNorm_t1.ReadOnly = true;
-            txbNorm_t1.Size = new Size(68, 14);
+            txbNorm_t1.Size = new Size(58, 14);
             txbNorm_t1.TabIndex = 0;
             // 
             // txbNorm_t5
@@ -1799,11 +1752,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t5.Font = new Font("Arial", 9F);
             txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t5.Location = new Point(3, 123);
+            txbNorm_t5.Location = new Point(5, 123);
             txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t5.Name = "txbNorm_t5";
             txbNorm_t5.ReadOnly = true;
-            txbNorm_t5.Size = new Size(68, 14);
+            txbNorm_t5.Size = new Size(58, 14);
             txbNorm_t5.TabIndex = 4;
             // 
             // txbNorm_t2
@@ -1812,11 +1765,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t2.Font = new Font("Arial", 9F);
             txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t2.Location = new Point(3, 41);
+            txbNorm_t2.Location = new Point(5, 41);
             txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t2.Name = "txbNorm_t2";
             txbNorm_t2.ReadOnly = true;
-            txbNorm_t2.Size = new Size(68, 14);
+            txbNorm_t2.Size = new Size(58, 14);
             txbNorm_t2.TabIndex = 1;
             // 
             // txbNorm_t4
@@ -1825,11 +1778,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t4.Font = new Font("Arial", 9F);
             txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t4.Location = new Point(3, 96);
+            txbNorm_t4.Location = new Point(5, 96);
             txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t4.Name = "txbNorm_t4";
             txbNorm_t4.ReadOnly = true;
-            txbNorm_t4.Size = new Size(68, 14);
+            txbNorm_t4.Size = new Size(58, 14);
             txbNorm_t4.TabIndex = 3;
             // 
             // txbNorm_t3
@@ -1838,11 +1791,11 @@ namespace SewingProduction.Features.Articul
             txbNorm_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNorm_t3.Font = new Font("Arial", 9F);
             txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t3.Location = new Point(3, 69);
+            txbNorm_t3.Location = new Point(5, 69);
             txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNorm_t3.Name = "txbNorm_t3";
             txbNorm_t3.ReadOnly = true;
-            txbNorm_t3.Size = new Size(68, 14);
+            txbNorm_t3.Size = new Size(58, 14);
             txbNorm_t3.TabIndex = 2;
             // 
             // cgbTkanBrak
@@ -1855,7 +1808,7 @@ namespace SewingProduction.Features.Articul
             cgbTkanBrak.Controls.Add(txbBrak5);
             cgbTkanBrak.Controls.Add(txbBrak3);
             cgbTkanBrak.Controls.Add(txbBrak4);
-            cgbTkanBrak.Location = new Point(456, 6);
+            cgbTkanBrak.Location = new Point(455, 22);
             cgbTkanBrak.Name = "cgbTkanBrak";
             cgbTkanBrak.Size = new Size(64, 206);
             cgbTkanBrak.TabIndex = 34;
@@ -1959,7 +1912,7 @@ namespace SewingProduction.Features.Articul
             customLabel30.BackColor = Color.Transparent;
             customLabel30.Font = new Font("Arial", 8F);
             customLabel30.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel30.Location = new Point(182, 194);
+            customLabel30.Location = new Point(160, 202);
             customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel30.Name = "customLabel30";
             customLabel30.Size = new Size(18, 14);
@@ -1972,7 +1925,7 @@ namespace SewingProduction.Features.Articul
             customLabel31.BackColor = Color.Transparent;
             customLabel31.Font = new Font("Arial", 8F);
             customLabel31.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel31.Location = new Point(182, 166);
+            customLabel31.Location = new Point(160, 174);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
             customLabel31.Size = new Size(18, 14);
@@ -1985,7 +1938,7 @@ namespace SewingProduction.Features.Articul
             customLabel32.BackColor = Color.Transparent;
             customLabel32.Font = new Font("Arial", 8F);
             customLabel32.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel32.Location = new Point(182, 137);
+            customLabel32.Location = new Point(160, 145);
             customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel32.Name = "customLabel32";
             customLabel32.Size = new Size(18, 14);
@@ -1998,7 +1951,7 @@ namespace SewingProduction.Features.Articul
             customLabel33.BackColor = Color.Transparent;
             customLabel33.Font = new Font("Arial", 8F);
             customLabel33.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel33.Location = new Point(182, 111);
+            customLabel33.Location = new Point(160, 119);
             customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel33.Name = "customLabel33";
             customLabel33.Size = new Size(18, 14);
@@ -2011,7 +1964,7 @@ namespace SewingProduction.Features.Articul
             customLabel34.BackColor = Color.Transparent;
             customLabel34.Font = new Font("Arial", 8F);
             customLabel34.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel34.Location = new Point(182, 83);
+            customLabel34.Location = new Point(160, 91);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
             customLabel34.Size = new Size(18, 14);
@@ -2024,7 +1977,7 @@ namespace SewingProduction.Features.Articul
             customLabel35.BackColor = Color.Transparent;
             customLabel35.Font = new Font("Arial", 8F);
             customLabel35.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel35.Location = new Point(182, 55);
+            customLabel35.Location = new Point(160, 63);
             customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel35.Name = "customLabel35";
             customLabel35.Size = new Size(18, 14);
@@ -2037,7 +1990,7 @@ namespace SewingProduction.Features.Articul
             customLabel36.BackColor = Color.Transparent;
             customLabel36.Font = new Font("Arial", 8F);
             customLabel36.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel36.Location = new Point(182, 28);
+            customLabel36.Location = new Point(160, 36);
             customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel36.Name = "customLabel36";
             customLabel36.Size = new Size(18, 14);
@@ -2050,7 +2003,7 @@ namespace SewingProduction.Features.Articul
             customLabel29.BackColor = Color.Transparent;
             customLabel29.Font = new Font("Arial", 8F);
             customLabel29.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel29.Location = new Point(521, 224);
+            customLabel29.Location = new Point(520, 235);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
             customLabel29.Size = new Size(28, 14);
@@ -2063,7 +2016,7 @@ namespace SewingProduction.Features.Articul
             txbBrakAll.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrakAll.Font = new Font("Arial", 9F);
             txbBrakAll.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrakAll.Location = new Point(462, 224);
+            txbBrakAll.Location = new Point(461, 235);
             txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrakAll.Name = "txbBrakAll";
             txbBrakAll.ReadOnly = true;
@@ -2076,7 +2029,7 @@ namespace SewingProduction.Features.Articul
             customLabel28.BackColor = Color.Transparent;
             customLabel28.Font = new Font("Arial", 8F);
             customLabel28.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel28.Location = new Point(7, 61);
+            customLabel28.Location = new Point(6, 72);
             customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel28.Name = "customLabel28";
             customLabel28.Size = new Size(28, 14);
@@ -2089,7 +2042,7 @@ namespace SewingProduction.Features.Articul
             customLabel27.BackColor = Color.Transparent;
             customLabel27.Font = new Font("Arial", 8F);
             customLabel27.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel27.Location = new Point(7, 23);
+            customLabel27.Location = new Point(6, 34);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
             customLabel27.Size = new Size(54, 14);
@@ -2102,7 +2055,7 @@ namespace SewingProduction.Features.Articul
             customLabel26.BackColor = Color.Transparent;
             customLabel26.Font = new Font("Arial", 8F);
             customLabel26.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel26.Location = new Point(281, 194);
+            customLabel26.Location = new Point(266, 205);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
             customLabel26.Size = new Size(28, 14);
@@ -2115,7 +2068,7 @@ namespace SewingProduction.Features.Articul
             customLabel25.BackColor = Color.Transparent;
             customLabel25.Font = new Font("Arial", 8F);
             customLabel25.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel25.Location = new Point(281, 166);
+            customLabel25.Location = new Point(266, 177);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
             customLabel25.Size = new Size(28, 14);
@@ -2128,7 +2081,7 @@ namespace SewingProduction.Features.Articul
             txbSeb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSeb.Font = new Font("Arial", 10F);
             txbSeb.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSeb.Location = new Point(7, 79);
+            txbSeb.Location = new Point(6, 90);
             txbSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeb.Name = "txbSeb";
             txbSeb.ReadOnly = true;
@@ -2141,7 +2094,7 @@ namespace SewingProduction.Features.Articul
             customLabel24.BackColor = Color.Transparent;
             customLabel24.Font = new Font("Arial", 8F);
             customLabel24.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel24.Location = new Point(281, 138);
+            customLabel24.Location = new Point(266, 149);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
             customLabel24.Size = new Size(28, 14);
@@ -2154,7 +2107,7 @@ namespace SewingProduction.Features.Articul
             txbNormt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNormt.Font = new Font("Arial", 10F);
             txbNormt.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNormt.Location = new Point(7, 39);
+            txbNormt.Location = new Point(6, 50);
             txbNormt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNormt.Name = "txbNormt";
             txbNormt.ReadOnly = true;
@@ -2167,7 +2120,7 @@ namespace SewingProduction.Features.Articul
             customLabel23.BackColor = Color.Transparent;
             customLabel23.Font = new Font("Arial", 8F);
             customLabel23.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel23.Location = new Point(282, 111);
+            customLabel23.Location = new Point(267, 122);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
             customLabel23.Size = new Size(28, 14);
@@ -2180,7 +2133,7 @@ namespace SewingProduction.Features.Articul
             customLabel22.BackColor = Color.Transparent;
             customLabel22.Font = new Font("Arial", 8F);
             customLabel22.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel22.Location = new Point(281, 83);
+            customLabel22.Location = new Point(266, 94);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
             customLabel22.Size = new Size(28, 14);
@@ -2193,7 +2146,7 @@ namespace SewingProduction.Features.Articul
             customLabel21.BackColor = Color.Transparent;
             customLabel21.Font = new Font("Arial", 8F);
             customLabel21.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel21.Location = new Point(281, 55);
+            customLabel21.Location = new Point(266, 66);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
             customLabel21.Size = new Size(28, 14);
@@ -2206,7 +2159,7 @@ namespace SewingProduction.Features.Articul
             customLabel20.BackColor = Color.Transparent;
             customLabel20.Font = new Font("Arial", 8F);
             customLabel20.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel20.Location = new Point(281, 28);
+            customLabel20.Location = new Point(266, 39);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
             customLabel20.Size = new Size(28, 14);
@@ -3512,14 +3465,68 @@ namespace SewingProduction.Features.Articul
             txbSebDop.Size = new Size(90, 16);
             txbSebDop.TabIndex = 39;
             // 
+            // layoutControl2
+            // 
+            layoutControl2.Location = new Point(1393, 906);
+            layoutControl2.Name = "layoutControl2";
+            layoutControl2.Root = layoutControlGroup4;
+            layoutControl2.Size = new Size(180, 120);
+            layoutControl2.TabIndex = 37;
+            layoutControl2.Text = "layoutControl2";
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup4.GroupBordersVisible = false;
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Size = new Size(180, 120);
+            layoutControlGroup4.TextVisible = false;
+            // 
+            // customGroupBox1
+            // 
+            customGroupBox1.BackColor = Color.Transparent;
+            customGroupBox1.Controls.Add(txbNormt);
+            customGroupBox1.Controls.Add(cgbTkanPurpose);
+            customGroupBox1.Controls.Add(customLabel20);
+            customGroupBox1.Controls.Add(cgbKfKach);
+            customGroupBox1.Controls.Add(customLabel21);
+            customGroupBox1.Controls.Add(cgbBrakPercent);
+            customGroupBox1.Controls.Add(customLabel22);
+            customGroupBox1.Controls.Add(cgbTkanSeb);
+            customGroupBox1.Controls.Add(customLabel23);
+            customGroupBox1.Controls.Add(cgbTkanNorm);
+            customGroupBox1.Controls.Add(customLabel24);
+            customGroupBox1.Controls.Add(cgbTkanBrak);
+            customGroupBox1.Controls.Add(txbSeb);
+            customGroupBox1.Controls.Add(customLabel30);
+            customGroupBox1.Controls.Add(customLabel25);
+            customGroupBox1.Controls.Add(customLabel31);
+            customGroupBox1.Controls.Add(customLabel26);
+            customGroupBox1.Controls.Add(customLabel32);
+            customGroupBox1.Controls.Add(customLabel27);
+            customGroupBox1.Controls.Add(customLabel33);
+            customGroupBox1.Controls.Add(customLabel28);
+            customGroupBox1.Controls.Add(customLabel34);
+            customGroupBox1.Controls.Add(txbBrakAll);
+            customGroupBox1.Controls.Add(customLabel35);
+            customGroupBox1.Controls.Add(customLabel29);
+            customGroupBox1.Controls.Add(customLabel36);
+            customGroupBox1.Location = new Point(592, 246);
+            customGroupBox1.Name = "customGroupBox1";
+            customGroupBox1.Size = new Size(606, 258);
+            customGroupBox1.TabIndex = 38;
+            customGroupBox1.TabStop = false;
+            customGroupBox1.Text = "Затраты на изготовление";
+            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new Size(1742, 1010);
+            Controls.Add(customGroupBox1);
+            Controls.Add(layoutControl2);
             Controls.Add(groupBox3);
             Controls.Add(splitContainerControl1);
-            Controls.Add(gbTkanInfo);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -3540,8 +3547,6 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
-            gbTkanInfo.ResumeLayout(false);
-            gbTkanInfo.PerformLayout();
             cgbTkanPurpose.ResumeLayout(false);
             cgbTkanPurpose.PerformLayout();
             cgbKfKach.ResumeLayout(false);
@@ -3597,6 +3602,10 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).EndInit();
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            customGroupBox1.ResumeLayout(false);
+            customGroupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -3661,9 +3670,8 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbArh;
         //private System.Windows.Forms.GroupBox grBoxMainInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton customButtonCopy;
-        private CustomButton customButtonKompl;
-        private System.Windows.Forms.GroupBox gbTkanInfo;
+        private CustomSimpleButton customButtonCopy;
+        private CustomSimpleButton customButtonKompl;
         private CustomTextBox txbNorm_t1;
         private CustomTextBox txbSeb;
         private CustomTextBox txbNormt;
@@ -3846,6 +3854,8 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
-        private CustomCancelButton customCancelButton1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private CustomGroupBox customGroupBox1;
     }
 }
