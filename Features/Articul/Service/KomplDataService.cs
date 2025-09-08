@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using static DevExpress.Xpo.Helpers.AssociatedCollectionCriteriaHelper;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -104,13 +105,20 @@ namespace SewingProduction.Features.Articul.Service
 
         public bool CheckInProizv(string kod)
         {
-            string query = "SELECT 1 FROM View_rzu_rzv_nom_zad WHERE kod_k_pach  = @kod";
+            string query = "SELECT top 1 1 FROM View_rzu_rzv_nom_zad WHERE kod_k_pach  = @kod";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
         }
         public bool CheckNaklRas(string kod)
         {
-            string query = "SELECT 1 FROM nakl_ras WHERE kod_k  = @kod";
+            string query = "SELECT top 1 1 FROM nakl_ras WHERE kod_k  = @kod";
             return _dbHelper.Exists(query, new Dictionary<string, object> { { "@kod", kod } });
+        }
+
+        public int GetCountByRazmAll(string razmAll)
+        {
+            string query = "SELECT COUNT(*) FROM Razm WHERE Razm_all = @razmAll";
+            var result = _dbHelper.ExecuteScalar(query, new Dictionary<string, object> { { "@razmAll", razmAll } });
+            return Convert.ToInt32(result);
         }
     }
 

@@ -690,7 +690,7 @@
             customLabelGrup.AutoSize = true;
             tableLayoutPanel6.SetColumnSpan(customLabelGrup, 5);
             customLabelGrup.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabelGrup.Font = new System.Drawing.Font("Arial", 116F, System.Drawing.FontStyle.Bold);
+            customLabelGrup.Font = new System.Drawing.Font("Arial", 201F, System.Drawing.FontStyle.Bold);
             customLabelGrup.ForeColor = System.Drawing.Color.FromArgb(72, 61, 139);
             customLabelGrup.Location = new System.Drawing.Point(3, 0);
             customLabelGrup.Name = "customLabelGrup";

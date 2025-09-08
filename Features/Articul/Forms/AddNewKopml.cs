@@ -23,6 +23,8 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraVerticalGrid;
 using DevExpress.XtraGrid.Columns;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using ToolTip = System.Windows.Forms.ToolTip;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -37,12 +39,14 @@ namespace SewingProduction.Features.Articul.Forms
         bool xFlagKod = false;
         bool xAutoRazm = false; //галочка авторазмер
         bool xAllZap = false; //галочка все записи одинаковые
+        private ToolTip toolTip = new ToolTip();
 
         public AddNewKopml(UserClass user, List<ArticulModel> articuls, string kod) : base(user)
         {
             InitializeComponent();
             xkod = kod;
             this.articuls = articuls;
+            toolTipButton();
         }
         public AddNewKopml()
         {
@@ -127,10 +131,17 @@ namespace SewingProduction.Features.Articul.Forms
                 }
             }));
         }
-        // галочка Авторазмер
+        // галочка Автоподбор
         private void customCheckBoxAutoRazm_CheckedChanged(object sender, EventArgs e)
         {
             xAutoRazm = customCheckBoxAutoRazm.Checked;
+
+            if (xAutoRazm && !ValidateRazmAll())
+            {
+                xAutoRazm = false;
+                customCheckBoxAutoRazm.Checked = false;
+                return; 
+            }
 
             // Сброс значений
             customNumericUpDownValueTab.Value = 0;
@@ -152,7 +163,24 @@ namespace SewingProduction.Features.Articul.Forms
 
             ApplyGroupingByRazmAll(xAutoRazm ? true : false);
         }
-
+        //проверка на дубли в авторазмере
+        private bool ValidateRazmAll()
+        {
+            for (int i = 0; i < gridViewKomplRazm.RowCount; i++)
+            {
+                var razmAll = gridViewKomplRazm.GetRowCellValue(i, "Razm_all")?.ToString();
+                Debug.WriteLine(razmAll);
+                if (string.IsNullOrWhiteSpace(razmAll)) continue;
+                int count = komplService.GetCountByRazmAll(razmAll);
+                if (count > 1)
+                {
+                    MessageBox.Show($"Ошибка размерного ряда. Общий размер не уникален. Автоподбор невозможен",
+                                    "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return false;
+                }
+            }
+            return true;
+        }
         //галочка все записи одинковые 
         private void customCheckBoxOdinak_CheckedChanged(object sender, EventArgs e)
         {
@@ -221,6 +249,7 @@ namespace SewingProduction.Features.Articul.Forms
             };
             layout.Controls.Add(removeButton, 1, 0);
             removeButton.Click += (s, e) => RemoveButtonClick(s, grid);
+            toolTip.SetToolTip(removeButton, "Очистить страницу");
 
             // Создаём GridView
             var view = new DevExpress.XtraGrid.Views.Grid.GridView(grid);
@@ -497,40 +526,76 @@ namespace SewingProduction.Features.Articul.Forms
         {
             var view = gridViewKomplRazm;
             if (view?.GetFocusedRow() is not SpArticulGrupMenViewModel selected) return;
-            var data = view.DataSource as List<SpArticulGrupMenViewModel>;
-            if (data == null) return;
 
-            if (komplService.CheckInProizv((selected.Kod).ToString()))
+            // Фактическое новое состояние чекбокса (а не текущее значение в модели)
+            bool desired = (sender as DevExpress.XtraEditors.CheckEdit)?.Checked ?? selected.Pr_po;
+
+            // Быстрая валидация — если хотим поставить галочку, но позиция заблокирована
+            if (desired)
             {
-                selected.Pr_po = false;
-                MessageBox.Show("Невозможно комплектовать — запущено в производство ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (komplService.CheckInProizv(selected.Kod.ToString()))
+                {
+                    // Снимаем галочку и выходим
+                    selected.Pr_po = false;
+                    view.RefreshRow(view.FocusedRowHandle);
+                    customCheckBoxVerified.Checked = false;
+                    MessageBox.Show("Невозможно комплектовать — запущено в производство", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (komplService.CheckNaklRas(selected.Kod.ToString()))
+                {
+                    selected.Pr_po = false;
+                    view.RefreshRow(view.FocusedRowHandle);
+                    customCheckBoxVerified.Checked = false;
+                    MessageBox.Show("Невозможно комплектовать — созданы накладные", "Ошибка",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
             }
 
-            if (komplService.CheckNaklRas((selected.Kod).ToString()))
-            {
-                selected.Pr_po = false;
-                MessageBox.Show("Невозможно комплектовать — созданы накладные ", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            if (selected.Pr_po)
+            view.BeginDataUpdate();
+            try
             {
                 if (xAutoRazm)
                 {
-                    // переключаем состояние конкретной записи
-                    selected.Pr_po = !selected.Pr_po;
+                    // В авто-режиме не инвертируем, а ставим то, что запросил пользователь
+                    selected.Pr_po = desired;
                     AutoRazmForForming();
                 }
                 else
                 {
-                    // только одна галочка
-                    foreach (var item in data)
-                        item.Pr_po = false;
+                    // Режим «только одна галочка»
+                    var data = view.DataSource as List<SpArticulGrupMenViewModel>;
+                    if (data != null)
+                    {
+                        if (desired)
+                        {
+                            // Снимаем у всех и ставим у выбранной
+                            foreach (var item in data)
+                                item.Pr_po = false;
 
-                    selected.Pr_po = true;
-                } 
+                            selected.Pr_po = true;
+                        }
+                        else
+                        {
+                            // Просто сняли галочку на выбранной
+                            selected.Pr_po = false;
+                        }
+                    }
+                }
             }
-            view.RefreshData();
+            finally
+            {
+                view.EndDataUpdate();
+            }
+
+            // Минимальная перерисовка
+            view.RefreshRow(view.FocusedRowHandle);
             customCheckBoxVerified.Checked = false;
         }
+
 
         // кнопки "+" для добавления записей на таблицу
         private async void repositoryItemButtonEditAddRazm_Click(object sender, EventArgs e)
@@ -1497,5 +1562,21 @@ namespace SewingProduction.Features.Articul.Forms
             }
         }
         #endregion
+
+        /// <summary>
+        /// Подсказки при наведении на кнопки
+        /// </summary>
+        private void toolTipButton()
+        {
+            toolTip.AutoPopDelay = 5000;     // Подсказка исчезнет через 5 секунд.
+            toolTip.InitialDelay = 500;      // Подсказка появится через 0.5 секунды.
+            toolTip.ReshowDelay = 100;       // Подсказка появится повторно при движении мыши через 0.1 секунду.
+            //toolTip.IsBalloon = true;      // Показывать подсказку в виде воздушного шара.
+            //toolTip.ToolTipIcon = ToolTipIcon.Info; // Показывать иконку информации.
+            //toolTip.ToolTipTitle = "Подсказка";  // Заголовок подсказки.
+
+            toolTip.SetToolTip(customButtonDelKomplSelected, "Очистить список предварительной комплектовки");
+            toolTip.SetToolTip(customButtonDelKompl, "Удалить комплект");
+        }
     }
 }
