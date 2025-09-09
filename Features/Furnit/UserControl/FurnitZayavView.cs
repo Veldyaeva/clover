@@ -5,11 +5,6 @@ using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -34,7 +29,7 @@ namespace SewingProduction
         }
 
         [Browsable(true)]
-        public  event EventHandler TextChangedViewType
+        public event EventHandler TextChangedViewType
         {
             add => tbViewType.TextChanged += value;
             remove => tbViewType.TextChanged -= value;
@@ -299,7 +294,7 @@ namespace SewingProduction
 
                 await Task.WhenAll(furnitNViewTask, furnitArtViewTask);
 
-                gcFurnitArt.Refresh(); 
+                gcFurnitArt.Refresh();
 
                 var selectedRow = _furnitArtViewBindingSource.Current as FurnitArtView;
                 //await WorkDivisionLoadAsync(caller: "DataLoad", selectedRow.kod_f_d?? " ".PadRight(12));
@@ -311,7 +306,7 @@ namespace SewingProduction
                 {
                     await WorkDivisionLoadAsync(caller: "DataLoad", " ");
                 }
-                
+
 
             }
         }
@@ -361,7 +356,7 @@ namespace SewingProduction
 
         private async void gridView1_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
-           var selectedRow = _furnitArtViewBindingSource.Current as FurnitArtView;
+            var selectedRow = _furnitArtViewBindingSource.Current as FurnitArtView;
             //string _kodFD = selectedRow.kod_f_d;
             if (selectedRow != null)
             {

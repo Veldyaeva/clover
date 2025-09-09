@@ -1,19 +1,13 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SewingProduction.Helpers;
-using Microsoft.Extensions.Identity;
-using SewingProduction.Features.UserDistribution.Helpers;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNet.Identity;
-using SewingProduction.Core.Class.Settings;
-using System.Diagnostics;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {

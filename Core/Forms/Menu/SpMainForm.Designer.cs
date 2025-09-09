@@ -72,6 +72,7 @@ namespace SewingProduction
             карточкаРасчетаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             кнопкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             xtraTabbedMdiManager1 = new DevExpress.XtraTabbedMdi.XtraTabbedMdiManager(components);
+            раскройныйЦехToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)popupMenu1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)barManager1).BeginInit();
             menuStrip1.SuspendLayout();
@@ -148,28 +149,28 @@ namespace SewingProduction
             // профильToolStripMenuItem
             // 
             профильToolStripMenuItem.Name = "профильToolStripMenuItem";
-            профильToolStripMenuItem.Size = new Size(180, 22);
+            профильToolStripMenuItem.Size = new Size(149, 22);
             профильToolStripMenuItem.Text = "Профиль";
             профильToolStripMenuItem.Click += профильToolStripMenuItem_Click;
             // 
             // настройкиToolStripMenuItem
             // 
             настройкиToolStripMenuItem.Name = "настройкиToolStripMenuItem";
-            настройкиToolStripMenuItem.Size = new Size(180, 22);
+            настройкиToolStripMenuItem.Size = new Size(149, 22);
             настройкиToolStripMenuItem.Text = "Настройки";
             настройкиToolStripMenuItem.Click += настройкиToolStripMenuItem_Click;
             // 
             // оПрограммеToolStripMenuItem
             // 
             оПрограммеToolStripMenuItem.Name = "оПрограммеToolStripMenuItem";
-            оПрограммеToolStripMenuItem.Size = new Size(180, 22);
+            оПрограммеToolStripMenuItem.Size = new Size(149, 22);
             оПрограммеToolStripMenuItem.Text = "О программе";
             оПрограммеToolStripMenuItem.Click += оПрограммеToolStripMenuItem_Click;
             // 
             // помощьToolStripMenuItem
             // 
             помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            помощьToolStripMenuItem.Size = new Size(180, 22);
+            помощьToolStripMenuItem.Size = new Size(149, 22);
             помощьToolStripMenuItem.Text = "Помощь";
             помощьToolStripMenuItem.Click += помощьToolStripMenuItem_Click;
             // 
@@ -322,7 +323,7 @@ namespace SewingProduction
             // 
             // швейноеПроизводствоToolStripMenuItem
             // 
-            швейноеПроизводствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { рабочийСтолМастераToolStripMenuItem });
+            швейноеПроизводствоToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { рабочийСтолМастераToolStripMenuItem, раскройныйЦехToolStripMenuItem });
             швейноеПроизводствоToolStripMenuItem.Name = "швейноеПроизводствоToolStripMenuItem";
             швейноеПроизводствоToolStripMenuItem.Size = new Size(210, 22);
             швейноеПроизводствоToolStripMenuItem.Text = "Швейное производство";
@@ -381,6 +382,13 @@ namespace SewingProduction
             xtraTabbedMdiManager1.ShowToolTips = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.UseFormIconAsPageImage = DevExpress.Utils.DefaultBoolean.True;
             xtraTabbedMdiManager1.PageAdded += XtraTabbedMdiManager1_PageAdded;
+            // 
+            // раскройныйЦехToolStripMenuItem
+            // 
+            раскройныйЦехToolStripMenuItem.Name = "раскройныйЦехToolStripMenuItem";
+            раскройныйЦехToolStripMenuItem.Size = new Size(198, 22);
+            раскройныйЦехToolStripMenuItem.Text = "Раскройный цех";
+            раскройныйЦехToolStripMenuItem.Click += раскройныйЦехToolStripMenuItem_Click;
             // 
             // SpMainForm
             // 
@@ -453,5 +461,6 @@ namespace SewingProduction
         private System.Windows.Forms.ToolStripMenuItem кнопкаToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковПряжиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видыБраковНосковToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem раскройныйЦехToolStripMenuItem;
     }
 }

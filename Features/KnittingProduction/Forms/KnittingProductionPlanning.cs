@@ -1,32 +1,19 @@
-﻿using DevExpress.XtraEditors.Repository;
+﻿using Dapper;
 using DevExpress.XtraEditors;
+using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
+using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.KnittingProduction.Services;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.Xpo.DB;
-using System.Data.SqlClient;
-using Dapper;
-using DevExpress.XtraGrid;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid.Views.Base;
-using DevExpress.Data.Filtering;
-using DevExpress.Data;
-using DevExpress.XtraEditors;
-using DevExpress.Utils;
-using DevExpress.XtraGrid.Columns;
-using SewingProduction.Features.KnittingProduction.Models;
-using SewingProduction.Core.Services;
-using SewingProduction.Features.KnittingProduction.Services;
 
 namespace SewingProduction.form.Nadezhda
 {
@@ -650,35 +637,35 @@ namespace SewingProduction.form.Nadezhda
         {
             var selectedItem = (VyazPlanView)gridViewVyazPlan.GetRow(rowHandle);
             switch (selectedItem.pszkmID, selectedItem.KmlID)
-                {
-                    case (0, 0):  // Оба ID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+            {
+                case (0, 0):  // Оба ID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = true;
-                        break;
+                case ( > 0, 0):  // xPszkmID > 0 и xKmlID = 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = true;
+                    break;
 
-                    case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
-                        selectedItem.IsNew = true;
-                        selectedItem.IsModified = false;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case (0, > 0):  // xPszkmID = 0 и xKmlID > 0
+                    selectedItem.IsNew = true;
+                    selectedItem.IsModified = false;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    case ( > 0, > 0):  // Оба ID > 0
-                        selectedItem.IsNew = false;
-                        selectedItem.IsModified = true;
-                        selectedItem.IsDeleted = false;
-                        break;
+                case ( > 0, > 0):  // Оба ID > 0
+                    selectedItem.IsNew = false;
+                    selectedItem.IsModified = true;
+                    selectedItem.IsDeleted = false;
+                    break;
 
-                    default:  // Все остальные случаи (например, отрицательные значения)
-                        Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
-                        break;
-                }
+                default:  // Все остальные случаи (например, отрицательные значения)
+                    Console.WriteLine($"Не определен тип обновления строки для задания {selectedItem.NomZad} по артикулу {selectedItem.Articul} класс вязания {selectedItem.NameVyazClass}");
+                    break;
+            }
         }
         private void SimpleButtonSaveVyazStatusUpdate()
         {

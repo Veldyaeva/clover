@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
+﻿using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Service
 {

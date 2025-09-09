@@ -1,25 +1,9 @@
-using DevExpress.Utils.Menu;
-using DevExpress.XtraGrid;
-using DevExpress.XtraReports.Native;
-using SewingProduction.form.TeamWork.Interfaces;
-using SewingProduction.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Security.AccessControl;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static DevExpress.LookAndFeel.DXSkinColors;
-using SewingProduction;
-using DevExpress.XtraLayout;
-using System.ComponentModel;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Services;
+using System;
+using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
-using SewingProduction.Core.Class;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SewingProduction
 {
@@ -34,7 +18,7 @@ namespace SewingProduction
         bool VisibleLogic { get; set; }
         void ApplyPermission(UserClass user);
     }
-    
+
 
     public class CustomTextBox : TextBox, IThemeable, IThemeableControl
     {
@@ -933,7 +917,7 @@ namespace SewingProduction
             ApplyTheme(); // Применяем тему к самой форме (фон)
             ThemeManager.ThemeChanged += OnThemeChanged;
             // Применяем тему к дочерним контролам после инициализации самой формы
-            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); }; 
+            this.Load += (s, e) => { if (!this.DesignMode) ApplyThemeToChildren(this); };
         }
         public CustomForm(UserClass user)
         {
@@ -953,7 +937,7 @@ namespace SewingProduction
                 CustomForm_Load(s, e);
             };
         }
-        public void ApplyTheme() 
+        public void ApplyTheme()
         {
             if (this.IsDisposed || !this.IsHandleCreated) return;
 
@@ -963,7 +947,7 @@ namespace SewingProduction
             }
             else
             {
-                Invalidate(); 
+                Invalidate();
             }
         }
         protected override void OnPaint(PaintEventArgs e)

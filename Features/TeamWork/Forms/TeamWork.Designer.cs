@@ -1271,6 +1271,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             ANNgridControl.Size = new System.Drawing.Size(568, 565);
             ANNgridControl.TabIndex = 2;
             ANNgridControl.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { ANNgridView });
+            ANNgridControl.Click += ANNgridControl_Click;
             // 
             // ANNgridView
             // 

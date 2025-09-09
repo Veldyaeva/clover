@@ -50,9 +50,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
         [NotMapped]
         public bool SyncSelection { get; set; } = false;
         [NotMapped]
-        public bool IsModified { get; set; } = false ;
+        public bool IsModified { get; set; } = false;
         [NotMapped]
-        public bool IsNew { get; set; } = false ;
+        public bool IsNew { get; set; } = false;
         [NotMapped]
         public bool IsDeleted { get; set; } = false;
 
@@ -66,9 +66,9 @@ namespace SewingProduction.Features.KnittingProduction.Models
     [Table("plan_sezon_zad_knitMachine")]
     public class PlanSezonZadKnitMachineList : INewable, IModifiable, IDeletable
     {
-        public int pszkmID {  set; get; }
-        public string pszkmPszNom {  set; get; }
-        public int pszkmKnitClass {  set; get; }
+        public int pszkmID { set; get; }
+        public string pszkmPszNom { set; get; }
+        public int pszkmKnitClass { set; get; }
         public int pszkmKmlID { get; set; }
         public DateTime? pszkmPlanDate { get; set; }
         public DateTime? pszkmDateAdd { get; set; }
@@ -86,7 +86,7 @@ namespace SewingProduction.Features.KnittingProduction.Models
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
-    
+
     public class ArtPrKnitMachineView
     {
         public int kmlid { get; set; }

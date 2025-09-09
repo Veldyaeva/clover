@@ -1,5 +1,4 @@
 ﻿using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
@@ -7,8 +6,6 @@ using SewingProduction.Services;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
@@ -21,7 +18,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private readonly ILogger _logger = new FileLogger();
         private readonly TWGridHelper _gridHelper = new TWGridHelper();
         private readonly int _annId;
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)] 
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public NormRasz SelectedRowData { get; private set; }
         public NormOperNew()
         {
@@ -136,12 +133,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             normRasz.Spec = Convert.ToString(view.GetRowCellValue(rowHandle, "spec"))?.TrimEnd(' ');
             // Записываем текст из поля text_ob (из таблицы norm_oper) в поле obor записи norm_rasz
             normRasz.Obor = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');
-            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd"); 
-            normRasz.N1 = GetIntFromView(view, rowHandle, "n1"); 
-            normRasz.Sek = GetIntFromView(view, rowHandle, "sek"); 
-            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob"); 
-            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr"); 
-            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv"); 
+            normRasz.razryd = GetIntFromView(view, rowHandle, "razryd");
+            normRasz.N1 = GetIntFromView(view, rowHandle, "n1");
+            normRasz.Sek = GetIntFromView(view, rowHandle, "sek");
+            normRasz.KodOb = GetIntFromView(view, rowHandle, "kod_ob");
+            normRasz.KodPodr = GetIntFromView(view, rowHandle, "kod_podr");
+            normRasz.KodProizv = GetIntFromView(view, rowHandle, "kod_proizv");
             normRasz.TextProizv = Convert.ToString(view.GetRowCellValue(rowHandle, "text_proizv"))?.TrimEnd(' ');
             normRasz.TextVyaz = Convert.ToString(view.GetRowCellValue(rowHandle, "text_vyaz"))?.TrimEnd(' ');
             normRasz.TextOb = Convert.ToString(view.GetRowCellValue(rowHandle, "text_ob"))?.TrimEnd(' ');

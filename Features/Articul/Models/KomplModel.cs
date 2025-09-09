@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Models
-{    
+{
     public class KomplModel : INotifyPropertyChanged
     {
         public int? kod_k { get; set; }

@@ -1,19 +1,8 @@
-﻿using System;
+﻿using DevExpress.XtraGrid;
+using SewingProduction.Features.UserDistribution.Helpers;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevExpress.XtraBars.Docking2010.DragEngine;
-using DevExpress.XtraBars.ViewInfo;
-using DevExpress.XtraGrid;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.UserDistribution.Models;
-using SewingProduction.Helpers;
-using SewingProduction.Services;
-using static DevExpress.LookAndFeel.DXSkinColors;
 
 namespace SewingProduction.Core.Class
 {

@@ -1,13 +1,13 @@
-﻿using System;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Forms
 {
@@ -78,7 +78,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             int id = row["ProjectFormsID"] != DBNull.Value ? Convert.ToInt32(row["ProjectFormsID"]) : 0;
 
             string nameForm = row["NameForm"]?.ToString() ?? "";
-            string nameFormRus = row["NameFormRus"]?.ToString() ?? ""; 
+            string nameFormRus = row["NameFormRus"]?.ToString() ?? "";
             int creatorID = row["CreatorID"] != DBNull.Value ? Convert.ToInt32(row["CreatorID"]) : _user.UserId;
 
 
@@ -407,7 +407,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             string query = $@"
                 SELECT pf.ProjectFormsID, pf.NameForm, pf.NameFormRus, UserName, pf.CreatorID FROM ProjectForms pf
                 LEFT JOIN Users u ON pf.CreatorID = u.UserID";
-            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> {});
+            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { });
         }
         public async void UpdateProjectForms(string eColumn, object eValue, int eId)
         {
@@ -431,14 +431,14 @@ namespace SewingProduction.Features.UserDistribution.Forms
             await InsertObjectForm(eNameForm, eNameFormRus, "CustomForm", CreatorID, result);
             return Convert.ToInt32(result);
         }
-        public async void DeleteProjectForms( int eId)
+        public async void DeleteProjectForms(int eId)
         {
             string query = $@"
                 DELETE ProjectForms 
                 WHERE ProjectFormsID = @eId;
                 DELETE ObjectForm 
                 WHERE FormID = @eId";
-            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> {{ "@eId", eId } });
+            await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@eId", eId } });
         }
 
         #endregion
@@ -466,7 +466,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
             OUTPUT INSERTED.ObjectID
             VALUES (@ObjectName, @ObjectNameRus, @ObjectType, @CreatorID, @FormID)";
 
-                    var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
+            var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {
                 { "@ObjectName", objectName },
                 { "@ObjectNameRus", objectNameRus },
@@ -499,7 +499,7 @@ namespace SewingProduction.Features.UserDistribution.Forms
                 SELECT COUNT(*) FROM ObjectForm
                 WHERE FormID = @FormID AND ObjectName = @ObjectName";
 
-                    var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
+            var result = await _dbHelper.ExecuteScalarAsync(query, new Dictionary<string, object>
             {
                 { "@FormID", formId },
                 { "@ObjectName", objectName }

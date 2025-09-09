@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using DevExpress.XtraEditors.Repository;
+using DevExpress.XtraGrid.Columns;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using System;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using DevExpress.DataAccess.Native.Data;
-using DevExpress.XtraEditors.Repository;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraPrinting;
-using DevExpress.XtraReports.UI;
-using SewingProduction.Helpers;
-using SewingProduction.Features.UserDistribution.Helpers;
 
 namespace SewingProduction.form
 {

@@ -60,7 +60,7 @@ namespace SewingProduction.Features.TeamWork.Services
                     Designer = designer,
                     Constructor = constructor,
                     Reco = annData.Reco?.Trim() ?? "",
-                    
+
                     // Основные показатели времени
                     Sek = annData.Sek,
                     SekShv = annData.SekShv,
@@ -79,7 +79,7 @@ namespace SewingProduction.Features.TeamWork.Services
                     SekVyaz57 = annData.SekVyaz57,
                     SekVyaz18 = annData.SekVyaz18,
                     SekKr = annData.SekKr,
-                    
+
                     // Операции
                     Operations = operations ?? new System.Collections.Generic.List<NormRasz>(),
                     RaskroyOperations = raskroyOps ?? new System.Collections.Generic.List<NormRask>(),
@@ -108,14 +108,14 @@ namespace SewingProduction.Features.TeamWork.Services
         {
             // Здесь можно добавить расчет дополнительных параметров
             // Например, такт потока, количество рабочих, расчетный выпуск в смену
-            
+
             // Пример расчета такта потока (может потребоваться корректировка формулы)
             if (reportData.Sek > 0)
             {
                 // Пример: такт потока = общее время / количество операций
                 int operationsCount = reportData.Operations?.Count ?? 1;
                 if (operationsCount == 0) operationsCount = 1;
-                
+
                 reportData.TaktPotoka = (decimal)reportData.Sek / operationsCount;
             }
 
@@ -130,4 +130,4 @@ namespace SewingProduction.Features.TeamWork.Services
             reportData.KolRab = reportData.Operations?.Count ?? 0;
         }
     }
-} 
+}

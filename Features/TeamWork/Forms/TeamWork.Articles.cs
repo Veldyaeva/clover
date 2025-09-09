@@ -1,22 +1,15 @@
-﻿using System.Threading.Tasks;
-using System.Threading;
-using System;
-using SewingProduction.Models;
-using System.ComponentModel;
-using System.Data;
-using System.Windows.Forms;
-using DevExpress.XtraGrid.Columns;
-using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+﻿using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraGrid;
 using SewingProduction.Helpers;
+using SewingProduction.Models;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
-using DevExpress.XtraGrid.Views.Base;
-using System.Collections;
-using SewingProduction.Services;
-using DevExpress.Xpo.DB.Helpers;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -281,7 +274,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void gridViewWdToBind_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var view = sender as GridView;// gridView_wdToBind; 
-            if (view == null) 
+            if (view == null)
             {
                 await ClearWdToBindRelatedData();
                 return;
@@ -309,7 +302,7 @@ namespace SewingProduction.Features.TeamWork.Forms
 
                 // 2. Затем загружаем основные данные
                 token.ThrowIfCancellationRequested();
-                
+
                 // Обновляем NormRasz для customGridControl3
                 await RefreshNormRaszForArticlesTab(annId, token);
 
@@ -337,7 +330,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async Task RefreshNormRaszForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             List<NormRasz> raszList = new List<NormRasz>();
             if (annId > 0)
             {
@@ -366,11 +359,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async Task LoadNZPForArticlesTab(int annId, CancellationToken cancellationToken = default)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             var nzpData = annId > 0 ? await _artNormService.GetNzpWithPztCounts(annId, cancellationToken) : new List<NZPByKoddRt>();
-            
+
             cancellationToken.ThrowIfCancellationRequested();
-            
+
             _nzpListArt.RaiseListChangedEvents = false;
             _nzpListArt.Clear();
             foreach (var item in nzpData)
@@ -378,7 +371,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _nzpListArt.Add(item);
             }
             _nzpListArt.RaiseListChangedEvents = true;
-            
+
             _nzpByKoddRtSourceArt?.ResetBindings(false);
             gridControlNZP?.RefreshDataSource(); // Обновить грид НЗП
             await UpdateUnboundButtonStatusBasedOnNZP(); // Обновить состояние кнопки
@@ -517,7 +510,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 confirmDialog.CancelButton = cancelButton;
 
                 if (confirmDialog.ShowDialog() != DialogResult.OK) return;
-                
+
                 // Заполняем группу и модель в зависимости от выбора пользователя
                 if (fillGroupCheckBox.Checked && string.IsNullOrEmpty(selectedAnnRow.grup))
                 {
@@ -528,7 +521,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     selectedAnnRow.mod = selectedArtRow.mod;
                 }
                 // Обновляем annId в базе данных
-                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt,selectedArtRow.Articul);
+                _artNormService.UpdateAnnIdinArticul(selectedAnnRow.AnnID, selectedArtRow.kodd, selectedArtRow.kodd_rt, selectedArtRow.Articul);
                 selectedArtRow.BindedArt = selectedAnnRow.Articul;//заполняем в артикуле из РТ
 
                 await _dbService.UpdateEntityAsync(TableNames.Ann, TableNames.AnnId, selectedAnnRow);
@@ -570,7 +563,7 @@ namespace SewingProduction.Features.TeamWork.Forms
         private async void gridView_unboundArts_FocusedRowChanged_Internal(object sender, FocusedRowChangedEventArgs e)
         {
             var gv_unbound_Arts = sender as GridView;
-            if (gv_unbound_Arts == null) 
+            if (gv_unbound_Arts == null)
             {
                 await ClearUnboundArtsRelatedData();
                 return;

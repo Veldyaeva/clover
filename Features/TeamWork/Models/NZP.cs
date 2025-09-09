@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SewingProduction.Models
 {
@@ -29,7 +25,7 @@ namespace SewingProduction.Models
         public int kolNZP { get; set; }
         [Column("PztCount")]
         public int PZTCount { get; set; }
-        [Column ("data_r")]
+        [Column("data_r")]
         public DateTime? data_r { get; set; }
     }
 }

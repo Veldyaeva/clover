@@ -1,15 +1,6 @@
 ﻿using System;
-using System.Data;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Drawing.Printing;
-using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using DevExpress.XtraRichEdit.Model;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SewingProduction
 {

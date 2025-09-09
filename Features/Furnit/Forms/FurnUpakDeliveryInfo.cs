@@ -6,10 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -210,7 +206,7 @@ namespace SewingProduction.form
                     _reestrFurnShtrBindingSource.ResetBindings(false);
                 });
 
-             }
+            }
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при загрузке данных ReestrFurnSostAndShtrLoadAsync");
@@ -232,7 +228,7 @@ namespace SewingProduction.form
                 _reestrFurnSostViewBindingSource.ResetBindings(false);
                 return;
             }
-                
+
             try
             {
                 // Загружаем все данные параллельно
@@ -358,8 +354,8 @@ namespace SewingProduction.form
             {
                 GetReestrFurn(tbKodF.Text);
             }
-            
-            
+
+
         }
 
         private void btnKodFDelivInfo_Click(object sender, EventArgs e)
@@ -394,8 +390,8 @@ namespace SewingProduction.form
         private void button6_Click(object sender, EventArgs e)
         {
             object data = gridViewReestrFurn.GetRow(gridViewReestrFurn.FocusedRowHandle);
-           MessageBox.Show(((DataRowView)data).Row["rfDateTime"].ToString());
-                }
+            MessageBox.Show(((DataRowView)data).Row["rfDateTime"].ToString());
+        }
 
         private void FurnUpakDeliveryInfo_Deactivate(object sender, EventArgs e)
         {

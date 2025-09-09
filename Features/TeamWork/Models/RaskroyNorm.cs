@@ -1,5 +1,3 @@
-using System;
-
 namespace SewingProduction.Models
 {
     public class RaskroyNorm
@@ -26,4 +24,4 @@ namespace SewingProduction.Models
         public string Lpro3 { get; set; }
     }
 
-} 
+}

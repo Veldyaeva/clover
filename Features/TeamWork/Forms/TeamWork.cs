@@ -1,22 +1,11 @@
-﻿using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.CodeParser.VB;
-using DevExpress.Data.Filtering;
-using DevExpress.Xpo;
-using DevExpress.XtraBars.Docking;
-using DevExpress.XtraBars.Docking2010;
-using DevExpress.XtraEditors;
-using DevExpress.XtraEditors.ButtonPanel;
+﻿using DevExpress.XtraBars.Docking2010;
 using DevExpress.XtraEditors.Controls;
 using DevExpress.XtraEditors.Repository;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
-using DevExpress.XtraSpreadsheet.Import.Xls;
-using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Features.TeamWork;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form;
 using SewingProduction.Helpers;
 using SewingProduction.Models;
 using SewingProduction.Report;
@@ -25,14 +14,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BindingSource = System.Windows.Forms.BindingSource;
-using PopupMenuShowingEventHandler = DevExpress.XtraGrid.Views.Grid.PopupMenuShowingEventHandler;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {
@@ -306,7 +293,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                     // Загружаем данные для вкладки артикулов
                     await CurrentWorks_Load();
                     break;
-                    
+
                 default:
                     // При переходе на другие вкладки можно добавить дополнительную логику если необходимо
                     break;
@@ -1472,6 +1459,11 @@ namespace SewingProduction.Features.TeamWork.Forms
         {
 
         }
+
+        private void ANNgridControl_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     public static class DemoHelper
     {
@@ -1498,4 +1490,3 @@ namespace SewingProduction.Features.TeamWork.Forms
         }
     }
 }
-   

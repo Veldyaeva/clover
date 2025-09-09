@@ -1,15 +1,4 @@
-﻿using DevExpress.ClipboardSource.SpreadsheetML;
-using DevExpress.Data.Linq.Helpers;
-using DevExpress.Xpo.Logger.Transport;
-using DevExpress.XtraBars.Docking2010.Dragging;
-using DevExpress.XtraReports.Templates;
-using DevExpress.XtraRichEdit.Import.EPub;
-using Newtonsoft.Json.Linq;
-using SewingProduction.form;
-using SewingProduction.Interfaces;
-using System;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
 
 namespace SewingProduction.Features.KnittingProduction.Models
 {

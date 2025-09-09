@@ -1,27 +1,19 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
-using System;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Windows.Forms;
-using DataTable = System.Data.DataTable;
-using BindingSource = System.Windows.Forms.BindingSource;
-using SewingProduction.Helpers;
-using SewingProduction.Report;
-using System.Diagnostics;
 using DevExpress.XtraReports.UI;
-using SewingProduction.Features.CardByNom.Models;
-using SewingProduction.Help.Form;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using SewingProduction.Features.Articul.Forms;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.Features.Articul;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
-using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Features.UserDistribution.Helpers;
+using SewingProduction.Helpers;
+using SewingProduction.Report;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
+using DataTable = System.Data.DataTable;
 
 //using DataTable = DevExpress.DataAccess.Native.Data.DataTable;
 
@@ -87,6 +79,7 @@ namespace SewingProduction.Features.Articul
 
 
         }
+       
         private void bindComboBoxTkanName()
         {
             string query = "SELECT tkan.tkb,tkan,kod_t, concat(tkb,kod_t) as concat  FROM tkan order by tkb";

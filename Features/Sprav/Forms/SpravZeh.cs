@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraExport.Helpers;
-using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
-using static DevExpress.Mvvm.Native.Either;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using SewingProduction.Core.interfaces;
-using SewingProduction.Helpers;
 using SewingProduction.Features.UserDistribution.Helpers;
-using Org.BouncyCastle.Ocsp;
+using SewingProduction.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace SewingProduction.form
 {
@@ -43,7 +33,7 @@ namespace SewingProduction.form
             //Таймер
             timer = new Timer();
             timer.Interval = 2000;
-            timer.Tick += Timer_Tick; 
+            timer.Tick += Timer_Tick;
             _tableSQL = tableSQL;
             //Имя формы:
             this.Text = rusNameTableSQL;
@@ -237,7 +227,7 @@ namespace SewingProduction.form
         {
             if (this.MdiParent is SpMainForm mainForm)
             {
-                var form = new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", red : false);
+                var form = new SpravForAll("spVidProizv", rusNameTableSQL: "Справочник Вид произв", red: false);
                 mainForm.OpenForm(form, sender);
             }
         }

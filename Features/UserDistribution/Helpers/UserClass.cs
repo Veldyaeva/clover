@@ -1,11 +1,8 @@
-﻿using System;
+﻿using SewingProduction.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using DevExpress.XtraBars.Ribbon;
-using SewingProduction.Helpers;
 
 namespace SewingProduction.Features.UserDistribution.Helpers
 {
@@ -25,7 +22,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
         public List<UserClass> Children { get; set; } = new List<UserClass>();
         public DataTable myObjectForm;
         public UserClass()
-        { 
+        {
             _userClassDataService = new UserClassDataService(dbHelper);
         }
         public async Task LoadUserData()
@@ -117,7 +114,7 @@ namespace SewingProduction.Features.UserDistribution.Helpers
                     LEFT JOIN Mode m ON m.ModeID = ro.ModeID
                 WHERE u.UserId = @UserId
                 AND pf.NameForm = @NameForm";
-            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserId", UserId } , { "@NameForm", NameForm } });
+            return await _dbHelper.ExecuteQueryAsync(query, new Dictionary<string, object> { { "@UserId", UserId }, { "@NameForm", NameForm } });
         }
     }
 

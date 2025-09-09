@@ -1,20 +1,10 @@
-﻿using DevExpress.XtraEditors;
+﻿using DevExpress.Data.Filtering;
+using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
-using SewingProduction.Helpers;
+using SewingProduction.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SewingProduction.form;
-using SewingProduction.Interfaces;
-using SewingProduction.Models;
-using SewingProduction.Services;
-using DevExpress.Data.Filtering;
 using System.Windows.Forms;
-using System.Data;
-using DevExpress.XtraGrid;
-using System.ComponentModel;
 
 namespace SewingProduction.Features.TeamWork.Forms
 {

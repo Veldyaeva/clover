@@ -1,48 +1,21 @@
-﻿using DevExpress.Office.Utils;
-using DevExpress.XtraGrid.Views.Card.ViewInfo;
-using DevExpress.XtraGrid.Views.Card;
-using DevExpress.XtraReports;
-using DevExpress.XtraReports.UI;
-using DevExpress.XtraReports.Parameters;
-using DevExpress.XtraReports.UserDesigner;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static DevExpress.Xpo.DB.DataStoreLongrunnersWatch;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Collections;
-using System.Security.Cryptography.X509Certificates;
-using DevExpress.ClipboardSource.SpreadsheetML;
-using SewingProduction.report;
-using DevExpress.XtraGauges.Core.Styles;
-using DevExpress.XtraPrinting;
-using SewingProduction.form;
-using DevExpress.DataAccess.Native.Sql;
+﻿using DevExpress.XtraReports.UI;
 using DevExpress.XtraTab;
-using DevExpress.Utils.Gesture;
-using SewingProduction.Helpers;
-using SewingProduction.form.TeamWork.Interfaces;
-using SewingProduction.Models;
-using DevExpress.ChartRangeControlClient.Core;
-using DevExpress.XtraEditors.Controls;
-using BindingSource = System.Windows.Forms.BindingSource;
-using Z.Dapper.Plus;
-using DevExpress.XtraPrinting.Native;
+using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
-using SewingProduction.Interfaces;
-using DevExpress.Xpo.DB.Helpers;
 using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CardByNom.Services;
 using SewingProduction.Features.Furnit.Services;
-using SewingProduction.Core.Services;
+using SewingProduction.form;
+using SewingProduction.Helpers;
+using SewingProduction.Models;
+using SewingProduction.report;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using BindingSource = System.Windows.Forms.BindingSource;
 
 namespace SewingProduction
 {
@@ -50,7 +23,7 @@ namespace SewingProduction
     {
         public int fspecrez, uspecrez;
         public string fkodfd, ukodfd;
-        
+
         private readonly DatabaseHelper _dbHelper;
         private readonly CardByNomService _cardByNomService;
         private readonly FurnitService _furnitService;
@@ -86,7 +59,7 @@ namespace SewingProduction
 
         public CardByNom()
         {
-            
+
             InitializeComponent();
             _dbHelper = new DatabaseHelper("ace");
             _cardByNomService = new CardByNomService(_dbHelper);
@@ -147,7 +120,7 @@ namespace SewingProduction
                     _proizvCombIzdVZPByPachKodBindingSource = new BindingSource { DataSource = _proizvCombIzdVZPByPachKodBindingList };
                 });
 
-                await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, chipInfoByNomZadTask, historyRazdelNaklViewByIzTask, furnitZayavCheckByPachKodTask, planSezonOtdelkaViewByPachKodTask, proizvCombIzdSPByPachKodTask, proizvCombIzdVZPByPachKodTask) ;
+                await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, chipInfoByNomZadTask, historyRazdelNaklViewByIzTask, furnitZayavCheckByPachKodTask, planSezonOtdelkaViewByPachKodTask, proizvCombIzdSPByPachKodTask, proizvCombIzdVZPByPachKodTask);
                 //await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, historyRazdelNaklViewByIzTask);
 
                 //_currentRasInfoData = new RasInfoByPachKod();
@@ -162,14 +135,14 @@ namespace SewingProduction
                 //_currentNaklViewData = new List<NaklViewByPachKod>();
                 //_naklViewByPachKodBindingSource.DataSource = _currentNaklViewData;
                 //gcNaklList.DataSource = _naklViewByPachKodBindingSource;
-                
+
                 //_currentHistoryRazdelNaklViewData = new List<HistoryRazdelNaklViewByIz>();
                 //_historyRazdelNaklViewByIzBindingSource.DataSource = _currentHistoryRazdelNaklViewData;
                 //gcNaklList.DataSource = _naklViewByPachKodBindingSource;
 
                 //_currentPlanSezonOtdelkaViewData = new List<PlanSezonOtdelkaView>();
                 //_planSezonOtdelkaViewByPachKodBindingSource.DataSource = _currentPlanSezonOtdelkaViewData;
-                
+
 
                 //this.xtraTabControl1.Enabled = true;
                 #region заполнение блока "карточка расчета"
@@ -197,7 +170,7 @@ namespace SewingProduction
                 tbPsaKombOsn.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(RasInfoByPachKod.PsaKombOsn), true, DataSourceUpdateMode.Never);
                 psaSezName.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(RasInfoByPachKod.PsaSezName), true, DataSourceUpdateMode.Never);
                 pbEskiz.DataBindings.Add("ImageLocation", _rasInfoByPachKodBindingSource, nameof(RasInfoByPachKod.PictPath), true, DataSourceUpdateMode.Never);
-                
+
                 cbIsChip.DataBindings.Add("Checked", _chipInfoByPachKodBindingSource, nameof(ChipInfoByNomZad.isChip), true, DataSourceUpdateMode.Never);
                 #endregion
 
@@ -384,10 +357,10 @@ namespace SewingProduction
             //    var rasInfoTask = _cardByNomService.GetRasInfoByPachKod(pachKod);
             //    var naklViewTask = _cardByNomService.GetNaklViewByPachKod(pachKod);
             //    var furnitZayavCheckTask = _furnitService.GetFurnitZayavCheckByPachKod(pachKod);
-                
+
             //    //var historyRazdelNaklViewTask = _cardByNomService.GetHistoryRazdelNaklViewByIz(iz);
 
-                
+
             //    await Task.WhenAll(naklViewTask, rasInfoTask, furnitZayavCheckTask);
             //    //await Task.WhenAll(naklViewTask, rasInfoTask);
             //    //await Task.WhenAll(naklViewTask);
@@ -445,7 +418,7 @@ namespace SewingProduction
             //        //    _naklViewByPachKodBindingSource.DataSource = _currentNaklViewData;
             //        //}
             //    });
-                
+
             //    var selectedRow = new NaklViewByPachKod();
             //    if (_naklViewByPachKodBindingSource.Current == null && _naklViewByPachKodBindingSource.Count > 0)
             //    {
@@ -456,7 +429,7 @@ namespace SewingProduction
             //        selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
             //    }
 
-                
+
             //    _currentHistoryRazdelNaklViewData.Clear();
             //    if (selectedRow != null)
             //    {
@@ -490,7 +463,7 @@ namespace SewingProduction
         //    PrintingSystemBase pb = e.PrintingSystem as PrintingSystemBase;
         //    pb.PageSettings.Landscape = true;
         //}
-     
+
         private string GetPachKod()
         {
             string pachKod = string.Concat(tbYearPach.Text, tbNomPach.Text.PadLeft(6));
@@ -498,7 +471,7 @@ namespace SewingProduction
         }
         private async Task UpdateFurnitUpak()
         {
-            
+
             //string pachKod = GetPachKod();
             await LoadFurnitZayavCheckDataAsync(GetPachKod());
 
@@ -526,7 +499,7 @@ namespace SewingProduction
             }
 
 
-            furnitZayavViewFurnit.Text = (selectedRow.FKodFD?? " ".PadRight(12)).Substring(0, 12);
+            furnitZayavViewFurnit.Text = (selectedRow.FKodFD ?? " ".PadRight(12)).Substring(0, 12);
             furnitZayavViewFurnit.ViewType = "r";
             furnitZayavViewFurnit.Refresh();
 
@@ -596,9 +569,9 @@ namespace SewingProduction
             try
             {
                 // При архивировании нам нужны данные из _selectedAnnId
-         //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
+                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
 
-         //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
+                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
                 //RasCard.Enabled = false;
                 _rasInfoByPachKodBindingSource.Clear();
                 _rasInfoByPachKodBindingSource.ResetBindings(false);
@@ -617,7 +590,7 @@ namespace SewingProduction
 
                     await _logger.LogEventAsync($"Данные RasInfo успешно загружены для PachKod {pachKod}", "LoadRasInfoDataAsync");
                     //RasCard.Enabled = true ;
-                _rasInfoByPachKodBindingSource.ResetBindings(false);
+                    _rasInfoByPachKodBindingSource.ResetBindings(false);
                 }
                 else
                 {
@@ -964,7 +937,7 @@ namespace SewingProduction
         //        this.gcNaklList.BringToFront();
         //        this.gcPartNaklList.Visible = false;
         //    }
-            
+
         //}
         private void btnPrintMLRTAll_Click(object sender, EventArgs e)
         {
@@ -1038,8 +1011,8 @@ namespace SewingProduction
         private void btnFurnUpakDeliveryInfoShow_Click(object sender, EventArgs e)
         {
             var selectedRow = _furnitZayavCheckByPachKodBindingSource.Current as FurnitZayavCheckByPachKod;
-            FurnUpakDeliveryInfo FDI = new FurnUpakDeliveryInfo(selectedRow.FKodFD.Substring(0,12));
-            DialogResult result = FDI.ShowDialog() ;
+            FurnUpakDeliveryInfo FDI = new FurnUpakDeliveryInfo(selectedRow.FKodFD.Substring(0, 12));
+            DialogResult result = FDI.ShowDialog();
             // Обработка результата, возвращенного модальной формой
             if (result == DialogResult.OK)
             {
@@ -1129,7 +1102,7 @@ namespace SewingProduction
 
         private async void simpleButtonNaklPart_Click(object sender, EventArgs e)
         {
-            
+
             if (simpleButtonNaklPart.Text == "Показать информацию по делению накладной")
             {
                 simpleButtonNaklPart.Text = "Скрыть информацию по делению накладной";
@@ -1137,7 +1110,7 @@ namespace SewingProduction
 
                 var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
                 await LoadHistoryRazdelNaklViewDataAsync(selectedRow.Iz);
-                
+
                 this.gridControlPartNaklList.Location = this.gridControlNaklList.Location;
                 this.gridControlPartNaklList.Size = this.gridControlNaklList.Size;
                 this.gridControlPartNaklList.BringToFront();
@@ -1322,7 +1295,7 @@ namespace SewingProduction
 
         private void button11_Click(object sender, EventArgs e)
         {
-            
+
         }
         private void btnFurnKKPrint_Click(object sender, EventArgs e)
         {
@@ -1332,7 +1305,7 @@ namespace SewingProduction
             //report1.Parameters["_naklIz"].Value = iz;
             //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             //reportPrintTool1.ShowPreviewDialog();
-            
+
             //string nomzad = tbPsaNomZad.Text;
             //int vidf = 1;
             ConfectionCardReport report1 = new ConfectionCardReport();

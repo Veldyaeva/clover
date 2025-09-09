@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SewingProduction
@@ -18,7 +11,7 @@ namespace SewingProduction
             InitializeComponent();
             Random random = new Random();
             int minValue = 3;
-            int maxValue = 16; 
+            int maxValue = 16;
 
             int randomNumber = random.Next(minValue, maxValue + 1);
 
@@ -32,7 +25,7 @@ namespace SewingProduction
             {
                 minValue = 9;
                 maxValue = 16;
-                randomNumber = random.Next(minValue,maxValue + 1);
+                randomNumber = random.Next(minValue, maxValue + 1);
                 imageSlider1.CurrentImageIndex = randomNumber;//summer
             }
             else if (month >= 9 && month <= 11)
@@ -45,14 +38,14 @@ namespace SewingProduction
             }
             DateTime sprStart = DateTime.ParseExact("03-05", "MM-dd", CultureInfo.InvariantCulture);
             DateTime sprEnd = DateTime.ParseExact("03-11", "MM-dd", CultureInfo.InvariantCulture);
-            if (today >= sprStart&& today<=sprEnd)
+            if (today >= sprStart && today <= sprEnd)
             {
                 imageSlider1.CurrentImageIndex = 4;//8.03
             }
             if (today == DateTime.ParseExact("02-14", "MM-dd", CultureInfo.InvariantCulture))
-                { imageSlider1.CurrentImageIndex = 7; }//14.02
-            if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture)&&today<=DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
-            { imageSlider1.CurrentImageIndex = 8;}//23.02
+            { imageSlider1.CurrentImageIndex = 7; }//14.02
+            if (today >= DateTime.ParseExact("02-17", "MM-dd", CultureInfo.InvariantCulture) && today <= DateTime.ParseExact("02-25", "MM-dd", CultureInfo.InvariantCulture))
+            { imageSlider1.CurrentImageIndex = 8; }//23.02
         }
     }
 }

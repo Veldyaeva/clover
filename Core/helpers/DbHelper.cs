@@ -1,6 +1,4 @@
 ﻿using Dapper;
-using DevExpress.XtraCharts.Designer.Native;
-using DevExpress.XtraCharts.Native;
 using SewingProduction.Core.Class.Settings;
 
 //using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
@@ -8,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SewingProduction.Helpers
@@ -102,7 +98,7 @@ namespace SewingProduction.Helpers
                 using (var command = new SqlCommand(query, connection))
                 {
                     DataTable table = new DataTable();
-                    command.CommandType = type; 
+                    command.CommandType = type;
                     if (parameters != null)
                     {
                         foreach (var param in parameters)

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SewingProduction.Features.Articul.Models;
+﻿using SewingProduction.Features.Articul.Models;
 using SewingProduction.Helpers;
 using SewingProduction.Services;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SewingProduction.Features.Articul.Service
 {
@@ -72,8 +69,16 @@ namespace SewingProduction.Features.Articul.Service
 
             int count = await _dbHelper.ExecuteScalarAsync<int>(query, new
             {
-                model.kod1, model.kod2, model.kod3, model.kod4, model.kod5, 
-                model.kod6, model.kod7, model.kod8, model.kod9, model.kod10,
+                model.kod1,
+                model.kod2,
+                model.kod3,
+                model.kod4,
+                model.kod5,
+                model.kod6,
+                model.kod7,
+                model.kod8,
+                model.kod9,
+                model.kod10,
                 model.sost_k
             });
 

@@ -1,26 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml.Linq;
-using DevExpress.DataAccess.DataFederation;
-using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SewingProduction.Core.Class;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
-using SewingProduction.form;
-using SewingProduction.Features.Articul;
-using DevExpress.XtraGrid;
-using DevExpress.XtraVerticalGrid;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -108,9 +99,9 @@ namespace SewingProduction.Features.Articul.Forms
                 if (int.TryParse(xkod, out var val))
                 {
                     int h = gridViewKomplRazm.LocateByValue("kod", val);
-                    if (h >= 0) 
-                    { 
-                        gridViewKomplRazm.FocusedRowHandle = h; 
+                    if (h >= 0)
+                    {
+                        gridViewKomplRazm.FocusedRowHandle = h;
                         gridViewKomplRazm.MakeRowVisible(h);
                         xFlagKod = true;
                     }

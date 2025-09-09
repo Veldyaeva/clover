@@ -1,18 +1,16 @@
-﻿using DevExpress.XtraBars;
-using DevExpress.XtraTabbedMdi;
+﻿using DevExpress.XtraTabbedMdi;
+using Microsoft.AspNet.Identity;
+using SewingProduction.Core.Class.Settings;
+using SewingProduction.Features.Articul;
+using SewingProduction.Features.CuttingProduction.Forms;
+using SewingProduction.Features.Sprav;
+using SewingProduction.Features.TeamWork.Forms;
+using SewingProduction.Features.UserDistribution.Forms;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.form.Nadezhda;
 using System;
 using System.Windows.Forms;
-using SewingProduction.Features.UserDistribution.Helpers;
-using Microsoft.AspNet.Identity;
-using SewingProduction.Core.Class.Settings;
-using SewingProduction.Features.UserDistribution.Forms;
-using SewingProduction.Features.TeamWork;
-using System.Diagnostics;
-using SewingProduction.Features.TeamWork.Forms;
-using SewingProduction.Features.Sprav;
-using SewingProduction.Features.Articul;
 
 namespace SewingProduction
 {
@@ -134,7 +132,7 @@ namespace SewingProduction
         #region Виды браков пряжи
         private void видыБраковНосковToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user : _user, servBrok : false), sender);
+            OpenForm(new SpravForAll("view_NameDefectsSpisPryzSocks", "*", "", "Виды браков пряжи - Носки", user: _user, servBrok: false), sender);
         }
         #endregion
         #endregion
@@ -244,5 +242,9 @@ namespace SewingProduction
             helpForm.Show();
         }
 
+        private void раскройныйЦехToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new CuttingForm(), sender);
+        }
     }
 }
