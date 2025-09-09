@@ -24,10 +24,10 @@ namespace SewingProduction.Models
             DapperPlusManager.Entity<NormRask>().Table(TableNames.Rask).Key(x => x.id);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Identity(x => x.nkId);
             DapperPlusManager.Entity<NormKont>().Table(TableNames.Kont).Key(x => x.nkId);
-            DapperPlusManager.Entity<NaklViewByPachKod>();
+            DapperPlusManager.Entity<NaklView>();
             DapperPlusManager.Entity<RasInfo>();
             DapperPlusManager.Entity<HistoryRazdelNaklViewByIz>();
-            DapperPlusManager.Entity<ChipInfoByNomZad>();
+            DapperPlusManager.Entity<ChipInfo>();
             DapperPlusManager.Entity<ProizvCombIzd>();
             DapperPlusManager.Entity<VyazPlanView>();
             DapperPlusManager.Entity<ArtPrFioProgr>();

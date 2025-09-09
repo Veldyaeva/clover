@@ -114,6 +114,41 @@ namespace SewingProduction.Features.CardByNom.Services
                 return null;
             }
         }
+
+        public async Task<List<SockDownTimeList>> GetSockDownTimeListByNomZad(string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"select * from KnitMachineDownTimeByNomZad where kzPszNom = '{nomZad}'";
+                    var result = await connection.QueryAsync<SockDownTimeList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных SockDownTimeList");
+                return null;
+            }
+        }
+        public async Task<List<SockDefectList>> GetSockDefectListByNomZad(string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT * FROM vSpisPryzDefect_view WHERE nom_zadany = '{nomZad}'";
+                    var result = await connection.QueryAsync<SockDefectList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных SockDefectList");
+                return null;
+            }
+        }
         #endregion
 
     }

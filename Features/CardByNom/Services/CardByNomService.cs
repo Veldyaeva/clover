@@ -45,23 +45,23 @@ namespace SewingProduction.Features.CardByNom.Services
         /// </summary>
         /// <param pachKod="_pachKod">pach_kod</param>
         /// <returns></returns>
-        public async Task<List<NaklViewByPachKod>> GetNaklViewByPachKod(string pachKod)
+        public async Task<List<NaklView>> GetNaklViewByPachKod(string pachKod)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 var xPachKod = pachKod + "%";
                 string query = $"select * from NaklView where nom = (select nom from raskr_zeh_up where pach_kod like @pachKod )";
-                var result = await connection.QueryAsync<NaklViewByPachKod>(query, new Dictionary<string, object> { { "@pachKod", xPachKod } });
+                var result = await connection.QueryAsync<NaklView>(query, new Dictionary<string, object> { { "@pachKod", xPachKod } });
                 return result.ToList();
             }
         }
 
-        public async Task<List<NaklViewByPachKod>> GetNaklViewByNomZad(string nomZad)
+        public async Task<List<NaklView>> GetNaklViewByNomZad(string nomZad)
         {
             using (var connection = _dbHelper.GetConnection())
             {
                 string query = $"select * from NaklView where nom_zad = @nomZad";
-                var result = await connection.QueryAsync<NaklViewByPachKod>(query, new Dictionary<string, object> { { "@nomZad", nomZad } });
+                var result = await connection.QueryAsync<NaklView>(query, new Dictionary<string, object> { { "@nomZad", nomZad } });
                 return result.ToList();
             }
         }
@@ -91,22 +91,33 @@ namespace SewingProduction.Features.CardByNom.Services
             }
         }
 
-        public async Task<ChipInfoByNomZad> GetChipInfoByPachKod(string pachKod)
+        public async Task<ChipInfo> GetChipInfoByPachKod(string pachKod)
         {
             try
             {
-                //string query = $"SELECT dbo.checkChipNakl('', @nomZad) AS isChip ";
                 var xPachKod = pachKod + "%";
                 string query = $"SELECT dbo.checkChipNakl('', (SELECT nom_zad FROM raskr_zeh_up WHERE pach_kod LIKE @pachKod)) AS isChip\r\n ";
-                return await _dbService.GetEntityAsync<ChipInfoByNomZad>(query, new { xPachKod });
+                return await _dbService.GetEntityAsync<ChipInfo>(query, new { xPachKod });
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных ChipInfo для NomZad {pachKod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных ChipInfo для pach_kod {pachKod}");
                 return null;
             }
         }
-
+        public async Task<ChipInfo> GetChipInfoByNomZad(string nomZad)
+        {
+            try
+            {
+                string query = $"SELECT dbo.checkChipNakl('', @nomZad) AS isChip ";
+                return await _dbService.GetEntityAsync<ChipInfo>(query, new { nomZad });
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных ChipInfo для NomZad {nomZad}");
+                return null;
+            }
+        }
         
         public async Task<List<ProizvCombIzd>> GetProizvCombIzdByPachKod(string pachKod, int vidPr)
         {

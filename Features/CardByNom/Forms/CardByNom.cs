@@ -17,6 +17,8 @@ using DevExpress.XtraReports.Parameters;
 using DevExpress.XtraReports.UI;
 using DevExpress.XtraReports.UserDesigner;
 using DevExpress.XtraTab;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Org.BouncyCastle.Asn1.X509;
 using SewingProduction.Core.Services;
 using SewingProduction.Extensions;
 using SewingProduction.Features.Articul;
@@ -64,18 +66,18 @@ namespace SewingProduction
         private readonly SockService _sockService;
         private readonly ILogger _logger = new FileLogger();
         private RasInfo _currentRasInfoData = new RasInfo();
-        private ChipInfoByNomZad _currentChipInfoData = new ChipInfoByNomZad();
+        private ChipInfo _currentChipInfoData = new ChipInfo();
         private FurnitZayavCheckByPachKod _currentFurnitZayavCheckData = new FurnitZayavCheckByPachKod();
-        private List<NaklViewByPachKod> _currentNaklViewData = new List<NaklViewByPachKod>();
+        private List<NaklView> _currentNaklViewData = new List<NaklView>();
         private List<HistoryRazdelNaklViewByIz> _currentHistoryRazdelNaklViewData = new List<HistoryRazdelNaklViewByIz>();
         private List<PlanSezonOtdelkaView> _currentPlanSezonOtdelkaViewData = new List<PlanSezonOtdelkaView>();
         private List<ProizvCombIzd> _currentProizvCombIzdSPData = new List<ProizvCombIzd>();
         private List<ProizvCombIzd> _currentProizvCombIzdVZPData = new List<ProizvCombIzd>();
-        private BindingList<NaklViewByPachKod> _naklViewByPachKodBindingList;
+        private BindingList<NaklView> _naklViewByPachKodBindingList;
         private BindingSource _naklViewByPachKodBindingSource;
         private BindingList<RasInfo> _rasInfoByPachKodBindingList;
         private BindingSource _rasInfoByPachKodBindingSource;
-        private BindingList<ChipInfoByNomZad> _chipInfoByPachKodBindingList;
+        private BindingList<ChipInfo> _chipInfoByPachKodBindingList;
         private BindingSource _chipInfoByPachKodBindingSource;
         private BindingList<FurnitZayavCheckByPachKod> _furnitZayavCheckByPachKodBindingList;
         private BindingSource _furnitZayavCheckByPachKodBindingSource;
@@ -107,6 +109,17 @@ namespace SewingProduction
         private BindingList<SockServiceList> _sockServiceListBindingList;
         private BindingSource _sockServiceListBindingSource;
 
+        // список простоев оборудования во время вязания задания. Носки
+        private List<SockDownTimeList> _currentSockDownTimeListData = new List<SockDownTimeList>();
+        private List<SockDownTimeList> sockDownTimeListData = new List<SockDownTimeList>();
+        private BindingList<SockDownTimeList> _sockDownTimeListBindingList;
+        private BindingSource _sockDownTimeListBindingSource;
+
+        // браки по заданию. Носки
+        private List<SockDefectList> _currentSockDefectListData = new List<SockDefectList>();
+        private List<SockDefectList> sockDefectListData = new List<SockDefectList>();
+        private BindingList<SockDefectList> _sockDefectListBindingList;
+        private BindingSource _sockDefectListBindingSource;
         public CardByNom()
         {
 
@@ -132,7 +145,7 @@ namespace SewingProduction
             {
                 var naklViewByPachKodTask = Task.Run(() =>
                 {
-                    _naklViewByPachKodBindingList = new BindingList<NaklViewByPachKod>();
+                    _naklViewByPachKodBindingList = new BindingList<NaklView>();
                     _naklViewByPachKodBindingSource = new BindingSource { DataSource = _naklViewByPachKodBindingList };
                 });
                 var rasInfoByPachKodTask = Task.Run(() =>
@@ -142,7 +155,7 @@ namespace SewingProduction
                 });
                 var chipInfoByNomZadTask = Task.Run(() =>
                 {
-                    _chipInfoByPachKodBindingList = new BindingList<ChipInfoByNomZad>();
+                    _chipInfoByPachKodBindingList = new BindingList<ChipInfo>();
                     _chipInfoByPachKodBindingSource = new BindingSource { DataSource = _chipInfoByPachKodBindingList };
                 });
                 var historyRazdelNaklViewByIzTask = Task.Run(() =>
@@ -188,10 +201,21 @@ namespace SewingProduction
                     _sockServiceListBindingList = new BindingList<SockServiceList>();
                     _sockServiceListBindingSource = new BindingSource { DataSource = _sockServiceListBindingList };
                 });
+                var sockMachiheDownTimeListTask = Task.Run(() =>
+                {
+                    _sockDownTimeListBindingList = new BindingList<SockDownTimeList>();
+                    _sockDownTimeListBindingSource = new BindingSource { DataSource = _sockDownTimeListBindingList };
+                });
+                var sockDefectListTask = Task.Run(() =>
+                {
+                    _sockDefectListBindingList = new BindingList<SockDefectList>();
+                    _sockDefectListBindingSource = new BindingSource { DataSource = _sockDefectListBindingList };
+                });
                 await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, chipInfoByNomZadTask, historyRazdelNaklViewByIzTask
                         , furnitZayavCheckByPachKodTask, planSezonOtdelkaViewByPachKodTask, proizvCombIzdSPByPachKodTask
                         , proizvCombIzdVZPByPachKodTask
-                        , sockZadanySmenListTask, sockKnitZadanyInfoTask, sockServiceListTask);
+                        , sockZadanySmenListTask, sockKnitZadanyInfoTask, sockServiceListTask
+                        , sockMachiheDownTimeListTask, sockDefectListTask);
                 //await Task.WhenAll(naklViewByPachKodTask, rasInfoByPachKodTask, historyRazdelNaklViewByIzTask);
 
                 //_currentRasInfoData = new RasInfoByPachKod();
@@ -242,7 +266,7 @@ namespace SewingProduction
                 psaSezName.DataBindings.Add("Text", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PsaSezName), true, DataSourceUpdateMode.Never);
                 pbEskiz.DataBindings.Add("ImageLocation", _rasInfoByPachKodBindingSource, nameof(Features.CardByNom.Models.RasInfo.PictPath), true, DataSourceUpdateMode.Never);
 
-                cbIsChip.DataBindings.Add("Checked", _chipInfoByPachKodBindingSource, nameof(ChipInfoByNomZad.isChip), true, DataSourceUpdateMode.Never);
+                cbIsChip.DataBindings.Add("Checked", _chipInfoByPachKodBindingSource, nameof(ChipInfo.isChip), true, DataSourceUpdateMode.Never);
                 #endregion
 
                 #region заполонение блока "контрольные даты"
@@ -403,13 +427,12 @@ namespace SewingProduction
                 #endregion
 
                 #region TabPage Носки. Отчет по заданию. Задание
-                TextBoxNomZad.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kzPszNom), true, DataSourceUpdateMode.Never);
-                TextBoxArticul.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.articul), true, DataSourceUpdateMode.Never);
-                TextBoxKol.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kol), true, DataSourceUpdateMode.Never);
-                TextBoxColor.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.zv_tkan), true, DataSourceUpdateMode.Never);
-                TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
-                TextBoxDefectWeight.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kgDefects), true, DataSourceUpdateMode.Never);
-                TextBoxDefectCount.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolDefects), true, DataSourceUpdateMode.Never);
+                //TextBoxNomZad.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kzPszNom), true, DataSourceUpdateMode.Never);
+                //TextBoxArticul.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.articul), true, DataSourceUpdateMode.Never);
+                //TextBoxKol.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kol), true, DataSourceUpdateMode.Never);
+                //TextBoxColor.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.zv_tkan), true, DataSourceUpdateMode.Never);
+                //TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
+                
                 #endregion
 
                 #region TabPage Носки. Отчет по заданию. Вязание
@@ -421,7 +444,12 @@ namespace SewingProduction
                 TextBoxKolFactSmen.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFakt), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactZadany.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFactZadany), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactDelta.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFactDelta), true, DataSourceUpdateMode.Never);
-                TextBoxDownTimeList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dtList), true, DataSourceUpdateMode.Never);
+                TextBoxDefectWeight.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kgDefects), true, DataSourceUpdateMode.Never);
+                TextBoxDefectCount.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolDefects), true, DataSourceUpdateMode.Never);
+                //TextBoxDownTimeList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dtList), true, DataSourceUpdateMode.Never);
+                _sockKnitZadanyInfoBindingSource.CurrentItemChanged += (_, __) => RecalcFromModel();
+                _sockKnitZadanyInfoBindingSource.PositionChanged += (_, __) => RecalcFromModel();
+                RecalcFromModel();
                 #endregion
 
                 #region TabPage Носки. Отчет по заданию. gridControl Смены
@@ -437,6 +465,7 @@ namespace SewingProduction
                 gridSockZadanySmenListColumnDiffPeriod.FieldName = "DiffPeriod";
                 gridSockZadanySmenListColumnKmaNumber.FieldName = "kmaNumber";
                 gridSockZadanySmenListColumnKmlNumber.FieldName = "kmlNumber";
+                gridSockZadanySmenListColumnKmlInvNumber.FieldName = "kmlInvNumber";
                 gridSockZadanySmenListColumnKzID.FieldName = "kzID";
                 gridSockZadanySmenListColumnKzKwsID.FieldName = "kzKwsID";
                 gridSockZadanySmenListColumnKzKmlID.FieldName = "kzKmlID";
@@ -459,8 +488,37 @@ namespace SewingProduction
                 gridSockServiceListColumnResultText.FieldName = "ResultText";
                 gridSockServiceListColumnDateEnd.FieldName = "dateEnd";
                 gridSockServiceListColumnMechanic.FieldName = "mechanic";
-                gridSockServiceListColumnTmeDiffDHM.FieldName = "tmeDiffDHM";
+                gridSockServiceListColumnDiffPeriod.FieldName = "DiffPeriod";
                 #endregion
+
+                #region TabPage Носки. Отчет по заданию. gridControl Простои оборудования
+                gridControlSockDownTimeList.DataSource = _sockDownTimeListBindingSource;
+                gridSockDownTimeListColumnKzPszNom.FieldName = "kzPszNom";
+                gridSockDownTimeListColumnKmaNumber.FieldName = "kmaNumber";
+                gridSockDownTimeListColumnKmlInvNumber.FieldName = "kmlInvNumber";
+                gridSockDownTimeListColumnKmlNumber.FieldName = "kmlNumber";
+                gridSockDownTimeListColumnKmlID.FieldName = "kmlID";
+                gridSockDownTimeListColumnTextObS.FieldName = "text_ob_s";
+                gridSockDownTimeListColumnKdtlDateStart.FieldName = "kdtlDateStart";
+                gridSockDownTimeListColumnKdtlDateEnd.FieldName = "kdtlDateEnd";
+                gridSockDownTimeListColumnDaysDiff.FieldName = "DaysDiff";
+                gridSockDownTimeListColumnTimeDiff.FieldName = "TimeDiff";
+                gridSockDownTimeListColumnDiffPeriod.FieldName = "DiffPeriod";
+                #endregion
+
+                #region TabPage Носки. Отчет по заданию. gridControl Причины брака
+                gridControlSockDefectList.DataSource = _sockDefectListBindingSource;
+                gridSockDefectListColumnVspdid.FieldName = "vspdid";
+                gridSockDefectListColumnNomZadany.FieldName = "nom_zadany";
+                gridSockDefectListColumnIsdefect.FieldName = "isdefect";
+                gridSockDefectListColumnKg.FieldName = "kg";
+                gridSockDefectListColumnKolAll.FieldName = "kolAll";
+                gridSockDefectListColumnKolDefect.FieldName = "kolDefect";
+                gridSockDefectListColumnIdspj.FieldName = "idspj";
+                gridSockDefectListColumnIdndsp.FieldName = "id_ndsp";
+                gridSockDefectListColumnNamedefect.FieldName = "namedefect";
+                #endregion
+
                 //nameTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Articul), true, DataSourceUpdateMode.OnPropertyChanged);
                 //groupTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Group), true, DataSourceUpdateMode.OnPropertyChanged);
                 //modelTextBox.DataBindings.Add("Text", bindingSource1, nameof(ArtNormN.Mod), true, DataSourceUpdateMode.OnPropertyChanged);
@@ -473,6 +531,22 @@ namespace SewingProduction
             {
                 await _logger.LogErrorAsync(ex, "Ошибка при инициализации привязок");
                 throw;
+            }
+        }
+
+        private void RecalcFromModel()
+        {
+            if (_sockKnitZadanyInfoBindingSource.Current is Features.CardByNom.Models.SockZadanyInfo m
+                && m.dateStart != null && m.dateEnd != null)
+            {
+                var ts = m.dateEnd.Value - m.dateStart.Value;
+                var sign = ts < TimeSpan.Zero ? "-" : "";
+                ts = ts.Duration();
+                TextBoxKnitTotalTime.Text = sign + ts.ToString(@"d' д 'hh\:mm\:ss");
+            }
+            else
+            {
+                TextBoxKnitTotalTime.Clear();
             }
         }
 
@@ -777,7 +851,7 @@ namespace SewingProduction
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных RasInfo для NomZad {nomZad}");
             }
         }
-        private async Task LoadChipInfoDataAsync(string pachKod)
+        private async Task LoadChipInfoByPachKodDataAsync(string pachKod)
         {
             try
             {
@@ -809,6 +883,41 @@ namespace SewingProduction
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ChipInfo для pach_kod {pachKod}");
+            }
+        }
+
+        private async Task LoadChipInfoByNomZadDataAsync(string nomZad)
+        {
+            try
+            {
+                // При архивировании нам нужны данные из _selectedAnnId
+                //       int idToLoad = _mode == (int)Mode.ArchAndCopy ? _selectedAnnId : _newAnnId;
+
+                //       await _logger.LogEventAsync($"Загрузка данных ANN. Mode: {_mode}, ID: {idToLoad}", "LoadAnnDataAsync");
+                _chipInfoByPachKodBindingSource.Clear();
+                _chipInfoByPachKodBindingSource.ResetBindings(false);
+                var chipInfoData = await _cardByNomService.GetChipInfoByNomZad(nomZad);
+                if (chipInfoData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные ChipInfo: nomZad={nomZad}, isChip={chipInfoData.isChip}", "LoadChipInfoByNomZadDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentChipInfoData = chipInfoData;                // Обновляем текущую модель
+                        _chipInfoByPachKodBindingSource.DataSource = _currentChipInfoData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные ChipInfo успешно загружены для NomZad {nomZad}", "LoadChipInfoByNomZadDataAsync");
+                    _chipInfoByPachKodBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные ChipInfo для NomZad {nomZad}", "LoadChipInfoByNomZadDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных ChipInfo для NomZad {nomZad}");
             }
         }
         private async Task LoadPlanSezonOtdelkaViewDataAsync(string pachKod)
@@ -926,7 +1035,7 @@ namespace SewingProduction
                 var naklViewData = await _cardByNomService.GetNaklViewByNomZad(nomZad);
                 if (naklViewData != null)
                 {
-                    await _logger.LogEventAsync($"Получены данные NaklView: nomZad={naklViewData[0].nom_zad}, Articul={naklViewData[0].Articul}", "LoadNaklViewDataAsync");
+                    await _logger.LogEventAsync($"Получены данные NaklView: nomZad={naklViewData[0].nom_zad}, Articul={naklViewData[0].Articul}", "LoadNaklViewByNomZadDataAsync");
 
                     await this.InvokeAsync(() =>
                     {
@@ -934,17 +1043,17 @@ namespace SewingProduction
                         _naklViewByPachKodBindingSource.DataSource = _currentNaklViewData; // Привязываем данные к форме
                     });
 
-                    await _logger.LogEventAsync($"Данные Naklview успешно загружены для PachKod {pachKod}", "LoadNaklViewDataAsync");
+                    await _logger.LogEventAsync($"Данные Naklview успешно загружены для NomZad {nomZad}", "LoadNaklViewByNomZadDataAsync");
                     _naklViewByPachKodBindingSource.ResetBindings(false);
                 }
                 else
                 {
-                    await _logger.LogEventAsync($"Не удалось найти данные Naklview для PachKod {pachKod}", "LoadNaklViewDataAsync");
+                    await _logger.LogEventAsync($"Не удалось найти данные Naklview для NomZad {nomZad}", "LoadNaklViewByNomZadDataAsync");
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных Naklview для pach_kod {pachKod}");
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных Naklview для NomZad {nomZad}");
             }
         }
         private async Task LoadHistoryRazdelNaklViewDataAsync(string iz)
@@ -1126,7 +1235,7 @@ namespace SewingProduction
                     });
 
                     await _logger.LogEventAsync($"Данные SockServiceList успешно загружены для nomZad {nomZad}", "LoadSockServiceListByNomZadDataAsync");
-                    _sockZadanySmenListBindingSource.ResetBindings(false);
+                    _sockServiceListBindingSource.ResetBindings(false);
                 }
                 else
                 {
@@ -1136,6 +1245,67 @@ namespace SewingProduction
             catch (Exception ex)
             {
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SockServiceList для nomZad {nomZad}");
+            }
+        }
+        private async Task LoadSockDownTimeListByNomZadDataAsync(string nomZad)
+        {
+            try
+            {
+                _sockDownTimeListBindingSource.Clear();
+                _sockDownTimeListBindingSource.ResetBindings(false);
+                var sockDownTimeListData = await _sockService.GetSockDownTimeListByNomZad(nomZad);
+                if (sockDownTimeListData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные SockServiceList: nomZad='{nomZad}'", "LoadSockDownTimeListByNomZadDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentSockDownTimeListData = sockDownTimeListData;                // Обновляем текущую модель
+                        _sockDownTimeListBindingSource.DataSource = _currentSockDownTimeListData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные SockDownTimeList успешно загружены для nomZad {nomZad}", "LoadSockDownTimeListByNomZadDataAsync");
+                    _sockDownTimeListBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные SockDownTimeList для nomZad {nomZad}", "LoadSockDownTimeListByNomZadDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SockDownTimeList для nomZad {nomZad}");
+            }
+        }
+        
+        private async Task LoadSockDefectListByNomZadDataAsync(string nomZad)
+        {
+            try
+            {
+                _sockDefectListBindingSource.Clear();
+                _sockDefectListBindingSource.ResetBindings(false);
+                var sockDefectListData = await _sockService.GetSockDefectListByNomZad(nomZad);
+                if (sockDefectListData != null)
+                {
+                    await _logger.LogEventAsync($"Получены данные SockDefectList: nomZad='{nomZad}'", "LoadSockDefectListByNomZadDataAsync");
+
+                    await this.InvokeAsync(() =>
+                    {
+                        _currentSockDefectListData = sockDefectListData;                // Обновляем текущую модель
+                        _sockDefectListBindingSource.DataSource = _currentSockDefectListData; // Привязываем данные к форме
+                    });
+
+                    await _logger.LogEventAsync($"Данные SockDefectList успешно загружены для nomZad {nomZad}", "LoadSockDefectListByNomZadDataAsync");
+                    _sockDefectListBindingSource.ResetBindings(false);
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"Не удалось найти данные SockDefectList для nomZad {nomZad}", "LoadSockDefectListByNomZadDataAsync");
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SockDefectList для nomZad {nomZad}");
             }
         }
         private async void tbNomPach_KeyDown(object sender, KeyEventArgs e)
@@ -1154,7 +1324,7 @@ namespace SewingProduction
                 //Task wDLoadTask = WorkDivisionLoadAsync(caller: "DataLoad", GetPachKod());
                 Task rasInfoLoadTask = LoadRasInfoByPachKodDataAsync(GetPachKod());
                 Task naklViewLoadTask = LoadNaklViewDataAsync(GetPachKod());
-                Task chipInfoLoadTask = LoadChipInfoDataAsync(GetPachKod());
+                Task chipInfoLoadTask = LoadChipInfoByPachKodDataAsync(GetPachKod());
                 Task planSezonOtdelkaLoadTask = LoadPlanSezonOtdelkaViewDataAsync(GetPachKod());
                 //await Task.WhenAll(wDLoadTask, rasInfoLoadTask, naklViewLoadTask);
                 await Task.WhenAll(rasInfoLoadTask, naklViewLoadTask, chipInfoLoadTask, planSezonOtdelkaLoadTask);
@@ -1215,7 +1385,7 @@ namespace SewingProduction
             //string iz = GetIzNakl();
             NaklReport report1 = new NaklReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_naklIz"].Value = selectedRow.Iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
@@ -1251,7 +1421,7 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 0;
@@ -1265,7 +1435,7 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
@@ -1278,7 +1448,7 @@ namespace SewingProduction
             string RzuPachList = this.tbRzuPach.Text;
             ReestrListReport report1 = new ReestrListReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_rzuPachList"].Value = RzuPachList;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
@@ -1400,7 +1570,7 @@ namespace SewingProduction
             NaklReport report1 = new NaklReport();
             report1.RequestParameters = false;
             //report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_naklIz"].Value = selectedRow.Iz;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
             reportPrintTool1.ShowPreviewDialog();
@@ -1414,7 +1584,7 @@ namespace SewingProduction
                 simpleButtonNaklPart.Text = "Скрыть информацию по делению накладной";
                 simpleButtonPrintNaklXtraReport.Enabled = false;
 
-                var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+                var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
                 await LoadHistoryRazdelNaklViewDataAsync(selectedRow.Iz);
 
                 this.gridControlPartNaklList.Location = this.gridControlNaklList.Location;
@@ -1437,12 +1607,19 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
-            report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
-            report1.Parameters["_isChip"].Value = IsChip;
-            report1.Parameters["_isUpak"].Value = 0;
-            ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
-            reportPrintTool1.ShowPreviewDialog();
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+            if (selectedRow != null && Convert.ToInt32(tbRzuNom.Text) != 0)
+            {
+                report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
+                report1.Parameters["_isChip"].Value = IsChip;
+                report1.Parameters["_isUpak"].Value = 0;
+                ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                reportPrintTool1.ShowPreviewDialog();
+            }
+            else
+            {
+                MessageBox.Show("Не выбран расчет для печати");
+            }
         }
 
         private void simpleButtonPrintMLRTUpak_Click(object sender, EventArgs e)
@@ -1450,7 +1627,7 @@ namespace SewingProduction
             int IsChip = Convert.ToInt32(this.cbIsChip.Checked);
             MlRtReport report1 = new MlRtReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_isChip"].Value = IsChip;
             report1.Parameters["_isUpak"].Value = 1;
@@ -1463,7 +1640,7 @@ namespace SewingProduction
             string RzuPachList = this.tbRzuPach.Text;
             ReestrListReport report1 = new ReestrListReport();
             report1.RequestParameters = false;
-            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklViewByPachKod;
+            var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
             report1.Parameters["_rzuNom"].Value = selectedRow.Nom;
             report1.Parameters["_rzuPachList"].Value = RzuPachList;
             ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
@@ -1663,7 +1840,7 @@ namespace SewingProduction
         {
             if (e.KeyCode == Keys.Enter)
             {
-                RasInfo.PageVisible = false;
+                RasInfo.PageVisible = true;
                 FurnInfo.PageVisible = false;
                 WorkInfo.PageVisible = false;
                 OtdelkaInfo.PageVisible = false;
@@ -1675,7 +1852,11 @@ namespace SewingProduction
                 Task sockKnitZadanyInfoLoadTask = LoadSockKnitZadanyInfoDataAsync(tbNomZad.Text);
                 Task sockZadanySmenListLoadTask = LoadSockZadanySmenListDataAsync(tbNomZad.Text);
                 Task sockServiceListByNomZadLoadTask = LoadSockServiceListByNomZadDataAsync(tbNomZad.Text);
-                await Task.WhenAll(rasInfoLoadTask, sockKnitZadanyInfoLoadTask, sockZadanySmenListLoadTask, sockServiceListByNomZadLoadTask);
+                Task sockDownTimeListByNomZadLoadTask = LoadSockDownTimeListByNomZadDataAsync(tbNomZad.Text);
+                Task sockDefectListByNomZadLoadTask = LoadSockDefectListByNomZadDataAsync(tbNomZad.Text);
+                await Task.WhenAll(rasInfoLoadTask, sockKnitZadanyInfoLoadTask, sockZadanySmenListLoadTask
+                    , sockServiceListByNomZadLoadTask, sockDownTimeListByNomZadLoadTask
+                    , sockDefectListByNomZadLoadTask);
                 var selectedRow = _sockKnitZadanyInfoBindingSource.Current as SockZadanyInfo;
                 if (selectedRow != null)
                 {

@@ -61,8 +61,8 @@ namespace SewingProduction.Features.CardByNom.Services
         {
             try
             {
-                string query = @"exec GetRasInfoView @xNomZadany = @nomZad";
-                return await _dbService.GetEntityAsync<RasInfo>(query, new { nomZad });
+                string query = $"exec GetRasInfoView @xNomZadany = '{nomZad}'";
+                return await _dbService.GetEntityAsync<RasInfo>(query, new {  });
             }
             catch (Exception ex)
             {

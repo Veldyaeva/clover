@@ -92,6 +92,8 @@ namespace SewingProduction.Features.CardByNom.Models
         [NotMapped]
         public string kmlNumber { get; set; }
         [NotMapped]
+        public string kmlInvNumber { get; set; }
+        [NotMapped]
         public int kmlKodOb { get; set; }
         [NotMapped]
         public int kmlOdpID { get; set; }
@@ -174,36 +176,130 @@ namespace SewingProduction.Features.CardByNom.Models
         public DateTime? dateEnd { get; set; }
         [NotMapped]
         public string mechanic { get; set; }
+        //[NotMapped]
+        //public TimeSpan tmeDiffDHM { get; set; }
         [NotMapped]
-        public TimeSpan tmeDiffDHM { get; set; }
+        public int DaysDiff { get; set; }
+        [NotMapped]
+        public TimeSpan TimeDiff { get; set; }
+        public string DiffPeriod
+        {
+            get
+            {
+                if (DaysDiff > 0)
+                {
+                    return $"{DaysDiff} дн. {TimeDiff}";
+                }
+                else
+                {
+                    return $"{TimeDiff}"; // или return $"0 дн. {TimeDiff}"; если нужно всегда показывать 0
+                }
+            }
+        }
 
     }
 
-    public class SockKnitMachiheService
+    //public class SockKnitMachiheService
+    //{
+    //    [NotMapped]
+    //    public string kzPszNom { get; set; }
+    //    [NotMapped]
+    //    public string kmaNumber { get; set; }
+    //    [NotMapped]
+    //    public string kmlInvNum { get; set; }
+    //    [NotMapped]
+    //    public  string kmlNumber { get; set; }
+    //    [NotMapped]
+    //    public string text_ob_s { get; set; }
+    //    [NotMapped]
+    //    public string directorName { get; set; }
+    //    [NotMapped]
+    //    public DateTime? date { get; set; }
+    //    [NotMapped]
+    //    public DateTime? resultName { get; set; }
+    //    [NotMapped]
+    //    public string ResultText { get; set; }
+    //    [NotMapped]
+    //    public DateTime? dateEnd { get; set; }
+    //    [NotMapped]
+    //    public string mechanic { get; set; }
+    //    [NotMapped]
+    //    public int DaysDiff { get; set; }
+    //    [NotMapped]
+    //    public TimeSpan TimeDiff { get; set; }
+    //    public string DiffPeriod
+    //    {
+    //        get
+    //        {
+    //            if (DaysDiff > 0)
+    //            {
+    //                return $"{DaysDiff} дн. {TimeDiff}";
+    //            }
+    //            else
+    //            {
+    //                return $"{TimeDiff}"; // или return $"0 дн. {TimeDiff}"; если нужно всегда показывать 0
+    //            }
+    //        }
+    //    }
+    //}
+
+    public class SockDownTimeList
     {
         [NotMapped]
         public string kzPszNom { get; set; }
         [NotMapped]
         public string kmaNumber { get; set; }
         [NotMapped]
-        public string kmlInvNum { get; set; }
+        public string kmlInvNumber { get; set; }
         [NotMapped]
-        public  string kmlNumber { get; set; }
+        public string kmlNumber { get; set; }
+        [NotMapped]
+        public int kmlID { get; set; }
         [NotMapped]
         public string text_ob_s { get; set; }
         [NotMapped]
-        public string directorName { get; set; }
+        public DateTime? kdtlDateStart { get; set; }
         [NotMapped]
-        public DateTime? date { get; set; }
+        public DateTime? kdtlDateEnd { get; set; }
         [NotMapped]
-        public DateTime? resultName { get; set; }
+        public int DaysDiff { get; set; }
         [NotMapped]
-        public string ResultText { get; set; }
+        public TimeSpan TimeDiff { get; set; }
+        public string DiffPeriod
+        {
+            get
+            {
+                if (DaysDiff > 0)
+                {
+                    return $"{DaysDiff} дн. {TimeDiff}";
+                }
+                else
+                {
+                    return $"{TimeDiff}"; // или return $"0 дн. {TimeDiff}"; если нужно всегда показывать 0
+                }
+            }
+        }
+    }
+
+    public class SockDefectList
+    {
         [NotMapped]
-        public DateTime? dateEnd { get; set; }
+        public int vspdid { get; set; }
         [NotMapped]
-        public string mechanic { get; set; }
+        public string nom_zadany { get; set; }
         [NotMapped]
-        public TimeSpan tmeDiffDHM { get; set; }
+        public int isdefect { get; set; }
+        [NotMapped]
+        public decimal kg { get; set; }
+        [NotMapped]
+        public int kolAll { get; set; }
+        [NotMapped]
+        public int kolDefect { get; set; }
+        [NotMapped]
+        public int idspj { get; set; }
+        [NotMapped]
+        public int id_ndsp { get; set; }
+        [NotMapped]
+        public string namedefect { get; set; }
     }
 }
