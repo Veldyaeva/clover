@@ -354,13 +354,7 @@ namespace SewingProduction.Features.TeamWork.Forms
             splitterItem1 = new DevExpress.XtraLayout.SplitterItem();
             splitterItem8 = new DevExpress.XtraLayout.SplitterItem();
             xtraTabPage3 = new CustomTabPage();
-            splitContainerControl2 = new SplitContainerControl();
             customButton2 = new CustomButton();
-            flyoutPanel1 = new DevExpress.Utils.FlyoutPanel();
-            flyoutPanelControl1 = new DevExpress.Utils.FlyoutPanelControl();
-            customCancelButton1 = new CustomCancelButton();
-            customComboBox1 = new CustomComboBox();
-            customButton1 = new CustomButton();
             gridControlPreArch = new CustomGridControl();
             gridViewPreArch = new GridView();
             gridColumn14 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -368,6 +362,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn15 = new DevExpress.XtraGrid.Columns.GridColumn();
             repositoryItemCheckEdit5 = new RepositoryItemCheckEdit();
             gridColumn17 = new DevExpress.XtraGrid.Columns.GridColumn();
+            customGridControl5 = new CustomGridControl();
+            gridView2 = new GridView();
+            flyoutPanel1 = new DevExpress.Utils.FlyoutPanel();
+            flyoutPanelControl1 = new DevExpress.Utils.FlyoutPanelControl();
+            customCancelButton1 = new CustomCancelButton();
+            customComboBox1 = new CustomComboBox();
+            customButton1 = new CustomButton();
             gridColumn48 = new DevExpress.XtraGrid.Columns.GridColumn();
             artnormnBindingSource1 = new BindingSource(components);
             normraszBindingSource = new BindingSource(components);
@@ -383,6 +384,13 @@ namespace SewingProduction.Features.TeamWork.Forms
             errorProvider1 = new ErrorProvider(components);
             desBindingSource = new BindingSource(components);
             constrBindingSource = new BindingSource(components);
+            gridView3 = new GridView();
+            layoutControl3 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControlGroup17 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem17 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem39 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)repositoryItemButtonEdit2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)xtraTabControl1).BeginInit();
@@ -514,19 +522,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem8).BeginInit();
             xtraTabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel1).BeginInit();
-            splitContainerControl2.Panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel2).BeginInit();
-            splitContainerControl2.Panel2.SuspendLayout();
-            splitContainerControl2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridControlPreArch).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPreArch).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControl5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)flyoutPanel1).BeginInit();
             flyoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)flyoutPanelControl1).BeginInit();
             flyoutPanelControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridControlPreArch).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewPreArch).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)artnormnBindingSource1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normraszBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)normraskBindingSource).BeginInit();
@@ -541,6 +545,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)desBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)constrBindingSource).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).BeginInit();
+            layoutControl3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem39).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem40).BeginInit();
             SuspendLayout();
             // 
             // repositoryItemCheckEdit1
@@ -3531,32 +3543,11 @@ namespace SewingProduction.Features.TeamWork.Forms
             xtraTabPage3.Appearance.HeaderHotTracked.Options.UseBackColor = true;
             xtraTabPage3.Appearance.PageClient.BackColor = System.Drawing.Color.Transparent;
             xtraTabPage3.Appearance.PageClient.Options.UseBackColor = true;
-            xtraTabPage3.Controls.Add(splitContainerControl2);
+            xtraTabPage3.Controls.Add(layoutControl3);
             xtraTabPage3.Margin = new Padding(4, 3, 4, 3);
             xtraTabPage3.Name = "xtraTabPage3";
             xtraTabPage3.Size = new System.Drawing.Size(1845, 915);
             xtraTabPage3.Text = "Предварительный архив";
-            // 
-            // splitContainerControl2
-            // 
-            splitContainerControl2.Dock = DockStyle.Fill;
-            splitContainerControl2.Location = new System.Drawing.Point(0, 0);
-            splitContainerControl2.Margin = new Padding(4, 3, 4, 3);
-            splitContainerControl2.Name = "splitContainerControl2";
-            // 
-            // splitContainerControl2.Panel1
-            // 
-            splitContainerControl2.Panel1.Controls.Add(customButton2);
-            splitContainerControl2.Panel1.Text = "Panel1";
-            // 
-            // splitContainerControl2.Panel2
-            // 
-            splitContainerControl2.Panel2.Controls.Add(flyoutPanel1);
-            splitContainerControl2.Panel2.Controls.Add(gridControlPreArch);
-            splitContainerControl2.Panel2.Text = "Panel2";
-            splitContainerControl2.Size = new System.Drawing.Size(1845, 915);
-            splitContainerControl2.SplitterPosition = 142;
-            splitContainerControl2.TabIndex = 2;
             // 
             // customButton2
             // 
@@ -3565,91 +3556,28 @@ namespace SewingProduction.Features.TeamWork.Forms
             customButton2.FlatStyle = FlatStyle.Flat;
             customButton2.Font = new System.Drawing.Font("Arial", 12F);
             customButton2.ForeColor = System.Drawing.Color.FromArgb(106, 90, 205);
-            customButton2.Location = new System.Drawing.Point(12, 22);
+            customButton2.Location = new System.Drawing.Point(12, 12);
             customButton2.Margin = new Padding(4, 3, 4, 3);
             customButton2.Name = "customButton2";
-            customButton2.Size = new System.Drawing.Size(118, 35);
-            customButton2.TabIndex = 1;
+            customButton2.Size = new System.Drawing.Size(908, 878);
+            customButton2.TabIndex = 0;
             customButton2.Text = "В архив";
             customButton2.UseVisualStyleBackColor = false;
             customButton2.Click += customButton2_Click;
             // 
-            // flyoutPanel1
-            // 
-            flyoutPanel1.Controls.Add(flyoutPanelControl1);
-            flyoutPanel1.Location = new System.Drawing.Point(807, 252);
-            flyoutPanel1.Margin = new Padding(4, 3, 4, 3);
-            flyoutPanel1.Name = "flyoutPanel1";
-            flyoutPanel1.OptionsButtonPanel.ButtonPanelHeight = 35;
-            flyoutPanel1.Size = new System.Drawing.Size(444, 293);
-            flyoutPanel1.TabIndex = 1;
-            // 
-            // flyoutPanelControl1
-            // 
-            flyoutPanelControl1.Controls.Add(customCancelButton1);
-            flyoutPanelControl1.Controls.Add(customComboBox1);
-            flyoutPanelControl1.Controls.Add(customButton1);
-            flyoutPanelControl1.Dock = DockStyle.Fill;
-            flyoutPanelControl1.FlyoutPanel = flyoutPanel1;
-            flyoutPanelControl1.Location = new System.Drawing.Point(0, 0);
-            flyoutPanelControl1.Margin = new Padding(4, 3, 4, 3);
-            flyoutPanelControl1.Name = "flyoutPanelControl1";
-            flyoutPanelControl1.Size = new System.Drawing.Size(444, 293);
-            flyoutPanelControl1.TabIndex = 0;
-            // 
-            // customCancelButton1
-            // 
-            customCancelButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customCancelButton1.DialogResult = DialogResult.Cancel;
-            customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customCancelButton1.Location = new System.Drawing.Point(322, 38);
-            customCancelButton1.Margin = new Padding(4, 3, 4, 3);
-            customCancelButton1.Name = "customCancelButton1";
-            customCancelButton1.Size = new System.Drawing.Size(88, 29);
-            customCancelButton1.TabIndex = 2;
-            customCancelButton1.Text = "customCancelButton1";
-            customCancelButton1.UseVisualStyleBackColor = false;
-            // 
-            // customComboBox1
-            // 
-            customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
-            customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
-            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
-            customComboBox1.FormattingEnabled = true;
-            customComboBox1.Location = new System.Drawing.Point(254, 144);
-            customComboBox1.Margin = new Padding(4, 3, 4, 3);
-            customComboBox1.Name = "customComboBox1";
-            customComboBox1.Size = new System.Drawing.Size(140, 24);
-            customComboBox1.TabIndex = 1;
-            // 
-            // customButton1
-            // 
-            customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
-            customButton1.Font = new System.Drawing.Font("Arial", 10F);
-            customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customButton1.Location = new System.Drawing.Point(61, 39);
-            customButton1.Margin = new Padding(4, 3, 4, 3);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new System.Drawing.Size(88, 29);
-            customButton1.TabIndex = 0;
-            customButton1.Text = "customButton1";
-            customButton1.UseVisualStyleBackColor = false;
-            // 
             // gridControlPreArch
             // 
-            gridControlPreArch.Dock = DockStyle.Left;
             gridControlPreArch.EmbeddedNavigator.Margin = new Padding(4, 3, 4, 3);
             gridControlPreArch.Font = new System.Drawing.Font("Arial", 10F);
-            gridControlPreArch.Location = new System.Drawing.Point(0, 0);
+            gridControlPreArch.Location = new System.Drawing.Point(12, 12);
             gridControlPreArch.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.Flat;
             gridControlPreArch.MainView = gridViewPreArch;
             gridControlPreArch.Margin = new Padding(4, 3, 4, 3);
             gridControlPreArch.Name = "gridControlPreArch";
             gridControlPreArch.RepositoryItems.AddRange(new RepositoryItem[] { repositoryItemCheckEdit5 });
-            gridControlPreArch.Size = new System.Drawing.Size(705, 915);
+            gridControlPreArch.Size = new System.Drawing.Size(682, 891);
             gridControlPreArch.TabIndex = 0;
-            gridControlPreArch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPreArch });
+            gridControlPreArch.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewPreArch, gridView3 });
             // 
             // gridViewPreArch
             // 
@@ -3709,6 +3637,90 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridColumn17.VisibleIndex = 3;
             gridColumn17.Width = 87;
             // 
+            // customGridControl5
+            // 
+            customGridControl5.Font = new System.Drawing.Font("Arial", 10F);
+            customGridControl5.Location = new System.Drawing.Point(698, 12);
+            customGridControl5.MainView = gridView2;
+            customGridControl5.Name = "customGridControl5";
+            customGridControl5.Size = new System.Drawing.Size(1135, 891);
+            customGridControl5.TabIndex = 2;
+            customGridControl5.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView2 });
+            // 
+            // gridView2
+            // 
+            gridView2.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridView2.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView2.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridView2.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridView2.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridView2.Appearance.FocusedRow.Options.UseFont = true;
+            gridView2.GridControl = customGridControl5;
+            gridView2.Name = "gridView2";
+            gridView2.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // flyoutPanel1
+            // 
+            flyoutPanel1.Controls.Add(flyoutPanelControl1);
+            flyoutPanel1.Location = new System.Drawing.Point(12, 894);
+            flyoutPanel1.Margin = new Padding(4, 3, 4, 3);
+            flyoutPanel1.Name = "flyoutPanel1";
+            flyoutPanel1.OptionsButtonPanel.ButtonPanelHeight = 35;
+            flyoutPanel1.Size = new System.Drawing.Size(1821, 9);
+            flyoutPanel1.TabIndex = 1;
+            // 
+            // flyoutPanelControl1
+            // 
+            flyoutPanelControl1.Controls.Add(customCancelButton1);
+            flyoutPanelControl1.Controls.Add(customComboBox1);
+            flyoutPanelControl1.Controls.Add(customButton1);
+            flyoutPanelControl1.Dock = DockStyle.Fill;
+            flyoutPanelControl1.FlyoutPanel = flyoutPanel1;
+            flyoutPanelControl1.Location = new System.Drawing.Point(0, 0);
+            flyoutPanelControl1.Margin = new Padding(4, 3, 4, 3);
+            flyoutPanelControl1.Name = "flyoutPanelControl1";
+            flyoutPanelControl1.Size = new System.Drawing.Size(1821, 9);
+            flyoutPanelControl1.TabIndex = 0;
+            // 
+            // customCancelButton1
+            // 
+            customCancelButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customCancelButton1.DialogResult = DialogResult.Cancel;
+            customCancelButton1.Font = new System.Drawing.Font("Arial", 10F);
+            customCancelButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customCancelButton1.Location = new System.Drawing.Point(322, 38);
+            customCancelButton1.Margin = new Padding(4, 3, 4, 3);
+            customCancelButton1.Name = "customCancelButton1";
+            customCancelButton1.Size = new System.Drawing.Size(88, 29);
+            customCancelButton1.TabIndex = 2;
+            customCancelButton1.Text = "customCancelButton1";
+            customCancelButton1.UseVisualStyleBackColor = false;
+            // 
+            // customComboBox1
+            // 
+            customComboBox1.BackColor = System.Drawing.Color.FromArgb(255, 245, 230);
+            customComboBox1.Font = new System.Drawing.Font("Arial", 10F);
+            customComboBox1.ForeColor = System.Drawing.Color.FromArgb(120, 60, 30);
+            customComboBox1.FormattingEnabled = true;
+            customComboBox1.Location = new System.Drawing.Point(254, 144);
+            customComboBox1.Margin = new Padding(4, 3, 4, 3);
+            customComboBox1.Name = "customComboBox1";
+            customComboBox1.Size = new System.Drawing.Size(140, 24);
+            customComboBox1.TabIndex = 1;
+            // 
+            // customButton1
+            // 
+            customButton1.BackColor = System.Drawing.Color.FromArgb(255, 223, 196);
+            customButton1.Font = new System.Drawing.Font("Arial", 10F);
+            customButton1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
+            customButton1.Location = new System.Drawing.Point(61, 39);
+            customButton1.Margin = new Padding(4, 3, 4, 3);
+            customButton1.Name = "customButton1";
+            customButton1.Size = new System.Drawing.Size(88, 29);
+            customButton1.TabIndex = 0;
+            customButton1.Text = "customButton1";
+            customButton1.UseVisualStyleBackColor = false;
+            // 
             // gridColumn48
             // 
             gridColumn48.Caption = "Дата обн.";
@@ -3725,6 +3737,77 @@ namespace SewingProduction.Features.TeamWork.Forms
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
+            // 
+            // gridView3
+            // 
+            gridView3.Appearance.EvenRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridView3.Appearance.EvenRow.Options.UseBackColor = true;
+            gridView3.Appearance.FocusedRow.BackColor = System.Drawing.Color.FromArgb(180, 220, 240);
+            gridView3.Appearance.FocusedRow.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Bold);
+            gridView3.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridView3.Appearance.FocusedRow.Options.UseFont = true;
+            gridView3.GridControl = gridControlPreArch;
+            gridView3.Name = "gridView3";
+            gridView3.OptionsView.EnableAppearanceEvenRow = true;
+            // 
+            // layoutControl3
+            // 
+            layoutControl3.Controls.Add(customButton2);
+            layoutControl3.Controls.Add(flyoutPanel1);
+            layoutControl3.Controls.Add(gridControlPreArch);
+            layoutControl3.Controls.Add(customGridControl5);
+            layoutControl3.Dock = DockStyle.Fill;
+            layoutControl3.HiddenItems.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem40, layoutControlItem39 });
+            layoutControl3.Location = new System.Drawing.Point(0, 0);
+            layoutControl3.Name = "layoutControl3";
+            layoutControl3.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(634, 0, 650, 400);
+            layoutControl3.Root = layoutControlGroup17;
+            layoutControl3.Size = new System.Drawing.Size(1845, 915);
+            layoutControl3.TabIndex = 3;
+            layoutControl3.Text = "layoutControl3";
+            // 
+            // layoutControlGroup17
+            // 
+            layoutControlGroup17.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton(), new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton() });
+            layoutControlGroup17.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup17.GroupBordersVisible = false;
+            layoutControlGroup17.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem38, layoutControlItem17 });
+            layoutControlGroup17.Name = "Root";
+            layoutControlGroup17.Size = new System.Drawing.Size(1845, 915);
+            layoutControlGroup17.TextVisible = false;
+            // 
+            // layoutControlItem17
+            // 
+            layoutControlItem17.Control = customGridControl5;
+            layoutControlItem17.Location = new System.Drawing.Point(686, 0);
+            layoutControlItem17.Name = "layoutControlItem17";
+            layoutControlItem17.Size = new System.Drawing.Size(1139, 895);
+            layoutControlItem17.TextVisible = false;
+            // 
+            // layoutControlItem38
+            // 
+            layoutControlItem38.Control = gridControlPreArch;
+            layoutControlItem38.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem38.Name = "layoutControlItem38";
+            layoutControlItem38.OptionsTableLayoutItem.ColumnIndex = 1;
+            layoutControlItem38.Size = new System.Drawing.Size(686, 895);
+            layoutControlItem38.TextVisible = false;
+            // 
+            // layoutControlItem39
+            // 
+            layoutControlItem39.Control = flyoutPanel1;
+            layoutControlItem39.Location = new System.Drawing.Point(0, 882);
+            layoutControlItem39.Name = "layoutControlItem39";
+            layoutControlItem39.Size = new System.Drawing.Size(1825, 13);
+            layoutControlItem39.TextVisible = false;
+            // 
+            // layoutControlItem40
+            // 
+            layoutControlItem40.Control = customButton2;
+            layoutControlItem40.Location = new System.Drawing.Point(0, 0);
+            layoutControlItem40.Name = "layoutControlItem40";
+            layoutControlItem40.Size = new System.Drawing.Size(912, 882);
+            layoutControlItem40.TextVisible = false;
             // 
             // TeamWork
             // 
@@ -3874,19 +3957,15 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)splitterItem1).EndInit();
             ((System.ComponentModel.ISupportInitialize)splitterItem8).EndInit();
             xtraTabPage3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel1).EndInit();
-            splitContainerControl2.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2.Panel2).EndInit();
-            splitContainerControl2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)splitContainerControl2).EndInit();
-            splitContainerControl2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)gridControlPreArch).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewPreArch).EndInit();
+            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)customGridControl5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
             ((System.ComponentModel.ISupportInitialize)flyoutPanel1).EndInit();
             flyoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)flyoutPanelControl1).EndInit();
             flyoutPanelControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)gridControlPreArch).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridViewPreArch).EndInit();
-            ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
             ((System.ComponentModel.ISupportInitialize)artnormnBindingSource1).EndInit();
             ((System.ComponentModel.ISupportInitialize)normraszBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)normraskBindingSource).EndInit();
@@ -3901,6 +3980,14 @@ namespace SewingProduction.Features.TeamWork.Forms
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ((System.ComponentModel.ISupportInitialize)desBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)constrBindingSource).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControl3).EndInit();
+            layoutControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem17).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem38).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem39).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem40).EndInit();
             ResumeLayout(false);
         }
 
@@ -4078,23 +4165,14 @@ namespace SewingProduction.Features.TeamWork.Forms
         private System.Windows.Forms.BindingSource bindingSource1;
         private DevExpress.XtraTab.XtraTabControl xtraTabControl2;
         private CustomTabPage xtraTabPage3;
-        private CustomButton customButton2;
-        private CustomGridControl gridControlPreArch;
         private BindingSource sparticulBindingSource;
         private BindingSource sparticulBindingSource1;
         private ToolStrip fillBy1ToolStrip;
         private ToolStripButton fillBy1ToolStripButton;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPreArch;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
-        private DevExpress.XtraEditors.Repository.RepositoryItemCheckEdit repositoryItemCheckEdit5;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
         private BindingSource normraszBindingSource1;
         private CustomTabPage xtraTabPageWorkDivisions;
         private BindingSource artnormnBindingSource2;
         RepositoryItemButtonEdit buttonEdit = new RepositoryItemButtonEdit();
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private RepositoryItemCheckEdit repositoryItemCheckEdit1;
         private RepositoryItemButtonEdit repositoryItemButtonEdit2;
         private PanelControl panelControl2;
@@ -4110,11 +4188,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         private CustomCheckBox archiveCheckBox;
         private CustomCheckBox actualCheckBox;
         private CustomCheckBox preliminaryCheckBox;
-        private DevExpress.Utils.FlyoutPanel flyoutPanel1;
-        private DevExpress.Utils.FlyoutPanelControl flyoutPanelControl1;
-        private CustomCancelButton customCancelButton1;
-        private CustomComboBox customComboBox1;
-        private CustomButton customButton1;
         private ErrorProvider errorProvider1;
         private BindingSource desBindingSource;
         private BindingSource constrBindingSource;
@@ -4379,5 +4452,27 @@ namespace SewingProduction.Features.TeamWork.Forms
         private DevExpress.XtraLayout.SplitterItem splitterItem7;
         private DevExpress.XtraLayout.SplitterItem splitterItem8;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumn59;
+        private CustomButton customButton2;
+        private CustomGridControl gridControlPreArch;
+        private GridView gridViewPreArch;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn14;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn16;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn15;
+        private RepositoryItemCheckEdit repositoryItemCheckEdit5;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn17;
+        private CustomGridControl customGridControl5;
+        private GridView gridView2;
+        private DevExpress.Utils.FlyoutPanel flyoutPanel1;
+        private DevExpress.Utils.FlyoutPanelControl flyoutPanelControl1;
+        private CustomCancelButton customCancelButton1;
+        private CustomComboBox customComboBox1;
+        private CustomButton customButton1;
+        private GridView gridView3;
+        private DevExpress.XtraLayout.LayoutControl layoutControl3;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem17;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem38;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem39;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem40;
     }
 }

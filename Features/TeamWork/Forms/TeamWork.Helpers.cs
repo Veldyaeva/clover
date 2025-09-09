@@ -28,7 +28,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.LoadFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Загружаем настройки split container
-                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+          //      _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
                 // Загружаем настройки для всех гридов
                 _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
@@ -66,7 +66,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.SaveFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Сохраняем настройки split container
-                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+        //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
                 // Сохраняем настройки для всех гридов
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");

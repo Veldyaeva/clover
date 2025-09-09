@@ -138,7 +138,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 //    "FROM sp_articul sa " +
                 //    "   left join kompl k on sa.kod = k.kod_k " +
                 //    "WHERE sa.annID IS NULL and k.kod_k is null";//
-                                                                 "SELECT * FROM articulListUnboundRTBySizeLabel";
+                                                                 "SELECT * FROM articulListGroupBySizeLabel where annId is null or annId = 0";
                 List<MyDataART> loadedData = await _dbService.GetListAsync<MyDataART>(query, null);
 
                 _myDataArtList.BulkLoad(loadedData);

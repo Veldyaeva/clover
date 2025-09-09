@@ -326,8 +326,9 @@ namespace SewingProduction.Features.TeamWork.Forms
                                        ORDER BY ann.annId DESC";
 
                 // Запрос для gridView_unboundArts (модель MyDataART)
-                string queryUnboundArts = @"SELECT * FROM articulListUnboundRTBySizeLabel 
-                                          WHERE articul LIKE @searchPattern 
+                string queryUnboundArts = @"SELECT * FROM articulListGroupBySizeLabel 
+                                          WHERE  (annId is null or annId = 0) and
+                                          articul LIKE @searchPattern 
                                           ORDER BY articul, row_num";
 
                 var parameters = new Dictionary<string, object>
