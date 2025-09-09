@@ -92,7 +92,7 @@ namespace SewingProduction
         private BindingSource _proizvCombIzdVZPByPachKodBindingSource;
 
         // список смен по заданию. Носки
-        private List<SockZadanySmenList> _currentSockZadanySmenListData = new List<SockZadanySmenList>();       
+        private List<SockZadanySmenList> _currentSockZadanySmenListData = new List<SockZadanySmenList>();
         private List<SockZadanySmenList> sockZadanySmenListData = new List<SockZadanySmenList>();
         private BindingList<SockZadanySmenList> _sockZadanySmenListBindingList;
         private BindingSource _sockZadanySmenListBindingSource;
@@ -102,7 +102,7 @@ namespace SewingProduction
         private List<SockZadanyInfo> sockKnitZadanyInfoData = new List<SockZadanyInfo>();
         private BindingList<SockZadanyInfo> _sockKnitZadanyInfoBindingList;
         private BindingSource _sockKnitZadanyInfoBindingSource;
-        
+
         // список обслуживаний оборудования во время вязания задания. Носки
         private List<SockServiceList> _currentSockServiceListData = new List<SockServiceList>();
         private List<SockServiceList> sockServiceListData = new List<SockServiceList>();
@@ -189,13 +189,13 @@ namespace SewingProduction
                     _sockZadanySmenListBindingList = new BindingList<SockZadanySmenList>();
                     _sockZadanySmenListBindingSource = new BindingSource { DataSource = _sockZadanySmenListBindingList };
                 });
-                
+
                 var sockKnitZadanyInfoTask = Task.Run(() =>
                 {
                     _sockKnitZadanyInfoBindingList = new BindingList<SockZadanyInfo>();
                     _sockKnitZadanyInfoBindingSource = new BindingSource { DataSource = _sockKnitZadanyInfoBindingList };
                 });
-                
+
                 var sockServiceListTask = Task.Run(() =>
                 {
                     _sockServiceListBindingList = new BindingList<SockServiceList>();
@@ -432,7 +432,7 @@ namespace SewingProduction
                 //TextBoxKol.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kol), true, DataSourceUpdateMode.Never);
                 //TextBoxColor.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.zv_tkan), true, DataSourceUpdateMode.Never);
                 //TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
-                
+
                 #endregion
 
                 #region TabPage Носки. Отчет по заданию. Вязание
@@ -441,11 +441,14 @@ namespace SewingProduction
                 TextBoxMachineNumber.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kmlNumber), true, DataSourceUpdateMode.Never);
                 TextBoxKnitStartDate.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dateStart), true, DataSourceUpdateMode.Never);
                 TextBoxKnitEndDate.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dateEnd), true, DataSourceUpdateMode.Never);
+                TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
+                TextBoxKolPlanZadany.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kol), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactSmen.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFakt), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactZadany.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFactZadany), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactDelta.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFactDelta), true, DataSourceUpdateMode.Never);
                 TextBoxDefectWeight.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kgDefects), true, DataSourceUpdateMode.Never);
                 TextBoxDefectCount.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolDefects), true, DataSourceUpdateMode.Never);
+
                 //TextBoxDownTimeList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dtList), true, DataSourceUpdateMode.Never);
                 _sockKnitZadanyInfoBindingSource.CurrentItemChanged += (_, __) => RecalcFromModel();
                 _sockKnitZadanyInfoBindingSource.PositionChanged += (_, __) => RecalcFromModel();
@@ -1277,7 +1280,7 @@ namespace SewingProduction
                 await _logger.LogErrorAsync(ex, $"Ошибка загрузки данных SockDownTimeList для nomZad {nomZad}");
             }
         }
-        
+
         private async Task LoadSockDefectListByNomZadDataAsync(string nomZad)
         {
             try
@@ -1932,7 +1935,27 @@ namespace SewingProduction
             }
         }
 
-        
+        private void layoutControlGroup6_CustomButtonClick(object sender, DevExpress.XtraBars.Docking2010.BaseButtonEventArgs e)
+        {
+            int buttonIndex = ((DevExpress.XtraLayout.LayoutControlGroup)sender).CustomHeaderButtons.IndexOf(e.Button);
+
+            switch (buttonIndex)
+            {
+                case 0:
+                    MessageBox.Show("Печать");
+                    //tbNomZad.Text
+                    //NaklReport report1 = new NaklReport();
+                    //report1.RequestParameters = false;
+                    ////report1.Parameters["_naklIz"].Value = _currentNaklViewData[0].Iz;
+                    //var selectedRow = _naklViewByPachKodBindingSource.Current as NaklView;
+                    //report1.Parameters["_naklIz"].Value = selectedRow.Iz;
+                    //ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                    //reportPrintTool1.ShowPreviewDialog();
+                    break;
+            }
+        }
+
+
 
         //private void gcNaklList1_RowCellStyle(object sender, MaskInputRejectedEventArgs e)
         //{

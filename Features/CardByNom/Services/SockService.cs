@@ -68,25 +68,7 @@ namespace SewingProduction.Features.CardByNom.Services
             {
                 using (var connection = _dbHelper.GetConnection())
                 {
-                    string query = $"WITH OrderedData AS (" +
-                        $"SELECT * " +
-                        $"      ,LEAD(kzDateAdd) OVER(ORDER BY kzDateAdd) AS NextKzDateAdd " +
-                        $"  FROM knitZadany_view " +
-                        $"  WHERE kzPszNom = '{nomZad}'" +
-                        $")" +
-                        $"SELECT *," +
-                        $"  CASE " +        //Количество дней(целое число)
-                        $"      WHEN kzDateEnd IS NOT NULL AND NextKzDateAdd IS NOT NULL" +
-                        $"      THEN DATEDIFF(SECOND, kzDateEnd, NextKzDateAdd) / 86400 " +
-                        $"      ELSE 0" +
-                        $"  END AS DaysDiff," +
-                        $"  CASE " +        //Оставшееся время(тип TIME)
-                        $"      WHEN kzDateEnd IS NOT NULL AND NextKzDateAdd IS NOT NULL " +
-                        $"      THEN CAST(DATEADD(SECOND, DATEDIFF(SECOND, kzDateEnd, NextKzDateAdd) % 86400, '19000101') AS TIME) " +
-                        $"      ELSE CAST('00:00:00' AS TIME) " +
-                        $"  END AS TimeDiff " +
-                        $"FROM OrderedData " +
-                        $"ORDER BY kzDateAdd";
+                    string query = $"exec GetKnitZadanyBySmen_view @xNomZad = '{nomZad}'";
                     var result = await connection.QueryAsync<SockZadanySmenList>(query, new Dictionary<string, object> {  });
                     return result.ToList();
                 }

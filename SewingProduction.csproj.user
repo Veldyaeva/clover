@@ -220,6 +220,15 @@
     <Compile Update="Report\subreport\secByKodPodrAnnIdReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\SockZadanyInfoReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport_test.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Features\UserDistribution\Forms\AboutBox.resx">
