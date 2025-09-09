@@ -16,8 +16,8 @@ namespace SewingProduction.Models
         public string grup { get; set; }
         [Column("mod")]
         public string mod { get; set; }
-        [Column("size")]
-        public string size { get; set; }
+        [Column("size_label")]
+        public string size_label { get; set; }
         [NotMapped]
         public string BindedArt { get; set; }
 

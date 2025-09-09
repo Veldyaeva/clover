@@ -39,5 +39,8 @@ namespace SewingProduction.Models
         public int PZTCount { get; set; }
         [Column ("data_r")]
         public DateTime? data_r { get; set; }
+        
+        [NotMapped]
+        public bool IsChecked { get; set; }
     }
 }

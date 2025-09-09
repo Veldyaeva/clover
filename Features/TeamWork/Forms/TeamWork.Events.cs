@@ -299,130 +299,104 @@ namespace SewingProduction.Features.TeamWork.Forms
 
 
         /// <summary>
-        /// Выполняет поиск артикулов по тексту из textEdit1
+        /// Выполняет поиск артикулов по тексту из searchControl1 в таблицах WDtoBind и unboundArts
         /// </summary>
         private async Task SearchArticulesByText()
         {
             try
             {
-                string searchText = customTextBox1.Text?.Trim();
+                string searchText = searchControl1.Text?.Trim();
                 if (string.IsNullOrEmpty(searchText))
                 {
                     await _logger.LogWarningAsync("Пустой текст для поиска артикулов", "SearchArticulesByText");
                     return;
                 }
 
-                await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}'", "SearchArticulesByText");
+                await _logger.LogEventAsync($"Начало поиска артикулов по тексту: '{searchText}' в таблицах WDtoBind и unboundArts", "SearchArticulesByText");
 
-                // Строим SQL запрос
-                string query = @"SELECT * FROM art_norm_n ann 
-                               WHERE ann.annId IN (
-                                   SELECT sa.annId 
-                                   FROM sp_articul sa 
-                                   WHERE sa.articul LIKE @searchPattern
-                               )
-                               ORDER BY ann.annId DESC";
+                // Запрос для gridView_wdToBind (модель MyDataANN)
+                string queryWdToBind = @"SELECT ann.annId as AnnID, ann.kod as Kod, ann.articul as Articul, 
+                                       ann.status as Status, ann.grup, ann.mod, ann.size_label, ann.data_obn as dateUpdate
+                                       FROM art_norm_n ann 
+                                       WHERE ann.annId IN (
+                                           SELECT sa.annId 
+                                           FROM sp_articul sa 
+                                           WHERE sa.articul LIKE @searchPattern
+                                       )
+                                       ORDER BY ann.annId DESC";
 
-                var parameters = new Dictionary<string, object>
-                {
-                    { "@searchPattern", $"%{searchText}%" }
-                };
-
-                // Выполняем запрос через DbService для модели MyDataANN
-                var searchResults = await _dbService.GetListAsync<MyDataANN>(query, parameters);
-
-                // Обновляем данные в gridView_wdToBind
-                if (searchResults != null && searchResults.Any())
-                {
-                    _myDataAnnList.Clear();
-                    _myDataAnnList.BulkLoad(searchResults);
-
-                    await _logger.LogEventAsync($"Найдено {searchResults.Count} артикулов в текущих работах по запросу '{searchText}'", "SearchArticulesForCurrentWorks");
-
-                    // Устанавливаем фокус на первую строку в gridView_wdToBind
-                    if (gridView_wdToBind.DataRowCount > 0)
-                    {
-                        gridView_wdToBind.FocusedRowHandle = 0;
-                        // Фокус автоматически загрузит связанные данные через существующий обработчик
-                    }
-                }
-                else
-                {
-                    _myDataAnnList.Clear();
-                    await _logger.LogEventAsync($"По запросу '{searchText}' артикулы в текущих работах не найдены", "SearchArticulesForCurrentWorks");
-                    MessageBox.Show($"По запросу '{searchText}' артикулы не найдены", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, $"Ошибка при поиске артикулов в текущих работах по тексту: '{textEdit1.Text}'");
-                MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        /// <summary>
-        /// Выполняет поиск артикулов для вкладки "Текущие работы" из searchLookUpEditByBindedArts
-        /// </summary>
-        private async Task SearchArticulesForCurrentWorks()
-        {
-            try
-            {
-                string searchText = textEdit1.Text?.Trim();
-                if (string.IsNullOrEmpty(searchText))
-                {
-                    await _logger.LogWarningAsync("Пустой текст для поиска артикулов в текущих работах", "SearchArticulesForCurrentWorks");
-                    return;
-                }
-
-                await _logger.LogEventAsync($"Начало поиска артикулов в текущих работах по тексту: '{searchText}'", "SearchArticulesForCurrentWorks");
-
-                // Адаптированный SQL запрос для модели MyDataANN
-                string query = @"SELECT ann.annId as AnnID, ann.kod as Kod, ann.articul as Articul, 
-                               ann.status as Status, ann.grup, ann.mod, ann.data_obn as dateUpdate
-                               FROM art_norm_n ann 
-                               WHERE ann.annId IN (
-                                   SELECT sa.annId 
-                                   FROM sp_articul sa 
-                                   WHERE sa.articul LIKE @searchPattern
-                               )
-                               ORDER BY ann.annId DESC";
+                // Запрос для gridView_unboundArts (модель MyDataART)
+                string queryUnboundArts = @"SELECT * FROM articulListUnboundRTBySizeLabel 
+                                          WHERE articul LIKE @searchPattern 
+                                          ORDER BY articul, row_num";
 
                 var parameters = new Dictionary<string, object>
                 {
                     { "@searchPattern", $"%{searchText}%" }
                 };
 
-                // Выполняем запрос через DbService для модели MyDataANN
-                var searchResults = await _dbService.GetListAsync<MyDataANN>(query, parameters);
+                // Выполняем оба запроса параллельно
+                var wdToBindTask = _dbService.GetListAsync<MyDataANN>(queryWdToBind, parameters);
+                var unboundArtsTask = _dbService.GetListAsync<MyDataART>(queryUnboundArts, parameters);
+
+                await Task.WhenAll(wdToBindTask, unboundArtsTask);
+
+                var wdToBindResults = wdToBindTask.Result;
+                var unboundArtsResults = unboundArtsTask.Result;
+                // Обновляем данные в gridView_unboundArts
+                if (unboundArtsResults != null && unboundArtsResults.Any())
+                {
+                    _myDataArtList.Clear();
+                    _myDataArtList.BulkLoad(unboundArtsResults);
+
+                    // Устанавливаем фокус на первую строку в gridView_unboundArts
+                    if (gridView_unboundArts.DataRowCount > 0)
+                    {
+                        gridView_unboundArts.FocusedRowHandle = 0;
+                    }
+                }
+                else
+                {
+                    _myDataArtList.Clear();
+                }
+
 
                 // Обновляем данные в gridView_wdToBind
-                if (searchResults != null && searchResults.Any())
+                if (wdToBindResults != null && wdToBindResults.Any())
                 {
                     _myDataAnnList.Clear();
-                    _myDataAnnList.BulkLoad(searchResults);
-                    
-                    await _logger.LogEventAsync($"Найдено {searchResults.Count} артикулов в текущих работах по запросу '{searchText}'", "SearchArticulesForCurrentWorks");
+                    _myDataAnnList.BulkLoad(wdToBindResults);
                     
                     // Устанавливаем фокус на первую строку в gridView_wdToBind
                     if (gridView_wdToBind.DataRowCount > 0)
                     {
                         gridView_wdToBind.FocusedRowHandle = 0;
-                        // Фокус автоматически загрузит связанные данные через существующий обработчик
                     }
                 }
                 else
                 {
                     _myDataAnnList.Clear();
-                    await _logger.LogEventAsync($"По запросу '{searchText}' артикулы в текущих работах не найдены", "SearchArticulesForCurrentWorks");
+                }
+
+                // Логируем результаты
+                int totalResults = (wdToBindResults?.Count ?? 0) + (unboundArtsResults?.Count ?? 0);
+                if (totalResults > 0)
+                {
+                    await _logger.LogEventAsync($"Найдено артикулов по запросу '{searchText}': WDtoBind={wdToBindResults?.Count ?? 0}, unboundArts={unboundArtsResults?.Count ?? 0}", "SearchArticulesByText");
+                }
+                else
+                {
+                    await _logger.LogEventAsync($"По запросу '{searchText}' артикулы не найдены", "SearchArticulesByText");
                     MessageBox.Show($"По запросу '{searchText}' артикулы не найдены", "Поиск", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             catch (Exception ex)
             {
-                await _logger.LogErrorAsync(ex, $"Ошибка при поиске артикулов в текущих работах по тексту: '{textEdit1.Text}'");
+                await _logger.LogErrorAsync(ex, $"Ошибка при поиске артикулов по тексту: '{searchControl1.Text}'");
                 MessageBox.Show($"Ошибка при поиске: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         public async Task<bool> PrepareUiAsync(GridView view, int FocusedRowHandle)
         {
@@ -725,19 +699,21 @@ namespace SewingProduction.Features.TeamWork.Forms
 
             try
             {
-                int focusedRowHandle = gridView_unboundArts.FocusedRowHandle;
-                if (focusedRowHandle < 0)
+                // Проверяем валидность gridView_unboundArts
+                if (!IsUnboundArtsGridValid())
                 {
                     MessageBox.Show("Пожалуйста, выберите запись из таблицы артикулов.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    await _logger.LogWarningAsync("GridView_unboundArts не содержит валидных данных", "simpleButton2_Click_Internal");
                     return;
                 }
 
-                var selectedArtData = gridView_unboundArts.GetRow(focusedRowHandle) as MyDataART;
+                int focusedRowHandle = gridView_unboundArts.FocusedRowHandle;
+                var selectedArtData = GetSafeUnboundArtData(gridView_unboundArts, focusedRowHandle);
 
                 if (selectedArtData == null)
                 {
                     MessageBox.Show("Не удалось получить данные выбранного артикула.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    await _logger.LogWarningAsync($"Не удалось получить/преобразовать MyDataART из gridView_unboundArts, строка: {focusedRowHandle}", "simpleButton2_Click_Internal");
+                    await _logger.LogWarningAsync($"GetSafeUnboundArtData вернул null для строки: {focusedRowHandle}", "simpleButton2_Click_Internal");
                     return;
                 }
 
@@ -905,37 +881,64 @@ namespace SewingProduction.Features.TeamWork.Forms
         #region Поиск и фильтрация
         private async void loadAllCheckBox_CheckedChanged_Internal(object sender, EventArgs e)
         {
-            List<MyDataANN> list = null;
-            if (loadAllCheckBox.Checked) //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
-                list = await LoadWorksbyArt("");
-            else if (!loadAllCheckBox.Checked) //loadAll = layoutControlGroup14.CustomHeaderButtons[6].Properties.Checked;
+            try
             {
-                //string kod = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Kod").ToString();
-                //if (!int.TryParse(kod, out int kodInt))
-                //{
-                //    await _logger.LogWarningAsync($"Не удалось преобразовать Kod '{kod}' в число", "gridView_unboundArts_FocusedRowChanged_Internal");
-                //    kodInt = 0;
-                //}
+                List<MyDataANN> list = null;
+                if (loadAllCheckBox.Checked)
+                {
+                    list = await LoadWorksbyArt("");
+                    await _logger.LogEventAsync("loadAllCheckBox: Загружены все РТ", "loadAllCheckBox_CheckedChanged");
+                }
+                else if (!loadAllCheckBox.Checked)
+                {
+                    // Безопасно получаем артикул из выбранной строки
+                    string articul = "";
+                    if (IsUnboundArtsGridValid())
+                    {
+                        var selectedData = GetSafeUnboundArtData(gridView_unboundArts, gridView_unboundArts.FocusedRowHandle);
+                        if (selectedData != null && !string.IsNullOrEmpty(selectedData.Articul))
+                        {
+                            articul = selectedData.Articul.TrimEnd(' ');
+                        }
+                        else
+                        {
+                            await _logger.LogWarningAsync("Не удалось получить артикул из выбранной строки, используем пустую строку", "loadAllCheckBox_CheckedChanged");
+                        }
+                    }
+                    else
+                    {
+                        await _logger.LogWarningAsync("GridView_unboundArts не содержит валидных данных, используем пустую строку", "loadAllCheckBox_CheckedChanged");
+                    }
 
-                string articul = gridView_unboundArts.GetRowCellValue(gridView_unboundArts.FocusedRowHandle, "Articul").ToString();
-                list = await LoadWorksbyArt(articul);
-            }
+                    list = await LoadWorksbyArt(articul);
+                    await _logger.LogEventAsync($"loadAllCheckBox: Загружены РТ для артикула '{articul}'", "loadAllCheckBox_CheckedChanged");
+                }
             // gridControl_wdToBind.DataSource = list;//loadAllCheckBox.Checked ? LoadWorksbyArt(0, "") : LoadWorksbyArt(kod, articul);
             //var bindingList = new BindingList<MyDataANN>(list);
             //_myDataAnnBindingSource = new BindingSource(bindingList, null);
             //gridControl_wdToBind.DataSource = _myDataAnnBindingSource;
-            _myDataAnnList.Clear();
-                        if (list != null)
-                            {
-                _myDataAnnList.RaiseListChangedEvents = false;
-                                foreach (var item in list)
-                                    {
-                    _myDataAnnList.Add(item);
-                                    }
-                _myDataAnnList.RaiseListChangedEvents = true;
-                            }
-            _myDataAnnBindingSource.ResetBindings(false);
-            gridView_wdToBind.RefreshData();
+                // Обновляем данные в UI
+                _myDataAnnList.Clear();
+                if (list != null)
+                {
+                    _myDataAnnList.RaiseListChangedEvents = false;
+                    foreach (var item in list)
+                    {
+                        _myDataAnnList.Add(item);
+                    }
+                    _myDataAnnList.RaiseListChangedEvents = true;
+                }
+                _myDataAnnBindingSource.ResetBindings(false);
+                gridView_wdToBind.RefreshData();
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, "Ошибка в loadAllCheckBox_CheckedChanged_Internal");
+                // В случае ошибки очищаем данные
+                _myDataAnnList.Clear();
+                _myDataAnnBindingSource.ResetBindings(false);
+                gridView_wdToBind.RefreshData();
+            }
         }
 
 
