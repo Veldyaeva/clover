@@ -205,6 +205,9 @@
     <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\subreport\KnitMashineServiceByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -226,7 +229,10 @@
     <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
-    <Compile Update="Report\subreport\KnitZadanyBySmenReport_test.cs">
+    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>

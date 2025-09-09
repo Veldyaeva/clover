@@ -32,6 +32,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Interfaces;
 using SewingProduction.Models;
 using SewingProduction.report;
+using SewingProduction.Report;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1942,7 +1943,12 @@ namespace SewingProduction
             switch (buttonIndex)
             {
                 case 0:
-                    MessageBox.Show("Печать");
+                    //MessageBox.Show("Печать");
+                    SockZadanyInfoReport report1 = new SockZadanyInfoReport();
+                    report1.RequestParameters = false;
+                    report1.Parameters["_nomZadany"].Value = tbNomZad.Text;
+                    ReportPrintTool reportPrintTool1 = new ReportPrintTool(report1);
+                    reportPrintTool1.ShowPreviewDialog();
                     //tbNomZad.Text
                     //NaklReport report1 = new NaklReport();
                     //report1.RequestParameters = false;

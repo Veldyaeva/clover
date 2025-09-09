@@ -1,6 +1,6 @@
 ﻿namespace SewingProduction.Report.subreport
 {
-    partial class KnitZadanyBySmenReport
+    partial class KnitMashineServiceByNomZadReport
     {
         /// <summary>
         /// Required designer variable.
@@ -29,12 +29,38 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters msSqlConnectionParameters1 = new DevExpress.DataAccess.ConnectionParameters.MsSqlConnectionParameters();
-            DevExpress.DataAccess.Sql.StoredProcQuery storedProcQuery1 = new DevExpress.DataAccess.Sql.StoredProcQuery();
+            DevExpress.DataAccess.Sql.SelectQuery selectQuery1 = new DevExpress.DataAccess.Sql.SelectQuery();
+            DevExpress.DataAccess.Sql.Column column1 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression1 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Table table1 = new DevExpress.DataAccess.Sql.Table();
+            DevExpress.DataAccess.Sql.Column column2 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression2 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column3 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression3 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column4 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression4 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column5 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression5 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column6 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression6 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column7 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression7 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column8 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression8 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column9 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression9 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column10 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression10 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column11 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression11 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column12 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression12 = new DevExpress.DataAccess.Sql.ColumnExpression();
+            DevExpress.DataAccess.Sql.Column column13 = new DevExpress.DataAccess.Sql.Column();
+            DevExpress.DataAccess.Sql.ColumnExpression columnExpression13 = new DevExpress.DataAccess.Sql.ColumnExpression();
             DevExpress.DataAccess.Sql.QueryParameter queryParameter1 = new DevExpress.DataAccess.Sql.QueryParameter();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnitZadanyBySmenReport));
-            this._nomZad = new DevExpress.XtraReports.Parameters.Parameter();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(KnitMashineServiceByNomZadReport));
+            DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.pageInfo1 = new DevExpress.XtraReports.UI.XRPageInfo();
@@ -48,17 +74,17 @@
             this.xrTableCell2 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell4 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell5 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell7 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell6 = new DevExpress.XtraReports.UI.XRTableCell();
+            this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell9 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell8 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell3 = new DevExpress.XtraReports.UI.XRTableCell();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
             this.xrTable2 = new DevExpress.XtraReports.UI.XRTable();
             this.xrTableRow2 = new DevExpress.XtraReports.UI.XRTableRow();
+            this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell13 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell14 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell15 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -69,25 +95,16 @@
             this.xrTableCell20 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell21 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell22 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell23 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell24 = new DevExpress.XtraReports.UI.XRTableCell();
             this.sqlDataSource1 = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this.Title = new DevExpress.XtraReports.UI.XRControlStyle();
             this.DetailCaption1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.DetailData1 = new DevExpress.XtraReports.UI.XRControlStyle();
             this.DetailData3_Odd = new DevExpress.XtraReports.UI.XRControlStyle();
             this.PageInfo = new DevExpress.XtraReports.UI.XRControlStyle();
+            this._nomZadany = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
-            // 
-            // _nomZad
-            // 
-            this._nomZad.Description = "NomZad";
-            this._nomZad.Name = "_nomZad";
-            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102505474", null));
-            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue("102506476", null));
-            this._nomZad.ValueSourceSettings = staticListLookUpSettings1;
             // 
             // TopMargin
             // 
@@ -129,19 +146,19 @@
             // label1
             // 
             this.label1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Смены по заданию \' + ToStr([kzPszNom])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Обслуживание оборудования по заданию \' + [kzPszNom]")});
             this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.label1.Name = "label1";
             this.label1.SizeF = new System.Drawing.SizeF(650F, 24.19433F);
             this.label1.StyleName = "Title";
-            this.label1.Text = "KnitZadanyBySmenReport";
+            this.label1.Text = "KnitMashineServiceByNomZadReport";
             // 
             // GroupHeader1
             // 
             this.GroupHeader1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable1});
             this.GroupHeader1.GroupUnion = DevExpress.XtraReports.UI.GroupUnion.WithFirstDetail;
-            this.GroupHeader1.HeightF = 39.58334F;
+            this.GroupHeader1.HeightF = 54.11132F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // xrTable1
@@ -154,7 +171,7 @@
             this.xrTable1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable1.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow1});
-            this.xrTable1.SizeF = new System.Drawing.SizeF(1050F, 39.58334F);
+            this.xrTable1.SizeF = new System.Drawing.SizeF(1050F, 54.11132F);
             this.xrTable1.StylePriority.UseBorders = false;
             // 
             // xrTableRow1
@@ -164,13 +181,12 @@
             this.xrTableCell2,
             this.xrTableCell4,
             this.xrTableCell5,
-            this.xrTableCell6,
             this.xrTableCell7,
-            this.xrTableCell12,
+            this.xrTableCell6,
+            this.xrTableCell8,
             this.xrTableCell11,
             this.xrTableCell10,
             this.xrTableCell9,
-            this.xrTableCell8,
             this.xrTableCell3});
             this.xrTableRow1.Name = "xrTableRow1";
             this.xrTableRow1.Weight = 1D;
@@ -180,90 +196,83 @@
             this.xrTableCell1.Multiline = true;
             this.xrTableCell1.Name = "xrTableCell1";
             this.xrTableCell1.Text = "Зона";
-            this.xrTableCell1.Weight = 0.44692073059082027D;
+            this.xrTableCell1.Weight = 0.38648792532408943D;
             // 
             // xrTableCell2
             // 
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
             this.xrTableCell2.Text = "В/М";
-            this.xrTableCell2.Weight = 0.57440782165527338D;
+            this.xrTableCell2.Weight = 0.4967375315766831D;
             // 
             // xrTableCell4
             // 
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
             this.xrTableCell4.Text = "В/М инв. №";
-            this.xrTableCell4.Weight = 0.66233557128906251D;
+            this.xrTableCell4.Weight = 0.572774580398694D;
             // 
             // xrTableCell5
             // 
             this.xrTableCell5.Multiline = true;
             this.xrTableCell5.Name = "xrTableCell5";
-            this.xrTableCell5.Text = "Дата/время начала вязания";
-            this.xrTableCell5.Weight = 1.6463341979980468D;
-            // 
-            // xrTableCell6
-            // 
-            this.xrTableCell6.Multiline = true;
-            this.xrTableCell6.Name = "xrTableCell6";
-            this.xrTableCell6.Text = "Таб. №";
-            this.xrTableCell6.Weight = 0.57000184631347661D;
+            this.xrTableCell5.Text = "Вид оборудования";
+            this.xrTableCell5.Weight = 1.0116926262171722D;
             // 
             // xrTableCell7
             // 
             this.xrTableCell7.Multiline = true;
             this.xrTableCell7.Name = "xrTableCell7";
-            this.xrTableCell7.Text = "ФИО";
-            this.xrTableCell7.Weight = 1.8266788482666014D;
+            this.xrTableCell7.Text = "ФИО (кто вызвал)";
+            this.xrTableCell7.Weight = 1.320532570029205D;
             // 
-            // xrTableCell12
+            // xrTableCell6
             // 
-            this.xrTableCell12.Multiline = true;
-            this.xrTableCell12.Name = "xrTableCell12";
-            this.xrTableCell12.Text = "Дата/время окончания вязания";
-            this.xrTableCell12.Weight = 1.7178896636962893D;
-            // 
-            // xrTableCell11
-            // 
-            this.xrTableCell11.Multiline = true;
-            this.xrTableCell11.Name = "xrTableCell11";
-            this.xrTableCell11.Text = "Таб. №";
-            this.xrTableCell11.Weight = 0.5054318771362305D;
-            // 
-            // xrTableCell10
-            // 
-            this.xrTableCell10.Multiline = true;
-            this.xrTableCell10.Name = "xrTableCell10";
-            this.xrTableCell10.Text = "ФИО";
-            this.xrTableCell10.Weight = 1.6374997482299807D;
-            // 
-            // xrTableCell9
-            // 
-            this.xrTableCell9.Multiline = true;
-            this.xrTableCell9.Name = "xrTableCell9";
-            this.xrTableCell9.Text = "Кол-во";
-            this.xrTableCell9.Weight = 0.58750045776367188D;
+            this.xrTableCell6.Multiline = true;
+            this.xrTableCell6.Name = "xrTableCell6";
+            this.xrTableCell6.Text = "Дата/время Начало простоя";
+            this.xrTableCell6.Weight = 1.2126088461246127D;
             // 
             // xrTableCell8
             // 
             this.xrTableCell8.Multiline = true;
             this.xrTableCell8.Name = "xrTableCell8";
-            this.xrTableCell8.Text = "Итого, час";
-            this.xrTableCell8.Weight = 0.63749996948242182D;
+            this.xrTableCell8.Text = "Описание проблемы";
+            this.xrTableCell8.Weight = 1.3412844811205598D;
+            // 
+            // xrTableCell11
+            // 
+            this.xrTableCell11.Multiline = true;
+            this.xrTableCell11.Name = "xrTableCell11";
+            this.xrTableCell11.Text = "Принятые меры";
+            this.xrTableCell11.Weight = 1.2177094375322448D;
+            // 
+            // xrTableCell10
+            // 
+            this.xrTableCell10.Multiline = true;
+            this.xrTableCell10.Name = "xrTableCell10";
+            this.xrTableCell10.Text = "Дата/время Конец простоя";
+            this.xrTableCell10.Weight = 1.1915468905466908D;
+            // 
+            // xrTableCell9
+            // 
+            this.xrTableCell9.Multiline = true;
+            this.xrTableCell9.Name = "xrTableCell9";
+            this.xrTableCell9.Text = "ФИО механика / таб";
+            this.xrTableCell9.Weight = 1.0972922643237739D;
             // 
             // xrTableCell3
             // 
             this.xrTableCell3.Multiline = true;
             this.xrTableCell3.Name = "xrTableCell3";
-            this.xrTableCell3.Text = "Разница между сменами";
-            this.xrTableCell3.Weight = 1.1874992675781251D;
+            this.xrTableCell3.Text = "Продолжительность простоя";
+            this.xrTableCell3.Weight = 1.1513328468062745D;
             // 
             // Detail
             // 
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrTable2});
-            this.Detail.HeightF = 39.58334F;
+            this.Detail.HeightF = 25F;
             this.Detail.Name = "Detail";
             // 
             // xrTable2
@@ -276,12 +285,13 @@
             this.xrTable2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
             this.xrTable2.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow2});
-            this.xrTable2.SizeF = new System.Drawing.SizeF(1050F, 39.58334F);
+            this.xrTable2.SizeF = new System.Drawing.SizeF(1050F, 25F);
             this.xrTable2.StylePriority.UseBorders = false;
             // 
             // xrTableRow2
             // 
             this.xrTableRow2.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
+            this.xrTableCell12,
             this.xrTableCell13,
             this.xrTableCell14,
             this.xrTableCell15,
@@ -291,122 +301,111 @@
             this.xrTableCell19,
             this.xrTableCell20,
             this.xrTableCell21,
-            this.xrTableCell22,
-            this.xrTableCell23,
-            this.xrTableCell24});
+            this.xrTableCell22});
             this.xrTableRow2.Name = "xrTableRow2";
             this.xrTableRow2.Weight = 1D;
+            // 
+            // xrTableCell12
+            // 
+            this.xrTableCell12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmaNumber]")});
+            this.xrTableCell12.Multiline = true;
+            this.xrTableCell12.Name = "xrTableCell12";
+            this.xrTableCell12.Text = "Зона";
+            this.xrTableCell12.Weight = 0.38648792532408943D;
             // 
             // xrTableCell13
             // 
             this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmaNumber]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmlNumber]")});
             this.xrTableCell13.Multiline = true;
             this.xrTableCell13.Name = "xrTableCell13";
-            this.xrTableCell13.Text = "Зона";
-            this.xrTableCell13.Weight = 0.44692073059082027D;
+            this.xrTableCell13.Text = "В/М";
+            this.xrTableCell13.Weight = 0.4967375315766831D;
             // 
             // xrTableCell14
             // 
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmlNumber]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmlInvNum]")});
             this.xrTableCell14.Multiline = true;
             this.xrTableCell14.Name = "xrTableCell14";
-            this.xrTableCell14.Text = "В/М";
-            this.xrTableCell14.Weight = 0.57440782165527338D;
+            this.xrTableCell14.Text = "В/М инв. №";
+            this.xrTableCell14.Weight = 0.57277260107441319D;
             // 
             // xrTableCell15
             // 
             this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kmlInvNumber]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[text_ob_s]")});
             this.xrTableCell15.Multiline = true;
             this.xrTableCell15.Name = "xrTableCell15";
-            this.xrTableCell15.Text = "В/М инв. №";
-            this.xrTableCell15.Weight = 0.66233557128906251D;
+            this.xrTableCell15.Text = "Вид оборудования";
+            this.xrTableCell15.Weight = 1.011692339347277D;
             // 
             // xrTableCell16
             // 
             this.xrTableCell16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kzDateAdd]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[directorName]")});
             this.xrTableCell16.Multiline = true;
             this.xrTableCell16.Name = "xrTableCell16";
-            this.xrTableCell16.Text = "Дата/время начала вязания";
-            this.xrTableCell16.Weight = 1.6463341979980468D;
+            this.xrTableCell16.Text = "ФИО (кто вызвал)";
+            this.xrTableCell16.Weight = 1.3205369321952274D;
             // 
             // xrTableCell17
             // 
             this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kwsTabStart]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[date]")});
             this.xrTableCell17.Multiline = true;
             this.xrTableCell17.Name = "xrTableCell17";
-            this.xrTableCell17.Text = "Таб. №";
-            this.xrTableCell17.Weight = 0.57000184631347661D;
+            this.xrTableCell17.Text = "Дата/время Начало простоя";
+            this.xrTableCell17.Weight = 1.2126082978499346D;
             // 
             // xrTableCell18
             // 
             this.xrTableCell18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[fioSt]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[resultName]")});
             this.xrTableCell18.Multiline = true;
             this.xrTableCell18.Name = "xrTableCell18";
-            this.xrTableCell18.Text = "ФИО";
-            this.xrTableCell18.Weight = 1.8266788482666014D;
+            this.xrTableCell18.Text = "Описание проблемы";
+            this.xrTableCell18.Weight = 1.3412829368541634D;
             // 
             // xrTableCell19
             // 
             this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kzDateEnd]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ResultText]")});
             this.xrTableCell19.Multiline = true;
             this.xrTableCell19.Name = "xrTableCell19";
-            this.xrTableCell19.Text = "Дата/время окончания вязания";
-            this.xrTableCell19.Weight = 1.7178896636962893D;
+            this.xrTableCell19.Text = "Принятые меры";
+            this.xrTableCell19.Weight = 1.2177094404354267D;
             // 
             // xrTableCell20
             // 
             this.xrTableCell20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kwsTabEnd]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[dateEnd]")});
             this.xrTableCell20.Multiline = true;
             this.xrTableCell20.Name = "xrTableCell20";
-            this.xrTableCell20.Text = "Таб. №";
-            this.xrTableCell20.Weight = 0.5054318771362305D;
+            this.xrTableCell20.Text = "Дата/время Конец простоя";
+            this.xrTableCell20.Weight = 1.1915453799264566D;
             // 
             // xrTableCell21
             // 
             this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[fioEn]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[mechanic]")});
             this.xrTableCell21.Multiline = true;
             this.xrTableCell21.Name = "xrTableCell21";
-            this.xrTableCell21.Text = "ФИО";
-            this.xrTableCell21.Weight = 1.6374997482299807D;
+            this.xrTableCell21.Text = "ФИО механика / таб";
+            this.xrTableCell21.Weight = 1.0972960614589753D;
             // 
             // xrTableCell22
             // 
             this.xrTableCell22.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[kolFakt]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DaysDiff] > 0, ToStr([DaysDiff]) + \' д. \', \'\') + Iif(ToStr([TimeDiff]) != \'0" +
+                    "0:00:00\', ToStr([TimeDiff]), \'\')\n")});
             this.xrTableCell22.Multiline = true;
             this.xrTableCell22.Name = "xrTableCell22";
-            this.xrTableCell22.Text = "Кол-во";
-            this.xrTableCell22.Weight = 0.58750045776367188D;
-            // 
-            // xrTableCell23
-            // 
-            this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[chasVyaz]")});
-            this.xrTableCell23.Multiline = true;
-            this.xrTableCell23.Name = "xrTableCell23";
-            this.xrTableCell23.Text = "Итого, час";
-            this.xrTableCell23.Weight = 0.63749996948242182D;
-            // 
-            // xrTableCell24
-            // 
-            this.xrTableCell24.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DaysDiff] > 0, ToStr([DaysDiff]) + \' д. \', \'\') + Iif(ToStr([TimeDiff]) != \'0" +
-                    "0:00:00\', ToStr([TimeDiff]), \'\')")});
-            this.xrTableCell24.Multiline = true;
-            this.xrTableCell24.Name = "xrTableCell24";
-            this.xrTableCell24.StylePriority.UseTextAlignment = false;
-            this.xrTableCell24.Text = "Разница между сменами";
-            this.xrTableCell24.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
-            this.xrTableCell24.Weight = 1.1874992675781251D;
+            this.xrTableCell22.StylePriority.UseTextAlignment = false;
+            this.xrTableCell22.Text = "Продолжительность простоя";
+            this.xrTableCell22.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
+            this.xrTableCell22.Weight = 1.1513305539573535D;
             // 
             // sqlDataSource1
             // 
@@ -419,15 +418,71 @@
             msSqlConnectionParameters1.UserName = "sa";
             this.sqlDataSource1.ConnectionParameters = msSqlConnectionParameters1;
             this.sqlDataSource1.Name = "sqlDataSource1";
-            storedProcQuery1.Name = "GetKnitZadanyBySmen_view";
-            queryParameter1.Name = "@xNomZad";
+            columnExpression1.ColumnName = "kzPszNom";
+            table1.MetaSerializable = "<Meta X=\"30\" Y=\"30\" Width=\"125\" Height=\"323\" />";
+            table1.Name = "KnitMashineServiceByNomZad";
+            columnExpression1.Table = table1;
+            column1.Expression = columnExpression1;
+            columnExpression2.ColumnName = "kmaNumber";
+            columnExpression2.Table = table1;
+            column2.Expression = columnExpression2;
+            columnExpression3.ColumnName = "kmlInvNum";
+            columnExpression3.Table = table1;
+            column3.Expression = columnExpression3;
+            columnExpression4.ColumnName = "kmlNumber";
+            columnExpression4.Table = table1;
+            column4.Expression = columnExpression4;
+            columnExpression5.ColumnName = "text_ob_s";
+            columnExpression5.Table = table1;
+            column5.Expression = columnExpression5;
+            columnExpression6.ColumnName = "directorName";
+            columnExpression6.Table = table1;
+            column6.Expression = columnExpression6;
+            columnExpression7.ColumnName = "date";
+            columnExpression7.Table = table1;
+            column7.Expression = columnExpression7;
+            columnExpression8.ColumnName = "resultName";
+            columnExpression8.Table = table1;
+            column8.Expression = columnExpression8;
+            columnExpression9.ColumnName = "ResultText";
+            columnExpression9.Table = table1;
+            column9.Expression = columnExpression9;
+            columnExpression10.ColumnName = "dateEnd";
+            columnExpression10.Table = table1;
+            column10.Expression = columnExpression10;
+            columnExpression11.ColumnName = "mechanic";
+            columnExpression11.Table = table1;
+            column11.Expression = columnExpression11;
+            columnExpression12.ColumnName = "DaysDiff";
+            columnExpression12.Table = table1;
+            column12.Expression = columnExpression12;
+            columnExpression13.ColumnName = "TimeDiff";
+            columnExpression13.Table = table1;
+            column13.Expression = columnExpression13;
+            selectQuery1.Columns.Add(column1);
+            selectQuery1.Columns.Add(column2);
+            selectQuery1.Columns.Add(column3);
+            selectQuery1.Columns.Add(column4);
+            selectQuery1.Columns.Add(column5);
+            selectQuery1.Columns.Add(column6);
+            selectQuery1.Columns.Add(column7);
+            selectQuery1.Columns.Add(column8);
+            selectQuery1.Columns.Add(column9);
+            selectQuery1.Columns.Add(column10);
+            selectQuery1.Columns.Add(column11);
+            selectQuery1.Columns.Add(column12);
+            selectQuery1.Columns.Add(column13);
+            selectQuery1.FilterString = "[KnitMashineServiceByNomZad.kzPszNom] = ?_nomZad";
+            selectQuery1.GroupFilterString = "";
+            selectQuery1.Name = "KnitMashineServiceByNomZad";
+            queryParameter1.Name = "_nomZad";
             queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
-            queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZad", typeof(string));
-            storedProcQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
+            queryParameter1.Value = new DevExpress.DataAccess.Expression("?_nomZadany", typeof(string));
+            selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1});
-            storedProcQuery1.StoredProcName = "GetKnitZadanyBySmen_view";
+            selectQuery1.Tables.Add(table1);
             this.sqlDataSource1.Queries.AddRange(new DevExpress.DataAccess.Sql.SqlQuery[] {
-            storedProcQuery1});
+            selectQuery1});
             this.sqlDataSource1.ResultSchemaSerializable = resources.GetString("sqlDataSource1.ResultSchemaSerializable");
             // 
             // Title
@@ -483,7 +538,16 @@
             this.PageInfo.Name = "PageInfo";
             this.PageInfo.Padding = new DevExpress.XtraPrinting.PaddingInfo(6, 6, 0, 0, 100F);
             // 
-            // KnitZadanyBySmenReport
+            // _nomZadany
+            // 
+            this._nomZadany.Description = "NomZadany";
+            this._nomZadany.Name = "_nomZadany";
+            this._nomZadany.Type = typeof(int);
+            this._nomZadany.ValueInfo = "0";
+            staticListLookUpSettings1.LookUpValues.Add(new DevExpress.XtraReports.Parameters.LookUpValue(102505474, null));
+            this._nomZadany.ValueSourceSettings = staticListLookUpSettings1;
+            // 
+            // KnitMashineServiceByNomZadReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -493,17 +557,15 @@
             this.Detail});
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.sqlDataSource1});
-            this.DataMember = "GetKnitZadanyBySmen_view";
+            this.DataMember = "KnitMashineServiceByNomZad";
             this.DataSource = this.sqlDataSource1;
             this.Font = new DevExpress.Drawing.DXFont("Arial", 9.75F);
             this.Landscape = true;
             this.Margins = new DevExpress.Drawing.DXMargins(25F, 25F, 0F, 23F);
             this.PageHeight = 850;
             this.PageWidth = 1100;
-            this.ParameterPanelLayoutItems.AddRange(new DevExpress.XtraReports.Parameters.ParameterPanelLayoutItem[] {
-            new DevExpress.XtraReports.Parameters.ParameterLayoutItem(this._nomZad, DevExpress.XtraReports.Parameters.Orientation.Horizontal)});
             this.Parameters.AddRange(new DevExpress.XtraReports.Parameters.Parameter[] {
-            this._nomZad});
+            this._nomZadany});
             this.StyleSheet.AddRange(new DevExpress.XtraReports.UI.XRControlStyle[] {
             this.Title,
             this.DetailCaption1,
@@ -519,7 +581,6 @@
 
         #endregion
 
-        private DevExpress.XtraReports.Parameters.Parameter _nomZad;
         private DevExpress.XtraReports.UI.TopMarginBand TopMargin;
         private DevExpress.XtraReports.UI.BottomMarginBand BottomMargin;
         private DevExpress.XtraReports.UI.XRPageInfo pageInfo1;
@@ -540,16 +601,16 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell2;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell4;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell5;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell7;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell6;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell11;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell10;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell9;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell8;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell3;
         private DevExpress.XtraReports.UI.XRTable xrTable2;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow2;
+        private DevExpress.XtraReports.UI.XRTableCell xrTableCell12;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell13;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell14;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell15;
@@ -560,7 +621,6 @@
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell20;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell21;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell22;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell23;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell24;
+        private DevExpress.XtraReports.Parameters.Parameter _nomZadany;
     }
 }

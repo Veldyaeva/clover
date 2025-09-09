@@ -6,9 +6,9 @@ using System.Drawing;
 
 namespace SewingProduction.Report.subreport
 {
-    public partial class KnitZadanyBySmenReport_test : DevExpress.XtraReports.UI.XtraReport
+    public partial class KnitMachineDownTimeByNomZadReport : DevExpress.XtraReports.UI.XtraReport
     {
-        public KnitZadanyBySmenReport_test()
+        public KnitMachineDownTimeByNomZadReport()
         {
             InitializeComponent();
         }
