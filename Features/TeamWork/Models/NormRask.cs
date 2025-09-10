@@ -28,7 +28,7 @@ namespace SewingProduction.Models
         }
         public int AnnId { get; set; }
         public string Kod_o { get; set; }
-        public string Text { get; set; }
+        public string TextRask { get; set; }
         public string Spec { get; set; }
         public int razryd { get; set; }
         public string Obor { get; set; }

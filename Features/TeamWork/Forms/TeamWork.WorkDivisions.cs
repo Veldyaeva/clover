@@ -408,7 +408,7 @@ namespace SewingProduction.Features.TeamWork.Forms
                 Komment = "",
                 Reco = "",
                 dateCreate = DateTime.Now,
-                dateAdd = DateTime.Now,
+                //dateAdd = DateTime.Now,
                 Diz = 0,
                 Constr = 0,
                 dateUpdate = null,//DateTime.MinValue,
@@ -589,6 +589,10 @@ namespace SewingProduction.Features.TeamWork.Forms
             UpdateRowInBindingList(oldRow);
 
             await _dbService.UpdateFieldAsync("sp_Articul", "annId", oldRow.AnnID, "annId", newRowId);
+            
+            // Обновляем данные архива после перевода из предварительного архива
+            await RefreshArchData();
+            
             await _logger.LogEventAsync($"Запись ID={oldRow.AnnID} архивирована. Артикулы {""} привязаны к новой записи {oldRow.ParentId}", "Arch");
 
         }
@@ -812,6 +816,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             
             await _logger.LogEventAsync($"Запись ID={selectedItem.AnnID} архивирована. Создана новая запись ID={newRow.AnnID}, нзп {(hasNZP ? "отсутствует" : "присутствует")}", "ArchAndCopy");
             
+            // Обновляем данные архива если был установлен статус архива (3)
+            if (newStatus == (int)Status.Archive)
+            {
+                await RefreshArchData();
+            }
+            
             // Запускаем асинхронное обновление секунд для новой записи
             _ = Task.Run(async () =>
             {
@@ -1002,81 +1012,20 @@ namespace SewingProduction.Features.TeamWork.Forms
 
         #region отвязать
         /// <summary>
-        /// Обработчик кнопки "Отвязать артикул от РТ".
-        /// Удаляет связь между выбранным артикулом и разделением труда.
+        /// Обработчик кнопки "Отвязать артикул от РТ" для вкладки артикулов.
+        /// Использует универсальную процедуру UnbindArticulesFromWorkDivision_Internal.
         /// </summary>
         private async Task UnboundWD(object sender, EventArgs e)
         {
-            try
-            {
-                var view = gridControlNZP.MainView as GridView;
-                if (view == null) return;
-
-                var selectedRow = _nzpByKoddRtSourceArt.Current as NZPByKoddRt;
-                if (selectedRow == null)
-                {
-                    MessageBox.Show("Выберите артикул для отвязки!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
-                int kod = selectedRow.kodd_rt; // код артикула из строки НЗП
-                int annIdNzpRow = selectedRow.annId; // AnnID РТ из строки НЗП
-                await _logger.LogEventAsync($"UnboundWD: Начало. Артикул KOD: {kod}, РТ AnnID из строки НЗП: {annIdNzpRow}", "UnboundWD_Debug");
-
-                // Вызов метода для отвязки артикула в sp_articul
-                await _artNormService.ResetAnnIdinArticul(kod);
-                await _logger.LogEventAsync($"UnboundWD: ResetAnnIdinArticul(kod: {kod}) выполнен.", "UnboundWD_Debug");
-
-                // Обновление статуса РТ
-                await _dbService.UpdateFieldAsync(TableNames.Ann, "status", (int)Status.Actual, "parentId", annIdNzpRow);
-                await _logger.LogEventAsync($"UnboundWD: UpdateFieldAsync для статуса РТ выполнен.", "UnboundWD_Debug");
-
-                // Получаем AnnID текущего выбранного РТ из gridView_wdToBind
-                // Это AnnID, для которого нужно обновить список НЗП.
-                int currentWorkDivisionAnnId = 0;
-                if (gridView_wdToBind != null && gridView_wdToBind.FocusedRowHandle >= 0)
-                {
-                    currentWorkDivisionAnnId = CommonFunctions.GetRowCellValueOrDefault<int>(gridView_wdToBind, gridView_wdToBind.FocusedRowHandle, "AnnID", 0);
-                }
-                await _logger.LogEventAsync($"UnboundWD: AnnID текущего РТ из gridView_wdToBind: {currentWorkDivisionAnnId}", "UnboundWD_Debug");
-
-                if (_nzpListArt != null)
-                {
-                  //  _nzpList.Clear(); // Очищаем текущий список НЗП
-                    if (currentWorkDivisionAnnId > 0)
-                    {
-                        // Перезагружаем НЗП для текущего РТ
-                        List<NZPByKoddRt> nzpData = await _artNormService.GetNzpWithPztCounts(currentWorkDivisionAnnId);
-                        await _logger.LogEventAsync($"UnboundWD: GetNzpWithPztCounts(annId: {currentWorkDivisionAnnId}) вернул {(nzpData?.Count ?? 0)} записей.", "UnboundWD_Debug");
-                        if (nzpData != null)
-                        {
-                            if (nzpData.Count == 0)
-                            {
-                                await _logger.LogEventAsync($"UnboundWD: Список nzpData ПУСТ после GetNzpWithPztCounts.", "UnboundWD_Debug");
-                            }
-                            _nzpListArt.BulkLoad(nzpData);
-                            //foreach (var item in nzpData)
-                            //{
-                            //    _nzpList.Add(item);
-                            //   // await _logger.LogEventAsync($"UnboundWD: В _nzpList добавлена запись: Kodd_rt={item.kodd_rt}, AnnId={item.annId}, KolNZP={item.kolNZP}", "UnboundWD_Debug");
-                            //}
-                        }
-                    }
-                }
-
-                _nzpByKoddRtSourceArt?.ResetBindings(false);
-                gridControlNZP?.RefreshDataSource();
-                await UpdateUnboundButtonStatusBasedOnNZP(); // Обновляем состояние кнопки отвязки
-                await _logger.LogEventAsync($"UnboundWD: UI обновлен (_nzpByKoddRtSource.ResetBindings, RefreshDataSource, UpdateUnboundButtonStatusBasedOnNZP).", "UnboundWD_Debug");
-
-                MessageBox.Show("Артикул успешно отвязан от РТ.", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await _logger.LogEventAsync($"UnboundWD ЗАВЕРШЕН: Артикул {kod} отвязан от РТ {annIdNzpRow}. Список НЗП для РТ {currentWorkDivisionAnnId} обновлен.", "UnboundWD_Debug");
-            }
-            catch (Exception ex)
-            {
-                await _logger.LogErrorAsync(ex, "Ошибка при отвязке артикула от РТ");
-                MessageBox.Show($"Ошибка при отвязке артикула: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            await _logger.LogEventAsync("UnboundWD: Отвязка РТ от артикула на вкладке артикулов");
+            
+            // Используем универсальную процедуру для вкладки артикулов
+            await UnbindArticulesFromWorkDivision_Internal(
+                gridControlNZP.MainView as GridView,  // GridView НЗП
+                _nzpListArt,                          // Источник данных НЗП для вкладки артикулов
+                gridView_wdToBind,                    // GridView с РТ (MyDataANN)
+                useCheckedRows: true                  // Используем отмеченные строки
+            );
         }
         #endregion
 

@@ -768,6 +768,7 @@ namespace SewingProduction
                 Task bindingsTask = InitializeBindingsAsync();
 
                 await Task.WhenAll(bindingsTask);
+
             }
             catch (Exception ex)
             {

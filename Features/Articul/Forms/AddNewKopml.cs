@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraTab;
 using SewingProduction.Core.Class;
-using SewingProduction.Features.Articul.Models;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
@@ -23,6 +23,7 @@ using DevExpress.XtraGrid;
 using DevExpress.XtraVerticalGrid;
 using DevExpress.XtraGrid.Columns;
 using System.IO;
+using SewingProduction.Features.Articul.Models;
 
 namespace SewingProduction.Features.Articul.Forms
 {
@@ -73,7 +74,7 @@ namespace SewingProduction.Features.Articul.Forms
                              Kle = a.Kle,
                              GrupMen = g ?? new GrupMenModel(),
                              Po = " ",
-                             Pr_po = false
+                             //Pr_po = false
                          };
 
             var resultList = result.ToList();
@@ -97,7 +98,7 @@ namespace SewingProduction.Features.Articul.Forms
                                 Kle = a.Kle,
                                 GrupMen = g ?? new GrupMenModel(),
                                 Po = " ",
-                                Pr_po = false
+                                //Pr_po = false
                             };
             var resulRazmList = resulRazm.ToList();
             await FillRazmAllAsync(resulRazmList); // 🔹 заполняем razm_all
@@ -140,8 +141,9 @@ namespace SewingProduction.Features.Articul.Forms
             if (gridViewKomplRazm?.DataSource is not List<SpArticulGrupMenViewModel> data)
                 return;
 
-            foreach (var item in data)
+            /*foreach (var item in data)
                 item.Pr_po = false;
+            */
 
             gridViewKomplRazm.RefreshData();
 
@@ -402,7 +404,7 @@ namespace SewingProduction.Features.Articul.Forms
                     countStr = tabsCount
                 });
 
-                _tabSelection[tabIndex] = (selected.Kod, selected.Razm);
+                //_tabSelection[tabIndex] = (selected.Kod, selected.Razm);
                 customGridControlKomplSelected.RefreshDataSource();
                 return;
             }
@@ -437,11 +439,12 @@ namespace SewingProduction.Features.Articul.Forms
             view.RefreshData();
 
             // Если на вкладке раньше была другая пара — её нужно уменьшить
+            
             if (_tabSelection.TryGetValue(tabIndex, out var prev))
             {
-                if (prev.kod != selected.Kod || prev.razm != selected.Razm)
+                if (prev.kod != Convert.ToInt32(selected.Kod) || prev.razm != selected.Razm)
                 {
-                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == prev.kod && x.Razm == prev.razm);
+                    var prevAgg = _selectedKomplItems.FirstOrDefault(x => Convert.ToInt32(x.Kod) == prev.kod && x.Razm == prev.razm);
                     if (prevAgg != null)
                     {
                         if (prevAgg.countStr > 1) prevAgg.countStr -= 1;
@@ -449,13 +452,14 @@ namespace SewingProduction.Features.Articul.Forms
                     }
                 }
             }
+            
 
             // Учесть новую пару
             var curAgg = _selectedKomplItems.FirstOrDefault(x => x.Kod == selected.Kod && x.Razm == selected.Razm);
             if (curAgg != null) curAgg.countStr += 1;
             else { selected.countStr = 1; _selectedKomplItems.Add(selected); }
 
-            _tabSelection[tabIndex] = (selected.Kod, selected.Razm);
+            _tabSelection[tabIndex] = (Convert.ToInt32(selected.Kod), selected.Razm);
             customGridControlKomplSelected.RefreshDataSource();
 
             if (!xAutoRazm && !xAllZap)
@@ -606,12 +610,12 @@ namespace SewingProduction.Features.Articul.Forms
             customTabControlKomplRazm.SelectedTabPageIndex = targetIndex;
 
             // Добавляем строки без дублей по (kod, razm)
-            var kodRazmSet = new HashSet<(int, string)>(targetList.Select(x => (x.Kod, x.Razm)));
+            var kodRazmSet = new HashSet<(int, string)>(targetList.Select(x => (Convert.ToInt32(x.Kod), x.Razm)));
 
-            foreach (var row in sameArticulRows)
+            /*foreach (var row in sameArticulRows)
             {
                 var key = (row.Kod, row.Razm);
-                if (!kodRazmSet.Contains(key))
+                if (!kodRazmSet.Contains(key)
                 {
                     targetList.Add(new SpArticulGrupMenViewModel
                     {
@@ -632,6 +636,7 @@ namespace SewingProduction.Features.Articul.Forms
                     kodRazmSet.Add(key);
                 }
             }
+            */
 
             // Если авторазмер включён — сразу авторасставим галки в вкладках
             if (xAutoRazm)
@@ -868,7 +873,7 @@ namespace SewingProduction.Features.Articul.Forms
                 var grid = layout.Controls.OfType<CustomGridControl>().FirstOrDefault();
                 if (grid?.DataSource is not BindingList<SpArticulGrupMenViewModel> list) continue;
 
-                foreach (var row in list.Where(r => r.Pr_po))
+                /*foreach (var row in list.Where(r => r.Pr_po))
                 {
                     var key = (row.Kod, row.Razm);
                     if (!agg.TryGetValue(key, out var acc))
@@ -883,6 +888,7 @@ namespace SewingProduction.Features.Articul.Forms
                         acc.countStr += 1;
                     }
                 }
+                */
             }
 
             foreach (var item in agg.Values)
@@ -1088,13 +1094,13 @@ namespace SewingProduction.Features.Articul.Forms
                 }
 
                 var mainItem = selectedLeft[0];
-                if (mainItem.Kod == 0)
+                /*if (mainItem.Kod == 0)
                 {
                     VerifiedCheckedFalse();
                     MessageBox.Show("Код комплекта не найден.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-
+                */
                 var flatCodes = BuildFlatCodesByCountStr(_selectedKomplItems);
                 if (flatCodes.Count == 0)
                 {
@@ -1149,6 +1155,7 @@ namespace SewingProduction.Features.Articul.Forms
         private static List<int> BuildFlatCodesByCountStr(IEnumerable<SpArticulGrupMenViewModel> items)
         {
             var flat = new List<int>(10);
+            /*
             foreach (var it in items)
             {
                 int times = it.countStr > 0 ? it.countStr : 1;
@@ -1156,6 +1163,7 @@ namespace SewingProduction.Features.Articul.Forms
                     if (it.Kod > 0) flat.Add(it.Kod);
                 if (flat.Count >= 10) break;
             }
+            */
             return flat;
         }
 
@@ -1170,7 +1178,7 @@ namespace SewingProduction.Features.Articul.Forms
 
         private async void customButtonKompl_Click(object sender, EventArgs e)
         {
-            if (!customCheckBoxVerified.Checked)
+            /*if (!customCheckBoxVerified.Checked)
                 return;
 
             var razmList = customGridControlKomplRazm.DataSource as List<SpArticulGrupMenViewModel>;
@@ -1194,6 +1202,7 @@ namespace SewingProduction.Features.Articul.Forms
                     Sost_k = mainItem.Sost,
                     CompName = Environment.MachineName
                 };
+                
                 FillKodSlots(kompl, flatCodes);
 
                 if (await komplService.ExistsExactAsync(kompl))
@@ -1233,6 +1242,7 @@ namespace SewingProduction.Features.Articul.Forms
                 await loadKomplByArticul(kompl.Articul_k);
                 customNumericUpDownValueTab.Value = 0;
                 return;
+            
             }
 
             // =========================
@@ -1298,6 +1308,7 @@ namespace SewingProduction.Features.Articul.Forms
 
             foreach (var r in razmList) r.Pr_po = false;
             gridViewKomplRazm.RefreshData();
+            */
         }
 
         async Task loadKomplByArticul(string articul_k)
@@ -1309,7 +1320,8 @@ namespace SewingProduction.Features.Articul.Forms
         private Dictionary<int, ArticulModel> _artByKod;
         void loadKodForKompl()
         {
-            customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
+            /*
+             * customGridControlKompl.LevelTree.Nodes[0].RelationName = "Коды";
             customGridControlKompl.LevelTree.Nodes[0].LevelTemplate = gridViewKomplKod;
 
             gridViewKomplKod.Columns.Clear();
@@ -1353,7 +1365,7 @@ namespace SewingProduction.Features.Articul.Forms
                 _artByKod = (articuls ?? new List<ArticulModel>()).GroupBy(a => a.Kod)
                              .ToDictionary(g => g.Key, g => g.First());
             }
-
+            
             // fallback-поиск по вкладкам, если кода нет в кэше articuls
             ArticulModel LookupArt(int kod)
             {
@@ -1384,6 +1396,7 @@ namespace SewingProduction.Features.Articul.Forms
                         }
                     }
                 }
+            
                 return null;
             }
             // =======================================================================
@@ -1437,6 +1450,7 @@ namespace SewingProduction.Features.Articul.Forms
             {
                 gridViewKompl.ExpandMasterRow(handle);
             }
+            */
         }
 
         #endregion

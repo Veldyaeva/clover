@@ -14,6 +14,7 @@ namespace SewingProduction.Models
         private string _group;
         private string _articul;
         private string _mod;
+        private string _size_label;
         private int _sek;
         private int _diz;
         private int _constr;
@@ -47,6 +48,11 @@ namespace SewingProduction.Models
             set { if (_mod != value) { _mod = value; OnPropertyChanged(nameof(Mod)); } }
         }
 
+        public string Size_label
+        {
+            get => _size_label;
+            set { if (_size_label != value) { _size_label = value; OnPropertyChanged(nameof(Size_label)); } }
+        }
         public int Sek
         {
             get => _sek;
@@ -141,8 +147,10 @@ namespace SewingProduction.Models
         [Column("annCompDel")]
         public string compDel { get; set; }
         [Column("annDateAdd")]
+        [NotMapped]
         public DateTime? dateAdd { get; set; }
         [Column("annCompAdd")]
+        [NotMapped]
         public string compAdd { get; set; }
 
         [Column("sek_kr")]
@@ -227,6 +235,7 @@ namespace SewingProduction.Models
             this.grup = source.grup; 
             this.Articul = source.Articul;
             this.Mod = source.Mod;
+            this.Size_label = source.Size_label;
             this.SekShv = source.SekShv;
             this.SekVyaz3 = source.SekVyaz3;
             this.SekVyaz5 = source.SekVyaz5;
@@ -239,17 +248,17 @@ namespace SewingProduction.Models
             this.Sek = source.Sek;
             this.Komment = source.Komment;
             this.Reco = source.Reco; 
-            this.dateCreate = source.dateCreate;
+            //this.dateCreate = source.dateCreate;
             this.Diz = source.Diz;
             this.Constr = source.Constr;
-            this.dateUpdate = source.dateUpdate;
+            //this.dateUpdate = source.dateUpdate;
             this.SekKr = source.SekKr;
             this.Slogn = source.Slogn;
-            this.Status = source.Status;
-            this.StatusText = source.StatusText; 
-            this.Arh = source.Arh;
+            //this.Status = source.Status;
+            //this.StatusText = source.StatusText; 
+            //this.Arh = source.Arh;
             this.Seb = source.Seb;
-            this.ParentId = source.ParentId;
+            //this.ParentId = source.ParentId;
             this.SekVyaz14 = source.SekVyaz14;
             this.SekVyaz70 = source.SekVyaz70;
             this.SekVyaz71 = source.SekVyaz71;
@@ -258,10 +267,10 @@ namespace SewingProduction.Models
             this.SekVyaz57 = source.SekVyaz57;
             this.SekVyaz18 = source.SekVyaz18;
             this.SekShv1 = source.SekShv1;
-            this.dateDel = source.dateDel;
-            this.compDel = source.compDel;
-            this.dateAdd = source.dateAdd;
-            this.compAdd = source.compAdd;
+            //this.dateDel = source.dateDel;
+            //this.compDel = source.compDel;
+            //this.dateAdd = source.dateAdd;
+            //this.compAdd = source.compAdd;
         }
 
         public ArtNormN Clone()

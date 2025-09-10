@@ -28,13 +28,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.LoadFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Загружаем настройки split container
-                _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+          //      _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
                 // Загружаем настройки для всех гридов
                 _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.LoadGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.LoadGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -46,10 +46,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.LoadGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.LoadGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.LoadGridViewSettings(gridView2, "gridView2Layout.xml");
-                if (gridView3 != null)
-                    _gridHelper.LoadGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.LoadGridViewSettings(normKontTab, "gridView2Layout.xml");
+                if (normRaskArt != null)
+                    _gridHelper.LoadGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)
                     _gridHelper.LoadGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -66,13 +66,13 @@ namespace SewingProduction.Features.TeamWork.Forms
                 _formSettingsHelper.SaveFormSettings(this, "TeamWorkFormLayout.xml");
 
                 // Сохраняем настройки split container
-                _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+        //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
                 // Сохраняем настройки для всех гридов
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
-                _gridHelper.SaveGridViewSettings(gridView6, "gridView6Layout.xml");
+                _gridHelper.SaveGridViewSettings(normRaszTab, "gridView6Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_unboundArts, "gridView_unboundArtsLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView_wdToBind, "gridView_wdToBindLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridViewPreArch, "gridViewPreArchLayout.xml");
@@ -84,10 +84,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                     _gridHelper.SaveGridViewSettings(gridViewRaskrTW, "gridViewRaskrTWLayout.xml");
                 if (gridView5 != null)
                     _gridHelper.SaveGridViewSettings(gridView5, "gridView5Layout.xml");
-                if (gridView2 != null)
-                    _gridHelper.SaveGridViewSettings(gridView2, "gridView2Layout.xml");
-                if (gridView3 != null)
-                    _gridHelper.SaveGridViewSettings(gridView3, "gridView3Layout.xml");
+                if (normKontTab != null)
+                    _gridHelper.SaveGridViewSettings(normKontTab, "gridView2Layout.xml");
+                if (normRaskArt != null)
+                    _gridHelper.SaveGridViewSettings(normRaskArt, "gridView3Layout.xml");
                 if (gridView8 != null)
                     _gridHelper.SaveGridViewSettings(gridView8, "gridView8Layout.xml");
             }
@@ -101,101 +101,6 @@ namespace SewingProduction.Features.TeamWork.Forms
         /// </summary>
         private void filterTable()
         {
-            //try
-            //{
-            //    // Сохраняем текущий общий фильтр (включая поиск и фильтры колонок)
-            //    CriteriaOperator existingFilter = ANNgridView.ActiveFilterCriteria;
-
-            //    // Создаем фильтры на основе состояния чекбоксов
-            //    CriteriaOperator statusCriteria = null;
-            //    GroupOperator statusGroup = null;
-
-            //    // Создаем фильтр по статусу
-            //    if (preliminaryCheckBox.Checked || actualCheckBox.Checked || archiveCheckBox.Checked)
-            //    {
-            //        var statusFilters = new List<CriteriaOperator>();
-
-            //        if (preliminaryCheckBox.Checked)
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Preliminary));
-
-            //        if (actualCheckBox.Checked)
-            //        {
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.PreliminaryArchive));
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Actual));
-            //        }
-
-            //        if (archiveCheckBox.Checked)
-            //            statusFilters.Add(new BinaryOperator("Status", (int)Status.Archive));
-
-            //        if (statusFilters.Count > 1)
-            //        {
-            //            statusGroup = new GroupOperator(GroupOperatorType.Or, statusFilters.ToArray());
-            //            statusCriteria = statusGroup;
-            //        }
-            //        else if (statusFilters.Count == 1)
-            //        {
-            //            statusCriteria = statusFilters[0];
-            //        }
-            //    }
-
-            //    // Добавляем фильтр по "Не описанные" если выбран
-            //    if (SortBox.Checked)
-            //    {
-            //        var updateIsEmpty = new GroupOperator(
-            //            GroupOperatorType.Or,
-            //            new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
-            //        );
-
-            //        var excludeArchived = new BinaryOperator("Status", (int)Status.Archive, BinaryOperatorType.NotEqual);
-            //        archiveCheckBox.Checked = false;
-            //        archiveCheckBox.Enabled = false;
-            //        var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
-
-            //        if (statusCriteria != null)
-            //            statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
-            //        else
-            //            statusCriteria = notDescribedFilter;
-            //    }
-            //    else archiveCheckBox.Enabled = true;
-
-            //    // Собираем итоговый фильтр, не стирая текущие фильтры (поиск, фильтры колонок)
-            //    ANNgridView.BeginUpdate();
-            //    try
-            //    {
-            //        CriteriaOperator combinedFilter = null;
-
-            //        if (statusCriteria != null && existingFilter != null)
-            //        {
-            //            combinedFilter = new GroupOperator(GroupOperatorType.And, existingFilter, statusCriteria);
-            //        }
-            //        else if (statusCriteria != null)
-            //        {
-            //            combinedFilter = statusCriteria;
-            //        }
-            //        else if (existingFilter != null)
-            //        {
-            //            combinedFilter = existingFilter;
-            //        }
-
-            //        if (combinedFilter != null)
-            //        {
-            //            ANNgridView.ActiveFilterCriteria = combinedFilter;
-            //        }
-            //        else
-            //        {
-            //            // Нет ни статусного фильтра, ни текущего поискового фильтра
-            //            ANNgridView.ActiveFilterString = string.Empty;
-            //        }
-            //    }
-            //    finally
-            //    {
-            //        ANNgridView.EndUpdate();
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    _logger.LogErrorAsync(ex, "Ошибка при применении фильтра");
-            //}
             try
             {
                 // Сохраняем текущий фильтр поиска, если он есть
@@ -254,15 +159,30 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Добавляем фильтр по "Не описанные" если выбран
                 if (SortBox.Checked)
                 {
-                    var updateIsEmpty = new GroupOperator(
+                    // Условие: dateUpdate IS NULL OR дата dateUpdate = сегодня (без времени)
+                    // Необходимо, чтоб пользователь видел записи, с которыми работал сегодня
+                    var updateIsEmpty = new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"));
+                    
+                    // Сравниваем диапазон: от начала дня до конца дня
+                    var todayStart = DateTime.Today; // 00:00:00
+                    var todayEnd = DateTime.Today.AddDays(1).AddTicks(-1); // 23:59:59.9999999
+                    
+                    var updateIsToday = new GroupOperator(
+                        GroupOperatorType.And,
+                        new BinaryOperator("dateUpdate", todayStart, BinaryOperatorType.GreaterOrEqual),
+                        new BinaryOperator("dateUpdate", todayEnd, BinaryOperatorType.LessOrEqual)
+                    );
+                    
+                    var updateCondition = new GroupOperator(
                         GroupOperatorType.Or,
-                        new UnaryOperator(UnaryOperatorType.IsNull, new OperandProperty("dateUpdate"))
+                        updateIsEmpty,
+                        updateIsToday
                     );
 
                     var excludeArchived = new BinaryOperator("status", (int)Status.Archive, BinaryOperatorType.NotEqual);
                     archiveCheckBox.Checked = false;
                     archiveCheckBox.Enabled = false;
-                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateIsEmpty, excludeArchived);
+                    var notDescribedFilter = new GroupOperator(GroupOperatorType.And, updateCondition, excludeArchived);
 
                     if (statusCriteria != null)
                         statusCriteria = new GroupOperator(GroupOperatorType.And, statusCriteria, notDescribedFilter);
@@ -405,11 +325,12 @@ namespace SewingProduction.Features.TeamWork.Forms
             return new MyDataANN
             {
                 AnnID = ann.AnnID,
-                Kod = ann.Kod,
+                //Kod = ann.Kod,
                 Articul = ann.Articul,
                 Status = ann.Status,
                 grup = ann.grup,
                 mod = ann.Mod,
+                dateUpdate = ann.dateUpdate,
             };
         }
 
