@@ -61,12 +61,6 @@ namespace SewingProduction.form
             gridColumn38 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridColumn37 = new DevExpress.XtraGrid.Columns.GridColumn();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            customLabel1 = new CustomLabel();
-            customLabel2 = new CustomLabel();
-            customLabel3 = new CustomLabel();
-            customLabel4 = new CustomLabel();
-            customLabel5 = new CustomLabel();
-            customLabel6 = new CustomLabel();
             customTextBox1 = new CustomTextBox();
             customTextBox2 = new CustomTextBox();
             customTextBox3 = new CustomTextBox();
@@ -80,13 +74,9 @@ namespace SewingProduction.form
             ctbOlNameFull = new CustomTextBox();
             simpleButton16 = new CustomSimpleButton();
             simpleButton15 = new CustomSimpleButton();
-            label6 = new CustomLabel();
             simpleButton17 = new CustomSimpleButton();
             tableLayoutPanel14 = new System.Windows.Forms.TableLayoutPanel();
             panel6 = new System.Windows.Forms.Panel();
-            customLabel11 = new CustomLabel();
-            customLabel10 = new CustomLabel();
-            customLabel9 = new CustomLabel();
             tbNlNom = new CustomTextBox();
             simpleButton6 = new CustomSimpleButton();
             tbPachNumber = new CustomTextBox();
@@ -99,9 +89,6 @@ namespace SewingProduction.form
             radioButton7 = new CustomRadioButton();
             radioButton9 = new CustomRadioButton();
             panel5 = new System.Windows.Forms.Panel();
-            customLabel8 = new CustomLabel();
-            customLabel7 = new CustomLabel();
-            label5 = new CustomLabel();
             simpleButton5 = new CustomSimpleButton();
             cbMonthList = new CustomComboBox();
             tbYearPlan = new CustomTextBox();
@@ -122,19 +109,11 @@ namespace SewingProduction.form
             simpleButton9 = new CustomSimpleButton();
             simpleButton8 = new CustomSimpleButton();
             simpleButton12 = new CustomSimpleButton();
-            customLabel12 = new CustomLabel();
-            customLabel13 = new CustomLabel();
-            customLabel14 = new CustomLabel();
-            customLabel15 = new CustomLabel();
-            customLabel16 = new CustomLabel();
             tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             simpleButton14 = new CustomSimpleButton();
             simpleButton13 = new CustomSimpleButton();
             textBox7 = new CustomTextBox();
             textBox6 = new CustomTextBox();
-            customLabel17 = new CustomLabel();
-            customLabel18 = new CustomLabel();
-            customLabel19 = new CustomLabel();
             gridControlPzOperList = new CustomGridControl();
             gridViewPzOperList = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridColumn36 = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -166,8 +145,6 @@ namespace SewingProduction.form
             gridColumn57 = new DevExpress.XtraGrid.Columns.GridColumn();
             gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             panel10 = new System.Windows.Forms.Panel();
-            label1 = new CustomLabel();
-            lblBrigName = new CustomLabel();
             simpleButton2 = new CustomSimpleButton();
             tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             tbPList = new CustomTextBox();
@@ -201,11 +178,8 @@ namespace SewingProduction.form
             panel3 = new System.Windows.Forms.Panel();
             customGroupBox1 = new CustomGroupBox();
             tablePanel1 = new DevExpress.Utils.Layout.TablePanel();
-            label4 = new CustomLabel();
-            label2 = new CustomLabel();
             panel4 = new System.Windows.Forms.Panel();
             tablePanel2 = new DevExpress.Utils.Layout.TablePanel();
-            label3 = new CustomLabel();
             ((System.ComponentModel.ISupportInitialize)bsPzOperList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsOborudList).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsGroupOborudList).BeginInit();
@@ -578,12 +552,6 @@ namespace SewingProduction.form
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 104F));
             tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
-            tableLayoutPanel2.Controls.Add(customLabel1, 0, 0);
-            tableLayoutPanel2.Controls.Add(customLabel2, 0, 1);
-            tableLayoutPanel2.Controls.Add(customLabel3, 0, 2);
-            tableLayoutPanel2.Controls.Add(customLabel4, 2, 0);
-            tableLayoutPanel2.Controls.Add(customLabel5, 2, 1);
-            tableLayoutPanel2.Controls.Add(customLabel6, 2, 2);
             tableLayoutPanel2.Controls.Add(customTextBox1, 1, 0);
             tableLayoutPanel2.Controls.Add(customTextBox2, 1, 1);
             tableLayoutPanel2.Controls.Add(customTextBox3, 1, 2);
@@ -601,78 +569,6 @@ namespace SewingProduction.form
             tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 23F));
             tableLayoutPanel2.Size = new System.Drawing.Size(341, 89);
             tableLayoutPanel2.TabIndex = 43;
-            // 
-            // customLabel1
-            // 
-            customLabel1.AutoSize = true;
-            customLabel1.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel1.Location = new System.Drawing.Point(4, 0);
-            customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel1.Name = "customLabel1";
-            customLabel1.Size = new System.Drawing.Size(84, 28);
-            customLabel1.TabIndex = 0;
-            customLabel1.Text = "customLabel1";
-            // 
-            // customLabel2
-            // 
-            customLabel2.AutoSize = true;
-            customLabel2.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel2.Location = new System.Drawing.Point(4, 28);
-            customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel2.Name = "customLabel2";
-            customLabel2.Size = new System.Drawing.Size(84, 28);
-            customLabel2.TabIndex = 1;
-            customLabel2.Text = "customLabel2";
-            // 
-            // customLabel3
-            // 
-            customLabel3.AutoSize = true;
-            customLabel3.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel3.Location = new System.Drawing.Point(4, 56);
-            customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel3.Name = "customLabel3";
-            customLabel3.Size = new System.Drawing.Size(84, 32);
-            customLabel3.TabIndex = 2;
-            customLabel3.Text = "customLabel3";
-            // 
-            // customLabel4
-            // 
-            customLabel4.AutoSize = true;
-            customLabel4.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel4.Location = new System.Drawing.Point(168, 0);
-            customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel4.Name = "customLabel4";
-            customLabel4.Size = new System.Drawing.Size(95, 16);
-            customLabel4.TabIndex = 3;
-            customLabel4.Text = "customLabel4";
-            // 
-            // customLabel5
-            // 
-            customLabel5.AutoSize = true;
-            customLabel5.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel5.Location = new System.Drawing.Point(168, 28);
-            customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel5.Name = "customLabel5";
-            customLabel5.Size = new System.Drawing.Size(95, 16);
-            customLabel5.TabIndex = 4;
-            customLabel5.Text = "customLabel5";
-            // 
-            // customLabel6
-            // 
-            customLabel6.AutoSize = true;
-            customLabel6.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel6.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel6.Location = new System.Drawing.Point(168, 56);
-            customLabel6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel6.Name = "customLabel6";
-            customLabel6.Size = new System.Drawing.Size(95, 16);
-            customLabel6.TabIndex = 5;
-            customLabel6.Text = "customLabel6";
             // 
             // customTextBox1
             // 
@@ -754,7 +650,6 @@ namespace SewingProduction.form
             tableLayoutPanel3.Controls.Add(ctbOlNameFull, 0, 0);
             tableLayoutPanel3.Controls.Add(simpleButton16, 3, 0);
             tableLayoutPanel3.Controls.Add(simpleButton15, 2, 0);
-            tableLayoutPanel3.Controls.Add(label6, 0, 1);
             tableLayoutPanel3.Controls.Add(simpleButton17, 2, 1);
             tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel3.Location = new System.Drawing.Point(4, 799);
@@ -835,20 +730,6 @@ namespace SewingProduction.form
             simpleButton15.TabIndex = 34;
             simpleButton15.Text = "Таб 999 по V";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            label6.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
-            label6.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label6.Location = new System.Drawing.Point(4, 31);
-            label6.Margin = new System.Windows.Forms.Padding(4, 1, 4, 1);
-            label6.Name = "label6";
-            label6.Size = new System.Drawing.Size(417, 31);
-            label6.TabIndex = 0;
-            label6.Text = "Дата запрета редактирования";
-            label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // simpleButton17
             // 
             tableLayoutPanel3.SetColumnSpan(simpleButton17, 2);
@@ -890,9 +771,6 @@ namespace SewingProduction.form
             // 
             // panel6
             // 
-            panel6.Controls.Add(customLabel11);
-            panel6.Controls.Add(customLabel10);
-            panel6.Controls.Add(customLabel9);
             panel6.Controls.Add(tbNlNom);
             panel6.Controls.Add(simpleButton6);
             panel6.Controls.Add(tbPachNumber);
@@ -904,45 +782,6 @@ namespace SewingProduction.form
             tableLayoutPanel14.SetRowSpan(panel6, 3);
             panel6.Size = new System.Drawing.Size(305, 73);
             panel6.TabIndex = 23;
-            // 
-            // customLabel11
-            // 
-            customLabel11.AutoSize = true;
-            customLabel11.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel11.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel11.Location = new System.Drawing.Point(186, 9);
-            customLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel11.Name = "customLabel11";
-            customLabel11.Size = new System.Drawing.Size(49, 16);
-            customLabel11.TabIndex = 24;
-            customLabel11.Text = "Пачка:";
-            customLabel11.Click += customLabel11_Click;
-            // 
-            // customLabel10
-            // 
-            customLabel10.AutoSize = true;
-            customLabel10.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel10.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel10.Location = new System.Drawing.Point(100, 9);
-            customLabel10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel10.Name = "customLabel10";
-            customLabel10.Size = new System.Drawing.Size(34, 16);
-            customLabel10.TabIndex = 23;
-            customLabel10.Text = "Год:";
-            customLabel10.Click += customLabel10_Click;
-            // 
-            // customLabel9
-            // 
-            customLabel9.AutoSize = true;
-            customLabel9.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel9.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel9.Location = new System.Drawing.Point(5, 9);
-            customLabel9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel9.Name = "customLabel9";
-            customLabel9.Size = new System.Drawing.Size(22, 16);
-            customLabel9.TabIndex = 22;
-            customLabel9.Text = "№";
-            customLabel9.Click += customLabel9_Click;
             // 
             // tbNlNom
             // 
@@ -1099,9 +938,6 @@ namespace SewingProduction.form
             // 
             // panel5
             // 
-            panel5.Controls.Add(customLabel8);
-            panel5.Controls.Add(customLabel7);
-            panel5.Controls.Add(label5);
             panel5.Controls.Add(simpleButton5);
             panel5.Controls.Add(cbMonthList);
             panel5.Controls.Add(tbYearPlan);
@@ -1113,43 +949,6 @@ namespace SewingProduction.form
             tableLayoutPanel14.SetRowSpan(panel5, 3);
             panel5.Size = new System.Drawing.Size(183, 73);
             panel5.TabIndex = 22;
-            // 
-            // customLabel8
-            // 
-            customLabel8.AutoSize = true;
-            customLabel8.Font = new System.Drawing.Font("Arial", 9F);
-            customLabel8.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel8.Location = new System.Drawing.Point(1, 18);
-            customLabel8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel8.Name = "customLabel8";
-            customLabel8.Size = new System.Drawing.Size(43, 15);
-            customLabel8.TabIndex = 21;
-            customLabel8.Text = "Месяц";
-            // 
-            // customLabel7
-            // 
-            customLabel7.AutoSize = true;
-            customLabel7.Font = new System.Drawing.Font("Arial", 9F);
-            customLabel7.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel7.Location = new System.Drawing.Point(1, 42);
-            customLabel7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            customLabel7.Name = "customLabel7";
-            customLabel7.Size = new System.Drawing.Size(27, 15);
-            customLabel7.TabIndex = 20;
-            customLabel7.Text = "Год";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Tahoma", 9F);
-            label5.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label5.Location = new System.Drawing.Point(19, 1);
-            label5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(127, 14);
-            label5.TabIndex = 18;
-            label5.Text = "Плановая дата сдачи";
-            label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // simpleButton5
             // 
@@ -1310,11 +1109,6 @@ namespace SewingProduction.form
             tableLayoutPanel1.Controls.Add(simpleButton9, 3, 1);
             tableLayoutPanel1.Controls.Add(simpleButton8, 3, 0);
             tableLayoutPanel1.Controls.Add(simpleButton12, 9, 0);
-            tableLayoutPanel1.Controls.Add(customLabel12, 0, 0);
-            tableLayoutPanel1.Controls.Add(customLabel13, 1, 0);
-            tableLayoutPanel1.Controls.Add(customLabel14, 1, 1);
-            tableLayoutPanel1.Controls.Add(customLabel15, 5, 0);
-            tableLayoutPanel1.Controls.Add(customLabel16, 5, 1);
             tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel1.Location = new System.Drawing.Point(4, 396);
             tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1450,77 +1244,6 @@ namespace SewingProduction.form
             simpleButton12.TabIndex = 24;
             simpleButton12.Text = "Обновить";
             // 
-            // customLabel12
-            // 
-            customLabel12.AutoSize = true;
-            customLabel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel12.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            customLabel12.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel12.Location = new System.Drawing.Point(4, 3);
-            customLabel12.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel12.Name = "customLabel12";
-            tableLayoutPanel1.SetRowSpan(customLabel12, 2);
-            customLabel12.Size = new System.Drawing.Size(86, 62);
-            customLabel12.TabIndex = 32;
-            customLabel12.Text = "ФИЛЬТР";
-            customLabel12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel13
-            // 
-            customLabel13.AutoSize = true;
-            customLabel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel13.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel13.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel13.Location = new System.Drawing.Point(98, 3);
-            customLabel13.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel13.Name = "customLabel13";
-            customLabel13.Size = new System.Drawing.Size(69, 28);
-            customLabel13.TabIndex = 33;
-            customLabel13.Text = "статус";
-            customLabel13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel14
-            // 
-            customLabel14.AutoSize = true;
-            customLabel14.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel14.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel14.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel14.Location = new System.Drawing.Point(98, 37);
-            customLabel14.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel14.Name = "customLabel14";
-            customLabel14.Size = new System.Drawing.Size(69, 28);
-            customLabel14.TabIndex = 34;
-            customLabel14.Text = "ФИО";
-            customLabel14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel15
-            // 
-            customLabel15.AutoSize = true;
-            customLabel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel15.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel15.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel15.Location = new System.Drawing.Point(536, 3);
-            customLabel15.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel15.Name = "customLabel15";
-            customLabel15.Size = new System.Drawing.Size(125, 28);
-            customLabel15.TabIndex = 35;
-            customLabel15.Text = "группа оборуд.";
-            customLabel15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel16
-            // 
-            customLabel16.AutoSize = true;
-            customLabel16.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel16.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel16.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel16.Location = new System.Drawing.Point(536, 37);
-            customLabel16.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel16.Name = "customLabel16";
-            customLabel16.Size = new System.Drawing.Size(125, 28);
-            customLabel16.TabIndex = 36;
-            customLabel16.Text = "оборуд.";
-            customLabel16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // tableLayoutPanel9
             // 
             tableLayoutPanel9.ColumnCount = 10;
@@ -1539,9 +1262,6 @@ namespace SewingProduction.form
             tableLayoutPanel9.Controls.Add(simpleButton13, 7, 0);
             tableLayoutPanel9.Controls.Add(textBox7, 5, 0);
             tableLayoutPanel9.Controls.Add(textBox6, 2, 0);
-            tableLayoutPanel9.Controls.Add(customLabel17, 0, 0);
-            tableLayoutPanel9.Controls.Add(customLabel18, 1, 0);
-            tableLayoutPanel9.Controls.Add(customLabel19, 4, 0);
             tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             tableLayoutPanel9.Location = new System.Drawing.Point(4, 470);
             tableLayoutPanel9.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -1598,48 +1318,6 @@ namespace SewingProduction.form
             textBox6.Name = "textBox6";
             textBox6.Size = new System.Drawing.Size(152, 23);
             textBox6.TabIndex = 24;
-            // 
-            // customLabel17
-            // 
-            customLabel17.AutoSize = true;
-            customLabel17.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel17.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Bold);
-            customLabel17.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel17.Location = new System.Drawing.Point(4, 3);
-            customLabel17.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel17.Name = "customLabel17";
-            customLabel17.Size = new System.Drawing.Size(86, 32);
-            customLabel17.TabIndex = 34;
-            customLabel17.Text = "ПОИСК";
-            customLabel17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel18
-            // 
-            customLabel18.AutoSize = true;
-            customLabel18.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel18.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel18.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel18.Location = new System.Drawing.Point(98, 3);
-            customLabel18.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel18.Name = "customLabel18";
-            customLabel18.Size = new System.Drawing.Size(68, 32);
-            customLabel18.TabIndex = 35;
-            customLabel18.Text = "артикул";
-            customLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // customLabel19
-            // 
-            customLabel19.AutoSize = true;
-            customLabel19.Dock = System.Windows.Forms.DockStyle.Fill;
-            customLabel19.Font = new System.Drawing.Font("Arial", 10F);
-            customLabel19.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            customLabel19.Location = new System.Drawing.Point(424, 3);
-            customLabel19.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customLabel19.Name = "customLabel19";
-            customLabel19.Size = new System.Drawing.Size(51, 32);
-            customLabel19.TabIndex = 36;
-            customLabel19.Text = "пачка";
-            customLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // gridControlPzOperList
             // 
@@ -1994,8 +1672,6 @@ namespace SewingProduction.form
             // 
             // panel10
             // 
-            panel10.Controls.Add(label1);
-            panel10.Controls.Add(lblBrigName);
             panel10.Controls.Add(simpleButton2);
             panel10.Dock = System.Windows.Forms.DockStyle.Fill;
             panel10.Location = new System.Drawing.Point(4, 3);
@@ -2003,30 +1679,6 @@ namespace SewingProduction.form
             panel10.Name = "panel10";
             panel10.Size = new System.Drawing.Size(1190, 24);
             panel10.TabIndex = 0;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            label1.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label1.Location = new System.Drawing.Point(430, 0);
-            label1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(300, 19);
-            label1.TabIndex = 4;
-            label1.Text = "НЕЗАВЕРШЕННОЕ ПРОИЗВОДСТВО";
-            // 
-            // lblBrigName
-            // 
-            lblBrigName.AutoSize = true;
-            lblBrigName.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            lblBrigName.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            lblBrigName.Location = new System.Drawing.Point(-2, 2);
-            lblBrigName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            lblBrigName.Name = "lblBrigName";
-            lblBrigName.Size = new System.Drawing.Size(270, 19);
-            lblBrigName.TabIndex = 7;
-            lblBrigName.Text = "бригада № /заполнить позже/";
             // 
             // simpleButton2
             // 
@@ -2402,8 +2054,6 @@ namespace SewingProduction.form
             // 
             panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel3.Controls.Add(customGroupBox1);
-            panel3.Controls.Add(label4);
-            panel3.Controls.Add(label2);
             panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             panel3.Location = new System.Drawing.Point(4, 3);
             panel3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2437,35 +2087,10 @@ namespace SewingProduction.form
             tablePanel1.TabIndex = 0;
             tablePanel1.UseSkinIndents = true;
             // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            label4.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label4.Location = new System.Drawing.Point(705, 0);
-            label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label4.Name = "label4";
-            label4.Size = new System.Drawing.Size(68, 19);
-            label4.TabIndex = 6;
-            label4.Text = "СМЕНА";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            label2.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label2.Location = new System.Drawing.Point(419, 0);
-            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(175, 19);
-            label2.TabIndex = 5;
-            label2.Text = "СМЕННОЕ ЗАДАНИЕ";
-            // 
             // panel4
             // 
             panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             panel4.Controls.Add(tablePanel2);
-            panel4.Controls.Add(label3);
             panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             panel4.Location = new System.Drawing.Point(4, 486);
             panel4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2483,18 +2108,6 @@ namespace SewingProduction.form
             tablePanel2.Size = new System.Drawing.Size(792, 51);
             tablePanel2.TabIndex = 0;
             tablePanel2.UseSkinIndents = true;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold);
-            label3.ForeColor = System.Drawing.Color.FromArgb(139, 69, 19);
-            label3.Location = new System.Drawing.Point(430, 0);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(154, 19);
-            label3.TabIndex = 6;
-            label3.Text = "НАРЯД-ЗАДАНИЕ";
             // 
             // PlanZagrBrig
             // 
@@ -2538,7 +2151,6 @@ namespace SewingProduction.form
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel1.PerformLayout();
             tableLayoutPanel9.ResumeLayout(false);
             tableLayoutPanel9.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlPzOperList).EndInit();
@@ -2547,7 +2159,6 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)repositoryItemCheckEdit5).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView2).EndInit();
             panel10.ResumeLayout(false);
-            panel10.PerformLayout();
             tableLayoutPanel7.ResumeLayout(false);
             tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gridControlPzArticulList).EndInit();
@@ -2561,11 +2172,9 @@ namespace SewingProduction.form
             ((System.ComponentModel.ISupportInitialize)gridView3).EndInit();
             tableLayoutPanel5.ResumeLayout(false);
             panel3.ResumeLayout(false);
-            panel3.PerformLayout();
             customGroupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)tablePanel1).EndInit();
             panel4.ResumeLayout(false);
-            panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)tablePanel2).EndInit();
             ResumeLayout(false);
         }

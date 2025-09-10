@@ -13,6 +13,7 @@ namespace SewingProduction.Models
         public int Status { get; set; }
         public string grup { get; set; }
         public string mod { get; set; }
+        public string size_label { get; set; }
         [Column("data_obn")]
         public DateTime? dateUpdate { get; set; }
         [NotMapped]

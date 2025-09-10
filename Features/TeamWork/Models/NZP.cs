@@ -17,6 +17,14 @@ namespace SewingProduction.Models
         public int kodd { get; set; }
         [Column("grup")]
         public string grup { get; set; }
+        [Column("minSize")]
+        [NotMapped]
+        public string minSize { get; set; }
+        [Column("maxSize")]
+        [NotMapped]
+        public string maxSize { get; set; }
+        [Column("articulForRT")]
+        public string articulForRT {  get; set; }
         [Column("articul")]
         public string articul { get; set; }
         [Column("mod")]
@@ -31,5 +39,8 @@ namespace SewingProduction.Models
         public int PZTCount { get; set; }
         [Column ("data_r")]
         public DateTime? data_r { get; set; }
+        
+        [NotMapped]
+        public bool IsChecked { get; set; }
     }
 }

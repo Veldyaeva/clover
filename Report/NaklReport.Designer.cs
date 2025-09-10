@@ -38,6 +38,7 @@
             DevExpress.XtraPrinting.BarCode.Code39Generator code39Generator1 = new DevExpress.XtraPrinting.BarCode.Code39Generator();
             DevExpress.XtraReports.UI.XRSummary xrSummary2 = new DevExpress.XtraReports.UI.XRSummary();
             DevExpress.XtraReports.Parameters.StaticListLookUpSettings staticListLookUpSettings1 = new DevExpress.XtraReports.Parameters.StaticListLookUpSettings();
+            DevExpress.XtraReports.UI.XRWatermark xrWatermark1 = new DevExpress.XtraReports.UI.XRWatermark();
             this.sqlACEDataSource = new DevExpress.DataAccess.Sql.SqlDataSource(this.components);
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.xrLabel47 = new DevExpress.XtraReports.UI.XRLabel();
@@ -180,7 +181,7 @@
             selectQuery1.GroupFilterString = "";
             selectQuery1.Name = "PrintNaklView";
             queryParameter1.Name = "_naklIz";
-            queryParameter1.Type = typeof(DevExpress.DataAccess.Expression);
+            queryParameter1.Type = typeof(global::DevExpress.DataAccess.Expression);
             queryParameter1.Value = new DevExpress.DataAccess.Expression("?_naklIz", typeof(string));
             selectQuery1.Parameters.AddRange(new DevExpress.DataAccess.Sql.QueryParameter[] {
             queryParameter1});
@@ -2042,7 +2043,7 @@
             this._naklIz.ValueSourceSettings = staticListLookUpSettings1;
             this._naklIz.Visible = false;
             // 
-            // PrintNaklReport
+            // NaklReport
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.TopMargin,
@@ -2083,12 +2084,15 @@
             this.GrandTotalData1,
             this.GrandTotalBackground1,
             this.PageInfo});
-            this.Version = "22.2";
-            this.Watermark.ForeColor = System.Drawing.Color.Gainsboro;
-            this.Watermark.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.Watermark.ImageViewMode = DevExpress.XtraPrinting.Drawing.ImageViewMode.Stretch;
-            this.Watermark.TextDirection = DevExpress.XtraPrinting.Drawing.DirectionMode.Horizontal;
-            this.Watermark.TextTransparency = 85;
+            this.Version = "24.2";
+            xrWatermark1.ForeColor = System.Drawing.Color.Gainsboro;
+            xrWatermark1.Id = "Watermark1";
+            xrWatermark1.ImageAlignment = DevExpress.XtraPrinting.ImageAlignment.BottomCenter;
+            xrWatermark1.ImageViewMode = DevExpress.XtraPrinting.Drawing.ImageViewMode.Stretch;
+            xrWatermark1.TextDirection = DevExpress.XtraPrinting.Drawing.DirectionMode.Horizontal;
+            xrWatermark1.TextTransparency = 85;
+            this.Watermarks.AddRange(new DevExpress.XtraPrinting.Drawing.Watermark[] {
+            xrWatermark1});
             this.DataSourceRowChanged += new DevExpress.XtraReports.UI.DataSourceRowEventHandler(this.PrintNaklReport_DataSourceRowChanged);
             this.BeforePrint += new DevExpress.XtraReports.UI.BeforePrintEventHandler(this.PrintNaklReport_BeforePrint);
             ((System.ComponentModel.ISupportInitialize)(this.table2)).EndInit();
