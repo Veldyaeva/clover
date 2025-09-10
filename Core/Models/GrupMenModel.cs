@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SewingProduction.Models;
 
-namespace SewingProduction.Features.Articul.Models
+namespace SewingProduction.Core.Models
 {
     public class GrupMenModel : INotifyPropertyChanged
     {
@@ -32,8 +32,11 @@ namespace SewingProduction.Features.Articul.Models
             get => _men;
             set { if (_men != value) { _men = value; OnPropertyChanged(nameof(Men)); } }
         }
+        
+        
 
         public List<ArticulModel> Articuls { get; set; } = new List<ArticulModel>();
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SewingProduction.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,16 +10,16 @@ using System.Windows.Forms;
 
 namespace SewingProduction.Features.Articul.Models
 {
-    public class SpArticulGrupMenViewModel : ArticulModel, INotifyPropertyChanged
+    public class SpArticulGrupMenViewModel : ArticulModel
+        //, INotifyPropertyChanged
     {
 
         public GrupMenModel GrupMen { get; set; } = new GrupMenModel();
         public int countStr { get; set; } = 1;
 
-        [NotMapped]
-        public string Po = " ";
-        [NotMapped]
-        public string Razm_all { get; set; }
+
+        //[NotMapped]
+        //public string po = " ";
 
         private bool _pr_po;
         public bool Pr_po
@@ -34,9 +35,10 @@ namespace SewingProduction.Features.Articul.Models
             }
         }
         public int TabIndex { get; set; } = -1;
+        public string Razm_all { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        //public event PropertyChangedEventHandler PropertyChanged;
+        //protected void OnPropertyChanged(string propertyName)
+        //    => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }
