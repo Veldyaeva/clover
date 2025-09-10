@@ -163,10 +163,12 @@
             // 
             this.label1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "\'Простои оборудования по заданию \' + [kzPszNom]")});
+            this.label1.Font = new DevExpress.Drawing.DXFont("Arial", 14.25F, DevExpress.Drawing.DXFontStyle.Bold);
             this.label1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.label1.Name = "label1";
             this.label1.SizeF = new System.Drawing.SizeF(900F, 24.19433F);
             this.label1.StyleName = "Title";
+            this.label1.StylePriority.UseFont = false;
             this.label1.Text = "KnitMachineDownTimeByNomZadReport";
             // 
             // GroupHeader1
@@ -362,7 +364,7 @@
             // 
             this.xrTableCell14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Iif([DaysDiff] > 0, ToStr([DaysDiff]) + \' д. \', \'\') + Iif(ToStr([TimeDiff]) != \'0" +
-                    "0:00:00\', ToStr([TimeDiff]), \'\')")});
+                    "0:00:00\', ToStr([TimeDiff]), \'\')\n")});
             this.xrTableCell14.Multiline = true;
             this.xrTableCell14.Name = "xrTableCell14";
             this.xrTableCell14.Text = "Продолжительность простоя";

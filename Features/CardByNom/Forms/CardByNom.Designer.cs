@@ -426,14 +426,12 @@ namespace SewingProduction
             layoutControlItem36 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem37 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem4 = new DevExpress.XtraLayout.EmptySpaceItem();
-            emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem12 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem28 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem41 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem42 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem6 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem38 = new DevExpress.XtraLayout.LayoutControlItem();
-            emptySpaceItem10 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem40 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem7 = new DevExpress.XtraLayout.EmptySpaceItem();
             layoutControlItem43 = new DevExpress.XtraLayout.LayoutControlItem();
@@ -454,6 +452,8 @@ namespace SewingProduction
             layoutControlItem13 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem14 = new DevExpress.XtraLayout.LayoutControlItem();
             emptySpaceItem12 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem10 = new DevExpress.XtraLayout.EmptySpaceItem();
+            emptySpaceItem5 = new DevExpress.XtraLayout.EmptySpaceItem();
             simpleSeparator3 = new DevExpress.XtraLayout.SimpleSeparator();
             simpleSeparator1 = new DevExpress.XtraLayout.SimpleSeparator();
             layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
@@ -486,10 +486,6 @@ namespace SewingProduction
             layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
             layoutControlItem9 = new DevExpress.XtraLayout.LayoutControlItem();
-            TextBoxPachList = new CustomTextBoxEx();
-            layoutControlItem16 = new DevExpress.XtraLayout.LayoutControlItem();
-            customLabel6 = new CustomLabel();
-            layoutControlItem15 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)pbEskiz).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdSP).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsProizvCombIzdVZP).BeginInit();
@@ -574,14 +570,12 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem36).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem37).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem41).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem42).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem38).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem10).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem40).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem43).BeginInit();
@@ -602,6 +596,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).BeginInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
@@ -631,9 +627,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)TextBoxPachList.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).BeginInit();
             SuspendLayout();
             // 
             // gridColumn40
@@ -1412,14 +1405,14 @@ namespace SewingProduction
             label6.AutoSize = true;
             label6.BackColor = Color.Transparent;
             tablePanel1.SetColumn(label6, 0);
-            tablePanel1.SetColumnSpan(label6, 2);
+            tablePanel1.SetColumnSpan(label6, 3);
             label6.Font = new Font("Arial", 10F);
             label6.ForeColor = Color.FromArgb(0, 0, 0);
-            label6.Location = new Point(15, 74);
+            label6.Location = new Point(15, 77);
             label6.Margin = new Padding(4, 0, 4, 0);
             label6.Name = "label6";
             tablePanel1.SetRow(label6, 2);
-            label6.Size = new Size(78, 22);
+            label6.Size = new Size(131, 16);
             label6.TabIndex = 12;
             label6.Text = "№ пачек в расчете";
             // 
@@ -4482,8 +4475,6 @@ namespace SewingProduction
             // 
             // layoutControl2
             // 
-            layoutControl2.Controls.Add(customLabel6);
-            layoutControl2.Controls.Add(TextBoxPachList);
             layoutControl2.Controls.Add(TextBoxKolPlanZadany);
             layoutControl2.Controls.Add(customLabel5);
             layoutControl2.Controls.Add(gridControlSockDefectList);
@@ -4514,7 +4505,7 @@ namespace SewingProduction
             layoutControl2.Controls.Add(customLabel7);
             layoutControl2.Location = new Point(8, 8);
             layoutControl2.Name = "layoutControl2";
-            layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(293, 185, 650, 400);
+            layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(1070, 182, 650, 400);
             layoutControl2.Root = layoutControlGroup3;
             layoutControl2.Size = new Size(1829, 596);
             layoutControl2.TabIndex = 1;
@@ -4522,7 +4513,7 @@ namespace SewingProduction
             // 
             // TextBoxKolPlanZadany
             // 
-            TextBoxKolPlanZadany.Location = new Point(138, 194);
+            TextBoxKolPlanZadany.Location = new Point(138, 168);
             TextBoxKolPlanZadany.Name = "TextBoxKolPlanZadany";
             TextBoxKolPlanZadany.ObjectName = null;
             TextBoxKolPlanZadany.Properties.Appearance.BackColor = Color.FromArgb(230, 245, 255);
@@ -4531,7 +4522,7 @@ namespace SewingProduction
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseFont = true;
             TextBoxKolPlanZadany.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolPlanZadany.Size = new Size(93, 22);
+            TextBoxKolPlanZadany.Size = new Size(67, 22);
             TextBoxKolPlanZadany.StyleController = layoutControl2;
             TextBoxKolPlanZadany.TabIndex = 24;
             // 
@@ -4539,7 +4530,7 @@ namespace SewingProduction
             // 
             customLabel5.Font = new Font("Arial", 10F);
             customLabel5.ForeColor = Color.FromArgb(30, 70, 140);
-            customLabel5.Location = new Point(24, 194);
+            customLabel5.Location = new Point(24, 168);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new Size(110, 32);
             customLabel5.TabIndex = 23;
@@ -4548,10 +4539,10 @@ namespace SewingProduction
             // gridControlSockDefectList
             // 
             gridControlSockDefectList.Font = new Font("Arial", 10F);
-            gridControlSockDefectList.Location = new Point(290, 231);
+            gridControlSockDefectList.Location = new Point(290, 205);
             gridControlSockDefectList.MainView = gridViewSockDefectList;
             gridControlSockDefectList.Name = "gridControlSockDefectList";
-            gridControlSockDefectList.Size = new Size(483, 139);
+            gridControlSockDefectList.Size = new Size(483, 150);
             gridControlSockDefectList.TabIndex = 22;
             gridControlSockDefectList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewSockDefectList });
             // 
@@ -4645,10 +4636,10 @@ namespace SewingProduction
             // gridControlSockDownTimeList
             // 
             gridControlSockDownTimeList.Font = new Font("Arial", 10F);
-            gridControlSockDownTimeList.Location = new Point(138, 384);
+            gridControlSockDownTimeList.Location = new Point(138, 369);
             gridControlSockDownTimeList.MainView = gridViewSockDownTimeList;
             gridControlSockDownTimeList.Name = "gridControlSockDownTimeList";
-            gridControlSockDownTimeList.Size = new Size(635, 187);
+            gridControlSockDownTimeList.Size = new Size(635, 202);
             gridControlSockDownTimeList.TabIndex = 19;
             gridControlSockDownTimeList.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewSockDownTimeList });
             // 
@@ -4757,7 +4748,7 @@ namespace SewingProduction
             // 
             // TextBoxKolFactSmen
             // 
-            TextBoxKolFactSmen.Location = new Point(561, 194);
+            TextBoxKolFactSmen.Location = new Point(528, 168);
             TextBoxKolFactSmen.Name = "TextBoxKolFactSmen";
             TextBoxKolFactSmen.ObjectName = null;
             TextBoxKolFactSmen.Properties.Appearance.BackColor = Color.FromArgb(230, 245, 255);
@@ -4772,7 +4763,7 @@ namespace SewingProduction
             // 
             // TextBoxKolFactDelta
             // 
-            TextBoxKolFactDelta.Location = new Point(710, 194);
+            TextBoxKolFactDelta.Location = new Point(722, 168);
             TextBoxKolFactDelta.Name = "TextBoxKolFactDelta";
             TextBoxKolFactDelta.ObjectName = null;
             TextBoxKolFactDelta.Properties.Appearance.BackColor = Color.FromArgb(245, 245, 250);
@@ -4781,7 +4772,7 @@ namespace SewingProduction
             TextBoxKolFactDelta.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolFactDelta.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactDelta.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolFactDelta.Size = new Size(63, 22);
+            TextBoxKolFactDelta.Size = new Size(51, 22);
             TextBoxKolFactDelta.StyleController = layoutControl2;
             TextBoxKolFactDelta.TabIndex = 15;
             // 
@@ -4789,15 +4780,15 @@ namespace SewingProduction
             // 
             customLabel19.Font = new Font("Arial", 10F);
             customLabel19.ForeColor = Color.FromArgb(72, 61, 139);
-            customLabel19.Location = new Point(641, 194);
+            customLabel19.Location = new Point(608, 168);
             customLabel19.Name = "customLabel19";
-            customLabel19.Size = new Size(65, 32);
+            customLabel19.Size = new Size(110, 32);
             customLabel19.TabIndex = 1;
-            customLabel19.Text = "Разница, шт.";
+            customLabel19.Text = "Разница по датчикам, шт.";
             // 
             // TextBoxKolFactZadany
             // 
-            TextBoxKolFactZadany.Location = new Point(357, 194);
+            TextBoxKolFactZadany.Location = new Point(335, 168);
             TextBoxKolFactZadany.Name = "TextBoxKolFactZadany";
             TextBoxKolFactZadany.ObjectName = null;
             TextBoxKolFactZadany.Properties.Appearance.BackColor = Color.FromArgb(245, 245, 250);
@@ -4806,7 +4797,7 @@ namespace SewingProduction
             TextBoxKolFactZadany.Properties.Appearance.Options.UseBackColor = true;
             TextBoxKolFactZadany.Properties.Appearance.Options.UseFont = true;
             TextBoxKolFactZadany.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxKolFactZadany.Size = new Size(71, 22);
+            TextBoxKolFactZadany.Size = new Size(65, 22);
             TextBoxKolFactZadany.StyleController = layoutControl2;
             TextBoxKolFactZadany.TabIndex = 13;
             // 
@@ -4814,9 +4805,9 @@ namespace SewingProduction
             // 
             customLabel18.Font = new Font("Arial", 10F);
             customLabel18.ForeColor = Color.FromArgb(72, 61, 139);
-            customLabel18.Location = new Point(245, 194);
+            customLabel18.Location = new Point(219, 168);
             customLabel18.Name = "customLabel18";
-            customLabel18.Size = new Size(108, 32);
+            customLabel18.Size = new Size(112, 32);
             customLabel18.TabIndex = 1;
             customLabel18.Text = "Факт. кол-во по заданию, шт";
             // 
@@ -5195,9 +5186,9 @@ namespace SewingProduction
             // 
             customLabel14.Font = new Font("Arial", 10F);
             customLabel14.ForeColor = Color.FromArgb(72, 61, 139);
-            customLabel14.Location = new Point(24, 384);
+            customLabel14.Location = new Point(24, 369);
             customLabel14.Name = "customLabel14";
-            customLabel14.Size = new Size(110, 187);
+            customLabel14.Size = new Size(110, 202);
             customLabel14.TabIndex = 1;
             customLabel14.Text = "Простои";
             // 
@@ -5205,9 +5196,9 @@ namespace SewingProduction
             // 
             customLabel13.Font = new Font("Arial", 10F);
             customLabel13.ForeColor = Color.FromArgb(72, 61, 139);
-            customLabel13.Location = new Point(442, 194);
+            customLabel13.Location = new Point(414, 168);
             customLabel13.Name = "customLabel13";
-            customLabel13.Size = new Size(115, 32);
+            customLabel13.Size = new Size(110, 32);
             customLabel13.TabIndex = 1;
             customLabel13.Text = "Факт. кол-во по сменам, шт.";
             // 
@@ -5263,7 +5254,7 @@ namespace SewingProduction
             // 
             // TextBoxDefectCount
             // 
-            TextBoxDefectCount.Location = new Point(138, 259);
+            TextBoxDefectCount.Location = new Point(138, 235);
             TextBoxDefectCount.Name = "TextBoxDefectCount";
             TextBoxDefectCount.ObjectName = null;
             TextBoxDefectCount.Properties.Appearance.BackColor = Color.FromArgb(245, 245, 250);
@@ -5278,7 +5269,7 @@ namespace SewingProduction
             // 
             // TextBoxDefectWeight
             // 
-            TextBoxDefectWeight.Location = new Point(138, 231);
+            TextBoxDefectWeight.Location = new Point(138, 205);
             TextBoxDefectWeight.Name = "TextBoxDefectWeight";
             TextBoxDefectWeight.ObjectName = null;
             TextBoxDefectWeight.Properties.Appearance.BackColor = Color.FromArgb(245, 245, 250);
@@ -5295,9 +5286,9 @@ namespace SewingProduction
             // 
             customLabel7.Font = new Font("Arial", 10F);
             customLabel7.ForeColor = Color.FromArgb(72, 61, 139);
-            customLabel7.Location = new Point(24, 231);
+            customLabel7.Location = new Point(24, 205);
             customLabel7.Name = "customLabel7";
-            customLabel7.Size = new Size(110, 139);
+            customLabel7.Size = new Size(110, 150);
             customLabel7.TabIndex = 1;
             customLabel7.Text = "Брак";
             // 
@@ -5315,7 +5306,7 @@ namespace SewingProduction
             buttonImageOptions2.Image = (Image)resources.GetObject("buttonImageOptions2.Image");
             layoutControlGroup6.CustomHeaderButtons.AddRange(new DevExpress.XtraEditors.ButtonPanel.IBaseButton[] { new DevExpress.XtraEditors.ButtonsPanelControl.GroupBoxButton("Печать", true, buttonImageOptions2, DevExpress.XtraBars.Docking2010.ButtonStyle.PushButton, "", -1, true, null, true, false, true, null, -1) });
             layoutControlGroup6.HeaderButtonsLocation = DevExpress.Utils.GroupElementLocation.AfterText;
-            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, emptySpaceItem5, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, emptySpaceItem10, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, layoutControlItem16, layoutControlItem15 });
+            layoutControlGroup6.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem26, layoutControlItem27, layoutControlItem29, layoutControlItem30, layoutControlItem31, emptySpaceItem8, layoutControlItem32, layoutControlItem33, layoutControlItem34, layoutControlItem35, emptySpaceItem9, layoutControlItem36, layoutControlItem37, emptySpaceItem4, layoutControlItem12, layoutControlItem28, layoutControlItem41, layoutControlItem42, emptySpaceItem6, layoutControlItem38, layoutControlItem40, emptySpaceItem7, layoutControlItem43, layoutControlItem44, layoutControlItem45, emptySpaceItem13, emptySpaceItem14, simpleSeparator2, simpleSeparator4, simpleSeparator5, simpleSeparator6, layoutControlItem24, layoutControlItem19, layoutControlItem25, layoutControlItem39, emptySpaceItem11, splitterItem1, layoutControlItem13, layoutControlItem14, emptySpaceItem12, emptySpaceItem10, emptySpaceItem5 });
             layoutControlGroup6.Location = new Point(0, 0);
             layoutControlGroup6.Name = "layoutControlGroup3";
             layoutControlGroup6.Size = new Size(777, 575);
@@ -5341,9 +5332,9 @@ namespace SewingProduction
             // layoutControlItem29
             // 
             layoutControlItem29.Control = customLabel14;
-            layoutControlItem29.Location = new Point(0, 339);
+            layoutControlItem29.Location = new Point(0, 324);
             layoutControlItem29.Name = "layoutControlItem23";
-            layoutControlItem29.Size = new Size(114, 191);
+            layoutControlItem29.Size = new Size(114, 206);
             layoutControlItem29.TextVisible = false;
             // 
             // layoutControlItem30
@@ -5438,75 +5429,63 @@ namespace SewingProduction
             emptySpaceItem4.Name = "item0";
             emptySpaceItem4.Size = new Size(131, 10);
             // 
-            // emptySpaceItem5
-            // 
-            emptySpaceItem5.Location = new Point(408, 149);
-            emptySpaceItem5.Name = "emptySpaceItem5";
-            emptySpaceItem5.Size = new Size(10, 36);
-            // 
             // layoutControlItem12
             // 
             layoutControlItem12.Control = customLabel18;
-            layoutControlItem12.Location = new Point(221, 149);
+            layoutControlItem12.Location = new Point(195, 123);
             layoutControlItem12.Name = "item2";
-            layoutControlItem12.Size = new Size(112, 36);
+            layoutControlItem12.Size = new Size(116, 36);
             layoutControlItem12.TextVisible = false;
             // 
             // layoutControlItem28
             // 
             layoutControlItem28.Control = customLabel13;
-            layoutControlItem28.Location = new Point(418, 149);
+            layoutControlItem28.Location = new Point(390, 123);
             layoutControlItem28.Name = "layoutControlItem22";
-            layoutControlItem28.Size = new Size(119, 36);
+            layoutControlItem28.Size = new Size(114, 36);
             layoutControlItem28.TextVisible = false;
             // 
             // layoutControlItem41
             // 
             layoutControlItem41.Control = customLabel19;
-            layoutControlItem41.Location = new Point(617, 149);
+            layoutControlItem41.Location = new Point(584, 123);
             layoutControlItem41.Name = "layoutControlItem41";
-            layoutControlItem41.Size = new Size(69, 36);
+            layoutControlItem41.Size = new Size(114, 36);
             layoutControlItem41.TextVisible = false;
             // 
             // layoutControlItem42
             // 
             layoutControlItem42.Control = TextBoxKolFactDelta;
-            layoutControlItem42.Location = new Point(686, 149);
+            layoutControlItem42.Location = new Point(698, 123);
             layoutControlItem42.MinSize = new Size(54, 26);
             layoutControlItem42.Name = "layoutControlItem42";
-            layoutControlItem42.Size = new Size(67, 36);
+            layoutControlItem42.Size = new Size(55, 36);
             layoutControlItem42.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem42.TextVisible = false;
             // 
             // emptySpaceItem6
             // 
-            emptySpaceItem6.Location = new Point(607, 149);
+            emptySpaceItem6.Location = new Point(574, 123);
             emptySpaceItem6.Name = "item5";
             emptySpaceItem6.Size = new Size(10, 36);
             // 
             // layoutControlItem38
             // 
             layoutControlItem38.Control = TextBoxKolFactSmen;
-            layoutControlItem38.Location = new Point(537, 149);
+            layoutControlItem38.Location = new Point(504, 123);
             layoutControlItem38.MinSize = new Size(54, 26);
             layoutControlItem38.Name = "layoutControlItem38";
             layoutControlItem38.Size = new Size(70, 36);
             layoutControlItem38.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem38.TextVisible = false;
             // 
-            // emptySpaceItem10
-            // 
-            emptySpaceItem10.Location = new Point(333, 175);
-            emptySpaceItem10.Name = "emptySpaceItem10";
-            emptySpaceItem10.Size = new Size(75, 10);
-            // 
             // layoutControlItem40
             // 
             layoutControlItem40.Control = TextBoxKolFactZadany;
-            layoutControlItem40.Location = new Point(333, 149);
+            layoutControlItem40.Location = new Point(311, 123);
             layoutControlItem40.MinSize = new Size(54, 26);
             layoutControlItem40.Name = "layoutControlItem40";
-            layoutControlItem40.Size = new Size(75, 26);
+            layoutControlItem40.Size = new Size(69, 26);
             layoutControlItem40.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem40.TextVisible = false;
             // 
@@ -5519,9 +5498,9 @@ namespace SewingProduction
             // layoutControlItem43
             // 
             layoutControlItem43.Control = gridControlSockDownTimeList;
-            layoutControlItem43.Location = new Point(114, 339);
+            layoutControlItem43.Location = new Point(114, 324);
             layoutControlItem43.Name = "layoutControlItem43";
-            layoutControlItem43.Size = new Size(639, 191);
+            layoutControlItem43.Size = new Size(639, 206);
             layoutControlItem43.TextVisible = false;
             // 
             // layoutControlItem44
@@ -5574,17 +5553,17 @@ namespace SewingProduction
             // 
             // simpleSeparator6
             // 
-            simpleSeparator6.Location = new Point(0, 185);
+            simpleSeparator6.Location = new Point(0, 159);
             simpleSeparator6.Name = "simpleSeparator6";
             simpleSeparator6.Size = new Size(753, 1);
             // 
             // layoutControlItem24
             // 
             layoutControlItem24.Control = TextBoxDefectWeight;
-            layoutControlItem24.Location = new Point(114, 186);
+            layoutControlItem24.Location = new Point(114, 160);
             layoutControlItem24.MinSize = new Size(54, 26);
             layoutControlItem24.Name = "layoutControlItem16";
-            layoutControlItem24.Size = new Size(152, 28);
+            layoutControlItem24.Size = new Size(152, 30);
             layoutControlItem24.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem24.Text = "кг";
             layoutControlItem24.TextLocation = DevExpress.Utils.Locations.Right;
@@ -5593,20 +5572,20 @@ namespace SewingProduction
             // layoutControlItem19
             // 
             layoutControlItem19.Control = customLabel7;
-            layoutControlItem19.Location = new Point(0, 186);
+            layoutControlItem19.Location = new Point(0, 160);
             layoutControlItem19.MinSize = new Size(24, 24);
             layoutControlItem19.Name = "layoutControlItem9";
-            layoutControlItem19.Size = new Size(114, 143);
+            layoutControlItem19.Size = new Size(114, 154);
             layoutControlItem19.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem19.TextVisible = false;
             // 
             // layoutControlItem25
             // 
             layoutControlItem25.Control = TextBoxDefectCount;
-            layoutControlItem25.Location = new Point(114, 214);
+            layoutControlItem25.Location = new Point(114, 190);
             layoutControlItem25.MinSize = new Size(54, 26);
             layoutControlItem25.Name = "layoutControlItem17";
-            layoutControlItem25.Size = new Size(152, 28);
+            layoutControlItem25.Size = new Size(152, 30);
             layoutControlItem25.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             layoutControlItem25.Text = "шт";
             layoutControlItem25.TextLocation = DevExpress.Utils.Locations.Right;
@@ -5615,27 +5594,27 @@ namespace SewingProduction
             // layoutControlItem39
             // 
             layoutControlItem39.Control = gridControlSockDefectList;
-            layoutControlItem39.Location = new Point(266, 186);
+            layoutControlItem39.Location = new Point(266, 160);
             layoutControlItem39.Name = "layoutControlItem39";
-            layoutControlItem39.Size = new Size(487, 143);
+            layoutControlItem39.Size = new Size(487, 154);
             layoutControlItem39.TextVisible = false;
             // 
             // emptySpaceItem11
             // 
-            emptySpaceItem11.Location = new Point(114, 242);
+            emptySpaceItem11.Location = new Point(114, 220);
             emptySpaceItem11.Name = "emptySpaceItem11";
-            emptySpaceItem11.Size = new Size(152, 87);
+            emptySpaceItem11.Size = new Size(152, 94);
             // 
             // splitterItem1
             // 
-            splitterItem1.Location = new Point(0, 329);
+            splitterItem1.Location = new Point(0, 314);
             splitterItem1.Name = "splitterItem1";
             splitterItem1.Size = new Size(753, 10);
             // 
             // layoutControlItem13
             // 
             layoutControlItem13.Control = customLabel5;
-            layoutControlItem13.Location = new Point(0, 149);
+            layoutControlItem13.Location = new Point(0, 123);
             layoutControlItem13.Name = "layoutControlItem13";
             layoutControlItem13.Size = new Size(114, 36);
             layoutControlItem13.TextVisible = false;
@@ -5643,16 +5622,28 @@ namespace SewingProduction
             // layoutControlItem14
             // 
             layoutControlItem14.Control = TextBoxKolPlanZadany;
-            layoutControlItem14.Location = new Point(114, 149);
+            layoutControlItem14.Location = new Point(114, 123);
             layoutControlItem14.Name = "layoutControlItem14";
-            layoutControlItem14.Size = new Size(97, 36);
+            layoutControlItem14.Size = new Size(71, 36);
             layoutControlItem14.TextVisible = false;
             // 
             // emptySpaceItem12
             // 
-            emptySpaceItem12.Location = new Point(211, 149);
+            emptySpaceItem12.Location = new Point(185, 123);
             emptySpaceItem12.Name = "emptySpaceItem12";
             emptySpaceItem12.Size = new Size(10, 36);
+            // 
+            // emptySpaceItem10
+            // 
+            emptySpaceItem10.Location = new Point(380, 123);
+            emptySpaceItem10.Name = "emptySpaceItem10";
+            emptySpaceItem10.Size = new Size(10, 36);
+            // 
+            // emptySpaceItem5
+            // 
+            emptySpaceItem5.Location = new Point(311, 149);
+            emptySpaceItem5.Name = "emptySpaceItem5";
+            emptySpaceItem5.Size = new Size(69, 10);
             // 
             // simpleSeparator3
             // 
@@ -5678,7 +5669,7 @@ namespace SewingProduction
             // 
             layoutControlItem10.Control = gridControlSockZadanySmenList;
             layoutControlItem10.Location = new Point(0, 0);
-            layoutControlItem10.Name = "item3";
+            layoutControlItem10.Name = "item4";
             layoutControlItem10.Size = new Size(1008, 230);
             layoutControlItem10.TextVisible = false;
             // 
@@ -5694,7 +5685,7 @@ namespace SewingProduction
             // 
             layoutControlItem11.Control = gridControlSockServiceList;
             layoutControlItem11.Location = new Point(0, 0);
-            layoutControlItem11.Name = "item4";
+            layoutControlItem11.Name = "item6";
             layoutControlItem11.Size = new Size(1008, 244);
             layoutControlItem11.TextVisible = false;
             // 
@@ -6014,47 +6005,6 @@ namespace SewingProduction
             layoutControlItem9.Size = new Size(129, 26);
             layoutControlItem9.TextVisible = false;
             // 
-            // TextBoxPachList
-            // 
-            TextBoxPachList.Location = new Point(138, 168);
-            TextBoxPachList.Name = "TextBoxPachList";
-            TextBoxPachList.ObjectName = null;
-            TextBoxPachList.Properties.Appearance.BackColor = Color.FromArgb(230, 245, 255);
-            TextBoxPachList.Properties.Appearance.Font = new Font("Arial", 10F);
-            TextBoxPachList.Properties.Appearance.ForeColor = Color.FromArgb(50, 90, 160);
-            TextBoxPachList.Properties.Appearance.Options.UseBackColor = true;
-            TextBoxPachList.Properties.Appearance.Options.UseFont = true;
-            TextBoxPachList.Properties.Appearance.Options.UseForeColor = true;
-            TextBoxPachList.Size = new Size(635, 22);
-            TextBoxPachList.StyleController = layoutControl2;
-            TextBoxPachList.TabIndex = 26;
-            // 
-            // layoutControlItem16
-            // 
-            layoutControlItem16.Control = TextBoxPachList;
-            layoutControlItem16.Location = new Point(114, 123);
-            layoutControlItem16.Name = "layoutControlItem16";
-            layoutControlItem16.Size = new Size(639, 26);
-            layoutControlItem16.TextVisible = false;
-            // 
-            // customLabel6
-            // 
-            customLabel6.Font = new Font("Arial", 10F);
-            customLabel6.ForeColor = Color.FromArgb(30, 70, 140);
-            customLabel6.Location = new Point(24, 168);
-            customLabel6.Name = "customLabel6";
-            customLabel6.Size = new Size(110, 22);
-            customLabel6.TabIndex = 27;
-            customLabel6.Text = "Пачки";
-            // 
-            // layoutControlItem15
-            // 
-            layoutControlItem15.Control = customLabel6;
-            layoutControlItem15.Location = new Point(0, 123);
-            layoutControlItem15.Name = "layoutControlItem15";
-            layoutControlItem15.Size = new Size(114, 26);
-            layoutControlItem15.TextVisible = false;
-            // 
             // CardByNom
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -6154,14 +6104,12 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem36).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem37).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem12).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem28).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem41).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem42).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem6).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem38).EndInit();
-            ((System.ComponentModel.ISupportInitialize)emptySpaceItem10).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem40).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem7).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem43).EndInit();
@@ -6182,6 +6130,8 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlItem13).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem14).EndInit();
             ((System.ComponentModel.ISupportInitialize)emptySpaceItem12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)emptySpaceItem5).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator3).EndInit();
             ((System.ComponentModel.ISupportInitialize)simpleSeparator1).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
@@ -6213,9 +6163,6 @@ namespace SewingProduction
             ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
             ((System.ComponentModel.ISupportInitialize)layoutControlItem9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)TextBoxPachList.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem16).EndInit();
-            ((System.ComponentModel.ISupportInitialize)layoutControlItem15).EndInit();
             ResumeLayout(false);
         }
 
@@ -6531,7 +6478,6 @@ namespace SewingProduction
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem37;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem4;
         private CustomTextBox TextBoxTabFio;
-        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
         private CustomGridControl gridControlSockZadanySmenList;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem10;
@@ -6649,9 +6595,6 @@ namespace SewingProduction
         private CustomTextBoxEx TextBoxKolPlanZadany;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem14;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem12;
-        private CustomLabel customLabel6;
-        private CustomTextBoxEx TextBoxPachList;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem16;
-        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem15;
+        private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem5;
     }
 }

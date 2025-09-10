@@ -442,7 +442,7 @@ namespace SewingProduction
                 TextBoxMachineNumber.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kmlNumber), true, DataSourceUpdateMode.Never);
                 TextBoxKnitStartDate.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dateStart), true, DataSourceUpdateMode.Never);
                 TextBoxKnitEndDate.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.dateEnd), true, DataSourceUpdateMode.Never);
-                TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
+                //TextBoxPachList.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.pach), true, DataSourceUpdateMode.Never);
                 TextBoxKolPlanZadany.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kol), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactSmen.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFakt), true, DataSourceUpdateMode.Never);
                 TextBoxKolFactZadany.DataBindings.Add("Text", _sockKnitZadanyInfoBindingSource, nameof(Features.CardByNom.Models.SockZadanyInfo.kolFactZadany), true, DataSourceUpdateMode.Never);
