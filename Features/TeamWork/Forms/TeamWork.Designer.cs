@@ -3763,9 +3763,17 @@ namespace SewingProduction.Features.TeamWork.Forms
             gridViewArch.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { gridColumn66, gridColumn60, gridColumn61, gridColumn62, gridColumn63, gridColumn64, gridColumn65 });
             gridViewArch.GridControl = gridControlArch;
             gridViewArch.Name = "gridViewArch";
+            gridViewArch.OptionsBehavior.Editable = false;
+            gridViewArch.OptionsFind.AlwaysVisible = true;
+            gridViewArch.OptionsFind.Behavior = FindPanelBehavior.Filter;
+            gridViewArch.OptionsFind.FindDelay = 500;
+            gridViewArch.OptionsFind.FindNullPrompt = "Введите значение для поиска...";
+            gridViewArch.OptionsFind.FindPanelLocation = GridFindPanelLocation.Panel;
             gridViewArch.OptionsSelection.MultiSelect = true;
             gridViewArch.OptionsSelection.ShowCheckBoxSelectorInColumnHeader = DevExpress.Utils.DefaultBoolean.True;
             gridViewArch.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewArch.OptionsView.GroupFooterShowMode = GroupFooterShowMode.Hidden;
+            gridViewArch.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumn66
             // 

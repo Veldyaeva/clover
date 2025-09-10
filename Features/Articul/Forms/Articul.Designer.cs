@@ -34,6 +34,11 @@ namespace SewingProduction.Features.Articul
             components = new System.ComponentModel.Container();
             DevExpress.XtraGrid.GridFormatRule gridFormatRule1 = new DevExpress.XtraGrid.GridFormatRule();
             DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue1 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            DevExpress.XtraGrid.GridFormatRule gridFormatRule2 = new DevExpress.XtraGrid.GridFormatRule();
+            DevExpress.XtraEditors.FormatConditionRuleValue formatConditionRuleValue2 = new DevExpress.XtraEditors.FormatConditionRuleValue();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Articul));
+            grColKomplHasDifference = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostSost = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrName = new DevExpress.XtraGrid.Columns.GridColumn();
             gridArt = new DevExpress.XtraGrid.GridControl();
             bsArt = new System.Windows.Forms.BindingSource(components);
@@ -92,31 +97,63 @@ namespace SewingProduction.Features.Articul
             txbPo = new CustomTextBox();
             label1 = new CustomLabel();
             txbKod = new CustomTextBox();
-            cbTM = new CustomComboBox();
-            bsTM = new System.Windows.Forms.BindingSource(components);
             bsArticul = new System.Windows.Forms.BindingSource(components);
-            tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            customButtonAdd = new CustomButton();
-            customButtonCopy = new CustomButton();
-            customButtonKompl = new CustomButton();
-            grBoxMainInfo = new System.Windows.Forms.GroupBox();
+            customButtonCopy = new CustomSimpleButton();
+            customButtonKompl = new CustomSimpleButton();
+            lContrBoxMainInfo = new DevExpress.XtraLayout.LayoutControl();
+            Root = new DevExpress.XtraLayout.LayoutControlGroup();
             flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             customButton1 = new CustomButton();
             customButton2 = new CustomButton();
             customButton6 = new CustomButton();
-            gbTkanName = new System.Windows.Forms.GroupBox();
-            customComboBox7 = new CustomComboBox();
-            customComboBox2 = new CustomComboBox();
-            customComboBox6 = new CustomComboBox();
-            customComboBox1 = new CustomComboBox();
-            customComboBox5 = new CustomComboBox();
-            customComboBox3 = new CustomComboBox();
-            customComboBox4 = new CustomComboBox();
-            checkedComboBoxEdit2 = new DevExpress.XtraEditors.CheckedComboBoxEdit();
-            comboBoxEdit1 = new DevExpress.XtraEditors.SearchLookUpEdit();
-            searchLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
-            lookUpEdit1 = new DevExpress.XtraEditors.LookUpEdit();
-            gbTkanInfo = new System.Windows.Forms.GroupBox();
+            cgbTkanPurpose = new System.Windows.Forms.GroupBox();
+            txbOpis_t7 = new CustomTextBox();
+            txbOpis_t6 = new CustomTextBox();
+            txbOpis_t1 = new CustomTextBox();
+            txbOpis_t5 = new CustomTextBox();
+            txbOpis_t2 = new CustomTextBox();
+            txbOpis_t4 = new CustomTextBox();
+            txbOpis_t3 = new CustomTextBox();
+            cgbKfKach = new System.Windows.Forms.GroupBox();
+            txbKfKach7 = new CustomTextBox();
+            txbKfKach6 = new CustomTextBox();
+            txbKfKach5 = new CustomTextBox();
+            txbKfKach4 = new CustomTextBox();
+            txbKfKach3 = new CustomTextBox();
+            txbKfKach2 = new CustomTextBox();
+            txbKfKach1 = new CustomTextBox();
+            cgbBrakPercent = new System.Windows.Forms.GroupBox();
+            txtBrakPercent7 = new CustomTextBox();
+            txtBrakPercent6 = new CustomTextBox();
+            txtBrakPercent1 = new CustomTextBox();
+            txtBrakPercent5 = new CustomTextBox();
+            txtBrakPercent2 = new CustomTextBox();
+            txtBrakPercent4 = new CustomTextBox();
+            txtBrakPercent3 = new CustomTextBox();
+            cgbTkanSeb = new System.Windows.Forms.GroupBox();
+            txbTkanSeb_t7 = new CustomTextBox();
+            txbTkanSeb_t6 = new CustomTextBox();
+            txbTkanSeb_t1 = new CustomTextBox();
+            txbTkanSeb_t5 = new CustomTextBox();
+            txbTkanSeb_t2 = new CustomTextBox();
+            txbTkanSeb_t4 = new CustomTextBox();
+            txbTkanSeb_t3 = new CustomTextBox();
+            cgbTkanNorm = new System.Windows.Forms.GroupBox();
+            txbNorm_t7 = new CustomTextBox();
+            txbNorm_t6 = new CustomTextBox();
+            txbNorm_t1 = new CustomTextBox();
+            txbNorm_t5 = new CustomTextBox();
+            txbNorm_t2 = new CustomTextBox();
+            txbNorm_t4 = new CustomTextBox();
+            txbNorm_t3 = new CustomTextBox();
+            cgbTkanBrak = new System.Windows.Forms.GroupBox();
+            txbBrak7 = new CustomTextBox();
+            txbBrak1 = new CustomTextBox();
+            txbBrak6 = new CustomTextBox();
+            txbBrak2 = new CustomTextBox();
+            txbBrak5 = new CustomTextBox();
+            txbBrak3 = new CustomTextBox();
+            txbBrak4 = new CustomTextBox();
             customLabel30 = new CustomLabel();
             customLabel31 = new CustomLabel();
             customLabel32 = new CustomLabel();
@@ -128,48 +165,34 @@ namespace SewingProduction.Features.Articul
             txbBrakAll = new CustomTextBox();
             customLabel28 = new CustomLabel();
             customLabel27 = new CustomLabel();
-            gbBrakPercent = new System.Windows.Forms.GroupBox();
-            txtBrakPercent7 = new CustomTextBox();
-            txtBrakPercent6 = new CustomTextBox();
-            txtBrakPercent5 = new CustomTextBox();
-            txtBrakPercent4 = new CustomTextBox();
-            txtBrakPercent3 = new CustomTextBox();
-            txtBrakPercent2 = new CustomTextBox();
-            txtBrakPercent1 = new CustomTextBox();
-            gbTkanBrak = new System.Windows.Forms.GroupBox();
-            txbBrak7 = new CustomTextBox();
-            txbBrak6 = new CustomTextBox();
-            txbBrak5 = new CustomTextBox();
-            txbBrak4 = new CustomTextBox();
-            txbBrak3 = new CustomTextBox();
-            txbBrak2 = new CustomTextBox();
-            txbBrak1 = new CustomTextBox();
             customLabel26 = new CustomLabel();
-            gbTkanSeb = new System.Windows.Forms.GroupBox();
-            txbTkanSeb_t7 = new CustomTextBox();
-            txbTkanSeb_t6 = new CustomTextBox();
-            txbTkanSeb_t5 = new CustomTextBox();
-            txbTkanSeb_t4 = new CustomTextBox();
-            txbTkanSeb_t3 = new CustomTextBox();
-            txbTkanSeb_t2 = new CustomTextBox();
-            txbTkanSeb_t1 = new CustomTextBox();
             customLabel25 = new CustomLabel();
             txbSeb = new CustomTextBox();
             customLabel24 = new CustomLabel();
             txbNormt = new CustomTextBox();
             customLabel23 = new CustomLabel();
-            gbTkanNorm = new System.Windows.Forms.GroupBox();
-            txbNorm_t7 = new CustomTextBox();
-            txbNorm_t6 = new CustomTextBox();
-            txbNorm_t5 = new CustomTextBox();
-            txbNorm_t4 = new CustomTextBox();
-            txbNorm_t3 = new CustomTextBox();
-            txbNorm_t2 = new CustomTextBox();
-            txbNorm_t1 = new CustomTextBox();
             customLabel22 = new CustomLabel();
             customLabel21 = new CustomLabel();
             customLabel20 = new CustomLabel();
+            cGridKomplSost = new CustomGridControl();
+            bsSostKompl = new System.Windows.Forms.BindingSource(components);
+            gridViewKomplSost = new DevExpress.XtraGrid.Views.Grid.GridView();
+            grColKomplSostKod = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostGrup_k = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostGrup = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostArticul = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColKomplSostRazm = new DevExpress.XtraGrid.Columns.GridColumn();
             groupBox1 = new System.Windows.Forms.GroupBox();
+            customLabel45 = new CustomLabel();
+            txbSumKomplNum = new CustomTextBox();
+            customLabel44 = new CustomLabel();
+            txbSumSebRaskr = new CustomTextBox();
+            customLabel43 = new CustomLabel();
+            txbSumStrVznos = new CustomTextBox();
+            customLabel42 = new CustomLabel();
+            txbSumDopOpl = new CustomTextBox();
+            customLabel41 = new CustomLabel();
+            txbSumZarpl = new CustomTextBox();
             customLabel40 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel39 = new CustomLabel();
@@ -179,8 +202,6 @@ namespace SewingProduction.Features.Articul
             txbSekShv = new CustomTextBox();
             txbSekVyaz = new CustomTextBox();
             txbSek = new CustomTextBox();
-            gridLookUpEdit1 = new DevExpress.XtraEditors.GridLookUpEdit();
-            gridLookUpEdit1View = new DevExpress.XtraGrid.Views.Grid.GridView();
             gridArtDr = new DevExpress.XtraGrid.GridControl();
             bsArtDr = new System.Windows.Forms.BindingSource(components);
             gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -201,54 +222,150 @@ namespace SewingProduction.Features.Articul
             chbIsUpak = new CustomCheckBox();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             customButton7 = new CustomButton();
-            gbKompl = new System.Windows.Forms.GroupBox();
-            dataGridView1 = new System.Windows.Forms.DataGridView();
-            gbNabor = new System.Windows.Forms.GroupBox();
-            dataGridView2 = new System.Windows.Forms.DataGridView();
             customButtonKart = new CustomButton();
+            buttonEdit1 = new DevExpress.XtraEditors.ButtonEdit();
+            layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
+            splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            sButtodDeleteKod = new DevExpress.XtraEditors.SimpleButton();
+            customSimpleButton7 = new CustomSimpleButton();
+            customTabControlKomplNabor = new CustomTabControl();
+            cTabPage1 = new DevExpress.XtraTab.XtraTabPage();
+            cTabPage2 = new DevExpress.XtraTab.XtraTabPage();
+            cGridNaborSost = new CustomGridControl();
+            bsSostNabor = new System.Windows.Forms.BindingSource(components);
+            gridViewNaborSost = new DevExpress.XtraGrid.Views.Grid.GridView();
+            grColNaborSostAg_naimen = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostTk_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostTat_name = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostId_gost = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostName_gost = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostSostav = new DevExpress.XtraGrid.Columns.GridColumn();
+            grColNaborSostRazm = new DevExpress.XtraGrid.Columns.GridColumn();
+            customSimpleButton2 = new CustomSimpleButton();
+            csButtonNew = new CustomSimpleButton();
+            layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem7 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem6 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlItem8 = new DevExpress.XtraLayout.LayoutControlItem();
+            layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            tabbedControlGroup1 = new DevExpress.XtraLayout.TabbedControlGroup();
+            layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            lCTabsControl = new DevExpress.XtraLayout.LayoutControlGroup();
+            lCPagesKoplNabor = new DevExpress.XtraLayout.LayoutControlGroup();
+            customCheckBox1 = new CustomCheckBox();
+            groupBox3 = new System.Windows.Forms.GroupBox();
+            customLabel48 = new CustomLabel();
+            customSimpleButton6 = new CustomSimpleButton();
+            customTextBox1 = new CustomTextBox();
+            customSimpleButton5 = new CustomSimpleButton();
+            customSimpleButton4 = new CustomSimpleButton();
+            customSimpleButton3 = new CustomSimpleButton();
+            customSimpleButton1 = new CustomSimpleButton();
+            txbSebRecom = new CustomTextBox();
+            customLabel47 = new CustomLabel();
+            labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            customLabel46 = new CustomLabel();
+            label8 = new System.Windows.Forms.Label();
+            txbKoef = new CustomTextBox();
+            label7 = new System.Windows.Forms.Label();
+            txbSebProizv = new CustomTextBox();
+            label6 = new System.Windows.Forms.Label();
+            txbKoefVedDG = new CustomTextBox();
+            label5 = new System.Windows.Forms.Label();
+            txbKoefPr = new CustomTextBox();
+            label4 = new System.Windows.Forms.Label();
+            txbSebDop = new CustomTextBox();
+            layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
+            layoutControlGroup4 = new DevExpress.XtraLayout.LayoutControlGroup();
+            customGroupBox1 = new CustomGroupBox();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)bsTM).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).BeginInit();
-            tableLayoutPanel1.SuspendLayout();
-            grBoxMainInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).BeginInit();
+            lContrBoxMainInfo.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).BeginInit();
             flowLayoutPanel1.SuspendLayout();
-            gbTkanName.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEdit1.Properties).BeginInit();
-            gbTkanInfo.SuspendLayout();
-            gbBrakPercent.SuspendLayout();
-            gbTkanBrak.SuspendLayout();
-            gbTkanSeb.SuspendLayout();
-            gbTkanNorm.SuspendLayout();
+            cgbTkanPurpose.SuspendLayout();
+            cgbKfKach.SuspendLayout();
+            cgbBrakPercent.SuspendLayout();
+            cgbTkanSeb.SuspendLayout();
+            cgbTkanNorm.SuspendLayout();
+            cgbTkanBrak.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostKompl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).BeginInit();
             groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1.Properties).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).BeginInit();
             groupBox2.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            gbKompl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            gbNabor.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).BeginInit();
+            splitContainerControl1.Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel2).BeginInit();
+            splitContainerControl1.Panel2.SuspendLayout();
+            splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).BeginInit();
+            layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)customTabControlKomplNabor).BeginInit();
+            customTabControlKomplNabor.SuspendLayout();
+            cTabPage1.SuspendLayout();
+            cTabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)cGridNaborSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostNabor).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewNaborSost).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lCTabsControl).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).BeginInit();
+            groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).BeginInit();
+            customGroupBox1.SuspendLayout();
             SuspendLayout();
+            // 
+            // grColKomplHasDifference
+            // 
+            grColKomplHasDifference.Caption = "gridColumn7";
+            grColKomplHasDifference.Name = "grColKomplHasDifference";
+            // 
+            // grColKomplSostSost
+            // 
+            grColKomplSostSost.Caption = "Состав";
+            grColKomplSostSost.FieldName = "Sost";
+            grColKomplSostSost.Name = "grColKomplSostSost";
+            grColKomplSostSost.Visible = true;
+            grColKomplSostSost.VisibleIndex = 5;
             // 
             // grArtDrName
             // 
-            grArtDrName.Caption = "название";
-            grArtDrName.FieldName = "articul_poln";
+            grArtDrName.Caption = "Название";
+            grArtDrName.FieldName = "Articul_poln";
             grArtDrName.MinWidth = 23;
             grArtDrName.Name = "grArtDrName";
             grArtDrName.OptionsEditForm.Visible = DevExpress.Utils.DefaultBoolean.False;
             grArtDrName.Visible = true;
             grArtDrName.VisibleIndex = 0;
-            grArtDrName.Width = 353;
+            grArtDrName.Width = 321;
             // 
             // gridArt
             // 
@@ -258,12 +375,12 @@ namespace SewingProduction.Features.Articul
             gridArt.EmbeddedNavigator.Appearance.Options.UseFont = true;
             gridArt.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Font = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            gridArt.Location = new Point(1, 1);
+            gridArt.Location = new Point(-5, 3);
             gridArt.MainView = gridControl1;
             gridArt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArt.Name = "gridArt";
-            gridArt.Size = new Size(582, 743);
-            gridArt.TabIndex = 1;
+            gridArt.Size = new Size(586, 729);
+            gridArt.TabIndex = 2;
             gridArt.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridControl1 });
             // 
             // gridControl1
@@ -483,7 +600,7 @@ namespace SewingProduction.Features.Articul
             customLabel16.BackColor = Color.Transparent;
             customLabel16.Font = new Font("Arial", 8.25F);
             customLabel16.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel16.Location = new Point(265, 228);
+            customLabel16.Location = new Point(269, 228);
             customLabel16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel16.Name = "customLabel16";
             customLabel16.Size = new Size(84, 14);
@@ -756,7 +873,7 @@ namespace SewingProduction.Features.Articul
             customLabel5.BackColor = Color.Transparent;
             customLabel5.Font = new Font("Arial", 8.25F);
             customLabel5.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel5.Location = new Point(265, 202);
+            customLabel5.Location = new Point(269, 202);
             customLabel5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel5.Name = "customLabel5";
             customLabel5.Size = new Size(59, 14);
@@ -783,7 +900,7 @@ namespace SewingProduction.Features.Articul
             customLabel4.BackColor = Color.Transparent;
             customLabel4.Font = new Font("Arial", 8.25F);
             customLabel4.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel4.Location = new Point(282, 178);
+            customLabel4.Location = new Point(284, 178);
             customLabel4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel4.Name = "customLabel4";
             customLabel4.Size = new Size(44, 14);
@@ -809,7 +926,7 @@ namespace SewingProduction.Features.Articul
             customLabel3.BackColor = Color.Transparent;
             customLabel3.Font = new Font("Arial", 8.25F);
             customLabel3.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel3.Location = new Point(279, 149);
+            customLabel3.Location = new Point(281, 149);
             customLabel3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel3.Name = "customLabel3";
             customLabel3.Size = new Size(47, 14);
@@ -835,7 +952,7 @@ namespace SewingProduction.Features.Articul
             customLabel2.BackColor = Color.Transparent;
             customLabel2.Font = new Font("Arial", 8.25F);
             customLabel2.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel2.Location = new Point(309, 95);
+            customLabel2.Location = new Point(307, 95);
             customLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel2.Name = "customLabel2";
             customLabel2.Size = new Size(21, 14);
@@ -861,7 +978,7 @@ namespace SewingProduction.Features.Articul
             customLabel1.BackColor = Color.Transparent;
             customLabel1.Font = new Font("Arial", 8.25F);
             customLabel1.ForeColor = Color.FromArgb(0, 0, 0);
-            customLabel1.Location = new Point(290, 121);
+            customLabel1.Location = new Point(291, 121);
             customLabel1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel1.Name = "customLabel1";
             customLabel1.Size = new Size(37, 14);
@@ -886,7 +1003,7 @@ namespace SewingProduction.Features.Articul
             pictureBoxArticul.Location = new Point(7, 3);
             pictureBoxArticul.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             pictureBoxArticul.Name = "pictureBoxArticul";
-            pictureBoxArticul.Size = new Size(255, 245);
+            pictureBoxArticul.Size = new Size(261, 239);
             pictureBoxArticul.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             pictureBoxArticul.TabIndex = 8;
             pictureBoxArticul.TabStop = false;
@@ -897,7 +1014,7 @@ namespace SewingProduction.Features.Articul
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Arial", 8.25F);
             label3.ForeColor = Color.FromArgb(0, 0, 0);
-            label3.Location = new Point(281, 66);
+            label3.Location = new Point(283, 66);
             label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label3.Name = "label3";
             label3.Size = new Size(45, 14);
@@ -925,7 +1042,7 @@ namespace SewingProduction.Features.Articul
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Arial", 8.25F);
             label2.ForeColor = Color.FromArgb(0, 0, 0);
-            label2.Location = new Point(257, 50);
+            label2.Location = new Point(278, 39);
             label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label2.Name = "label2";
             label2.Size = new Size(50, 14);
@@ -966,7 +1083,7 @@ namespace SewingProduction.Features.Articul
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Arial", 8.25F);
             label1.ForeColor = Color.FromArgb(0, 0, 0);
-            label1.Location = new Point(303, 12);
+            label1.Location = new Point(302, 12);
             label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             label1.Name = "label1";
             label1.Size = new Size(26, 14);
@@ -986,143 +1103,110 @@ namespace SewingProduction.Features.Articul
             txbKod.Size = new Size(86, 15);
             txbKod.TabIndex = 0;
             // 
-            // cbTM
-            // 
-            cbTM.BackColor = Color.FromArgb(248, 248, 255);
-            cbTM.DataSource = bsTM;
-            cbTM.Font = new Font("Arial", 10F);
-            cbTM.ForeColor = Color.FromArgb(72, 61, 139);
-            cbTM.FormattingEnabled = true;
-            cbTM.Location = new Point(1640, 310);
-            cbTM.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            cbTM.Name = "cbTM";
-            cbTM.Size = new Size(119, 24);
-            cbTM.TabIndex = 7;
-            // 
-            // tableLayoutPanel1
-            // 
-            tableLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-            tableLayoutPanel1.BackColor = Color.Transparent;
-            tableLayoutPanel1.ColumnCount = 5;
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.58064F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.29032F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15.69893F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            tableLayoutPanel1.Controls.Add(customButtonAdd, 0, 0);
-            tableLayoutPanel1.Controls.Add(customButtonCopy, 0, 1);
-            tableLayoutPanel1.Controls.Add(customButtonKompl, 0, 2);
-            tableLayoutPanel1.Location = new Point(1, 748);
-            tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tableLayoutPanel1.Name = "tableLayoutPanel1";
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            tableLayoutPanel1.Size = new Size(583, 120);
-            tableLayoutPanel1.TabIndex = 8;
-            // 
-            // customButtonAdd
-            // 
-            customButtonAdd.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonAdd.Font = new Font("Arial", 10F);
-            customButtonAdd.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonAdd.Location = new Point(4, 3);
-            customButtonAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customButtonAdd.Name = "customButtonAdd";
-            customButtonAdd.Size = new Size(115, 32);
-            customButtonAdd.TabIndex = 0;
-            customButtonAdd.Text = "Добавить";
-            customButtonAdd.UseVisualStyleBackColor = false;
-            customButtonAdd.Click += customButtonAdd_Click;
-            // 
             // customButtonCopy
             // 
-            customButtonCopy.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonCopy.Font = new Font("Arial", 10F);
-            customButtonCopy.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonCopy.Location = new Point(4, 43);
-            customButtonCopy.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonCopy.Appearance.Font = new Font("Arial", 10F);
+            customButtonCopy.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonCopy.Appearance.Options.UseFont = true;
+            customButtonCopy.Appearance.Options.UseForeColor = true;
+            customButtonCopy.Location = new Point(2, 32);
+            customButtonCopy.Margin = new System.Windows.Forms.Padding(1);
+            customButtonCopy.MaximumSize = new Size(285, 26);
+            customButtonCopy.MinimumSize = new Size(285, 26);
             customButtonCopy.Name = "customButtonCopy";
-            customButtonCopy.Size = new Size(115, 32);
-            customButtonCopy.TabIndex = 1;
+            customButtonCopy.Size = new Size(285, 26);
+            customButtonCopy.StyleController = layoutControl1;
+            customButtonCopy.TabIndex = 3;
             customButtonCopy.Text = "Копия";
-            customButtonCopy.UseVisualStyleBackColor = false;
             customButtonCopy.Click += customButtonCopy_Click;
             // 
             // customButtonKompl
             // 
-            customButtonKompl.BackColor = Color.FromArgb(230, 230, 250);
-            customButtonKompl.Font = new Font("Arial", 10F);
-            customButtonKompl.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonKompl.Location = new Point(4, 83);
-            customButtonKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customButtonKompl.Appearance.Font = new Font("Arial", 10F);
+            customButtonKompl.Appearance.ForeColor = Color.FromArgb(106, 90, 205);
+            customButtonKompl.Appearance.Options.UseFont = true;
+            customButtonKompl.Appearance.Options.UseForeColor = true;
+            customButtonKompl.Location = new Point(2, 62);
+            customButtonKompl.Margin = new System.Windows.Forms.Padding(0);
+            customButtonKompl.MaximumSize = new Size(285, 26);
+            customButtonKompl.MinimumSize = new Size(285, 26);
             customButtonKompl.Name = "customButtonKompl";
-            customButtonKompl.Size = new Size(115, 31);
-            customButtonKompl.TabIndex = 2;
+            customButtonKompl.Size = new Size(285, 26);
+            customButtonKompl.StyleController = layoutControl1;
+            customButtonKompl.TabIndex = 5;
             customButtonKompl.Text = "Комплект";
-            customButtonKompl.UseVisualStyleBackColor = false;
             customButtonKompl.Click += customButtonKompl_Click;
             // 
-            // grBoxMainInfo
+            // lContrBoxMainInfo
             // 
-            grBoxMainInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            grBoxMainInfo.BackColor = Color.Transparent;
-            grBoxMainInfo.Controls.Add(customLabel10);
-            grBoxMainInfo.Controls.Add(chbArh);
-            grBoxMainInfo.Controls.Add(customLabel9);
-            grBoxMainInfo.Controls.Add(customLabel8);
-            grBoxMainInfo.Controls.Add(pictureBoxArticul);
-            grBoxMainInfo.Controls.Add(chbKombIzd);
-            grBoxMainInfo.Controls.Add(txbKod);
-            grBoxMainInfo.Controls.Add(chbKombDet);
-            grBoxMainInfo.Controls.Add(label1);
-            grBoxMainInfo.Controls.Add(customLabel19);
-            grBoxMainInfo.Controls.Add(txbTM);
-            grBoxMainInfo.Controls.Add(txbNDS);
-            grBoxMainInfo.Controls.Add(txbPo);
-            grBoxMainInfo.Controls.Add(customLabel18);
-            grBoxMainInfo.Controls.Add(txbArticul);
-            grBoxMainInfo.Controls.Add(txbKodTnved);
-            grBoxMainInfo.Controls.Add(label2);
-            grBoxMainInfo.Controls.Add(customLabel17);
-            grBoxMainInfo.Controls.Add(txbMod);
-            grBoxMainInfo.Controls.Add(txbScNomer);
-            grBoxMainInfo.Controls.Add(label3);
-            grBoxMainInfo.Controls.Add(mtbDateOpis);
-            grBoxMainInfo.Controls.Add(txbSeason);
-            grBoxMainInfo.Controls.Add(customLabel16);
-            grBoxMainInfo.Controls.Add(customLabel1);
-            grBoxMainInfo.Controls.Add(customLabel15);
-            grBoxMainInfo.Controls.Add(customLabel2);
-            grBoxMainInfo.Controls.Add(txbRazmPrint);
-            grBoxMainInfo.Controls.Add(txbAssort);
-            grBoxMainInfo.Controls.Add(customLabel14);
-            grBoxMainInfo.Controls.Add(customLabel3);
-            grBoxMainInfo.Controls.Add(txbRazm);
-            grBoxMainInfo.Controls.Add(txbCountry);
-            grBoxMainInfo.Controls.Add(customLabel13);
-            grBoxMainInfo.Controls.Add(customLabel4);
-            grBoxMainInfo.Controls.Add(txbSost3);
-            grBoxMainInfo.Controls.Add(txbGrupMenName);
-            grBoxMainInfo.Controls.Add(customLabel12);
-            grBoxMainInfo.Controls.Add(customLabel5);
-            grBoxMainInfo.Controls.Add(txbSost2);
-            grBoxMainInfo.Controls.Add(txbGrup);
-            grBoxMainInfo.Controls.Add(customLabel11);
-            grBoxMainInfo.Controls.Add(customLabel6);
-            grBoxMainInfo.Controls.Add(txbSost);
-            grBoxMainInfo.Controls.Add(txbIdGost);
-            grBoxMainInfo.Controls.Add(customLabel7);
-            grBoxMainInfo.Controls.Add(txbOpiGost);
-            grBoxMainInfo.Controls.Add(txbNameGost);
-            grBoxMainInfo.Location = new Point(590, 1);
-            grBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            grBoxMainInfo.Name = "grBoxMainInfo";
-            grBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            grBoxMainInfo.Size = new Size(1157, 254);
-            grBoxMainInfo.TabIndex = 10;
-            grBoxMainInfo.TabStop = false;
+            lContrBoxMainInfo.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            lContrBoxMainInfo.BackColor = Color.Transparent;
+            lContrBoxMainInfo.Controls.Add(customLabel10);
+            lContrBoxMainInfo.Controls.Add(chbArh);
+            lContrBoxMainInfo.Controls.Add(customLabel9);
+            lContrBoxMainInfo.Controls.Add(customLabel8);
+            lContrBoxMainInfo.Controls.Add(pictureBoxArticul);
+            lContrBoxMainInfo.Controls.Add(chbKombIzd);
+            lContrBoxMainInfo.Controls.Add(txbKod);
+            lContrBoxMainInfo.Controls.Add(chbKombDet);
+            lContrBoxMainInfo.Controls.Add(label1);
+            lContrBoxMainInfo.Controls.Add(customLabel19);
+            lContrBoxMainInfo.Controls.Add(txbTM);
+            lContrBoxMainInfo.Controls.Add(txbNDS);
+            lContrBoxMainInfo.Controls.Add(txbPo);
+            lContrBoxMainInfo.Controls.Add(customLabel18);
+            lContrBoxMainInfo.Controls.Add(txbArticul);
+            lContrBoxMainInfo.Controls.Add(txbKodTnved);
+            lContrBoxMainInfo.Controls.Add(label2);
+            lContrBoxMainInfo.Controls.Add(customLabel17);
+            lContrBoxMainInfo.Controls.Add(txbMod);
+            lContrBoxMainInfo.Controls.Add(txbScNomer);
+            lContrBoxMainInfo.Controls.Add(label3);
+            lContrBoxMainInfo.Controls.Add(mtbDateOpis);
+            lContrBoxMainInfo.Controls.Add(txbSeason);
+            lContrBoxMainInfo.Controls.Add(customLabel16);
+            lContrBoxMainInfo.Controls.Add(customLabel1);
+            lContrBoxMainInfo.Controls.Add(customLabel15);
+            lContrBoxMainInfo.Controls.Add(customLabel2);
+            lContrBoxMainInfo.Controls.Add(txbRazmPrint);
+            lContrBoxMainInfo.Controls.Add(txbAssort);
+            lContrBoxMainInfo.Controls.Add(customLabel14);
+            lContrBoxMainInfo.Controls.Add(customLabel3);
+            lContrBoxMainInfo.Controls.Add(txbRazm);
+            lContrBoxMainInfo.Controls.Add(txbCountry);
+            lContrBoxMainInfo.Controls.Add(customLabel13);
+            lContrBoxMainInfo.Controls.Add(customLabel4);
+            lContrBoxMainInfo.Controls.Add(txbSost3);
+            lContrBoxMainInfo.Controls.Add(txbGrupMenName);
+            lContrBoxMainInfo.Controls.Add(customLabel12);
+            lContrBoxMainInfo.Controls.Add(customLabel5);
+            lContrBoxMainInfo.Controls.Add(txbSost2);
+            lContrBoxMainInfo.Controls.Add(txbGrup);
+            lContrBoxMainInfo.Controls.Add(customLabel11);
+            lContrBoxMainInfo.Controls.Add(customLabel6);
+            lContrBoxMainInfo.Controls.Add(txbSost);
+            lContrBoxMainInfo.Controls.Add(txbIdGost);
+            lContrBoxMainInfo.Controls.Add(customLabel7);
+            lContrBoxMainInfo.Controls.Add(txbOpiGost);
+            lContrBoxMainInfo.Controls.Add(txbNameGost);
+            lContrBoxMainInfo.Location = new Point(589, 2);
+            lContrBoxMainInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            lContrBoxMainInfo.Name = "lContrBoxMainInfo";
+            lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
+            lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            lContrBoxMainInfo.Root = Root;
+            lContrBoxMainInfo.Size = new Size(1141, 249);
+            lContrBoxMainInfo.TabIndex = 31;
+            lContrBoxMainInfo.TabStop = false;
+            lContrBoxMainInfo.Text = "layoutControl1";
+            // 
+            // Root
+            // 
+            Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            Root.GroupBordersVisible = false;
+            Root.Name = "Root";
+            Root.Size = new Size(1141, 249);
+            Root.TextVisible = false;
             // 
             // flowLayoutPanel1
             // 
@@ -1130,7 +1214,7 @@ namespace SewingProduction.Features.Articul
             flowLayoutPanel1.Controls.Add(customButton1);
             flowLayoutPanel1.Controls.Add(customButton2);
             flowLayoutPanel1.Controls.Add(customButton6);
-            flowLayoutPanel1.Location = new Point(107, 20);
+            flowLayoutPanel1.Location = new Point(226, 17);
             flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(187, 148);
@@ -1175,184 +1259,652 @@ namespace SewingProduction.Features.Articul
             customButton6.Text = "Несоответствие спр-ка и разд.труда";
             customButton6.UseVisualStyleBackColor = false;
             // 
-            // gbTkanName
+            // cgbTkanPurpose
             // 
-            gbTkanName.BackColor = Color.Transparent;
-            gbTkanName.Controls.Add(customComboBox7);
-            gbTkanName.Controls.Add(customComboBox2);
-            gbTkanName.Controls.Add(customComboBox6);
-            gbTkanName.Controls.Add(customComboBox1);
-            gbTkanName.Controls.Add(customComboBox5);
-            gbTkanName.Controls.Add(customComboBox3);
-            gbTkanName.Controls.Add(customComboBox4);
-            gbTkanName.Location = new Point(103, 3);
-            gbTkanName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanName.Name = "gbTkanName";
-            gbTkanName.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanName.Size = new Size(92, 208);
-            gbTkanName.TabIndex = 19;
-            gbTkanName.TabStop = false;
+            cgbTkanPurpose.BackColor = Color.Transparent;
+            cgbTkanPurpose.Controls.Add(txbOpis_t7);
+            cgbTkanPurpose.Controls.Add(txbOpis_t6);
+            cgbTkanPurpose.Controls.Add(txbOpis_t1);
+            cgbTkanPurpose.Controls.Add(txbOpis_t5);
+            cgbTkanPurpose.Controls.Add(txbOpis_t2);
+            cgbTkanPurpose.Controls.Add(txbOpis_t4);
+            cgbTkanPurpose.Controls.Add(txbOpis_t3);
+            cgbTkanPurpose.Location = new Point(347, 22);
+            cgbTkanPurpose.Name = "cgbTkanPurpose";
+            cgbTkanPurpose.Size = new Size(82, 200);
+            cgbTkanPurpose.TabIndex = 37;
+            cgbTkanPurpose.TabStop = false;
+            cgbTkanPurpose.Text = "назнач.";
             // 
-            // customComboBox7
+            // txbOpis_t7
             // 
-            customComboBox7.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox7.Font = new Font("Arial", 8F);
-            customComboBox7.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox7.FormattingEnabled = true;
-            customComboBox7.Location = new Point(7, 181);
-            customComboBox7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox7.Name = "customComboBox7";
-            customComboBox7.Size = new Size(81, 22);
-            customComboBox7.TabIndex = 23;
+            txbOpis_t7.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t7.Font = new Font("Arial", 9F);
+            txbOpis_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t7.Location = new Point(5, 181);
+            txbOpis_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t7.Name = "txbOpis_t7";
+            txbOpis_t7.ReadOnly = true;
+            txbOpis_t7.Size = new Size(65, 14);
+            txbOpis_t7.TabIndex = 6;
             // 
-            // customComboBox2
+            // txbOpis_t6
             // 
-            customComboBox2.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox2.Font = new Font("Arial", 8F);
-            customComboBox2.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox2.FormattingEnabled = true;
-            customComboBox2.Location = new Point(7, 43);
-            customComboBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox2.Name = "customComboBox2";
-            customComboBox2.Size = new Size(81, 22);
-            customComboBox2.TabIndex = 18;
+            txbOpis_t6.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t6.Font = new Font("Arial", 9F);
+            txbOpis_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t6.Location = new Point(5, 153);
+            txbOpis_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t6.Name = "txbOpis_t6";
+            txbOpis_t6.ReadOnly = true;
+            txbOpis_t6.Size = new Size(65, 14);
+            txbOpis_t6.TabIndex = 5;
             // 
-            // customComboBox6
+            // txbOpis_t1
             // 
-            customComboBox6.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox6.Font = new Font("Arial", 8F);
-            customComboBox6.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox6.FormattingEnabled = true;
-            customComboBox6.Location = new Point(7, 153);
-            customComboBox6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox6.Name = "customComboBox6";
-            customComboBox6.Size = new Size(81, 22);
-            customComboBox6.TabIndex = 22;
+            txbOpis_t1.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t1.Font = new Font("Arial", 9F);
+            txbOpis_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t1.Location = new Point(5, 17);
+            txbOpis_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t1.Name = "txbOpis_t1";
+            txbOpis_t1.ReadOnly = true;
+            txbOpis_t1.Size = new Size(65, 14);
+            txbOpis_t1.TabIndex = 0;
             // 
-            // customComboBox1
+            // txbOpis_t5
             // 
-            customComboBox1.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox1.Font = new Font("Arial", 8F);
-            customComboBox1.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox1.FormattingEnabled = true;
-            customComboBox1.Location = new Point(7, 16);
-            customComboBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox1.Name = "customComboBox1";
-            customComboBox1.Size = new Size(81, 22);
-            customComboBox1.TabIndex = 17;
+            txbOpis_t5.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t5.Font = new Font("Arial", 9F);
+            txbOpis_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t5.Location = new Point(5, 127);
+            txbOpis_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t5.Name = "txbOpis_t5";
+            txbOpis_t5.ReadOnly = true;
+            txbOpis_t5.Size = new Size(65, 14);
+            txbOpis_t5.TabIndex = 4;
             // 
-            // customComboBox5
+            // txbOpis_t2
             // 
-            customComboBox5.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox5.Font = new Font("Arial", 8F);
-            customComboBox5.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox5.FormattingEnabled = true;
-            customComboBox5.Location = new Point(7, 126);
-            customComboBox5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox5.Name = "customComboBox5";
-            customComboBox5.Size = new Size(81, 22);
-            customComboBox5.TabIndex = 21;
+            txbOpis_t2.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t2.Font = new Font("Arial", 9F);
+            txbOpis_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t2.Location = new Point(5, 45);
+            txbOpis_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t2.Name = "txbOpis_t2";
+            txbOpis_t2.ReadOnly = true;
+            txbOpis_t2.Size = new Size(65, 14);
+            txbOpis_t2.TabIndex = 1;
             // 
-            // customComboBox3
+            // txbOpis_t4
             // 
-            customComboBox3.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox3.Font = new Font("Arial", 8F);
-            customComboBox3.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox3.FormattingEnabled = true;
-            customComboBox3.Location = new Point(7, 70);
-            customComboBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox3.Name = "customComboBox3";
-            customComboBox3.Size = new Size(81, 22);
-            customComboBox3.TabIndex = 19;
+            txbOpis_t4.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t4.Font = new Font("Arial", 9F);
+            txbOpis_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t4.Location = new Point(5, 100);
+            txbOpis_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t4.Name = "txbOpis_t4";
+            txbOpis_t4.ReadOnly = true;
+            txbOpis_t4.Size = new Size(65, 14);
+            txbOpis_t4.TabIndex = 3;
             // 
-            // customComboBox4
+            // txbOpis_t3
             // 
-            customComboBox4.BackColor = Color.FromArgb(248, 248, 255);
-            customComboBox4.Font = new Font("Arial", 8F);
-            customComboBox4.ForeColor = Color.FromArgb(72, 61, 139);
-            customComboBox4.FormattingEnabled = true;
-            customComboBox4.Location = new Point(7, 98);
-            customComboBox4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            customComboBox4.Name = "customComboBox4";
-            customComboBox4.Size = new Size(81, 22);
-            customComboBox4.TabIndex = 20;
+            txbOpis_t3.BackColor = Color.FromArgb(248, 248, 255);
+            txbOpis_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbOpis_t3.Font = new Font("Arial", 9F);
+            txbOpis_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            txbOpis_t3.Location = new Point(5, 73);
+            txbOpis_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbOpis_t3.Name = "txbOpis_t3";
+            txbOpis_t3.ReadOnly = true;
+            txbOpis_t3.Size = new Size(65, 14);
+            txbOpis_t3.TabIndex = 2;
             // 
-            // checkedComboBoxEdit2
+            // cgbKfKach
             // 
-            checkedComboBoxEdit2.Location = new Point(1660, 358);
-            checkedComboBoxEdit2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            checkedComboBoxEdit2.Name = "checkedComboBoxEdit2";
-            checkedComboBoxEdit2.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            checkedComboBoxEdit2.Properties.DataSource = bsTM;
-            checkedComboBoxEdit2.Size = new Size(117, 20);
-            checkedComboBoxEdit2.TabIndex = 15;
+            cgbKfKach.Controls.Add(txbKfKach7);
+            cgbKfKach.Controls.Add(txbKfKach6);
+            cgbKfKach.Controls.Add(txbKfKach5);
+            cgbKfKach.Controls.Add(txbKfKach4);
+            cgbKfKach.Controls.Add(txbKfKach3);
+            cgbKfKach.Controls.Add(txbKfKach2);
+            cgbKfKach.Controls.Add(txbKfKach1);
+            cgbKfKach.Location = new Point(299, 22);
+            cgbKfKach.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cgbKfKach.Name = "cgbKfKach";
+            cgbKfKach.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            cgbKfKach.Size = new Size(43, 200);
+            cgbKfKach.TabIndex = 23;
+            cgbKfKach.TabStop = false;
+            cgbKfKach.Text = "к-т кач";
             // 
-            // comboBoxEdit1
+            // txbKfKach7
             // 
-            comboBoxEdit1.Location = new Point(1644, 267);
-            comboBoxEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            comboBoxEdit1.Name = "comboBoxEdit1";
-            comboBoxEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            comboBoxEdit1.Properties.NullText = "";
-            comboBoxEdit1.Properties.PopupSizeable = false;
-            comboBoxEdit1.Properties.PopupView = searchLookUpEdit1View;
-            comboBoxEdit1.Size = new Size(117, 20);
-            comboBoxEdit1.TabIndex = 17;
+            txbKfKach7.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach7.Font = new Font("Arial", 9F);
+            txbKfKach7.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach7.Location = new Point(5, 180);
+            txbKfKach7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach7.Name = "txbKfKach7";
+            txbKfKach7.ReadOnly = true;
+            txbKfKach7.Size = new Size(33, 14);
+            txbKfKach7.TabIndex = 6;
             // 
-            // searchLookUpEdit1View
+            // txbKfKach6
             // 
-            searchLookUpEdit1View.DetailHeight = 404;
-            searchLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            searchLookUpEdit1View.Name = "searchLookUpEdit1View";
-            searchLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
-            searchLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            searchLookUpEdit1View.OptionsView.ShowGroupPanel = false;
+            txbKfKach6.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach6.Font = new Font("Arial", 9F);
+            txbKfKach6.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach6.Location = new Point(5, 152);
+            txbKfKach6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach6.Name = "txbKfKach6";
+            txbKfKach6.ReadOnly = true;
+            txbKfKach6.Size = new Size(33, 14);
+            txbKfKach6.TabIndex = 5;
             // 
-            // lookUpEdit1
+            // txbKfKach5
             // 
-            lookUpEdit1.Location = new Point(1674, 444);
-            lookUpEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            lookUpEdit1.Name = "lookUpEdit1";
-            lookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            lookUpEdit1.Size = new Size(113, 20);
-            lookUpEdit1.TabIndex = 18;
+            txbKfKach5.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach5.Font = new Font("Arial", 9F);
+            txbKfKach5.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach5.Location = new Point(5, 126);
+            txbKfKach5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach5.Name = "txbKfKach5";
+            txbKfKach5.ReadOnly = true;
+            txbKfKach5.Size = new Size(33, 14);
+            txbKfKach5.TabIndex = 4;
             // 
-            // gbTkanInfo
+            // txbKfKach4
             // 
-            gbTkanInfo.BackColor = Color.Transparent;
-            gbTkanInfo.Controls.Add(customLabel30);
-            gbTkanInfo.Controls.Add(customLabel31);
-            gbTkanInfo.Controls.Add(customLabel32);
-            gbTkanInfo.Controls.Add(customLabel33);
-            gbTkanInfo.Controls.Add(customLabel34);
-            gbTkanInfo.Controls.Add(customLabel35);
-            gbTkanInfo.Controls.Add(customLabel36);
-            gbTkanInfo.Controls.Add(customLabel29);
-            gbTkanInfo.Controls.Add(txbBrakAll);
-            gbTkanInfo.Controls.Add(customLabel28);
-            gbTkanInfo.Controls.Add(customLabel27);
-            gbTkanInfo.Controls.Add(gbBrakPercent);
-            gbTkanInfo.Controls.Add(gbTkanBrak);
-            gbTkanInfo.Controls.Add(customLabel26);
-            gbTkanInfo.Controls.Add(gbTkanSeb);
-            gbTkanInfo.Controls.Add(customLabel25);
-            gbTkanInfo.Controls.Add(txbSeb);
-            gbTkanInfo.Controls.Add(customLabel24);
-            gbTkanInfo.Controls.Add(txbNormt);
-            gbTkanInfo.Controls.Add(customLabel23);
-            gbTkanInfo.Controls.Add(gbTkanNorm);
-            gbTkanInfo.Controls.Add(customLabel22);
-            gbTkanInfo.Controls.Add(customLabel21);
-            gbTkanInfo.Controls.Add(customLabel20);
-            gbTkanInfo.Controls.Add(gbTkanName);
-            gbTkanInfo.Location = new Point(589, 254);
-            gbTkanInfo.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanInfo.Name = "gbTkanInfo";
-            gbTkanInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanInfo.Size = new Size(612, 250);
-            gbTkanInfo.TabIndex = 20;
-            gbTkanInfo.TabStop = false;
-            gbTkanInfo.Text = "Затраты на изготовление";
+            txbKfKach4.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach4.Font = new Font("Arial", 9F);
+            txbKfKach4.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach4.Location = new Point(5, 99);
+            txbKfKach4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach4.Name = "txbKfKach4";
+            txbKfKach4.ReadOnly = true;
+            txbKfKach4.Size = new Size(33, 14);
+            txbKfKach4.TabIndex = 3;
+            // 
+            // txbKfKach3
+            // 
+            txbKfKach3.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach3.Font = new Font("Arial", 9F);
+            txbKfKach3.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach3.Location = new Point(5, 72);
+            txbKfKach3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach3.Name = "txbKfKach3";
+            txbKfKach3.ReadOnly = true;
+            txbKfKach3.Size = new Size(33, 14);
+            txbKfKach3.TabIndex = 2;
+            // 
+            // txbKfKach2
+            // 
+            txbKfKach2.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach2.Font = new Font("Arial", 9F);
+            txbKfKach2.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach2.Location = new Point(5, 44);
+            txbKfKach2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach2.Name = "txbKfKach2";
+            txbKfKach2.ReadOnly = true;
+            txbKfKach2.Size = new Size(33, 14);
+            txbKfKach2.TabIndex = 1;
+            // 
+            // txbKfKach1
+            // 
+            txbKfKach1.BackColor = Color.FromArgb(248, 248, 255);
+            txbKfKach1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKfKach1.Font = new Font("Arial", 9F);
+            txbKfKach1.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKfKach1.Location = new Point(5, 16);
+            txbKfKach1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKfKach1.Name = "txbKfKach1";
+            txbKfKach1.ReadOnly = true;
+            txbKfKach1.Size = new Size(33, 14);
+            txbKfKach1.TabIndex = 0;
+            // 
+            // cgbBrakPercent
+            // 
+            cgbBrakPercent.BackColor = Color.Transparent;
+            cgbBrakPercent.Controls.Add(txtBrakPercent7);
+            cgbBrakPercent.Controls.Add(txtBrakPercent6);
+            cgbBrakPercent.Controls.Add(txtBrakPercent1);
+            cgbBrakPercent.Controls.Add(txtBrakPercent5);
+            cgbBrakPercent.Controls.Add(txtBrakPercent2);
+            cgbBrakPercent.Controls.Add(txtBrakPercent4);
+            cgbBrakPercent.Controls.Add(txtBrakPercent3);
+            cgbBrakPercent.Location = new Point(525, 22);
+            cgbBrakPercent.Name = "cgbBrakPercent";
+            cgbBrakPercent.Size = new Size(75, 204);
+            cgbBrakPercent.TabIndex = 37;
+            cgbBrakPercent.TabStop = false;
+            cgbBrakPercent.Text = "%";
+            // 
+            // txtBrakPercent7
+            // 
+            txtBrakPercent7.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent7.Font = new Font("Arial", 9F);
+            txtBrakPercent7.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent7.Location = new Point(3, 182);
+            txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent7.Name = "txtBrakPercent7";
+            txtBrakPercent7.ReadOnly = true;
+            txtBrakPercent7.Size = new Size(53, 14);
+            txtBrakPercent7.TabIndex = 6;
+            // 
+            // txtBrakPercent6
+            // 
+            txtBrakPercent6.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent6.Font = new Font("Arial", 9F);
+            txtBrakPercent6.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent6.Location = new Point(3, 154);
+            txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent6.Name = "txtBrakPercent6";
+            txtBrakPercent6.ReadOnly = true;
+            txtBrakPercent6.Size = new Size(53, 14);
+            txtBrakPercent6.TabIndex = 5;
+            // 
+            // txtBrakPercent1
+            // 
+            txtBrakPercent1.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent1.Font = new Font("Arial", 9F);
+            txtBrakPercent1.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent1.Location = new Point(4, 18);
+            txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent1.Name = "txtBrakPercent1";
+            txtBrakPercent1.ReadOnly = true;
+            txtBrakPercent1.Size = new Size(53, 14);
+            txtBrakPercent1.TabIndex = 0;
+            // 
+            // txtBrakPercent5
+            // 
+            txtBrakPercent5.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent5.Font = new Font("Arial", 9F);
+            txtBrakPercent5.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent5.Location = new Point(3, 128);
+            txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent5.Name = "txtBrakPercent5";
+            txtBrakPercent5.ReadOnly = true;
+            txtBrakPercent5.Size = new Size(53, 14);
+            txtBrakPercent5.TabIndex = 4;
+            // 
+            // txtBrakPercent2
+            // 
+            txtBrakPercent2.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent2.Font = new Font("Arial", 9F);
+            txtBrakPercent2.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent2.Location = new Point(4, 46);
+            txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent2.Name = "txtBrakPercent2";
+            txtBrakPercent2.ReadOnly = true;
+            txtBrakPercent2.Size = new Size(53, 14);
+            txtBrakPercent2.TabIndex = 1;
+            // 
+            // txtBrakPercent4
+            // 
+            txtBrakPercent4.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent4.Font = new Font("Arial", 9F);
+            txtBrakPercent4.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent4.Location = new Point(2, 101);
+            txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent4.Name = "txtBrakPercent4";
+            txtBrakPercent4.ReadOnly = true;
+            txtBrakPercent4.Size = new Size(53, 14);
+            txtBrakPercent4.TabIndex = 3;
+            // 
+            // txtBrakPercent3
+            // 
+            txtBrakPercent3.BackColor = Color.FromArgb(248, 248, 255);
+            txtBrakPercent3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txtBrakPercent3.Font = new Font("Arial", 9F);
+            txtBrakPercent3.ForeColor = Color.FromArgb(72, 61, 139);
+            txtBrakPercent3.Location = new Point(3, 74);
+            txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txtBrakPercent3.Name = "txtBrakPercent3";
+            txtBrakPercent3.ReadOnly = true;
+            txtBrakPercent3.Size = new Size(53, 14);
+            txtBrakPercent3.TabIndex = 2;
+            // 
+            // cgbTkanSeb
+            // 
+            cgbTkanSeb.BackColor = Color.Transparent;
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t7);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t6);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t1);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t5);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t2);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t4);
+            cgbTkanSeb.Controls.Add(txbTkanSeb_t3);
+            cgbTkanSeb.Location = new Point(186, 22);
+            cgbTkanSeb.Name = "cgbTkanSeb";
+            cgbTkanSeb.Size = new Size(74, 203);
+            cgbTkanSeb.TabIndex = 36;
+            cgbTkanSeb.TabStop = false;
+            // 
+            // txbTkanSeb_t7
+            // 
+            txbTkanSeb_t7.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t7.Font = new Font("Arial", 9F);
+            txbTkanSeb_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t7.Location = new Point(5, 181);
+            txbTkanSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t7.Name = "txbTkanSeb_t7";
+            txbTkanSeb_t7.ReadOnly = true;
+            txbTkanSeb_t7.Size = new Size(65, 14);
+            txbTkanSeb_t7.TabIndex = 6;
+            // 
+            // txbTkanSeb_t6
+            // 
+            txbTkanSeb_t6.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t6.Font = new Font("Arial", 9F);
+            txbTkanSeb_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t6.Location = new Point(5, 153);
+            txbTkanSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t6.Name = "txbTkanSeb_t6";
+            txbTkanSeb_t6.ReadOnly = true;
+            txbTkanSeb_t6.Size = new Size(65, 14);
+            txbTkanSeb_t6.TabIndex = 5;
+            // 
+            // txbTkanSeb_t1
+            // 
+            txbTkanSeb_t1.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t1.Font = new Font("Arial", 9F);
+            txbTkanSeb_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t1.Location = new Point(5, 17);
+            txbTkanSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t1.Name = "txbTkanSeb_t1";
+            txbTkanSeb_t1.ReadOnly = true;
+            txbTkanSeb_t1.Size = new Size(65, 14);
+            txbTkanSeb_t1.TabIndex = 0;
+            // 
+            // txbTkanSeb_t5
+            // 
+            txbTkanSeb_t5.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t5.Font = new Font("Arial", 9F);
+            txbTkanSeb_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t5.Location = new Point(5, 127);
+            txbTkanSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t5.Name = "txbTkanSeb_t5";
+            txbTkanSeb_t5.ReadOnly = true;
+            txbTkanSeb_t5.Size = new Size(65, 14);
+            txbTkanSeb_t5.TabIndex = 4;
+            // 
+            // txbTkanSeb_t2
+            // 
+            txbTkanSeb_t2.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t2.Font = new Font("Arial", 9F);
+            txbTkanSeb_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t2.Location = new Point(5, 45);
+            txbTkanSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t2.Name = "txbTkanSeb_t2";
+            txbTkanSeb_t2.ReadOnly = true;
+            txbTkanSeb_t2.Size = new Size(65, 14);
+            txbTkanSeb_t2.TabIndex = 1;
+            // 
+            // txbTkanSeb_t4
+            // 
+            txbTkanSeb_t4.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t4.Font = new Font("Arial", 9F);
+            txbTkanSeb_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t4.Location = new Point(5, 100);
+            txbTkanSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t4.Name = "txbTkanSeb_t4";
+            txbTkanSeb_t4.ReadOnly = true;
+            txbTkanSeb_t4.Size = new Size(65, 14);
+            txbTkanSeb_t4.TabIndex = 3;
+            // 
+            // txbTkanSeb_t3
+            // 
+            txbTkanSeb_t3.BackColor = Color.FromArgb(248, 248, 255);
+            txbTkanSeb_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbTkanSeb_t3.Font = new Font("Arial", 9F);
+            txbTkanSeb_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            txbTkanSeb_t3.Location = new Point(5, 73);
+            txbTkanSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbTkanSeb_t3.Name = "txbTkanSeb_t3";
+            txbTkanSeb_t3.ReadOnly = true;
+            txbTkanSeb_t3.Size = new Size(65, 14);
+            txbTkanSeb_t3.TabIndex = 2;
+            // 
+            // cgbTkanNorm
+            // 
+            cgbTkanNorm.BackColor = Color.Transparent;
+            cgbTkanNorm.Controls.Add(txbNorm_t7);
+            cgbTkanNorm.Controls.Add(txbNorm_t6);
+            cgbTkanNorm.Controls.Add(txbNorm_t1);
+            cgbTkanNorm.Controls.Add(txbNorm_t5);
+            cgbTkanNorm.Controls.Add(txbNorm_t2);
+            cgbTkanNorm.Controls.Add(txbNorm_t4);
+            cgbTkanNorm.Controls.Add(txbNorm_t3);
+            cgbTkanNorm.Location = new Point(83, 22);
+            cgbTkanNorm.Name = "cgbTkanNorm";
+            cgbTkanNorm.Size = new Size(71, 199);
+            cgbTkanNorm.TabIndex = 35;
+            cgbTkanNorm.TabStop = false;
+            // 
+            // txbNorm_t7
+            // 
+            txbNorm_t7.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t7.Font = new Font("Arial", 9F);
+            txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t7.Location = new Point(5, 177);
+            txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t7.Name = "txbNorm_t7";
+            txbNorm_t7.ReadOnly = true;
+            txbNorm_t7.Size = new Size(58, 14);
+            txbNorm_t7.TabIndex = 6;
+            // 
+            // txbNorm_t6
+            // 
+            txbNorm_t6.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t6.Font = new Font("Arial", 9F);
+            txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t6.Location = new Point(5, 149);
+            txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t6.Name = "txbNorm_t6";
+            txbNorm_t6.ReadOnly = true;
+            txbNorm_t6.Size = new Size(58, 14);
+            txbNorm_t6.TabIndex = 5;
+            // 
+            // txbNorm_t1
+            // 
+            txbNorm_t1.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t1.Font = new Font("Arial", 9F);
+            txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t1.Location = new Point(5, 13);
+            txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t1.Name = "txbNorm_t1";
+            txbNorm_t1.ReadOnly = true;
+            txbNorm_t1.Size = new Size(58, 14);
+            txbNorm_t1.TabIndex = 0;
+            // 
+            // txbNorm_t5
+            // 
+            txbNorm_t5.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t5.Font = new Font("Arial", 9F);
+            txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t5.Location = new Point(5, 123);
+            txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t5.Name = "txbNorm_t5";
+            txbNorm_t5.ReadOnly = true;
+            txbNorm_t5.Size = new Size(58, 14);
+            txbNorm_t5.TabIndex = 4;
+            // 
+            // txbNorm_t2
+            // 
+            txbNorm_t2.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t2.Font = new Font("Arial", 9F);
+            txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t2.Location = new Point(5, 41);
+            txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t2.Name = "txbNorm_t2";
+            txbNorm_t2.ReadOnly = true;
+            txbNorm_t2.Size = new Size(58, 14);
+            txbNorm_t2.TabIndex = 1;
+            // 
+            // txbNorm_t4
+            // 
+            txbNorm_t4.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t4.Font = new Font("Arial", 9F);
+            txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t4.Location = new Point(5, 96);
+            txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t4.Name = "txbNorm_t4";
+            txbNorm_t4.ReadOnly = true;
+            txbNorm_t4.Size = new Size(58, 14);
+            txbNorm_t4.TabIndex = 3;
+            // 
+            // txbNorm_t3
+            // 
+            txbNorm_t3.BackColor = Color.FromArgb(248, 248, 255);
+            txbNorm_t3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbNorm_t3.Font = new Font("Arial", 9F);
+            txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
+            txbNorm_t3.Location = new Point(5, 69);
+            txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbNorm_t3.Name = "txbNorm_t3";
+            txbNorm_t3.ReadOnly = true;
+            txbNorm_t3.Size = new Size(58, 14);
+            txbNorm_t3.TabIndex = 2;
+            // 
+            // cgbTkanBrak
+            // 
+            cgbTkanBrak.BackColor = Color.Transparent;
+            cgbTkanBrak.Controls.Add(txbBrak7);
+            cgbTkanBrak.Controls.Add(txbBrak1);
+            cgbTkanBrak.Controls.Add(txbBrak6);
+            cgbTkanBrak.Controls.Add(txbBrak2);
+            cgbTkanBrak.Controls.Add(txbBrak5);
+            cgbTkanBrak.Controls.Add(txbBrak3);
+            cgbTkanBrak.Controls.Add(txbBrak4);
+            cgbTkanBrak.Location = new Point(455, 22);
+            cgbTkanBrak.Name = "cgbTkanBrak";
+            cgbTkanBrak.Size = new Size(64, 206);
+            cgbTkanBrak.TabIndex = 34;
+            cgbTkanBrak.TabStop = false;
+            cgbTkanBrak.Text = "Брак,м";
+            // 
+            // txbBrak7
+            // 
+            txbBrak7.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak7.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak7.Font = new Font("Arial", 9F);
+            txbBrak7.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak7.Location = new Point(5, 182);
+            txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak7.Name = "txbBrak7";
+            txbBrak7.ReadOnly = true;
+            txbBrak7.Size = new Size(53, 14);
+            txbBrak7.TabIndex = 6;
+            // 
+            // txbBrak1
+            // 
+            txbBrak1.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak1.Font = new Font("Arial", 9F);
+            txbBrak1.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak1.Location = new Point(5, 18);
+            txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak1.Name = "txbBrak1";
+            txbBrak1.ReadOnly = true;
+            txbBrak1.Size = new Size(53, 14);
+            txbBrak1.TabIndex = 0;
+            // 
+            // txbBrak6
+            // 
+            txbBrak6.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak6.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak6.Font = new Font("Arial", 9F);
+            txbBrak6.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak6.Location = new Point(5, 154);
+            txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak6.Name = "txbBrak6";
+            txbBrak6.ReadOnly = true;
+            txbBrak6.Size = new Size(53, 14);
+            txbBrak6.TabIndex = 5;
+            // 
+            // txbBrak2
+            // 
+            txbBrak2.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak2.Font = new Font("Arial", 9F);
+            txbBrak2.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak2.Location = new Point(5, 46);
+            txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak2.Name = "txbBrak2";
+            txbBrak2.ReadOnly = true;
+            txbBrak2.Size = new Size(53, 14);
+            txbBrak2.TabIndex = 1;
+            // 
+            // txbBrak5
+            // 
+            txbBrak5.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak5.Font = new Font("Arial", 9F);
+            txbBrak5.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak5.Location = new Point(5, 128);
+            txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak5.Name = "txbBrak5";
+            txbBrak5.ReadOnly = true;
+            txbBrak5.Size = new Size(53, 14);
+            txbBrak5.TabIndex = 4;
+            // 
+            // txbBrak3
+            // 
+            txbBrak3.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak3.Font = new Font("Arial", 9F);
+            txbBrak3.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak3.Location = new Point(5, 74);
+            txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak3.Name = "txbBrak3";
+            txbBrak3.ReadOnly = true;
+            txbBrak3.Size = new Size(53, 14);
+            txbBrak3.TabIndex = 2;
+            // 
+            // txbBrak4
+            // 
+            txbBrak4.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrak4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbBrak4.Font = new Font("Arial", 9F);
+            txbBrak4.ForeColor = Color.FromArgb(72, 61, 139);
+            txbBrak4.Location = new Point(5, 101);
+            txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbBrak4.Name = "txbBrak4";
+            txbBrak4.ReadOnly = true;
+            txbBrak4.Size = new Size(53, 14);
+            txbBrak4.TabIndex = 3;
             // 
             // customLabel30
             // 
@@ -1360,7 +1912,7 @@ namespace SewingProduction.Features.Articul
             customLabel30.BackColor = Color.Transparent;
             customLabel30.Font = new Font("Arial", 8F);
             customLabel30.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel30.Location = new Point(280, 194);
+            customLabel30.Location = new Point(160, 202);
             customLabel30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel30.Name = "customLabel30";
             customLabel30.Size = new Size(18, 14);
@@ -1373,7 +1925,7 @@ namespace SewingProduction.Features.Articul
             customLabel31.BackColor = Color.Transparent;
             customLabel31.Font = new Font("Arial", 8F);
             customLabel31.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel31.Location = new Point(280, 166);
+            customLabel31.Location = new Point(160, 174);
             customLabel31.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel31.Name = "customLabel31";
             customLabel31.Size = new Size(18, 14);
@@ -1386,7 +1938,7 @@ namespace SewingProduction.Features.Articul
             customLabel32.BackColor = Color.Transparent;
             customLabel32.Font = new Font("Arial", 8F);
             customLabel32.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel32.Location = new Point(280, 137);
+            customLabel32.Location = new Point(160, 145);
             customLabel32.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel32.Name = "customLabel32";
             customLabel32.Size = new Size(18, 14);
@@ -1399,7 +1951,7 @@ namespace SewingProduction.Features.Articul
             customLabel33.BackColor = Color.Transparent;
             customLabel33.Font = new Font("Arial", 8F);
             customLabel33.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel33.Location = new Point(280, 111);
+            customLabel33.Location = new Point(160, 119);
             customLabel33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel33.Name = "customLabel33";
             customLabel33.Size = new Size(18, 14);
@@ -1412,7 +1964,7 @@ namespace SewingProduction.Features.Articul
             customLabel34.BackColor = Color.Transparent;
             customLabel34.Font = new Font("Arial", 8F);
             customLabel34.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel34.Location = new Point(280, 83);
+            customLabel34.Location = new Point(160, 91);
             customLabel34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel34.Name = "customLabel34";
             customLabel34.Size = new Size(18, 14);
@@ -1425,7 +1977,7 @@ namespace SewingProduction.Features.Articul
             customLabel35.BackColor = Color.Transparent;
             customLabel35.Font = new Font("Arial", 8F);
             customLabel35.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel35.Location = new Point(280, 55);
+            customLabel35.Location = new Point(160, 63);
             customLabel35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel35.Name = "customLabel35";
             customLabel35.Size = new Size(18, 14);
@@ -1438,7 +1990,7 @@ namespace SewingProduction.Features.Articul
             customLabel36.BackColor = Color.Transparent;
             customLabel36.Font = new Font("Arial", 8F);
             customLabel36.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel36.Location = new Point(280, 28);
+            customLabel36.Location = new Point(160, 36);
             customLabel36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel36.Name = "customLabel36";
             customLabel36.Size = new Size(18, 14);
@@ -1451,7 +2003,7 @@ namespace SewingProduction.Features.Articul
             customLabel29.BackColor = Color.Transparent;
             customLabel29.Font = new Font("Arial", 8F);
             customLabel29.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel29.Location = new Point(510, 226);
+            customLabel29.Location = new Point(520, 235);
             customLabel29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel29.Name = "customLabel29";
             customLabel29.Size = new Size(28, 14);
@@ -1461,12 +2013,14 @@ namespace SewingProduction.Features.Articul
             // txbBrakAll
             // 
             txbBrakAll.BackColor = Color.FromArgb(248, 248, 255);
+            txbBrakAll.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbBrakAll.Font = new Font("Arial", 9F);
             txbBrakAll.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrakAll.Location = new Point(432, 222);
+            txbBrakAll.Location = new Point(461, 235);
             txbBrakAll.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbBrakAll.Name = "txbBrakAll";
-            txbBrakAll.Size = new Size(75, 21);
+            txbBrakAll.ReadOnly = true;
+            txbBrakAll.Size = new Size(53, 14);
             txbBrakAll.TabIndex = 7;
             // 
             // customLabel28
@@ -1475,7 +2029,7 @@ namespace SewingProduction.Features.Articul
             customLabel28.BackColor = Color.Transparent;
             customLabel28.Font = new Font("Arial", 8F);
             customLabel28.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel28.Location = new Point(7, 78);
+            customLabel28.Location = new Point(6, 72);
             customLabel28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel28.Name = "customLabel28";
             customLabel28.Size = new Size(28, 14);
@@ -1488,209 +2042,12 @@ namespace SewingProduction.Features.Articul
             customLabel27.BackColor = Color.Transparent;
             customLabel27.Font = new Font("Arial", 8F);
             customLabel27.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel27.Location = new Point(7, 27);
+            customLabel27.Location = new Point(6, 34);
             customLabel27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel27.Name = "customLabel27";
             customLabel27.Size = new Size(54, 14);
             customLabel27.TabIndex = 24;
             customLabel27.Text = "Норма, м";
-            // 
-            // gbBrakPercent
-            // 
-            gbBrakPercent.Controls.Add(txtBrakPercent7);
-            gbBrakPercent.Controls.Add(txtBrakPercent6);
-            gbBrakPercent.Controls.Add(txtBrakPercent5);
-            gbBrakPercent.Controls.Add(txtBrakPercent4);
-            gbBrakPercent.Controls.Add(txtBrakPercent3);
-            gbBrakPercent.Controls.Add(txtBrakPercent2);
-            gbBrakPercent.Controls.Add(txtBrakPercent1);
-            gbBrakPercent.Location = new Point(526, 3);
-            gbBrakPercent.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbBrakPercent.Name = "gbBrakPercent";
-            gbBrakPercent.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbBrakPercent.Size = new Size(77, 210);
-            gbBrakPercent.TabIndex = 23;
-            gbBrakPercent.TabStop = false;
-            gbBrakPercent.Text = "%";
-            // 
-            // txtBrakPercent7
-            // 
-            txtBrakPercent7.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent7.Font = new Font("Arial", 9F);
-            txtBrakPercent7.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent7.Location = new Point(0, 180);
-            txtBrakPercent7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent7.Name = "txtBrakPercent7";
-            txtBrakPercent7.ReadOnly = true;
-            txtBrakPercent7.Size = new Size(75, 21);
-            txtBrakPercent7.TabIndex = 6;
-            // 
-            // txtBrakPercent6
-            // 
-            txtBrakPercent6.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent6.Font = new Font("Arial", 9F);
-            txtBrakPercent6.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent6.Location = new Point(0, 152);
-            txtBrakPercent6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent6.Name = "txtBrakPercent6";
-            txtBrakPercent6.ReadOnly = true;
-            txtBrakPercent6.Size = new Size(75, 21);
-            txtBrakPercent6.TabIndex = 5;
-            // 
-            // txtBrakPercent5
-            // 
-            txtBrakPercent5.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent5.Font = new Font("Arial", 9F);
-            txtBrakPercent5.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent5.Location = new Point(0, 126);
-            txtBrakPercent5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent5.Name = "txtBrakPercent5";
-            txtBrakPercent5.ReadOnly = true;
-            txtBrakPercent5.Size = new Size(75, 21);
-            txtBrakPercent5.TabIndex = 4;
-            // 
-            // txtBrakPercent4
-            // 
-            txtBrakPercent4.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent4.Font = new Font("Arial", 9F);
-            txtBrakPercent4.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent4.Location = new Point(0, 99);
-            txtBrakPercent4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent4.Name = "txtBrakPercent4";
-            txtBrakPercent4.ReadOnly = true;
-            txtBrakPercent4.Size = new Size(75, 21);
-            txtBrakPercent4.TabIndex = 3;
-            // 
-            // txtBrakPercent3
-            // 
-            txtBrakPercent3.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent3.Font = new Font("Arial", 9F);
-            txtBrakPercent3.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent3.Location = new Point(0, 72);
-            txtBrakPercent3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent3.Name = "txtBrakPercent3";
-            txtBrakPercent3.ReadOnly = true;
-            txtBrakPercent3.Size = new Size(75, 21);
-            txtBrakPercent3.TabIndex = 2;
-            // 
-            // txtBrakPercent2
-            // 
-            txtBrakPercent2.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent2.Font = new Font("Arial", 9F);
-            txtBrakPercent2.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent2.Location = new Point(0, 44);
-            txtBrakPercent2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent2.Name = "txtBrakPercent2";
-            txtBrakPercent2.ReadOnly = true;
-            txtBrakPercent2.Size = new Size(75, 21);
-            txtBrakPercent2.TabIndex = 1;
-            // 
-            // txtBrakPercent1
-            // 
-            txtBrakPercent1.BackColor = Color.FromArgb(248, 248, 255);
-            txtBrakPercent1.Font = new Font("Arial", 9F);
-            txtBrakPercent1.ForeColor = Color.FromArgb(72, 61, 139);
-            txtBrakPercent1.Location = new Point(0, 16);
-            txtBrakPercent1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txtBrakPercent1.Name = "txtBrakPercent1";
-            txtBrakPercent1.ReadOnly = true;
-            txtBrakPercent1.Size = new Size(75, 21);
-            txtBrakPercent1.TabIndex = 0;
-            // 
-            // gbTkanBrak
-            // 
-            gbTkanBrak.Controls.Add(txbBrak7);
-            gbTkanBrak.Controls.Add(txbBrak6);
-            gbTkanBrak.Controls.Add(txbBrak5);
-            gbTkanBrak.Controls.Add(txbBrak4);
-            gbTkanBrak.Controls.Add(txbBrak3);
-            gbTkanBrak.Controls.Add(txbBrak2);
-            gbTkanBrak.Controls.Add(txbBrak1);
-            gbTkanBrak.Location = new Point(432, 3);
-            gbTkanBrak.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanBrak.Name = "gbTkanBrak";
-            gbTkanBrak.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanBrak.Size = new Size(77, 209);
-            gbTkanBrak.TabIndex = 22;
-            gbTkanBrak.TabStop = false;
-            gbTkanBrak.Text = "Брак, м";
-            // 
-            // txbBrak7
-            // 
-            txbBrak7.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak7.Font = new Font("Arial", 9F);
-            txbBrak7.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak7.Location = new Point(0, 180);
-            txbBrak7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak7.Name = "txbBrak7";
-            txbBrak7.Size = new Size(75, 21);
-            txbBrak7.TabIndex = 6;
-            // 
-            // txbBrak6
-            // 
-            txbBrak6.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak6.Font = new Font("Arial", 9F);
-            txbBrak6.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak6.Location = new Point(0, 152);
-            txbBrak6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak6.Name = "txbBrak6";
-            txbBrak6.Size = new Size(75, 21);
-            txbBrak6.TabIndex = 5;
-            // 
-            // txbBrak5
-            // 
-            txbBrak5.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak5.Font = new Font("Arial", 9F);
-            txbBrak5.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak5.Location = new Point(0, 126);
-            txbBrak5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak5.Name = "txbBrak5";
-            txbBrak5.Size = new Size(75, 21);
-            txbBrak5.TabIndex = 4;
-            // 
-            // txbBrak4
-            // 
-            txbBrak4.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak4.Font = new Font("Arial", 9F);
-            txbBrak4.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak4.Location = new Point(0, 99);
-            txbBrak4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak4.Name = "txbBrak4";
-            txbBrak4.Size = new Size(75, 21);
-            txbBrak4.TabIndex = 3;
-            // 
-            // txbBrak3
-            // 
-            txbBrak3.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak3.Font = new Font("Arial", 9F);
-            txbBrak3.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak3.Location = new Point(0, 72);
-            txbBrak3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak3.Name = "txbBrak3";
-            txbBrak3.Size = new Size(75, 21);
-            txbBrak3.TabIndex = 2;
-            // 
-            // txbBrak2
-            // 
-            txbBrak2.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak2.Font = new Font("Arial", 9F);
-            txbBrak2.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak2.Location = new Point(0, 44);
-            txbBrak2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak2.Name = "txbBrak2";
-            txbBrak2.Size = new Size(75, 21);
-            txbBrak2.TabIndex = 1;
-            // 
-            // txbBrak1
-            // 
-            txbBrak1.BackColor = Color.FromArgb(248, 248, 255);
-            txbBrak1.Font = new Font("Arial", 9F);
-            txbBrak1.ForeColor = Color.FromArgb(72, 61, 139);
-            txbBrak1.Location = new Point(0, 16);
-            txbBrak1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbBrak1.Name = "txbBrak1";
-            txbBrak1.Size = new Size(75, 21);
-            txbBrak1.TabIndex = 0;
             // 
             // customLabel26
             // 
@@ -1698,106 +2055,12 @@ namespace SewingProduction.Features.Articul
             customLabel26.BackColor = Color.Transparent;
             customLabel26.Font = new Font("Arial", 8F);
             customLabel26.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel26.Location = new Point(390, 194);
+            customLabel26.Location = new Point(266, 205);
             customLabel26.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel26.Name = "customLabel26";
             customLabel26.Size = new Size(28, 14);
             customLabel26.TabIndex = 13;
             customLabel26.Text = "руб.";
-            // 
-            // gbTkanSeb
-            // 
-            gbTkanSeb.Controls.Add(txbTkanSeb_t7);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t6);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t5);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t4);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t3);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t2);
-            gbTkanSeb.Controls.Add(txbTkanSeb_t1);
-            gbTkanSeb.Location = new Point(308, 3);
-            gbTkanSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanSeb.Name = "gbTkanSeb";
-            gbTkanSeb.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanSeb.Size = new Size(77, 209);
-            gbTkanSeb.TabIndex = 21;
-            gbTkanSeb.TabStop = false;
-            // 
-            // txbTkanSeb_t7
-            // 
-            txbTkanSeb_t7.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t7.Font = new Font("Arial", 9F);
-            txbTkanSeb_t7.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t7.Location = new Point(0, 180);
-            txbTkanSeb_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t7.Name = "txbTkanSeb_t7";
-            txbTkanSeb_t7.Size = new Size(75, 21);
-            txbTkanSeb_t7.TabIndex = 6;
-            // 
-            // txbTkanSeb_t6
-            // 
-            txbTkanSeb_t6.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t6.Font = new Font("Arial", 9F);
-            txbTkanSeb_t6.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t6.Location = new Point(0, 152);
-            txbTkanSeb_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t6.Name = "txbTkanSeb_t6";
-            txbTkanSeb_t6.Size = new Size(75, 21);
-            txbTkanSeb_t6.TabIndex = 5;
-            // 
-            // txbTkanSeb_t5
-            // 
-            txbTkanSeb_t5.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t5.Font = new Font("Arial", 9F);
-            txbTkanSeb_t5.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t5.Location = new Point(0, 126);
-            txbTkanSeb_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t5.Name = "txbTkanSeb_t5";
-            txbTkanSeb_t5.Size = new Size(75, 21);
-            txbTkanSeb_t5.TabIndex = 4;
-            // 
-            // txbTkanSeb_t4
-            // 
-            txbTkanSeb_t4.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t4.Font = new Font("Arial", 9F);
-            txbTkanSeb_t4.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t4.Location = new Point(0, 99);
-            txbTkanSeb_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t4.Name = "txbTkanSeb_t4";
-            txbTkanSeb_t4.Size = new Size(75, 21);
-            txbTkanSeb_t4.TabIndex = 3;
-            // 
-            // txbTkanSeb_t3
-            // 
-            txbTkanSeb_t3.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t3.Font = new Font("Arial", 9F);
-            txbTkanSeb_t3.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t3.Location = new Point(0, 72);
-            txbTkanSeb_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t3.Name = "txbTkanSeb_t3";
-            txbTkanSeb_t3.Size = new Size(75, 21);
-            txbTkanSeb_t3.TabIndex = 2;
-            // 
-            // txbTkanSeb_t2
-            // 
-            txbTkanSeb_t2.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t2.Font = new Font("Arial", 9F);
-            txbTkanSeb_t2.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t2.Location = new Point(0, 44);
-            txbTkanSeb_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t2.Name = "txbTkanSeb_t2";
-            txbTkanSeb_t2.Size = new Size(75, 21);
-            txbTkanSeb_t2.TabIndex = 1;
-            // 
-            // txbTkanSeb_t1
-            // 
-            txbTkanSeb_t1.BackColor = Color.FromArgb(248, 248, 255);
-            txbTkanSeb_t1.Font = new Font("Arial", 9F);
-            txbTkanSeb_t1.ForeColor = Color.FromArgb(72, 61, 139);
-            txbTkanSeb_t1.Location = new Point(0, 16);
-            txbTkanSeb_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbTkanSeb_t1.Name = "txbTkanSeb_t1";
-            txbTkanSeb_t1.Size = new Size(75, 21);
-            txbTkanSeb_t1.TabIndex = 0;
             // 
             // customLabel25
             // 
@@ -1805,7 +2068,7 @@ namespace SewingProduction.Features.Articul
             customLabel25.BackColor = Color.Transparent;
             customLabel25.Font = new Font("Arial", 8F);
             customLabel25.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel25.Location = new Point(390, 166);
+            customLabel25.Location = new Point(266, 177);
             customLabel25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel25.Name = "customLabel25";
             customLabel25.Size = new Size(28, 14);
@@ -1815,12 +2078,14 @@ namespace SewingProduction.Features.Articul
             // txbSeb
             // 
             txbSeb.BackColor = Color.FromArgb(248, 248, 255);
+            txbSeb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSeb.Font = new Font("Arial", 10F);
             txbSeb.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSeb.Location = new Point(7, 98);
+            txbSeb.Location = new Point(6, 90);
             txbSeb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSeb.Name = "txbSeb";
-            txbSeb.Size = new Size(88, 23);
+            txbSeb.ReadOnly = true;
+            txbSeb.Size = new Size(69, 16);
             txbSeb.TabIndex = 22;
             // 
             // customLabel24
@@ -1829,7 +2094,7 @@ namespace SewingProduction.Features.Articul
             customLabel24.BackColor = Color.Transparent;
             customLabel24.Font = new Font("Arial", 8F);
             customLabel24.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel24.Location = new Point(390, 138);
+            customLabel24.Location = new Point(266, 149);
             customLabel24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel24.Name = "customLabel24";
             customLabel24.Size = new Size(28, 14);
@@ -1839,12 +2104,14 @@ namespace SewingProduction.Features.Articul
             // txbNormt
             // 
             txbNormt.BackColor = Color.FromArgb(248, 248, 255);
+            txbNormt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbNormt.Font = new Font("Arial", 10F);
             txbNormt.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNormt.Location = new Point(7, 50);
+            txbNormt.Location = new Point(6, 50);
             txbNormt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbNormt.Name = "txbNormt";
-            txbNormt.Size = new Size(88, 23);
+            txbNormt.ReadOnly = true;
+            txbNormt.Size = new Size(69, 16);
             txbNormt.TabIndex = 21;
             // 
             // customLabel23
@@ -1853,106 +2120,12 @@ namespace SewingProduction.Features.Articul
             customLabel23.BackColor = Color.Transparent;
             customLabel23.Font = new Font("Arial", 8F);
             customLabel23.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel23.Location = new Point(391, 111);
+            customLabel23.Location = new Point(267, 122);
             customLabel23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel23.Name = "customLabel23";
             customLabel23.Size = new Size(28, 14);
             customLabel23.TabIndex = 10;
             customLabel23.Text = "руб.";
-            // 
-            // gbTkanNorm
-            // 
-            gbTkanNorm.Controls.Add(txbNorm_t7);
-            gbTkanNorm.Controls.Add(txbNorm_t6);
-            gbTkanNorm.Controls.Add(txbNorm_t5);
-            gbTkanNorm.Controls.Add(txbNorm_t4);
-            gbTkanNorm.Controls.Add(txbNorm_t3);
-            gbTkanNorm.Controls.Add(txbNorm_t2);
-            gbTkanNorm.Controls.Add(txbNorm_t1);
-            gbTkanNorm.Location = new Point(202, 3);
-            gbTkanNorm.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanNorm.Name = "gbTkanNorm";
-            gbTkanNorm.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbTkanNorm.Size = new Size(79, 209);
-            gbTkanNorm.TabIndex = 20;
-            gbTkanNorm.TabStop = false;
-            // 
-            // txbNorm_t7
-            // 
-            txbNorm_t7.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t7.Font = new Font("Arial", 9F);
-            txbNorm_t7.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t7.Location = new Point(0, 180);
-            txbNorm_t7.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t7.Name = "txbNorm_t7";
-            txbNorm_t7.Size = new Size(75, 21);
-            txbNorm_t7.TabIndex = 6;
-            // 
-            // txbNorm_t6
-            // 
-            txbNorm_t6.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t6.Font = new Font("Arial", 9F);
-            txbNorm_t6.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t6.Location = new Point(0, 152);
-            txbNorm_t6.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t6.Name = "txbNorm_t6";
-            txbNorm_t6.Size = new Size(75, 21);
-            txbNorm_t6.TabIndex = 5;
-            // 
-            // txbNorm_t5
-            // 
-            txbNorm_t5.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t5.Font = new Font("Arial", 9F);
-            txbNorm_t5.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t5.Location = new Point(0, 126);
-            txbNorm_t5.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t5.Name = "txbNorm_t5";
-            txbNorm_t5.Size = new Size(75, 21);
-            txbNorm_t5.TabIndex = 4;
-            // 
-            // txbNorm_t4
-            // 
-            txbNorm_t4.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t4.Font = new Font("Arial", 9F);
-            txbNorm_t4.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t4.Location = new Point(0, 99);
-            txbNorm_t4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t4.Name = "txbNorm_t4";
-            txbNorm_t4.Size = new Size(75, 21);
-            txbNorm_t4.TabIndex = 3;
-            // 
-            // txbNorm_t3
-            // 
-            txbNorm_t3.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t3.Font = new Font("Arial", 9F);
-            txbNorm_t3.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t3.Location = new Point(0, 72);
-            txbNorm_t3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t3.Name = "txbNorm_t3";
-            txbNorm_t3.Size = new Size(75, 21);
-            txbNorm_t3.TabIndex = 2;
-            // 
-            // txbNorm_t2
-            // 
-            txbNorm_t2.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t2.Font = new Font("Arial", 9F);
-            txbNorm_t2.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t2.Location = new Point(0, 44);
-            txbNorm_t2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t2.Name = "txbNorm_t2";
-            txbNorm_t2.Size = new Size(75, 21);
-            txbNorm_t2.TabIndex = 1;
-            // 
-            // txbNorm_t1
-            // 
-            txbNorm_t1.BackColor = Color.FromArgb(248, 248, 255);
-            txbNorm_t1.Font = new Font("Arial", 9F);
-            txbNorm_t1.ForeColor = Color.FromArgb(72, 61, 139);
-            txbNorm_t1.Location = new Point(0, 16);
-            txbNorm_t1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            txbNorm_t1.Name = "txbNorm_t1";
-            txbNorm_t1.Size = new Size(75, 21);
-            txbNorm_t1.TabIndex = 0;
             // 
             // customLabel22
             // 
@@ -1960,7 +2133,7 @@ namespace SewingProduction.Features.Articul
             customLabel22.BackColor = Color.Transparent;
             customLabel22.Font = new Font("Arial", 8F);
             customLabel22.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel22.Location = new Point(390, 83);
+            customLabel22.Location = new Point(266, 94);
             customLabel22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel22.Name = "customLabel22";
             customLabel22.Size = new Size(28, 14);
@@ -1973,7 +2146,7 @@ namespace SewingProduction.Features.Articul
             customLabel21.BackColor = Color.Transparent;
             customLabel21.Font = new Font("Arial", 8F);
             customLabel21.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel21.Location = new Point(390, 55);
+            customLabel21.Location = new Point(266, 66);
             customLabel21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel21.Name = "customLabel21";
             customLabel21.Size = new Size(28, 14);
@@ -1986,16 +2159,103 @@ namespace SewingProduction.Features.Articul
             customLabel20.BackColor = Color.Transparent;
             customLabel20.Font = new Font("Arial", 8F);
             customLabel20.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel20.Location = new Point(390, 28);
+            customLabel20.Location = new Point(266, 39);
             customLabel20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel20.Name = "customLabel20";
             customLabel20.Size = new Size(28, 14);
             customLabel20.TabIndex = 7;
             customLabel20.Text = "руб.";
             // 
+            // cGridKomplSost
+            // 
+            cGridKomplSost.DataSource = bsSostKompl;
+            cGridKomplSost.Dock = System.Windows.Forms.DockStyle.Fill;
+            cGridKomplSost.Font = new Font("Arial", 10F);
+            cGridKomplSost.Location = new Point(0, 0);
+            cGridKomplSost.MainView = gridViewKomplSost;
+            cGridKomplSost.Name = "cGridKomplSost";
+            cGridKomplSost.Size = new Size(574, 129);
+            cGridKomplSost.TabIndex = 6;
+            cGridKomplSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewKomplSost });
+            // 
+            // gridViewKomplSost
+            // 
+            gridViewKomplSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewKomplSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewKomplSost.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewKomplSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grColKomplSostKod, grColKomplSostGrup_k, grColKomplSostGrup, grColKomplSostArticul, grColKomplSostRazm, grColKomplSostSost, grColKomplHasDifference });
+            gridFormatRule1.Column = grColKomplHasDifference;
+            gridFormatRule1.ColumnApplyTo = grColKomplSostSost;
+            gridFormatRule1.Name = "Format0";
+            formatConditionRuleValue1.Appearance.BackColor = Color.FromArgb(255, 192, 192);
+            formatConditionRuleValue1.Appearance.Options.UseBackColor = true;
+            formatConditionRuleValue1.Condition = DevExpress.XtraEditors.FormatCondition.Equal;
+            formatConditionRuleValue1.Value1 = true;
+            gridFormatRule1.Rule = formatConditionRuleValue1;
+            gridViewKomplSost.FormatRules.Add(gridFormatRule1);
+            gridViewKomplSost.GridControl = cGridKomplSost;
+            gridViewKomplSost.Name = "gridViewKomplSost";
+            gridViewKomplSost.OptionsBehavior.Editable = false;
+            gridViewKomplSost.OptionsBehavior.ReadOnly = true;
+            gridViewKomplSost.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewKomplSost.OptionsView.ShowGroupPanel = false;
+            // 
+            // grColKomplSostKod
+            // 
+            grColKomplSostKod.Caption = "Код";
+            grColKomplSostKod.FieldName = "Kod_k";
+            grColKomplSostKod.Name = "grColKomplSostKod";
+            grColKomplSostKod.Visible = true;
+            grColKomplSostKod.VisibleIndex = 0;
+            // 
+            // grColKomplSostGrup_k
+            // 
+            grColKomplSostGrup_k.Caption = "Группа компл";
+            grColKomplSostGrup_k.FieldName = "Grup_k";
+            grColKomplSostGrup_k.Name = "grColKomplSostGrup_k";
+            grColKomplSostGrup_k.Visible = true;
+            grColKomplSostGrup_k.VisibleIndex = 1;
+            // 
+            // grColKomplSostGrup
+            // 
+            grColKomplSostGrup.Caption = "Группа";
+            grColKomplSostGrup.FieldName = "Grup";
+            grColKomplSostGrup.Name = "grColKomplSostGrup";
+            grColKomplSostGrup.Visible = true;
+            grColKomplSostGrup.VisibleIndex = 2;
+            // 
+            // grColKomplSostArticul
+            // 
+            grColKomplSostArticul.Caption = "Артикул";
+            grColKomplSostArticul.FieldName = "Articul";
+            grColKomplSostArticul.Name = "grColKomplSostArticul";
+            grColKomplSostArticul.Visible = true;
+            grColKomplSostArticul.VisibleIndex = 3;
+            // 
+            // grColKomplSostRazm
+            // 
+            grColKomplSostRazm.Caption = "Размер";
+            grColKomplSostRazm.FieldName = "Razm";
+            grColKomplSostRazm.Name = "grColKomplSostRazm";
+            grColKomplSostRazm.Visible = true;
+            grColKomplSostRazm.VisibleIndex = 4;
+            // 
             // groupBox1
             // 
             groupBox1.BackColor = Color.Transparent;
+            groupBox1.Controls.Add(customLabel45);
+            groupBox1.Controls.Add(txbSumKomplNum);
+            groupBox1.Controls.Add(customLabel44);
+            groupBox1.Controls.Add(txbSumSebRaskr);
+            groupBox1.Controls.Add(customLabel43);
+            groupBox1.Controls.Add(txbSumStrVznos);
+            groupBox1.Controls.Add(customLabel42);
+            groupBox1.Controls.Add(txbSumDopOpl);
+            groupBox1.Controls.Add(customLabel41);
+            groupBox1.Controls.Add(txbSumZarpl);
             groupBox1.Controls.Add(customLabel40);
             groupBox1.Controls.Add(txbSebz);
             groupBox1.Controls.Add(customLabel39);
@@ -2006,14 +2266,144 @@ namespace SewingProduction.Features.Articul
             groupBox1.Controls.Add(flowLayoutPanel1);
             groupBox1.Controls.Add(txbSekVyaz);
             groupBox1.Controls.Add(txbSek);
-            groupBox1.Location = new Point(1206, 254);
+            groupBox1.Location = new Point(1207, 254);
             groupBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox1.Size = new Size(298, 250);
+            groupBox1.Size = new Size(418, 250);
             groupBox1.TabIndex = 21;
             groupBox1.TabStop = false;
             groupBox1.Text = "Норма/сек";
+            // 
+            // customLabel45
+            // 
+            customLabel45.AutoSize = true;
+            customLabel45.BackColor = Color.Transparent;
+            customLabel45.Font = new Font("Arial", 8F);
+            customLabel45.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel45.Location = new Point(104, 157);
+            customLabel45.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel45.Name = "customLabel45";
+            customLabel45.Size = new Size(78, 14);
+            customLabel45.TabIndex = 46;
+            customLabel45.Text = "Компл. и нум.";
+            // 
+            // txbSumKomplNum
+            // 
+            txbSumKomplNum.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumKomplNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumKomplNum.Font = new Font("Arial", 10F);
+            txbSumKomplNum.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumKomplNum.Location = new Point(105, 174);
+            txbSumKomplNum.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumKomplNum.Name = "txbSumKomplNum";
+            txbSumKomplNum.ReadOnly = true;
+            txbSumKomplNum.Size = new Size(90, 16);
+            txbSumKomplNum.TabIndex = 47;
+            // 
+            // customLabel44
+            // 
+            customLabel44.AutoSize = true;
+            customLabel44.BackColor = Color.Transparent;
+            customLabel44.Font = new Font("Arial", 8F);
+            customLabel44.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel44.Location = new Point(105, 119);
+            customLabel44.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel44.Name = "customLabel44";
+            customLabel44.Size = new Size(48, 14);
+            customLabel44.TabIndex = 44;
+            customLabel44.Text = "Раскрой";
+            // 
+            // txbSumSebRaskr
+            // 
+            txbSumSebRaskr.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumSebRaskr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumSebRaskr.Font = new Font("Arial", 10F);
+            txbSumSebRaskr.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumSebRaskr.Location = new Point(106, 136);
+            txbSumSebRaskr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumSebRaskr.Name = "txbSumSebRaskr";
+            txbSumSebRaskr.ReadOnly = true;
+            txbSumSebRaskr.Size = new Size(90, 16);
+            txbSumSebRaskr.TabIndex = 45;
+            // 
+            // customLabel43
+            // 
+            customLabel43.AutoSize = true;
+            customLabel43.BackColor = Color.Transparent;
+            customLabel43.Font = new Font("Arial", 8F);
+            customLabel43.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel43.Location = new Point(105, 82);
+            customLabel43.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel43.Name = "customLabel43";
+            customLabel43.Size = new Size(70, 14);
+            customLabel43.TabIndex = 42;
+            customLabel43.Text = "Стр. взносы";
+            // 
+            // txbSumStrVznos
+            // 
+            txbSumStrVznos.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumStrVznos.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumStrVznos.Font = new Font("Arial", 10F);
+            txbSumStrVznos.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumStrVznos.Location = new Point(106, 99);
+            txbSumStrVznos.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumStrVznos.Name = "txbSumStrVznos";
+            txbSumStrVznos.ReadOnly = true;
+            txbSumStrVznos.Size = new Size(90, 16);
+            txbSumStrVznos.TabIndex = 43;
+            // 
+            // customLabel42
+            // 
+            customLabel42.AutoSize = true;
+            customLabel42.BackColor = Color.Transparent;
+            customLabel42.Font = new Font("Arial", 8F);
+            customLabel42.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel42.Location = new Point(106, 46);
+            customLabel42.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel42.Name = "customLabel42";
+            customLabel42.Size = new Size(69, 14);
+            customLabel42.TabIndex = 40;
+            customLabel42.Text = "Доп. оплата";
+            // 
+            // txbSumDopOpl
+            // 
+            txbSumDopOpl.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumDopOpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumDopOpl.Font = new Font("Arial", 10F);
+            txbSumDopOpl.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumDopOpl.Location = new Point(107, 63);
+            txbSumDopOpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumDopOpl.Name = "txbSumDopOpl";
+            txbSumDopOpl.ReadOnly = true;
+            txbSumDopOpl.Size = new Size(90, 16);
+            txbSumDopOpl.TabIndex = 41;
+            // 
+            // customLabel41
+            // 
+            customLabel41.AutoSize = true;
+            customLabel41.BackColor = Color.Transparent;
+            customLabel41.Font = new Font("Arial", 8F);
+            customLabel41.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel41.Location = new Point(105, 10);
+            customLabel41.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel41.Name = "customLabel41";
+            customLabel41.Size = new Size(71, 14);
+            customLabel41.TabIndex = 38;
+            customLabel41.Text = "Зарплата РТ";
+            // 
+            // txbSumZarpl
+            // 
+            txbSumZarpl.BackColor = Color.FromArgb(248, 248, 255);
+            txbSumZarpl.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSumZarpl.Font = new Font("Arial", 10F);
+            txbSumZarpl.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSumZarpl.Location = new Point(106, 27);
+            txbSumZarpl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSumZarpl.Name = "txbSumZarpl";
+            txbSumZarpl.ReadOnly = true;
+            txbSumZarpl.Size = new Size(90, 16);
+            txbSumZarpl.TabIndex = 39;
             // 
             // customLabel40
             // 
@@ -2021,7 +2411,7 @@ namespace SewingProduction.Features.Articul
             customLabel40.BackColor = Color.Transparent;
             customLabel40.Font = new Font("Arial", 8F);
             customLabel40.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel40.Location = new Point(7, 151);
+            customLabel40.Location = new Point(103, 192);
             customLabel40.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel40.Name = "customLabel40";
             customLabel40.Size = new Size(56, 14);
@@ -2031,12 +2421,14 @@ namespace SewingProduction.Features.Articul
             // txbSebz
             // 
             txbSebz.BackColor = Color.FromArgb(248, 248, 255);
+            txbSebz.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSebz.Font = new Font("Arial", 10F);
             txbSebz.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSebz.Location = new Point(8, 168);
+            txbSebz.Location = new Point(104, 209);
             txbSebz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSebz.Name = "txbSebz";
-            txbSebz.Size = new Size(90, 23);
+            txbSebz.ReadOnly = true;
+            txbSebz.Size = new Size(90, 16);
             txbSebz.TabIndex = 37;
             // 
             // customLabel39
@@ -2045,7 +2437,7 @@ namespace SewingProduction.Features.Articul
             customLabel39.BackColor = Color.Transparent;
             customLabel39.Font = new Font("Arial", 8F);
             customLabel39.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel39.Location = new Point(6, 119);
+            customLabel39.Location = new Point(4, 124);
             customLabel39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel39.Name = "customLabel39";
             customLabel39.Size = new Size(21, 14);
@@ -2058,7 +2450,7 @@ namespace SewingProduction.Features.Articul
             customLabel38.BackColor = Color.Transparent;
             customLabel38.Font = new Font("Arial", 8F);
             customLabel38.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel38.Location = new Point(6, 88);
+            customLabel38.Location = new Point(4, 93);
             customLabel38.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel38.Name = "customLabel38";
             customLabel38.Size = new Size(25, 14);
@@ -2071,7 +2463,7 @@ namespace SewingProduction.Features.Articul
             customLabel37.BackColor = Color.Transparent;
             customLabel37.Font = new Font("Arial", 8F);
             customLabel37.ForeColor = Color.FromArgb(139, 69, 19);
-            customLabel37.Location = new Point(6, 58);
+            customLabel37.Location = new Point(4, 63);
             customLabel37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             customLabel37.Name = "customLabel37";
             customLabel37.Size = new Size(28, 14);
@@ -2081,80 +2473,65 @@ namespace SewingProduction.Features.Articul
             // txbSekKr
             // 
             txbSekKr.BackColor = Color.Pink;
+            txbSekKr.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekKr.Font = new Font("Arial", 10F);
             txbSekKr.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekKr.Location = new Point(38, 113);
+            txbSekKr.Location = new Point(32, 124);
             txbSekKr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekKr.Name = "txbSekKr";
             txbSekKr.ReadOnly = true;
-            txbSekKr.Size = new Size(61, 23);
+            txbSekKr.Size = new Size(61, 16);
             txbSekKr.TabIndex = 3;
             // 
             // txbSekShv
             // 
             txbSekShv.BackColor = Color.Pink;
+            txbSekShv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekShv.Font = new Font("Arial", 10F);
             txbSekShv.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekShv.Location = new Point(38, 82);
+            txbSekShv.Location = new Point(32, 93);
             txbSekShv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekShv.Name = "txbSekShv";
             txbSekShv.ReadOnly = true;
-            txbSekShv.Size = new Size(61, 23);
+            txbSekShv.Size = new Size(61, 16);
             txbSekShv.TabIndex = 2;
             // 
             // txbSekVyaz
             // 
             txbSekVyaz.BackColor = Color.Pink;
+            txbSekVyaz.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSekVyaz.Font = new Font("Arial", 10F);
             txbSekVyaz.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSekVyaz.Location = new Point(38, 52);
+            txbSekVyaz.Location = new Point(32, 63);
             txbSekVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSekVyaz.Name = "txbSekVyaz";
             txbSekVyaz.ReadOnly = true;
-            txbSekVyaz.Size = new Size(61, 23);
+            txbSekVyaz.Size = new Size(61, 16);
             txbSekVyaz.TabIndex = 1;
             // 
             // txbSek
             // 
             txbSek.BackColor = Color.FromArgb(248, 248, 255);
+            txbSek.BorderStyle = System.Windows.Forms.BorderStyle.None;
             txbSek.Font = new Font("Arial", 10F);
             txbSek.ForeColor = Color.FromArgb(72, 61, 139);
-            txbSek.Location = new Point(9, 23);
+            txbSek.Location = new Point(7, 28);
             txbSek.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             txbSek.Name = "txbSek";
-            txbSek.Size = new Size(90, 23);
+            txbSek.Size = new Size(90, 16);
             txbSek.TabIndex = 0;
-            // 
-            // gridLookUpEdit1
-            // 
-            gridLookUpEdit1.Location = new Point(1643, 474);
-            gridLookUpEdit1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridLookUpEdit1.Name = "gridLookUpEdit1";
-            gridLookUpEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo) });
-            gridLookUpEdit1.Properties.PopupView = gridLookUpEdit1View;
-            gridLookUpEdit1.Size = new Size(161, 20);
-            gridLookUpEdit1.TabIndex = 25;
-            // 
-            // gridLookUpEdit1View
-            // 
-            gridLookUpEdit1View.DetailHeight = 404;
-            gridLookUpEdit1View.FocusRectStyle = DevExpress.XtraGrid.Views.Grid.DrawFocusRectStyle.RowFocus;
-            gridLookUpEdit1View.Name = "gridLookUpEdit1View";
-            gridLookUpEdit1View.OptionsEditForm.PopupEditFormWidth = 933;
-            gridLookUpEdit1View.OptionsSelection.EnableAppearanceFocusedCell = false;
-            gridLookUpEdit1View.OptionsView.ShowGroupPanel = false;
             // 
             // gridArtDr
             // 
             gridArtDr.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             gridArtDr.DataSource = bsArtDr;
             gridArtDr.EmbeddedNavigator.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gridArtDr.Location = new Point(589, 507);
+            gridArtDr.Location = new Point(589, 510);
             gridArtDr.MainView = gridView1;
             gridArtDr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             gridArtDr.MinimumSize = new Size(614, 89);
             gridArtDr.Name = "gridArtDr";
-            gridArtDr.Size = new Size(793, 450);
+            gridArtDr.Size = new Size(793, 392);
             gridArtDr.TabIndex = 26;
             gridArtDr.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridView1 });
             // 
@@ -2162,13 +2539,13 @@ namespace SewingProduction.Features.Articul
             // 
             gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grArtDrName, grArtDrEd, artDrSeb, grArtDrKol, grArtDrSum, grArtDrKod_fur, grArtDrKod_furn_ar, grArtDrData_nitki });
             gridView1.DetailHeight = 404;
-            gridFormatRule1.ColumnApplyTo = grArtDrName;
-            gridFormatRule1.Name = "Format0";
-            formatConditionRuleValue1.Appearance.ForeColor = Color.Cyan;
-            formatConditionRuleValue1.Appearance.Options.UseForeColor = true;
-            formatConditionRuleValue1.Expression = "1=1";
-            gridFormatRule1.Rule = formatConditionRuleValue1;
-            gridView1.FormatRules.Add(gridFormatRule1);
+            gridFormatRule2.ColumnApplyTo = grArtDrName;
+            gridFormatRule2.Name = "Format0";
+            formatConditionRuleValue2.Appearance.ForeColor = Color.Cyan;
+            formatConditionRuleValue2.Appearance.Options.UseForeColor = true;
+            formatConditionRuleValue2.Expression = "1=1";
+            gridFormatRule2.Rule = formatConditionRuleValue2;
+            gridView1.FormatRules.Add(gridFormatRule2);
             gridView1.GridControl = gridArtDr;
             gridView1.Name = "gridView1";
             gridView1.OptionsEditForm.PopupEditFormWidth = 933;
@@ -2176,76 +2553,77 @@ namespace SewingProduction.Features.Articul
             // 
             // grArtDrEd
             // 
-            grArtDrEd.Caption = "ед.изм.";
-            grArtDrEd.FieldName = "t_ed";
+            grArtDrEd.Caption = "Ед.изм.";
+            grArtDrEd.FieldName = "T_ed";
             grArtDrEd.MinWidth = 23;
             grArtDrEd.Name = "grArtDrEd";
             grArtDrEd.Visible = true;
             grArtDrEd.VisibleIndex = 1;
-            grArtDrEd.Width = 65;
+            grArtDrEd.Width = 45;
             // 
             // artDrSeb
             // 
-            artDrSeb.Caption = "себ-ть";
-            artDrSeb.FieldName = "t_seb";
+            artDrSeb.Caption = "Себ-ть";
+            artDrSeb.FieldName = "T_seb";
             artDrSeb.MinWidth = 23;
             artDrSeb.Name = "artDrSeb";
             artDrSeb.Visible = true;
             artDrSeb.VisibleIndex = 2;
-            artDrSeb.Width = 84;
+            artDrSeb.Width = 66;
             // 
             // grArtDrKol
             // 
-            grArtDrKol.Caption = "кол-во";
-            grArtDrKol.FieldName = "kol";
+            grArtDrKol.Caption = "Кол-во";
+            grArtDrKol.FieldName = "Kol";
             grArtDrKol.MinWidth = 23;
             grArtDrKol.Name = "grArtDrKol";
             grArtDrKol.Visible = true;
             grArtDrKol.VisibleIndex = 3;
-            grArtDrKol.Width = 64;
+            grArtDrKol.Width = 49;
             // 
             // grArtDrSum
             // 
-            grArtDrSum.Caption = "сумма";
-            grArtDrSum.FieldName = "sum";
+            grArtDrSum.Caption = "Сумма";
+            grArtDrSum.FieldName = "Sum";
             grArtDrSum.MinWidth = 23;
             grArtDrSum.Name = "grArtDrSum";
             grArtDrSum.Visible = true;
             grArtDrSum.VisibleIndex = 4;
-            grArtDrSum.Width = 71;
+            grArtDrSum.Width = 66;
             // 
             // grArtDrKod_fur
             // 
-            grArtDrKod_fur.Caption = "код фурн";
+            grArtDrKod_fur.Caption = "Код фурн";
             grArtDrKod_fur.FieldName = "Kod_fur";
             grArtDrKod_fur.MinWidth = 23;
             grArtDrKod_fur.Name = "grArtDrKod_fur";
             grArtDrKod_fur.Visible = true;
             grArtDrKod_fur.VisibleIndex = 5;
-            grArtDrKod_fur.Width = 77;
+            grArtDrKod_fur.Width = 70;
             // 
             // grArtDrKod_furn_ar
             // 
-            grArtDrKod_furn_ar.Caption = "код арт фурн";
+            grArtDrKod_furn_ar.Caption = "Код арт фурн";
             grArtDrKod_furn_ar.FieldName = "Kod_furn_ar";
             grArtDrKod_furn_ar.MinWidth = 23;
             grArtDrKod_furn_ar.Name = "grArtDrKod_furn_ar";
             grArtDrKod_furn_ar.Visible = true;
             grArtDrKod_furn_ar.VisibleIndex = 6;
-            grArtDrKod_furn_ar.Width = 59;
+            grArtDrKod_furn_ar.Width = 48;
             // 
             // grArtDrData_nitki
             // 
-            grArtDrData_nitki.Caption = "дата нитки";
-            grArtDrData_nitki.FieldName = "data_nitki";
+            grArtDrData_nitki.Caption = "Дата нитки";
+            grArtDrData_nitki.FieldName = "Data_nitki";
             grArtDrData_nitki.MinWidth = 23;
             grArtDrData_nitki.Name = "grArtDrData_nitki";
             grArtDrData_nitki.Visible = true;
             grArtDrData_nitki.VisibleIndex = 7;
-            grArtDrData_nitki.Width = 134;
+            grArtDrData_nitki.Width = 103;
             // 
             // groupBox2
             // 
+            groupBox2.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right;
             groupBox2.BackColor = Color.Transparent;
             groupBox2.Controls.Add(chkPres);
             groupBox2.Controls.Add(chkStra);
@@ -2254,11 +2632,11 @@ namespace SewingProduction.Features.Articul
             groupBox2.Controls.Add(chkP);
             groupBox2.Controls.Add(chbIsFurnit);
             groupBox2.Controls.Add(chbIsUpak);
-            groupBox2.Location = new Point(1507, 254);
+            groupBox2.Location = new Point(1631, 254);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            groupBox2.Size = new Size(122, 250);
+            groupBox2.Size = new Size(99, 250);
             groupBox2.TabIndex = 27;
             groupBox2.TabStop = false;
             groupBox2.Text = "Отделка";
@@ -2388,93 +2766,773 @@ namespace SewingProduction.Features.Articul
             customButton7.Text = "customButton7";
             customButton7.UseVisualStyleBackColor = false;
             // 
-            // gbKompl
-            // 
-            gbKompl.BackColor = Color.Transparent;
-            gbKompl.Controls.Add(dataGridView1);
-            gbKompl.Location = new Point(169, 875);
-            gbKompl.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbKompl.Name = "gbKompl";
-            gbKompl.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbKompl.Size = new Size(578, 134);
-            gbKompl.TabIndex = 29;
-            gbKompl.TabStop = false;
-            gbKompl.Text = "Комплект";
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.DataSource = bsArt;
-            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView1.Location = new Point(4, 19);
-            dataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(570, 112);
-            dataGridView1.TabIndex = 0;
-            // 
-            // gbNabor
-            // 
-            gbNabor.BackColor = Color.Transparent;
-            gbNabor.Controls.Add(dataGridView2);
-            gbNabor.Location = new Point(51, 924);
-            gbNabor.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbNabor.Name = "gbNabor";
-            gbNabor.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            gbNabor.Size = new Size(578, 134);
-            gbNabor.TabIndex = 30;
-            gbNabor.TabStop = false;
-            gbNabor.Text = "Состав набора";
-            // 
-            // dataGridView2
-            // 
-            dataGridView2.AutoGenerateColumns = false;
-            dataGridView2.BackgroundColor = SystemColors.ButtonHighlight;
-            dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.DataSource = bsArt;
-            dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            dataGridView2.Location = new Point(4, 19);
-            dataGridView2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.Size = new Size(570, 112);
-            dataGridView2.TabIndex = 0;
-            // 
             // customButtonKart
             // 
             customButtonKart.BackColor = Color.FromArgb(230, 230, 250);
             customButtonKart.Font = new Font("Arial", 10F);
             customButtonKart.ForeColor = Color.FromArgb(106, 90, 205);
-            customButtonKart.Location = new Point(483, 13);
+            customButtonKart.Location = new Point(485, 10);
             customButtonKart.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             customButtonKart.Name = "customButtonKart";
-            customButtonKart.Size = new Size(89, 23);
-            customButtonKart.TabIndex = 3;
+            customButtonKart.Size = new Size(83, 26);
+            customButtonKart.TabIndex = 0;
             customButtonKart.Text = "Карточка";
             customButtonKart.UseVisualStyleBackColor = false;
             customButtonKart.Click += customButtonKart_Click;
+            // 
+            // buttonEdit1
+            // 
+            buttonEdit1.Location = new Point(117, 508);
+            buttonEdit1.Name = "buttonEdit1";
+            buttonEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] { new DevExpress.XtraEditors.Controls.EditorButton() });
+            buttonEdit1.Size = new Size(460, 20);
+            buttonEdit1.TabIndex = 4;
+            // 
+            // layoutControlItem3
+            // 
+            layoutControlItem3.Control = buttonEdit1;
+            layoutControlItem3.Location = new Point(0, 496);
+            layoutControlItem3.Name = "layoutControlItem3";
+            layoutControlItem3.Size = new Size(569, 24);
+            layoutControlItem3.TextSize = new Size(50, 20);
+            // 
+            // splitContainerControl1
+            // 
+            splitContainerControl1.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.None;
+            splitContainerControl1.Horizontal = false;
+            splitContainerControl1.Location = new Point(3, 2);
+            splitContainerControl1.Name = "splitContainerControl1";
+            // 
+            // splitContainerControl1.Panel1
+            // 
+            splitContainerControl1.Panel1.AutoScroll = true;
+            splitContainerControl1.Panel1.Controls.Add(customButtonKart);
+            splitContainerControl1.Panel1.Controls.Add(gridArt);
+            splitContainerControl1.Panel1.Text = "Panel1";
+            // 
+            // splitContainerControl1.Panel2
+            // 
+            splitContainerControl1.Panel2.Controls.Add(layoutControl1);
+            splitContainerControl1.Panel2.Text = "Panel2";
+            splitContainerControl1.Size = new Size(581, 1015);
+            splitContainerControl1.SplitterPosition = 736;
+            splitContainerControl1.TabIndex = 33;
+            // 
+            // layoutControl1
+            // 
+            layoutControl1.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+            layoutControl1.Controls.Add(sButtodDeleteKod);
+            layoutControl1.Controls.Add(customSimpleButton7);
+            layoutControl1.Controls.Add(customTabControlKomplNabor);
+            layoutControl1.Controls.Add(customSimpleButton2);
+            layoutControl1.Controls.Add(customButtonCopy);
+            layoutControl1.Controls.Add(customButtonKompl);
+            layoutControl1.Controls.Add(csButtonNew);
+            layoutControl1.Location = new Point(0, 4);
+            layoutControl1.Name = "layoutControl1";
+            layoutControl1.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-680, 164, 650, 400);
+            layoutControl1.Root = layoutControlGroup1;
+            layoutControl1.Size = new Size(580, 248);
+            layoutControl1.TabIndex = 0;
+            layoutControl1.Text = "layoutControl1";
+            // 
+            // sButtodDeleteKod
+            // 
+            sButtodDeleteKod.Appearance.BackColor = Color.FromArgb(224, 224, 224);
+            sButtodDeleteKod.Appearance.Font = new Font("Tahoma", 8.25F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            sButtodDeleteKod.Appearance.ForeColor = Color.Red;
+            sButtodDeleteKod.Appearance.Options.UseBackColor = true;
+            sButtodDeleteKod.Appearance.Options.UseFont = true;
+            sButtodDeleteKod.Appearance.Options.UseForeColor = true;
+            sButtodDeleteKod.Location = new Point(291, 62);
+            sButtodDeleteKod.Margin = new System.Windows.Forms.Padding(0);
+            sButtodDeleteKod.MaximumSize = new Size(285, 26);
+            sButtodDeleteKod.MinimumSize = new Size(285, 26);
+            sButtodDeleteKod.Name = "sButtodDeleteKod";
+            sButtodDeleteKod.Size = new Size(285, 26);
+            sButtodDeleteKod.StyleController = layoutControl1;
+            sButtodDeleteKod.TabIndex = 8;
+            sButtodDeleteKod.Text = "Удалить";
+            sButtodDeleteKod.Click += sButtodDeleteKod_Click;
+            // 
+            // customSimpleButton7
+            // 
+            customSimpleButton7.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton7.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton7.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton7.Appearance.Options.UseBackColor = true;
+            customSimpleButton7.Appearance.Options.UseFont = true;
+            customSimpleButton7.Appearance.Options.UseForeColor = true;
+            customSimpleButton7.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton7.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton7.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton7.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton7.Location = new Point(291, 32);
+            customSimpleButton7.MaximumSize = new Size(285, 26);
+            customSimpleButton7.MinimumSize = new Size(285, 26);
+            customSimpleButton7.Name = "customSimpleButton7";
+            customSimpleButton7.Size = new Size(285, 26);
+            customSimpleButton7.StyleController = layoutControl1;
+            customSimpleButton7.TabIndex = 4;
+            customSimpleButton7.Text = "Вшивки";
+            // 
+            // customTabControlKomplNabor
+            // 
+            customTabControlKomplNabor.Appearance.ForeColor = Color.FromArgb(105, 75, 45);
+            customTabControlKomplNabor.Appearance.Options.UseForeColor = true;
+            customTabControlKomplNabor.Location = new Point(2, 92);
+            customTabControlKomplNabor.Name = "customTabControlKomplNabor";
+            customTabControlKomplNabor.ObjectName = null;
+            customTabControlKomplNabor.SelectedTabPage = cTabPage1;
+            customTabControlKomplNabor.Size = new Size(576, 154);
+            customTabControlKomplNabor.TabIndex = 7;
+            customTabControlKomplNabor.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] { cTabPage1, cTabPage2 });
+            // 
+            // cTabPage1
+            // 
+            cTabPage1.Controls.Add(cGridKomplSost);
+            cTabPage1.Name = "cTabPage1";
+            cTabPage1.Size = new Size(574, 129);
+            cTabPage1.Text = "Состав комплекта";
+            // 
+            // cTabPage2
+            // 
+            cTabPage2.Controls.Add(cGridNaborSost);
+            cTabPage2.Name = "cTabPage2";
+            cTabPage2.Size = new Size(574, 129);
+            cTabPage2.Text = "Состав набора";
+            // 
+            // cGridNaborSost
+            // 
+            cGridNaborSost.DataSource = bsSostNabor;
+            cGridNaborSost.Dock = System.Windows.Forms.DockStyle.Fill;
+            cGridNaborSost.Font = new Font("Arial", 10F);
+            cGridNaborSost.Location = new Point(0, 0);
+            cGridNaborSost.MainView = gridViewNaborSost;
+            cGridNaborSost.Name = "cGridNaborSost";
+            cGridNaborSost.Size = new Size(574, 129);
+            cGridNaborSost.TabIndex = 1;
+            cGridNaborSost.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] { gridViewNaborSost });
+            // 
+            // gridViewNaborSost
+            // 
+            gridViewNaborSost.Appearance.EvenRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewNaborSost.Appearance.EvenRow.Options.UseBackColor = true;
+            gridViewNaborSost.Appearance.FocusedRow.BackColor = Color.FromArgb(255, 235, 205);
+            gridViewNaborSost.Appearance.FocusedRow.Font = new Font("Tahoma", 8.25F, FontStyle.Bold);
+            gridViewNaborSost.Appearance.FocusedRow.Options.UseBackColor = true;
+            gridViewNaborSost.Appearance.FocusedRow.Options.UseFont = true;
+            gridViewNaborSost.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] { grColNaborSostAg_naimen, grColNaborSostTk_name, grColNaborSostTat_name, grColNaborSostId_gost, grColNaborSostName_gost, grColNaborSostSostav, grColNaborSostRazm });
+            gridViewNaborSost.GridControl = cGridNaborSost;
+            gridViewNaborSost.Name = "gridViewNaborSost";
+            gridViewNaborSost.OptionsBehavior.ReadOnly = true;
+            gridViewNaborSost.OptionsView.EnableAppearanceEvenRow = true;
+            gridViewNaborSost.OptionsView.ShowGroupPanel = false;
+            // 
+            // grColNaborSostAg_naimen
+            // 
+            grColNaborSostAg_naimen.Caption = "Группа по ГОСТ";
+            grColNaborSostAg_naimen.FieldName = "Ag_naimen";
+            grColNaborSostAg_naimen.Name = "grColNaborSostAg_naimen";
+            grColNaborSostAg_naimen.Visible = true;
+            grColNaborSostAg_naimen.VisibleIndex = 0;
+            // 
+            // grColNaborSostTk_name
+            // 
+            grColNaborSostTk_name.Caption = "Часть в наборе";
+            grColNaborSostTk_name.FieldName = "Tk_name";
+            grColNaborSostTk_name.Name = "grColNaborSostTk_name";
+            grColNaborSostTk_name.Visible = true;
+            grColNaborSostTk_name.VisibleIndex = 1;
+            grColNaborSostTk_name.Width = 70;
+            // 
+            // grColNaborSostTat_name
+            // 
+            grColNaborSostTat_name.Caption = "Ассортимент";
+            grColNaborSostTat_name.FieldName = "Tat_name";
+            grColNaborSostTat_name.Name = "grColNaborSostTat_name";
+            grColNaborSostTat_name.Visible = true;
+            grColNaborSostTat_name.VisibleIndex = 2;
+            // 
+            // grColNaborSostId_gost
+            // 
+            grColNaborSostId_gost.Caption = "ГОСТ";
+            grColNaborSostId_gost.FieldName = "Id_gost";
+            grColNaborSostId_gost.Name = "grColNaborSostId_gost";
+            grColNaborSostId_gost.Visible = true;
+            grColNaborSostId_gost.VisibleIndex = 3;
+            grColNaborSostId_gost.Width = 52;
+            // 
+            // grColNaborSostName_gost
+            // 
+            grColNaborSostName_gost.Caption = "Название по ГОСТ";
+            grColNaborSostName_gost.FieldName = "Name_gost";
+            grColNaborSostName_gost.Name = "grColNaborSostName_gost";
+            grColNaborSostName_gost.Visible = true;
+            grColNaborSostName_gost.VisibleIndex = 4;
+            grColNaborSostName_gost.Width = 97;
+            // 
+            // grColNaborSostSostav
+            // 
+            grColNaborSostSostav.Caption = "Состав";
+            grColNaborSostSostav.FieldName = "SostSostav";
+            grColNaborSostSostav.Name = "grColNaborSostSostav";
+            grColNaborSostSostav.Visible = true;
+            grColNaborSostSostav.VisibleIndex = 5;
+            // 
+            // grColNaborSostRazm
+            // 
+            grColNaborSostRazm.Caption = "Размер";
+            grColNaborSostRazm.FieldName = "Razm";
+            grColNaborSostRazm.Name = "grColNaborSostRazm";
+            grColNaborSostRazm.Visible = true;
+            grColNaborSostRazm.VisibleIndex = 6;
+            // 
+            // customSimpleButton2
+            // 
+            customSimpleButton2.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton2.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton2.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton2.Appearance.Options.UseBackColor = true;
+            customSimpleButton2.Appearance.Options.UseFont = true;
+            customSimpleButton2.Appearance.Options.UseForeColor = true;
+            customSimpleButton2.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton2.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton2.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton2.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton2.Location = new Point(291, 2);
+            customSimpleButton2.MaximumSize = new Size(285, 26);
+            customSimpleButton2.MinimumSize = new Size(285, 26);
+            customSimpleButton2.Name = "customSimpleButton2";
+            customSimpleButton2.Size = new Size(285, 26);
+            customSimpleButton2.StyleController = layoutControl1;
+            customSimpleButton2.TabIndex = 2;
+            customSimpleButton2.Text = "Опублик.артикулы";
+            // 
+            // csButtonNew
+            // 
+            csButtonNew.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            csButtonNew.Appearance.Font = new Font("Arial", 10F);
+            csButtonNew.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            csButtonNew.Appearance.Options.UseBackColor = true;
+            csButtonNew.Appearance.Options.UseFont = true;
+            csButtonNew.Appearance.Options.UseForeColor = true;
+            csButtonNew.AppearanceDisabled.BackColor = Color.Green;
+            csButtonNew.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            csButtonNew.AppearanceDisabled.Options.UseBackColor = true;
+            csButtonNew.AppearanceDisabled.Options.UseForeColor = true;
+            csButtonNew.Location = new Point(2, 2);
+            csButtonNew.MaximumSize = new Size(285, 26);
+            csButtonNew.MinimumSize = new Size(285, 26);
+            csButtonNew.Name = "csButtonNew";
+            csButtonNew.Size = new Size(285, 26);
+            csButtonNew.StyleController = layoutControl1;
+            csButtonNew.TabIndex = 0;
+            csButtonNew.Text = "Добавить";
+            csButtonNew.Click += csButtonNew_Click;
+            // 
+            // layoutControlGroup1
+            // 
+            layoutControlGroup1.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup1.GroupBordersVisible = false;
+            layoutControlGroup1.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlItem1, layoutControlItem4, layoutControlItem7, layoutControlItem2, layoutControlItem6, layoutControlItem5, layoutControlItem8 });
+            layoutControlGroup1.Name = "Root";
+            layoutControlGroup1.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
+            layoutControlGroup1.Size = new Size(580, 248);
+            layoutControlGroup1.TextVisible = false;
+            // 
+            // layoutControlItem1
+            // 
+            layoutControlItem1.Control = customTabControlKomplNabor;
+            layoutControlItem1.Location = new Point(0, 90);
+            layoutControlItem1.Name = "layoutControlItem1";
+            layoutControlItem1.Size = new Size(580, 158);
+            layoutControlItem1.Text = "SostKomplNabor";
+            layoutControlItem1.TextVisible = false;
+            // 
+            // layoutControlItem4
+            // 
+            layoutControlItem4.Control = customButtonCopy;
+            layoutControlItem4.CustomizationFormText = "Copy";
+            layoutControlItem4.Location = new Point(0, 30);
+            layoutControlItem4.Name = "layoutControlItem4";
+            layoutControlItem4.Size = new Size(289, 30);
+            layoutControlItem4.TextVisible = false;
+            // 
+            // layoutControlItem7
+            // 
+            layoutControlItem7.Control = customSimpleButton7;
+            layoutControlItem7.Location = new Point(289, 30);
+            layoutControlItem7.MinSize = new Size(58, 26);
+            layoutControlItem7.Name = "layoutControlItem7";
+            layoutControlItem7.Size = new Size(291, 30);
+            layoutControlItem7.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
+            layoutControlItem7.Text = "Vshivk";
+            layoutControlItem7.TextVisible = false;
+            // 
+            // layoutControlItem2
+            // 
+            layoutControlItem2.Control = csButtonNew;
+            layoutControlItem2.Location = new Point(0, 0);
+            layoutControlItem2.Name = "layoutControlItem2";
+            layoutControlItem2.Size = new Size(289, 30);
+            layoutControlItem2.Text = "add";
+            layoutControlItem2.TextVisible = false;
+            // 
+            // layoutControlItem6
+            // 
+            layoutControlItem6.Control = customSimpleButton2;
+            layoutControlItem6.Location = new Point(289, 0);
+            layoutControlItem6.Name = "layoutControlItem6";
+            layoutControlItem6.Size = new Size(291, 30);
+            layoutControlItem6.Text = "PublicArt";
+            layoutControlItem6.TextVisible = false;
+            // 
+            // layoutControlItem5
+            // 
+            layoutControlItem5.Control = customButtonKompl;
+            layoutControlItem5.Location = new Point(0, 60);
+            layoutControlItem5.Name = "layoutControlItem5";
+            layoutControlItem5.Size = new Size(289, 30);
+            layoutControlItem5.Text = "Kompl";
+            layoutControlItem5.TextVisible = false;
+            // 
+            // layoutControlItem8
+            // 
+            layoutControlItem8.Control = sButtodDeleteKod;
+            layoutControlItem8.Location = new Point(289, 60);
+            layoutControlItem8.Name = "layoutControlItem8";
+            layoutControlItem8.Size = new Size(291, 30);
+            layoutControlItem8.Text = "Del";
+            layoutControlItem8.TextVisible = false;
+            // 
+            // layoutControlGroup3
+            // 
+            layoutControlGroup3.Location = new Point(0, 0);
+            layoutControlGroup3.Name = "layoutControlGroup3";
+            layoutControlGroup3.Size = new Size(572, 127);
+            layoutControlGroup3.Text = "Состав коплекта";
+            // 
+            // tabbedControlGroup1
+            // 
+            tabbedControlGroup1.Location = new Point(0, 207);
+            tabbedControlGroup1.Name = "tabbedControlGroup1";
+            tabbedControlGroup1.SelectedTabPage = layoutControlGroup2;
+            tabbedControlGroup1.Size = new Size(545, 94);
+            tabbedControlGroup1.TabPages.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] { layoutControlGroup2 });
+            // 
+            // layoutControlGroup2
+            // 
+            layoutControlGroup2.Location = new Point(0, 0);
+            layoutControlGroup2.Name = "layoutControlGroup2";
+            layoutControlGroup2.Size = new Size(521, 47);
+            // 
+            // lCTabsControl
+            // 
+            lCTabsControl.Location = new Point(0, 0);
+            lCTabsControl.Name = "lCPagesKoplNabor";
+            lCTabsControl.Size = new Size(572, 127);
+            lCTabsControl.Text = "Состав коплекта";
+            // 
+            // lCPagesKoplNabor
+            // 
+            lCPagesKoplNabor.Location = new Point(0, 0);
+            lCPagesKoplNabor.Name = "lCGSostKompl";
+            lCPagesKoplNabor.Size = new Size(572, 127);
+            lCPagesKoplNabor.Text = "Состав коплекта";
+            // 
+            // customCheckBox1
+            // 
+            customCheckBox1.AutoSize = true;
+            customCheckBox1.Font = new Font("Arial", 10F);
+            customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
+            customCheckBox1.Location = new Point(7, 15);
+            customCheckBox1.Name = "customCheckBox1";
+            customCheckBox1.Size = new Size(325, 20);
+            customCheckBox1.TabIndex = 34;
+            customCheckBox1.Text = "Старая модель, на пересчете у экономистов";
+            customCheckBox1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            groupBox3.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
+            groupBox3.Controls.Add(customLabel48);
+            groupBox3.Controls.Add(customSimpleButton6);
+            groupBox3.Controls.Add(customTextBox1);
+            groupBox3.Controls.Add(customSimpleButton5);
+            groupBox3.Controls.Add(customSimpleButton4);
+            groupBox3.Controls.Add(customSimpleButton3);
+            groupBox3.Controls.Add(customSimpleButton1);
+            groupBox3.Controls.Add(txbSebRecom);
+            groupBox3.Controls.Add(customLabel47);
+            groupBox3.Controls.Add(labelControl1);
+            groupBox3.Controls.Add(customLabel46);
+            groupBox3.Controls.Add(label8);
+            groupBox3.Controls.Add(txbKoef);
+            groupBox3.Controls.Add(label7);
+            groupBox3.Controls.Add(txbSebProizv);
+            groupBox3.Controls.Add(label6);
+            groupBox3.Controls.Add(txbKoefVedDG);
+            groupBox3.Controls.Add(label5);
+            groupBox3.Controls.Add(txbKoefPr);
+            groupBox3.Controls.Add(label4);
+            groupBox3.Controls.Add(txbSebDop);
+            groupBox3.Controls.Add(customCheckBox1);
+            groupBox3.Location = new Point(1384, 502);
+            groupBox3.Name = "groupBox3";
+            groupBox3.Size = new Size(338, 398);
+            groupBox3.TabIndex = 35;
+            groupBox3.TabStop = false;
+            // 
+            // customLabel48
+            // 
+            customLabel48.AutoSize = true;
+            customLabel48.BackColor = Color.Transparent;
+            customLabel48.Font = new Font("Arial", 8F);
+            customLabel48.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel48.Location = new Point(8, 302);
+            customLabel48.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            customLabel48.Name = "customLabel48";
+            customLabel48.Size = new Size(78, 14);
+            customLabel48.TabIndex = 48;
+            customLabel48.Text = "Дата расчета";
+            // 
+            // customSimpleButton6
+            // 
+            customSimpleButton6.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton6.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton6.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton6.Appearance.Options.UseBackColor = true;
+            customSimpleButton6.Appearance.Options.UseFont = true;
+            customSimpleButton6.Appearance.Options.UseForeColor = true;
+            customSimpleButton6.Appearance.Options.UseTextOptions = true;
+            customSimpleButton6.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            customSimpleButton6.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton6.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton6.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton6.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton6.Location = new Point(239, 351);
+            customSimpleButton6.Name = "customSimpleButton6";
+            customSimpleButton6.Size = new Size(94, 36);
+            customSimpleButton6.TabIndex = 58;
+            customSimpleButton6.Text = "С\\ст по накладной в XLS";
+            // 
+            // customTextBox1
+            // 
+            customTextBox1.BackColor = Color.FromArgb(248, 248, 255);
+            customTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            customTextBox1.Font = new Font("Arial", 10F);
+            customTextBox1.ForeColor = Color.FromArgb(72, 61, 139);
+            customTextBox1.Location = new Point(9, 319);
+            customTextBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            customTextBox1.Name = "customTextBox1";
+            customTextBox1.ReadOnly = true;
+            customTextBox1.Size = new Size(90, 16);
+            customTextBox1.TabIndex = 49;
+            // 
+            // customSimpleButton5
+            // 
+            customSimpleButton5.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton5.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton5.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton5.Appearance.Options.UseBackColor = true;
+            customSimpleButton5.Appearance.Options.UseFont = true;
+            customSimpleButton5.Appearance.Options.UseForeColor = true;
+            customSimpleButton5.Appearance.Options.UseTextOptions = true;
+            customSimpleButton5.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            customSimpleButton5.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton5.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton5.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton5.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton5.Location = new Point(105, 351);
+            customSimpleButton5.Name = "customSimpleButton5";
+            customSimpleButton5.Size = new Size(128, 36);
+            customSimpleButton5.TabIndex = 57;
+            customSimpleButton5.Text = "Скопировать во все размеры";
+            // 
+            // customSimpleButton4
+            // 
+            customSimpleButton4.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton4.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton4.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton4.Appearance.Options.UseBackColor = true;
+            customSimpleButton4.Appearance.Options.UseFont = true;
+            customSimpleButton4.Appearance.Options.UseForeColor = true;
+            customSimpleButton4.Appearance.Options.UseTextOptions = true;
+            customSimpleButton4.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            customSimpleButton4.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton4.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton4.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton4.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton4.Location = new Point(239, 304);
+            customSimpleButton4.Name = "customSimpleButton4";
+            customSimpleButton4.Size = new Size(94, 43);
+            customSimpleButton4.TabIndex = 56;
+            customSimpleButton4.Text = "С\\ст по накладной";
+            // 
+            // customSimpleButton3
+            // 
+            customSimpleButton3.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton3.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton3.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton3.Appearance.Options.UseBackColor = true;
+            customSimpleButton3.Appearance.Options.UseFont = true;
+            customSimpleButton3.Appearance.Options.UseForeColor = true;
+            customSimpleButton3.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton3.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton3.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton3.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton3.Location = new Point(105, 304);
+            customSimpleButton3.Name = "customSimpleButton3";
+            customSimpleButton3.Size = new Size(128, 43);
+            customSimpleButton3.TabIndex = 55;
+            customSimpleButton3.Text = "Калькуляция в XLS";
+            // 
+            // customSimpleButton1
+            // 
+            customSimpleButton1.Appearance.BackColor = Color.FromArgb(255, 235, 205);
+            customSimpleButton1.Appearance.Font = new Font("Arial", 10F);
+            customSimpleButton1.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            customSimpleButton1.Appearance.Options.UseBackColor = true;
+            customSimpleButton1.Appearance.Options.UseFont = true;
+            customSimpleButton1.Appearance.Options.UseForeColor = true;
+            customSimpleButton1.Appearance.Options.UseTextOptions = true;
+            customSimpleButton1.Appearance.TextOptions.WordWrap = DevExpress.Utils.WordWrap.Wrap;
+            customSimpleButton1.AppearanceDisabled.BackColor = Color.Green;
+            customSimpleButton1.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            customSimpleButton1.AppearanceDisabled.Options.UseBackColor = true;
+            customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
+            customSimpleButton1.Location = new Point(6, 351);
+            customSimpleButton1.Name = "customSimpleButton1";
+            customSimpleButton1.Size = new Size(93, 36);
+            customSimpleButton1.TabIndex = 54;
+            customSimpleButton1.Text = "История расчета";
+            // 
+            // txbSebRecom
+            // 
+            txbSebRecom.BackColor = Color.FromArgb(248, 248, 255);
+            txbSebRecom.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebRecom.Font = new Font("Arial", 10F);
+            txbSebRecom.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSebRecom.Location = new Point(193, 273);
+            txbSebRecom.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSebRecom.Name = "txbSebRecom";
+            txbSebRecom.ReadOnly = true;
+            txbSebRecom.Size = new Size(90, 16);
+            txbSebRecom.TabIndex = 53;
+            // 
+            // customLabel47
+            // 
+            customLabel47.AutoSize = true;
+            customLabel47.Font = new Font("Arial", 10F);
+            customLabel47.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel47.Location = new Point(8, 273);
+            customLabel47.Name = "customLabel47";
+            customLabel47.Size = new Size(163, 16);
+            customLabel47.TabIndex = 52;
+            customLabel47.Text = "Рекомендованная цена";
+            // 
+            // labelControl1
+            // 
+            labelControl1.Appearance.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            labelControl1.Appearance.Options.UseFont = true;
+            labelControl1.Location = new Point(193, 245);
+            labelControl1.Name = "labelControl1";
+            labelControl1.Size = new Size(85, 16);
+            labelControl1.TabIndex = 51;
+            labelControl1.Text = "labelControl1";
+            // 
+            // customLabel46
+            // 
+            customLabel46.AutoSize = true;
+            customLabel46.Font = new Font("Arial", 10F);
+            customLabel46.ForeColor = Color.FromArgb(139, 69, 19);
+            customLabel46.Location = new Point(8, 245);
+            customLabel46.Name = "customLabel46";
+            customLabel46.Size = new Size(162, 16);
+            customLabel46.TabIndex = 49;
+            customLabel46.Text = "Расчетная реком. цена";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.Font = new Font("Segoe UI", 9F);
+            label8.Location = new Point(8, 203);
+            label8.Name = "label8";
+            label8.Size = new Size(97, 15);
+            label8.TabIndex = 48;
+            label8.Text = "Коэфф. наценки";
+            // 
+            // txbKoef
+            // 
+            txbKoef.BackColor = Color.FromArgb(248, 248, 255);
+            txbKoef.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKoef.Font = new Font("Arial", 10F);
+            txbKoef.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKoef.Location = new Point(6, 221);
+            txbKoef.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKoef.Name = "txbKoef";
+            txbKoef.ReadOnly = true;
+            txbKoef.Size = new Size(90, 16);
+            txbKoef.TabIndex = 47;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            label7.Location = new Point(9, 148);
+            label7.Name = "label7";
+            label7.Size = new Size(80, 15);
+            label7.TabIndex = 46;
+            label7.Text = "Произв. себ.";
+            // 
+            // txbSebProizv
+            // 
+            txbSebProizv.BackColor = Color.FromArgb(248, 248, 255);
+            txbSebProizv.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebProizv.Font = new Font("Arial", 10F);
+            txbSebProizv.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSebProizv.Location = new Point(7, 166);
+            txbSebProizv.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSebProizv.Name = "txbSebProizv";
+            txbSebProizv.ReadOnly = true;
+            txbSebProizv.Size = new Size(90, 16);
+            txbSebProizv.TabIndex = 45;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(9, 111);
+            label6.Name = "label6";
+            label6.Size = new Size(88, 15);
+            label6.TabIndex = 44;
+            label6.Text = "Коэф.ВЭД и ДГ";
+            // 
+            // txbKoefVedDG
+            // 
+            txbKoefVedDG.BackColor = Color.FromArgb(248, 248, 255);
+            txbKoefVedDG.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKoefVedDG.Font = new Font("Arial", 10F);
+            txbKoefVedDG.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKoefVedDG.Location = new Point(7, 129);
+            txbKoefVedDG.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKoefVedDG.Name = "txbKoefVedDG";
+            txbKoefVedDG.ReadOnly = true;
+            txbKoefVedDG.Size = new Size(90, 16);
+            txbKoefVedDG.TabIndex = 43;
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(9, 74);
+            label5.Name = "label5";
+            label5.Size = new Size(73, 15);
+            label5.TabIndex = 42;
+            label5.Text = "Коэф.затрат";
+            // 
+            // txbKoefPr
+            // 
+            txbKoefPr.BackColor = Color.FromArgb(248, 248, 255);
+            txbKoefPr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbKoefPr.Font = new Font("Arial", 10F);
+            txbKoefPr.ForeColor = Color.FromArgb(72, 61, 139);
+            txbKoefPr.Location = new Point(7, 92);
+            txbKoefPr.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbKoefPr.Name = "txbKoefPr";
+            txbKoefPr.ReadOnly = true;
+            txbKoefPr.Size = new Size(90, 16);
+            txbKoefPr.TabIndex = 41;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(9, 37);
+            label4.Name = "label4";
+            label4.Size = new Size(69, 15);
+            label4.TabIndex = 40;
+            label4.Text = "Пр.затраты";
+            // 
+            // txbSebDop
+            // 
+            txbSebDop.BackColor = Color.FromArgb(248, 248, 255);
+            txbSebDop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            txbSebDop.Font = new Font("Arial", 10F);
+            txbSebDop.ForeColor = Color.FromArgb(72, 61, 139);
+            txbSebDop.Location = new Point(7, 55);
+            txbSebDop.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            txbSebDop.Name = "txbSebDop";
+            txbSebDop.ReadOnly = true;
+            txbSebDop.Size = new Size(90, 16);
+            txbSebDop.TabIndex = 39;
+            // 
+            // layoutControl2
+            // 
+            layoutControl2.Location = new Point(1393, 906);
+            layoutControl2.Name = "layoutControl2";
+            layoutControl2.Root = layoutControlGroup4;
+            layoutControl2.Size = new Size(180, 120);
+            layoutControl2.TabIndex = 37;
+            layoutControl2.Text = "layoutControl2";
+            // 
+            // layoutControlGroup4
+            // 
+            layoutControlGroup4.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
+            layoutControlGroup4.GroupBordersVisible = false;
+            layoutControlGroup4.Name = "layoutControlGroup4";
+            layoutControlGroup4.Size = new Size(180, 120);
+            layoutControlGroup4.TextVisible = false;
+            // 
+            // customGroupBox1
+            // 
+            customGroupBox1.BackColor = Color.Transparent;
+            customGroupBox1.Controls.Add(txbNormt);
+            customGroupBox1.Controls.Add(cgbTkanPurpose);
+            customGroupBox1.Controls.Add(customLabel20);
+            customGroupBox1.Controls.Add(cgbKfKach);
+            customGroupBox1.Controls.Add(customLabel21);
+            customGroupBox1.Controls.Add(cgbBrakPercent);
+            customGroupBox1.Controls.Add(customLabel22);
+            customGroupBox1.Controls.Add(cgbTkanSeb);
+            customGroupBox1.Controls.Add(customLabel23);
+            customGroupBox1.Controls.Add(cgbTkanNorm);
+            customGroupBox1.Controls.Add(customLabel24);
+            customGroupBox1.Controls.Add(cgbTkanBrak);
+            customGroupBox1.Controls.Add(txbSeb);
+            customGroupBox1.Controls.Add(customLabel30);
+            customGroupBox1.Controls.Add(customLabel25);
+            customGroupBox1.Controls.Add(customLabel31);
+            customGroupBox1.Controls.Add(customLabel26);
+            customGroupBox1.Controls.Add(customLabel32);
+            customGroupBox1.Controls.Add(customLabel27);
+            customGroupBox1.Controls.Add(customLabel33);
+            customGroupBox1.Controls.Add(customLabel28);
+            customGroupBox1.Controls.Add(customLabel34);
+            customGroupBox1.Controls.Add(txbBrakAll);
+            customGroupBox1.Controls.Add(customLabel35);
+            customGroupBox1.Controls.Add(customLabel29);
+            customGroupBox1.Controls.Add(customLabel36);
+            customGroupBox1.Location = new Point(592, 246);
+            customGroupBox1.Name = "customGroupBox1";
+            customGroupBox1.Size = new Size(606, 258);
+            customGroupBox1.TabIndex = 38;
+            customGroupBox1.TabStop = false;
+            customGroupBox1.Text = "Затраты на изготовление";
             // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new Size(1777, 1010);
-            Controls.Add(gbNabor);
-            Controls.Add(gbKompl);
-            Controls.Add(gbTkanInfo);
-            Controls.Add(customButtonKart);
+            ClientSize = new Size(1742, 1010);
+            Controls.Add(customGroupBox1);
+            Controls.Add(layoutControl2);
+            Controls.Add(groupBox3);
+            Controls.Add(splitContainerControl1);
             Controls.Add(tableLayoutPanel2);
             Controls.Add(groupBox2);
-            Controls.Add(gridArtDr);
-            Controls.Add(gridLookUpEdit1);
             Controls.Add(groupBox1);
-            Controls.Add(lookUpEdit1);
-            Controls.Add(checkedComboBoxEdit2);
-            Controls.Add(cbTM);
-            Controls.Add(grBoxMainInfo);
-            Controls.Add(tableLayoutPanel1);
-            Controls.Add(gridArt);
-            Controls.Add(comboBoxEdit1);
+            Controls.Add(lContrBoxMainInfo);
+            Controls.Add(gridArtDr);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Name = "Articul";
             Text = "Справочник изделий";
@@ -2483,41 +3541,71 @@ namespace SewingProduction.Features.Articul
             ((System.ComponentModel.ISupportInitialize)bsArt).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBoxArticul).EndInit();
-            ((System.ComponentModel.ISupportInitialize)bsTM).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArticul).EndInit();
-            tableLayoutPanel1.ResumeLayout(false);
-            grBoxMainInfo.ResumeLayout(false);
-            grBoxMainInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)lContrBoxMainInfo).EndInit();
+            lContrBoxMainInfo.ResumeLayout(false);
+            lContrBoxMainInfo.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)Root).EndInit();
             flowLayoutPanel1.ResumeLayout(false);
-            gbTkanName.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)checkedComboBoxEdit2.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)comboBoxEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)searchLookUpEdit1View).EndInit();
-            ((System.ComponentModel.ISupportInitialize)lookUpEdit1.Properties).EndInit();
-            gbTkanInfo.ResumeLayout(false);
-            gbTkanInfo.PerformLayout();
-            gbBrakPercent.ResumeLayout(false);
-            gbBrakPercent.PerformLayout();
-            gbTkanBrak.ResumeLayout(false);
-            gbTkanBrak.PerformLayout();
-            gbTkanSeb.ResumeLayout(false);
-            gbTkanSeb.PerformLayout();
-            gbTkanNorm.ResumeLayout(false);
-            gbTkanNorm.PerformLayout();
+            cgbTkanPurpose.ResumeLayout(false);
+            cgbTkanPurpose.PerformLayout();
+            cgbKfKach.ResumeLayout(false);
+            cgbKfKach.PerformLayout();
+            cgbBrakPercent.ResumeLayout(false);
+            cgbBrakPercent.PerformLayout();
+            cgbTkanSeb.ResumeLayout(false);
+            cgbTkanSeb.PerformLayout();
+            cgbTkanNorm.ResumeLayout(false);
+            cgbTkanNorm.PerformLayout();
+            cgbTkanBrak.ResumeLayout(false);
+            cgbTkanBrak.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)cGridKomplSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostKompl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewKomplSost).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1.Properties).EndInit();
-            ((System.ComponentModel.ISupportInitialize)gridLookUpEdit1View).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)bsArtDr).EndInit();
             ((System.ComponentModel.ISupportInitialize)gridView1).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox2.PerformLayout();
             tableLayoutPanel2.ResumeLayout(false);
-            gbKompl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            gbNabor.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)buttonEdit1.Properties).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel1).EndInit();
+            splitContainerControl1.Panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1.Panel2).EndInit();
+            splitContainerControl1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainerControl1).EndInit();
+            splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)layoutControl1).EndInit();
+            layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)customTabControlKomplNabor).EndInit();
+            customTabControlKomplNabor.ResumeLayout(false);
+            cTabPage1.ResumeLayout(false);
+            cTabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)cGridNaborSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bsSostNabor).EndInit();
+            ((System.ComponentModel.ISupportInitialize)gridViewNaborSost).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem4).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem7).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem6).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlItem8).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)tabbedControlGroup1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lCTabsControl).EndInit();
+            ((System.ComponentModel.ISupportInitialize)lCPagesKoplNabor).EndInit();
+            groupBox3.ResumeLayout(false);
+            groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)layoutControl2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)layoutControlGroup4).EndInit();
+            customGroupBox1.ResumeLayout(false);
+            customGroupBox1.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -2536,9 +3624,6 @@ namespace SewingProduction.Features.Articul
         private System.Windows.Forms.BindingSource bsArticul;
         private System.Windows.Forms.BindingSource bsArt;
         private CustomTextBox txbMod;
-        private SewingProduction.CustomComboBox cbTM;
-        //private System.Windows.Forms.ComboBox cbTM;
-        private System.Windows.Forms.BindingSource bsTM;
         private System.Windows.Forms.PictureBox pictureBoxArticul;
         private CustomLabel label1;
         private CustomLabel label2;
@@ -2583,26 +3668,10 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chbKombIzd;
         private CustomCheckBox chbKombDet;
         private CustomCheckBox chbArh;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.GroupBox grBoxMainInfo;
+        //private System.Windows.Forms.GroupBox grBoxMainInfo;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private CustomButton customButtonAdd;
-        private CustomButton customButtonCopy;
-        private CustomButton customButtonKompl;
-        private DevExpress.XtraEditors.CheckedComboBoxEdit checkedComboBoxEdit2;
-        private CustomComboBox customComboBox7;
-        private CustomComboBox customComboBox6;
-        private CustomComboBox customComboBox5;
-        private CustomComboBox customComboBox4;
-        private CustomComboBox customComboBox3;
-        private CustomComboBox customComboBox2;
-        private CustomComboBox customComboBox1;
-        private DevExpress.XtraEditors.SearchLookUpEdit comboBoxEdit1;
-        private DevExpress.XtraGrid.Views.Grid.GridView searchLookUpEdit1View;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEdit1;
-        private System.Windows.Forms.GroupBox gbTkanName;
-        private System.Windows.Forms.GroupBox gbTkanInfo;
-        private System.Windows.Forms.GroupBox gbTkanNorm;
+        private CustomSimpleButton customButtonCopy;
+        private CustomSimpleButton customButtonKompl;
         private CustomTextBox txbNorm_t1;
         private CustomTextBox txbSeb;
         private CustomTextBox txbNormt;
@@ -2612,7 +3681,6 @@ namespace SewingProduction.Features.Articul
         private CustomTextBox txbNorm_t4;
         private CustomTextBox txbNorm_t3;
         private CustomTextBox txbNorm_t2;
-        private System.Windows.Forms.GroupBox gbTkanSeb;
         private CustomTextBox txbTkanSeb_t7;
         private CustomTextBox txbTkanSeb_t6;
         private CustomTextBox txbTkanSeb_t5;
@@ -2627,7 +3695,6 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel22;
         private CustomLabel customLabel21;
         private CustomLabel customLabel20;
-        private System.Windows.Forms.GroupBox gbTkanBrak;
         private CustomTextBox txbBrak7;
         private CustomTextBox txbBrak6;
         private CustomTextBox txbBrak5;
@@ -2635,7 +3702,6 @@ namespace SewingProduction.Features.Articul
         private CustomTextBox txbBrak3;
         private CustomTextBox txbBrak2;
         private CustomTextBox txbBrak1;
-        private System.Windows.Forms.GroupBox gbBrakPercent;
         private CustomTextBox txtBrakPercent7;
         private CustomTextBox txtBrakPercent6;
         private CustomTextBox txtBrakPercent5;
@@ -2662,8 +3728,6 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel37;
         private CustomLabel customLabel39;
         private CustomLabel customLabel38;
-        private DevExpress.XtraEditors.GridLookUpEdit gridLookUpEdit1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridLookUpEdit1View;
         private CustomButton customButton1;
         private CustomButton customButton2;
         private CustomButton customButton6;
@@ -2690,10 +3754,108 @@ namespace SewingProduction.Features.Articul
         private CustomCheckBox chkStra;
         private CustomCheckBox chkBus;
         private CustomCheckBox chkV;
-        private System.Windows.Forms.GroupBox gbKompl;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.GroupBox gbNabor;
-        private System.Windows.Forms.DataGridView dataGridView2;
         private CustomButton customButtonKart;
+        private DevExpress.XtraLayout.LayoutControl lContrBoxMainInfo;
+        private DevExpress.XtraLayout.LayoutControlGroup Root;
+        private CustomGridControl cGridKomplSost;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewKomplSost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostKod;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostGrup_k;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostGrup;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostArticul;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostRazm;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplSostSost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColKomplHasDifference;
+        private System.Windows.Forms.BindingSource bsSostKompl;
+        private DevExpress.XtraEditors.ButtonEdit buttonEdit1;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem3;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        private DevExpress.XtraLayout.LayoutControl layoutControl1;
+        private CustomSimpleButton csButtonNew;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup1;
+        private CustomSimpleButton customSimpleButton2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem4;
+        private CustomGridControl cGridNaborSost;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewNaborSost;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        private DevExpress.XtraLayout.TabbedControlGroup tabbedControlGroup1;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
+        private System.Windows.Forms.BindingSource bsSostNabor;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostAg_naimen;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostTk_name;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostTat_name;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostId_gost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostName_gost;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostSostav;
+        private DevExpress.XtraGrid.Columns.GridColumn grColNaborSostRazm;
+        private DevExpress.XtraLayout.LayoutControlGroup lCTabsControl;
+        private DevExpress.XtraLayout.LayoutControlGroup lCPagesKoplNabor;
+        private CustomTabControl customTabControlKomplNabor;
+        private DevExpress.XtraTab.XtraTabPage cTabPage1;
+        private DevExpress.XtraTab.XtraTabPage cTabPage2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
+        private System.Windows.Forms.GroupBox cgbKfKach;
+        private CustomTextBox txbKfKach7;
+        private CustomTextBox txbKfKach6;
+        private CustomTextBox txbKfKach5;
+        private CustomTextBox txbKfKach4;
+        private CustomTextBox txbKfKach3;
+        private CustomTextBox txbKfKach2;
+        private CustomTextBox txbKfKach1;
+        private System.Windows.Forms.GroupBox cgbTkanBrak;
+        private System.Windows.Forms.GroupBox cgbTkanNorm;
+        private System.Windows.Forms.GroupBox cgbTkanSeb;
+        private System.Windows.Forms.GroupBox cgbBrakPercent;
+        private System.Windows.Forms.GroupBox cgbTkanPurpose;
+        private CustomTextBox txbOpis_t7;
+        private CustomTextBox txbOpis_t6;
+        private CustomTextBox txbOpis_t1;
+        private CustomTextBox txbOpis_t5;
+        private CustomTextBox txbOpis_t2;
+        private CustomTextBox txbOpis_t4;
+        private CustomTextBox txbOpis_t3;
+        private CustomLabel customLabel41;
+        private CustomTextBox txbSumZarpl;
+        private CustomLabel customLabel44;
+        private CustomTextBox txbSumSebRaskr;
+        private CustomLabel customLabel43;
+        private CustomTextBox txbSumStrVznos;
+        private CustomLabel customLabel42;
+        private CustomTextBox txbSumDopOpl;
+        private CustomLabel customLabel45;
+        private CustomTextBox txbSumKomplNum;
+        private CustomCheckBox customCheckBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private CustomTextBox txbSebDop;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label7;
+        private CustomTextBox txbSebProizv;
+        private System.Windows.Forms.Label label6;
+        private CustomTextBox txbKoefVedDG;
+        private System.Windows.Forms.Label label5;
+        private CustomTextBox txbKoefPr;
+        private System.Windows.Forms.Label label8;
+        private CustomTextBox txbKoef;
+        private CustomLabel customLabel46;
+        private CustomTextBox txbSebRecom;
+        private CustomLabel customLabel47;
+        private DevExpress.XtraEditors.LabelControl labelControl1;
+        private CustomLabel customLabel48;
+        private CustomSimpleButton customSimpleButton6;
+        private CustomTextBox customTextBox1;
+        private CustomSimpleButton customSimpleButton5;
+        private CustomSimpleButton customSimpleButton4;
+        private CustomSimpleButton customSimpleButton3;
+        private CustomSimpleButton customSimpleButton1;
+        private DevExpress.XtraEditors.SimpleButton sButtodDeleteKod;
+        private CustomSimpleButton customSimpleButton7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem7;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem6;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem5;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem8;
+        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup4;
+        private CustomGroupBox customGroupBox1;
     }
 }
