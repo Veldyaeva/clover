@@ -26,6 +26,7 @@ using SewingProduction.Features.CardByNom.Models;
 using SewingProduction.Features.CardByNom.Services;
 using SewingProduction.Features.Furnit.Services;
 using SewingProduction.Features.KnittingProduction.Models;
+using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.form;
 using SewingProduction.form.TeamWork.Interfaces;
 using SewingProduction.Helpers;
@@ -121,7 +122,7 @@ namespace SewingProduction
         private List<SockDefectList> sockDefectListData = new List<SockDefectList>();
         private BindingList<SockDefectList> _sockDefectListBindingList;
         private BindingSource _sockDefectListBindingSource;
-        public CardByNom()
+        public CardByNom(UserClass user) : base(user)
         {
 
             InitializeComponent();
