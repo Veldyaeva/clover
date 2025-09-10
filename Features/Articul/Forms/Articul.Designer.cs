@@ -214,7 +214,7 @@ namespace SewingProduction.Features.Articul
             grArtDrKod_fur = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrKod_furn_ar = new DevExpress.XtraGrid.Columns.GridColumn();
             grArtDrData_nitki = new DevExpress.XtraGrid.Columns.GridColumn();
-            groupBox2 = new System.Windows.Forms.GroupBox();
+            groupBox2 = new CustomGroupBox();
             chkPres = new CustomCheckBox();
             chkStra = new CustomCheckBox();
             chkBus = new CustomCheckBox();
@@ -283,6 +283,7 @@ namespace SewingProduction.Features.Articul
             customLabel41 = new CustomLabel();
             txbSebz = new CustomTextBox();
             customLabel40 = new CustomLabel();
+            csButtonEdit = new CustomSimpleButton();
             ((System.ComponentModel.ISupportInitialize)gridArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bsArt).BeginInit();
             ((System.ComponentModel.ISupportInitialize)gridControl1).BeginInit();
@@ -462,6 +463,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbArh.AutoSize = true;
             chbArh.Enabled = false;
+            chbArh.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbArh.Font = new Font("Arial", 10F);
             chbArh.ForeColor = Color.FromArgb(72, 61, 139);
             chbArh.Location = new Point(1054, 6);
@@ -476,6 +478,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbKombIzd.AutoSize = true;
             chbKombIzd.Enabled = false;
+            chbKombIzd.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombIzd.Font = new Font("Arial", 10F);
             chbKombIzd.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombIzd.Location = new Point(937, 6);
@@ -490,6 +493,7 @@ namespace SewingProduction.Features.Articul
             // 
             chbKombDet.AutoSize = true;
             chbKombDet.Enabled = false;
+            chbKombDet.FlatStyle = System.Windows.Forms.FlatStyle.System;
             chbKombDet.Font = new Font("Arial", 10F);
             chbKombDet.ForeColor = Color.FromArgb(72, 61, 139);
             chbKombDet.Location = new Point(824, 7);
@@ -1560,7 +1564,7 @@ namespace SewingProduction.Features.Articul
             lContrBoxMainInfo.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new Rectangle(-650, 6, 650, 400);
             lContrBoxMainInfo.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
             lContrBoxMainInfo.Root = Root;
-            lContrBoxMainInfo.Size = new Size(1141, 249);
+            lContrBoxMainInfo.Size = new Size(1148, 249);
             lContrBoxMainInfo.TabIndex = 31;
             lContrBoxMainInfo.TabStop = false;
             lContrBoxMainInfo.Text = "layoutControl1";
@@ -1570,7 +1574,7 @@ namespace SewingProduction.Features.Articul
             Root.EnableIndentsWithoutBorders = DevExpress.Utils.DefaultBoolean.True;
             Root.GroupBordersVisible = false;
             Root.Name = "Root";
-            Root.Size = new Size(1141, 249);
+            Root.Size = new Size(1148, 249);
             Root.TextVisible = false;
             // 
             // cgbTkanPurpose
@@ -2591,7 +2595,7 @@ namespace SewingProduction.Features.Articul
             groupBox2.Controls.Add(chbIsFurnit);
             groupBox2.Controls.Add(chbIsUpak);
             groupBox2.Enabled = false;
-            groupBox2.Location = new Point(1610, 244);
+            groupBox2.Location = new Point(1610, 246);
             groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -2822,11 +2826,12 @@ namespace SewingProduction.Features.Articul
             // customCheckBox1
             // 
             customCheckBox1.AutoSize = true;
+            customCheckBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             customCheckBox1.Font = new Font("Arial", 10F);
             customCheckBox1.ForeColor = Color.FromArgb(105, 75, 45);
             customCheckBox1.Location = new Point(7, 15);
             customCheckBox1.Name = "customCheckBox1";
-            customCheckBox1.Size = new Size(325, 20);
+            customCheckBox1.Size = new Size(331, 21);
             customCheckBox1.TabIndex = 34;
             customCheckBox1.Text = "Старая модель, на пересчете у экономистов";
             customCheckBox1.UseVisualStyleBackColor = true;
@@ -3163,6 +3168,7 @@ namespace SewingProduction.Features.Articul
             // customGroupBox1
             // 
             customGroupBox1.BackColor = Color.Transparent;
+            customGroupBox1.Controls.Add(csButtonEdit);
             customGroupBox1.Controls.Add(txbNormt);
             customGroupBox1.Controls.Add(cgbTkanPurpose);
             customGroupBox1.Controls.Add(customLabel20);
@@ -3219,9 +3225,9 @@ namespace SewingProduction.Features.Articul
             customGroupBox2.Controls.Add(customLabel41);
             customGroupBox2.Controls.Add(txbSebz);
             customGroupBox2.Controls.Add(customLabel40);
-            customGroupBox2.Location = new Point(1202, 245);
+            customGroupBox2.Location = new Point(1202, 246);
             customGroupBox2.Name = "customGroupBox2";
-            customGroupBox2.Size = new Size(403, 259);
+            customGroupBox2.Size = new Size(403, 258);
             customGroupBox2.TabIndex = 39;
             customGroupBox2.TabStop = false;
             customGroupBox2.Text = "Норма/сек";
@@ -3523,6 +3529,25 @@ namespace SewingProduction.Features.Articul
             customLabel40.TabIndex = 34;
             customLabel40.Text = "Зарплата";
             // 
+            // csButtonEdit
+            // 
+            csButtonEdit.Appearance.BackColor = Color.FromArgb(255, 223, 196);
+            csButtonEdit.Appearance.Font = new Font("Arial", 10F);
+            csButtonEdit.Appearance.ForeColor = Color.FromArgb(139, 69, 19);
+            csButtonEdit.Appearance.Options.UseBackColor = true;
+            csButtonEdit.Appearance.Options.UseFont = true;
+            csButtonEdit.Appearance.Options.UseForeColor = true;
+            csButtonEdit.AppearanceDisabled.BackColor = Color.Green;
+            csButtonEdit.AppearanceDisabled.ForeColor = Color.GreenYellow;
+            csButtonEdit.AppearanceDisabled.Options.UseBackColor = true;
+            csButtonEdit.AppearanceDisabled.Options.UseForeColor = true;
+            csButtonEdit.Location = new Point(2, 223);
+            csButtonEdit.Name = "csButtonEdit";
+            csButtonEdit.Size = new Size(235, 25);
+            csButtonEdit.TabIndex = 38;
+            csButtonEdit.Text = "Редактировать";
+            csButtonEdit.Click += csButtonEdit_Click;
+            // 
             // Articul
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -3734,7 +3759,6 @@ namespace SewingProduction.Features.Articul
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrKod_fur;
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrKod_furn_ar;
         private DevExpress.XtraGrid.Columns.GridColumn grArtDrData_nitki;
-        private System.Windows.Forms.GroupBox groupBox2;
         private CustomCheckBox chbIsUpak;
         private CustomCheckBox chkP;
         private CustomCheckBox chbIsFurnit;
@@ -3861,5 +3885,7 @@ namespace SewingProduction.Features.Articul
         private CustomLabel customLabel41;
         private CustomTextBox txbSebz;
         private CustomLabel customLabel40;
+        private CustomGroupBox groupBox2;
+        private CustomSimpleButton csButtonEdit;
     }
 }

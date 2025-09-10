@@ -1,6 +1,7 @@
 ﻿//using Microsoft.ReportingServices.DataProcessing;
 using DevExpress.Data.Internal;
 using DevExpress.Office.Utils;
+using DevExpress.XtraGrid.Views.Base.ViewInfo;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraReports.UI;
 using SewingProduction.Core.interfaces;
@@ -11,6 +12,7 @@ using SewingProduction.Features.Articul.Forms;
 using SewingProduction.Features.Articul.Models;
 using SewingProduction.Features.Articul.Service;
 using SewingProduction.Features.Sprav;
+using SewingProduction.Features.TeamWork.Forms;
 using SewingProduction.Features.UserDistribution.Forms;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Help.Form;
@@ -18,6 +20,7 @@ using SewingProduction.Helpers;
 using SewingProduction.Report;
 using SewingProduction.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,6 +29,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DevExpress.Office.PInvoke.Win32;
 using BindingSource = System.Windows.Forms.BindingSource;
 using DataTable = System.Data.DataTable;
 
@@ -42,7 +46,7 @@ namespace SewingProduction.Features.Articul
         private readonly ILogger _logger = new FileLogger();
         //все поля таблицы Артикул
         private SpArticulPreviewModel _articulByKod;
-        
+
 
         //краткий перечень полей таблицы
         private List<ArticulModel> _artPreview;
@@ -60,6 +64,8 @@ namespace SewingProduction.Features.Articul
 
         //private BindingSource _articulBindingSource;
         //private BindingSource _komplSostBindingSource;
+
+        
 
 
         ArticulDataService _articulDataService = new ArticulDataService();
@@ -560,7 +566,7 @@ namespace SewingProduction.Features.Articul
             */
         }
 
-        private async void  sButtodDeleteKod_Click(object sender, EventArgs e)
+        private async void sButtodDeleteKod_Click(object sender, EventArgs e)
         {
             try
             {
@@ -579,7 +585,7 @@ namespace SewingProduction.Features.Articul
                         return;
                     }
                     //удаление кода 
-                    
+
                     await _dbService.DeleteEntityAsync("sp_articul", "Kod", cuRow);
 
                     _artPreview.Remove(cuRow);
@@ -595,7 +601,128 @@ namespace SewingProduction.Features.Articul
 
                 await _logger.LogErrorAsync(ex, "Ошибка при Удалении");
             }
-            
+
+        }
+        /// <summary>
+        /// открывает на редактирование карточку артикула
+        /// </summary>
+        /// <param name="gridView"></param>
+        /// <param name="bindingSource"></param>
+        /// <returns></returns>
+        //private async Task EditArtciul (GridView gridView, IList list, BindingSource bindingSource, bool forMyDataAnnView = false)
+        private ArticulEditAdvance EditArtciul(GridView gridView, BindingSource bindingSource)
+        {
+            if (gridView == null || gridView.FocusedRowHandle < 0)
+            {
+                MessageBox.Show("Выберите артикул для редактирования!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return null;
+            }
+            var selectedArticul = gridView.GetRow(gridView.FocusedRowHandle) as ArticulModel;
+
+            // Проверяем, есть ли уже открытые экземпляры
+            if (HasOpenAdvanceForms())
+            {
+                // Получаем первый открытый экземпляр
+                ArticulEditAdvance existingForm = null;
+                lock (_lockObject)
+                {
+                    existingForm = _openEditArticulForms.FirstOrDefault(form => form != null && !form.IsDisposed);
+                }
+
+                if (existingForm != null)
+                {
+                    //string articul = existingForm.CurrentArticul;
+                    //string msg = string.IsNullOrWhiteSpace(articul)
+                    //    ? "Открыто разделение труда"
+                    //    : $"Открыто разделение труда для артикула \"{articul}\"";
+
+                    //// Показать сплеш на 3 секунды
+                    //Task.Run(async () =>
+                    //{
+                    //    SplashScreenHelper.ShowSplash(msg, textOnly: true);
+                    //    await Task.Delay(3000);
+                    //    SplashScreenHelper.CloseSplash();
+                    //});
+
+                    existingForm.WindowState = FormWindowState.Normal;
+                    existingForm.BringToFront();
+                    existingForm.Activate();
+                }
+
+                return null;
+            }
+
+            var editForm = new ArticulEditAdvance();
+
+            // Добавляем в список открытых форм
+            AddOpenAdvanceForm(editForm);
+            // Подписываемся на событие закрытия формы
+            editForm.FormClosed += (sender, e) =>
+            {
+                RemoveOpenAdvanceForm(editForm);
+            };
+
+            // Открываем форму не в модальном режиме
+            //editForm.Show();
+            OpenForm(new Articul(_user), sender);
+
+            return editForm;
+
+
+        }
+
+        #region Управление немодальной формой ArticulEditAdvance
+
+        private static readonly List<ArticulEditAdvance> _openEditArticulForms = new List<ArticulEditAdvance>();
+        private static readonly object _lockObject = new object();
+        private static bool HasOpenAdvanceForms()
+        {
+            lock (_lockObject)
+            {
+                // Очищаем закрытые формы из списка
+                _openEditArticulForms.RemoveAll(form => form == null || form.IsDisposed);
+                return _openEditArticulForms.Count > 0;
+            }
+        }
+
+        /// <summary>
+        /// Добавляет экземпляр ArticulEditAdvance в список открытых форм
+        /// </summary>
+        /// <param name="form">Форма для добавления</param>
+        private static void AddOpenAdvanceForm(ArticulEditAdvance form)
+        {
+            lock (_lockObject)
+            {
+                if (form != null && !form.IsDisposed && !_openEditArticulForms.Contains(form))
+                {
+                    _openEditArticulForms.Add(form);
+                }
+
+            }
+        }
+        /// <summary>
+        /// Удаляет экземпляр ArticulEditAdvance из списка открытых форм
+        /// </summary>
+        /// <param name="form">Форма для удаления</param>
+        private static void RemoveOpenAdvanceForm(ArticulEditAdvance form)
+        {
+            lock (_lockObject)
+            {
+                _openEditArticulForms.Remove(form);
+            }
+        }
+        #endregion
+
+        private async void csButtonEdit_Click(object sender, EventArgs e)
+        {
+            var editForm = EditArtciul(gridControl1,bsArt);
+            if (editForm == null)
+            {
+                // Форма уже открыта или произошла ошибка
+                return;
+            }
+
+
         }
     }
 }
