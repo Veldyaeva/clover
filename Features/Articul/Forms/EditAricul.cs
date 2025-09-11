@@ -15,6 +15,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraExport.Helpers;
 using DevExpress.XtraGrid.Views.Grid;
 using DevExpress.XtraGrid.Views.Grid.ViewInfo;
+using SewingProduction.Core.Models;
 using SewingProduction.Features.UserDistribution.Helpers;
 using SewingProduction.Helpers;
 using static DevExpress.XtraEditors.Filtering.DataItemsExtension;
@@ -171,6 +172,12 @@ namespace SewingProduction.Features.Articul
         // Кнопка сохранить
         private void customOkButton1_Click(object sender, EventArgs e)
         {
+            ArticulModel articulModel = new ArticulModel
+            { 
+                Articul = customTextBoxArt.Text 
+
+            };
+            //articulModel.Articul = customTextBoxArt.Text;
             this.DialogResult = DialogResult.OK;
             this.Close();
         }

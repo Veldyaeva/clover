@@ -541,23 +541,21 @@ namespace SewingProduction.Features.Articul
         /// <param name="e"></param>
         private void customButtonKompl_Click(object sender, EventArgs e)
         {
-            /*//var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
+            //var kodObj = gridControl1.GetFocusedRowCellValue("Kod");
             var kodObj = (bsArt.Current as ArticulModel).Kod;
             if (this.MdiParent is SpMainForm mainForm)
             {
-                mainForm.OpenForm(new AddNewKopml(CurrentUser.User, _articuls, kodObj.ToString()));
+                mainForm.OpenForm(new AddNewKopml(User, _artPreview, kodObj.ToString()));
             }
-            */
         }
 
         private void csButtonNew_Click(object sender, EventArgs e)
         {
-            /*EditAricul f = new EditAricul(_user);
+            EditAricul f = new EditAricul();
             if (f.ShowDialog() == DialogResult.OK)
             {
                 Articul_Load(sender, e);
             }
-            */
         }
 
         private async void  sButtodDeleteKod_Click(object sender, EventArgs e)
