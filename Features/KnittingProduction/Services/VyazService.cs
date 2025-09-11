@@ -265,6 +265,84 @@ namespace SewingProduction.Features.KnittingProduction.Services
                 return null;
             }
         }
+
+        public async Task<List<PlanTotalHoursByKnitMachine>> GetPlanTotalHoursByKnitMachine()
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec GetPlanTotalHoursByKnitMachine ";
+
+                    var result = await connection.QueryAsync<PlanTotalHoursByKnitMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanTotalHoursByKnitMachine");
+                return null;
+            }
+        }
+
+        public async Task<List<ZadanyListByMachine>> GetZadanyListByMachine(int kmlID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"exec GetZadanyListByMachine {kmlID}";
+
+                    var result = await connection.QueryAsync<ZadanyListByMachine>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetZadanyListByMachine");
+                return null;
+            }
+        }
+        public async Task<List<RzvPachListByNom>> GetRzvPachListByNom(int nom, string nomZad)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"SELECT rzv.zad_pl as nomZad, rzv.nom, rzv.nom_n, rzv.n_pach, rzv.pach_kod, rzv.kod, rzv.razm, rzv.kol, 0 AS grad " +
+                        $"FROM raskr_zeh_vyaz rzv" +
+                        $" WHERE rzv.nom = {nom} and zad_pl = {nomZad}";
+
+                    var result = await connection.QueryAsync<RzvPachListByNom>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetRzvPachListByNom");
+                return null;
+            }
+        }
+
+        public async Task<List<PZVOperList>> GetPZVOperListByPachList(string pachList, int podrID)
+        {
+            try
+            {
+                using (var connection = _dbHelper.GetConnection())
+                {
+                    string query = $"EXEC GetPlanZagrVyazByPachList @xNomZadNomListJson = '{pachList}', @xVyazPodrKod = {podrID}";
+
+                    var result = await connection.QueryAsync<PZVOperList>(query, new Dictionary<string, object> { });
+                    return result.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                await _logger.LogErrorAsync(ex, $"Ошибка при получении данных GetPlanZagrVyazByPachList");
+                return null;
+            }
+        }
+
         #endregion
 
     }

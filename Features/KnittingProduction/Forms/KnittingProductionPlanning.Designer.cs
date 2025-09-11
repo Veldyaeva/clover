@@ -397,6 +397,7 @@ namespace SewingProduction.form.Nadezhda
             customSimpleButton1.AppearanceDisabled.Options.UseForeColor = true;
             tablePanel1.SetColumn(customSimpleButton1, 10);
             customSimpleButton1.Dock = System.Windows.Forms.DockStyle.Fill;
+            customSimpleButton1.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("customSimpleButton1.ImageOptions.Image");
             customSimpleButton1.Location = new System.Drawing.Point(1486, 572);
             customSimpleButton1.Name = "customSimpleButton1";
             tablePanel1.SetRow(customSimpleButton1, 7);
@@ -717,6 +718,7 @@ namespace SewingProduction.form.Nadezhda
             tablePanel1.SetColumn(simpleButtonSaveVyaz, 10);
             simpleButtonSaveVyaz.Dock = System.Windows.Forms.DockStyle.Fill;
             simpleButtonSaveVyaz.Enabled = false;
+            simpleButtonSaveVyaz.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSaveVyaz.ImageOptions.Image");
             simpleButtonSaveVyaz.Location = new System.Drawing.Point(1488, 527);
             simpleButtonSaveVyaz.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonSaveVyaz.Name = "simpleButtonSaveVyaz";
@@ -740,6 +742,7 @@ namespace SewingProduction.form.Nadezhda
             simpleButtonClearKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
             tablePanel1.SetColumn(simpleButtonClearKnitMachine, 10);
             simpleButtonClearKnitMachine.Dock = System.Windows.Forms.DockStyle.Fill;
+            simpleButtonClearKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonClearKnitMachine.ImageOptions.Image");
             simpleButtonClearKnitMachine.Location = new System.Drawing.Point(1486, 480);
             simpleButtonClearKnitMachine.Name = "simpleButtonClearKnitMachine";
             tablePanel1.SetRow(simpleButtonClearKnitMachine, 3);
@@ -807,6 +810,7 @@ namespace SewingProduction.form.Nadezhda
             simpleButtonSetKnitMachine.AppearanceDisabled.Options.UseForeColor = true;
             tablePanel1.SetColumn(simpleButtonSetKnitMachine, 10);
             simpleButtonSetKnitMachine.Dock = System.Windows.Forms.DockStyle.Fill;
+            simpleButtonSetKnitMachine.ImageOptions.Image = (System.Drawing.Image)resources.GetObject("simpleButtonSetKnitMachine.ImageOptions.Image");
             simpleButtonSetKnitMachine.Location = new System.Drawing.Point(1488, 435);
             simpleButtonSetKnitMachine.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             simpleButtonSetKnitMachine.Name = "simpleButtonSetKnitMachine";

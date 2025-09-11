@@ -19,6 +19,9 @@
     <Compile Update="Core\Class\CustomControls\CustomLabel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Update="Core\Class\CustomControls\CustomRadioGroup.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Update="Core\Class\CustomControls\CustomTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -37,7 +40,16 @@
     <Compile Update="Features\Articul\Forms\EditAricul.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\KnittingProduction\Forms\Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Features\KnittingProduction\Forms\PlanZagrVyaz.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Features\SockProduction\Forms\ReportByNomZad.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Features\Sprav\Forms\EditTarif.cs">
@@ -193,6 +205,9 @@
     <Compile Update="Report\subreport\FurnitFITByKodFD.cs">
       <SubType>XtraReport</SubType>
     </Compile>
+    <Compile Update="Report\subreport\KnitMashineServiceByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
     <Compile Update="Report\subreport\PrintGroupNROborudReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
@@ -206,6 +221,18 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Report\subreport\secByKodPodrAnnIdReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\SockZadanyInfoReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitZadanyBySmenReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\KnitMachineDownTimeByNomZadReport.cs">
+      <SubType>XtraReport</SubType>
+    </Compile>
+    <Compile Update="Report\subreport\SpisPryzDefectReport.cs">
       <SubType>XtraReport</SubType>
     </Compile>
   </ItemGroup>
