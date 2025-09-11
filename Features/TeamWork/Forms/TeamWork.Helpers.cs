@@ -1,5 +1,5 @@
-﻿using DevExpress.XtraEditors;
-using DevExpress.XtraGrid.Views.Grid;
+﻿using DevExpress.XtraGrid.Views.Grid;
+using SewingProduction.Core.Extensions;
 using SewingProduction.Helpers;
 using System;
 using System.Collections.Generic;
@@ -27,10 +27,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Загружаем настройки размера и положения формы
                 _formSettingsHelper.LoadFormSettings(this, "TeamWorkFormLayout.xml");
 
-                // Загружаем настройки split container
-          //      _splitContainerHelper.LoadSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
+                // Включаем автоматическое сохранение настроек для всех CustomGridControl
+                this.EnableAutoGridSettings(true);
 
-                // Загружаем настройки для всех гридов
+                // Загружаем настройки для обычных GridControl (не CustomGridControl)
                 _gridHelper.LoadGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.LoadGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.LoadGridViewSettings(gridView4, "gridView4Layout.xml");
@@ -68,7 +68,10 @@ namespace SewingProduction.Features.TeamWork.Forms
                 // Сохраняем настройки split container
         //        _splitContainerHelper.SaveSplitContainerSettings(splitContainerControl2, "splitContainer2Layout.xml");
 
-                // Сохраняем настройки для всех гридов
+   
+                this.SaveAllGridSettings();
+
+                // Сохраняем настройки для обычных GridControl (не CustomGridControl)
                 _gridHelper.SaveGridViewSettings(ANNgridView, "ANNgridViewLayout.xml");
                 _gridHelper.SaveGridViewSettings(gridView1, "gridView1Layout.xml");
                 _gridHelper.SaveGridViewSettings(gridView4, "gridView4Layout.xml");
