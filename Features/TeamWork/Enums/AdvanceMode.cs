@@ -12,6 +12,10 @@ namespace SewingProduction
     public enum Mode
     {
         /// <summary>
+        /// Комплект
+        /// </summary>
+        Kit = 5,
+        /// <summary>
         /// Дубль
         /// </summary>
         Clone = 4,

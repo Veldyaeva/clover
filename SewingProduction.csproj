@@ -16,16 +16,28 @@
     <Compile Remove="Features\KnittingProduction\Models\KnitMachineLoadInfo - Копировать.cs" />
     <Compile Remove="Features\Settings.cs" />
     <Compile Remove="Features\Settings.Designer.cs" />
+    <Compile Remove="Features\TeamWork\DbContext\ArtNormN.cs" />
+    <Compile Remove="Features\TeamWork\Forms\NormRaskrNew_old.cs" />
+    <Compile Remove="Features\TeamWork\Forms\TeamWork.Designer_.cs" />
+    <Compile Remove="Features\TeamWork\Forms\TeamWork.Events_old.cs" />
+    <Compile Remove="Features\TeamWork\Forms\TeamWork.Helpers_old.cs" />
     <Compile Remove="Features\TeamWork\Forms\TeamWork.WorkDivisions1.cs" />
     <Compile Remove="Features\TeamWork\Forms\_TeamWork.Designer.cs" />
     <Compile Remove="Features\TeamWork\Forms\_TeamWork.Helpers.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ANNGridViewHelper.cs" />
     <Compile Remove="Features\TeamWork\Helpers\AnnManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\ArtNormController.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\CopyHelper_old.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaskManager.cs" />
     <Compile Remove="Features\TeamWork\Helpers\NormRaszManager.cs" />
+    <Compile Remove="Features\TeamWork\Helpers\TWGridHelper_old.cs" />
+    <Compile Remove="Features\TeamWork\Models\ArtNormN_.cs" />
+    <Compile Remove="Features\TeamWork\Models\ArtNormN_old.cs" />
+    <Compile Remove="Features\TeamWork\Models\MyDataANN_old.cs" />
     <Compile Remove="Features\TeamWork\Models\NormRasz1.cs" />
     <Compile Remove="Features\TeamWork\Models\NormRasz2.cs" />
+    <Compile Remove="Features\TeamWork\Models\NormRasz_old.cs" />
+    <Compile Remove="Features\TeamWork\Services\TeamWorkBuffer___.cs" />
     <Compile Remove="Report\PostReportFio.cs" />
     <Compile Remove="Report\PostReportFio.Designer.cs" />
   </ItemGroup>
@@ -36,8 +48,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Features\Features.zip" />
     <None Remove="Features\TeamWork.zip" />
     <None Remove="Features\TeamWork\Forms\исходная НАДИНА SQL процедура .txt" />
+    <None Remove="Features\_TeamWork.zip" />
     <None Remove="Help\Features\TeamWork\Forms\img\1.png" />
     <None Remove="Help\Features\TeamWork\Forms\img\10.png" />
     <None Remove="Help\Features\TeamWork\Forms\img\11.png" />
